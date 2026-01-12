@@ -36,18 +36,10 @@ import { Separator } from '@heroui/react';
 
 ### Surface Variants
 
-The Separator component automatically detects the surface level and applies the appropriate variant for better visibility.
+The Separator component adapts to different surface backgrounds for better visibility.
 
 <ComponentPreview
   name="separator-surface-variants"
-/>
-
-### Manual Variant Override
-
-You can manually override the variant to achieve different visual effects.
-
-<ComponentPreview
-  name="separator-manual-variant-override"
 />
 
 <RelatedComponents component="separator" />
@@ -93,9 +85,6 @@ The Separator component uses these CSS classes ([View source styles](https://git
 - `.separator` - Base separator styles with default horizontal orientation
 - `.separator--horizontal` - Horizontal orientation (full width, 1px height)
 - `.separator--vertical` - Vertical orientation (full height, 1px width)
-- `.separator--in-surface-default` - Applied when `inSurface="default"`, uses `bg-separator` for better visibility on default surface backgrounds
-- `.separator--in-surface-secondary` - Applied when `inSurface="secondary"`, uses `bg-separator-secondary` for better visibility on secondary surface backgrounds
-- `.separator--in-surface-tertiary` - Applied when `inSurface="tertiary"`, uses `bg-separator-tertiary` for better visibility on tertiary surface backgrounds
 
 ## API Reference
 
@@ -104,43 +93,4 @@ The Separator component uses these CSS classes ([View source styles](https://git
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the separator |
-| `inSurface` | `'default' \| 'secondary' \| 'tertiary' \| undefined` | `undefined` | The surface level for the separator. When `undefined`, uses base separator style suitable for default background or transparent cards. When set, applies the appropriate separator color for better visibility on that surface level. Automatically detects from `SurfaceContext` (e.g., Card, Alert, Popover, Modal) when not explicitly provided. |
 | `className` | `string` | - | Additional CSS classes |
-
-### Automatic Surface Detection
-
-The Separator component automatically detects when it's placed inside a surface component (one that uses `bg-surface`) and applies the appropriate divider color. This works with components that provide `SurfaceContext`, such as:
-
-- Card
-- Alert
-- Popover
-- Modal
-- Combobox
-- Select
-- Dropdown
-
-**Example:**
-
-```tsx
-<Surface variant="default">
-  <Separator />
-</Surface>
-
-<Surface variant="secondary">
-  <Separator />
-</Surface>
-
-<Surface variant="tertiary">
-  <Separator />
-</Surface>
-```
-
-When `inSurface` is not explicitly set, the Separator will automatically detect the `SurfaceContext` variant and apply the appropriate separator color for that surface level. If no `SurfaceContext` is present, it uses the base separator style (suitable for background or transparent cards). You can also manually override the surface level:
-
-```tsx
-<Surface variant="default">
-  <Separator inSurface="secondary" />
-</Surface>
-```
-
-**Note**: The `inSurface` prop uses semantic naming that avoids the "on*" pattern (commonly used for React event handlers like `onClick`, `onChange`). The prop name indicates that the separator is used "in" a surface context, while the value indicates the level (`default`, `secondary`, etc.).

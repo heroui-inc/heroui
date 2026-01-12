@@ -8,7 +8,7 @@ import React, {createContext, useContext} from "react";
 import {Checkbox as CheckboxPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
+import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";
 
 import {checkboxVariants} from "./checkbox.styles";
 
@@ -25,12 +25,12 @@ interface CheckboxRootProps
   name?: string;
 }
 
-const CheckboxRoot = ({children, className, inSurface, ...props}: CheckboxRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
+const CheckboxRoot = ({children, className, variant, ...props}: CheckboxRootProps) => {
+  const checkboxGroupContext = useContext(CheckboxGroupContext);
+  const effectiveVariant = variant ?? checkboxGroupContext.variant;
   const slots = React.useMemo(
-    () => checkboxVariants({inSurface: resolvedInSurface}),
-    [resolvedInSurface],
+    () => checkboxVariants({variant: effectiveVariant}),
+    [effectiveVariant],
   );
 
   return (

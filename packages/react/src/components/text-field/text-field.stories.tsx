@@ -6,7 +6,6 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Input} from "../input";
 import {Label} from "../label";
-import {Surface} from "../surface";
 import {TextArea} from "../textarea";
 
 import {TextField} from "./index";
@@ -222,52 +221,4 @@ export const WithValidation: Story = {
       </div>
     );
   },
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <TextField name="name-default">
-            <Label>Your name</Label>
-            <Input className="w-full" placeholder="John" />
-          </TextField>
-          <p className="text-sm text-muted">
-            TextField automatically detects default surface level through its Input/TextArea
-            components.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <TextField name="name-secondary">
-            <Label>Your name</Label>
-            <Input className="w-full" placeholder="John" />
-          </TextField>
-          <p className="text-sm text-muted">
-            TextField automatically detects secondary surface level through its Input/TextArea
-            components.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <TextField name="name-tertiary">
-            <Label>Your name</Label>
-            <Input className="w-full" placeholder="John" />
-          </TextField>
-          <p className="text-sm text-muted">
-            TextField automatically detects tertiary surface level through its Input/TextArea
-            components.
-          </p>
-        </Surface>
-      </div>
-    </div>
-  ),
 };

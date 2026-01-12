@@ -5,13 +5,14 @@ import {tv} from "tailwind-variants";
 export const radioGroupVariants = tv({
   base: "radio-group",
   variants: {
-    inSurface: {
-      default: "radio-group--in-surface-default",
-      secondary: "radio-group--in-surface-secondary",
-      tertiary: "radio-group--in-surface-tertiary",
+    variant: {
+      primary: "radio-group--primary",
+      secondary: "radio-group--secondary",
     },
   },
-  defaultVariants: {},
+  defaultVariants: {
+    variant: "primary",
+  },
 });
 
 export type RadioGroupVariants = VariantProps<typeof radioGroupVariants>;

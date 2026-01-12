@@ -2,8 +2,6 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {Surface} from "../surface";
-
 import {Separator} from "./index";
 
 const meta: Meta<typeof Separator> = {
@@ -88,64 +86,6 @@ export const WithContent: Story = {
           {index < items.length - 1 && <Separator className="my-4" />}
         </div>
       ))}
-    </div>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
-          <Separator />
-          <p className="text-sm text-muted">
-            Separator automatically detects default surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
-          <Separator />
-          <p className="text-sm text-muted">
-            Separator automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
-          <Separator />
-          <p className="text-sm text-muted">
-            Separator automatically detects tertiary surface level.
-          </p>
-        </Surface>
-      </div>
-    </div>
-  ),
-};
-
-export const ManualVariantOverride: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">
-          Manual Override: Secondary variant on default surface
-        </p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
-          <Separator inSurface="secondary" />
-          <p className="text-sm text-muted">
-            Manually set to secondary variant for enhanced visibility.
-          </p>
-        </Surface>
-      </div>
     </div>
   ),
 };

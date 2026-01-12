@@ -59,7 +59,7 @@ export function DeliveryAndPayment() {
       }}
     >
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroup defaultValue="express" inSurface="default" name="delivery">
+        <RadioGroup defaultValue="express" name="delivery" variant="secondary">
           <Label>Delivery method</Label>
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
@@ -87,7 +87,7 @@ export function DeliveryAndPayment() {
         </RadioGroup>
       </section>
       <section className="flex w-full max-w-lg flex-col gap-4">
-        <RadioGroup defaultValue="visa" inSurface="default" name="payment">
+        <RadioGroup defaultValue="visa" name="payment" variant="secondary">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Label>Payment method</Label>
           </div>

@@ -34,6 +34,8 @@
   --animate-fd-fade-in: custom-fade-in 200ms ease-out forwards;
   --animate-fd-fade-out: custom-fade-out 150ms ease-out forwards;
 
+  /* Default font - can be overridden by theme builder */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -488,6 +490,10 @@ code {
 
   .line {
     @apply pl-0!;
+  }
+
+  [role="region"] {
+    max-height: 75vh;
   }
 }
 

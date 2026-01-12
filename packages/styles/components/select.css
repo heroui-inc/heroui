@@ -78,16 +78,18 @@
   }
 }
 
-/**
- * In-Surface Variants
- * Used when select trigger is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
-.select__trigger--in-surface-default,
-.select__trigger--in-surface-secondary,
-.select__trigger--in-surface-tertiary {
+/* Variant property definitions */
+.select--primary {
+  /* Default styles */
+}
+
+.select--secondary .select__trigger {
   @apply shadow-none;
   background-color: var(--select-trigger-bg);
+
+  --select-trigger-bg: var(--color-default);
+  --select-trigger-bg-hover: var(--color-default-hover);
+  --select-trigger-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover,
@@ -104,25 +106,6 @@
   &:focus,
   &[data-focus="true"] {
   }
-}
-
-/* In-surface variant property definitions */
-.select__trigger--in-surface-default {
-  --select-trigger-bg: var(--color-in-surface);
-  --select-trigger-bg-hover: var(--color-in-surface-hover);
-  --select-trigger-bg-focus: var(--color-in-surface-focus);
-}
-
-.select__trigger--in-surface-secondary {
-  --select-trigger-bg: var(--color-in-surface-secondary);
-  --select-trigger-bg-hover: var(--color-in-surface-secondary-hover);
-  --select-trigger-bg-focus: var(--color-in-surface-secondary-focus);
-}
-
-.select__trigger--in-surface-tertiary {
-  --select-trigger-bg: var(--color-in-surface-tertiary);
-  --select-trigger-bg-hover: var(--color-in-surface-tertiary-hover);
-  --select-trigger-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 .select__value {

@@ -10,7 +10,6 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 import {Radio} from "../radio";
-import {Surface} from "../surface";
 
 import {RadioGroup} from "./index";
 
@@ -63,91 +62,54 @@ export const Default: Story = {
   ),
 };
 
-export const SurfaceVariants: Story = {
+export const Variants: Story = {
   render: () => (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 px-4">
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <RadioGroup defaultValue="premium" name="plan-default">
-            <Label>Plan selection</Label>
-            <Radio value="basic">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
-              <Radio.Content>
-                <Label>Basic Plan</Label>
-              </Radio.Content>
-            </Radio>
-            <Radio value="premium">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
-              <Radio.Content>
-                <Label>Premium Plan</Label>
-              </Radio.Content>
-            </Radio>
-          </RadioGroup>
-          <p className="text-sm text-muted">
-            RadioGroup automatically detects default surface level.
-          </p>
-        </Surface>
+        <p className="text-sm font-medium text-muted">Primary variant</p>
+        <RadioGroup defaultValue="option1" name="primary-plan" variant="primary">
+          <Radio value="option1">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 1</Label>
+              <Description>Standard styling with default background</Description>
+            </Radio.Content>
+          </Radio>
+          <Radio value="option2">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 2</Label>
+              <Description>Another option with primary styling</Description>
+            </Radio.Content>
+          </Radio>
+        </RadioGroup>
       </div>
-
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <RadioGroup defaultValue="premium" name="plan-secondary">
-            <Label>Plan selection</Label>
-            <Radio value="basic">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
-              <Radio.Content>
-                <Label>Basic Plan</Label>
-              </Radio.Content>
-            </Radio>
-            <Radio value="premium">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
-              <Radio.Content>
-                <Label>Premium Plan</Label>
-              </Radio.Content>
-            </Radio>
-          </RadioGroup>
-          <p className="text-sm text-muted">
-            RadioGroup automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <RadioGroup defaultValue="premium" name="plan-tertiary">
-            <Label>Plan selection</Label>
-            <Radio value="basic">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
-              <Radio.Content>
-                <Label>Basic Plan</Label>
-              </Radio.Content>
-            </Radio>
-            <Radio value="premium">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
-              <Radio.Content>
-                <Label>Premium Plan</Label>
-              </Radio.Content>
-            </Radio>
-          </RadioGroup>
-          <p className="text-sm text-muted">
-            RadioGroup automatically detects tertiary surface level.
-          </p>
-        </Surface>
+        <p className="text-sm font-medium text-muted">Secondary variant</p>
+        <RadioGroup defaultValue="option1" name="secondary-plan" variant="secondary">
+          <Radio value="option1">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 1</Label>
+              <Description>Lower emphasis variant for use in surfaces</Description>
+            </Radio.Content>
+          </Radio>
+          <Radio value="option2">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 2</Label>
+              <Description>Another option with secondary styling</Description>
+            </Radio.Content>
+          </Radio>
+        </RadioGroup>
       </div>
     </div>
   ),

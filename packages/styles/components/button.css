@@ -103,7 +103,7 @@
   --button-bg: var(--color-default);
   --button-bg-hover: var(--color-default-hover);
   --button-bg-pressed: var(--color-default-hover);
-  --button-fg: var(--color-accent);
+  --button-fg: var(--color-accent-soft-foreground);
 }
 
 .button--tertiary {

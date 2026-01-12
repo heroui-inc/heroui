@@ -43,7 +43,7 @@
 
   /* Checkmark SVG indicator */
   [data-slot="checkbox-default-indicator--checkmark"] {
-    @apply size-2.5 text-accent-foreground;
+    @apply size-2.5 stroke-[2.5px] text-accent-foreground;
 
     /**
      * Transitions
@@ -52,7 +52,7 @@
   }
 
   &[data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"] {
-    transition: stroke-dashoffset 250ms linear 150ms;
+    transition: stroke-dashoffset 150ms linear 50ms;
   }
 
   /* Invalid + Selected: checkmark icon color */
@@ -91,8 +91,8 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    background-color 250ms var(--ease-out),
-    transform 250ms var(--ease-out-quart);
+    background-color 200ms var(--ease-out),
+    transform 100ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
@@ -104,14 +104,14 @@
 
   /* Background indicator pseudo-element */
   &::before {
-    @apply pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md bg-accent opacity-0 content-[''];
+    @apply pointer-events-none absolute inset-0 z-0 origin-center scale-70 rounded-md bg-accent opacity-0 content-[''];
 
     /**
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
      */
     transition:
-      scale 200ms var(--ease-linear),
+      scale 100ms var(--ease-linear),
       opacity 200ms var(--ease-linear),
       background-color 200ms var(--ease-out);
     @apply motion-reduce:transition-none;
@@ -218,16 +218,18 @@
 }
 
 /* ==========================================================================
-   In-Surface Variants
-   Used when checkbox is placed on a Surface component background.
-   Uses CSS custom properties to reduce repetition.
+   Variant property definitions
    ========================================================================== */
 
-/* Shared styles for all in-surface variants */
-.checkbox--in-surface-default .checkbox__control,
-.checkbox--in-surface-secondary .checkbox__control,
-.checkbox--in-surface-tertiary .checkbox__control {
+.checkbox--primary {
+  /* Default styles */
+}
+
+.checkbox--secondary .checkbox__control {
   @apply shadow-none;
+  background-color: var(--checkbox-control-bg);
+
+  --checkbox-control-bg: var(--color-default);
 
   /* Hover state */
   .checkbox:hover &,
@@ -236,51 +238,24 @@
   }
 }
 
-/* Unselected state background - uses CSS custom properties */
-.checkbox--in-surface-default:not([aria-checked="true"]):not([data-selected="true"]):not(
-    [data-indeterminate="true"]
-  )
-  .checkbox__control,
-.checkbox--in-surface-secondary:not([aria-checked="true"]):not([data-selected="true"]):not(
-    [data-indeterminate="true"]
-  )
-  .checkbox__control,
-.checkbox--in-surface-tertiary:not([aria-checked="true"]):not([data-selected="true"]):not(
+/* Unselected state background for secondary variant */
+.checkbox--secondary:not([aria-checked="true"]):not([data-selected="true"]):not(
     [data-indeterminate="true"]
   )
   .checkbox__control {
   background-color: var(--checkbox-control-bg);
 }
 
-/* In-surface variant property definitions */
-.checkbox--in-surface-default {
-  --checkbox-control-bg: var(--color-in-surface);
-}
-
-.checkbox--in-surface-secondary {
-  --checkbox-control-bg: var(--color-in-surface-secondary);
-}
-
-.checkbox--in-surface-tertiary {
-  --checkbox-control-bg: var(--color-in-surface-tertiary);
-}
-
-/* Selected state on surface */
-.checkbox--in-surface-default[aria-checked="true"] .checkbox__control,
-.checkbox--in-surface-default[data-selected="true"] .checkbox__control,
-.checkbox--in-surface-secondary[aria-checked="true"] .checkbox__control,
-.checkbox--in-surface-secondary[data-selected="true"] .checkbox__control,
-.checkbox--in-surface-tertiary[aria-checked="true"] .checkbox__control,
-.checkbox--in-surface-tertiary[data-selected="true"] .checkbox__control {
+/* Selected state on secondary variant */
+.checkbox--secondary[aria-checked="true"] .checkbox__control,
+.checkbox--secondary[data-selected="true"] .checkbox__control {
   &::before {
     @apply bg-accent;
   }
 }
 
-/* Indeterminate state on surface */
-.checkbox--in-surface-default[data-indeterminate="true"] .checkbox__control,
-.checkbox--in-surface-secondary[data-indeterminate="true"] .checkbox__control,
-.checkbox--in-surface-tertiary[data-indeterminate="true"] .checkbox__control {
+/* Indeterminate state on secondary variant */
+.checkbox--secondary[data-indeterminate="true"] .checkbox__control {
   @apply bg-accent;
 
   &::before {

@@ -13,19 +13,18 @@ export const inputOTPVariants = tv({
     separator: "input-otp__separator",
   },
   variants: {
-    inSurface: {
-      default: {
-        base: "input-otp--in-surface-default",
+    variant: {
+      primary: {
+        base: "input-otp--primary",
       },
       secondary: {
-        base: "input-otp--in-surface-secondary",
-      },
-      tertiary: {
-        base: "input-otp--in-surface-tertiary",
+        base: "input-otp--secondary",
       },
     },
   },
-  defaultVariants: {},
+  defaultVariants: {
+    variant: "primary",
+  },
 });
 
 export type InputOTPVariants = VariantProps<typeof inputOTPVariants>;

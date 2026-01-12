@@ -11,18 +11,12 @@ export const numberFieldVariants = tv({
     decrementButton: "number-field__decrement-button",
   },
   variants: {
-    inSurface: {
-      default: {
-        group: "number-field__group--in-surface-default",
-        input: "number-field__input--in-surface-default",
+    variant: {
+      primary: {
+        base: "number-field--primary",
       },
       secondary: {
-        group: "number-field__group--in-surface-secondary",
-        input: "number-field__input--in-surface-secondary",
-      },
-      tertiary: {
-        group: "number-field__group--in-surface-tertiary",
-        input: "number-field__input--in-surface-tertiary",
+        base: "number-field--secondary",
       },
     },
     fullWidth: {
@@ -34,6 +28,7 @@ export const numberFieldVariants = tv({
     },
   },
   defaultVariants: {
+    variant: "primary",
     fullWidth: false,
   },
 });

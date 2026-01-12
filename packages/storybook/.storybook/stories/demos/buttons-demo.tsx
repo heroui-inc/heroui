@@ -1,5 +1,5 @@
-import React from "react";
 import {Button} from "@heroui/react";
+import React from "react";
 
 export const ButtonsDemo = () => {
   return (
@@ -23,4 +23,3 @@ export const ButtonsDemo = () => {
     </div>
   );
 };
-

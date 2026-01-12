@@ -1,11 +1,12 @@
 import {addons} from "storybook/manager-api";
-import {themes} from "../../styles/theme";
+
 import {
+  DEFAULT_THEME,
   THEME_EVENT_NAME,
   THEME_GLOBAL_TYPE_ID,
-  DEFAULT_THEME,
   ensureThemeKey,
 } from "../../addons/theme/constants";
+import {themes} from "../../styles/theme";
 
 // Register addon to hook into the manager lifecycle properly
 addons.register("heroui-theme-manager", (api) => {
@@ -30,6 +31,7 @@ addons.register("heroui-theme-manager", (api) => {
 
   const applyTheme = (theme: string) => {
     const next = ensureThemeKey(theme);
+
     lastTheme = next;
     updateManagerTheme(next);
   };
@@ -41,6 +43,7 @@ addons.register("heroui-theme-manager", (api) => {
 
     if (!channel) {
       setTimeout(init, 100);
+
       return;
     }
 
@@ -55,6 +58,7 @@ addons.register("heroui-theme-manager", (api) => {
     // Listen for globals updates
     channel.on("GLOBALS_UPDATED", (payload: {globals?: Record<string, unknown>}) => {
       const theme = payload?.globals?.[THEME_GLOBAL_TYPE_ID] as string | undefined;
+
       if (theme) applyTheme(theme);
     });
 
@@ -66,6 +70,7 @@ addons.register("heroui-theme-manager", (api) => {
       "STORY_RENDERED",
       "DOCS_RENDERED",
     ] as const;
+
     replayEvents.forEach((eventName) => {
       channel.on(eventName, () => {
         applyTheme(lastTheme);
@@ -76,6 +81,7 @@ addons.register("heroui-theme-manager", (api) => {
     try {
       const state = (api as any).getData?.();
       const initialGlobalTheme = state?.globals?.[THEME_GLOBAL_TYPE_ID];
+
       if (initialGlobalTheme) {
         applyTheme(initialGlobalTheme as string);
       }

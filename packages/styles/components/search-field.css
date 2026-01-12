@@ -16,6 +16,12 @@
   [data-slot="description"] {
     @apply px-1;
   }
+
+  &[data-empty="true"] {
+    [data-slot="search-field-clear-button"] {
+      @apply pointer-events-none opacity-0;
+    }
+  }
 }
 
 .search-field__group {
@@ -103,16 +109,18 @@
   }
 }
 
-/**
- * In-Surface Variants
- * Used when search field group is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
-.search-field__group--in-surface-default,
-.search-field__group--in-surface-secondary,
-.search-field__group--in-surface-tertiary {
+/* Variant property definitions */
+.search-field--primary {
+  /* Default styles */
+}
+
+.search-field--secondary .search-field__group {
   @apply shadow-none;
   background-color: var(--search-field-group-bg);
+
+  --search-field-group-bg: var(--color-default);
+  --search-field-group-bg-hover: var(--color-default-hover);
+  --search-field-group-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
@@ -136,25 +144,6 @@
   [data-slot="search-field-input"] {
     @apply bg-transparent;
   }
-}
-
-/* In-surface variant property definitions */
-.search-field__group--in-surface-default {
-  --search-field-group-bg: var(--color-in-surface);
-  --search-field-group-bg-hover: var(--color-in-surface-hover);
-  --search-field-group-bg-focus: var(--color-in-surface-focus);
-}
-
-.search-field__group--in-surface-secondary {
-  --search-field-group-bg: var(--color-in-surface-secondary);
-  --search-field-group-bg-hover: var(--color-in-surface-secondary-hover);
-  --search-field-group-bg-focus: var(--color-in-surface-secondary-focus);
-}
-
-.search-field__group--in-surface-tertiary {
-  --search-field-group-bg: var(--color-in-surface-tertiary);
-  --search-field-group-bg-hover: var(--color-in-surface-tertiary-hover);
-  --search-field-group-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */

@@ -9,7 +9,6 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Input} from "../input";
 import {Label} from "../label";
-import {Surface} from "../surface";
 import {TextField} from "../text-field";
 import {TextArea} from "../textarea";
 
@@ -98,77 +97,4 @@ export const Default: Story = {
       </Form>
     );
   },
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <Fieldset className="w-full">
-            <Fieldset.Legend>Profile Settings</Fieldset.Legend>
-            <Fieldset.Group>
-              <TextField name="name-default">
-                <Label>Name</Label>
-                <Input placeholder="John Doe" />
-              </TextField>
-              <TextField name="email-default" type="email">
-                <Label>Email</Label>
-                <Input placeholder="john@example.com" />
-              </TextField>
-            </Fieldset.Group>
-          </Fieldset>
-          <p className="text-sm text-muted">
-            Fieldset automatically detects default surface level through its child form components.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <Fieldset className="w-full">
-            <Fieldset.Legend>Profile Settings</Fieldset.Legend>
-            <Fieldset.Group>
-              <TextField name="name-secondary">
-                <Label>Name</Label>
-                <Input placeholder="John Doe" />
-              </TextField>
-              <TextField name="email-secondary" type="email">
-                <Label>Email</Label>
-                <Input placeholder="john@example.com" />
-              </TextField>
-            </Fieldset.Group>
-          </Fieldset>
-          <p className="text-sm text-muted">
-            Fieldset automatically detects secondary surface level through its child form
-            components.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <Fieldset className="w-full">
-            <Fieldset.Legend>Profile Settings</Fieldset.Legend>
-            <Fieldset.Group>
-              <TextField name="name-tertiary">
-                <Label>Name</Label>
-                <Input placeholder="John Doe" />
-              </TextField>
-              <TextField name="email-tertiary" type="email">
-                <Label>Email</Label>
-                <Input placeholder="john@example.com" />
-              </TextField>
-            </Fieldset.Group>
-          </Fieldset>
-          <p className="text-sm text-muted">
-            Fieldset automatically detects tertiary surface level through its child form components.
-          </p>
-        </Surface>
-      </div>
-    </div>
-  ),
 };

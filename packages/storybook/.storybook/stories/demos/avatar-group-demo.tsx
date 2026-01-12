@@ -1,5 +1,5 @@
-import React from "react";
 import {Avatar} from "@heroui/react";
+import React from "react";
 
 const avatars = [
   {
@@ -56,4 +56,3 @@ export function AvatarGroupDemo() {
     </div>
   );
 }
-

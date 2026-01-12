@@ -56,7 +56,7 @@ const AccordionRoot = ({
   return (
     <AccordionContext value={{slots, hideSeparator}}>
       {variant === "surface" ? (
-        // Allows inner components to apply "in-surface" colors for proper contrast
+        // Allows inner components to apply "on-surface" colors for proper contrast
         <SurfaceContext value={{variant: "default"}}>{content}</SurfaceContext>
       ) : (
         content

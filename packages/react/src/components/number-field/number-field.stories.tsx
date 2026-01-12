@@ -8,7 +8,6 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {NumberField} from "./index";
 
@@ -34,6 +33,29 @@ export const Default: Story = {
         <NumberField.IncrementButton />
       </NumberField.Group>
     </NumberField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <NumberField defaultValue={100} minValue={0} name="primary-width" variant="primary">
+        <Label>Primary variant</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-[120px]" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+      <NumberField defaultValue={100} minValue={0} name="secondary-width" variant="secondary">
+        <Label>Secondary variant</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-[120px]" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+    </div>
   ),
 };
 
@@ -395,63 +417,6 @@ export const CustomIcons: Story = {
         </NumberField.Group>
         <Description>Custom icon children</Description>
       </NumberField>
-    </div>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <NumberField defaultValue={100} minValue={0} name="quantity-default">
-            <Label>Quantity</Label>
-            <NumberField.Group>
-              <NumberField.DecrementButton />
-              <NumberField.Input className="w-full" />
-              <NumberField.IncrementButton />
-            </NumberField.Group>
-          </NumberField>
-          <p className="text-sm text-muted">
-            NumberField automatically detects default surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <NumberField defaultValue={100} minValue={0} name="quantity-secondary">
-            <Label>Quantity</Label>
-            <NumberField.Group>
-              <NumberField.DecrementButton />
-              <NumberField.Input className="w-full" />
-              <NumberField.IncrementButton />
-            </NumberField.Group>
-          </NumberField>
-          <p className="text-sm text-muted">
-            NumberField automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <NumberField defaultValue={100} minValue={0} name="quantity-tertiary">
-            <Label>Quantity</Label>
-            <NumberField.Group>
-              <NumberField.DecrementButton />
-              <NumberField.Input className="w-full" />
-              <NumberField.IncrementButton />
-            </NumberField.Group>
-          </NumberField>
-          <p className="text-sm text-muted">
-            NumberField automatically detects tertiary surface level.
-          </p>
-        </Surface>
-      </div>
     </div>
   ),
 };

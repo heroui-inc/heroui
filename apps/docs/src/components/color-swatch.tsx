@@ -18,7 +18,7 @@ interface ColorSwatchProps {
 }
 
 const getLabValue = (value: string): LAB | null => {
-  const match = value.match(/\d+/g);
+  const match = value.match(/-?\d*\.?\d+/g);
 
   if (match && match.length >= 3) {
     return [Number(match[0]), Number(match[1]), Number(match[2])];

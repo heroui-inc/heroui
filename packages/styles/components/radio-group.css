@@ -14,18 +14,17 @@
   }
 }
 
-/**
- * In-Surface Variants
- * Used when radio group is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
+/* Variant property definitions */
+.radio-group--primary {
+  /* Default styles */
+}
 
-/* Shared styles for all in-surface variants */
-.radio-group--in-surface-default .radio__control,
-.radio-group--in-surface-secondary .radio__control,
-.radio-group--in-surface-tertiary .radio__control {
+.radio-group--secondary .radio__control {
   @apply shadow-none;
   background-color: var(--radio-control-bg);
+
+  --radio-control-bg: var(--color-default);
+  --radio-control-bg-hover: var(--color-default-hover);
 
   /* Hover state */
   .radio:hover &,
@@ -45,20 +44,4 @@
       background-color: var(--radio-control-bg-hover);
     }
   }
-}
-
-/* In-surface variant property definitions */
-.radio-group--in-surface-default {
-  --radio-control-bg: var(--color-in-surface);
-  --radio-control-bg-hover: var(--color-in-surface-hover);
-}
-
-.radio-group--in-surface-secondary {
-  --radio-control-bg: var(--color-in-surface-secondary);
-  --radio-control-bg-hover: var(--color-in-surface-secondary-hover);
-}
-
-.radio-group--in-surface-tertiary {
-  --radio-control-bg: var(--color-in-surface-tertiary);
-  --radio-control-bg-hover: var(--color-in-surface-tertiary-hover);
 }

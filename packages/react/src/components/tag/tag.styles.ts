@@ -34,20 +34,6 @@ export const tagVariants = tv({
         base: "tag--on-form-field",
       },
     },
-    inSurface: {
-      default: {
-        base: "tag--in-surface-default",
-        removeButton: "tag__remove-button--in-surface-default",
-      },
-      secondary: {
-        base: "tag--in-surface-secondary",
-        removeButton: "tag__remove-button--in-surface-secondary",
-      },
-      tertiary: {
-        base: "tag--in-surface-tertiary",
-        removeButton: "tag__remove-button--in-surface-tertiary",
-      },
-    },
   },
 });
 

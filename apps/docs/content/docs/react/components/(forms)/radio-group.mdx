@@ -86,12 +86,21 @@ Combine `defaultValue` with `onChange` when you only need to react to updates.
   name="radio-group-disabled"
 />
 
+### Variants
+
+The RadioGroup component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with default background, suitable for most use cases
+- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
+
+<ComponentPreview name="radio-group-variants" />
+
 ### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, RadioGroup automatically applies in-surface styling.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview
-  name="radio-group-in-surface"
+  name="radio-group-on-surface"
 />
 
 ### Delivery & Payment
@@ -210,7 +219,7 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `isRequired` | `boolean` | `false` | Whether the radio group is required |
 | `isReadOnly` | `boolean` | `false` | Whether the radio group is read only |
 | `isInvalid` | `boolean` | `false` | Whether the radio group is in an invalid state |
-| `inSurface` | `"default" \| "secondary" \| "tertiary"` | `false` | Whether the radio group is displayed in a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `name` | `string` | - | The name of the radio group, used when submitting an HTML form |
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the radio group |
 | `children` | `React.ReactNode \| (values: RadioGroupRenderProps) => React.ReactNode` | - | Radio group content or render prop |

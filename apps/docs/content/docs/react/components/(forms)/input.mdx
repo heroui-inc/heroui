@@ -35,11 +35,20 @@ import { Input } from '@heroui/react';
 
 <ComponentPreview name="input-full-width" />
 
+### Variants
+
+The Input component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="input-variants" />
+
 ### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, Input automatically applies in-surface styling.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
-<ComponentPreview name="input-in-surface" />
+<ComponentPreview name="input-on-surface" />
 
 <RelatedComponents component="input" />
 
@@ -128,6 +137,6 @@ Input accepts all standard HTML `<input>` attributes plus the following:
 | `max` | `number \| string` | - | Maximum value (for number/date inputs). |
 | `step` | `number \| string` | - | Stepping interval (for number inputs). |
 | `fullWidth` | `boolean` | `false` | Whether the input should take full width of its container |
-| `inSurface` | `"default" \| "secondary" \| "tertiary"` | `false` | Whether the input is displayed in a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 > For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with Input as a child component.

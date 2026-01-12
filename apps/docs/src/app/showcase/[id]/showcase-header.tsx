@@ -14,14 +14,14 @@ import {useEffect} from "react";
 
 import {HeroUILogo} from "@/components/heroui-logo";
 import {Iconify} from "@/components/iconify";
+import {useCodePanel} from "@/hooks/use-code-panel";
 
 import {ShowcaseThemeSwitch} from "./showcase-theme-switch";
-import {useShowcase} from "./showcase-wrapper";
 
 export function ShowcaseHeader() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const {isCodeVisible, toggleCode} = useShowcase();
+  const {isCodeVisible, toggleCode} = useCodePanel();
 
   // Get the returnUrl parameter, default to /showcase if not present
   const returnUrl = searchParams.get("returnUrl") || "/showcase";

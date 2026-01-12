@@ -107,6 +107,15 @@ export default () => (
   name="checkbox-full-rounded"
 />
 
+### Variants
+
+The Checkbox component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with default background, suitable for most use cases
+- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
+
+<ComponentPreview name="checkbox-variants" />
+
 <RelatedComponents component="checkbox" />
 
 ## Styling
@@ -209,7 +218,7 @@ Inherits from [React Aria Checkbox](https://react-spectrum.adobe.com/react-aria/
 | `isDisabled` | `boolean` | `false` | Whether the checkbox is disabled |
 | `isInvalid` | `boolean` | `false` | Whether the checkbox is invalid |
 | `isReadOnly` | `boolean` | `false` | Whether the checkbox is read only |
-| `inSurface` | `"default" \| "secondary" \| "tertiary"` | `false` | Whether the checkbox is displayed in a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `name` | `string` | - | The name of the input element, used when submitting an HTML form |
 | `value` | `string` | - | The value of the input element, used when submitting an HTML form |
 | `onChange` | `(isSelected: boolean) => void` | - | Handler called when the checkbox value changes |

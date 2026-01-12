@@ -133,11 +133,20 @@ InputGroup respects the disabled state from its parent TextField.
 
 <ComponentPreview name="input-group-full-width" />
 
+### Variants
+
+The InputGroup component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="input-group-variants" />
+
 ### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, InputGroup automatically applies in-surface styling. You can also manually control this with the `inSurface` prop.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
-<ComponentPreview name="input-group-in-surface" />
+<ComponentPreview name="input-group-on-surface" />
 
 ### With TextArea
 
@@ -196,9 +205,10 @@ InputGroup uses CSS classes that can be customized. Override the component class
     @apply text-field-placeholder rounded-r-field flex h-full items-center justify-center rounded-l-none bg-transparent px-3;
   }
 
-  /* In surface variant */
-  .input-group--in-surface {
-    @apply bg-in-surface shadow-none;
+  /* Secondary variant */
+  .input-group--secondary {
+    @apply shadow-none;
+    background-color: var(--color-default);
   }
 }
 ```
@@ -209,7 +219,8 @@ InputGroup uses CSS classes that can be customized. Override the component class
 - `.input-group__input` – Input element with transparent background and no border. Also used as the base class for textarea elements.
 - `.input-group__prefix` – Prefix container with left border radius. Aligns to top when used with textarea.
 - `.input-group__suffix` – Suffix container with right border radius. Aligns to top when used with textarea.
-- `.input-group--in-surface` – Variant for use in surface backgrounds
+- `.input-group--primary` – Primary variant with shadow (default)
+- `.input-group--secondary` – Secondary variant without shadow, suitable for use in surfaces
 
 **Note**: When using `InputGroup.TextArea`, the container automatically switches from `items-center` to `items-start` alignment and uses `height: auto` instead of a fixed height. Prefix and suffix elements align to the top with additional padding to match the textarea's vertical padding. The textarea uses the same `.input-group__input` base class with textarea-specific styles (minimum height and vertical resize) applied via the `[data-slot="input-group-textarea"]` attribute selector.
 
@@ -242,7 +253,7 @@ InputGroup inherits all props from React Aria's [Group](https://react-spectrum.a
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the group is displayed in a surface background. Automatically detected when inside a Surface component. |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 #### Accessibility Props
 
@@ -271,7 +282,7 @@ InputGroup.Input inherits all props from React Aria's [Input](https://react-spec
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | CSS classes for styling. |
-| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the input is displayed in a surface background. |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the input. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `type` | `string` | `'text'` | Input type (text, password, email, etc.). |
 | `value` | `string` | - | Current value (controlled). |
 | `defaultValue` | `string` | - | Default value (uncontrolled). |
@@ -286,7 +297,7 @@ InputGroup.TextArea inherits all props from React Aria's [TextArea](https://reac
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | CSS classes for styling. |
-| `inSurface` | `"default" \| "secondary" \| "tertiary"` | - | Whether the textarea is displayed in a surface background. |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the textarea. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `value` | `string` | - | Current value (controlled). |
 | `defaultValue` | `string` | - | Default value (uncontrolled). |
 | `placeholder` | `string` | - | Placeholder text. |

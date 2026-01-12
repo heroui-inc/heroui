@@ -18,7 +18,6 @@ import {ListBox} from "../listbox";
 import {Collection, ListBoxLoadMoreItem} from "../rac";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {ComboBox} from "./index";
 
@@ -902,108 +901,6 @@ export const MenuTrigger: Story = {
             Popover only opens when the trigger button is pressed or arrow keys are used
           </Description>
         </ComboBox>
-      </div>
-    </div>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <ComboBox className="w-full" name="animal-default">
-            <Label>Favorite Animal</Label>
-            <ComboBox.InputGroup>
-              <Input placeholder="Search animals..." />
-              <ComboBox.Trigger />
-            </ComboBox.InputGroup>
-            <ComboBox.Popover>
-              <ListBox>
-                <ListBox.Item id="aardvark" textValue="Aardvark">
-                  Aardvark
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="cat" textValue="Cat">
-                  Cat
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="dog" textValue="Dog">
-                  Dog
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              </ListBox>
-            </ComboBox.Popover>
-          </ComboBox>
-          <p className="text-sm text-muted">
-            ComboBox automatically detects default surface level through its Input component.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <ComboBox className="w-full" name="animal-secondary">
-            <Label>Favorite Animal</Label>
-            <ComboBox.InputGroup>
-              <Input placeholder="Search animals..." />
-              <ComboBox.Trigger />
-            </ComboBox.InputGroup>
-            <ComboBox.Popover>
-              <ListBox>
-                <ListBox.Item id="aardvark" textValue="Aardvark">
-                  Aardvark
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="cat" textValue="Cat">
-                  Cat
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="dog" textValue="Dog">
-                  Dog
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              </ListBox>
-            </ComboBox.Popover>
-          </ComboBox>
-          <p className="text-sm text-muted">
-            ComboBox automatically detects secondary surface level through its Input component.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <ComboBox className="w-full" name="animal-tertiary">
-            <Label>Favorite Animal</Label>
-            <ComboBox.InputGroup>
-              <Input placeholder="Search animals..." />
-              <ComboBox.Trigger />
-            </ComboBox.InputGroup>
-            <ComboBox.Popover>
-              <ListBox>
-                <ListBox.Item id="aardvark" textValue="Aardvark">
-                  Aardvark
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="cat" textValue="Cat">
-                  Cat
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="dog" textValue="Dog">
-                  Dog
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              </ListBox>
-            </ComboBox.Popover>
-          </ComboBox>
-          <p className="text-sm text-muted">
-            ComboBox automatically detects tertiary surface level through its Input component.
-          </p>
-        </Surface>
       </div>
     </div>
   ),

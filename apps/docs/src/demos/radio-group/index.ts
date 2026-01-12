@@ -4,6 +4,7 @@ export {CustomIndicator} from "./custom-indicator";
 export {DeliveryAndPayment} from "./delivery-and-payment";
 export {Disabled} from "./disabled";
 export {Horizontal} from "./horizontal";
-export {InSurface} from "./in-surface";
+export {OnSurface} from "./on-surface";
 export {Uncontrolled} from "./uncontrolled";
 export {Validation} from "./validation";
+export {Variants} from "./variants";

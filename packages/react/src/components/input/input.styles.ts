@@ -5,10 +5,9 @@ import {tv} from "tailwind-variants";
 export const inputVariants = tv({
   base: "input",
   variants: {
-    inSurface: {
-      default: "input--in-surface-default",
-      secondary: "input--in-surface-secondary",
-      tertiary: "input--in-surface-tertiary",
+    variant: {
+      primary: "input--primary",
+      secondary: "input--secondary",
     },
     fullWidth: {
       true: "input--full-width",
@@ -16,7 +15,7 @@ export const inputVariants = tv({
     },
   },
   defaultVariants: {
-    inSurface: undefined,
+    variant: "primary",
     fullWidth: false,
   },
 });

@@ -9,7 +9,6 @@ import {Form} from "../form";
 import {Kbd} from "../kbd";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {SearchField} from "./index";
 
@@ -35,6 +34,29 @@ export const Default: Story = {
         <SearchField.ClearButton />
       </SearchField.Group>
     </SearchField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <SearchField name="primary-search" variant="primary">
+        <Label>Primary variant</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input className="w-[280px]" placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+      </SearchField>
+      <SearchField name="secondary-search" variant="secondary">
+        <Label>Secondary variant</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input className="w-[280px]" placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+      </SearchField>
+    </div>
   ),
 };
 
@@ -241,63 +263,6 @@ export const CustomIcons: Story = {
         </SearchField.Group>
         <Description>Custom icon children</Description>
       </SearchField>
-    </div>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <SearchField name="search-default">
-            <Label>Search</Label>
-            <SearchField.Group>
-              <SearchField.SearchIcon />
-              <SearchField.Input className="w-full" placeholder="Search..." />
-              <SearchField.ClearButton />
-            </SearchField.Group>
-          </SearchField>
-          <p className="text-sm text-muted">
-            SearchField automatically detects default surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <SearchField name="search-secondary">
-            <Label>Search</Label>
-            <SearchField.Group>
-              <SearchField.SearchIcon />
-              <SearchField.Input className="w-full" placeholder="Search..." />
-              <SearchField.ClearButton />
-            </SearchField.Group>
-          </SearchField>
-          <p className="text-sm text-muted">
-            SearchField automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <SearchField name="search-tertiary">
-            <Label>Search</Label>
-            <SearchField.Group>
-              <SearchField.SearchIcon />
-              <SearchField.Input className="w-full" placeholder="Search..." />
-              <SearchField.ClearButton />
-            </SearchField.Group>
-          </SearchField>
-          <p className="text-sm text-muted">
-            SearchField automatically detects tertiary surface level.
-          </p>
-        </Surface>
-      </div>
     </div>
   ),
 };

@@ -2,21 +2,19 @@ import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 
+import {DemoComponents} from "@/components/demo";
 import {Footer} from "@/components/footer";
+import {FrameworkChip} from "@/components/framework-chip";
 import {GitHubLink} from "@/components/github-link";
-import {Iconify} from "@/components/iconify";
-import {currentVersion} from "@/utils/version";
-
-import {DemoComponents} from "./components/demo";
 
 const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/react/releases/v3-0-0-beta-3"
+      href="/docs/native/releases/beta-11"
     >
-      <Iconify className="size-2 text-accent/90" icon="gravity-ui:circle-fill" />
-      <span>v{currentVersion}: Seven new components</span>
+      <FrameworkChip framework="native" />
+      <span>Beta 11 - Enhanced components and PortalHost export</span>
     </LinkRoot>
   );
 };
@@ -72,7 +70,7 @@ export default function HomePage() {
           />
         </section>
         {/* Desktop: Show demos */}
-        <div className="hidden lg:block">
+        <div className="hidden py-24 lg:block">
           <DemoComponents />
         </div>
       </section>

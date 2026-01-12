@@ -1,5 +1,5 @@
-import React from "react";
 import {Avatar, Card} from "@heroui/react";
+import React from "react";
 import {tv} from "tailwind-variants";
 
 const cardStyles = tv({
@@ -70,4 +70,3 @@ export function SubtleCardsDemo() {
     </div>
   );
 }
-

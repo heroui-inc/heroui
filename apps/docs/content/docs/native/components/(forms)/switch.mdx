@@ -203,6 +203,7 @@ export default function SwitchExample() {
 | `isDisabled`                | `boolean`                                                            | `false`     | Whether the switch is disabled and cannot be interacted with |
 | `className`                 | `string`                                                             | `undefined` | Custom class name for the switch                             |
 | `animation`                 | `SwitchRootAnimation`                                                | -           | Animation configuration                                      |
+| `isAnimatedStyleActive`     | `boolean`                                                            | `true`      | Whether animated styles (react-native-reanimated) are active |
 | `onSelectedChange`          | `(isSelected: boolean) => void`                                      | -           | Callback fired when the switch selection state changes       |
 | `...AnimatedPressableProps` | `AnimatedProps<PressableProps>`                                      | -           | All React Native Reanimated Pressable props are supported    |
 
@@ -222,21 +223,23 @@ Animation configuration for Switch component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                           | type               | default                                                        | description                                    |
-| ------------------------------ | ------------------ | -------------------------------------------------------------- | ---------------------------------------------- |
-| `scale.value`                  | `[number, number]` | `[1, 0.96]`                                                    | Scale values [unpressed, pressed]              |
-| `scale.timingConfig`           | `WithTimingConfig` | `{ duration: 150 }`                                            | Animation timing configuration                 |
-| `backgroundColor.value`        | `[string, string]` | Uses theme colors                                              | Background color values [unselected, selected] |
-| `backgroundColor.timingConfig` | `WithTimingConfig` | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | Animation timing configuration                 |
+| prop                           | type                                    | default                                                        | description                                    |
+| ------------------------------ | --------------------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
+| `state`                        | `'disabled' \| 'disable-all' \| boolean` | -                                                              | Disable animations while customizing properties |
+| `scale.value`                  | `[number, number]`                      | `[1, 0.96]`                                                    | Scale values [unpressed, pressed]              |
+| `scale.timingConfig`           | `WithTimingConfig`                       | `{ duration: 150 }`                                            | Animation timing configuration                 |
+| `backgroundColor.value`        | `[string, string]`                      | Uses theme colors                                              | Background color values [unselected, selected] |
+| `backgroundColor.timingConfig` | `WithTimingConfig`                       | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | Animation timing configuration                 |
 
 ### Switch.Thumb
 
-| prop           | type                                                                 | default     | description                                              |
-| -------------- | -------------------------------------------------------------------- | ----------- | -------------------------------------------------------- |
-| `children`     | `React.ReactNode \| ((props: SwitchRenderProps) => React.ReactNode)` | `undefined` | Content to render inside the thumb, or a render function |
-| `className`    | `string`                                                             | `undefined` | Custom class name for the thumb element                  |
-| `animation`    | `SwitchThumbAnimation`                                               | -           | Animation configuration                                  |
-| `...ViewProps` | `ViewProps`                                                          | -           | All standard React Native View props are supported       |
+| prop                    | type                                                                 | default     | description                                                  |
+| ----------------------- | -------------------------------------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode \| ((props: SwitchRenderProps) => React.ReactNode)` | `undefined` | Content to render inside the thumb, or a render function     |
+| `className`             | `string`                                                             | `undefined` | Custom class name for the thumb element                      |
+| `animation`             | `SwitchThumbAnimation`                                               | -           | Animation configuration                                      |
+| `isAnimatedStyleActive` | `boolean`                                                            | `true`      | Whether animated styles (react-native-reanimated) are active |
+| `...ViewProps`          | `ViewProps`                                                          | -           | All standard React Native View props are supported           |
 
 #### SwitchThumbAnimation
 
@@ -248,6 +251,7 @@ Animation configuration for Switch.Thumb component. Can be:
 
 | prop                           | type               | default                                                        | description                                                             |
 | ------------------------------ | ------------------ | -------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `state`                        | `'disabled' \| boolean` | -                                                              | Disable animations while customizing properties                         |
 | `left.value`                   | `number`           | `2`                                                            | Offset value from the edges (left when unselected, right when selected) |
 | `left.springConfig`            | `WithSpringConfig` | `{ damping: 120, stiffness: 1600, mass: 2 }`                   | Spring animation configuration for thumb position                       |
 | `backgroundColor.value`        | `[string, string]` | `['white', theme accent-foreground color]`                     | Background color values [unselected, selected]                          |

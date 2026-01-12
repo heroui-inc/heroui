@@ -11,7 +11,6 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
-import {Surface} from "../surface";
 
 import {DateField} from "./index";
 
@@ -37,6 +36,29 @@ export const Default: Story = {
         </DateInputGroup.Input>
       </DateInputGroup>
     </DateField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <DateField className="w-[256px]" name="primary-date">
+        <Label>Primary variant</Label>
+        <DateInputGroup variant="primary">
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+        </DateInputGroup>
+      </DateField>
+      <DateField className="w-[256px]" name="secondary-date">
+        <Label>Secondary variant</Label>
+        <DateInputGroup variant="secondary">
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+        </DateInputGroup>
+      </DateField>
+    </div>
   ),
 };
 
@@ -279,63 +301,6 @@ export const WithPrefixAndSuffix: Story = {
       </DateInputGroup>
       <Description>Enter a date</Description>
     </DateField>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <DateField className="w-full" name="date-default">
-            <Label>Date</Label>
-            <DateInputGroup>
-              <DateInputGroup.Input>
-                {(segment) => <DateInputGroup.Segment segment={segment} />}
-              </DateInputGroup.Input>
-            </DateInputGroup>
-          </DateField>
-          <p className="text-sm text-muted">
-            DateField automatically detects default surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <DateField className="w-full" name="date-secondary">
-            <Label>Date</Label>
-            <DateInputGroup>
-              <DateInputGroup.Input>
-                {(segment) => <DateInputGroup.Segment segment={segment} />}
-              </DateInputGroup.Input>
-            </DateInputGroup>
-          </DateField>
-          <p className="text-sm text-muted">
-            DateField automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <DateField className="w-full" name="date-tertiary">
-            <Label>Date</Label>
-            <DateInputGroup>
-              <DateInputGroup.Input>
-                {(segment) => <DateInputGroup.Segment segment={segment} />}
-              </DateInputGroup.Input>
-            </DateInputGroup>
-          </DateField>
-          <p className="text-sm text-muted">
-            DateField automatically detects tertiary surface level.
-          </p>
-        </Surface>
-      </div>
-    </div>
   ),
 };
 

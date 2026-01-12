@@ -86,6 +86,34 @@ import {Easing} from 'react-native-reanimated';
 </Accordion>;
 ```
 
+### Example 4: State Prop for Granular Control
+
+The `state` prop allows you to disable animations while still customizing animation properties. This is useful when you want to fine-tune component behavior without enabling animations:
+
+```tsx
+import {Switch} from 'heroui-native';
+
+<Switch
+  animation={{
+    state: 'disabled', // Disable animations but allow property customization
+    scale: {
+      value: 0.95, // This value is still respected even though animations are disabled
+    },
+    backgroundColor: {
+      value: ['#172554', '#eab308'],
+    },
+  }}>
+  <Switch.Thumb />
+</Switch>
+```
+
+The `state` prop accepts:
+- `'disabled'`: Disable animations while allowing property customization
+- `'disable-all'`: Disable all animations including children (only available at root level)
+- `boolean`: Simple enable/disable control (`true` enables, `false` disables)
+
+This provides more granular control over animation behavior, allowing you to customize properties without enabling animations.
+
 ## Disabling Animations
 
 You can disable animations at different levels using the `animation` prop.

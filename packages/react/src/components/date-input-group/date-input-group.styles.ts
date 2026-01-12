@@ -11,18 +11,12 @@ export const dateInputGroupVariants = tv({
     suffix: "date-input-group__suffix",
   },
   variants: {
-    inSurface: {
-      default: {
-        base: "date-input-group--in-surface-default",
-        input: "date-input-group__input--in-surface-default",
+    variant: {
+      primary: {
+        base: "date-input-group--primary",
       },
       secondary: {
-        base: "date-input-group--in-surface-secondary",
-        input: "date-input-group__input--in-surface-secondary",
-      },
-      tertiary: {
-        base: "date-input-group--in-surface-tertiary",
-        input: "date-input-group__input--in-surface-tertiary",
+        base: "date-input-group--secondary",
       },
     },
     fullWidth: {
@@ -33,6 +27,7 @@ export const dateInputGroupVariants = tv({
     },
   },
   defaultVariants: {
+    variant: "primary",
     fullWidth: false,
   },
 });

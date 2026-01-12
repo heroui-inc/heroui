@@ -42,15 +42,10 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
   children,
   className,
   fullWidth,
-  inSurface,
+  variant,
   ...props
 }: SelectRootProps<T, M>) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-  const slots = React.useMemo(
-    () => selectVariants({fullWidth, inSurface: resolvedInSurface}),
-    [fullWidth, resolvedInSurface],
-  );
+  const slots = React.useMemo(() => selectVariants({fullWidth, variant}), [fullWidth, variant]);
 
   return (
     <SelectContext value={{slots}}>

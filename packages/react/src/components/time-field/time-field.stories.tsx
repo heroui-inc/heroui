@@ -11,7 +11,6 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
-import {Surface} from "../surface";
 
 import {TimeField} from "./index";
 
@@ -293,63 +292,6 @@ export const WithPrefixAndSuffix: Story = {
       </DateInputGroup>
       <Description>Enter a time</Description>
     </TimeField>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <TimeField className="w-full" name="time-default">
-            <Label>Time</Label>
-            <DateInputGroup>
-              <DateInputGroup.Input>
-                {(segment) => <DateInputGroup.Segment segment={segment} />}
-              </DateInputGroup.Input>
-            </DateInputGroup>
-          </TimeField>
-          <p className="text-sm text-muted">
-            TimeField automatically detects default surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <TimeField className="w-full" name="time-secondary">
-            <Label>Time</Label>
-            <DateInputGroup>
-              <DateInputGroup.Input>
-                {(segment) => <DateInputGroup.Segment segment={segment} />}
-              </DateInputGroup.Input>
-            </DateInputGroup>
-          </TimeField>
-          <p className="text-sm text-muted">
-            TimeField automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <TimeField className="w-full" name="time-tertiary">
-            <Label>Time</Label>
-            <DateInputGroup>
-              <DateInputGroup.Input>
-                {(segment) => <DateInputGroup.Segment segment={segment} />}
-              </DateInputGroup.Input>
-            </DateInputGroup>
-          </TimeField>
-          <p className="text-sm text-muted">
-            TimeField automatically detects tertiary surface level.
-          </p>
-        </Surface>
-      </div>
-    </div>
   ),
 };
 

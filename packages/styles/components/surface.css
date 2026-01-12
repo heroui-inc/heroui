@@ -6,6 +6,10 @@
 }
 
 /* Modifier - variant */
+.surface--transparent {
+  @apply bg-transparent;
+}
+
 .surface--default {
   @apply bg-surface;
 }
