@@ -4,6 +4,7 @@ import type {Key} from "@heroui/react";
 
 import {
   Autocomplete,
+  Description,
   EmptyState,
   Label,
   ListBox,
@@ -14,19 +15,17 @@ import {
 } from "@heroui/react";
 import {useState} from "react";
 
-export default function Default() {
-  const {contains} = useFilter({sensitivity: "base"});
+export function EmailRecipients() {
+  const emails = [
+    {email: "alice@example.com", id: "alice@example.com", name: "Alice Johnson"},
+    {email: "bob@example.com", id: "bob@example.com", name: "Bob Smith"},
+    {email: "charlie@example.com", id: "charlie@example.com", name: "Charlie Brown"},
+    {email: "diana@example.com", id: "diana@example.com", name: "Diana Prince"},
+    {email: "eve@example.com", id: "eve@example.com", name: "Eve Wilson"},
+  ];
 
   const [selectedKeys, setSelectedKeys] = useState<Key[]>([]);
-
-  const items = [
-    {id: "california", name: "California"},
-    {id: "texas", name: "Texas"},
-    {id: "florida", name: "Florida"},
-    {id: "new-york", name: "New York"},
-    {id: "illinois", name: "Illinois"},
-    {id: "pennsylvania", name: "Pennsylvania"},
-  ];
+  const {contains} = useFilter({sensitivity: "base"});
 
   const onRemoveTags = (keys: Set<Key>) => {
     setSelectedKeys((prev) => prev.filter((key) => !keys.has(key)));
@@ -35,32 +34,32 @@ export default function Default() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select countries"
+      placeholder="Add recipients"
       selectionMode="multiple"
       value={selectedKeys}
-      onChange={(keys: Key | Key[] | null) => setSelectedKeys(keys as Key[])}
+      onChange={(keys) => setSelectedKeys(keys as Key[])}
     >
-      <Label>Countries to Visit</Label>
+      <Label>To</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
-          {({defaultChildren, isPlaceholder, state}: any) => {
+          {({defaultChildren, isPlaceholder, state}) => {
             if (isPlaceholder || state.selectedItems.length === 0) {
               return defaultChildren;
             }
 
-            const selectedItemsKeys = state.selectedItems.map((item: any) => item.key);
+            const selectedItemsKeys = state.selectedItems.map((item) => item.key);
 
             return (
               <TagGroup size="sm" onRemove={onRemoveTags}>
                 <TagGroup.List>
-                  {selectedItemsKeys.map((selectedItemKey: Key) => {
-                    const item = items.find((s) => s.id === selectedItemKey);
+                  {selectedItemsKeys.map((selectedItemKey) => {
+                    const email = emails.find((e) => e.id === selectedItemKey);
 
-                    if (!item) return null;
+                    if (!email) return null;
 
                     return (
-                      <Tag key={item.id} id={item.id}>
-                        {item.name}
+                      <Tag key={email.id} id={email.id}>
+                        {email.email}
                       </Tag>
                     );
                   })}
@@ -76,14 +75,17 @@ export default function Default() {
           <SearchField autoFocus name="search">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search..." />
+              <SearchField.Input placeholder="Search emails..." />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
-            {items.map((item) => (
-              <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
-                {item.name}
+          <ListBox renderEmptyState={() => <EmptyState>No recipients found</EmptyState>}>
+            {emails.map((email) => (
+              <ListBox.Item key={email.id} id={email.id} textValue={email.email}>
+                <div className="flex flex-col">
+                  <Label>{email.name}</Label>
+                  <Description>{email.email}</Description>
+                </div>
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             ))}

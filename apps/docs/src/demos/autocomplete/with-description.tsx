@@ -2,32 +2,31 @@
 
 import type {Key} from "@heroui/react";
 
-import {Autocomplete, Label, ListBox, SearchField, useFilter} from "@heroui/react";
+import {Autocomplete, Description, Label, ListBox, SearchField, useFilter} from "@heroui/react";
 import {useState} from "react";
 
-export default function SingleSelect() {
+export function WithDescription() {
+  const [selectedKey, setSelectedKey] = useState<Key | null>(null);
   const {contains} = useFilter({sensitivity: "base"});
 
-  const [selectedKey, setSelectedKey] = useState<Key | null>(null);
-
   const items = [
-    {id: "cat", name: "Cat"},
-    {id: "dog", name: "Dog"},
-    {id: "elephant", name: "Elephant"},
-    {id: "lion", name: "Lion"},
-    {id: "tiger", name: "Tiger"},
-    {id: "giraffe", name: "Giraffe"},
+    {id: "florida", name: "Florida"},
+    {id: "delaware", name: "Delaware"},
+    {id: "california", name: "California"},
+    {id: "texas", name: "Texas"},
+    {id: "new-york", name: "New York"},
+    {id: "washington", name: "Washington"},
   ];
 
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select an animal"
+      placeholder="Select one"
       selectionMode="single"
       value={selectedKey}
       onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
     >
-      <Label>Favorite Animal</Label>
+      <Label>State</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
         <Autocomplete.Indicator />
@@ -37,7 +36,7 @@ export default function SingleSelect() {
           <SearchField autoFocus name="search">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search animals..." />
+              <SearchField.Input placeholder="Search states..." />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
@@ -51,6 +50,7 @@ export default function SingleSelect() {
           </ListBox>
         </Autocomplete.Filter>
       </Autocomplete.Popover>
+      <Description>Select your state of residence</Description>
     </Autocomplete>
   );
 }

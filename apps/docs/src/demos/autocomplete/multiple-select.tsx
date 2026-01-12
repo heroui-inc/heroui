@@ -14,10 +14,9 @@ import {
 } from "@heroui/react";
 import {useState} from "react";
 
-export default function Default() {
-  const {contains} = useFilter({sensitivity: "base"});
-
+export function MultipleSelect() {
   const [selectedKeys, setSelectedKeys] = useState<Key[]>([]);
+  const {contains} = useFilter({sensitivity: "base"});
 
   const items = [
     {id: "california", name: "California"},
@@ -35,25 +34,25 @@ export default function Default() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select countries"
+      placeholder="Select states"
       selectionMode="multiple"
       value={selectedKeys}
-      onChange={(keys: Key | Key[] | null) => setSelectedKeys(keys as Key[])}
+      onChange={(keys) => setSelectedKeys(keys as Key[])}
     >
-      <Label>Countries to Visit</Label>
+      <Label>States</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
-          {({defaultChildren, isPlaceholder, state}: any) => {
+          {({defaultChildren, isPlaceholder, state}) => {
             if (isPlaceholder || state.selectedItems.length === 0) {
               return defaultChildren;
             }
 
-            const selectedItemsKeys = state.selectedItems.map((item: any) => item.key);
+            const selectedItemsKeys = state.selectedItems.map((item) => item.key);
 
             return (
               <TagGroup size="sm" onRemove={onRemoveTags}>
                 <TagGroup.List>
-                  {selectedItemsKeys.map((selectedItemKey: Key) => {
+                  {selectedItemsKeys.map((selectedItemKey) => {
                     const item = items.find((s) => s.id === selectedItemKey);
 
                     if (!item) return null;

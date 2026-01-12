@@ -424,12 +424,80 @@ export const demos: Record<string, DemoItem> = {
   },
   // Autocomplete demos
   "autocomplete-default": {
-    component: AutocompleteDemos.AutocompleteDefault,
+    component: AutocompleteDemos.Default,
     file: "autocomplete/default.tsx",
   },
   "autocomplete-single-select": {
-    component: AutocompleteDemos.AutocompleteSingleSelect,
+    component: AutocompleteDemos.SingleSelect,
     file: "autocomplete/single-select.tsx",
+  },
+  "autocomplete-variants": {
+    component: AutocompleteDemos.Variants,
+    file: "autocomplete/variants.tsx",
+  },
+  "autocomplete-multiple-select": {
+    component: AutocompleteDemos.MultipleSelect,
+    file: "autocomplete/multiple-select.tsx",
+  },
+  "autocomplete-full-width": {
+    component: AutocompleteDemos.FullWidth,
+    file: "autocomplete/full-width.tsx",
+  },
+  "autocomplete-with-description": {
+    component: AutocompleteDemos.WithDescription,
+    file: "autocomplete/with-description.tsx",
+  },
+  "autocomplete-with-sections": {
+    component: AutocompleteDemos.WithSections,
+    file: "autocomplete/with-sections.tsx",
+  },
+  "autocomplete-with-disabled-options": {
+    component: AutocompleteDemos.WithDisabledOptions,
+    file: "autocomplete/with-disabled-options.tsx",
+  },
+  "autocomplete-custom-indicator": {
+    component: AutocompleteDemos.CustomIndicator,
+    file: "autocomplete/custom-indicator.tsx",
+  },
+  "autocomplete-required": {
+    component: AutocompleteDemos.Required,
+    file: "autocomplete/required.tsx",
+  },
+  "autocomplete-controlled": {
+    component: AutocompleteDemos.Controlled,
+    file: "autocomplete/controlled.tsx",
+  },
+  "autocomplete-controlled-open-state": {
+    component: AutocompleteDemos.ControlledOpenState,
+    file: "autocomplete/controlled-open-state.tsx",
+  },
+  "autocomplete-asynchronous-filtering": {
+    component: AutocompleteDemos.AsynchronousFiltering,
+    file: "autocomplete/asynchronous-filtering.tsx",
+  },
+  "autocomplete-disabled": {
+    component: AutocompleteDemos.Disabled,
+    file: "autocomplete/disabled.tsx",
+  },
+  "autocomplete-user-selection": {
+    component: AutocompleteDemos.UserSelection,
+    file: "autocomplete/user-selection.tsx",
+  },
+  "autocomplete-user-selection-multiple": {
+    component: AutocompleteDemos.UserSelectionMultiple,
+    file: "autocomplete/user-selection-multiple.tsx",
+  },
+  "autocomplete-location-search": {
+    component: AutocompleteDemos.LocationSearch,
+    file: "autocomplete/location-search.tsx",
+  },
+  "autocomplete-tag-group-selection": {
+    component: AutocompleteDemos.TagGroupSelection,
+    file: "autocomplete/tag-group-selection.tsx",
+  },
+  "autocomplete-email-recipients": {
+    component: AutocompleteDemos.EmailRecipients,
+    file: "autocomplete/email-recipients.tsx",
   },
   // ComboBox demos
   "combobox-default": {

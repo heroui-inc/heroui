@@ -1,2 +1,20 @@
-export {default as AutocompleteDefault} from "./default";
-export {default as AutocompleteSingleSelect} from "./single-select";
+// Autocomplete demos
+export {AsynchronousFiltering} from "./asynchronous-filtering";
+export {Controlled} from "./controlled";
+export {ControlledOpenState} from "./controlled-open-state";
+export {CustomIndicator} from "./custom-indicator";
+export {default as Default} from "./default";
+export {Disabled} from "./disabled";
+export {EmailRecipients} from "./email-recipients";
+export {FullWidth} from "./full-width";
+export {LocationSearch} from "./location-search";
+export {MultipleSelect} from "./multiple-select";
+export {Required} from "./required";
+export {default as SingleSelect} from "./single-select";
+export {TagGroupSelection} from "./tag-group-selection";
+export {UserSelection} from "./user-selection";
+export {UserSelectionMultiple} from "./user-selection-multiple";
+export {Variants} from "./variants";
+export {WithDescription} from "./with-description";
+export {WithDisabledOptions} from "./with-disabled-options";
+export {WithSections} from "./with-sections";

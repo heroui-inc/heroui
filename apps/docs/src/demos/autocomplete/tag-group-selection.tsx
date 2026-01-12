@@ -14,19 +14,20 @@ import {
 } from "@heroui/react";
 import {useState} from "react";
 
-export default function Default() {
-  const {contains} = useFilter({sensitivity: "base"});
+export function TagGroupSelection() {
+  const tags = [
+    {id: "react", name: "React"},
+    {id: "typescript", name: "TypeScript"},
+    {id: "javascript", name: "JavaScript"},
+    {id: "nodejs", name: "Node.js"},
+    {id: "python", name: "Python"},
+    {id: "vue", name: "Vue"},
+    {id: "angular", name: "Angular"},
+    {id: "nextjs", name: "Next.js"},
+  ];
 
   const [selectedKeys, setSelectedKeys] = useState<Key[]>([]);
-
-  const items = [
-    {id: "california", name: "California"},
-    {id: "texas", name: "Texas"},
-    {id: "florida", name: "Florida"},
-    {id: "new-york", name: "New York"},
-    {id: "illinois", name: "Illinois"},
-    {id: "pennsylvania", name: "Pennsylvania"},
-  ];
+  const {contains} = useFilter({sensitivity: "base"});
 
   const onRemoveTags = (keys: Set<Key>) => {
     setSelectedKeys((prev) => prev.filter((key) => !keys.has(key)));
@@ -35,32 +36,32 @@ export default function Default() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select countries"
+      placeholder="Select tags"
       selectionMode="multiple"
       value={selectedKeys}
-      onChange={(keys: Key | Key[] | null) => setSelectedKeys(keys as Key[])}
+      onChange={(keys) => setSelectedKeys(keys as Key[])}
     >
-      <Label>Countries to Visit</Label>
+      <Label>Tags</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
-          {({defaultChildren, isPlaceholder, state}: any) => {
+          {({defaultChildren, isPlaceholder, state}) => {
             if (isPlaceholder || state.selectedItems.length === 0) {
               return defaultChildren;
             }
 
-            const selectedItemsKeys = state.selectedItems.map((item: any) => item.key);
+            const selectedItemsKeys = state.selectedItems.map((item) => item.key);
 
             return (
               <TagGroup size="sm" onRemove={onRemoveTags}>
                 <TagGroup.List>
-                  {selectedItemsKeys.map((selectedItemKey: Key) => {
-                    const item = items.find((s) => s.id === selectedItemKey);
+                  {selectedItemsKeys.map((selectedItemKey) => {
+                    const tag = tags.find((t) => t.id === selectedItemKey);
 
-                    if (!item) return null;
+                    if (!tag) return null;
 
                     return (
-                      <Tag key={item.id} id={item.id}>
-                        {item.name}
+                      <Tag key={tag.id} id={tag.id}>
+                        {tag.name}
                       </Tag>
                     );
                   })}
@@ -76,14 +77,14 @@ export default function Default() {
           <SearchField autoFocus name="search">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search..." />
+              <SearchField.Input placeholder="Search tags..." />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
-            {items.map((item) => (
-              <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
-                {item.name}
+          <ListBox renderEmptyState={() => <EmptyState>No tags found</EmptyState>}>
+            {tags.map((tag) => (
+              <ListBox.Item key={tag.id} id={tag.id} textValue={tag.name}>
+                {tag.name}
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             ))}
