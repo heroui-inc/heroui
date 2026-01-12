@@ -36,7 +36,7 @@ export const FullWidth: Story = {
       <Input fullWidth placeholder="Full width input" />
       <div className="flex h-[180px] items-center justify-center rounded-3xl bg-surface p-4">
         <Surface className="w-full">
-          <Input fullWidth inSurface="default" placeholder="Full width input on surface" />
+          <Input fullWidth placeholder="Full width input on surface" variant="secondary" />
         </Surface>
       </div>
     </div>

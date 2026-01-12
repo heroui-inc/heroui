@@ -129,16 +129,18 @@
   @apply motion-reduce:transition-none;
 }
 
-/**
- * In-Surface Variants
- * Used when input group is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
-.input-group--in-surface-default,
-.input-group--in-surface-secondary,
-.input-group--in-surface-tertiary {
+/* Variant property definitions */
+.input-group--primary {
+  /* Default styles */
+}
+
+.input-group--secondary {
   @apply shadow-none;
   background-color: var(--input-group-bg);
+
+  --input-group-bg: var(--color-default);
+  --input-group-bg-hover: var(--color-default-hover);
+  --input-group-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
@@ -163,31 +165,6 @@
   [data-slot="input-group-textarea"] {
     @apply bg-transparent;
   }
-}
-
-/* In-surface variant property definitions */
-.input-group--in-surface-transparent {
-}
-
-.input-group__input--in-surface-transparent {
-}
-
-.input-group--in-surface-default {
-  --input-group-bg: var(--color-in-surface);
-  --input-group-bg-hover: var(--color-in-surface-hover);
-  --input-group-bg-focus: var(--color-in-surface-focus);
-}
-
-.input-group--in-surface-secondary {
-  --input-group-bg: var(--color-in-surface-secondary);
-  --input-group-bg-hover: var(--color-in-surface-secondary-hover);
-  --input-group-bg-focus: var(--color-in-surface-secondary-focus);
-}
-
-.input-group--in-surface-tertiary {
-  --input-group-bg: var(--color-in-surface-tertiary);
-  --input-group-bg-hover: var(--color-in-surface-tertiary-hover);
-  --input-group-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */

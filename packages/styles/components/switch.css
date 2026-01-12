@@ -150,10 +150,8 @@
       0px 0px 1px 0px rgb(0 0 0 / 0.3);
   }
 
-  /* Pressed state - scale down with width animation */
   .switch:active &,
   .switch[data-pressed="true"] & {
-    @apply scale-95;
   }
 }
 

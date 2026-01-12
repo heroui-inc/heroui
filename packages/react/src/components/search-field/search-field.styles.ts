@@ -11,22 +11,12 @@ export const searchFieldVariants = tv({
     clearButton: "search-field__clear-button",
   },
   variants: {
-    inSurface: {
-      transparent: {
-        group: "search-field__group--in-surface-transparent",
-        input: "search-field__input--in-surface-transparent",
-      },
-      default: {
-        group: "search-field__group--in-surface-default",
-        input: "search-field__input--in-surface-default",
+    variant: {
+      primary: {
+        base: "search-field--primary",
       },
       secondary: {
-        group: "search-field__group--in-surface-secondary",
-        input: "search-field__input--in-surface-secondary",
-      },
-      tertiary: {
-        group: "search-field__group--in-surface-tertiary",
-        input: "search-field__input--in-surface-tertiary",
+        base: "search-field--secondary",
       },
     },
     fullWidth: {
@@ -38,6 +28,7 @@ export const searchFieldVariants = tv({
     },
   },
   defaultVariants: {
+    variant: "primary",
     fullWidth: false,
   },
 });

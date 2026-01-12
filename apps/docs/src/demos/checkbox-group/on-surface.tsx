@@ -1,9 +1,9 @@
 import {Checkbox, CheckboxGroup, Description, Label, Surface} from "@heroui/react";
 
-export function InSurface() {
+export function OnSurface() {
   return (
     <Surface className="w-full rounded-3xl p-6">
-      <CheckboxGroup name="interests">
+      <CheckboxGroup name="interests" variant="secondary">
         <Label>Select your interests</Label>
         <Description>Choose all that apply</Description>
         <Checkbox value="coding">

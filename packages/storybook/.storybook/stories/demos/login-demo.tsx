@@ -1,6 +1,7 @@
-import React from "react";
-import {Avatar, Button, Card, CloseButton, Separator} from "@heroui/react";
 import {Person} from "@gravity-ui/icons";
+import {Avatar, Button, Card, CloseButton, Separator} from "@heroui/react";
+import React from "react";
+
 import {AppleIcon, GoogleIcon} from "./components/icons";
 
 export function LoginDemo() {
@@ -9,7 +10,7 @@ export function LoginDemo() {
       <Card.Header className="flex w-full items-center justify-center gap-2">
         <Avatar>
           <Avatar.Fallback>
-            <Person   />
+            <Person />
           </Avatar.Fallback>
         </Avatar>
         <Card.Title>Create an account</Card.Title>
@@ -37,4 +38,3 @@ export function LoginDemo() {
     </Card>
   );
 }
-

@@ -100,9 +100,9 @@
 }
 
 .button--secondary {
-  --button-bg: var(--color-accent-soft);
-  --button-bg-hover: var(--color-accent-soft-hover);
-  --button-bg-pressed: var(--color-accent-soft-hover);
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
   --button-fg: var(--color-accent-soft-foreground);
 }
 

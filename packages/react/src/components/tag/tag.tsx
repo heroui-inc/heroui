@@ -9,7 +9,6 @@ import {Tag as TagPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
-import {SurfaceContext} from "../surface";
 import {TagGroupContext} from "../tag-group";
 
 import {tagVariants} from "./tag.styles";
@@ -28,15 +27,10 @@ const TagContext = createContext<TagContext>({});
  * -----------------------------------------------------------------------------------------------*/
 interface TagRootProps extends ComponentPropsWithRef<typeof TagPrimitive>, TagVariants {}
 
-const TagRoot = ({children, className, inSurface, ...restProps}: TagRootProps) => {
+const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
   const {size, variant} = useContext(TagGroupContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
-  const slots = useMemo(
-    () => tagVariants({size, variant, inSurface: resolvedInSurface}),
-    [size, variant, resolvedInSurface],
-  );
+  const slots = useMemo(() => tagVariants({size, variant}), [size, variant]);
 
   const textValue = useMemo(() => {
     if (typeof children === "string") {

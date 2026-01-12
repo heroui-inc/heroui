@@ -1,13 +1,13 @@
 import {InputOTP, Label, Link, Surface} from "@heroui/react";
 
-export function InSurface() {
+export function OnSurface() {
   return (
     <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
       <div className="flex flex-col gap-1">
         <Label>Verify account</Label>
         <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
       </div>
-      <InputOTP maxLength={6}>
+      <InputOTP maxLength={6} variant="secondary">
         <InputOTP.Group>
           <InputOTP.Slot index={0} />
           <InputOTP.Slot index={1} />

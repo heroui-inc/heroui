@@ -1,9 +1,9 @@
 import {Description, Label, Radio, RadioGroup, Surface} from "@heroui/react";
 
-export function InSurface() {
+export function OnSurface() {
   return (
     <Surface className="w-full rounded-3xl p-6">
-      <RadioGroup defaultValue="premium" name="plan">
+      <RadioGroup defaultValue="premium" name="plan" variant="secondary">
         <Label>Plan selection</Label>
         <Description>Choose the plan that suits you best</Description>
         <Radio value="basic">

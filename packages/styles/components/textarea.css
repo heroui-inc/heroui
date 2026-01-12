@@ -49,20 +49,22 @@
   }
 }
 
-/**
- * In-Surface Variants
- * Used when textarea is placed on a Surface component background.
- * Uses CSS custom properties to reduce repetition.
- */
-.textarea--in-surface-default,
-.textarea--in-surface-secondary,
-.textarea--in-surface-tertiary {
+/* Variant property definitions */
+.textarea--primary {
+  /* Default styles */
+}
+
+.textarea--secondary {
   @apply shadow-none;
   background-color: var(--textarea-bg);
 
+  --textarea-bg: var(--color-default);
+  --textarea-bg-hover: var(--color-default-hover);
+  --textarea-bg-focus: var(--color-default);
+
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
-    &[data-hovered="true"]:not([data-focus-visible="true"]) {
+    &[data-hovered="true"]:not([data-focused="true"]):not([data-focus-visible="true"]) {
       background-color: var(--textarea-bg-hover);
     }
   }
@@ -82,28 +84,6 @@
     @apply status-invalid-field;
     background-color: var(--textarea-bg-focus);
   }
-}
-
-/* In-surface variant property definitions */
-.textarea--in-surface-transparent {
-}
-
-.textarea--in-surface-default {
-  --textarea-bg: var(--color-in-surface);
-  --textarea-bg-hover: var(--color-in-surface-hover);
-  --textarea-bg-focus: var(--color-in-surface-focus);
-}
-
-.textarea--in-surface-secondary {
-  --textarea-bg: var(--color-in-surface-secondary);
-  --textarea-bg-hover: var(--color-in-surface-secondary-hover);
-  --textarea-bg-focus: var(--color-in-surface-secondary-focus);
-}
-
-.textarea--in-surface-tertiary {
-  --textarea-bg: var(--color-in-surface-tertiary);
-  --textarea-bg-hover: var(--color-in-surface-tertiary-hover);
-  --textarea-bg-focus: var(--color-in-surface-tertiary-focus);
 }
 
 /* Full width modifier */

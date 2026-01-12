@@ -9,12 +9,6 @@ export const inputVariants = tv({
       primary: "input--primary",
       secondary: "input--secondary",
     },
-    inSurface: {
-      transparent: "input--in-surface-transparent",
-      default: "input--in-surface-default",
-      secondary: "input--in-surface-secondary",
-      tertiary: "input--in-surface-tertiary",
-    },
     fullWidth: {
       true: "input--full-width",
       false: "",
@@ -22,7 +16,6 @@ export const inputVariants = tv({
   },
   defaultVariants: {
     variant: "primary",
-    inSurface: undefined,
     fullWidth: false,
   },
 });

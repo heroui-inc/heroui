@@ -1,9 +1,10 @@
 import type {StorybookConfig} from "@storybook/react-vite";
 
-import {fileURLToPath} from "url";
-import {sync as globSync} from "glob";
-import {dirname, join as pathJoin} from "path";
 import {readFileSync as fsReadFileSync} from "fs";
+import {dirname, join as pathJoin} from "path";
+import {fileURLToPath} from "url";
+
+import {sync as globSync} from "glob";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,7 +38,13 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: [pathJoin(__dirname, "../public")],
-  stories: ["./welcome.mdx", "./stories/colors.stories.tsx", "./stories/demo.stories.tsx", ...getStories()],
+  stories: [
+    "./welcome.mdx",
+    "./stories/colors.stories.tsx",
+    "./stories/colors-demo.stories.tsx",
+    "./stories/demo.stories.tsx",
+    ...getStories(),
+  ],
 };
 
 export default config;

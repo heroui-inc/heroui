@@ -7,7 +7,6 @@ import React from "react";
 import {CheckboxGroup} from "../checkbox-group";
 import {Description} from "../description";
 import {Label} from "../label";
-import {Surface} from "../surface";
 
 import {Checkbox} from "./index";
 
@@ -33,6 +32,37 @@ export const Default: Story = {
           <Label>Accept terms and conditions</Label>
         </Checkbox.Content>
       </Checkbox>
+    </div>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 px-4">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Primary variant</p>
+        <Checkbox name="primary" variant="primary">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label>Primary checkbox</Label>
+            <Description>Standard styling with default background</Description>
+          </Checkbox.Content>
+        </Checkbox>
+      </div>
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary variant</p>
+        <Checkbox name="secondary" variant="secondary">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label>Secondary checkbox</Label>
+            <Description>Lower emphasis variant for use in surfaces</Description>
+          </Checkbox.Content>
+        </Checkbox>
+      </div>
     </div>
   ),
 };
@@ -325,85 +355,4 @@ export const FeaturesAndAddOnsExample: Story = {
       </div>
     );
   },
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <Checkbox name="terms-default">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Content>
-              <Label>Accept terms and conditions</Label>
-              <Description>I agree to the terms and privacy policy</Description>
-            </Checkbox.Content>
-          </Checkbox>
-          <p className="text-sm text-muted">
-            Checkbox automatically detects default surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <Checkbox name="terms-secondary">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Content>
-              <Label>Accept terms and conditions</Label>
-              <Description>I agree to the terms and privacy policy</Description>
-            </Checkbox.Content>
-          </Checkbox>
-          <p className="text-sm text-muted">
-            Checkbox automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <Checkbox name="terms-tertiary">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Content>
-              <Label>Accept terms and conditions</Label>
-              <Description>I agree to the terms and privacy policy</Description>
-            </Checkbox.Content>
-          </Checkbox>
-          <p className="text-sm text-muted">
-            Checkbox automatically detects tertiary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Transparent Surface</p>
-        <Surface
-          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
-          variant="transparent"
-        >
-          <Checkbox name="terms-transparent">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Content>
-              <Label>Accept terms and conditions</Label>
-              <Description>I agree to the terms and privacy policy</Description>
-            </Checkbox.Content>
-          </Checkbox>
-          <p className="text-sm text-muted">
-            Checkbox automatically detects transparent surface level.
-          </p>
-        </Surface>
-      </div>
-    </div>
-  ),
 };

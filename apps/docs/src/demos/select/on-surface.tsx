@@ -2,7 +2,7 @@
 
 import {Button, FieldError, Form, Label, ListBox, Select, Surface} from "@heroui/react";
 
-export function InSurface() {
+export function OnSurface() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -19,7 +19,13 @@ export function InSurface() {
   return (
     <Surface className="w-[320px] rounded-3xl p-6">
       <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-        <Select isRequired className="w-full" name="state" placeholder="Select one">
+        <Select
+          isRequired
+          className="w-full"
+          name="state"
+          placeholder="Select one"
+          variant="secondary"
+        >
           <Label>State</Label>
           <Select.Trigger>
             <Select.Value />
@@ -55,7 +61,13 @@ export function InSurface() {
           </Select.Popover>
           <FieldError />
         </Select>
-        <Select isRequired className="w-full" name="country" placeholder="Select a country">
+        <Select
+          isRequired
+          className="w-full"
+          name="country"
+          placeholder="Select a country"
+          variant="secondary"
+        >
           <Label>Country</Label>
           <Select.Trigger>
             <Select.Value />

@@ -21,7 +21,7 @@ import { Surface } from '@heroui/react';
 
 ## Overview
 
-The Surface component is a semantic container that provides different levels of visual prominence through variants. It also exposes a context that child components (like Input, TextArea, RadioGroup, and InputOTP) can use to automatically apply in-surface styling.
+The Surface component is a semantic container that provides different levels of visual prominence through variants.
 
 ### Variants
 
@@ -31,32 +31,18 @@ Surface comes in semantic variants that describe their prominence level:
 - **`secondary`** - Medium prominence (bg-surface-secondary)
 - **`tertiary`** - Higher prominence (bg-surface-tertiary)
 
-## Context
+## Usage with Form Components
 
-The Surface component provides a `SurfaceContext` that child components can access via `useContext(SurfaceContext)`. Form components like Input, TextArea, RadioGroup, and InputOTP automatically detect when they're inside a Surface and apply the appropriate in-surface styling.
+When using form components inside a Surface, use the `variant="secondary"` prop to apply the lower emphasis variant suitable for surface backgrounds.
 
 ```tsx
 import { Surface, Input, TextArea } from '@heroui/react';
-import { useContext } from 'react';
-import { SurfaceContext } from '@heroui/react';
-
-function MyComponent() {
-  const surfaceContext = useContext(SurfaceContext);
-  // Access the variant if needed
-  const variant = surfaceContext.variant;
-
-  return (
-    <>
-      <Input placeholder="This input will use in-surface styling" />
-      <TextArea placeholder="This textarea will use in-surface styling" />
-    </>
-  );
-}
 
 function App() {
   return (
     <Surface variant="default">
-      <MyComponent />
+      <Input placeholder="Input with secondary variant" variant="secondary" />
+      <TextArea placeholder="TextArea with secondary variant" variant="secondary" />
     </Surface>
   );
 }

@@ -1,7 +1,8 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {DocsContainer as StorybookDocsContainer} from "@storybook/addon-docs/blocks";
-import {addons} from "storybook/preview-api";
 import type {Preview} from "@storybook/react";
+
+import {DocsContainer as StorybookDocsContainer} from "@storybook/addon-docs/blocks";
+import React, {useEffect, useMemo, useState} from "react";
+import {addons} from "storybook/preview-api";
 
 import {
   DEFAULT_THEME,
@@ -16,8 +17,8 @@ import {themes} from "../styles/theme";
  * with the global theme state selected in the toolbar.
  */
 export const DocsContainer: NonNullable<Preview["parameters"]>["docs"]["container"] = ({
-  context,
   children,
+  context,
 }) => {
   const initialTheme = useMemo(
     () =>
@@ -33,6 +34,7 @@ export const DocsContainer: NonNullable<Preview["parameters"]>["docs"]["containe
       (context?.globals?.[THEME_GLOBAL_TYPE_ID] as string | undefined) || undefined,
     );
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Guarded update to prevent unnecessary renders
     setThemeKey((prev) => (prev === next ? prev : next));
   }, [context?.globals]);
 

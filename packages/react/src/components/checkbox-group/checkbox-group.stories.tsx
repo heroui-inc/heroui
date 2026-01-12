@@ -8,7 +8,6 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
-import {Surface} from "../surface";
 
 import {CheckboxGroup} from "./index";
 
@@ -56,131 +55,6 @@ export const Default: Story = {
         </Checkbox.Content>
       </Checkbox>
     </CheckboxGroup>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex max-w-[520px] flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <CheckboxGroup name="interests-default">
-            <Label>Select your interests</Label>
-            <Checkbox value="coding">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Coding</Label>
-              </Checkbox.Content>
-            </Checkbox>
-            <Checkbox value="design">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Design</Label>
-              </Checkbox.Content>
-            </Checkbox>
-          </CheckboxGroup>
-          <p className="text-sm text-muted">
-            CheckboxGroup automatically detects default surface level through its Checkbox
-            components.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <CheckboxGroup name="interests-secondary">
-            <Label>Select your interests</Label>
-            <Checkbox value="coding">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Coding</Label>
-              </Checkbox.Content>
-            </Checkbox>
-            <Checkbox value="design">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Design</Label>
-              </Checkbox.Content>
-            </Checkbox>
-          </CheckboxGroup>
-          <p className="text-sm text-muted">
-            CheckboxGroup automatically detects secondary surface level through its Checkbox
-            components.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <CheckboxGroup name="interests-tertiary">
-            <Label>Select your interests</Label>
-            <Checkbox value="coding">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Coding</Label>
-              </Checkbox.Content>
-            </Checkbox>
-            <Checkbox value="design">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Design</Label>
-              </Checkbox.Content>
-            </Checkbox>
-          </CheckboxGroup>
-          <p className="text-sm text-muted">
-            CheckboxGroup automatically detects tertiary surface level through its Checkbox
-            components.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Transparent Surface</p>
-        <Surface
-          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
-          variant="transparent"
-        >
-          <CheckboxGroup name="interests-transparent">
-            <Label>Select your interests</Label>
-            <Checkbox value="coding">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Coding</Label>
-              </Checkbox.Content>
-            </Checkbox>
-            <Checkbox value="design">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
-                <Label>Design</Label>
-              </Checkbox.Content>
-            </Checkbox>
-          </CheckboxGroup>
-          <p className="text-sm text-muted">
-            CheckboxGroup automatically detects transparent surface level through its Checkbox
-            components.
-          </p>
-        </Surface>
-      </div>
-    </div>
   ),
 };
 

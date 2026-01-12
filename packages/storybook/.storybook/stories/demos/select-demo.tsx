@@ -1,5 +1,5 @@
-import React from "react";
 import {Label, ListBox, Select} from "@heroui/react";
+import React from "react";
 
 export function SelectDemo() {
   return (
@@ -40,4 +40,3 @@ export function SelectDemo() {
     </Select>
   );
 }
-

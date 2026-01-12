@@ -1,5 +1,5 @@
-import React from "react";
 import {Alert, Button} from "@heroui/react";
+import React from "react";
 
 export function AlertDemo() {
   return (
@@ -13,4 +13,3 @@ export function AlertDemo() {
     </Alert>
   );
 }
-

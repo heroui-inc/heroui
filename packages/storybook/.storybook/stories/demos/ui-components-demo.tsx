@@ -1,5 +1,5 @@
-import React from "react";
 import {Checkbox, Radio, RadioGroup, Spinner, Switch} from "@heroui/react";
+import React from "react";
 
 export function UIComponentsDemo() {
   return (
@@ -43,4 +43,3 @@ export function UIComponentsDemo() {
     </div>
   );
 }
-
