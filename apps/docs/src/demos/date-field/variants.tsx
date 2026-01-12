@@ -1,3 +1,5 @@
+"use client";
+
 import {DateField, DateInputGroup, Label} from "@heroui/react";
 
 export function Variants() {
