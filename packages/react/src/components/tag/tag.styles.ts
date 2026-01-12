@@ -30,9 +30,6 @@ export const tagVariants = tv({
       surface: {
         base: "tag--surface",
       },
-      "on-form-field": {
-        base: "tag--on-form-field",
-      },
     },
   },
 });

@@ -4,18 +4,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React, {useMemo, useState} from "react";
 
-import {
-  Avatar,
-  Description,
-  EmptyState,
-  ErrorMessage,
-  Form,
-  Label,
-  ListBox,
-  Select,
-  Surface,
-  Tag,
-} from "../";
+import {Avatar, Description, EmptyState, ErrorMessage, Label, Tag} from "../";
 import {useListData} from "../../";
 
 import {TagGroup} from "./";
@@ -91,12 +80,6 @@ export const Sizes: Story = {
 
 export const Variants: Story = {
   render: () => {
-    const items = [
-      {id: "news", name: "News"},
-      {id: "travel", name: "Travel"},
-      {id: "gaming", name: "Gaming"},
-    ];
-
     return (
       <div className="flex flex-col gap-8">
         <TagGroup selectionMode="single" variant="default">
@@ -116,73 +99,6 @@ export const Variants: Story = {
             <Tag>Gaming</Tag>
           </TagGroup.List>
         </TagGroup>
-
-        <div className="flex w-sm items-center justify-center rounded-3xl bg-surface p-4">
-          <Surface className="w-full">
-            <TagGroup selectionMode="single">
-              <Label>On Surface</Label>
-              <TagGroup.List>
-                <Tag>News</Tag>
-                <Tag>Travel</Tag>
-                <Tag>Gaming</Tag>
-              </TagGroup.List>
-              <Description>Tags on surface component</Description>
-            </TagGroup>
-          </Surface>
-        </div>
-
-        <Form className="w-100">
-          <div className="flex flex-col gap-2">
-            <Select
-              className="w-full"
-              defaultValue={["news", "travel"]}
-              placeholder="Select items"
-              selectionMode="multiple"
-            >
-              <Select.Trigger>
-                <Select.Value className="no-truncate flex flex-wrap gap-2">
-                  {({defaultChildren, isPlaceholder, state}) => {
-                    if (isPlaceholder || state.selectedItems.length === 0) {
-                      return defaultChildren;
-                    }
-
-                    const selectedItemsKeys = state.selectedItems.map((item) => item.key);
-
-                    return (
-                      <TagGroup variant="on-form-field">
-                        <Label>On Form Field</Label>
-                        <TagGroup.List className="flex flex-wrap gap-1">
-                          {selectedItemsKeys.map((selectedItemKey) => {
-                            const item = items.find((s) => s.id === selectedItemKey);
-
-                            if (!item) return null;
-
-                            return (
-                              <Tag key={item.id} id={item.id}>
-                                {item.name}
-                              </Tag>
-                            );
-                          })}
-                        </TagGroup.List>
-                      </TagGroup>
-                    );
-                  }}
-                </Select.Value>
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox selectionMode="multiple">
-                  {items.map((skill) => (
-                    <ListBox.Item key={skill.id} id={skill.id} textValue={skill.name}>
-                      {skill.name}
-                      <ListBox.ItemIndicator />
-                    </ListBox.Item>
-                  ))}
-                </ListBox>
-              </Select.Popover>
-            </Select>
-          </div>
-        </Form>
       </div>
     );
   },
@@ -419,7 +335,7 @@ export const WithRemoveButton: Story = {
 
         <div className="w-md">
           <TagGroup selectionMode="single" onRemove={onRemoveFrameworks}>
-            <Label>Custom Remove Button</Label>
+            <Label>Custom Remove Button (Render Props)</Label>
             <TagGroup.List
               items={frameworks}
               renderEmptyState={() => <EmptyState className="p-1">No frameworks found</EmptyState>}
@@ -439,7 +355,27 @@ export const WithRemoveButton: Story = {
                 </Tag>
               )}
             </TagGroup.List>
-            <Description>Custom remove button with icon</Description>
+            <Description>Custom remove button with icon using render props</Description>
+          </TagGroup>
+        </div>
+
+        <div className="w-md">
+          <TagGroup selectionMode="single" onRemove={onRemoveFrameworks}>
+            <Label>Custom Remove Button (Compound Component)</Label>
+            <TagGroup.List
+              items={frameworks}
+              renderEmptyState={() => <EmptyState className="p-1">No frameworks found</EmptyState>}
+            >
+              {(tag) => (
+                <Tag key={tag.id} id={tag.id} textValue={tag.name}>
+                  {tag.name}
+                  <Tag.RemoveButton>
+                    <Icon icon="gravity-ui:circle-xmark-fill" />
+                  </Tag.RemoveButton>
+                </Tag>
+              )}
+            </TagGroup.List>
+            <Description>Custom remove button using compound component pattern</Description>
           </TagGroup>
         </div>
       </div>

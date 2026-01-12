@@ -1,16 +1,17 @@
 "use client";
 
-import clsx from "clsx";
 import {composeRenderProps} from "react-aria-components";
+import {cx} from "tailwind-variants";
 
 function composeTwRenderProps<T>(
   className: string | ((v: T) => string) | undefined,
   tailwind?: string | ((v: T) => string | undefined),
 ): string | ((v: T) => string) {
-  return composeRenderProps(className, (className, renderProps) => {
+  return composeRenderProps(className, (className, renderProps): string => {
     const tw = typeof tailwind === "function" ? (tailwind(renderProps) ?? "") : (tailwind ?? "");
+    const cls = className ?? "";
 
-    return clsx(tw, className);
+    return cx(tw, cls) ?? "";
   });
 }
 

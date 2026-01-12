@@ -1,8 +1,8 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import clsx from "clsx";
 import React from "react";
+import {cx} from "tailwind-variants";
 
 import {CheckboxGroup} from "../checkbox-group";
 import {Description} from "../description";
@@ -332,7 +332,7 @@ export const FeaturesAndAddOnsExample: Story = {
                 <Checkbox
                   key={addon.value}
                   value={addon.value}
-                  className={clsx(
+                  className={cx(
                     "group relative flex-col gap-4 rounded-3xl bg-surface-tertiary px-5 py-4 transition-all",
                     "data-[selected=true]:bg-accent/10",
                   )}

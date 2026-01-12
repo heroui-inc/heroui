@@ -25,7 +25,7 @@
 }
 
 .search-field__group {
-  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
+  @apply relative inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -101,7 +101,7 @@
 }
 
 .search-field__clear-button {
-  @apply mr-1 shrink-0;
+  @apply mr-2 size-5 shrink-0;
 
   /* Overrides close button default icon size from 16px to 12px */
   [data-slot="close-button-icon"] {

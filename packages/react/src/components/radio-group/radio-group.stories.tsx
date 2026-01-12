@@ -1,8 +1,8 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import clsx from "clsx";
 import React from "react";
+import {cx} from "tailwind-variants";
 
 import {Button} from "../button";
 import {Description} from "../description";
@@ -437,7 +437,7 @@ export const DeliveryAndPaymentExample: Story = {
                 <Radio
                   key={option.value}
                   value={option.value}
-                  className={clsx(
+                  className={cx(
                     "group relative flex-col gap-4 rounded-xl bg-surface-tertiary px-5 py-4 transition-all data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                     "data-[focus-visible=true]:bg-accent/10",
                   )}
@@ -467,7 +467,7 @@ export const DeliveryAndPaymentExample: Story = {
                 <Radio
                   key={option.value}
                   value={option.value}
-                  className={clsx(
+                  className={cx(
                     "group relative flex-col gap-4 rounded-xl bg-surface-tertiary px-5 py-4 transition-all",
                     "data-[selected=true]:bg-accent/10",
                   )}
