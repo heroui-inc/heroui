@@ -213,6 +213,9 @@ importers:
       color2k:
         specifier: 2.0.3
         version: 2.0.3
+      culori:
+        specifier: 4.0.2
+        version: 4.0.2
       feed:
         specifier: 5.1.0
         version: 5.1.0
@@ -298,6 +301,9 @@ importers:
       '@types/color-convert':
         specifier: 2.0.4
         version: 2.0.4
+      '@types/culori':
+        specifier: 4.0.1
+        version: 4.0.1
       '@types/mdx':
         specifier: 2.0.13
         version: 2.0.13
@@ -3582,6 +3588,9 @@ packages:
 
   '@types/conventional-commits-parser@5.0.2':
     resolution: {integrity: sha512-BgT2szDXnVypgpNxOK8aL5SGjUdaQbC++WZNjF1Qge3Og2+zhHj+RWhmehLhYyvQwqAmvezruVfOf8+3m74W+g==}
+
+  '@types/culori@4.0.1':
+    resolution: {integrity: sha512-43M51r/22CjhbOXyGT361GZ9vncSVQ39u62x5eJdBQFviI8zWp2X5jzqg7k4M6PVgDQAClpy2bUe2dtwEgEDVQ==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -11627,6 +11636,8 @@ snapshots:
   '@types/conventional-commits-parser@5.0.2':
     dependencies:
       '@types/node': 25.0.3
+
+  '@types/culori@4.0.1': {}
 
   '@types/debug@4.1.12':
     dependencies:
