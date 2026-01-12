@@ -20,6 +20,7 @@ import {tooltipVariants} from "./tooltip.styles";
  * -----------------------------------------------------------------------------------------------*/
 type TooltipContext = {
   slots?: ReturnType<typeof tooltipVariants>;
+  forceHide?: boolean;
 };
 
 const TooltipContext = createContext<TooltipContext>({});
@@ -31,13 +32,73 @@ type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
 
 const TooltipRoot = ({
   children,
+  closeDelay = 0,
   ...props
 }: ComponentPropsWithRef<typeof TooltipTriggerPrimitive>) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
+  const [forceHide, setForceHide] = React.useState(false);
+  const [internalIsOpen, setInternalIsOpen] = React.useState(false);
+  const clearTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  // Prevent tooltip from immediately reopening after close.
+  // Fixes issue where tooltips stay visible when clicking triggers that open overlays.
+  // See: https://github.com/heroui-inc/heroui/issues/5912
+  const handleOpenChange = React.useCallback(
+    (open: boolean) => {
+      if (open) {
+        if (forceHide) {
+          // Block reopening while in force-hide mode
+          setInternalIsOpen(false);
+
+          return;
+        }
+        setInternalIsOpen(true);
+        setForceHide(false);
+      } else {
+        // Enter force-hide mode to prevent immediate reopening
+        setInternalIsOpen(false);
+        setForceHide(true);
+
+        // Clear force-hide after 500ms to restore normal tooltip behavior.
+        // This delay is long enough to prevent the race condition but short
+        // enough to not impact user experience on subsequent hovers.
+        if (clearTimeoutRef.current) {
+          clearTimeout(clearTimeoutRef.current);
+        }
+        clearTimeoutRef.current = setTimeout(() => {
+          setForceHide(false);
+        }, 500);
+      }
+    },
+    [forceHide],
+  );
+
+  // Cleanup timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (clearTimeoutRef.current) {
+        clearTimeout(clearTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const contextValue = React.useMemo(
+    () => ({
+      slots,
+      forceHide,
+    }),
+    [slots, forceHide],
+  );
 
   return (
-    <TooltipContext value={{slots}}>
-      <TooltipTriggerPrimitive data-slot="tooltip-root" {...props}>
+    <TooltipContext value={contextValue}>
+      <TooltipTriggerPrimitive
+        closeDelay={closeDelay}
+        data-slot="tooltip-root"
+        isOpen={internalIsOpen}
+        onOpenChange={handleOpenChange}
+        {...props}
+      >
         {children}
       </TooltipTriggerPrimitive>
     </TooltipContext>
@@ -60,8 +121,14 @@ const TooltipContent = ({
   showArrow = false,
   ...props
 }: TooltipContentProps) => {
-  const {slots} = useContext(TooltipContext);
+  const {forceHide, slots} = useContext(TooltipContext);
   const offset = offsetProp ? offsetProp : showArrow ? 7 : 3;
+
+  // Don't render tooltip if it's been force-hidden (e.g., after clicking a button)
+  // This prevents tooltip from staying visible when opening popovers/dialogs
+  if (forceHide) {
+    return null;
+  }
 
   return (
     <TooltipPrimitive
