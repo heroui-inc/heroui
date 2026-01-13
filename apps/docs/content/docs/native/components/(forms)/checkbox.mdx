@@ -1,6 +1,7 @@
 ---
 title: Checkbox
 description: A selectable control that allows users to toggle between checked and unchecked states.
+icon: updated
 links:
   source_native: checkbox/checkbox.tsx
   styles_native: checkbox/checkbox.styles.ts
@@ -202,6 +203,8 @@ export default function BasicUsage() {
 }
 ```
 
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/checkbox.tsx>).
+
 ## API Reference
 
 ### Checkbox
@@ -213,7 +216,7 @@ export default function BasicUsage() {
 | `onSelectedChange`      | `(isSelected: boolean) => void`                                        | `undefined` | Callback fired when the checkbox selection state changes                  |
 | `isDisabled`            | `boolean`                                                              | `false`     | Whether the checkbox is disabled and cannot be interacted with            |
 | `isInvalid`             | `boolean`                                                              | `false`     | Whether the checkbox is invalid (shows danger color)                      |
-| `isOnSurface`           | `boolean`                                                              | `undefined` | Whether checkbox is on a surface background (auto-detected if not set)    |
+| `variant`               | `'primary' \| 'secondary'`                                             | `'primary'` | Variant style for the checkbox                                            |
 | `hitSlop`               | `number`                                                               | `6`         | Hit slop for the pressable area                                           |
 | `animation`             | `CheckboxRootAnimation`                                                | -           | Animation configuration                                                   |
 | `isAnimatedStyleActive` | `boolean`                                                              | `true`      | Whether animated styles (react-native-reanimated) are active              |
@@ -237,11 +240,11 @@ Animation configuration for checkbox root component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                 | type                                    | default             | description                       |
-| -------------------- | --------------------------------------- | ------------------- | --------------------------------- |
+| prop                 | type                                     | default             | description                                     |
+| -------------------- | ---------------------------------------- | ------------------- | ----------------------------------------------- |
 | `state`              | `'disabled' \| 'disable-all' \| boolean` | -                   | Disable animations while customizing properties |
-| `scale.value`        | `[number, number]`                      | `[1, 0.96]`         | Scale values [unpressed, pressed] |
-| `scale.timingConfig` | `WithTimingConfig`                      | `{ duration: 150 }` | Animation timing configuration    |
+| `scale.value`        | `[number, number]`                       | `[1, 0.96]`         | Scale values [unpressed, pressed]               |
+| `scale.timingConfig` | `WithTimingConfig`                       | `{ duration: 150 }` | Animation timing configuration                  |
 
 ### Checkbox.Indicator
 
@@ -274,17 +277,17 @@ Animation configuration for checkbox indicator component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                        | type               | default             | description                                 |
-| --------------------------- | ------------------ | ------------------- | ------------------------------------------- |
-| `state`                     | `'disabled' \| boolean` | -                 | Disable animations while customizing properties |
-| `opacity.value`             | `[number, number]` | `[0, 1]`            | Opacity values [unselected, selected]       |
-| `opacity.timingConfig`      | `WithTimingConfig` | `{ duration: 100 }` | Animation timing configuration              |
-| `borderRadius.value`        | `[number, number]` | `[8, 0]`            | Border radius values [unselected, selected] |
-| `borderRadius.timingConfig` | `WithTimingConfig` | `{ duration: 50 }`  | Animation timing configuration              |
-| `translateX.value`          | `[number, number]` | `[-4, 0]`           | TranslateX values [unselected, selected]    |
-| `translateX.timingConfig`   | `WithTimingConfig` | `{ duration: 100 }` | Animation timing configuration              |
-| `scale.value`               | `[number, number]` | `[0.8, 1]`          | Scale values [unselected, selected]         |
-| `scale.timingConfig`        | `WithTimingConfig` | `{ duration: 100 }` | Animation timing configuration              |
+| prop                        | type                    | default             | description                                     |
+| --------------------------- | ----------------------- | ------------------- | ----------------------------------------------- |
+| `state`                     | `'disabled' \| boolean` | -                   | Disable animations while customizing properties |
+| `opacity.value`             | `[number, number]`      | `[0, 1]`            | Opacity values [unselected, selected]           |
+| `opacity.timingConfig`      | `WithTimingConfig`      | `{ duration: 100 }` | Animation timing configuration                  |
+| `borderRadius.value`        | `[number, number]`      | `[8, 0]`            | Border radius values [unselected, selected]     |
+| `borderRadius.timingConfig` | `WithTimingConfig`      | `{ duration: 50 }`  | Animation timing configuration                  |
+| `translateX.value`          | `[number, number]`      | `[-4, 0]`           | TranslateX values [unselected, selected]        |
+| `translateX.timingConfig`   | `WithTimingConfig`      | `{ duration: 100 }` | Animation timing configuration                  |
+| `scale.value`               | `[number, number]`      | `[0.8, 1]`          | Scale values [unselected, selected]             |
+| `scale.timingConfig`        | `WithTimingConfig`      | `{ duration: 100 }` | Animation timing configuration                  |
 
 ## Hooks
 
@@ -309,7 +312,6 @@ const CustomIndicator = () => {
 | `onSelectedChange` | `((isSelected: boolean) => void) \| undefined` | Callback function to change the checkbox selection state       |
 | `isDisabled`       | `boolean`                                      | Whether the checkbox is disabled and cannot be interacted with |
 | `isInvalid`        | `boolean`                                      | Whether the checkbox is invalid (shows danger color)           |
-| `isOnSurface`      | `boolean \| undefined`                         | Whether checkbox is on a surface background                    |
 | `nativeID`         | `string \| undefined`                          | Native ID for the checkbox element                             |
 
 **Note:** This hook must be used within a `Checkbox` component. It will throw an error if called outside of the checkbox context.

@@ -257,6 +257,8 @@ export default function AvatarExample() {
 }
 ```
 
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/avatar.tsx).
+
 ## API Reference
 
 ### Avatar
@@ -298,11 +300,11 @@ Animation configuration for avatar image component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                   | type               | default                                             | description                                          |
-| ---------------------- | ------------------ | --------------------------------------------------- | ---------------------------------------------------- |
-| `state`                | `'disabled' \| boolean` | -                                                  | Disable animations while customizing properties      |
-| `opacity.value`        | `[number, number]` | `[0, 1]`                                            | Opacity values [initial, loaded] for image animation |
-| `opacity.timingConfig` | `WithTimingConfig` | `{ duration: 200, easing: Easing.in(Easing.ease) }` | Animation timing configuration                       |
+| prop                   | type                    | default                                             | description                                          |
+| ---------------------- | ----------------------- | --------------------------------------------------- | ---------------------------------------------------- |
+| `state`                | `'disabled' \| boolean` | -                                                   | Disable animations while customizing properties      |
+| `opacity.value`        | `[number, number]`      | `[0, 1]`                                            | Opacity values [initial, loaded] for image animation |
+| `opacity.timingConfig` | `WithTimingConfig`      | `{ duration: 200, easing: Easing.in(Easing.ease) }` | Animation timing configuration                       |
 
 **Note:** Animation is automatically disabled when `asChild={true}`
 
@@ -330,10 +332,10 @@ Animation configuration for avatar fallback component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop             | type                    | default                                                                             | description                            |
-| ---------------- | ----------------------- | ----------------------------------------------------------------------------------- | -------------------------------------- |
+| prop             | type                    | default                                                                             | description                                     |
+| ---------------- | ----------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------- |
 | `state`          | `'disabled' \| boolean` | -                                                                                   | Disable animations while customizing properties |
-| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))`<br/>`.delay(0)` | Custom entering animation for fallback |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))`<br/>`.delay(0)` | Custom entering animation for fallback          |
 
 #### PersonIconProps
 
