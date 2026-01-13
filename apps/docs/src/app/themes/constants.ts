@@ -16,12 +16,12 @@ import spotifyTheme from "@/assets/themes/spotify.png";
 export const tabs = ["components", "dashboard", "mail", "chat", "finances"];
 
 export const colorIds = [
-  "hsla(208, 97%, 49%, 1)",
-  "hsla(0, 84%, 60%, 1)",
-  "hsla(38, 92%, 50%, 1)",
-  "hsla(160, 84%, 39%, 1)",
-  "hsla(292, 84%, 61%, 1)",
-  "hsla(0, 0%, 0%, 1)",
+  "oklch(0.6199 0.194 253.67)",
+  "oklch(0.6356 0.2082 25.38)",
+  "oklch(0.7697 0.1645 70.61)",
+  "oklch(0.6902 0.1481 162.37)",
+  "oklch(0.6683 0.2569 322.02)",
+  "oklch(0 0 0)",
 ] as const;
 
 export const colors = colorIds.map((id) => ({id, value: id}));
@@ -31,9 +31,9 @@ export const colors = colorIds.map((id) => ({id, value: id}));
  * Maps a color ID to its light and dark mode variants.
  */
 export const adaptiveColors: Record<string, {light: string; dark: string}> = {
-  "hsla(0, 0%, 0%, 1)": {
-    dark: "hsla(0, 0%, 98%, 1)",
-    light: "hsla(0, 0%, 0%, 1)",
+  "oklch(0 0 0)": {
+    dark: "oklch(0.9848 0 0)",
+    light: "oklch(0 0 0)",
   },
 };
 
@@ -91,17 +91,17 @@ export const radiusCssMap = Object.fromEntries(
 
 export const themeIds = [
   "default",
-  "airbnb",
-  "black",
-  "coinbase",
-  "discord",
   "glass",
+  "sky",
   "lavender",
   "mint",
   "netflix",
-  "rabbit",
-  "sky",
+  "uber",
   "spotify",
+  "coinbase",
+  "airbnb",
+  "discord",
+  "rabbit",
 ] as const;
 export const themes: Array<{
   id: (typeof themeIds)[number];
@@ -110,17 +110,17 @@ export const themes: Array<{
   value: string;
 }> = [
   {id: "default", image: defaultTheme, label: "Default", value: "default"},
-  {id: "airbnb", image: airbnbTheme, label: "Airbnb", value: "airbnb"},
-  {id: "black", image: blackTheme, label: "Black", value: "black"},
-  {id: "coinbase", image: coinbaseTheme, label: "Coinbase", value: "coinbase"},
-  {id: "discord", image: discordTheme, label: "Discord", value: "discord"},
   {id: "glass", image: glassTheme, label: "Glass", value: "glass"},
+  {id: "sky", image: skyTheme, label: "Sky", value: "sky"},
   {id: "lavender", image: lavenderTheme, label: "Lavender", value: "lavender"},
   {id: "mint", image: mintTheme, label: "Mint", value: "mint"},
   {id: "netflix", image: netflixTheme, label: "Netflix", value: "netflix"},
-  {id: "rabbit", image: rabbitTheme, label: "Rabbit", value: "rabbit"},
-  {id: "sky", image: skyTheme, label: "Sky", value: "sky"},
+  {id: "uber", image: blackTheme, label: "Uber", value: "uber"},
   {id: "spotify", image: spotifyTheme, label: "Spotify", value: "spotify"},
+  {id: "coinbase", image: coinbaseTheme, label: "Coinbase", value: "coinbase"},
+  {id: "airbnb", image: airbnbTheme, label: "Airbnb", value: "airbnb"},
+  {id: "discord", image: discordTheme, label: "Discord", value: "discord"},
+  {id: "rabbit", image: rabbitTheme, label: "Rabbit", value: "rabbit"},
 ];
 
 export type ThemeVariables = {

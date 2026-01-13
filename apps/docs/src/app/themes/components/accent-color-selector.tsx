@@ -1,11 +1,11 @@
 "use client";
 
-import type {Color} from "react-aria-components";
+import type {Color} from "@/components/color-picker";
 
 import {Check} from "@gravity-ui/icons";
 import {Button, ListBox, cn} from "@heroui/react";
 
-import ColorPicker from "@/components/color-picker";
+import ColorPicker, {formatColor} from "@/components/color-picker";
 
 import {colorIds, colors} from "../constants";
 import {useVariableSetter} from "../hooks";
@@ -19,10 +19,9 @@ export function AccentColorSelector() {
   const isCustomColor = !colorIds.includes(variables.accentColor as (typeof colorIds)[number]);
 
   const handleColorChange = (color: Color) => {
-    // Convert to CSS color string
-    const cssColor = color.toString("css");
+    const oklch = formatColor(color, "oklch");
 
-    setVariable("accentColor", cssColor);
+    setVariable("accentColor", oklch);
   };
 
   return (
@@ -71,8 +70,8 @@ export function AccentColorSelector() {
         {/* Custom Color Picker - styled to match ListBox items */}
         <ColorPicker
           showSwatches
+          defaultValue={variables.accentColor}
           showAlpha={false}
-          value={variables.accentColor}
           trigger={
             <Button
               isIconOnly

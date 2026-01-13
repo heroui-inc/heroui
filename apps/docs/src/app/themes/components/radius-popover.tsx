@@ -44,9 +44,8 @@ export function RadiusPopover({label, variableKey}: RadiusPopoverProps) {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[304px]">
+      <Popover.Content className="w-[304px] rounded-xl" placement="top">
         <Popover.Dialog className="p-3">
-          <Popover.Arrow />
           <ListBox
             disallowEmptySelection
             aria-label={label}

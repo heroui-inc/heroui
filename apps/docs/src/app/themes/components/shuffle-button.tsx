@@ -79,6 +79,7 @@ export function ShuffleButton() {
                 <Checkbox
                   id="dont-show-again"
                   isSelected={isDontShowAgainChecked}
+                  variant="secondary"
                   onChange={setIsDontShowAgainChecked}
                 >
                   <Checkbox.Control>
