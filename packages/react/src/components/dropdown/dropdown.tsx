@@ -12,6 +12,7 @@ import {
   Popover as PopoverPrimitive,
   SubmenuTrigger as SubmenuTriggerPrimitive,
 } from "react-aria-components";
+import {useMediaQuery} from "usehooks-ts";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu-item";
@@ -77,6 +78,8 @@ interface DropdownPopoverProps
 const DropdownPopover = ({children, className, placement, ...props}: DropdownPopoverProps) => {
   const {slots} = useContext(DropdownContext);
 
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
   return (
     <SurfaceContext
       value={{
@@ -86,7 +89,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}
-        placement={placement}
+        placement={placement ?? (isMobile ? "bottom" : undefined)}
       >
         {children}
       </PopoverPrimitive>
