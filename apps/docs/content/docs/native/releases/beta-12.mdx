@@ -1,0 +1,337 @@
+---
+title: Beta 12
+description: InputOTP, Label, and Description components, Popover close fixes, controlled state improvements, border radius fixes, and variant style prop support
+github:
+  pull: 214
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">January 13, 2026</span>
+</div>
+
+Beta 12 introduces three essential form components—InputOTP, Label, and Description—that enhance form building capabilities in React Native applications. This release also includes critical fixes for Popover close behavior, popup controlled state management, border radius configuration, and adds variant style prop support across multiple form components. These improvements provide developers with more robust form components and better control over component styling and behavior.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native@beta
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native@beta
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native@beta
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native@beta
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## What's New
+
+### New Components
+
+This release introduces **3 new** essential form components:
+
+- **[InputOTP](/docs/native/components/input-otp)**: Input component for entering one-time passwords (OTP) with individual character slots, animations, and validation support.
+- **[Label](/docs/native/components/label)**: Text component for labeling form fields and other UI elements with support for required indicators and validation states.
+- **[Description](/docs/native/components/description)**: Text component for providing accessible descriptions and helper text for form fields and other UI elements.
+
+#### InputOTP
+
+The InputOTP component provides a complete solution for one-time password input scenarios, such as two-factor authentication, verification codes, and PIN entry. It features individual character slots with smooth animations, customizable grouping, separators, and comprehensive validation support.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Individual character slots with smooth animations and caret indicators
+- Flexible grouping with separators for visual organization
+- Pattern-based input restriction (digits, characters, or custom regex)
+- Controlled and uncontrolled value management
+- Validation state support with visual feedback
+- Customizable placeholder characters per slot position
+- Paste support with transformer function
+- Complete accessibility support
+
+**Usage:**
+
+```tsx
+import { InputOTP, Label, Description } from "heroui-native";
+
+export function Example() {
+  return (
+    <>
+      <Label>Verify account</Label>
+      <InputOTP maxLength={6} onComplete={(code) => console.log(code)}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+        </InputOTP.Group>
+        <InputOTP.Separator />
+        <InputOTP.Group>
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
+      <Description>We've sent a code to your email</Description>
+    </>
+  );
+}
+```
+
+For complete documentation and examples, see the [InputOTP component page](/docs/native/components/input-otp).
+
+**Related PR:** [#214](https://github.com/heroui-inc/heroui-native/pull/214)
+
+#### Label
+
+The Label component provides accessible labeling for form fields with built-in support for required indicators, validation states, and disabled states. It automatically displays an asterisk for required fields and adapts its styling based on the field's validation state.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Automatic required field indicator (asterisk)
+- Invalid state styling for validation errors
+- Disabled state support
+- Compound component architecture for custom layouts
+- Full accessibility support with nativeID linking
+- Customizable styling via className, classNames, and styles props
+
+**Usage:**
+
+```tsx
+import { Label, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <Label isRequired>Password</Label>
+      <TextField.Input placeholder="Create a password" secureTextEntry />
+    </TextField>
+  );
+}
+```
+
+For complete documentation and examples, see the [Label component page](/docs/native/components/label).
+
+**Related PR:** [#214](https://github.com/heroui-inc/heroui-native/pull/214)
+
+#### Description
+
+The Description component provides accessible helper text and descriptions for form fields. It features muted styling by default and supports linking to form fields via nativeID for screen reader support.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/description-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/description-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Muted text styling optimized for helper text
+- Accessibility linking via nativeID and aria-describedby
+- Seamless integration with form components
+- Customizable styling support
+
+**Usage:**
+
+```tsx
+import { Description, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <TextField.Label>Email address</TextField.Label>
+      <TextField.Input
+        placeholder="Enter your email"
+        keyboardType="email-address"
+        aria-describedby="email-desc"
+      />
+      <Description nativeID="email-desc">
+        We'll never share your email with anyone else.
+      </Description>
+    </TextField>
+  );
+}
+```
+
+For complete documentation and examples, see the [Description component page](/docs/native/components/description).
+
+**Related PR:** [#214](https://github.com/heroui-inc/heroui-native/pull/214)
+
+## Component Improvements
+
+### Popover Close via Ref Fix
+
+The [Popover](/docs/native/components/popover) component has been fixed to properly handle programmatic close operations via ref.
+
+**Improvements:**
+
+- Fixed ref-based close method to properly trigger close animations
+- Improved state synchronization between ref calls and component state
+- Enhanced reliability of programmatic close operations
+
+This fix ensures that when developers call `popoverRef.current?.close()`, the popover closes reliably with proper animation and state management.
+
+**Related PR:** [#207](https://github.com/heroui-inc/heroui-native/pull/207)
+
+### Popup Controlled State Fix
+
+Popup components (including Dialog, Bottom Sheet, and Popover) have been fixed to properly handle controlled state via the `isOpen` prop.
+
+**Improvements:**
+
+- Fixed controlled state synchronization for popup components
+- Improved handling of external state changes
+- Enhanced reliability when using controlled mode
+
+This fix ensures that popup components correctly respond to external state changes when using controlled mode, providing developers with more predictable behavior when managing popup state externally.
+
+**Related PR:** [#215](https://github.com/heroui-inc/heroui-native/pull/215)
+
+### Button, Chip, and Tabs Border Radius Fix
+
+The [Button](/docs/native/components/button), [Chip](/docs/native/components/chip), and [Tabs](/docs/native/components/tabs) components have been fixed to properly respect global border radius configuration.
+
+**Improvements:**
+
+- Fixed border radius configuration application for Button component
+- Fixed border radius configuration application for Chip component
+- Fixed border radius configuration application for Tabs component
+- Improved consistency across components using global theme configuration
+
+These fixes ensure that global border radius settings defined in the theme configuration are properly applied to Button, Chip, and Tabs components, providing consistent styling across the application.
+
+**Related PR:** [#218](https://github.com/heroui-inc/heroui-native/pull/218)
+
+### TextField.Input Props Cleanup
+
+The [TextField](/docs/native/components/text-field) component's Input subcomponent has been cleaned up by removing the `animation` and `isAnimatedStyleActive` props.
+
+**Changes:**
+
+- Removed `animation` prop from TextField.Input
+- Removed `isAnimatedStyleActive` prop from TextField.Input
+- Simplified component API for better maintainability
+
+These props were removed to streamline the TextField.Input API and reduce complexity. Animation behavior is now handled internally by the component, providing a more consistent and predictable experience without requiring manual animation configuration.
+
+**Related PR:** [#220](https://github.com/heroui-inc/heroui-native/pull/220)
+
+## API Enhancements
+
+### HeroUINativeProvider devInfo Configuration
+
+The `HeroUINativeProvider` component now supports `devInfo` configuration options for enhanced development experience.
+
+**New Capability:**
+
+```tsx
+import { HeroUINativeProvider } from "heroui-native";
+
+export function App() {
+  return (
+    <HeroUINativeProvider
+      devInfo={{
+        // Configuration options for development
+      }}
+    >
+      {/* Your app content */}
+    </HeroUINativeProvider>
+  );
+}
+```
+
+This enhancement provides developers with additional configuration options for development and debugging scenarios, making it easier to troubleshoot and optimize applications during development.
+
+**Related PR:** [#217](https://github.com/heroui-inc/heroui-native/pull/217)
+
+### Variant Style Prop Support
+
+The [Checkbox](/docs/native/components/checkbox), [Radio](/docs/native/components/radio), [TextField](/docs/native/components/text-field), and [InputOTP](/docs/native/components/input-otp) components now support the `variant` style prop for easier variant customization.
+
+**New Capability:**
+
+```tsx
+import { Checkbox, Radio, TextField, InputOTP } from "heroui-native";
+
+// Apply variant styles directly via style prop
+<Checkbox variant="bordered" style={{ variant: "flat" }}>
+  Option 1
+</Checkbox>
+
+<Radio variant="solid" style={{ variant: "bordered" }}>
+  Option 2
+</Radio>
+
+<TextField variant="underlined" style={{ variant: "bordered" }}>
+  <TextField.Input />
+</TextField>
+```
+
+This enhancement provides developers with more flexibility when customizing component variants, allowing variant changes to be applied via the style prop in addition to the component's variant prop.
+
+**Related PR:** [#220](https://github.com/heroui-inc/heroui-native/pull/220)
+
+## Style Fixes
+
+### Border Radius Configuration
+
+Fixed global border radius configuration not applying correctly to certain components.
+
+**Fixes:**
+
+- Fixed Button component not respecting global border radius configuration
+- Fixed Chip component border radius application
+- Fixed Tabs component border radius application
+
+### Style Optimizations
+
+- **Border Radius Consistency**: Improved consistency of border radius application across Button, Chip, and Tabs components
+- **Theme Configuration**: Enhanced theme configuration propagation to ensure all components respect global settings
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #93](https://github.com/heroui-inc/heroui-native/issues/93)**: Fixed global border radius configuration not applying to Button component in hero-ui-native using Unwind. The Button component now properly respects border radius settings defined in the global theme configuration, ensuring consistent styling across the application.
+
+- **[Issue #213](https://github.com/heroui-inc/heroui-native/issues/213)**: Fixed Select controlled mode (`isOpen`) not working. The Select component now properly handles controlled state when the `isOpen` prop is provided, allowing developers to manage Select open/close state externally with predictable behavior.
+
+**Related PRs:**
+
+- [#218](https://github.com/heroui-inc/heroui-native/pull/218)
+- [#215](https://github.com/heroui-inc/heroui-native/pull/215)
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
