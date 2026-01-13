@@ -18,6 +18,7 @@
     "(layout)/divider",
     "(feedback)/error-view",
     "(forms)/form-field",
+    "(forms)/input-otp",
     "(overlays)/popover",
     "(utilities)/pressable-feedback",
     "(forms)/radio-group",

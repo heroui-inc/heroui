@@ -16,7 +16,11 @@ const COMPONENT_GROUPS = [
     category: "Forms",
     components: [
       "(forms)/checkbox",
+      "(forms)/description",
+      "(forms)/error-view",
       "(forms)/form-field",
+      "(forms)/input-otp",
+      "(forms)/label",
       "(forms)/radio-group",
       "(forms)/select",
       "(forms)/switch",
@@ -38,12 +42,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Feedback",
-    components: [
-      "(feedback)/error-view",
-      "(feedback)/skeleton",
-      "(feedback)/skeleton-group",
-      "(feedback)/spinner",
-    ],
+    components: ["(feedback)/skeleton", "(feedback)/skeleton-group", "(feedback)/spinner"],
   },
   {
     category: "Layout",
