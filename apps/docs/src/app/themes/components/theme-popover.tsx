@@ -35,9 +35,8 @@ export function ThemePopover() {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[228px]">
+      <Popover.Content className="w-[228px] rounded-xl" placement="top">
         <Popover.Dialog className="p-4">
-          <Popover.Arrow />
           <ListBox
             disallowEmptySelection
             aria-label="Theme"

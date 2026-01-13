@@ -1,14 +1,28 @@
 import {ArrowRotateLeft} from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
+import {useMemo} from "react";
 
+import {defaultThemeValues} from "../constants";
 import {useResetVariables} from "../hooks";
+import {useVariablesState} from "../hooks/use-variables-state";
 
 export function ResetButton() {
   const reset = useResetVariables();
+  const [variables] = useVariablesState();
+
+  const isDisabled = useMemo(() => {
+    return (
+      variables.accentColor === defaultThemeValues.accentColor &&
+      variables.fontFamily === defaultThemeValues.fontFamily &&
+      variables.formRadius === defaultThemeValues.formRadius &&
+      variables.radius === defaultThemeValues.radius &&
+      variables.theme === defaultThemeValues.theme
+    );
+  }, [variables]);
 
   return (
     <AlertDialog>
-      <Button isIconOnly size="md" variant="tertiary" onPress={reset}>
+      <Button isIconOnly isDisabled={isDisabled} size="md" variant="tertiary">
         <ArrowRotateLeft />
       </Button>
       <AlertDialog.Backdrop>
