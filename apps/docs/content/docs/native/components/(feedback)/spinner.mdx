@@ -144,6 +144,8 @@ export default function SpinnerExample() {
 }
 ```
 
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/spinner.tsx).
+
 ## API Reference
 
 ### Spinner
@@ -167,11 +169,11 @@ Animation configuration for Spinner component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop             | type                                    | default                                                              | description               |
-| ---------------- | --------------------------------------- | -------------------------------------------------------------------- | ------------------------- |
-| `state`          | `'disabled' \| 'disable-all' \| boolean` | -                                                                   | Disable animations while customizing properties |
-| `entering.value` | `EntryOrExitLayoutType`                 | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.out(Easing.ease))` | Custom entering animation |
-| `exiting.value`  | `EntryOrExitLayoutType`                 | `FadeOut`<br/>`.duration(100)`                                       | Custom exiting animation  |
+| prop             | type                                     | default                                                              | description                                     |
+| ---------------- | ---------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
+| `state`          | `'disabled' \| 'disable-all' \| boolean` | -                                                                    | Disable animations while customizing properties |
+| `entering.value` | `EntryOrExitLayoutType`                  | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.out(Easing.ease))` | Custom entering animation                       |
+| `exiting.value`  | `EntryOrExitLayoutType`                  | `FadeOut`<br/>`.duration(100)`                                       | Custom exiting animation                        |
 
 ### Spinner.Indicator
 
@@ -192,11 +194,11 @@ Animation configuration for Spinner.Indicator component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop              | type                         | default         | description                    |
-| ----------------- | ---------------------------- | --------------- | ------------------------------ |
+| prop              | type                         | default         | description                                     |
+| ----------------- | ---------------------------- | --------------- | ----------------------------------------------- |
 | `state`           | `'disabled' \| boolean`      | -               | Disable animations while customizing properties |
-| `rotation.speed`  | `number`                     | `1.1`           | Rotation speed multiplier      |
-| `rotation.easing` | `WithTimingConfig['easing']` | `Easing.linear` | Animation easing configuration |
+| `rotation.speed`  | `number`                     | `1.1`           | Rotation speed multiplier                       |
+| `rotation.easing` | `WithTimingConfig['easing']` | `Easing.linear` | Animation easing configuration                  |
 
 ### SpinnerIconProps
 

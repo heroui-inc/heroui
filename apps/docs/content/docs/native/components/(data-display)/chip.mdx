@@ -154,6 +154,8 @@ export default function ChipExample() {
 }
 ```
 
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/chip.tsx).
+
 ## API Reference
 
 ### Chip
@@ -176,7 +178,6 @@ export default function ChipExample() {
 | `className`    | `string`          | -       | Additional CSS classes to apply        |
 | `...TextProps` | `TextProps`       | -       | All standard Text props are supported  |
 
-
 ## Hooks
 
 ### useChip
@@ -191,10 +192,10 @@ const { size, variant, color } = useChip();
 
 #### Return Value
 
-| property  | type                                                          | description                    |
-| --------- | ------------------------------------------------------------- | ------------------------------ |
-| `size`    | `'sm' \| 'md' \| 'lg'`                                        | Size of the chip               |
-| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'soft'`            | Visual variant of the chip     |
-| `color`   | `'accent' \| 'default' \| 'success' \| 'warning' \| 'danger'` | Color theme of the chip        |
+| property  | type                                                          | description                |
+| --------- | ------------------------------------------------------------- | -------------------------- |
+| `size`    | `'sm' \| 'md' \| 'lg'`                                        | Size of the chip           |
+| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'soft'`            | Visual variant of the chip |
+| `color`   | `'accent' \| 'default' \| 'success' \| 'warning' \| 'danger'` | Color theme of the chip    |
 
 **Note:** This hook must be used within a `Chip` component. It will throw an error if called outside of the chip context.

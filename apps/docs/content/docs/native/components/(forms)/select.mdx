@@ -400,6 +400,8 @@ export default function SelectExample() {
 }
 ```
 
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/select.tsx).
+
 ## API Reference
 
 ### Select
@@ -429,11 +431,11 @@ Animation configuration for Select component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop             | type                                    | default | description                                    |
-| ---------------- | --------------------------------------- | ------- | ---------------------------------------------- |
-| `state`          | `'disabled' \| 'disable-all' \| boolean` | -       | Disable animations while customizing properties |
-| `entering.value` | `SpringAnimationConfig \| TimingAnimationConfig` | -       | Animation configuration for when select opens  |
-| `exiting.value`  | `SpringAnimationConfig \| TimingAnimationConfig` | -       | Animation configuration for when select closes |
+| prop             | type                                             | default | description                                     |
+| ---------------- | ------------------------------------------------ | ------- | ----------------------------------------------- |
+| `state`          | `'disabled' \| 'disable-all' \| boolean`         | -       | Disable animations while customizing properties |
+| `entering.value` | `SpringAnimationConfig \| TimingAnimationConfig` | -       | Animation configuration for when select opens   |
+| `exiting.value`  | `SpringAnimationConfig \| TimingAnimationConfig` | -       | Animation configuration for when select closes  |
 
 #### SpringAnimationConfig
 
@@ -484,7 +486,7 @@ Animation configuration for Select component. Can be:
 | `animation`             | `SelectOverlayAnimation` | -       | Animation configuration                                      |
 | `isAnimatedStyleActive` | `boolean`                | `true`  | Whether animated styles (react-native-reanimated) are active |
 | `closeOnPress`          | `boolean`                | `true`  | Whether to close the select when overlay is pressed          |
-| `forceMount`            | `boolean`                | -       | Whether to force mount the component in the DOM             |
+| `forceMount`            | `boolean`                | -       | Whether to force mount the component in the DOM              |
 | `asChild`               | `boolean`                | `false` | Whether to render as a child element                         |
 | `...Animated.ViewProps` | `Animated.ViewProps`     | -       | All Reanimated Animated.View props are supported             |
 
@@ -496,10 +498,10 @@ Animation configuration for Select.Overlay component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop            | type                       | default     | description                        |
-| --------------- | -------------------------- | ----------- | ---------------------------------- |
+| prop            | type                       | default     | description                                     |
+| --------------- | -------------------------- | ----------- | ----------------------------------------------- |
 | `state`         | `'disabled' \| boolean`    | -           | Disable animations while customizing properties |
-| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close] |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close]              |
 
 ### Select.Content (Popover Presentation)
 
@@ -507,7 +509,7 @@ Animation configuration for Select.Overlay component. Can be:
 | ----------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------------ |
 | `children`              | `ReactNode`                                      | -               | The select content                                           |
 | `width`                 | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | Width sizing strategy for the content                        |
-| `presentation`          | `'popover'`                                      | `'popover'`     | Presentation mode for the select                              |
+| `presentation`          | `'popover'`                                      | `'popover'`     | Presentation mode for the select                             |
 | `placement`             | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | Placement of the content relative to trigger                 |
 | `align`                 | `'start' \| 'center' \| 'end'`                   | `'center'`      | Alignment along the placement axis                           |
 | `avoidCollisions`       | `boolean`                                        | `true`          | Whether to flip placement when close to viewport edges       |
@@ -529,14 +531,14 @@ Animation configuration for Select.Content component (popover presentation). Can
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                    | type                       | default            | description                           |
-| ----------------------- | -------------------------- | ------------------ | ------------------------------------- |
+| prop                    | type                       | default            | description                                     |
+| ----------------------- | -------------------------- | ------------------ | ----------------------------------------------- |
 | `state`                 | `'disabled' \| boolean`    | -                  | Disable animations while customizing properties |
-| `opacity.value`         | `[number, number, number]` | `[0, 1, 0]`        | Opacity values [idle, open, close]    |
-| `scale.value`           | `[number, number, number]` | `[0.95, 1, 0.95]`  | Scale values [idle, open, close]      |
-| `translateX.value`      | `[number, number, number]` | Based on placement | TranslateX values [idle, open, close] |
-| `translateY.value`      | `[number, number, number]` | Based on placement | TranslateY values [idle, open, close] |
-| `transformOrigin.value` | `string`                   | Based on placement | Transform origin value                |
+| `opacity.value`         | `[number, number, number]` | `[0, 1, 0]`        | Opacity values [idle, open, close]              |
+| `scale.value`           | `[number, number, number]` | `[0.95, 1, 0.95]`  | Scale values [idle, open, close]                |
+| `translateX.value`      | `[number, number, number]` | Based on placement | TranslateX values [idle, open, close]           |
+| `translateY.value`      | `[number, number, number]` | Based on placement | TranslateY values [idle, open, close]           |
+| `transformOrigin.value` | `string`                   | Based on placement | Transform origin value                          |
 
 ### Select.Content (Bottom Sheet Presentation)
 
@@ -552,12 +554,12 @@ Animation configuration for Select.Content component (popover presentation). Can
 | prop                    | type                                     | default | description                                                  |
 | ----------------------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
 | `children`              | `ReactNode`                              | -       | The dialog content                                           |
-| `presentation`          | `'dialog'`                               | -       | Presentation mode for the select                              |
+| `presentation`          | `'dialog'`                               | -       | Presentation mode for the select                             |
 | `classNames`            | `{ wrapper?: string; content?: string }` | -       | Additional CSS classes for wrapper and content               |
 | `animation`             | `SelectContentAnimation`                 | -       | Animation configuration                                      |
 | `isAnimatedStyleActive` | `boolean`                                | `true`  | Whether animated styles (react-native-reanimated) are active |
 | `isSwipeable`           | `boolean`                                | `true`  | Whether the dialog content can be swiped to dismiss          |
-| `forceMount`            | `boolean`                                | -       | Whether to force mount the component in the DOM             |
+| `forceMount`            | `boolean`                                | -       | Whether to force mount the component in the DOM              |
 | `asChild`               | `boolean`                                | `false` | Whether to render as a child element                         |
 | `...Animated.ViewProps` | `Animated.ViewProps`                     | -       | All Reanimated Animated.View props are supported             |
 
@@ -569,11 +571,11 @@ Animation configuration for Select.Content component (dialog presentation). Can 
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop            | type                       | default           | description                        |
-| --------------- | -------------------------- | ----------------- | ---------------------------------- |
+| prop            | type                       | default           | description                                     |
+| --------------- | -------------------------- | ----------------- | ----------------------------------------------- |
 | `state`         | `'disabled' \| boolean`    | -                 | Disable animations while customizing properties |
-| `opacity.value` | `[number, number, number]` | `[0, 1, 0]`       | Opacity values [idle, open, close] |
-| `scale.value`   | `[number, number, number]` | `[0.97, 1, 0.97]` | Scale values [idle, open, close]   |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]`       | Opacity values [idle, open, close]              |
+| `scale.value`   | `[number, number, number]` | `[0.97, 1, 0.97]` | Scale values [idle, open, close]                |
 
 ### Select.Close
 

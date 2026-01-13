@@ -115,31 +115,32 @@ Disable the entire field to prevent interaction.
 </TextField>
 ```
 
-### Custom Colors
+### With Variant
 
-Customize the input colors for different states using the animation prop.
+Use different variants to style the input based on context.
+
+```tsx
+<TextField>
+  <TextField.Label>Primary Variant</TextField.Label>
+  <TextField.Input placeholder="Primary style" variant="primary" />
+</TextField>
+
+<TextField>
+  <TextField.Label>Secondary Variant</TextField.Label>
+  <TextField.Input placeholder="Secondary style" variant="secondary" />
+</TextField>
+```
+
+### Custom Styling
+
+Customize the input appearance using className.
 
 ```tsx
 <TextField>
   <TextField.Label>Custom Styled</TextField.Label>
   <TextField.Input
     placeholder="Custom colors"
-    animation={{
-      backgroundColor: {
-        value: {
-          blur: '#eff6ff',
-          focus: '#dbeafe',
-          error: '#eff6ff',
-        },
-      },
-      borderColor: {
-        value: {
-          blur: '#2563eb',
-          focus: '#1d4ed8',
-          error: '#dc2626',
-        },
-      },
-    }}
+    className="bg-blue-50 border-blue-500 focus:border-blue-700"
   />
 </TextField>
 ```
@@ -212,6 +213,8 @@ export const TextInputContent = () => {
 };
 ```
 
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/text-field.tsx>).
+
 ## API Reference
 
 ### TextField
@@ -252,41 +255,22 @@ Animation configuration for TextField.Label component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop             | type                    | default                                                               | description               |
-| ---------------- | ----------------------- | --------------------------------------------------------------------- | ------------------------- |
+| prop             | type                    | default                                                               | description                                     |
+| ---------------- | ----------------------- | --------------------------------------------------------------------- | ----------------------------------------------- |
 | `state`          | `'disabled' \| boolean` | -                                                                     | Disable animations while customizing properties |
-| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation |
-| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation  |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation                       |
+| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation                        |
 
 ### TextField.Input
 
-| prop                  | type                      | default     | description                                                  |
-| --------------------- | ------------------------- | ----------- | ------------------------------------------------------------ |
-| isInvalid             | `boolean`                 | `undefined` | Whether the input is in an invalid state (overrides context) |
-| className             | `string`                  | -           | Custom class name for the input                              |
-| animation             | `TextFieldInputAnimation` | -           | Animation configuration                                      |
-| isAnimatedStyleActive | `boolean`                 | `true`      | Whether animated styles (react-native-reanimated) are active |
-| ...TextInputProps     | `TextInputProps`          | -           | All standard React Native TextInput props are supported      |
-
-#### TextFieldInputAnimation
-
-Animation configuration for TextField.Input component. Can be:
-
-- `false` or `"disabled"`: Disable all animations
-- `true` or `undefined`: Use default animations
-- `object`: Custom animation configuration
-
-| prop                           | type               | default                                              | description                                                     |
-| ------------------------------ | ------------------ | ---------------------------------------------------- | --------------------------------------------------------------- |
-| `state`                        | `'disabled' \| boolean` | -                                                    | Disable animations while customizing properties                 |
-| `backgroundColor.value.blur`   | `string`           | Uses theme color                                     | Background color when input is blurred                          |
-| `backgroundColor.value.focus`  | `string`           | Uses theme color                                     | Background color when input is focused                          |
-| `backgroundColor.value.error`  | `string`           | Uses theme color                                     | Background color when input is invalid                          |
-| `backgroundColor.timingConfig` | `WithTimingConfig` | `{ duration: 150, easing: Easing.out(Easing.ease) }` | Animation timing configuration for background color transitions |
-| `borderColor.value.blur`       | `string`           | Uses theme color                                     | Border color when input is blurred                              |
-| `borderColor.value.focus`      | `string`           | Uses theme color                                     | Border color when input is focused                              |
-| `borderColor.value.error`      | `string`           | Uses theme color                                     | Border color when input is invalid                              |
-| `borderColor.timingConfig`     | `WithTimingConfig` | `{ duration: 150, easing: Easing.out(Easing.ease) }` | Animation timing configuration for border color transitions     |
+| prop                      | type                       | default               | description                                                  |
+| ------------------------- | -------------------------- | --------------------- | ------------------------------------------------------------ |
+| isInvalid                 | `boolean`                  | `undefined`           | Whether the input is in an invalid state (overrides context) |
+| variant                   | `'primary' \| 'secondary'` | `'primary'`           | Variant style for the input                                  |
+| className                 | `string`                   | -                     | Custom class name for the input                              |
+| selectionColorClassName   | `string`                   | `"accent-accent"`     | Custom className for the selection color                     |
+| placeholderColorClassName | `string`                   | `"field-placeholder"` | Custom className for the placeholder text color              |
+| ...TextInputProps         | `TextInputProps`           | -                     | All standard React Native TextInput props are supported      |
 
 ### TextField.Description
 
@@ -306,11 +290,11 @@ Animation configuration for TextField.Description component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop             | type                    | default                                                               | description               |
-| ---------------- | ----------------------- | --------------------------------------------------------------------- | ------------------------- |
+| prop             | type                    | default                                                               | description                                     |
+| ---------------- | ----------------------- | --------------------------------------------------------------------- | ----------------------------------------------- |
 | `state`          | `'disabled' \| boolean` | -                                                                     | Disable animations while customizing properties |
-| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation |
-| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation  |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | Custom entering animation                       |
+| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))` | Custom exiting animation                        |
 
 ### TextField.ErrorMessage
 

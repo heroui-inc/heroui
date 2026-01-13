@@ -166,6 +166,8 @@ export default function ScrollShadowExample() {
 }
 ```
 
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/scroll-shadow.tsx).
+
 ## API Reference
 
 ### ScrollShadow
@@ -173,7 +175,7 @@ export default function ScrollShadowExample() {
 | prop                      | type                                                                   | default      | description                                                                                                     |
 | ------------------------- | ---------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------- |
 | `children`                | `React.ReactElement`                                                   | -            | The scrollable component to enhance with shadows. Must be a single React element (ScrollView, FlatList, etc.)   |
-| `LinearGradientComponent` | `ComponentType<`<br/>`LinearGradientProps>`                                   | **required** | LinearGradient component from any compatible library (expo-linear-gradient, react-native-linear-gradient, etc.) |
+| `LinearGradientComponent` | `ComponentType<`<br/>`LinearGradientProps>`                            | **required** | LinearGradient component from any compatible library (expo-linear-gradient, react-native-linear-gradient, etc.) |
 | `size`                    | `number`                                                               | `50`         | Size (height/width) of the gradient shadow in pixels                                                            |
 | `orientation`             | `'horizontal' \| 'vertical'`                                           | auto-detect  | Orientation of the scroll shadow. If not provided, will auto-detect from child's `horizontal` prop              |
 | `visibility`              | `'auto' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'both' \| 'none'` | `'auto'`     | Visibility mode for the shadows. 'auto' shows shadows based on scroll position and content overflow             |
@@ -192,10 +194,10 @@ Animation configuration for ScrollShadow component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop            | type                                    | default  | description                                                                 |
-| --------------- | --------------------------------------- | -------- | --------------------------------------------------------------------------- |
-| `state`         | `'disabled' \| 'disable-all' \| boolean` | -        | Disable animations while customizing properties                             |
-| `opacity.value` | `[number, number]`                      | `[0, 1]` | `Opacity values [initial, active].`<br/>`For bottom/right shadow, this is reversed` |
+| prop            | type                                     | default  | description                                                                         |
+| --------------- | ---------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
+| `state`         | `'disabled' \| 'disable-all' \| boolean` | -        | Disable animations while customizing properties                                     |
+| `opacity.value` | `[number, number]`                       | `[0, 1]` | `Opacity values [initial, active].`<br/>`For bottom/right shadow, this is reversed` |
 
 ### LinearGradientProps
 
