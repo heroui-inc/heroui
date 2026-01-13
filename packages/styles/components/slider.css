@@ -47,7 +47,7 @@
 
     /* after: Visible thumb element */
     &::after {
-      @apply relative z-10 rounded-full bg-white text-black shadow-field;
+      @apply relative z-10 rounded-full bg-accent-foreground text-black shadow-field;
       content: "";
 
       /**
