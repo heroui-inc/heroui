@@ -36,9 +36,8 @@ export function FontFamilyPopover() {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[324px]">
+      <Popover.Content className="w-[325px] rounded-xl" placement="top">
         <Popover.Dialog className="p-3">
-          <Popover.Arrow />
           <ListBox
             disallowEmptySelection
             aria-label="Font Family"

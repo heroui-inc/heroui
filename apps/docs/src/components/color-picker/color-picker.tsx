@@ -120,7 +120,10 @@ export default function ColorPicker({
       {() => (
         <Popover>
           <Popover.Trigger>{trigger}</Popover.Trigger>
-          <Popover.Content className={cn("w-[248px]", popoverClassName)} placement="top">
+          <Popover.Content
+            className={cn("w-[248px] rounded-[20px]", popoverClassName)}
+            placement="top"
+          >
             <Popover.Dialog className="flex flex-col gap-2 px-2 pt-4 pb-2">
               {children ?? (
                 <>
@@ -133,8 +136,12 @@ export default function ColorPicker({
                   <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness" />
 
                   {/* Hue Slider with Shuffle */}
-                  <div className="flex items-center gap-2">
-                    <ColorSlider channel="hue" className="h-5 flex-1" colorSpace="hsb" />
+                  <div className="flex w-full items-center justify-between gap-2">
+                    <ColorSlider
+                      channel="hue"
+                      className="h-5 max-w-[184px] flex-1"
+                      colorSpace="hsb"
+                    />
                     {showShuffle ? (
                       <Button
                         isIconOnly
@@ -154,7 +161,7 @@ export default function ColorPicker({
                   {/* Color Field with Color Space Selector */}
                   {showColorField ? (
                     <TextField aria-labelledby="Accent color" isInvalid={inputError}>
-                      <InputGroup fullWidth className="rounded-xl">
+                      <InputGroup fullWidth className="rounded-xl" variant="secondary">
                         <InputGroup.Input
                           className="w-full flex-1 px-4 text-sm"
                           value={displayedInputValue}

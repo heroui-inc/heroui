@@ -48,7 +48,7 @@ export function ColorSwatchesCarousel({initialColorHex, swatches}: ColorSwatches
     <div className="flex items-center gap-2">
       <Button
         isIconOnly
-        className="size-4 min-w-4 shrink-0 rounded-full"
+        className="size-5.5 min-w-5.5 shrink-0 rounded-full"
         isDisabled={isFirstPage}
         size="sm"
         variant="ghost"
@@ -85,7 +85,7 @@ export function ColorSwatchesCarousel({initialColorHex, swatches}: ColorSwatches
       </div>
       <Button
         isIconOnly
-        className="size-4 min-w-4 shrink-0 rounded-full"
+        className="size-5.5 min-w-5.5 shrink-0 rounded-full"
         isDisabled={isLastPage}
         size="sm"
         variant="ghost"

@@ -19,7 +19,7 @@ const colorSliderTrackStyles = tv({
 });
 
 const colorThumbStyles = tv({
-  base: "size-6 rounded-full border-[3px] border-white shadow-lg forced-colors:bg-[Canvas]!",
+  base: "size-4 rounded-full border-[1.5px] border-white shadow-lg forced-colors:bg-[Canvas]!",
   extend: focusRing,
 });
 
@@ -32,7 +32,7 @@ export function ColorSlider({
   return (
     <AriaColorSlider
       channel={channel}
-      className={cn("group flex w-full flex-col gap-1", className)}
+      className={cn("group flex w-full max-w-[184px] flex-col gap-1", className)}
       colorSpace={colorSpace}
       orientation={orientation}
     >
