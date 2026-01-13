@@ -349,6 +349,9 @@ importers:
       tailwind-variants:
         specifier: 3.2.2
         version: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
+      usehooks-ts:
+        specifier: 3.1.1
+        version: 3.1.1(react@19.2.3)
     devDependencies:
       '@heroui/standard':
         specifier: workspace:*
