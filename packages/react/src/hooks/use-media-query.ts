@@ -1,4 +1,5 @@
 // https://github.com/juliencrn/usehooks-ts/blob/master/packages/usehooks-ts/src/useMediaQuery/useMediaQuery.ts
+"use client";
 
 import {useState} from "react";
 

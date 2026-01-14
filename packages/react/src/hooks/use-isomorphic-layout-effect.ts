@@ -1,4 +1,5 @@
 // https://github.com/juliencrn/usehooks-ts/blob/master/packages/usehooks-ts/src/useIsomorphicLayoutEffect/useIsomorphicLayoutEffect.ts
+"use client";
 
 import {useEffect, useLayoutEffect} from "react";
 
