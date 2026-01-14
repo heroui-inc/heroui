@@ -14,6 +14,8 @@ import {ComponentsCategory} from "./components/components-category";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
 import {NativeComponentsCategory} from "./components/native-components-category";
+import {NativeImageHeroView} from "./components/native-image-hero-view";
+import {NativeQRPreviewPopover} from "./components/native-qr-preview-popover";
 import {NativeVideoPlayerView} from "./components/native-video-player-view";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
@@ -111,6 +113,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Info,
     Link,
     NativeComponentsCategory,
+    NativeImageHeroView,
+    NativeQRPreviewPopover,
     NativeVideoPlayerView,
     NewsletterForm,
     PackageManagers,
