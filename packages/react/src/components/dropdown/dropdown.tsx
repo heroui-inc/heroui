@@ -12,8 +12,8 @@ import {
   Popover as PopoverPrimitive,
   SubmenuTrigger as SubmenuTriggerPrimitive,
 } from "react-aria-components";
-import {useMediaQuery} from "usehooks-ts";
 
+import {useMediaQuery} from "../../hooks/use-media-query";
 import {composeTwRenderProps} from "../../utils/compose";
 import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu-item";
 import {MenuSectionRoot} from "../menu-section";
