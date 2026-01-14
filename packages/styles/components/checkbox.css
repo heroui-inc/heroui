@@ -52,7 +52,7 @@
   }
 
   &[data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"] {
-    transition: stroke-dashoffset 150ms linear 50ms;
+    transition: stroke-dashoffset 150ms linear 15ms;
   }
 
   /* Invalid + Selected: checkmark icon color */
