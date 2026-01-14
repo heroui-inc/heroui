@@ -52,10 +52,7 @@ export default function ColorPicker({
     safeDefaultValue.toString("hex").toLowerCase();
 
   const handleColorChange = (newColor: typeof colorValue) => {
-    if (!controlledValue) {
-      setInternalColor(newColor);
-    }
-    // const newColorString = formatColor(newColor, "oklch");
+    setInternalColor(newColor);
 
     onChange?.(newColor);
   };
@@ -133,14 +130,14 @@ export default function ColorPicker({
                   ) : null}
 
                   {/* Color Area */}
-                  <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness" />
+                  <ColorArea colorSpace="hsl" xChannel="saturation" yChannel="lightness" />
 
                   {/* Hue Slider with Shuffle */}
                   <div className="flex w-full items-center justify-between gap-2">
                     <ColorSlider
                       channel="hue"
                       className="h-5 max-w-[184px] flex-1"
-                      colorSpace="hsb"
+                      colorSpace="hsl"
                     />
                     {showShuffle ? (
                       <Button

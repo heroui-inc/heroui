@@ -12,11 +12,14 @@ export function ResetButton() {
 
   const isDisabled = useMemo(() => {
     return (
-      variables.accentColor === defaultThemeValues.accentColor &&
+      variables.chroma === defaultThemeValues.chroma &&
+      variables.hue === defaultThemeValues.hue &&
+      variables.lightness === defaultThemeValues.lightness &&
       variables.fontFamily === defaultThemeValues.fontFamily &&
       variables.formRadius === defaultThemeValues.formRadius &&
       variables.radius === defaultThemeValues.radius &&
-      variables.theme === defaultThemeValues.theme
+      variables.theme === defaultThemeValues.theme &&
+      variables.base === defaultThemeValues.base
     );
   }, [variables]);
 

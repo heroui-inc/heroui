@@ -3,41 +3,26 @@
 import {useEffect} from "react";
 
 import {THEME_BUILDER_CONTENT_ID, adaptiveColors, fontMap, radiusCssMap} from "../constants";
-import {calculateForeground} from "../utils/calculate-foreground";
+import {
+  calculateAccentForeground,
+  generateThemeColors,
+  getAccentDerivedVariables,
+  getColorVariablesForElement,
+  getSemanticDerivedVariables,
+  radiusDerivedVariables,
+} from "../utils/generate-theme-colors";
 
 import {useVariablesState} from "./use-variables-state";
 
 /**
- * Accent-derived variables that need to be recalculated at the scoped level.
- * These mirror the calculations from @heroui/styles theme.css
+ * Style element ID for adaptive color CSS injection
  */
-const accentDerivedVariables: Record<string, string> = {
-  "--color-accent": "var(--accent)",
-  "--color-accent-foreground": "var(--accent-foreground)",
-  "--color-accent-hover":
-    "color-mix(in oklab, var(--color-accent) 90%, var(--color-accent-foreground) 10%)",
-  "--color-accent-soft": "color-mix(in oklab, var(--color-accent) 15%, transparent)",
-  "--color-accent-soft-foreground": "var(--color-accent)",
-  "--color-accent-soft-hover": "color-mix(in oklab, var(--color-accent) 20%, transparent)",
-  "--color-focus": "var(--focus)",
-  "--tw-ring-color": "var(--focus)",
-};
+const ADAPTIVE_STYLE_ID = "theme-builder-adaptive-colors";
 
 /**
- * Radius-derived variables that need to be recalculated at the scoped level.
- * These mirror the calculations from @heroui/styles theme.css
+ * Style element ID for theme-aware color CSS injection
  */
-const radiusDerivedVariables: Record<string, string> = {
-  "--radius-2xl": "calc(var(--radius) * 2)",
-  "--radius-3xl": "calc(var(--radius) * 3)",
-  "--radius-4xl": "calc(var(--radius) * 4)",
-  "--radius-field": "var(--field-radius, var(--radius-xl))",
-  "--radius-lg": "calc(var(--radius) * 1)",
-  "--radius-md": "calc(var(--radius) * 0.75)",
-  "--radius-sm": "calc(var(--radius) * 0.5)",
-  "--radius-xl": "calc(var(--radius) * 1.5)",
-  "--radius-xs": "calc(var(--radius) * 0.25)",
-};
+const THEME_COLORS_STYLE_ID = "theme-builder-theme-colors";
 
 /**
  * Helper to apply a map of CSS variables to an element
@@ -49,9 +34,13 @@ function applyVariables(element: HTMLElement, variables: Record<string, string>)
 }
 
 /**
- * Style element ID for adaptive color CSS injection
+ * Build CSS string from a variables record
  */
-const ADAPTIVE_STYLE_ID = "theme-builder-adaptive-colors";
+function buildVarsCSS(vars: Record<string, string>): string {
+  return Object.entries(vars)
+    .map(([prop, val]) => `${prop}: ${val};`)
+    .join("\n    ");
+}
 
 /**
  * Generates CSS for adaptive colors that need different values in light/dark modes.
@@ -59,7 +48,9 @@ const ADAPTIVE_STYLE_ID = "theme-builder-adaptive-colors";
  */
 function getAdaptiveColorCSS(
   accentColor: string,
-  derivedVariables: Record<string, string>,
+  chroma: number,
+  hue: number,
+  lightness: number,
 ): string | null {
   const adaptiveConfig = adaptiveColors[accentColor];
 
@@ -67,78 +58,259 @@ function getAdaptiveColorCSS(
     return null;
   }
 
-  const lightFg = calculateForeground(adaptiveConfig.light);
-  const darkFg = calculateForeground(adaptiveConfig.dark);
+  // For adaptive colors (like black/white), we use predefined light/dark variants
+  const lightFg = calculateAccentForeground(1, 0, 0); // Light accent (white) needs dark fg
+  const darkFg = calculateAccentForeground(0, 0, 0); // Dark accent (black) needs light fg
 
-  const derivedVarsCSS = Object.entries(derivedVariables)
-    .map(([prop, val]) => `${prop}: ${val};`)
-    .join("\n    ");
+  // Generate full theme colors for both modes
+  const lightColors = generateThemeColors({chroma, hue, lightness});
+  const darkColors = generateThemeColors({chroma, hue, lightness});
+
+  // Get light and dark color variables
+  const lightVars = getColorVariablesForElement(lightColors, "light");
+  const darkVars = getColorVariablesForElement(darkColors, "dark");
+
+  // Get derived variables for accent
+  const accentDerivedLight = getAccentDerivedVariables(adaptiveConfig.light, lightFg);
+  const accentDerivedDark = getAccentDerivedVariables(adaptiveConfig.dark, darkFg);
+
+  // Get semantic derived variables
+  const successDerivedLight = getSemanticDerivedVariables(
+    "success",
+    lightVars["--success"] ?? "",
+    lightVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedLight = getSemanticDerivedVariables(
+    "warning",
+    lightVars["--warning"] ?? "",
+    lightVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedLight = getSemanticDerivedVariables(
+    "danger",
+    lightVars["--danger"] ?? "",
+    lightVars["--danger-foreground"] ?? "",
+  );
+
+  const successDerivedDark = getSemanticDerivedVariables(
+    "success",
+    darkVars["--success"] ?? "",
+    darkVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedDark = getSemanticDerivedVariables(
+    "warning",
+    darkVars["--warning"] ?? "",
+    darkVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedDark = getSemanticDerivedVariables(
+    "danger",
+    darkVars["--danger"] ?? "",
+    darkVars["--danger-foreground"] ?? "",
+  );
+
+  const lightAccentVars = {
+    "--accent": adaptiveConfig.light,
+    "--accent-foreground": lightFg,
+    "--focus": adaptiveConfig.light,
+    ...accentDerivedLight,
+  };
+
+  const darkAccentVars = {
+    "--accent": adaptiveConfig.dark,
+    "--accent-foreground": darkFg,
+    "--focus": adaptiveConfig.dark,
+    ...accentDerivedDark,
+  };
+
+  // Merge all light vars
+  const allLightVars = {
+    ...lightVars,
+    ...lightAccentVars,
+    ...successDerivedLight,
+    ...warningDerivedLight,
+    ...dangerDerivedLight,
+  };
+
+  // Merge all dark vars
+  const allDarkVars = {
+    ...darkVars,
+    ...darkAccentVars,
+    ...successDerivedDark,
+    ...warningDerivedDark,
+    ...dangerDerivedDark,
+  };
 
   return `
   :is([data-theme="light"], .light) #${THEME_BUILDER_CONTENT_ID},
   #${THEME_BUILDER_CONTENT_ID}:not(:is([data-theme="dark"] *, .dark *)) {
-    --accent: ${adaptiveConfig.light};
-    --focus: ${adaptiveConfig.light};
-    --accent-foreground: ${lightFg};
-    ${derivedVarsCSS}
+    ${buildVarsCSS(allLightVars)}
   }
 
   :is([data-theme="dark"], .dark) #${THEME_BUILDER_CONTENT_ID} {
-    --accent: ${adaptiveConfig.dark};
-    --focus: ${adaptiveConfig.dark};
-    --accent-foreground: ${darkFg};
-    ${derivedVarsCSS}
+    ${buildVarsCSS(allDarkVars)}
   }
   `;
+}
+
+/**
+ * Generates CSS for theme-aware colors (light/dark mode support).
+ * This handles all generated theme colors including semantic colors.
+ */
+function getThemeColorsCSS(
+  chroma: number,
+  hue: number,
+  lightness: number,
+  grayChroma: number,
+): string {
+  // Generate full theme colors
+  const colors = generateThemeColors({chroma, grayChroma, hue, lightness});
+
+  // Get color variables for both modes
+  const lightVars = getColorVariablesForElement(colors, "light");
+  const darkVars = getColorVariablesForElement(colors, "dark");
+
+  // Get accent derived variables
+  const accentLight = colors.accent.oklchLight;
+  const accentFgLight = colors.accentForeground.oklchLight;
+  const accentDerivedLight = getAccentDerivedVariables(accentLight, accentFgLight);
+
+  const accentDark = colors.accent.oklchDark;
+  const accentFgDark = colors.accentForeground.oklchDark;
+  const accentDerivedDark = getAccentDerivedVariables(accentDark, accentFgDark);
+
+  // Get semantic derived variables for light mode
+  const successDerivedLight = getSemanticDerivedVariables(
+    "success",
+    lightVars["--success"] ?? "",
+    lightVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedLight = getSemanticDerivedVariables(
+    "warning",
+    lightVars["--warning"] ?? "",
+    lightVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedLight = getSemanticDerivedVariables(
+    "danger",
+    lightVars["--danger"] ?? "",
+    lightVars["--danger-foreground"] ?? "",
+  );
+
+  // Get semantic derived variables for dark mode
+  const successDerivedDark = getSemanticDerivedVariables(
+    "success",
+    darkVars["--success"] ?? "",
+    darkVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedDark = getSemanticDerivedVariables(
+    "warning",
+    darkVars["--warning"] ?? "",
+    darkVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedDark = getSemanticDerivedVariables(
+    "danger",
+    darkVars["--danger"] ?? "",
+    darkVars["--danger-foreground"] ?? "",
+  );
+
+  // Default hover
+  const defaultHoverLight = `color-mix(in oklab, ${lightVars["--default"]} 90%, ${lightVars["--foreground"]} 10%)`;
+  const defaultHoverDark = `color-mix(in oklab, ${darkVars["--default"]} 90%, ${darkVars["--foreground"]} 10%)`;
+
+  // Merge all light vars
+  const allLightVars = {
+    ...lightVars,
+    ...accentDerivedLight,
+    ...successDerivedLight,
+    ...warningDerivedLight,
+    ...dangerDerivedLight,
+    "--color-default-hover": defaultHoverLight,
+  };
+
+  // Merge all dark vars
+  const allDarkVars = {
+    ...darkVars,
+    ...accentDerivedDark,
+    ...successDerivedDark,
+    ...warningDerivedDark,
+    ...dangerDerivedDark,
+    "--color-default-hover": defaultHoverDark,
+  };
+
+  return `
+  :is([data-theme="light"], .light) #${THEME_BUILDER_CONTENT_ID},
+  #${THEME_BUILDER_CONTENT_ID}:not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(allLightVars)}
+  }
+
+  :is([data-theme="dark"], .dark) #${THEME_BUILDER_CONTENT_ID} {
+    ${buildVarsCSS(allDarkVars)}
+  }
+  `;
+}
+
+/**
+ * Removes existing style elements and creates a fresh one
+ */
+function injectStyleElement(id: string, css: string): HTMLStyleElement {
+  // Remove any existing style element with this ID
+  const existingStyle = document.getElementById(id);
+
+  if (existingStyle) {
+    existingStyle.remove();
+  }
+
+  // Create and inject new style element
+  const styleElement = document.createElement("style");
+
+  styleElement.id = id;
+  styleElement.textContent = css;
+  document.head.appendChild(styleElement);
+
+  return styleElement;
 }
 
 /**
  * Hook that syncs theme builder store values to CSS custom properties.
  * Should be called at the root of the theme builder page.
  *
- * Since @theme inline variables are computed at :root level, we need to
- * re-apply the derived variable formulas at the scoped element level
- * so the browser recalculates them using our overridden base values.
+ * This generates all theme colors based on the selected hue, chroma, and lightness,
+ * applying them via CSS injection for proper light/dark mode support.
  */
 export function useCssSync() {
   const [variables] = useVariablesState();
+  const {base, chroma, hue, lightness} = variables;
+  const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
 
   useEffect(() => {
     const themeBuilderContent = document.getElementById(THEME_BUILDER_CONTENT_ID);
-    // const themeBuilderContent = document.documentElement;
 
     if (!themeBuilderContent) return;
 
-    // Check if this is an adaptive color that needs light/dark variants
-    const adaptiveCSS = getAdaptiveColorCSS(variables.accentColor, accentDerivedVariables);
+    // Check if this is an adaptive color that needs special light/dark variants
+    const isAdaptive = accentColor in adaptiveColors;
 
-    // Remove any existing adaptive style element
-    const existingStyle = document.getElementById(ADAPTIVE_STYLE_ID);
+    // Remove all existing injected styles
+    const cleanupStyles = () => {
+      [ADAPTIVE_STYLE_ID, THEME_COLORS_STYLE_ID].forEach((id) => {
+        const existing = document.getElementById(id);
 
-    if (existingStyle) {
-      existingStyle.remove();
-    }
+        if (existing) existing.remove();
+      });
+    };
 
-    if (adaptiveCSS) {
-      // Inject CSS for adaptive colors (different values for light/dark)
-      const styleElement = document.createElement("style");
+    cleanupStyles();
 
-      styleElement.id = ADAPTIVE_STYLE_ID;
-      styleElement.textContent = adaptiveCSS;
-      document.head.appendChild(styleElement);
+    if (isAdaptive) {
+      // Inject CSS for adaptive colors (different accent values for light/dark)
+      const adaptiveCSS = getAdaptiveColorCSS(accentColor, chroma, hue, lightness);
 
-      // Clear inline styles for accent to let the injected CSS take over
-      themeBuilderContent.style.removeProperty("--accent");
-      themeBuilderContent.style.removeProperty("--focus");
-      themeBuilderContent.style.removeProperty("--accent-foreground");
+      if (adaptiveCSS) {
+        injectStyleElement(ADAPTIVE_STYLE_ID, adaptiveCSS);
+      }
     } else {
-      // Non-adaptive color: set directly on element
-      themeBuilderContent.style.setProperty("--accent", variables.accentColor);
-      themeBuilderContent.style.setProperty("--focus", variables.accentColor);
-      const foreground = calculateForeground(variables.accentColor);
+      // Inject CSS for standard theme colors
+      const themeColorsCSS = getThemeColorsCSS(chroma, hue, lightness, base);
 
-      themeBuilderContent.style.setProperty("--accent-foreground", foreground);
-      applyVariables(themeBuilderContent, accentDerivedVariables);
+      injectStyleElement(THEME_COLORS_STYLE_ID, themeColorsCSS);
     }
 
     // Set base radius and re-apply all radius-derived variables
@@ -154,13 +326,16 @@ export function useCssSync() {
       `var(${fontMap[variables.fontFamily].variable})`,
     );
 
-    // Cleanup: remove injected style when unmounting or color changes to non-adaptive
-    return () => {
-      const styleToRemove = document.getElementById(ADAPTIVE_STYLE_ID);
-
-      if (styleToRemove) {
-        styleToRemove.remove();
-      }
-    };
-  }, [variables.accentColor, variables.fontFamily, variables.formRadius, variables.radius]);
+    // Cleanup: remove injected styles when unmounting
+    return cleanupStyles;
+  }, [
+    accentColor,
+    chroma,
+    hue,
+    lightness,
+    variables.fontFamily,
+    variables.formRadius,
+    variables.radius,
+    base,
+  ]);
 }

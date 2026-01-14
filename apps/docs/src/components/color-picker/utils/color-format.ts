@@ -1,8 +1,10 @@
 import type {ColorFormat} from "../types";
 import type {Color} from "react-aria-components";
 
-import {converter, formatCss, formatHsl, mapper, parse, round} from "culori";
+import {converter, formatCss, formatHsl, mapper, parse, parseOklch, round} from "culori";
 import {parseColor} from "react-aria-components";
+
+import {DEFAULT_COLOR_HSL} from "../constants";
 
 /* -------------------------------------------------------------------------------------------------
  * Normalize Color Syntax
@@ -116,6 +118,46 @@ export function formatColor(color: Color, format: ColorFormat): string {
 
   return formatCss(roundedColor);
 }
+
+export function getHueFromColor(color: Color): number {
+  const oklch = converter("oklch")(color.toString("hsl"));
+
+  if (!oklch || oklch.h === undefined) {
+    return 0;
+  }
+
+  return oklch.h;
+}
+
+export function formatFromOklchToColor(oklch: string): Color {
+  const oklchColor = parseOklch(oklch);
+
+  if (!oklchColor) {
+    return parseColor(DEFAULT_COLOR_HSL);
+  }
+
+  const hsl = formatHsl(oklchColor);
+
+  return parseColor(hsl);
+}
+
+export const getValuesFromOklch = (
+  hsl: string,
+): {lightness: number; chroma: number; hue: number} => {
+  const oklch = converter("oklch");
+  const oklchColor = oklch(hsl);
+
+  if (
+    !oklchColor ||
+    oklchColor.c === undefined ||
+    oklchColor.h === undefined ||
+    oklchColor.l === undefined
+  ) {
+    return {chroma: 0, hue: 0, lightness: 0};
+  }
+
+  return {chroma: oklchColor.c, hue: oklchColor.h, lightness: oklchColor.l};
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Validate Color Input

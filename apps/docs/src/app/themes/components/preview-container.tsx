@@ -20,7 +20,10 @@ export function PreviewContainer() {
   }, []);
 
   return (
-    <div className="flex w-full flex-1 items-center font-sans" id={THEME_BUILDER_CONTENT_ID}>
+    <div
+      className="flex w-full flex-1 items-center bg-background py-7 font-sans"
+      id={THEME_BUILDER_CONTENT_ID}
+    >
       {isMounted ? <DemoComponents /> : null}
     </div>
   );

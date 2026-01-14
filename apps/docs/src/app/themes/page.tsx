@@ -6,6 +6,7 @@ import {CodePanelProvider} from "@/hooks/use-code-panel";
 
 import {
   AccentColorSelector,
+  BaseColorSlider,
   BuilderHeader,
   FontFamilyPopover,
   PreviewContainer,
@@ -23,7 +24,7 @@ export default function ThemeBuilderPage() {
           <BuilderHeader />
           <ScrollShadow
             hideScrollBar
-            className="mx-auto flex h-full w-full max-w-[1400px] flex-col items-center overflow-scroll rounded-2xl border border-separator py-7"
+            className="mx-auto flex h-full w-full max-w-[1400px] flex-col items-center overflow-scroll rounded-2xl border border-separator p-0"
             visibility="none"
           >
             <div className="relative flex w-full flex-1 items-center justify-center">
@@ -33,6 +34,7 @@ export default function ThemeBuilderPage() {
           </ScrollShadow>
           <div className="mx-auto flex items-center justify-between gap-4 p-6">
             <AccentColorSelector />
+            <BaseColorSlider />
             <FontFamilyPopover />
             <RadiusPopover label="Radius" variableKey="radius" />
             <RadiusPopover label="Radius Form" variableKey="formRadius" />
