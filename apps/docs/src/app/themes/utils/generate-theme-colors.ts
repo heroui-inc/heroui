@@ -126,6 +126,11 @@ export interface GeneratedThemeColors {
   border: ThemeColor;
   separator: ThemeColor;
 
+  // Field colors
+  fieldBackground: ThemeColor;
+  fieldForeground: ThemeColor;
+  fieldPlaceholder: ThemeColor;
+
   // Semantic colors
   success: ThemeColor;
   successForeground: ThemeColor;
@@ -440,6 +445,27 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
     oklchLight: formatOklch(adjustChroma(adjustHue(defaultsLight.separator, hue), grayChroma)),
   };
 
+  // --field-background: Same as surface (white in light, dark surface in dark)
+  const fieldBackground: ThemeColor = {
+    name: "--field-background",
+    oklchDark: surface.oklchDark,
+    oklchLight: surface.oklchLight,
+  };
+
+  // --field-foreground: Same as foreground
+  const fieldForeground: ThemeColor = {
+    name: "--field-foreground",
+    oklchDark: foreground.oklchDark,
+    oklchLight: foreground.oklchLight,
+  };
+
+  // --field-placeholder: Same as muted
+  const fieldPlaceholder: ThemeColor = {
+    name: "--field-placeholder",
+    oklchDark: muted.oklchDark,
+    oklchLight: muted.oklchLight,
+  };
+
   // Generate semantic colors with base hue blending
   const successColors = generateSemanticColor("success", SEMANTIC_COLORS.success, hue, grayChroma);
   const warningColors = generateSemanticColor("warning", SEMANTIC_COLORS.warning, hue, grayChroma);
@@ -447,22 +473,26 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
 
   return {
     accent,
-
     accentForeground,
+
     // Core colors
     background,
     border,
-    danger: dangerColors.color,
 
+    danger: dangerColors.color,
     dangerForeground: dangerColors.foreground,
 
     default: defaultColor,
-
     defaultForeground,
 
-    focus,
+    // Field colors
+    fieldBackground,
+    fieldForeground,
+    fieldPlaceholder,
 
+    focus,
     foreground,
+
     // UI colors
     muted,
     overlay,
@@ -474,11 +504,11 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
 
     // Semantic colors
     success: successColors.color,
-
     successForeground: successColors.foreground,
 
     surface,
     surfaceForeground,
+
     warning: warningColors.color,
     warningForeground: warningColors.foreground,
   };
@@ -526,6 +556,29 @@ export function getSemanticDerivedVariables(
 }
 
 /**
+ * Field-derived CSS variables (from theme.css)
+ * These are the computed field tokens based on base field variables
+ */
+export function getFieldDerivedVariables(
+  fieldBgValue: string,
+  fieldFgValue: string,
+  fieldPlaceholderValue: string,
+  borderValue: string,
+): Record<string, string> {
+  return {
+    // Base field color tokens (sorted alphabetically)
+    "--color-field": fieldBgValue,
+    "--color-field-border": borderValue,
+    "--color-field-border-focus": `color-mix(in oklab, ${borderValue} 74%, ${fieldFgValue} 22%)`,
+    "--color-field-border-hover": `color-mix(in oklab, ${borderValue} 88%, ${fieldFgValue} 10%)`,
+    "--color-field-focus": fieldBgValue,
+    "--color-field-foreground": fieldFgValue,
+    "--color-field-hover": `color-mix(in oklab, ${fieldBgValue} 90%, ${fieldFgValue} 2%)`,
+    "--color-field-placeholder": fieldPlaceholderValue,
+  };
+}
+
+/**
  * Radius-derived variables
  */
 export const radiusDerivedVariables: Record<string, string> = {
@@ -566,7 +619,6 @@ export function getColorVariablesForElement(
   // UI colors
   vars["--muted"] = getValue(colors.muted);
   vars["--color-muted"] = getValue(colors.muted);
-  vars["--field-placeholder"] = getValue(colors.muted);
 
   vars["--default"] = getValue(colors.default);
   vars["--color-default"] = getValue(colors.default);
@@ -596,6 +648,11 @@ export function getColorVariablesForElement(
 
   vars["--separator"] = getValue(colors.separator);
   vars["--color-separator"] = getValue(colors.separator);
+
+  // Field colors
+  vars["--field-background"] = getValue(colors.fieldBackground);
+  vars["--field-foreground"] = getValue(colors.fieldForeground);
+  vars["--field-placeholder"] = getValue(colors.fieldPlaceholder);
 
   // Semantic colors
   vars["--success"] = getValue(colors.success);

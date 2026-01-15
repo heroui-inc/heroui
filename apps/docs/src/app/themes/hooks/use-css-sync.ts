@@ -8,6 +8,7 @@ import {
   generateThemeColors,
   getAccentDerivedVariables,
   getColorVariablesForElement,
+  getFieldDerivedVariables,
   getSemanticDerivedVariables,
   radiusDerivedVariables,
 } from "../utils/generate-theme-colors";
@@ -25,13 +26,12 @@ const ADAPTIVE_STYLE_ID = "theme-builder-adaptive-colors";
 const THEME_COLORS_STYLE_ID = "theme-builder-theme-colors";
 
 /**
- * Helper to apply a map of CSS variables to an element
+ * CSS selector that targets the theme builder content and dialogs within it
  */
-function applyVariables(element: HTMLElement, variables: Record<string, string>) {
-  Object.entries(variables).forEach(([property, value]) => {
-    element.style.setProperty(property, value);
-  });
-}
+const THEME_BUILDER_SELECTORS = [
+  `#${THEME_BUILDER_CONTENT_ID}`,
+  `#${THEME_BUILDER_CONTENT_ID} [role='dialog']`,
+].join(", ");
 
 /**
  * Build CSS string from a variables record
@@ -43,6 +43,22 @@ function buildVarsCSS(vars: Record<string, string>): string {
 }
 
 /**
+ * Get common variables (radius, font) that apply to both light and dark modes
+ */
+function getCommonVariables(
+  radius: string,
+  fieldRadius: string,
+  fontVariable: string,
+): Record<string, string> {
+  return {
+    "--field-radius": fieldRadius,
+    "--font-sans": `var(${fontVariable})`,
+    "--radius": radius,
+    ...radiusDerivedVariables,
+  };
+}
+
+/**
  * Generates CSS for adaptive colors that need different values in light/dark modes.
  * This injects CSS rules targeting both light and dark selectors within the scoped element.
  */
@@ -51,6 +67,7 @@ function getAdaptiveColorCSS(
   chroma: number,
   hue: number,
   lightness: number,
+  commonVars: Record<string, string>,
 ): string | null {
   const adaptiveConfig = adaptiveColors[accentColor];
 
@@ -121,31 +138,49 @@ function getAdaptiveColorCSS(
     ...accentDerivedDark,
   };
 
-  // Merge all light vars
+  // Get field derived variables
+  const fieldDerivedLight = getFieldDerivedVariables(
+    lightVars["--field-background"] ?? "",
+    lightVars["--field-foreground"] ?? "",
+    lightVars["--field-placeholder"] ?? "",
+    lightVars["--border"] ?? "",
+  );
+  const fieldDerivedDark = getFieldDerivedVariables(
+    darkVars["--field-background"] ?? "",
+    darkVars["--field-foreground"] ?? "",
+    darkVars["--field-placeholder"] ?? "",
+    darkVars["--border"] ?? "",
+  );
+
+  // Merge all light vars (include common vars like radius, font)
   const allLightVars = {
+    ...commonVars,
     ...lightVars,
     ...lightAccentVars,
     ...successDerivedLight,
     ...warningDerivedLight,
     ...dangerDerivedLight,
+    ...fieldDerivedLight,
   };
 
-  // Merge all dark vars
+  // Merge all dark vars (include common vars like radius, font)
   const allDarkVars = {
+    ...commonVars,
     ...darkVars,
     ...darkAccentVars,
     ...successDerivedDark,
     ...warningDerivedDark,
     ...dangerDerivedDark,
+    ...fieldDerivedDark,
   };
 
   return `
-  :is([data-theme="light"], .light) #${THEME_BUILDER_CONTENT_ID},
-  #${THEME_BUILDER_CONTENT_ID}:not(:is([data-theme="dark"] *, .dark *)) {
+  :is([data-theme="light"], .light) :is(${THEME_BUILDER_SELECTORS}),
+  :is(${THEME_BUILDER_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
     ${buildVarsCSS(allLightVars)}
   }
 
-  :is([data-theme="dark"], .dark) #${THEME_BUILDER_CONTENT_ID} {
+  :is([data-theme="dark"], .dark) :is(${THEME_BUILDER_SELECTORS}) {
     ${buildVarsCSS(allDarkVars)}
   }
   `;
@@ -160,6 +195,7 @@ function getThemeColorsCSS(
   hue: number,
   lightness: number,
   grayChroma: number,
+  commonVars: Record<string, string>,
 ): string {
   // Generate full theme colors
   const colors = generateThemeColors({chroma, grayChroma, hue, lightness});
@@ -215,33 +251,51 @@ function getThemeColorsCSS(
   const defaultHoverLight = `color-mix(in oklab, ${lightVars["--default"]} 90%, ${lightVars["--foreground"]} 10%)`;
   const defaultHoverDark = `color-mix(in oklab, ${darkVars["--default"]} 90%, ${darkVars["--foreground"]} 10%)`;
 
-  // Merge all light vars
+  // Get field derived variables
+  const fieldDerivedLight = getFieldDerivedVariables(
+    lightVars["--field-background"] ?? "",
+    lightVars["--field-foreground"] ?? "",
+    lightVars["--field-placeholder"] ?? "",
+    lightVars["--border"] ?? "",
+  );
+  const fieldDerivedDark = getFieldDerivedVariables(
+    darkVars["--field-background"] ?? "",
+    darkVars["--field-foreground"] ?? "",
+    darkVars["--field-placeholder"] ?? "",
+    darkVars["--border"] ?? "",
+  );
+
+  // Merge all light vars (include common vars like radius, font)
   const allLightVars = {
+    ...commonVars,
     ...lightVars,
     ...accentDerivedLight,
     ...successDerivedLight,
     ...warningDerivedLight,
     ...dangerDerivedLight,
+    ...fieldDerivedLight,
     "--color-default-hover": defaultHoverLight,
   };
 
-  // Merge all dark vars
+  // Merge all dark vars (include common vars like radius, font)
   const allDarkVars = {
+    ...commonVars,
     ...darkVars,
     ...accentDerivedDark,
     ...successDerivedDark,
     ...warningDerivedDark,
     ...dangerDerivedDark,
+    ...fieldDerivedDark,
     "--color-default-hover": defaultHoverDark,
   };
 
   return `
-  :is([data-theme="light"], .light) #${THEME_BUILDER_CONTENT_ID},
-  #${THEME_BUILDER_CONTENT_ID}:not(:is([data-theme="dark"] *, .dark *)) {
+  :is([data-theme="light"], .light) :is(${THEME_BUILDER_SELECTORS}),
+  :is(${THEME_BUILDER_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
     ${buildVarsCSS(allLightVars)}
   }
 
-  :is([data-theme="dark"], .dark) #${THEME_BUILDER_CONTENT_ID} {
+  :is([data-theme="dark"], .dark) :is(${THEME_BUILDER_SELECTORS}) {
     ${buildVarsCSS(allDarkVars)}
   }
   `;
@@ -281,12 +335,15 @@ export function useCssSync() {
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
 
   useEffect(() => {
-    const themeBuilderContent = document.getElementById(THEME_BUILDER_CONTENT_ID);
-
-    if (!themeBuilderContent) return;
-
     // Check if this is an adaptive color that needs special light/dark variants
     const isAdaptive = accentColor in adaptiveColors;
+
+    // Build common variables (radius, font) that apply to all selectors
+    const commonVars = getCommonVariables(
+      radiusCssMap[variables.radius],
+      radiusCssMap[variables.formRadius],
+      fontMap[variables.fontFamily].variable,
+    );
 
     // Remove all existing injected styles
     const cleanupStyles = () => {
@@ -301,30 +358,17 @@ export function useCssSync() {
 
     if (isAdaptive) {
       // Inject CSS for adaptive colors (different accent values for light/dark)
-      const adaptiveCSS = getAdaptiveColorCSS(accentColor, chroma, hue, lightness);
+      const adaptiveCSS = getAdaptiveColorCSS(accentColor, chroma, hue, lightness, commonVars);
 
       if (adaptiveCSS) {
         injectStyleElement(ADAPTIVE_STYLE_ID, adaptiveCSS);
       }
     } else {
       // Inject CSS for standard theme colors
-      const themeColorsCSS = getThemeColorsCSS(chroma, hue, lightness, base);
+      const themeColorsCSS = getThemeColorsCSS(chroma, hue, lightness, base, commonVars);
 
       injectStyleElement(THEME_COLORS_STYLE_ID, themeColorsCSS);
     }
-
-    // Set base radius and re-apply all radius-derived variables
-    themeBuilderContent.style.setProperty("--radius", radiusCssMap[variables.radius]);
-    applyVariables(themeBuilderContent, radiusDerivedVariables);
-
-    // Set field radius (used by --radius-field)
-    themeBuilderContent.style.setProperty("--field-radius", radiusCssMap[variables.formRadius]);
-
-    // Update --font-sans with the selected font variable
-    themeBuilderContent.style.setProperty(
-      "--font-sans",
-      `var(${fontMap[variables.fontFamily].variable})`,
-    );
 
     // Cleanup: remove injected styles when unmounting
     return cleanupStyles;

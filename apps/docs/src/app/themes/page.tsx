@@ -20,7 +20,7 @@ export default function ThemeBuilderPage() {
   return (
     <CodePanelProvider>
       <Suspense>
-        <div className="grid h-screen grid-rows-[auto_1fr_auto] overflow-hidden px-6">
+        <div className="grid h-screen grid-rows-[auto_1fr_auto] overflow-hidden bg-background px-6">
           <BuilderHeader />
           <ScrollShadow
             hideScrollBar
@@ -32,7 +32,7 @@ export default function ThemeBuilderPage() {
               <ThemeCodePanel />
             </div>
           </ScrollShadow>
-          <div className="mx-auto flex items-center justify-between gap-4 p-6">
+          <div className="mx-auto flex items-center justify-between gap-4 py-6">
             <AccentColorSelector />
             <BaseColorSlider />
             <FontFamilyPopover />
