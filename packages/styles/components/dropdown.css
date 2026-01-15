@@ -109,7 +109,11 @@
   }
 
   &[data-placement="bottom"][data-trigger="SubmenuTrigger"] {
-    @apply -translate-y-2 md:translate-y-0;
+    @apply -translate-y-0.5 rounded-t-none shadow-none md:translate-y-0;
+  }
+
+  &:has([data-slot="menu-item"][data-open="true"]) {
+    @apply rounded-b-none;
   }
 
   [data-slot="menu-item"] {
