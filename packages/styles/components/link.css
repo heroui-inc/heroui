@@ -58,9 +58,4 @@
   .link__icon[data-default-icon="true"] {
     @apply ml-1 pb-1.5;
   }
-
-  /* Link as Button */
-  &.button {
-    @apply gap-0 no-underline;
-  }
 }
