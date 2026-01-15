@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
 import React, {useState} from "react";
 
-import {Surface, useFilter} from "@heroui/react";
+import {useFilter} from "@heroui/react";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
@@ -19,6 +19,7 @@ import {ListBox} from "../listbox";
 import {SearchField} from "../search-field";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";
+import {Surface} from "../surface";
 import {Tag} from "../tag";
 import {TagGroup} from "../tag-group";
 
