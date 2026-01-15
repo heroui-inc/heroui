@@ -318,12 +318,6 @@ Now use in components:
 ### Using Theme Variables in Tailwind
 
 ```tsx
-// Direct CSS variables with arbitrary values
-<div className="bg-[var(--accent)] text-[var(--accent-foreground)]">
-  Using theme variables
-</div>
-
-// Or use the mapped color names
 <div className="bg-accent text-accent-foreground">
   Using Tailwind color names
 </div>

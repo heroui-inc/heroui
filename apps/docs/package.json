@@ -12,7 +12,11 @@
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
     "typegen": "next typegen",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "test:skills": "node test_skills_scripts.mjs",
+    "test:skills:dev": "node test_skills_scripts.mjs --env dev",
+    "test:skills:staging": "node test_skills_scripts.mjs --env staging",
+    "test:skills:prod": "node test_skills_scripts.mjs --env production"
   },
   "dependencies": {
     "@gravity-ui/icons": "2.16.0",

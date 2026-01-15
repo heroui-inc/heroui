@@ -94,6 +94,53 @@ https://v3.heroui.com/docs/react/components/{component-name}.mdx
 
 ---
 
+## Available Scripts
+
+Execute these scripts for reliable, up-to-date component information directly from the HeroUI API:
+
+### List Components
+```bash
+node scripts/list_components.mjs
+```
+Returns all available HeroUI v3 components with version info in JSON format.
+
+### Get Component Documentation
+```bash
+node scripts/get_component_docs.mjs Button
+node scripts/get_component_docs.mjs Button Card TextField
+```
+Returns complete MDX documentation including imports, usage, variants, props, and examples.
+
+### Get Source Code
+```bash
+node scripts/get_source.mjs Accordion
+node scripts/get_source.mjs Button Card
+```
+Returns the React/TypeScript implementation source with GitHub links. Useful for understanding component internals.
+
+### Get CSS Styles
+```bash
+node scripts/get_styles.mjs Button
+node scripts/get_styles.mjs Button Card Chip
+```
+Returns BEM CSS classes for styling with GitHub links. Shows all variants and states.
+
+### Get Theme Variables
+```bash
+node scripts/get_theme.mjs
+```
+Returns theme CSS variables and design tokens (oklch format) organized by common/light/dark modes.
+
+### Get Documentation
+```bash
+node scripts/get_docs.mjs /docs/react/getting-started/theming
+node scripts/get_docs.mjs /docs/react/releases/v3-0-0-beta-3
+```
+Returns non-component MDX documentation (guides, releases, principles).
+**Note:** For component docs, use `get_component_docs.mjs` instead.
+
+---
+
 ## Installation Guide
 
 **CRITICAL**: HeroUI v3 is currently in BETA. Always use `@beta` tag when installing packages.

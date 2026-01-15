@@ -20,8 +20,10 @@ Support Claude Code, Cursor, OpenCode and more.
 
 ```bash
 /heroui check installation
+/heroui list all components
 /heroui create a login page
 /heroui create a custom button on /src/components/button.tsx
+/heroui get source code for button component
 ```
 
 <Callout>
@@ -36,6 +38,24 @@ Support Claude Code, Cursor, OpenCode and more.
 - Design principles and composition patterns
 - Accessibility best practices (WCAG 2.1 AA)
 
+### Structure
+
+```
+skills/react/
+├── SKILL.md              # Main skill documentation
+├── LICENSE.txt           # MIT license
+├── scripts/              # Utility scripts
+│   ├── list_components.mjs
+│   ├── get_component_docs.mjs
+│   ├── get_source.mjs
+│   ├── get_styles.mjs
+│   ├── get_theme.mjs
+│   └── get_docs.mjs
+└── references/           # Reference guides
+    ├── accessibility-guide.md
+    ├── component-patterns.md
+    └── theming-customization.md
+```
 
 ### Related Documentation
 
