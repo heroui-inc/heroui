@@ -2,7 +2,13 @@
 
 import {useEffect} from "react";
 
-import {THEME_BUILDER_CONTENT_ID, adaptiveColors, fontMap, radiusCssMap} from "../constants";
+import {
+  THEME_BUILDER_CONTENT_ID,
+  THEME_BUILDER_PAGE_ID,
+  adaptiveColors,
+  fontMap,
+  radiusCssMap,
+} from "../constants";
 import {
   calculateAccentForeground,
   generateThemeColors,
@@ -26,9 +32,15 @@ const ADAPTIVE_STYLE_ID = "theme-builder-adaptive-colors";
 const THEME_COLORS_STYLE_ID = "theme-builder-theme-colors";
 
 /**
- * CSS selector that targets the theme builder content and dialogs within it
+ * CSS selector for colors only (page level)
  */
-const THEME_BUILDER_SELECTORS = [
+const PAGE_SELECTORS = `#${THEME_BUILDER_PAGE_ID}`;
+
+/**
+ * CSS selector for full theme (colors + radius + fonts)
+ * Targets the content area and dialogs within it
+ */
+const CONTENT_SELECTORS = [
   `#${THEME_BUILDER_CONTENT_ID}`,
   `#${THEME_BUILDER_CONTENT_ID} [role='dialog']`,
 ].join(", ");
@@ -152,9 +164,8 @@ function getAdaptiveColorCSS(
     darkVars["--border"] ?? "",
   );
 
-  // Merge all light vars (include common vars like radius, font)
-  const allLightVars = {
-    ...commonVars,
+  // Colors only (for page level)
+  const colorLightVars = {
     ...lightVars,
     ...lightAccentVars,
     ...successDerivedLight,
@@ -163,9 +174,7 @@ function getAdaptiveColorCSS(
     ...fieldDerivedLight,
   };
 
-  // Merge all dark vars (include common vars like radius, font)
-  const allDarkVars = {
-    ...commonVars,
+  const colorDarkVars = {
     ...darkVars,
     ...darkAccentVars,
     ...successDerivedDark,
@@ -174,14 +183,29 @@ function getAdaptiveColorCSS(
     ...fieldDerivedDark,
   };
 
+  // Full theme vars (colors + radius + fonts for content level)
+  const fullLightVars = {...commonVars, ...colorLightVars};
+  const fullDarkVars = {...commonVars, ...colorDarkVars};
+
   return `
-  :is([data-theme="light"], .light) :is(${THEME_BUILDER_SELECTORS}),
-  :is(${THEME_BUILDER_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
-    ${buildVarsCSS(allLightVars)}
+  /* Page level: colors only */
+  :is([data-theme="light"], .light) ${PAGE_SELECTORS},
+  ${PAGE_SELECTORS}:not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(colorLightVars)}
   }
 
-  :is([data-theme="dark"], .dark) :is(${THEME_BUILDER_SELECTORS}) {
-    ${buildVarsCSS(allDarkVars)}
+  :is([data-theme="dark"], .dark) ${PAGE_SELECTORS} {
+    ${buildVarsCSS(colorDarkVars)}
+  }
+
+  /* Content level: colors + radius + fonts */
+  :is([data-theme="light"], .light) :is(${CONTENT_SELECTORS}),
+  :is(${CONTENT_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(fullLightVars)}
+  }
+
+  :is([data-theme="dark"], .dark) :is(${CONTENT_SELECTORS}) {
+    ${buildVarsCSS(fullDarkVars)}
   }
   `;
 }
@@ -265,9 +289,8 @@ function getThemeColorsCSS(
     darkVars["--border"] ?? "",
   );
 
-  // Merge all light vars (include common vars like radius, font)
-  const allLightVars = {
-    ...commonVars,
+  // Colors only (for page level)
+  const colorLightVars = {
     ...lightVars,
     ...accentDerivedLight,
     ...successDerivedLight,
@@ -277,9 +300,7 @@ function getThemeColorsCSS(
     "--color-default-hover": defaultHoverLight,
   };
 
-  // Merge all dark vars (include common vars like radius, font)
-  const allDarkVars = {
-    ...commonVars,
+  const colorDarkVars = {
     ...darkVars,
     ...accentDerivedDark,
     ...successDerivedDark,
@@ -289,14 +310,29 @@ function getThemeColorsCSS(
     "--color-default-hover": defaultHoverDark,
   };
 
+  // Full theme vars (colors + radius + fonts for content level)
+  const fullLightVars = {...commonVars, ...colorLightVars};
+  const fullDarkVars = {...commonVars, ...colorDarkVars};
+
   return `
-  :is([data-theme="light"], .light) :is(${THEME_BUILDER_SELECTORS}),
-  :is(${THEME_BUILDER_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
-    ${buildVarsCSS(allLightVars)}
+  /* Page level: colors only */
+  :is([data-theme="light"], .light) ${PAGE_SELECTORS},
+  ${PAGE_SELECTORS}:not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(colorLightVars)}
   }
 
-  :is([data-theme="dark"], .dark) :is(${THEME_BUILDER_SELECTORS}) {
-    ${buildVarsCSS(allDarkVars)}
+  :is([data-theme="dark"], .dark) ${PAGE_SELECTORS} {
+    ${buildVarsCSS(colorDarkVars)}
+  }
+
+  /* Content level: colors + radius + fonts */
+  :is([data-theme="light"], .light) :is(${CONTENT_SELECTORS}),
+  :is(${CONTENT_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(fullLightVars)}
+  }
+
+  :is([data-theme="dark"], .dark) :is(${CONTENT_SELECTORS}) {
+    ${buildVarsCSS(fullDarkVars)}
   }
   `;
 }

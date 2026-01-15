@@ -15,12 +15,16 @@ import {
   ThemeCodePanel,
   ThemePopover,
 } from "./components";
+import {THEME_BUILDER_PAGE_ID} from "./constants";
 
 export default function ThemeBuilderPage() {
   return (
     <CodePanelProvider>
       <Suspense>
-        <div className="grid h-screen grid-rows-[auto_1fr_auto] overflow-hidden bg-background px-6">
+        <div
+          className="grid h-screen grid-rows-[auto_1fr_auto] overflow-hidden bg-background px-6"
+          id={THEME_BUILDER_PAGE_ID}
+        >
           <BuilderHeader />
           <ScrollShadow
             hideScrollBar
