@@ -109,11 +109,11 @@
   }
 
   &[data-placement="bottom"][data-trigger="SubmenuTrigger"] {
-    @apply -translate-y-0.5 rounded-t-none shadow-none md:translate-y-0;
+    @apply -translate-y-0.5 rounded-t-none shadow-none md:translate-y-0 md:rounded-t-3xl md:shadow-(--shadow-overlay);
   }
 
   &:has([data-slot="menu-item"][data-open="true"]) {
-    @apply rounded-b-none;
+    @apply rounded-b-none md:rounded-b-3xl;
   }
 
   [data-slot="menu-item"] {
