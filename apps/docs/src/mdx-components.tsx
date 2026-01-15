@@ -118,6 +118,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     NativeVideoPlayerView,
     NewsletterForm,
     PackageManagers,
+    Pre,
     Preview,
     RelatedComponents,
     RelatedShowcases,
