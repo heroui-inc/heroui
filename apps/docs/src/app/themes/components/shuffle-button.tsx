@@ -2,19 +2,25 @@
 
 import {Shuffle} from "@gravity-ui/icons";
 import {AlertDialog, Button, Checkbox, Kbd, Label, Tooltip, useOverlayState} from "@heroui/react";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 import {useKeyPress} from "@/hooks/use-key-press";
 
 import {LOCAL_STORAGE_KEYS} from "../constants";
 import {useRandomizeVariables} from "../hooks";
+import {useVariablesState} from "../hooks/use-variables-state";
+import {compareThemeVariables} from "../utils/compare-theme-variables";
 
 export function ShuffleButton() {
   const [isDontShowAgainChecked, setIsDontShowAgainChecked] = useState(false);
   const modalState = useOverlayState();
   const randomize = useRandomizeVariables();
+  const [variables] = useVariablesState();
+  const snapshotVariablesRef = useRef(variables);
+  const isRandomizingRef = useRef(false);
 
   const handleRandomize = () => {
+    isRandomizingRef.current = true;
     randomize();
     if (isDontShowAgainChecked) {
       localStorage.setItem(LOCAL_STORAGE_KEYS.SHUFFLE_WARNING_SHOWN, JSON.stringify(true));
@@ -24,12 +30,15 @@ export function ShuffleButton() {
 
   const handleModalTrigger = () => {
     const isDontShowAgainChecked = localStorage.getItem(LOCAL_STORAGE_KEYS.SHUFFLE_WARNING_SHOWN);
+    const isSame = compareThemeVariables(variables, snapshotVariablesRef.current);
 
-    if (isDontShowAgainChecked !== "true") {
-      modalState.open();
-    } else {
-      randomize();
+    if (isSame || isDontShowAgainChecked === "true") {
+      isRandomizingRef.current = true;
+
+      return randomize();
     }
+
+    modalState.open();
   };
 
   useKeyPress("r", handleModalTrigger);
@@ -43,6 +52,14 @@ export function ShuffleButton() {
     setIsDontShowAgainChecked(false);
     modalState.close();
   };
+
+  // Update snapshot after randomize completes (when variables change due to randomization)
+  useEffect(() => {
+    if (isRandomizingRef.current) {
+      snapshotVariablesRef.current = variables;
+      isRandomizingRef.current = false;
+    }
+  }, [variables]);
 
   return (
     <div className="flex flex-col gap-1">
