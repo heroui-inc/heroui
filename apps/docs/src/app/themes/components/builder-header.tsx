@@ -1,7 +1,7 @@
 "use client";
 
 import {ArrowUturnCcwLeft, ArrowUturnCwRight, Code, NodesRight} from "@gravity-ui/icons";
-import {Button, Separator, Tabs} from "@heroui/react";
+import {Button, Chip, Separator, Tabs} from "@heroui/react";
 import Link from "next/link";
 
 import {HeroUILogo} from "@/components/heroui-logo";
@@ -46,18 +46,28 @@ export function BuilderHeader() {
             <ResetButton />
           </div>
         </div>
-        <Tabs>
-          <Tabs.ListContainer>
-            <Tabs.List>
-              {tabs.map((tab) => (
-                <Tabs.Tab key={tab} className="capitalize" id={tab}>
-                  {tab}
-                  <Tabs.Indicator />
-                </Tabs.Tab>
-              ))}
-            </Tabs.List>
-          </Tabs.ListContainer>
-        </Tabs>
+        <div className="relative">
+          <Tabs>
+            <Tabs.ListContainer>
+              <Tabs.List>
+                {tabs.map((tab) => (
+                  <Tabs.Tab
+                    key={tab.label}
+                    className="capitalize"
+                    id={tab.label}
+                    isDisabled={tab.disabled}
+                  >
+                    {tab.label}
+                    <Tabs.Indicator />
+                  </Tabs.Tab>
+                ))}
+              </Tabs.List>
+            </Tabs.ListContainer>
+          </Tabs>
+          <Chip className="absolute -top-1 -right-3" color="accent" size="sm" variant="soft">
+            Soon
+          </Chip>
+        </div>
         <div className="flex w-[244px] items-center justify-end gap-3">
           <Button isIconOnly size="md" variant="tertiary">
             <NodesRight />

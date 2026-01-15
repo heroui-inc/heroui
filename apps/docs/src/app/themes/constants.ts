@@ -13,7 +13,13 @@ import rabbitTheme from "@/assets/themes/rabbit.png";
 import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
 
-export const tabs = ["components", "dashboard", "mail", "chat", "finances"];
+export const tabs = [
+  {disabled: false, label: "components"},
+  {disabled: true, label: "dashboard"},
+  {disabled: true, label: "mail"},
+  {disabled: true, label: "chat"},
+  {disabled: true, label: "finances"},
+];
 export const DEFAULT_COLOR = "oklch(0.6199 0.194 253.67)";
 export const DEFAULT_COLOR_HSL = "hsl(253.67, 100%, 61.99%)";
 export const DEFAULT_BASE = 0.0015;
