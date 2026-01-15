@@ -54,7 +54,6 @@ export function ShuffleButton() {
           </Button>
         </Tooltip.Trigger>
         <Tooltip.Content>
-          <Tooltip.Arrow />
           <p>
             Randomize{" "}
             <Kbd>

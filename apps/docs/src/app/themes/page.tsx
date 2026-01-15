@@ -1,8 +1,10 @@
-import {Label, ScrollShadow} from "@heroui/react";
+import {Kbd, Label, ScrollShadow, Tooltip} from "@heroui/react";
+import {useTheme} from "next-themes";
 import {Suspense} from "react";
 
 import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
 import {CodePanelProvider} from "@/hooks/use-code-panel";
+import {useKeyPress} from "@/hooks/use-key-press";
 
 import {
   AccentColorSelector,
@@ -18,6 +20,14 @@ import {
 import {THEME_BUILDER_PAGE_ID} from "./constants";
 
 export default function ThemeBuilderPage() {
+  const {setTheme, theme} = useTheme();
+
+  const handleModeSwitch = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  useKeyPress("s", handleModeSwitch);
+
   return (
     <CodePanelProvider>
       <Suspense>
@@ -45,7 +55,19 @@ export default function ThemeBuilderPage() {
             <ThemePopover />
             <div className="flex flex-col gap-1">
               <Label>Mode</Label>
-              <ThemeToggle className="h-9" mode="light-dark" />
+              <Tooltip>
+                <Tooltip.Trigger>
+                  <ThemeToggle className="h-9" mode="light-dark" />
+                </Tooltip.Trigger>
+                <Tooltip.Content>
+                  <p>
+                    Switch mode{" "}
+                    <Kbd>
+                      <Kbd.Content>S</Kbd.Content>
+                    </Kbd>
+                  </p>
+                </Tooltip.Content>
+              </Tooltip>
             </div>
             <ShuffleButton />
           </div>
