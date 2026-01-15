@@ -5,9 +5,8 @@ import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
 import React, {useState} from "react";
 
-import {Surface} from "@heroui/react";
+import {Surface, useFilter} from "@heroui/react";
 
-import {useFilter} from "../../hooks/use-filter";
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
 import {Description} from "../description";
