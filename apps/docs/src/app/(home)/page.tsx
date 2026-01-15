@@ -12,10 +12,10 @@ const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/native/releases/beta-12"
+      href="/docs/react/getting-started/agent-skills"
     >
-      <FrameworkChip framework="native" />
-      <span>Beta 12 - InputOTP, Label and Description components</span>
+      <FrameworkChip framework="web" />
+      <span>Introducing Agent Skills for HeroUI React</span>
     </LinkRoot>
   );
 };
