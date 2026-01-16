@@ -23,7 +23,7 @@ export function MobileFooter() {
         <div className="w-full cursor-pointer" onClick={() => setIsSheetOpen(true)}>
           <ThemeInput />
         </div>
-        <ShuffleButton />
+        <ShuffleButton enableKeyboardShortcut={false} />
       </div>
       <BottomSheet
         id={THEME_BUILDER_BOTTOM_SHEET_ID}

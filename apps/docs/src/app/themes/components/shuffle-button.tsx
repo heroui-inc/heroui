@@ -11,7 +11,11 @@ import {useRandomizeVariables} from "../hooks";
 import {useVariablesState} from "../hooks/use-variables-state";
 import {compareThemeVariables} from "../utils/compare-theme-variables";
 
-export function ShuffleButton() {
+interface ShuffleButtonProps {
+  enableKeyboardShortcut?: boolean;
+}
+
+export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProps) {
   const [isDontShowAgainChecked, setIsDontShowAgainChecked] = useState(false);
   const modalState = useOverlayState();
   const randomize = useRandomizeVariables();
@@ -41,7 +45,7 @@ export function ShuffleButton() {
     modalState.open();
   };
 
-  useKeyPress("r", handleModalTrigger);
+  useKeyPress("r", handleModalTrigger, {enabled: enableKeyboardShortcut});
 
   const handleOpenChange = (isOpen: boolean) => {
     setIsDontShowAgainChecked(false);
