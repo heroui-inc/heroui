@@ -3,6 +3,7 @@
 import {useEffect} from "react";
 
 import {
+  THEME_BUILDER_BOTTOM_SHEET_ID,
   THEME_BUILDER_CONTENT_ID,
   THEME_BUILDER_PAGE_ID,
   adaptiveColors,
@@ -41,6 +42,7 @@ const PAGE_SELECTORS = `#${THEME_BUILDER_PAGE_ID}`;
  * Targets the content area and dialogs within it
  */
 const CONTENT_SELECTORS = [
+  `#${THEME_BUILDER_BOTTOM_SHEET_ID}`,
   `#${THEME_BUILDER_CONTENT_ID}`,
   `#${THEME_BUILDER_CONTENT_ID} [role='dialog']`,
 ].join(", ");

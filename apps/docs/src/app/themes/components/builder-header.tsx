@@ -11,14 +11,15 @@ import {tabs} from "../constants";
 import {useUndoRedo} from "../hooks";
 
 import {ResetButton} from "./reset-button";
+import {SwitchMode} from "./switch-mode";
 
 export function BuilderHeader() {
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
   const {isCodeVisible, toggleCode} = useCodePanel();
 
   return (
-    <div className="mb-6 flex h-15 w-full items-center justify-center">
-      <div className="flex h-14 w-full max-w-[1400px] items-center justify-between">
+    <div className="sticky top-0 z-50 mb-3 flex h-15 w-full items-center justify-center bg-background xl:mb-6">
+      <div className="flex h-14 w-full max-w-[1400px] items-center justify-between xl:h-14">
         <div className="flex items-center gap-4">
           <Link href="/">
             <HeroUILogo />
@@ -26,6 +27,7 @@ export function BuilderHeader() {
           <div className="flex items-center gap-3">
             <Button
               isIconOnly
+              className="hidden xl:inline-flex"
               isDisabled={!canUndo}
               size="md"
               variant="tertiary"
@@ -35,6 +37,7 @@ export function BuilderHeader() {
             </Button>
             <Button
               isIconOnly
+              className="hidden xl:inline-flex"
               isDisabled={!canRedo}
               size="md"
               variant="tertiary"
@@ -42,11 +45,11 @@ export function BuilderHeader() {
             >
               <ArrowUturnCwRight />
             </Button>
-            <Separator className="h-6" orientation="vertical" />
+            <Separator className="hidden h-6 xl:block" orientation="vertical" />
             <ResetButton />
           </div>
         </div>
-        <div className="relative">
+        <div className="relative hidden xl:block">
           <Tabs>
             <Tabs.ListContainer>
               <Tabs.List>
@@ -68,12 +71,16 @@ export function BuilderHeader() {
             Soon
           </Chip>
         </div>
-        <div className="flex w-[244px] items-center justify-end gap-3">
+        <div className="flex w-auto items-center justify-end gap-3 xl:w-[244px]">
+          <div className="block xl:hidden">
+            <SwitchMode />
+          </div>
           <Button isIconOnly size="md" variant="tertiary">
             <NodesRight />
           </Button>
           <Button
             isIconOnly
+            className="hidden xl:inline-flex"
             size="md"
             variant={isCodeVisible ? "primary" : "tertiary"}
             onPress={toggleCode}

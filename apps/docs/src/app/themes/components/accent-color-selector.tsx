@@ -58,7 +58,7 @@ export function AccentColorSelector() {
       <div className="flex flex-row items-center gap-2 overflow-visible">
         <ColorSlider
           channel="hue"
-          className="h-6 w-[160px]"
+          className="h-6 w-[138px] xl:w-[160px]"
           thumbBackground={oklchColor}
           trackBackground={trackBackground}
           value={value}

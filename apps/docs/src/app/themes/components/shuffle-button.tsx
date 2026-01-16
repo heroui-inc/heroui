@@ -63,7 +63,6 @@ export function ShuffleButton() {
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="h-5" />
       <Tooltip delay={0}>
         <Tooltip.Trigger className="w-min">
           <Button isIconOnly size="md" variant="tertiary" onPress={handleModalTrigger}>

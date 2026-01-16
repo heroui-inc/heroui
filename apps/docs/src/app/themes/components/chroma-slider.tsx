@@ -10,7 +10,7 @@ import {cn} from "@/utils/cn";
  * -----------------------------------------------------------------------------------------------*/
 
 const sliderTrackStyles = tv({
-  base: "relative h-8 w-full cursor-pointer rounded-full",
+  base: "relative h-8 w-full cursor-pointer touch-none rounded-full",
 });
 
 const sliderThumbStyles = tv({
@@ -54,25 +54,28 @@ export function ChromaSlider({className, hue, onChange, value}: ChromaSliderProp
     [value],
   );
 
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
       isDragging.current = true;
+      // Capture pointer to receive events even when pointer leaves the element
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
       onChange(getValueFromPosition(e.clientX));
 
-      const handleMouseMove = (e: MouseEvent) => {
+      const handlePointerMove = (e: PointerEvent) => {
         if (isDragging.current) {
           onChange(getValueFromPosition(e.clientX));
         }
       };
 
-      const handleMouseUp = () => {
+      const handlePointerUp = (e: PointerEvent) => {
         isDragging.current = false;
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
+        (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+        document.removeEventListener("pointermove", handlePointerMove);
+        document.removeEventListener("pointerup", handlePointerUp);
       };
 
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener("pointermove", handlePointerMove);
+      document.addEventListener("pointerup", handlePointerUp);
     },
     [getValueFromPosition, onChange],
   );
@@ -126,7 +129,7 @@ export function ChromaSlider({className, hue, onChange, value}: ChromaSliderProp
         background: `linear-gradient(to right, oklch(0.7 0 ${hue}), oklch(0.7 ${MAX_CHROMA} ${hue}))`,
       }}
       onKeyDown={handleKeyDown}
-      onMouseDown={handleMouseDown}
+      onPointerDown={handlePointerDown}
     >
       <div
         className={sliderThumbStyles()}

@@ -20,7 +20,7 @@ export function BaseColorSlider() {
     <div className="flex flex-col gap-1">
       <LockableLabel label="Base" variable="base" />
       <ChromaSlider
-        className="h-6 w-[160px]"
+        className="h-6 w-[138px] xl:w-[160px]"
         hue={hue}
         value={base}
         onChange={handleBaseSliderChange}

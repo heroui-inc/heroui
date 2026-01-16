@@ -14,6 +14,7 @@ import {
   ThemeCodePanel,
   ThemePopover,
 } from "./components";
+import {MobileFooter} from "./components/mobile-footer";
 import {SwitchMode} from "./components/switch-mode";
 import {THEME_BUILDER_PAGE_ID} from "./constants";
 
@@ -22,7 +23,7 @@ export default function ThemeBuilderPage() {
     <CodePanelProvider>
       <Suspense>
         <div
-          className="grid h-screen grid-rows-[auto_1fr_auto] overflow-hidden bg-background px-6"
+          className="grid h-full grid-rows-[auto_1fr_auto] bg-background px-4 xl:h-screen xl:overflow-hidden xl:px-6"
           id={THEME_BUILDER_PAGE_ID}
         >
           <BuilderHeader />
@@ -36,16 +37,21 @@ export default function ThemeBuilderPage() {
               <ThemeCodePanel />
             </div>
           </ScrollShadow>
-          <div className="mx-auto flex items-center justify-between gap-4 py-6">
+          <div className="mx-auto hidden items-center justify-between gap-4 py-6 xl:flex">
             <AccentColorSelector />
             <BaseColorSlider />
             <FontFamilyPopover />
             <RadiusPopover label="Radius" variableKey="radius" />
             <RadiusPopover label="Radius Form" variableKey="formRadius" />
             <ThemePopover />
-            <SwitchMode />
-            <ShuffleButton />
+            <SwitchMode label="Mode" />
+            <div>
+              <div className="h-5" />
+              <ShuffleButton />
+            </div>
           </div>
+          <div className="h-20 w-full xl:hidden" />
+          <MobileFooter />
         </div>
       </Suspense>
     </CodePanelProvider>

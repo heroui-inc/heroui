@@ -25,7 +25,7 @@ export function PreviewContainer() {
     <UNSAFE_PortalProvider getContainer={() => container.current}>
       <div
         ref={container}
-        className="flex h-full w-full flex-1 items-center bg-background px-5 py-7 font-sans"
+        className="flex h-full w-full flex-1 items-center bg-background px-4 py-8 font-sans xl:px-5 xl:py-7"
         id={THEME_BUILDER_CONTENT_ID}
       >
         {isMounted ? <DemoComponents /> : null}

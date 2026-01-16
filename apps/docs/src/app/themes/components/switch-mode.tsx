@@ -6,7 +6,7 @@ import {useTheme} from "next-themes";
 import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
 import {useKeyPress} from "@/hooks/use-key-press";
 
-export function SwitchMode() {
+export function SwitchMode({label}: {label?: string}) {
   const {setTheme, theme} = useTheme();
 
   const handleModeSwitch = () => {
@@ -17,7 +17,7 @@ export function SwitchMode() {
 
   return (
     <div className="flex flex-col gap-1">
-      <Label>Mode</Label>
+      {label ? <Label>{label}</Label> : null}
       <Tooltip>
         <Tooltip.Trigger>
           <ThemeToggle className="h-9" mode="light-dark" />

@@ -174,3 +174,4 @@ export const LOCAL_STORAGE_KEYS = {
 
 export const THEME_BUILDER_CONTENT_ID = "theme-builder-content";
 export const THEME_BUILDER_PAGE_ID = "theme-builder-page";
+export const THEME_BUILDER_BOTTOM_SHEET_ID = "theme-builder-bottom-sheet";
