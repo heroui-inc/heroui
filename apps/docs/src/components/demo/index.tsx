@@ -19,7 +19,7 @@ import {XProfileDemo} from "./x-profile-demo";
 
 export function DemoComponents() {
   return (
-    <div className="mx-auto grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+    <div className="mx-auto grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[auto_1fr_1fr] xl:grid-cols-3">
       {/* Left */}
       <div className="flex flex-col items-center gap-10">
         <TextfieldDemo />
@@ -40,7 +40,7 @@ export function DemoComponents() {
         <AllowNotificationsDemo />
       </div>
       {/* Right */}
-      <div className="col-span-1 grid grid-cols-1 grid-rows-2 justify-items-center gap-8 md:col-span-2 md:grid-cols-2 xl:col-span-1 xl:grid-cols-1">
+      <div className="col-span-1 grid grid-cols-1 grid-rows-2 justify-items-center gap-8 md:col-span-2 md:grid-cols-2 lg:col-span-1 lg:grid-cols-1">
         <div className="row-span-2">
           <LoginDemo />
         </div>
