@@ -18,7 +18,11 @@ export function BaseColorSlider() {
 
   return (
     <div className="flex flex-col gap-1">
-      <LockableLabel label="Base" variable="base" />
+      <LockableLabel
+        label="Base"
+        tooltip="Controls how much gray is used in neutrals like backgrounds and surfaces."
+        variable="base"
+      />
       <ChromaSlider
         className="h-6 w-[138px] xl:w-[160px]"
         hue={hue}

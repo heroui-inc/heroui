@@ -54,7 +54,11 @@ export function AccentColorSelector() {
 
   return (
     <div className="flex flex-col gap-1">
-      <LockableLabel label="Accent" variable="hue" />
+      <LockableLabel
+        label="Accent"
+        tooltip="Main color used for branding and highlights."
+        variable="hue"
+      />
       <div className="flex flex-row items-center gap-2 overflow-visible">
         <ColorSlider
           channel="hue"

@@ -1,7 +1,7 @@
 "use client";
 
 import {ArrowUturnCcwLeft, ArrowUturnCwRight, Code, NodesRight} from "@gravity-ui/icons";
-import {Button, Chip, Separator, Tabs} from "@heroui/react";
+import {Button, Chip, Separator, Tabs, Tooltip} from "@heroui/react";
 import Link from "next/link";
 
 import {HeroUILogo} from "@/components/heroui-logo";
@@ -25,26 +25,42 @@ export function BuilderHeader() {
             <HeroUILogo />
           </Link>
           <div className="flex items-center gap-3">
-            <Button
-              isIconOnly
-              className="hidden xl:inline-flex"
-              isDisabled={!canUndo}
-              size="md"
-              variant="tertiary"
-              onPress={() => undo()}
-            >
-              <ArrowUturnCcwLeft />
-            </Button>
-            <Button
-              isIconOnly
-              className="hidden xl:inline-flex"
-              isDisabled={!canRedo}
-              size="md"
-              variant="tertiary"
-              onPress={() => redo()}
-            >
-              <ArrowUturnCwRight />
-            </Button>
+            <Tooltip closeDelay={0} delay={100}>
+              <Tooltip.Trigger>
+                <Button
+                  isIconOnly
+                  className="hidden xl:inline-flex"
+                  isDisabled={!canUndo}
+                  size="md"
+                  variant="tertiary"
+                  onPress={() => undo()}
+                >
+                  <ArrowUturnCcwLeft />
+                </Button>
+              </Tooltip.Trigger>
+              <Tooltip.Content>
+                <Tooltip.Arrow />
+                <p>Undo last change</p>
+              </Tooltip.Content>
+            </Tooltip>
+            <Tooltip closeDelay={0} delay={100}>
+              <Tooltip.Trigger>
+                <Button
+                  isIconOnly
+                  className="hidden xl:inline-flex"
+                  isDisabled={!canRedo}
+                  size="md"
+                  variant="tertiary"
+                  onPress={() => redo()}
+                >
+                  <ArrowUturnCwRight />
+                </Button>
+                <Tooltip.Content>
+                  <Tooltip.Arrow />
+                  <p>Redo last change</p>
+                </Tooltip.Content>
+              </Tooltip.Trigger>
+            </Tooltip>
             <Separator className="hidden h-6 xl:block" orientation="vertical" />
             <ResetButton />
           </div>
@@ -75,18 +91,34 @@ export function BuilderHeader() {
           <div className="flex h-auto items-center xl:hidden">
             <SwitchMode />
           </div>
-          <Button isIconOnly size="md" variant="tertiary">
-            <NodesRight />
-          </Button>
-          <Button
-            isIconOnly
-            className="hidden xl:inline-flex"
-            size="md"
-            variant={isCodeVisible ? "primary" : "tertiary"}
-            onPress={toggleCode}
-          >
-            <Code />
-          </Button>
+          <Tooltip closeDelay={0} delay={100}>
+            <Tooltip.Trigger>
+              <Button isIconOnly size="md" variant="tertiary">
+                <NodesRight />
+              </Button>
+            </Tooltip.Trigger>
+            <Tooltip.Content>
+              <Tooltip.Arrow />
+              <p>Share theme link</p>
+            </Tooltip.Content>
+          </Tooltip>
+          <Tooltip closeDelay={0} delay={100}>
+            <Tooltip.Trigger>
+              <Button
+                isIconOnly
+                className="hidden xl:inline-flex"
+                size="md"
+                variant={isCodeVisible ? "primary" : "tertiary"}
+                onPress={toggleCode}
+              >
+                <Code />
+              </Button>
+            </Tooltip.Trigger>
+            <Tooltip.Content>
+              <Tooltip.Arrow />
+              <p>View code</p>
+            </Tooltip.Content>
+          </Tooltip>
         </div>
       </div>
     </div>

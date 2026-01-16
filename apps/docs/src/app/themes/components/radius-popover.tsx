@@ -15,9 +15,10 @@ import {LockableLabel} from "./lockable-label";
 type RadiusPopoverProps = {
   label: string;
   variableKey: keyof Pick<ThemeVariables, "radius" | "formRadius">;
+  tooltip?: string;
 };
 
-export function RadiusPopover({label, variableKey}: RadiusPopoverProps) {
+export function RadiusPopover({label, tooltip, variableKey}: RadiusPopoverProps) {
   const {setVariable, variables} = useVariableSetter();
   const currentValue = variables[variableKey];
   const currentOption = radiusOptions.find((r) => r.id === currentValue);
@@ -25,7 +26,7 @@ export function RadiusPopover({label, variableKey}: RadiusPopoverProps) {
   return (
     <Popover>
       <div className="flex flex-col gap-1">
-        <LockableLabel label={label} variable={variableKey} />
+        <LockableLabel label={label} tooltip={tooltip} variable={variableKey} />
         <Popover.Trigger>
           <InputGroup className="w-40 cursor-pointer">
             <InputGroup.Prefix className="w-10">

@@ -41,8 +41,16 @@ export default function ThemeBuilderPage() {
             <AccentColorSelector />
             <BaseColorSlider />
             <FontFamilyPopover />
-            <RadiusPopover label="Radius" variableKey="radius" />
-            <RadiusPopover label="Radius Form" variableKey="formRadius" />
+            <RadiusPopover
+              label="Radius"
+              tooltip="Global border radius for UI components like menus, cards, or modals."
+              variableKey="radius"
+            />
+            <RadiusPopover
+              label="Radius Form"
+              tooltip="Border radius for form elements like inputs and selects."
+              variableKey="formRadius"
+            />
             <ThemePopover />
             <SwitchMode label="Mode" />
             <div>
