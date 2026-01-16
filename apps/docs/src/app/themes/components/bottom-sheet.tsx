@@ -28,11 +28,13 @@ const staticTransition = {
   ease: cubicBezier(0.32, 0.72, 0, 1),
 };
 
-const SHEET_HEIGHT = 300;
+const SHEET_HEIGHT = 600; // Total height of the sheet
+const SNAP_HEIGHT = 320; // Height visible at snap position
+const SNAP_OFFSET = SHEET_HEIGHT - SNAP_HEIGHT; // Offset to show snap height
 
 interface BottomSheetProps {
-  id?: string;
   children?: ReactNode;
+  id?: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
 }
@@ -53,10 +55,10 @@ export function BottomSheet({children, id, isOpen, onOpenChange}: BottomSheetPro
           onOpenChange={onOpenChange}
         >
           <MotionModal
-            animate={{y: 0}}
+            animate={{y: SNAP_OFFSET}}
             className="absolute bottom-0 w-full rounded-t-3xl bg-background shadow-lg will-change-transform"
             drag="y"
-            dragConstraints={{top: 0}}
+            dragConstraints={{top: SNAP_OFFSET}}
             exit={{y: SHEET_HEIGHT}}
             initial={{y: SHEET_HEIGHT}}
             transition={staticTransition}
@@ -65,10 +67,10 @@ export function BottomSheet({children, id, isOpen, onOpenChange}: BottomSheetPro
               y,
             }}
             onDragEnd={(_e, {offset, velocity}) => {
-              if (offset.y > SHEET_HEIGHT * 0.5 || velocity.y > 10) {
+              if (offset.y > SNAP_HEIGHT * 0.5 || velocity.y > 10) {
                 onOpenChange(false);
               } else {
-                animate(y, 0, {...inertiaTransition, max: 0, min: 0});
+                animate(y, SNAP_OFFSET, {...inertiaTransition, max: SNAP_OFFSET, min: SNAP_OFFSET});
               }
             }}
           >
