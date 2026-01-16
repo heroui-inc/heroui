@@ -19,7 +19,7 @@ export function MobileFooter() {
 
   return (
     <>
-      <div className="fixed right-0 bottom-0 left-0 z-50 flex w-full items-center justify-between gap-4 border-t border-separator bg-background px-4 pt-3 pb-2 xl:hidden">
+      <div className="fixed right-0 bottom-0 left-0 z-50 flex w-full items-center justify-between gap-4 border-t border-separator bg-background px-6 pt-3 pb-4 xl:hidden">
         <div className="w-full cursor-pointer" onClick={() => setIsSheetOpen(true)}>
           <ThemeInput />
         </div>

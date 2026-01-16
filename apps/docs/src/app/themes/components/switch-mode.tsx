@@ -1,6 +1,6 @@
 "use client";
 
-import {Kbd, Label, Tooltip} from "@heroui/react";
+import {Kbd, Label, Tooltip, cn} from "@heroui/react";
 import {useTheme} from "next-themes";
 
 import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
@@ -16,7 +16,7 @@ export function SwitchMode({label}: {label?: string}) {
   useKeyPress("s", handleModeSwitch);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className={cn("flex flex-col gap-1", !label && "h-9")}>
       {label ? <Label>{label}</Label> : null}
       <Tooltip>
         <Tooltip.Trigger>

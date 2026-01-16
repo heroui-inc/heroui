@@ -23,8 +23,12 @@ export function ThemeInput() {
           />
         </Avatar>
       </InputGroup.Prefix>
-      <InputGroup.Input readOnly value={currentTheme?.label ?? "Default"} />
-      <InputGroup.Suffix className="w-10">
+      <InputGroup.Input
+        readOnly
+        className="max-w-20 sm:max-w-none"
+        value={currentTheme?.label ?? "Default"}
+      />
+      <InputGroup.Suffix className="flex w-10 flex-1 justify-end">
         <ChevronsExpandVertical className="size-4" />
       </InputGroup.Suffix>
     </InputGroup>

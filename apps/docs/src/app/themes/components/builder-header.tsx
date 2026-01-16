@@ -18,7 +18,7 @@ export function BuilderHeader() {
   const {isCodeVisible, toggleCode} = useCodePanel();
 
   return (
-    <div className="sticky top-0 z-50 mb-3 flex h-15 w-full items-center justify-center bg-background xl:mb-6">
+    <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 xl:mb-6 xl:px-0">
       <div className="flex h-14 w-full max-w-[1400px] items-center justify-between xl:h-14">
         <div className="flex items-center gap-4">
           <Link href="/">
@@ -71,8 +71,8 @@ export function BuilderHeader() {
             Soon
           </Chip>
         </div>
-        <div className="flex w-auto items-center justify-end gap-3 xl:w-[244px]">
-          <div className="block xl:hidden">
+        <div className="flex w-auto justify-end gap-3 xl:w-[244px]">
+          <div className="flex h-auto items-center xl:hidden">
             <SwitchMode />
           </div>
           <Button isIconOnly size="md" variant="tertiary">
