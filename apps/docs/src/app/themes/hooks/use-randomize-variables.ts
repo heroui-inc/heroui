@@ -1,6 +1,6 @@
 "use client";
 
-import {colorIds, fontIds, radiusIds} from "../constants";
+import {fontIds, radiusIds} from "../constants";
 
 import {useVariablesState} from "./use-variables-state";
 
@@ -11,15 +11,14 @@ export function useRandomizeVariables() {
     const lockedVariables = variables.lockedVariables;
 
     setVariables({
-      accentColor: lockedVariables.includes("accentColor")
-        ? variables.accentColor
-        : randomPick([...colorIds]),
+      base: lockedVariables.includes("base") ? variables.base : Math.random() * 0.02,
       fontFamily: lockedVariables.includes("fontFamily")
         ? variables.fontFamily
         : randomPick([...fontIds]),
       formRadius: lockedVariables.includes("formRadius")
         ? variables.formRadius
         : randomPick([...radiusIds]),
+      hue: lockedVariables.includes("hue") ? variables.hue : Math.floor(Math.random() * 360),
       radius: lockedVariables.includes("radius") ? variables.radius : randomPick([...radiusIds]),
     });
   };

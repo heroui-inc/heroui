@@ -1,5 +1,6 @@
 import type {
   ColorPickerProps as AriaColorPickerProps,
+  ColorSliderProps as AriaColorSliderProps,
   Color,
   ColorSpace,
 } from "react-aria-components";
@@ -21,13 +22,9 @@ export interface ColorAreaProps {
   className?: string;
 }
 
-export interface ColorSliderProps {
-  channel: "hue" | "saturation" | "brightness" | "lightness" | "red" | "green" | "blue" | "alpha";
-  colorSpace?: ColorSpace;
-  orientation?: "horizontal" | "vertical";
-  label?: string;
-  showOutput?: boolean;
-  className?: string;
+export interface ColorSliderProps extends Omit<AriaColorSliderProps, "children"> {
+  trackBackground?: string;
+  thumbBackground?: string;
 }
 
 export interface ColorSwatchesCarouselProps {

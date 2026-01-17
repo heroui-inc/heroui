@@ -13,8 +13,16 @@ import rabbitTheme from "@/assets/themes/rabbit.png";
 import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
 
-export const tabs = ["components", "dashboard", "mail", "chat", "finances"];
-
+export const tabs = [
+  {disabled: false, label: "components"},
+  {disabled: true, label: "dashboard"},
+  {disabled: true, label: "mail"},
+  {disabled: true, label: "chat"},
+  {disabled: true, label: "finances"},
+];
+export const DEFAULT_COLOR = "oklch(0.6199 0.194 253.67)";
+export const DEFAULT_COLOR_HSL = "hsl(253.67, 100%, 61.99%)";
+export const DEFAULT_BASE = 0.0015;
 export const colorIds = [
   "oklch(0.6199 0.194 253.67)",
   "oklch(0.6356 0.2082 25.38)",
@@ -125,6 +133,10 @@ export const themes: Array<{
 
 export type ThemeVariables = {
   /** Accent color - can be a predefined colorId or any valid CSS color string */
+  lightness: number;
+  chroma: number;
+  hue: number;
+  base: number;
   accentColor: (typeof colorIds)[number] | string;
   fontFamily: (typeof fontIds)[number];
   formRadius: (typeof radiusIds)[number];
@@ -133,6 +145,10 @@ export type ThemeVariables = {
 };
 
 export const themeVariableKeys = [
+  "base",
+  "lightness",
+  "chroma",
+  "hue",
   "accentColor",
   "fontFamily",
   "formRadius",
@@ -142,8 +158,12 @@ export const themeVariableKeys = [
 
 export const defaultThemeValues: ThemeVariables = {
   accentColor: colorIds[0],
+  base: DEFAULT_BASE,
+  chroma: 0.195,
   fontFamily: "inter",
   formRadius: "large",
+  hue: 253.83,
+  lightness: 0.6204,
   radius: "medium",
   theme: "default",
 } as const;
@@ -153,3 +173,5 @@ export const LOCAL_STORAGE_KEYS = {
 } as const;
 
 export const THEME_BUILDER_CONTENT_ID = "theme-builder-content";
+export const THEME_BUILDER_PAGE_ID = "theme-builder-page";
+export const THEME_BUILDER_BOTTOM_SHEET_ID = "theme-builder-bottom-sheet";
