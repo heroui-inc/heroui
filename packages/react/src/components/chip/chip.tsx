@@ -1,9 +1,9 @@
 "use client";
 
-import type {ChipVariants} from "./chip.styles";
+import type {ChipVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
-import {chipVariants} from "./chip.styles";
+import {chipVariants} from "@heroui/styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Chip Root

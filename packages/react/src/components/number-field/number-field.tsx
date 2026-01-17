@@ -1,8 +1,9 @@
 "use client";
 
-import type {NumberFieldVariants} from "./number-field.styles";
+import type {NumberFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {numberFieldVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button as ButtonPrimitive,
@@ -13,8 +14,6 @@ import {
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconMinus, IconPlus} from "../icons";
-
-import {numberFieldVariants} from "./number-field.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * NumberField Context

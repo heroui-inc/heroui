@@ -1,9 +1,10 @@
 "use client";
 
-import type {BreadcrumbsVariants} from "./breadcrumbs.styles";
 import type {LinkProps} from "../link";
+import type {BreadcrumbsVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {breadcrumbsVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Breadcrumb as BreadcrumbPrimitive,
@@ -13,8 +14,6 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronRight} from "../icons";
 import {Link} from "../link";
-
-import {breadcrumbsVariants} from "./breadcrumbs.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Breadcrumbs Context

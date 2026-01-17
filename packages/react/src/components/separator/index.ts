@@ -24,6 +24,6 @@ export type {SeparatorRootProps, SeparatorRootProps as SeparatorProps} from "./s
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {separatorVariants} from "./separator.styles";
+export {separatorVariants} from "@heroui/styles";
 
-export type {SeparatorVariants} from "./separator.styles";
+export type {SeparatorVariants} from "@heroui/styles";

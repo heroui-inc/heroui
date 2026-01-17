@@ -1,8 +1,9 @@
 "use client";
 
-import type {InputGroupVariants} from "./input-group.styles";
+import type {InputGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {inputGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Group as GroupPrimitive,
@@ -12,8 +13,6 @@ import {
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {TextFieldContext} from "../text-field";
-
-import {inputGroupVariants} from "./input-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Context

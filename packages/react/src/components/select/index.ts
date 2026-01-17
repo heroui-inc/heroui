@@ -39,6 +39,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {selectVariants} from "./select.styles";
+export {selectVariants} from "@heroui/styles";
 
-export type {SelectVariants} from "./select.styles";
+export type {SelectVariants} from "@heroui/styles";

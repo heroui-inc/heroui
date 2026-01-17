@@ -81,6 +81,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {alertDialogVariants} from "./alert-dialog.styles";
+export {alertDialogVariants} from "@heroui/styles";
 
-export type {AlertDialogVariants} from "./alert-dialog.styles";
+export type {AlertDialogVariants} from "@heroui/styles";

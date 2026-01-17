@@ -33,6 +33,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {avatarVariants} from "./avatar.styles";
+export {avatarVariants} from "@heroui/styles";
 
-export type {AvatarVariants} from "./avatar.styles";
+export type {AvatarVariants} from "@heroui/styles";

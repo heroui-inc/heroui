@@ -1,10 +1,11 @@
 "use client";
 
-import type {AutocompleteVariants} from "./autocomplete.styles";
 import type {Booleanish} from "../../utils/assertion";
 import type {SurfaceVariants} from "../surface";
+import type {AutocompleteVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, MutableRefObject} from "react";
 
+import {autocompleteVariants} from "@heroui/styles";
 import {mergeRefs} from "@react-aria/utils";
 import React, {createContext, useContext, useRef} from "react";
 import {
@@ -20,8 +21,6 @@ import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
-
-import {autocompleteVariants} from "./autocomplete.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Context

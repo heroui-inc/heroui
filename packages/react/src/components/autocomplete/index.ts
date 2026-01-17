@@ -56,6 +56,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {autocompleteVariants} from "./autocomplete.styles";
+export {autocompleteVariants} from "@heroui/styles";
 
-export type {AutocompleteVariants} from "./autocomplete.styles";
+export type {AutocompleteVariants} from "@heroui/styles";

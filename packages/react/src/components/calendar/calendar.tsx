@@ -1,9 +1,10 @@
 "use client";
 
-import type {CalendarVariants} from "./calendar.styles";
+import type {CalendarVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components";
 
+import {calendarVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button as ButtonPrimitive,
@@ -17,8 +18,6 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-
-import {calendarVariants} from "./calendar.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Calendar Context

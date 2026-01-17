@@ -1,8 +1,9 @@
 "use client";
 
-import type {TooltipVariants} from "./tooltip.styles";
+import type {TooltipVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {tooltipVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Focusable as FocusablePrimitive,
@@ -12,8 +13,6 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-
-import {tooltipVariants} from "./tooltip.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Context

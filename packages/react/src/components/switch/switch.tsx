@@ -1,14 +1,13 @@
 "use client";
 
-import type {SwitchVariants} from "./switch.styles";
+import type {SwitchVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {switchVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-
-import {switchVariants} from "./switch.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Switch Context

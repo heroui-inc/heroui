@@ -39,6 +39,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {alertVariants} from "./alert.styles";
+export {alertVariants} from "@heroui/styles";
 
-export type {AlertVariants} from "./alert.styles";
+export type {AlertVariants} from "@heroui/styles";
