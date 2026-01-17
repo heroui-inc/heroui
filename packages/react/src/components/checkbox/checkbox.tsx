@@ -1,16 +1,15 @@
 "use client";
 
-import type {CheckboxVariants} from "./checkbox.styles";
+import type {CheckboxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {CheckboxRenderProps} from "react-aria-components";
 
+import {checkboxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {Checkbox as CheckboxPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";
-
-import {checkboxVariants} from "./checkbox.styles";
 
 interface CheckboxContext {
   slots?: ReturnType<typeof checkboxVariants>;

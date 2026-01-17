@@ -1,9 +1,10 @@
 "use client";
 
-import type {AccordionVariants} from "./accordion.styles";
 import type {Booleanish} from "../../utils/assertion";
+import type {AccordionVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {accordionVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button,
@@ -18,8 +19,6 @@ import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
-
-import {accordionVariants} from "./accordion.styles";
 
 const AccordionContext = createContext<{
   slots?: ReturnType<typeof accordionVariants>;

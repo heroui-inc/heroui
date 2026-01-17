@@ -337,6 +337,9 @@ importers:
 
   packages/react:
     dependencies:
+      '@heroui/styles':
+        specifier: workspace:*
+        version: link:../styles
       '@internationalized/date':
         specifier: 3.10.1
         version: 3.10.1
@@ -488,6 +491,9 @@ importers:
 
   packages/styles:
     dependencies:
+      tailwind-variants:
+        specifier: 3.2.2
+        version: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
       tw-animate-css:
         specifier: 1.4.0
         version: 1.4.0
@@ -507,6 +513,9 @@ importers:
       tailwindcss:
         specifier: 4.1.18
         version: 4.1.18
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
 
   packages/vitest:
     devDependencies:
@@ -7689,6 +7698,11 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <6.0.0'
+
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
 
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
@@ -16539,6 +16553,8 @@ snapshots:
       typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
+
+  typescript@5.8.3: {}
 
   typescript@5.9.3: {}
 

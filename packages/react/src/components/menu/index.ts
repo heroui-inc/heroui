@@ -34,6 +34,6 @@ export type {MenuRootProps, MenuRootProps as MenuProps} from "./menu";
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {menuVariants} from "./menu.styles";
+export {menuVariants} from "@heroui/styles";
 
-export type {MenuVariants} from "./menu.styles";
+export type {MenuVariants} from "@heroui/styles";

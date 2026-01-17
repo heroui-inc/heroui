@@ -1,10 +1,11 @@
 "use client";
 
-import type {DisclosureVariants} from "./disclosure.styles";
 import type {Booleanish} from "../../utils/assertion";
+import type {DisclosureVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {ButtonProps} from "react-aria-components";
 
+import {disclosureVariants} from "@heroui/styles";
 import React, {createContext, useContext, useRef} from "react";
 import {
   Button,
@@ -17,8 +18,6 @@ import {
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
-
-import {disclosureVariants} from "./disclosure.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Disclosure Context

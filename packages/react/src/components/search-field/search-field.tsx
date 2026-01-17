@@ -1,8 +1,9 @@
 "use client";
 
-import type {SearchFieldVariants} from "./search-field.styles";
+import type {SearchFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {searchFieldVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Group as GroupPrimitive,
@@ -13,8 +14,6 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {IconSearch} from "../icons";
-
-import {searchFieldVariants} from "./search-field.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * SearchField Context

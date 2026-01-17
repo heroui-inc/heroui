@@ -66,6 +66,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {calendarVariants} from "./calendar.styles";
+export {calendarVariants} from "@heroui/styles";
 
-export type {CalendarVariants} from "./calendar.styles";
+export type {CalendarVariants} from "@heroui/styles";

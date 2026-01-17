@@ -1,15 +1,14 @@
 "use client";
 
-import type {ButtonVariants} from "./button.styles";
+import type {ButtonVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {buttonVariants} from "@heroui/styles";
 import {useContext} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {BUTTON_GROUP_CHILD, ButtonGroupContext} from "../button-group";
-
-import {buttonVariants} from "./button.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Button Root

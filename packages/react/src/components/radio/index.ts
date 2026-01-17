@@ -36,6 +36,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {radioVariants} from "./radio.styles";
+export {radioVariants} from "@heroui/styles";
 
-export type {RadioVariants} from "./radio.styles";
+export type {RadioVariants} from "@heroui/styles";

@@ -1,15 +1,14 @@
 "use client";
 
-import type {TextAreaVariants} from "./textarea.styles";
+import type {TextAreaVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {textAreaVariants} from "@heroui/styles";
 import React, {useContext} from "react";
 import {TextArea as TextAreaPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {TextFieldContext} from "../text-field";
-
-import {textAreaVariants} from "./textarea.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * TextArea Root

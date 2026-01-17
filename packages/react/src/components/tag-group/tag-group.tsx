@@ -3,12 +3,11 @@
 import type {TagVariants} from "../tag";
 import type {ComponentPropsWithRef} from "react";
 
+import {tagGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext, useMemo} from "react";
 import {TagGroup as TagGroupPrimitive, TagList as TagListPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-
-import {tagGroupVariants} from "./tag-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * TagGroup Context

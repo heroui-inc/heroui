@@ -1,10 +1,11 @@
 "use client";
 
-import type {ComboBoxVariants} from "./combobox.styles";
 import type {SurfaceVariants} from "../surface";
+import type {ComboBoxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components";
 
+import {comboboxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button,
@@ -17,8 +18,6 @@ import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
-
-import {comboboxVariants} from "./combobox.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Context

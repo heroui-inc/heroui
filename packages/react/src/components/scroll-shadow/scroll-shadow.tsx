@@ -1,14 +1,14 @@
 "use client";
 
-import type {ScrollShadowVariants} from "./scroll-shadow.styles";
+import type {ScrollShadowVariants} from "@heroui/styles";
 import type {RefObject} from "react";
 
+import {scrollShadowVariants} from "@heroui/styles";
 import {mergeRefs} from "@react-aria/utils";
 import {useMemo, useRef} from "react";
 
 import {useSafeLayoutEffect} from "../../hooks/use-safe-layout-effect";
 
-import {scrollShadowVariants} from "./scroll-shadow.styles";
 import {useScrollShadow} from "./use-scroll-shadow";
 
 export type ScrollShadowVisibility = "auto" | "both" | "top" | "bottom" | "left" | "right" | "none";

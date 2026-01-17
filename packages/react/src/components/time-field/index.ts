@@ -24,6 +24,6 @@ export type {TimeFieldRootProps, TimeFieldRootProps as TimeFieldProps} from "./t
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {timeFieldVariants} from "./time-field.styles";
+export {timeFieldVariants} from "@heroui/styles";
 
-export type {TimeFieldVariants} from "./time-field.styles";
+export type {TimeFieldVariants} from "@heroui/styles";
