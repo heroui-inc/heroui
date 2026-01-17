@@ -3,7 +3,7 @@
 import type {Booleanish} from "../../utils/assertion";
 import type {SurfaceVariants} from "../surface";
 import type {AutocompleteVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, MutableRefObject} from "react";
+import type {ComponentPropsWithRef, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
 import {mergeRefs} from "@react-aria/utils";
@@ -11,6 +11,7 @@ import React, {createContext, useContext, useRef} from "react";
 import {
   Autocomplete as AutocompletePrimitive,
   Button as ButtonPrimitive,
+  Group as GroupPrimitive,
   Popover as PopoverPrimitive,
   Select as SelectPrimitive,
   SelectStateContext,
@@ -19,24 +20,26 @@ import {
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-import {IconChevronDown} from "../icons";
+import {CloseIcon, IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Context
- * -----------------------------------------------------------------------------------------------*/
+| * Autocomplete Context
+| * -----------------------------------------------------------------------------------------------*/
 type AutocompleteContext = {
   slots?: ReturnType<typeof autocompleteVariants>;
-  triggerRef: MutableRefObject<HTMLElement | null>;
+  triggerRef: RefObject<HTMLElement | null>;
+  clearButtonRef: RefObject<HTMLButtonElement | null>;
 };
 
 const AutocompleteContext = createContext<AutocompleteContext>({
-  triggerRef: {current: null} as MutableRefObject<HTMLElement | null>,
+  triggerRef: {current: null} as RefObject<HTMLElement | null>,
+  clearButtonRef: {current: null} as RefObject<HTMLButtonElement | null>,
 });
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Root
- * -----------------------------------------------------------------------------------------------*/
+| * Autocomplete Root
+| * -----------------------------------------------------------------------------------------------*/
 interface AutocompleteRootProps<T extends object, M extends "single" | "multiple" = "single">
   extends ComponentPropsWithRef<typeof SelectPrimitive<T, M>>, AutocompleteVariants {
   items?: Iterable<T, M>;
@@ -54,9 +57,10 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
     [fullWidth, variant],
   );
   const triggerRef = useRef<HTMLElement | null>(null);
+  const clearButtonRef = useRef<HTMLButtonElement | null>(null);
 
   return (
-    <AutocompleteContext value={{slots, triggerRef}}>
+    <AutocompleteContext value={{slots, triggerRef, clearButtonRef}}>
       <SelectPrimitive
         data-slot="autocomplete"
         {...props}
@@ -69,17 +73,18 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Trigger
- * -----------------------------------------------------------------------------------------------*/
-interface AutocompleteTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
+| * Autocomplete Trigger
+| * -----------------------------------------------------------------------------------------------*/
+interface AutocompleteTriggerProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
 
-const AutocompleteTrigger = React.forwardRef<HTMLButtonElement, AutocompleteTriggerProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots, triggerRef} = useContext(AutocompleteContext);
+const AutocompleteTrigger = React.forwardRef<HTMLDivElement, AutocompleteTriggerProps>(
+  ({children, className, onClick, ...props}, ref) => {
+    const {clearButtonRef, slots, triggerRef} = useContext(AutocompleteContext);
+    const state = useContext(SelectStateContext);
 
     // Callback ref to update context ref
     const contextRefCallback = React.useCallback(
-      (node: HTMLButtonElement | null) => {
+      (node: HTMLDivElement | null) => {
         triggerRef.current = node;
       },
       [triggerRef],
@@ -88,15 +93,25 @@ const AutocompleteTrigger = React.forwardRef<HTMLButtonElement, AutocompleteTrig
     // Merge context ref callback with user-provided ref
     const mergedRef = mergeRefs(contextRefCallback, ref);
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      // Don't toggle if clicking the clear button
+      if (clearButtonRef.current?.contains(e.target as Node)) {
+        return;
+      }
+      onClick?.(e);
+      state?.toggle();
+    };
+
     return (
-      <ButtonPrimitive
+      <GroupPrimitive
         ref={mergedRef}
         className={composeTwRenderProps(className, slots?.trigger())}
         data-slot="autocomplete-trigger"
+        onClick={handleClick}
         {...props}
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </ButtonPrimitive>
+      </GroupPrimitive>
     );
   },
 );
@@ -104,8 +119,8 @@ const AutocompleteTrigger = React.forwardRef<HTMLButtonElement, AutocompleteTrig
 AutocompleteTrigger.displayName = "AutocompleteTrigger";
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Value
- * -----------------------------------------------------------------------------------------------*/
+| * Autocomplete Value
+| * -----------------------------------------------------------------------------------------------*/
 interface AutocompleteValueProps extends ComponentPropsWithRef<typeof SelectValuePrimitive> {}
 
 const AutocompleteValue = ({children, className, ...props}: AutocompleteValueProps) => {
@@ -123,8 +138,8 @@ const AutocompleteValue = ({children, className, ...props}: AutocompleteValuePro
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Indicator
- * -----------------------------------------------------------------------------------------------*/
+| * Autocomplete Indicator
+| * -----------------------------------------------------------------------------------------------*/
 interface AutocompleteIndicatorProps extends ComponentPropsWithRef<"svg"> {
   className?: string;
 }
@@ -162,8 +177,8 @@ const AutocompleteIndicator = ({children, className, ...props}: AutocompleteIndi
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Popover
- * -----------------------------------------------------------------------------------------------*/
+| * Autocomplete Popover
+| * -----------------------------------------------------------------------------------------------*/
 interface AutocompletePopoverProps extends Omit<
   ComponentPropsWithRef<typeof PopoverPrimitive>,
   "children"
@@ -199,8 +214,8 @@ const AutocompletePopover = ({
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Autocomplete Filter
- * -----------------------------------------------------------------------------------------------*/
+| * Autocomplete Filter
+| * -----------------------------------------------------------------------------------------------*/
 interface AutocompleteFilterProps extends ComponentPropsWithRef<typeof AutocompletePrimitive> {}
 
 const AutocompleteFilter = ({children, ...props}: AutocompleteFilterProps) => {
@@ -212,8 +227,52 @@ const AutocompleteFilter = ({children, ...props}: AutocompleteFilterProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Exports
- * -----------------------------------------------------------------------------------------------*/
+| * Autocomplete Clear Button
+| * -----------------------------------------------------------------------------------------------*/
+interface AutocompleteClearButtonProps extends ComponentPropsWithRef<"button"> {}
+
+const AutocompleteClearButton = ({
+  className,
+  onClick,
+  ref,
+  ...props
+}: AutocompleteClearButtonProps) => {
+  const {slots} = useContext(AutocompleteContext);
+  const state = useContext(SelectStateContext);
+  const {clearButtonRef} = useContext(AutocompleteContext);
+
+  const clearButtonRefCallback = React.useCallback(
+    (node: HTMLButtonElement | null) => {
+      clearButtonRef.current = node;
+    },
+    [clearButtonRef],
+  );
+
+  // Merge context ref callback with user-provided ref
+  const mergedRef = mergeRefs(clearButtonRefCallback, ref);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    state?.selectionManager.setSelectedKeys(new Set());
+    onClick?.(e);
+  };
+
+  return (
+    <button
+      ref={mergedRef}
+      className={slots?.clearButton({className})}
+      data-empty={dataAttr(state?.selectionManager.selectedKeys.size === 0)}
+      data-slot="autocomplete-clear-button"
+      onClick={handleClick}
+      {...props}
+    >
+      <CloseIcon data-slot="autocomplete-clear-button-icon" />
+    </button>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+| * Exports
+| * -----------------------------------------------------------------------------------------------*/
 export {
   AutocompleteRoot,
   AutocompleteTrigger,
@@ -221,6 +280,7 @@ export {
   AutocompleteIndicator,
   AutocompletePopover,
   AutocompleteFilter,
+  AutocompleteClearButton,
 };
 
 export type {
@@ -230,4 +290,5 @@ export type {
   AutocompleteIndicatorProps,
   AutocompletePopoverProps,
   AutocompleteFilterProps,
+  AutocompleteClearButtonProps,
 };

@@ -35,6 +35,7 @@ export function Disabled() {
         <Label>State</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -67,6 +68,7 @@ export function Disabled() {
         <Label>Countries to Visit</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
