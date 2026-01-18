@@ -4,10 +4,8 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
 import React, {useState} from "react";
+import {useFilter} from "react-aria-components";
 
-import {Surface} from "@heroui/react";
-
-import {useFilter} from "../../hooks/use-filter";
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
 import {Description} from "../description";
@@ -20,6 +18,7 @@ import {ListBox} from "../listbox";
 import {SearchField} from "../search-field";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";
+import {Surface} from "../surface";
 import {Tag} from "../tag";
 import {TagGroup} from "../tag-group";
 
