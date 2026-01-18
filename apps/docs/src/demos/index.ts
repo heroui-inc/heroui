@@ -1103,6 +1103,10 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.WithoutSeparator,
     file: "tabs/without-separator.tsx",
   },
+  "tabs-secondary": {
+    component: TabsDemos.Secondary,
+    file: "tabs/secondary.tsx",
+  },
   // TagGroup demos
   "tag-group-basic": {
     component: TagGroupDemos.Basic,

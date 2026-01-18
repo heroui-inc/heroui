@@ -40,9 +40,10 @@ const TabsRoot = ({
   className,
   hideSeparator = false,
   orientation = "horizontal",
+  variant,
   ...props
 }: TabsRootProps) => {
-  const slots = React.useMemo(() => tabsVariants(), []);
+  const slots = React.useMemo(() => tabsVariants({variant}), [variant]);
 
   return (
     <TabsContext value={{hideSeparator, orientation, slots}}>

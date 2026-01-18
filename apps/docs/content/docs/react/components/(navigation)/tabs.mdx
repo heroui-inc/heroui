@@ -65,6 +65,15 @@ export default () => (
   name="tabs-custom-styles"
 />
 
+### Secondary Variant
+
+The secondary variant displays an underline indicator instead of a filled background. This is useful for navigation-style tabs.
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-secondary"
+/>
+
 <RelatedShowcases component="Tabs" />
 
 <RelatedComponents component="tabs" />
@@ -127,6 +136,9 @@ The Tabs component uses these CSS classes:
 - `.tabs[data-orientation="horizontal"]` - Horizontal tab layout (default)
 - `.tabs[data-orientation="vertical"]` - Vertical tab layout
 
+#### Variant Classes
+- `.tabs--secondary` - Secondary variant with underline indicator
+
 ### Interactive States
 
 The component supports both CSS pseudo-classes and data attributes:
@@ -144,6 +156,7 @@ The component supports both CSS pseudo-classes and data attributes:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual style variant. Primary uses a filled indicator, secondary uses an underline indicator |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Tab layout orientation |
 | `hideSeparator` | `boolean` | `false` | Hide separator lines between tabs |
 | `selectedKey` | `string` | - | Controlled selected tab key |
