@@ -2,51 +2,25 @@
 
 import {useEffect} from "react";
 
-import {THEME_BUILDER_CONTENT_ID, adaptiveColors, fontMap, radiusCssMap} from "../constants";
-import {calculateForeground} from "../utils/calculate-foreground";
+import {
+  THEME_BUILDER_BOTTOM_SHEET_ID,
+  THEME_BUILDER_CONTENT_ID,
+  THEME_BUILDER_PAGE_ID,
+  adaptiveColors,
+  fontMap,
+  radiusCssMap,
+} from "../constants";
+import {
+  calculateAccentForeground,
+  generateThemeColors,
+  getAccentDerivedVariables,
+  getColorVariablesForElement,
+  getFieldDerivedVariables,
+  getSemanticDerivedVariables,
+  radiusDerivedVariables,
+} from "../utils/generate-theme-colors";
 
 import {useVariablesState} from "./use-variables-state";
-
-/**
- * Accent-derived variables that need to be recalculated at the scoped level.
- * These mirror the calculations from @heroui/styles theme.css
- */
-const accentDerivedVariables: Record<string, string> = {
-  "--color-accent": "var(--accent)",
-  "--color-accent-foreground": "var(--accent-foreground)",
-  "--color-accent-hover":
-    "color-mix(in oklab, var(--color-accent) 90%, var(--color-accent-foreground) 10%)",
-  "--color-accent-soft": "color-mix(in oklab, var(--color-accent) 15%, transparent)",
-  "--color-accent-soft-foreground": "var(--color-accent)",
-  "--color-accent-soft-hover": "color-mix(in oklab, var(--color-accent) 20%, transparent)",
-  "--color-focus": "var(--focus)",
-  "--tw-ring-color": "var(--focus)",
-};
-
-/**
- * Radius-derived variables that need to be recalculated at the scoped level.
- * These mirror the calculations from @heroui/styles theme.css
- */
-const radiusDerivedVariables: Record<string, string> = {
-  "--radius-2xl": "calc(var(--radius) * 2)",
-  "--radius-3xl": "calc(var(--radius) * 3)",
-  "--radius-4xl": "calc(var(--radius) * 4)",
-  "--radius-field": "var(--field-radius, var(--radius-xl))",
-  "--radius-lg": "calc(var(--radius) * 1)",
-  "--radius-md": "calc(var(--radius) * 0.75)",
-  "--radius-sm": "calc(var(--radius) * 0.5)",
-  "--radius-xl": "calc(var(--radius) * 1.5)",
-  "--radius-xs": "calc(var(--radius) * 0.25)",
-};
-
-/**
- * Helper to apply a map of CSS variables to an element
- */
-function applyVariables(element: HTMLElement, variables: Record<string, string>) {
-  Object.entries(variables).forEach(([property, value]) => {
-    element.style.setProperty(property, value);
-  });
-}
 
 /**
  * Style element ID for adaptive color CSS injection
@@ -54,12 +28,60 @@ function applyVariables(element: HTMLElement, variables: Record<string, string>)
 const ADAPTIVE_STYLE_ID = "theme-builder-adaptive-colors";
 
 /**
+ * Style element ID for theme-aware color CSS injection
+ */
+const THEME_COLORS_STYLE_ID = "theme-builder-theme-colors";
+
+/**
+ * CSS selector for colors only (page level)
+ */
+const PAGE_SELECTORS = `#${THEME_BUILDER_PAGE_ID}`;
+
+/**
+ * CSS selector for full theme (colors + radius + fonts)
+ * Targets the content area and dialogs within it
+ */
+const CONTENT_SELECTORS = [
+  `#${THEME_BUILDER_BOTTOM_SHEET_ID}`,
+  `#${THEME_BUILDER_CONTENT_ID}`,
+  `#${THEME_BUILDER_CONTENT_ID} [role='dialog']`,
+].join(", ");
+
+/**
+ * Build CSS string from a variables record
+ */
+function buildVarsCSS(vars: Record<string, string>): string {
+  return Object.entries(vars)
+    .map(([prop, val]) => `${prop}: ${val};`)
+    .join("\n    ");
+}
+
+/**
+ * Get common variables (radius, font) that apply to both light and dark modes
+ */
+function getCommonVariables(
+  radius: string,
+  fieldRadius: string,
+  fontVariable: string,
+): Record<string, string> {
+  return {
+    "--field-radius": fieldRadius,
+    "--font-sans": `var(${fontVariable})`,
+    "--radius": radius,
+    ...radiusDerivedVariables,
+  };
+}
+
+/**
  * Generates CSS for adaptive colors that need different values in light/dark modes.
  * This injects CSS rules targeting both light and dark selectors within the scoped element.
  */
 function getAdaptiveColorCSS(
   accentColor: string,
-  derivedVariables: Record<string, string>,
+  chroma: number,
+  hue: number,
+  lightness: number,
+  commonVars: Record<string, string>,
 ): string | null {
   const adaptiveConfig = adaptiveColors[accentColor];
 
@@ -67,100 +89,335 @@ function getAdaptiveColorCSS(
     return null;
   }
 
-  const lightFg = calculateForeground(adaptiveConfig.light);
-  const darkFg = calculateForeground(adaptiveConfig.dark);
+  // For adaptive colors (like black/white), we use predefined light/dark variants
+  const lightFg = calculateAccentForeground(1, 0, 0); // Light accent (white) needs dark fg
+  const darkFg = calculateAccentForeground(0, 0, 0); // Dark accent (black) needs light fg
 
-  const derivedVarsCSS = Object.entries(derivedVariables)
-    .map(([prop, val]) => `${prop}: ${val};`)
-    .join("\n    ");
+  // Generate full theme colors for both modes
+  const lightColors = generateThemeColors({chroma, hue, lightness});
+  const darkColors = generateThemeColors({chroma, hue, lightness});
+
+  // Get light and dark color variables
+  const lightVars = getColorVariablesForElement(lightColors, "light");
+  const darkVars = getColorVariablesForElement(darkColors, "dark");
+
+  // Get derived variables for accent
+  const accentDerivedLight = getAccentDerivedVariables(adaptiveConfig.light, lightFg);
+  const accentDerivedDark = getAccentDerivedVariables(adaptiveConfig.dark, darkFg);
+
+  // Get semantic derived variables
+  const successDerivedLight = getSemanticDerivedVariables(
+    "success",
+    lightVars["--success"] ?? "",
+    lightVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedLight = getSemanticDerivedVariables(
+    "warning",
+    lightVars["--warning"] ?? "",
+    lightVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedLight = getSemanticDerivedVariables(
+    "danger",
+    lightVars["--danger"] ?? "",
+    lightVars["--danger-foreground"] ?? "",
+  );
+
+  const successDerivedDark = getSemanticDerivedVariables(
+    "success",
+    darkVars["--success"] ?? "",
+    darkVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedDark = getSemanticDerivedVariables(
+    "warning",
+    darkVars["--warning"] ?? "",
+    darkVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedDark = getSemanticDerivedVariables(
+    "danger",
+    darkVars["--danger"] ?? "",
+    darkVars["--danger-foreground"] ?? "",
+  );
+
+  const lightAccentVars = {
+    "--accent": adaptiveConfig.light,
+    "--accent-foreground": lightFg,
+    "--focus": adaptiveConfig.light,
+    ...accentDerivedLight,
+  };
+
+  const darkAccentVars = {
+    "--accent": adaptiveConfig.dark,
+    "--accent-foreground": darkFg,
+    "--focus": adaptiveConfig.dark,
+    ...accentDerivedDark,
+  };
+
+  // Get field derived variables
+  const fieldDerivedLight = getFieldDerivedVariables(
+    lightVars["--field-background"] ?? "",
+    lightVars["--field-foreground"] ?? "",
+    lightVars["--field-placeholder"] ?? "",
+    lightVars["--border"] ?? "",
+  );
+  const fieldDerivedDark = getFieldDerivedVariables(
+    darkVars["--field-background"] ?? "",
+    darkVars["--field-foreground"] ?? "",
+    darkVars["--field-placeholder"] ?? "",
+    darkVars["--border"] ?? "",
+  );
+
+  // Colors only (for page level)
+  const colorLightVars = {
+    ...lightVars,
+    ...lightAccentVars,
+    ...successDerivedLight,
+    ...warningDerivedLight,
+    ...dangerDerivedLight,
+    ...fieldDerivedLight,
+  };
+
+  const colorDarkVars = {
+    ...darkVars,
+    ...darkAccentVars,
+    ...successDerivedDark,
+    ...warningDerivedDark,
+    ...dangerDerivedDark,
+    ...fieldDerivedDark,
+  };
+
+  // Full theme vars (colors + radius + fonts for content level)
+  const fullLightVars = {...commonVars, ...colorLightVars};
+  const fullDarkVars = {...commonVars, ...colorDarkVars};
 
   return `
-  :is([data-theme="light"], .light) #${THEME_BUILDER_CONTENT_ID},
-  #${THEME_BUILDER_CONTENT_ID}:not(:is([data-theme="dark"] *, .dark *)) {
-    --accent: ${adaptiveConfig.light};
-    --focus: ${adaptiveConfig.light};
-    --accent-foreground: ${lightFg};
-    ${derivedVarsCSS}
+  /* Page level: colors only */
+  :is([data-theme="light"], .light) ${PAGE_SELECTORS},
+  ${PAGE_SELECTORS}:not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(colorLightVars)}
   }
 
-  :is([data-theme="dark"], .dark) #${THEME_BUILDER_CONTENT_ID} {
-    --accent: ${adaptiveConfig.dark};
-    --focus: ${adaptiveConfig.dark};
-    --accent-foreground: ${darkFg};
-    ${derivedVarsCSS}
+  :is([data-theme="dark"], .dark) ${PAGE_SELECTORS} {
+    ${buildVarsCSS(colorDarkVars)}
+  }
+
+  /* Content level: colors + radius + fonts */
+  :is([data-theme="light"], .light) :is(${CONTENT_SELECTORS}),
+  :is(${CONTENT_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(fullLightVars)}
+  }
+
+  :is([data-theme="dark"], .dark) :is(${CONTENT_SELECTORS}) {
+    ${buildVarsCSS(fullDarkVars)}
   }
   `;
+}
+
+/**
+ * Generates CSS for theme-aware colors (light/dark mode support).
+ * This handles all generated theme colors including semantic colors.
+ */
+function getThemeColorsCSS(
+  chroma: number,
+  hue: number,
+  lightness: number,
+  grayChroma: number,
+  commonVars: Record<string, string>,
+): string {
+  // Generate full theme colors
+  const colors = generateThemeColors({chroma, grayChroma, hue, lightness});
+
+  // Get color variables for both modes
+  const lightVars = getColorVariablesForElement(colors, "light");
+  const darkVars = getColorVariablesForElement(colors, "dark");
+
+  // Get accent derived variables
+  const accentLight = colors.accent.oklchLight;
+  const accentFgLight = colors.accentForeground.oklchLight;
+  const accentDerivedLight = getAccentDerivedVariables(accentLight, accentFgLight);
+
+  const accentDark = colors.accent.oklchDark;
+  const accentFgDark = colors.accentForeground.oklchDark;
+  const accentDerivedDark = getAccentDerivedVariables(accentDark, accentFgDark);
+
+  // Get semantic derived variables for light mode
+  const successDerivedLight = getSemanticDerivedVariables(
+    "success",
+    lightVars["--success"] ?? "",
+    lightVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedLight = getSemanticDerivedVariables(
+    "warning",
+    lightVars["--warning"] ?? "",
+    lightVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedLight = getSemanticDerivedVariables(
+    "danger",
+    lightVars["--danger"] ?? "",
+    lightVars["--danger-foreground"] ?? "",
+  );
+
+  // Get semantic derived variables for dark mode
+  const successDerivedDark = getSemanticDerivedVariables(
+    "success",
+    darkVars["--success"] ?? "",
+    darkVars["--success-foreground"] ?? "",
+  );
+  const warningDerivedDark = getSemanticDerivedVariables(
+    "warning",
+    darkVars["--warning"] ?? "",
+    darkVars["--warning-foreground"] ?? "",
+  );
+  const dangerDerivedDark = getSemanticDerivedVariables(
+    "danger",
+    darkVars["--danger"] ?? "",
+    darkVars["--danger-foreground"] ?? "",
+  );
+
+  // Default hover
+  const defaultHoverLight = `color-mix(in oklab, ${lightVars["--default"]} 90%, ${lightVars["--foreground"]} 10%)`;
+  const defaultHoverDark = `color-mix(in oklab, ${darkVars["--default"]} 90%, ${darkVars["--foreground"]} 10%)`;
+
+  // Get field derived variables
+  const fieldDerivedLight = getFieldDerivedVariables(
+    lightVars["--field-background"] ?? "",
+    lightVars["--field-foreground"] ?? "",
+    lightVars["--field-placeholder"] ?? "",
+    lightVars["--border"] ?? "",
+  );
+  const fieldDerivedDark = getFieldDerivedVariables(
+    darkVars["--field-background"] ?? "",
+    darkVars["--field-foreground"] ?? "",
+    darkVars["--field-placeholder"] ?? "",
+    darkVars["--border"] ?? "",
+  );
+
+  // Colors only (for page level)
+  const colorLightVars = {
+    ...lightVars,
+    ...accentDerivedLight,
+    ...successDerivedLight,
+    ...warningDerivedLight,
+    ...dangerDerivedLight,
+    ...fieldDerivedLight,
+    "--color-default-hover": defaultHoverLight,
+  };
+
+  const colorDarkVars = {
+    ...darkVars,
+    ...accentDerivedDark,
+    ...successDerivedDark,
+    ...warningDerivedDark,
+    ...dangerDerivedDark,
+    ...fieldDerivedDark,
+    "--color-default-hover": defaultHoverDark,
+  };
+
+  // Full theme vars (colors + radius + fonts for content level)
+  const fullLightVars = {...commonVars, ...colorLightVars};
+  const fullDarkVars = {...commonVars, ...colorDarkVars};
+
+  return `
+  /* Page level: colors only */
+  :is([data-theme="light"], .light) ${PAGE_SELECTORS},
+  ${PAGE_SELECTORS}:not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(colorLightVars)}
+  }
+
+  :is([data-theme="dark"], .dark) ${PAGE_SELECTORS} {
+    ${buildVarsCSS(colorDarkVars)}
+  }
+
+  /* Content level: colors + radius + fonts */
+  :is([data-theme="light"], .light) :is(${CONTENT_SELECTORS}),
+  :is(${CONTENT_SELECTORS}):not(:is([data-theme="dark"] *, .dark *)) {
+    ${buildVarsCSS(fullLightVars)}
+  }
+
+  :is([data-theme="dark"], .dark) :is(${CONTENT_SELECTORS}) {
+    ${buildVarsCSS(fullDarkVars)}
+  }
+  `;
+}
+
+/**
+ * Removes existing style elements and creates a fresh one
+ */
+function injectStyleElement(id: string, css: string): HTMLStyleElement {
+  // Remove any existing style element with this ID
+  const existingStyle = document.getElementById(id);
+
+  if (existingStyle) {
+    existingStyle.remove();
+  }
+
+  // Create and inject new style element
+  const styleElement = document.createElement("style");
+
+  styleElement.id = id;
+  styleElement.textContent = css;
+  document.head.appendChild(styleElement);
+
+  return styleElement;
 }
 
 /**
  * Hook that syncs theme builder store values to CSS custom properties.
  * Should be called at the root of the theme builder page.
  *
- * Since @theme inline variables are computed at :root level, we need to
- * re-apply the derived variable formulas at the scoped element level
- * so the browser recalculates them using our overridden base values.
+ * This generates all theme colors based on the selected hue, chroma, and lightness,
+ * applying them via CSS injection for proper light/dark mode support.
  */
 export function useCssSync() {
   const [variables] = useVariablesState();
+  const {base, chroma, hue, lightness} = variables;
+  const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
 
   useEffect(() => {
-    const themeBuilderContent = document.getElementById(THEME_BUILDER_CONTENT_ID);
-    // const themeBuilderContent = document.documentElement;
+    // Check if this is an adaptive color that needs special light/dark variants
+    const isAdaptive = accentColor in adaptiveColors;
 
-    if (!themeBuilderContent) return;
-
-    // Check if this is an adaptive color that needs light/dark variants
-    const adaptiveCSS = getAdaptiveColorCSS(variables.accentColor, accentDerivedVariables);
-
-    // Remove any existing adaptive style element
-    const existingStyle = document.getElementById(ADAPTIVE_STYLE_ID);
-
-    if (existingStyle) {
-      existingStyle.remove();
-    }
-
-    if (adaptiveCSS) {
-      // Inject CSS for adaptive colors (different values for light/dark)
-      const styleElement = document.createElement("style");
-
-      styleElement.id = ADAPTIVE_STYLE_ID;
-      styleElement.textContent = adaptiveCSS;
-      document.head.appendChild(styleElement);
-
-      // Clear inline styles for accent to let the injected CSS take over
-      themeBuilderContent.style.removeProperty("--accent");
-      themeBuilderContent.style.removeProperty("--focus");
-      themeBuilderContent.style.removeProperty("--accent-foreground");
-    } else {
-      // Non-adaptive color: set directly on element
-      themeBuilderContent.style.setProperty("--accent", variables.accentColor);
-      themeBuilderContent.style.setProperty("--focus", variables.accentColor);
-      const foreground = calculateForeground(variables.accentColor);
-
-      themeBuilderContent.style.setProperty("--accent-foreground", foreground);
-      applyVariables(themeBuilderContent, accentDerivedVariables);
-    }
-
-    // Set base radius and re-apply all radius-derived variables
-    themeBuilderContent.style.setProperty("--radius", radiusCssMap[variables.radius]);
-    applyVariables(themeBuilderContent, radiusDerivedVariables);
-
-    // Set field radius (used by --radius-field)
-    themeBuilderContent.style.setProperty("--field-radius", radiusCssMap[variables.formRadius]);
-
-    // Update --font-sans with the selected font variable
-    themeBuilderContent.style.setProperty(
-      "--font-sans",
-      `var(${fontMap[variables.fontFamily].variable})`,
+    // Build common variables (radius, font) that apply to all selectors
+    const commonVars = getCommonVariables(
+      radiusCssMap[variables.radius],
+      radiusCssMap[variables.formRadius],
+      fontMap[variables.fontFamily].variable,
     );
 
-    // Cleanup: remove injected style when unmounting or color changes to non-adaptive
-    return () => {
-      const styleToRemove = document.getElementById(ADAPTIVE_STYLE_ID);
+    // Remove all existing injected styles
+    const cleanupStyles = () => {
+      [ADAPTIVE_STYLE_ID, THEME_COLORS_STYLE_ID].forEach((id) => {
+        const existing = document.getElementById(id);
 
-      if (styleToRemove) {
-        styleToRemove.remove();
-      }
+        if (existing) existing.remove();
+      });
     };
-  }, [variables.accentColor, variables.fontFamily, variables.formRadius, variables.radius]);
+
+    cleanupStyles();
+
+    if (isAdaptive) {
+      // Inject CSS for adaptive colors (different accent values for light/dark)
+      const adaptiveCSS = getAdaptiveColorCSS(accentColor, chroma, hue, lightness, commonVars);
+
+      if (adaptiveCSS) {
+        injectStyleElement(ADAPTIVE_STYLE_ID, adaptiveCSS);
+      }
+    } else {
+      // Inject CSS for standard theme colors
+      const themeColorsCSS = getThemeColorsCSS(chroma, hue, lightness, base, commonVars);
+
+      injectStyleElement(THEME_COLORS_STYLE_ID, themeColorsCSS);
+    }
+
+    // Cleanup: remove injected styles when unmounting
+    return cleanupStyles;
+  }, [
+    accentColor,
+    chroma,
+    hue,
+    lightness,
+    variables.fontFamily,
+    variables.formRadius,
+    variables.radius,
+    base,
+  ]);
 }

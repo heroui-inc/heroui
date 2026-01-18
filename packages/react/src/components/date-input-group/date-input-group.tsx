@@ -1,6 +1,6 @@
 "use client";
 
-import type {DateInputGroupVariants} from "./date-input-group.styles";
+import type {DateInputGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {
   DateInputProps as DateInputPrimitiveProps,
@@ -9,6 +9,7 @@ import type {
   DateSegmentProps as TimeSegmentPrimitiveProps,
 } from "react-aria-components";
 
+import {dateInputGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   DateInput as DateInputPrimitive,
@@ -17,8 +18,6 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-
-import {dateInputGroupVariants} from "./date-input-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * DateInputGroup Context

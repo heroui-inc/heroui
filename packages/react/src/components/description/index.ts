@@ -24,6 +24,6 @@ export type {DescriptionRootProps, DescriptionRootProps as DescriptionProps} fro
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {descriptionVariants} from "./description.styles";
+export {descriptionVariants} from "@heroui/styles";
 
-export type {DescriptionVariants} from "./description.styles";
+export type {DescriptionVariants} from "@heroui/styles";

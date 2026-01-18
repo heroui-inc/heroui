@@ -1,16 +1,15 @@
 "use client";
 
-import type {MenuItemVariants} from "./menu-item.styles";
+import type {MenuItemVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {MenuItemRenderProps} from "react-aria-components";
 
+import {menuItemVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 import {IconChevronRight} from "../icons";
-
-import {menuItemVariants} from "./menu-item.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Context

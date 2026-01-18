@@ -1,14 +1,13 @@
 "use client";
 
-import type {RadioGroupVariants} from "./radio-group.styles";
+import type {RadioGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {radioGroupVariants} from "@heroui/styles";
 import React from "react";
 import {RadioGroup as RadioGroupPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-
-import {radioGroupVariants} from "./radio-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Group Root

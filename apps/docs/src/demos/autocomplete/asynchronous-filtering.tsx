@@ -27,6 +27,7 @@ export function AsynchronousFiltering() {
       <Label>Search a Star Wars characters</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>

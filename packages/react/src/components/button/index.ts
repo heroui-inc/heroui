@@ -31,6 +31,6 @@ export {BUTTON_GROUP_CHILD};
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {buttonVariants} from "./button.styles";
+export {buttonVariants} from "@heroui/styles";
 
-export type {ButtonVariants} from "./button.styles";
+export type {ButtonVariants} from "@heroui/styles";

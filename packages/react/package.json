@@ -55,6 +55,7 @@
   },
   "clean-package": "./clean-package.config.json",
   "dependencies": {
+    "@heroui/styles": "workspace:*",
     "@internationalized/date": "3.10.1",
     "@radix-ui/react-avatar": "1.1.11",
     "@react-aria/ssr": "3.9.10",

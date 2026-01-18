@@ -57,6 +57,7 @@ export function Required() {
         <Label>State</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -90,6 +91,7 @@ export function Required() {
         <Label>Country</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>

@@ -4,10 +4,8 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
 import React, {useState} from "react";
+import {useFilter} from "react-aria-components";
 
-import {Surface} from "@heroui/react";
-
-import {useFilter} from "../../hooks/use-filter";
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
 import {Description} from "../description";
@@ -20,6 +18,7 @@ import {ListBox} from "../listbox";
 import {SearchField} from "../search-field";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";
+import {Surface} from "../surface";
 import {Tag} from "../tag";
 import {TagGroup} from "../tag-group";
 
@@ -88,6 +87,58 @@ export const Default: Story = {
   },
 };
 
+export const WithClearButton: Story = {
+  render: () => {
+    const [selectedKey, setSelectedKey] = useState<Key | null>(null);
+    const {contains} = useFilter({sensitivity: "base"});
+
+    const items = [
+      {id: "cat", name: "Cat"},
+      {id: "dog", name: "Dog"},
+      {id: "elephant", name: "Elephant"},
+      {id: "lion", name: "Lion"},
+      {id: "tiger", name: "Tiger"},
+      {id: "giraffe", name: "Giraffe"},
+    ];
+
+    return (
+      <Autocomplete
+        className="w-[256px]"
+        placeholder="Select an animal"
+        selectionMode="single"
+        value={selectedKey}
+        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+      >
+        <Label>Favorite Animal</Label>
+        <Autocomplete.Trigger>
+          <Autocomplete.Value />
+          <Autocomplete.ClearButton />
+          <Autocomplete.Indicator />
+        </Autocomplete.Trigger>
+        <Autocomplete.Popover>
+          <Autocomplete.Filter filter={contains}>
+            <SearchField autoFocus name="search">
+              <SearchField.Group>
+                <SearchField.SearchIcon />
+                <SearchField.Input placeholder="Search animals..." />
+                <SearchField.ClearButton />
+              </SearchField.Group>
+            </SearchField>
+            <ListBox>
+              {items.map((item) => (
+                <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
+                  {item.name}
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              ))}
+            </ListBox>
+          </Autocomplete.Filter>
+        </Autocomplete.Popover>
+      </Autocomplete>
+    );
+  },
+};
+
 export const Variants: Story = {
   render: () => {
     const [selectedKey1, setSelectedKey1] = useState<Key | null>(null);
@@ -127,6 +178,7 @@ export const Variants: Story = {
               <Label>Primary variant</Label>
               <Autocomplete.Trigger>
                 <Autocomplete.Value />
+                <Autocomplete.ClearButton />
                 <Autocomplete.Indicator />
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
@@ -160,6 +212,7 @@ export const Variants: Story = {
               <Label>Secondary variant</Label>
               <Autocomplete.Trigger>
                 <Autocomplete.Value />
+                <Autocomplete.ClearButton />
                 <Autocomplete.Indicator />
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
@@ -224,6 +277,7 @@ export const Variants: Story = {
                     );
                   }}
                 </Autocomplete.Value>
+                <Autocomplete.ClearButton />
                 <Autocomplete.Indicator />
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
@@ -283,6 +337,7 @@ export const Variants: Story = {
                     );
                   }}
                 </Autocomplete.Value>
+                <Autocomplete.ClearButton />
                 <Autocomplete.Indicator />
               </Autocomplete.Trigger>
               <Autocomplete.Popover>
@@ -367,6 +422,7 @@ export const MultipleSelect: Story = {
               );
             }}
           </Autocomplete.Value>
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -420,6 +476,7 @@ export const FullWidth: Story = {
           <Label>State</Label>
           <Autocomplete.Trigger>
             <Autocomplete.Value />
+            <Autocomplete.ClearButton />
             <Autocomplete.Indicator />
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
@@ -472,6 +529,7 @@ export const WithDescription: Story = {
         <Label>State</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -515,6 +573,7 @@ export const WithSections: Story = {
         <Label>Country</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -611,6 +670,7 @@ export const WithDisabledOptions: Story = {
         <Label>Animal</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -680,6 +740,7 @@ export const CustomIndicator: Story = {
         <Label>State</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator className="size-3">
             <Icon icon="gravity-ui:chevrons-expand-vertical" />
           </Autocomplete.Indicator>
@@ -755,6 +816,7 @@ export const Required: Story = {
           <Label>State</Label>
           <Autocomplete.Trigger>
             <Autocomplete.Value />
+            <Autocomplete.ClearButton />
             <Autocomplete.Indicator />
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
@@ -788,6 +850,7 @@ export const Required: Story = {
           <Label>Country</Label>
           <Autocomplete.Trigger>
             <Autocomplete.Value />
+            <Autocomplete.ClearButton />
             <Autocomplete.Indicator />
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
@@ -845,6 +908,7 @@ export const Controlled: Story = {
           <Label>State (controlled)</Label>
           <Autocomplete.Trigger>
             <Autocomplete.Value />
+            <Autocomplete.ClearButton />
             <Autocomplete.Indicator />
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
@@ -899,6 +963,7 @@ export const ControlledOpenState: Story = {
           <Label>State</Label>
           <Autocomplete.Trigger>
             <Autocomplete.Value />
+            <Autocomplete.ClearButton />
             <Autocomplete.Indicator />
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
@@ -953,6 +1018,7 @@ export const AsynchronousFiltering: Story = {
         <Label>Search a Star Wars characters</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -1020,6 +1086,7 @@ export const Disabled: Story = {
           <Label>State</Label>
           <Autocomplete.Trigger>
             <Autocomplete.Value />
+            <Autocomplete.ClearButton />
             <Autocomplete.Indicator />
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
@@ -1052,6 +1119,7 @@ export const Disabled: Story = {
           <Label>Countries to Visit</Label>
           <Autocomplete.Trigger>
             <Autocomplete.Value />
+            <Autocomplete.ClearButton />
             <Autocomplete.Indicator />
           </Autocomplete.Trigger>
           <Autocomplete.Popover>
@@ -1161,6 +1229,7 @@ export const UserSelection: Story = {
               );
             }}
           </Autocomplete.Value>
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -1285,6 +1354,7 @@ export const UserSelectionMultiple: Story = {
               );
             }}
           </Autocomplete.Value>
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -1362,6 +1432,7 @@ export const LocationSearch: Story = {
         <Label>City</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -1452,6 +1523,7 @@ export const TagGroupSelection: Story = {
               );
             }}
           </Autocomplete.Value>
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
@@ -1532,6 +1604,7 @@ export const EmailRecipients: Story = {
               );
             }}
           </Autocomplete.Value>
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>

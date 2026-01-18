@@ -286,6 +286,8 @@ export default function PopoverExample() {
 }
 ```
 
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/popover.tsx).
+
 ## API Reference
 
 ### Popover
@@ -310,11 +312,11 @@ Animation configuration for popover root component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop             | type                                    | default                                                                                          | description                         |
-| ---------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------- |
-| `state`          | `'disabled' \| 'disable-all' \| boolean` | -                                                                                               | Disable animations while customizing properties |
-| `entering.value` | `SpringAnimationConfig \| TimingAnimationConfig` | `{ type: 'timing',`<br/>`config: { duration: 200,`<br/>`easing: Easing.out(Easing.ease) } }`     | Animation configuration for opening |
-| `exiting.value`  | `SpringAnimationConfig \| TimingAnimationConfig` | `{ type: 'timing',`<br/>`config: { duration: 150,`<br/>`easing: Easing.bezier(0.4, 0, 1, 1) } }` | Animation configuration for closing |
+| prop             | type                                             | default                                                                                          | description                                     |
+| ---------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `state`          | `'disabled' \| 'disable-all' \| boolean`         | -                                                                                                | Disable animations while customizing properties |
+| `entering.value` | `SpringAnimationConfig \| TimingAnimationConfig` | `{ type: 'timing',`<br/>`config: { duration: 200,`<br/>`easing: Easing.out(Easing.ease) } }`     | Animation configuration for opening             |
+| `exiting.value`  | `SpringAnimationConfig \| TimingAnimationConfig` | `{ type: 'timing',`<br/>`config: { duration: 150,`<br/>`easing: Easing.bezier(0.4, 0, 1, 1) } }` | Animation configuration for closing             |
 
 #### SpringAnimationConfig
 
@@ -369,10 +371,10 @@ Animation configuration for popover overlay component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop            | type                       | default     | description                        |
-| --------------- | -------------------------- | ----------- | ---------------------------------- |
+| prop            | type                       | default     | description                                     |
+| --------------- | -------------------------- | ----------- | ----------------------------------------------- |
 | `state`         | `'disabled' \| boolean`    | -           | Disable animations while customizing properties |
-| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close] |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close]              |
 
 ### Popover.Content (Popover Presentation)
 
@@ -385,8 +387,8 @@ Animation configuration for popover overlay component. Can be:
 | `avoidCollisions`         | `boolean`                                        | `true`          | Whether to flip placement when close to viewport edges       |
 | `offset`                  | `number`                                         | `8`             | Distance from trigger element in pixels                      |
 | `alignOffset`             | `number`                                         | `0`             | Offset along the alignment axis in pixels                    |
-| `disablePositioningStyle` | `boolean`                                        | `false`         | Whether to disable automatic positioning styles               |
-| `forceMount`              | `boolean`                                        | -               | Whether to force mount the component in the DOM               |
+| `disablePositioningStyle` | `boolean`                                        | `false`         | Whether to disable automatic positioning styles              |
+| `forceMount`              | `boolean`                                        | -               | Whether to force mount the component in the DOM              |
 | `insets`                  | `Insets`                                         | -               | Screen edge insets to respect when positioning               |
 | `className`               | `string`                                         | -               | Additional CSS classes for the content container             |
 | `presentation`            | `'popover'`                                      | -               | Presentation mode for the popover                            |
@@ -416,14 +418,14 @@ Animation configuration for popover content component (popover presentation). Ca
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop                    | type                       | default                                                         | description                           |
-| ----------------------- | -------------------------- | --------------------------------------------------------------- | ------------------------------------- |
+| prop                    | type                       | default                                                         | description                                     |
+| ----------------------- | -------------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
 | `state`                 | `'disabled' \| boolean`    | -                                                               | Disable animations while customizing properties |
-| `opacity.value`         | `[number, number, number]` | `[0, 1, 0]`                                                     | Opacity values [idle, open, close]    |
-| `scale.value`           | `[number, number, number]` | `[0.95, 1, 0.95]`                                               | Scale values [idle, open, close]      |
-| `translateX.value`      | `[number, number, number]` | Based on placement<br/>`(4, 0, 4)` or `(-4, 0, -4)`             | TranslateX values [idle, open, close]  |
-| `translateY.value`      | `[number, number, number]` | Based on placement<br/>`(4, 0, 4)` or `(-4, 0, -4)`             | TranslateY values [idle, open, close]  |
-| `transformOrigin.value` | `string`                   | Based on placement<br/>`'top'`, `'bottom'`, `'left'`, `'right'` | Transform origin value                 |
+| `opacity.value`         | `[number, number, number]` | `[0, 1, 0]`                                                     | Opacity values [idle, open, close]              |
+| `scale.value`           | `[number, number, number]` | `[0.95, 1, 0.95]`                                               | Scale values [idle, open, close]                |
+| `translateX.value`      | `[number, number, number]` | Based on placement<br/>`(4, 0, 4)` or `(-4, 0, -4)`             | TranslateX values [idle, open, close]           |
+| `translateY.value`      | `[number, number, number]` | Based on placement<br/>`(4, 0, 4)` or `(-4, 0, -4)`             | TranslateY values [idle, open, close]           |
+| `transformOrigin.value` | `string`                   | Based on placement<br/>`'top'`, `'bottom'`, `'left'`, `'right'` | Transform origin value                          |
 
 ### Popover.Arrow
 
@@ -437,7 +439,7 @@ Animation configuration for popover content component (popover presentation). Ca
 | `strokeWidth`         | `number`                                 | `1`     | Stroke width of the arrow border in pixels                            |
 | `strokeBaselineInset` | `number`                                 | `1`     | Baseline inset in pixels for stroke alignment                         |
 | `placement`           | `'top' \| 'bottom' \| 'left' \| 'right'` | -       | Placement of the popover (inherited from content)                     |
-| `children`            | `ReactNode`                              | -       | Custom arrow content (replaces default SVG arrow)                      |
+| `children`            | `ReactNode`                              | -       | Custom arrow content (replaces default SVG arrow)                     |
 | `style`               | `StyleProp<ViewStyle>`                   | -       | Additional styles for the arrow container                             |
 | `...ViewProps`        | `ViewProps`                              | -       | All standard React Native View props are supported                    |
 

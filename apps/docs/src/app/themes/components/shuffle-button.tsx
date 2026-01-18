@@ -2,19 +2,29 @@
 
 import {Shuffle} from "@gravity-ui/icons";
 import {AlertDialog, Button, Checkbox, Kbd, Label, Tooltip, useOverlayState} from "@heroui/react";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 import {useKeyPress} from "@/hooks/use-key-press";
 
 import {LOCAL_STORAGE_KEYS} from "../constants";
 import {useRandomizeVariables} from "../hooks";
+import {useVariablesState} from "../hooks/use-variables-state";
+import {compareThemeVariables} from "../utils/compare-theme-variables";
 
-export function ShuffleButton() {
+interface ShuffleButtonProps {
+  enableKeyboardShortcut?: boolean;
+}
+
+export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProps) {
   const [isDontShowAgainChecked, setIsDontShowAgainChecked] = useState(false);
   const modalState = useOverlayState();
   const randomize = useRandomizeVariables();
+  const [variables] = useVariablesState();
+  const snapshotVariablesRef = useRef(variables);
+  const isRandomizingRef = useRef(false);
 
   const handleRandomize = () => {
+    isRandomizingRef.current = true;
     randomize();
     if (isDontShowAgainChecked) {
       localStorage.setItem(LOCAL_STORAGE_KEYS.SHUFFLE_WARNING_SHOWN, JSON.stringify(true));
@@ -24,15 +34,18 @@ export function ShuffleButton() {
 
   const handleModalTrigger = () => {
     const isDontShowAgainChecked = localStorage.getItem(LOCAL_STORAGE_KEYS.SHUFFLE_WARNING_SHOWN);
+    const isSame = compareThemeVariables(variables, snapshotVariablesRef.current);
 
-    if (isDontShowAgainChecked !== "true") {
-      modalState.open();
-    } else {
-      randomize();
+    if (isSame || isDontShowAgainChecked === "true") {
+      isRandomizingRef.current = true;
+
+      return randomize();
     }
+
+    modalState.open();
   };
 
-  useKeyPress("r", handleModalTrigger);
+  useKeyPress("r", handleModalTrigger, {enabled: enableKeyboardShortcut});
 
   const handleOpenChange = (isOpen: boolean) => {
     setIsDontShowAgainChecked(false);
@@ -44,9 +57,16 @@ export function ShuffleButton() {
     modalState.close();
   };
 
+  // Update snapshot after randomize completes (when variables change due to randomization)
+  useEffect(() => {
+    if (isRandomizingRef.current) {
+      snapshotVariablesRef.current = variables;
+      isRandomizingRef.current = false;
+    }
+  }, [variables]);
+
   return (
     <div className="flex flex-col gap-1">
-      <div className="h-5" />
       <Tooltip delay={0}>
         <Tooltip.Trigger className="w-min">
           <Button isIconOnly size="md" variant="tertiary" onPress={handleModalTrigger}>
@@ -54,7 +74,6 @@ export function ShuffleButton() {
           </Button>
         </Tooltip.Trigger>
         <Tooltip.Content>
-          <Tooltip.Arrow />
           <p>
             Randomize{" "}
             <Kbd>
@@ -79,6 +98,7 @@ export function ShuffleButton() {
                 <Checkbox
                   id="dont-show-again"
                   isSelected={isDontShowAgainChecked}
+                  variant="secondary"
                   onChange={setIsDontShowAgainChecked}
                 >
                   <Checkbox.Control>

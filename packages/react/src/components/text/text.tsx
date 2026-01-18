@@ -1,11 +1,10 @@
 "use client";
 
-import type {TextVariants} from "./text.styles";
+import type {TextVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {textVariants} from "@heroui/styles";
 import {Text as TextPrimitive} from "react-aria-components";
-
-import {textVariants} from "./text.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Text Root

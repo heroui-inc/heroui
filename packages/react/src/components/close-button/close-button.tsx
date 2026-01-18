@@ -1,15 +1,14 @@
 "use client";
 
-import type {CloseButtonVariants} from "./close-button.styles";
+import type {CloseButtonVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {closeButtonVariants} from "@heroui/styles";
 import {useMemo} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {CloseIcon} from "../icons";
-
-import {closeButtonVariants} from "./close-button.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Close Button Root

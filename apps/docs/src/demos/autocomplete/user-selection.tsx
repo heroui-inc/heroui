@@ -79,7 +79,7 @@ export function UserSelection() {
               return `${selectedItems.length} users selected`;
             }
 
-            const selectedItem = users.find((user) => user.id === selectedItems[0].key);
+            const selectedItem = users.find((user) => user.id === selectedItems[0]?.key);
 
             if (!selectedItem) {
               return defaultChildren;
@@ -96,6 +96,7 @@ export function UserSelection() {
             );
           }}
         </Autocomplete.Value>
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>

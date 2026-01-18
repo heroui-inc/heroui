@@ -161,7 +161,7 @@ or with React:
 
 ```tsx
 // Apply styles to any component
-import { buttonVariants } from '@heroui/react';
+import { buttonVariants } from '@heroui/styles';
 
 <Link className={buttonVariants({ variant: "primary" })} href="/home">
   Home
@@ -202,7 +202,8 @@ Wrap, extend, and customize components to match your needs. Use variant function
 **Apply styles with variant functions:**
 
 ```tsx
-import { Link, linkVariants } from '@heroui/react';
+import { Link } from '@heroui/react';
+import { linkVariants } from '@heroui/styles';
 import NextLink from 'next/link';
 
 // Use variant functions to style framework-specific components
@@ -252,8 +253,8 @@ const CTAButton = ({
 **Extend with Tailwind Variants:**
 
 ```tsx
-import { Button, buttonVariants } from '@heroui/react';
-import { tv } from 'tailwind-variants';
+import { Button } from '@heroui/react';
+import { buttonVariants, tv } from '@heroui/styles';
 
 // Extend button styles with custom variants
 const myButtonVariants = tv({

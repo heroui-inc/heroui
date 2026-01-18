@@ -1,14 +1,13 @@
 "use client";
 
-import type {InputVariants} from "./input.styles";
+import type {InputVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {inputVariants} from "@heroui/styles";
 import React from "react";
 import {Input as InputPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
-
-import {inputVariants} from "./input.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Input Root

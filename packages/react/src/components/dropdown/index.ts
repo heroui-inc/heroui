@@ -71,6 +71,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {dropdownVariants} from "./dropdown.styles";
+export {dropdownVariants} from "@heroui/styles";
 
-export type {DropdownVariants} from "./dropdown.styles";
+export type {DropdownVariants} from "@heroui/styles";

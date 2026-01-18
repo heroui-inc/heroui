@@ -17,7 +17,11 @@ export function FontFamilyPopover() {
   return (
     <Popover>
       <div className="flex flex-col gap-1">
-        <LockableLabel label="Font Family" variable="fontFamily" />
+        <LockableLabel
+          label="Font Family"
+          tooltip="Font used across the entire theme."
+          variable="fontFamily"
+        />
         <Popover.Trigger>
           <InputGroup className="w-40 cursor-pointer">
             <InputGroup.Prefix className="w-10">
@@ -36,9 +40,8 @@ export function FontFamilyPopover() {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[324px]">
+      <Popover.Content className="w-[325px] rounded-xl" placement="top">
         <Popover.Dialog className="p-3">
-          <Popover.Arrow />
           <ListBox
             disallowEmptySelection
             aria-label="Font Family"

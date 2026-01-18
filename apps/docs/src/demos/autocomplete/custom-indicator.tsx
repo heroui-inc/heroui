@@ -30,6 +30,7 @@ export function CustomIndicator() {
       <Label>State</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator className="size-3">
           <Icon icon="gravity-ui:chevrons-expand-vertical" />
         </Autocomplete.Indicator>

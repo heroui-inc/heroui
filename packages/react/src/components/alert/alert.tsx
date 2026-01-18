@@ -1,16 +1,15 @@
 "use client";
 
-import type {AlertVariants} from "./alert.styles";
 import type {SurfaceVariants} from "../surface";
+import type {AlertVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {alertVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 import {SurfaceContext} from "../surface";
-
-import {alertVariants} from "./alert.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Context

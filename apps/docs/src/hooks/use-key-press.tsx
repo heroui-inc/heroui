@@ -1,13 +1,22 @@
 import {useEffect} from "react";
 
+interface UseKeyPressOptions {
+  alt?: boolean;
+  ctrl?: boolean;
+  shift?: boolean;
+  enabled?: boolean;
+}
+
 export function useKeyPress(
   key: string,
   callback: (event: KeyboardEvent) => void,
-  options: {alt?: boolean; ctrl?: boolean; shift?: boolean} = {},
+  options: UseKeyPressOptions = {},
 ) {
-  const {alt = false, ctrl = false, shift = false} = options;
+  const {alt = false, ctrl = false, enabled = true, shift = false} = options;
 
   useEffect(() => {
+    if (!enabled) return;
+
     const handleKeyPress = (event: KeyboardEvent) => {
       const isTargetKey = event.key.toLowerCase() === key.toLowerCase();
 
@@ -31,7 +40,7 @@ export function useKeyPress(
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [key, callback, ctrl, shift, alt]);
+  }, [key, callback, ctrl, shift, alt, enabled]);
 }
 
 export default useKeyPress;

@@ -28,9 +28,9 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {scrollShadowVariants} from "./scroll-shadow.styles";
+export {scrollShadowVariants} from "@heroui/styles";
 
-export type {ScrollShadowVariants} from "./scroll-shadow.styles";
+export type {ScrollShadowVariants} from "@heroui/styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Hooks

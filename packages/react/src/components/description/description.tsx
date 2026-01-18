@@ -1,12 +1,11 @@
 "use client";
 
-import type {DescriptionVariants} from "./description.styles";
+import type {DescriptionVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {TextProps} from "react-aria-components";
 
+import {descriptionVariants} from "@heroui/styles";
 import {Text} from "react-aria-components";
-
-import {descriptionVariants} from "./description.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Description Root

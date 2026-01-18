@@ -13,15 +13,23 @@ import rabbitTheme from "@/assets/themes/rabbit.png";
 import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
 
-export const tabs = ["components", "dashboard", "mail", "chat", "finances"];
-
+export const tabs = [
+  {disabled: false, label: "components"},
+  {disabled: true, label: "dashboard"},
+  {disabled: true, label: "mail"},
+  {disabled: true, label: "chat"},
+  {disabled: true, label: "finances"},
+];
+export const DEFAULT_COLOR = "oklch(0.6199 0.194 253.67)";
+export const DEFAULT_COLOR_HSL = "hsl(253.67, 100%, 61.99%)";
+export const DEFAULT_BASE = 0.0015;
 export const colorIds = [
-  "hsla(208, 97%, 49%, 1)",
-  "hsla(0, 84%, 60%, 1)",
-  "hsla(38, 92%, 50%, 1)",
-  "hsla(160, 84%, 39%, 1)",
-  "hsla(292, 84%, 61%, 1)",
-  "hsla(0, 0%, 0%, 1)",
+  "oklch(0.6199 0.194 253.67)",
+  "oklch(0.6356 0.2082 25.38)",
+  "oklch(0.7697 0.1645 70.61)",
+  "oklch(0.6902 0.1481 162.37)",
+  "oklch(0.6683 0.2569 322.02)",
+  "oklch(0 0 0)",
 ] as const;
 
 export const colors = colorIds.map((id) => ({id, value: id}));
@@ -31,9 +39,9 @@ export const colors = colorIds.map((id) => ({id, value: id}));
  * Maps a color ID to its light and dark mode variants.
  */
 export const adaptiveColors: Record<string, {light: string; dark: string}> = {
-  "hsla(0, 0%, 0%, 1)": {
-    dark: "hsla(0, 0%, 98%, 1)",
-    light: "hsla(0, 0%, 0%, 1)",
+  "oklch(0 0 0)": {
+    dark: "oklch(0.9848 0 0)",
+    light: "oklch(0 0 0)",
   },
 };
 
@@ -91,17 +99,17 @@ export const radiusCssMap = Object.fromEntries(
 
 export const themeIds = [
   "default",
-  "airbnb",
-  "black",
-  "coinbase",
-  "discord",
   "glass",
+  "sky",
   "lavender",
   "mint",
   "netflix",
-  "rabbit",
-  "sky",
+  "uber",
   "spotify",
+  "coinbase",
+  "airbnb",
+  "discord",
+  "rabbit",
 ] as const;
 export const themes: Array<{
   id: (typeof themeIds)[number];
@@ -110,21 +118,25 @@ export const themes: Array<{
   value: string;
 }> = [
   {id: "default", image: defaultTheme, label: "Default", value: "default"},
-  {id: "airbnb", image: airbnbTheme, label: "Airbnb", value: "airbnb"},
-  {id: "black", image: blackTheme, label: "Black", value: "black"},
-  {id: "coinbase", image: coinbaseTheme, label: "Coinbase", value: "coinbase"},
-  {id: "discord", image: discordTheme, label: "Discord", value: "discord"},
   {id: "glass", image: glassTheme, label: "Glass", value: "glass"},
+  {id: "sky", image: skyTheme, label: "Sky", value: "sky"},
   {id: "lavender", image: lavenderTheme, label: "Lavender", value: "lavender"},
   {id: "mint", image: mintTheme, label: "Mint", value: "mint"},
   {id: "netflix", image: netflixTheme, label: "Netflix", value: "netflix"},
-  {id: "rabbit", image: rabbitTheme, label: "Rabbit", value: "rabbit"},
-  {id: "sky", image: skyTheme, label: "Sky", value: "sky"},
+  {id: "uber", image: blackTheme, label: "Uber", value: "uber"},
   {id: "spotify", image: spotifyTheme, label: "Spotify", value: "spotify"},
+  {id: "coinbase", image: coinbaseTheme, label: "Coinbase", value: "coinbase"},
+  {id: "airbnb", image: airbnbTheme, label: "Airbnb", value: "airbnb"},
+  {id: "discord", image: discordTheme, label: "Discord", value: "discord"},
+  {id: "rabbit", image: rabbitTheme, label: "Rabbit", value: "rabbit"},
 ];
 
 export type ThemeVariables = {
   /** Accent color - can be a predefined colorId or any valid CSS color string */
+  lightness: number;
+  chroma: number;
+  hue: number;
+  base: number;
   accentColor: (typeof colorIds)[number] | string;
   fontFamily: (typeof fontIds)[number];
   formRadius: (typeof radiusIds)[number];
@@ -133,6 +145,10 @@ export type ThemeVariables = {
 };
 
 export const themeVariableKeys = [
+  "base",
+  "lightness",
+  "chroma",
+  "hue",
   "accentColor",
   "fontFamily",
   "formRadius",
@@ -142,8 +158,12 @@ export const themeVariableKeys = [
 
 export const defaultThemeValues: ThemeVariables = {
   accentColor: colorIds[0],
+  base: DEFAULT_BASE,
+  chroma: 0.195,
   fontFamily: "inter",
   formRadius: "large",
+  hue: 253.83,
+  lightness: 0.6204,
   radius: "medium",
   theme: "default",
 } as const;
@@ -153,3 +173,5 @@ export const LOCAL_STORAGE_KEYS = {
 } as const;
 
 export const THEME_BUILDER_CONTENT_ID = "theme-builder-content";
+export const THEME_BUILDER_PAGE_ID = "theme-builder-page";
+export const THEME_BUILDER_BOTTOM_SHEET_ID = "theme-builder-bottom-sheet";

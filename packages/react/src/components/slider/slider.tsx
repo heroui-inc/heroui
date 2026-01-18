@@ -1,9 +1,10 @@
 "use client";
 
-import type {SliderVariants} from "./slider.styles";
+import type {SliderVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {SliderRenderProps} from "react-aria-components";
 
+import {sliderVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   SliderOutput as SliderOutputPrimitive,
@@ -14,8 +15,6 @@ import {
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-
-import {sliderVariants} from "./slider.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Component Status: Preview

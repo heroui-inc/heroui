@@ -1,14 +1,13 @@
 "use client";
 
-import type {AvatarVariants} from "./avatar.styles";
+import type {AvatarVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {avatarVariants} from "@heroui/styles";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import React, {createContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
-
-import {avatarVariants} from "./avatar.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Avatar Context

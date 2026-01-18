@@ -6,7 +6,7 @@ import {GoogleIcon} from "@/icons/google";
 
 export function LoginDemo() {
   return (
-    <Card className="w-[320px] items-start justify-center p-5">
+    <Card className="w-full max-w-[320px] items-start justify-center p-5">
       <Card.Header className="flex w-full items-center justify-center gap-2">
         <Avatar>
           <Avatar.Fallback>
