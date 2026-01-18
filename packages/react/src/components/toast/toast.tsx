@@ -12,6 +12,7 @@ import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
   UNSTABLE_Toast as ToastPrimitive,
   UNSTABLE_ToastRegion as ToastRegionPrimitive,
+  UNSTABLE_ToastStateContext as ToastStateContext,
 } from "react-aria-components";
 
 import {useMediaQuery} from "../../hooks";
@@ -28,6 +29,10 @@ import {DEFAULT_MAX_VISIBLE_TOAST, ToastQueue, toast as defaultToast} from "./to
 type ToastContext = {
   slots?: ReturnType<typeof toastVariants>;
   variant?: ToastVariants["variant"];
+  /** The vertical offset (in pixels) between stacked toasts. @default 64 */
+  offset?: number;
+  /** Whether to disable the scale effect on stacked toasts. @default false */
+  disableScale?: boolean;
 };
 
 const ToastContext = createContext<ToastContext>({});
@@ -38,6 +43,9 @@ const ToastContext = createContext<ToastContext>({});
 interface ToastProps<T extends object = ToastContentValue>
   extends ToastPrimitiveProps<T>, ToastVariants {}
 
+/** The default vertical offset (in pixels) between stacked toasts. */
+const DEFAULT_TOAST_OFFSET = 64;
+
 const Toast = <T extends object = ToastContentValue>({
   children,
   className,
@@ -45,24 +53,39 @@ const Toast = <T extends object = ToastContentValue>({
   variant = "default",
   ...rest
 }: ToastProps<T>) => {
-  const {slots: contextSlots} = useContext(ToastContext);
+  const {
+    disableScale = false,
+    offset = DEFAULT_TOAST_OFFSET,
+    slots: contextSlots,
+  } = useContext(ToastContext);
 
   const slots = useMemo(() => toastVariants({variant}), [variant]);
 
+  const state = useContext(ToastStateContext)!;
+  const visibleToasts = state.visibleToasts;
+  const index = visibleToasts.indexOf(toast);
+
   const updatedContext = useMemo<ToastContext>(
-    () => ({slots: {...contextSlots, ...slots}, variant}),
-    [contextSlots, slots, variant],
+    () => ({slots: {...contextSlots, ...slots}, variant, offset, disableScale}),
+    [contextSlots, slots, variant, offset, disableScale],
   );
 
   const style = useMemo<CSSProperties>(
-    () => ({viewTransitionName: toast?.key, ...rest.style}),
-    [toast?.key, rest.style],
+    () => ({
+      viewTransitionName: toast?.key,
+      translate: `0 ${index * offset}px 0`,
+      scale: disableScale ? 1 : 1 - index * 0.05,
+      zIndex: visibleToasts.length - index - 1,
+      ...rest.style,
+    }),
+    [toast?.key, rest.style, index, visibleToasts.length, offset, disableScale],
   );
 
   return (
     <ToastContext value={updatedContext}>
       <ToastPrimitive
         className={composeTwRenderProps(className, slots?.toast())}
+        data-index={index}
         data-slot="toast"
         style={style}
         toast={toast}
@@ -228,8 +251,12 @@ interface ToastContainerProps<T extends object = ToastContentValue> extends Omit
   "queue" | "children"
 > {
   children?: ToastRegionPrimitiveProps<T>["children"];
+  /** Whether to disable the scale effect on stacked toasts. @default false */
+  disableScale?: boolean;
   /** The maximum number of toasts to display at a time. Only applies when no custom `toast` prop is provided. */
   maxVisibleToasts?: number;
+  /** The vertical offset (in pixels) between stacked toasts. @default 64 */
+  offset?: number;
   placement?: ToastVariants["placement"];
   toast?: ToastQueue<T>;
 }
@@ -237,7 +264,9 @@ interface ToastContainerProps<T extends object = ToastContentValue> extends Omit
 const ToastContainer = <T extends object = ToastContentValue>({
   children,
   className,
+  disableScale = false,
   maxVisibleToasts = DEFAULT_MAX_VISIBLE_TOAST,
+  offset = DEFAULT_TOAST_OFFSET,
   placement = "bottom",
   toast: toastProp,
   ...rest
@@ -298,7 +327,7 @@ const ToastContainer = <T extends object = ToastContentValue>({
       {...rest}
     >
       {(renderProps) => (
-        <ToastContext value={{slots}}>
+        <ToastContext value={{slots, offset, disableScale}}>
           {typeof children === "undefined"
             ? getDefaultChildren(renderProps)
             : typeof children === "function"
@@ -316,6 +345,7 @@ ToastContainer.displayName = "HeroUI.ToastContainer";
  * Exports
  * --------------------------------------------------------------------------------------------- */
 export {
+  DEFAULT_TOAST_OFFSET,
   ToastQueue,
   Toast,
   ToastActionButton,

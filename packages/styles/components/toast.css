@@ -5,25 +5,30 @@
   @apply fixed z-50 flex flex-col gap-2 outline-none;
 }
 
-/* Placement variants */
-.toast-region--top-left {
-  @apply top-4 left-4;
+/* Placement variants - Bottom */
+.toast-region--bottom {
+  @apply bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse;
 }
 
-.toast-region--top-right {
-  @apply top-4 right-4;
+.toast-region--bottom-start {
+  @apply bottom-4 left-4 flex-col-reverse;
 }
 
-.toast-region--bottom-left {
-  @apply bottom-4 left-4;
-}
-
-.toast-region--bottom-right {
+.toast-region--bottom-end {
   @apply right-4 bottom-4 flex-col-reverse;
 }
 
-.toast-region--bottom {
-  @apply bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse;
+/* Placement variants - Top */
+.toast-region--top {
+  @apply top-4 left-1/2 -translate-x-1/2;
+}
+
+.toast-region--top-start {
+  @apply top-4 left-4;
+}
+
+.toast-region--top-end {
+  @apply top-4 right-4;
 }
 
 .toast-region:focus-visible {
@@ -32,7 +37,7 @@
 
 /* Base toast styles */
 .toast {
-  @apply relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-4 py-3 shadow-surface sm:min-w-auto;
+  @apply relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
   view-transition-class: toast;
 }
 
@@ -145,7 +150,6 @@
   to {
     translate: 0 100%;
     opacity: 0;
-    visibility: hidden;
   }
 }
 
