@@ -24,7 +24,7 @@ export function WithDescription() {
       placeholder="Select one"
       selectionMode="single"
       value={selectedKey}
-      onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+      onChange={setSelectedKey}
     >
       <Label>State</Label>
       <Autocomplete.Trigger>

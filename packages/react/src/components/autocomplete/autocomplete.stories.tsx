@@ -56,7 +56,7 @@ export const Default: Story = {
         placeholder="Select an animal"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>Favorite Animal</Label>
         <Autocomplete.Trigger>
@@ -107,7 +107,7 @@ export const WithClearButton: Story = {
         placeholder="Select an animal"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>Favorite Animal</Label>
         <Autocomplete.Trigger>
@@ -135,6 +135,87 @@ export const WithClearButton: Story = {
           </Autocomplete.Filter>
         </Autocomplete.Popover>
       </Autocomplete>
+    );
+  },
+};
+
+export const WithOnClearCallback: Story = {
+  render: () => {
+    const [selectedKey, setSelectedKey] = useState<Key | null>(null);
+    const [clearCount, setClearCount] = useState(0);
+    const [lastClearedAt, setLastClearedAt] = useState<string | null>(null);
+    const {contains} = useFilter({sensitivity: "base"});
+
+    const items = [
+      {id: "cat", name: "Cat"},
+      {id: "dog", name: "Dog"},
+      {id: "elephant", name: "Elephant"},
+      {id: "lion", name: "Lion"},
+      {id: "tiger", name: "Tiger"},
+      {id: "giraffe", name: "Giraffe"},
+    ];
+
+    const handleClear = () => {
+      setClearCount((prev) => prev + 1);
+      setLastClearedAt(new Date().toLocaleTimeString());
+      // eslint-disable-next-line no-console
+      console.log("onClear callback triggered!");
+    };
+
+    const selectedItem = items.find((item) => item.id === selectedKey);
+
+    return (
+      <div className="w-full space-y-4">
+        <Autocomplete
+          className="w-[256px]"
+          placeholder="Select an animal"
+          selectionMode="single"
+          value={selectedKey}
+          onChange={setSelectedKey}
+          onClear={handleClear}
+        >
+          <Label>Favorite Animal</Label>
+          <Autocomplete.Trigger>
+            <Autocomplete.Value />
+            <Autocomplete.ClearButton />
+            <Autocomplete.Indicator />
+          </Autocomplete.Trigger>
+          <Autocomplete.Popover>
+            <Autocomplete.Filter filter={contains}>
+              <SearchField autoFocus name="search">
+                <SearchField.Group>
+                  <SearchField.SearchIcon />
+                  <SearchField.Input placeholder="Search animals..." />
+                  <SearchField.ClearButton />
+                </SearchField.Group>
+              </SearchField>
+              <ListBox>
+                {items.map((item) => (
+                  <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
+                    {item.name}
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                ))}
+              </ListBox>
+            </Autocomplete.Filter>
+          </Autocomplete.Popover>
+        </Autocomplete>
+        <div className="space-y-2 rounded-xl border border-border p-4">
+          <p className="text-sm font-medium">onClear Callback Info:</p>
+          <div className="space-y-1 text-sm text-muted">
+            <p>Clear button clicked: {clearCount} time(s)</p>
+            {!!lastClearedAt && <p>Last cleared at: {lastClearedAt}</p>}
+            {!!selectedItem && (
+              <p className="text-success">
+                Currently selected: <strong>{selectedItem.name}</strong>
+              </p>
+            )}
+            {!selectedItem && (
+              <p className="text-muted">No selection (click clear to see the callback)</p>
+            )}
+          </div>
+        </div>
+      </div>
     );
   },
 };
@@ -173,7 +254,7 @@ export const Variants: Story = {
               selectionMode="single"
               value={selectedKey1}
               variant="primary"
-              onChange={(key: Key | Key[] | null) => setSelectedKey1(key as Key | null)}
+              onChange={setSelectedKey1}
             >
               <Label>Primary variant</Label>
               <Autocomplete.Trigger>
@@ -207,7 +288,7 @@ export const Variants: Story = {
               selectionMode="single"
               value={selectedKey2}
               variant="secondary"
-              onChange={(key: Key | Key[] | null) => setSelectedKey2(key as Key | null)}
+              onChange={setSelectedKey2}
             >
               <Label>Secondary variant</Label>
               <Autocomplete.Trigger>
@@ -471,7 +552,7 @@ export const FullWidth: Story = {
           selectionMode="single"
           value={selectedKey}
           variant="secondary"
-          onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+          onChange={setSelectedKey}
         >
           <Label>State</Label>
           <Autocomplete.Trigger>
@@ -524,7 +605,7 @@ export const WithDescription: Story = {
         placeholder="Select one"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>State</Label>
         <Autocomplete.Trigger>
@@ -568,7 +649,7 @@ export const WithSections: Story = {
         placeholder="Select a country"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>Country</Label>
         <Autocomplete.Trigger>
@@ -665,7 +746,7 @@ export const WithDisabledOptions: Story = {
         placeholder="Select an animal"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>Animal</Label>
         <Autocomplete.Trigger>
@@ -735,7 +816,7 @@ export const CustomIndicator: Story = {
         placeholder="Select one"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>State</Label>
         <Autocomplete.Trigger>
@@ -903,7 +984,7 @@ export const Controlled: Story = {
           placeholder="Select a state"
           selectionMode="single"
           value={state}
-          onChange={(value) => setState(value)}
+          onChange={setState}
         >
           <Label>State (controlled)</Label>
           <Autocomplete.Trigger>
@@ -1196,7 +1277,7 @@ export const UserSelection: Story = {
         placeholder="Select a user"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>User</Label>
         <Autocomplete.Trigger>
@@ -1427,7 +1508,7 @@ export const LocationSearch: Story = {
         placeholder="Search for a city"
         selectionMode="single"
         value={selectedKey}
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>City</Label>
         <Autocomplete.Trigger>

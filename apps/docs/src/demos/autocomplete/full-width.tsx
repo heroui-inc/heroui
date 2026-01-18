@@ -26,7 +26,7 @@ export function FullWidth() {
         selectionMode="single"
         value={selectedKey}
         variant="secondary"
-        onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+        onChange={setSelectedKey}
       >
         <Label>State</Label>
         <Autocomplete.Trigger>

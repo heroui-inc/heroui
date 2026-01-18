@@ -63,7 +63,7 @@ export function UserSelection() {
       placeholder="Select a user"
       selectionMode="single"
       value={selectedKey}
-      onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+      onChange={setSelectedKey}
     >
       <Label>User</Label>
       <Autocomplete.Trigger>

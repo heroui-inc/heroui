@@ -51,7 +51,7 @@ export function LocationSearch() {
       placeholder="Search for a city"
       selectionMode="single"
       value={selectedKey}
-      onChange={(key: Key | Key[] | null) => setSelectedKey(key as Key | null)}
+      onChange={setSelectedKey}
     >
       <Label>City</Label>
       <Autocomplete.Trigger>

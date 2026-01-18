@@ -47,7 +47,7 @@ export function Variants() {
             selectionMode="single"
             value={selectedKey1}
             variant="primary"
-            onChange={(key: Key | Key[] | null) => setSelectedKey1(key as Key | null)}
+            onChange={setSelectedKey1}
           >
             <Label>Primary variant</Label>
             <Autocomplete.Trigger>
@@ -81,7 +81,7 @@ export function Variants() {
             selectionMode="single"
             value={selectedKey2}
             variant="secondary"
-            onChange={(key: Key | Key[] | null) => setSelectedKey2(key as Key | null)}
+            onChange={setSelectedKey2}
           >
             <Label>Secondary variant</Label>
             <Autocomplete.Trigger>

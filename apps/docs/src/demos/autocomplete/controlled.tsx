@@ -27,7 +27,7 @@ export function Controlled() {
         placeholder="Select a state"
         selectionMode="single"
         value={state}
-        onChange={(value) => setState(value)}
+        onChange={setState}
       >
         <Label>State (controlled)</Label>
         <Autocomplete.Trigger>
