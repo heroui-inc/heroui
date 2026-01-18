@@ -1,10 +1,11 @@
 "use client";
 
 import type {ToastContentValue} from "./toast-queue";
-import type {ToastVariants} from "./toast.styles";
+import type {ToastVariants} from "@heroui/styles";
 import type {CSSProperties, ComponentPropsWithRef} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components";
 
+import {toastVariants} from "@heroui/styles";
 import React, {createContext, useCallback, useContext, useMemo} from "react";
 import {
   Button as ButtonPrimitive,
@@ -19,7 +20,6 @@ import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 
 import {ToastQueue, toast as defaultToast} from "./toast-queue";
-import {toastVariants} from "./toast.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Context
