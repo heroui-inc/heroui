@@ -62,11 +62,6 @@
   & svg:not([data-slot="spinner"] svg, [data-slot="link-icon"] svg) {
     @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
   }
-
-  /* Link as Button */
-  &.link {
-    @apply gap-0 no-underline;
-  }
 }
 
 /* Size variants */
