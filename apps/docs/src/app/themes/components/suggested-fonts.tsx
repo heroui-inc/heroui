@@ -83,7 +83,7 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
           <Plus className="size-4" />
         </Button>
       </div>
-      <ScrollShadow className="max-h-56 pb-3">
+      <ScrollShadow className="max-h-56 pb-3" size={15}>
         <ListBox
           disallowEmptySelection
           aria-label="Font Family"
@@ -106,7 +106,7 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
               textValue={item.label}
               className={cn(
                 "group border-separator-on-surface relative flex h-[83px] w-[95px] flex-col items-center justify-center gap-[5px] rounded-2xl border",
-                "data-[selected=true]:border-2 data-[selected=true]:border-foreground",
+                "data-[selected=true]:border-foreground",
                 "data-[hovered=true]:bg-default",
               )}
               style={{
