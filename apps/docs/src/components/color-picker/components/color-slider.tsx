@@ -19,33 +19,33 @@ const colorSliderTrackStyles = tv({
 });
 
 const colorThumbStyles = tv({
-  base: "size-4 rounded-full border-[1.5px] border-white shadow-lg forced-colors:bg-[Canvas]!",
+  base: "size-4 cursor-grab rounded-full border-[1.5px] border-white shadow-lg data-[dragging=true]:cursor-grabbing",
   extend: focusRing,
 });
 
 export function ColorSlider({
-  channel,
   className,
-  colorSpace,
   orientation = "horizontal",
+  thumbBackground,
+  trackBackground,
+  ...props
 }: ColorSliderProps) {
   return (
     <AriaColorSlider
-      channel={channel}
-      className={cn("group flex w-full max-w-[184px] flex-col gap-1", className)}
-      colorSpace={colorSpace}
+      className={cn("group flex w-full flex-col gap-1", className)}
       orientation={orientation}
+      {...props}
     >
       <SliderTrack
         className={colorSliderTrackStyles({orientation})}
         style={({defaultStyle}) => ({
-          background: `${defaultStyle.background}`,
+          background: trackBackground || `${defaultStyle.background}`,
         })}
       >
         <ColorThumb
           className={cn(colorThumbStyles(), orientation === "horizontal" ? "top-1/2" : "left-1/2")}
           style={({color}) => ({
-            background: color.toString("css"),
+            background: thumbBackground || color.toString("css"),
           })}
         />
       </SliderTrack>

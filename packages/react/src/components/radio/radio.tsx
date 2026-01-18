@@ -3,12 +3,11 @@
 import type {ComponentPropsWithRef} from "react";
 import type {RadioRenderProps} from "react-aria-components";
 
+import {radioVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {Radio as RadioPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-
-import {radioVariants} from "./radio.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Context

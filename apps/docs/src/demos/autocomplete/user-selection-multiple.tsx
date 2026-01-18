@@ -107,6 +107,7 @@ export function UserSelectionMultiple() {
             );
           }}
         </Autocomplete.Value>
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>

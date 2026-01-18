@@ -56,6 +56,7 @@ export function LocationSearch() {
       <Label>City</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>

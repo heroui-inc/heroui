@@ -24,6 +24,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {listboxSectionVariants} from "./listbox-section.styles";
+export {listboxSectionVariants} from "@heroui/styles";
 
-export type {ListBoxSectionVariants} from "./listbox-section.styles";
+export type {ListBoxSectionVariants} from "@heroui/styles";

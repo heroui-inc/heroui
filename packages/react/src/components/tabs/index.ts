@@ -42,6 +42,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {tabsVariants} from "./tabs.styles";
+export {tabsVariants} from "@heroui/styles";
 
-export type {TabsVariants} from "./tabs.styles";
+export type {TabsVariants} from "@heroui/styles";

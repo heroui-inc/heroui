@@ -24,6 +24,6 @@ export type {SpinnerRootProps, SpinnerRootProps as SpinnerProps} from "./spinner
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {spinnerVariants} from "./spinner.styles";
+export {spinnerVariants} from "@heroui/styles";
 
-export type {SpinnerVariants} from "./spinner.styles";
+export type {SpinnerVariants} from "@heroui/styles";

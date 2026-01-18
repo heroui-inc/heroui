@@ -68,6 +68,7 @@ export function MultipleSelect() {
             );
           }}
         </Autocomplete.Value>
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>

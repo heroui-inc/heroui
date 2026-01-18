@@ -1,13 +1,12 @@
 "use client";
 
-import type {FieldErrorVariants} from "./field-error.styles";
+import type {FieldErrorVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {fieldErrorVariants} from "@heroui/styles";
 import {FieldError as FieldErrorPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-
-import {fieldErrorVariants} from "./field-error.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Field Error Root

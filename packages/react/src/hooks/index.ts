@@ -5,4 +5,3 @@ export * from "./use-measured-height";
 export * from "./use-mounted";
 export * from "./use-overlay-state";
 export * from "./use-safe-layout-effect";
-export * from "./use-filter";

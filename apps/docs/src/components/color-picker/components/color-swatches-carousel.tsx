@@ -48,7 +48,7 @@ export function ColorSwatchesCarousel({initialColorHex, swatches}: ColorSwatches
     <div className="flex items-center gap-2">
       <Button
         isIconOnly
-        className="size-5.5 min-w-5.5 shrink-0 rounded-full"
+        className="size-5 min-w-5 shrink-0 rounded-full"
         isDisabled={isFirstPage}
         size="sm"
         variant="ghost"
@@ -69,7 +69,7 @@ export function ColorSwatchesCarousel({initialColorHex, swatches}: ColorSwatches
                 {pageSwatches.map((swatch) => (
                   <ColorSwatchPickerItem
                     key={swatch}
-                    className="size-4 rounded-full transition-all data-selected:ring-2 data-selected:ring-foreground data-selected:ring-offset-1"
+                    className="size-4 rounded-full transition-all data-selected:ring-1 data-selected:ring-foreground data-selected:ring-offset-1"
                     color={swatch}
                   >
                     <AriaColorSwatch
@@ -85,7 +85,7 @@ export function ColorSwatchesCarousel({initialColorHex, swatches}: ColorSwatches
       </div>
       <Button
         isIconOnly
-        className="size-5.5 min-w-5.5 shrink-0 rounded-full"
+        className="size-5 min-w-5 shrink-0 rounded-full"
         isDisabled={isLastPage}
         size="sm"
         variant="ghost"

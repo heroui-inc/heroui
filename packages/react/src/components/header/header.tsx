@@ -2,9 +2,8 @@
 
 import type {ComponentPropsWithRef} from "react";
 
+import {headerVariants} from "@heroui/styles";
 import {Header as HeaderPrimitive} from "react-aria-components";
-
-import {headerVariants} from "./header.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Header Root

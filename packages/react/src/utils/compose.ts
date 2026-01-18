@@ -3,6 +3,9 @@
 import {composeRenderProps} from "react-aria-components";
 import {cx} from "tailwind-variants";
 
+// Re-export utility classes from @heroui/styles for backward compatibility
+export {disabledClasses, focusRingClasses, ariaDisabledClasses} from "@heroui/styles";
+
 function composeTwRenderProps<T>(
   className: string | ((v: T) => string) | undefined,
   tailwind?: string | ((v: T) => string | undefined),
@@ -23,13 +26,4 @@ export const composeSlotClassName = (
   return typeof slotFn === "function" ? slotFn({...(variants ?? {}), className}) : className;
 };
 
-const focusRingClasses =
-  "focus-visible:ring-focus focus-visible:ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
-
-const disabledClasses =
-  "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-[var(--disabled-opacity)]";
-
-const ariaDisabledClasses =
-  "aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-[var(--disabled-opacity)]";
-
-export {composeTwRenderProps, focusRingClasses, disabledClasses, ariaDisabledClasses};
+export {composeTwRenderProps};

@@ -28,6 +28,7 @@ export function WithSections() {
       <Label>Country</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>

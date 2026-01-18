@@ -1,23 +1,248 @@
 import type {ThemeVariables} from "../constants";
+import type {GeneratedThemeColors, ThemeColor} from "./generate-theme-colors";
 
 import {adaptiveColors, fontMap, radiusCssMap} from "../constants";
 
-import {calculateForeground} from "./calculate-foreground";
+import {
+  calculateAccentForeground,
+  generateThemeColors,
+  getAccentDerivedVariables,
+  getColorVariablesForElement,
+  getFieldDerivedVariables,
+  getSemanticDerivedVariables,
+} from "./generate-theme-colors";
+
+/**
+ * Get only the base CSS variables (those defined in variables.css)
+ * Excludes derived variables like --color-accent-hover, --color-accent-soft, etc.
+ */
+function getBaseColorVariables(
+  colors: GeneratedThemeColors,
+  theme: "light" | "dark",
+): Record<string, string> {
+  const isLight = theme === "light";
+  const getValue = (color: ThemeColor) => (isLight ? color.oklchLight : color.oklchDark);
+
+  return {
+    "--accent": getValue(colors.accent),
+    "--accent-foreground": getValue(colors.accentForeground),
+    "--background": getValue(colors.background),
+    "--border": getValue(colors.border),
+    "--danger": getValue(colors.danger),
+    "--danger-foreground": getValue(colors.dangerForeground),
+    "--default": getValue(colors.default),
+    "--default-foreground": getValue(colors.defaultForeground),
+    "--field-background": getValue(colors.fieldBackground),
+    "--field-foreground": getValue(colors.fieldForeground),
+    "--field-placeholder": getValue(colors.fieldPlaceholder),
+    "--focus": getValue(colors.focus),
+    "--foreground": getValue(colors.foreground),
+    "--muted": getValue(colors.muted),
+    "--overlay": getValue(colors.overlay),
+    "--overlay-foreground": getValue(colors.overlayForeground),
+    "--scrollbar": getValue(colors.scrollbar),
+    "--segment": getValue(colors.segment),
+    "--segment-foreground": getValue(colors.segmentForeground),
+    "--separator": getValue(colors.separator),
+    "--success": getValue(colors.success),
+    "--success-foreground": getValue(colors.successForeground),
+    "--surface": getValue(colors.surface),
+    "--surface-foreground": getValue(colors.surfaceForeground),
+    "--warning": getValue(colors.warning),
+    "--warning-foreground": getValue(colors.warningForeground),
+  };
+}
+
+/**
+ * Build CSS variable declarations for a given theme
+ */
+function buildColorVarsCSS(
+  colors: GeneratedThemeColors,
+  theme: "light" | "dark",
+  indentation = "  ",
+): string {
+  const vars = getColorVariablesForElement(colors, theme);
+
+  // Get accent derived variables
+  const accentValue = theme === "light" ? colors.accent.oklchLight : colors.accent.oklchDark;
+  const accentFgValue =
+    theme === "light" ? colors.accentForeground.oklchLight : colors.accentForeground.oklchDark;
+  const accentDerived = getAccentDerivedVariables(accentValue, accentFgValue);
+
+  // Get semantic derived variables
+  const successDerived = getSemanticDerivedVariables(
+    "success",
+    vars["--success"] ?? "",
+    vars["--success-foreground"] ?? "",
+  );
+  const warningDerived = getSemanticDerivedVariables(
+    "warning",
+    vars["--warning"] ?? "",
+    vars["--warning-foreground"] ?? "",
+  );
+  const dangerDerived = getSemanticDerivedVariables(
+    "danger",
+    vars["--danger"] ?? "",
+    vars["--danger-foreground"] ?? "",
+  );
+
+  // Default hover
+  const defaultHover = `color-mix(in oklab, ${vars["--default"]} 90%, ${vars["--foreground"]} 10%)`;
+
+  // Get field derived variables
+  const fieldDerived = getFieldDerivedVariables(
+    vars["--field-background"] ?? "",
+    vars["--field-foreground"] ?? "",
+    vars["--field-placeholder"] ?? "",
+    vars["--border"] ?? "",
+  );
+
+  // Merge all vars
+  const allVars = {
+    ...vars,
+    ...accentDerived,
+    ...successDerived,
+    ...warningDerived,
+    ...dangerDerived,
+    ...fieldDerived,
+    "--color-default-hover": defaultHover,
+  };
+
+  return Object.entries(allVars)
+    .map(([prop, val]) => `${indentation}${prop}: ${val};`)
+    .join("\n");
+}
 
 /**
  * Generates CSS variables that users can copy-paste into their global.css.
- * Always shows all customizable variables with their current values.
+ * Generates comprehensive theme colors based on hue, chroma, and lightness.
  *
  * @see https://v3.heroui.com/docs/react/getting-started/theming
  */
 export function generateCssVariables(variables: ThemeVariables): string {
   const font = fontMap[variables.fontFamily];
-  const adaptiveConfig = adaptiveColors[variables.accentColor];
+  const {chroma, hue, lightness} = variables;
+  const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
+  const adaptiveConfig = adaptiveColors[accentColor];
+
+  // Generate theme colors
+  const colors = generateThemeColors({chroma, hue, lightness});
+
+  // Build radius CSS
+  const radiusCSS = `
+  /* Border Radius */
+  --radius: ${radiusCssMap[variables.radius]};
+  --field-radius: ${radiusCssMap[variables.formRadius]};`;
+
+  // Build font CSS
+  const fontCSS = `
+  /* Font Family */
+  /* Make sure to load ${font.label} font in your app */
+  --font-sans: var(${font.variable});`;
 
   // Check if this is an adaptive color that needs light/dark variants
   if (adaptiveConfig) {
-    const lightForeground = calculateForeground(adaptiveConfig.light);
-    const darkForeground = calculateForeground(adaptiveConfig.dark);
+    const lightFg = calculateAccentForeground(1, 0, 0); // Light accent needs dark fg
+    const darkFg = calculateAccentForeground(0, 0, 0); // Dark accent needs light fg
+
+    // For adaptive colors, we override the accent with predefined values
+    const lightVars = getColorVariablesForElement(colors, "light");
+    const darkVars = getColorVariablesForElement(colors, "dark");
+
+    // Get accent derived for both modes
+    const accentDerivedLight = getAccentDerivedVariables(adaptiveConfig.light, lightFg);
+    const accentDerivedDark = getAccentDerivedVariables(adaptiveConfig.dark, darkFg);
+
+    // Get semantic derived for both modes
+    const successDerivedLight = getSemanticDerivedVariables(
+      "success",
+      lightVars["--success"] ?? "",
+      lightVars["--success-foreground"] ?? "",
+    );
+    const warningDerivedLight = getSemanticDerivedVariables(
+      "warning",
+      lightVars["--warning"] ?? "",
+      lightVars["--warning-foreground"] ?? "",
+    );
+    const dangerDerivedLight = getSemanticDerivedVariables(
+      "danger",
+      lightVars["--danger"] ?? "",
+      lightVars["--danger-foreground"] ?? "",
+    );
+
+    const successDerivedDark = getSemanticDerivedVariables(
+      "success",
+      darkVars["--success"] ?? "",
+      darkVars["--success-foreground"] ?? "",
+    );
+    const warningDerivedDark = getSemanticDerivedVariables(
+      "warning",
+      darkVars["--warning"] ?? "",
+      darkVars["--warning-foreground"] ?? "",
+    );
+    const dangerDerivedDark = getSemanticDerivedVariables(
+      "danger",
+      darkVars["--danger"] ?? "",
+      darkVars["--danger-foreground"] ?? "",
+    );
+
+    // Default hover
+    const defaultHoverLight = `color-mix(in oklab, ${lightVars["--default"]} 90%, ${lightVars["--foreground"]} 10%)`;
+    const defaultHoverDark = `color-mix(in oklab, ${darkVars["--default"]} 90%, ${darkVars["--foreground"]} 10%)`;
+
+    // Get field derived for both modes
+    const fieldDerivedLight = getFieldDerivedVariables(
+      lightVars["--field-background"] ?? "",
+      lightVars["--field-foreground"] ?? "",
+      lightVars["--field-placeholder"] ?? "",
+      lightVars["--border"] ?? "",
+    );
+    const fieldDerivedDark = getFieldDerivedVariables(
+      darkVars["--field-background"] ?? "",
+      darkVars["--field-foreground"] ?? "",
+      darkVars["--field-placeholder"] ?? "",
+      darkVars["--border"] ?? "",
+    );
+
+    // Build light mode vars string
+    const lightAccentVars = {
+      "--accent": adaptiveConfig.light,
+      "--accent-foreground": lightFg,
+      "--focus": adaptiveConfig.light,
+    };
+    const allLightVars = {
+      ...lightVars,
+      ...lightAccentVars,
+      ...accentDerivedLight,
+      ...successDerivedLight,
+      ...warningDerivedLight,
+      ...dangerDerivedLight,
+      ...fieldDerivedLight,
+      "--color-default-hover": defaultHoverLight,
+    };
+    const lightVarsCSS = Object.entries(allLightVars)
+      .map(([prop, val]) => `  ${prop}: ${val};`)
+      .join("\n");
+
+    // Build dark mode vars string
+    const darkAccentVars = {
+      "--accent": adaptiveConfig.dark,
+      "--accent-foreground": darkFg,
+      "--focus": adaptiveConfig.dark,
+    };
+    const allDarkVars = {
+      ...darkVars,
+      ...darkAccentVars,
+      ...accentDerivedDark,
+      ...successDerivedDark,
+      ...warningDerivedDark,
+      ...dangerDerivedDark,
+      ...fieldDerivedDark,
+      "--color-default-hover": defaultHoverDark,
+    };
+    const darkVarsCSS = Object.entries(allDarkVars)
+      .map(([prop, val]) => `  ${prop}: ${val};`)
+      .join("\n");
 
     return `/*
  * HeroUI Theme Customization
@@ -26,14 +251,108 @@ export function generateCssVariables(variables: ThemeVariables): string {
  */
 
 :root,
-  .light,
-  .default,
-  [data-theme="light"],
-  [data-theme="default"] {
-  /* Accent & Focus Color (Light Mode) */
-  --accent: ${adaptiveConfig.light};
-  --accent-foreground: ${lightForeground};
-  --focus: ${adaptiveConfig.light};
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  /* Theme Colors (Light Mode) */
+${lightVarsCSS}
+${radiusCSS}
+${fontCSS}
+}
+
+.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* Theme Colors (Dark Mode) */
+${darkVarsCSS}
+}`;
+  }
+
+  // Non-adaptive color: generate complete theme
+  const lightVarsCSS = buildColorVarsCSS(colors, "light");
+  const darkVarsCSS = buildColorVarsCSS(colors, "dark");
+
+  return `/*
+ * HeroUI Theme Customization
+ * Add this to your global.css after importing @heroui/styles
+ * @see https://v3.heroui.com/docs/react/getting-started/theming
+ */
+
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  /* Theme Colors (Light Mode) */
+${lightVarsCSS}
+${radiusCSS}
+${fontCSS}
+}
+
+.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* Theme Colors (Dark Mode) */
+${darkVarsCSS}
+}`;
+}
+
+/**
+ * Generates CSS output with only the base variables found in variables.css.
+ * Does not include derived variables like --color-accent-hover, --color-accent-soft, etc.
+ * These derived variables are automatically computed by theme.css.
+ */
+export function generateMinimalCssVariables(variables: ThemeVariables): string {
+  const font = fontMap[variables.fontFamily];
+  const {chroma, hue, lightness} = variables;
+  const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
+  const adaptiveConfig = adaptiveColors[accentColor];
+
+  // Generate theme colors
+  const colors = generateThemeColors({chroma, hue, lightness});
+
+  // Get base variables for both themes
+  const lightVars = getBaseColorVariables(colors, "light");
+  const darkVars = getBaseColorVariables(colors, "dark");
+
+  // Override accent for adaptive colors (like black/white)
+  if (adaptiveConfig) {
+    const lightFg = calculateAccentForeground(1, 0, 0);
+    const darkFg = calculateAccentForeground(0, 0, 0);
+
+    lightVars["--accent"] = adaptiveConfig.light;
+    lightVars["--accent-foreground"] = lightFg;
+    lightVars["--focus"] = adaptiveConfig.light;
+
+    darkVars["--accent"] = adaptiveConfig.dark;
+    darkVars["--accent-foreground"] = darkFg;
+    darkVars["--focus"] = adaptiveConfig.dark;
+  }
+
+  // Build CSS strings
+  const lightVarsCSS = Object.entries(lightVars)
+    .map(([prop, val]) => `  ${prop}: ${val};`)
+    .join("\n");
+
+  const darkVarsCSS = Object.entries(darkVars)
+    .map(([prop, val]) => `  ${prop}: ${val};`)
+    .join("\n");
+
+  return `/*
+ * HeroUI Theme Customization
+ * Add this to your global.css after importing @heroui/styles
+ * Only includes base variables from variables.css
+ * @see https://v3.heroui.com/docs/react/getting-started/theming
+ */
+
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  /* Theme Colors (Light Mode) */
+${lightVarsCSS}
 
   /* Border Radius */
   --radius: ${radiusCssMap[variables.radius]};
@@ -47,33 +366,7 @@ export function generateCssVariables(variables: ThemeVariables): string {
 .dark,
 [data-theme="dark"] {
   color-scheme: dark;
-  /* Accent & Focus Color (Dark Mode) */
-  --accent: ${adaptiveConfig.dark};
-  --accent-foreground: ${darkForeground};
-  --focus: ${adaptiveConfig.dark};
-}`;
-  }
-
-  const accentForeground = calculateForeground(variables.accentColor);
-
-  return `/*
- * HeroUI Theme Customization
- * Add this to your global.css after importing @heroui/styles
- * @see https://v3.heroui.com/docs/react/getting-started/theming
- */
-
-:root {
-  /* Accent & Focus Color */
-  --accent: ${variables.accentColor};
-  --accent-foreground: ${accentForeground};
-  --focus: ${variables.accentColor};
-
-  /* Border Radius */
-  --radius: ${radiusCssMap[variables.radius]};
-  --field-radius: ${radiusCssMap[variables.formRadius]};
-
-  /* Font Family */
-  /* Make sure to load ${font.label} font in your app */
-  --font-sans: var(${font.variable});
+  /* Theme Colors (Dark Mode) */
+${darkVarsCSS}
 }`;
 }

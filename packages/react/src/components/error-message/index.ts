@@ -27,6 +27,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {errorMessageVariants} from "./error-message.styles";
+export {errorMessageVariants} from "@heroui/styles";
 
-export type {ErrorMessageVariants} from "./error-message.styles";
+export type {ErrorMessageVariants} from "@heroui/styles";
