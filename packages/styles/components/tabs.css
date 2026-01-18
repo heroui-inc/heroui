@@ -171,7 +171,7 @@
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
-  transition-duration: 320ms;
+  transition-duration: 250ms;
   transition-property: translate, width, height;
   transition-timing-function: var(--ease-out-fluid);
   @apply motion-reduce:transition-none;

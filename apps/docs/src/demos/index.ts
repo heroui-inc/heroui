@@ -1107,6 +1107,10 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.Secondary,
     file: "tabs/secondary.tsx",
   },
+  "tabs-secondary-vertical": {
+    component: TabsDemos.SecondaryVertical,
+    file: "tabs/secondary-vertical.tsx",
+  },
   // TagGroup demos
   "tag-group-basic": {
     component: TagGroupDemos.Basic,

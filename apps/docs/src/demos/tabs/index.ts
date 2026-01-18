@@ -4,3 +4,4 @@ export {Disabled} from "./disabled";
 export {CustomStyles} from "./custom-styles";
 export {WithoutSeparator} from "./without-separator";
 export {Secondary} from "./secondary";
+export {SecondaryVertical} from "./secondary-vertical";
