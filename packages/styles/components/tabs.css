@@ -171,8 +171,78 @@
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
-  transition-duration: 320ms;
+  transition-duration: 250ms;
   transition-property: translate, width, height;
   transition-timing-function: var(--ease-out-fluid);
   @apply motion-reduce:transition-none;
+}
+
+/* ==========================================================================
+   Secondary Variant
+   ========================================================================== */
+
+.tabs--secondary {
+  /* Tab list - remove background, add bottom/left border */
+  .tabs__list {
+    @apply bg-transparent p-0;
+
+    border-radius: 0;
+
+    /* Horizontal orientation - bottom border, scrollable */
+    &[data-orientation="horizontal"] {
+      @apply border-b border-border;
+
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: clip;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    /* Vertical orientation - left border */
+    &[data-orientation="vertical"] {
+      @apply border-l border-border;
+    }
+  }
+
+  /* Tab - adjust for secondary variant */
+  .tabs__tab {
+    @apply rounded-none;
+
+    /* Hide separators in secondary variant */
+    &:not(:first-child):before {
+      display: none;
+    }
+
+    /* Selected state - use text-foreground */
+    &[data-selected="true"] {
+      @apply text-foreground;
+    }
+  }
+
+  /* Tab indicator - line style */
+  .tabs__indicator {
+    @apply bg-accent;
+
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* Horizontal orientation - bottom line indicator */
+  &[data-orientation="horizontal"] .tabs__indicator {
+    top: auto;
+    bottom: 0;
+    height: 2px;
+  }
+
+  /* Vertical orientation - left line indicator */
+  &[data-orientation="vertical"] .tabs__indicator {
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+  }
 }

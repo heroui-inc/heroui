@@ -3,6 +3,9 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const tabsVariants = tv({
+  defaultVariants: {
+    variant: "primary",
+  },
   slots: {
     base: "tabs",
     tab: "tabs__tab",
@@ -10,6 +13,14 @@ export const tabsVariants = tv({
     tabList: "tabs__list",
     tabListContainer: "tabs__list-container",
     tabPanel: "tabs__panel",
+  },
+  variants: {
+    variant: {
+      primary: {},
+      secondary: {
+        base: "tabs--secondary",
+      },
+    },
   },
 });
 
