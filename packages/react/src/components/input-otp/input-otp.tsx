@@ -1,18 +1,16 @@
 "use client";
 
-import type {InputOTPVariants} from "./input-otp.styles";
+import type {InputOTPVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {ValidationResult} from "react-aria-components";
 
+import {inputOTPVariants} from "@heroui/styles";
 import {OTPInput, OTPInputContext} from "input-otp";
 import React, {createContext, useContext} from "react";
 import {FieldErrorContext} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
-
-import {inputOTPVariants} from "./input-otp.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Context
@@ -45,20 +43,15 @@ interface InputOTPRootProps
 
 const InputOTPRoot = ({
   className,
-  inSurface,
   inputClassName,
   isDisabled = false,
   isInvalid = false,
   validationDetails,
   validationErrors = [],
+  variant,
   ...props
 }: InputOTPRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-  const slots = React.useMemo(
-    () => inputOTPVariants({inSurface: resolvedInSurface}),
-    [resolvedInSurface],
-  );
+  const slots = React.useMemo(() => inputOTPVariants({variant}), [variant]);
 
   const validation = React.useMemo(
     () =>

@@ -45,6 +45,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {inputGroupVariants} from "./input-group.styles";
+export {inputGroupVariants} from "@heroui/styles";
 
-export type {InputGroupVariants} from "./input-group.styles";
+export type {InputGroupVariants} from "@heroui/styles";

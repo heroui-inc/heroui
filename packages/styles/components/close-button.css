@@ -19,7 +19,7 @@
   @apply transform-gpu motion-reduce:transition-none;
 
   /* Focus visible state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -45,17 +45,16 @@
 
 /* Variants */
 .close-button--default {
-  @apply bg-transparent text-muted;
+  @apply bg-default text-muted;
 
   &:active,
   &[data-pressed="true"] {
-    @apply bg-default-hover text-foreground;
   }
 
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-default text-foreground;
+      @apply bg-default-hover;
     }
   }
 

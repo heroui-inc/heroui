@@ -1,16 +1,15 @@
 "use client";
 
-import type {TimeFieldVariants} from "./time-field.styles";
+import type {TimeFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {TimeValue} from "react-aria-components";
 
+import {timeFieldVariants} from "@heroui/styles";
 import React from "react";
 import {TimeField as TimeFieldPrimitive} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
-
-import {timeFieldVariants} from "./time-field.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * TimeField Root

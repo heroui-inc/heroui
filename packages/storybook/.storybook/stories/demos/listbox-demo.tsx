@@ -1,8 +1,6 @@
-import React from "react";
-
+import {Pencil, SquarePlus, TrashBin} from "@gravity-ui/icons";
 import {Description, Header, Kbd, Label, ListBox, Separator, Surface} from "@heroui/react";
-
-import {SquarePlus, Pencil, TrashBin} from "@gravity-ui/icons";
+import React from "react";
 
 export function ListBoxDemo() {
   return (
@@ -59,4 +57,3 @@ export function ListBoxDemo() {
     </Surface>
   );
 }
-

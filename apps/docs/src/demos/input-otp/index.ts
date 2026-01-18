@@ -4,6 +4,7 @@ export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FourDigits} from "./four-digits";
 export {OnComplete} from "./on-complete";
-export {InSurface} from "./in-surface";
+export {OnSurface} from "./on-surface";
+export {Variants} from "./variants";
 export {WithPattern} from "./with-pattern";
 export {WithValidation} from "./with-validation";

@@ -1,21 +1,21 @@
 "use client";
 
+import type {TagVariants} from "../tag";
 import type {ComponentPropsWithRef} from "react";
 
+import {tagGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext, useMemo} from "react";
 import {TagGroup as TagGroupPrimitive, TagList as TagListPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-
-import {tagGroupVariants} from "./tag-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * TagGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupContext = {
   slots?: ReturnType<typeof tagGroupVariants>;
-  size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface" | "on-form-field";
+  size?: TagVariants["size"];
+  variant?: TagVariants["variant"];
 };
 
 const TagGroupContext = createContext<TagGroupContext>({});
@@ -24,8 +24,8 @@ const TagGroupContext = createContext<TagGroupContext>({});
  * TagGroup Root
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
-  size?: "sm" | "md" | "lg";
-  variant?: "default" | "surface" | "on-form-field";
+  size?: TagVariants["size"];
+  variant?: TagVariants["variant"];
 };
 
 const TagGroupRoot = ({children, className, size, variant, ...restProps}: TagGroupRootProps) => {

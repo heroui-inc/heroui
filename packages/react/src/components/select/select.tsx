@@ -1,10 +1,11 @@
 "use client";
 
-import type {SelectVariants} from "./select.styles";
 import type {Booleanish} from "../../utils/assertion";
 import type {SurfaceVariants} from "../surface";
+import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {selectVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button as ButtonPrimitive,
@@ -18,8 +19,6 @@ import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
-
-import {selectVariants} from "./select.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Select Context
@@ -42,15 +41,10 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
   children,
   className,
   fullWidth,
-  inSurface,
+  variant,
   ...props
 }: SelectRootProps<T, M>) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-  const slots = React.useMemo(
-    () => selectVariants({fullWidth, inSurface: resolvedInSurface}),
-    [fullWidth, resolvedInSurface],
-  );
+  const slots = React.useMemo(() => selectVariants({fullWidth, variant}), [fullWidth, variant]);
 
   return (
     <SelectContext value={{slots}}>

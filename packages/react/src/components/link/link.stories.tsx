@@ -28,10 +28,14 @@ const DefaultTemplate = (_props: Link["RootProps"]) => (
       <Link.Icon />
     </Link>
     <Link
-      className={buttonVariants({className: "px-3", size: "md", variant: "tertiary"})}
       href="https://heroui.com"
       rel="noopener noreferrer"
       target="_blank"
+      className={buttonVariants({
+        className: "gap-0 px-3 py-0.5 no-underline",
+        size: "md",
+        variant: "tertiary",
+      })}
     >
       HeroUI
       <Link.Icon className="h-2 w-2" />

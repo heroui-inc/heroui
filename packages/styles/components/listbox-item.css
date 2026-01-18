@@ -32,7 +32,7 @@
   }
 
   /* Focus visible state (keyboard focus only) */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -52,7 +52,7 @@
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-default-hover;
+      @apply bg-default;
     }
   }
 

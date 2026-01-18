@@ -1,5 +1,5 @@
-import React from "react";
 import {Label, Slider} from "@heroui/react";
+import React from "react";
 
 export function SliderDemo() {
   return (
@@ -22,4 +22,3 @@ export function SliderDemo() {
     </div>
   );
 }
-

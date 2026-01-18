@@ -1,8 +1,9 @@
 "use client";
 
-import type {NumberFieldVariants} from "./number-field.styles";
+import type {NumberFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {numberFieldVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button as ButtonPrimitive,
@@ -13,9 +14,6 @@ import {
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconMinus, IconPlus} from "../icons";
-import {SurfaceContext} from "../surface";
-
-import {numberFieldVariants} from "./number-field.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * NumberField Context
@@ -36,15 +34,12 @@ const NumberFieldRoot = ({
   children,
   className,
   fullWidth,
-  inSurface,
+  variant,
   ...props
 }: NumberFieldRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-
   const slots = React.useMemo(
-    () => numberFieldVariants({fullWidth, inSurface: resolvedInSurface}),
-    [fullWidth, resolvedInSurface],
+    () => numberFieldVariants({fullWidth, variant}),
+    [fullWidth, variant],
   );
 
   return (
@@ -82,18 +77,14 @@ const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps
 /* -------------------------------------------------------------------------------------------------
  * NumberField Input
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
-  inSurface?: "default" | "secondary" | "tertiary";
-}
+interface NumberFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
-const NumberFieldInput = ({className, inSurface, ...props}: NumberFieldInputProps) => {
+const NumberFieldInput = ({className, ...props}: NumberFieldInputProps) => {
   const {slots} = useContext(NumberFieldContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
+      className={composeTwRenderProps(className, slots?.input())}
       data-slot="number-field-input"
       {...props}
     />

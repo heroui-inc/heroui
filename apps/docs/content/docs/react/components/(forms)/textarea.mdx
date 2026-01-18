@@ -35,11 +35,20 @@ import { TextArea } from '@heroui/react';
 
 <ComponentPreview name="textarea-full-width" />
 
+### Variants
+
+The TextArea component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="textarea-variants" />
+
 ### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, TextArea automatically applies in-surface styling.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
-<ComponentPreview name="textarea-in-surface" />
+<ComponentPreview name="textarea-on-surface" />
 
 <RelatedComponents component="textarea" />
 
@@ -129,6 +138,6 @@ TextArea accepts all standard HTML `<textarea>` attributes plus the following:
 | `minLength` | `number` | - | Minimum number of characters. |
 | `wrap` | `'soft' \| 'hard'` | - | How text wraps when submitted. |
 | `fullWidth` | `boolean` | `false` | Whether the textarea should take full width of its container |
-| `inSurface` | `"transparent" \| "default" \| "secondary" \| "tertiary"` | `false` | Whether the textarea is displayed in a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 > For validation props like `isInvalid`, `isRequired`, and error handling, use **[TextField](/docs/components/text-field)** with TextArea as a child component.

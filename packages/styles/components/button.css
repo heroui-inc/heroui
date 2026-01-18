@@ -27,7 +27,7 @@
   color: var(--button-fg);
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -58,8 +58,8 @@
     }
   }
 
-  /* SVG icon styling - exclude spinner svgs */
-  & svg:not([data-slot="spinner"] svg) {
+  /* SVG icon styling - exclude spinner and link-icon svgs */
+  & svg:not([data-slot="spinner"] svg, [data-slot="link-icon"] svg) {
     @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
   }
 }
@@ -68,7 +68,7 @@
 .button--sm {
   @apply h-9 px-3 md:h-8;
 
-  & svg:not([data-slot="spinner"] svg) {
+  & svg:not([data-slot="spinner"] svg, [data-slot="link-icon"] svg) {
     @apply size-4;
   }
 
@@ -103,7 +103,7 @@
   --button-bg: var(--color-default);
   --button-bg-hover: var(--color-default-hover);
   --button-bg-pressed: var(--color-default-hover);
-  --button-fg: var(--color-accent);
+  --button-fg: var(--color-accent-soft-foreground);
 }
 
 .button--tertiary {

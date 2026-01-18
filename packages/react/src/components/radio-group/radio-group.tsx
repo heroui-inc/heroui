@@ -1,15 +1,13 @@
 "use client";
 
-import type {RadioGroupVariants} from "./radio-group.styles";
+import type {RadioGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
-import React, {useContext} from "react";
+import {radioGroupVariants} from "@heroui/styles";
+import React from "react";
 import {RadioGroup as RadioGroupPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
-
-import {radioGroupVariants} from "./radio-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Group Root
@@ -17,13 +15,8 @@ import {radioGroupVariants} from "./radio-group.styles";
 interface RadioGroupRootProps
   extends ComponentPropsWithRef<typeof RadioGroupPrimitive>, RadioGroupVariants {}
 
-const RadioGroupRoot = ({children, className, inSurface, ...props}: RadioGroupRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-  const styles = React.useMemo(
-    () => radioGroupVariants({inSurface: resolvedInSurface}),
-    [resolvedInSurface],
-  );
+const RadioGroupRoot = ({children, className, variant, ...props}: RadioGroupRootProps) => {
+  const styles = React.useMemo(() => radioGroupVariants({variant}), [variant]);
 
   return (
     <RadioGroupPrimitive

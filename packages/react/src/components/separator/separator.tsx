@@ -1,14 +1,11 @@
 "use client";
 
-import type {SeparatorVariants} from "./separator.styles";
+import type {SeparatorVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
-import React, {useContext} from "react";
+import {separatorVariants} from "@heroui/styles";
+import React from "react";
 import {Separator as SeparatorPrimitive} from "react-aria-components";
-
-import {SurfaceContext} from "../surface";
-
-import {separatorVariants} from "./separator.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Separator Root
@@ -16,17 +13,7 @@ import {separatorVariants} from "./separator.styles";
 interface SeparatorRootProps
   extends ComponentPropsWithRef<typeof SeparatorPrimitive>, SeparatorVariants {}
 
-const SeparatorRoot = ({
-  className,
-  inSurface,
-  orientation = "horizontal",
-  ...props
-}: SeparatorRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  // Auto-detect surface from SurfaceContext if not explicitly provided
-  // If inSurface is not provided and no SurfaceContext, tv() will use default undefined (base style)
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-
+const SeparatorRoot = ({className, orientation = "horizontal", ...props}: SeparatorRootProps) => {
   return (
     <SeparatorPrimitive
       data-orientation={orientation}
@@ -34,7 +21,6 @@ const SeparatorRoot = ({
       orientation={orientation}
       className={separatorVariants({
         orientation,
-        inSurface: resolvedInSurface,
         className,
       })}
       {...props}

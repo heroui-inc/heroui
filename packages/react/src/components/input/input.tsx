@@ -1,34 +1,24 @@
 "use client";
 
-import type {InputVariants} from "./input.styles";
+import type {InputVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
-import React, {useContext} from "react";
+import {inputVariants} from "@heroui/styles";
+import React from "react";
 import {Input as InputPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
-import {SurfaceContext} from "../surface";
-import {TextFieldContext} from "../text-field";
-
-import {inputVariants} from "./input.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Input Root
  * -----------------------------------------------------------------------------------------------*/
 interface InputRootProps extends ComponentPropsWithRef<typeof InputPrimitive>, InputVariants {}
 
-const InputRoot = ({className, fullWidth, inSurface, ...rest}: InputRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const textFieldContext = useContext(TextFieldContext);
-  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
-
+const InputRoot = ({className, fullWidth, variant, ...rest}: InputRootProps) => {
   return (
     <InputPrimitive
+      className={composeTwRenderProps(className, inputVariants({fullWidth, variant}))}
       data-slot="input"
-      className={composeTwRenderProps(
-        className,
-        inputVariants({fullWidth, inSurface: resolvedInSurface}),
-      )}
       {...rest}
     />
   );

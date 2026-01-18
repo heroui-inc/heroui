@@ -6,6 +6,20 @@ icon: layers
 
 HeroUI uses composition patterns to create flexible, customizable components. Change the rendered element, compose components together, and maintain full control over markup.
 
+## Framework-Agnostic Styles
+
+HeroUI's variant functions are available in the `@heroui/styles` package, which can be used independently of React. This enables Vue, Svelte, and other frameworks to use HeroUI's design system:
+
+```tsx
+// Import directly from @heroui/styles (framework-agnostic)
+import { buttonVariants } from '@heroui/styles';
+
+// Or import from @heroui/react (re-exports the same functions)
+import { buttonVariants } from '@heroui/react';
+```
+
+Both imports work identically. Use `@heroui/styles` when building for non-React frameworks or when you want to avoid pulling in React dependencies.
+
 ## Polymorphic Styling
 
 Apply HeroUI styles to any element using variant functions or BEM classes. Extend component styles to framework components, native HTML elements, or custom components with full type safety.
@@ -15,7 +29,7 @@ Apply HeroUI styles to any element using variant functions or BEM classes. Exten
 You can use `buttonVariants` to style a Link component with button styles:
 
 ```tsx
-import { buttonVariants } from '@heroui/react';
+import { buttonVariants } from '@heroui/styles';
 import Link from 'next/link';
 
 // Style a Next.js Link as a primary button
@@ -51,18 +65,19 @@ import Link from 'next/link';
 When using a custom root element instead of HeroUI's Root component, child components cannot access context slots. You can manually pass `className` to child components using variant functions or BEM classes:
 
 ```tsx
-import { Link, linkVariants } from '@heroui/react';
+import { Link } from '@heroui/react';
+import { linkVariants } from '@heroui/styles';
 import NextLink from 'next/link';
 
 // With custom root - pass className manually
-const slots = linkVariants({ underline: "hover" });
+const slots = linkVariants();
 
 <NextLink className={slots.base()} href="/about">
   About Page
   <Link.Icon className={slots.icon()} />
 </NextLink>
 
-<NextLink className="link link--underline-hover" href="/about">
+<NextLink className="link" href="/about">
   About Page
   <Link.Icon className="link__icon" />
 </NextLink>
@@ -100,15 +115,16 @@ This approach works because HeroUI uses [BEM](https://getbem.com/) classes that 
 
 ## Using Variant Functions
 
-For more control and type safety, use variant functions to apply HeroUI styles to framework-specific components or custom elements.
+For more control and type safety, use variant functions to apply HeroUI styles to framework-specific components or custom elements. Variant functions are available from both `@heroui/styles` (framework-agnostic) and `@heroui/react` (re-exports).
 
 **With Next.js Link:**
 
 ```tsx
-import { Link, linkVariants } from '@heroui/react';
+import { Link } from '@heroui/react';
+import { linkVariants } from '@heroui/styles';
 import NextLink from 'next/link';
 
-const slots = linkVariants({ underline: "hover" });
+const slots = linkVariants();
 
 <NextLink className={slots.base()} href="/about">
   About Page
@@ -119,7 +135,7 @@ const slots = linkVariants({ underline: "hover" });
 **With Button styles:**
 
 ```tsx
-import { buttonVariants } from '@heroui/react';
+import { buttonVariants } from '@heroui/styles';
 import Link from 'next/link';
 
 <Link
@@ -130,7 +146,7 @@ import Link from 'next/link';
 </Link>
 ```
 
-**Available variant functions:** Each component exports its variant function (`buttonVariants`, `chipVariants`, `linkVariants`, `spinnerVariants`, and more). Use them to apply HeroUI's design system to any element while maintaining type safety.
+**Available variant functions:** Each component exports its variant function (`buttonVariants`, `chipVariants`, `linkVariants`, `spinnerVariants`, and more) from `@heroui/styles`. Use them to apply HeroUI's design system to any element while maintaining type safety.
 
 ## Compound Components
 
@@ -226,14 +242,14 @@ import { ButtonRoot } from '@heroui/react';
 You can combine variant functions from different components to create unique styles:
 
 ```tsx
-import { Link, linkVariants, buttonVariants } from '@heroui/react';
+import { Link } from '@heroui/react';
+import { linkVariants, buttonVariants } from '@heroui/styles';
 
 // Link styled with button variants
-const linkSlots = linkVariants({ underline: "hover" });
 const buttonStyles = buttonVariants({ variant: "tertiary", size: "md" });
 
 <Link
-  className={`${linkSlots.base()} ${buttonStyles}`}
+  className={buttonStyles}
   href="https://heroui.com"
 >
   HeroUI
@@ -245,7 +261,8 @@ const buttonStyles = buttonVariants({ variant: "tertiary", size: "md" });
 Create your own components by composing HeroUI primitives:
 
 ```tsx
-import { Button, Tooltip, buttonVariants } from '@heroui/react';
+import { Button, Tooltip } from '@heroui/react';
+import { buttonVariants } from '@heroui/styles';
 
 // Link button component using variant functions
 function LinkButton({ href, children, variant = "primary", ...props }) {
@@ -283,8 +300,8 @@ Create custom variants by extending the component's variant function:
 import type { ButtonRootProps } from "@heroui/react";
 import type { VariantProps } from "tailwind-variants";
 
-import { Button, buttonVariants } from "@heroui/react";
-import { tv } from "tailwind-variants";
+import { Button } from "@heroui/react";
+import { buttonVariants, tv } from "@heroui/styles";
 
 const myButtonVariants = tv({
   extend: buttonVariants,
@@ -352,7 +369,7 @@ type MyAvatarProps = Avatar["RootProps"];
 
 Use variant functions for type-safe styling:
 ```tsx
-import { buttonVariants } from '@heroui/react';
+import { buttonVariants } from '@heroui/styles';
 import Link from 'next/link';
 
 <Link
@@ -376,7 +393,7 @@ import Link from 'next/link';
 
 Use variant functions:
 ```tsx
-import { buttonVariants } from '@heroui/react';
+import { buttonVariants } from '@heroui/styles';
 import { Link } from 'react-router-dom';
 
 <Link
@@ -394,6 +411,21 @@ import { Link } from 'react-router-dom';
 <Link className="button button--primary" to="/dashboard">
   Dashboard
 </Link>
+```
+
+**With Vue, Svelte, or Other Frameworks:**
+
+Since `@heroui/styles` has no React dependencies, you can use it directly in any framework:
+```vue
+<script setup>
+import { buttonVariants } from '@heroui/styles';
+
+const primaryButton = buttonVariants({ variant: "primary" });
+</script>
+
+<template>
+  <button :class="primaryButton">Click me</button>
+</template>
 ```
 
 

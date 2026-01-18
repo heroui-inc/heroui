@@ -3,7 +3,7 @@ export {Controlled} from "./controlled";
 export {Disabled} from "./disabled";
 export {FullWidth} from "./full-width";
 export {InputTypes} from "./input-types";
-export {InSurface} from "./in-surface";
+export {OnSurface} from "./on-surface";
 export {Required} from "./required";
 export {TextAreaExample as TextArea} from "./textarea";
 export {Validation} from "./validation";

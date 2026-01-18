@@ -69,22 +69,23 @@ export function NewsletterForm() {
         throw new Error(newsletterResData.error || "Failed to subscribe newsletter");
       }
 
+      // Temporarily disable changelog subscription
       // Featurebase - changelog
-      const changelogResponse = await fetch("/api/changelog", {
-        body: JSON.stringify({
-          email: emailValue,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
+      // const changelogResponse = await fetch("/api/changelog", {
+      //   body: JSON.stringify({
+      //     email: emailValue,
+      //   }),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   method: "POST",
+      // });
 
-      const changelogResData = await changelogResponse.json();
+      // const changelogResData = await changelogResponse.json();
 
-      if (!changelogResData.success) {
-        throw new Error(changelogResData.error || "Failed to subscribe changelog");
-      }
+      // if (!changelogResData.success) {
+      //   throw new Error(changelogResData.error || "Failed to subscribe changelog");
+      // }
 
       setStatus("success");
       setEmail("");

@@ -1,18 +1,29 @@
 {
   "remove": ["devDependencies", "scripts", "clean-package"],
   "replace": {
-    "main": "./dist/index.css",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "style": "./dist/index.css",
     "browser": "./dist/heroui.min.css",
+    "sideEffects": ["*.css"],
     "exports": {
       ".": {
         "style": "./dist/index.css",
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "./css": {
+        "style": "./dist/index.css",
         "default": "./dist/index.css"
       },
-      "./css": "./dist/index.css",
+      "./components/*": {
+        "types": "./dist/components/*/index.d.ts",
+        "import": "./dist/components/*/index.js",
+        "default": "./dist/components/*/index.js"
+      },
       "./base": "./dist/base/base.css",
       "./base/*.css": "./dist/base/*.css",
-      "./components": "./dist/components/index.css",
       "./components/*.css": "./dist/components/*.css",
       "./themes/default": "./dist/themes/default/index.css",
       "./themes/*/*.css": "./dist/themes/*/*.css",

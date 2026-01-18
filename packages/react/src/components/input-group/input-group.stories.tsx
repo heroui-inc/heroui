@@ -10,7 +10,6 @@ import {FieldError} from "../field-error";
 import {Kbd} from "../kbd";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 import {TextField} from "../text-field";
 import {Tooltip} from "../tooltip";
 
@@ -39,6 +38,31 @@ export const Default: Story = {
         <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
       </InputGroup>
     </TextField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <TextField className="w-[280px]" name="primary">
+        <Label>Primary variant</Label>
+        <InputGroup variant="primary">
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input placeholder="name@email.com" />
+        </InputGroup>
+      </TextField>
+      <TextField className="w-[280px]" name="secondary">
+        <Label>Secondary variant</Label>
+        <InputGroup variant="secondary">
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input placeholder="name@email.com" />
+        </InputGroup>
+      </TextField>
+    </div>
   ),
 };
 
@@ -333,87 +357,6 @@ export const Disabled: Story = {
           <InputGroup.Suffix>USD</InputGroup.Suffix>
         </InputGroup>
       </TextField>
-    </div>
-  ),
-};
-
-export const SurfaceVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Default Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
-          <TextField name="email-default">
-            <Label>Email address</Label>
-            <InputGroup>
-              <InputGroup.Prefix>
-                <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
-              </InputGroup.Prefix>
-              <InputGroup.Input className="w-full" placeholder="name@email.com" />
-            </InputGroup>
-          </TextField>
-          <p className="text-sm text-muted">
-            InputGroup automatically detects default surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Secondary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="secondary">
-          <TextField name="email-secondary">
-            <Label>Email address</Label>
-            <InputGroup>
-              <InputGroup.Prefix>
-                <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
-              </InputGroup.Prefix>
-              <InputGroup.Input className="w-full" placeholder="name@email.com" />
-            </InputGroup>
-          </TextField>
-          <p className="text-sm text-muted">
-            InputGroup automatically detects secondary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Tertiary Surface</p>
-        <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="tertiary">
-          <TextField name="email-tertiary">
-            <Label>Email address</Label>
-            <InputGroup>
-              <InputGroup.Prefix>
-                <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
-              </InputGroup.Prefix>
-              <InputGroup.Input className="w-full" placeholder="name@email.com" />
-            </InputGroup>
-          </TextField>
-          <p className="text-sm text-muted">
-            InputGroup automatically detects tertiary surface level.
-          </p>
-        </Surface>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Transparent Surface</p>
-        <Surface
-          className="flex min-w-[320px] flex-col gap-3 rounded-3xl border p-6"
-          variant="transparent"
-        >
-          <TextField name="email-transparent">
-            <Label>Email address</Label>
-            <InputGroup>
-              <InputGroup.Prefix>
-                <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
-              </InputGroup.Prefix>
-              <InputGroup.Input className="w-full" placeholder="name@email.com" />
-            </InputGroup>
-          </TextField>
-          <p className="text-sm text-muted">
-            InputGroup automatically detects transparent surface level.
-          </p>
-        </Surface>
-      </div>
     </div>
   ),
 };

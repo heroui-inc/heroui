@@ -1,8 +1,9 @@
 "use client";
 
-import type {InputGroupVariants} from "./input-group.styles";
+import type {InputGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {inputGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Group as GroupPrimitive,
@@ -11,10 +12,7 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
 import {TextFieldContext} from "../text-field";
-
-import {inputGroupVariants} from "./input-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Context
@@ -35,24 +33,38 @@ const InputGroupRoot = ({
   children,
   className,
   fullWidth,
-  inSurface,
+  onClick,
+  variant,
   ...props
 }: InputGroupRootProps) => {
   const textFieldContext = useContext(TextFieldContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
+  const resolvedVariant = variant ?? textFieldContext?.variant;
+  const groupRef = React.useRef<HTMLDivElement>(null);
 
   const slots = React.useMemo(
-    () => inputGroupVariants({fullWidth, inSurface: resolvedInSurface}),
-    [fullWidth, resolvedInSurface],
+    () => inputGroupVariants({fullWidth, variant: resolvedVariant}),
+    [fullWidth, resolvedVariant],
   );
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const input = groupRef.current?.querySelector("input");
+
+    if (input && target !== input && !input.contains(target)) {
+      input.focus();
+    }
+
+    onClick?.(e);
+  };
 
   return (
     <InputGroupContext value={{slots}}>
       <GroupPrimitive
         {...props}
+        ref={groupRef}
         className={composeTwRenderProps(className, slots?.base())}
         data-slot="input-group"
+        onClick={handleClick}
       >
         {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
       </GroupPrimitive>
@@ -63,19 +75,14 @@ const InputGroupRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Input
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
-  inSurface?: "default" | "secondary" | "tertiary";
-}
+interface InputGroupInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
-const InputGroupInput = ({className, inSurface, ...props}: InputGroupInputProps) => {
+const InputGroupInput = ({className, ...props}: InputGroupInputProps) => {
   const {slots} = useContext(InputGroupContext);
-  const textFieldContext = useContext(TextFieldContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
+      className={composeTwRenderProps(className, slots?.input())}
       data-slot="input-group-input"
       {...props}
     />
@@ -104,19 +111,14 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
 /* -------------------------------------------------------------------------------------------------
  * InputGroup TextArea
  * -----------------------------------------------------------------------------------------------*/
-interface InputGroupTextAreaProps extends ComponentPropsWithRef<typeof TextAreaPrimitive> {
-  inSurface?: "default" | "secondary" | "tertiary";
-}
+interface InputGroupTextAreaProps extends ComponentPropsWithRef<typeof TextAreaPrimitive> {}
 
-const InputGroupTextArea = ({className, inSurface, ...props}: InputGroupTextAreaProps) => {
+const InputGroupTextArea = ({className, ...props}: InputGroupTextAreaProps) => {
   const {slots} = useContext(InputGroupContext);
-  const textFieldContext = useContext(TextFieldContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? textFieldContext?.inSurface ?? surfaceContext.variant;
 
   return (
     <TextAreaPrimitive
-      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
+      className={composeTwRenderProps(className, slots?.input())}
       data-slot="input-group-textarea"
       {...props}
     />

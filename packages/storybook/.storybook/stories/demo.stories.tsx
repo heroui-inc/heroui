@@ -1,10 +1,11 @@
-import React from "react";
 import type {Meta} from "@storybook/react";
+
+import React from "react";
 
 import {DemoComponents} from "./demos";
 
 const meta: Meta = {
-  title: "Demo",
+  title: "Components Demo",
   parameters: {
     layout: "fullscreen",
   },
@@ -24,4 +25,3 @@ Components.parameters = {
     },
   },
 };
-

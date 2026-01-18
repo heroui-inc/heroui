@@ -1,15 +1,15 @@
 "use client";
 
 import type {KbdKey} from "./kbd.constants";
-import type {KbdVariants} from "./kbd.styles";
+import type {KbdVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {kbdVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 
 import {kbdKeysLabelMap, kbdKeysMap} from "./kbd.constants";
-import {kbdVariants} from "./kbd.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Kbd Context

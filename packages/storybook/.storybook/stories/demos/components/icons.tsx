@@ -1,7 +1,6 @@
-import React from "react";
 import type {Ref, SVGProps} from "react";
 
-import {forwardRef, memo} from "react";
+import React, {forwardRef, memo} from "react";
 import {cn} from "tailwind-variants";
 
 const AppleIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => {
@@ -27,8 +26,6 @@ const AppleIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>
 };
 
 export const AppleIcon = memo(forwardRef(AppleIconRender));
-
-
 
 const GoogleIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => {
   const {className, ...restProps} = props;
@@ -68,8 +65,6 @@ const GoogleIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement
 };
 
 export const GoogleIcon = memo(forwardRef(GoogleIconRender));
-
-
 
 const VerifiedBadgeIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => {
   const {className, ...restProps} = props;

@@ -1,15 +1,15 @@
 "use client";
 
-import type {CardVariants} from "./card.styles";
 import type {SurfaceVariants} from "../surface";
+import type {CardVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {cardVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
-import {cardVariants} from "./card.styles";
 /* -------------------------------------------------------------------------------------------------
  * Card Context
  * -----------------------------------------------------------------------------------------------*/
@@ -38,7 +38,7 @@ const CardRoot = ({children, className, variant = "default", ...props}: CardRoot
       {variant === "transparent" ? (
         content
       ) : (
-        // Allows inner components to apply "in-surface" colors for proper contrast
+        // Allows inner components to apply "on-surface" colors for proper contrast
         <SurfaceContext
           value={{
             variant: variant as SurfaceVariants["variant"],

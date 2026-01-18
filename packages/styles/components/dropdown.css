@@ -23,7 +23,7 @@
   cursor: var(--cursor-interactive);
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
@@ -52,7 +52,7 @@
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply outline-none;
   }

@@ -1,16 +1,15 @@
 "use client";
 
-import type {CheckboxVariants} from "./checkbox.styles";
+import type {CheckboxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {CheckboxRenderProps} from "react-aria-components";
 
+import {checkboxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {Checkbox as CheckboxPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
-
-import {checkboxVariants} from "./checkbox.styles";
+import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";
 
 interface CheckboxContext {
   slots?: ReturnType<typeof checkboxVariants>;
@@ -25,12 +24,12 @@ interface CheckboxRootProps
   name?: string;
 }
 
-const CheckboxRoot = ({children, className, inSurface, ...props}: CheckboxRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
+const CheckboxRoot = ({children, className, variant, ...props}: CheckboxRootProps) => {
+  const checkboxGroupContext = useContext(CheckboxGroupContext);
+  const effectiveVariant = variant ?? checkboxGroupContext.variant;
   const slots = React.useMemo(
-    () => checkboxVariants({inSurface: resolvedInSurface}),
-    [resolvedInSurface],
+    () => checkboxVariants({variant: effectiveVariant}),
+    [effectiveVariant],
   );
 
   return (

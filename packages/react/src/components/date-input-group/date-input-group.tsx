@@ -1,6 +1,6 @@
 "use client";
 
-import type {DateInputGroupVariants} from "./date-input-group.styles";
+import type {DateInputGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {
   DateInputProps as DateInputPrimitiveProps,
@@ -9,6 +9,7 @@ import type {
   DateSegmentProps as TimeSegmentPrimitiveProps,
 } from "react-aria-components";
 
+import {dateInputGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   DateInput as DateInputPrimitive,
@@ -17,9 +18,6 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
-
-import {dateInputGroupVariants} from "./date-input-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * DateInputGroup Context
@@ -40,15 +38,12 @@ const DateInputGroupRoot = ({
   children,
   className,
   fullWidth,
-  inSurface,
+  variant,
   ...props
 }: DateInputGroupRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-
   const slots = React.useMemo(
-    () => dateInputGroupVariants({fullWidth, inSurface: resolvedInSurface}),
-    [fullWidth, resolvedInSurface],
+    () => dateInputGroupVariants({fullWidth, variant}),
+    [fullWidth, variant],
   );
 
   return (
@@ -89,21 +84,17 @@ const DateInputGroupPrefix = ({children, className, ...props}: DateInputGroupPre
 interface DateInputGroupInputProps
   extends
     DateInputPrimitiveProps,
-    Partial<Omit<TimeInputPrimitiveProps, keyof DateInputPrimitiveProps>> {
-  inSurface?: "default" | "secondary" | "tertiary";
-}
+    Partial<Omit<TimeInputPrimitiveProps, keyof DateInputPrimitiveProps>> {}
 
-const DateInputGroupInput = ({className, inSurface, ...props}: DateInputGroupInputProps) => {
+const DateInputGroupInput = ({className, ...props}: DateInputGroupInputProps) => {
   const {slots} = useContext(DateInputGroupContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   // TimeInput and DateInput have compatible interfaces
   // React Aria Components will handle the correct primitive based on parent context (TimeField vs DateField)
   // We use DateInputPrimitive as the default, but it will work with TimeField context
   return (
     <DateInputPrimitive
-      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
+      className={composeTwRenderProps(className, slots?.input())}
       data-slot="date-input-group-input"
       {...(props as DateInputPrimitiveProps)}
     />

@@ -3,5 +3,5 @@
   "description": "HeroUI Native Release Notes",
   "icon": "rocket",
   "root": true,
-  "pages": ["---Overview---", "index", "---Releases---", "beta-10"]
+  "pages": ["---Overview---", "index", "---Releases---", "beta-12", "beta-11", "beta-10"]
 }

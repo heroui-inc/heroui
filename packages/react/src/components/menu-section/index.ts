@@ -21,6 +21,6 @@ export type {MenuSectionRootProps, MenuSectionRootProps as MenuSectionProps} fro
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {menuSectionVariants} from "./menu-section.styles";
+export {menuSectionVariants} from "@heroui/styles";
 
-export type {MenuSectionVariants} from "./menu-section.styles";
+export type {MenuSectionVariants} from "@heroui/styles";

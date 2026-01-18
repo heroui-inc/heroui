@@ -271,6 +271,91 @@ const WithoutSeparatorTemplate = (args: Story["args"]) => {
   );
 };
 
+const SecondaryTemplate = (args: Story["args"]) => {
+  return (
+    <div className="w-[600px]">
+      <Tabs {...args} variant="secondary">
+        <Tabs.ListContainer>
+          <Tabs.List aria-label="Options">
+            <Tabs.Tab id="overview">
+              Overview
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="analytics">
+              Analytics
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="reports">
+              Reports
+              <Tabs.Indicator />
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs.ListContainer>
+        <Tabs.Panel className="pt-4" id="overview">
+          <p>View your project overview and recent activity.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="analytics">
+          <p>Track your metrics and analyze performance data.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="reports">
+          <p>Generate and download detailed reports.</p>
+        </Tabs.Panel>
+      </Tabs>
+    </div>
+  );
+};
+
+const SecondaryVerticalTemplate = (args: Story["args"]) => {
+  return (
+    <div className="w-[600px]">
+      <Tabs {...args} orientation="vertical" variant="secondary">
+        <Tabs.ListContainer>
+          <Tabs.List aria-label="Vertical tabs">
+            <Tabs.Tab id="account">
+              Account
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="security">
+              Security
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="notifications">
+              Notifications
+              <Tabs.Indicator />
+            </Tabs.Tab>
+            <Tabs.Tab id="billing">
+              Billing
+              <Tabs.Indicator />
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs.ListContainer>
+        <Tabs.Panel className="px-4" id="account">
+          <h3 className="mb-2 font-semibold">Account Settings</h3>
+          <p className="text-sm text-gray-600">Manage your account information and preferences.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="px-4" id="security">
+          <h3 className="mb-2 font-semibold">Security Settings</h3>
+          <p className="text-sm text-gray-600">
+            Configure two-factor authentication and password settings.
+          </p>
+        </Tabs.Panel>
+        <Tabs.Panel className="px-4" id="notifications">
+          <h3 className="mb-2 font-semibold">Notification Preferences</h3>
+          <p className="text-sm text-gray-600">
+            Choose how and when you want to receive notifications.
+          </p>
+        </Tabs.Panel>
+        <Tabs.Panel className="px-4" id="billing">
+          <h3 className="mb-2 font-semibold">Billing Information</h3>
+          <p className="text-sm text-gray-600">
+            View and manage your subscription and payment methods.
+          </p>
+        </Tabs.Panel>
+      </Tabs>
+    </div>
+  );
+};
+
 const Showcase1Template = (args: Story["args"]) => {
   const DEFAULT_ZOOM = 200;
   const [selectedZoom, setSelectedZoom] = React.useState<Key>(DEFAULT_ZOOM);
@@ -418,4 +503,21 @@ export const Showcase1: Story = {
   },
   render: Showcase1Template,
   name: "Showcases/Apple iPhone 17 Pro cameras",
+};
+
+export const Secondary: Story = {
+  args: {
+    children: null,
+    variant: "secondary",
+  },
+  render: SecondaryTemplate,
+};
+
+export const SecondaryVertical: Story = {
+  args: {
+    children: null,
+    orientation: "vertical",
+    variant: "secondary",
+  },
+  render: SecondaryVerticalTemplate,
 };

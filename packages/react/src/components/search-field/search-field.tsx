@@ -1,8 +1,9 @@
 "use client";
 
-import type {SearchFieldVariants} from "./search-field.styles";
+import type {SearchFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {searchFieldVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Group as GroupPrimitive,
@@ -13,9 +14,6 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {IconSearch} from "../icons";
-import {SurfaceContext} from "../surface";
-
-import {searchFieldVariants} from "./search-field.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * SearchField Context
@@ -36,15 +34,12 @@ const SearchFieldRoot = ({
   children,
   className,
   fullWidth,
-  inSurface,
+  variant,
   ...props
 }: SearchFieldRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
-
   const slots = React.useMemo(
-    () => searchFieldVariants({fullWidth, inSurface: resolvedInSurface}),
-    [fullWidth, resolvedInSurface],
+    () => searchFieldVariants({fullWidth, variant}),
+    [fullWidth, variant],
   );
 
   return (
@@ -82,18 +77,14 @@ const SearchFieldGroup = ({children, className, ...props}: SearchFieldGroupProps
 /* -------------------------------------------------------------------------------------------------
  * SearchField Input
  * -----------------------------------------------------------------------------------------------*/
-interface SearchFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {
-  inSurface?: "default" | "secondary" | "tertiary";
-}
+interface SearchFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
-const SearchFieldInput = ({className, inSurface, ...props}: SearchFieldInputProps) => {
+const SearchFieldInput = ({className, ...props}: SearchFieldInputProps) => {
   const {slots} = useContext(SearchFieldContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const resolvedInSurface = inSurface ?? surfaceContext.variant;
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input({inSurface: resolvedInSurface}))}
+      className={composeTwRenderProps(className, slots?.input())}
       data-slot="search-field-input"
       {...props}
     />

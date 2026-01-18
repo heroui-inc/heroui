@@ -55,12 +55,12 @@
   },
   "clean-package": "./clean-package.config.json",
   "dependencies": {
+    "@heroui/styles": "workspace:*",
     "@internationalized/date": "3.10.1",
     "@radix-ui/react-avatar": "1.1.11",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/utils": "3.32.0",
     "@react-types/shared": "3.32.1",
-    "clsx": "2.1.1",
     "input-otp": "1.4.2",
     "react-aria-components": "1.14.0",
     "tailwind-merge": "3.4.0",

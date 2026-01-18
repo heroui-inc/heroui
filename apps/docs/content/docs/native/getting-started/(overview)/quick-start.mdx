@@ -76,7 +76,12 @@ Inside your `global.css` file add the following imports:
 
 @import 'heroui-native/styles';
 
-/* Path to the heroui-native lib inside node_modules from the root of your project */
+/* Path to the heroui-native lib inside node_modules relative to global.css */
+/* Examples:
+ *   - If global.css is at project root: ./node_modules/heroui-native/lib
+ *   - If global.css is in app/: ../node_modules/heroui-native/lib
+ *   - If global.css is in src/styles/: ../../node_modules/heroui-native/lib
+ */
 @source './node_modules/heroui-native/lib';
 ```
 
@@ -123,5 +128,5 @@ export default function MyComponent() {
 ## Running on Web (Expo)
 
 <Callout type="warning">
-  HeroUI Native is currently not recommended for web use. We are focusing on mobile platforms (iOS and Android) at this time.
+  HeroUI Native is currently not recommended for web use. We are focusing on mobile platforms (iOS and Android) at this time. For web development, please use [HeroUI React](/docs/react/getting-started/quick-start) instead.
 </Callout>
