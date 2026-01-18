@@ -125,7 +125,7 @@
   }
 
   /* Focus states - comprehensive fallback */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
   }
