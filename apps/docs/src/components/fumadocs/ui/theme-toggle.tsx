@@ -3,10 +3,10 @@
 import type {ComponentProps} from "react";
 
 import {useTheme} from "next-themes";
-import {useEffect, useState} from "react";
 import {tv} from "tailwind-variants";
 
 import {Airplay, Moon, Sun} from "@/components/fumadocs/ui/icons";
+import {useIsMounted} from "@/hooks/use-is-mounted";
 import {cn} from "@/utils/cn";
 
 const itemVariants = tv({
@@ -29,12 +29,7 @@ export function ThemeToggle({
   mode?: "light-dark" | "light-dark-system";
 }) {
   const {resolvedTheme, setTheme, theme} = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
+  const mounted = useIsMounted();
 
   const container = cn(
     "inline-flex cursor-(--cursor-interactive) items-center rounded-full border p-1",

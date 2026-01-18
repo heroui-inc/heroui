@@ -5,12 +5,19 @@ import {CodeBlock} from "@/components/codeblock-client";
 import {useCodePanel} from "@/hooks/use-code-panel";
 
 import {useVariablesState} from "../hooks/use-variables-state";
+import {getCustomFontInfoFromUrl, isCustomFontUrl} from "../utils/font-utils";
 import {generateMinimalCssVariables} from "../utils/generate-css-variables";
 
 export function ThemeCodePanel() {
   const [variables] = useVariablesState();
   const {isCodeVisible, toggleCode} = useCodePanel();
-  const cssCode = generateMinimalCssVariables(variables);
+
+  // Get custom font info if using a URL-based custom font
+  const customFontInfo = isCustomFontUrl(variables.fontFamily)
+    ? getCustomFontInfoFromUrl(variables.fontFamily)
+    : undefined;
+
+  const cssCode = generateMinimalCssVariables(variables, customFontInfo ?? undefined);
 
   return (
     <CodePanel

@@ -4,15 +4,7 @@ import type {ReactNode} from "react";
 import {Analytics} from "@vercel/analytics/next";
 import {NextProvider} from "fumadocs-core/framework/next";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
-import {
-  DM_Sans,
-  Figtree,
-  Geist,
-  Google_Sans,
-  Hanken_Grotesk,
-  Inter,
-  Public_Sans,
-} from "next/font/google";
+import {Inter} from "next/font/google";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
@@ -28,43 +20,9 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const figtree = Figtree({
-  subsets: ["latin"],
-  variable: "--font-figtree",
-});
-
-const hankenGrotesk = Hanken_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-hanken-grotesk",
-});
-
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-});
-
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  variable: "--font-public-sans",
-});
-
-const googleSans = Google_Sans({
-  subsets: ["latin"],
-  variable: "--font-google-sans",
-});
-
 export default function Layout({children}: {children: ReactNode}) {
   return (
-    <html
-      suppressHydrationWarning
-      className={`${inter.variable} ${figtree.variable} ${hankenGrotesk.variable} ${geist.variable} ${dmSans.variable} ${publicSans.variable} ${googleSans.variable}`}
-      lang="en"
-    >
+    <html suppressHydrationWarning className={inter.variable} lang="en">
       <body className="flex min-h-screen flex-col font-sans">
         <NuqsAdapter>
           <NextProvider>

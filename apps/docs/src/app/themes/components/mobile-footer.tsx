@@ -3,7 +3,7 @@
 import {ScrollShadow} from "@heroui/react";
 import {useState} from "react";
 
-import {THEME_BUILDER_BOTTOM_SHEET_ID} from "../constants";
+import {THEME_BUILDER_BOTTOM_SHEET_ID, formRadiusOptions, radiusOptions} from "../constants";
 
 import {AccentColorSelector} from "./accent-color-selector";
 import {BaseColorSlider} from "./base-color-slider";
@@ -48,13 +48,15 @@ export function MobileFooter() {
           >
             <FontFamilyPopover />
             <RadiusPopover
+              description="Affects the overall UI, like menus and modals."
               label="Radius"
-              tooltip="Global border radius for UI components like menus, cards, or modals."
+              radiusOptions={radiusOptions}
               variableKey="radius"
             />
             <RadiusPopover
+              description="Affects form elements, like inputs and selects."
               label="Radius Form"
-              tooltip="Border radius for form elements like inputs and selects."
+              radiusOptions={formRadiusOptions}
               variableKey="formRadius"
             />
           </ScrollShadow>

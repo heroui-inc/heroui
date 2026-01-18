@@ -3,6 +3,15 @@ import type {GeneratedThemeColors, ThemeColor} from "./generate-theme-colors";
 
 import {adaptiveColors, fontMap, radiusCssMap} from "../constants";
 
+/**
+ * Custom font info for generating CSS variables
+ */
+export interface CustomFontInfo {
+  label: string;
+  variable: string;
+  fontFamily: string;
+}
+
 import {
   calculateAccentForeground,
   generateThemeColors,
@@ -118,9 +127,17 @@ function buildColorVarsCSS(
  * Generates comprehensive theme colors based on hue, chroma, and lightness.
  *
  * @see https://v3.heroui.com/docs/react/getting-started/theming
+ * @param customFont - Optional custom font info when using a CDN font
  */
-export function generateCssVariables(variables: ThemeVariables): string {
-  const font = fontMap[variables.fontFamily];
+export function generateCssVariables(
+  variables: ThemeVariables,
+  customFont?: CustomFontInfo,
+): string {
+  // Check if this is a predefined font
+  const fontId = variables.fontFamily;
+  const isPredefinedFont = fontId in fontMap;
+  const predefinedFont = isPredefinedFont ? fontMap[fontId as keyof typeof fontMap] : undefined;
+
   const {chroma, hue, lightness} = variables;
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
   const adaptiveConfig = adaptiveColors[accentColor];
@@ -134,11 +151,26 @@ export function generateCssVariables(variables: ThemeVariables): string {
   --radius: ${radiusCssMap[variables.radius]};
   --field-radius: ${radiusCssMap[variables.formRadius]};`;
 
+  // Determine font values
+  let fontLabel: string;
+  let fontSansValue: string;
+
+  if (predefinedFont) {
+    fontLabel = predefinedFont.label;
+    fontSansValue = `var(${predefinedFont.variable})`;
+  } else if (customFont) {
+    fontLabel = customFont.label;
+    fontSansValue = `"${customFont.fontFamily}", sans-serif`;
+  } else {
+    fontLabel = "your custom font";
+    fontSansValue = "var(--font-sans)";
+  }
+
   // Build font CSS
   const fontCSS = `
   /* Font Family */
-  /* Make sure to load ${font.label} font in your app */
-  --font-sans: var(${font.variable});`;
+  /* Make sure to load ${fontLabel} font in your app */
+  --font-sans: ${fontSansValue};`;
 
   // Check if this is an adaptive color that needs light/dark variants
   if (adaptiveConfig) {
@@ -302,9 +334,19 @@ ${darkVarsCSS}
  * Generates CSS output with only the base variables found in variables.css.
  * Does not include derived variables like --color-accent-hover, --color-accent-soft, etc.
  * These derived variables are automatically computed by theme.css.
+ *
+ * @param variables - Theme variables from the builder
+ * @param customFont - Optional custom font info when using a CDN font
  */
-export function generateMinimalCssVariables(variables: ThemeVariables): string {
-  const font = fontMap[variables.fontFamily];
+export function generateMinimalCssVariables(
+  variables: ThemeVariables,
+  customFont?: CustomFontInfo,
+): string {
+  // Check if this is a predefined font
+  const fontId = variables.fontFamily;
+  const isPredefinedFont = fontId in fontMap;
+  const predefinedFont = isPredefinedFont ? fontMap[fontId as keyof typeof fontMap] : undefined;
+
   const {chroma, hue, lightness} = variables;
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
   const adaptiveConfig = adaptiveColors[accentColor];
@@ -339,6 +381,22 @@ export function generateMinimalCssVariables(variables: ThemeVariables): string {
     .map(([prop, val]) => `  ${prop}: ${val};`)
     .join("\n");
 
+  // Determine font values based on whether it's predefined or custom
+  let fontLabel: string;
+  let fontSansValue: string;
+
+  if (predefinedFont) {
+    fontLabel = predefinedFont.label;
+    fontSansValue = `var(${predefinedFont.variable})`;
+  } else if (customFont) {
+    fontLabel = customFont.label;
+    fontSansValue = `"${customFont.fontFamily}", sans-serif`;
+  } else {
+    // Fallback for unknown font
+    fontLabel = "your custom font";
+    fontSansValue = "var(--font-sans)";
+  }
+
   return `/*
  * HeroUI Theme Customization
  * Add this to your global.css after importing @heroui/styles
@@ -359,8 +417,8 @@ ${lightVarsCSS}
   --field-radius: ${radiusCssMap[variables.formRadius]};
 
   /* Font Family */
-  /* Make sure to load ${font.label} font in your app */
-  --font-sans: var(${font.variable});
+  /* Make sure to load ${fontLabel} font in your app */
+  --font-sans: ${fontSansValue};
 }
 
 .dark,

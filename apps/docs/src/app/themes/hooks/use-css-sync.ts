@@ -10,6 +10,7 @@ import {
   fontMap,
   radiusCssMap,
 } from "../constants";
+import {getCustomFontInfoFromUrl, injectFontLink, isCustomFontUrl} from "../utils/font-utils";
 import {
   calculateAccentForeground,
   generateThemeColors,
@@ -361,6 +362,11 @@ function injectStyleElement(id: string, css: string): HTMLStyleElement {
 }
 
 /**
+ * Style element ID for font CSS variable definition
+ */
+const FONT_VAR_STYLE_ID = "theme-builder-font-var";
+
+/**
  * Hook that syncs theme builder store values to CSS custom properties.
  * Should be called at the root of the theme builder page.
  *
@@ -376,14 +382,53 @@ export function useCssSync() {
     // Check if this is an adaptive color that needs special light/dark variants
     const isAdaptive = accentColor in adaptiveColors;
 
+    // Determine font variable - handle predefined fonts and URL-based custom fonts
+    // All fonts are now loaded on-demand via CDN
+    const fontFamily = variables.fontFamily;
+    let fontVariable: string;
+    let fontFamilyName: string;
+
+    if (isCustomFontUrl(fontFamily)) {
+      // Custom font via URL - extract info and inject
+      const customFontInfo = getCustomFontInfoFromUrl(fontFamily);
+
+      if (customFontInfo) {
+        // Inject the font stylesheet from CDN
+        injectFontLink(customFontInfo.variable, fontFamily);
+        fontVariable = customFontInfo.variable;
+        fontFamilyName = customFontInfo.fontFamily;
+      } else {
+        // Fallback to Inter if we can't parse the URL
+        const interFont = fontMap.inter;
+
+        injectFontLink(interFont.variable, interFont.cdnUrl);
+        fontVariable = interFont.variable;
+        fontFamilyName = interFont.label;
+      }
+    } else {
+      // Predefined font by ID - load on-demand via CDN
+      const predefinedFont = fontMap[fontFamily as keyof typeof fontMap] ?? fontMap.inter;
+
+      // Inject the font stylesheet from CDN
+      injectFontLink(predefinedFont.variable, predefinedFont.cdnUrl);
+      fontVariable = predefinedFont.variable;
+      fontFamilyName = predefinedFont.label;
+    }
+
     // Build common variables (radius, font) that apply to all selectors
     const commonVars = getCommonVariables(
       radiusCssMap[variables.radius],
       radiusCssMap[variables.formRadius],
-      fontMap[variables.fontFamily].variable,
+      fontVariable,
     );
 
-    // Remove all existing injected styles
+    // Inject the CSS variable definition for the font
+    // All fonts (predefined and custom) are loaded via CDN and need their variable defined
+    const fontVarCSS = `:root { ${fontVariable}: "${fontFamilyName}", sans-serif; }`;
+
+    injectStyleElement(FONT_VAR_STYLE_ID, fontVarCSS);
+
+    // Remove all existing injected color styles
     const cleanupStyles = () => {
       [ADAPTIVE_STYLE_ID, THEME_COLORS_STYLE_ID].forEach((id) => {
         const existing = document.getElementById(id);
@@ -409,7 +454,15 @@ export function useCssSync() {
     }
 
     // Cleanup: remove injected styles when unmounting
-    return cleanupStyles;
+    return () => {
+      cleanupStyles();
+      // Also remove font var style on unmount
+      const existingFontVar = document.getElementById(FONT_VAR_STYLE_ID);
+
+      if (existingFontVar) {
+        existingFontVar.remove();
+      }
+    };
   }, [
     accentColor,
     chroma,

@@ -8,7 +8,7 @@ import {
   useQueryStates,
 } from "nuqs";
 
-import {defaultThemeValues, fontIds, radiusIds, themeIds, themeVariableKeys} from "../constants";
+import {defaultThemeValues, radiusIds, themeIds, themeVariableKeys} from "../constants";
 
 export function useVariablesState() {
   return useQueryStates(
@@ -17,7 +17,8 @@ export function useVariablesState() {
       accentColor: parseAsString.withDefault(defaultThemeValues.accentColor),
       base: parseAsFloat.withDefault(defaultThemeValues.base),
       chroma: parseAsFloat.withDefault(defaultThemeValues.chroma),
-      fontFamily: parseAsStringLiteral(fontIds).withDefault(defaultThemeValues.fontFamily),
+      // Use parseAsString for fontFamily to allow custom fonts (prefixed with "custom-")
+      fontFamily: parseAsString.withDefault(defaultThemeValues.fontFamily),
       formRadius: parseAsStringLiteral(radiusIds).withDefault(defaultThemeValues.formRadius),
       hue: parseAsFloat.withDefault(defaultThemeValues.hue),
       lightness: parseAsFloat.withDefault(defaultThemeValues.lightness),
