@@ -4,7 +4,7 @@ import {tv} from "tailwind-variants";
 
 export const toastVariants = tv({
   defaultVariants: {
-    placement: "bottom-right",
+    placement: "bottom",
     variant: "default",
   },
   slots: {
@@ -19,17 +19,23 @@ export const toastVariants = tv({
   },
   variants: {
     placement: {
-      "bottom-left": {
-        region: "toast-region--bottom-left",
+      bottom: {
+        region: "toast-region--bottom",
       },
-      "bottom-right": {
-        region: "toast-region--bottom-right",
+      "bottom end": {
+        region: "toast-region--bottom-end",
       },
-      "top-left": {
-        region: "toast-region--top-left",
+      "bottom start": {
+        region: "toast-region--bottom-start",
       },
-      "top-right": {
-        region: "toast-region--top-right",
+      top: {
+        region: "toast-region--top",
+      },
+      "top end": {
+        region: "toast-region--top-end",
+      },
+      "top start": {
+        region: "toast-region--top-start",
       },
     },
     variant: {

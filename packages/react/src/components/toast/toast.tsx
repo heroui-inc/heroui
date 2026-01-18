@@ -218,7 +218,7 @@ type ToastRegionPrimitiveProps<T extends object = ToastContentValue> = Component
   typeof ToastRegionPrimitive<T>
 >;
 
-interface ToastRegionProps<T extends object = ToastContentValue> extends Omit<
+interface ToastContainerProps<T extends object = ToastContentValue> extends Omit<
   ToastRegionPrimitiveProps<T>,
   "queue" | "children"
 > {
@@ -227,13 +227,13 @@ interface ToastRegionProps<T extends object = ToastContentValue> extends Omit<
   children?: ToastRegionPrimitiveProps<T>["children"];
 }
 
-const ToastRegion = <T extends object = ToastContentValue>({
+const ToastContainer = <T extends object = ToastContentValue>({
   children,
   className,
-  placement = "bottom-right",
+  placement = "bottom",
   toast: toastProp,
   ...rest
-}: ToastRegionProps<T>) => {
+}: ToastContainerProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
 
   const toast = useMemo(() => {
@@ -284,7 +284,7 @@ const ToastRegion = <T extends object = ToastContentValue>({
   );
 };
 
-ToastRegion.displayName = "HeroUI.ToastRegion";
+ToastContainer.displayName = "HeroUI.ToastContainer";
 
 /* ------------------------------------------------------------------------------------------------
  * Exports
@@ -297,7 +297,7 @@ export {
   ToastContent,
   ToastDescription,
   ToastIcon,
-  ToastRegion,
+  ToastContainer,
   ToastTitle,
 };
 
@@ -308,6 +308,6 @@ export type {
   ToastDescriptionProps,
   ToastIconProps,
   ToastProps,
-  ToastRegionProps,
+  ToastContainerProps,
   ToastTitleProps,
 };

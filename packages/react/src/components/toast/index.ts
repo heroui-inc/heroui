@@ -3,10 +3,10 @@ import type {ComponentProps} from "react";
 import {
   ToastAction,
   ToastClose,
+  ToastContainer,
   ToastContent,
   ToastDescription,
   ToastIcon,
-  ToastRegion,
   Toast as ToastRoot,
   ToastTitle,
 } from "./toast";
@@ -16,7 +16,7 @@ import {ToastQueue, toast, toastQueue} from "./toast-queue";
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const Toast = Object.assign(ToastRoot, {
-  Region: ToastRegion,
+  Container: ToastContainer,
   Content: ToastContent,
   Icon: ToastIcon,
   Title: ToastTitle,
@@ -29,7 +29,7 @@ export const Toast = Object.assign(ToastRoot, {
 
 export type Toast = {
   Props: ComponentProps<typeof ToastRoot>;
-  RegionProps: ComponentProps<typeof ToastRegion>;
+  ContainerProps: ComponentProps<typeof ToastContainer>;
   ContentProps: ComponentProps<typeof ToastContent>;
   IconProps: ComponentProps<typeof ToastIcon>;
   TitleProps: ComponentProps<typeof ToastTitle>;
@@ -42,7 +42,7 @@ export type Toast = {
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
 export {
-  ToastRegion,
+  ToastContainer,
   ToastContent,
   ToastIcon,
   ToastTitle,
@@ -53,11 +53,11 @@ export {
 
 export type {
   ToastCloseProps,
+  ToastContainerProps,
   ToastContentProps,
   ToastDescriptionProps,
   ToastIconProps,
   ToastProps,
-  ToastRegionProps,
   ToastTitleProps,
 } from "./toast";
 
