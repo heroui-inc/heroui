@@ -83,7 +83,7 @@ export function RadiusPopover({
                 textValue={item.id}
                 className={cn(
                   "group border-separator-on-surface flex h-[83px] w-[88px] flex-col items-center justify-center gap-[5px] rounded-2xl border",
-                  "data-[selected=true]:border-2 data-[selected=true]:border-foreground",
+                  "data-[selected=true]:border-foreground",
                 )}
               >
                 <span className="text-xl font-semibold">{item.label}</span>
