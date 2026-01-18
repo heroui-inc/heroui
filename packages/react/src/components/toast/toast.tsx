@@ -8,18 +8,19 @@ import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-co
 import {toastVariants} from "@heroui/styles";
 import React, {createContext, useCallback, useContext, useMemo} from "react";
 import {
-  Button as ButtonPrimitive,
   Text as TextPrimitive,
   UNSTABLE_ToastContent as ToastContentPrimitive,
   UNSTABLE_Toast as ToastPrimitive,
   UNSTABLE_ToastRegion as ToastRegionPrimitive,
 } from "react-aria-components";
 
+import {useMediaQuery} from "../../hooks";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {Button} from "../button";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 
-import {ToastQueue, toast as defaultToast} from "./toast-queue";
+import {DEFAULT_MAX_VISIBLE_TOAST, ToastQueue, toast as defaultToast} from "./toast-queue";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Context
@@ -95,11 +96,11 @@ const ToastContent = ({children, className, ...rest}: ToastContentProps) => {
 };
 
 /* ------------------------------------------------------------------------------------------------
- * Toast Icon
+ * Toast Indicator
  * --------------------------------------------------------------------------------------------- */
-interface ToastIconProps extends ComponentPropsWithRef<"div"> {}
+interface ToastIndicatorProps extends ComponentPropsWithRef<"div"> {}
 
-const ToastIcon = ({children, className, ...rest}: ToastIconProps) => {
+const ToastIndicator = ({children, className, ...rest}: ToastIndicatorProps) => {
   const {slots, variant} = useContext(ToastContext);
 
   const getDefaultIcon = useCallback(() => {
@@ -118,13 +119,17 @@ const ToastIcon = ({children, className, ...rest}: ToastIconProps) => {
   }, [variant]);
 
   return (
-    <div className={composeSlotClassName(slots?.icon, className)} data-slot="toast-icon" {...rest}>
+    <div
+      className={composeSlotClassName(slots?.indicator, className)}
+      data-slot="toast-indicator"
+      {...rest}
+    >
       {children ?? getDefaultIcon()}
     </div>
   );
 };
 
-ToastIcon.displayName = "HeroUI.ToastIcon";
+ToastIndicator.displayName = "HeroUI.ToastIndicator";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Title
@@ -171,11 +176,11 @@ const ToastDescription = ({children, className, ...rest}: ToastDescriptionProps)
 ToastDescription.displayName = "HeroUI.ToastDescription";
 
 /* ------------------------------------------------------------------------------------------------
- * Toast Close
+ * Toast Close Button
  * --------------------------------------------------------------------------------------------- */
-interface ToastCloseProps extends ComponentPropsWithRef<typeof CloseButton> {}
+interface ToastCloseButtonProps extends ComponentPropsWithRef<typeof CloseButton> {}
 
-const ToastClose = ({className, ...rest}: ToastCloseProps) => {
+const ToastCloseButton = ({className, ...rest}: ToastCloseButtonProps) => {
   const {slots} = useContext(ToastContext);
 
   return (
@@ -188,28 +193,28 @@ const ToastClose = ({className, ...rest}: ToastCloseProps) => {
   );
 };
 
-ToastClose.displayName = "HeroUI.ToastClose";
+ToastCloseButton.displayName = "HeroUI.ToastCloseButton";
 
 /* ------------------------------------------------------------------------------------------------
- * Toast Action
+ * Toast Action Button
  * --------------------------------------------------------------------------------------------- */
-interface ToastActionProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
+interface ToastActionButtonProps extends ComponentPropsWithRef<typeof Button> {}
 
-const ToastAction = ({children, className, ...rest}: ToastActionProps) => {
+const ToastActionButton = ({children, className, ...rest}: ToastActionButtonProps) => {
   const {slots} = useContext(ToastContext);
 
   return (
-    <ButtonPrimitive
+    <Button
       className={composeTwRenderProps(className, slots?.action?.())}
-      data-slot="toast-action"
+      data-slot="toast-action-button"
       {...rest}
     >
       {children}
-    </ButtonPrimitive>
+    </Button>
   );
 };
 
-ToastAction.displayName = "HeroUI.ToastAction";
+ToastActionButton.displayName = "HeroUI.ToastActionButton";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Region
@@ -222,47 +227,68 @@ interface ToastContainerProps<T extends object = ToastContentValue> extends Omit
   ToastRegionPrimitiveProps<T>,
   "queue" | "children"
 > {
-  toast?: ToastQueue<T>;
-  placement?: ToastVariants["placement"];
   children?: ToastRegionPrimitiveProps<T>["children"];
+  /** The maximum number of toasts to display at a time. Only applies when no custom `toast` prop is provided. */
+  maxVisibleToasts?: number;
+  placement?: ToastVariants["placement"];
+  toast?: ToastQueue<T>;
 }
 
 const ToastContainer = <T extends object = ToastContentValue>({
   children,
   className,
+  maxVisibleToasts = DEFAULT_MAX_VISIBLE_TOAST,
   placement = "bottom",
   toast: toastProp,
   ...rest
 }: ToastContainerProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const toast = useMemo(() => {
     if (toastProp) {
+      // Custom toast prop provided - use it (it already has its own maxVisibleToasts limit)
       return toastProp;
     }
 
-    // defaultToast is a function with getQueue method
+    // If maxVisibleToasts differs from default and no custom toast is provided,
+    // create a new queue with the specified limit
+    // Note: This queue will only receive toasts if you use a custom toast function
+    // created with this queue. The default `toast()` function uses the default queue.
+    if (maxVisibleToasts !== DEFAULT_MAX_VISIBLE_TOAST) {
+      return new ToastQueue<T>({
+        maxVisibleToasts,
+      });
+    }
+
+    // Use default toast (which has DEFAULT_MAX_VISIBLE_TOAST limit)
     return defaultToast as unknown as ToastQueue<T>;
-  }, [toastProp]);
+  }, [toastProp, maxVisibleToasts]);
 
-  const getDefaultChildren = useCallback((renderProps: {toast: QueuedToast<T>}) => {
-    const {action, description, icon, title, variant} =
-      (renderProps.toast.content as ToastContentValue) ?? {};
+  const getDefaultChildren = useCallback(
+    (renderProps: {toast: QueuedToast<T>}) => {
+      const {actionProps, description, indicator, title, variant} =
+        (renderProps.toast.content as ToastContentValue) ?? {};
 
-    return (
-      <Toast toast={renderProps.toast} variant={variant || "default"}>
-        {icon ? <ToastIcon>{icon}</ToastIcon> : <ToastIcon />}
-        <ToastContent>
-          {!!title && <ToastTitle>{title}</ToastTitle>}
-          {!!description && <ToastDescription>{description}</ToastDescription>}
-        </ToastContent>
-        <div className="flex items-center gap-3 py-3">
-          {action ? <ToastAction onPress={action.onClick}>{action.label}</ToastAction> : null}
-          <ToastClose />
-        </div>
-      </Toast>
-    );
-  }, []);
+      return (
+        <Toast toast={renderProps.toast} variant={variant || "default"}>
+          {indicator ? <ToastIndicator>{indicator}</ToastIndicator> : <ToastIndicator />}
+          <ToastContent>
+            {!!title && <ToastTitle>{title}</ToastTitle>}
+            {!!description && <ToastDescription>{description}</ToastDescription>}
+            {isMobile && actionProps?.children ? (
+              <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
+            ) : null}
+          </ToastContent>
+          {!isMobile && actionProps?.children ? (
+            <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
+          ) : null}
+          <ToastCloseButton />
+        </Toast>
+      );
+    },
+    [isMobile],
+  );
 
   return (
     <ToastRegionPrimitive<T>
@@ -292,21 +318,21 @@ ToastContainer.displayName = "HeroUI.ToastContainer";
 export {
   ToastQueue,
   Toast,
-  ToastAction,
-  ToastClose,
+  ToastActionButton,
+  ToastCloseButton,
   ToastContent,
   ToastDescription,
-  ToastIcon,
+  ToastIndicator,
   ToastContainer,
   ToastTitle,
 };
 
 export type {
-  ToastActionProps,
-  ToastCloseProps,
+  ToastActionButtonProps,
+  ToastCloseButtonProps,
   ToastContentProps,
   ToastDescriptionProps,
-  ToastIconProps,
+  ToastIndicatorProps,
   ToastProps,
   ToastContainerProps,
   ToastTitleProps,

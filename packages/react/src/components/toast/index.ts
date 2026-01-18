@@ -1,12 +1,12 @@
 import type {ComponentProps} from "react";
 
 import {
-  ToastAction,
-  ToastClose,
+  ToastActionButton,
+  ToastCloseButton,
   ToastContainer,
   ToastContent,
   ToastDescription,
-  ToastIcon,
+  ToastIndicator,
   Toast as ToastRoot,
   ToastTitle,
 } from "./toast";
@@ -18,11 +18,11 @@ import {ToastQueue, toast, toastQueue} from "./toast-queue";
 export const Toast = Object.assign(ToastRoot, {
   Container: ToastContainer,
   Content: ToastContent,
-  Icon: ToastIcon,
+  Indicator: ToastIndicator,
   Title: ToastTitle,
   Description: ToastDescription,
-  Action: ToastAction,
-  Close: ToastClose,
+  Action: ToastActionButton,
+  CloseButton: ToastCloseButton,
   Queue: ToastQueue,
   toast,
 });
@@ -31,11 +31,11 @@ export type Toast = {
   Props: ComponentProps<typeof ToastRoot>;
   ContainerProps: ComponentProps<typeof ToastContainer>;
   ContentProps: ComponentProps<typeof ToastContent>;
-  IconProps: ComponentProps<typeof ToastIcon>;
+  IndicatorProps: ComponentProps<typeof ToastIndicator>;
   TitleProps: ComponentProps<typeof ToastTitle>;
   DescriptionProps: ComponentProps<typeof ToastDescription>;
-  ActionProps: ComponentProps<typeof ToastAction>;
-  CloseProps: ComponentProps<typeof ToastClose>;
+  ActionProps: ComponentProps<typeof ToastActionButton>;
+  CloseButtonProps: ComponentProps<typeof ToastCloseButton>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -44,19 +44,19 @@ export type Toast = {
 export {
   ToastContainer,
   ToastContent,
-  ToastIcon,
+  ToastIndicator,
   ToastTitle,
   ToastDescription,
-  ToastAction,
-  ToastClose,
+  ToastActionButton,
+  ToastCloseButton,
 };
 
 export type {
-  ToastCloseProps,
+  ToastCloseButtonProps,
   ToastContainerProps,
   ToastContentProps,
   ToastDescriptionProps,
-  ToastIconProps,
+  ToastIndicatorProps,
   ToastProps,
   ToastTitleProps,
 } from "./toast";

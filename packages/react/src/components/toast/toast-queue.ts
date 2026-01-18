@@ -1,3 +1,4 @@
+import type {ButtonProps} from "../button";
 import type {ReactNode} from "react";
 import type {
   ToastOptions as RACToastOptions,
@@ -6,6 +7,12 @@ import type {
 
 import {UNSTABLE_ToastQueue as ToastQueuePrimitive} from "react-aria-components";
 import {flushSync} from "react-dom";
+
+/* ------------------------------------------------------------------------------------------------
+ * Constants
+ * --------------------------------------------------------------------------------------------- */
+/** The default maximum number of visible toasts. */
+export const DEFAULT_MAX_VISIBLE_TOAST = 3;
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Options
@@ -76,24 +83,20 @@ export class ToastQueue<T extends object = ToastContentValue> {
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Instance
  * --------------------------------------------------------------------------------------------- */
-export interface ToastAction {
-  label: ReactNode;
-  onClick: () => void;
-}
 
 export interface ToastContentValue {
-  icon?: ReactNode | undefined;
+  indicator?: ReactNode | undefined;
   title?: ReactNode | undefined;
   description?: ReactNode | undefined;
   variant?: "default" | "accent" | "success" | "warning" | "danger" | undefined;
-  action?: ToastAction | undefined;
+  actionProps?: ButtonProps | undefined;
 }
 
 export interface HeroUIToastOptions {
   description?: ReactNode;
-  icon?: ReactNode;
+  indicator?: ReactNode;
   variant?: ToastContentValue["variant"];
-  action?: ToastAction;
+  actionProps?: ButtonProps;
   timeout?: number;
   onClose?: () => void;
 }
@@ -111,9 +114,9 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
       {
         title: message,
         description: options?.description,
-        icon: options?.icon,
+        indicator: options?.indicator,
         variant: options?.variant || "default",
-        action: options?.action,
+        actionProps: options?.actionProps,
       },
       {
         timeout: options?.timeout,
@@ -189,7 +192,9 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
   };
 }
 
-const toastQueue = new ToastQueue<ToastContentValue>();
+const toastQueue = new ToastQueue<ToastContentValue>({
+  maxVisibleToasts: DEFAULT_MAX_VISIBLE_TOAST,
+});
 
 export const toast = createToastFunction(toastQueue);
 export {toastQueue};

@@ -9,10 +9,10 @@ export const toastVariants = tv({
   },
   slots: {
     action: "toast__action",
-    close: "toast__close",
+    close: "toast__close-button",
     content: "toast__content",
     description: "toast__description",
-    icon: "toast__icon",
+    indicator: "toast__indicator",
     region: "toast-region",
     title: "toast__title",
     toast: "toast",

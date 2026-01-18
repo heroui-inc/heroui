@@ -1,7 +1,8 @@
 import type {ToastVariants} from "./index";
 import type {HeroUIToastOptions} from "./toast-queue";
-import type {Meta, StoryObj} from "@storybook/react";
+import type {Meta} from "@storybook/react";
 
+import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
@@ -36,98 +37,95 @@ const meta: Meta<ToastStoryProps> = {
 
 export default meta;
 
-type Story = StoryObj<ToastStoryProps>;
-
 const noop = () => {};
 
-export const Example: Story = {
-  render: (args) => (
-    <>
-      <Toast.Container placement={args.placement} />
-      <div className="flex max-w-2xl flex-wrap gap-2">
+const Template = () => {
+  return (
+    <div className="max-w-xl">
+      <Toast.Container placement="bottom" />
+      <div className="flex w-full flex-wrap gap-4">
         <Button
+          size="sm"
+          variant="secondary"
+          onPress={() => {
+            toast("You have been invited to join a team", {
+              description: "Bob sent you an invitation to join HeroUI team",
+              variant: "default",
+              indicator: <Icon icon="gravity-ui:persons" />,
+              actionProps: {
+                children: "Dismiss",
+                onPress: () => toast.clear(),
+                variant: "tertiary",
+              },
+            });
+          }}
+        >
+          Default toast
+        </Button>
+        <Button
+          size="sm"
           variant="secondary"
           onPress={() =>
-            toast("Toast available", {
-              ...args,
-              action: {label: "Action!", onClick: noop},
-              onClose: noop,
+            toast.info("You have 2 credits left", {
+              description: "Get a paid plan for more credits",
+              actionProps: {children: "Upgrade", onPress: noop},
             })
           }
         >
-          Show Default Toast
+          Accent toast
         </Button>
         <Button
-          variant="primary"
+          size="sm"
+          variant="secondary"
           onPress={() =>
-            toast.success("Toast is done!", {
-              ...args,
-              action: {label: "Action!", onClick: noop},
-              onClose: noop,
+            toast.success("You have upgraded your plan", {
+              description: "You can continue using HeroUI Chat",
+              actionProps: {
+                children: "Billing",
+                onPress: noop,
+                className: "bg-success text-success-foreground",
+              },
             })
           }
         >
-          Show Success Toast
+          Success toast
         </Button>
         <Button
-          variant="danger"
+          size="sm"
+          variant="secondary"
           onPress={() =>
-            toast.danger("Toast is burned!", {
-              ...args,
-              action: {label: "Action!", onClick: noop},
-              onClose: noop,
+            toast.warning("You have no credits left", {
+              description: "Upgrade to a paid plan to continue",
+              actionProps: {
+                children: "Upgrade",
+                onPress: noop,
+                className: "bg-warning text-warning-foreground",
+              },
             })
           }
         >
-          Show Danger Toast
+          Warning toast
         </Button>
         <Button
-          variant="secondary"
+          size="sm"
+          variant="danger-soft"
           onPress={() =>
-            toast.info("Toasting…", {
-              ...args,
-              action: {label: "Action!", onClick: noop},
-              onClose: noop,
+            toast.danger("Storage is full", {
+              description:
+                "Remove files to release space. I'm adding more text as usual but it's okay I guess I just want to see how it looks with a lot of information",
+              indicator: <Icon icon="gravity-ui:hard-drive" />,
+              actionProps: {children: "Remove", onPress: noop, variant: "danger"},
             })
           }
         >
-          Show Info Toast
-        </Button>
-        <Button
-          variant="secondary"
-          onPress={() =>
-            toast.warning("Toast is getting hot!", {
-              ...args,
-              action: {label: "Action!", onClick: noop},
-              onClose: noop,
-            })
-          }
-        >
-          Show Warning Toast
-        </Button>
-        <Button
-          variant="secondary"
-          onPress={() =>
-            toast.info(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-              {...args, onClose: noop},
-            )
-          }
-        >
-          Show Long Toast
-        </Button>
-        <Button
-          variant="secondary"
-          onPress={() =>
-            toast.info(
-              "LoremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaUtenimaminimveniamquisnostrudexercitationullamcolaborisnisiutaliquipeacommodoconsequat.",
-              {...args, onClose: noop},
-            )
-          }
-        >
-          Show Long Word Toast
+          Danger toast
         </Button>
       </div>
-    </>
-  ),
+    </div>
+  );
+};
+
+export const Default = {
+  args: {},
+  render: Template,
 };
