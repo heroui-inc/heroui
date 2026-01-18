@@ -1,11 +1,10 @@
 "use client";
 
-import type {SwitchGroupVariants} from "./switch-group.styles";
+import type {SwitchGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {switchGroupVariants} from "@heroui/styles";
 import React from "react";
-
-import {switchGroupVariants} from "./switch-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Switch Group Root

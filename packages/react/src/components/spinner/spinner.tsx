@@ -1,11 +1,10 @@
 "use client";
 
-import type {SpinnerVariants} from "./spinner.styles";
+import type {SpinnerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {spinnerVariants} from "@heroui/styles";
 import {useId} from "react";
-
-import {spinnerVariants} from "./spinner.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Internal

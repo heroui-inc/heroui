@@ -2,115 +2,96 @@
 
 import type {Color} from "@/components/color-picker";
 
-import {Check} from "@gravity-ui/icons";
-import {Button, ListBox, cn} from "@heroui/react";
+import {Button, cn} from "@heroui/react";
+import {formatHsl} from "culori";
+import {useMemo} from "react";
 
-import ColorPicker, {formatColor} from "@/components/color-picker";
+import ColorPicker, {ColorSlider} from "@/components/color-picker";
+import {getHueFromColor, getValuesFromOklch} from "@/components/color-picker/utils/color-format";
 
-import {colorIds, colors} from "../constants";
-import {useVariableSetter} from "../hooks";
+import {useVariablesState} from "../hooks/use-variables-state";
 
 import {LockableLabel} from "./lockable-label";
 
 export function AccentColorSelector() {
-  const {setVariable, variables} = useVariableSetter();
+  const [variables, setVariables] = useVariablesState();
+  const {chroma, hue, lightness} = variables;
+  const oklchColor = `oklch(${lightness} ${chroma} ${hue})`;
 
-  // Check if current color is a predefined color or custom
-  const isCustomColor = !colorIds.includes(variables.accentColor as (typeof colorIds)[number]);
+  const trackBackground = useMemo(() => {
+    // const displayChroma = Math.max(0.2, chroma);
+
+    // Build gradient with the current chroma level for accurate representation
+    const gradientStops = [
+      24, 48, 72, 96, 120, 144, 168, 192, 216, 240, 264, 288, 312, 336, 360, 24,
+    ]
+      .map((h) => `oklch(${lightness} ${chroma} ${h})`)
+      .join(", ");
+
+    return `linear-gradient(to right, ${gradientStops})`;
+  }, [lightness, chroma]);
+
+  const value = formatHsl(oklchColor) ?? "hsl(253.67, 100%, 61.99%)";
+
+  const handleHueSliderChange = (color: Color) => {
+    setVariables({
+      ...variables,
+      hue: getHueFromColor(color),
+    });
+  };
 
   const handleColorChange = (color: Color) => {
-    const oklch = formatColor(color, "oklch");
+    const hsl = color.toString("hsl");
+    const {chroma, hue, lightness} = getValuesFromOklch(hsl);
 
-    setVariable("accentColor", oklch);
+    setVariables({
+      ...variables,
+      chroma,
+      hue,
+      lightness,
+    });
   };
 
   return (
     <div className="flex flex-col gap-1">
-      <LockableLabel label="Accent Color" variable="accentColor" />
+      <LockableLabel
+        label="Accent"
+        tooltip="Main color used for branding and highlights."
+        variable="hue"
+      />
       <div className="flex flex-row items-center gap-2 overflow-visible">
-        {/* Predefined Colors */}
-        <ListBox
-          aria-label="Accent Color"
-          className="flex flex-row gap-2 overflow-visible p-0"
-          items={colors}
-          layout="stack"
-          orientation="horizontal"
-          selectedKeys={isCustomColor ? new Set() : new Set([variables.accentColor])}
-          selectionMode="single"
-          onSelectionChange={(keys) => {
-            const selected = [...keys][0];
-
-            if (selected) {
-              setVariable("accentColor", String(selected));
-            }
-          }}
-        >
-          {(item) => (
-            <ListBox.Item
-              className="group size-8 min-h-0 p-0 data-[hovered=true]:bg-transparent"
-              id={item.id}
-              textValue={item.id}
-            >
-              <div
-                className="size-8 cursor-pointer rounded-full border-2 border-white/50"
-                style={{backgroundColor: item.value}}
-              />
-              <div
-                className={cn(
-                  "absolute -top-0.5 -right-1 flex size-4 items-center justify-center rounded-full border border-background bg-foreground",
-                  "scale-80 opacity-0 transition-all duration-200 ease-out group-data-[selected=true]:scale-100 group-data-[selected=true]:opacity-100",
-                )}
-              >
-                <Check className="size-3 text-background" />
-              </div>
-            </ListBox.Item>
-          )}
-        </ListBox>
-
-        {/* Custom Color Picker - styled to match ListBox items */}
+        <ColorSlider
+          channel="hue"
+          className="h-6 w-[138px] xl:w-[160px]"
+          thumbBackground={oklchColor}
+          trackBackground={trackBackground}
+          value={value}
+          onChange={handleHueSliderChange}
+        />
         <ColorPicker
           showSwatches
-          defaultValue={variables.accentColor}
           showAlpha={false}
+          value={value}
           trigger={
             <Button
               isIconOnly
-              className="group relative flex size-8 min-h-0 min-w-0 items-center overflow-visible rounded-full p-0"
+              className="group relative flex size-6 min-h-0 min-w-0 items-center overflow-visible rounded-full p-0"
               variant="ghost"
             >
               {/* Pastel gradient to indicate custom color picker */}
               <div
-                className={cn(
-                  "z-0 size-full rounded-full",
-                  isCustomColor && "z-10 size-7 border-2 border-background",
-                )}
+                className={cn("z-0 size-full rounded-full")}
                 style={{
-                  background: isCustomColor
-                    ? variables.accentColor
-                    : "conic-gradient(from 0deg, #F8AECF, #FBC7A3, #F7E8A4, #D7F5B0, #B5F3D2, #A3EAF7, #A8C9FF, #C9B8FF, #F8AECF)",
+                  background:
+                    "conic-gradient(from 0deg, #F8AECF, #FBC7A3, #F7E8A4, #D7F5B0, #B5F3D2, #A3EAF7, #A8C9FF, #C9B8FF, #F8AECF)",
                 }}
               />
               <div
-                className={cn(
-                  "absolute inset-0 z-10 rounded-full border-2 border-white/50",
-                  isCustomColor && "z-0 border-none mix-blend-plus-darker",
-                )}
+                className={cn("absolute inset-0 z-10 rounded-full border-2 border-white/50")}
                 style={{
-                  background: isCustomColor
-                    ? "conic-gradient(from 0deg, #F8AECF, #FBC7A3, #F7E8A4, #D7F5B0, #B5F3D2, #A3EAF7, #A8C9FF, #C9B8FF, #F8AECF)"
-                    : "transparent",
+                  background: "transparent",
                 }}
               />
-              {/* Check indicator when custom color is selected */}
-              <div
-                className={cn(
-                  "absolute -top-0.5 -right-1 z-20 flex size-4 items-center justify-center rounded-full border border-background bg-foreground",
-                  "transition-all duration-200 ease-out",
-                  isCustomColor ? "scale-100 opacity-100" : "scale-80 opacity-0",
-                )}
-              >
-                <Check className="size-3 text-background" />
-              </div>
             </Button>
           }
           onChange={handleColorChange}

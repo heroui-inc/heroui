@@ -31,6 +31,7 @@ export default () => (
     <Label />
     <Autocomplete.Trigger>
       <Autocomplete.Value />
+      <Autocomplete.ClearButton />
       <Autocomplete.Indicator />
     </Autocomplete.Trigger>
     <Description />
@@ -160,6 +161,7 @@ function CustomAutocomplete() {
       <Label>State</Label>
       <Autocomplete.Trigger className="rounded-lg border bg-surface p-2">
         <Autocomplete.Value />
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
@@ -203,6 +205,10 @@ To customize the Autocomplete component classes, you can use the `@layer compone
     @apply text-current;
   }
 
+  .autocomplete__clear-button {
+    @apply text-muted hover:text-foreground;
+  }
+
   .autocomplete__indicator {
     @apply text-muted;
   }
@@ -224,6 +230,7 @@ The Autocomplete component uses these CSS classes ([View source styles](https://
 - `.autocomplete` - Base autocomplete container
 - `.autocomplete__trigger` - The button that triggers the autocomplete
 - `.autocomplete__value` - The displayed value or placeholder
+- `.autocomplete__clear-button` - The clear button that removes the selected value
 - `.autocomplete__indicator` - The dropdown indicator icon
 - `.autocomplete__popover` - The popover container
 - `.autocomplete__filter` - The filter wrapper
@@ -239,6 +246,7 @@ The Autocomplete component uses these CSS classes ([View source styles](https://
 - `.autocomplete__trigger[data-focus-visible="true"]` - Focused trigger state
 - `.autocomplete__trigger[data-disabled="true"]` - Disabled trigger state
 - `.autocomplete__value[data-placeholder="true"]` - Placeholder state
+- `.autocomplete__clear-button[data-empty="true"]` - Clear button hidden when no selection
 - `.autocomplete__indicator[data-open="true"]` - Open indicator state
 
 ### Interactive States
@@ -294,6 +302,14 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | ----------- | ----------- | ------- | ------------------------ |
 | `className` | `string`    | -       | Additional CSS classes   |
 | `children`  | `ReactNode` | -       | Custom indicator content |
+
+### Autocomplete.ClearButton Props
+
+| Prop        | Type                          | Default | Description                      |
+| ----------- | ----------------------------- | ------- | -------------------------------- |
+| `className` | `string`                      | -       | Additional CSS classes           |
+| `onClick`   | `(e: MouseEvent) => void`     | -       | Handler called when button is clicked |
+| `ref`       | `RefObject<HTMLButtonElement>` | -       | Ref to the clear button element  |
 
 ### Autocomplete.Popover Props
 

@@ -9,7 +9,7 @@ import {composeTailwindRenderProps} from "@/utils/compose-tw-render";
 import {focusRing} from "@/utils/focus";
 
 const colorAreaStyles = tv({
-  base: "size-[232px] shrink-0 rounded-2xl forced-colors:bg-[GrayText]",
+  base: "size-[232px] shrink-0 rounded-2xl border border-border forced-colors:bg-[GrayText]",
 });
 
 const colorThumbStyles = tv({

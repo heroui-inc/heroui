@@ -2,7 +2,7 @@ import {Alert, Button} from "@heroui/react";
 
 export function AlertDemo() {
   return (
-    <Alert className="w-[400px] items-center">
+    <Alert className="w-full items-center xl:w-[400px]">
       <Alert.Indicator />
       <Alert.Content>
         <Alert.Title>You have 2 credits left</Alert.Title>

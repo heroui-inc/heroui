@@ -5,12 +5,12 @@ import {CodeBlock} from "@/components/codeblock-client";
 import {useCodePanel} from "@/hooks/use-code-panel";
 
 import {useVariablesState} from "../hooks/use-variables-state";
-import {generateCssVariables} from "../utils/generate-css-variables";
+import {generateMinimalCssVariables} from "../utils/generate-css-variables";
 
 export function ThemeCodePanel() {
   const [variables] = useVariablesState();
   const {isCodeVisible, toggleCode} = useCodePanel();
-  const cssCode = generateCssVariables(variables);
+  const cssCode = generateMinimalCssVariables(variables);
 
   return (
     <CodePanel

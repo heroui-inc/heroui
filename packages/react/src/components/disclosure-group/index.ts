@@ -27,9 +27,9 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {disclosureGroupVariants} from "./disclosure-group.styles";
+export {disclosureGroupVariants} from "@heroui/styles";
 
-export type {DisclosureGroupVariants} from "./disclosure-group.styles";
+export type {DisclosureGroupVariants} from "@heroui/styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Hooks

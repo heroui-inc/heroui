@@ -1,14 +1,15 @@
 "use client";
 
-import type {ModalVariants} from "./modal.styles";
 import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-overlay-state";
 import type {SurfaceVariants} from "../surface";
+import type {ModalVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {
   Button as ButtonPrimitive,
   DialogProps as DialogPrimitiveProps,
 } from "react-aria-components";
 
+import {modalVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
 import {createContext, useContext, useMemo} from "react";
 import {
@@ -23,8 +24,6 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
-
-import {modalVariants} from "./modal.styles";
 
 type ModalPlacement = "auto" | "top" | "center" | "bottom";
 

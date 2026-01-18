@@ -32,6 +32,7 @@ export function Controlled() {
         <Label>State (controlled)</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
+          <Autocomplete.ClearButton />
           <Autocomplete.Indicator />
         </Autocomplete.Trigger>
         <Autocomplete.Popover>

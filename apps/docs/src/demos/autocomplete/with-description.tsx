@@ -29,6 +29,7 @@ export function WithDescription() {
       <Label>State</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
+        <Autocomplete.ClearButton />
         <Autocomplete.Indicator />
       </Autocomplete.Trigger>
       <Autocomplete.Popover>

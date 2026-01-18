@@ -12,7 +12,11 @@
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
     "typegen": "next typegen",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "test:skills": "node test_skills_scripts.mjs",
+    "test:skills:dev": "node test_skills_scripts.mjs --env dev",
+    "test:skills:staging": "node test_skills_scripts.mjs --env staging",
+    "test:skills:prod": "node test_skills_scripts.mjs --env production"
   },
   "dependencies": {
     "@gravity-ui/icons": "2.16.0",
@@ -20,6 +24,7 @@
     "@iconify-json/gravity-ui": "1.2.10",
     "@iconify/react": "6.0.2",
     "@internationalized/date": "3.10.1",
+    "@react-aria/overlays": "3.31.0",
     "@react-stately/data": "3.15.0",
     "@t3-oss/env-nextjs": "0.13.10",
     "@vercel/analytics": "1.6.1",
@@ -40,6 +45,8 @@
     "next-sitemap": "4.2.3",
     "next-themes": "0.4.6",
     "nuqs": "2.8.6",
+    "posthog-js": "1.321.2",
+    "posthog-node": "5.21.0",
     "react": "19.2.3",
     "react-aria-components": "1.14.0",
     "react-dom": "19.2.3",

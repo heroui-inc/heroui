@@ -1,9 +1,10 @@
 "use client";
 
-import type {TagVariants} from "./tag.styles";
+import type {TagVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {Button as ButtonPrimitive} from "react-aria-components";
 
+import {tagVariants} from "@heroui/styles";
 import React, {Children, createContext, useContext, useMemo} from "react";
 import {Tag as TagPrimitive} from "react-aria-components";
 
@@ -11,8 +12,6 @@ import {pickChildren} from "../../utils/children";
 import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {TagGroupContext} from "../tag-group";
-
-import {tagVariants} from "./tag.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Tag Context

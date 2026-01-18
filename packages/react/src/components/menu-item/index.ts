@@ -33,5 +33,5 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {menuItemVariants} from "./menu-item.styles";
-export type {MenuItemVariants} from "./menu-item.styles";
+export {menuItemVariants} from "@heroui/styles";
+export type {MenuItemVariants} from "@heroui/styles";

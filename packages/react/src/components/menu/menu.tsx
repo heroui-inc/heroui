@@ -1,14 +1,13 @@
 "use client";
 
-import type {MenuVariants} from "./menu.styles";
+import type {MenuVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {menuVariants} from "@heroui/styles";
 import React from "react";
 import {Menu as MenuPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
-
-import {menuVariants} from "./menu.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Menu Root

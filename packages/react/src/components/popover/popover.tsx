@@ -1,9 +1,10 @@
 "use client";
 
-import type {PopoverVariants} from "./popover.styles";
 import type {SurfaceVariants} from "../surface";
+import type {PopoverVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {popoverVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Dialog as DialogPrimitive,
@@ -16,8 +17,6 @@ import {
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
-
-import {popoverVariants} from "./popover.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Popover Context

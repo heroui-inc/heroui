@@ -1,12 +1,11 @@
 "use client";
 
-import type {ButtonGroupVariants} from "./button-group.styles";
 import type {ButtonProps} from "../button";
+import type {ButtonGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {buttonGroupVariants} from "@heroui/styles";
 import React, {Children, createContext, isValidElement} from "react";
-
-import {buttonGroupVariants} from "./button-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Context

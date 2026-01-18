@@ -52,6 +52,7 @@ export function Variants() {
             <Label>Primary variant</Label>
             <Autocomplete.Trigger>
               <Autocomplete.Value />
+              <Autocomplete.ClearButton />
               <Autocomplete.Indicator />
             </Autocomplete.Trigger>
             <Autocomplete.Popover>
@@ -85,6 +86,7 @@ export function Variants() {
             <Label>Secondary variant</Label>
             <Autocomplete.Trigger>
               <Autocomplete.Value />
+              <Autocomplete.ClearButton />
               <Autocomplete.Indicator />
             </Autocomplete.Trigger>
             <Autocomplete.Popover>
@@ -149,6 +151,7 @@ export function Variants() {
                   );
                 }}
               </Autocomplete.Value>
+              <Autocomplete.ClearButton />
               <Autocomplete.Indicator />
             </Autocomplete.Trigger>
             <Autocomplete.Popover>
@@ -208,6 +211,7 @@ export function Variants() {
                   );
                 }}
               </Autocomplete.Value>
+              <Autocomplete.ClearButton />
               <Autocomplete.Indicator />
             </Autocomplete.Trigger>
             <Autocomplete.Popover>

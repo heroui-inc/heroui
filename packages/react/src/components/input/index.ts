@@ -24,6 +24,6 @@ export type {InputRootProps, InputRootProps as InputProps} from "./input";
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {inputVariants} from "./input.styles";
+export {inputVariants} from "@heroui/styles";
 
-export type {InputVariants} from "./input.styles";
+export type {InputVariants} from "@heroui/styles";

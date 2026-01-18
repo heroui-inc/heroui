@@ -3,6 +3,8 @@
  * -----------------------------------------------------------------------------------------------*/
 
 export const DEFAULT_COLOR = "#006FEE";
+export const DEFAULT_COLOR_OKLCH = "oklch(0.6199 0.194 253.67)";
+export const DEFAULT_COLOR_HSL = "hsl(253.67, 100%, 61.99%)";
 
 export const SWATCHES_PER_PAGE = 8;
 
@@ -11,8 +13,6 @@ export const SWATCHES_PER_PAGE = 8;
  * -----------------------------------------------------------------------------------------------*/
 
 export const defaultSwatches = [
-  // Original 8 colors
-  "hsla(26, 35%, 92%, 1)", // Light beige
   "hsla(338, 77%, 78%, 1)", // Pink
   "hsla(309, 23%, 55%, 1)", // Muted purple
   "hsla(355, 85%, 66%, 1)", // Coral/red
@@ -32,8 +32,4 @@ export const defaultSwatches = [
   "hsla(10, 80%, 65%, 1)", // Tomato red
   "hsla(30, 90%, 55%, 1)", // Dark orange
   "hsla(45, 100%, 51%, 1)", // Gold
-  "hsla(60, 90%, 85%, 1)", // Pale yellow
-  "hsla(0, 0%, 95%, 1)", // Cloud white
-  "hsla(0, 0%, 70%, 1)", // Medium gray
-  "hsla(0, 0%, 40%, 1)", // Charcoal
 ];

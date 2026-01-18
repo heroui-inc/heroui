@@ -27,10 +27,10 @@
     @apply pr-7;
   }
 
-  /* Hover state */
+  /* Hover state - exclude when clear button is hovered to prevent double hover effect */
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
+    &:hover:not(:has(.autocomplete__clear-button:hover)),
+    &[data-hovered="true"]:not(:has(.autocomplete__clear-button:hover)) {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
@@ -76,9 +76,10 @@
   --autocomplete-trigger-bg-hover: var(--color-default-hover);
   --autocomplete-trigger-bg-focus: var(--color-default);
 
+  /* Exclude when clear button is hovered to prevent double hover effect */
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
+    &:hover:not(:has(.autocomplete__clear-button:hover)),
+    &[data-hovered="true"]:not(:has(.autocomplete__clear-button:hover)) {
       background-color: var(--autocomplete-trigger-bg-hover);
     }
   }
@@ -212,4 +213,45 @@
 
 .autocomplete__trigger--full-width {
   @apply w-full;
+}
+
+/* Clear Button styles */
+.autocomplete__clear-button {
+  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center items-center justify-center rounded-xl p-1 text-muted will-change-transform select-none no-highlight;
+  @apply mr-0 size-5 shrink-0 self-center bg-transparent;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  @apply transform-gpu;
+
+  /* Transition only when visible - disappears immediately when cleared */
+  &:not([data-empty="true"]) {
+    transition: opacity 150ms var(--ease-smooth);
+    @apply motion-reduce:transition-none;
+  }
+
+  &[data-empty="true"] {
+    @apply pointer-events-none opacity-0;
+  }
+
+  [data-slot="autocomplete-clear-button-icon"] {
+    @apply size-3.5;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default-hover;
+    }
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.93);
+  }
 }

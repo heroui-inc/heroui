@@ -30,5 +30,5 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {listboxItemVariants} from "./listbox-item.styles";
-export type {ListBoxItemVariants} from "./listbox-item.styles";
+export {listboxItemVariants} from "@heroui/styles";
+export type {ListBoxItemVariants} from "@heroui/styles";
