@@ -35,7 +35,7 @@ export function ThemePopover() {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[228px] rounded-xl" placement="top">
+      <Popover.Content className="w-[228px] rounded-3xl" placement="top">
         <Popover.Dialog className="p-4">
           <ListBox
             disallowEmptySelection

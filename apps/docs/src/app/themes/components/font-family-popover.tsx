@@ -46,7 +46,7 @@ export function FontFamilyPopover() {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[325px] rounded-xl" placement="top">
+      <Popover.Content className="w-[325px] rounded-3xl" placement="top">
         <Popover.Dialog className="p-3">
           {mode === "suggested" ? (
             <SuggestedFonts customFonts={customFonts} goToCustom={() => setMode("custom")} />
