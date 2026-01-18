@@ -70,14 +70,14 @@ import { linkVariants } from '@heroui/styles';
 import NextLink from 'next/link';
 
 // With custom root - pass className manually
-const slots = linkVariants({ underline: "hover" });
+const slots = linkVariants();
 
 <NextLink className={slots.base()} href="/about">
   About Page
   <Link.Icon className={slots.icon()} />
 </NextLink>
 
-<NextLink className="link link--underline-hover" href="/about">
+<NextLink className="link" href="/about">
   About Page
   <Link.Icon className="link__icon" />
 </NextLink>
@@ -124,7 +124,7 @@ import { Link } from '@heroui/react';
 import { linkVariants } from '@heroui/styles';
 import NextLink from 'next/link';
 
-const slots = linkVariants({ underline: "hover" });
+const slots = linkVariants();
 
 <NextLink className={slots.base()} href="/about">
   About Page
@@ -246,11 +246,10 @@ import { Link } from '@heroui/react';
 import { linkVariants, buttonVariants } from '@heroui/styles';
 
 // Link styled with button variants
-const linkSlots = linkVariants({ underline: "hover" });
 const buttonStyles = buttonVariants({ variant: "tertiary", size: "md" });
 
 <Link
-  className={`${linkSlots.base()} ${buttonStyles}`}
+  className={buttonStyles}
   href="https://heroui.com"
 >
   HeroUI
