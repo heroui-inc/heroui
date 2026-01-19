@@ -21,7 +21,7 @@ export function DemoComponents() {
   return (
     <div className="mx-auto grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[auto_1fr_1fr] xl:grid-cols-3">
       {/* Left */}
-      <div className="flex flex-col items-center gap-10">
+      <div className="order-2 flex flex-col items-center gap-10 md:order-1">
         <TextfieldDemo />
         <SelectDemo />
         <UIComponentsDemo />
@@ -31,7 +31,7 @@ export function DemoComponents() {
         <ListBoxDemo />
       </div>
       {/* Center */}
-      <div className="flex flex-col items-center gap-10">
+      <div className="order-1 flex flex-col items-center gap-10 md:order-2">
         <AvatarGroupDemo />
         <InputOTPDemo />
         <ButtonsDemo />
@@ -40,7 +40,7 @@ export function DemoComponents() {
         <AllowNotificationsDemo />
       </div>
       {/* Right */}
-      <div className="col-span-1 grid grid-cols-1 grid-rows-2 justify-items-center gap-8 md:col-span-2 md:grid-cols-2 lg:col-span-1 lg:grid-cols-1">
+      <div className="order-3 col-span-1 grid grid-cols-1 grid-rows-2 justify-items-center gap-8 md:col-span-2 md:grid-cols-2 lg:col-span-1 lg:grid-cols-1">
         <div className="row-span-2">
           <LoginDemo />
         </div>
