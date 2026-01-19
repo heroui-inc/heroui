@@ -152,7 +152,7 @@ const PlacementsTemplate = () => {
       {placements.map((p) => (
         <Toast.Container key={p} placement={p} toast={placementQueues[p]} />
       ))}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="flex max-w-xs flex-wrap justify-center gap-2">
         {placements.map((p) => (
           <Button key={p} size="sm" variant="secondary" onPress={() => showToast(p)}>
             {p}

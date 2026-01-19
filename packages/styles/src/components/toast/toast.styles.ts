@@ -21,21 +21,27 @@ export const toastVariants = tv({
     placement: {
       bottom: {
         region: "toast-region--bottom",
+        toast: "toast--bottom",
       },
       "bottom end": {
         region: "toast-region--bottom-end",
+        toast: "toast--bottom-end",
       },
       "bottom start": {
         region: "toast-region--bottom-start",
+        toast: "toast--bottom-start",
       },
       top: {
         region: "toast-region--top",
+        toast: "toast--top",
       },
       "top end": {
         region: "toast-region--top-end",
+        toast: "toast--top-end",
       },
       "top start": {
         region: "toast-region--top-start",
+        toast: "toast--top-start",
       },
     },
     variant: {

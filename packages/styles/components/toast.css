@@ -38,7 +38,6 @@
 /* Base toast styles */
 .toast {
   @apply relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
-  view-transition-class: toast;
 }
 
 .toast:not([data-frontmost="true"]) {
@@ -53,6 +52,19 @@
 
 .toast:focus-visible {
   @apply outline-2 outline-offset-2 outline-focus;
+}
+
+/* Toast placements + view transitions */
+.toast--bottom,
+.toast--bottom-start,
+.toast--bottom-end {
+  view-transition-class: toast-bottom;
+}
+
+.toast--top,
+.toast--top-start,
+.toast--top-end {
+  view-transition-class: toast-top;
 }
 
 /* Toast content */
@@ -138,34 +150,59 @@
 }
 
 /* View transition animations */
-::view-transition-new(.toast):only-child {
-  animation: toast-slide-in 350ms;
+::view-transition-group(.toast-bottom),
+::view-transition-group(.toast-top) {
+  will-change: translate, opacity;
 }
 
-::view-transition-old(.toast):only-child {
-  animation: toast-slide-out 350ms;
+/* Bottom */
+::view-transition-new(.toast-bottom):only-child {
+  animation: toast-slide-bottom-in 350ms;
+}
+
+::view-transition-old(.toast-bottom):only-child {
+  animation: toast-slide-bottom-out 350ms;
   animation-fill-mode: forwards;
 }
 
-.toast-region--bottom ::view-transition-new(.toast):only-child {
-  animation: toast-slide-in 350ms;
+/* Top */
+::view-transition-new(.toast-top):only-child {
+  animation: toast-slide-top-in 350ms;
 }
 
-.toast-region--bottom ::view-transition-old(.toast):only-child {
-  animation: toast-slide-out 350ms;
+::view-transition-old(.toast-top):only-child {
+  animation: toast-slide-top-out 350ms;
   animation-fill-mode: forwards;
 }
 
-@keyframes toast-slide-out {
+/* Keyframes */
+
+/* Bottom */
+@keyframes toast-slide-bottom-in {
+  from {
+    translate: 0 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes toast-slide-bottom-out {
   to {
     translate: 0 100%;
     opacity: 0;
   }
 }
 
-@keyframes toast-slide-in {
+/* Top */
+@keyframes toast-slide-top-in {
   from {
-    translate: 0 100%;
+    translate: 100% 0;
+    opacity: 0;
+  }
+}
+
+@keyframes toast-slide-top-out {
+  to {
+    translate: 100% 0;
     opacity: 0;
   }
 }
