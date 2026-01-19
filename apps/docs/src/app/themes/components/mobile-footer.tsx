@@ -30,36 +30,38 @@ export function MobileFooter() {
         isOpen={isSheetOpen}
         onOpenChange={setIsSheetOpen}
       >
-        <div className="flex w-full flex-col">
-          <div className="mb-4 flex justify-center pb-2">
+        <div className="flex w-full flex-col items-start md:items-center">
+          <div className="mb-4 flex w-full justify-center pb-2">
             <div className="h-1.5 w-9 rounded-sm bg-separator" />
           </div>
           <ThemesList />
           <div className="h-6" />
-          <div className="mb-4 flex items-center gap-4 px-4">
-            <AccentColorSelector />
-            <BaseColorSlider />
+          <div className="flex w-full flex-wrap gap-4 gap-x-0 md:w-auto">
+            <div className="mb-4 flex items-center gap-4 pl-4">
+              <AccentColorSelector />
+              <BaseColorSlider />
+            </div>
+            <ScrollShadow
+              hideScrollBar
+              className="flex w-full items-center gap-4 px-4 pb-4 md:w-auto"
+              orientation="horizontal"
+              visibility="none"
+            >
+              <FontFamilyPopover />
+              <RadiusPopover
+                description="Affects the overall UI, like menus and modals"
+                label="Radius"
+                radiusOptions={radiusOptions}
+                variableKey="radius"
+              />
+              <RadiusPopover
+                description="Affects form elements, like inputs and selects"
+                label="Radius Form"
+                radiusOptions={formRadiusOptions}
+                variableKey="formRadius"
+              />
+            </ScrollShadow>
           </div>
-          <ScrollShadow
-            hideScrollBar
-            className="flex w-full items-center gap-4 px-4 pb-4"
-            orientation="horizontal"
-            visibility="none"
-          >
-            <FontFamilyPopover />
-            <RadiusPopover
-              description="Affects the overall UI, like menus and modals."
-              label="Radius"
-              radiusOptions={radiusOptions}
-              variableKey="radius"
-            />
-            <RadiusPopover
-              description="Affects form elements, like inputs and selects."
-              label="Radius Form"
-              radiusOptions={formRadiusOptions}
-              variableKey="formRadius"
-            />
-          </ScrollShadow>
         </div>
       </BottomSheet>
     </>

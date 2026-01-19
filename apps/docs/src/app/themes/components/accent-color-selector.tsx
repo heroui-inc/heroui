@@ -56,13 +56,13 @@ export function AccentColorSelector() {
     <div className="flex flex-col gap-1">
       <LockableLabel
         label="Accent"
-        tooltip="Main color used for branding and highlights."
+        tooltip="Main color used for branding and highlights"
         variable="hue"
       />
       <div className="flex flex-row items-center gap-2 overflow-visible">
         <ColorSlider
           channel="hue"
-          className="h-6 w-[138px] xl:w-[160px]"
+          className="h-6 w-[128px] xl:w-[160px]"
           thumbBackground={oklchColor}
           trackBackground={trackBackground}
           value={value}

@@ -82,7 +82,11 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
           </p>
         </Tooltip.Content>
       </Tooltip>
-      <AlertDialog.Backdrop isOpen={modalState.isOpen} onOpenChange={handleOpenChange}>
+      <AlertDialog.Backdrop
+        isDismissable
+        isOpen={modalState.isOpen}
+        onOpenChange={handleOpenChange}
+      >
         <AlertDialog.Container>
           <AlertDialog.Dialog>
             <AlertDialog.CloseTrigger />
@@ -95,7 +99,7 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
             <AlertDialog.Body>This will overwrite your current theme settings.</AlertDialog.Body>
             <AlertDialog.Footer className="flex-col sm:flex-row sm:items-center">
               <Button
-                className="order-1 w-full sm:order-2 sm:w-auto"
+                className="order-2 w-full sm:order-2 sm:w-auto"
                 size="md"
                 variant="tertiary"
                 onPress={handleClose}
@@ -103,7 +107,7 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
                 Cancel
               </Button>
               <Button
-                className="order-2 w-full sm:order-3 sm:w-auto"
+                className="order-1 w-full sm:order-3 sm:w-auto"
                 size="md"
                 onPress={handleRandomize}
               >

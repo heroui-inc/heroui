@@ -29,7 +29,12 @@ export function ThemesList() {
   };
 
   return (
-    <ScrollShadow hideScrollBar className="w-full px-4" orientation="horizontal" visibility="none">
+    <ScrollShadow
+      hideScrollBar
+      className="w-full px-4 md:w-auto"
+      orientation="horizontal"
+      visibility="none"
+    >
       <ListBox
         aria-label="Theme"
         className="flex w-max flex-row flex-nowrap gap-5"

@@ -1,6 +1,6 @@
 "use client";
 
-import {fontIds, radiusIds} from "../constants";
+import {fontIds, radiusIds, radiusOptions} from "../constants";
 
 import {useVariablesState} from "./use-variables-state";
 
@@ -26,7 +26,9 @@ export function useRandomizeVariables() {
       lightness: lockedVariables.includes("lightness")
         ? variables.lightness
         : randomInRange(0.5, 0.85),
-      radius: lockedVariables.includes("radius") ? variables.radius : randomPick([...radiusIds]),
+      radius: lockedVariables.includes("radius")
+        ? variables.radius
+        : randomPick([...radiusOptions.map((r) => r.id)]),
     });
   };
 

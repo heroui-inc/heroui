@@ -11,6 +11,9 @@ export function ThemeInput() {
   const currentThemeId = findMatchingTheme(variables);
   const currentTheme = currentThemeId ? themes.find((t) => t.id === currentThemeId) : undefined;
 
+  const accentColor = `oklch(${variables.lightness} ${variables.chroma} ${variables.hue})`;
+  const customThemeGradient = `radial-gradient(85.29% 80.57% at 40.28% 34.72%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.02) 43.66%, rgba(0, 0, 0, 0.27) 72.4%, rgba(0, 0, 0, 0.30) 100%), ${accentColor}`;
+
   return (
     <InputGroup className="w-full cursor-pointer">
       <InputGroup.Prefix className="w-10">
@@ -25,7 +28,7 @@ export function ThemeInput() {
             />
           </Avatar>
         ) : (
-          <span className="text-xs">✨</span>
+          <div className="size-4 rounded-full" style={{background: customThemeGradient}} />
         )}
       </InputGroup.Prefix>
       <InputGroup.Input

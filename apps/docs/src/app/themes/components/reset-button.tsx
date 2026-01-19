@@ -29,7 +29,7 @@ export function ResetButton() {
           <Button isIconOnly isDisabled={isDisabled} size="md" variant="tertiary">
             <ArrowRotateLeft />
           </Button>
-          <AlertDialog.Backdrop>
+          <AlertDialog.Backdrop isDismissable>
             <AlertDialog.Container>
               <AlertDialog.Dialog>
                 <AlertDialog.CloseTrigger />
@@ -43,10 +43,20 @@ export function ResetButton() {
                   This will restore all theme values to their default settings.
                 </AlertDialog.Body>
                 <AlertDialog.Footer className="flex-col sm:flex-row">
-                  <Button className="w-full sm:w-auto" size="md" slot="close" variant="tertiary">
+                  <Button
+                    className="order-2 w-full sm:order-1 sm:w-auto"
+                    size="md"
+                    slot="close"
+                    variant="tertiary"
+                  >
                     Cancel
                   </Button>
-                  <Button className="w-full sm:w-auto" size="md" slot="close" onPress={reset}>
+                  <Button
+                    className="order-1 w-full sm:order-2 sm:w-auto"
+                    size="md"
+                    slot="close"
+                    onPress={reset}
+                  >
                     Confirm
                   </Button>
                 </AlertDialog.Footer>

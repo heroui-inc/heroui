@@ -83,7 +83,7 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
           <Plus className="size-4" />
         </Button>
       </div>
-      <ScrollShadow className="max-h-56 pb-3" size={15}>
+      <ScrollShadow hideScrollBar className="max-h-56 pb-3" size={15}>
         <ListBox
           disallowEmptySelection
           aria-label="Font Family"
@@ -129,7 +129,7 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
                         handleDeleteCustomFont(item.url);
                       }}
                     >
-                      <TrashBin className="size-3" />
+                      <TrashBin className="size-3 text-danger" />
                     </Button>
                   </Tooltip.Trigger>
                   <Tooltip.Content>
