@@ -1,7 +1,6 @@
 "use client";
 
 import {CodePanel} from "@/components/code-panel";
-import {CodeBlock} from "@/components/codeblock-client";
 import {useCodePanel} from "@/hooks/use-code-panel";
 
 import {useVariablesState} from "../hooks/use-variables-state";
@@ -21,22 +20,13 @@ export function ThemeCodePanel() {
 
   return (
     <CodePanel
+      showLineNumbers
       fileName="theme.css"
       isVisible={isCodeVisible}
+      lang="css"
       sourceCode={cssCode}
-      title="Theme CSS Variables"
+      title="index.css"
       onClose={toggleCode}
-    >
-      <CodeBlock
-        showLineNumbers
-        allowCopy={false}
-        className="docs-code-block docs-code-block-line-numbers"
-        title={undefined}
-      >
-        <pre>
-          <code className="language-css">{cssCode}</code>
-        </pre>
-      </CodeBlock>
-    </CodePanel>
+    />
   );
 }
