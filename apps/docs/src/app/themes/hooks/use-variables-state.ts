@@ -8,23 +8,20 @@ import {
   useQueryStates,
 } from "nuqs";
 
-import {defaultThemeValues, radiusIds, themeIds, themeVariableKeys} from "../constants";
+import {defaultThemeVariables, radiusIds, themeVariableKeys} from "../constants";
 
 export function useVariablesState() {
   return useQueryStates(
     {
-      // Use parseAsString for accentColor to allow custom colors from the ColorPicker
-      accentColor: parseAsString.withDefault(defaultThemeValues.accentColor),
-      base: parseAsFloat.withDefault(defaultThemeValues.base),
-      chroma: parseAsFloat.withDefault(defaultThemeValues.chroma),
+      base: parseAsFloat.withDefault(defaultThemeVariables.base),
+      chroma: parseAsFloat.withDefault(defaultThemeVariables.chroma),
       // Use parseAsString for fontFamily to allow custom fonts (prefixed with "custom-")
-      fontFamily: parseAsString.withDefault(defaultThemeValues.fontFamily),
-      formRadius: parseAsStringLiteral(radiusIds).withDefault(defaultThemeValues.formRadius),
-      hue: parseAsFloat.withDefault(defaultThemeValues.hue),
-      lightness: parseAsFloat.withDefault(defaultThemeValues.lightness),
+      fontFamily: parseAsString.withDefault(defaultThemeVariables.fontFamily),
+      formRadius: parseAsStringLiteral(radiusIds).withDefault(defaultThemeVariables.formRadius),
+      hue: parseAsFloat.withDefault(defaultThemeVariables.hue),
+      lightness: parseAsFloat.withDefault(defaultThemeVariables.lightness),
       lockedVariables: parseAsArrayOf(parseAsStringLiteral(themeVariableKeys)).withDefault([]),
-      radius: parseAsStringLiteral(radiusIds).withDefault(defaultThemeValues.radius),
-      theme: parseAsStringLiteral(themeIds).withDefault(defaultThemeValues.theme),
+      radius: parseAsStringLiteral(radiusIds).withDefault(defaultThemeVariables.radius),
     },
     {
       history: "push",

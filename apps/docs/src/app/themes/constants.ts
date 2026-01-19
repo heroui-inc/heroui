@@ -1,3 +1,4 @@
+import type {RadiusId, ThemeId} from "./theme-values";
 import type {StaticImageData} from "next/image";
 
 import airbnbTheme from "@/assets/themes/airbnb.png";
@@ -5,13 +6,24 @@ import blackTheme from "@/assets/themes/black.png";
 import coinbaseTheme from "@/assets/themes/coinbase.png";
 import defaultTheme from "@/assets/themes/default.png";
 import discordTheme from "@/assets/themes/discord.png";
-import glassTheme from "@/assets/themes/glass.png";
 import lavenderTheme from "@/assets/themes/lavender.png";
 import mintTheme from "@/assets/themes/mint.png";
 import netflixTheme from "@/assets/themes/netflix.png";
 import rabbitTheme from "@/assets/themes/rabbit.png";
 import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
+
+import {DEFAULT_BASE} from "./theme-values";
+
+export type {RadiusId, ThemeId, ThemeValues} from "./theme-values";
+export {
+  DEFAULT_BASE,
+  findMatchingTheme,
+  radiusIds,
+  themeComparisonKeys,
+  themeIds,
+  themeValuesById,
+} from "./theme-values";
 
 export const tabs = [
   {disabled: false, label: "components"},
@@ -22,7 +34,6 @@ export const tabs = [
 ];
 export const DEFAULT_COLOR = "oklch(0.6199 0.194 253.67)";
 export const DEFAULT_COLOR_HSL = "hsl(253.67, 100%, 61.99%)";
-export const DEFAULT_BASE = 0.0015;
 export const colorIds = [
   "oklch(0.6199 0.194 253.67)",
   "oklch(0.6356 0.2082 25.38)",
@@ -165,18 +176,10 @@ export const fontMap = Object.fromEntries(fonts.map((f) => [f.id, f])) as Record
   FontConfig
 >;
 
-export const radiusIds = [
-  "none",
-  "extra-small",
-  "small",
-  "medium",
-  "large",
-  "extra-large",
-] as const;
 export const radiusOptions: Array<{
   cssValue: string;
   description: string;
-  id: (typeof radiusIds)[number];
+  id: RadiusId;
   label: string;
 }> = [
   {cssValue: "0", description: "none", id: "none", label: "-"},
@@ -188,7 +191,7 @@ export const radiusOptions: Array<{
 export const formRadiusOptions: Array<{
   cssValue: string;
   description: string;
-  id: (typeof radiusIds)[number];
+  id: RadiusId;
   label: string;
 }> = [
   {cssValue: "0", description: "none", id: "none", label: "-"},
@@ -204,52 +207,33 @@ export const radiusCssMap = Object.fromEntries(
   formRadiusOptions.map((r) => [r.id, r.cssValue]),
 ) as Record<(typeof formRadiusOptions)[number]["id"], string>;
 
-export const themeIds = [
-  "default",
-  "glass",
-  "sky",
-  "lavender",
-  "mint",
-  "netflix",
-  "uber",
-  "spotify",
-  "coinbase",
-  "airbnb",
-  "discord",
-  "rabbit",
-] as const;
 export const themes: Array<{
-  id: (typeof themeIds)[number];
+  id: ThemeId;
   image: StaticImageData;
   label: string;
-  value: string;
 }> = [
-  {id: "default", image: defaultTheme, label: "Default", value: "default"},
-  {id: "glass", image: glassTheme, label: "Glass", value: "glass"},
-  {id: "sky", image: skyTheme, label: "Sky", value: "sky"},
-  {id: "lavender", image: lavenderTheme, label: "Lavender", value: "lavender"},
-  {id: "mint", image: mintTheme, label: "Mint", value: "mint"},
-  {id: "netflix", image: netflixTheme, label: "Netflix", value: "netflix"},
-  {id: "uber", image: blackTheme, label: "Uber", value: "uber"},
-  {id: "spotify", image: spotifyTheme, label: "Spotify", value: "spotify"},
-  {id: "coinbase", image: coinbaseTheme, label: "Coinbase", value: "coinbase"},
-  {id: "airbnb", image: airbnbTheme, label: "Airbnb", value: "airbnb"},
-  {id: "discord", image: discordTheme, label: "Discord", value: "discord"},
-  {id: "rabbit", image: rabbitTheme, label: "Rabbit", value: "rabbit"},
+  {id: "default", image: defaultTheme, label: "Default"},
+  {id: "sky", image: skyTheme, label: "Sky"},
+  {id: "lavender", image: lavenderTheme, label: "Lavender"},
+  {id: "mint", image: mintTheme, label: "Mint"},
+  {id: "netflix", image: netflixTheme, label: "Netflix"},
+  {id: "uber", image: blackTheme, label: "Uber"},
+  {id: "spotify", image: spotifyTheme, label: "Spotify"},
+  {id: "coinbase", image: coinbaseTheme, label: "Coinbase"},
+  {id: "airbnb", image: airbnbTheme, label: "Airbnb"},
+  {id: "discord", image: discordTheme, label: "Discord"},
+  {id: "rabbit", image: rabbitTheme, label: "Rabbit"},
 ];
 
 export type ThemeVariables = {
-  /** Accent color - can be a predefined colorId or any valid CSS color string */
   lightness: number;
   chroma: number;
   hue: number;
   base: number;
-  accentColor: (typeof colorIds)[number] | string;
   /** Font family - can be a predefined fontId or a custom font ID (prefixed with "custom-") */
   fontFamily: (typeof fontIds)[number] | string;
-  formRadius: (typeof radiusIds)[number];
-  radius: (typeof radiusIds)[number];
-  theme: (typeof themeIds)[number];
+  formRadius: RadiusId;
+  radius: RadiusId;
 };
 
 export const themeVariableKeys = [
@@ -257,15 +241,12 @@ export const themeVariableKeys = [
   "lightness",
   "chroma",
   "hue",
-  "accentColor",
   "fontFamily",
   "formRadius",
   "radius",
-  "theme",
 ] as const satisfies readonly (keyof ThemeVariables)[];
 
-export const defaultThemeValues: ThemeVariables = {
-  accentColor: colorIds[0],
+export const defaultThemeVariables: ThemeVariables = {
   base: DEFAULT_BASE,
   chroma: 0.195,
   fontFamily: "inter",
@@ -273,7 +254,6 @@ export const defaultThemeValues: ThemeVariables = {
   hue: 253.83,
   lightness: 0.6204,
   radius: "medium",
-  theme: "default",
 } as const;
 
 export const LOCAL_STORAGE_KEYS = {

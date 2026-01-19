@@ -2,7 +2,7 @@ import {ArrowRotateLeft} from "@gravity-ui/icons";
 import {AlertDialog, Button, Tooltip} from "@heroui/react";
 import {useMemo} from "react";
 
-import {defaultThemeValues} from "../constants";
+import {defaultThemeVariables} from "../constants";
 import {useResetVariables} from "../hooks";
 import {useVariablesState} from "../hooks/use-variables-state";
 
@@ -12,14 +12,13 @@ export function ResetButton() {
 
   const isDisabled = useMemo(() => {
     return (
-      variables.chroma === defaultThemeValues.chroma &&
-      variables.hue === defaultThemeValues.hue &&
-      variables.lightness === defaultThemeValues.lightness &&
-      variables.fontFamily === defaultThemeValues.fontFamily &&
-      variables.formRadius === defaultThemeValues.formRadius &&
-      variables.radius === defaultThemeValues.radius &&
-      variables.theme === defaultThemeValues.theme &&
-      variables.base === defaultThemeValues.base
+      variables.chroma === defaultThemeVariables.chroma &&
+      variables.hue === defaultThemeVariables.hue &&
+      variables.lightness === defaultThemeVariables.lightness &&
+      variables.fontFamily === defaultThemeVariables.fontFamily &&
+      variables.formRadius === defaultThemeVariables.formRadius &&
+      variables.radius === defaultThemeVariables.radius &&
+      variables.base === defaultThemeVariables.base
     );
   }, [variables]);
 

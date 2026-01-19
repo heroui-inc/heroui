@@ -8,7 +8,7 @@ import {useEffect} from "react";
 
 import {cn} from "@/utils/cn";
 
-import {defaultThemeValues, fonts} from "../constants";
+import {defaultThemeVariables, fonts} from "../constants";
 import {useCustomFonts, useVariableSetter} from "../hooks";
 import {injectFontLink, isCustomFontUrl} from "../utils/font-utils";
 
@@ -68,7 +68,7 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
     }
     // If the deleted font was selected, switch to Inter
     if (variables.fontFamily === fontUrl) {
-      setVariable("fontFamily", defaultThemeValues.fontFamily);
+      setVariable("fontFamily", defaultThemeVariables.fontFamily);
     }
   };
 
