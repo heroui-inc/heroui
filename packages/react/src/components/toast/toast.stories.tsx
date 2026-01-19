@@ -41,12 +41,13 @@ const noop = () => {};
 
 const Template = () => {
   return (
-    <div className="max-w-xl">
+    <div className="flex h-full max-w-xl flex-col items-center justify-center">
       <Toast.Container placement="bottom" />
-      <div className="flex w-full flex-wrap gap-4">
+      <div className="flex w-full flex-wrap items-center justify-center gap-4">
         <Button
+          className="text-muted"
           size="sm"
-          variant="secondary"
+          variant="tertiary"
           onPress={() => {
             toast("You have been invited to join a team", {
               description: "Bob sent you an invitation to join HeroUI team",
@@ -75,8 +76,9 @@ const Template = () => {
           Accent toast
         </Button>
         <Button
+          className="text-success"
           size="sm"
-          variant="secondary"
+          variant="tertiary"
           onPress={() =>
             toast.success("You have upgraded your plan", {
               description: "You can continue using HeroUI Chat",
@@ -91,8 +93,9 @@ const Template = () => {
           Success toast
         </Button>
         <Button
+          className="text-warning"
           size="sm"
-          variant="secondary"
+          variant="tertiary"
           onPress={() =>
             toast.warning("You have no credits left", {
               description: "Upgrade to a paid plan to continue",
@@ -147,7 +150,7 @@ const PlacementsTemplate = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex h-full flex-col items-center justify-center gap-6">
       {/* Render a ToastContainer for each placement */}
       {placements.map((p) => (
         <Toast.Container key={p} placement={p} toast={placementQueues[p]} />

@@ -2,7 +2,9 @@
 
 /* Toast Region - Container for all toasts */
 .toast-region {
-  @apply fixed z-50 flex flex-col gap-2 outline-none;
+  @apply pointer-events-none fixed flex flex-col outline-none;
+
+  gap: var(--gap);
 }
 
 /* Placement variants - Bottom */
@@ -37,7 +39,7 @@
 
 /* Base toast styles */
 .toast {
-  @apply relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
+  @apply pointer-events-auto relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
 }
 
 .toast:not([data-frontmost="true"]) {
@@ -47,6 +49,10 @@
     @apply pointer-events-none opacity-0;
     tabindex: -1;
     outline: none;
+  }
+
+  .toast__content {
+    @apply max-h-[20px] overflow-hidden;
   }
 }
 
@@ -195,14 +201,14 @@
 /* Top */
 @keyframes toast-slide-top-in {
   from {
-    translate: 100% 0;
+    translate: 0 -100%;
     opacity: 0;
   }
 }
 
 @keyframes toast-slide-top-out {
   to {
-    translate: 100% 0;
+    translate: 0 -100%;
     opacity: 0;
   }
 }

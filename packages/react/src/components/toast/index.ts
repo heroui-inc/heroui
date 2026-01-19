@@ -73,4 +73,9 @@ export type {ToastVariants} from "@heroui/styles";
  * -----------------------------------------------------------------------------------------------*/
 export {ToastQueue, toast, toastQueue};
 
+/* -------------------------------------------------------------------------------------------------
+ * Constants
+ * -----------------------------------------------------------------------------------------------*/
+export {DEFAULT_MAX_VISIBLE_TOAST, DEFAULT_GAP} from "./constants";
+
 export type {ToastQueueOptions} from "./toast-queue";

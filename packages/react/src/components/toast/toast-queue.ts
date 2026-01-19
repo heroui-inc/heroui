@@ -8,11 +8,7 @@ import type {
 import {UNSTABLE_ToastQueue as ToastQueuePrimitive} from "react-aria-components";
 import {flushSync} from "react-dom";
 
-/* ------------------------------------------------------------------------------------------------
- * Constants
- * --------------------------------------------------------------------------------------------- */
-/** The default maximum number of visible toasts. */
-export const DEFAULT_MAX_VISIBLE_TOAST = 3;
+import {DEFAULT_MAX_VISIBLE_TOAST} from "./constants";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Options
