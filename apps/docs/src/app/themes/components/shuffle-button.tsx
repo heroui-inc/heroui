@@ -93,8 +93,14 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
               <AlertDialog.Heading>Are you sure you want to randomize?</AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>This will overwrite your current theme settings.</AlertDialog.Body>
-            <AlertDialog.Footer>
-              <div className="flex flex-1 items-center gap-2">
+            <AlertDialog.Footer className="flex-col sm:flex-row">
+              <Button className="w-full" size="md" variant="tertiary" onPress={handleClose}>
+                Cancel
+              </Button>
+              <Button className="w-full" size="md" onPress={handleRandomize}>
+                Confirm
+              </Button>
+              <div className="flex flex-1 items-center gap-2 self-start">
                 <Checkbox
                   id="dont-show-again"
                   isSelected={isDontShowAgainChecked}
@@ -107,12 +113,6 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
                 </Checkbox>
                 <Label htmlFor="dont-show-again">Don't show again</Label>
               </div>
-              <Button size="md" variant="tertiary" onPress={handleClose}>
-                Cancel
-              </Button>
-              <Button size="md" onPress={handleRandomize}>
-                Confirm
-              </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>
         </AlertDialog.Container>

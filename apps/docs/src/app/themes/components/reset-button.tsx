@@ -43,11 +43,11 @@ export function ResetButton() {
                 <AlertDialog.Body>
                   This will restore all theme values to their default settings.
                 </AlertDialog.Body>
-                <AlertDialog.Footer>
-                  <Button size="md" slot="close" variant="tertiary">
+                <AlertDialog.Footer className="flex-col sm:flex-row">
+                  <Button className="w-full" size="md" slot="close" variant="tertiary">
                     Cancel
                   </Button>
-                  <Button size="md" slot="close" onPress={reset}>
+                  <Button className="w-full" size="md" slot="close" onPress={reset}>
                     Confirm
                   </Button>
                 </AlertDialog.Footer>
