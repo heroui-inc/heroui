@@ -29,6 +29,22 @@ import {useVariablesState} from "./use-variables-state";
 const ADAPTIVE_STYLE_ID = "theme-builder-adaptive-colors";
 
 /**
+ * Parse an oklch color string into its components
+ * @param oklchString - e.g. "oklch(0.5 0.2 250)" or "oklch(0 0 0)"
+ */
+function parseOklch(oklchString: string): {lightness: number; chroma: number; hue: number} | null {
+  const match = oklchString.match(/oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\)/);
+
+  if (!match || !match[1] || !match[2] || !match[3]) return null;
+
+  return {
+    chroma: parseFloat(match[2]),
+    hue: parseFloat(match[3]),
+    lightness: parseFloat(match[1]),
+  };
+}
+
+/**
  * Style element ID for theme-aware color CSS injection
  */
 const THEME_COLORS_STYLE_ID = "theme-builder-theme-colors";
@@ -90,9 +106,17 @@ function getAdaptiveColorCSS(
     return null;
   }
 
-  // For adaptive colors (like black/white), we use predefined light/dark variants
-  const lightFg = calculateAccentForeground(1, 0, 0); // Light accent (white) needs dark fg
-  const darkFg = calculateAccentForeground(0, 0, 0); // Dark accent (black) needs light fg
+  // Parse the actual oklch values from the adaptive config to calculate foreground colors
+  const lightAccent = parseOklch(adaptiveConfig.light);
+  const darkAccent = parseOklch(adaptiveConfig.dark);
+
+  // Calculate foreground colors based on the actual accent lightness values
+  const lightFg = lightAccent
+    ? calculateAccentForeground(lightAccent.lightness, lightAccent.chroma, lightAccent.hue)
+    : calculateAccentForeground(0, 0, 0); // Fallback
+  const darkFg = darkAccent
+    ? calculateAccentForeground(darkAccent.lightness, darkAccent.chroma, darkAccent.hue)
+    : calculateAccentForeground(1, 0, 0); // Fallback
 
   // Generate full theme colors for both modes
   const lightColors = generateThemeColors({chroma, hue, lightness});

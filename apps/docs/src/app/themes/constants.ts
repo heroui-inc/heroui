@@ -32,18 +32,6 @@ export const tabs = [
   {disabled: true, label: "chat"},
   {disabled: true, label: "finances"},
 ];
-export const DEFAULT_COLOR = "oklch(0.6199 0.194 253.67)";
-export const DEFAULT_COLOR_HSL = "hsl(253.67, 100%, 61.99%)";
-export const colorIds = [
-  "oklch(0.6199 0.194 253.67)",
-  "oklch(0.6356 0.2082 25.38)",
-  "oklch(0.7697 0.1645 70.61)",
-  "oklch(0.6902 0.1481 162.37)",
-  "oklch(0.6683 0.2569 322.02)",
-  "oklch(0 0 0)",
-] as const;
-
-export const colors = colorIds.map((id) => ({id, value: id}));
 
 /**
  * Adaptive colors that need different values in light vs dark modes.
