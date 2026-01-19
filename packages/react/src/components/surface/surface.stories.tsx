@@ -43,9 +43,14 @@ export const Variants: Story = {
         <p className="text-sm font-medium text-muted">Default</p>
         <Surface className="flex min-w-[320px] flex-col gap-3 rounded-3xl p-6" variant="default">
           <h3 className="text-base font-semibold text-foreground">Surface Content</h3>
+          {/* TODO: TextField is not propagating the `variant` prop down to the Input */}
           <TextField isRequired name="email" type="email">
             <Label>Email</Label>
-            <Input className="w-[280px] border border-border/20" placeholder="john@example.com" />
+            <Input
+              className="w-[280px] border border-border/20"
+              placeholder="john@example.com"
+              variant="secondary"
+            />
           </TextField>
           <p className="text-sm text-muted">
             This is a default surface variant. It uses bg-surface styling.
