@@ -16,6 +16,7 @@ import {
 } from "react-aria-components";
 
 import {useMediaQuery} from "../../hooks";
+import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {Button} from "../button";
 import {CloseButton} from "../close-button";
@@ -28,7 +29,10 @@ import {DEFAULT_MAX_VISIBLE_TOAST, ToastQueue, toast as defaultToast} from "./to
  * --------------------------------------------------------------------------------------------- */
 type ToastContext = {
   slots?: ReturnType<typeof toastVariants>;
+  index?: number;
   variant?: ToastVariants["variant"];
+  /** The vertical offset (in pixels) between stacked toasts on mobile. @default 16 */
+  mobileOffset?: number;
   /** The vertical offset (in pixels) between stacked toasts. @default 64 */
   offset?: number;
   /** Whether to disable the scale effect on stacked toasts. @default false */
@@ -45,16 +49,19 @@ interface ToastProps<T extends object = ToastContentValue>
 
 /** The default vertical offset (in pixels) between stacked toasts. */
 const DEFAULT_TOAST_OFFSET = 64;
+const DEFAULT_MOBILE_TOAST_OFFSET = 100;
 
 const Toast = <T extends object = ToastContentValue>({
   children,
   className,
+  placement: _placement,
   toast,
-  variant = "default",
+  variant,
   ...rest
 }: ToastProps<T>) => {
   const {
     disableScale = false,
+    mobileOffset = DEFAULT_MOBILE_TOAST_OFFSET,
     offset = DEFAULT_TOAST_OFFSET,
     slots: contextSlots,
   } = useContext(ToastContext);
@@ -64,27 +71,47 @@ const Toast = <T extends object = ToastContentValue>({
   const state = useContext(ToastStateContext)!;
   const visibleToasts = state.visibleToasts;
   const index = visibleToasts.indexOf(toast);
+  const isFrontmost = index <= 0;
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const calculatedOffset = isMobile ? mobileOffset : offset;
 
   const updatedContext = useMemo<ToastContext>(
-    () => ({slots: {...contextSlots, ...slots}, variant, offset, disableScale}),
-    [contextSlots, slots, variant, offset, disableScale],
+    () => ({
+      slots: {...contextSlots, ...slots},
+      variant,
+      mobileOffset,
+      offset,
+      disableScale,
+      index,
+    }),
+    [contextSlots, slots, variant, mobileOffset, offset, disableScale, index],
   );
 
   const style = useMemo<CSSProperties>(
     () => ({
       viewTransitionName: toast?.key,
-      translate: `0 ${index * offset}px 0`,
+      translate: `0 ${index * calculatedOffset}px 0`,
       scale: disableScale ? 1 : 1 - index * 0.05,
       zIndex: visibleToasts.length - index - 1,
+      tabindex: isFrontmost ? 0 : -1,
       ...rest.style,
     }),
-    [toast?.key, rest.style, index, visibleToasts.length, offset, disableScale],
+    [
+      toast?.key,
+      rest.style,
+      index,
+      visibleToasts.length,
+      calculatedOffset,
+      disableScale,
+      isFrontmost,
+    ],
   );
 
   return (
     <ToastContext value={updatedContext}>
       <ToastPrimitive
         className={composeTwRenderProps(className, slots?.toast())}
+        data-frontmost={dataAttr(isFrontmost)}
         data-index={index}
         data-slot="toast"
         style={style}
@@ -255,6 +282,8 @@ interface ToastContainerProps<T extends object = ToastContentValue> extends Omit
   disableScale?: boolean;
   /** The maximum number of toasts to display at a time. Only applies when no custom `toast` prop is provided. */
   maxVisibleToasts?: number;
+  /** The vertical offset (in pixels) between stacked toasts on mobile. @default 16 */
+  mobileOffset?: number;
   /** The vertical offset (in pixels) between stacked toasts. @default 64 */
   offset?: number;
   placement?: ToastVariants["placement"];
@@ -266,6 +295,7 @@ const ToastContainer = <T extends object = ToastContentValue>({
   className,
   disableScale = false,
   maxVisibleToasts = DEFAULT_MAX_VISIBLE_TOAST,
+  mobileOffset = DEFAULT_MOBILE_TOAST_OFFSET,
   offset = DEFAULT_TOAST_OFFSET,
   placement = "bottom",
   toast: toastProp,
@@ -300,7 +330,7 @@ const ToastContainer = <T extends object = ToastContentValue>({
         (renderProps.toast.content as ToastContentValue) ?? {};
 
       return (
-        <Toast toast={renderProps.toast} variant={variant || "default"}>
+        <Toast placement={placement} toast={renderProps.toast} variant={variant}>
           {indicator ? <ToastIndicator>{indicator}</ToastIndicator> : <ToastIndicator />}
           <ToastContent>
             {!!title && <ToastTitle>{title}</ToastTitle>}
@@ -316,7 +346,7 @@ const ToastContainer = <T extends object = ToastContentValue>({
         </Toast>
       );
     },
-    [isMobile],
+    [isMobile, placement],
   );
 
   return (
@@ -327,7 +357,7 @@ const ToastContainer = <T extends object = ToastContentValue>({
       {...rest}
     >
       {(renderProps) => (
-        <ToastContext value={{slots, offset, disableScale}}>
+        <ToastContext value={{slots, mobileOffset, offset, disableScale}}>
           {typeof children === "undefined"
             ? getDefaultChildren(renderProps)
             : typeof children === "function"

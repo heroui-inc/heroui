@@ -41,6 +41,16 @@
   view-transition-class: toast;
 }
 
+.toast:not([data-frontmost="true"]) {
+  @apply pointer-events-none;
+
+  .toast__close-button {
+    @apply pointer-events-none opacity-0;
+    tabindex: -1;
+    outline: none;
+  }
+}
+
 .toast:focus-visible {
   @apply outline-2 outline-offset-2 outline-focus;
 }
