@@ -1,5 +1,7 @@
 "use client";
 
+import {useDeferredValue} from "react";
+
 import {CodePanel} from "@/components/code-panel";
 import {useCodePanel} from "@/hooks/use-code-panel";
 
@@ -18,13 +20,20 @@ export function ThemeCodePanel() {
 
   const cssCode = generateMinimalCssVariables(variables, customFontInfo ?? undefined);
 
+  // Defer the CSS code value to prevent expensive syntax highlighting
+  // from blocking high-priority UI updates (like color sliders).
+  // This allows the theme preview to stay responsive while the code panel
+  // updates on a lower priority schedule.
+  // See: https://www.joshwcomeau.com/react/use-deferred-value/
+  const deferredCssCode = useDeferredValue(cssCode);
+
   return (
     <CodePanel
       showLineNumbers
       fileName="theme.css"
       isVisible={isCodeVisible}
       lang="css"
-      sourceCode={cssCode}
+      sourceCode={deferredCssCode}
       title="index.css"
       onClose={toggleCode}
     />

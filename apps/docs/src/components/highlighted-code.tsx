@@ -3,7 +3,7 @@
 import type {BundledLanguage, BundledTheme, HighlighterGeneric} from "shiki";
 
 import {useTheme} from "next-themes";
-import {use, useMemo} from "react";
+import {memo, use, useMemo} from "react";
 
 import {cn} from "@/utils/cn";
 
@@ -32,7 +32,15 @@ interface HighlightedCodeProps {
   className?: string;
 }
 
-export function HighlightedCode({
+/**
+ * HighlightedCode component for syntax highlighting using Shiki.
+ *
+ * This component is memoized with React.memo() to work effectively with
+ * useDeferredValue for performance optimization. When parent components
+ * use useDeferredValue on the code prop, memoization ensures this expensive
+ * syntax highlighting only re-runs when the deferred value actually changes.
+ */
+export const HighlightedCode = memo(function HighlightedCode({
   className,
   code,
   lang = "tsx",
@@ -74,4 +82,4 @@ export function HighlightedCode({
       )}
     />
   );
-}
+});
