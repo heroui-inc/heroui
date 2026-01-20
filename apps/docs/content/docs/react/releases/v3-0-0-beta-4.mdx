@@ -89,11 +89,11 @@ This release introduces **3 new** essential components:
 ### Toast
 
 <Callout type="warning">
-  The Toast component is currently in preview and some features might not work as expected.
+  This  component is currently in preview and some features might not work as expected.
 </Callout>
 
 <ComponentPreview
-  name="toast-default"
+  name="toast-variants"
 />
 
 ## Component Improvements
@@ -168,6 +168,14 @@ Added size support to [AlertDialog](/docs/components/alert-dialog) component, al
 
 <ComponentPreview
   name="alert-dialog-sizes"
+/>
+
+### Checkbox Animation Improvements
+
+Faster animation and increased stroke width for better feedback on [Checkbox](/docs/components/checkbox).
+
+<ComponentPreview
+  name="checkbox-basic"
 />
 
 ### Link Text Decoration
@@ -253,8 +261,7 @@ The `secondary` variant provides lower emphasis styling without shadow, which is
 ## Style Fixes
 
 - **Button**: Updated secondary button colors for improved visual consistency
-- **Checkbox**: Reduced transition delay for checkmark indicator
-- **Checkbox**: Increased stroke width and animation speed for better visibility
+- **Checkbox**: Optimized animation speed and increased stroke width for better feedback (see [Checkbox Animation Improvements](#checkbox-animation-improvements))
 - **Link**: Updated decoration styles and transition timings
 - **Focus Visible**: Added `:not(:focus)` to focus-visible selectors to prevent conflicts with hover states
 - **Separator**: Fixed styles to only apply to horizontal separator
