@@ -20,3 +20,12 @@
 ::file-selector-button {
   border-color: var(--border, currentColor);
 }
+
+/* Keeps main page content interactive during view transitions */
+:root {
+  view-transition-name: none;
+}
+
+::view-transition {
+  pointer-events: none;
+}
