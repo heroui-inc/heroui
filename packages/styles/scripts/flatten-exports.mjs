@@ -242,6 +242,9 @@ async function flattenExports() {
   // Remove: export * from "./utils";
   content = content.replace(/export\s*\*\s*from\s*["']\.\/utils["'];?\n?/g, "");
 
+  // Remove any existing flattened exports section (to handle rebuilds without clean)
+  content = content.replace(/\n*\/\/ Flattened component exports \(auto-generated\)[\s\S]*$/g, "");
+
   // Append the flattened exports
   content =
     content.trim() +
@@ -306,6 +309,9 @@ async function flattenDeclarations(allExports) {
   // Remove the chained export * statements
   content = content.replace(/export\s*\*\s*from\s*["']\.\/components["'];?\n?/g, "");
   content = content.replace(/export\s*\*\s*from\s*["']\.\/utils["'];?\n?/g, "");
+
+  // Remove any existing flattened exports section (to handle rebuilds without clean)
+  content = content.replace(/\n*\/\/ Flattened component exports \(auto-generated\)[\s\S]*$/g, "");
 
   // Append the flattened exports
   content =
