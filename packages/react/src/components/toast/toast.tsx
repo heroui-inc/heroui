@@ -265,7 +265,6 @@ const ToastContainer = <T extends object = ToastContentValue>({
   children,
   className,
   gap = DEFAULT_GAP,
-  key,
   maxVisibleToasts = DEFAULT_MAX_VISIBLE_TOAST,
   placement = "bottom",
   queue: queueProp,
@@ -318,7 +317,6 @@ const ToastContainer = <T extends object = ToastContentValue>({
 
   return (
     <ToastRegionPrimitive<T>
-      key={key}
       className={composeTwRenderProps(className, slots?.region())}
       data-slot="toast-region"
       queue={toastQueue}
