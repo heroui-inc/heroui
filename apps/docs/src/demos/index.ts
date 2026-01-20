@@ -49,6 +49,7 @@ import * as TagGroupDemos from "./tag-group";
 import * as TextFieldDemos from "./text-field";
 import * as TextAreaDemos from "./textarea";
 import * as TimeFieldDemos from "./time-field";
+import * as ToastDemos from "./toast";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -1274,6 +1275,35 @@ export const demos: Record<string, DemoItem> = {
   "time-field-with-validation": {
     component: TimeFieldDemos.WithValidation,
     file: "time-field/with-validation.tsx",
+  },
+  // Toast demos
+  "toast-default": {
+    component: ToastDemos.Default,
+    file: "toast/default.tsx",
+  },
+  "toast-variants": {
+    component: ToastDemos.Variants,
+    file: "toast/variants.tsx",
+  },
+  "toast-placements": {
+    component: ToastDemos.Placements,
+    file: "toast/placements.tsx",
+  },
+  "toast-simple": {
+    component: ToastDemos.Simple,
+    file: "toast/simple.tsx",
+  },
+  "toast-custom-indicator": {
+    component: ToastDemos.CustomIndicator,
+    file: "toast/custom-indicator.tsx",
+  },
+  "toast-custom-toast": {
+    component: ToastDemos.CustomToast,
+    file: "toast/custom-toast.tsx",
+  },
+  "toast-custom-queue": {
+    component: ToastDemos.CustomQueue,
+    file: "toast/custom-queue.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

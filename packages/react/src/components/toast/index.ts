@@ -21,7 +21,7 @@ export const Toast = Object.assign(ToastRoot, {
   Indicator: ToastIndicator,
   Title: ToastTitle,
   Description: ToastDescription,
-  Action: ToastActionButton,
+  ActionButton: ToastActionButton,
   CloseButton: ToastCloseButton,
   Queue: ToastQueue,
   toast,
@@ -78,4 +78,4 @@ export {ToastQueue, toast, toastQueue};
  * -----------------------------------------------------------------------------------------------*/
 export {DEFAULT_MAX_VISIBLE_TOAST, DEFAULT_GAP} from "./constants";
 
-export type {ToastQueueOptions} from "./toast-queue";
+export type {ToastQueueOptions, ToastContentValue} from "./toast-queue";

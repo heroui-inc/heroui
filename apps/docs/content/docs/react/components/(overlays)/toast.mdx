@@ -1,0 +1,313 @@
+---
+title: Toast
+description: Display temporary notifications and messages to users with automatic dismissal and customizable placement
+icon: preview
+links:
+  rac: Toast
+  source: toast/toast.tsx
+  styles: toast.css
+  storybook: Components/Feedback/Toast
+  figma: true
+---
+
+<Callout type="warning">
+  **Under construction.** The Toast component is currently in development and some features might not work as expected.
+</Callout>
+
+## Import
+
+```tsx
+import { Toast, toast } from '@heroui/react';
+```
+
+## Setup
+
+Render the container in the root of your app.
+
+```tsx
+import { Toast, Button, toast } from '@heroui/react';
+
+function App() {
+  return (
+    <div>
+      <Toast.Container />
+      <Button onPress={() => toast("Simple message")}>
+        Show toast
+      </Button>
+    </div>
+  );
+}
+```
+
+### Usage
+
+<ComponentPreview
+  name="toast-default"
+/>
+
+### Variants
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+### Placements
+
+<ComponentPreview
+  name="toast-placements"
+/>
+
+### Simple Toasts
+
+<ComponentPreview
+  name="toast-simple"
+/>
+
+### Custom Indicators
+
+<ComponentPreview
+  name="toast-custom-indicator"
+/>
+
+### Custom Toast Rendering
+
+<ComponentPreview
+  name="toast-custom-toast"
+/>
+
+### Custom Queues
+
+<ComponentPreview
+  name="toast-custom-queue"
+/>
+
+### Anatomy
+
+```tsx
+<Toast.Container>
+  <Toast>
+    <Toast.Indicator />
+    <Toast.Content>
+      <Toast.Title />
+      <Toast.Description />
+    </Toast.Content>
+    <Toast.ActionButton />
+    <Toast.CloseButton />
+  </Toast>
+</Toast.Container>
+```
+
+<RelatedComponents component="toast" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+<Toast.Container className="bottom-8 right-8" placement="bottom end" />
+```
+
+### Customizing the component classes
+
+To customize the Toast component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .toast {
+    @apply rounded-xl shadow-lg;
+  }
+
+  .toast__content {
+    @apply gap-2;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Toast component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toast.css)):
+
+#### Base Classes
+- `.toast` - Base toast container
+- `.toast__region` - Toast region container
+- `.toast__content` - Content wrapper for title and description
+- `.toast__indicator` - Icon/indicator container
+- `.toast__title` - Toast title text
+- `.toast__description` - Toast description text
+- `.toast__action` - Action button container
+- `.toast__close` - Close button container
+
+#### Variant Classes
+- `.toast--default` - Default gray variant
+- `.toast--accent` - Accent blue variant
+- `.toast--success` - Success green variant
+- `.toast--warning` - Warning yellow/orange variant
+- `.toast--danger` - Danger red variant
+
+### Interactive States
+
+The component supports various states:
+
+- **Frontmost**: `[data-frontmost]` - Applied to the topmost visible toast
+- **Index**: `[data-index]` - Applied based on toast position in stack
+- **Placement**: `[data-placement="*"]` - Applied based on toast region placement
+
+## API Reference
+
+### Toast.Container Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placement` | `"top start" \| "top" \| "top end" \| "bottom start" \| "bottom" \| "bottom end"` | `"bottom"` | Placement of the toast region |
+| `gap` | `number` | `14` | The gap between toasts in pixels |
+| `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
+| `scaleFactor` | `number` | `0.05` | Scale factor for stacked toasts (0-1) |
+| `queue` | `ToastQueue<T>` | - | Custom toast queue instance |
+| `children` | `ReactNode \| ((props: {toast: QueuedToast<T>}) => ReactNode)` | - | Custom render function or children |
+| `className` | `string` | - | Additional CSS classes |
+
+### Toast Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `toast` | `QueuedToast<T>` | - | Toast data from queue (required) |
+| `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Visual variant of the toast |
+| `placement` | `ToastVariants["placement"]` | - | Placement (inherited from Container) |
+| `scaleFactor` | `number` | - | Scale factor (inherited from Container) |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Toast content (ToastContent, ToastIndicator, etc.) |
+
+### Toast.Content Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content (typically ToastTitle and ToastDescription) |
+| `className` | `string` | - | Additional CSS classes |
+
+### Toast.Indicator Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `ToastVariants["variant"]` | - | Variant for default icon |
+| `children` | `ReactNode` | - | Custom indicator icon (defaults to variant icon) |
+| `className` | `string` | - | Additional CSS classes |
+
+### Toast.Title Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Title text |
+| `className` | `string` | - | Additional CSS classes |
+
+### Toast.Description Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Description text |
+| `className` | `string` | - | Additional CSS classes |
+
+### Toast.Action Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Action button content |
+| `className` | `string` | - | Additional CSS classes |
+| All `Button` props | - | - | Accepts all Button component props |
+
+### Toast.CloseButton Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| All `CloseButton` props | - | - | Accepts all CloseButton component props |
+
+### ToastQueue
+
+A `ToastQueue` manages the state for a `<Toast.Container>`. The state is stored outside React so you can trigger toasts from anywhere in your application.
+
+#### Constructor Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
+| `wrapUpdate` | `(fn: () => void) => void` | - | Function to wrap state updates (e.g., for view transitions) |
+
+#### Methods
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `add` | `(content: T, options?: ToastOptions)` | `string` | Add a toast to the queue, returns toast key |
+| `close` | `(key: string)` | `void` | Close a toast by its key |
+| `pauseAll` | `()` | `void` | Pause all toast timers |
+| `resumeAll` | `()` | `void` | Resume all toast timers |
+| `clear` | `()` | `void` | Close all toasts |
+| `subscribe` | `(fn: () => void)` | `() => void` | Subscribe to queue changes, returns unsubscribe function |
+
+### toast Function
+
+The default `toast` function provides convenient methods for showing toasts:
+
+```tsx
+import { toast } from '@heroui/react';
+
+// Basic toast
+toast("Message");
+
+// Variant methods
+toast.success("Success message");
+toast.info("Info message");
+toast.warning("Warning message");
+toast.danger("Error message");
+
+// With options
+toast("Message", {
+  description: "Additional details",
+  variant: "default",
+  timeout: 5000,
+  onClose: () => console.log("Closed"),
+  actionProps: {
+    children: "Action",
+    onPress: () => {},
+  },
+  indicator: <CustomIcon />,
+});
+
+// Promise support
+toast.promise(
+  fetchData(),
+  {
+    loading: "Loading...",
+    success: "Data loaded",
+    error: "Failed to load",
+  }
+);
+
+// Queue methods
+toast.close(key);
+toast.clear();
+toast.pauseAll();
+toast.resumeAll();
+```
+
+#### toast Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `title` | `ReactNode` | - | Toast title (first parameter for variant methods) |
+| `description` | `ReactNode` | - | Optional description text |
+| `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Visual variant |
+| `indicator` | `ReactNode` | - | Custom indicator icon (null to hide) |
+| `actionProps` | `ButtonProps` | - | Props for action button |
+| `timeout` | `number` | - | Auto-dismiss timeout in milliseconds (0 for persistent) |
+| `onClose` | `() => void` | - | Callback when toast is closed |
+
+#### toast.promise Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `loading` | `ReactNode` | - | Message shown while promise is pending |
+| `success` | `ReactNode \| ((data: T) => ReactNode)` | - | Message shown on success (can be function) |
+| `error` | `ReactNode \| ((error: Error) => ReactNode)` | - | Message shown on error (can be function) |

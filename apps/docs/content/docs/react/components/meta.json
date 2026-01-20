@@ -55,6 +55,7 @@
     "(forms)/text-field",
     "(forms)/textarea",
     "(forms)/time-field",
+    "(overlays)/toast",
     "(overlays)/tooltip"
   ]
 }

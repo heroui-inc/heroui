@@ -1,3 +1,5 @@
+"use client";
+
 import type {ButtonProps} from "../button";
 import type {ReactNode} from "react";
 import type {

@@ -2,7 +2,7 @@
 
 /* Toast Region - Container for all toasts */
 .toast-region {
-  @apply pointer-events-none fixed flex flex-col outline-none;
+  @apply pointer-events-none fixed z-50 flex flex-col outline-none;
 
   gap: var(--gap);
 }
@@ -39,7 +39,7 @@
 
 /* Base toast styles */
 .toast {
-  @apply pointer-events-auto relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
+  @apply pointer-events-auto relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
 }
 
 .toast:not([data-frontmost="true"]) {
