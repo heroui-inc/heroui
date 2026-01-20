@@ -1,12 +1,13 @@
 "use client";
 
-import type {AlertDialogVariants} from "./alert-dialog.styles";
+import type {AlertDialogVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, HTMLAttributes} from "react";
 import type {
   ButtonProps as ButtonPrimitiveProps,
   DialogProps as DialogPrimitiveProps,
 } from "react-aria-components";
 
+import {alertDialogVariants} from "@heroui/styles";
 import {createContext, useContext, useMemo} from "react";
 import {
   DialogTrigger as AlertDialogTriggerPrimitive,
@@ -20,8 +21,6 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
-
-import {alertDialogVariants} from "./alert-dialog.styles";
 
 type AlertDialogPlacement = "auto" | "top" | "center" | "bottom";
 
@@ -144,24 +143,28 @@ interface AlertDialogContainerProps extends Omit<
    * @default "auto"
    */
   placement?: AlertDialogPlacement;
+  size?: AlertDialogVariants["size"];
 }
 
 const AlertDialogContainer = ({
   children,
   className,
   placement = "auto",
+  size,
   ...props
 }: AlertDialogContainerProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots: contextSlots} = useContext(AlertDialogContext);
+
+  const updatedSlots = useMemo(() => alertDialogVariants({size}), [size]);
 
   const updatedContext = useMemo<AlertDialogContext>(
-    () => ({placement, slots}),
-    [placement, slots],
+    () => ({placement, slots: {...contextSlots, ...updatedSlots}}),
+    [placement, contextSlots, updatedSlots],
   );
 
   return (
     <ModalPrimitive
-      className={composeTwRenderProps(className, slots?.container())}
+      className={composeTwRenderProps(className, updatedSlots?.container())}
       data-placement={placement}
       data-slot="alert-dialog-container"
       {...props}

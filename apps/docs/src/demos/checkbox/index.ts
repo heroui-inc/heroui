@@ -9,5 +9,6 @@ export {FullRounded} from "./full-rounded";
 export {Indeterminate} from "./indeterminate";
 export {Invalid} from "./invalid";
 export {RenderProps} from "./render-props";
+export {Variants} from "./variants";
 export {WithDescription} from "./with-description";
 export {WithLabel} from "./with-label";

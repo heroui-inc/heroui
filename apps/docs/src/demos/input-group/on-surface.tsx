@@ -8,7 +8,7 @@ export function OnSurface() {
     <Surface className="rounded-2xl p-6">
       <TextField className="w-full max-w-[280px]" name="email">
         <Label>Email address</Label>
-        <InputGroup isOnSurface>
+        <InputGroup variant="secondary">
           <InputGroup.Prefix>
             <Envelope className="size-4 text-muted" />
           </InputGroup.Prefix>

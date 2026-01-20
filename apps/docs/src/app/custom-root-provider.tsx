@@ -2,6 +2,7 @@
 
 import type {ReactNode} from "react";
 
+import {Toast} from "@heroui/react";
 import {RootProvider} from "fumadocs-ui/provider/next";
 import dynamic from "next/dynamic";
 
@@ -17,6 +18,8 @@ export function CustomRootProvider({children}: {children: ReactNode}) {
       }}
     >
       {children}
+      {/* Global toast container for demos using the default toast() function */}
+      <Toast.Container />
     </RootProvider>
   );
 }

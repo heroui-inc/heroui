@@ -1,7 +1,6 @@
 ---
 title: NumberField
 description: Number input fields with increment/decrement buttons, validation, and internationalized formatting
-icon: updated
 links:
   rac: NumberField
   source: number-field/number-field.tsx
@@ -99,9 +98,18 @@ Use chevron icons in a vertical layout for a different visual style.
 
 <ComponentPreview name="number-field-full-width" />
 
-### On Surface
+### Variants
 
-When used inside a [Surface](/docs/components/surface) component, NumberField automatically applies on-surface styling.
+The NumberField component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="number-field-variants" />
+
+### In Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="number-field-on-surface" />
 
@@ -174,7 +182,8 @@ NumberField uses CSS classes that can be customized. Override the component clas
 - `.number-field__input` – The numeric input field
 - `.number-field__increment-button` – Button to increment the value
 - `.number-field__decrement-button` – Button to decrement the value
-- `.number-field__group--on-surface` – Applied when used inside a Surface component
+- `.number-field--primary` – Primary variant with shadow (default)
+- `.number-field--secondary` – Secondary variant without shadow, suitable for use in surfaces
 
 > **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options.
 
@@ -205,7 +214,7 @@ NumberField inherits all props from React Aria's [NumberField](https://react-spe
 | `style` | `React.CSSProperties \| (values: NumberFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the number field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
-| `isOnSurface` | `boolean` | - | Whether the field is on a surface (auto-detected when inside Surface). |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 #### Value Props
 
@@ -306,7 +315,7 @@ NumberField.Input inherits props from React Aria's [Input](https://react-spectru
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | CSS classes for styling. |
-| `isOnSurface` | `boolean` | - | Whether the input is on a surface (auto-detected when inside Surface). |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the input. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 #### NumberField.IncrementButton Props
 

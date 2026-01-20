@@ -126,8 +126,8 @@ HeroUI uses [BEM methodology](https://getbem.com/) for consistent class naming:
 Create reusable custom components using [tailwind-variants](https://tailwind-variants.org/)—a Tailwind CSS first-class variant API:
 
 ```tsx
-import { Button as HeroButton, buttonVariants, type ButtonProps } from '@heroui/react';
-import { tv, type VariantProps } from 'tailwind-variants';
+import { Button as HeroButton, type ButtonProps } from '@heroui/react';
+import { buttonVariants, tv, type VariantProps } from '@heroui/styles';
 
 const customButtonVariants = tv({
   extend: buttonVariants,
@@ -271,7 +271,7 @@ import { Button } from '@heroui/react';
 
 ## Component Classes Reference
 
-**Button:** `.button`, `.button--{variant}`, `.button--{size}`, `.button--icon-only`  
+**Button:** `.button`, `.button--{variant}`, `.button--{size}`, `.button--icon-only`
 **Accordion:** `.accordion`, `.accordion__item`, `.accordion__trigger`, `.accordion__panel`, `.accordion--outline`
 
 > **Note:** See component docs for complete class references: [Button](/docs/components/button#css-classes), [Accordion](/docs/components/accordion#css-classes)

@@ -3,7 +3,7 @@ import {Description, Label, SearchField, Surface} from "@heroui/react";
 export function OnSurface() {
   return (
     <Surface className="flex w-full max-w-sm flex-col gap-4 rounded-3xl p-6">
-      <SearchField name="search">
+      <SearchField name="search" variant="secondary">
         <Label>Search</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />
@@ -12,7 +12,7 @@ export function OnSurface() {
         </SearchField.Group>
         <Description>Enter keywords to search</Description>
       </SearchField>
-      <SearchField name="search-2">
+      <SearchField name="search-2" variant="secondary">
         <Label>Advanced search</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />

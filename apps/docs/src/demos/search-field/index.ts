@@ -7,6 +7,7 @@ export {FullWidth} from "./full-width";
 export {OnSurface} from "./on-surface";
 export {Required} from "./required";
 export {Validation} from "./validation";
+export {Variants} from "./variants";
 export {WithDescription} from "./with-description";
 export {WithKeyboardShortcut} from "./with-keyboard-shortcut";
 export {WithValidation} from "./with-validation";

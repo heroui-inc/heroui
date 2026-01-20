@@ -1,11 +1,10 @@
 "use client";
 
-import type {LabelVariants} from "./label.styles";
+import type {LabelVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {labelVariants} from "@heroui/styles";
 import {Label as LabelPrimitive} from "react-aria-components";
-
-import {labelVariants} from "./label.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Label Root

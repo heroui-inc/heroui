@@ -22,8 +22,13 @@ export {TextFieldRoot};
 export type {TextFieldRootProps, TextFieldRootProps as TextFieldProps} from "./text-field";
 
 /* -------------------------------------------------------------------------------------------------
+ * Context
+ * -----------------------------------------------------------------------------------------------*/
+export {TextFieldContext} from "./text-field";
+
+/* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {textFieldVariants} from "./text-field.styles";
+export {textFieldVariants} from "@heroui/styles";
 
-export type {TextFieldVariants} from "./text-field.styles";
+export type {TextFieldVariants} from "@heroui/styles";

@@ -8,7 +8,7 @@ export function OnSurface() {
     <Surface className="flex w-full max-w-sm flex-col gap-4 rounded-3xl p-6">
       <DateField className="w-full" name="date">
         <Label>Date</Label>
-        <DateInputGroup isOnSurface>
+        <DateInputGroup variant="secondary">
           <DateInputGroup.Input>
             {(segment) => <DateInputGroup.Segment segment={segment} />}
           </DateInputGroup.Input>
@@ -17,7 +17,7 @@ export function OnSurface() {
       </DateField>
       <DateField className="w-full" name="date-2">
         <Label>Appointment date</Label>
-        <DateInputGroup isOnSurface>
+        <DateInputGroup variant="secondary">
           <DateInputGroup.Prefix>
             <Calendar className="size-4 text-muted" />
           </DateInputGroup.Prefix>

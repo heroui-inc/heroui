@@ -11,6 +11,10 @@ import {ColorSwatch, ColorPalette} from "@/components/color-swatch";
 
 HeroUI uses CSS variables for colors that automatically switch between light and dark themes. All colors use the `oklch` color space for better color transitions.
 
+<Callout type="info">
+  **Want to create your own theme?** Try the [Theme Builder](/themes) to visually customize colors, radius, fonts, and more — then export the CSS to use in your project.
+</Callout>
+
 ## How It Works
 
 HeroUI's color system is built on top of Tailwind CSS v4's theme. When you import `@heroui/styles`, it uses Tailwind's built-in color palettes and maps them to semantic variables.
@@ -59,7 +63,7 @@ These four colors stay the same in all themes:
 
 ### Primary Colors
 
-**Accent** — Your main brand color (used for primary actions)  
+**Accent** — Your main brand color (used for primary actions)
 **Accent Soft** — A lighter version for secondary actions
 
 <ColorPalette
@@ -174,8 +178,8 @@ The complete theme definition can be found in ([variables.css](https://github.co
       --spacing: 0.25rem;
 
       /* Border */
-      --border-width: 0px; /* no border by default */
-      --field-border-width: var(--border-width);
+      --border-width: 1px;
+      --field-border-width: 0px;
       --disabled-opacity: 0.5;
 
       /* Ring offset - Used for focus ring */
@@ -233,7 +237,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
       --segment-foreground: var(--eclipse);
 
       /* Misc Colors */
-      --border: oklch(0 0 0 / 0%);
+      --border: oklch(92% 0.004 286.32);
       --separator: oklch(92% 0.004 286.32);
       --focus: var(--accent);
       --link: var(--foreground);
@@ -290,7 +294,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
       --segment-foreground: var(--foreground);
 
       /* Misc Colors */
-      --border: oklch(1 0 0 / 0%);
+      --border: oklch(22% 0.006 286.033);
       --separator: oklch(22% 0.006 286.033);
       --focus: var(--accent);
       --link: var(--foreground);
@@ -328,7 +332,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
 **Add your own colors:**
 
 ```css
-:root, 
+:root,
 [data-theme="light"] {
   --info: oklch(0.6 0.15 210);
   --info-foreground: oklch(0.98 0 0);

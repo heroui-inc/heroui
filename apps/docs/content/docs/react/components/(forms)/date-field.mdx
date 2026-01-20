@@ -1,7 +1,6 @@
 ---
 title: DateField
 description: Date input field with labels, descriptions, and validation built on React Aria DateField
-icon: new
 links:
   rac: DateField
   source: date-field/date-field.tsx
@@ -84,9 +83,18 @@ Add prefix or suffix icons to enhance the date field.
 
 <ComponentPreview name="date-field-full-width" />
 
-### On Surface
+### Variants
 
-When used inside a [Surface](/docs/components/surface) component, DateField and its child DateInputGroup automatically apply on-surface styling.
+The DateInputGroup component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="date-field-variants" />
+
+### In Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on DateInputGroup to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="date-field-on-surface" />
 
@@ -319,7 +327,7 @@ DateInputGroup accepts all props from React Aria's `Group` component plus the fo
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `fullWidth` | `boolean` | `false` | Whether the date input group should take full width of its container |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 ### DateInputGroup.Input Props
 
@@ -328,7 +336,7 @@ DateInputGroup.Input accepts all props from React Aria's `DateInput` component p
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the input. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 The `DateInput` component accepts a render prop function that receives date segments. Each segment represents a part of the date (year, month, day, etc.).
 

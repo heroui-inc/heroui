@@ -17,9 +17,9 @@ import { Fieldset } from '@heroui/react';
 
 <ComponentPreview name="fieldset-basic" />
 
-### On Surface
+### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, form controls within Fieldset automatically apply on-surface styling.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on form controls (Input, TextArea, etc.) to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="fieldset-on-surface" />
 
@@ -90,11 +90,11 @@ Use the `@layer components` directive to target Fieldset [BEM](https://getbem.co
     @apply text-lg font-semibold;
   }
 
-  .fieldset_field_group {
+  .fieldset__field_group {
     @apply gap-3 md:grid md:grid-cols-2;
   }
 
-  .fieldset_actions {
+  .fieldset__actions {
     @apply flex justify-end gap-2 pt-2;
   }
 }
@@ -106,8 +106,8 @@ The Fieldset compound component exposes these CSS selectors:
 
 - `.fieldset` – Root container
 - `.fieldset__legend` – Legend element
-- `.fieldset_field_group` – Wrapper for grouped fields
-- `.fieldset_actions` – Action bar below the fields
+- `.fieldset__field_group` – Wrapper for grouped fields
+- `.fieldset__actions` – Action bar below the fields
 
 ## API Reference
 

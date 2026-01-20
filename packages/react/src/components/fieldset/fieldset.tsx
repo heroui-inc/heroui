@@ -1,13 +1,12 @@
 "use client";
 
-import type {FieldsetVariants} from "./fieldset.styles";
+import type {FieldsetVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {fieldsetVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
-
-import {fieldsetVariants} from "./fieldset.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Context

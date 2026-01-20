@@ -24,6 +24,6 @@ export type {SkeletonRootProps, SkeletonRootProps as SkeletonProps} from "./skel
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {skeletonVariants} from "./skeleton.styles";
+export {skeletonVariants} from "@heroui/styles";
 
-export type {SkeletonVariants} from "./skeleton.styles";
+export type {SkeletonVariants} from "@heroui/styles";

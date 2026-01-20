@@ -4,10 +4,6 @@
   --scroll-shadow-size: 40px;
 }
 
-/* On surface variant */
-.scroll-shadow--on-surface {
-}
-
 /* Orientation: Vertical */
 .scroll-shadow--vertical {
   @apply overflow-y-auto;

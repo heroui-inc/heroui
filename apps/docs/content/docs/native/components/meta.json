@@ -5,6 +5,7 @@
   "icon": "circles-4-diamond",
   "pages": [
     "index",
+    "---Components---",
     "(navigation)/accordion",
     "(media)/avatar",
     "(overlays)/bottom-sheet",

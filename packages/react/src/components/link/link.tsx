@@ -1,16 +1,15 @@
 "use client";
 
-import type {LinkVariants} from "./link.styles";
+import type {LinkVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {linkVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {Link as LinkPrimitive} from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {ExternalLinkIcon} from "../icons";
-
-import {linkVariants} from "./link.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Link Context
@@ -26,11 +25,8 @@ const LinkContext = createContext<LinkContext>({});
  * --------------------------------------------------------------------------------------------- */
 interface LinkRootProps extends ComponentPropsWithRef<typeof LinkPrimitive>, LinkVariants {}
 
-const LinkRoot = ({children, className, underline, underlineOffset, ...props}: LinkRootProps) => {
-  const slots = React.useMemo(
-    () => linkVariants({underline, underlineOffset}),
-    [underline, underlineOffset],
-  );
+const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
+  const slots = React.useMemo(() => linkVariants(), []);
 
   return (
     <LinkContext value={{slots}}>

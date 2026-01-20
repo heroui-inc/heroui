@@ -4,7 +4,9 @@ import type {ComponentType} from "react";
 import * as AccordionDemos from "./accordion";
 import * as AlertDemos from "./alert";
 import * as AlertDialogDemos from "./alert-dialog";
+import * as AutocompleteDemos from "./autocomplete";
 import * as AvatarDemos from "./avatar";
+import * as BreadcrumbsDemos from "./breadcrumbs";
 import * as ButtonDemos from "./button";
 import * as ButtonGroupDemos from "./button-group";
 import * as CardDemos from "./card";
@@ -47,6 +49,7 @@ import * as TagGroupDemos from "./tag-group";
 import * as TextFieldDemos from "./text-field";
 import * as TextAreaDemos from "./textarea";
 import * as TimeFieldDemos from "./time-field";
+import * as ToastDemos from "./toast";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -110,6 +113,10 @@ export const demos: Record<string, DemoItem> = {
   "alert-dialog-backdrop-variants": {
     component: AlertDialogDemos.BackdropVariants,
     file: "alert-dialog/backdrop-variants.tsx",
+  },
+  "alert-dialog-sizes": {
+    component: AlertDialogDemos.Sizes,
+    file: "alert-dialog/sizes.tsx",
   },
   "alert-dialog-controlled": {
     component: AlertDialogDemos.Controlled,
@@ -176,6 +183,27 @@ export const demos: Record<string, DemoItem> = {
     component: AvatarDemos.CustomStyles,
     file: "avatar/custom-styles.tsx",
   },
+  // Breadcrumbs demos
+  "breadcrumbs-basic": {
+    component: BreadcrumbsDemos.BreadcrumbsBasic,
+    file: "breadcrumbs/basic.tsx",
+  },
+  "breadcrumbs-level-2": {
+    component: BreadcrumbsDemos.BreadcrumbsLevel2,
+    file: "breadcrumbs/level-2.tsx",
+  },
+  "breadcrumbs-level-3": {
+    component: BreadcrumbsDemos.BreadcrumbsLevel3,
+    file: "breadcrumbs/level-3.tsx",
+  },
+  "breadcrumbs-custom-separator": {
+    component: BreadcrumbsDemos.BreadcrumbsCustomSeparator,
+    file: "breadcrumbs/custom-separator.tsx",
+  },
+  "breadcrumbs-disabled": {
+    component: BreadcrumbsDemos.BreadcrumbsDisabled,
+    file: "breadcrumbs/disabled.tsx",
+  },
   // Button demos
   "button-basic": {
     component: ButtonDemos.Basic,
@@ -216,6 +244,10 @@ export const demos: Record<string, DemoItem> = {
   "button-variants": {
     component: ButtonDemos.Variants,
     file: "button/variants.tsx",
+  },
+  "button-outline-variant": {
+    component: ButtonDemos.OutlineVariant,
+    file: "button/outline-variant.tsx",
   },
   "button-with-icons": {
     component: ButtonDemos.WithIcons,
@@ -328,6 +360,10 @@ export const demos: Record<string, DemoItem> = {
     component: CheckboxDemos.FullRounded,
     file: "checkbox/full-rounded.tsx",
   },
+  "checkbox-variants": {
+    component: CheckboxDemos.Variants,
+    file: "checkbox/variants.tsx",
+  },
   // CheckboxGroup demos
   "checkbox-group-basic": {
     component: CheckboxGroupDemos.Basic,
@@ -390,6 +426,83 @@ export const demos: Record<string, DemoItem> = {
   "close-button-interactive": {
     component: CloseButtonDemos.Interactive,
     file: "close-button/interactive.tsx",
+  },
+  // Autocomplete demos
+  "autocomplete-default": {
+    component: AutocompleteDemos.Default,
+    file: "autocomplete/default.tsx",
+  },
+  "autocomplete-single-select": {
+    component: AutocompleteDemos.SingleSelect,
+    file: "autocomplete/single-select.tsx",
+  },
+  "autocomplete-variants": {
+    component: AutocompleteDemos.Variants,
+    file: "autocomplete/variants.tsx",
+  },
+  "autocomplete-multiple-select": {
+    component: AutocompleteDemos.MultipleSelect,
+    file: "autocomplete/multiple-select.tsx",
+  },
+  "autocomplete-full-width": {
+    component: AutocompleteDemos.FullWidth,
+    file: "autocomplete/full-width.tsx",
+  },
+  "autocomplete-with-description": {
+    component: AutocompleteDemos.WithDescription,
+    file: "autocomplete/with-description.tsx",
+  },
+  "autocomplete-with-sections": {
+    component: AutocompleteDemos.WithSections,
+    file: "autocomplete/with-sections.tsx",
+  },
+  "autocomplete-with-disabled-options": {
+    component: AutocompleteDemos.WithDisabledOptions,
+    file: "autocomplete/with-disabled-options.tsx",
+  },
+  "autocomplete-custom-indicator": {
+    component: AutocompleteDemos.CustomIndicator,
+    file: "autocomplete/custom-indicator.tsx",
+  },
+  "autocomplete-required": {
+    component: AutocompleteDemos.Required,
+    file: "autocomplete/required.tsx",
+  },
+  "autocomplete-controlled": {
+    component: AutocompleteDemos.Controlled,
+    file: "autocomplete/controlled.tsx",
+  },
+  "autocomplete-controlled-open-state": {
+    component: AutocompleteDemos.ControlledOpenState,
+    file: "autocomplete/controlled-open-state.tsx",
+  },
+  "autocomplete-asynchronous-filtering": {
+    component: AutocompleteDemos.AsynchronousFiltering,
+    file: "autocomplete/asynchronous-filtering.tsx",
+  },
+  "autocomplete-disabled": {
+    component: AutocompleteDemos.Disabled,
+    file: "autocomplete/disabled.tsx",
+  },
+  "autocomplete-user-selection": {
+    component: AutocompleteDemos.UserSelection,
+    file: "autocomplete/user-selection.tsx",
+  },
+  "autocomplete-user-selection-multiple": {
+    component: AutocompleteDemos.UserSelectionMultiple,
+    file: "autocomplete/user-selection-multiple.tsx",
+  },
+  "autocomplete-location-search": {
+    component: AutocompleteDemos.LocationSearch,
+    file: "autocomplete/location-search.tsx",
+  },
+  "autocomplete-tag-group-selection": {
+    component: AutocompleteDemos.TagGroupSelection,
+    file: "autocomplete/tag-group-selection.tsx",
+  },
+  "autocomplete-email-recipients": {
+    component: AutocompleteDemos.EmailRecipients,
+    file: "autocomplete/email-recipients.tsx",
   },
   // ComboBox demos
   "combobox-default": {
@@ -455,6 +568,10 @@ export const demos: Record<string, DemoItem> = {
   "combobox-on-surface": {
     component: ComboBoxDemos.OnSurface,
     file: "combobox/on-surface.tsx",
+  },
+  "combobox-menu-trigger": {
+    component: ComboBoxDemos.MenuTrigger,
+    file: "combobox/menu-trigger.tsx",
   },
   // Disclosure demos
   "disclosure-basic": {
@@ -579,6 +696,10 @@ export const demos: Record<string, DemoItem> = {
     component: InputDemos.OnSurface,
     file: "input/on-surface.tsx",
   },
+  "input-variants": {
+    component: InputDemos.Variants,
+    file: "input/variants.tsx",
+  },
   // DateField demos
   "date-field-basic": {
     component: DateFieldDemos.Basic,
@@ -632,6 +753,10 @@ export const demos: Record<string, DemoItem> = {
     component: DateFieldDemos.WithValidation,
     file: "date-field/with-validation.tsx",
   },
+  "date-field-variants": {
+    component: DateFieldDemos.Variants,
+    file: "date-field/variants.tsx",
+  },
   // InputOTP demos
   "input-otp-basic": {
     component: InputOTPDemos.Basic,
@@ -668,6 +793,10 @@ export const demos: Record<string, DemoItem> = {
   "input-otp-on-surface": {
     component: InputOTPDemos.OnSurface,
     file: "input-otp/on-surface.tsx",
+  },
+  "input-otp-variants": {
+    component: InputOTPDemos.Variants,
+    file: "input-otp/variants.tsx",
   },
   // InputGroup demos
   "input-group-default": {
@@ -742,6 +871,14 @@ export const demos: Record<string, DemoItem> = {
     component: InputGroupDemos.OnSurface,
     file: "input-group/on-surface.tsx",
   },
+  "input-group-with-textarea": {
+    component: InputGroupDemos.WithTextArea,
+    file: "input-group/with-textarea.tsx",
+  },
+  "input-group-variants": {
+    component: InputGroupDemos.Variants,
+    file: "input-group/variants.tsx",
+  },
   // Kbd demos
   "kbd-basic": {
     component: KbdDemos.Basic,
@@ -780,13 +917,9 @@ export const demos: Record<string, DemoItem> = {
     component: LinkDemos.IconPlacement,
     file: "link/icon-placement.tsx",
   },
-  "link-underline-variants": {
-    component: LinkDemos.UnderlineVariants,
-    file: "link/underline-variants.tsx",
-  },
-  "link-underline-offset": {
-    component: LinkDemos.UnderlineOffset,
-    file: "link/underline-offset.tsx",
+  "link-underline-and-offset": {
+    component: LinkDemos.UnderlineAndOffset,
+    file: "link/underline-and-offset.tsx",
   },
   // RadioGroup demos
   "radio-group-basic": {
@@ -824,6 +957,10 @@ export const demos: Record<string, DemoItem> = {
   "radio-group-on-surface": {
     component: RadioGroupDemos.OnSurface,
     file: "radio-group/on-surface.tsx",
+  },
+  "radio-group-variants": {
+    component: RadioGroupDemos.Variants,
+    file: "radio-group/variants.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {
@@ -866,6 +1003,14 @@ export const demos: Record<string, DemoItem> = {
   "separator-with-content": {
     component: SeparatorDemos.WithContent,
     file: "separator/with-content.tsx",
+  },
+  "separator-surface-variants": {
+    component: SeparatorDemos.SurfaceVariants,
+    file: "separator/surface-variants.tsx",
+  },
+  "separator-manual-variant-override": {
+    component: SeparatorDemos.ManualVariantOverride,
+    file: "separator/manual-variant-override.tsx",
   },
   // Spinner demos
   "spinner-basic": {
@@ -963,6 +1108,14 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.WithoutSeparator,
     file: "tabs/without-separator.tsx",
   },
+  "tabs-secondary": {
+    component: TabsDemos.Secondary,
+    file: "tabs/secondary.tsx",
+  },
+  "tabs-secondary-vertical": {
+    component: TabsDemos.SecondaryVertical,
+    file: "tabs/secondary-vertical.tsx",
+  },
   // TagGroup demos
   "tag-group-basic": {
     component: TagGroupDemos.Basic,
@@ -971,6 +1124,10 @@ export const demos: Record<string, DemoItem> = {
   "tag-group-sizes": {
     component: TagGroupDemos.Sizes,
     file: "tag-group/sizes.tsx",
+  },
+  "tag-group-variants": {
+    component: TagGroupDemos.Variants,
+    file: "tag-group/variants.tsx",
   },
   "tag-group-disabled": {
     component: TagGroupDemos.Disabled,
@@ -983,10 +1140,6 @@ export const demos: Record<string, DemoItem> = {
   "tag-group-controlled": {
     component: TagGroupDemos.Controlled,
     file: "tag-group/controlled.tsx",
-  },
-  "tag-group-on-surface": {
-    component: TagGroupDemos.OnSurface,
-    file: "tag-group/on-surface.tsx",
   },
   "tag-group-with-error-message": {
     component: TagGroupDemos.WithErrorMessage,
@@ -1024,6 +1177,10 @@ export const demos: Record<string, DemoItem> = {
   "textarea-on-surface": {
     component: TextAreaDemos.OnSurface,
     file: "textarea/on-surface.tsx",
+  },
+  "textarea-variants": {
+    component: TextAreaDemos.Variants,
+    file: "textarea/variants.tsx",
   },
   // TextField demos
   "text-field-basic": {
@@ -1122,6 +1279,35 @@ export const demos: Record<string, DemoItem> = {
   "time-field-with-validation": {
     component: TimeFieldDemos.WithValidation,
     file: "time-field/with-validation.tsx",
+  },
+  // Toast demos
+  "toast-default": {
+    component: ToastDemos.Default,
+    file: "toast/default.tsx",
+  },
+  "toast-variants": {
+    component: ToastDemos.Variants,
+    file: "toast/variants.tsx",
+  },
+  "toast-placements": {
+    component: ToastDemos.Placements,
+    file: "toast/placements.tsx",
+  },
+  "toast-simple": {
+    component: ToastDemos.Simple,
+    file: "toast/simple.tsx",
+  },
+  "toast-custom-indicator": {
+    component: ToastDemos.CustomIndicator,
+    file: "toast/custom-indicator.tsx",
+  },
+  "toast-custom-toast": {
+    component: ToastDemos.CustomToast,
+    file: "toast/custom-toast.tsx",
+  },
+  "toast-custom-queue": {
+    component: ToastDemos.CustomQueue,
+    file: "toast/custom-queue.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {
@@ -1297,6 +1483,10 @@ export const demos: Record<string, DemoItem> = {
     component: NumberFieldDemos.FormExample,
     file: "number-field/form-example.tsx",
   },
+  "number-field-variants": {
+    component: NumberFieldDemos.Variants,
+    file: "number-field/variants.tsx",
+  },
   // Select demos
   "select-default": {
     component: SelectDemos.Default,
@@ -1362,6 +1552,10 @@ export const demos: Record<string, DemoItem> = {
     component: SelectDemos.Disabled,
     file: "select/disabled.tsx",
   },
+  "select-variants": {
+    component: SelectDemos.Variants,
+    file: "select/variants.tsx",
+  },
   // SearchField demos
   "search-field-basic": {
     component: SearchFieldDemos.Basic,
@@ -1411,6 +1605,10 @@ export const demos: Record<string, DemoItem> = {
     component: SearchFieldDemos.WithKeyboardShortcut,
     file: "search-field/with-keyboard-shortcut.tsx",
   },
+  "search-field-variants": {
+    component: SearchFieldDemos.Variants,
+    file: "search-field/variants.tsx",
+  },
   // ScrollShadow demos
   "scroll-shadow-default": {
     component: ScrollShadowDemos.Default,
@@ -1423,10 +1621,6 @@ export const demos: Record<string, DemoItem> = {
   "scroll-shadow-hide-scroll-bar": {
     component: ScrollShadowDemos.HideScrollBar,
     file: "scroll-shadow/hide-scroll-bar.tsx",
-  },
-  "scroll-shadow-on-surface": {
-    component: ScrollShadowDemos.OnSurface,
-    file: "scroll-shadow/on-surface.tsx",
   },
   "scroll-shadow-custom-size": {
     component: ScrollShadowDemos.CustomSize,

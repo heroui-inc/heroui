@@ -1,12 +1,11 @@
 "use client";
 
 import type {ButtonProps} from "../button";
-import type {ButtonGroupVariants} from "./button-group.styles";
+import type {ButtonGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
-import React, {createContext} from "react";
-
-import {buttonGroupVariants} from "./button-group.styles";
+import {buttonGroupVariants} from "@heroui/styles";
+import React, {Children, createContext, isValidElement} from "react";
 
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Context
@@ -21,6 +20,9 @@ type ButtonGroupContext = {
 
 const ButtonGroupContext = createContext<ButtonGroupContext>({});
 
+// Property name to mark direct children of ButtonGroup
+export const BUTTON_GROUP_CHILD = "__button_group_child";
+
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Root
  * -----------------------------------------------------------------------------------------------*/
@@ -33,6 +35,7 @@ interface ButtonGroupRootProps
 }
 
 const ButtonGroupRoot = ({
+  children,
   className,
   fullWidth,
   hideSeparator = false,
@@ -41,6 +44,18 @@ const ButtonGroupRoot = ({
   variant,
   ...rest
 }: ButtonGroupRootProps) => {
+  // Wrap only direct children with context provider
+  const wrappedChildren = Children.map(children, (child) => {
+    if (!isValidElement(child)) {
+      return child;
+    }
+
+    // Clone the child and add the special prop
+    return React.cloneElement(child, {
+      [BUTTON_GROUP_CHILD]: true,
+    } as any);
+  });
+
   return (
     <ButtonGroupContext value={{size, variant, isDisabled, fullWidth, hideSeparator}}>
       <div
@@ -48,7 +63,9 @@ const ButtonGroupRoot = ({
         data-hide-separator={hideSeparator ? "true" : undefined}
         data-slot="button-group"
         {...rest}
-      />
+      >
+        {wrappedChildren}
+      </div>
     </ButtonGroupContext>
   );
 };

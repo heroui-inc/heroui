@@ -11,7 +11,6 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
-import {Surface} from "../surface";
 
 import {DateField} from "./index";
 
@@ -37,6 +36,29 @@ export const Default: Story = {
         </DateInputGroup.Input>
       </DateInputGroup>
     </DateField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <DateField className="w-[256px]" name="primary-date">
+        <Label>Primary variant</Label>
+        <DateInputGroup variant="primary">
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+        </DateInputGroup>
+      </DateField>
+      <DateField className="w-[256px]" name="secondary-date">
+        <Label>Secondary variant</Label>
+        <DateInputGroup variant="secondary">
+          <DateInputGroup.Input>
+            {(segment) => <DateInputGroup.Segment segment={segment} />}
+          </DateInputGroup.Input>
+        </DateInputGroup>
+      </DateField>
+    </div>
   ),
 };
 
@@ -279,34 +301,6 @@ export const WithPrefixAndSuffix: Story = {
       </DateInputGroup>
       <Description>Enter a date</Description>
     </DateField>
-  ),
-};
-
-export const OnSurface: Story = {
-  render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <DateField className="w-full" name="date">
-        <Label>Date</Label>
-        <DateInputGroup isOnSurface>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
-        <Description>Enter a date</Description>
-      </DateField>
-      <DateField isInvalid className="w-full" name="date-2">
-        <Label>Appointment date</Label>
-        <DateInputGroup isOnSurface>
-          <DateInputGroup.Prefix>
-            <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-          </DateInputGroup.Prefix>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
-        <Description>Enter a date for your appointment</Description>
-      </DateField>
-    </Surface>
   ),
 };
 

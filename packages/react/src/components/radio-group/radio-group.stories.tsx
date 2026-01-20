@@ -1,8 +1,8 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import clsx from "clsx";
 import React from "react";
+import {cx} from "tailwind-variants";
 
 import {Button} from "../button";
 import {Description} from "../description";
@@ -10,7 +10,6 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 import {Radio} from "../radio";
-import {Surface} from "../surface";
 
 import {RadioGroup} from "./index";
 
@@ -63,41 +62,56 @@ export const Default: Story = {
   ),
 };
 
-export const OnSurface: Story = {
+export const Variants: Story = {
   render: () => (
-    <Surface className="w-full rounded-3xl p-6">
-      <RadioGroup defaultValue="premium" name="plan">
-        <Label>Plan selection</Label>
-        <Description>Choose the plan that suits you best</Description>
-        <Radio value="basic">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Basic Plan</Label>
-            <Description>Includes 100 messages per month</Description>
-          </Radio.Content>
-        </Radio>
-        <Radio value="premium">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Premium Plan</Label>
-            <Description>Includes 200 messages per month</Description>
-          </Radio.Content>
-        </Radio>
-        <Radio value="business">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Business Plan</Label>
-            <Description>Unlimited messages</Description>
-          </Radio.Content>
-        </Radio>
-      </RadioGroup>
-    </Surface>
+    <div className="flex flex-col gap-8 px-4">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Primary variant</p>
+        <RadioGroup defaultValue="option1" name="primary-plan" variant="primary">
+          <Radio value="option1">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 1</Label>
+              <Description>Standard styling with default background</Description>
+            </Radio.Content>
+          </Radio>
+          <Radio value="option2">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 2</Label>
+              <Description>Another option with primary styling</Description>
+            </Radio.Content>
+          </Radio>
+        </RadioGroup>
+      </div>
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary variant</p>
+        <RadioGroup defaultValue="option1" name="secondary-plan" variant="secondary">
+          <Radio value="option1">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 1</Label>
+              <Description>Lower emphasis variant for use in surfaces</Description>
+            </Radio.Content>
+          </Radio>
+          <Radio value="option2">
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Radio.Content>
+              <Label>Option 2</Label>
+              <Description>Another option with secondary styling</Description>
+            </Radio.Content>
+          </Radio>
+        </RadioGroup>
+      </div>
+    </div>
   ),
 };
 
@@ -423,7 +437,7 @@ export const DeliveryAndPaymentExample: Story = {
                 <Radio
                   key={option.value}
                   value={option.value}
-                  className={clsx(
+                  className={cx(
                     "group relative flex-col gap-4 rounded-xl bg-surface-tertiary px-5 py-4 transition-all data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                     "data-[focus-visible=true]:bg-accent/10",
                   )}
@@ -453,7 +467,7 @@ export const DeliveryAndPaymentExample: Story = {
                 <Radio
                   key={option.value}
                   value={option.value}
-                  className={clsx(
+                  className={cx(
                     "group relative flex-col gap-4 rounded-xl bg-surface-tertiary px-5 py-4 transition-all",
                     "data-[selected=true]:bg-accent/10",
                   )}

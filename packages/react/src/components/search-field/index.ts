@@ -51,6 +51,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {searchFieldVariants} from "./search-field.styles";
+export {searchFieldVariants} from "@heroui/styles";
 
-export type {SearchFieldVariants} from "./search-field.styles";
+export type {SearchFieldVariants} from "@heroui/styles";

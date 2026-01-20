@@ -5,6 +5,7 @@ import {Analytics} from "@vercel/analytics/next";
 import {NextProvider} from "fumadocs-core/framework/next";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {Inter} from "next/font/google";
+import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
@@ -16,17 +17,20 @@ import "./global.css";
 
 const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export default function Layout({children}: {children: ReactNode}) {
   return (
-    <html suppressHydrationWarning className={inter.className} lang="en">
-      <body className="flex min-h-screen flex-col">
-        <NextProvider>
-          <TreeContextProvider tree={source.pageTree}>
-            <CustomRootProvider>{children}</CustomRootProvider>
-          </TreeContextProvider>
-        </NextProvider>
+    <html suppressHydrationWarning className={inter.variable} lang="en">
+      <body className="flex min-h-screen flex-col font-sans">
+        <NuqsAdapter>
+          <NextProvider>
+            <TreeContextProvider tree={source.pageTree}>
+              <CustomRootProvider>{children}</CustomRootProvider>
+            </TreeContextProvider>
+          </NextProvider>
+        </NuqsAdapter>
         <Analytics />
       </body>
     </html>

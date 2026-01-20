@@ -2,20 +2,19 @@ import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 
+import {DemoComponents} from "@/components/demo";
 import {Footer} from "@/components/footer";
 import {FrameworkChip} from "@/components/framework-chip";
 import {GitHubLink} from "@/components/github-link";
-
-import {DemoComponents} from "./components/demo";
 
 const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/react/getting-started/agent-skills"
+      href="/docs/react/releases/v3-0-0-beta-4"
     >
       <FrameworkChip framework="web" />
-      <span>Introducing Agent Skills for HeroUI React</span>
+      <span>Beta 4 — Theme Builder, Autocomplete, Toast & more</span>
     </LinkRoot>
   );
 };
@@ -27,7 +26,7 @@ export default function HomePage() {
   return (
     <main className="flex h-[calc(100vh-4rem)] flex-col">
       {/* Hero Section */}
-      <section className="z-10 flex flex-col items-center pt-20 text-center">
+      <section className="z-10 flex flex-col items-center px-4 pt-20 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-y-4">
           <VersionChip />
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -48,7 +47,7 @@ export default function HomePage() {
           </div>
         </div>
         {/* Mobile/Tablet: Show images */}
-        <section className="mt-16 -ml-4 w-screen overflow-hidden lg:hidden lg:w-[150vw]">
+        <section className="mt-16 -ml-4 hidden w-screen overflow-hidden lg:w-[150vw]">
           <Image
             alt="HeroUI components preview"
             className="block dark:hidden"
@@ -71,7 +70,7 @@ export default function HomePage() {
           />
         </section>
         {/* Desktop: Show demos */}
-        <div className="hidden lg:block">
+        <div className="py-24">
           <DemoComponents />
         </div>
       </section>

@@ -11,11 +11,17 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@gravity-ui/icons": "2.16.0",
     "@heroui/react": "workspace:*",
     "@heroui/styles": "workspace:*",
+    "@iconify/react": "6.0.2",
+    "apcach": "0.6.4",
+    "culori": "4.0.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-scan": "0.4.3"
+    "react-aria-components": "1.14.0",
+    "react-scan": "0.4.3",
+    "tailwind-variants": "^3.2.2"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",

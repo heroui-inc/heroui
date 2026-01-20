@@ -49,21 +49,29 @@
   }
 }
 
-/* Variant modifiers */
-.textarea--on-surface {
-  @apply bg-on-surface shadow-none;
+/* Variant property definitions */
+.textarea--primary {
+  /* Default styles */
+}
+
+.textarea--secondary {
+  @apply shadow-none;
+  background-color: var(--textarea-bg);
+
+  --textarea-bg: var(--color-default);
+  --textarea-bg-hover: var(--color-default-hover);
+  --textarea-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
-    &[data-hovered="true"]:not([data-focus-visible="true"]) {
-      @apply bg-on-surface-hover;
+    &[data-hovered="true"]:not([data-focused="true"]):not([data-focus-visible="true"]) {
+      background-color: var(--textarea-bg-hover);
     }
   }
 
-  /* Focus state */
   &:focus,
   &[data-focused="true"] {
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--textarea-bg-focus);
   }
 
   /* Focus visible state */
@@ -74,7 +82,7 @@
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--textarea-bg-focus);
   }
 }
 

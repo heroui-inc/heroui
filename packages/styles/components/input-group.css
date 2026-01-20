@@ -1,8 +1,14 @@
 /* Input group styles */
 .input-group {
-  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
+  @apply inline-flex min-h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
+
+  /* When textarea is present, align items to start and allow height to grow */
+  &:has([data-slot="input-group-textarea"]) {
+    @apply items-start;
+    height: auto;
+  }
 
   /**
    * Transitions
@@ -65,6 +71,12 @@
   }
 }
 
+/* TextArea within InputGroup - uses same base class as input but with textarea-specific styles */
+.input-group__input[data-slot="input-group-textarea"] {
+  min-height: 38px;
+  resize: vertical;
+}
+
 .input-group__prefix {
   @apply flex h-full items-center justify-center rounded-l-field rounded-r-none bg-transparent px-3 text-field-placeholder;
   border-width: var(--border-width-field);
@@ -74,6 +86,12 @@
   border-left: none;
   border-top: none;
   border-bottom: none;
+
+  /* Align to top when textarea is present */
+  .input-group:has([data-slot="input-group-textarea"]) & {
+    @apply items-start;
+    padding-top: 0.5rem;
+  }
 
   /**
    * Transitions
@@ -95,6 +113,12 @@
   border-top: none;
   border-bottom: none;
 
+  /* Align to top when textarea is present */
+  .input-group:has([data-slot="input-group-textarea"]) & {
+    @apply items-start;
+    padding-top: 0.5rem;
+  }
+
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
@@ -105,31 +129,40 @@
   @apply motion-reduce:transition-none;
 }
 
-/* On Surface variant */
-.input-group--on-surface {
-  @apply bg-on-surface shadow-none;
+/* Variant property definitions */
+.input-group--primary {
+  /* Default styles */
+}
+
+.input-group--secondary {
+  @apply shadow-none;
+  background-color: var(--input-group-bg);
+
+  --input-group-bg: var(--color-default);
+  --input-group-bg-hover: var(--color-default-hover);
+  --input-group-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
-      @apply bg-on-surface-hover;
+      background-color: var(--input-group-bg-hover);
     }
   }
 
-  /* Focus within state */
   &:focus-within,
   &[data-focus-within="true"] {
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--input-group-bg-focus);
   }
 
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-on-surface-focus);
     border-color: var(--color-field-border-invalid);
+    background-color: var(--input-group-bg-focus);
   }
 
-  [data-slot="input-group-input"] {
+  [data-slot="input-group-input"],
+  [data-slot="input-group-textarea"] {
     @apply bg-transparent;
   }
 }

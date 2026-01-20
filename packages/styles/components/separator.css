@@ -44,8 +44,3 @@
 .separator__content--vertical {
   @apply text-center;
 }
-
-/* On Surface variant */
-.separator--on-surface {
-  @apply bg-separator-on-surface;
-}

@@ -24,11 +24,11 @@ export type {ButtonGroupRootProps, ButtonGroupRootProps as ButtonGroupProps} fro
 /* -------------------------------------------------------------------------------------------------
  * Context
  * -----------------------------------------------------------------------------------------------*/
-export {ButtonGroupContext} from "./button-group";
+export {ButtonGroupContext, BUTTON_GROUP_CHILD} from "./button-group";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {buttonGroupVariants} from "./button-group.styles";
+export {buttonGroupVariants} from "@heroui/styles";
 
-export type {ButtonGroupVariants} from "./button-group.styles";
+export type {ButtonGroupVariants} from "@heroui/styles";

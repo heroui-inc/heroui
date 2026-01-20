@@ -1,5 +1,5 @@
 .skeleton {
-  @apply pointer-events-none relative overflow-hidden rounded-sm bg-surface-quaternary/70;
+  @apply pointer-events-none relative overflow-hidden rounded-sm bg-surface-tertiary/70;
 }
 
 /* TODO: Skeleton with parent are not visible */
@@ -7,7 +7,7 @@
 /* Animation types */
 .skeleton--shimmer {
   &::after {
-    @apply absolute inset-0 -translate-x-full animate-skeleton bg-linear-to-r from-transparent via-surface-quaternary to-transparent content-[''];
+    @apply absolute inset-0 -translate-x-full animate-skeleton bg-linear-to-r from-transparent via-surface-tertiary to-transparent content-[''];
   }
 
   /* When applied to a parent container with multiple skeletons */

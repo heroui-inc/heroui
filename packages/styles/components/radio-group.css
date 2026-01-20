@@ -14,9 +14,17 @@
   }
 }
 
-/* Variant modifiers */
-.radio-group--on-surface .radio__control {
-  @apply bg-on-surface shadow-none;
+/* Variant property definitions */
+.radio-group--primary {
+  /* Default styles */
+}
+
+.radio-group--secondary .radio__control {
+  @apply shadow-none;
+  background-color: var(--radio-control-bg);
+
+  --radio-control-bg: var(--color-default);
+  --radio-control-bg-hover: var(--color-default-hover);
 
   /* Hover state */
   .radio:hover &,
@@ -24,16 +32,16 @@
     @apply border-field-border-hover;
   }
 
-  /* Default indicator color */
+  /* Default indicator color (unselected) */
   .radio:not([aria-checked="true"]):not([data-selected="true"]) & .radio__indicator:empty::before {
-    @apply bg-on-surface;
+    background-color: var(--radio-control-bg);
   }
 
-  /* Hover indicator color */
+  /* Hover indicator color (unselected) */
   .radio:hover:not([aria-checked="true"]):not([data-selected="true"]) &,
   .radio[data-hovered="true"]:not([aria-checked="true"]):not([data-selected="true"]) & {
     .radio__indicator:empty::before {
-      @apply bg-on-surface-hover;
+      background-color: var(--radio-control-bg-hover);
     }
   }
 }

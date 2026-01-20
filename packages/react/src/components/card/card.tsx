@@ -1,15 +1,15 @@
 "use client";
 
-import type {CardVariants} from "./card.styles";
 import type {SurfaceVariants} from "../surface";
+import type {CardVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {cardVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
-import {cardVariants} from "./card.styles";
 /* -------------------------------------------------------------------------------------------------
  * Card Context
  * -----------------------------------------------------------------------------------------------*/

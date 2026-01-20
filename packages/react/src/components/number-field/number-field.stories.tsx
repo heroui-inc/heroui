@@ -8,7 +8,6 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {NumberField} from "./index";
 
@@ -34,6 +33,29 @@ export const Default: Story = {
         <NumberField.IncrementButton />
       </NumberField.Group>
     </NumberField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <NumberField defaultValue={100} minValue={0} name="primary-width" variant="primary">
+        <Label>Primary variant</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-[120px]" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+      <NumberField defaultValue={100} minValue={0} name="secondary-width" variant="secondary">
+        <Label>Secondary variant</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-[120px]" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+    </div>
   ),
 };
 
@@ -396,56 +418,6 @@ export const CustomIcons: Story = {
         <Description>Custom icon children</Description>
       </NumberField>
     </div>
-  ),
-};
-
-export const OnSurface: Story = {
-  render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <NumberField defaultValue={1024} minValue={0} name="width">
-        <Label>Width</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>Enter the width in pixels</Description>
-      </NumberField>
-      <NumberField
-        defaultValue={0.5}
-        formatOptions={{style: "percent"}}
-        maxValue={1}
-        minValue={0}
-        name="percentage"
-        step={0.1}
-      >
-        <Label>Percentage</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>Value must be between 0 and 100</Description>
-      </NumberField>
-      <NumberField isInvalid isRequired maxValue={5} minValue={1} name="quantity" value={10}>
-        <Label>Quantity</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <FieldError>Quantity must be between 1 and 5</FieldError>
-      </NumberField>
-      <NumberField isDisabled defaultValue={50} minValue={0} name="disabled">
-        <Label>Disabled field</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>This field cannot be edited</Description>
-      </NumberField>
-    </Surface>
   ),
 };
 

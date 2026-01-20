@@ -1,11 +1,10 @@
 "use client";
 
-import type {SurfaceVariants} from "./surface.styles";
+import type {SurfaceVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {surfaceVariants} from "@heroui/styles";
 import React, {createContext} from "react";
-
-import {surfaceVariants} from "./surface.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Surface Context

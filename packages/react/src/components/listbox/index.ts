@@ -32,6 +32,6 @@ export type {ListBoxRootProps, ListBoxRootProps as ListBoxProps} from "./listbox
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {listboxVariants} from "./listbox.styles";
+export {listboxVariants} from "@heroui/styles";
 
-export type {ListBoxVariants} from "./listbox.styles";
+export type {ListBoxVariants} from "@heroui/styles";

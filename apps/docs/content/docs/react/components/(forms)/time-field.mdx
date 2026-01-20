@@ -1,7 +1,6 @@
 ---
 title: TimeField
 description: Time input field with labels, descriptions, and validation built on React Aria TimeField
-icon: new
 links:
   rac: TimeField
   source: time-field/time-field.tsx
@@ -84,9 +83,9 @@ Add prefix or suffix icons to enhance the time field.
 
 <ComponentPreview name="time-field-full-width" />
 
-### On Surface
+### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, TimeField and its child DateInputGroup automatically apply on-surface styling.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on DateInputGroup to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="time-field-on-surface" />
 
@@ -317,7 +316,7 @@ DateInputGroup accepts all props from React Aria's `Group` component plus the fo
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 ### DateInputGroup.Input Props
 
@@ -326,7 +325,7 @@ DateInputGroup.Input accepts all props from React Aria's `DateInput` component p
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
-| `isOnSurface` | `boolean` | `false` | Whether the input is displayed on a surface (affects styling) |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the input. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
 The `DateInput` component accepts a render prop function that receives date segments. Each segment represents a part of the time (hour, minute, second, etc.).
 

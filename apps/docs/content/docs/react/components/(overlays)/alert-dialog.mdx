@@ -1,7 +1,6 @@
 ---
 title: Alert Dialog
 description: Modal dialog for critical confirmations requiring user attention and explicit action
-icon: updated
 links:
   rac: AlertDialog
   source: alert-dialog/alert-dialog.tsx
@@ -57,6 +56,10 @@ export default () => (
 ### Backdrop Variants
 
 <ComponentPreview name="alert-dialog-backdrop-variants" />
+
+### Sizes
+
+<ComponentPreview name="alert-dialog-sizes" />
 
 ### Custom Icon
 
@@ -237,6 +240,7 @@ The component supports these interactive states:
 | Prop        | Type                                      | Default  | Description               |
 | ----------- | ----------------------------------------- | -------- | ------------------------- |
 | `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"` | Dialog position on screen |
+| `size`      | `"xs" \| "sm" \| "md" \| "lg" \| "cover"` | `"md"`   | Alert Dialog size variant |
 | `className` | `string \| (values) => string`            | -        | Container CSS classes     |
 
 ### AlertDialog.Dialog

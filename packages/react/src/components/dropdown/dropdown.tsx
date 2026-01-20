@@ -1,9 +1,10 @@
 "use client";
 
-import type {DropdownVariants} from "./dropdown.styles";
 import type {SurfaceVariants} from "../surface";
+import type {DropdownVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {dropdownVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button,
@@ -17,8 +18,6 @@ import {composeTwRenderProps} from "../../utils/compose";
 import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu-item";
 import {MenuSectionRoot} from "../menu-section";
 import {SurfaceContext} from "../surface";
-
-import {dropdownVariants} from "./dropdown.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Context

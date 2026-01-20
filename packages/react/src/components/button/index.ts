@@ -1,5 +1,7 @@
 import type {ComponentProps} from "react";
 
+import {BUTTON_GROUP_CHILD} from "../button-group";
+
 import {ButtonRoot} from "./button";
 
 /* -------------------------------------------------------------------------------------------------
@@ -22,8 +24,13 @@ export {ButtonRoot};
 export type {ButtonRootProps, ButtonRootProps as ButtonProps} from "./button";
 
 /* -------------------------------------------------------------------------------------------------
+ * Re-export BUTTON_GROUP_CHILD for type declarations
+ * -----------------------------------------------------------------------------------------------*/
+export {BUTTON_GROUP_CHILD};
+
+/* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {buttonVariants} from "./button.styles";
+export {buttonVariants} from "@heroui/styles";
 
-export type {ButtonVariants} from "./button.styles";
+export type {ButtonVariants} from "@heroui/styles";

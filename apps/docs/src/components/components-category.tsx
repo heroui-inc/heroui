@@ -38,11 +38,11 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Navigation",
-    components: ["accordion", "disclosure", "disclosure-group", "link", "tabs"],
+    components: ["accordion", "breadcrumbs", "disclosure", "disclosure-group", "link", "tabs"],
   },
   {
     category: "Overlays",
-    components: ["alert-dialog", "modal", "popover", "tooltip"],
+    components: ["alert-dialog", "modal", "popover", "toast", "tooltip"],
   },
   {
     category: "Collections",
@@ -66,7 +66,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Pickers",
-    components: ["combobox", "select"],
+    components: ["autocomplete", "combobox", "select"],
   },
   {
     category: "Typography",

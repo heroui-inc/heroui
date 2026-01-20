@@ -109,27 +109,36 @@
   @apply mr-3 flex items-center;
 }
 
-/* On Surface variant */
-.date-input-group--on-surface {
-  @apply bg-on-surface shadow-none;
+/* Variant property definitions */
+.date-input-group--primary {
+  /* Default styles */
+}
+
+.date-input-group--secondary {
+  @apply shadow-none;
+  background-color: var(--date-input-group-bg);
+
+  --date-input-group-bg: var(--color-default);
+  --date-input-group-bg-hover: var(--color-default-hover);
+  --date-input-group-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
-      @apply bg-on-surface-hover;
+      background-color: var(--date-input-group-bg-hover);
     }
   }
 
   &:focus-within,
   &[data-focus-within="true"] {
-    background-color: var(--color-on-surface-focus);
+    background-color: var(--date-input-group-bg-focus);
   }
 
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-on-surface-focus);
     border-color: var(--color-field-border-invalid);
+    background-color: var(--date-input-group-bg-focus);
   }
 
   [data-slot="date-input-group-input"] {

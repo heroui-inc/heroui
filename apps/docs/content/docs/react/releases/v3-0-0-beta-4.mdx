@@ -1,0 +1,324 @@
+---
+title: v3.0.0-beta.4
+description: New Theme Builder, three new components (Autocomplete, Breadcrumbs, Toast), Tabs secondary variant, Input/InputGroup variants, and various improvements.
+github:
+  pull: 6121
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">January 20, 2026</span>
+</div>
+
+This release introduces the new [Theme Builder](/themes) for visual theme customization, three new components ([Autocomplete](/docs/components/autocomplete), [Breadcrumbs](/docs/components/breadcrumbs), [Toast](/docs/components/toast)), adds secondary variant to [Tabs](/docs/components/tabs), primary/secondary variants to [Input](/docs/components/input) and [InputGroup](/docs/components/input-group), TextArea support for InputGroup, and ⚠️ **breaking changes** removing Link's underline variants and the `isInSurface` prop from form components.
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-4-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-4-dark@2x.jpg"
+  alt="HeroUI v3 Beta 4"
+  href="/docs/changelog/v3-0-0-beta-4"
+/>
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### Theme Builder
+
+We're excited to introduce the **[Theme Builder](/themes)** - a powerful visual tool for creating and customizing HeroUI themes. Build your perfect theme with real-time preview and export ready-to-use CSS.
+
+**Key features:**
+- **Visual Color Editing**: Adjust colors using OKLCH color pickers with intuitive sliders for lightness, chroma, and hue
+- **Real-time Preview**: See your changes instantly on live component previews
+- **Custom Accent Colors**: Define your brand colors and watch them propagate across all components
+- **Preset Themes**: Start from curated presets like Default, Airbnb, Coinbase, Discord, and more
+- **Export Ready**: Generate CSS variables ready to copy into your project
+- **Light & Dark Mode**: Customize both themes simultaneously with linked or independent values
+- **Keyboard Shortcuts**: Undo/redo support and quick actions for efficient workflow
+
+Try it now at [v3.heroui.com/themes](/themes).
+
+### New Components
+
+This release introduces **3 new** essential components:
+
+- **[Autocomplete](#autocomplete)**: Combines a select with filtering, allowing users to search and select from a list of options. ([Documentation](/docs/components/autocomplete))
+- **[Breadcrumbs](#breadcrumbs)**: Navigation breadcrumbs showing the current page's location within a hierarchy. ([Documentation](/docs/components/breadcrumbs))
+- **[Toast](#toast)**: Display temporary notifications and messages with automatic dismissal and customizable placement. ([Documentation](/docs/components/toast))
+
+### Autocomplete
+
+<ComponentPreview
+  name="autocomplete-default"
+/>
+
+### Breadcrumbs
+
+<ComponentPreview
+  name="breadcrumbs-basic"
+/>
+
+### Toast
+
+<Callout type="warning">
+  This  component is currently in preview and some features might not work as expected.
+</Callout>
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+## Component Improvements
+
+### Tabs Secondary Variant
+
+Added a new `secondary` variant to [Tabs](/docs/components/tabs) with an underline indicator style. The secondary variant supports both horizontal and vertical orientations.
+
+<ComponentPreview
+  name="tabs-secondary"
+/>
+
+**Usage:**
+
+```tsx
+<Tabs variant="secondary">
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="overview">
+        Overview
+        <Tabs.Indicator />
+      </Tabs.Tab>
+      <Tabs.Tab id="analytics">
+        Analytics
+        <Tabs.Indicator />
+      </Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+  <Tabs.Panel id="overview">Content</Tabs.Panel>
+  <Tabs.Panel id="analytics">Content</Tabs.Panel>
+</Tabs>
+```
+
+### Input Variants
+
+Added `primary` and `secondary` variants to the [Input](/docs/components/input) component:
+
+- **`primary`** (default): Standard styling with shadow, suitable for most use cases
+- **`secondary`**: Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview
+  name="input-variants"
+/>
+
+### InputGroup Enhancements
+
+The [InputGroup](/docs/components/input-group) component received several improvements:
+
+**TextArea Support**: Use `InputGroup.TextArea` for multiline text inputs with prefix and suffix elements.
+
+<ComponentPreview
+  name="input-group-with-textarea"
+/>
+
+**Variants**: Added `primary` and `secondary` variants matching the Input component.
+
+<ComponentPreview
+  name="input-group-variants"
+/>
+
+### Button & ButtonGroup Outline Variants
+
+Added a new `outline` variant to both [Button](/docs/components/button) and [ButtonGroup](/docs/components/button-group) components for outlined styling.
+
+<ComponentPreview
+  name="button-outline-variant"
+/>
+
+### AlertDialog Size Support
+
+Added size support to [AlertDialog](/docs/components/alert-dialog) component, allowing you to control the dialog size.
+
+<ComponentPreview
+  name="alert-dialog-sizes"
+/>
+
+### Checkbox Animation Improvements
+
+Faster animation and increased stroke width for better feedback on [Checkbox](/docs/components/checkbox).
+
+<ComponentPreview
+  name="checkbox-basic"
+/>
+
+### Link Text Decoration
+
+The [Link](/docs/components/link) component now uses Tailwind CSS classes for text decoration instead of built-in variants. This provides more flexibility and follows Tailwind conventions.
+
+**Available Tailwind utilities:**
+- `underline` - Always visible underline
+- `no-underline` - Remove underline
+- `hover:underline` - Underline appears on hover
+- `decoration-primary`, `decoration-secondary`, etc. - Set underline color
+- `decoration-1`, `decoration-2`, `decoration-4` - Control thickness
+- `underline-offset-1`, `underline-offset-2`, etc. - Adjust spacing
+
+<ComponentPreview
+  name="link-underline-and-offset"
+/>
+
+## ⚠️ Breaking Changes
+
+### Link Component - Removed Underline Variants
+
+The Link component's built-in `underline` and `underlineOffset` props have been removed. Use Tailwind CSS classes instead for text decoration.
+
+**Before:**
+```tsx
+<Link href="#" underline="hover" underlineOffset={4}>
+  Link text
+</Link>
+```
+
+**After:**
+```tsx
+<Link href="#" className="hover:underline underline-offset-4">
+  Link text
+</Link>
+```
+
+**Available Tailwind classes:**
+- `underline`, `no-underline`, `hover:underline` - Decoration line
+- `decoration-primary`, `decoration-muted`, etc. - Decoration color
+- `decoration-solid`, `decoration-dashed`, `decoration-dotted` - Decoration style
+- `decoration-1`, `decoration-2`, `decoration-4` - Decoration thickness
+- `underline-offset-1`, `underline-offset-2`, `underline-offset-4` - Underline offset
+
+For more details, see the [Link documentation](/docs/components/link).
+
+### Form Components - Removed `isInSurface` Prop
+
+The `isInSurface` prop and automatic surface detection have been removed from form-based components. Instead, use the `variant="secondary"` prop when placing form components inside Surface, Card, or other surface-based containers.
+
+**Before:**
+```tsx
+<Surface>
+  {/* Input automatically detected surface context */}
+  <Input isInSurface />
+</Surface>
+```
+
+**After:**
+```tsx
+<Surface>
+  {/* Use variant="secondary" for surface backgrounds */}
+  <Input variant="secondary" />
+</Surface>
+```
+
+**Affected components:**
+- Input
+- InputGroup
+- TextField
+- TextArea
+- SearchField
+- NumberField
+- DateField
+- TimeField
+- Select
+- ComboBox
+- Autocomplete
+
+The `secondary` variant provides lower emphasis styling without shadow, which is appropriate for use on surface backgrounds.
+
+## Style Fixes
+
+- **Button**: Updated secondary button colors for improved visual consistency
+- **Checkbox**: Optimized animation speed and increased stroke width for better feedback (see [Checkbox Animation Improvements](#checkbox-animation-improvements))
+- **Link**: Updated decoration styles and transition timings
+- **Focus Visible**: Added `:not(:focus)` to focus-visible selectors to prevent conflicts with hover states
+- **Separator**: Fixed styles to only apply to horizontal separator
+
+## Bug Fixes
+
+- Fixed Link with Button variants styling
+- Fixed Fieldset flexbox quirk in Safari with BEM styles
+- Fixed SearchField empty state to properly disable clear button
+- Fixed ButtonGroup context to only apply to direct children
+- Fixed ButtonGroup `BUTTON_GROUP_CHILD` re-export for type declarations
+
+## Dependencies
+
+### Direct Exports from React Aria Components
+
+HeroUI now provides direct exports from react-aria-components for easier access to primitives and utilities. These exports are particularly useful for [React Aria Framework setup](https://react-aria.adobe.com/frameworks).
+
+**Providers:**
+- `RouterProvider` - Configure React Aria links to use your client-side router
+- `I18nProvider` - Set the locale used by React Aria components
+
+**Hooks and Utilities:**
+- `isRTL` - Check if a locale is right-to-left
+- `useLocale` - Access the current locale and direction
+- `useFilter` - Filter and sort collections
+
+**Components:**
+- `Collection` - Collection component for managing lists
+- `ListBoxLoadMoreItem` - ListBox item for loading more items
+
+**i18n Utilities:**
+- `getLocalizationScript` - Get localization script for server-side rendering (from `react-aria-components/i18n`)
+
+All of these can be imported directly from `@heroui/react`:
+
+```tsx
+import {
+  RouterProvider,
+  I18nProvider,
+  isRTL,
+  useLocale,
+  useFilter,
+  getLocalizationScript
+} from "@heroui/react";
+```
+
+## Links
+
+- [Theme Builder](/themes)
+- [Component Documentation](/docs/components)
+- [Design System - Figma Kit V3 (updated)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6121](https://github.com/heroui-inc/heroui/pull/6121)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

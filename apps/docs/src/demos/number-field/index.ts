@@ -7,6 +7,7 @@ export {FullWidth} from "./full-width";
 export {OnSurface} from "./on-surface";
 export {Required} from "./required";
 export {Validation} from "./validation";
+export {Variants} from "./variants";
 export {WithChevrons} from "./with-chevrons";
 export {WithDescription} from "./with-description";
 export {WithFormatOptions} from "./with-format-options";

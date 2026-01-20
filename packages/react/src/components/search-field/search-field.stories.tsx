@@ -9,7 +9,6 @@ import {Form} from "../form";
 import {Kbd} from "../kbd";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {SearchField} from "./index";
 
@@ -35,6 +34,29 @@ export const Default: Story = {
         <SearchField.ClearButton />
       </SearchField.Group>
     </SearchField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <SearchField name="primary-search" variant="primary">
+        <Label>Primary variant</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input className="w-[280px]" placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+      </SearchField>
+      <SearchField name="secondary-search" variant="secondary">
+        <Label>Secondary variant</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input className="w-[280px]" placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+      </SearchField>
+    </div>
   ),
 };
 
@@ -242,49 +264,6 @@ export const CustomIcons: Story = {
         <Description>Custom icon children</Description>
       </SearchField>
     </div>
-  ),
-};
-
-export const OnSurface: Story = {
-  render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <SearchField name="search">
-        <Label>Search</Label>
-        <SearchField.Group>
-          <SearchField.SearchIcon />
-          <SearchField.Input className="w-full" placeholder="Search..." />
-          <SearchField.ClearButton />
-        </SearchField.Group>
-        <Description>Enter keywords to search</Description>
-      </SearchField>
-      <SearchField name="search-2">
-        <Label>Advanced search</Label>
-        <SearchField.Group>
-          <SearchField.SearchIcon />
-          <SearchField.Input className="w-full" placeholder="Advanced search..." />
-          <SearchField.ClearButton />
-        </SearchField.Group>
-        <Description>Use filters to refine your search</Description>
-      </SearchField>
-      <SearchField isInvalid isRequired name="search-invalid" value="ab">
-        <Label>Search query</Label>
-        <SearchField.Group>
-          <SearchField.SearchIcon />
-          <SearchField.Input className="w-full" placeholder="Search..." />
-          <SearchField.ClearButton />
-        </SearchField.Group>
-        <FieldError>Search query must be at least 3 characters</FieldError>
-      </SearchField>
-      <SearchField isDisabled name="search-disabled" value="Disabled search">
-        <Label>Disabled search</Label>
-        <SearchField.Group>
-          <SearchField.SearchIcon />
-          <SearchField.Input className="w-full" placeholder="Search..." />
-          <SearchField.ClearButton />
-        </SearchField.Group>
-        <Description>This search field is disabled</Description>
-      </SearchField>
-    </Surface>
   ),
 };
 

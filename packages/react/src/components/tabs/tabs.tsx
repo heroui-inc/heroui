@@ -1,8 +1,9 @@
 "use client";
 
-import type {TabsVariants} from "./tabs.styles";
+import type {TabsVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
+import {tabsVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   SelectionIndicator as SelectionIndicatorPrimitive,
@@ -13,8 +14,6 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-
-import {tabsVariants} from "./tabs.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs Context
@@ -41,9 +40,10 @@ const TabsRoot = ({
   className,
   hideSeparator = false,
   orientation = "horizontal",
+  variant,
   ...props
 }: TabsRootProps) => {
-  const slots = React.useMemo(() => tabsVariants(), []);
+  const slots = React.useMemo(() => tabsVariants({variant}), [variant]);
 
   return (
     <TabsContext value={{hideSeparator, orientation, slots}}>

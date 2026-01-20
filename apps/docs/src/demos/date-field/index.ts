@@ -6,6 +6,7 @@ export {FullWidth} from "./full-width";
 export {Invalid} from "./invalid";
 export {OnSurface} from "./on-surface";
 export {Required} from "./required";
+export {Variants} from "./variants";
 export {WithDescription} from "./with-description";
 export {WithPrefixAndSuffix} from "./with-prefix-and-suffix";
 export {WithPrefixIcon} from "./with-prefix-icon";
