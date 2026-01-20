@@ -79,14 +79,15 @@ import { Accordion } from 'heroui-native';
 Start simple, add complexity only when needed. Components work with minimal props and scale up as requirements grow.
 
 ```tsx
-import { Button, Icon, Spinner } from 'heroui-native';
+import { Button, Spinner } from 'heroui-native';
+import { Feather } from '@expo/vector-icons';
 
 // Level 1: Minimal
 <Button>Click me</Button>
 
 // Level 2: Enhanced
 <Button variant="primary" size="lg">
-  <Icon name="check" size={20} />
+  <Feather name="check" size={20} />
   <Button.Label>Submit</Button.Label>
 </Button>
 
