@@ -1,7 +1,13 @@
 import type {ThemeVariables} from "../constants";
-import type {GeneratedThemeColors, ThemeColor} from "./generate-theme-colors";
+import type {GeneratedThemeColors, SemanticOverrides, ThemeColor} from "./generate-theme-colors";
 
-import {adaptiveColors, fontMap, radiusCssMap} from "../constants";
+import {
+  adaptiveColors,
+  findMatchingTheme,
+  fontMap,
+  radiusCssMap,
+  themeValuesById,
+} from "../constants";
 
 /**
  * Custom font info for generating CSS variables
@@ -142,8 +148,14 @@ export function generateCssVariables(
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
   const adaptiveConfig = adaptiveColors[accentColor];
 
+  // Find matching theme to get semantic overrides
+  const matchingThemeId = findMatchingTheme(variables);
+  const semanticOverrides: SemanticOverrides | undefined = matchingThemeId
+    ? themeValuesById[matchingThemeId].semanticOverrides
+    : undefined;
+
   // Generate theme colors
-  const colors = generateThemeColors({chroma, hue, lightness});
+  const colors = generateThemeColors({chroma, hue, lightness, semanticOverrides});
 
   // Build radius CSS
   const radiusCSS = `
@@ -351,8 +363,14 @@ export function generateMinimalCssVariables(
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
   const adaptiveConfig = adaptiveColors[accentColor];
 
+  // Find matching theme to get semantic overrides
+  const matchingThemeId = findMatchingTheme(variables);
+  const semanticOverrides: SemanticOverrides | undefined = matchingThemeId
+    ? themeValuesById[matchingThemeId].semanticOverrides
+    : undefined;
+
   // Generate theme colors
-  const colors = generateThemeColors({chroma, grayChroma: base, hue, lightness});
+  const colors = generateThemeColors({chroma, grayChroma: base, hue, lightness, semanticOverrides});
 
   // Get base variables for both themes
   const lightVars = getBaseColorVariables(colors, "light");

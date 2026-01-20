@@ -1,5 +1,7 @@
 "use client";
 
+import type {SemanticOverrides} from "../utils/generate-theme-colors";
+
 import {useEffect} from "react";
 
 import {
@@ -7,8 +9,10 @@ import {
   THEME_BUILDER_CONTENT_ID,
   THEME_BUILDER_PAGE_ID,
   adaptiveColors,
+  findMatchingTheme,
   fontMap,
   radiusCssMap,
+  themeValuesById,
 } from "../constants";
 import {getCustomFontInfoFromUrl, injectFontLink, isCustomFontUrl} from "../utils/font-utils";
 import {
@@ -99,6 +103,7 @@ function getAdaptiveColorCSS(
   hue: number,
   lightness: number,
   commonVars: Record<string, string>,
+  semanticOverrides?: SemanticOverrides,
 ): string | null {
   const adaptiveConfig = adaptiveColors[accentColor];
 
@@ -119,8 +124,8 @@ function getAdaptiveColorCSS(
     : calculateAccentForeground(1, 0, 0); // Fallback
 
   // Generate full theme colors for both modes
-  const lightColors = generateThemeColors({chroma, hue, lightness});
-  const darkColors = generateThemeColors({chroma, hue, lightness});
+  const lightColors = generateThemeColors({chroma, hue, lightness, semanticOverrides});
+  const darkColors = generateThemeColors({chroma, hue, lightness, semanticOverrides});
 
   // Get light and dark color variables
   const lightVars = getColorVariablesForElement(lightColors, "light");
@@ -247,9 +252,10 @@ function getThemeColorsCSS(
   lightness: number,
   grayChroma: number,
   commonVars: Record<string, string>,
+  semanticOverrides?: SemanticOverrides,
 ): string {
   // Generate full theme colors
-  const colors = generateThemeColors({chroma, grayChroma, hue, lightness});
+  const colors = generateThemeColors({chroma, grayChroma, hue, lightness, semanticOverrides});
 
   // Get color variables for both modes
   const lightVars = getColorVariablesForElement(colors, "light");
@@ -406,6 +412,12 @@ export function useCssSync() {
     // Check if this is an adaptive color that needs special light/dark variants
     const isAdaptive = accentColor in adaptiveColors;
 
+    // Find matching theme to get semantic overrides
+    const matchingThemeId = findMatchingTheme(variables);
+    const semanticOverrides = matchingThemeId
+      ? themeValuesById[matchingThemeId].semanticOverrides
+      : undefined;
+
     // Determine font variable - handle predefined fonts and URL-based custom fonts
     // All fonts are now loaded on-demand via CDN
     const fontFamily = variables.fontFamily;
@@ -465,14 +477,28 @@ export function useCssSync() {
 
     if (isAdaptive) {
       // Inject CSS for adaptive colors (different accent values for light/dark)
-      const adaptiveCSS = getAdaptiveColorCSS(accentColor, chroma, hue, lightness, commonVars);
+      const adaptiveCSS = getAdaptiveColorCSS(
+        accentColor,
+        chroma,
+        hue,
+        lightness,
+        commonVars,
+        semanticOverrides,
+      );
 
       if (adaptiveCSS) {
         injectStyleElement(ADAPTIVE_STYLE_ID, adaptiveCSS);
       }
     } else {
       // Inject CSS for standard theme colors
-      const themeColorsCSS = getThemeColorsCSS(chroma, hue, lightness, base, commonVars);
+      const themeColorsCSS = getThemeColorsCSS(
+        chroma,
+        hue,
+        lightness,
+        base,
+        commonVars,
+        semanticOverrides,
+      );
 
       injectStyleElement(THEME_COLORS_STYLE_ID, themeColorsCSS);
     }
