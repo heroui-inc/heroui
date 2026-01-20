@@ -79,14 +79,15 @@ import { Accordion } from 'heroui-native';
 Start simple, add complexity only when needed. Components work with minimal props and scale up as requirements grow.
 
 ```tsx
-import { Button, Icon, Spinner } from 'heroui-native';
+import { Button, Spinner } from 'heroui-native';
+import { Feather } from '@expo/vector-icons';
 
 // Level 1: Minimal
 <Button>Click me</Button>
 
 // Level 2: Enhanced
 <Button variant="primary" size="lg">
-  <Icon name="check" size={20} />
+  <Feather name="check" size={20} />
   <Button.Label>Submit</Button.Label>
 </Button>
 
@@ -221,8 +222,22 @@ const myButtonVariants = tv({
   base: 'px-4 py-2 rounded-lg',
   variants: {
     variant: {
-      'primary-cta': 'bg-accent text-accent-foreground px-8 py-4 shadow-lg',
-      'secondary-cta': 'border-2 border-accent text-accent px-6 py-3',
+      'primary-cta': 'bg-accent px-8 py-4 shadow-lg',
+      'secondary-cta': 'border-2 border-accent px-6 py-3',
+    }
+  },
+  defaultVariants: {
+    variant: 'primary-cta',
+  }
+});
+
+// Label variants for text colors (must be applied to Button.Label)
+const myLabelVariants = tv({
+  base: '',
+  variants: {
+    variant: {
+      'primary-cta': 'text-accent-foreground',
+      'secondary-cta': 'text-accent',
     }
   },
   defaultVariants: {
@@ -231,10 +246,12 @@ const myButtonVariants = tv({
 });
 
 // Use the custom variants
-function CustomButton({ variant, className, ...props }) {
+function CustomButton({ variant, className, labelClassName, children, ...props }) {
   return (
     <Button className={myButtonVariants({ variant, className })} {...props}>
-      <Button.Label>Get Started</Button.Label>
+      <Button.Label className={myLabelVariants({ variant, className: labelClassName })}>
+        {children}
+      </Button.Label>
     </Button>
   );
 }
