@@ -11,3 +11,4 @@ export {Sizes} from "./sizes";
 export {Social} from "./social";
 export {Variants} from "./variants";
 export {WithIcons} from "./with-icons";
+export {RippleEffect} from "./ripple-effect";
