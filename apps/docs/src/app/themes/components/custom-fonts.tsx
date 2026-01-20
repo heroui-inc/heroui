@@ -1,7 +1,7 @@
 "use client";
 
 import {ArrowLeft, Globe} from "@gravity-ui/icons";
-import {Button, FieldError, InputGroup, Label, Link, TextField} from "@heroui/react";
+import {Button, Description, FieldError, InputGroup, Label, Link, TextField} from "@heroui/react";
 import {useState} from "react";
 
 import {useCustomFonts, useVariableSetter} from "../hooks";
@@ -86,16 +86,10 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <Button size="sm" variant="ghost" onPress={goToSuggested}>
+        <Link className="flex items-center gap-1 no-underline" onPress={goToSuggested}>
           <ArrowLeft className="size-4" />
           Back
-        </Button>
-        <div className="flex gap-2">
-          <Link href="https://fontsource.org" target="_blank">
-            Fontsource
-            <Link.Icon />
-          </Link>
-        </div>
+        </Link>
       </div>
       <TextField
         isInvalid={showError}
@@ -112,6 +106,7 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
           </InputGroup.Prefix>
           <InputGroup.Input placeholder="Paste font URL..." onBlur={() => setHasBlurred(true)} />
         </InputGroup>
+        <Description>Supports G Fonts, Fontsource and Fontshare</Description>
         {showError ? <FieldError>{errorMessage}</FieldError> : null}
       </TextField>
       <Button
