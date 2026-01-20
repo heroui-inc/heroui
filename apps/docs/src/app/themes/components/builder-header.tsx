@@ -1,7 +1,13 @@
 "use client";
 
-import {ArrowUturnCcwLeft, ArrowUturnCwRight, Code, NodesRight} from "@gravity-ui/icons";
-import {Button, Chip, Separator, Tabs, Tooltip} from "@heroui/react";
+import {
+  ArrowUturnCcwLeft,
+  ArrowUturnCwRight,
+  Code,
+  Link as LinkIcon,
+  NodesRight,
+} from "@gravity-ui/icons";
+import {Button, Chip, Separator, Tabs, Toast, Tooltip, toast} from "@heroui/react";
 import Link from "next/link";
 
 import {HeroUILogo} from "@/components/heroui-logo";
@@ -18,8 +24,18 @@ export function BuilderHeader() {
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
   const {isCodeVisible, toggleCode} = useCodePanel();
 
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast("Link copied", {
+      description: "Your theme link is copied to the clipboard.",
+      indicator: <LinkIcon />,
+      variant: "success",
+    });
+  };
+
   return (
     <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 min-[1200px]:mb-6 min-[1200px]:px-0">
+      <Toast.Container placement="bottom" />
       <div className="flex h-14 w-full max-w-[1400px] items-center justify-between min-[1200px]:h-14">
         <div className="flex items-center gap-4">
           <Link href="/">
@@ -107,7 +123,7 @@ export function BuilderHeader() {
           </div>
           <Tooltip closeDelay={0} delay={100}>
             <Tooltip.Trigger>
-              <Button isIconOnly size="md" variant="tertiary">
+              <Button isIconOnly size="md" variant="tertiary" onPress={handleShare}>
                 <NodesRight />
               </Button>
             </Tooltip.Trigger>
