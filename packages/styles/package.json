@@ -40,12 +40,13 @@
     "src"
   ],
   "scripts": {
-    "build": "pnpm run build:ts && pnpm run build:copy && pnpm run build:minify",
+    "build": "pnpm run build:ts && pnpm run build:flatten && pnpm run build:copy && pnpm run build:minify",
     "build:ts": "tsc",
+    "build:flatten": "node scripts/flatten-exports.mjs",
     "build:copy": "node scripts/copy-css.mjs",
     "build:minify": "npx @tailwindcss/cli -i ./dist/index.css -o dist/heroui.min.css --minify",
     "measure-size": "node scripts/measure-bundle-size.mjs",
-    "clean": "rm -rf dist .turbo",
+    "clean": "rm -rf dist .turbo tsconfig.tsbuildinfo",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit"
