@@ -26,10 +26,9 @@ export function BuilderHeader() {
           </Link>
           <div className="flex items-center gap-3">
             <Tooltip closeDelay={0} delay={100}>
-              <Tooltip.Trigger>
+              <Tooltip.Trigger className="hidden xl:inline-flex">
                 <Button
                   isIconOnly
-                  className="hidden xl:inline-flex"
                   isDisabled={!canUndo}
                   size="md"
                   variant="tertiary"
@@ -44,10 +43,9 @@ export function BuilderHeader() {
               </Tooltip.Content>
             </Tooltip>
             <Tooltip closeDelay={0} delay={100}>
-              <Tooltip.Trigger>
+              <Tooltip.Trigger className="hidden xl:inline-flex">
                 <Button
                   isIconOnly
-                  className="hidden xl:inline-flex"
                   isDisabled={!canRedo}
                   size="md"
                   variant="tertiary"
@@ -103,10 +101,9 @@ export function BuilderHeader() {
             </Tooltip.Content>
           </Tooltip>
           <Tooltip closeDelay={0} delay={100}>
-            <Tooltip.Trigger>
+            <Tooltip.Trigger className="hidden xl:inline-flex">
               <Button
                 isIconOnly
-                className="hidden xl:inline-flex"
                 size="md"
                 variant={isCodeVisible ? "primary" : "tertiary"}
                 onPress={toggleCode}

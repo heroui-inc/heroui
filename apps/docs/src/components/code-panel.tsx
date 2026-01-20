@@ -4,17 +4,43 @@ import type {ReactNode} from "react";
 
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
 import {AnimatePresence, LazyMotion, domAnimation, m} from "motion/react";
-import {useCallback} from "react";
+import dynamic from "next/dynamic";
+import {Suspense, useCallback} from "react";
 
 import {Iconify} from "@/components/iconify";
 import {cn} from "@/utils/cn";
 
+// Dynamically import the highlighted code component (client-side only, with shiki)
+const HighlightedCode = dynamic(
+  () => import("@/components/highlighted-code").then((mod) => mod.HighlightedCode),
+  {
+    loading: () => <CodeLoadingSpinner />,
+    ssr: false,
+  },
+);
+
+function CodeLoadingSpinner() {
+  return (
+    <div className="flex items-center justify-center py-8">
+      <div className="h-5 w-5 animate-spin rounded-full border-2 border-foreground/20 border-t-foreground/60" />
+    </div>
+  );
+}
+
 interface CodePanelProps {
-  children: ReactNode;
+  /** Pre-rendered children (takes precedence over code prop) */
+  children?: ReactNode;
   className?: string;
+  /** Raw source code to highlight (used with lang prop) */
   sourceCode?: string;
+  /** File name for download */
   fileName?: string;
+  /** Language for syntax highlighting when using code prop */
+  lang?: string;
+  /** Panel title */
   title?: string;
+  /** Whether to show line numbers */
+  showLineNumbers?: boolean;
   isVisible: boolean;
   onClose: () => void;
 }
@@ -38,7 +64,9 @@ export function CodePanel({
   className,
   fileName,
   isVisible,
+  lang = "tsx",
   onClose,
+  showLineNumbers = true,
   sourceCode,
   title = "Source code",
 }: CodePanelProps) {
@@ -63,6 +91,23 @@ export function CodePanel({
   }, [sourceCode, fileName]);
 
   if (!isVisible) return null;
+
+  // Determine what to render: children take precedence, otherwise highlight sourceCode
+  const renderContent = () => {
+    if (children) {
+      return children;
+    }
+
+    if (sourceCode) {
+      return (
+        <Suspense fallback={<CodeLoadingSpinner />}>
+          <HighlightedCode code={sourceCode} lang={lang} showLineNumbers={showLineNumbers} />
+        </Suspense>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <LazyMotion strict features={domAnimation}>
@@ -118,7 +163,7 @@ export function CodePanel({
           </header>
 
           {/* Code content */}
-          <div className="flex-1 overflow-auto px-4 py-2">{children}</div>
+          <div className="flex-1 overflow-auto px-4 py-2">{renderContent()}</div>
         </m.aside>
       </AnimatePresence>
     </LazyMotion>

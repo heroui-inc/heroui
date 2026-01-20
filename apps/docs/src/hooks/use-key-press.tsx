@@ -18,6 +18,16 @@ export function useKeyPress(
     if (!enabled) return;
 
     const handleKeyPress = (event: KeyboardEvent) => {
+      // Ignore key presses when typing in form elements or editable content
+      const target = event.target as HTMLElement;
+      const isEditableElement =
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
+        target.isContentEditable;
+
+      if (isEditableElement) return;
+
       const isTargetKey = event.key.toLowerCase() === key.toLowerCase();
 
       // Check if modifiers match EXACTLY

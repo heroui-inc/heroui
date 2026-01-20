@@ -1,27 +1,33 @@
 "use client";
 
 import {ChevronsExpandVertical, FontCase} from "@gravity-ui/icons";
-import {InputGroup, ListBox, Popover} from "@heroui/react";
-
-import {cn} from "@/utils/cn";
+import {InputGroup, Popover} from "@heroui/react";
+import {useState} from "react";
 
 import {fonts} from "../constants";
-import {useVariableSetter} from "../hooks";
+import {useCustomFonts, useVariableSetter} from "../hooks";
+import {extractFontFamilyFromUrl, isCustomFontUrl} from "../utils/font-utils";
 
+import {CustomFonts} from "./custom-fonts";
 import {LockableLabel} from "./lockable-label";
+import {SuggestedFonts} from "./suggested-fonts";
 
 export function FontFamilyPopover() {
-  const {setVariable, variables} = useVariableSetter();
-  const currentFont = fonts.find((f) => f.id === variables.fontFamily);
+  const {variables} = useVariableSetter();
+  const {customFonts} = useCustomFonts();
+  const [mode, setMode] = useState<"suggested" | "custom">("suggested");
+
+  // Find current font label - check predefined fonts first, then URL-based custom fonts
+  const currentSuggestedFont = fonts.find((f) => f.id === variables.fontFamily);
+  const currentUrlFontLabel = isCustomFontUrl(variables.fontFamily)
+    ? extractFontFamilyFromUrl(variables.fontFamily)
+    : null;
+  const currentFontLabel = currentSuggestedFont?.label ?? currentUrlFontLabel ?? "Inter";
 
   return (
     <Popover>
       <div className="flex flex-col gap-1">
-        <LockableLabel
-          label="Font Family"
-          tooltip="Font used across the entire theme."
-          variable="fontFamily"
-        />
+        <LockableLabel label="Font Family" variable="fontFamily" />
         <Popover.Trigger>
           <InputGroup className="w-40 cursor-pointer">
             <InputGroup.Prefix className="w-10">
@@ -32,7 +38,7 @@ export function FontFamilyPopover() {
               className="max-w-20 cursor-pointer"
               id="font-family"
               name="font-family"
-              value={currentFont?.label ?? "Inter"}
+              value={currentFontLabel}
             />
             <InputGroup.Suffix className="w-10">
               <ChevronsExpandVertical className="size-3" />
@@ -40,42 +46,13 @@ export function FontFamilyPopover() {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[325px] rounded-xl" placement="top">
+      <Popover.Content className="w-[325px] rounded-3xl" placement="top">
         <Popover.Dialog className="p-3">
-          <ListBox
-            disallowEmptySelection
-            aria-label="Font Family"
-            className="grid grid-cols-3 gap-2 p-0"
-            items={fonts}
-            layout="grid"
-            selectedKeys={new Set([variables.fontFamily])}
-            selectionMode="single"
-            onSelectionChange={(keys) => {
-              const selected = [...keys][0];
-
-              if (selected) {
-                setVariable("fontFamily", String(selected));
-              }
-            }}
-          >
-            {(item) => (
-              <ListBox.Item
-                id={item.id}
-                style={{fontFamily: `var(${item.variable})`}}
-                textValue={item.label}
-                className={cn(
-                  "group border-separator-on-surface flex h-[83px] w-[95px] flex-col items-center justify-center gap-[5px] rounded-2xl border",
-                  "data-[selected=true]:border-2 data-[selected=true]:border-foreground",
-                  "data-[hovered=true]:bg-default",
-                )}
-              >
-                <span className="text-xl font-medium">Ag</span>
-                <p className="text-[10px] text-muted group-data-[selected=true]:text-foreground">
-                  {item.label}
-                </p>
-              </ListBox.Item>
-            )}
-          </ListBox>
+          {mode === "suggested" ? (
+            <SuggestedFonts customFonts={customFonts} goToCustom={() => setMode("custom")} />
+          ) : (
+            <CustomFonts goToSuggested={() => setMode("suggested")} />
+          )}
         </Popover.Dialog>
       </Popover.Content>
     </Popover>

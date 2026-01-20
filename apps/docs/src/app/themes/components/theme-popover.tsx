@@ -1,17 +1,34 @@
 "use client";
 
+import type {ThemeId} from "../constants";
+
 import {BucketPaint, ChevronsExpandVertical} from "@gravity-ui/icons";
 import {InputGroup, Label, ListBox, Popover} from "@heroui/react";
 import Image from "next/image";
 
 import {cn} from "@/utils/cn";
 
-import {themes} from "../constants";
-import {useVariableSetter} from "../hooks";
+import {findMatchingTheme, themeValuesById, themes} from "../constants";
+import {useVariablesState} from "../hooks/use-variables-state";
 
 export function ThemePopover() {
-  const {setVariable, variables} = useVariableSetter();
-  const currentTheme = themes.find((t) => t.id === variables.theme);
+  const [variables, setVariables] = useVariablesState();
+  const currentThemeId = findMatchingTheme(variables);
+  const currentTheme = currentThemeId ? themes.find((t) => t.id === currentThemeId) : undefined;
+
+  const applyTheme = (themeId: ThemeId) => {
+    const themeValues = themeValuesById[themeId];
+
+    setVariables({
+      base: themeValues.base,
+      chroma: themeValues.chroma,
+      fontFamily: themeValues.fontFamily,
+      formRadius: themeValues.formRadius,
+      hue: themeValues.hue,
+      lightness: themeValues.lightness,
+      radius: themeValues.radius,
+    });
+  };
 
   return (
     <Popover>
@@ -27,7 +44,7 @@ export function ThemePopover() {
               className="max-w-20 cursor-pointer capitalize"
               id="theme"
               name="theme"
-              value={currentTheme?.label}
+              value={currentTheme?.label ?? "Custom"}
             />
             <InputGroup.Suffix className="w-10">
               <ChevronsExpandVertical className="size-3" />
@@ -35,21 +52,20 @@ export function ThemePopover() {
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[228px] rounded-xl" placement="top">
+      <Popover.Content className="w-[228px] rounded-3xl" placement="top">
         <Popover.Dialog className="p-4">
           <ListBox
-            disallowEmptySelection
             aria-label="Theme"
             className="grid grid-cols-4 gap-3"
             items={themes}
             layout="grid"
-            selectedKeys={new Set([variables.theme])}
+            selectedKeys={currentThemeId ? new Set([currentThemeId]) : new Set()}
             selectionMode="single"
             onSelectionChange={(keys) => {
               const selected = [...keys][0];
 
               if (selected) {
-                setVariable("theme", String(selected));
+                applyTheme(selected as ThemeId);
               }
             }}
           >

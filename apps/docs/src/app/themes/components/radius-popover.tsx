@@ -1,13 +1,12 @@
 "use client";
 
-import type {ThemeVariables} from "../constants";
+import type {ThemeVariables, radiusIds} from "../constants";
 
 import {ChevronsExpandVertical} from "@gravity-ui/icons";
 import {InputGroup, ListBox, Popover} from "@heroui/react";
 
 import {cn} from "@/utils/cn";
 
-import {radiusOptions} from "../constants";
 import {useVariableSetter} from "../hooks";
 
 import {LockableLabel} from "./lockable-label";
@@ -15,10 +14,21 @@ import {LockableLabel} from "./lockable-label";
 type RadiusPopoverProps = {
   label: string;
   variableKey: keyof Pick<ThemeVariables, "radius" | "formRadius">;
-  tooltip?: string;
+  description?: string;
+  radiusOptions: Array<{
+    cssValue: string;
+    description: string;
+    id: (typeof radiusIds)[number];
+    label: string;
+  }>;
 };
 
-export function RadiusPopover({label, tooltip, variableKey}: RadiusPopoverProps) {
+export function RadiusPopover({
+  description,
+  label,
+  radiusOptions,
+  variableKey,
+}: RadiusPopoverProps) {
   const {setVariable, variables} = useVariableSetter();
   const currentValue = variables[variableKey];
   const currentOption = radiusOptions.find((r) => r.id === currentValue);
@@ -26,7 +36,7 @@ export function RadiusPopover({label, tooltip, variableKey}: RadiusPopoverProps)
   return (
     <Popover>
       <div className="flex flex-col gap-1">
-        <LockableLabel label={label} tooltip={tooltip} variable={variableKey} />
+        <LockableLabel label={label} variable={variableKey} />
         <Popover.Trigger>
           <InputGroup className="w-40 cursor-pointer">
             <InputGroup.Prefix className="w-10">
@@ -45,12 +55,16 @@ export function RadiusPopover({label, tooltip, variableKey}: RadiusPopoverProps)
           </InputGroup>
         </Popover.Trigger>
       </div>
-      <Popover.Content className="w-[304px] rounded-xl" placement="top">
+      <Popover.Content className="w-[304px] rounded-3xl" placement="top">
         <Popover.Dialog className="p-3">
+          <div className="mb-2 flex flex-col gap-0.5 pl-2">
+            <p className="text-xs font-medium capitalize">{label}</p>
+            <p className="text-xs text-muted">{description}</p>
+          </div>
           <ListBox
             disallowEmptySelection
             aria-label={label}
-            className="grid grid-cols-3 gap-2"
+            className="grid grid-cols-3 gap-2 px-0"
             items={radiusOptions}
             layout="grid"
             selectedKeys={new Set([currentValue])}
@@ -69,7 +83,7 @@ export function RadiusPopover({label, tooltip, variableKey}: RadiusPopoverProps)
                 textValue={item.id}
                 className={cn(
                   "group border-separator-on-surface flex h-[83px] w-[88px] flex-col items-center justify-center gap-[5px] rounded-2xl border",
-                  "data-[selected=true]:border-2 data-[selected=true]:border-foreground",
+                  "data-[selected=true]:border-foreground",
                 )}
               >
                 <span className="text-xl font-semibold">{item.label}</span>

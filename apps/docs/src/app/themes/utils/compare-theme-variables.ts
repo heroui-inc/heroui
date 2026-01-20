@@ -11,7 +11,6 @@ export function compareThemeVariables(
     variables.fontFamily === snapshotVariables.fontFamily &&
     variables.formRadius === snapshotVariables.formRadius &&
     variables.radius === snapshotVariables.radius &&
-    variables.theme === snapshotVariables.theme &&
     variables.base === snapshotVariables.base
   );
 }

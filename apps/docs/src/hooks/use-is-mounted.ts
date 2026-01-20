@@ -1,15 +1,12 @@
-import {useEffect, useState} from "react";
+import {useSyncExternalStore} from "react";
+
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 export function useIsMounted(): boolean {
   // Initialize as true since component is mounted when hook is called
-  const [isMounted, setIsMounted] = useState(true);
-
-  useEffect(() => {
-    // Component is already mounted, but ensure cleanup sets it to false
-    return () => {
-      setIsMounted(false);
-    };
-  }, []);
+  const isMounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
 
   return isMounted;
 }
