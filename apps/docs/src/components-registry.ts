@@ -343,6 +343,14 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "timefield",
     title: "TimeField",
   },
+  toast: {
+    category: "display",
+    description:
+      "Display temporary notifications and messages to users with automatic dismissal and customizable placement",
+    href: "/docs/components/toast",
+    name: "toast",
+    title: "Toast",
+  },
   tooltip: {
     category: "display",
     description: "Contextual information on hover or focus",
@@ -355,7 +363,7 @@ const componentsMap: Record<string, ComponentInfo> = {
 // Define relationships between components
 const componentRelationships: Record<string, string[]> = {
   accordion: ["disclosuregroup", "disclosure"],
-  alert: ["closebutton", "button", "spinner"],
+  alert: ["closebutton", "button", "spinner", "toast"],
   alertdialog: ["button", "closebutton"],
   autocomplete: [
     "listbox",
@@ -370,7 +378,17 @@ const componentRelationships: Record<string, string[]> = {
     "button",
   ],
   avatar: ["separator"],
-  button: ["popover", "tooltip", "form", "alert", "alertdialog", "closebutton", "dropdown"],
+  breadcrumbs: ["link", "separator", "tabs"],
+  button: [
+    "popover",
+    "tooltip",
+    "form",
+    "alert",
+    "alertdialog",
+    "closebutton",
+    "dropdown",
+    "toast",
+  ],
   buttongroup: ["button", "dropdown", "chip"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
@@ -490,7 +508,7 @@ const componentRelationships: Record<string, string[]> = {
     "datefield",
     "timefield",
   ],
-  link: [],
+  link: ["breadcrumbs"],
   listbox: ["select", "combobox", "avatar", "kbd", "separator", "surface", "dropdown"],
   modal: ["button", "tooltip", "select", "avatar"],
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
@@ -521,6 +539,7 @@ const componentRelationships: Record<string, string[]> = {
     "select",
     "combobox",
     "dropdown",
+    "breadcrumbs",
   ],
   skeleton: ["card", "avatar"],
   slider: ["label", "form", "description"],
@@ -542,7 +561,7 @@ const componentRelationships: Record<string, string[]> = {
     "listbox",
   ],
   switch: ["label", "description", "button", "form"],
-  tabs: [],
+  tabs: ["breadcrumbs"],
   taggroup: ["tag", "label", "description", "errormessage", "closebutton"],
   textarea: ["textfield", "input", "label", "fielderror", "form", "surface", "description"],
   textfield: [
@@ -558,6 +577,7 @@ const componentRelationships: Record<string, string[]> = {
     "datefield",
   ],
   timefield: ["label", "fielderror", "description", "form", "surface"],
+  toast: ["button", "alert", "closebutton", "spinner"],
   tooltip: ["button", "popover"],
 };
 

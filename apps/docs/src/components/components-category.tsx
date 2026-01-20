@@ -42,7 +42,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Overlays",
-    components: ["alert-dialog", "modal", "popover", "tooltip"],
+    components: ["alert-dialog", "modal", "popover", "toast", "tooltip"],
   },
   {
     category: "Collections",
