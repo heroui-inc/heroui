@@ -29,7 +29,4 @@ export const defaultSwatches = [
   "hsla(280, 60%, 60%, 1)", // Violet
   "hsla(270, 50%, 70%, 1)", // Lavender
   "hsla(350, 100%, 88%, 1)", // Blush
-  "hsla(10, 80%, 65%, 1)", // Tomato red
-  "hsla(30, 90%, 55%, 1)", // Dark orange
-  "hsla(45, 100%, 51%, 1)", // Gold
 ];
