@@ -16,7 +16,7 @@ import {
 } from "./components";
 import {MobileFooter} from "./components/mobile-footer";
 import {SwitchMode} from "./components/switch-mode";
-import {THEME_BUILDER_PAGE_ID} from "./constants";
+import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
 
 export default function ThemeBuilderPage() {
   return (
@@ -42,13 +42,15 @@ export default function ThemeBuilderPage() {
             <BaseColorSlider />
             <FontFamilyPopover />
             <RadiusPopover
+              description="Affects the overall UI, like menus and modals"
               label="Radius"
-              tooltip="Global border radius for UI components like menus, cards, or modals."
+              radiusOptions={radiusOptions}
               variableKey="radius"
             />
             <RadiusPopover
+              description="Affects form elements, like inputs and selects"
               label="Radius Form"
-              tooltip="Border radius for form elements like inputs and selects."
+              radiusOptions={formRadiusOptions}
               variableKey="formRadius"
             />
             <ThemePopover />

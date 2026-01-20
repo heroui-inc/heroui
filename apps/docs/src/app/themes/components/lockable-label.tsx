@@ -28,7 +28,7 @@ export function LockableLabel({label, tooltip, variable}: LockableLabelProps) {
       {tooltip ? (
         <Tooltip closeDelay={0} delay={100}>
           <Tooltip.Trigger className="hidden xl:block">
-            <CircleInfo className="size-4 text-muted" />
+            <CircleInfo className="size-4 text-muted" tabIndex={0} />
           </Tooltip.Trigger>
           <Tooltip.Content>
             <Tooltip.Arrow />
@@ -39,6 +39,8 @@ export function LockableLabel({label, tooltip, variable}: LockableLabelProps) {
       <Tooltip closeDelay={0} delay={100}>
         <Tooltip.Trigger>
           <div
+            role="button"
+            tabIndex={0}
             className={cn(
               "button button--icon-only button--ghost hidden size-6 rounded-full hover:flex",
               isLabelHovered && "flex",

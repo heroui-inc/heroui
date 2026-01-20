@@ -17,7 +17,7 @@ export const revalidate = false;
 
 export async function GET(request: NextRequest) {
   const ide = request.nextUrl.searchParams.get("ide") || "claude";
-  const skillPath = SKILL_PATHS[ide] || SKILL_PATHS.claude;
+  const skillPath = SKILL_PATHS[ide] || (SKILL_PATHS["claude"] as string);
 
   const filePath = path.join(process.cwd(), "_raw", "command.md");
   const content = fs.readFileSync(filePath, "utf-8");

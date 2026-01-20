@@ -20,7 +20,7 @@ export function SwitchMode({label}: {label?: string}) {
       {label ? <Label>{label}</Label> : null}
       <Tooltip>
         <Tooltip.Trigger>
-          <ThemeToggle className="h-9" mode="light-dark" />
+          <ThemeToggle className="h-9" mode="light-dark" tabIndex={0} />
         </Tooltip.Trigger>
         <Tooltip.Content>
           <p>

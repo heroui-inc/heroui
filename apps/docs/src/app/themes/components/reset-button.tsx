@@ -2,7 +2,7 @@ import {ArrowRotateLeft} from "@gravity-ui/icons";
 import {AlertDialog, Button, Tooltip} from "@heroui/react";
 import {useMemo} from "react";
 
-import {defaultThemeValues} from "../constants";
+import {defaultThemeVariables} from "../constants";
 import {useResetVariables} from "../hooks";
 import {useVariablesState} from "../hooks/use-variables-state";
 
@@ -12,14 +12,13 @@ export function ResetButton() {
 
   const isDisabled = useMemo(() => {
     return (
-      variables.chroma === defaultThemeValues.chroma &&
-      variables.hue === defaultThemeValues.hue &&
-      variables.lightness === defaultThemeValues.lightness &&
-      variables.fontFamily === defaultThemeValues.fontFamily &&
-      variables.formRadius === defaultThemeValues.formRadius &&
-      variables.radius === defaultThemeValues.radius &&
-      variables.theme === defaultThemeValues.theme &&
-      variables.base === defaultThemeValues.base
+      variables.chroma === defaultThemeVariables.chroma &&
+      variables.hue === defaultThemeVariables.hue &&
+      variables.lightness === defaultThemeVariables.lightness &&
+      variables.fontFamily === defaultThemeVariables.fontFamily &&
+      variables.formRadius === defaultThemeVariables.formRadius &&
+      variables.radius === defaultThemeVariables.radius &&
+      variables.base === defaultThemeVariables.base
     );
   }, [variables]);
 
@@ -30,7 +29,7 @@ export function ResetButton() {
           <Button isIconOnly isDisabled={isDisabled} size="md" variant="tertiary">
             <ArrowRotateLeft />
           </Button>
-          <AlertDialog.Backdrop>
+          <AlertDialog.Backdrop isDismissable>
             <AlertDialog.Container>
               <AlertDialog.Dialog>
                 <AlertDialog.CloseTrigger />
@@ -43,11 +42,21 @@ export function ResetButton() {
                 <AlertDialog.Body>
                   This will restore all theme values to their default settings.
                 </AlertDialog.Body>
-                <AlertDialog.Footer>
-                  <Button size="md" slot="close" variant="tertiary">
+                <AlertDialog.Footer className="flex-col sm:flex-row">
+                  <Button
+                    className="order-2 w-full sm:order-1 sm:w-auto"
+                    size="md"
+                    slot="close"
+                    variant="tertiary"
+                  >
                     Cancel
                   </Button>
-                  <Button size="md" slot="close" onPress={reset}>
+                  <Button
+                    className="order-1 w-full sm:order-2 sm:w-auto"
+                    size="md"
+                    slot="close"
+                    onPress={reset}
+                  >
                     Confirm
                   </Button>
                 </AlertDialog.Footer>
