@@ -2,7 +2,7 @@ import {Button} from "@heroui/react";
 
 export const ButtonsDemo = () => {
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+    <div className="grid grid-cols-3 gap-x-3 gap-y-2">
       <Button size="sm">Click me</Button>
       <Button size="sm" variant="secondary">
         Click me
