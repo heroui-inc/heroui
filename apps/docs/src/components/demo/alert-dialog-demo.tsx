@@ -4,7 +4,7 @@ import {Iconify} from "@/components/iconify";
 
 export function AlertDialogDemo() {
   return (
-    <Card className="h-[208px] w-full items-start justify-center p-5 xl:w-[340px]">
+    <Card className="h-[208px] w-full items-start justify-center p-5 min-[1200px]:w-[340px]">
       <Card.Header className="flex w-full items-start justify-center gap-2 px-1">
         <Avatar color="warning" variant="soft">
           <Avatar.Fallback>
