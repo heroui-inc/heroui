@@ -89,7 +89,7 @@
 
 /* Toast title */
 .toast__title {
-  @apply text-sm leading-6 font-medium text-overlay-foreground;
+  @apply text-sm leading-5 font-medium text-overlay-foreground;
 }
 
 /* Toast description */
