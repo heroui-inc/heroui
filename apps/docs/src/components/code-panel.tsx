@@ -2,6 +2,7 @@
 
 import type {ReactNode} from "react";
 
+import {Skeleton} from "@heroui/react";
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
 import {AnimatePresence, LazyMotion, domAnimation, m} from "motion/react";
 import dynamic from "next/dynamic";
@@ -14,15 +15,29 @@ import {cn} from "@/utils/cn";
 const HighlightedCode = dynamic(
   () => import("@/components/highlighted-code").then((mod) => mod.HighlightedCode),
   {
-    loading: () => <CodeLoadingSpinner />,
+    loading: () => <CodeLoadingSkeleton />,
     ssr: false,
   },
 );
 
-function CodeLoadingSpinner() {
+function CodeLoadingSkeleton() {
   return (
-    <div className="flex items-center justify-center py-8">
-      <div className="h-5 w-5 animate-spin rounded-full border-2 border-foreground/20 border-t-foreground/60" />
+    <div className="space-y-2.5 py-4">
+      <Skeleton className="h-4 w-3/4 rounded-md" />
+      <Skeleton className="h-4 w-1/2 rounded-md" />
+      <Skeleton className="h-4 w-5/6 rounded-md" />
+      <Skeleton className="h-4 w-2/3 rounded-md" />
+      <Skeleton className="h-4 w-4/5 rounded-md" />
+      <Skeleton className="h-4 w-1/3 rounded-md" />
+      <Skeleton className="h-4 w-3/5 rounded-md" />
+      <Skeleton className="h-4 w-2/5 rounded-md" />
+      <Skeleton className="h-4 w-1/5 rounded-md" />
+      <Skeleton className="h-4 w-4/5 rounded-md" />
+      <Skeleton className="h-4 w-3/5 rounded-md" />
+      <Skeleton className="h-4 w-2/5 rounded-md" />
+      <Skeleton className="h-4 w-1/5 rounded-md" />
+      <Skeleton className="h-4 w-4/5 rounded-md" />
+      <Skeleton className="h-4 w-3/5 rounded-md" />
     </div>
   );
 }
@@ -100,7 +115,7 @@ export function CodePanel({
 
     if (sourceCode) {
       return (
-        <Suspense fallback={<CodeLoadingSpinner />}>
+        <Suspense fallback={<CodeLoadingSkeleton />}>
           <HighlightedCode code={sourceCode} lang={lang} showLineNumbers={showLineNumbers} />
         </Suspense>
       );

@@ -14,6 +14,7 @@ import {
   ThemePopover,
 } from "./components";
 import {MobileFooter} from "./components/mobile-footer";
+import {Onboarding} from "./components/onboarding";
 import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
 
 export default function ThemeBuilderPage() {
@@ -60,6 +61,7 @@ export default function ThemeBuilderPage() {
           <div className="h-20 w-full sm:hidden" />
           <MobileFooter />
         </div>
+        <Onboarding />
       </Suspense>
     </CodePanelProvider>
   );
