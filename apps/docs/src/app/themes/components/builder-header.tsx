@@ -11,6 +11,7 @@ import {tabs} from "../constants";
 import {useUndoRedo} from "../hooks";
 
 import {ResetButton} from "./reset-button";
+import {ShuffleButton} from "./shuffle-button";
 import {SwitchMode} from "./switch-mode";
 
 export function BuilderHeader() {
@@ -61,6 +62,9 @@ export function BuilderHeader() {
             </Tooltip>
             <Separator className="hidden h-6 min-[1200px]:block" orientation="vertical" />
             <ResetButton />
+            <div className="hidden sm:block">
+              <ShuffleButton />
+            </div>
           </div>
         </div>
         <div className="relative hidden min-[1200px]:block">
@@ -70,11 +74,23 @@ export function BuilderHeader() {
                 {tabs.map((tab) => (
                   <Tabs.Tab
                     key={tab.label}
-                    className="capitalize"
+                    className="pointer-events-auto cursor-not-allowed capitalize"
                     id={tab.label}
                     isDisabled={tab.disabled}
                   >
-                    {tab.label}
+                    {tab.disabled ? (
+                      <Tooltip>
+                        <Tooltip.Trigger className="cursor-not-allowed">
+                          {tab.label}
+                        </Tooltip.Trigger>
+                        <Tooltip.Content>
+                          <Tooltip.Arrow />
+                          <p>Soon</p>
+                        </Tooltip.Content>
+                      </Tooltip>
+                    ) : (
+                      tab.label
+                    )}
                     <Tabs.Indicator />
                   </Tabs.Tab>
                 ))}
@@ -86,7 +102,7 @@ export function BuilderHeader() {
           </Chip>
         </div>
         <div className="flex w-auto justify-end gap-3 min-[1200px]:w-[244px]">
-          <div className="flex h-auto items-center min-[1200px]:hidden">
+          <div className="flex h-auto items-center">
             <SwitchMode />
           </div>
           <Tooltip closeDelay={0} delay={100}>
