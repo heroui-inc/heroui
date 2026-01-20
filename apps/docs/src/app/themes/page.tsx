@@ -23,7 +23,7 @@ export default function ThemeBuilderPage() {
     <CodePanelProvider>
       <Suspense>
         <div
-          className="grid h-full grid-rows-[auto_1fr_auto] bg-background px-4 xl:h-screen xl:overflow-hidden xl:px-6"
+          className="grid h-full grid-rows-[auto_1fr_auto] bg-background px-4 min-[1200px]:h-screen min-[1200px]:overflow-hidden min-[1200px]:px-6"
           id={THEME_BUILDER_PAGE_ID}
         >
           <BuilderHeader />
@@ -37,7 +37,7 @@ export default function ThemeBuilderPage() {
               <ThemeCodePanel />
             </div>
           </ScrollShadow>
-          <div className="mx-auto hidden items-center justify-between gap-4 py-6 xl:flex">
+          <div className="mx-auto hidden items-center justify-between gap-4 py-6 min-[1200px]:flex">
             <AccentColorSelector />
             <BaseColorSlider />
             <FontFamilyPopover />
@@ -60,7 +60,7 @@ export default function ThemeBuilderPage() {
               <ShuffleButton />
             </div>
           </div>
-          <div className="h-20 w-full xl:hidden" />
+          <div className="h-20 w-full min-[1200px]:hidden" />
           <MobileFooter />
         </div>
       </Suspense>

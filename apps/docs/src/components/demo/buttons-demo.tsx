@@ -3,21 +3,21 @@ import {Button} from "@heroui/react";
 export const ButtonsDemo = () => {
   return (
     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-      <Button size="sm">Call to action</Button>
+      <Button size="sm">Click me</Button>
       <Button size="sm" variant="secondary">
-        Call to action
+        Click me
       </Button>
       <Button size="sm" variant="tertiary">
-        Call to action
+        Click me
       </Button>
       <Button size="sm" variant="danger">
-        Call to action
+        Click me
       </Button>
       <Button size="sm" variant="danger-soft">
-        Call to action
+        Click me
       </Button>
       <Button size="sm" variant="ghost">
-        Call to action
+        Click me
       </Button>
     </div>
   );

@@ -18,15 +18,15 @@ export function BuilderHeader() {
   const {isCodeVisible, toggleCode} = useCodePanel();
 
   return (
-    <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 xl:mb-6 xl:px-0">
-      <div className="flex h-14 w-full max-w-[1400px] items-center justify-between xl:h-14">
+    <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 min-[1200px]:mb-6 min-[1200px]:px-0">
+      <div className="flex h-14 w-full max-w-[1400px] items-center justify-between min-[1200px]:h-14">
         <div className="flex items-center gap-4">
           <Link href="/">
             <HeroUILogo />
           </Link>
           <div className="flex items-center gap-3">
             <Tooltip closeDelay={0} delay={100}>
-              <Tooltip.Trigger className="hidden xl:inline-flex">
+              <Tooltip.Trigger className="hidden min-[1200px]:inline-flex">
                 <Button
                   isIconOnly
                   isDisabled={!canUndo}
@@ -43,7 +43,7 @@ export function BuilderHeader() {
               </Tooltip.Content>
             </Tooltip>
             <Tooltip closeDelay={0} delay={100}>
-              <Tooltip.Trigger className="hidden xl:inline-flex">
+              <Tooltip.Trigger className="hidden min-[1200px]:inline-flex">
                 <Button
                   isIconOnly
                   isDisabled={!canRedo}
@@ -59,11 +59,11 @@ export function BuilderHeader() {
                 </Tooltip.Content>
               </Tooltip.Trigger>
             </Tooltip>
-            <Separator className="hidden h-6 xl:block" orientation="vertical" />
+            <Separator className="hidden h-6 min-[1200px]:block" orientation="vertical" />
             <ResetButton />
           </div>
         </div>
-        <div className="relative hidden xl:block">
+        <div className="relative hidden min-[1200px]:block">
           <Tabs>
             <Tabs.ListContainer>
               <Tabs.List>
@@ -85,8 +85,8 @@ export function BuilderHeader() {
             Soon
           </Chip>
         </div>
-        <div className="flex w-auto justify-end gap-3 xl:w-[244px]">
-          <div className="flex h-auto items-center xl:hidden">
+        <div className="flex w-auto justify-end gap-3 min-[1200px]:w-[244px]">
+          <div className="flex h-auto items-center min-[1200px]:hidden">
             <SwitchMode />
           </div>
           <Tooltip closeDelay={0} delay={100}>
@@ -101,7 +101,7 @@ export function BuilderHeader() {
             </Tooltip.Content>
           </Tooltip>
           <Tooltip closeDelay={0} delay={100}>
-            <Tooltip.Trigger className="hidden xl:inline-flex">
+            <Tooltip.Trigger className="hidden min-[1200px]:inline-flex">
               <Button
                 isIconOnly
                 size="md"
