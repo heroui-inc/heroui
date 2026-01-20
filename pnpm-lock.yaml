@@ -507,9 +507,15 @@ importers:
       '@tailwindcss/cli':
         specifier: 4.1.18
         version: 4.1.18
+      '@types/fs-extra':
+        specifier: 11.0.4
+        version: 11.0.4
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
+      fs-extra:
+        specifier: 11.3.3
+        version: 11.3.3
       rimraf:
         specifier: 6.1.2
         version: 6.1.2
