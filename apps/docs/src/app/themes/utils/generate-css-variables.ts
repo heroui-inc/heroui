@@ -347,12 +347,12 @@ export function generateMinimalCssVariables(
   const isPredefinedFont = fontId in fontMap;
   const predefinedFont = isPredefinedFont ? fontMap[fontId as keyof typeof fontMap] : undefined;
 
-  const {chroma, hue, lightness} = variables;
+  const {base, chroma, hue, lightness} = variables;
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
   const adaptiveConfig = adaptiveColors[accentColor];
 
   // Generate theme colors
-  const colors = generateThemeColors({chroma, hue, lightness});
+  const colors = generateThemeColors({chroma, grayChroma: base, hue, lightness});
 
   // Get base variables for both themes
   const lightVars = getBaseColorVariables(colors, "light");
