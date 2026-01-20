@@ -40,11 +40,8 @@
     "src"
   ],
   "scripts": {
-    "build": "pnpm run build:ts && pnpm run build:flatten && pnpm run build:copy && pnpm run build:minify",
-    "build:ts": "tsc",
-    "build:flatten": "node scripts/flatten-exports.mjs",
-    "build:copy": "node scripts/copy-css.mjs",
-    "build:minify": "npx @tailwindcss/cli -i ./dist/index.css -o dist/heroui.min.css --minify",
+    "build": "node scripts/build.mjs --tsc",
+    "dev": "rollup -c rollup.config.mjs --watch",
     "measure-size": "node scripts/measure-bundle-size.mjs",
     "clean": "rm -rf dist .turbo tsconfig.tsbuildinfo",
     "prepack": "clean-package",
@@ -62,7 +59,9 @@
   "devDependencies": {
     "@heroui/standard": "workspace:*",
     "@tailwindcss/cli": "4.1.18",
+    "@types/fs-extra": "11.0.4",
     "clean-package": "2.2.0",
+    "fs-extra": "11.3.3",
     "rimraf": "6.1.2",
     "tailwindcss": "4.1.18",
     "typescript": "5.8.3"
