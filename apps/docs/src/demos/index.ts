@@ -241,6 +241,10 @@ export const demos: Record<string, DemoItem> = {
     component: ButtonDemos.Social,
     file: "button/social.tsx",
   },
+  "button-ripple-effect": {
+    component: ButtonDemos.RippleEffect,
+    file: "button/ripple-effect.tsx",
+  },
   "button-variants": {
     component: ButtonDemos.Variants,
     file: "button/variants.tsx",
