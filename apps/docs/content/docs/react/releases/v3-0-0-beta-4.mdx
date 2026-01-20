@@ -64,7 +64,7 @@ We're excited to introduce the **[Theme Builder](/themes)** - a powerful visual 
 - **Light & Dark Mode**: Customize both themes simultaneously with linked or independent values
 - **Keyboard Shortcuts**: Undo/redo support and quick actions for efficient workflow
 
-Try it now at [heroui.com/themes](/themes).
+Try it now at [v3.heroui.com/themes](/themes).
 
 ### New Components
 
@@ -142,7 +142,7 @@ Added `primary` and `secondary` variants to the [Input](/docs/components/input) 
 
 The [InputGroup](/docs/components/input-group) component received several improvements:
 
-**TextArea Support**: Use `InputGroup.TextArea` for multiline text inputs with prefix and suffix elements. The container automatically adjusts its height and aligns elements to the top.
+**TextArea Support**: Use `InputGroup.TextArea` for multiline text inputs with prefix and suffix elements.
 
 <ComponentPreview
   name="input-group-with-textarea"
@@ -154,15 +154,21 @@ The [InputGroup](/docs/components/input-group) component received several improv
   name="input-group-variants"
 />
 
-**Focus on Decorative Click**: Clicking on prefix or suffix decorative elements now focuses the input field for better UX.
+### Button & ButtonGroup Outline Variants
 
-### ButtonGroup Outline Variant
+Added a new `outline` variant to both [Button](/docs/components/button) and [ButtonGroup](/docs/components/button-group) components for outlined styling.
 
-Added a new `outline` variant to [ButtonGroup](/docs/components/button-group) for outlined button groups.
+<ComponentPreview
+  name="button-outline-variant"
+/>
 
 ### AlertDialog Size Support
 
 Added size support to [AlertDialog](/docs/components/alert-dialog) component, allowing you to control the dialog size.
+
+<ComponentPreview
+  name="alert-dialog-sizes"
+/>
 
 ### Link Text Decoration
 
@@ -255,24 +261,51 @@ The `secondary` variant provides lower emphasis styling without shadow, which is
 
 ## Bug Fixes
 
-- Fixed Toast close button on mobile devices
-- Fixed Toast duplicate container issue by using global container at app root
-- Fixed Toast default gap between toasts (updated from 14 to 8)
 - Fixed Link with Button variants styling
 - Fixed Fieldset flexbox quirk in Safari with BEM styles
 - Fixed SearchField empty state to properly disable clear button
 - Fixed ButtonGroup context to only apply to direct children
-- Fixed ButtonGroup BUTTON_GROUP_CHILD re-export for type declarations
+- Fixed ButtonGroup `BUTTON_GROUP_CHILD` re-export for type declarations
 
 ## Dependencies
 
 ### Direct Exports from React Aria Components
 
-HeroUI now provides direct exports from react-aria-components for easier access to primitives and utilities.
+HeroUI now provides direct exports from react-aria-components for easier access to primitives and utilities. These exports are particularly useful for [React Aria Framework setup](https://react-aria.adobe.com/frameworks).
+
+**Providers:**
+- `RouterProvider` - Configure React Aria links to use your client-side router
+- `I18nProvider` - Set the locale used by React Aria components
+
+**Hooks and Utilities:**
+- `isRTL` - Check if a locale is right-to-left
+- `useLocale` - Access the current locale and direction
+- `useFilter` - Filter and sort collections
+
+**Components:**
+- `Collection` - Collection component for managing lists
+- `ListBoxLoadMoreItem` - ListBox item for loading more items
+
+**i18n Utilities:**
+- `getLocalizationScript` - Get localization script for server-side rendering (from `react-aria-components/i18n`)
+
+All of these can be imported directly from `@heroui/react`:
+
+```tsx
+import {
+  RouterProvider,
+  I18nProvider,
+  isRTL,
+  useLocale,
+  useFilter,
+  getLocalizationScript
+} from "@heroui/react";
+```
 
 ## Links
 
-- [Component Documentation](https://v3.heroui.com/docs/components)
+- [Theme Builder](/themes)
+- [Component Documentation](/docs/components)
 - [Design System - Figma Kit V3 (updated)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
 - [GitHub Repository](https://github.com/heroui-inc/heroui)
 - [GitHub PR #6121](https://github.com/heroui-inc/heroui/pull/6121)

@@ -245,6 +245,10 @@ export const demos: Record<string, DemoItem> = {
     component: ButtonDemos.Variants,
     file: "button/variants.tsx",
   },
+  "button-outline-variant": {
+    component: ButtonDemos.OutlineVariant,
+    file: "button/outline-variant.tsx",
+  },
   "button-with-icons": {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
