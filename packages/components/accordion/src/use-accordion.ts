@@ -210,6 +210,7 @@ export function useAccordion<T extends object>(props: UseAccordionProps<T>) {
       disableIndicatorAnimation,
       state.expandedKeys.size,
       state.disabledKeys.size,
+      state.collection,
       motionProps,
     ],
   );
