@@ -109,7 +109,7 @@ async function fetchFallback() {
  * Main function to list all available HeroUI v3 components.
  */
 async function main() {
-  let data = await fetchApi("/components");
+  let data = await fetchApi("/v1/components");
 
   // Check if API returned valid data with components
   if (!data || !data.components || data.components.length === 0) {

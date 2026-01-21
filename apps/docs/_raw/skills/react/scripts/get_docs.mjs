@@ -18,11 +18,20 @@ const APP_PARAM = "app=skills";
 
 /**
  * Fetch documentation from HeroUI API.
+ * Uses v1 endpoint pattern: /v1/docs/:path
  */
 async function fetchApi(path) {
-  // Remove leading slash if present for API call
-  const cleanPath = path.replace(/^\//, "");
-  const url = `${API_BASE}/${cleanPath}?${APP_PARAM}`;
+  // The v1 API expects path without /docs/ prefix
+  // Input: /docs/react/getting-started/theming
+  // API expects: react/getting-started/theming (route is /v1/docs/:path(*))
+  let apiPath = path.startsWith("/docs/")
+    ? path.slice(6) // Remove /docs/ prefix
+    : path.startsWith("/")
+      ? path.slice(1) // Remove leading /
+      : path;
+
+  const separator = "?";
+  const url = `${API_BASE}/v1/docs/${apiPath}${separator}${APP_PARAM}`;
 
   try {
     const response = await fetch(url, {

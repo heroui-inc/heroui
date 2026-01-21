@@ -105,7 +105,7 @@ function formatVariables(variables) {
 async function main() {
   console.error("# Fetching theme variables...");
 
-  const rawData = await fetchApi("/themes/variables");
+  const rawData = await fetchApi("/v1/themes/variables?theme=default");
 
   let data;
   let version;
