@@ -1,5 +1,5 @@
 ---
-"@heroui/accordion": minor
+"@heroui/accordion": patch
 ---
 
-Fix newly created dynamic accordion items not responding to clicks
+Fix newly created dynamic accordion items not responding to clicks (#5825)
