@@ -1,4 +1,4 @@
-.textarea {
+.text-area {
   @apply rounded-field border bg-field px-3 py-2 text-base text-field-foreground shadow-field outline-none placeholder:text-field-placeholder sm:text-sm;
 
   min-height: 38px;
@@ -50,28 +50,28 @@
 }
 
 /* Variant property definitions */
-.textarea--primary {
+.text-area--primary {
   /* Default styles */
 }
 
-.textarea--secondary {
+.text-area--secondary {
   @apply shadow-none;
-  background-color: var(--textarea-bg);
+  background-color: var(--text-area-bg);
 
-  --textarea-bg: var(--color-default);
-  --textarea-bg-hover: var(--color-default-hover);
-  --textarea-bg-focus: var(--color-default);
+  --text-area-bg: var(--color-default);
+  --text-area-bg-hover: var(--color-default-hover);
+  --text-area-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
     &[data-hovered="true"]:not([data-focused="true"]):not([data-focus-visible="true"]) {
-      background-color: var(--textarea-bg-hover);
+      background-color: var(--text-area-bg-hover);
     }
   }
 
   &:focus,
   &[data-focused="true"] {
-    background-color: var(--textarea-bg-focus);
+    background-color: var(--text-area-bg-focus);
   }
 
   /* Focus visible state */
@@ -82,11 +82,11 @@
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--textarea-bg-focus);
+    background-color: var(--text-area-bg-focus);
   }
 }
 
 /* Full width modifier */
-.textarea--full-width {
+.text-area--full-width {
   @apply w-full;
 }

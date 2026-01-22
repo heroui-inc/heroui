@@ -1,5 +1,5 @@
 /* ComboBox styles */
-.combobox {
+.combo-box {
   @apply flex flex-col gap-1;
 
   &[data-invalid="true"],
@@ -21,11 +21,11 @@
     @apply min-w-0 flex-1;
 
     /* Add padding-right when trigger is present */
-    &:has(+ .combobox__trigger) {
+    &:has(+ .combo-box__trigger) {
       @apply pr-7;
     }
 
-    /* Focus state (input.css only has focus-visible, but combobox also needs focus) */
+    /* Focus state (input.css only has focus-visible, but combo-box also needs focus) */
     &:focus,
     &[data-focus] {
       @apply status-focused-field;
@@ -42,11 +42,11 @@
   }
 }
 
-.combobox__input-group {
+.combo-box__input-group {
   @apply relative isolate inline-flex items-center;
 }
 
-.combobox__trigger {
+.combo-box__trigger {
   @apply absolute top-1/2 right-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pr-2 text-field-placeholder transition duration-150 no-highlight;
 
   /* Remove default button styles */
@@ -89,7 +89,7 @@
 }
 
 /* Similar to popover content styles */
-.combobox__popover {
+.combo-box__popover {
   @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
@@ -152,7 +152,7 @@
   [data-slot="listbox-item"] {
     @apply px-2.5;
 
-    /* As the combobox is single-select, we don't need to animate the checkmark */
+    /* As the combo-box is single-select, we don't need to animate the checkmark */
     [data-slot="listbox-item-indicator--checkmark"] {
       @apply transition-none;
     }
@@ -160,10 +160,10 @@
 }
 
 /* Full width modifier */
-.combobox--full-width {
+.combo-box--full-width {
   @apply w-full;
 }
 
-.combobox__input-group--full-width {
+.combo-box__input-group--full-width {
   @apply w-full;
 }

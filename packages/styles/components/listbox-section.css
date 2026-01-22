@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Base listbox section styles
+   Base list-box section styles
    ========================================================================== */
 
-.listbox-section {
+.list-box-section {
   @apply flex flex-col items-start gap-0;
 }
