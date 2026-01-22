@@ -147,16 +147,7 @@ export const getValuesFromOklch = (
   const oklch = converter("oklch");
   const oklchColor = oklch(hsl);
 
-  if (
-    !oklchColor ||
-    oklchColor.c === undefined ||
-    oklchColor.h === undefined ||
-    oklchColor.l === undefined
-  ) {
-    return {chroma: 0, hue: 0, lightness: 0};
-  }
-
-  return {chroma: oklchColor.c, hue: oklchColor.h, lightness: oklchColor.l};
+  return {chroma: oklchColor?.c ?? 0, hue: oklchColor?.h ?? 0, lightness: oklchColor?.l ?? 0};
 };
 
 /* -------------------------------------------------------------------------------------------------
