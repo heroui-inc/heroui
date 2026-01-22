@@ -122,7 +122,7 @@
 }
 
 .select__indicator {
-  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150 will-change-transform;
+  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
 
   &[data-open="true"] {
     @apply rotate-180;
@@ -135,7 +135,7 @@
 
 /* Similar to popover content styles */
 .select__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm;
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
@@ -169,6 +169,11 @@
   /* Exiting animations */
   &[data-exiting="true"] {
     @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+  }
+
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
   }
 
   /* Arrow styling */

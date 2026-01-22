@@ -95,7 +95,6 @@
 
 .accordion__panel {
   opacity: 0;
-  will-change: height, opacity;
   height: var(--disclosure-panel-height);
   overflow: clip;
 
@@ -109,6 +108,7 @@
   @apply motion-reduce:transition-none;
 
   &[data-expanded="true"] {
+    will-change: height, opacity;
     opacity: 1;
   }
 }
