@@ -1512,6 +1512,10 @@ export const demos: Record<string, DemoItem> = {
     component: SelectDemos.WithDisabledOptions,
     file: "select/with-disabled-options.tsx",
   },
+  "select-with-clear-button": {
+    component: SelectDemos.WithClearButton,
+    file: "select/with-clear-button.tsx",
+  },
   "select-custom-indicator": {
     component: SelectDemos.CustomIndicator,
     file: "select/custom-indicator.tsx",

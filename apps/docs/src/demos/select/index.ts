@@ -13,6 +13,7 @@ export {MultipleSelect} from "./multiple-select";
 export {OnSurface} from "./on-surface";
 export {Required} from "./required";
 export {Variants} from "./variants";
+export {WithClearButton} from "./with-clear-button";
 export {WithDescription} from "./with-description";
 export {WithDisabledOptions} from "./with-disabled-options";
 export {WithSections} from "./with-sections";

@@ -3,7 +3,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
-import React from "react";
+import React, {useState} from "react";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
@@ -353,6 +353,126 @@ export const WithDisabledOptions: Story = {
       </Select.Popover>
     </Select>
   ),
+};
+
+export const WithClearButton: Story = {
+  render: () => {
+    const [selectedKey, setSelectedKey] = useState<Key | null>(null);
+
+    return (
+      <Select
+        className="w-[256px]"
+        placeholder="Select one"
+        value={selectedKey}
+        onChange={setSelectedKey}
+      >
+        <Label>State</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.ClearButton />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            <ListBox.Item id="florida" textValue="Florida">
+              Florida
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="delaware" textValue="Delaware">
+              Delaware
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="california" textValue="California">
+              California
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="texas" textValue="Texas">
+              Texas
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="new-york" textValue="New York">
+              New York
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="washington" textValue="Washington">
+              Washington
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Select.Popover>
+      </Select>
+    );
+  },
+};
+
+export const WithClearButtonCallback: Story = {
+  render: () => {
+    const [selectedKey, setSelectedKey] = useState<Key | null>("california");
+    const [clearCount, setClearCount] = useState(0);
+    const [lastClearedAt, setLastClearedAt] = useState<string | null>(null);
+
+    const handleClear = () => {
+      setClearCount((prev) => prev + 1);
+      setLastClearedAt(new Date().toLocaleTimeString());
+      // eslint-disable-next-line no-console
+      console.log("onClear callback triggered!");
+    };
+
+    const items = [
+      {id: "cat", name: "Cat"},
+      {id: "dog", name: "Dog"},
+      {id: "elephant", name: "Elephant"},
+      {id: "lion", name: "Lion"},
+      {id: "tiger", name: "Tiger"},
+      {id: "giraffe", name: "Giraffe"},
+    ];
+
+    const selectedItem = items.find((item) => item.id === selectedKey);
+
+    return (
+      <div className="space-y-2">
+        <Select
+          className="w-[256px]"
+          placeholder="Select one"
+          value={selectedKey}
+          onChange={setSelectedKey}
+          onClear={handleClear}
+        >
+          <Label>State</Label>
+          <Select.Trigger>
+            <Select.Value />
+            <Select.ClearButton />
+            <Select.Indicator />
+          </Select.Trigger>
+          <Select.Popover>
+            <ListBox>
+              {items.map((item) => (
+                <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
+                  {item.name}
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              ))}
+            </ListBox>
+          </Select.Popover>
+        </Select>
+        <div className="space-y-2 rounded-xl border border-border p-4">
+          <p className="text-sm font-medium">onClear Callback Info:</p>
+          <div className="space-y-1 text-sm text-muted">
+            <p>Clear button clicked: {clearCount} time(s)</p>
+            {!!lastClearedAt && <p>Last cleared at: {lastClearedAt}</p>}
+            {!!selectedItem && (
+              <p className="text-success">
+                Currently selected: <strong>{selectedItem.name}</strong>
+              </p>
+            )}
+            {!selectedItem && (
+              <p className="text-muted">No selection (click clear to see the callback)</p>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  },
 };
 
 export const CustomIndicator: Story = {
