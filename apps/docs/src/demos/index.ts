@@ -1008,6 +1008,10 @@ export const demos: Record<string, DemoItem> = {
     component: SeparatorDemos.WithContent,
     file: "separator/with-content.tsx",
   },
+  "separator-variants": {
+    component: SeparatorDemos.Variants,
+    file: "separator/variants.tsx",
+  },
   "separator-surface-variants": {
     component: SeparatorDemos.SurfaceVariants,
     file: "separator/surface-variants.tsx",
