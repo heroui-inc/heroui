@@ -61,6 +61,6 @@
 
   /* Handle Link with Button Variants */
   &.button {
-    @apply no-underline;
+    @apply gap-0 no-underline;
   }
 }
