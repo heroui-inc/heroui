@@ -35,11 +35,16 @@ jobs:
           files: ".changeset/pre.json"
 
       - name: Debug condition values
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          FILES_EXISTS: ${{ steps.check_if_pre_json_exists.outputs.files_exists }}
+          CONTAINS_VERSION_PACKAGES: ${{ contains(github.event.head_commit.message, 'ci(changesets): version packages') }}
+          FULL_CONDITION: ${{ steps.check_if_pre_json_exists.outputs.files_exists == 'true' && contains(github.event.head_commit.message, 'ci(changesets): version packages') }}
         run: |
-          echo "pre.json exists: ${{ steps.check_if_pre_json_exists.outputs.files_exists }}"
-          echo "Commit message: ${{ github.event.head_commit.message }}"
-          echo "Contains version packages: ${{ contains(github.event.head_commit.message, 'ci(changesets): version packages') }}"
-          echo "Full condition would be: ${{ steps.check_if_pre_json_exists.outputs.files_exists == 'true' && contains(github.event.head_commit.message, 'ci(changesets): version packages') }}"
+          echo "pre.json exists: $FILES_EXISTS"
+          echo "Commit message: $COMMIT_MESSAGE"
+          echo "Contains version packages: $CONTAINS_VERSION_PACKAGES"
+          echo "Full condition would be: $FULL_CONDITION"
 
       - name: Get pre-release changesets
         id: get-pre-release-changesets
