@@ -127,7 +127,7 @@ async function main() {
 
   // Print summary to stderr for human readability
   console.error(
-    `\n# Found ${data.components.length} components (v${data.latestVersion || "unknown"})`,
+    `\n# Found ${data.components.length} components (${data.latestVersion || "unknown"})`,
   );
 }
 
