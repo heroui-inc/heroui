@@ -197,6 +197,25 @@ export async function getRedirects(): Promise<Redirect[]> {
 
   redirects.push(...generateRedirects(components, "components"));
 
+  // Component name redirects - backward compatibility for renamed components
+  redirects.push(
+    {
+      destination: "/docs/react/components/text-area",
+      permanent: true,
+      source: "/docs/react/components/textarea",
+    },
+    {
+      destination: "/docs/react/components/combo-box",
+      permanent: true,
+      source: "/docs/react/components/combobox",
+    },
+    {
+      destination: "/docs/react/components/list-box",
+      permanent: true,
+      source: "/docs/react/components/listbox",
+    },
+  );
+
   // Handbook migration: redirect old handbook paths to new getting-started paths
   // Handbook pages are now under getting-started/(handbook)/
   const handbookPages = ["colors", "theming", "styling", "animation", "composition"];
