@@ -33,7 +33,7 @@
 @import "./dropdown.css";
 @import "./listbox-item.css";
 @import "./listbox-section.css";
-@import "./listbox.css";
+@import "./list-box.css";
 @import "./menu-item.css";
 @import "./menu-section.css";
 @import "./menu.css";
@@ -78,7 +78,7 @@
 @import "./radio.css";
 @import "./text-field.css";
 @import "./search-field.css";
-@import "./textarea.css";
+@import "./text-area.css";
 
 /* ------------------------------------------------------------------------------------------------
  * Layout
@@ -114,7 +114,7 @@
 /* ------------------------------------------------------------------------------------------------
  * Pickers
  * ------------------------------------------------------------------------------------------------ */
-@import "./combobox.css";
+@import "./combo-box.css";
 @import "./select.css";
 @import "./autocomplete.css";
 

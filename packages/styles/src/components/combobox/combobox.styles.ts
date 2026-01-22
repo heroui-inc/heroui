@@ -7,17 +7,17 @@ export const comboboxVariants = tv({
     fullWidth: false,
   },
   slots: {
-    base: "combobox",
-    inputGroup: "combobox__input-group",
-    popover: "combobox__popover",
-    trigger: "combobox__trigger",
+    base: "combo-box",
+    inputGroup: "combo-box__input-group",
+    popover: "combo-box__popover",
+    trigger: "combo-box__trigger",
   },
   variants: {
     fullWidth: {
       false: {},
       true: {
-        base: "combobox--full-width",
-        inputGroup: "combobox__input-group--full-width",
+        base: "combo-box--full-width",
+        inputGroup: "combo-box__input-group--full-width",
       },
     },
   },
