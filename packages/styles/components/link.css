@@ -53,6 +53,10 @@
      */
     transition: opacity 150ms var(--ease-out);
     @apply motion-reduce:transition-none;
+
+    & svg {
+      @apply transform-gpu;
+    }
   }
 
   .link__icon[data-default-icon="true"] {
