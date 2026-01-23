@@ -105,7 +105,7 @@ async function main() {
 
   // Try API first
   console.error(`# Fetching styles for: ${components.join(", ")}...`);
-  const data = await fetchApi("/components/styles", "POST", {components});
+  const data = await fetchApi("/v1/components/styles", "POST", {components});
 
   if (data && data.results) {
     for (const result of data.results) {
