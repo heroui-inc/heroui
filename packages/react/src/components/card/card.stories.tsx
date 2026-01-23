@@ -483,11 +483,11 @@ export const WithForm: Story = {
             <div className="flex flex-col gap-4">
               <TextField name="email" type="email">
                 <Label>Email</Label>
-                <Input placeholder="email@example.com" />
+                <Input placeholder="email@example.com" variant="secondary" />
               </TextField>
               <TextField name="password" type="password">
                 <Label>Password</Label>
-                <Input placeholder="••••••••" />
+                <Input placeholder="••••••••" variant="secondary" />
               </TextField>
             </div>
           </Card.Content>
