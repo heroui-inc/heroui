@@ -1,0 +1,138 @@
+---
+title: ColorSwatch
+description: A visual preview of a color value with accessibility support
+icon: new
+links:
+  rac: ColorSwatch
+  source: color-swatch/color-swatch.tsx
+  styles: color-swatch.css
+  storybook: Components/DataDisplay/ColorSwatch
+---
+
+## Import
+
+```tsx
+import { ColorSwatch } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="color-swatch-basic"
+/>
+
+### Sizes
+
+The ColorSwatch component supports multiple sizes: `xs`, `sm`, `md` (default), `lg`, and `xl`.
+
+<ComponentPreview
+  name="color-swatch-sizes"
+/>
+
+### Shapes
+
+ColorSwatch can be displayed as a `circle` (default) or `square`.
+
+<ComponentPreview
+  name="color-swatch-shapes"
+/>
+
+### Transparency
+
+ColorSwatch displays a checkered background pattern to indicate transparency when using colors with alpha values.
+
+<ComponentPreview
+  name="color-swatch-transparency"
+/>
+
+### Custom Styles with Render Props
+
+You can use the `style` render props to access the color value and create custom visual effects.
+
+<ComponentPreview
+  name="color-swatch-custom-styles"
+/>
+
+<RelatedComponents component="color-swatch" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {ColorSwatch} from '@heroui/react';
+
+function CustomColorSwatch() {
+  return (
+    <ColorSwatch
+      className="size-12 rounded-lg"
+      color="#0485F7"
+    />
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the ColorSwatch component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .color-swatch {
+    @apply border-2 border-white;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The ColorSwatch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-swatch.css)):
+
+#### Base Classes
+- `.color-swatch` - Base swatch styles with checkered background for transparency
+
+#### Shape Classes
+- `.color-swatch--circle` - Circular shape (default)
+- `.color-swatch--square` - Square shape with rounded corners
+
+#### Size Classes
+- `.color-swatch--xs` - Extra small (16px)
+- `.color-swatch--sm` - Small (24px)
+- `.color-swatch--md` - Medium (32px, default)
+- `.color-swatch--lg` - Large (36px)
+- `.color-swatch--xl` - Extra large (40px)
+
+## API Reference
+
+### ColorSwatch Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `string \| Color` | - | The color value to display (hex, rgb, hsl, etc.) |
+| `colorName` | `string` | - | Accessible name for the color (overrides auto-generated description) |
+| `className` | `string` | - | Additional CSS classes |
+| `shape` | `"circle" \| "square"` | `"circle"` | Shape of the swatch |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size of the swatch |
+| `style` | `CSSProperties \| ((renderProps) => CSSProperties)` | - | Inline styles or render props function with access to color |
+| `aria-label` | `string` | - | Accessible label for the swatch |
+
+### Style Render Props
+
+When using the `style` prop as a function, you receive render props with access to the color:
+
+```tsx
+<ColorSwatch
+  color="#0485F7"
+  style={({ color }) => ({
+    boxShadow: `0 4px 14px ${color.toString("css")}80`,
+  })}
+/>
+```
+
+The `color` object provides methods like:
+- `color.toString("css")` - Returns CSS color string
+- `color.toString("hex")` - Returns hex color string
+- `color.getChannelValue("alpha")` - Returns alpha channel value

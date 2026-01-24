@@ -98,6 +98,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "closebutton",
     title: "CloseButton",
   },
+  colorswatch: {
+    category: "display",
+    description: "Visual preview of a color value",
+    href: "/docs/react/components/color-swatch",
+    name: "colorswatch",
+    title: "ColorSwatch",
+  },
   combobox: {
     category: "forms",
     description: "Text input with searchable dropdown list",

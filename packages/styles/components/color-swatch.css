@@ -1,0 +1,42 @@
+/* Base color-swatch styles */
+.color-swatch {
+  @apply relative box-border size-8 shrink-0;
+
+  /* Checkered background pattern for transparency */
+  background:
+    linear-gradient(var(--color-swatch-current), var(--color-swatch-current)),
+    repeating-conic-gradient(#efefef 0% 25%, #f7f7f7 0% 50%) 50% / 16px 16px;
+
+  /* Default border for visibility against similar backgrounds */
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Shape variants */
+.color-swatch--circle {
+  @apply rounded-full;
+}
+
+.color-swatch--square {
+  @apply rounded-md;
+}
+
+/* Size variants */
+.color-swatch--xs {
+  @apply size-4;
+}
+
+.color-swatch--sm {
+  @apply size-6;
+}
+
+.color-swatch--md {
+  /* No styles as this is the default size */
+}
+
+.color-swatch--lg {
+  @apply size-9;
+}
+
+.color-swatch--xl {
+  @apply size-10;
+}

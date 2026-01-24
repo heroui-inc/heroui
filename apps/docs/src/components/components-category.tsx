@@ -74,7 +74,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Data Display",
-    components: ["chip"],
+    components: ["chip", "color-swatch"],
   },
   {
     category: "Utilities",
