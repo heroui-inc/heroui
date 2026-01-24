@@ -246,7 +246,7 @@ type ToastRegionPrimitiveProps<T extends object = ToastContentValue> = Component
   typeof ToastRegionPrimitive<T>
 >;
 
-interface ToastContainerProps<T extends object = ToastContentValue> extends Omit<
+interface ToastProviderProps<T extends object = ToastContentValue> extends Omit<
   ToastRegionPrimitiveProps<T>,
   "queue" | "children"
 > {
@@ -261,7 +261,7 @@ interface ToastContainerProps<T extends object = ToastContentValue> extends Omit
   queue?: ToastQueue<T>;
 }
 
-const ToastContainer = <T extends object = ToastContentValue>({
+const ToastProvider = <T extends object = ToastContentValue>({
   children,
   className,
   gap = DEFAULT_GAP,
@@ -270,7 +270,7 @@ const ToastContainer = <T extends object = ToastContentValue>({
   queue: queueProp,
   scaleFactor = DEFAULT_SCALE_FACTOR,
   ...rest
-}: ToastContainerProps<T>) => {
+}: ToastProviderProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -341,7 +341,7 @@ const ToastContainer = <T extends object = ToastContentValue>({
   );
 };
 
-ToastContainer.displayName = "HeroUI.ToastContainer";
+ToastProvider.displayName = "HeroUI.ToastProvider";
 
 /* ------------------------------------------------------------------------------------------------
  * Exports
@@ -354,7 +354,7 @@ export {
   ToastContent,
   ToastDescription,
   ToastIndicator,
-  ToastContainer,
+  ToastProvider,
   ToastTitle,
 };
 
@@ -365,6 +365,6 @@ export type {
   ToastDescriptionProps,
   ToastIndicatorProps,
   ToastProps,
-  ToastContainerProps,
+  ToastProviderProps,
   ToastTitleProps,
 };

@@ -50,7 +50,7 @@ const noop = () => {};
 const Template = () => {
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
-      <Toast.Container placement="bottom" />
+      <Toast.Provider placement="bottom" />
       <div className="flex w-full flex-wrap items-center justify-center gap-4">
         <Button
           className="text-muted"
@@ -159,9 +159,9 @@ const PlacementsTemplate = () => {
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-6">
-      {/* Render a ToastContainer for each placement */}
+      {/* Render a ToastProvider for each placement */}
       {placements.map((p) => (
-        <Toast.Container key={p} placement={p} queue={placementQueues[p]} />
+        <Toast.Provider key={p} placement={p} queue={placementQueues[p]} />
       ))}
       <div className="flex max-w-xs flex-wrap justify-center gap-2">
         {placements.map((p) => (
@@ -182,7 +182,7 @@ export const Placements = {
 const SimpleToastTemplate = () => {
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
-      <Toast.Container placement="bottom" />
+      <Toast.Provider placement="bottom" />
       <div className="flex w-full flex-wrap items-center justify-center gap-4">
         <Button size="sm" variant="secondary" onPress={() => toast("Simple message")}>
           Simple toast
@@ -241,7 +241,7 @@ const PromiseToastTemplate = () => {
 
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
-      <Toast.Container placement="bottom" />
+      <Toast.Provider placement="bottom" />
       <div className="flex w-full flex-wrap items-center justify-center gap-4">
         <Button
           size="sm"
@@ -314,7 +314,7 @@ export const PromiseToast = {
 const CustomIndicatorTemplate = () => {
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
-      <Toast.Container placement="bottom" />
+      <Toast.Provider placement="bottom" />
       <Button
         size="sm"
         variant="secondary"
@@ -339,7 +339,7 @@ export const CustomIndicator = {
 const WithCallbacksTemplate = () => {
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
-      <Toast.Container placement="bottom" />
+      <Toast.Provider placement="bottom" />
       <div className="flex w-full flex-wrap items-center justify-center gap-4">
         <Button
           size="sm"
@@ -411,7 +411,7 @@ const CustomToastTemplate = () => {
 
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
-      <Toast.Container placement="bottom" queue={customQueue}>
+      <Toast.Provider placement="bottom" queue={customQueue}>
         {({toast: toastItem}) => {
           const content = toastItem.content as ToastContentValue;
 
@@ -438,7 +438,7 @@ const CustomToastTemplate = () => {
             </Toast>
           );
         }}
-      </Toast.Container>
+      </Toast.Provider>
       <Button
         size="sm"
         variant="secondary"
@@ -469,7 +469,7 @@ const CustomQueueTemplate = () => {
   return (
     <div className="flex h-full max-w-4xl items-center justify-center gap-4">
       {/* Notification Queue */}
-      <Toast.Container placement="bottom" queue={notificationQueue} />
+      <Toast.Provider placement="bottom" queue={notificationQueue} />
       <div className="flex justify-center gap-2">
         <Button
           size="sm"
@@ -487,7 +487,7 @@ const CustomQueueTemplate = () => {
       </div>
 
       {/* Error Queue */}
-      <Toast.Container placement="top" queue={errorQueue} />
+      <Toast.Provider placement="top" queue={errorQueue} />
       <div className="flex justify-center gap-2">
         <Button
           size="sm"
@@ -505,7 +505,7 @@ const CustomQueueTemplate = () => {
       </div>
 
       {/* Success Queue */}
-      <Toast.Container placement="bottom end" queue={successQueue} />
+      <Toast.Provider placement="bottom end" queue={successQueue} />
       <div className="flex justify-center gap-2">
         <Button
           className="text-success"

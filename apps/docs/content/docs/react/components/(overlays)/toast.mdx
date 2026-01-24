@@ -22,7 +22,7 @@ import { Toast, toast } from '@heroui/react';
 
 ## Setup
 
-Render the container in the root of your app.
+Render the provider in the root of your app.
 
 ```tsx
 import { Toast, Button, toast } from '@heroui/react';
@@ -30,7 +30,7 @@ import { Toast, Button, toast } from '@heroui/react';
 function App() {
   return (
     <div>
-      <Toast.Container />
+      <Toast.Provider />
       <Button onPress={() => toast("Simple message")}>
         Show toast
       </Button>
@@ -84,7 +84,7 @@ function App() {
 ### Anatomy
 
 ```tsx
-<Toast.Container>
+<Toast.Provider>
   <Toast>
     <Toast.Indicator />
     <Toast.Content>
@@ -94,7 +94,7 @@ function App() {
     <Toast.ActionButton />
     <Toast.CloseButton />
   </Toast>
-</Toast.Container>
+</Toast.Provider>
 ```
 
 <RelatedComponents component="toast" />
@@ -104,7 +104,7 @@ function App() {
 ### Passing Tailwind CSS classes
 
 ```tsx
-<Toast.Container className="bottom-8 right-8" placement="bottom end" />
+<Toast.Provider className="bottom-8 right-8" placement="bottom end" />
 ```
 
 ### Customizing the component classes
@@ -157,7 +157,7 @@ The component supports various states:
 
 ## API Reference
 
-### Toast.Container Props
+### Toast.Provider Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -175,8 +175,8 @@ The component supports various states:
 |------|------|---------|-------------|
 | `toast` | `QueuedToast<T>` | - | Toast data from queue (required) |
 | `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Visual variant of the toast |
-| `placement` | `ToastVariants["placement"]` | - | Placement (inherited from Container) |
-| `scaleFactor` | `number` | - | Scale factor (inherited from Container) |
+| `placement` | `ToastVariants["placement"]` | - | Placement (inherited from Provider) |
+| `scaleFactor` | `number` | - | Scale factor (inherited from Provider) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Toast content (ToastContent, ToastIndicator, etc.) |
 
@@ -226,7 +226,7 @@ The component supports various states:
 
 ### ToastQueue
 
-A `ToastQueue` manages the state for a `<Toast.Container>`. The state is stored outside React so you can trigger toasts from anywhere in your application.
+A `ToastQueue` manages the state for a `<Toast.Provider>`. The state is stored outside React so you can trigger toasts from anywhere in your application.
 
 #### Constructor Options
 

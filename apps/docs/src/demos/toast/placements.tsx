@@ -24,9 +24,9 @@ export function Placements() {
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-6">
-      {/* Render a ToastContainer for each placement */}
+      {/* Render a ToastProvider for each placement */}
       {placements.map((p) => (
-        <Toast.Container key={p} placement={p} queue={placementQueues[p]} />
+        <Toast.Provider key={p} placement={p} queue={placementQueues[p]} />
       ))}
       <div className="flex max-w-xs flex-wrap justify-center gap-2">
         {placements.map((p) => (
