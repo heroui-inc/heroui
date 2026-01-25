@@ -23,11 +23,11 @@
 }
 
 .separator--secondary {
-  @apply bg-[var(--color-separator-secondary)];
+  @apply bg-separator-secondary;
 }
 
 .separator--tertiary {
-  @apply bg-[var(--color-separator-tertiary)];
+  @apply bg-separator-tertiary;
 }
 
 .separator__container {
