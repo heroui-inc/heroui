@@ -7,7 +7,7 @@ import {ChevronDown} from "lucide-react";
 import {useMemo, useState} from "react";
 import {cn, tv} from "tailwind-variants";
 
-import {ClaudeIcon, CursorIcon, MarkdownIcon, OpenAIIcon} from "@/icons/dev";
+import {ClaudeIcon, CursorIcon, MarkdownIcon, OpenAIIcon, VSCodeIcon} from "@/icons/dev";
 import {__DEV__} from "@/utils/env";
 import {docsButtonVariants} from "@/utils/variants";
 
@@ -68,6 +68,13 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
         icon: <CursorIcon size={18} />,
         key: "cursor",
         title: "Add to Cursor",
+      },
+      {
+        description: "Install MCP Server on VS Code",
+        href: "vscode:mcp/install?%7B%22name%22%3A%22heroui-react%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40heroui%2Freact-mcp%40latest%22%5D%7D",
+        icon: <VSCodeIcon size={18} />,
+        key: "vscode",
+        title: "Add to VS Code",
       },
       {
         description: "Ask questions about this page",
