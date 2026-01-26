@@ -35,7 +35,7 @@ function markdownUrlToSlug(markdownUrl: string): string {
 }
 
 const optionVariants = tv({
-  base: "hover:text-fd-accent-foreground hover:bg-fd-accent inline-flex items-center gap-2 rounded-lg p-2 text-sm [&_svg]:flex-none",
+  base: "inline-flex items-center gap-2 rounded-lg text-sm [&_svg]:flex-none [&_svg]:text-muted",
 });
 
 export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; githubUrl: string}) {
@@ -143,7 +143,7 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
         <PopoverTrigger className={docsButtonVariants({size: "md"})}>
           <ChevronDown className="text-fd-muted-foreground size-3.5" />
         </PopoverTrigger>
-        <PopoverContent align="end" className="flex flex-col overflow-auto">
+        <PopoverContent align="end" className="flex flex-col overflow-auto p-1">
           <ListBox>
             {items.map((item) => (
               <ListBoxItem
