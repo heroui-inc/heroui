@@ -94,6 +94,8 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
   }, [githubUrl, markdownUrl]);
 
   const [isLoading, setLoading] = useState(false);
+
+  const [isOpen, setOpen] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
     if (!__DEV__) {
       const cached = cache.get(markdownUrl);
@@ -146,9 +148,14 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
         />
         {checked ? "Copied" : "Copy Markdown"}
       </Button>
-      <Popover>
+      <Popover open={isOpen} onOpenChange={setOpen}>
         <PopoverTrigger className={docsButtonVariants({size: "md"})}>
-          <ChevronDown className="text-fd-muted-foreground size-3.5" />
+          <ChevronDown
+            className={cn(
+              "text-fd-muted-foreground size-3.5 transition-transform",
+              isOpen && "rotate-180",
+            )}
+          />
         </PopoverTrigger>
         <PopoverContent align="end" className="flex flex-col overflow-auto p-1">
           <ListBox>
