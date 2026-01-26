@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
   const protocol = host.includes("localhost") ? "http" : "https";
   const baseUrl = `${protocol}://${host}`;
 
-  const filePath = path.join(process.cwd(), "_raw", "install.sh");
+  const filePath = path.join(process.cwd(), "skills", "install.sh");
   const installScript = fs.readFileSync(filePath, "utf-8");
   const body = installScript.replace(/\{\{BASE_URL\}\}/g, baseUrl).trim() + "\n";
 
