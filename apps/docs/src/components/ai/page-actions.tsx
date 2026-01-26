@@ -64,7 +64,7 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
       },
       {
         description: "Install MCP Server on Cursor",
-        href: "https://link.heroui.com/mcp-cursor-install",
+        href: "cursor://anysphere.cursor-deeplink/mcp/install?name=heroui-react&config=eyJjb21tYW5kIjoibnB4IC15IEBoZXJvdWkvcmVhY3QtbWNwQGxhdGVzdCJ9",
         icon: <CursorIcon size={18} />,
         key: "cursor",
         title: "Add to Cursor",
