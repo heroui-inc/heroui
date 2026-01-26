@@ -10,7 +10,7 @@
  */
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
-const APP_PARAM = "app=skills";
+const APP_PARAM = "app=react-skills";
 
 // Fallback theme reference when API is unavailable
 const FALLBACK_THEME = {

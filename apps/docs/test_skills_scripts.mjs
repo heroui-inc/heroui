@@ -44,7 +44,7 @@ const ENVIRONMENTS = {
 // Get script directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const SCRIPTS_DIR = join(__dirname, "_raw/skills/react/scripts");
+const SCRIPTS_DIR = join(__dirname, "..", "..", "skills/heroui-react/scripts");
 const NODE = "node";
 
 /**

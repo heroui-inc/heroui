@@ -30,7 +30,7 @@ If `$ARGUMENTS` is empty, ask the user what they want to build.
 
 ## Skill
 
-Use the `heroui` skill at `{{SKILL_PATH}}` for comprehensive guidance on components, patterns, theming, and accessibility.
+Use the `heroui-react` skill at `{{SKILL_PATH}}` for comprehensive guidance on components, patterns, theming, and accessibility.
 
 ---
 
