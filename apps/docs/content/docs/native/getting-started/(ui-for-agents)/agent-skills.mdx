@@ -1,21 +1,21 @@
 ---
 title: Agent Skills
-description: Enable AI assistants to build UIs with HeroUI v3 components
+description: Enable AI assistants to build mobile UIs with HeroUI Native components
 icon: preview
 ---
 
-HeroUI Skills give your AI assistant comprehensive knowledge of HeroUI v3 components, patterns, and best practices.
+HeroUI Native Skills give your AI assistant comprehensive knowledge of HeroUI Native components, patterns, and best practices for React Native development.
 
 <DocsImage
-  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills.jpg"
-  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills-dark.jpg"
-  alt="HeroUI v3 MCP Server"
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills-native.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills-native-dark.jpg"
+  alt="HeroUI Native Agent Skills"
 />
 
 ### Installation
 
 ```bash
-curl -fsSL https://v3.heroui.com/install | bash -s heroui-react
+curl -fsSL https://v3.heroui.com/install | bash -s heroui-native
 ```
 
 Or using the skills package:
@@ -33,34 +33,32 @@ Supports Claude Code, Cursor, OpenCode, Codex CLI, and Antigravity. The installe
 Skills are **automatically discovered** by your AI assistant.
 
 Simply ask your AI assistant to:
-- Build components using HeroUI v3
-- Create pages with HeroUI components
+- Build mobile components using HeroUI Native
+- Create screens with HeroUI Native components
 - Customize themes and styles
 - Access component documentation
 
 <Callout>
-  For more complex use cases, use the [MCP Server](/docs/react/getting-started/mcp-server) which provides real-time access to component documentation and source code.
+  For more complex use cases, use the [MCP Server](/docs/native/getting-started/mcp-server) which provides real-time access to component documentation and source code.
 </Callout>
 
 ### What's Included
 
-- HeroUI v3 installation guide
-- All HeroUI v3 components with props, examples, and usage patterns
-- Theming and styling guidelines
+- HeroUI Native installation guide
+- All HeroUI Native components with props, examples, and usage patterns
+- Theming and styling guidelines with Uniwind
 - Design principles and composition patterns
-- Accessibility best practices (WCAG 2.1 AA)
+- Accessibility best practices for React Native
 
 ### Structure
 
 ```
-skills/heroui-react/
+skills/heroui-native/
 ├── SKILL.md              # Main skill documentation
 ├── LICENSE.txt           # MIT license
 └── scripts/              # Utility scripts
     ├── list_components.mjs
     ├── get_component_docs.mjs
-    ├── get_source.mjs
-    ├── get_styles.mjs
     ├── get_theme.mjs
     └── get_docs.mjs
 ```
