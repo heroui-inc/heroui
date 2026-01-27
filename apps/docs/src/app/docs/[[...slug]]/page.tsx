@@ -7,7 +7,7 @@ import {join} from "node:path";
 import {createRelativeLink} from "fumadocs-ui/mdx";
 import {notFound} from "next/navigation";
 
-import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
+import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
 import {
   DocsBody,
@@ -21,7 +21,7 @@ import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
-import {DOCS_CONTENT_PATH} from "@/utils/constants";
+import {RAW_DOCS_CONTENT_PATH} from "@/utils/constants";
 import {
   extractGithubFromMDX,
   extractImageFromMDX,
@@ -90,9 +90,8 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
           </DocsTitle>
           {page.data.toc.length > 0 && (
             <div className="flex items-center gap-2">
-              <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
               <ViewOptions
-                githubUrl={`${DOCS_CONTENT_PATH}/${page.path}`}
+                githubUrl={`${RAW_DOCS_CONTENT_PATH}/${page.path}`}
                 markdownUrl={`${page.url}.mdx`}
               />
             </div>
