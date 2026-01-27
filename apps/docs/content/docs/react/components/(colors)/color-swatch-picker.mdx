@@ -31,9 +31,15 @@ import { ColorSwatchPicker } from '@heroui/react';
 
 export default () => (
   <ColorSwatchPicker>
-    <ColorSwatchPicker.Item color="#F43F5E" />
-    <ColorSwatchPicker.Item color="#D946EF" />
-    <ColorSwatchPicker.Item color="#8B5CF6" />
+    <ColorSwatchPicker.Item color="#F43F5E">
+      <ColorSwatchPicker.Swatch />
+    </ColorSwatchPicker.Item>
+    <ColorSwatchPicker.Item color="#D946EF">
+      <ColorSwatchPicker.Swatch />
+    </ColorSwatchPicker.Item>
+    <ColorSwatchPicker.Item color="#8B5CF6">
+      <ColorSwatchPicker.Swatch />
+    </ColorSwatchPicker.Item>
   </ColorSwatchPicker>
 );
 ```
@@ -88,8 +94,12 @@ import { ColorSwatchPicker } from '@heroui/react';
 function CustomColorSwatchPicker() {
   return (
     <ColorSwatchPicker className="gap-4">
-      <ColorSwatchPicker.Item color="#F43F5E" className="shadow-lg" />
-      <ColorSwatchPicker.Item color="#D946EF" />
+      <ColorSwatchPicker.Item color="#F43F5E" className="shadow-lg">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item color="#D946EF">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
     </ColorSwatchPicker>
   );
 }
@@ -174,6 +184,13 @@ Inherits from [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/re
 |------|------|---------|-------------|
 | `color` | `string \| Color` | **Required** | The color of the swatch |
 | `isDisabled` | `boolean` | `false` | Whether the item is disabled |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | ColorSwatchPicker.Swatch element |
+
+### ColorSwatchPicker.Swatch Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 
 ### parseColor

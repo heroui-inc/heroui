@@ -12,7 +12,9 @@ export function Sizes() {
           <span className="w-8 text-sm text-muted">{size}</span>
           <ColorSwatchPicker size={size}>
             {colors.map((color) => (
-              <ColorSwatchPicker.Item key={color} color={color} />
+              <ColorSwatchPicker.Item key={color} color={color}>
+                <ColorSwatchPicker.Swatch />
+              </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker>
         </div>

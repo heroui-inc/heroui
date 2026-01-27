@@ -12,7 +12,9 @@ export function Controlled() {
     <div className="flex flex-col gap-4">
       <ColorSwatchPicker value={value} onChange={setValue}>
         {colors.map((color) => (
-          <ColorSwatchPicker.Item key={color} color={color} />
+          <ColorSwatchPicker.Item key={color} color={color}>
+            <ColorSwatchPicker.Swatch />
+          </ColorSwatchPicker.Item>
         ))}
       </ColorSwatchPicker>
       <p className="text-sm text-muted">

@@ -6,7 +6,9 @@ export function StackLayout() {
   return (
     <ColorSwatchPicker layout="stack">
       {colors.map((color) => (
-        <ColorSwatchPicker.Item key={color} color={color} />
+        <ColorSwatchPicker.Item key={color} color={color}>
+          <ColorSwatchPicker.Swatch />
+        </ColorSwatchPicker.Item>
       ))}
     </ColorSwatchPicker>
   );

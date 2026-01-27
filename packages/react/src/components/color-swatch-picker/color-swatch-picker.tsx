@@ -57,12 +57,11 @@ const ColorSwatchPickerRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * ColorSwatchPicker Item
  * -----------------------------------------------------------------------------------------------*/
-interface ColorSwatchPickerItemProps extends Omit<
-  ComponentPropsWithRef<typeof ColorSwatchPickerItemPrimitive>,
-  "children"
+interface ColorSwatchPickerItemProps extends ComponentPropsWithRef<
+  typeof ColorSwatchPickerItemPrimitive
 > {}
 
-const ColorSwatchPickerItem = ({className, ...props}: ColorSwatchPickerItemProps) => {
+const ColorSwatchPickerItem = ({children, className, ...props}: ColorSwatchPickerItemProps) => {
   const {slots} = useContext(ColorSwatchPickerContext);
 
   return (
@@ -76,14 +75,31 @@ const ColorSwatchPickerItem = ({className, ...props}: ColorSwatchPickerItemProps
         }) as CSSProperties
       }
     >
-      <ColorSwatchPrimitive className={slots?.swatch()} data-slot="color-swatch-picker-swatch" />
+      {children}
     </ColorSwatchPickerItemPrimitive>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * ColorSwatchPicker Swatch
+ * -----------------------------------------------------------------------------------------------*/
+interface ColorSwatchPickerSwatchProps extends ComponentPropsWithRef<typeof ColorSwatchPrimitive> {}
+
+const ColorSwatchPickerSwatch = ({className, ...props}: ColorSwatchPickerSwatchProps) => {
+  const {slots} = useContext(ColorSwatchPickerContext);
+
+  return (
+    <ColorSwatchPrimitive
+      className={composeTwRenderProps(className, slots?.swatch())}
+      data-slot="color-swatch-picker-swatch"
+      {...props}
+    />
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ColorSwatchPickerRoot, ColorSwatchPickerItem};
+export {ColorSwatchPickerRoot, ColorSwatchPickerItem, ColorSwatchPickerSwatch};
 
-export type {ColorSwatchPickerRootProps, ColorSwatchPickerItemProps};
+export type {ColorSwatchPickerRootProps, ColorSwatchPickerItemProps, ColorSwatchPickerSwatchProps};

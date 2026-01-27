@@ -9,7 +9,9 @@ export function Variants() {
         <span className="text-sm text-muted">Circle (default)</span>
         <ColorSwatchPicker variant="circle">
           {colors.map((color) => (
-            <ColorSwatchPicker.Item key={color} color={color} />
+            <ColorSwatchPicker.Item key={color} color={color}>
+              <ColorSwatchPicker.Swatch />
+            </ColorSwatchPicker.Item>
           ))}
         </ColorSwatchPicker>
       </div>
@@ -17,7 +19,9 @@ export function Variants() {
         <span className="text-sm text-muted">Square</span>
         <ColorSwatchPicker variant="square">
           {colors.map((color) => (
-            <ColorSwatchPicker.Item key={color} color={color} />
+            <ColorSwatchPicker.Item key={color} color={color}>
+              <ColorSwatchPicker.Swatch />
+            </ColorSwatchPicker.Item>
           ))}
         </ColorSwatchPicker>
       </div>

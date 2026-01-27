@@ -33,7 +33,9 @@ const defaultColors = ["#F43F5E", "#D946EF", "#8B5CF6", "#3B82F6", "#06B6D4", "#
 const Template = (props: ColorSwatchPicker["RootProps"]) => (
   <ColorSwatchPicker {...props}>
     {defaultColors.map((color) => (
-      <ColorSwatchPicker.Item key={color} color={color} />
+      <ColorSwatchPicker.Item key={color} color={color}>
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
     ))}
   </ColorSwatchPicker>
 );
@@ -57,7 +59,9 @@ const SizesTemplate = () => {
           <span className="text-sm font-medium text-muted capitalize">{size}</span>
           <ColorSwatchPicker size={size}>
             {defaultColors.map((color) => (
-              <ColorSwatchPicker.Item key={color} color={color} />
+              <ColorSwatchPicker.Item key={color} color={color}>
+                <ColorSwatchPicker.Swatch />
+              </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker>
         </div>
@@ -80,7 +84,9 @@ const VariantsTemplate = () => {
           <span className="text-sm font-medium text-muted capitalize">{variant}</span>
           <ColorSwatchPicker variant={variant}>
             {defaultColors.map((color) => (
-              <ColorSwatchPicker.Item key={color} color={color} />
+              <ColorSwatchPicker.Item key={color} color={color}>
+                <ColorSwatchPicker.Swatch />
+              </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker>
         </div>
@@ -103,7 +109,9 @@ const LayoutsTemplate = () => {
           <span className="text-sm font-medium text-muted capitalize">{layout}</span>
           <ColorSwatchPicker layout={layout}>
             {defaultColors.map((color) => (
-              <ColorSwatchPicker.Item key={color} color={color} />
+              <ColorSwatchPicker.Item key={color} color={color}>
+                <ColorSwatchPicker.Swatch />
+              </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker>
         </div>
@@ -130,7 +138,9 @@ const AllVariantsTemplate = () => {
               <span className="w-8 text-sm text-muted">{size}</span>
               <ColorSwatchPicker size={size} variant={variant}>
                 {defaultColors.map((color) => (
-                  <ColorSwatchPicker.Item key={color} color={color} />
+                  <ColorSwatchPicker.Item key={color} color={color}>
+                    <ColorSwatchPicker.Swatch />
+                  </ColorSwatchPicker.Item>
                 ))}
               </ColorSwatchPicker>
             </div>
@@ -153,7 +163,9 @@ export const Controlled: Story = {
       <div className="flex flex-col gap-4">
         <ColorSwatchPicker value={value} onChange={setValue}>
           {defaultColors.map((color) => (
-            <ColorSwatchPicker.Item key={color} color={color} />
+            <ColorSwatchPicker.Item key={color} color={color}>
+              <ColorSwatchPicker.Swatch />
+            </ColorSwatchPicker.Item>
           ))}
         </ColorSwatchPicker>
         <p className="text-sm text-muted">
@@ -167,13 +179,27 @@ export const Controlled: Story = {
 export const Disabled: Story = {
   render: () => (
     <ColorSwatchPicker>
-      <ColorSwatchPicker.Item color="#F43F5E" />
-      <ColorSwatchPicker.Item isDisabled color="#D946EF" />
-      <ColorSwatchPicker.Item color="#8B5CF6" />
-      <ColorSwatchPicker.Item isDisabled color="#3B82F6" />
-      <ColorSwatchPicker.Item color="#06B6D4" />
-      <ColorSwatchPicker.Item color="#10B981" />
-      <ColorSwatchPicker.Item color="#84CC16" />
+      <ColorSwatchPicker.Item color="#F43F5E">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item isDisabled color="#D946EF">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item color="#8B5CF6">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item isDisabled color="#3B82F6">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item color="#06B6D4">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item color="#10B981">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item color="#84CC16">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
     </ColorSwatchPicker>
   ),
 };
@@ -182,7 +208,9 @@ export const WithDefaultValue: Story = {
   render: () => (
     <ColorSwatchPicker defaultValue="#8B5CF6">
       {defaultColors.map((color) => (
-        <ColorSwatchPicker.Item key={color} color={color} />
+        <ColorSwatchPicker.Item key={color} color={color}>
+          <ColorSwatchPicker.Swatch />
+        </ColorSwatchPicker.Item>
       ))}
     </ColorSwatchPicker>
   ),
@@ -238,7 +266,9 @@ const ExtendedPaletteTemplate = () => {
     <div className="max-w-md">
       <ColorSwatchPicker className="gap-1" size="sm">
         {palette.map((color) => (
-          <ColorSwatchPicker.Item key={color} color={color} />
+          <ColorSwatchPicker.Item key={color} color={color}>
+            <ColorSwatchPicker.Swatch />
+          </ColorSwatchPicker.Item>
         ))}
       </ColorSwatchPicker>
     </div>

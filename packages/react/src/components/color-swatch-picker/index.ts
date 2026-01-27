@@ -1,6 +1,10 @@
 import type {ComponentProps} from "react";
 
-import {ColorSwatchPickerItem, ColorSwatchPickerRoot} from "./color-swatch-picker";
+import {
+  ColorSwatchPickerItem,
+  ColorSwatchPickerRoot,
+  ColorSwatchPickerSwatch,
+} from "./color-swatch-picker";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -8,23 +12,26 @@ import {ColorSwatchPickerItem, ColorSwatchPickerRoot} from "./color-swatch-picke
 export const ColorSwatchPicker = Object.assign(ColorSwatchPickerRoot, {
   Root: ColorSwatchPickerRoot,
   Item: ColorSwatchPickerItem,
+  Swatch: ColorSwatchPickerSwatch,
 });
 
 export type ColorSwatchPicker = {
   Props: ComponentProps<typeof ColorSwatchPickerRoot>;
   RootProps: ComponentProps<typeof ColorSwatchPickerRoot>;
   ItemProps: ComponentProps<typeof ColorSwatchPickerItem>;
+  SwatchProps: ComponentProps<typeof ColorSwatchPickerSwatch>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {ColorSwatchPickerRoot, ColorSwatchPickerItem};
+export {ColorSwatchPickerRoot, ColorSwatchPickerItem, ColorSwatchPickerSwatch};
 
 export type {
   ColorSwatchPickerRootProps,
   ColorSwatchPickerRootProps as ColorSwatchPickerProps,
   ColorSwatchPickerItemProps,
+  ColorSwatchPickerSwatchProps,
 } from "./color-swatch-picker";
 
 /* -------------------------------------------------------------------------------------------------
