@@ -440,6 +440,10 @@ export const demos: Record<string, DemoItem> = {
     component: ColorSwatchDemos.CustomStyles,
     file: "color-swatch/custom-styles.tsx",
   },
+  "color-swatch-accessibility": {
+    component: ColorSwatchDemos.Accessibility,
+    file: "color-swatch/accessibility.tsx",
+  },
   // CloseButton demos
   "close-button-default": {
     component: CloseButtonDemos.Default,

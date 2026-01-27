@@ -23,7 +23,7 @@ export default {
   parameters: {
     layout: "centered",
   },
-  title: "Components/DataDisplay/ColorSwatch",
+  title: "Components/Colors/ColorSwatch",
 } as Meta<typeof ColorSwatch>;
 
 const defaultArgs: ColorSwatchProps = {
@@ -33,16 +33,6 @@ const defaultArgs: ColorSwatchProps = {
 const Template = (props: ColorSwatchProps) => (
   <div className="flex items-center gap-3">
     <ColorSwatch className="h-5 w-5" {...props} />
-  </div>
-);
-
-const SizesTemplate = (props: ColorSwatchProps) => (
-  <div className="flex items-center gap-3">
-    <ColorSwatch {...props} size="xs" />
-    <ColorSwatch {...props} size="sm" />
-    <ColorSwatch {...props} size="md" />
-    <ColorSwatch {...props} size="lg" />
-    <ColorSwatch {...props} size="xl" />
   </div>
 );
 
@@ -60,6 +50,16 @@ const ColorsTemplate = (_props: ColorSwatchProps) => (
     <ColorSwatch aria-label="Amber" color="#F59E0B" />
     <ColorSwatch aria-label="Green" color="#10B981" />
     <ColorSwatch aria-label="Fuchsia" color="#D946EF" />
+  </div>
+);
+
+const SizesTemplate = (props: ColorSwatchProps) => (
+  <div className="flex items-center gap-3">
+    <ColorSwatch {...props} color="#0485F7" size="xs" />
+    <ColorSwatch {...props} color="#EF4444" size="sm" />
+    <ColorSwatch {...props} color="#F59E0B" size="md" />
+    <ColorSwatch {...props} color="#10B981" size="lg" />
+    <ColorSwatch {...props} color="#D946EF" size="xl" />
   </div>
 );
 

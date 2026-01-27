@@ -6,7 +6,7 @@ links:
   rac: ColorSwatch
   source: color-swatch/color-swatch.tsx
   styles: color-swatch.css
-  storybook: Components/DataDisplay/ColorSwatch
+  storybook: Components/Colors/ColorSwatch
 ---
 
 ## Import
@@ -23,23 +23,17 @@ import { ColorSwatch } from '@heroui/react';
 
 ### Sizes
 
-The ColorSwatch component supports multiple sizes: `xs`, `sm`, `md` (default), `lg`, and `xl`.
-
 <ComponentPreview
   name="color-swatch-sizes"
 />
 
 ### Shapes
 
-ColorSwatch can be displayed as a `circle` (default) or `square`.
-
 <ComponentPreview
   name="color-swatch-shapes"
 />
 
 ### Transparency
-
-ColorSwatch displays a checkered background pattern to indicate transparency when using colors with alpha values.
 
 <ComponentPreview
   name="color-swatch-transparency"
@@ -51,6 +45,14 @@ You can use the `style` render props to access the color value and create custom
 
 <ComponentPreview
   name="color-swatch-custom-styles"
+/>
+
+### Accessibility
+
+Use `colorName` to provide a custom accessible name for the color, and `aria-label` to add context about how the color is used.
+
+<ComponentPreview
+  name="color-swatch-accessibility"
 />
 
 <RelatedComponents component="color-swatch" />

@@ -99,7 +99,7 @@ const componentsMap: Record<string, ComponentInfo> = {
     title: "CloseButton",
   },
   colorswatch: {
-    category: "display",
+    category: "colors",
     description: "Visual preview of a color value",
     href: "/docs/react/components/color-swatch",
     name: "colorswatch",
