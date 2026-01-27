@@ -4,6 +4,7 @@ import {tv} from "tailwind-variants";
 
 export const colorSwatchPickerVariants = tv({
   defaultVariants: {
+    layout: "grid",
     size: "md",
     variant: "circle",
   },
@@ -13,6 +14,14 @@ export const colorSwatchPickerVariants = tv({
     swatch: "color-swatch-picker__swatch",
   },
   variants: {
+    layout: {
+      grid: {
+        base: "color-swatch-picker--grid",
+      },
+      stack: {
+        base: "color-swatch-picker--stack",
+      },
+    },
     size: {
       lg: {
         base: "color-swatch-picker--lg",

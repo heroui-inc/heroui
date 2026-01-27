@@ -31,11 +31,15 @@ interface ColorSwatchPickerRootProps
 const ColorSwatchPickerRoot = ({
   children,
   className,
+  layout,
   size,
   variant,
   ...props
 }: ColorSwatchPickerRootProps) => {
-  const slots = React.useMemo(() => colorSwatchPickerVariants({size, variant}), [size, variant]);
+  const slots = React.useMemo(
+    () => colorSwatchPickerVariants({layout, size, variant}),
+    [layout, size, variant],
+  );
 
   return (
     <ColorSwatchPickerContext value={{slots}}>

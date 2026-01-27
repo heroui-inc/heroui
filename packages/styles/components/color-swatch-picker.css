@@ -5,9 +5,6 @@
 /* Base styles */
 .color-swatch-picker {
   @apply flex flex-wrap items-center gap-2;
-  &[data-layout="stack"] {
-    @apply flex-col;
-  }
 }
 
 /* ==========================================================================
@@ -71,6 +68,18 @@
       transform: scale(1.1);
     }
   }
+}
+
+/* ==========================================================================
+   Layout variants
+   ========================================================================== */
+
+.color-swatch-picker--grid {
+  /* Default is already grid (flex-wrap) - no additional styles needed */
+}
+
+.color-swatch-picker--stack {
+  @apply flex-col;
 }
 
 /* ==========================================================================
