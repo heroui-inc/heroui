@@ -14,6 +14,7 @@ export * from "./checkbox-group";
 export * from "./chip";
 export * from "./color-swatch";
 export * from "./close-button";
+export * from "./color-swatch-picker";
 export * from "./combobox";
 export * from "./date-field";
 export * from "./date-input-group";

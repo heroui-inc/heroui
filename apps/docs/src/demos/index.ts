@@ -15,6 +15,7 @@ import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as ColorSwatchDemos from "./color-swatch";
+import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combobox";
 import * as DateFieldDemos from "./date-field";
 import * as DescriptionDemos from "./description";
@@ -456,6 +457,35 @@ export const demos: Record<string, DemoItem> = {
   "close-button-interactive": {
     component: CloseButtonDemos.Interactive,
     file: "close-button/interactive.tsx",
+  },
+  // ColorSwatchPicker demos
+  "color-swatch-picker-basic": {
+    component: ColorSwatchPickerDemos.Basic,
+    file: "color-swatch-picker/basic.tsx",
+  },
+  "color-swatch-picker-sizes": {
+    component: ColorSwatchPickerDemos.Sizes,
+    file: "color-swatch-picker/sizes.tsx",
+  },
+  "color-swatch-picker-variants": {
+    component: ColorSwatchPickerDemos.Variants,
+    file: "color-swatch-picker/variants.tsx",
+  },
+  "color-swatch-picker-stack-layout": {
+    component: ColorSwatchPickerDemos.StackLayout,
+    file: "color-swatch-picker/stack-layout.tsx",
+  },
+  "color-swatch-picker-controlled": {
+    component: ColorSwatchPickerDemos.Controlled,
+    file: "color-swatch-picker/controlled.tsx",
+  },
+  "color-swatch-picker-disabled": {
+    component: ColorSwatchPickerDemos.Disabled,
+    file: "color-swatch-picker/disabled.tsx",
+  },
+  "color-swatch-picker-default-value": {
+    component: ColorSwatchPickerDemos.DefaultValue,
+    file: "color-swatch-picker/default-value.tsx",
   },
   // Autocomplete demos
   "autocomplete-default": {

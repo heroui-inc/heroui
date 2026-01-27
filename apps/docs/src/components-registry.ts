@@ -101,9 +101,16 @@ const componentsMap: Record<string, ComponentInfo> = {
   colorswatch: {
     category: "colors",
     description: "Visual preview of a color value",
-    href: "/docs/react/components/color-swatch",
+    href: "/docs/components/color-swatch",
     name: "colorswatch",
     title: "ColorSwatch",
+  },
+  colorswatchpicker: {
+    category: "colors",
+    description: "Color swatch selection from a list of colors",
+    href: "/docs/components/color-swatch-picker",
+    name: "colorswatchpicker",
+    title: "ColorSwatchPicker",
   },
   combobox: {
     category: "forms",
@@ -411,6 +418,8 @@ const componentRelationships: Record<string, string[]> = {
   ],
   chip: ["avatar", "closebutton", "separator"],
   closebutton: ["alert", "alertdialog", "chip", "modal"],
+  colorswatch: ["colorswatchpicker"],
+  colorswatchpicker: ["colorswatch"],
   combobox: [
     "listbox",
     "popover",
