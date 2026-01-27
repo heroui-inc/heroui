@@ -16,8 +16,8 @@ export function ColorSwatchCustomStyles() {
               key={color}
               color={color}
               size="xl"
-              style={({color: c}) => ({
-                boxShadow: `0 0 12px 2px ${c.toString("css")}90`,
+              style={() => ({
+                boxShadow: `0 0 20px 2px ${color}`,
               })}
             />
           ))}
