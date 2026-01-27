@@ -24,7 +24,9 @@
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
-  transition: border-color 100ms var(--ease-out);
+  transition:
+    border-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   /* Focus state */
