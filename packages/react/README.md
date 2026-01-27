@@ -16,7 +16,15 @@
   </a>
 </p>
 
+> **Note:** You're currently viewing **HeroUI v3** (beta), which is in active development and close to stable. If you need v2, check out the [`v2` branch](https://github.com/heroui-inc/heroui/tree/v2).
+
 HeroUI is the modern UI library built to help you move fast, stay consistent, and deliver delightful user experiences.
+
+## Version Status
+
+**HeroUI v3** is currently in **beta** and approaching stable release. We're actively working on finalizing v3 and expect to reach stable status soon.
+
+If you need v2, you can find it on the [`v2` branch](https://github.com/heroui-inc/heroui/tree/v2). Your feedback and contributions to v3 are welcome!
 
 ## Getting Started
 
