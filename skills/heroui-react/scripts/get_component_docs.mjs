@@ -12,7 +12,7 @@
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
 const FALLBACK_BASE = "https://v3.heroui.com";
-const APP_PARAM = "app=skills";
+const APP_PARAM = "app=react-skills";
 
 /**
  * Convert PascalCase to kebab-case.
