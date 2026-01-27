@@ -12,7 +12,7 @@
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
 const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/heroui-inc/heroui/refs/heads/v3";
-const APP_PARAM = "app=skills";
+const APP_PARAM = "app=react-skills";
 
 /**
  * Fetch data from HeroUI API with app parameter for analytics.
@@ -105,7 +105,7 @@ async function main() {
 
   // Try API first
   console.error(`# Fetching source code for: ${components.join(", ")}...`);
-  const data = await fetchApi("/components/source", "POST", {components});
+  const data = await fetchApi("/v1/components/source", "POST", {components});
 
   if (data && data.results) {
     for (const result of data.results) {

@@ -10,7 +10,7 @@
  */
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
-const APP_PARAM = "app=skills";
+const APP_PARAM = "app=react-skills";
 const LLMS_TXT_URL = "https://v3.heroui.com/react/llms.txt";
 
 /**
@@ -109,7 +109,7 @@ async function fetchFallback() {
  * Main function to list all available HeroUI v3 components.
  */
 async function main() {
-  let data = await fetchApi("/components");
+  let data = await fetchApi("/v1/components");
 
   // Check if API returned valid data with components
   if (!data || !data.components || data.components.length === 0) {
@@ -127,7 +127,7 @@ async function main() {
 
   // Print summary to stderr for human readability
   console.error(
-    `\n# Found ${data.components.length} components (v${data.latestVersion || "unknown"})`,
+    `\n# Found ${data.components.length} components (${data.latestVersion || "unknown"})`,
   );
 }
 

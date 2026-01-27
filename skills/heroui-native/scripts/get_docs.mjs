@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * Get non-component HeroUI documentation (guides, theming, releases).
+ * Get non-component HeroUI Native documentation (guides, theming, releases).
  *
  * Usage:
- *   node get_docs.mjs /docs/react/getting-started/theming
- *   node get_docs.mjs /docs/react/releases/v3-0-0-beta-3
+ *   node get_docs.mjs /docs/native/getting-started/theming
+ *   node get_docs.mjs /docs/native/releases/beta-12
  *
  * Output:
  *   MDX documentation content
@@ -12,21 +12,30 @@
  * Note: For component docs, use get_component_docs.mjs instead.
  */
 
-const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
+const API_BASE = process.env.HEROUI_NATIVE_API_BASE || "https://native-mcp-api.heroui.com";
 const FALLBACK_BASE = "https://v3.heroui.com";
-const APP_PARAM = "app=skills";
+const APP_PARAM = "app=native-skills";
 
 /**
- * Fetch documentation from HeroUI API.
+ * Fetch documentation from HeroUI Native API.
+ * Uses v1 endpoint pattern: /v1/docs/:path
  */
 async function fetchApi(path) {
-  // Remove leading slash if present for API call
-  const cleanPath = path.replace(/^\//, "");
-  const url = `${API_BASE}/${cleanPath}?${APP_PARAM}`;
+  // The v1 API expects path without /docs/ prefix
+  // Input: /docs/native/getting-started/theming
+  // API expects: native/getting-started/theming (route is /v1/docs/:path(*))
+  let apiPath = path.startsWith("/docs/")
+    ? path.slice(6) // Remove /docs/ prefix
+    : path.startsWith("/")
+      ? path.slice(1) // Remove leading /
+      : path;
+
+  const separator = "?";
+  const url = `${API_BASE}/v1/docs/${apiPath}${separator}${APP_PARAM}`;
 
   try {
     const response = await fetch(url, {
-      headers: {"User-Agent": "HeroUI-Skill/1.0"},
+      headers: {"User-Agent": "HeroUI-Native-Skill/1.0"},
       signal: AbortSignal.timeout(30000),
     });
 
@@ -59,7 +68,7 @@ async function fetchFallback(path) {
 
   try {
     const response = await fetch(url, {
-      headers: {"User-Agent": "HeroUI-Skill/1.0"},
+      headers: {"User-Agent": "HeroUI-Native-Skill/1.0"},
       signal: AbortSignal.timeout(30000),
     });
 
@@ -89,13 +98,13 @@ async function main() {
 
   if (args.length === 0) {
     console.error("Usage: node get_docs.mjs <path>");
-    console.error("Example: node get_docs.mjs /docs/react/getting-started/theming");
+    console.error("Example: node get_docs.mjs /docs/native/getting-started/theming");
     console.error();
     console.error("Available paths include:");
-    console.error("  /docs/react/getting-started/theming");
-    console.error("  /docs/react/getting-started/colors");
-    console.error("  /docs/react/getting-started/animations");
-    console.error("  /docs/react/releases/v3-0-0-beta-3");
+    console.error("  /docs/native/getting-started/theming");
+    console.error("  /docs/native/getting-started/colors");
+    console.error("  /docs/native/getting-started/styling");
+    console.error("  /docs/native/releases/beta-12");
     console.error();
     console.error("Note: For component docs, use get_component_docs.mjs instead.");
     process.exit(1);
@@ -112,7 +121,13 @@ async function main() {
     console.error(`# Example: node get_component_docs.mjs ${titleCase}`);
   }
 
-  console.error(`# Fetching documentation for ${path}...`);
+  // Validate Native path
+  if (!path.startsWith("/docs/native/")) {
+    console.error("# Warning: Native documentation paths should start with /docs/native/");
+    console.error(`# Provided path: ${path}`);
+  }
+
+  console.error(`# Fetching Native documentation for ${path}...`);
 
   // Try API first
   const data = await fetchApi(path);

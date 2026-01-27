@@ -43,6 +43,13 @@ const config = defineConfig([
     ],
   },
   ...baseConfig,
+  // Allow console usage in skill scripts
+  {
+    files: ["skills/**/*.mjs"],
+    rules: {
+      "no-console": "off",
+    },
+  },
 ]);
 
 export default config;

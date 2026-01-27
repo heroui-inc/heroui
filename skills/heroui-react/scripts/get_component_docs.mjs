@@ -12,7 +12,7 @@
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
 const FALLBACK_BASE = "https://v3.heroui.com";
-const APP_PARAM = "app=skills";
+const APP_PARAM = "app=react-skills";
 
 /**
  * Convert PascalCase to kebab-case.
@@ -27,15 +27,25 @@ function toKebabCase(name) {
 /**
  * Fetch data from HeroUI API with app parameter for analytics.
  */
-async function fetchApi(endpoint) {
+async function fetchApi(endpoint, method = "GET", body = null) {
   const separator = endpoint.includes("?") ? "&" : "?";
   const url = `${API_BASE}${endpoint}${separator}${APP_PARAM}`;
 
   try {
-    const response = await fetch(url, {
-      headers: {"User-Agent": "HeroUI-Skill/1.0"},
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "HeroUI-Skill/1.0",
+      },
+      method,
       signal: AbortSignal.timeout(30000),
-    });
+    };
+
+    if (body) {
+      options.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(url, options);
 
     if (!response.ok) {
       return null;
@@ -79,25 +89,6 @@ async function fetchFallback(component) {
 }
 
 /**
- * Get documentation for a single component.
- */
-async function getComponentDocs(component) {
-  // Try API first
-  const data = await fetchApi(`/components/${component}/docs`);
-
-  if (data && data.content) {
-    data.source = "api";
-
-    return data;
-  }
-
-  // Fallback to direct fetch
-  console.error(`# API failed for ${component}, using fallback...`);
-
-  return fetchFallback(component);
-}
-
-/**
  * Main function to get component documentation.
  */
 async function main() {
@@ -110,11 +101,39 @@ async function main() {
   }
 
   const components = args;
+
+  // Try API first - use POST /v1/components/docs for batch requests
+  console.error(`# Fetching docs for: ${components.join(", ")}...`);
+  const data = await fetchApi("/v1/components/docs", "POST", {components});
+
+  if (data && data.results) {
+    // Output results
+    if (data.results.length === 1) {
+      // Single component - output content directly for easier reading
+      const result = data.results[0];
+
+      if (result.content) {
+        console.log(result.content);
+      } else if (result.error) {
+        console.error(`# Error for ${result.component}: ${result.error}`);
+        console.log(JSON.stringify(result, null, 2));
+      } else {
+        console.log(JSON.stringify(result, null, 2));
+      }
+    } else {
+      // Multiple components - output as JSON array
+      console.log(JSON.stringify(data, null, 2));
+    }
+
+    return;
+  }
+
+  // Fallback to individual component fetches
+  console.error("# API failed, using fallback...");
   const results = [];
 
   for (const component of components) {
-    console.error(`# Fetching docs for ${component}...`);
-    const result = await getComponentDocs(component);
+    const result = await fetchFallback(component);
 
     results.push(result);
   }

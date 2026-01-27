@@ -779,6 +779,10 @@ export const demos: Record<string, DemoItem> = {
     component: DateFieldDemos.FullWidth,
     file: "date-field/full-width.tsx",
   },
+  "date-field-granularity": {
+    component: DateFieldDemos.Granularity,
+    file: "date-field/granularity.tsx",
+  },
   "date-field-with-validation": {
     component: DateFieldDemos.WithValidation,
     file: "date-field/with-validation.tsx",
