@@ -173,11 +173,6 @@ export const Default = {
   render: Template,
 };
 
-export const Sizes = {
-  args: defaultArgs,
-  render: SizesTemplate,
-};
-
 export const Shapes = {
   args: defaultArgs,
   render: ShapesTemplate,
@@ -186,6 +181,11 @@ export const Shapes = {
 export const Colors = {
   args: defaultArgs,
   render: ColorsTemplate,
+};
+
+export const Sizes = {
+  args: defaultArgs,
+  render: SizesTemplate,
 };
 
 export const Transparency = {
