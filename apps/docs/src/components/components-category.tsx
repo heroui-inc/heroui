@@ -77,6 +77,10 @@ const COMPONENT_GROUPS = [
     components: ["chip"],
   },
   {
+    category: "Colors",
+    components: ["color-swatch"],
+  },
+  {
     category: "Utilities",
     components: ["scroll-shadow"],
   },

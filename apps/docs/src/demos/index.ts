@@ -14,6 +14,7 @@ import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as ColorSwatchDemos from "./color-swatch";
 import * as ComboBoxDemos from "./combobox";
 import * as DateFieldDemos from "./date-field";
 import * as DescriptionDemos from "./description";
@@ -417,6 +418,31 @@ export const demos: Record<string, DemoItem> = {
   "chip-statuses": {
     component: ChipDemos.Statuses,
     file: "chip/statuses.tsx",
+  },
+  // ColorSwatch demos
+  "color-swatch-basic": {
+    component: ColorSwatchDemos.Basic,
+    file: "color-swatch/basic.tsx",
+  },
+  "color-swatch-sizes": {
+    component: ColorSwatchDemos.Sizes,
+    file: "color-swatch/sizes.tsx",
+  },
+  "color-swatch-shapes": {
+    component: ColorSwatchDemos.Shapes,
+    file: "color-swatch/shapes.tsx",
+  },
+  "color-swatch-transparency": {
+    component: ColorSwatchDemos.Transparency,
+    file: "color-swatch/transparency.tsx",
+  },
+  "color-swatch-custom-styles": {
+    component: ColorSwatchDemos.CustomStyles,
+    file: "color-swatch/custom-styles.tsx",
+  },
+  "color-swatch-accessibility": {
+    component: ColorSwatchDemos.Accessibility,
+    file: "color-swatch/accessibility.tsx",
   },
   // CloseButton demos
   "close-button-default": {

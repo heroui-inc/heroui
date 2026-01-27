@@ -20,6 +20,7 @@
     "(forms)/checkbox-group",
     "(data-display)/chip",
     "(buttons)/close-button",
+    "(colors)/color-swatch",
     "(pickers)/combo-box",
     "(forms)/date-field",
     "(forms)/description",
