@@ -1,15 +1,13 @@
 "use client";
 
-import {Button, ButtonGroup, Description, Label, ListBox, ListBoxItem} from "@heroui/react";
-import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
+import {Button, ButtonGroup, Description, Dropdown, Label} from "@heroui/react";
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
 import {ChevronDown} from "lucide-react";
 import {useMemo, useState} from "react";
-import {cn, tv} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 import {ClaudeIcon, CursorIcon, MarkdownIcon, OpenAIIcon, VSCodeIcon} from "@/icons/dev";
 import {__DEV__} from "@/utils/env";
-import {docsButtonVariants} from "@/utils/variants";
 
 import {Iconify} from "../iconify";
 
@@ -33,10 +31,6 @@ function markdownUrlToSlug(markdownUrl: string): string {
 
   return slug || "index";
 }
-
-const optionVariants = tv({
-  base: "inline-flex items-center gap-2 rounded-lg text-sm [&_svg]:flex-none [&_svg]:text-muted",
-});
 
 export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; githubUrl: string}) {
   const items = useMemo(() => {
@@ -134,39 +128,47 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
   });
 
   return (
-    <ButtonGroup variant="tertiary">
-      <Button isDisabled={isLoading} onClick={onClick}>
-        <Iconify
-          className="absolute left-2.5 scale-50 opacity-0 transition-all data-[visible=true]:scale-100 data-[visible=true]:opacity-100"
-          data-visible={checked}
-          icon="check"
-        />
-        <Iconify
-          className="scale-50 opacity-0 transition-all data-[visible=true]:scale-100 data-[visible=true]:opacity-100"
-          data-visible={!checked}
-          icon="copy"
-        />
-        {checked ? "Copied" : "Copy Markdown"}
+    <ButtonGroup size="md" variant="tertiary">
+      <Button className={isLoading ? "animate-pulse" : ""} isDisabled={isLoading} onClick={onClick}>
+        {checked ? (
+          <>
+            <Iconify icon="check" />
+            Copied
+          </>
+        ) : (
+          <>
+            <Iconify icon="copy" />
+            Copy Markdown
+          </>
+        )}
       </Button>
-      <Popover open={isOpen} onOpenChange={setOpen}>
-        <PopoverTrigger className={docsButtonVariants({size: "md"})}>
+      <Dropdown isOpen={isOpen} onOpenChange={setOpen}>
+        <Button isIconOnly size="md" variant="tertiary">
           <ChevronDown
             className={cn(
               "text-fd-muted-foreground size-3.5 transition-transform",
               isOpen && "rotate-180",
             )}
           />
-        </PopoverTrigger>
-        <PopoverContent align="end" className="flex flex-col overflow-auto p-1">
-          <ListBox>
+        </Button>
+        <Dropdown.Popover placement="bottom end">
+          <Dropdown.Menu
+            onAction={(key) => {
+              const item = items.find((i) => i.key === key);
+
+              if (item?.href) {
+                window.open(item.href, "_blank", "noreferrer noopener");
+              }
+            }}
+          >
             {items.map((item) => (
-              <ListBoxItem
+              <Dropdown.Item
                 key={item.key}
-                className={cn(optionVariants())}
                 href={item.href}
                 id={item.key}
                 rel="noreferrer noopener"
                 target="_blank"
+                textValue={item.title}
               >
                 {item.icon}
                 <div className="flex w-full flex-col">
@@ -176,11 +178,11 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
                 {(item.key === "chatgpt" || item.key === "claude") && (
                   <Iconify className="text-foreground/70" icon="arrow-up-right-from-square" />
                 )}
-              </ListBoxItem>
+              </Dropdown.Item>
             ))}
-          </ListBox>
-        </PopoverContent>
-      </Popover>
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown>
     </ButtonGroup>
   );
 }
