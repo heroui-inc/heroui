@@ -26,8 +26,8 @@ if [ -d "$HOME/.claude" ]; then
   echo "✓ Installed ${SKILL_NAME} skill for Claude Code"
   INSTALLED=$((INSTALLED + 1))
 
-  # Cleanup old heroui skill
-  if [ -d "$HOME/.claude/skills/heroui" ]; then
+  # Cleanup old heroui skill (only when installing heroui-react)
+  if [ "$SKILL_NAME" = "heroui-react" ] && [ -d "$HOME/.claude/skills/heroui" ]; then
     rm -rf "$HOME/.claude/skills/heroui"
     echo "✓ Removed old heroui skill"
   fi
@@ -40,17 +40,19 @@ if [ -d "$HOME/.cursor" ]; then
   echo "✓ Installed ${SKILL_NAME} skill for Cursor"
   INSTALLED=$((INSTALLED + 1))
 
-  # Cleanup old heroui skill and command
-  OLD_SKILL_FOUND=0
-  if [ -d "$HOME/.cursor/skills/heroui" ]; then
-    rm -rf "$HOME/.cursor/skills/heroui"
-    echo "✓ Removed old heroui skill"
-    OLD_SKILL_FOUND=1
-  fi
+  # Cleanup old heroui skill and command (only when installing heroui-react)
+  if [ "$SKILL_NAME" = "heroui-react" ]; then
+    OLD_SKILL_FOUND=0
+    if [ -d "$HOME/.cursor/skills/heroui" ]; then
+      rm -rf "$HOME/.cursor/skills/heroui"
+      echo "✓ Removed old heroui skill"
+      OLD_SKILL_FOUND=1
+    fi
 
-  if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.cursor/commands/heroui.md" ]; then
-    rm -f "$HOME/.cursor/commands/heroui.md"
-    echo "✓ Removed old /heroui command"
+    if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.cursor/commands/heroui.md" ]; then
+      rm -f "$HOME/.cursor/commands/heroui.md"
+      echo "✓ Removed old /heroui command"
+    fi
   fi
 fi
 
@@ -61,17 +63,19 @@ if command -v opencode &> /dev/null || [ -d "$HOME/.config/opencode" ]; then
   echo "✓ Installed ${SKILL_NAME} skill for OpenCode"
   INSTALLED=$((INSTALLED + 1))
 
-  # Cleanup old heroui skill and command
-  OLD_SKILL_FOUND=0
-  if [ -d "$HOME/.config/opencode/skill/heroui" ]; then
-    rm -rf "$HOME/.config/opencode/skill/heroui"
-    echo "✓ Removed old heroui skill"
-    OLD_SKILL_FOUND=1
-  fi
+  # Cleanup old heroui skill and command (only when installing heroui-react)
+  if [ "$SKILL_NAME" = "heroui-react" ]; then
+    OLD_SKILL_FOUND=0
+    if [ -d "$HOME/.config/opencode/skill/heroui" ]; then
+      rm -rf "$HOME/.config/opencode/skill/heroui"
+      echo "✓ Removed old heroui skill"
+      OLD_SKILL_FOUND=1
+    fi
 
-  if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.config/opencode/command/heroui.md" ]; then
-    rm -f "$HOME/.config/opencode/command/heroui.md"
-    echo "✓ Removed old /heroui command"
+    if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.config/opencode/command/heroui.md" ]; then
+      rm -f "$HOME/.config/opencode/command/heroui.md"
+      echo "✓ Removed old /heroui command"
+    fi
   fi
 fi
 
@@ -82,17 +86,19 @@ if command -v codex &> /dev/null || [ -d "$HOME/.codex" ]; then
   echo "✓ Installed ${SKILL_NAME} skill for Codex"
   INSTALLED=$((INSTALLED + 1))
 
-  # Cleanup old heroui skill and command
-  OLD_SKILL_FOUND=0
-  if [ -d "$HOME/.codex/skills/heroui" ]; then
-    rm -rf "$HOME/.codex/skills/heroui"
-    echo "✓ Removed old heroui skill"
-    OLD_SKILL_FOUND=1
-  fi
+  # Cleanup old heroui skill and command (only when installing heroui-react)
+  if [ "$SKILL_NAME" = "heroui-react" ]; then
+    OLD_SKILL_FOUND=0
+    if [ -d "$HOME/.codex/skills/heroui" ]; then
+      rm -rf "$HOME/.codex/skills/heroui"
+      echo "✓ Removed old heroui skill"
+      OLD_SKILL_FOUND=1
+    fi
 
-  if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.codex/prompts/heroui.md" ]; then
-    rm -f "$HOME/.codex/prompts/heroui.md"
-    echo "✓ Removed old /heroui command"
+    if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.codex/prompts/heroui.md" ]; then
+      rm -f "$HOME/.codex/prompts/heroui.md"
+      echo "✓ Removed old /heroui command"
+    fi
   fi
 fi
 
@@ -103,17 +109,19 @@ if [ -d "$HOME/.gemini" ]; then
   echo "✓ Installed ${SKILL_NAME} skill for Antigravity"
   INSTALLED=$((INSTALLED + 1))
 
-  # Cleanup old heroui skill and command
-  OLD_SKILL_FOUND=0
-  if [ -d "$HOME/.gemini/antigravity/skills/heroui" ]; then
-    rm -rf "$HOME/.gemini/antigravity/skills/heroui"
-    echo "✓ Removed old heroui skill"
-    OLD_SKILL_FOUND=1
-  fi
+  # Cleanup old heroui skill and command (only when installing heroui-react)
+  if [ "$SKILL_NAME" = "heroui-react" ]; then
+    OLD_SKILL_FOUND=0
+    if [ -d "$HOME/.gemini/antigravity/skills/heroui" ]; then
+      rm -rf "$HOME/.gemini/antigravity/skills/heroui"
+      echo "✓ Removed old heroui skill"
+      OLD_SKILL_FOUND=1
+    fi
 
-  if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.gemini/antigravity/global_workflows/heroui.md" ]; then
-    rm -f "$HOME/.gemini/antigravity/global_workflows/heroui.md"
-    echo "✓ Removed old /heroui command"
+    if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.gemini/antigravity/global_workflows/heroui.md" ]; then
+      rm -f "$HOME/.gemini/antigravity/global_workflows/heroui.md"
+      echo "✓ Removed old /heroui command"
+    fi
   fi
 fi
 

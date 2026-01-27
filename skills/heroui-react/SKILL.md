@@ -1,6 +1,9 @@
 ---
 name: heroui-react
 description: "HeroUI v3 React component library (Tailwind CSS v4 + React Aria). Use when working with HeroUI components, installing HeroUI, customizing HeroUI themes, or accessing HeroUI component documentation. Keywords: HeroUI, Hero UI, heroui, @heroui/react, @heroui/styles."
+metadata:
+  author: heroui
+  version: "2.0.0"
 ---
 
 # HeroUI v3 React Development Guide
