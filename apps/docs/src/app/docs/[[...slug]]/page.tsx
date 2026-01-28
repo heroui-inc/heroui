@@ -21,7 +21,6 @@ import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
-import {RAW_DOCS_CONTENT_PATH} from "@/utils/constants";
 import {
   extractGithubFromMDX,
   extractImageFromMDX,
@@ -90,10 +89,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
           </DocsTitle>
           {page.data.toc.length > 0 && (
             <div className="flex items-center gap-2">
-              <ViewOptions
-                githubUrl={`${RAW_DOCS_CONTENT_PATH}/${page.path}`}
-                markdownUrl={`${page.url}.mdx`}
-              />
+              <ViewOptions markdownUrl={`${page.url}.mdx`} />
             </div>
           )}
         </div>

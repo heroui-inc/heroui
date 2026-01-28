@@ -32,7 +32,7 @@ function markdownUrlToSlug(markdownUrl: string): string {
   return slug || "index";
 }
 
-export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; githubUrl: string}) {
+export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
   const items = useMemo(() => {
     let fullMarkdownUrl = "";
 
@@ -51,7 +51,7 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
     return [
       {
         description: "View page as Markdown format",
-        href: githubUrl,
+        href: fullMarkdownUrl,
         icon: <MarkdownIcon size={18} />,
         key: "markdown",
         title: "View as Markdown",
@@ -85,7 +85,7 @@ export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; gith
         title: "Open in Claude",
       },
     ];
-  }, [githubUrl, markdownUrl]);
+  }, [markdownUrl]);
 
   const [isLoading, setLoading] = useState(false);
 
