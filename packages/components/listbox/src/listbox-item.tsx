@@ -48,7 +48,7 @@ const ListboxItem = (props: ListboxItemProps) => {
 
   return (
     <Component {...getItemProps()}>
-      {startContent}
+      {startContent && <span data-slot="startContent">{startContent}</span>}
       {description ? (
         <div {...getWrapperProps()}>
           <span {...getLabelProps()}>{rendered}</span>
@@ -60,7 +60,7 @@ const ListboxItem = (props: ListboxItemProps) => {
       {isSelectable && !hideSelectedIcon && (
         <span {...getSelectedIconProps()}>{selectedContent}</span>
       )}
-      {endContent}
+      {endContent && <span data-slot="endContent">{endContent}</span>}
     </Component>
   );
 };
