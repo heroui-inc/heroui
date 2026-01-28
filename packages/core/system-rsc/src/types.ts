@@ -40,7 +40,7 @@ export type MergeWithAs<
   AsComponent extends As = As,
 > = (RightJoinProps<ComponentProps, AdditionalProps> | RightJoinProps<AsProps, AdditionalProps>) & {
   as?: AsComponent;
-};
+} & React.RefAttributes<any>;
 
 export type InternalForwardRefRenderFunction<
   Component extends As,

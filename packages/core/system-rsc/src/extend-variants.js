@@ -3,22 +3,38 @@ import {tv, cn} from "@heroui/theme";
 
 import {mapPropsVariants} from "./utils";
 
+/**
+ * Extracts slot names from variant configurations.
+ * Traverses: variants -> variant groups -> variant configs -> slot names
+ * @param {Object} variants - Nested object: { variantName: { value: { slotName: "...", ... } } }
+ * @returns {Object} Map of slot names to empty strings
+ */
 function getSlots(variants) {
-  return variants
-    ? Object.values(variants)
-        .flatMap(Object.values)
-        .reduce((acc, slot) => {
-          if (typeof slot === "object" && slot !== null && !(slot instanceof String)) {
-            Object.keys(slot).forEach((key) => {
-              if (!acc.hasOwnProperty(key)) {
-                acc[key] = "";
-              }
-            });
-          }
+  if (!variants || typeof variants !== "object") return {};
 
-          return acc;
-        }, {})
-    : {};
+  const acc = Object.create(null);
+
+  for (const group of Object.values(variants)) {
+    if (!group || typeof group !== "object") continue;
+
+    for (const config of Object.values(group)) {
+      // Skip non-objects, arrays (which would yield numeric indices), and String objects
+      if (
+        !config ||
+        typeof config !== "object" ||
+        Array.isArray(config) ||
+        config instanceof String
+      ) {
+        continue;
+      }
+
+      for (const slotName of Object.keys(config)) {
+        acc[slotName] = "";
+      }
+    }
+  }
+
+  return acc;
 }
 
 function getClassNamesWithProps({
@@ -114,22 +130,25 @@ export function extendVariants(BaseComponent, styles = {}, opts = {}) {
   const hasSlots = typeof slots === "object" && Object.keys(slots).length !== 0;
 
   const ForwardedComponent = React.forwardRef((originalProps = {}, ref) => {
+    // Extract 'as' prop if present
+    const {as: Component = BaseComponent, ...restProps} = originalProps;
+
     const newProps = React.useMemo(() =>
       getClassNamesWithProps(
         {
           slots,
           variants,
           compoundVariants,
-          props: originalProps,
+          props: restProps, // Use restProps without 'as'
           defaultVariants,
           hasSlots,
           opts,
         },
-        [originalProps],
+        [restProps],
       ),
     );
 
-    return React.createElement(BaseComponent, {...originalProps, ...newProps, ref});
+    return React.createElement(Component, {...restProps, ...newProps, ref});
   });
 
   // Add collection node function for collection-based components
