@@ -1,5 +1,12 @@
 # @heroui/table
 
+## 2.2.30
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/checkbox@2.3.30
+
 ## 2.2.29
 
 ### Patch Changes

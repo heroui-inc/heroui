@@ -1,5 +1,14 @@
 # @heroui/dropdown
 
+## 2.3.30
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/menu@2.2.29
+  - @heroui/popover@2.3.30
+  - @heroui/aria-utils@2.2.27
+
 ## 2.3.29
 
 ### Patch Changes
