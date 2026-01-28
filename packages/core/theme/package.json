@@ -49,7 +49,6 @@
     "color": "^4.2.3",
     "color2k": "^2.0.3",
     "deepmerge": "4.3.1",
-    "flat": "^5.0.2",
     "tailwind-variants": "3.2.2",
     "tailwind-merge": "3.4.0",
     "@heroui/shared-utils": "workspace:*"
