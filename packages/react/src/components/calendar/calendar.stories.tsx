@@ -23,7 +23,7 @@ const meta: Meta<typeof Calendar> = {
   parameters: {
     layout: "centered",
   },
-  title: "📝 ToDo/Calendar",
+  title: "Components/Date and Time/Calendar",
 };
 
 export default meta;
