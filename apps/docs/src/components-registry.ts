@@ -115,7 +115,7 @@ const componentsMap: Record<string, ComponentInfo> = {
   combobox: {
     category: "forms",
     description: "Text input with searchable dropdown list",
-    href: "/docs/components/combobox",
+    href: "/docs/components/combo-box",
     name: "combobox",
     title: "ComboBox",
   },
