@@ -14,6 +14,7 @@ import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as ColorFieldDemos from "./color-field";
 import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combobox";
@@ -419,6 +420,51 @@ export const demos: Record<string, DemoItem> = {
   "chip-statuses": {
     component: ChipDemos.Statuses,
     file: "chip/statuses.tsx",
+  },
+  // ColorField demos
+  "color-field-basic": {
+    component: ColorFieldDemos.Basic,
+    file: "color-field/basic.tsx",
+  },
+  "color-field-channel-editing": {
+    component: ColorFieldDemos.ChannelEditing,
+    file: "color-field/channel-editing.tsx",
+  },
+  "color-field-controlled": {
+    component: ColorFieldDemos.Controlled,
+    file: "color-field/controlled.tsx",
+  },
+  "color-field-disabled": {
+    component: ColorFieldDemos.Disabled,
+    file: "color-field/disabled.tsx",
+  },
+  "color-field-form-example": {
+    component: ColorFieldDemos.FormExample,
+    file: "color-field/form-example.tsx",
+  },
+  "color-field-full-width": {
+    component: ColorFieldDemos.FullWidth,
+    file: "color-field/full-width.tsx",
+  },
+  "color-field-invalid": {
+    component: ColorFieldDemos.Invalid,
+    file: "color-field/invalid.tsx",
+  },
+  "color-field-on-surface": {
+    component: ColorFieldDemos.OnSurface,
+    file: "color-field/on-surface.tsx",
+  },
+  "color-field-required": {
+    component: ColorFieldDemos.Required,
+    file: "color-field/required.tsx",
+  },
+  "color-field-variants": {
+    component: ColorFieldDemos.Variants,
+    file: "color-field/variants.tsx",
+  },
+  "color-field-with-description": {
+    component: ColorFieldDemos.WithDescription,
+    file: "color-field/with-description.tsx",
   },
   // ColorSwatch demos
   "color-swatch-basic": {

@@ -78,7 +78,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Colors",
-    components: ["color-swatch", "color-swatch-picker"],
+    components: ["color-field", "color-swatch", "color-swatch-picker"],
   },
   {
     category: "Utilities",
