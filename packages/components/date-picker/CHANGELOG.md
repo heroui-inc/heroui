@@ -1,5 +1,19 @@
 # @heroui/date-picker
 
+## 2.3.31
+
+### Patch Changes
+
+- [#6084](https://github.com/heroui-inc/heroui/pull/6084) [`d5a5c77`](https://github.com/heroui-inc/heroui/commit/d5a5c77ed697e6d4bae99167899a0bcb7194e023) Thanks [@KyZy7](https://github.com/KyZy7)! - Fixed DatePicker not opening when clicking the border area (#5373)
+
+- Updated dependencies []:
+  - @heroui/button@2.2.30
+  - @heroui/calendar@2.2.30
+  - @heroui/date-input@2.3.30
+  - @heroui/form@2.1.30
+  - @heroui/popover@2.3.30
+  - @heroui/aria-utils@2.2.27
+
 ## 2.3.30
 
 ### Patch Changes

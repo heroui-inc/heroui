@@ -1,5 +1,12 @@
 # @heroui/modal
 
+## 2.2.27
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/framer-utils@2.1.26
+
 ## 2.2.26
 
 ### Patch Changes

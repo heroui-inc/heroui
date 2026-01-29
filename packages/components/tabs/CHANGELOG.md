@@ -1,5 +1,12 @@
 # @heroui/tabs
 
+## 2.2.27
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/aria-utils@2.2.27
+
 ## 2.2.26
 
 ### Patch Changes

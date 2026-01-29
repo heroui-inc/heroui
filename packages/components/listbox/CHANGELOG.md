@@ -1,5 +1,15 @@
 # @heroui/listbox
 
+## 2.3.29
+
+### Patch Changes
+
+- [#6060](https://github.com/heroui-inc/heroui/pull/6060) [`7814df7`](https://github.com/heroui-inc/heroui/commit/7814df7cea7d7e527ae3b8c13d17a9843399758b) Thanks [@KumJungMin](https://github.com/KumJungMin)! - prevent option focus from start/end content slots (#5551)
+
+- Updated dependencies []:
+  - @heroui/divider@2.2.22
+  - @heroui/aria-utils@2.2.27
+
 ## 2.3.28
 
 ### Patch Changes

@@ -1,5 +1,60 @@
 # @heroui/react
 
+## 2.8.8
+
+### Patch Changes
+
+- Updated dependencies [[`5ec842b`](https://github.com/heroui-inc/heroui/commit/5ec842b1cf6fff845b7ae7cd8fb876762e62e279), [`7814df7`](https://github.com/heroui-inc/heroui/commit/7814df7cea7d7e527ae3b8c13d17a9843399758b), [`d5a5c77`](https://github.com/heroui-inc/heroui/commit/d5a5c77ed697e6d4bae99167899a0bcb7194e023), [`96b1f49`](https://github.com/heroui-inc/heroui/commit/96b1f498cfa0630b18538901a12db349fb2aaad6), [`5549167`](https://github.com/heroui-inc/heroui/commit/55491670414a78b6a7daec5a7bfd82445aaa4530), [`1f08506`](https://github.com/heroui-inc/heroui/commit/1f085061ed3166b5c20f17c17a0c1494cb489dff)]:
+  - @heroui/image@2.2.19
+  - @heroui/avatar@2.2.25
+  - @heroui/listbox@2.3.29
+  - @heroui/date-picker@2.3.31
+  - @heroui/accordion@2.2.27
+  - @heroui/theme@2.4.26
+  - @heroui/card@2.2.27
+  - @heroui/drawer@2.2.27
+  - @heroui/dropdown@2.3.30
+  - @heroui/autocomplete@2.3.32
+  - @heroui/badge@2.2.18
+  - @heroui/chip@2.2.24
+  - @heroui/navbar@2.2.28
+  - @heroui/select@2.4.31
+  - @heroui/user@2.2.25
+  - @heroui/code@2.2.23
+  - @heroui/divider@2.2.22
+  - @heroui/kbd@2.2.24
+  - @heroui/spacer@2.2.23
+  - @heroui/spinner@2.2.27
+  - @heroui/system@2.4.26
+  - @heroui/alert@2.2.30
+  - @heroui/breadcrumbs@2.2.24
+  - @heroui/button@2.2.30
+  - @heroui/calendar@2.2.30
+  - @heroui/checkbox@2.3.30
+  - @heroui/date-input@2.3.30
+  - @heroui/form@2.1.30
+  - @heroui/input@2.4.31
+  - @heroui/input-otp@2.1.30
+  - @heroui/link@2.2.25
+  - @heroui/menu@2.2.29
+  - @heroui/modal@2.2.27
+  - @heroui/number-input@2.0.21
+  - @heroui/pagination@2.2.26
+  - @heroui/popover@2.3.30
+  - @heroui/progress@2.2.24
+  - @heroui/radio@2.3.30
+  - @heroui/ripple@2.2.21
+  - @heroui/scroll-shadow@2.3.19
+  - @heroui/skeleton@2.2.18
+  - @heroui/slider@2.4.27
+  - @heroui/snippet@2.2.31
+  - @heroui/switch@2.2.26
+  - @heroui/table@2.2.30
+  - @heroui/tabs@2.2.27
+  - @heroui/toast@2.0.20
+  - @heroui/tooltip@2.2.27
+  - @heroui/framer-utils@2.1.26
+
 ## 2.8.7
 
 ### Patch Changes

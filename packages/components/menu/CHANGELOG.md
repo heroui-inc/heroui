@@ -1,5 +1,13 @@
 # @heroui/menu
 
+## 2.2.29
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/divider@2.2.22
+  - @heroui/aria-utils@2.2.27
+
 ## 2.2.28
 
 ### Patch Changes

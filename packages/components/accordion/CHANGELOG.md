@@ -1,5 +1,16 @@
 # @heroui/accordion
 
+## 2.2.27
+
+### Patch Changes
+
+- [#6133](https://github.com/heroui-inc/heroui/pull/6133) [`96b1f49`](https://github.com/heroui-inc/heroui/commit/96b1f498cfa0630b18538901a12db349fb2aaad6) Thanks [@deepansh946](https://github.com/deepansh946)! - Fix newly created dynamic accordion items not responding to clicks (#5825)
+
+- Updated dependencies []:
+  - @heroui/divider@2.2.22
+  - @heroui/aria-utils@2.2.27
+  - @heroui/framer-utils@2.1.26
+
 ## 2.2.26
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @heroui/toast
 
+## 2.0.20
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/spinner@2.2.27
+
 ## 2.0.19
 
 ### Patch Changes

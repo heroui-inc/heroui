@@ -1,5 +1,12 @@
 # @heroui/divider
 
+## 2.2.22
+
+### Patch Changes
+
+- Updated dependencies [[`1a2635b`](https://github.com/heroui-inc/heroui/commit/1a2635beda844e22630bd4514982b70807b49a81)]:
+  - @heroui/system-rsc@2.3.22
+
 ## 2.2.21
 
 ### Patch Changes
