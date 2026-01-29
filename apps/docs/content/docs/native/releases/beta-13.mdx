@@ -76,9 +76,10 @@ This will automatically open the app in Expo Go if it's installed on your device
 
 ### New Components
 
-This release introduces **2 new** essential components:
+This release introduces **3 new** essential components:
 
 - **[TextArea](/docs/native/components/text-area)**: Multiline text input component with styled border and background for collecting longer user input.
+- **[Input](/docs/native/components/input)**: Single-line text input component with styled border and background, now available as a standalone component separate from TextField.
 - **[CloseButton](/docs/native/components/close-button)**: Reusable button component for closing dialogs, modals, or dismissing content with consistent styling across overlay components.
 
 #### TextArea
@@ -119,6 +120,45 @@ export function Example() {
 For complete documentation and examples, see the [TextArea component page](/docs/native/components/text-area).
 
 **Related PR:** [#254](https://github.com/heroui-inc/heroui-native/pull/254)
+
+#### Input
+
+The Input component is now available as a standalone component, providing single-line text input functionality with styled border and background. Previously available only as `TextField.Input`, Input can now be used independently or integrated with form components like TextField and ControlField.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Single-line text input with styled border and background
+- Standalone usage or integration with form components
+- Validation state support with visual feedback
+- Primary and secondary variants for different contexts
+- Disabled and read-only states
+- Customizable styling via className and styles props
+- Complete accessibility support
+
+**Usage:**
+
+```tsx
+import { Description, Input, Label, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <Label>Email</Label>
+      <Input placeholder="Enter your email..." />
+      <Description>We'll never share your email.</Description>
+    </TextField>
+  );
+}
+```
+
+For complete documentation and examples, see the [Input component page](/docs/native/components/input).
+
+**Related PR:** [#247](https://github.com/heroui-inc/heroui-native/pull/247)
 
 #### CloseButton
 
@@ -369,6 +409,49 @@ Update all instances of Tabs variant prop:
 
 **Related PR:** [#236](https://github.com/heroui-inc/heroui-native/pull/236)
 
+### Tabs Indicator Animation Refactor
+
+The [Tabs](/docs/native/components/tabs) component's indicator animation has been refactored to use `translateX` transforms instead of `left` positioning for GPU-accelerated performance. This change improves animation performance but requires updates to custom animation configurations.
+
+**Migration:**
+
+If you have customized the Tabs indicator animation, update your animation configuration:
+
+```tsx
+// Before
+<Tabs
+  indicatorAnimation={{
+    left: {
+      type: "spring",
+      config: { damping: 20, stiffness: 300 }
+    }
+  }}
+>
+  {/* content */}
+</Tabs>
+
+// After
+<Tabs
+  indicatorAnimation={{
+    translateX: {
+      type: "spring",
+      config: { damping: 20, stiffness: 300 }
+    }
+  }}
+>
+  {/* content */}
+</Tabs>
+```
+
+**What Changed:**
+
+- Animation API changed from `left` to `translateX` in `TabsIndicatorAnimation` configuration
+- Indicator positioning now uses `translateX` transform for GPU-accelerated animations
+- Added `left-0` base class to indicator styles to maintain initial positioning
+- Visual behavior remains identical, only the underlying implementation has changed
+
+**Related PR:** [#227](https://github.com/heroui-inc/heroui-native/pull/227)
+
 ### Divider Component Rename
 
 The `Divider` component has been renamed to `Separator` for better consistency with naming conventions and to avoid confusion with other divider implementations.
@@ -432,6 +515,131 @@ Update any components using the `quaternary` variant:
 - `"tertiary"` - Tertiary surface styling
 
 **Related PR:** [#246](https://github.com/heroui-inc/heroui-native/pull/246)
+
+### Form Component Decomposition
+
+As part of the form component decomposition, several components have been renamed and restructured to provide better flexibility and composition patterns.
+
+**Component Renames:**
+
+- `FormField` has been renamed to `ControlField`
+- `ErrorView` has been renamed to `FieldError`
+
+**Migration:**
+
+Update all imports and usages:
+
+```tsx
+// Before
+import { FormField, ErrorView, TextField } from "heroui-native";
+
+<FormField>
+  <TextField.Input />
+  <ErrorView>Error message</ErrorView>
+</FormField>
+
+// After
+import { ControlField, FieldError, Input, TextField } from "heroui-native";
+
+<ControlField>
+  <Input />
+  <FieldError>Error message</FieldError>
+</ControlField>
+```
+
+**TextField.Input Removal:**
+
+The `TextField.Input` subcomponent has been removed. Use the standalone `Input` component instead:
+
+```tsx
+// Before
+import { TextField } from "heroui-native";
+
+<TextField>
+  <TextField.Input placeholder="Enter text..." />
+</TextField>
+
+// After
+import { Input, TextField } from "heroui-native";
+
+<TextField>
+  <Input placeholder="Enter text..." />
+</TextField>
+```
+
+**Component Composition Changes:**
+
+`RadioGroup`, `TextField`, and `ControlField` now use `Label`, `Description`, and `FieldError` components directly, providing more flexible composition:
+
+```tsx
+import { ControlField, Description, FieldError, Input, Label, RadioGroup, TextField } from "heroui-native";
+
+// TextField with Label, Description, and FieldError
+<TextField>
+  <Label>Email</Label>
+  <Input placeholder="Enter email..." />
+  <Description>We'll never share your email.</Description>
+  <FieldError>Invalid email address</FieldError>
+</TextField>
+
+// RadioGroup with Label, Description, and FieldError
+<RadioGroup>
+  <Label>Select option</Label>
+  <RadioGroup.Item value="option1">
+    <RadioGroup.Label>Option 1</RadioGroup.Label>
+  </RadioGroup.Item>
+  <Description>Choose one option</Description>
+  <FieldError>Please select an option</FieldError>
+</RadioGroup>
+
+// ControlField with Label, Description, and FieldError
+<ControlField>
+  <Label>Custom Field</Label>
+  <Input placeholder="Enter value..." />
+  <Description>Additional information</Description>
+  <FieldError>Validation error</FieldError>
+</ControlField>
+```
+
+**Related PR:** [#247](https://github.com/heroui-inc/heroui-native/pull/247)
+
+### CloseButton Component and asChild Removal
+
+A new reusable `CloseButton` component has been introduced, and all close button implementations across Dialog, Popover, Select, and BottomSheet components have been refactored to use this shared component. The `asChild` prop has been removed from all Close components.
+
+**Migration:**
+
+Update any usage of `asChild` prop on Close components:
+
+```tsx
+// Before
+import { Button, Dialog } from "heroui-native";
+
+<Dialog>
+  <Dialog.Close asChild>
+    <Button>Cancel</Button>
+  </Dialog.Close>
+</Dialog>
+
+// After
+import { Button, Dialog } from "heroui-native";
+
+const [isOpen, setIsOpen] = useState(false);
+
+<Dialog open={isOpen} onOpenChange={setIsOpen}>
+  <Button onPress={() => setIsOpen(false)}>Cancel</Button>
+</Dialog>
+```
+
+**What Changed:**
+
+- New `CloseButton` component added with default `variant="tertiary"`, `size="sm"`, and `isIconOnly={true}`
+- `Dialog.Close`, `Popover.Close`, `Select.Close`, and `BottomSheet.Close` now extend `CloseButton` internally
+- The `asChild` prop has been removed from all Close components
+- Close components still support all Button props including `variant`, `size`, `iconProps`, and custom `children`
+- You must now handle close logic manually when using custom buttons instead of Close components
+
+**Related PR:** [#237](https://github.com/heroui-inc/heroui-native/pull/237)
 
 ## Bug Fixes
 
