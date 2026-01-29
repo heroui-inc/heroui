@@ -1,0 +1,463 @@
+---
+title: Beta 13
+description: TextArea component, Button outline variant, Tabs improvements, form component decomposition, style class exports, and critical bug fixes
+github:
+  pull: 254
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">January 29, 2026</span>
+</div>
+
+Beta 13 introduces the TextArea component for multiline text input, adds Button outline variant, and exports style class names for all components. This release also includes significant improvements to Tabs with better animations and clearer variant naming, decomposes form components into standalone primitives for better flexibility, and fixes critical issues including Chinese character input handling, theme color calculations, and Uniwind Pro compatibility. These updates enhance developer experience and component reliability across the library.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native@beta
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native@beta
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native@beta
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native@beta
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the Beta 13 improvements in action with our preview app! You can explore the new TextArea and CloseButton components, along with Button outline variant, Tabs improvements, granular exports, and all the bug fixes directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## What's New
+
+### New Components
+
+This release introduces **2 new** essential components:
+
+- **[TextArea](/docs/native/components/text-area)**: Multiline text input component with styled border and background for collecting longer user input.
+- **[CloseButton](/docs/native/components/close-button)**: Reusable button component for closing dialogs, modals, or dismissing content with consistent styling across overlay components.
+
+#### TextArea
+
+The TextArea component provides a complete solution for multiline text input scenarios, such as comments, messages, descriptions, and longer form fields. It features seamless integration with TextField for complete form structure, validation state support, and customizable variants for different visual contexts.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Multiline text input with customizable rows
+- Seamless integration with TextField component
+- Validation state support with visual feedback
+- Primary and secondary variants for different contexts
+- Disabled and read-only states
+- Customizable styling via className and styles props
+- Complete accessibility support
+
+**Usage:**
+
+```tsx
+import { Description, Label, TextArea, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <Label>Message</Label>
+      <TextArea placeholder="Enter your message here..." />
+      <Description>Please provide as much detail as possible.</Description>
+    </TextField>
+  );
+}
+```
+
+For complete documentation and examples, see the [TextArea component page](/docs/native/components/text-area).
+
+**Related PR:** [#254](https://github.com/heroui-inc/heroui-native/pull/254)
+
+#### CloseButton
+
+The CloseButton component provides a reusable solution for closing dialogs, modals, popovers, and other overlay components. It features consistent styling across all overlay components, customizable icon properties, and seamless integration with Dialog, Popover, Select, and Bottom Sheet components.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Consistent close button styling across overlay components
+- Customizable icon size and color
+- Support for custom children to replace default icon
+- Disabled state support
+- Seamless integration with Dialog, Popover, Select, and Bottom Sheet
+- Default styling optimized for overlay contexts
+
+**Usage:**
+
+```tsx
+import { CloseButton } from "heroui-native";
+
+// Standalone usage
+<CloseButton onPress={handleClose} />
+
+// As part of Dialog, Popover, Select, Bottom Sheet
+<Dialog>
+  <Dialog.Close />
+</Dialog>
+```
+
+For complete documentation and examples, see the [CloseButton component page](/docs/native/components/close-button).
+
+**Related PR:** [#237](https://github.com/heroui-inc/heroui-native/pull/237)
+
+### New Subcomponents
+
+#### Tabs.Separator
+
+The Tabs component now includes a new `Separator` subcomponent that provides animated visibility control between tab triggers. This allows developers to create visual separators that automatically show or hide based on the active tab state.
+
+**Features:**
+
+- Animated visibility transitions based on active tab
+- Configurable visibility via `betweenValues` prop
+- Customizable animation timing and opacity
+- Always visible option for static separators
+
+**Usage:**
+
+```tsx
+import { Tabs } from "heroui-native";
+
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.ScrollView>
+      <Tabs.Indicator />
+      <Tabs.Trigger value="general">
+        <Tabs.Label>General</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Separator betweenValues={["general", "notifications"]} />
+      <Tabs.Trigger value="notifications">
+        <Tabs.Label>Notifications</Tabs.Label>
+      </Tabs.Trigger>
+    </Tabs.ScrollView>
+  </Tabs.List>
+</Tabs>
+```
+
+**Related PR:** [#228](https://github.com/heroui-inc/heroui-native/pull/228)
+
+## Component Improvements
+
+### Button Outline Variant
+
+The [Button](/docs/native/components/button) component now includes an `outline` variant that provides a bordered style with transparent background, offering more visual variety for button designs.
+
+**Improvements:**
+
+- New `outline` variant for bordered button style
+- Consistent styling with other Button variants
+- Proper hover and focus states for outline variant
+- Seamless integration with existing Button API
+
+**Usage:**
+
+```tsx
+import { Button } from "heroui-native";
+
+<Button variant="outline">Outline Button</Button>
+```
+
+**Related PR:** [#235](https://github.com/heroui-inc/heroui-native/pull/235)
+
+### Tabs Indicator Animation Refactor
+
+The [Tabs](/docs/native/components/tabs) component's indicator animation has been refactored to use `translateX` transforms instead of width/height animations, resulting in smoother and more performant tab indicator transitions.
+
+**Improvements:**
+
+- Migrated indicator animation to `translateX` transforms
+- Improved animation performance and smoothness
+- Better visual consistency during tab transitions
+- Reduced layout recalculations during animations
+
+**Related PR:** [#227](https://github.com/heroui-inc/heroui-native/pull/227)
+
+### Popover Arrow Sizing and Visual Connection
+
+The [Popover](/docs/native/components/popover) component has been improved with better arrow sizing and visual connection to the popover content, creating a more cohesive visual appearance.
+
+**Improvements:**
+
+- Improved arrow sizing relative to popover content
+- Enhanced visual connection between arrow and popover
+- Better alignment and spacing
+- More polished overall appearance
+
+**Related PR:** [#243](https://github.com/heroui-inc/heroui-native/pull/243)
+
+### Form Components Decomposition
+
+Form components have been decomposed into standalone primitives, providing developers with more flexibility and better control over component composition.
+
+**Improvements:**
+
+- Decomposed form components into standalone primitives
+- Improved component reusability and composition
+- Better separation of concerns
+- Enhanced flexibility for custom form layouts
+
+**Related PR:** [#247](https://github.com/heroui-inc/heroui-native/pull/247)
+
+### Input Android Shadow Fix
+
+The [Input](/docs/native/components/input) component now includes platform-specific shadow styling for Android, ensuring consistent visual appearance across platforms.
+
+**Improvements:**
+
+- Added platform-specific shadow for Android
+- Improved visual consistency across iOS and Android
+- Better elevation appearance on Android devices
+- Enhanced component appearance on Android platform
+
+**Related PR:** [#248](https://github.com/heroui-inc/heroui-native/pull/248)
+
+## API Enhancements
+
+### Granular Exports for Bundle Optimization
+
+The library now provides granular exports for each component, allowing developers to reduce bundle size by importing only the components they need.
+
+**New Capability:**
+
+```tsx
+// Granular imports - use when you need only a few components
+import { HeroUINativeProvider } from "heroui-native/provider";
+import { Button } from "heroui-native/button";
+import { Card } from "heroui-native/card";
+
+// General import - imports the whole library, use when you're using many components
+import { Button, Card } from "heroui-native";
+```
+
+Granular imports are ideal when you only need a few components, as they help keep your bundle size smaller. General imports from `heroui-native` will include the entire library, which is convenient when you're using many components throughout your app.
+
+**Available granular exports:**
+
+- `heroui-native/provider` - Provider component
+- `heroui-native/[component-name]` - Individual components
+- `heroui-native/portal` - Portal utilities
+- `heroui-native/utils` - Utility functions
+- `heroui-native/hooks` - Custom hooks
+
+<Callout type="warning">
+  **Important**: To keep the bundle size under control, you must follow the pattern with granular imports consistently. Even one general import from `heroui-native` will break this optimization strategy.
+</Callout>
+
+**Related PR:** [#233](https://github.com/heroui-inc/heroui-native/pull/233)
+
+### Style Class Names Export
+
+All components now export their style class names, enabling developers to reference component styles programmatically and create custom styling solutions.
+
+**New Capability:**
+
+```tsx
+import { buttonClassNames } from "heroui-native";
+
+// Access component class names programmatically
+const customStyles = {
+  base: buttonClassNames.base,
+  variant: buttonClassNames.variant,
+};
+```
+
+This enhancement provides developers with programmatic access to component class names, enabling advanced styling scenarios and custom theme implementations.
+
+**Related PR:** [#252](https://github.com/heroui-inc/heroui-native/pull/252)
+
+## Style Fixes
+
+### Style Optimizations
+
+- **Quaternary Variant Removal**: Removed quaternary variant and polished component styles for better consistency
+- **Component Style Polish**: Enhanced styling across multiple components for improved visual consistency
+- **Shadow and Border Radius Updates**: Improved shadow and border radius consistency across components
+- **Theme Variable Cleanup**: Simplified theme variables and removed redundant color-mix calculations
+
+**Related PR:** [#246](https://github.com/heroui-inc/heroui-native/pull/246)
+
+## ⚠️ Breaking Changes
+
+### Tabs Variant Prop Rename
+
+The Tabs component's `variant` prop has been renamed from `pill`/`line` to `primary`/`secondary` for better clarity and consistency with other components.
+
+**Migration:**
+
+Update all instances of Tabs variant prop:
+
+```tsx
+// Before
+<Tabs variant="pill">
+  {/* content */}
+</Tabs>
+
+<Tabs variant="line">
+  {/* content */}
+</Tabs>
+
+// After
+<Tabs variant="primary">
+  {/* content */}
+</Tabs>
+
+<Tabs variant="secondary">
+  {/* content */}
+</Tabs>
+```
+
+**Available options:**
+
+- `"primary"` - Primary variant (previously `"pill"`)
+- `"secondary"` - Secondary variant (previously `"line"`)
+
+**Related PR:** [#236](https://github.com/heroui-inc/heroui-native/pull/236)
+
+### Divider Component Rename
+
+The `Divider` component has been renamed to `Separator` for better consistency with naming conventions and to avoid confusion with other divider implementations.
+
+**Migration:**
+
+Update all imports and usages:
+
+```tsx
+// Before
+import { Divider } from "heroui-native";
+
+<Divider />
+
+// After
+import { Separator } from "heroui-native";
+
+<Separator />
+```
+
+**Related PR:** [#238](https://github.com/heroui-inc/heroui-native/pull/238)
+
+### Quaternary Variant Removal
+
+The `quaternary` variant has been removed from [Surface](/docs/native/components/surface) and [Card](/docs/native/components/card) components to simplify the design system and improve consistency.
+
+**Migration:**
+
+Update any components using the `quaternary` variant:
+
+```tsx
+// Before
+<Surface variant="quaternary">
+  {/* content */}
+</Surface>
+
+<Card variant="quaternary">
+  {/* content */}
+</Card>
+
+// After
+// Use default, secondary, or tertiary variants, or apply custom styling
+<Surface variant="secondary">
+  {/* content */}
+</Surface>
+
+<Card variant="secondary">
+  {/* content */}
+</Card>
+
+// Or use custom styling for specific needs
+<Surface className="bg-custom-quaternary">
+  {/* content */}
+</Surface>
+```
+
+**Available variants:**
+
+- `"default"` - Default surface styling
+- `"secondary"` - Secondary surface styling
+- `"tertiary"` - Tertiary surface styling
+
+**Related PR:** [#246](https://github.com/heroui-inc/heroui-native/pull/246)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #181](https://github.com/heroui-inc/heroui-native/issues/181)**: Fixed TextField error when inputting Chinese characters. The TextField component now properly handles multibyte characters and international input, ensuring smooth text entry for all languages including Chinese, Japanese, and Korean.
+
+- **[Issue #219](https://github.com/heroui-inc/heroui-native/issues/219)**: Fixed Button `childrenToString()` returning `"[object Object]"` for multiple children. The function now properly handles React elements and complex children structures, preventing stringification issues when rendering button content.
+
+- **[Issue #232](https://github.com/heroui-inc/heroui-native/issues/232)**: Fixed HeroUINativeProvider breaking with the recently released Uniwind Pro. The provider now properly handles Uniwind Pro compatibility, ensuring smooth integration with the latest Uniwind version.
+
+**Additional Fixes:**
+
+- Fixed theme calculated colors issue that was causing incorrect color values in certain scenarios
+- Fixed `childrenToString` function to prevent React elements from being stringified incorrectly
+
+**Related PRs:**
+
+- [#226](https://github.com/heroui-inc/heroui-native/pull/226)
+- [#239](https://github.com/heroui-inc/heroui-native/pull/239)
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
