@@ -15,6 +15,7 @@
     "(data-display)/chip",
     "(forms)/description",
     "(overlays)/dialog",
+    "(forms)/input",
     "(layout)/divider",
     "(feedback)/error-view",
     "(forms)/form-field",

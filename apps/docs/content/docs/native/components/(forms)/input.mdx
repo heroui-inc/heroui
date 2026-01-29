@@ -1,0 +1,204 @@
+---
+title: Input
+description: A text input component with styled border and background for collecting user input.
+icon: new
+links:
+  source_native: input/input.tsx
+  styles_native: input/input.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Input } from 'heroui-native';
+```
+
+## Usage
+
+### Basic Usage
+
+Input can be used standalone or within a TextField component.
+
+```tsx
+import { Input } from 'heroui-native';
+
+<Input placeholder="Enter your email" />
+```
+
+### Within TextField
+
+Input works seamlessly with TextField for complete form structure.
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>Email</Label>
+  <Input placeholder="Enter your email" />
+</TextField>
+```
+
+### With Validation
+
+Display error state when the input is invalid.
+
+```tsx
+import { FieldError, Input, Label, TextField } from 'heroui-native';
+
+<TextField isRequired isInvalid={true}>
+  <Label>Email</Label>
+  <Input placeholder="Enter your email" />
+  <FieldError>Please enter a valid email</FieldError>
+</TextField>
+```
+
+### With Local Invalid State Override
+
+Override the context's invalid state for the input.
+
+```tsx
+import { FieldError, Input, Label, TextField } from 'heroui-native';
+
+<TextField isInvalid={true}>
+  <Label isInvalid={false}>Email</Label>
+  <Input placeholder="Enter your email" isInvalid={false} />
+  <FieldError>Email format is incorrect</FieldError>
+</TextField>
+```
+
+### Disabled State
+
+Disable the input to prevent interaction.
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField isDisabled>
+  <Label>Disabled Field</Label>
+  <Input placeholder="Cannot edit" value="Read only value" />
+</TextField>
+```
+
+### With Variant
+
+Use different variants to style the input based on context.
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>Primary Variant</Label>
+  <Input placeholder="Primary style" variant="primary" />
+</TextField>
+
+<TextField>
+  <Label>Secondary Variant</Label>
+  <Input placeholder="Secondary style" variant="secondary" />
+</TextField>
+```
+
+### Custom Styling
+
+Customize the input appearance using className.
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>Custom Styled</Label>
+  <Input
+    placeholder="Custom colors"
+    className="bg-blue-50 border-blue-500 focus:border-blue-700"
+  />
+</TextField>
+```
+
+## Example
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { Description, Input, Label, TextField } from 'heroui-native';
+import { useState } from 'react';
+import { Pressable, View } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export const TextInputContent = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  return (
+    <View className="gap-4">
+      <TextField isRequired>
+        <Label>Email</Label>
+        <Input
+          placeholder="Enter your email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Description>
+          We'll never share your email with anyone else.
+        </Description>
+      </TextField>
+
+      <TextField isRequired>
+        <Label>New password</Label>
+        <View className="w-full flex-row items-center">
+          <Input
+            value={password}
+            onChangeText={setPassword}
+            className="flex-1 px-10"
+            placeholder="Enter your password"
+            secureTextEntry={!isPasswordVisible}
+          />
+          <StyledIonicons
+            name="lock-closed-outline"
+            size={16}
+            className="absolute left-3.5 text-muted"
+            pointerEvents="none"
+          />
+          <Pressable
+            className="absolute right-4"
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+          >
+            <StyledIonicons
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+              size={16}
+              className="text-muted"
+            />
+          </Pressable>
+        </View>
+        <Description>
+          Password must be at least 6 characters
+        </Description>
+      </TextField>
+    </View>
+  );
+};
+```
+
+## API Reference
+
+### Input
+
+| prop                      | type                       | default               | description                                                  |
+| ------------------------- | -------------------------- | --------------------- | ------------------------------------------------------------ |
+| isInvalid                 | `boolean`                  | `undefined`           | Whether the input is in an invalid state (overrides context) |
+| variant                   | `'primary' \| 'secondary'` | `'primary'`           | Variant style for the input                                  |
+| className                 | `string`                   | -                     | Custom class name for the input                              |
+| selectionColorClassName   | `string`                   | `"accent-accent"`     | Custom className for the selection color                     |
+| placeholderColorClassName | `string`                   | `"field-placeholder"` | Custom className for the placeholder text color              |
+| animation                 | `AnimationRoot`            | `undefined`           | Animation configuration for the input                        |
+| ...TextInputProps         | `TextInputProps`           | -                     | All standard React Native TextInput props are supported      |
+
+> **Note**: When used within a TextField component, Input automatically consumes form state (isDisabled, isInvalid) from TextField via the form-item-state context.

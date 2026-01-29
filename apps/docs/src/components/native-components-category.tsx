@@ -19,6 +19,7 @@ const COMPONENT_GROUPS = [
       "(forms)/description",
       "(forms)/error-view",
       "(forms)/form-field",
+      "(forms)/input",
       "(forms)/input-otp",
       "(forms)/label",
       "(forms)/radio-group",
