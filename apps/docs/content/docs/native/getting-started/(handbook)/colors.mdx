@@ -16,10 +16,12 @@ HeroUI Native uses CSS variables for colors that automatically switch between li
 HeroUI Native's color system is built on top of [Tailwind CSS v4](https://tailwindcss.com/docs/theme)'s theme via [Uniwind](https://uniwind.dev/). When you import `heroui-native/styles`, it uses Tailwind's built-in color palettes and maps them to semantic variables.
 
 **Naming pattern:**
+
 - Colors without a suffix are backgrounds (e.g., `--accent`)
 - Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
 
 **Usage:**
+
 ```tsx
 import { View, Text } from 'react-native';
 
@@ -28,7 +30,7 @@ import { View, Text } from 'react-native';
   <View className="bg-accent p-4 rounded-lg">
     <Text className="text-accent-foreground">Hello</Text>
   </View>
-</View>
+</View>;
 ```
 
 ### Base Colors
@@ -113,6 +115,7 @@ For consistent form field styling across input components:
 ## How to Use Colors
 
 **In your components:**
+
 ```tsx
 import { View, Text } from 'react-native';
 import { Button } from 'heroui-native';
@@ -122,7 +125,7 @@ import { Button } from 'heroui-native';
   <Button variant="primary" className="bg-accent">
     <Button.Label className="text-accent-foreground">Click me</Button.Label>
   </Button>
-</View>
+</View>;
 ```
 
 **In CSS files:**
@@ -149,8 +152,13 @@ The complete theme definition can be found in ([variables.css](https://github.co
     --snow: oklch(0.9911 0 0);
     --eclipse: oklch(0.2103 0.0059 285.89);
 
+    /* Border */
+    --border-width: 1px;
+    --field-border-width: 0px;
+
     /* Base radius */
     --radius: 0.5rem;
+    --field-radius: calc(var(--radius) * 1.5);
 
     /* Opacity */
     --opacity-disabled: 0.5;
@@ -171,7 +179,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --overlay: var(--white);
         --overlay-foreground: var(--foreground);
 
-        --muted: oklch(55.2% 0.016 285.938);
+        --muted: oklch(0.5517 0.0138 285.94);
 
         --default: oklch(94% 0.001 286.375);
         --default-foreground: var(--eclipse);
@@ -179,7 +187,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --accent: oklch(0.6204 0.195 253.83);
         --accent-foreground: var(--snow);
 
-        /* Form Field Defaults - Colors */
+        /* Form Fields */
         --field-background: var(--white);
         --field-foreground: oklch(0.2103 0.0059 285.89);
         --field-placeholder: var(--muted);
@@ -200,18 +208,18 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --segment-foreground: var(--eclipse);
 
         /* Misc Colors */
-        --border: oklch(0 0 0 / 0%);
-        --divider: oklch(72% 0.004 286.32);
+        --border: oklch(90% 0.004 286.32);
+        --separator: oklch(74% 0.004 286.32);
+        --focus: var(--accent);
         --link: var(--foreground);
 
         /* Shadows */
-        /* --surface-shadow: 0 0px 0px 0 rgba(24, 24, 27, 0.03), 0 2px 10px 0 rgba(24, 24, 27, 0.08); */
         --surface-shadow:
           0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
           0 0 1px 0 rgba(0, 0, 0, 0.06);
-        /* Overlay shadow */
         --overlay-shadow:
-          0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
+          0 2px 8px 0 rgba(0, 0, 0, 0.04), 0 -6px 12px 0 rgba(0, 0, 0, 0.02),
+          0 14px 28px 0 rgba(0, 0, 0, 0.06);
         --field-shadow:
           0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
           0 0 1px 0 rgba(0, 0, 0, 0.06);
@@ -219,7 +227,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
 
       @variant dark {
         /* Base Colors */
-        --background: var(--black);
+        --background: oklch(12% 0.005 285.823);
         --foreground: var(--snow);
 
         /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
@@ -227,9 +235,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --surface-foreground: var(--foreground);
 
         /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) - lighter for contrast */
-        --overlay: oklch(
-          0.2563 0.0058 271.19
-        ); /* Lighter than surface for visibility in dark mode */
+        --overlay: oklch(0.2103 0.0059 285.89);
         --overlay-foreground: var(--foreground);
 
         --muted: oklch(70.5% 0.015 286.067);
@@ -241,7 +247,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --accent-foreground: var(--snow);
 
         /* Form Field Defaults - Colors (only the ones that are different from light theme) */
-        --field-background: var(--default);
+        --field-background: oklch(0.2103 0.0059 285.89);
         --field-foreground: var(--foreground);
         --field-placeholder: var(--muted);
         --field-border: transparent; /* no border by default on form fields */
@@ -261,13 +267,14 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --segment-foreground: var(--foreground);
 
         /* Misc Colors */
-        --border: oklch(1 0 0 / 0%);
-        --divider: oklch(38% 0.006 286.033);
+        --border: oklch(28% 0.006 286.033);
+        --separator: oklch(40% 0.006 286.033);
+        --focus: var(--accent);
         --link: var(--foreground);
 
-         /* Shadows */
+        /* Shadows */
         --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
-        --overlay-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+        --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
         --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
       }
     }
@@ -326,14 +333,14 @@ import { View, Text } from 'react-native';
 
 <View className="bg-info p-4 rounded-lg">
   <Text className="text-info-foreground">Info message</Text>
-</View>
+</View>;
 ```
 
 > **Note**: To learn more about theme variables and how they work in Tailwind CSS v4, see the [Tailwind CSS Theme documentation](https://tailwindcss.com/docs/theme).
 
-## use-theme-color Hook
+## useThemeColor Hook
 
-The `use-theme-color` hook has been enhanced to support multiple colors selection, making it more flexible for complex theming scenarios.
+The `useThemeColor` hook has been enhanced to support multiple colors selection, making it more flexible for complex theming scenarios.
 
 **Multiple Colors Selection:**
 
@@ -353,7 +360,7 @@ const { accent, accentForeground, success, danger } = useThemeColor([
 // Use the selected colors
 <View style={{ backgroundColor: accent }}>
   <Text style={{ color: accentForeground }}>Accent Text</Text>
-</View>
+</View>;
 ```
 
 This enhancement improves performance when working with multiple color values and makes it easier to manage complex theming scenarios where multiple colors need to be selected and applied together.

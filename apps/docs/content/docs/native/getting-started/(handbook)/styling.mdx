@@ -31,7 +31,7 @@ import { Button } from 'heroui-native';
 
 <Button className="bg-accent px-6 py-3 rounded-lg">
   <Button.Label>Custom Button</Button.Label>
-</Button>
+</Button>;
 ```
 
 **Using style:** Components also accept inline styles via the `style` prop:
@@ -41,7 +41,7 @@ import { Button } from 'heroui-native';
 
 <Button style={{ backgroundColor: '#8B5CF6', paddingHorizontal: 24 }}>
   <Button.Label>Styled Button</Button.Label>
-</Button>
+</Button>;
 ```
 
 ## Render Props
@@ -49,24 +49,24 @@ import { Button } from 'heroui-native';
 Use a render function to access component state and customize content dynamically:
 
 ```tsx
-import { RadioGroup, cn } from 'heroui-native';
+import { RadioGroup, Label, cn } from 'heroui-native';
 
 <RadioGroup value={value} onValueChange={setValue}>
   <RadioGroup.Item value="option1">
     {({ isSelected, isInvalid, isDisabled }) => (
       <>
-        <RadioGroup.Label
+        <Label
           className={cn(
-            "text-foreground",
-            isSelected && "text-accent font-semibold"
+            'text-foreground',
+            isSelected && 'text-accent font-semibold'
           )}
         >
           Option 1
-        </RadioGroup.Label>
+        </Label>
         <RadioGroup.Indicator
           className={cn(
-            "border-2 rounded-full",
-            isSelected && "border-accent bg-accent"
+            'border-2 rounded-full',
+            isSelected && 'border-accent bg-accent'
           )}
         >
           {isSelected && <CustomIcon />}
@@ -74,7 +74,7 @@ import { RadioGroup, cn } from 'heroui-native';
       </>
     )}
   </RadioGroup.Item>
-</RadioGroup>
+</RadioGroup>;
 ```
 
 ## Creating Wrapper Components
@@ -166,7 +166,7 @@ import { View, Text } from 'react-native';
       Responsive Button
     </Button.Label>
   </Button>
-</View>
+</View>;
 ```
 
 ### Responsive Layouts
@@ -181,7 +181,7 @@ import { View, Text } from 'react-native';
       <Text className="text-accent-foreground">Item 1</Text>
     </View>
   </View>
-</View>
+</View>;
 ```
 
 **Default breakpoints:**
@@ -210,14 +210,15 @@ function MyComponent({ className, isActive }) {
     <View
       className={cn(
         'bg-background p-4 rounded-lg',
-        'border border-divider',
+        'border border-separator',
         isActive && 'bg-accent',
         className
       )}
     />
   );
 }
-```
+```;
+
 
 The `cn` utility is powered by `tailwind-variants` and includes:
 
@@ -252,7 +253,7 @@ function MyComponent() {
     </View>
   );
 }
-```
+```;
 
 **Multiple colors usage (more efficient):**
 
@@ -272,7 +273,7 @@ function MyComponent() {
     </View>
   );
 }
-```
+```;
 
 **Type signatures:**
 
@@ -289,11 +290,10 @@ useThemeColor<T extends readonly [ThemeColor, ...ThemeColor[]]>(
 useThemeColor(themeColor: ThemeColor[]): string[]
 ```
 
-Available theme colors include: `background`, `foreground`, `surface`, `accent`, `default`, `success`, `warning`, `danger`, and all their variants (hover, soft, foreground, etc.), plus semantic colors like `muted`, `border`, `divider`, `field`, `overlay`, and more.
+Available theme colors include: `background`, `foreground`, `surface`, `accent`, `default`, `success`, `warning`, `danger`, and all their variants (hover, soft, foreground, etc.), plus semantic colors like `muted`, `border`, `separator`, `field`, `overlay`, and more.
 
 ## Next Steps
 
 - Learn about [Animation](/docs/native/getting-started/animation) techniques
 - Explore [Theming](/docs/native/getting-started/theming) system
 - Explore [Colors](/docs/native/getting-started/colors) documentation
-
