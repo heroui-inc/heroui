@@ -47,7 +47,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Layout",
-    components: ["(layout)/card", "(layout)/divider", "(layout)/surface"],
+    components: ["(layout)/card", "(layout)/separator", "(layout)/surface"],
   },
   {
     category: "Media",
