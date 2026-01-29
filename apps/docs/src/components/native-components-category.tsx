@@ -17,8 +17,8 @@ const COMPONENT_GROUPS = [
     components: [
       "(forms)/checkbox",
       "(forms)/description",
-      "(forms)/error-view",
       "(forms)/form-field",
+      "(forms)/field-error",
       "(forms)/input",
       "(forms)/input-otp",
       "(forms)/label",
