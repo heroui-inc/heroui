@@ -33,6 +33,7 @@
     "(layout)/surface",
     "(forms)/switch",
     "(navigation)/tabs",
+    "(forms)/text-area",
     "(forms)/text-field",
     "(overlays)/toast"
   ]

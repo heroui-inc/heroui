@@ -25,6 +25,7 @@ const COMPONENT_GROUPS = [
       "(forms)/radio-group",
       "(forms)/select",
       "(forms)/switch",
+      "(forms)/text-area",
       "(forms)/text-field",
     ],
   },
