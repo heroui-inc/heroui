@@ -1,6 +1,7 @@
 ---
 title: Tabs
 description: Organize content into tabbed views with animated transitions and indicators.
+icon: updated
 links:
   source_native: tabs/tabs.tsx
   styles_native: tabs/tabs.styles.ts
@@ -28,6 +29,10 @@ import { Tabs } from 'heroui-native';
       <Tabs.Trigger>
         <Tabs.Label>...</Tabs.Label>
       </Tabs.Trigger>
+      <Tabs.Separator />
+      <Tabs.Trigger>
+        <Tabs.Label>...</Tabs.Label>
+      </Tabs.Trigger>
     </Tabs.ScrollView>
   </Tabs.List>
   <Tabs.Content>...</Tabs.Content>
@@ -35,11 +40,12 @@ import { Tabs } from 'heroui-native';
 ```
 
 - **Tabs**: Main container that manages tab state and selection. Controls active tab, handles value changes, and provides context to child components.
-- **Tabs.List**: Container for tab triggers. Groups triggers together with optional styling variants (pill or line).
+- **Tabs.List**: Container for tab triggers. Groups triggers together with optional styling variants (primary or secondary).
 - **Tabs.ScrollView**: Optional scrollable wrapper for tab triggers. Enables horizontal scrolling when tabs overflow with automatic centering of active tab.
 - **Tabs.Trigger**: Interactive button for each tab. Handles press events to change active tab and measures its position for indicator animation.
 - **Tabs.Label**: Text content for tab triggers. Displays the tab title with appropriate styling.
 - **Tabs.Indicator**: Animated visual indicator for active tab. Smoothly transitions between tabs using spring or timing animations.
+- **Tabs.Separator**: Visual separator between tabs. Shows when the current tab value is not in the `betweenValues` array, with animated opacity transitions.
 - **Tabs.Content**: Container for tab panel content. Shows content when its value matches the active tab.
 
 ## Usage
@@ -64,12 +70,12 @@ The Tabs component uses compound parts to create navigable content sections.
 </Tabs>
 ```
 
-### Pill Variant
+### Primary Variant
 
-Default rounded pill style for tab triggers.
+Default rounded primary style for tab triggers.
 
 ```tsx
-<Tabs value={activeTab} onValueChange={setActiveTab} variant="pill">
+<Tabs value={activeTab} onValueChange={setActiveTab} variant="primary">
   <Tabs.List>
     <Tabs.Indicator />
     <Tabs.Trigger value="settings">
@@ -84,12 +90,12 @@ Default rounded pill style for tab triggers.
 </Tabs>
 ```
 
-### Line Variant
+### Secondary Variant
 
 Underline style indicator for a more minimal appearance.
 
 ```tsx
-<Tabs value={activeTab} onValueChange={setActiveTab} variant="line">
+<Tabs value={activeTab} onValueChange={setActiveTab} variant="secondary">
   <Tabs.List>
     <Tabs.Indicator />
     <Tabs.Trigger value="overview">
@@ -216,10 +222,46 @@ Use a render function on `Tabs.Trigger` to access state and customize content ba
 </Tabs>
 ```
 
+### With Separators
+
+Add visual separators between tabs that show when the active tab is not between specified values.
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.ScrollView>
+      <Tabs.Indicator />
+      <Tabs.Trigger value="general">
+        <Tabs.Label>General</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Separator betweenValues={['general', 'notifications']} />
+      <Tabs.Trigger value="notifications">
+        <Tabs.Label>Notifications</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Separator betweenValues={['notifications', 'profile']} />
+      <Tabs.Trigger value="profile">
+        <Tabs.Label>Profile</Tabs.Label>
+      </Tabs.Trigger>
+    </Tabs.ScrollView>
+  </Tabs.List>
+  <Tabs.Content value="general">...</Tabs.Content>
+  <Tabs.Content value="notifications">...</Tabs.Content>
+  <Tabs.Content value="profile">...</Tabs.Content>
+</Tabs>
+```
+
 ## Example
 
 ```tsx
-import { Tabs, TextField, FormField, Checkbox, Button } from 'heroui-native';
+import {
+  Button,
+  Checkbox,
+  Description,
+  ControlField,
+  Label,
+  Tabs,
+  TextField,
+} from 'heroui-native';
 import { useState } from 'react';
 import { View, Text } from 'react-native';
 import Animated, {
@@ -250,7 +292,7 @@ export default function TabsExample() {
   const [name, setName] = useState('');
 
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab} variant="pill">
+    <Tabs value={activeTab} onValueChange={setActiveTab} variant="primary">
       <Tabs.List>
         <Tabs.ScrollView>
           <Tabs.Indicator />
@@ -272,43 +314,43 @@ export default function TabsExample() {
       >
         <Tabs.Content value="general">
           <AnimatedContentContainer>
-            <FormField
+            <ControlField
               isSelected={showSidebar}
               onSelectedChange={setShowSidebar}
             >
-              <FormField.Indicator variant="checkbox" />
+              <ControlField.Indicator variant="checkbox" />
               <View className="flex-1">
-                <FormField.Label>Show sidebar</FormField.Label>
-                <FormField.Description>
+                <Label>Show sidebar</Label>
+                <Description>
                   Display the sidebar navigation panel
-                </FormField.Description>
+                </Description>
               </View>
-            </FormField>
+            </ControlField>
           </AnimatedContentContainer>
         </Tabs.Content>
 
         <Tabs.Content value="notifications">
           <AnimatedContentContainer>
-            <FormField
+            <ControlField
               isSelected={accountActivity}
               onSelectedChange={setAccountActivity}
             >
-              <FormField.Indicator variant="checkbox" />
+              <ControlField.Indicator variant="checkbox" />
               <View className="flex-1">
-                <FormField.Label>Account activity</FormField.Label>
-                <FormField.Description>
+                <Label>Account activity</Label>
+                <Description>
                   Notifications about your account activity
-                </FormField.Description>
+                </Description>
               </View>
-            </FormField>
+            </ControlField>
           </AnimatedContentContainer>
         </Tabs.Content>
 
         <Tabs.Content value="profile">
           <AnimatedContentContainer>
             <TextField isRequired>
-              <TextField.Label>Name</TextField.Label>
-              <TextField.Input
+              <Label>Name</Label>
+              <Input
                 value={name}
                 onChangeText={setName}
                 placeholder="Enter your full name"
@@ -325,7 +367,7 @@ export default function TabsExample() {
 }
 ```
 
-You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/tabs.tsx).
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/tabs.tsx>).
 
 ## API Reference
 
@@ -335,7 +377,7 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | --------------- | ---------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
 | `children`      | `React.ReactNode`            | -           | Children elements to be rendered inside tabs                                              |
 | `value`         | `string`                     | -           | Currently active tab value                                                                |
-| `variant`       | `'pill' \| 'line'`           | `'pill'`    | Visual variant of the tabs                                                                |
+| `variant`       | `'primary' \| 'secondary'`           | `'primary'`    | Visual variant of the tabs                                                                |
 | `className`     | `string`                     | -           | Additional CSS classes for the container                                                  |
 | `animation`     | `"disable-all" \| undefined` | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
 | `onValueChange` | `(value: string) => void`    | -           | Callback when the active tab changes                                                      |
@@ -405,15 +447,47 @@ Animation configuration for Tabs.Indicator component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop            | type                                   | default                                                                      | description                                     |
-| --------------- | -------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------- |
-| `state`         | `'disabled' \| boolean`                | -                                                                            | Disable animations while customizing properties |
-| `width.type`    | `'spring' \| 'timing'`                 | `'spring'`                                                                   | Type of animation to use                        |
-| `width.config`  | `WithSpringConfig \| WithTimingConfig` | `{ stiffness: 1200, damping: 120 }` (spring) or `{ duration: 200 }` (timing) | Reanimated animation configuration              |
-| `height.type`   | `'spring' \| 'timing'`                 | `'spring'`                                                                   | Type of animation to use                        |
-| `height.config` | `WithSpringConfig \| WithTimingConfig` | `{ stiffness: 1200, damping: 120 }` (spring) or `{ duration: 200 }` (timing) | Reanimated animation configuration              |
-| `left.type`     | `'spring' \| 'timing'`                 | `'spring'`                                                                   | Type of animation to use                        |
-| `left.config`   | `WithSpringConfig \| WithTimingConfig` | `{ stiffness: 1200, damping: 120 }` (spring) or `{ duration: 200 }` (timing) | Reanimated animation configuration              |
+| prop                | type                                   | default                                                                      | description                                     |
+| ------------------- | -------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------- |
+| `state`             | `'disabled' \| boolean`                | -                                                                            | Disable animations while customizing properties |
+| `width.type`        | `'spring' \| 'timing'`                 | `'spring'`                                                                   | Type of animation to use                        |
+| `width.config`      | `WithSpringConfig \| WithTimingConfig` | `{ stiffness: 1200, damping: 120 }` (spring) or `{ duration: 200 }` (timing) | Reanimated animation configuration              |
+| `height.type`       | `'spring' \| 'timing'`                 | `'spring'`                                                                   | Type of animation to use                        |
+| `height.config`     | `WithSpringConfig \| WithTimingConfig` | `{ stiffness: 1200, damping: 120 }` (spring) or `{ duration: 200 }` (timing) | Reanimated animation configuration              |
+| `translateX.type`   | `'spring' \| 'timing'`                 | `'spring'`                                                                   | Type of animation to use                        |
+| `translateX.config` | `WithSpringConfig \| WithTimingConfig` | `{ stiffness: 1200, damping: 120 }` (spring) or `{ duration: 200 }` (timing) | Reanimated animation configuration              |
+
+### Tabs.Separator
+
+| prop                    | type                     | default | description                                                                                                                            |
+| ----------------------- | ------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `betweenValues`         | `string[]`               | -       | Array of tab values between which the separator should be visible. The separator shows when the current tab value is NOT in this array |
+| `isAlwaysVisible`       | `boolean`                | `false` | If true, opacity is always 1 regardless of the current tab value                                                                       |
+| `className`             | `string`                 | -       | Additional CSS classes                                                                                                                 |
+| `animation`             | `TabsSeparatorAnimation` | -       | Animation configuration                                                                                                                |
+| `isAnimatedStyleActive` | `boolean`                | `true`  | Whether animated styles (react-native-reanimated) are active                                                                           |
+| `children`              | `React.ReactNode`        | -       | Custom separator content                                                                                                               |
+| `...Animated.ViewProps` | `Animated.ViewProps`     | -       | All Reanimated Animated.View props are supported                                                                                       |
+
+**Note:** The following style properties are occupied by animations and cannot be set via className:
+
+- `opacity` - Animated for separator visibility transitions (0 when current tab is in `betweenValues`, 1 when not)
+
+To customize these properties, use the `animation` prop. To completely disable animated styles and use your own via className or style prop, set `isAnimatedStyleActive={false}`.
+
+#### TabsSeparatorAnimation
+
+Animation configuration for Tabs.Separator component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                   | type                    | default             | description                                     |
+| ---------------------- | ----------------------- | ------------------- | ----------------------------------------------- |
+| `state`                | `'disabled' \| boolean` | -                   | Disable animations while customizing properties |
+| `opacity.value`        | `[number, number]`      | `[0, 1]`            | Opacity values [hidden, visible]                |
+| `opacity.timingConfig` | `WithTimingConfig`      | `{ duration: 200 }` | Animation timing configuration                  |
 
 ### Tabs.Content
 
@@ -468,7 +542,7 @@ const CustomIndicator = () => {
 | ----------------- | ------------------------------------------------------- | ------------------------------------------------- |
 | `measurements`    | `Record<string, ItemMeasurements>`                      | Record of measurements for each tab trigger       |
 | `setMeasurements` | `(key: string, measurements: ItemMeasurements) => void` | Function to update measurements for a tab trigger |
-| `variant`         | `'pill' \| 'line'`                                      | Visual variant of the tabs                        |
+| `variant`         | `'primary' \| 'secondary'`                                      | Visual variant of the tabs                        |
 
 #### ItemMeasurements
 

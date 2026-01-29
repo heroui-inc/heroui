@@ -1,6 +1,7 @@
 ---
 title: Button
 description: Interactive component that triggers an action when pressed.
+icon: updated
 links:
   source_native: button/button.tsx
   styles_native: button/button.styles.ts
@@ -87,12 +88,13 @@ Control button dimensions with three size options.
 
 ### Variants
 
-Choose from six visual variants for different emphasis levels.
+Choose from seven visual variants for different emphasis levels.
 
 ```tsx
 <Button variant="primary">Primary</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="tertiary">Tertiary</Button>
+<Button variant="outline">Outline</Button>
 <Button variant="ghost">Ghost</Button>
 <Button variant="danger">Danger</Button>
 <Button variant="danger-soft">Danger Soft</Button>
@@ -284,9 +286,9 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 
 Button extends all props from [PressableFeedback](./pressable-feedback) component with additional button-specific props.
 
-| prop                              | type                                                                             | default       | description                                                    |
-| --------------------------------- | -------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------- |
-| `variant`                         | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'`   | Visual variant of the button                                   |
+| prop                              | type                                                                                  | default       | description                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------- |
+| `variant`                         | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'`   | Visual variant of the button                                   |
 | `size`                            | `'sm' \| 'md' \| 'lg'`                                                           | `'md'`        | Size of the button                                             |
 | `isIconOnly`                      | `boolean`                                                                        | `false`       | Whether the button displays an icon only (square aspect ratio) |
 | `pressableFeedbackVariant`        | `'highlight' \| 'ripple' \| 'none'`                                              | `'highlight'` | Variant of pressable feedback effect                           |
@@ -317,10 +319,10 @@ const { size, variant, isDisabled } = useButton();
 
 #### Return Value
 
-| property     | type                                                                             | description                    |
-| ------------ | -------------------------------------------------------------------------------- | ------------------------------ |
-| `size`       | `'sm' \| 'md' \| 'lg'`                                                           | Size of the button             |
-| `variant`    | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger' \| 'danger-soft'` | Visual variant of the button   |
-| `isDisabled` | `boolean`                                                                        | Whether the button is disabled |
+| property     | type                                                                                  | description                    |
+| ------------ | ------------------------------------------------------------------------------------- | ------------------------------ |
+| `size`       | `'sm' \| 'md' \| 'lg'`                                                               | Size of the button             |
+| `variant`    | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger' \| 'danger-soft'` | Visual variant of the button   |
+| `isDisabled` | `boolean`                                                                             | Whether the button is disabled |
 
 **Note:** This hook must be used within a `Button` component. It will throw an error if called outside of the button context.
