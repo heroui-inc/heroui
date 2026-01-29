@@ -145,6 +145,78 @@ export function CustomButton({
 }
 ```
 
+## Using Component classNames
+
+Each HeroUI Native component exports a `classNames` object that contains the same styling functions used internally by the component. This is particularly useful when you want to style your own custom components to match the appearance of HeroUI Native components.
+
+For example, you can style a custom `Link` component to look like a `Button`:
+
+```tsx
+import { buttonClassNames, cn } from 'heroui-native';
+import { Pressable, Text } from 'react-native';
+
+interface LinkProps {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Link({
+  href,
+  variant = 'primary',
+  size = 'md',
+  children,
+  className,
+}: LinkProps) {
+  return (
+    <Pressable
+      className={cn(
+        buttonClassNames.root({ variant, size }),
+        className
+      )}
+      onPress={() => {
+        // Handle navigation
+      }}
+    >
+      <Text className={buttonClassNames.label({ variant, size })}>
+        {children}
+      </Text>
+    </Pressable>
+  );
+}
+```
+
+**Available classNames exports:**
+
+Each component exports its `classNames` object. For example:
+- `buttonClassNames` - Contains `root` and `label` functions
+- `cardClassNames` - Contains `root`, `header`, `body`, `footer`, `label`, and `description` functions
+- `chipClassNames` - Contains `root` and `label` functions
+- And many more...
+
+**Usage pattern:**
+
+```tsx
+import { buttonClassNames } from 'heroui-native';
+
+// Use with variant and size options
+const rootClasses = buttonClassNames.root({
+  variant: 'primary',
+  size: 'md',
+  className: 'custom-class', // Optional: merge with your own classes
+});
+
+const labelClasses = buttonClassNames.label({
+  variant: 'primary',
+  size: 'md',
+});
+```
+
+The `classNames` functions accept the same variant props as the components themselves, allowing you to maintain visual consistency across your custom components and HeroUI Native components.
+
+
 ## Responsive Design
 
 HeroUI Native supports Tailwind's responsive breakpoint system via [Uniwind](https://docs.uniwind.dev/breakpoints). Use breakpoint prefixes like `sm:`, `md:`, `lg:`, and `xl:` to apply styles conditionally based on screen width.
