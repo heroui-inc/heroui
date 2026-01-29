@@ -13,6 +13,7 @@
     "(layout)/card",
     "(forms)/checkbox",
     "(data-display)/chip",
+    "(buttons)/close-button",
     "(forms)/control-field",
     "(forms)/description",
     "(overlays)/dialog",
