@@ -20,12 +20,12 @@ export default function Default() {
   const [selectedKeys, setSelectedKeys] = useState<Key[]>([]);
 
   const items = [
+    {id: "florida", name: "Florida"},
+    {id: "delaware", name: "Delaware"},
     {id: "california", name: "California"},
     {id: "texas", name: "Texas"},
-    {id: "florida", name: "Florida"},
     {id: "new-york", name: "New York"},
-    {id: "illinois", name: "Illinois"},
-    {id: "pennsylvania", name: "Pennsylvania"},
+    {id: "washington", name: "Washington"},
   ];
 
   const onRemoveTags = (keys: Set<Key>) => {
@@ -35,12 +35,12 @@ export default function Default() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select countries"
+      placeholder="Select states"
       selectionMode="multiple"
       value={selectedKeys}
       onChange={(keys: Key | Key[] | null) => setSelectedKeys(keys as Key[])}
     >
-      <Label>Countries to Visit</Label>
+      <Label>States to Visit</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
           {({defaultChildren, isPlaceholder, state}: any) => {
