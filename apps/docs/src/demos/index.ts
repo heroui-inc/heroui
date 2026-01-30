@@ -16,6 +16,7 @@ import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as ColorAreaDemos from "./color-area";
 import * as ColorFieldDemos from "./color-field";
+import * as ColorSliderDemos from "./color-slider";
 import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combo-box";
@@ -512,6 +513,35 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-accessibility": {
     component: ColorSwatchDemos.Accessibility,
     file: "color-swatch/accessibility.tsx",
+  },
+  // ColorSlider demos
+  "color-slider-basic": {
+    component: ColorSliderDemos.Basic,
+    file: "color-slider/basic.tsx",
+  },
+  "color-slider-channels": {
+    component: ColorSliderDemos.Channels,
+    file: "color-slider/channels.tsx",
+  },
+  "color-slider-alpha-channel": {
+    component: ColorSliderDemos.AlphaChannel,
+    file: "color-slider/alpha-channel.tsx",
+  },
+  "color-slider-rgb-channels": {
+    component: ColorSliderDemos.RGBChannels,
+    file: "color-slider/rgb-channels.tsx",
+  },
+  "color-slider-vertical": {
+    component: ColorSliderDemos.Vertical,
+    file: "color-slider/vertical.tsx",
+  },
+  "color-slider-disabled": {
+    component: ColorSliderDemos.Disabled,
+    file: "color-slider/disabled.tsx",
+  },
+  "color-slider-controlled": {
+    component: ColorSliderDemos.Controlled,
+    file: "color-slider/controlled.tsx",
   },
   // CloseButton demos
   "close-button-default": {

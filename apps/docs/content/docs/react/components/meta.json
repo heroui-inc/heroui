@@ -22,6 +22,7 @@
     "(buttons)/close-button",
     "(colors)/color-area",
     "(colors)/color-field",
+    "(colors)/color-slider",
     "(colors)/color-swatch",
     "(colors)/color-swatch-picker",
     "(pickers)/combo-box",
