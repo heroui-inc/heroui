@@ -1108,9 +1108,10 @@ export const AsynchronousFiltering: Story = {
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search characters..." />
-                <SearchField.ClearButton />
-                {!!list.isLoading && (
+                {list.isLoading ? (
                   <Spinner className="absolute top-1/2 right-2 -translate-y-1/2" size="sm" />
+                ) : (
+                  <SearchField.ClearButton />
                 )}
               </SearchField.Group>
             </SearchField>
