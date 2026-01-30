@@ -325,7 +325,7 @@ const componentsMap: Record<string, ComponentInfo> = {
   textarea: {
     category: "forms",
     description: "Multiline text input with focus management",
-    href: "/docs/components/textarea",
+    href: "/docs/components/text-area",
     name: "textarea",
     title: "TextArea",
   },
