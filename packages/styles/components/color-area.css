@@ -41,7 +41,7 @@
    ========================================================================== */
 
 .color-area__thumb {
-  @apply size-4 rounded-full;
+  @apply size-4 rounded-full will-change-[width,height];
 
   /* Current color from React Aria */
   background-color: var(--color-area-thumb-color);
@@ -54,6 +54,15 @@
     0 0 0 1px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    width 150ms var(--ease-out),
+    height 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
   /* Focus state */
   &[data-focus-visible="true"] {
     @apply status-focused;
@@ -61,21 +70,11 @@
 
   /* Dragging state */
   &[data-dragging="true"] {
-    @apply scale-120;
+    @apply size-5;
   }
 
   /* Disabled state */
   &[data-disabled="true"] {
     @apply status-disabled;
   }
-
-  /**
-   * Transitions
-   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
-   */
-  transition:
-    transform 150ms var(--ease-out),
-    width 150ms var(--ease-out),
-    height 150ms var(--ease-out);
-  @apply motion-reduce:transition-none;
 }
