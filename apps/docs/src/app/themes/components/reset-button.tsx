@@ -1,6 +1,8 @@
 import {ArrowRotateLeft} from "@gravity-ui/icons";
-import {AlertDialog, Button, Tooltip} from "@heroui/react";
+import {AlertDialog, Button, Kbd, Tooltip, useOverlayState} from "@heroui/react";
 import {useMemo} from "react";
+
+import useKeyPress from "@/hooks/use-key-press";
 
 import {defaultThemeVariables} from "../constants";
 import {useResetVariables} from "../hooks";
@@ -9,6 +11,7 @@ import {useVariablesState} from "../hooks/use-variables-state";
 export function ResetButton() {
   const reset = useResetVariables();
   const [variables] = useVariablesState();
+  const {isOpen, setOpen} = useOverlayState();
 
   const isDisabled = useMemo(() => {
     return (
@@ -22,10 +25,12 @@ export function ResetButton() {
     );
   }, [variables]);
 
+  useKeyPress("d", () => setOpen(true), {enabled: !isDisabled});
+
   return (
     <Tooltip closeDelay={0} delay={100}>
       <Tooltip.Trigger>
-        <AlertDialog>
+        <AlertDialog isOpen={isOpen} onOpenChange={setOpen}>
           <Button isIconOnly isDisabled={isDisabled} size="md" variant="tertiary">
             <ArrowRotateLeft />
           </Button>
@@ -67,7 +72,12 @@ export function ResetButton() {
       </Tooltip.Trigger>
       <Tooltip.Content>
         <Tooltip.Arrow />
-        <p>Reset to defaults</p>
+        <p>
+          Reset to defaults{" "}
+          <Kbd>
+            <Kbd.Content>D</Kbd.Content>
+          </Kbd>
+        </p>
       </Tooltip.Content>
     </Tooltip>
   );
