@@ -37,6 +37,7 @@ const Template = (props: ColorSwatchPicker["RootProps"]) => (
     {defaultColors.map((color) => (
       <ColorSwatchPicker.Item key={color} color={color}>
         <ColorSwatchPicker.Swatch />
+        <ColorSwatchPicker.Indicator />
       </ColorSwatchPicker.Item>
     ))}
   </ColorSwatchPicker>
@@ -63,6 +64,7 @@ const SizesTemplate = () => {
             {defaultColors.map((color) => (
               <ColorSwatchPicker.Item key={color} color={color}>
                 <ColorSwatchPicker.Swatch />
+                <ColorSwatchPicker.Indicator />
               </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker>
@@ -88,6 +90,7 @@ const VariantsTemplate = () => {
             {defaultColors.map((color) => (
               <ColorSwatchPicker.Item key={color} color={color}>
                 <ColorSwatchPicker.Swatch />
+                <ColorSwatchPicker.Indicator />
               </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker>
@@ -113,6 +116,7 @@ const LayoutsTemplate = () => {
             {defaultColors.map((color) => (
               <ColorSwatchPicker.Item key={color} color={color}>
                 <ColorSwatchPicker.Swatch />
+                <ColorSwatchPicker.Indicator />
               </ColorSwatchPicker.Item>
             ))}
           </ColorSwatchPicker>
@@ -142,6 +146,7 @@ const AllVariantsTemplate = () => {
                 {defaultColors.map((color) => (
                   <ColorSwatchPicker.Item key={color} color={color}>
                     <ColorSwatchPicker.Swatch />
+                    <ColorSwatchPicker.Indicator />
                   </ColorSwatchPicker.Item>
                 ))}
               </ColorSwatchPicker>
@@ -167,6 +172,7 @@ export const Controlled: Story = {
           {defaultColors.map((color) => (
             <ColorSwatchPicker.Item key={color} color={color}>
               <ColorSwatchPicker.Swatch />
+              <ColorSwatchPicker.Indicator />
             </ColorSwatchPicker.Item>
           ))}
         </ColorSwatchPicker>
@@ -179,31 +185,20 @@ export const Controlled: Story = {
 };
 
 export const Disabled: Story = {
-  render: () => (
-    <ColorSwatchPicker>
-      <ColorSwatchPicker.Item color="#F43F5E">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item isDisabled color="#D946EF">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#8B5CF6">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item isDisabled color="#3B82F6">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#06B6D4">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#10B981">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#84CC16">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-    </ColorSwatchPicker>
-  ),
+  render: () => {
+    const colors = ["#F43F5E", "#D946EF", "#8B5CF6", "#3B82F6", "#06B6D4", "#10B981", "#84CC16"];
+
+    return (
+      <ColorSwatchPicker>
+        {colors.map((color) => (
+          <ColorSwatchPicker.Item key={color} isDisabled color={color}>
+            <ColorSwatchPicker.Swatch />
+            <ColorSwatchPicker.Indicator />
+          </ColorSwatchPicker.Item>
+        ))}
+      </ColorSwatchPicker>
+    );
+  },
 };
 
 export const WithDefaultValue: Story = {
@@ -212,6 +207,7 @@ export const WithDefaultValue: Story = {
       {defaultColors.map((color) => (
         <ColorSwatchPicker.Item key={color} color={color}>
           <ColorSwatchPicker.Swatch />
+          <ColorSwatchPicker.Indicator />
         </ColorSwatchPicker.Item>
       ))}
     </ColorSwatchPicker>
@@ -270,6 +266,7 @@ const ExtendedPaletteTemplate = () => {
         {palette.map((color) => (
           <ColorSwatchPicker.Item key={color} color={color}>
             <ColorSwatchPicker.Swatch />
+            <ColorSwatchPicker.Indicator />
           </ColorSwatchPicker.Item>
         ))}
       </ColorSwatchPicker>

@@ -12,7 +12,7 @@
    ========================================================================== */
 
 .color-swatch-picker__item {
-  @apply flex size-8 items-center justify-center rounded-full border-2 border-transparent outline-none no-highlight;
+  @apply relative flex size-8 items-center justify-center rounded-full border-2 border-transparent outline-none no-highlight;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -40,6 +40,7 @@
   /* Selected state */
   &[data-selected="true"] {
     border-color: var(--color-swatch-current);
+    box-shadow: var(--field-shadow);
     /* Shrink the swatch to reveal the white gap */
     .color-swatch-picker__swatch {
       transform: scale(0.77);
@@ -67,6 +68,38 @@
     &:hover {
       transform: scale(1.1);
     }
+  }
+}
+
+/* ==========================================================================
+   Indicator - Checkmark indicator for selected state
+   ========================================================================== */
+
+.color-swatch-picker__indicator {
+  @apply pointer-events-none absolute inset-0 z-10 flex items-center justify-center;
+
+  /* Checkmark SVG styles - default to white for dark backgrounds */
+  [data-slot="color-swatch-picker-checkmark"] {
+    @apply size-1/3 text-white;
+
+    /* Start scaled down - use explicit transform for proper transition */
+    transform: scale(0);
+
+    /**
+     * Transitions
+     */
+    transition: transform 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+  }
+
+  /* Use black checkmark on light backgrounds */
+  &[data-light-color="true"] [data-slot="color-swatch-picker-checkmark"] {
+    @apply text-black;
+  }
+
+  /* Scale up when parent item is selected */
+  .color-swatch-picker__item[data-selected="true"] & [data-slot="color-swatch-picker-checkmark"] {
+    transform: scale(1);
   }
 }
 

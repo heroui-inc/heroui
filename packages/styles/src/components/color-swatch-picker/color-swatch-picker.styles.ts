@@ -10,6 +10,7 @@ export const colorSwatchPickerVariants = tv({
   },
   slots: {
     base: "color-swatch-picker",
+    indicator: "color-swatch-picker__indicator",
     item: "color-swatch-picker__item",
     swatch: "color-swatch-picker__swatch",
   },
