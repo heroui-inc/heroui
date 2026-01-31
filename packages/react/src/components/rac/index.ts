@@ -16,4 +16,10 @@ export type {
   ValidationResult,
   RangeValue,
   RouterConfig,
+  Color,
+  ColorFormat,
+  ColorSpace,
+  ColorChannel,
+  ColorChannelRange,
+  ColorAxes,
 } from "./types";
