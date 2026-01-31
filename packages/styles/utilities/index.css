@@ -13,6 +13,7 @@
 
 @utility invalid-field-outline {
   @apply outline-1 outline-danger outline-solid;
+  --tw-ring-offset-width: 3px;
 }
 
 @utility no-highlight {
