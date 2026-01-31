@@ -5,6 +5,7 @@ import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
 import React, {useState} from "react";
 import {useFilter} from "react-aria-components";
+import {cn} from "tailwind-variants";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
@@ -1108,11 +1109,15 @@ export const AsynchronousFiltering: Story = {
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search characters..." />
-                {list.isLoading ? (
-                  <Spinner className="absolute top-1/2 right-2 -translate-y-1/2" size="sm" />
-                ) : (
-                  <SearchField.ClearButton />
-                )}
+                <Spinner
+                  size="sm"
+                  className={cn("absolute top-1/2 right-2 -translate-y-1/2", {
+                    "pointer-events-none opacity-0": !list.isLoading,
+                  })}
+                />
+                <SearchField.ClearButton
+                  className={cn({"pointer-events-none opacity-0": !!list.isLoading})}
+                />
               </SearchField.Group>
             </SearchField>
             <ListBox
