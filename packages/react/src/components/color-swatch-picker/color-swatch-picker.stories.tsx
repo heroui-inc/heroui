@@ -258,6 +258,9 @@ const ExtendedPaletteTemplate = () => {
     "#A78BFA",
     "#8B5CF6",
     "#7C3AED",
+    // White & Black
+    "#FFFFFF",
+    "#000000",
   ];
 
   return (
