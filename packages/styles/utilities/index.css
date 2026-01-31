@@ -11,10 +11,8 @@
   --tw-ring-offset-width: 0px;
 }
 
-@utility invalid-field-ring {
-  @apply ring-1 ring-danger ring-offset-0 outline-none;
-  /* No separation - ring sits directly against the element */
-  --tw-ring-offset-width: 0px;
+@utility invalid-field-outline {
+  @apply outline-1 outline-danger outline-solid;
 }
 
 @utility no-highlight {
@@ -31,7 +29,7 @@
 }
 
 @utility status-invalid-field {
-  @apply invalid-field-ring;
+  @apply invalid-field-outline;
 }
 
 @utility status-disabled {
