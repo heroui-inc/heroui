@@ -79,22 +79,11 @@
 .color-input-group__prefix {
   @apply shrink-0 text-field-placeholder;
   @apply mr-0 ml-3 flex items-center;
-
-  /* Color swatch in prefix should be interactive for color picker trigger */
-  [data-slot="color-swatch"] {
-    @apply pointer-events-auto cursor-pointer;
-  }
 }
 
 .color-input-group__suffix {
   @apply shrink-0 text-field-placeholder;
   @apply mr-3 flex items-center;
-
-  /* Allow interactive elements in suffix (like format selector) */
-  button,
-  [role="button"] {
-    @apply pointer-events-auto cursor-pointer;
-  }
 }
 
 /* ==========================================================================
