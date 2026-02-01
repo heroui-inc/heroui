@@ -1,16 +1,13 @@
 "use client";
 
-import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
+import {Button, ButtonGroup, Description, Dropdown, Label} from "@heroui/react";
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
 import {ChevronDown} from "lucide-react";
 import {useMemo, useState} from "react";
-import {tv} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
-import {AnthropicIcon, GithubIcon, OpenAIIcon} from "@/icons/dev";
-import {LinkIcon} from "@/icons/link";
-import {cn} from "@/utils/cn";
+import {ClaudeIcon, CursorIcon, MarkdownIcon, OpenAIIcon, VSCodeIcon} from "@/icons/dev";
 import {__DEV__} from "@/utils/env";
-import {docsButtonVariants} from "@/utils/variants";
 
 import {Iconify} from "../iconify";
 
@@ -35,8 +32,64 @@ function markdownUrlToSlug(markdownUrl: string): string {
   return slug || "index";
 }
 
-export function LLMCopyButton({markdownUrl}: {markdownUrl: string}) {
+export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
+  const items = useMemo(() => {
+    let fullMarkdownUrl = "";
+
+    if (typeof window !== "undefined") {
+      try {
+        fullMarkdownUrl = new URL(markdownUrl, window.location.origin).href;
+      } catch {
+        fullMarkdownUrl = `${window.location.origin}${markdownUrl}`;
+      }
+    }
+
+    const query = fullMarkdownUrl
+      ? `Read ${fullMarkdownUrl}, I want to ask questions about it.`
+      : "I want to ask questions about this documentation.";
+
+    return [
+      {
+        description: "View page as Markdown format",
+        href: fullMarkdownUrl,
+        icon: <MarkdownIcon size={18} />,
+        key: "markdown",
+        title: "View as Markdown",
+      },
+      {
+        description: "Install MCP Server on Cursor",
+        href: "cursor://anysphere.cursor-deeplink/mcp/install?name=heroui-react&config=eyJjb21tYW5kIjoibnB4IC15IEBoZXJvdWkvcmVhY3QtbWNwQGxhdGVzdCJ9",
+        icon: <CursorIcon size={18} />,
+        key: "cursor",
+        title: "Add to Cursor",
+      },
+      {
+        description: "Install MCP Server on VS Code",
+        href: "vscode:mcp/install?%7B%22name%22%3A%22heroui-react%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40heroui%2Freact-mcp%40latest%22%5D%7D",
+        icon: <VSCodeIcon size={18} />,
+        key: "vscode",
+        title: "Add to VS Code",
+      },
+      {
+        description: "Ask questions about this page",
+        href: `https://chatgpt.com/?${new URLSearchParams({hints: "search", q: query})}`,
+        icon: <OpenAIIcon size={16} />,
+        key: "chatgpt",
+        title: "Open in ChatGPT",
+      },
+      {
+        description: "Ask questions about this page",
+        href: `https://claude.ai/new?${new URLSearchParams({q: query})}`,
+        icon: <ClaudeIcon size={16} />,
+        key: "claude",
+        title: "Open in Claude",
+      },
+    ];
+  }, [markdownUrl]);
+
   const [isLoading, setLoading] = useState(false);
+
+  const [isOpen, setOpen] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
     if (!__DEV__) {
       const cached = cache.get(markdownUrl);
@@ -75,88 +128,61 @@ export function LLMCopyButton({markdownUrl}: {markdownUrl: string}) {
   });
 
   return (
-    <button
-      disabled={isLoading}
-      className={docsButtonVariants({
-        className: "text-sm [&_svg]:size-3.5 [&_svg]:text-muted",
-      })}
-      onClick={onClick}
-    >
-      <Iconify
-        className="absolute left-2.5 scale-50 opacity-0 transition-all data-[visible=true]:scale-100 data-[visible=true]:opacity-100"
-        data-visible={checked}
-        icon="check"
-      />
-      <Iconify
-        className="scale-50 opacity-0 transition-all data-[visible=true]:scale-100 data-[visible=true]:opacity-100"
-        data-visible={!checked}
-        icon="copy"
-      />
-      Copy Markdown
-    </button>
-  );
-}
+    <ButtonGroup size="md" variant="tertiary">
+      <Button className={isLoading ? "animate-pulse" : ""} isDisabled={isLoading} onClick={onClick}>
+        {checked ? (
+          <>
+            <Iconify icon="check" />
+            Copied
+          </>
+        ) : (
+          <>
+            <Iconify icon="copy" />
+            Copy Markdown
+          </>
+        )}
+      </Button>
+      <Dropdown isOpen={isOpen} onOpenChange={setOpen}>
+        <Button isIconOnly size="md" variant="tertiary">
+          <ChevronDown
+            className={cn(
+              "text-fd-muted-foreground size-3.5 transition-transform",
+              isOpen && "rotate-180",
+            )}
+          />
+        </Button>
+        <Dropdown.Popover placement="bottom end">
+          <Dropdown.Menu
+            onAction={(key) => {
+              const item = items.find((i) => i.key === key);
 
-const optionVariants = tv({
-  base: "hover:text-fd-accent-foreground hover:bg-fd-accent inline-flex items-center gap-2 rounded-lg p-2 text-sm [&_svg]:flex-none",
-});
-
-export function ViewOptions({githubUrl, markdownUrl}: {markdownUrl: string; githubUrl: string}) {
-  const items = useMemo(() => {
-    let fullMarkdownUrl = "";
-
-    if (typeof window !== "undefined") {
-      try {
-        fullMarkdownUrl = new URL(markdownUrl, window.location.origin).href;
-      } catch {
-        fullMarkdownUrl = `${window.location.origin}${markdownUrl}`;
-      }
-    }
-
-    const query = fullMarkdownUrl
-      ? `Read ${fullMarkdownUrl}, I want to ask questions about it.`
-      : "I want to ask questions about this documentation.";
-
-    return [
-      {
-        href: githubUrl,
-        icon: <GithubIcon size={18} />,
-        title: "Open in GitHub",
-      },
-      {
-        href: `https://chatgpt.com/?${new URLSearchParams({hints: "search", q: query})}`,
-        icon: <OpenAIIcon size={16} />,
-        title: "Open in ChatGPT",
-      },
-      {
-        href: `https://claude.ai/new?${new URLSearchParams({q: query})}`,
-        icon: <AnthropicIcon size={16} />,
-        title: "Open in Claude",
-      },
-    ];
-  }, [githubUrl, markdownUrl]);
-
-  return (
-    <Popover>
-      <PopoverTrigger className={docsButtonVariants()}>
-        Open
-        <ChevronDown className="text-fd-muted-foreground size-3.5" />
-      </PopoverTrigger>
-      <PopoverContent align="end" className="flex flex-col overflow-auto">
-        {items.map((item) => (
-          <a
-            key={item.href}
-            className={cn(optionVariants())}
-            href={item.href}
-            rel="noreferrer noopener"
-            target="_blank"
+              if (item?.href) {
+                window.open(item.href, "_blank", "noreferrer noopener");
+              }
+            }}
           >
-            {item.icon}
-            {item.title}
-            <LinkIcon className="ms-auto size-3 flex-none text-muted" />
-          </a>
-        ))}
-      </PopoverContent>
-    </Popover>
+            {items.map((item) => (
+              <Dropdown.Item
+                key={item.key}
+                href={item.href}
+                id={item.key}
+                rel="noreferrer noopener"
+                target="_blank"
+                textValue={item.title}
+              >
+                {item.icon}
+                <div className="flex w-full flex-col">
+                  <Label className="flex gap-0.5">{item.title}</Label>
+                  <Description>{item.description}</Description>
+                </div>
+                {(item.key === "chatgpt" || item.key === "claude") && (
+                  <Iconify className="text-foreground/70" icon="arrow-up-right-from-square" />
+                )}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown>
+    </ButtonGroup>
   );
 }

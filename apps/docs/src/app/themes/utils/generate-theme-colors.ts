@@ -140,6 +140,37 @@ export interface GeneratedThemeColors {
   dangerForeground: ThemeColor;
 }
 
+/**
+ * Semantic color override for a single color (success, warning, or danger)
+ */
+export interface SemanticColorOverride {
+  /** OKLCH color string e.g. "oklch(0.5148 0.1337 146.82)" */
+  color: string;
+  /** Optional foreground color - if not provided, will be calculated automatically */
+  foreground?: string;
+}
+
+/**
+ * Semantic color overrides for light and dark modes.
+ * Allows themes to specify exact semantic colors instead of using calculated values.
+ */
+export interface SemanticOverrides {
+  light?: {
+    /** Override the accent foreground color (text on accent background) */
+    accentForeground?: string;
+    danger?: SemanticColorOverride;
+    success?: SemanticColorOverride;
+    warning?: SemanticColorOverride;
+  };
+  dark?: {
+    /** Override the accent foreground color (text on accent background) */
+    accentForeground?: string;
+    danger?: SemanticColorOverride;
+    success?: SemanticColorOverride;
+    warning?: SemanticColorOverride;
+  };
+}
+
 export interface ColorGenerationParams {
   /** Lightness value for accent color (0-1) */
   lightness: number;
@@ -149,6 +180,8 @@ export interface ColorGenerationParams {
   hue: number;
   /** Base chroma for gray/neutral colors (optional, defaults to subtle value) */
   grayChroma?: number;
+  /** Optional semantic color overrides for light/dark modes */
+  semanticOverrides?: SemanticOverrides;
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -315,9 +348,16 @@ function generateSemanticColor(
  * Unlike the storybook version, this supports:
  * - Lightness customization for accent colors
  * - Full theme color generation for both light and dark modes
+ * - Semantic color overrides for specific themes
  */
 export function generateThemeColors(params: ColorGenerationParams): GeneratedThemeColors {
-  const {lightness, chroma, hue, grayChroma = Math.min(chroma * 0.05, 0.015)} = params;
+  const {
+    lightness,
+    chroma,
+    hue,
+    grayChroma = Math.min(chroma * 0.05, 0.015),
+    semanticOverrides,
+  } = params;
 
   // Get defaults
   const defaultsLight = DEFAULT_THEME_VALUES.light;
@@ -333,11 +373,15 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
     oklchLight: accentLight,
   };
 
-  // --accent-foreground: Calculated based on accent lightness
+  // --accent-foreground: Use override if provided, otherwise calculate based on accent lightness
   const accentForeground: ThemeColor = {
     name: "--accent-foreground",
-    oklchDark: calculateAccentForeground(lightness, chroma, hue),
-    oklchLight: calculateAccentForeground(lightness, chroma, hue),
+    oklchDark:
+      semanticOverrides?.dark?.accentForeground ??
+      calculateAccentForeground(lightness, chroma, hue),
+    oklchLight:
+      semanticOverrides?.light?.accentForeground ??
+      calculateAccentForeground(lightness, chroma, hue),
   };
 
   // --focus: Same as accent
@@ -466,10 +510,92 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
     oklchLight: muted.oklchLight,
   };
 
-  // Generate semantic colors with base hue blending
-  const successColors = generateSemanticColor("success", SEMANTIC_COLORS.success, hue, grayChroma);
-  const warningColors = generateSemanticColor("warning", SEMANTIC_COLORS.warning, hue, grayChroma);
-  const dangerColors = generateSemanticColor("danger", SEMANTIC_COLORS.danger, hue, grayChroma);
+  // Generate semantic colors - use overrides if provided, otherwise calculate
+  let successColors: {color: ThemeColor; foreground: ThemeColor};
+  let warningColors: {color: ThemeColor; foreground: ThemeColor};
+  let dangerColors: {color: ThemeColor; foreground: ThemeColor};
+
+  // Check for success overrides
+  const lightSuccessOverride = semanticOverrides?.light?.success;
+  const darkSuccessOverride = semanticOverrides?.dark?.success;
+
+  if (lightSuccessOverride || darkSuccessOverride) {
+    // Use overrides where provided, fall back to calculated values
+    const calculated = generateSemanticColor("success", SEMANTIC_COLORS.success, hue, grayChroma);
+
+    successColors = {
+      color: {
+        name: "--success",
+        oklchDark: darkSuccessOverride?.color ?? calculated.color.oklchDark,
+        oklchLight: lightSuccessOverride?.color ?? calculated.color.oklchLight,
+      },
+      foreground: {
+        name: "--success-foreground",
+        oklchDark:
+          darkSuccessOverride?.foreground ??
+          calculateForeground(darkSuccessOverride?.color ?? calculated.color.oklchDark),
+        oklchLight:
+          lightSuccessOverride?.foreground ??
+          calculateForeground(lightSuccessOverride?.color ?? calculated.color.oklchLight),
+      },
+    };
+  } else {
+    successColors = generateSemanticColor("success", SEMANTIC_COLORS.success, hue, grayChroma);
+  }
+
+  // Check for warning overrides
+  const lightWarningOverride = semanticOverrides?.light?.warning;
+  const darkWarningOverride = semanticOverrides?.dark?.warning;
+
+  if (lightWarningOverride || darkWarningOverride) {
+    const calculated = generateSemanticColor("warning", SEMANTIC_COLORS.warning, hue, grayChroma);
+
+    warningColors = {
+      color: {
+        name: "--warning",
+        oklchDark: darkWarningOverride?.color ?? calculated.color.oklchDark,
+        oklchLight: lightWarningOverride?.color ?? calculated.color.oklchLight,
+      },
+      foreground: {
+        name: "--warning-foreground",
+        oklchDark:
+          darkWarningOverride?.foreground ??
+          calculateForeground(darkWarningOverride?.color ?? calculated.color.oklchDark),
+        oklchLight:
+          lightWarningOverride?.foreground ??
+          calculateForeground(lightWarningOverride?.color ?? calculated.color.oklchLight),
+      },
+    };
+  } else {
+    warningColors = generateSemanticColor("warning", SEMANTIC_COLORS.warning, hue, grayChroma);
+  }
+
+  // Check for danger overrides
+  const lightDangerOverride = semanticOverrides?.light?.danger;
+  const darkDangerOverride = semanticOverrides?.dark?.danger;
+
+  if (lightDangerOverride || darkDangerOverride) {
+    const calculated = generateSemanticColor("danger", SEMANTIC_COLORS.danger, hue, grayChroma);
+
+    dangerColors = {
+      color: {
+        name: "--danger",
+        oklchDark: darkDangerOverride?.color ?? calculated.color.oklchDark,
+        oklchLight: lightDangerOverride?.color ?? calculated.color.oklchLight,
+      },
+      foreground: {
+        name: "--danger-foreground",
+        oklchDark:
+          darkDangerOverride?.foreground ??
+          calculateForeground(darkDangerOverride?.color ?? calculated.color.oklchDark),
+        oklchLight:
+          lightDangerOverride?.foreground ??
+          calculateForeground(lightDangerOverride?.color ?? calculated.color.oklchLight),
+      },
+    };
+  } else {
+    dangerColors = generateSemanticColor("danger", SEMANTIC_COLORS.danger, hue, grayChroma);
+  }
 
   return {
     accent,

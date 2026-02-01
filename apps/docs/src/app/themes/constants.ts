@@ -15,7 +15,13 @@ import spotifyTheme from "@/assets/themes/spotify.png";
 
 import {DEFAULT_BASE} from "./theme-values";
 
-export type {RadiusId, ThemeId, ThemeValues} from "./theme-values";
+export type {
+  RadiusId,
+  SemanticColorOverride,
+  ThemeId,
+  ThemeSemanticOverrides,
+  ThemeValues,
+} from "./theme-values";
 export {
   DEFAULT_BASE,
   findMatchingTheme,

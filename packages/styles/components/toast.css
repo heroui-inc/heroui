@@ -75,7 +75,7 @@
 
 /* Toast content */
 .toast__content {
-  @apply flex h-full grow flex-col items-start;
+  @apply flex h-full grow flex-col items-start self-center;
 }
 
 /* Toast indicator */

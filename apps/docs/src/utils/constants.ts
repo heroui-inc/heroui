@@ -24,6 +24,11 @@ export const DOCS_CONTENT_PATH =
     ? `${GITHUB_URL}/${REPO_NAME}/blob/v3/apps/docs/content/docs`
     : `${GITHUB_URL}/${REPO_NAME}/blob/main/apps/docs/content/docs`;
 
+export const RAW_DOCS_CONTENT_PATH =
+  __IS_PRE_RELEASE__ || __PREVIEW__
+    ? `${RAW_GITHUB_URL}/${REPO_NAME}/refs/heads/v3/apps/docs/content/docs`
+    : `${RAW_GITHUB_URL}/${REPO_NAME}/refs/heads/main/apps/docs/content/docs`;
+
 export const COMPONENT_STYLES_PATH =
   __IS_PRE_RELEASE__ || __PREVIEW__
     ? `${GITHUB_URL}/${REPO_NAME}/tree/v3/packages/styles/components`

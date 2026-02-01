@@ -14,6 +14,8 @@ export * from "./card";
 export * from "./checkbox";
 export * from "./checkbox-group";
 export * from "./chip";
+export * from "./color-swatch";
+export * from "./color-swatch-picker";
 export * from "./close-button";
 export * from "./combobox";
 export * from "./date-field";

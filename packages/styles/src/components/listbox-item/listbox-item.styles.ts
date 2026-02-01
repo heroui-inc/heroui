@@ -7,16 +7,16 @@ export const listboxItemVariants = tv({
     variant: "default",
   },
   slots: {
-    indicator: "listbox-item__indicator",
-    item: "listbox-item",
+    indicator: "list-box-item__indicator",
+    item: "list-box-item",
   },
   variants: {
     variant: {
       danger: {
-        item: "listbox-item--danger",
+        item: "list-box-item--danger",
       },
       default: {
-        item: "listbox-item--default",
+        item: "list-box-item--default",
       },
     },
   },

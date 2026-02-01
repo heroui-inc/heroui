@@ -13,7 +13,12 @@ import {Separator as SeparatorPrimitive} from "react-aria-components";
 interface SeparatorRootProps
   extends ComponentPropsWithRef<typeof SeparatorPrimitive>, SeparatorVariants {}
 
-const SeparatorRoot = ({className, orientation = "horizontal", ...props}: SeparatorRootProps) => {
+const SeparatorRoot = ({
+  className,
+  orientation = "horizontal",
+  variant,
+  ...props
+}: SeparatorRootProps) => {
   return (
     <SeparatorPrimitive
       data-orientation={orientation}
@@ -21,6 +26,7 @@ const SeparatorRoot = ({className, orientation = "horizontal", ...props}: Separa
       orientation={orientation}
       className={separatorVariants({
         orientation,
+        variant,
         className,
       })}
       {...props}
