@@ -21,6 +21,7 @@ import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {Button} from "../button";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
+import {Spinner} from "../spinner";
 
 import {DEFAULT_GAP, DEFAULT_MAX_VISIBLE_TOAST, DEFAULT_SCALE_FACTOR} from "./constants";
 import {ToastQueue, toast as defaultToastQueue} from "./toast-queue";
@@ -285,7 +286,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
 
   const getDefaultChildren = useCallback(
     (renderProps: {toast: QueuedToast<T>}) => {
-      const {actionProps, description, indicator, title, variant} =
+      const {actionProps, description, indicator, isLoading, title, variant} =
         (renderProps.toast.content as ToastContentValue) ?? {};
 
       return (
@@ -295,7 +296,11 @@ const ToastProvider = <T extends object = ToastContentValue>({
           toast={renderProps.toast}
           variant={variant}
         >
-          {indicator === null ? null : (
+          {indicator === null ? null : isLoading ? (
+            <ToastIndicator variant={variant}>
+              <Spinner color="current" size="sm" />
+            </ToastIndicator>
+          ) : (
             <ToastIndicator variant={variant}>{indicator}</ToastIndicator>
           )}
           <ToastContent>
@@ -328,15 +333,23 @@ const ToastProvider = <T extends object = ToastContentValue>({
       }}
       {...rest}
     >
-      {(renderProps) => (
-        <ToastContext value={{slots, placement, scaleFactor}}>
-          {typeof children === "undefined"
-            ? getDefaultChildren(renderProps)
-            : typeof children === "function"
-              ? children(renderProps)
-              : children}
-        </ToastContext>
-      )}
+      {(renderProps) => {
+        const content = renderProps.toast.content as ToastContentValue;
+        const renderPropsWithIsLoading = {
+          ...renderProps,
+          isLoading: content?.isLoading ?? false,
+        };
+
+        return (
+          <ToastContext value={{slots, placement, scaleFactor}}>
+            {typeof children === "undefined"
+              ? getDefaultChildren(renderProps)
+              : typeof children === "function"
+                ? children(renderPropsWithIsLoading)
+                : children}
+          </ToastContext>
+        );
+      }}
     </ToastRegionPrimitive>
   );
 };

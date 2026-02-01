@@ -85,6 +85,15 @@
   [data-slot="toast-default-icon"] {
     @apply box-content size-4;
   }
+
+  /* Spinner styles override for toast */
+  [data-slot="spinner"] {
+    @apply size-4;
+  }
+
+  [data-slot="spinner-icon"] {
+    @apply size-4;
+  }
 }
 
 /* Toast title */

@@ -88,6 +88,7 @@ export interface ToastContentValue {
   description?: ReactNode | undefined;
   variant?: "default" | "accent" | "success" | "warning" | "danger" | undefined;
   actionProps?: ButtonProps | undefined;
+  isLoading?: boolean | undefined;
 }
 
 export interface HeroUIToastOptions {
@@ -146,7 +147,16 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
     options: ToastPromiseOptions<T>,
   ): string => {
     const promiseFn = typeof promise === "function" ? promise() : promise;
-    const loadingId = toastFn(options.loading, {variant: "default"});
+    const loadingId = queue.add(
+      {
+        title: options.loading,
+        variant: "default",
+        isLoading: true,
+      },
+      {
+        timeout: 0, // Don't auto-close loading toasts
+      },
+    );
 
     promiseFn
       .then((data) => {
