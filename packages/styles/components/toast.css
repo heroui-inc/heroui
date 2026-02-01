@@ -158,7 +158,6 @@
 /* View transition animations */
 ::view-transition-group(.toast-bottom),
 ::view-transition-group(.toast-top) {
-  will-change: translate, opacity;
 }
 
 /* Bottom */

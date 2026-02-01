@@ -2,7 +2,7 @@
 
 /* Base popover styles */
 .popover {
-  @apply origin-(--trigger-anchor-point) rounded-3xl bg-overlay p-0 text-sm will-change-[opacity,transform];
+  @apply origin-(--trigger-anchor-point) rounded-3xl bg-overlay p-0 text-sm;
   box-shadow: var(--shadow-overlay);
 
   /* Entering animations */
@@ -30,6 +30,11 @@
   /* Exiting animations */
   &[data-exiting="true"] {
     @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+  }
+
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
   }
 
   /* Arrow styling */

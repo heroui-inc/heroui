@@ -2,7 +2,7 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-3xl px-4 text-sm font-medium whitespace-nowrap will-change-transform outline-none select-none no-highlight md:h-9;
+  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-3xl px-4 text-sm font-medium whitespace-nowrap outline-none select-none no-highlight md:h-9;
 
   /**
    * Transitions
