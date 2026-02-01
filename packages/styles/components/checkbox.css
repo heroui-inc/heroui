@@ -199,6 +199,10 @@
 
 .checkbox__indicator {
   @apply relative z-10 flex size-3 items-center justify-center;
+
+  & svg {
+    @apply transform-gpu;
+  }
 }
 
 /* ==========================================================================

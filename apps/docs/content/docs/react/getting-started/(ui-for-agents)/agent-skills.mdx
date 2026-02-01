@@ -12,10 +12,20 @@ HeroUI Skills give your AI assistant comprehensive knowledge of HeroUI v3 compon
   alt="HeroUI v3 MCP Server"
 />
 
+<p className="px-0.5 text-sm text-muted">
+Version 2.0.0
+</p>
+
 ### Installation
 
 ```bash
-curl -fsSL https://v3.heroui.com/install | bash
+curl -fsSL https://v3.heroui.com/install | bash -s heroui-react
+```
+
+Or using the skills package:
+
+```bash
+npx skills add heroui-inc/heroui
 ```
 
 <span className="text-sm text-muted">
@@ -24,16 +34,16 @@ Support Claude Code, Cursor, OpenCode and more.
 
 ### Usage
 
-```bash
-/heroui check installation
-/heroui list all components
-/heroui create a login page
-/heroui create a custom button on /src/components/button.tsx
-/heroui get source code for button component
-```
+Skills are **automatically discovered** by your AI assistant, or call it directly using `/heroui-react` command.
+
+Simply ask your AI assistant to:
+- Build components using HeroUI v3
+- Create pages with HeroUI components
+- Customize themes and styles
+- Access component documentation
 
 <Callout>
-  For more complex use cases, use the [MCP Server](/docs/react/getting-started/mcp-server) which provides real-time access to component documentation and source code. Skills are still being adjusted and tested.
+  For more complex use cases, use the [MCP Server](/docs/react/getting-started/mcp-server) which provides real-time access to component documentation and source code.
 </Callout>
 
 ### What's Included
@@ -42,25 +52,20 @@ Support Claude Code, Cursor, OpenCode and more.
 - All HeroUI v3 components with props, examples, and usage patterns
 - Theming and styling guidelines
 - Design principles and composition patterns
-- Accessibility best practices (WCAG 2.1 AA)
 
 ### Structure
 
 ```
-skills/react/
+skills/heroui-react/
 ├── SKILL.md              # Main skill documentation
 ├── LICENSE.txt           # MIT license
-├── scripts/              # Utility scripts
-│   ├── list_components.mjs
-│   ├── get_component_docs.mjs
-│   ├── get_source.mjs
-│   ├── get_styles.mjs
-│   ├── get_theme.mjs
-│   └── get_docs.mjs
-└── references/           # Reference guides
-    ├── accessibility-guide.md
-    ├── component-patterns.md
-    └── theming-customization.md
+└── scripts/              # Utility scripts
+    ├── list_components.mjs
+    ├── get_component_docs.mjs
+    ├── get_source.mjs
+    ├── get_styles.mjs
+    ├── get_theme.mjs
+    └── get_docs.mjs
 ```
 
 ### Related Documentation

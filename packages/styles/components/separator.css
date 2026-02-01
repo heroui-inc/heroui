@@ -17,6 +17,19 @@
   @apply h-full min-h-2 w-px;
 }
 
+/* Color variants */
+.separator--default {
+  @apply bg-separator;
+}
+
+.separator--secondary {
+  @apply bg-separator-secondary;
+}
+
+.separator--tertiary {
+  @apply bg-separator-tertiary;
+}
+
 .separator__container {
   @apply flex items-center gap-3;
 }

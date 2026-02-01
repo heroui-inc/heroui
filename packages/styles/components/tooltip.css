@@ -2,7 +2,7 @@
 
 /* Base tooltip styles */
 .tooltip {
-  @apply origin-(--trigger-anchor-point) rounded-xl bg-overlay px-2 py-1 text-xs will-change-[opacity,transform];
+  @apply max-w-xs origin-(--trigger-anchor-point) rounded-xl bg-overlay px-2 py-1 text-xs break-all will-change-[opacity,transform];
   box-shadow: var(--shadow-overlay);
 
   /* Entering animations */
@@ -63,8 +63,6 @@
     background-color 150ms var(--ease-smooth),
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
-
-  cursor: var(--cursor-interactive);
 
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {

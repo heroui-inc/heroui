@@ -14,6 +14,8 @@ import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as ColorSwatchDemos from "./color-swatch";
+import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combobox";
 import * as DateFieldDemos from "./date-field";
 import * as DescriptionDemos from "./description";
@@ -418,6 +420,31 @@ export const demos: Record<string, DemoItem> = {
     component: ChipDemos.Statuses,
     file: "chip/statuses.tsx",
   },
+  // ColorSwatch demos
+  "color-swatch-basic": {
+    component: ColorSwatchDemos.Basic,
+    file: "color-swatch/basic.tsx",
+  },
+  "color-swatch-sizes": {
+    component: ColorSwatchDemos.Sizes,
+    file: "color-swatch/sizes.tsx",
+  },
+  "color-swatch-shapes": {
+    component: ColorSwatchDemos.Shapes,
+    file: "color-swatch/shapes.tsx",
+  },
+  "color-swatch-transparency": {
+    component: ColorSwatchDemos.Transparency,
+    file: "color-swatch/transparency.tsx",
+  },
+  "color-swatch-custom-styles": {
+    component: ColorSwatchDemos.CustomStyles,
+    file: "color-swatch/custom-styles.tsx",
+  },
+  "color-swatch-accessibility": {
+    component: ColorSwatchDemos.Accessibility,
+    file: "color-swatch/accessibility.tsx",
+  },
   // CloseButton demos
   "close-button-default": {
     component: CloseButtonDemos.Default,
@@ -430,6 +457,35 @@ export const demos: Record<string, DemoItem> = {
   "close-button-interactive": {
     component: CloseButtonDemos.Interactive,
     file: "close-button/interactive.tsx",
+  },
+  // ColorSwatchPicker demos
+  "color-swatch-picker-basic": {
+    component: ColorSwatchPickerDemos.Basic,
+    file: "color-swatch-picker/basic.tsx",
+  },
+  "color-swatch-picker-sizes": {
+    component: ColorSwatchPickerDemos.Sizes,
+    file: "color-swatch-picker/sizes.tsx",
+  },
+  "color-swatch-picker-variants": {
+    component: ColorSwatchPickerDemos.Variants,
+    file: "color-swatch-picker/variants.tsx",
+  },
+  "color-swatch-picker-stack-layout": {
+    component: ColorSwatchPickerDemos.StackLayout,
+    file: "color-swatch-picker/stack-layout.tsx",
+  },
+  "color-swatch-picker-controlled": {
+    component: ColorSwatchPickerDemos.Controlled,
+    file: "color-swatch-picker/controlled.tsx",
+  },
+  "color-swatch-picker-disabled": {
+    component: ColorSwatchPickerDemos.Disabled,
+    file: "color-swatch-picker/disabled.tsx",
+  },
+  "color-swatch-picker-default-value": {
+    component: ColorSwatchPickerDemos.DefaultValue,
+    file: "color-swatch-picker/default-value.tsx",
   },
   // Autocomplete demos
   "autocomplete-default": {
@@ -753,6 +809,10 @@ export const demos: Record<string, DemoItem> = {
     component: DateFieldDemos.FullWidth,
     file: "date-field/full-width.tsx",
   },
+  "date-field-granularity": {
+    component: DateFieldDemos.Granularity,
+    file: "date-field/granularity.tsx",
+  },
   "date-field-with-validation": {
     component: DateFieldDemos.WithValidation,
     file: "date-field/with-validation.tsx",
@@ -1007,6 +1067,10 @@ export const demos: Record<string, DemoItem> = {
   "separator-with-content": {
     component: SeparatorDemos.WithContent,
     file: "separator/with-content.tsx",
+  },
+  "separator-variants": {
+    component: SeparatorDemos.Variants,
+    file: "separator/variants.tsx",
   },
   "separator-surface-variants": {
     component: SeparatorDemos.SurfaceVariants,

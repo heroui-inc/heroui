@@ -22,6 +22,9 @@
  *     - dev: http://localhost:8787
  *     - staging: https://staging-mcp-api.heroui.com
  *     - production: https://mcp-api.heroui.com
+ *
+ * Note: Tests are updated for v1 API endpoints which return {results: [...]} format
+ * for batch requests (multiple components).
  */
 
 import {execFile} from "child_process";
@@ -41,7 +44,7 @@ const ENVIRONMENTS = {
 // Get script directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const SCRIPTS_DIR = join(__dirname, "_raw/skills/react/scripts");
+const SCRIPTS_DIR = join(__dirname, "..", "..", "skills/heroui-react/scripts");
 const NODE = "node";
 
 /**
@@ -178,13 +181,23 @@ async function testGetComponentDocsMultiple(apiBase, verbose = false) {
     envVars,
   );
 
-  // Multiple components should return JSON array
+  // v1 API returns {results: [...]} format
   try {
     const data = JSON.parse(stdout);
 
+    // Check for v1 API format: {results: [...]}
+    if (data.results && Array.isArray(data.results) && data.results.length === 2) {
+      if (verbose) {
+        console.log(`  Received docs for ${data.results.length} components (v1 format)`);
+      }
+
+      return new TestResult(name, true, duration, `Received ${data.results.length} component docs`);
+    }
+
+    // Fallback: check if it's a plain array (fallback format)
     if (Array.isArray(data) && data.length === 2) {
       if (verbose) {
-        console.log(`  Received docs for ${data.length} components`);
+        console.log(`  Received docs for ${data.length} components (fallback format)`);
       }
 
       return new TestResult(name, true, duration, `Received ${data.length} component docs`);
@@ -195,7 +208,7 @@ async function testGetComponentDocsMultiple(apiBase, verbose = false) {
       false,
       duration,
       stdout.slice(0, 200),
-      "Expected array of 2 results",
+      "Expected {results: [...]} or array of 2 results",
     );
   } catch (e) {
     // If not JSON, might be concatenated MDX (also acceptable)

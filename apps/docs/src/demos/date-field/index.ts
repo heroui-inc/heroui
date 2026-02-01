@@ -3,6 +3,7 @@ export {Controlled} from "./controlled";
 export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FullWidth} from "./full-width";
+export {Granularity} from "./granularity";
 export {Invalid} from "./invalid";
 export {OnSurface} from "./on-surface";
 export {Required} from "./required";
