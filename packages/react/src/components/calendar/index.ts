@@ -2,7 +2,9 @@ import type {ComponentProps} from "react";
 
 import {
   CalendarCell,
+  CalendarCellIndicator,
   CalendarGrid,
+  CalendarGridBody,
   CalendarGridHeader,
   CalendarHeader,
   CalendarHeaderCell,
@@ -12,8 +14,8 @@ import {
 } from "./calendar";
 
 /* -------------------------------------------------------------------------------------------------
- * Compound Component
- * -----------------------------------------------------------------------------------------------*/
+| * Compound Component
+| * -----------------------------------------------------------------------------------------------*/
 export const Calendar = Object.assign(CalendarRoot, {
   Root: CalendarRoot,
   Header: CalendarHeader,
@@ -21,8 +23,10 @@ export const Calendar = Object.assign(CalendarRoot, {
   NavButton: CalendarNavButton,
   Grid: CalendarGrid,
   GridHeader: CalendarGridHeader,
+  GridBody: CalendarGridBody,
   HeaderCell: CalendarHeaderCell,
   Cell: CalendarCell,
+  CellIndicator: CalendarCellIndicator,
 });
 
 export type Calendar = {
@@ -33,13 +37,15 @@ export type Calendar = {
   NavButtonProps: ComponentProps<typeof CalendarNavButton>;
   GridProps: ComponentProps<typeof CalendarGrid>;
   GridHeaderProps: ComponentProps<typeof CalendarGridHeader>;
+  GridBodyProps: ComponentProps<typeof CalendarGridBody>;
   HeaderCellProps: ComponentProps<typeof CalendarHeaderCell>;
   CellProps: ComponentProps<typeof CalendarCell>;
+  CellIndicatorProps: ComponentProps<typeof CalendarCellIndicator>;
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Named Component
- * -----------------------------------------------------------------------------------------------*/
+| * Named Component
+| * -----------------------------------------------------------------------------------------------*/
 export {
   CalendarRoot,
   CalendarHeader,
@@ -47,8 +53,10 @@ export {
   CalendarNavButton,
   CalendarGrid,
   CalendarGridHeader,
+  CalendarGridBody,
   CalendarHeaderCell,
   CalendarCell,
+  CalendarCellIndicator,
 };
 
 export type {
@@ -59,13 +67,15 @@ export type {
   CalendarNavButtonProps,
   CalendarGridProps,
   CalendarGridHeaderProps,
+  CalendarGridBodyProps,
   CalendarHeaderCellProps,
   CalendarCellProps,
+  CalendarCellIndicatorProps,
 } from "./calendar";
 
 /* -------------------------------------------------------------------------------------------------
- * Variants
- * -----------------------------------------------------------------------------------------------*/
+| * Variants
+| * -----------------------------------------------------------------------------------------------*/
 export {calendarVariants} from "@heroui/styles";
 
 export type {CalendarVariants} from "@heroui/styles";

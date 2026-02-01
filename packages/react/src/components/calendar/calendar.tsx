@@ -18,10 +18,11 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {IconChevronLeft, IconChevronRight} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
- * Calendar Context
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Context
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarContext {
   slots?: ReturnType<typeof calendarVariants>;
 }
@@ -29,24 +30,22 @@ interface CalendarContext {
 const CalendarContext = createContext<CalendarContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Calendar Root
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Root
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarRootProps<T extends DateValue = DateValue>
   extends ComponentPropsWithRef<typeof CalendarPrimitive<T>>, CalendarVariants {}
 
 function CalendarRoot<T extends DateValue = DateValue>({
   children,
   className,
-  isDisabled,
   ...rest
 }: CalendarRootProps<T>) {
-  const slots = React.useMemo(() => calendarVariants({isDisabled}), [isDisabled]);
+  const slots = React.useMemo(() => calendarVariants(), []);
 
   return (
     <CalendarContext value={{slots}}>
       <CalendarPrimitive
         data-slot="calendar"
-        isDisabled={isDisabled}
         {...rest}
         className={composeTwRenderProps(className, slots.base())}
       >
@@ -56,9 +55,11 @@ function CalendarRoot<T extends DateValue = DateValue>({
   );
 }
 
+CalendarRoot.displayName = "HeroUI.Calendar";
+
 /* -------------------------------------------------------------------------------------------------
- * Calendar Header
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Header
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarHeaderProps extends ComponentPropsWithRef<"header"> {
   className?: string;
 }
@@ -77,9 +78,11 @@ const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) =>
   );
 };
 
+CalendarHeader.displayName = "HeroUI.Calendar.Header";
+
 /* -------------------------------------------------------------------------------------------------
- * Calendar Heading
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Heading
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
 const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
@@ -94,9 +97,11 @@ const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
   );
 };
 
+CalendarHeading.displayName = "HeroUI.Calendar.Heading";
+
 /* -------------------------------------------------------------------------------------------------
- * Calendar Nav Button
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Nav Button
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarNavButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   slot?: "previous" | "next";
 }
@@ -111,38 +116,54 @@ const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavBut
       {...props}
       className={composeTwRenderProps(className, slots?.navButton())}
     >
-      {children || (slot === "previous" ? "‹" : "›")}
+      {children ||
+        (slot === "previous" ? (
+          <IconChevronLeft
+            className={slots?.navButtonIcon()}
+            data-slot="calendar-nav-button-icon"
+          />
+        ) : (
+          <IconChevronRight
+            className={slots?.navButtonIcon()}
+            data-slot="calendar-nav-button-icon"
+          />
+        ))}
     </ButtonPrimitive>
   );
 };
 
+CalendarNavButton.displayName = "HeroUI.Calendar.NavButton";
+
 /* -------------------------------------------------------------------------------------------------
- * Calendar Grid
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Grid
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarGridProps extends ComponentPropsWithRef<typeof CalendarGridPrimitive> {}
 
-const CalendarGrid = ({className, ...props}: CalendarGridProps) => {
+const CalendarGrid = ({
+  children,
+  className,
+  weekdayStyle = "short",
+  ...props
+}: CalendarGridProps) => {
   const {slots} = useContext(CalendarContext);
 
   return (
     <CalendarGridPrimitive
       data-slot="calendar-grid"
+      weekdayStyle={weekdayStyle}
       {...props}
       className={composeSlotClassName(slots?.grid, className)}
     >
-      <CalendarGridHeader>
-        {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
-      </CalendarGridHeader>
-      <CalendarGridBodyPrimitive>
-        {(date) => <CalendarCell date={date}>{date.day}</CalendarCell>}
-      </CalendarGridBodyPrimitive>
+      {children}
     </CalendarGridPrimitive>
   );
 };
 
+CalendarGrid.displayName = "HeroUI.Calendar.Grid";
+
 /* -------------------------------------------------------------------------------------------------
- * Calendar Grid Header
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Grid Header
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarGridHeaderProps extends ComponentPropsWithRef<
   typeof CalendarGridHeaderPrimitive
 > {}
@@ -159,9 +180,30 @@ const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
   );
 };
 
+CalendarGridHeader.displayName = "HeroUI.Calendar.GridHeader";
+
 /* -------------------------------------------------------------------------------------------------
- * Calendar Header Cell
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Grid Body
+| * -----------------------------------------------------------------------------------------------*/
+interface CalendarGridBodyProps extends ComponentPropsWithRef<typeof CalendarGridBodyPrimitive> {}
+
+const CalendarGridBody = ({className, ...props}: CalendarGridBodyProps) => {
+  const {slots} = useContext(CalendarContext);
+
+  return (
+    <CalendarGridBodyPrimitive
+      data-slot="calendar-grid-body"
+      {...props}
+      className={composeSlotClassName(slots?.gridBody, className)}
+    />
+  );
+};
+
+CalendarGridBody.displayName = "HeroUI.Calendar.GridBody";
+
+/* -------------------------------------------------------------------------------------------------
+| * Calendar Header Cell
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarHeaderCellProps extends ComponentPropsWithRef<
   typeof CalendarHeaderCellPrimitive
 > {}
@@ -178,9 +220,11 @@ const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
   );
 };
 
+CalendarHeaderCell.displayName = "HeroUI.Calendar.HeaderCell";
+
 /* -------------------------------------------------------------------------------------------------
- * Calendar Cell
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Cell
+| * -----------------------------------------------------------------------------------------------*/
 interface CalendarCellProps extends ComponentPropsWithRef<typeof CalendarCellPrimitive> {}
 
 const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
@@ -193,30 +237,39 @@ const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
       className={composeTwRenderProps(className, slots?.cell())}
     >
       {(values) => {
-        const {formattedDate, isDisabled, isHovered, isOutsideMonth, isSelected, isUnavailable} =
-          values;
+        const {formattedDate} = values;
 
-        return (
-          <div
-            className={slots?.cellButton({
-              isDisabled,
-              isHovered,
-              isOutsideMonth,
-              isSelected,
-              isUnavailable,
-            })}
-          >
-            {typeof children === "function" ? children(values) : children || formattedDate}
-          </div>
-        );
+        return typeof children === "function" ? children(values) : children || formattedDate;
       }}
     </CalendarCellPrimitive>
   );
 };
 
+CalendarCell.displayName = "HeroUI.Calendar.Cell";
+
 /* -------------------------------------------------------------------------------------------------
- * Exports
- * -----------------------------------------------------------------------------------------------*/
+| * Calendar Cell Indicator
+| * -----------------------------------------------------------------------------------------------*/
+interface CalendarCellIndicatorProps extends ComponentPropsWithRef<"span"> {}
+
+const CalendarCellIndicator = ({className, ...props}: CalendarCellIndicatorProps) => {
+  const {slots} = useContext(CalendarContext);
+
+  return (
+    <span
+      aria-hidden="true"
+      className={composeSlotClassName(slots?.cellIndicator, className)}
+      data-slot="calendar-cell-indicator"
+      {...props}
+    />
+  );
+};
+
+CalendarCellIndicator.displayName = "HeroUI.Calendar.CellIndicator";
+
+/* -------------------------------------------------------------------------------------------------
+| * Exports
+| * -----------------------------------------------------------------------------------------------*/
 export {
   CalendarRoot,
   CalendarHeader,
@@ -224,8 +277,10 @@ export {
   CalendarNavButton,
   CalendarGrid,
   CalendarGridHeader,
+  CalendarGridBody,
   CalendarHeaderCell,
   CalendarCell,
+  CalendarCellIndicator,
 };
 export type {
   CalendarRootProps,
@@ -234,6 +289,8 @@ export type {
   CalendarNavButtonProps,
   CalendarGridProps,
   CalendarGridHeaderProps,
+  CalendarGridBodyProps,
   CalendarHeaderCellProps,
   CalendarCellProps,
+  CalendarCellIndicatorProps,
 };
