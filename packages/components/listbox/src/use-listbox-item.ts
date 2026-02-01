@@ -11,7 +11,7 @@ import {useFocusRing} from "@react-aria/focus";
 import {filterDOMProps} from "@heroui/react-utils";
 import {dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
 import {useOption} from "@react-aria/listbox";
-import {useHover, usePress} from "@react-aria/interactions";
+import {useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
 
 interface Props<T extends object> extends ListboxItemBaseProps<T> {
@@ -40,12 +40,6 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     className,
     classNames,
     autoFocus,
-    onPress,
-    onPressUp,
-    onPressStart,
-    onPressEnd,
-    onPressChange,
-    onClick,
     shouldHighlightOnFocus,
     hideSelectedIcon = false,
     isReadOnly = false,
@@ -67,17 +61,6 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
 
   const isMobile = useIsMobile();
 
-  const {pressProps, isPressed} = usePress({
-    ref: domRef,
-    isDisabled,
-    onClick,
-    onPress,
-    onPressUp,
-    onPressStart,
-    onPressEnd,
-    onPressChange,
-  });
-
   const {isHovered, hoverProps} = useHover({
     isDisabled,
   });
@@ -86,7 +69,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     autoFocus,
   });
 
-  const {isFocused, isSelected, optionProps, labelProps, descriptionProps} = useOption(
+  const {isFocused, isSelected, isPressed, optionProps, labelProps, descriptionProps} = useOption(
     {
       key,
       isDisabled,
@@ -137,7 +120,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     onFocusCapture: handleFocusCapture,
     ...mergeProps(
       itemProps,
-      isReadOnly ? {} : mergeProps(focusProps, pressProps),
+      isReadOnly ? {} : focusProps,
       hoverProps,
       filterDOMProps(otherProps, {
         enabled: shouldFilterDOMProps,
