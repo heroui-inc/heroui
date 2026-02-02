@@ -78,12 +78,12 @@
     @apply cursor-not-allowed opacity-50;
   }
 
-  [data-slot="combobox-trigger-default-icon"] {
+  [data-slot="combo-box-trigger-default-icon"] {
     @apply size-4 transition-transform duration-150 motion-reduce:transition-none;
   }
 
   /* Rotate icon when trigger is open */
-  &[data-open="true"] [data-slot="combobox-trigger-default-icon"] {
+  &[data-open="true"] [data-slot="combo-box-trigger-default-icon"] {
     @apply rotate-180;
   }
 }
@@ -150,15 +150,15 @@
   }
 
   /* Listbox styles */
-  [data-slot="listbox"] {
+  [data-slot="list-box"] {
     @apply p-1.5 outline-none;
   }
 
-  [data-slot="listbox-item"] {
+  [data-slot="list-box-item"] {
     @apply px-2.5;
 
     /* As the combo-box is single-select, we don't need to animate the checkmark */
-    [data-slot="listbox-item-indicator--checkmark"] {
+    [data-slot="list-box-item-indicator--checkmark"] {
       @apply transition-none;
     }
   }

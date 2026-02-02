@@ -4,8 +4,8 @@ description: A combo box combines a text input with a listbox, allowing users to
 icon: updated
 links:
   rac: ComboBox
-  source: combobox/combobox.tsx
-  styles: combobox.css
+  source: combo-box/combo-box.tsx
+  styles: combo-box.css
   storybook: Components/Pickers/ComboBox
 ---
 
@@ -18,7 +18,7 @@ import { ComboBox } from '@heroui/react';
 ### Usage
 
 <ComponentPreview
-  name="combobox-default"
+  name="combo-box-default"
 />
 
 ### Anatomy
@@ -58,85 +58,85 @@ export default () => (
 ### With Description
 
 <ComponentPreview
-  name="combobox-with-description"
+  name="combo-box-with-description"
 />
 
 ### With Sections
 
 <ComponentPreview
-  name="combobox-with-sections"
+  name="combo-box-with-sections"
 />
 
 ### With Disabled Options
 
 <ComponentPreview
-  name="combobox-with-disabled-options"
+  name="combo-box-with-disabled-options"
 />
 
 ### Custom Indicator
 
 <ComponentPreview
-  name="combobox-custom-indicator"
+  name="combo-box-custom-indicator"
 />
 
 ### Required
 
 <ComponentPreview
-  name="combobox-required"
+  name="combo-box-required"
 />
 
 ### Custom Value
 
 <ComponentPreview
-  name="combobox-custom-value"
+  name="combo-box-custom-value"
 />
 
 ### Controlled
 
 <ComponentPreview
-  name="combobox-controlled"
+  name="combo-box-controlled"
 />
 
 ### Controlled Input Value
 
 <ComponentPreview
-  name="combobox-controlled-input-value"
+  name="combo-box-controlled-input-value"
 />
 
 ### Asynchronous Loading
 
 <ComponentPreview
-  name="combobox-asynchronous-loading"
+  name="combo-box-asynchronous-loading"
 />
 
 ### Custom Filtering
 
 <ComponentPreview
-  name="combobox-custom-filtering"
+  name="combo-box-custom-filtering"
 />
 
 ### Allows Custom Value
 
 <ComponentPreview
-  name="combobox-allows-custom-value"
+  name="combo-box-allows-custom-value"
 />
 
 ### Disabled
 
 <ComponentPreview
-  name="combobox-disabled"
+  name="combo-box-disabled"
 />
 
 ### Default Selected Key
 
 <ComponentPreview
-  name="combobox-default-selected-key"
+  name="combo-box-default-selected-key"
 />
 
 ### Full Width
 
 <ComponentPreview
-  name="combobox-full-width"
+  name="combo-box-full-width"
 />
 
 ### In Surface
@@ -144,7 +144,7 @@ export default () => (
 When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview
-  name="combobox-on-surface"
+  name="combo-box-on-surface"
 />
 
 ### Menu Trigger
@@ -156,7 +156,7 @@ Use the `menuTrigger` prop to control when the popover opens:
 - `manual`: popover only opens when the user presses the trigger button or uses the arrow keys
 
 <ComponentPreview
-  name="combobox-menu-trigger"
+  name="combo-box-menu-trigger"
 />
 
 <RelatedComponents component="combobox" />
@@ -195,19 +195,19 @@ To customize the ComboBox component classes, you can use the `@layer components`
 
 ```css
 @layer components {
-  .combobox {
+  .combo-box {
     @apply flex flex-col gap-1;
   }
 
-  .combobox__input-group {
+  .combo-box__input-group {
     @apply relative inline-flex items-center;
   }
 
-  .combobox__trigger {
+  .combo-box__trigger {
     @apply absolute right-0 text-muted;
   }
 
-  .combobox__popover {
+  .combo-box__popover {
     @apply rounded-lg border border-border bg-surface p-2;
   }
 }
@@ -220,17 +220,17 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The ComboBox component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/combobox.css)):
 
 #### Base Classes
-- `.combobox` - Base combobox container
-- `.combobox__input-group` - Container for the input and trigger button
-- `.combobox__trigger` - The button that triggers the popover
-- `.combobox__popover` - The popover container
+- `.combo-box` - Base combobox container
+- `.combo-box__input-group` - Container for the input and trigger button
+- `.combo-box__trigger` - The button that triggers the popover
+- `.combo-box__popover` - The popover container
 
 #### State Classes
-- `.combobox[data-invalid="true"]` - Invalid state
-- `.combobox[data-disabled="true"]` - Disabled combobox state
-- `.combobox__trigger[data-focus-visible="true"]` - Focused trigger state
-- `.combobox__trigger[data-disabled="true"]` - Disabled trigger state
-- `.combobox__trigger[data-open="true"]` - Open trigger state
+- `.combo-box[data-invalid="true"]` - Invalid state
+- `.combo-box[data-disabled="true"]` - Disabled combobox state
+- `.combo-box__trigger[data-focus-visible="true"]` - Focused trigger state
+- `.combo-box__trigger[data-disabled="true"]` - Disabled trigger state
+- `.combo-box__trigger[data-open="true"]` - Open trigger state
 
 ### Interactive States
 

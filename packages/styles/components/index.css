@@ -41,8 +41,8 @@
  * Collections
  * ------------------------------------------------------------------------------------------------ */
 @import "./dropdown.css";
-@import "./listbox-item.css";
-@import "./listbox-section.css";
+@import "./list-box-item.css";
+@import "./list-box-section.css";
 @import "./list-box.css";
 @import "./menu-item.css";
 @import "./menu-section.css";

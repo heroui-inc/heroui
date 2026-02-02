@@ -34,7 +34,7 @@ const ListBoxItemRoot = ({children, className, variant, ...props}: ListBoxItemRo
   return (
     <ListBoxItemPrimitive
       className={composeTwRenderProps(className, slots.item())}
-      data-slot="listbox-item"
+      data-slot="list-box-item"
       {...props}
     >
       {(values) => (
@@ -65,7 +65,7 @@ const ListBoxItemIndicator = ({children, className, ...props}: ListBoxItemIndica
     ) : (
       <svg
         aria-hidden="true"
-        data-slot="listbox-item-indicator--checkmark"
+        data-slot="list-box-item-indicator--checkmark"
         fill="none"
         role="presentation"
         stroke="currentColor"
@@ -84,7 +84,7 @@ const ListBoxItemIndicator = ({children, className, ...props}: ListBoxItemIndica
     <span
       aria-hidden="true"
       className={composeSlotClassName(slots?.indicator, className)}
-      data-slot="listbox-item-indicator"
+      data-slot="list-box-item-indicator"
       data-visible={isSelected || undefined}
       {...props}
     >

@@ -6,7 +6,7 @@ import {AllowNotificationsDemo} from "./allow-notifications-demo";
 import {AvatarGroupDemo} from "./avatar-group-demo";
 import {ButtonsDemo} from "./buttons-demo";
 import {InputOTPDemo} from "./input-otp-demo";
-import {ListBoxDemo} from "./listbox-demo";
+import {ListBoxDemo} from "./list-box-demo";
 import {LoginDemo} from "./login-demo";
 import {SelectDemo} from "./select-demo";
 import {SliderDemo} from "./slider-demo";

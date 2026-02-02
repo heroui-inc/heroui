@@ -227,8 +227,8 @@ const componentsMap: Record<string, ComponentInfo> = {
   listbox: {
     category: "display",
     description: "Scrollable list of selectable items",
-    href: "/docs/components/listbox",
-    name: "listbox",
+    href: "/docs/components/list-box",
+    name: "list-box",
     title: "Listbox",
   },
   modal: {
