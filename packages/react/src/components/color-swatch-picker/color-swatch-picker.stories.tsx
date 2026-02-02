@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
+import {Icon} from "@iconify/react";
 import React from "react";
 
 import {parseColor} from "../rac";
@@ -208,6 +209,21 @@ export const WithDefaultValue: Story = {
         <ColorSwatchPicker.Item key={color} color={color}>
           <ColorSwatchPicker.Swatch />
           <ColorSwatchPicker.Indicator />
+        </ColorSwatchPicker.Item>
+      ))}
+    </ColorSwatchPicker>
+  ),
+};
+
+export const WithCustomIndicator: Story = {
+  render: () => (
+    <ColorSwatchPicker>
+      {defaultColors.map((color) => (
+        <ColorSwatchPicker.Item key={color} color={color}>
+          <ColorSwatchPicker.Swatch />
+          <ColorSwatchPicker.Indicator>
+            <Icon icon="gravity-ui:star-fill" />
+          </ColorSwatchPicker.Indicator>
         </ColorSwatchPicker.Item>
       ))}
     </ColorSwatchPicker>

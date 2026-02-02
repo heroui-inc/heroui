@@ -585,6 +585,10 @@ export const demos: Record<string, DemoItem> = {
     component: ColorSwatchPickerDemos.DefaultValue,
     file: "color-swatch-picker/default-value.tsx",
   },
+  "color-swatch-picker-custom-indicator": {
+    component: ColorSwatchPickerDemos.CustomIndicator,
+    file: "color-swatch-picker/custom-indicator.tsx",
+  },
   // Autocomplete demos
   "autocomplete-default": {
     component: AutocompleteDemos.Default,
