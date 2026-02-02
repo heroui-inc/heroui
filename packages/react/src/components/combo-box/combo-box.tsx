@@ -5,7 +5,7 @@ import type {ComboBoxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components";
 
-import {comboboxVariants} from "@heroui/styles";
+import {comboBoxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button,
@@ -23,7 +23,7 @@ import {SurfaceContext} from "../surface";
  * ComboBox Context
  * -----------------------------------------------------------------------------------------------*/
 type ComboBoxContext = {
-  slots?: ReturnType<typeof comboboxVariants>;
+  slots?: ReturnType<typeof comboBoxVariants>;
 };
 
 const ComboBoxContext = createContext<ComboBoxContext>({});
@@ -43,7 +43,7 @@ const ComboBoxRoot = <T extends object = object>({
   menuTrigger = "focus",
   ...props
 }: ComboBoxRootProps<T>) => {
-  const slots = React.useMemo(() => comboboxVariants({fullWidth}), [fullWidth]);
+  const slots = React.useMemo(() => comboBoxVariants({fullWidth}), [fullWidth]);
 
   return (
     <ComboBoxContext value={{slots}}>
