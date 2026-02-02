@@ -1,6 +1,6 @@
 "use client";
 
-import type {Color} from "react-aria-components";
+import type {Color} from "@heroui/react";
 
 import {ColorField, ColorInputGroup, ColorSwatch, Label, parseColor} from "@heroui/react";
 import {useState} from "react";

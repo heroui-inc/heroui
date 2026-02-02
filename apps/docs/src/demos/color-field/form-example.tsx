@@ -1,6 +1,6 @@
 "use client";
 
-import type {Color} from "react-aria-components";
+import type {Color} from "@heroui/react";
 
 import {
   Button,

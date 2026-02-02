@@ -1,5 +1,3 @@
-"use client";
-
 import {ColorField, ColorInputGroup, FieldError, Label} from "@heroui/react";
 
 export function Invalid() {
