@@ -1,9 +1,9 @@
-import {execSync} from "child_process";
 import fs from "fs";
 import os from "os";
 import path from "path";
 
 import {NextResponse} from "next/server";
+import * as tar from "tar";
 
 // Valid skill names
 const VALID_SKILLS = ["heroui-react", "heroui-native"];
@@ -33,7 +33,7 @@ function copyDirectory(src: string, dest: string): void {
 /**
  * Create tarball from local skill directory
  */
-function createSkillTarball(skillName: string) {
+async function createSkillTarball(skillName: string): Promise<Buffer> {
   const skillDir = path.join(SKILLS_DIR, skillName);
 
   if (!fs.existsSync(skillDir)) {
@@ -47,18 +47,56 @@ function createSkillTarball(skillName: string) {
     // Copy skill files to temp directory
     copyDirectory(skillDir, tempDir);
 
-    // Create tarball
-    const tarBuffer = execSync(`tar czf - -C "${tempDir}" .`, {
-      // 10MB max
-      encoding: undefined,
-      maxBuffer: 10 * 1024 * 1024, // Return Buffer
-    });
+    const chunks: Buffer[] = [];
+    const tarStream = tar.create(
+      {
+        cwd: tempDir,
+        gzip: true,
+      },
+      ["."],
+    );
 
-    // Convert Buffer to Uint8Array for NextResponse
-    return tarBuffer;
-  } finally {
-    // Cleanup temp directory
-    fs.rmSync(tempDir, {force: true, recursive: true});
+    // Collect stream data into buffer
+    return new Promise<Buffer>((resolve, reject) => {
+      tarStream.on("data", (chunk: Buffer) => {
+        chunks.push(chunk);
+        // Safety check: 10MB max
+        const totalSize = chunks.reduce((sum, c) => sum + c.length, 0);
+
+        if (totalSize > 10 * 1024 * 1024) {
+          tarStream.destroy();
+          reject(new Error("Tarball exceeds 10MB limit"));
+        }
+      });
+
+      tarStream.on("end", () => {
+        // Cleanup temp directory after stream completes
+        try {
+          fs.rmSync(tempDir, {force: true, recursive: true});
+        } catch (cleanupError) {
+          console.error("Failed to cleanup temp directory:", cleanupError);
+        }
+        resolve(Buffer.concat(chunks));
+      });
+
+      tarStream.on("error", (error: unknown) => {
+        // Cleanup temp directory on error
+        try {
+          fs.rmSync(tempDir, {force: true, recursive: true});
+        } catch (cleanupError) {
+          console.error("Failed to cleanup temp directory on error:", cleanupError);
+        }
+        reject(error instanceof Error ? error : new Error(String(error)));
+      });
+    });
+  } catch (error) {
+    // Cleanup temp directory on exception (before Promise creation)
+    try {
+      fs.rmSync(tempDir, {force: true, recursive: true});
+    } catch (cleanupError) {
+      console.error("Failed to cleanup temp directory on exception:", cleanupError);
+    }
+    throw error;
   }
 }
 
@@ -90,9 +128,9 @@ export async function GET(_: Request, {params}: {params: Promise<{skill: string}
     }
 
     // Create tarball from local files
-    const tarBuffer = createSkillTarball(skillName);
+    const tarBuffer = await createSkillTarball(skillName);
 
-    return new NextResponse(tarBuffer, {
+    return new NextResponse(tarBuffer as unknown as BodyInit, {
       headers: {
         "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
         "Content-Disposition": `attachment; filename=${skillName}.tar.gz`,
