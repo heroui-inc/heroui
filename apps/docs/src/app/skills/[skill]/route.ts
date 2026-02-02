@@ -1,66 +1,9 @@
-import {execSync} from "child_process";
 import fs from "fs";
-import os from "os";
 import path from "path";
 
 import {NextResponse} from "next/server";
 
-// Valid skill names
-const VALID_SKILLS = ["heroui-react", "heroui-native"];
-
-// Skills directory in the repo (at repo root, two levels up from apps/docs)
-const SKILLS_DIR = path.join(process.cwd(), "..", "..", "skills");
-
-/**
- * Recursively copy directory from source to destination
- */
-function copyDirectory(src: string, dest: string): void {
-  fs.mkdirSync(dest, {recursive: true});
-  const entries = fs.readdirSync(src, {withFileTypes: true});
-
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-
-    if (entry.isDirectory()) {
-      copyDirectory(srcPath, destPath);
-    } else {
-      fs.copyFileSync(srcPath, destPath);
-    }
-  }
-}
-
-/**
- * Create tarball from local skill directory
- */
-function createSkillTarball(skillName: string) {
-  const skillDir = path.join(SKILLS_DIR, skillName);
-
-  if (!fs.existsSync(skillDir)) {
-    throw new Error(`Skill not found: ${skillName}`);
-  }
-
-  // Create temp directory
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), `skill-${skillName}-`));
-
-  try {
-    // Copy skill files to temp directory
-    copyDirectory(skillDir, tempDir);
-
-    // Create tarball
-    const tarBuffer = execSync(`tar czf - -C "${tempDir}" .`, {
-      // 10MB max
-      encoding: undefined,
-      maxBuffer: 10 * 1024 * 1024, // Return Buffer
-    });
-
-    // Convert Buffer to Uint8Array for NextResponse
-    return tarBuffer;
-  } finally {
-    // Cleanup temp directory
-    fs.rmSync(tempDir, {force: true, recursive: true});
-  }
-}
+import {VALID_SKILLS} from "@/lib/skills-constants.mjs";
 
 export async function GET(_: Request, {params}: {params: Promise<{skill: string}>}) {
   try {
@@ -70,6 +13,7 @@ export async function GET(_: Request, {params}: {params: Promise<{skill: string}
     // Extract skill name from parameter (handle .tar.gz suffix)
     let skillName = skill.replace(/\.tar\.gz$/, "");
 
+    // Normalize skill names
     if (skillName === "react") {
       skillName = "heroui-react";
     }
@@ -89,8 +33,21 @@ export async function GET(_: Request, {params}: {params: Promise<{skill: string}
       );
     }
 
-    // Create tarball from local files
-    const tarBuffer = createSkillTarball(skillName);
+    // Serve pre-built tar.gz file from public directory
+    const tarFilePath = path.join(process.cwd(), "public", "skills", `${skillName}.tar.gz`);
+
+    if (!fs.existsSync(tarFilePath)) {
+      return NextResponse.json(
+        {
+          error: `Skill tarball not found: ${skillName}`,
+          message:
+            "The skill tarball may not have been built. Run 'pnpm dev' or 'pnpm build' to build skill files.",
+        },
+        {status: 404},
+      );
+    }
+
+    const tarBuffer = fs.readFileSync(tarFilePath);
 
     return new NextResponse(tarBuffer, {
       headers: {
@@ -100,11 +57,11 @@ export async function GET(_: Request, {params}: {params: Promise<{skill: string}
       },
     });
   } catch (error) {
-    console.error("Error generating skill tarball:", error);
+    console.error("Error serving skill tarball:", error);
 
     return NextResponse.json(
       {
-        error: "Failed to generate skill tarball",
+        error: "Failed to serve skill tarball",
         message: error instanceof Error ? error.message : "Unknown error",
       },
       {status: 500},
