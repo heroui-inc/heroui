@@ -14,9 +14,6 @@ SKILL_NAME="${1:-heroui-react}"
 BASE_URL="${BASE_URL:-{{BASE_URL}}}"
 SKILL_URL="${BASE_URL}/skills/${SKILL_NAME}.tar.gz"
 
-# Codex CLI config home (override with CODEX_HOME)
-CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
-
 INSTALLED=0
 
 echo "Installing HeroUI skill: ${SKILL_NAME}..."
@@ -83,23 +80,23 @@ if command -v opencode &> /dev/null || [ -d "$HOME/.config/opencode" ]; then
 fi
 
 # Codex CLI - Install skill
-if command -v codex &> /dev/null || [ -d "$CODEX_HOME" ]; then
-  mkdir -p "$CODEX_HOME/skills/${SKILL_NAME}"
-  curl -sL "$SKILL_URL" | tar xz -C "$CODEX_HOME/skills/${SKILL_NAME}"
+if command -v codex &> /dev/null || [ -d "$HOME/.codex" ]; then
+  mkdir -p "$HOME/.codex/skills/${SKILL_NAME}"
+  curl -sL "$SKILL_URL" | tar xz -C "$HOME/.codex/skills/${SKILL_NAME}"
   echo "✓ Installed ${SKILL_NAME} skill for Codex"
   INSTALLED=$((INSTALLED + 1))
 
   # Cleanup old heroui skill and command (only when installing heroui-react)
   if [ "$SKILL_NAME" = "heroui-react" ]; then
     OLD_SKILL_FOUND=0
-    if [ -d "$CODEX_HOME/skills/heroui" ]; then
-      rm -rf "$CODEX_HOME/skills/heroui"
+    if [ -d "$HOME/.codex/skills/heroui" ]; then
+      rm -rf "$HOME/.codex/skills/heroui"
       echo "✓ Removed old heroui skill"
       OLD_SKILL_FOUND=1
     fi
 
-    if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$CODEX_HOME/prompts/heroui.md" ]; then
-      rm -f "$CODEX_HOME/prompts/heroui.md"
+    if [ $OLD_SKILL_FOUND -eq 1 ] && [ -f "$HOME/.codex/prompts/heroui.md" ]; then
+      rm -f "$HOME/.codex/prompts/heroui.md"
       echo "✓ Removed old /heroui command"
     fi
   fi
