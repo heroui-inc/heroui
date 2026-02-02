@@ -16,7 +16,7 @@ import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
-import * as ComboBoxDemos from "./combobox";
+import * as ComboBoxDemos from "./combo-box";
 import * as DateFieldDemos from "./date-field";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
@@ -32,7 +32,7 @@ import * as InputOTPDemos from "./input-otp";
 import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
-import * as ListBoxDemos from "./listbox";
+import * as ListBoxDemos from "./list-box";
 import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
 import * as PopoverDemos from "./popover";
@@ -565,73 +565,73 @@ export const demos: Record<string, DemoItem> = {
     file: "autocomplete/email-recipients.tsx",
   },
   // ComboBox demos
-  "combobox-default": {
+  "combo-box-default": {
     component: ComboBoxDemos.Default,
-    file: "combobox/default.tsx",
+    file: "combo-box/default.tsx",
   },
-  "combobox-default-selected-key": {
+  "combo-box-default-selected-key": {
     component: ComboBoxDemos.DefaultSelectedKey,
-    file: "combobox/default-selected-key.tsx",
+    file: "combo-box/default-selected-key.tsx",
   },
-  "combobox-with-description": {
+  "combo-box-with-description": {
     component: ComboBoxDemos.WithDescription,
-    file: "combobox/with-description.tsx",
+    file: "combo-box/with-description.tsx",
   },
-  "combobox-with-sections": {
+  "combo-box-with-sections": {
     component: ComboBoxDemos.WithSections,
-    file: "combobox/with-sections.tsx",
+    file: "combo-box/with-sections.tsx",
   },
-  "combobox-with-disabled-options": {
+  "combo-box-with-disabled-options": {
     component: ComboBoxDemos.WithDisabledOptions,
-    file: "combobox/with-disabled-options.tsx",
+    file: "combo-box/with-disabled-options.tsx",
   },
-  "combobox-custom-indicator": {
+  "combo-box-custom-indicator": {
     component: ComboBoxDemos.CustomIndicator,
-    file: "combobox/custom-indicator.tsx",
+    file: "combo-box/custom-indicator.tsx",
   },
-  "combobox-required": {
+  "combo-box-required": {
     component: ComboBoxDemos.Required,
-    file: "combobox/required.tsx",
+    file: "combo-box/required.tsx",
   },
-  "combobox-full-width": {
+  "combo-box-full-width": {
     component: ComboBoxDemos.FullWidth,
-    file: "combobox/full-width.tsx",
+    file: "combo-box/full-width.tsx",
   },
-  "combobox-custom-value": {
+  "combo-box-custom-value": {
     component: ComboBoxDemos.CustomValue,
-    file: "combobox/custom-value.tsx",
+    file: "combo-box/custom-value.tsx",
   },
-  "combobox-controlled": {
+  "combo-box-controlled": {
     component: ComboBoxDemos.Controlled,
-    file: "combobox/controlled.tsx",
+    file: "combo-box/controlled.tsx",
   },
-  "combobox-controlled-input-value": {
+  "combo-box-controlled-input-value": {
     component: ComboBoxDemos.ControlledInputValue,
-    file: "combobox/controlled-input-value.tsx",
+    file: "combo-box/controlled-input-value.tsx",
   },
-  "combobox-asynchronous-loading": {
+  "combo-box-asynchronous-loading": {
     component: ComboBoxDemos.AsynchronousLoading,
-    file: "combobox/asynchronous-loading.tsx",
+    file: "combo-box/asynchronous-loading.tsx",
   },
-  "combobox-custom-filtering": {
+  "combo-box-custom-filtering": {
     component: ComboBoxDemos.CustomFiltering,
-    file: "combobox/custom-filtering.tsx",
+    file: "combo-box/custom-filtering.tsx",
   },
-  "combobox-allows-custom-value": {
+  "combo-box-allows-custom-value": {
     component: ComboBoxDemos.AllowsCustomValue,
-    file: "combobox/allows-custom-value.tsx",
+    file: "combo-box/allows-custom-value.tsx",
   },
-  "combobox-disabled": {
+  "combo-box-disabled": {
     component: ComboBoxDemos.Disabled,
-    file: "combobox/disabled.tsx",
+    file: "combo-box/disabled.tsx",
   },
-  "combobox-on-surface": {
+  "combo-box-on-surface": {
     component: ComboBoxDemos.OnSurface,
-    file: "combobox/on-surface.tsx",
+    file: "combo-box/on-surface.tsx",
   },
-  "combobox-menu-trigger": {
+  "combo-box-menu-trigger": {
     component: ComboBoxDemos.MenuTrigger,
-    file: "combobox/menu-trigger.tsx",
+    file: "combo-box/menu-trigger.tsx",
   },
   // Disclosure demos
   "disclosure-basic": {
@@ -1417,29 +1417,29 @@ export const demos: Record<string, DemoItem> = {
     file: "label/basic.tsx",
   },
   // ListBox demos
-  "listbox-controlled": {
+  "list-box-controlled": {
     component: ListBoxDemos.Controlled,
-    file: "listbox/controlled.tsx",
+    file: "list-box/controlled.tsx",
   },
-  "listbox-custom-check-icon": {
+  "list-box-custom-check-icon": {
     component: ListBoxDemos.CustomCheckIcon,
-    file: "listbox/custom-check-icon.tsx",
+    file: "list-box/custom-check-icon.tsx",
   },
-  "listbox-default": {
+  "list-box-default": {
     component: ListBoxDemos.Default,
-    file: "listbox/default.tsx",
+    file: "list-box/default.tsx",
   },
-  "listbox-multi-select": {
+  "list-box-multi-select": {
     component: ListBoxDemos.MultiSelect,
-    file: "listbox/multi-select.tsx",
+    file: "list-box/multi-select.tsx",
   },
-  "listbox-with-disabled-items": {
+  "list-box-with-disabled-items": {
     component: ListBoxDemos.WithDisabledItems,
-    file: "listbox/with-disabled-items.tsx",
+    file: "list-box/with-disabled-items.tsx",
   },
-  "listbox-with-sections": {
+  "list-box-with-sections": {
     component: ListBoxDemos.WithSections,
-    file: "listbox/with-sections.tsx",
+    file: "list-box/with-sections.tsx",
   },
   // Modal demos
   "modal-default": {

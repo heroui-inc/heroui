@@ -14,7 +14,7 @@ import {Form} from "../form";
 import {Header} from "../header";
 import {Input} from "../input";
 import {Label} from "../label";
-import {ListBox} from "../listbox";
+import {ListBox} from "../list-box";
 import {Collection, ListBoxLoadMoreItem} from "../rac";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";

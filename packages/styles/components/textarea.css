@@ -1,4 +1,5 @@
-.text-area {
+/* use textarea instead of text-area to avoid conflict with Tailwind `text-` prefix */
+.textarea {
   @apply rounded-field border bg-field px-3 py-2 text-base text-field-foreground shadow-field outline-none placeholder:text-field-placeholder sm:text-sm;
 
   min-height: 38px;
@@ -50,28 +51,28 @@
 }
 
 /* Variant property definitions */
-.text-area--primary {
+.textarea--primary {
   /* Default styles */
 }
 
-.text-area--secondary {
+.textarea--secondary {
   @apply shadow-none;
-  background-color: var(--text-area-bg);
+  background-color: var(--textarea-bg);
 
-  --text-area-bg: var(--color-default);
-  --text-area-bg-hover: var(--color-default-hover);
-  --text-area-bg-focus: var(--color-default);
+  --textarea-bg: var(--color-default);
+  --textarea-bg-hover: var(--color-default-hover);
+  --textarea-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
     &[data-hovered="true"]:not([data-focused="true"]):not([data-focus-visible="true"]) {
-      background-color: var(--text-area-bg-hover);
+      background-color: var(--textarea-bg-hover);
     }
   }
 
   &:focus,
   &[data-focused="true"] {
-    background-color: var(--text-area-bg-focus);
+    background-color: var(--textarea-bg-focus);
   }
 
   /* Focus visible state */
@@ -82,11 +83,11 @@
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--text-area-bg-focus);
+    background-color: var(--textarea-bg-focus);
   }
 }
 
 /* Full width modifier */
-.text-area--full-width {
+.textarea--full-width {
   @apply w-full;
 }

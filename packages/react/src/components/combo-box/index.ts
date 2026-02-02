@@ -1,6 +1,6 @@
 import type {ComponentProps} from "react";
 
-import {ComboBoxInputGroup, ComboBoxPopover, ComboBoxRoot, ComboBoxTrigger} from "./combobox";
+import {ComboBoxInputGroup, ComboBoxPopover, ComboBoxRoot, ComboBoxTrigger} from "./combo-box";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -31,11 +31,11 @@ export type {
   ComboBoxInputGroupProps,
   ComboBoxTriggerProps,
   ComboBoxPopoverProps,
-} from "./combobox";
+} from "./combo-box";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {comboboxVariants} from "@heroui/styles";
+export {comboBoxVariants} from "@heroui/styles";
 
 export type {ComboBoxVariants} from "@heroui/styles";

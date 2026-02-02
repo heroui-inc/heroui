@@ -115,8 +115,8 @@
     @apply text-field-placeholder;
   }
 
-  /* Removes the listbox-item indicator element from the select value*/
-  [data-slot="listbox-item-indicator"] {
+  /* Removes the list-box-item indicator element from the select value*/
+  [data-slot="list-box-item-indicator"] {
     @apply hidden;
   }
 }
@@ -195,19 +195,19 @@
   }
 
   /* Listbox styles */
-  [data-slot="listbox"] {
+  [data-slot="list-box"] {
     @apply p-1.5 outline-none;
   }
 
-  [data-slot="listbox-item"] {
+  [data-slot="list-box-item"] {
     @apply px-2.5;
   }
 
   /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
-  [data-slot="listbox"]:not([aria-multiselectable="true"]) [data-slot="listbox-item-indicator"],
-  [data-slot="listbox"]:not([aria-multiselectable="true"])
-    [data-slot="listbox-item-indicator"]
-    [data-slot="listbox-item-indicator--checkmark"] {
+  [data-slot="list-box"]:not([aria-multiselectable="true"]) [data-slot="list-box-item-indicator"],
+  [data-slot="list-box"]:not([aria-multiselectable="true"])
+    [data-slot="list-box-item-indicator"]
+    [data-slot="list-box-item-indicator--checkmark"] {
     @apply transition-none;
   }
 }

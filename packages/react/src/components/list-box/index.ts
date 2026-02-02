@@ -1,9 +1,9 @@
 import type {ComponentProps} from "react";
 
-import {ListBoxItem, ListBoxItemIndicator} from "../listbox-item";
-import {ListBoxSection} from "../listbox-section";
+import {ListBoxItem, ListBoxItemIndicator} from "../list-box-item";
+import {ListBoxSection} from "../list-box-section";
 
-import {ListBoxRoot} from "./listbox";
+import {ListBoxRoot} from "./list-box";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -27,7 +27,7 @@ export type ListBox = {
  * -----------------------------------------------------------------------------------------------*/
 export {ListBoxRoot};
 
-export type {ListBoxRootProps, ListBoxRootProps as ListBoxProps} from "./listbox";
+export type {ListBoxRootProps, ListBoxRootProps as ListBoxProps} from "./list-box";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants

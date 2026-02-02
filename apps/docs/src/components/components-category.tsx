@@ -46,7 +46,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Collections",
-    components: ["dropdown", "listbox", "tag-group"],
+    components: ["dropdown", "list-box", "tag-group"],
   },
   {
     category: "Controls",
@@ -66,7 +66,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Pickers",
-    components: ["autocomplete", "combobox", "select"],
+    components: ["autocomplete", "combo-box", "select"],
   },
   {
     category: "Typography",

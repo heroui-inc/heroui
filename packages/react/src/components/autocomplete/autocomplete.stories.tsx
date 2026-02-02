@@ -14,7 +14,7 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Header} from "../header";
 import {Label} from "../label";
-import {ListBox} from "../listbox";
+import {ListBox} from "../list-box";
 import {SearchField} from "../search-field";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";

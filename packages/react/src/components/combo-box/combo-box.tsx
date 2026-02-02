@@ -5,7 +5,7 @@ import type {ComboBoxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components";
 
-import {comboboxVariants} from "@heroui/styles";
+import {comboBoxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button,
@@ -23,7 +23,7 @@ import {SurfaceContext} from "../surface";
  * ComboBox Context
  * -----------------------------------------------------------------------------------------------*/
 type ComboBoxContext = {
-  slots?: ReturnType<typeof comboboxVariants>;
+  slots?: ReturnType<typeof comboBoxVariants>;
 };
 
 const ComboBoxContext = createContext<ComboBoxContext>({});
@@ -43,12 +43,12 @@ const ComboBoxRoot = <T extends object = object>({
   menuTrigger = "focus",
   ...props
 }: ComboBoxRootProps<T>) => {
-  const slots = React.useMemo(() => comboboxVariants({fullWidth}), [fullWidth]);
+  const slots = React.useMemo(() => comboBoxVariants({fullWidth}), [fullWidth]);
 
   return (
     <ComboBoxContext value={{slots}}>
       <ComboBoxPrimitive
-        data-slot="combobox"
+        data-slot="combo-box"
         menuTrigger={menuTrigger}
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
@@ -69,7 +69,7 @@ const ComboBoxInputGroup = ({children, className, ...props}: ComboBoxInputGroupP
   const inputGroupClassName = composeSlotClassName(slots?.inputGroup, className);
 
   return (
-    <div className={inputGroupClassName} data-slot="combobox-input-group" {...props}>
+    <div className={inputGroupClassName} data-slot="combo-box-input-group" {...props}>
       {children}
     </div>
   );
@@ -91,10 +91,10 @@ const ComboBoxTrigger = ({children, className, ...rest}: ComboBoxTriggerProps) =
     <Button
       className={composeTwRenderProps(className, slots?.trigger())}
       data-open={dataAttr(state?.isOpen)}
-      data-slot="combobox-trigger"
+      data-slot="combo-box-trigger"
       {...rest}
     >
-      {children ?? <IconChevronDown data-slot="combobox-trigger-default-icon" />}
+      {children ?? <IconChevronDown data-slot="combo-box-trigger-default-icon" />}
     </Button>
   );
 };

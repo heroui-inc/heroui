@@ -11,7 +11,7 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
-import {ListBox} from "../listbox";
+import {ListBox} from "../list-box";
 import {Select} from "../select";
 import {Tooltip} from "../tooltip";
 

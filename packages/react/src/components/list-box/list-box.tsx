@@ -23,7 +23,7 @@ function ListBoxRoot<T extends object>({className, variant, ...props}: ListBoxRo
   return (
     <ListBoxPrimitive
       className={composeTwRenderProps(className, styles)}
-      data-slot="listbox"
+      data-slot="list-box"
       {...props}
     />
   );

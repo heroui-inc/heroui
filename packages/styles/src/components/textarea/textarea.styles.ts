@@ -3,7 +3,7 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const textAreaVariants = tv({
-  base: "text-area",
+  base: "textarea",
   defaultVariants: {
     fullWidth: false,
     variant: "primary",
@@ -11,11 +11,11 @@ export const textAreaVariants = tv({
   variants: {
     fullWidth: {
       false: "",
-      true: "text-area--full-width",
+      true: "textarea--full-width",
     },
     variant: {
-      primary: "text-area--primary",
-      secondary: "text-area--secondary",
+      primary: "textarea--primary",
+      secondary: "textarea--secondary",
     },
   },
 });

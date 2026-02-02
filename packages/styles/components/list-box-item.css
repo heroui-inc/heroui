@@ -80,7 +80,7 @@
   @apply transition duration-250 motion-reduce:transition-none;
 
   /* Checkmark SVG indicator */
-  [data-slot="listbox-item-indicator--checkmark"] {
+  [data-slot="list-box-item-indicator--checkmark"] {
     @apply size-2.5;
 
     /**
@@ -89,8 +89,8 @@
     @apply transition-all duration-300 motion-reduce:transition-none;
   }
 
-  .list-box-item[aria-selected="true"] [data-slot="listbox-item-indicator--checkmark"],
-  .list-box-item[data-selected="true"] [data-slot="listbox-item-indicator--checkmark"] {
+  .list-box-item[aria-selected="true"] [data-slot="list-box-item-indicator--checkmark"],
+  .list-box-item[data-selected="true"] [data-slot="list-box-item-indicator--checkmark"] {
     /**
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity

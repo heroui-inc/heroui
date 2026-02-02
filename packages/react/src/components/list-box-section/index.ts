@@ -1,6 +1,6 @@
 import type {ComponentProps} from "react";
 
-import {ListBoxSectionRoot} from "./listbox-section";
+import {ListBoxSectionRoot} from "./list-box-section";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -19,7 +19,7 @@ export {ListBoxSectionRoot};
 export type {
   ListBoxSectionRootProps,
   ListBoxSectionRootProps as ListBoxSectionProps,
-} from "./listbox-section";
+} from "./list-box-section";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants

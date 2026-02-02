@@ -2,7 +2,7 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-export const comboboxVariants = tv({
+export const comboBoxVariants = tv({
   defaultVariants: {
     fullWidth: false,
   },
@@ -23,4 +23,4 @@ export const comboboxVariants = tv({
   },
 });
 
-export type ComboBoxVariants = VariantProps<typeof comboboxVariants>;
+export type ComboBoxVariants = VariantProps<typeof comboBoxVariants>;
