@@ -1,1 +1,1 @@
-export * from "./combobox.styles";
+export * from "./combo-box.styles";
