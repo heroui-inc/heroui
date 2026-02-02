@@ -482,7 +482,7 @@ export const FormExample: Story = {
     const STOCK_AVAILABLE = 3;
     const isOutOfStock = value !== undefined && value > STOCK_AVAILABLE;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SyntheticEvent) => {
       e.preventDefault();
 
       if (value === undefined || value === null || value < 1 || value > STOCK_AVAILABLE) {

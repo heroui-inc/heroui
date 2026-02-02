@@ -614,7 +614,7 @@ Use the `formValue` prop to control whether the selected item's key or text is s
 import { Button, ComboBox, FieldError, Form, Input, Label, ListBox } from '@heroui/react';
 
 function FormValueExample() {
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     console.log('Submitted value:', formData.get('animal')); // Will be "cat" (the key)

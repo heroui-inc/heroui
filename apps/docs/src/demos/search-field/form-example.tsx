@@ -9,7 +9,7 @@ export function FormExample() {
   const MIN_LENGTH = 3;
   const isInvalid = value.length > 0 && value.length < MIN_LENGTH;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     if (value.length < MIN_LENGTH) {

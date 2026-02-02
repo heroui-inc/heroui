@@ -207,7 +207,7 @@ export const WithValidation: Story = {
     const [value, setValue] = React.useState("");
     const [isInvalid, setIsInvalid] = React.useState(false);
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
       const code = formData.get("code");
@@ -279,7 +279,7 @@ export const OnComplete: Story = {
       console.log("Code complete:", code);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       setIsSubmitting(true);
@@ -343,7 +343,7 @@ export const FormExample: Story = {
     const [error, setError] = React.useState("");
     const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SyntheticEvent) => {
       e.preventDefault();
       setError("");
 

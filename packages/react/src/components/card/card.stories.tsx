@@ -459,7 +459,7 @@ export const WithImages: Story = {
 
 export const WithForm: Story = {
   render: (args) => {
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
       const data: Record<string, string> = {};

@@ -37,7 +37,7 @@ export function NewsletterForm() {
       return status === "idle" || status === "error" ? "subscribe" : status;
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
