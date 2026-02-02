@@ -72,9 +72,9 @@ The Form component is a wrapper around React Aria's Form primitive that provides
 | `children` | `React.ReactNode` | - | Form content (fields, buttons, etc.). |
 | `encType` | `'application/x-www-form-urlencoded' \| 'multipart/form-data' \| 'text/plain'` | - | The encoding type for form data submission. |
 | `method` | `'get' \| 'post'` | - | The HTTP method to use when submitting the form. |
-| `onInvalid` | `(event: FormEvent<HTMLFormElement>) => void` | - | Handler called when the form validation fails. By default, the first invalid field will be focused. Use `preventDefault()` to customize focus behavior. |
-| `onReset` | `(event: FormEvent<HTMLFormElement>) => void` | - | Handler called when the form is reset. |
-| `onSubmit` | `(event: FormEvent<HTMLFormElement>) => void` | - | Handler called when the form is submitted. |
+| `onInvalid` | `(event: SyntheticEvent<HTMLFormElement>) => void` | - | Handler called when the form validation fails. By default, the first invalid field will be focused. Use `preventDefault()` to customize focus behavior. |
+| `onReset` | `(event: SyntheticEvent<HTMLFormElement>) => void` | - | Handler called when the form is reset. |
+| `onSubmit` | `(event: SyntheticEvent<HTMLFormElement>) => void` | - | Handler called when the form is submitted. |
 | `target` | `'_self' \| '_blank' \| '_parent' \| '_top'` | - | Where to display the response after submitting the form. |
 | `validationBehavior` | `'native' \| 'aria'` | `'native'` | Whether to use native HTML validation or ARIA validation. 'native' blocks form submission, 'aria' displays errors in realtime. |
 | `validationErrors` | `ValidationErrors` | - | Server-side validation errors mapped by field name. Displayed immediately and cleared when user modifies the field. |
@@ -111,7 +111,7 @@ Forms can be submitted in several ways:
 Example with FormData:
 
 ```tsx
-function handleSubmit(e: FormEvent<HTMLFormElement>) {
+function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
   const data = Object.fromEntries(formData);
