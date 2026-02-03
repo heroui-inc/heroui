@@ -24,8 +24,6 @@ import { ColorArea } from '@heroui/react';
 
 ### Anatomy
 
-Import the ColorArea component and access all parts using dot notation.
-
 ```tsx
 import { ColorArea } from '@heroui/react';
 
@@ -38,24 +36,23 @@ export default () => (
 
 ### With Dots
 
-Use the `showDots` prop to display a dot grid overlay for precision color picking.
-
 <ComponentPreview
   name="color-area-with-dots"
-/>
-
-### Color Channels
-
-By default, ColorArea uses the HSB color space with saturation on the X axis and brightness on the Y axis. You can customize this with the `xChannel` and `yChannel` props.
-
-<ComponentPreview
-  name="color-area-channels"
 />
 
 ### Controlled
 
 <ComponentPreview
   name="color-area-controlled"
+/>
+
+
+### Color Space & Channels
+
+Use `colorSpace` to set the color space (RGB, HSL, HSB) and `xChannel`/`yChannel` props to customize which color channels are displayed on each axis.
+
+<ComponentPreview
+  name="color-area-space-and-channels"
 />
 
 ### Disabled

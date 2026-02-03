@@ -476,9 +476,9 @@ export const demos: Record<string, DemoItem> = {
     component: ColorAreaDemos.WithDots,
     file: "color-area/with-dots.tsx",
   },
-  "color-area-channels": {
-    component: ColorAreaDemos.Channels,
-    file: "color-area/channels.tsx",
+  "color-area-space-and-channels": {
+    component: ColorAreaDemos.SpaceAndChannels,
+    file: "color-area/space-and-channels.tsx",
   },
   "color-area-controlled": {
     component: ColorAreaDemos.Controlled,

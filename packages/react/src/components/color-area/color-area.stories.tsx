@@ -2,9 +2,9 @@ import type {ColorAreaRootProps} from "./index";
 import type {Meta} from "@storybook/react";
 
 import React from "react";
-import {parseColor} from "react-aria-components";
 
 import {ColorSwatch} from "../color-swatch";
+import {parseColor} from "../rac";
 
 import {ColorArea} from "./index";
 

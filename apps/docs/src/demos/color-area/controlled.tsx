@@ -1,21 +1,23 @@
 "use client";
 
-import {ColorArea, ColorSwatch} from "@heroui/react";
+import type {Color} from "@heroui/react";
+
+import {ColorArea, ColorSwatch, parseColor} from "@heroui/react";
 import {useState} from "react";
-import {parseColor} from "react-aria-components";
 
 export function ColorAreaControlled() {
-  const [color, setColor] = useState(parseColor("hsl(50, 100%, 50%)"));
+  const [color, setColor] = useState<Color>(parseColor("#9B80FF"));
 
   return (
     <div className="flex flex-col gap-4">
-      <ColorArea value={color} onChange={setColor}>
+      <ColorArea colorSpace="rgb" value={color} xChannel="red" yChannel="green" onChange={setColor}>
         <ColorArea.Thumb />
       </ColorArea>
       <div className="flex w-[300px] items-center gap-3">
-        <ColorSwatch color={color.toString("css")} size="md" />
+        <ColorSwatch color={color} size="md" />
         <p className="text-sm text-muted">
-          Current color: <span className="font-medium">{color.toString("hsl")}</span>
+          Current color:{" "}
+          <span className="font-medium">{color ? color.toString("hex") : "(empty)"}</span>
         </p>
       </div>
     </div>
