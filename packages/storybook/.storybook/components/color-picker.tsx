@@ -5,7 +5,7 @@ import type {
 } from "react-aria-components";
 
 import {ChevronLeft, ChevronRight, Shuffle} from "@gravity-ui/icons";
-import {Button, InputGroup, ListBox, Popover, Select} from "@heroui/react";
+import {Button, InputGroup, ListBox, Popover, Select, parseColor} from "@heroui/react";
 import React, {useState} from "react";
 import {
   ColorArea as AriaColorArea,
@@ -19,7 +19,6 @@ import {
   Input,
   Label,
   SliderTrack,
-  parseColor,
 } from "react-aria-components";
 import {tv} from "tailwind-variants";
 

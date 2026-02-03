@@ -2,7 +2,6 @@ import type {Meta, StoryObj} from "@storybook/react";
 import type {Color} from "react-aria-components";
 
 import React, {useState} from "react";
-import {parseColor} from "react-aria-components";
 
 import {Button} from "../button";
 import {ColorInputGroup} from "../color-input-group";
@@ -11,6 +10,7 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
+import {parseColor} from "../rac";
 
 import {ColorField} from "./index";
 

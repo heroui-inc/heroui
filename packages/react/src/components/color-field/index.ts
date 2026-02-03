@@ -31,8 +31,3 @@ export type {
 export {colorFieldVariants} from "@heroui/styles";
 
 export type {ColorFieldVariants} from "@heroui/styles";
-
-/* -------------------------------------------------------------------------------------------------
- * Re-export Color utilities from react-aria-components
- * -----------------------------------------------------------------------------------------------*/
-export {parseColor} from "react-aria-components";

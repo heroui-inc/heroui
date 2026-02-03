@@ -2,7 +2,9 @@ import type {Meta, StoryObj} from "@storybook/react";
 
 import React from "react";
 
-import {ColorSwatchPicker, parseColor} from "./index";
+import {parseColor} from "../rac";
+
+import {ColorSwatchPicker} from "./index";
 
 export default {
   argTypes: {

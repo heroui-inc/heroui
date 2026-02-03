@@ -40,8 +40,3 @@ export type {
 export {colorSwatchPickerVariants} from "@heroui/styles";
 
 export type {ColorSwatchPickerVariants} from "@heroui/styles";
-
-/* -------------------------------------------------------------------------------------------------
- * Re-export parseColor for convenience
- * -----------------------------------------------------------------------------------------------*/
-export {parseColor} from "react-aria-components";
