@@ -39,20 +39,22 @@ const defaultArgs: ChipProps = {
 
 const Template = (props: ChipProps) => (
   <div className="flex items-center gap-3">
-    <Chip {...props}>Label</Chip>
+    <Chip {...props}>
+      <Chip.Label>Label</Chip.Label>
+    </Chip>
   </div>
 );
 
 const SizesTemplate = (props: ChipProps) => (
   <div className="flex items-center gap-3">
     <Chip {...props} size="sm">
-      Small
+      <Chip.Label>Small</Chip.Label>
     </Chip>
     <Chip {...props} size="md">
-      Medium
+      <Chip.Label>Medium</Chip.Label>
     </Chip>
     <Chip {...props} size="lg">
-      Large
+      <Chip.Label>Large</Chip.Label>
     </Chip>
   </div>
 );
@@ -61,7 +63,8 @@ const WithIconTemplate = (props: ChipProps) => (
   <div className="flex items-center gap-3">
     <Chip {...props}>
       <Icon icon="gravity-ui:circle-dashed" />
-      Label <Icon icon="gravity-ui:circle-dashed" />
+      <Chip.Label>Label</Chip.Label>
+      <Icon icon="gravity-ui:circle-dashed" />
     </Chip>
   </div>
 );
@@ -75,19 +78,19 @@ const StatusesTemplate = (props: ChipProps) => {
         <div key={variant} className="flex items-center gap-3">
           <Chip {...props} variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Information
+            <Chip.Label>Information</Chip.Label>
           </Chip>
           <Chip {...props} color="success" variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Completed
+            <Chip.Label>Completed</Chip.Label>
           </Chip>
           <Chip {...props} color="warning" variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Pending
+            <Chip.Label>Pending</Chip.Label>
           </Chip>
           <Chip {...props} color="danger" variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Failed
+            <Chip.Label>Failed</Chip.Label>
           </Chip>
         </div>
       ))}
@@ -131,7 +134,8 @@ const VariantsTemplate = (props: ChipProps) => {
                     >
                       <Chip {...props} color={color} size={size} variant={variant}>
                         <Icon icon="gravity-ui:circle-dashed" />
-                        Label <Icon icon="gravity-ui:circle-dashed" />
+                        <Chip.Label>Label</Chip.Label>
+                        <Icon icon="gravity-ui:circle-dashed" />
                       </Chip>
                     </div>
                   ))}
