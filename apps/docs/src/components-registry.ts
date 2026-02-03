@@ -112,6 +112,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "colorfield",
     title: "ColorField",
   },
+  colorslider: {
+    category: "colors",
+    description: "Slider for adjusting individual color channel values",
+    href: "/docs/components/color-slider",
+    name: "colorslider",
+    title: "ColorSlider",
+  },
   colorswatch: {
     category: "colors",
     description: "Visual preview of a color value",
@@ -434,6 +441,7 @@ const componentRelationships: Record<string, string[]> = {
   closebutton: ["alert", "alertdialog", "chip", "modal"],
   colorarea: ["colorswatch", "colorswatchpicker", "colorfield"],
   colorfield: ["colorswatch", "colorswatchpicker", "form", "label", "description", "fielderror"],
+  colorslider: ["colorswatch", "colorswatchpicker", "slider"],
   colorswatch: ["colorswatchpicker", "colorfield", "colorarea"],
   colorswatchpicker: ["colorswatch", "colorfield", "colorarea"],
   combobox: [

@@ -15,6 +15,7 @@ export * from "./chip";
 export * from "./color-area";
 export * from "./color-field";
 export * from "./color-input-group";
+export * from "./color-slider";
 export * from "./color-swatch";
 export * from "./close-button";
 export * from "./color-swatch-picker";
