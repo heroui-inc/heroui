@@ -98,6 +98,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "closebutton",
     title: "CloseButton",
   },
+  colorarea: {
+    category: "colors",
+    description: "2D color picker for selecting colors from a gradient area",
+    href: "/docs/components/color-area",
+    name: "colorarea",
+    title: "ColorArea",
+  },
   colorfield: {
     category: "colors",
     description: "Input for entering color values with hex format",
@@ -425,9 +432,10 @@ const componentRelationships: Record<string, string[]> = {
   ],
   chip: ["avatar", "closebutton", "separator"],
   closebutton: ["alert", "alertdialog", "chip", "modal"],
+  colorarea: ["colorswatch", "colorswatchpicker", "colorfield"],
   colorfield: ["colorswatch", "colorswatchpicker", "form", "label", "description", "fielderror"],
-  colorswatch: ["colorswatchpicker", "colorfield"],
-  colorswatchpicker: ["colorswatch", "colorfield"],
+  colorswatch: ["colorswatchpicker", "colorfield", "colorarea"],
+  colorswatchpicker: ["colorswatch", "colorfield", "colorarea"],
   combobox: [
     "listbox",
     "popover",

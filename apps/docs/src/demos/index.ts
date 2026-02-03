@@ -14,6 +14,7 @@ import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as ColorAreaDemos from "./color-area";
 import * as ColorFieldDemos from "./color-field";
 import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
@@ -465,6 +466,27 @@ export const demos: Record<string, DemoItem> = {
   "color-field-with-description": {
     component: ColorFieldDemos.WithDescription,
     file: "color-field/with-description.tsx",
+  },
+  // ColorArea demos
+  "color-area-basic": {
+    component: ColorAreaDemos.Basic,
+    file: "color-area/basic.tsx",
+  },
+  "color-area-with-dots": {
+    component: ColorAreaDemos.WithDots,
+    file: "color-area/with-dots.tsx",
+  },
+  "color-area-space-and-channels": {
+    component: ColorAreaDemos.SpaceAndChannels,
+    file: "color-area/space-and-channels.tsx",
+  },
+  "color-area-controlled": {
+    component: ColorAreaDemos.Controlled,
+    file: "color-area/controlled.tsx",
+  },
+  "color-area-disabled": {
+    component: ColorAreaDemos.Disabled,
+    file: "color-area/disabled.tsx",
   },
   // ColorSwatch demos
   "color-swatch-basic": {
