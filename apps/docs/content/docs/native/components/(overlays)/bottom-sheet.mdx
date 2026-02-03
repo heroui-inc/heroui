@@ -213,27 +213,21 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 
 ### BottomSheet
 
-| prop                       | type                       | default | description                                          |
-| -------------------------- | -------------------------- | ------- | ---------------------------------------------------- |
-| `children`                 | `React.ReactNode`          | -       | Bottom sheet content and trigger elements            |
-| `isOpen`                   | `boolean`                  | -       | Controlled open state of the bottom sheet            |
-| `isDefaultOpen`            | `boolean`                  | `false` | Initial open state when uncontrolled                 |
-| `isDismissKeyboardOnClose` | `boolean`                  | `true`  | Whether to dismiss keyboard when bottom sheet closes |
-| `animation`                | `BottomSheetRootAnimation` | -       | Animation configuration                              |
-| `onOpenChange`             | `(value: boolean) => void` | -       | Callback when open state changes                     |
-| `...ViewProps`             | `ViewProps`                | -       | All standard React Native View props are supported   |
+| prop           | type                       | default | description                                          |
+| -------------- | -------------------------- | ------- | ---------------------------------------------------- |
+| `children`     | `React.ReactNode`          | -       | Bottom sheet content and trigger elements            |
+| `isOpen`       | `boolean`                  | -       | Controlled open state of the bottom sheet            |
+| `isDefaultOpen`| `boolean`                  | `false` | Initial open state when uncontrolled                 |
+| `animation`    | `AnimationRootDisableAll`  | -       | Animation configuration                              |
+| `onOpenChange` | `(value: boolean) => void` | -       | Callback when open state changes                     |
+| `...ViewProps` | `ViewProps`                | -       | All standard React Native View props are supported   |
 
-#### BottomSheetRootAnimation
+#### Animation Configuration
 
 Animation configuration for bottom sheet root component. Can be:
 
 - `"disable-all"`: Disable all animations including children
 - `undefined`: Use default animations
-- `object`: Custom animation configuration
-
-| prop    | type                                     | default | description                                     |
-| ------- | ---------------------------------------- | ------- | ----------------------------------------------- |
-| `state` | `'disabled' \| 'disable-all' \| boolean` | -       | Disable animations while customizing properties |
 
 ### BottomSheet.Trigger
 
@@ -260,19 +254,18 @@ Animation configuration for bottom sheet root component. Can be:
 | `children`              | `React.ReactNode`             | -       | Custom overlay content                                       |
 | `className`             | `string`                      | -       | Additional CSS classes for overlay                           |
 | `style`                 | `ViewStyle`                   | -       | Additional styles for overlay container                      |
-| `animation`             | `BottomSheetOverlayAnimation` | -       | Animation configuration                                      |
-| `isAnimatedStyleActive` | `boolean`                     | `true`  | Whether animated styles (react-native-reanimated) are active |
-| `isCloseOnPress`        | `boolean`                     | `true`  | Whether pressing overlay closes bottom sheet                 |
-| `forceMount`            | `boolean`                     | -       | Force mount when closed for animation purposes               |
-| `...PressableProps`     | `PressableProps`              | -       | All standard React Native Pressable props are supported      |
+| `animation`             | `Omit<PopupOverlayAnimation, 'entering' \| 'exiting'>` | -       | Animation configuration                                      |
+| `isAnimatedStyleActive` | `boolean`                                                | `true`  | Whether animated styles (react-native-reanimated) are active |
+| `isCloseOnPress`        | `boolean`                                                | `true`  | Whether pressing overlay closes bottom sheet                 |
+| `...PressableProps`     | `PressableProps`                                         | -       | All standard React Native Pressable props are supported      |
 
-#### BottomSheetOverlayAnimation
+#### Animation Configuration
 
 Animation configuration for bottom sheet overlay component. Can be:
 
 - `false` or `"disabled"`: Disable all animations
 - `true` or `undefined`: Use default animations
-- `object`: Custom animation configuration
+- `object`: Custom animation configuration (excluding `entering` and `exiting` properties)
 
 | prop            | type                       | default     | description                                     |
 | --------------- | -------------------------- | ----------- | ----------------------------------------------- |
@@ -336,13 +329,12 @@ const { isOpen, onOpenChange } = useBottomSheet();
 Hook to access bottom sheet animation context for advanced customization.
 
 ```tsx
-const { bottomSheetState, progress } = useBottomSheetAnimation();
+const { progress } = useBottomSheetAnimation();
 ```
 
-| property           | type                          | description                                  |
-| ------------------ | ----------------------------- | -------------------------------------------- |
-| `bottomSheetState` | `'idle' \| 'open' \| 'close'` | Internal bottom sheet state                  |
-| `progress`         | `SharedValue<number>`         | Animation progress (0=idle, 1=open, 2=close) |
+| property   | type                  | description                                  |
+| ---------- | --------------------- | -------------------------------------------- |
+| `progress` | `SharedValue<number>` | Animation progress (0=idle, 1=open, 2=close) |
 
 ## Special Notes
 

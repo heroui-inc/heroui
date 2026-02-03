@@ -1,15 +1,15 @@
 ---
 title: Beta 13
-description: TextArea component, Button outline variant, Tabs improvements, form component decomposition, style class exports, and critical bug fixes
+description: TextArea component, Button outline variant, Tabs improvements, form component decomposition, popup animation refactor, style class exports, and critical bug fixes
 github:
   pull: 254
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-muted">January 29, 2026</span>
+  <span className="text-sm text-muted">February 3, 2026</span>
 </div>
 
-Beta 13 introduces the TextArea component for multiline text input, adds Button outline variant, and exports style class names for all components. This release also includes significant improvements to Tabs with better animations and clearer variant naming, decomposes form components into standalone primitives for better flexibility, and fixes critical issues including Chinese character input handling, theme color calculations, and Uniwind Pro compatibility. These updates enhance developer experience and component reliability across the library.
+Beta 13 introduces the TextArea component for multiline text input, adds Button outline variant, and exports style class names for all components. This release also includes significant improvements to Tabs with better animations and clearer variant naming, decomposes form components into standalone primitives for better flexibility, refactors popup animation system for improved consistency and Android compatibility, and fixes critical issues including Chinese character input handling, theme color calculations, Uniwind Pro compatibility, BottomSheet opening issues, and tree-shaking support. These updates enhance developer experience and component reliability across the library.
 
 ## Installation
 
@@ -306,6 +306,21 @@ The [Input](/docs/native/components/input) component now includes platform-speci
 - Enhanced component appearance on Android platform
 
 **Related PR:** [#248](https://github.com/heroui-inc/heroui-native/pull/248)
+
+### Popup Animation System Refactor
+
+The animation system for popup components (Popover, Select, Dialog, BottomSheet) has been refactored to improve entering/exiting animation logic, overlay composition, and content animation handling. This change standardizes animation behavior across all popup components and fixes Android pointer events issues.
+
+**Improvements:**
+
+- Standardized entering/exiting animations using FadeInDown/FadeOutDown for dialog presentations
+- Refactored overlay animation hooks to support both progress-based and entering/exiting animations
+- Improved overlay composition using Dialog.Overlay and Popover.Overlay components instead of Pressable wrappers
+- Fixed Android pointer events issue affecting popup interactions
+- Made presentation prop explicit in examples (popover, dialog, bottom-sheet)
+- Simplified animation API for better maintainability and consistency
+
+**Related PR:** [#263](https://github.com/heroui-inc/heroui-native/pull/263)
 
 ## API Enhancements
 
@@ -641,6 +656,33 @@ const [isOpen, setIsOpen] = useState(false);
 
 **Related PR:** [#237](https://github.com/heroui-inc/heroui-native/pull/237)
 
+### Popup Animation System Refactor
+
+The animation system for popup components has been refactored, resulting in several API changes that require code updates.
+
+**Migration:**
+
+- Remove `closeDelay` and `isDismissKeyboardOnClose` props from `Dialog.Root`
+- Remove custom `entering`/`exiting` animation configs from `Dialog.Root` animation prop (now only supports disable flags). Custom animations should be configured using Keyframe animations directly on `Dialog.Content` component
+- Remove `isAnimatedStyleActive` and `onLayout` props from `Dialog.Content`
+- Remove `isDismissKeyboardOnClose` prop from `BottomSheet.Root`
+- Update `BottomSheet.Overlay` animation prop to remove `entering`/`exiting` properties (no longer supported)
+- Make `presentation` prop explicit on all `Popover.Content` and `Select.Content` components (changed from optional to required)
+- Update animation hooks usage: `useBottomSheetAnimation()` no longer returns `bottomSheetState`, `useDialogAnimation()` no longer returns `dialogState`
+
+**What Changed:**
+
+- `Dialog.Root`: Removed `closeDelay` and `isDismissKeyboardOnClose` props
+- `Dialog.Root`: Animation prop type changed from `DialogRootAnimation` (supported custom entering/exiting) to `AnimationRootDisableAll` (disable flags only)
+- `Dialog.Content`: Removed `isAnimatedStyleActive` and `onLayout` props
+- `BottomSheet.Root`: Removed `isDismissKeyboardOnClose` prop
+- `BottomSheet.Overlay`: Animation prop no longer supports `entering`/`exiting` properties
+- `Popover.Content`: `presentation` prop is now required (was optional, defaulted to `"popover"`)
+- `Select.Content`: `presentation` prop is now required (was optional, defaulted to `"popover"`)
+- Animation hooks: `useBottomSheetAnimation()` no longer returns `bottomSheetState`, `useDialogAnimation()` no longer returns `dialogState`
+
+**Related PR:** [#263](https://github.com/heroui-inc/heroui-native/pull/263)
+
 ## Bug Fixes
 
 This release includes fixes for the following issues:
@@ -650,6 +692,10 @@ This release includes fixes for the following issues:
 - **[Issue #219](https://github.com/heroui-inc/heroui-native/issues/219)**: Fixed Button `childrenToString()` returning `"[object Object]"` for multiple children. The function now properly handles React elements and complex children structures, preventing stringification issues when rendering button content.
 
 - **[Issue #232](https://github.com/heroui-inc/heroui-native/issues/232)**: Fixed HeroUINativeProvider breaking with the recently released Uniwind Pro. The provider now properly handles Uniwind Pro compatibility, ensuring smooth integration with the latest Uniwind version.
+
+- **[Issue #259](https://github.com/heroui-inc/heroui-native/issues/259)**: Fixed BottomSheet issue where opening quickly and starting a meeting would prevent it from opening again. The refactored animation system resolves this issue by improving the entering/exiting animation logic.
+
+- **[Issue #261](https://github.com/heroui-inc/heroui-native/issues/261)**: Fixed `@gorhom/bottom-sheet` not being tree-shaken. The library now properly supports tree-shaking for unused dependencies.
 
 **Additional Fixes:**
 
