@@ -101,7 +101,7 @@ const componentsMap: Record<string, ComponentInfo> = {
   combobox: {
     category: "forms",
     description: "Text input with searchable dropdown list",
-    href: "/docs/components/combobox",
+    href: "/docs/components/combo-box",
     name: "combobox",
     title: "ComboBox",
   },
@@ -325,7 +325,7 @@ const componentsMap: Record<string, ComponentInfo> = {
   textarea: {
     category: "forms",
     description: "Multiline text input with focus management",
-    href: "/docs/components/textarea",
+    href: "/docs/components/text-area",
     name: "textarea",
     title: "TextArea",
   },

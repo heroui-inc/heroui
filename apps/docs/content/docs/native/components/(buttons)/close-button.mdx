@@ -1,0 +1,120 @@
+---
+title: CloseButton
+description: Button component for closing dialogs, modals, or dismissing content.
+icon: new
+links:
+  source_native: close-button/close-button.tsx
+  styles_native: close-button/close-button.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { CloseButton } from 'heroui-native';
+```
+
+## Usage
+
+### Basic Usage
+
+The CloseButton component renders a close icon button with default styling.
+
+```tsx
+<CloseButton />
+```
+
+### Custom Icon Color
+
+Customize the icon color using the `iconProps` prop.
+
+```tsx
+<CloseButton iconProps={{ color: themeColorDanger }} />
+<CloseButton iconProps={{ color: themeColorAccent }} />
+```
+
+### Custom Icon Size
+
+Adjust the icon size using the `iconProps` prop.
+
+```tsx
+<CloseButton iconProps={{ size: 24 }} />
+```
+
+### Custom Children
+
+Replace the default close icon with custom content.
+
+```tsx
+<CloseButton>
+  <CustomIcon />
+</CloseButton>
+```
+
+### Disabled State
+
+Disable the button to prevent interactions.
+
+```tsx
+<CloseButton isDisabled />
+```
+
+## Example
+
+```tsx
+import { CloseButton, useThemeColor } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export default function CloseButtonExample() {
+  const themeColorForeground = useThemeColor('foreground');
+  const themeColorDanger = useThemeColor('danger');
+
+  return (
+    <View className="flex-1 px-5 items-center justify-center">
+      <View className="flex-row items-center gap-4">
+        <CloseButton />
+        <CloseButton iconProps={{ color: themeColorDanger }} />
+        <CloseButton>
+          <StyledIonicons
+            name="close-circle"
+            size={28}
+            color={themeColorForeground}
+          />
+        </CloseButton>
+        <CloseButton isDisabled />
+      </View>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/close-button.tsx).
+
+## API Reference
+
+### CloseButton
+
+CloseButton extends all props from [Button](./button) component. It defaults to `variant='tertiary'`, `size='sm'`, and `isIconOnly=true`.
+
+| prop       | type                   | default | description                                                      |
+| ---------- | ---------------------- | ------- | ---------------------------------------------------------------- |
+| `iconProps` | `CloseButtonIconProps` | -       | Props for customizing the close icon                             |
+| `children` | `React.ReactNode`      | -       | Custom content to replace the default close icon                 |
+
+For inherited props including `isDisabled`, `className`, `animation`, `pressableFeedbackVariant`, `pressableFeedbackHighlightProps`, `pressableFeedbackRippleProps`, and all Pressable props, see [Button API Reference](./button#api-reference).
+
+#### CloseButtonIconProps
+
+| prop    | type     | default                  | description                      |
+| ------- | -------- | ------------------------ | -------------------------------- |
+| `size`  | `number` | `20`                     | Size of the icon                 |
+| `color` | `string` | Uses theme muted color   | Color of the icon                |

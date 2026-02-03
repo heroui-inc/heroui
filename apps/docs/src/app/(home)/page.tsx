@@ -13,8 +13,8 @@ const VersionChip = () => {
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
       href="/docs/react/releases/v3-0-0-beta-4"
     >
-      <FrameworkChip framework="web" />
-      <span>Beta 4 — Theme Builder, Autocomplete, Toast & more</span>
+      <FrameworkChip framework="native" />
+      <span>Beta 13 — The last Beta before the stable release</span>
     </LinkRoot>
   );
 };

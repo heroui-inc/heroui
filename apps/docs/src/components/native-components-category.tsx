@@ -10,20 +10,22 @@ import {NativeComponentItem} from "./native-component-item";
 const COMPONENT_GROUPS = [
   {
     category: "Buttons",
-    components: ["(buttons)/button"],
+    components: ["(buttons)/button", "(buttons)/close-button"],
   },
   {
     category: "Forms",
     components: [
       "(forms)/checkbox",
+      "(forms)/control-field",
       "(forms)/description",
-      "(forms)/error-view",
-      "(forms)/form-field",
+      "(forms)/field-error",
+      "(forms)/input",
       "(forms)/input-otp",
       "(forms)/label",
       "(forms)/radio-group",
       "(forms)/select",
       "(forms)/switch",
+      "(forms)/text-area",
       "(forms)/text-field",
     ],
   },
@@ -46,7 +48,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Layout",
-    components: ["(layout)/card", "(layout)/divider", "(layout)/surface"],
+    components: ["(layout)/card", "(layout)/separator", "(layout)/surface"],
   },
   {
     category: "Media",
