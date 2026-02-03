@@ -98,6 +98,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "closebutton",
     title: "CloseButton",
   },
+  colorfield: {
+    category: "colors",
+    description: "Input for entering color values with hex format",
+    href: "/docs/components/color-field",
+    name: "colorfield",
+    title: "ColorField",
+  },
   colorswatch: {
     category: "colors",
     description: "Visual preview of a color value",
@@ -418,8 +425,9 @@ const componentRelationships: Record<string, string[]> = {
   ],
   chip: ["avatar", "closebutton", "separator"],
   closebutton: ["alert", "alertdialog", "chip", "modal"],
-  colorswatch: ["colorswatchpicker"],
-  colorswatchpicker: ["colorswatch"],
+  colorfield: ["colorswatch", "colorswatchpicker", "form", "label", "description", "fielderror"],
+  colorswatch: ["colorswatchpicker", "colorfield"],
+  colorswatchpicker: ["colorswatch", "colorfield"],
   combobox: [
     "listbox",
     "popover",
