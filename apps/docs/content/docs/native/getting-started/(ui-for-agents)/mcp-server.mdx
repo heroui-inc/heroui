@@ -93,8 +93,9 @@ See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/
 
 ```json title=".vscode/mcp.json"
 {
-  "mcpServers": {
+  "servers": {
     "heroui-native": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "@heroui/native-mcp@latest"]
     }
