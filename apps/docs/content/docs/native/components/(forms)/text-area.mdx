@@ -1,0 +1,141 @@
+---
+title: TextArea
+description: A multiline text input component with styled border and background for collecting longer user input.
+icon: new
+links:
+  source_native: text-area/text-area.tsx
+  styles_native: text-area/text-area.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { TextArea } from 'heroui-native';
+```
+
+## Usage
+
+### Basic Usage
+
+TextArea can be used standalone or within a TextField component.
+
+```tsx
+import { TextArea } from 'heroui-native';
+
+<TextArea placeholder="Enter your message" />
+```
+
+### Within TextField
+
+TextArea works seamlessly with TextField for complete form structure.
+
+```tsx
+import { Description, Label, TextArea, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>Message</Label>
+  <TextArea placeholder="Enter your message here..." />
+  <Description>Please provide as much detail as possible.</Description>
+</TextField>
+```
+
+### With Validation
+
+Display error state when the text area is invalid.
+
+```tsx
+import { FieldError, Label, TextArea, TextField } from 'heroui-native';
+
+<TextField isRequired isInvalid={true}>
+  <Label>Message</Label>
+  <TextArea placeholder="Enter your message" />
+  <FieldError>Please enter a valid message</FieldError>
+</TextField>
+```
+
+### Disabled State
+
+Disable the text area to prevent interaction.
+
+```tsx
+import { Label, TextArea, TextField } from 'heroui-native';
+
+<TextField isDisabled>
+  <Label>Disabled Field</Label>
+  <TextArea placeholder="Cannot edit" value="Read only value" />
+</TextField>
+```
+
+### With Variant
+
+Use different variants to style the text area based on context.
+
+```tsx
+import { Label, TextArea, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>Primary Variant</Label>
+  <TextArea placeholder="Primary style text area" variant="primary" />
+</TextField>
+
+<TextField>
+  <Label>Secondary Variant</Label>
+  <TextArea placeholder="Secondary style text area" variant="secondary" />
+</TextField>
+```
+
+### Custom Styling
+
+Customize the text area appearance using className.
+
+```tsx
+import { Label, TextArea, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>Custom Styled</Label>
+  <TextArea
+    placeholder="Custom colors"
+    className="bg-blue-50 border-blue-500 focus:border-blue-700"
+  />
+</TextField>
+```
+
+## Example
+
+```tsx
+import { Description, FieldError, Label, TextArea, TextField } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function TextAreaExample() {
+  return (
+    <View className="gap-8">
+      <TextField>
+        <Label>Primary Variant</Label>
+        <TextArea placeholder="Primary style text area" variant="primary" />
+        <Description>Default variant with primary styling</Description>
+      </TextField>
+
+      <TextField>
+        <Label>Secondary Variant</Label>
+        <TextArea
+          placeholder="Secondary style text area"
+          variant="secondary"
+        />
+        <Description>Secondary variant for surfaces</Description>
+      </TextField>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/text-area.tsx).
+
+## API Reference
+
+TextArea extends [Input](./input) component and inherits all its props. The only differences are default values: `multiline` defaults to `true` and `textAlignVertical` defaults to `'top'`.
