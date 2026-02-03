@@ -31,7 +31,7 @@ export function RGBChannels() {
         </ColorSlider.Track>
       </ColorSlider>
       <div className="flex items-center gap-2">
-        <ColorSwatch color={color} size="lg" />
+        <ColorSwatch color={color} size="sm" />
         <p className="text-sm text-muted">
           Current color: <code className="font-mono">{color.toString("rgb")}</code>
         </p>

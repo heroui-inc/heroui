@@ -145,6 +145,8 @@
       "label";
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
 
     .color-slider__output {
       text-align: center;

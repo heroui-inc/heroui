@@ -40,7 +40,8 @@ export type {
   HSLChannel,
   HSBChannel,
   RGBChannel,
-  SharedChannel,
+  HSLHSBSharedChannel,
+  AlphaChannel,
   ColorSliderChannelProps,
 } from "./color-slider";
 

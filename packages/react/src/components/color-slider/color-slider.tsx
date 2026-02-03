@@ -28,26 +28,30 @@ type HSBChannel = "hue" | "saturation" | "brightness" | "alpha";
 /** Channels available in RGB color space */
 type RGBChannel = "red" | "green" | "blue" | "alpha";
 
-/** Channels that work across multiple color spaces */
-type SharedChannel = "hue" | "saturation" | "alpha";
+/** Channels shared between HSL and HSB (but NOT RGB) */
+type HSLHSBSharedChannel = "hue" | "saturation";
+
+/** Alpha channel works across ALL color spaces */
+type AlphaChannel = "alpha";
 
 /**
  * Discriminated union type for valid channel/colorSpace combinations.
  * This ensures TypeScript will error on invalid combinations like
- * `channel="red"` with `colorSpace="hsl"`.
+ * `channel="red"` with `colorSpace="hsl"` or `channel="saturation"` with `colorSpace="rgb"`.
  */
 type ColorSliderChannelProps =
   | {channel: HSLChannel; colorSpace?: "hsl"}
   | {channel: HSBChannel; colorSpace?: "hsb"}
   | {channel: RGBChannel; colorSpace?: "rgb"}
-  | {channel: SharedChannel; colorSpace?: ColorSpace};
+  | {channel: HSLHSBSharedChannel; colorSpace?: "hsl" | "hsb"}
+  | {channel: AlphaChannel; colorSpace?: ColorSpace};
 
 /* -------------------------------------------------------------------------------------------------
  * ColorSlider Validation Utilities
  * -----------------------------------------------------------------------------------------------*/
 
 /** Maps channels to their required color space (for channels that are color-space specific) */
-const CHANNEL_TO_COLORSPACE: Partial<Record<string, ColorSpace>> = {
+const CHANNEL_TO_REQUIRED_COLORSPACE: Partial<Record<string, ColorSpace>> = {
   red: "rgb",
   green: "rgb",
   blue: "rgb",
@@ -55,12 +59,16 @@ const CHANNEL_TO_COLORSPACE: Partial<Record<string, ColorSpace>> = {
   brightness: "hsb",
 };
 
+/** Channels that only work with HSL or HSB (not RGB) */
+const HSL_HSB_ONLY_CHANNELS = new Set(["hue", "saturation"]);
+
 /**
  * Validates and returns a valid colorSpace for the given channel.
  * If an invalid combination is detected, logs a warning and returns the correct colorSpace.
  */
 function getValidColorSpace(channel: string, colorSpace?: ColorSpace): ColorSpace | undefined {
-  const requiredSpace = CHANNEL_TO_COLORSPACE[channel];
+  // Check if channel requires a specific color space (e.g., "red" requires "rgb")
+  const requiredSpace = CHANNEL_TO_REQUIRED_COLORSPACE[channel];
 
   if (requiredSpace && colorSpace && colorSpace !== requiredSpace) {
     // eslint-disable-next-line no-console
@@ -70,6 +78,17 @@ function getValidColorSpace(channel: string, colorSpace?: ColorSpace): ColorSpac
     );
 
     return requiredSpace;
+  }
+
+  // Check if channel is HSL/HSB only (hue, saturation) but RGB was specified
+  if (HSL_HSB_ONLY_CHANNELS.has(channel) && colorSpace === "rgb") {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `[HeroUI ColorSlider] Invalid combination: channel="${channel}" is not available in RGB color space. ` +
+        `Use colorSpace="hsl" or colorSpace="hsb" instead. Auto-correcting to "hsl".`,
+    );
+
+    return "hsl";
   }
 
   return colorSpace;
@@ -241,6 +260,7 @@ export type {
   HSLChannel,
   HSBChannel,
   RGBChannel,
-  SharedChannel,
+  HSLHSBSharedChannel,
+  AlphaChannel,
   ColorSliderChannelProps,
 };

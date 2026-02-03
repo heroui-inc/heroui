@@ -1,10 +1,10 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
 import React, {useState} from "react";
-import {parseColor} from "react-aria-components";
 
 import {ColorSwatch} from "../color-swatch";
 import {Label} from "../label";
+import {parseColor} from "../rac";
 
 import {ColorSlider} from "./index";
 
@@ -53,14 +53,18 @@ export const Default: Story = {
     colorSpace: "hsl",
   },
   render: (args) => {
+    const isVertical = args.orientation === "vertical";
+
     return (
-      <ColorSlider {...args}>
-        <Label>Hue</Label>
-        <ColorSlider.Output />
-        <ColorSlider.Track>
-          <ColorSlider.Thumb />
-        </ColorSlider.Track>
-      </ColorSlider>
+      <div className={isVertical ? "h-64" : undefined}>
+        <ColorSlider {...args}>
+          <Label>Hue</Label>
+          <ColorSlider.Output />
+          <ColorSlider.Track>
+            <ColorSlider.Thumb />
+          </ColorSlider.Track>
+        </ColorSlider>
+      </div>
     );
   },
 };
