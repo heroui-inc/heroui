@@ -1,5 +1,3 @@
-"use client";
-
 import {HeartFill} from "@gravity-ui/icons";
 import {ColorSwatchPicker} from "@heroui/react";
 

@@ -1,36 +1,16 @@
 import {ColorSwatchPicker} from "@heroui/react";
 
+const colors = ["#F43F5E", "#D946EF", "#8B5CF6", "#3B82F6", "#06B6D4", "#10B981", "#84CC16"];
+
 export function Basic() {
   return (
     <ColorSwatchPicker>
-      <ColorSwatchPicker.Item color="#F43F5E">
-        <ColorSwatchPicker.Swatch />
-        <ColorSwatchPicker.Indicator />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#D946EF">
-        <ColorSwatchPicker.Swatch />
-        <ColorSwatchPicker.Indicator />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#8B5CF6">
-        <ColorSwatchPicker.Swatch />
-        <ColorSwatchPicker.Indicator />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#3B82F6">
-        <ColorSwatchPicker.Swatch />
-        <ColorSwatchPicker.Indicator />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#06B6D4">
-        <ColorSwatchPicker.Swatch />
-        <ColorSwatchPicker.Indicator />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#10B981">
-        <ColorSwatchPicker.Swatch />
-        <ColorSwatchPicker.Indicator />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#84CC16">
-        <ColorSwatchPicker.Swatch />
-        <ColorSwatchPicker.Indicator />
-      </ColorSwatchPicker.Item>
+      {colors.map((color) => (
+        <ColorSwatchPicker.Item key={color} color={color}>
+          <ColorSwatchPicker.Swatch />
+          <ColorSwatchPicker.Indicator />
+        </ColorSwatchPicker.Item>
+      ))}
     </ColorSwatchPicker>
   );
 }
