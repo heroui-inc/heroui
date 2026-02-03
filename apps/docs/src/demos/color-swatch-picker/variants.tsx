@@ -11,6 +11,7 @@ export function Variants() {
           {colors.map((color) => (
             <ColorSwatchPicker.Item key={color} color={color}>
               <ColorSwatchPicker.Swatch />
+              <ColorSwatchPicker.Indicator />
             </ColorSwatchPicker.Item>
           ))}
         </ColorSwatchPicker>
@@ -21,6 +22,7 @@ export function Variants() {
           {colors.map((color) => (
             <ColorSwatchPicker.Item key={color} color={color}>
               <ColorSwatchPicker.Swatch />
+              <ColorSwatchPicker.Indicator />
             </ColorSwatchPicker.Item>
           ))}
         </ColorSwatchPicker>

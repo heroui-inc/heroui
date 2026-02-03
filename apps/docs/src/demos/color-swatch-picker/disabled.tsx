@@ -8,6 +8,7 @@ export function Disabled() {
       {colors.map((color) => (
         <ColorSwatchPicker.Item key={color} isDisabled color={color}>
           <ColorSwatchPicker.Swatch />
+          <ColorSwatchPicker.Indicator />
         </ColorSwatchPicker.Item>
       ))}
     </ColorSwatchPicker>

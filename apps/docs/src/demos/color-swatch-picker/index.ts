@@ -1,5 +1,6 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
+export {CustomIndicator} from "./custom-indicator";
 export {DefaultValue} from "./default-value";
 export {Disabled} from "./disabled";
 export {Sizes} from "./sizes";

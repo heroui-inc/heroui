@@ -1,18 +1,20 @@
 import type {ComponentProps} from "react";
 
 import {
+  ColorSwatchPickerIndicator,
   ColorSwatchPickerItem,
   ColorSwatchPickerRoot,
   ColorSwatchPickerSwatch,
 } from "./color-swatch-picker";
 
 /* -------------------------------------------------------------------------------------------------
- * Compound Component
- * -----------------------------------------------------------------------------------------------*/
+| * Compound Component
+| * -----------------------------------------------------------------------------------------------*/
 export const ColorSwatchPicker = Object.assign(ColorSwatchPickerRoot, {
   Root: ColorSwatchPickerRoot,
   Item: ColorSwatchPickerItem,
   Swatch: ColorSwatchPickerSwatch,
+  Indicator: ColorSwatchPickerIndicator,
 });
 
 export type ColorSwatchPicker = {
@@ -20,23 +22,30 @@ export type ColorSwatchPicker = {
   RootProps: ComponentProps<typeof ColorSwatchPickerRoot>;
   ItemProps: ComponentProps<typeof ColorSwatchPickerItem>;
   SwatchProps: ComponentProps<typeof ColorSwatchPickerSwatch>;
+  IndicatorProps: ComponentProps<typeof ColorSwatchPickerIndicator>;
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Named Component
- * -----------------------------------------------------------------------------------------------*/
-export {ColorSwatchPickerRoot, ColorSwatchPickerItem, ColorSwatchPickerSwatch};
+| * Named Component
+| * -----------------------------------------------------------------------------------------------*/
+export {
+  ColorSwatchPickerRoot,
+  ColorSwatchPickerItem,
+  ColorSwatchPickerSwatch,
+  ColorSwatchPickerIndicator,
+};
 
 export type {
   ColorSwatchPickerRootProps,
   ColorSwatchPickerRootProps as ColorSwatchPickerProps,
   ColorSwatchPickerItemProps,
   ColorSwatchPickerSwatchProps,
+  ColorSwatchPickerIndicatorProps,
 } from "./color-swatch-picker";
 
 /* -------------------------------------------------------------------------------------------------
- * Variants
- * -----------------------------------------------------------------------------------------------*/
+| * Variants
+| * -----------------------------------------------------------------------------------------------*/
 export {colorSwatchPickerVariants} from "@heroui/styles";
 
 export type {ColorSwatchPickerVariants} from "@heroui/styles";
