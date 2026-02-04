@@ -47,6 +47,7 @@ export function WithFields() {
           </ColorSlider.Track>
         </ColorSlider>
         <Select
+          aria-label="Color space"
           value={colorSpace}
           variant="secondary"
           onChange={(value) => setColorSpace(value as ColorSpace)}
@@ -68,7 +69,12 @@ export function WithFields() {
         </Select>
         <div className="grid w-full grid-cols-3 items-center gap-2">
           {colorChannelsByColorSpace[colorSpace].map((channel) => (
-            <ColorField key={channel} channel={channel} colorSpace={colorSpace}>
+            <ColorField
+              key={channel}
+              aria-label={channel}
+              channel={channel}
+              colorSpace={colorSpace}
+            >
               <ColorInputGroup variant="secondary">
                 <ColorInputGroup.Input />
               </ColorInputGroup>

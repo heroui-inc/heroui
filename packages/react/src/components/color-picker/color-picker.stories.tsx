@@ -108,7 +108,12 @@ export const Controlled: Story = {
               <ColorArea.Thumb />
             </ColorArea>
             <div className="flex items-center gap-2 px-1">
-              <ColorSlider channel="hue" className="flex-1" colorSpace="hsb">
+              <ColorSlider
+                aria-label="Hue slider"
+                channel="hue"
+                className="flex-1"
+                colorSpace="hsb"
+              >
                 <ColorSlider.Track>
                   <ColorSlider.Thumb />
                 </ColorSlider.Track>
@@ -123,7 +128,7 @@ export const Controlled: Story = {
                 <Icon className="size-4" icon="gravity-ui:shuffle" />
               </Button>
             </div>
-            <ColorField>
+            <ColorField aria-label="Color field">
               <ColorInputGroup variant="secondary">
                 <ColorInputGroup.Prefix>
                   <ColorSwatch size="xs" />
@@ -159,7 +164,12 @@ export const WithSwatches: Story = {
           >
             <ColorArea.Thumb />
           </ColorArea>
-          <ColorSlider channel="hue" className="gap-1 px-1" colorSpace="hsb">
+          <ColorSlider
+            aria-label="Hue slider"
+            channel="hue"
+            className="gap-1 px-1"
+            colorSpace="hsb"
+          >
             <Label>Hue</Label>
             <ColorSlider.Output className="text-muted" />
             <ColorSlider.Track>
@@ -213,6 +223,7 @@ export const WidthFields: Story = {
             </ColorSlider.Track>
           </ColorSlider>
           <Select
+            aria-label="Color space"
             value={colorSpace}
             variant="secondary"
             onChange={(value) => setColorSpace(value as ColorSpace)}
@@ -234,7 +245,12 @@ export const WidthFields: Story = {
           </Select>
           <div className="grid w-full grid-cols-3 items-center gap-2">
             {colorChannelsByColorSpace[colorSpace].map((channel) => (
-              <ColorField key={channel} channel={channel} colorSpace={colorSpace}>
+              <ColorField
+                key={channel}
+                aria-label={channel}
+                channel={channel}
+                colorSpace={colorSpace}
+              >
                 <ColorInputGroup variant="secondary">
                   <ColorInputGroup.Input />
                 </ColorInputGroup>
@@ -265,6 +281,7 @@ export const WithSliders: Story = {
         </ColorPicker.Trigger>
         <ColorPicker.Popover className="max-w-62 gap-2 px-2 py-3">
           <Select
+            aria-label="Color space"
             value={colorSpace}
             variant="secondary"
             onChange={(value) => setColorSpace(value as ColorSpace)}
@@ -289,6 +306,7 @@ export const WithSliders: Story = {
               // @ts-expect-error - TypeScript can't correlate dynamic colorSpace with channel type
               <ColorSlider
                 key={channel}
+                aria-label={channel}
                 channel={channel}
                 className="gap-1 px-1"
                 colorSpace={colorSpace}

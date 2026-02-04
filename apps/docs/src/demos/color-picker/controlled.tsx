@@ -63,7 +63,7 @@ export function Controlled() {
             <ColorArea.Thumb />
           </ColorArea>
           <div className="flex items-center gap-2 px-1">
-            <ColorSlider channel="hue" className="flex-1" colorSpace="hsb">
+            <ColorSlider aria-label="Hue slider" channel="hue" className="flex-1" colorSpace="hsb">
               <ColorSlider.Track>
                 <ColorSlider.Thumb />
               </ColorSlider.Track>
@@ -78,7 +78,7 @@ export function Controlled() {
               <Icon className="size-4" icon="gravity-ui:shuffle" />
             </Button>
           </div>
-          <ColorField>
+          <ColorField aria-label="Color field">
             <ColorInputGroup variant="secondary">
               <ColorInputGroup.Prefix>
                 <ColorSwatch size="xs" />

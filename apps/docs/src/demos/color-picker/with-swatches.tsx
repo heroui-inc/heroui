@@ -23,11 +23,12 @@ export function WithSwatches() {
   return (
     <ColorPicker defaultValue="#F43F5E">
       <ColorPicker.Trigger>
-        <ColorSwatch />
+        <ColorSwatch size="lg" />
         <Label>Brand Color</Label>
       </ColorPicker.Trigger>
       <ColorPicker.Popover>
         <ColorArea
+          aria-label="Color area"
           className="max-w-full"
           colorSpace="hsb"
           xChannel="saturation"
@@ -35,7 +36,7 @@ export function WithSwatches() {
         >
           <ColorArea.Thumb />
         </ColorArea>
-        <ColorSlider channel="hue" className="gap-1 px-1" colorSpace="hsb">
+        <ColorSlider aria-label="Hue slider" channel="hue" className="gap-1 px-1" colorSpace="hsb">
           <Label>Hue</Label>
           <ColorSlider.Output className="text-muted" />
           <ColorSlider.Track>

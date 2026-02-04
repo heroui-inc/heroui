@@ -22,6 +22,7 @@ export function WithSliders() {
       </ColorPicker.Trigger>
       <ColorPicker.Popover className="max-w-62 gap-2 px-2 py-3">
         <Select
+          aria-label="Color space"
           value={colorSpace}
           variant="secondary"
           onChange={(value) => setColorSpace(value as ColorSpace)}
@@ -46,6 +47,7 @@ export function WithSliders() {
             // @ts-expect-error - TypeScript can't correlate dynamic colorSpace with channel type
             <ColorSlider
               key={channel}
+              aria-label={channel}
               channel={channel}
               className="gap-1 px-1"
               colorSpace={colorSpace}
