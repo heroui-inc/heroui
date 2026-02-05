@@ -88,45 +88,31 @@ const Toast = <T extends object = ToastContentValue>({
   }, [toastKey, toastHeight, onToastHeightChange]);
 
   const style = useMemo<CSSProperties>(() => {
-    if (isHidden) {
-      return {
-        viewTransitionName: `toast-${toast.key}`,
-        scale: 1 - index * finalScaleFactor,
-        zIndex: visibleToasts.length - index - 1,
-        tabindex: isFrontmost ? 0 : -1,
-        ...rest.style,
-      };
-    }
-
-    const toastsHeightBefore = visibleToasts.slice(0, index).reduce((total, item) => {
-      if (!item?.key || !heightsByKey) {
-        return total;
-      }
-
-      return total + (heightsByKey[item.key] ?? 0);
-    }, 0);
-
     const frontToastKey = visibleToasts[0]?.key;
+
     const frontHeight =
       (frontToastKey ? heightsByKey?.[frontToastKey] : undefined) ?? toastHeight ?? 0;
-    const currentHeight = (toastKey ? heightsByKey?.[toastKey] : undefined) ?? toastHeight ?? 0;
-    const naturalPosition = toastsHeightBefore + gap * index;
-    const desiredPosition = frontHeight - currentHeight + gap * index;
-    const translateY = (isBottom ? -1 : 1) * (desiredPosition - naturalPosition);
+
+    const offset = index * gap;
+    const translateY = (isBottom ? -1 : 1) * offset;
+    const scale = 1 - index * finalScaleFactor;
 
     return {
-      viewTransitionName: `toast-${toast.key}`,
+      viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
       translate: `0 ${translateY}px 0`,
-      scale: 1 - index * finalScaleFactor,
-      zIndex: visibleToasts.length - index - 1,
+      scale: `${scale}`,
+      zIndex: visibleToasts.length - index,
       tabindex: isFrontmost ? 0 : -1,
       ...(frontHeight
         ? ({
             "--front-height": `${frontHeight}px`,
           } as CSSProperties)
         : null),
+      opacity: isHidden ? 0 : 1,
+      pointerEvents: isHidden ? "none" : "auto",
+
       ...rest.style,
-    };
+    } as const;
   }, [
     finalScaleFactor,
     gap,
@@ -137,6 +123,7 @@ const Toast = <T extends object = ToastContentValue>({
     isHidden,
     rest.style,
     toast?.key,
+    toastHeight,
     visibleToasts,
   ]);
 

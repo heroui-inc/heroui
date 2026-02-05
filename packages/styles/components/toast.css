@@ -2,22 +2,23 @@
 
 /* Toast Region - Container for all toasts */
 .toast-region {
-  @apply pointer-events-none fixed z-50 flex flex-col outline-none;
+  @apply pointer-events-none fixed z-50 outline-none;
+  @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-[350px];
 
-  gap: var(--gap);
+  display: block;
 }
 
 /* Placement variants - Bottom */
 .toast-region--bottom {
-  @apply bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse;
+  @apply bottom-4 left-1/2 -translate-x-1/2;
 }
 
 .toast-region--bottom-start {
-  @apply bottom-4 left-4 flex-col-reverse;
+  @apply bottom-4 left-4;
 }
 
 .toast-region--bottom-end {
-  @apply right-4 bottom-4 flex-col-reverse;
+  @apply right-4 bottom-4;
 }
 
 /* Placement variants - Top */
@@ -39,12 +40,32 @@
 
 /* Base toast styles */
 .toast {
-  @apply pointer-events-auto relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay;
+
+  transition: none;
+  will-change: transform, opacity, height;
+}
+
+.toast--bottom,
+.toast--bottom-start,
+.toast--bottom-end {
+  bottom: 0;
+}
+
+.toast--top,
+.toast--top-start,
+.toast--top-end {
+  top: 0;
 }
 
 .toast:not([data-frontmost="true"]) {
   @apply pointer-events-none;
-  height: calc(var(--front-height) + var(--gap));
+
+  height: var(--front-height) !important;
   overflow: hidden;
 
   .toast__close-button {
@@ -55,6 +76,8 @@
 
 .toast[data-hidden="true"] {
   @apply pointer-events-none hidden opacity-0;
+
+  display: flex !important;
 }
 
 .toast:focus-visible {
@@ -168,6 +191,11 @@
 /* View transition animations */
 ::view-transition-group(.toast-bottom),
 ::view-transition-group(.toast-top) {
+  will-change: translate, opacity;
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
   will-change: translate, opacity;
 }
 
