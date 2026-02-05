@@ -121,7 +121,11 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
       },
       {
         timeout: options?.timeout,
-        onClose: options?.onClose,
+        onClose: () => {
+          requestAnimationFrame(() => {
+            options?.onClose?.();
+          });
+        },
       },
     );
   };
