@@ -49,7 +49,7 @@
     "posthog-js": "1.321.2",
     "posthog-node": "5.21.0",
     "react": "19.2.3",
-    "react-aria-components": "1.14.0",
+    "react-aria-components": "1.15.0",
     "react-dom": "19.2.3",
     "remark": "15.0.1",
     "remark-gfm": "4.0.1",
