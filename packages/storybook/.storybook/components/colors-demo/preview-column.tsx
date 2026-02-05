@@ -55,7 +55,7 @@ export const PreviewColumn = forwardRef<HTMLDivElement, PreviewColumnProps>(func
               </clipPath>
             </defs>
           </svg>
-          {theme}
+          <Chip.Label>{theme}</Chip.Label>
         </Chip>
       </div>
       {/* Scrollable Content */}

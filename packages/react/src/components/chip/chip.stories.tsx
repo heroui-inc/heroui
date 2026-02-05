@@ -39,22 +39,20 @@ const defaultArgs: ChipProps = {
 
 const Template = (props: ChipProps) => (
   <div className="flex items-center gap-3">
-    <Chip {...props}>
-      <Chip.Label>Label</Chip.Label>
-    </Chip>
+    <Chip {...props}>Label</Chip>
   </div>
 );
 
 const SizesTemplate = (props: ChipProps) => (
   <div className="flex items-center gap-3">
     <Chip {...props} size="sm">
-      <Chip.Label>Small</Chip.Label>
+      Small
     </Chip>
     <Chip {...props} size="md">
-      <Chip.Label>Medium</Chip.Label>
+      Medium
     </Chip>
     <Chip {...props} size="lg">
-      <Chip.Label>Large</Chip.Label>
+      Large
     </Chip>
   </div>
 );
