@@ -322,7 +322,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   children,
   className,
   gap = DEFAULT_GAP,
-  maxVisibleToasts = DEFAULT_MAX_VISIBLE_TOAST,
+  maxVisibleToasts,
   placement = "bottom",
   queue: queueProp,
   scaleFactor = DEFAULT_SCALE_FACTOR,
@@ -336,16 +336,18 @@ const ToastProvider = <T extends object = ToastContentValue>({
   const toastQueue = useMemo(() => {
     if (queueProp) {
       // Custom toast prop provided - use it (it already has its own maxVisibleToasts limit)
-      return queueProp;
+      return "getQueue" in queueProp ? queueProp.getQueue() : queueProp;
     }
 
     return defaultToastQueue.getQueue() as ToastQueue<T>;
   }, [queueProp]);
 
-  const resolvedMaxVisibleToasts = useMemo(
-    () => maxVisibleToasts ?? queueProp?.maxVisibleToasts,
-    [maxVisibleToasts, queueProp?.maxVisibleToasts],
-  );
+  const resolvedMaxVisibleToasts = useMemo(() => {
+    const queueLimit =
+      queueProp && "maxVisibleToasts" in queueProp ? queueProp.maxVisibleToasts : undefined;
+
+    return maxVisibleToasts ?? queueLimit ?? DEFAULT_MAX_VISIBLE_TOAST;
+  }, [maxVisibleToasts, queueProp]);
 
   const handleToastHeightChange = useCallback((key: string, height: number) => {
     setToastHeights((prev) => {
