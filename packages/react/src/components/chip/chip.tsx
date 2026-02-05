@@ -28,10 +28,18 @@ interface ChipRootProps extends Omit<ComponentPropsWithRef<"div">, "type" | "col
 const ChipRoot = ({children, className, color, size, variant, ...props}: ChipRootProps) => {
   const slots = React.useMemo(() => chipVariants({color, size, variant}), [color, size, variant]);
 
+  const chipChildren = React.useMemo(() => {
+    if (typeof children === "string" || typeof children === "number") {
+      return <ChipLabel>{children}</ChipLabel>;
+    }
+
+    return children;
+  }, [children]);
+
   return (
     <ChipContext value={{slots}}>
       <span {...props} className={composeSlotClassName(slots.base, className)} data-slot="chip">
-        {children}
+        {chipChildren}
       </span>
     </ChipContext>
   );
