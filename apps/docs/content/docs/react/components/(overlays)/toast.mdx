@@ -1,7 +1,7 @@
 ---
 title: Toast
 description: Display temporary notifications and messages to users with automatic dismissal and customizable placement
-icon: preview
+icon: updated
 links:
   rac: Toast
   source: toast/toast.tsx
@@ -9,10 +9,6 @@ links:
   storybook: Components/Feedback/Toast
   figma: true
 ---
-
-<Callout type="warning">
-  **Under construction.** The Toast component is currently in development and some features might not work as expected.
-</Callout>
 
 ## Import
 
@@ -61,6 +57,12 @@ function App() {
 
 <ComponentPreview
   name="toast-simple"
+/>
+
+### Promise & Loading
+
+<ComponentPreview
+  name="toast-promise"
 />
 
 ### Custom Indicators
@@ -162,9 +164,10 @@ The component supports various states:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `placement` | `"top start" \| "top" \| "top end" \| "bottom start" \| "bottom" \| "bottom end"` | `"bottom"` | Placement of the toast region |
-| `gap` | `number` | `14` | The gap between toasts in pixels |
+| `gap` | `number` | `12` | The gap between toasts in pixels |
 | `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
 | `scaleFactor` | `number` | `0.05` | Scale factor for stacked toasts (0-1) |
+| `width` | `number \| string` | `460` | Width of the toast in pixels or CSS value |
 | `queue` | `ToastQueue<T>` | - | Custom toast queue instance |
 | `children` | `ReactNode \| ((props: {toast: QueuedToast<T>}) => ReactNode)` | - | Custom render function or children |
 | `className` | `string` | - | Additional CSS classes |
@@ -209,7 +212,7 @@ The component supports various states:
 | `children` | `ReactNode` | - | Description text |
 | `className` | `string` | - | Additional CSS classes |
 
-### Toast.Action Props
+### Toast.ActionButton Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -232,7 +235,7 @@ A `ToastQueue` manages the state for a `<Toast.Provider>`. The state is stored o
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
+| `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once (visual only) |
 | `wrapUpdate` | `(fn: () => void) => void` | - | Function to wrap state updates (e.g., for view transitions) |
 
 #### Methods
@@ -275,7 +278,7 @@ toast("Message", {
   indicator: <CustomIcon />,
 });
 
-// Promise support
+// Promise support (automatically shows loading spinner)
 toast.promise(
   fetchData(),
   {
@@ -284,6 +287,16 @@ toast.promise(
     error: "Failed to load",
   }
 );
+
+// Manual loading state
+const loadingId = toast("Processing...", {
+  isLoading: true,
+  timeout: 0,
+});
+
+// Later, close and show result
+toast.close(loadingId);
+toast.success("Done!");
 
 // Queue methods
 toast.close(key);
@@ -301,6 +314,7 @@ toast.resumeAll();
 | `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Visual variant |
 | `indicator` | `ReactNode` | - | Custom indicator icon (null to hide) |
 | `actionProps` | `ButtonProps` | - | Props for action button |
+| `isLoading` | `boolean` | `false` | Show loading spinner instead of indicator |
 | `timeout` | `number` | - | Auto-dismiss timeout in milliseconds (0 for persistent) |
 | `onClose` | `() => void` | - | Callback when toast is closed |
 

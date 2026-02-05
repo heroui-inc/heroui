@@ -98,6 +98,7 @@ export interface HeroUIToastOptions {
   indicator?: ReactNode;
   variant?: ToastContentValue["variant"];
   actionProps?: ButtonProps;
+  isLoading?: boolean;
   timeout?: number;
   onClose?: () => void;
 }
@@ -118,6 +119,7 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
         indicator: options?.indicator,
         variant: options?.variant || "default",
         actionProps: options?.actionProps,
+        isLoading: options?.isLoading,
       },
       {
         timeout: options?.timeout,

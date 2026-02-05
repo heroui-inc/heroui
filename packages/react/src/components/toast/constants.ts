@@ -1,5 +1,5 @@
 // Default gap between toasts
-export const DEFAULT_GAP = 8;
+export const DEFAULT_GAP = 12;
 // The default maximum number of visible toasts (visual only).
 export const DEFAULT_MAX_VISIBLE_TOAST = 3;
 // The maximum number of toasts to render in the RAC queue.

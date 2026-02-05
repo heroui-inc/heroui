@@ -1377,6 +1377,10 @@ export const demos: Record<string, DemoItem> = {
     component: ToastDemos.CustomQueue,
     file: "toast/custom-queue.tsx",
   },
+  "toast-promise": {
+    component: ToastDemos.Promise,
+    file: "toast/promise.tsx",
+  },
   // Tooltip demos
   "tooltip-basic": {
     component: TooltipDemos.Basic,

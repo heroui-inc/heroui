@@ -80,7 +80,7 @@ export function Variants() {
             toast.danger("Storage is full", {
               actionProps: {children: "Remove", onPress: noop, variant: "danger"},
               description:
-                "Remove files to release space. I'm adding more text as usual but it's okay I guess I just want to see how it looks with a lot of information",
+                "Remove files to release space. Adding more text to demonstrate longer content display",
               indicator: <HardDrive />,
             })
           }
