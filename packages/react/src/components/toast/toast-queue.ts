@@ -10,13 +10,13 @@ import type {
 import {UNSTABLE_ToastQueue as ToastQueuePrimitive} from "react-aria-components";
 import {flushSync} from "react-dom";
 
-import {DEFAULT_MAX_VISIBLE_TOAST} from "./constants";
+import {DEFAULT_RAC_MAX_VISIBLE_TOAST} from "./constants";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Options
  * --------------------------------------------------------------------------------------------- */
 export interface ToastQueueOptions {
-  /** The maximum number of toasts to display at a time. */
+  /** The maximum number of toasts to display at a time (visual only). */
   maxVisibleToasts?: number;
   /** Function to wrap updates in (i.e. document.startViewTransition()). */
   wrapUpdate?: (fn: () => void) => void;
@@ -27,10 +27,12 @@ export interface ToastQueueOptions {
  * --------------------------------------------------------------------------------------------- */
 export class ToastQueue<T extends object = ToastContentValue> {
   private queue: ToastQueuePrimitiveType<T>;
+  readonly maxVisibleToasts?: number;
 
   constructor(options?: ToastQueueOptions) {
+    this.maxVisibleToasts = options?.maxVisibleToasts;
     this.queue = new ToastQueuePrimitive<T>({
-      maxVisibleToasts: options?.maxVisibleToasts,
+      maxVisibleToasts: DEFAULT_RAC_MAX_VISIBLE_TOAST,
       wrapUpdate: options?.wrapUpdate
         ? options.wrapUpdate
         : (fn: () => void) => {
@@ -201,7 +203,7 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
 }
 
 const toastQueue = new ToastQueue<ToastContentValue>({
-  maxVisibleToasts: DEFAULT_MAX_VISIBLE_TOAST,
+  maxVisibleToasts: DEFAULT_RAC_MAX_VISIBLE_TOAST,
 });
 
 export const toast = createToastFunction(toastQueue);

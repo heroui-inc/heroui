@@ -44,16 +44,17 @@
 
 .toast:not([data-frontmost="true"]) {
   @apply pointer-events-none;
+  height: calc(var(--front-height) + var(--gap));
+  overflow: hidden;
 
   .toast__close-button {
     @apply pointer-events-none opacity-0;
-    tabindex: -1;
     outline: none;
   }
+}
 
-  .toast__content {
-    @apply max-h-[20px] overflow-hidden;
-  }
+.toast[data-hidden="true"] {
+  @apply pointer-events-none hidden opacity-0;
 }
 
 .toast:focus-visible {
