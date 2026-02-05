@@ -212,7 +212,6 @@ export const SimpleToast = {
   render: SimpleToastTemplate,
 };
 
-// TODO: Handle promises
 // Promise Toast - Async operations with loading/success/error states
 const PromiseToastTemplate = () => {
   const simulateSuccess = (): Promise<{message: string}> => {
@@ -334,7 +333,6 @@ export const CustomIndicator = {
   render: CustomIndicatorTemplate,
 };
 
-// TODO: Handle promises to support callbacks
 // With Callbacks - Timeout and onClose
 const WithCallbacksTemplate = () => {
   return (

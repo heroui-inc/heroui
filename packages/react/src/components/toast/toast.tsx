@@ -23,7 +23,12 @@ import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 import {Spinner} from "../spinner";
 
-import {DEFAULT_GAP, DEFAULT_MAX_VISIBLE_TOAST, DEFAULT_SCALE_FACTOR} from "./constants";
+import {
+  DEFAULT_GAP,
+  DEFAULT_MAX_VISIBLE_TOAST,
+  DEFAULT_SCALE_FACTOR,
+  DEFAULT_TOAST_WIDTH,
+} from "./constants";
 import {ToastQueue, toast as defaultToastQueue} from "./toast-queue";
 
 /* ------------------------------------------------------------------------------------------------
@@ -32,6 +37,7 @@ import {ToastQueue, toast as defaultToastQueue} from "./toast-queue";
 type ToastContext = {
   slots?: ReturnType<typeof toastVariants>;
   placement?: ToastVariants["placement"];
+  width?: number | string;
   scaleFactor?: number;
   gap?: number;
   maxVisibleToasts?: number;
@@ -110,7 +116,6 @@ const Toast = <T extends object = ToastContentValue>({
         : null),
       opacity: isHidden ? 0 : 1,
       pointerEvents: isHidden ? "none" : "auto",
-
       ...rest.style,
     } as const;
   }, [
@@ -309,6 +314,8 @@ interface ToastProviderProps<T extends object = ToastContentValue> extends Omit<
   scaleFactor?: number;
   placement?: ToastVariants["placement"];
   queue?: ToastQueue<T>;
+  /** The width of the toast. @default 460 */
+  width?: number | string;
 }
 
 const ToastProvider = <T extends object = ToastContentValue>({
@@ -319,6 +326,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   placement = "bottom",
   queue: queueProp,
   scaleFactor = DEFAULT_SCALE_FACTOR,
+  width = DEFAULT_TOAST_WIDTH,
   ...rest
 }: ToastProviderProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
@@ -398,6 +406,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
         "--gap": `${gap}px`,
         "--scale-factor": scaleFactor,
         "--placement": placement,
+        "--toast-width": typeof width === "number" ? `${width}px` : width,
       }}
       {...rest}
     >
@@ -418,6 +427,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
               maxVisibleToasts: resolvedMaxVisibleToasts,
               heightsByKey: toastHeights,
               onToastHeightChange: handleToastHeightChange,
+              width,
             }}
           >
             {typeof children === "undefined"

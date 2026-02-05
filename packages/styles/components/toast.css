@@ -3,7 +3,7 @@
 /* Toast Region - Container for all toasts */
 .toast-region {
   @apply pointer-events-none fixed z-50 outline-none;
-  @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-[350px];
+  @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-(--toast-width);
 
   display: block;
 }
@@ -45,9 +45,6 @@
   right: 0;
 
   @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay;
-
-  transition: none;
-  will-change: transform, opacity, height;
 }
 
 .toast--bottom,
@@ -65,7 +62,7 @@
 .toast:not([data-frontmost="true"]) {
   @apply pointer-events-none;
 
-  height: var(--front-height) !important;
+  height: var(--front-height);
   overflow: hidden;
 
   .toast__close-button {
@@ -75,9 +72,7 @@
 }
 
 .toast[data-hidden="true"] {
-  @apply pointer-events-none hidden opacity-0;
-
-  display: flex !important;
+  @apply pointer-events-none flex opacity-0;
 }
 
 .toast:focus-visible {
