@@ -1,6 +1,7 @@
 ---
 title: Chip
 description: Small informational badges for displaying labels, statuses, and categories
+icon: updated
 links:
   source: chip/chip.tsx
   styles: chip.css
@@ -16,14 +17,13 @@ import { Chip } from '@heroui/react';
 
 ## Anatomy
 
-The Chip component consists of these parts:
+Import the Chip component and access all parts using dot notation.
 
-- **Chip** (or **Chip.Root**) - The root container element
-- **Chip.Label** - The label text slot for semantic structure
+> Plain-text children are automatically wrapped in `<Chip.Label>`.
 
 ```tsx
 <Chip>
-  <Chip.Label>Label text</Chip.Label>
+  Label {/* same as <Chip.Label>Label text</Chip.Label> */}
 </Chip>
 ```
 
