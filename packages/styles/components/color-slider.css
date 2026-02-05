@@ -11,6 +11,35 @@
     "label output"
     "track track";
   grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+
+  /* When neither label nor output exist, collapse to single row */
+  &:not(:has([data-slot="label"])):not(:has(.color-slider__output)) {
+    grid-template-areas: "track";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 0;
+  }
+
+  /* When only label exists (no output) */
+  &:has([data-slot="label"]):not(:has(.color-slider__output)) {
+    grid-template-areas:
+      "label"
+      "track";
+    grid-template-columns: 1fr;
+  }
+
+  /* When only output exists (no label) */
+  &:not(:has([data-slot="label"])):has(.color-slider__output) {
+    grid-template-areas:
+      "output"
+      "track";
+    grid-template-columns: 1fr;
+
+    .color-slider__output {
+      justify-self: end;
+    }
+  }
 
   [data-slot="label"] {
     @apply w-fit text-sm font-medium;
@@ -147,6 +176,29 @@
     grid-template-columns: 1fr;
     align-items: center;
     justify-items: center;
+
+    /* When neither label nor output exist in vertical, just show track */
+    &:not(:has([data-slot="label"])):not(:has(.color-slider__output)) {
+      grid-template-areas: "track";
+      grid-template-rows: 1fr;
+      gap: 0;
+    }
+
+    /* When only label exists in vertical (no output) */
+    &:has([data-slot="label"]):not(:has(.color-slider__output)) {
+      grid-template-areas:
+        "track"
+        "label";
+      grid-template-rows: 1fr auto;
+    }
+
+    /* When only output exists in vertical (no label) */
+    &:not(:has([data-slot="label"])):has(.color-slider__output) {
+      grid-template-areas:
+        "output"
+        "track";
+      grid-template-rows: auto 1fr;
+    }
 
     .color-slider__output {
       text-align: center;
