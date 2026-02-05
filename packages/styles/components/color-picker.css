@@ -26,6 +26,10 @@
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
+  [data-slot="label"] {
+    cursor: var(--cursor-interactive);
+  }
+
   /* Focus visible state */
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
