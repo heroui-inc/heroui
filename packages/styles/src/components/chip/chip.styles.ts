@@ -3,29 +3,56 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const chipVariants = tv({
-  base: "chip",
   defaultVariants: {
     color: "default",
     variant: "secondary",
   },
+  slots: {
+    base: "chip",
+    label: "chip__label",
+  },
   variants: {
     color: {
-      accent: "chip--accent",
-      danger: "chip--danger",
-      default: "chip--default",
-      success: "chip--success",
-      warning: "chip--warning",
+      accent: {
+        base: "chip--accent",
+      },
+      danger: {
+        base: "chip--danger",
+      },
+      default: {
+        base: "chip--default",
+      },
+      success: {
+        base: "chip--success",
+      },
+      warning: {
+        base: "chip--warning",
+      },
     },
     size: {
-      lg: "chip--lg",
-      md: "chip--md",
-      sm: "chip--sm",
+      lg: {
+        base: "chip--lg",
+      },
+      md: {
+        base: "chip--md",
+      },
+      sm: {
+        base: "chip--sm",
+      },
     },
     variant: {
-      primary: "chip--primary",
-      secondary: "chip--secondary",
-      soft: "chip--soft",
-      tertiary: "chip--tertiary",
+      primary: {
+        base: "chip--primary",
+      },
+      secondary: {
+        base: "chip--secondary",
+      },
+      soft: {
+        base: "chip--soft",
+      },
+      tertiary: {
+        base: "chip--tertiary",
+      },
     },
   },
 });

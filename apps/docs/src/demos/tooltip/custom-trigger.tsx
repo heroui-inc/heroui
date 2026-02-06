@@ -27,7 +27,7 @@ export function TooltipCustomTrigger() {
         <Tooltip.Trigger aria-label="Status chip">
           <Chip color="success">
             <CircleCheckFill width={12} />
-            Active
+            <Chip.Label>Active</Chip.Label>
           </Chip>
         </Tooltip.Trigger>
         <Tooltip.Content className="flex items-center gap-1.5">
