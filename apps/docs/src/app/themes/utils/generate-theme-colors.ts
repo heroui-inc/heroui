@@ -39,6 +39,8 @@ const DEFAULT_THEME_VALUES = {
     separator: {c: 0.006, h: 286.033, l: 0.25},
     // Snow
     surface: {c: 0.0059, h: 285.89, l: 0.2103},
+    surfaceSecondary: {c: 0.0037, h: 286.14, l: 0.257},
+    surfaceTertiary: {c: 0.0024, h: 247.91, l: 0.2721},
   },
   light: {
     background: {c: 0, h: 0, l: 0.9702},
@@ -56,6 +58,8 @@ const DEFAULT_THEME_VALUES = {
     segment: {c: 0, h: 0, l: 1},
     separator: {c: 0.004, h: 286.32, l: 0.92},
     surface: {c: 0, h: 0, l: 1}, // Pure white
+    surfaceSecondary: {c: 0.0013, h: 286.37, l: 0.9524},
+    surfaceTertiary: {c: 0.0013, h: 286.37, l: 0.9373},
   },
 };
 
@@ -118,6 +122,10 @@ export interface GeneratedThemeColors {
   defaultForeground: ThemeColor;
   surface: ThemeColor;
   surfaceForeground: ThemeColor;
+  surfaceSecondary: ThemeColor;
+  surfaceSecondaryForeground: ThemeColor;
+  surfaceTertiary: ThemeColor;
+  surfaceTertiaryForeground: ThemeColor;
   overlay: ThemeColor;
   overlayForeground: ThemeColor;
   scrollbar: ThemeColor;
@@ -398,11 +406,11 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
     oklchLight: formatOklch(adjustChroma(adjustHue(defaultsLight.background, hue), grayChroma)),
   };
 
-  // --foreground: Adjust hue only for slight tinting
+  // --foreground: Apply hue and chroma adjustments
   const foreground: ThemeColor = {
     name: "--foreground",
-    oklchDark: formatOklch(defaultsDark.foreground),
-    oklchLight: formatOklch(adjustHue(defaultsLight.foreground, hue)), // Snow stays neutral
+    oklchDark: formatOklch(adjustChroma(adjustHue(defaultsDark.foreground, hue), grayChroma)),
+    oklchLight: formatOklch(adjustChroma(adjustHue(defaultsLight.foreground, hue), grayChroma)),
   };
 
   // --muted: Apply hue and gray chroma adjustments
@@ -436,6 +444,42 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
   // --surface-foreground: Same as foreground
   const surfaceForeground: ThemeColor = {
     name: "--surface-foreground",
+    oklchDark: foreground.oklchDark,
+    oklchLight: foreground.oklchLight,
+  };
+
+  // --surface-secondary: Apply hue and chroma adjustments
+  const surfaceSecondary: ThemeColor = {
+    name: "--surface-secondary",
+    oklchDark: formatOklch(
+      adjustChroma(adjustHue(defaultsDark.surfaceSecondary, hue), grayChroma * 1.5),
+    ),
+    oklchLight: formatOklch(
+      adjustChroma(adjustHue(defaultsLight.surfaceSecondary, hue), grayChroma * 0.8),
+    ),
+  };
+
+  // --surface-secondary-foreground: Uses foreground value
+  const surfaceSecondaryForeground: ThemeColor = {
+    name: "--surface-secondary-foreground",
+    oklchDark: foreground.oklchDark,
+    oklchLight: foreground.oklchLight,
+  };
+
+  // --surface-tertiary: Apply hue and chroma adjustments
+  const surfaceTertiary: ThemeColor = {
+    name: "--surface-tertiary",
+    oklchDark: formatOklch(
+      adjustChroma(adjustHue(defaultsDark.surfaceTertiary, hue), grayChroma * 1.5),
+    ),
+    oklchLight: formatOklch(
+      adjustChroma(adjustHue(defaultsLight.surfaceTertiary, hue), grayChroma * 0.8),
+    ),
+  };
+
+  // --surface-tertiary-foreground: Uses foreground value
+  const surfaceTertiaryForeground: ThemeColor = {
+    name: "--surface-tertiary-foreground",
     oklchDark: foreground.oklchDark,
     oklchLight: foreground.oklchLight,
   };
@@ -634,6 +678,10 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
 
     surface,
     surfaceForeground,
+    surfaceSecondary,
+    surfaceSecondaryForeground,
+    surfaceTertiary,
+    surfaceTertiaryForeground,
 
     warning: warningColors.color,
     warningForeground: warningColors.foreground,
@@ -755,6 +803,16 @@ export function getColorVariablesForElement(
   vars["--color-surface"] = getValue(colors.surface);
   vars["--surface-foreground"] = getValue(colors.surfaceForeground);
   vars["--color-surface-foreground"] = getValue(colors.surfaceForeground);
+
+  vars["--surface-secondary"] = getValue(colors.surfaceSecondary);
+  vars["--color-surface-secondary"] = getValue(colors.surfaceSecondary);
+  vars["--surface-secondary-foreground"] = getValue(colors.surfaceSecondaryForeground);
+  vars["--color-surface-secondary-foreground"] = getValue(colors.surfaceSecondaryForeground);
+
+  vars["--surface-tertiary"] = getValue(colors.surfaceTertiary);
+  vars["--color-surface-tertiary"] = getValue(colors.surfaceTertiary);
+  vars["--surface-tertiary-foreground"] = getValue(colors.surfaceTertiaryForeground);
+  vars["--color-surface-tertiary-foreground"] = getValue(colors.surfaceTertiaryForeground);
 
   vars["--overlay"] = getValue(colors.overlay);
   vars["--color-overlay"] = getValue(colors.overlay);

@@ -108,10 +108,6 @@
   --color-success-soft-foreground: var(--success);
   --color-success-soft-hover: color-mix(in oklab, var(--success) 20%, transparent);
 
-  /* Surface Levels - progressively darker/lighter shades for layering */
-  --color-surface-secondary: color-mix(in oklab, var(--surface) 94%, var(--surface-foreground) 6%);
-  --color-surface-tertiary: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
-
   /* On Surface Colors (on default surface) */
   --color-on-surface: color-mix(in oklab, var(--surface) 93%, var(--surface-foreground) 7%);
   --color-on-surface-foreground: var(--surface-foreground);
