@@ -145,7 +145,8 @@
   }
 }
 
-.toast:hover .toast__close-button {
+/* Only show close button on hover for frontmost toast */
+.toast[data-frontmost="true"]:hover .toast__close-button {
   @apply pointer-events-auto opacity-100;
 }
 
