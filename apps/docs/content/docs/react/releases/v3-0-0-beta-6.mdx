@@ -128,6 +128,28 @@ A grid of color swatches for quick color selection from a predefined palette.
 
 ## Component Improvements
 
+### Toast Enhancements
+
+The [Toast](/docs/components/toast) component has been significantly improved with new features and better stability (#6151):
+
+**New Features:**
+- **Loading State**: Added `isLoading` prop to show a spinner instead of the default indicator
+- **Default Timeout**: Toasts now auto-dismiss after 4 seconds by default (configurable via `timeout` prop)
+- **Width Control**: Added `width` prop to `Toast.Provider` for customizable toast width
+- **Adaptive Height**: Toasts now adapt their height based on content
+- **Better Stacking**: Fixed layout shifts when toasts stack using absolute positioning and height synchronization
+- **Improved Close Handling**: Deferred `onClose` callback to prevent toast transition deadlock
+- **Front-most Close Button**: Close button only appears on the front-most toast for cleaner UI
+- **Enhanced Promise Support**: Improved `toast.promise()` with better loading states and error handling
+
+**New Demos:**
+- Promise & Loading states
+- Callbacks and timeout handling
+
+<ComponentPreview
+  name="toast-promise"
+/>
+
 ### Separator Variants
 
 Added variants to the [Separator](/docs/components/separator) component for different visual styles.
@@ -153,23 +175,91 @@ Added variants to the [Separator](/docs/components/separator) component for diff
 
 ## ⚠️ Breaking Changes
 
+### Toast Component - Container Renamed to Provider
+
+The `Toast.Container` component has been renamed to `Toast.Provider` for better semantic clarity (#6151).
+
+**Before:**
+```tsx
+<Toast.Container placement="bottom" />
+```
+
+**After:**
+```tsx
+<Toast.Provider placement="bottom" />
+```
+
+**Additional Changes:**
+- Default `gap` prop changed from `14` to `12` pixels
+- Default `timeout` is now `4000` (4 seconds) instead of requiring explicit timeout
+- `Toast.Action` has been renamed to `Toast.ActionButton` for consistency
+
 ### CSS Class Naming Convention
 
-CSS classes have been renamed to use hyphenated format for consistency (#6141). This follows BEM conventions more closely.
+CSS classes have been renamed to use hyphenated format for consistency (#6141). This follows BEM conventions more closely and improves compatibility with Tailwind CSS.
+
+**Important Note**: The `textarea` class was initially renamed to `text-area` but was rolled back to `textarea` in PR #6191 due to conflicts with Tailwind's native `textarea` class. No changes are needed for TextArea component classes.
+
+#### Component Class Name Changes
+
+The following CSS class names have been updated. If you have custom CSS targeting these classes directly, update your selectors:
+
+| Component | Old Class Name | New Class Name | Notes |
+|-----------|---------------|----------------|-------|
+| **ComboBox** | `.combobox` | `.combo-box` | All related classes updated |
+| | `.combobox__input-group` | `.combo-box__input-group` | |
+| | `.combobox__trigger` | `.combo-box__trigger` | |
+| | `.combobox__popover` | `.combo-box__popover` | |
+| | `.combobox--full-width` | `.combo-box--full-width` | |
+| **ListBox** | `.listbox` | `.list-box` | All related classes updated |
+| **ListBoxItem** | `.listbox-item` | `.list-box-item` | All related classes updated |
+| | `.listbox-item__indicator` | `.list-box-item__indicator` | |
+| | `.listbox-item--default` | `.list-box-item--default` | |
+| | `.listbox-item--danger` | `.list-box-item--danger` | |
+| **ListBoxSection** | `.listbox-section` | `.list-box-section` | All related classes updated |
+| **TextArea** | `.textarea` | `.textarea` | **No change** - Rolled back to avoid Tailwind conflict |
+
+#### Migration Guide
 
 **Before:**
 ```css
-.buttonGroup { }
-.alertDialog { }
+/* Custom styles targeting old class names */
+.combobox {
+  /* styles */
+}
+
+.listbox-item {
+  /* styles */
+}
 ```
 
 **After:**
 ```css
-.button-group { }
-.alert-dialog { }
+/* Update to new hyphenated class names */
+.combo-box {
+  /* styles */
+}
+
+.list-box-item {
+  /* styles */
+}
 ```
 
-If you have custom CSS targeting HeroUI class names directly, update your selectors to use the new hyphenated format.
+**JavaScript/TypeScript Updates:**
+
+If you're using these class names in JavaScript or TypeScript code:
+
+```tsx
+// Before
+<div className="combobox" />
+<ListBoxItem className="listbox-item" />
+
+// After
+<div className="combo-box" />
+<ListBoxItem className="list-box-item" />
+```
+
+**Note**: Component props and TypeScript types remain unchanged. Only CSS class names have been updated.
 
 ## Links
 
