@@ -1,7 +1,7 @@
 ---
 title: Separator
 description: Visually divide content sections
-
+icon: updated
 links:
   rac: Separator
   source: separator/separator.tsx
@@ -32,6 +32,12 @@ import { Separator } from '@heroui/react';
 
 <ComponentPreview
   name="separator-with-content"
+/>
+
+### Variants
+
+<ComponentPreview
+  name="separator-variants"
 />
 
 ### Surface Variants
@@ -86,6 +92,11 @@ The Separator component uses these CSS classes ([View source styles](https://git
 - `.separator--horizontal` - Horizontal orientation (full width, 1px height)
 - `.separator--vertical` - Vertical orientation (full height, 1px width)
 
+#### Variant Classes
+- `.separator--default` - Default variant with standard contrast
+- `.separator--secondary` - Secondary variant with medium contrast
+- `.separator--tertiary` - Tertiary variant with subtle contrast
+
 ## API Reference
 
 ### Separator Props
@@ -93,4 +104,5 @@ The Separator component uses these CSS classes ([View source styles](https://git
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the separator |
+| `variant` | `'default' \| 'secondary' \| 'tertiary'` | `'default'` | The visual variant of the separator |
 | `className` | `string` | - | Additional CSS classes |

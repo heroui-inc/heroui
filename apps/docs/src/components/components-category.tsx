@@ -46,7 +46,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Collections",
-    components: ["dropdown", "listbox", "tag-group"],
+    components: ["dropdown", "list-box", "tag-group"],
   },
   {
     category: "Controls",
@@ -66,7 +66,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Pickers",
-    components: ["autocomplete", "combobox", "select"],
+    components: ["autocomplete", "combo-box", "select"],
   },
   {
     category: "Typography",
@@ -75,6 +75,17 @@ const COMPONENT_GROUPS = [
   {
     category: "Data Display",
     components: ["chip"],
+  },
+  {
+    category: "Colors",
+    components: [
+      "color-area",
+      "color-field",
+      "color-picker",
+      "color-slider",
+      "color-swatch",
+      "color-swatch-picker",
+    ],
   },
   {
     category: "Utilities",

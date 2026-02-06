@@ -64,7 +64,7 @@
       "bytes": 1431,
       "kb": 1.397
     },
-    "combobox.css": {
+    "combo-box.css": {
       "bytes": 3844,
       "kb": 3.754
     },
@@ -136,15 +136,15 @@
       "bytes": 2795,
       "kb": 2.729
     },
-    "listbox-item.css": {
+    "list-box-item.css": {
       "bytes": 2773,
       "kb": 2.708
     },
-    "listbox-section.css": {
+    "list-box-section.css": {
       "bytes": 254,
       "kb": 0.248
     },
-    "listbox.css": {
+    "list-box.css": {
       "bytes": 437,
       "kb": 0.427
     },

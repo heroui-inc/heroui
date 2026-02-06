@@ -1,3 +1,4 @@
+/* use textarea instead of text-area to avoid conflict with Tailwind `text-` prefix */
 .textarea {
   @apply rounded-field border bg-field px-3 py-2 text-base text-field-foreground shadow-field outline-none placeholder:text-field-placeholder sm:text-sm;
 

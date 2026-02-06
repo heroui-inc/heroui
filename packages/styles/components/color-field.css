@@ -1,0 +1,28 @@
+/* ==========================================================================
+   ColorField - Form field for editing hex colors or individual color channels
+   ========================================================================== */
+
+/* Base styles */
+.color-field {
+  @apply flex flex-col gap-1;
+
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  [data-slot="label"] {
+    @apply w-fit;
+  }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
+}
+
+/* Full width modifier */
+.color-field--full-width {
+  @apply w-full;
+}

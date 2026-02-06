@@ -3,8 +3,8 @@ title: ListBox
 description: A listbox displays a list of options and allows a user to select one or more of them
 links:
   rac: ListBox
-  source: listbox/listbox.tsx
-  styles: listbox.css
+  source: list-box/list-box.tsx
+  styles: list-box.css
   storybook: Components/Collections/ListBox
 ---
 
@@ -17,7 +17,7 @@ import { ListBox } from '@heroui/react';
 ### Usage
 
 <ComponentPreview
-  name="listbox-default"
+  name="list-box-default"
 />
 
 ### Anatomy
@@ -47,34 +47,34 @@ export default () => (
 ### With Sections
 
 <ComponentPreview
-  name="listbox-with-sections"
+  name="list-box-with-sections"
 />
 
 ### Multi Select
 
 <ComponentPreview
-  name="listbox-multi-select"
+  name="list-box-multi-select"
 />
 
 ### With Disabled Items
 
 <ComponentPreview
-  name="listbox-with-disabled-items"
+  name="list-box-with-disabled-items"
 />
 
 ### Custom Check Icon
 
 <ComponentPreview
-  name="listbox-custom-check-icon"
+  name="list-box-custom-check-icon"
 />
 
 ### Controlled
 
 <ComponentPreview
-  name="listbox-controlled"
+  name="list-box-controlled"
 />
 
-<RelatedComponents component="listbox" />
+<RelatedComponents component="list-box" />
  
 ## Styling
 
@@ -101,19 +101,19 @@ To customize the ListBox component classes, you can use the `@layer components` 
 
 ```css
 @layer components {
-  .listbox {
+  .list-box {
     @apply rounded-lg border border-border bg-surface p-2;
   }
 
-  .listbox-item {
+  .list-box-item {
     @apply rounded px-2 py-1 cursor-pointer;
   }
 
-  .listbox-item--danger {
+  .list-box-item--danger {
     @apply text-danger;
   }
 
-  .listbox-item__indicator {
+  .list-box-item__indicator {
     @apply text-accent;
   }
 }
@@ -123,25 +123,25 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 
 ### CSS Classes
 
-The ListBox component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/listbox.css)):
+The ListBox component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/list-box.css)):
 
 #### Base Classes
-- `.listbox` - Base listbox container
-- `.listbox-item` - Individual listbox item
-- `.listbox-item__indicator` - Selection indicator icon
-- `.listbox-section` - Section container for grouping items
+- `.list-box` - Base listbox container
+- `.list-box-item` - Individual listbox item
+- `.list-box-item__indicator` - Selection indicator icon
+- `.list-box-section` - Section container for grouping items
 
 #### Variant Classes
-- `.listbox--default` - Default variant styling
-- `.listbox--danger` - Danger variant styling
-- `.listbox-item--default` - Default item variant
-- `.listbox-item--danger` - Danger item variant
+- `.list-box--default` - Default variant styling
+- `.list-box--danger` - Danger variant styling
+- `.list-box-item--default` - Default item variant
+- `.list-box-item--danger` - Danger item variant
 
 #### State Classes
-- `.listbox-item[data-selected="true"]` - Selected item state
-- `.listbox-item[data-focus-visible="true"]` - Focused item state
-- `.listbox-item[data-disabled="true"]` - Disabled item state
-- `.listbox-item__indicator[data-visible="true"]` - Visible indicator state
+- `.list-box-item[data-selected="true"]` - Selected item state
+- `.list-box-item[data-focus-visible="true"]` - Focused item state
+- `.list-box-item[data-disabled="true"]` - Disabled item state
+- `.list-box-item__indicator[data-visible="true"]` - Visible indicator state
 
 ### Interactive States
 

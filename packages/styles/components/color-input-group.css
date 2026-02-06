@@ -1,0 +1,135 @@
+/* ==========================================================================
+   ColorInputGroup - Input group for color field with prefix/suffix support
+   ========================================================================== */
+
+/* Base styles */
+.color-input-group {
+  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
+  border-width: var(--border-width-field);
+  border-color: var(--color-field-border);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
+      @apply bg-field-hover;
+      border-color: var(--color-field-border-hover);
+    }
+  }
+
+  /* Focus within state */
+  &[data-focus-within="true"],
+  &:focus-within {
+    @apply status-focused-field;
+  }
+
+  /* Invalid state */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    background-color: var(--color-field-focus);
+    border-color: var(--color-field-border-invalid);
+  }
+
+  /* Disabled state */
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+/* ==========================================================================
+   Elements
+   ========================================================================== */
+
+.color-input-group__input {
+  @apply flex h-full flex-1 cursor-text items-center rounded-none border-0 bg-transparent px-3 py-2 text-base shadow-none outline-none sm:text-sm;
+
+  /* Placeholder styling */
+  &::placeholder {
+    @apply text-field-placeholder;
+  }
+
+  /* Remove border radius on left side when prefix is present */
+  .color-input-group:has([data-slot="color-input-group-prefix"]) & {
+    @apply rounded-l-none pl-2;
+  }
+
+  /* Remove border radius on right side when suffix is present */
+  .color-input-group:has([data-slot="color-input-group-suffix"]) & {
+    @apply rounded-r-none pr-2;
+  }
+
+  /* Focus state - handled by group */
+  &:focus,
+  &:focus-visible {
+    @apply outline-none;
+  }
+}
+
+.color-input-group__prefix {
+  @apply shrink-0 text-field-placeholder;
+  @apply mr-0 ml-3 flex items-center;
+}
+
+.color-input-group__suffix {
+  @apply shrink-0 text-field-placeholder;
+  @apply mr-3 flex items-center;
+}
+
+/* ==========================================================================
+   Variant modifiers
+   ========================================================================== */
+
+.color-input-group--primary {
+  /* Default styles - primary variant uses the base field styling */
+}
+
+.color-input-group--secondary {
+  @apply shadow-none;
+  background-color: var(--color-input-group-bg);
+
+  --color-input-group-bg: var(--color-default);
+  --color-input-group-bg-hover: var(--color-default-hover);
+  --color-input-group-bg-focus: var(--color-default);
+
+  @media (hover: hover) {
+    &:hover:not(:focus-within),
+    &[data-hovered="true"]:not([data-focus-within="true"]) {
+      background-color: var(--color-input-group-bg-hover);
+    }
+  }
+
+  &:focus-within,
+  &[data-focus-within="true"] {
+    background-color: var(--color-input-group-bg-focus);
+  }
+
+  /* Invalid state */
+  &[data-invalid="true"] {
+    @apply status-invalid-field;
+    border-color: var(--color-field-border-invalid);
+    background-color: var(--color-input-group-bg-focus);
+  }
+
+  [data-slot="color-input-group-input"] {
+    @apply bg-transparent;
+  }
+}
+
+/* ==========================================================================
+   Full width modifier
+   ========================================================================== */
+
+.color-input-group--full-width {
+  @apply w-full;
+}

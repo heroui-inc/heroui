@@ -1,0 +1,80 @@
+/* ==========================================================================
+   ColorArea - 2D color picker for selecting colors from a gradient area
+   ========================================================================== */
+
+/* Base styles */
+.color-area {
+  @apply relative w-full max-w-56 shrink-0 rounded-2xl no-highlight;
+
+  /* Square aspect ratio */
+  aspect-ratio: 1 / 1;
+
+  /* Color gradient background from React Aria */
+  background: var(--color-area-background);
+
+  /* Inner shadow for depth */
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+
+  /* Disabled state */
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+/* ==========================================================================
+   Dots overlay variant
+   ========================================================================== */
+
+.color-area--show-dots {
+  /* Dot pattern overlay using radial gradient */
+  &::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 rounded-[inherit];
+
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+}
+
+/* ==========================================================================
+   Thumb element
+   ========================================================================== */
+
+.color-area__thumb {
+  @apply size-4 rounded-full will-change-[width,height];
+
+  /* Current color from React Aria */
+  background-color: var(--color-area-thumb-color);
+
+  /* White border for visibility */
+  border: 3px solid white;
+
+  /* Inner shadow for depth */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    width 150ms var(--ease-out),
+    height 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Focus state */
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Dragging state */
+  &[data-dragging="true"] {
+    @apply size-5;
+  }
+
+  /* Disabled state */
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+}

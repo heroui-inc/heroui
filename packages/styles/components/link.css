@@ -53,9 +53,18 @@
      */
     transition: opacity 150ms var(--ease-out);
     @apply motion-reduce:transition-none;
+
+    & svg {
+      @apply transform-gpu;
+    }
   }
 
   .link__icon[data-default-icon="true"] {
     @apply ml-1 pb-1.5;
+  }
+
+  /* Handle Link with Button Variants */
+  &.button {
+    @apply gap-0 no-underline;
   }
 }

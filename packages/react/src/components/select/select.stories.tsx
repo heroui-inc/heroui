@@ -13,7 +13,7 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Header} from "../header";
 import {Label} from "../label";
-import {ListBox} from "../listbox";
+import {ListBox} from "../list-box";
 import {Collection, ListBoxLoadMoreItem} from "../rac";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";
@@ -659,7 +659,7 @@ export const CustomValueMultiple: Story = {
                       <AvatarImage src={selectedItem.avatarUrl} />
                       <AvatarFallback>{selectedItem.fallback}</AvatarFallback>
                     </Avatar>
-                    <span>{selectedItem.name}</span>
+                    <Chip.Label>{selectedItem.name}</Chip.Label>
                   </Chip>
                 );
               });

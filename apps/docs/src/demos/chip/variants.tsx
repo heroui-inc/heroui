@@ -38,7 +38,8 @@ export function ChipVariants() {
                     >
                       <Chip color={color} size={size} variant={variant}>
                         <CircleDashed />
-                        Label <CircleDashed />
+                        <Chip.Label>Label</Chip.Label>
+                        <CircleDashed />
                       </Chip>
                     </div>
                   ))}
