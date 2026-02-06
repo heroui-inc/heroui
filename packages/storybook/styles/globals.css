@@ -15,6 +15,10 @@
   /* Use OS-native cursor for interactive elements (macOS style) */
   --cursor-interactive: pointer;
 
+  /* theme.css */
+
+  /* variables.css */
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
