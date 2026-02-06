@@ -1,0 +1,185 @@
+---
+title: v3.0.0-beta.6
+description: New Color System with six new components (ColorPicker, ColorArea, ColorSlider, ColorField, ColorSwatch, ColorSwatchPicker), Separator variants, and various style improvements.
+github:
+  pull: 6129
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">February 4, 2026</span>
+</div>
+
+This release introduces a comprehensive **Color System** with six new components for color selection and manipulation: [ColorPicker](/docs/components/color-picker), [ColorArea](/docs/components/color-area), [ColorSlider](/docs/components/color-slider), [ColorField](/docs/components/color-field), [ColorSwatch](/docs/components/color-swatch), and [ColorSwatchPicker](/docs/components/color-swatch-picker). Also includes [Separator](/docs/components/separator) variants and various style improvements.
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-dark@2x.jpg"
+  alt="HeroUI v3 Beta 6"
+  href="/docs/changelog/v3-0-0-beta-6"
+/>
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### Color System
+
+We're excited to introduce a comprehensive **Color System** - a complete suite of components for color selection, manipulation, and display. These components are built on React Aria's color primitives and work together seamlessly.
+
+**Key features:**
+- **Full Color Space Support**: Work with HSL, HSB, and RGB color spaces
+- **Channel-based Editing**: Manipulate individual color channels (hue, saturation, lightness, brightness, red, green, blue, alpha)
+- **Accessible by Default**: Full keyboard navigation and screen reader support
+- **Composable Design**: Mix and match components to build custom color pickers
+
+### New Components
+
+This release introduces **6 new** color components:
+
+- **[ColorPicker](#colorpicker)**: Complete color picker with trigger, popover, and composable internals. ([Documentation](/docs/components/color-picker))
+- **[ColorArea](#colorarea)**: 2D gradient area for selecting two color channels simultaneously. ([Documentation](/docs/components/color-area))
+- **[ColorSlider](#colorslider)**: Single-channel slider for precise color adjustments. ([Documentation](/docs/components/color-slider))
+- **[ColorField](#colorfield)**: Text input for entering and editing color values. ([Documentation](/docs/components/color-field))
+- **[ColorSwatch](#colorswatch)**: Visual color preview with support for transparency. ([Documentation](/docs/components/color-swatch))
+- **[ColorSwatchPicker](#colorswatchpicker)**: Grid of selectable color swatches for quick color selection. ([Documentation](/docs/components/color-swatch-picker))
+
+### ColorPicker
+
+The ColorPicker is a compound component that combines all color components into a complete color selection experience.
+
+<ComponentPreview
+  name="color-picker-basic"
+/>
+
+### ColorArea
+
+A 2D gradient area for selecting two color channels at once, typically saturation and brightness.
+
+<ComponentPreview
+  name="color-area-basic"
+/>
+
+### ColorSlider
+
+A slider for adjusting individual color channels like hue, saturation, lightness, or alpha.
+
+<ComponentPreview
+  name="color-slider-basic"
+/>
+
+**With different channels:**
+
+<ComponentPreview
+  name="color-slider-channels"
+/>
+
+### ColorField
+
+A text input field for entering color values directly. Supports various color formats.
+
+<ComponentPreview
+  name="color-field-basic"
+/>
+
+### ColorSwatch
+
+A visual display of a color value with support for transparency patterns.
+
+<ComponentPreview
+  name="color-swatch-basic"
+/>
+
+### ColorSwatchPicker
+
+A grid of color swatches for quick color selection from a predefined palette.
+
+<ComponentPreview
+  name="color-swatch-picker-basic"
+/>
+
+## Component Improvements
+
+### Separator Variants
+
+Added variants to the [Separator](/docs/components/separator) component for different visual styles.
+
+## Style Fixes
+
+- **Overlay Content**: Fixed blur effect on overlay content (#6136)
+- **Invalid Field**: Converted ring to outline for invalid field states (#6184)
+- **Link with Button**: Fixed styling for Link components using button variants (#6138)
+- **Toast Content**: Fixed vertical alignment of toast content (#6147)
+- **Safari SVG**: Fixed SVG shifting issue in Safari (#6149)
+- **Placeholder Color**: Aligned placeholder color with input text (#6139)
+- **Tooltip**: Removed cursor style from tooltip trigger component
+- **CSS Variables**: Made calculated variables depend only on root variables (#6154)
+
+## Bug Fixes
+
+- Fixed page interactivity during view transitions (#6128)
+- Fixed markdown URL formatting (#6162)
+- Fixed incorrect link to combo box page (#6164)
+- Fixed autocomplete styles import order in index.css
+- Fixed hyphenated format for CSS classes (#6191)
+
+## ⚠️ Breaking Changes
+
+### CSS Class Naming Convention
+
+CSS classes have been renamed to use hyphenated format for consistency (#6141). This follows BEM conventions more closely.
+
+**Before:**
+```css
+.buttonGroup { }
+.alertDialog { }
+```
+
+**After:**
+```css
+.button-group { }
+.alert-dialog { }
+```
+
+If you have custom CSS targeting HeroUI class names directly, update your selectors to use the new hyphenated format.
+
+## Links
+
+- [Component Documentation](/docs/components)
+- [Design System - Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6201](https://github.com/heroui-inc/heroui/pull/6201)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
