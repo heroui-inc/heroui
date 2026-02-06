@@ -53,13 +53,13 @@ export function WithFields() {
           onChange={(value) => setColorSpace(value as ColorSpace)}
         >
           <Select.Trigger>
-            <Select.Value />
+            <Select.Value className="uppercase" />
             <Select.Indicator />
           </Select.Trigger>
           <Select.Popover>
             <ListBox>
               {Object.keys(colorChannelsByColorSpace).map((space) => (
-                <ListBox.Item key={space} id={space} textValue={space}>
+                <ListBox.Item key={space} className="uppercase" id={space} textValue={space}>
                   {space}
                   <ListBox.ItemIndicator />
                 </ListBox.Item>

@@ -2,6 +2,7 @@
 
 import {Autocomplete, EmptyState, Label, ListBox, SearchField, Spinner} from "@heroui/react";
 import {useAsyncList} from "@react-stately/data";
+import {cn} from "tailwind-variants";
 
 interface Character {
   name: string;
@@ -32,14 +33,19 @@ export function AsynchronousFiltering() {
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
         <Autocomplete.Filter inputValue={list.filterText} onInputChange={list.setFilterText}>
-          <SearchField autoFocus className="sticky top-0 z-10" name="search">
+          <SearchField autoFocus className="sticky top-0 z-10" name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
               <SearchField.Input placeholder="Search characters..." />
-              <SearchField.ClearButton />
-              {!!list.isLoading && (
-                <Spinner className="absolute top-1/2 right-2 -translate-y-1/2" size="sm" />
-              )}
+              <Spinner
+                size="sm"
+                className={cn("absolute top-1/2 right-2 -translate-y-1/2", {
+                  "pointer-events-none opacity-0": !list.isLoading,
+                })}
+              />
+              <SearchField.ClearButton
+                className={cn({"pointer-events-none opacity-0": !!list.isLoading})}
+              />
             </SearchField.Group>
           </SearchField>
           <ListBox

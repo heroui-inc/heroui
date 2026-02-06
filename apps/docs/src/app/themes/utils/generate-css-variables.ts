@@ -63,6 +63,10 @@ function getBaseColorVariables(
     "--success-foreground": getValue(colors.successForeground),
     "--surface": getValue(colors.surface),
     "--surface-foreground": getValue(colors.surfaceForeground),
+    "--surface-secondary": getValue(colors.surfaceSecondary),
+    "--surface-secondary-foreground": getValue(colors.surfaceSecondaryForeground),
+    "--surface-tertiary": getValue(colors.surfaceTertiary),
+    "--surface-tertiary-foreground": getValue(colors.surfaceTertiaryForeground),
     "--warning": getValue(colors.warning),
     "--warning-foreground": getValue(colors.warningForeground),
   };

@@ -7,11 +7,12 @@ import {
   Link as LinkIcon,
   NodesRight,
 } from "@gravity-ui/icons";
-import {Button, Chip, Separator, Tabs, Tooltip, toast} from "@heroui/react";
+import {Button, Chip, Kbd, Separator, Tabs, Tooltip, toast} from "@heroui/react";
 import Link from "next/link";
 
 import {HeroUILogo} from "@/components/heroui-logo";
 import {useCodePanel} from "@/hooks/use-code-panel";
+import useKeyPress from "@/hooks/use-key-press";
 
 import {tabs} from "../constants";
 import {useUndoRedo} from "../hooks";
@@ -32,6 +33,9 @@ export function BuilderHeader() {
       variant: "success",
     });
   };
+
+  useKeyPress("ArrowLeft", () => undo(), {enabled: canUndo});
+  useKeyPress("ArrowRight", () => redo(), {enabled: canRedo});
 
   return (
     <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 min-[1200px]:mb-6 min-[1200px]:px-0">
@@ -55,7 +59,12 @@ export function BuilderHeader() {
               </Tooltip.Trigger>
               <Tooltip.Content>
                 <Tooltip.Arrow />
-                <p>Undo last change</p>
+                <p>
+                  Undo last change{" "}
+                  <Kbd>
+                    <Kbd.Abbr keyValue="left" />
+                  </Kbd>
+                </p>
               </Tooltip.Content>
             </Tooltip>
             <Tooltip closeDelay={0} delay={100}>
@@ -71,7 +80,12 @@ export function BuilderHeader() {
                 </Button>
                 <Tooltip.Content>
                   <Tooltip.Arrow />
-                  <p>Redo last change</p>
+                  <p>
+                    Redo last change{" "}
+                    <Kbd>
+                      <Kbd.Abbr keyValue="right" />
+                    </Kbd>
+                  </p>
                 </Tooltip.Content>
               </Tooltip.Trigger>
             </Tooltip>

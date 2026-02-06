@@ -1,0 +1,144 @@
+---
+title: Portal
+icon: windows
+---
+
+Portals let you render its children into a different part of your app. This is particularly useful for components that need to render above other content, such as modals, overlays, and popups.
+
+## Default Setup
+
+By default, the `PortalHost` is included in the `HeroUINativeProvider`, so there is no need to add it manually. The provider automatically sets up the portal system for all components that use portals.
+
+## Advanced Use Cases
+
+For advanced use cases, you can import `Portal` and `PortalHost` directly from `heroui-native` to create custom portal implementations:
+
+```tsx
+import { Portal, PortalHost } from "heroui-native";
+import { View, Text } from "react-native";
+
+function AppLayout() {
+  return (
+    <View className="flex-1">
+      <View className="p-5">
+        <Text>Header Content</Text>
+      </View>
+      
+      <View className="flex-1 p-5">
+        <Text>Main Content Area</Text>
+        <CustomNotification />
+      </View>
+      
+      {/* Portal host positioned at the top of the screen */}
+      <PortalHost name="notification-host" />
+    </View>
+  );
+}
+
+function CustomNotification() {
+  return (
+    <Portal name="notification-portal" hostName="notification-host">
+      <View className="absolute top-0 left-0 right-0 bg-blue-500 p-4">
+        <Text>This notification appears at the top via Portal</Text>
+      </View>
+    </Portal>
+  );
+}
+```
+
+In this example, the `CustomNotification` component uses a `Portal` to render its content at the location of the `PortalHost`, which is positioned at the top of the screen. This allows the notification to appear above all other content regardless of where it's defined in the component tree.
+
+## State Management Considerations
+
+State changes in parent components can cause unexpected issues with components rendered inside portals. For example, when a text input is placed directly inside a portal and the parent component re-renders, it can reset the input's auto-suggestions or cause other UI disruptions.
+
+To avoid this, keep the state of interactive components (like text inputs) inside the portal by creating a separate component for the portal content. This isolates the state from parent re-renders.
+
+### Example Pattern
+
+```tsx
+// ❌ Problematic: State in parent causes re-renders that affect portal content
+function ParentComponent() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [inputValue, setInputValue] = useState(""); // State in parent
+  
+  return (
+    <Dialog isOpen={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog.Trigger>
+        <Button>Open Dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Input 
+          value={inputValue} 
+          onChangeText={setInputValue} 
+          // Parent re-renders reset auto-suggestions
+        />
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+
+// ✅ Correct: State managed inside separate component within portal
+function ParentComponent() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  
+  return (
+    <Dialog isOpen={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog.Trigger>
+        <Button>Open Dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <DialogFormContent 
+          onClose={() => setDialogOpen(false)} 
+          // Form state isolated from parent
+        />
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+
+function DialogFormContent({ onClose }: { onClose: () => void }) {
+  const [inputValue, setInputValue] = useState(""); // State inside portal
+  const [error, setError] = useState("");
+  
+  return (
+    <Dialog.Content>
+      <Input 
+        value={inputValue} 
+        onChangeText={setInputValue}
+        // Auto-suggestions preserved during parent re-renders
+      />
+      <FieldError>{error}</FieldError>
+      <Button onPress={onClose}>Close</Button>
+    </Dialog.Content>
+  );
+}
+```
+
+In the correct pattern, the `DialogFormContent` component manages its own state independently of the parent component. This ensures that parent re-renders (such as when `dialogOpen` changes) don't affect the input's internal state, preserving auto-suggestions and other input behaviors.
+
+## API Reference
+
+### PortalHost
+
+By default, children of all Portal components will be rendered as its own children.
+
+| Prop | Type     | Note                                                      |
+|------|----------|-----------------------------------------------------------|
+| name | `string` | Provide when it is used as a custom host (optional)       |
+
+### Portal
+
+| Prop      | Type     | Note                                                      |
+|-----------|----------|-----------------------------------------------------------|
+| name*     | `string` | Unique value otherwise the portal with the same name will replace the original portal |
+| hostName  | `string` | Provide when its children are to be rendered in a custom host (optional) |
+| children  | `React.ReactNode` | The content to render in the portal |
+
+\* Required prop
+
+## Related
+
+- [Quick Start](/docs/native/getting-started/quick-start) - Basic setup guide
+- View [Provider](/docs/native/getting-started/provider) documentation
+

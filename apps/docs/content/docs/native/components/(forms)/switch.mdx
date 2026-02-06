@@ -325,18 +325,20 @@ If you need to apply a border to the switch root, use the `outline` style proper
 
 Using `outline` keeps the border visual without impacting the switch's internal width calculations, ensuring the thumb animates correctly.
 
-### Integration with FormField
+### Integration with ControlField
 
-The Switch component integrates seamlessly with FormField for press state sharing:
+The Switch component integrates seamlessly with ControlField for press state sharing:
 
 ```tsx
-<FormField isSelected={isSelected} onSelectedChange={setIsSelected}>
+import { Description, ControlField, Label } from 'heroui-native';
+
+<ControlField isSelected={isSelected} onSelectedChange={setIsSelected}>
   <View className="flex-1">
-    <FormField.Label>Enable notifications</FormField.Label>
-    <FormField.Description>Receive push notifications</FormField.Description>
+    <Label>Enable notifications</Label>
+    <Description>Receive push notifications</Description>
   </View>
-  <FormField.Indicator />
-</FormField>
+  <ControlField.Indicator />
+</ControlField>
 ```
 
-When wrapped in FormField, the Switch will automatically respond to press events on the entire FormField container, creating a larger touch target and better user experience.
+When wrapped in ControlField, the Switch will automatically respond to press events on the entire ControlField container, creating a larger touch target and better user experience.

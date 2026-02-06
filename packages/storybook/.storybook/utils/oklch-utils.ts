@@ -135,6 +135,10 @@ export const COLOR_VARIABLES = [
   {name: "--foreground", label: "Foreground", category: "base"},
   {name: "--surface", label: "Surface", category: "surface"},
   {name: "--surface-foreground", label: "Surface Foreground", category: "surface"},
+  {name: "--surface-secondary", label: "Surface Secondary", category: "surface"},
+  {name: "--surface-secondary-foreground", label: "Surface Secondary FG", category: "surface"},
+  {name: "--surface-tertiary", label: "Surface Tertiary", category: "surface"},
+  {name: "--surface-tertiary-foreground", label: "Surface Tertiary FG", category: "surface"},
   {name: "--overlay", label: "Overlay", category: "overlay"},
   {name: "--overlay-foreground", label: "Overlay Foreground", category: "overlay"},
 
