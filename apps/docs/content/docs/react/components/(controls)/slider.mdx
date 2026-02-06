@@ -183,6 +183,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `aria-labelledby` | `string` | - | ID of element that labels the slider |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Slider content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Slider.Output Props
 
@@ -190,6 +191,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Output content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderOutputRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Slider.Track Props
 
@@ -197,6 +199,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Track content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderTrackRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Slider.Fill Props
 
@@ -214,6 +217,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `name` | `string` | - | The name of the input element, used when submitting an HTML form |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Thumb content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderThumbRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### RenderProps
 

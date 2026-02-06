@@ -187,6 +187,7 @@ Inherits from [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/re
 | `layout` | `"grid" \| "stack"` | `"grid"` | Layout direction |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | ColorSwatchPicker.Item elements |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchPickerRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ColorSwatchPicker.Item Props
 
@@ -196,6 +197,7 @@ Inherits from [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/re
 | `isDisabled` | `boolean` | `false` | Whether the item is disabled |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | ColorSwatchPicker.Swatch element |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchPickerItemRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ColorSwatchPicker.Swatch Props
 

@@ -131,6 +131,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `isDisabled` | `boolean` | `false` | Whether all breadcrumb links are disabled |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The breadcrumb items |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function|
 
 ### Breadcrumbs.Item Props
 
@@ -139,6 +140,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `href` | `string` | - | The URL to link to (omit for current page) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Item content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, BreadcrumbRenderProps>` | - | Overrides the default DOM element with a custom render function|
 
 ## Accessibility
 

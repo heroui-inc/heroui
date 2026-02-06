@@ -223,6 +223,7 @@ Inherits from [React Aria Checkbox](https://react-spectrum.adobe.com/react-aria/
 | `value` | `string` | - | The value of the input element, used when submitting an HTML form |
 | `onChange` | `(isSelected: boolean) => void` | - | Handler called when the checkbox value changes |
 | `children` | `React.ReactNode \| (values: CheckboxRenderProps) => React.ReactNode` | - | Checkbox content or render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### CheckboxRenderProps
 
