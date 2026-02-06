@@ -3,9 +3,10 @@
 import type {ThemeId} from "../constants";
 
 import {BucketPaint, ChevronsExpandVertical} from "@gravity-ui/icons";
-import {InputGroup, Label, ListBox, Popover} from "@heroui/react";
+import {InputGroup, Kbd, Label, ListBox, Popover} from "@heroui/react";
 import Image from "next/image";
 
+import useKeyPress from "@/hooks/use-key-press";
 import {cn} from "@/utils/cn";
 
 import {findMatchingTheme, themeValuesById, themes} from "../constants";
@@ -29,6 +30,16 @@ export function ThemePopover() {
       radius: themeValues.radius,
     });
   };
+
+  const randomizeTheme = () => {
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+
+    if (randomTheme) {
+      applyTheme(randomTheme.id);
+    }
+  };
+
+  useKeyPress("t", randomizeTheme);
 
   return (
     <Popover>
@@ -94,6 +105,13 @@ export function ThemePopover() {
               </ListBox.Item>
             )}
           </ListBox>
+          <p className="mt-5 text-xs text-muted">
+            Press{" "}
+            <Kbd>
+              <Kbd.Content>T</Kbd.Content>
+            </Kbd>{" "}
+            to pick random
+          </p>
         </Popover.Dialog>
       </Popover.Content>
     </Popover>
