@@ -31,7 +31,7 @@ import { Button } from 'heroui-native';
 
 <Button className="bg-accent px-6 py-3 rounded-lg">
   <Button.Label>Custom Button</Button.Label>
-</Button>
+</Button>;
 ```
 
 **Using style:** Components also accept inline styles via the `style` prop:
@@ -41,7 +41,7 @@ import { Button } from 'heroui-native';
 
 <Button style={{ backgroundColor: '#8B5CF6', paddingHorizontal: 24 }}>
   <Button.Label>Styled Button</Button.Label>
-</Button>
+</Button>;
 ```
 
 ## Render Props
@@ -49,24 +49,24 @@ import { Button } from 'heroui-native';
 Use a render function to access component state and customize content dynamically:
 
 ```tsx
-import { RadioGroup, cn } from 'heroui-native';
+import { RadioGroup, Label, cn } from 'heroui-native';
 
 <RadioGroup value={value} onValueChange={setValue}>
   <RadioGroup.Item value="option1">
     {({ isSelected, isInvalid, isDisabled }) => (
       <>
-        <RadioGroup.Label
+        <Label
           className={cn(
-            "text-foreground",
-            isSelected && "text-accent font-semibold"
+            'text-foreground',
+            isSelected && 'text-accent font-semibold'
           )}
         >
           Option 1
-        </RadioGroup.Label>
+        </Label>
         <RadioGroup.Indicator
           className={cn(
-            "border-2 rounded-full",
-            isSelected && "border-accent bg-accent"
+            'border-2 rounded-full',
+            isSelected && 'border-accent bg-accent'
           )}
         >
           {isSelected && <CustomIcon />}
@@ -74,7 +74,7 @@ import { RadioGroup, cn } from 'heroui-native';
       </>
     )}
   </RadioGroup.Item>
-</RadioGroup>
+</RadioGroup>;
 ```
 
 ## Creating Wrapper Components
@@ -145,6 +145,78 @@ export function CustomButton({
 }
 ```
 
+## Using Component classNames
+
+Each HeroUI Native component exports a `classNames` object that contains the same styling functions used internally by the component. This is particularly useful when you want to style your own custom components to match the appearance of HeroUI Native components.
+
+For example, you can style a custom `Link` component to look like a `Button`:
+
+```tsx
+import { buttonClassNames, cn } from 'heroui-native';
+import { Pressable, Text } from 'react-native';
+
+interface LinkProps {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Link({
+  href,
+  variant = 'primary',
+  size = 'md',
+  children,
+  className,
+}: LinkProps) {
+  return (
+    <Pressable
+      className={cn(
+        buttonClassNames.root({ variant, size }),
+        className
+      )}
+      onPress={() => {
+        // Handle navigation
+      }}
+    >
+      <Text className={buttonClassNames.label({ variant, size })}>
+        {children}
+      </Text>
+    </Pressable>
+  );
+}
+```
+
+**Available classNames exports:**
+
+Each component exports its `classNames` object. For example:
+- `buttonClassNames` - Contains `root` and `label` functions
+- `cardClassNames` - Contains `root`, `header`, `body`, `footer`, `label`, and `description` functions
+- `chipClassNames` - Contains `root` and `label` functions
+- And many more...
+
+**Usage pattern:**
+
+```tsx
+import { buttonClassNames } from 'heroui-native';
+
+// Use with variant and size options
+const rootClasses = buttonClassNames.root({
+  variant: 'primary',
+  size: 'md',
+  className: 'custom-class', // Optional: merge with your own classes
+});
+
+const labelClasses = buttonClassNames.label({
+  variant: 'primary',
+  size: 'md',
+});
+```
+
+The `classNames` functions accept the same variant props as the components themselves, allowing you to maintain visual consistency across your custom components and HeroUI Native components.
+
+
 ## Responsive Design
 
 HeroUI Native supports Tailwind's responsive breakpoint system via [Uniwind](https://docs.uniwind.dev/breakpoints). Use breakpoint prefixes like `sm:`, `md:`, `lg:`, and `xl:` to apply styles conditionally based on screen width.
@@ -166,7 +238,7 @@ import { View, Text } from 'react-native';
       Responsive Button
     </Button.Label>
   </Button>
-</View>
+</View>;
 ```
 
 ### Responsive Layouts
@@ -181,7 +253,7 @@ import { View, Text } from 'react-native';
       <Text className="text-accent-foreground">Item 1</Text>
     </View>
   </View>
-</View>
+</View>;
 ```
 
 **Default breakpoints:**
@@ -210,14 +282,15 @@ function MyComponent({ className, isActive }) {
     <View
       className={cn(
         'bg-background p-4 rounded-lg',
-        'border border-divider',
+        'border border-separator',
         isActive && 'bg-accent',
         className
       )}
     />
   );
 }
-```
+```;
+
 
 The `cn` utility is powered by `tailwind-variants` and includes:
 
@@ -252,7 +325,7 @@ function MyComponent() {
     </View>
   );
 }
-```
+```;
 
 **Multiple colors usage (more efficient):**
 
@@ -272,7 +345,7 @@ function MyComponent() {
     </View>
   );
 }
-```
+```;
 
 **Type signatures:**
 
@@ -289,11 +362,10 @@ useThemeColor<T extends readonly [ThemeColor, ...ThemeColor[]]>(
 useThemeColor(themeColor: ThemeColor[]): string[]
 ```
 
-Available theme colors include: `background`, `foreground`, `surface`, `accent`, `default`, `success`, `warning`, `danger`, and all their variants (hover, soft, foreground, etc.), plus semantic colors like `muted`, `border`, `divider`, `field`, `overlay`, and more.
+Available theme colors include: `background`, `foreground`, `surface`, `accent`, `default`, `success`, `warning`, `danger`, and all their variants (hover, soft, foreground, etc.), plus semantic colors like `muted`, `border`, `separator`, `field`, `overlay`, and more.
 
 ## Next Steps
 
 - Learn about [Animation](/docs/native/getting-started/animation) techniques
 - Explore [Theming](/docs/native/getting-started/theming) system
 - Explore [Colors](/docs/native/getting-started/colors) documentation
-

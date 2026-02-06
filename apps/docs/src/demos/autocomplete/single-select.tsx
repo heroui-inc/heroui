@@ -35,7 +35,7 @@ export default function SingleSelect() {
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
         <Autocomplete.Filter filter={contains}>
-          <SearchField autoFocus name="search">
+          <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
               <SearchField.Input placeholder="Search animals..." />

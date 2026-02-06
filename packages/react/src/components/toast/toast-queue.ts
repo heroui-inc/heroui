@@ -10,13 +10,13 @@ import type {
 import {UNSTABLE_ToastQueue as ToastQueuePrimitive} from "react-aria-components";
 import {flushSync} from "react-dom";
 
-import {DEFAULT_MAX_VISIBLE_TOAST} from "./constants";
+import {DEFAULT_RAC_MAX_VISIBLE_TOAST, DEFAULT_TOAST_TIMEOUT} from "./constants";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Options
  * --------------------------------------------------------------------------------------------- */
 export interface ToastQueueOptions {
-  /** The maximum number of toasts to display at a time. */
+  /** The maximum number of toasts to display at a time (visual only). */
   maxVisibleToasts?: number;
   /** Function to wrap updates in (i.e. document.startViewTransition()). */
   wrapUpdate?: (fn: () => void) => void;
@@ -27,10 +27,12 @@ export interface ToastQueueOptions {
  * --------------------------------------------------------------------------------------------- */
 export class ToastQueue<T extends object = ToastContentValue> {
   private queue: ToastQueuePrimitiveType<T>;
+  readonly maxVisibleToasts?: number;
 
   constructor(options?: ToastQueueOptions) {
+    this.maxVisibleToasts = options?.maxVisibleToasts;
     this.queue = new ToastQueuePrimitive<T>({
-      maxVisibleToasts: options?.maxVisibleToasts,
+      maxVisibleToasts: DEFAULT_RAC_MAX_VISIBLE_TOAST,
       wrapUpdate: options?.wrapUpdate
         ? options.wrapUpdate
         : (fn: () => void) => {
@@ -46,7 +48,13 @@ export class ToastQueue<T extends object = ToastContentValue> {
   }
 
   add(content: T, options?: RACToastOptions): string {
-    return this.queue.add(content, options);
+    // Apply default timeout if not provided, but respect explicit 0 (persistent toast)
+    const timeout = options?.timeout !== undefined ? options.timeout : DEFAULT_TOAST_TIMEOUT;
+
+    return this.queue.add(content, {
+      ...options,
+      timeout,
+    });
   }
 
   close(key: string): void {
@@ -88,6 +96,7 @@ export interface ToastContentValue {
   description?: ReactNode | undefined;
   variant?: "default" | "accent" | "success" | "warning" | "danger" | undefined;
   actionProps?: ButtonProps | undefined;
+  isLoading?: boolean | undefined;
 }
 
 export interface HeroUIToastOptions {
@@ -95,6 +104,7 @@ export interface HeroUIToastOptions {
   indicator?: ReactNode;
   variant?: ToastContentValue["variant"];
   actionProps?: ButtonProps;
+  isLoading?: boolean;
   timeout?: number;
   onClose?: () => void;
 }
@@ -108,6 +118,9 @@ export interface ToastPromiseOptions<T = unknown> {
 // Helper function to create toast
 function createToastFunction(queue: ToastQueue<ToastContentValue>) {
   const toastFn = (message: ReactNode, options?: HeroUIToastOptions): string => {
+    // Use default timeout if not provided, but respect explicit 0 (persistent toast)
+    const timeout = options?.timeout !== undefined ? options.timeout : DEFAULT_TOAST_TIMEOUT;
+
     return queue.add(
       {
         title: message,
@@ -115,10 +128,15 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
         indicator: options?.indicator,
         variant: options?.variant || "default",
         actionProps: options?.actionProps,
+        isLoading: options?.isLoading,
       },
       {
-        timeout: options?.timeout,
-        onClose: options?.onClose,
+        timeout,
+        onClose: () => {
+          requestAnimationFrame(() => {
+            options?.onClose?.();
+          });
+        },
       },
     );
   };
@@ -146,7 +164,16 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
     options: ToastPromiseOptions<T>,
   ): string => {
     const promiseFn = typeof promise === "function" ? promise() : promise;
-    const loadingId = toastFn(options.loading, {variant: "default"});
+    const loadingId = queue.add(
+      {
+        title: options.loading,
+        variant: "default",
+        isLoading: true,
+      },
+      {
+        timeout: 0, // Don't auto-close loading toasts
+      },
+    );
 
     promiseFn
       .then((data) => {
@@ -191,7 +218,7 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
 }
 
 const toastQueue = new ToastQueue<ToastContentValue>({
-  maxVisibleToasts: DEFAULT_MAX_VISIBLE_TOAST,
+  maxVisibleToasts: DEFAULT_RAC_MAX_VISIBLE_TOAST,
 });
 
 export const toast = createToastFunction(toastQueue);

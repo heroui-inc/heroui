@@ -119,6 +119,34 @@ export default function MyComponent() {
 }
 ```
 
+### 7. Reduce Bundle Size with Granular Exports
+
+If you want to reduce bundle size and import only the components you need, our library provides granular exports for each component:
+
+```tsx
+// Granular imports - use when you need only a few components
+import { HeroUINativeProvider } from "heroui-native/provider";
+import { Button } from "heroui-native/button";
+import { Card } from "heroui-native/card";
+
+// General import - imports the whole library, use when you're using many components
+import { Button, Card } from "heroui-native";
+```
+
+Granular imports are ideal when you only need a few components, as they help keep your bundle size smaller. General imports from `heroui-native` will include the entire library, which is convenient when you're using many components throughout your app.
+
+**Available granular exports:**
+
+- `heroui-native/provider` - Provider component
+- `heroui-native/[component-name]` - Individual components
+- `heroui-native/portal` - Portal utilities
+- `heroui-native/utils` - Utility functions
+- `heroui-native/hooks` - Custom hooks
+
+<Callout type="warning">
+  **Important**: To keep the bundle size under control, you must follow the pattern with granular imports consistently. Even one general import from `heroui-native` will break this optimization strategy.
+</Callout>
+
 ## What's Next?
 
 - [HeroUI Native Provider](/docs/native/getting-started/provider)

@@ -85,3 +85,6 @@ bundle-sizes.json
 package
 
 storybook-static
+
+# Pre-built skill tarballs (generated during build)
+apps/docs/public/skills

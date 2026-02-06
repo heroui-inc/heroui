@@ -44,6 +44,12 @@
     --surface: var(--white);
     --surface-foreground: var(--foreground);
 
+    --surface-secondary: oklch(0.9524 0.0013 286.37);
+    --surface-secondary-foreground: var(--foreground);
+
+    --surface-tertiary: oklch(0.9373 0.0013 286.37);
+    --surface-tertiary-foreground: var(--foreground);
+
     /* Overlay: Used for floating/overlay components (tooltips, popovers, modals, menus) */
     --overlay: var(--white);
     --overlay-foreground: var(--foreground);
@@ -112,6 +118,9 @@
     /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
     --surface: oklch(0.2103 0.0059 285.89);
     --surface-foreground: var(--foreground);
+
+    --surface-secondary: oklch(0.257 0.0037 286.14);
+    --surface-tertiary: oklch(0.2721 0.0024 247.91);
 
     /* Overlay: Used for floating/overlay components (tooltips, popovers, modals, menus) - lighter for contrast */
     --overlay: oklch(0.2103 0.0059 285.89);

@@ -14,6 +14,10 @@ import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
 import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
+import * as ColorAreaDemos from "./color-area";
+import * as ColorFieldDemos from "./color-field";
+import * as ColorPickerDemos from "./color-picker";
+import * as ColorSliderDemos from "./color-slider";
 import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combo-box";
@@ -420,6 +424,93 @@ export const demos: Record<string, DemoItem> = {
     component: ChipDemos.Statuses,
     file: "chip/statuses.tsx",
   },
+  // ColorField demos
+  "color-field-basic": {
+    component: ColorFieldDemos.Basic,
+    file: "color-field/basic.tsx",
+  },
+  "color-field-channel-editing": {
+    component: ColorFieldDemos.ChannelEditing,
+    file: "color-field/channel-editing.tsx",
+  },
+  "color-field-controlled": {
+    component: ColorFieldDemos.Controlled,
+    file: "color-field/controlled.tsx",
+  },
+  "color-field-disabled": {
+    component: ColorFieldDemos.Disabled,
+    file: "color-field/disabled.tsx",
+  },
+  "color-field-form-example": {
+    component: ColorFieldDemos.FormExample,
+    file: "color-field/form-example.tsx",
+  },
+  "color-field-full-width": {
+    component: ColorFieldDemos.FullWidth,
+    file: "color-field/full-width.tsx",
+  },
+  "color-field-invalid": {
+    component: ColorFieldDemos.Invalid,
+    file: "color-field/invalid.tsx",
+  },
+  "color-field-on-surface": {
+    component: ColorFieldDemos.OnSurface,
+    file: "color-field/on-surface.tsx",
+  },
+  "color-field-required": {
+    component: ColorFieldDemos.Required,
+    file: "color-field/required.tsx",
+  },
+  "color-field-variants": {
+    component: ColorFieldDemos.Variants,
+    file: "color-field/variants.tsx",
+  },
+  "color-field-with-description": {
+    component: ColorFieldDemos.WithDescription,
+    file: "color-field/with-description.tsx",
+  },
+  // ColorPicker demos
+  "color-picker-basic": {
+    component: ColorPickerDemos.Basic,
+    file: "color-picker/basic.tsx",
+  },
+  "color-picker-controlled": {
+    component: ColorPickerDemos.Controlled,
+    file: "color-picker/controlled.tsx",
+  },
+  "color-picker-with-swatches": {
+    component: ColorPickerDemos.WithSwatches,
+    file: "color-picker/with-swatches.tsx",
+  },
+  "color-picker-with-fields": {
+    component: ColorPickerDemos.WithFields,
+    file: "color-picker/with-fields.tsx",
+  },
+  "color-picker-with-sliders": {
+    component: ColorPickerDemos.WithSliders,
+    file: "color-picker/with-sliders.tsx",
+  },
+  // ColorArea demos
+  "color-area-basic": {
+    component: ColorAreaDemos.Basic,
+    file: "color-area/basic.tsx",
+  },
+  "color-area-with-dots": {
+    component: ColorAreaDemos.WithDots,
+    file: "color-area/with-dots.tsx",
+  },
+  "color-area-space-and-channels": {
+    component: ColorAreaDemos.SpaceAndChannels,
+    file: "color-area/space-and-channels.tsx",
+  },
+  "color-area-controlled": {
+    component: ColorAreaDemos.Controlled,
+    file: "color-area/controlled.tsx",
+  },
+  "color-area-disabled": {
+    component: ColorAreaDemos.Disabled,
+    file: "color-area/disabled.tsx",
+  },
   // ColorSwatch demos
   "color-swatch-basic": {
     component: ColorSwatchDemos.Basic,
@@ -444,6 +535,35 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-accessibility": {
     component: ColorSwatchDemos.Accessibility,
     file: "color-swatch/accessibility.tsx",
+  },
+  // ColorSlider demos
+  "color-slider-basic": {
+    component: ColorSliderDemos.Basic,
+    file: "color-slider/basic.tsx",
+  },
+  "color-slider-channels": {
+    component: ColorSliderDemos.Channels,
+    file: "color-slider/channels.tsx",
+  },
+  "color-slider-alpha-channel": {
+    component: ColorSliderDemos.AlphaChannel,
+    file: "color-slider/alpha-channel.tsx",
+  },
+  "color-slider-rgb-channels": {
+    component: ColorSliderDemos.RGBChannels,
+    file: "color-slider/rgb-channels.tsx",
+  },
+  "color-slider-vertical": {
+    component: ColorSliderDemos.Vertical,
+    file: "color-slider/vertical.tsx",
+  },
+  "color-slider-disabled": {
+    component: ColorSliderDemos.Disabled,
+    file: "color-slider/disabled.tsx",
+  },
+  "color-slider-controlled": {
+    component: ColorSliderDemos.Controlled,
+    file: "color-slider/controlled.tsx",
   },
   // CloseButton demos
   "close-button-default": {
@@ -486,6 +606,10 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-picker-default-value": {
     component: ColorSwatchPickerDemos.DefaultValue,
     file: "color-swatch-picker/default-value.tsx",
+  },
+  "color-swatch-picker-custom-indicator": {
+    component: ColorSwatchPickerDemos.CustomIndicator,
+    file: "color-swatch-picker/custom-indicator.tsx",
   },
   // Autocomplete demos
   "autocomplete-default": {
@@ -1353,21 +1477,29 @@ export const demos: Record<string, DemoItem> = {
     component: ToastDemos.Default,
     file: "toast/default.tsx",
   },
-  "toast-variants": {
-    component: ToastDemos.Variants,
-    file: "toast/variants.tsx",
-  },
-  "toast-placements": {
-    component: ToastDemos.Placements,
-    file: "toast/placements.tsx",
-  },
   "toast-simple": {
     component: ToastDemos.Simple,
     file: "toast/simple.tsx",
   },
+  "toast-variants": {
+    component: ToastDemos.Variants,
+    file: "toast/variants.tsx",
+  },
   "toast-custom-indicator": {
     component: ToastDemos.CustomIndicator,
     file: "toast/custom-indicator.tsx",
+  },
+  "toast-promise": {
+    component: ToastDemos.Promise,
+    file: "toast/promise.tsx",
+  },
+  "toast-callbacks": {
+    component: ToastDemos.Callbacks,
+    file: "toast/callbacks.tsx",
+  },
+  "toast-placements": {
+    component: ToastDemos.Placements,
+    file: "toast/placements.tsx",
   },
   "toast-custom-toast": {
     component: ToastDemos.CustomToast,
