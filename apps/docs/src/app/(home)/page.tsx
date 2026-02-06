@@ -11,10 +11,10 @@ const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/native/releases/beta-13"
+      href="/docs/react/releases/v3-0-0-beta-6"
     >
-      <FrameworkChip framework="native" />
-      <span>Beta 13 (Native) — Latest beta release</span>
+      <FrameworkChip framework="web" />
+      <span>Beta 6 (Web) — 6 new components and toast improvements</span>
     </LinkRoot>
   );
 };
