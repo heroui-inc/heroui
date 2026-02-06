@@ -1,7 +1,7 @@
 ---
 title: Toast
 description: Display temporary notifications and messages to users with automatic dismissal and customizable placement
-icon: preview
+icon: updated
 links:
   rac: Toast
   source: toast/toast.tsx
@@ -9,10 +9,6 @@ links:
   storybook: Components/Feedback/Toast
   figma: true
 ---
-
-<Callout type="warning">
-  **Under construction.** The Toast component is currently in development and some features might not work as expected.
-</Callout>
 
 ## Import
 
@@ -22,7 +18,7 @@ import { Toast, toast } from '@heroui/react';
 
 ## Setup
 
-Render the container in the root of your app.
+Render the provider in the root of your app.
 
 ```tsx
 import { Toast, Button, toast } from '@heroui/react';
@@ -30,7 +26,7 @@ import { Toast, Button, toast } from '@heroui/react';
 function App() {
   return (
     <div>
-      <Toast.Container />
+      <Toast.Provider />
       <Button onPress={() => toast("Simple message")}>
         Show toast
       </Button>
@@ -45,28 +41,40 @@ function App() {
   name="toast-default"
 />
 
-### Variants
-
-<ComponentPreview
-  name="toast-variants"
-/>
-
-### Placements
-
-<ComponentPreview
-  name="toast-placements"
-/>
-
 ### Simple Toasts
 
 <ComponentPreview
   name="toast-simple"
 />
 
+### Variants
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
 ### Custom Indicators
 
 <ComponentPreview
   name="toast-custom-indicator"
+/>
+
+### Promise & Loading
+
+<ComponentPreview
+  name="toast-promise"
+/>
+
+### Callbacks
+
+<ComponentPreview
+  name="toast-callbacks"
+/>
+
+### Placements
+
+<ComponentPreview
+  name="toast-placements"
 />
 
 ### Custom Toast Rendering
@@ -84,7 +92,7 @@ function App() {
 ### Anatomy
 
 ```tsx
-<Toast.Container>
+<Toast.Provider>
   <Toast>
     <Toast.Indicator />
     <Toast.Content>
@@ -94,7 +102,7 @@ function App() {
     <Toast.ActionButton />
     <Toast.CloseButton />
   </Toast>
-</Toast.Container>
+</Toast.Provider>
 ```
 
 <RelatedComponents component="toast" />
@@ -104,7 +112,7 @@ function App() {
 ### Passing Tailwind CSS classes
 
 ```tsx
-<Toast.Container className="bottom-8 right-8" placement="bottom end" />
+<Toast.Provider className="bottom-8 right-8" placement="bottom end" />
 ```
 
 ### Customizing the component classes
@@ -157,14 +165,15 @@ The component supports various states:
 
 ## API Reference
 
-### Toast.Container Props
+### Toast.Provider Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `placement` | `"top start" \| "top" \| "top end" \| "bottom start" \| "bottom" \| "bottom end"` | `"bottom"` | Placement of the toast region |
-| `gap` | `number` | `14` | The gap between toasts in pixels |
+| `gap` | `number` | `12` | The gap between toasts in pixels |
 | `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
 | `scaleFactor` | `number` | `0.05` | Scale factor for stacked toasts (0-1) |
+| `width` | `number \| string` | `460` | Width of the toast in pixels or CSS value |
 | `queue` | `ToastQueue<T>` | - | Custom toast queue instance |
 | `children` | `ReactNode \| ((props: {toast: QueuedToast<T>}) => ReactNode)` | - | Custom render function or children |
 | `className` | `string` | - | Additional CSS classes |
@@ -175,8 +184,8 @@ The component supports various states:
 |------|------|---------|-------------|
 | `toast` | `QueuedToast<T>` | - | Toast data from queue (required) |
 | `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Visual variant of the toast |
-| `placement` | `ToastVariants["placement"]` | - | Placement (inherited from Container) |
-| `scaleFactor` | `number` | - | Scale factor (inherited from Container) |
+| `placement` | `ToastVariants["placement"]` | - | Placement (inherited from Provider) |
+| `scaleFactor` | `number` | - | Scale factor (inherited from Provider) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Toast content (ToastContent, ToastIndicator, etc.) |
 
@@ -209,7 +218,7 @@ The component supports various states:
 | `children` | `ReactNode` | - | Description text |
 | `className` | `string` | - | Additional CSS classes |
 
-### Toast.Action Props
+### Toast.ActionButton Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -226,13 +235,13 @@ The component supports various states:
 
 ### ToastQueue
 
-A `ToastQueue` manages the state for a `<Toast.Container>`. The state is stored outside React so you can trigger toasts from anywhere in your application.
+A `ToastQueue` manages the state for a `<Toast.Provider>`. The state is stored outside React so you can trigger toasts from anywhere in your application.
 
 #### Constructor Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
+| `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once (visual only) |
 | `wrapUpdate` | `(fn: () => void) => void` | - | Function to wrap state updates (e.g., for view transitions) |
 
 #### Methods
@@ -253,37 +262,47 @@ The default `toast` function provides convenient methods for showing toasts:
 ```tsx
 import { toast } from '@heroui/react';
 
-// Basic toast
-toast("Message");
+// Basic toast (auto-dismisses after 4 seconds by default)
+toast("Event has been created");
 
-// Variant methods
-toast.success("Success message");
-toast.info("Info message");
-toast.warning("Warning message");
-toast.danger("Error message");
+// Variant methods (also auto-dismiss after 4 seconds by default)
+toast.success("File saved");
+toast.info("New update available");
+toast.warning("Please check your settings");
+toast.danger("Something went wrong");
 
 // With options
-toast("Message", {
-  description: "Additional details",
+toast("Event has been created", {
+  description: "Your event has been scheduled for tomorrow",
   variant: "default",
-  timeout: 5000,
+  timeout: 5000, // Custom timeout: 5 seconds
   onClose: () => console.log("Closed"),
   actionProps: {
-    children: "Action",
+    children: "View",
     onPress: () => {},
   },
   indicator: <CustomIcon />,
 });
 
-// Promise support
+// Promise support (automatically shows loading spinner)
 toast.promise(
-  fetchData(),
+  uploadFile(),
   {
-    loading: "Loading...",
-    success: "Data loaded",
-    error: "Failed to load",
+    loading: "Uploading file...",
+    success: (data) => `File ${data.filename} uploaded`,
+    error: "Failed to upload file",
   }
 );
+
+// Manual loading state (persistent toast - no auto-dismiss)
+const loadingId = toast("Creating event...", {
+  isLoading: true,
+  timeout: 0, // Persistent toast that doesn't auto-dismiss
+});
+
+// Later, close and show result
+toast.close(loadingId);
+toast.success("Event created");
 
 // Queue methods
 toast.close(key);
@@ -301,7 +320,8 @@ toast.resumeAll();
 | `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Visual variant |
 | `indicator` | `ReactNode` | - | Custom indicator icon (null to hide) |
 | `actionProps` | `ButtonProps` | - | Props for action button |
-| `timeout` | `number` | - | Auto-dismiss timeout in milliseconds (0 for persistent) |
+| `isLoading` | `boolean` | `false` | Show loading spinner instead of indicator |
+| `timeout` | `number` | `4000` | Auto-dismiss timeout in milliseconds. Defaults to 4000ms (4 seconds). Set to `0` for persistent toasts that don't auto-dismiss |
 | `onClose` | `() => void` | - | Callback when toast is closed |
 
 #### toast.promise Options
