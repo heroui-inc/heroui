@@ -2,22 +2,23 @@
 
 /* Toast Region - Container for all toasts */
 .toast-region {
-  @apply pointer-events-none fixed z-50 flex flex-col outline-none;
+  @apply pointer-events-none fixed z-50 outline-none;
+  @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-(--toast-width);
 
-  gap: var(--gap);
+  display: block;
 }
 
 /* Placement variants - Bottom */
 .toast-region--bottom {
-  @apply bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse;
+  @apply bottom-4 left-1/2 -translate-x-1/2;
 }
 
 .toast-region--bottom-start {
-  @apply bottom-4 left-4 flex-col-reverse;
+  @apply bottom-4 left-4;
 }
 
 .toast-region--bottom-end {
-  @apply right-4 bottom-4 flex-col-reverse;
+  @apply right-4 bottom-4;
 }
 
 /* Placement variants - Top */
@@ -39,21 +40,39 @@
 
 /* Base toast styles */
 .toast {
-  @apply pointer-events-auto relative flex w-full min-w-[calc(100vw-2rem)] flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay sm:min-w-auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay;
+}
+
+.toast--bottom,
+.toast--bottom-start,
+.toast--bottom-end {
+  bottom: 0;
+}
+
+.toast--top,
+.toast--top-start,
+.toast--top-end {
+  top: 0;
 }
 
 .toast:not([data-frontmost="true"]) {
   @apply pointer-events-none;
 
+  height: var(--front-height);
+  overflow: hidden;
+
   .toast__close-button {
     @apply pointer-events-none opacity-0;
-    tabindex: -1;
     outline: none;
   }
+}
 
-  .toast__content {
-    @apply max-h-[20px] overflow-hidden;
-  }
+.toast[data-hidden="true"] {
+  @apply pointer-events-none flex opacity-0;
 }
 
 .toast:focus-visible {
@@ -75,7 +94,7 @@
 
 /* Toast content */
 .toast__content {
-  @apply flex h-full grow flex-col items-start;
+  @apply flex h-full grow flex-col items-start self-center;
 }
 
 /* Toast indicator */
@@ -84,6 +103,15 @@
 
   [data-slot="toast-default-icon"] {
     @apply box-content size-4;
+  }
+
+  /* Spinner styles override for toast */
+  [data-slot="spinner"] {
+    @apply size-4;
+  }
+
+  [data-slot="spinner-icon"] {
+    @apply size-4;
   }
 }
 
@@ -117,7 +145,8 @@
   }
 }
 
-.toast:hover .toast__close-button {
+/* Only show close button on hover for frontmost toast */
+.toast[data-frontmost="true"]:hover .toast__close-button {
   @apply pointer-events-auto opacity-100;
 }
 
@@ -158,6 +187,10 @@
 /* View transition animations */
 ::view-transition-group(.toast-bottom),
 ::view-transition-group(.toast-top) {
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
   will-change: translate, opacity;
 }
 

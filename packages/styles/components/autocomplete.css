@@ -101,14 +101,14 @@
     @apply text-field-placeholder;
   }
 
-  /* Removes the listbox-item indicator element from the autocomplete value*/
-  [data-slot="listbox-item-indicator"] {
+  /* Removes the list-box-item indicator element from the autocomplete value*/
+  [data-slot="list-box-item-indicator"] {
     @apply hidden;
   }
 }
 
 .autocomplete__indicator {
-  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150 will-change-transform;
+  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -124,7 +124,7 @@
 
 /* Similar to popover content styles */
 .autocomplete__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 pt-2 text-sm will-change-[opacity,transform];
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 pt-2 text-sm;
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
@@ -160,6 +160,11 @@
     @apply animate-out duration-100 ease-out-quad zoom-out-95 fade-out;
   }
 
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
+  }
+
   /* Arrow styling */
   & [data-slot="popover-overlay-arrow"] {
     fill: var(--overlay);
@@ -179,19 +184,19 @@
   }
 
   /* Listbox styles */
-  [data-slot="listbox"] {
+  [data-slot="list-box"] {
     @apply p-1.5 outline-none;
   }
 
-  [data-slot="listbox-item"] {
+  [data-slot="list-box-item"] {
     @apply px-2.5;
   }
 
   /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
-  [data-slot="listbox"]:not([aria-multiselectable="true"]) [data-slot="listbox-item-indicator"],
-  [data-slot="listbox"]:not([aria-multiselectable="true"])
-    [data-slot="listbox-item-indicator"]
-    [data-slot="listbox-item-indicator--checkmark"] {
+  [data-slot="list-box"]:not([aria-multiselectable="true"]) [data-slot="list-box-item-indicator"],
+  [data-slot="list-box"]:not([aria-multiselectable="true"])
+    [data-slot="list-box-item-indicator"]
+    [data-slot="list-box-item-indicator--checkmark"] {
     @apply transition-none;
   }
 
@@ -217,7 +222,7 @@
 
 /* Clear Button styles */
 .autocomplete__clear-button {
-  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center items-center justify-center rounded-xl p-1 text-muted will-change-transform select-none no-highlight;
+  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center items-center justify-center rounded-xl p-1 text-muted select-none no-highlight;
   @apply mr-0 size-5 shrink-0 self-center bg-transparent;
 
   /* Cursor */

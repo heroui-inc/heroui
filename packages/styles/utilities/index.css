@@ -12,9 +12,20 @@
 }
 
 @utility invalid-field-ring {
-  @apply ring-1 ring-danger ring-offset-0 outline-none;
-  /* No separation - ring sits directly against the element */
-  --tw-ring-offset-width: 0px;
+  /* Unfocused: show 1px outline */
+  @apply outline-1 outline-danger outline-solid;
+  --tw-ring-offset-width: 3px;
+
+  /* Focused: show 2px ring in danger color, remove outline */
+  &:focus,
+  &:focus-visible,
+  &[data-focused="true"],
+  &[data-focus-visible="true"],
+  &:focus-within,
+  &[data-focus-within="true"] {
+    @apply ring-2 ring-danger ring-offset-0;
+    --tw-ring-offset-width: 0px;
+  }
 }
 
 @utility no-highlight {

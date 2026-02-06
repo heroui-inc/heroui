@@ -1,0 +1,258 @@
+/* ==========================================================================
+   ColorSlider - A slider for adjusting individual color channel values
+   ========================================================================== */
+
+/* Base styles */
+.color-slider {
+  @apply w-full gap-2;
+
+  display: grid;
+  grid-template-areas:
+    "label output"
+    "track track";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+
+  /* When neither label nor output exist, collapse to single row */
+  &:not(:has([data-slot="label"])):not(:has(.color-slider__output)) {
+    grid-template-areas: "track";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 0;
+  }
+
+  /* When only label exists (no output) */
+  &:has([data-slot="label"]):not(:has(.color-slider__output)) {
+    grid-template-areas:
+      "label"
+      "track";
+    grid-template-columns: 1fr;
+  }
+
+  /* When only output exists (no label) */
+  &:not(:has([data-slot="label"])):has(.color-slider__output) {
+    grid-template-areas:
+      "output"
+      "track";
+    grid-template-columns: 1fr;
+
+    .color-slider__output {
+      justify-self: end;
+    }
+  }
+
+  [data-slot="label"] {
+    @apply w-fit text-sm font-medium;
+
+    grid-area: label;
+  }
+
+  .color-slider__output {
+    @apply text-sm font-medium tabular-nums;
+
+    grid-area: output;
+  }
+
+  .color-slider__track {
+    @apply relative rounded-full;
+
+    grid-area: track;
+    /* Edge cap pseudo-elements */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+    }
+  }
+
+  .color-slider__thumb {
+    /* Flex container for centering */
+    @apply absolute flex cursor-grab items-center justify-center rounded-full no-highlight;
+
+    /* Border to create white ring around the thumb */
+    @apply border-3 border-white shadow-overlay;
+
+    /* Ensure thumb is above edge caps */
+    z-index: 1;
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition:
+      transform 250ms var(--ease-out),
+      box-shadow 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+
+    /* Dragging state - cursor changes and thumb scales down */
+    &[data-dragging="true"] {
+      @apply cursor-grabbing;
+    }
+
+    /* Focus state - show focus ring */
+    &[data-focus-visible="true"] {
+      @apply z-10 status-focused;
+    }
+
+    /* Disabled state */
+    &[data-disabled="true"] {
+      @apply cursor-default bg-default;
+    }
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+
+    [data-slot="label"] {
+      @apply opacity-100;
+    }
+  }
+
+  /* Horizontal orientation */
+  &[data-orientation="horizontal"] {
+    flex-direction: column;
+
+    .color-slider__track {
+      @apply h-5 justify-self-center rounded-none;
+      width: calc(100% - 1.25rem);
+
+      /* Default border for visibility against similar backgrounds */
+      box-shadow:
+        inset 0 1px 0 0 rgba(0, 0, 0, 0.1),
+        inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+
+      /* Edge caps for horizontal orientation */
+      &::before,
+      &::after {
+        @apply top-0 h-full;
+        width: 0.625rem; /* Half thumb width + 2px gap */
+      }
+
+      &::before {
+        left: -0.625rem;
+        border-top-left-radius: 999px;
+        border-bottom-left-radius: 999px;
+        box-shadow:
+          inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 0 rgba(0, 0, 0, 0.1),
+          inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+        background:
+          linear-gradient(var(--track-start-color, transparent)),
+          repeating-conic-gradient(#efefef 0% 25%, #f7f7f7 0% 50%) 50% / 16px 16px;
+      }
+
+      &::after {
+        right: -0.625rem;
+        border-top-right-radius: 999px;
+        border-bottom-right-radius: 999px;
+        box-shadow:
+          inset -1px 0 0 0 rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 0 rgba(0, 0, 0, 0.1),
+          inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+        background-color: var(--track-end-color, transparent);
+      }
+    }
+
+    .color-slider__thumb {
+      @apply top-1/2 size-4;
+    }
+  }
+
+  /* Vertical orientation */
+  &[data-orientation="vertical"] {
+    @apply h-full gap-2;
+
+    flex-direction: row;
+    grid-template-areas:
+      "output"
+      "track"
+      "label";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+
+    /* When neither label nor output exist in vertical, just show track */
+    &:not(:has([data-slot="label"])):not(:has(.color-slider__output)) {
+      grid-template-areas: "track";
+      grid-template-rows: 1fr;
+      gap: 0;
+    }
+
+    /* When only label exists in vertical (no output) */
+    &:has([data-slot="label"]):not(:has(.color-slider__output)) {
+      grid-template-areas:
+        "track"
+        "label";
+      grid-template-rows: 1fr auto;
+    }
+
+    /* When only output exists in vertical (no label) */
+    &:not(:has([data-slot="label"])):has(.color-slider__output) {
+      grid-template-areas:
+        "output"
+        "track";
+      grid-template-rows: auto 1fr;
+    }
+
+    .color-slider__output {
+      text-align: center;
+    }
+
+    [data-slot="label"] {
+      text-align: center;
+    }
+
+    .color-slider__track {
+      @apply w-5 justify-self-center rounded-none;
+      height: calc(100% - 1.25rem);
+
+      /* Left and right borders for vertical track */
+      box-shadow:
+        inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
+        inset -1px 0 0 0 rgba(0, 0, 0, 0.1);
+
+      /* Edge caps for vertical orientation */
+      &::before,
+      &::after {
+        @apply left-0 w-full;
+        height: 0.625rem; /* Half thumb height + 2px gap */
+      }
+
+      &::before {
+        bottom: -0.625rem;
+        border-bottom-left-radius: 999px;
+        border-bottom-right-radius: 999px;
+        /* Left, right, and bottom borders for bottom cap */
+        box-shadow:
+          inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
+          inset -1px 0 0 0 rgba(0, 0, 0, 0.1),
+          inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+        background:
+          linear-gradient(var(--track-start-color, transparent)),
+          repeating-conic-gradient(#efefef 0% 25%, #f7f7f7 0% 50%) 50% / 16px 16px;
+      }
+
+      &::after {
+        top: -0.625rem;
+        border-top-left-radius: 999px;
+        border-top-right-radius: 999px;
+        /* Left, right, and top borders for top cap */
+        box-shadow:
+          inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
+          inset -1px 0 0 0 rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 0 rgba(0, 0, 0, 0.1);
+        background-color: var(--track-end-color, transparent);
+      }
+    }
+
+    .color-slider__thumb {
+      @apply left-1/2 size-4;
+    }
+  }
+}
