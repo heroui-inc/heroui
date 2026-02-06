@@ -154,6 +154,30 @@ The [Toast](/docs/components/toast) component has been significantly improved wi
 
 Added variants to the [Separator](/docs/components/separator) component for different visual styles.
 
+### Chip Component - Label Slot
+
+The [Chip](/docs/components/chip) component now supports a `Chip.Label` subcomponent for better visual alignment. When removing start or end content (like icons), the label text was too close to the chip edges. Plain text children are automatically wrapped in `<Chip.Label>` for backward compatibility.
+
+**Usage:**
+
+```tsx
+import { Chip } from '@heroui/react';
+
+// Automatic wrapping (backward compatible)
+<Chip>Label text</Chip>
+
+// Explicit label with custom styling
+<Chip>
+  <Chip.Label className="font-bold">Custom Label</Chip.Label>
+</Chip>
+
+// Mixing icons and labels
+<Chip>
+  <Icon icon="gravity-ui:check" />
+  <Chip.Label>With Icon</Chip.Label>
+</Chip>
+```
+
 ## Style Fixes
 
 - **Overlay Content**: Fixed blur effect on overlay content (#6136)
