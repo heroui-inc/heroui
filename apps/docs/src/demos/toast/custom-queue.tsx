@@ -17,7 +17,7 @@ export function CustomQueue() {
           variant="secondary"
           onPress={() => {
             notificationQueue.add({
-              description: `Notification ${Date.now()}`,
+              description: "You have a new message",
               title: "New notification",
               variant: "default",
             });
@@ -35,7 +35,7 @@ export function CustomQueue() {
           variant="danger-soft"
           onPress={() => {
             errorQueue.add({
-              description: `Error ${Date.now()}`,
+              description: "Failed to save changes",
               title: "Error occurred",
               variant: "danger",
             });

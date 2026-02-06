@@ -41,22 +41,22 @@ function App() {
   name="toast-default"
 />
 
+### Simple Toasts
+
+<ComponentPreview
+  name="toast-simple"
+/>
+
 ### Variants
 
 <ComponentPreview
   name="toast-variants"
 />
 
-### Placements
+### Custom Indicators
 
 <ComponentPreview
-  name="toast-placements"
-/>
-
-### Simple Toasts
-
-<ComponentPreview
-  name="toast-simple"
+  name="toast-custom-indicator"
 />
 
 ### Promise & Loading
@@ -65,10 +65,16 @@ function App() {
   name="toast-promise"
 />
 
-### Custom Indicators
+### Callbacks
 
 <ComponentPreview
-  name="toast-custom-indicator"
+  name="toast-callbacks"
+/>
+
+### Placements
+
+<ComponentPreview
+  name="toast-placements"
 />
 
 ### Custom Toast Rendering
@@ -256,23 +262,23 @@ The default `toast` function provides convenient methods for showing toasts:
 ```tsx
 import { toast } from '@heroui/react';
 
-// Basic toast
-toast("Message");
+// Basic toast (auto-dismisses after 4 seconds by default)
+toast("Event has been created");
 
-// Variant methods
-toast.success("Success message");
-toast.info("Info message");
-toast.warning("Warning message");
-toast.danger("Error message");
+// Variant methods (also auto-dismiss after 4 seconds by default)
+toast.success("File saved");
+toast.info("New update available");
+toast.warning("Please check your settings");
+toast.danger("Something went wrong");
 
 // With options
-toast("Message", {
-  description: "Additional details",
+toast("Event has been created", {
+  description: "Your event has been scheduled for tomorrow",
   variant: "default",
-  timeout: 5000,
+  timeout: 5000, // Custom timeout: 5 seconds
   onClose: () => console.log("Closed"),
   actionProps: {
-    children: "Action",
+    children: "View",
     onPress: () => {},
   },
   indicator: <CustomIcon />,
@@ -280,23 +286,23 @@ toast("Message", {
 
 // Promise support (automatically shows loading spinner)
 toast.promise(
-  fetchData(),
+  uploadFile(),
   {
-    loading: "Loading...",
-    success: "Data loaded",
-    error: "Failed to load",
+    loading: "Uploading file...",
+    success: (data) => `File ${data.filename} uploaded`,
+    error: "Failed to upload file",
   }
 );
 
-// Manual loading state
-const loadingId = toast("Processing...", {
+// Manual loading state (persistent toast - no auto-dismiss)
+const loadingId = toast("Creating event...", {
   isLoading: true,
-  timeout: 0,
+  timeout: 0, // Persistent toast that doesn't auto-dismiss
 });
 
 // Later, close and show result
 toast.close(loadingId);
-toast.success("Done!");
+toast.success("Event created");
 
 // Queue methods
 toast.close(key);
@@ -315,7 +321,7 @@ toast.resumeAll();
 | `indicator` | `ReactNode` | - | Custom indicator icon (null to hide) |
 | `actionProps` | `ButtonProps` | - | Props for action button |
 | `isLoading` | `boolean` | `false` | Show loading spinner instead of indicator |
-| `timeout` | `number` | - | Auto-dismiss timeout in milliseconds (0 for persistent) |
+| `timeout` | `number` | `4000` | Auto-dismiss timeout in milliseconds. Defaults to 4000ms (4 seconds). Set to `0` for persistent toasts that don't auto-dismiss |
 | `onClose` | `() => void` | - | Callback when toast is closed |
 
 #### toast.promise Options

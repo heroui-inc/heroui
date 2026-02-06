@@ -1353,21 +1353,29 @@ export const demos: Record<string, DemoItem> = {
     component: ToastDemos.Default,
     file: "toast/default.tsx",
   },
-  "toast-variants": {
-    component: ToastDemos.Variants,
-    file: "toast/variants.tsx",
-  },
-  "toast-placements": {
-    component: ToastDemos.Placements,
-    file: "toast/placements.tsx",
-  },
   "toast-simple": {
     component: ToastDemos.Simple,
     file: "toast/simple.tsx",
   },
+  "toast-variants": {
+    component: ToastDemos.Variants,
+    file: "toast/variants.tsx",
+  },
   "toast-custom-indicator": {
     component: ToastDemos.CustomIndicator,
     file: "toast/custom-indicator.tsx",
+  },
+  "toast-promise": {
+    component: ToastDemos.Promise,
+    file: "toast/promise.tsx",
+  },
+  "toast-callbacks": {
+    component: ToastDemos.Callbacks,
+    file: "toast/callbacks.tsx",
+  },
+  "toast-placements": {
+    component: ToastDemos.Placements,
+    file: "toast/placements.tsx",
   },
   "toast-custom-toast": {
     component: ToastDemos.CustomToast,
@@ -1376,10 +1384,6 @@ export const demos: Record<string, DemoItem> = {
   "toast-custom-queue": {
     component: ToastDemos.CustomQueue,
     file: "toast/custom-queue.tsx",
-  },
-  "toast-promise": {
-    component: ToastDemos.Promise,
-    file: "toast/promise.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

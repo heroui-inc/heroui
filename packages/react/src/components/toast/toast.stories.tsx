@@ -151,8 +151,8 @@ const placementQueues = Object.fromEntries(
 const PlacementsTemplate = () => {
   const showToast = (placement: Placement) => {
     placementQueues[placement].add({
-      description: "This toast demonstrates the placement option",
-      title: `Toast at ${placement}`,
+      description: "Event has been created",
+      title: "Event created",
       variant: "default",
     });
   };
@@ -185,23 +185,23 @@ const SimpleToastTemplate = () => {
       <Toast.Provider placement="bottom" />
       <div className="flex w-full flex-wrap items-center justify-center gap-4">
         <Button size="sm" variant="secondary" onPress={() => toast("Simple message")}>
-          Simple toast
+          Default
         </Button>
         <Button size="sm" variant="secondary" onPress={() => toast.success("Operation completed")}>
-          Success (simple)
+          Success
         </Button>
         <Button size="sm" variant="secondary" onPress={() => toast.info("New update available")}>
-          Info (simple)
+          Info
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() => toast.warning("Please check your settings")}
         >
-          Warning (simple)
+          Warning
         </Button>
         <Button size="sm" variant="secondary" onPress={() => toast.danger("Something went wrong")}>
-          Danger (simple)
+          Error
         </Button>
       </div>
     </div>
@@ -214,27 +214,33 @@ export const SimpleToast = {
 
 // Promise Toast - Async operations with loading/success/error states
 const PromiseToastTemplate = () => {
-  const simulateSuccess = (): Promise<{message: string}> => {
+  const uploadFile = (): Promise<{filename: string; size: number}> => {
     return new Promise((resolve) => {
-      setTimeout(() => resolve({message: "File uploaded successfully"}), 2000);
+      setTimeout(() => resolve({filename: "document.pdf", size: 1024}), 2000);
     });
   };
 
-  const simulateError = (): Promise<never> => {
+  const createEvent = (): Promise<never> => {
     return new Promise((_, reject) => {
-      setTimeout(() => reject(new Error("Upload failed. Please try again.")), 2000);
+      setTimeout(() => reject(new Error("Network error. Please try again.")), 2000);
     });
   };
 
-  const simulateRandom = (): Promise<{count: number}> => {
+  const saveData = (): Promise<{count: number}> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (Math.random() > 0.5) {
           resolve({count: 42});
         } else {
-          reject(new Error("Random error occurred"));
+          reject(new Error("Failed to save data"));
         }
       }, 2000);
+    });
+  };
+
+  const fetchUser = (): Promise<{name: string; email: string}> => {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve({name: "John Doe", email: "john@example.com"}), 2000);
     });
   };
 
@@ -246,59 +252,53 @@ const PromiseToastTemplate = () => {
           size="sm"
           variant="secondary"
           onPress={() => {
-            toast.promise(simulateSuccess(), {
-              error: "Upload failed. Please try again.",
+            toast.promise(uploadFile(), {
+              error: "Failed to upload file",
               loading: "Uploading file...",
-              success: "File uploaded successfully",
+              success: (data) => `File ${data.filename} uploaded (${data.size}KB)`,
             });
           }}
         >
-          Promise (success)
+          Upload file
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() => {
-            toast.promise(simulateError(), {
+            toast.promise(createEvent(), {
               error: (err) => err.message,
-              loading: "Processing request...",
-              success: "Request completed",
+              loading: "Creating event...",
+              success: "Event created",
             });
           }}
         >
-          Promise (error)
+          Create event (error)
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() => {
-            toast.promise(simulateRandom(), {
+            toast.promise(saveData(), {
               error: (err) => err.message,
-              loading: "Loading data...",
-              success: (data) => `Loaded ${data.count} items`,
+              loading: "Saving changes...",
+              success: (data) => `Saved ${data.count} items`,
             });
           }}
         >
-          Promise (random)
+          Save data (random)
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() => {
-            toast.promise(
-              (): Promise<{user: string}> =>
-                new Promise((resolve) => {
-                  setTimeout(() => resolve({user: "John Doe"}), 2000);
-                }),
-              {
-                error: "Failed to create account",
-                loading: "Creating account...",
-                success: (data: {user: string}) => `Welcome, ${data.user}!`,
-              },
-            );
+            toast.promise(fetchUser(), {
+              error: "Failed to fetch user",
+              loading: "Loading user...",
+              success: (data) => `Welcome back, ${data.name}!`,
+            });
           }}
         >
-          Promise (function)
+          Fetch user
         </Button>
       </div>
     </div>
@@ -333,8 +333,8 @@ export const CustomIndicator = {
   render: CustomIndicatorTemplate,
 };
 
-// With Callbacks - Timeout and onClose
-const WithCallbacksTemplate = () => {
+// Loading State - Manual loading toasts
+const LoadingStateTemplate = () => {
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
       <Toast.Provider placement="bottom" />
@@ -342,10 +342,95 @@ const WithCallbacksTemplate = () => {
         <Button
           size="sm"
           variant="secondary"
+          onPress={() => {
+            const loadingId = toast("Uploading file...", {
+              description: "Please wait while we upload your file",
+              isLoading: true,
+              timeout: 0,
+            });
+
+            setTimeout(() => {
+              toast.close(loadingId);
+              toast.success("File uploaded", {
+                description: "Your file has been uploaded successfully",
+              });
+            }, 3000);
+          }}
+        >
+          Upload with loading
+        </Button>
+        <Button
+          size="sm"
+          variant="secondary"
+          onPress={() => {
+            const loadingId = toast("Processing payment...", {
+              isLoading: true,
+              timeout: 0,
+            });
+
+            setTimeout(() => {
+              toast.close(loadingId);
+              toast.success("Payment processed", {
+                description: "Your payment has been processed successfully",
+              });
+            }, 2500);
+          }}
+        >
+          Payment processing
+        </Button>
+        <Button
+          size="sm"
+          variant="secondary"
+          onPress={() => {
+            const loadingId = toast("Saving changes...", {
+              isLoading: true,
+              timeout: 0,
+            });
+
+            setTimeout(() => {
+              toast.close(loadingId);
+              toast.danger("Failed to save", {
+                description: "Please try again",
+              });
+            }, 2000);
+          }}
+        >
+          Loading to error
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export const LoadingState = {
+  render: LoadingStateTemplate,
+};
+
+// With Callbacks - Timeout and onClose
+const WithCallbacksTemplate = () => {
+  const [closedHistory, setClosedHistory] = React.useState<Array<{message: string; time: string}>>(
+    [],
+  );
+
+  const addToHistory = (message: string) => {
+    const time = new Date().toLocaleTimeString();
+
+    setClosedHistory((prev) => [{message, time}, ...prev].slice(0, 5));
+  };
+
+  return (
+    <div className="flex h-full max-w-2xl flex-col items-center justify-center gap-6">
+      <Toast.Provider placement="bottom" />
+
+      {/* Toast Buttons */}
+      <div className="flex w-full flex-wrap items-center justify-center gap-4">
+        <Button
+          size="sm"
+          variant="secondary"
           onPress={() =>
-            toast("This toast closes in 3 seconds", {
+            toast("File saved", {
               onClose: () => {
-                toast.info("Toast was closed");
+                addToHistory("File saved (closed after 3 seconds)");
               },
               timeout: 3000,
             })
@@ -357,9 +442,9 @@ const WithCallbacksTemplate = () => {
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast("This toast closes in 10 seconds", {
+            toast("Changes saved", {
               onClose: () => {
-                toast.info("Toast closed after 10 seconds");
+                addToHistory("Changes saved (closed after 10 seconds)");
               },
               timeout: 10000,
             })
@@ -371,9 +456,9 @@ const WithCallbacksTemplate = () => {
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast.success("Operation completed", {
+            toast.success("Event created", {
               onClose: () => {
-                toast.info("Previous toast closed");
+                addToHistory("Event created (closed after default timeout)");
               },
             })
           }
@@ -384,16 +469,65 @@ const WithCallbacksTemplate = () => {
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast("Persistent toast (no timeout)", {
+            toast("Important notification", {
+              description: "This toast will stay until dismissed",
               onClose: () => {
-                toast.info("Persistent toast was manually closed");
+                addToHistory("Important notification (manually closed)");
               },
               timeout: 0,
             })
           }
         >
-          Persistent (no timeout)
+          Persistent toast
         </Button>
+      </div>
+
+      {/* Closed History Panel */}
+      <div className="w-full space-y-2">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-medium">Closed History</h3>
+          {closedHistory.length > 0 && (
+            <Button
+              className="h-6 text-xs"
+              size="sm"
+              variant="tertiary"
+              onPress={() => setClosedHistory([])}
+            >
+              Clear
+            </Button>
+          )}
+        </div>
+        <div className="min-h-[120px] space-y-2 rounded-lg border border-border bg-surface p-4">
+          {closedHistory.length === 0 ? (
+            <p className="text-sm text-muted">No toasts closed yet. Try closing one above!</p>
+          ) : (
+            closedHistory.map((item, index) => (
+              <div
+                key={`${item.time}-${index}`}
+                className="flex animate-in items-start justify-between gap-3 rounded-md border border-border bg-default px-3 py-2 text-sm duration-200 fade-in slide-in-from-top-2"
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                }}
+              >
+                <div className="flex-1">
+                  <span className="font-medium">{item.message}</span>
+                  <span className="ml-2 text-xs text-muted">({item.time})</span>
+                </div>
+                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/10 text-success">
+                  <svg
+                    className="size-3"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
@@ -474,7 +608,7 @@ const CustomQueueTemplate = () => {
           variant="secondary"
           onPress={() => {
             notificationQueue.add({
-              description: `Notification ${Date.now()}`,
+              description: "You have a new message",
               title: "New notification",
               variant: "default",
             });
@@ -492,7 +626,7 @@ const CustomQueueTemplate = () => {
           variant="danger-soft"
           onPress={() => {
             errorQueue.add({
-              description: `Error ${Date.now()}`,
+              description: "Failed to save changes",
               title: "Error occurred",
               variant: "danger",
             });

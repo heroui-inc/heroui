@@ -1,3 +1,4 @@
+export {Callbacks} from "./callbacks";
 export {CustomIndicator} from "./custom-indicator";
 export {CustomQueue} from "./custom-queue";
 export {CustomToast} from "./custom-toast";
