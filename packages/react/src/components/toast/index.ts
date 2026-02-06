@@ -76,6 +76,6 @@ export {ToastQueue, toast, toastQueue};
 /* -------------------------------------------------------------------------------------------------
  * Constants
  * -----------------------------------------------------------------------------------------------*/
-export {DEFAULT_MAX_VISIBLE_TOAST, DEFAULT_GAP} from "./constants";
+export {DEFAULT_MAX_VISIBLE_TOAST, DEFAULT_GAP, DEFAULT_TOAST_TIMEOUT} from "./constants";
 
 export type {ToastQueueOptions, ToastContentValue} from "./toast-queue";

@@ -10,7 +10,7 @@ import type {
 import {UNSTABLE_ToastQueue as ToastQueuePrimitive} from "react-aria-components";
 import {flushSync} from "react-dom";
 
-import {DEFAULT_RAC_MAX_VISIBLE_TOAST} from "./constants";
+import {DEFAULT_RAC_MAX_VISIBLE_TOAST, DEFAULT_TOAST_TIMEOUT} from "./constants";
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Options
@@ -48,7 +48,13 @@ export class ToastQueue<T extends object = ToastContentValue> {
   }
 
   add(content: T, options?: RACToastOptions): string {
-    return this.queue.add(content, options);
+    // Apply default timeout if not provided, but respect explicit 0 (persistent toast)
+    const timeout = options?.timeout !== undefined ? options.timeout : DEFAULT_TOAST_TIMEOUT;
+
+    return this.queue.add(content, {
+      ...options,
+      timeout,
+    });
   }
 
   close(key: string): void {
@@ -112,6 +118,9 @@ export interface ToastPromiseOptions<T = unknown> {
 // Helper function to create toast
 function createToastFunction(queue: ToastQueue<ToastContentValue>) {
   const toastFn = (message: ReactNode, options?: HeroUIToastOptions): string => {
+    // Use default timeout if not provided, but respect explicit 0 (persistent toast)
+    const timeout = options?.timeout !== undefined ? options.timeout : DEFAULT_TOAST_TIMEOUT;
+
     return queue.add(
       {
         title: message,
@@ -122,7 +131,7 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
         isLoading: options?.isLoading,
       },
       {
-        timeout: options?.timeout,
+        timeout,
         onClose: () => {
           requestAnimationFrame(() => {
             options?.onClose?.();
