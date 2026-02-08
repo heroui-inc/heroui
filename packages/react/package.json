@@ -56,7 +56,6 @@
   "clean-package": "./clean-package.config.json",
   "dependencies": {
     "@heroui/styles": "workspace:*",
-    "@internationalized/date": "3.11.0",
     "@radix-ui/react-avatar": "1.1.11",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/utils": "3.33.0",
@@ -70,6 +69,7 @@
   "devDependencies": {
     "@heroui/standard": "workspace:*",
     "@iconify/react": "6.0.2",
+    "@internationalized/date": "3.11.0",
     "@react-stately/data": "3.15.1",
     "@storybook/react": "10.1.10",
     "@types/fs-extra": "11.0.4",

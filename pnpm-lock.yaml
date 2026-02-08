@@ -346,9 +346,6 @@ importers:
       '@heroui/styles':
         specifier: workspace:*
         version: link:../styles
-      '@internationalized/date':
-        specifier: 3.11.0
-        version: 3.11.0
       '@radix-ui/react-avatar':
         specifier: 1.1.11
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -383,6 +380,9 @@ importers:
       '@iconify/react':
         specifier: 6.0.2
         version: 6.0.2(react@19.2.3)
+      '@internationalized/date':
+        specifier: 3.11.0
+        version: 3.11.0
       '@react-stately/data':
         specifier: 3.15.1
         version: 3.15.1(react@19.2.3)
