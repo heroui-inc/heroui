@@ -659,7 +659,7 @@ export const CustomValueMultiple: Story = {
                       <AvatarImage src={selectedItem.avatarUrl} />
                       <AvatarFallback>{selectedItem.fallback}</AvatarFallback>
                     </Avatar>
-                    <span>{selectedItem.name}</span>
+                    <Chip.Label>{selectedItem.name}</Chip.Label>
                   </Chip>
                 );
               });

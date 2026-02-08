@@ -1196,9 +1196,9 @@ export const demos: Record<string, DemoItem> = {
     component: SeparatorDemos.Variants,
     file: "separator/variants.tsx",
   },
-  "separator-surface-variants": {
-    component: SeparatorDemos.SurfaceVariants,
-    file: "separator/surface-variants.tsx",
+  "separator-with-surface": {
+    component: SeparatorDemos.WithSurface,
+    file: "separator/with-surface.tsx",
   },
   "separator-manual-variant-override": {
     component: SeparatorDemos.ManualVariantOverride,

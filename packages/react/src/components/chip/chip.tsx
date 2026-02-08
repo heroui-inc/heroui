@@ -4,6 +4,18 @@ import type {ChipVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {chipVariants} from "@heroui/styles";
+import React, {createContext, useContext} from "react";
+
+import {composeSlotClassName} from "../../utils/compose";
+
+/* -------------------------------------------------------------------------------------------------
+ * Chip Context
+ * -----------------------------------------------------------------------------------------------*/
+type ChipContext = {
+  slots?: ReturnType<typeof chipVariants>;
+};
+
+const ChipContext = createContext<ChipContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Chip Root
@@ -14,8 +26,41 @@ interface ChipRootProps extends Omit<ComponentPropsWithRef<"div">, "type" | "col
 }
 
 const ChipRoot = ({children, className, color, size, variant, ...props}: ChipRootProps) => {
+  const slots = React.useMemo(() => chipVariants({color, size, variant}), [color, size, variant]);
+
+  const chipChildren = React.useMemo(() => {
+    if (typeof children === "string" || typeof children === "number") {
+      return <ChipLabel>{children}</ChipLabel>;
+    }
+
+    return children;
+  }, [children]);
+
   return (
-    <span {...props} className={chipVariants({className, size, color, variant})}>
+    <ChipContext value={{slots}}>
+      <span {...props} className={composeSlotClassName(slots.base, className)} data-slot="chip">
+        {chipChildren}
+      </span>
+    </ChipContext>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Chip Label
+ * -----------------------------------------------------------------------------------------------*/
+interface ChipLabelProps extends ComponentPropsWithRef<"span"> {
+  className?: string;
+}
+
+const ChipLabel = ({children, className, ...props}: ChipLabelProps) => {
+  const {slots} = useContext(ChipContext);
+
+  return (
+    <span
+      className={composeSlotClassName(slots?.label, className)}
+      data-slot="chip-label"
+      {...props}
+    >
       {children}
     </span>
   );
@@ -24,6 +69,6 @@ const ChipRoot = ({children, className, color, size, variant, ...props}: ChipRoo
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ChipRoot};
+export {ChipRoot, ChipLabel};
 
-export type {ChipRootProps};
+export type {ChipRootProps, ChipLabelProps};

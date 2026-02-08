@@ -7,38 +7,38 @@ export function ChipStatuses() {
       <div className="flex flex-wrap items-center gap-3">
         <Chip variant="primary">
           <CircleFill width={6} />
-          Default
+          <Chip.Label>Default</Chip.Label>
         </Chip>
         <Chip color="success" variant="primary">
           <CircleFill width={6} />
-          Active
+          <Chip.Label>Active</Chip.Label>
         </Chip>
         <Chip color="warning" variant="primary">
           <CircleFill width={6} />
-          Pending
+          <Chip.Label>Pending</Chip.Label>
         </Chip>
         <Chip color="danger" variant="primary">
           <CircleFill width={6} />
-          Inactive
+          <Chip.Label>Inactive</Chip.Label>
         </Chip>
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
         <Chip>
           <CircleInfo width={12} />
-          New Feature
+          <Chip.Label>New Feature</Chip.Label>
         </Chip>
         <Chip color="success">
           <Check width={12} />
-          Available
+          <Chip.Label>Available</Chip.Label>
         </Chip>
         <Chip color="warning">
           <TriangleExclamation width={12} />
-          Beta
+          <Chip.Label>Beta</Chip.Label>
         </Chip>
         <Chip color="danger">
           <Ban width={12} />
-          Deprecated
+          <Chip.Label>Deprecated</Chip.Label>
         </Chip>
       </div>
     </div>

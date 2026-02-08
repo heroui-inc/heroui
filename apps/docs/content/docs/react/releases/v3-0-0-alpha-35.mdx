@@ -361,7 +361,7 @@ sed -i 's/<\/Switch\.GroupItems>//g' **/*.tsx
 - Be careful with automated replacements. Make sure you're only replacing compound pattern usage, not named exports.
 - For Switch migrations, verify that `SwitchGroup` is imported: `import { Switch, SwitchGroup } from "@heroui/react"`
 - Test your code after running automated migrations to ensure all changes are correct.
- 
+
 ## Why This Change?
 
 This change was necessary to fix React Server Components compatibility. The previous implementation had architectural limitations:
@@ -391,7 +391,7 @@ If you encounter any issues during migration:
 
 ## Links
 
-- [Component Documentation](https://heroui.com/docs/components)
+- [Component Documentation](/docs/react/components)
 - [React Server Components](https://react.dev/reference/rsc/server-components)
 - [React 19 Release](https://react.dev/blog/2024/12/05/react-19)
 - [GitHub Repository](https://github.com/heroui-inc/heroui)
