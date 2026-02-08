@@ -11,6 +11,7 @@ import {tv} from "tailwind-variants";
 import {ShowcaseItem} from "@/components/showcase-item";
 import {ShowcasePreview} from "@/components/showcase-preview";
 import {getAllShowcases} from "@/showcases";
+import {cn} from "@/utils/cn";
 
 import {ShowcaseHeader} from "./showcase-header";
 
@@ -111,10 +112,12 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
                 <LinkRoot
                   key={component}
                   href={`/docs/components/${component.toLowerCase().replace(/group$/, "-group")}`}
-                  className={chipVariants({
-                    class: "rounded-full text-muted hover:bg-default/50",
-                    variant: "tertiary",
-                  })}
+                  className={cn(
+                    chipVariants({
+                      class: "rounded-full text-muted hover:bg-default/50",
+                      variant: "tertiary",
+                    }),
+                  )}
                 >
                   {component}
                 </LinkRoot>

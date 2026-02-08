@@ -54,6 +54,7 @@
  * Colors
  * ------------------------------------------------------------------------------------------------ */
 @import "./color-area.css";
+@import "./color-picker.css";
 @import "./color-slider.css";
 @import "./color-swatch.css";
 @import "./color-swatch-picker.css";

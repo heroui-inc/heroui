@@ -6,22 +6,22 @@ export function ChipWithIcon() {
     <div className="flex flex-wrap items-center gap-3">
       <Chip>
         <CircleFill width={6} />
-        Information
+        <Chip.Label>Information</Chip.Label>
       </Chip>
       <Chip color="success">
         <CircleCheckFill width={12} />
-        Completed
+        <Chip.Label>Completed</Chip.Label>
       </Chip>
       <Chip color="warning">
         <Clock width={12} />
-        Pending
+        <Chip.Label>Pending</Chip.Label>
       </Chip>
       <Chip color="danger">
         <Xmark width={12} />
-        Failed
+        <Chip.Label>Failed</Chip.Label>
       </Chip>
       <Chip color="accent">
-        Label
+        <Chip.Label>Label</Chip.Label>
         <ChevronDown width={12} />
       </Chip>
     </div>

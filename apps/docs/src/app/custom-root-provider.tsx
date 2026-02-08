@@ -18,8 +18,8 @@ export function CustomRootProvider({children}: {children: ReactNode}) {
       }}
     >
       {children}
-      {/* Global toast container for demos using the default toast() function */}
-      <Toast.Container />
+      {/* Global toast provider for demos using the default toast() function */}
+      <Toast.Provider />
     </RootProvider>
   );
 }

@@ -16,6 +16,7 @@ import * as ChipDemos from "./chip";
 import * as CloseButtonDemos from "./close-button";
 import * as ColorAreaDemos from "./color-area";
 import * as ColorFieldDemos from "./color-field";
+import * as ColorPickerDemos from "./color-picker";
 import * as ColorSliderDemos from "./color-slider";
 import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
@@ -467,6 +468,27 @@ export const demos: Record<string, DemoItem> = {
   "color-field-with-description": {
     component: ColorFieldDemos.WithDescription,
     file: "color-field/with-description.tsx",
+  },
+  // ColorPicker demos
+  "color-picker-basic": {
+    component: ColorPickerDemos.Basic,
+    file: "color-picker/basic.tsx",
+  },
+  "color-picker-controlled": {
+    component: ColorPickerDemos.Controlled,
+    file: "color-picker/controlled.tsx",
+  },
+  "color-picker-with-swatches": {
+    component: ColorPickerDemos.WithSwatches,
+    file: "color-picker/with-swatches.tsx",
+  },
+  "color-picker-with-fields": {
+    component: ColorPickerDemos.WithFields,
+    file: "color-picker/with-fields.tsx",
+  },
+  "color-picker-with-sliders": {
+    component: ColorPickerDemos.WithSliders,
+    file: "color-picker/with-sliders.tsx",
   },
   // ColorArea demos
   "color-area-basic": {
@@ -1174,9 +1196,9 @@ export const demos: Record<string, DemoItem> = {
     component: SeparatorDemos.Variants,
     file: "separator/variants.tsx",
   },
-  "separator-surface-variants": {
-    component: SeparatorDemos.SurfaceVariants,
-    file: "separator/surface-variants.tsx",
+  "separator-with-surface": {
+    component: SeparatorDemos.WithSurface,
+    file: "separator/with-surface.tsx",
   },
   "separator-manual-variant-override": {
     component: SeparatorDemos.ManualVariantOverride,
@@ -1455,21 +1477,29 @@ export const demos: Record<string, DemoItem> = {
     component: ToastDemos.Default,
     file: "toast/default.tsx",
   },
-  "toast-variants": {
-    component: ToastDemos.Variants,
-    file: "toast/variants.tsx",
-  },
-  "toast-placements": {
-    component: ToastDemos.Placements,
-    file: "toast/placements.tsx",
-  },
   "toast-simple": {
     component: ToastDemos.Simple,
     file: "toast/simple.tsx",
   },
+  "toast-variants": {
+    component: ToastDemos.Variants,
+    file: "toast/variants.tsx",
+  },
   "toast-custom-indicator": {
     component: ToastDemos.CustomIndicator,
     file: "toast/custom-indicator.tsx",
+  },
+  "toast-promise": {
+    component: ToastDemos.Promise,
+    file: "toast/promise.tsx",
+  },
+  "toast-callbacks": {
+    component: ToastDemos.Callbacks,
+    file: "toast/callbacks.tsx",
+  },
+  "toast-placements": {
+    component: ToastDemos.Placements,
+    file: "toast/placements.tsx",
   },
   "toast-custom-toast": {
     component: ToastDemos.CustomToast,

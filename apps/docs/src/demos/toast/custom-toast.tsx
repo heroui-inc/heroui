@@ -17,7 +17,7 @@ export function CustomToast() {
 
   return (
     <div className="flex h-full max-w-xl flex-col items-center justify-center">
-      <Toast.Container placement="bottom" queue={customQueue}>
+      <Toast.Provider placement="bottom" queue={customQueue}>
         {({toast: toastItem}) => {
           const content = toastItem.content as ToastContentValue;
 
@@ -44,7 +44,7 @@ export function CustomToast() {
             </Toast>
           );
         }}
-      </Toast.Container>
+      </Toast.Provider>
       <Button
         size="sm"
         variant="secondary"

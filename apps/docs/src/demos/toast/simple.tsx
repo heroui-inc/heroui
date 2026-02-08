@@ -23,7 +23,7 @@ export function Simple() {
           Warning
         </Button>
         <Button size="sm" variant="secondary" onPress={() => toast.danger("Something went wrong")}>
-          Danger
+          Error
         </Button>
       </div>
     </div>

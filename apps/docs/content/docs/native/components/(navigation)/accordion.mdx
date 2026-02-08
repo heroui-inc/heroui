@@ -1,6 +1,7 @@
 ---
 title: Accordion
 description: A collapsible content panel for organizing information in a compact space
+icon: updated
 links:
   source_native: accordion/accordion.tsx
   styles_native: accordion/accordion.styles.ts
@@ -128,12 +129,12 @@ Replace the default chevron indicator with custom content.
 </Accordion>
 ```
 
-### Without Dividers
+### Without Separators
 
-Hide the dividers between accordion items.
+Hide the separators between accordion items.
 
 ```tsx
-<Accordion selectionMode="single" isDividerVisible={false}>
+<Accordion selectionMode="single" hideSeparator>
   <Accordion.Item value="1">
     <Accordion.Trigger>...</Accordion.Trigger>
     <Accordion.Content>...</Accordion.Content>
@@ -241,7 +242,7 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | `children`              | `React.ReactNode`                                  | -           | Children elements to be rendered inside the accordion             |
 | `selectionMode`         | `'single' \| 'multiple'`                           | -           | Whether the accordion allows single or multiple expanded items    |
 | `variant`               | `'default' \| 'surface'`                           | `'default'` | Visual variant of the accordion                                   |
-| `isDividerVisible`      | `boolean`                                          | `true`      | Whether to display a divider at the bottom of each accordion item |
+| `hideSeparator`         | `boolean`                                          | `false`     | Whether to hide the separator between accordion items             |
 | `defaultValue`          | `string \| string[] \| undefined`                  | -           | Default expanded item(s) in uncontrolled mode                     |
 | `value`                 | `string \| string[] \| undefined`                  | -           | Controlled expanded item(s)                                       |
 | `isDisabled`            | `boolean`                                          | -           | Whether all accordion items are disabled                          |
@@ -257,7 +258,7 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | prop        | type     | description                                     |
 | ----------- | -------- | ----------------------------------------------- |
 | `container` | `string` | Custom class name for the accordion container   |
-| `divider`   | `string` | Custom class name for the divider between items |
+| `separator` | `string` | Custom class name for the separator between items |
 
 #### AccordionRootAnimation
 

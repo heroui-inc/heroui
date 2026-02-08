@@ -1,0 +1,104 @@
+/* ==========================================================================
+   ColorPicker - Color selection component with popover
+   ========================================================================== */
+
+/* Base color-picker styles */
+.color-picker {
+  @apply inline-flex;
+}
+
+/* ==========================================================================
+   Trigger
+   ========================================================================== */
+
+.color-picker__trigger {
+  @apply inline-flex items-center gap-3 rounded-sm text-sm no-highlight;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    background-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  [data-slot="label"] {
+    cursor: var(--cursor-interactive);
+  }
+
+  /* Focus visible state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+/* ==========================================================================
+   Popover
+   ========================================================================== */
+
+.color-picker__popover {
+  @apply min-w-62 origin-(--trigger-anchor-point) overflow-x-hidden overflow-y-auto overscroll-contain bg-overlay px-2 pt-2 pb-3;
+  box-shadow: var(--shadow-overlay);
+  border-radius: calc(var(--radius) * 2.5);
+  /* Content layout */
+  @apply flex flex-col gap-3;
+
+  /* Hide scrollbar */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* For IE and Edge */
+  -ms-overflow-style: none;
+  /* For Firefox */
+  scrollbar-width: none;
+
+  /* Focus state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply outline-none;
+  }
+
+  /* Entering animations */
+  &[data-entering="true"] {
+    @apply animate-in duration-150 ease-smooth fade-in-0 zoom-in-95;
+
+    /* Placement-specific translations */
+    &[data-placement^="top"] {
+      @apply slide-in-from-bottom-1;
+    }
+
+    &[data-placement^="bottom"] {
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement^="left"] {
+      @apply slide-in-from-right-1;
+    }
+
+    &[data-placement^="right"] {
+      @apply slide-in-from-left-1;
+    }
+  }
+
+  /* Exiting animations */
+  &[data-exiting="true"] {
+    @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+  }
+
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
+  }
+}

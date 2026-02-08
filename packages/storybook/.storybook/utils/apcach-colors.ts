@@ -19,6 +19,8 @@ const DEFAULT_THEME_VALUES = {
     background: {l: 0.9702, c: 0, h: 0},
     foreground: {l: 0.2103, c: 0.0059, h: 285.89},
     surface: {l: 1, c: 0, h: 0}, // Pure white (var(--white): oklch(100% 0 0))
+    surfaceSecondary: {l: 0.9524, c: 0.0013, h: 286.37},
+    surfaceTertiary: {l: 0.9373, c: 0.0013, h: 286.37},
     overlay: {l: 1, c: 0, h: 0}, // Pure white (var(--white): oklch(100% 0 0))
     muted: {l: 0.5517, c: 0.0138, h: 285.94},
     scrollbar: {l: 0.871, c: 0.006, h: 286.286},
@@ -35,6 +37,8 @@ const DEFAULT_THEME_VALUES = {
     background: {l: 0.12, c: 0.005, h: 285.823},
     foreground: {l: 0.9911, c: 0, h: 0}, // var(--snow): oklch(0.9911 0 0)
     surface: {l: 0.2103, c: 0.0059, h: 285.89},
+    surfaceSecondary: {l: 0.257, c: 0.0037, h: 286.14},
+    surfaceTertiary: {l: 0.2721, c: 0.0024, h: 247.91},
     overlay: {l: 0.2103, c: 0.0059, h: 285.89},
     muted: {l: 0.705, c: 0.015, h: 286.067},
     scrollbar: {l: 0.705, c: 0.015, h: 286.067},
@@ -93,6 +97,10 @@ export interface GeneratedColors {
   default: ThemeColor;
   defaultForeground: ThemeColor;
   surface: ThemeColor;
+  surfaceSecondary: ThemeColor;
+  surfaceSecondaryForeground: ThemeColor;
+  surfaceTertiary: ThemeColor;
+  surfaceTertiaryForeground: ThemeColor;
   overlay: ThemeColor;
   scrollbar: ThemeColor;
   segment: ThemeColor;
@@ -301,11 +309,11 @@ export function generateThemeColors(hue: number, chroma: number): GeneratedColor
   };
 
   // --foreground: Uses CSS variables (eclipse/snow), no adjustment needed
-  const foreground: ThemeColor = createThemeColor(
-    "--foreground",
-    defaultsLight.foreground,
-    defaultsDark.foreground,
-  );
+  const foreground: ThemeColor = {
+    name: "--foreground",
+    oklchLight: formatOklch(adjustChroma(adjustHue(defaultsLight.foreground, hue), chroma)),
+    oklchDark: formatOklch(adjustChroma(adjustHue(defaultsDark.foreground, hue), chroma)),
+  };
 
   // --accent: Keep original chroma but adjust hue
   const accent: ThemeColor = {
@@ -347,6 +355,42 @@ export function generateThemeColors(hue: number, chroma: number): GeneratedColor
     name: "--surface",
     oklchLight: formatOklch(adjustChroma(adjustHue(defaultsLight.surface, hue), chroma * 0.5)),
     oklchDark: formatOklch(adjustChroma(adjustHue(defaultsDark.surface, hue), chroma * 2)),
+  };
+
+  // --surface-secondary: Apply hue and chroma adjustments
+  const surfaceSecondaryColor: ThemeColor = {
+    name: "--surface-secondary",
+    oklchLight: formatOklch(
+      adjustChroma(adjustHue(defaultsLight.surfaceSecondary, hue), chroma * 0.8),
+    ),
+    oklchDark: formatOklch(
+      adjustChroma(adjustHue(defaultsDark.surfaceSecondary, hue), chroma * 1.5),
+    ),
+  };
+
+  // --surface-secondary-foreground: Uses foreground value
+  const surfaceSecondaryForeground: ThemeColor = {
+    name: "--surface-secondary-foreground",
+    oklchLight: formatOklch(adjustChroma(adjustHue(defaultsLight.foreground, hue), chroma)),
+    oklchDark: formatOklch(adjustChroma(adjustHue(defaultsDark.foreground, hue), chroma)),
+  };
+
+  // --surface-tertiary: Apply hue and chroma adjustments
+  const surfaceTertiaryColor: ThemeColor = {
+    name: "--surface-tertiary",
+    oklchLight: formatOklch(
+      adjustChroma(adjustHue(defaultsLight.surfaceTertiary, hue), chroma * 0.8),
+    ),
+    oklchDark: formatOklch(
+      adjustChroma(adjustHue(defaultsDark.surfaceTertiary, hue), chroma * 1.5),
+    ),
+  };
+
+  // --surface-tertiary-foreground: Uses foreground value
+  const surfaceTertiaryForeground: ThemeColor = {
+    name: "--surface-tertiary-foreground",
+    oklchLight: formatOklch(adjustChroma(adjustHue(defaultsLight.foreground, hue), chroma)),
+    oklchDark: formatOklch(adjustChroma(adjustHue(defaultsDark.foreground, hue), chroma)),
   };
 
   // --overlay: Apply hue and chroma adjustments
@@ -398,6 +442,10 @@ export function generateThemeColors(hue: number, chroma: number): GeneratedColor
     default: defaultColor,
     defaultForeground,
     surface: surfaceColor,
+    surfaceSecondary: surfaceSecondaryColor,
+    surfaceSecondaryForeground,
+    surfaceTertiary: surfaceTertiaryColor,
+    surfaceTertiaryForeground,
     overlay: overlayColor,
     scrollbar,
     segment,
@@ -472,6 +520,18 @@ export function buildThemeCssVars(colors: GeneratedColors, theme: "light" | "dar
   vars.push(`--color-surface: ${getValue(colors.surface)}`);
   vars.push(`--surface-foreground: ${getValue(colors.foreground)}`);
   vars.push(`--color-surface-foreground: ${getValue(colors.foreground)}`);
+
+  // Surface secondary
+  vars.push(`--surface-secondary: ${getValue(colors.surfaceSecondary)}`);
+  vars.push(`--color-surface-secondary: ${getValue(colors.surfaceSecondary)}`);
+  vars.push(`--surface-secondary-foreground: ${getValue(colors.surfaceSecondaryForeground)}`);
+  vars.push(`--color-surface-secondary-foreground: ${getValue(colors.surfaceSecondaryForeground)}`);
+
+  // Surface tertiary
+  vars.push(`--surface-tertiary: ${getValue(colors.surfaceTertiary)}`);
+  vars.push(`--color-surface-tertiary: ${getValue(colors.surfaceTertiary)}`);
+  vars.push(`--surface-tertiary-foreground: ${getValue(colors.surfaceTertiaryForeground)}`);
+  vars.push(`--color-surface-tertiary-foreground: ${getValue(colors.surfaceTertiaryForeground)}`);
 
   // Overlay (tooltips, popovers, modals)
   vars.push(`--overlay: ${getValue(colors.overlay)}`);
@@ -561,6 +621,10 @@ export function getColorVariablesArray(
     {name: "--background", value: getValue(colors.background)},
     {name: "--foreground", value: getValue(colors.foreground)},
     {name: "--surface", value: getValue(colors.surface)},
+    {name: "--surface-secondary", value: getValue(colors.surfaceSecondary)},
+    {name: "--surface-secondary-foreground", value: getValue(colors.surfaceSecondaryForeground)},
+    {name: "--surface-tertiary", value: getValue(colors.surfaceTertiary)},
+    {name: "--surface-tertiary-foreground", value: getValue(colors.surfaceTertiaryForeground)},
     {name: "--overlay", value: getValue(colors.overlay)},
     {name: "--default", value: getValue(colors.default)},
     {name: "--default-foreground", value: getValue(colors.defaultForeground)},
