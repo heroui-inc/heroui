@@ -123,7 +123,14 @@ function getClassNamesWithProps({
 export function extendVariants(BaseComponent, styles = {}, opts = {}) {
   const {variants, defaultVariants, compoundVariants, slots: directSlots} = styles || {};
 
-  const inferredSlots = getSlots(variants);
+  const inheritedVariants = BaseComponent.__variants ?? {};
+
+  const mergedVariants = {
+    ...inheritedVariants,
+    ...variants,
+  };
+
+  const inferredSlots = getSlots(mergedVariants);
 
   const slots = directSlots ? {...inferredSlots, ...directSlots} : inferredSlots;
 
@@ -134,7 +141,7 @@ export function extendVariants(BaseComponent, styles = {}, opts = {}) {
       getClassNamesWithProps(
         {
           slots,
-          variants,
+          variants: mergedVariants,
           compoundVariants,
           props: originalProps,
           defaultVariants,
@@ -153,7 +160,7 @@ export function extendVariants(BaseComponent, styles = {}, opts = {}) {
     ForwardedComponent.getCollectionNode = (itemProps) => {
       const newProps = getClassNamesWithProps({
         slots,
-        variants,
+        variants: mergedVariants,
         compoundVariants,
         props: itemProps,
         defaultVariants,
@@ -167,6 +174,8 @@ export function extendVariants(BaseComponent, styles = {}, opts = {}) {
 
   // To make dev tools show a proper name
   ForwardedComponent.displayName = `Extended(${BaseComponent.displayName || BaseComponent.name})`;
+
+  ForwardedComponent.__variants = mergedVariants;
 
   return ForwardedComponent;
 }

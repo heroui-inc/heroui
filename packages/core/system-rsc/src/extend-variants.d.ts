@@ -70,6 +70,7 @@ export type ExtendVariantProps = {
 };
 
 export type ExtendVariantWithSlotsProps = {
+  slots?: Record<string, string>;
   variants?: Record<string, Record<string, string | Record<string, string>>>;
   defaultVariants?: Record<string, string | Record<string, string>>;
   compoundVariants?: Array<Record<string, boolean | string | Record<string, string>>>;
