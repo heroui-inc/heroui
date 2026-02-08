@@ -45,7 +45,7 @@ Once configured, AI assistants can automatically access migration guides through
 
 ### Using Migration Prompts
 
-The Migration MCP server provides **user-invokable prompts** that guide you through an incremental migration workflow. These prompts are designed to help you migrate large projects in manageable phases.
+The Migration MCP server provides **user-invokable prompts** that guide you through a phased migration workflow. These prompts are designed to help you migrate large projects in manageable phases.
 
 **How to Invoke Prompts:**
 
@@ -67,7 +67,7 @@ Prompts are invoked by **you** (the user), not by AI assistants. The method depe
 | `handle-dependencies` | When needed | Identifies and handles component dependencies during migration |
 | `migrate-styling-phase` | After all components migrated | Provides styling migration instructions |
 
-**Incremental Migration Workflow:**
+**Phased Migration Workflow:**
 
 1. **Invoke `analyze-project` prompt** - Analyze your codebase
 2. **Invoke `create-migration-plan` prompt** - Create a phased migration plan
@@ -83,12 +83,12 @@ Prompts are invoked by **you** (the user), not by AI assistants. The method depe
 - Prompts guide you through the workflow step-by-step
 - Each prompt includes "next steps" guidance
 - Your AI assistant can help interpret prompt outputs and apply migrations
-- The project will be broken during migration (v2 and v3 cannot coexist)
+- **Phased migration means the project will be broken during migration** (v2 and v3 cannot coexist in this approach)
 - Work in a feature branch to maintain a working main branch
 
 **For AI Assistants:**
 
-If you're using an AI assistant to help with migration, see the [Agent Migration Guide](/docs/v2-to-v3-migration/agent-guide) for instructions on how assistants should guide users through prompts.
+If you're using an AI assistant to help with migration, see the [Agent Migration Guides](/docs/v2-to-v3-migration/agent-guide-incremental) ([Incremental Migration](/docs/v2-to-v3-migration/agent-guide-incremental) / [Phased Migration](/docs/v2-to-v3-migration/agent-guide-phased)) for instructions on how assistants should guide users through prompts.
 
 ### Migration Workflow
 
@@ -105,6 +105,200 @@ If you're using an AI assistant to help with migration, see the [Agent Migration
 4. Update component styling (sizes, spacing, border radius)
 5. Review visual differences and adjust as needed
 
+<section id="incremental-migration-with-coexistence">
+
+### Incremental Migration with Coexistence
+
+<Callout type="info">
+  **Alternative Approach**: This section describes strategies for migrating incrementally while keeping v2 and v3 components working side-by-side. This allows you to migrate component-by-component without breaking your project. If you prefer to migrate all components at once using phased migration, see the [Phased Migration Workflow](#phased-migration-workflow) section above.
+</Callout>
+
+#### When to Use Incremental Coexistence
+
+Use this approach when:
+- You want to migrate gradually over time
+- You need to keep the project working during migration
+- You want to test v3 components alongside v2 components
+- You have a large codebase and want to migrate feature-by-feature
+
+#### Strategy Selection
+
+Choose your strategy based on how you currently import v2 components:
+
+- **Using `@heroui/react`**: Use Strategy A (pnpm aliases)
+- **Using component packages** (`@heroui/button`, `@heroui/card`, etc.): Use Strategy B (component packages)
+
+#### Strategy A: Using pnpm Aliases
+
+This strategy uses pnpm package aliases to install v3 packages under different names, allowing both versions to coexist.
+
+**Setup:**
+
+1. Install v3 packages with aliases:
+   ```json
+   {
+     "dependencies": {
+       "@heroui/react": "2.8.6",
+       "@heroui/theme": "2.4.24",
+       "@heroui-v3/react": "npm:@heroui/react@beta",
+       "@heroui-v3/styles": "npm:@heroui/styles@beta"
+     }
+   }
+   ```
+
+2. Import v2 components from `@heroui/react`:
+   ```tsx
+   import {Button} from "@heroui/react"; // v2
+   ```
+
+3. Import v3 components from `@heroui-v3/react`:
+   ```tsx
+   import {Button} from "@heroui-v3/react"; // v3
+   ```
+
+**Migration Process:**
+
+1. Start with v2 components working normally
+2. Migrate one component at a time:
+   - Update imports to use `@heroui-v3/react`
+   - Update component code to v3 API
+   - Test the migrated component
+3. Continue until all components are migrated
+4. Once all components are migrated, switch to v3-only:
+   - Remove v2 dependencies
+   - Remove aliases
+   - Update all imports to `@heroui/react`
+   - Complete styling migration
+
+**Considerations:**
+- Both CSS systems will be loaded (v2 via Tailwind plugin, v3 via CSS import)
+- You'll need both Tailwind configs temporarily
+- Bundle size will be larger during migration
+- Some styling conflicts may occur
+
+#### Strategy B: Using Component Packages
+
+This strategy uses v2's component-specific packages alongside v3's unified package.
+
+**Setup:**
+
+1. Install v3 main package and v2 component packages:
+   ```json
+   {
+     "dependencies": {
+       "@heroui/react": "beta", // v3
+       "@heroui/styles": "beta", // v3
+       "@heroui/button": "2.8.6", // v2
+       "@heroui/card": "2.8.6", // v2
+       // ... other v2 component packages as needed
+     }
+   }
+   ```
+
+2. Import v3 components from `@heroui/react`:
+   ```tsx
+   import {Button} from "@heroui/react"; // v3
+   ```
+
+3. Import v2 components from component packages:
+   ```tsx
+   import {Card} from "@heroui/card"; // v2
+   ```
+
+**Migration Process:**
+
+1. Install v3 packages (`@heroui/react@beta`, `@heroui/styles@beta`)
+2. Install v2 component packages for components not yet migrated
+3. Migrate one component at a time:
+   - Remove the v2 component package from dependencies
+   - Update imports to use `@heroui/react` (v3)
+   - Update component code to v3 API
+   - Test the migrated component
+4. Continue until all components are migrated
+5. Remove remaining v2 component packages
+6. Complete styling migration
+
+**Considerations:**
+- Only works if your project uses component-specific packages
+- Requires managing multiple package dependencies
+- v3 doesn't have component packages, so this is a one-way migration path
+
+#### CSS Configuration for Coexistence
+
+During coexistence, you'll need both CSS systems:
+
+```css
+/* globals.css */
+@import "tailwindcss";
+
+/* v2 styles via Tailwind plugin */
+/* (configured in tailwind.config.js) */
+
+/* v3 styles */
+@import "@heroui/styles";
+```
+
+**Important:** Import order matters. Import `tailwindcss` first, then `@heroui/styles`.
+
+#### Tailwind Configuration
+
+You'll need both Tailwind configs temporarily:
+
+**v2 Config (tailwind.config.js):**
+```js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [heroui()],
+  // ... other config
+};
+```
+
+**v3 Config:** No plugin needed, but ensure Tailwind v4 is installed.
+
+#### Completing the Migration
+
+Once all components are migrated:
+
+1. **Remove v2 dependencies:**
+   - Remove `@heroui/react` and `@heroui/theme` (Strategy A)
+   - Remove all `@heroui/*` component packages (Strategy B)
+   - Remove aliases (Strategy A)
+
+2. **Update all imports:**
+   - Change `@heroui-v3/react` → `@heroui/react` (Strategy A)
+   - Change component package imports → `@heroui/react` (Strategy B)
+
+3. **Update CSS:**
+   - Remove v2 Tailwind plugin from config
+   - Keep only `@import "@heroui/styles";`
+
+4. **Complete styling migration:**
+   - Follow the [Styling Migration Guide](/docs/v2-to-v3-migration/styling)
+   - Update utility classes, color tokens, etc.
+
+#### Limitations and Considerations
+
+- **Bundle Size**: Both versions will be included during migration, increasing bundle size
+- **Styling Conflicts**: v2 and v3 styles may conflict; test thoroughly
+- **Type Conflicts**: TypeScript may show conflicts if both versions are imported in the same file
+- **Provider**: v2 requires `HeroUIProvider`, v3 doesn't - you may need conditional provider wrapping
+- **React Version**: v3 requires React 19+, v2 supports React 18+ - ensure React 19 is installed
+
+#### Migration Checklist for Coexistence
+
+- Choose strategy (A: aliases or B: component packages)
+- Install v3 packages (with aliases or directly)
+- Configure CSS for both versions
+- Migrate first component and test
+- Continue migrating components one by one
+- Test each migrated component
+- Once all migrated, remove v2 dependencies
+- Update all imports to v3-only
+- Complete styling migration
+
+<section id="major-changes">
+
 ### Major Changes
 
 - **No Provider Required**: v3 removes the need for `HeroUIProvider`
@@ -114,6 +308,10 @@ If you're using an AI assistant to help with migration, see the [Agent Migration
 - **Component API Updates**: Many components use React Aria Components patterns
 - **Compound Components**: New compound component patterns for better customization
 - **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead. `useDisclosure` is replaced with `useOverlayState`. See the [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) for details.
+
+</section>
+
+<section id="key-api-changes">
 
 ### Key API Changes
 
@@ -135,7 +333,11 @@ Many components now use compound component patterns for better composition and f
 
 See specific component migration guides for detailed examples and usage patterns.
 
+</section>
+
 ## Migration Steps
+
+<section id="step-1-update-dependencies">
 
 ### Step 1: Update Dependencies
 
@@ -251,6 +453,10 @@ Ensure you're using Tailwind CSS v4:
   </Tab>
 </Tabs>
 
+</section>
+
+<section id="step-2-update-theming-configuration">
+
 ### Step 2: Update Theming Configuration
 
 #### Remove Tailwind Plugin Configuration
@@ -306,6 +512,10 @@ If you created a `hero.ts` file for v2, you can remove it:
 rm hero.ts
 ```
 
+</section>
+
+<section id="step-3-remove-herouiprovider">
+
 ### Step 3: Remove HeroUIProvider
 
 v3 does not require a Provider component. Remove it from your application root.
@@ -352,6 +562,8 @@ v3 removes the Framer Motion dependency and handles animations differently:
 - **Per-component control**: Control animations through CSS or component-specific props where available
 - **Custom animations**: Use standard CSS `@keyframes` and transition properties for custom animations
 
+</section>
+
 ### Step 4: Replace Removed Hooks
 
 HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) and utility hooks like `useDisclosure`. HeroUI v3 removes most component hooks in favor of compound components, and replaces `useDisclosure` with `useOverlayState`.
@@ -360,6 +572,10 @@ See the comprehensive [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) fo
 - Component hooks removal and migration to compound components
 - `useDisclosure` → `useOverlayState` migration
 - Migration strategies and examples
+
+</section>
+
+<section id="step-5-update-component-imports">
 
 ### Step 5: Update Component Imports
 
@@ -406,6 +622,10 @@ type MyButtonProps = ButtonProps & {
 - Compound component parts have their own type exports
 - Ref types updated to match React 19 patterns
 
+</section>
+
+<section id="step-6-component-migration-reference">
+
 ### Step 6: Component Migration Reference
 
 Use the table below to quickly find migration guidance for each component. Use the link in the "Migration Guide" column to jump to detailed migration instructions.
@@ -421,11 +641,13 @@ Use the table below to quickly find migration guidance for each component. Use t
 | Autocomplete | Combobox | ✅ Available | [View guide →](/docs/v2-to-v3-migration/autocomplete) |
 | Avatar | Avatar | ✅ Available | [View guide →](/docs/v2-to-v3-migration/avatar) |
 | Badge | Badge | 📋 Planned | - |
-| Breadcrumbs | Breadcrumbs | 🔄 In Progress | - |
+| Breadcrumbs | Breadcrumbs | ✅ Available | [View guide →](/docs/v2-to-v3-migration/breadcrumbs) |
 | Button | Button | ✅ Available | [View guide →](/docs/v2-to-v3-migration/button) |
+| ButtonGroup | ButtonGroup | ✅ Available | [View guide →](/docs/v2-to-v3-migration/button-group) |
 | Calendar | Calendar | 🔄 In Progress | - |
 | Card | Card | ✅ Available | [View guide →](/docs/v2-to-v3-migration/card) |
 | Checkbox | Checkbox | ✅ Available | [View guide →](/docs/v2-to-v3-migration/checkbox) |
+| CheckboxGroup | CheckboxGroup | ✅ Renamed | [View guide →](/docs/v2-to-v3-migration/checkbox-group) |
 | Chip | Chip | ✅ Available | [View guide →](/docs/v2-to-v3-migration/chip) |
 | Code | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/code) |
 | DateInput | DatePicker | 🔄 In Progress | - |
@@ -447,8 +669,9 @@ Use the table below to quickly find migration guidance for each component. Use t
 | Popover | Popover | ✅ Available | [View guide →](/docs/v2-to-v3-migration/popover) |
 | Progress | Progress | 📋 Planned | - |
 | Radio | Radio | ✅ Available | [View guide →](/docs/v2-to-v3-migration/radio) |
+| RadioGroup | RadioGroup | ✅ Available | [View guide →](/docs/v2-to-v3-migration/radio-group) |
 | Ripple | ❌ | ❌ Removed | Unsupported |
-| ScrollShadow | ScrollShadow | 📋 Planned | - |
+| ScrollShadow | ScrollShadow | ✅ Available | [View guide →](/docs/v2-to-v3-migration/scroll-shadow) |
 | Select | Select | ✅ Available | [View guide →](/docs/v2-to-v3-migration/select) |
 | Skeleton | Skeleton | ✅ Available | [View guide →](/docs/v2-to-v3-migration/skeleton) |
 | Slider | Slider | ✅ Available | [View guide →](/docs/v2-to-v3-migration/slider) |
@@ -458,9 +681,13 @@ Use the table below to quickly find migration guidance for each component. Use t
 | Switch | Switch | ✅ Available | [View guide →](/docs/v2-to-v3-migration/switch) |
 | Table | Table | 📋 Planned | - |
 | Tabs | Tabs | ✅ Available | [View guide →](/docs/v2-to-v3-migration/tabs) |
-| Toast | Toast | 📋 Planned | - |
+| Toast | Toast | ✅ Available | [View guide →](/docs/v2-to-v3-migration/toast) |
 | Tooltip | Tooltip | ✅ Available | [View guide →](/docs/v2-to-v3-migration/tooltip) |
 | User | ❌ | ❌ Removed | [View guide →](/docs/v2-to-v3-migration/user) |
+
+</section>
+
+<section id="new-components-in-v3">
 
 ### New Components in v3
 
@@ -480,6 +707,10 @@ v3 introduces several new components not available in v2:
 | Input Group | Compose multiple inputs together | [View docs →](/docs/components/input-group) |
 | Surface | Container component with elevation styles | [View docs →](/docs/components/surface) |
 | Disclosure | Expandable/collapsible content sections | [View docs →](/docs/components/disclosure) |
+
+</section>
+
+<section id="step-6-update-custom-theme-overrides">
 
 ### Step 6: Update Custom Theme Overrides
 
@@ -527,6 +758,8 @@ Check the [Theming documentation](/docs/handbook/theming) for available CSS vari
 
 This is a good point to pause and verify component functionality before proceeding to styling migration.
 
+</section>
+
 ### Step 7: Hooks Migration
 
 After component migration is complete, ensure all hooks have been migrated:
@@ -534,6 +767,8 @@ After component migration is complete, ensure all hooks have been migrated:
 1. **Replace component hooks**: Replace hooks like `useSwitch`, `useInput`, `useCheckbox`, etc. with compound components
 2. **Migrate useDisclosure**: Replace `useDisclosure` with `useOverlayState` for overlay state management
 3. **Reference hooks guide**: See the [Hooks Migration Guide](/docs/v2-to-v3-migration/hooks) for detailed migration instructions and examples
+
+<section id="step-8-styling-migration">
 
 ### Step 8: Styling Migration
 
@@ -567,6 +802,8 @@ See the comprehensive [Styling Migration Guide](/docs/v2-to-v3-migration/styling
 - Review component styling changes (sizes, spacing, border radius)
 - Test visual appearance and adjust as needed
 
+</section>
+
 ### Step 9: Testing
 
 After migration, thoroughly test your application:
@@ -598,12 +835,12 @@ Use this checklist to track your migration progress:
 - Update all component imports to `@heroui/react`
 - Migrate renamed components (Divider → Separator, Autocomplete → Combobox, NumberInput → NumberField)
 - Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
-- Update group components (CheckboxGroup, RadioGroup, SwitchGroup)
+- Update group components (ButtonGroup, CheckboxGroup, RadioGroup)
 - Change `onClick` to `onPress` for interactive components
 - Update `key` prop to `id` and `textValue` where applicable
 - Update TypeScript type references (if using component types)
 - Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User) - replace with HTML elements
-- Handle in-progress/planned components (Badge, Breadcrumbs, Calendar, DateInput, DatePicker, Drawer, Pagination, Progress, ScrollShadow, Table, Toast) - replace with HTML elements until v3 components are available
+- Handle in-progress/planned components (Badge, Calendar, DateInput, DatePicker, Drawer, Pagination, Progress, Table) - replace with HTML elements until v3 components are available
 - Consider using `asChild` prop for flexible composition
 - **Verify component functionality before proceeding to hooks migration**
 

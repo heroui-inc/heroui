@@ -1,0 +1,177 @@
+---
+title: CheckboxGroup
+description: Migration guide for CheckboxGroup from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 CheckboxGroup documentation](/docs/components/checkbox-group) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The CheckboxGroup component in HeroUI v3 has been redesigned as a separate component (instead of `Checkbox.Group`) with updated structure to work with the new compound Checkbox pattern. The group now uses React Aria Components for better accessibility.
+
+## Structure Changes
+
+### v2: Compound Component Pattern
+
+In v2, `CheckboxGroup` was accessed via `Checkbox.Group`:
+
+```tsx
+import { Checkbox } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Checkbox.Group label="Select interests">
+      <Checkbox value="coding">Coding</Checkbox>
+      <Checkbox value="design">Design</Checkbox>
+      <Checkbox value="writing">Writing</Checkbox>
+    </Checkbox.Group>
+  );
+}
+```
+
+### v3: Separate Component with Compound Checkbox
+
+In v3, `CheckboxGroup` is a separate component that works with the new compound Checkbox structure:
+
+```tsx
+import { CheckboxGroup, Checkbox, Label, Description } from "@heroui/react";
+
+export default function App() {
+  return (
+    <CheckboxGroup name="interests">
+      <Label>Select interests</Label>
+      <Checkbox value="coding">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Coding</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="design">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Design</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="writing">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Writing</Label>
+        </Checkbox.Content>
+      </Checkbox>
+    </CheckboxGroup>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Name: `Checkbox.Group` → `CheckboxGroup`
+
+**v2:** Used `Checkbox.Group` (compound component)  
+**v3:** Uses `CheckboxGroup` (separate component)
+
+### 2. Import Path
+
+**v2:** Imported from `Checkbox` compound component  
+**v3:** Imported directly from `@heroui/react`
+
+### 3. Label Prop
+
+**v2:** Used `label` prop on `Checkbox.Group`  
+**v3:** Use `Label` component as a child of `CheckboxGroup`
+
+### 4. Checkbox Structure
+
+**v2:** Simple Checkbox components with children as labels  
+**v3:** Compound Checkbox components with `Checkbox.Control`, `Checkbox.Indicator`, and `Checkbox.Content`
+
+### 5. Event Handler
+
+**v2:** Used `onValueChange` prop  
+**v3:** Uses `onChange` prop (from React Aria Components)
+
+### 6. Variant Support
+
+**v3:** New `variant` prop for styling the group container
+
+## Migration Examples
+
+### Controlled CheckboxGroup
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { Checkbox } from "@heroui/react";
+
+    const [selected, setSelected] = useState(["coding"]);
+
+    <Checkbox.Group
+      value={selected}
+      onValueChange={setSelected}
+      label="Select interests"
+    >
+      <Checkbox value="coding">Coding</Checkbox>
+      <Checkbox value="design">Design</Checkbox>
+      <Checkbox value="writing">Writing</Checkbox>
+    </Checkbox.Group>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { CheckboxGroup, Checkbox, Label } from "@heroui/react";
+
+    const [selected, setSelected] = useState(["coding"]);
+
+    <CheckboxGroup
+      name="interests"
+      value={selected}
+      onChange={setSelected}
+    >
+      <Label>Select interests</Label>
+      <Checkbox value="coding">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Coding</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="design">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Design</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="writing">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Writing</Label>
+        </Checkbox.Content>
+      </Checkbox>
+    </CheckboxGroup>
+    ```
+  </Tab>
+</Tabs>
+
+## Summary
+
+- Rename `Checkbox.Group` to `CheckboxGroup` (separate import)
+- Replace `label` prop with `Label` component as child
+- Update Checkbox children to use compound component structure
+- Change `onValueChange` to `onChange`
+- Add `name` prop for form integration
+- Better accessibility through React Aria Components

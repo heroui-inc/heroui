@@ -105,10 +105,10 @@ The following props are no longer available in v3:
 - `disableAnimation` - Animations are handled internally
 - `classNames` - Use `className` prop instead
 
-### 6. ButtonGroup Removed
+### 6. ButtonGroup Available
 
 **v2:** Had a dedicated `ButtonGroup` component  
-**v3:** No `ButtonGroup` component - create groups manually with CSS classes
+**v3:** `ButtonGroup` component continues to exist with enhanced prop inheritance. See the [ButtonGroup migration guide](/docs/v2-to-v3-migration/button-group) for details.
 
 ## Migration Examples
 
@@ -257,28 +257,26 @@ The following props are no longer available in v3:
     import { Button, ButtonGroup } from "@heroui/react";
 
     <ButtonGroup>
+      <Button size="sm" variant="primary">One</Button>
+      <Button size="sm" variant="primary">Two</Button>
+      <Button size="sm" variant="primary">Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup size="sm" variant="primary">
       <Button>One</Button>
       <Button>Two</Button>
       <Button>Three</Button>
     </ButtonGroup>
     ```
   </Tab>
-  <Tab value="v3">
-    ```tsx
-    <div className="inline-flex rounded-lg border border-divider" role="group">
-      <Button className="rounded-r-none border-r border-divider">
-        One
-      </Button>
-      <Button className="rounded-none border-r border-divider">
-        Two
-      </Button>
-      <Button className="rounded-l-none">
-        Three
-      </Button>
-    </div>
-    ```
-  </Tab>
 </Tabs>
+
+**Note:** ButtonGroup in v3 supports enhanced prop inheritance. See the [ButtonGroup migration guide](/docs/v2-to-v3-migration/button-group) for more details.
 
 ### Sizes and Minimum Width
 
@@ -334,5 +332,5 @@ Available render props:
 8. **Radius Removed**: Use Tailwind CSS classes
 9. **FullWidth Removed**: Use Tailwind `w-full` class
 10. **Ripple Removed**: No ripple effect in v3
-11. **ButtonGroup Removed**: Create groups manually with CSS
+11. **ButtonGroup Available**: ButtonGroup continues to exist with enhanced prop inheritance - see [ButtonGroup migration guide](/docs/v2-to-v3-migration/button-group)
 12. **ClassNames Removed**: Use `className` prop

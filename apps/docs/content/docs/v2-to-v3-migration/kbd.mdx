@@ -66,35 +66,6 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Basic Usage
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Multiple keys with content */}
-    <Kbd keys={["command", "shift"]}>N</Kbd>
-    
-    {/* Key only */}
-    <Kbd keys={["enter"]} />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Multiple keys with content */}
-    <Kbd>
-      <Kbd.Abbr keyValue="command" />
-      <Kbd.Abbr keyValue="shift" />
-      <Kbd.Content>N</Kbd.Content>
-    </Kbd>
-    
-    {/* Key only */}
-    <Kbd>
-      <Kbd.Abbr keyValue="enter" />
-    </Kbd>
-    ```
-  </Tab>
-</Tabs>
-
 ### Variants
 
 <Tabs items={["v2", "v3"]}>
