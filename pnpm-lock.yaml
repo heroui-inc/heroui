@@ -190,8 +190,8 @@ importers:
         specifier: 6.0.2
         version: 6.0.2(react@19.2.3)
       '@internationalized/date':
-        specifier: 3.10.1
-        version: 3.10.1
+        specifier: 3.11.0
+        version: 3.11.0
       '@react-aria/overlays':
         specifier: 3.31.0
         version: 3.31.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1464,9 +1464,6 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
-
-  '@internationalized/date@3.10.1':
-    resolution: {integrity: sha512-oJrXtQiAXLvT9clCf1K4kxp3eKsQhIaZqxEyowkBcsvZDdZkbWrVmnGknxs5flTD0VGsxrxKgBCZty1EzoiMzA==}
 
   '@internationalized/date@3.11.0':
     resolution: {integrity: sha512-BOx5huLAWhicM9/ZFs84CzP+V3gBW6vlpM02yzsdYC7TGlZJX1OJiEEHcSayF00Z+3jLlm4w79amvSt6RqKN3Q==}
@@ -9071,10 +9068,6 @@ snapshots:
       iconv-lite: 0.7.1
     optionalDependencies:
       '@types/node': 25.0.3
-
-  '@internationalized/date@3.10.1':
-    dependencies:
-      '@swc/helpers': 0.5.18
 
   '@internationalized/date@3.11.0':
     dependencies:
