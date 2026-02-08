@@ -1,0 +1,229 @@
+---
+title: Toast
+description: Migration guide for Toast from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Toast documentation](/docs/components/toast) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The Toast component in HeroUI v3 has been completely redesigned with a new API based on React Aria Components. Instead of using `ToastProvider` and `useToast` hook, v3 uses `Toast.Container` and a `toast()` function with a queue-based system.
+
+## Structure Changes
+
+### v2: Provider and Hook Pattern
+
+In v2, Toast used a provider and hook pattern:
+
+```tsx
+import { ToastProvider, useToast } from "@heroui/react";
+
+function App() {
+  return (
+    <ToastProvider>
+      <MyComponent />
+    </ToastProvider>
+  );
+}
+
+function MyComponent() {
+  const { toast } = useToast();
+
+  return (
+    <button onClick={() => toast.show("Hello!")}>
+      Show Toast
+    </button>
+  );
+}
+```
+
+### v3: Container and Function Pattern
+
+In v3, Toast uses a container component and a global `toast()` function:
+
+```tsx
+import { Toast } from "@heroui/react";
+
+function App() {
+  return (
+    <>
+      <Toast.Container />
+      <MyComponent />
+    </>
+  );
+}
+
+function MyComponent() {
+  return (
+    <button onClick={() => toast("Hello!")}>
+      Show Toast
+    </button>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Provider → Container
+
+**v2:** Required `ToastProvider` wrapper  
+**v3:** Uses `Toast.Container` component (can be placed anywhere)
+
+### 2. Hook → Function
+
+**v2:** Used `useToast()` hook  
+**v3:** Uses `toast()` function directly
+
+### 3. API Changes
+
+**v2:** Used `toast.show()` method  
+**v3:** `toast()` is a function with helper methods (`toast.success()`, `toast.danger()`, etc.)
+
+### 4. Variant Names
+
+**v2:** Variants like `success`, `error`, `warning`, `info`  
+**v3:** Variants: `default`, `accent`, `success`, `warning`, `danger`
+
+### 5. Compound Component Structure
+
+**v3:** Toast uses compound components for custom rendering:
+- `Toast` - Main toast container
+- `Toast.Content` - Content wrapper
+- `Toast.Title` - Title text
+- `Toast.Description` - Description text
+- `Toast.Indicator` - Icon/indicator
+- `Toast.CloseButton` - Close button
+- `Toast.ActionButton` - Action button
+
+### 6. Promise Support
+
+**v3:** Built-in promise support with `toast.promise()` for handling async operations
+
+## Migration Examples
+
+### Toast with Title and Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({
+      title: "Success",
+      description: "Your changes have been saved",
+      variant: "success"
+    });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    toast.success("Your changes have been saved", {
+      title: "Success",
+      description: "Your changes have been saved"
+    });
+    ```
+  </Tab>
+</Tabs>
+
+### Helper Methods for Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({ variant: "success", title: "Success" });
+    toast.show({ variant: "error", title: "Error" });
+    toast.show({ variant: "warning", title: "Warning" });
+    toast.show({ variant: "info", title: "Info" });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    toast.success("Success");
+    toast.danger("Error");
+    toast.warning("Warning");
+    toast.info("Info");
+    ```
+  </Tab>
+</Tabs>
+
+### Promise Support
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    const handleAsync = async () => {
+      try {
+        await someAsyncOperation();
+        toast.show({ title: "Success", variant: "success" });
+      } catch {
+        toast.show({ title: "Error", variant: "error" });
+      }
+    };
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    const handleAsync = async () => {
+      toast.promise(someAsyncOperation(), {
+        loading: "Processing...",
+        success: "Operation completed!",
+        error: "Operation failed"
+      });
+    };
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Toast Rendering
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({
+      title: "Custom",
+      render: (toast) => (
+        <div>Custom content</div>
+      )
+    });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Toast, ToastContent, ToastTitle } from "@heroui/react";
+
+    <Toast.Container>
+      {({ toast: toastItem }) => (
+        <Toast toast={toastItem}>
+          <ToastContent>
+            <ToastTitle>Custom content</ToastTitle>
+          </ToastContent>
+        </Toast>
+      )}
+    </Toast.Container>
+    ```
+  </Tab>
+</Tabs>
+
+## Summary
+
+- Replace `ToastProvider` with `Toast.Container`
+- Replace `useToast()` hook with `toast()` function
+- Update variant names (`error` → `danger`, `info` → `accent`)
+- Use helper methods: `toast.success()`, `toast.danger()`, etc.
+- Use `toast.promise()` for async operations
+- Compound component structure for custom rendering
+- Better TypeScript support and queue management

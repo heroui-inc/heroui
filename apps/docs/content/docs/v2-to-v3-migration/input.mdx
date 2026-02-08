@@ -277,23 +277,6 @@ For inputs with prefix or suffix content, use the **InputGroup** compound compon
   </Tab>
 </Tabs>
 
-### Simple Input (No Label/Validation)
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Input placeholder="Search..." type="search" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* v3 Input can be used directly for simple cases */}
-    <Input aria-label="Search" placeholder="Search..." type="search" />
-    ```
-  </Tab>
-</Tabs>
-
-
 ## Breaking Changes Summary
 
 1. **Component Split**: `Input` → `TextField` for form fields, `Input` for primitive input

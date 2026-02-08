@@ -1,0 +1,105 @@
+---
+title: ButtonGroup
+description: Migration guide for ButtonGroup from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 ButtonGroup documentation](/docs/components/button-group) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Overview
+
+The ButtonGroup component in HeroUI v3 maintains similar functionality to v2 but with enhanced prop inheritance and styling options. ButtonGroup allows grouping related buttons together with consistent styling and spacing.
+
+## Structure Changes
+
+### v2: Basic ButtonGroup
+
+In v2, `ButtonGroup` grouped buttons together:
+
+```tsx
+import { ButtonGroup, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ButtonGroup>
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  );
+}
+```
+
+### v3: Enhanced ButtonGroup
+
+In v3, `ButtonGroup` has the same basic structure but with enhanced prop inheritance:
+
+```tsx
+import { ButtonGroup, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ButtonGroup>
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Import Path
+
+**v2:** Imported from `@heroui/react`  
+**v3:** Imported from `@heroui/react` (same package, but unified import)
+
+### 2. Prop Inheritance
+
+**v2:** Limited prop inheritance to child buttons  
+**v3:** Enhanced prop inheritance - `size`, `variant`, `isDisabled`, and `fullWidth` props on ButtonGroup are automatically passed to child buttons
+
+### 3. Hide Separator
+
+**v3:** New `hideSeparator` prop to hide visual separators between buttons
+
+### 4. Variant Support
+
+**v3:** ButtonGroup now supports `variant` prop that applies to all child buttons
+
+## Migration Examples
+
+### Prop Inheritance
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { ButtonGroup, Button } from "@heroui/react";
+
+    <ButtonGroup>
+      <Button size="sm" variant="primary">First</Button>
+      <Button size="sm" variant="primary">Second</Button>
+      <Button size="sm" variant="primary">Third</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ButtonGroup, Button } from "@heroui/react";
+
+    <ButtonGroup size="sm" variant="primary">
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+</Tabs>
+
+
+## Summary
+
+- Enhanced prop inheritance - set `size`, `variant`, `isDisabled`, and `fullWidth` on ButtonGroup instead of individual buttons
+- Improved consistency and reduced code duplication
