@@ -1,6 +1,7 @@
 ---
 title: Agent Migration Guide - Phased Migration
 description: Phased migration guide for AI assistants helping migrate HeroUI v2 to v3
+index: false
 ---
 
 <Callout type="warning">
@@ -29,21 +30,21 @@ This guide is designed for AI assistants (agents) helping users migrate from Her
 
 ## Major Changes in v3
 
-<include>./index.mdx#major-changes</include>
+<include>../index.mdx#major-changes</include>
 
-## Dependency Updates
+## Detailed Migration Steps
 
-<include>./index.mdx#step-1-update-dependencies</include>
+For detailed step-by-step instructions, see the [Phased Migration Guide](/docs/react/migration/phased-migration). The guide covers:
 
-**Agent Note**: These dependency updates can be done before switching HeroUI (won't break project). However, the HeroUI package switch should only happen AFTER all component code is migrated.
+- Dependency updates
+- Theming configuration changes
+- Removing HeroUIProvider
+- Component imports and migration
+- Hooks migration
+- Styling migration
+- Testing
 
-## Configuration Changes
-
-<include>./index.mdx#step-2-update-theming-configuration</include>
-
-## Remove HeroUIProvider
-
-<include>./index.mdx#step-3-remove-herouiprovider</include>
+**Agent Note**: Dependency updates (React 19, Tailwind v4) can be done before switching HeroUI (won't break project). However, the HeroUI package switch should only happen AFTER all component code is migrated.
 
 ## Hooks Migration
 
@@ -63,17 +64,17 @@ HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`,
 
 ## Component Import Changes
 
-<include>./index.mdx#step-5-update-component-imports</include>
+See the [Phased Migration Guide](/docs/react/migration/phased-migration#step-5-update-component-imports) for detailed component import changes.
 
 ## Key API Changes
 
-<include>./index.mdx#key-api-changes</include>
+<include>../index.mdx#key-api-changes</include>
 
 See specific component migration guides for detailed examples and usage patterns. Use `get_component_guides` MCP tool to fetch component-specific guides.
 
 ## Component Migration Reference
 
-<include>./index.mdx#step-6-component-migration-reference</include>
+<include>../index.mdx#step-6-component-migration-reference</include>
 
 <Callout type="info">
   **Removed/In-Progress/Planned Components**: For components marked as ❌ Removed, 🔄 In Progress, or 📋 Planned, replace them with standard HTML elements during migration. You can migrate back to HeroUI components once they become available in v3.
@@ -83,15 +84,15 @@ Use the `get_component_guides` MCP tool to fetch detailed guides for each compon
 
 ## New Components in v3
 
-<include>./index.mdx#new-components-in-v3</include>
+<include>../index.mdx#new-components-in-v3</include>
 
 ## Custom Theme Overrides
 
-<include>./index.mdx#step-6-update-custom-theme-overrides</include>
+See the [Phased Migration Guide](/docs/react/migration/phased-migration#step-7-update-custom-theme-overrides) for custom theme override migration.
 
 ## Styling Migration
 
-<include>./index.mdx#step-8-styling-migration</include>
+See the [Phased Migration Guide](/docs/react/migration/phased-migration#step-9-styling-migration) for detailed styling migration instructions.
 
 **Agent Note**: Use the `get_styling_migration_guide` MCP tool for comprehensive styling migration details.
 

@@ -1,0 +1,312 @@
+---
+title: Incremental Migration with Coexistence
+description: Step-by-step guide for migrating HeroUI v2 to v3 incrementally while keeping both versions working side-by-side
+---
+
+<Callout type="warning">
+  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
+</Callout>
+
+## Overview
+
+Incremental migration with coexistence allows you to migrate from HeroUI v2 to v3 component-by-component while keeping your project functional throughout the migration process. This approach uses special setup strategies to allow both v2 and v3 components to work side-by-side.
+
+<Callout type="info">
+  **Key Advantage**: Unlike phased migration, incremental coexistence migration allows the project to remain functional during migration. Both v2 and v3 components can coexist temporarily, enabling you to migrate gradually over time.
+</Callout>
+
+### When to Use Incremental Coexistence
+
+Use this approach when:
+- You want to migrate gradually over time
+- You need to keep the project working during migration
+- You want to test v3 components alongside v2 components
+- You have a large codebase and want to migrate feature-by-feature
+- You need to deploy incremental updates without breaking the application
+
+### Limitations and Considerations
+
+Before choosing this approach, be aware of:
+
+- **Bundle Size**: Both versions will be included during migration, increasing bundle size
+- **Styling Conflicts**: v2 and v3 styles may conflict; test thoroughly
+- **Type Conflicts**: TypeScript may show conflicts if both versions are imported in the same file
+- **Provider**: v2 requires `HeroUIProvider`, v3 doesn't - you may need conditional provider wrapping
+- **React Version**: v3 requires React 19+, v2 supports React 18+ - ensure React 19 is installed
+- **Setup Complexity**: Requires more complex initial setup compared to phased migration
+
+## Strategy Selection
+
+Choose your strategy based on how you currently import v2 components:
+
+- **Using `@heroui/react`**: Use Strategy A (pnpm aliases)
+- **Using component packages** (`@heroui/button`, `@heroui/card`, etc.): Use Strategy B (component packages)
+
+## Strategy A: Using pnpm Aliases
+
+This strategy uses pnpm package aliases to install v3 packages under different names, allowing both versions to coexist.
+
+### Setup
+
+1. Install v3 packages with aliases:
+
+```json
+{
+  "dependencies": {
+    "@heroui/react": "2.8.6",
+    "@heroui/theme": "2.4.24",
+    "@heroui-v3/react": "npm:@heroui/react@beta",
+    "@heroui-v3/styles": "npm:@heroui/styles@beta"
+  }
+}
+```
+
+2. Import v2 components from `@heroui/react`:
+
+```tsx
+import {Button} from "@heroui/react"; // v2
+```
+
+3. Import v3 components from `@heroui-v3/react`:
+
+```tsx
+import {Button} from "@heroui-v3/react"; // v3
+```
+
+### Migration Process
+
+1. **Start with v2 components working normally**
+   - All existing components continue to work as before
+
+2. **Migrate one component at a time:**
+   - Update imports to use `@heroui-v3/react`
+   - Update component code to v3 API
+   - Test the migrated component
+   - Verify styling looks correct
+
+3. **Continue until all components are migrated**
+   - Track which components have been migrated
+   - Test each migrated component thoroughly
+
+4. **Once all components are migrated, switch to v3-only:**
+   - Remove v2 dependencies (`@heroui/react`, `@heroui/theme`)
+   - Remove aliases
+   - Update all imports to `@heroui/react` (remove `-v3` suffix)
+   - Complete styling migration
+
+### Considerations
+
+- Both CSS systems will be loaded (v2 via Tailwind plugin, v3 via CSS import)
+- You'll need both Tailwind configs temporarily
+- Bundle size will be larger during migration
+- Some styling conflicts may occur
+
+## Strategy B: Using Component Packages
+
+This strategy uses v2's component-specific packages alongside v3's unified package.
+
+### Setup
+
+1. Install v3 main package and v2 component packages:
+
+```json
+{
+  "dependencies": {
+    "@heroui/react": "beta", // v3
+    "@heroui/styles": "beta", // v3
+    "@heroui/button": "2.8.6", // v2
+    "@heroui/card": "2.8.6", // v2
+    // ... other v2 component packages as needed
+  }
+}
+```
+
+2. Import v3 components from `@heroui/react`:
+
+```tsx
+import {Button} from "@heroui/react"; // v3
+```
+
+3. Import v2 components from component packages:
+
+```tsx
+import {Card} from "@heroui/card"; // v2
+```
+
+### Migration Process
+
+1. **Install v3 packages** (`@heroui/react@beta`, `@heroui/styles@beta`)
+2. **Install v2 component packages** for components not yet migrated
+3. **Migrate one component at a time:**
+   - Remove the v2 component package from dependencies
+   - Update imports to use `@heroui/react` (v3)
+   - Update component code to v3 API
+   - Test the migrated component
+4. **Continue until all components are migrated**
+5. **Remove remaining v2 component packages**
+6. **Complete styling migration**
+
+### Considerations
+
+- Only works if your project uses component-specific packages
+- Requires managing multiple package dependencies
+- v3 doesn't have component packages, so this is a one-way migration path
+
+## CSS Configuration for Coexistence
+
+During coexistence, you'll need both CSS systems:
+
+```css
+/* globals.css */
+@import "tailwindcss";
+
+/* v2 styles via Tailwind plugin */
+/* (configured in tailwind.config.js) */
+
+/* v3 styles */
+@import "@heroui/styles";
+```
+
+<Callout type="warning">
+  **Important:** Import order matters. Import `tailwindcss` first, then `@heroui/styles`.
+</Callout>
+
+## Tailwind Configuration
+
+You'll need both Tailwind configs temporarily:
+
+**v2 Config (tailwind.config.js):**
+
+```js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [heroui()],
+  // ... other config
+};
+```
+
+**v3 Config:** No plugin needed, but ensure Tailwind v4 is installed.
+
+## Component Migration
+
+For each component you migrate:
+
+1. **Review the component migration guide**
+   - Use the [Component Migration Reference](/docs/react/migration#component-migration-reference) table
+   - Check component-specific migration guides
+
+2. **Update imports**
+   - Strategy A: Change `@heroui/react` → `@heroui-v3/react`
+   - Strategy B: Change component package → `@heroui/react`
+
+3. **Update component code**
+   - Follow component migration guide
+   - Update props, component structure, and API calls
+   - Replace hooks with compound components if needed
+   - Change `onClick` to `onPress` for interactive components
+
+4. **Test the migrated component**
+   - Verify component renders correctly
+   - Test functionality and interactions
+   - Check for styling conflicts
+   - Ensure v2 components still styled correctly
+
+5. **Document migration**
+   - Track which components have been migrated
+   - Note any issues or concerns
+
+## CSS Conflict Handling
+
+During coexistence, both v2 and v3 CSS systems will be loaded. Monitor for conflicts:
+
+1. **Watch for styling inconsistencies**
+   - Check if v2 and v3 styles are conflicting
+   - Verify both CSS imports are present and in correct order
+
+2. **Guide conflict resolution**
+   - Ensure CSS import order: `tailwindcss` first, then `@heroui/styles`
+   - Check Tailwind config has v2 plugin configured
+   - Verify v3 CSS is imported correctly
+
+3. **Test styling after each migration**
+   - Verify migrated components look correct
+   - Check for unexpected style overrides
+   - Ensure v2 components still styled correctly
+
+## Completing the Migration
+
+Once all components are migrated:
+
+1. **Remove v2 dependencies:**
+   - Remove `@heroui/react` and `@heroui/theme` (Strategy A)
+   - Remove all `@heroui/*` component packages (Strategy B)
+   - Remove aliases (Strategy A)
+
+2. **Update all imports:**
+   - Change `@heroui-v3/react` → `@heroui/react` (Strategy A)
+   - Change component package imports → `@heroui/react` (Strategy B)
+
+3. **Update CSS:**
+   - Remove v2 Tailwind plugin from config
+   - Keep only `@import "@heroui/styles";`
+
+4. **Complete styling migration:**
+   - Follow the [Styling Migration Guide](/docs/react/migration/styling)
+   - Update utility classes, color tokens, etc.
+
+## Migration Checklist for Coexistence
+
+Use this checklist to track your incremental migration progress:
+
+### Initial Setup
+- Choose strategy (A: aliases or B: component packages)
+- Install v3 packages (with aliases or directly)
+- Configure CSS for both versions
+- Ensure React 19+ is installed
+- Set up both Tailwind configs temporarily
+
+### Component Migration (Repeat for each component)
+- Review component migration guide
+- Update imports (Strategy A or B)
+- Update component code to v3 API
+- Test the migrated component
+- Check for styling conflicts
+- Document migration progress
+
+### Completion
+- Migrate all components
+- Remove v2 dependencies
+- Remove aliases (Strategy A)
+- Update all imports to v3-only
+- Remove v2 Tailwind plugin
+- Update CSS to v3-only
+- Complete styling migration
+- Test entire application
+
+## Common Issues and Solutions
+
+### Issue: Styling conflicts between v2 and v3
+
+**Solution:** Ensure CSS import order is correct (`tailwindcss` first, then `@heroui/styles`). Check that both CSS systems are properly configured.
+
+### Issue: TypeScript errors with both versions
+
+**Solution:** Avoid importing both versions in the same file. Migrate files completely to v3 before mixing imports.
+
+### Issue: Provider conflicts
+
+**Solution:** v2 components need `HeroUIProvider`, v3 doesn't. You may need conditional provider wrapping or migrate Provider-dependent components together.
+
+### Issue: Bundle size increase
+
+**Solution:** This is expected during coexistence. Bundle size will return to normal once v2 dependencies are removed.
+
+## Next Steps
+
+After completing the incremental migration:
+
+1. Review the [v3 component documentation](/docs/react/components)
+2. Explore new components available in v3
+3. Check out the [styling guide](/docs/react/getting-started/handbook/styling)
+4. Learn about [composition patterns](/docs/react/getting-started/handbook/composition)

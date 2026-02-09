@@ -1,0 +1,302 @@
+---
+title: Migration
+description: Complete guide to migrate your HeroUI v2 application to v3
+index: true
+---
+
+<Callout type="warning">
+  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
+</Callout>
+
+## Overview
+
+### Migration MCP Tool
+
+To make migration easier, we provide a **Migration MCP (Model Context Protocol) server** that AI assistants can use to access migration guides directly. This tool provides programmatic access to all migration documentation, making it easier for AI-powered development tools to help you migrate your codebase.
+
+**Features:**
+- Access to comprehensive migration guide
+- Component-specific migration guides
+- Step-by-step migration instructions
+- Code examples and API changes
+
+**Setup:**
+
+Add the Migration MCP server to your MCP client configuration (e.g., in Cursor or other MCP-compatible tools):
+
+```json
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+<Callout type="warning">
+  **Important:** Do not use the Migration MCP alongside the HeroUI React MCP server. Having both configured simultaneously may confuse AI assistants about which set of component documentation to use. For migration purposes, connect only to the Migration MCP. Once migration is complete, you can switch to using the HeroUI React MCP for v3 component documentation.
+</Callout>
+
+Once configured, AI assistants can automatically access migration guides through tools to help you migrate your components more efficiently. The MCP server also provides guided migration prompts that can be used with slash commands in your agent chat.
+
+**Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
+
+## Choose Your Migration Approach
+
+HeroUI v2 and v3 cannot coexist in the same project without special setup. You have two migration approaches to choose from:
+
+### Phased Migration
+
+**Best for:** Projects that can dedicate focused time to complete migration, teams comfortable working in feature branches with temporarily broken code.
+
+**How it works:**
+- Migrate all component code first (project will be broken during this phase)
+- Switch dependencies to v3
+- Complete styling migration
+
+**Advantages:**
+- Simpler setup - no complex coexistence configuration
+- Cleaner transition - only one version active at a time
+- No CSS conflicts during migration
+- Supported by Migration MCP prompts
+
+**Disadvantages:**
+- Project is broken during migration
+- Requires working in a feature branch
+- All components must be migrated before switching dependencies
+
+**Get started:** [Phased Migration Guide](/docs/react/migration/phased-migration)
+
+### Incremental Migration with Coexistence
+
+**Best for:** Projects that need to stay functional during migration, teams migrating gradually over time, large codebases migrating feature-by-feature.
+
+**How it works:**
+- Set up coexistence using pnpm aliases or component packages
+- Migrate components one-by-one while keeping project functional
+- Complete migration and remove v2 dependencies
+
+**Advantages:**
+- Project remains functional during migration
+- Can migrate gradually over time
+- Can test v3 components alongside v2
+
+**Disadvantages:**
+- More complex initial setup
+- Both CSS systems loaded (larger bundle size)
+- Potential styling conflicts
+- Requires managing two versions simultaneously
+
+**Get started:** [Incremental Migration Guide](/docs/react/migration/incremental-migration)
+
+### Quick Comparison
+
+| Aspect | Phased Migration | Incremental Migration |
+|--------|-----------------|----------------------|
+| Project State | Broken during migration | Functional throughout |
+| Setup Complexity | Simple | Complex (coexistence setup) |
+| CSS Conflicts | None | Possible |
+| Bundle Size | Normal | Increased during migration |
+| Migration Speed | Faster (focused) | Slower (gradual) |
+| Best For | Focused migration sessions | Gradual migration over time |
+
+## High-Level Migration Checklist
+
+Regardless of which approach you choose, you'll need to:
+
+### Dependencies
+- Update React to v19+
+- Update HeroUI packages to v3
+- Remove Framer Motion
+- Update Tailwind CSS to v4
+
+### Configuration
+- Remove `heroui()` plugin from Tailwind config
+- Update CSS imports (`@import "tailwindcss"; @import "@heroui/styles";`)
+- Remove `hero.ts` file (if exists)
+
+### Application Code
+- Remove `HeroUIProvider` wrapper
+- Update component imports and APIs
+- Migrate hooks (see [Hooks Migration Guide](/docs/react/migration/hooks))
+- Update styling (see [Styling Migration Guide](/docs/react/migration/styling))
+
+### Testing
+- Visual regression testing
+- Functionality testing
+- Accessibility testing
+- Performance testing
+
+For detailed step-by-step instructions, see the [Phased Migration Guide](/docs/react/migration/phased-migration) or [Incremental Migration Guide](/docs/react/migration/incremental-migration).
+
+<section id="major-changes">
+
+## Major Changes
+
+- **No Provider Required**: v3 removes the need for `HeroUIProvider`
+- **CSS-First Theming**: New CSS-based theming system replaces Tailwind plugin
+- **React 19 Required**: v3 requires React 19+ (v2 supports React 18+)
+- **No Framer Motion**: Animation library dependency removed
+- **Component API Updates**: Many components use React Aria Components patterns
+- **Compound Components**: New compound component patterns for better customization
+- **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead. `useDisclosure` is replaced with `useOverlayState`. See the [Hooks Migration Guide](/docs/react/migration/hooks) for details.
+
+</section>
+
+<section id="key-api-changes">
+
+## Key API Changes
+
+### General Props Changes
+
+- `key` prop → `id` and `textValue` props (ListBox, etc.)
+- `onClick` → `onPress` (all interactive components)
+- `classNames` prop → `className` prop (all components)
+
+### Compound Component Patterns
+
+Many components now use compound component patterns for better composition and flexibility. For example:
+
+- **Checkbox**: `Checkbox`, `Checkbox.Control`, `Checkbox.Indicator`, `Checkbox.Content`
+- **Card**: `Card`, `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, `Card.Footer`
+- **Modal**: `Modal`, `Modal.Overlay`, `Modal.Content`, `Modal.Header`, `Modal.Footer`, `Modal.Body`
+- **Select**: `Select`, `Select.Trigger`, `Select.Value`, `Select.Content`, `Select.Item`
+- **Dropdown**: `Dropdown`, `Dropdown.Trigger`, `Dropdown.Content`, `Dropdown.Item`
+
+See specific component migration guides for detailed examples and usage patterns.
+
+</section>
+
+<section id="step-6-component-migration-reference">
+
+## Component Migration Reference
+
+Use the table below to quickly find migration guidance for each component. Use the link in the "Migration Guide" column to jump to detailed migration instructions.
+
+<Callout>
+  **Component Development Status**: Components marked with 🔄 In Progress or 📋 Planned are still being developed. Check the [Roadmap](https://herouiv3.featurebase.app/roadmap) for the task status. Guides for these components will be available once development is finished.
+</Callout>
+
+| v2 Component | v3 Component | Status | Migration Guide |
+|-------------|--------------|--------|-----------------|
+| Accordion | Accordion | ✅ Available | [View guide →](/docs/react/migration/accordion) |
+| Alert | Alert | ✅ Available | [View guide →](/docs/react/migration/alert) |
+| Autocomplete | Combobox | ✅ Available | [View guide →](/docs/react/migration/autocomplete) |
+| Avatar | Avatar | ✅ Available | [View guide →](/docs/react/migration/avatar) |
+| Badge | Badge | 📋 Planned | - |
+| Breadcrumbs | Breadcrumbs | ✅ Available | [View guide →](/docs/react/migration/breadcrumbs) |
+| Button | Button | ✅ Available | [View guide →](/docs/react/migration/button) |
+| ButtonGroup | ButtonGroup | ✅ Available | [View guide →](/docs/react/migration/button-group) |
+| Calendar | Calendar | 🔄 In Progress | - |
+| Card | Card | ✅ Available | [View guide →](/docs/react/migration/card) |
+| Checkbox | Checkbox | ✅ Available | [View guide →](/docs/react/migration/checkbox) |
+| CheckboxGroup | CheckboxGroup | ✅ Renamed | [View guide →](/docs/react/migration/checkbox-group) |
+| Chip | Chip | ✅ Available | [View guide →](/docs/react/migration/chip) |
+| Code | ❌ | ❌ Removed | [View guide →](/docs/react/migration/code) |
+| DateInput | DatePicker | 🔄 In Progress | - |
+| DatePicker | DatePicker | 🔄 In Progress | - |
+| Divider | Separator | ✅ Renamed | [View guide →](/docs/react/migration/divider) |
+| Drawer | Drawer | 📋 Planned | - |
+| Dropdown | Dropdown | ✅ Available | [View guide →](/docs/react/migration/dropdown) |
+| Form | Form | ✅ Available | [View guide →](/docs/react/migration/form) |
+| Image | ❌ | ❌ Removed | [View guide →](/docs/react/migration/image) |
+| Input | Input | ✅ Available | [View guide →](/docs/react/migration/input) |
+| InputOTP | InputOTP | ✅ Available | [View guide →](/docs/react/migration/input-otp) |
+| Kbd | Kbd | ✅ Available | [View guide →](/docs/react/migration/kbd) |
+| Link | Link | ✅ Available | [View guide →](/docs/react/migration/link) |
+| Listbox | ListBox | ✅ Available | [View guide →](/docs/react/migration/listbox) |
+| Modal | Modal | ✅ Available | [View guide →](/docs/react/migration/modal) |
+| Navbar | ❌ | ❌ Removed | [View guide →](/docs/react/migration/navbar) |
+| NumberInput | NumberField | ✅ Renamed | [View guide →](/docs/react/migration/numberinput) |
+| Pagination | Pagination | 📋 Planned | - |
+| Popover | Popover | ✅ Available | [View guide →](/docs/react/migration/popover) |
+| Progress | Progress | 📋 Planned | - |
+| Radio | Radio | ✅ Available | [View guide →](/docs/react/migration/radio) |
+| RadioGroup | RadioGroup | ✅ Available | [View guide →](/docs/react/migration/radio-group) |
+| Ripple | ❌ | ❌ Removed | Unsupported |
+| ScrollShadow | ScrollShadow | ✅ Available | [View guide →](/docs/react/migration/scroll-shadow) |
+| Select | Select | ✅ Available | [View guide →](/docs/react/migration/select) |
+| Skeleton | Skeleton | ✅ Available | [View guide →](/docs/react/migration/skeleton) |
+| Slider | Slider | ✅ Available | [View guide →](/docs/react/migration/slider) |
+| Snippet | ❌ | ❌ Removed | [View guide →](/docs/react/migration/snippet) |
+| Spacer | ❌ | ❌ Removed | [View guide →](/docs/react/migration/spacer) |
+| Spinner | Spinner | ✅ Available | [View guide →](/docs/react/migration/spinner) |
+| Switch | Switch | ✅ Available | [View guide →](/docs/react/migration/switch) |
+| Table | Table | 📋 Planned | - |
+| Tabs | Tabs | ✅ Available | [View guide →](/docs/react/migration/tabs) |
+| Toast | Toast | ✅ Available | [View guide →](/docs/react/migration/toast) |
+| Tooltip | Tooltip | ✅ Available | [View guide →](/docs/react/migration/tooltip) |
+| User | ❌ | ❌ Removed | [View guide →](/docs/react/migration/user) |
+
+</section>
+
+<section id="new-components-in-v3">
+
+## New Components in v3
+
+v3 introduces several new components not available in v2:
+
+| Component | Purpose | Documentation |
+|-----------|---------|---------------|
+| TextField | Enhanced text input with label and description support | [View docs →](/docs/react/components/textfield) |
+| Textarea | Multi-line text input component | [View docs →](/docs/react/components/textarea) |
+| Alert Dialog | Modal dialog for confirmations and alerts | [View docs →](/docs/react/components/alert-dialog) |
+| Empty State | Display empty or no-data states | [View docs →](/docs/react/components/empty-state) |
+| Text | Typography component for consistent text styling | [View docs →](/docs/react/components/text) |
+| Label | Accessible form label component | [View docs →](/docs/react/components/label) |
+| Description | Helper text for form fields | [View docs →](/docs/react/components/description) |
+| Field Error | Form field error message display | [View docs →](/docs/react/components/field-error) |
+| Fieldset | Group related form fields | [View docs →](/docs/react/components/fieldset) |
+| Input Group | Compose multiple inputs together | [View docs →](/docs/react/components/input-group) |
+| Surface | Container component with elevation styles | [View docs →](/docs/react/components/surface) |
+| Disclosure | Expandable/collapsible content sections | [View docs →](/docs/react/components/disclosure) |
+
+</section>
+
+## Additional Migration Guides
+
+- **[Hooks Migration Guide](/docs/react/migration/hooks)**: Detailed guide for migrating hooks from v2 to v3
+- **[Styling Migration Guide](/docs/react/migration/styling)**: Comprehensive guide for updating utility classes, color tokens, and component styling
+
+## Common Issues and Solutions
+
+### Issue: Components not rendering
+
+**Solution:** Ensure you've imported `@heroui/styles` in your CSS file and it's imported after `tailwindcss`.
+
+### Issue: Styles not applying
+
+**Solution:** Check that Tailwind CSS v4 is properly configured and CSS imports are in the correct order.
+
+### Issue: TypeScript errors
+
+**Solution:** Update your TypeScript types. v3 may have different prop types. Check component documentation.
+
+### Issue: Animations not working
+
+**Solution:** v3 handles animations differently. Check if the component supports animations in v3.
+
+## Getting Help
+
+If you encounter issues during migration:
+
+1. Check the [v3 documentation](/docs/react)
+2. Review component-specific migration guides
+3. Check the [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
+4. Join the [Discord community](https://discord.gg/9b6yyZKmH4)
+
+## Next Steps
+
+After completing the migration:
+
+1. Review the [v3 component documentation](/docs/react/components)
+2. Explore new components available in v3
+3. Check out the [styling guide](/docs/react/getting-started/handbook/styling)
+4. Learn about [composition patterns](/docs/react/getting-started/handbook/composition)
+
+---
+
+<Callout type="info">
+  This migration guide is a living document. As v3 evolves, we'll update this guide with new information and best practices.
+</Callout>
