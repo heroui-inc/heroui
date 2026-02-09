@@ -128,6 +128,7 @@ The component supports animation states:
 | `closeDelay` | `number` | `0` | Delay in milliseconds before hiding tooltip |
 | `trigger` | `"hover" \| "focus"` | `"hover"` | How the tooltip is triggered |
 | `isDisabled` | `boolean` | `false` | Whether the tooltip is disabled |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TooltipRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Tooltip.Content Props
 
@@ -152,3 +153,4 @@ The component supports animation states:
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Custom arrow element |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, OverlayArrowRenderProps>` | - | Overrides the default DOM element with a custom render function.|

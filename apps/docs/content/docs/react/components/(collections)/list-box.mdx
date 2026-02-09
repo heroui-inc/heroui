@@ -169,6 +169,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `variant` | `"default" \| "danger"` | `"default"` | Visual variant |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | ListBox items and sections |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ListBoxRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ListBox.Item Props
 
@@ -180,6 +181,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `variant` | `"default" \| "danger"` | `"default"` | Visual variant |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Item content or render function |
+| `render` | `(props: DetailedHTMLProps<LinkWithRequiredHref, HTMLAnchorElement> \| React.JSX.IntrinsicElements[keyof React.JSX.IntrinsicElements], renderProps: ListBoxItemRenderProps) => ReactElement` | - | Overrides the default DOM element with a custom render function.|
 
 ### ListBox.ItemIndicator Props
 
@@ -187,6 +189,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Custom indicator content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ListBoxItemIndicatorRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ListBox.Section Props
 
@@ -194,6 +197,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Section content including Header and Items |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function.|
 
 ### RenderProps
 

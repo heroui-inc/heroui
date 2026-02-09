@@ -188,6 +188,7 @@ The component supports various states:
 | `scaleFactor` | `number` | - | Scale factor (inherited from Provider) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Toast content (ToastContent, ToastIndicator, etc.) |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ToastRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Toast.Content Props
 
@@ -195,6 +196,7 @@ The component supports various states:
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Content (typically ToastTitle and ToastDescription) |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ToastContentRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Toast.Indicator Props
 

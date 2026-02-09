@@ -223,6 +223,7 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `name` | `string` | - | The name of the radio group, used when submitting an HTML form |
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the radio group |
 | `children` | `React.ReactNode \| (values: RadioGroupRenderProps) => React.ReactNode` | - | Radio group content or render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioGroupRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Radio Props
 
@@ -232,6 +233,7 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `isDisabled` | `boolean` | `false` | Whether the radio button is disabled |
 | `name` | `string` | - | The name of the radio button, used when submitting an HTML form |
 | `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | Radio content or render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Radio.Control Props
 
