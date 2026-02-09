@@ -19,7 +19,7 @@
     "culori": "4.0.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-aria-components": "1.14.0",
+    "react-aria-components": "1.15.0",
     "react-scan": "0.4.3",
     "tailwind-variants": "^3.2.2"
   },
