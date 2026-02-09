@@ -1,6 +1,7 @@
 ---
 title: Agent Migration Guide - Incremental Migration with Coexistence
 description: Incremental coexistence migration guide for AI assistants helping migrate HeroUI v2 to v3
+index: false
 ---
 
 <Callout type="warning">
@@ -25,11 +26,18 @@ This guide is designed for AI assistants (agents) helping users migrate from Her
 
 ## Major Changes in v3
 
-<include>./index.mdx#major-changes</include>
+<include>../index.mdx#major-changes</include>
 
 ## Incremental Migration Setup
 
-<include>./index.mdx#incremental-migration-with-coexistence</include>
+For detailed setup and migration instructions, see the [Incremental Migration Guide](/docs/react/migration/incremental-migration). The guide covers:
+
+- Strategy selection (A: pnpm aliases or B: component packages)
+- Detailed setup for each strategy
+- CSS configuration for coexistence
+- Component-by-component migration process
+- CSS conflict handling
+- Completing the migration
 
 ## Strategy Identification
 
@@ -119,17 +127,17 @@ During coexistence, both v2 and v3 CSS systems will be loaded. Agents should:
 
 ## Component Migration Reference
 
-<include>./index.mdx#step-6-component-migration-reference</include>
+<include>../index.mdx#step-6-component-migration-reference</include>
 
 Use the `get_component_guides` MCP tool to fetch detailed guides for each component.
 
 ## Key API Changes
 
-<include>./index.mdx#key-api-changes</include>
+<include>../index.mdx#key-api-changes</include>
 
 ## New Components in v3
 
-<include>./index.mdx#new-components-in-v3</include>
+<include>../index.mdx#new-components-in-v3</include>
 
 ## Completion Steps
 
