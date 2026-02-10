@@ -52,7 +52,7 @@
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-default-hover;
+      @apply bg-default;
     }
   }
 
