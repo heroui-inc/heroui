@@ -43,9 +43,9 @@
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-types/shared": "3.32.1",
-    "@react-stately/form": "3.2.2",
-    "@react-types/form": "3.7.16"
+    "@react-types/shared": "3.33.0",
+    "@react-stately/form": "3.2.3",
+    "@react-types/form": "3.7.17"
   },
   "devDependencies": {
     "@heroui/button": "workspace:*",

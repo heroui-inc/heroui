@@ -44,12 +44,12 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-form-reset": "workspace:*",
-    "@react-aria/form": "3.1.3",
+    "@react-aria/form": "3.1.4",
     "@react-stately/utils": "3.11.0",
-    "@react-stately/form": "3.2.2",
-    "@react-types/textfield": "3.12.6",
+    "@react-stately/form": "3.2.3",
+    "@react-types/textfield": "3.12.7",
     "input-otp": "1.4.1",
-    "@react-aria/focus": "3.21.3"
+    "@react-aria/focus": "3.21.4"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

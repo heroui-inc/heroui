@@ -39,10 +39,10 @@
   },
   "dependencies": {
     "@heroui/system": "workspace:*",
-    "@react-aria/utils": "3.32.0",
-    "@react-stately/collections": "3.12.8",
-    "@react-types/overlays": "3.9.2",
-    "@react-types/shared": "3.32.1"
+    "@react-aria/utils": "3.33.0",
+    "@react-stately/collections": "3.12.9",
+    "@react-types/overlays": "3.9.3",
+    "@react-types/shared": "3.33.0"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
