@@ -20,13 +20,12 @@ This guide is designed for AI assistants (agents) helping users migrate from Her
 
 1. **Full Migration**: Never migrate all components at once. Large projects require full migration.
 2. **Project Analysis First**: Always analyze the codebase to understand component usage before creating a migration plan.
-3. **MCP Prompt-Driven**: **Important**: Prompts are registered on the MCP to help with the migrations. Agents should guide users on which prompts to use at each step.
-4. **Broken State Management**: **Critical**: v2 and v3 cannot coexist. The project will be broken during migration. Plan for this by:
+3. **Broken State Management**: **Critical**: The project will be broken during migration. Plan for this by:
    - Migrating in a feature branch
    - Preparing all code changes before switching dependencies
    - Having a rollback plan
    - Testing in isolated environment first
-5. **All-or-Nothing Dependency Switch**: Once dependencies are updated to v3, ALL components must be migrated. Plan component migrations before switching dependencies.
+4. **All-or-Nothing Dependency Switch**: Once dependencies are updated to v3, ALL components must be migrated. Plan component migrations before switching dependencies.
 
 ## Major Changes in v3
 
@@ -60,7 +59,7 @@ HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`,
 1. **Identify hook usage**: Search codebase for imports from `@heroui/react` that include hook names (`useSwitch`, `useInput`, `useCheckbox`, `useRadio`, `useDisclosure`, etc.)
 2. **Replace component hooks**: Use compound components instead of hooks with prop getters (done during component migration)
 3. **Replace useDisclosure**: Migrate to `useOverlayState` for overlay state management (use `get_hooks_migration_guide` MCP tool)
-4. **Reference guides**: Use `get_hooks_migration_guide` MCP tool for hooks migration, `get_component_guides` for component-specific guides
+4. **Reference guides**: Use `get_hooks_migration_guide` MCP tool for hooks migration, `get_component_migration_guides` for component-specific guides
 
 ## Component Import Changes
 
@@ -70,7 +69,7 @@ See the [Full Migration Guide](/docs/react/migration/full-migration#step-5-updat
 
 <include>../index.mdx#key-api-changes</include>
 
-See specific component migration guides for detailed examples and usage patterns. Use `get_component_guides` MCP tool to fetch component-specific guides.
+See specific component migration guides for detailed examples and usage patterns. Use `get_component_migration_guides` MCP tool to fetch component-specific guides.
 
 ## Component Migration Reference
 
@@ -80,7 +79,7 @@ See specific component migration guides for detailed examples and usage patterns
   **Removed/In-Progress/Planned Components**: For components marked as ❌ Removed, 🔄 In Progress, or 📋 Planned, replace them with standard HTML elements during migration. You can migrate back to HeroUI components once they become available in v3.
 </Callout>
 
-Use the `get_component_guides` MCP tool to fetch detailed guides for each component.
+Use the `get_component_migration_guides` MCP tool to fetch detailed guides for each component.
 
 ## New Components in v3
 
@@ -97,21 +96,6 @@ See the [Full Migration Guide](/docs/react/migration/full-migration#step-9-styli
 **Agent Note**: Use the `get_styling_migration_guide` MCP tool for comprehensive styling migration details.
 
 **Important**: Styling migration happens AFTER component migration and dependency switch.
-
-## Migration MCP Prompts
-
-The Migration MCP server exposes prompts that **users invoke** (not agents). Each prompt includes guidance on which prompts to invoke next, so agents should guide users to follow the prompt workflow.
-
-**Important**: Prompts are invoked by users through their MCP client (e.g., Cursor slash commands, Claude Code prompts menu). You cannot invoke prompts directly - guide users to invoke them.
-
-### Available Prompts
-
-1. **`analyze-and-plan`**: Analyze the project to identify all HeroUI v2 components and create a full migration plan. First step in migration. No arguments required.
-2. **`implement-migration`**: Implement component migrations incrementally with checkpoints for user approval. Use this to migrate components phase by phase, including the final styling migration phase. No arguments required.
-
-**Agent role**: Guide users to invoke prompts at appropriate stages. Help interpret prompt outputs and apply migrations. Use MCP tools (`get_component_guides`, `get_styling_migration_guide`) to fetch detailed guides when needed.
-
-**Critical**: The `implement-migration` prompt emphasizes stopping at checkpoints for user approval. Always wait for explicit user approval between phases - do not proceed automatically.
 
 ## Full Migration Workflow
 
@@ -136,12 +120,13 @@ The Migration MCP server exposes prompts that **users invoke** (not agents). Eac
 2. **Verify Migration MCP is configured**
    - Check that Migration MCP server is connected
    - Ensure `heroui-react` MCP is NOT connected (to avoid confusion)
-   - Verify prompts are available
+   - Verify MCP tools are available
 
-3. **Guide user to invoke `analyze-and-plan` prompt**
-   - This combines analysis and plan creation into one step
-   - Help interpret results: component inventory, usage patterns, dependencies, migration plan
-   - Review the plan when user shares it
+3. **Analyze the project and create a migration plan**
+   - Use `get_migration_workflow` to fetch this guide
+   - Scan for HeroUI v2 imports, identify all components and usage
+   - Map component dependencies
+   - Create a phased migration plan (e.g., 3-5 components per phase, by-dependency strategy)
 
 ### Phase 1: Dependency Preparation (Before Code Changes)
 
@@ -164,30 +149,26 @@ These steps can be done before switching HeroUI dependencies and won't break the
 
 For each component group in the migration plan:
 
-1. **Guide user to invoke `implement-migration` prompt**
-   - Prompt includes instructions for full migration with checkpoints
-   - **Critical**: Prompt emphasizes stopping between phases for user approval
-
-2. **Fetch component-specific guides**
-   - Use `get_component_guides` MCP tool for each component
+1. **Fetch component-specific guides**
+   - Use `get_component_migration_guides` MCP tool for each component
    - Review API changes, prop migrations, structure changes
 
-3. **Apply code migrations**
+2. **Apply code migrations**
    - Migrate component code to v3 API patterns
    - Update imports, props, component structure
    - **Note**: Code will be broken until dependencies are switched
 
-4. **Handle dependencies**
+3. **Handle dependencies**
    - If components have dependencies, migrate dependencies first
    - Check if dependencies are already migrated
    - Migrate shared code as needed
 
-5. **🛑 CHECKPOINT: Stop and wait for user approval**
+4. **🛑 CHECKPOINT: Stop and wait for user approval**
    - **DO NOT proceed to next phase automatically**
    - Summarize what was migrated in this phase
    - Wait for explicit user approval before continuing
 
-6. **Document migration status**
+5. **Document migration status**
    - Track which components have been migrated
    - Note any issues or concerns
 
@@ -214,8 +195,7 @@ For each component group in the migration plan:
    - Verify components work correctly
    - Wait for explicit user approval before styling migration
 
-4. **Continue with styling migration** (part of `implement-migration` prompt)
-   - The prompt includes instructions for the final styling phase
+4. **Continue with styling migration**
    - Use `get_styling_migration_guide` MCP tool to fetch styling guide
    - Apply styling updates systematically
 
@@ -282,10 +262,8 @@ For each component group in the migration plan:
    - Only switch dependencies when ALL components are migrated
    - This minimizes the broken state duration
 
-3. **Guide users through prompts**
-   - Guide users on which prompt to use at each step
-   - Help interpret prompt outputs
-   - Use MCP tools to fetch detailed guides
+3. **Use MCP tools for each phase**
+   - Use `get_migration_workflow`, `get_component_migration_guides`, `get_styling_migration_guide` as needed
    - **Critical**: Always stop at checkpoints and wait for user approval between phases
 
 4. **Work in a feature branch**
@@ -341,17 +319,16 @@ For each component group in the migration plan:
 
 Use these MCP tools:
 
-- `get_migration_guide`: Get main migration overview (user-facing reference)
-- `get_component_guides`: Get component-specific migration guides (use when migrating components)
+- `get_migration_workflow`: Get migration overview. For full migration, pass `migrationType: "full"` (default).
+- `get_component_migration_guides`: Get component-specific migration guides (use when migrating components)
 - `get_styling_migration_guide`: Get styling migration details (use after dependency switch)
-- `list_migration_guides`: See available component guides
+- `list_component_migration_guides`: See available component guides
 
 ## Troubleshooting
 
-### Issue: MCP prompts not available
+### Issue: MCP tools not available
 
 - Verify Migration MCP server is connected
-- Check server supports prompts capability
 - Ensure using correct MCP server (migration, not heroui-react)
 - Restart MCP client if needed
 
@@ -360,11 +337,11 @@ Use these MCP tools:
 - Reduce batch size
 - Use "by-dependency" strategy
 - Break phases into smaller steps
-- Guide user to re-invoke `create-migration-plan` with adjusted parameters
+- Create a new migration plan with adjusted parameters
 
 ### Issue: Components failing to migrate
 
-- Check component migration guide using `get_component_guides` tool
+- Check component migration guide using `get_component_migration_guides` tool
 - Verify prerequisites are met
 - Check if dependencies need to be migrated first
 - Document the issue and continue with other components
@@ -399,5 +376,5 @@ After completing migration:
 ---
 
 <Callout type="info">
-  This agent migration guide is designed to work with the Migration MCP server. Ensure the MCP server is properly configured and prompts are available before starting migration.
+  This agent migration guide is designed to work with the Migration MCP server. Ensure the MCP server is properly configured and tools are available before starting migration.
 </Callout>

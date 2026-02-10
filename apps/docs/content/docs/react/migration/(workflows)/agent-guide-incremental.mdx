@@ -58,14 +58,14 @@ For projects using incremental coexistence strategies, agents should:
 
 1. **Identify component to migrate**
    - Review the component migration reference table
-   - Use `get_component_guides` MCP tool to fetch component-specific guide
+   - Use `get_component_migration_guides` MCP tool to fetch component-specific guide
 
 2. **Update imports**
    - Change imports from `@heroui/react` to `@heroui-v3/react`
    - Example: `import {Button} from "@heroui/react"` → `import {Button} from "@heroui-v3/react"`
 
 3. **Update component code**
-   - Follow component migration guide from `get_component_guides` tool
+   - Follow component migration guide from `get_component_migration_guides` tool
    - Update props, component structure, and API calls
    - Replace hooks with compound components if needed
 
@@ -82,7 +82,7 @@ For projects using incremental coexistence strategies, agents should:
 
 1. **Identify component to migrate**
    - Review the component migration reference table
-   - Use `get_component_guides` MCP tool to fetch component-specific guide
+   - Use `get_component_migration_guides` MCP tool to fetch component-specific guide
 
 2. **Remove component package**
    - Remove the v2 component package from dependencies (e.g., `@heroui/button`)
@@ -93,7 +93,7 @@ For projects using incremental coexistence strategies, agents should:
    - Example: `import {Card} from "@heroui/card"` → `import {Card} from "@heroui/react"`
 
 4. **Update component code**
-   - Follow component migration guide from `get_component_guides` tool
+   - Follow component migration guide from `get_component_migration_guides` tool
    - Update props, component structure, and API calls
    - Replace hooks with compound components if needed
 
@@ -129,7 +129,7 @@ During coexistence, both v2 and v3 CSS systems will be loaded. Agents should:
 
 <include>../index.mdx#step-6-component-migration-reference</include>
 
-Use the `get_component_guides` MCP tool to fetch detailed guides for each component.
+Use the `get_component_migration_guides` MCP tool to fetch detailed guides for each component.
 
 ## Key API Changes
 
@@ -195,7 +195,7 @@ Once all components are migrated:
 
 2. **Guide component-by-component migration**
    - Help migrate one component at a time
-   - Use `get_component_guides` MCP tool for each component
+   - Use `get_component_migration_guides` MCP tool for each component
    - Test thoroughly before proceeding
 
 3. **Monitor CSS conflicts**
@@ -239,10 +239,10 @@ Once all components are migrated:
 
 Use these MCP tools:
 
-- `get_migration_guide`: Get main migration overview (user-facing reference)
-- `get_component_guides`: Get component-specific migration guides (use when migrating components)
+- `get_migration_workflow`: Get migration overview. For incremental migration, pass `migrationType: "incremental"`.
+- `get_component_migration_guides`: Get component-specific migration guides (use when migrating components)
 - `get_styling_migration_guide`: Get styling migration details (use after all components migrated)
-- `list_migration_guides`: See available component guides
+- `list_component_migration_guides`: See available component guides
 
 ## Troubleshooting
 
@@ -256,7 +256,7 @@ Use these MCP tools:
 ### Issue: Component not rendering correctly
 
 - Verify correct import path (Strategy A: `@heroui-v3/react`, Strategy B: `@heroui/react`)
-- Check component migration guide using `get_component_guides`
+- Check component migration guide using `get_component_migration_guides`
 - Ensure component code follows v3 API patterns
 - Test in isolation if needed
 
@@ -287,5 +287,5 @@ After completing migration:
 ---
 
 <Callout type="info">
-  This agent migration guide is designed to work with the Migration MCP server. Ensure the MCP server is properly configured and prompts are available before starting migration.
+  This agent migration guide is designed to work with the Migration MCP server. Ensure the MCP server is properly configured and tools are available before starting migration.
 </Callout>
