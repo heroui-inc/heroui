@@ -1,0 +1,55 @@
+---
+title: Agents MD
+description: Download HeroUI Native documentation for AI coding agents
+icon: preview
+---
+
+Download HeroUI Native documentation directly into your project for AI assistants to reference.
+
+<Callout>
+  **Note:** The `agents-md` command is specifically for HeroUI React v3 and HeroUI Native. Other CLI commands (like `add`, `init`, `upgrade`, etc.) are for HeroUI v2.
+</Callout>
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agents-md-native.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agents-md-native-dark.jpg"
+  alt="HeroUI v3 MCP Server"
+/>
+
+<p className="px-0.5 text-sm text-muted">
+Version 1.0.0
+</p>
+
+### Usage
+
+```bash
+npx heroui-cli@latest agents-md --native
+```
+
+Or specify output file:
+
+```bash
+npx heroui-cli@latest agents-md --native --output AGENTS.md
+```
+
+### What It Does
+
+- Downloads latest HeroUI Native docs to `.heroui-docs/native/`
+- Generates an index in `AGENTS.md` or `CLAUDE.md`
+- Adds `.heroui-docs/` to `.gitignore` automatically
+
+### Options
+
+- `--native` - Download Native docs only
+- `--output <files...>` - Target file(s) (e.g., `AGENTS.md` or `AGENTS.md CLAUDE.md`)
+- `--ssh` - Use SSH for git clone
+
+### Requirements
+
+- Tailwind CSS >= v4 (via Uniwind)
+
+### Related Documentation
+
+- [AGENTS.md](https://agents.md/) - Learn about the AGENTS.md format for coding agents
+- [CLAUDE.md](https://code.claude.com/docs/en/best-practices#write-an-effective-claude-md) - Claude equivalent of AGENTS.md
+- [AGENTS.md vs Skills](https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals) - AGENTS.md performance
