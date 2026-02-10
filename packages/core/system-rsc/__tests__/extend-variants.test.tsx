@@ -2,8 +2,6 @@ import React from "react";
 import {render, screen} from "@testing-library/react";
 
 import {extendVariants} from "../src/extend-variants";
-// import {Button} from "../test-utils/extend-components";
-// import {Card} from "../test-utils/slots-component";
 import {Link, Button, Card, CardHeader, CardBody, CardFooter} from "../../react/src";
 
 const BaseButton = extendVariants(Button, {
@@ -96,27 +94,23 @@ const BaseCard = extendVariants(Card, {
 
 describe("extendVariants function - no slots", () => {
   it("should render correctly", () => {
-    const Button2 = BaseButton;
-    const wrapper = render(<Button2 disableRipple />);
+    const wrapper = render(<BaseButton disableRipple />);
 
     expect(() => wrapper.unmount()).not.toThrow();
   });
 
   it("ref should be forwarded", () => {
     const ref = React.createRef<HTMLButtonElement>();
-    const Button2 = BaseButton;
 
-    render(<Button2 ref={ref} disableRipple />);
+    render(<BaseButton ref={ref} disableRipple />);
     expect(ref.current).not.toBeNull();
   });
 
-  test("as Link should work", () => {
-    const Button2 = BaseButton;
-
+  it("as Link should work", () => {
     const {container} = render(
-      <Button2 as={Link} href="/sign-in">
+      <BaseButton as={Link} href="/sign-in">
         Press me
-      </Button2>,
+      </BaseButton>,
     );
 
     // Link component from react package - verify it renders
@@ -126,10 +120,9 @@ describe("extendVariants function - no slots", () => {
     expect(screen.getByText("Press me")).toBeInTheDocument();
   });
 
-  test("should render with given text", () => {
-    const Button2 = BaseButton;
+  it("should render with given text", () => {
     const {container} = render(
-      <Button2 className="px-3 py-2 rounded-medium hover:opacity-80">Press me</Button2>,
+      <BaseButton className="px-3 py-2 rounded-medium hover:opacity-80">Press me</BaseButton>,
     );
 
     const button = container.querySelector("button");
@@ -137,10 +130,9 @@ describe("extendVariants function - no slots", () => {
     expect(button).toHaveTextContent("Press me");
   });
 
-  test("should override the base styles", () => {
-    const Button2 = BaseButton;
+  it("should override the base styles", () => {
     const {container} = render(
-      <Button2 className="px-3 py-2 rounded-medium hover:opacity-80">Press me</Button2>,
+      <BaseButton className="px-3 py-2 rounded-medium hover:opacity-80">Press me</BaseButton>,
     );
 
     const button = container.querySelector("button");
@@ -148,16 +140,15 @@ describe("extendVariants function - no slots", () => {
     expect(button).toHaveClass("px-3 py-2 rounded-medium hover:opacity-80");
   });
 
-  test("should have the default variant styles - extended", () => {
-    const Button2 = BaseButton;
-    const {container} = render(<Button2>Press me</Button2>);
+  it("should have the default variant styles - extended", () => {
+    const {container} = render(<BaseButton>Press me</BaseButton>);
 
     const button = container.querySelector("button");
 
     expect(button).toHaveClass("size--xl");
   });
 
-  test("should have the default variant styles - original", () => {
+  it("should have the default variant styles - original", () => {
     const Button2 = extendVariants(BaseButton, {
       defaultVariants: {
         size: "sm",
@@ -171,12 +162,11 @@ describe("extendVariants function - no slots", () => {
     expect(button).toHaveClass("px-3 min-w-16 h-8 text-tiny gap-2 rounded-small");
   });
 
-  test("should include the compound variant styles - extended", () => {
-    const Button2 = BaseButton;
+  it("should include the compound variant styles - extended", () => {
     const {container} = render(
-      <Button2 isScalable size="2xl">
+      <BaseButton isScalable size="2xl">
         Press me
-      </Button2>,
+      </BaseButton>,
     );
 
     const button = container.querySelector("button");
@@ -184,7 +174,7 @@ describe("extendVariants function - no slots", () => {
     expect(button).toHaveClass("scale-150");
   });
 
-  test("should include the compound variant styles - original", () => {
+  it("should include the compound variant styles - original", () => {
     const Button2 = extendVariants(BaseButton, {
       variants: {
         size: {
@@ -211,12 +201,11 @@ describe("extendVariants function - no slots", () => {
     expect(button).toHaveClass("scale-[custom_scale]");
   });
 
-  test("as prop should work with polymorphic base component", () => {
-    const Button2 = BaseButton;
+  it("as prop should work with polymorphic base component", () => {
     const {container} = render(
-      <Button2 as={Link} href="/test">
+      <BaseButton as={Link} href="/test">
         Link Button
-      </Button2>,
+      </BaseButton>,
     );
 
     const link = container.querySelector("a");
@@ -226,9 +215,8 @@ describe("extendVariants function - no slots", () => {
     expect(link).toHaveTextContent("Link Button");
   });
 
-  test("as prop should change rendered element to div", () => {
-    const Button2 = BaseButton;
-    const {container} = render(<Button2 as="div">Div Button</Button2>);
+  it("as prop should change rendered element to div", () => {
+    const {container} = render(<BaseButton as="div">Div Button</BaseButton>);
 
     const div = container.querySelector("div");
 
@@ -241,26 +229,24 @@ describe("extendVariants function - no slots", () => {
     expect(button).not.toBeInTheDocument();
   });
 
-  test("ref should work with polymorphic component as anchor", () => {
+  it("ref should work with polymorphic component as anchor", () => {
     const ref = React.createRef<HTMLAnchorElement>();
-    const Button2 = BaseButton;
 
     render(
-      <Button2 ref={ref} as="a" href="/test">
+      <BaseButton ref={ref} as="a" href="/test">
         Link
-      </Button2>,
+      </BaseButton>,
     );
 
     expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
     expect(ref.current).toHaveAttribute("href", "/test");
   });
 
-  test("variant styles should persist with 'as' prop", () => {
-    const Button2 = BaseButton;
+  it("variant styles should persist with 'as' prop", () => {
     const {container} = render(
-      <Button2 isScalable as="a" href="/test" size="2xl">
+      <BaseButton isScalable as="a" href="/test" size="2xl">
         Link
-      </Button2>,
+      </BaseButton>,
     );
 
     const link = container.querySelector("a");
@@ -269,12 +255,11 @@ describe("extendVariants function - no slots", () => {
     expect(link).toHaveClass("scale-150");
   });
 
-  test("compound variant styles should work with 'as' prop", () => {
-    const Button2 = BaseButton;
+  it("compound variant styles should work with 'as' prop", () => {
     const {container} = render(
-      <Button2 isScalable as="a" href="/test" size="2xl">
+      <BaseButton isScalable as="a" href="/test" size="2xl">
         Link
-      </Button2>,
+      </BaseButton>,
     );
 
     const link = container.querySelector("a");
@@ -282,7 +267,7 @@ describe("extendVariants function - no slots", () => {
     expect(link).toHaveClass("scale-150");
   });
 
-  test("should respect defaultVariants.className", () => {
+  it("should respect defaultVariants.className", () => {
     const Button2 = extendVariants(BaseButton, {
       defaultVariants: {
         className: "w-full text-medium rounded-small",
@@ -299,7 +284,7 @@ describe("extendVariants function - no slots", () => {
     expect(button).toHaveClass("rounded-small");
   });
 
-  test("should merge defaultVariants.className with props.className", () => {
+  it("should merge defaultVariants.className with props.className", () => {
     const Button2 = extendVariants(BaseButton, {
       defaultVariants: {
         className: "w-full text-medium rounded-small",
@@ -322,32 +307,27 @@ describe("extendVariants function - no slots", () => {
 
 describe("extendVariants function - with slots", () => {
   it("should render correctly", () => {
-    const Card2 = BaseCard;
-    const wrapper = render(<Card2 />);
+    const wrapper = render(<BaseCard />);
 
     expect(() => wrapper.unmount()).not.toThrow();
   });
 
   it("ref should be forwarded", () => {
     const ref = React.createRef<HTMLDivElement>();
-    const Card2 = BaseCard;
 
-    render(<Card2 ref={ref} />);
+    render(<BaseCard ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  test("should render with given text", () => {
-    const Card2 = BaseCard;
-
-    render(<Card2>Card Content</Card2>);
+  it("should render with given text", () => {
+    render(<BaseCard>Card Content</BaseCard>);
 
     expect(screen.getByText("Card Content")).toBeInTheDocument();
   });
 
-  test("should override the base styles", () => {
-    const Card2 = BaseCard;
+  it("should override the base styles", () => {
     const {container} = render(
-      <Card2 className="px-3 py-2 rounded-medium hover:opacity-80">Card Content</Card2>,
+      <BaseCard className="px-3 py-2 rounded-medium hover:opacity-80">Card Content</BaseCard>,
     );
 
     const card = container.querySelector("div");
@@ -355,23 +335,21 @@ describe("extendVariants function - with slots", () => {
     expect(card).toHaveClass("px-3 py-2 rounded-medium hover:opacity-80");
   });
 
-  test("should have the default variant styles - (base slot) extended", () => {
-    const Card2 = BaseCard;
-    const {getByTestId} = render(<Card2 data-testid="base">Card Content</Card2>);
+  it("should have the default variant styles - (base slot) extended", () => {
+    const {getByTestId} = render(<BaseCard data-testid="base">Card Content</BaseCard>);
 
     const baseEl = getByTestId("base");
 
     expect(baseEl).toHaveClass("shadow-xl");
   });
 
-  test("should have all slots styles", () => {
-    const Card2 = BaseCard;
+  it("should have all slots styles", () => {
     const {getByTestId} = render(
-      <Card2 data-testid="base">
+      <BaseCard data-testid="base">
         <CardHeader data-testid="header">Header</CardHeader>
         <CardBody data-testid="body">Body</CardBody>
         <CardFooter data-testid="footer">Footer</CardFooter>
-      </Card2>,
+      </BaseCard>,
     );
 
     const baseEl = getByTestId("base");
@@ -389,12 +367,11 @@ describe("extendVariants function - with slots", () => {
     expect(footerEl).toHaveClass("rounded-b-xl");
   });
 
-  test("should override the slots styles", () => {
-    const Card2 = BaseCard;
+  it("should override the slots styles", () => {
     const {getByTestId} = render(
-      <Card2 classNames={{base: "shadow-xs"}} data-testid="base">
+      <BaseCard classNames={{base: "shadow-xs"}} data-testid="base">
         Card Content
-      </Card2>,
+      </BaseCard>,
     );
 
     const baseEl = getByTestId("base");
@@ -402,12 +379,11 @@ describe("extendVariants function - with slots", () => {
     expect(baseEl).toHaveClass("shadow-xs");
   });
 
-  test("should override all slots styles", () => {
-    const Card2 = BaseCard;
+  it("should override all slots styles", () => {
     const {getByTestId} = render(
-      <Card2 classNames={{base: "shadow-xs", header: "rounded-none"}} data-testid="base">
+      <BaseCard classNames={{base: "shadow-xs", header: "rounded-none"}} data-testid="base">
         <CardHeader data-testid="header">Header</CardHeader>
-      </Card2>,
+      </BaseCard>,
     );
 
     const baseEl = getByTestId("base");
@@ -417,13 +393,11 @@ describe("extendVariants function - with slots", () => {
     expect(headerEl).toHaveClass("rounded-none");
   });
 
-  test("should include the compound variant styles - extended", () => {
-    const Card2 = BaseCard;
-
+  it("should include the compound variant styles - extended", () => {
     const {getByTestId} = render(
-      <Card2 data-testid="base" radius="none" shadow="none">
+      <BaseCard data-testid="base" radius="none" shadow="none">
         <CardHeader data-testid="header">Header</CardHeader>
-      </Card2>,
+      </BaseCard>,
     );
 
     const baseEl = getByTestId("base");
@@ -433,7 +407,7 @@ describe("extendVariants function - with slots", () => {
     expect(headerEl).toHaveClass("scale-75");
   });
 
-  test("should include the compound variant styles - original", () => {
+  it("should include the compound variant styles - original", () => {
     const Card2 = extendVariants(BaseCard, {
       variants: {
         shadow: {
@@ -468,7 +442,7 @@ describe("extendVariants function - with slots", () => {
     expect(headerEl).toHaveClass("scale-[test]");
   });
 
-  test("should override base component slots with direct slots option", () => {
+  it("should override base component slots with direct slots option", () => {
     const Card2 = extendVariants(BaseCard, {
       slots: {
         header: "!font-bold !text-lg",
@@ -491,7 +465,7 @@ describe("extendVariants function - with slots", () => {
     expect(footerEl).toHaveClass("!bg-red-500");
   });
 
-  test("should merge direct slots with variant-based slots", () => {
+  it("should merge direct slots with variant-based slots", () => {
     const Card2 = extendVariants(BaseCard, {
       slots: {
         header: "!font-bold",
@@ -521,7 +495,7 @@ describe("extendVariants function - with slots", () => {
     expect(headerEl).toHaveClass("!font-bold");
   });
 
-  test("direct slots should override variant-based slots for the same slot", () => {
+  it("direct slots should override variant-based slots for the same slot", () => {
     const Card2 = extendVariants(BaseCard, {
       slots: {
         base: "!bg-blue-500",
@@ -542,9 +516,7 @@ describe("extendVariants function - with slots", () => {
 
     const baseEl = getByTestId("base");
 
-    // Direct slots should be applied
     expect(baseEl).toHaveClass("!bg-blue-500");
-    // Variant-based slots should also be applied (they merge)
     expect(baseEl).toHaveClass("shadow-xl");
   });
 });
