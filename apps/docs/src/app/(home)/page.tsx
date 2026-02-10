@@ -14,7 +14,9 @@ const VersionChip = () => {
       href="/docs/react/releases/v3-0-0-beta-6"
     >
       <FrameworkChip framework="web" />
-      <span>Beta 6 (Web) — 6 new components and toast improvements</span>
+      <span className="max-w-60 truncate sm:max-w-full">
+        Beta 6 (Web) — 6 new components and toast improvements
+      </span>
     </LinkRoot>
   );
 };
