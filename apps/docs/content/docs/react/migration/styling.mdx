@@ -705,45 +705,6 @@ v3 uses more consistent gap spacing:
   </Tab>
 </Tabs>
 
-## Common Issues & Solutions
-
-### Issue: Components look different after migration
-
-**Solution:** Check for:
-1. Border radius differences - v3 uses larger default radius
-2. Height differences - v3 has responsive heights
-3. Padding differences - v3 may have different padding
-4. Font size differences - v3 uses standard Tailwind text sizes
-
-### Issue: Custom utilities not working
-
-**Solution:** Replace custom utilities with standard Tailwind classes:
-- `text-tiny` → `text-xs`
-- `rounded-small` → `rounded-sm` (or `rounded-[8px]` for exact match)
-- `border-medium` → `border-2`
-
-### Issue: Colors look different
-
-**Solution:** 
-1. v3 uses OKLCH color format which may appear slightly different
-2. Update color references: `primary` → `accent`
-3. Update muted colors: `foreground-400` → `muted`
-
-### Issue: Border radius too small
-
-**Solution:** v3 default radius values are smaller. Use arbitrary values to match v2:
-- `rounded-[8px]` for `rounded-small`
-- `rounded-[12px]` for `rounded-medium`
-- `rounded-[14px]` for `rounded-large`
-
-### Issue: Transitions not working
-
-**Solution:** Replace custom transition utilities with standard Tailwind `transition-*` utilities. Add `duration-250 ease` to match v2's default 250ms duration and ease timing function. Note that v2 utilities transition many specific properties:
-
-- `.transition-background` → `transition-[background] duration-250 ease`
-- `.transition-colors-opacity` → `transition-[color,background-color,border-color,text-decoration-color,fill,stroke,opacity] duration-250 ease`
-- `.transition-transform-colors-opacity` → `transition-[transform,scale,color,background,background-color,border-color,text-decoration-color,fill,stroke,opacity] duration-250 ease`
-
 ## Best Practices
 
 1. **Use Standard Tailwind**: Prefer standard Tailwind utilities over custom ones

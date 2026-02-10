@@ -13,8 +13,6 @@ The Kbd component in HeroUI v3 has been redesigned with a compound component pat
 
 ## Structure Changes
 
-### v2: Keys Prop
-
 In v2, Kbd used a `keys` prop to automatically render keyboard keys:
 
 ```tsx
@@ -24,8 +22,6 @@ export default function App() {
   return <Kbd keys={["command"]}>K</Kbd>;
 }
 ```
-
-### v3: Compound Components
 
 In v3, Kbd requires manual definition of keys using compound components:
 

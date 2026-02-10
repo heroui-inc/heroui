@@ -41,8 +41,6 @@ The v2 Code component had the following variants that need to be replaced:
 
 ## Structure Changes
 
-### v2: Component Wrapper
-
 In v2, `Code` was a component wrapper around the native `<code>` element:
 
 ```tsx
@@ -52,8 +50,6 @@ export default function App() {
   return <Code>npm install @heroui/react</Code>;
 }
 ```
-
-### v3: Native HTML Element
 
 In v3, use the native `<code>` element directly with Tailwind CSS classes:
 
@@ -115,153 +111,6 @@ export default function App() {
     <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-lg bg-accent/20 text-accent-600 text-base">
       npm install @heroui/react
     </code>
-    ```
-  </Tab>
-</Tabs>
-
-## Creating a Reusable Code Component (Optional)
-
-If you use inline code frequently, you can create a simple wrapper component:
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Code } from "@heroui/react";
-
-    <Code color="primary" size="md">Code snippet</Code>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    // components/Code.tsx
-    import { cn } from "@/lib/utils"; // or your cn utility
-
-    interface CodeProps extends React.HTMLAttributes<HTMLElement> {
-      color?: "default" | "accent" | "success" | "warning" | "danger";
-      size?: "sm" | "md" | "lg";
-      radius?: "none" | "sm" | "md" | "lg" | "full";
-    }
-
-    const colorClasses = {
-      default: "bg-default/40 text-default-700",
-      accent: "bg-accent/20 text-accent-600",
-      success: "bg-success/20 text-success-700",
-      warning: "bg-warning/20 text-warning-700",
-      danger: "bg-danger/20 text-danger-600",
-    };
-
-    const sizeClasses = {
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-lg",
-    };
-
-    const radiusClasses = {
-      none: "rounded-none",
-      sm: "rounded-sm",
-      md: "rounded-md",
-      lg: "rounded-lg",
-      full: "rounded-full",
-    };
-
-    export function Code({
-      children,
-      className,
-      color = "default",
-      size = "sm",
-      radius = "sm",
-      ...props
-    }: CodeProps) {
-      return (
-        <code
-          className={cn(
-            "px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap",
-            colorClasses[color],
-            sizeClasses[size],
-            radiusClasses[radius],
-            className
-          )}
-          {...props}
-        >
-          {children}
-        </code>
-      );
-    }
-
-    // Usage
-    <Code color="accent" size="md">Code snippet</Code>
-    ```
-  </Tab>
-</Tabs>
-
-## Complete Example
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Code } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <div className="space-y-4">
-          <p>
-            Install HeroUI with <Code>npm install @heroui/react</Code>
-          </p>
-          <div className="flex gap-2">
-            <Code color="primary">Primary</Code>
-            <Code color="success">Success</Code>
-            <Code color="warning">Warning</Code>
-            <Code color="danger">Danger</Code>
-          </div>
-          <div className="flex gap-2 items-center">
-            <Code size="sm">Small</Code>
-            <Code size="md">Medium</Code>
-            <Code size="lg">Large</Code>
-          </div>
-        </div>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    export default function App() {
-      return (
-        <div className="space-y-4">
-          <p>
-            Install HeroUI with{" "}
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
-              npm install @heroui/react
-            </code>
-          </p>
-          <div className="flex gap-2">
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-accent/20 text-accent-600 text-sm">
-              Primary
-            </code>
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-success/20 text-success-700 text-sm">
-              Success
-            </code>
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-warning/20 text-warning-700 text-sm">
-              Warning
-            </code>
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-danger/20 text-danger-600 text-sm">
-              Danger
-            </code>
-          </div>
-          <div className="flex gap-2 items-center">
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
-              Small
-            </code>
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-base">
-              Medium
-            </code>
-            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-lg">
-              Large
-            </code>
-          </div>
-        </div>
-      );
-    }
     ```
   </Tab>
 </Tabs>

@@ -13,8 +13,6 @@ The Popover component in HeroUI v3 has been redesigned with a compound component
 
 ## Structure Changes
 
-### v2: Separate Components
-
 In v2, Popover used separate components:
 
 ```tsx
@@ -33,8 +31,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Components
 
 In v3, Popover uses compound components:
 
@@ -178,62 +174,6 @@ The following props are no longer available in v3:
         <p className="text-muted mt-2 text-sm">Content</p>
       </Popover.Dialog>
     </Popover.Content>
-    ```
-  </Tab>
-</Tabs>
-
-### Controlled
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger>
-        <Button>Open</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div>Content</div>
-      </PopoverContent>
-    </Popover>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
-      <Button>Open</Button>
-      <Popover.Content>
-        <Popover.Dialog>
-          <div>Content</div>
-        </Popover.Dialog>
-      </Popover.Content>
-    </Popover>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Trigger
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <PopoverTrigger>
-      <CustomButton>Custom</CustomButton>
-    </PopoverTrigger>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Popover.Trigger>
-      <CustomButton>Custom</CustomButton>
-    </Popover.Trigger>
     ```
   </Tab>
 </Tabs>

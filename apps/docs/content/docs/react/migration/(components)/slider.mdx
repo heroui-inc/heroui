@@ -13,8 +13,6 @@ The Slider component in HeroUI v3 has been redesigned with a compound component 
 
 ## Structure Changes
 
-### v2: Simple Structure
-
 In v2, Slider used a simple structure with props:
 
 ```tsx
@@ -31,8 +29,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Components
 
 In v3, Slider requires compound components:
 
@@ -177,62 +173,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Vertical Slider
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Slider
-      defaultValue={30}
-      orientation="vertical"
-      label="Volume"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Slider defaultValue={30} orientation="vertical">
-      <Label>Volume</Label>
-      <Slider.Output />
-      <Slider.Track>
-        <Slider.Fill />
-        <Slider.Thumb />
-      </Slider.Track>
-    </Slider>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Value Display
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Slider
-      renderValue={(props) => (
-        <output {...props}>Custom: {value}</output>
-      )}
-      label="Volume"
-      defaultValue={30}
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Slider defaultValue={30}>
-      <Label>Volume</Label>
-      <Slider.Output>
-        {({state}) => `Custom: ${state.values[0]}`}
-      </Slider.Output>
-      <Slider.Track>
-        <Slider.Fill />
-        <Slider.Thumb />
-      </Slider.Track>
-    </Slider>
-    ```
-  </Tab>
-</Tabs>
-
 ## Component Anatomy
 
 The v3 Slider follows this structure:
@@ -260,26 +200,6 @@ For range sliders, use a render prop in `Slider.Track`:
   )}
 </Slider.Track>
 ```
-
-## Important Notes
-
-### Range Sliders
-
-- **v2:** Automatically detected range when `value` or `defaultValue` is an array
-- **v3:** Still detects range automatically, but you must map over thumbs in `Slider.Track` render prop
-
-### Features Not Yet Supported
-
-Based on the v3 source code TODOs, the following features are not yet implemented:
-- Steps (`showSteps`)
-- Marks (`marks` - though `Slider.Marks` component exists)
-- RTL support
-- Fill offset (`fillOffset`)
-
-### Value Formatting
-
-- **v2:** Used `formatOptions` prop and `getValue` function
-- **v3:** `formatOptions` still works, but custom formatting uses `Slider.Output` render prop
 
 ## Breaking Changes Summary
 

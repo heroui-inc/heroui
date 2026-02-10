@@ -13,8 +13,6 @@ The Tooltip component in HeroUI v3 has been redesigned with a compound component
 
 ## Structure Changes
 
-### v2: Content Prop
-
 In v2, Tooltip used a `content` prop:
 
 ```tsx
@@ -28,8 +26,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Components
 
 In v3, Tooltip requires compound components:
 
@@ -159,66 +155,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Controlled Tooltip
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    <Tooltip
-      content="I am a tooltip"
-      isOpen={isOpen}
-      onOpenChange={setIsOpen}
-    >
-      <Button>Hover me</Button>
-    </Tooltip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    <Tooltip isOpen={isOpen} onOpenChange={setIsOpen} delay={0}>
-      <Tooltip.Trigger>
-        <Button>Hover me</Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content>
-        <p>I am a tooltip</p>
-      </Tooltip.Content>
-    </Tooltip>
-    ```
-  </Tab>
-</Tabs>
-
-### With Delay
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tooltip content="Tooltip" delay={500} closeDelay={200}>
-      <Button>Hover me</Button>
-    </Tooltip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Tooltip delay={500} closeDelay={200}>
-      <Tooltip.Trigger>
-        <Button>Hover me</Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content>
-        <p>Tooltip</p>
-      </Tooltip.Content>
-    </Tooltip>
-    ```
-  </Tab>
-</Tabs>
-
 ### Custom Content
 
 <Tabs items={["v2", "v3"]}>
@@ -253,30 +189,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### With Custom Trigger
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tooltip content="Tooltip">
-      <div className="custom-trigger">Custom trigger</div>
-    </Tooltip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Tooltip delay={0}>
-      <Tooltip.Trigger className="custom-trigger">
-        <div>Custom trigger</div>
-      </Tooltip.Trigger>
-      <Tooltip.Content>
-        <p>Tooltip</p>
-      </Tooltip.Content>
-    </Tooltip>
-    ```
-  </Tab>
-</Tabs>
-
 ## Component Anatomy
 
 The v3 Tooltip follows this structure:
@@ -289,33 +201,6 @@ Tooltip (Root)
       ├── Tooltip.Arrow (optional)
       └── [Tooltip content]
 ```
-
-## Important Notes
-
-### Content Prop
-
-- **v2:** Used `content` prop for tooltip text/content
-- **v3:** Content goes as children of `Tooltip.Content` component
-
-### Arrow
-
-- **v2:** Controlled by `showArrow` prop on root
-- **v3:** Use `showArrow` prop on `Tooltip.Content` and include `Tooltip.Arrow` component
-
-### Placement and Offset
-
-- **v2:** `placement` and `offset` props on root
-- **v3:** `placement` and `offset` props moved to `Tooltip.Content`
-
-### Trigger Element
-
-- **v2:** Children were automatically used as trigger
-- **v3:** Must wrap trigger element in `Tooltip.Trigger` component
-
-### Default Delay
-
-- **v2:** `delay` default was `0`
-- **v3:** `delay` default is `700` (note: examples use `delay={0}` to match v2 behavior)
 
 ## Breaking Changes Summary
 

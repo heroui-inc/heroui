@@ -13,8 +13,6 @@ The Alert component in HeroUI v3 has been redesigned with a compound component p
 
 ## Structure Changes
 
-### v2: Single Component with Props
-
 In v2, `Alert` was a single component that accepted props for title, description, icon, and other elements:
 
 ```tsx
@@ -29,8 +27,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Component Structure
 
 In v3, Alert uses a compound component pattern with explicit subcomponents:
 
@@ -69,24 +65,6 @@ export default function App() {
 | `success` | `success` | Same |
 | `warning` | `warning` | Same |
 | `danger` | `danger` | Same |
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Alert color="primary" title="Alert" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Alert status="accent">
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Alert</Alert.Title>
-      </Alert.Content>
-    </Alert>
-    ```
-  </Tab>
-</Tabs>
 
 ### 3. Variants Removed
 
@@ -197,70 +175,6 @@ The following props are no longer available in v3:
     ```
   </Tab>
 </Tabs>
-
-### Closable Alert
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Alert
-      title="Closable Alert"
-      isClosable
-      onClose={() => console.log("Closed")}
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Alert, CloseButton } from "@heroui/react";
-    import { useState } from "react";
-
-    const [isVisible, setIsVisible] = useState(true);
-
-    {isVisible && (
-      <Alert>
-        <Alert.Indicator />
-        <Alert.Content>
-          <Alert.Title>Closable Alert</Alert.Title>
-        </Alert.Content>
-        <CloseButton 
-          aria-label="Close"
-          onPress={() => setIsVisible(false)}
-        />
-      </Alert>
-    )}
-    ```
-  </Tab>
-</Tabs>
-
-
-## Styling Changes
-
-### v2: `classNames` Prop
-
-```tsx
-<Alert 
-  classNames={{
-    base: "custom-base",
-    title: "custom-title",
-    description: "custom-description"
-  }}
-/>
-```
-
-### v3: Direct `className` Props
-
-```tsx
-<Alert className="custom-base">
-  <Alert.Indicator />
-  <Alert.Content>
-    <Alert.Title className="custom-title">Title</Alert.Title>
-    <Alert.Description className="custom-description">
-      Description
-    </Alert.Description>
-  </Alert.Content>
-</Alert>
-```
 
 ## Component Anatomy
 

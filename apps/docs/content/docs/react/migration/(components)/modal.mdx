@@ -13,8 +13,6 @@ The Modal component in HeroUI v3 has been redesigned with a compound component p
 
 ## Structure Changes
 
-### v2: Separate Components
-
 In v2, Modal used separate components:
 
 ```tsx
@@ -37,8 +35,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Components
 
 In v3, Modal uses compound components:
 
@@ -228,69 +224,6 @@ The following props are no longer available in v3:
     <Modal.Container scroll="outside">
       <Modal.Dialog>{/* content */}</Modal.Dialog>
     </Modal.Container>
-    ```
-  </Tab>
-</Tabs>
-
-### Close Button
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Without close button */}
-    <Modal hideCloseButton>
-      <ModalContent>{/* content */}</ModalContent>
-    </Modal>
-    
-    {/* Custom close button */}
-    <Modal closeButton={<CustomCloseIcon />}>
-      <ModalContent>{/* content */}</ModalContent>
-    </Modal>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Without close button - omit Modal.CloseTrigger */}
-    <Modal.Container>
-      <Modal.Dialog>
-        <Modal.Header>
-          <Modal.Heading>Title</Modal.Heading>
-        </Modal.Header>
-      </Modal.Dialog>
-    </Modal.Container>
-    
-    {/* Custom close button */}
-    <Modal.Container>
-      <Modal.Dialog>
-        <Modal.CloseTrigger>
-          <CustomCloseIcon />
-        </Modal.CloseTrigger>
-        {/* content */}
-      </Modal.Dialog>
-    </Modal.Container>
-    ```
-  </Tab>
-</Tabs>
-
-### With Icon and Heading
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <ModalHeader className="flex flex-col gap-1">
-      <Icon />
-      Modal Title
-    </ModalHeader>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Modal.Header>
-      <Modal.Icon>
-        <Icon />
-      </Modal.Icon>
-      <Modal.Heading>Modal Title</Modal.Heading>
-    </Modal.Header>
     ```
   </Tab>
 </Tabs>

@@ -60,8 +60,6 @@ The following props are no longer available in v3:
 
 ## Structure Changes
 
-### v2: Component with Props
-
 In v2, `Chip` was a component that accepted various props for styling:
 
 ```tsx
@@ -71,8 +69,6 @@ export default function App() {
   return <Chip>Chip</Chip>;
 }
 ```
-
-### v3: Simplified Component
 
 In v3, `Chip` has a simplified API with fewer variants:
 
@@ -85,35 +81,6 @@ export default function App() {
 ```
 
 ## Migration Examples
-
-### Variants and Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Variants */}
-    <Chip variant="solid">Solid</Chip>
-    <Chip variant="bordered">Bordered</Chip>
-    <Chip variant="soft">Soft</Chip>
-    
-    {/* Colors */}
-    <Chip color="primary">Primary</Chip>
-    <Chip color="success">Success</Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Variants */}
-    <Chip variant="primary">Primary</Chip>
-    <Chip variant="secondary">Secondary</Chip>
-    <Chip variant="soft">Soft</Chip>
-    
-    {/* Colors */}
-    <Chip color="accent">Accent</Chip>
-    <Chip color="success">Success</Chip>
-    ```
-  </Tab>
-</Tabs>
 
 ### With Icons
 
@@ -152,33 +119,6 @@ export default function App() {
   </Tab>
 </Tabs>
 
-### With Avatar
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Avatar } from "@heroui/react";
-
-    <Chip
-      avatar={<Avatar name="JW" src="https://example.com/avatar.jpg" />}
-      variant="flat"
-    >
-      Avatar
-    </Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Avatar } from "@heroui/react";
-
-    <Chip variant="tertiary">
-      <Avatar name="JW" src="https://example.com/avatar.jpg" />
-      Avatar
-    </Chip>
-    ```
-  </Tab>
-</Tabs>
-
 ### With Close Button
 
 <Tabs items={["v2", "v3"]}>
@@ -203,61 +143,6 @@ export default function App() {
     ```
   </Tab>
 </Tabs>
-
-### Removed Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Dot variant */}
-    <Chip variant="dot">Dot</Chip>
-    
-    {/* Shadow variant */}
-    <Chip variant="shadow">Shadow</Chip>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Icon } from "@iconify/react";
-
-    {/* Dot variant - implement manually */}
-    <Chip>
-      <Icon icon="gravity-ui:circle-fill" width={6} />
-      Dot
-    </Chip>
-    
-    {/* Shadow variant - use Tailwind classes */}
-    <Chip variant="primary" className="shadow-md">
-      Shadow
-    </Chip>
-    ```
-  </Tab>
-</Tabs>
-
-## Styling Changes
-
-### v2: `classNames` Prop
-
-```tsx
-<Chip 
-  classNames={{
-    base: "custom-base",
-    content: "custom-content",
-    dot: "custom-dot",
-    avatar: "custom-avatar",
-    closeButton: "custom-close-button"
-  }}
-/>
-```
-
-### v3: Direct `className` Prop
-
-```tsx
-<Chip className="custom-base">
-  {/* Content with custom classes */}
-  <span className="custom-content">Chip</span>
-</Chip>
-```
 
 ## Breaking Changes Summary
 

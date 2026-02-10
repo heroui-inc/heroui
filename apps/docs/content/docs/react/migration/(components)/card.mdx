@@ -13,8 +13,6 @@ The Card component in HeroUI v3 has been redesigned with a compound component pa
 
 ## Structure Changes
 
-### v2: Separate Components
-
 In v2, Card used separate components: `CardHeader`, `CardBody`, and `CardFooter`:
 
 ```tsx
@@ -30,8 +28,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Component Structure
 
 In v3, Card uses a compound component pattern with explicit subcomponents:
 
@@ -93,47 +89,29 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Card Structure
+### Pressable Card
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    {/* Basic structure */}
-    <Card>
-      <CardHeader>Header</CardHeader>
-      <CardBody>Body content</CardBody>
-      <CardFooter>Footer</CardFooter>
-    </Card>
-    
-    {/* With title and description */}
-    <Card>
-      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <p className="text-tiny uppercase font-bold">Daily Mix</p>
-        <small className="text-default-500">12 Tracks</small>
-        <h4 className="font-bold text-large">Frontend Radio</h4>
-      </CardHeader>
-      <CardBody>Content</CardBody>
+    <Card 
+      isPressable 
+      shadow="sm" 
+      onPress={() => console.log("pressed")}
+    >
+      <CardBody>Clickable card</CardBody>
     </Card>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    {/* Basic structure */}
-    <Card>
-      <Card.Header>
-        <Card.Title>Header</Card.Title>
-      </Card.Header>
-      <Card.Content>Body content</Card.Content>
-      <Card.Footer>Footer</Card.Footer>
-    </Card>
-    
-    {/* With title and description */}
-    <Card>
-      <Card.Header>
-        <Card.Title>Frontend Radio</Card.Title>
-        <Card.Description>Daily Mix • 12 Tracks</Card.Description>
-      </Card.Header>
-      <Card.Content>Content</Card.Content>
+    <Card 
+      asChild
+      className="shadow-sm cursor-pointer"
+    >
+      <button onClick={() => console.log("pressed")}>
+        <Card.Content>Clickable card</Card.Content>
+      </button>
     </Card>
     ```
   </Tab>
@@ -172,102 +150,6 @@ The following props are no longer available in v3:
           src="https://example.com/image.jpg"
         />
       </Card.Content>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-### Pressable Card
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Card 
-      isPressable 
-      shadow="sm" 
-      onPress={() => console.log("pressed")}
-    >
-      <CardBody>Clickable card</CardBody>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Card 
-      asChild
-      className="shadow-sm cursor-pointer"
-    >
-      <button onClick={() => console.log("pressed")}>
-        <Card.Content>Clickable card</Card.Content>
-      </button>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-### Blurred Footer Card
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Card, CardFooter, Image, Button } from "@heroui/react";
-
-    <Card isFooterBlurred className="border-none" radius="lg">
-      <Image
-        alt="Woman listing to music"
-        className="object-cover"
-        height={200}
-        src="https://example.com/image.jpg"
-        width={200}
-      />
-      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-        <p className="text-tiny text-white/80">Available soon.</p>
-        <Button className="text-tiny text-white bg-black/20" size="sm">
-          Notify me
-        </Button>
-      </CardFooter>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Card, Button } from "@heroui/react";
-
-    <Card className="border-none rounded-lg relative overflow-hidden">
-      <img
-        alt="Woman listing to music"
-        className="object-cover w-full h-[200px]"
-        src="https://example.com/image.jpg"
-      />
-      <Card.Footer className="justify-between backdrop-blur-md bg-white/10 border-white/20 border overflow-hidden py-1 absolute rounded-lg bottom-1 w-[calc(100%_-_8px)] shadow-sm ml-1 z-10">
-        <p className="text-tiny text-white/80">Available soon.</p>
-        <Button className="text-tiny text-white bg-black/20" size="sm">
-          Notify me
-        </Button>
-      </Card.Footer>
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-### Card Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* v2 doesn't have variants, uses shadow/radius */}
-    <Card shadow="md" radius="lg">
-      <CardBody>Content</CardBody>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Card variant="default">
-      <Card.Content>Content</Card.Content>
-    </Card>
-    <Card variant="secondary">
-      <Card.Content>Content</Card.Content>
     </Card>
     ```
   </Tab>

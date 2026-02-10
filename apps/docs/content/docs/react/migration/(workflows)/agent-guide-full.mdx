@@ -1,6 +1,6 @@
 ---
-title: Agent Migration Guide - Phased Migration
-description: Phased migration guide for AI assistants helping migrate HeroUI v2 to v3
+title: Agent Migration Guide - Full Migration
+description: Full migration guide for AI assistants helping migrate HeroUI v2 to v3
 index: false
 ---
 
@@ -10,15 +10,15 @@ index: false
 
 ## Overview
 
-This guide is designed for AI assistants (agents) helping users migrate from HeroUI v2 to v3. It implements a **phased migration approach** that analyzes the project first and migrates components in manageable batches rather than all at once.
+This guide is designed for AI assistants (agents) helping users migrate from HeroUI v2 to v3. It implements a **full migration approach** that analyzes the project first and migrates components in manageable batches rather than all at once.
 
 <Callout type="warning">
-  **Critical Constraint**: HeroUI v2 and v3 **cannot coexist** in the same project. The project will be broken during migration. Always work in a feature branch and migrate all component code before switching dependencies.
+  **Critical Constraint**: HeroUI v2 and v3 **should not coexist** in the same project. The project will be broken during migration. Always work in a feature branch and migrate all component code before switching dependencies.
 </Callout>
 
 ## Key Principles
 
-1. **Phased Migration**: Never migrate all components at once. Large projects require phased migration.
+1. **Full Migration**: Never migrate all components at once. Large projects require full migration.
 2. **Project Analysis First**: Always analyze the codebase to understand component usage before creating a migration plan.
 3. **MCP Prompt-Driven**: **Important**: Prompts are registered on the MCP to help with the migrations. Agents should guide users on which prompts to use at each step.
 4. **Broken State Management**: **Critical**: v2 and v3 cannot coexist. The project will be broken during migration. Plan for this by:
@@ -34,7 +34,7 @@ This guide is designed for AI assistants (agents) helping users migrate from Her
 
 ## Detailed Migration Steps
 
-For detailed step-by-step instructions, see the [Phased Migration Guide](/docs/react/migration/phased-migration). The guide covers:
+For detailed step-by-step instructions, see the [Full Migration Guide](/docs/react/migration/full-migration). The guide covers:
 
 - Dependency updates
 - Theming configuration changes
@@ -64,7 +64,7 @@ HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`,
 
 ## Component Import Changes
 
-See the [Phased Migration Guide](/docs/react/migration/phased-migration#step-5-update-component-imports) for detailed component import changes.
+See the [Full Migration Guide](/docs/react/migration/full-migration#step-5-update-component-imports) for detailed component import changes.
 
 ## Key API Changes
 
@@ -88,11 +88,11 @@ Use the `get_component_guides` MCP tool to fetch detailed guides for each compon
 
 ## Custom Theme Overrides
 
-See the [Phased Migration Guide](/docs/react/migration/phased-migration#step-7-update-custom-theme-overrides) for custom theme override migration.
+See the [Full Migration Guide](/docs/react/migration/full-migration#step-7-update-custom-theme-overrides) for custom theme override migration.
 
 ## Styling Migration
 
-See the [Phased Migration Guide](/docs/react/migration/phased-migration#step-9-styling-migration) for detailed styling migration instructions.
+See the [Full Migration Guide](/docs/react/migration/full-migration#step-9-styling-migration) for detailed styling migration instructions.
 
 **Agent Note**: Use the `get_styling_migration_guide` MCP tool for comprehensive styling migration details.
 
@@ -106,14 +106,14 @@ The Migration MCP server exposes prompts that **users invoke** (not agents). Eac
 
 ### Available Prompts
 
-1. **`analyze-and-plan`**: Analyze the project to identify all HeroUI v2 components and create a phased migration plan. First step in migration. No arguments required.
+1. **`analyze-and-plan`**: Analyze the project to identify all HeroUI v2 components and create a full migration plan. First step in migration. No arguments required.
 2. **`implement-migration`**: Implement component migrations incrementally with checkpoints for user approval. Use this to migrate components phase by phase, including the final styling migration phase. No arguments required.
 
 **Agent role**: Guide users to invoke prompts at appropriate stages. Help interpret prompt outputs and apply migrations. Use MCP tools (`get_component_guides`, `get_styling_migration_guide`) to fetch detailed guides when needed.
 
 **Critical**: The `implement-migration` prompt emphasizes stopping at checkpoints for user approval. Always wait for explicit user approval between phases - do not proceed automatically.
 
-## Phased Migration Workflow
+## Full Migration Workflow
 
 **IMPORTANT**: Since v2 and v3 cannot coexist, the migration happens in two main stages:
 
@@ -165,7 +165,7 @@ These steps can be done before switching HeroUI dependencies and won't break the
 For each component group in the migration plan:
 
 1. **Guide user to invoke `implement-migration` prompt**
-   - Prompt includes instructions for phased migration with checkpoints
+   - Prompt includes instructions for full migration with checkpoints
    - **Critical**: Prompt emphasizes stopping between phases for user approval
 
 2. **Fetch component-specific guides**
@@ -326,13 +326,13 @@ For each component group in the migration plan:
 
 - Can use larger batches (5-10 components)
 - May complete in fewer phases
-- Still verify incrementally (phased approach)
+- Still verify incrementally (full migration approach)
 - Can use any strategy
 - Still need to migrate all code before switching deps
 
-### Mixed v2/v3 Usage (Phased Migration)
+### Mixed v2/v3 Usage (Full Migration)
 
-- **Not possible in phased migration**: v2 and v3 cannot coexist in phased migration approach
+- **Not possible in full migration**: v2 and v3 cannot coexist in full migration approach
 - Must migrate all components before switching dependencies
 - Use feature branch to maintain working main branch
 - Complete migration in one go
@@ -384,7 +384,7 @@ Use these MCP tools:
 - Check for missed v2 patterns
 - Search for remaining v2 imports and patterns
 - Consider rolling back and completing missed migrations
-- Fix errors incrementally (phased approach)
+- Fix errors incrementally (full migration approach)
 
 ## Next Steps
 

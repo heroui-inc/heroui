@@ -13,8 +13,6 @@ The Avatar component in HeroUI v3 has been redesigned with a compound component 
 
 ## Structure Changes
 
-### v2: Single Component with Props
-
 In v2, `Avatar` was a single component that accepted props for image source, name, fallback, and other elements:
 
 ```tsx
@@ -30,8 +28,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Component Structure
 
 In v3, Avatar uses a compound component pattern with explicit subcomponents:
 
@@ -93,24 +89,6 @@ The following props are no longer available in v3:
 **v3:** No `AvatarGroup` component - create groups manually with CSS classes
 
 ## Migration Examples
-
-### Sizes and Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Avatar size="md" color="primary" src="..." name="John" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Avatar size="md" color="accent">
-      <Avatar.Image src="..." alt="John" />
-      <Avatar.Fallback>J</Avatar.Fallback>
-    </Avatar>
-    ```
-  </Tab>
-</Tabs>
 
 ### Custom Fallback
 
@@ -178,97 +156,6 @@ The following props are no longer available in v3:
     ```
   </Tab>
 </Tabs>
-
-### Avatar Group with Max Count
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Avatar, AvatarGroup } from "@heroui/react";
-
-    <AvatarGroup max={3}>
-      <Avatar src="https://example.com/1.jpg" />
-      <Avatar src="https://example.com/2.jpg" />
-      <Avatar src="https://example.com/3.jpg" />
-      <Avatar src="https://example.com/4.jpg" />
-      <Avatar src="https://example.com/5.jpg" />
-    </AvatarGroup>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Avatar } from "@heroui/react";
-
-    const users = [
-      { id: 1, src: "https://example.com/1.jpg", name: "User 1" },
-      { id: 2, src: "https://example.com/2.jpg", name: "User 2" },
-      { id: 3, src: "https://example.com/3.jpg", name: "User 3" },
-      { id: 4, src: "https://example.com/4.jpg", name: "User 4" },
-      { id: 5, src: "https://example.com/5.jpg", name: "User 5" },
-    ];
-
-    <div className="flex -space-x-2">
-      {users.slice(0, 3).map((user) => (
-        <Avatar key={user.id} className="ring-2 ring-background">
-          <Avatar.Image src={user.src} alt={user.name} />
-          <Avatar.Fallback>
-            {user.name.split(" ").map(n => n[0]).join("")}
-          </Avatar.Fallback>
-        </Avatar>
-      ))}
-      <Avatar className="ring-2 ring-background">
-        <Avatar.Fallback className="border-none">
-          +{users.length - 3}
-        </Avatar.Fallback>
-      </Avatar>
-    </div>
-    ```
-  </Tab>
-</Tabs>
-
-### Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* v2 doesn't have variants, but uses color prop */}
-    <Avatar color="primary" name="John" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* v3 has variant prop */}
-    <Avatar variant="soft" color="accent">
-      <Avatar.Fallback>J</Avatar.Fallback>
-    </Avatar>
-    ```
-  </Tab>
-</Tabs>
-
-## Styling Changes
-
-### v2: `classNames` Prop
-
-```tsx
-<Avatar 
-  classNames={{
-    base: "custom-base",
-    img: "custom-img",
-    fallback: "custom-fallback"
-  }}
-/>
-```
-
-### v3: Direct `className` Props
-
-```tsx
-<Avatar className="custom-base">
-  <Avatar.Image className="custom-img" src="..." alt="..." />
-  <Avatar.Fallback className="custom-fallback">
-    JD
-  </Avatar.Fallback>
-</Avatar>
-```
 
 ## Component Anatomy
 

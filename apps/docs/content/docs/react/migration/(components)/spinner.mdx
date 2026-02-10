@@ -13,8 +13,6 @@ The Spinner component in HeroUI v3 has been simplified to a single circular spin
 
 ## Structure Changes
 
-### v2: Multiple Variants with Label
-
 In v2, Spinner supported multiple variants and labels:
 
 ```tsx
@@ -24,8 +22,6 @@ export default function App() {
   return <Spinner variant="default" label="Loading..." color="primary" />;
 }
 ```
-
-### v3: Single Variant
 
 In v3, Spinner is simplified to a single circular variant:
 
@@ -152,32 +148,6 @@ The following props are no longer available in v3:
     ```
   </Tab>
 </Tabs>
-
-### Variants (Removed)
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <div className="flex gap-4">
-      <Spinner variant="default" />
-      <Spinner variant="simple" />
-      <Spinner variant="gradient" />
-      <Spinner variant="wave" />
-      <Spinner variant="dots" />
-      <Spinner variant="spinner" />
-    </div>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Only one variant available - circular spinner */}
-    <Spinner />
-    
-    {/* For other spinner styles, consider using CSS animations */}
-    ```
-  </Tab>
-</Tabs>
-
 
 ## Color Mapping
 

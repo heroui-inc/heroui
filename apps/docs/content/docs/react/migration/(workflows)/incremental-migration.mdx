@@ -1,5 +1,5 @@
 ---
-title: Incremental Migration with Coexistence
+title: Incremental Migration
 description: Step-by-step guide for migrating HeroUI v2 to v3 incrementally while keeping both versions working side-by-side
 ---
 
@@ -11,18 +11,9 @@ description: Step-by-step guide for migrating HeroUI v2 to v3 incrementally whil
 
 Incremental migration with coexistence allows you to migrate from HeroUI v2 to v3 component-by-component while keeping your project functional throughout the migration process. This approach uses special setup strategies to allow both v2 and v3 components to work side-by-side.
 
-<Callout type="info">
-  **Key Advantage**: Unlike phased migration, incremental coexistence migration allows the project to remain functional during migration. Both v2 and v3 components can coexist temporarily, enabling you to migrate gradually over time.
-</Callout>
+### Migration MCP
 
-### When to Use Incremental Coexistence
-
-Use this approach when:
-- You want to migrate gradually over time
-- You need to keep the project working during migration
-- You want to test v3 components alongside v2 components
-- You have a large codebase and want to migrate feature-by-feature
-- You need to deploy incremental updates without breaking the application
+The HeroUI Migration MCP server provides tools for AI agents and prompts to help with migration. See the [Migration MCP Tool](/docs/react/migration#migration-mcp-tool) section in the main migration guide for setup and available prompts.
 
 ### Limitations and Considerations
 
@@ -33,7 +24,7 @@ Before choosing this approach, be aware of:
 - **Type Conflicts**: TypeScript may show conflicts if both versions are imported in the same file
 - **Provider**: v2 requires `HeroUIProvider`, v3 doesn't - you may need conditional provider wrapping
 - **React Version**: v3 requires React 19+, v2 supports React 18+ - ensure React 19 is installed
-- **Setup Complexity**: Requires more complex initial setup compared to phased migration
+- **Setup Complexity**: Requires more complex initial setup compared to full migration
 
 ## Strategy Selection
 
@@ -75,20 +66,17 @@ import {Button} from "@heroui-v3/react"; // v3
 
 ### Migration Process
 
-1. **Start with v2 components working normally**
-   - All existing components continue to work as before
-
-2. **Migrate one component at a time:**
+1. **Migrate one component at a time:**
    - Update imports to use `@heroui-v3/react`
    - Update component code to v3 API
    - Test the migrated component
    - Verify styling looks correct
 
-3. **Continue until all components are migrated**
+2. **Continue until all components are migrated**
    - Track which components have been migrated
    - Test each migrated component thoroughly
 
-4. **Once all components are migrated, switch to v3-only:**
+3. **Once all components are migrated, switch to v3-only:**
    - Remove v2 dependencies (`@heroui/react`, `@heroui/theme`)
    - Remove aliases
    - Update all imports to `@heroui/react` (remove `-v3` suffix)
@@ -283,24 +271,6 @@ Use this checklist to track your incremental migration progress:
 - Update CSS to v3-only
 - Complete styling migration
 - Test entire application
-
-## Common Issues and Solutions
-
-### Issue: Styling conflicts between v2 and v3
-
-**Solution:** Ensure CSS import order is correct (`tailwindcss` first, then `@heroui/styles`). Check that both CSS systems are properly configured.
-
-### Issue: TypeScript errors with both versions
-
-**Solution:** Avoid importing both versions in the same file. Migrate files completely to v3 before mixing imports.
-
-### Issue: Provider conflicts
-
-**Solution:** v2 components need `HeroUIProvider`, v3 doesn't. You may need conditional provider wrapping or migrate Provider-dependent components together.
-
-### Issue: Bundle size increase
-
-**Solution:** This is expected during coexistence. Bundle size will return to normal once v2 dependencies are removed.
 
 ## Next Steps
 
