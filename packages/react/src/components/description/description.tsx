@@ -1,16 +1,17 @@
 "use client";
 
-import type {DescriptionVariants} from "./description.styles";
+import type {DescriptionVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 import type {TextProps} from "react-aria-components";
 
+import {descriptionVariants} from "@heroui/styles";
 import {Text} from "react-aria-components";
-
-import {descriptionVariants} from "./description.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Description Root
  * -----------------------------------------------------------------------------------------------*/
-interface DescriptionRootProps extends TextProps, DescriptionVariants {}
+interface DescriptionRootProps
+  extends ComponentPropsWithRef<typeof Text>, TextProps, DescriptionVariants {}
 
 const DescriptionRoot = ({children, className, ...rest}: DescriptionRootProps) => {
   return (

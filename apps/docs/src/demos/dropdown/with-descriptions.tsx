@@ -1,7 +1,7 @@
 "use client";
 
+import {FloppyDisk, FolderOpen, SquarePlus, TrashBin} from "@gravity-ui/icons";
 import {Button, Description, Dropdown, Kbd, Label} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithDescriptions() {
   return (
@@ -13,7 +13,7 @@ export function WithDescriptions() {
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Item id="new-file" textValue="New file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+              <SquarePlus className="size-4 shrink-0 text-muted" />
             </div>
             <div className="flex flex-col">
               <Label>New file</Label>
@@ -26,7 +26,7 @@ export function WithDescriptions() {
           </Dropdown.Item>
           <Dropdown.Item id="open-file" textValue="Open file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:folder-open" />
+              <FolderOpen className="size-4 shrink-0 text-muted" />
             </div>
             <div className="flex flex-col">
               <Label>Open file</Label>
@@ -39,7 +39,7 @@ export function WithDescriptions() {
           </Dropdown.Item>
           <Dropdown.Item id="save-file" textValue="Save file">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:floppy-disk" />
+              <FloppyDisk className="size-4 shrink-0 text-muted" />
             </div>
             <div className="flex flex-col">
               <Label>Save file</Label>
@@ -52,7 +52,7 @@ export function WithDescriptions() {
           </Dropdown.Item>
           <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
             <div className="flex h-8 items-start justify-center pt-px">
-              <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+              <TrashBin className="size-4 shrink-0 text-danger" />
             </div>
             <div className="flex flex-col">
               <Label>Delete file</Label>

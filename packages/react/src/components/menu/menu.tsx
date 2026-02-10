@@ -1,19 +1,19 @@
 "use client";
 
-import type {MenuVariants} from "./menu.styles";
-import type {MenuProps as MenuPrimitiveProps} from "react-aria-components";
+import type {MenuVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
+import {menuVariants} from "@heroui/styles";
 import React from "react";
 import {Menu as MenuPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 
-import {menuVariants} from "./menu.styles";
-
 /* -------------------------------------------------------------------------------------------------
  * Menu Root
  * -----------------------------------------------------------------------------------------------*/
-interface MenuRootProps<T extends object> extends MenuPrimitiveProps<T>, MenuVariants {
+interface MenuRootProps<T extends object>
+  extends ComponentPropsWithRef<typeof MenuPrimitive<T>>, MenuVariants {
   className?: string;
 }
 

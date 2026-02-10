@@ -233,9 +233,9 @@ The theme also provides calculated variables for hover states, soft colors, and 
 
 - **Hover states**: `--color-accent-hover`, `--color-success-hover`, `--color-warning-hover`, `--color-danger-hover`, `--color-default-hover`
 - **Soft colors**: `--color-accent-soft`, `--color-danger-soft`, `--color-warning-soft`, `--color-success-soft` (with their foreground and hover variants)
-- **Surface levels**: `--color-surface-secondary`, `--color-surface-tertiary`, `--color-surface-quaternary`
+- **Surface levels**: `--color-surface-secondary`, `--color-surface-tertiary`
 - **Radius scale**: `--radius-xs` through `--radius-4xl` (calculated from `--radius`)
-- **Transition timing functions**: Various easing curves like `--ease-smooth`, `--ease-fluid-out`, etc.
+- **Transition timing functions**: Various easing curves like `--ease-smooth`, `--ease-out-fuild`, etc.
 
 ## Dependencies
 

@@ -2,7 +2,7 @@
 
 /* Base close button styles */
 .close-button {
-  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center select-none items-center justify-center rounded-xl p-1;
+  @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center items-center justify-center rounded-xl p-1 select-none no-highlight;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -14,24 +14,24 @@
   transition:
     transform 250ms var(--ease-out-quart),
     color 150ms var(--ease-out),
-    background-color 150ms var(--ease-smooth),
+    background-color 100ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Pending state */
-  &[data-pending] {
+  &[data-pending="true"] {
     @apply status-pending;
   }
 
@@ -45,17 +45,21 @@
 
 /* Variants */
 .close-button--default {
-  @apply text-muted bg-transparent;
+  @apply bg-default text-muted;
+
+  &:active,
+  &[data-pressed="true"] {
+  }
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
-      @apply text-foreground bg-default;
+    &[data-hovered="true"] {
+      @apply bg-default-hover;
     }
   }
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.93);
   }
 }

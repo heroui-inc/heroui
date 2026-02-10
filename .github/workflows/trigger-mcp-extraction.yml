@@ -1,0 +1,52 @@
+name: Trigger MCP Extraction on Vercel Deployment
+
+on:
+  repository_dispatch:
+    types:
+      - vercel.deployment.success
+      - vercel.deployment.promoted
+
+jobs:
+  trigger-extraction:
+    name: Trigger MCP Extraction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Native MCP Extraction
+        if: |
+          github.event.client_payload.environment == 'production' ||
+          (github.event.client_payload.environment == 'preview' && 
+           (github.event.client_payload.git.ref == 'v3' || github.event.client_payload.git.ref == 'refs/heads/v3'))
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.MCP_DISPATCH_TOKEN }}
+          repository: heroui-inc/heroui-mcp
+          event-type: native-docs-deployed
+          client-payload: |
+            {
+              "environment": "${{ github.event.client_payload.environment }}",
+              "deployment_url": "${{ github.event.client_payload.url }}",
+              "deployment_id": "${{ github.event.client_payload.id }}",
+              "git_ref": "${{ github.event.client_payload.git.ref }}",
+              "git_sha": "${{ github.event.client_payload.git.sha }}",
+              "triggered_by": "vercel_deployment"
+            }
+
+      - name: Trigger React MCP Extraction
+        if: |
+          github.event.client_payload.environment == 'production' ||
+          (github.event.client_payload.environment == 'preview' && 
+           (github.event.client_payload.git.ref == 'v3' || github.event.client_payload.git.ref == 'refs/heads/v3'))
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.MCP_DISPATCH_TOKEN }}
+          repository: heroui-inc/heroui-mcp
+          event-type: react-docs-deployed
+          client-payload: |
+            {
+              "environment": "${{ github.event.client_payload.environment }}",
+              "deployment_url": "${{ github.event.client_payload.url }}",
+              "deployment_id": "${{ github.event.client_payload.id }}",
+              "git_ref": "${{ github.event.client_payload.git.ref }}",
+              "git_sha": "${{ github.event.client_payload.git.sha }}",
+              "triggered_by": "vercel_deployment"
+            }

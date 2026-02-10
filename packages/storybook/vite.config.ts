@@ -3,9 +3,9 @@ import {default as react} from "@vitejs/plugin-react";
 import {defineConfig} from "vite";
 
 export default defineConfig({
+  plugins: [react(), tailwindcss()],
   optimizeDeps: {
-    include: ["@storybook/theming", "@mdx-js/react"],
+    include: ["@mdx-js/react"],
     exclude: ["sb-vite"],
   },
-  plugins: [react(), tailwindcss()],
 });

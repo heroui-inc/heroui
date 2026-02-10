@@ -1,17 +1,17 @@
 "use client";
 
+import {Copy} from "@gravity-ui/icons";
 import {Button, InputGroup, Label, TextField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithCopySuffix() {
   return (
-    <TextField className="w-full max-w-[280px]" name="website">
+    <TextField className="w-full max-w-[280px]" defaultValue="heroui.com" name="website">
       <Label>Website</Label>
       <InputGroup>
-        <InputGroup.Input className="w-full max-w-[280px]" defaultValue="heroui.com" />
+        <InputGroup.Input className="w-full max-w-[280px]" />
         <InputGroup.Suffix className="pr-0">
           <Button isIconOnly aria-label="Copy" size="sm" variant="ghost">
-            <Icon className="size-4" icon="gravity-ui:copy" />
+            <Copy className="size-4" />
           </Button>
         </InputGroup.Suffix>
       </InputGroup>

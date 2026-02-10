@@ -30,7 +30,7 @@ export function PopoverPlacement() {
       </Popover>
 
       <div className="flex items-center justify-center">
-        <span className="text-muted text-sm">Click buttons</span>
+        <span className="text-sm text-muted">Click buttons</span>
       </div>
 
       <Popover>

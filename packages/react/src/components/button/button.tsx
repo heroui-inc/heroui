@@ -1,57 +1,60 @@
 "use client";
 
-import type {ButtonVariants} from "./button.styles";
-import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
+import type {ButtonVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import {buttonVariants} from "@heroui/styles";
+import {useContext} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
-
-import {buttonVariants} from "./button.styles";
+import {BUTTON_GROUP_CHILD, ButtonGroupContext} from "../button-group";
 
 /* -------------------------------------------------------------------------------------------------
  * Button Root
  * -----------------------------------------------------------------------------------------------*/
-interface ButtonRootProps extends ButtonPrimitiveProps, ButtonVariants {
-  asChild?: boolean;
+interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {
+  [BUTTON_GROUP_CHILD]?: boolean;
 }
 
 const ButtonRoot = ({
-  asChild,
   children,
   className,
+  fullWidth,
+  isDisabled,
   isIconOnly,
   size,
   slot,
   style,
   variant,
+  [BUTTON_GROUP_CHILD]: isButtonGroupChild,
   ...rest
 }: ButtonRootProps) => {
-  const styles = buttonVariants({
-    isIconOnly,
-    size,
-    variant,
-    class: typeof className === "string" ? className : undefined,
-  });
+  const buttonGroupContext = useContext(ButtonGroupContext);
 
-  if (asChild) {
-    return (
-      <SlotPrimitive
-        className={styles}
-        slot={slot as string}
-        style={style as React.CSSProperties}
-        {...rest}
-      >
-        {typeof children === "function" ? children({} as any) : children}
-      </SlotPrimitive>
-    );
-  }
+  // Only use context if this button is a direct child of ButtonGroup
+  const shouldUseContext = isButtonGroupChild === true;
+
+  // Merge props with precedence: direct props > context props
+  const finalSize = size ?? (shouldUseContext ? buttonGroupContext?.size : undefined);
+  const finalVariant = variant ?? (shouldUseContext ? buttonGroupContext?.variant : undefined);
+  const finalIsDisabled =
+    isDisabled ?? (shouldUseContext ? buttonGroupContext?.isDisabled : undefined);
+  const finalFullWidth =
+    fullWidth ?? (shouldUseContext ? buttonGroupContext?.fullWidth : undefined);
+
+  const styles = buttonVariants({
+    fullWidth: finalFullWidth,
+    isIconOnly,
+    size: finalSize,
+    variant: finalVariant,
+  });
 
   return (
     <ButtonPrimitive
       className={composeTwRenderProps(className, styles)}
       data-slot="button"
+      isDisabled={finalIsDisabled}
       slot={slot}
       style={style}
       {...rest}

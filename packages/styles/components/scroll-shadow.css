@@ -1,0 +1,77 @@
+/* Base scroll-shadow component */
+.scroll-shadow {
+  @apply relative;
+  --scroll-shadow-size: 40px;
+}
+
+/* Orientation: Vertical */
+.scroll-shadow--vertical {
+  @apply overflow-y-auto;
+}
+
+/* Orientation: Horizontal */
+.scroll-shadow--horizontal {
+  @apply overflow-x-auto;
+}
+
+/* Variant: Fade - Vertical */
+.scroll-shadow--fade.scroll-shadow--vertical {
+  &[data-top-scroll="true"] {
+    --scroll-linear-gradient: 0deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
+  }
+
+  &[data-bottom-scroll="true"] {
+    --scroll-linear-gradient: 180deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
+  }
+
+  &[data-top-bottom-scroll="true"] {
+    --scroll-linear-gradient:
+      #000, #000, transparent 0, #000 var(--scroll-shadow-size),
+      #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
+  }
+}
+
+/* Variant: Fade - Horizontal */
+.scroll-shadow--fade.scroll-shadow--horizontal {
+  &[data-left-scroll="true"] {
+    --scroll-linear-gradient: 270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
+  }
+
+  &[data-right-scroll="true"] {
+    --scroll-linear-gradient: 90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
+  }
+
+  &[data-left-right-scroll="true"] {
+    --scroll-linear-gradient:
+      to right, #000, #000, transparent 0, #000 var(--scroll-shadow-size),
+      #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    mask-image: linear-gradient(var(--scroll-linear-gradient));
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
+  }
+}
+
+/* Hide scrollbar modifier */
+.scroll-shadow--hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    @apply hidden;
+  }
+}

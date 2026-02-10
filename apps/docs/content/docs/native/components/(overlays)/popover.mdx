@@ -1,0 +1,498 @@
+---
+title: Popover
+description: Displays a floating content panel anchored to a trigger element with placement and alignment options.
+icon: updated
+links:
+  source_native: popover/popover.tsx
+  styles_native: popover/popover.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/popover-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/popover-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Popover } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content>
+      <Popover.Arrow />
+      <Popover.Close />
+      <Popover.Title>...</Popover.Title>
+      <Popover.Description>...</Popover.Description>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+- **Popover**: Main container that manages open/close state, positioning, and provides context to child components.
+- **Popover.Trigger**: Clickable element that toggles popover visibility. Wraps any child element with press handlers.
+- **Popover.Portal**: Renders popover content in a portal layer above other content. Ensures proper stacking and positioning.
+- **Popover.Overlay**: Optional background overlay. Can be transparent or semi-transparent to capture outside clicks.
+- **Popover.Content**: Container for popover content with positioning, styling, and collision detection. Supports both popover and bottom-sheet presentations.
+- **Popover.Arrow**: Optional arrow element pointing to the trigger. Automatically positioned based on placement.
+- **Popover.Close**: Close button for the popover. Can accept custom children or uses default close icon.
+- **Popover.Title**: Optional title text with pre-styled typography.
+- **Popover.Description**: Optional description text with muted styling.
+
+## Usage
+
+### Basic Usage
+
+The Popover component uses compound parts to create floating content panels.
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">...</Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### With Title and Description
+
+Structure popover content with title and description for better information hierarchy.
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">
+      <Popover.Close />
+      <Popover.Title>...</Popover.Title>
+      <Popover.Description>...</Popover.Description>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### With Arrow
+
+Add an arrow pointing to the trigger element for better visual connection.
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" placement="top">
+      <Popover.Arrow />
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+> **Note:** When using `<Popover.Arrow />`, you need to apply a border to `Popover.Content`, for instance using the `border border-border` class. This ensures the arrow visually connects properly with the content border.
+
+### Width Control
+
+Control the width of the popover content using the `width` prop.
+
+```tsx
+{
+  /* Fixed width in pixels */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width={320}>...</Popover.Content>
+  </Popover.Portal>
+</Popover>;
+
+{
+  /* Match trigger width */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width="trigger">...</Popover.Content>
+  </Popover.Portal>
+</Popover>;
+
+{
+  /* Full width (100%) */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width="full">...</Popover.Content>
+  </Popover.Portal>
+</Popover>;
+
+{
+  /* Auto-size to content (default) */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width="content-fit">...</Popover.Content>
+  </Popover.Portal>
+</Popover>;
+```
+
+### Bottom Sheet Presentation
+
+Use bottom sheet presentation for mobile-optimized interaction patterns.
+
+> **Important:** The `presentation` prop on `Popover.Content` must match the `presentation` prop on `Popover.Root`. In development mode, a mismatch will throw an error.
+
+```tsx
+<Popover presentation="bottom-sheet">
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="bottom-sheet">
+      <Popover.Title>...</Popover.Title>
+      <Popover.Description>...</Popover.Description>
+      <Button>Close</Button>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### Placement Options
+
+Control where the popover appears relative to the trigger element.
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Content presentation="popover" placement="left">...</Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### Alignment Options
+
+Fine-tune content alignment along the placement axis.
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Content presentation="popover" placement="top" align="start">
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### Custom Animation
+
+Configure custom animations for open and close transitions using the `animation` prop on `Popover.Root`.
+
+```tsx
+<Popover
+  animation={{
+    entering: {
+      type: 'spring',
+      config: { damping: 15, stiffness: 300 },
+    },
+    exiting: {
+      type: 'timing',
+      config: { duration: 200 },
+    },
+  }}
+>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">...</Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### Programmatic control
+
+```tsx
+// Open or close popover programmatically using ref
+const popoverRef = useRef<PopoverTriggerRef>(null);
+
+// Open programmatically
+popoverRef.current?.open();
+
+// Close programmatically
+popoverRef.current?.close();
+
+// Full example
+<Popover>
+  <Popover.Trigger ref={popoverRef} asChild>
+    <Button>Trigger</Button>
+  </Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">
+      <Text>Content</Text>
+      <Button onPress={() => popoverRef.current?.close()}>Close</Button>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>;
+```
+
+## Example
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { Button, Popover, useThemeColor } from 'heroui-native';
+import { Text, View } from 'react-native';
+
+export default function PopoverExample() {
+  const themeColorMuted = useThemeColor('muted');
+
+  return (
+    <Popover>
+      <Popover.Trigger asChild>
+        <Button variant="tertiary" size="sm">
+          <Button.StartContent>
+            <Ionicons
+              name="information-circle"
+              size={20}
+              color={themeColorMuted}
+            />
+          </Button.StartContent>
+          <Button.LabelContent>Show Info</Button.LabelContent>
+        </Button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Overlay />
+        <Popover.Content presentation="popover" width={320} className="gap-1 rounded-xl px-6 py-4">
+          <Popover.Close className="absolute top-3 right-3 z-50" />
+          <Popover.Title>Information</Popover.Title>
+          <Popover.Description>
+            This popover includes a title and description to provide more
+            structured information to users.
+          </Popover.Description>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/popover.tsx).
+
+## API Reference
+
+### Popover
+
+| prop            | type                        | default | description                                                               |
+| --------------- | --------------------------- | ------- | ------------------------------------------------------------------------- |
+| `children`      | `ReactNode`                 | -       | Children elements to be rendered inside the popover                       |
+| `isOpen`        | `boolean`                   | -       | Whether the popover is open (controlled mode)                             |
+| `isDefaultOpen` | `boolean`                   | -       | The open state of the popover when initially rendered (uncontrolled mode) |
+| `onOpenChange`  | `(isOpen: boolean) => void` | -       | Callback when the popover open state changes                              |
+| `animation`     | `AnimationRootDisableAll`      | -       | Animation configuration. Can be `false`, `"disabled"`, `"disable-all"`, `true`, or `undefined` |
+| `presentation` | `'popover' \| 'bottom-sheet'`  | `'popover'` | Presentation mode for the popover content                                 |
+| `asChild`       | `boolean`                   | `false` | Whether to render as a child element                                      |
+| `...ViewProps`  | `ViewProps`                 | -       | All standard React Native View props are supported                        |
+
+#### AnimationRootDisableAll
+
+Animation configuration for popover root component. Can be:
+
+- `false` or `"disabled"`: Disable only root animations
+- `"disable-all"`: Disable all animations including children
+- `true` or `undefined`: Use default animations
+
+### Popover.Trigger
+
+| prop                | type             | default | description                                             |
+| ------------------- | ---------------- | ------- | ------------------------------------------------------- |
+| `children`          | `ReactNode`      | -       | The trigger element content                             |
+| `className`         | `string`         | -       | Additional CSS classes for the trigger                  |
+| `asChild`           | `boolean`        | `true`  | Whether to render as a child element                    |
+| `...PressableProps` | `PressableProps` | -       | All standard React Native Pressable props are supported |
+
+### Popover.Portal
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode` | -       | The portal content (required)                      |
+| `hostName`     | `string`    | -       | Optional name of the host element for the portal   |
+| `forceMount`   | `boolean`   | -       | Whether to force mount the component in the DOM    |
+| `className`    | `string`    | -       | Additional CSS classes for the portal container    |
+| `...ViewProps` | `ViewProps` | -       | All standard React Native View props are supported |
+
+### Popover.Overlay
+
+| prop                    | type                      | default | description                                                  |
+| ----------------------- | ------------------------- | ------- | ------------------------------------------------------------ |
+| `className`             | `string`                  | -       | Additional CSS classes for the overlay                       |
+| `closeOnPress`          | `boolean`                 | `true`  | Whether to close the popover when overlay is pressed         |
+| `forceMount`            | `boolean`                 | -       | Whether to force mount the component in the DOM              |
+| `animation`             | `PopoverOverlayAnimation` | -       | Animation configuration                                      |
+| `isAnimatedStyleActive` | `boolean`                 | `true`  | Whether animated styles (react-native-reanimated) are active |
+| `asChild`               | `boolean`                 | `false` | Whether to render as a child element                         |
+| `...Animated.ViewProps` | `Animated.ViewProps`      | -       | All Reanimated Animated.View props are supported             |
+
+#### PopoverOverlayAnimation
+
+Animation configuration for popover overlay component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop      | type                    | default     | description                                     |
+| --------- | ----------------------- | ----------- | ----------------------------------------------- |
+| `state`   | `'disabled' \| boolean` | -           | Disable animations while customizing properties |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close] - Takes effect for bottom-sheet/dialog presentation |
+| `entering` | `EntryOrExitLayoutType` | FadeIn with duration 200ms | Custom Keyframe animation for entering transition - Takes effect for popover presentation |
+| `exiting` | `EntryOrExitLayoutType` | FadeOut with duration 150ms | Custom Keyframe animation for exiting transition - Takes effect for popover presentation |
+
+### Popover.Content (Popover Presentation)
+
+| prop                      | type                                             | default         | description                                                  |
+| ------------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------------ |
+| `children`                | `ReactNode`                                      | -               | The popover content                                          |
+| `presentation`            | `'popover'`                                      | `'popover'`     | Presentation mode - must match Popover.Root presentation prop. When not provided, defaults to 'popover' |
+| `width`                   | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | Width sizing strategy for the content                        |
+| `placement`               | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | Placement of the popover relative to trigger                 |
+| `align`                   | `'start' \| 'center' \| 'end'`                   | `'center'`      | Alignment along the placement axis                           |
+| `avoidCollisions`         | `boolean`                                        | `true`          | Whether to flip placement when close to viewport edges       |
+| `offset`                  | `number`                                         | `9`             | Distance from trigger element in pixels                      |
+| `alignOffset`             | `number`                                         | `0`             | Offset along the alignment axis in pixels                    |
+| `disablePositioningStyle` | `boolean`                                        | `false`         | Whether to disable automatic positioning styles              |
+| `forceMount`              | `boolean`                                        | -               | Whether to force mount the component in the DOM              |
+| `insets`                  | `Insets`                                         | -               | Screen edge insets to respect when positioning               |
+| `className`               | `string`                                         | -               | Additional CSS classes for the content container             |
+| `animation`               | `PopupPopoverContentAnimation`                   | -               | Animation configuration                                      |
+| `isAnimatedStyleActive`   | `boolean`                                        | `true`          | Whether animated styles (react-native-reanimated) are active |
+| `asChild`                 | `boolean`                                        | `false`         | Whether to render as a child element                         |
+| `...Animated.ViewProps`   | `Animated.ViewProps`                             | -               | All Reanimated Animated.View props are supported             |
+
+### Popover.Content (Bottom Sheet Presentation)
+
+| prop                        | type                   | default | description                                      |
+| --------------------------- | ---------------------- | ------- | ------------------------------------------------ |
+| `children`                  | `ReactNode`            | -       | The bottom sheet content                         |
+| `presentation`              | `'bottom-sheet'`       | -       | Presentation mode - must be 'bottom-sheet' and match Popover.Root presentation prop (required) |
+| `contentContainerClassName` | `string`               | -       | Additional CSS classes for the content container |
+| `contentContainerProps`     | `BottomSheetViewProps` | -       | Props for the content container                  |
+| `enablePanDownToClose`      | `boolean`              | `true`  | Whether pan down gesture closes the sheet        |
+| `backgroundStyle`           | `ViewStyle`            | -       | Style for the bottom sheet background            |
+| `handleIndicatorStyle`      | `ViewStyle`            | -       | Style for the bottom sheet handle indicator      |
+| `...BottomSheetProps`       | `BottomSheetProps`     | -       | All @gorhom/bottom-sheet props are supported     |
+
+#### PopupPopoverContentAnimation
+
+Animation configuration for popover content component (popover presentation). Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop      | type                    | default                                                         | description                                     |
+| --------- | ----------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
+| `state`   | `'disabled' \| boolean` | -                                                               | Disable animations while customizing properties |
+| `entering` | `EntryOrExitLayoutType` | Keyframe with translateY/translateX, scale, and opacity (200ms) | Custom Keyframe animation for entering transition |
+| `exiting` | `EntryOrExitLayoutType` | Keyframe mirroring entering animation (150ms)                   | Custom Keyframe animation for exiting transition |
+
+### Popover.Arrow
+
+| prop                  | type                                     | default | description                                                           |
+| --------------------- | ---------------------------------------- | ------- | --------------------------------------------------------------------- |
+| `className`           | `string`                                 | -       | Additional CSS classes for the arrow                                  |
+| `height`              | `number`                                 | `12`    | Height of the arrow in pixels                                         |
+| `width`               | `number`                                 | `20`    | Width of the arrow in pixels                                          |
+| `fill`                | `string`                                 | -       | Fill color of the arrow (defaults to content background)              |
+| `stroke`              | `string`                                 | -       | Stroke (border) color of the arrow (defaults to content border color) |
+| `strokeWidth`         | `number`                                 | `1`     | Stroke width of the arrow border in pixels                            |
+| `strokeBaselineInset` | `number`                                 | `1`     | Baseline inset in pixels for stroke alignment                         |
+| `placement`           | `'top' \| 'bottom' \| 'left' \| 'right'` | -       | Placement of the popover (inherited from content)                     |
+| `children`            | `ReactNode`                              | -       | Custom arrow content (replaces default SVG arrow)                     |
+| `style`               | `StyleProp<ViewStyle>`                   | -       | Additional styles for the arrow container                             |
+| `...ViewProps`        | `ViewProps`                              | -       | All standard React Native View props are supported                    |
+
+### Popover.Close
+
+Popover.Close extends [CloseButton](./close-button) and automatically handles popover dismissal when pressed.
+
+### Popover.Title
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode` | -       | The title text content                             |
+| `className`    | `string`    | -       | Additional CSS classes for the title               |
+| `...TextProps` | `TextProps` | -       | All standard React Native Text props are supported |
+
+### Popover.Description
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode` | -       | The description text content                       |
+| `className`    | `string`    | -       | Additional CSS classes for the description         |
+| `...TextProps` | `TextProps` | -       | All standard React Native Text props are supported |
+
+## Hooks
+
+### usePopover
+
+Hook to access popover context values within custom components or compound components.
+
+```tsx
+import { usePopover } from 'heroui-native';
+
+const CustomContent = () => {
+  const { isOpen, onOpenChange, triggerPosition } = usePopover();
+  // ... your implementation
+};
+```
+
+**Returns:** `UsePopoverReturn`
+
+| property             | type                                                | description                                                       |
+| -------------------- | --------------------------------------------------- | ----------------------------------------------------------------- |
+| `isOpen`             | `boolean`                                           | Whether the popover is currently open                             |
+| `onOpenChange`       | `(open: boolean) => void`                           | Callback function to change the popover open state                |
+| `isDefaultOpen`      | `boolean \| undefined`                              | Whether the popover should be open by default (uncontrolled mode) |
+| `isDisabled`         | `boolean \| undefined`                              | Whether the popover is disabled                                   |
+| `triggerPosition`    | `LayoutPosition \| null`                            | The position of the trigger element relative to the viewport      |
+| `setTriggerPosition` | `(triggerPosition: LayoutPosition \| null) => void` | Function to update the trigger element's position                 |
+| `contentLayout`      | `LayoutRectangle \| null`                           | The layout measurements of the popover content                    |
+| `setContentLayout`   | `(contentLayout: LayoutRectangle \| null) => void`  | Function to update the content layout measurements                |
+| `nativeID`           | `string`                                            | Unique identifier for the popover instance                        |
+
+**Note:** This hook must be used within a `Popover` component. It will throw an error if called outside of the popover context.
+
+### usePopoverAnimation
+
+Hook to access popover animation state values within custom components or compound components.
+
+```tsx
+import { usePopoverAnimation } from 'heroui-native';
+
+const CustomContent = () => {
+  const { progress, isDragging } = usePopoverAnimation();
+  // ... your implementation
+};
+```
+
+**Returns:** `UsePopoverAnimationReturn`
+
+| property     | type                  | description                                                        |
+| ------------ | --------------------- | ------------------------------------------------------------------ |
+| `progress`   | `SharedValue<number>` | Progress value for the popover animation (0=idle, 1=open, 2=close) |
+| `isDragging` | `SharedValue<boolean>` | Dragging state shared value                                        |
+
+**Note:** This hook must be used within a `Popover` component. It will throw an error if called outside of the popover animation context.

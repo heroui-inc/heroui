@@ -2,8 +2,8 @@
 .text-field {
   @apply flex flex-col gap-1;
 
-  &[data-invalid],
-  &[aria-invalid] {
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -11,5 +11,16 @@
 
   [data-slot="description"] {
     @apply px-1;
+  }
+}
+
+/* Full width modifier */
+.text-field--full-width {
+  @apply w-full;
+
+  /* Automatically make Input full width when TextField is full width */
+  [data-slot="input"],
+  [data-slot="textarea"] {
+    @apply w-full;
   }
 }

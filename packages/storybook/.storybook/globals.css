@@ -1,0 +1,32 @@
+@import "../styles/globals.css";
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  --background: lab(96.5432% -0.0000596046 0);
+  --foreground: lab(8.34178% 0.607349 -2.12998);
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+}
+
+.dark,
+[data-theme="dark"] {
+  --background: lab(1.54547% 0.178337 -0.64671);
+  --foreground: lab(98.9676% -0.0000298023 -0.0000119209);
+}

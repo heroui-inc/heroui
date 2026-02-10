@@ -2,7 +2,7 @@
 .input-otp {
   @apply relative flex items-center gap-2;
 
-  &[data-disabled] {
+  &[data-disabled="true"] {
     @apply cursor-not-allowed opacity-50;
   }
 }
@@ -14,8 +14,8 @@
 
 /* Individual slot box - fully rounded, standalone */
 .input-otp__slot {
-  @apply w-9.5 relative flex h-10 flex-1 items-center justify-center;
-  @apply bg-field text-field-foreground shadow-field border;
+  @apply relative flex h-10 w-9.5 flex-1 items-center justify-center;
+  @apply border bg-field text-field-foreground shadow-field;
   @apply rounded-field text-sm font-semibold outline-none;
 
   border-width: var(--border-width-field);
@@ -34,29 +34,29 @@
   /* Hover */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
   }
 
   /* Active/Focus */
-  &[data-active] {
-    @apply bg-field-focus status-focused-field z-10;
+  &[data-active="true"] {
+    @apply z-10 bg-field-focus status-focused-field;
   }
 
   /* Filled */
-  &[data-filled] {
+  &[data-filled="true"] {
     @apply bg-field-focus;
   }
 
   /* Disabled */
-  &[data-disabled] {
+  &[data-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Invalid */
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
@@ -77,31 +77,37 @@
 
 /* Caret */
 .input-otp__caret {
-  @apply bg-field-placeholder animate-caret-blink absolute h-4 w-[2px] rounded-[4px];
+  @apply absolute h-4 w-[2px] animate-caret-blink rounded-[4px] bg-field-placeholder;
 }
 
 /* Separator */
 .input-otp__separator {
-  @apply bg-separator h-[2px] w-[6px] shrink-0 rounded-[4px];
+  @apply h-[2px] w-[6px] shrink-0 rounded-[4px] bg-separator;
 }
 
-/* Variant modifiers */
-.input-otp--on-surface .input-otp__slot {
-  @apply bg-on-surface shadow-none;
+/* Variant property definitions */
+.input-otp--primary {
+  /* Default styles */
+}
+
+.input-otp--secondary .input-otp__slot {
+  @apply shadow-none;
+  background-color: var(--input-otp-slot-bg);
+
+  --input-otp-slot-bg: var(--color-default);
+  --input-otp-slot-bg-hover: var(--color-default-hover);
+  --input-otp-slot-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
-      @apply bg-on-surface-hover;
+    &[data-hovered="true"] {
+      background-color: var(--input-otp-slot-bg-hover);
     }
   }
 
-  &[data-active] {
-    background-color: var(--color-on-surface-focus);
-  }
-
-  &[data-filled] {
-    background-color: var(--color-on-surface-focus);
+  &[data-active="true"],
+  &[data-filled="true"] {
+    background-color: var(--input-otp-slot-bg-focus);
   }
 }
 

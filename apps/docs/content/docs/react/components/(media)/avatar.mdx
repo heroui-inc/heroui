@@ -1,0 +1,154 @@
+---
+title: Avatar
+description: Display user profile images with customizable fallback content
+links:
+  radix: avatar
+  source: avatar/avatar.tsx
+  styles: avatar.css
+  storybook: Components/Media/Avatar
+  figma: true
+---
+
+## Import
+
+```tsx
+import { Avatar } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="avatar-basic" />
+
+### Anatomy
+
+Import the Avatar component and access all parts using dot notation.
+
+```tsx
+import { Avatar } from '@heroui/react';
+
+export default () => (
+  <Avatar>
+    <Avatar.Image/>
+    <Avatar.Fallback/>
+  </Avatar>
+)
+```
+
+### Sizes
+
+<ComponentPreview name="avatar-sizes" />
+
+### Colors
+
+<ComponentPreview name="avatar-colors" />
+
+### Variants
+
+<ComponentPreview name="avatar-variants" />
+
+### Fallback Content
+
+<ComponentPreview name="avatar-fallback" />
+
+### Avatar Group
+
+<ComponentPreview name="avatar-group" />
+
+### Custom Styles
+
+<ComponentPreview name="avatar-custom-styles" />
+
+<RelatedComponents component="avatar" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Avatar } from '@heroui/react';
+
+function CustomAvatar() {
+  return (
+    <Avatar className="size-20">
+      <Avatar.Image src="..." alt="..." />
+      <Avatar.Fallback>XL</Avatar.Fallback>
+    </Avatar>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Avatar component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .avatar {
+    @apply size-16 border-2 border-primary;
+  }
+
+  .avatar__fallback {
+    @apply bg-gradient-to-br from-purple-500 to-pink-500;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Avatar component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/avatar.css)):
+
+#### Base Classes
+- `.avatar` - Base container with default size (size-10)
+- `.avatar__image` - Image element with aspect-square sizing
+- `.avatar__fallback` - Fallback container with centered content
+
+#### Size Modifiers
+- `.avatar--sm` - Small avatar (size-8)
+- `.avatar--md` - Medium avatar (default, no additional styles)
+- `.avatar--lg` - Large avatar (size-12)
+
+#### Variant Modifiers
+- `.avatar--soft` - Soft variant with lighter background
+
+#### Color Modifiers
+- `.avatar__fallback--default` - Default text color
+- `.avatar__fallback--accent` - Accent text color
+- `.avatar__fallback--success` - Success text color
+- `.avatar__fallback--warning` - Warning text color
+- `.avatar__fallback--danger` - Danger text color
+
+## API Reference
+
+### Avatar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Avatar size |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Fallback color theme |
+| `variant` | `'default' \| 'soft'` | `'default'` | Visual style variant |
+| `className` | `string` | - | Additional CSS classes |
+
+### Avatar.Image Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | - | Image source URL |
+| `srcSet` | `string` | - | The image `srcset` attribute for responsive images |
+| `sizes` | `string` | - | The image `sizes` attribute for responsive images |
+| `alt` | `string` | - | Alternative text for the image |
+| `onLoad` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | Callback when the image loads successfully |
+| `onError` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | Callback when there's an error loading the image |
+| `crossOrigin` | `'anonymous' \| 'use-credentials'` | - | CORS setting for the image request |
+| `loading` | `'eager' \| 'lazy'` | - | Native lazy loading attribute |
+| `className` | `string` | - | Additional CSS classes |
+
+### Avatar.Fallback Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delayMs` | `number` | - | Delay before showing fallback (prevents flash) |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | Override color from parent |
+| `className` | `string` | - | Additional CSS classes |

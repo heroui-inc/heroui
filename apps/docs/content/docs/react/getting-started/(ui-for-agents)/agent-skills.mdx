@@ -1,0 +1,76 @@
+---
+title: Agent Skills
+description: Enable AI assistants to build UIs with HeroUI v3 components
+icon: preview
+---
+
+HeroUI Skills give your AI assistant comprehensive knowledge of HeroUI v3 components, patterns, and best practices.
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills-dark.jpg"
+  alt="HeroUI v3 MCP Server"
+/>
+
+<p className="px-0.5 text-sm text-muted">
+Version 2.0.0
+</p>
+
+### Installation
+
+```bash
+curl -fsSL https://v3.heroui.com/install | bash -s heroui-react
+```
+
+Or using the skills package:
+
+```bash
+npx skills add heroui-inc/heroui
+```
+
+<span className="text-sm text-muted">
+Support Claude Code, Cursor, OpenCode and more.
+</span>
+
+### Usage
+
+Skills are **automatically discovered** by your AI assistant, or call it directly using `/heroui-react` command.
+
+Simply ask your AI assistant to:
+- Build components using HeroUI v3
+- Create pages with HeroUI components
+- Customize themes and styles
+- Access component documentation
+
+<Callout>
+  For more complex use cases, use the [MCP Server](/docs/react/getting-started/mcp-server) which provides real-time access to component documentation and source code.
+</Callout>
+
+### What's Included
+
+- HeroUI v3 installation guide
+- All HeroUI v3 components with props, examples, and usage patterns
+- Theming and styling guidelines
+- Design principles and composition patterns
+
+### Structure
+
+```
+skills/heroui-react/
+├── SKILL.md              # Main skill documentation
+├── LICENSE.txt           # MIT license
+└── scripts/              # Utility scripts
+    ├── list_components.mjs
+    ├── get_component_docs.mjs
+    ├── get_source.mjs
+    ├── get_styles.mjs
+    ├── get_theme.mjs
+    └── get_docs.mjs
+```
+
+### Related Documentation
+
+- [Agent Skills Specification](https://agentskills.io/home) - Learn about the Agent Skills format
+- [Claude Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) - Claude's Skills documentation
+- [Cursor Skills](https://cursor.com/docs/context/skills) - Using Skills in Cursor
+- [OpenCode Skills](https://opencode.ai/docs/skills) - Using Skills in OpenCode

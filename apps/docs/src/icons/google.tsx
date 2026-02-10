@@ -1,7 +1,7 @@
 import type {Ref, SVGProps} from "react";
 
 import {forwardRef, memo} from "react";
-import {cnBase as cn} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 const IconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => {
   const {className, ...restProps} = props;

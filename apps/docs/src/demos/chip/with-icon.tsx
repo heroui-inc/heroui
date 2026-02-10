@@ -1,28 +1,28 @@
+import {ChevronDown, CircleCheckFill, CircleFill, Clock, Xmark} from "@gravity-ui/icons";
 import {Chip} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function ChipWithIcon() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <Chip>
-        <Icon icon="gravity-ui:circle-fill" width={6} />
-        Information
+        <CircleFill width={6} />
+        <Chip.Label>Information</Chip.Label>
       </Chip>
       <Chip color="success">
-        <Icon icon="gravity-ui:circle-check-fill" width={12} />
-        Completed
+        <CircleCheckFill width={12} />
+        <Chip.Label>Completed</Chip.Label>
       </Chip>
       <Chip color="warning">
-        <Icon icon="gravity-ui:clock" width={12} />
-        Pending
+        <Clock width={12} />
+        <Chip.Label>Pending</Chip.Label>
       </Chip>
       <Chip color="danger">
-        <Icon icon="gravity-ui:xmark" width={12} />
-        Failed
+        <Xmark width={12} />
+        <Chip.Label>Failed</Chip.Label>
       </Chip>
       <Chip color="accent">
-        Label
-        <Icon icon="gravity-ui:chevron-down" width={12} />
+        <Chip.Label>Label</Chip.Label>
+        <ChevronDown width={12} />
       </Chip>
     </div>
   );

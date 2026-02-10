@@ -1,11 +1,10 @@
 "use client";
 
-import type {SurfaceVariants} from "./surface.styles";
+import type {SurfaceVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import {surfaceVariants} from "@heroui/styles";
 import React, {createContext} from "react";
-
-import {surfaceVariants} from "./surface.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Surface Context
@@ -19,24 +18,14 @@ const SurfaceContext = createContext<SurfaceContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Surface Root
  * --------------------------------------------------------------------------------------------- */
-interface SurfaceRootProps extends React.ComponentProps<"div">, SurfaceVariants {
-  asChild?: boolean;
-}
+interface SurfaceRootProps extends ComponentPropsWithRef<"div">, SurfaceVariants {}
 
-const SurfaceRoot = ({
-  asChild,
-  children,
-  className,
-  variant = "default",
-  ...rest
-}: SurfaceRootProps) => {
-  const Component = asChild ? SlotPrimitive : "div";
-
+const SurfaceRoot = ({children, className, variant = "default", ...rest}: SurfaceRootProps) => {
   return (
     <SurfaceContext value={{variant}}>
-      <Component className={surfaceVariants({variant, className})} data-slot="surface" {...rest}>
+      <div className={surfaceVariants({variant, className})} data-slot="surface" {...rest}>
         {children}
-      </Component>
+      </div>
     </SurfaceContext>
   );
 };

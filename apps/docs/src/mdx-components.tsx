@@ -3,20 +3,25 @@ import type {MDXComponents} from "mdx/types";
 import Link from "fumadocs-core/link";
 import {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
-import {CodeBlock, Pre} from "fumadocs-ui/components/codeblock";
+import {Pre} from "fumadocs-ui/components/codeblock";
 import * as TabsComponents from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import {Suspense} from "react";
 
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
-import {ComponentsList} from "./components/components-list";
+import {ComponentsCategory} from "./components/components-category";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
+import {NativeComponentsCategory} from "./components/native-components-category";
+import {NativeImageHeroView} from "./components/native-image-hero-view";
+import {NativeQRPreviewPopover} from "./components/native-qr-preview-popover";
+import {NativeVideoPlayerView} from "./components/native-video-player-view";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {VideoPlayer} from "./components/video-player";
+import {FumadocsCustomCodeblock as CodeBlock} from "./mdx-components/fumadocs-custom-codeblock";
 import {PackageManagers} from "./mdx-components/package-managers";
 import {cn} from "./utils/cn";
 
@@ -34,7 +39,7 @@ const MAX_LINES_FOR_LINE_NUMBERS = 20;
 
 function Preview({children}: {children: React.ReactNode}) {
   return (
-    <div className="bg-background my-6 flex items-center justify-center rounded-lg border p-6">
+    <div className="my-6 flex items-center justify-center rounded-lg border bg-background p-6">
       {children}
     </div>
   );
@@ -54,9 +59,9 @@ function ComponentCard({
   href: string;
 }) {
   return (
-    <a className="hover:bg-muted/50 block rounded-lg border p-4 transition-colors" href={href}>
+    <a className="block rounded-lg border p-4 transition-colors hover:bg-muted/50" href={href}>
       <h3 className="mb-2 font-semibold">{name}</h3>
-      <p className="text-muted text-sm">{description}</p>
+      <p className="text-sm text-muted">{description}</p>
     </a>
   );
 }
@@ -83,7 +88,7 @@ function Callout({className, ...props}: React.ComponentProps<typeof FDCallout>) 
   return (
     <FDCallout
       {...props}
-      className={cn("bg-surface shadow-surface text-surface-foreground", className)}
+      className={cn("bg-surface text-surface-foreground shadow-surface", className)}
     />
   );
 }
@@ -102,13 +107,18 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentCard,
     ComponentGrid,
     ComponentPreview,
-    ComponentsList,
+    ComponentsCategory,
     DocsImage,
     Icon,
     Info,
     Link,
+    NativeComponentsCategory,
+    NativeImageHeroView,
+    NativeQRPreviewPopover,
+    NativeVideoPlayerView,
     NewsletterForm,
     PackageManagers,
+    Pre,
     Preview,
     RelatedComponents,
     RelatedShowcases,

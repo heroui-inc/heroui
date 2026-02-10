@@ -1,8 +1,8 @@
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
-import clsx from "clsx";
 import React from "react";
+import {cx} from "tailwind-variants";
 
 import {CheckboxGroup} from "../checkbox-group";
 import {Description} from "../description";
@@ -32,6 +32,37 @@ export const Default: Story = {
           <Label>Accept terms and conditions</Label>
         </Checkbox.Content>
       </Checkbox>
+    </div>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 px-4">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Primary variant</p>
+        <Checkbox name="primary" variant="primary">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label>Primary checkbox</Label>
+            <Description>Standard styling with default background</Description>
+          </Checkbox.Content>
+        </Checkbox>
+      </div>
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-medium text-muted">Secondary variant</p>
+        <Checkbox name="secondary" variant="secondary">
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          <Checkbox.Content>
+            <Label>Secondary checkbox</Label>
+            <Description>Lower emphasis variant for use in surfaces</Description>
+          </Checkbox.Content>
+        </Checkbox>
+      </div>
     </div>
   ),
 };
@@ -171,7 +202,7 @@ export const Controlled: Story = {
             <Label>Email notifications</Label>
           </Checkbox.Content>
         </Checkbox>
-        <p className="text-muted mt-2 text-sm">
+        <p className="mt-2 text-sm text-muted">
           Status: <span className="font-medium">{isSelected ? "Enabled" : "Disabled"}</span>
         </p>
       </div>
@@ -301,16 +332,16 @@ export const FeaturesAndAddOnsExample: Story = {
                 <Checkbox
                   key={addon.value}
                   value={addon.value}
-                  className={clsx(
-                    "bg-surface-tertiary group relative flex-col gap-4 rounded-3xl px-5 py-4 transition-all",
+                  className={cx(
+                    "group relative flex-col gap-4 rounded-3xl bg-surface-tertiary px-5 py-4 transition-all",
                     "data-[selected=true]:bg-accent/10",
                   )}
                 >
-                  <Checkbox.Control className="absolute right-4 top-3 size-5 rounded-full before:rounded-full">
+                  <Checkbox.Control className="absolute top-3 right-4 size-5 rounded-full before:rounded-full">
                     <Checkbox.Indicator />
                   </Checkbox.Control>
                   <Checkbox.Content className="flex flex-row items-start justify-start gap-4">
-                    <Icon className="text-accent size-5" icon={addon.icon} />
+                    <Icon className="size-5 text-accent" icon={addon.icon} />
                     <div className="flex flex-col gap-1">
                       <Label>{addon.title}</Label>
                       <Description>{addon.description}</Description>

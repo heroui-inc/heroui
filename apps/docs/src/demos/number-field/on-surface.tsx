@@ -3,7 +3,7 @@ import {Description, Label, NumberField, Surface} from "@heroui/react";
 export function OnSurface() {
   return (
     <Surface className="flex w-full max-w-[280px] flex-col gap-4 rounded-3xl p-6">
-      <NumberField defaultValue={1024} minValue={0} name="width">
+      <NumberField defaultValue={1024} minValue={0} name="width" variant="secondary">
         <Label>Width</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
@@ -19,6 +19,7 @@ export function OnSurface() {
         minValue={0}
         name="percentage"
         step={0.1}
+        variant="secondary"
       >
         <Label>Percentage</Label>
         <NumberField.Group>

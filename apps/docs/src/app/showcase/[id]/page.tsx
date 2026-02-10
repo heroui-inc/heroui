@@ -50,10 +50,8 @@ export default async function ShowcasePage({params}: ShowcasePageProps) {
   }
 
   const codePanel = (
-    <ShowcaseCodePanel showcaseName={id} sourceCode={sourceCode}>
-      <div className="showcase-source-wrapper">
-        <ShowcaseSource showLineNumbers allowCopy={false} language="tsx" name={id} />
-      </div>
+    <ShowcaseCodePanel fileName={`${id}.tsx`} sourceCode={sourceCode}>
+      <ShowcaseSource showLineNumbers allowCopy={false} language="tsx" name={id} />
     </ShowcaseCodePanel>
   );
 

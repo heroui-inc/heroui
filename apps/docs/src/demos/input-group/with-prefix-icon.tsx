@@ -1,7 +1,7 @@
 "use client";
 
+import {Envelope} from "@gravity-ui/icons";
 import {Description, InputGroup, Label, TextField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithPrefixIcon() {
   return (
@@ -9,7 +9,7 @@ export function WithPrefixIcon() {
       <Label>Email address</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+          <Envelope className="size-4 text-muted" />
         </InputGroup.Prefix>
         <InputGroup.Input className="w-full max-w-[280px]" placeholder="name@email.com" />
       </InputGroup>

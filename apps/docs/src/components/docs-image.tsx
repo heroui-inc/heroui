@@ -3,12 +3,15 @@ import type {UrlObject} from "url";
 import Image from "next/image";
 import Link from "next/link";
 
+import {cn} from "@/utils/cn";
+
 interface DocsImageProps {
   src: string;
   darkSrc?: string;
   alt: string;
   className?: string;
   width?: number;
+  wrapperClassName?: string;
   height?: number;
   priority?: boolean;
   href?: string;
@@ -16,21 +19,25 @@ interface DocsImageProps {
 
 export function DocsImage({
   alt,
-  className = "h-[220px] md:h-[340px]",
+  className,
   darkSrc,
   height = 1000,
   href,
   priority = true,
   src,
   width = 1000,
+  wrapperClassName,
 }: DocsImageProps) {
-  const wrapperClasses = `block not-prose border border-separator relative w-full overflow-hidden rounded-xl ${className}`;
+  const wrapperClasses = cn(
+    "not-prose relative block aspect-18/9 w-full overflow-hidden rounded-xl border border-separator",
+    wrapperClassName,
+  );
 
   const imageContent = darkSrc ? (
     <>
       <Image
         alt={alt}
-        className="absolute inset-0 block h-full w-full object-cover dark:hidden"
+        className={cn("absolute inset-0 block h-full w-full object-cover dark:hidden", className)}
         height={height}
         priority={priority}
         src={src}
@@ -38,7 +45,7 @@ export function DocsImage({
       />
       <Image
         alt={alt}
-        className="absolute inset-0 hidden h-full w-full object-cover dark:block"
+        className={cn("absolute inset-0 hidden h-full w-full object-cover dark:block", className)}
         height={height}
         priority={priority}
         src={darkSrc}
@@ -48,7 +55,7 @@ export function DocsImage({
   ) : (
     <Image
       alt={alt}
-      className="absolute inset-0 h-full w-full object-cover"
+      className="absolute inset-0 h-full w-full object-contain"
       height={height}
       priority={priority}
       src={src}

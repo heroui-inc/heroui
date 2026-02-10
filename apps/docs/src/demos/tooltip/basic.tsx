@@ -1,5 +1,5 @@
+import {CircleInfo} from "@gravity-ui/icons";
 import {Button, Tooltip} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function TooltipBasic() {
   return (
@@ -13,7 +13,7 @@ export function TooltipBasic() {
 
       <Tooltip delay={0}>
         <Button isIconOnly variant="tertiary">
-          <Icon icon="gravity-ui:circle-info" />
+          <CircleInfo />
         </Button>
         <Tooltip.Content>
           <p>More information</p>

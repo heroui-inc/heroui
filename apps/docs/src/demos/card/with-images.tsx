@@ -1,5 +1,5 @@
+import {CircleDollar} from "@gravity-ui/icons";
 import {Avatar, Button, Card, CloseButton, Link} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithImages() {
   return (
@@ -7,10 +7,10 @@ export function WithImages() {
       <div className="grid w-full max-w-2xl grid-cols-12 gap-4 p-4">
         {/* Row 1: Large Product Card - Available Soon */}
         <Card className="col-span-12 flex h-auto min-h-[152px] flex-col sm:flex-row">
-          <div className="relative h-[140px] w-full flex-shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
+          <div className="relative h-[140px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
             <img
               alt="Cherries"
-              className="pointer-events-none absolute inset-0 h-full w-full scale-125 select-none object-cover"
+              className="pointer-events-none absolute inset-0 h-full w-full scale-125 object-cover select-none"
               loading="lazy"
               src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/cherries.jpeg"
             />
@@ -22,12 +22,12 @@ export function WithImages() {
                 Lorem ipsum dolor sit amet consectetur. Sed arcu donec id aliquam dolor sed amet
                 faucibus etiam.
               </Card.Description>
-              <CloseButton aria-label="Close banner" className="absolute right-3 top-3" />
+              <CloseButton aria-label="Close banner" className="absolute top-3 right-3" />
             </Card.Header>
             <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-col">
-                <span className="text-foreground text-sm font-medium">Only 10 spots</span>
-                <span className="text-muted text-xs">Submission ends Oct 10.</span>
+                <span className="text-sm font-medium text-foreground">Only 10 spots</span>
+                <span className="text-xs text-muted">Submission ends Oct 10.</span>
               </div>
               <Button className="w-full sm:w-auto">Apply Now</Button>
             </Card.Footer>
@@ -40,18 +40,17 @@ export function WithImages() {
           <div className="col-span-12 grid grid-cols-12 gap-4 lg:col-span-6">
             {/* Top Card */}
             <Card className="col-span-12">
-              <div className="absolute right-3 top-3 z-10">
+              <div className="absolute top-3 right-3 z-10">
                 <CloseButton aria-label="Close notification" />
               </div>
               <Card.Header className="gap-3">
-                <Icon
+                <CircleDollar
                   aria-label="Dollar sign icon"
-                  className="text-primary size-8 flex-shrink-0"
-                  icon="gravity-ui:circle-dollar"
+                  className="text-primary size-8 shrink-0"
                   role="img"
                 />
                 <div className="flex flex-col gap-1">
-                  <span className="text-muted text-xs font-medium uppercase">PAYMENT</span>
+                  <span className="text-xs font-medium text-muted uppercase">PAYMENT</span>
                   <Card.Title className="pr-8 text-sm sm:text-base">
                     You can now withdraw on crypto
                   </Card.Title>
@@ -81,8 +80,8 @@ export function WithImages() {
                   </Avatar>
                 </Card.Header>
                 <Card.Content className="mt-1">
-                  <p className="text-sm font-medium leading-4">Indie Hackers</p>
-                  <p className="text-muted text-xs">148 members</p>
+                  <p className="text-sm leading-4 font-medium">Indie Hackers</p>
+                  <p className="text-xs text-muted">148 members</p>
                 </Card.Content>
                 <Card.Footer className="flex items-center gap-2">
                   <Avatar className="size-4">
@@ -92,7 +91,7 @@ export function WithImages() {
                     />
                     <Avatar.Fallback>JK</Avatar.Fallback>
                   </Avatar>
-                  <p className="text-muted text-xs">By John</p>
+                  <p className="text-xs text-muted">By John</p>
                 </Card.Footer>
               </Card>
               {/* Right Card */}
@@ -107,8 +106,8 @@ export function WithImages() {
                   </Avatar>
                 </Card.Header>
                 <Card.Content className="mt-1">
-                  <p className="text-sm font-medium leading-4">AI Builders</p>
-                  <p className="text-muted text-xs">362 members</p>
+                  <p className="text-sm leading-4 font-medium">AI Builders</p>
+                  <p className="text-xs text-muted">362 members</p>
                 </Card.Content>
                 <Card.Footer className="flex items-center gap-2">
                   <Avatar className="size-4">
@@ -118,7 +117,7 @@ export function WithImages() {
                     />
                     <Avatar.Fallback>M</Avatar.Fallback>
                   </Avatar>
-                  <p className="text-muted text-xs">By Martha</p>
+                  <p className="text-xs text-muted">By Martha</p>
                 </Card.Footer>
               </Card>
             </div>
@@ -138,7 +137,7 @@ export function WithImages() {
               <Card.Title className="text-xs font-semibold tracking-wide text-black/70">
                 NEO
               </Card.Title>
-              <Card.Description className="text-sm font-medium leading-5 text-black/50">
+              <Card.Description className="text-sm leading-5 font-medium text-black/50">
                 Home Robot
               </Card.Description>
             </Card.Header>
@@ -184,7 +183,7 @@ export function WithImages() {
             <Card className="flex flex-row gap-3 p-1" variant="transparent">
               <img
                 alt="Futuristic Robot"
-                className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+                className="aspect-square h-16 w-16 shrink-0 rounded-xl object-cover select-none sm:h-20 sm:w-20"
                 loading="lazy"
                 src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/robot1.jpeg"
               />
@@ -197,7 +196,7 @@ export function WithImages() {
             <Card className="flex flex-row gap-3 p-1" variant="transparent">
               <img
                 alt="Avocado"
-                className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+                className="aspect-square h-16 w-16 shrink-0 rounded-xl object-cover select-none sm:h-20 sm:w-20"
                 loading="lazy"
                 src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/avocado.jpeg"
               />
@@ -210,7 +209,7 @@ export function WithImages() {
             <Card className="flex flex-row gap-3 p-1" variant="transparent">
               <img
                 alt="Sound Electro event"
-                className="aspect-square h-16 w-16 shrink-0 select-none rounded-xl object-cover sm:h-20 sm:w-20"
+                className="aspect-square h-16 w-16 shrink-0 rounded-xl object-cover select-none sm:h-20 sm:w-20"
                 loading="lazy"
                 src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/oranges.jpeg"
               />

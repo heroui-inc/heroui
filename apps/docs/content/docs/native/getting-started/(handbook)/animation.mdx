@@ -1,0 +1,206 @@
+---
+title: Animation
+description: Add smooth animations and transitions to HeroUI Native components
+icon: copy-transparent
+---
+
+All animations in HeroUI Native are built with [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) and gesture control is handled by [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/). It's worth familiarizing yourself with these libraries if you want more control over animations.
+
+## The `animation` Prop
+
+Every animated component in HeroUI Native exposes a single `animation` prop that controls all animations for that component. This prop allows you to modify animation values, timing configurations, layout animations, or completely disable animations.
+
+**Approach**: If you're working with animations, first look for the `animation` prop on the component you're using.
+
+## Modifying Animations
+
+You can customize animations by passing an object to the `animation` prop. Each component exposes different animation properties that you can modify. The approach is simple: if you want to slightly change the animation behavior of already written animations in components, we provide all necessary values for modification. If you want to write your own animations without relying on our written ones, you must create your own custom components with animations.
+
+### Example 1: Simple Value Modification
+
+Modify animation values like scale, opacity, or colors:
+
+```tsx
+import {Switch} from 'heroui-native';
+
+<Switch
+  animation={{
+    scale: {
+      value: [1, 0.9], // [unpressed, pressed]
+    },
+    backgroundColor: {
+      value: ['#172554', '#eab308'], // [unselected, selected]
+    },
+  }}>
+  <Switch.Thumb />
+</Switch>;
+```
+
+### Example 2: Timing Configuration
+
+Customize animation timing and easing:
+
+```tsx
+import {Accordion} from 'heroui-native';
+
+<Accordion>
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      <Accordion.Indicator
+        animation={{
+          rotation: {
+            value: [0, -180],
+            springConfig: {
+              damping: 60,
+              stiffness: 900,
+              mass: 3,
+            },
+          },
+        }}
+      />
+    </Accordion.Trigger>
+  </Accordion.Item>
+</Accordion>;
+```
+
+### Example 3: Layout Animations (Entering/Exiting)
+
+Customize entering and exiting animations using Reanimated's layout animations:
+
+```tsx
+import {Accordion} from 'heroui-native';
+import {FadeInRight, FadeInLeft, ZoomIn} from 'react-native-reanimated';
+import {Easing} from 'react-native-reanimated';
+
+<Accordion>
+  <Accordion.Item value="1">
+    <Accordion.Content
+      animation={{
+        entering: {
+          value: FadeInRight.delay(50).easing(Easing.inOut(Easing.ease)),
+        },
+      }}>
+      Content here
+    </Accordion.Content>
+  </Accordion.Item>
+</Accordion>;
+```
+
+### Example 4: State Prop for Granular Control
+
+The `state` prop allows you to disable animations while still customizing animation properties. This is useful when you want to fine-tune component behavior without enabling animations:
+
+```tsx
+import {Switch} from 'heroui-native';
+
+<Switch
+  animation={{
+    state: 'disabled', // Disable animations but allow property customization
+    scale: {
+      value: 0.95, // This value is still respected even though animations are disabled
+    },
+    backgroundColor: {
+      value: ['#172554', '#eab308'],
+    },
+  }}>
+  <Switch.Thumb />
+</Switch>
+```
+
+The `state` prop accepts:
+- `'disabled'`: Disable animations while allowing property customization
+- `'disable-all'`: Disable all animations including children (only available at root level)
+- `boolean`: Simple enable/disable control (`true` enables, `false` disables)
+
+This provides more granular control over animation behavior, allowing you to customize properties without enabling animations.
+
+## Disabling Animations
+
+You can disable animations at different levels using the `animation` prop.
+
+### Disable Options
+
+- `animation={false}` or `animation="disabled"`: Disable animations for the specific component only
+- `animation="disable-all"`: Disable all animations including children (only available at root level)
+- `animation={true}` or `animation={undefined}`: Use default animations
+
+### Component-Level Disabling
+
+Disable animations for a specific component:
+
+```tsx
+<Switch>
+  <Switch.Thumb animation={false} />
+</Switch>
+```
+
+### Root-Level Disabling (`disable-all`)
+
+The `"disable-all"` option is only available at the root level of compound components. When used, it disables all animations including children, even if those children are not part of the compound component structure:
+
+```tsx
+// Disables all animations including Button components inside Card
+<Card animation="disable-all">
+  <Card.Body>
+    <Card.Title>$450</Card.Title>
+    <Card.Description>Living room Sofa</Card.Description>
+  </Card.Body>
+  <Card.Footer className="gap-3">
+    <Button variant="primary">Buy now</Button>
+    <Button variant="ghost">Add to cart</Button>
+  </Card.Footer>
+</Card>
+```
+
+**Important**: `"disable-all"` cascades down to all child components, including standalone components like `Button`, `Spinner`, etc., not just compound component parts.
+
+## Global Animation Configuration
+
+You can disable all HeroUI Native animations globally using the `HeroUINativeProvider`:
+
+```tsx
+import {HeroUINativeProvider} from 'heroui-native';
+
+<HeroUINativeProvider
+  config={{
+    animation: 'disable-all',
+  }}>
+  <App />
+</HeroUINativeProvider>;
+```
+
+This will disable all animations across your entire application, regardless of individual component `animation` prop settings.
+
+## Accessibility
+
+Reduce motion is handled automatically under the hood. When a user enables "Reduce Motion" in their device accessibility settings, all animations are automatically disabled globally. This is handled by the `GlobalAnimationSettingsProvider` which checks `useReducedMotion()` from react-native-reanimated.
+
+You don't need to do anything - the library respects the user's accessibility preferences automatically.
+
+## Animation State Management
+
+We keep disabled state of animations under control internally to ensure they look nice without unpredictable lags or jumps. When animations are disabled, components immediately jump to their final state rather than animating, preventing visual glitches or intermediate states.
+
+## Children Render Function
+
+Many components support a render function pattern for children, which is particularly handy when working with state like `isSelected`:
+
+```tsx
+import {Switch} from 'heroui-native';
+
+<Switch
+  isSelected={isSelected}
+  onSelectedChange={setIsSelected}>
+  {({isSelected, isDisabled}) => (
+    <Switch.Thumb>{isSelected ? <CheckIcon /> : <XIcon />}</Switch.Thumb>
+  )}
+</Switch>;
+```
+
+This pattern allows you to conditionally render content based on component state, making it easy to create dynamic UIs that respond to selection, disabled states, and other component properties.
+
+## Next Steps
+
+- Learn about [Styling](/docs/native/getting-started/styling) approaches
+- View [Theming](/docs/native/getting-started/theming) documentation
+- Explore [Colors](/docs/native/getting-started/colors) documentation

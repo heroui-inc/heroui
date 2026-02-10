@@ -1,0 +1,239 @@
+/* ==========================================================================
+   ColorSwatchPicker - A list of color swatches for selection
+   ========================================================================== */
+
+/* Base styles */
+.color-swatch-picker {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+/* ==========================================================================
+   Item - Individual swatch picker item
+   ========================================================================== */
+
+.color-swatch-picker__item {
+  @apply relative flex size-8 items-center justify-center rounded-full border-2 border-transparent outline-none no-highlight;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    border-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  /* Selected state */
+  &[data-selected="true"] {
+    border-color: var(--color-swatch-current);
+    box-shadow: var(--field-shadow);
+    /* Shrink the swatch to reveal the white gap */
+    .color-swatch-picker__swatch {
+      transform: scale(0.77);
+    }
+  }
+}
+
+/* ==========================================================================
+   Swatch - The color swatch visual
+   ========================================================================== */
+
+.color-swatch-picker__swatch {
+  @apply block size-full;
+
+  /* Inherit border-radius from item */
+  border-radius: inherit;
+  /**
+  * Transitions
+  * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+  */
+  transition: transform 100ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+/* ==========================================================================
+   Indicator - Checkmark indicator for selected state
+   ========================================================================== */
+
+.color-swatch-picker__indicator {
+  @apply pointer-events-none absolute inset-0 z-10 flex items-center justify-center;
+
+  /* Checkmark SVG styles - default to white for dark backgrounds */
+  & > * {
+    @apply size-1/3 text-white;
+
+    /* Start scaled down - use translateZ(0) for GPU acceleration */
+    transform: scale(0) translateZ(0);
+
+    /**
+     * Transitions
+     */
+    transition: transform 150ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+  }
+
+  /* Use black checkmark on light backgrounds */
+  &[data-light-color="true"] & > * {
+    @apply text-black;
+  }
+
+  /* Scale up when parent item is selected */
+  .color-swatch-picker__item[data-selected="true"] & > * {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+/* ==========================================================================
+   Layout variants
+   ========================================================================== */
+
+.color-swatch-picker--grid {
+  /* Default is already grid (flex-wrap) - no additional styles needed */
+}
+
+.color-swatch-picker--stack {
+  @apply flex-col;
+}
+
+/* ==========================================================================
+   Size variants
+   ========================================================================== */
+
+.color-swatch-picker--xs {
+  .color-swatch-picker__item {
+    @apply size-4 border;
+  }
+}
+
+.color-swatch-picker--sm {
+  .color-swatch-picker__item {
+    @apply size-6 border-2;
+  }
+}
+
+.color-swatch-picker--md {
+  .color-swatch-picker__item {
+    /* No styles as this is the default size */
+  }
+}
+
+.color-swatch-picker--lg {
+  .color-swatch-picker__item {
+    @apply size-9 border-3;
+  }
+}
+
+.color-swatch-picker--xl {
+  .color-swatch-picker__item {
+    @apply size-10 border-3;
+  }
+}
+
+/* ==========================================================================
+   Shape variants
+   ========================================================================== */
+
+/* Circle variant (default) - no additional styles needed */
+.color-swatch-picker--circle .color-swatch-picker__item {
+  /* Default is already circle (border-radius: 9999px) */
+}
+
+/* Square variant */
+.color-swatch-picker--square {
+  .color-swatch-picker__item {
+    @apply rounded-xl;
+    .color-swatch-picker__swatch {
+      @apply rounded-lg;
+    }
+    &[data-selected="true"] {
+      .color-swatch-picker__swatch {
+        @apply rounded-lg;
+      }
+    }
+  }
+}
+
+/* Square variant - item radius for xs */
+.color-swatch-picker--square.color-swatch-picker--xs {
+  .color-swatch-picker__item {
+    @apply rounded-md;
+    .color-swatch-picker__swatch {
+      @apply rounded-md;
+    }
+    &[data-selected="true"] {
+      .color-swatch-picker__swatch {
+        @apply rounded-md;
+      }
+    }
+  }
+}
+
+/* Square variant - item radius for sm */
+.color-swatch-picker--square.color-swatch-picker--sm {
+  .color-swatch-picker__item {
+    @apply rounded-lg;
+    .color-swatch-picker__swatch {
+      @apply rounded-lg;
+    }
+    &[data-selected="true"] {
+      .color-swatch-picker__swatch {
+        @apply rounded-md;
+      }
+    }
+  }
+}
+
+/* Square variant - item radius for md (default) */
+.color-swatch-picker--square.color-swatch-picker--md {
+  /* No styles as this is the default size */
+}
+
+/* Square variant - item radius for lg */
+.color-swatch-picker--square.color-swatch-picker--lg {
+  .color-swatch-picker__item {
+    @apply rounded-xl;
+    .color-swatch-picker__swatch {
+      @apply rounded-lg;
+    }
+    &[data-selected="true"] {
+      .color-swatch-picker__swatch {
+        @apply rounded-lg;
+      }
+    }
+  }
+}
+
+/* Square variant - item radius for xl */
+.color-swatch-picker--square.color-swatch-picker--xl {
+  .color-swatch-picker__item {
+    @apply rounded-xl;
+    .color-swatch-picker__swatch {
+      @apply rounded-lg;
+    }
+    &[data-selected="true"] {
+      .color-swatch-picker__swatch {
+        @apply rounded-lg;
+      }
+    }
+  }
+}

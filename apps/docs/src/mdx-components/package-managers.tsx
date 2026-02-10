@@ -17,7 +17,7 @@ type PackageManager = {
 
 const packageManagers: PackageManager[] = [
   {
-    icon: <CLIBoldIcon className="text-foreground text-lg" />,
+    icon: <CLIBoldIcon className="text-lg text-foreground" />,
     label: "CLI",
     name: "cli",
   },

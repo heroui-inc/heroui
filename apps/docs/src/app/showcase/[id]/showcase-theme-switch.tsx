@@ -24,7 +24,7 @@ export function ShowcaseThemeSwitch() {
         variant="tertiary"
       >
         <div className="relative h-5 w-5">
-          <Iconify className="text-foreground/70 h-5 w-5" icon="sun" />
+          <Iconify className="h-5 w-5 text-foreground/70" icon="sun" />
         </div>
       </Button>
     );
@@ -54,12 +54,12 @@ export function ShowcaseThemeSwitch() {
           variant="secondary"
           onPress={onPress}
         >
-          <Iconify className="text-foreground/70 m-0" icon={isDark ? "moon" : "sun"} />
+          <Iconify className="m-0 text-foreground/70" icon={isDark ? "moon" : "sun"} />
         </Button>
       </TooltipTrigger>
       <TooltipContent offset={7}>
         <TooltipArrow />
-        <p className="text-muted text-xs">{tooltipContent}</p>
+        <p className="text-xs text-muted">{tooltipContent}</p>
       </TooltipContent>
     </TooltipRoot>
   );

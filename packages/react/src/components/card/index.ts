@@ -42,6 +42,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {cardVariants} from "./card.styles";
+export {cardVariants} from "@heroui/styles";
 
-export type {CardVariants} from "./card.styles";
+export type {CardVariants} from "@heroui/styles";

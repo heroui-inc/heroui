@@ -1,28 +1,22 @@
 "use client";
 
-import type {RadioGroupVariants} from "./radio-group.styles";
-import type {RadioGroupProps as RadioGroupPrimitiveProps} from "react-aria-components";
+import type {RadioGroupVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
-import React, {useContext} from "react";
+import {radioGroupVariants} from "@heroui/styles";
+import React from "react";
 import {RadioGroup as RadioGroupPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
-import {SurfaceContext} from "../surface";
-
-import {radioGroupVariants} from "./radio-group.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Group Root
  * -----------------------------------------------------------------------------------------------*/
-interface RadioGroupRootProps extends RadioGroupPrimitiveProps, RadioGroupVariants {}
+interface RadioGroupRootProps
+  extends ComponentPropsWithRef<typeof RadioGroupPrimitive>, RadioGroupVariants {}
 
-const RadioGroupRoot = ({children, className, isOnSurface, ...props}: RadioGroupRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
-  const styles = React.useMemo(
-    () => radioGroupVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
-  );
+const RadioGroupRoot = ({children, className, variant, ...props}: RadioGroupRootProps) => {
+  const styles = React.useMemo(() => radioGroupVariants({variant}), [variant]);
 
   return (
     <RadioGroupPrimitive

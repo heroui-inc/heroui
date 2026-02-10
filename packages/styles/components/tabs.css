@@ -19,7 +19,7 @@
 
 /* Tab list */
 .tabs__list {
-  @apply bg-default inline-flex p-1;
+  @apply inline-flex bg-default p-1;
 
   border-radius: calc(var(--radius-2xl) + 0.25rem);
 
@@ -44,7 +44,7 @@
   z-index: 1;
   cursor: var(--cursor-interactive);
 
-  @apply text-muted flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium outline-none;
+  @apply flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium text-muted outline-none no-highlight;
 
   /**
    * Transitions
@@ -74,7 +74,7 @@
   }
 
   /* Horizontal tabs - vertical separator */
-  [data-orientation="horizontal"] &:not(:first-child):before {
+  .tabs__list[data-orientation="horizontal"] &:not(:first-child):before {
     left: 0;
     top: 25%;
     width: 1px;
@@ -82,7 +82,7 @@
   }
 
   /* Vertical tabs - horizontal separator */
-  [data-orientation="vertical"] &:not(:first-child):before {
+  .tabs__list[data-orientation="vertical"] &:not(:first-child):before {
     top: 0;
     left: 5%;
     width: 90%;
@@ -90,38 +90,43 @@
   }
 
   /* Selected state */
-  &[data-selected] {
+  &[data-selected="true"] {
     @apply text-segment-foreground;
   }
 
   /* Hide separator when this tab is selected */
-  &[data-selected]:before {
+  &[data-selected="true"]:before {
     opacity: 0;
   }
 
   /* Hide separator when previous sibling is selected */
-  &[data-selected] + .tabs__tab:before {
+  &[data-selected="true"] + .tabs__tab:before {
     opacity: 0;
+  }
+
+  /* Hide separator when hideSeparator prop is set */
+  [data-hide-separator="true"] &:not(:first-child):before {
+    display: none;
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Hover states - both approaches for compatibility */
   @media (hover: hover) {
-    &:not([data-selected]):not([data-disabled]):hover,
-    &[data-hovered]:not([data-selected]):not([data-disabled]) {
+    &:not([data-selected="true"]):not([data-disabled="true"]):hover,
+    &[data-hovered="true"]:not([data-selected="true"]):not([data-disabled="true"]) {
       @apply opacity-70;
     }
   }
 
   /* Focus states - comprehensive fallback */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 }
@@ -129,6 +134,15 @@
 /* Tab panel */
 .tabs__panel {
   @apply w-full p-2 outline-none;
+
+  /* Entering animations */
+  &[data-entering="true"] {
+  }
+
+  /* Exiting animations */
+  &[data-exiting="true"] {
+    @apply absolute top-0 left-0 w-full;
+  }
 
   /* Orientation spacing */
   &[data-orientation="horizontal"] {
@@ -157,8 +171,78 @@
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
-  transition-duration: 420ms;
+  transition-duration: 250ms;
   transition-property: translate, width, height;
-  transition-timing-function: var(--ease-fluid-out);
+  transition-timing-function: var(--ease-out-fluid);
   @apply motion-reduce:transition-none;
+}
+
+/* ==========================================================================
+   Secondary Variant
+   ========================================================================== */
+
+.tabs--secondary {
+  /* Tab list - remove background, add bottom/left border */
+  .tabs__list {
+    @apply bg-transparent p-0;
+
+    border-radius: 0;
+
+    /* Horizontal orientation - bottom border, scrollable */
+    &[data-orientation="horizontal"] {
+      @apply border-b border-border;
+
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: clip;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    /* Vertical orientation - left border */
+    &[data-orientation="vertical"] {
+      @apply border-l border-border;
+    }
+  }
+
+  /* Tab - adjust for secondary variant */
+  .tabs__tab {
+    @apply rounded-none;
+
+    /* Hide separators in secondary variant */
+    &:not(:first-child):before {
+      display: none;
+    }
+
+    /* Selected state - use text-foreground */
+    &[data-selected="true"] {
+      @apply text-foreground;
+    }
+  }
+
+  /* Tab indicator - line style */
+  .tabs__indicator {
+    @apply bg-accent;
+
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* Horizontal orientation - bottom line indicator */
+  &[data-orientation="horizontal"] .tabs__indicator {
+    top: auto;
+    bottom: 0;
+    height: 2px;
+  }
+
+  /* Vertical orientation - left line indicator */
+  &[data-orientation="vertical"] .tabs__indicator {
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+  }
 }

@@ -28,10 +28,14 @@ const DefaultTemplate = (_props: Link["RootProps"]) => (
       <Link.Icon />
     </Link>
     <Link
-      className={buttonVariants({className: "px-3", size: "md", variant: "tertiary"})}
       href="https://heroui.com"
       rel="noopener noreferrer"
       target="_blank"
+      className={buttonVariants({
+        className: "gap-0 px-3 py-0.5 no-underline",
+        size: "md",
+        variant: "tertiary",
+      })}
     >
       HeroUI
       <Link.Icon className="h-2 w-2" />
@@ -74,60 +78,46 @@ const IconPlacementTemplate = (_props: Link["RootProps"]) => (
 const UnderlineVariantsTemplate = (_props: LinkProps) => (
   <div className="flex flex-col gap-6">
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Underline on hover (default)</p>
-      <Link href="#" underline="hover">
-        Hover to see underline animation
+      <p className="text-sm text-muted">Always visible underline</p>
+      <Link className="underline" href="#">
+        Underline always visible
         <Link.Icon />
       </Link>
     </div>
 
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Always visible underline</p>
-      <Link href="#" underline="always">
-        Underline always visible (50% opacity, 100% on hover)
+      <p className="text-sm text-muted">Underline visible on hover</p>
+      <Link className="no-underline hover:underline" href="#">
+        Hover to see the underline
         <Link.Icon />
       </Link>
     </div>
 
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">No underline</p>
-      <Link href="#" underline="none">
+      <p className="text-sm text-muted">No underline</p>
+      <Link className="no-underline" href="#">
         Link without any underline
         <Link.Icon />
       </Link>
     </div>
 
     <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Underline offset variations</p>
+      <p className="text-sm text-muted">Changing the underline offset</p>
       <div className="flex flex-col gap-3">
-        <Link href="#" underline="always" underlineOffset={1}>
-          Offset 1 (default - no space)
+        <Link className="underline-offset-1 hover:underline" href="#">
+          Offset 1 (1px space)
           <Link.Icon />
         </Link>
-        <Link href="#" underline="always" underlineOffset={2}>
+        <Link className="underline-offset-2 hover:underline" href="#">
           Offset 2 (2px space)
           <Link.Icon />
         </Link>
-        <Link href="#" underline="always" underlineOffset={3}>
-          Offset 3 (4px space)
+        <Link className="underline-offset-3 hover:underline" href="#">
+          Offset 3 (3px space)
           <Link.Icon />
         </Link>
-      </div>
-    </div>
-
-    <div className="flex flex-col gap-2">
-      <p className="text-muted text-sm">Always underline with different offsets</p>
-      <div className="flex flex-col gap-3">
-        <Link href="#" underline="always" underlineOffset={1}>
-          Always underlined - Offset 1
-          <Link.Icon />
-        </Link>
-        <Link href="#" underline="always" underlineOffset={2}>
-          Always underlined - Offset 2
-          <Link.Icon />
-        </Link>
-        <Link href="#" underline="always" underlineOffset={3}>
-          Always underlined - Offset 3
+        <Link className="underline-offset-4 hover:underline" href="#">
+          Offset 4 (4px space)
           <Link.Icon />
         </Link>
       </div>

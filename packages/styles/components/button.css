@@ -2,46 +2,64 @@
 
 /* Base button styles */
 .button {
-  @apply relative isolate inline-flex h-10 w-fit origin-center select-none items-center justify-center gap-2 whitespace-nowrap rounded-3xl px-4 text-sm font-medium outline-none md:h-9;
+  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-3xl px-4 text-sm font-medium whitespace-nowrap outline-none select-none no-highlight md:h-9;
 
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    transform 250ms var(--ease-out-quart),
-    background-color 150ms var(--ease-smooth),
-    box-shadow 150ms var(--ease-out);
+    transform 250ms var(--ease-smooth),
+    background-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
 
+  /* Default tokens (fallback behavior) */
+  --button-bg: transparent;
+  --button-bg-hover: var(--button-bg);
+  --button-bg-pressed: var(--button-bg-hover);
+  --button-fg: currentColor;
+
+  background-color: var(--button-bg);
+  color: var(--button-fg);
+
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 
   /* Pending state */
-  &[data-pending] {
+  &[data-pending="true"] {
     @apply status-pending;
   }
 
-  /* Default active/pressed state - scale transform */
+  /* Active / pressed */
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
+    background-color: var(--button-bg-pressed);
     transform: scale(0.97);
   }
 
-  /* SVG icon styling - exclude spinner svgs */
-  & svg:not([data-slot="spinner"] svg) {
+  /* Hover */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      background-color: var(--button-bg-hover);
+    }
+  }
+
+  /* SVG icon styling - exclude spinner and link-icon svgs */
+  & svg:not([data-slot="spinner"] svg, [data-slot="link-icon"] svg) {
     @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
   }
 }
@@ -50,12 +68,12 @@
 .button--sm {
   @apply h-9 px-3 md:h-8;
 
-  & svg:not([data-slot="spinner"] svg) {
+  & svg:not([data-slot="spinner"] svg, [data-slot="link-icon"] svg) {
     @apply size-4;
   }
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.98);
   }
 }
@@ -68,76 +86,57 @@
   @apply h-11 text-base md:h-10;
 
   &:active,
-  &[data-pressed] {
+  &[data-pressed="true"] {
     transform: scale(0.96);
   }
 }
 
-/* Color variants */
+/* Color variants - only set custom property values */
 .button--primary {
-  @apply bg-accent text-accent-foreground;
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
-      @apply bg-accent-hover;
-    }
-  }
+  --button-bg: var(--color-accent);
+  --button-bg-hover: var(--color-accent-hover);
+  --button-bg-pressed: var(--color-accent-hover);
+  --button-fg: var(--color-accent-foreground);
 }
 
 .button--secondary {
-  @apply bg-default text-accent;
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
-      @apply bg-default-hover;
-    }
-  }
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
+  --button-fg: var(--color-accent-soft-foreground);
 }
 
 .button--tertiary {
-  @apply bg-default;
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
-      @apply bg-default-hover;
-    }
-  }
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
 }
 
-.button--ghost {
-  @apply text-default-foreground bg-transparent;
+.button--ghost,
+.button--outline {
+  --button-bg: transparent;
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
+  --button-fg: var(--color-default-foreground);
+}
 
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
-      @apply bg-default-hover;
-    }
-  }
+.button--outline {
+  @apply border border-border;
+  --button-bg-hover: color-mix(in srgb, var(--color-default) 60%, transparent);
 }
 
 .button--danger {
-  @apply bg-danger text-danger-foreground;
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
-      @apply bg-danger-hover;
-    }
-  }
+  --button-bg: var(--color-danger);
+  --button-bg-hover: var(--color-danger-hover);
+  --button-bg-pressed: var(--color-danger-hover);
+  --button-fg: var(--color-danger-foreground);
 }
 
 .button--danger-soft {
-  @apply bg-danger-soft text-danger-soft-foreground;
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered] {
-      @apply bg-danger-soft-hover;
-    }
-  }
+  --button-bg: var(--color-danger-soft);
+  --button-bg-hover: var(--color-danger-soft-hover);
+  --button-bg-pressed: var(--color-danger-soft-hover);
+  --button-fg: var(--color-danger-soft-foreground);
 }
 
 /* Icon-only modifier */
@@ -151,4 +150,9 @@
 
 .button--icon-only.button--lg {
   @apply w-11 md:w-10;
+}
+
+/* Full width modifier */
+.button--full-width {
+  @apply w-full;
 }

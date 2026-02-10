@@ -8,7 +8,6 @@ import {Form} from "../form";
 import {Label} from "../label";
 import {Link} from "../link";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {InputOTP, REGEXP_ONLY_CHARS} from "./index";
 
@@ -39,7 +38,7 @@ export const Default: Story = {
     <div className="flex w-[280px] flex-col gap-2">
       <div className="flex flex-col gap-1">
         <Label>Verify account</Label>
-        <p className="text-muted text-sm">We&apos;ve sent a code to a****@gmail.com</p>
+        <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
       </div>
       <InputOTP {...args} maxLength={6}>
         <InputOTP.Group>
@@ -55,7 +54,7 @@ export const Default: Story = {
         </InputOTP.Group>
       </InputOTP>
       <div className="flex items-center gap-[5px] px-1 pt-1">
-        <p className="text-muted text-sm">Didn&apos;t receive a code?</p>
+        <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
         <Link className="text-foreground" underline="always">
           Resend
         </Link>
@@ -64,33 +63,42 @@ export const Default: Story = {
   ),
 };
 
-export const OnSurface: Story = {
-  render: (args) => (
-    <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
-      <div className="flex flex-col gap-1">
-        <Label>Verify account</Label>
-        <p className="text-muted text-sm">We&apos;ve sent a code to a****@gmail.com</p>
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <Label>Primary variant</Label>
+        <InputOTP maxLength={6} variant="primary">
+          <InputOTP.Group>
+            <InputOTP.Slot index={0} />
+            <InputOTP.Slot index={1} />
+            <InputOTP.Slot index={2} />
+          </InputOTP.Group>
+          <InputOTP.Separator />
+          <InputOTP.Group>
+            <InputOTP.Slot index={3} />
+            <InputOTP.Slot index={4} />
+            <InputOTP.Slot index={5} />
+          </InputOTP.Group>
+        </InputOTP>
       </div>
-      <InputOTP {...args} maxLength={6}>
-        <InputOTP.Group>
-          <InputOTP.Slot index={0} />
-          <InputOTP.Slot index={1} />
-          <InputOTP.Slot index={2} />
-        </InputOTP.Group>
-        <InputOTP.Separator />
-        <InputOTP.Group>
-          <InputOTP.Slot index={3} />
-          <InputOTP.Slot index={4} />
-          <InputOTP.Slot index={5} />
-        </InputOTP.Group>
-      </InputOTP>
-      <div className="flex items-center gap-[5px] px-1 pt-1">
-        <p className="text-muted text-sm">Didn&apos;t receive a code?</p>
-        <Link className="text-foreground" underline="always">
-          Resend
-        </Link>
+      <div className="flex flex-col gap-2">
+        <Label>Secondary variant</Label>
+        <InputOTP maxLength={6} variant="secondary">
+          <InputOTP.Group>
+            <InputOTP.Slot index={0} />
+            <InputOTP.Slot index={1} />
+            <InputOTP.Slot index={2} />
+          </InputOTP.Group>
+          <InputOTP.Separator />
+          <InputOTP.Group>
+            <InputOTP.Slot index={3} />
+            <InputOTP.Slot index={4} />
+            <InputOTP.Slot index={5} />
+          </InputOTP.Group>
+        </InputOTP>
       </div>
-    </Surface>
+    </div>
   ),
 };
 
@@ -179,7 +187,7 @@ export const Controlled: Story = {
             <>
               Value: {value} ({value.length}/6) •{" "}
               <button
-                className="text-foreground font-medium underline"
+                className="font-medium text-foreground underline"
                 onClick={() => setValue("")}
               >
                 Clear
@@ -408,8 +416,8 @@ export const FormExample: Story = {
           )}
         </Button>
         <div className="flex items-center justify-center gap-1">
-          <p className="text-muted text-sm">Having trouble?</p>
-          <Link className="text-foreground text-sm" underline="always">
+          <p className="text-sm text-muted">Having trouble?</p>
+          <Link className="text-sm text-foreground" underline="always">
             Use backup code
           </Link>
         </div>

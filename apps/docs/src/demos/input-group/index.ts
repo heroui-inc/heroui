@@ -1,9 +1,11 @@
 export {Default} from "./default";
 export {Disabled} from "./disabled";
+export {FullWidth} from "./full-width";
 export {Invalid} from "./invalid";
 export {OnSurface} from "./on-surface";
 export {PasswordWithToggle} from "./password-with-toggle";
 export {Required} from "./required";
+export {Variants} from "./variants";
 export {WithBadgeSuffix} from "./with-badge-suffix";
 export {WithCopySuffix} from "./with-copy-suffix";
 export {WithIconPrefixAndCopySuffix} from "./with-icon-prefix-and-copy-suffix";
@@ -15,3 +17,4 @@ export {WithPrefixIcon} from "./with-prefix-icon";
 export {WithSuffixIcon} from "./with-suffix-icon";
 export {WithTextPrefix} from "./with-text-prefix";
 export {WithTextSuffix} from "./with-text-suffix";
+export {WithTextArea} from "./with-textarea";

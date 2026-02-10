@@ -1,0 +1,247 @@
+/* Toast component styles */
+
+/* Toast Region - Container for all toasts */
+.toast-region {
+  @apply pointer-events-none fixed z-50 outline-none;
+  @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-(--toast-width);
+
+  display: block;
+}
+
+/* Placement variants - Bottom */
+.toast-region--bottom {
+  @apply bottom-4 left-1/2 -translate-x-1/2;
+}
+
+.toast-region--bottom-start {
+  @apply bottom-4 left-4;
+}
+
+.toast-region--bottom-end {
+  @apply right-4 bottom-4;
+}
+
+/* Placement variants - Top */
+.toast-region--top {
+  @apply top-4 left-1/2 -translate-x-1/2;
+}
+
+.toast-region--top-start {
+  @apply top-4 left-4;
+}
+
+.toast-region--top-end {
+  @apply top-4 right-4;
+}
+
+.toast-region:focus-visible {
+  @apply outline-2 outline-offset-2 outline-focus;
+}
+
+/* Base toast styles */
+.toast {
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay;
+}
+
+.toast--bottom,
+.toast--bottom-start,
+.toast--bottom-end {
+  bottom: 0;
+}
+
+.toast--top,
+.toast--top-start,
+.toast--top-end {
+  top: 0;
+}
+
+.toast:not([data-frontmost="true"]) {
+  @apply pointer-events-none;
+
+  height: var(--front-height);
+  overflow: hidden;
+
+  .toast__close-button {
+    @apply pointer-events-none opacity-0;
+    outline: none;
+  }
+}
+
+.toast[data-hidden="true"] {
+  @apply pointer-events-none flex opacity-0;
+}
+
+.toast:focus-visible {
+  @apply outline-2 outline-offset-2 outline-focus;
+}
+
+/* Toast placements + view transitions */
+.toast--bottom,
+.toast--bottom-start,
+.toast--bottom-end {
+  view-transition-class: toast-bottom;
+}
+
+.toast--top,
+.toast--top-start,
+.toast--top-end {
+  view-transition-class: toast-top;
+}
+
+/* Toast content */
+.toast__content {
+  @apply flex h-full grow flex-col items-start self-center;
+}
+
+/* Toast indicator */
+.toast__indicator {
+  @apply flex shrink-0 items-center justify-center p-1 text-overlay-foreground select-none;
+
+  [data-slot="toast-default-icon"] {
+    @apply box-content size-4;
+  }
+
+  /* Spinner styles override for toast */
+  [data-slot="spinner"] {
+    @apply size-4;
+  }
+
+  [data-slot="spinner-icon"] {
+    @apply size-4;
+  }
+}
+
+/* Toast title */
+.toast__title {
+  @apply text-sm leading-5 font-medium text-overlay-foreground;
+}
+
+/* Toast description */
+.toast__description {
+  @apply text-sm text-muted;
+}
+
+/* Toast close button */
+.toast__close-button {
+  @apply absolute top-2.5 right-2.5 size-5 border-border bg-default opacity-100 sm:pointer-events-none sm:-top-1 sm:-right-1 sm:border sm:bg-overlay sm:opacity-0;
+
+  transition: opacity 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+  /* Overrides close button default icon size from 16px to 12px */
+  [data-slot="close-button-icon"] {
+    @apply size-3.5 sm:size-3;
+  }
+
+  /* Overrides close button hover state */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default;
+    }
+  }
+}
+
+/* Only show close button on hover for frontmost toast */
+.toast[data-frontmost="true"]:hover .toast__close-button {
+  @apply pointer-events-auto opacity-100;
+}
+
+/* Toast action button */
+.toast__action {
+  @apply mt-2 sm:mt-0;
+}
+
+/* Variant modifiers */
+.toast--accent .toast__title {
+  @apply text-accent;
+}
+
+.toast--success .toast__title {
+  @apply text-success;
+}
+
+.toast--success .toast__indicator {
+  @apply text-success;
+}
+
+.toast--warning .toast__title {
+  @apply text-warning;
+}
+
+.toast--warning .toast__indicator {
+  @apply text-warning;
+}
+
+.toast--danger .toast__title {
+  @apply text-danger;
+}
+
+.toast--danger .toast__indicator {
+  @apply text-danger;
+}
+
+/* View transition animations */
+::view-transition-group(.toast-bottom),
+::view-transition-group(.toast-top) {
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  will-change: translate, opacity;
+}
+
+/* Bottom */
+::view-transition-new(.toast-bottom):only-child {
+  animation: toast-slide-bottom-in 350ms;
+}
+
+::view-transition-old(.toast-bottom):only-child {
+  animation: toast-slide-bottom-out 350ms;
+  animation-fill-mode: forwards;
+}
+
+/* Top */
+::view-transition-new(.toast-top):only-child {
+  animation: toast-slide-top-in 350ms;
+}
+
+::view-transition-old(.toast-top):only-child {
+  animation: toast-slide-top-out 350ms;
+  animation-fill-mode: forwards;
+}
+
+/* Keyframes */
+
+/* Bottom */
+@keyframes toast-slide-bottom-in {
+  from {
+    translate: 0 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes toast-slide-bottom-out {
+  to {
+    translate: 0 100%;
+    opacity: 0;
+  }
+}
+
+/* Top */
+@keyframes toast-slide-top-in {
+  from {
+    translate: 0 -100%;
+    opacity: 0;
+  }
+}
+
+@keyframes toast-slide-top-out {
+  to {
+    translate: 0 -100%;
+    opacity: 0;
+  }
+}

@@ -10,8 +10,8 @@ import {FieldError} from "../field-error";
 import {Kbd} from "../kbd";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 import {TextField} from "../text-field";
+import {Tooltip} from "../tooltip";
 
 import {InputGroup} from "./index";
 
@@ -33,11 +33,61 @@ export const Default: Story = {
       <Label>Email address</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+          <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
         </InputGroup.Prefix>
         <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
       </InputGroup>
     </TextField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <TextField className="w-[280px]" name="primary">
+        <Label>Primary variant</Label>
+        <InputGroup variant="primary">
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input placeholder="name@email.com" />
+        </InputGroup>
+      </TextField>
+      <TextField className="w-[280px]" name="secondary">
+        <Label>Secondary variant</Label>
+        <InputGroup variant="secondary">
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input placeholder="name@email.com" />
+        </InputGroup>
+      </TextField>
+    </div>
+  ),
+};
+
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <TextField fullWidth name="email">
+        <Label>Email address</Label>
+        <InputGroup fullWidth>
+          <InputGroup.Prefix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
+          </InputGroup.Prefix>
+          <InputGroup.Input placeholder="name@email.com" />
+        </InputGroup>
+      </TextField>
+      <TextField fullWidth name="password">
+        <Label>Password</Label>
+        <InputGroup fullWidth>
+          <InputGroup.Input placeholder="Enter password" type="password" />
+          <InputGroup.Suffix>
+            <Icon className="size-4 text-muted" icon="gravity-ui:eye" />
+          </InputGroup.Suffix>
+        </InputGroup>
+      </TextField>
+    </div>
   ),
 };
 
@@ -47,7 +97,7 @@ export const WithPrefixIcon: Story = {
       <Label>Email address</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+          <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
         </InputGroup.Prefix>
         <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
       </InputGroup>
@@ -63,7 +113,7 @@ export const WithSuffixIcon: Story = {
       <InputGroup>
         <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
         <InputGroup.Suffix>
-          <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+          <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
         </InputGroup.Suffix>
       </InputGroup>
       <Description>We don't send spam</Description>
@@ -73,11 +123,11 @@ export const WithSuffixIcon: Story = {
 
 export const WithPrefixAndSuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="price">
+    <TextField className="w-[280px]" defaultValue="10" name="price">
       <Label>Set a price</Label>
       <InputGroup>
         <InputGroup.Prefix>$</InputGroup.Prefix>
-        <InputGroup.Input className="w-[200px]" defaultValue="10" type="number" />
+        <InputGroup.Input className="w-[200px]" type="number" />
         <InputGroup.Suffix>USD</InputGroup.Suffix>
       </InputGroup>
       <Description>What customers would pay</Description>
@@ -87,11 +137,11 @@ export const WithPrefixAndSuffix: Story = {
 
 export const WithTextPrefix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="website">
+    <TextField className="w-[280px]" defaultValue="heroui.com" name="website">
       <Label>Website</Label>
       <InputGroup>
         <InputGroup.Prefix>https://</InputGroup.Prefix>
-        <InputGroup.Input className="w-[280px]" defaultValue="heroui.com" />
+        <InputGroup.Input className="w-[280px]" />
       </InputGroup>
     </TextField>
   ),
@@ -99,10 +149,10 @@ export const WithTextPrefix: Story = {
 
 export const WithTextSuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="website">
+    <TextField className="w-[280px]" defaultValue="heroui" name="website">
       <Label>Website</Label>
       <InputGroup>
-        <InputGroup.Input className="w-[280px]" defaultValue="heroui" />
+        <InputGroup.Input className="w-[280px]" />
         <InputGroup.Suffix>.com</InputGroup.Suffix>
       </InputGroup>
     </TextField>
@@ -111,13 +161,13 @@ export const WithTextSuffix: Story = {
 
 export const WithIconPrefixAndTextSuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="website">
+    <TextField className="w-[280px]" defaultValue="heroui" name="website">
       <Label>Website</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="text-muted size-4" icon="gravity-ui:globe" />
+          <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
         </InputGroup.Prefix>
-        <InputGroup.Input className="w-[280px]" defaultValue="heroui" />
+        <InputGroup.Input className="w-[280px]" />
         <InputGroup.Suffix>.com</InputGroup.Suffix>
       </InputGroup>
     </TextField>
@@ -126,10 +176,10 @@ export const WithIconPrefixAndTextSuffix: Story = {
 
 export const WithCopySuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="website">
+    <TextField className="w-[280px]" defaultValue="heroui.com" name="website">
       <Label>Website</Label>
       <InputGroup>
-        <InputGroup.Input className="w-[280px]" defaultValue="heroui.com" />
+        <InputGroup.Input className="w-[280px]" />
         <InputGroup.Suffix className="pr-0">
           <Button isIconOnly aria-label="Copy" size="sm" variant="ghost">
             <Icon className="size-4" icon="gravity-ui:copy" />
@@ -142,13 +192,13 @@ export const WithCopySuffix: Story = {
 
 export const WithIconPrefixAndCopySuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="website">
+    <TextField className="w-[280px]" defaultValue="heroui.com" name="website">
       <Label>Website</Label>
       <InputGroup>
         <InputGroup.Prefix>
-          <Icon className="text-muted size-4" icon="gravity-ui:globe" />
+          <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
         </InputGroup.Prefix>
-        <InputGroup.Input className="w-[280px]" defaultValue="heroui.com" />
+        <InputGroup.Input className="w-[280px]" />
         <InputGroup.Suffix className="pr-0">
           <Button isIconOnly aria-label="Copy" size="sm" variant="ghost">
             <Icon className="size-4" icon="gravity-ui:copy" />
@@ -194,9 +244,9 @@ export const PasswordWithToggle: Story = {
 
 export const WithLoadingSuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="status">
+    <TextField className="w-[280px]" defaultValue="Sending..." name="status">
       <InputGroup>
-        <InputGroup.Input className="w-[280px]" defaultValue="Sending..." />
+        <InputGroup.Input className="w-[280px]" />
         <InputGroup.Suffix>
           <Spinner className="size-4" />
         </InputGroup.Suffix>
@@ -207,7 +257,7 @@ export const WithLoadingSuffix: Story = {
 
 export const WithKeyboardShortcut: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="command">
+    <TextField aria-label="Command" className="w-[280px]" name="command">
       <InputGroup>
         <InputGroup.Input className="w-[280px]" placeholder="Command" />
         <InputGroup.Suffix className="pr-2">
@@ -223,7 +273,7 @@ export const WithKeyboardShortcut: Story = {
 
 export const WithBadgeSuffix: Story = {
   render: () => (
-    <TextField className="w-[280px]" name="email">
+    <TextField aria-label="Email address" className="w-[280px]" name="email">
       <InputGroup>
         <InputGroup.Input className="w-[280px]" placeholder="Email address" />
         <InputGroup.Suffix className="pr-2">
@@ -243,7 +293,7 @@ export const Required: Story = {
         <Label>Email address</Label>
         <InputGroup>
           <InputGroup.Prefix>
-            <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
           </InputGroup.Prefix>
           <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
         </InputGroup>
@@ -268,7 +318,7 @@ export const Invalid: Story = {
         <Label>Email address</Label>
         <InputGroup>
           <InputGroup.Prefix>
-            <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
           </InputGroup.Prefix>
           <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
         </InputGroup>
@@ -290,20 +340,20 @@ export const Invalid: Story = {
 export const Disabled: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <TextField isDisabled className="w-[280px]" name="email">
+      <TextField isDisabled className="w-[280px]" defaultValue="name@email.com" name="email">
         <Label>Email address</Label>
         <InputGroup>
           <InputGroup.Prefix>
-            <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+            <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
           </InputGroup.Prefix>
-          <InputGroup.Input className="w-[280px]" defaultValue="name@email.com" />
+          <InputGroup.Input className="w-[280px]" />
         </InputGroup>
       </TextField>
-      <TextField isDisabled className="w-[280px]" name="price">
+      <TextField isDisabled className="w-[280px]" defaultValue="10" name="price">
         <Label>Set a price</Label>
         <InputGroup>
           <InputGroup.Prefix>$</InputGroup.Prefix>
-          <InputGroup.Input className="w-[200px]" defaultValue="10" type="number" />
+          <InputGroup.Input className="w-[200px]" type="number" />
           <InputGroup.Suffix>USD</InputGroup.Suffix>
         </InputGroup>
       </TextField>
@@ -311,21 +361,98 @@ export const Disabled: Story = {
   ),
 };
 
-export const OnSurface: Story = {
-  render: () => (
-    <Surface className="rounded-2xl p-6">
-      <TextField name="email">
-        <Label>Email address</Label>
-        <InputGroup isOnSurface>
-          <InputGroup.Prefix>
-            <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+export const WithTextArea: Story = {
+  render: () => {
+    const [value, setValue] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = () => {
+      if (!value.trim()) return;
+
+      setIsSubmitting(true);
+
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setValue("");
+      }, 1000);
+    };
+
+    return (
+      <TextField
+        fullWidth
+        aria-label="Prompt input"
+        className="flex w-sm flex-col sm:w-lg"
+        name="prompt"
+      >
+        <InputGroup fullWidth className="flex flex-col gap-2 rounded-3xl py-2">
+          <InputGroup.Prefix className="px-3 py-0">
+            <Button aria-label="Add context" size="sm" variant="outline">
+              <Icon icon="gravity-ui:at" />
+              Add Context
+            </Button>
           </InputGroup.Prefix>
-          <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
+          <InputGroup.TextArea
+            className="w-full resize-none px-3.5 py-0"
+            placeholder="Assign tasks or ask anything..."
+            rows={5}
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+          />
+          <InputGroup.Suffix className="flex w-full items-center gap-1.5 px-3 py-0">
+            <Tooltip delay={0}>
+              <Button isIconOnly aria-label="Attach file" size="sm" variant="tertiary">
+                <Icon icon="gravity-ui:plus" />
+              </Button>
+              <Tooltip.Content>
+                <p className="text-xs">Add a files and more</p>
+              </Tooltip.Content>
+            </Tooltip>
+            <Tooltip delay={0}>
+              <Button isIconOnly aria-label="Connect Apps" size="sm" variant="tertiary">
+                <Icon icon="gravity-ui:plug-connection" />
+              </Button>
+              <Tooltip.Content>
+                <p className="text-xs">Connect apps</p>
+              </Tooltip.Content>
+            </Tooltip>
+            <div className="ml-auto flex items-center gap-1.5">
+              <Tooltip delay={0}>
+                <Button isIconOnly aria-label="Voice input" size="sm" variant="ghost">
+                  <Icon icon="gravity-ui:microphone" />
+                </Button>
+                <Tooltip.Content>
+                  <p className="text-xs">Voice input</p>
+                </Tooltip.Content>
+              </Tooltip>
+              <Tooltip delay={0}>
+                <Button
+                  isIconOnly
+                  aria-label="Send prompt"
+                  isDisabled={!value.trim()}
+                  isPending={isSubmitting}
+                  onPress={handleSubmit}
+                >
+                  {({isPending}) =>
+                    isPending ? (
+                      <Spinner color="current" size="sm" />
+                    ) : (
+                      <Icon icon="gravity-ui:arrow-up" />
+                    )
+                  }
+                </Button>
+                <Tooltip.Content className="flex items-center gap-1">
+                  <p className="text-xs">Send</p>
+                  <Kbd className="h-4 rounded-sm px-1">
+                    <Kbd.Abbr keyValue="enter" />
+                  </Kbd>
+                </Tooltip.Content>
+              </Tooltip>
+            </div>
+          </InputGroup.Suffix>
         </InputGroup>
-        <Description>We'll never share this with anyone else</Description>
       </TextField>
-    </Surface>
-  ),
+    );
+  },
 };
 
 export const AllVariations: Story = {
@@ -336,7 +463,7 @@ export const AllVariations: Story = {
           <Label>Email address *</Label>
           <InputGroup>
             <InputGroup.Prefix>
-              <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+              <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
             </InputGroup.Prefix>
             <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
           </InputGroup>
@@ -348,53 +475,53 @@ export const AllVariations: Story = {
           <InputGroup>
             <InputGroup.Input className="w-[280px]" placeholder="name@email.com" />
             <InputGroup.Suffix>
-              <Icon className="text-muted size-4" icon="gravity-ui:envelope" />
+              <Icon className="size-4 text-muted" icon="gravity-ui:envelope" />
             </InputGroup.Suffix>
           </InputGroup>
           <Description>We don't send spam</Description>
         </TextField>
 
-        <TextField className="w-[280px]" name="price">
+        <TextField className="w-[280px]" defaultValue="10" name="price">
           <Label>Set a price</Label>
           <InputGroup>
             <InputGroup.Prefix>$</InputGroup.Prefix>
-            <InputGroup.Input className="w-[200px]" defaultValue="10" type="number" />
+            <InputGroup.Input className="w-[200px]" type="number" />
             <InputGroup.Suffix>USD</InputGroup.Suffix>
           </InputGroup>
           <Description>What customers would pay</Description>
         </TextField>
 
-        <TextField className="w-[280px]" name="website1">
+        <TextField className="w-[280px]" defaultValue="heroui.com" name="website1">
           <Label>Website</Label>
           <InputGroup>
             <InputGroup.Prefix>https://</InputGroup.Prefix>
-            <InputGroup.Input className="w-[280px]" defaultValue="heroui.com" />
+            <InputGroup.Input className="w-[280px]" />
           </InputGroup>
         </TextField>
 
-        <TextField className="w-[280px]" name="website2">
+        <TextField className="w-[280px]" defaultValue="heroui" name="website2">
           <Label>Website</Label>
           <InputGroup>
-            <InputGroup.Input className="w-[280px]" defaultValue="heroui" />
+            <InputGroup.Input className="w-[280px]" />
             <InputGroup.Suffix>.com</InputGroup.Suffix>
           </InputGroup>
         </TextField>
 
-        <TextField className="w-[280px]" name="website3">
+        <TextField className="w-[280px]" defaultValue="heroui" name="website3">
           <Label>Website</Label>
           <InputGroup>
             <InputGroup.Prefix>
-              <Icon className="text-muted size-4" icon="gravity-ui:globe" />
+              <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
             </InputGroup.Prefix>
-            <InputGroup.Input className="w-[280px]" defaultValue="heroui" />
+            <InputGroup.Input className="w-[280px]" />
             <InputGroup.Suffix>.com</InputGroup.Suffix>
           </InputGroup>
         </TextField>
 
-        <TextField className="w-[280px]" name="website4">
+        <TextField className="w-[280px]" defaultValue="heroui.com" name="website4">
           <Label>Website</Label>
           <InputGroup>
-            <InputGroup.Input className="w-[280px]" defaultValue="heroui.com" />
+            <InputGroup.Input className="w-[280px]" />
             <InputGroup.Suffix className="pr-0">
               <Button isIconOnly aria-label="Copy" className="h-auto p-0" size="sm" variant="ghost">
                 <Icon className="size-4" icon="gravity-ui:copy" />
@@ -403,13 +530,13 @@ export const AllVariations: Story = {
           </InputGroup>
         </TextField>
 
-        <TextField className="w-[280px]" name="website5">
+        <TextField className="w-[280px]" defaultValue="heroui.com" name="website5">
           <Label>Website</Label>
           <InputGroup>
             <InputGroup.Prefix>
-              <Icon className="text-muted size-4" icon="gravity-ui:globe" />
+              <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
             </InputGroup.Prefix>
-            <InputGroup.Input className="w-[280px]" defaultValue="heroui.com" />
+            <InputGroup.Input className="w-[280px]" />
             <InputGroup.Suffix className="pr-0">
               <Button isIconOnly aria-label="Copy" className="h-auto p-0" size="sm" variant="ghost">
                 <Icon className="size-4" icon="gravity-ui:copy" />

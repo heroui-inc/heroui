@@ -1,0 +1,386 @@
+---
+title: InputOTP
+description: Input component for entering one-time passwords (OTP) with individual character slots, animations, and validation support.
+links:
+  source_native: input-otp/input-otp.tsx
+  styles_native: input-otp/input-otp.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { InputOTP } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<InputOTP>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={2}>
+      <InputOTP.SlotPlaceholder />
+      <InputOTP.SlotValue />
+      <InputOTP.SlotCaret />
+    </InputOTP.Slot>
+  </InputOTP.Group>
+</InputOTP>
+```
+
+- **InputOTP**: Main container that manages OTP input state, handles text changes, and provides context to child components. Manages focus, validation, and character input.
+- **InputOTP.Group**: Container for grouping multiple slots together. Use this to visually group related slots (e.g., groups of 3 digits).
+- **InputOTP.Slot**: Individual slot that displays a single character or placeholder. Each slot must have a unique index matching its position in the OTP sequence. When no children are provided, automatically renders SlotPlaceholder, SlotValue, and SlotCaret.
+- **InputOTP.SlotPlaceholder**: Text component that displays the placeholder character for a slot when it's empty. Used by default in Slot if no children provided.
+- **InputOTP.SlotValue**: Text component that displays the actual character value for a slot with animations. Used by default in Slot if no children provided.
+- **InputOTP.SlotCaret**: Animated caret indicator that shows the current input position. Place this inside a Slot to show where the user is currently typing.
+- **InputOTP.Separator**: Visual separator between groups of slots. Use this to visually separate different groups of OTP digits.
+
+## Usage
+
+### Basic Usage
+
+Create a 6-digit OTP input with grouped slots and separator.
+
+```tsx
+<InputOTP maxLength={6} onComplete={(code) => console.log(code)}>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>
+```
+
+### Four Digits
+
+Create a simple 4-digit PIN input.
+
+```tsx
+<InputOTP maxLength={4} onComplete={(code) => console.log(code)}>
+  <InputOTP.Slot index={0} />
+  <InputOTP.Slot index={1} />
+  <InputOTP.Slot index={2} />
+  <InputOTP.Slot index={3} />
+</InputOTP>
+```
+
+### With Placeholder
+
+Provide custom placeholder characters for each slot position.
+
+```tsx
+<InputOTP
+  maxLength={6}
+  placeholder="——————"
+  onComplete={(code) => console.log(code)}
+>
+  <InputOTP.Group>
+    {({ slots }) => (
+      <>
+        {slots.map((slot) => (
+          <InputOTP.Slot key={slot.index} index={slot.index} />
+        ))}
+      </>
+    )}
+  </InputOTP.Group>
+</InputOTP>
+```
+
+### Controlled Value
+
+Control the OTP value programmatically.
+
+```tsx
+const [value, setValue] = useState('');
+
+<InputOTP value={value} onChange={setValue} maxLength={6}>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>;
+```
+
+### With Validation
+
+Display validation errors when the OTP is invalid.
+
+```tsx
+<InputOTP value={value} onChange={setValue} maxLength={6} isInvalid={isInvalid}>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>
+```
+
+### With Pattern
+
+Restrict input to specific character patterns using regex. Three predefined patterns are available: `REGEXP_ONLY_DIGITS` (matches digits 0-9), `REGEXP_ONLY_CHARS` (matches alphabetic characters a-z, A-Z), and `REGEXP_ONLY_DIGITS_AND_CHARS` (matches both digits and alphabetic characters).
+
+```tsx
+import { InputOTP, REGEXP_ONLY_CHARS } from 'heroui-native';
+
+<InputOTP
+  maxLength={6}
+  pattern={REGEXP_ONLY_CHARS}
+  inputMode="text"
+  onComplete={(code) => console.log(code)}
+>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>;
+```
+
+### Custom Layout
+
+Use render props in Group to create custom slot layouts.
+
+```tsx
+<InputOTP maxLength={6}>
+  <InputOTP.Group>
+    {({ slots, isFocused, isInvalid }) => (
+      <>
+        {slots.map((slot) => (
+          <InputOTP.Slot
+            key={slot.index}
+            index={slot.index}
+            className={cn('custom-class', slot.isActive && 'active-class')}
+          >
+            <InputOTP.SlotPlaceholder />
+            <InputOTP.SlotValue />
+            <InputOTP.SlotCaret />
+          </InputOTP.Slot>
+        ))}
+      </>
+    )}
+  </InputOTP.Group>
+</InputOTP>
+```
+
+## Example
+
+```tsx
+import { InputOTP, Label, Description, type InputOTPRef } from 'heroui-native';
+import { View } from 'react-native';
+import { useRef } from 'react';
+
+export default function InputOTPExample() {
+  const ref = useRef<InputOTPRef>(null);
+
+  const onComplete = (code: string) => {
+    console.log('OTP completed:', code);
+    setTimeout(() => {
+      ref.current?.clear();
+    }, 1000);
+  };
+
+  return (
+    <View className="flex-1 px-5 items-center justify-center">
+      <View>
+        <Label>Verify account</Label>
+        <Description className="mb-3">
+          We've sent a code to a****@gmail.com
+        </Description>
+        <InputOTP ref={ref} maxLength={6} onComplete={onComplete}>
+          <InputOTP.Group>
+            <InputOTP.Slot index={0} />
+            <InputOTP.Slot index={1} />
+            <InputOTP.Slot index={2} />
+          </InputOTP.Group>
+          <InputOTP.Separator />
+          <InputOTP.Group>
+            <InputOTP.Slot index={3} />
+            <InputOTP.Slot index={4} />
+            <InputOTP.Slot index={5} />
+          </InputOTP.Group>
+        </InputOTP>
+      </View>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/input-otp.tsx).
+
+## API Reference
+
+### InputOTP
+
+| prop                       | type                          | default     | description                                                                                |
+| -------------------------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `maxLength`                | `number`                      | -           | Maximum length of the OTP (required)                                                       |
+| `value`                    | `string`                      | -           | Controlled value for the OTP input                                                         |
+| `defaultValue`             | `string`                      | -           | Default value for uncontrolled usage                                                       |
+| `onChange`                 | `(value: string) => void`     | -           | Callback when value changes                                                                |
+| `onComplete`               | `(value: string) => void`     | -           | Handler called when all slots are filled                                                   |
+| `isDisabled`               | `boolean`                     | `false`     | Whether the input is disabled                                                              |
+| `isInvalid`                | `boolean`                     | `false`     | Whether the input is in an invalid state                                                   |
+| `pattern`                  | `string`                      | -           | Regex pattern for allowed characters (e.g., REGEXP_ONLY_DIGITS, REGEXP_ONLY_CHARS)         |
+| `inputMode`                | `TextInputProps['inputMode']` | `'numeric'` | Input mode for the input                                                                   |
+| `placeholder`              | `string`                      | -           | Placeholder text for the input. Each character corresponds to a slot position              |
+| `placeholderTextColor`     | `string`                      | -           | Placeholder text color for all slots                                                       |
+| `placeholderTextClassName` | `string`                      | -           | Placeholder text class name for all slots                                                  |
+| `pasteTransformer`         | `(text: string) => string`    | -           | Transform pasted text (e.g., remove hyphens). Defaults to removing non-matching characters |
+| `onFocus`                  | `(e: FocusEvent) => void`     | -           | Handler for focus events                                                                   |
+| `onBlur`                   | `(e: BlurEvent) => void`      | -           | Handler for blur events                                                                    |
+| `textInputProps`           | `Omit<TextInputProps, ...>`   | -           | Additional props to pass to the underlying TextInput component                             |
+| `children`                 | `React.ReactNode`             | -           | Children elements to be rendered inside the InputOTP                                       |
+| `className`                | `string`                      | -           | Additional CSS classes to apply                                                            |
+| `style`                    | `PressableProps['style']`     | -           | Style to pass to the container Pressable component                                         |
+| `animation`                | `"disable-all" \| undefined`  | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children  |
+
+### InputOTP.Group
+
+| prop           | type                                                                        | default | description                                                                                                              |
+| -------------- | --------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `children`     | `React.ReactNode \| ((props: InputOTPGroupRenderProps) => React.ReactNode)` | -       | Children elements to be rendered inside the group, or a render function that receives slot data and other context values |
+| `className`    | `string`                                                                    | -       | Additional CSS classes to apply                                                                                          |
+| `...ViewProps` | `ViewProps`                                                                 | -       | All standard React Native View props are supported                                                                       |
+
+#### InputOTPGroupRenderProps
+
+| prop         | type         | description                              |
+| ------------ | ------------ | ---------------------------------------- |
+| `slots`      | `SlotData[]` | Array of slot data for each position     |
+| `maxLength`  | `number`     | Maximum length of the OTP                |
+| `value`      | `string`     | Current OTP value                        |
+| `isFocused`  | `boolean`    | Whether the input is currently focused   |
+| `isDisabled` | `boolean`    | Whether the input is disabled            |
+| `isInvalid`  | `boolean`    | Whether the input is in an invalid state |
+
+### InputOTP.Slot
+
+| prop           | type              | default | description                                                                                 |
+| -------------- | ----------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `index`        | `number`          | -       | Zero-based index of the slot (required). Must be between 0 and maxLength - 1                |
+| `children`     | `React.ReactNode` | -       | Custom slot content. If not provided, defaults to SlotPlaceholder, SlotValue, and SlotCaret |
+| `className`    | `string`          | -       | Additional CSS classes to apply                                                             |
+| `style`        | `ViewStyle`       | -       | Additional styles to apply                                                                  |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported                                          |
+
+### InputOTP.SlotPlaceholder
+
+| prop           | type        | default | description                                                          |
+| -------------- | ----------- | ------- | -------------------------------------------------------------------- |
+| `children`     | `string`    | -       | Text content to display (optional, defaults to slot.placeholderChar) |
+| `className`    | `string`    | -       | Additional CSS classes to apply                                      |
+| `style`        | `TextStyle` | -       | Additional styles to apply                                           |
+| `...TextProps` | `TextProps` | -       | All standard React Native Text props are supported                   |
+
+### InputOTP.SlotValue
+
+| prop           | type                         | default | description                                               |
+| -------------- | ---------------------------- | ------- | --------------------------------------------------------- |
+| `children`     | `string`                     | -       | Text content to display (optional, defaults to slot.char) |
+| `className`    | `string`                     | -       | Additional CSS classes to apply                           |
+| `animation`    | `InputOTPSlotValueAnimation` | -       | Animation configuration for SlotValue                     |
+| `...TextProps` | `TextProps`                  | -       | All standard React Native Text props are supported        |
+
+#### InputOTPSlotValueAnimation
+
+Animation configuration for InputOTP.SlotValue component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop               | type                    | default                                  | description                                     |
+| ------------------ | ----------------------- | ---------------------------------------- | ----------------------------------------------- |
+| `state`            | `'disabled' \| boolean` | -                                        | Disable animations while customizing properties |
+| `wrapper.entering` | `EntryOrExitLayoutType` | `FadeIn.duration(250)`                   | Entering animation for wrapper                  |
+| `wrapper.exiting`  | `EntryOrExitLayoutType` | `FadeOut.duration(100)`                  | Exiting animation for wrapper                   |
+| `text.entering`    | `EntryOrExitLayoutType` | `FlipInXDown.duration(250).easing(...)`  | Entering animation for text                     |
+| `text.exiting`     | `EntryOrExitLayoutType` | `FlipOutXDown.duration(250).easing(...)` | Exiting animation for text                      |
+
+### InputOTP.SlotCaret
+
+| prop                    | type                         | default  | description                                                                                                                                  |
+| ----------------------- | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `className`             | `string`                     | -        | Additional CSS classes to apply                                                                                                              |
+| `style`                 | `ViewStyle`                  | -        | Additional styles to apply                                                                                                                   |
+| `animation`             | `InputOTPSlotCaretAnimation` | -        | Animation configuration for SlotCaret                                                                                                        |
+| `isAnimatedStyleActive` | `boolean`                    | `true`   | Whether animated styles (react-native-reanimated) are active. When `false`, the animated style is removed and you can implement custom logic |
+| `pointerEvents`         | `'none' \| 'auto' \| ...`    | `'none'` | Pointer events configuration                                                                                                                 |
+| `...ViewProps`          | `ViewProps`                  | -        | All standard React Native View props are supported                                                                                           |
+
+#### InputOTPSlotCaretAnimation
+
+Animation configuration for InputOTP.SlotCaret component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop               | type                    | default    | description                                     |
+| ------------------ | ----------------------- | ---------- | ----------------------------------------------- |
+| `state`            | `'disabled' \| boolean` | -          | Disable animations while customizing properties |
+| `opacity.value`    | `[number, number]`      | `[0, 1]`   | Opacity values [min, max]                       |
+| `opacity.duration` | `number`                | `500`      | Animation duration in milliseconds              |
+| `height.value`     | `[number, number]`      | `[16, 18]` | Height values [min, max] in pixels              |
+| `height.duration`  | `number`                | `500`      | Animation duration in milliseconds              |
+
+### InputOTP.Separator
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `className`    | `string`    | -       | Additional CSS classes to apply                    |
+| `...ViewProps` | `ViewProps` | -       | All standard React Native View props are supported |
+
+## Hooks
+
+### useInputOTP
+
+Hook to access the InputOTP root context. Must be used within an `InputOTP` component.
+
+```tsx
+const { value, maxLength, isFocused, isDisabled, isInvalid, slots } =
+  useInputOTP();
+```
+
+### useInputOTPSlot
+
+Hook to access the InputOTP.Slot context. Must be used within an `InputOTP.Slot` component.
+
+```tsx
+const { slot, isActive, isCaretVisible } = useInputOTPSlot();
+```

@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Base list-box item styles
+   ========================================================================== */
+
+.list-box-item {
+  @apply relative flex min-h-9 w-full items-center justify-start gap-3 rounded-2xl px-2 py-1.5 outline-none no-highlight;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out-quart),
+    box-shadow 150ms var(--ease-out);
+
+  @apply motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  [data-slot="label"] {
+    @apply pointer-events-none w-fit select-none;
+  }
+
+  [data-slot="description"] {
+    @apply pointer-events-none text-wrap select-none;
+  }
+
+  /* Add padding-right when indicator is present */
+  &:has(.list-box-item__indicator) {
+    @apply pr-7;
+  }
+
+  /* Focus visible state (keyboard focus only) */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Focus state */
+  &:focus,
+  &[data-focus="true"] {
+  }
+
+  /* Pressed state */
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.98);
+  }
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default-hover;
+    }
+  }
+
+  /* Selected state */
+  &[aria-selected="true"],
+  &[data-selected="true"] {
+  }
+
+  /* Disabled state */
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+/* ==========================================================================
+   List-box item indicator
+   ========================================================================== */
+
+.list-box-item__indicator {
+  @apply absolute top-1/2 right-2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center text-default-foreground;
+
+  /**
+   * Transitions
+   */
+  @apply transition duration-250 motion-reduce:transition-none;
+
+  /* Checkmark SVG indicator */
+  [data-slot="list-box-item-indicator--checkmark"] {
+    @apply size-2.5;
+
+    /**
+     * Transitions
+     */
+    @apply transition-all duration-300 motion-reduce:transition-none;
+  }
+
+  .list-box-item[aria-selected="true"] [data-slot="list-box-item-indicator--checkmark"],
+  .list-box-item[data-selected="true"] [data-slot="list-box-item-indicator--checkmark"] {
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: stroke-dashoffset 250ms linear;
+    @apply motion-reduce:transition-none;
+  }
+}
+
+/* Default variant */
+.list-box-item--default {
+}
+
+/* Danger variant */
+.list-box-item--danger {
+  .list-box-item__indicator {
+    @apply text-danger;
+  }
+
+  [data-slot="label"] {
+    @apply text-danger;
+  }
+}

@@ -1,13 +1,11 @@
 "use client";
 
-import type {DisclosureVariants} from "./disclosure.styles";
 import type {Booleanish} from "../../utils/assertion";
-import type {
-  ButtonProps,
-  DisclosurePanelProps,
-  DisclosureProps as DisclosurePrimitiveProps,
-} from "react-aria-components";
+import type {DisclosureVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
+import type {ButtonProps} from "react-aria-components";
 
+import {disclosureVariants} from "@heroui/styles";
 import React, {createContext, useContext, useRef} from "react";
 import {
   Button,
@@ -17,12 +15,9 @@ import {
   DisclosureStateContext,
 } from "react-aria-components";
 
-import {mapPropsVariants, objectToDeps} from "../../utils";
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
-
-import {disclosureVariants} from "./disclosure.styles";
 
 /* ------------------------------------------------------------------------------------------------
  * Disclosure Context
@@ -36,15 +31,11 @@ const DisclosureContext = createContext<DisclosureContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Root
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureRootProps extends DisclosurePrimitiveProps, DisclosureVariants {}
+interface DisclosureRootProps
+  extends ComponentPropsWithRef<typeof DisclosurePrimitive>, DisclosureVariants {}
 
-const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootProps) => {
-  const [props, variantProps] = mapPropsVariants(originalProps, disclosureVariants.variantKeys);
-
-  const slots = React.useMemo(
-    () => disclosureVariants({...(variantProps as DisclosureVariants)}),
-    [objectToDeps(variantProps)],
-  );
+const DisclosureRoot = ({children, className, ...props}: DisclosureRootProps) => {
+  const slots = React.useMemo(() => disclosureVariants({}), []);
 
   return (
     <DisclosureContext value={{slots}}>
@@ -62,7 +53,7 @@ const DisclosureRoot = ({children, className, ...originalProps}: DisclosureRootP
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Heading
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureHeadingProps extends React.ComponentProps<typeof DisclosureHeadingPrimitive> {
+interface DisclosureHeadingProps extends ComponentPropsWithRef<typeof DisclosureHeadingPrimitive> {
   className?: string;
 }
 
@@ -71,7 +62,7 @@ const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
 
   return (
     <DisclosureHeadingPrimitive
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
       data-slot="disclosure-heading"
       {...props}
     />
@@ -103,7 +94,7 @@ const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Content
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureContentProps extends DisclosurePanelProps {}
+interface DisclosureContentProps extends ComponentPropsWithRef<typeof DisclosurePanel> {}
 
 const DisclosureContent = ({children, className, ...props}: DisclosureContentProps) => {
   const {slots} = useContext(DisclosureContext);
@@ -126,7 +117,7 @@ const DisclosureContent = ({children, className, ...props}: DisclosureContentPro
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Body
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureBodyContentProps extends React.ComponentProps<"div"> {
+interface DisclosureBodyContentProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
@@ -135,7 +126,7 @@ const DisclosureBody = ({children, className, ...props}: DisclosureBodyContentPr
 
   return (
     <div className={slots?.body({})} data-slot="disclosure-body" {...props}>
-      <div className={slots?.bodyInner({className})}>{children}</div>
+      <div className={composeSlotClassName(slots?.bodyInner, className)}>{children}</div>
     </div>
   );
 };
@@ -143,7 +134,7 @@ const DisclosureBody = ({children, className, ...props}: DisclosureBodyContentPr
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureIndicatorProps extends React.ComponentProps<"svg"> {
+interface DisclosureIndicatorProps extends ComponentPropsWithRef<"svg"> {
   className?: string;
 }
 
@@ -161,7 +152,7 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
       {
         ...props,
         "data-expanded": dataAttr(isExpanded),
-        className: slots?.indicator({className}),
+        className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "disclosure-indicator",
       },
     );
@@ -169,7 +160,7 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
 
   return (
     <IconChevronDown
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-expanded={dataAttr(isExpanded)}
       data-slot="disclosure-indicator"
       {...props}

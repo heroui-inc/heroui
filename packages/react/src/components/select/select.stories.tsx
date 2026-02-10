@@ -13,11 +13,10 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Header} from "../header";
 import {Label} from "../label";
-import {ListBox} from "../listbox";
+import {ListBox} from "../list-box";
 import {Collection, ListBoxLoadMoreItem} from "../rac";
 import {Separator} from "../separator";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {Select} from "./index";
 
@@ -70,6 +69,81 @@ export const Default: Story = {
         </ListBox>
       </Select.Popover>
     </Select>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Select className="w-[256px]" placeholder="Select one" variant="primary">
+        <Label>Primary variant</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            <ListBox.Item id="option1" textValue="Option 1">
+              Option 1
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="option2" textValue="Option 2">
+              Option 2
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Select.Popover>
+      </Select>
+      <Select className="w-[256px]" placeholder="Select one" variant="secondary">
+        <Label>Secondary variant</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            <ListBox.Item id="option1" textValue="Option 1">
+              Option 1
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="option2" textValue="Option 2">
+              Option 2
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Select.Popover>
+      </Select>
+    </div>
+  ),
+};
+
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <Select fullWidth placeholder="Select one">
+        <Label>State</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            <ListBox.Item id="florida" textValue="Florida">
+              Florida
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="delaware" textValue="Delaware">
+              Delaware
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="california" textValue="California">
+              California
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Select.Popover>
+      </Select>
+    </div>
   ),
 };
 
@@ -418,103 +492,6 @@ export const Required: Story = {
   },
 };
 
-export const OnSurface: Story = {
-  render: () => {
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
-      const data: Record<string, string> = {};
-
-      // Convert FormData to plain object
-      formData.forEach((value, key) => {
-        data[key] = value.toString();
-      });
-
-      alert("Form submitted successfully!");
-    };
-
-    return (
-      <Surface className="w-[320px] rounded-3xl p-6">
-        <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-          <Select isRequired className="w-full" name="state" placeholder="Select one">
-            <Label>State</Label>
-            <Select.Trigger>
-              <Select.Value />
-              <Select.Indicator />
-            </Select.Trigger>
-            <Select.Popover>
-              <ListBox>
-                <ListBox.Item id="florida" textValue="Florida">
-                  Florida
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="delaware" textValue="Delaware">
-                  Delaware
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="california" textValue="California">
-                  California
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="texas" textValue="Texas">
-                  Texas
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="new-york" textValue="New York">
-                  New York
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="washington" textValue="Washington">
-                  Washington
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              </ListBox>
-            </Select.Popover>
-            <FieldError />
-          </Select>
-          <Select isRequired className="w-full" name="country" placeholder="Select a country">
-            <Label>Country</Label>
-            <Select.Trigger>
-              <Select.Value />
-              <Select.Indicator />
-            </Select.Trigger>
-            <Select.Popover>
-              <ListBox>
-                <ListBox.Item id="usa" textValue="United States">
-                  United States
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="canada" textValue="Canada">
-                  Canada
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="mexico" textValue="Mexico">
-                  Mexico
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="uk" textValue="United Kingdom">
-                  United Kingdom
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="france" textValue="France">
-                  France
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-                <ListBox.Item id="germany" textValue="Germany">
-                  Germany
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              </ListBox>
-            </Select.Popover>
-            <FieldError />
-          </Select>
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Surface>
-    );
-  },
-};
-
 export const CustomValue: Story = {
   render: () => {
     const users = [
@@ -682,7 +659,7 @@ export const CustomValueMultiple: Story = {
                       <AvatarImage src={selectedItem.avatarUrl} />
                       <AvatarFallback>{selectedItem.fallback}</AvatarFallback>
                     </Avatar>
-                    <span>{selectedItem.name}</span>
+                    <Chip.Label>{selectedItem.name}</Chip.Label>
                   </Chip>
                 );
               });
@@ -769,7 +746,7 @@ export const Controlled: Story = {
             </ListBox>
           </Select.Popover>
         </Select>
-        <p className="text-muted text-sm">Selected: {selectedState?.name || "None"}</p>
+        <p className="text-sm text-muted">Selected: {selectedState?.name || "None"}</p>
       </div>
     );
   },
@@ -822,7 +799,7 @@ export const ControlledMultiple: Story = {
             </ListBox>
           </Select.Popover>
         </Select>
-        <p className="text-muted text-sm">
+        <p className="text-sm text-muted">
           Selected: {selected.length > 0 ? selected.join(", ") : "None"}
         </p>
       </div>
@@ -877,7 +854,7 @@ export const ControlledOpenState: Story = {
           </Select.Popover>
         </Select>
         <Button onPress={() => setIsOpen(!isOpen)}>{isOpen ? "Close" : "Open"} Select</Button>
-        <p className="text-muted text-sm">Select is {isOpen ? "open" : "closed"}</p>
+        <p className="text-sm text-muted">Select is {isOpen ? "open" : "closed"}</p>
       </div>
     );
   },
@@ -924,7 +901,7 @@ export const AsynchronousLoading: Story = {
             >
               <div className="flex items-center justify-center gap-2 py-2">
                 <Spinner size="sm" />
-                <span className="text-muted text-sm">Loading more...</span>
+                <span className="text-sm text-muted">Loading more...</span>
               </div>
             </ListBoxLoadMoreItem>
           </ListBox>

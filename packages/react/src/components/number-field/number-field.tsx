@@ -1,15 +1,12 @@
 "use client";
 
-import type {NumberFieldVariants} from "./number-field.styles";
-import type {
-  ButtonProps,
-  InputProps,
-  NumberFieldProps as NumberFieldPrimitiveProps,
-} from "react-aria-components";
+import type {NumberFieldVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
+import {numberFieldVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
-  Button,
+  Button as ButtonPrimitive,
   Group as GroupPrimitive,
   Input as InputPrimitive,
   NumberField as NumberFieldPrimitive,
@@ -17,9 +14,6 @@ import {
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconMinus, IconPlus} from "../icons";
-import {SurfaceContext} from "../surface";
-
-import {numberFieldVariants} from "./number-field.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * NumberField Context
@@ -33,19 +27,23 @@ const NumberFieldContext = createContext<NumberFieldContext>({});
 /* -------------------------------------------------------------------------------------------------
  * NumberField Root
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldRootProps extends NumberFieldPrimitiveProps, NumberFieldVariants {}
+interface NumberFieldRootProps
+  extends ComponentPropsWithRef<typeof NumberFieldPrimitive>, NumberFieldVariants {}
 
-const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFieldRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
-
+const NumberFieldRoot = ({
+  children,
+  className,
+  fullWidth,
+  variant,
+  ...props
+}: NumberFieldRootProps) => {
   const slots = React.useMemo(
-    () => numberFieldVariants({isOnSurface: isOnSurfaceValue}),
-    [isOnSurfaceValue],
+    () => numberFieldVariants({fullWidth, variant}),
+    [fullWidth, variant],
   );
 
   return (
-    <NumberFieldContext.Provider value={{slots}}>
+    <NumberFieldContext value={{slots}}>
       <NumberFieldPrimitive
         data-slot="number-field"
         {...props}
@@ -53,14 +51,14 @@ const NumberFieldRoot = ({children, className, isOnSurface, ...props}: NumberFie
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </NumberFieldPrimitive>
-    </NumberFieldContext.Provider>
+    </NumberFieldContext>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * NumberField Group
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldGroupProps extends React.ComponentProps<typeof GroupPrimitive> {}
+interface NumberFieldGroupProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
 
 const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps) => {
   const {slots} = useContext(NumberFieldContext);
@@ -79,18 +77,14 @@ const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps
 /* -------------------------------------------------------------------------------------------------
  * NumberField Input
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldInputProps extends InputProps {
-  isOnSurface?: boolean;
-}
+interface NumberFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
-const NumberFieldInput = ({className, isOnSurface, ...props}: NumberFieldInputProps) => {
+const NumberFieldInput = ({className, ...props}: NumberFieldInputProps) => {
   const {slots} = useContext(NumberFieldContext);
-  const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
 
   return (
     <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input({isOnSurface: isOnSurfaceValue}))}
+      className={composeTwRenderProps(className, slots?.input())}
       data-slot="number-field-input"
       {...props}
     />
@@ -100,7 +94,7 @@ const NumberFieldInput = ({className, isOnSurface, ...props}: NumberFieldInputPr
 /* -------------------------------------------------------------------------------------------------
  * NumberField Increment Button
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldIncrementButtonProps extends ButtonProps {}
+interface NumberFieldIncrementButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
 const NumberFieldIncrementButton = ({
   children,
@@ -110,7 +104,7 @@ const NumberFieldIncrementButton = ({
   const {slots} = useContext(NumberFieldContext);
 
   return (
-    <Button
+    <ButtonPrimitive
       className={composeTwRenderProps(className, slots?.incrementButton())}
       data-slot="number-field-increment-button"
       slot="increment"
@@ -121,14 +115,14 @@ const NumberFieldIncrementButton = ({
       ) : (
         <IconPlus data-slot="number-field-increment-button-icon" />
       )}
-    </Button>
+    </ButtonPrimitive>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * NumberField Decrement Button
  * -----------------------------------------------------------------------------------------------*/
-interface NumberFieldDecrementButtonProps extends ButtonProps {}
+interface NumberFieldDecrementButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
 const NumberFieldDecrementButton = ({
   children,
@@ -138,7 +132,7 @@ const NumberFieldDecrementButton = ({
   const {slots} = useContext(NumberFieldContext);
 
   return (
-    <Button
+    <ButtonPrimitive
       className={composeTwRenderProps(className, slots?.decrementButton())}
       data-slot="number-field-decrement-button"
       slot="decrement"
@@ -149,7 +143,7 @@ const NumberFieldDecrementButton = ({
       ) : (
         <IconMinus data-slot="number-field-decrement-button-icon" />
       )}
-    </Button>
+    </ButtonPrimitive>
   );
 };
 

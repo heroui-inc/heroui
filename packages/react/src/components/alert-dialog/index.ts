@@ -1,6 +1,7 @@
 import type {ComponentProps} from "react";
 
 import {
+  AlertDialogBackdrop,
   AlertDialogBody,
   AlertDialogCloseTrigger,
   AlertDialogContainer,
@@ -19,6 +20,7 @@ import {
 export const AlertDialog = Object.assign(AlertDialogRoot, {
   Root: AlertDialogRoot,
   Trigger: AlertDialogTrigger,
+  Backdrop: AlertDialogBackdrop,
   Container: AlertDialogContainer,
   Dialog: AlertDialogDialog,
   Header: AlertDialogHeader,
@@ -33,6 +35,7 @@ export type AlertDialog = {
   Props: ComponentProps<typeof AlertDialogRoot>;
   RootProps: ComponentProps<typeof AlertDialogRoot>;
   TriggerProps: ComponentProps<typeof AlertDialogTrigger>;
+  BackdropProps: ComponentProps<typeof AlertDialogBackdrop>;
   ContainerProps: ComponentProps<typeof AlertDialogContainer>;
   DialogProps: ComponentProps<typeof AlertDialogDialog>;
   HeaderProps: ComponentProps<typeof AlertDialogHeader>;
@@ -49,6 +52,7 @@ export type AlertDialog = {
 export {
   AlertDialogRoot,
   AlertDialogTrigger,
+  AlertDialogBackdrop,
   AlertDialogContainer,
   AlertDialogDialog,
   AlertDialogHeader,
@@ -63,6 +67,7 @@ export type {
   AlertDialogRootProps,
   AlertDialogRootProps as AlertDialogProps,
   AlertDialogTriggerProps,
+  AlertDialogBackdropProps,
   AlertDialogContainerProps,
   AlertDialogDialogProps,
   AlertDialogHeaderProps,
@@ -76,6 +81,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {alertDialogVariants} from "./alert-dialog.styles";
+export {alertDialogVariants} from "@heroui/styles";
 
-export type {AlertDialogVariants} from "./alert-dialog.styles";
+export type {AlertDialogVariants} from "@heroui/styles";

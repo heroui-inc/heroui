@@ -28,9 +28,9 @@ export type {KbdRootProps, KbdAbbrProps, KbdContentProps, KbdRootProps as KbdPro
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {kbdVariants} from "./kbd.styles";
+export {kbdVariants} from "@heroui/styles";
 
-export type {KbdVariants} from "./kbd.styles";
+export type {KbdVariants} from "@heroui/styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Constants

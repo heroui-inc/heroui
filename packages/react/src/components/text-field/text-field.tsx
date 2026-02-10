@@ -1,22 +1,37 @@
 "use client";
 
-import type {TextFieldVariants} from "./text-field.styles";
-import type {TextFieldProps as TextFieldPrimitiveProps} from "react-aria-components";
+import type {TextFieldVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
-import React from "react";
+import {textFieldVariants} from "@heroui/styles";
+import React, {createContext} from "react";
 import {TextField as TextFieldPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils/compose";
 
-import {textFieldVariants} from "./text-field.styles";
+/* ------------------------------------------------------------------------------------------------
+ * TextField Context
+ * --------------------------------------------------------------------------------------------- */
+type TextFieldContext = {
+  variant?: "primary" | "secondary";
+};
+
+const TextFieldContext = createContext<TextFieldContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * TextField Root
  * -----------------------------------------------------------------------------------------------*/
-interface TextFieldRootProps extends TextFieldPrimitiveProps, TextFieldVariants {}
+interface TextFieldRootProps
+  extends ComponentPropsWithRef<typeof TextFieldPrimitive>, TextFieldVariants {
+  /**
+   * The variant of the text field.
+   * @default "primary"
+   */
+  variant?: "primary" | "secondary";
+}
 
-const TextFieldRoot = ({children, className, ...props}: TextFieldRootProps) => {
-  const styles = React.useMemo(() => textFieldVariants({}), []);
+const TextFieldRoot = ({children, className, fullWidth, variant, ...props}: TextFieldRootProps) => {
+  const styles = React.useMemo(() => textFieldVariants({fullWidth}), [fullWidth]);
 
   return (
     <TextFieldPrimitive
@@ -24,7 +39,11 @@ const TextFieldRoot = ({children, className, ...props}: TextFieldRootProps) => {
       {...props}
       className={composeTwRenderProps(className, styles)}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {(values) => (
+        <TextFieldContext value={{variant}}>
+          <>{typeof children === "function" ? children(values) : children}</>
+        </TextFieldContext>
+      )}
     </TextFieldPrimitive>
   );
 };
@@ -32,6 +51,6 @@ const TextFieldRoot = ({children, className, ...props}: TextFieldRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {TextFieldRoot};
+export {TextFieldRoot, TextFieldContext};
 
 export type {TextFieldRootProps};

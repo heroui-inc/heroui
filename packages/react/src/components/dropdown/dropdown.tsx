@@ -1,16 +1,10 @@
 "use client";
 
-import type {DropdownVariants} from "./dropdown.styles";
-import type {MenuItemIndicatorProps, MenuItemRootProps} from "../menu-item";
-import type {MenuSectionRootProps} from "../menu-section";
 import type {SurfaceVariants} from "../surface";
-import type {
-  ButtonProps,
-  MenuProps as MenuPrimitiveProps,
-  MenuTriggerProps as MenuTriggerPrimitiveProps,
-  PopoverProps as PopoverPrimitiveProps,
-} from "react-aria-components";
+import type {DropdownVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
+import {dropdownVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   Button,
@@ -25,8 +19,6 @@ import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu
 import {MenuSectionRoot} from "../menu-section";
 import {SurfaceContext} from "../surface";
 
-import {dropdownVariants} from "./dropdown.styles";
-
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Context
  * -----------------------------------------------------------------------------------------------*/
@@ -39,7 +31,8 @@ const DropdownContext = createContext<DropdownContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Root (MenuTrigger wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownRootProps extends MenuTriggerPrimitiveProps, DropdownVariants {
+interface DropdownRootProps
+  extends ComponentPropsWithRef<typeof MenuTriggerPrimitive>, DropdownVariants {
   className?: string;
 }
 
@@ -47,16 +40,16 @@ const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
   const slots = React.useMemo(() => dropdownVariants(), []);
 
   return (
-    <DropdownContext.Provider value={{slots}}>
+    <DropdownContext value={{slots}}>
       <MenuTriggerPrimitive {...props}>{children}</MenuTriggerPrimitive>
-    </DropdownContext.Provider>
+    </DropdownContext>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Trigger (Button wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownTriggerProps extends ButtonProps {}
+interface DropdownTriggerProps extends ComponentPropsWithRef<typeof Button> {}
 
 const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) => {
   const {slots} = useContext(DropdownContext);
@@ -75,7 +68,8 @@ const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Popover (Popover wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownPopoverProps extends Omit<PopoverPrimitiveProps, "children">, DropdownVariants {
+interface DropdownPopoverProps
+  extends Omit<ComponentPropsWithRef<typeof PopoverPrimitive>, "children">, DropdownVariants {
   children: React.ReactNode;
 }
 
@@ -83,7 +77,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
   const {slots} = useContext(DropdownContext);
 
   return (
-    <SurfaceContext.Provider
+    <SurfaceContext
       value={{
         variant: "default" as SurfaceVariants["variant"],
       }}
@@ -95,14 +89,15 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
       >
         {children}
       </PopoverPrimitive>
-    </SurfaceContext.Provider>
+    </SurfaceContext>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Menu (Menu wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownMenuProps<T extends object> extends MenuPrimitiveProps<T>, DropdownVariants {
+interface DropdownMenuProps<T extends object>
+  extends ComponentPropsWithRef<typeof MenuPrimitive<T>>, DropdownVariants {
   className?: string;
 }
 
@@ -122,7 +117,7 @@ function DropdownMenu<T extends object>({className, ...props}: DropdownMenuProps
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Item (MenuItem wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownItemProps extends MenuItemRootProps {}
+interface DropdownItemProps extends ComponentPropsWithRef<typeof MenuItemRoot> {}
 
 const DropdownItem = (props: DropdownItemProps) => {
   return <MenuItemRoot {...props} />;
@@ -131,8 +126,9 @@ const DropdownItem = (props: DropdownItemProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Submenu Indicator (MenuItemSubmenuIndicator wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownSubmenuIndicatorProps
-  extends React.ComponentProps<typeof MenuItemSubmenuIndicator> {}
+interface DropdownSubmenuIndicatorProps extends ComponentPropsWithRef<
+  typeof MenuItemSubmenuIndicator
+> {}
 
 const DropdownSubmenuIndicator = (props: DropdownSubmenuIndicatorProps) => {
   return <MenuItemSubmenuIndicator {...props} />;
@@ -141,7 +137,9 @@ const DropdownSubmenuIndicator = (props: DropdownSubmenuIndicatorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Submenu Trigger
  * -----------------------------------------------------------------------------------------------*/
-type DropdownSubmenuTriggerProps = React.ComponentProps<typeof SubmenuTriggerPrimitive>;
+interface DropdownSubmenuTriggerProps extends ComponentPropsWithRef<
+  typeof SubmenuTriggerPrimitive
+> {}
 
 const DropdownSubmenuTrigger = ({children, ...props}: DropdownSubmenuTriggerProps) => {
   return (
@@ -154,7 +152,7 @@ const DropdownSubmenuTrigger = ({children, ...props}: DropdownSubmenuTriggerProp
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Item Indicator (MenuItemIndicator wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownItemIndicatorProps extends MenuItemIndicatorProps {}
+interface DropdownItemIndicatorProps extends ComponentPropsWithRef<typeof MenuItemIndicator> {}
 
 const DropdownItemIndicator = (props: DropdownItemIndicatorProps) => {
   return <MenuItemIndicator {...props} />;
@@ -163,7 +161,7 @@ const DropdownItemIndicator = (props: DropdownItemIndicatorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Section (MenuSection wrapper)
  * -----------------------------------------------------------------------------------------------*/
-interface DropdownSectionProps extends MenuSectionRootProps {}
+interface DropdownSectionProps extends ComponentPropsWithRef<typeof MenuSectionRoot> {}
 
 const DropdownSection = (props: DropdownSectionProps) => {
   return <MenuSectionRoot {...props} />;

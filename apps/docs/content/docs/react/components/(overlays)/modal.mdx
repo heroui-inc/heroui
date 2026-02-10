@@ -1,0 +1,295 @@
+---
+title: Modal
+description: Dialog overlay for focused user interactions and important content
+links:
+  rac: Modal
+  source: modal/modal.tsx
+  styles: modal.css
+  storybook: modal
+---
+
+## Import
+
+```tsx
+import {Modal} from "@heroui/react";
+```
+
+### Usage
+
+<ComponentPreview name="modal-default" />
+
+### Anatomy
+
+Import the Modal component and access all parts using dot notation.
+
+```tsx
+import {Modal, Button} from "@heroui/react";
+
+export default () => (
+  <Modal>
+    <Button>Open Modal</Button>
+    <Modal.Backdrop>
+      <Modal.Container>
+        <Modal.Dialog>
+          <Modal.CloseTrigger /> {/* Optional: Close button */}
+          <Modal.Header>
+            <Modal.Icon /> {/* Optional: Icon */}
+            <Modal.Heading />
+          </Modal.Header>
+          <Modal.Body />
+          <Modal.Footer />
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal>
+);
+```
+
+### Placement
+
+<ComponentPreview name="modal-placements" />
+
+### Backdrop Variants
+
+<ComponentPreview name="modal-backdrop-variants" />
+
+### Sizes
+
+<ComponentPreview name="modal-sizes" />
+
+### Custom Backdrop
+
+<ComponentPreview name="modal-custom-backdrop" />
+
+### Dismiss Behavior
+
+<ComponentPreview name="modal-dismiss-behavior" />
+
+### Close Methods
+
+<ComponentPreview name="modal-close-methods" />
+
+### Scroll Behavior
+
+<ComponentPreview name="modal-scroll-comparison" />
+
+### Controlled State
+
+<ComponentPreview name="modal-controlled" />
+
+### With Form
+
+<ComponentPreview name="modal-with-form" />
+
+### Custom Trigger
+
+<ComponentPreview name="modal-custom-trigger" />
+
+### Custom Animations
+
+<ComponentPreview name="modal-custom-animations" />
+
+### Custom Portal
+
+<ComponentPreview name="modal-custom-portal" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Modal, Button} from "@heroui/react";
+
+function CustomModal() {
+  return (
+    <Modal>
+      <Button>Open Modal</Button>
+      <Modal.Backdrop className="bg-black/80">
+        <Modal.Container className="items-start pt-20">
+          <Modal.Dialog className="bg-linear-to-br from-purple-500 to-pink-500 text-white">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>Custom Styled Modal</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <p>This modal has custom styling applied via Tailwind classes</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button slot="close">Close</Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Modal component classes, you can use the `@layer components` directive.
+
+<br />
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .modal__backdrop {
+    @apply bg-gradient-to-br from-black/50 to-black/70;
+  }
+
+  .modal__dialog {
+    @apply rounded-2xl border border-white/10 shadow-2xl;
+  }
+
+  .modal__header {
+    @apply text-center;
+  }
+
+  .modal__close-trigger {
+    @apply rounded-full bg-white/10 hover:bg-white/20;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Modal component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/modal.css)):
+
+#### Base Classes
+
+- `.modal__trigger` - Trigger element that opens the modal
+- `.modal__backdrop` - Overlay backdrop behind the modal
+- `.modal__container` - Positioning wrapper with placement support
+- `.modal__dialog` - Modal content container
+- `.modal__header` - Header section for titles and icons
+- `.modal__body` - Main content area
+- `.modal__footer` - Footer section for actions
+- `.modal__close-trigger` - Close button element
+
+#### Backdrop Variants
+
+- `.modal__backdrop--opaque` - Opaque colored backdrop (default)
+- `.modal__backdrop--blur` - Blurred backdrop with glass effect
+- `.modal__backdrop--transparent` - Transparent backdrop (no overlay)
+
+#### Scroll Variants
+
+- `.modal__container--scroll-outside` - Enables scrolling the entire modal
+- `.modal__dialog--scroll-inside` - Constrains modal height for body scrolling
+- `.modal__body--scroll-inside` - Makes only the body scrollable
+- `.modal__body--scroll-outside` - Allows full-page scrolling
+
+### Interactive States
+
+The component supports these interactive states:
+
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` - Applied to trigger, dialog, and close button
+- **Hover**: `:hover` or `[data-hovered="true"]` - Applied to close button on hover
+- **Active**: `:active` or `[data-pressed="true"]` - Applied to close button when pressed
+- **Entering**: `[data-entering]` - Applied during modal opening animation
+- **Exiting**: `[data-exiting]` - Applied during modal closing animation
+- **Placement**: `[data-placement="*"]` - Applied based on modal position (auto, top, center, bottom)
+
+## API Reference
+
+### Modal
+
+| Prop       | Type        | Default | Description                    |
+| ---------- | ----------- | ------- | ------------------------------ |
+| `children` | `ReactNode` | -       | Trigger and container elements |
+
+### Modal.Trigger
+
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Custom trigger content |
+| `className` | `string`    | -       | CSS classes            |
+
+### Modal.Backdrop
+
+| Prop                        | Type                                  | Default    | Description               |
+| --------------------------- | ------------------------------------- | ---------- | ------------------------- |
+| `variant`                   | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | Backdrop overlay style    |
+| `isDismissable`             | `boolean`                             | `true`     | Close on backdrop click   |
+| `isKeyboardDismissDisabled` | `boolean`                             | `false`    | Disable ESC key to close  |
+| `isOpen`                    | `boolean`                             | -          | Controlled open state     |
+| `onOpenChange`              | `(isOpen: boolean) => void`           | -          | Open state change handler |
+| `className`                 | `string \| (values) => string`        | -          | Backdrop CSS classes      |
+| `UNSTABLE_portalContainer`  | `HTMLElement`                         | -          | Custom portal container   |
+
+### Modal.Container
+
+| Prop        | Type                                      | Default    | Description               |
+| ----------- | ----------------------------------------- | ---------- | ------------------------- |
+| `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"`   | Modal position on screen  |
+| `scroll`    | `"inside" \| "outside"`                   | `"inside"` | Scroll behavior           |
+| `size`      | `"xs" \| "sm" \| "md" \| "lg" \| "cover" \| "full"` | `"md"` | Modal size variant        |
+| `className` | `string \| (values) => string`            | -          | Container CSS classes     |
+
+### Modal.Dialog
+
+| Prop               | Type                                  | Default    | Description                |
+| ------------------ | ------------------------------------- | ---------- | -------------------------- |
+| `children`         | `ReactNode \| ({close}) => ReactNode` | -          | Content or render function |
+| `className`        | `string \| (values) => string`        | -          | CSS classes                |
+| `role`             | `string`                              | `"dialog"` | ARIA role                  |
+| `aria-label`       | `string`                              | -          | Accessibility label        |
+| `aria-labelledby`  | `string`                              | -          | ID of label element        |
+| `aria-describedby` | `string`                              | -          | ID of description element  |
+
+### Modal.Header
+
+| Prop        | Type        | Default | Description    |
+| ----------- | ----------- | ------- | -------------- |
+| `children`  | `ReactNode` | -       | Header content |
+| `className` | `string`    | -       | CSS classes    |
+
+### Modal.Body
+
+| Prop        | Type        | Default | Description  |
+| ----------- | ----------- | ------- | ------------ |
+| `children`  | `ReactNode` | -       | Body content |
+| `className` | `string`    | -       | CSS classes  |
+
+### Modal.Footer
+
+| Prop        | Type        | Default | Description    |
+| ----------- | ----------- | ------- | -------------- |
+| `children`  | `ReactNode` | -       | Footer content |
+| `className` | `string`    | -       | CSS classes    |
+
+### Modal.CloseTrigger
+
+| Prop        | Type                           | Default | Description         |
+| ----------- | ------------------------------ | ------- | ------------------- |
+| `children`  | `ReactNode`                    | -       | Custom close button |
+| `className` | `string \| (values) => string` | -       | CSS classes         |
+
+### useOverlayState Hook
+
+```tsx
+import {useOverlayState} from "@heroui/react";
+
+const state = useOverlayState({
+  defaultOpen: false,
+  onOpenChange: (isOpen) => console.log(isOpen),
+});
+
+state.isOpen; // Current state
+state.open(); // Open modal
+state.close(); // Close modal
+state.toggle(); // Toggle state
+state.setOpen(); // Set state directly
+```
+
+## Accessibility
+
+Implements [WAI-ARIA Dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/):
+
+- **Focus trap**: Focus locked within modal
+- **Keyboard**: `ESC` closes (when enabled), `Tab` cycles elements
+- **Screen readers**: Proper ARIA attributes
+- **Scroll lock**: Body scroll disabled when open

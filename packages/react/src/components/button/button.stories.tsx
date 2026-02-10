@@ -5,7 +5,7 @@ import React, {useState} from "react";
 
 import {Spinner} from "../spinner";
 
-import {Button} from "./index";
+import {Button, buttonVariants} from "./index";
 
 export default {
   argTypes: {
@@ -18,7 +18,7 @@ export default {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "tertiary", "ghost", "danger"],
+      options: ["primary", "secondary", "tertiary", "outline", "ghost", "danger"],
     },
   },
   component: Button,
@@ -43,6 +43,9 @@ const Template = ({isDisabled, size}: Button["RootProps"]) => (
     <Button isDisabled={isDisabled} size={size} variant="tertiary">
       Tertiary
     </Button>
+    <Button isDisabled={isDisabled} size={size} variant="outline">
+      Outline
+    </Button>
     <Button isDisabled={isDisabled} size={size} variant="ghost">
       Ghost
     </Button>
@@ -55,13 +58,18 @@ const Template = ({isDisabled, size}: Button["RootProps"]) => (
   </div>
 );
 
-const TemplateWithAsChild = ({isDisabled, size}: Button["RootProps"]) => (
-  <div className="flex gap-3">
-    <Button asChild isDisabled={isDisabled} size={size}>
-      <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">
+const TemplateWithLinkButton = ({isIconOnly, size, variant}: Button["RootProps"]) => (
+  <div className="flex flex-col gap-3">
+    <div className="flex gap-3">
+      <a
+        className={buttonVariants({size, variant, isIconOnly})}
+        href="https://www.google.com"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
         Google
       </a>
-    </Button>
+    </div>
   </div>
 );
 
@@ -190,13 +198,37 @@ export const Default = {
   render: Template,
 };
 
-export const WithAsChild = {
+export const WithLinkButton = {
   args: defaultArgs,
-  render: TemplateWithAsChild,
+  render: TemplateWithLinkButton,
 };
 
 export const Sizes = {
   render: SizesTemplate,
+};
+
+export const FullWidth = {
+  render: () => (
+    <div className="w-[400px] space-y-3">
+      <Button fullWidth>Primary</Button>
+      <Button fullWidth variant="secondary">
+        Secondary
+      </Button>
+      <Button fullWidth variant="tertiary">
+        Tertiary
+      </Button>
+      <Button fullWidth size="sm">
+        Small
+      </Button>
+      <Button fullWidth size="lg">
+        Large
+      </Button>
+      <Button fullWidth>
+        <Icon icon="gravity-ui:plus" />
+        With Icon
+      </Button>
+    </div>
+  ),
 };
 
 export const WithIcon = {

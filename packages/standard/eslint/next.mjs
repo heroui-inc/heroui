@@ -1,10 +1,7 @@
-import {dirname} from "path";
-import {fileURLToPath} from "url";
-
-import {FlatCompat} from "@eslint/eslintrc";
 import typescriptParser from "@typescript-eslint/parser";
 import {defineConfig} from "eslint/config";
-import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import reactRefreshPlugin from "eslint-plugin-react-refresh";
@@ -12,21 +9,11 @@ import globals from "globals";
 
 import baseConfig from "./base.mjs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-export default defineConfig([
+const config = defineConfig([
+  // Next.js configs - handle both array and object formats
+  ...(Array.isArray(nextVitals) ? nextVitals : [nextVitals]),
+  ...(Array.isArray(nextTs) ? nextTs : [nextTs]),
   ...baseConfig,
-  ...compat.extends(
-    "next",
-    "next/core-web-vitals",
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
-  ),
   {
     files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
     languageOptions: {
@@ -42,7 +29,6 @@ export default defineConfig([
       },
     },
     plugins: {
-      "jsx-a11y": jsxA11yPlugin,
       react: reactPlugin,
       "react-hooks": reactHooksPlugin,
       "react-refresh": reactRefreshPlugin,
@@ -50,9 +36,6 @@ export default defineConfig([
     rules: {
       "@next/next/no-html-link-for-pages": "off",
       "@next/next/no-img-element": "off",
-      "jsx-a11y/click-events-have-key-events": "warn",
-      "jsx-a11y/interactive-supports-focus": "warn",
-      "jsx-a11y/no-autofocus": "off",
       "no-console": "off",
       "react-hooks/exhaustive-deps": "off",
       "react-refresh/only-export-components": "off",
@@ -108,3 +91,5 @@ export default defineConfig([
     },
   },
 ]);
+
+export default config;

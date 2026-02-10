@@ -1,13 +1,72 @@
 import type {IconProps} from "@iconify/react";
 
 import {Icon} from "@iconify/react";
-import {Icon as OfflineIcon} from "@iconify/react/dist/offline";
 import gravityIcons from "@iconify-json/gravity-ui/icons.json";
-import {forwardRef} from "react";
+import {forwardRef, useId, useMemo} from "react";
 
 export type IconifyProps = IconProps & {
   icon?: IconProps["icon"] | string;
 };
+
+// Helper component to render SVG directly from icon data
+// This ensures consistent rendering between SSR and client
+// React 19 supports passing refs through props directly
+function SVGFromIconData({
+  iconData,
+  ref,
+  ...props
+}: {
+  iconData: {body: string; width?: number; height?: number};
+  ref?: React.Ref<SVGSVGElement>;
+} & Omit<IconProps, "icon">) {
+  const {className, height = "1em", style, width = "1em", ...restProps} = props;
+
+  const viewBox =
+    iconData.width && iconData.height ? `0 0 ${iconData.width} ${iconData.height}` : "0 0 16 16";
+
+  const uniqueId = useId().replace(/:/g, "");
+
+  const processedBody = useMemo(() => {
+    const {body} = iconData;
+
+    if (!body.includes("id=")) {
+      return body;
+    }
+
+    const regex = /\bid=["']([^"']+)["']|url\(#([^)]+)\)|(?:href|xlink:href)=["']#([^"']+)["']/g;
+
+    return body.replace(regex, (match, g1, g2, g3) => {
+      const id = g1 || g2 || g3;
+
+      if (!id) return match;
+
+      const newId = `${id}-${uniqueId}`;
+
+      if (g1) return `id="${newId}"`;
+      if (g2) return `url(#${newId})`;
+      if (g3) return `href="#${newId}"`;
+
+      return match;
+    });
+  }, [iconData.body, uniqueId]);
+
+  return (
+    <svg
+      ref={ref}
+      aria-hidden="true"
+      className={className}
+      height={height}
+      role="img"
+      style={style}
+      viewBox={viewBox}
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      {...restProps}
+      dangerouslySetInnerHTML={{__html: processedBody}}
+    />
+  );
+}
 
 const customIcons = {
   "bulb-off": {
@@ -25,6 +84,9 @@ const customIcons = {
   openai: {
     body: '<path fill="currentColor" d="M14.949 6.547a3.94 3.94 0 0 0-.348-3.273a4.11 4.11 0 0 0-4.4-1.934A4.1 4.1 0 0 0 8.423.2A4.15 4.15 0 0 0 6.305.086a4.1 4.1 0 0 0-1.891.948a4.04 4.04 0 0 0-1.158 1.753a4.1 4.1 0 0 0-1.563.679A4 4 0 0 0 .554 4.72a3.99 3.99 0 0 0 .502 4.731a3.94 3.94 0 0 0 .346 3.274a4.11 4.11 0 0 0 4.402 1.933c.382.425.852.764 1.377.995c.526.231 1.095.35 1.67.346c1.78.002 3.358-1.132 3.901-2.804a4.1 4.1 0 0 0 1.563-.68a4 4 0 0 0 1.14-1.253a3.99 3.99 0 0 0-.506-4.716m-6.097 8.406a3.05 3.05 0 0 1-1.945-.694l.096-.054l3.23-1.838a.53.53 0 0 0 .265-.455v-4.49l1.366.778q.02.011.025.035v3.722c-.003 1.653-1.361 2.992-3.037 2.996m-6.53-2.75a2.95 2.95 0 0 1-.36-2.01l.095.057L5.29 12.09a.53.53 0 0 0 .527 0l3.949-2.246v1.555a.05.05 0 0 1-.022.041L6.473 13.3c-1.454.826-3.311.335-4.15-1.098m-.85-6.94A3.02 3.02 0 0 1 3.07 3.949v3.785a.51.51 0 0 0 .262.451l3.93 2.237l-1.366.779a.05.05 0 0 1-.048 0L2.585 9.342a2.98 2.98 0 0 1-1.113-4.094zm11.216 2.571L8.747 5.576l1.362-.776a.05.05 0 0 1 .048 0l3.265 1.86a3 3 0 0 1 1.173 1.207a2.96 2.96 0 0 1-.27 3.2a3.05 3.05 0 0 1-1.36.997V8.279a.52.52 0 0 0-.276-.445m1.36-2.015l-.097-.057l-3.226-1.855a.53.53 0 0 0-.53 0L6.249 6.153V4.598a.04.04 0 0 1 .019-.04L9.533 2.7a3.07 3.07 0 0 1 3.257.139c.474.325.843.778 1.066 1.303c.223.526.289 1.103.191 1.664zM5.503 8.575L4.139 7.8a.05.05 0 0 1-.026-.037V4.049c0-.57.166-1.127.476-1.607s.752-.864 1.275-1.105a3.08 3.08 0 0 1 3.234.41l-.096.054l-3.23 1.838a.53.53 0 0 0-.265.455zm.742-1.577l1.758-1l1.762 1v2l-1.755 1l-1.762-1z"/>',
   },
+  windows: {
+    body: '<path fill="currentColor" fill-rule="evenodd" d="m11.788 2.974l-3.038.434V7.25h4.75V4.459a1.5 1.5 0 0 0-1.712-1.485M13.5 8.75H8.75v3.842l3.038.434A1.5 1.5 0 0 0 13.5 11.54zm-6.25-1.5V3.622l-3.462.495A1.5 1.5 0 0 0 2.5 5.602V7.25zM2.5 8.75h4.75v3.628l-3.462-.495A1.5 1.5 0 0 1 2.5 10.398zm1.076-6.118A3 3 0 0 0 1 5.602v4.796a3 3 0 0 0 2.576 2.97l8 1.143A3 3 0 0 0 15 11.54V4.459a3 3 0 0 0-3.424-2.97z"/>',
+  },
 };
 
 const icons = {
@@ -37,21 +99,28 @@ const Iconify = forwardRef<SVGSVGElement, IconifyProps>(({icon: iconProp, ...pro
   const isGravityIcon =
     typeof iconProp === "string" && (iconProp in icons || iconProp.startsWith("gravity-ui:"));
 
-  // Only use offline icon after hydration to avoid mismatch
+  // For gravity-ui icons, render SVG directly from icon data
+  // This ensures consistent rendering between SSR and client, avoiding hydration mismatch
   if (isGravityIcon && typeof iconProp === "string") {
-    // Use offline version with gravity-ui icons
     // Remove "gravity-ui:" prefix if present
     const iconName = iconProp.replace(/^gravity-ui:/, "");
     const gravityIconData = icons[iconName as keyof typeof icons];
 
     if (gravityIconData) {
-      return <OfflineIcon {...props} ref={ref} icon={gravityIconData} />;
+      return <SVGFromIconData ref={ref} iconData={gravityIconData} {...props} />;
     }
   }
 
   // Use online version for other icon sets (like simple-icons:vite, lineicons:nextjs)
-  // Also use during SSR to ensure consistent rendering
-  return <Icon {...props} ref={ref} icon={iconProp} />;
+  // Icon component supports SSR, so this works consistently on both server and client
+  return (
+    <Icon
+      {...props}
+      ref={ref}
+      fallback={<SVGFromIconData iconData={icons["square"]} />}
+      icon={iconProp}
+    />
+  );
 });
 
 Iconify.displayName = "HeroUI.Iconify";

@@ -1,18 +1,31 @@
 import matter from "gray-matter";
 
 import {siteConfig} from "@/config/site";
-import {COMPONENT_PATH, COMPONENT_STYLES_PATH, STORYBOOK_URL, THEMES_PATH} from "@/utils/constants";
+import {
+  COMPONENT_PATH,
+  COMPONENT_PATH_NATIVE,
+  COMPONENT_STYLES_PATH,
+  COMPONENT_STYLES_PATH_NATIVE,
+  STORYBOOK_URL,
+  THEMES_PATH,
+} from "@/utils/constants";
 
 export interface ComponentLinksType {
   rac?: string;
   radix?: string;
   source?: string;
+  source_native?: string;
   styles?: string;
+  styles_native?: string;
   storybook?: string;
   themes?: string;
   tailwind?: string;
   figma?: boolean;
   [key: string]: string | boolean | undefined;
+}
+
+export interface GithubInfoType {
+  pull?: number;
 }
 
 /**
@@ -31,6 +44,48 @@ export function extractLinksFromMDX(content: string): ComponentLinksType | null 
     return null;
   } catch (error) {
     console.error("Error extracting links from MDX:", error);
+
+    return null;
+  }
+}
+
+/**
+ * Extracts the github field from MDX frontmatter
+ * @param content - The raw MDX content string
+ * @returns The parsed github object or null if not found
+ */
+export function extractGithubFromMDX(content: string): GithubInfoType | null {
+  try {
+    const {data} = matter(content);
+
+    if (data["github"] && typeof data["github"] === "object") {
+      return data["github"] as GithubInfoType;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error extracting github info from MDX:", error);
+
+    return null;
+  }
+}
+
+/**
+ * Extracts the image field from MDX frontmatter
+ * @param content - The raw MDX content string
+ * @returns The image URL string or null if not found
+ */
+export function extractImageFromMDX(content: string): string | null {
+  try {
+    const {data} = matter(content);
+
+    if (data["image"] && typeof data["image"] === "string") {
+      return data["image"];
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error extracting image from MDX:", error);
 
     return null;
   }
@@ -69,22 +124,28 @@ export function generateComponentLinks(links: ComponentLinksType | null) {
     if (links.storybook.includes("/")) {
       const pathSegment = convertStorybookTitleToPath(links.storybook);
 
-      storybookUrl = `${STORYBOOK_URL}/?path=/story/${pathSegment}`;
+      storybookUrl = `${STORYBOOK_URL}/?path=/docs/${pathSegment}`;
     } else {
       // Legacy support: treat as simple slug (kept for backward compatibility)
-      storybookUrl = `${STORYBOOK_URL}/?path=/story/components-${links.storybook}`;
+      storybookUrl = `${STORYBOOK_URL}/?path=/docs/components-${links.storybook}`;
     }
   }
 
   return {
     figma: links.figma ? siteConfig.figmaCommunityFile : undefined,
-    rac: links.rac ? `https://react-spectrum.adobe.com/react-aria/${links.rac}.html` : undefined,
+    rac: links.rac ? `https://react-aria.adobe.com/${links.rac}` : undefined,
     radix: links.radix
       ? `https://www.radix-ui.com/primitives/docs/components/${links.radix}`
       : undefined,
     source: links.source ? `${COMPONENT_PATH}/${links.source}` : undefined,
+    source_native: links.source_native
+      ? `${COMPONENT_PATH_NATIVE}/${links.source_native}`
+      : undefined,
     storybook: storybookUrl,
     styles: links.styles ? `${COMPONENT_STYLES_PATH}/${links.styles}` : undefined,
+    styles_native: links.styles_native
+      ? `${COMPONENT_STYLES_PATH_NATIVE}/${links.styles_native}`
+      : undefined,
     tailwind: links.tailwind ? `https://tailwindcss.com/docs/${links.tailwind}` : undefined,
     themes: links.themes ? THEMES_PATH : undefined,
   };

@@ -1,16 +1,17 @@
 import type {StorybookConfig} from "@storybook/react-vite";
 
-import {sync as globSync} from "glob";
-import {dirname, join as pathJoin} from "path";
 import {readFileSync as fsReadFileSync} from "fs";
+import {dirname, join as pathJoin} from "path";
+import {fileURLToPath} from "url";
 
-const getAbsolutePath = (value: string) => {
-  return dirname(require.resolve(pathJoin(value, "package.json")));
-};
+import {sync as globSync} from "glob";
 
-const __STORYBOOK_READY_ONLY__ = process.env.STORYBOOK_READY_ONLY === 'true';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const getStories = () => {
+  const __STORYBOOK_READY_ONLY__ = process.env.STORYBOOK_READY_ONLY === "true";
+
   if (!__STORYBOOK_READY_ONLY__)
     return [pathJoin(__dirname, "../../react/src/**/*.stories.@(ts|tsx)")];
 
@@ -26,23 +27,24 @@ export const getStories = () => {
 };
 
 const config: StorybookConfig = {
-  addons: [
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("storybook-dark-mode"),
-    pathJoin(__dirname, "addons/strict-mode/register"),
-    pathJoin(__dirname, "addons/i18n/register"),
-    pathJoin(__dirname, "addons/reduce-motion/register"),
-  ],
+  addons: ["@storybook/addon-a11y", "@storybook/addon-docs"],
   core: {
     disableTelemetry: true,
+    disableWhatsNewNotifications: true,
+    enableCrashReports: false,
   },
   framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
+    name: "@storybook/react-vite",
     options: {},
   },
   staticDirs: [pathJoin(__dirname, "../public")],
-  stories: ["./welcome.mdx", "./colors.stories.tsx", ...getStories()],
+  stories: [
+    "./welcome.mdx",
+    "./stories/colors.stories.tsx",
+    "./stories/colors-demo.stories.tsx",
+    "./stories/demo.stories.tsx",
+    ...getStories(),
+  ],
 };
 
 export default config;

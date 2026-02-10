@@ -1,0 +1,191 @@
+---
+title: All Releases
+description: All updates and changes to HeroUI v3, including new features, fixes, and breaking changes.
+---
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Latest Release
+
+### v3.0.0-beta.6
+
+**February 6, 2026**
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-dark@2x.jpg"
+  alt="HeroUI v3 Beta 6"
+  href="/docs/releases/v3-0-0-beta-6"
+/>
+
+This release introduces a comprehensive **Color System** with six new components ([ColorPicker](/docs/components/color-picker), [ColorArea](/docs/components/color-area), [ColorSlider](/docs/components/color-slider), [ColorField](/docs/components/color-field), [ColorSwatch](/docs/components/color-swatch), [ColorSwatchPicker](/docs/components/color-swatch-picker)), major [Toast](/docs/components/toast) improvements with loading states and promise support, [Separator](/docs/components/separator) variants, and ⚠️ **breaking changes** renaming `Toast.Container` to `Toast.Provider` and updating CSS class names to hyphenated format.
+
+[Read full release notes →](/docs/releases/v3-0-0-beta-6)
+
+---
+### v3.0.0-beta.5
+
+- Fixed build issue
+
+### v3.0.0-beta.4
+
+**January 20, 2026**
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-4-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-4-dark@2x.jpg"
+  alt="HeroUI v3 Beta 4"
+  href="/docs/releases/v3-0-0-beta-4"
+/>
+
+<Callout type="warning">
+  **Critical Build Issue Fixed**: This version (beta.4) had a critical build issue that has been fixed in **beta.5**. Please upgrade to `@heroui/styles@3.0.0-beta.5` and `@heroui/react@3.0.0-beta.5` to ensure proper TypeScript declaration generation and export resolution.
+</Callout>
+
+This release introduces the new [Theme Builder](/themes) for visual theme customization, three new components ([Autocomplete](/docs/components/autocomplete), [Breadcrumbs](/docs/components/breadcrumbs), [Toast](/docs/components/toast)), secondary variant for [Tabs](/docs/components/tabs), primary/secondary variants for [Input](/docs/components/input) and [InputGroup](/docs/components/input-group), and ⚠️ **breaking changes** removing Link's underline variants and `isInSurface` prop from form components.
+
+[Read full release notes →](/docs/releases/v3-0-0-beta-4)
+
+---
+
+### v3.0.0-beta.3
+
+**December 19, 2025**
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-dark@2x.jpg"
+  alt="HeroUI v3 Beta 3"
+  href="/docs/releases/v3-0-0-beta-3"
+/>
+
+
+This release introduces seven new components ([ButtonGroup](/docs/components/button-group), [DateField](/docs/components/date-field), [ErrorMessage](/docs/components/error-message), [ScrollShadow](/docs/components/scroll-shadow), [SearchField](/docs/components/search-field), [TagGroup](/docs/components/tag-group), [TimeField](/docs/components/time-field)), adds `fullWidth` support for form and input components, introduces `hideSeparator` to [Tabs](/docs/components/tabs), [ButtonGroup](/docs/components/button-group), and [Accordion](/docs/components/accordion) for cleaner layouts, includes styling fixes, and ⚠️ **breaking changes** removing the `asChild` prop and updating [AlertDialog](/docs/components/alert-dialog) & [Modal](/docs/components/modal) backdrop variant.
+
+[Read full release notes →](/docs/releases/v3-0-0-beta-3)
+
+---
+
+### v3.0.0-beta.2
+
+**November 20, 2025**
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-2-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-2-dark@2x.jpg"
+  alt="HeroUI v3 Beta 2"
+  href="/docs/releases/v3-0-0-beta-2"
+/>
+
+
+This release introduces six essential new components ([AlertDialog](/docs/components/alert-dialog), [ComboBox](/docs/components/combo-box), [Dropdown](/docs/components/dropdown), [InputGroup](/docs/components/input-group), [Modal](/docs/components/modal), [NumberField](/docs/components/number-field)), enhances theme compatibility and motion preferences, improves the [Select](/docs/components/select) component API with a ⚠️ **breaking change**, plus various refinements and bug fixes.
+
+[Read full release notes →](/docs/releases/v3-0-0-beta-2)
+
+---
+
+### v3.0.0-beta.1
+
+**November 6, 2025**
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/videos/v3-beta-1.mp4"
+  poster="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/videos/v3-beta-1-poster.png"
+  height={430}
+/>
+
+This release introduces a comprehensive redesign of HeroUI v3, merging v2's beauty and animations with v3's simplicity. All components have been redesigned, 8 new components added ([Alert](/docs/compoenents/alert), [Checkbox](/docs/components/checkbox), [InputOTP](/docs/components/input-otp), [ListBox](/docs/components/listbox), [Select](/docs/components/select), [Slider](/docs/components/slider), [Surface](/docs/components/surface)), and the design system has been completely overhauled with better color tokens, shadows, and architecture. Includes breaking changes to design system variables, component APIs, and flexible component patterns.
+
+[Read full release notes →](/docs/releases/v3-0-0-beta-1)
+
+---
+
+## Previous Releases
+
+### v3.0.0-alpha.35
+
+**October 21, 2025**
+
+#### React Server Components Support
+- Fixed critical issue where compound components didn't work in React Server Components (RSC)
+- Moved compound pattern logic from components to index files, resolving `"use client"` conflicts
+- **(⚠️ Breaking change)**: Main component now requires `.Root` suffix (e.g., `<Avatar>` → `<Avatar.Root>`)
+- Named exports remain unchanged and fully supported
+
+#### React 19 Improvements
+- Removed `forwardRef` (now native in [React 19](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop))
+- Simplified Context usage (`Context.Provider` → [React 19](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider))
+
+#### Switch Component Refactoring
+- **(⚠️ Breaking change)**: Split Switch and SwitchGroup into separate components
+- Cleaner API: `<SwitchGroup>` replaces `<Switch.Group>` and `<Switch.GroupItems>`
+- Matches Radio/RadioGroup pattern for consistency
+- Separate styles, types, and implementations
+
+#### Affected Components
+All compound components now require `.Root` suffix: `Accordion`, `Avatar`, `Card`, `Disclosure`, `Fieldset`, `Kbd`, `Link`, `Popover`, `Radio`, `Switch`, `Tabs`, `Tooltip`
+
+[Read full release notes →](/docs/releases/v3-0-0-alpha-35)
+
+### v3.0.0-alpha.34
+
+**October 15, 2025**
+
+- Added Form-based components: [Description](/docs/components/description), [FieldError](/docs/components/field-error), [Fieldset](/docs/components/fieldset), [Form](/docs/components/form), [Input](/docs/components/input), [Label](/docs/components/label), [RadioGroup](/docs/components/radio-group), [TextField](/docs/components/text-field), and [TextArea](/docs/components/textarea).
+- Introduced form field tokens `--field-*`
+- Reorganized Storybook by category
+- **(Breaking change)**: Renamed `--skeleton-default-animation-type` to `--skeleton-animation` in [Skeleton](/docs/components/skeleton)
+- Aligned data-slot markers across components
+- Improved documentation
+
+
+[Read full release notes →](/docs/releases/v3-0-0-alpha-34)
+
+### v3.0.0-alpha.33
+
+**October 5, 2025**
+
+- Upgraded RAC with [October 2, 2025 Release](https://react-spectrum.adobe.com/releases/2025-10-02.html)
+- Reordered [Tabs](/docs/components/tabs) Indicator (**Breaking change**)
+- Updated [Tabs](/docs/components/tabs) component to use React Aria's `SelectionIndicator`, now supports SSR
+- Updated [Disclosure](/docs/components/disclosure) and [Disclosure Group](/docs/components/disclosure-group) components to use RAC CSS variables for the expand and collapse animations
+- Updated [Switch](/docs/components/switch) component styles and animations
+- Added `size` variants and added demo in [Switch](/docs/components/switch#sizes)
+- Added related showcases in [Button](/docs/components/button), [Tabs](/docs/components/tabs), [Disclosure](/docs/components/disclosure), [Disclosure Group](/docs/components/disclosure-group)
+- Improved documentation
+
+
+[Read full release notes →](/docs/releases/v3-0-0-alpha-33)
+
+### v3.0.0-alpha.32
+
+**October 1, 2025**
+
+Card component redesigned with [new variants](/docs/components/card), added [CloseButton](/docs/components/close-button) component, [MCP Server](/docs/ui-for-agents/mcp-server) for AI coding assistants, and improved documentation.
+
+[Read full release notes →](/docs/releases/v3-0-0-alpha-32)
+
+### v3.0.0-alpha.31
+
+**September 22, 2025**
+
+- 🎨 **Showcases page** - Gallery of sites built with HeroUI
+- 🌀 **DisclosureGroup component** - Groups multiple disclosures together
+- 📇 **Card component** (preview) - First version of card component
+- 🔀 **Switch component** (preview) - Toggle switch for settings
+
+---
+
+## Release Schedule
+
+HeroUI v3 follows a regular release cycle:
+
+- **Alpha releases**: Weekly to bi-weekly during active development
+- **Beta releases**: Monthly stabilization releases - In progress
+- **Stable releases**: Quarterly major versions (Q4 2025 target)
+
+## Contributing
+
+Found an issue or want to contribute? Check out our [GitHub repository](https://github.com/heroui-inc/heroui).

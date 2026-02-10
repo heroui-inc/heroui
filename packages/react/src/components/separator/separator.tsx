@@ -1,29 +1,24 @@
 "use client";
 
-import type {SeparatorVariants} from "./separator.styles";
-import type {SeparatorProps as SeparatorPrimitiveProps} from "react-aria-components";
+import type {SeparatorVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
-import React, {useContext} from "react";
+import {separatorVariants} from "@heroui/styles";
+import React from "react";
 import {Separator as SeparatorPrimitive} from "react-aria-components";
-
-import {SurfaceContext} from "../surface";
-
-import {separatorVariants} from "./separator.styles";
 
 /* -------------------------------------------------------------------------------------------------
  * Separator Root
  * -----------------------------------------------------------------------------------------------*/
-interface SeparatorRootProps extends SeparatorPrimitiveProps, SeparatorVariants {}
+interface SeparatorRootProps
+  extends ComponentPropsWithRef<typeof SeparatorPrimitive>, SeparatorVariants {}
 
 const SeparatorRoot = ({
   className,
-  isOnSurface,
   orientation = "horizontal",
+  variant,
   ...props
 }: SeparatorRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
-
   return (
     <SeparatorPrimitive
       data-orientation={orientation}
@@ -31,7 +26,7 @@ const SeparatorRoot = ({
       orientation={orientation}
       className={separatorVariants({
         orientation,
-        isOnSurface: isOnSurfaceValue,
+        variant,
         className,
       })}
       {...props}

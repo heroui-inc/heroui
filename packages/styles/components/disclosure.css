@@ -9,16 +9,17 @@
 
 .disclosure__trigger {
   cursor: var(--cursor-interactive);
+  @apply no-highlight;
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
   }
 
   /* Disabled state */
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     @apply status-disabled;
   }
 }
@@ -29,17 +30,16 @@
   /**
    * Transitions
    */
-  @apply duration-250 transition motion-reduce:transition-none;
+  @apply transition duration-250 motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
-  &[data-expanded] {
+  &[data-expanded="true"] {
     @apply -rotate-180;
   }
 }
 
 .disclosure__content {
   opacity: 0;
-  will-change: height, opacity;
   height: var(--disclosure-panel-height);
   overflow: clip;
 
@@ -48,11 +48,12 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    height 420ms var(--ease-fluid-out),
-    opacity 340ms var(--ease-out);
+    height 200ms var(--ease-out-quad),
+    opacity 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &[data-expanded] {
+  &[data-expanded="true"] {
+    will-change: height, opacity;
     opacity: 1;
   }
 }

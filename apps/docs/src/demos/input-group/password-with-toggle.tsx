@@ -1,7 +1,7 @@
 "use client";
 
+import {Eye, EyeSlash} from "@gravity-ui/icons";
 import {Button, InputGroup, Label, TextField} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import {useState} from "react";
 
 export function PasswordWithToggle() {
@@ -24,7 +24,7 @@ export function PasswordWithToggle() {
             variant="ghost"
             onPress={() => setIsVisible(!isVisible)}
           >
-            <Icon className="size-4" icon={isVisible ? "gravity-ui:eye" : "gravity-ui:eye-slash"} />
+            {isVisible ? <Eye className="size-4" /> : <EyeSlash className="size-4" />}
           </Button>
         </InputGroup.Suffix>
       </InputGroup>

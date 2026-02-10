@@ -61,7 +61,8 @@ const WithIconTemplate = (props: ChipProps) => (
   <div className="flex items-center gap-3">
     <Chip {...props}>
       <Icon icon="gravity-ui:circle-dashed" />
-      Label <Icon icon="gravity-ui:circle-dashed" />
+      <Chip.Label>Label</Chip.Label>
+      <Icon icon="gravity-ui:circle-dashed" />
     </Chip>
   </div>
 );
@@ -75,19 +76,19 @@ const StatusesTemplate = (props: ChipProps) => {
         <div key={variant} className="flex items-center gap-3">
           <Chip {...props} variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Information
+            <Chip.Label>Information</Chip.Label>
           </Chip>
           <Chip {...props} color="success" variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Completed
+            <Chip.Label>Completed</Chip.Label>
           </Chip>
           <Chip {...props} color="warning" variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Pending
+            <Chip.Label>Pending</Chip.Label>
           </Chip>
           <Chip {...props} color="danger" variant={variant}>
             <Icon icon="gravity-ui:circle-fill" width={6} />
-            Failed
+            <Chip.Label>Failed</Chip.Label>
           </Chip>
         </div>
       ))}
@@ -105,7 +106,7 @@ const VariantsTemplate = (props: ChipProps) => {
       {sizes.map((size, index) => (
         <React.Fragment key={size}>
           <div className="flex flex-col gap-4">
-            <h3 className="text-muted text-sm font-semibold capitalize">{size}</h3>
+            <h3 className="text-sm font-semibold text-muted capitalize">{size}</h3>
             {/* Color labels header */}
             <div className="flex items-center gap-3">
               <div className="w-24 shrink-0" />
@@ -115,14 +116,14 @@ const VariantsTemplate = (props: ChipProps) => {
                   className="flex shrink-0 items-center justify-center"
                   style={{width: "130px"}}
                 >
-                  <span className="text-muted text-xs capitalize">{color}</span>
+                  <span className="text-xs text-muted capitalize">{color}</span>
                 </div>
               ))}
             </div>
             <div className="flex flex-col gap-3">
               {variants.map((variant) => (
                 <div key={variant} className="flex items-center gap-3">
-                  <div className="text-muted w-24 shrink-0 text-sm capitalize">{variant}</div>
+                  <div className="w-24 shrink-0 text-sm text-muted capitalize">{variant}</div>
                   {colors.map((color) => (
                     <div
                       key={color}
@@ -131,7 +132,8 @@ const VariantsTemplate = (props: ChipProps) => {
                     >
                       <Chip {...props} color={color} size={size} variant={variant}>
                         <Icon icon="gravity-ui:circle-dashed" />
-                        Label <Icon icon="gravity-ui:circle-dashed" />
+                        <Chip.Label>Label</Chip.Label>
+                        <Icon icon="gravity-ui:circle-dashed" />
                       </Chip>
                     </div>
                   ))}

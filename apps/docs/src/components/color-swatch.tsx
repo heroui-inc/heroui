@@ -18,7 +18,7 @@ interface ColorSwatchProps {
 }
 
 const getLabValue = (value: string): LAB | null => {
-  const match = value.match(/\d+/g);
+  const match = value.match(/-?\d*\.?\d+/g);
 
   if (match && match.length >= 3) {
     return [Number(match[0]), Number(match[1]), Number(match[2])];
@@ -83,7 +83,7 @@ export function ColorSwatch({className, foreground, name, value, variable}: Colo
   return (
     <div className={cn("flex flex-col items-center gap-2", className)}>
       <button
-        className="focus:ring-accent shadow-surface group relative size-10 rounded-full transition-all hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+        className="group relative size-10 rounded-full shadow-surface transition-all hover:scale-105 hover:shadow-md focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none"
         type="button"
         style={{
           backgroundColor: `var(${variable})`,

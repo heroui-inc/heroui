@@ -1,28 +1,20 @@
-import {addons, makeDecorator} from "@storybook/preview-api";
-import React, {StrictMode, useEffect, useState} from "react";
+import type {Decorator} from "@storybook/react";
 
-import {Emitter} from "../../constant";
+import React, {StrictMode} from "react";
+import {useGlobals} from "storybook/preview-api";
 
-const StrictModeDecorator = ({children}) => {
-  const [isStrict, setStrict] = useState(true);
+import {STRICT_MODE_GLOBAL_TYPE_ID} from "./constants";
 
-  useEffect(() => {
-    const channel = addons.getChannel();
+export const withReactStrictMode: Decorator = (Story) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- Storybook decorators are valid hook consumers
+  const [globals] = useGlobals();
+  const isStrict = globals[STRICT_MODE_GLOBAL_TYPE_ID] === "true";
 
-    const updateStrict = (val: boolean) => setStrict(val);
-
-    channel.on(Emitter.STRICT_MODE, updateStrict);
-
-    return () => {
-      channel.removeListener(Emitter.STRICT_MODE, updateStrict);
-    };
-  }, []);
-
-  return isStrict ? <StrictMode>{children}</StrictMode> : children;
+  return isStrict ? (
+    <StrictMode>
+      <Story />
+    </StrictMode>
+  ) : (
+    <Story />
+  );
 };
-
-export const withReactStrictMode = makeDecorator({
-  name: "withReactStrictMode",
-  parameterName: "reactStrictMode",
-  wrapper: (getStory, context) => <StrictModeDecorator>{getStory(context)}</StrictModeDecorator>,
-});

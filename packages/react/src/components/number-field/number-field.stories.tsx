@@ -8,7 +8,6 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {Surface} from "../surface";
 
 import {NumberField} from "./index";
 
@@ -34,6 +33,44 @@ export const Default: Story = {
         <NumberField.IncrementButton />
       </NumberField.Group>
     </NumberField>
+  ),
+};
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <NumberField defaultValue={100} minValue={0} name="primary-width" variant="primary">
+        <Label>Primary variant</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-[120px]" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+      <NumberField defaultValue={100} minValue={0} name="secondary-width" variant="secondary">
+        <Label>Secondary variant</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input className="w-[120px]" />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+    </div>
+  ),
+};
+
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <NumberField fullWidth defaultValue={1024} minValue={0} name="width">
+        <Label>Width</Label>
+        <NumberField.Group>
+          <NumberField.DecrementButton />
+          <NumberField.Input />
+          <NumberField.IncrementButton />
+        </NumberField.Group>
+      </NumberField>
+    </div>
   ),
 };
 
@@ -384,38 +421,6 @@ export const CustomIcons: Story = {
   ),
 };
 
-export const OnSurface: Story = {
-  render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <NumberField defaultValue={1024} minValue={0} name="width">
-        <Label>Width</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>Enter the width in pixels</Description>
-      </NumberField>
-      <NumberField
-        defaultValue={0.5}
-        formatOptions={{style: "percent"}}
-        maxValue={1}
-        minValue={0}
-        name="percentage"
-        step={0.1}
-      >
-        <Label>Percentage</Label>
-        <NumberField.Group>
-          <NumberField.DecrementButton />
-          <NumberField.Input className="w-full" />
-          <NumberField.IncrementButton />
-        </NumberField.Group>
-        <Description>Value must be between 0 and 100</Description>
-      </NumberField>
-    </Surface>
-  ),
-};
-
 export const WithChevrons: Story = {
   render: () => (
     <NumberField
@@ -431,8 +436,8 @@ export const WithChevrons: Story = {
       <Label>Number field with chevrons</Label>
       <NumberField.Group>
         <NumberField.Input />
-        <div className="border-field-placeholder/15 flex h-[calc(100%+2px)] flex-col border-l">
-          <NumberField.IncrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-l-0 border-r-0 pt-0.5 text-sm">
+        <div className="flex h-[calc(100%+2px)] flex-col border-l border-field-placeholder/15">
+          <NumberField.IncrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-r-0 border-l-0 pt-0.5 text-sm">
             <svg
               aria-hidden="true"
               height="11"
@@ -448,7 +453,7 @@ export const WithChevrons: Story = {
               />
             </svg>
           </NumberField.IncrementButton>
-          <NumberField.DecrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-l-0 border-r-0 pb-0.5 text-sm">
+          <NumberField.DecrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-r-0 border-l-0 pb-0.5 text-sm">
             <svg
               aria-hidden="true"
               height="11"

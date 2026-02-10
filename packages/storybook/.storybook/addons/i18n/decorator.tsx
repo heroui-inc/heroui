@@ -1,53 +1,38 @@
-import {addons, makeDecorator} from "@storybook/preview-api";
-import React, {useEffect, useRef} from "react";
+import type {Decorator} from "@storybook/react";
 
-import {Emitter, locales} from "../../constant";
+import React, {useEffect} from "react";
+import {useGlobals} from "storybook/preview-api";
 
-const useIsFirstRender = () => {
-  const isFirstRenderRef = useRef(true);
+import {DEFAULT_LOCALE, I18N_GLOBAL_TYPE_ID, LOCALES} from "./constants";
 
-  if (isFirstRenderRef.current) {
-    isFirstRenderRef.current = false;
+export const withInternationalization: Decorator = (Story) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- Storybook decorators are valid hook consumers
+  const [globals] = useGlobals();
+  const selectedLocale = globals[I18N_GLOBAL_TYPE_ID] || DEFAULT_LOCALE;
 
-    return true;
-  }
-
-  return isFirstRenderRef.current;
-};
-
-const InternationalizationDecorator = ({children}) => {
-  const isFirstRender = useIsFirstRender();
-
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- Storybook decorators are valid hook consumers
   useEffect(() => {
-    const channel = addons.getChannel();
+    // If auto, use navigator language, otherwise use selected
+    const localeValue =
+      selectedLocale === "Auto"
+        ? typeof navigator !== "undefined"
+          ? navigator.language
+          : "en-US"
+        : selectedLocale;
 
-    const updateInternationalization = (locale) => {
-      document.documentElement.lang = locale.value;
-      document.documentElement.dir = locale.direction;
-    };
+    // Find the full locale object to get direction
+    // Fallback to English/LTR if not found or if Auto resolves to something we don't have explicit config for
+    // (though we mainly need direction here)
+    const localeConfig =
+      LOCALES.find((l) => l.value === localeValue) ||
+      LOCALES.find((l) => l.value.startsWith(localeValue.split("-")[0])) ||
+      LOCALES.find((l) => l.value === "en-US");
 
-    channel.on(Emitter.INTERNATIONALIZATION, updateInternationalization);
-
-    if (isFirstRender) {
-      const preferredLocale = navigator.language;
-
-      const locale = locales.find((l) => l.value === preferredLocale) || locales[0];
-
-      updateInternationalization(locale);
+    if (localeConfig) {
+      document.documentElement.lang = localeConfig.value;
+      document.documentElement.dir = localeConfig.direction;
     }
+  }, [selectedLocale]);
 
-    return () => {
-      channel.removeListener(Emitter.INTERNATIONALIZATION, updateInternationalization);
-    };
-  }, [isFirstRender]);
-
-  return children;
+  return <Story />;
 };
-
-export const withInternationalization = makeDecorator({
-  name: "withInternationalization",
-  parameterName: "internationalization",
-  wrapper: (getStory, context) => (
-    <InternationalizationDecorator>{getStory(context)}</InternationalizationDecorator>
-  ),
-});

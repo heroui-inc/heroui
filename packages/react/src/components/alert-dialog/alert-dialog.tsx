@@ -1,13 +1,13 @@
 "use client";
 
-import type {AlertDialogVariants} from "./alert-dialog.styles";
-import type {ComponentProps, HTMLAttributes, ReactNode} from "react";
+import type {AlertDialogVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef, HTMLAttributes} from "react";
 import type {
   ButtonProps as ButtonPrimitiveProps,
   DialogProps as DialogPrimitiveProps,
 } from "react-aria-components";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import {alertDialogVariants} from "@heroui/styles";
 import {createContext, useContext, useMemo} from "react";
 import {
   DialogTrigger as AlertDialogTriggerPrimitive,
@@ -18,12 +18,9 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components";
 
-import {isNotAsChild} from "../../utils";
-import {composeTwRenderProps} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
-
-import {alertDialogVariants} from "./alert-dialog.styles";
 
 type AlertDialogPlacement = "auto" | "top" | "center" | "bottom";
 
@@ -42,7 +39,7 @@ const AlertDialogContext = createContext<AlertDialogContext>({});
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Root
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogRootProps extends ComponentProps<typeof AlertDialogTriggerPrimitive> {}
+interface AlertDialogRootProps extends ComponentPropsWithRef<typeof AlertDialogTriggerPrimitive> {}
 
 const AlertDialogRoot = ({children, ...props}: AlertDialogRootProps) => {
   const alertDialogContext = useMemo<AlertDialogContext>(
@@ -70,7 +67,7 @@ const AlertDialogTrigger = ({children, className, ...props}: AlertDialogTriggerP
   return (
     <PressablePrimitive>
       <div
-        className={slots?.trigger({className})}
+        className={composeSlotClassName(slots?.trigger, className)}
         data-slot="alert-dialog-trigger"
         role="button"
         {...props}
@@ -82,23 +79,10 @@ const AlertDialogTrigger = ({children, className, ...props}: AlertDialogTriggerP
 };
 
 /* -------------------------------------------------------------------------------------------------
- * AlertDialog Container
+ * AlertDialog Backdrop
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogContainerProps extends ComponentProps<typeof ModalPrimitive> {
-  /**
-   * The placement of the alert dialog on the screen.
-   * @default "auto"
-   */
-  placement?: AlertDialogPlacement;
-  /**
-   * The visual variant of the backdrop overlay.
-   * @default "solid"
-   */
-  backdropVariant?: AlertDialogVariants["variant"];
-  /**
-   * Additional CSS classes to apply to the backdrop overlay.
-   */
-  backdropClassName?: ComponentProps<typeof ModalOverlayPrimitive>["className"];
+interface AlertDialogBackdropProps extends ComponentPropsWithRef<typeof ModalOverlayPrimitive> {
+  variant?: AlertDialogVariants["variant"];
   /**
    * Whether to close the alert dialog when the user interacts outside it.
    * Alert dialogs typically require explicit action, so this defaults to false.
@@ -113,46 +97,84 @@ interface AlertDialogContainerProps extends ComponentProps<typeof ModalPrimitive
   isKeyboardDismissDisabled?: boolean;
 }
 
-const AlertDialogContainer = ({
-  backdropClassName,
-  backdropVariant = "solid",
+const AlertDialogBackdrop = ({
   children,
   className,
   isDismissable = false,
   isKeyboardDismissDisabled = true,
+  variant,
+  ...props
+}: AlertDialogBackdropProps) => {
+  const {slots: contextSlots} = useContext(AlertDialogContext);
+
+  const updatedSlots = useMemo(() => alertDialogVariants({variant}), [variant]);
+
+  const updatedModalContext = useMemo<AlertDialogContext>(
+    () => ({slots: {...contextSlots, ...updatedSlots}}),
+    [contextSlots, updatedSlots],
+  );
+
+  return (
+    <ModalOverlayPrimitive
+      className={composeTwRenderProps(className, updatedSlots?.backdrop())}
+      data-slot="alert-dialog-backdrop"
+      isDismissable={isDismissable}
+      isKeyboardDismissDisabled={isKeyboardDismissDisabled}
+      {...props}
+    >
+      {(renderProps) => (
+        <AlertDialogContext value={updatedModalContext}>
+          {typeof children === "function" ? children(renderProps) : children}{" "}
+        </AlertDialogContext>
+      )}
+    </ModalOverlayPrimitive>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialog Container
+ * -----------------------------------------------------------------------------------------------*/
+interface AlertDialogContainerProps extends Omit<
+  ComponentPropsWithRef<typeof ModalPrimitive>,
+  Exclude<keyof AlertDialogBackdropProps, "children" | "className">
+> {
+  /**
+   * The placement of the alert dialog on the screen.
+   * @default "auto"
+   */
+  placement?: AlertDialogPlacement;
+  size?: AlertDialogVariants["size"];
+}
+
+const AlertDialogContainer = ({
+  children,
+  className,
   placement = "auto",
+  size,
   ...props
 }: AlertDialogContainerProps) => {
   const {slots: contextSlots} = useContext(AlertDialogContext);
 
-  const updatedSlots = useMemo(
-    () => alertDialogVariants({variant: backdropVariant}),
-    [backdropVariant],
-  );
+  const updatedSlots = useMemo(() => alertDialogVariants({size}), [size]);
 
-  const updatedAlertDialogContext = useMemo<AlertDialogContext>(
+  const updatedContext = useMemo<AlertDialogContext>(
     () => ({placement, slots: {...contextSlots, ...updatedSlots}}),
-    [contextSlots, placement, updatedSlots],
+    [placement, contextSlots, updatedSlots],
   );
 
   return (
-    <AlertDialogContext value={updatedAlertDialogContext}>
-      <ModalOverlayPrimitive
-        className={composeTwRenderProps(backdropClassName, updatedSlots?.backdrop())}
-        data-slot="alert-dialog-backdrop"
-        isDismissable={isDismissable}
-        isKeyboardDismissDisabled={isKeyboardDismissDisabled}
-        {...props}
-      >
-        <ModalPrimitive
-          className={composeTwRenderProps(className, updatedSlots?.container())}
-          data-placement={placement}
-          data-slot="alert-dialog-container"
-        >
-          {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
-        </ModalPrimitive>
-      </ModalOverlayPrimitive>
-    </AlertDialogContext>
+    <ModalPrimitive
+      className={composeTwRenderProps(className, updatedSlots?.container())}
+      data-placement={placement}
+      data-slot="alert-dialog-container"
+      {...props}
+    >
+      {(renderProps) => (
+        <AlertDialogContext value={updatedContext}>
+          {typeof children === "function" ? children(renderProps) : children}
+        </AlertDialogContext>
+      )}
+    </ModalPrimitive>
   );
 };
 
@@ -162,11 +184,12 @@ const AlertDialogContainer = ({
 interface AlertDialogDialogProps extends DialogPrimitiveProps {}
 
 const AlertDialogDialog = ({children, className, ...props}: AlertDialogDialogProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {placement, slots} = useContext(AlertDialogContext);
 
   return (
     <DialogPrimitive
-      className={slots?.dialog({className})}
+      className={composeSlotClassName(slots?.dialog, className)}
+      data-placement={placement}
       data-slot="alert-dialog-dialog"
       role="alertdialog"
       {...props}
@@ -185,7 +208,11 @@ const AlertDialogHeader = ({children, className, ...props}: AlertDialogHeaderPro
   const {slots} = useContext(AlertDialogContext);
 
   return (
-    <div className={slots?.header({className})} data-slot="alert-dialog-header" {...props}>
+    <div
+      className={composeSlotClassName(slots?.header, className)}
+      data-slot="alert-dialog-header"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -194,14 +221,14 @@ const AlertDialogHeader = ({children, className, ...props}: AlertDialogHeaderPro
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Heading
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogHeadingProps extends ComponentProps<typeof HeadingPrimitive> {}
+interface AlertDialogHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
 const AlertDialogHeading = ({children, className, ...props}: AlertDialogHeadingProps) => {
   const {slots} = useContext(AlertDialogContext);
 
   return (
     <HeadingPrimitive
-      className={slots?.heading({className})}
+      className={composeSlotClassName(slots?.heading, className)}
       data-slot="alert-dialog-heading"
       slot="title"
       {...props}
@@ -220,7 +247,11 @@ const AlertDialogBody = ({children, className, ...props}: AlertDialogBodyProps) 
   const {slots} = useContext(AlertDialogContext);
 
   return (
-    <div className={slots?.body({className})} data-slot="alert-dialog-body" {...props}>
+    <div
+      className={composeSlotClassName(slots?.body, className)}
+      data-slot="alert-dialog-body"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -235,7 +266,11 @@ const AlertDialogFooter = ({children, className, ...props}: AlertDialogFooterPro
   const {slots} = useContext(AlertDialogContext);
 
   return (
-    <div className={slots?.footer({className})} data-slot="alert-dialog-footer" {...props}>
+    <div
+      className={composeSlotClassName(slots?.footer, className)}
+      data-slot="alert-dialog-footer"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -244,7 +279,7 @@ const AlertDialogFooter = ({children, className, ...props}: AlertDialogFooterPro
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Icon
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogIconProps extends ComponentProps<"div"> {
+interface AlertDialogIconProps extends ComponentPropsWithRef<"div"> {
   /**
    * The semantic status of the icon, affects background color and default icon
    * @default "danger"
@@ -287,41 +322,18 @@ const AlertDialogIcon = ({
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Close Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogCloseTriggerProps {
-  asChild?: boolean;
-  className?: string;
-  children?: ReactNode;
-}
+interface AlertDialogCloseTriggerProps extends ButtonPrimitiveProps {}
 
-interface AlertDialogCloseTrigger {
-  (props: {asChild: true} & ComponentProps<"button">): React.JSX.Element;
-  (props: {asChild?: false} & ButtonPrimitiveProps): React.JSX.Element;
-}
-
-const AlertDialogCloseTrigger: AlertDialogCloseTrigger = (props) => {
+const AlertDialogCloseTrigger = ({className, ...rest}: AlertDialogCloseTriggerProps) => {
   const {slots} = useContext(AlertDialogContext);
 
-  if (isNotAsChild(props)) {
-    const {className, ...rest} = props;
-
-    return (
-      <CloseButton
-        className={composeTwRenderProps(className, slots?.closeTrigger())}
-        data-slot="alert-dialog-close-trigger"
-        slot="close"
-        {...rest}
-      />
-    );
-  }
-
-  const {asChild: _asChild, children, className, ...rest} = props;
-
   return (
-    <SlotPrimitive data-slot="alert-dialog-close-trigger" slot="close" {...rest}>
-      {children ?? (
-        <CloseButton className={composeTwRenderProps(className, slots?.closeTrigger())} />
-      )}
-    </SlotPrimitive>
+    <CloseButton
+      className={composeTwRenderProps(className, slots?.closeTrigger())}
+      data-slot="alert-dialog-close-trigger"
+      slot="close"
+      {...rest}
+    />
   );
 };
 
@@ -331,6 +343,7 @@ const AlertDialogCloseTrigger: AlertDialogCloseTrigger = (props) => {
 export {
   AlertDialogRoot,
   AlertDialogTrigger,
+  AlertDialogBackdrop,
   AlertDialogContainer,
   AlertDialogDialog,
   AlertDialogHeader,
@@ -344,6 +357,7 @@ export {
 export type {
   AlertDialogRootProps,
   AlertDialogTriggerProps,
+  AlertDialogBackdropProps,
   AlertDialogContainerProps,
   AlertDialogDialogProps,
   AlertDialogHeaderProps,

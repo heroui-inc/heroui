@@ -19,7 +19,13 @@ export function OnSurface() {
   return (
     <Surface className="w-[320px] rounded-3xl p-6">
       <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-        <Select isRequired className="w-full" name="state" placeholder="Select one">
+        <Select
+          isRequired
+          className="w-full"
+          name="state"
+          placeholder="Select one"
+          variant="secondary"
+        >
           <Label>State</Label>
           <Select.Trigger>
             <Select.Value />
@@ -55,7 +61,13 @@ export function OnSurface() {
           </Select.Popover>
           <FieldError />
         </Select>
-        <Select isRequired className="w-full" name="country" placeholder="Select a country">
+        <Select
+          isRequired
+          className="w-full"
+          name="country"
+          placeholder="Select a country"
+          variant="secondary"
+        >
           <Label>Country</Label>
           <Select.Trigger>
             <Select.Value />

@@ -1,0 +1,193 @@
+---
+title: Card
+description: Flexible container component for grouping related content and actions
+links:
+  source: card/card.tsx
+  styles: card.css
+  storybook: Components/Layout/Card
+---
+
+## Import
+
+```tsx
+import { Card } from "@heroui/react";
+```
+
+### Usage
+
+<ComponentPreview
+  name="card-default"
+/>
+
+### Anatomy
+
+Import the Card component and access all parts using dot notation.
+
+```tsx
+import { Card } from "@heroui/react";
+
+export default () => (
+  <Card>
+    <Card.Header>
+      <Card.Title />
+      <Card.Description />
+    </Card.Header>
+    <Card.Content />
+    <Card.Footer />
+  </Card>
+);
+```
+
+### Variants
+
+Cards come in semantic variants that describe their prominence level rather than specific visual styles. This allows themes to interpret them differently:
+
+<ComponentPreview
+  name="card-variants"
+/>
+
+- **`transparent`** - Minimal prominence, transparent background (great for nested cards)
+- **`default`** - Standard card for most use cases (surface-secondary)
+- **`secondary`** - Medium prominence to draw moderate attention (surface-tertiary)
+- **`tertiary`** - Higher prominence for important content (surface-tertiary)
+
+### Horizontal Layout
+
+<ComponentPreview
+  name="card-horizontal"
+/>
+
+### With Avatar
+
+<ComponentPreview
+  name="card-with-avatar"
+/>
+
+### With Images
+
+<ComponentPreview
+  name="card-with-images"
+/>
+
+### With Form
+
+<ComponentPreview
+  name="card-with-form"
+/>
+
+## Accessibility
+
+```tsx
+import { Card } from '@heroui/react';
+import { cardVariants } from '@heroui/styles';
+
+// Semantic markup
+<Card role="article" aria-labelledby="card-title">
+  <Card.Header>
+    <Card.Title id="card-title">Article Title</Card.Title>
+  </Card.Header>
+</Card>
+
+// Interactive cards
+<a className={cardVariants().base()} href="/details" aria-label="View product details">
+  <Card.Title>Product Name</Card.Title>
+</a>
+```
+
+<RelatedComponents component="card" />
+
+## Styling
+
+### Component Customization
+
+```tsx
+<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
+  <Card.Header>
+    <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
+    <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    <p className="text-blue-800">Content with custom styling</p>
+  </Card.Content>
+</Card>
+```
+
+### CSS Variable Overrides
+
+```css
+/* Override specific variants */
+.card--secondary {
+  @apply bg-gradient-to-br from-blue-50 to-purple-50;
+}
+
+/* Custom element styles */
+.card__title {
+  @apply text-xl font-bold;
+}
+```
+
+## CSS Classes
+
+Card uses [BEM](https://getbem.com/) naming for predictable styling, ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/card.css)):
+
+
+#### Base Classes
+
+- `.card` - Base container with padding and border
+- `.card__header` - Header section container
+- `.card__title` - Title with base font size and weight
+- `.card__description` - Muted description text
+- `.card__content` - Flexible content container
+- `.card__footer` - Footer with row layout
+
+#### Variant Classes
+
+- `.card--transparent` - Minimal prominence, transparent background (maps to `transparent` variant)
+- `.card--default` - Standard appearance with surface-secondary (default)
+- `.card--secondary` - Medium prominence with surface-tertiary (maps to `secondary` variant)
+- `.card--tertiary` - Higher prominence with surface-tertiary (maps to `tertiary` variant)
+
+## API Reference
+
+### Card
+
+| Prop        | Type                                                      | Default      | Description                |
+| ----------- | --------------------------------------------------------- | ------------ | -------------------------- |
+| `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary"`         | `"default"` | Semantic variant indicating prominence level |
+| `className` | `string`                          | -       | Additional CSS classes     |
+| `children`  | `React.ReactNode`                 | -       | Card content               |
+
+### Card.Header
+
+| Prop        | Type              | Default | Description               |
+| ----------- | ----------------- | ------- | ------------------------- |
+| `className` | `string`          | -       | Additional CSS classes    |
+| `children`  | `React.ReactNode` | -       | Header content            |
+
+### Card.Title
+
+| Prop        | Type              | Default | Description                      |
+| ----------- | ----------------- | ------- | -------------------------------- |
+| `className` | `string`          | -       | Additional CSS classes           |
+| `children`  | `React.ReactNode` | -       | Title content (renders as `h3`) |
+
+### Card.Description
+
+| Prop        | Type              | Default | Description                     |
+| ----------- | ----------------- | ------- | ------------------------------- |
+| `className` | `string`          | -       | Additional CSS classes          |
+| `children`  | `React.ReactNode` | -       | Description content (renders as `p`) |
+
+### Card.Content
+
+| Prop        | Type              | Default | Description               |
+| ----------- | ----------------- | ------- | ------------------------- |
+| `className` | `string`          | -       | Additional CSS classes    |
+| `children`  | `React.ReactNode` | -       | Main content              |
+
+### Card.Footer
+
+| Prop        | Type              | Default | Description               |
+| ----------- | ----------------- | ------- | ------------------------- |
+| `className` | `string`          | -       | Additional CSS classes    |
+| `children`  | `React.ReactNode` | -       | Footer content            |

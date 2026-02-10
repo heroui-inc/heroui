@@ -1,8 +1,16 @@
-/* Scrollbar styles */
-* {
+/*
+ * Scrollbar styles
+ *
+ * TODO: This is a temporary workaround by removing the scrollbar styles.
+ * Global scrollbar styling causes modal/overlay interaction/closure issues
+ * (e.g. backdrop clicks not closing the overlay) and should be removed.
+ */
+/*
+*:not(.alert-dialog__backdrop):not(.modal__backdrop) {
   scrollbar-color: var(--scrollbar) transparent;
   scrollbar-width: thin;
 }
+*/
 
 /* Border color inheritance */
 *,
@@ -11,4 +19,13 @@
 ::backdrop,
 ::file-selector-button {
   border-color: var(--border, currentColor);
+}
+
+/* Keeps main page content interactive during view transitions */
+:root {
+  view-transition-name: none;
+}
+
+::view-transition {
+  pointer-events: none;
 }

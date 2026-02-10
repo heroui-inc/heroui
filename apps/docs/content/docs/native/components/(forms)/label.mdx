@@ -1,0 +1,190 @@
+---
+title: Label
+description: Text component for labeling form fields and other UI elements with support for required indicators and validation states.
+links:
+  source_native: label/label.tsx
+  styles_native: label/label.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Label } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Label>
+  <Label.Text>...</Label.Text>
+</Label>
+```
+
+- **Label**: Root container that manages label state and provides context to child components. When string children are provided, automatically renders as Label.Text. Supports disabled, required, and invalid states.
+- **Label.Text**: Text content of the label. Displays the label text and automatically shows an asterisk when the label is required. Changes color when invalid or disabled.
+
+## Usage
+
+### Basic Usage
+
+Display a label with text content. String children are automatically rendered as Label.Text.
+
+```tsx
+<Label>Username</Label>
+```
+
+### With Form Fields
+
+Use Label with form fields to provide accessible labels.
+
+```tsx
+<TextField>
+  <Label>Username</Label>
+  <Input placeholder="Choose a username" />
+</TextField>
+```
+
+### Required Fields
+
+Show an asterisk indicator for required fields using the `isRequired` prop.
+
+```tsx
+<TextField>
+  <Label isRequired>Password</Label>
+  <Input placeholder="Create a password" secureTextEntry />
+</TextField>
+```
+
+### Invalid State
+
+Display labels in an invalid state to indicate validation errors.
+
+```tsx
+import { FieldError, Label, TextField } from 'heroui-native';
+
+<TextField isInvalid>
+  <Label isInvalid>Confirm password</Label>
+  <Input
+    placeholder="Confirm your password"
+    secureTextEntry
+    value="different"
+    editable={false}
+  />
+  <FieldError>Passwords do not match</FieldError>
+</TextField>
+```
+
+### Disabled State
+
+Disable labels to indicate non-interactive fields.
+
+```tsx
+<TextField isDisabled>
+  <Label>Subscription plan</Label>
+  <Input value="Premium" />
+</TextField>
+```
+
+### Custom Layout
+
+Use compound components for custom label layouts.
+
+```tsx
+<Label>
+  <Label.Text>Custom label</Label.Text>
+</Label>
+```
+
+### Custom Styling
+
+Apply custom styles using className, classNames, or styles props.
+
+```tsx
+<Label className="mb-2">
+  <Label.Text
+    className="text-lg"
+    classNames={{
+      text: "font-bold",
+      asterisk: "text-danger"
+    }}
+  >
+    Custom styled label
+  </Label.Text>
+</Label>
+```
+
+## Example
+
+```tsx
+import { FieldError, Label, TextField } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function LabelExample() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-8">
+      <TextField>
+        <Label>Username</Label>
+        <Input placeholder="Choose a username" />
+      </TextField>
+      <TextField>
+        <Label isRequired>Password</Label>
+        <Input placeholder="Create a password" secureTextEntry />
+      </TextField>
+      <TextField isInvalid>
+        <Label isInvalid>Confirm password</Label>
+        <Input
+          placeholder="Confirm your password"
+          secureTextEntry
+          value="different"
+          editable={false}
+        />
+        <FieldError>Passwords do not match</FieldError>
+      </TextField>
+      <TextField isDisabled>
+        <Label>Subscription plan</Label>
+        <Input value="Premium" />
+      </TextField>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/label.tsx).
+
+## API Reference
+
+### Label
+
+| prop           | type                        | default     | description                                                                                                                                    |
+| -------------- | --------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`           | -           | Label content. When string is provided, automatically renders as Label.Text. Otherwise renders children as-is                                 |
+| `isRequired`   | `boolean`                   | `false`     | Whether the label is required. Shows asterisk indicator when true                                                                              |
+| `isInvalid`    | `boolean`                   | `false`     | Whether the label is in an invalid state. Changes text color to danger                                                                         |
+| `isDisabled`   | `boolean`                   | `false`     | Whether the label is disabled. Applies disabled styling and prevents interaction                                                               |
+| `className`    | `string`                    | -           | Additional CSS classes to apply                                                                                                                 |
+| `animation`    | `"disable-all" \| undefined` | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children                                                     |
+| `...PressableProps` | `PressableProps`        | -           | All standard React Native Pressable props are supported                                                                                          |
+
+### Label.Text
+
+| prop           | type              | default | description                                                                                                                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Label text content                                                                                                                             |
+| `className`    | `string`          | -       | Additional CSS classes to apply to the text element                                                                                            |
+| `classNames`   | `ElementSlots<LabelSlots>` | - | Additional CSS classes for different parts of the label                                                                                        |
+| `styles`       | `Partial<Record<LabelSlots, TextStyle>>` | - | Styles for different parts of the label                                                                                                        |
+| `nativeID`     | `string`          | -       | Native ID for accessibility. Used to link label to form fields via aria-labelledby                                                           |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported                                                                                              |
+
+#### `ElementSlots<LabelSlots>`
+
+| prop       | type     | description                    |
+| ---------- | -------- | ------------------------------ |
+| `text`     | `string` | CSS classes for the label text |
+| `asterisk` | `string` | CSS classes for the asterisk   |

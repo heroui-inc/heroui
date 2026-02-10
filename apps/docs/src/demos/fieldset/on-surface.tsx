@@ -1,5 +1,6 @@
 "use client";
 
+import {FloppyDisk} from "@gravity-ui/icons";
 import {
   Button,
   Description,
@@ -12,7 +13,6 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
-import {Icon} from "@iconify/react";
 import React from "react";
 
 export function OnSurface() {
@@ -30,7 +30,7 @@ export function OnSurface() {
   };
 
   return (
-    <div className="bg-surface flex items-center justify-center rounded-3xl p-6">
+    <div className="flex items-center justify-center rounded-3xl bg-surface p-6">
       <Surface className="w-full min-w-[380px]">
         <Form onSubmit={onSubmit}>
           <Fieldset className="w-full">
@@ -49,12 +49,12 @@ export function OnSurface() {
                 }}
               >
                 <Label>Name</Label>
-                <Input placeholder="John Doe" />
+                <Input placeholder="John Doe" variant="secondary" />
                 <FieldError />
               </TextField>
               <TextField isRequired name="email" type="email">
                 <Label>Email</Label>
-                <Input placeholder="john@example.com" />
+                <Input placeholder="john@example.com" variant="secondary" />
                 <FieldError />
               </TextField>
               <TextField
@@ -69,14 +69,14 @@ export function OnSurface() {
                 }}
               >
                 <Label>Bio</Label>
-                <TextArea placeholder="Tell us about yourself..." />
+                <TextArea placeholder="Tell us about yourself..." variant="secondary" />
                 <Description>Minimum 10 characters</Description>
                 <FieldError />
               </TextField>
             </Fieldset.Group>
             <Fieldset.Actions>
               <Button type="submit">
-                <Icon icon="gravity-ui:floppy-disk" />
+                <FloppyDisk />
                 Save changes
               </Button>
               <Button type="reset" variant="tertiary">

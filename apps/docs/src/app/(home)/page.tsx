@@ -2,21 +2,19 @@ import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 
+import {DemoComponents} from "@/components/demo";
 import {Footer} from "@/components/footer";
+import {FrameworkChip} from "@/components/framework-chip";
 import {GitHubLink} from "@/components/github-link";
-import {Iconify} from "@/components/iconify";
-import {currentVersion} from "@/utils/version";
-
-import {DemoComponents} from "./components/demo";
 
 const VersionChip = () => {
   return (
     <LinkRoot
-      className="text-muted chip bg-surface-secondary rounded-full text-xs"
-      href="/docs/changelog/v3-0-0-beta-2"
+      className="chip rounded-full bg-surface-secondary text-xs text-muted"
+      href="/docs/react/releases/v3-0-0-beta-6"
     >
-      <Iconify icon="gravity-ui:sparkles" />
-      <span>v{currentVersion}: 6 New components</span>
+      <FrameworkChip framework="web" />
+      <span>Beta 6 (Web) — 6 new components and toast improvements</span>
     </LinkRoot>
   );
 };
@@ -28,25 +26,28 @@ export default function HomePage() {
   return (
     <main className="flex h-[calc(100vh-4rem)] flex-col">
       {/* Hero Section */}
-      <section className="z-10 flex flex-col items-center pt-20 text-center">
+      <section className="z-10 flex flex-col items-center px-4 pt-20 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-y-4">
           <VersionChip />
-          <h1 className="text-foreground mt-2 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Beautiful by default. Customizable by design.
           </h1>
-          <p className="text-muted text-balance md:text-lg">
-            HeroUI is the modern UI library built to help you move fast, stay consistent, and
-            deliver delightful user experiences.
+          <p className="text-balance text-muted md:text-lg">
+            HeroUI is the modern UI library for web and mobile, built to help you move fast, stay
+            consistent, and deliver delightful user experiences.
           </p>
           <div className="mt-2 flex gap-3">
-            <LinkRoot className={buttonVariants({variant: "primary"})} href="/docs/components-list">
+            <LinkRoot
+              className={buttonVariants({variant: "primary"})}
+              href="/docs/react/components"
+            >
               View components
             </LinkRoot>
             <GitHubLink>Stars</GitHubLink>
           </div>
         </div>
         {/* Mobile/Tablet: Show images */}
-        <section className="-ml-4 mt-16 w-[100vw] overflow-hidden lg:hidden lg:w-[150vw]">
+        <section className="mt-16 -ml-4 hidden w-screen overflow-hidden lg:w-[150vw]">
           <Image
             alt="HeroUI components preview"
             className="block dark:hidden"
@@ -69,7 +70,7 @@ export default function HomePage() {
           />
         </section>
         {/* Desktop: Show demos */}
-        <div className="hidden lg:block">
+        <div className="py-24">
           <DemoComponents />
         </div>
       </section>

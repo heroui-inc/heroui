@@ -69,22 +69,23 @@ export function NewsletterForm() {
         throw new Error(newsletterResData.error || "Failed to subscribe newsletter");
       }
 
+      // Temporarily disable changelog subscription
       // Featurebase - changelog
-      const changelogResponse = await fetch("/api/changelog", {
-        body: JSON.stringify({
-          email: emailValue,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
+      // const changelogResponse = await fetch("/api/changelog", {
+      //   body: JSON.stringify({
+      //     email: emailValue,
+      //   }),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   method: "POST",
+      // });
 
-      const changelogResData = await changelogResponse.json();
+      // const changelogResData = await changelogResponse.json();
 
-      if (!changelogResData.success) {
-        throw new Error(changelogResData.error || "Failed to subscribe changelog");
-      }
+      // if (!changelogResData.success) {
+      //   throw new Error(changelogResData.error || "Failed to subscribe changelog");
+      // }
 
       setStatus("success");
       setEmail("");
@@ -128,7 +129,7 @@ export function NewsletterForm() {
             <Input placeholder="name@email.com" value={email} />
             <FieldError className="mt-1 px-1 text-xs" />
             {apiErrorMessage && status === "error" ? (
-              <p className="text-danger mt-1 px-1 text-xs">{apiErrorMessage}</p>
+              <p className="mt-1 px-1 text-xs text-danger">{apiErrorMessage}</p>
             ) : null}
           </TextField>
           <Button

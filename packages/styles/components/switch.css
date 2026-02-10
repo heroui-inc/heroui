@@ -1,14 +1,21 @@
 /* Switch base styles */
 .switch {
-  @apply inline-flex items-center gap-3;
+  @apply inline-flex items-center gap-3 no-highlight;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
 
+  /* Default tokens for switch control states */
+  --switch-control-bg: var(--color-default);
+  --switch-control-bg-hover: color-mix(in oklab, var(--switch-control-bg), transparent 20%);
+  --switch-control-bg-pressed: var(--switch-control-bg-hover);
+  --switch-control-bg-checked: var(--color-accent);
+  --switch-control-bg-checked-hover: var(--color-accent-hover);
+
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
     @apply status-disabled;
 
     .switch__thumb {
@@ -17,12 +24,12 @@
   }
 
   /* Disabled + Selected state */
-  &:disabled[aria-checked],
-  &:disabled[data-selected],
-  &[data-disabled][aria-checked],
-  &[data-disabled][data-selected],
-  &[aria-disabled][aria-checked],
-  &[aria-disabled][data-selected] {
+  &:disabled[aria-checked="true"],
+  &:disabled[data-selected="true"],
+  &[data-disabled="true"][aria-checked="true"],
+  &[data-disabled="true"][data-selected="true"],
+  &[aria-disabled="true"][aria-checked="true"],
+  &[aria-disabled="true"][data-selected="true"] {
     .switch__thumb {
       opacity: 0.4;
     }
@@ -45,9 +52,11 @@
 /* Switch control (track) */
 .switch__control {
   /* Default size (medium) */
-  @apply bg-surface-quaternary relative flex shrink-0 items-center overflow-hidden rounded-full;
+  @apply relative flex shrink-0 items-center overflow-hidden rounded-full;
   height: 1.25rem; /* 20px on desktop (14px base), 20px on mobile (16px base) - scales with font-size */
   width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
+
+  background-color: var(--switch-control-bg);
 
   /**
    * Transitions
@@ -55,49 +64,48 @@
    */
   transition:
     background-color 250ms var(--ease-smooth),
-    transform 250ms var(--ease-out),
     box-shadow 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   /* Focus states */
   .switch:focus-visible &,
-  .switch[data-focus-visible] & {
+  .switch[data-focus-visible="true"] & {
     @apply status-focused;
   }
 
   /* Hover states */
   .switch:hover &,
-  .switch[data-hovered] & {
-    @apply bg-surface-quaternary/80;
+  .switch[data-hovered="true"] & {
+    background-color: var(--switch-control-bg-hover);
   }
 
   /* Pressed states */
   .switch:active &,
-  .switch[data-pressed] & {
-    @apply bg-surface-quaternary/80 motion-reduce:[transform:none];
-    transform: scale(0.95);
+  .switch[data-pressed="true"] & {
+    background-color: var(--switch-control-bg-pressed);
+    @apply motion-reduce:transform-none;
   }
 
   /* Checked states */
-  .switch[aria-checked] &,
-  .switch[data-selected] & {
-    @apply bg-accent;
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
+    background-color: var(--switch-control-bg-checked);
   }
 
   /* Checked + Hover states */
-  .switch[aria-checked]:hover &,
-  .switch[data-selected]:hover &,
-  .switch[aria-checked][data-hovered] &,
-  .switch[data-selected][data-hovered] & {
-    @apply bg-accent-hover;
+  .switch[aria-checked="true"]:hover &,
+  .switch[data-selected="true"]:hover &,
+  .switch[aria-checked="true"][data-hovered="true"] &,
+  .switch[data-selected="true"][data-hovered="true"] & {
+    background-color: var(--switch-control-bg-checked-hover);
   }
 
   /* Checked + Pressed states */
-  .switch[aria-checked]:active &,
-  .switch[data-selected]:active &,
-  .switch[aria-checked][data-pressed] &,
-  .switch[data-selected][data-pressed] & {
-    @apply bg-accent-hover;
+  .switch[aria-checked="true"]:active &,
+  .switch[data-selected="true"]:active &,
+  .switch[aria-checked="true"][data-pressed="true"] &,
+  .switch[data-selected="true"][data-pressed="true"] & {
+    background-color: var(--switch-control-bg-checked-hover);
   }
 }
 
@@ -119,7 +127,7 @@
 /* Switch thumb */
 .switch__thumb {
   /* Default size (medium) with margin-based positioning */
-  @apply shadow-field ms-[0.125rem] flex origin-center rounded-full bg-white text-black;
+  @apply ms-0.5 flex origin-center rounded-full bg-white text-black shadow-field;
   height: 1rem; /* ~14px on desktop, ~16px on mobile */
   width: 1.375rem; /* ~19px on desktop, ~22px on mobile */
 
@@ -128,24 +136,22 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    margin 350ms var(--ease-fluid-out),
+    margin 300ms var(--ease-out-fluid),
     background-color 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
   /* Selected/checked state - use margin instead of translate */
-  .switch[aria-checked] &,
-  .switch[data-selected] & {
-    @apply bg-accent-foreground text-accent ms-[calc(100%-1.5rem)];
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
+    @apply ms-[calc(100%-1.5rem)] bg-accent-foreground text-accent;
     box-shadow:
       0px 0px 5px 0px rgb(0 0 0 / 0.02),
       0px 2px 10px 0px rgb(0 0 0 / 0.06),
       0px 0px 1px 0px rgb(0 0 0 / 0.3);
   }
 
-  /* Pressed state - scale down with width animation */
   .switch:active &,
-  .switch[data-pressed] & {
-    @apply scale-[0.98];
+  .switch[data-pressed="true"] & {
   }
 }
 
@@ -155,8 +161,8 @@
   width: 1.03125rem; /* ~14.4px on desktop, ~16.5px on mobile - maintains 1.375:1 ratio */
 
   /* Small selected state positioning */
-  .switch[aria-checked] &,
-  .switch[data-selected] & {
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
     @apply ms-[calc(100%-1.15625rem)];
   }
 }
@@ -166,8 +172,8 @@
   width: 1.71875rem; /* ~24px on desktop, ~27.5px on mobile - maintains 1.375:1 ratio */
 
   /* Large selected state positioning */
-  .switch[aria-checked] &,
-  .switch[data-selected] & {
+  .switch[aria-checked="true"] &,
+  .switch[data-selected="true"] & {
     @apply ms-[calc(100%-1.84375rem)];
   }
 }
@@ -179,5 +185,5 @@
 
 /* Switch label */
 .switch__label {
-  @apply text-foreground text-base font-medium;
+  @apply text-base font-medium text-foreground;
 }

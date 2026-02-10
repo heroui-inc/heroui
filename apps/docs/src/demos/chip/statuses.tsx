@@ -1,44 +1,44 @@
+import {Ban, Check, CircleFill, CircleInfo, TriangleExclamation} from "@gravity-ui/icons";
 import {Chip} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function ChipStatuses() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-3">
         <Chip variant="primary">
-          <Icon icon="gravity-ui:circle-fill" width={6} />
-          Default
+          <CircleFill width={6} />
+          <Chip.Label>Default</Chip.Label>
         </Chip>
         <Chip color="success" variant="primary">
-          <Icon icon="gravity-ui:circle-fill" width={6} />
-          Active
+          <CircleFill width={6} />
+          <Chip.Label>Active</Chip.Label>
         </Chip>
         <Chip color="warning" variant="primary">
-          <Icon icon="gravity-ui:circle-fill" width={6} />
-          Pending
+          <CircleFill width={6} />
+          <Chip.Label>Pending</Chip.Label>
         </Chip>
         <Chip color="danger" variant="primary">
-          <Icon icon="gravity-ui:circle-fill" width={6} />
-          Inactive
+          <CircleFill width={6} />
+          <Chip.Label>Inactive</Chip.Label>
         </Chip>
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
         <Chip>
-          <Icon icon="gravity-ui:circle-info" width={12} />
-          New Feature
+          <CircleInfo width={12} />
+          <Chip.Label>New Feature</Chip.Label>
         </Chip>
         <Chip color="success">
-          <Icon icon="gravity-ui:check" width={12} />
-          Available
+          <Check width={12} />
+          <Chip.Label>Available</Chip.Label>
         </Chip>
         <Chip color="warning">
-          <Icon icon="gravity-ui:triangle-exclamation" width={12} />
-          Beta
+          <TriangleExclamation width={12} />
+          <Chip.Label>Beta</Chip.Label>
         </Chip>
         <Chip color="danger">
-          <Icon icon="gravity-ui:ban" width={12} />
-          Deprecated
+          <Ban width={12} />
+          <Chip.Label>Deprecated</Chip.Label>
         </Chip>
       </div>
     </div>

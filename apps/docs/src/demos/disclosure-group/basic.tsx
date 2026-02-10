@@ -1,9 +1,10 @@
 "use client";
 
+import {QrCode} from "@gravity-ui/icons";
 import {Button, Disclosure, DisclosureGroup, Separator} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import React from "react";
-import {cnBase} from "tailwind-variants";
+import {cn} from "tailwind-variants";
 
 export function Basic() {
   const [expandedKeys, setExpandedKeys] = React.useState(new Set<string | number>(["preview"]));
@@ -17,12 +18,12 @@ export function Basic() {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("preview") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("preview"),
                 })}
               >
                 <div className="flex w-full items-center justify-start gap-2">
-                  <Icon icon="gravity-ui:qr-code" />
+                  <QrCode />
                   Preview HeroUI Native
                 </div>
                 <Disclosure.Indicator className="text-muted" />
@@ -30,15 +31,15 @@ export function Basic() {
             </Disclosure.Heading>
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
-                <p className="text-muted text-sm">
+                <p className="text-sm text-muted">
                   Scan this QR code with your camera app to preview the HeroUI native components.
                 </p>
                 <img
                   alt="Expo Go QR Code"
-                  className="max-w-54 aspect-square w-full object-cover"
+                  className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-muted text-sm">Expo must be installed on your device.</p>
+                <p className="text-sm text-muted">Expo must be installed on your device.</p>
                 <Button className="mt-4" variant="primary">
                   <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
                   Preview on Expo Go
@@ -52,7 +53,7 @@ export function Basic() {
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
-                className={cnBase("w-full border-none", {
+                className={cn("w-full border-none", {
                   "bg-transparent": !expandedKeys.has("download"),
                 })}
               >
@@ -65,16 +66,16 @@ export function Basic() {
             </Disclosure.Heading>
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
-                <p className="text-muted text-sm">
+                <p className="text-sm text-muted">
                   Download the HeroUI native app to explore our mobile components directly on your
                   device.
                 </p>
                 <img
                   alt="App Store QR Code"
-                  className="max-w-54 aspect-square w-full object-cover"
+                  className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-muted text-sm">Available on iOS and Android devices.</p>
+                <p className="text-sm text-muted">Available on iOS and Android devices.</p>
                 <Button className="mt-4" variant="primary">
                   <Icon icon="tabler:brand-apple-filled" />
                   Download on App Store

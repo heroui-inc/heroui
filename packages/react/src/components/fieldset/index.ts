@@ -36,6 +36,6 @@ export type {
 /* -------------------------------------------------------------------------------------------------
  * Variants
  * -----------------------------------------------------------------------------------------------*/
-export {fieldsetVariants} from "./fieldset.styles";
+export {fieldsetVariants} from "@heroui/styles";
 
-export type {FieldsetVariants} from "./fieldset.styles";
+export type {FieldsetVariants} from "@heroui/styles";

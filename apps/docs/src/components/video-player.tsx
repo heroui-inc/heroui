@@ -19,6 +19,7 @@ interface VideoPlayerProps {
   height?: number;
   controls?: boolean;
   className?: string;
+  onPlayingChange?: (isPlaying: boolean) => void;
 }
 
 export const VideoPlayer: FC<VideoPlayerProps> = ({
@@ -26,6 +27,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
   className,
   controls = false,
   height,
+  onPlayingChange,
   playMode = "auto",
   poster,
   src,
@@ -42,14 +44,21 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
   });
 
   // Merge refs: videoRef for video operations and intersectionRef for intersection observer
+  // Use ref callback to avoid mutating hook return value
   const setVideoRef = useCallback(
     (element: HTMLVideoElement | null) => {
       videoRef.current = element;
       if (element) {
+        // Call intersectionRef if it's a function (ref callback)
         if (typeof intersectionRef === "function") {
           intersectionRef(element);
-        } else if (intersectionRef && "current" in intersectionRef) {
-          (intersectionRef as React.MutableRefObject<HTMLVideoElement | null>).current = element;
+        }
+        // Note: If intersectionRef is a ref object, we can't mutate it as it's a hook return value
+        // The intersection observer hook should handle ref assignment internally
+      } else {
+        // Cleanup: call with null when element is removed
+        if (typeof intersectionRef === "function") {
+          intersectionRef(null);
         }
       }
     },
@@ -67,10 +76,8 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
     if (isVisible) {
       videoRef.current.play();
-      setIsPlaying(true);
     } else {
       videoRef.current.pause();
-      setIsPlaying(false);
     }
   }, [isVisible, effectivePlayMode]);
 
@@ -78,16 +85,26 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     setIsLoading(false);
   }, []);
 
+  const handlePlay = useCallback(() => {
+    setIsPlaying(true);
+    onPlayingChange?.(true);
+  }, [onPlayingChange]);
+
+  const handlePause = useCallback(() => {
+    setIsPlaying(false);
+    onPlayingChange?.(false);
+  }, [onPlayingChange]);
+
   useEffect(() => {
     const videoEl = videoRef.current;
 
     if (videoEl) {
+      // Check if video is already ready, but update state via event handler to avoid setState in effect
       if (videoEl.readyState > 3) {
-        // HAVE_FUTURE_DATA: enough data to start playing
-        handleCanPlay();
-      } else {
-        videoEl.addEventListener("canplaythrough", handleCanPlay);
+        // Trigger the event handler asynchronously to avoid setState in effect
+        videoEl.dispatchEvent(new Event("canplaythrough"));
       }
+      videoEl.addEventListener("canplaythrough", handleCanPlay);
 
       // Cleanup the event listener
       return () => {
@@ -108,23 +125,33 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     }
   }, [isPlaying]);
 
+  const handleVideoClick = useCallback(() => {
+    if (videoRef.current) {
+      if (!isPlaying) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
   return (
     <div
-      className="not-prose border-separator relative overflow-hidden rounded-xl border"
+      className="not-prose relative overflow-hidden rounded-xl border border-separator"
       data-playing={isPlaying}
     >
-      {isLoading ? (
+      {isLoading && !isPlaying ? (
         <Spinner
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 z-2 -translate-x-1/2 -translate-y-1/2"
           color="accent"
-          size="lg"
+          size="md"
         />
       ) : !isPlaying ? (
         <Tooltip delay={1000}>
           <Tooltip.Trigger>
             <Button
               isIconOnly
-              className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
+              className="absolute top-1/2 left-1/2 z-3 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
               size="sm"
               variant="tertiary"
               onPress={onTogglePlay}
@@ -139,6 +166,9 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
           <Tooltip.Content>{isPlaying ? "Pause" : "Play"}</Tooltip.Content>
         </Tooltip>
       ) : null}
+      {/* Absolute overlay for clicking anywhere on the video to play/pause */}
+      {/* z-0 ensures it's below buttons (preview button is z-1, play button is z-50) */}
+      <div className="absolute inset-0 z-3 cursor-pointer" onClick={handleVideoClick} />
 
       <video
         ref={setVideoRef}
@@ -153,6 +183,8 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         src={src}
         width={width}
         onCanPlay={handleCanPlay}
+        onPause={handlePause}
+        onPlay={handlePlay}
       />
     </div>
   );

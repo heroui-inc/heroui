@@ -42,7 +42,7 @@ export function ShowcaseItem({
       >
         {/* Status chip */}
         {!!status && !isMinimal && (
-          <div className="absolute right-2 top-1.5 z-10">
+          <div className="absolute top-1.5 right-2 z-10">
             <span
               className={cn(
                 chipVariants({
@@ -60,7 +60,7 @@ export function ShowcaseItem({
         )}
         <div
           className={cn(
-            "shadow-panel group-hover:drop-shadow-black/15 ease-out-quad h-full w-full overflow-hidden rounded-xl border border-transparent object-cover transition-all duration-[250ms] will-change-transform group-hover:scale-[1.02] group-hover:drop-shadow-xl",
+            "shadow-panel h-full w-full overflow-hidden rounded-xl border border-transparent object-cover transition-all duration-[250ms] ease-out-quad will-change-transform group-hover:scale-[1.02] group-hover:drop-shadow-xl group-hover:drop-shadow-black/15",
             {
               "aspect-video h-full w-full rounded-lg": isMinimal,
               "border-foreground/60": isSelected,
@@ -82,7 +82,7 @@ export function ShowcaseItem({
         </div>
         {!isMinimal && (
           <div className="mt-3 flex w-full items-start justify-between px-1">
-            <span className="text-foreground/50 group-hover:text-foreground/80 ease-out-quad text-sm transition-[color] duration-[250ms]">
+            <span className="text-sm text-foreground/50 transition-[color] duration-[250ms] ease-out-quad group-hover:text-foreground/80">
               {title}
             </span>
           </div>

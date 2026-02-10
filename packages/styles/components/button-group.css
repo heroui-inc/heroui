@@ -1,0 +1,78 @@
+/* ButtonGroup component styles */
+
+/* Base button group styles */
+.button-group {
+  @apply inline-flex h-auto items-center justify-center gap-0;
+}
+
+/* Remove border radius from all buttons in group */
+.button-group .button {
+  @apply rounded-none;
+}
+
+/* Apply border radius to first button (left/start edge) */
+.button-group .button:first-child {
+  @apply rounded-s-3xl;
+}
+
+/* Apply border radius to last button (right/end edge) */
+.button-group .button:last-child {
+  @apply rounded-e-3xl;
+}
+
+/* If only one button, apply both rounded edges */
+.button-group .button:first-child:last-child {
+  @apply rounded-3xl;
+}
+
+/* Remove scale transform on active/pressed state for buttons in group */
+.button-group .button:active,
+.button-group .button[data-pressed="true"] {
+  transform: none;
+}
+
+/* Separator between buttons */
+.button-group .button:not(:first-child):before {
+  @apply bg-current opacity-15;
+
+  content: "";
+  border-radius: 4px;
+  position: absolute;
+  left: -1px;
+  top: 25%;
+  width: 1px;
+  height: 50%;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition: opacity 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+}
+
+/* Hide separator when hideSeparator prop is set */
+.button-group[data-hide-separator="true"] .button:not(:first-child):before {
+  display: none;
+}
+
+/* Remove adjacent borders from outline buttons in group since we have separators */
+/* First button: remove end border (right in LTR, left in RTL) */
+.button-group .button--outline:first-child {
+  @apply border-e-0;
+}
+
+/* Last button: remove start border (left in LTR, right in RTL) */
+.button-group .button--outline:last-child {
+  @apply border-s-0;
+}
+
+/* Middle buttons: remove both inline borders */
+.button-group .button--outline:not(:first-child):not(:last-child) {
+  @apply border-x-0;
+}
+
+/* Full width modifier */
+.button-group--full-width {
+  @apply w-full;
+}

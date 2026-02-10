@@ -1,13 +1,13 @@
 "use client";
 
-import type {RadioProps as RadioPrimitiveProps, RadioRenderProps} from "react-aria-components";
+import type {ComponentPropsWithRef} from "react";
+import type {RadioRenderProps} from "react-aria-components";
 
+import {radioVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {Radio as RadioPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils/compose";
-
-import {radioVariants} from "./radio.styles";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Context
@@ -22,7 +22,7 @@ const RadioContext = createContext<RadioContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Radio Root
  * -----------------------------------------------------------------------------------------------*/
-interface RadioRootProps extends RadioPrimitiveProps {
+interface RadioRootProps extends ComponentPropsWithRef<typeof RadioPrimitive> {
   /** The name of the radio button, used when submitting an HTML form. */
   name?: string;
 }
@@ -48,13 +48,17 @@ const RadioRoot = ({children, className, ...props}: RadioRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Radio Control
  * -----------------------------------------------------------------------------------------------*/
-interface RadioControlProps extends React.HTMLAttributes<HTMLSpanElement> {}
+interface RadioControlProps extends ComponentPropsWithRef<"span"> {}
 
 const RadioControl = ({children, className, ...props}: RadioControlProps) => {
   const {slots} = useContext(RadioContext);
 
   return (
-    <span className={slots?.control({className})} data-slot="radio-control" {...props}>
+    <span
+      className={composeSlotClassName(slots?.control, className)}
+      data-slot="radio-control"
+      {...props}
+    >
       {children}
     </span>
   );
@@ -63,7 +67,7 @@ const RadioControl = ({children, className, ...props}: RadioControlProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Radio Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface RadioIndicatorProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
+interface RadioIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
   children?: React.ReactNode | ((props: RadioRenderProps) => React.ReactNode);
 }
 
@@ -75,7 +79,7 @@ const RadioIndicator = ({children, className, ...props}: RadioIndicatorProps) =>
   return (
     <span
       aria-hidden="true"
-      className={slots?.indicator({className})}
+      className={composeSlotClassName(slots?.indicator, className)}
       data-slot="radio-indicator"
       {...props}
     >
@@ -87,13 +91,17 @@ const RadioIndicator = ({children, className, ...props}: RadioIndicatorProps) =>
 /* -------------------------------------------------------------------------------------------------
  * Radio Content
  * -----------------------------------------------------------------------------------------------*/
-interface RadioContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface RadioContentProps extends ComponentPropsWithRef<"div"> {}
 
 const RadioContent = ({children, className, ...props}: RadioContentProps) => {
   const {slots} = useContext(RadioContext);
 
   return (
-    <div className={slots?.content({className})} data-slot="radio-content" {...props}>
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="radio-content"
+      {...props}
+    >
       {children}
     </div>
   );

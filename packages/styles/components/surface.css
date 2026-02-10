@@ -2,22 +2,22 @@
 
 /* Block */
 .surface {
-  @apply relative;
+  @apply relative text-foreground;
 }
 
 /* Modifier - variant */
+.surface--transparent {
+  @apply bg-transparent;
+}
+
 .surface--default {
-  @apply bg-surface;
+  @apply bg-surface text-surface-foreground;
 }
 
 .surface--secondary {
-  @apply bg-surface-secondary;
+  @apply bg-surface-secondary text-surface-secondary-foreground;
 }
 
 .surface--tertiary {
-  @apply bg-surface-tertiary;
-}
-
-.surface--quaternary {
-  @apply bg-surface-quaternary;
+  @apply bg-surface-tertiary text-surface-tertiary-foreground;
 }

@@ -1,10 +1,10 @@
 import type {ComponentLinksType} from "@/utils/extract-links";
 
 import {
-  AdobeIcon,
   FigmaIcon,
   GithubIcon,
   RadixUIIcon,
+  ReactAriaIcon,
   StorybookIcon,
   TailwindIcon,
 } from "@/icons/dev";
@@ -63,7 +63,7 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
       {componentLinks.rac ? (
         <ButtonLink
           href={componentLinks.rac}
-          startContent={<AdobeIcon className="text-lg text-[#E1251B]" />}
+          startContent={<ReactAriaIcon className="text-lg text-[#6733FF]" />}
         >
           React Aria
         </ButtonLink>
@@ -78,8 +78,18 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
           Source
         </ButtonLink>
       ) : null}
+      {componentLinks.source_native ? (
+        <ButtonLink href={componentLinks.source_native} startContent={<GithubIcon size={20} />}>
+          Source
+        </ButtonLink>
+      ) : null}
       {componentLinks.styles ? (
         <ButtonLink href={componentLinks.styles} startContent={<GithubIcon size={20} />}>
+          Styles source
+        </ButtonLink>
+      ) : null}
+      {componentLinks.styles_native ? (
+        <ButtonLink href={componentLinks.styles_native} startContent={<GithubIcon size={20} />}>
           Styles source
         </ButtonLink>
       ) : null}

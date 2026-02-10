@@ -1,13 +1,13 @@
 "use client";
 
+import {Bars, Pencil, SquarePlus, TrashBin} from "@gravity-ui/icons";
 import {Button, Description, Dropdown, Header, Kbd, Label, Separator} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function WithDisabledItems() {
   return (
     <Dropdown>
       <Button isIconOnly aria-label="Menu" variant="secondary">
-        <Icon className="outline-none" icon="gravity-ui:bars" />
+        <Bars className="outline-none" />
       </Button>
       <Dropdown.Popover className="min-w-[220px]">
         <Dropdown.Menu
@@ -18,7 +18,7 @@ export function WithDisabledItems() {
             <Header>Actions</Header>
             <Dropdown.Item id="new-file" textValue="New file">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:square-plus" />
+                <SquarePlus className="size-4 shrink-0 text-muted" />
               </div>
               <div className="flex flex-col">
                 <Label>New file</Label>
@@ -31,7 +31,7 @@ export function WithDisabledItems() {
             </Dropdown.Item>
             <Dropdown.Item id="edit-file" textValue="Edit file">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-muted size-4 flex-shrink-0" icon="gravity-ui:pencil" />
+                <Pencil className="size-4 shrink-0 text-muted" />
               </div>
               <div className="flex flex-col">
                 <Label>Edit file</Label>
@@ -48,7 +48,7 @@ export function WithDisabledItems() {
             <Header>Danger zone</Header>
             <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
               <div className="flex h-8 items-start justify-center pt-px">
-                <Icon className="text-danger size-4 flex-shrink-0" icon="gravity-ui:trash-bin" />
+                <TrashBin className="size-4 shrink-0 text-danger" />
               </div>
               <div className="flex flex-col">
                 <Label>Delete file</Label>

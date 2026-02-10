@@ -216,11 +216,11 @@ const ComponentRoot = React.forwardRef<...>(({children, className, ...props}, re
   const slots = React.useMemo(() => componentVariants({...}), [...]);
 
   return (
-    <ComponentContext.Provider value={{slots}}>
+    <ComponentContext value={{slots}}>
       <ReactAriaComponent ref={ref} className={composeTwRenderProps(className, slots.base())}>
         {children}
       </ReactAriaComponent>
-    </ComponentContext.Provider>
+    </ComponentContext>
   );
 });
 
@@ -260,7 +260,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - Built on React Aria Components for accessibility
    - Use `forwardRef` for all components
    - Display names follow: `HeroUI.ComponentName` or `HeroUI.Component.SubPart`
-   - Support `asChild` prop pattern when applicable (using Radix UI's Slot)
    - Support render props from React Aria when available
 
 3. **Type Exports**:
@@ -277,7 +276,6 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
    - `focusRingClasses`: Consistent focus styling
    - `disabledClasses`: Disabled state styling
    - `mapPropsVariants`: Separate variant props from component props
-   - `objectToDeps`: Convert objects to dependency arrays for memoization
 
 5. **React Aria Components className Patterns**:
 
@@ -485,7 +483,6 @@ This workflow ensures thorough understanding, proper planning, and high-quality 
    - Create Context for sharing styles across component parts
    - Export ALL component parts for maximum customization
    - Define styles in separate `.styles.ts` file with slot system
-   - Support `asChild` prop where it makes sense (using Radix UI's Slot)
    - Add "use client" directive at the top of component file
    - Create comprehensive Storybook stories showing all variants and compositions
    - Follow the export pattern: `export * as ComponentName from "./component-name"`

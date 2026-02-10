@@ -1,43 +1,74 @@
 "use client";
 
-import type {ChipVariants} from "./chip.styles";
+import type {ChipVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import {chipVariants} from "@heroui/styles";
+import React, {createContext, useContext} from "react";
 
-import {chipVariants} from "./chip.styles";
+import {composeSlotClassName} from "../../utils/compose";
+
+/* -------------------------------------------------------------------------------------------------
+ * Chip Context
+ * -----------------------------------------------------------------------------------------------*/
+type ChipContext = {
+  slots?: ReturnType<typeof chipVariants>;
+};
+
+const ChipContext = createContext<ChipContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Chip Root
  * -----------------------------------------------------------------------------------------------*/
-interface ChipRootProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "type" | "color">,
-    ChipVariants {
+interface ChipRootProps extends Omit<ComponentPropsWithRef<"div">, "type" | "color">, ChipVariants {
   className?: string;
   children: React.ReactNode;
-  asChild?: boolean;
 }
 
-const ChipRoot = ({
-  asChild = false,
-  children,
-  className,
-  color,
-  size,
-  variant,
-  ...props
-}: ChipRootProps) => {
-  const Comp = asChild ? SlotPrimitive : "span";
+const ChipRoot = ({children, className, color, size, variant, ...props}: ChipRootProps) => {
+  const slots = React.useMemo(() => chipVariants({color, size, variant}), [color, size, variant]);
+
+  const chipChildren = React.useMemo(() => {
+    if (typeof children === "string" || typeof children === "number") {
+      return <ChipLabel>{children}</ChipLabel>;
+    }
+
+    return children;
+  }, [children]);
 
   return (
-    <Comp {...props} className={chipVariants({className, size, color, variant})}>
+    <ChipContext value={{slots}}>
+      <span {...props} className={composeSlotClassName(slots.base, className)} data-slot="chip">
+        {chipChildren}
+      </span>
+    </ChipContext>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Chip Label
+ * -----------------------------------------------------------------------------------------------*/
+interface ChipLabelProps extends ComponentPropsWithRef<"span"> {
+  className?: string;
+}
+
+const ChipLabel = ({children, className, ...props}: ChipLabelProps) => {
+  const {slots} = useContext(ChipContext);
+
+  return (
+    <span
+      className={composeSlotClassName(slots?.label, className)}
+      data-slot="chip-label"
+      {...props}
+    >
       {children}
-    </Comp>
+    </span>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ChipRoot};
+export {ChipRoot, ChipLabel};
 
-export type {ChipRootProps};
+export type {ChipRootProps, ChipLabelProps};

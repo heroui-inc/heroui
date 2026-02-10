@@ -22,18 +22,18 @@
   }
 
   .slider__track {
-    @apply bg-default relative rounded-full;
+    @apply relative rounded-full bg-default;
 
     grid-area: track;
   }
 
   .slider__fill {
-    @apply bg-accent pointer-events-none absolute;
+    @apply pointer-events-none absolute bg-accent;
   }
 
   .slider__thumb {
     /* Flex container for centering pseudo-elements */
-    @apply bg-accent absolute relative flex cursor-grab items-center justify-center rounded-full;
+    @apply absolute flex cursor-grab items-center justify-center rounded-full bg-accent no-highlight;
 
     /**
    * Transitions
@@ -47,7 +47,7 @@
 
     /* after: Visible thumb element */
     &::after {
-      @apply shadow-field relative z-10 rounded-full bg-white text-black;
+      @apply relative z-10 rounded-full bg-accent-foreground text-black shadow-field;
       content: "";
 
       /**
@@ -57,7 +57,7 @@
     }
 
     /* Dragging state - cursor changes and thumb scales down */
-    &[data-dragging] {
+    &[data-dragging="true"] {
       @apply cursor-grabbing;
 
       &::after {
@@ -66,20 +66,20 @@
     }
 
     /* Focus state - increase z-index */
-    &[data-focus-visible] {
-      @apply status-focused z-10;
+    &[data-focus-visible="true"] {
+      @apply z-10 status-focused;
     }
 
     /* Disabled state */
-    &[data-disabled] {
+    &[data-disabled="true"] {
       @apply cursor-default;
     }
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
     @apply status-disabled;
 
     [data-slot="label"] {
@@ -97,11 +97,11 @@
       /* Thumb width is 1.5rem (24px), so half is 0.75rem (12px) */
       @apply border-x-[0.75rem] border-x-transparent;
 
-      &[data-fill-start] {
+      &[data-fill-start="true"] {
         @apply border-s-accent;
       }
 
-      &[data-fill-end] {
+      &[data-fill-end="true"] {
         @apply border-e-accent;
       }
     }
@@ -151,11 +151,11 @@
       @apply border-y-[0.75rem] border-y-transparent;
       justify-self: center;
 
-      &[data-fill-start] {
+      &[data-fill-start="true"] {
         @apply border-b-accent;
       }
 
-      &[data-fill-end] {
+      &[data-fill-end="true"] {
         @apply border-t-accent;
       }
     }

@@ -1,0 +1,214 @@
+---
+title: Link
+description: A styled anchor component for navigation with built-in icon support
+icon: updated
+links:
+  rac: Link
+  source: link/link.tsx
+  styles: link.css
+  storybook: Components/Navigation/Link
+  figma: true
+---
+
+## Import
+
+```tsx
+import { Link } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="link-basic"
+/>
+
+### Anatomy
+
+Import the Link component and access all parts using dot notation.
+
+```tsx
+import { Link } from '@heroui/react';
+
+export default () => (
+  <Link href="#">
+    Call to action
+    <Link.Icon />
+  </Link>
+);
+```
+
+### Custom Icon
+
+<ComponentPreview
+  name="link-custom-icon"
+/>
+
+### Icon Placement
+
+<ComponentPreview
+  name="link-icon-placement"
+/>
+
+### Text Decoration with Tailwind CSS
+
+<ComponentPreview
+  name="link-underline-and-offset"
+/>
+
+**Text Decoration Line:**
+- `underline` - Always visible underline
+- `no-underline` - Remove underline
+- `hover:underline` - Underline appears on hover
+
+**Text Decoration Color:**
+- `decoration-primary`, `decoration-secondary`, etc. - Set underline color using theme colors
+- `decoration-muted/50` - Use opacity modifiers for semi-transparent underlines
+
+**Text Decoration Style:**
+- `decoration-solid` - Solid line (default)
+- `decoration-double` - Double line
+- `decoration-dotted` - Dotted line
+- `decoration-dashed` - Dashed line
+- `decoration-wavy` - Wavy line
+
+**Text Decoration Thickness:**
+- `decoration-1`, `decoration-2`, `decoration-4`, etc. - Control underline thickness
+
+**Underline Offset:**
+- `underline-offset-1`, `underline-offset-2`, `underline-offset-4`, etc. - Adjust spacing between text and underline
+
+For more details, see the Tailwind CSS documentation:
+- [text-decoration-line](https://tailwindcss.com/docs/text-decoration-line)
+- [text-decoration-color](https://tailwindcss.com/docs/text-decoration-color)
+- [text-decoration-style](https://tailwindcss.com/docs/text-decoration-style)
+- [text-decoration-thickness](https://tailwindcss.com/docs/text-decoration-thickness)
+- [text-underline-offset](https://tailwindcss.com/docs/text-underline-offset)
+
+
+Available BEM classes:
+- Base: `link`
+- Icon: `link__icon`
+
+<RelatedComponents component="link" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Link } from '@heroui/react';
+
+function CustomLink() {
+  return (
+    <Link
+      href="#"
+      className="text-lg font-bold text-accent hover:text-accent/80"
+    >
+      Custom styled link
+    </Link>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Link component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .link {
+    @apply font-semibold no-underline hover:underline;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Link component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/link.css)):
+
+#### Base Classes
+- `.link` - Base link styles
+- `.link__icon` - Link icon styles
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Disabled**: `:disabled` or `[aria-disabled="true"]`
+
+## API Reference
+
+### Link Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | - | Destination URL for the anchor |
+| `target` | `string` | `"_self"` | Controls where to open the linked document |
+| `rel` | `string` | - | Relationship between the current and linked documents |
+| `download` | `boolean \| string` | - | Prompts file download instead of navigation |
+| `isDisabled` | `boolean` | `false` | Disables pointer and keyboard interaction |
+| `className` | `string` | - | Custom classes merged with the default styles |
+| `children` | `React.ReactNode` | - | Content rendered inside the link |
+| `onPress` | `(e: PressEvent) => void` | - | Fired when the link is activated |
+| `autoFocus` | `boolean` | - | Whether the element should receive focus on render |
+
+### Link.Icon Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Custom icon element; defaults to the built-in arrow icon when omitted |
+| `className` | `string` | - | Additional CSS classes |
+
+
+
+### Using with Routing Libraries
+
+Use variant functions to style framework-specific links like Next.js:
+
+```tsx
+import { Link } from '@heroui/react';
+import { linkVariants } from '@heroui/styles';
+import NextLink from 'next/link';
+
+export default function Demo() {
+  const slots = linkVariants();
+
+  return (
+    <NextLink className={slots.base()} href="/about">
+      About Page
+      <Link.Icon className={slots.icon()} />
+    </NextLink>
+  );
+}
+```
+
+### Direct Class Application
+
+Since HeroUI uses [BEM](https://getbem.com/) classes, you can apply Link styles directly to any link element:
+
+```tsx
+import NextLink from 'next/link';
+
+// Apply classes directly with Tailwind utilities
+export default function Demo() {
+  return (
+    <NextLink href="/about" className="link hover:underline underline-offset-2">
+      About Page
+    </NextLink>
+  );
+}
+
+// Or with a native anchor
+export default function NativeLink() {
+  return (
+    <a href="/about" className="link underline decoration-primary underline-offset-4">
+      About Page
+      <Link.Icon className="link__icon" />
+    </a>
+  );
+}
+```

@@ -11,6 +11,7 @@ import {tv} from "tailwind-variants";
 import {ShowcaseItem} from "@/components/showcase-item";
 import {ShowcasePreview} from "@/components/showcase-preview";
 import {getAllShowcases} from "@/showcases";
+import {cn} from "@/utils/cn";
 
 import {ShowcaseHeader} from "./showcase-header";
 
@@ -54,7 +55,7 @@ function ShowcasesList({showcaseId}: {showcaseId: string}) {
 
 export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: ShowcaseDetailClientProps) {
   return (
-    <section className="bg-background text-foreground relative flex min-h-screen w-screen flex-col overflow-hidden">
+    <section className="relative flex min-h-screen w-screen flex-col overflow-hidden bg-background text-foreground">
       <div aria-hidden="true" className={dotBackground()} />
 
       {/* Header */}
@@ -82,15 +83,15 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
         </div>
 
         {/* Footer */}
-        <footer className="border-border/50 bg-background/50 z-[1] border-t backdrop-blur-sm">
+        <footer className="z-[1] bg-background/50 backdrop-blur-sm">
           <div className="jutify-center mx-auto flex max-w-7xl flex-col flex-wrap items-center px-6 py-4 md:flex-row md:flex-nowrap md:justify-between">
             {/* Left section - Author info */}
             <div className="order-2 flex-1 md:order-1">
-              <p className="text-muted/70 text-center text-sm md:text-left">
+              <p className="text-center text-sm text-muted/70 md:text-left">
                 By{" "}
                 {showcase.author?.link ? (
                   <a
-                    className="hover:text-muted transition-colors"
+                    className="transition-colors hover:text-muted"
                     href={showcase.author?.link}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -111,10 +112,12 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
                 <LinkRoot
                   key={component}
                   href={`/docs/components/${component.toLowerCase().replace(/group$/, "-group")}`}
-                  className={chipVariants({
-                    class: "text-muted hover:bg-default/50 rounded-full",
-                    variant: "tertiary",
-                  })}
+                  className={cn(
+                    chipVariants({
+                      class: "rounded-full text-muted hover:bg-default/50",
+                      variant: "tertiary",
+                    }),
+                  )}
                 >
                   {component}
                 </LinkRoot>
@@ -122,7 +125,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
             </div>
 
             <div className="order-3 flex-1 text-center md:text-right">
-              <p className="text-muted/70 text-sm">{showcase.title}</p>
+              <p className="text-sm text-muted/70">{showcase.title}</p>
             </div>
           </div>
         </footer>

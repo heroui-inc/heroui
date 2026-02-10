@@ -1,25 +1,22 @@
 "use client";
 
-import type {CloseButtonVariants} from "./close-button.styles";
-import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components";
+import type {CloseButtonVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
-import {Slot as SlotPrimitive} from "@radix-ui/react-slot";
+import {closeButtonVariants} from "@heroui/styles";
+import {useMemo} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {CloseIcon} from "../icons";
 
-import {closeButtonVariants} from "./close-button.styles";
-
 /* -------------------------------------------------------------------------------------------------
  * Close Button Root
  * -----------------------------------------------------------------------------------------------*/
-interface CloseButtonRootProps extends ButtonPrimitiveProps, CloseButtonVariants {
-  asChild?: boolean;
-}
+interface CloseButtonRootProps
+  extends ComponentPropsWithRef<typeof ButtonPrimitive>, CloseButtonVariants {}
 
 const CloseButtonRoot = ({
-  asChild,
   children,
   className,
   slot,
@@ -27,24 +24,7 @@ const CloseButtonRoot = ({
   variant,
   ...rest
 }: CloseButtonRootProps) => {
-  const styles = closeButtonVariants({
-    variant,
-    class: typeof className === "string" ? className : undefined,
-  });
-
-  if (asChild) {
-    return (
-      <SlotPrimitive
-        className={styles}
-        data-slot="close-button"
-        slot={slot as string}
-        style={style as React.CSSProperties}
-        {...rest}
-      >
-        {typeof children === "function" ? children({} as any) : children}
-      </SlotPrimitive>
-    );
-  }
+  const styles = useMemo(() => closeButtonVariants({variant}), [variant]);
 
   return (
     <ButtonPrimitive
@@ -56,7 +36,9 @@ const CloseButtonRoot = ({
       {...rest}
     >
       {(renderProps) =>
-        typeof children === "function" ? children(renderProps) : (children ?? <CloseIcon />)
+        typeof children === "function"
+          ? children(renderProps)
+          : (children ?? <CloseIcon data-slot="close-button-icon" />)
       }
     </ButtonPrimitive>
   );

@@ -6,7 +6,7 @@ export function WithAvatar() {
       <Card className="w-[200px] gap-2">
         <img
           alt="Indie Hackers community"
-          className="pointer-events-none aspect-square w-14 select-none rounded-2xl object-cover"
+          className="pointer-events-none aspect-square w-14 rounded-2xl object-cover select-none"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo1.jpg"
         />
@@ -29,7 +29,7 @@ export function WithAvatar() {
       <Card className="w-[200px] gap-2">
         <img
           alt="AI Builders community"
-          className="pointer-events-none aspect-square w-14 select-none rounded-2xl object-cover"
+          className="pointer-events-none aspect-square w-14 rounded-2xl object-cover select-none"
           loading="lazy"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo2.jpg"
         />

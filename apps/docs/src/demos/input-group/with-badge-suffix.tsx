@@ -4,7 +4,7 @@ import {Chip, InputGroup, TextField} from "@heroui/react";
 
 export function WithBadgeSuffix() {
   return (
-    <TextField className="w-full max-w-[280px]" name="email">
+    <TextField aria-label="Email address" className="w-full max-w-[280px]" name="email">
       <InputGroup>
         <InputGroup.Input className="w-full max-w-[280px]" placeholder="Email address" />
         <InputGroup.Suffix className="pr-2">

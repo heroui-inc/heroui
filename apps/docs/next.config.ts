@@ -2,6 +2,8 @@ import type {NextConfig} from "next";
 
 import {createMDX} from "fumadocs-mdx/next";
 
+import {getRedirects} from "./next-redirects";
+
 // TODO: remove it for next typegen
 // validate environment variables
 // import "./env";
@@ -10,12 +12,8 @@ const withMDX = createMDX();
 
 const config: NextConfig = {
   compress: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   experimental: {
     optimizePackageImports: ["@heroui/react"],
-    reactCompiler: true,
   },
   async headers() {
     return [
@@ -31,6 +29,7 @@ const config: NextConfig = {
     ];
   },
   images: {
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         hostname: "heroui-assets.nyc3.cdn.digitaloceanspaces.com",
@@ -42,6 +41,11 @@ const config: NextConfig = {
         pathname: "/**",
         protocol: "https",
       },
+      {
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/**",
+        protocol: "https",
+      },
     ],
   },
   logging: {
@@ -49,30 +53,10 @@ const config: NextConfig = {
       fullUrl: true,
     },
   },
+  reactCompiler: true,
   reactStrictMode: true,
   async redirects() {
-    return [
-      {
-        destination: "/docs/introduction",
-        permanent: true,
-        source: "/docs",
-      },
-      {
-        destination: "/docs/components-list",
-        permanent: true,
-        source: "/docs/components",
-      },
-      {
-        destination: "/docs/components-list",
-        permanent: true,
-        source: "/components",
-      },
-      {
-        destination: "/docs/handbook/styling",
-        permanent: true,
-        source: "/handbook",
-      },
-    ];
+    return getRedirects();
   },
   async rewrites() {
     return [

@@ -1,0 +1,373 @@
+---
+title: v3.0.0-beta.6
+description: 6 new color components (ColorPicker, ColorArea, ColorSlider, ColorField, ColorSwatch, ColorSwatchPicker), toast improvements, and various style fixes.
+github:
+  pull: 6129
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">February 6, 2026</span>
+</div>
+
+This release introduces a comprehensive **Color System** with six new components for color selection and manipulation: [ColorPicker](/docs/components/color-picker), [ColorArea](/docs/components/color-area), [ColorSlider](/docs/components/color-slider), [ColorField](/docs/components/color-field), [ColorSwatch](/docs/components/color-swatch), and [ColorSwatchPicker](/docs/components/color-swatch-picker). Also includes [Separator](/docs/components/separator) variants and various style improvements.
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-dark@2x.jpg"
+  alt="HeroUI v3 Beta 6"
+  href="/docs/changelog/v3-0-0-beta-6"
+/>
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### Color System
+
+We're excited to introduce a comprehensive **Color System** - a complete suite of components for color selection, manipulation, and display. These components are built on React Aria's color primitives and work together seamlessly.
+
+**Key features:**
+- **Full Color Space Support**: Work with HSL, HSB, and RGB color spaces
+- **Channel-based Editing**: Manipulate individual color channels (hue, saturation, lightness, brightness, red, green, blue, alpha)
+- **Accessible by Default**: Full keyboard navigation and screen reader support
+- **Composable Design**: Mix and match components to build custom color pickers
+
+### New Components
+
+This release introduces **6 new** color components:
+
+- **[ColorPicker](#colorpicker)**: Complete color picker with trigger, popover, and composable internals. ([Documentation](/docs/components/color-picker))
+- **[ColorArea](#colorarea)**: 2D gradient area for selecting two color channels simultaneously. ([Documentation](/docs/components/color-area))
+- **[ColorSlider](#colorslider)**: Single-channel slider for precise color adjustments. ([Documentation](/docs/components/color-slider))
+- **[ColorField](#colorfield)**: Text input for entering and editing color values. ([Documentation](/docs/components/color-field))
+- **[ColorSwatch](#colorswatch)**: Visual color preview with support for transparency. ([Documentation](/docs/components/color-swatch))
+- **[ColorSwatchPicker](#colorswatchpicker)**: Grid of selectable color swatches for quick color selection. ([Documentation](/docs/components/color-swatch-picker))
+
+### ColorPicker
+
+The ColorPicker is a compound component that combines all color components into a complete color selection experience.
+
+<ComponentPreview
+  name="color-picker-basic"
+/>
+
+### ColorArea
+
+A 2D gradient area for selecting two color channels at once, typically saturation and brightness.
+
+<ComponentPreview
+  name="color-area-basic"
+/>
+
+### ColorSlider
+
+A slider for adjusting individual color channels like hue, saturation, lightness, or alpha.
+
+<ComponentPreview
+  name="color-slider-basic"
+/>
+
+**With different channels:**
+
+<ComponentPreview
+  name="color-slider-channels"
+/>
+
+### ColorField
+
+A text input field for entering color values directly. Supports various color formats.
+
+<ComponentPreview
+  name="color-field-basic"
+/>
+
+### ColorSwatch
+
+A visual display of a color value with support for transparency patterns.
+
+<ComponentPreview
+  name="color-swatch-basic"
+/>
+
+### ColorSwatchPicker
+
+A grid of color swatches for quick color selection from a predefined palette.
+
+<ComponentPreview
+  name="color-swatch-picker-basic"
+/>
+
+## Component Improvements
+
+### Toast Enhancements
+
+The [Toast](/docs/components/toast) component has been significantly improved with new features and better stability (#6151):
+
+**New Features:**
+- **Loading State**: Added `isLoading` prop to show a spinner instead of the default indicator
+- **Default Timeout**: Toasts now auto-dismiss after 4 seconds by default (configurable via `timeout` prop)
+- **Width Control**: Added `width` prop to `Toast.Provider` for customizable toast width
+- **Adaptive Height**: Toasts now adapt their height based on content
+- **Better Stacking**: Fixed layout shifts when toasts stack using absolute positioning and height synchronization
+- **Improved Close Handling**: Deferred `onClose` callback to prevent toast transition deadlock
+- **Front-most Close Button**: Close button only appears on the front-most toast for cleaner UI
+- **Enhanced Promise Support**: Improved `toast.promise()` with better loading states and error handling
+
+**New Demos:**
+- Promise & Loading states
+- Callbacks and timeout handling
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+### Separator Variants
+
+Added variants to the [Separator](/docs/components/separator) component for different visual styles.
+
+### Chip Component - Label Slot
+
+The [Chip](/docs/components/chip) component now supports a `Chip.Label` subcomponent for better visual alignment. When removing start or end content (like icons), the label text was too close to the chip edges. Plain text children are automatically wrapped in `<Chip.Label>` for backward compatibility.
+
+**Usage:**
+
+```tsx
+import { Chip } from '@heroui/react';
+
+// Automatic wrapping (backward compatible)
+<Chip>Label text</Chip>
+
+// Explicit label with custom styling
+<Chip>
+  <Chip.Label className="font-bold">Custom Label</Chip.Label>
+</Chip>
+
+// Mixing icons and labels
+<Chip>
+  <Icon icon="gravity-ui:check" />
+  <Chip.Label>With Icon</Chip.Label>
+</Chip>
+```
+
+## Style Fixes
+
+- **Overlay Content**: Fixed blur effect on overlay content (#6136)
+- **Invalid Field**: Converted ring to outline for invalid field states (#6184)
+- **Link with Button**: Fixed styling for Link components using button variants (#6138)
+- **Toast Content**: Fixed vertical alignment of toast content (#6147)
+- **Safari SVG**: Fixed SVG shifting issue in Safari (#6149)
+- **Placeholder Color**: Aligned placeholder color with input text (#6139)
+- **Tooltip**: Removed cursor style from tooltip trigger component
+- **CSS Variables**: Made calculated variables depend only on root variables (#6154)
+
+## Bug Fixes
+
+- Fixed page interactivity during view transitions (#6128)
+- Fixed markdown URL formatting (#6162)
+- Fixed incorrect link to combo box page (#6164)
+- Fixed autocomplete styles import order in index.css
+- Fixed hyphenated format for CSS classes (#6191)
+
+## ⚠️ Breaking Changes
+
+### Toast Component - Container Renamed to Provider
+
+The `Toast.Container` component has been renamed to `Toast.Provider` for better semantic clarity (#6151).
+
+**Before:**
+```tsx
+<Toast.Container placement="bottom" />
+```
+
+**After:**
+```tsx
+<Toast.Provider placement="bottom" />
+```
+
+**Additional Changes:**
+- Default `gap` prop changed from `14` to `12` pixels
+- Default `timeout` is now `4000` (4 seconds) instead of requiring explicit timeout
+- `Toast.Action` has been renamed to `Toast.ActionButton` for consistency
+
+### CSS Class Naming Convention
+
+CSS classes have been renamed to use hyphenated format for consistency (#6141). This follows BEM conventions more closely and improves compatibility with Tailwind CSS.
+
+**Important Note**: The `textarea` class was initially renamed to `text-area` but was rolled back to `textarea` in PR #6191 due to conflicts with Tailwind's native `textarea` class. No changes are needed for TextArea component classes.
+
+#### Component Class Name Changes
+
+The following CSS class names have been updated. If you have custom CSS targeting these classes directly, update your selectors:
+
+| Component | Old Class Name | New Class Name | Notes |
+|-----------|---------------|----------------|-------|
+| **ComboBox** | `.combobox` | `.combo-box` | All related classes updated |
+| | `.combobox__input-group` | `.combo-box__input-group` | |
+| | `.combobox__trigger` | `.combo-box__trigger` | |
+| | `.combobox__popover` | `.combo-box__popover` | |
+| | `.combobox--full-width` | `.combo-box--full-width` | |
+| **ListBox** | `.listbox` | `.list-box` | All related classes updated |
+| **ListBoxItem** | `.listbox-item` | `.list-box-item` | All related classes updated |
+| | `.listbox-item__indicator` | `.list-box-item__indicator` | |
+| | `.listbox-item--default` | `.list-box-item--default` | |
+| | `.listbox-item--danger` | `.list-box-item--danger` | |
+| **ListBoxSection** | `.listbox-section` | `.list-box-section` | All related classes updated |
+| **TextArea** | `.textarea` | `.textarea` | **No change** - Rolled back to avoid Tailwind conflict |
+
+#### Migration Guide
+
+**Before:**
+```css
+/* Custom styles targeting old class names */
+.combobox {
+  /* styles */
+}
+
+.listbox-item {
+  /* styles */
+}
+```
+
+**After:**
+```css
+/* Update to new hyphenated class names */
+.combo-box {
+  /* styles */
+}
+
+.list-box-item {
+  /* styles */
+}
+```
+
+**JavaScript/TypeScript Updates:**
+
+If you're using these class names in JavaScript or TypeScript code:
+
+```tsx
+// Before
+<div className="combobox" />
+<ListBoxItem className="listbox-item" />
+
+// After
+<div className="combo-box" />
+<ListBoxItem className="list-box-item" />
+```
+
+**Note**: Component props and TypeScript types remain unchanged. Only CSS class names have been updated.
+
+### Removed CSS Variables
+
+Several CSS variables have been removed as part of the surface color refactoring (#6204). These variables were either replaced with direct variable references or removed entirely.
+
+#### Surface Color Variables
+
+The following calculated surface color variables have been removed and replaced with direct variable references:
+
+**Removed:**
+- `--color-surface-secondary` (was calculated via `color-mix`)
+- `--color-surface-tertiary` (was calculated via `color-mix`)
+
+**Replacement:**
+These variables now directly reference the base variables defined in `variables.css`:
+- `--color-surface-secondary` → Uses `var(--surface-secondary)` directly
+- `--color-surface-tertiary` → Uses `var(--surface-tertiary)` directly
+
+The base variables `--surface-secondary` and `--surface-tertiary` are now defined directly in `variables.css` instead of being calculated in `theme.css`.
+
+#### On Surface Color Variables
+
+All `--color-on-surface-*` variables have been removed entirely:
+
+**Removed:**
+- `--color-on-surface`
+- `--color-on-surface-foreground`
+- `--color-on-surface-hover`
+- `--color-on-surface-focus`
+- `--color-on-surface-secondary`
+- `--color-on-surface-secondary-foreground`
+- `--color-on-surface-secondary-hover`
+- `--color-on-surface-secondary-focus`
+- `--color-on-surface-tertiary`
+- `--color-on-surface-tertiary-foreground`
+- `--color-on-surface-tertiary-hover`
+- `--color-on-surface-tertiary-focus`
+
+**Migration:**
+
+If you were using these variables, update your code to use the appropriate surface variables directly:
+
+```css
+/* Before */
+.element {
+  background: var(--color-on-surface);
+  color: var(--color-on-surface-foreground);
+}
+
+.element:hover {
+  background: var(--color-on-surface-hover);
+}
+
+/* After */
+.element {
+  background: var(--surface-secondary);
+  color: var(--surface-secondary-foreground);
+}
+
+.element:hover {
+  background: color-mix(in oklab, var(--surface-secondary) 92%, var(--surface-secondary-foreground) 8%);
+}
+```
+
+Or use the Tailwind utilities:
+```tsx
+// Before
+<div className="bg-on-surface text-on-surface-foreground" />
+
+// After
+<div className="bg-surface-secondary text-surface-secondary-foreground" />
+```
+
+**Related PR:** [#6204](https://github.com/heroui-inc/heroui/pull/6204)
+
+## Links
+
+- [Component Documentation](/docs/react/components)
+- [Design System - Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6201](https://github.com/heroui-inc/heroui/pull/6201)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

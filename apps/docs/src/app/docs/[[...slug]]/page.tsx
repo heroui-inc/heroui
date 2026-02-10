@@ -1,21 +1,44 @@
 import type {StatusChipStatus} from "@/components/status-chip";
 import type {Metadata} from "next";
 
+import {readFile} from "node:fs/promises";
+import {join} from "node:path";
+
 import {createRelativeLink} from "fumadocs-ui/mdx";
-import {DocsBody, DocsDescription, DocsPage, DocsTitle} from "fumadocs-ui/page";
 import {notFound} from "next/navigation";
 
-import {LLMCopyButton, ViewOptions} from "@/components/ai/page-actions";
+import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
+import {
+  DocsBody,
+  DocsDescription,
+  DocsPage,
+  DocsTitle,
+} from "@/components/fumadocs/layouts/notebook/page";
 import {NewsletterForm} from "@/components/newsletter-form";
+import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
+import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
-import {DOCS_CONTENT_PATH} from "@/utils/constants";
-import {extractLinksFromMDX} from "@/utils/extract-links";
+import {
+  extractGithubFromMDX,
+  extractImageFromMDX,
+  extractLinksFromMDX,
+} from "@/utils/extract-links";
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
 const componentStatusIcons = ["preview", "new", "updated"];
+
+async function getRawMDXContent(pagePath: string): Promise<string> {
+  try {
+    const filePath = join(process.cwd(), "content/docs", pagePath);
+
+    return await readFile(filePath, "utf-8");
+  } catch {
+    return "";
+  }
+}
 
 export default async function Page(props: {params: Promise<{slug?: string[]}>}) {
   const params = await props.params;
@@ -33,8 +56,17 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   //   path: `apps/docs/content/docs/${page.path}`,
   // });
 
+  // Read raw MDX content for frontmatter extraction
+  const rawContent = await getRawMDXContent(page.path);
+
   // Extract links from MDX content
-  const links = extractLinksFromMDX(page.data.content);
+  const links = extractLinksFromMDX(rawContent);
+
+  // Extract GitHub info from MDX content
+  const githubInfo = extractGithubFromMDX(rawContent);
+
+  // Fetch PR contributors if github info is available
+  const contributors = githubInfo?.pull ? await fetchPRContributors(githubInfo.pull) : undefined;
 
   return (
     <DocsPage
@@ -47,30 +79,30 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
         style: "normal",
       }}
     >
-      <section className="border-border mb-4 flex flex-col gap-2 border-b">
+      <section className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <DocsTitle className="flex items-end gap-2">
+          <DocsTitle className="flex items-center gap-2">
             {page.data.title}
             {!!isComponentStatusIcon && (
-              <StatusChip className="mb-1.5 w-fit" status={page.data.icon as StatusChipStatus} />
+              <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
             )}
           </DocsTitle>
           {page.data.toc.length > 0 && (
             <div className="flex items-center gap-2">
-              <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
-              <ViewOptions
-                githubUrl={`${DOCS_CONTENT_PATH}/${page.path}`}
-                markdownUrl={`${page.url}.mdx`}
-              />
+              <ViewOptions markdownUrl={`${page.url}.mdx`} />
             </div>
           )}
         </div>
-        <DocsDescription className="text-md mb-4 mt-2">{page.data.description}</DocsDescription>
+        <DocsDescription className="text-md mt-2 mb-4">{page.data.description}</DocsDescription>
         {!!links && <ComponentLinks links={links} />}
       </section>
       <DocsBody className="prose-sm">
         <MDXContent
           components={getMDXComponents({
+            PRContributors: () => (
+              <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
+            ),
+
             // this allows you to link to other pages with relative file paths
             a: createRelativeLink(source, page),
           })}
@@ -88,17 +120,25 @@ export async function generateMetadata(props: {
 
   if (!page) notFound();
 
-  const image = ["/og", ...(params.slug ?? []), "image.png"].join("/");
+  // Read raw MDX to extract image from frontmatter
+  const rawContent = await getRawMDXContent(page.path);
+  const frontmatterImage = extractImageFromMDX(rawContent);
+
+  // Determine image URL
+  const image = frontmatterImage || ["/og", ...(params.slug ?? []), "image.png"].join("/");
+
+  // Ensure absolute URL for Open Graph
+  const imageUrl = image.startsWith("http") ? image : new URL(image, siteConfig.siteUrl).toString();
 
   return {
     description: page.data.description,
     openGraph: {
-      images: image,
+      images: imageUrl,
     },
     title: page.data.title,
     twitter: {
       card: "summary_large_image",
-      images: image,
+      images: imageUrl,
     },
   };
 }

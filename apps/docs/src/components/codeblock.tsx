@@ -25,6 +25,7 @@ export async function CodeBlock({
   collapsible?: boolean;
 } & CodeBlockProps) {
   let rendered;
+  let renderedPreview;
 
   try {
     // Trim the code to avoid issues with leading/trailing whitespace
@@ -38,6 +39,19 @@ export async function CodeBlock({
         </Base.Pre>
       );
     } else {
+      const lines = trimmedCode.split("\n");
+
+      if (lines.length > 10) {
+        const previewCode = lines.slice(0, 5).join("\n");
+
+        renderedPreview = await highlight(previewCode, {
+          components: {
+            pre: (props) => <Base.Pre {...props} />,
+          },
+          lang: lang || "text",
+        });
+      }
+
       rendered = await highlight(trimmedCode, {
         components: {
           pre: (props) => <Base.Pre {...props} />,
@@ -62,6 +76,7 @@ export async function CodeBlock({
       collapsible={collapsible}
       isIsolated={isIsolated}
       lang={lang}
+      preview={renderedPreview}
       showLineNumbers={showLineNumbers}
       title={title}
       {...props}

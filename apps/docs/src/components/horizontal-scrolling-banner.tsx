@@ -66,12 +66,12 @@ const HorizontalScrollingBanner = React.forwardRef<HTMLDivElement, HorizontalScr
         >
           {/* Clone children and duplicate for seamless loop */}
           {React.Children.map(children, (child, index) => (
-            <div key={`original-${index}`} className="flex-shrink-0">
+            <div key={`original-${index}`} className="shrink-0">
               {React.cloneElement(child as React.ReactElement)}
             </div>
           ))}
           {React.Children.map(children, (child, index) => (
-            <div key={`duplicate-${index}`} className="flex-shrink-0">
+            <div key={`duplicate-${index}`} className="shrink-0">
               {React.cloneElement(child as React.ReactElement)}
             </div>
           ))}

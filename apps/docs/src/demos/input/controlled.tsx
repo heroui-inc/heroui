@@ -14,7 +14,7 @@ export function Controlled() {
         value={value}
         onChange={(event) => setValue(event.target.value)}
       />
-      <span className="text-muted px-1 text-sm">https://{value || "your-domain"}</span>
+      <span className="px-1 text-sm text-muted">https://{value || "your-domain"}</span>
     </div>
   );
 }

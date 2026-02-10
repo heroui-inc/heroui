@@ -11,8 +11,8 @@ export function Controlled() {
   const selectedItems = Array.from(selected);
 
   return (
-    <div className="min-w-sm flex flex-col items-center justify-center gap-4">
-      <p className="text-muted text-sm">
+    <div className="flex min-w-sm flex-col items-center justify-center gap-4">
+      <p className="text-sm text-muted">
         Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
       </p>
       <Dropdown>

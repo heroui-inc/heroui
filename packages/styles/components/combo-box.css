@@ -1,0 +1,174 @@
+/* ComboBox styles */
+.combo-box {
+  @apply flex flex-col gap-1;
+
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  [data-slot="label"] {
+    @apply w-fit;
+  }
+
+  [data-slot="description"] {
+    @apply px-1;
+  }
+
+  [data-slot="input"] {
+    @apply min-w-0 flex-1;
+
+    /* Add padding-right when trigger is present */
+    &:has(+ .combo-box__trigger) {
+      @apply pr-7;
+    }
+
+    /* Focus state (input.css only has focus-visible, but combo-box also needs focus) */
+    &:focus,
+    &[data-focus] {
+      @apply status-focused-field;
+      border-color: var(--color-field-border-focus);
+      background-color: var(--color-field-focus);
+    }
+
+    /* Disabled state */
+    &:disabled,
+    &[data-disabled],
+    &[aria-disabled="true"] {
+      @apply status-disabled;
+    }
+  }
+}
+
+.combo-box__input-group {
+  @apply relative isolate inline-flex items-center;
+}
+
+.combo-box__trigger {
+  @apply absolute top-1/2 right-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pr-2 text-field-placeholder transition duration-150 no-highlight;
+
+  /* Remove default button styles */
+  @apply border-none bg-transparent outline-none;
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply text-field-foreground;
+    }
+  }
+
+  /* Focus visible state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply rounded ring-2 ring-focus ring-offset-2 ring-offset-background outline-none;
+  }
+
+  /* Pressed state */
+  &[data-pressed="true"] {
+    @apply opacity-70;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled],
+  &[aria-disabled="true"] {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  [data-slot="combo-box-trigger-default-icon"] {
+    @apply size-4 transition-transform duration-150 motion-reduce:transition-none;
+  }
+
+  /* Rotate icon when trigger is open */
+  &[data-open="true"] [data-slot="combo-box-trigger-default-icon"] {
+    @apply rotate-180;
+  }
+}
+
+/* Similar to popover content styles */
+.combo-box__popover {
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm;
+  box-shadow: var(--shadow-overlay);
+
+  /* Focus state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply outline-none;
+  }
+
+  /* Entering animations */
+  &[data-entering="true"] {
+    @apply animate-in duration-150 ease-smooth fade-in-0 zoom-in-95;
+
+    /* Placement-specific translations */
+    &[data-placement="top"] {
+      @apply slide-in-from-bottom-1;
+    }
+
+    &[data-placement="bottom"] {
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement="left"] {
+      @apply slide-in-from-right-1;
+    }
+
+    &[data-placement="right"] {
+      @apply slide-in-from-left-1;
+    }
+  }
+
+  /* Exiting animations */
+  &[data-exiting="true"] {
+    @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+  }
+
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
+  }
+
+  /* Arrow styling */
+  & [data-slot="popover-overlay-arrow"] {
+    fill: var(--overlay);
+  }
+
+  /* Arrow rotation based on placement */
+  &[data-placement="bottom"] [data-slot="popover-overlay-arrow"] {
+    rotate: 180deg;
+  }
+
+  &[data-placement="left"] [data-slot="popover-overlay-arrow"] {
+    rotate: -90deg;
+  }
+
+  &[data-placement="right"] [data-slot="popover-overlay-arrow"] {
+    rotate: 90deg;
+  }
+
+  /* Listbox styles */
+  [data-slot="list-box"] {
+    @apply p-1.5 outline-none;
+  }
+
+  [data-slot="list-box-item"] {
+    @apply px-2.5;
+
+    /* As the combo-box is single-select, we don't need to animate the checkmark */
+    [data-slot="list-box-item-indicator--checkmark"] {
+      @apply transition-none;
+    }
+  }
+}
+
+/* Full width modifier */
+.combo-box--full-width {
+  @apply w-full;
+}
+
+.combo-box__input-group--full-width {
+  @apply w-full;
+}

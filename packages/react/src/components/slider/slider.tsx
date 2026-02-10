@@ -1,8 +1,10 @@
 "use client";
 
-import type {SliderVariants} from "./slider.styles";
+import type {SliderVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 import type {SliderRenderProps} from "react-aria-components";
 
+import {sliderVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   SliderOutput as SliderOutputPrimitive,
@@ -12,9 +14,7 @@ import {
 } from "react-aria-components";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeTwRenderProps} from "../../utils/compose";
-
-import {sliderVariants} from "./slider.styles";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 /* -------------------------------------------------------------------------------------------------
  * Component Status: Preview
@@ -37,7 +37,7 @@ const SliderContext = createContext<SliderContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Slider Root
  * -----------------------------------------------------------------------------------------------*/
-interface SliderRootProps extends React.ComponentProps<typeof SliderPrimitive>, SliderVariants {}
+interface SliderRootProps extends ComponentPropsWithRef<typeof SliderPrimitive>, SliderVariants {}
 
 const SliderRoot = ({
   children,
@@ -66,7 +66,7 @@ const SliderRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Slider Output
  * -----------------------------------------------------------------------------------------------*/
-interface SliderOutputProps extends React.ComponentProps<typeof SliderOutputPrimitive> {}
+interface SliderOutputProps extends ComponentPropsWithRef<typeof SliderOutputPrimitive> {}
 
 const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
   const {slots} = useContext(SliderContext);
@@ -87,7 +87,7 @@ const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Track
  * -----------------------------------------------------------------------------------------------*/
-interface SliderTrackProps extends React.ComponentProps<typeof SliderTrackPrimitive> {}
+interface SliderTrackProps extends ComponentPropsWithRef<typeof SliderTrackPrimitive> {}
 
 const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
   const {slots, state} = useContext(SliderContext);
@@ -127,7 +127,7 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
  * -----------------------------------------------------------------------------------------------*/
-interface SliderFillProps extends React.ComponentProps<"div"> {}
+interface SliderFillProps extends ComponentPropsWithRef<"div"> {}
 
 const SliderFill = ({className, style, ...props}: SliderFillProps) => {
   const {slots, state} = useContext(SliderContext);
@@ -143,7 +143,7 @@ const SliderFill = ({className, style, ...props}: SliderFillProps) => {
 
   return (
     <div
-      className={slots?.fill({className})}
+      className={composeSlotClassName(slots?.fill, className)}
       data-disabled={dataAttr(state?.isDisabled)}
       data-slot="slider-fill"
       style={{
@@ -166,7 +166,7 @@ const SliderFill = ({className, style, ...props}: SliderFillProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Thumb
  * -----------------------------------------------------------------------------------------------*/
-interface SliderThumbProps extends React.ComponentProps<typeof SliderThumbPrimitive> {}
+interface SliderThumbProps extends ComponentPropsWithRef<typeof SliderThumbPrimitive> {}
 
 const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
   const {slots} = useContext(SliderContext);
@@ -185,12 +185,18 @@ const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
 /* -------------------------------------------------------------------------------------------------
  * TODO: Slider Marks
  * -----------------------------------------------------------------------------------------------*/
-interface SliderMarksProps extends React.ComponentProps<"div"> {}
+interface SliderMarksProps extends ComponentPropsWithRef<"div"> {}
 
 const SliderMarks = ({className, ...props}: SliderMarksProps) => {
   const {slots} = useContext(SliderContext);
 
-  return <div className={slots?.marks({className})} data-slot="slider-marks" {...props} />;
+  return (
+    <div
+      className={composeSlotClassName(slots?.marks, className)}
+      data-slot="slider-marks"
+      {...props}
+    />
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------

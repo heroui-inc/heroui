@@ -14,14 +14,14 @@ import {useEffect} from "react";
 
 import {HeroUILogo} from "@/components/heroui-logo";
 import {Iconify} from "@/components/iconify";
+import {useCodePanel} from "@/hooks/use-code-panel";
 
 import {ShowcaseThemeSwitch} from "./showcase-theme-switch";
-import {useShowcase} from "./showcase-wrapper";
 
 export function ShowcaseHeader() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const {isCodeVisible, toggleCode} = useShowcase();
+  const {isCodeVisible, toggleCode} = useCodePanel();
 
   // Get the returnUrl parameter, default to /showcase if not present
   const returnUrl = searchParams.get("returnUrl") || "/showcase";
@@ -45,7 +45,7 @@ export function ShowcaseHeader() {
   }, [returnUrl]);
 
   return (
-    <header className="border-border/50 bg-background/50 z-[1] flex items-center justify-between border-b p-4 backdrop-blur-sm">
+    <header className="z-[1] flex items-center justify-between bg-background/50 p-4 backdrop-blur-sm">
       <div className="flex flex-1 justify-start">
         <TooltipRoot delay={0}>
           <TooltipTrigger>
@@ -53,7 +53,7 @@ export function ShowcaseHeader() {
               <Iconify className="text-foreground/70" icon="xmark" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent className="text-muted px-2 py-0.5 text-xs" offset={7} placement="bottom">
+          <TooltipContent className="px-2 py-0.5 text-xs text-muted" offset={7} placement="bottom">
             <TooltipArrow />
             Press{" "}
             <KbdRoot>
@@ -81,7 +81,7 @@ export function ShowcaseHeader() {
           </TooltipTrigger>
           <TooltipContent offset={7}>
             <TooltipArrow />
-            <p className="text-muted text-xs">{isCodeVisible ? "Hide code" : "Show code"}</p>
+            <p className="text-xs text-muted">{isCodeVisible ? "Hide code" : "Show code"}</p>
           </TooltipContent>
         </TooltipRoot>
         {/* TODO: Add this later */}

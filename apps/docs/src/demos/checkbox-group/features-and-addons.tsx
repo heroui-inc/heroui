@@ -1,24 +1,24 @@
+import {Bell, Comment, Envelope} from "@gravity-ui/icons";
 import {Checkbox, CheckboxGroup, Description, Label} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import clsx from "clsx";
 
 export function FeaturesAndAddOns() {
   const addOns = [
     {
       description: "Receive updates via email",
-      icon: "gravity-ui:envelope",
+      icon: Envelope,
       title: "Email Notifications",
       value: "email",
     },
     {
       description: "Get instant SMS notifications",
-      icon: "gravity-ui:comment",
+      icon: Comment,
       title: "SMS Alerts",
       value: "sms",
     },
     {
       description: "Browser and mobile push alerts",
-      icon: "gravity-ui:bell",
+      icon: Bell,
       title: "Push Notifications",
       value: "push",
     },
@@ -34,18 +34,18 @@ export function FeaturesAndAddOns() {
             {addOns.map((addon) => (
               <Checkbox
                 key={addon.value}
-                isOnSurface
                 value={addon.value}
+                variant="secondary"
                 className={clsx(
-                  "bg-surface group relative flex-col gap-4 rounded-3xl px-5 py-4 transition-all",
+                  "group relative flex-col gap-4 rounded-3xl bg-surface px-5 py-4 transition-all",
                   "data-[selected=true]:bg-accent/10",
                 )}
               >
-                <Checkbox.Control className="absolute right-4 top-3 size-5 rounded-full before:rounded-full">
+                <Checkbox.Control className="absolute top-3 right-4 size-5 rounded-full before:rounded-full">
                   <Checkbox.Indicator />
                 </Checkbox.Control>
                 <Checkbox.Content className="flex flex-row items-start justify-start gap-4">
-                  <Icon className="text-accent size-5" icon={addon.icon} />
+                  <addon.icon className="size-5 text-accent" />
                   <div className="flex flex-col gap-1">
                     <Label>{addon.title}</Label>
                     <Description>{addon.description}</Description>

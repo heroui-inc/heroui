@@ -1,29 +1,32 @@
 "use client";
 
-import type {TextAreaVariants} from "./textarea.styles";
-import type {TextAreaProps as TextAreaPrimitiveProps} from "react-aria-components";
+import type {TextAreaVariants} from "@heroui/styles";
+import type {ComponentPropsWithRef} from "react";
 
+import {textAreaVariants} from "@heroui/styles";
 import React, {useContext} from "react";
 import {TextArea as TextAreaPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
-import {SurfaceContext} from "../surface";
-
-import {textAreaVariants} from "./textarea.styles";
+import {TextFieldContext} from "../text-field";
 
 /* -------------------------------------------------------------------------------------------------
- * Exports
+ * TextArea Root
  * -----------------------------------------------------------------------------------------------*/
-interface TextAreaRootProps extends TextAreaPrimitiveProps, TextAreaVariants {}
+interface TextAreaRootProps
+  extends ComponentPropsWithRef<typeof TextAreaPrimitive>, TextAreaVariants {}
 
-const TextAreaRoot = ({className, isOnSurface, ...rest}: TextAreaRootProps) => {
-  const surfaceContext = useContext(SurfaceContext);
-  const isOnSurfaceValue = isOnSurface ?? (surfaceContext.variant !== undefined ? true : false);
+const TextAreaRoot = ({className, fullWidth, variant, ...rest}: TextAreaRootProps) => {
+  const textFieldContext = useContext(TextFieldContext);
+  const resolvedVariant = variant ?? textFieldContext?.variant;
 
   return (
     <TextAreaPrimitive
-      className={composeTwRenderProps(className, textAreaVariants({isOnSurface: isOnSurfaceValue}))}
       data-slot="textarea"
+      className={composeTwRenderProps(
+        className,
+        textAreaVariants({fullWidth, variant: resolvedVariant}),
+      )}
       {...rest}
     />
   );

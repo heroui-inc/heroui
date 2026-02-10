@@ -2,23 +2,35 @@ import type {Metadata, Viewport} from "next";
 import type {ReactNode} from "react";
 
 import {Analytics} from "@vercel/analytics/next";
-import {RootProvider} from "fumadocs-ui/provider";
+import {NextProvider} from "fumadocs-core/framework/next";
+import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {Inter} from "next/font/google";
+import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
+import {source} from "@/lib/source";
 import {__BASE_URL__} from "@/utils/env";
+
+import {CustomRootProvider} from "./custom-root-provider";
 
 import "./global.css";
 
 const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export default function Layout({children}: {children: ReactNode}) {
   return (
-    <html suppressHydrationWarning className={inter.className} lang="en">
-      <body className="flex min-h-screen flex-col">
-        <RootProvider>{children}</RootProvider>
+    <html suppressHydrationWarning className={inter.variable} lang="en">
+      <body className="flex min-h-screen flex-col font-sans">
+        <NuqsAdapter>
+          <NextProvider>
+            <TreeContextProvider tree={source.pageTree}>
+              <CustomRootProvider>{children}</CustomRootProvider>
+            </TreeContextProvider>
+          </NextProvider>
+        </NuqsAdapter>
         <Analytics />
       </body>
     </html>

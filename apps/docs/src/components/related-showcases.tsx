@@ -29,7 +29,7 @@ export function RelatedShowcases({className, component}: RelatedShowcasesProps) 
         {showcases.map((showcase) => (
           <ShowcaseItem
             key={showcase.name}
-            className="aspect-video h-[180px] max-w-[250px] flex-shrink-0"
+            className="aspect-video h-[180px] max-w-[250px] shrink-0"
             href={`/showcase/${showcase.name}?returnUrl=${returnUrl}`}
             item={showcase}
           />

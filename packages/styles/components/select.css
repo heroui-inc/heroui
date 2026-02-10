@@ -2,8 +2,8 @@
 .select {
   @apply flex flex-col gap-1;
 
-  &[data-invalid],
-  &[aria-invalid] {
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -19,7 +19,7 @@
 }
 
 .select__trigger {
-  @apply bg-field text-field-foreground shadow-field rounded-field relative isolate inline-flex min-h-9 select-none border px-3 py-2 text-sm outline-none;
+  @apply relative isolate inline-flex min-h-9 rounded-field border bg-field px-3 py-2 text-sm text-field-foreground shadow-field outline-none select-none no-highlight;
 
   /**
    * Transitions
@@ -45,7 +45,7 @@
   /* Hover state */
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
+    &[data-hovered="true"] {
       @apply bg-field-hover;
       border-color: var(--color-field-border-hover);
     }
@@ -53,7 +53,7 @@
 
   /* Focus visible state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply status-focused;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);
@@ -61,65 +61,70 @@
 
   /* Focus state */
   &:focus,
-  &[data-focus] {
-    @apply status-focused;
-    border-color: var(--color-field-border-focus);
-    background-color: var(--color-field-focus);
+  &[data-focus="true"] {
   }
 
   /* Invalid state */
-  &[data-invalid] {
+  &[data-invalid="true"] {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled],
-  &[aria-disabled] {
-    @apply status-disabled pointer-events-none;
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
   }
 }
 
-/* On Surface variant */
-.select__trigger--on-surface {
-  @apply bg-on-surface shadow-none;
+/* Variant property definitions */
+.select--primary {
+  /* Default styles */
+}
+
+.select--secondary .select__trigger {
+  @apply shadow-none;
+  background-color: var(--select-trigger-bg);
+
+  --select-trigger-bg: var(--color-default);
+  --select-trigger-bg-hover: var(--color-default-hover);
+  --select-trigger-bg-focus: var(--color-default);
 
   @media (hover: hover) {
     &:hover,
-    &[data-hovered] {
-      @apply bg-on-surface-hover;
+    &[data-hovered="true"] {
+      background-color: var(--select-trigger-bg-hover);
     }
   }
 
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
-    background-color: var(--color-on-surface-focus);
+  &[data-focus-visible="true"] {
+    background-color: var(--select-trigger-bg-focus);
   }
 
   &:focus,
-  &[data-focus] {
-    background-color: var(--color-on-surface-focus);
+  &[data-focus="true"] {
   }
 }
 
 .select__value {
-  @apply flex-1 truncate text-left text-current;
+  @apply flex-1 text-left text-base wrap-break-word text-current sm:text-sm;
 
-  &[data-placeholder] {
+  &[data-placeholder="true"] {
     @apply text-field-placeholder;
   }
 
-  /* Removes the listbox-item indicator element from the select value*/
-  [data-slot="listbox-item-indicator"] {
+  /* Removes the list-box-item indicator element from the select value*/
+  [data-slot="list-box-item-indicator"] {
     @apply hidden;
   }
 }
 
 .select__indicator {
-  @apply text-field-placeholder absolute right-2 top-1/2 flex shrink-0 -translate-y-1/2 items-center justify-center transition duration-150;
+  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
 
-  &[data-open] {
+  &[data-open="true"] {
     @apply rotate-180;
   }
 
@@ -130,18 +135,18 @@
 
 /* Similar to popover content styles */
 .select__popover {
-  @apply min-w-(--trigger-width) bg-overlay origin-[var(--trigger-anchor-point)] scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl p-0 text-sm will-change-transform;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm;
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */
   &:focus-visible:not(:focus),
-  &[data-focus-visible] {
+  &[data-focus-visible="true"] {
     @apply outline-none;
   }
 
   /* Entering animations */
-  &[data-entering] {
-    @apply animate-in zoom-in-95 fade-in-0 ease-fluid-out duration-250;
+  &[data-entering="true"] {
+    @apply animate-in duration-150 ease-smooth fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */
     &[data-placement="top"] {
@@ -162,8 +167,13 @@
   }
 
   /* Exiting animations */
-  &[data-exiting] {
-    @apply animate-out zoom-out-95 fade-out ease-out-quad duration-100;
+  &[data-exiting="true"] {
+    @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+  }
+
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
   }
 
   /* Arrow styling */
@@ -185,19 +195,28 @@
   }
 
   /* Listbox styles */
-  [data-slot="listbox"] {
+  [data-slot="list-box"] {
     @apply p-1.5 outline-none;
   }
 
-  [data-slot="listbox-item"] {
+  [data-slot="list-box-item"] {
     @apply px-2.5;
   }
 
   /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
-  [data-slot="listbox"]:not([aria-multiselectable]) [data-slot="listbox-item-indicator"],
-  [data-slot="listbox"]:not([aria-multiselectable])
-    [data-slot="listbox-item-indicator"]
-    [data-slot="listbox-item-indicator--checkmark"] {
+  [data-slot="list-box"]:not([aria-multiselectable="true"]) [data-slot="list-box-item-indicator"],
+  [data-slot="list-box"]:not([aria-multiselectable="true"])
+    [data-slot="list-box-item-indicator"]
+    [data-slot="list-box-item-indicator--checkmark"] {
     @apply transition-none;
   }
+}
+
+/* Full width modifier */
+.select--full-width {
+  @apply w-full;
+}
+
+.select__trigger--full-width {
+  @apply w-full;
 }

@@ -1,0 +1,381 @@
+---
+title: InputGroup
+description: Group related input controls with prefix and suffix elements for enhanced form fields
+icon: updated
+links:
+  rac: Group
+  source: input-group/input-group.tsx
+  styles: input-group.css
+  storybook: Components/Forms/InputGroup
+  figma: true
+---
+
+## Import
+
+```tsx
+import { InputGroup } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="input-group-default" />
+
+### Anatomy
+
+```tsx
+import {InputGroup, TextField, Label} from '@heroui/react';
+
+export default () => (
+  <TextField>
+    <Label />
+    <InputGroup>
+      <InputGroup.Prefix />
+      <InputGroup.Input /> {/* Or use InputGroup.TextArea for multiline input */}
+      <InputGroup.Suffix />
+    </InputGroup>
+  </TextField>
+)
+```
+
+> **InputGroup** wraps an input field with optional prefix and suffix elements, creating a visually cohesive group. It's typically used within **[TextField](/docs/components/text-field)** to add icons, text, buttons, or other elements before or after the input. Use **InputGroup.Input** for single-line inputs or **InputGroup.TextArea** for multiline text inputs.
+
+### With Prefix Icon
+
+Add an icon before the input field.
+
+<ComponentPreview name="input-group-with-prefix-icon" />
+
+### With Suffix Icon
+
+Add an icon after the input field.
+
+<ComponentPreview name="input-group-with-suffix-icon" />
+
+### With Prefix and Suffix
+
+Combine both prefix and suffix elements.
+
+<ComponentPreview name="input-group-with-prefix-and-suffix" />
+
+### Text Prefix
+
+Use text as a prefix, such as currency symbols or protocol prefixes.
+
+<ComponentPreview name="input-group-with-text-prefix" />
+
+### Text Suffix
+
+Use text as a suffix, such as domain extensions or units.
+
+<ComponentPreview name="input-group-with-text-suffix" />
+
+### Icon Prefix and Text Suffix
+
+Combine an icon prefix with a text suffix.
+
+<ComponentPreview name="input-group-with-icon-prefix-and-text-suffix" />
+
+### Copy Button Suffix
+
+Add an interactive button in the suffix, such as a copy button.
+
+<ComponentPreview name="input-group-with-copy-suffix" />
+
+### Icon Prefix and Copy Button
+
+Combine an icon prefix with an interactive button suffix.
+
+<ComponentPreview name="input-group-with-icon-prefix-and-copy-suffix" />
+
+### Password Toggle
+
+Use a button in the suffix to toggle password visibility.
+
+<ComponentPreview name="input-group-password-with-toggle" />
+
+### Loading State
+
+Show a loading spinner in the suffix to indicate processing.
+
+<ComponentPreview name="input-group-with-loading-suffix" />
+
+### Keyboard Shortcut
+
+Display keyboard shortcuts using the [Kbd](/docs/components/kbd) component.
+
+<ComponentPreview name="input-group-with-keyboard-shortcut" />
+
+### Badge Suffix
+
+Add a badge or chip in the suffix to show status or labels.
+
+<ComponentPreview name="input-group-with-badge-suffix" />
+
+### Required Field
+
+InputGroup respects the required state from its parent TextField.
+
+<ComponentPreview name="input-group-required" />
+
+### Validation
+
+InputGroup automatically reflects invalid state from its parent TextField.
+
+<ComponentPreview name="input-group-invalid" />
+
+### Disabled State
+
+InputGroup respects the disabled state from its parent TextField.
+
+<ComponentPreview name="input-group-disabled" />
+
+### Full Width
+
+<ComponentPreview name="input-group-full-width" />
+
+### Variants
+
+The InputGroup component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="input-group-variants" />
+
+### In Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
+
+<ComponentPreview name="input-group-on-surface" />
+
+### With TextArea
+
+Use **InputGroup.TextArea** for multiline text inputs with prefix and suffix elements. When a textarea is present, the container automatically adjusts its height to accommodate the content and aligns prefix/suffix elements to the top.
+
+<ComponentPreview name="input-group-with-textarea" />
+
+<RelatedComponents component="inputgroup" />
+
+<RelatedShowcases component="InputGroup" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {InputGroup, TextField, Label} from '@heroui/react';
+
+function CustomInputGroup() {
+  return (
+    <TextField>
+      <Label>Website</Label>
+      <InputGroup className="rounded-xl border-2 border-primary">
+        <InputGroup.Prefix className="bg-primary/10 text-primary">
+          https://
+        </InputGroup.Prefix>
+        <InputGroup.Input className="font-medium" />
+        <InputGroup.Suffix className="bg-primary/10 text-primary">
+          .com
+        </InputGroup.Suffix>
+      </InputGroup>
+    </TextField>
+  );
+}
+```
+
+### Customizing the component classes
+
+InputGroup uses CSS classes that can be customized. Override the component classes to match your design system.
+
+```css
+@layer components {
+  .input-group {
+    @apply bg-field text-field-foreground shadow-field rounded-field inline-flex min-h-9 items-center overflow-hidden border text-sm outline-none;
+  }
+
+  .input-group__input {
+    @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+  }
+
+  .input-group__prefix {
+    @apply text-field-placeholder rounded-l-field flex h-full items-center justify-center rounded-r-none bg-transparent px-3;
+  }
+
+  .input-group__suffix {
+    @apply text-field-placeholder rounded-r-field flex h-full items-center justify-center rounded-l-none bg-transparent px-3;
+  }
+
+  /* Secondary variant */
+  .input-group--secondary {
+    @apply shadow-none;
+    background-color: var(--color-default);
+  }
+}
+```
+
+### CSS Classes
+
+- `.input-group` – Root container with border, background, and flex layout. Uses `min-h-9` for flexible height and `items-center` by default, switching to `items-start` when a textarea is present.
+- `.input-group__input` – Input element with transparent background and no border. Also used as the base class for textarea elements.
+- `.input-group__prefix` – Prefix container with left border radius. Aligns to top when used with textarea.
+- `.input-group__suffix` – Suffix container with right border radius. Aligns to top when used with textarea.
+- `.input-group--primary` – Primary variant with shadow (default)
+- `.input-group--secondary` – Secondary variant without shadow, suitable for use in surfaces
+
+**Note**: When using `InputGroup.TextArea`, the container automatically switches from `items-center` to `items-start` alignment and uses `height: auto` instead of a fixed height. Prefix and suffix elements align to the top with additional padding to match the textarea's vertical padding. The textarea uses the same `.input-group__input` base class with textarea-specific styles (minimum height and vertical resize) applied via the `[data-slot="input-group-textarea"]` attribute selector.
+
+### Interactive States
+
+InputGroup automatically manages these data attributes based on its state:
+
+- **Hover**: `[data-hovered]` - Applied when hovering over the group
+- **Focus Within**: `[data-focus-within]` - Applied when the input is focused
+- **Invalid**: `[data-invalid]` - Applied when parent TextField is invalid
+- **Disabled**: `[data-disabled]` or `[aria-disabled]` - Applied when parent TextField is disabled
+
+## API Reference
+
+### InputGroup Props
+
+InputGroup inherits all props from React Aria's [Group](https://react-spectrum.adobe.com/react-aria/Group.html) component.
+
+#### Base Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode \| (values: GroupRenderProps) => React.ReactNode` | - | Child components (Input, TextArea, Prefix, Suffix) or render function. |
+| `className` | `string \| (values: GroupRenderProps) => string` | - | CSS classes for styling, supports render props. |
+| `style` | `React.CSSProperties \| (values: GroupRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
+| `fullWidth` | `boolean` | `false` | Whether the input group should take full width of its container |
+| `id` | `string` | - | The element's unique identifier. |
+
+#### Variant Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
+
+#### Accessibility Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `aria-label` | `string` | - | Accessibility label when no visible label is present. |
+| `aria-labelledby` | `string` | - | ID of elements that label this group. |
+| `aria-describedby` | `string` | - | ID of elements that describe this group. |
+| `aria-details` | `string` | - | ID of elements with additional details. |
+| `role` | `'group' \| 'region' \| 'presentation'` | `'group'` | Accessibility role for the group. Use 'region' for important content, 'presentation' for visual-only grouping. |
+
+### Composition Components
+
+InputGroup works with these subcomponents:
+
+- **InputGroup.Root** - Root container (also available as `InputGroup`)
+- **InputGroup.Input** - Single-line input element component
+- **InputGroup.TextArea** - Multiline textarea element component
+- **InputGroup.Prefix** - Prefix container component
+- **InputGroup.Suffix** - Suffix container component
+
+#### InputGroup.Input Props
+
+InputGroup.Input inherits all props from React Aria's [Input](https://react-spectrum.adobe.com/react-aria/Input.html) component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | CSS classes for styling. |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the input. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
+| `type` | `string` | `'text'` | Input type (text, password, email, etc.). |
+| `value` | `string` | - | Current value (controlled). |
+| `defaultValue` | `string` | - | Default value (uncontrolled). |
+| `placeholder` | `string` | - | Placeholder text. |
+| `disabled` | `boolean` | - | Whether the input is disabled. |
+| `readOnly` | `boolean` | - | Whether the input is read-only. |
+
+#### InputGroup.TextArea Props
+
+InputGroup.TextArea inherits all props from React Aria's [TextArea](https://react-spectrum.adobe.com/react-aria/TextArea.html) component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | CSS classes for styling. |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the textarea. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
+| `value` | `string` | - | Current value (controlled). |
+| `defaultValue` | `string` | - | Default value (uncontrolled). |
+| `placeholder` | `string` | - | Placeholder text. |
+| `rows` | `number` | - | Number of visible text lines. |
+| `disabled` | `boolean` | - | Whether the textarea is disabled. |
+| `readOnly` | `boolean` | - | Whether the textarea is read-only. |
+
+#### InputGroup.Prefix Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to display in the prefix (icons, text, etc.). |
+| `className` | `string` | - | CSS classes for styling. |
+
+#### InputGroup.Suffix Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content to display in the suffix (icons, buttons, badges, etc.). |
+| `className` | `string` | - | CSS classes for styling. |
+
+### Usage Example
+
+```tsx
+import {InputGroup, TextField, Label, Button} from '@heroui/react';
+import {Icon} from '@iconify/react';
+
+function Example() {
+  return (
+    <TextField>
+      <Label>Email</Label>
+      <InputGroup>
+        <InputGroup.Prefix>
+          <Icon icon="gravity-ui:envelope" />
+        </InputGroup.Prefix>
+        <InputGroup.Input placeholder="name@email.com" />
+        <InputGroup.Suffix>
+          <Button isIconOnly size="sm" variant="ghost">
+            <Icon icon="gravity-ui:check" />
+          </Button>
+        </InputGroup.Suffix>
+      </InputGroup>
+    </TextField>
+  );
+}
+```
+
+### TextArea Usage Example
+
+```tsx
+import {Envelope} from "@gravity-ui/icons";
+import {Description, FieldError, InputGroup, Label, TextField} from "@heroui/react";
+import {useState} from "react";
+
+function TextAreaExample() {
+  const [feedback, setFeedback] = useState("");
+
+  return (
+    <TextField fullWidth isInvalid={feedback.length > 500} name="feedback" onChange={setFeedback}>
+      <Label>Your Feedback</Label>
+      <InputGroup fullWidth>
+        <InputGroup.Prefix>
+          <Envelope className="size-4 text-muted" />
+        </InputGroup.Prefix>
+        <InputGroup.TextArea
+          className="resize-none"
+          placeholder="Share your thoughts, suggestions, or issues..."
+          rows={5}
+          value={feedback}
+        />
+      </InputGroup>
+      <Description className="flex w-full items-center justify-between px-1">
+        <span>Maximum 500 characters.</span>
+        <span className="ml-auto">{feedback.length}/500</span>
+      </Description>
+      <FieldError>Feedback must be less than 500 characters</FieldError>
+    </TextField>
+  );
+}
+```
+

@@ -55,29 +55,28 @@ export function Statuses() {
       {examples.map(({actions, body, classNames, header, status, trigger}) => (
         <AlertDialog key={status}>
           <Button className={classNames}>{trigger}</Button>
-          <AlertDialog.Container>
-            <AlertDialog.Dialog className="sm:max-w-[400px]">
-              {({close}) => (
-                <>
-                  <AlertDialog.Header>
-                    <AlertDialog.Icon status={status} />
-                    <AlertDialog.Heading>{header}</AlertDialog.Heading>
-                  </AlertDialog.Header>
-                  <AlertDialog.Body>
-                    <p>{body}</p>
-                  </AlertDialog.Body>
-                  <AlertDialog.Footer>
-                    <Button variant="tertiary" onPress={close}>
-                      {actions.cancel}
-                    </Button>
-                    <Button variant={status === "danger" ? "danger" : "primary"} onPress={close}>
-                      {actions.confirm}
-                    </Button>
-                  </AlertDialog.Footer>
-                </>
-              )}
-            </AlertDialog.Dialog>
-          </AlertDialog.Container>
+          <AlertDialog.Backdrop>
+            <AlertDialog.Container>
+              <AlertDialog.Dialog className="sm:max-w-[400px]">
+                <AlertDialog.CloseTrigger />
+                <AlertDialog.Header>
+                  <AlertDialog.Icon status={status} />
+                  <AlertDialog.Heading>{header}</AlertDialog.Heading>
+                </AlertDialog.Header>
+                <AlertDialog.Body>
+                  <p>{body}</p>
+                </AlertDialog.Body>
+                <AlertDialog.Footer>
+                  <Button slot="close" variant="tertiary">
+                    {actions.cancel}
+                  </Button>
+                  <Button slot="close" variant={status === "danger" ? "danger" : "primary"}>
+                    {actions.confirm}
+                  </Button>
+                </AlertDialog.Footer>
+              </AlertDialog.Dialog>
+            </AlertDialog.Container>
+          </AlertDialog.Backdrop>
         </AlertDialog>
       ))}
     </div>

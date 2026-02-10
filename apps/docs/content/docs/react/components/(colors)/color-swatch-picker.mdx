@@ -1,0 +1,221 @@
+---
+title: ColorSwatchPicker
+description: A list of color swatches that allows users to select a color from a predefined palette.
+icon: new
+links:
+  rac: ColorSwatchPicker
+  source: color-swatch-picker/color-swatch-picker.tsx
+  styles: color-swatch-picker.css
+  storybook: Components/Colors/ColorSwatchPicker
+  figma: true
+---
+
+## Import
+
+```tsx
+import { ColorSwatchPicker, parseColor } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="color-swatch-picker-basic"
+/>
+
+### Anatomy
+
+Import the ColorSwatchPicker component and access all parts using dot notation.
+
+```tsx
+import { ColorSwatchPicker } from '@heroui/react';
+
+export default () => (
+  <ColorSwatchPicker>
+    <ColorSwatchPicker.Item color="#F43F5E">
+      <ColorSwatchPicker.Swatch />
+      <ColorSwatchPicker.Indicator />
+    </ColorSwatchPicker.Item>
+    <ColorSwatchPicker.Item color="#D946EF">
+      <ColorSwatchPicker.Swatch />
+      <ColorSwatchPicker.Indicator />
+    </ColorSwatchPicker.Item>
+    <ColorSwatchPicker.Item color="#8B5CF6">
+      <ColorSwatchPicker.Swatch />
+      <ColorSwatchPicker.Indicator />
+    </ColorSwatchPicker.Item>
+  </ColorSwatchPicker>
+);
+```
+
+### Variants
+
+<ComponentPreview
+  name="color-swatch-picker-variants"
+/>
+
+### Sizes
+
+<ComponentPreview
+  name="color-swatch-picker-sizes"
+/>
+
+### Stack Layout
+
+<ComponentPreview
+  name="color-swatch-picker-stack-layout"
+/>
+
+### Default Value
+
+<ComponentPreview
+  name="color-swatch-picker-default-value"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="color-swatch-picker-controlled"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="color-swatch-picker-disabled"
+/>
+
+### Custom Indicator
+
+<ComponentPreview
+  name="color-swatch-picker-custom-indicator"
+/>
+
+<RelatedComponents component="color-swatch-picker" />
+
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+You can customize the ColorSwatchPicker using className props:
+
+```tsx
+import { ColorSwatchPicker } from '@heroui/react';
+
+function CustomColorSwatchPicker() {
+  return (
+    <ColorSwatchPicker className="gap-4">
+      <ColorSwatchPicker.Item color="#F43F5E" className="shadow-lg">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item color="#D946EF">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+    </ColorSwatchPicker>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the ColorSwatchPicker component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .color-swatch-picker {
+    @apply gap-4;
+  }
+
+  .color-swatch-picker__item {
+    @apply shadow-md;
+  }
+
+  .color-swatch-picker__swatch {
+    @apply border-2 border-white;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The ColorSwatchPicker component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-swatch-picker.css)):
+
+#### Base & Structure
+- `.color-swatch-picker` - Base container (flex layout)
+- `.color-swatch-picker__item` - Individual swatch item wrapper
+- `.color-swatch-picker__swatch` - The color swatch visual element
+
+#### Size Classes
+- `.color-swatch-picker--xs` - Extra small (16px)
+- `.color-swatch-picker--sm` - Small (24px)
+- `.color-swatch-picker--md` - Medium (32px, default)
+- `.color-swatch-picker--lg` - Large (36px)
+- `.color-swatch-picker--xl` - Extra large (40px)
+
+#### Shape Variants
+- `.color-swatch-picker--circle` - Circle shape (default)
+- `.color-swatch-picker--square` - Square shape with rounded corners
+
+#### Layout Classes
+- `.color-swatch-picker--grid` - Horizontal wrapping layout (default)
+- `.color-swatch-picker--stack` - Vertical stacked layout
+
+### Interactive States
+
+The component supports both CSS pseudo-classes and data attributes for flexibility:
+
+- **Hover**: `:hover` or `[data-hovered="true"]` - Scale up to 1.1 (only when not selected)
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` - Focus ring
+- **Selected**: `[data-selected="true"]` - Inner border with same color as swatch
+- **Disabled**: `[data-disabled="true"]` - Reduced opacity
+
+## API Reference
+
+### ColorSwatchPicker Props
+
+Inherits from [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/react-aria/ColorSwatchPicker.html).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string \| Color` | - | The current selected color (controlled) |
+| `defaultValue` | `string \| Color` | - | The default selected color (uncontrolled) |
+| `onChange` | `(value: Color) => void` | - | Handler called when selection changes |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size of the swatches |
+| `variant` | `"circle" \| "square"` | `"circle"` | Shape of the swatches |
+| `layout` | `"grid" \| "stack"` | `"grid"` | Layout direction |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | ColorSwatchPicker.Item elements |
+
+### ColorSwatchPicker.Item Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `string \| Color` | **Required** | The color of the swatch |
+| `isDisabled` | `boolean` | `false` | Whether the item is disabled |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | ColorSwatchPicker.Swatch element |
+
+### ColorSwatchPicker.Swatch Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### parseColor
+
+The `parseColor` function is re-exported from React Aria Components for convenience:
+
+```tsx
+import { parseColor } from '@heroui/react';
+
+// Parse hex color
+const red = parseColor('#ff0000');
+
+// Parse RGB
+const green = parseColor('rgb(0, 255, 0)');
+
+// Parse HSL
+const blue = parseColor('hsl(240, 100%, 50%)');
+```

@@ -1,5 +1,5 @@
+import {ChevronsExpandVertical} from "@gravity-ui/icons";
 import {Label, ListBox, Select} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function CustomIndicator() {
   return (
@@ -8,7 +8,7 @@ export function CustomIndicator() {
       <Select.Trigger>
         <Select.Value />
         <Select.Indicator className="size-3">
-          <Icon icon="gravity-ui:chevrons-expand-vertical" />
+          <ChevronsExpandVertical />
         </Select.Indicator>
       </Select.Trigger>
       <Select.Popover>

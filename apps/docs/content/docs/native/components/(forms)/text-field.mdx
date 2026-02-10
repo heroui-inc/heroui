@@ -1,0 +1,266 @@
+---
+title: TextField
+description: A text input component with label, description, and error handling for collecting user input.
+icon: updated
+links:
+  source_native: text-field/text-field.tsx
+  styles_native: text-field/text-field.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { TextField } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<TextField>
+  <Label>...</Label>
+  <Input />
+  <Description>...</Description>
+  <FieldError>...</FieldError>
+</TextField>
+```
+
+- **TextField**: Root container that provides spacing and state management
+- **Label**: Label with optional asterisk for required fields (from [Label](./label) component)
+- **Input**: Input container with animated border and background (from [Input](./input) component)
+- **Description**: Secondary descriptive helper text (from [Description](./description) component)
+- **FieldError**: Validation error message display (from [FieldError](./field-error) component)
+
+## Usage
+
+### Basic Usage
+
+TextField provides a complete form input structure with label and description.
+
+```tsx
+<TextField>
+  <Label>Email</Label>
+  <Input placeholder="Enter your email" />
+  <Description>We'll never share your email</Description>
+</TextField>
+```
+
+### With Required Field
+
+Mark fields as required to show an asterisk in the label.
+
+```tsx
+<TextField isRequired>
+  <Label>Username</Label>
+  <Input placeholder="Choose a username" />
+</TextField>
+```
+
+### With Validation
+
+Display error messages when the field is invalid.
+
+```tsx
+import { FieldError, Input, Label, TextField } from 'heroui-native';
+
+<TextField isRequired isInvalid={true}>
+  <Label>Email</Label>
+  <Input placeholder="Enter your email" />
+  <FieldError>Please enter a valid email</FieldError>
+</TextField>
+```
+
+### With Local Invalid State Override
+
+Override the context's invalid state for individual components.
+
+```tsx
+import { Description, FieldError, Input, Label, TextField } from 'heroui-native';
+
+<TextField isInvalid={true}>
+  <Label isInvalid={false}>Email</Label>
+  <Input placeholder="Enter your email" isInvalid={false} />
+  <Description isInvalid={false}>
+    This shows despite input being invalid
+  </Description>
+  <FieldError>Email format is incorrect</FieldError>
+</TextField>
+```
+
+### Multiline Input
+
+Create text areas for longer content.
+
+```tsx
+<TextField>
+  <Label>Message</Label>
+  <Input
+    placeholder="Type your message..."
+    multiline
+    numberOfLines={4}
+  />
+  <Description>Maximum 500 characters</Description>
+</TextField>
+```
+
+### Disabled State
+
+Disable the entire field to prevent interaction.
+
+```tsx
+<TextField isDisabled>
+  <Label>Disabled Field</Label>
+  <Input placeholder="Cannot edit" value="Read only value" />
+</TextField>
+```
+
+### With Variant
+
+Use different variants to style the input based on context.
+
+```tsx
+<TextField>
+  <Label>Primary Variant</Label>
+  <Input placeholder="Primary style" variant="primary" />
+</TextField>
+
+<TextField>
+  <Label>Secondary Variant</Label>
+  <Input placeholder="Secondary style" variant="secondary" />
+</TextField>
+```
+
+### Custom Styling
+
+Customize the input appearance using className.
+
+```tsx
+<TextField>
+  <Label>Custom Styled</Label>
+  <Input
+    placeholder="Custom colors"
+    className="bg-blue-50 border-blue-500 focus:border-blue-700"
+  />
+</TextField>
+```
+
+## Example
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { Description, Input, Label, TextField } from 'heroui-native';
+import { useState } from 'react';
+import { Pressable, View } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export const TextInputContent = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  return (
+    <View className="gap-4">
+      <TextField isRequired>
+        <Label>Email</Label>
+        <Input
+          placeholder="Enter your email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Description>
+          We'll never share your email with anyone else.
+        </Description>
+      </TextField>
+
+      <TextField isRequired>
+        <Label>New password</Label>
+        <View className="w-full flex-row items-center">
+          <Input
+            value={password}
+            onChangeText={setPassword}
+            className="flex-1 px-10"
+            placeholder="Enter your password"
+            secureTextEntry={!isPasswordVisible}
+          />
+          <StyledIonicons
+            name="lock-closed-outline"
+            size={16}
+            className="absolute left-3.5 text-muted"
+            pointerEvents="none"
+          />
+          <Pressable
+            className="absolute right-4"
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+          >
+            <StyledIonicons
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+              size={16}
+              className="text-muted"
+            />
+          </Pressable>
+        </View>
+        <Description>
+          Password must be at least 6 characters
+        </Description>
+      </TextField>
+    </View>
+  );
+};
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/text-field.tsx>).
+
+## API Reference
+
+### TextField
+
+| prop         | type                         | default     | description                                                                               |
+| ------------ | ---------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| children     | `React.ReactNode`            | -           | Content to render inside the text field                                                   |
+| isDisabled   | `boolean`                    | `false`     | Whether the entire text field is disabled                                                 |
+| isInvalid    | `boolean`                    | `false`     | Whether the text field is in an invalid state                                             |
+| isRequired   | `boolean`                    | `false`     | Whether the text field is required (shows asterisk)                                       |
+| className    | `string`                     | -           | Custom class name for the root element                                                    |
+| animation    | `"disable-all" \| undefined` | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| ...ViewProps | `ViewProps`                  | -           | All standard React Native View props are supported                                        |
+
+> **Note**: For Label, Input, Description, and FieldError components, see their respective documentation:
+> - [Label documentation](./label)
+> - [Input documentation](./input)
+> - [Description documentation](./description)
+> - [FieldError documentation](./field-error)
+>
+> These components automatically consume form state from TextField via the form-item-state context.
+
+## Hooks
+
+### useTextField
+
+Hook to access the TextField context values. Must be used within a `TextField` component.
+
+```tsx
+import { TextField, useTextField } from 'heroui-native';
+
+function CustomComponent() {
+  const { isDisabled, isInvalid, isRequired } = useTextField();
+
+  // Use the context values...
+}
+```
+
+#### Returns
+
+| property   | type      | description                                   |
+| ---------- | --------- | --------------------------------------------- |
+| isDisabled | `boolean` | Whether the entire text field is disabled     |
+| isInvalid  | `boolean` | Whether the text field is in an invalid state |
+| isRequired | `boolean` | Whether the text field is required            |

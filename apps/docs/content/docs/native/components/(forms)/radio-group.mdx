@@ -1,0 +1,309 @@
+---
+title: RadioGroup
+description: A set of radio buttons where only one option can be selected at a time.
+icon: updated
+links:
+  source_native: radio-group/radio-group.tsx
+  styles_native: radio-group/radio-group.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/radio-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/radio-group-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { RadioGroup } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<RadioGroup>
+  <RadioGroup.Item>
+    <Label>...</Label>
+    <Description>...</Description>
+    <RadioGroup.Indicator>
+      <RadioGroup.IndicatorThumb />
+    </RadioGroup.Indicator>
+  </RadioGroup.Item>
+  <FieldError>...</FieldError>
+</RadioGroup>
+```
+
+- **RadioGroup**: Container that manages the selection state of radio items. Supports both horizontal and vertical orientations.
+- **RadioGroup.Item**: Individual radio option within a RadioGroup. Must be used inside RadioGroup. Handles selection state and renders default indicator if no children provided. Supports render function children to access state (`isSelected`, `isInvalid`, `isDisabled`).
+- **Label**: Optional clickable text label for the radio option. Linked to the radio for accessibility. Use the [Label](./label) component directly.
+- **Description**: Optional secondary text below the label. Provides additional context about the radio option. Use the [Description](./description) component directly.
+- **RadioGroup.Indicator**: Optional container for the radio circle. Renders default thumb if no children provided. Manages the visual selection state.
+- **RadioGroup.IndicatorThumb**: Optional inner circle that appears when selected. Animates scale based on selection. Can be replaced with custom content.
+- **FieldError**: Error message displayed when radio group is invalid. Shown with animation below the radio group content. Use the [FieldError](./field-error) component directly.
+
+## Usage
+
+### Basic Usage
+
+RadioGroup with simple string children automatically renders title and indicator.
+
+```tsx
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>
+  <RadioGroup.Item value="option2">Option 2</RadioGroup.Item>
+  <RadioGroup.Item value="option3">Option 3</RadioGroup.Item>
+</RadioGroup>
+```
+
+### With Descriptions
+
+Add descriptive text below each radio option for additional context.
+
+```tsx
+import { RadioGroup, Label, Description } from 'heroui-native';
+import { View } from 'react-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="standard">
+    <View>
+      <Label>Standard Shipping</Label>
+      <Description>
+        Delivered in 5-7 business days
+      </Description>
+    </View>
+    <RadioGroup.Indicator />
+  </RadioGroup.Item>
+  <RadioGroup.Item value="express">
+    <View>
+      <Label>Express Shipping</Label>
+      <Description>
+        Delivered in 2-3 business days
+      </Description>
+    </View>
+    <RadioGroup.Indicator />
+  </RadioGroup.Item>
+</RadioGroup>
+```
+
+### Custom Indicator
+
+Replace the default indicator thumb with custom content.
+
+```tsx
+import { RadioGroup, Label } from 'heroui-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="custom">
+    <Label>Custom Option</Label>
+    <RadioGroup.Indicator>
+      {value === 'custom' && (
+        <Animated.View entering={FadeIn}>
+          <Icon name="check" size={12} />
+        </Animated.View>
+      )}
+    </RadioGroup.Indicator>
+  </RadioGroup.Item>
+</RadioGroup>
+```
+
+### With Render Function
+
+Use a render function on RadioGroup.Item to access state and customize the entire content.
+
+```tsx
+import { RadioGroup, Label } from 'heroui-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="option1">
+    {({ isSelected, isInvalid, isDisabled }) => (
+      <>
+        <Label>Option 1</Label>
+        <RadioGroup.Indicator>
+          {isSelected && <CustomIcon />}
+        </RadioGroup.Indicator>
+      </>
+    )}
+  </RadioGroup.Item>
+</RadioGroup>
+```
+
+### With Error Message
+
+Display validation errors below the radio group.
+
+```tsx
+import { RadioGroup, FieldError, useRadioGroup } from 'heroui-native';
+
+function RadioGroupWithError() {
+  const [value, setValue] = React.useState<string | undefined>(undefined);
+  const { isInvalid } = useRadioGroup();
+
+  return (
+    <RadioGroup value={value} onValueChange={setValue} isInvalid={!value}>
+      <RadioGroup.Item value="agree">I agree to the terms</RadioGroup.Item>
+      <RadioGroup.Item value="disagree">I do not agree</RadioGroup.Item>
+      <FieldError isInvalid={!value}>
+        Please select an option to continue
+      </FieldError>
+    </RadioGroup>
+  );
+}
+```
+
+## Example
+
+```tsx
+import { RadioGroup, Label, Description, useThemeColor } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { View } from 'react-native';
+
+export default function PaymentMethodExample() {
+  const [paymentMethod, setPaymentMethod] = React.useState('card');
+  const themeColorForeground = useThemeColor('foreground');
+
+  return (
+    <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+      <RadioGroup.Item value="card">
+        <View>
+          <View className="flex-row items-center gap-1.5">
+            <Ionicons
+              name="card-outline"
+              size={16}
+              color={themeColorForeground}
+            />
+            <Label>Credit/Debit Card</Label>
+          </View>
+          <Description>
+            Pay securely with your credit or debit card
+          </Description>
+        </View>
+        <RadioGroup.Indicator />
+      </RadioGroup.Item>
+
+      <RadioGroup.Item value="paypal">
+        <View>
+          <Label>PayPal</Label>
+          <Description>
+            Fast and secure payment with PayPal
+          </Description>
+        </View>
+        <RadioGroup.Indicator />
+      </RadioGroup.Item>
+
+      <RadioGroup.Item value="bank">
+        <View>
+          <Label>Bank Transfer</Label>
+          <Description>
+            Direct transfer from your bank account
+          </Description>
+        </View>
+        <RadioGroup.Indicator />
+      </RadioGroup.Item>
+    </RadioGroup>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/radio-group.tsx>).
+
+## API Reference
+
+### RadioGroup
+
+| prop            | type                         | default     | description                                                                               |
+| --------------- | ---------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `children`      | `React.ReactNode`            | `undefined` | Radio group content                                                                       |
+| `value`         | `string \| undefined`        | `undefined` | The currently selected value of the radio group                                           |
+| `onValueChange` | `(val: string) => void`      | `undefined` | Callback fired when the selected value changes                                            |
+| `isDisabled`    | `boolean`                    | `false`     | Whether the entire radio group is disabled                                                |
+| `isInvalid`     | `boolean`                    | `false`     | Whether the radio group is invalid                                                        |
+| `variant`       | `'primary' \| 'secondary'`   | `undefined` | Variant style for the radio group (inherited by items if not set on item)                 |
+| `animation`     | `"disable-all" \| undefined` | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| `className`     | `string`                     | `undefined` | Custom class name                                                                         |
+| `...ViewProps`  | `ViewProps`                  | -           | All standard React Native View props are supported                                        |
+
+### RadioGroup.Item
+
+| prop                | type                                                                         | default     | description                                                               |
+| ------------------- | ---------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode \| ((props: RadioGroupItemRenderProps) => React.ReactNode)` | `undefined` | Radio item content or render function to customize the radio item         |
+| `value`             | `string`                                                                     | `undefined` | The value associated with this radio item                                 |
+| `isDisabled`        | `boolean`                                                                    | `false`     | Whether this specific radio item is disabled                              |
+| `isInvalid`         | `boolean`                                                                    | `false`     | Whether the radio item is invalid                                         |
+| `variant`           | `'primary' \| 'secondary'`                                                   | `'primary'` | Variant style for the radio item                                          |
+| `hitSlop`           | `number`                                                                     | `6`         | Hit slop for the pressable area                                           |
+| `className`         | `string`                                                                     | `undefined` | Custom class name                                                         |
+| `...PressableProps` | `PressableProps`                                                             | -           | All standard React Native Pressable props are supported (except disabled) |
+
+#### RadioGroupItemRenderProps
+
+| prop         | type      | description                        |
+| ------------ | --------- | ---------------------------------- |
+| `isSelected` | `boolean` | Whether the radio item is selected |
+| `isInvalid`  | `boolean` | Whether the radio item is invalid  |
+| `isDisabled` | `boolean` | Whether the radio item is disabled |
+
+### RadioGroup.Indicator
+
+| prop                    | type                       | default     | description                                      |
+| ----------------------- | -------------------------- | ----------- | ------------------------------------------------ |
+| `children`              | `React.ReactNode`          | `undefined` | Indicator content                                |
+| `className`             | `string`                   | `undefined` | Custom class name                                |
+| `...Animated.ViewProps` | `AnimatedProps<ViewProps>` | -           | All Reanimated Animated.View props are supported |
+
+**Note:** The `variant` state is automatically provided via context from the parent RadioGroup.Item component.
+
+### RadioGroup.IndicatorThumb
+
+| prop                    | type                                | default     | description                                                  |
+| ----------------------- | ----------------------------------- | ----------- | ------------------------------------------------------------ |
+| `className`             | `string`                            | `undefined` | Custom class name                                            |
+| `animation`             | `RadioGroupIndicatorThumbAnimation` | -           | Animation configuration                                      |
+| `isAnimatedStyleActive` | `boolean`                           | `true`      | Whether animated styles (react-native-reanimated) are active |
+| `...Animated.ViewProps` | `AnimatedProps<ViewProps>`          | -           | All Reanimated Animated.View props are supported             |
+
+#### RadioGroupIndicatorThumbAnimation
+
+Animation configuration for RadioGroupIndicatorThumb component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                 | type                    | default                                              | description                                     |
+| -------------------- | ----------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| `state`              | `'disabled' \| boolean` | -                                                    | Disable animations while customizing properties |
+| `scale.value`        | `[number, number]`      | `[1.5, 1]`                                           | Scale values [unselected, selected]             |
+| `scale.timingConfig` | `WithTimingConfig`      | `{ duration: 300, easing: Easing.out(Easing.ease) }` | Animation timing configuration                  |
+
+**Note:** For labels, descriptions, and error messages, use the base components directly:
+- Use [Label](./label) component for labels
+- Use [Description](./description) component for descriptions
+- Use [FieldError](./field-error) component for error messages
+
+## Hooks
+
+### useRadioGroup
+
+**Returns:**
+
+| Property        | Type                       | Description                                    |
+| --------------- | -------------------------- | ---------------------------------------------- |
+| `value`         | `string \| undefined`      | Currently selected value                       |
+| `isDisabled`    | `boolean`                  | Whether the radio group is disabled            |
+| `isInvalid`     | `boolean`                  | Whether the radio group is in an invalid state |
+| `variant`       | `'primary' \| 'secondary'` | Variant style for the radio group              |
+| `onValueChange` | `(value: string) => void`  | Function to change the selected value          |
+
+### useRadioGroupItem
+
+**Returns:**
+
+| Property     | Type                       | Description                        |
+| ------------ | -------------------------- | ---------------------------------- |
+| `isSelected` | `boolean`                  | Whether the radio item is selected |
+| `isDisabled` | `boolean`                  | Whether the radio item is disabled |
+| `isInvalid`  | `boolean`                  | Whether the radio item is invalid  |
+| `variant`    | `'primary' \| 'secondary'` | Variant style for the radio item   |

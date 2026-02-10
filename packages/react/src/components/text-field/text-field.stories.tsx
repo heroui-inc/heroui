@@ -6,7 +6,6 @@ import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Input} from "../input";
 import {Label} from "../label";
-import {Surface} from "../surface";
 import {TextArea} from "../textarea";
 
 import {TextField} from "./index";
@@ -29,6 +28,26 @@ export const Default: Story = {
       <Label>Your name</Label>
       <Input className="w-[280px]" placeholder="John" />
     </TextField>
+  ),
+};
+
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <TextField fullWidth name="name">
+        <Label>Your name</Label>
+        <Input placeholder="John" />
+      </TextField>
+      <TextField fullWidth name="productDescription">
+        <Label>Describe your product</Label>
+        <TextArea placeholder="My product is..." />
+      </TextField>
+      <TextField fullWidth isInvalid isRequired name="password" type="password">
+        <Label>Password</Label>
+        <Input />
+        <FieldError>Password must be longer than 8 characters</FieldError>
+      </TextField>
+    </div>
   ),
 };
 
@@ -202,25 +221,4 @@ export const WithValidation: Story = {
       </div>
     );
   },
-};
-
-export const OnSurface: Story = {
-  render: () => (
-    <Surface className="flex w-full min-w-[340px] flex-col gap-4 rounded-3xl p-6">
-      <TextField name="name">
-        <Label>Your name</Label>
-        <Input className="w-full" placeholder="John" />
-        <Description>We'll never share this with anyone else</Description>
-      </TextField>
-      <TextField name="email" type="email">
-        <Label>Email</Label>
-        <Input className="w-full" placeholder="john@example.com" />
-      </TextField>
-      <TextField name="bio">
-        <Label>Bio</Label>
-        <TextArea className="w-full" placeholder="Tell us about yourself..." rows={4} />
-        <Description>Minimum 4 rows</Description>
-      </TextField>
-    </Surface>
-  ),
 };
