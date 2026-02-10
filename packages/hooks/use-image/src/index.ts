@@ -4,7 +4,7 @@
 
 import type {ImgHTMLAttributes, SyntheticEvent} from "react";
 
-import {useRef, useState, useEffect, useCallback} from "react";
+import {useRef, useState, useCallback} from "react";
 import {useIsHydrated} from "@heroui/react-utils";
 import {useSafeLayoutEffect} from "@heroui/use-safe-layout-effect";
 
@@ -87,51 +87,75 @@ export function useImage(props: UseImageProps = {}) {
 
   const isHydrated = useIsHydrated();
 
-  const imageRef = useRef<HTMLImageElement | null>(isHydrated ? new Image() : null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
 
   const [status, setStatus] = useState<Status>("pending");
 
-  useEffect(() => {
-    if (!imageRef.current) return;
-    imageRef.current.onload = (event) => {
-      flush();
-      setStatus("loaded");
-      onLoad?.(event as unknown as ImageEvent);
-    };
-    imageRef.current.onerror = (error) => {
-      flush();
-      setStatus("failed");
-      onError?.(error as any);
-    };
-  }, [imageRef.current]);
-
-  const flush = () => {
+  const flush = useCallback(() => {
     if (imageRef.current) {
       imageRef.current.onload = null;
       imageRef.current.onerror = null;
       imageRef.current = null;
     }
-  };
+  }, []);
 
   const load = useCallback((): Status => {
     if (!src) return "pending";
     if (ignoreFallback || shouldBypassImageLoad) return "loaded";
 
+    // Flush any previous image to avoid stale handlers
+    flush();
+
     const img = new Image();
 
-    img.src = src;
+    // CRITICAL: Attach handlers BEFORE setting src to avoid race condition
+    // with cached images that fire onload synchronously
+    img.onload = (event) => {
+      flush();
+      setStatus("loaded");
+      onLoad?.(event as unknown as ImageEvent);
+    };
+    img.onerror = (error) => {
+      flush();
+      setStatus("failed");
+      onError?.(error as any);
+    };
+
+    // Set properties AFTER handlers are attached
     if (crossOrigin) img.crossOrigin = crossOrigin;
     if (srcSet) img.srcset = srcSet;
     if (sizes) img.sizes = sizes;
     if (loading) img.loading = loading;
 
+    // Set src last - this triggers the load
+    img.src = src;
+
     imageRef.current = img;
-    if (img.complete && img.naturalWidth) {
-      return "loaded";
+
+    // Handle already-complete images (belt and suspenders for cached images)
+    if (img.complete) {
+      // Check both naturalWidth and naturalHeight to ensure image fully loaded
+      if (img.naturalWidth && img.naturalHeight) {
+        return "loaded";
+      }
+
+      // Image is complete but has no dimensions - it failed to load
+      return "failed";
     }
 
     return "loading";
-  }, [src, crossOrigin, srcSet, sizes, onLoad, onError, loading, shouldBypassImageLoad]);
+  }, [
+    src,
+    crossOrigin,
+    srcSet,
+    sizes,
+    onLoad,
+    onError,
+    ignoreFallback,
+    loading,
+    shouldBypassImageLoad,
+    flush,
+  ]);
 
   useSafeLayoutEffect(() => {
     if (isHydrated) {

@@ -1,5 +1,12 @@
 # @heroui/date-input
 
+## 2.3.30
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.30
+
 ## 2.3.29
 
 ### Patch Changes

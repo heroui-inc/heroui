@@ -3228,9 +3228,6 @@ importers:
       deepmerge:
         specifier: 4.3.1
         version: 4.3.1
-      flat:
-        specifier: ^5.0.2
-        version: 5.0.2
       tailwind-merge:
         specifier: 3.4.0
         version: 3.4.0

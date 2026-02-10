@@ -1,5 +1,13 @@
 # @heroui/theme
 
+## 2.4.26
+
+### Patch Changes
+
+- [#6157](https://github.com/heroui-inc/heroui/pull/6157) [`5549167`](https://github.com/heroui-inc/heroui/commit/55491670414a78b6a7daec5a7bfd82445aaa4530) Thanks [@wingkwong](https://github.com/wingkwong)! - remove flat dependencies (#6148)
+
+- [#6034](https://github.com/heroui-inc/heroui/pull/6034) [`1f08506`](https://github.com/heroui-inc/heroui/commit/1f085061ed3166b5c20f17c17a0c1494cb489dff) Thanks [@atishkr25](https://github.com/atishkr25)! - improve pagination with large page counts (#4853, #5860)
+
 ## 2.4.25
 
 ### Patch Changes

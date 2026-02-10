@@ -1,5 +1,11 @@
 # @heroui/system-rsc
 
+## 2.3.22
+
+### Patch Changes
+
+- [#5847](https://github.com/heroui-inc/heroui/pull/5847) [`1a2635b`](https://github.com/heroui-inc/heroui/commit/1a2635beda844e22630bd4514982b70807b49a81) Thanks [@ITBoomBKStudio](https://github.com/ITBoomBKStudio)! - fix(system-rsc): correct type inference in extendVariants and CompoundVariants & correct slot detection in getSlots() to ensure proper slot key extraction and consistent compoundVariants behavior.
+
 ## 2.3.21
 
 ### Patch Changes
