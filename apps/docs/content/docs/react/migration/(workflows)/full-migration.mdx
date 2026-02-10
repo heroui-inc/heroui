@@ -1,6 +1,6 @@
 ---
-title: Phased Migration
-description: Step-by-step guide for migrating HeroUI v2 to v3 using phased migration approach
+title: Full Migration
+description: Step-by-step guide for migrating HeroUI v2 to v3 using full migration approach
 ---
 
 <Callout type="warning">
@@ -9,66 +9,13 @@ description: Step-by-step guide for migrating HeroUI v2 to v3 using phased migra
 
 ## Overview
 
-Phased migration is a structured approach to migrating from HeroUI v2 to v3. This method involves migrating all component code first, then switching dependencies, ensuring a clean transition.
+Full migration is a structured approach to migrating from HeroUI v2 to v3. This method involves migrating all component code first, then switching dependencies, ensuring a clean transition.
 
-<Callout type="warning">
-  **Critical Constraint**: HeroUI v2 and v3 **cannot coexist** in the same project. The project will be broken during migration. Always work in a feature branch and migrate all component code before switching dependencies.
-</Callout>
+**Important:** Full migration means the project will be broken during migration (v2 and v3 cannot coexist). Work in a feature branch to maintain a working main branch.
 
-### When to Use Phased Migration
+### Migration MCP
 
-Use this approach when:
-- You can dedicate focused time to complete the migration
-- You're comfortable working in a feature branch with a temporarily broken project
-- You want a clean, all-at-once transition
-- You prefer a simpler setup without managing two versions simultaneously
-
-### Migration MCP Prompts
-
-The Migration MCP server provides **user-invokable prompts** that guide you through a phased migration workflow. These prompts are designed to help you migrate large projects in manageable phases.
-
-**How to Invoke Prompts:**
-
-Prompts are invoked by **you** (the user), not by AI assistants. The method depends on your MCP client:
-
-- **Cursor**: Use slash commands or the prompts menu
-- **Claude Code**: Use the prompts menu or `/prompt` command
-- **Windsurf**: Use the prompts feature
-- **VS Code**: Use the Copilot prompts interface
-
-**Available Prompts:**
-
-| Prompt | When to Use | What It Does |
-|--------|-------------|--------------|
-| `analyze-project` | First step | Analyzes your codebase to identify all HeroUI v2 components |
-| `create-migration-plan` | After analysis | Generates a phased migration plan based on your project |
-| `migrate-component-group` | For each phase | Provides migration instructions for a specific group of components |
-| `verify-migration-step` | After each phase | Verifies that a migration step was completed successfully |
-| `handle-dependencies` | When needed | Identifies and handles component dependencies during migration |
-| `migrate-styling-phase` | After all components migrated | Provides styling migration instructions |
-
-**Phased Migration Workflow:**
-
-1. **Invoke `analyze-project` prompt** - Analyze your codebase
-2. **Invoke `create-migration-plan` prompt** - Create a phased migration plan
-3. **For each phase:**
-   - Invoke `migrate-component-group` prompt with phase components
-   - Apply migrations (your AI assistant can help)
-   - Invoke `verify-migration-step` prompt to verify completion
-4. **After all phases:** Switch dependencies (remove v2, install v3)
-5. **Invoke `migrate-styling-phase` prompt** - Complete styling migration
-
-**Important Notes:**
-
-- Prompts guide you through the workflow step-by-step
-- Each prompt includes "next steps" guidance
-- Your AI assistant can help interpret prompt outputs and apply migrations
-- **Phased migration means the project will be broken during migration** (v2 and v3 cannot coexist in this approach)
-- Work in a feature branch to maintain a working main branch
-
-**For AI Assistants:**
-
-If you're using an AI assistant to help with migration, see the [Agent Migration Guide - Phased Migration](/docs/react/migration/agent-guide-phased) for instructions on how assistants should guide users through prompts.
+The HeroUI Migration MCP server provides tools for AI agents and prompts to help with migration. See the [Migration MCP Tool](/docs/react/migration#migration-mcp-tool) section in the main migration guide for setup and available prompts.
 
 ## Migration Workflow
 
@@ -509,7 +456,7 @@ After migration, thoroughly test your application:
 
 ## Migration Checklist
 
-Use this checklist to track your phased migration progress:
+Use this checklist to track your full migration progress:
 
 ### Dependencies
 - Update React to v19+
@@ -561,27 +508,9 @@ Use this checklist to track your phased migration progress:
 - Accessibility testing
 - Performance testing
 
-## Common Issues and Solutions
-
-### Issue: Components not rendering
-
-**Solution:** Ensure you've imported `@heroui/styles` in your CSS file and it's imported after `tailwindcss`.
-
-### Issue: Styles not applying
-
-**Solution:** Check that Tailwind CSS v4 is properly configured and CSS imports are in the correct order.
-
-### Issue: TypeScript errors
-
-**Solution:** Update your TypeScript types. v3 may have different prop types. Check component documentation.
-
-### Issue: Animations not working
-
-**Solution:** v3 handles animations differently. Check if the component supports animations in v3.
-
 ## Next Steps
 
-After completing the phased migration:
+After completing the full migration:
 
 1. Review the [v3 component documentation](/docs/react/components)
 2. Explore new components available in v3

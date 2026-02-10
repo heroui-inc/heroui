@@ -13,8 +13,6 @@ The Accordion component in HeroUI v3 has been redesigned with a compound compone
 
 ## Structure Changes
 
-### v2: Flat Component Structure
-
 In v2, `AccordionItem` was a self-contained component that accepted props for title, subtitle, content, and other elements:
 
 ```tsx
@@ -39,8 +37,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Component Structure
 
 In v3, Accordion uses a compound component pattern with explicit subcomponents:
 
@@ -236,110 +232,7 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Custom Indicator
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Icon } from "@iconify/react";
-
-    <Accordion>
-      <AccordionItem 
-        key="1"
-        title="Item 1"
-        indicator={(props) => (
-          props.isOpen ? <Icon icon="mdi:minus" /> : <Icon icon="mdi:plus" />
-        )}
-      >
-        Content
-      </AccordionItem>
-    </Accordion>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Icon } from "@iconify/react";
-    import { useState } from "react";
-    import { Accordion } from "@heroui/react";
-    import type { Key } from "@heroui/react";
-
-    const [expandedKeys, setExpandedKeys] = useState<Set<Key>>(new Set());
-
-    <Accordion 
-      expandedKeys={expandedKeys}
-      onExpandedChange={setExpandedKeys}
-    >
-      <Accordion.Item id="1">
-        <Accordion.Heading>
-          <Accordion.Trigger>
-            Item 1
-            <Accordion.Indicator>
-              {expandedKeys.has("1") ? (
-                <Icon icon="gravity-ui:minus" />
-              ) : (
-                <Icon icon="gravity-ui:plus" />
-              )}
-            </Accordion.Indicator>
-          </Accordion.Trigger>
-        </Accordion.Heading>
-        <Accordion.Panel>
-          <Accordion.Body>Content</Accordion.Body>
-        </Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled Items and Default Expanded Keys
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Accordion 
-      defaultExpandedKeys={["1"]}
-      disabledKeys={["2"]}
-    >
-      <AccordionItem key="1" title="Item 1">
-        Content 1
-      </AccordionItem>
-      <AccordionItem key="2" title="Item 2">
-        Content 2
-      </AccordionItem>
-    </Accordion>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Accordion defaultExpandedKeys={["1"]}>
-      <Accordion.Item id="1">
-        <Accordion.Heading>
-          <Accordion.Trigger>
-            Item 1
-            <Accordion.Indicator />
-          </Accordion.Trigger>
-        </Accordion.Heading>
-        <Accordion.Panel>
-          <Accordion.Body>Content 1</Accordion.Body>
-        </Accordion.Panel>
-      </Accordion.Item>
-      <Accordion.Item id="2" isDisabled>
-        <Accordion.Heading>
-          <Accordion.Trigger>
-            Item 2
-            <Accordion.Indicator />
-          </Accordion.Trigger>
-        </Accordion.Heading>
-        <Accordion.Panel>
-          <Accordion.Body>Content 2</Accordion.Body>
-        </Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
-    ```
-  </Tab>
-</Tabs>
-
-## Styling Changes
+## Component Anatomy
 
 ### v2: `classNames` Prop
 

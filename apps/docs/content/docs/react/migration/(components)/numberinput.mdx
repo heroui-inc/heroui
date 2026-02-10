@@ -13,8 +13,6 @@ The NumberInput component in HeroUI v3 has been renamed to `NumberField` and red
 
 ## Structure Changes
 
-### v2: Single Component
-
 In v2, NumberInput was a single component with props:
 
 ```tsx
@@ -24,8 +22,6 @@ export default function App() {
   return <NumberInput label="Amount" defaultValue={1024} />;
 }
 ```
-
-### v3: Compound Components
 
 In v3, NumberField requires compound components:
 
@@ -212,64 +208,6 @@ The following props are no longer available in v3:
     ```
   </Tab>
 </Tabs>
-
-### Number Constraints
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Min/Max */}
-    <NumberInput
-      label="Quantity"
-      maxValue={100}
-      minValue={0}
-    />
-    
-    {/* Step */}
-    <NumberInput label="Percentage" step={0.1} />
-    
-    {/* Format options */}
-    <NumberInput
-      formatOptions={{style: "currency", currency: "USD"}}
-      label="Price"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Min/Max */}
-    <NumberField maxValue={100} minValue={0}>
-      <Label>Quantity</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    
-    {/* Step */}
-    <NumberField step={0.1}>
-      <Label>Percentage</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    
-    {/* Format options */}
-    <NumberField formatOptions={{style: "currency", currency: "USD"}}>
-      <Label>Price</Label>
-      <NumberField.Group>
-        <NumberField.DecrementButton />
-        <NumberField.Input />
-        <NumberField.IncrementButton />
-      </NumberField.Group>
-    </NumberField>
-    ```
-  </Tab>
-</Tabs>
-
 
 ## Component Anatomy
 

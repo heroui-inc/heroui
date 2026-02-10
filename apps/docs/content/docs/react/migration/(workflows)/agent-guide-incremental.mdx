@@ -13,13 +13,13 @@ index: false
 This guide is designed for AI assistants (agents) helping users migrate from HeroUI v2 to v3 using **incremental coexistence migration**. This approach allows v2 and v3 components to work side-by-side, enabling component-by-component migration while keeping the project functional.
 
 <Callout type="info">
-  **Key Difference**: Unlike phased migration, incremental coexistence migration allows the project to remain functional during migration. Both v2 and v3 components can coexist temporarily.
+  **Key Difference**: Unlike full migration, incremental coexistence migration allows the project to remain functional during migration. Both v2 and v3 components can coexist temporarily.
 </Callout>
 
 ## Key Principles
 
 1. **Incremental Component Migration**: Migrate one component at a time, testing each before proceeding
-2. **Project Remains Functional**: Unlike phased migration, the project should remain working throughout
+2. **Project Remains Functional**: Unlike full migration, the project should remain working throughout
 3. **Strategy Identification**: Determine which coexistence strategy the project uses (A: pnpm aliases or B: component packages)
 4. **Component-by-Component Testing**: Test each migrated component before moving to the next
 5. **CSS Conflict Management**: Monitor and resolve styling conflicts between v2 and v3 during coexistence
@@ -161,7 +161,7 @@ Once all components are migrated:
    - Use `get_styling_migration_guide` MCP tool
    - Update utility classes, color tokens, etc.
 
-## Differences from Phased Migration
+## Differences from Full Migration
 
 **Key Differences:**
 
@@ -179,12 +179,12 @@ Once all components are migrated:
 - Teams that want to test v3 components incrementally
 - Projects already using component-specific packages (Strategy B)
 
-**When to Use Phased Migration:**
+**When to Use Full Migration:**
 
 - Smaller projects that can migrate quickly
 - Projects where temporary broken state is acceptable
 - Teams that prefer all-at-once migration
-- Projects using unified `@heroui/react` package (Strategy A can work but phased may be simpler)
+- Projects using unified `@heroui/react` package (Strategy A can work but full migration may be simpler)
 
 ## Best Practices for Agents
 

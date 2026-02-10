@@ -13,8 +13,6 @@ The Dropdown component in HeroUI v3 has been redesigned with a compound componen
 
 ## Structure Changes
 
-### v2: Separate Components
-
 In v2, Dropdown used separate components: `DropdownTrigger`, `DropdownMenu`, `DropdownItem`, `DropdownSection`:
 
 ```tsx
@@ -34,8 +32,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Component Structure
 
 In v3, Dropdown uses a compound component pattern with explicit subcomponents:
 
@@ -118,27 +114,6 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### With Action Handler
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <DropdownMenu onAction={(key) => alert(key)}>
-      <DropdownItem key="new">New file</DropdownItem>
-    </DropdownMenu>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Dropdown.Menu onAction={(key) => alert(key)}>
-      <Dropdown.Item id="new" textValue="New file">
-        <Label>New file</Label>
-      </Dropdown.Item>
-    </Dropdown.Menu>
-    ```
-  </Tab>
-</Tabs>
-
 ### Item Content
 
 <Tabs items={["v2", "v3"]}>
@@ -198,29 +173,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Danger Item
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <DropdownItem
-      key="delete"
-      className="text-danger"
-      color="danger"
-    >
-      Delete file
-    </DropdownItem>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Dropdown.Item id="delete" textValue="Delete file" variant="danger">
-      <Label>Delete file</Label>
-    </Dropdown.Item>
-    ```
-  </Tab>
-</Tabs>
-
 ### With Sections
 
 <Tabs items={["v2", "v3"]}>
@@ -259,180 +211,6 @@ The following props are no longer available in v3:
         </Dropdown.Item>
       </Dropdown.Section>
     </Dropdown.Menu>
-    ```
-  </Tab>
-</Tabs>
-
-### Selection
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    {/* Single selection */}
-    const [singleSelected, setSingleSelected] = useState(new Set(["text"]));
-    <DropdownMenu
-      selectedKeys={singleSelected}
-      selectionMode="single"
-      onSelectionChange={setSingleSelected}
-    >
-      <DropdownItem key="text">Text</DropdownItem>
-      <DropdownItem key="number">Number</DropdownItem>
-    </DropdownMenu>
-    
-    {/* Multiple selection */}
-    const [multiSelected, setMultiSelected] = useState(new Set(["bold"]));
-    <DropdownMenu
-      selectedKeys={multiSelected}
-      selectionMode="multiple"
-      onSelectionChange={setMultiSelected}
-    >
-      <DropdownItem key="bold">Bold</DropdownItem>
-      <DropdownItem key="italic">Italic</DropdownItem>
-    </DropdownMenu>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-
-    {/* Single selection */}
-    const [singleSelected, setSingleSelected] = useState(new Set(["text"]));
-    <Dropdown.Menu
-      selectedKeys={singleSelected}
-      selectionMode="single"
-      onSelectionChange={setSingleSelected}
-    >
-      <Dropdown.Item id="text" textValue="Text">
-        <Dropdown.ItemIndicator />
-        <Label>Text</Label>
-      </Dropdown.Item>
-      <Dropdown.Item id="number" textValue="Number">
-        <Dropdown.ItemIndicator />
-        <Label>Number</Label>
-      </Dropdown.Item>
-    </Dropdown.Menu>
-    
-    {/* Multiple selection */}
-    const [multiSelected, setMultiSelected] = useState(new Set(["bold"]));
-    <Dropdown.Menu
-      selectedKeys={multiSelected}
-      selectionMode="multiple"
-      onSelectionChange={setMultiSelected}
-    >
-      <Dropdown.Item id="bold" textValue="Bold">
-        <Label>Bold</Label>
-        <Dropdown.ItemIndicator />
-      </Dropdown.Item>
-      <Dropdown.Item id="italic" textValue="Italic">
-        <Label>Italic</Label>
-        <Dropdown.ItemIndicator />
-      </Dropdown.Item>
-    </Dropdown.Menu>
-    ```
-  </Tab>
-</Tabs>
-
-### Disabled Items
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <DropdownMenu disabledKeys={["delete"]}>
-      <DropdownItem key="new">New file</DropdownItem>
-      <DropdownItem key="delete">Delete file</DropdownItem>
-    </DropdownMenu>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Dropdown.Menu disabledKeys={["delete"]}>
-      <Dropdown.Item id="new" textValue="New file">
-        <Label>New file</Label>
-      </Dropdown.Item>
-      <Dropdown.Item id="delete" textValue="Delete file">
-        <Label>Delete file</Label>
-      </Dropdown.Item>
-    </Dropdown.Menu>
-    ```
-  </Tab>
-</Tabs>
-
-### Custom Trigger
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Dropdown>
-      <DropdownTrigger>
-        <CustomButton>Menu</CustomButton>
-      </DropdownTrigger>
-      <DropdownMenu>
-        <DropdownItem key="new">New file</DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Dropdown>
-      <Dropdown.Trigger>
-        <CustomButton>Menu</CustomButton>
-      </Dropdown.Trigger>
-      <Dropdown.Popover>
-        <Dropdown.Menu>
-          <Dropdown.Item id="new" textValue="New file">
-            <Label>New file</Label>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown.Popover>
-    </Dropdown>
-    ```
-  </Tab>
-</Tabs>
-
-### Controlled Open State
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    <Dropdown
-      isOpen={isOpen}
-      onOpenChange={setIsOpen}
-    >
-      <DropdownTrigger>
-        <Button>Menu</Button>
-      </DropdownTrigger>
-      <DropdownMenu>
-        <DropdownItem key="new">New file</DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    <Dropdown
-      isOpen={isOpen}
-      onOpenChange={setIsOpen}
-    >
-      <Button>Menu</Button>
-      <Dropdown.Popover>
-        <Dropdown.Menu>
-          <Dropdown.Item id="new" textValue="New file">
-            <Label>New file</Label>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown.Popover>
-    </Dropdown>
     ```
   </Tab>
 </Tabs>

@@ -13,8 +13,6 @@ The Switch component in HeroUI v3 has been redesigned with a compound component 
 
 ## Structure Changes
 
-### v2: Simple Structure
-
 In v2, Switch used a simple structure with children as label:
 
 ```tsx
@@ -24,8 +22,6 @@ export default function App() {
   return <Switch>Enable notifications</Switch>;
 }
 ```
-
-### v3: Compound Components
 
 In v3, Switch requires compound components:
 
@@ -82,55 +78,6 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
-### Controlled Switch
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [isSelected, setIsSelected] = useState(true);
-
-    <Switch isSelected={isSelected} onValueChange={setIsSelected}>
-      Airplane mode
-    </Switch>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-
-    const [isSelected, setIsSelected] = useState(true);
-
-    <Switch isSelected={isSelected} onChange={setIsSelected}>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
-      <Label>Airplane mode</Label>
-    </Switch>
-    ```
-  </Tab>
-</Tabs>
-
-### Without Label
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Switch defaultSelected aria-label="Automatic updates" />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Switch defaultSelected aria-label="Automatic updates">
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
-    </Switch>
-    ```
-  </Tab>
-</Tabs>
-
 ### With Thumb Icon
 
 <Tabs items={["v2", "v3"]}>
@@ -150,98 +97,6 @@ The following props are no longer available in v3:
         </Switch.Thumb>
       </Switch.Control>
       <Label>Enable notifications</Label>
-    </Switch>
-    ```
-  </Tab>
-</Tabs>
-
-### With Start/End Content
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Switch
-      startContent={<SunIcon />}
-      endContent={<MoonIcon />}
-    >
-      Dark mode
-    </Switch>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Switch>
-      <Switch.Control className="flex items-center gap-2">
-        <SunIcon />
-        <Switch.Thumb />
-        <MoonIcon />
-      </Switch.Control>
-      <Label>Dark mode</Label>
-    </Switch>
-    ```
-  </Tab>
-</Tabs>
-
-### Sizes and Colors
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Sizes */}
-    <div className="flex gap-4">
-      <Switch size="sm">Small</Switch>
-      <Switch size="md">Medium</Switch>
-      <Switch size="lg">Large</Switch>
-    </div>
-    
-    {/* Colors */}
-    <Switch color="primary">Primary</Switch>
-    <Switch color="success">Success</Switch>
-    <Switch color="danger">Danger</Switch>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    {/* Sizes */}
-    <div className="flex gap-4">
-      <Switch size="sm">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Small</Label>
-      </Switch>
-      <Switch size="md">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Medium</Label>
-      </Switch>
-      <Switch size="lg">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Large</Label>
-      </Switch>
-    </div>
-    
-    {/* Colors - Use Tailwind CSS classes */}
-    <Switch>
-      <Switch.Control className="data-[selected=true]:bg-accent">
-        <Switch.Thumb />
-      </Switch.Control>
-      <Label>Primary</Label>
-    </Switch>
-    <Switch>
-      <Switch.Control className="data-[selected=true]:bg-success">
-        <Switch.Thumb />
-      </Switch.Control>
-      <Label>Success</Label>
-    </Switch>
-    <Switch>
-      <Switch.Control className="data-[selected=true]:bg-danger">
-        <Switch.Thumb />
-      </Switch.Control>
-      <Label>Danger</Label>
     </Switch>
     ```
   </Tab>

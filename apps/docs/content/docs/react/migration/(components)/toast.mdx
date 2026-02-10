@@ -13,8 +13,6 @@ The Toast component in HeroUI v3 has been completely redesigned with a new API b
 
 ## Structure Changes
 
-### v2: Provider and Hook Pattern
-
 In v2, Toast used a provider and hook pattern:
 
 ```tsx
@@ -38,8 +36,6 @@ function MyComponent() {
   );
 }
 ```
-
-### v3: Container and Function Pattern
 
 In v3, Toast uses a container component and a global `toast()` function:
 
@@ -102,57 +98,6 @@ function MyComponent() {
 **v3:** Built-in promise support with `toast.promise()` for handling async operations
 
 ## Migration Examples
-
-### Toast with Title and Description
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    const { toast } = useToast();
-
-    toast.show({
-      title: "Success",
-      description: "Your changes have been saved",
-      variant: "success"
-    });
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { toast } from "@heroui/react";
-
-    toast.success("Your changes have been saved", {
-      title: "Success",
-      description: "Your changes have been saved"
-    });
-    ```
-  </Tab>
-</Tabs>
-
-### Helper Methods for Variants
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    const { toast } = useToast();
-
-    toast.show({ variant: "success", title: "Success" });
-    toast.show({ variant: "error", title: "Error" });
-    toast.show({ variant: "warning", title: "Warning" });
-    toast.show({ variant: "info", title: "Info" });
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { toast } from "@heroui/react";
-
-    toast.success("Success");
-    toast.danger("Error");
-    toast.warning("Warning");
-    toast.info("Info");
-    ```
-  </Tab>
-</Tabs>
 
 ### Promise Support
 

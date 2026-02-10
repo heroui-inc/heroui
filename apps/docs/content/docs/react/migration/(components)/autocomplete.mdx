@@ -13,8 +13,6 @@ The Autocomplete component has been renamed to **ComboBox** in HeroUI v3 and red
 
 ## Structure Changes
 
-### v2: Single Component with Internal Structure
-
 In v2, Autocomplete was a single component that wrapped Input internally:
 
 ```tsx
@@ -29,8 +27,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Component Pattern
 
 In v3, ComboBox uses compound components and requires explicit Input:
 
@@ -239,71 +235,6 @@ The following props are no longer available in v3:
           </ListBox.Section>
         </ListBox>
       </ComboBox.Popover>
-    </ComboBox>
-    ```
-  </Tab>
-</Tabs>
-
-### Form Validation
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Required field */}
-    <Autocomplete label="Animal" isRequired>
-      <AutocompleteItem key="cat">Cat</AutocompleteItem>
-    </Autocomplete>
-    
-    {/* With error message */}
-    <Autocomplete
-      label="Animal"
-      isInvalid
-      errorMessage="Please select an animal"
-    >
-      <AutocompleteItem key="cat">Cat</AutocompleteItem>
-    </Autocomplete>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { FieldError, Form } from "@heroui/react";
-
-    {/* Required field */}
-    <Form>
-      <ComboBox isRequired name="animal">
-        <Label>Animal</Label>
-        <ComboBox.InputGroup>
-          <Input placeholder="Search animals..." />
-          <ComboBox.Trigger />
-        </ComboBox.InputGroup>
-        <ComboBox.Popover>
-          <ListBox>
-            <ListBox.Item id="cat" textValue="Cat">
-              Cat
-              <ListBox.ItemIndicator />
-            </ListBox.Item>
-          </ListBox>
-        </ComboBox.Popover>
-        <FieldError />
-      </ComboBox>
-    </Form>
-    
-    {/* With error message */}
-    <ComboBox isInvalid>
-      <Label>Animal</Label>
-      <ComboBox.InputGroup>
-        <Input placeholder="Search animals..." />
-        <ComboBox.Trigger />
-      </ComboBox.InputGroup>
-      <ComboBox.Popover>
-        <ListBox>
-          <ListBox.Item id="cat" textValue="Cat">
-            Cat
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-        </ListBox>
-      </ComboBox.Popover>
-      <FieldError>Please select an animal</FieldError>
     </ComboBox>
     ```
   </Tab>

@@ -13,8 +13,6 @@ The Skeleton component in HeroUI v3 has been simplified to a standalone placehol
 
 ## Structure Changes
 
-### v2: Wrapper Component
-
 In v2, Skeleton wrapped children and showed/hid them based on `isLoaded`:
 
 ```tsx
@@ -30,8 +28,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Standalone Component
 
 In v3, Skeleton is a standalone placeholder that you control visibility of manually:
 
@@ -112,33 +108,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Standalone Skeleton
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <div className="flex items-center gap-3">
-      <Skeleton className="flex rounded-full w-12 h-12" />
-      <div className="w-full flex flex-col gap-2">
-        <Skeleton className="h-3 w-3/5 rounded-lg" />
-        <Skeleton className="h-3 w-4/5 rounded-lg" />
-      </div>
-    </div>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <div className="flex items-center gap-3">
-      <Skeleton className="h-12 w-12 shrink-0 rounded-lg" />
-      <div className="flex-1 space-y-2">
-        <Skeleton className="h-3 w-full rounded" />
-        <Skeleton className="h-3 w-4/5 rounded" />
-      </div>
-    </div>
-    ```
-  </Tab>
-</Tabs>
-
 ### Animation Types
 
 <Tabs items={["v2", "v3"]}>
@@ -168,71 +137,6 @@ The following props are no longer available in v3:
     ```
   </Tab>
 </Tabs>
-
-### Complex Example: Card with Content
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    <Card className="w-[200px] space-y-5 p-4" radius="lg">
-      <Skeleton className="rounded-lg" isLoaded={isLoaded}>
-        <div className="h-24 rounded-lg bg-secondary" />
-      </Skeleton>
-      <div className="space-y-3">
-        <Skeleton className="w-3/5 rounded-lg" isLoaded={isLoaded}>
-          <div className="h-3 w-full rounded-lg bg-secondary" />
-        </Skeleton>
-        <Skeleton className="w-4/5 rounded-lg" isLoaded={isLoaded}>
-          <div className="h-3 w-full rounded-lg bg-secondary-300" />
-        </Skeleton>
-      </div>
-    </Card>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    <Card className="w-[250px] space-y-5 rounded-lg p-4">
-      {!isLoaded ? (
-        <>
-          <Skeleton className="h-32 rounded-lg" />
-          <div className="space-y-3">
-            <Skeleton className="h-3 w-3/5 rounded-lg" />
-            <Skeleton className="h-3 w-4/5 rounded-lg" />
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="h-32 rounded-lg bg-secondary" />
-          <div className="space-y-3">
-            <div className="h-3 w-3/5 rounded-lg bg-secondary" />
-            <div className="h-3 w-4/5 rounded-lg bg-secondary-300" />
-          </div>
-        </>
-      )}
-    </Card>
-    ```
-  </Tab>
-</Tabs>
-
-## Global Animation Configuration
-
-In v3, you can set a default animation type globally using CSS variables:
-
-```css
-:root {
-  --skeleton-animation: pulse; /* shimmer, pulse, or none */
-}
-```
-
-This can be overridden by the `animationType` prop on individual components.
 
 ## Breaking Changes Summary
 

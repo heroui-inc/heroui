@@ -13,8 +13,6 @@ The Tabs component in HeroUI v3 has been redesigned with a compound component pa
 
 ## Structure Changes
 
-### v2: Tab Component with Title
-
 In v2, Tabs used `Tab` component with `title` prop and children as panel content:
 
 ```tsx
@@ -30,8 +28,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Components
 
 In v3, Tabs requires compound components with separate tab and panel:
 
@@ -146,39 +142,6 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
-### Vertical Tabs
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Tabs isVertical aria-label="Options">
-      <Tab key="photos" title="Photos">Content</Tab>
-      <Tab key="music" title="Music">Content</Tab>
-    </Tabs>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <Tabs orientation="vertical">
-      <Tabs.ListContainer>
-        <Tabs.List aria-label="Options">
-          <Tabs.Tab id="photos">
-            Photos
-            <Tabs.Indicator />
-          </Tabs.Tab>
-          <Tabs.Tab id="music">
-            Music
-            <Tabs.Indicator />
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs.ListContainer>
-      <Tabs.Panel id="photos">Content</Tabs.Panel>
-      <Tabs.Panel id="music">Content</Tabs.Panel>
-    </Tabs>
-    ```
-  </Tab>
-</Tabs>
-
 ### With Icons
 
 <Tabs items={["v2", "v3"]}>
@@ -221,28 +184,6 @@ Tabs (Root)
   │           └── Tabs.Indicator (optional)
   └── Tabs.Panel (one per tab, matching id)
 ```
-
-## Important Notes
-
-### Tab and Panel Matching
-
-- **v2:** Tab `key` matched automatically with panel content
-- **v3:** `Tabs.Tab` `id` must match `Tabs.Panel` `id` exactly
-
-### Indicator
-
-- **v2:** Cursor indicator was automatic (could be disabled with `disableCursorAnimation`)
-- **v3:** Must explicitly include `Tabs.Indicator` in each `Tabs.Tab`
-
-### Orientation
-
-- **v2:** Used `isVertical` boolean prop
-- **v3:** Uses `orientation` prop with `"horizontal"` or `"vertical"` values
-
-### Placement
-
-- **v2:** Had `placement` prop (`"top"`, `"bottom"`, `"start"`, `"end"`)
-- **v3:** `placement` removed - use `orientation` and layout with Tailwind CSS
 
 ## Breaking Changes Summary
 

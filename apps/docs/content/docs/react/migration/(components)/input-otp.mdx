@@ -13,8 +13,6 @@ The InputOTP component in HeroUI v3 has been redesigned with a compound componen
 
 ## Structure Changes
 
-### v2: Automatic Segment Rendering
-
 In v2, InputOtp automatically rendered segments based on the `length` prop:
 
 ```tsx
@@ -24,8 +22,6 @@ export default function App() {
   return <InputOtp length={4} />;
 }
 ```
-
-### v3: Manual Slot Definition
 
 In v3, InputOTP requires manual definition of slots using compound components:
 
@@ -139,87 +135,6 @@ The following props are no longer available in v3:
     ```
   </Tab>
 </Tabs>
-
-### Form Validation
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* With description */}
-    <InputOtp description="Enter the code sent to your email" length={4} />
-    
-    {/* With error message */}
-    <InputOtp errorMessage="Invalid code" isInvalid length={4} />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Description } from "@heroui/react";
-
-    {/* With description */}
-    <div className="flex flex-col gap-2">
-      <InputOTP maxLength={4}>
-        <InputOTP.Group>
-          <InputOTP.Slot index={0} />
-          <InputOTP.Slot index={1} />
-          <InputOTP.Slot index={2} />
-          <InputOTP.Slot index={3} />
-        </InputOTP.Group>
-      </InputOTP>
-      <Description>Enter the code sent to your email</Description>
-    </div>
-    
-    {/* With error message */}
-    <div className="flex flex-col gap-2">
-      <InputOTP isInvalid maxLength={4}>
-        <InputOTP.Group>
-          <InputOTP.Slot index={0} />
-          <InputOTP.Slot index={1} />
-          <InputOTP.Slot index={2} />
-          <InputOTP.Slot index={3} />
-        </InputOTP.Group>
-      </InputOTP>
-      <span className="field-error" data-visible={isInvalid}>
-        Invalid code
-      </span>
-    </div>
-    ```
-  </Tab>
-</Tabs>
-
-### With onComplete Callback
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <InputOtp
-      length={6}
-      onComplete={(value) => console.log("Complete:", value)}
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <InputOTP
-      maxLength={6}
-      onComplete={(value) => console.log("Complete:", value)}
-    >
-      <InputOTP.Group>
-        <InputOTP.Slot index={0} />
-        <InputOTP.Slot index={1} />
-        <InputOTP.Slot index={2} />
-      </InputOTP.Group>
-      <InputOTP.Separator />
-      <InputOTP.Group>
-        <InputOTP.Slot index={3} />
-        <InputOTP.Slot index={4} />
-        <InputOTP.Slot index={5} />
-      </InputOTP.Group>
-    </InputOTP>
-    ```
-  </Tab>
-</Tabs>
-
 
 ## Component Anatomy
 

@@ -37,8 +37,6 @@ Use `Input` when you need:
 
 ## Structure Changes
 
-### v2: Single Component with Props
-
 In v2, `Input` was a full-featured component that accepted props for label, description, placeholder, and other elements:
 
 ```tsx
@@ -54,8 +52,6 @@ export default function App() {
   );
 }
 ```
-
-### v3: Compound Component Structure
 
 In v3, `Input` is a primitive component. For form fields with labels and validation, use `TextField` which wraps `Input` with `Label`, `Description`, and `FieldError`:
 
@@ -204,78 +200,6 @@ For inputs with prefix or suffix content, use the **InputGroup** compound compon
 - `InputGroup.Prefix` for content before the input (replaces `startContent`)
 - `InputGroup.Suffix` for content after the input (replaces `endContent`)
 - `InputGroup.Input` for the input element itself
-
-### Input with Clear Button
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    <Input
-      isClearable
-      label="Email"
-      onClear={() => console.log("cleared")}
-      type="email"
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-    import { CloseButton } from "@heroui/react";
-
-    const [value, setValue] = useState("");
-
-    <TextField name="email" type="email">
-      <Label>Email</Label>
-      <div className="flex items-center">
-        <Input value={value} onChange={(e) => setValue(e.target.value)} />
-        {value && (
-          <CloseButton
-            aria-label="Clear"
-            onPress={() => setValue("")}
-          />
-        )}
-      </div>
-      <FieldError />
-    </TextField>
-    ```
-  </Tab>
-</Tabs>
-
-### Controlled Input
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { useState } from "react";
-
-    const [value, setValue] = useState("");
-
-    <Input
-      label="Email"
-      onValueChange={setValue}
-      type="email"
-      value={value}
-    />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { useState } from "react";
-
-    const [value, setValue] = useState("");
-
-    <TextField name="email" type="email">
-      <Label>Email</Label>
-      <Input
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
-      />
-      <FieldError />
-    </TextField>
-    ```
-  </Tab>
-</Tabs>
 
 ## Breaking Changes Summary
 

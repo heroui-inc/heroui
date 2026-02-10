@@ -12,7 +12,7 @@ index: true
 
 ### Migration MCP Tool
 
-To make migration easier, we provide a **Migration MCP (Model Context Protocol) server** that AI assistants can use to access migration guides directly. This tool provides programmatic access to all migration documentation, making it easier for AI-powered development tools to help you migrate your codebase.
+To make migration easier, we provide a **Migration MCP (Model Context Protocol) server** that AI assistants can use to access migration guides directly.
 
 **Features:**
 - Access to comprehensive migration guide
@@ -34,113 +34,20 @@ Add the Migration MCP server to your MCP client configuration (e.g., in Cursor o
 }
 ```
 
-<Callout type="warning">
-  **Important:** Do not use the Migration MCP alongside the HeroUI React MCP server. Having both configured simultaneously may confuse AI assistants about which set of component documentation to use. For migration purposes, connect only to the Migration MCP. Once migration is complete, you can switch to using the HeroUI React MCP for v3 component documentation.
-</Callout>
-
 Once configured, AI assistants can automatically access migration guides through tools to help you migrate your components more efficiently. The MCP server also provides guided migration prompts that can be used with slash commands in your agent chat.
 
 **Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
-
-## Choose Your Migration Approach
-
-HeroUI v2 and v3 cannot coexist in the same project without special setup. You have two migration approaches to choose from:
-
-### Phased Migration
-
-**Best for:** Projects that can dedicate focused time to complete migration, teams comfortable working in feature branches with temporarily broken code.
-
-**How it works:**
-- Migrate all component code first (project will be broken during this phase)
-- Switch dependencies to v3
-- Complete styling migration
-
-**Advantages:**
-- Simpler setup - no complex coexistence configuration
-- Cleaner transition - only one version active at a time
-- No CSS conflicts during migration
-- Supported by Migration MCP prompts
-
-**Disadvantages:**
-- Project is broken during migration
-- Requires working in a feature branch
-- All components must be migrated before switching dependencies
-
-**Get started:** [Phased Migration Guide](/docs/react/migration/phased-migration)
-
-### Incremental Migration with Coexistence
-
-**Best for:** Projects that need to stay functional during migration, teams migrating gradually over time, large codebases migrating feature-by-feature.
-
-**How it works:**
-- Set up coexistence using pnpm aliases or component packages
-- Migrate components one-by-one while keeping project functional
-- Complete migration and remove v2 dependencies
-
-**Advantages:**
-- Project remains functional during migration
-- Can migrate gradually over time
-- Can test v3 components alongside v2
-
-**Disadvantages:**
-- More complex initial setup
-- Both CSS systems loaded (larger bundle size)
-- Potential styling conflicts
-- Requires managing two versions simultaneously
-
-**Get started:** [Incremental Migration Guide](/docs/react/migration/incremental-migration)
-
-### Quick Comparison
-
-| Aspect | Phased Migration | Incremental Migration |
-|--------|-----------------|----------------------|
-| Project State | Broken during migration | Functional throughout |
-| Setup Complexity | Simple | Complex (coexistence setup) |
-| CSS Conflicts | None | Possible |
-| Bundle Size | Normal | Increased during migration |
-| Migration Speed | Faster (focused) | Slower (gradual) |
-| Best For | Focused migration sessions | Gradual migration over time |
-
-## High-Level Migration Checklist
-
-Regardless of which approach you choose, you'll need to:
-
-### Dependencies
-- Update React to v19+
-- Update HeroUI packages to v3
-- Remove Framer Motion
-- Update Tailwind CSS to v4
-
-### Configuration
-- Remove `heroui()` plugin from Tailwind config
-- Update CSS imports (`@import "tailwindcss"; @import "@heroui/styles";`)
-- Remove `hero.ts` file (if exists)
-
-### Application Code
-- Remove `HeroUIProvider` wrapper
-- Update component imports and APIs
-- Migrate hooks (see [Hooks Migration Guide](/docs/react/migration/hooks))
-- Update styling (see [Styling Migration Guide](/docs/react/migration/styling))
-
-### Testing
-- Visual regression testing
-- Functionality testing
-- Accessibility testing
-- Performance testing
-
-For detailed step-by-step instructions, see the [Phased Migration Guide](/docs/react/migration/phased-migration) or [Incremental Migration Guide](/docs/react/migration/incremental-migration).
 
 <section id="major-changes">
 
 ## Major Changes
 
+- **Dependencies**: Update React to v19+, HeroUI packages to v3, Tailwind CSS to v4, remove Framer Motion
 - **No Provider Required**: v3 removes the need for `HeroUIProvider`
-- **CSS-First Theming**: New CSS-based theming system replaces Tailwind plugin
-- **React 19 Required**: v3 requires React 19+ (v2 supports React 18+)
-- **No Framer Motion**: Animation library dependency removed
 - **Component API Updates**: Many components use React Aria Components patterns
 - **Compound Components**: New compound component patterns for better customization
 - **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead. `useDisclosure` is replaced with `useOverlayState`. See the [Hooks Migration Guide](/docs/react/migration/hooks) for details.
+- **Configuration**: Remove `heroui()` plugin from Tailwind config, update CSS imports, remove `hero.ts` file
 
 </section>
 
@@ -167,6 +74,54 @@ Many components now use compound component patterns for better composition and f
 See specific component migration guides for detailed examples and usage patterns.
 
 </section>
+
+## Migration Strategies
+
+HeroUI v2 and v3 cannot coexist in the same project without special setup. You have two migration approaches to choose from:
+
+### Full Migration
+
+**Best for:** Projects that can dedicate focused time to complete migration, teams comfortable working in feature branches with temporarily broken code.
+
+**How it works:**
+- Migrate all component code first (project will be broken during this phase)
+- Switch dependencies to v3
+- Complete styling migration
+
+**Advantages:**
+- Simpler setup - no complex coexistence configuration
+- Cleaner transition - only one version active at a time
+- No CSS conflicts during migration
+- Supported by Migration MCP prompts
+
+**Disadvantages:**
+- Project is broken during migration
+- Requires working in a feature branch
+- All components must be migrated before switching dependencies
+
+**Get started:** [Full Migration Guide](/docs/react/migration/full-migration)
+
+### Incremental Migration
+
+**Best for:** Projects that need to stay functional during migration, teams migrating gradually over time, large codebases migrating feature-by-feature.
+
+**How it works:**
+- Set up coexistence using pnpm aliases or component packages
+- Migrate components one-by-one while keeping project functional
+- Complete migration and remove v2 dependencies
+
+**Advantages:**
+- Project remains functional during migration
+- Can migrate gradually over time
+- Can test v3 components alongside v2
+
+**Disadvantages:**
+- More complex initial setup
+- Both CSS systems loaded (larger bundle size)
+- Potential styling conflicts
+- Requires managing two versions simultaneously
+
+**Get started:** [Incremental Migration Guide](/docs/react/migration/incremental-migration)
 
 <section id="step-6-component-migration-reference">
 
@@ -235,7 +190,7 @@ Use the table below to quickly find migration guidance for each component. Use t
 
 ## New Components in v3
 
-v3 introduces several new components not available in v2:
+v3 introduces a number of new components not available in v2:
 
 | Component | Purpose | Documentation |
 |-----------|---------|---------------|
@@ -259,24 +214,6 @@ v3 introduces several new components not available in v2:
 - **[Hooks Migration Guide](/docs/react/migration/hooks)**: Detailed guide for migrating hooks from v2 to v3
 - **[Styling Migration Guide](/docs/react/migration/styling)**: Comprehensive guide for updating utility classes, color tokens, and component styling
 
-## Common Issues and Solutions
-
-### Issue: Components not rendering
-
-**Solution:** Ensure you've imported `@heroui/styles` in your CSS file and it's imported after `tailwindcss`.
-
-### Issue: Styles not applying
-
-**Solution:** Check that Tailwind CSS v4 is properly configured and CSS imports are in the correct order.
-
-### Issue: TypeScript errors
-
-**Solution:** Update your TypeScript types. v3 may have different prop types. Check component documentation.
-
-### Issue: Animations not working
-
-**Solution:** v3 handles animations differently. Check if the component supports animations in v3.
-
 ## Getting Help
 
 If you encounter issues during migration:
@@ -285,18 +222,3 @@ If you encounter issues during migration:
 2. Review component-specific migration guides
 3. Check the [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions)
 4. Join the [Discord community](https://discord.gg/9b6yyZKmH4)
-
-## Next Steps
-
-After completing the migration:
-
-1. Review the [v3 component documentation](/docs/react/components)
-2. Explore new components available in v3
-3. Check out the [styling guide](/docs/react/getting-started/handbook/styling)
-4. Learn about [composition patterns](/docs/react/getting-started/handbook/composition)
-
----
-
-<Callout type="info">
-  This migration guide is a living document. As v3 evolves, we'll update this guide with new information and best practices.
-</Callout>
