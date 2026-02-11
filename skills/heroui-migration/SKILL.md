@@ -13,6 +13,14 @@ This skill helps agents migrate HeroUI v2 applications to v3. HeroUI v3 introduc
 
 ---
 
+## Installation
+
+```bash
+curl -fsSL https://v3.heroui.com/install | bash -s heroui-migration
+```
+
+---
+
 ## CRITICAL: Always Fetch Migration Docs Before Applying
 
 **Do NOT assume v2 patterns work in v3.** Always fetch migration guides before implementing changes.
