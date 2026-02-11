@@ -8,6 +8,7 @@ import {
   AvatarFallback,
   AvatarImage,
   Description,
+  EmptyState,
   Label,
   ListBox,
   SearchField,
@@ -108,7 +109,7 @@ export function UserSelection() {
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox>
+          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
             {users.map((user) => (
               <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
                 <Avatar size="sm">

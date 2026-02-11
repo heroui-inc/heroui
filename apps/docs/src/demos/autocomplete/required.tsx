@@ -3,6 +3,7 @@
 import {
   Autocomplete,
   Button,
+  EmptyState,
   FieldError,
   Form,
   Label,
@@ -69,7 +70,7 @@ export function Required() {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {states.map((state) => (
                 <ListBox.Item key={state.id} id={state.id} textValue={state.name}>
                   {state.name}
@@ -103,7 +104,7 @@ export function Required() {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {countries.map((country) => (
                 <ListBox.Item key={country.id} id={country.id} textValue={country.name}>
                   {country.name}
