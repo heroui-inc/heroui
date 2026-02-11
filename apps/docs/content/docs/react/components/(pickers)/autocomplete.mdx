@@ -1,6 +1,7 @@
 ---
 title: Autocomplete
 description: An autocomplete combines a select with filtering, allowing users to search and select from a list of options
+icon: updated
 links:
   rac: Select
   source: autocomplete/autocomplete.tsx
@@ -69,6 +70,12 @@ export default () => (
 ### With Disabled Options
 
 <ComponentPreview name="autocomplete-with-disabled-options" />
+
+### Allows Empty Collection
+
+The `allowsEmptyCollection` prop enables the autocomplete to function even when there are no items in the collection. This is useful for scenarios where the list might be empty initially or when all items are filtered out.
+
+<ComponentPreview name="autocomplete-allows-empty-collection" />
 
 ### Custom Indicator
 
@@ -265,6 +272,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | --------------- | --------------------------------------- | ------------------ | -------------------------------------------------------- |
 | `placeholder`   | `string`                                | `'Select an item'` | Temporary text that occupies the autocomplete when it is empty |
 | `selectionMode` | `"single" \| "multiple"`                | `"single"`         | Whether single or multiple selection is enabled          |
+| `allowsEmptyCollection` | `boolean`                        | `false`            | Whether the autocomplete allows an empty collection. When true, the autocomplete can function even with no items. |
 | `isOpen`        | `boolean`                               | -                  | Sets the open state of the popover (controlled)             |
 | `defaultOpen`   | `boolean`                               | -                  | Sets the default open state of the popover (uncontrolled)   |
 | `onOpenChange`  | `(isOpen: boolean) => void`             | -                  | Handler called when the open state changes               |

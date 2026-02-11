@@ -1,4 +1,5 @@
 // Autocomplete demos
+export {AllowsEmptyCollection} from "./allows-empty-collection";
 export {AsynchronousFiltering} from "./asynchronous-filtering";
 export {Controlled} from "./controlled";
 export {ControlledOpenState} from "./controlled-open-state";
