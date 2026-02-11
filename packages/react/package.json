@@ -62,6 +62,7 @@
     "@react-aria/utils": "3.32.0",
     "@react-types/shared": "3.32.1",
     "@react-types/color": "3.1.2",
+    "@react-stately/utils": "3.11.0",
     "input-otp": "1.4.2",
     "react-aria-components": "1.14.0",
     "tailwind-merge": "3.4.0",

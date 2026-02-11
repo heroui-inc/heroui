@@ -358,6 +358,9 @@ importers:
       '@react-aria/utils':
         specifier: 3.32.0
         version: 3.32.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-stately/utils':
+        specifier: 3.11.0
+        version: 3.11.0(react@19.2.3)
       '@react-types/color':
         specifier: 3.1.2
         version: 3.1.2(react@19.2.3)

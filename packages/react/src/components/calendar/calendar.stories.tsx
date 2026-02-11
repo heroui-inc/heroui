@@ -1,11 +1,20 @@
 import type {DateValue} from "@internationalized/date";
 import type {Meta, StoryObj} from "@storybook/react";
 
-import {getLocalTimeZone, isToday, isWeekend, parseDate, today} from "@internationalized/date";
+import {
+  getLocalTimeZone,
+  isToday,
+  isWeekend,
+  parseDate,
+  startOfMonth,
+  startOfWeek,
+  today,
+} from "@internationalized/date";
 import React, {useState} from "react";
-import {useLocale} from "react-aria-components";
+import {CalendarStateContext, useLocale} from "react-aria-components";
 
 import {Button} from "../button";
+import {ButtonGroup} from "../button-group";
 import {Description} from "../description";
 
 import {Calendar} from "./index";
@@ -50,6 +59,23 @@ const CalendarTemplate = (props: Omit<React.ComponentProps<typeof Calendar>, "ch
 );
 
 /* -------------------------------------------------------------------------------------------------
+ * Helper component to render individual month heading for multi-month calendars
+ * -----------------------------------------------------------------------------------------------*/
+const CalendarMonthHeading = ({offset = 0}: {offset?: number}) => {
+  const state = React.useContext(CalendarStateContext)!;
+  const {locale} = useLocale();
+
+  const startDate = state.visibleRange.start;
+  const monthDate = startDate.add({months: offset});
+  const dateObj = monthDate.toDate(getLocalTimeZone());
+  const monthYear = new Intl.DateTimeFormat(locale, {month: "long", year: "numeric"}).format(
+    dateObj,
+  );
+
+  return <span className="text-sm font-medium">{monthYear}</span>;
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Stories
  * -----------------------------------------------------------------------------------------------*/
 export const Default: Story = {
@@ -66,9 +92,40 @@ export const Controlled: Story = {
   render: (args) => {
     const [value, setValue] = useState<DateValue | null>(null);
     const [focusedDate, setFocusedDate] = useState<DateValue>(parseDate("2025-12-25"));
+    const {locale} = useLocale();
 
     return (
       <div className="flex flex-col items-center gap-4">
+        <ButtonGroup variant="tertiary">
+          <Button
+            onPress={() => {
+              setValue(today(getLocalTimeZone()));
+              setFocusedDate(today(getLocalTimeZone()));
+            }}
+          >
+            Today
+          </Button>
+          <Button
+            onPress={() => {
+              const nextWeekStart = startOfWeek(today(getLocalTimeZone()).add({weeks: 1}), locale);
+
+              setValue(nextWeekStart);
+              setFocusedDate(nextWeekStart);
+            }}
+          >
+            Next week
+          </Button>
+          <Button
+            onPress={() => {
+              const nextMonthStart = startOfMonth(today(getLocalTimeZone()).add({months: 1}));
+
+              setValue(nextMonthStart);
+              setFocusedDate(nextMonthStart);
+            }}
+          >
+            Next month
+          </Button>
+        </ButtonGroup>
         <CalendarTemplate
           {...args}
           aria-label="Event date"
@@ -344,25 +401,40 @@ export const TodayIndicator: Story = {
 
 export const MultipleMonths: Story = {
   render: (args) => (
-    <Calendar {...args} aria-label="Trip dates" visibleDuration={{months: 2}}>
-      <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.Heading />
-        <Calendar.NavButton slot="next" />
-      </Calendar.Header>
-      <div className="flex gap-6">
-        <Calendar.Grid>
-          <Calendar.GridHeader>
-            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
-          </Calendar.GridHeader>
-          <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-        </Calendar.Grid>
-        <Calendar.Grid offset={{months: 1}}>
-          <Calendar.GridHeader>
-            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
-          </Calendar.GridHeader>
-          <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-        </Calendar.Grid>
+    <Calendar
+      {...args}
+      aria-label="Trip dates"
+      className="@container-normal w-auto"
+      visibleDuration={{months: 2}}
+    >
+      <Calendar.Heading className="sr-only" />
+      <div className="flex gap-8">
+        <div className="w-64">
+          <Calendar.Header>
+            <Calendar.NavButton slot="previous" />
+            <CalendarMonthHeading offset={0} />
+            <div className="size-6" />
+          </Calendar.Header>
+          <Calendar.Grid>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+          </Calendar.Grid>
+        </div>
+        <div className="w-64">
+          <Calendar.Header>
+            <div className="size-6" />
+            <CalendarMonthHeading offset={1} />
+            <Calendar.NavButton slot="next" />
+          </Calendar.Header>
+          <Calendar.Grid offset={{months: 1}}>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+          </Calendar.Grid>
+        </div>
       </div>
     </Calendar>
   ),
@@ -370,114 +442,56 @@ export const MultipleMonths: Story = {
 
 export const ThreeMonths: Story = {
   render: (args) => (
-    <Calendar {...args} aria-label="Vacation planning" visibleDuration={{months: 3}}>
-      <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.Heading />
-        <Calendar.NavButton slot="next" />
-      </Calendar.Header>
-      <div className="flex gap-6">
-        <Calendar.Grid>
-          <Calendar.GridHeader>
-            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
-          </Calendar.GridHeader>
-          <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-        </Calendar.Grid>
-        <Calendar.Grid offset={{months: 1}}>
-          <Calendar.GridHeader>
-            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
-          </Calendar.GridHeader>
-          <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-        </Calendar.Grid>
-        <Calendar.Grid offset={{months: 2}}>
-          <Calendar.GridHeader>
-            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
-          </Calendar.GridHeader>
-          <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-        </Calendar.Grid>
-      </div>
-    </Calendar>
-  ),
-};
-
-export const DateRangePicker: Story = {
-  render: (args) => {
-    const [startDate, setStartDate] = useState<DateValue | null>(null);
-    const [endDate, setEndDate] = useState<DateValue | null>(null);
-    const [isSelectingEnd, setIsSelectingEnd] = useState(false);
-
-    const handleDateChange = (date: DateValue | null) => {
-      if (!isSelectingEnd) {
-        setStartDate(date);
-        setEndDate(null);
-        setIsSelectingEnd(true);
-      } else {
-        if (date && startDate && date.compare(startDate) < 0) {
-          // If end date is before start date, swap them
-          setEndDate(startDate);
-          setStartDate(date);
-        } else {
-          setEndDate(date);
-        }
-        setIsSelectingEnd(false);
-      }
-    };
-
-    const isInRange = (date: DateValue) => {
-      if (!startDate || !endDate) return false;
-
-      return date.compare(startDate) >= 0 && date.compare(endDate) <= 0;
-    };
-
-    return (
-      <div className="flex flex-col items-center gap-4">
-        <Calendar
-          {...args}
-          aria-label="Date range"
-          value={isSelectingEnd ? endDate : startDate}
-          onChange={handleDateChange}
-        >
+    <Calendar
+      {...args}
+      aria-label="Vacation planning"
+      className="@container-normal w-auto"
+      visibleDuration={{months: 3}}
+    >
+      <Calendar.Heading className="sr-only" />
+      <div className="flex gap-7">
+        <div className="w-64">
           <Calendar.Header>
             <Calendar.NavButton slot="previous" />
-            <Calendar.Heading />
-            <Calendar.NavButton slot="next" />
+            <CalendarMonthHeading offset={0} />
+            <div className="size-6" />
           </Calendar.Header>
           <Calendar.Grid>
             <Calendar.GridHeader>
               {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
             </Calendar.GridHeader>
-            <Calendar.GridBody>
-              {(date) => (
-                <Calendar.Cell
-                  className={isInRange(date) ? "bg-accent-soft" : undefined}
-                  date={date}
-                />
-              )}
-            </Calendar.GridBody>
+            <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
           </Calendar.Grid>
-        </Calendar>
-        <div className="flex flex-col gap-1 text-center">
-          <Description>{isSelectingEnd ? "Select end date" : "Select start date"}</Description>
-          <p className="text-sm">
-            {startDate ? `Start: ${startDate.toString()}` : null}
-            {startDate && endDate ? " → " : null}
-            {endDate ? `End: ${endDate.toString()}` : null}
-          </p>
         </div>
-        <Button
-          size="sm"
-          variant="tertiary"
-          onPress={() => {
-            setStartDate(null);
-            setEndDate(null);
-            setIsSelectingEnd(false);
-          }}
-        >
-          Reset
-        </Button>
+        <div className="w-64">
+          <Calendar.Header>
+            <div className="size-6" />
+            <CalendarMonthHeading offset={1} />
+            <div className="size-6" />
+          </Calendar.Header>
+          <Calendar.Grid offset={{months: 1}}>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+          </Calendar.Grid>
+        </div>
+        <div className="w-64">
+          <Calendar.Header>
+            <div className="size-6" />
+            <CalendarMonthHeading offset={2} />
+            <Calendar.NavButton slot="next" />
+          </Calendar.Header>
+          <Calendar.Grid offset={{months: 2}}>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+          </Calendar.Grid>
+        </div>
       </div>
-    );
-  },
+    </Calendar>
+  ),
 };
 
 export const BookingCalendar: Story = {
@@ -546,6 +560,25 @@ export const BookingCalendar: Story = {
       </div>
     );
   },
+};
+
+export const YearPicker: Story = {
+  render: (args) => (
+    <Calendar {...args} aria-label="Event date">
+      <Calendar.Header>
+        <Calendar.NavButton slot="previous" />
+        <Calendar.YearPickerTrigger />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+      </Calendar.Grid>
+      <Calendar.YearPickerGrid />
+    </Calendar>
+  ),
 };
 
 export const EventCalendar: Story = {

@@ -1,0 +1,198 @@
+/* =============================================================================
+ * Calendar Year Picker Component Styles
+ *
+ * Internal component used inside Calendar / RangeCalendar to provide a
+ * toggleable year selector. Uses CSS :has() on the parent .calendar to
+ * drive crossfade transitions.
+ *
+ * The year grid is absolutely positioned and sized via JS to match the
+ * day grid's exact area. This keeps the calendar's original block layout
+ * completely untouched.
+ *
+ * BEM naming: calendar-year-picker__element, calendar-year-picker--modifier
+ * ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+ * Positioning Context
+ * -------------------------------------------------------------------------- */
+.calendar:has(.calendar-year-picker__year-grid) {
+  position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+ * Crossfade + Blur Transitions
+ *
+ * The crossfade is staggered to avoid both grids being semi-transparent at
+ * the same time (ghosting). When opening, the day grid fades out first,
+ * then the year grid fades in. When closing, the year grid fades out first,
+ * then the day grid fades in (via transition-delay).
+ *
+ * A subtle blur (2px) accompanies the opacity change to mask the swap and
+ * create a smoother perceived transition between the two views.
+ * -------------------------------------------------------------------------- */
+
+/* Day grid – default visible */
+.calendar:has(.calendar-year-picker__year-grid) > [data-slot="calendar-grid"] {
+  filter: blur(0px);
+  will-change: opacity, filter;
+  transition:
+    opacity 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    filter 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    visibility 0ms linear;
+  @apply motion-reduce:transition-none;
+}
+
+/* Day grid – hidden when year picker is open (fade + blur out) */
+.calendar:has(.calendar-year-picker__year-grid[data-open="true"]) > [data-slot="calendar-grid"] {
+  @apply pointer-events-none opacity-0;
+  filter: blur(2px);
+  visibility: hidden;
+  transition:
+    opacity 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    filter 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    visibility 0ms linear 150ms;
+  @apply motion-reduce:transition-none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Trigger Button
+ * -------------------------------------------------------------------------- */
+.calendar-year-picker__trigger {
+  @apply flex flex-1 items-center justify-center gap-0.5 rounded-lg outline-none;
+
+  cursor: var(--cursor-interactive);
+  touch-action: manipulation;
+
+  /* Focus state */
+  &:focus-visible {
+    @apply status-focused;
+  }
+}
+
+.calendar-year-picker__trigger-text {
+  @apply text-sm font-medium;
+}
+
+.calendar-year-picker__trigger-icon {
+  @apply size-4 text-muted;
+
+  transition: transform 200ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+}
+
+/* Rotate chevron when open */
+.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-icon {
+  transform: rotate(180deg);
+}
+
+/* -----------------------------------------------------------------------------
+ * Year Grid Container
+ *
+ * Absolutely positioned over the day grid area. The exact `top` and `height`
+ * are set via JS to match the sibling day grid element.
+ * -------------------------------------------------------------------------- */
+.calendar-year-picker__year-grid {
+  @apply pointer-events-none absolute right-0 left-0 grid content-start gap-1 overflow-y-auto p-1 opacity-0;
+  filter: blur(2px);
+  grid-template-columns: repeat(3, 1fr);
+
+  /* When closing: fade + blur out quickly */
+  will-change: opacity, filter;
+  transition:
+    opacity 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    filter 150ms cubic-bezier(0.23, 1, 0.32, 1);
+  @apply motion-reduce:transition-none;
+
+  /* Custom scrollbar – small contained element, per Emil's guidelines */
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0% 0 0 / 0.15) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: oklch(0% 0 0 / 0.15);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: oklch(0% 0 0 / 0.25);
+  }
+
+  /* Dark mode scrollbar */
+  :is([data-theme="dark"], .dark) & {
+    scrollbar-color: oklch(100% 0 0 / 0.15) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background: oklch(100% 0 0 / 0.15);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: oklch(100% 0 0 / 0.25);
+    }
+  }
+}
+
+.calendar-year-picker__year-grid[data-open="true"] {
+  @apply pointer-events-auto opacity-100;
+  filter: blur(0px);
+
+  /* When opening: slight delay so the day grid starts fading out first */
+  transition:
+    opacity 200ms cubic-bezier(0.23, 1, 0.32, 1) 50ms,
+    filter 200ms cubic-bezier(0.23, 1, 0.32, 1) 50ms;
+  @apply motion-reduce:transition-none;
+}
+
+/* -----------------------------------------------------------------------------
+ * Year Cell
+ * -------------------------------------------------------------------------- */
+.calendar-year-picker__year-cell {
+  @apply relative inline-flex items-center justify-center rounded-full px-2.5 py-1.5 text-sm font-medium outline-none select-none no-highlight;
+
+  font-variant-numeric: tabular-nums;
+  touch-action: manipulation;
+
+  /**
+   * Transitions – same as .tag
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    color 100ms var(--ease-smooth),
+    scale 100ms var(--ease-smooth),
+    opacity 100ms var(--ease-smooth),
+    background-color 100ms var(--ease-smooth),
+    box-shadow 100ms var(--ease-out);
+  @apply origin-center transform-gpu motion-reduce:transition-none;
+
+  cursor: var(--cursor-interactive);
+
+  /* Hover state (when not selected) – only on devices that support hover */
+  @media (hover: hover) and (pointer: fine) {
+    &:is(:hover, [data-hovered="true"]):not([data-selected="true"]) {
+      @apply bg-default text-default-foreground;
+    }
+  }
+
+  /* Selected state (current year) – same as .tag[data-selected] */
+  &[data-selected="true"],
+  &[aria-selected="true"] {
+    @apply bg-accent text-accent-foreground;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:is(:hover, [data-hovered="true"]) {
+        @apply bg-accent-hover;
+      }
+    }
+  }
+
+  /* Focus state */
+  &:focus-visible {
+    @apply status-focused;
+  }
+}

@@ -5,6 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components";
 
 import {calendarVariants} from "@heroui/styles";
+import {useControlledState} from "@react-stately/utils";
 import React, {createContext, useContext} from "react";
 import {
   Button as ButtonPrimitive,
@@ -18,6 +19,7 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {YearPickerContext} from "../calendar-year-picker/year-picker-context";
 import {IconChevronLeft, IconChevronRight} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
@@ -33,25 +35,39 @@ const CalendarContext = createContext<CalendarContext>({});
 | * Calendar Root
 | * -----------------------------------------------------------------------------------------------*/
 interface CalendarRootProps<T extends DateValue = DateValue>
-  extends ComponentPropsWithRef<typeof CalendarPrimitive<T>>, CalendarVariants {}
+  extends ComponentPropsWithRef<typeof CalendarPrimitive<T>>, CalendarVariants {
+  isYearPickerOpen?: boolean;
+  onYearPickerOpenChange?: (isYearPickerOpen: boolean) => void;
+  defaultYearPickerOpen?: boolean;
+}
 
 function CalendarRoot<T extends DateValue = DateValue>({
   children,
   className,
+  defaultYearPickerOpen: defaultYearPickerOpenProp = false,
+  isYearPickerOpen: isYearPickerOpenProp,
+  onYearPickerOpenChange: onYearPickerOpenChangeProp,
   ...rest
 }: CalendarRootProps<T>) {
   const slots = React.useMemo(() => calendarVariants(), []);
+  const [isYearPickerOpen, setIsYearPickerOpen] = useControlledState(
+    isYearPickerOpenProp,
+    defaultYearPickerOpenProp,
+    onYearPickerOpenChangeProp,
+  );
 
   return (
-    <CalendarContext value={{slots}}>
-      <CalendarPrimitive
-        data-slot="calendar"
-        {...rest}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {children}
-      </CalendarPrimitive>
-    </CalendarContext>
+    <YearPickerContext value={{isYearPickerOpen, setIsYearPickerOpen}}>
+      <CalendarContext value={{slots}}>
+        <CalendarPrimitive
+          data-slot="calendar"
+          {...rest}
+          className={composeTwRenderProps(className, slots.base())}
+        >
+          {children}
+        </CalendarPrimitive>
+      </CalendarContext>
+    </YearPickerContext>
   );
 }
 

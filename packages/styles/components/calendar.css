@@ -42,16 +42,18 @@
 
   cursor: var(--cursor-interactive);
 
-  /* Hover state */
-  &:hover,
-  &[data-hovered="true"] {
-    @apply bg-default text-default-foreground;
+  /* Hover state – only on devices that support hover (avoids false triggers on touch) */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default text-default-foreground;
+    }
   }
 
   /* Pressed state */
   &:active,
   &[data-pressed="true"] {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   /* Focus state */
@@ -160,13 +162,15 @@
   &:active,
   &[data-pressed="true"] {
     @apply bg-accent-hover;
-    transform: scale(0.92);
+    transform: scale(0.95);
   }
 
-  /* Hover state */
-  &:hover:not([data-selected="true"]),
-  &[data-hovered="true"]:not([data-selected="true"]) {
-    @apply bg-default;
+  /* Hover state – only on devices that support hover (avoids false triggers on touch) */
+  @media (hover: hover) {
+    &:hover:not([data-selected="true"]),
+    &[data-hovered="true"]:not([data-selected="true"]) {
+      @apply bg-default;
+    }
   }
 
   /* Outside month (previous/next month days) */
