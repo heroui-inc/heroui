@@ -9,6 +9,7 @@ import * as AvatarDemos from "./avatar";
 import * as BreadcrumbsDemos from "./breadcrumbs";
 import * as ButtonDemos from "./button";
 import * as ButtonGroupDemos from "./button-group";
+import * as CalendarDemos from "./calendar";
 import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
@@ -316,6 +317,55 @@ export const demos: Record<string, DemoItem> = {
   "card-with-images": {
     component: CardDemos.WithImages,
     file: "card/with-images.tsx",
+  },
+  // Calendar demos
+  "calendar-basic": {
+    component: CalendarDemos.Basic,
+    file: "calendar/basic.tsx",
+  },
+  "calendar-default-value": {
+    component: CalendarDemos.DefaultValue,
+    file: "calendar/default-value.tsx",
+  },
+  "calendar-controlled": {
+    component: CalendarDemos.Controlled,
+    file: "calendar/controlled.tsx",
+  },
+  "calendar-min-max-dates": {
+    component: CalendarDemos.MinMaxDates,
+    file: "calendar/min-max-dates.tsx",
+  },
+  "calendar-unavailable-dates": {
+    component: CalendarDemos.UnavailableDates,
+    file: "calendar/unavailable-dates.tsx",
+  },
+  "calendar-disabled": {
+    component: CalendarDemos.Disabled,
+    file: "calendar/disabled.tsx",
+  },
+  "calendar-read-only": {
+    component: CalendarDemos.ReadOnly,
+    file: "calendar/read-only.tsx",
+  },
+  "calendar-focused-value": {
+    component: CalendarDemos.FocusedValue,
+    file: "calendar/focused-value.tsx",
+  },
+  "calendar-with-indicators": {
+    component: CalendarDemos.WithIndicators,
+    file: "calendar/with-indicators.tsx",
+  },
+  "calendar-multiple-months": {
+    component: CalendarDemos.MultipleMonths,
+    file: "calendar/multiple-months.tsx",
+  },
+  "calendar-year-picker": {
+    component: CalendarDemos.YearPicker,
+    file: "calendar/year-picker.tsx",
+  },
+  "calendar-booking-calendar": {
+    component: CalendarDemos.BookingCalendar,
+    file: "calendar/booking-calendar.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {
