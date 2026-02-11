@@ -6,7 +6,6 @@ import {Time, getLocalTimeZone, now, parseTime} from "@internationalized/date";
 import React, {useState} from "react";
 
 import {Button} from "../button";
-import {DateInputGroup} from "../date-input-group";
 import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
@@ -30,11 +29,9 @@ export const Default: Story = {
   render: () => (
     <TimeField className="w-[256px]" name="time">
       <Label>Time</Label>
-      <DateInputGroup>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+      <TimeField.Group>
+        <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+      </TimeField.Group>
     </TimeField>
   ),
 };
@@ -44,25 +41,21 @@ export const FullWidth: Story = {
     <div className="w-[400px] space-y-4">
       <TimeField fullWidth name="time">
         <Label>Time</Label>
-        <DateInputGroup fullWidth>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <TimeField.Group fullWidth>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
       </TimeField>
       <TimeField fullWidth name="time-icons">
         <Label>Time</Label>
-        <DateInputGroup fullWidth>
-          <DateInputGroup.Prefix>
+        <TimeField.Group fullWidth>
+          <TimeField.Prefix>
             <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-          </DateInputGroup.Prefix>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-          <DateInputGroup.Suffix>
+          </TimeField.Prefix>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+          <TimeField.Suffix>
             <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
-          </DateInputGroup.Suffix>
-        </DateInputGroup>
+          </TimeField.Suffix>
+        </TimeField.Group>
       </TimeField>
     </div>
   ),
@@ -73,20 +66,16 @@ export const WithDescription: Story = {
     <div className="flex flex-col gap-4">
       <TimeField className="w-[256px]" name="time">
         <Label>Start time</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <TimeField.Group>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
         <Description>Enter the start time</Description>
       </TimeField>
       <TimeField className="w-[256px]" name="end-time">
         <Label>End time</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <TimeField.Group>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
         <Description>Enter the end time</Description>
       </TimeField>
     </div>
@@ -98,19 +87,15 @@ export const Required: Story = {
     <div className="flex flex-col gap-4">
       <TimeField isRequired className="w-[256px]" name="time">
         <Label>Time</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <TimeField.Group>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
       </TimeField>
       <TimeField isRequired className="w-[256px]" name="appointment-time">
         <Label>Appointment time</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <TimeField.Group>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
         <Description>Required field</Description>
       </TimeField>
     </div>
@@ -122,20 +107,16 @@ export const Invalid: Story = {
     <div className="flex flex-col gap-4">
       <TimeField isInvalid isRequired className="w-[256px]" name="time">
         <Label>Time</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <TimeField.Group>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
         <FieldError>Please enter a valid time</FieldError>
       </TimeField>
       <TimeField isInvalid className="w-[256px]" name="invalid-time">
         <Label>Time</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <TimeField.Group>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
         <FieldError>Time must be within business hours</FieldError>
       </TimeField>
     </div>
@@ -151,20 +132,20 @@ export const Disabled: Story = {
       <div className="flex flex-col gap-4">
         <TimeField isDisabled className="w-[256px]" name="time" value={timeValue}>
           <Label>Time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+          <TimeField.Group>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+          </TimeField.Group>
           <Description>This time field is disabled</Description>
         </TimeField>
         <TimeField isDisabled className="w-[256px]" name="time-empty">
           <Label>Time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+          <TimeField.Group>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+          </TimeField.Group>
           <Description>This time field is disabled</Description>
         </TimeField>
       </div>
@@ -180,11 +161,11 @@ export const Controlled: Story = {
       <div className="flex flex-col gap-4">
         <TimeField className="w-[256px]" name="time" value={value} onChange={setValue}>
           <Label>Time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+          <TimeField.Group>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+          </TimeField.Group>
           <Description>Current value: {value ? value.toString() : "(empty)"}</Description>
         </TimeField>
         <div className="flex gap-2">
@@ -227,11 +208,11 @@ export const WithValidation: Story = {
           onChange={setValue}
         >
           <Label>Time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+          <TimeField.Group>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+          </TimeField.Group>
           {isInvalid ? (
             <FieldError>Time must be between 9:00 AM and 5:00 PM</FieldError>
           ) : (
@@ -247,14 +228,12 @@ export const WithPrefixIcon: Story = {
   render: () => (
     <TimeField className="w-[256px]" name="time">
       <Label>Time</Label>
-      <DateInputGroup>
-        <DateInputGroup.Prefix>
+      <TimeField.Group>
+        <TimeField.Prefix>
           <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-        </DateInputGroup.Prefix>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+        </TimeField.Prefix>
+        <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+      </TimeField.Group>
     </TimeField>
   ),
 };
@@ -263,14 +242,12 @@ export const WithSuffixIcon: Story = {
   render: () => (
     <TimeField className="w-[256px]" name="time">
       <Label>Time</Label>
-      <DateInputGroup>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-        <DateInputGroup.Suffix>
+      <TimeField.Group>
+        <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        <TimeField.Suffix>
           <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-        </DateInputGroup.Suffix>
-      </DateInputGroup>
+        </TimeField.Suffix>
+      </TimeField.Group>
     </TimeField>
   ),
 };
@@ -279,17 +256,15 @@ export const WithPrefixAndSuffix: Story = {
   render: () => (
     <TimeField className="w-[256px]" name="time">
       <Label>Time</Label>
-      <DateInputGroup>
-        <DateInputGroup.Prefix>
+      <TimeField.Group>
+        <TimeField.Prefix>
           <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-        </DateInputGroup.Prefix>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-        <DateInputGroup.Suffix>
+        </TimeField.Prefix>
+        <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        <TimeField.Suffix>
           <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
-        </DateInputGroup.Suffix>
-      </DateInputGroup>
+        </TimeField.Suffix>
+      </TimeField.Group>
       <Description>Enter a time</Description>
     </TimeField>
   ),
@@ -334,14 +309,14 @@ export const FormExample: Story = {
           onChange={setValue}
         >
           <Label>Appointment time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Prefix>
+          <TimeField.Group>
+            <TimeField.Prefix>
               <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-            </DateInputGroup.Prefix>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+            </TimeField.Prefix>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+          </TimeField.Group>
           {isInvalid ? (
             <FieldError>Time must be between 9:00 AM and 5:00 PM</FieldError>
           ) : (
@@ -368,43 +343,43 @@ export const AllVariations: Story = {
       <div className="flex flex-col gap-4">
         <TimeField isRequired className="w-[256px]" name="time1">
           <Label>Time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Prefix>
+          <TimeField.Group>
+            <TimeField.Prefix>
               <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-            </DateInputGroup.Prefix>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+            </TimeField.Prefix>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+          </TimeField.Group>
           <Description>Enter a time</Description>
         </TimeField>
 
         <TimeField isRequired className="w-[256px]" name="time2">
           <Label>Time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-            <DateInputGroup.Suffix>
+          <TimeField.Group>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+            <TimeField.Suffix>
               <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-            </DateInputGroup.Suffix>
-          </DateInputGroup>
+            </TimeField.Suffix>
+          </TimeField.Group>
           <Description>Enter a time</Description>
         </TimeField>
 
         <TimeField isRequired className="w-[256px]" name="time3">
           <Label>Time</Label>
-          <DateInputGroup>
-            <DateInputGroup.Prefix>
+          <TimeField.Group>
+            <TimeField.Prefix>
               <Icon className="size-4 text-muted" icon="gravity-ui:clock" />
-            </DateInputGroup.Prefix>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-            <DateInputGroup.Suffix>
+            </TimeField.Prefix>
+            <TimeField.Input>
+              {(segment) => <TimeField.Segment segment={segment} />}
+            </TimeField.Input>
+            <TimeField.Suffix>
               <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
-            </DateInputGroup.Suffix>
-          </DateInputGroup>
+            </TimeField.Suffix>
+          </TimeField.Group>
           <Description>Enter a time</Description>
         </TimeField>
       </div>

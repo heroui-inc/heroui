@@ -1,16 +1,14 @@
 "use client";
 
-import {DateField, DateInputGroup, Label} from "@heroui/react";
+import {DateField, Label} from "@heroui/react";
 
 export function Basic() {
   return (
     <DateField className="w-[256px]" name="date">
       <Label>Date</Label>
-      <DateInputGroup>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+      <DateField.Group>
+        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+      </DateField.Group>
     </DateField>
   );
 }
