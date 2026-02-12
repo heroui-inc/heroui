@@ -109,6 +109,12 @@ For a complete list of supported calendar systems and their identifiers, see:
 - [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
 - [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
 
+### Custom Navigation Icons
+
+Pass children to `Calendar.NavButton` to replace the default chevron icons.
+
+<ComponentPreview name="calendar-custom-icons" />
+
 ### Real-World Example
 
 <ComponentPreview name="calendar-booking-calendar" />
@@ -176,8 +182,8 @@ Calendar uses these classes in `packages/styles/components/calendar.css` and `pa
 - `.calendar__cell` - Interactive day cell.
 - `.calendar__cell-indicator` - Dot indicator inside a day cell.
 - `.calendar-year-picker__trigger` - Year picker toggle button.
-- `.calendar-year-picker__trigger-text` - Heading text inside year picker trigger.
-- `.calendar-year-picker__trigger-icon` - Indicator icon inside year picker trigger.
+- `.calendar-year-picker__trigger-heading` - Heading text inside year picker trigger.
+- `.calendar-year-picker__trigger-indicator` - Indicator icon inside year picker trigger.
 - `.calendar-year-picker__year-grid` - Overlay grid of selectable years.
 - `.calendar-year-picker__year-cell` - Individual year option.
 

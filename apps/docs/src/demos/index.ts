@@ -371,6 +371,10 @@ export const demos: Record<string, DemoItem> = {
     component: CalendarDemos.BookingCalendar,
     file: "calendar/booking-calendar.tsx",
   },
+  "calendar-custom-icons": {
+    component: CalendarDemos.CustomIcons,
+    file: "calendar/custom-icons.tsx",
+  },
   // Checkbox demos
   "checkbox-basic": {
     component: CheckboxDemos.Basic,

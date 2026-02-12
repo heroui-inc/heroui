@@ -63,11 +63,11 @@
   }
 }
 
-.calendar-year-picker__trigger-text {
+.calendar-year-picker__trigger-heading {
   @apply text-sm font-medium;
 }
 
-.calendar-year-picker__trigger-icon {
+.calendar-year-picker__trigger-indicator {
   @apply size-4 text-muted;
 
   transition: transform 200ms var(--ease-out);
@@ -75,7 +75,7 @@
 }
 
 /* Rotate chevron when open */
-.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-icon {
+.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-indicator {
   transform: rotate(180deg);
 }
 
