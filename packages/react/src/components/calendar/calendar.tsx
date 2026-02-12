@@ -1,10 +1,12 @@
 "use client";
 
 import type {CalendarVariants} from "@heroui/styles";
+import type {CalendarIdentifier} from "@internationalized/date";
 import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components";
 
 import {calendarVariants} from "@heroui/styles";
+import {CalendarDate, DateFormatter, createCalendar} from "@internationalized/date";
 import {useControlledState} from "@react-stately/utils";
 import React, {createContext, useContext} from "react";
 import {
@@ -16,6 +18,7 @@ import {
   CalendarHeaderCell as CalendarHeaderCellPrimitive,
   Calendar as CalendarPrimitive,
   Heading as HeadingPrimitive,
+  useLocale,
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
@@ -30,6 +33,33 @@ interface CalendarContext {
 }
 
 const CalendarContext = createContext<CalendarContext>({});
+
+function getGregorianYearOffset(identifier: string): number {
+  switch (identifier) {
+    case "buddhist":
+      return 543;
+    case "ethiopic":
+    case "ethioaa":
+      return -8;
+    case "coptic":
+      return -284;
+    case "hebrew":
+      return 3760;
+    case "indian":
+      return -78;
+    case "islamic-civil":
+    case "islamic-tbla":
+    case "islamic-umalqura":
+      return -579;
+    case "persian":
+      return -600;
+    case "roc":
+    case "japanese":
+    case "gregory":
+    default:
+      return 0;
+  }
+}
 
 /* -------------------------------------------------------------------------------------------------
 | * Calendar Root
@@ -46,21 +76,44 @@ function CalendarRoot<T extends DateValue = DateValue>({
   className,
   defaultYearPickerOpen: defaultYearPickerOpenProp = false,
   isYearPickerOpen: isYearPickerOpenProp,
+  maxValue: maxValueProp,
+  minValue: minValueProp,
   onYearPickerOpenChange: onYearPickerOpenChangeProp,
   ...rest
 }: CalendarRootProps<T>) {
+  const {locale} = useLocale();
   const slots = React.useMemo(() => calendarVariants(), []);
+  const calendarRef = React.useRef<HTMLDivElement>(null);
   const [isYearPickerOpen, setIsYearPickerOpen] = useControlledState(
     isYearPickerOpenProp,
     defaultYearPickerOpenProp,
     onYearPickerOpenChangeProp,
   );
+  const calendarProp = React.useMemo(() => {
+    const calendarIdentifier = new DateFormatter(locale).resolvedOptions()
+      .calendar as CalendarIdentifier;
+
+    return createCalendar(calendarIdentifier);
+  }, [locale]);
+  const gregorianYearOffset = React.useMemo(
+    () => getGregorianYearOffset(calendarProp.identifier),
+    [calendarProp.identifier],
+  );
+  const minValue =
+    minValueProp ??
+    (new CalendarDate(calendarProp, 1900 + gregorianYearOffset, 1, 1) as unknown as T);
+  const maxValue =
+    maxValueProp ??
+    (new CalendarDate(calendarProp, 2099 + gregorianYearOffset, 12, 31) as unknown as T);
 
   return (
-    <YearPickerContext value={{isYearPickerOpen, setIsYearPickerOpen}}>
+    <YearPickerContext value={{isYearPickerOpen, setIsYearPickerOpen, calendarRef}}>
       <CalendarContext value={{slots}}>
         <CalendarPrimitive
+          ref={calendarRef}
           data-slot="calendar"
+          maxValue={maxValue}
+          minValue={minValue}
           {...rest}
           className={composeTwRenderProps(className, slots.base())}
         >

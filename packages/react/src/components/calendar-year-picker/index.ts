@@ -1,28 +1,56 @@
 import type {ComponentProps} from "react";
 
-import {CalendarYearPickerGrid, CalendarYearPickerTrigger} from "./calendar-year-picker";
+import {
+  CalendarYearPickerCell,
+  CalendarYearPickerGrid,
+  CalendarYearPickerGridBody,
+  CalendarYearPickerTrigger,
+  CalendarYearPickerTriggerHeading,
+  CalendarYearPickerTriggerIndicator,
+} from "./calendar-year-picker";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const CalendarYearPicker = {
   Trigger: CalendarYearPickerTrigger,
+  TriggerHeading: CalendarYearPickerTriggerHeading,
+  TriggerIndicator: CalendarYearPickerTriggerIndicator,
   Grid: CalendarYearPickerGrid,
+  GridBody: CalendarYearPickerGridBody,
+  Cell: CalendarYearPickerCell,
 };
 
 export type CalendarYearPicker = {
   TriggerProps: ComponentProps<typeof CalendarYearPickerTrigger>;
+  TriggerHeadingProps: ComponentProps<typeof CalendarYearPickerTriggerHeading>;
+  TriggerIndicatorProps: ComponentProps<typeof CalendarYearPickerTriggerIndicator>;
   GridProps: ComponentProps<typeof CalendarYearPickerGrid>;
+  GridBodyProps: ComponentProps<typeof CalendarYearPickerGridBody>;
+  CellProps: ComponentProps<typeof CalendarYearPickerCell>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {CalendarYearPickerTrigger, CalendarYearPickerGrid};
+export {
+  CalendarYearPickerTrigger,
+  CalendarYearPickerTriggerHeading,
+  CalendarYearPickerTriggerIndicator,
+  CalendarYearPickerGrid,
+  CalendarYearPickerGridBody,
+  CalendarYearPickerCell,
+};
 
 export type {
   CalendarYearPickerTriggerProps,
+  CalendarYearPickerTriggerHeadingProps,
+  CalendarYearPickerTriggerIndicatorProps,
+  CalendarYearPickerTriggerRenderProps,
   CalendarYearPickerGridProps,
+  CalendarYearPickerGridBodyProps,
+  CalendarYearPickerCellProps,
+  CalendarYearPickerCellRenderProps,
 } from "./calendar-year-picker";
 
 /* -------------------------------------------------------------------------------------------------

@@ -43,7 +43,11 @@ export default () => (
 )
 ```
 
-Calendar also exposes `Calendar.YearPickerTrigger` and `Calendar.YearPickerGrid` for an inline year-selection view.
+### Year Picker
+
+`Calendar.YearPickerTrigger`, `Calendar.YearPickerGrid`, and their body/cell subcomponents provide an integrated year navigation pattern.
+
+<ComponentPreview name="calendar-year-picker" />
 
 ### Default Value
 
@@ -91,12 +95,6 @@ Render multiple grids with `visibleDuration` and `offset` for booking and planni
 
 <ComponentPreview name="calendar-multiple-months" />
 
-### Year Picker
-
-`Calendar.YearPickerTrigger` and `Calendar.YearPickerGrid` provide an integrated year navigation pattern.
-
-<ComponentPreview name="calendar-year-picker" />
-
 ### Real-World Example
 
 <ComponentPreview name="calendar-booking-calendar" />
@@ -114,9 +112,9 @@ function CustomCalendar() {
   return (
     <Calendar aria-label="Custom calendar" className="w-72 rounded-2xl border border-border bg-surface p-3 shadow-sm">
       <Calendar.Header className="pb-3">
-        <Calendar.NavButton slot="previous" className="text-default-600" />
-        <Calendar.Heading className="text-default-700" />
-        <Calendar.NavButton slot="next" className="text-default-600" />
+        <Calendar.NavButton slot="previous" className="text-default" />
+        <Calendar.Heading className="text-default" />
+        <Calendar.NavButton slot="next" className="text-default" />
       </Calendar.Header>
       <Calendar.Grid>
         <Calendar.GridHeader>
@@ -193,8 +191,8 @@ Calendar inherits all props from React Aria [Calendar](https://react-spectrum.ad
 | `onChange` | `(value: DateValue) => void` | - | Called when selection changes. |
 | `focusedValue` | `DateValue` | - | Controlled focused date. |
 | `onFocusChange` | `(value: DateValue) => void` | - | Called when focus moves to another date. |
-| `minValue` | `DateValue` | - | Earliest selectable date. |
-| `maxValue` | `DateValue` | - | Latest selectable date. |
+| `minValue` | `DateValue` | Calendar-aware `1900-01-01` | Earliest selectable date. |
+| `maxValue` | `DateValue` | Calendar-aware `2099-12-31` | Latest selectable date. |
 | `isDateUnavailable` | `(date: DateValue) => boolean` | - | Marks dates as unavailable. |
 | `isDisabled` | `boolean` | `false` | Disables interaction and selection. |
 | `isReadOnly` | `boolean` | `false` | Keeps content readable but prevents selection changes. |
@@ -218,7 +216,11 @@ Calendar inherits all props from React Aria [Calendar](https://react-spectrum.ad
 | `Calendar.Cell` | Individual date cell. |
 | `Calendar.CellIndicator` | Optional indicator element for custom metadata. |
 | `Calendar.YearPickerTrigger` | Trigger to toggle year-picker mode. |
-| `Calendar.YearPickerGrid` | Overlay year selection grid. |
+| `Calendar.YearPickerTriggerHeading` | Localized heading content inside the year-picker trigger. |
+| `Calendar.YearPickerTriggerIndicator` | Toggle icon inside the year-picker trigger. |
+| `Calendar.YearPickerGrid` | Overlay year selection grid container. |
+| `Calendar.YearPickerGridBody` | Body renderer for year grid cells. |
+| `Calendar.YearPickerCell` | Individual year option cell. |
 
 ### Calendar.Cell Render Props
 

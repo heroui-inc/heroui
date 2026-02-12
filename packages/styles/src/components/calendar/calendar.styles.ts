@@ -33,16 +33,4 @@ export const calendarVariants = tv({
   variants: {},
 });
 
-// Render props that should be excluded from CalendarVariants (framework-specific)
-type CalendarRenderPropsKeys =
-  | "isDisabled"
-  | "isFocused"
-  | "isFocusVisible"
-  | "isHovered"
-  | "isInvalid"
-  | "isOutsideMonth"
-  | "isPressed"
-  | "isSelected"
-  | "isUnavailable";
-
-export type CalendarVariants = Omit<VariantProps<typeof calendarVariants>, CalendarRenderPropsKeys>;
+export type CalendarVariants = VariantProps<typeof calendarVariants>;

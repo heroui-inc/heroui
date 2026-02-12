@@ -1,6 +1,13 @@
 import type {ComponentProps} from "react";
 
-import {CalendarYearPickerGrid, CalendarYearPickerTrigger} from "../calendar-year-picker";
+import {
+  CalendarYearPickerCell,
+  CalendarYearPickerGrid,
+  CalendarYearPickerGridBody,
+  CalendarYearPickerTrigger,
+  CalendarYearPickerTriggerHeading,
+  CalendarYearPickerTriggerIndicator,
+} from "../calendar-year-picker";
 
 import {
   CalendarCell,
@@ -30,7 +37,11 @@ export const Calendar = Object.assign(CalendarRoot, {
   Cell: CalendarCell,
   CellIndicator: CalendarCellIndicator,
   YearPickerTrigger: CalendarYearPickerTrigger,
+  YearPickerTriggerHeading: CalendarYearPickerTriggerHeading,
+  YearPickerTriggerIndicator: CalendarYearPickerTriggerIndicator,
   YearPickerGrid: CalendarYearPickerGrid,
+  YearPickerGridBody: CalendarYearPickerGridBody,
+  YearPickerCell: CalendarYearPickerCell,
 });
 
 export type Calendar = {
@@ -46,7 +57,11 @@ export type Calendar = {
   CellProps: ComponentProps<typeof CalendarCell>;
   CellIndicatorProps: ComponentProps<typeof CalendarCellIndicator>;
   YearPickerTriggerProps: ComponentProps<typeof CalendarYearPickerTrigger>;
+  YearPickerTriggerHeadingProps: ComponentProps<typeof CalendarYearPickerTriggerHeading>;
+  YearPickerTriggerIndicatorProps: ComponentProps<typeof CalendarYearPickerTriggerIndicator>;
   YearPickerGridProps: ComponentProps<typeof CalendarYearPickerGrid>;
+  YearPickerGridBodyProps: ComponentProps<typeof CalendarYearPickerGridBody>;
+  YearPickerCellProps: ComponentProps<typeof CalendarYearPickerCell>;
 };
 
 /* -------------------------------------------------------------------------------------------------

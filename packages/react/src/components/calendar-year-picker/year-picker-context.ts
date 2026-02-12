@@ -12,6 +12,7 @@ import {createContext, useContext} from "react";
 interface YearPickerContextValue {
   isYearPickerOpen: boolean;
   setIsYearPickerOpen: (open: boolean) => void;
+  calendarRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const YearPickerContext = createContext<YearPickerContextValue | null>(null);

@@ -179,12 +179,27 @@ export const MinMaxDates: Story = {
 
     return (
       <div className="flex flex-col items-center gap-4">
-        <CalendarTemplate
-          {...args}
-          aria-label="Appointment date"
-          maxValue={maxDate}
-          minValue={minDate}
-        />
+        <Calendar {...args} aria-label="Appointment date" maxValue={maxDate} minValue={minDate}>
+          <Calendar.Header>
+            <Calendar.NavButton slot="previous" />
+            <Calendar.YearPickerTrigger>
+              <Calendar.YearPickerTriggerHeading />
+              <Calendar.YearPickerTriggerIndicator />
+            </Calendar.YearPickerTrigger>
+            <Calendar.NavButton slot="next" />
+          </Calendar.Header>
+          <Calendar.Grid>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+          </Calendar.Grid>
+          <Calendar.YearPickerGrid>
+            <Calendar.YearPickerGridBody>
+              {({year}) => <Calendar.YearPickerCell year={year} />}
+            </Calendar.YearPickerGridBody>
+          </Calendar.YearPickerGrid>
+        </Calendar>
         <Description className="text-center">
           Select a date between today and {maxDate.toString()}
         </Description>
@@ -567,7 +582,10 @@ export const YearPicker: Story = {
     <Calendar {...args} aria-label="Event date">
       <Calendar.Header>
         <Calendar.NavButton slot="previous" />
-        <Calendar.YearPickerTrigger />
+        <Calendar.YearPickerTrigger>
+          <Calendar.YearPickerTriggerHeading />
+          <Calendar.YearPickerTriggerIndicator />
+        </Calendar.YearPickerTrigger>
         <Calendar.NavButton slot="next" />
       </Calendar.Header>
       <Calendar.Grid>
@@ -576,7 +594,81 @@ export const YearPicker: Story = {
         </Calendar.GridHeader>
         <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
       </Calendar.Grid>
-      <Calendar.YearPickerGrid />
+      <Calendar.YearPickerGrid>
+        <Calendar.YearPickerGridBody>
+          {({year}) => <Calendar.YearPickerCell year={year} />}
+        </Calendar.YearPickerGridBody>
+      </Calendar.YearPickerGrid>
+    </Calendar>
+  ),
+};
+
+export const YearPickerStyledCells: Story = {
+  render: (args) => (
+    <Calendar {...args} aria-label="Event date with styled year cells">
+      <Calendar.Header>
+        <Calendar.NavButton slot="previous" />
+        <Calendar.YearPickerTrigger>
+          <Calendar.YearPickerTriggerHeading />
+          <Calendar.YearPickerTriggerIndicator />
+        </Calendar.YearPickerTrigger>
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+      </Calendar.Grid>
+      <Calendar.YearPickerGrid>
+        <Calendar.YearPickerGridBody>
+          {({isCurrentYear, isSelected, year}) => (
+            <Calendar.YearPickerCell
+              year={year}
+              className={
+                isCurrentYear && !isSelected
+                  ? "text-accent ring-1 ring-accent/60 ring-inset"
+                  : undefined
+              }
+            />
+          )}
+        </Calendar.YearPickerGridBody>
+      </Calendar.YearPickerGrid>
+    </Calendar>
+  ),
+};
+
+export const YearPickerCustomCells: Story = {
+  render: (args) => (
+    <Calendar {...args} aria-label="Event date with custom year cells">
+      <Calendar.Header>
+        <Calendar.NavButton slot="previous" />
+        <Calendar.YearPickerTrigger>
+          <Calendar.YearPickerTriggerHeading />
+          <Calendar.YearPickerTriggerIndicator />
+        </Calendar.YearPickerTrigger>
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+      </Calendar.Grid>
+      <Calendar.YearPickerGrid>
+        <Calendar.YearPickerGridBody>
+          {({isCurrentYear, isSelected, year}) => (
+            <Calendar.YearPickerCell year={year}>
+              <span className="inline-flex items-center gap-1">
+                <span>{year}</span>
+                {isCurrentYear ? (
+                  <span className={isSelected ? "text-accent-foreground" : "text-accent"}>Now</span>
+                ) : null}
+              </span>
+            </Calendar.YearPickerCell>
+          )}
+        </Calendar.YearPickerGridBody>
+      </Calendar.YearPickerGrid>
     </Calendar>
   ),
 };

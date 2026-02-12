@@ -13,7 +13,10 @@ export function MinMaxDates() {
       <Calendar aria-label="Appointment date" maxValue={maxDate} minValue={minDate}>
         <Calendar.Header>
           <Calendar.NavButton slot="previous" />
-          <Calendar.Heading />
+          <Calendar.YearPickerTrigger>
+            <Calendar.YearPickerTriggerHeading />
+            <Calendar.YearPickerTriggerIndicator />
+          </Calendar.YearPickerTrigger>
           <Calendar.NavButton slot="next" />
         </Calendar.Header>
         <Calendar.Grid>
@@ -22,6 +25,11 @@ export function MinMaxDates() {
           </Calendar.GridHeader>
           <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
         </Calendar.Grid>
+        <Calendar.YearPickerGrid>
+          <Calendar.YearPickerGridBody>
+            {({year}) => <Calendar.YearPickerCell year={year} />}
+          </Calendar.YearPickerGridBody>
+        </Calendar.YearPickerGrid>
       </Calendar>
       <Description className="text-center">
         Select a date between today and {maxDate.toString()}
