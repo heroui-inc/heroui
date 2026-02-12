@@ -160,7 +160,7 @@ const CalendarYearPickerTriggerHeading = ({
 
   return (
     <span
-      className={composeSlotClassName(slots.triggerText, className)}
+      className={composeSlotClassName(slots.triggerHeading, className)}
       data-slot="calendar-year-picker-trigger-text"
       {...props}
     >
@@ -184,7 +184,7 @@ const CalendarYearPickerTriggerIndicator = ({
   return (
     <span
       aria-hidden="true"
-      className={composeSlotClassName(slots.triggerIcon, className)}
+      className={composeSlotClassName(slots.triggerIndicator, className)}
       data-slot="calendar-year-picker-trigger-icon"
       {...props}
     >
