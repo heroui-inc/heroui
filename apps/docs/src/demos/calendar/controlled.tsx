@@ -20,7 +20,7 @@ export function Controlled() {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <ButtonGroup variant="tertiary">
+      <ButtonGroup fullWidth size="sm" variant="tertiary">
         <Button
           onPress={() => {
             const todayDate = today(getLocalTimeZone());
@@ -33,23 +33,23 @@ export function Controlled() {
         </Button>
         <Button
           onPress={() => {
-            const nextWeekStart = startOfWeek(today(getLocalTimeZone()).add({weeks: 1}), locale);
+            const nextWeekStart = startOfWeek(today(getLocalTimeZone()), locale);
 
             setValue(nextWeekStart);
             setFocusedDate(nextWeekStart);
           }}
         >
-          Next week
+          Week
         </Button>
         <Button
           onPress={() => {
-            const nextMonthStart = startOfMonth(today(getLocalTimeZone()).add({months: 1}));
+            const nextMonthStart = startOfMonth(today(getLocalTimeZone()));
 
             setValue(nextMonthStart);
             setFocusedDate(nextMonthStart);
           }}
         >
-          Next month
+          Month
         </Button>
       </ButtonGroup>
 
