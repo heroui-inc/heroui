@@ -352,12 +352,18 @@ importers:
       '@radix-ui/react-avatar':
         specifier: 1.1.11
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-aria/i18n':
+        specifier: 3.12.14
+        version: 3.12.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@react-aria/ssr':
         specifier: 3.9.10
         version: 3.9.10(react@19.2.3)
       '@react-aria/utils':
         specifier: 3.32.0
         version: 3.32.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-stately/utils':
+        specifier: 3.11.0
+        version: 3.11.0(react@19.2.3)
       '@react-types/color':
         specifier: 3.1.2
         version: 3.1.2(react@19.2.3)

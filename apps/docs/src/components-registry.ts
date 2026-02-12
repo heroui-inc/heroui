@@ -63,6 +63,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "buttongroup",
     title: "ButtonGroup",
   },
+  calendar: {
+    category: "date-time",
+    description: "Interactive month grid for selecting dates",
+    href: "/docs/components/calendar",
+    name: "calendar",
+    title: "Calendar",
+  },
   card: {
     category: "layout",
     description: "Content container with header, body, and footer",
@@ -432,6 +439,7 @@ const componentRelationships: Record<string, string[]> = {
     "toast",
   ],
   buttongroup: ["button", "dropdown", "chip"],
+  calendar: ["datefield", "timefield", "inputgroup", "form"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
   checkboxgroup: [

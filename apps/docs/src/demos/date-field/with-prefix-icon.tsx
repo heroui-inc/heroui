@@ -1,20 +1,18 @@
 "use client";
 
 import {Calendar} from "@gravity-ui/icons";
-import {DateField, DateInputGroup, Label} from "@heroui/react";
+import {DateField, Label} from "@heroui/react";
 
 export function WithPrefixIcon() {
   return (
     <DateField className="w-[256px]" name="date">
       <Label>Date</Label>
-      <DateInputGroup>
-        <DateInputGroup.Prefix>
+      <DateField.Group>
+        <DateField.Prefix>
           <Calendar className="size-4 text-muted" />
-        </DateInputGroup.Prefix>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+        </DateField.Prefix>
+        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+      </DateField.Group>
     </DateField>
   );
 }

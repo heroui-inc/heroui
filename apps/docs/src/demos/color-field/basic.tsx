@@ -2,7 +2,7 @@
 
 import type {Color} from "@heroui/react";
 
-import {ColorField, ColorInputGroup, ColorSwatch, Label, parseColor} from "@heroui/react";
+import {ColorField, ColorSwatch, Label, parseColor} from "@heroui/react";
 import {useState} from "react";
 
 export function Basic() {
@@ -11,12 +11,12 @@ export function Basic() {
   return (
     <ColorField className="w-[280px]" name="color" value={color} onChange={setColor}>
       <Label>Color</Label>
-      <ColorInputGroup>
-        <ColorInputGroup.Prefix>
+      <ColorField.Group>
+        <ColorField.Prefix>
           <ColorSwatch color={color ?? undefined} size="xs" />
-        </ColorInputGroup.Prefix>
-        <ColorInputGroup.Input />
-      </ColorInputGroup>
+        </ColorField.Prefix>
+        <ColorField.Input />
+      </ColorField.Group>
     </ColorField>
   );
 }

@@ -21,6 +21,25 @@ export const IconChevronDown = (props: IconProps) => (
   </svg>
 );
 
+export const IconChevronLeft = (props: IconProps) => (
+  <svg
+    aria-hidden="true"
+    aria-label="Chevron left icon"
+    fill="none"
+    role="presentation"
+    viewBox="0 0 16 16"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      clipRule="evenodd"
+      d="M10.53 2.97a.75.75 0 0 1 0 1.06L6.56 8l3.97 3.97a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 0"
+      fill="currentColor"
+      fillRule="evenodd"
+    />
+  </svg>
+);
+
 export const IconChevronRight = (props: IconProps) => (
   <svg
     aria-hidden="true"

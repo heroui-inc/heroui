@@ -2,15 +2,7 @@
 
 import type {Color} from "@heroui/react";
 
-import {
-  Button,
-  ColorField,
-  ColorInputGroup,
-  ColorSwatch,
-  Description,
-  Label,
-  parseColor,
-} from "@heroui/react";
+import {Button, ColorField, ColorSwatch, Description, Label, parseColor} from "@heroui/react";
 import {useState} from "react";
 
 export function Controlled() {
@@ -20,12 +12,12 @@ export function Controlled() {
     <div className="flex flex-col gap-4">
       <ColorField className="w-[280px]" name="color" value={value} onChange={setValue}>
         <Label>Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Prefix>
+        <ColorField.Group>
+          <ColorField.Prefix>
             <ColorSwatch color={value ?? undefined} size="xs" />
-          </ColorInputGroup.Prefix>
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+          </ColorField.Prefix>
+          <ColorField.Input />
+        </ColorField.Group>
         <Description>Current value: {value ? value.toString("hex") : "(empty)"}</Description>
       </ColorField>
       <div className="flex gap-2">

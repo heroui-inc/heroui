@@ -6,7 +6,6 @@ import {getLocalTimeZone, parseDate, parseZonedDateTime, today} from "@internati
 import React, {useState} from "react";
 
 import {Button} from "../button";
-import {DateInputGroup} from "../date-input-group";
 import {Description} from "../description";
 import {FieldError} from "../field-error";
 import {Form} from "../form";
@@ -33,11 +32,9 @@ export const Default: Story = {
   render: () => (
     <DateField className="w-[256px]" name="date">
       <Label>Date</Label>
-      <DateInputGroup>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+      <DateField.Group>
+        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+      </DateField.Group>
     </DateField>
   ),
 };
@@ -47,19 +44,15 @@ export const Variants: Story = {
     <div className="flex flex-col gap-4">
       <DateField className="w-[256px]" name="primary-date">
         <Label>Primary variant</Label>
-        <DateInputGroup variant="primary">
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group variant="primary">
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
       </DateField>
       <DateField className="w-[256px]" name="secondary-date">
         <Label>Secondary variant</Label>
-        <DateInputGroup variant="secondary">
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group variant="secondary">
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
       </DateField>
     </div>
   ),
@@ -70,25 +63,21 @@ export const FullWidth: Story = {
     <div className="w-[400px] space-y-4">
       <DateField fullWidth name="date">
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
       </DateField>
       <DateField fullWidth name="date-icons">
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Prefix>
+        <DateField.Group>
+          <DateField.Prefix>
             <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-          </DateInputGroup.Prefix>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-          <DateInputGroup.Suffix>
+          </DateField.Prefix>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+          <DateField.Suffix>
             <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
-          </DateInputGroup.Suffix>
-        </DateInputGroup>
+          </DateField.Suffix>
+        </DateField.Group>
       </DateField>
     </div>
   ),
@@ -99,20 +88,16 @@ export const WithDescription: Story = {
     <div className="flex flex-col gap-4">
       <DateField className="w-[256px]" name="date">
         <Label>Birth date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <Description>Enter your date of birth</Description>
       </DateField>
       <DateField className="w-[256px]" name="appointment-date">
         <Label>Appointment date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <Description>Enter a date for your appointment</Description>
       </DateField>
     </div>
@@ -124,19 +109,15 @@ export const Required: Story = {
     <div className="flex flex-col gap-4">
       <DateField isRequired className="w-[256px]" name="date">
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
       </DateField>
       <DateField isRequired className="w-[256px]" name="start-date">
         <Label>Start date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <Description>Required field</Description>
       </DateField>
     </div>
@@ -148,20 +129,16 @@ export const Invalid: Story = {
     <div className="flex flex-col gap-4">
       <DateField isInvalid isRequired className="w-[256px]" name="date">
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <FieldError>Please enter a valid date</FieldError>
       </DateField>
       <DateField isInvalid className="w-[256px]" name="invalid-date">
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <FieldError>Date must be in the future</FieldError>
       </DateField>
     </div>
@@ -173,20 +150,16 @@ export const Disabled: Story = {
     <div className="flex flex-col gap-4">
       <DateField isDisabled className="w-[256px]" name="date" value={today(getLocalTimeZone())}>
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <Description>This date field is disabled</Description>
       </DateField>
       <DateField isDisabled className="w-[256px]" name="date-empty">
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <Description>This date field is disabled</Description>
       </DateField>
     </div>
@@ -201,11 +174,11 @@ export const Controlled: Story = {
       <div className="flex flex-col gap-4">
         <DateField className="w-[256px]" name="date" value={value} onChange={setValue}>
           <Label>Date</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+          <DateField.Group>
+            <DateField.Input>
+              {(segment) => <DateField.Segment segment={segment} />}
+            </DateField.Input>
+          </DateField.Group>
           <Description>Current value: {value ? value.toString() : "(empty)"}</Description>
         </DateField>
         <div className="flex gap-2">
@@ -239,11 +212,11 @@ export const WithValidation: Story = {
           onChange={setValue}
         >
           <Label>Date</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+          <DateField.Group>
+            <DateField.Input>
+              {(segment) => <DateField.Segment segment={segment} />}
+            </DateField.Input>
+          </DateField.Group>
           {isInvalid ? (
             <FieldError>Date must be today or in the future</FieldError>
           ) : (
@@ -259,14 +232,12 @@ export const WithPrefixIcon: Story = {
   render: () => (
     <DateField className="w-[256px]" name="date">
       <Label>Date</Label>
-      <DateInputGroup>
-        <DateInputGroup.Prefix>
+      <DateField.Group>
+        <DateField.Prefix>
           <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-        </DateInputGroup.Prefix>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+        </DateField.Prefix>
+        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+      </DateField.Group>
     </DateField>
   ),
 };
@@ -275,14 +246,12 @@ export const WithSuffixIcon: Story = {
   render: () => (
     <DateField className="w-[256px]" name="date">
       <Label>Date</Label>
-      <DateInputGroup>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-        <DateInputGroup.Suffix>
+      <DateField.Group>
+        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        <DateField.Suffix>
           <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-        </DateInputGroup.Suffix>
-      </DateInputGroup>
+        </DateField.Suffix>
+      </DateField.Group>
     </DateField>
   ),
 };
@@ -291,17 +260,15 @@ export const WithPrefixAndSuffix: Story = {
   render: () => (
     <DateField className="w-[256px]" name="date">
       <Label>Date</Label>
-      <DateInputGroup>
-        <DateInputGroup.Prefix>
+      <DateField.Group>
+        <DateField.Prefix>
           <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-        </DateInputGroup.Prefix>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-        <DateInputGroup.Suffix>
+        </DateField.Prefix>
+        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        <DateField.Suffix>
           <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
-        </DateInputGroup.Suffix>
-      </DateInputGroup>
+        </DateField.Suffix>
+      </DateField.Group>
       <Description>Enter a date</Description>
     </DateField>
   ),
@@ -344,14 +311,14 @@ export const FormExample: Story = {
           onChange={setValue}
         >
           <Label>Appointment date</Label>
-          <DateInputGroup>
-            <DateInputGroup.Prefix>
+          <DateField.Group>
+            <DateField.Prefix>
               <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-            </DateInputGroup.Prefix>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+            </DateField.Prefix>
+            <DateField.Input>
+              {(segment) => <DateField.Segment segment={segment} />}
+            </DateField.Input>
+          </DateField.Group>
           {isInvalid ? (
             <FieldError>Date must be today or in the future</FieldError>
           ) : (
@@ -402,11 +369,11 @@ export const Granularity: Story = {
           name="granularity-date"
         >
           <Label>Appointment Date</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+          <DateField.Group>
+            <DateField.Input>
+              {(segment) => <DateField.Segment segment={segment} />}
+            </DateField.Input>
+          </DateField.Group>
         </DateField>
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
@@ -457,43 +424,43 @@ export const AllVariations: Story = {
       <div className="flex flex-col gap-4">
         <DateField isRequired className="w-[256px]" name="date1">
           <Label>Date</Label>
-          <DateInputGroup>
-            <DateInputGroup.Prefix>
+          <DateField.Group>
+            <DateField.Prefix>
               <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-            </DateInputGroup.Prefix>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-          </DateInputGroup>
+            </DateField.Prefix>
+            <DateField.Input>
+              {(segment) => <DateField.Segment segment={segment} />}
+            </DateField.Input>
+          </DateField.Group>
           <Description>Enter a date</Description>
         </DateField>
 
         <DateField isRequired className="w-[256px]" name="date2">
           <Label>Date</Label>
-          <DateInputGroup>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-            <DateInputGroup.Suffix>
+          <DateField.Group>
+            <DateField.Input>
+              {(segment) => <DateField.Segment segment={segment} />}
+            </DateField.Input>
+            <DateField.Suffix>
               <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-            </DateInputGroup.Suffix>
-          </DateInputGroup>
+            </DateField.Suffix>
+          </DateField.Group>
           <Description>Enter a date</Description>
         </DateField>
 
         <DateField isRequired className="w-[256px]" name="date3">
           <Label>Date</Label>
-          <DateInputGroup>
-            <DateInputGroup.Prefix>
+          <DateField.Group>
+            <DateField.Prefix>
               <Icon className="size-4 text-muted" icon="gravity-ui:calendar" />
-            </DateInputGroup.Prefix>
-            <DateInputGroup.Input>
-              {(segment) => <DateInputGroup.Segment segment={segment} />}
-            </DateInputGroup.Input>
-            <DateInputGroup.Suffix>
+            </DateField.Prefix>
+            <DateField.Input>
+              {(segment) => <DateField.Segment segment={segment} />}
+            </DateField.Input>
+            <DateField.Suffix>
               <Icon className="size-4 text-muted" icon="gravity-ui:chevron-down" />
-            </DateInputGroup.Suffix>
-          </DateInputGroup>
+            </DateField.Suffix>
+          </DateField.Group>
           <Description>Enter a date</Description>
         </DateField>
       </div>

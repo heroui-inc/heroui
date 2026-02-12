@@ -1,0 +1,257 @@
+---
+title: Calendar
+description: Composable date picker with month grid, navigation, and year picker support built on React Aria Calendar
+icon: new
+links:
+  rac: Calendar
+  source: calendar/calendar.tsx
+  styles: calendar.css
+  storybook: Components/Date and Time/Calendar
+---
+
+## Import
+
+```tsx
+import { Calendar } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="calendar-basic" />
+
+### Anatomy
+
+```tsx
+import {Calendar} from '@heroui/react';
+
+export default () => (
+  <Calendar aria-label="Event date">
+    <Calendar.Header>
+      <Calendar.NavButton slot="previous" />
+      <Calendar.Heading />
+      <Calendar.NavButton slot="next" />
+    </Calendar.Header>
+    <Calendar.Grid>
+      <Calendar.GridHeader>
+        {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+      </Calendar.GridHeader>
+      <Calendar.GridBody>
+        {(date) => <Calendar.Cell date={date} />}
+      </Calendar.GridBody>
+    </Calendar.Grid>
+  </Calendar>
+)
+```
+
+### Year Picker
+
+`Calendar.YearPickerTrigger`, `Calendar.YearPickerGrid`, and their body/cell subcomponents provide an integrated year navigation pattern.
+
+<ComponentPreview name="calendar-year-picker" />
+
+### Default Value
+
+<ComponentPreview name="calendar-default-value" />
+
+### Controlled
+
+Use controlled `value` and `focusedValue` for external state coordination and custom shortcuts.
+
+<ComponentPreview name="calendar-controlled" />
+
+### Min and Max Dates
+
+<ComponentPreview name="calendar-min-max-dates" />
+
+### Unavailable Dates
+
+Use `isDateUnavailable` to block dates such as weekends, holidays, or booked slots.
+
+<ComponentPreview name="calendar-unavailable-dates" />
+
+### Disabled
+
+<ComponentPreview name="calendar-disabled" />
+
+### Read Only
+
+<ComponentPreview name="calendar-read-only" />
+
+### Focused Value
+
+Programmatically control which date is focused using `focusedValue` and `onFocusChange`.
+
+<ComponentPreview name="calendar-focused-value" />
+
+### Cell Indicators
+
+You can customize `Calendar.Cell` children and use `Calendar.CellIndicator` to display metadata like events.
+
+<ComponentPreview name="calendar-with-indicators" />
+
+### Multiple Months
+
+Render multiple grids with `visibleDuration` and `offset` for booking and planning experiences.
+
+<ComponentPreview name="calendar-multiple-months" />
+
+### International Calendars
+
+By default, Calendar displays dates using the calendar system for the user's locale. You can override this by wrapping your Calendar with `I18nProvider` and setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string).
+
+The example below shows the Indian calendar system:
+
+<ComponentPreview name="calendar-international-calendar" />
+
+**Note:** The `onChange` event always returns a date in the same calendar system as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale. This ensures your application logic works consistently with a single calendar system while still displaying dates in the user's preferred format.
+
+For a complete list of supported calendar systems and their identifiers, see:
+- [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
+- [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
+
+### Custom Navigation Icons
+
+Pass children to `Calendar.NavButton` to replace the default chevron icons.
+
+<ComponentPreview name="calendar-custom-icons" />
+
+### Real-World Example
+
+<ComponentPreview name="calendar-booking-calendar" />
+
+<RelatedComponents component="calendar" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {Calendar} from '@heroui/react';
+
+function CustomCalendar() {
+  return (
+    <Calendar aria-label="Custom calendar" className="w-72 rounded-2xl border border-border bg-surface p-3 shadow-sm">
+      <Calendar.Header className="pb-3">
+        <Calendar.NavButton slot="previous" className="text-default" />
+        <Calendar.Heading className="text-default" />
+        <Calendar.NavButton slot="next" className="text-default" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar>
+  );
+}
+```
+
+### Customizing the component classes
+
+```css
+@layer components {
+  .calendar {
+    @apply w-72 rounded-2xl border border-border bg-surface p-3 shadow-sm;
+  }
+
+  .calendar__heading {
+    @apply text-sm font-semibold text-default-700;
+  }
+
+  .calendar__cell[data-selected="true"] {
+    @apply bg-accent text-accent-foreground;
+  }
+}
+```
+
+### CSS Classes
+
+Calendar uses these classes in `packages/styles/components/calendar.css` and `packages/styles/components/calendar-year-picker.css`:
+
+- `.calendar` - Root container.
+- `.calendar__header` - Header row containing nav buttons and heading.
+- `.calendar__heading` - Current month label.
+- `.calendar__nav-button` - Previous/next navigation controls.
+- `.calendar__grid` - Main day grid.
+- `.calendar__grid-header` - Weekday header row wrapper.
+- `.calendar__grid-body` - Date rows wrapper.
+- `.calendar__header-cell` - Weekday header cell.
+- `.calendar__cell` - Interactive day cell.
+- `.calendar__cell-indicator` - Dot indicator inside a day cell.
+- `.calendar-year-picker__trigger` - Year picker toggle button.
+- `.calendar-year-picker__trigger-heading` - Heading text inside year picker trigger.
+- `.calendar-year-picker__trigger-indicator` - Indicator icon inside year picker trigger.
+- `.calendar-year-picker__year-grid` - Overlay grid of selectable years.
+- `.calendar-year-picker__year-cell` - Individual year option.
+
+### Interactive States
+
+Calendar supports both pseudo-classes and React Aria data attributes:
+
+- **Selected**: `[data-selected="true"]`
+- **Today**: `[data-today="true"]`
+- **Unavailable**: `[data-unavailable="true"]`
+- **Outside month**: `[data-outside-month="true"]`
+- **Hovered**: `:hover` or `[data-hovered="true"]`
+- **Pressed**: `:active` or `[data-pressed="true"]`
+- **Focus visible**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Disabled**: `:disabled` or `[data-disabled="true"]`
+
+## API Reference
+
+### Calendar Props
+
+Calendar inherits all props from React Aria [Calendar](https://react-spectrum.adobe.com/react-aria/Calendar.html).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `DateValue \| null` | - | Controlled selected date. |
+| `defaultValue` | `DateValue \| null` | - | Initial selected date (uncontrolled). |
+| `onChange` | `(value: DateValue) => void` | - | Called when selection changes. |
+| `focusedValue` | `DateValue` | - | Controlled focused date. |
+| `onFocusChange` | `(value: DateValue) => void` | - | Called when focus moves to another date. |
+| `minValue` | `DateValue` | Calendar-aware `1900-01-01` | Earliest selectable date. |
+| `maxValue` | `DateValue` | Calendar-aware `2099-12-31` | Latest selectable date. |
+| `isDateUnavailable` | `(date: DateValue) => boolean` | - | Marks dates as unavailable. |
+| `isDisabled` | `boolean` | `false` | Disables interaction and selection. |
+| `isReadOnly` | `boolean` | `false` | Keeps content readable but prevents selection changes. |
+| `isInvalid` | `boolean` | `false` | Marks the calendar as invalid for validation UI. |
+| `visibleDuration` | `{months?: number}` | `{months: 1}` | Number of visible months. |
+| `defaultYearPickerOpen` | `boolean` | `false` | Initial open state of internal year picker. |
+| `isYearPickerOpen` | `boolean` | - | Controlled year picker open state. |
+| `onYearPickerOpenChange` | `(isOpen: boolean) => void` | - | Called when year picker open state changes. |
+
+### Composition Parts
+
+| Component | Description |
+|-----------|-------------|
+| `Calendar.Header` | Header container for navigation and heading. |
+| `Calendar.Heading` | Current month/year heading. |
+| `Calendar.NavButton` | Previous/next navigation control (`slot=\"previous\"` or `slot=\"next\"`). |
+| `Calendar.Grid` | Day grid for one month (`offset` supported for multi-month layouts). |
+| `Calendar.GridHeader` | Weekday header container. |
+| `Calendar.GridBody` | Date cell body container. |
+| `Calendar.HeaderCell` | Weekday label cell. |
+| `Calendar.Cell` | Individual date cell. |
+| `Calendar.CellIndicator` | Optional indicator element for custom metadata. |
+| `Calendar.YearPickerTrigger` | Trigger to toggle year-picker mode. |
+| `Calendar.YearPickerTriggerHeading` | Localized heading content inside the year-picker trigger. |
+| `Calendar.YearPickerTriggerIndicator` | Toggle icon inside the year-picker trigger. |
+| `Calendar.YearPickerGrid` | Overlay year selection grid container. |
+| `Calendar.YearPickerGridBody` | Body renderer for year grid cells. |
+| `Calendar.YearPickerCell` | Individual year option cell. |
+
+### Calendar.Cell Render Props
+
+When `Calendar.Cell` children is a function, React Aria render props are available:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `formattedDate` | `string` | Localized day label for the cell. |
+| `isSelected` | `boolean` | Whether the date is selected. |
+| `isUnavailable` | `boolean` | Whether the date is unavailable. |
+| `isDisabled` | `boolean` | Whether the cell is disabled. |
+| `isOutsideMonth` | `boolean` | Whether the date belongs to adjacent month. |

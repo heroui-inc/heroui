@@ -37,6 +37,10 @@ const COMPONENT_GROUPS = [
     ],
   },
   {
+    category: "Date and Time",
+    components: ["calendar"],
+  },
+  {
     category: "Navigation",
     components: ["accordion", "breadcrumbs", "disclosure", "disclosure-group", "link", "tabs"],
   },

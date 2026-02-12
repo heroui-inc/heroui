@@ -2,15 +2,7 @@
 
 import type {Color} from "@heroui/react";
 
-import {
-  Button,
-  ColorField,
-  ColorInputGroup,
-  ColorSwatch,
-  Description,
-  Form,
-  Label,
-} from "@heroui/react";
+import {Button, ColorField, ColorSwatch, Description, Form, Label} from "@heroui/react";
 import {useState} from "react";
 
 export function FormExample() {
@@ -45,12 +37,12 @@ export function FormExample() {
         onChange={setValue}
       >
         <Label>Brand Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Prefix>
+        <ColorField.Group>
+          <ColorField.Prefix>
             <ColorSwatch color={value ?? undefined} size="xs" />
-          </ColorInputGroup.Prefix>
-          <ColorInputGroup.Input placeholder="#000000" />
-        </ColorInputGroup>
+          </ColorField.Prefix>
+          <ColorField.Input placeholder="#000000" />
+        </ColorField.Group>
         <Description>Choose your brand's primary color</Description>
       </ColorField>
       <Button

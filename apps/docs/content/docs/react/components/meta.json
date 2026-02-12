@@ -15,6 +15,7 @@
     "(navigation)/breadcrumbs",
     "(buttons)/button",
     "(buttons)/button-group",
+    "(date-and-time)/calendar",
     "(layout)/card",
     "(forms)/checkbox",
     "(forms)/checkbox-group",
