@@ -1,6 +1,7 @@
 ---
 title: Select
 description: Displays a list of options for the user to pick from — triggered by a button.
+icon: updated
 links:
   source_native: select/select.tsx
   styles_native: select/select.styles.ts
@@ -24,6 +25,7 @@ import { Select } from 'heroui-native';
 <Select>
   <Select.Trigger>
     <Select.Value />
+    <Select.TriggerIndicator />
   </Select.Trigger>
   <Select.Portal>
     <Select.Overlay />
@@ -41,8 +43,9 @@ import { Select } from 'heroui-native';
 ```
 
 - **Select**: Main container that manages open/close state, value selection and provides context to child components.
-- **Select.Trigger**: Clickable element that toggles the select visibility. Wraps any child element with press handlers.
-- **Select.Value**: Displays the selected value or placeholder text. Automatically updates when selection changes.
+- **Select.Trigger**: Clickable element that toggles the select visibility. Wraps any child element with press handlers. Supports `variant` prop (`'default'` or `'unstyled'`).
+- **Select.Value**: Displays the selected value or placeholder text. Automatically updates when selection changes. Styling changes based on selection state.
+- **Select.TriggerIndicator**: Optional visual indicator showing open/close state. Renders an animated chevron icon by default that rotates when the select opens/closes.
 - **Select.Portal**: Renders select content in a portal layer above other content. Ensures proper stacking and positioning.
 - **Select.Overlay**: Optional background overlay. Can be transparent or semi-transparent to capture outside clicks.
 - **Select.Content**: Container for select content with three presentation modes: popover (floating with positioning), bottom sheet modal, or dialog modal.
@@ -80,6 +83,7 @@ Display the selected value in the trigger using the Value component.
 <Select>
   <Select.Trigger>
     <Select.Value placeholder="Choose an option" />
+    <Select.TriggerIndicator />
   </Select.Trigger>
   <Select.Portal>
     <Select.Overlay />
@@ -134,7 +138,7 @@ Control the width of the select content using the `width` prop. This only works 
   <Select.Trigger>...</Select.Trigger>
   <Select.Portal>
     <Select.Overlay />
-    <Select.Content presentation="popover"  width="trigger" >
+    <Select.Content presentation="popover" width="trigger">
       <Select.Item value="1" label="Item 1" />
     </Select.Content>
   </Select.Portal>
@@ -160,7 +164,7 @@ Control the width of the select content using the `width` prop. This only works 
   <Select.Trigger>...</Select.Trigger>
   <Select.Portal>
     <Select.Overlay />
-    <Select.Content presentation="popover" width="content-fit" >
+    <Select.Content presentation="popover" width="content-fit">
       <Select.Item value="1" label="Item 1" />
     </Select.Content>
   </Select.Portal>
@@ -301,6 +305,48 @@ Add descriptions to items for additional context.
 </Select>
 ```
 
+### With Trigger Indicator
+
+Add a visual indicator to show the open/close state of the select. The indicator rotates when the select opens/closes.
+
+```tsx
+<Select>
+  <Select.Trigger>
+    <Select.Value placeholder="Select one" />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="1" label="Option 1" />
+      <Select.Item value="2" label="Option 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### Custom Trigger with Unstyled Variant
+
+Use the `unstyled` variant when composing a custom trigger with other components like Button.
+
+```tsx
+<Select>
+  <Select.Trigger variant="unstyled" asChild>
+    <Button variant="secondary">
+      <Select.Value placeholder="Select..." />
+      <Select.TriggerIndicator />
+    </Button>
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="1" label="Option 1" />
+      <Select.Item value="2" label="Option 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
 ### Controlled Mode
 
 Control the select state programmatically.
@@ -317,6 +363,7 @@ const [isOpen, setIsOpen] = useState(false);
 >
   <Select.Trigger>
     <Select.Value placeholder="Select..." />
+    <Select.TriggerIndicator />
   </Select.Trigger>
   <Select.Portal>
     <Select.Overlay />
@@ -331,73 +378,40 @@ const [isOpen, setIsOpen] = useState(false);
 ## Example
 
 ```tsx
-import { Button, Select } from 'heroui-native';
-import { useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Select, Separator } from 'heroui-native';
+import React, { useState } from 'react';
 
-type CountryOption = {
+type SelectOption = {
   value: string;
   label: string;
-  flag: string;
-  code: string;
 };
 
-const COUNTRIES: CountryOption[] = [
-  { value: 'US', label: 'United States', flag: '🇺🇸', code: '+1' },
-  { value: 'GB', label: 'United Kingdom', flag: '🇬🇧', code: '+44' },
-  { value: 'CA', label: 'Canada', flag: '🇨🇦', code: '+1' },
-  { value: 'AU', label: 'Australia', flag: '🇦🇺', code: '+61' },
+const US_STATES: SelectOption[] = [
+  { value: 'CA', label: 'California' },
+  { value: 'NY', label: 'New York' },
+  { value: 'TX', label: 'Texas' },
+  { value: 'FL', label: 'Florida' },
 ];
 
 export default function SelectExample() {
-  const [country, setCountry] = useState<CountryOption>();
+  const [value, setValue] = useState<SelectOption | undefined>();
 
   return (
-    <Select
-      value={country}
-      onValueChange={(value) => {
-        const selected = COUNTRIES.find((c) => c.value === value?.value);
-        setCountry(selected);
-      }}
-    >
-      <Select.Trigger asChild>
-        <Button variant="tertiary" size="sm">
-          {country ? (
-            <View className="flex-row items-center gap-2">
-              <Text className="text-base">{country.flag}</Text>
-              <Text className="text-sm text-foreground">{country.code}</Text>
-            </View>
-          ) : (
-            <Text className="text-foreground">Select Country</Text>
-          )}
-        </Button>
+    <Select value={value} onValueChange={setValue}>
+      <Select.Trigger>
+        <Select.Value placeholder="Select one" />
+        <Select.TriggerIndicator />
       </Select.Trigger>
       <Select.Portal>
         <Select.Overlay />
-        <Select.Content
-          presentation="popover"
-          width={280}
-          className="h-[250px] rounded-2xl"
-          placement="bottom"
-        >
-          <ScrollView>
-            {COUNTRIES.map((item) => (
-              <Select.Item
-                key={item.value}
-                value={item.value}
-                label={item.label}
-              >
-                <View className="flex-row items-center gap-3 flex-1">
-                  <Text className="text-2xl">{item.flag}</Text>
-                  <Text className="text-sm text-muted w-10">{item.code}</Text>
-                  <Text className="text-base text-foreground flex-1">
-                    {item.label}
-                  </Text>
-                </View>
-                <Select.ItemIndicator />
-              </Select.Item>
-            ))}
-          </ScrollView>
+        <Select.Content presentation="popover" width="trigger">
+          <Select.ListLabel className="mb-2">Choose a state</Select.ListLabel>
+          {US_STATES.map((state, index) => (
+            <React.Fragment key={state.value}>
+              <Select.Item value={state.value} label={state.label} />
+              {index < US_STATES.length - 1 && <Separator />}
+            </React.Fragment>
+          ))}
         </Select.Content>
       </Select.Portal>
     </Select>
@@ -411,20 +425,20 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 
 ### Select
 
-| prop                       | type                            | default     | description                                                            |
-| -------------------------- | ------------------------------- | ----------- | ---------------------------------------------------------------------- |
-| `children`                 | `ReactNode`                     | -           | The content of the select                                              |
-| `value`                    | `SelectOption`                  | -           | The selected value (controlled mode)                                   |
-| `onValueChange`            | `(value: SelectOption) => void` | -           | Callback when the value changes                                        |
-| `defaultValue`             | `SelectOption`                  | -           | The default selected value (uncontrolled mode)                         |
-| `isOpen`                   | `boolean`                       | -           | Whether the select is open (controlled mode)                           |
-| `isDefaultOpen`            | `boolean`                       | -           | Whether the select is open when initially rendered (uncontrolled mode) |
-| `onOpenChange`             | `(isOpen: boolean) => void`     | -           | Callback when the select open state changes                            |
-| `isDisabled`               | `boolean`                       | `false`     | Whether the select is disabled                                         |
-| `presentation`             | `'popover' \| 'bottom-sheet' \| 'dialog'` | `'popover'` | Presentation mode for the select content                               |
-| `animation`                | `SelectRootAnimation`           | -           | Animation configuration                                                |
-| `asChild`                  | `boolean`                       | `false`     | Whether to render as a child element                                   |
-| `...ViewProps`             | `ViewProps`                     | -           | All standard React Native View props are supported                     |
+| prop            | type                                      | default     | description                                                            |
+| --------------- | ----------------------------------------- | ----------- | ---------------------------------------------------------------------- |
+| `children`      | `ReactNode`                               | -           | The content of the select                                              |
+| `value`         | `SelectOption`                            | -           | The selected value (controlled mode)                                   |
+| `onValueChange` | `(value: SelectOption) => void`           | -           | Callback when the value changes                                        |
+| `defaultValue`  | `SelectOption`                            | -           | The default selected value (uncontrolled mode)                         |
+| `isOpen`        | `boolean`                                 | -           | Whether the select is open (controlled mode)                           |
+| `isDefaultOpen` | `boolean`                                 | -           | Whether the select is open when initially rendered (uncontrolled mode) |
+| `onOpenChange`  | `(isOpen: boolean) => void`               | -           | Callback when the select open state changes                            |
+| `isDisabled`    | `boolean`                                 | `false`     | Whether the select is disabled                                         |
+| `presentation`  | `'popover' \| 'bottom-sheet' \| 'dialog'` | `'popover'` | Presentation mode for the select content                               |
+| `animation`     | `SelectRootAnimation`                     | -           | Animation configuration                                                |
+| `asChild`       | `boolean`                                 | `false`     | Whether to render as a child element                                   |
+| `...ViewProps`  | `ViewProps`                               | -           | All standard React Native View props are supported                     |
 
 #### SelectRootAnimation
 
@@ -457,12 +471,14 @@ Animation configuration for Select component. Can be:
 
 ### Select.Trigger
 
-| prop                | type             | default | description                                             |
-| ------------------- | ---------------- | ------- | ------------------------------------------------------- |
-| `children`          | `ReactNode`      | -       | The trigger element content                             |
-| `className`         | `string`         | -       | Additional CSS classes for the trigger                  |
-| `asChild`           | `boolean`        | `true`  | Whether to render as a child element                    |
-| `...PressableProps` | `PressableProps` | -       | All standard React Native Pressable props are supported |
+| prop                | type                      | default     | description                                                                                                       |
+| ------------------- | ------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| `variant`           | `'default' \| 'unstyled'` | `'default'` | The variant of the trigger. `'default'` applies pre-styled container styles, `'unstyled'` removes default styling |
+| `children`          | `ReactNode`               | -           | The trigger element content                                                                                       |
+| `className`         | `string`                  | -           | Additional CSS classes for the trigger                                                                            |
+| `asChild`           | `boolean`                 | `true`      | Whether to render as a child element                                                                              |
+| `isDisabled`        | `boolean`                 | -           | Whether the trigger is disabled                                                                                   |
+| `...PressableProps` | `PressableProps`          | -           | All standard React Native Pressable props are supported                                                           |
 
 ### Select.Value
 
@@ -472,15 +488,60 @@ Animation configuration for Select component. Can be:
 | `className`    | `string`    | -       | Additional CSS classes for the value               |
 | `...TextProps` | `TextProps` | -       | All standard React Native Text props are supported |
 
+**Note:** The value component automatically applies different text colors based on selection state:
+
+- When a value is selected: `text-foreground`
+- When no value is selected (placeholder): `text-field-placeholder`
+
+### Select.TriggerIndicator
+
+| prop                    | type                              | default | description                                                  |
+| ----------------------- | --------------------------------- | ------- | ------------------------------------------------------------ |
+| `children`              | `ReactNode`                       | -       | Custom indicator content. Defaults to animated chevron icon  |
+| `className`             | `string`                          | -       | Additional CSS classes for the trigger indicator             |
+| `style`                 | `ViewStyle`                       | -       | Custom styles for the trigger indicator                      |
+| `iconProps`             | `SelectTriggerIndicatorIconProps` | -       | Chevron icon configuration                                   |
+| `animation`             | `SelectTriggerIndicatorAnimation` | -       | Animation configuration                                      |
+| `isAnimatedStyleActive` | `boolean`                         | `true`  | Whether animated styles (react-native-reanimated) are active |
+| `...ViewProps`          | `ViewProps`                       | -       | All standard React Native View props are supported           |
+
+**Note:** The following style properties are occupied by animations and cannot be set via className:
+
+- `transform` (specifically `rotate`) - Animated for open/close rotation transitions
+
+To customize this property, use the `animation` prop. To completely disable animated styles and use your own via className or style prop, set `isAnimatedStyleActive={false}`.
+
+#### SelectTriggerIndicatorIconProps
+
+| prop    | type     | default | description                                            |
+| ------- | -------- | ------- | ------------------------------------------------------ |
+| `size`  | `number` | `16`    | Size of the icon                                       |
+| `color` | `string` | -       | Color of the icon (defaults to foreground theme color) |
+
+#### SelectTriggerIndicatorAnimation
+
+Animation configuration for Select.TriggerIndicator component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations (rotation from 0° to -180°)
+- `object`: Custom animation configuration
+
+| prop                    | type                    | default                                      | description                                     |
+| ----------------------- | ----------------------- | -------------------------------------------- | ----------------------------------------------- |
+| `state`                 | `'disabled' \| boolean` | -                                            | Disable animations while customizing properties |
+| `rotation.value`        | `[number, number]`      | `[0, -180]`                                  | Rotation values [closed, open] in degrees       |
+| `rotation.springConfig` | `WithSpringConfig`      | `{ damping: 140, stiffness: 1000, mass: 4 }` | Spring animation configuration for rotation     |
+
 ### Select.Portal
 
-| prop           | type        | default | description                                        |
-| -------------- | ----------- | ------- | -------------------------------------------------- |
-| `children`     | `ReactNode` | -       | The portal content (required)                      |
-| `className`    | `string`    | -       | Additional CSS classes for the portal container    |
-| `hostName`     | `string`    | -       | Optional name of the host element for the portal   |
-| `forceMount`   | `boolean`   | -       | Whether to force mount the component in the DOM    |
-| `...ViewProps` | `ViewProps` | -       | All standard React Native View props are supported |
+| prop                       | type        | default | description                                                                                                                   |
+| -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `children`                 | `ReactNode` | -       | The portal content (required)                                                                                                 |
+| `disableFullWindowOverlay` | `boolean`   | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
+| `className`                | `string`    | -       | Additional CSS classes for the portal container                                                                               |
+| `hostName`                 | `string`    | -       | Optional name of the host element for the portal                                                                              |
+| `forceMount`               | `boolean`   | -       | Whether to force mount the component in the DOM                                                                               |
+| `...ViewProps`             | `ViewProps` | -       | All standard React Native View props are supported                                                                            |
 
 ### Select.Overlay
 
@@ -502,31 +563,31 @@ Animation configuration for Select.Overlay component. Can be:
 - `true` or `undefined`: Use default animations (progress-based opacity for bottom-sheet/dialog, Keyframe animations for popover)
 - `object`: Custom animation configuration
 
-| prop            | type                       | default     | description                                     |
-| --------------- | -------------------------- | ----------- | ----------------------------------------------- |
-| `state`         | `'disabled' \| boolean`    | -           | Disable animations while customizing properties |
-| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close] (for bottom-sheet/dialog presentation) |
+| prop            | type                       | default     | description                                                                  |
+| --------------- | -------------------------- | ----------- | ---------------------------------------------------------------------------- |
+| `state`         | `'disabled' \| boolean`    | -           | Disable animations while customizing properties                              |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close] (for bottom-sheet/dialog presentation)    |
 | `entering`      | `EntryOrExitLayoutType`    | -           | Custom Keyframe animation for entering transition (for popover presentation) |
-| `exiting`       | `EntryOrExitLayoutType`    | -           | Custom Keyframe animation for exiting transition (for popover presentation) |
+| `exiting`       | `EntryOrExitLayoutType`    | -           | Custom Keyframe animation for exiting transition (for popover presentation)  |
 
 ### Select.Content (Popover Presentation)
 
-| prop                    | type                                             | default         | description                                                  |
-| ----------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-| `children`              | `ReactNode`                                      | -               | The select content                                           |
-| `width`                 | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | Width sizing strategy for the content                        |
-| `presentation`          | `'popover'`                                      | `'popover'`     | Presentation mode for the select                             |
-| `placement`             | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | Placement of the content relative to trigger                 |
-| `align`                 | `'start' \| 'center' \| 'end'`                   | `'center'`      | Alignment along the placement axis                           |
-| `avoidCollisions`       | `boolean`                                        | `true`          | Whether to flip placement when close to viewport edges       |
-| `offset`                | `number`                                         | `8`             | Distance from trigger element in pixels                      |
-| `alignOffset`           | `number`                                         | `0`             | Offset along the alignment axis in pixels                    |
-| `className`             | `string`                                         | -               | Additional CSS classes for the content container             |
-| `animation`             | `SelectContentPopoverAnimation`                  | -               | Animation configuration                                      |
-| `forceMount`            | `boolean`                                        | -               | Whether to force mount the component in the DOM              |
-| `insets`                | `Insets`                                         | -               | Screen edge insets to respect when positioning               |
-| `asChild`               | `boolean`                                        | `false`         | Whether to render as a child element                         |
-| `...Animated.ViewProps` | `Animated.ViewProps`                             | -               | All Reanimated Animated.View props are supported             |
+| prop                    | type                                             | default         | description                                            |
+| ----------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------ |
+| `children`              | `ReactNode`                                      | -               | The select content                                     |
+| `width`                 | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | Width sizing strategy for the content                  |
+| `presentation`          | `'popover'`                                      | `'popover'`     | Presentation mode for the select                       |
+| `placement`             | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | Placement of the content relative to trigger           |
+| `align`                 | `'start' \| 'center' \| 'end'`                   | `'center'`      | Alignment along the placement axis                     |
+| `avoidCollisions`       | `boolean`                                        | `true`          | Whether to flip placement when close to viewport edges |
+| `offset`                | `number`                                         | `8`             | Distance from trigger element in pixels                |
+| `alignOffset`           | `number`                                         | `0`             | Offset along the alignment axis in pixels              |
+| `className`             | `string`                                         | -               | Additional CSS classes for the content container       |
+| `animation`             | `SelectContentPopoverAnimation`                  | -               | Animation configuration                                |
+| `forceMount`            | `boolean`                                        | -               | Whether to force mount the component in the DOM        |
+| `insets`                | `Insets`                                         | -               | Screen edge insets to respect when positioning         |
+| `asChild`               | `boolean`                                        | `false`         | Whether to render as a child element                   |
+| `...Animated.ViewProps` | `Animated.ViewProps`                             | -               | All Reanimated Animated.View props are supported       |
 
 #### SelectContentPopoverAnimation
 
@@ -536,11 +597,11 @@ Animation configuration for Select.Content component (popover presentation). Can
 - `true` or `undefined`: Use default Keyframe animations (translateY/translateX, scale, opacity based on placement)
 - `object`: Custom animation configuration with `entering` and/or `exiting` Keyframe animations
 
-| prop       | type                    | default | description                                     |
-| ---------- | ----------------------- | ------- | ----------------------------------------------- |
-| `state`    | `'disabled' \| boolean` | -       | Disable animations while customizing properties |
+| prop       | type                    | default | description                                                                                                                                |
+| ---------- | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `state`    | `'disabled' \| boolean` | -       | Disable animations while customizing properties                                                                                            |
 | `entering` | `EntryOrExitLayoutType` | -       | Custom Keyframe animation for entering transition (default: Keyframe with translateY/translateX, scale, opacity based on placement, 200ms) |
-| `exiting`  | `EntryOrExitLayoutType` | -       | Custom Keyframe animation for exiting transition (default: Keyframe mirroring entering animation, 150ms) |
+| `exiting`  | `EntryOrExitLayoutType` | -       | Custom Keyframe animation for exiting transition (default: Keyframe mirroring entering animation, 150ms)                                   |
 
 ### Select.Content (Bottom Sheet Presentation)
 
@@ -553,16 +614,24 @@ Animation configuration for Select.Content component (popover presentation). Can
 
 ### Select.Content (Dialog Presentation)
 
-| prop                    | type                                     | default | description                                                  |
-| ----------------------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
-| `children`              | `ReactNode`                              | -       | The dialog content                                           |
-| `presentation`          | `'dialog'`                               | -       | Presentation mode for the select                             |
-| `classNames`            | `{ wrapper?: string; content?: string }` | -       | Additional CSS classes for wrapper and content               |
-| `animation`             | `SelectContentAnimation`                 | -       | Animation configuration                                      |
-| `isSwipeable`           | `boolean`                                | `true`  | Whether the dialog content can be swiped to dismiss          |
-| `forceMount`            | `boolean`                                | -       | Whether to force mount the component in the DOM              |
-| `asChild`               | `boolean`                                | `false` | Whether to render as a child element                         |
-| `...ViewProps`          | `ViewProps`                              | -       | All standard React Native View props are supported           |
+| prop           | type                                                     | default | description                                         |
+| -------------- | -------------------------------------------------------- | ------- | --------------------------------------------------- |
+| `children`     | `ReactNode`                                              | -       | The dialog content                                  |
+| `presentation` | `'dialog'`                                               | -       | Presentation mode for the select                    |
+| `classNames`   | `{ wrapper?: string; content?: string }`                 | -       | Additional CSS classes for wrapper and content      |
+| `styles`       | `Partial<Record<DialogContentFallbackSlots, ViewStyle>>` | -       | Styles for different parts of the dialog content    |
+| `animation`    | `SelectContentAnimation`                                 | -       | Animation configuration                             |
+| `isSwipeable`  | `boolean`                                                | `true`  | Whether the dialog content can be swiped to dismiss |
+| `forceMount`   | `boolean`                                                | -       | Whether to force mount the component in the DOM     |
+| `asChild`      | `boolean`                                                | `false` | Whether to render as a child element                |
+| `...ViewProps` | `ViewProps`                                              | -       | All standard React Native View props are supported  |
+
+#### `styles`
+
+| prop      | type        | description                      |
+| --------- | ----------- | -------------------------------- |
+| `wrapper` | `ViewStyle` | Styles for the wrapper container |
+| `content` | `ViewStyle` | Styles for the dialog content    |
 
 #### SelectContentAnimation
 
@@ -572,15 +641,15 @@ Animation configuration for Select.Content component (dialog presentation). Can 
 - `true` or `undefined`: Use default Keyframe animations (scale and opacity transitions)
 - `object`: Custom animation configuration with `entering` and/or `exiting` Keyframe animations
 
-| prop       | type                    | default | description                                     |
-| ---------- | ----------------------- | ------- | ----------------------------------------------- |
-| `state`    | `'disabled' \| boolean` | -       | Disable animations while customizing properties |
-| `entering` | `EntryOrExitLayoutType` | -       | Custom Keyframe animation for entering transition (default: Keyframe with scale and opacity, 200ms) |
+| prop       | type                    | default | description                                                                                              |
+| ---------- | ----------------------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `state`    | `'disabled' \| boolean` | -       | Disable animations while customizing properties                                                          |
+| `entering` | `EntryOrExitLayoutType` | -       | Custom Keyframe animation for entering transition (default: Keyframe with scale and opacity, 200ms)      |
 | `exiting`  | `EntryOrExitLayoutType` | -       | Custom Keyframe animation for exiting transition (default: Keyframe mirroring entering animation, 150ms) |
 
 ### Select.Close
 
-Select.Close extends [CloseButton](../close-button/close-button.md) and automatically handles select dismissal when pressed.
+Select.Close extends [CloseButton](./close-button) and automatically handles select dismissal when pressed.
 
 ### Select.ListLabel
 
@@ -699,11 +768,11 @@ const { selectState, progress, isDragging, isGestureReleaseAnimationRunning } =
 
 #### Return Value
 
-| property                           | type                          | description                                                |
-| ---------------------------------- | ----------------------------- | ---------------------------------------------------------- |
-| `progress`                         | `SharedValue<number>`         | Progress value for animations (0=idle, 1=open, 2=close)    |
-| `isDragging`                       | `SharedValue<boolean>`        | Whether the select content is currently being dragged      |
-| `isGestureReleaseAnimationRunning` | `SharedValue<boolean>`        | Whether the gesture release animation is currently running |
+| property                           | type                   | description                                                |
+| ---------------------------------- | ---------------------- | ---------------------------------------------------------- |
+| `progress`                         | `SharedValue<number>`  | Progress value for animations (0=idle, 1=open, 2=close)    |
+| `isDragging`                       | `SharedValue<boolean>` | Whether the select content is currently being dragged      |
+| `isGestureReleaseAnimationRunning` | `SharedValue<boolean>` | Whether the gesture release animation is currently running |
 
 **Note:** This hook must be used within a `Select` component. It will throw an error if called outside of the select animation context.
 
@@ -730,3 +799,9 @@ const { itemValue, label } = useSelectItem();
 | ----------- | -------- | ---------------------------------- |
 | `itemValue` | `string` | The value of the current item      |
 | `label`     | `string` | The label text of the current item |
+
+## Special Notes
+
+### Element Inspector (iOS)
+
+Select uses FullWindowOverlay on iOS. To enable the React Native element inspector during development, set `disableFullWindowOverlay={true}` on `Select.Portal`. Tradeoff: the select dropdown will not appear above native modals when disabled.

@@ -1,6 +1,7 @@
 ---
 title: Toast
 description: Displays temporary notification messages that appear at the top or bottom of the screen.
+icon: updated
 links:
   source_native: toast/toast.tsx
   styles_native: toast/toast.styles.ts
@@ -342,13 +343,14 @@ For inherited props including `isDisabled` and all Button props, see [Button API
 
 Props for configuring toast behavior globally via `HeroUINativeProvider` config prop.
 
-| prop               | type                                                | default | description                                                      |
-| ------------------ | --------------------------------------------------- | ------- | ---------------------------------------------------------------- |
-| `defaultProps`     | `ToastGlobalConfig`                                 | -       | Global toast configuration used as defaults for all toasts       |
-| `insets`           | `ToastInsets`                                       | -       | Insets for spacing from screen edges (added to safe area insets) |
-| `maxVisibleToasts` | `number`                                            | `3`     | Maximum number of visible toasts before opacity starts fading    |
-| `contentWrapper`   | `(children: React.ReactNode) => React.ReactElement` | -       | Custom wrapper function to wrap toast content                    |
-| `children`         | `React.ReactNode`                                   | -       | Children to render                                               |
+| prop                       | type                                                | default | description                                                                                                                  |
+| -------------------------- | --------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `defaultProps`             | `ToastGlobalConfig`                                 | -       | Global toast configuration used as defaults for all toasts                                                                   |
+| `disableFullWindowOverlay` | `boolean`                                           | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; toasts won't appear above native modals |
+| `insets`                   | `ToastInsets`                                       | -       | Insets for spacing from screen edges (added to safe area insets)                                                             |
+| `maxVisibleToasts`         | `number`                                            | `3`     | Maximum number of visible toasts before opacity starts fading                                                                |
+| `contentWrapper`           | `(children: React.ReactNode) => React.ReactElement` | -       | Custom wrapper function to wrap toast content                                                                                |
+| `children`                 | `React.ReactNode`                                   | -       | Children to render                                                                                                           |
 
 #### ToastGlobalConfig
 
@@ -424,10 +426,6 @@ Options for showing a toast. Can be either a config object with default styling 
 
 ## Special Notes
 
-### Styling Notes
+### Element Inspector (iOS)
 
-#### Border as Padding
-
-Toast uses `border-[16px]` class which serves as padding. This is intentional because when visible toasts have different heights, the toast adapts to the last visible toast height. In cases where a toast originally has one height and gets smaller when a new toast comes to stack, content might be visible behind the last toast without proper padding. The border ensures consistent spacing regardless of toast height changes.
-
-For padding, use `border` classes. For actual borders, use `outline` classes.
+Toast uses FullWindowOverlay on iOS. To enable the React Native element inspector during development, set `disableFullWindowOverlay={true}` on `ToastProvider` (via `config.toast` when using HeroUINativeProvider). Tradeoff: toasts will not appear above native modals when disabled.

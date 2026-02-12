@@ -1,6 +1,7 @@
 ---
 title: Popover
 description: Displays a floating content panel anchored to a trigger element with placement and alignment options.
+icon: updated
 links:
   source_native: popover/popover.tsx
   styles_native: popover/popover.styles.ts
@@ -110,7 +111,9 @@ Control the width of the popover content using the `width` prop.
   <Popover.Trigger>...</Popover.Trigger>
   <Popover.Portal>
     <Popover.Overlay />
-    <Popover.Content presentation="popover" width={320}>...</Popover.Content>
+    <Popover.Content presentation="popover" width={320}>
+      ...
+    </Popover.Content>
   </Popover.Portal>
 </Popover>;
 
@@ -121,7 +124,9 @@ Control the width of the popover content using the `width` prop.
   <Popover.Trigger>...</Popover.Trigger>
   <Popover.Portal>
     <Popover.Overlay />
-    <Popover.Content presentation="popover" width="trigger">...</Popover.Content>
+    <Popover.Content presentation="popover" width="trigger">
+      ...
+    </Popover.Content>
   </Popover.Portal>
 </Popover>;
 
@@ -132,7 +137,9 @@ Control the width of the popover content using the `width` prop.
   <Popover.Trigger>...</Popover.Trigger>
   <Popover.Portal>
     <Popover.Overlay />
-    <Popover.Content presentation="popover" width="full">...</Popover.Content>
+    <Popover.Content presentation="popover" width="full">
+      ...
+    </Popover.Content>
   </Popover.Portal>
 </Popover>;
 
@@ -143,7 +150,9 @@ Control the width of the popover content using the `width` prop.
   <Popover.Trigger>...</Popover.Trigger>
   <Popover.Portal>
     <Popover.Overlay />
-    <Popover.Content presentation="popover" width="content-fit">...</Popover.Content>
+    <Popover.Content presentation="popover" width="content-fit">
+      ...
+    </Popover.Content>
   </Popover.Portal>
 </Popover>;
 ```
@@ -176,7 +185,9 @@ Control where the popover appears relative to the trigger element.
 <Popover>
   <Popover.Trigger>...</Popover.Trigger>
   <Popover.Portal>
-    <Popover.Content presentation="popover" placement="left">...</Popover.Content>
+    <Popover.Content presentation="popover" placement="left">
+      ...
+    </Popover.Content>
   </Popover.Portal>
 </Popover>
 ```
@@ -274,7 +285,11 @@ export default function PopoverExample() {
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Overlay />
-        <Popover.Content presentation="popover" width={320} className="gap-1 rounded-xl px-6 py-4">
+        <Popover.Content
+          presentation="popover"
+          width={320}
+          className="gap-1 rounded-xl px-6 py-4"
+        >
           <Popover.Close className="absolute top-3 right-3 z-50" />
           <Popover.Title>Information</Popover.Title>
           <Popover.Description>
@@ -294,16 +309,16 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 
 ### Popover
 
-| prop            | type                        | default | description                                                               |
-| --------------- | --------------------------- | ------- | ------------------------------------------------------------------------- |
-| `children`      | `ReactNode`                 | -       | Children elements to be rendered inside the popover                       |
-| `isOpen`        | `boolean`                   | -       | Whether the popover is open (controlled mode)                             |
-| `isDefaultOpen` | `boolean`                   | -       | The open state of the popover when initially rendered (uncontrolled mode) |
-| `onOpenChange`  | `(isOpen: boolean) => void` | -       | Callback when the popover open state changes                              |
-| `animation`     | `AnimationRootDisableAll`      | -       | Animation configuration. Can be `false`, `"disabled"`, `"disable-all"`, `true`, or `undefined` |
-| `presentation` | `'popover' \| 'bottom-sheet'`  | `'popover'` | Presentation mode for the popover content                                 |
-| `asChild`       | `boolean`                   | `false` | Whether to render as a child element                                      |
-| `...ViewProps`  | `ViewProps`                 | -       | All standard React Native View props are supported                        |
+| prop            | type                          | default     | description                                                                                    |
+| --------------- | ----------------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
+| `children`      | `ReactNode`                   | -           | Children elements to be rendered inside the popover                                            |
+| `isOpen`        | `boolean`                     | -           | Whether the popover is open (controlled mode)                                                  |
+| `isDefaultOpen` | `boolean`                     | -           | The open state of the popover when initially rendered (uncontrolled mode)                      |
+| `onOpenChange`  | `(isOpen: boolean) => void`   | -           | Callback when the popover open state changes                                                   |
+| `animation`     | `AnimationRootDisableAll`     | -           | Animation configuration. Can be `false`, `"disabled"`, `"disable-all"`, `true`, or `undefined` |
+| `presentation`  | `'popover' \| 'bottom-sheet'` | `'popover'` | Presentation mode for the popover content                                                      |
+| `asChild`       | `boolean`                     | `false`     | Whether to render as a child element                                                           |
+| `...ViewProps`  | `ViewProps`                   | -           | All standard React Native View props are supported                                             |
 
 #### AnimationRootDisableAll
 
@@ -324,13 +339,14 @@ Animation configuration for popover root component. Can be:
 
 ### Popover.Portal
 
-| prop           | type        | default | description                                        |
-| -------------- | ----------- | ------- | -------------------------------------------------- |
-| `children`     | `ReactNode` | -       | The portal content (required)                      |
-| `hostName`     | `string`    | -       | Optional name of the host element for the portal   |
-| `forceMount`   | `boolean`   | -       | Whether to force mount the component in the DOM    |
-| `className`    | `string`    | -       | Additional CSS classes for the portal container    |
-| `...ViewProps` | `ViewProps` | -       | All standard React Native View props are supported |
+| prop                       | type        | default | description                                                                                                                   |
+| -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `children`                 | `ReactNode` | -       | The portal content (required)                                                                                                 |
+| `disableFullWindowOverlay` | `boolean`   | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
+| `hostName`                 | `string`    | -       | Optional name of the host element for the portal                                                                              |
+| `forceMount`               | `boolean`   | -       | Whether to force mount the component in the DOM                                                                               |
+| `className`                | `string`    | -       | Additional CSS classes for the portal container                                                                               |
+| `...ViewProps`             | `ViewProps` | -       | All standard React Native View props are supported                                                                            |
 
 ### Popover.Overlay
 
@@ -352,46 +368,46 @@ Animation configuration for popover overlay component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop      | type                    | default     | description                                     |
-| --------- | ----------------------- | ----------- | ----------------------------------------------- |
-| `state`   | `'disabled' \| boolean` | -           | Disable animations while customizing properties |
-| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | Opacity values [idle, open, close] - Takes effect for bottom-sheet/dialog presentation |
-| `entering` | `EntryOrExitLayoutType` | FadeIn with duration 200ms | Custom Keyframe animation for entering transition - Takes effect for popover presentation |
-| `exiting` | `EntryOrExitLayoutType` | FadeOut with duration 150ms | Custom Keyframe animation for exiting transition - Takes effect for popover presentation |
+| prop            | type                       | default                     | description                                                                               |
+| --------------- | -------------------------- | --------------------------- | ----------------------------------------------------------------------------------------- |
+| `state`         | `'disabled' \| boolean`    | -                           | Disable animations while customizing properties                                           |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]`                 | Opacity values [idle, open, close] - Takes effect for bottom-sheet/dialog presentation    |
+| `entering`      | `EntryOrExitLayoutType`    | FadeIn with duration 200ms  | Custom Keyframe animation for entering transition - Takes effect for popover presentation |
+| `exiting`       | `EntryOrExitLayoutType`    | FadeOut with duration 150ms | Custom Keyframe animation for exiting transition - Takes effect for popover presentation  |
 
 ### Popover.Content (Popover Presentation)
 
-| prop                      | type                                             | default         | description                                                  |
-| ------------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-| `children`                | `ReactNode`                                      | -               | The popover content                                          |
+| prop                      | type                                             | default         | description                                                                                             |
+| ------------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------------------------------------------------------- |
+| `children`                | `ReactNode`                                      | -               | The popover content                                                                                     |
 | `presentation`            | `'popover'`                                      | `'popover'`     | Presentation mode - must match Popover.Root presentation prop. When not provided, defaults to 'popover' |
-| `width`                   | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | Width sizing strategy for the content                        |
-| `placement`               | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | Placement of the popover relative to trigger                 |
-| `align`                   | `'start' \| 'center' \| 'end'`                   | `'center'`      | Alignment along the placement axis                           |
-| `avoidCollisions`         | `boolean`                                        | `true`          | Whether to flip placement when close to viewport edges       |
-| `offset`                  | `number`                                         | `9`             | Distance from trigger element in pixels                      |
-| `alignOffset`             | `number`                                         | `0`             | Offset along the alignment axis in pixels                    |
-| `disablePositioningStyle` | `boolean`                                        | `false`         | Whether to disable automatic positioning styles              |
-| `forceMount`              | `boolean`                                        | -               | Whether to force mount the component in the DOM              |
-| `insets`                  | `Insets`                                         | -               | Screen edge insets to respect when positioning               |
-| `className`               | `string`                                         | -               | Additional CSS classes for the content container             |
-| `animation`               | `PopupPopoverContentAnimation`                   | -               | Animation configuration                                      |
-| `isAnimatedStyleActive`   | `boolean`                                        | `true`          | Whether animated styles (react-native-reanimated) are active |
-| `asChild`                 | `boolean`                                        | `false`         | Whether to render as a child element                         |
-| `...Animated.ViewProps`   | `Animated.ViewProps`                             | -               | All Reanimated Animated.View props are supported             |
+| `width`                   | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | Width sizing strategy for the content                                                                   |
+| `placement`               | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | Placement of the popover relative to trigger                                                            |
+| `align`                   | `'start' \| 'center' \| 'end'`                   | `'center'`      | Alignment along the placement axis                                                                      |
+| `avoidCollisions`         | `boolean`                                        | `true`          | Whether to flip placement when close to viewport edges                                                  |
+| `offset`                  | `number`                                         | `9`             | Distance from trigger element in pixels                                                                 |
+| `alignOffset`             | `number`                                         | `0`             | Offset along the alignment axis in pixels                                                               |
+| `disablePositioningStyle` | `boolean`                                        | `false`         | Whether to disable automatic positioning styles                                                         |
+| `forceMount`              | `boolean`                                        | -               | Whether to force mount the component in the DOM                                                         |
+| `insets`                  | `Insets`                                         | -               | Screen edge insets to respect when positioning                                                          |
+| `className`               | `string`                                         | -               | Additional CSS classes for the content container                                                        |
+| `animation`               | `PopupPopoverContentAnimation`                   | -               | Animation configuration                                                                                 |
+| `isAnimatedStyleActive`   | `boolean`                                        | `true`          | Whether animated styles (react-native-reanimated) are active                                            |
+| `asChild`                 | `boolean`                                        | `false`         | Whether to render as a child element                                                                    |
+| `...Animated.ViewProps`   | `Animated.ViewProps`                             | -               | All Reanimated Animated.View props are supported                                                        |
 
 ### Popover.Content (Bottom Sheet Presentation)
 
-| prop                        | type                   | default | description                                      |
-| --------------------------- | ---------------------- | ------- | ------------------------------------------------ |
-| `children`                  | `ReactNode`            | -       | The bottom sheet content                         |
+| prop                        | type                   | default | description                                                                                    |
+| --------------------------- | ---------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `children`                  | `ReactNode`            | -       | The bottom sheet content                                                                       |
 | `presentation`              | `'bottom-sheet'`       | -       | Presentation mode - must be 'bottom-sheet' and match Popover.Root presentation prop (required) |
-| `contentContainerClassName` | `string`               | -       | Additional CSS classes for the content container |
-| `contentContainerProps`     | `BottomSheetViewProps` | -       | Props for the content container                  |
-| `enablePanDownToClose`      | `boolean`              | `true`  | Whether pan down gesture closes the sheet        |
-| `backgroundStyle`           | `ViewStyle`            | -       | Style for the bottom sheet background            |
-| `handleIndicatorStyle`      | `ViewStyle`            | -       | Style for the bottom sheet handle indicator      |
-| `...BottomSheetProps`       | `BottomSheetProps`     | -       | All @gorhom/bottom-sheet props are supported     |
+| `contentContainerClassName` | `string`               | -       | Additional CSS classes for the content container                                               |
+| `contentContainerProps`     | `BottomSheetViewProps` | -       | Props for the content container                                                                |
+| `enablePanDownToClose`      | `boolean`              | `true`  | Whether pan down gesture closes the sheet                                                      |
+| `backgroundStyle`           | `ViewStyle`            | -       | Style for the bottom sheet background                                                          |
+| `handleIndicatorStyle`      | `ViewStyle`            | -       | Style for the bottom sheet handle indicator                                                    |
+| `...BottomSheetProps`       | `BottomSheetProps`     | -       | All @gorhom/bottom-sheet props are supported                                                   |
 
 #### PopupPopoverContentAnimation
 
@@ -401,11 +417,11 @@ Animation configuration for popover content component (popover presentation). Ca
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop      | type                    | default                                                         | description                                     |
-| --------- | ----------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
-| `state`   | `'disabled' \| boolean` | -                                                               | Disable animations while customizing properties |
+| prop       | type                    | default                                                         | description                                       |
+| ---------- | ----------------------- | --------------------------------------------------------------- | ------------------------------------------------- |
+| `state`    | `'disabled' \| boolean` | -                                                               | Disable animations while customizing properties   |
 | `entering` | `EntryOrExitLayoutType` | Keyframe with translateY/translateX, scale, and opacity (200ms) | Custom Keyframe animation for entering transition |
-| `exiting` | `EntryOrExitLayoutType` | Keyframe mirroring entering animation (150ms)                   | Custom Keyframe animation for exiting transition |
+| `exiting`  | `EntryOrExitLayoutType` | Keyframe mirroring entering animation (150ms)                   | Custom Keyframe animation for exiting transition  |
 
 ### Popover.Arrow
 
@@ -489,9 +505,15 @@ const CustomContent = () => {
 
 **Returns:** `UsePopoverAnimationReturn`
 
-| property     | type                  | description                                                        |
-| ------------ | --------------------- | ------------------------------------------------------------------ |
-| `progress`   | `SharedValue<number>` | Progress value for the popover animation (0=idle, 1=open, 2=close) |
+| property     | type                   | description                                                        |
+| ------------ | ---------------------- | ------------------------------------------------------------------ |
+| `progress`   | `SharedValue<number>`  | Progress value for the popover animation (0=idle, 1=open, 2=close) |
 | `isDragging` | `SharedValue<boolean>` | Dragging state shared value                                        |
 
 **Note:** This hook must be used within a `Popover` component. It will throw an error if called outside of the popover animation context.
+
+## Special Notes
+
+### Element Inspector (iOS)
+
+Popover uses FullWindowOverlay on iOS. To enable the React Native element inspector during development, set `disableFullWindowOverlay={true}` on `Popover.Portal`. Tradeoff: the popover will not appear above native modals when disabled.

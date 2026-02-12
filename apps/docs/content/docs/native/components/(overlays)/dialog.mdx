@@ -1,6 +1,7 @@
 ---
 title: Dialog
 description: Displays a modal overlay with animated transitions and gesture-based dismissal.
+icon: updated
 links:
   source_native: dialog/dialog.tsx
   styles_native: dialog/dialog.styles.ts
@@ -151,14 +152,14 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 
 ### Dialog
 
-| prop                       | type                       | default | description                                                                          |
-| -------------------------- | -------------------------- | ------- | ------------------------------------------------------------------------------------ |
-| `children`                 | `React.ReactNode`          | -       | Dialog content and trigger elements                                                  |
-| `isOpen`                   | `boolean`                  | -       | Controlled open state of the dialog                                                  |
-| `isDefaultOpen`            | `boolean`                  | `false` | Initial open state when uncontrolled                                                 |
-| `animation`                | `AnimationRootDisableAll`  | -       | Animation configuration                                                              |
-| `onOpenChange`             | `(value: boolean) => void` | -       | Callback when open state changes                                                     |
-| `...ViewProps`             | `ViewProps`                | -       | All standard React Native View props are supported                                   |
+| prop            | type                       | default | description                                        |
+| --------------- | -------------------------- | ------- | -------------------------------------------------- |
+| `children`      | `React.ReactNode`          | -       | Dialog content and trigger elements                |
+| `isOpen`        | `boolean`                  | -       | Controlled open state of the dialog                |
+| `isDefaultOpen` | `boolean`                  | `false` | Initial open state when uncontrolled               |
+| `animation`     | `AnimationRootDisableAll`  | -       | Animation configuration                            |
+| `onOpenChange`  | `(value: boolean) => void` | -       | Callback when open state changes                   |
+| `...ViewProps`  | `ViewProps`                | -       | All standard React Native View props are supported |
 
 #### AnimationRootDisableAll
 
@@ -178,13 +179,14 @@ Animation configuration for dialog root component. Can be:
 
 ### Dialog.Portal
 
-| prop         | type                   | default | description                                      |
-| ------------ | ---------------------- | ------- | ------------------------------------------------ |
-| `children`   | `React.ReactNode`      | -       | Portal content (overlay and dialog)              |
-| `className`  | `string`               | -       | Additional CSS classes for portal container      |
-| `style`      | `StyleProp<ViewStyle>` | -       | Additional styles for portal container           |
-| `hostName`   | `string`               | -       | Optional portal host name for specific container |
-| `forceMount` | `boolean`              | -       | Force mount when closed for animation purposes   |
+| prop                       | type                   | default | description                                                                                                                   |
+| -------------------------- | ---------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `children`                 | `React.ReactNode`      | -       | Portal content (overlay and dialog)                                                                                           |
+| `disableFullWindowOverlay` | `boolean`              | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
+| `className`                | `string`               | -       | Additional CSS classes for portal container                                                                                   |
+| `style`                    | `StyleProp<ViewStyle>` | -       | Additional styles for portal container                                                                                        |
+| `hostName`                 | `string`               | -       | Optional portal host name for specific container                                                                              |
+| `forceMount`               | `boolean`              | -       | Force mount when closed for animation purposes                                                                                |
 
 ### Dialog.Overlay
 
@@ -207,24 +209,24 @@ Animation configuration for dialog overlay component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop            | type                       | default                    | description                                                                 |
-| --------------- | -------------------------- | -------------------------- | --------------------------------------------------------------------------- |
-| `state`         | `'disabled' \| boolean`    | -                          | Disable animations while customizing properties                             |
-| `opacity.value` | `[number, number, number]` | `[0, 1, 0]`                | Opacity values [idle, open, close] (progress-based, for dialog presentation) |
-| `entering`      | `EntryOrExitLayoutType`    | `FadeIn.duration(200)`     | Custom entering animation (for popover presentation)                        |
-| `exiting`       | `EntryOrExitLayoutType`    | `FadeOut.duration(150)`    | Custom exiting animation (for popover presentation)                           |
+| prop            | type                       | default                 | description                                                                  |
+| --------------- | -------------------------- | ----------------------- | ---------------------------------------------------------------------------- |
+| `state`         | `'disabled' \| boolean`    | -                       | Disable animations while customizing properties                              |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]`             | Opacity values [idle, open, close] (progress-based, for dialog presentation) |
+| `entering`      | `EntryOrExitLayoutType`    | `FadeIn.duration(200)`  | Custom entering animation (for popover presentation)                         |
+| `exiting`       | `EntryOrExitLayoutType`    | `FadeOut.duration(150)` | Custom exiting animation (for popover presentation)                          |
 
 ### Dialog.Content
 
-| prop                    | type                     | default | description                                                  |
-| ----------------------- | ------------------------ | ------- | ------------------------------------------------------------ |
-| `children`              | `React.ReactNode`        | -       | Dialog content                                               |
-| `className`             | `string`                 | -       | Additional CSS classes for content container                 |
-| `style`                 | `StyleProp<ViewStyle>`   | -       | Additional styles for content container                      |
-| `animation`             | `DialogContentAnimation` | -       | Animation configuration                                      |
-| `isSwipeable`           | `boolean`                | `true`  | Whether the dialog content can be swiped to dismiss          |
-| `forceMount`            | `boolean`                | -       | Force mount when closed for animation purposes               |
-| `...Animated.ViewProps` | `Animated.ViewProps`     | -       | All Reanimated Animated.View props are supported             |
+| prop                    | type                     | default | description                                         |
+| ----------------------- | ------------------------ | ------- | --------------------------------------------------- |
+| `children`              | `React.ReactNode`        | -       | Dialog content                                      |
+| `className`             | `string`                 | -       | Additional CSS classes for content container        |
+| `style`                 | `StyleProp<ViewStyle>`   | -       | Additional styles for content container             |
+| `animation`             | `DialogContentAnimation` | -       | Animation configuration                             |
+| `isSwipeable`           | `boolean`                | `true`  | Whether the dialog content can be swiped to dismiss |
+| `forceMount`            | `boolean`                | -       | Force mount when closed for animation purposes      |
+| `...Animated.ViewProps` | `Animated.ViewProps`     | -       | All Reanimated Animated.View props are supported    |
 
 #### DialogContentAnimation
 
@@ -234,11 +236,11 @@ Animation configuration for dialog content component. Can be:
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
-| prop       | type                    | default                                                                                                 | description                                     |
-| ---------- | ----------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `state`    | `'disabled' \| boolean` | -                                                                                                       | Disable animations while customizing properties |
-| `entering` | `EntryOrExitLayoutType` | Keyframe with `scale: 0.96→1` and `opacity: 0→1` (200ms, easing: `Easing.out(Easing.ease)`)           | Custom entering animation                       |
-| `exiting`  | `EntryOrExitLayoutType` | Keyframe with `scale: 1→0.96` and `opacity: 1→0` (150ms, easing: `Easing.in(Easing.ease)`)             | Custom exiting animation                        |
+| prop       | type                    | default                                                                                     | description                                     |
+| ---------- | ----------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `state`    | `'disabled' \| boolean` | -                                                                                           | Disable animations while customizing properties |
+| `entering` | `EntryOrExitLayoutType` | Keyframe with `scale: 0.96→1` and `opacity: 0→1` (200ms, easing: `Easing.out(Easing.ease)`) | Custom entering animation                       |
+| `exiting`  | `EntryOrExitLayoutType` | Keyframe with `scale: 1→0.96` and `opacity: 1→0` (150ms, easing: `Easing.in(Easing.ease)`)  | Custom exiting animation                        |
 
 ### Dialog.Close
 
@@ -284,8 +286,14 @@ const { progress, isDragging, isGestureReleaseAnimationRunning } =
   useDialogAnimation();
 ```
 
-| property                           | type                  | description                                  |
-| ---------------------------------- | --------------------- | -------------------------------------------- |
-| `progress`                         | `SharedValue<number>` | Animation progress (0=idle, 1=open, 2=close) |
+| property                           | type                   | description                                  |
+| ---------------------------------- | ---------------------- | -------------------------------------------- |
+| `progress`                         | `SharedValue<number>`  | Animation progress (0=idle, 1=open, 2=close) |
 | `isDragging`                       | `SharedValue<boolean>` | Whether dialog is being dragged              |
 | `isGestureReleaseAnimationRunning` | `SharedValue<boolean>` | Whether gesture release animation is running |
+
+## Special Notes
+
+### Element Inspector (iOS)
+
+Dialog uses FullWindowOverlay on iOS. To enable the React Native element inspector during development, set `disableFullWindowOverlay={true}` on `Dialog.Portal`. Tradeoff: the dialog will not appear above native modals when disabled.
