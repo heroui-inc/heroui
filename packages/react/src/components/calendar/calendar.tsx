@@ -21,6 +21,7 @@ import {
   useLocale,
 } from "react-aria-components";
 
+import {getGregorianYearOffset} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {YearPickerContext} from "../calendar-year-picker/year-picker-context";
 import {IconChevronLeft, IconChevronRight} from "../icons";
@@ -33,33 +34,6 @@ interface CalendarContext {
 }
 
 const CalendarContext = createContext<CalendarContext>({});
-
-function getGregorianYearOffset(identifier: string): number {
-  switch (identifier) {
-    case "buddhist":
-      return 543;
-    case "ethiopic":
-    case "ethioaa":
-      return -8;
-    case "coptic":
-      return -284;
-    case "hebrew":
-      return 3760;
-    case "indian":
-      return -78;
-    case "islamic-civil":
-    case "islamic-tbla":
-    case "islamic-umalqura":
-      return -579;
-    case "persian":
-      return -600;
-    case "roc":
-    case "japanese":
-    case "gregory":
-    default:
-      return 0;
-  }
-}
 
 /* -------------------------------------------------------------------------------------------------
 | * Calendar Root

@@ -4,10 +4,11 @@ import type {CalendarYearPickerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {calendarYearPickerVariants} from "@heroui/styles";
-import {getLocalTimeZone} from "@internationalized/date";
+import {useDateFormatter} from "@react-aria/i18n";
 import React from "react";
-import {Button as ButtonPrimitive, CalendarStateContext, useLocale} from "react-aria-components";
+import {Button as ButtonPrimitive, CalendarStateContext} from "react-aria-components";
 
+import {getYearRange} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 
@@ -70,15 +71,22 @@ const CalendarYearPickerTrigger = ({
 }: CalendarYearPickerTriggerProps) => {
   const {isYearPickerOpen, setIsYearPickerOpen} = useYearPicker();
   const state = React.useContext(CalendarStateContext)!;
-  const {locale} = useLocale();
 
   const slots = React.useMemo(() => calendarYearPickerVariants(), []);
 
-  // Format "Month Year" (e.g. "December 2025")
-  const dateObj = state.focusedDate.toDate(getLocalTimeZone());
-  const monthYear = new Intl.DateTimeFormat(locale, {month: "long", year: "numeric"}).format(
-    dateObj,
-  );
+  // Format "Month Year" (e.g. "December 2025"), handling non-Gregorian calendars and eras
+  const focusedDate = state.focusedDate;
+  const monthYearFormatter = useDateFormatter({
+    month: "long",
+    year: "numeric",
+    era:
+      focusedDate.calendar.identifier === "gregory" && focusedDate.era === "BC"
+        ? "short"
+        : undefined,
+    calendar: focusedDate.calendar.identifier,
+    timeZone: state.timeZone,
+  });
+  const monthYear = monthYearFormatter.format(focusedDate.toDate(state.timeZone));
 
   const handleToggle = React.useCallback(() => {
     setIsYearPickerOpen(!isYearPickerOpen);
@@ -226,7 +234,7 @@ interface CalendarYearPickerGridContextValue {
   activeYear: number;
   focusedYear: number;
   years: number[];
-  yearFormatter: Intl.DateTimeFormat;
+  formatYear: (year: number) => string;
   selectYear: (year: number) => void;
   setActiveYear: (year: number) => void;
 }
@@ -252,23 +260,44 @@ const CalendarYearPickerGrid = ({
 }: CalendarYearPickerGridProps) => {
   const {calendarRef, isYearPickerOpen, setIsYearPickerOpen} = useYearPicker();
   const state = React.useContext(CalendarStateContext)!;
-  const {locale} = useLocale();
   const gridRef = React.useRef<HTMLDivElement>(null);
 
   const slots = React.useMemo(() => calendarYearPickerVariants(), []);
 
-  const yearFormatter = React.useMemo(
-    () => new Intl.DateTimeFormat(locale, {year: "numeric"}),
-    [locale],
-  );
+  const focusedDate = state.focusedDate;
+  const yearFormatter = useDateFormatter({
+    year: "numeric",
+    era:
+      focusedDate.calendar.identifier === "gregory" && focusedDate.era === "BC"
+        ? "short"
+        : undefined,
+    calendar: focusedDate.calendar.identifier,
+    timeZone: state.timeZone,
+  });
 
   const focusedYear = state.focusedDate.year;
-  const minYear = state.minValue?.year ?? focusedYear;
-  const maxYear = state.maxValue?.year ?? focusedYear;
-  const years = React.useMemo(
-    () => Array.from({length: Math.max(maxYear - minYear + 1, 0)}, (_, i) => minYear + i),
-    [maxYear, minYear],
+
+  // Build calendar-aware year list using DateValue arithmetic
+  const yearDates = React.useMemo(
+    () => getYearRange(state.minValue, state.maxValue),
+    [state.minValue, state.maxValue],
   );
+
+  const years = React.useMemo(() => yearDates.map((d) => d.year), [yearDates]);
+
+  const yearDateMap = React.useMemo(() => new Map(yearDates.map((d) => [d.year, d])), [yearDates]);
+
+  const formatYear = React.useCallback(
+    (year: number) => {
+      const dateValue = yearDateMap.get(year);
+
+      if (!dateValue) return String(year);
+
+      return yearFormatter.format(dateValue.toDate(state.timeZone));
+    },
+    [yearDateMap, yearFormatter, state.timeZone],
+  );
+
   const [activeYear, setActiveYear] = React.useState(focusedYear);
 
   // Position the year grid to overlay the day grid
@@ -297,7 +326,6 @@ const CalendarYearPickerGrid = ({
 
     if (yearCell) {
       yearCell.focus();
-      yearCell.scrollIntoView({block: "center"});
     }
   }, []);
 
@@ -339,12 +367,8 @@ const CalendarYearPickerGrid = ({
     (year: number) => {
       const newDate = state.focusedDate.set({year});
 
-      // Brief delay so the user sees the pressed feedback, then update date + close together.
-      // Both fire in the same tick so the year grid never re-renders with the new selection visible.
-      setTimeout(() => {
-        state.setFocusedDate(newDate);
-        setIsYearPickerOpen(false);
-      }, 150);
+      state.setFocusedDate(newDate);
+      setIsYearPickerOpen(false);
     },
     [setIsYearPickerOpen, state],
   );
@@ -418,9 +442,9 @@ const CalendarYearPickerGrid = ({
       setActiveYear,
       slots,
       years,
-      yearFormatter,
+      formatYear,
     }),
-    [activeYear, focusedYear, handleYearSelect, isYearPickerOpen, slots, yearFormatter, years],
+    [activeYear, focusedYear, formatYear, handleYearSelect, isYearPickerOpen, slots, years],
   );
 
   return (
@@ -449,7 +473,7 @@ CalendarYearPickerGrid.displayName = "HeroUI.CalendarYearPicker.Grid";
  * CalendarYearPickerGridBody
  * -----------------------------------------------------------------------------------------------*/
 const CalendarYearPickerGridBody = ({children}: CalendarYearPickerGridBodyProps) => {
-  const {focusedYear, isYearPickerOpen, selectYear, yearFormatter, years} =
+  const {focusedYear, formatYear, isYearPickerOpen, selectYear, years} =
     useCalendarYearPickerGridContext();
   const currentYear = new Date().getFullYear();
 
@@ -457,7 +481,7 @@ const CalendarYearPickerGridBody = ({children}: CalendarYearPickerGridBodyProps)
     <>
       {years.map((year) => {
         const isSelected = year === focusedYear;
-        const formattedYear = yearFormatter.format(new Date(year, 0, 1));
+        const formattedYear = formatYear(year);
         const values: CalendarYearPickerCellRenderProps = {
           formattedYear,
           isCurrentYear: year === currentYear,
@@ -495,18 +519,11 @@ const CalendarYearPickerCell = ({
   year,
   ...props
 }: CalendarYearPickerCellProps) => {
-  const {
-    activeYear,
-    focusedYear,
-    isYearPickerOpen,
-    selectYear,
-    setActiveYear,
-    slots,
-    yearFormatter,
-  } = useCalendarYearPickerGridContext();
+  const {activeYear, focusedYear, formatYear, isYearPickerOpen, selectYear, setActiveYear, slots} =
+    useCalendarYearPickerGridContext();
   const isSelected = year === focusedYear;
   const isActive = year === activeYear;
-  const formattedYear = yearFormatter.format(new Date(year, 0, 1));
+  const formattedYear = formatYear(year);
   const values: CalendarYearPickerCellRenderProps = {
     formattedYear,
     isCurrentYear: year === new Date().getFullYear(),

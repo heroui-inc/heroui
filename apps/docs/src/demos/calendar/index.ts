@@ -4,6 +4,7 @@ export {Controlled} from "./controlled";
 export {DefaultValue} from "./default-value";
 export {Disabled} from "./disabled";
 export {FocusedValue} from "./focused-value";
+export {InternationalCalendar} from "./international-calendar";
 export {MinMaxDates} from "./min-max-dates";
 export {MultipleMonths} from "./multiple-months";
 export {ReadOnly} from "./read-only";

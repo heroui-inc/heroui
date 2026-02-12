@@ -11,7 +11,7 @@ import {
   today,
 } from "@internationalized/date";
 import React, {useState} from "react";
-import {CalendarStateContext, useLocale} from "react-aria-components";
+import {CalendarStateContext, I18nProvider, useLocale} from "react-aria-components";
 
 import {Button} from "../button";
 import {ButtonGroup} from "../button-group";
@@ -59,6 +59,35 @@ const CalendarTemplate = (props: Omit<React.ComponentProps<typeof Calendar>, "ch
 );
 
 /* -------------------------------------------------------------------------------------------------
+ * Helper component to render a calendar with year picker
+ * -----------------------------------------------------------------------------------------------*/
+const CalendarTemplateWithYearPicker = (
+  props: Omit<React.ComponentProps<typeof Calendar>, "children">,
+) => (
+  <Calendar {...props}>
+    <Calendar.Header>
+      <Calendar.NavButton slot="previous" />
+      <Calendar.YearPickerTrigger>
+        <Calendar.YearPickerTriggerHeading />
+        <Calendar.YearPickerTriggerIndicator />
+      </Calendar.YearPickerTrigger>
+      <Calendar.NavButton slot="next" />
+    </Calendar.Header>
+    <Calendar.Grid>
+      <Calendar.GridHeader>
+        {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+      </Calendar.GridHeader>
+      <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+    </Calendar.Grid>
+    <Calendar.YearPickerGrid>
+      <Calendar.YearPickerGridBody>
+        {({year}) => <Calendar.YearPickerCell year={year} />}
+      </Calendar.YearPickerGridBody>
+    </Calendar.YearPickerGrid>
+  </Calendar>
+);
+
+/* -------------------------------------------------------------------------------------------------
  * Helper component to render individual month heading for multi-month calendars
  * -----------------------------------------------------------------------------------------------*/
 const CalendarMonthHeading = ({offset = 0}: {offset?: number}) => {
@@ -80,6 +109,10 @@ const CalendarMonthHeading = ({offset = 0}: {offset?: number}) => {
  * -----------------------------------------------------------------------------------------------*/
 export const Default: Story = {
   render: (args) => <CalendarTemplate {...args} aria-label="Event date" />,
+};
+
+export const WithYearPicker: Story = {
+  render: (args) => <CalendarTemplateWithYearPicker {...args} aria-label="Event date" />,
 };
 
 export const DefaultValue: Story = {
@@ -452,6 +485,18 @@ export const MultipleMonths: Story = {
         </div>
       </div>
     </Calendar>
+  ),
+};
+
+export const InternationalCalendar: Story = {
+  render: (args) => (
+    <I18nProvider locale="hi-IN-u-ca-indian">
+      <CalendarTemplateWithYearPicker
+        {...args}
+        aria-label="Event date"
+        defaultValue={today(getLocalTimeZone())}
+      />
+    </I18nProvider>
   ),
 };
 

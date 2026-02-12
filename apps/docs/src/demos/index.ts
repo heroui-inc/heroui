@@ -363,6 +363,10 @@ export const demos: Record<string, DemoItem> = {
     component: CalendarDemos.YearPicker,
     file: "calendar/year-picker.tsx",
   },
+  "calendar-international-calendar": {
+    component: CalendarDemos.InternationalCalendar,
+    file: "calendar/international-calendar.tsx",
+  },
   "calendar-booking-calendar": {
     component: CalendarDemos.BookingCalendar,
     file: "calendar/booking-calendar.tsx",

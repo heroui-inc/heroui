@@ -59,6 +59,7 @@
     "@internationalized/date": "3.10.1",
     "@radix-ui/react-avatar": "1.1.11",
     "@react-aria/ssr": "3.9.10",
+    "@react-aria/i18n": "3.12.14",
     "@react-aria/utils": "3.32.0",
     "@react-types/shared": "3.32.1",
     "@react-types/color": "3.1.2",

@@ -161,8 +161,12 @@
   /* Pressed state */
   &:active,
   &[data-pressed="true"] {
-    @apply bg-accent-hover;
+    @apply bg-default;
     transform: scale(0.95);
+
+    &[data-selected="true"] {
+      @apply bg-accent-hover;
+    }
   }
 
   /* Hover state – only on devices that support hover (avoids false triggers on touch) */
