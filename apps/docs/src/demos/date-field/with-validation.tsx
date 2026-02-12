@@ -2,7 +2,7 @@
 
 import type {DateValue} from "@internationalized/date";
 
-import {DateField, DateInputGroup, Description, FieldError, Label} from "@heroui/react";
+import {DateField, Description, FieldError, Label} from "@heroui/react";
 import {getLocalTimeZone, today} from "@internationalized/date";
 import {useState} from "react";
 
@@ -23,11 +23,9 @@ export function WithValidation() {
         onChange={setValue}
       >
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         {isInvalid ? (
           <FieldError>Date must be today or in the future</FieldError>
         ) : (

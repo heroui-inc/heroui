@@ -2,7 +2,7 @@
 
 import type {Color} from "@heroui/react";
 
-import {ColorField, ColorInputGroup, ColorSwatch, Label, parseColor} from "@heroui/react";
+import {ColorField, ColorSwatch, Label, parseColor} from "@heroui/react";
 import {useState} from "react";
 
 export function ChannelEditing() {
@@ -21,9 +21,9 @@ export function ChannelEditing() {
           onChange={setColor}
         >
           <Label>Hue</Label>
-          <ColorInputGroup>
-            <ColorInputGroup.Input />
-          </ColorInputGroup>
+          <ColorField.Group>
+            <ColorField.Input />
+          </ColorField.Group>
         </ColorField>
         <ColorField
           channel="saturation"
@@ -34,12 +34,12 @@ export function ChannelEditing() {
           onChange={setColor}
         >
           <Label>Saturation</Label>
-          <ColorInputGroup>
-            <ColorInputGroup.Input />
-            <ColorInputGroup.Suffix>
+          <ColorField.Group>
+            <ColorField.Input />
+            <ColorField.Suffix>
               <span className="text-sm text-muted">%</span>
-            </ColorInputGroup.Suffix>
-          </ColorInputGroup>
+            </ColorField.Suffix>
+          </ColorField.Group>
         </ColorField>
         <ColorField
           channel="lightness"
@@ -50,12 +50,12 @@ export function ChannelEditing() {
           onChange={setColor}
         >
           <Label>Lightness</Label>
-          <ColorInputGroup>
-            <ColorInputGroup.Input />
-            <ColorInputGroup.Suffix>
+          <ColorField.Group>
+            <ColorField.Input />
+            <ColorField.Suffix>
               <span className="text-sm text-muted">%</span>
-            </ColorInputGroup.Suffix>
-          </ColorInputGroup>
+            </ColorField.Suffix>
+          </ColorField.Group>
         </ColorField>
       </div>
       <div className="flex items-center gap-2">

@@ -4,7 +4,6 @@ import {
   Button,
   ColorArea,
   ColorField,
-  ColorInputGroup,
   ColorPicker,
   ColorSlider,
   ColorSwatch,
@@ -79,12 +78,12 @@ export function Controlled() {
             </Button>
           </div>
           <ColorField aria-label="Color field">
-            <ColorInputGroup variant="secondary">
-              <ColorInputGroup.Prefix>
+            <ColorField.Group variant="secondary">
+              <ColorField.Prefix>
                 <ColorSwatch size="xs" />
-              </ColorInputGroup.Prefix>
-              <ColorInputGroup.Input />
-            </ColorInputGroup>
+              </ColorField.Prefix>
+              <ColorField.Input />
+            </ColorField.Group>
           </ColorField>
         </ColorPicker.Popover>
       </ColorPicker>

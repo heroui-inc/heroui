@@ -5,7 +5,6 @@ import type {ColorChannel, ColorSpace} from "@heroui/react";
 import {
   ColorArea,
   ColorField,
-  ColorInputGroup,
   ColorPicker,
   ColorSlider,
   ColorSwatch,
@@ -75,9 +74,9 @@ export function WithFields() {
               channel={channel}
               colorSpace={colorSpace}
             >
-              <ColorInputGroup variant="secondary">
-                <ColorInputGroup.Input />
-              </ColorInputGroup>
+              <ColorField.Group variant="secondary">
+                <ColorField.Input />
+              </ColorField.Group>
             </ColorField>
           ))}
         </div>
