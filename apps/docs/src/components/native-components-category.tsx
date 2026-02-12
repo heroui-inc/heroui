@@ -44,7 +44,12 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Feedback",
-    components: ["(feedback)/skeleton", "(feedback)/skeleton-group", "(feedback)/spinner"],
+    components: [
+      "(feedback)/alert",
+      "(feedback)/skeleton",
+      "(feedback)/skeleton-group",
+      "(feedback)/spinner",
+    ],
   },
   {
     category: "Layout",
