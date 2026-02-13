@@ -46,9 +46,9 @@
     "@heroui/use-aria-button": "workspace:*",
     "@heroui/ripple": "workspace:*",
     "@heroui/spinner": "workspace:*",
-    "@react-aria/interactions": "3.26.0",
-    "@react-aria/focus": "3.21.3",
-    "@react-types/shared": "3.32.1"
+    "@react-aria/interactions": "3.27.0",
+    "@react-aria/focus": "3.21.4",
+    "@react-types/shared": "3.33.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",
