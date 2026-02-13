@@ -23,6 +23,7 @@ import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combo-box";
 import * as DateFieldDemos from "./date-field";
+import * as DatePickerDemos from "./date-picker";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -1002,6 +1003,31 @@ export const demos: Record<string, DemoItem> = {
   "date-field-variants": {
     component: DateFieldDemos.Variants,
     file: "date-field/variants.tsx",
+  },
+  // DatePicker demos
+  "date-picker-basic": {
+    component: DatePickerDemos.Basic,
+    file: "date-picker/basic.tsx",
+  },
+  "date-picker-controlled": {
+    component: DatePickerDemos.Controlled,
+    file: "date-picker/controlled.tsx",
+  },
+  "date-picker-disabled": {
+    component: DatePickerDemos.Disabled,
+    file: "date-picker/disabled.tsx",
+  },
+  "date-picker-form-example": {
+    component: DatePickerDemos.FormExample,
+    file: "date-picker/form-example.tsx",
+  },
+  "date-picker-with-custom-indicator": {
+    component: DatePickerDemos.WithCustomIndicator,
+    file: "date-picker/with-custom-indicator.tsx",
+  },
+  "date-picker-with-validation": {
+    component: DatePickerDemos.WithValidation,
+    file: "date-picker/with-validation.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
