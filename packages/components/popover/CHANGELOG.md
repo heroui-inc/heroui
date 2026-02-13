@@ -1,5 +1,14 @@
 # @heroui/popover
 
+## 2.3.31
+
+### Patch Changes
+
+- Updated dependencies [[`c92543b`](https://github.com/heroui-inc/heroui/commit/c92543ba7984eff3e0946da46bacc7532af614e8)]:
+  - @heroui/button@2.2.31
+  - @heroui/aria-utils@2.2.28
+  - @heroui/framer-utils@2.1.27
+
 ## 2.3.30
 
 ### Patch Changes

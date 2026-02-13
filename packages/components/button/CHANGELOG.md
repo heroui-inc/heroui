@@ -1,5 +1,15 @@
 # @heroui/button
 
+## 2.2.31
+
+### Patch Changes
+
+- [#6199](https://github.com/heroui-inc/heroui/pull/6199) [`c92543b`](https://github.com/heroui-inc/heroui/commit/c92543ba7984eff3e0946da46bacc7532af614e8) Thanks [@KMNowak](https://github.com/KMNowak)! - fix(button): correct `disableRipple` prop precedence to respect explicit `false` value when `disableAnimation` is enabled
+
+- Updated dependencies []:
+  - @heroui/spinner@2.2.28
+  - @heroui/ripple@2.2.21
+
 ## 2.2.30
 
 ### Patch Changes

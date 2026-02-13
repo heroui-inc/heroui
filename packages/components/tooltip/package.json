@@ -1,6 +1,6 @@
 {
   "name": "@heroui/tooltip",
-  "version": "2.2.27",
+  "version": "2.2.28",
   "description": "A React Component for rendering dynamically positioned Tooltips",
   "keywords": [
     "tooltip"

@@ -1,5 +1,17 @@
 # @heroui/date-picker
 
+## 2.3.32
+
+### Patch Changes
+
+- Updated dependencies [[`c92543b`](https://github.com/heroui-inc/heroui/commit/c92543ba7984eff3e0946da46bacc7532af614e8)]:
+  - @heroui/button@2.2.31
+  - @heroui/calendar@2.2.31
+  - @heroui/form@2.1.31
+  - @heroui/popover@2.3.31
+  - @heroui/date-input@2.3.31
+  - @heroui/aria-utils@2.2.28
+
 ## 2.3.31
 
 ### Patch Changes

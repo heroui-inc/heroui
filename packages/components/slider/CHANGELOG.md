@@ -1,5 +1,12 @@
 # @heroui/slider
 
+## 2.4.28
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/tooltip@2.2.28
+
 ## 2.4.27
 
 ### Patch Changes
