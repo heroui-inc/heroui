@@ -324,6 +324,10 @@ export const demos: Record<string, DemoItem> = {
     component: CalendarDemos.Basic,
     file: "calendar/basic.tsx",
   },
+  "calendar-custom-styles": {
+    component: CalendarDemos.CustomStyles,
+    file: "calendar/custom-styles.tsx",
+  },
   "calendar-default-value": {
     component: CalendarDemos.DefaultValue,
     file: "calendar/default-value.tsx",
