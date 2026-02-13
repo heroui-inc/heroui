@@ -6,7 +6,8 @@ import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components";
 
 import {datePickerVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import {mergeRefs} from "@react-aria/utils";
+import React, {createContext, useContext, useEffect, useRef} from "react";
 import {
   Button as ButtonPrimitive,
   DatePicker as DatePickerPrimitive,
@@ -22,9 +23,12 @@ import {SurfaceContext} from "../surface";
  * -----------------------------------------------------------------------------------------------*/
 type DatePickerContext = {
   slots?: ReturnType<typeof datePickerVariants>;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 };
 
-const DatePickerContext = createContext<DatePickerContext>({});
+const DatePickerContext = createContext<DatePickerContext>({
+  triggerRef: {current: null},
+});
 
 /* -------------------------------------------------------------------------------------------------
  * DatePicker Root
@@ -35,16 +39,52 @@ interface DatePickerRootProps<T extends DateValue>
 const DatePickerRoot = <T extends DateValue>({
   children,
   className,
+  onOpenChange,
   ...props
 }: DatePickerRootProps<T>) => {
   const slots = React.useMemo(() => datePickerVariants(), []);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const isOpenRef = useRef(false);
+  const shouldRestoreFocusToTriggerRef = useRef(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
+      if (!event.metaKey && !event.ctrlKey && !event.altKey) {
+        shouldRestoreFocusToTriggerRef.current = true;
+      }
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown, true);
+
+    return () => {
+      window.removeEventListener("keydown", handleGlobalKeyDown, true);
+    };
+  }, [isOpen]);
+
+  const handleOpenChange = (isOpen: boolean) => {
+    setIsOpen(isOpen);
+    isOpenRef.current = isOpen;
+
+    if (!isOpen && shouldRestoreFocusToTriggerRef.current) {
+      window.requestAnimationFrame(() => {
+        triggerRef.current?.focus();
+      });
+    }
+
+    shouldRestoreFocusToTriggerRef.current = false;
+    onOpenChange?.(isOpen);
+  };
 
   return (
-    <DatePickerContext value={{slots}}>
+    <DatePickerContext value={{slots, triggerRef}}>
       <DatePickerPrimitive
         data-slot="date-picker"
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
+        onOpenChange={handleOpenChange}
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </DatePickerPrimitive>
@@ -59,19 +99,30 @@ DatePickerRoot.displayName = "HeroUI.DatePicker";
  * -----------------------------------------------------------------------------------------------*/
 interface DatePickerTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
-const DatePickerTrigger = ({children, className, ...props}: DatePickerTriggerProps) => {
-  const {slots} = useContext(DatePickerContext);
+const DatePickerTrigger = React.forwardRef<HTMLButtonElement, DatePickerTriggerProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots, triggerRef} = useContext(DatePickerContext);
 
-  return (
-    <ButtonPrimitive
-      className={composeTwRenderProps(className, slots?.trigger())}
-      data-slot="date-picker-trigger"
-      {...props}
-    >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-    </ButtonPrimitive>
-  );
-};
+    const contextRefCallback = React.useCallback(
+      (node: HTMLButtonElement | null) => {
+        triggerRef.current = node;
+      },
+      [triggerRef],
+    );
+    const mergedRef = mergeRefs(contextRefCallback, ref);
+
+    return (
+      <ButtonPrimitive
+        ref={mergedRef}
+        className={composeTwRenderProps(className, slots?.trigger())}
+        data-slot="date-picker-trigger"
+        {...props}
+      >
+        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      </ButtonPrimitive>
+    );
+  },
+);
 
 DatePickerTrigger.displayName = "HeroUI.DatePicker.Trigger";
 
@@ -116,7 +167,7 @@ interface DatePickerPopoverProps extends Omit<
 const DatePickerPopover = ({
   children,
   className,
-  placement = "bottom start",
+  placement = "bottom",
   ...props
 }: DatePickerPopoverProps) => {
   const {slots} = useContext(DatePickerContext);

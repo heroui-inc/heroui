@@ -68,7 +68,7 @@
 }
 
 .calendar-year-picker__trigger-indicator {
-  @apply size-4 text-muted;
+  @apply size-4;
 
   transition: transform 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
@@ -140,8 +140,6 @@
  * -------------------------------------------------------------------------- */
 .calendar-year-picker__year-cell {
   @apply relative inline-flex items-center justify-center rounded-full px-2.5 py-1.5 text-sm font-medium outline-none select-none no-highlight;
-
-  font-variant-numeric: tabular-nums;
   touch-action: manipulation;
 
   /**

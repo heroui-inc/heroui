@@ -24,8 +24,18 @@
   }
 
   /* Focus within state */
-  &[data-focus-within="true"],
-  &:focus-within {
+  &[data-focus-within="true"]:not(
+      :has(
+        [data-slot="date-picker-trigger"]:focus,
+        [data-slot="date-picker-trigger"][data-focused="true"]
+      )
+    ),
+  &:focus-within:not(
+      :has(
+        [data-slot="date-picker-trigger"]:focus,
+        [data-slot="date-picker-trigger"][data-focused="true"]
+      )
+    ) {
     @apply status-focused-field;
   }
 
@@ -64,7 +74,7 @@
 }
 
 .date-input-group__segment {
-  @apply inline-block rounded-md px-0.5 text-end tabular-nums outline-none;
+  @apply inline-block rounded-md px-0.5 text-end outline-none;
 
   /* Segment separators styling "/" */
   &[data-type="literal"] {

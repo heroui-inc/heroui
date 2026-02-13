@@ -82,7 +82,7 @@ export const Controlled: Story = {
     const [value, setValue] = useState<DateValue | null>(today(getLocalTimeZone()));
 
     return (
-      <div className="flex w-[280px] flex-col gap-2">
+      <div className="flex w-64 flex-col gap-2">
         <DatePicker name="date" value={value} onChange={setValue}>
           <DatePickerField showDescription />
         </DatePicker>
@@ -94,7 +94,7 @@ export const Controlled: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <DatePicker isDisabled className="w-[280px]" name="date" value={today(getLocalTimeZone())}>
+    <DatePicker isDisabled className="w-64" name="date" value={today(getLocalTimeZone())}>
       <DatePickerField />
     </DatePicker>
   ),
@@ -109,7 +109,7 @@ export const WithValidation: Story = {
     return (
       <DatePicker
         isRequired
-        className="w-[280px]"
+        className="w-64"
         isInvalid={isInvalid}
         minValue={currentDate}
         name="date"
@@ -140,7 +140,7 @@ export const WithValidation: Story = {
 
 export const WithCustomIndicator: Story = {
   render: () => (
-    <DatePicker className="w-[280px]" name="date">
+    <DatePicker className="w-64" name="date">
       <Label>Date</Label>
       <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
@@ -180,7 +180,7 @@ export const FormExample: Story = {
     };
 
     return (
-      <Form className="flex w-[280px] flex-col gap-3" onSubmit={handleSubmit}>
+      <Form className="flex w-64 flex-col gap-3" onSubmit={handleSubmit}>
         <DatePicker
           isRequired
           isInvalid={isInvalid}
@@ -190,7 +190,7 @@ export const FormExample: Story = {
           onChange={setValue}
         >
           <Label>Appointment date</Label>
-          <DateField.Group fullWidth variant="secondary">
+          <DateField.Group fullWidth>
             <DateField.Input>
               {(segment) => <DateField.Segment segment={segment} />}
             </DateField.Input>

@@ -5,9 +5,9 @@ import {getLocalTimeZone, today} from "@internationalized/date";
 
 export function Disabled() {
   return (
-    <DatePicker isDisabled className="w-[280px]" name="date" value={today(getLocalTimeZone())}>
+    <DatePicker isDisabled className="w-64" name="date" value={today(getLocalTimeZone())}>
       <Label>Date</Label>
-      <DateField.Group fullWidth variant="secondary">
+      <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         <DateField.Suffix>
           <DatePicker.Trigger>

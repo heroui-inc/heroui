@@ -14,7 +14,7 @@ export function WithValidation() {
   return (
     <DatePicker
       isRequired
-      className="w-[280px]"
+      className="w-64"
       isInvalid={isInvalid}
       minValue={currentDate}
       name="date"
@@ -22,7 +22,7 @@ export function WithValidation() {
       onChange={setValue}
     >
       <Label>Appointment date</Label>
-      <DateField.Group fullWidth variant="secondary">
+      <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         <DateField.Suffix>
           <DatePicker.Trigger>

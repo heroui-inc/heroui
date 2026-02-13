@@ -1,52 +1,18 @@
 "use client";
 
-import type {DateValue} from "@internationalized/date";
-
-import {
-  Button,
-  Calendar,
-  DateField,
-  DatePicker,
-  Description,
-  FieldError,
-  Form,
-  Label,
-} from "@heroui/react";
+import {Calendar, DateField, DatePicker, Label} from "@heroui/react";
 import {getLocalTimeZone, today} from "@internationalized/date";
-import {useState} from "react";
+import {I18nProvider} from "react-aria-components";
 
-export function FormExample() {
-  const [value, setValue] = useState<DateValue | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const currentDate = today(getLocalTimeZone());
-  const isInvalid = value != null && value.compare(currentDate) < 0;
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!value || isInvalid) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      setValue(null);
-      setIsSubmitting(false);
-    }, 1200);
-  };
-
+export function InternationalCalendar() {
   return (
-    <Form className="flex w-64 flex-col gap-3" onSubmit={handleSubmit}>
+    <I18nProvider locale="hi-IN-u-ca-indian">
       <DatePicker
-        isRequired
-        isInvalid={isInvalid}
-        minValue={currentDate}
-        name="appointmentDate"
-        value={value}
-        onChange={setValue}
+        className="w-64"
+        defaultValue={today(getLocalTimeZone())}
+        name="international-date"
       >
-        <Label>Appointment date</Label>
+        <Label>Event date</Label>
         <DateField.Group fullWidth>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
           <DateField.Suffix>
@@ -55,11 +21,6 @@ export function FormExample() {
             </DatePicker.Trigger>
           </DateField.Suffix>
         </DateField.Group>
-        {isInvalid ? (
-          <FieldError>Date must be today or in the future.</FieldError>
-        ) : (
-          <Description>Choose a valid appointment date.</Description>
-        )}
         <DatePicker.Popover>
           <Calendar aria-label="Event date">
             <Calendar.Header>
@@ -84,14 +45,6 @@ export function FormExample() {
           </Calendar>
         </DatePicker.Popover>
       </DatePicker>
-      <Button
-        className="w-full"
-        isDisabled={!value || isInvalid}
-        isPending={isSubmitting}
-        type="submit"
-      >
-        {isSubmitting ? "Submitting..." : "Submit"}
-      </Button>
-    </Form>
+    </I18nProvider>
   );
 }

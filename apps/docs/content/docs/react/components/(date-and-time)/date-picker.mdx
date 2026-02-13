@@ -70,6 +70,12 @@ export default () => (
 
 <ComponentPreview name="date-picker-with-validation" />
 
+### Format Options
+
+Control how DatePicker values are displayed with props such as `granularity`, `hourCycle`, `hideTimeZone`, and `shouldForceLeadingZeros`.
+
+<ComponentPreview name="date-picker-format-options" />
+
 ### Disabled
 
 <ComponentPreview name="date-picker-disabled" />
@@ -83,6 +89,20 @@ export default () => (
 ### Form Example
 
 <ComponentPreview name="date-picker-form-example" />
+
+### International Calendar
+
+By default, DatePicker displays dates using the calendar system for the user's locale. You can override this by wrapping your DatePicker with `I18nProvider` and setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string).
+
+The example below shows the Indian calendar system:
+
+<ComponentPreview name="date-picker-international-calendar" />
+
+**Note:** The `onChange` event always returns a date in the same calendar system as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale. This ensures your application logic works consistently with a single calendar system while still displaying dates in the user's preferred format.
+
+For a complete list of supported calendar systems and their identifiers, see:
+- [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
+- [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
 
 <RelatedComponents component="datepicker" />
 

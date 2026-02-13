@@ -1017,6 +1017,10 @@ export const demos: Record<string, DemoItem> = {
     component: DatePickerDemos.Disabled,
     file: "date-picker/disabled.tsx",
   },
+  "date-picker-format-options": {
+    component: DatePickerDemos.FormatOptions,
+    file: "date-picker/format-options.tsx",
+  },
   "date-picker-form-example": {
     component: DatePickerDemos.FormExample,
     file: "date-picker/form-example.tsx",
@@ -1028,6 +1032,10 @@ export const demos: Record<string, DemoItem> = {
   "date-picker-with-validation": {
     component: DatePickerDemos.WithValidation,
     file: "date-picker/with-validation.tsx",
+  },
+  "date-picker-international-calendar": {
+    component: DatePickerDemos.InternationalCalendar,
+    file: "date-picker/international-calendar.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {

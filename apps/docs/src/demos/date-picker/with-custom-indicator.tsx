@@ -5,9 +5,9 @@ import {Icon} from "@iconify/react";
 
 export function WithCustomIndicator() {
   return (
-    <DatePicker className="w-[280px]" name="date">
+    <DatePicker className="w-64" name="date">
       <Label>Date</Label>
-      <DateField.Group fullWidth variant="secondary">
+      <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         <DateField.Suffix>
           <DatePicker.Trigger>

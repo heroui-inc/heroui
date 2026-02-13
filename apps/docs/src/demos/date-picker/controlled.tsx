@@ -10,10 +10,10 @@ export function Controlled() {
   const [value, setValue] = useState<DateValue | null>(today(getLocalTimeZone()));
 
   return (
-    <div className="flex w-[280px] flex-col gap-4">
+    <div className="flex w-64 flex-col gap-4">
       <DatePicker name="date" value={value} onChange={setValue}>
         <Label>Date</Label>
-        <DateField.Group fullWidth variant="secondary">
+        <DateField.Group fullWidth>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
           <DateField.Suffix>
             <DatePicker.Trigger>
