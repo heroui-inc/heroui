@@ -30,11 +30,11 @@ type Story = StoryObj<typeof meta>;
 const CalendarContent = () => (
   <Calendar aria-label="Selected date">
     <Calendar.Header>
-      <Calendar.NavButton slot="previous" />
       <Calendar.YearPickerTrigger>
         <Calendar.YearPickerTriggerHeading />
         <Calendar.YearPickerTriggerIndicator />
       </Calendar.YearPickerTrigger>
+      <Calendar.NavButton slot="previous" />
       <Calendar.NavButton slot="next" />
     </Calendar.Header>
     <Calendar.Grid>

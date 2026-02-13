@@ -5,13 +5,13 @@ import {Calendar} from "@heroui/react";
 export function CustomStyles() {
   return (
     <Calendar aria-label="Custom styled calendar">
-      <Calendar.Header className="pb-3">
-        <Calendar.YearPickerTrigger className="group justify-start">
-          <Calendar.YearPickerTriggerHeading />
-          <Calendar.YearPickerTriggerIndicator className="-rotate-90 text-accent group-data-[open=true]:-rotate-180" />
+      <Calendar.Header>
+        <Calendar.NavButton className="text-foreground" slot="previous" />
+        <Calendar.YearPickerTrigger className="w-full justify-center">
+          <Calendar.YearPickerTriggerHeading className="text-foreground" />
+          <Calendar.YearPickerTriggerIndicator className="text-foreground" />
         </Calendar.YearPickerTrigger>
-        <Calendar.NavButton className="text-accent" slot="previous" />
-        <Calendar.NavButton className="text-accent" slot="next" />
+        <Calendar.NavButton className="text-foreground" slot="next" />
       </Calendar.Header>
       <Calendar.Grid>
         <Calendar.GridHeader>

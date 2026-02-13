@@ -57,11 +57,11 @@ export function FormatOptions() {
         <DatePicker.Popover>
           <Calendar aria-label="Event date">
             <Calendar.Header>
-              <Calendar.NavButton slot="previous" />
               <Calendar.YearPickerTrigger>
                 <Calendar.YearPickerTriggerHeading />
                 <Calendar.YearPickerTriggerIndicator />
               </Calendar.YearPickerTrigger>
+              <Calendar.NavButton slot="previous" />
               <Calendar.NavButton slot="next" />
             </Calendar.Header>
             <Calendar.Grid>

@@ -27,8 +27,8 @@ import {Calendar} from '@heroui/react';
 export default () => (
   <Calendar aria-label="Event date">
     <Calendar.Header>
-      <Calendar.NavButton slot="previous" />
       <Calendar.Heading />
+      <Calendar.NavButton slot="previous" />
       <Calendar.NavButton slot="next" />
     </Calendar.Header>
     <Calendar.Grid>
@@ -136,8 +136,8 @@ function CustomCalendar() {
   return (
     <Calendar aria-label="Custom calendar" className="w-72 rounded-2xl border border-border bg-surface p-3 shadow-sm">
       <Calendar.Header className="pb-3">
-        <Calendar.NavButton slot="previous" className="text-default" />
         <Calendar.Heading className="text-default" />
+        <Calendar.NavButton slot="previous" className="text-default" />
         <Calendar.NavButton slot="next" className="text-default" />
       </Calendar.Header>
       <Calendar.Grid>

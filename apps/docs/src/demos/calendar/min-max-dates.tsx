@@ -12,8 +12,8 @@ export function MinMaxDates() {
     <div className="flex flex-col items-center gap-4">
       <Calendar aria-label="Appointment date" maxValue={maxDate} minValue={minDate}>
         <Calendar.Header>
-          <Calendar.NavButton slot="previous" />
           <Calendar.Heading />
+          <Calendar.NavButton slot="previous" />
           <Calendar.NavButton slot="next" />
         </Calendar.Header>
         <Calendar.Grid>

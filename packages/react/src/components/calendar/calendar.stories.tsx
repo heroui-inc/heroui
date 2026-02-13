@@ -45,8 +45,8 @@ type Story = StoryObj<typeof Calendar>;
 const CalendarTemplate = (props: Omit<React.ComponentProps<typeof Calendar>, "children">) => (
   <Calendar {...props}>
     <Calendar.Header>
-      <Calendar.NavButton slot="previous" />
       <Calendar.Heading />
+      <Calendar.NavButton slot="previous" />
       <Calendar.NavButton slot="next" />
     </Calendar.Header>
     <Calendar.Grid>
@@ -66,11 +66,11 @@ const CalendarTemplateWithYearPicker = (
 ) => (
   <Calendar {...props}>
     <Calendar.Header>
-      <Calendar.NavButton slot="previous" />
       <Calendar.YearPickerTrigger>
         <Calendar.YearPickerTriggerHeading />
         <Calendar.YearPickerTriggerIndicator />
       </Calendar.YearPickerTrigger>
+      <Calendar.NavButton slot="previous" />
       <Calendar.NavButton slot="next" />
     </Calendar.Header>
     <Calendar.Grid>
@@ -626,11 +626,11 @@ export const YearPicker: Story = {
   render: (args) => (
     <Calendar {...args} aria-label="Event date">
       <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
         <Calendar.YearPickerTrigger>
           <Calendar.YearPickerTriggerHeading />
           <Calendar.YearPickerTriggerIndicator />
         </Calendar.YearPickerTrigger>
+        <Calendar.NavButton slot="previous" />
         <Calendar.NavButton slot="next" />
       </Calendar.Header>
       <Calendar.Grid>
@@ -652,11 +652,11 @@ export const YearPickerStyledCells: Story = {
   render: (args) => (
     <Calendar {...args} aria-label="Event date with styled year cells">
       <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
         <Calendar.YearPickerTrigger>
           <Calendar.YearPickerTriggerHeading />
           <Calendar.YearPickerTriggerIndicator />
         </Calendar.YearPickerTrigger>
+        <Calendar.NavButton slot="previous" />
         <Calendar.NavButton slot="next" />
       </Calendar.Header>
       <Calendar.Grid>
@@ -687,11 +687,11 @@ export const YearPickerCustomCells: Story = {
   render: (args) => (
     <Calendar {...args} aria-label="Event date with custom year cells">
       <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
         <Calendar.YearPickerTrigger>
           <Calendar.YearPickerTriggerHeading />
           <Calendar.YearPickerTriggerIndicator />
         </Calendar.YearPickerTrigger>
+        <Calendar.NavButton slot="previous" />
         <Calendar.NavButton slot="next" />
       </Calendar.Header>
       <Calendar.Grid>
@@ -763,8 +763,8 @@ export const EventCalendar: Story = {
       <div className="flex flex-col items-center gap-4">
         <Calendar {...args} aria-label="Event calendar">
           <Calendar.Header>
-            <Calendar.NavButton slot="previous" />
             <Calendar.Heading />
+            <Calendar.NavButton slot="previous" />
             <Calendar.NavButton slot="next" />
           </Calendar.Header>
           <Calendar.Grid>
