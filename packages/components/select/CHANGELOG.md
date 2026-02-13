@@ -1,5 +1,17 @@
 # @heroui/select
 
+## 2.4.32
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.31
+  - @heroui/popover@2.3.31
+  - @heroui/spinner@2.2.28
+  - @heroui/listbox@2.3.30
+  - @heroui/scroll-shadow@2.3.19
+  - @heroui/aria-utils@2.2.28
+
 ## 2.4.31
 
 ### Patch Changes

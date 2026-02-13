@@ -1,5 +1,12 @@
 # @heroui/input
 
+## 2.4.32
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/form@2.1.31
+
 ## 2.4.31
 
 ### Patch Changes

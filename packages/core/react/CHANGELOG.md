@@ -1,5 +1,59 @@
 # @heroui/react
 
+## 2.8.9
+
+### Patch Changes
+
+- Updated dependencies [[`c92543b`](https://github.com/heroui-inc/heroui/commit/c92543ba7984eff3e0946da46bacc7532af614e8)]:
+  - @heroui/button@2.2.31
+  - @heroui/accordion@2.2.28
+  - @heroui/alert@2.2.31
+  - @heroui/autocomplete@2.3.33
+  - @heroui/breadcrumbs@2.2.24
+  - @heroui/calendar@2.2.31
+  - @heroui/card@2.2.27
+  - @heroui/date-picker@2.3.32
+  - @heroui/drawer@2.2.28
+  - @heroui/dropdown@2.3.31
+  - @heroui/form@2.1.31
+  - @heroui/input-otp@2.1.31
+  - @heroui/modal@2.2.28
+  - @heroui/navbar@2.2.29
+  - @heroui/number-input@2.0.22
+  - @heroui/popover@2.3.31
+  - @heroui/select@2.4.32
+  - @heroui/skeleton@2.2.18
+  - @heroui/snippet@2.2.32
+  - @heroui/table@2.2.31
+  - @heroui/tabs@2.2.28
+  - @heroui/toast@2.0.21
+  - @heroui/tooltip@2.2.28
+  - @heroui/code@2.2.24
+  - @heroui/divider@2.2.23
+  - @heroui/kbd@2.2.25
+  - @heroui/spacer@2.2.24
+  - @heroui/spinner@2.2.28
+  - @heroui/system@2.4.27
+  - @heroui/listbox@2.3.30
+  - @heroui/menu@2.2.30
+  - @heroui/avatar@2.2.25
+  - @heroui/badge@2.2.18
+  - @heroui/checkbox@2.3.31
+  - @heroui/chip@2.2.24
+  - @heroui/date-input@2.3.31
+  - @heroui/image@2.2.19
+  - @heroui/input@2.4.32
+  - @heroui/link@2.2.25
+  - @heroui/pagination@2.2.26
+  - @heroui/progress@2.2.24
+  - @heroui/radio@2.3.31
+  - @heroui/ripple@2.2.21
+  - @heroui/scroll-shadow@2.3.19
+  - @heroui/slider@2.4.28
+  - @heroui/switch@2.2.26
+  - @heroui/user@2.2.25
+  - @heroui/framer-utils@2.1.27
+
 ## 2.8.8
 
 ### Patch Changes

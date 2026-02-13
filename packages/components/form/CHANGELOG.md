@@ -1,5 +1,12 @@
 # @heroui/form
 
+## 2.1.31
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/system@2.4.27
+
 ## 2.1.30
 
 ### Patch Changes
