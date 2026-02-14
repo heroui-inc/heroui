@@ -1,0 +1,89 @@
+/* ==========================================================================
+   DatePicker - Date selection trigger and popover container
+   ========================================================================== */
+
+.date-picker {
+  @apply inline-flex flex-col gap-1;
+
+  .date-input-group__suffix,
+  .date-input-group__prefix {
+    @apply pointer-events-auto;
+  }
+}
+
+.date-picker__trigger {
+  @apply inline-flex w-full items-center rounded-field p-1 text-sm no-highlight;
+
+  cursor: var(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition: box-shadow 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+.date-picker__trigger-indicator {
+  @apply inline-flex size-4 items-center justify-center text-field-placeholder;
+}
+
+.date-picker__popover {
+  @apply max-w-(--trigger-width) origin-(--trigger-anchor-point) overflow-x-hidden overflow-y-auto overscroll-contain bg-overlay p-3;
+  @apply motion-reduce:transition-none;
+
+  box-shadow: var(--shadow-overlay);
+  border-radius: calc(var(--radius) * 2.5);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply outline-none;
+  }
+
+  &[data-entering="true"] {
+    @apply animate-in duration-150 ease-smooth fade-in-0 zoom-in-95;
+
+    &[data-placement^="top"] {
+      @apply slide-in-from-bottom-1;
+    }
+
+    &[data-placement^="bottom"] {
+      @apply slide-in-from-top-1;
+    }
+
+    &[data-placement^="left"] {
+      @apply slide-in-from-right-1;
+    }
+
+    &[data-placement^="right"] {
+      @apply slide-in-from-left-1;
+    }
+  }
+
+  &[data-exiting="true"] {
+    @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+  }
+
+  &[data-exiting="true"],
+  &[data-entering="true"] {
+    @apply will-change-[opacity,transform];
+  }
+}

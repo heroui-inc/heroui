@@ -10,7 +10,7 @@ import {Button as ButtonPrimitive, CalendarStateContext} from "react-aria-compon
 
 import {getYearRange} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-import {IconChevronDown} from "../icons";
+import {IconChevronRight} from "../icons";
 
 import {useYearPicker} from "./year-picker-context";
 
@@ -190,7 +190,7 @@ const CalendarYearPickerTriggerIndicator = ({
     >
       {typeof children === "function"
         ? children({monthYear, ...values})
-        : children || <IconChevronDown />}
+        : children || <IconChevronRight />}
     </span>
   );
 };

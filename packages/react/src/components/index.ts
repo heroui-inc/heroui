@@ -23,6 +23,7 @@ export * from "./color-swatch-picker";
 export * from "./close-button";
 export * from "./combo-box";
 export * from "./date-field";
+export * from "./date-picker";
 export * from "./time-field";
 export * from "./disclosure";
 export * from "./disclosure-group";

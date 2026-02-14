@@ -1,6 +1,7 @@
 export {Basic} from "./basic";
 export {BookingCalendar} from "./booking-calendar";
 export {Controlled} from "./controlled";
+export {CustomStyles} from "./custom-styles";
 export {CustomIcons} from "./custom-icons";
 export {DefaultValue} from "./default-value";
 export {Disabled} from "./disabled";

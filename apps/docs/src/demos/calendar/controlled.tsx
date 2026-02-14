@@ -61,8 +61,8 @@ export function Controlled() {
         onFocusChange={setFocusedDate}
       >
         <Calendar.Header>
-          <Calendar.NavButton slot="previous" />
           <Calendar.Heading />
+          <Calendar.NavButton slot="previous" />
           <Calendar.NavButton slot="next" />
         </Calendar.Header>
         <Calendar.Grid>
