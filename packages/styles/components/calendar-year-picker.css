@@ -52,7 +52,7 @@
  * Trigger Button
  * -------------------------------------------------------------------------- */
 .calendar-year-picker__trigger {
-  @apply flex flex-1 items-center justify-center gap-0.5 rounded-lg outline-none;
+  @apply flex flex-1 items-center justify-start gap-0.5 rounded-lg outline-none;
 
   cursor: var(--cursor-interactive);
   touch-action: manipulation;
@@ -65,18 +65,25 @@
 
 .calendar-year-picker__trigger-heading {
   @apply text-sm font-medium;
+
+  transition: color 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
 }
 
 .calendar-year-picker__trigger-indicator {
-  @apply size-4 text-muted;
+  @apply size-3 text-accent;
 
-  transition: transform 200ms var(--ease-out);
+  transition: transform 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
 }
 
 /* Rotate chevron when open */
 .calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-indicator {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
+}
+
+.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-heading {
+  @apply text-accent;
 }
 
 /* -----------------------------------------------------------------------------
@@ -140,8 +147,6 @@
  * -------------------------------------------------------------------------- */
 .calendar-year-picker__year-cell {
   @apply relative inline-flex items-center justify-center rounded-full px-2.5 py-1.5 text-sm font-medium outline-none select-none no-highlight;
-
-  font-variant-numeric: tabular-nums;
   touch-action: manipulation;
 
   /**

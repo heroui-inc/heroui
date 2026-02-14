@@ -9,8 +9,8 @@ export function WithIndicators() {
   return (
     <Calendar aria-label="Event date">
       <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
         <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
         <Calendar.NavButton slot="next" />
       </Calendar.Header>
       <Calendar.Grid>

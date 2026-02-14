@@ -7,8 +7,8 @@ export function DefaultValue() {
   return (
     <Calendar aria-label="Event date" defaultValue={parseDate("2025-02-14")}>
       <Calendar.Header>
-        <Calendar.NavButton slot="previous" />
         <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
         <Calendar.NavButton slot="next" />
       </Calendar.Header>
       <Calendar.Grid>

@@ -19,14 +19,20 @@
  * -------------------------------------------------------------------------- */
 .calendar__header {
   @apply flex items-center justify-between px-0.5 pb-4;
+
+  &:has(.calendar-year-picker__trigger[data-open="true"]) {
+    .calendar__nav-button {
+      @apply pointer-events-none opacity-0;
+    }
+  }
 }
 
 .calendar__heading {
-  @apply flex-1 text-center text-sm font-medium;
+  @apply flex-1 text-sm font-medium;
 }
 
 .calendar__nav-button {
-  @apply flex size-6 items-center justify-center rounded-full text-muted;
+  @apply flex size-6 items-center justify-center rounded-full text-accent;
 
   will-change: scale;
 
@@ -37,7 +43,8 @@
   transition:
     transform 250ms var(--ease-out),
     background-color 100ms var(--ease-out),
-    box-shadow 100ms var(--ease-out);
+    box-shadow 100ms var(--ease-out),
+    opacity 150ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
 
   cursor: var(--cursor-interactive);
@@ -46,7 +53,7 @@
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-default text-default-foreground;
+      @apply bg-default text-accent;
     }
   }
 

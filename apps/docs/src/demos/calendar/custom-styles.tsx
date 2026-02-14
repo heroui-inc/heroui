@@ -2,16 +2,16 @@
 
 import {Calendar} from "@heroui/react";
 
-export function YearPicker() {
+export function CustomStyles() {
   return (
-    <Calendar aria-label="Event date">
+    <Calendar aria-label="Custom styled calendar">
       <Calendar.Header>
-        <Calendar.YearPickerTrigger>
-          <Calendar.YearPickerTriggerHeading />
-          <Calendar.YearPickerTriggerIndicator />
+        <Calendar.NavButton className="text-foreground" slot="previous" />
+        <Calendar.YearPickerTrigger className="w-full justify-center">
+          <Calendar.YearPickerTriggerHeading className="text-foreground" />
+          <Calendar.YearPickerTriggerIndicator className="text-foreground" />
         </Calendar.YearPickerTrigger>
-        <Calendar.NavButton slot="previous" />
-        <Calendar.NavButton slot="next" />
+        <Calendar.NavButton className="text-foreground" slot="next" />
       </Calendar.Header>
       <Calendar.Grid>
         <Calendar.GridHeader>

@@ -9,11 +9,11 @@ export function InternationalCalendar() {
     <I18nProvider locale="hi-IN-u-ca-indian">
       <Calendar aria-label="Event date" defaultValue={today(getLocalTimeZone())}>
         <Calendar.Header>
-          <Calendar.NavButton slot="previous" />
           <Calendar.YearPickerTrigger>
             <Calendar.YearPickerTriggerHeading />
             <Calendar.YearPickerTriggerIndicator />
           </Calendar.YearPickerTrigger>
+          <Calendar.NavButton slot="previous" />
           <Calendar.NavButton slot="next" />
         </Calendar.Header>
         <Calendar.Grid>
