@@ -841,6 +841,10 @@ export const demos: Record<string, DemoItem> = {
     component: DisclosureDemos.Basic,
     file: "disclosure/basic.tsx",
   },
+  "disclosure-custom-render-function": {
+    component: DisclosureDemos.CustomRenderFunction,
+    file: "disclosure/custom-render-function.tsx",
+  },
   // DisclosureGroup demos
   "disclosure-group-basic": {
     component: DisclosureGroupDemos.Basic,
