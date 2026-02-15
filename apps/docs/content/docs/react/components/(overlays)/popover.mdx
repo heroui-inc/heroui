@@ -143,7 +143,6 @@ The component supports animation states:
 | `isOpen` | `boolean` | - | Controls popover visibility (controlled) |
 | `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
 | `onOpenChange` | `(isOpen: boolean) => void` | - | Called when open state changes |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, PopoverRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Popover.Content Props
 
@@ -154,6 +153,7 @@ The component supports animation states:
 | `offset` | `number` | `8` | Distance from the trigger element |
 | `shouldFlip` | `boolean` | `true` | Whether popover can change orientation to fit |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, PopoverRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Popover.Dialog Props
 

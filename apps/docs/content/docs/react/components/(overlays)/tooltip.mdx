@@ -134,7 +134,6 @@ The component supports animation states:
 | `closeDelay` | `number` | `0` | Delay in milliseconds before hiding tooltip |
 | `trigger` | `"hover" \| "focus"` | `"hover"` | How the tooltip is triggered |
 | `isDisabled` | `boolean` | `false` | Whether the tooltip is disabled |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TooltipRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Tooltip.Content Props
 
@@ -145,6 +144,7 @@ The component supports animation states:
 | `offset` | `number` | `3` (7 with arrow) | Distance from the trigger element |
 | `placement` | `"top" \| "bottom" \| "left" \| "right"` (and variants) | `"top"` | Placement of the tooltip |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TooltipRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Tooltip.Trigger Props
 
