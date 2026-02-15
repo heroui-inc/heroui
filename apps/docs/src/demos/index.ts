@@ -919,10 +919,6 @@ export const demos: Record<string, DemoItem> = {
     component: DropdownDemos.CustomTrigger,
     file: "dropdown/custom-trigger.tsx",
   },
-  "dropdown-custom-render-function": {
-    component: DropdownDemos.CustomRenderFunction,
-    file: "dropdown/custom-render-function.tsx",
-  },
   // ErrorMessage demos
   "error-message-basic": {
     component: ErrorMessageDemos.Basic,
