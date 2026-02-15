@@ -1,7 +1,6 @@
 export {Callbacks} from "./callbacks";
 export {CustomIndicator} from "./custom-indicator";
 export {CustomQueue} from "./custom-queue";
-export {CustomRenderFunction} from "./custom-render-function";
 export {CustomToast} from "./custom-toast";
 export {Default} from "./default";
 export {Placements} from "./placements";

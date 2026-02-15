@@ -2,7 +2,7 @@
 
 import {Label, TimeField} from "@heroui/react";
 
-export function Basic() {
+export function CustomRenderFunction() {
   return (
     <TimeField
       className="w-[256px]"
