@@ -152,12 +152,6 @@ export default () => (
   name="dropdown-custom-trigger"
 />
 
-### Custom Render Function
-
-<ComponentPreview
-  name="dropdown-custom-render-function"
-/>
-
 <RelatedComponents component="dropdown" />
  
 ## Styling
@@ -286,7 +280,6 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `trigger` | `"press" \| "longPress"` | `"press"` | The type of interaction that triggers the menu |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Dropdown content |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Dropdown.Trigger Props
 
@@ -294,7 +287,6 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Trigger content or render function |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownTriggerRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 All [Button](https://react-spectrum.adobe.com/react-aria/Button.html) props are also supported when using a Button as the trigger.
 
@@ -305,7 +297,6 @@ All [Button](https://react-spectrum.adobe.com/react-aria/Button.html) props are 
 | `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | Placement of the popover relative to the trigger |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Content children |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownPopoverRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 All [Popover](https://react-spectrum.adobe.com/react-aria/Popover.html) props are also supported.
 
@@ -321,7 +312,6 @@ All [Popover](https://react-spectrum.adobe.com/react-aria/Popover.html) props ar
 | `onAction` | `(key: Key) => void` | - | Handler called when an item is activated |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Menu content |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownMenuRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 All [Menu](https://react-spectrum.adobe.com/react-aria/Menu.html#menu) props are also supported.
 
@@ -336,7 +326,6 @@ All [Menu](https://react-spectrum.adobe.com/react-aria/Menu.html#menu) props are
 | `disabledKeys` | `Iterable<Key>` | - | Keys of disabled items |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Section content |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownSectionRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 All [MenuSection](https://react-spectrum.adobe.com/react-aria/Menu.html#menusection) props are also supported.
 
@@ -349,7 +338,6 @@ All [MenuSection](https://react-spectrum.adobe.com/react-aria/Menu.html#menusect
 | `variant` | `"default" \| "danger"` | `"default"` | Visual variant of the item |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Item content or render function |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownItemRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 All [MenuItem](https://react-spectrum.adobe.com/react-aria/Menu.html#menuitem) props are also supported.
 
@@ -360,7 +348,6 @@ All [MenuItem](https://react-spectrum.adobe.com/react-aria/Menu.html#menuitem) p
 | `type` | `"checkmark" \| "dot"` | `"checkmark"` | Type of indicator to display |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Custom indicator content or render function |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownItemIndicatorRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 When using a render function, these values are provided:
 
@@ -375,7 +362,6 @@ When using a render function, these values are provided:
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Custom indicator content |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownSubmenuIndicatorRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Dropdown.SubmenuTrigger Props
 
@@ -383,7 +369,6 @@ When using a render function, these values are provided:
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Submenu trigger content |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DropdownSubmenuTriggerRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 All [SubmenuTrigger](https://react-spectrum.adobe.com/react-aria/Menu.html#submenutrigger) props are also supported.
 
