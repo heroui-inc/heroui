@@ -2,88 +2,35 @@ import type {VariantProps} from "tailwind-variants";
 
 import {tv} from "tailwind-variants";
 
-import {disabledClasses, focusRingClasses} from "../../utils";
-
 export const calendarVariants = tv({
-  compoundSlots: [
-    {
-      class: [disabledClasses, "hover:bg-transparent"],
-      isDisabled: true,
-      slots: ["cellButton"],
-    },
-  ],
-  defaultVariants: {
-    isDisabled: false,
-  },
+  defaultVariants: {},
   slots: {
-    base: ["flex flex-col", "rounded-xl bg-surface", "shadow-lg", "p-4", "w-[280px]"],
-    cell: ["relative", "p-0", "text-center", "focus-within:z-10"],
-    cellButton: [
-      "relative",
-      "h-9 w-9",
-      "rounded-lg",
-      "text-sm",
-      "font-medium",
-      "transition-all duration-200",
-      "outline-none",
-      "cursor-interactive",
-      "data-[hovered]:bg-default-hover",
-      "data-[pressed]:scale-95",
-      focusRingClasses,
-    ],
-    grid: ["w-full", "border-separate", "border-spacing-0"],
-    gridHeader: [],
-    header: ["flex items-center justify-between", "mb-4", "px-1"],
-    headerCell: ["text-xs font-medium", "text-muted", "text-center", "pb-2", "h-8 w-9"],
-    heading: ["text-lg font-semibold", "text-foreground", "tracking-[-0.36px]"],
-    navButton: [
-      "rounded-lg",
-      "p-1.5",
-      "transition-all duration-200",
-      "hover:bg-default-hover",
-      "text-foreground",
-      "text-xl",
-      "leading-none",
-      "cursor-interactive",
-      focusRingClasses,
-    ],
+    /** Root calendar container */
+    base: "calendar",
+    /** Calendar cell (td) */
+    cell: "calendar__cell",
+    /** Cell indicator (small dot at bottom of cell) */
+    cellIndicator: "calendar__cell-indicator",
+    /** Calendar grid (table) */
+    grid: "calendar__grid",
+    /** Grid body (tbody) */
+    gridBody: "calendar__grid-body",
+    /** Grid header (thead) */
+    gridHeader: "calendar__grid-header",
+    /** Grid row (tr) */
+    gridRow: "calendar__grid-row",
+    /** Calendar header containing heading and navigation */
+    header: "calendar__header",
+    /** Header cell (th - day names) */
+    headerCell: "calendar__header-cell",
+    /** Month/year heading text */
+    heading: "calendar__heading",
+    /** Previous/Next navigation button */
+    navButton: "calendar__nav-button",
+    /** Navigation button icon */
+    navButtonIcon: "calendar__nav-button-icon",
   },
-  variants: {
-    isDisabled: {
-      true: {
-        base: disabledClasses,
-        navButton: disabledClasses,
-      },
-    },
-    isHovered: {
-      true: {
-        cellButton: ["bg-default-hover"],
-      },
-    },
-    isOutsideMonth: {
-      true: {
-        cellButton: ["text-muted/30", "hover:bg-transparent"],
-      },
-    },
-    isSelected: {
-      true: {
-        cellButton: [
-          "bg-accent text-accent-foreground",
-          "hover:bg-accent/90",
-          "data-[hovered]:bg-accent/90",
-        ],
-      },
-    },
-    isUnavailable: {
-      true: {
-        cellButton: ["text-muted/50", "line-through", "cursor-not-allowed", "hover:bg-transparent"],
-      },
-    },
-    variant: {
-      next: {},
-      previous: {},
-    },
-  },
+  variants: {},
 });
 
 export type CalendarVariants = VariantProps<typeof calendarVariants>;

@@ -1,20 +1,18 @@
 "use client";
 
 import {Clock} from "@gravity-ui/icons";
-import {DateInputGroup, Label, TimeField} from "@heroui/react";
+import {Label, TimeField} from "@heroui/react";
 
 export function WithSuffixIcon() {
   return (
     <TimeField className="w-[256px]" name="time">
       <Label>Time</Label>
-      <DateInputGroup>
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-        <DateInputGroup.Suffix>
+      <TimeField.Group>
+        <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        <TimeField.Suffix>
           <Clock className="size-4 text-muted" />
-        </DateInputGroup.Suffix>
-      </DateInputGroup>
+        </TimeField.Suffix>
+      </TimeField.Group>
     </TimeField>
   );
 }

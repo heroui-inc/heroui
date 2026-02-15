@@ -18,7 +18,6 @@ const COMPONENT_GROUPS = [
     components: [
       "checkbox",
       "checkbox-group",
-      "date-field",
       "description",
       "error-message",
       "field-error",
@@ -33,8 +32,11 @@ const COMPONENT_GROUPS = [
       "search-field",
       "text-field",
       "textarea",
-      "time-field",
     ],
+  },
+  {
+    category: "Date and Time",
+    components: ["calendar", "date-field", "date-picker", "time-field"],
   },
   {
     category: "Navigation",

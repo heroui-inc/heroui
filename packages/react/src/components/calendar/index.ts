@@ -1,8 +1,19 @@
 import type {ComponentProps} from "react";
 
 import {
+  CalendarYearPickerCell,
+  CalendarYearPickerGrid,
+  CalendarYearPickerGridBody,
+  CalendarYearPickerTrigger,
+  CalendarYearPickerTriggerHeading,
+  CalendarYearPickerTriggerIndicator,
+} from "../calendar-year-picker";
+
+import {
   CalendarCell,
+  CalendarCellIndicator,
   CalendarGrid,
+  CalendarGridBody,
   CalendarGridHeader,
   CalendarHeader,
   CalendarHeaderCell,
@@ -12,8 +23,8 @@ import {
 } from "./calendar";
 
 /* -------------------------------------------------------------------------------------------------
- * Compound Component
- * -----------------------------------------------------------------------------------------------*/
+| * Compound Component
+| * -----------------------------------------------------------------------------------------------*/
 export const Calendar = Object.assign(CalendarRoot, {
   Root: CalendarRoot,
   Header: CalendarHeader,
@@ -21,8 +32,16 @@ export const Calendar = Object.assign(CalendarRoot, {
   NavButton: CalendarNavButton,
   Grid: CalendarGrid,
   GridHeader: CalendarGridHeader,
+  GridBody: CalendarGridBody,
   HeaderCell: CalendarHeaderCell,
   Cell: CalendarCell,
+  CellIndicator: CalendarCellIndicator,
+  YearPickerTrigger: CalendarYearPickerTrigger,
+  YearPickerTriggerHeading: CalendarYearPickerTriggerHeading,
+  YearPickerTriggerIndicator: CalendarYearPickerTriggerIndicator,
+  YearPickerGrid: CalendarYearPickerGrid,
+  YearPickerGridBody: CalendarYearPickerGridBody,
+  YearPickerCell: CalendarYearPickerCell,
 });
 
 export type Calendar = {
@@ -33,13 +52,21 @@ export type Calendar = {
   NavButtonProps: ComponentProps<typeof CalendarNavButton>;
   GridProps: ComponentProps<typeof CalendarGrid>;
   GridHeaderProps: ComponentProps<typeof CalendarGridHeader>;
+  GridBodyProps: ComponentProps<typeof CalendarGridBody>;
   HeaderCellProps: ComponentProps<typeof CalendarHeaderCell>;
   CellProps: ComponentProps<typeof CalendarCell>;
+  CellIndicatorProps: ComponentProps<typeof CalendarCellIndicator>;
+  YearPickerTriggerProps: ComponentProps<typeof CalendarYearPickerTrigger>;
+  YearPickerTriggerHeadingProps: ComponentProps<typeof CalendarYearPickerTriggerHeading>;
+  YearPickerTriggerIndicatorProps: ComponentProps<typeof CalendarYearPickerTriggerIndicator>;
+  YearPickerGridProps: ComponentProps<typeof CalendarYearPickerGrid>;
+  YearPickerGridBodyProps: ComponentProps<typeof CalendarYearPickerGridBody>;
+  YearPickerCellProps: ComponentProps<typeof CalendarYearPickerCell>;
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Named Component
- * -----------------------------------------------------------------------------------------------*/
+| * Named Component
+| * -----------------------------------------------------------------------------------------------*/
 export {
   CalendarRoot,
   CalendarHeader,
@@ -47,8 +74,10 @@ export {
   CalendarNavButton,
   CalendarGrid,
   CalendarGridHeader,
+  CalendarGridBody,
   CalendarHeaderCell,
   CalendarCell,
+  CalendarCellIndicator,
 };
 
 export type {
@@ -59,13 +88,21 @@ export type {
   CalendarNavButtonProps,
   CalendarGridProps,
   CalendarGridHeaderProps,
+  CalendarGridBodyProps,
   CalendarHeaderCellProps,
   CalendarCellProps,
+  CalendarCellIndicatorProps,
 } from "./calendar";
 
 /* -------------------------------------------------------------------------------------------------
- * Variants
- * -----------------------------------------------------------------------------------------------*/
+| * YearPickerContext (re-exported from calendar-year-picker for convenience)
+| * -----------------------------------------------------------------------------------------------*/
+export {YearPickerContext, useYearPicker} from "../calendar-year-picker";
+export type {YearPickerContextValue} from "../calendar-year-picker";
+
+/* -------------------------------------------------------------------------------------------------
+| * Variants
+| * -----------------------------------------------------------------------------------------------*/
 export {calendarVariants} from "@heroui/styles";
 
 export type {CalendarVariants} from "@heroui/styles";

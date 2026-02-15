@@ -2,7 +2,7 @@
 
 import type {DateValue} from "@internationalized/date";
 
-import {Button, DateField, DateInputGroup, Description, Label} from "@heroui/react";
+import {Button, DateField, Description, Label} from "@heroui/react";
 import {getLocalTimeZone, today} from "@internationalized/date";
 import {useState} from "react";
 
@@ -13,11 +13,9 @@ export function Controlled() {
     <div className="flex flex-col gap-4">
       <DateField className="w-[256px]" name="date" value={value} onChange={setValue}>
         <Label>Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         <Description>Current value: {value ? value.toString() : "(empty)"}</Description>
       </DateField>
       <div className="flex gap-2">
