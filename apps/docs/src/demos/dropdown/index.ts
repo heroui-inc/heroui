@@ -15,3 +15,4 @@ export {WithSections} from "./with-sections";
 export {WithSingleSelection} from "./with-single-selection";
 export {WithSubmenus} from "./with-submenus";
 export {WithCustomSubmenuIndicator} from "./with-custom-submenu-indicator";
+export {CustomRenderFunction} from "./custom-render-function";

@@ -265,6 +265,10 @@ export const demos: Record<string, DemoItem> = {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
   },
+  "button-custom-render-function": {
+    component: ButtonDemos.CustomRenderFunction,
+    file: "button/custom-render-function.tsx",
+  },
   // ButtonGroup demos
   "button-group-basic": {
     component: ButtonGroupDemos.Basic,
@@ -574,6 +578,10 @@ export const demos: Record<string, DemoItem> = {
     component: ColorAreaDemos.Disabled,
     file: "color-area/disabled.tsx",
   },
+  "color-area-custom-render-function": {
+    component: ColorAreaDemos.CustomRenderFunction,
+    file: "color-area/custom-render-function.tsx",
+  },
   // ColorSwatch demos
   "color-swatch-basic": {
     component: ColorSwatchDemos.Basic,
@@ -640,6 +648,10 @@ export const demos: Record<string, DemoItem> = {
   "close-button-interactive": {
     component: CloseButtonDemos.Interactive,
     file: "close-button/interactive.tsx",
+  },
+  "close-button-custom-render-function": {
+    component: CloseButtonDemos.CustomRenderFunction,
+    file: "close-button/custom-render-function.tsx",
   },
   // ColorSwatchPicker demos
   "color-swatch-picker-basic": {
@@ -898,6 +910,10 @@ export const demos: Record<string, DemoItem> = {
   "dropdown-custom-trigger": {
     component: DropdownDemos.CustomTrigger,
     file: "dropdown/custom-trigger.tsx",
+  },
+  "dropdown-custom-render-function": {
+    component: DropdownDemos.CustomRenderFunction,
+    file: "dropdown/custom-render-function.tsx",
   },
   // ErrorMessage demos
   "error-message-basic": {
@@ -1445,6 +1461,10 @@ export const demos: Record<string, DemoItem> = {
     component: TagGroupDemos.WithListData,
     file: "tag-group/with-list-data.tsx",
   },
+  "tag-group-custom-render-function": {
+    component: TagGroupDemos.CustomRenderFunction,
+    file: "tag-group/custom-render-function.tsx",
+  },
   // TextArea demos
   "textarea-basic": {
     component: TextAreaDemos.Basic,
@@ -1668,6 +1688,10 @@ export const demos: Record<string, DemoItem> = {
   "list-box-with-sections": {
     component: ListBoxDemos.WithSections,
     file: "list-box/with-sections.tsx",
+  },
+  "list-box-custom-render-function": {
+    component: ListBoxDemos.CustomRenderFunction,
+    file: "list-box/custom-render-function.tsx",
   },
   // Modal demos
   "modal-default": {
