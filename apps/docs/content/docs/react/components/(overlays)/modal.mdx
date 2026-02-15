@@ -93,12 +93,6 @@ export default () => (
 
 <ComponentPreview name="modal-custom-portal" />
 
-### Custom Render Function
-
-<ComponentPreview
-  name="modal-custom-render-function"
-/>
-
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -206,7 +200,6 @@ The component supports these interactive states:
 | Prop       | Type        | Default | Description                    |
 | ---------- | ----------- | ------- | ------------------------------ |
 | `children` | `ReactNode` | -       | Trigger and container elements |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ModalRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Modal.Trigger
 
@@ -226,7 +219,6 @@ The component supports these interactive states:
 | `onOpenChange`              | `(isOpen: boolean) => void`           | -          | Open state change handler |
 | `className`                 | `string \| (values) => string`        | -          | Backdrop CSS classes      |
 | `UNSTABLE_portalContainer`  | `HTMLElement`                         | -          | Custom portal container   |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ModalRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Modal.Container
 
@@ -247,7 +239,6 @@ The component supports these interactive states:
 | `aria-label`       | `string`                              | -          | Accessibility label        |
 | `aria-labelledby`  | `string`                              | -          | ID of label element        |
 | `aria-describedby` | `string`                              | -          | ID of description element  |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Modal.Header
 
