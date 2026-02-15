@@ -212,6 +212,10 @@ export const demos: Record<string, DemoItem> = {
     component: BreadcrumbsDemos.BreadcrumbsDisabled,
     file: "breadcrumbs/disabled.tsx",
   },
+  "breadcrumbs-custom-render-function": {
+    component: BreadcrumbsDemos.CustomRenderFunction,
+    file: "breadcrumbs/custom-render-function.tsx",
+  },
   // Button demos
   "button-basic": {
     component: ButtonDemos.Basic,
@@ -474,6 +478,10 @@ export const demos: Record<string, DemoItem> = {
     component: CheckboxGroupDemos.FeaturesAndAddOns,
     file: "checkbox-group/features-and-addons.tsx",
   },
+  "checkbox-group-custom-render-function": {
+    component: CheckboxGroupDemos.CustomRenderFunction,
+    file: "checkbox-group/custom-render-function.tsx",
+  },
   // Chip demos
   "chip-basic": {
     component: ChipDemos.Basic,
@@ -648,10 +656,6 @@ export const demos: Record<string, DemoItem> = {
   "close-button-interactive": {
     component: CloseButtonDemos.Interactive,
     file: "close-button/interactive.tsx",
-  },
-  "close-button-custom-render-function": {
-    component: CloseButtonDemos.CustomRenderFunction,
-    file: "close-button/custom-render-function.tsx",
   },
   // ColorSwatchPicker demos
   "color-swatch-picker-basic": {
@@ -1056,6 +1060,10 @@ export const demos: Record<string, DemoItem> = {
   "date-picker-international-calendar": {
     component: DatePickerDemos.InternationalCalendar,
     file: "date-picker/international-calendar.tsx",
+  },
+  "date-picker-custom-render-function": {
+    component: DatePickerDemos.CustomRenderFunction,
+    file: "date-picker/custom-render-function.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
