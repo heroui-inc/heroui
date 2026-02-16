@@ -6,6 +6,10 @@
   "pages": [
     "---Overview---",
     "index",
+    "---Migration for Agents---",
+    "(migration-for-agents)/mcp-server",
+    "(migration-for-agents)/agent-skills",
+    "(migration-for-agents)/agents-md",
     "---Workflows---",
     "(workflows)/full-migration",
     "(workflows)/incremental-migration",

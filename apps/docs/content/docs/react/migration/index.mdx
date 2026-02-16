@@ -10,33 +10,13 @@ index: true
 
 ## Overview
 
-### Migration MCP Tool
+### AI Assistant Resources
 
-To make migration easier, we provide a **Migration MCP (Model Context Protocol) server** that AI assistants can use to access migration guides directly.
+To make migration easier, we provide the following for AI assistants:
 
-**Features:**
-- Access to comprehensive migration guide
-- Component-specific migration guides
-- Step-by-step migration instructions
-- Code examples and API changes
-
-**Setup:**
-
-Add the Migration MCP server to your MCP client configuration (e.g., in Cursor or other MCP-compatible tools):
-
-```json
-{
-  "mcpServers": {
-    "heroui-migration": {
-      "url": "https://migration-mcp.heroui.com"
-    }
-  }
-}
-```
-
-Once configured, AI assistants can automatically access migration guides through tools to help you migrate your components more efficiently. The MCP server also provides guided migration prompts that can be used with slash commands in your agent chat.
-
-**Repository:** The Migration MCP server code is available at [`heroui-inc/heroui-mcp`](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
+- **[Migration MCP Server](/docs/react/migration/mcp-server)** — MCP tools and prompts for real-time access to migration guides. See setup for Cursor, Claude Code, Windsurf, Zed, and VS Code.
+- **[Migration Agent Skills](/docs/react/migration/agent-skills)** — Install with `curl -fsSL https://v3.heroui.com/install | bash -s heroui-migration` for skill-based migration knowledge.
+- **[AGENTS.md for Migration](/docs/react/migration/agents-md)** — Run `npx heroui-cli@latest agents-md --migration` to download migration docs into your project.
 
 ## Major Changes
 
