@@ -176,6 +176,69 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Closable Alert
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Alert
+      title="Closable Alert"
+      isClosable
+      onClose={() => console.log("Closed")}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Alert, CloseButton } from "@heroui/react";
+    import { useState } from "react";
+
+    const [isVisible, setIsVisible] = useState(true);
+
+    {isVisible && (
+      <Alert>
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>Closable Alert</Alert.Title>
+        </Alert.Content>
+        <CloseButton 
+          aria-label="Close"
+          onPress={() => setIsVisible(false)}
+        />
+      </Alert>
+    )}
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Alert 
+  classNames={{
+    base: "custom-base",
+    title: "custom-title",
+    description: "custom-description"
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Alert className="custom-base">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title className="custom-title">Title</Alert.Title>
+    <Alert.Description className="custom-description">
+      Description
+    </Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
 ## Component Anatomy
 
 The v3 Alert follows this structure:

@@ -136,6 +136,84 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Form Validation
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With description */}
+    <InputOtp description="Enter the code sent to your email" length={4} />
+    
+    {/* With error message */}
+    <InputOtp errorMessage="Invalid code" isInvalid length={4} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError } from "@heroui/react";
+
+    {/* With description */}
+    <div className="flex flex-col gap-2">
+      <InputOTP maxLength={4}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+          <InputOTP.Slot index={3} />
+        </InputOTP.Group>
+      </InputOTP>
+      <Description>Enter the code sent to your email</Description>
+    </div>
+    
+    {/* With error message */}
+    <div className="flex flex-col gap-2">
+      <InputOTP isInvalid maxLength={4}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+          <InputOTP.Slot index={3} />
+        </InputOTP.Group>
+      </InputOTP>
+      <FieldError>Invalid code</FieldError>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### With onComplete Callback
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp
+      length={6}
+      onComplete={(value) => console.log("Complete:", value)}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <InputOTP
+      maxLength={6}
+      onComplete={(value) => console.log("Complete:", value)}
+    >
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+      </InputOTP.Group>
+      <InputOTP.Separator />
+      <InputOTP.Group>
+        <InputOTP.Slot index={3} />
+        <InputOTP.Slot index={4} />
+        <InputOTP.Slot index={5} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
 ## Component Anatomy
 
 The v3 InputOTP follows this structure:

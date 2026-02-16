@@ -173,6 +173,54 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### With Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="new"
+      description="Create a new file"
+    >
+      New file
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, Label } from "@heroui/react";
+
+    <ListBox.Item id="new" textValue="New file">
+      <Label>New file</Label>
+      <Description>Create a new file</Description>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### With Icons
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="new"
+      startContent={<AddIcon />}
+    >
+      New file
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ListBox.Item id="new" textValue="New file">
+      <AddIcon />
+      <Label>New file</Label>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
 ### With Sections
 
 <Tabs items={["v2", "v3"]}>
@@ -211,6 +259,33 @@ The following props are no longer available in v3:
         </ListBox.Item>
       </ListBox.Section>
     </ListBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With Custom Indicator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="1"
+      selectedIcon={<CustomCheckIcon />}
+    >
+      Item 1
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ListBox.Item id="1" textValue="Item 1">
+      <Label>Item 1</Label>
+      <ListBox.ItemIndicator>
+        {({isSelected}) =>
+          isSelected ? <CustomCheckIcon /> : null
+        }
+      </ListBox.ItemIndicator>
+    </ListBox.Item>
     ```
   </Tab>
 </Tabs>

@@ -195,6 +195,42 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Horizontal Orientation
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <RadioGroup orientation="horizontal" label="Select city">
+      <Radio value="london">London</Radio>
+      <Radio value="tokyo">Tokyo</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <RadioGroup orientation="horizontal">
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <Radio value="tokyo">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Tokyo</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
 ## Component Anatomy
 
 The v3 Radio follows this structure:

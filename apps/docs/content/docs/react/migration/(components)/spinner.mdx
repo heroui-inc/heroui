@@ -149,6 +149,31 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Variants (Removed)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div className="flex gap-4">
+      <Spinner variant="default" />
+      <Spinner variant="simple" />
+      <Spinner variant="gradient" />
+      <Spinner variant="wave" />
+      <Spinner variant="dots" />
+      <Spinner variant="spinner" />
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Only one variant available - circular spinner */}
+    <Spinner />
+    
+    {/* For other spinner styles, consider using CSS animations */}
+    ```
+  </Tab>
+</Tabs>
+
 ## Color Mapping
 
 When migrating colors, use this mapping:

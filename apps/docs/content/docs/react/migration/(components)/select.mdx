@@ -200,6 +200,73 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Form Validation
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With description */}
+    <Select
+      label="Select animal"
+      description="Choose your favorite"
+      placeholder="Choose one"
+    >
+      <SelectItem key="cat">Cat</SelectItem>
+    </Select>
+    
+    {/* With validation */}
+    <Select
+      isInvalid
+      errorMessage="Please select an option"
+      label="Select animal"
+    >
+      <SelectItem key="cat">Cat</SelectItem>
+    </Select>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError } from "@heroui/react";
+
+    {/* With description */}
+    <Select placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Description>Choose your favorite</Description>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+    
+    {/* With validation */}
+    <Select isInvalid placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+      <FieldError>Please select an option</FieldError>
+    </Select>
+    ```
+  </Tab>
+</Tabs>
+
 ### With Sections
 
 <Tabs items={["v2", "v3"]}>
@@ -254,6 +321,39 @@ The following props are no longer available in v3:
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox.Section>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Indicator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Select selectorIcon={<CustomIcon />} label="Select animal">
+      <SelectItem key="cat">Cat</SelectItem>
+    </Select>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Select placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator>
+          <CustomIcon />
+        </Select.Indicator>
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
         </ListBox>
       </Select.Popover>
     </Select>

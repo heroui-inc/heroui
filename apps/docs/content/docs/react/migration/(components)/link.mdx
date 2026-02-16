@@ -132,6 +132,60 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### Underline Offset
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have underlineOffset prop */}
+    <Link href="#" underline="hover">
+      No offset
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#" underline="hover" underlineOffset={1}>
+      No offset
+    </Link>
+    <Link href="#" underline="hover" underlineOffset={2}>
+      2px offset
+    </Link>
+    <Link href="#" underline="hover" underlineOffset={3}>
+      4px offset
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### With Routing Libraries
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    <Link as={NextLink} href="/about">
+      About
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    <Link asChild underline="hover">
+      <NextLink href="/about">
+        About
+        <Link.Icon />
+      </NextLink>
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
 ## Component Anatomy
 
 The v3 Link follows this structure:

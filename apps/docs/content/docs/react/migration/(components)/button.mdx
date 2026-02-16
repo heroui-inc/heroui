@@ -108,6 +108,25 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
+### Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button color="primary" variant="solid">Solid</Button>
+    <Button color="primary" variant="bordered">Bordered</Button>
+    <Button color="primary" variant="ghost">Ghost</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="ghost">Ghost</Button>
+    ```
+  </Tab>
+</Tabs>
+
 ### Loading State
 
 <Tabs items={["v2", "v3"]}>
@@ -180,6 +199,13 @@ The following props are no longer available in v3:
     >
       Take a photo
     </Button>
+    <Button 
+      color="danger" 
+      startContent={<Icon icon="gravity-ui:trash-bin" />}
+      variant="bordered"
+    >
+      Delete user
+    </Button>
     ```
   </Tab>
   <Tab value="v3">
@@ -189,6 +215,79 @@ The following props are no longer available in v3:
     <Button variant="primary">
       <Icon icon="gravity-ui:camera" />
       Take a photo
+    </Button>
+    <Button variant="secondary">
+      <Icon icon="gravity-ui:trash-bin" />
+      Delete user
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Icon Only Button
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button isIconOnly color="danger">
+      <HeartIcon />
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button isIconOnly variant="danger">
+      <Icon icon="gravity-ui:heart" />
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Button Group
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup>
+      <Button size="sm" variant="primary">One</Button>
+      <Button size="sm" variant="primary">Two</Button>
+      <Button size="sm" variant="primary">Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup size="sm" variant="primary">
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+</Tabs>
+
+**Note:** ButtonGroup in v3 supports enhanced prop inheritance. See the [ButtonGroup migration guide](/docs/react/migration/button-group) for more details.
+
+### Sizes and Minimum Width
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 automatically applies minimum widths */}
+    <Button size="md" color="primary">Save</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* v3 uses w-fit by default - add min-width to match v2 */}
+    <Button size="md" variant="primary" className="min-w-20">
+      Save
     </Button>
     ```
   </Tab>

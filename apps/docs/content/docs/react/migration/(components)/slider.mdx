@@ -173,6 +173,62 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Vertical Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      defaultValue={30}
+      orientation="vertical"
+      label="Volume"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30} orientation="vertical">
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Value Display
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      renderValue={(props) => (
+        <output {...props}>Custom: {value}</output>
+      )}
+      label="Volume"
+      defaultValue={30}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output>
+        {({state}) => `Custom: ${state.values[0]}`}
+      </Slider.Output>
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
 ## Component Anatomy
 
 The v3 Slider follows this structure:

@@ -121,6 +121,61 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### Enhanced Visibility Control
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ScrollShadow visibility="bottom">
+      {/* content */}
+    </ScrollShadow>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { ScrollShadow } from "@heroui/react";
+
+    function App() {
+      const [visibility, setVisibility] = useState("none");
+
+      return (
+        <>
+          <p>Shadow state: {visibility}</p>
+          <ScrollShadow
+            onVisibilityChange={setVisibility}
+            className="max-h-[400px]"
+          >
+            {/* content */}
+          </ScrollShadow>
+        </>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Variant Effects
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ScrollShadow>
+      {/* Only fade effect available */}
+    </ScrollShadow>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ScrollShadow } from "@heroui/react";
+
+    <ScrollShadow variant="blur" className="max-h-[400px]">
+      {/* Content with blur shadow effect */}
+    </ScrollShadow>
+    ```
+  </Tab>
+</Tabs>
+
 ## Summary
 
 - Update import from `@heroui/scroll-shadow` to `@heroui/react`

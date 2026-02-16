@@ -99,6 +99,57 @@ function MyComponent() {
 
 ## Migration Examples
 
+### Toast with Title and Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({
+      title: "Success",
+      description: "Your changes have been saved",
+      variant: "success"
+    });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    toast.success("Your changes have been saved", {
+      title: "Success",
+      description: "Your changes have been saved"
+    });
+    ```
+  </Tab>
+</Tabs>
+
+### Helper Methods for Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({ variant: "success", title: "Success" });
+    toast.show({ variant: "error", title: "Error" });
+    toast.show({ variant: "warning", title: "Warning" });
+    toast.show({ variant: "info", title: "Info" });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    toast.success("Success");
+    toast.danger("Error");
+    toast.warning("Warning");
+    toast.info("Info");
+    ```
+  </Tab>
+</Tabs>
+
 ### Promise Support
 
 <Tabs items={["v2", "v3"]}>
