@@ -1,3 +1,5 @@
+"use client";
+
 import {ColorArea} from "@heroui/react";
 
 export function CustomRenderFunction() {

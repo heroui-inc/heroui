@@ -1,3 +1,5 @@
+"use client";
+
 import {Label, ListBox, Select} from "@heroui/react";
 
 export function CustomRenderFunction() {

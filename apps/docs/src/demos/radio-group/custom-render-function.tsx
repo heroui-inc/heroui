@@ -1,3 +1,5 @@
+"use client";
+
 import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 
 export function CustomRenderFunction() {

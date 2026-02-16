@@ -1,3 +1,5 @@
+"use client";
+
 import {Tabs} from "@heroui/react";
 
 export function CustomRenderFunction() {

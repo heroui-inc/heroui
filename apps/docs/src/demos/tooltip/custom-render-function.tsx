@@ -1,3 +1,5 @@
+"use client";
+
 import {CircleInfo} from "@gravity-ui/icons";
 import {Button, Tooltip} from "@heroui/react";
 

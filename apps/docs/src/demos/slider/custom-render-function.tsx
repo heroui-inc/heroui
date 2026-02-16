@@ -1,3 +1,5 @@
+"use client";
+
 import {Label, Slider} from "@heroui/react";
 
 export function CustomRenderFunction() {

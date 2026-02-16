@@ -1,3 +1,5 @@
+"use client";
+
 import {Checkbox, CheckboxGroup, Description, Label} from "@heroui/react";
 
 export function CustomRenderFunction() {

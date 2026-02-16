@@ -1,3 +1,5 @@
+"use client";
+
 import {Label, SearchField} from "@heroui/react";
 
 export function CustomRenderFunction() {

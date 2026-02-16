@@ -1,3 +1,5 @@
+"use client";
+
 import {Avatar, Description, Label, ListBox} from "@heroui/react";
 
 export function CustomRenderFunction() {
@@ -5,7 +7,7 @@ export function CustomRenderFunction() {
     <ListBox
       aria-label="Users"
       className="w-[220px]"
-      render={(props) => <div {...props} data-custom="foo" />}
+      render={(props) => <div {...props} data-custom="true" />}
       selectionMode="single"
     >
       <ListBox.Item

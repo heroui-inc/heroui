@@ -1,3 +1,5 @@
+"use client";
+
 import {ColorSwatch} from "@heroui/react";
 
 export function CustomRenderFunction() {
