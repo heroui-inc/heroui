@@ -544,6 +544,10 @@ export const demos: Record<string, DemoItem> = {
     component: ColorFieldDemos.WithDescription,
     file: "color-field/with-description.tsx",
   },
+  "color-field-custom-render-function": {
+    component: ColorFieldDemos.CustomRenderFunction,
+    file: "color-field/custom-render-function.tsx",
+  },
   // ColorPicker demos
   "color-picker-basic": {
     component: ColorPickerDemos.Basic,
@@ -615,6 +619,10 @@ export const demos: Record<string, DemoItem> = {
     component: ColorSwatchDemos.Accessibility,
     file: "color-swatch/accessibility.tsx",
   },
+  "color-swatch-custom-render-function": {
+    component: ColorSwatchDemos.CustomRenderFunction,
+    file: "color-swatch/custom-render-function.tsx",
+  },
   // ColorSlider demos
   "color-slider-basic": {
     component: ColorSliderDemos.Basic,
@@ -643,6 +651,10 @@ export const demos: Record<string, DemoItem> = {
   "color-slider-controlled": {
     component: ColorSliderDemos.Controlled,
     file: "color-slider/controlled.tsx",
+  },
+  "color-slider-custom-render-function": {
+    component: ColorSliderDemos.CustomRenderFunction,
+    file: "color-slider/custom-render-function.tsx",
   },
   // CloseButton demos
   "close-button-default": {
@@ -689,6 +701,10 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-picker-custom-indicator": {
     component: ColorSwatchPickerDemos.CustomIndicator,
     file: "color-swatch-picker/custom-indicator.tsx",
+  },
+  "color-swatch-picker-custom-render-function": {
+    component: ColorSwatchPickerDemos.CustomRenderFunction,
+    file: "color-swatch-picker/custom-render-function.tsx",
   },
   // Autocomplete demos
   "autocomplete-default": {
@@ -836,6 +852,10 @@ export const demos: Record<string, DemoItem> = {
     component: ComboBoxDemos.MenuTrigger,
     file: "combo-box/menu-trigger.tsx",
   },
+  "combo-box-custom-render-function": {
+    component: ComboBoxDemos.CustomRenderFunction,
+    file: "combo-box/custom-render-function.tsx",
+  },
   // Disclosure demos
   "disclosure-basic": {
     component: DisclosureDemos.Basic,
@@ -933,6 +953,10 @@ export const demos: Record<string, DemoItem> = {
     component: FormDemos.Basic,
     file: "form/basic.tsx",
   },
+  "form-custom-render-function": {
+    component: FormDemos.CustomRenderFunction,
+    file: "form/custom-render-function.tsx",
+  },
   // Fieldset demos
   "fieldset-basic": {
     component: FieldsetDemos.Basic,
@@ -1027,6 +1051,10 @@ export const demos: Record<string, DemoItem> = {
   "date-field-variants": {
     component: DateFieldDemos.Variants,
     file: "date-field/variants.tsx",
+  },
+  "date-field-custom-render-function": {
+    component: DateFieldDemos.CustomRenderFunction,
+    file: "date-field/custom-render-function.tsx",
   },
   // DatePicker demos
   "date-picker-basic": {
@@ -1229,6 +1257,10 @@ export const demos: Record<string, DemoItem> = {
     component: LinkDemos.UnderlineAndOffset,
     file: "link/underline-and-offset.tsx",
   },
+  "link-custom-render-function": {
+    component: LinkDemos.CustomRenderFunction,
+    file: "link/custom-render-function.tsx",
+  },
   // RadioGroup demos
   "radio-group-basic": {
     component: RadioGroupDemos.Basic,
@@ -1269,6 +1301,10 @@ export const demos: Record<string, DemoItem> = {
   "radio-group-variants": {
     component: RadioGroupDemos.Variants,
     file: "radio-group/variants.tsx",
+  },
+  "radio-group-custom-render-function": {
+    component: RadioGroupDemos.CustomRenderFunction,
+    file: "radio-group/custom-render-function.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {
@@ -1323,6 +1359,10 @@ export const demos: Record<string, DemoItem> = {
   "separator-manual-variant-override": {
     component: SeparatorDemos.ManualVariantOverride,
     file: "separator/manual-variant-override.tsx",
+  },
+  "separator-custom-render-function": {
+    component: SeparatorDemos.CustomRenderFunction,
+    file: "separator/custom-render-function.tsx",
   },
   // Spinner demos
   "spinner-basic": {
@@ -1596,6 +1636,10 @@ export const demos: Record<string, DemoItem> = {
     component: TimeFieldDemos.WithValidation,
     file: "time-field/with-validation.tsx",
   },
+  "time-field-custom-render-function": {
+    component: TimeFieldDemos.CustomRenderFunction,
+    file: "time-field/custom-render-function.tsx",
+  },
   // Toast demos
   "toast-default": {
     component: ToastDemos.Default,
@@ -1815,6 +1859,10 @@ export const demos: Record<string, DemoItem> = {
     component: NumberFieldDemos.Variants,
     file: "number-field/variants.tsx",
   },
+  "number-field-custom-render-function": {
+    component: NumberFieldDemos.CustomRenderFunction,
+    file: "number-field/custom-render-function.tsx",
+  },
   // Select demos
   "select-default": {
     component: SelectDemos.Default,
@@ -1884,6 +1932,10 @@ export const demos: Record<string, DemoItem> = {
     component: SelectDemos.Variants,
     file: "select/variants.tsx",
   },
+  "select-custom-render-function": {
+    component: SelectDemos.CustomRenderFunction,
+    file: "select/custom-render-function.tsx",
+  },
   // SearchField demos
   "search-field-basic": {
     component: SearchFieldDemos.Basic,
@@ -1937,6 +1989,10 @@ export const demos: Record<string, DemoItem> = {
     component: SearchFieldDemos.Variants,
     file: "search-field/variants.tsx",
   },
+  "search-field-custom-render-function": {
+    component: SearchFieldDemos.CustomRenderFunction,
+    file: "search-field/custom-render-function.tsx",
+  },
   // ScrollShadow demos
   "scroll-shadow-default": {
     component: ScrollShadowDemos.Default,
@@ -1978,6 +2034,10 @@ export const demos: Record<string, DemoItem> = {
   "slider-disabled": {
     component: SliderDemos.Disabled,
     file: "slider/disabled.tsx",
+  },
+  "slider-custom-render-function": {
+    component: SliderDemos.CustomRenderFunction,
+    file: "slider/custom-render-function.tsx",
   },
   // Description demos
   "description-basic": {
