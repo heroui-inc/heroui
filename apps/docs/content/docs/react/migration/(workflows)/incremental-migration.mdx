@@ -26,6 +26,14 @@ Before choosing this approach, be aware of:
 - **React Version**: v3 requires React 19+, v2 supports React 18+ - ensure React 19 is installed
 - **Setup Complexity**: Requires more complex initial setup compared to full migration
 
+### Components Without v3 Counterparts
+
+Since v2 and v3 can coexist, v2 components that have no v3 counterpart can remain in your project. These components will continue to work during migration:
+
+- **Code**, **Image**, **Navbar**, **Ripple**, **Snippet**, **Spacer**, **User**
+
+You do not need to replace them to complete the migration. If you prefer to remove them and use native HTML or manual implementations instead, you may ask your agent to help using the [Component Migration Reference](/docs/react/migration#component-migration-reference) guides.
+
 ## Strategy Selection
 
 Choose your strategy based on how you currently import v2 components:
@@ -71,10 +79,12 @@ import {Button} from "@heroui-v3/react"; // v3
    - Update component code to v3 API
    - Test the migrated component
    - Verify styling looks correct
+   - For v2 components with no v3 counterpart (Code, Image, Navbar, Ripple, Snippet, Spacer, User), leave them in place. They will continue to work during coexistence.
 
 2. **Continue until all components are migrated**
    - Track which components have been migrated
    - Test each migrated component thoroughly
+   - If you want to remove v2 removed components later, use the [Component Migration Reference](/docs/react/migration#component-migration-reference) guides and ask your agent to help replace them with native HTML or manual implementations.
 
 3. **Once all components are migrated, switch to v3-only:**
    - Remove v2 dependencies (`@heroui/react`, `@heroui/theme`)
@@ -130,7 +140,9 @@ import {Card} from "@heroui/card"; // v2
    - Update imports to use `@heroui/react` (v3)
    - Update component code to v3 API
    - Test the migrated component
+   - For v2 components with no v3 counterpart (Code, Image, Navbar, Ripple, Snippet, Spacer, User), leave them in place. They will continue to work during coexistence.
 4. **Continue until all components are migrated**
+   - If you want to remove v2 removed components later, use the [Component Migration Reference](/docs/react/migration#component-migration-reference) guides and ask your agent to help replace them with native HTML or manual implementations.
 5. **Remove remaining v2 component packages**
 6. **Complete styling migration**
 
@@ -230,6 +242,7 @@ Once all components are migrated:
    - Remove `@heroui/react` and `@heroui/theme` (Strategy A)
    - Remove all `@heroui/*` component packages (Strategy B)
    - Remove aliases (Strategy A)
+   - If you left v2 removed components in place (Code, Image, Navbar, Ripple, Snippet, Spacer, User), you have two options: (1) Replace them per the migration guides before removing v2 dependencies, or (2) Keep v2 dependencies until you are ready to replace them. You may ask an agent to help remove them using the provided guides.
 
 2. **Update all imports:**
    - Change `@heroui-v3/react` → `@heroui/react` (Strategy A)
@@ -261,9 +274,11 @@ Use this checklist to track your incremental migration progress:
 - Test the migrated component
 - Check for styling conflicts
 - Document migration progress
+- Identify v2 removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User) — leave in place or replace per guides
 
 ### Completion
 - Migrate all components
+- Optional: Replace removed components using migration guides before removing v2 deps, or remove v2 deps only after all removed components are replaced
 - Remove v2 dependencies
 - Remove aliases (Strategy A)
 - Update all imports to v3-only

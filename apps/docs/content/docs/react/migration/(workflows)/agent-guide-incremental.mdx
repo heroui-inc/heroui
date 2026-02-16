@@ -23,6 +23,7 @@ This guide is designed for AI assistants (agents) helping users migrate from Her
 3. **Strategy Identification**: Determine which coexistence strategy the project uses (A: pnpm aliases or B: component packages)
 4. **Component-by-Component Testing**: Test each migrated component before moving to the next
 5. **CSS Conflict Management**: Monitor and resolve styling conflicts between v2 and v3 during coexistence
+6. **Removed Components**: v2 components with no v3 counterpart (Code, Image, Navbar, Ripple, Snippet, Spacer, User) can be left in place during coexistence. Do not migrate them unless the user explicitly asks to replace them.
 
 ## Major Changes in v3
 
@@ -106,6 +107,13 @@ For projects using incremental coexistence strategies, agents should:
    - Track which components have been migrated
    - Note any issues or concerns
 
+### Handling Removed Components (No v3 Counterpart)
+
+When encountering v2 components with no v3 counterpart (Code, Image, Navbar, Ripple, Snippet, Spacer, User):
+
+- **Leave them in place** — do not attempt to migrate them unless the user explicitly requests removal
+- **If the user wants to remove them**: Use `get_component_migration_guides` (where available) or the [Component Migration Reference](/docs/react/migration#component-migration-reference) to fetch guides and help replace with native HTML or manual implementations
+
 ## CSS Conflict Handling
 
 During coexistence, both v2 and v3 CSS systems will be loaded. Agents should:
@@ -146,6 +154,7 @@ Once all components are migrated:
 1. **Remove v2 dependencies**
    - Strategy A: Remove `@heroui/react`, `@heroui/theme`, and aliases
    - Strategy B: Remove all remaining `@heroui/*` component packages
+   - If the project contains v2 removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User), inform the user they may ask to remove them later using the provided guides.
 
 2. **Update all imports**
    - Strategy A: Change `@heroui-v3/react` → `@heroui/react`
@@ -234,6 +243,11 @@ Once all components are migrated:
 - Some projects may use Strategy A for some components, Strategy B for others
 - Guide appropriate import updates for each component
 - Ensure consistent approach where possible
+
+### Project Uses v2 Navbar (or Other Removed Components)
+
+- Leave in place — v2 Navbar and other removed components (Code, Image, Ripple, Snippet, Spacer, User) will continue to work during coexistence
+- Inform the user they can optionally remove them later with agent assistance and the [Component Migration Reference](/docs/react/migration#component-migration-reference) guides
 
 ## MCP Tool Usage Reference
 
