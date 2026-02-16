@@ -249,45 +249,6 @@ Once all components are migrated:
 - Leave in place — v2 Navbar and other removed components (Code, Image, Ripple, Snippet, Spacer, User) will continue to work during coexistence
 - Inform the user they can optionally remove them later with agent assistance and the [Component Migration Reference](/docs/react/migration#component-migration-reference) guides
 
-## MCP Tool Usage Reference
-
-See the [Migration MCP Server](/docs/react/migration/mcp-server) guide for setup. Use these MCP tools:
-
-- `get_migration_workflow`: Get migration overview. For incremental migration, pass `migrationType: "incremental"`.
-- `get_component_migration_guides`: Get component-specific migration guides (use when migrating components)
-- `get_styling_migration_guide`: Get styling migration details (use after all components migrated)
-- `list_component_migration_guides`: See available component guides
-
-## Troubleshooting
-
-### Issue: CSS conflicts between v2 and v3
-
-- Verify CSS import order: `tailwindcss` first, then `@heroui/styles`
-- Check Tailwind config has v2 plugin
-- Ensure both CSS systems are loaded
-- Guide user to adjust CSS specificity if needed
-
-### Issue: Component not rendering correctly
-
-- Verify correct import path (Strategy A: `@heroui-v3/react`, Strategy B: `@heroui/react`)
-- Check component migration guide using `get_component_migration_guides`
-- Ensure component code follows v3 API patterns
-- Test in isolation if needed
-
-### Issue: TypeScript errors
-
-- Verify correct package versions
-- Check import paths match strategy
-- Ensure types are imported from correct package
-- May need to update TypeScript config
-
-### Issue: Styling looks wrong after migration
-
-- Check for CSS conflicts
-- Verify CSS import order
-- Ensure v3 styles are loaded
-- May need to adjust CSS specificity
-
 ## Next Steps
 
 After completing migration:
