@@ -2,7 +2,15 @@
 
 import type {Key} from "@heroui/react";
 
-import {Autocomplete, Label, ListBox, SearchField, Surface, useFilter} from "@heroui/react";
+import {
+  Autocomplete,
+  EmptyState,
+  Label,
+  ListBox,
+  SearchField,
+  Surface,
+  useFilter,
+} from "@heroui/react";
 import {useState} from "react";
 
 export function FullWidth() {
@@ -43,7 +51,7 @@ export function FullWidth() {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {items.map((item) => (
                 <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                   {item.name}

@@ -1,6 +1,7 @@
 ---
 title: InputOTP
 description: Input component for entering one-time passwords (OTP) with individual character slots, animations, and validation support.
+icon: updated
 links:
   source_native: input-otp/input-otp.tsx
   styles_native: input-otp/input-otp.styles.ts
@@ -240,7 +241,7 @@ export default function InputOTPExample() {
 }
 ```
 
-You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/input-otp.tsx).
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/input-otp.tsx).
 
 ## API Reference
 
@@ -267,6 +268,7 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | `children`                 | `React.ReactNode`             | -           | Children elements to be rendered inside the InputOTP                                       |
 | `className`                | `string`                      | -           | Additional CSS classes to apply                                                            |
 | `style`                    | `PressableProps['style']`     | -           | Style to pass to the container Pressable component                                         |
+| `isBottomSheetAware`       | `boolean`                     | `true`      | Whether the InputOTP automatically handles keyboard state when rendered inside a BottomSheet. Set to `false` to disable |
 | `animation`                | `"disable-all" \| undefined`  | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children  |
 
 ### InputOTP.Group

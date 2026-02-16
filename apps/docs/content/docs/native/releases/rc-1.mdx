@@ -1,0 +1,497 @@
+---
+title: RC 1
+description: Alert component, standalone Radio component, Select TriggerIndicator, HeroUINativeProviderRaw, disableFullWindowOverlay prop, styles prop expansion, theme surface refactor
+github:
+  pull: 284
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">February 12, 2026</span>
+</div>
+
+RC 1 marks the first Release Candidate for HeroUI Native, signaling that the library is approaching production readiness. This release introduces the Alert compound component with accessibility-first design and status variants, extracts Radio into a standalone component with dual-mode operation, and adds the animated Select.TriggerIndicator subcomponent. It also delivers a lightweight HeroUINativeProviderRaw for bundle optimization, a new `disableFullWindowOverlay` prop for iOS debugging, unified `styles` prop support across six components, and a theme refactor that replaces calculated surface colors with explicit theme-defined variables. Several critical bug fixes—including InputOTP in BottomSheet, toast text clipping, and element inspector compatibility—round out the release.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the RC 1 improvements in action with our preview app! You can explore the new Alert and Radio components, Select TriggerIndicator and all the bug fixes directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## What's New
+
+### New Components
+
+This release introduces **1 new** component:
+
+- **[Alert](/docs/native/components/alert)**: Accessible alert component with five status variants and compound sub-components for flexible content composition.
+
+#### Alert
+
+The Alert component provides accessible alert messaging with built-in support for five status variants: default, accent, success, warning, and danger. It follows the compound component pattern with `Alert.Indicator`, `Alert.Content`, `Alert.Title`, and `Alert.Description` sub-components, giving developers full control over layout and customization. The primitive layer provides `role="alert"`, `aria-labelledby`, and `aria-describedby` accessibility associations automatically.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Five status variants: default, accent, success, warning, and danger
+- Default SVG status icons with theme-aware colors via `useStatusColor` hook
+- Compound component architecture with Indicator, Content, Title, and Description sub-components
+- Custom indicator support (e.g., replace default icon with a Spinner)
+- Accessibility primitives with `role="alert"`, `aria-labelledby`, and `aria-describedby`
+- `asChild` slot support on all sub-components
+- Ref forwarding and `className` prop support on all parts
+
+**Usage:**
+
+```tsx
+import { Alert } from "heroui-native";
+
+export function Example() {
+  return (
+    <Alert status="success">
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>Payment successful</Alert.Title>
+        <Alert.Description>
+          Your payment has been processed successfully.
+        </Alert.Description>
+      </Alert.Content>
+    </Alert>
+  );
+}
+```
+
+For complete documentation and examples, see the [Alert component page](/docs/native/components/alert).
+
+**Related PR:** [#284](https://github.com/heroui-inc/heroui-native/pull/284)
+
+### New Subcomponents
+
+#### Select.TriggerIndicator
+
+The [Select](/docs/native/components/select) component now includes a `TriggerIndicator` subcomponent that displays an animated chevron icon to visually indicate the open/close state. The indicator rotates smoothly when the select opens or closes, using React Native Reanimated spring physics.
+
+**Features:**
+
+- Animated chevron icon that rotates on open/close transitions
+- Customizable animation configuration via `animation` prop with rotation values and spring config
+- Icon customization through `iconProps` (size, color)
+- Support for custom children to replace the default chevron
+- Automatic state synchronization with Select open/close state
+
+**Usage:**
+
+```tsx
+import { Select } from "heroui-native";
+
+<Select>
+  <Select.Trigger>
+    <Select.Value placeholder="Select an option" />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Content>
+      {/* Select items */}
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+**Related PR:** [#274](https://github.com/heroui-inc/heroui-native/pull/274)
+
+## Component Improvements
+
+### Toast Styling and Stacking Refactor
+
+The [Toast](/docs/native/components/toast) component styling has been refactored to replace the border-based padding approach with proper padding and vertical placeholder views, improving content visibility when toasts stack.
+
+**Improvements:**
+
+- Replaced `border-[16px]` padding workaround with proper `p-4` padding
+- Added `useVerticalPlaceholderStyles` hook for placeholder view styling
+- Added absolute positioned placeholder Views at top and bottom to prevent content visibility when toasts stack
+- Updated shadow system to use `shadow-overlay` token
+- Standardized overlay shadow values across all themes (alpha, mint, sky) with lighter opacity
+
+This refactor ensures content remains properly hidden when toasts of different heights stack together, while providing a more maintainable and predictable styling approach.
+
+**Related PR:** [#229](https://github.com/heroui-inc/heroui-native/pull/229)
+
+### Dialog Overlay Animation Fix
+
+The [Dialog](/docs/native/components/dialog) component's popup animation timing has been fixed when closing via gesture. The progress value is now properly sequenced with delays to ensure the closing animation completes before resetting.
+
+**Improvements:**
+
+- Progress value now transitions to 2 after a 300ms delay when closing via gesture
+- Progress resets to 0 after 350ms to ensure animation completion
+- Removed immediate `progress.set(2)` call when `isOpen` becomes false
+- Smooth closing animations now play correctly when dismissing popups via swipe gestures
+
+**Related PR:** [#277](https://github.com/heroui-inc/heroui-native/pull/277)
+
+### Theme Surface Variables Refactor
+
+The theme system has been refactored to replace calculated surface colors with explicit theme-defined variables, providing more control and consistency across themes.
+
+**Improvements:**
+
+- `surface-secondary` and `surface-tertiary` (with foregrounds) are now defined explicitly in each theme (alpha, lavender, mint, sky, variables.css)
+- Base theme uses `var(--surface-secondary)` and `var(--surface-tertiary)` instead of `color-mix` calculations
+- Removed `on-surface`, `on-surface-secondary`, and `on-surface-tertiary` palettes from theme.css
+- Updated theming documentation with the new variable structure and examples
+
+This change gives theme authors direct control over surface color values rather than relying on `color-mix` calculations, resulting in more predictable and consistent surface styling across all themes.
+
+**Related PR:** [#281](https://github.com/heroui-inc/heroui-native/pull/281)
+
+## API Enhancements
+
+### Unified `styles` Prop for Multiple Components
+
+Six components now support the unified `styles` prop for slot-based styling, providing a consistent pattern for applying styles to component internals.
+
+**Supported components:**
+
+- **Accordion**: `container` and `separator` slots
+- **AvatarFallback**: `container` and `text` slots
+- **FieldError**: `container` and `text` slots
+- **Label**: `text` and `asterisk` slots (also fixed `style` prop handling)
+- **PressableFeedback Ripple**: `container` and `ripple` slots (replaces `containerStyle` and `rippleStyle`)
+- **SelectContentDialog**: `wrapper` and `content` slots
+
+**New Capability:**
+
+```tsx
+import { Accordion, Label } from "heroui-native";
+
+// Apply styles to specific slots
+<Label styles={{ text: { fontSize: 18 }, asterisk: { color: "red" } }} isRequired>
+  Username
+</Label>
+
+<Accordion
+  styles={{
+    container: { borderRadius: 12 },
+    separator: { backgroundColor: "gray" },
+  }}
+>
+  {/* Accordion items */}
+</Accordion>
+```
+
+All changes maintain backward compatibility with existing `style` props and properly merge styles when both are provided.
+
+**Related PR:** [#271](https://github.com/heroui-inc/heroui-native/pull/271)
+
+### `disableFullWindowOverlay` Prop
+
+Portal-based components now support a `disableFullWindowOverlay` prop that enables React Native element inspector support on iOS during development.
+
+**Supported components:**
+
+- `BottomSheet.Portal`
+- `Dialog.Portal`
+- `Popover.Portal`
+- `Select.Portal`
+- `ToastProvider`
+
+**New Capability:**
+
+```tsx
+import { Dialog } from "heroui-native";
+
+// Enable element inspector support on iOS
+<Dialog>
+  <Dialog.Portal disableFullWindowOverlay>
+    <Dialog.Overlay />
+    <Dialog.Content>
+      {/* content */}
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+On iOS, `FullWindowOverlay` uses a separate native window that blocks the React Native element inspector. Setting `disableFullWindowOverlay` to `true` renders content in the main window instead, enabling the inspector during development. The tradeoff is that overlays will no longer appear above native modals or the keyboard. This prop has no effect on Android.
+
+For Toast, the prop is passed via `config.toast` when using `HeroUINativeProvider`.
+
+**Related PR:** [#283](https://github.com/heroui-inc/heroui-native/pull/283)
+
+### HeroUINativeProviderRaw
+
+A new lightweight provider variant, `HeroUINativeProviderRaw`, excludes `ToastProvider` and `PortalHost` to give consumers full control over which dependencies are bundled.
+
+**New Capability:**
+
+```tsx
+import { HeroUINativeProviderRaw } from "heroui-native/provider-raw";
+
+// Lightweight provider without Toast and Portal dependencies
+export function App() {
+  return (
+    <HeroUINativeProviderRaw>
+      {/* Your app content */}
+    </HeroUINativeProviderRaw>
+  );
+}
+```
+
+This makes `react-native-screens`, `@gorhom/bottom-sheet`, and `react-native-svg` fully optional dependencies. The raw provider includes only `SafeAreaListener`, `GlobalAnimationSettingsProvider`, and `TextComponentProvider`. Consumers who need toast or portal features can compose them manually.
+
+**Related PR:** [#285](https://github.com/heroui-inc/heroui-native/pull/285)
+
+### Select.Trigger `variant` Prop
+
+The `Select.Trigger` component now supports a `variant` prop with `"default"` and `"unstyled"` options, enabling better composition with custom trigger components like Button.
+
+**New Capability:**
+
+```tsx
+import { Button, Select } from "heroui-native";
+
+// Default variant (pre-styled trigger)
+<Select>
+  <Select.Trigger variant="default">
+    <Select.Value placeholder="Choose..." />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+</Select>
+
+// Unstyled variant for custom compositions
+<Select>
+  <Select.Trigger variant="unstyled">
+    <Button>
+      <Select.Value placeholder="Choose..." />
+      <Select.TriggerIndicator />
+    </Button>
+  </Select.Trigger>
+</Select>
+```
+
+**Related PR:** [#274](https://github.com/heroui-inc/heroui-native/pull/274)
+
+### ControlField Radio Variant
+
+The [ControlField](/docs/native/components/control-field) component now supports a `"radio"` variant in `ControlField.Indicator`, rendering a standalone Radio component alongside the existing `"switch"` and `"checkbox"` variants.
+
+**New Capability:**
+
+```tsx
+import { ControlField } from "heroui-native";
+
+<ControlField>
+  <ControlField.Indicator variant="radio" />
+  <ControlField.Label>Radio option</ControlField.Label>
+</ControlField>
+```
+
+**Related PR:** [#286](https://github.com/heroui-inc/heroui-native/pull/286)
+
+## ⚠️ Breaking Changes
+
+### PressableFeedback Ripple: Unified `styles` Prop
+
+The PressableFeedback Ripple component's individual style props (`containerStyle` and `rippleStyle`) have been replaced with a unified `styles` prop.
+
+**Migration:**
+
+Update all instances of individual style props to the unified `styles` prop:
+
+```tsx
+// Before
+<PressableFeedback.Ripple
+  containerStyle={{ borderRadius: 8 }}
+  rippleStyle={{ backgroundColor: "blue" }}
+/>
+
+// After
+<PressableFeedback.Ripple
+  styles={{
+    container: { borderRadius: 8 },
+    ripple: { backgroundColor: "blue" },
+  }}
+/>
+```
+
+**Related PR:** [#271](https://github.com/heroui-inc/heroui-native/pull/271)
+
+### Select.Trigger Default Styles
+
+`Select.Trigger` now defaults to `variant="default"`, which applies default container styles (`flex-row items-center justify-between h-12 px-4 rounded-2xl bg-surface shadow-surface`). Users with custom styled triggers need to add `variant="unstyled"` to prevent default styles from being applied.
+
+**Migration:**
+
+```tsx
+// Before (custom styled trigger)
+<Select.Trigger className="custom-trigger-styles">
+  {/* content */}
+</Select.Trigger>
+
+// After (add variant="unstyled" to preserve custom styling)
+<Select.Trigger variant="unstyled" className="custom-trigger-styles">
+  {/* content */}
+</Select.Trigger>
+```
+
+**Related PR:** [#274](https://github.com/heroui-inc/heroui-native/pull/274)
+
+### Surface Theme Variables Restructured
+
+The `on-surface`, `on-surface-secondary`, and `on-surface-tertiary` CSS variables and their hover/focus variants have been removed from the base theme. Surface secondary and tertiary colors are now defined explicitly in each theme file.
+
+**Migration:**
+
+If you reference `on-surface`, `on-surface-secondary`, or `on-surface-tertiary` variables in custom styles, replace them with the appropriate surface foreground variables defined in your theme.
+
+```css
+/* Before */
+color: var(--on-surface);
+color: var(--on-surface-secondary);
+
+/* After */
+color: var(--surface-foreground);
+color: var(--surface-secondary-foreground);
+```
+
+**Related PR:** [#281](https://github.com/heroui-inc/heroui-native/pull/281)
+
+### RadioGroup Indicator Removed
+
+`RadioGroup.Indicator` and `RadioGroup.IndicatorThumb` have been removed in favor of the new standalone `Radio` component. The related types `RadioGroupIndicatorProps`, `RadioGroupIndicatorThumbProps`, and `RadioGroupIndicatorThumbAnimation` are also removed from exports.
+
+**Migration:**
+
+Replace all `RadioGroup.Indicator` and `RadioGroup.IndicatorThumb` usages with the `Radio` component:
+
+```tsx
+// Before
+import { RadioGroup } from "heroui-native";
+
+<RadioGroup>
+  <RadioGroup.Item value="option1">
+    <RadioGroup.Indicator>
+      <RadioGroup.IndicatorThumb />
+    </RadioGroup.Indicator>
+    <RadioGroup.Label>Option 1</RadioGroup.Label>
+  </RadioGroup.Item>
+</RadioGroup>
+
+// After
+import { Radio, RadioGroup } from "heroui-native";
+
+<RadioGroup>
+  <RadioGroup.Item value="option1">
+    <Radio>
+      <Radio.Indicator>
+        <Radio.IndicatorThumb />
+      </Radio.Indicator>
+    </Radio>
+    <RadioGroup.Label>Option 1</RadioGroup.Label>
+  </RadioGroup.Item>
+</RadioGroup>
+```
+
+**Related PR:** [#286](https://github.com/heroui-inc/heroui-native/pull/286)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #229](https://github.com/heroui-inc/heroui-native/issues/229)**: Fixed InputOTP not working inside BottomSheet. The InputOTP component now functions correctly when rendered within a BottomSheet overlay, resolving input focus and interaction issues that previously prevented OTP entry in bottom sheet contexts.
+
+- **[Issue #265](https://github.com/heroui-inc/heroui-native/issues/265)**: Fixed the first letter of Toast description text being clipped. The toast styling refactor replaces the border-based padding approach with proper padding and placeholder views, ensuring all text content is fully visible regardless of toast stacking configuration.
+
+- **[Issue #272](https://github.com/heroui-inc/heroui-native/issues/272)**: Fixed FullWindowOverlay blocking the React Native element inspector on iOS. The new `disableFullWindowOverlay` prop on portal components allows developers to render overlay content in the main window during development, restoring element inspector functionality.
+
+**Related PRs:**
+
+- [#229](https://github.com/heroui-inc/heroui-native/pull/229)
+- [#283](https://github.com/heroui-inc/heroui-native/pull/283)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Alert](/docs/native/components/alert) - New component documentation with usage examples and API reference
+- [Radio](/docs/native/components/radio) - New standalone Radio component documentation
+- [Radio Group](/docs/native/components/radio-group) - Updated to reflect RadioGroup.Indicator removal and Radio integration
+- [Control Field](/docs/native/components/control-field) - Updated with new radio variant documentation
+- [Select](/docs/native/components/select) - TriggerIndicator subcomponent and Trigger variant documentation
+- [Toast](/docs/native/components/toast) - Updated styling approach documentation
+- [Bottom Sheet](/docs/native/components/bottom-sheet) - Added disableFullWindowOverlay documentation
+- [Dialog](/docs/native/components/dialog) - Added disableFullWindowOverlay documentation
+- [Popover](/docs/native/components/popover) - Added disableFullWindowOverlay documentation
+- [Provider](/docs/native/getting-started/provider) - HeroUINativeProviderRaw documentation and provider hierarchy
+- [Theming](/docs/native/getting-started/theming) - Updated surface variable structure and examples
+- [Accordion](/docs/native/components/accordion) - Added styles prop documentation
+- [Avatar](/docs/native/components/avatar) - Added styles prop documentation
+- [Label](/docs/native/components/label) - Added styles prop documentation
+- [Field Error](/docs/native/components/field-error) - Added styles prop documentation
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
