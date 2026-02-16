@@ -64,7 +64,7 @@ export function Variants() {
                     <SearchField.ClearButton />
                   </SearchField.Group>
                 </SearchField>
-                <ListBox>
+                <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                   {items.map((item) => (
                     <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                       {item.name}
@@ -98,7 +98,7 @@ export function Variants() {
                     <SearchField.ClearButton />
                   </SearchField.Group>
                 </SearchField>
-                <ListBox>
+                <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                   {items.map((item) => (
                     <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                       {item.name}

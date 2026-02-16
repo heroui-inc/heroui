@@ -138,14 +138,18 @@ Granular imports are ideal when you only need a few components, as they help kee
 **Available granular exports:**
 
 - `heroui-native/provider` - Provider component
+- `heroui-native/provider-raw` - Lightweight provider (keeps bare minimum to start)
 - `heroui-native/[component-name]` - Individual components
 - `heroui-native/portal` - Portal utilities
+- `heroui-native/toast` - Toast provider and utilities
 - `heroui-native/utils` - Utility functions
 - `heroui-native/hooks` - Custom hooks
 
 <Callout type="warning">
   **Important**: To keep the bundle size under control, you must follow the pattern with granular imports consistently. Even one general import from `heroui-native` will break this optimization strategy.
 </Callout>
+
+> **Tip**: For even more control over your bundle, consider using [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider) — a lightweight provider that excludes `ToastProvider` and `PortalHost`, making dependencies like `react-native-screens`, `@gorhom/bottom-sheet`, and `react-native-svg` fully optional.
 
 ## What's Next?
 

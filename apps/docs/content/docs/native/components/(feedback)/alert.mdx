@@ -1,0 +1,276 @@
+---
+title: Alert
+description: Displays important messages and notifications to users with status indicators.
+icon: new
+links:
+  source_native: alert/alert.tsx
+  styles_native: alert/alert.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Alert } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Alert>
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>...</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+- **Alert**: Main container with `role="alert"` and status-based styling. Provides status context to sub-components via a primitive context.
+- **Alert.Indicator**: Renders a status-appropriate icon by default. Accepts custom children to override the default icon. Supports `iconProps` for customising size and color.
+- **Alert.Content**: Wrapper for the title and description. Provides layout structure for text content.
+- **Alert.Title**: Heading text with status-based color. Connected to root via `aria-labelledby`.
+- **Alert.Description**: Body text rendered with muted color. Connected to root via `aria-describedby`.
+
+## Usage
+
+### Basic Usage
+
+The Alert component uses compound parts to display a notification with an icon, title, and description.
+
+```tsx
+<Alert>
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>New features available</Alert.Title>
+    <Alert.Description>
+      Check out our latest updates including dark mode support and improved
+      accessibility features.
+    </Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+### Status Variants
+
+Set the `status` prop to control the icon and title color. Available statuses are `default`, `accent`, `success`, `warning`, and `danger`.
+
+```tsx
+<Alert status="success">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>Success</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+
+<Alert status="warning">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>Scheduled maintenance</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+
+<Alert status="danger">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>Unable to connect</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+### Title Only
+
+Omit `Alert.Description` for a compact single-line alert.
+
+```tsx
+<Alert status="success" className="items-center">
+  <Alert.Indicator className="pt-0" />
+  <Alert.Content>
+    <Alert.Title>Profile updated successfully</Alert.Title>
+  </Alert.Content>
+</Alert>
+```
+
+### With Action Buttons
+
+Place additional elements like buttons alongside the content.
+
+```tsx
+<Alert status="accent">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>Update available</Alert.Title>
+    <Alert.Description>
+      A new version of the application is available.
+    </Alert.Description>
+  </Alert.Content>
+  <Button size="sm" variant="primary">
+    Refresh
+  </Button>
+</Alert>
+```
+
+### Custom Indicator
+
+Replace the default status icon by passing custom children to `Alert.Indicator`.
+
+```tsx
+<Alert status="accent">
+  <Alert.Indicator>
+    <Spinner>
+      <Spinner.Indicator iconProps={{ width: 20, height: 20 }} />
+    </Spinner>
+  </Alert.Indicator>
+  <Alert.Content>
+    <Alert.Title>Processing your request</Alert.Title>
+    <Alert.Description>Please wait while we sync your data.</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+### Custom Styling
+
+Apply custom styles using the `className` prop on the root and compound parts.
+
+```tsx
+<Alert className="bg-accent/10 rounded-xl">
+  <Alert.Indicator className="pt-1" />
+  <Alert.Content className="gap-1">
+    <Alert.Title className="text-lg">...</Alert.Title>
+    <Alert.Description className="text-base">...</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+## Example
+
+```tsx
+import { Alert, Button, CloseButton } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function AlertExample() {
+  return (
+    <View className="w-full gap-4">
+      <Alert status="accent">
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>Update available</Alert.Title>
+          <Alert.Description>
+            A new version of the application is available. Please refresh to get
+            the latest features and bug fixes.
+          </Alert.Description>
+        </Alert.Content>
+        <Button size="sm" variant="primary">
+          Refresh
+        </Button>
+      </Alert>
+
+      <Alert status="danger">
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>Unable to connect to server</Alert.Title>
+          <Alert.Description>
+            Unable to connect to the server. Check your internet connection and
+            try again.
+          </Alert.Description>
+        </Alert.Content>
+        <Button size="sm" variant="danger">
+          Retry
+        </Button>
+      </Alert>
+
+      <Alert status="success" className="items-center">
+        <Alert.Indicator className="pt-0" />
+        <Alert.Content>
+          <Alert.Title>Profile updated successfully</Alert.Title>
+        </Alert.Content>
+        <CloseButton />
+      </Alert>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/alert.tsx>).
+
+## API Reference
+
+### Alert
+
+| prop           | type                                                          | default     | description                                                       |
+| -------------- | ------------------------------------------------------------- | ----------- | ----------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                                             | -           | Children elements to render inside the alert                      |
+| `status`       | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Status controlling the icon and color treatment                   |
+| `id`           | `string \| number`                                            | -           | Unique identifier for the alert. Auto-generated when not provided |
+| `className`    | `string`                                                      | -           | Additional CSS classes                                            |
+| `style`        | `ViewStyle`                                                   | -           | Additional styles applied to the root container                   |
+| `...ViewProps` | `ViewProps`                                                   | -           | All standard React Native View props are supported                |
+
+### Alert.Indicator
+
+| prop           | type              | default | description                                                        |
+| -------------- | ----------------- | ------- | ------------------------------------------------------------------ |
+| `children`     | `React.ReactNode` | -       | Custom children to render instead of the default status icon       |
+| `className`    | `string`          | -       | Additional CSS classes                                             |
+| `iconProps`    | `AlertIconProps`  | -       | Props passed to the default status icon (size and color overrides) |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported                 |
+
+#### AlertIconProps
+
+| prop    | type     | default      | description            |
+| ------- | -------- | ------------ | ---------------------- |
+| `size`  | `number` | `18`         | Icon size in pixels    |
+| `color` | `string` | status color | Icon color as a string |
+
+### Alert.Content
+
+| prop           | type              | default | description                                                     |
+| -------------- | ----------------- | ------- | --------------------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Children elements (typically Alert.Title and Alert.Description) |
+| `className`    | `string`          | -       | Additional CSS classes                                          |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported              |
+
+### Alert.Title
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Title text content                                 |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported |
+
+### Alert.Description
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Description text content                           |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported |
+
+## Hooks
+
+### useAlert
+
+Hook to access the alert root context. Must be used within an `Alert` component.
+
+```tsx
+import { useAlert } from 'heroui-native';
+
+const { status, nativeID } = useAlert();
+```
+
+#### Returns
+
+| property   | type                                                          | description                                                  |
+| ---------- | ------------------------------------------------------------- | ------------------------------------------------------------ |
+| `status`   | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | Current alert status for sub-component styling               |
+| `nativeID` | `string`                                                      | Unique identifier used for accessibility and ARIA attributes |
+
+

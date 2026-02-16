@@ -644,6 +644,10 @@ export const demos: Record<string, DemoItem> = {
     component: AutocompleteDemos.WithDisabledOptions,
     file: "autocomplete/with-disabled-options.tsx",
   },
+  "autocomplete-allows-empty-collection": {
+    component: AutocompleteDemos.AllowsEmptyCollection,
+    file: "autocomplete/allows-empty-collection.tsx",
+  },
   "autocomplete-custom-indicator": {
     component: AutocompleteDemos.CustomIndicator,
     file: "autocomplete/custom-indicator.tsx",

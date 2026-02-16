@@ -110,9 +110,15 @@ export default function CustomSearchDialog(props: SharedProps) {
   const searchMap = useMemo(() => {
     const map = new Map<string, Item>();
     const tagPrefix = selectedTag === "web" ? "/docs/react/" : "/docs/native/";
+    const releasePrefix =
+      selectedTag === "web" ? "/docs/react/releases/" : "/docs/native/releases/";
 
     for (const page of allPages) {
-      if (page.url?.startsWith(tagPrefix) && typeof page.name === "string") {
+      if (
+        page.url?.startsWith(tagPrefix) &&
+        !page.url.startsWith(releasePrefix) &&
+        typeof page.name === "string"
+      ) {
         map.set(page.name.toLowerCase(), page);
       }
     }
@@ -173,6 +179,16 @@ export default function CustomSearchDialog(props: SharedProps) {
     }
   }
 
+  const releasesPath = useMemo(() => {
+    return `/docs/${selectedTag === "web" ? "react" : "native"}/releases`;
+  }, [selectedTag]);
+
+  const queryData = useMemo(() => {
+    if (!query.data || query.data === "empty") return null;
+
+    return query.data.filter((item) => !item.url.startsWith(releasesPath));
+  }, [query.data, releasesPath]);
+
   return (
     <SearchDialog
       isLoading={query.isLoading}
@@ -212,10 +228,10 @@ export default function CustomSearchDialog(props: SharedProps) {
               ? defaultSuggestions.length > 0
                 ? defaultSuggestions
                 : null
-              : query.data !== "empty" || pageTreeAction
+              : queryData || pageTreeAction
                 ? [
                     ...(pageTreeAction ? [pageTreeAction] : []),
-                    ...(Array.isArray(query.data) ? query.data : []),
+                    ...(Array.isArray(queryData) ? queryData : []),
                   ]
                 : null
           }

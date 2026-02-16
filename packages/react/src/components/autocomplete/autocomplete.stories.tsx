@@ -73,7 +73,7 @@ export const Default: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {items.map((item) => (
                 <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                   {item.name}
@@ -125,7 +125,7 @@ export const WithClearButton: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {items.map((item) => (
                 <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                   {item.name}
@@ -190,7 +190,7 @@ export const WithOnClearCallback: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {items.map((item) => (
                   <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                     {item.name}
@@ -272,7 +272,7 @@ export const Variants: Story = {
                       <SearchField.ClearButton />
                     </SearchField.Group>
                   </SearchField>
-                  <ListBox>
+                  <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                     {items.map((item) => (
                       <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                         {item.name}
@@ -306,7 +306,7 @@ export const Variants: Story = {
                       <SearchField.ClearButton />
                     </SearchField.Group>
                   </SearchField>
-                  <ListBox>
+                  <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                     {items.map((item) => (
                       <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                         {item.name}
@@ -570,7 +570,7 @@ export const FullWidth: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {items.map((item) => (
                   <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                     {item.name}
@@ -623,7 +623,7 @@ export const WithDescription: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {items.map((item) => (
                 <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                   {item.name}
@@ -667,7 +667,7 @@ export const WithSections: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               <ListBox.Section>
                 <Header>North America</Header>
                 <ListBox.Item id="usa" textValue="United States">
@@ -764,7 +764,7 @@ export const WithDisabledOptions: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               <ListBox.Item id="dog" textValue="Dog">
                 Dog
                 <ListBox.ItemIndicator />
@@ -836,7 +836,7 @@ export const CustomIndicator: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {items.map((item) => (
                 <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                   {item.name}
@@ -910,7 +910,7 @@ export const Required: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {states.map((state) => (
                   <ListBox.Item key={state.id} id={state.id} textValue={state.name}>
                     {state.name}
@@ -944,7 +944,7 @@ export const Required: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {countries.map((country) => (
                   <ListBox.Item key={country.id} id={country.id} textValue={country.name}>
                     {country.name}
@@ -1002,7 +1002,7 @@ export const Controlled: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {states.map((state) => (
                   <ListBox.Item key={state.id} id={state.id} textValue={state.name}>
                     {state.name}
@@ -1057,7 +1057,7 @@ export const ControlledOpenState: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {items.map((item) => (
                   <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                     {item.name}
@@ -1185,7 +1185,7 @@ export const Disabled: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {items.map((item) => (
                   <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                     {item.name}
@@ -1218,7 +1218,7 @@ export const Disabled: Story = {
                   <SearchField.ClearButton />
                 </SearchField.Group>
               </SearchField>
-              <ListBox>
+              <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
                 {countries.map((country) => (
                   <ListBox.Item key={country.id} id={country.id} textValue={country.name}>
                     {country.name}
@@ -1328,7 +1328,7 @@ export const UserSelection: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {users.map((user) => (
                 <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
                   <Avatar size="sm">
@@ -1453,7 +1453,7 @@ export const UserSelectionMultiple: Story = {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {users.map((user) => (
                 <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
                   <Avatar size="sm">
