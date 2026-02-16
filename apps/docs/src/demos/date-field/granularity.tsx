@@ -3,7 +3,7 @@
 import type {DateValue} from "@internationalized/date";
 
 import {CircleQuestion} from "@gravity-ui/icons";
-import {DateField, DateInputGroup, Label, ListBox, Select, Tooltip} from "@heroui/react";
+import {DateField, Label, ListBox, Select, Tooltip} from "@heroui/react";
 import {parseDate, parseZonedDateTime} from "@internationalized/date";
 import {useState} from "react";
 
@@ -36,11 +36,9 @@ export function Granularity() {
         name="granularity-date"
       >
         <Label>Appointment Date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+        <DateField.Group>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
       </DateField>
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">

@@ -1,7 +1,7 @@
 ---
 title: ColorField
 description: Color input field with labels, descriptions, and validation built on React Aria ColorField
-icon: new
+icon: updated
 links:
   rac: ColorField
   source: color-field/color-field.tsx
@@ -22,17 +22,17 @@ import { ColorField, parseColor } from '@heroui/react';
 ### Anatomy
 
 ```tsx
-import {ColorField, Label, ColorInputGroup, ColorSwatch, Description, FieldError, parseColor} from '@heroui/react';
+import {ColorField, Label, ColorSwatch, Description, FieldError, parseColor} from '@heroui/react';
 
 export default () => (
   <ColorField>
     <Label />
-    <ColorInputGroup>
-      <ColorInputGroup.Prefix>
+    <ColorField.Group>
+      <ColorField.Prefix>
         <ColorSwatch color="#000000" />
-      </ColorInputGroup.Prefix>
-      <ColorInputGroup.Input />
-    </ColorInputGroup>
+      </ColorField.Prefix>
+      <ColorField.Input />
+    </ColorField.Group>
     <Description />
     <FieldError />
   </ColorField>
@@ -77,7 +77,7 @@ Control the value to synchronize with other components or state management.
 
 ### Variants
 
-The ColorInputGroup component supports two visual variants:
+The ColorField.Group component supports two visual variants:
 
 - **`primary`** (default) - Standard styling with shadow, suitable for most use cases
 - **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
@@ -86,7 +86,7 @@ The ColorInputGroup component supports two visual variants:
 
 ### On Surface
 
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on ColorInputGroup to apply the lower emphasis variant suitable for surface backgrounds.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on ColorField.Group to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="color-field-on-surface" />
 
@@ -103,7 +103,7 @@ Complete form example with validation and submission handling.
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {ColorField, Label, ColorInputGroup, ColorSwatch, Description} from '@heroui/react';
+import {ColorField, Label, ColorSwatch, Description} from '@heroui/react';
 
 function CustomColorField() {
   return (
@@ -111,12 +111,12 @@ function CustomColorField() {
       <Label className="text-sm font-semibold text-default-700">
         Brand Color
       </Label>
-      <ColorInputGroup className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <ColorInputGroup.Prefix>
+      <ColorField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
+        <ColorField.Prefix>
           <ColorSwatch color="#3B82F6" />
-        </ColorInputGroup.Prefix>
-        <ColorInputGroup.Input />
-      </ColorInputGroup>
+        </ColorField.Prefix>
+        <ColorField.Input />
+      </ColorField.Group>
       <Description className="text-xs text-default-500">
         Select your brand's primary color.
       </Description>
@@ -156,7 +156,7 @@ ColorField has minimal default styling. Override the `.color-field` class to cus
 
 - `.color-field` – Root container with minimal styling (`flex flex-col gap-1`)
 
-> **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options. ColorInputGroup styling is documented below in the API Reference section.
+> **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options. ColorField.Group styling is documented below in the API Reference section.
 
 ### Interactive States
 
@@ -177,7 +177,7 @@ ColorField inherits all props from React Aria's [ColorField](https://react-aria.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode \| (values: ColorFieldRenderProps) => React.ReactNode` | - | Child components (Label, ColorInputGroup, etc.) or render function. |
+| `children` | `React.ReactNode \| (values: ColorFieldRenderProps) => React.ReactNode` | - | Child components (Label, ColorField.Group, etc.) or render function. |
 | `className` | `string \| (values: ColorFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: ColorFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the color field should take full width of its container |
@@ -236,7 +236,9 @@ ColorField inherits all props from React Aria's [ColorField](https://react-aria.
 ColorField works with these separate components that should be imported and used directly:
 
 - **Label** - Field label component from `@heroui/react`
-- **ColorInputGroup** - Color input component from `@heroui/react` (documented below)
+- **ColorField.Group** - Color input group component (documented below)
+- **ColorField.Input** - Input element within ColorField.Group
+- **ColorField.Prefix** / **ColorField.Suffix** - Prefix and suffix slots for the input group
 - **ColorSwatch** - Color preview component from `@heroui/react`
 - **Description** - Helper text component from `@heroui/react`
 - **FieldError** - Validation error message from `@heroui/react`
@@ -244,7 +246,7 @@ ColorField works with these separate components that should be imported and used
 Each of these components has its own props API. Use them directly within ColorField for composition:
 
 ```tsx
-import {ColorField, Label, ColorInputGroup, ColorSwatch, Description, FieldError, parseColor} from '@heroui/react';
+import {ColorField, Label, ColorSwatch, Description, FieldError, parseColor} from '@heroui/react';
 
 <ColorField
   isRequired
@@ -253,12 +255,12 @@ import {ColorField, Label, ColorInputGroup, ColorSwatch, Description, FieldError
   onChange={setColor}
 >
   <Label>Brand Color</Label>
-  <ColorInputGroup>
-    <ColorInputGroup.Prefix>
+  <ColorField.Group>
+    <ColorField.Prefix>
       <ColorSwatch color={color?.toString("hex") || "#E4E4E7"} />
-    </ColorInputGroup.Prefix>
-    <ColorInputGroup.Input />
-  </ColorInputGroup>
+    </ColorField.Prefix>
+    <ColorField.Input />
+  </ColorField.Group>
   <Description>Select your brand's primary color.</Description>
   <FieldError>Please enter a valid color.</FieldError>
 </ColorField>
@@ -300,9 +302,9 @@ When using render props with `className`, `style`, or `children`, these values a
 | `isFocusWithin` | `boolean` | Whether any child element is focused. |
 | `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
 
-### ColorInputGroup Props
+### ColorField.Group Props
 
-ColorInputGroup accepts all props from React Aria's `Group` component plus the following:
+ColorField.Group accepts all props from React Aria's `Group` component plus the following:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -310,34 +312,34 @@ ColorInputGroup accepts all props from React Aria's `Group` component plus the f
 | `fullWidth` | `boolean` | `false` | Whether the color input group should take full width of its container |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
-### ColorInputGroup.Input Props
+### ColorField.Input Props
 
-ColorInputGroup.Input accepts all props from React Aria's `Input` component plus the following:
+ColorField.Input accepts all props from React Aria's `Input` component plus the following:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `placeholder` | `string` | - | Placeholder text shown when empty. |
 
-### ColorInputGroup.Prefix Props
+### ColorField.Prefix Props
 
-ColorInputGroup.Prefix accepts standard HTML `div` attributes:
+ColorField.Prefix accepts standard HTML `div` attributes:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the prefix slot. |
 
-### ColorInputGroup.Suffix Props
+### ColorField.Suffix Props
 
-ColorInputGroup.Suffix accepts standard HTML `div` attributes:
+ColorField.Suffix accepts standard HTML `div` attributes:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the suffix slot. |
 
-## ColorInputGroup Styling
+## ColorField.Group Styling
 
 ### Customizing the component classes
 
@@ -379,14 +381,14 @@ The base classes power every instance. Override them once with `@layer component
 }
 ```
 
-### ColorInputGroup CSS Classes
+### ColorField.Group CSS Classes
 
 - `.color-input-group` – Root container styling
 - `.color-input-group__input` – Input wrapper styling
 - `.color-input-group__prefix` – Prefix element styling
 - `.color-input-group__suffix` – Suffix element styling
 
-### ColorInputGroup Interactive States
+### ColorField.Group Interactive States
 
 - **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus Within**: `[data-focus-within="true"]` or `:focus-within`

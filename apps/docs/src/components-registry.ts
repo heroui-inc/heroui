@@ -63,6 +63,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "buttongroup",
     title: "ButtonGroup",
   },
+  calendar: {
+    category: "date-time",
+    description: "Interactive month grid for selecting dates",
+    href: "/docs/components/calendar",
+    name: "calendar",
+    title: "Calendar",
+  },
   card: {
     category: "layout",
     description: "Content container with header, body, and footer",
@@ -148,11 +155,18 @@ const componentsMap: Record<string, ComponentInfo> = {
     title: "ComboBox",
   },
   datefield: {
-    category: "forms",
+    category: "date-time",
     description: "Date input field with labels, descriptions, and validation",
     href: "/docs/components/date-field",
     name: "datefield",
     title: "DateField",
+  },
+  datepicker: {
+    category: "date-time",
+    description: "Composable date picker with date field trigger and calendar popover",
+    href: "/docs/components/date-picker",
+    name: "datepicker",
+    title: "DatePicker",
   },
   description: {
     category: "forms",
@@ -379,7 +393,7 @@ const componentsMap: Record<string, ComponentInfo> = {
     title: "TextField",
   },
   timefield: {
-    category: "forms",
+    category: "date-time",
     description: "Time input field with labels, descriptions, and validation",
     href: "/docs/components/time-field",
     name: "timefield",
@@ -432,6 +446,7 @@ const componentRelationships: Record<string, string[]> = {
     "toast",
   ],
   buttongroup: ["button", "dropdown", "chip"],
+  calendar: ["datefield", "datepicker", "timefield", "inputgroup", "form"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
   checkboxgroup: [
@@ -481,7 +496,8 @@ const componentRelationships: Record<string, string[]> = {
     "spinner",
     "button",
   ],
-  datefield: ["label", "fielderror", "description", "form", "surface"],
+  datefield: ["datepicker", "calendar", "label", "fielderror", "description", "form", "surface"],
+  datepicker: ["calendar", "datefield", "timefield", "inputgroup", "form", "popover"],
   description: [
     "textfield",
     "input",
@@ -508,6 +524,7 @@ const componentRelationships: Record<string, string[]> = {
     "form",
     "numberfield",
     "datefield",
+    "datepicker",
     "timefield",
   ],
   fieldset: ["textfield", "label", "checkboxgroup", "surface"],
@@ -529,6 +546,7 @@ const componentRelationships: Record<string, string[]> = {
     "inputotp",
     "numberfield",
     "datefield",
+    "datepicker",
     "timefield",
   ],
   input: [
@@ -619,6 +637,7 @@ const componentRelationships: Record<string, string[]> = {
     "textarea",
     "numberfield",
     "datefield",
+    "datepicker",
     "timefield",
     "card",
     "listbox",

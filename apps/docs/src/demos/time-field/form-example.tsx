@@ -3,15 +3,7 @@
 import type {Time} from "@internationalized/date";
 
 import {Clock} from "@gravity-ui/icons";
-import {
-  Button,
-  DateInputGroup,
-  Description,
-  FieldError,
-  Form,
-  Label,
-  TimeField,
-} from "@heroui/react";
+import {Button, Description, FieldError, Form, Label, TimeField} from "@heroui/react";
 import {parseTime} from "@internationalized/date";
 import {useState} from "react";
 
@@ -52,14 +44,12 @@ export function FormExample() {
         onChange={setValue}
       >
         <Label>Appointment time</Label>
-        <DateInputGroup>
-          <DateInputGroup.Prefix>
+        <TimeField.Group>
+          <TimeField.Prefix>
             <Clock className="size-4 text-muted" />
-          </DateInputGroup.Prefix>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+          </TimeField.Prefix>
+          <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+        </TimeField.Group>
         {isInvalid ? (
           <FieldError>Time must be between 9:00 AM and 5:00 PM</FieldError>
         ) : (

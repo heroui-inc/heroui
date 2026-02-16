@@ -9,6 +9,7 @@ import * as AvatarDemos from "./avatar";
 import * as BreadcrumbsDemos from "./breadcrumbs";
 import * as ButtonDemos from "./button";
 import * as ButtonGroupDemos from "./button-group";
+import * as CalendarDemos from "./calendar";
 import * as CardDemos from "./card";
 import * as CheckboxDemos from "./checkbox";
 import * as CheckboxGroupDemos from "./checkbox-group";
@@ -22,6 +23,7 @@ import * as ColorSwatchDemos from "./color-swatch";
 import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combo-box";
 import * as DateFieldDemos from "./date-field";
+import * as DatePickerDemos from "./date-picker";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -316,6 +318,67 @@ export const demos: Record<string, DemoItem> = {
   "card-with-images": {
     component: CardDemos.WithImages,
     file: "card/with-images.tsx",
+  },
+  // Calendar demos
+  "calendar-basic": {
+    component: CalendarDemos.Basic,
+    file: "calendar/basic.tsx",
+  },
+  "calendar-custom-styles": {
+    component: CalendarDemos.CustomStyles,
+    file: "calendar/custom-styles.tsx",
+  },
+  "calendar-default-value": {
+    component: CalendarDemos.DefaultValue,
+    file: "calendar/default-value.tsx",
+  },
+  "calendar-controlled": {
+    component: CalendarDemos.Controlled,
+    file: "calendar/controlled.tsx",
+  },
+  "calendar-min-max-dates": {
+    component: CalendarDemos.MinMaxDates,
+    file: "calendar/min-max-dates.tsx",
+  },
+  "calendar-unavailable-dates": {
+    component: CalendarDemos.UnavailableDates,
+    file: "calendar/unavailable-dates.tsx",
+  },
+  "calendar-disabled": {
+    component: CalendarDemos.Disabled,
+    file: "calendar/disabled.tsx",
+  },
+  "calendar-read-only": {
+    component: CalendarDemos.ReadOnly,
+    file: "calendar/read-only.tsx",
+  },
+  "calendar-focused-value": {
+    component: CalendarDemos.FocusedValue,
+    file: "calendar/focused-value.tsx",
+  },
+  "calendar-with-indicators": {
+    component: CalendarDemos.WithIndicators,
+    file: "calendar/with-indicators.tsx",
+  },
+  "calendar-multiple-months": {
+    component: CalendarDemos.MultipleMonths,
+    file: "calendar/multiple-months.tsx",
+  },
+  "calendar-year-picker": {
+    component: CalendarDemos.YearPicker,
+    file: "calendar/year-picker.tsx",
+  },
+  "calendar-international-calendar": {
+    component: CalendarDemos.InternationalCalendar,
+    file: "calendar/international-calendar.tsx",
+  },
+  "calendar-booking-calendar": {
+    component: CalendarDemos.BookingCalendar,
+    file: "calendar/booking-calendar.tsx",
+  },
+  "calendar-custom-icons": {
+    component: CalendarDemos.CustomIcons,
+    file: "calendar/custom-icons.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {
@@ -944,6 +1007,39 @@ export const demos: Record<string, DemoItem> = {
   "date-field-variants": {
     component: DateFieldDemos.Variants,
     file: "date-field/variants.tsx",
+  },
+  // DatePicker demos
+  "date-picker-basic": {
+    component: DatePickerDemos.Basic,
+    file: "date-picker/basic.tsx",
+  },
+  "date-picker-controlled": {
+    component: DatePickerDemos.Controlled,
+    file: "date-picker/controlled.tsx",
+  },
+  "date-picker-disabled": {
+    component: DatePickerDemos.Disabled,
+    file: "date-picker/disabled.tsx",
+  },
+  "date-picker-format-options": {
+    component: DatePickerDemos.FormatOptions,
+    file: "date-picker/format-options.tsx",
+  },
+  "date-picker-form-example": {
+    component: DatePickerDemos.FormExample,
+    file: "date-picker/form-example.tsx",
+  },
+  "date-picker-with-custom-indicator": {
+    component: DatePickerDemos.WithCustomIndicator,
+    file: "date-picker/with-custom-indicator.tsx",
+  },
+  "date-picker-with-validation": {
+    component: DatePickerDemos.WithValidation,
+    file: "date-picker/with-validation.tsx",
+  },
+  "date-picker-international-calendar": {
+    component: DatePickerDemos.InternationalCalendar,
+    file: "date-picker/international-calendar.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {

@@ -15,6 +15,7 @@
     "(navigation)/breadcrumbs",
     "(buttons)/button",
     "(buttons)/button-group",
+    "(date-and-time)/calendar",
     "(layout)/card",
     "(forms)/checkbox",
     "(forms)/checkbox-group",
@@ -27,7 +28,8 @@
     "(colors)/color-swatch-picker",
     "(colors)/color-picker",
     "(pickers)/combo-box",
-    "(forms)/date-field",
+    "(date-and-time)/date-field",
+    "(date-and-time)/date-picker",
     "(forms)/description",
     "(navigation)/disclosure",
     "(navigation)/disclosure-group",
@@ -60,7 +62,7 @@
     "(collections)/tag-group",
     "(forms)/text-field",
     "(forms)/text-area",
-    "(forms)/time-field",
+    "(date-and-time)/time-field",
     "(overlays)/toast",
     "(overlays)/tooltip"
   ]
