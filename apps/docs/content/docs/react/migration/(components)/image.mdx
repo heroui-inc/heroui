@@ -101,6 +101,54 @@ If you're using Next.js, use the optimized `Image` component:
   </Tab>
 </Tabs>
 
+### With Zoom Effect
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image isZoomed src="..." alt="..." />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="relative overflow-hidden rounded-lg">
+      <img
+        src="..."
+        alt="..."
+        className="object-cover transition-transform duration-300 hover:scale-125"
+      />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### With Blur Effect
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image isBlurred src="..." alt="..." />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="relative">
+      <img
+        src="..."
+        alt="..."
+        className="relative z-10"
+      />
+      <img
+        src="..."
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 z-0 h-full w-full scale-105 object-cover blur-lg opacity-30 saturate-150"
+      />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
 ### With Fallback Image
 
 <Tabs items={["v2", "v3"]}>
@@ -139,7 +187,302 @@ If you're using Next.js, use the optimized `Image` component:
   </Tab>
 </Tabs>
 
-## Breaking Changes Summary
+### With Loading Skeleton
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image
+      src="https://example.com/image.jpg"
+      alt="Example"
+      disableSkeleton={false}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    function ImageWithSkeleton({ src, alt, ...props }) {
+      const [isLoading, setIsLoading] = useState(true);
+      const [hasError, setHasError] = useState(false);
+
+      return (
+        <div className="relative overflow-hidden rounded-lg bg-default-200">
+          {isLoading && (
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-default-300 to-transparent" />
+          )}
+          <img
+            src={src}
+            alt={alt}
+            className={`transition-opacity duration-300 ${
+              isLoading ? "opacity-0" : "opacity-100"
+            }`}
+            onLoad={() => setIsLoading(false)}
+            onError={() => {
+              setIsLoading(false);
+              setHasError(true);
+            }}
+            {...props}
+          />
+        </div>
+      );
+    }
+
+    <ImageWithSkeleton src="https://example.com/image.jpg" alt="Example" />
+    ```
+  </Tab>
+</Tabs>
+
+### Combined Features
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image
+      src="https://example.com/image.jpg"
+      alt="Example"
+      radius="lg"
+      shadow="md"
+      isZoomed
+      isBlurred
+      width={400}
+      height={300}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="relative overflow-hidden rounded-lg shadow-md">
+      <img
+        src="https://example.com/image.jpg"
+        alt="Example"
+        width={400}
+        height={300}
+        className="relative z-10 object-cover transition-transform duration-300 hover:scale-125"
+      />
+      <img
+        src="https://example.com/image.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 z-0 h-full w-full scale-105 object-cover blur-lg opacity-30 saturate-150"
+      />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## Creating a Reusable Image Component (Optional)
+
+If you frequently use images with similar features, you can create a reusable component:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Image } from "@heroui/react";
+
+    <Image
+      src="..."
+      radius="lg"
+      shadow="md"
+      isZoomed
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { cn } from "@/lib/utils"; // or your cn utility
+
+    interface CustomImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+      radius?: "none" | "sm" | "md" | "lg" | "full";
+      shadow?: "none" | "sm" | "md" | "lg";
+      isZoomed?: boolean;
+      isBlurred?: boolean;
+      fallbackSrc?: string;
+    }
+
+    const radiusClasses = {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      full: "rounded-full",
+    };
+
+    const shadowClasses = {
+      none: "shadow-none",
+      sm: "shadow-sm",
+      md: "shadow-md",
+      lg: "shadow-lg",
+    };
+
+    export function CustomImage({
+      src,
+      alt,
+      className,
+      radius = "lg",
+      shadow = "none",
+      isZoomed = false,
+      isBlurred = false,
+      fallbackSrc,
+      onError,
+      ...props
+    }: CustomImageProps) {
+      const [imgSrc, setImgSrc] = useState(src);
+      const [isLoading, setIsLoading] = useState(true);
+
+      const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        if (fallbackSrc && imgSrc !== fallbackSrc) {
+          setImgSrc(fallbackSrc);
+        }
+        onError?.(e);
+      };
+
+      const imageElement = (
+        <img
+          src={imgSrc}
+          alt={alt}
+          className={cn(
+            radiusClasses[radius],
+            shadowClasses[shadow],
+            isZoomed && "object-cover transition-transform duration-300 hover:scale-125",
+            isLoading && "opacity-0",
+            "transition-opacity duration-300",
+            className
+          )}
+          onLoad={() => setIsLoading(false)}
+          onError={handleError}
+          {...props}
+        />
+      );
+
+      if (isBlurred) {
+        return (
+          <div className={cn("relative", radiusClasses[radius], shadowClasses[shadow])}>
+            {imageElement}
+            <img
+              src={imgSrc}
+              alt=""
+              aria-hidden="true"
+              className={cn(
+                "absolute inset-0 z-0 h-full w-full scale-105 object-cover blur-lg opacity-30 saturate-150",
+                radiusClasses[radius]
+              )}
+            />
+          </div>
+        );
+      }
+
+      if (isZoomed || isLoading) {
+        return (
+          <div className={cn("relative overflow-hidden", radiusClasses[radius], shadowClasses[shadow])}>
+            {isLoading && (
+              <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-default-300 to-transparent" />
+            )}
+            {imageElement}
+          </div>
+        );
+      }
+
+      return imageElement;
+    }
+
+    // Usage
+    <CustomImage
+      src="..."
+      alt="Example"
+      radius="lg"
+      shadow="md"
+      isZoomed
+      isBlurred
+      fallbackSrc="/fallback.jpg"
+    />
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Example
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Image } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <Image
+            src="https://example.com/image1.jpg"
+            alt="Image 1"
+            width={300}
+            height={200}
+            radius="lg"
+            shadow="md"
+          />
+          <Image
+            src="https://example.com/image2.jpg"
+            alt="Image 2"
+            width={300}
+            height={200}
+            isZoomed
+            radius="lg"
+          />
+          <Image
+            src="https://example.com/image3.jpg"
+            alt="Image 3"
+            width={300}
+            height={200}
+            isBlurred
+            radius="full"
+          />
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <img
+            src="https://example.com/image1.jpg"
+            alt="Image 1"
+            width={300}
+            height={200}
+            className="rounded-lg shadow-md"
+          />
+          <div className="relative overflow-hidden rounded-lg">
+            <img
+              src="https://example.com/image2.jpg"
+              alt="Image 2"
+              width={300}
+              height={200}
+              className="object-cover transition-transform duration-300 hover:scale-125"
+            />
+          </div>
+          <div className="relative rounded-full">
+            <img
+              src="https://example.com/image3.jpg"
+              alt="Image 3"
+              width={300}
+              height={300}
+              className="relative z-10 rounded-full"
+            />
+            <img
+              src="https://example.com/image3.jpg"
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 z-0 h-full w-full scale-105 object-cover rounded-full blur-lg opacity-30 saturate-150"
+            />
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Breaking Changes Summary
 

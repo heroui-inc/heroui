@@ -178,6 +178,62 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Controlled
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Button>Open</Button>
+      <Popover.Content>
+        <Popover.Dialog>
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Trigger
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <PopoverTrigger>
+      <CustomButton>Custom</CustomButton>
+    </PopoverTrigger>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover.Trigger>
+      <CustomButton>Custom</CustomButton>
+    </Popover.Trigger>
+    ```
+  </Tab>
+</Tabs>
+
 ## Component Anatomy
 
 The v3 Popover follows this structure:

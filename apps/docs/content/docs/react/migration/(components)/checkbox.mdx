@@ -78,6 +78,68 @@ The following props are no longer available in v3:
 
 ## Migration Examples
 
+### Controlled Checkbox
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isSelected, setIsSelected] = useState(false);
+
+    <Checkbox isSelected={isSelected} onValueChange={setIsSelected}>
+      Subscribe
+    </Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Label } from "@heroui/react";
+
+    const [isSelected, setIsSelected] = useState(false);
+
+    <Checkbox id="subscribe" isSelected={isSelected} onChange={setIsSelected}>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="subscribe">Subscribe</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Checkbox with Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have built-in description support */}
+    <Checkbox defaultSelected>
+      Option
+    </Checkbox>
+    <p className="text-sm text-default-500">Description text</p>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Checkbox, Label, Description } from "@heroui/react";
+
+    <Checkbox id="option" defaultSelected>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+        <Description>Description text</Description>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
 ### CheckboxGroup
 
 <Tabs items={["v2", "v3"]}>
@@ -128,6 +190,43 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Colors and Sizes
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Colors */}
+    <Checkbox defaultSelected color="primary">Primary</Checkbox>
+    
+    {/* Sizes */}
+    <Checkbox defaultSelected size="md">Medium</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Colors - use Tailwind classes */}
+    <Checkbox defaultSelected id="primary">
+      <Checkbox.Control className="data-[selected=true]:bg-primary data-[selected=true]:border-primary">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="primary">Primary</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    
+    {/* Sizes - use Tailwind classes */}
+    <Checkbox defaultSelected id="medium">
+      <Checkbox.Control className="size-5">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="medium">Medium</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
 ### Custom Icon/Indicator
 
 <Tabs items={["v2", "v3"]}>
@@ -145,6 +244,28 @@ The following props are no longer available in v3:
         <Checkbox.Indicator>
           {({isSelected}) => isSelected ? <HeartIcon /> : null}
         </Checkbox.Indicator>
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### Indeterminate State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox isIndeterminate>Option</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox isIndeterminate id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
         <Label htmlFor="option">Option</Label>

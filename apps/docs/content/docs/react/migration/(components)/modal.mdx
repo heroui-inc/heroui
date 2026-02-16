@@ -228,6 +228,69 @@ The following props are no longer available in v3:
   </Tab>
 </Tabs>
 
+### Close Button
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Without close button */}
+    <Modal hideCloseButton>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    
+    {/* Custom close button */}
+    <Modal closeButton={<CustomCloseIcon />}>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Without close button - omit Modal.CloseTrigger */}
+    <Modal.Container>
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Heading>Title</Modal.Heading>
+        </Modal.Header>
+      </Modal.Dialog>
+    </Modal.Container>
+    
+    {/* Custom close button */}
+    <Modal.Container>
+      <Modal.Dialog>
+        <Modal.CloseTrigger>
+          <CustomCloseIcon />
+        </Modal.CloseTrigger>
+        {/* content */}
+      </Modal.Dialog>
+    </Modal.Container>
+    ```
+  </Tab>
+</Tabs>
+
+### With Icon and Heading
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ModalHeader className="flex flex-col gap-1">
+      <Icon />
+      Modal Title
+    </ModalHeader>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Modal.Header>
+      <Modal.Icon>
+        <Icon />
+      </Modal.Icon>
+      <Modal.Heading>Modal Title</Modal.Heading>
+    </Modal.Header>
+    ```
+  </Tab>
+</Tabs>
+
 ## Component Anatomy
 
 The v3 Modal follows this structure:
