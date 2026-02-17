@@ -1,19 +1,12 @@
 "use client";
 
 import {RangeCalendar} from "@heroui/react";
-import {getLocalTimeZone, today} from "@internationalized/date";
 import {I18nProvider} from "react-aria-components";
 
 export function InternationalCalendar() {
   return (
     <I18nProvider locale="hi-IN-u-ca-indian">
-      <RangeCalendar
-        aria-label="Trip dates"
-        defaultValue={{
-          end: today(getLocalTimeZone()).add({days: 7}),
-          start: today(getLocalTimeZone()),
-        }}
-      >
+      <RangeCalendar aria-label="Trip dates">
         <RangeCalendar.Header>
           <RangeCalendar.YearPickerTrigger>
             <RangeCalendar.YearPickerTriggerHeading />

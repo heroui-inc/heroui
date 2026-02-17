@@ -1,19 +1,11 @@
 "use client";
 
 import {Description, RangeCalendar} from "@heroui/react";
-import {getLocalTimeZone, today} from "@internationalized/date";
 
 export function Disabled() {
   return (
     <div className="flex flex-col items-center gap-4">
-      <RangeCalendar
-        isDisabled
-        aria-label="Trip dates"
-        defaultValue={{
-          end: today(getLocalTimeZone()).add({days: 4}),
-          start: today(getLocalTimeZone()),
-        }}
-      >
+      <RangeCalendar isDisabled aria-label="Trip dates">
         <RangeCalendar.Header>
           <RangeCalendar.Heading />
           <RangeCalendar.NavButton slot="previous" />
