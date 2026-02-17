@@ -1,11 +1,11 @@
 "use client";
 
-import type {CalendarVariants} from "@heroui/styles";
+import type {RangeCalendarVariants} from "@heroui/styles";
 import type {CalendarIdentifier} from "@internationalized/date";
 import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components";
 
-import {calendarVariants} from "@heroui/styles";
+import {rangeCalendarVariants} from "@heroui/styles";
 import {CalendarDate, DateFormatter, createCalendar} from "@internationalized/date";
 import {useControlledState} from "@react-stately/utils";
 import React, {createContext, useContext} from "react";
@@ -16,9 +16,9 @@ import {
   CalendarGridHeader as CalendarGridHeaderPrimitive,
   CalendarGrid as CalendarGridPrimitive,
   CalendarHeaderCell as CalendarHeaderCellPrimitive,
-  Calendar as CalendarPrimitive,
-  CalendarStateContext,
   Heading as HeadingPrimitive,
+  RangeCalendar as RangeCalendarPrimitive,
+  RangeCalendarStateContext,
   useLocale,
 } from "react-aria-components";
 
@@ -31,19 +31,19 @@ import {
 import {IconChevronLeft, IconChevronRight} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Context
+| * RangeCalendar Context
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarContext {
-  slots?: ReturnType<typeof calendarVariants>;
+interface RangeCalendarContext {
+  slots?: ReturnType<typeof rangeCalendarVariants>;
 }
 
-const CalendarContext = createContext<CalendarContext>({});
+const RangeCalendarContext = createContext<RangeCalendarContext>({});
 
-const CalendarYearPickerStateBridge = ({children}: {children: React.ReactNode}) => {
-  const state = React.useContext(CalendarStateContext);
+const RangeCalendarYearPickerStateBridge = ({children}: {children: React.ReactNode}) => {
+  const state = React.useContext(RangeCalendarStateContext);
 
   if (!state) {
-    throw new Error("Calendar year picker state must be used within <Calendar>.");
+    throw new Error("RangeCalendar year picker state must be used within <RangeCalendar>.");
   }
 
   const yearPickerStateValue = {
@@ -58,16 +58,16 @@ const CalendarYearPickerStateBridge = ({children}: {children: React.ReactNode}) 
 };
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Root
+| * RangeCalendar Root
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarRootProps<T extends DateValue = DateValue>
-  extends ComponentPropsWithRef<typeof CalendarPrimitive<T>>, CalendarVariants {
+interface RangeCalendarRootProps<T extends DateValue = DateValue>
+  extends ComponentPropsWithRef<typeof RangeCalendarPrimitive<T>>, RangeCalendarVariants {
   isYearPickerOpen?: boolean;
   onYearPickerOpenChange?: (isYearPickerOpen: boolean) => void;
   defaultYearPickerOpen?: boolean;
 }
 
-function CalendarRoot<T extends DateValue = DateValue>({
+function RangeCalendarRoot<T extends DateValue = DateValue>({
   children,
   className,
   defaultYearPickerOpen: defaultYearPickerOpenProp = false,
@@ -76,9 +76,9 @@ function CalendarRoot<T extends DateValue = DateValue>({
   minValue: minValueProp,
   onYearPickerOpenChange: onYearPickerOpenChangeProp,
   ...rest
-}: CalendarRootProps<T>) {
+}: RangeCalendarRootProps<T>) {
   const {locale} = useLocale();
-  const slots = React.useMemo(() => calendarVariants(), []);
+  const slots = React.useMemo(() => rangeCalendarVariants(), []);
   const calendarRef = React.useRef<HTMLDivElement>(null);
   const [isYearPickerOpen, setIsYearPickerOpen] = useControlledState(
     isYearPickerOpenProp,
@@ -105,48 +105,48 @@ function CalendarRoot<T extends DateValue = DateValue>({
   return (
     <YearPickerContext
       value={{
-        calendarGridSlot: "calendar-grid",
+        calendarGridSlot: "range-calendar-grid",
         isYearPickerOpen,
         setIsYearPickerOpen,
         calendarRef,
       }}
     >
-      <CalendarContext value={{slots}}>
-        <CalendarPrimitive
+      <RangeCalendarContext value={{slots}}>
+        <RangeCalendarPrimitive
           ref={calendarRef}
-          data-slot="calendar"
+          data-slot="range-calendar"
           maxValue={maxValue}
           minValue={minValue}
           {...rest}
           className={composeTwRenderProps(className, slots.base())}
         >
           {(values) => (
-            <CalendarYearPickerStateBridge>
+            <RangeCalendarYearPickerStateBridge>
               {typeof children === "function" ? children(values) : children}
-            </CalendarYearPickerStateBridge>
+            </RangeCalendarYearPickerStateBridge>
           )}
-        </CalendarPrimitive>
-      </CalendarContext>
+        </RangeCalendarPrimitive>
+      </RangeCalendarContext>
     </YearPickerContext>
   );
 }
 
-CalendarRoot.displayName = "HeroUI.Calendar";
+RangeCalendarRoot.displayName = "HeroUI.RangeCalendar";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Header
+| * RangeCalendar Header
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarHeaderProps extends ComponentPropsWithRef<"header"> {
+interface RangeCalendarHeaderProps extends ComponentPropsWithRef<"header"> {
   className?: string;
 }
 
-const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarHeader = ({children, className, ...props}: RangeCalendarHeaderProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <header
       className={composeSlotClassName(slots?.header, className)}
-      data-slot="calendar-header"
+      data-slot="range-calendar-header"
       {...props}
     >
       {children}
@@ -154,40 +154,45 @@ const CalendarHeader = ({children, className, ...props}: CalendarHeaderProps) =>
   );
 };
 
-CalendarHeader.displayName = "HeroUI.Calendar.Header";
+RangeCalendarHeader.displayName = "HeroUI.RangeCalendar.Header";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Heading
+| * RangeCalendar Heading
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
+interface RangeCalendarHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
-const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarHeading = ({className, ...props}: RangeCalendarHeadingProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <HeadingPrimitive
-      data-slot="calendar-heading"
+      data-slot="range-calendar-heading"
       {...props}
       className={composeSlotClassName(slots?.heading, className)}
     />
   );
 };
 
-CalendarHeading.displayName = "HeroUI.Calendar.Heading";
+RangeCalendarHeading.displayName = "HeroUI.RangeCalendar.Heading";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Nav Button
+| * RangeCalendar Nav Button
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarNavButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
+interface RangeCalendarNavButtonProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   slot?: "previous" | "next";
 }
 
-const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavButtonProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarNavButton = ({
+  children,
+  className,
+  slot,
+  ...props
+}: RangeCalendarNavButtonProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <ButtonPrimitive
-      data-slot="calendar-nav-button"
+      data-slot="range-calendar-nav-button"
       slot={slot}
       {...props}
       className={composeTwRenderProps(className, slots?.navButton())}
@@ -196,36 +201,36 @@ const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavBut
         (slot === "previous" ? (
           <IconChevronLeft
             className={slots?.navButtonIcon()}
-            data-slot="calendar-nav-button-icon"
+            data-slot="range-calendar-nav-button-icon"
           />
         ) : (
           <IconChevronRight
             className={slots?.navButtonIcon()}
-            data-slot="calendar-nav-button-icon"
+            data-slot="range-calendar-nav-button-icon"
           />
         ))}
     </ButtonPrimitive>
   );
 };
 
-CalendarNavButton.displayName = "HeroUI.Calendar.NavButton";
+RangeCalendarNavButton.displayName = "HeroUI.RangeCalendar.NavButton";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Grid
+| * RangeCalendar Grid
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarGridProps extends ComponentPropsWithRef<typeof CalendarGridPrimitive> {}
+interface RangeCalendarGridProps extends ComponentPropsWithRef<typeof CalendarGridPrimitive> {}
 
-const CalendarGrid = ({
+const RangeCalendarGrid = ({
   children,
   className,
   weekdayStyle = "short",
   ...props
-}: CalendarGridProps) => {
-  const {slots} = useContext(CalendarContext);
+}: RangeCalendarGridProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <CalendarGridPrimitive
-      data-slot="calendar-grid"
+      data-slot="range-calendar-grid"
       weekdayStyle={weekdayStyle}
       {...props}
       className={composeSlotClassName(slots?.grid, className)}
@@ -235,138 +240,155 @@ const CalendarGrid = ({
   );
 };
 
-CalendarGrid.displayName = "HeroUI.Calendar.Grid";
+RangeCalendarGrid.displayName = "HeroUI.RangeCalendar.Grid";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Grid Header
+| * RangeCalendar Grid Header
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarGridHeaderProps extends ComponentPropsWithRef<
+interface RangeCalendarGridHeaderProps extends ComponentPropsWithRef<
   typeof CalendarGridHeaderPrimitive
 > {}
 
-const CalendarGridHeader = ({className, ...props}: CalendarGridHeaderProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarGridHeader = ({className, ...props}: RangeCalendarGridHeaderProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <CalendarGridHeaderPrimitive
-      data-slot="calendar-grid-header"
+      data-slot="range-calendar-grid-header"
       {...props}
       className={composeSlotClassName(slots?.gridHeader, className)}
     />
   );
 };
 
-CalendarGridHeader.displayName = "HeroUI.Calendar.GridHeader";
+RangeCalendarGridHeader.displayName = "HeroUI.RangeCalendar.GridHeader";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Grid Body
+| * RangeCalendar Grid Body
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarGridBodyProps extends ComponentPropsWithRef<typeof CalendarGridBodyPrimitive> {}
+interface RangeCalendarGridBodyProps extends ComponentPropsWithRef<
+  typeof CalendarGridBodyPrimitive
+> {}
 
-const CalendarGridBody = ({className, ...props}: CalendarGridBodyProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarGridBody = ({className, ...props}: RangeCalendarGridBodyProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <CalendarGridBodyPrimitive
-      data-slot="calendar-grid-body"
+      data-slot="range-calendar-grid-body"
       {...props}
       className={composeSlotClassName(slots?.gridBody, className)}
     />
   );
 };
 
-CalendarGridBody.displayName = "HeroUI.Calendar.GridBody";
+RangeCalendarGridBody.displayName = "HeroUI.RangeCalendar.GridBody";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Header Cell
+| * RangeCalendar Header Cell
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarHeaderCellProps extends ComponentPropsWithRef<
+interface RangeCalendarHeaderCellProps extends ComponentPropsWithRef<
   typeof CalendarHeaderCellPrimitive
 > {}
 
-const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarHeaderCell = ({className, ...props}: RangeCalendarHeaderCellProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <CalendarHeaderCellPrimitive
-      data-slot="calendar-header-cell"
+      data-slot="range-calendar-header-cell"
       {...props}
       className={composeSlotClassName(slots?.headerCell, className)}
     />
   );
 };
 
-CalendarHeaderCell.displayName = "HeroUI.Calendar.HeaderCell";
+RangeCalendarHeaderCell.displayName = "HeroUI.RangeCalendar.HeaderCell";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Cell
+| * RangeCalendar Cell
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarCellProps extends ComponentPropsWithRef<typeof CalendarCellPrimitive> {}
+interface RangeCalendarCellProps extends ComponentPropsWithRef<typeof CalendarCellPrimitive> {}
 
-const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarCell = ({children, className, ...props}: RangeCalendarCellProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <CalendarCellPrimitive
-      data-slot="calendar-cell"
+      data-slot="range-calendar-cell"
       {...props}
       className={composeTwRenderProps(className, slots?.cell())}
     >
       {(values) => {
-        const {formattedDate} = values;
+        const {formattedDate, isDisabled, isHovered, isPressed, isSelectionEnd, isSelectionStart} =
+          values;
 
-        return typeof children === "function" ? children(values) : children || formattedDate;
+        const content =
+          typeof children === "function" ? children(values) : children || formattedDate;
+
+        return (
+          <span
+            className="range-calendar__cell-button"
+            data-disabled={isDisabled || undefined}
+            data-hovered={isHovered || undefined}
+            data-pressed={isPressed || undefined}
+            data-selected={isSelectionStart || isSelectionEnd || undefined}
+            data-slot="range-calendar-cell-button"
+          >
+            {content}
+          </span>
+        );
       }}
     </CalendarCellPrimitive>
   );
 };
 
-CalendarCell.displayName = "HeroUI.Calendar.Cell";
+RangeCalendarCell.displayName = "HeroUI.RangeCalendar.Cell";
 
 /* -------------------------------------------------------------------------------------------------
-| * Calendar Cell Indicator
+| * RangeCalendar Cell Indicator
 | * -----------------------------------------------------------------------------------------------*/
-interface CalendarCellIndicatorProps extends ComponentPropsWithRef<"span"> {}
+interface RangeCalendarCellIndicatorProps extends ComponentPropsWithRef<"span"> {}
 
-const CalendarCellIndicator = ({className, ...props}: CalendarCellIndicatorProps) => {
-  const {slots} = useContext(CalendarContext);
+const RangeCalendarCellIndicator = ({className, ...props}: RangeCalendarCellIndicatorProps) => {
+  const {slots} = useContext(RangeCalendarContext);
 
   return (
     <span
       aria-hidden="true"
       className={composeSlotClassName(slots?.cellIndicator, className)}
-      data-slot="calendar-cell-indicator"
+      data-slot="range-calendar-cell-indicator"
       {...props}
     />
   );
 };
 
-CalendarCellIndicator.displayName = "HeroUI.Calendar.CellIndicator";
+RangeCalendarCellIndicator.displayName = "HeroUI.RangeCalendar.CellIndicator";
 
 /* -------------------------------------------------------------------------------------------------
 | * Exports
 | * -----------------------------------------------------------------------------------------------*/
 export {
-  CalendarRoot,
-  CalendarHeader,
-  CalendarHeading,
-  CalendarNavButton,
-  CalendarGrid,
-  CalendarGridHeader,
-  CalendarGridBody,
-  CalendarHeaderCell,
-  CalendarCell,
-  CalendarCellIndicator,
+  RangeCalendarRoot,
+  RangeCalendarHeader,
+  RangeCalendarHeading,
+  RangeCalendarNavButton,
+  RangeCalendarGrid,
+  RangeCalendarGridHeader,
+  RangeCalendarGridBody,
+  RangeCalendarHeaderCell,
+  RangeCalendarCell,
+  RangeCalendarCellIndicator,
 };
 export type {
-  CalendarRootProps,
-  CalendarHeaderProps,
-  CalendarHeadingProps,
-  CalendarNavButtonProps,
-  CalendarGridProps,
-  CalendarGridHeaderProps,
-  CalendarGridBodyProps,
-  CalendarHeaderCellProps,
-  CalendarCellProps,
-  CalendarCellIndicatorProps,
+  RangeCalendarRootProps,
+  RangeCalendarHeaderProps,
+  RangeCalendarHeadingProps,
+  RangeCalendarNavButtonProps,
+  RangeCalendarGridProps,
+  RangeCalendarGridHeaderProps,
+  RangeCalendarGridBodyProps,
+  RangeCalendarHeaderCellProps,
+  RangeCalendarCellProps,
+  RangeCalendarCellIndicatorProps,
 };

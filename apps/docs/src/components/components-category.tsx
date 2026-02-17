@@ -36,7 +36,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Date and Time",
-    components: ["calendar", "date-field", "date-picker", "time-field"],
+    components: ["calendar", "range-calendar", "date-field", "date-picker", "time-field"],
   },
   {
     category: "Navigation",

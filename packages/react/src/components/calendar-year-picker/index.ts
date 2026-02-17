@@ -57,7 +57,8 @@ export type {
  * YearPickerContext
  * -----------------------------------------------------------------------------------------------*/
 export {YearPickerContext, useYearPicker} from "./year-picker-context";
-export type {YearPickerContextValue} from "./year-picker-context";
+export {YearPickerStateContext, useYearPickerState} from "./year-picker-context";
+export type {YearPickerContextValue, YearPickerStateContextValue} from "./year-picker-context";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants

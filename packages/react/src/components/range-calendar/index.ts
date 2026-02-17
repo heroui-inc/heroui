@@ -10,32 +10,32 @@ import {
 } from "../calendar-year-picker";
 
 import {
-  CalendarCell,
-  CalendarCellIndicator,
-  CalendarGrid,
-  CalendarGridBody,
-  CalendarGridHeader,
-  CalendarHeader,
-  CalendarHeaderCell,
-  CalendarHeading,
-  CalendarNavButton,
-  CalendarRoot,
-} from "./calendar";
+  RangeCalendarCell,
+  RangeCalendarCellIndicator,
+  RangeCalendarGrid,
+  RangeCalendarGridBody,
+  RangeCalendarGridHeader,
+  RangeCalendarHeader,
+  RangeCalendarHeaderCell,
+  RangeCalendarHeading,
+  RangeCalendarNavButton,
+  RangeCalendarRoot,
+} from "./range-calendar";
 
 /* -------------------------------------------------------------------------------------------------
 | * Compound Component
 | * -----------------------------------------------------------------------------------------------*/
-export const Calendar = Object.assign(CalendarRoot, {
-  Root: CalendarRoot,
-  Header: CalendarHeader,
-  Heading: CalendarHeading,
-  NavButton: CalendarNavButton,
-  Grid: CalendarGrid,
-  GridHeader: CalendarGridHeader,
-  GridBody: CalendarGridBody,
-  HeaderCell: CalendarHeaderCell,
-  Cell: CalendarCell,
-  CellIndicator: CalendarCellIndicator,
+export const RangeCalendar = Object.assign(RangeCalendarRoot, {
+  Root: RangeCalendarRoot,
+  Header: RangeCalendarHeader,
+  Heading: RangeCalendarHeading,
+  NavButton: RangeCalendarNavButton,
+  Grid: RangeCalendarGrid,
+  GridHeader: RangeCalendarGridHeader,
+  GridBody: RangeCalendarGridBody,
+  HeaderCell: RangeCalendarHeaderCell,
+  Cell: RangeCalendarCell,
+  CellIndicator: RangeCalendarCellIndicator,
   YearPickerTrigger: CalendarYearPickerTrigger,
   YearPickerTriggerHeading: CalendarYearPickerTriggerHeading,
   YearPickerTriggerIndicator: CalendarYearPickerTriggerIndicator,
@@ -44,18 +44,18 @@ export const Calendar = Object.assign(CalendarRoot, {
   YearPickerCell: CalendarYearPickerCell,
 });
 
-export type Calendar = {
-  Props: ComponentProps<typeof CalendarRoot>;
-  RootProps: ComponentProps<typeof CalendarRoot>;
-  HeaderProps: ComponentProps<typeof CalendarHeader>;
-  HeadingProps: ComponentProps<typeof CalendarHeading>;
-  NavButtonProps: ComponentProps<typeof CalendarNavButton>;
-  GridProps: ComponentProps<typeof CalendarGrid>;
-  GridHeaderProps: ComponentProps<typeof CalendarGridHeader>;
-  GridBodyProps: ComponentProps<typeof CalendarGridBody>;
-  HeaderCellProps: ComponentProps<typeof CalendarHeaderCell>;
-  CellProps: ComponentProps<typeof CalendarCell>;
-  CellIndicatorProps: ComponentProps<typeof CalendarCellIndicator>;
+export type RangeCalendar = {
+  Props: ComponentProps<typeof RangeCalendarRoot>;
+  RootProps: ComponentProps<typeof RangeCalendarRoot>;
+  HeaderProps: ComponentProps<typeof RangeCalendarHeader>;
+  HeadingProps: ComponentProps<typeof RangeCalendarHeading>;
+  NavButtonProps: ComponentProps<typeof RangeCalendarNavButton>;
+  GridProps: ComponentProps<typeof RangeCalendarGrid>;
+  GridHeaderProps: ComponentProps<typeof RangeCalendarGridHeader>;
+  GridBodyProps: ComponentProps<typeof RangeCalendarGridBody>;
+  HeaderCellProps: ComponentProps<typeof RangeCalendarHeaderCell>;
+  CellProps: ComponentProps<typeof RangeCalendarCell>;
+  CellIndicatorProps: ComponentProps<typeof RangeCalendarCellIndicator>;
   YearPickerTriggerProps: ComponentProps<typeof CalendarYearPickerTrigger>;
   YearPickerTriggerHeadingProps: ComponentProps<typeof CalendarYearPickerTriggerHeading>;
   YearPickerTriggerIndicatorProps: ComponentProps<typeof CalendarYearPickerTriggerIndicator>;
@@ -68,31 +68,31 @@ export type Calendar = {
 | * Named Component
 | * -----------------------------------------------------------------------------------------------*/
 export {
-  CalendarRoot,
-  CalendarHeader,
-  CalendarHeading,
-  CalendarNavButton,
-  CalendarGrid,
-  CalendarGridHeader,
-  CalendarGridBody,
-  CalendarHeaderCell,
-  CalendarCell,
-  CalendarCellIndicator,
+  RangeCalendarRoot,
+  RangeCalendarHeader,
+  RangeCalendarHeading,
+  RangeCalendarNavButton,
+  RangeCalendarGrid,
+  RangeCalendarGridHeader,
+  RangeCalendarGridBody,
+  RangeCalendarHeaderCell,
+  RangeCalendarCell,
+  RangeCalendarCellIndicator,
 };
 
 export type {
-  CalendarRootProps,
-  CalendarRootProps as CalendarProps,
-  CalendarHeaderProps,
-  CalendarHeadingProps,
-  CalendarNavButtonProps,
-  CalendarGridProps,
-  CalendarGridHeaderProps,
-  CalendarGridBodyProps,
-  CalendarHeaderCellProps,
-  CalendarCellProps,
-  CalendarCellIndicatorProps,
-} from "./calendar";
+  RangeCalendarRootProps,
+  RangeCalendarRootProps as RangeCalendarProps,
+  RangeCalendarHeaderProps,
+  RangeCalendarHeadingProps,
+  RangeCalendarNavButtonProps,
+  RangeCalendarGridProps,
+  RangeCalendarGridHeaderProps,
+  RangeCalendarGridBodyProps,
+  RangeCalendarHeaderCellProps,
+  RangeCalendarCellProps,
+  RangeCalendarCellIndicatorProps,
+} from "./range-calendar";
 
 /* -------------------------------------------------------------------------------------------------
 | * YearPickerContext (re-exported from calendar-year-picker for convenience)
@@ -108,6 +108,6 @@ export type {YearPickerContextValue, YearPickerStateContextValue} from "../calen
 /* -------------------------------------------------------------------------------------------------
 | * Variants
 | * -----------------------------------------------------------------------------------------------*/
-export {calendarVariants} from "@heroui/styles";
+export {rangeCalendarVariants} from "@heroui/styles";
 
-export type {CalendarVariants} from "@heroui/styles";
+export type {RangeCalendarVariants} from "@heroui/styles";

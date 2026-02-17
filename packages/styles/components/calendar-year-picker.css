@@ -15,7 +15,8 @@
 /* -----------------------------------------------------------------------------
  * Positioning Context
  * -------------------------------------------------------------------------- */
-.calendar:has(.calendar-year-picker__year-grid) {
+.calendar:has(.calendar-year-picker__year-grid),
+.range-calendar:has(.calendar-year-picker__year-grid) {
   position: relative;
 }
 
@@ -30,7 +31,8 @@
  * -------------------------------------------------------------------------- */
 
 /* Day grid – default visible */
-.calendar:has(.calendar-year-picker__year-grid) > [data-slot="calendar-grid"] {
+.calendar:has(.calendar-year-picker__year-grid) > [data-slot="calendar-grid"],
+.range-calendar:has(.calendar-year-picker__year-grid) > [data-slot="range-calendar-grid"] {
   will-change: opacity;
   transition:
     opacity 150ms var(--ease-out),
@@ -39,7 +41,9 @@
 }
 
 /* Day grid – hidden when year picker is open (fade + blur out) */
-.calendar:has(.calendar-year-picker__year-grid[data-open="true"]) > [data-slot="calendar-grid"] {
+.calendar:has(.calendar-year-picker__year-grid[data-open="true"]) > [data-slot="calendar-grid"],
+.range-calendar:has(.calendar-year-picker__year-grid[data-open="true"])
+  > [data-slot="range-calendar-grid"] {
   @apply pointer-events-none opacity-0;
   visibility: hidden;
   transition:
