@@ -63,14 +63,14 @@ import { RadioGroup, Label, cn } from 'heroui-native';
         >
           Option 1
         </Label>
-        <RadioGroup.Indicator
+        <Radio
           className={cn(
             'border-2 rounded-full',
             isSelected && 'border-accent bg-accent'
           )}
         >
           {isSelected && <CustomIcon />}
-        </RadioGroup.Indicator>
+        </Radio>
       </>
     )}
   </RadioGroup.Item>

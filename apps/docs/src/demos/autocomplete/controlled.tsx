@@ -2,7 +2,7 @@
 
 import type {Key} from "@heroui/react";
 
-import {Autocomplete, Label, ListBox, SearchField, useFilter} from "@heroui/react";
+import {Autocomplete, EmptyState, Label, ListBox, SearchField, useFilter} from "@heroui/react";
 import {useState} from "react";
 
 export function Controlled() {
@@ -44,7 +44,7 @@ export function Controlled() {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {states.map((state) => (
                 <ListBox.Item key={state.id} id={state.id} textValue={state.name}>
                   {state.name}
