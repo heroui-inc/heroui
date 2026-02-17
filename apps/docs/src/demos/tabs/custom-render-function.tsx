@@ -1,22 +1,35 @@
 "use client";
 
 import {Tabs} from "@heroui/react";
+import Link from "next/link";
 
 export function CustomRenderFunction() {
   return (
     <Tabs className="w-full max-w-md" render={(props) => <div {...props} data-custom="foo" />}>
       <Tabs.ListContainer>
         <Tabs.List aria-label="Options">
-          <Tabs.Tab id="overview">
-            Overview
+          <Tabs.Tab
+            href="/docs/react/getting-started"
+            id="getting-started"
+            render={(domProps: any) => <Link {...domProps} />}
+          >
+            Getting Started
             <Tabs.Indicator />
           </Tabs.Tab>
-          <Tabs.Tab id="analytics">
-            Analytics
+          <Tabs.Tab
+            href="/docs/react/components"
+            id="components"
+            render={(domProps: any) => <Link {...domProps} />}
+          >
+            Components
             <Tabs.Indicator />
           </Tabs.Tab>
-          <Tabs.Tab id="reports">
-            Reports
+          <Tabs.Tab
+            href="/docs/react/releases"
+            id="releases"
+            render={(domProps: any) => <Link {...domProps} />}
+          >
+            Releases
             <Tabs.Indicator />
           </Tabs.Tab>
         </Tabs.List>
