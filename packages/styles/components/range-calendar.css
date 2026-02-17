@@ -144,7 +144,6 @@
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    background-color 100ms var(--ease-out),
     box-shadow 100ms var(--ease-out),
     border-color 100ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
@@ -159,7 +158,7 @@
   }
 
   /* Focus state */
-  &:focus-visible,
+  &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply z-2;
 
