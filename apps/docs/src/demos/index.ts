@@ -445,6 +445,10 @@ export const demos: Record<string, DemoItem> = {
     component: CheckboxDemos.Variants,
     file: "checkbox/variants.tsx",
   },
+  "checkbox-custom-render-function": {
+    component: CheckboxDemos.CustomRenderFunction,
+    file: "checkbox/custom-render-function.tsx",
+  },
   // CheckboxGroup demos
   "checkbox-group-basic": {
     component: CheckboxGroupDemos.Basic,
@@ -1468,6 +1472,10 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.SecondaryVertical,
     file: "tabs/secondary-vertical.tsx",
   },
+  "tabs-custom-render-function": {
+    component: TabsDemos.CustomRenderFunction,
+    file: "tabs/custom-render-function.tsx",
+  },
   // TagGroup demos
   "tag-group-basic": {
     component: TagGroupDemos.Basic,
@@ -1583,6 +1591,10 @@ export const demos: Record<string, DemoItem> = {
     component: TextFieldDemos.OnSurface,
     file: "text-field/on-surface.tsx",
   },
+  "text-field-custom-render-function": {
+    component: TextFieldDemos.CustomRenderFunction,
+    file: "text-field/custom-render-function.tsx",
+  },
   // TimeField demos
   "time-field-basic": {
     component: TimeFieldDemos.Basic,
@@ -1693,6 +1705,10 @@ export const demos: Record<string, DemoItem> = {
   "tooltip-custom-trigger": {
     component: TooltipDemos.CustomTrigger,
     file: "tooltip/custom-trigger.tsx",
+  },
+  "tooltip-custom-render-function": {
+    component: TooltipDemos.CustomRenderFunction,
+    file: "tooltip/custom-render-function.tsx",
   },
   // Popover demos
   "popover-basic": {

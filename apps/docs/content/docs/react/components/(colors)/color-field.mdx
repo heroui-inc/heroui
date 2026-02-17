@@ -318,6 +318,7 @@ ColorField.Group accepts all props from React Aria's `Group` component plus the 
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `fullWidth` | `boolean` | `false` | Whether the color input group should take full width of its container |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, GroupRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ColorField.Input Props
 
