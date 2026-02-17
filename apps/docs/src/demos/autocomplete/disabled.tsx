@@ -1,6 +1,6 @@
 "use client";
 
-import {Autocomplete, Label, ListBox, SearchField, useFilter} from "@heroui/react";
+import {Autocomplete, EmptyState, Label, ListBox, SearchField, useFilter} from "@heroui/react";
 
 export function Disabled() {
   const {contains} = useFilter({sensitivity: "base"});
@@ -47,7 +47,7 @@ export function Disabled() {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {items.map((item) => (
                 <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                   {item.name}
@@ -80,7 +80,7 @@ export function Disabled() {
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox>
+            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
               {countries.map((country) => (
                 <ListBox.Item key={country.id} id={country.id} textValue={country.name}>
                   {country.name}

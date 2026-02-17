@@ -3,15 +3,7 @@
 import type {DateValue} from "@internationalized/date";
 
 import {Calendar} from "@gravity-ui/icons";
-import {
-  Button,
-  DateField,
-  DateInputGroup,
-  Description,
-  FieldError,
-  Form,
-  Label,
-} from "@heroui/react";
+import {Button, DateField, Description, FieldError, Form, Label} from "@heroui/react";
 import {getLocalTimeZone, today} from "@internationalized/date";
 import {useState} from "react";
 
@@ -50,14 +42,12 @@ export function FormExample() {
         onChange={setValue}
       >
         <Label>Appointment date</Label>
-        <DateInputGroup>
-          <DateInputGroup.Prefix>
+        <DateField.Group>
+          <DateField.Prefix>
             <Calendar className="size-4 text-muted" />
-          </DateInputGroup.Prefix>
-          <DateInputGroup.Input>
-            {(segment) => <DateInputGroup.Segment segment={segment} />}
-          </DateInputGroup.Input>
-        </DateInputGroup>
+          </DateField.Prefix>
+          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+        </DateField.Group>
         {isInvalid ? (
           <FieldError>Date must be today or in the future</FieldError>
         ) : (

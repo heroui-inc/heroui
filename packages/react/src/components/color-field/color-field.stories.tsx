@@ -4,7 +4,6 @@ import type {Color} from "react-aria-components";
 import React, {useState} from "react";
 
 import {Button} from "../button";
-import {ColorInputGroup} from "../color-input-group";
 import {ColorSwatch} from "../color-swatch";
 import {Description} from "../description";
 import {FieldError} from "../field-error";
@@ -35,12 +34,12 @@ export const Default: Story = {
     return (
       <ColorField className="w-[280px]" name="color" value={color} onChange={setColor}>
         <Label>Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Prefix>
+        <ColorField.Group>
+          <ColorField.Prefix>
             <ColorSwatch color={color ?? undefined} size="xs" />
-          </ColorInputGroup.Prefix>
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+          </ColorField.Prefix>
+          <ColorField.Input />
+        </ColorField.Group>
       </ColorField>
     );
   },
@@ -51,15 +50,15 @@ export const Variants: Story = {
     <div className="flex flex-col gap-4">
       <ColorField className="w-[280px]" defaultValue={parseColor("#0485F7")} name="primary-color">
         <Label>Primary variant</Label>
-        <ColorInputGroup variant="primary">
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+        <ColorField.Group variant="primary">
+          <ColorField.Input />
+        </ColorField.Group>
       </ColorField>
       <ColorField className="w-[280px]" defaultValue={parseColor("#F43F5E")} name="secondary-color">
         <Label>Secondary variant</Label>
-        <ColorInputGroup variant="secondary">
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+        <ColorField.Group variant="secondary">
+          <ColorField.Input />
+        </ColorField.Group>
       </ColorField>
     </div>
   ),
@@ -70,15 +69,15 @@ export const FullWidth: Story = {
     <div className="w-[400px] space-y-4">
       <ColorField fullWidth defaultValue={parseColor("#10B981")} name="color">
         <Label>Brand Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input />
+        </ColorField.Group>
       </ColorField>
       <ColorField fullWidth defaultValue={parseColor("#8B5CF6")} name="color-with-suffix">
         <Label>Theme Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input />
+        </ColorField.Group>
       </ColorField>
     </div>
   ),
@@ -89,16 +88,16 @@ export const WithDescription: Story = {
     <div className="flex flex-col gap-4">
       <ColorField className="w-[280px]" defaultValue={parseColor("#3B82F6")} name="color">
         <Label>Primary Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input />
+        </ColorField.Group>
         <Description>Enter your brand's primary color</Description>
       </ColorField>
       <ColorField className="w-[280px]" defaultValue={parseColor("#F59E0B")} name="accent-color">
         <Label>Accent Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input />
+        </ColorField.Group>
         <Description>Used for highlights and CTAs</Description>
       </ColorField>
     </div>
@@ -110,15 +109,15 @@ export const Required: Story = {
     <div className="flex flex-col gap-4">
       <ColorField isRequired className="w-[280px]" name="color">
         <Label>Brand Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input placeholder="#000000" />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input placeholder="#000000" />
+        </ColorField.Group>
       </ColorField>
       <ColorField isRequired className="w-[280px]" name="theme-color">
         <Label>Theme Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input placeholder="#000000" />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input placeholder="#000000" />
+        </ColorField.Group>
         <Description>Required field</Description>
       </ColorField>
     </div>
@@ -130,16 +129,16 @@ export const Invalid: Story = {
     <div className="flex flex-col gap-4">
       <ColorField isInvalid isRequired className="w-[280px]" name="color">
         <Label>Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input placeholder="#000000" />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input placeholder="#000000" />
+        </ColorField.Group>
         <FieldError>Please enter a valid hex color</FieldError>
       </ColorField>
       <ColorField isInvalid className="w-[280px]" name="invalid-color">
         <Label>Background Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input defaultValue="not-a-color" />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input defaultValue="not-a-color" />
+        </ColorField.Group>
         <FieldError>Invalid color format. Use hex (e.g., #FF5733)</FieldError>
       </ColorField>
     </div>
@@ -156,16 +155,16 @@ export const Disabled: Story = {
         name="color"
       >
         <Label>Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input />
+        </ColorField.Group>
         <Description>This color field is disabled</Description>
       </ColorField>
       <ColorField isDisabled className="w-[280px]" name="color-empty">
         <Label>Color</Label>
-        <ColorInputGroup>
-          <ColorInputGroup.Input placeholder="#000000" />
-        </ColorInputGroup>
+        <ColorField.Group>
+          <ColorField.Input placeholder="#000000" />
+        </ColorField.Group>
         <Description>This color field is disabled</Description>
       </ColorField>
     </div>
@@ -180,12 +179,12 @@ export const Controlled: Story = {
       <div className="flex flex-col gap-4">
         <ColorField className="w-[280px]" name="color" value={value} onChange={setValue}>
           <Label>Color</Label>
-          <ColorInputGroup>
-            <ColorInputGroup.Prefix>
+          <ColorField.Group>
+            <ColorField.Prefix>
               <ColorSwatch color={value ?? undefined} size="xs" />
-            </ColorInputGroup.Prefix>
-            <ColorInputGroup.Input />
-          </ColorInputGroup>
+            </ColorField.Prefix>
+            <ColorField.Input />
+          </ColorField.Group>
           <Description>Current value: {value ? value.toString("hex") : "(empty)"}</Description>
         </ColorField>
         <div className="flex gap-2">
@@ -221,9 +220,9 @@ export const ChannelEditing: Story = {
             onChange={setColor}
           >
             <Label>Hue</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Input />
-            </ColorInputGroup>
+            <ColorField.Group>
+              <ColorField.Input />
+            </ColorField.Group>
           </ColorField>
           <ColorField
             channel="saturation"
@@ -234,12 +233,12 @@ export const ChannelEditing: Story = {
             onChange={setColor}
           >
             <Label>Saturation</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Input />
-              <ColorInputGroup.Suffix>
+            <ColorField.Group>
+              <ColorField.Input />
+              <ColorField.Suffix>
                 <span className="text-sm text-muted">%</span>
-              </ColorInputGroup.Suffix>
-            </ColorInputGroup>
+              </ColorField.Suffix>
+            </ColorField.Group>
           </ColorField>
           <ColorField
             channel="lightness"
@@ -250,12 +249,12 @@ export const ChannelEditing: Story = {
             onChange={setColor}
           >
             <Label>Lightness</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Input />
-              <ColorInputGroup.Suffix>
+            <ColorField.Group>
+              <ColorField.Input />
+              <ColorField.Suffix>
                 <span className="text-sm text-muted">%</span>
-              </ColorInputGroup.Suffix>
-            </ColorInputGroup>
+              </ColorField.Suffix>
+            </ColorField.Group>
           </ColorField>
         </div>
         <div className="flex items-center gap-2">
@@ -284,9 +283,9 @@ export const RGBChannels: Story = {
             onChange={setColor}
           >
             <Label>Red</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Input />
-            </ColorInputGroup>
+            <ColorField.Group>
+              <ColorField.Input />
+            </ColorField.Group>
           </ColorField>
           <ColorField
             channel="green"
@@ -297,9 +296,9 @@ export const RGBChannels: Story = {
             onChange={setColor}
           >
             <Label>Green</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Input />
-            </ColorInputGroup>
+            <ColorField.Group>
+              <ColorField.Input />
+            </ColorField.Group>
           </ColorField>
           <ColorField
             channel="blue"
@@ -310,9 +309,9 @@ export const RGBChannels: Story = {
             onChange={setColor}
           >
             <Label>Blue</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Input />
-            </ColorInputGroup>
+            <ColorField.Group>
+              <ColorField.Input />
+            </ColorField.Group>
           </ColorField>
         </div>
         <div className="flex items-center gap-2">
@@ -360,12 +359,12 @@ export const FormExample: Story = {
           onChange={setValue}
         >
           <Label>Brand Color</Label>
-          <ColorInputGroup>
-            <ColorInputGroup.Prefix>
+          <ColorField.Group>
+            <ColorField.Prefix>
               <ColorSwatch color={value ?? undefined} size="xs" />
-            </ColorInputGroup.Prefix>
-            <ColorInputGroup.Input placeholder="#000000" />
-          </ColorInputGroup>
+            </ColorField.Prefix>
+            <ColorField.Input placeholder="#000000" />
+          </ColorField.Group>
           <Description>Choose your brand's primary color</Description>
         </ColorField>
         <Button
@@ -391,12 +390,12 @@ export const WithColorPresets: Story = {
       <div className="flex flex-col gap-4">
         <ColorField className="w-[280px]" name="color" value={value} onChange={setValue}>
           <Label>Color</Label>
-          <ColorInputGroup>
-            <ColorInputGroup.Prefix>
+          <ColorField.Group>
+            <ColorField.Prefix>
               <ColorSwatch color={value?.toString("hex") || "#E4E4E7"} size="xs" />
-            </ColorInputGroup.Prefix>
-            <ColorInputGroup.Input />
-          </ColorInputGroup>
+            </ColorField.Prefix>
+            <ColorField.Input />
+          </ColorField.Group>
           <Description>Select or enter a color</Description>
         </ColorField>
         <div className="flex gap-2">
@@ -432,12 +431,12 @@ export const AllVariations: Story = {
             onChange={setColor1}
           >
             <Label>With Prefix Icon</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Prefix>
+            <ColorField.Group>
+              <ColorField.Prefix>
                 <ColorSwatch color={color1 ?? undefined} size="xs" />
-              </ColorInputGroup.Prefix>
-              <ColorInputGroup.Input />
-            </ColorInputGroup>
+              </ColorField.Prefix>
+              <ColorField.Input />
+            </ColorField.Group>
             <Description>Enter a hex color</Description>
           </ColorField>
 
@@ -449,12 +448,12 @@ export const AllVariations: Story = {
             onChange={setColor2}
           >
             <Label>With Suffix</Label>
-            <ColorInputGroup>
-              <ColorInputGroup.Input />
-              <ColorInputGroup.Suffix>
+            <ColorField.Group>
+              <ColorField.Input />
+              <ColorField.Suffix>
                 <ColorSwatch color={color2 ?? undefined} size="xs" />
-              </ColorInputGroup.Suffix>
-            </ColorInputGroup>
+              </ColorField.Suffix>
+            </ColorField.Group>
             <Description>Enter a hex color</Description>
           </ColorField>
 
@@ -466,12 +465,12 @@ export const AllVariations: Story = {
             onChange={setColor3}
           >
             <Label>Secondary Variant</Label>
-            <ColorInputGroup variant="secondary">
-              <ColorInputGroup.Prefix>
+            <ColorField.Group variant="secondary">
+              <ColorField.Prefix>
                 <ColorSwatch color={color3 ?? undefined} size="xs" />
-              </ColorInputGroup.Prefix>
-              <ColorInputGroup.Input />
-            </ColorInputGroup>
+              </ColorField.Prefix>
+              <ColorField.Input />
+            </ColorField.Group>
             <Description>Enter a hex color</Description>
           </ColorField>
         </div>

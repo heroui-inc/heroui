@@ -4,6 +4,7 @@ import type {Key} from "@heroui/react";
 
 import {
   Autocomplete,
+  EmptyState,
   Header,
   Label,
   ListBox,
@@ -40,7 +41,7 @@ export function WithSections() {
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox>
+          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
             <ListBox.Section>
               <Header>North America</Header>
               <ListBox.Item id="usa" textValue="United States">

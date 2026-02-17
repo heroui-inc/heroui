@@ -263,6 +263,77 @@ HeroUINativeProvider
 
 The provider automatically wraps your application with [`SafeAreaListener`](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-listener) from `react-native-safe-area-context`. This component listens to safe area insets and frame changes without triggering re-renders, and automatically updates Uniwind with the latest insets via the `onChange` callback.
 
+## Raw Provider
+
+`HeroUINativeProviderRaw` is a lightweight variant of `HeroUINativeProvider` designed for bundle optimization. It excludes `ToastProvider` and `PortalHost`, giving you a bare minimum starting point where you only install and add what you actually need.
+
+### When to Use
+
+Use `HeroUINativeProviderRaw` when you want full control over which dependencies are included in your bundle. With the raw provider imported from `heroui-native/provider-raw`, the following dependencies are optional and only required if you use the corresponding components:
+
+- **react-native-screens** -- required for overlay components (Popover, Dialog)
+- **@gorhom/bottom-sheet** -- required for BottomSheet component
+- **react-native-svg** -- required for components that use icons (Accordion, Alert, Checkbox, etc.)
+
+### Setup
+
+```tsx
+import {
+  HeroUINativeProviderRaw,
+  type HeroUINativeConfigRaw,
+} from 'heroui-native/provider-raw';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+const config: HeroUINativeConfigRaw = {
+  textProps: {
+    maxFontSizeMultiplier: 1.5,
+  },
+};
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <HeroUINativeProviderRaw config={config}>
+        {/* Your app content */}
+      </HeroUINativeProviderRaw>
+    </GestureHandlerRootView>
+  );
+}
+```
+
+### Adding Toast and Portal Manually
+
+If you need toast or portal functionality with the raw provider, add them yourself:
+
+```tsx
+import { HeroUINativeProviderRaw } from 'heroui-native/provider-raw';
+import { PortalHost } from 'heroui-native/portal';
+import { ToastProvider } from 'heroui-native/toast';
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <HeroUINativeProviderRaw>
+        <ToastProvider>
+          {/* Your app content */}
+          <PortalHost />
+        </ToastProvider>
+      </HeroUINativeProviderRaw>
+    </GestureHandlerRootView>
+  );
+}
+```
+
+### Provider Hierarchy
+
+```
+HeroUINativeProviderRaw
+├── SafeAreaListener (handles safe area insets updates)
+│   └── GlobalAnimationSettingsProvider (animation configuration)
+│       └── TextComponentProvider (text configuration)
+│           └── Your App
+```
+
 ## Best Practices
 
 ### 1. Single Provider Instance

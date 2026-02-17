@@ -7,6 +7,7 @@
     "index",
     "---Components---",
     "(navigation)/accordion",
+    "(feedback)/alert",
     "(media)/avatar",
     "(overlays)/bottom-sheet",
     "(buttons)/button",

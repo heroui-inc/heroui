@@ -22,16 +22,16 @@ import { DateField } from '@heroui/react';
 ### Anatomy
 
 ```tsx
-import {DateField, Label, DateInputGroup, Description, FieldError} from '@heroui/react';
+import {DateField, Label, Description, FieldError} from '@heroui/react';
 
 export default () => (
   <DateField>
     <Label />
-    <DateInputGroup>
-      <DateInputGroup.Input>
-        {(segment) => <DateInputGroup.Segment segment={segment} />}
-      </DateInputGroup.Input>
-    </DateInputGroup>
+    <DateField.Group>
+      <DateField.Input>
+        {(segment) => <DateField.Segment segment={segment} />}
+      </DateField.Input>
+    </DateField.Group>
     <Description />
     <FieldError />
   </DateField>
@@ -90,7 +90,7 @@ Add prefix or suffix icons to enhance the date field.
 
 ### Variants
 
-The DateInputGroup component supports two visual variants:
+The DateField.Group component supports two visual variants:
 
 - **`primary`** (default) - Standard styling with shadow, suitable for most use cases
 - **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
@@ -99,7 +99,7 @@ The DateInputGroup component supports two visual variants:
 
 ### In Surface
 
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on DateInputGroup to apply the lower emphasis variant suitable for surface backgrounds.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on DateField.Group to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="date-field-on-surface" />
 
@@ -116,7 +116,7 @@ Complete form example with validation and submission handling.
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {DateField, Label, DateInputGroup, Description} from '@heroui/react';
+import {DateField, Label, Description} from '@heroui/react';
 
 function CustomDateField() {
   return (
@@ -124,11 +124,11 @@ function CustomDateField() {
       <Label className="text-sm font-semibold text-default-700">
         Appointment date
       </Label>
-      <DateInputGroup className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+      <DateField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+      </DateField.Group>
       <Description className="text-xs text-default-500">
         Select a date for your appointment.
       </Description>
@@ -168,7 +168,7 @@ DateField has minimal default styling. Override the `.date-field` class to custo
 
 - `.date-field` – Root container with minimal styling (`flex flex-col gap-1`)
 
-> **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options. DateInputGroup styling is documented below in the API Reference section.
+> **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options. DateField.Group styling is documented below in the API Reference section.
 
 ### Interactive States
 
@@ -189,7 +189,7 @@ DateField inherits all props from React Aria's [DateField](https://react-aria.ad
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode \| (values: DateFieldRenderProps) => React.ReactNode` | - | Child components (Label, DateInputGroup, etc.) or render function. |
+| `children` | `React.ReactNode \| (values: DateFieldRenderProps) => React.ReactNode` | - | Child components (Label, DateField.Group, etc.) or render function. |
 | `className` | `string \| (values: DateFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: DateFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the date field should take full width of its container |
@@ -254,7 +254,10 @@ DateField inherits all props from React Aria's [DateField](https://react-aria.ad
 DateField works with these separate components that should be imported and used directly:
 
 - **Label** - Field label component from `@heroui/react`
-- **DateInputGroup** - Date input component with segmented editing from `@heroui/react` (documented below)
+- **DateField.Group** - Date input group component (documented below)
+- **DateField.Input** - Input component with segmented editing from `@heroui/react`
+- **DateField.Segment** - Individual date segment (year, month, day, etc.)
+- **DateField.Prefix** / **DateField.Suffix** - Prefix and suffix slots for the input group
 - **Description** - Helper text component from `@heroui/react`
 - **FieldError** - Validation error message from `@heroui/react`
 
@@ -262,7 +265,7 @@ Each of these components has its own props API. Use them directly within DateFie
 
 ```tsx
 import {parseDate} from '@internationalized/date';
-import {DateField, Label, DateInputGroup, Description, FieldError} from '@heroui/react';
+import {DateField, Label, Description, FieldError} from '@heroui/react';
 
 <DateField
   isRequired
@@ -272,11 +275,11 @@ import {DateField, Label, DateInputGroup, Description, FieldError} from '@heroui
   onChange={setDate}
 >
   <Label>Appointment Date</Label>
-  <DateInputGroup>
-    <DateInputGroup.Input>
-      {(segment) => <DateInputGroup.Segment segment={segment} />}
-    </DateInputGroup.Input>
-  </DateInputGroup>
+  <DateField.Group>
+    <DateField.Input>
+      {(segment) => <DateField.Segment segment={segment} />}
+    </DateField.Input>
+  </DateField.Group>
   <Description>Select a date from today onwards.</Description>
   <FieldError>Please select a valid date.</FieldError>
 </DateField>
@@ -324,9 +327,9 @@ When using render props with `className`, `style`, or `children`, these values a
 | `isFocusWithin` | `boolean` | Whether any child element is focused. |
 | `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
 
-### DateInputGroup Props
+### DateField.Group Props
 
-DateInputGroup accepts all props from React Aria's `Group` component plus the following:
+DateField.Group accepts all props from React Aria's `Group` component plus the following:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -334,45 +337,45 @@ DateInputGroup accepts all props from React Aria's `Group` component plus the fo
 | `fullWidth` | `boolean` | `false` | Whether the date input group should take full width of its container |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
-### DateInputGroup.Input Props
+### DateField.Input Props
 
-DateInputGroup.Input accepts all props from React Aria's `DateInput` component plus the following:
+DateField.Input accepts all props from React Aria's `DateInput` component plus the following:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the input. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
-The `DateInput` component accepts a render prop function that receives date segments. Each segment represents a part of the date (year, month, day, etc.).
+The `DateField.Input` component accepts a render prop function that receives date segments. Each segment represents a part of the date (year, month, day, etc.).
 
-### DateInputGroup.Segment Props
+### DateField.Segment Props
 
-DateInputGroup.Segment accepts all props from React Aria's `DateSegment` component:
+DateField.Segment accepts all props from React Aria's `DateSegment` component:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `segment` | `DateSegment` | - | The date segment object from the DateInput render prop. |
+| `segment` | `DateSegment` | - | The date segment object from the DateField.Input render prop. |
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 
-### DateInputGroup.Prefix Props
+### DateField.Prefix Props
 
-DateInputGroup.Prefix accepts standard HTML `div` attributes:
+DateField.Prefix accepts standard HTML `div` attributes:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the prefix slot. |
 
-### DateInputGroup.Suffix Props
+### DateField.Suffix Props
 
-DateInputGroup.Suffix accepts standard HTML `div` attributes:
+DateField.Suffix accepts standard HTML `div` attributes:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the suffix slot. |
 
-## DateInputGroup Styling
+## DateField.Group Styling
 
 ### Customizing the component classes
 
@@ -423,7 +426,7 @@ The base classes power every instance. Override them once with `@layer component
 }
 ```
 
-### DateInputGroup CSS Classes
+### DateField.Group CSS Classes
 
 - `.date-input-group` – Root container styling
 - `.date-input-group__input` – Input wrapper styling
@@ -431,7 +434,7 @@ The base classes power every instance. Override them once with `@layer component
 - `.date-input-group__prefix` – Prefix element styling
 - `.date-input-group__suffix` – Suffix element styling
 
-### DateInputGroup Interactive States
+### DateField.Group Interactive States
 
 - **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus Within**: `[data-focus-within="true"]` or `:focus-within`
