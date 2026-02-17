@@ -1443,6 +1443,10 @@ export const demos: Record<string, DemoItem> = {
     component: SwitchDemos.CustomStyles,
     file: "switch/custom-styles.tsx",
   },
+  "switch-custom-render-function": {
+    component: SwitchDemos.CustomRenderFunction,
+    file: "switch/custom-render-function.tsx",
+  },
   // Tabs demos
   "tabs-basic": {
     component: TabsDemos.Basic,
@@ -1726,6 +1730,10 @@ export const demos: Record<string, DemoItem> = {
   "popover-interactive": {
     component: PopoverDemos.Interactive,
     file: "popover/interactive.tsx",
+  },
+  "popover-custom-render-function": {
+    component: PopoverDemos.CustomRenderFunction,
+    file: "popover/custom-render-function.tsx",
   },
   // Label demos
   "label-basic": {
