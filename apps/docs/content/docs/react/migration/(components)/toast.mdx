@@ -33,7 +33,7 @@ function MyComponent() {
 }
 ```
 
-In v3, Toast uses a container component and a global `toast()` function:
+In v3, Toast uses a provider component and a global `toast()` function:
 
 ```tsx
 import { Toast } from "@heroui/react";
@@ -41,7 +41,7 @@ import { Toast } from "@heroui/react";
 function App() {
   return (
     <>
-      <Toast.Container />
+      <Toast.Provider />
       <MyComponent />
     </>
   );
@@ -58,10 +58,10 @@ function MyComponent() {
 
 ## Key Changes
 
-### 1. Provider → Container
+### 1. Provider Pattern
 
 **v2:** Required `ToastProvider` wrapper  
-**v3:** Uses `Toast.Container` component (can be placed anywhere)
+**v3:** Uses `Toast.Provider` component (can be placed anywhere)
 
 ### 2. Hook → Function
 
@@ -113,8 +113,7 @@ function MyComponent() {
     ```tsx
     import { toast } from "@heroui/react";
 
-    toast.success("Your changes have been saved", {
-      title: "Success",
+    toast.success("Success", {
       description: "Your changes have been saved"
     });
     ```
@@ -197,7 +196,7 @@ function MyComponent() {
     ```tsx
     import { Toast, ToastContent, ToastTitle } from "@heroui/react";
 
-    <Toast.Container>
+    <Toast.Provider>
       {({ toast: toastItem }) => (
         <Toast toast={toastItem}>
           <ToastContent>
@@ -205,14 +204,14 @@ function MyComponent() {
           </ToastContent>
         </Toast>
       )}
-    </Toast.Container>
+    </Toast.Provider>
     ```
   </Tab>
 </Tabs>
 
 ## Summary
 
-- Replace `ToastProvider` with `Toast.Container`
+- Replace `ToastProvider` with `Toast.Provider`
 - Replace `useToast()` hook with `toast()` function
 - Update variant names (`error` → `danger`, `info` → `accent`)
 - Use helper methods: `toast.success()`, `toast.danger()`, etc.

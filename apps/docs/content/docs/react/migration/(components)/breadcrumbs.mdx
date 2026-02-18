@@ -62,9 +62,12 @@ export default function App() {
 
 The following props are no longer available in v3:
 
-- `maxItems` - No longer supported
+- `maxItems` - No longer supported; render all items or implement collapse manually
+- `itemsBeforeCollapse` / `itemsAfterCollapse` / `renderEllipsis` - Collapse/ellipsis feature removed with `maxItems`
 - `items` prop pattern - Use children instead
 - `onAction` - Use `onPress` on individual items if needed
+- `isDisabled` - Not on root in v3; handle per item or via styling if needed
+- `classNames` / `itemClasses` - Use `className` on `Breadcrumbs` and `BreadcrumbsItem` instead
 
 ### 5. React Aria Components Integration
 
@@ -99,6 +102,7 @@ The following props are no longer available in v3:
 ## Summary
 
 - Rename `BreadcrumbItem` to `BreadcrumbsItem`
-- Custom separators now accept React elements instead of strings
-- Built-in Link component integration when `href` is provided
-- Better accessibility through React Aria Components
+- Set `separator` on the root; it can be a string or a React element (e.g. an icon)
+- Items use the built-in Link when `href` is provided
+- No `maxItems` / collapse in v3—show all items or implement yourself; use `className` instead of `classNames` / `itemClasses`
+- Built on React Aria Components for accessibility

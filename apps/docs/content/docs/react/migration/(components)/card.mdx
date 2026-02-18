@@ -69,7 +69,7 @@ The following props are no longer available in v3:
 - `radius` - Use Tailwind CSS classes like `rounded-lg`, `rounded-xl`, `rounded-full`
 - `fullWidth` - Use Tailwind CSS class `w-full`
 - `isHoverable` - Use Tailwind CSS classes with hover states
-- `isPressable` - Use `asChild` prop with a button or link component
+- `isPressable` - Use a button or link wrapper inside Card (see Pressable Card example)
 - `isBlurred` - Use Tailwind CSS backdrop blur classes
 - `isFooterBlurred` - Use Tailwind CSS backdrop blur classes on footer
 - `isDisabled` - Handle disabled state manually with conditional rendering
@@ -81,7 +81,7 @@ The following props are no longer available in v3:
 ### 4. Variants
 
 **v2:** No variant prop (used shadow/radius for styling)  
-**v3:** Has `variant` prop: `transparent`, `default`, `secondary`, `tertiary`, `quaternary`
+**v3:** Has `variant` prop: `transparent`, `default`, `secondary`, `tertiary`
 
 ## Migration Examples
 
@@ -147,11 +147,12 @@ The following props are no longer available in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
-    <Card 
-      asChild
-      className="shadow-sm cursor-pointer"
-    >
-      <button onClick={() => console.log("pressed")}>
+    <Card className="shadow-sm">
+      <button
+        type="button"
+        className="w-full cursor-pointer text-left"
+        onClick={() => console.log("pressed")}
+      >
         <Card.Content>Clickable card</Card.Content>
       </button>
     </Card>
@@ -309,13 +310,13 @@ Card (Root)
   └── Card.Footer (optional)
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must use compound components instead of separate components
 2. **CardBody → Card.Content**: Component renamed
 3. **New Subcomponents**: `Card.Title` and `Card.Description` for structured headers
 4. **Props Removed**: Many styling props removed; use Tailwind CSS classes
-5. **Pressable Cards**: Use `asChild` prop with button/link instead of `isPressable`
+5. **Pressable Cards**: Use a button or link inside Card instead of `isPressable`
 6. **Blur Effects**: Use Tailwind `backdrop-blur-*` classes instead of props
 7. **Variants**: New variant system for semantic prominence levels
 8. **ClassNames Removed**: Use `className` props on individual components

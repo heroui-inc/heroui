@@ -64,7 +64,7 @@ export default function App() {
 | `title` (on Tab) | - | Removed (content goes directly in `Tabs.Tab`) |
 | `isVertical` | `orientation` | Changed to `"horizontal" \| "vertical"` |
 | `placement` | - | Removed (use `orientation` and layout) |
-| `variant` | - | Removed (use Tailwind CSS) |
+| `variant` | `variant` | Simplified to `primary` \| `secondary` only |
 | `color` | - | Removed (use Tailwind CSS) |
 | `size` | - | Removed (use Tailwind CSS) |
 | `radius` | - | Removed (use Tailwind CSS) |
@@ -77,8 +77,7 @@ export default function App() {
 
 The following props are no longer available in v3:
 
-- `variant` - Use Tailwind CSS classes
-- `color` - Use Tailwind CSS classes
+- `color` - Use Tailwind CSS classes (`variant` exists in v3 as `primary` \| `secondary`)
 - `size` - Use Tailwind CSS classes
 - `radius` - Use Tailwind CSS classes
 - `placement` - Use `orientation` prop and layout
@@ -181,7 +180,7 @@ Tabs (Root)
   └── Tabs.Panel (one per tab, matching id)
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must use compound components (`Tabs.ListContainer`, `Tabs.List`, `Tabs.Tab`, `Tabs.Indicator`, `Tabs.Panel`)
 2. **Tab Identification**: `key` → `id` (must match between tab and panel)
@@ -189,5 +188,5 @@ Tabs (Root)
 4. **Panel Separation**: Panel content moved to separate `Tabs.Panel` component
 5. **Indicator**: Must explicitly include `Tabs.Indicator` in each tab
 6. **Orientation**: `isVertical` → `orientation` prop
-7. **Styling Props Removed**: `variant`, `color`, `size`, `radius`, `placement` - use Tailwind CSS
+7. **Styling**: `variant` simplified to `primary` \| `secondary`; `color`, `size`, `radius`, `placement` removed - use Tailwind for more
 8. **ClassNames Removed**: Use `className` props on individual components

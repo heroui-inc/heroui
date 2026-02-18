@@ -50,48 +50,16 @@ export default function App() {
 
 ### 2. Prop Inheritance
 
-**v2:** Limited prop inheritance to child buttons  
-**v3:** Enhanced prop inheritance - `size`, `variant`, `isDisabled`, and `fullWidth` props on ButtonGroup are automatically passed to child buttons
+**v2:** ButtonGroup passed `size`, `color`, `variant`, `radius`, `isIconOnly`, `isDisabled`, `disableAnimation`, `disableRipple`, and `fullWidth` to child buttons.
+
+**v3:** ButtonGroup passes `size`, `variant`, `isDisabled`, and `fullWidth` to child buttons. Props such as `color` and `radius` no longer exist on Button (replaced by `variant`); `disableAnimation` and `disableRipple` were removed from the design system.
 
 ### 3. Hide Separator
 
-**v3:** New `hideSeparator` prop to hide visual separators between buttons
-
-### 4. Variant Support
-
-**v3:** ButtonGroup now supports `variant` prop that applies to all child buttons
-
-## Migration Examples
-
-### Prop Inheritance
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { ButtonGroup, Button } from "@heroui/react";
-
-    <ButtonGroup>
-      <Button size="sm" variant="primary">First</Button>
-      <Button size="sm" variant="primary">Second</Button>
-      <Button size="sm" variant="primary">Third</Button>
-    </ButtonGroup>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { ButtonGroup, Button } from "@heroui/react";
-
-    <ButtonGroup size="sm" variant="primary">
-      <Button>First</Button>
-      <Button>Second</Button>
-      <Button>Third</Button>
-    </ButtonGroup>
-    ```
-  </Tab>
-</Tabs>
-
+**v3:** New `hideSeparator` prop to hide visual separators between buttons.
 
 ## Summary
 
-- Enhanced prop inheritance - set `size`, `variant`, `isDisabled`, and `fullWidth` on ButtonGroup instead of individual buttons
-- Improved consistency and reduced code duplication
+- Set `size`, `variant`, `isDisabled`, and `fullWidth` on ButtonGroup to apply to all child buttons (replace v2’s `color` + `variant` with v3’s single `variant`)
+- Use the new `hideSeparator` prop to hide separators between buttons
+- Structure stays the same; removed props (`radius`, `disableAnimation`, `disableRipple`) are no longer available on Button in v3

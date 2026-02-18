@@ -66,6 +66,7 @@ export default function App() {
 The following props are no longer available in v3:
 
 - `isLoaded` - Control skeleton visibility manually with conditional rendering
+- `disableAnimation` - Use `animationType="none"` instead
 - `classNames` - Use `className` prop directly
 - `children` - Skeleton no longer wraps content
 
@@ -226,7 +227,7 @@ In v3, you can set a default animation type globally using CSS variables:
 
 This can be overridden by the `animationType` prop on individual components.
 
-## Breaking Changes Summary
+## Summary
 
 1. **No Children Wrapping**: Skeleton no longer wraps children - it's a standalone placeholder
 2. **No `isLoaded` Prop**: Control visibility manually with conditional rendering

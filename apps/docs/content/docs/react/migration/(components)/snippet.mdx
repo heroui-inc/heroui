@@ -66,7 +66,7 @@ export default function App() {
         <span className="text-default-500">$ </span>
         npm install @heroui/react
       </pre>
-      <Tooltip content={copied ? "Copied!" : "Copy to clipboard"}>
+      <Tooltip>
         <Button
           isIconOnly
           aria-label="Copy"
@@ -76,6 +76,7 @@ export default function App() {
         >
           {copied ? "✓" : "📋"}
         </Button>
+        <Tooltip.Content>{copied ? "Copied!" : "Copy to clipboard"}</Tooltip.Content>
       </Tooltip>
     </div>
   );
@@ -128,7 +129,7 @@ export default function App() {
               </pre>
             ))}
           </div>
-          <Tooltip content={copied ? "Copied!" : "Copy to clipboard"}>
+          <Tooltip>
             <Button
               isIconOnly
               aria-label="Copy"
@@ -138,6 +139,7 @@ export default function App() {
             >
               {copied ? "✓" : "📋"}
             </Button>
+            <Tooltip.Content>{copied ? "Copied!" : "Copy to clipboard"}</Tooltip.Content>
           </Tooltip>
         </div>
       );
@@ -308,10 +310,7 @@ Since Snippet functionality is commonly needed, here's a complete reusable compo
       );
 
       const copyButton = hideCopyButton ? null : (
-        <Tooltip
-          content={copied ? "Copied!" : "Copy to clipboard"}
-          isDisabled={disableTooltip || disableCopy}
-        >
+        <Tooltip isDisabled={disableTooltip || disableCopy}>
           <Button
             isIconOnly
             aria-label="Copy"
@@ -327,6 +326,7 @@ Since Snippet functionality is commonly needed, here's a complete reusable compo
               <span>📋</span>
             )}
           </Button>
+          <Tooltip.Content>{copied ? "Copied!" : "Copy to clipboard"}</Tooltip.Content>
         </Tooltip>
       );
 
@@ -375,7 +375,7 @@ Since Snippet functionality is commonly needed, here's a complete reusable compo
   </Tab>
 </Tabs>
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Removed**: `Snippet` component no longer exists in v3
 2. **Import Change**: Remove `import { Snippet } from "@heroui/react"`

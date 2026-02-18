@@ -58,7 +58,7 @@ export default function App() {
 | `label` | - | Removed (use `Label` component) |
 | `description` | - | Removed (use `Description` component) |
 | `errorMessage` | - | Removed (use `FieldError` component) |
-| `variant` | - | Removed (use Tailwind CSS) |
+| `variant` | `variant` | Simplified to `primary` \| `secondary` only |
 | `color` | - | Removed (use Tailwind CSS) |
 | `size` | - | Removed (use Tailwind CSS) |
 | `radius` | - | Removed (use Tailwind CSS) |
@@ -77,7 +77,7 @@ The following props are no longer available in v3:
 - `label` - Use `Label` component instead
 - `description` - Use `Description` component instead
 - `errorMessage` - Use `FieldError` component instead
-- `variant` - Use Tailwind CSS classes
+- `variant` - In v3 use `variant` on `NumberField` (primary \| secondary only)
 - `color` - Use Tailwind CSS classes
 - `size` - Use Tailwind CSS classes
 - `radius` - Use Tailwind CSS classes
@@ -277,14 +277,14 @@ NumberField (Root)
   └── FieldError (optional)
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Renamed**: `NumberInput` → `NumberField`
 2. **Component Structure**: Must use compound components (`NumberField.Group`, `NumberField.Input`, etc.)
 3. **Label/Description/Error**: Use separate components (`Label`, `Description`, `FieldError`)
 4. **Stepper Buttons**: Must explicitly include `NumberField.IncrementButton` and `NumberField.DecrementButton`
 5. **Event Handler**: `onValueChange` → `onChange`
-6. **Styling Props Removed**: `variant`, `color`, `size`, `radius` - use Tailwind CSS
+6. **Variant Simplified**: v3 supports only `variant="primary"` and `variant="secondary"`; `color`, `size`, `radius` removed — use Tailwind CSS
 7. **Content Props Removed**: `startContent`, `endContent` - place manually
 8. **Clear Button Removed**: `isClearable` removed - handle manually
 9. **Stepper Control**: `hideStepper` removed - omit buttons instead

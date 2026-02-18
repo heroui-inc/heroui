@@ -9,23 +9,23 @@ description: Migration guide for CheckboxGroup from HeroUI v2 to v3
 
 ## Structure Changes
 
-In v2, `CheckboxGroup` was accessed via `Checkbox.Group`:
+In v2, `CheckboxGroup` was a separate component with a `label` prop and simple `Checkbox` children:
 
 ```tsx
-import { Checkbox } from "@heroui/react";
+import { Checkbox, CheckboxGroup } from "@heroui/react";
 
 export default function App() {
   return (
-    <Checkbox.Group label="Select interests">
+    <CheckboxGroup label="Select interests">
       <Checkbox value="coding">Coding</Checkbox>
       <Checkbox value="design">Design</Checkbox>
       <Checkbox value="writing">Writing</Checkbox>
-    </Checkbox.Group>
+    </CheckboxGroup>
   );
 }
 ```
 
-In v3, `CheckboxGroup` is a separate component that works with the new compound Checkbox structure:
+In v3, `CheckboxGroup` is still a separate component but uses `Label`/`Description` as children and the new compound Checkbox structure:
 
 ```tsx
 import { CheckboxGroup, Checkbox, Label, Description } from "@heroui/react";
@@ -65,32 +65,27 @@ export default function App() {
 
 ## Key Changes
 
-### 1. Component Name: `Checkbox.Group` → `CheckboxGroup`
+### 1. Same Component Name
 
-**v2:** Used `Checkbox.Group` (compound component)  
-**v3:** Uses `CheckboxGroup` (separate component)
+**v2:** `CheckboxGroup` (separate import with `label` prop)  
+**v3:** `CheckboxGroup` (separate import; use `Label` component instead of `label` prop)
 
-### 2. Import Path
+### 2. Label Prop
 
-**v2:** Imported from `Checkbox` compound component  
-**v3:** Imported directly from `@heroui/react`
-
-### 3. Label Prop
-
-**v2:** Used `label` prop on `Checkbox.Group`  
+**v2:** Used `label` prop on `CheckboxGroup`  
 **v3:** Use `Label` component as a child of `CheckboxGroup`
 
-### 4. Checkbox Structure
+### 3. Checkbox Structure
 
 **v2:** Simple Checkbox components with children as labels  
 **v3:** Compound Checkbox components with `Checkbox.Control`, `Checkbox.Indicator`, and `Checkbox.Content`
 
-### 5. Event Handler
+### 4. Event Handler
 
 **v2:** Used `onValueChange` prop  
 **v3:** Uses `onChange` prop (from React Aria Components)
 
-### 6. Variant Support
+### 5. Variant Support
 
 **v3:** New `variant` prop for styling the group container
 
@@ -102,11 +97,11 @@ export default function App() {
   <Tab value="v2">
     ```tsx
     import { useState } from "react";
-    import { Checkbox } from "@heroui/react";
+    import { Checkbox, CheckboxGroup } from "@heroui/react";
 
     const [selected, setSelected] = useState(["coding"]);
 
-    <Checkbox.Group
+    <CheckboxGroup
       value={selected}
       onValueChange={setSelected}
       label="Select interests"
@@ -114,7 +109,7 @@ export default function App() {
       <Checkbox value="coding">Coding</Checkbox>
       <Checkbox value="design">Design</Checkbox>
       <Checkbox value="writing">Writing</Checkbox>
-    </Checkbox.Group>
+    </CheckboxGroup>
     ```
   </Tab>
   <Tab value="v3">
@@ -161,9 +156,8 @@ export default function App() {
 
 ## Summary
 
-- Rename `Checkbox.Group` to `CheckboxGroup` (separate import)
-- Replace `label` prop with `Label` component as child
-- Update Checkbox children to use compound component structure
+- Keep using `CheckboxGroup`; replace `label` prop with `Label` component as a child
+- Update Checkbox children to use compound component structure (`Checkbox.Control`, `Checkbox.Indicator`, `Checkbox.Content`)
 - Change `onValueChange` to `onChange`
 - Add `name` prop for form integration
-- Better accessibility through React Aria Components
+- Built on React Aria Components for accessibility

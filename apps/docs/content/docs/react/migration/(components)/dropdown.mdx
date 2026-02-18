@@ -66,7 +66,7 @@ export default function App() {
 |-------------|--------------|-------|
 | `DropdownTrigger` | `Dropdown.Trigger` | Same functionality |
 | `DropdownMenu` | `Dropdown.Menu` | Wrapped in `Dropdown.Popover` |
-| `DropdownItem` | `Dropdown.Item` | Requires `id` instead of `key` |
+| `DropdownItem` | `Dropdown.Item` | Use `id` and `textValue`; keep `key` on list items |
 | `DropdownSection` | `Dropdown.Section` | Same functionality |
 | - | `Dropdown.Popover` | New wrapper component (required) |
 
@@ -343,7 +343,7 @@ Dropdown (Root)
   │           └── Dropdown.Item
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must use compound components (`Dropdown.Trigger`, `Dropdown.Popover`, `Dropdown.Menu`, etc.)
 2. **Dropdown.Popover Required**: `Dropdown.Menu` must be wrapped in `Dropdown.Popover`

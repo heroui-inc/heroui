@@ -25,9 +25,7 @@ description: Migration guide for Link from HeroUI v2 to v3
 | `color` | - | Removed (use Tailwind CSS) |
 | `isBlock` | - | Removed (use Tailwind CSS) |
 | `disableAnimation` | - | Removed |
-| `underline` | `underline` | Simplified (`active` and `focus` removed) |
-| - | `underlineOffset` | New prop (1 \| 2 \| 3) |
-| - | `asChild` | New prop for composition |
+| `underline` | - | Removed (use Tailwind: `underline`, `hover:underline`, `no-underline`) |
 
 ### 3. Removed Props
 
@@ -37,6 +35,7 @@ The following props are no longer available in v3:
 - `color` - Use Tailwind CSS classes (e.g., `text-primary`, `text-danger`)
 - `isBlock` - Use Tailwind CSS classes (e.g., `block`, `hover:bg-surface`)
 - `disableAnimation` - Animations are handled differently in v3
+- `underline` - Use Tailwind classes (`underline`, `hover:underline`, `no-underline`, `underline-offset-*`)
 - `showAnchorIcon` - Use `Link.Icon` component instead
 - `anchorIcon` - Pass custom icon as children to `Link.Icon`
 - `isExternal` - Handle manually with `target="_blank"` and `rel="noopener noreferrer"`
@@ -128,33 +127,29 @@ export default function App() {
   </Tab>
 </Tabs>
 
-### Underline Offset
+### Underline and offset (v3: use Tailwind)
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    {/* v2 doesn't have underlineOffset prop */}
     <Link href="#" underline="hover">
-      No offset
+      Hover to underline
     </Link>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    <Link href="#" underline="hover" underlineOffset={1}>
-      No offset
+    <Link href="#" className="hover:underline">
+      Hover to underline
     </Link>
-    <Link href="#" underline="hover" underlineOffset={2}>
-      2px offset
-    </Link>
-    <Link href="#" underline="hover" underlineOffset={3}>
-      4px offset
+    <Link href="#" className="underline underline-offset-2">
+      Underline with offset
     </Link>
     ```
   </Tab>
 </Tabs>
 
-### With Routing Libraries
+### With routing libraries
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
@@ -172,12 +167,10 @@ export default function App() {
     import NextLink from "next/link";
     import { Link } from "@heroui/react";
 
-    <Link asChild underline="hover">
-      <NextLink href="/about">
-        About
-        <Link.Icon />
-      </NextLink>
-    </Link>
+    {/* Style your router link with the same classes as Link; add an icon if needed */}
+    <NextLink href="/about" className="link hover:underline">
+      About
+    </NextLink>
     ```
   </Tab>
 </Tabs>
@@ -192,14 +185,13 @@ Link (Root)
   └── Link.Icon (optional)
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Icon Handling**: `showAnchorIcon` and `anchorIcon` props replaced with `Link.Icon` component
 2. **External Links**: `isExternal` prop removed - handle manually with `target` and `rel`
 3. **Size Prop Removed**: Use Tailwind CSS classes (`text-sm`, `text-base`, `text-lg`)
 4. **Color Prop Removed**: Use Tailwind CSS classes (`text-primary`, `text-danger`, etc.)
 5. **Block Prop Removed**: Use Tailwind CSS classes (`block`, `hover:bg-surface`)
-6. **Underline Simplified**: Removed `active` and `focus` variants, only `none`, `hover`, `always` remain
-7. **New UnderlineOffset**: Added `underlineOffset` prop (1, 2, 3) for spacing control
-8. **New asChild Prop**: Added for better composition with routing libraries
-9. **Animation Removed**: `disableAnimation` prop removed
+6. **Underline**: No longer a prop; use Tailwind (`underline`, `hover:underline`, `no-underline`, `underline-offset-1`, etc.)
+7. **Routing**: v3 Link does not support `as` or `asChild`; use your router's Link with Tailwind classes (e.g. `link`, `link__icon`) for consistent styling
+8. **Animation Removed**: `disableAnimation` prop removed

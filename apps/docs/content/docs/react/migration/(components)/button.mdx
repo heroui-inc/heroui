@@ -52,7 +52,7 @@ export default function App() {
 | `color="danger" variant="flat"` | `variant="danger-soft"` | New soft danger variant |
 
 **v2 Variants:** `solid`, `bordered`, `light`, `flat`, `faded`, `shadow`, `ghost`  
-**v3 Variants:** `primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-soft`
+**v3 Variants:** `primary`, `secondary`, `tertiary`, `outline`, `ghost`, `danger`, `danger-soft`
 
 ### 2. Loading State: `isLoading` → `isPending`
 
@@ -74,15 +74,14 @@ The following props are no longer available in v3:
 - `radius` - Use Tailwind CSS classes like `rounded-lg`, `rounded-full`, etc.
 - `startContent` / `endContent` - Place icons directly as children
 - `spinner` / `spinnerPlacement` - Handle loading state manually with render props
-- `fullWidth` - Use Tailwind CSS class `w-full`
 - `disableRipple` - Ripple effect removed in v3
 - `disableAnimation` - Animations are handled internally
 - `classNames` - Use `className` prop instead
 
-### 6. ButtonGroup Available
+### 5. ButtonGroup Available
 
 **v2:** Had a dedicated `ButtonGroup` component  
-**v3:** `ButtonGroup` component continues to exist with enhanced prop inheritance. See the [ButtonGroup migration guide](/docs/react/migration/button-group) for details.
+**v3:** `ButtonGroup` continues to exist. See the [ButtonGroup migration guide](/docs/react/migration/button-group) for details.
 
 ## Migration Examples
 
@@ -230,10 +229,10 @@ The following props are no longer available in v3:
     ```tsx
     import { Button, ButtonGroup } from "@heroui/react";
 
-    <ButtonGroup>
-      <Button size="sm" variant="primary">One</Button>
-      <Button size="sm" variant="primary">Two</Button>
-      <Button size="sm" variant="primary">Three</Button>
+    <ButtonGroup size="sm" color="primary" variant="solid">
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
     </ButtonGroup>
     ```
   </Tab>
@@ -249,8 +248,6 @@ The following props are no longer available in v3:
     ```
   </Tab>
 </Tabs>
-
-**Note:** ButtonGroup in v3 supports enhanced prop inheritance. See the [ButtonGroup migration guide](/docs/react/migration/button-group) for more details.
 
 ### Sizes and Minimum Width
 
@@ -294,7 +291,7 @@ Available render props:
 - `isFocusVisible` - Whether button should show focus indicator
 - `isDisabled` - Whether button is disabled
 
-## Breaking Changes Summary
+## Summary
 
 1. **Color Prop Removed**: Use `variant` prop instead of `color` + `variant`
 2. **Variants Changed**: New variant system (`primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-soft`)
@@ -303,7 +300,6 @@ Available render props:
 5. **Icons**: `startContent`/`endContent` removed - place icons as children
 6. **Loading Spinner**: Must handle spinner manually with render props
 7. **Radius Removed**: Use Tailwind CSS classes
-8. **FullWidth Removed**: Use Tailwind `w-full` class
-9. **Ripple Removed**: No ripple effect in v3
-10. **ButtonGroup Available**: ButtonGroup continues to exist with enhanced prop inheritance - see [ButtonGroup migration guide](/docs/react/migration/button-group)
-11. **ClassNames Removed**: Use `className` prop
+8. **Ripple Removed**: No ripple effect in v3
+9. **ButtonGroup Available**: See [ButtonGroup migration guide](/docs/react/migration/button-group)
+10. **ClassNames Removed**: Use `className` prop

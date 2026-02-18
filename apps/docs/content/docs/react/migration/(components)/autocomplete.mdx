@@ -328,12 +328,12 @@ ComboBox (Root)
   └── FieldError (optional)
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Rename**: `Autocomplete` → `ComboBox`
 2. **Component Structure**: Single component → Compound components
 3. **Item Components**: `AutocompleteItem` → `ListBox.Item`
-4. **Item Props**: `key` → `id` + `textValue` (required)
+4. **Item identity**: Use `id` and `textValue` on items; keep React's `key` for list reconciliation
 5. **Input**: Internal → Explicit `Input` component required
 6. **Label/Description**: Props → Separate components
 7. **Styling Props Removed**: `variant`, `color`, `size`, `radius` - use Tailwind CSS

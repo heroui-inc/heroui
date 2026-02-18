@@ -48,6 +48,7 @@ export default function App() {
 | v2 Prop | v3 Prop | Notes |
 |---------|---------|-------|
 | `onValueChange` | `onChange` | Renamed event handler |
+| `size` | `size` | Still exists on root (`sm` \| `md` \| `lg`) |
 | `label` | - | Removed (use `Label` component) |
 | `color` | - | Removed (use Tailwind CSS) |
 | `thumbIcon` | - | Removed (use `Switch.Icon` inside `Switch.Thumb`) |
@@ -316,7 +317,7 @@ SwitchGroup
 - **v2:** `thumbIcon` prop for icon inside thumb, `startContent`/`endContent` for icons outside
 - **v3:** Use `Switch.Icon` inside `Switch.Thumb` for thumb icon, customize `Switch.Control` for start/end content
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must use compound components (`Switch.Control`, `Switch.Thumb`)
 2. **Label Handling**: Children no longer used as label - use `Label` component
