@@ -8,6 +8,7 @@ export const switchVariants = tv({
   },
   slots: {
     base: "switch",
+    content: "switch__content",
     control: "switch__control",
     icon: "switch__icon",
     thumb: "switch__thumb",

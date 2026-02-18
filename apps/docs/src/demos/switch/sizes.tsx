@@ -7,19 +7,25 @@ export function Sizes() {
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-xs">Small</Label>
+        <Switch.Content>
+          <Label className="text-xs">Small</Label>
+        </Switch.Content>
       </Switch>
       <Switch size="md">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Medium</Label>
+        <Switch.Content>
+          <Label className="text-sm">Medium</Label>
+        </Switch.Content>
       </Switch>
       <Switch size="lg">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-base">Large</Label>
+        <Switch.Content>
+          <Label className="text-base">Large</Label>
+        </Switch.Content>
       </Switch>
     </div>
   );
