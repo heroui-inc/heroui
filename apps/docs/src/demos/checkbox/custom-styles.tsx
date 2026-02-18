@@ -8,7 +8,9 @@ export function CustomStyles() {
           <Checkbox.Indicator className="text-white" />
         </Checkbox.Control>
       </Checkbox>
-      <Label htmlFor="custom">Custom styled checkbox</Label>
+      <Checkbox.Content>
+        <Label htmlFor="custom">Custom styled checkbox</Label>
+      </Checkbox.Content>
     </div>
   );
 }

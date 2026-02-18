@@ -8,10 +8,10 @@ export function WithDescription() {
           <Checkbox.Indicator />
         </Checkbox.Control>
       </Checkbox>
-      <div className="flex flex-col gap-1">
+      <Checkbox.Content>
         <Label htmlFor="description-notifications">Email notifications</Label>
         <Description>Get notified when someone mentions you in a comment</Description>
-      </div>
+      </Checkbox.Content>
     </div>
   );
 }

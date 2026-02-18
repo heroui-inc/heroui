@@ -8,7 +8,9 @@ export function DefaultSelected() {
           <Checkbox.Indicator />
         </Checkbox.Control>
       </Checkbox>
-      <Label htmlFor="default-notifications">Enable email notifications</Label>
+      <Checkbox.Content>
+        <Label htmlFor="default-notifications">Enable email notifications</Label>
+      </Checkbox.Content>
     </div>
   );
 }

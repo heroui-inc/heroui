@@ -8,10 +8,10 @@ export function Disabled() {
           <Checkbox.Indicator />
         </Checkbox.Control>
       </Checkbox>
-      <div className="flex flex-col gap-1">
+      <Checkbox.Content>
         <Label htmlFor="feature">Premium Feature</Label>
         <Description>This feature is coming soon</Description>
-      </div>
+      </Checkbox.Content>
     </div>
   );
 }

@@ -23,10 +23,10 @@ export function Indeterminate() {
           <Checkbox.Indicator />
         </Checkbox.Control>
       </Checkbox>
-      <div className="flex flex-col gap-1">
+      <Checkbox.Content>
         <Label htmlFor="select-all">Select all</Label>
         <Description>Shows indeterminate state (dash icon)</Description>
-      </div>
+      </Checkbox.Content>
     </div>
   );
 }

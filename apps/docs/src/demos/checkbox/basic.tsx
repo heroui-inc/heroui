@@ -8,7 +8,9 @@ export function Basic() {
           <Checkbox.Indicator />
         </Checkbox.Control>
       </Checkbox>
-      <Label htmlFor="basic-terms">Accept terms and conditions</Label>
+      <Checkbox.Content>
+        <Label htmlFor="basic-terms">Accept terms and conditions</Label>
+      </Checkbox.Content>
     </div>
   );
 }
