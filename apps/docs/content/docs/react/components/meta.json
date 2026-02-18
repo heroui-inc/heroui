@@ -30,6 +30,7 @@
     "(pickers)/combo-box",
     "(date-and-time)/date-field",
     "(date-and-time)/date-picker",
+    "(date-and-time)/date-range-picker",
     "(forms)/description",
     "(navigation)/disclosure",
     "(navigation)/disclosure-group",

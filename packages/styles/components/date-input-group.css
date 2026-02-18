@@ -66,6 +66,15 @@
     @apply rounded-r-none pr-2;
   }
 
+  .date-input-group:has(.date-range-picker__range-separator) & {
+    &[slot="start"] {
+      @apply flex-none pr-0;
+    }
+    &[slot="end"] {
+      @apply pl-0;
+    }
+  }
+
   /* Focus state - handled by group */
   &:focus,
   &:focus-visible {
@@ -74,7 +83,7 @@
 }
 
 .date-input-group__segment {
-  @apply inline-block rounded-md px-0.5 text-end outline-none;
+  @apply inline-block rounded-md px-0.5 text-end text-nowrap outline-none;
 
   /* Segment separators styling "/" */
   &[data-type="literal"] {
