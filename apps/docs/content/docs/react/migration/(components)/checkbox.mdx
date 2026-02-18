@@ -69,8 +69,10 @@ The following props are no longer available in v3:
 
 ### 5. CheckboxGroup Changes
 
-**v2:** `Checkbox.Group` (compound component)  
-**v3:** `CheckboxGroup` (separate component, but structure of children changed)
+**v2:** `CheckboxGroup` (separate component) with `label` prop and simple `Checkbox` children  
+**v3:** `CheckboxGroup` (separate component) with `Label`/`Description` as children and compound `Checkbox` structure
+
+For migrating checkbox groups, see the [CheckboxGroup migration guide](/docs/react/migration/checkbox-group).
 
 ## Migration Examples
 
@@ -141,18 +143,18 @@ The following props are no longer available in v3:
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    import { Checkbox } from "@heroui/react";
+    import { Checkbox, CheckboxGroup } from "@heroui/react";
 
-    <Checkbox.Group label="Select cities">
+    <CheckboxGroup label="Select cities">
       <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
       <Checkbox value="sydney">Sydney</Checkbox>
       <Checkbox value="san-francisco">San Francisco</Checkbox>
-    </Checkbox.Group>
+    </CheckboxGroup>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { CheckboxGroup, Description } from "@heroui/react";
+    import { CheckboxGroup, Checkbox, Label, Description } from "@heroui/react";
 
     <CheckboxGroup name="cities">
       <Label>Select cities</Label>
@@ -345,7 +347,7 @@ Checkbox (Root)
       └── Description (optional)
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must use compound components (`Control`, `Indicator`, `Content`)
 2. **Label Handling**: Labels must use `Label` component inside `Checkbox.Content`
@@ -355,5 +357,5 @@ Checkbox (Root)
 6. **Radius Removed**: Use Tailwind CSS classes on `Checkbox.Control`
 7. **LineThrough Removed**: Use Tailwind `line-through` class on label
 8. **Icon Prop Removed**: Use custom content in `Checkbox.Indicator`
-9. **CheckboxGroup**: Changed from `Checkbox.Group` to `CheckboxGroup` with different child structure
+9. **CheckboxGroup**: Same component name; use `Label`/`Description` as children and compound `Checkbox` structure
 10. **ClassNames Removed**: Use `className` props on individual components

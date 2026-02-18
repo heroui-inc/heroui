@@ -30,10 +30,11 @@ description: Migration guide for Navbar from HeroUI v2 to v3
 
 - `shouldHideOnScroll` - Requires custom scroll detection
 - `isBlurred` - Use Tailwind `backdrop-blur` utilities
+- `isBordered` - Use Tailwind border classes
 - `position` variants - Use Tailwind `sticky`, `fixed` classes
 - `maxWidth` variants - Use Tailwind `max-w-*` classes
 - Mobile menu animations - Requires custom implementation
-- Scroll blocking - Requires custom implementation
+- Scroll blocking - Requires custom implementation (see "Scroll Blocking" below)
 
 ## Migration Examples
 
@@ -583,7 +584,7 @@ useEffect(() => {
 }, [isMenuOpen]);
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Removed**: All Navbar components removed (`Navbar`, `NavbarBrand`, `NavbarContent`, `NavbarItem`, `NavbarMenu`, `NavbarMenuItem`, `NavbarMenuToggle`)
 2. **Import Change**: Remove all Navbar imports from `@heroui/react`

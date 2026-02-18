@@ -54,12 +54,11 @@ export default function App() {
 | `onValueChange` | `onChange` | Renamed event handler |
 | `description` | - | Removed (handle separately) |
 | `errorMessage` | - | Removed (handle separately) |
-| `variant` | - | Removed (use Tailwind CSS) |
+| `variant` | `variant` | Simplified to `primary` \| `secondary` only |
 | `color` | - | Removed (use Tailwind CSS) |
 | `size` | - | Removed (use Tailwind CSS) |
 | `radius` | - | Removed (use Tailwind CSS) |
 | `classNames` | - | Use `className` props |
-| - | `isOnSurface` | New prop for surface styling |
 
 ### 3. Removed Props
 
@@ -69,7 +68,7 @@ The following props are no longer available in v3:
 - `allowedKeys` - Use `pattern` instead
 - `description` - Handle separately with `Description` component
 - `errorMessage` - Handle separately with error display
-- `variant` - Use Tailwind CSS classes
+- `variant` - In v3 only `primary` and `secondary` are supported (use Tailwind for other styles)
 - `color` - Use Tailwind CSS classes
 - `size` - Use Tailwind CSS classes
 - `radius` - Use Tailwind CSS classes
@@ -225,7 +224,7 @@ InputOTP (Root)
       └── InputOTP.Slot (index={...})
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must manually define slots using `InputOTP.Group` and `InputOTP.Slot`
 2. **length → maxLength**: Prop renamed
@@ -233,7 +232,7 @@ InputOTP (Root)
 4. **onValueChange → onChange**: Event handler renamed
 5. **Description Removed**: Handle separately with `Description` component
 6. **Error Message Removed**: Handle separately with error display
-7. **Variants Removed**: Use Tailwind CSS classes for styling
+7. **Variant Simplified**: v3 supports only `variant="primary"` and `variant="secondary"`
 8. **Colors Removed**: Use Tailwind CSS classes for styling
 9. **Sizes Removed**: Use Tailwind CSS classes for styling
 10. **Radius Removed**: Use Tailwind CSS classes for styling

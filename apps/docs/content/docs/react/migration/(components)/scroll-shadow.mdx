@@ -54,24 +54,14 @@ export default function App() {
 **v2:** Shadow size was fixed or limited customization  
 **v3:** `size` prop allows custom shadow size in pixels
 
-### 4. Orientation Support
-
-**v2:** Primarily vertical scrolling  
-**v3:** Supports both `vertical` and `horizontal` orientations
-
-### 5. Variant Support
-
-**v3:** New `variant` prop supports `fade` (opacity effect) and `blur` (blur effect)
-
-### 6. Enhanced Props
+### 4. Enhanced Props
 
 **v3:** New props available:
 - `size` - Shadow size in pixels (default: 40)
 - `offset` - Scroll offset before showing shadows (default: 0)
 - `isEnabled` - Enable/disable shadow detection (default: true)
 - `hideScrollBar` - Hide scrollbar while maintaining scroll functionality
-- `variant` - Shadow effect type: `fade` or `blur` (default: `fade`)
-- `orientation` - Scroll direction: `vertical` or `horizontal` (default: `vertical`)
+- `variant` - Shadow effect type (default: `fade`)
 - `onVisibilityChange` - Callback when shadow visibility changes
 
 ## Migration Examples
@@ -90,28 +80,6 @@ export default function App() {
     ```tsx
     <ScrollShadow size={80} className="max-h-[400px]">
       {/* Large shadow */}
-    </ScrollShadow>
-    ```
-  </Tab>
-</Tabs>
-
-### Horizontal Scrolling
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    {/* Horizontal scrolling was limited */}
-    <ScrollShadow>
-      <div className="flex overflow-x-auto">
-        {/* horizontal content */}
-      </div>
-    </ScrollShadow>
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    <ScrollShadow orientation="horizontal">
-      {/* horizontal scrolling content */}
     </ScrollShadow>
     ```
   </Tab>
@@ -151,22 +119,20 @@ export default function App() {
   </Tab>
 </Tabs>
 
-### Variant Effects
+### Variant
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
     <ScrollShadow>
-      {/* Only fade effect available */}
+      {/* v2 used theme variants (e.g. orientation, hideScrollBar) */}
     </ScrollShadow>
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { ScrollShadow } from "@heroui/react";
-
-    <ScrollShadow variant="blur" className="max-h-[400px]">
-      {/* Content with blur shadow effect */}
+    <ScrollShadow variant="fade" className="max-h-[400px]">
+      {/* Shadow effect controlled by variant (default: fade) */}
     </ScrollShadow>
     ```
   </Tab>
@@ -177,6 +143,6 @@ export default function App() {
 - Update import from `@heroui/scroll-shadow` to `@heroui/react`
 - Enhanced API with more configuration options
 - Better shadow detection and visibility control
-- Support for horizontal scrolling
-- Customizable shadow size and variant effects
+- Same orientation support (vertical / horizontal); import from `@heroui/react`
+- Customizable shadow size and variant (e.g. fade)
 - Improved performance and accessibility

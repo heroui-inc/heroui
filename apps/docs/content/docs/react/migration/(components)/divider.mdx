@@ -19,9 +19,9 @@ description: Migration guide for Divider (renamed to Separator) from HeroUI v2 t
 **v2:** `Divider`  
 **v3:** `Separator`
 
-### 2. New Feature: Surface Detection
+### 2. Variant Prop
 
-**v3:** Added `isOnSurface` prop and automatic surface detection for better visibility on surface backgrounds (e.g., inside Card, Alert, Popover, Modal components).
+**v3:** Separator has a `variant` prop: `default`, `secondary`, `tertiary` for different emphasis levels (v2 Divider had no variant).
 
 ### 3. Props Comparison
 
@@ -29,7 +29,7 @@ description: Migration guide for Divider (renamed to Separator) from HeroUI v2 t
 |------|----|----|-------|
 | `orientation` | ✅ | ✅ | Same: `"horizontal"` \| `"vertical"` |
 | `className` | ✅ | ✅ | Same |
-| `isOnSurface` | ❌ | ✅ | New: Automatically detects surface context |
+| `variant` | ❌ | ✅ | New: `"default"` \| `"secondary"` \| `"tertiary"` |
 
 ## Structure Changes
 
@@ -67,118 +67,33 @@ export default function App() {
 
 ## Migration Examples
 
-### On Surface Backgrounds
+### With Variant
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
     ```tsx
-    {/* v2 doesn't have surface detection */}
-    <Card>
-      <Divider />
-    </Card>
+    {/* v2 has no variant prop */}
+    <Divider />
     ```
   </Tab>
   <Tab value="v3">
     ```tsx
-    {/* v3 automatically detects surface context */}
-    <Card>
-      <Separator />
-    </Card>
-    
-    {/* Or explicitly set */}
-    <div className="bg-surface">
-      <Separator isOnSurface />
-    </div>
+    <Separator />
+    <Separator variant="secondary" />
+    <Separator variant="tertiary" />
     ```
   </Tab>
 </Tabs>
 
-## Complete Example
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Divider } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <div className="max-w-md">
-          <div className="space-y-1">
-            <h4 className="text-medium font-medium">HeroUI Components</h4>
-            <p className="text-small text-default-400">
-              Beautiful, fast and modern React UI library.
-            </p>
-          </div>
-          <Divider className="my-4" />
-          <div className="flex h-5 items-center space-x-4 text-small">
-            <div>Blog</div>
-            <Divider orientation="vertical" />
-            <div>Docs</div>
-            <Divider orientation="vertical" />
-            <div>Source</div>
-          </div>
-        </div>
-      );
-    }
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    import { Separator } from "@heroui/react";
-
-    export default function App() {
-      return (
-        <div className="max-w-md">
-          <div className="space-y-1">
-            <h4 className="text-medium font-medium">HeroUI v3 Components</h4>
-            <p className="text-small text-default-400">
-              Beautiful, fast and modern React UI library.
-            </p>
-          </div>
-          <Separator className="my-4" />
-          <div className="flex h-5 items-center space-x-4 text-small">
-            <div>Blog</div>
-            <Separator orientation="vertical" />
-            <div>Docs</div>
-            <Separator orientation="vertical" />
-            <div>Source</div>
-          </div>
-        </div>
-      );
-    }
-    ```
-  </Tab>
-</Tabs>
-
-## Automatic Surface Detection
-
-v3 Separator automatically detects when it's placed inside components that provide `SurfaceContext` and applies appropriate styling for better visibility. This works with:
-
-- Card
-- Alert
-- Popover
-- Modal
-- Combobox
-- Select
-- Dropdown
-
-You can also explicitly set `isOnSurface={true}` when needed:
-
-```tsx
-<div className="bg-surface">
-  <Separator isOnSurface />
-</div>
-```
-
-## Breaking Changes Summary
+## Summary
 
 1. **Component Renamed**: `Divider` → `Separator`
-2. **Import Change**: Update import statement from `Divider` to `Separator`
-3. **New Feature**: Added `isOnSurface` prop for better surface visibility
+2. **Import Change**: Update import from `Divider` to `Separator`
+3. **New in v3**: `variant` prop (`default`, `secondary`, `tertiary`) for emphasis levels
 
 ## Migration Steps
 
 1. **Update Import**: Change `import { Divider }` to `import { Separator }`
 2. **Update Component**: Replace all `<Divider />` with `<Separator />`
-3. **Verify Functionality**: The `orientation` prop works the same way
-4. **Optional**: Use `isOnSurface` prop when needed for better visibility on surface backgrounds
+3. **Same Props**: `orientation` and `className` work the same
+4. **Optional**: Use `variant="secondary"` or `variant="tertiary"` for different emphasis

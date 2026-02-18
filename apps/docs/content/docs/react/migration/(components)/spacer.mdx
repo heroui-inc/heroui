@@ -233,43 +233,7 @@ Apply margin directly to elements instead of using Spacer:
 </>
 ```
 
-## Creating a Reusable Spacer Component (Optional)
-
-If you frequently need spacer-like behavior, you can create a simple wrapper:
-
-<Tabs items={["v2", "v3"]}>
-  <Tab value="v2">
-    ```tsx
-    import { Spacer } from "@heroui/react";
-
-    <Spacer x={4} y={2} />
-    ```
-  </Tab>
-  <Tab value="v3">
-    ```tsx
-    interface SpacerProps {
-      x?: number | string;
-      y?: number | string;
-      className?: string;
-    }
-
-    export function Spacer({ x, y, className }: SpacerProps) {
-      const classes = [];
-      if (x) classes.push(`ml-${x}`);
-      if (y) classes.push(`mt-${y}`);
-      
-      return <div className={[classes.join(" "), className].filter(Boolean).join(" ")} aria-hidden="true" />;
-    }
-
-    // Usage
-    <Spacer x={4} y={2} />
-    ```
-  </Tab>
-</Tabs>
-
-However, it's recommended to use Tailwind utilities directly instead of creating a wrapper component.
-
-## Breaking Changes Summary
+## Summary
 
 1. **Component Removed**: `Spacer` component no longer exists in v3
 2. **Import Change**: Remove `import { Spacer } from "@heroui/react"`

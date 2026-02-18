@@ -41,16 +41,18 @@ export default function App() {
   return (
     <Modal>
       <Button>Open Modal</Button>
-      <Modal.Container>
-        <Modal.Dialog>
-          <Modal.CloseTrigger />
-          <Modal.Header>
-            <Modal.Heading>Title</Modal.Heading>
-          </Modal.Header>
-          <Modal.Body>Content</Modal.Body>
-          <Modal.Footer>Footer</Modal.Footer>
-        </Modal.Dialog>
-      </Modal.Container>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>Title</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>Content</Modal.Body>
+            <Modal.Footer>Footer</Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
   );
 }
@@ -61,12 +63,12 @@ export default function App() {
 ### 1. Component Structure
 
 **v2:** Separate components (`Modal`, `ModalContent`, `ModalHeader`, `ModalBody`, `ModalFooter`)  
-**v3:** Compound components (`Modal.Container`, `Modal.Dialog`, `Modal.Header`, `Modal.Body`, `Modal.Footer`)
+**v3:** Compound components (`Modal.Backdrop`, `Modal.Container`, `Modal.Dialog`, `Modal.Header`, `Modal.Body`, `Modal.Footer`)
 
 ### 2. State Management
 
 **v2:** Uses `useDisclosure` hook  
-**v3:** Built-in trigger or controlled with `isOpen`/`onOpenChange` on `Modal.Container`, or use `useOverlayState` hook
+**v3:** Built-in trigger or controlled with `isOpen`/`onOpenChange` on `Modal.Backdrop`, or use `useOverlayState` and pass `state` to the root
 
 <Callout type="info">
   For detailed migration from `useDisclosure` to `useOverlayState`, see the [Hooks Migration Guide](/docs/react/migration/hooks).
@@ -76,16 +78,16 @@ export default function App() {
 
 | v2 Prop | v3 Prop | Notes |
 |---------|---------|-------|
-| `size` | - | Removed (use Tailwind CSS) |
+| `size` | `size` (on Container) | Simplified (xs, sm, md, lg, cover, full) |
 | `radius` | - | Removed (use Tailwind CSS) |
 | `shadow` | - | Removed (use Tailwind CSS) |
-| `backdrop` | `variant` (on Container) | Renamed (`opaque` → `solid`) |
+| `backdrop` | `variant` (on **Backdrop**) | Renamed; values unchanged (`opaque`, `blur`, `transparent`) |
 | `scrollBehavior` | `scroll` (on Container) | Renamed (`normal` → `inside`) |
 | `placement` | `placement` (on Container) | Moved to Container |
-| `isDismissable` | `isDismissable` (on Container) | Moved to Container |
-| `isKeyboardDismissDisabled` | `isKeyboardDismissDisabled` (on Container) | Moved to Container |
-| `isOpen` | `isOpen` (on Container) | Moved to Container |
-| `onOpenChange` | `onOpenChange` (on Container) | Moved to Container |
+| `isDismissable` | `isDismissable` (on **Backdrop**) | Moved to `Modal.Backdrop` |
+| `isKeyboardDismissDisabled` | `isKeyboardDismissDisabled` (on **Backdrop**) | Moved to `Modal.Backdrop` |
+| `isOpen` | `isOpen` (on **Backdrop**) | Controlled state on `Modal.Backdrop` |
+| `onOpenChange` | `onOpenChange` (on **Backdrop**) | Same as above |
 | `onClose` | - | Use `close` from render prop |
 | `hideCloseButton` | - | Omit `Modal.CloseTrigger` instead |
 | `closeButton` | - | Use `Modal.CloseTrigger` with custom content |
@@ -98,7 +100,7 @@ export default function App() {
 
 The following props are no longer available in v3:
 
-- `size` - Use Tailwind CSS classes (e.g., `sm:max-w-[360px]`)
+- `size` - In v3 use `size` on `Modal.Container` (xs, sm, md, lg, cover, full); for custom widths use Tailwind
 - `radius` - Use Tailwind CSS classes (e.g., `rounded-lg`)
 - `shadow` - Use Tailwind CSS classes (e.g., `shadow-lg`)
 - `motionProps` - Animations handled differently
@@ -139,18 +141,20 @@ The following props are no longer available in v3:
 
     <Modal>
       <Button onPress={() => setIsOpen(true)}>Open</Button>
-      <Modal.Container isOpen={isOpen} onOpenChange={setIsOpen}>
-        <Modal.Dialog>
-          {({close}) => (
-            <>
-              <Modal.Header>
-                <Modal.Heading>Title</Modal.Heading>
-              </Modal.Header>
-              <Modal.Body>Content</Modal.Body>
-            </>
-          )}
-        </Modal.Dialog>
-      </Modal.Container>
+      <Modal.Backdrop isOpen={isOpen} onOpenChange={setIsOpen}>
+        <Modal.Container>
+          <Modal.Dialog>
+            {({close}) => (
+              <>
+                <Modal.Header>
+                  <Modal.Heading>Title</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>Content</Modal.Body>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
     ```
   </Tab>
@@ -162,18 +166,20 @@ The following props are no longer available in v3:
 
     <Modal>
       <Button onPress={state.open}>Open</Button>
-      <Modal.Container isOpen={state.isOpen} onOpenChange={state.setOpen}>
-        <Modal.Dialog>
-          {({close}) => (
-            <>
-              <Modal.Header>
-                <Modal.Heading>Title</Modal.Heading>
-              </Modal.Header>
-              <Modal.Body>Content</Modal.Body>
-            </>
-          )}
-        </Modal.Dialog>
-      </Modal.Container>
+      <Modal.Backdrop isOpen={state.isOpen} onOpenChange={state.setOpen}>
+        <Modal.Container>
+          <Modal.Dialog>
+            {({close}) => (
+              <>
+                <Modal.Header>
+                  <Modal.Heading>Title</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>Content</Modal.Body>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
     ```
   </Tab>
@@ -183,7 +189,7 @@ The following props are no longer available in v3:
   For detailed `useDisclosure` → `useOverlayState` migration guide, see the [Hooks Migration Guide](/docs/react/migration/hooks).
 </Callout>
 
-### Container Props
+### Backdrop and Container Props
 
 <Tabs items={["v2", "v3"]}>
   <Tab value="v2">
@@ -206,20 +212,26 @@ The following props are no longer available in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
-    {/* Backdrop - renamed to variant */}
-    <Modal.Container variant="blur">
-      <Modal.Dialog>{/* content */}</Modal.Dialog>
-    </Modal.Container>
+    {/* Backdrop - use Modal.Backdrop with variant */}
+    <Modal.Backdrop variant="blur">
+      <Modal.Container>
+        <Modal.Dialog>{/* content */}</Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
     
-    {/* Placement - moved to Container */}
-    <Modal.Container placement="top">
-      <Modal.Dialog>{/* content */}</Modal.Dialog>
-    </Modal.Container>
+    {/* Placement - on Container */}
+    <Modal.Backdrop>
+      <Modal.Container placement="top">
+        <Modal.Dialog>{/* content */}</Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
     
-    {/* Scroll behavior - renamed to scroll */}
-    <Modal.Container scroll="outside">
-      <Modal.Dialog>{/* content */}</Modal.Dialog>
-    </Modal.Container>
+    {/* Scroll - on Container */}
+    <Modal.Backdrop>
+      <Modal.Container scroll="outside">
+        <Modal.Dialog>{/* content */}</Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
     ```
   </Tab>
 </Tabs>
@@ -293,26 +305,27 @@ The v3 Modal follows this structure:
 
 ```
 Modal (Root)
-  ├── Modal.Trigger (optional, or use Button)
-  └── Modal.Container
-      └── Modal.Dialog
-          ├── Modal.CloseTrigger (optional)
-          ├── Modal.Header
-          │   ├── Modal.Icon (optional)
-          │   └── Modal.Heading
-          ├── Modal.Body
-          └── Modal.Footer
+  ├── Trigger (e.g. Button or Modal.Trigger)
+  └── Modal.Backdrop (variant, isDismissable, isKeyboardDismissDisabled)
+      └── Modal.Container (placement, scroll, size)
+          └── Modal.Dialog
+              ├── Modal.CloseTrigger (optional)
+              ├── Modal.Header
+              │   ├── Modal.Icon (optional)
+              │   └── Modal.Heading
+              ├── Modal.Body
+              └── Modal.Footer
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must use compound components (`Modal.Container`, `Modal.Dialog`, etc.)
 2. **State Management**: Built-in trigger or controlled state on `Modal.Container`
 3. **Props Moved**: Many props moved from `Modal` to `Modal.Container`
 4. **Close Handler**: `onClose` callback replaced with `close` render prop
 5. **Close Button**: `hideCloseButton`/`closeButton` replaced with `Modal.CloseTrigger`
-6. **Styling Props Removed**: `size`, `radius`, `shadow` - use Tailwind CSS
-7. **Backdrop Renamed**: `backdrop` → `variant` (`opaque` → `solid`)
+6. **Size**: Use `size` on `Modal.Container` (xs, sm, md, lg, cover, full); `radius` and `shadow` removed — use Tailwind
+7. **Backdrop**: `backdrop` → `variant` on `Modal.Backdrop` (values: `opaque`, `blur`, `transparent`)
 8. **Scroll Renamed**: `scrollBehavior` → `scroll` (`normal` → `inside`)
 9. **Motion Removed**: `motionProps` removed, animations handled differently
 10. **New Components**: `Modal.Icon`, `Modal.Heading`, `Modal.Trigger`

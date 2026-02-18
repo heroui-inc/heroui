@@ -76,7 +76,7 @@ export default function App() {
 | `label` | - | Removed (use `Label` component) |
 | `description` | - | Removed (use `Description` component) |
 | `errorMessage` | - | Removed (use `FieldError` component) |
-| `variant` | - | Removed (use Tailwind CSS) |
+| `variant` | `variant` | Simplified to `primary` \| `secondary` only |
 | `color` | - | Removed (use Tailwind CSS) |
 | `size` | - | Removed (use Tailwind CSS) |
 | `radius` | - | Removed (use Tailwind CSS) |
@@ -96,7 +96,7 @@ The following props are no longer available in v3:
 - `label` - Use `Label` component instead
 - `description` - Use `Description` component instead
 - `errorMessage` - Use `FieldError` component instead
-- `variant`, `color`, `size`, `radius` - Use Tailwind CSS classes
+- `color`, `size`, `radius` - Use Tailwind CSS classes (`variant` exists in v3 as `primary` \| `secondary`)
 - `classNames` - Use `className` props on individual components
 - `startContent`, `endContent` - Customize `Select.Trigger` directly
 - `selectorIcon` - Customize `Select.Indicator` children
@@ -222,7 +222,7 @@ The following props are no longer available in v3:
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Description, FieldError } from "@heroui/react";
+    import { Label, Description, FieldError } from "@heroui/react";
 
     {/* With description */}
     <Select placeholder="Choose one">
@@ -409,13 +409,13 @@ The `isClearable` prop has been removed. To implement a clear button:
 </Select>
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Component Structure**: Must use compound components (`Select.Trigger`, `Select.Value`, `Select.Indicator`, `Select.Popover`)
 2. **Item Components**: `SelectItem` → `ListBox.Item`, `SelectSection` → `ListBox.Section`
 3. **Label/Description/Error**: Use separate components instead of props
 4. **Selection Props**: `selectedKeys`/`onSelectionChange` → `value`/`onChange`
-5. **Styling Props Removed**: `variant`, `color`, `size`, `radius` - use Tailwind CSS
+5. **Styling**: `variant` simplified to `primary` \| `secondary`; `color`, `size`, `radius` removed - use Tailwind for more
 6. **ClassNames Removed**: Use `className` props on individual components
 7. **Content Props Removed**: `startContent`, `endContent` - customize trigger directly
 8. **Clear Button**: `isClearable` removed - implement manually

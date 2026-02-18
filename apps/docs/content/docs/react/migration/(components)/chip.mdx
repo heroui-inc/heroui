@@ -29,7 +29,7 @@ The following props are no longer available in v3:
 - `endContent` - Use children directly (e.g., icon as last child)
 - `onClose` - Implement close functionality manually with a button
 - `classNames` - Use `className` prop directly
-- `isDisabled` - Use `disabled` attribute or conditional rendering
+- `isDisabled` - Use conditional rendering or Tailwind classes (e.g. `opacity-50 pointer-events-none`)
 
 ### 4. Variant Mapping
 
@@ -86,7 +86,7 @@ export default function App() {
     {/* Variants */}
     <Chip variant="solid">Solid</Chip>
     <Chip variant="bordered">Bordered</Chip>
-    <Chip variant="soft">Soft</Chip>
+    <Chip variant="light">Light</Chip>
     
     {/* Colors */}
     <Chip color="primary">Primary</Chip>
@@ -161,10 +161,13 @@ export default function App() {
   </Tab>
   <Tab value="v3">
     ```tsx
-    import { Avatar } from "@heroui/react";
+    import { Avatar, Chip } from "@heroui/react";
 
     <Chip variant="tertiary">
-      <Avatar name="JW" src="https://example.com/avatar.jpg" />
+      <Avatar size="sm">
+        <Avatar.Image src="https://example.com/avatar.jpg" alt="JW" />
+        <Avatar.Fallback>JW</Avatar.Fallback>
+      </Avatar>
       Avatar
     </Chip>
     ```
@@ -251,7 +254,7 @@ export default function App() {
 </Chip>
 ```
 
-## Breaking Changes Summary
+## Summary
 
 1. **Variants Reduced**: From 7 variants to 4 variants
 2. **Color Changes**: `primary` → `accent`, `secondary` removed
