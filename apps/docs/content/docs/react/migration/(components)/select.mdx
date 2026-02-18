@@ -386,10 +386,10 @@ Select (Root)
 
 ## Important Notes
 
-### Item Keys
+### Item Identification
 
-- **v2:** Used `key` prop on `SelectItem`
-- **v3:** Use `id` prop on `ListBox.Item` (required) and `textValue` prop (required for accessibility)
+- **v2:** React's `key` was used for both list reconciliation and item identity for selection.
+- **v3:** Use `id` for state/focus and `textValue` for accessibility on `ListBox.Item`; keep React's `key` for list reconciliation.
 
 ### Selection Value Types
 
@@ -424,4 +424,3 @@ The `isClearable` prop has been removed. To implement a clear button:
 7. **Content Props Removed**: `startContent`, `endContent` - customize trigger directly
 8. **Clear Button**: `isClearable` removed - implement manually
 9. **Custom Value**: Use `Select.Value` render prop instead of `renderValue`
-10. **Item Props**: `key` → `id` and `textValue` (required)

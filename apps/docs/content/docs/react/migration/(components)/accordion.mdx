@@ -121,8 +121,8 @@ The following props are no longer available in v3:
 
 ### 5. Item Identification
 
-**v2:** Used `key` prop on `AccordionItem`  
-**v3:** Use `id` prop on `Accordion.Item`
+**v2:** React's `key` was used for both list reconciliation and expanded state.  
+**v3:** Use `id` on `Accordion.Item` for expanded state; keep React's `key` on items in lists.
 
 ## Migration Examples
 
@@ -388,7 +388,7 @@ Accordion (Root)
 1. **Component Structure**: Must use compound components instead of props
 2. **State Props**: `selectedKeys` → `expandedKeys`, `onSelectionChange` → `onExpandedChange`
 3. **Multiple Selection**: `selectionMode="multiple"` → `allowsMultipleExpanded={true}`
-4. **Item Keys**: `key` prop → `id` prop
+4. **Item identity**: Use `id` for expanded state; keep React's `key` for list reconciliation
 5. **Variants**: Reduced from 4 to 2 variants
 6. **Removed Props**: Many convenience props removed; use Tailwind CSS classes instead
 7. **Content Structure**: Title, subtitle, and start content must be manually placed in `Trigger`
