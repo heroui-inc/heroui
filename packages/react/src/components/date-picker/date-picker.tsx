@@ -45,7 +45,6 @@ const DatePickerRoot = <T extends DateValue>({
   const slots = React.useMemo(() => datePickerVariants(), []);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const [isOpen, setIsOpen] = React.useState(false);
-  const isOpenRef = useRef(false);
   const shouldRestoreFocusToTriggerRef = useRef(false);
 
   useEffect(() => {
@@ -64,18 +63,17 @@ const DatePickerRoot = <T extends DateValue>({
     };
   }, [isOpen]);
 
-  const handleOpenChange = (isOpen: boolean) => {
-    setIsOpen(isOpen);
-    isOpenRef.current = isOpen;
+  const handleOpenChange = (nextIsOpen: boolean) => {
+    setIsOpen(nextIsOpen);
 
-    if (!isOpen && shouldRestoreFocusToTriggerRef.current) {
+    if (!nextIsOpen && shouldRestoreFocusToTriggerRef.current) {
       window.requestAnimationFrame(() => {
         triggerRef.current?.focus();
       });
     }
 
     shouldRestoreFocusToTriggerRef.current = false;
-    onOpenChange?.(isOpen);
+    onOpenChange?.(nextIsOpen);
   };
 
   return (

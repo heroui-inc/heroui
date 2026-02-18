@@ -27,13 +27,17 @@
   &[data-focus-within="true"]:not(
       :has(
         [data-slot="date-picker-trigger"]:focus,
-        [data-slot="date-picker-trigger"][data-focused="true"]
+        [data-slot="date-picker-trigger"][data-focused="true"],
+        [data-slot="date-range-picker-trigger"]:focus,
+        [data-slot="date-range-picker-trigger"][data-focused="true"]
       )
     ),
   &:focus-within:not(
       :has(
         [data-slot="date-picker-trigger"]:focus,
-        [data-slot="date-picker-trigger"][data-focused="true"]
+        [data-slot="date-picker-trigger"][data-focused="true"],
+        [data-slot="date-range-picker-trigger"]:focus,
+        [data-slot="date-range-picker-trigger"][data-focused="true"]
       )
     ) {
     @apply status-focused-field;
