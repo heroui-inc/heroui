@@ -27,6 +27,8 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
     activePage,
     disableCursorAnimation,
     disableAnimation,
+    prevIcon,
+    nextIcon,
     renderItem: renderItemProp,
     onNext,
     onPrevious,
@@ -45,22 +47,24 @@ const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
 
   const renderChevronIcon = useCallback(
     (key: PaginationItemType) => {
-      if (
-        (key === PaginationItemType.PREV && !isRTL) ||
-        (key === PaginationItemType.NEXT && isRTL)
-      ) {
-        return <ChevronIcon />;
+      const isPrev =
+        (key === PaginationItemType.PREV && !isRTL) || (key === PaginationItemType.NEXT && isRTL);
+
+      if (isPrev) {
+        return prevIcon ?? <ChevronIcon />;
       }
 
       return (
-        <ChevronIcon
-          className={slots.chevronNext({
-            class: classNames?.chevronNext,
-          })}
-        />
+        nextIcon ?? (
+          <ChevronIcon
+            className={slots.chevronNext({
+              class: classNames?.chevronNext,
+            })}
+          />
+        )
       );
     },
-    [slots, isRTL],
+    [slots, isRTL, prevIcon, nextIcon],
   );
 
   const renderPrevItem = useCallback(
