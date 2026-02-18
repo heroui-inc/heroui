@@ -127,13 +127,13 @@ function CustomDateRangePicker() {
         <DateField.Input slot="start">
           {(segment) => <DateField.Segment segment={segment} />}
         </DateField.Input>
-        <DateRangePicker.RangeSeparator className="px-2 text-default-500" />
+        <DateRangePicker.RangeSeparator className="px-2 text-default" />
         <DateField.Input slot="end">
           {(segment) => <DateField.Segment segment={segment} />}
         </DateField.Input>
         <DateField.Suffix>
           <DateRangePicker.Trigger className="w-full">
-            <DateRangePicker.TriggerIndicator className="text-default-600" />
+            <DateRangePicker.TriggerIndicator className="text-default" />
           </DateRangePicker.Trigger>
         </DateField.Suffix>
       </DateField.Group>
@@ -166,7 +166,7 @@ To customize DateRangePicker base classes, use `@layer components`.
   }
 
   .date-range-picker__range-separator {
-    @apply px-2 text-default-500;
+    @apply px-2 text-default;
   }
 
   .date-range-picker__popover {
