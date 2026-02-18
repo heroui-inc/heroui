@@ -8,6 +8,7 @@ export const tabsVariants = tv({
   },
   slots: {
     base: "tabs",
+    separator: "tabs__separator",
     tab: "tabs__tab",
     tabIndicator: "tabs__indicator",
     tabList: "tabs__list",
