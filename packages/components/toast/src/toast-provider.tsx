@@ -10,7 +10,20 @@ import {ToastRegion} from "./toast-region";
 
 const loadFeatures = () => import("framer-motion").then((res) => res.domMax);
 
-let globalToastQueue: ToastQueue<ToastProps> | null = null;
+const toastQueues = new Map<ToastPlacement, ToastQueue<ToastProps>>();
+
+export const getToastQueue = (placement: ToastPlacement = "bottom-right") => {
+  if (!toastQueues.has(placement)) {
+    toastQueues.set(
+      placement,
+      new ToastQueue({
+        maxVisibleToasts: Infinity,
+      }),
+    );
+  }
+
+  return toastQueues.get(placement)!;
+};
 
 interface ToastProviderProps {
   maxVisibleToasts?: number;
@@ -21,16 +34,6 @@ interface ToastProviderProps {
   regionProps?: RegionProps;
 }
 
-export const getToastQueue = () => {
-  if (!globalToastQueue) {
-    globalToastQueue = new ToastQueue({
-      maxVisibleToasts: Infinity,
-    });
-  }
-
-  return globalToastQueue;
-};
-
 export const ToastProvider = ({
   placement = "bottom-right",
   disableAnimation: disableAnimationProp = false,
@@ -39,7 +42,7 @@ export const ToastProvider = ({
   toastProps = {},
   regionProps,
 }: ToastProviderProps) => {
-  const toastQueue = useToastQueue(getToastQueue());
+  const toastQueue = useToastQueue(getToastQueue(placement));
   const globalContext = useProviderContext();
   const disableAnimation = disableAnimationProp ?? globalContext?.disableAnimation ?? false;
 
@@ -60,20 +63,17 @@ export const ToastProvider = ({
   );
 };
 
-export const addToast = ({...props}: ToastProps & ToastOptions) => {
-  if (!globalToastQueue) {
-    return null;
-  }
+export const addToast = (props: (ToastProps & ToastOptions) & {placement?: ToastPlacement}) => {
+  const {placement = "bottom-right", ...toastProps} = props;
+  const queue = getToastQueue(placement);
 
-  return globalToastQueue.add(props);
+  return queue.add(toastProps);
 };
 
 const closingToasts = new Map<string, ReturnType<typeof setTimeout>>();
 
-export const closeToast = (key: string) => {
-  if (!globalToastQueue) {
-    return;
-  }
+export const closeToast = (key: string, placement: ToastPlacement = "bottom-right") => {
+  const queue = getToastQueue(placement);
 
   if (closingToasts.has(key)) {
     return;
@@ -81,22 +81,30 @@ export const closeToast = (key: string) => {
 
   const timeoutId = setTimeout(() => {
     closingToasts.delete(key);
-    globalToastQueue?.close(key);
+    queue.close(key);
   }, 300);
 
   closingToasts.set(key, timeoutId);
 };
 
-export const closeAll = () => {
-  if (!globalToastQueue) {
-    return;
+export const closeAll = (placement?: ToastPlacement) => {
+  if (placement) {
+    const queue = getToastQueue(placement);
+    const toasts = [...queue.visibleToasts];
+
+    toasts.forEach((toast) => {
+      closeToast(toast.key, placement);
+    });
+  } else {
+    // Close all toasts in all placements
+    toastQueues.forEach((queue, queuePlacement) => {
+      const toasts = [...queue.visibleToasts];
+
+      toasts.forEach((toast) => {
+        closeToast(toast.key, queuePlacement);
+      });
+    });
   }
-
-  const toasts = [...globalToastQueue.visibleToasts];
-
-  toasts.forEach((toast) => {
-    closeToast(toast.key);
-  });
 };
 
 export const isToastClosing = (key: string) => closingToasts.has(key);

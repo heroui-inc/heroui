@@ -77,7 +77,7 @@ export function ToastRegion<T extends ToastProps>({
 
   return (
     <div
-      {...mergeProps(regionProps, hoverProps)}
+      {...(mergeProps(regionProps, hoverProps) as React.HTMLAttributes<HTMLDivElement>)}
       ref={ref}
       className={slots.base({class: baseStyles})}
       data-placement={placement}
