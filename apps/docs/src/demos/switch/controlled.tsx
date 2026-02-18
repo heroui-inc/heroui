@@ -12,7 +12,9 @@ export function Controlled() {
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Enable notifications</Label>
+        <Switch.Content>
+          <Label className="text-sm">Enable notifications</Label>
+        </Switch.Content>
       </Switch>
       <p className="text-sm text-muted">Switch is {isSelected ? "on" : "off"}</p>
     </div>

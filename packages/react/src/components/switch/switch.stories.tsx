@@ -25,7 +25,9 @@ export const Default: Story = {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label className="text-sm">Enable notifications</Label>
+      <Switch.Content>
+        <Label className="text-sm">Enable notifications</Label>
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -36,7 +38,9 @@ export const Disabled: Story = {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label className="text-sm">Enable notifications</Label>
+      <Switch.Content>
+        <Label className="text-sm">Enable notifications</Label>
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -47,7 +51,9 @@ export const DefaultSelected: Story = {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label className="text-sm">Enable notifications</Label>
+      <Switch.Content>
+        <Label className="text-sm">Enable notifications</Label>
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -72,7 +78,9 @@ export const Controlled: Story = {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Enable notifications</Label>
+          <Switch.Content>
+            <Label className="text-sm">Enable notifications</Label>
+          </Switch.Content>
         </Switch>
         <p className="text-sm text-muted">Switch is {isSelected ? "on" : "off"}</p>
       </div>
@@ -97,19 +105,25 @@ export const Sizes: Story = {
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-xs">Small</Label>
+        <Switch.Content>
+          <Label className="text-xs">Small</Label>
+        </Switch.Content>
       </Switch>
       <Switch size="md">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Medium</Label>
+        <Switch.Content>
+          <Label className="text-sm">Medium</Label>
+        </Switch.Content>
       </Switch>
       <Switch size="lg">
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-base">Large</Label>
+        <Switch.Content>
+          <Label className="text-base">Large</Label>
+        </Switch.Content>
       </Switch>
     </div>
   ),
@@ -130,15 +144,13 @@ export const WithDescription: Story = {
   render: () => (
     <div className="max-w-sm">
       <Switch>
-        <div className="flex gap-3">
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <div className="-mt-0.5 flex flex-col gap-1">
-            <Label className="text-sm">Public profile</Label>
-            <Description>Allow others to see your profile information</Description>
-          </div>
-        </div>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Switch.Content>
+          <Label className="text-sm">Public profile</Label>
+          <Description>Allow others to see your profile information</Description>
+        </Switch.Content>
       </Switch>
     </div>
   ),

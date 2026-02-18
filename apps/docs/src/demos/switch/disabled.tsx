@@ -6,7 +6,9 @@ export function Disabled() {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label className="text-sm">Enable notifications</Label>
+      <Switch.Content>
+        <Label className="text-sm">Enable notifications</Label>
+      </Switch.Content>
     </Switch>
   );
 }
