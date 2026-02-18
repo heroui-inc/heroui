@@ -24,6 +24,7 @@ export * from "./close-button";
 export * from "./combo-box";
 export * from "./date-field";
 export * from "./date-picker";
+export * from "./date-range-picker";
 export * from "./time-field";
 export * from "./disclosure";
 export * from "./disclosure-group";

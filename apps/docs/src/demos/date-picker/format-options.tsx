@@ -13,7 +13,7 @@ import {
   Switch,
   TimeField,
 } from "@heroui/react";
-import {parseDate, parseZonedDateTime} from "@internationalized/date";
+import {getLocalTimeZone, parseDate, parseZonedDateTime} from "@internationalized/date";
 import {useMemo, useState} from "react";
 
 type Granularity = "day" | "hour" | "minute" | "second";
@@ -37,18 +37,20 @@ export function FormatOptions() {
   const timeGranularity = granularity !== "day" ? granularity : undefined;
   const showTimeField = !!timeGranularity;
   const defaultValue = useMemo<DateValue>(() => {
+    const localTimeZone = getLocalTimeZone();
+
     if (granularity === "day") {
-      return parseDate("2025-02-03");
+      return parseDate("2026-02-03");
     }
 
-    return parseZonedDateTime("2025-02-03T08:45:00[America/Los_Angeles]");
+    return parseZonedDateTime(`2026-02-03T08:45:00[${localTimeZone}]`);
   }, [granularity]);
 
   return (
     <div className="flex flex-col gap-4">
       <DatePicker
         key={granularity}
-        className="min-w-64"
+        className="w-fit min-w-64"
         defaultValue={defaultValue}
         granularity={granularity}
         hideTimeZone={hideTimeZone}
@@ -119,13 +121,13 @@ export function FormatOptions() {
 
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-col gap-1">
-          <Label>Granularity</Label>
           <Select
             className="w-[120px]"
             value={granularity}
             variant="secondary"
             onChange={(value) => setGranularity(value as Granularity)}
           >
+            <Label>Granularity</Label>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -144,13 +146,13 @@ export function FormatOptions() {
         </div>
 
         <div className="flex flex-col gap-1">
-          <Label>Hour cycle</Label>
           <Select
             className="w-[120px]"
             value={hourCycle}
             variant="secondary"
             onChange={(value) => setHourCycle(Number(value) as HourCycle)}
           >
+            <Label>Hour cycle</Label>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -169,7 +171,7 @@ export function FormatOptions() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex min-w-80 flex-col gap-2">
         <Switch isSelected={hideTimeZone} onChange={setHideTimeZone}>
           <Switch.Control>
             <Switch.Thumb />

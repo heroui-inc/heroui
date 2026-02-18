@@ -1,16 +1,16 @@
 "use client";
 
 import type {SurfaceVariants} from "../surface";
-import type {DatePickerVariants} from "@heroui/styles";
+import type {DateRangePickerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components";
 
-import {datePickerVariants} from "@heroui/styles";
+import {dateRangePickerVariants} from "@heroui/styles";
 import {mergeRefs} from "@react-aria/utils";
 import React, {createContext, useContext, useEffect, useRef} from "react";
 import {
   Button as ButtonPrimitive,
-  DatePicker as DatePickerPrimitive,
+  DateRangePicker as DateRangePickerPrimitive,
   Popover as PopoverPrimitive,
 } from "react-aria-components";
 
@@ -19,30 +19,30 @@ import {IconCalendar} from "../icons";
 import {SurfaceContext} from "../surface";
 
 /* -------------------------------------------------------------------------------------------------
- * DatePicker Context
+ * DateRangePicker Context
  * -----------------------------------------------------------------------------------------------*/
-type DatePickerContext = {
-  slots?: ReturnType<typeof datePickerVariants>;
+type DateRangePickerContext = {
+  slots?: ReturnType<typeof dateRangePickerVariants>;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
 };
 
-const DatePickerContext = createContext<DatePickerContext>({
+const DateRangePickerContext = createContext<DateRangePickerContext>({
   triggerRef: {current: null},
 });
 
 /* -------------------------------------------------------------------------------------------------
- * DatePicker Root
+ * DateRangePicker Root
  * -----------------------------------------------------------------------------------------------*/
-interface DatePickerRootProps<T extends DateValue>
-  extends ComponentPropsWithRef<typeof DatePickerPrimitive<T>>, DatePickerVariants {}
+interface DateRangePickerRootProps<T extends DateValue>
+  extends ComponentPropsWithRef<typeof DateRangePickerPrimitive<T>>, DateRangePickerVariants {}
 
-const DatePickerRoot = <T extends DateValue>({
+const DateRangePickerRoot = <T extends DateValue>({
   children,
   className,
   onOpenChange,
   ...props
-}: DatePickerRootProps<T>) => {
-  const slots = React.useMemo(() => datePickerVariants(), []);
+}: DateRangePickerRootProps<T>) => {
+  const slots = React.useMemo(() => dateRangePickerVariants(), []);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const [isOpen, setIsOpen] = React.useState(false);
   const shouldRestoreFocusToTriggerRef = useRef(false);
@@ -77,29 +77,29 @@ const DatePickerRoot = <T extends DateValue>({
   };
 
   return (
-    <DatePickerContext value={{slots, triggerRef}}>
-      <DatePickerPrimitive
-        data-slot="date-picker"
+    <DateRangePickerContext value={{slots, triggerRef}}>
+      <DateRangePickerPrimitive
+        data-slot="date-range-picker"
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
         onOpenChange={handleOpenChange}
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </DatePickerPrimitive>
-    </DatePickerContext>
+      </DateRangePickerPrimitive>
+    </DateRangePickerContext>
   );
 };
 
-DatePickerRoot.displayName = "HeroUI.DatePicker";
+DateRangePickerRoot.displayName = "HeroUI.DateRangePicker";
 
 /* -------------------------------------------------------------------------------------------------
- * DatePicker Trigger
+ * DateRangePicker Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface DatePickerTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
+interface DateRangePickerTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
-const DatePickerTrigger = React.forwardRef<HTMLButtonElement, DatePickerTriggerProps>(
+const DateRangePickerTrigger = React.forwardRef<HTMLButtonElement, DateRangePickerTriggerProps>(
   ({children, className, ...props}, ref) => {
-    const {slots, triggerRef} = useContext(DatePickerContext);
+    const {slots, triggerRef} = useContext(DateRangePickerContext);
 
     const contextRefCallback = React.useCallback(
       (node: HTMLButtonElement | null) => {
@@ -113,7 +113,7 @@ const DatePickerTrigger = React.forwardRef<HTMLButtonElement, DatePickerTriggerP
       <ButtonPrimitive
         ref={mergedRef}
         className={composeTwRenderProps(className, slots?.trigger())}
-        data-slot="date-picker-trigger"
+        data-slot="date-range-picker-trigger"
         {...props}
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
@@ -122,27 +122,30 @@ const DatePickerTrigger = React.forwardRef<HTMLButtonElement, DatePickerTriggerP
   },
 );
 
-DatePickerTrigger.displayName = "HeroUI.DatePicker.Trigger";
+DateRangePickerTrigger.displayName = "HeroUI.DateRangePicker.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
- * DatePicker Trigger Indicator
+ * DateRangePicker Trigger Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface DatePickerTriggerIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
+interface DateRangePickerTriggerIndicatorProps extends Omit<
+  ComponentPropsWithRef<"span">,
+  "children"
+> {
   children?: React.ReactNode;
 }
 
-const DatePickerTriggerIndicator = ({
+const DateRangePickerTriggerIndicator = ({
   children,
   className,
   ...props
-}: DatePickerTriggerIndicatorProps) => {
-  const {slots} = useContext(DatePickerContext);
+}: DateRangePickerTriggerIndicatorProps) => {
+  const {slots} = useContext(DateRangePickerContext);
 
   return (
     <span
       aria-hidden="true"
       className={composeSlotClassName(slots?.triggerIndicator, className)}
-      data-slot="date-picker-trigger-indicator"
+      data-slot="date-range-picker-trigger-indicator"
       {...props}
     >
       {children || <IconCalendar />}
@@ -150,25 +153,51 @@ const DatePickerTriggerIndicator = ({
   );
 };
 
-DatePickerTriggerIndicator.displayName = "HeroUI.DatePicker.TriggerIndicator";
+DateRangePickerTriggerIndicator.displayName = "HeroUI.DateRangePicker.TriggerIndicator";
 
 /* -------------------------------------------------------------------------------------------------
- * DatePicker Popover
+ * DateRangePicker Range Separator
  * -----------------------------------------------------------------------------------------------*/
-interface DatePickerPopoverProps extends Omit<
+interface DateRangePickerRangeSeparatorProps extends ComponentPropsWithRef<"span"> {}
+
+const DateRangePickerRangeSeparator = ({
+  children = " - ",
+  className,
+  ...props
+}: DateRangePickerRangeSeparatorProps) => {
+  const {slots} = useContext(DateRangePickerContext);
+
+  return (
+    <span
+      aria-hidden="true"
+      className={composeSlotClassName(slots?.rangeSeparator, className)}
+      data-slot="date-range-picker-range-separator"
+      {...props}
+    >
+      {children}
+    </span>
+  );
+};
+
+DateRangePickerRangeSeparator.displayName = "HeroUI.DateRangePicker.RangeSeparator";
+
+/* -------------------------------------------------------------------------------------------------
+ * DateRangePicker Popover
+ * -----------------------------------------------------------------------------------------------*/
+interface DateRangePickerPopoverProps extends Omit<
   ComponentPropsWithRef<typeof PopoverPrimitive>,
   "children"
 > {
   children: React.ReactNode;
 }
 
-const DatePickerPopover = ({
+const DateRangePickerPopover = ({
   children,
   className,
   placement = "bottom",
   ...props
-}: DatePickerPopoverProps) => {
-  const {slots} = useContext(DatePickerContext);
+}: DateRangePickerPopoverProps) => {
+  const {slots} = useContext(DateRangePickerContext);
 
   return (
     <SurfaceContext
@@ -187,16 +216,23 @@ const DatePickerPopover = ({
   );
 };
 
-DatePickerPopover.displayName = "HeroUI.DatePicker.Popover";
+DateRangePickerPopover.displayName = "HeroUI.DateRangePicker.Popover";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {DatePickerRoot, DatePickerTrigger, DatePickerTriggerIndicator, DatePickerPopover};
+export {
+  DateRangePickerRoot,
+  DateRangePickerTrigger,
+  DateRangePickerTriggerIndicator,
+  DateRangePickerRangeSeparator,
+  DateRangePickerPopover,
+};
 
 export type {
-  DatePickerRootProps,
-  DatePickerTriggerProps,
-  DatePickerTriggerIndicatorProps,
-  DatePickerPopoverProps,
+  DateRangePickerRootProps,
+  DateRangePickerTriggerProps,
+  DateRangePickerTriggerIndicatorProps,
+  DateRangePickerRangeSeparatorProps,
+  DateRangePickerPopoverProps,
 };

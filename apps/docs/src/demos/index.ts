@@ -24,6 +24,7 @@ import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combo-box";
 import * as DateFieldDemos from "./date-field";
 import * as DatePickerDemos from "./date-picker";
+import * as DateRangePickerDemos from "./date-range-picker";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -1110,6 +1111,39 @@ export const demos: Record<string, DemoItem> = {
   "date-picker-international-calendar": {
     component: DatePickerDemos.InternationalCalendar,
     file: "date-picker/international-calendar.tsx",
+  },
+  // DateRangePicker demos
+  "date-range-picker-basic": {
+    component: DateRangePickerDemos.Basic,
+    file: "date-range-picker/basic.tsx",
+  },
+  "date-range-picker-controlled": {
+    component: DateRangePickerDemos.Controlled,
+    file: "date-range-picker/controlled.tsx",
+  },
+  "date-range-picker-disabled": {
+    component: DateRangePickerDemos.Disabled,
+    file: "date-range-picker/disabled.tsx",
+  },
+  "date-range-picker-format-options": {
+    component: DateRangePickerDemos.FormatOptions,
+    file: "date-range-picker/format-options.tsx",
+  },
+  "date-range-picker-form-example": {
+    component: DateRangePickerDemos.FormExample,
+    file: "date-range-picker/form-example.tsx",
+  },
+  "date-range-picker-with-custom-indicator": {
+    component: DateRangePickerDemos.WithCustomIndicator,
+    file: "date-range-picker/with-custom-indicator.tsx",
+  },
+  "date-range-picker-with-validation": {
+    component: DateRangePickerDemos.WithValidation,
+    file: "date-range-picker/with-validation.tsx",
+  },
+  "date-range-picker-international-calendar": {
+    component: DateRangePickerDemos.InternationalCalendar,
+    file: "date-range-picker/international-calendar.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
