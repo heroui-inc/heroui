@@ -8,15 +8,19 @@ index: true
   HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
 </Callout>
 
-## Overview
+## For AI Assistants
 
-### AI Assistant Resources
+Below are three approaches for AI assistants to access migration documentation. ***We recommend using the HeroUI Migration MCP server*** and leveraging its prompts and tools, but all options provide agents with the complete documentation.
 
-To make migration easier, we provide the following for AI assistants:
-
-- **[Migration MCP Server](/docs/react/migration/mcp-server)** — MCP tools and prompts for real-time access to migration guides. See setup for Cursor, Claude Code, Windsurf, Zed, and VS Code.
-- **[Migration Agent Skills](/docs/react/migration/agent-skills)** — Install with `curl -fsSL https://v3.heroui.com/install | bash -s heroui-migration` for skill-based migration knowledge.
-- **[AGENTS.md for Migration](/docs/react/migration/agents-md)** — Run `npx heroui-cli@latest agents-md --migration` to download migration docs into your project.
+| Feature | MCP Server | Agent Skills | AGENTS.md |
+|---------|-----------|--------------|-----------|
+| **Data source** | Remote endpoints | Remote endpoints | Local files |
+| **Access method** | MCP tools | Script files | Local file reads |
+| **Setup** | MCP config | Install command | `heroui-cli` command |
+| **Updates** | Real-time | Real-time | Manual |
+| **Offline** | ❌ | ❌ | ✅ |
+| **Tools** | MCP tools + prompts | Scripts | ❌ |
+| **Guide** | [MCP Server →](/docs/react/migration/mcp-server) | [Agent Skills →](/docs/react/migration/agent-skills) | [AGENTS.md →](/docs/react/migration/agents-md) |
 
 ## Major Changes
 
@@ -25,33 +29,9 @@ To make migration easier, we provide the following for AI assistants:
 - **Dependencies**: Update React to v19+, HeroUI packages to v3, Tailwind CSS to v4, remove Framer Motion
 - **No Provider Required**: v3 removes the need for `HeroUIProvider`
 - **Component API Updates**: Many components use React Aria Components patterns
-- **Compound Components**: New compound component patterns for better customization
+- **Compound Components**: New compound component patterns for better customization. See individual component guides for details.
 - **Hooks Removed**: v2 component hooks like `useSwitch` or `useInput` are removed - use compound components instead. `useDisclosure` is replaced with `useOverlayState`. See the [Hooks Migration Guide](/docs/react/migration/hooks) for details.
 - **Configuration**: Remove `heroui()` plugin from Tailwind config, update CSS imports, remove `hero.ts` file
-
-</section>
-
-## Key API Changes
-
-<section id="key-api-changes">
-
-### General Props Changes
-
-- `key` prop → `id` and `textValue` props (ListBox, etc.)
-- `onClick` → `onPress` (all interactive components)
-- `classNames` prop → `className` prop (all components)
-
-### Compound Component Patterns
-
-Many components now use compound component patterns for better composition and flexibility. For example:
-
-- **Checkbox**: `Checkbox`, `Checkbox.Control`, `Checkbox.Indicator`, `Checkbox.Content`
-- **Card**: `Card`, `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, `Card.Footer`
-- **Modal**: `Modal`, `Modal.Overlay`, `Modal.Content`, `Modal.Header`, `Modal.Footer`, `Modal.Body`
-- **Select**: `Select`, `Select.Trigger`, `Select.Value`, `Select.Content`, `Select.Item`
-- **Dropdown**: `Dropdown`, `Dropdown.Trigger`, `Dropdown.Content`, `Dropdown.Item`
-
-See specific component migration guides for detailed examples and usage patterns.
 
 </section>
 
@@ -61,7 +41,7 @@ HeroUI v2 and v3 cannot coexist in the same project without special setup. You h
 
 ### Full Migration
 
-**Best for:** Projects that can dedicate focused time to complete migration, teams comfortable working in feature branches with temporarily broken code.
+**Best for:** Projects that can dedicate focused time to complete migration in one go.
 
 **How it works:**
 - Migrate all component code first (project will be broken during this phase)
@@ -71,13 +51,11 @@ HeroUI v2 and v3 cannot coexist in the same project without special setup. You h
 **Advantages:**
 - Simpler setup - no complex coexistence configuration
 - Cleaner transition - only one version active at a time
-- No CSS conflicts during migration
 - Supported by Migration MCP prompts
 
 **Disadvantages:**
 - Project is broken during migration
-- Requires working in a feature branch
-- All components must be migrated before switching dependencies
+- All components should be migrated before switching dependencies
 
 **Get started:** [Full Migration Guide](/docs/react/migration/full-migration)
 
@@ -97,7 +75,6 @@ HeroUI v2 and v3 cannot coexist in the same project without special setup. You h
 
 **Disadvantages:**
 - More complex initial setup
-- Both CSS systems loaded (larger bundle size)
 - Potential styling conflicts
 - Requires managing two versions simultaneously
 
@@ -129,8 +106,9 @@ Use the table below to quickly find migration guidance for each component. Use t
 | CheckboxGroup | CheckboxGroup | ✅ Renamed | [View guide →](/docs/react/migration/checkbox-group) |
 | Chip | Chip | ✅ Available | [View guide →](/docs/react/migration/chip) |
 | Code | ❌ | ❌ Removed | [View guide →](/docs/react/migration/code) |
-| DateInput | DatePicker | 🔄 In Progress | - |
+| DateInput | DateField | ✅ Available | [View docs →](/docs/react/components/date-field) |
 | DatePicker | DatePicker | 🔄 In Progress | - |
+| TimeInput | TimeField | ✅ Available | [View docs →](/docs/react/components/time-field) |
 | Divider | Separator | ✅ Renamed | [View guide →](/docs/react/migration/divider) |
 | Drawer | Drawer | 📋 Planned | - |
 | Dropdown | Dropdown | ✅ Available | [View guide →](/docs/react/migration/dropdown) |
@@ -174,11 +152,9 @@ v3 introduces a number of new components not available in v2:
 
 | Component | Purpose | Documentation |
 |-----------|---------|---------------|
-| TextField | Enhanced text input with label and description support | [View docs →](/docs/react/components/textfield) |
-| Textarea | Multi-line text input component | [View docs →](/docs/react/components/textarea) |
+| TextField | Enhanced text input with label and description support | [View docs →](/docs/react/components/text-field) |
+| Textarea | Multi-line text input component | [View docs →](/docs/react/components/text-area) |
 | Alert Dialog | Modal dialog for confirmations and alerts | [View docs →](/docs/react/components/alert-dialog) |
-| Empty State | Display empty or no-data states | [View docs →](/docs/react/components/empty-state) |
-| Text | Typography component for consistent text styling | [View docs →](/docs/react/components/text) |
 | Label | Accessible form label component | [View docs →](/docs/react/components/label) |
 | Description | Helper text for form fields | [View docs →](/docs/react/components/description) |
 | Field Error | Form field error message display | [View docs →](/docs/react/components/field-error) |
@@ -186,6 +162,14 @@ v3 introduces a number of new components not available in v2:
 | Input Group | Compose multiple inputs together | [View docs →](/docs/react/components/input-group) |
 | Surface | Container component with elevation styles | [View docs →](/docs/react/components/surface) |
 | Disclosure | Expandable/collapsible content sections | [View docs →](/docs/react/components/disclosure) |
+| Disclosure Group | Compound component for multiple disclosure sections | [View docs →](/docs/react/components/disclosure-group) |
+| Search Field | Search input with clear button and optional loading state | [View docs →](/docs/react/components/search-field) |
+| Date Field | Date input with calendar picker | [View docs →](/docs/react/components/date-field) |
+| Time Field | Time input component | [View docs →](/docs/react/components/time-field) |
+| Tag / Tag Group | Tags and tag group for selection or display | [View docs →](/docs/react/components/tag-group) |
+| Color Picker | Color selection (ColorArea, ColorField, ColorSlider, ColorSwatch, ColorSwatchPicker) | [View docs →](/docs/react/components/color-picker) |
+| Close Button | Dismiss or close trigger button | [View docs →](/docs/react/components/close-button) |
+| Error Message | Form field error display (React Aria integration) | [View docs →](/docs/react/components/error-message) |
 
 </section>
 
