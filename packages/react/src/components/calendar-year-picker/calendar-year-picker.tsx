@@ -6,13 +6,13 @@ import type {ComponentPropsWithRef} from "react";
 import {calendarYearPickerVariants} from "@heroui/styles";
 import {useDateFormatter} from "@react-aria/i18n";
 import React from "react";
-import {Button as ButtonPrimitive, CalendarStateContext} from "react-aria-components";
+import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {getYearRange} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronRight} from "../icons";
 
-import {useYearPicker} from "./year-picker-context";
+import {useYearPicker, useYearPickerState} from "./year-picker-context";
 
 /* -------------------------------------------------------------------------------------------------
  * CalendarYearPickerTrigger
@@ -70,7 +70,7 @@ const CalendarYearPickerTrigger = ({
   ...props
 }: CalendarYearPickerTriggerProps) => {
   const {isYearPickerOpen, setIsYearPickerOpen} = useYearPicker();
-  const state = React.useContext(CalendarStateContext)!;
+  const state = useYearPickerState();
 
   const slots = React.useMemo(() => calendarYearPickerVariants(), []);
 
@@ -258,8 +258,8 @@ const CalendarYearPickerGrid = ({
   onKeyDown,
   ...props
 }: CalendarYearPickerGridProps) => {
-  const {calendarRef, isYearPickerOpen, setIsYearPickerOpen} = useYearPicker();
-  const state = React.useContext(CalendarStateContext)!;
+  const {calendarGridSlot, calendarRef, isYearPickerOpen, setIsYearPickerOpen} = useYearPicker();
+  const state = useYearPickerState();
   const gridRef = React.useRef<HTMLDivElement>(null);
 
   const slots = React.useMemo(() => calendarYearPickerVariants(), []);
@@ -308,14 +308,14 @@ const CalendarYearPickerGrid = ({
 
     const calendar = calendarRef.current;
     const calendarGrid = calendar?.querySelector(
-      "[data-slot='calendar-grid']",
+      `[data-slot='${calendarGridSlot}']`,
     ) as HTMLElement | null;
 
     if (calendarGrid) {
       yearGrid.style.top = `${calendarGrid.offsetTop}px`;
       yearGrid.style.height = `${calendarGrid.offsetHeight}px`;
     }
-  }, [state.focusedDate]);
+  }, [calendarGridSlot, calendarRef, state.focusedDate]);
 
   const focusYearCell = React.useCallback((year: number) => {
     const yearGrid = gridRef.current;

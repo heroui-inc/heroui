@@ -1,8 +1,18 @@
 "use client";
 
+import type {TimeValue} from "@heroui/react";
 import type {DateValue} from "@internationalized/date";
 
-import {Calendar, DateField, DatePicker, Label, ListBox, Select, Switch} from "@heroui/react";
+import {
+  Calendar,
+  DateField,
+  DatePicker,
+  Label,
+  ListBox,
+  Select,
+  Switch,
+  TimeField,
+} from "@heroui/react";
 import {parseDate, parseZonedDateTime} from "@internationalized/date";
 import {useMemo, useState} from "react";
 
@@ -20,11 +30,12 @@ const hourCycleOptions: {label: string; value: HourCycle}[] = [
 ];
 
 export function FormatOptions() {
-  const [granularity, setGranularity] = useState<Granularity>("day");
+  const [granularity, setGranularity] = useState<Granularity>("minute");
   const [hourCycle, setHourCycle] = useState<HourCycle>(12);
   const [hideTimeZone, setHideTimeZone] = useState(false);
   const [shouldForceLeadingZeros, setShouldForceLeadingZeros] = useState(false);
-
+  const timeGranularity = granularity !== "day" ? granularity : undefined;
+  const showTimeField = !!timeGranularity;
   const defaultValue = useMemo<DateValue>(() => {
     if (granularity === "day") {
       return parseDate("2025-02-03");
@@ -45,38 +56,65 @@ export function FormatOptions() {
         name="date"
         shouldForceLeadingZeros={shouldForceLeadingZeros}
       >
-        <Label>Date and time</Label>
-        <DateField.Group fullWidth>
-          <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
-          <DateField.Suffix>
-            <DatePicker.Trigger>
-              <DatePicker.TriggerIndicator />
-            </DatePicker.Trigger>
-          </DateField.Suffix>
-        </DateField.Group>
-        <DatePicker.Popover>
-          <Calendar aria-label="Event date">
-            <Calendar.Header>
-              <Calendar.YearPickerTrigger>
-                <Calendar.YearPickerTriggerHeading />
-                <Calendar.YearPickerTriggerIndicator />
-              </Calendar.YearPickerTrigger>
-              <Calendar.NavButton slot="previous" />
-              <Calendar.NavButton slot="next" />
-            </Calendar.Header>
-            <Calendar.Grid>
-              <Calendar.GridHeader>
-                {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
-              </Calendar.GridHeader>
-              <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
-            </Calendar.Grid>
-            <Calendar.YearPickerGrid>
-              <Calendar.YearPickerGridBody>
-                {({year}) => <Calendar.YearPickerCell year={year} />}
-              </Calendar.YearPickerGridBody>
-            </Calendar.YearPickerGrid>
-          </Calendar>
-        </DatePicker.Popover>
+        {({state}) => (
+          <>
+            <Label>Date and time</Label>
+            <DateField.Group fullWidth>
+              <DateField.Input>
+                {(segment) => <DateField.Segment segment={segment} />}
+              </DateField.Input>
+              <DateField.Suffix>
+                <DatePicker.Trigger>
+                  <DatePicker.TriggerIndicator />
+                </DatePicker.Trigger>
+              </DateField.Suffix>
+            </DateField.Group>
+            <DatePicker.Popover className="flex flex-col gap-3">
+              <Calendar aria-label="Event date">
+                <Calendar.Header>
+                  <Calendar.YearPickerTrigger>
+                    <Calendar.YearPickerTriggerHeading />
+                    <Calendar.YearPickerTriggerIndicator />
+                  </Calendar.YearPickerTrigger>
+                  <Calendar.NavButton slot="previous" />
+                  <Calendar.NavButton slot="next" />
+                </Calendar.Header>
+                <Calendar.Grid>
+                  <Calendar.GridHeader>
+                    {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+                  </Calendar.GridHeader>
+                  <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+                </Calendar.Grid>
+                <Calendar.YearPickerGrid>
+                  <Calendar.YearPickerGridBody>
+                    {({year}) => <Calendar.YearPickerCell year={year} />}
+                  </Calendar.YearPickerGridBody>
+                </Calendar.YearPickerGrid>
+              </Calendar>
+              {!!showTimeField && (
+                <div className="flex items-center justify-between">
+                  <Label>Time</Label>
+                  <TimeField
+                    aria-label="Time"
+                    granularity={timeGranularity}
+                    hideTimeZone={hideTimeZone}
+                    hourCycle={hourCycle}
+                    name="time"
+                    shouldForceLeadingZeros={shouldForceLeadingZeros}
+                    value={state.timeValue}
+                    onChange={(v) => state.setTimeValue(v as TimeValue)}
+                  >
+                    <TimeField.Group variant="secondary">
+                      <TimeField.Input>
+                        {(segment) => <TimeField.Segment segment={segment} />}
+                      </TimeField.Input>
+                    </TimeField.Group>
+                  </TimeField>
+                </div>
+              )}
+            </DatePicker.Popover>
+          </>
+        )}
       </DatePicker>
 
       <div className="flex flex-wrap gap-4">

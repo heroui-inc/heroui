@@ -49,6 +49,7 @@
     "(forms)/number-field",
     "(overlays)/popover",
     "(forms)/radio-group",
+    "(date-and-time)/range-calendar",
     "(utilities)/scroll-shadow",
     "(forms)/search-field",
     "(pickers)/select",

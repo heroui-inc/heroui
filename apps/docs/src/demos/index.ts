@@ -43,6 +43,7 @@ import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
+import * as RangeCalendarDemos from "./range-calendar";
 import * as ScrollShadowDemos from "./scroll-shadow";
 import * as SearchFieldDemos from "./search-field";
 import * as SelectDemos from "./select";
@@ -379,6 +380,71 @@ export const demos: Record<string, DemoItem> = {
   "calendar-custom-icons": {
     component: CalendarDemos.CustomIcons,
     file: "calendar/custom-icons.tsx",
+  },
+  // RangeCalendar demos
+  "range-calendar-basic": {
+    component: RangeCalendarDemos.Basic,
+    file: "range-calendar/basic.tsx",
+  },
+  "range-calendar-year-picker": {
+    component: RangeCalendarDemos.YearPicker,
+    file: "range-calendar/year-picker.tsx",
+  },
+  "range-calendar-default-value": {
+    component: RangeCalendarDemos.DefaultValue,
+    file: "range-calendar/default-value.tsx",
+  },
+  "range-calendar-controlled": {
+    component: RangeCalendarDemos.Controlled,
+    file: "range-calendar/controlled.tsx",
+  },
+  "range-calendar-min-max-dates": {
+    component: RangeCalendarDemos.MinMaxDates,
+    file: "range-calendar/min-max-dates.tsx",
+  },
+  "range-calendar-unavailable-dates": {
+    component: RangeCalendarDemos.UnavailableDates,
+    file: "range-calendar/unavailable-dates.tsx",
+  },
+  "range-calendar-allows-non-contiguous-ranges": {
+    component: RangeCalendarDemos.AllowsNonContiguousRanges,
+    file: "range-calendar/allows-non-contiguous-ranges.tsx",
+  },
+  "range-calendar-disabled": {
+    component: RangeCalendarDemos.Disabled,
+    file: "range-calendar/disabled.tsx",
+  },
+  "range-calendar-read-only": {
+    component: RangeCalendarDemos.ReadOnly,
+    file: "range-calendar/read-only.tsx",
+  },
+  "range-calendar-invalid": {
+    component: RangeCalendarDemos.Invalid,
+    file: "range-calendar/invalid.tsx",
+  },
+  "range-calendar-focused-value": {
+    component: RangeCalendarDemos.FocusedValue,
+    file: "range-calendar/focused-value.tsx",
+  },
+  "range-calendar-with-indicators": {
+    component: RangeCalendarDemos.WithIndicators,
+    file: "range-calendar/with-indicators.tsx",
+  },
+  "range-calendar-multiple-months": {
+    component: RangeCalendarDemos.MultipleMonths,
+    file: "range-calendar/multiple-months.tsx",
+  },
+  "range-calendar-three-months": {
+    component: RangeCalendarDemos.ThreeMonths,
+    file: "range-calendar/three-months.tsx",
+  },
+  "range-calendar-international-calendar": {
+    component: RangeCalendarDemos.InternationalCalendar,
+    file: "range-calendar/international-calendar.tsx",
+  },
+  "range-calendar-booking-calendar": {
+    component: RangeCalendarDemos.BookingCalendar,
+    file: "range-calendar/booking-calendar.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {

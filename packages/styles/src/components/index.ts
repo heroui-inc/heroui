@@ -9,6 +9,7 @@ export * from "./button";
 export * from "./button-group";
 export * from "./calendar";
 export * from "./calendar-year-picker";
+export * from "./range-calendar";
 export * from "./card";
 export * from "./checkbox";
 export * from "./checkbox-group";

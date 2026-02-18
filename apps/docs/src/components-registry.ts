@@ -301,6 +301,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "radiogroup",
     title: "RadioGroup",
   },
+  rangecalendar: {
+    category: "date-time",
+    description: "Interactive month grid for selecting date ranges",
+    href: "/docs/components/range-calendar",
+    name: "rangecalendar",
+    title: "RangeCalendar",
+  },
   scrollshadow: {
     category: "utilities",
     description: "Visual shadows for scrollable content overflow",
@@ -446,7 +453,7 @@ const componentRelationships: Record<string, string[]> = {
     "toast",
   ],
   buttongroup: ["button", "dropdown", "chip"],
-  calendar: ["datefield", "datepicker", "timefield", "inputgroup", "form"],
+  calendar: ["rangecalendar", "datefield", "datepicker", "timefield", "inputgroup", "form"],
   card: ["surface", "avatar", "form", "button", "link", "closebutton"],
   checkbox: ["label", "checkboxgroup", "description", "button"],
   checkboxgroup: [
@@ -595,6 +602,7 @@ const componentRelationships: Record<string, string[]> = {
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
   popover: ["button", "tooltip", "select", "combobox", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
+  rangecalendar: ["calendar", "datefield", "datepicker", "timefield", "inputgroup", "form"],
   scrollshadow: [],
   searchfield: ["label", "description", "fielderror", "form", "surface", "input", "closebutton"],
   select: [

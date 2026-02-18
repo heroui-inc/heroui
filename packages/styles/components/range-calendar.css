@@ -1,37 +1,37 @@
 /* =============================================================================
- * Calendar Component Styles
+ * RangeCalendar Component Styles
  *
- * A compound component for date selection.
- * Uses BEM naming convention: calendar, calendar__element, calendar--modifier
+ * A compound component for contiguous date range selection.
+ * Uses BEM naming convention: range-calendar, range-calendar__element, range-calendar--modifier
  * ============================================================================= */
 
 /* -----------------------------------------------------------------------------
- * Base Calendar Styles
+ * Base RangeCalendar Styles
  * -------------------------------------------------------------------------- */
-.calendar {
+.range-calendar {
   @apply w-63 max-w-full;
 
   container-type: inline-size;
 }
 
 /* -----------------------------------------------------------------------------
- * Calendar Header
+ * RangeCalendar Header
  * -------------------------------------------------------------------------- */
-.calendar__header {
+.range-calendar__header {
   @apply flex items-center justify-between px-0.5 pb-4;
 
   &:has(.calendar-year-picker__trigger[data-open="true"]) {
-    .calendar__nav-button {
+    .range-calendar__nav-button {
       @apply pointer-events-none opacity-0;
     }
   }
 }
 
-.calendar__heading {
+.range-calendar__heading {
   @apply flex-1 text-sm font-medium;
 }
 
-.calendar__nav-button {
+.range-calendar__nav-button {
   @apply flex size-6 items-center justify-center rounded-full text-accent;
 
   will-change: scale;
@@ -76,27 +76,27 @@
   }
 }
 
-.calendar__nav-button-icon {
+.range-calendar__nav-button-icon {
   @apply size-4;
 }
 
 /* -----------------------------------------------------------------------------
- * Calendar Grid
+ * RangeCalendar Grid
  * -------------------------------------------------------------------------- */
-.calendar__grid {
+.range-calendar__grid {
   /* Override table display with CSS Grid for easier customization */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   @apply w-full;
 
   &[aria-readonly="true"] {
-    .calendar__cell {
+    .range-calendar__cell {
       @apply pointer-events-none;
     }
   }
 }
 
-.calendar__grid-header {
+.range-calendar__grid-header {
   /* Grid header (thead) styles */
   display: contents;
 
@@ -105,7 +105,7 @@
   }
 }
 
-.calendar__grid-body {
+.range-calendar__grid-body {
   /* Grid body (tbody) styles */
   display: contents;
 
@@ -119,68 +119,125 @@
   }
 }
 
-.calendar__grid-row {
+.range-calendar__grid-row {
   /* Use 'contents' so cells participate directly in grid */
   /* Note: This class can be used for custom row styling if needed */
   display: contents;
 }
 
-.calendar__header-cell {
+.range-calendar__header-cell {
   /* Header cell (th - weekday names) styles */
   @apply flex items-center justify-center pb-2 text-xs font-medium text-muted;
 }
 
 /* -----------------------------------------------------------------------------
- * Calendar Cells
+ * RangeCalendar Cells
  * -------------------------------------------------------------------------- */
-.calendar__cell {
-  /* Cell (td) wrapper styles - margins now work with grid layout */
-  @apply relative flex aspect-square size-full items-center justify-center rounded-3xl text-center text-sm font-medium outline-none no-highlight;
+.range-calendar__cell {
+  @apply relative z-1 mx-0 my-[2px] p-0 outline-none;
 
-  will-change: scale;
+  cursor: var(--cursor-interactive);
+
+  will-change: background-color, border-color;
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
    */
   transition:
-    transform 250ms var(--ease-out),
-    box-shadow 100ms var(--ease-out);
+    box-shadow 100ms var(--ease-out),
+    border-color 100ms var(--ease-out);
   @apply transform-gpu motion-reduce:transition-none;
 
-  cursor: var(--cursor-interactive);
+  /* Inner interactive circle/capsule (equivalent to React Aria "button-base") */
+  .range-calendar__cell-button {
+    @apply flex aspect-square w-full items-center justify-center rounded-full text-sm font-medium text-foreground no-highlight;
+
+    will-change: scale;
+    transition: scale 200ms var(--ease-out);
+    @apply transform-gpu motion-reduce:transition-none;
+  }
 
   /* Focus state */
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
-    @apply status-focused;
+    @apply z-2;
+
+    .range-calendar__cell-button {
+      @apply status-focused;
+    }
   }
 
   /* Today indicator */
   &[data-today="true"] {
-    @apply text-accent;
+    .range-calendar__cell-button {
+      @apply text-accent;
+    }
   }
 
-  /* Selected state */
-  &[data-selected="true"] {
-    @apply bg-accent text-accent-foreground;
+  /* Range selected track (middle segment) */
+  &[data-selected="true"]:not([data-outside-month="true"]) {
+    @apply rounded-none bg-accent-soft;
+  }
+
+  /* Round row boundaries so the range track looks continuous across weeks */
+  &[data-selected="true"]:is(td:first-child > *, [aria-disabled] + td > *) {
+    @apply rounded-ss-lg rounded-es-lg;
+    &[data-selection-start="true"] {
+      @apply rounded-ss-full rounded-es-full;
+    }
+  }
+
+  &[data-selected="true"]:is(td:last-child > *, td:has(+ [aria-disabled]) > *) {
+    @apply rounded-se-lg rounded-ee-lg;
+    &[data-selection-end="true"] {
+      @apply rounded-se-full rounded-ee-full;
+    }
+  }
+
+  /* Range caps (start/end) */
+  &[data-selection-start="true"]:not([data-outside-month="true"]),
+  &[data-selection-end="true"]:not([data-outside-month="true"]) {
+    @apply z-2;
+
+    .range-calendar__cell-button {
+      @apply bg-accent text-accent-foreground;
+    }
+  }
+
+  /* &[data-selection-start="true"]:has(+ [data-selection-end="true"]) {
+    @apply rounded-full;
+  } */
+
+  &[data-selection-start="true"]:not([data-outside-month="true"]) {
+    @apply rounded-tl-full rounded-bl-full;
+  }
+
+  &[data-selection-end="true"]:not([data-outside-month="true"]) {
+    @apply rounded-tr-full rounded-br-full;
   }
 
   /* Pressed state */
   &:active,
   &[data-pressed="true"] {
-    @apply bg-default;
-    transform: scale(0.95);
+    .range-calendar__cell-button {
+      scale: 0.9;
+    }
 
-    &[data-selected="true"] {
-      @apply bg-accent-hover;
+    &[data-selection-start="true"],
+    &[data-selection-end="true"] {
+      .range-calendar__cell-button {
+        @apply bg-accent-hover;
+      }
     }
   }
 
-  /* Hover state – only on devices that support hover (avoids false triggers on touch) */
+  /* Hover state for non-selected days */
   @media (hover: hover) {
     &:hover:not([data-selected="true"]),
     &[data-hovered="true"]:not([data-selected="true"]) {
-      @apply bg-default;
+      .range-calendar__cell-button {
+        @apply bg-default;
+      }
     }
   }
 
@@ -189,8 +246,11 @@
     @apply text-muted opacity-50;
   }
 
-  &[data-selected="true"][data-outside-month="true"] {
-    @apply bg-default;
+  &[data-selected="true"][data-outside-month="true"]:not(
+      [data-selection-start="true"],
+      [data-selection-end="true"]
+    ) {
+    @apply bg-default/20;
   }
 
   /* Unavailable dates */
@@ -207,8 +267,35 @@
   }
 }
 
+/* Outside-month cell followed by selected cell across adjacent table cells */
+.range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-outside-month="true"])
+  + td
+  > .range-calendar__cell[data-selected="true"] {
+  @apply rounded-ss-lg rounded-es-lg;
+
+  &[data-outside-month="true"],
+  &[data-selection-start="true"] {
+    @apply rounded-ss-full rounded-es-full;
+  }
+}
+
+/* Selected cell followed by outside-month cell across adjacent table cells */
+.range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-selected="true"]):has(
+    + td > .range-calendar__cell[data-outside-month="true"]
+  )
+  > .range-calendar__cell[data-selected="true"] {
+  @apply rounded-se-lg rounded-ee-lg;
+
+  &[data-outside-month="true"],
+  &[data-selection-end="true"] {
+    @apply rounded-se-full rounded-ee-full;
+  }
+}
+
 /* Cell indicator - small dot at bottom center of cell */
-.calendar__cell-indicator {
+.range-calendar__cell-indicator {
   @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-full bg-muted;
 
   /* Indicator color changes when cell is selected */
