@@ -74,13 +74,10 @@ export default function App() {
 | `DropdownSection` | `Dropdown.Section` | Same functionality |
 | - | `Dropdown.Popover` | New wrapper component (required) |
 
-### 3. Item Props Changes
+### 3. Item Identification
 
-**v2:** Used `key` prop for item identification  
-**v3:** Uses `id` prop instead of `key`, and requires `textValue` prop
-
-**v2:** Item content passed as children  
-**v3:** Item content must use `Label` component for text
+**v2:** Item content passed as children; React's `key` was used for both list reconciliation and item identity (selection, focus).  
+**v3:** Item content must use `Label` component for text. Give each item an `id` (for state/focus) and `textValue` (for accessibility when content isn't plain text). Keep React's `key` on items in lists.
 
 ### 4. Removed Props
 
@@ -92,7 +89,6 @@ The following props are no longer available in v3:
   - `classNames` - Use `className` prop directly
   - `itemClasses` - Use `className` on individual items
 - `DropdownItem`:
-  - `key` - Use `id` instead
   - `color` - Use `variant="danger"` for danger items
   - `title` - Use `Label` component as child
   - `description` - Use `Description` component as child
@@ -355,14 +351,12 @@ Dropdown (Root)
 
 1. **Component Structure**: Must use compound components (`Dropdown.Trigger`, `Dropdown.Popover`, `Dropdown.Menu`, etc.)
 2. **Dropdown.Popover Required**: `Dropdown.Menu` must be wrapped in `Dropdown.Popover`
-3. **key → id**: Items use `id` prop instead of `key`
-4. **textValue Required**: All items must have `textValue` prop
-5. **Label Component**: Item text must use `Label` component
-6. **Description Component**: Use `Description` component instead of `description` prop
-7. **Kbd Component**: Use `Kbd` component instead of `shortcut` prop
-8. **Icons as Children**: Icons go as first child, not `startContent` prop
-9. **Separator Component**: Use `Separator` instead of `showDivider` prop
-10. **ItemIndicator Component**: Use `Dropdown.ItemIndicator` for selection indicators
-11. **Variant Instead of Color**: Use `variant="danger"` instead of `color="danger"`
-12. **No Menu Variants**: `Dropdown.Menu` no longer supports `variant` or `color` props
-13. **ClassNames Removed**: Use `className` props on individual components
+3. **Label Component**: Item text must use `Label` component
+4. **Description Component**: Use `Description` component instead of `description` prop
+5. **Kbd Component**: Use `Kbd` component instead of `shortcut` prop
+6. **Icons as Children**: Icons go as first child, not `startContent` prop
+7. **Separator Component**: Use `Separator` instead of `showDivider` prop
+8. **ItemIndicator Component**: Use `Dropdown.ItemIndicator` for selection indicators
+9. **Variant Instead of Color**: Use `variant="danger"` instead of `color="danger"`
+10. **No Menu Variants**: `Dropdown.Menu` no longer supports `variant` or `color` props
+11. **ClassNames Removed**: Use `className` props on individual components

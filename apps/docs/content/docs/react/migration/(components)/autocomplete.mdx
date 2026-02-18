@@ -75,12 +75,17 @@ export default function App() {
 **v2:** `AutocompleteItem`, `AutocompleteSection`  
 **v3:** `ListBox.Item`, `ListBox.Section` (from ListBox component)
 
-### 4. Prop Changes
+### 4. Item Identification
+
+**v2:** React's `key` was used for both list reconciliation and item identity (selection).  
+**v3:** Use `id` and `textValue` on `ListBox.Item` (state and accessibility); keep React's `key` on items in lists.
+
+### 5. Prop Changes
 
 | v2 Prop | v3 Prop | Notes |
 |---------|---------|-------|
-| `key` (on AutocompleteItem) | `id` (on ListBox.Item) | Changed prop name |
-| - | `textValue` (on ListBox.Item) | Now required for accessibility |
+| - | `id` (on ListBox.Item) | Item identifier for state |
+| - | `textValue` (on ListBox.Item) | For accessibility |
 | `label` | `Label` component | Separate component |
 | `description` | `Description` component | Separate component |
 | `placeholder` | `placeholder` (on Input) | Moved to Input component |
@@ -109,7 +114,7 @@ export default function App() {
 | `isInvalid` | `isInvalid` | Still exists |
 | `name` | `name` | Still exists |
 
-### 5. Removed Props
+### 6. Removed Props
 
 The following props are no longer available in v3:
 

@@ -318,7 +318,6 @@ type MyButtonProps = ButtonProps & {
 
 **Common type changes:**
 - Component prop interfaces may have different names or properties
-- Event handler types changed from `onClick` to `onPress` (uses React Aria types)
 - Compound component parts have their own type exports
 - Ref types updated to match React 19 patterns
 
@@ -335,8 +334,6 @@ Use the [Component Migration Reference](/docs/react/migration#component-migratio
 - Migrate component APIs, props, and structure
 - Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
 - Update group components (ButtonGroup, CheckboxGroup, RadioGroup)
-- Change `onClick` to `onPress` for interactive components
-- Update `key` prop to `id` and `textValue` where applicable
 - Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User) - replace with HTML elements
 - Handle in-progress/planned components - replace with HTML elements until v3 components are available
 
@@ -476,8 +473,6 @@ Use this checklist to track your full migration progress:
 - Migrate renamed components (Divider → Separator, Autocomplete → Combobox, NumberInput → NumberField)
 - Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
 - Update group components (ButtonGroup, CheckboxGroup, RadioGroup)
-- Change `onClick` to `onPress` for interactive components
-- Update `key` prop to `id` and `textValue` where applicable
 - Update TypeScript type references (if using component types)
 - Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User) - replace with HTML elements
 - Handle in-progress/planned components - replace with HTML elements until v3 components are available

@@ -54,12 +54,17 @@ export default function App() {
 **v2:** `Listbox`, `ListboxItem`, `ListboxSection`  
 **v3:** `ListBox`, `ListBox.Item`, `ListBox.Section`
 
-### 2. Prop Changes
+### 2. Item Identification
+
+**v2:** React's `key` was used for both list reconciliation and item identity (selection, focus).  
+**v3:** Use `id` for state/focus and `textValue` for accessibility (when content isn't plain text); keep React's `key` on items in lists.
+
+### 3. Prop Changes
 
 | v2 Prop | v3 Prop | Notes |
 |---------|---------|-------|
-| `key` | `id` | Renamed (required) |
-| - | `textValue` | New required prop for accessibility |
+| - | `id` | Item identifier for state |
+| - | `textValue` | For accessibility (when content isn't plain text) |
 | `variant` | - | Removed (use Tailwind CSS) |
 | `color` | - | Removed (use Tailwind CSS) |
 | `startContent` | - | Removed (place icons manually) |
@@ -76,7 +81,7 @@ export default function App() {
 | `virtualization` | - | Removed |
 | `selectedKeys` | `selectedKeys` | Now uses `Selection` type (Set) |
 
-### 3. Removed Props
+### 4. Removed Props
 
 The following props are no longer available in v3:
 
@@ -309,11 +314,10 @@ ListBox (Root)
 ## Breaking Changes Summary
 
 1. **Component Naming**: `Listbox` → `ListBox`, `ListboxItem` → `ListBox.Item`, `ListboxSection` → `ListBox.Section`
-2. **key → id**: Prop renamed, `textValue` now required
-3. **Item Structure**: Must use `Label`, `Description`, `ListBox.ItemIndicator` components
-4. **Icons**: Manual placement instead of `startContent`/`endContent` props
-5. **Sections**: Use `Header` component instead of `title` prop
-6. **Styling Props Removed**: `variant`, `color` - use Tailwind CSS
-7. **Content Props Removed**: `topContent`, `bottomContent` - handle separately
-8. **Virtualization Removed**: `isVirtualized` and `virtualization` props removed
-9. **Selection Type**: Uses `Selection` type (Set) instead of arrays
+2. **Item Structure**: Must use `Label`, `Description`, `ListBox.ItemIndicator` components
+3. **Icons**: Manual placement instead of `startContent`/`endContent` props
+4. **Sections**: Use `Header` component instead of `title` prop
+5. **Styling Props Removed**: `variant`, `color` - use Tailwind CSS
+6. **Content Props Removed**: `topContent`, `bottomContent` - handle separately
+7. **Virtualization Removed**: `isVirtualized` and `virtualization` props removed
+8. **Selection Type**: Uses `Selection` type (Set) instead of arrays
