@@ -100,6 +100,10 @@ export const demos: Record<string, DemoItem> = {
     component: AccordionDemos.WithoutSeparator,
     file: "accordion/without-separator.tsx",
   },
+  "accordion-custom-render-function": {
+    component: AccordionDemos.CustomRenderFunction,
+    file: "accordion/custom-render-function.tsx",
+  },
   // Alert demos
   "alert-basic": {
     component: AlertDemos.Basic,
