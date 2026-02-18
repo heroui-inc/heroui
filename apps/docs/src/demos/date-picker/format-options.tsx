@@ -30,7 +30,7 @@ const hourCycleOptions: {label: string; value: HourCycle}[] = [
 ];
 
 export function FormatOptions() {
-  const [granularity, setGranularity] = useState<Granularity>("day");
+  const [granularity, setGranularity] = useState<Granularity>("minute");
   const [hourCycle, setHourCycle] = useState<HourCycle>(12);
   const [hideTimeZone, setHideTimeZone] = useState(false);
   const [shouldForceLeadingZeros, setShouldForceLeadingZeros] = useState(false);
@@ -69,7 +69,7 @@ export function FormatOptions() {
                 </DatePicker.Trigger>
               </DateField.Suffix>
             </DateField.Group>
-            <DatePicker.Popover>
+            <DatePicker.Popover className="flex flex-col gap-3">
               <Calendar aria-label="Event date">
                 <Calendar.Header>
                   <Calendar.YearPickerTrigger>
