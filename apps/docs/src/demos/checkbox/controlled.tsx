@@ -13,10 +13,10 @@ export function Controlled() {
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
+          <Checkbox.Content>
+            <Label htmlFor="email-notifications">Email notifications</Label>
+          </Checkbox.Content>
         </Checkbox>
-        <Checkbox.Content>
-          <Label htmlFor="email-notifications">Email notifications</Label>
-        </Checkbox.Content>
       </div>
       <p className="text-sm text-muted">
         Status: <span className="font-medium">{isSelected ? "Enabled" : "Disabled"}</span>

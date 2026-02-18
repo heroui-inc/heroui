@@ -7,10 +7,10 @@ export function DefaultSelected() {
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
+        <Checkbox.Content>
+          <Label htmlFor="default-notifications">Enable email notifications</Label>
+        </Checkbox.Content>
       </Checkbox>
-      <Checkbox.Content>
-        <Label htmlFor="default-notifications">Enable email notifications</Label>
-      </Checkbox.Content>
     </div>
   );
 }

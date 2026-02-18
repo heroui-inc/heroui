@@ -7,11 +7,11 @@ export function Disabled() {
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
+        <Checkbox.Content>
+          <Label htmlFor="feature">Premium Feature</Label>
+          <Description>This feature is coming soon</Description>
+        </Checkbox.Content>
       </Checkbox>
-      <Checkbox.Content>
-        <Label htmlFor="feature">Premium Feature</Label>
-        <Description>This feature is coming soon</Description>
-      </Checkbox.Content>
     </div>
   );
 }

@@ -22,11 +22,11 @@ export function Indeterminate() {
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
+        <Checkbox.Content>
+          <Label htmlFor="select-all">Select all</Label>
+          <Description>Shows indeterminate state (dash icon)</Description>
+        </Checkbox.Content>
       </Checkbox>
-      <Checkbox.Content>
-        <Label htmlFor="select-all">Select all</Label>
-        <Description>Shows indeterminate state (dash icon)</Description>
-      </Checkbox.Content>
     </div>
   );
 }
