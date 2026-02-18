@@ -22,7 +22,7 @@ export function CustomRenderFunction() {
             <Disclosure.Indicator />
           </Button>
         </Disclosure.Heading>
-        <Disclosure.Content>
+        <Disclosure.Content render={(props) => <div data-custom="bar" {...props} />}>
           <Disclosure.Body className="shadow-panel flex flex-col items-center rounded-3xl bg-surface p-4 text-center">
             <p className="text-sm text-muted">
               Scan this QR code with your camera app to preview the HeroUI native components.
