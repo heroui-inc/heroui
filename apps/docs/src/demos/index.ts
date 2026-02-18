@@ -1462,9 +1462,9 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.CustomStyles,
     file: "tabs/custom-styles.tsx",
   },
-  "tabs-without-separator": {
-    component: TabsDemos.WithoutSeparator,
-    file: "tabs/without-separator.tsx",
+  "tabs-with-separator": {
+    component: TabsDemos.WithSeparator,
+    file: "tabs/with-separator.tsx",
   },
   "tabs-secondary": {
     component: TabsDemos.Secondary,
