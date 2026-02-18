@@ -22,6 +22,7 @@ import {
   useLocale,
 } from "react-aria-components";
 
+import {dataAttr} from "../../utils/assertion";
 import {getGregorianYearOffset} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {
@@ -329,10 +330,10 @@ const RangeCalendarCell = ({children, className, ...props}: RangeCalendarCellPro
         return (
           <span
             className="range-calendar__cell-button"
-            data-disabled={isDisabled || undefined}
-            data-hovered={isHovered || undefined}
-            data-pressed={isPressed || undefined}
-            data-selected={isSelectionStart || isSelectionEnd || undefined}
+            data-disabled={dataAttr(isDisabled)}
+            data-hovered={dataAttr(isHovered)}
+            data-pressed={dataAttr(isPressed)}
+            data-selected={dataAttr(isSelectionStart || isSelectionEnd)}
             data-slot="range-calendar-cell-button"
           >
             {content}
