@@ -123,32 +123,36 @@ function getClassNamesWithProps({
 export function extendVariants(BaseComponent, styles = {}, opts = {}) {
   const {variants, defaultVariants, compoundVariants, slots: directSlots} = styles || {};
 
-  const inferredSlots = getSlots(variants);
+  const inheritedVariants = BaseComponent.__variants ?? {};
+
+  const mergedVariants = {
+    ...inheritedVariants,
+    ...variants,
+  };
+
+  const inferredSlots = getSlots(mergedVariants);
 
   const slots = directSlots ? {...inferredSlots, ...directSlots} : inferredSlots;
 
   const hasSlots = typeof slots === "object" && Object.keys(slots).length !== 0;
 
   const ForwardedComponent = React.forwardRef((originalProps = {}, ref) => {
-    // Extract 'as' prop if present
-    const {as: Component = BaseComponent, ...restProps} = originalProps;
-
     const newProps = React.useMemo(() =>
       getClassNamesWithProps(
         {
           slots,
-          variants,
+          variants: mergedVariants,
           compoundVariants,
-          props: restProps, // Use restProps without 'as'
+          props: originalProps,
           defaultVariants,
           hasSlots,
           opts,
         },
-        [restProps],
+        [originalProps],
       ),
     );
 
-    return React.createElement(Component, {...restProps, ...newProps, ref});
+    return React.createElement(BaseComponent, {...originalProps, ...newProps, ref});
   });
 
   // Add collection node function for collection-based components
@@ -156,7 +160,7 @@ export function extendVariants(BaseComponent, styles = {}, opts = {}) {
     ForwardedComponent.getCollectionNode = (itemProps) => {
       const newProps = getClassNamesWithProps({
         slots,
-        variants,
+        variants: mergedVariants,
         compoundVariants,
         props: itemProps,
         defaultVariants,
@@ -170,6 +174,8 @@ export function extendVariants(BaseComponent, styles = {}, opts = {}) {
 
   // To make dev tools show a proper name
   ForwardedComponent.displayName = `Extended(${BaseComponent.displayName || BaseComponent.name})`;
+
+  ForwardedComponent.__variants = mergedVariants;
 
   return ForwardedComponent;
 }

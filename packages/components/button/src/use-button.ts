@@ -81,7 +81,7 @@ export function useButton(props: UseButtonProps) {
     className,
     spinner,
     isLoading = false,
-    disableRipple: disableRippleProp = false,
+    disableRipple: disableRippleProp,
     fullWidth = groupContext?.fullWidth ?? false,
     radius = groupContext?.radius,
     size = groupContext?.size ?? "md",
@@ -101,7 +101,7 @@ export function useButton(props: UseButtonProps) {
 
   const domRef = useDOMRef(ref);
 
-  const disableRipple = (disableRippleProp || globalContext?.disableRipple) ?? disableAnimation;
+  const disableRipple = disableRippleProp ?? globalContext?.disableRipple ?? disableAnimation;
 
   const {isFocusVisible, isFocused, focusProps} = useFocusRing({
     autoFocus,

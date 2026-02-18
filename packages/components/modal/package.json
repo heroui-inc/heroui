@@ -1,6 +1,6 @@
 {
   "name": "@heroui/modal",
-  "version": "2.2.27",
+  "version": "2.2.28",
   "description": "Displays a dialog with a custom content that requires attention or provides additional information.",
   "keywords": [
     "modal"
@@ -51,10 +51,10 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-aria-modal-overlay": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/dialog": "3.5.32",
-    "@react-aria/focus": "3.21.3",
-    "@react-aria/overlays": "3.31.0",
-    "@react-stately/overlays": "3.6.21"
+    "@react-aria/dialog": "3.5.33",
+    "@react-aria/focus": "3.21.4",
+    "@react-aria/overlays": "3.31.1",
+    "@react-stately/overlays": "3.6.22"
   },
   "devDependencies": {
     "@heroui/autocomplete": "workspace:*",

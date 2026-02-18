@@ -1,6 +1,6 @@
 {
   "name": "@heroui/system-rsc",
-  "version": "2.3.22",
+  "version": "2.3.23",
   "description": "HeroUI system primitives compatibles with RSC imports",
   "keywords": [
     "system-rsc"
@@ -47,7 +47,7 @@
     "clean-package": "2.2.0"
   },
   "dependencies": {
-    "@react-types/shared": "3.32.1"
+    "@react-types/shared": "3.33.0"
   },
   "clean-package": "../../../clean-package.config.json",
   "tsup": {

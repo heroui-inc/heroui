@@ -1,5 +1,12 @@
 # @heroui/navbar
 
+## 2.2.29
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @heroui/framer-utils@2.1.27
+
 ## 2.2.28
 
 ### Patch Changes

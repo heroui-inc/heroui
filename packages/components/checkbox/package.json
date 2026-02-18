@@ -1,6 +1,6 @@
 {
   "name": "@heroui/checkbox",
-  "version": "2.3.30",
+  "version": "2.3.31",
   "description": "Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.",
   "keywords": [
     "checkbox"
@@ -45,13 +45,13 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-callback-ref": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/checkbox": "3.16.3",
-    "@react-aria/focus": "3.21.3",
-    "@react-aria/interactions": "3.26.0",
-    "@react-stately/checkbox": "3.7.3",
-    "@react-stately/toggle": "3.9.3",
-    "@react-types/checkbox": "3.10.2",
-    "@react-types/shared": "3.32.1"
+    "@react-aria/checkbox": "3.16.4",
+    "@react-aria/focus": "3.21.4",
+    "@react-aria/interactions": "3.27.0",
+    "@react-stately/checkbox": "3.7.4",
+    "@react-stately/toggle": "3.9.4",
+    "@react-types/checkbox": "3.10.3",
+    "@react-types/shared": "3.33.0"
   },
   "devDependencies": {
     "@heroui/shared-icons": "workspace:*",

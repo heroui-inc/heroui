@@ -1,6 +1,6 @@
 {
   "name": "@heroui/toast",
-  "version": "2.0.20",
+  "version": "2.0.21",
   "description": "Toast are temporary notifications that provide concise feedback about an action or event",
   "keywords": [
     "toast"
@@ -46,9 +46,9 @@
     "@heroui/shared-icons": "workspace:*",
     "@heroui/use-is-mobile": "workspace:*",
     "@heroui/spinner": "workspace:*",
-    "@react-aria/toast": "3.0.9",
-    "@react-aria/interactions": "3.26.0",
-    "@react-stately/toast": "3.1.2"
+    "@react-aria/toast": "3.0.10",
+    "@react-aria/interactions": "3.27.0",
+    "@react-stately/toast": "3.1.3"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",

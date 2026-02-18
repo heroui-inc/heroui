@@ -1,6 +1,6 @@
 {
   "name": "@heroui/radio",
-  "version": "2.3.30",
+  "version": "2.3.31",
   "description": "Radios allow users to select a single option from a list of mutually exclusive options.",
   "keywords": [
     "radio"
@@ -43,13 +43,13 @@
     "@heroui/form": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
-    "@react-aria/focus": "3.21.3",
-    "@react-aria/interactions": "3.26.0",
-    "@react-aria/radio": "3.12.3",
-    "@react-aria/visually-hidden": "3.8.29",
-    "@react-stately/radio": "3.11.3",
-    "@react-types/radio": "3.9.2",
-    "@react-types/shared": "3.32.1"
+    "@react-aria/focus": "3.21.4",
+    "@react-aria/interactions": "3.27.0",
+    "@react-aria/radio": "3.12.4",
+    "@react-aria/visually-hidden": "3.8.30",
+    "@react-stately/radio": "3.11.4",
+    "@react-types/radio": "3.9.3",
+    "@react-types/shared": "3.33.0"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

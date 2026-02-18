@@ -1,5 +1,11 @@
 # @heroui/system-rsc
 
+## 2.3.23
+
+### Patch Changes
+
+- [#6215](https://github.com/heroui-inc/heroui/pull/6215) [`e1b3453`](https://github.com/heroui-inc/heroui/commit/e1b34537ebc8fec0e7ffa45bc43ad8e52a510d18) Thanks [@ITBoomBKStudio](https://github.com/ITBoomBKStudio)! - Fix `extendVariants` to correctly inherit variant metadata from the base component & fix rendering of components that use 'as' prop
+
 ## 2.3.22
 
 ### Patch Changes

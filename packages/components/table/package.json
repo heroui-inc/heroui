@@ -1,6 +1,6 @@
 {
   "name": "@heroui/table",
-  "version": "2.2.30",
+  "version": "2.2.31",
   "description": "Tables are used to display tabular data using rows and columns. ",
   "keywords": [
     "table"
@@ -44,14 +44,14 @@
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-icons": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-aria/focus": "3.21.3",
-    "@react-aria/interactions": "3.26.0",
-    "@react-aria/table": "3.17.9",
-    "@react-aria/visually-hidden": "3.8.29",
-    "@react-stately/table": "3.15.2",
-    "@react-stately/virtualizer": "4.4.4",
-    "@react-types/grid": "3.3.6",
-    "@react-types/table": "3.13.4",
+    "@react-aria/focus": "3.21.4",
+    "@react-aria/interactions": "3.27.0",
+    "@react-aria/table": "3.17.10",
+    "@react-aria/visually-hidden": "3.8.30",
+    "@react-stately/table": "3.15.3",
+    "@react-stately/virtualizer": "4.4.5",
+    "@react-types/grid": "3.3.7",
+    "@react-types/table": "3.13.5",
     "@tanstack/react-virtual": "3.11.3"
   },
   "devDependencies": {
@@ -64,7 +64,7 @@
     "@heroui/tooltip": "workspace:*",
     "@heroui/use-infinite-scroll": "workspace:*",
     "@heroui/user": "workspace:*",
-    "@react-stately/data": "3.15.0",
+    "@react-stately/data": "3.15.1",
     "clean-package": "2.2.0",
     "react": "18.3.0",
     "react-dom": "18.3.0",
