@@ -7,7 +7,7 @@ export function Invalid() {
         <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
-        <Label>I agree to the terms</Label>
+        <Label htmlFor="agreement">I agree to the terms</Label>
         <Description>You must accept the terms to continue</Description>
       </Checkbox.Content>
     </Checkbox>
