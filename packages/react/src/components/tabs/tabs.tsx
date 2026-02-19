@@ -19,7 +19,6 @@ import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
  * Tabs Context
  * -----------------------------------------------------------------------------------------------*/
 type TabsContext = {
-  hideSeparator?: boolean;
   orientation?: "horizontal" | "vertical";
   slots?: ReturnType<typeof tabsVariants>;
 };
@@ -32,13 +31,11 @@ const TabsContext = createContext<TabsContext>({});
 interface TabsRootProps extends ComponentPropsWithRef<typeof TabsPrimitive>, TabsVariants {
   children: React.ReactNode;
   className?: string;
-  hideSeparator?: boolean;
 }
 
 const TabsRoot = ({
   children,
   className,
-  hideSeparator = false,
   orientation = "horizontal",
   variant,
   ...props
@@ -46,7 +43,7 @@ const TabsRoot = ({
   const slots = React.useMemo(() => tabsVariants({variant}), [variant]);
 
   return (
-    <TabsContext value={{hideSeparator, orientation, slots}}>
+    <TabsContext value={{orientation, slots}}>
       <TabsPrimitive
         {...props}
         className={composeTwRenderProps(className, slots.base())}
@@ -89,13 +86,12 @@ interface TabListProps extends ComponentPropsWithRef<typeof TabListPrimitive<obj
 }
 
 const TabList = ({children, className, ...props}: TabListProps) => {
-  const {hideSeparator, slots} = useContext(TabsContext);
+  const {slots} = useContext(TabsContext);
 
   return (
     <TabListPrimitive
       {...props}
       className={composeTwRenderProps(className, slots?.tabList())}
-      data-hide-separator={hideSeparator ? "true" : undefined}
       data-slot="tabs-list"
     >
       {children}
@@ -166,9 +162,29 @@ const TabPanel = ({children, className, ...props}: TabPanelProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * Tab Separator
+ * -----------------------------------------------------------------------------------------------*/
+interface TabSeparatorProps extends ComponentPropsWithRef<"span"> {
+  className?: string;
+}
+
+const TabSeparator = ({className, ...props}: TabSeparatorProps) => {
+  const {slots} = useContext(TabsContext);
+
+  return (
+    <span
+      aria-hidden="true"
+      className={composeSlotClassName(slots?.separator, className)}
+      data-slot="tabs-separator"
+      {...props}
+    />
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {TabsRoot, TabListContainer, TabList, Tab, TabIndicator, TabPanel};
+export {TabsRoot, TabListContainer, TabList, Tab, TabIndicator, TabPanel, TabSeparator};
 
 export type {
   TabsRootProps,
@@ -177,4 +193,5 @@ export type {
   TabProps,
   TabIndicatorProps,
   TabPanelProps,
+  TabSeparatorProps,
 };

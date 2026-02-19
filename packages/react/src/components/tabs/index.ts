@@ -1,6 +1,14 @@
 import type {ComponentProps} from "react";
 
-import {Tab, TabIndicator, TabList, TabListContainer, TabPanel, TabsRoot} from "./tabs";
+import {
+  Tab,
+  TabIndicator,
+  TabList,
+  TabListContainer,
+  TabPanel,
+  TabSeparator,
+  TabsRoot,
+} from "./tabs";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -11,6 +19,7 @@ export const Tabs = Object.assign(TabsRoot, {
   List: TabList,
   Tab,
   Indicator: TabIndicator,
+  Separator: TabSeparator,
   Panel: TabPanel,
 });
 
@@ -21,13 +30,14 @@ export type Tabs = {
   ListProps: ComponentProps<typeof TabList>;
   TabProps: ComponentProps<typeof Tab>;
   IndicatorProps: ComponentProps<typeof TabIndicator>;
+  SeparatorProps: ComponentProps<typeof TabSeparator>;
   PanelProps: ComponentProps<typeof TabPanel>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {TabsRoot, TabListContainer, TabList, Tab, TabIndicator, TabPanel};
+export {TabsRoot, TabListContainer, TabList, Tab, TabIndicator, TabSeparator, TabPanel};
 
 export type {
   TabsRootProps,
@@ -36,6 +46,7 @@ export type {
   TabListProps,
   TabProps,
   TabIndicatorProps,
+  TabSeparatorProps,
   TabPanelProps,
 } from "./tabs";
 

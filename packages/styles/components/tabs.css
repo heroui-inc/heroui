@@ -57,56 +57,19 @@
     opacity 150ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
 
-  /* Separator between tabs */
-  &:not(:first-child):before {
-    @apply bg-muted/25;
-
-    content: "";
-    border-radius: 4px;
-    position: absolute;
-
-    /**
-     * Transitions
-     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
-     */
-    transition: opacity 150ms var(--ease-smooth);
-    @apply motion-reduce:transition-none;
-  }
-
-  /* Horizontal tabs - vertical separator */
-  .tabs__list[data-orientation="horizontal"] &:not(:first-child):before {
-    left: 0;
-    top: 25%;
-    width: 1px;
-    height: 50%;
-  }
-
-  /* Vertical tabs - horizontal separator */
-  .tabs__list[data-orientation="vertical"] &:not(:first-child):before {
-    top: 0;
-    left: 5%;
-    width: 90%;
-    height: 1px;
-  }
-
   /* Selected state */
   &[data-selected="true"] {
     @apply text-segment-foreground;
   }
 
   /* Hide separator when this tab is selected */
-  &[data-selected="true"]:before {
+  &[data-selected="true"] .tabs__separator {
     opacity: 0;
   }
 
   /* Hide separator when previous sibling is selected */
-  &[data-selected="true"] + .tabs__tab:before {
+  &[data-selected="true"] + .tabs__tab .tabs__separator {
     opacity: 0;
-  }
-
-  /* Hide separator when hideSeparator prop is set */
-  [data-hide-separator="true"] &:not(:first-child):before {
-    display: none;
   }
 
   /* Disabled state */
@@ -128,6 +91,38 @@
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
+  }
+}
+
+/* Tab separator */
+.tabs__separator {
+  @apply bg-muted/25;
+
+  border-radius: 4px;
+  position: absolute;
+  pointer-events: none;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition: opacity 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+
+  /* Horizontal tabs - vertical separator */
+  .tabs__list[data-orientation="horizontal"] & {
+    left: 0;
+    top: 25%;
+    width: 1px;
+    height: 50%;
+  }
+
+  /* Vertical tabs - horizontal separator */
+  .tabs__list[data-orientation="vertical"] & {
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 1px;
   }
 }
 
@@ -212,15 +207,15 @@
   .tabs__tab {
     @apply rounded-none;
 
-    /* Hide separators in secondary variant */
-    &:not(:first-child):before {
-      display: none;
-    }
-
     /* Selected state - use text-foreground */
     &[data-selected="true"] {
       @apply text-foreground;
     }
+  }
+
+  /* Hide separators in secondary variant */
+  .tabs__separator {
+    display: none;
   }
 
   /* Tab indicator - line style */

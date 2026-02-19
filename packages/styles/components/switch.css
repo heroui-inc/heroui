@@ -187,3 +187,8 @@
 .switch__label {
   @apply text-base font-medium text-foreground;
 }
+
+/* Switch content */
+.switch__content {
+  @apply flex flex-col gap-0;
+}

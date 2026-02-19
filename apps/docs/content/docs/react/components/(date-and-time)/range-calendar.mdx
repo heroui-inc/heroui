@@ -1,0 +1,260 @@
+---
+title: RangeCalendar
+description: Composable date range picker with month grid, navigation, and year picker support built on React Aria RangeCalendar
+icon: new
+links:
+  rac: RangeCalendar
+  source: range-calendar/range-calendar.tsx
+  styles: range-calendar.css
+  storybook: Components/Date and Time/RangeCalendar
+---
+
+## Import
+
+```tsx
+import { RangeCalendar } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="range-calendar-basic" />
+
+### Anatomy
+
+```tsx
+import {RangeCalendar} from '@heroui/react';
+
+export default () => (
+  <RangeCalendar aria-label="Trip dates">
+    <RangeCalendar.Header>
+      <RangeCalendar.Heading />
+      <RangeCalendar.NavButton slot="previous" />
+      <RangeCalendar.NavButton slot="next" />
+    </RangeCalendar.Header>
+    <RangeCalendar.Grid>
+      <RangeCalendar.GridHeader>
+        {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+      </RangeCalendar.GridHeader>
+      <RangeCalendar.GridBody>
+        {(date) => <RangeCalendar.Cell date={date} />}
+      </RangeCalendar.GridBody>
+    </RangeCalendar.Grid>
+  </RangeCalendar>
+)
+```
+
+### Year Picker
+
+`RangeCalendar.YearPickerTrigger`, `RangeCalendar.YearPickerGrid`, and their body/cell subcomponents provide an integrated year navigation pattern.
+
+<ComponentPreview name="range-calendar-year-picker" />
+
+### Default Value
+
+<ComponentPreview name="range-calendar-default-value" />
+
+### Controlled
+
+<ComponentPreview name="range-calendar-controlled" />
+
+### Min and Max Dates
+
+<ComponentPreview name="range-calendar-min-max-dates" />
+
+### Unavailable Dates
+
+Use `isDateUnavailable` to block dates such as weekends, holidays, or booked slots.
+
+<ComponentPreview name="range-calendar-unavailable-dates" />
+
+### Allows Non-Contiguous Ranges
+
+Enable `allowsNonContiguousRanges` to allow selection across unavailable dates.
+
+<ComponentPreview name="range-calendar-allows-non-contiguous-ranges" />
+
+### Disabled
+
+<ComponentPreview name="range-calendar-disabled" />
+
+### Read Only
+
+<ComponentPreview name="range-calendar-read-only" />
+
+### Invalid
+
+<ComponentPreview name="range-calendar-invalid" />
+
+### Focused Value
+
+<ComponentPreview name="range-calendar-focused-value" />
+
+### Cell Indicators
+
+You can customize `RangeCalendar.Cell` children and use `RangeCalendar.CellIndicator` to display metadata like events.
+
+<ComponentPreview name="range-calendar-with-indicators" />
+
+### Multiple Months
+
+Render multiple grids with `visibleDuration` and `offset` for booking and planning experiences.
+
+<ComponentPreview name="range-calendar-multiple-months" />
+
+### International Calendars
+
+By default, RangeCalendar displays dates using the calendar system for the user's locale. You can override this by wrapping your RangeCalendar with `I18nProvider` and setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string).
+
+The example below shows the Indian calendar system:
+
+<ComponentPreview name="range-calendar-international-calendar" />
+
+**Note:** The `onChange` event always returns a date in the same calendar system as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
+
+### Real-World Example
+
+<ComponentPreview name="range-calendar-booking-calendar" />
+
+<RelatedComponents component="range-calendar" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import {RangeCalendar} from '@heroui/react';
+
+function CustomRangeCalendar() {
+  return (
+    <RangeCalendar aria-label="Trip dates" className="w-80 rounded-2xl border border-border bg-surface p-3 shadow-sm">
+      <RangeCalendar.Header className="pb-3">
+        <RangeCalendar.Heading className="text-default" />
+        <RangeCalendar.NavButton slot="previous" className="text-default" />
+        <RangeCalendar.NavButton slot="next" className="text-default" />
+      </RangeCalendar.Header>
+      <RangeCalendar.Grid>
+        <RangeCalendar.GridHeader>
+          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+        </RangeCalendar.GridHeader>
+        <RangeCalendar.GridBody>
+          {(date) => <RangeCalendar.Cell date={date} />}
+        </RangeCalendar.GridBody>
+      </RangeCalendar.Grid>
+    </RangeCalendar>
+  );
+}
+```
+
+### Customizing the component classes
+
+```css
+@layer components {
+  .range-calendar {
+    @apply w-80 rounded-2xl border border-border bg-surface p-3 shadow-sm;
+  }
+
+  .range-calendar__heading {
+    @apply text-sm font-semibold text-default;
+  }
+
+  .range-calendar__cell[data-selected="true"] .range-calendar__cell-button {
+    @apply bg-accent text-accent-foreground;
+  }
+}
+```
+
+### CSS Classes
+
+RangeCalendar uses these classes in `packages/styles/components/range-calendar.css` and `packages/styles/components/calendar-year-picker.css`:
+
+- `.range-calendar` - Root container.
+- `.range-calendar__header` - Header row containing nav buttons and heading.
+- `.range-calendar__heading` - Current month label.
+- `.range-calendar__nav-button` - Previous/next navigation controls.
+- `.range-calendar__grid` - Main day grid.
+- `.range-calendar__grid-header` - Weekday header row wrapper.
+- `.range-calendar__grid-body` - Date rows wrapper.
+- `.range-calendar__header-cell` - Weekday header cell.
+- `.range-calendar__cell` - Interactive day cell wrapper.
+- `.range-calendar__cell-button` - Interactive day button inside each cell.
+- `.range-calendar__cell-indicator` - Dot indicator inside a day cell.
+- `.calendar-year-picker__trigger` - Year picker toggle button.
+- `.calendar-year-picker__trigger-heading` - Heading text inside year picker trigger.
+- `.calendar-year-picker__trigger-indicator` - Indicator icon inside year picker trigger.
+- `.calendar-year-picker__year-grid` - Overlay grid of selectable years.
+- `.calendar-year-picker__year-cell` - Individual year option.
+
+### Interactive States
+
+RangeCalendar supports both pseudo-classes and React Aria data attributes:
+
+- **Selected**: `[data-selected="true"]`
+- **Selection start**: `[data-selection-start="true"]`
+- **Selection end**: `[data-selection-end="true"]`
+- **Range middle**: `[data-selection-in-range="true"]`
+- **Today**: `[data-today="true"]`
+- **Unavailable**: `[data-unavailable="true"]`
+- **Outside month**: `[data-outside-month="true"]`
+- **Hovered**: `:hover` or `[data-hovered="true"]`
+- **Pressed**: `:active` or `[data-pressed="true"]`
+- **Focus visible**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Disabled**: `:disabled` or `[data-disabled="true"]`
+
+## API Reference
+
+### RangeCalendar Props
+
+RangeCalendar inherits all props from React Aria [RangeCalendar](https://react-spectrum.adobe.com/react-aria/RangeCalendar.html).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `RangeValue<DateValue> \| null` | - | Controlled selected range. |
+| `defaultValue` | `RangeValue<DateValue> \| null` | - | Initial selected range (uncontrolled). |
+| `onChange` | `(value: RangeValue<DateValue>) => void` | - | Called when selection changes. |
+| `focusedValue` | `DateValue` | - | Controlled focused date. |
+| `onFocusChange` | `(value: DateValue) => void` | - | Called when focus moves to another date. |
+| `minValue` | `DateValue` | Calendar-aware `1900-01-01` | Earliest selectable date. |
+| `maxValue` | `DateValue` | Calendar-aware `2099-12-31` | Latest selectable date. |
+| `isDateUnavailable` | `(date: DateValue) => boolean` | - | Marks dates as unavailable. |
+| `allowsNonContiguousRanges` | `boolean` | `false` | Allows ranges that span unavailable dates. |
+| `isDisabled` | `boolean` | `false` | Disables interaction and selection. |
+| `isReadOnly` | `boolean` | `false` | Keeps content readable but prevents selection changes. |
+| `isInvalid` | `boolean` | `false` | Marks the calendar as invalid for validation UI. |
+| `visibleDuration` | `{months?: number}` | `{months: 1}` | Number of visible months. |
+| `defaultYearPickerOpen` | `boolean` | `false` | Initial open state of internal year picker. |
+| `isYearPickerOpen` | `boolean` | - | Controlled year picker open state. |
+| `onYearPickerOpenChange` | `(isOpen: boolean) => void` | - | Called when year picker open state changes. |
+
+### Composition Parts
+
+| Component | Description |
+|-----------|-------------|
+| `RangeCalendar.Header` | Header container for navigation and heading. |
+| `RangeCalendar.Heading` | Current month/year heading. |
+| `RangeCalendar.NavButton` | Previous/next navigation control (`slot="previous"` or `slot="next"`). |
+| `RangeCalendar.Grid` | Day grid for one month (`offset` supported for multi-month layouts). |
+| `RangeCalendar.GridHeader` | Weekday header container. |
+| `RangeCalendar.GridBody` | Date cell body container. |
+| `RangeCalendar.HeaderCell` | Weekday label cell. |
+| `RangeCalendar.Cell` | Individual date cell. |
+| `RangeCalendar.CellIndicator` | Optional indicator element for custom metadata. |
+| `RangeCalendar.YearPickerTrigger` | Trigger to toggle year-picker mode. |
+| `RangeCalendar.YearPickerTriggerHeading` | Localized heading content inside the year-picker trigger. |
+| `RangeCalendar.YearPickerTriggerIndicator` | Toggle icon inside the year-picker trigger. |
+| `RangeCalendar.YearPickerGrid` | Overlay year selection grid container. |
+| `RangeCalendar.YearPickerGridBody` | Body renderer for year grid cells. |
+| `RangeCalendar.YearPickerCell` | Individual year option cell. |
+
+### RangeCalendar.Cell Render Props
+
+When `RangeCalendar.Cell` children is a function, React Aria render props are available:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `formattedDate` | `string` | Localized day label for the cell. |
+| `isSelected` | `boolean` | Whether the date is selected. |
+| `isSelectionStart` | `boolean` | Whether the date is the start of the selected range. |
+| `isSelectionEnd` | `boolean` | Whether the date is the end of the selected range. |
+| `isUnavailable` | `boolean` | Whether the date is unavailable. |
+| `isDisabled` | `boolean` | Whether the cell is disabled. |
+| `isOutsideMonth` | `boolean` | Whether the date belongs to adjacent month. |

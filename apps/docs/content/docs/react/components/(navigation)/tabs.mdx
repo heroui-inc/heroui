@@ -35,6 +35,7 @@ export default () => (
     <Tabs.ListContainer>
       <Tabs.List aria-label="Options">
         <Tabs.Tab>
+          <Tabs.Separator /> {/* Optional */}
           <Tabs.Indicator />
         </Tabs.Tab>
       </Tabs.List>
@@ -56,6 +57,15 @@ export default () => (
 <ComponentPreview
   isBgSolid
   name="tabs-disabled"
+/>
+
+### With Separator
+
+Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display separator lines between tabs.
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-with-separator"
 />
 
 ### Custom Styles
@@ -140,6 +150,7 @@ The Tabs component uses these CSS classes:
 - `.tabs__list-container` - Tab list container wrapper
 - `.tabs__list` - Tab list container
 - `.tabs__tab` - Individual tab button
+- `.tabs__separator` - Separator between tabs
 - `.tabs__panel` - Tab panel content
 - `.tabs__indicator` - Tab indicator
 
@@ -169,7 +180,6 @@ The component supports both CSS pseudo-classes and data attributes:
 |------|------|---------|-------------|
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual style variant. Primary uses a filled indicator, secondary uses an underline indicator |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Tab layout orientation |
-| `hideSeparator` | `boolean` | `false` | Hide separator lines between tabs |
 | `selectedKey` | `string` | - | Controlled selected tab key |
 | `defaultSelectedKey` | `string` | - | Default selected tab key |
 | `onSelectionChange` | `(key: Key) => void` | - | Selection change handler |
@@ -192,6 +202,12 @@ The component supports both CSS pseudo-classes and data attributes:
 | `isDisabled` | `boolean` | `false` | Whether tab is disabled |
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+
+### Tabs.Separator Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
 
 ### Tabs.Panel Props
 

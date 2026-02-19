@@ -1,6 +1,7 @@
 ---
 title: Switch
 description: A toggle switch component for boolean states
+icon: updated
 links:
   rac: Switch
   source: switch/switch.tsx
@@ -26,7 +27,7 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 Import the Switch component and access all parts using dot notation.
 
 ```tsx
-import { Switch, Label } from '@heroui/react';
+import { Switch, Label, Description } from '@heroui/react';
 
 export default () => (
   <Switch>
@@ -35,7 +36,10 @@ export default () => (
         <Switch.Icon/> {/* Optional */}
       </Switch.Thumb>
     </Switch.Control>
-    <Label/> {/* Optional */}
+    <Switch.Content>
+      <Label />
+      <Description /> {/* Optional */}
+    </Switch.Content>
   </Switch>
 );
 ```
@@ -222,6 +226,10 @@ To customize the Switch component classes, you can use the `@layer components` d
     @apply bg-white shadow-sm;
   }
 
+  .switch__content {
+    @apply flex flex-col gap-1;
+  }
+
   .switch__icon {
     @apply h-3 w-3 text-current;
   }
@@ -237,6 +245,7 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
 
 - `.switch` - Base switch container
+- `.switch__content` - Optional content container
 - `.switch__control` - Switch control track
 - `.switch__thumb` - Switch thumb that moves
 - `.switch__icon` - Optional icon inside the thumb

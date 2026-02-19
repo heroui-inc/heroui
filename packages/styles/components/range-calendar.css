@@ -1,0 +1,305 @@
+/* =============================================================================
+ * RangeCalendar Component Styles
+ *
+ * A compound component for contiguous date range selection.
+ * Uses BEM naming convention: range-calendar, range-calendar__element, range-calendar--modifier
+ * ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+ * Base RangeCalendar Styles
+ * -------------------------------------------------------------------------- */
+.range-calendar {
+  @apply w-63 max-w-full;
+
+  container-type: inline-size;
+}
+
+/* -----------------------------------------------------------------------------
+ * RangeCalendar Header
+ * -------------------------------------------------------------------------- */
+.range-calendar__header {
+  @apply flex items-center justify-between px-0.5 pb-4;
+
+  &:has(.calendar-year-picker__trigger[data-open="true"]) {
+    .range-calendar__nav-button {
+      @apply pointer-events-none opacity-0;
+    }
+  }
+}
+
+.range-calendar__heading {
+  @apply flex-1 text-sm font-medium;
+}
+
+.range-calendar__nav-button {
+  @apply flex size-6 items-center justify-center rounded-full text-accent;
+
+  will-change: scale;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-out),
+    background-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out),
+    opacity 150ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  cursor: var(--cursor-interactive);
+
+  /* Hover state – only on devices that support hover (avoids false triggers on touch) */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default text-accent;
+    }
+  }
+
+  /* Pressed state */
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.95);
+  }
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+.range-calendar__nav-button-icon {
+  @apply size-4;
+}
+
+/* -----------------------------------------------------------------------------
+ * RangeCalendar Grid
+ * -------------------------------------------------------------------------- */
+.range-calendar__grid {
+  /* Override table display with CSS Grid for easier customization */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  @apply w-full;
+
+  &[aria-readonly="true"] {
+    .range-calendar__cell {
+      @apply pointer-events-none;
+    }
+  }
+}
+
+.range-calendar__grid-header {
+  /* Grid header (thead) styles */
+  display: contents;
+
+  & > tr {
+    display: contents;
+  }
+}
+
+.range-calendar__grid-body {
+  /* Grid body (tbody) styles */
+  display: contents;
+
+  & > tr {
+    display: contents;
+  }
+
+  /* Add top spacing between header and first body row */
+  & > tr:first-child > td {
+    @apply mt-1;
+  }
+}
+
+.range-calendar__grid-row {
+  /* Use 'contents' so cells participate directly in grid */
+  /* Note: This class can be used for custom row styling if needed */
+  display: contents;
+}
+
+.range-calendar__header-cell {
+  /* Header cell (th - weekday names) styles */
+  @apply flex items-center justify-center pb-2 text-xs font-medium text-muted;
+}
+
+/* -----------------------------------------------------------------------------
+ * RangeCalendar Cells
+ * -------------------------------------------------------------------------- */
+.range-calendar__cell {
+  @apply relative z-1 mx-0 my-[2px] p-0 outline-none;
+
+  cursor: var(--cursor-interactive);
+
+  will-change: background-color, border-color;
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    box-shadow 100ms var(--ease-out),
+    border-color 100ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  /* Inner interactive circle/capsule (equivalent to React Aria "button-base") */
+  .range-calendar__cell-button {
+    @apply flex aspect-square w-full items-center justify-center rounded-full text-sm font-medium text-foreground no-highlight;
+
+    will-change: scale;
+    transition: scale 200ms var(--ease-out);
+    @apply transform-gpu motion-reduce:transition-none;
+  }
+
+  /* Focus state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply z-2;
+
+    .range-calendar__cell-button {
+      @apply status-focused;
+    }
+  }
+
+  /* Today indicator */
+  &[data-today="true"] {
+    .range-calendar__cell-button {
+      @apply text-accent;
+    }
+  }
+
+  /* Range selected track (middle segment) */
+  &[data-selected="true"]:not([data-outside-month="true"]) {
+    @apply rounded-none bg-accent-soft;
+  }
+
+  /* Round row boundaries so the range track looks continuous across weeks */
+  &[data-selected="true"]:is(td:first-child > *, [aria-disabled] + td > *) {
+    @apply rounded-ss-lg rounded-es-lg;
+    &[data-selection-start="true"] {
+      @apply rounded-ss-full rounded-es-full;
+    }
+  }
+
+  &[data-selected="true"]:is(td:last-child > *, td:has(+ [aria-disabled]) > *) {
+    @apply rounded-se-lg rounded-ee-lg;
+    &[data-selection-end="true"] {
+      @apply rounded-se-full rounded-ee-full;
+    }
+  }
+
+  /* Range caps (start/end) */
+  &[data-selection-start="true"]:not([data-outside-month="true"]),
+  &[data-selection-end="true"]:not([data-outside-month="true"]) {
+    @apply z-2;
+
+    .range-calendar__cell-button {
+      @apply bg-accent text-accent-foreground;
+    }
+  }
+
+  /* &[data-selection-start="true"]:has(+ [data-selection-end="true"]) {
+    @apply rounded-full;
+  } */
+
+  &[data-selection-start="true"]:not([data-outside-month="true"]) {
+    @apply rounded-tl-full rounded-bl-full;
+  }
+
+  &[data-selection-end="true"]:not([data-outside-month="true"]) {
+    @apply rounded-tr-full rounded-br-full;
+  }
+
+  /* Pressed state */
+  &:active,
+  &[data-pressed="true"] {
+    .range-calendar__cell-button {
+      scale: 0.9;
+    }
+
+    &[data-selection-start="true"],
+    &[data-selection-end="true"] {
+      .range-calendar__cell-button {
+        @apply bg-accent-hover;
+      }
+    }
+  }
+
+  /* Hover state for non-selected days */
+  @media (hover: hover) {
+    &:hover:not([data-selected="true"]),
+    &[data-hovered="true"]:not([data-selected="true"]) {
+      .range-calendar__cell-button {
+        @apply bg-default;
+      }
+    }
+  }
+
+  /* Outside month (previous/next month days) */
+  &[data-outside-month="true"] {
+    @apply text-muted opacity-50;
+  }
+
+  &[data-selected="true"][data-outside-month="true"]:not(
+      [data-selection-start="true"],
+      [data-selection-end="true"]
+    ) {
+    @apply bg-default/20;
+  }
+
+  /* Unavailable dates */
+  &[data-unavailable="true"] {
+    @apply status-disabled;
+  }
+
+  /* Disabled state */
+  &:disabled:not([data-outside-month="true"]),
+  &[data-disabled="true"]:not([data-outside-month="true"]) {
+    @apply status-disabled;
+
+    text-decoration: line-through;
+  }
+}
+
+/* Outside-month cell followed by selected cell across adjacent table cells */
+.range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-outside-month="true"])
+  + td
+  > .range-calendar__cell[data-selected="true"] {
+  @apply rounded-ss-lg rounded-es-lg;
+
+  &[data-outside-month="true"],
+  &[data-selection-start="true"] {
+    @apply rounded-ss-full rounded-es-full;
+  }
+}
+
+/* Selected cell followed by outside-month cell across adjacent table cells */
+.range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-selected="true"]):has(
+    + td > .range-calendar__cell[data-outside-month="true"]
+  )
+  > .range-calendar__cell[data-selected="true"] {
+  @apply rounded-se-lg rounded-ee-lg;
+
+  &[data-outside-month="true"],
+  &[data-selection-end="true"] {
+    @apply rounded-se-full rounded-ee-full;
+  }
+}
+
+/* Cell indicator - small dot at bottom center of cell */
+.range-calendar__cell-indicator {
+  @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-full bg-muted;
+
+  /* Indicator color changes when cell is selected */
+  [data-selected="true"] > & {
+    @apply bg-accent-foreground;
+  }
+}

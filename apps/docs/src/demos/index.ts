@@ -24,6 +24,7 @@ import * as ColorSwatchPickerDemos from "./color-swatch-picker";
 import * as ComboBoxDemos from "./combo-box";
 import * as DateFieldDemos from "./date-field";
 import * as DatePickerDemos from "./date-picker";
+import * as DateRangePickerDemos from "./date-range-picker";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
@@ -43,6 +44,7 @@ import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
+import * as RangeCalendarDemos from "./range-calendar";
 import * as ScrollShadowDemos from "./scroll-shadow";
 import * as SearchFieldDemos from "./search-field";
 import * as SelectDemos from "./select";
@@ -391,6 +393,71 @@ export const demos: Record<string, DemoItem> = {
   "calendar-custom-icons": {
     component: CalendarDemos.CustomIcons,
     file: "calendar/custom-icons.tsx",
+  },
+  // RangeCalendar demos
+  "range-calendar-basic": {
+    component: RangeCalendarDemos.Basic,
+    file: "range-calendar/basic.tsx",
+  },
+  "range-calendar-year-picker": {
+    component: RangeCalendarDemos.YearPicker,
+    file: "range-calendar/year-picker.tsx",
+  },
+  "range-calendar-default-value": {
+    component: RangeCalendarDemos.DefaultValue,
+    file: "range-calendar/default-value.tsx",
+  },
+  "range-calendar-controlled": {
+    component: RangeCalendarDemos.Controlled,
+    file: "range-calendar/controlled.tsx",
+  },
+  "range-calendar-min-max-dates": {
+    component: RangeCalendarDemos.MinMaxDates,
+    file: "range-calendar/min-max-dates.tsx",
+  },
+  "range-calendar-unavailable-dates": {
+    component: RangeCalendarDemos.UnavailableDates,
+    file: "range-calendar/unavailable-dates.tsx",
+  },
+  "range-calendar-allows-non-contiguous-ranges": {
+    component: RangeCalendarDemos.AllowsNonContiguousRanges,
+    file: "range-calendar/allows-non-contiguous-ranges.tsx",
+  },
+  "range-calendar-disabled": {
+    component: RangeCalendarDemos.Disabled,
+    file: "range-calendar/disabled.tsx",
+  },
+  "range-calendar-read-only": {
+    component: RangeCalendarDemos.ReadOnly,
+    file: "range-calendar/read-only.tsx",
+  },
+  "range-calendar-invalid": {
+    component: RangeCalendarDemos.Invalid,
+    file: "range-calendar/invalid.tsx",
+  },
+  "range-calendar-focused-value": {
+    component: RangeCalendarDemos.FocusedValue,
+    file: "range-calendar/focused-value.tsx",
+  },
+  "range-calendar-with-indicators": {
+    component: RangeCalendarDemos.WithIndicators,
+    file: "range-calendar/with-indicators.tsx",
+  },
+  "range-calendar-multiple-months": {
+    component: RangeCalendarDemos.MultipleMonths,
+    file: "range-calendar/multiple-months.tsx",
+  },
+  "range-calendar-three-months": {
+    component: RangeCalendarDemos.ThreeMonths,
+    file: "range-calendar/three-months.tsx",
+  },
+  "range-calendar-international-calendar": {
+    component: RangeCalendarDemos.InternationalCalendar,
+    file: "range-calendar/international-calendar.tsx",
+  },
+  "range-calendar-booking-calendar": {
+    component: RangeCalendarDemos.BookingCalendar,
+    file: "range-calendar/booking-calendar.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {
@@ -1105,6 +1172,39 @@ export const demos: Record<string, DemoItem> = {
     component: DatePickerDemos.CustomRenderFunction,
     file: "date-picker/custom-render-function.tsx",
   },
+  // DateRangePicker demos
+  "date-range-picker-basic": {
+    component: DateRangePickerDemos.Basic,
+    file: "date-range-picker/basic.tsx",
+  },
+  "date-range-picker-controlled": {
+    component: DateRangePickerDemos.Controlled,
+    file: "date-range-picker/controlled.tsx",
+  },
+  "date-range-picker-disabled": {
+    component: DateRangePickerDemos.Disabled,
+    file: "date-range-picker/disabled.tsx",
+  },
+  "date-range-picker-format-options": {
+    component: DateRangePickerDemos.FormatOptions,
+    file: "date-range-picker/format-options.tsx",
+  },
+  "date-range-picker-form-example": {
+    component: DateRangePickerDemos.FormExample,
+    file: "date-range-picker/form-example.tsx",
+  },
+  "date-range-picker-with-custom-indicator": {
+    component: DateRangePickerDemos.WithCustomIndicator,
+    file: "date-range-picker/with-custom-indicator.tsx",
+  },
+  "date-range-picker-with-validation": {
+    component: DateRangePickerDemos.WithValidation,
+    file: "date-range-picker/with-validation.tsx",
+  },
+  "date-range-picker-international-calendar": {
+    component: DateRangePickerDemos.InternationalCalendar,
+    file: "date-range-picker/international-calendar.tsx",
+  },
   // InputOTP demos
   "input-otp-basic": {
     component: InputOTPDemos.Basic,
@@ -1472,9 +1572,9 @@ export const demos: Record<string, DemoItem> = {
     component: TabsDemos.CustomStyles,
     file: "tabs/custom-styles.tsx",
   },
-  "tabs-without-separator": {
-    component: TabsDemos.WithoutSeparator,
-    file: "tabs/without-separator.tsx",
+  "tabs-with-separator": {
+    component: TabsDemos.WithSeparator,
+    file: "tabs/with-separator.tsx",
   },
   "tabs-secondary": {
     component: TabsDemos.Secondary,
