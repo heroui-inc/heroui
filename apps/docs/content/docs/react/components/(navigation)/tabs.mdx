@@ -93,6 +93,12 @@ Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display 
 
 <RelatedComponents component="tabs" />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="tabs-custom-render-function"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -178,6 +184,7 @@ The component supports both CSS pseudo-classes and data attributes:
 | `defaultSelectedKey` | `string` | - | Default selected tab key |
 | `onSelectionChange` | `(key: Key) => void` | - | Selection change handler |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabsRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Tabs.List Props
 
@@ -185,6 +192,7 @@ The component supports both CSS pseudo-classes and data attributes:
 |------|------|---------|-------------|
 | `aria-label` | `string` | - | Accessibility label for tab list |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabListRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Tabs.Tab Props
 
@@ -193,6 +201,7 @@ The component supports both CSS pseudo-classes and data attributes:
 | `id` | `string` | - | Unique tab identifier |
 | `isDisabled` | `boolean` | `false` | Whether tab is disabled |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Tabs.Separator Props
 
@@ -206,3 +215,4 @@ The component supports both CSS pseudo-classes and data attributes:
 |------|------|---------|-------------|
 | `id` | `string` | - | Panel identifier matching tab id |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabPanelRenderProps>` | - | Overrides the default DOM element with a custom render function.|

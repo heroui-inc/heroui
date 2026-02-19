@@ -1,6 +1,7 @@
 export {Basic} from "./basic";
 export {ChannelEditing} from "./channel-editing";
 export {Controlled} from "./controlled";
+export {CustomRenderFunction} from "./custom-render-function";
 export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FullWidth} from "./full-width";

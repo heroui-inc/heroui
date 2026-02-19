@@ -60,6 +60,12 @@ Use `colorSpace` to set the color space (RGB, HSL, HSB) and `xChannel`/`yChannel
   name="color-area-disabled"
 />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="color-area-custom-render-function"
+/>
+
 <RelatedComponents component="color-area" />
 
 ## Styling
@@ -134,6 +140,7 @@ Inherits from [React Aria ColorArea](https://react-spectrum.adobe.com/react-aria
 | `isDisabled` | `boolean` | `false` | Whether the color area is disabled |
 | `showDots` | `boolean` | `false` | Whether to show the dot grid overlay |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorAreaRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ColorArea.Thumb Props
 
@@ -141,3 +148,4 @@ Inherits from [React Aria ColorArea](https://react-spectrum.adobe.com/react-aria
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `style` | `CSSProperties \| ((renderProps) => CSSProperties)` | - | Inline styles or render props function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorThumbRenderProps>` | - | Overrides the default DOM element with a custom render function.|

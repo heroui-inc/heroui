@@ -1,6 +1,7 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
 export {CustomStyles} from "./custom-styles";
+export {CustomRenderFunction} from "./custom-render-function";
 export {DefaultSelected} from "./default-selected";
 export {Disabled} from "./disabled";
 export {Form} from "./form";

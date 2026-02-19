@@ -136,8 +136,7 @@ Two date fields + popover range calendar.
 
 `Switch.Content` groups label and description next to the switch control ([#6240](https://github.com/heroui-inc/heroui/pull/6240)).
 
-**Usage:**
-
+**Before:**
 ```tsx
 import { Switch, Label, Description } from '@heroui/react';
 
@@ -179,10 +178,10 @@ Props passed to `Breadcrumbs.Item` are now forwarded to the underlying `Link` ([
 
 ## Dependencies
 
-- **React Aria Components**: Updated from `1.14.0` to `1.15.1`
+- **React Aria Components**: Updated from `1.14.0` to `1.15.0` — adds a new [`render` prop](https://react-aria.adobe.com/customization#dom-elements) for customizing the DOM element rendered by any React Aria component (useful for router links, animation libraries like Motion, etc.)
 - **@react-aria/utils**: Updated from `3.32.0` to `3.33.0`
 - **@react-types/shared**: Updated from `3.32.1` to `3.33.0`
-- **@internationalized/date**: Updated from `3.10.1` to `3.11.0`
+- **@internationalized/date**: Updated from `3.10.1` to `3.11.0` — date fields now constrain on blur instead of as you type
 - Added `@react-aria/i18n` and `@react-stately/utils` for calendar i18n
 
 ## ⚠️ Breaking Changes
@@ -278,7 +277,8 @@ Same pattern as DateField:
 | `ColorInputGroup.Prefix` | `ColorField.Prefix` |
 | `ColorInputGroup.Suffix` | `ColorField.Suffix` |
 
-**Before:**
+**Usage:**
+
 ```tsx
 import {ColorField, Label, ColorInputGroup, ColorSwatch} from '@heroui/react';
 

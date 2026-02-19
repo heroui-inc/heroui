@@ -102,6 +102,10 @@ export const demos: Record<string, DemoItem> = {
     component: AccordionDemos.WithoutSeparator,
     file: "accordion/without-separator.tsx",
   },
+  "accordion-custom-render-function": {
+    component: AccordionDemos.CustomRenderFunction,
+    file: "accordion/custom-render-function.tsx",
+  },
   // Alert demos
   "alert-basic": {
     component: AlertDemos.Basic,
@@ -214,6 +218,10 @@ export const demos: Record<string, DemoItem> = {
     component: BreadcrumbsDemos.BreadcrumbsDisabled,
     file: "breadcrumbs/disabled.tsx",
   },
+  "breadcrumbs-custom-render-function": {
+    component: BreadcrumbsDemos.CustomRenderFunction,
+    file: "breadcrumbs/custom-render-function.tsx",
+  },
   // Button demos
   "button-basic": {
     component: ButtonDemos.Basic,
@@ -266,6 +274,10 @@ export const demos: Record<string, DemoItem> = {
   "button-with-icons": {
     component: ButtonDemos.WithIcons,
     file: "button/with-icons.tsx",
+  },
+  "button-custom-render-function": {
+    component: ButtonDemos.CustomRenderFunction,
+    file: "button/custom-render-function.tsx",
   },
   // ButtonGroup demos
   "button-group-basic": {
@@ -504,6 +516,10 @@ export const demos: Record<string, DemoItem> = {
     component: CheckboxDemos.Variants,
     file: "checkbox/variants.tsx",
   },
+  "checkbox-custom-render-function": {
+    component: CheckboxDemos.CustomRenderFunction,
+    file: "checkbox/custom-render-function.tsx",
+  },
   // CheckboxGroup demos
   "checkbox-group-basic": {
     component: CheckboxGroupDemos.Basic,
@@ -536,6 +552,10 @@ export const demos: Record<string, DemoItem> = {
   "checkbox-group-features-and-addons": {
     component: CheckboxGroupDemos.FeaturesAndAddOns,
     file: "checkbox-group/features-and-addons.tsx",
+  },
+  "checkbox-group-custom-render-function": {
+    component: CheckboxGroupDemos.CustomRenderFunction,
+    file: "checkbox-group/custom-render-function.tsx",
   },
   // Chip demos
   "chip-basic": {
@@ -599,6 +619,10 @@ export const demos: Record<string, DemoItem> = {
     component: ColorFieldDemos.WithDescription,
     file: "color-field/with-description.tsx",
   },
+  "color-field-custom-render-function": {
+    component: ColorFieldDemos.CustomRenderFunction,
+    file: "color-field/custom-render-function.tsx",
+  },
   // ColorPicker demos
   "color-picker-basic": {
     component: ColorPickerDemos.Basic,
@@ -641,6 +665,10 @@ export const demos: Record<string, DemoItem> = {
     component: ColorAreaDemos.Disabled,
     file: "color-area/disabled.tsx",
   },
+  "color-area-custom-render-function": {
+    component: ColorAreaDemos.CustomRenderFunction,
+    file: "color-area/custom-render-function.tsx",
+  },
   // ColorSwatch demos
   "color-swatch-basic": {
     component: ColorSwatchDemos.Basic,
@@ -665,6 +693,10 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-accessibility": {
     component: ColorSwatchDemos.Accessibility,
     file: "color-swatch/accessibility.tsx",
+  },
+  "color-swatch-custom-render-function": {
+    component: ColorSwatchDemos.CustomRenderFunction,
+    file: "color-swatch/custom-render-function.tsx",
   },
   // ColorSlider demos
   "color-slider-basic": {
@@ -694,6 +726,10 @@ export const demos: Record<string, DemoItem> = {
   "color-slider-controlled": {
     component: ColorSliderDemos.Controlled,
     file: "color-slider/controlled.tsx",
+  },
+  "color-slider-custom-render-function": {
+    component: ColorSliderDemos.CustomRenderFunction,
+    file: "color-slider/custom-render-function.tsx",
   },
   // CloseButton demos
   "close-button-default": {
@@ -740,6 +776,10 @@ export const demos: Record<string, DemoItem> = {
   "color-swatch-picker-custom-indicator": {
     component: ColorSwatchPickerDemos.CustomIndicator,
     file: "color-swatch-picker/custom-indicator.tsx",
+  },
+  "color-swatch-picker-custom-render-function": {
+    component: ColorSwatchPickerDemos.CustomRenderFunction,
+    file: "color-swatch-picker/custom-render-function.tsx",
   },
   // Autocomplete demos
   "autocomplete-default": {
@@ -891,10 +931,18 @@ export const demos: Record<string, DemoItem> = {
     component: ComboBoxDemos.MenuTrigger,
     file: "combo-box/menu-trigger.tsx",
   },
+  "combo-box-custom-render-function": {
+    component: ComboBoxDemos.CustomRenderFunction,
+    file: "combo-box/custom-render-function.tsx",
+  },
   // Disclosure demos
   "disclosure-basic": {
     component: DisclosureDemos.Basic,
     file: "disclosure/basic.tsx",
+  },
+  "disclosure-custom-render-function": {
+    component: DisclosureDemos.CustomRenderFunction,
+    file: "disclosure/custom-render-function.tsx",
   },
   // DisclosureGroup demos
   "disclosure-group-basic": {
@@ -983,6 +1031,10 @@ export const demos: Record<string, DemoItem> = {
   "form-basic": {
     component: FormDemos.Basic,
     file: "form/basic.tsx",
+  },
+  "form-custom-render-function": {
+    component: FormDemos.CustomRenderFunction,
+    file: "form/custom-render-function.tsx",
   },
   // Fieldset demos
   "fieldset-basic": {
@@ -1079,6 +1131,10 @@ export const demos: Record<string, DemoItem> = {
     component: DateFieldDemos.Variants,
     file: "date-field/variants.tsx",
   },
+  "date-field-custom-render-function": {
+    component: DateFieldDemos.CustomRenderFunction,
+    file: "date-field/custom-render-function.tsx",
+  },
   // DatePicker demos
   "date-picker-basic": {
     component: DatePickerDemos.Basic,
@@ -1112,6 +1168,10 @@ export const demos: Record<string, DemoItem> = {
     component: DatePickerDemos.InternationalCalendar,
     file: "date-picker/international-calendar.tsx",
   },
+  "date-picker-custom-render-function": {
+    component: DatePickerDemos.CustomRenderFunction,
+    file: "date-picker/custom-render-function.tsx",
+  },
   // DateRangePicker demos
   "date-range-picker-basic": {
     component: DateRangePickerDemos.Basic,
@@ -1144,6 +1204,10 @@ export const demos: Record<string, DemoItem> = {
   "date-range-picker-international-calendar": {
     component: DateRangePickerDemos.InternationalCalendar,
     file: "date-range-picker/international-calendar.tsx",
+  },
+  "date-range-picker-custom-render-function": {
+    component: DateRangePickerDemos.CustomRenderFunction,
+    file: "date-range-picker/custom-render-function.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
@@ -1309,6 +1373,10 @@ export const demos: Record<string, DemoItem> = {
     component: LinkDemos.UnderlineAndOffset,
     file: "link/underline-and-offset.tsx",
   },
+  "link-custom-render-function": {
+    component: LinkDemos.CustomRenderFunction,
+    file: "link/custom-render-function.tsx",
+  },
   // RadioGroup demos
   "radio-group-basic": {
     component: RadioGroupDemos.Basic,
@@ -1349,6 +1417,10 @@ export const demos: Record<string, DemoItem> = {
   "radio-group-variants": {
     component: RadioGroupDemos.Variants,
     file: "radio-group/variants.tsx",
+  },
+  "radio-group-custom-render-function": {
+    component: RadioGroupDemos.CustomRenderFunction,
+    file: "radio-group/custom-render-function.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {
@@ -1403,6 +1475,10 @@ export const demos: Record<string, DemoItem> = {
   "separator-manual-variant-override": {
     component: SeparatorDemos.ManualVariantOverride,
     file: "separator/manual-variant-override.tsx",
+  },
+  "separator-custom-render-function": {
+    component: SeparatorDemos.CustomRenderFunction,
+    file: "separator/custom-render-function.tsx",
   },
   // Spinner demos
   "spinner-basic": {
@@ -1479,6 +1555,10 @@ export const demos: Record<string, DemoItem> = {
     component: SwitchDemos.CustomStyles,
     file: "switch/custom-styles.tsx",
   },
+  "switch-custom-render-function": {
+    component: SwitchDemos.CustomRenderFunction,
+    file: "switch/custom-render-function.tsx",
+  },
   // Tabs demos
   "tabs-basic": {
     component: TabsDemos.Basic,
@@ -1507,6 +1587,10 @@ export const demos: Record<string, DemoItem> = {
   "tabs-secondary-vertical": {
     component: TabsDemos.SecondaryVertical,
     file: "tabs/secondary-vertical.tsx",
+  },
+  "tabs-custom-render-function": {
+    component: TabsDemos.CustomRenderFunction,
+    file: "tabs/custom-render-function.tsx",
   },
   // TagGroup demos
   "tag-group-basic": {
@@ -1548,6 +1632,10 @@ export const demos: Record<string, DemoItem> = {
   "tag-group-with-list-data": {
     component: TagGroupDemos.WithListData,
     file: "tag-group/with-list-data.tsx",
+  },
+  "tag-group-custom-render-function": {
+    component: TagGroupDemos.CustomRenderFunction,
+    file: "tag-group/custom-render-function.tsx",
   },
   // TextArea demos
   "textarea-basic": {
@@ -1619,6 +1707,10 @@ export const demos: Record<string, DemoItem> = {
     component: TextFieldDemos.OnSurface,
     file: "text-field/on-surface.tsx",
   },
+  "text-field-custom-render-function": {
+    component: TextFieldDemos.CustomRenderFunction,
+    file: "text-field/custom-render-function.tsx",
+  },
   // TimeField demos
   "time-field-basic": {
     component: TimeFieldDemos.Basic,
@@ -1671,6 +1763,10 @@ export const demos: Record<string, DemoItem> = {
   "time-field-with-validation": {
     component: TimeFieldDemos.WithValidation,
     file: "time-field/with-validation.tsx",
+  },
+  "time-field-custom-render-function": {
+    component: TimeFieldDemos.CustomRenderFunction,
+    file: "time-field/custom-render-function.tsx",
   },
   // Toast demos
   "toast-default": {
@@ -1726,6 +1822,10 @@ export const demos: Record<string, DemoItem> = {
     component: TooltipDemos.CustomTrigger,
     file: "tooltip/custom-trigger.tsx",
   },
+  "tooltip-custom-render-function": {
+    component: TooltipDemos.CustomRenderFunction,
+    file: "tooltip/custom-render-function.tsx",
+  },
   // Popover demos
   "popover-basic": {
     component: PopoverDemos.Basic,
@@ -1742,6 +1842,10 @@ export const demos: Record<string, DemoItem> = {
   "popover-interactive": {
     component: PopoverDemos.Interactive,
     file: "popover/interactive.tsx",
+  },
+  "popover-custom-render-function": {
+    component: PopoverDemos.CustomRenderFunction,
+    file: "popover/custom-render-function.tsx",
   },
   // Label demos
   "label-basic": {
@@ -1772,6 +1876,10 @@ export const demos: Record<string, DemoItem> = {
   "list-box-with-sections": {
     component: ListBoxDemos.WithSections,
     file: "list-box/with-sections.tsx",
+  },
+  "list-box-custom-render-function": {
+    component: ListBoxDemos.CustomRenderFunction,
+    file: "list-box/custom-render-function.tsx",
   },
   // Modal demos
   "modal-default": {
@@ -1887,6 +1995,10 @@ export const demos: Record<string, DemoItem> = {
     component: NumberFieldDemos.Variants,
     file: "number-field/variants.tsx",
   },
+  "number-field-custom-render-function": {
+    component: NumberFieldDemos.CustomRenderFunction,
+    file: "number-field/custom-render-function.tsx",
+  },
   // Select demos
   "select-default": {
     component: SelectDemos.Default,
@@ -1956,6 +2068,10 @@ export const demos: Record<string, DemoItem> = {
     component: SelectDemos.Variants,
     file: "select/variants.tsx",
   },
+  "select-custom-render-function": {
+    component: SelectDemos.CustomRenderFunction,
+    file: "select/custom-render-function.tsx",
+  },
   // SearchField demos
   "search-field-basic": {
     component: SearchFieldDemos.Basic,
@@ -2009,6 +2125,10 @@ export const demos: Record<string, DemoItem> = {
     component: SearchFieldDemos.Variants,
     file: "search-field/variants.tsx",
   },
+  "search-field-custom-render-function": {
+    component: SearchFieldDemos.CustomRenderFunction,
+    file: "search-field/custom-render-function.tsx",
+  },
   // ScrollShadow demos
   "scroll-shadow-default": {
     component: ScrollShadowDemos.Default,
@@ -2050,6 +2170,10 @@ export const demos: Record<string, DemoItem> = {
   "slider-disabled": {
     component: SliderDemos.Disabled,
     file: "slider/disabled.tsx",
+  },
+  "slider-custom-render-function": {
+    component: SliderDemos.CustomRenderFunction,
+    file: "slider/custom-render-function.tsx",
   },
   // Description demos
   "description-basic": {

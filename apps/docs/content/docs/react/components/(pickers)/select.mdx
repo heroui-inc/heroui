@@ -121,6 +121,12 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <RelatedComponents component="select" />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="select-custom-render-function"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -239,6 +245,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `variant`       | `"primary" \| "secondary"`             | `"primary"`         | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `className`     | `string`                                | -                  | Additional CSS classes                                   |
 | `children`      | `ReactNode \| RenderFunction`           | -                  | Select content or render function                        |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SelectRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Select.Trigger Props
 
@@ -253,6 +260,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | ----------- | ----------------------------- | ------- | -------------------------------- |
 | `className` | `string`                      | -       | Additional CSS classes           |
 | `children`  | `ReactNode \| RenderFunction` | -       | Value content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SelectValueRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Select.Indicator Props
 

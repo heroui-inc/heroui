@@ -159,6 +159,12 @@ Use the `menuTrigger` prop to control when the popover opens:
   name="combo-box-menu-trigger"
 />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="combo-box-custom-render-function"
+/>
+
 <RelatedComponents component="combo-box" />
 
 ## Styling
@@ -277,6 +283,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `fullWidth` | `boolean` | `false` | Whether the ComboBox should take full width of its container |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | ComboBox content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ComboBoxRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ComboBox.InputGroup Props
 

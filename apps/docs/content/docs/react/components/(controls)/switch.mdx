@@ -145,6 +145,12 @@ export default () => (
   name="switch-custom-styles"
 />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="switch-custom-render-function"
+/>
+
 <RelatedComponents component="switch" />
 
 ## Styling
@@ -283,6 +289,7 @@ Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Sw
 | `onChange` | `(isSelected: boolean) => void` | - | Handler called when the switch value changes |
 | `onPress` | `(e: PressEvent) => void` | - | Handler called when the switch is pressed |
 | `children` | `React.ReactNode \| (values: SwitchRenderProps) => React.ReactNode` | - | Switch content or render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### SwitchRenderProps
 

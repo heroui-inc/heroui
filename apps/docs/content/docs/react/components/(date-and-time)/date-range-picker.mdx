@@ -108,10 +108,11 @@ For a complete list of supported calendar systems and their identifiers, see:
 - [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
 - [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
 
-**Related packages:**
-- [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — date types (`CalendarDate`, `CalendarDateTime`, `ZonedDateTime`) and utilities used by all date components
-- [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — override locale for a subtree
-- [`useLocale`](https://react-aria.adobe.com/useLocale) — read the current locale and layout direction
+### Custom Render Function
+
+<ComponentPreview
+  name="date-range-picker-custom-render-function"
+/>
 
 <RelatedComponents component="daterangepicker" />
 
@@ -222,6 +223,7 @@ DateRangePicker inherits all props from React Aria [DateRangePicker](https://rea
 | `startName` | `string` | - | Name used for the start date in HTML form submission. |
 | `endName` | `string` | - | Name used for the end date in HTML form submission. |
 | `children` | `ReactNode \| (values: DateRangePickerRenderProps) => ReactNode` | - | Composed content or render function. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DateRangePickerRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Composition Parts
 
@@ -232,3 +234,8 @@ DateRangePicker inherits all props from React Aria [DateRangePicker](https://rea
 | `DateRangePicker.TriggerIndicator` | Indicator slot with default calendar icon. |
 | `DateRangePicker.RangeSeparator` | Separator part between start and end date inputs. |
 | `DateRangePicker.Popover` | Popover wrapper for `RangeCalendar` content. |
+
+### Related packages
+- [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — date types (`CalendarDate`, `CalendarDateTime`, `ZonedDateTime`) and utilities used by all date components
+- [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — override locale for a subtree
+- [`useLocale`](https://react-aria.adobe.com/useLocale) — read the current locale and layout direction

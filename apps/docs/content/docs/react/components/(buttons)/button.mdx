@@ -78,6 +78,12 @@ import { Button } from '@heroui/react';
   name="button-social"
 />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="button-custom-render-function"
+/>
+
 <RelatedComponents component="button" />
 
 <RelatedShowcases component="Button" />
@@ -180,6 +186,7 @@ The button supports both CSS pseudo-classes and data attributes for flexibility:
 | `isIconOnly` | `boolean` | `false` | Whether the button contains only an icon |
 | `onPress` | `(e: PressEvent) => void` | - | Handler called when the button is pressed |
 | `children` | `React.ReactNode \| (values: ButtonRenderProps) => React.ReactNode` | - | Button content or render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ButtonRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ButtonRenderProps
 

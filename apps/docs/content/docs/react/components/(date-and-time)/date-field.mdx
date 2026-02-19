@@ -111,6 +111,12 @@ Complete form example with validation and submission handling.
 
 <RelatedComponents component="datefield" />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="date-field-custom-render-function"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -194,6 +200,7 @@ DateField inherits all props from React Aria's [DateField](https://react-aria.ad
 | `style` | `React.CSSProperties \| (values: DateFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the date field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DateFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 #### Value Props
 

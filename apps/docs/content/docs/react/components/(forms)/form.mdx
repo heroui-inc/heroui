@@ -32,6 +32,12 @@ export default () => (
 )
 ```
 
+### Custom Render Function
+
+<ComponentPreview
+  name="form-custom-render-function"
+/>
+
 <RelatedComponents component="form" />
 
 <RelatedShowcases component="Form" />
@@ -80,6 +86,7 @@ The Form component is a wrapper around React Aria's Form primitive that provides
 | `validationErrors` | `ValidationErrors` | - | Server-side validation errors mapped by field name. Displayed immediately and cleared when user modifies the field. |
 | `aria-label` | `string` | - | Accessibility label for the form. |
 | `aria-labelledby` | `string` | - | ID of element that labels the form. Creates a form landmark when provided. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Form Validation
 
