@@ -364,9 +364,7 @@ type MyAvatarProps = Avatar["RootProps"];
 
 ## Custom DOM Element
 
-Use the `render` prop on the following components to render a custom component in place of the default DOM element: `accordion`, `breadcrumbs`, `button`, `checkbox`, `checkbox-group`, `color-area`, `color-field`, `color-slider`, `color-swatch`, `color-swatch-picker`, `combo-box`, `date-field`, `date-picker`, `date-range-picker`, `disclosure`, `form`, `link`, `list-box`, `number-field`, `popover`, `radio-group`, `search-field`, `select`, `separator`, `slider`, `switch`, `tabs`, `tag-group`, `text-field`, `time-field`, `tooltip`.
-
-This accepts a function which receives the DOM props to pass through, and states such as `isPressed` and `isSelected`.
+Use the `render` prop on the following components to render a custom component in place of the default DOM element.
 
 For example, you can render a [Motion](https://motion.dev/) button and use the state to drive an animation.
 
@@ -385,6 +383,19 @@ import {motion} from 'motion/react';
 ```
 
 The `render` prop is also useful for rendering link components from client-side routers, or reusing existing presentational components.
+
+```tsx
+import {Link} from '@heroui/react';
+import NextLink from 'next/link';
+
+<Link
+  render={({ref, ...domProps}) => (
+    <NextLink {...domProps} ref={ref as React.Ref<HTMLAnchorElement>} href="/privacy-policy" />
+  )}
+>
+  Privacy Policy
+</Link>
+```
 
 Follow these rules to avoid breaking the behavior and accessibility of the component:
 - Always render the expected element type (e.g. if `<button>` is expected, do not render an `<a>`). You will see a warning in development if a mismatch is detected.
