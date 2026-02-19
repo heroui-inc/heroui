@@ -57,35 +57,21 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | `placement` | `placement` (on Content) | Moved to `Popover.Content` |
 | `offset` | `offset` (on Content) | Moved to `Popover.Content` |
 | `shouldFlip` | `shouldFlip` (on Content) | Moved to `Popover.Content` |
 | `isOpen` / `defaultOpen` / `onOpenChange` | Same (on root) | Controlled state stays on root `Popover` |
-| `showArrow` | - | Removed (use `Popover.Arrow` component) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `color` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `shadow` | - | Removed (use Tailwind CSS) |
-| `backdrop` | - | Removed |
-| `motionProps` | - | Removed (animations handled differently) |
-| `classNames` | - | Use `className` on each part |
-| `onClose` | - | Use `onOpenChange((open) => { if (!open) { ... } })` instead |
-
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `size` - Use Tailwind CSS classes
-- `color` - Use Tailwind CSS classes
-- `radius` - Use Tailwind CSS classes
-- `shadow` - Use Tailwind CSS classes
-- `backdrop` - Removed
-- `showArrow` - Use `Popover.Arrow` component instead
-- `motionProps` - Animations handled differently
-- `classNames` - Use `className` props on individual components
-- `onClose` - Use `onOpenChange((open) => { if (!open) { /* closed */ } })` instead
+| `showArrow` | — | Use `Popover.Arrow` component |
+| `size` | — | Removed (use Tailwind CSS) |
+| `color` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `shadow` | — | Removed (use Tailwind CSS) |
+| `backdrop` | — | Removed |
+| `motionProps` | — | Removed (animations handled differently) |
+| `classNames` | — | Use `className` on each part |
+| `onClose` | — | Use `onOpenChange((open) => { if (!open) { ... } })` instead |
 
 ## Migration Examples
 

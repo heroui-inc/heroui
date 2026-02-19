@@ -73,18 +73,21 @@ To achieve v2 variant styles in v3:
 - **v2 `flat`** → v3 default (no additional classes needed)
 - **v2 `faded`** → v3 `status` + add opacity/background classes
 
-### 4. Removed Props
+### 4. Prop Changes
 
-The following props are no longer available in v3:
-
-- `variant` - Use Tailwind CSS classes instead
-- `radius` - Use Tailwind CSS classes like `rounded-lg`, `rounded-full`, etc.
-- `startContent` - Place content directly before `<Alert.Indicator />`
-- `endContent` - Place content directly after `<Alert.Content />`
-- `hideIcon` - Simply don't render `<Alert.Indicator />`
-- `hideIconWrapper` - Not applicable (no wrapper in v3)
-- `isVisible` / `isDefaultVisible` / `onVisibleChange` - Handle visibility manually with conditional rendering
-- `isClosable` / `onClose` / `closeButtonProps` - Add a close button manually using `CloseButton` component
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `variant` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-lg`) |
+| `startContent` | - | Place content before `<Alert.Indicator />` |
+| `endContent` | - | Place content after `<Alert.Content />` |
+| `hideIcon` | - | Omit `<Alert.Indicator />` |
+| `hideIconWrapper` | - | Removed (no wrapper in v3) |
+| `icon` | `Alert.Indicator` | Render icon as child of `<Alert.Indicator />` |
+| `isVisible`, `isDefaultVisible`, `onVisibleChange` | - | Removed (handle with conditional rendering) |
+| `isClosable`, `onClose`, `closeButtonProps` | - | Removed (add `CloseButton` manually) |
+| `title` | `Alert.Title` | Use `<Alert.Title>` inside `<Alert.Content>` |
+| `description` | `Alert.Description` | Use `<Alert.Description>` inside `<Alert.Content>` |
 
 ### 5. Icon Handling
 
@@ -242,10 +245,10 @@ The v3 Alert follows this structure:
 ```
 Alert (Root)
   ├── Alert.Indicator (optional)
-  ├── Alert.Content
+  ├── Alert.Content (optional)
   │   ├── Alert.Title (optional)
   │   └── Alert.Description (optional)
-  └── [Additional content like buttons, close button, etc.]
+  └── [Additional content like buttons, close button, etc.] (optional)
 ```
 
 ## Summary

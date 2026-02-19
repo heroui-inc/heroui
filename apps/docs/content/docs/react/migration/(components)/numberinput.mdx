@@ -52,42 +52,23 @@ export default function App() {
 
 ### 3. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | `onValueChange` | `onChange` | Renamed event handler |
-| `label` | - | Removed (use `Label` component) |
-| `description` | - | Removed (use `Description` component) |
-| `errorMessage` | - | Removed (use `FieldError` component) |
-| `variant` | `variant` | Simplified to `primary` \| `secondary` only |
-| `color` | - | Removed (use Tailwind CSS) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `startContent` | - | Removed (place manually) |
-| `endContent` | - | Removed (place manually) |
-| `labelPlacement` | - | Removed (handle with layout) |
-| `hideStepper` | - | Omit stepper buttons instead |
-| `isClearable` | - | Removed (handle manually) |
-| `classNames` | - | Use `className` props |
-| `isWheelDisabled` | - | Removed |
-
-### 4. Removed Props
-
-The following props are no longer available in v3:
-
-- `label` - Use `Label` component instead
-- `description` - Use `Description` component instead
-- `errorMessage` - Use `FieldError` component instead
-- `variant` - In v3 use `variant` on `NumberField` (primary \| secondary only)
-- `color` - Use Tailwind CSS classes
-- `size` - Use Tailwind CSS classes
-- `radius` - Use Tailwind CSS classes
-- `startContent` - Place content manually in Group
-- `endContent` - Place content manually in Group
-- `labelPlacement` - Handle with layout classes
-- `hideStepper` - Omit `NumberField.IncrementButton` and `NumberField.DecrementButton`
-- `isClearable` - Handle clear functionality manually
-- `classNames` - Use `className` props on individual components
-- `isWheelDisabled` - Removed
+| `label` | — | Use `Label` component |
+| `description` | — | Use `Description` component |
+| `errorMessage` | — | Use `FieldError` component |
+| `variant` | `variant` (on NumberField) | Simplified to `primary` \| `secondary` only |
+| `color` | — | Removed (use Tailwind CSS) |
+| `size` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `startContent` | — | Place content manually in Group |
+| `endContent` | — | Place content manually in Group |
+| `labelPlacement` | — | Handle with layout classes |
+| `hideStepper` | — | Omit `NumberField.IncrementButton` and `NumberField.DecrementButton` |
+| `isClearable` | — | Handle clear functionality manually |
+| `classNames` | — | Use `className` props on individual components |
+| `isWheelDisabled` | — | Removed |
 
 ## Migration Examples
 

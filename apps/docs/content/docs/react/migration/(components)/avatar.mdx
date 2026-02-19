@@ -47,12 +47,31 @@ export default function App() {
 **v2:** Single `Avatar` component with props  
 **v3:** Compound components: `Avatar`, `Avatar.Image`, `Avatar.Fallback`
 
-### 2. Image and Fallback Handling
+### 2. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `src` | `Avatar.Image` | Use `<Avatar.Image src="..." />` |
+| `name` | - | Generate initials and pass to `<Avatar.Fallback />` |
+| `showFallback` | - | Removed (fallback shown if image fails or not provided) |
+| `fallback`, `icon` | `Avatar.Fallback` | Place content in `<Avatar.Fallback />` |
+| `color` | `Avatar` | Same; `primary` → `accent`, `secondary` → `default` |
+| `size` | `Avatar` | Same |
+| `isBordered` | - | Removed (use Tailwind e.g. `ring-2 ring-background`) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-full`) |
+| `isDisabled`, `isFocusable` | - | Removed (use Tailwind / `asChild` if needed) |
+| `getInitials` | - | Generate initials manually |
+| `ImgComponent`, `imgProps` | - | Use `asChild` on `Avatar.Image` if needed |
+| `onError` | `Avatar.Image` | Use `onError` on `<Avatar.Image />` |
+| `classNames` | - | Use `className` on parts |
+| AvatarGroup | - | No v3 equivalent; create groups with CSS |
+
+### 3. Image and Fallback Handling
 
 **v2:** Used `src`, `name`, `showFallback`, and `fallback` props  
 **v3:** Must explicitly render `<Avatar.Image />` and `<Avatar.Fallback />` components
 
-### 3. Color Props
+### 4. Color Props
 
 | v2 Color | v3 Color | Notes |
 |----------|---------|-------|
@@ -62,22 +81,6 @@ export default function App() {
 | `success` | `success` | Same |
 | `warning` | `warning` | Same |
 | `danger` | `danger` | Same |
-
-### 4. Removed Props
-
-The following props are no longer available in v3:
-
-- `name` - Generate initials manually and pass to `<Avatar.Fallback />`
-- `showFallback` - Fallback is always shown if image fails to load
-- `icon` - Place icon content directly in `<Avatar.Fallback />`
-- `isBordered` - Use Tailwind CSS classes like `ring-2 ring-background`
-- `radius` - Use Tailwind CSS classes like `rounded-full`, `rounded-lg`, etc.
-- `isDisabled` - Use Tailwind CSS classes with opacity
-- `isFocusable` - Not applicable (use `asChild` if needed)
-- `getInitials` - Generate initials manually
-- `ImgComponent` / `imgProps` - Use `asChild` prop on `Avatar.Image` if needed
-- `onError` - Use `onError` prop on `Avatar.Image` instead
-- `classNames` - Use `className` props on individual components
 
 ### 5. AvatarGroup Removed
 
@@ -269,7 +272,7 @@ The v3 Avatar follows this structure:
 ```
 Avatar (Root)
   ├── Avatar.Image (optional)
-  └── Avatar.Fallback (always shown if image fails or not provided)
+  └── Avatar.Fallback (optional; shown when image fails or not provided)
 ```
 
 ## Helper Function for Initials

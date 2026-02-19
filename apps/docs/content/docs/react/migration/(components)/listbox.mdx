@@ -57,44 +57,20 @@ export default function App() {
 
 ### 3. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| - | `id` | Item identifier for state |
-| - | `textValue` | For accessibility (when content isn't plain text) |
-| `variant` | - | Removed (use Tailwind CSS) |
-| `color` | - | Removed (use Tailwind CSS) |
-| `startContent` | - | Removed (place icons manually) |
-| `endContent` | - | Removed (place icons manually) |
-| `description` | - | Removed (use `Description` component) |
-| `title` | - | Removed (use `Header` component) |
-| `topContent` | - | Removed |
-| `bottomContent` | - | Removed |
-| `itemClasses` | - | Use `className` props |
-| `classNames` | - | Use `className` props |
-| `hideSelectedIcon` | - | Omit `ListBox.ItemIndicator` instead |
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `key` (for state) | `ListBox.Item` | Use `id` for item identity (state) |
+| - | `textValue` (on ListBox.Item) | For accessibility (type-ahead) |
+| `variant`, `color` | - | Removed (use Tailwind CSS) |
+| `startContent`, `endContent` | - | Place icons manually in item content |
+| `description` | `Description` | Use `Description` component |
+| `title` (on Section) | `Header` | Use `Header` component |
+| `topContent`, `bottomContent` | - | Removed (handle separately) |
+| `itemClasses`, `classNames` | - | Use `className` on parts |
+| `hideSelectedIcon` | - | Omit `ListBox.ItemIndicator` |
 | `disableAnimation` | - | Removed |
-| `isVirtualized` | - | Removed |
-| `virtualization` | - | Removed |
-| `selectedKeys` | `selectedKeys` | Now uses `Selection` type (Set) |
-
-### 4. Removed Props
-
-The following props are no longer available in v3:
-
-- `variant` - Use Tailwind CSS classes
-- `color` - Use Tailwind CSS classes
-- `startContent` - Place icons manually in item content
-- `endContent` - Place icons manually in item content
-- `description` - Use `Description` component
-- `title` (on Section) - Use `Header` component
-- `topContent` - Handle separately
-- `bottomContent` - Handle separately
-- `itemClasses` - Use `className` props on items
-- `classNames` - Use `className` props
-- `hideSelectedIcon` - Omit `ListBox.ItemIndicator` instead
-- `disableAnimation` - Animations handled differently
-- `isVirtualized` - Virtualization removed
-- `virtualization` - Virtualization removed
+| `isVirtualized`, `virtualization` | - | Removed (virtualization not supported) |
+| `selectedKeys` | `ListBox` | Same (uses `Selection` type Set) |
 
 ## Migration Examples
 

@@ -54,29 +54,29 @@ export default function App() {
 
 | v2 Prop | v3 Location | Notes |
 |---------|-------------|-------|
-| `label` | - | Removed (use `Label` component) |
-| `description` | - | Removed (use `Description` component) |
-| `errorMessage` | - | Removed (use `FieldError` component) |
+| `label` | — | Use `Label` component |
+| `description` | — | Use `Description` component |
+| `errorMessage` | — | Use `FieldError` component |
 | `value`, `defaultValue`, `onChange` | `TimeField` | Same (React Aria) |
 | `minValue`, `maxValue`, `granularity`, `placeholderValue` | `TimeField` | Same |
 | `isRequired`, `isDisabled`, `isReadOnly`, `isInvalid`, `name` | `TimeField` | Same |
 | `validationBehavior`, `shouldForceLeadingZeros` | `TimeField` | Same |
 | `variant` | `DateInputGroup` | Simplified to `primary` \| `secondary` only |
 | `fullWidth` | `TimeField` or `DateInputGroup` | On root or group |
-| `color` | - | Removed (use Tailwind CSS) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `labelPlacement` | - | Removed (handle with layout) |
+| `color` | — | Removed (use Tailwind CSS) |
+| `size` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `labelPlacement` | — | Handle with layout |
 | `startContent` | `DateInputGroup.Prefix` | Use Prefix child |
 | `endContent` | `DateInputGroup.Suffix` | Use Suffix child |
-| `classNames` | - | Use `className` on `TimeField` and `DateInputGroup` parts |
-| `groupProps` | - | Removed (use `className` or DOM props on `DateInputGroup`) |
-| `labelProps` | - | Removed (use `className` on `Label`) |
-| `fieldProps` | - | Removed (use `className` on `DateInputGroup`) |
-| `innerWrapperProps` | - | Removed (use `className` on group/input parts) |
-| `descriptionProps` | - | Removed (use `className` on `Description`) |
-| `errorMessageProps` | - | Removed (use `className` on `FieldError`) |
-| `inputRef` | - | Removed (ref is handled by `TimeField` / React Aria) |
+| `classNames` | — | Use `className` on `TimeField` and `DateInputGroup` parts |
+| `groupProps` | — | Use `className` or DOM props on `DateInputGroup` |
+| `labelProps` | — | Use `className` on `Label` |
+| `fieldProps` | — | Use `className` on `DateInputGroup` |
+| `innerWrapperProps` | — | Use `className` on group/input parts |
+| `descriptionProps` | — | Use `className` on `Description` |
+| `errorMessageProps` | — | Use `className` on `FieldError` |
+| `inputRef` | — | Ref handled by `TimeField` / React Aria |
 
 ## Migration Examples
 

@@ -54,23 +54,14 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| `isLoaded` | - | Removed - control visibility manually |
-| `disableAnimation` | `animationType` | Changed to `"shimmer" \| "pulse" \| "none"` |
-| `classNames` | - | Use `className` prop directly |
-| `children` | - | No longer wraps children |
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `isLoaded` | — | Control visibility manually with conditional rendering |
+| `disableAnimation` | `animationType` | Use `animationType="shimmer" \| "pulse" \| "none"` (use `"none"` to disable) |
+| `classNames` | — | Use `className` prop directly |
+| `children` | — | Skeleton no longer wraps content |
 
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `isLoaded` - Control skeleton visibility manually with conditional rendering
-- `disableAnimation` - Use `animationType="none"` instead
-- `classNames` - Use `className` prop directly
-- `children` - Skeleton no longer wraps content
-
-### 4. New Props
+### 3. New Props
 
 - `animationType` - Controls animation type: `"shimmer"` (default), `"pulse"`, or `"none"`
 

@@ -47,33 +47,15 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| `length` | `maxLength` | Renamed (required) |
-| `allowedKeys` | `pattern` | Renamed (regex pattern) |
-| `onValueChange` | `onChange` | Renamed event handler |
-| `description` | - | Removed (handle separately) |
-| `errorMessage` | - | Removed (handle separately) |
-| `variant` | `variant` | Simplified to `primary` \| `secondary` only |
-| `color` | - | Removed (use Tailwind CSS) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `classNames` | - | Use `className` props |
-
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `length` - Use `maxLength` instead
-- `allowedKeys` - Use `pattern` instead
-- `description` - Handle separately with `Description` component
-- `errorMessage` - Handle separately with error display
-- `variant` - In v3 only `primary` and `secondary` are supported (use Tailwind for other styles)
-- `color` - Use Tailwind CSS classes
-- `size` - Use Tailwind CSS classes
-- `radius` - Use Tailwind CSS classes
-- `classNames` - Use `className` props on individual components
-- `onValueChange` - Use `onChange` instead
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `length` | `InputOTP` | Renamed to `maxLength` |
+| `allowedKeys` | `InputOTP` | Renamed to `pattern` (regex) |
+| `onValueChange` | `InputOTP` | Use `onChange` |
+| `description`, `errorMessage` | - | Handle with Description / FieldError |
+| `variant` | `InputOTP` | Simplified to `primary` \| `secondary` only |
+| `color`, `size`, `radius` | - | Removed (use Tailwind CSS) |
+| `classNames` | - | Use `className` on parts |
 
 ## Migration Examples
 

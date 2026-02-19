@@ -58,36 +58,22 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | `key` (on Tab) | `id` (on Tab and Panel) | Changed prop name |
-| `title` (on Tab) | - | Removed (content goes directly in `Tabs.Tab`) |
-| `isVertical` | `orientation` | Changed to `"horizontal" \| "vertical"` |
-| `placement` | - | Removed (use `orientation` and layout) |
+| `title` (on Tab) | — | Content goes directly in `Tabs.Tab` |
+| `isVertical` | `orientation` | Changed to `"horizontal"` \| `"vertical"` |
+| `placement` | — | Use `orientation` and layout |
 | `variant` | `variant` | Simplified to `primary` \| `secondary` only |
-| `color` | - | Removed (use Tailwind CSS) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `classNames` | - | Use `className` props |
-| `disableCursorAnimation` | - | Removed (use `Tabs.Indicator`) |
-| `disableAnimation` | - | Removed |
-| `fullWidth` | - | Removed (use Tailwind CSS) |
+| `color` | — | Removed (use Tailwind CSS) |
+| `size` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `classNames` | — | Use `className` props on individual components |
+| `disableCursorAnimation` | — | Use `Tabs.Indicator` component |
+| `disableAnimation` | — | Removed (animations handled differently) |
+| `fullWidth` | — | Removed (use Tailwind CSS) |
 
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `color` - Use Tailwind CSS classes (`variant` exists in v3 as `primary` \| `secondary`)
-- `size` - Use Tailwind CSS classes
-- `radius` - Use Tailwind CSS classes
-- `placement` - Use `orientation` prop and layout
-- `classNames` - Use `className` props on individual components
-- `disableCursorAnimation` - Use `Tabs.Indicator` component
-- `disableAnimation` - Animations handled differently
-- `fullWidth` - Use Tailwind CSS classes
-- `title` (on Tab) - Content goes directly in `Tabs.Tab`
-
-### 4. Component Changes
+### 3. Component Changes
 
 - **Tab identification**: `key` → `id` (must match between `Tabs.Tab` and `Tabs.Panel`)
 - **Tab content**: `title` prop → direct children in `Tabs.Tab`

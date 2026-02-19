@@ -78,60 +78,32 @@ export default function App() {
 
 ### 5. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | - | `id` (on ListBox.Item) | Item identifier for state |
-| - | `textValue` (on ListBox.Item) | For accessibility |
-| `label` | `Label` component | Separate component |
-| `description` | `Description` component | Separate component |
-| `placeholder` | `placeholder` (on Input) | Moved to Input component |
-| `variant` | - | Removed (use Tailwind CSS) |
-| `color` | - | Removed (use Tailwind CSS) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `labelPlacement` | - | Removed (use Label component positioning) |
-| `startContent` | - | Removed (add to Input directly) |
-| `endContent` | - | Removed (add to Input directly) |
-| `selectorIcon` | - | Removed (customize ComboBox.Trigger) |
-| `clearIcon` | - | Removed (not built-in) |
-| `isClearable` | - | Removed (implement manually) |
+| - | `textValue` (on ListBox.Item) | For accessibility (type-ahead) |
+| `label` | `Label` | Use `Label` component |
+| `description` | `Description` | Use `Description` component |
+| `placeholder` | `Input` | `placeholder` on Input |
+| `selectedKey`, `onSelectionChange`, `inputValue`, `onInputChange` | `ComboBox` | Same |
+| `allowsCustomValue`, `allowsEmptyCollection`, `defaultFilter` | `ComboBox` | Same |
+| `disabledKeys`, `isDisabled`, `isRequired`, `isInvalid`, `name` | `ComboBox` | Same |
+| `variant`, `color`, `size`, `radius` | - | Removed (use Tailwind CSS) |
+| `labelPlacement` | - | Removed (use Label positioning) |
+| `startContent`, `endContent` | - | Add to Input or InputGroup |
+| `selectorIcon`, `clearIcon` | - | Customize ComboBox.Trigger or implement manually |
+| `isClearable` | - | Implement manually |
 | `showScrollIndicators` | - | Removed |
-| `classNames` | - | Use `className` props |
-| `selectedKey` | `selectedKey` | Still exists |
-| `onSelectionChange` | `onSelectionChange` | Still exists |
-| `inputValue` | `inputValue` | Still exists |
-| `onInputChange` | `onInputChange` | Still exists |
-| `allowsCustomValue` | `allowsCustomValue` | Still exists |
-| `allowsEmptyCollection` | `allowsEmptyCollection` | Still exists |
-| `defaultFilter` | `defaultFilter` | Still exists |
-| `disabledKeys` | `disabledKeys` | Still exists |
-| `isDisabled` | `isDisabled` | Still exists |
-| `isRequired` | `isRequired` | Still exists |
-| `isInvalid` | `isInvalid` | Still exists |
-| `name` | `name` | Still exists |
-
-### 6. Removed Props
-
-The following props are no longer available in v3:
-
-- `variant`, `color`, `size`, `radius` - Use Tailwind CSS classes
-- `labelPlacement` - Use Label component positioning
-- `startContent`, `endContent` - Add directly to Input component
-- `selectorIcon`, `clearIcon` - Customize ComboBox.Trigger or implement manually
-- `isClearable` - Implement clear functionality manually
-- `showScrollIndicators` - Not supported
-- `classNames` - Use `className` props on individual components
-- `popoverProps`, `listboxProps`, `inputProps` - Configure components directly
-- `scrollShadowProps` - Not supported
-- `selectorButtonProps`, `clearButtonProps` - Not applicable
-- `disableSelectorIconRotation` - Not applicable
-- `menuTrigger` - Handled automatically
-- `isReadOnly` - Use Input `readOnly` prop
-- `fullWidth` - Use Tailwind CSS classes
-- `isVirtualized`, `maxListboxHeight`, `itemHeight` - Not supported
-- `scrollRef` - Not supported
-- `onClose`, `onClear` - Use different event handlers
-- `validationBehavior`, `validate` - Use Form component
+| `classNames` | - | Use `className` on parts |
+| `popoverProps`, `listboxProps`, `inputProps` | - | Configure components directly |
+| `scrollShadowProps`, `scrollRef` | - | Removed |
+| `selectorButtonProps`, `clearButtonProps`, `disableSelectorIconRotation` | - | Removed |
+| `menuTrigger` | - | Handled automatically |
+| `isReadOnly` | `Input` | Use `readOnly` on Input |
+| `fullWidth` | - | Use Tailwind CSS |
+| `isVirtualized`, `maxListboxHeight`, `itemHeight` | - | Removed |
+| `onClose`, `onClear` | - | Use other event handlers |
+| `validationBehavior`, `validate` | - | Use Form component |
 
 ## Migration Examples
 

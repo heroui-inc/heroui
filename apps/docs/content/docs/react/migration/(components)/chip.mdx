@@ -19,17 +19,16 @@ description: Migration guide for Chip from HeroUI v2 to v3
 **v2:** `default`, `primary`, `secondary`, `success`, `warning`, `danger`  
 **v3:** `default`, `accent`, `success`, `warning`, `danger`
 
-### 3. Removed Props
+### 3. Prop Changes
 
-The following props are no longer available in v3:
-
-- `radius` - Use Tailwind CSS classes like `rounded-full`, `rounded-lg`, `rounded-md`
-- `avatar` - Use children directly (e.g., `<Avatar />` as first child)
-- `startContent` - Use children directly (e.g., icon as first child)
-- `endContent` - Use children directly (e.g., icon as last child)
-- `onClose` - Implement close functionality manually with a button
-- `classNames` - Use `className` prop directly
-- `isDisabled` - Use conditional rendering or Tailwind classes (e.g. `opacity-50 pointer-events-none`)
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `radius` | - | Removed (use Tailwind e.g. `rounded-full`) |
+| `avatar` | - | Use children (e.g. `<Avatar />` as first child) |
+| `startContent`, `endContent` | - | Use children directly |
+| `onClose` | - | Implement close manually (e.g. `CloseButton`) |
+| `classNames` | - | Use `className` |
+| `isDisabled` | - | Use conditional rendering or Tailwind (e.g. `opacity-50`) |
 
 ### 4. Variant Mapping
 

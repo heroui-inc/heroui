@@ -72,26 +72,22 @@ export default function App() {
 **v2:** Single `Input` component with all features  
 **v3:** Split into `Input` (primitive) and `TextField` (compound component)
 
-### 2. Removed Props from Input
+### 2. Prop Changes
 
-The following props are no longer available on `Input` in v3:
-
-- `label` - Use `Label` component inside `TextField`
-- `description` - Use `Description` component inside `TextField`
-- `errorMessage` - Use `FieldError` component inside `TextField`
-- `variant` - Removed (use Tailwind CSS classes)
-- `color` - Removed (use Tailwind CSS classes)
-- `size` - Removed (use Tailwind CSS classes)
-- `radius` - Removed (use Tailwind CSS classes)
-- `labelPlacement` - Use layout with `Label` component
-- `startContent` - Use `InputGroup` with `InputGroup.Prefix` inside `TextField`
-- `endContent` - Use `InputGroup` with `InputGroup.Suffix` inside `TextField`
-- `isClearable` - Implement manually with button
-- `isRequired` - Use `isRequired` on `TextField`
-- `isInvalid` - Use `isInvalid` on `TextField`
-- `validate` - Use `validate` on `TextField`
-- `classNames` - Use `className` props on individual components
-- `onValueChange` - Use `onChange` event handler
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `label` | `Label` | Use `Label` component inside `TextField` |
+| `description` | `Description` | Use `Description` component inside `TextField` |
+| `errorMessage` | `FieldError` | Use `FieldError` component inside `TextField` |
+| `variant`, `color`, `size`, `radius` | - | Removed (use Tailwind CSS) |
+| `labelPlacement` | - | Use layout with `Label` |
+| `startContent` | `InputGroup.Prefix` | Use `InputGroup` with `InputGroup.Prefix` inside `TextField` |
+| `endContent` | `InputGroup.Suffix` | Use `InputGroup` with `InputGroup.Suffix` inside `TextField` |
+| `isClearable` | - | Implement manually with button |
+| `isRequired`, `isInvalid` | `TextField` | Use on `TextField` |
+| `validate` | `TextField` | Use `validate` on `TextField` |
+| `classNames` | - | Use `className` on individual components |
+| `onValueChange` | `Input` | Use `onChange` event handler |
 
 ## Migration Examples
 

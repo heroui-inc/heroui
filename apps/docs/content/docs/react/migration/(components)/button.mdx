@@ -66,17 +66,18 @@ export default function App() {
 
 This means v3 buttons will be narrower than v2 buttons when they have short text. To maintain v2's minimum width behavior, add Tailwind classes see the [Minimum Width](#minimum-width) example section.
 
-### 4. Removed Props
+### 4. Prop Changes
 
-The following props are no longer available in v3:
-
-- `color` - Variants handle styling instead
-- `radius` - Use Tailwind CSS classes like `rounded-lg`, `rounded-full`, etc.
-- `startContent` / `endContent` - Place icons directly as children
-- `spinner` / `spinnerPlacement` - Handle loading state manually with render props
-- `disableRipple` - Ripple effect removed in v3
-- `disableAnimation` - Animations are handled internally
-- `classNames` - Use `className` prop instead
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `isLoading` | `Button` | Renamed to `isPending` |
+| `color` | - | Removed (variants handle styling) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-lg`) |
+| `startContent`, `endContent` | - | Place icons as children |
+| `spinner`, `spinnerPlacement` | - | Handle loading manually with render props |
+| `disableRipple` | - | Removed (ripple removed in v3) |
+| `disableAnimation` | - | Removed (animations handled internally) |
+| `classNames` | - | Use `className` |
 
 ### 5. ButtonGroup Available
 
