@@ -1205,6 +1205,10 @@ export const demos: Record<string, DemoItem> = {
     component: DateRangePickerDemos.InternationalCalendar,
     file: "date-range-picker/international-calendar.tsx",
   },
+  "date-range-picker-custom-render-function": {
+    component: DateRangePickerDemos.CustomRenderFunction,
+    file: "date-range-picker/custom-render-function.tsx",
+  },
   // InputOTP demos
   "input-otp-basic": {
     component: InputOTPDemos.Basic,
