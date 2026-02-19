@@ -24,7 +24,9 @@ export function Form() {
               <Checkbox.Indicator />
             </Checkbox.Control>
           </Checkbox>
-          <Label htmlFor="form-notifications">Enable notifications</Label>
+          <Checkbox.Content>
+            <Label htmlFor="form-notifications">Enable notifications</Label>
+          </Checkbox.Content>
         </div>
         <div className="flex items-center gap-3">
           <Checkbox defaultSelected id="form-newsletter" name="newsletter" value="on">
@@ -32,7 +34,9 @@ export function Form() {
               <Checkbox.Indicator />
             </Checkbox.Control>
           </Checkbox>
-          <Label htmlFor="form-newsletter">Subscribe to newsletter</Label>
+          <Checkbox.Content>
+            <Label htmlFor="form-newsletter">Subscribe to newsletter</Label>
+          </Checkbox.Content>
         </div>
         <div className="flex items-center gap-3">
           <Checkbox id="form-marketing" name="marketing" value="on">
@@ -40,7 +44,9 @@ export function Form() {
               <Checkbox.Indicator />
             </Checkbox.Control>
           </Checkbox>
-          <Label htmlFor="form-marketing">Receive marketing updates</Label>
+          <Checkbox.Content>
+            <Label htmlFor="form-marketing">Receive marketing updates</Label>
+          </Checkbox.Content>
         </div>
       </div>
       <Button className="mt-4" size="sm" type="submit" variant="primary">
