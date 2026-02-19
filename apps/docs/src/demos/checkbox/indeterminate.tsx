@@ -9,7 +9,6 @@ export function Indeterminate() {
 
   return (
     <Checkbox
-      className="mt-0.5"
       id="select-all"
       isIndeterminate={isIndeterminate}
       isSelected={isSelected}

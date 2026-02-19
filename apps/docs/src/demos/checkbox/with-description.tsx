@@ -2,7 +2,7 @@ import {Checkbox, Description, Label} from "@heroui/react";
 
 export function WithDescription() {
   return (
-    <Checkbox className="mt-0.5" id="description-notifications">
+    <Checkbox id="description-notifications">
       <Checkbox.Control>
         <Checkbox.Indicator />
       </Checkbox.Control>
