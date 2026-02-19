@@ -24,7 +24,7 @@ The MCP server currently supports **heroui-native** and [stdio transport](https:
 
 <div className="flex items-center gap-3 mb-4">
   <a
-    href="https://link.heroui.com/mcp-cursor-install"
+    href="https://link.heroui.com/native-mcp-cursor-install"
     className="button button--tertiary button--sm no-underline"
   >
     <svg viewBox="0 0 466.73 532.09" className="w-5 h-5 fill-current">
@@ -89,6 +89,24 @@ After adding the configuration, restart Windsurf to activate the MCP server.
 
 See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp) for more details.
 
+**Zed:** Add the HeroUI server to your `settings.json` configuration file. Open settings via Command Palette (`zed: open settings`) or use `Cmd-,` (Mac) / `Ctrl-,` (Linux):
+
+```json title="settings.json"
+{
+  "context_servers": {
+    "heroui-native": {
+      "command": "npx",
+      "args": ["-y", "@heroui/native-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+After adding the configuration, restart Zed and open the Agent Panel settings view. Check that the indicator dot next to the heroui-native server is green with "Server is active" tooltip.
+
+See the [Zed MCP documentation](https://zed.dev/docs/ai/mcp) for more details.
+
 **VS Code:** To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your project's `.vscode/mcp.json` configuration file:
 
 ```json title=".vscode/mcp.json"
@@ -114,8 +132,6 @@ Once configured, ask your AI assistant questions like:
 - "Show me all HeroUI Native components"
 - "What props does the Button component have?"
 - "Give me an example of using the Card component"
-- "Get the source code for the Button component"
-- "Show me the default styles for Card"
 - "What are the theme variables for dark mode?"
 
 ### Automatic Updates
@@ -139,12 +155,11 @@ The MCP server provides these tools to AI assistants:
 
 | Tool | Description |
 |------|-------------|
-| `installation` | Get complete installation instructions for your specific framework (Expo or Bare React Native) and package manager |
 | `list_components` | List all available HeroUI Native components |
 | `get_component_docs` | Get complete component documentation including anatomy, props, examples, and usage patterns for one or more components |
 | `get_theme_variables` | Access theme variables for colors, typography, spacing with light/dark mode support |
-| `get_docs` | Browse the full HeroUI Native documentation including guides and principles |
- 
+| `get_docs` | Browse the full HeroUI Native documentation including guides and principles (use path `/docs/native/getting-started/quick-start` for installation instructions) |
+
 
 ## Troubleshooting
 
