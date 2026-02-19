@@ -16,29 +16,13 @@ description: Migration guide for Link from HeroUI v2 to v3
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| `showAnchorIcon` | - | Removed (use `Link.Icon` component) |
-| `anchorIcon` | - | Removed (use `Link.Icon` children) |
-| `isExternal` | - | Removed (handle manually with `target` and `rel`) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `color` | - | Removed (use Tailwind CSS) |
-| `isBlock` | - | Removed (use Tailwind CSS) |
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `showAnchorIcon`, `anchorIcon` | - | Use `Link.Icon` component with children |
+| `isExternal` | - | Use `target="_blank"` and `rel="noopener noreferrer"` |
+| `size`, `color`, `isBlock` | - | Removed (use Tailwind CSS) |
 | `disableAnimation` | - | Removed |
-| `underline` | - | Removed (use Tailwind: `underline`, `hover:underline`, `no-underline`) |
-
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `size` - Use Tailwind CSS classes (e.g., `text-sm`, `text-base`, `text-lg`)
-- `color` - Use Tailwind CSS classes (e.g., `text-primary`, `text-danger`)
-- `isBlock` - Use Tailwind CSS classes (e.g., `block`, `hover:bg-surface`)
-- `disableAnimation` - Animations are handled differently in v3
-- `underline` - Use Tailwind classes (`underline`, `hover:underline`, `no-underline`, `underline-offset-*`)
-- `showAnchorIcon` - Use `Link.Icon` component instead
-- `anchorIcon` - Pass custom icon as children to `Link.Icon`
-- `isExternal` - Handle manually with `target="_blank"` and `rel="noopener noreferrer"`
+| `underline` | - | Removed (use Tailwind `underline`, etc.) |
 
 ## Structure Changes
 

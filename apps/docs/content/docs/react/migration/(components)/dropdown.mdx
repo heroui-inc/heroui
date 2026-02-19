@@ -75,27 +75,22 @@ export default function App() {
 **v2:** Item content passed as children; React's `key` was used for both list reconciliation and item identity (selection, focus).  
 **v3:** Item content must use `Label` component for text. Give each item an `id` (for state/focus) and `textValue` (for accessibility when content isn't plain text). Keep React's `key` on items in lists.
 
-### 4. Removed Props
+### 4. Prop Changes
 
-The following props are no longer available in v3:
-
-- `DropdownMenu`:
-  - `variant` - Removed (no longer supports visual variants)
-  - `color` - Removed (no longer supports color themes)
-  - `classNames` - Use `className` prop directly
-  - `itemClasses` - Use `className` on individual items
-- `DropdownItem`:
-  - `color` - Use `variant="danger"` for danger items
-  - `title` - Use `Label` component as child
-  - `description` - Use `Description` component as child
-  - `shortcut` - Use `Kbd` component as child
-  - `startContent` - Use icon/components as first child
-  - `endContent` - Use components as last child
-  - `selectedIcon` - Use `Dropdown.ItemIndicator` component
-  - `showDivider` - Use `Separator` component between items
-  - `classNames` - Use `className` prop directly
-  - `isSelected` - Use `selectedKeys` on `Dropdown.Menu`
-  - `isDisabled` - Use `disabledKeys` on `Dropdown.Menu`
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `variant`, `color` (on DropdownMenu) | - | Removed (no menu variants) |
+| `classNames`, `itemClasses` (on DropdownMenu) | - | Use `className` on Menu and items |
+| `color` (on DropdownItem) | `Dropdown.Item` | Use `variant="danger"` for danger |
+| `title` | - | Use `Label` component as child |
+| `description` | - | Use `Description` component as child |
+| `shortcut` | - | Use `Kbd` component as child |
+| `startContent`, `endContent` | - | Use icon/components as children |
+| `selectedIcon` | - | Use `Dropdown.ItemIndicator` |
+| `showDivider` | - | Use `Separator` between items |
+| `classNames` (on DropdownItem) | - | Use `className` on item |
+| `isSelected` | `Dropdown.Menu` | Use `selectedKeys` on Menu |
+| `isDisabled` | `Dropdown.Menu` | Use `disabledKeys` on Menu |
 
 ### 5. New Components
 

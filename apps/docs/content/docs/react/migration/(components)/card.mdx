@@ -61,22 +61,20 @@ export default function App() {
 | - | `Card.Title` | New subcomponent for header titles |
 | - | `Card.Description` | New subcomponent for header descriptions |
 
-### 3. Removed Props
+### 3. Prop Changes
 
-The following props are no longer available in v3:
-
-- `shadow` - Use Tailwind CSS classes like `shadow-sm`, `shadow-md`, `shadow-lg`
-- `radius` - Use Tailwind CSS classes like `rounded-lg`, `rounded-xl`, `rounded-full`
-- `fullWidth` - Use Tailwind CSS class `w-full`
-- `isHoverable` - Use Tailwind CSS classes with hover states
-- `isPressable` - Use a button or link wrapper inside Card (see Pressable Card example)
-- `isBlurred` - Use Tailwind CSS backdrop blur classes
-- `isFooterBlurred` - Use Tailwind CSS backdrop blur classes on footer
-- `isDisabled` - Handle disabled state manually with conditional rendering
-- `disableAnimation` - Animations are handled internally
-- `disableRipple` - Ripple effect removed in v3
-- `allowTextSelectionOnPress` - Not applicable
-- `classNames` - Use `className` props on individual components
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `shadow` | - | Removed (use Tailwind e.g. `shadow-sm`, `shadow-md`) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-lg`) |
+| `fullWidth` | - | Removed (use Tailwind `w-full`) |
+| `isHoverable` | - | Removed (use Tailwind hover classes) |
+| `isPressable` | - | Use button or link wrapper inside Card |
+| `isBlurred`, `isFooterBlurred` | - | Removed (use Tailwind `backdrop-blur-*`) |
+| `isDisabled` | - | Removed (handle with conditional rendering) |
+| `disableAnimation`, `disableRipple` | - | Removed |
+| `allowTextSelectionOnPress` | - | Removed (not applicable) |
+| `classNames` | - | Use `className` on parts |
 
 ### 4. Variants
 
@@ -303,10 +301,10 @@ The v3 Card follows this structure:
 
 ```
 Card (Root)
-  ├── Card.Header
+  ├── Card.Header (optional)
   │   ├── Card.Title (optional)
   │   └── Card.Description (optional)
-  ├── Card.Content
+  ├── Card.Content (optional)
   └── Card.Footer (optional)
 ```
 

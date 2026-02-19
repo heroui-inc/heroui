@@ -38,25 +38,16 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| `label` | - | Removed (add label manually if needed) |
-| `variant` | - | Removed (only one variant) |
-| `labelColor` | - | Removed (no label support) |
-| `classNames` | - | Use `className` prop directly |
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `label` | — | Add label manually with separate element if needed |
+| `variant` | — | Only one spinner variant available |
+| `labelColor` | — | No label support |
+| `classNames` | — | Use `className` prop directly |
 | `size` | `size` | Changed: `"sm" \| "md" \| "lg"` → `"sm" \| "md" \| "lg" \| "xl"` |
-| `color` | `color` | Changed: `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` → `"current" \| "accent" \| "success" \| "warning" \| "danger"` |
+| `color` | `color` | Changed values (see below) |
 
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `label` - Add label manually with separate element if needed
-- `variant` - Only one spinner variant available
-- `labelColor` - No label support
-- `classNames` - Use `className` prop directly
-
-### 4. Changed Color Values
+### 3. Changed Color Values
 
 - `"default"` → `"current"` (inherits current text color)
 - `"primary"` → `"accent"`

@@ -68,43 +68,28 @@ export default function App() {
 
 ### 3. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | `selectedKeys` | `value` | Changed from Set/array to single value or array |
 | `onSelectionChange` | `onChange` | Renamed event handler |
 | `defaultSelectedKeys` | `defaultValue` | Renamed prop |
-| `label` | - | Removed (use `Label` component) |
-| `description` | - | Removed (use `Description` component) |
-| `errorMessage` | - | Removed (use `FieldError` component) |
+| `label` | — | Use `Label` component |
+| `description` | — | Use `Description` component |
+| `errorMessage` | — | Use `FieldError` component |
 | `variant` | `variant` | Simplified to `primary` \| `secondary` only |
-| `color` | - | Removed (use Tailwind CSS) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `classNames` | - | Use `className` props |
-| `startContent` | - | Removed (customize trigger) |
-| `endContent` | - | Removed (customize trigger) |
-| `selectorIcon` | - | Removed (use `Select.Indicator` children) |
-| `isClearable` | - | Removed (implement manually) |
-| `renderValue` | - | Use `Select.Value` render prop |
-| `labelPlacement` | - | Removed |
+| `color` | — | Removed (use Tailwind CSS) |
+| `size` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `classNames` | — | Use `className` props on individual components |
+| `startContent` | — | Customize `Select.Trigger` directly |
+| `endContent` | — | Customize `Select.Trigger` directly |
+| `selectorIcon` | — | Customize `Select.Indicator` children |
+| `isClearable` | — | Implement clear button manually |
+| `renderValue` | — | Use `Select.Value` render prop |
+| `labelPlacement` | — | Labels are always outside |
 | `selectionMode` | `selectionMode` | Still exists |
-
-### 4. Removed Props
-
-The following props are no longer available in v3:
-
-- `label` - Use `Label` component instead
-- `description` - Use `Description` component instead
-- `errorMessage` - Use `FieldError` component instead
-- `color`, `size`, `radius` - Use Tailwind CSS classes (`variant` exists in v3 as `primary` \| `secondary`)
-- `classNames` - Use `className` props on individual components
-- `startContent`, `endContent` - Customize `Select.Trigger` directly
-- `selectorIcon` - Customize `Select.Indicator` children
-- `isClearable` - Implement clear button manually
-- `renderValue` - Use `Select.Value` render prop
-- `labelPlacement` - Labels are always outside
-- `disableAnimation` - Animations handled differently
-- `popoverProps`, `listboxProps`, `scrollShadowProps` - Use component props directly
+| `disableAnimation` | — | Removed (animations handled differently) |
+| `popoverProps`, `listboxProps`, `scrollShadowProps` | — | Use props on `Select.Popover`, `ListBox`, etc. directly |
 
 ## Migration Examples
 

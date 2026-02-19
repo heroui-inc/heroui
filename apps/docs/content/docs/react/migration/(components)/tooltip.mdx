@@ -51,42 +51,33 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| `content` | - | Removed (use `Tooltip.Content` children) |
-| `showArrow` | `showArrow` (on `Tooltip.Content`) | Moved to `Tooltip.Content` |
-| `placement` | `placement` (on `Tooltip.Content`) | Moved to `Tooltip.Content` |
-| `offset` | `offset` (on `Tooltip.Content`) | Moved to `Tooltip.Content` |
-| `color` | - | Removed (use Tailwind CSS) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `shadow` | - | Removed (use Tailwind CSS) |
-| `classNames` | - | Use `className` props |
-| `motionProps` | - | Removed (animations handled differently) |
-| `trigger` | `trigger` (on root) | Still exists, but simplified |
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `content` | — | Use `Tooltip.Content` children |
+| `showArrow` | `showArrow` (on Content) | Moved to `Tooltip.Content` |
+| `placement` | `placement` (on Content) | Moved to `Tooltip.Content` |
+| `offset` | `offset` (on Content) | Moved to `Tooltip.Content` |
+| `color` | — | Removed (use Tailwind CSS) |
+| `size` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `shadow` | — | Removed (use Tailwind CSS) |
+| `classNames` | — | Use `className` props on individual components |
+| `motionProps` | — | Removed (animations handled differently) |
+| `trigger` | `trigger` (on root) | Still exists, simplified |
 | `delay` | `delay` (on root) | Still exists |
 | `closeDelay` | `closeDelay` (on root) | Still exists |
+| `portalContainer` | — | Not exposed |
+| `updatePositionDeps` | — | Not exposed |
+| `containerPadding`, `crossOffset` | — | Not exposed |
+| `shouldFlip` | — | Handled automatically |
+| `triggerScaleOnOpen` | — | Not available |
+| `isKeyboardDismissDisabled` | — | Not available |
+| `isDismissable` | — | Not available |
+| `shouldCloseOnBlur` | — | Not available |
+| `shouldCloseOnInteractOutside` | — | Not available |
+| `onClose` | — | Use `onOpenChange` instead |
 
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `content` - Use `Tooltip.Content` children instead
-- `color`, `size`, `radius`, `shadow` - Use Tailwind CSS classes
-- `classNames` - Use `className` props on individual components
-- `motionProps` - Animations handled differently
-- `portalContainer` - Not exposed
-- `updatePositionDeps` - Not exposed
-- `containerPadding`, `crossOffset` - Not exposed
-- `shouldFlip` - Handled automatically
-- `triggerScaleOnOpen` - Not available
-- `isKeyboardDismissDisabled` - Not available
-- `isDismissable` - Not available
-- `shouldCloseOnBlur` - Not available
-- `shouldCloseOnInteractOutside` - Not available
-- `onClose` - Use `onOpenChange` instead
-
-### 4. Props Moved to Tooltip.Content
+### 3. Props Moved to Tooltip.Content
 
 - `showArrow` - Now on `Tooltip.Content`
 - `placement` - Now on `Tooltip.Content`

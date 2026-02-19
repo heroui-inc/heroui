@@ -54,43 +54,29 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| `label` | - | Removed (use `Label` component) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `color` | - | Removed (use Tailwind CSS) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `classNames` | - | Use `className` props |
-| `showSteps` | - | Removed (not yet supported) |
-| `showTooltip` | - | Removed (not yet supported) |
-| `marks` | - | Removed (not yet supported, see `Slider.Marks`) |
-| `startContent` | - | Removed (customize track wrapper) |
-| `endContent` | - | Removed (customize track wrapper) |
-| `hideValue` | - | Removed (omit `Slider.Output`) |
-| `hideThumb` | - | Removed (omit `Slider.Thumb`) |
-| `showOutline` | - | Removed (use Tailwind CSS) |
-| `renderThumb` | - | Use `Slider.Thumb` render prop |
-| `renderLabel` | - | Use `Label` component |
-| `renderValue` | - | Use `Slider.Output` render prop |
-| `getValue` | - | Use `Slider.Output` render prop |
-| `fillOffset` | - | Removed (not yet supported) |
-| `disableThumbScale` | - | Removed (use Tailwind CSS) |
-| `disableAnimation` | - | Removed |
-
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `label` - Use `Label` component instead
-- `size`, `color`, `radius` - Use Tailwind CSS classes
-- `classNames` - Use `className` props on individual components
-- `showSteps`, `showTooltip`, `marks` - Not yet supported (see TODOs in source)
-- `startContent`, `endContent` - Customize track wrapper directly
-- `hideValue`, `hideThumb`, `showOutline` - Control visibility/styling manually
-- `renderThumb`, `renderLabel`, `renderValue` - Use render props on components
-- `getValue`, `getTooltipValue` - Use `Slider.Output` render prop
-- `fillOffset` - Not yet supported
-- `disableThumbScale`, `disableAnimation` - Use Tailwind CSS
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `label` | — | Use `Label` component |
+| `size` | — | Removed (use Tailwind CSS) |
+| `color` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `classNames` | — | Use `className` props on individual components |
+| `showSteps` | — | Not yet supported |
+| `showTooltip` | — | Not yet supported |
+| `marks` | — | Not yet supported (see `Slider.Marks`) |
+| `startContent` | — | Customize track wrapper directly |
+| `endContent` | — | Customize track wrapper directly |
+| `hideValue` | — | Omit `Slider.Output` |
+| `hideThumb` | — | Omit `Slider.Thumb` |
+| `showOutline` | — | Use Tailwind CSS |
+| `renderThumb` | — | Use `Slider.Thumb` render prop |
+| `renderLabel` | — | Use `Label` component |
+| `renderValue` | — | Use `Slider.Output` render prop |
+| `getValue` | — | Use `Slider.Output` render prop |
+| `getTooltipValue` | — | Use `Slider.Output` render prop |
+| `fillOffset` | — | Not yet supported |
+| `disableThumbScale` | — | Use Tailwind CSS |
+| `disableAnimation` | — | Removed |
 
 ## Migration Examples
 

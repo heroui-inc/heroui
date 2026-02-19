@@ -76,11 +76,11 @@ export default function App() {
 
 ### 3. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | `size` | `size` (on Container) | Simplified (xs, sm, md, lg, cover, full) |
-| `radius` | - | Removed (use Tailwind CSS) |
-| `shadow` | - | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `shadow` | — | Removed (use Tailwind CSS) |
 | `backdrop` | `variant` (on **Backdrop**) | Renamed; values unchanged (`opaque`, `blur`, `transparent`) |
 | `scrollBehavior` | `scroll` (on Container) | Renamed (`normal` → `inside`) |
 | `placement` | `placement` (on Container) | Moved to Container |
@@ -88,27 +88,13 @@ export default function App() {
 | `isKeyboardDismissDisabled` | `isKeyboardDismissDisabled` (on **Backdrop**) | Moved to `Modal.Backdrop` |
 | `isOpen` | `isOpen` (on **Backdrop**) | Controlled state on `Modal.Backdrop` |
 | `onOpenChange` | `onOpenChange` (on **Backdrop**) | Same as above |
-| `onClose` | - | Use `close` from render prop |
-| `hideCloseButton` | - | Omit `Modal.CloseTrigger` instead |
-| `closeButton` | - | Use `Modal.CloseTrigger` with custom content |
-| `motionProps` | - | Removed (animations handled differently) |
-| `classNames` | - | Use `className` props |
-| `shouldBlockScroll` | - | Removed (handled automatically) |
-| `portalContainer` | - | Removed |
-
-### 4. Removed Props
-
-The following props are no longer available in v3:
-
-- `size` - In v3 use `size` on `Modal.Container` (xs, sm, md, lg, cover, full); for custom widths use Tailwind
-- `radius` - Use Tailwind CSS classes (e.g., `rounded-lg`)
-- `shadow` - Use Tailwind CSS classes (e.g., `shadow-lg`)
-- `motionProps` - Animations handled differently
-- `classNames` - Use `className` props on individual components
-- `shouldBlockScroll` - Handled automatically
-- `portalContainer` - Portal handling changed
-- `hideCloseButton` - Omit `Modal.CloseTrigger` instead
-- `closeButton` - Use `Modal.CloseTrigger` with custom content
+| `onClose` | — | Use `close` from render prop |
+| `hideCloseButton` | — | Omit `Modal.CloseTrigger` instead |
+| `closeButton` | — | Use `Modal.CloseTrigger` with custom content |
+| `motionProps` | — | Removed (animations handled differently) |
+| `classNames` | — | Use `className` props on individual components |
+| `shouldBlockScroll` | — | Removed (handled automatically) |
+| `portalContainer` | — | Removed |
 
 ## Migration Examples
 

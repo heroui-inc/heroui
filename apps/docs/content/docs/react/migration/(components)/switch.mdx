@@ -45,30 +45,19 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | `onValueChange` | `onChange` | Renamed event handler |
 | `size` | `size` | Still exists on root (`sm` \| `md` \| `lg`) |
-| `label` | - | Removed (use `Label` component) |
-| `color` | - | Removed (use Tailwind CSS) |
-| `thumbIcon` | - | Removed (use `Switch.Icon` inside `Switch.Thumb`) |
-| `startContent` | - | Removed (customize control) |
-| `endContent` | - | Removed (customize control) |
-| `classNames` | - | Use `className` props |
-| `disableAnimation` | - | Removed |
+| `label` | — | Use `Label` component |
+| `color` | — | Removed (use Tailwind CSS) |
+| `thumbIcon` | — | Use `Switch.Icon` inside `Switch.Thumb` |
+| `startContent` | — | Customize control directly |
+| `endContent` | — | Customize control directly |
+| `classNames` | — | Use `className` props on individual components |
+| `disableAnimation` | — | Removed (animations handled differently) |
 
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `label` - Use `Label` component instead
-- `color` - Use Tailwind CSS classes
-- `thumbIcon` - Use `Switch.Icon` component inside `Switch.Thumb`
-- `startContent`, `endContent` - Customize control directly
-- `classNames` - Use `className` props on individual components
-- `disableAnimation` - Animations handled differently
-
-### 4. New Components
+### 3. New Components
 
 - `SwitchGroup` - For grouping multiple switches
 - `Switch.Icon` - For icons inside the thumb

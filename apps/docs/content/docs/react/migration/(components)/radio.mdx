@@ -64,26 +64,15 @@ export default function App() {
 
 ### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
 | `onValueChange` | `onChange` | Renamed event handler |
-| `label` (on RadioGroup) | - | Removed (use `Label` component) |
-| `description` (on Radio) | - | Removed (use `Description` component) |
-| `size` | - | Removed (use Tailwind CSS) |
-| `color` | - | Removed (use Tailwind CSS) |
-| `classNames` | - | Use `className` props |
-| `disableAnimation` | - | Removed |
-
-### 3. Removed Props
-
-The following props are no longer available in v3:
-
-- `label` (on RadioGroup) - Use `Label` component instead
-- `description` (on Radio) - Use `Description` component inside `Radio.Content`
-- `size` - Use Tailwind CSS classes
-- `color` - Use Tailwind CSS classes
-- `classNames` - Use `className` props on individual components
-- `disableAnimation` - Animations handled differently
+| `label` (on RadioGroup) | — | Use `Label` component |
+| `description` (on Radio) | — | Use `Description` component inside `Radio.Content` |
+| `size` | — | Removed (use Tailwind CSS) |
+| `color` | — | Removed (use Tailwind CSS) |
+| `classNames` | — | Use `className` props on individual components |
+| `disableAnimation` | — | Removed (animations handled differently) |
 
 ## Migration Examples
 

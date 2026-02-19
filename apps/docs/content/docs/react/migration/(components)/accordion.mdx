@@ -76,14 +76,23 @@ export default function App() {
 **v2:** Single `AccordionItem` component with props  
 **v3:** Compound components: `Accordion.Item`, `Accordion.Heading`, `Accordion.Trigger`, `Accordion.Panel`, `Accordion.Body`, `Accordion.Indicator`
 
-### 2. State Management Props
+### 2. Prop Changes
 
-| v2 Prop | v3 Prop | Notes |
-|---------|---------|-------|
-| `selectedKeys` | `expandedKeys` | Changed from `Set<Key>` to `Iterable<Key>` |
-| `defaultSelectedKeys` | `defaultExpandedKeys` | Same change |
-| `onSelectionChange` | `onExpandedChange` | Callback signature: `(keys: Set<Key>) => void` |
-| `selectionMode="multiple"` | `allowsMultipleExpanded` | Changed from string to boolean |
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `selectedKeys` | `Accordion` | Renamed to `expandedKeys`; type `Iterable<Key>` |
+| `defaultSelectedKeys` | `Accordion` | Renamed to `defaultExpandedKeys` |
+| `onSelectionChange` | `Accordion` | Renamed to `onExpandedChange`; `(keys: Set<Key>) => void` |
+| `selectionMode="multiple"` | `Accordion` | Use `allowsMultipleExpanded` (boolean) |
+| `isCompact` | - | Removed (use Tailwind CSS e.g. `text-sm`, `py-2`) |
+| `hideIndicator` | - | Omit `<Accordion.Indicator />` to hide |
+| `disableAnimation`, `disableIndicatorAnimation`, `motionProps` | - | Removed (animations not supported / use CSS) |
+| `showDivider`, `dividerProps` | - | Removed (add dividers manually or use `Divider`) |
+| `keepContentMounted` | - | Removed (content always mounted in v3) |
+| `selectionBehavior`, `disallowEmptySelection` | - | Removed (not applicable) |
+| `itemClasses` | - | Use `className` on items |
+| `startContent` | - | Place content in `<Accordion.Trigger>` |
+| `title`, `subtitle` | - | Place content in `<Accordion.Trigger>` |
 
 ### 3. Variants
 
@@ -97,25 +106,7 @@ The v3 variants are simplified. To achieve similar effects to v2 variants:
 - **v2 `bordered`** → v3 `default` + add border classes
 - **v2 `splitted`** → v3 `default` + add background color and spacing/margin between items
 
-### 4. Removed Props
-
-The following props are no longer available in v3:
-
-- `isCompact` - Use Tailwind CSS classes like `text-sm` or `py-2` instead
-- `hideIndicator` - Simply don't render `<Accordion.Indicator />`
-- `disableAnimation` - Animations not supported
-- `disableIndicatorAnimation` - Use CSS to control indicator animations
-- `motionProps` - Animations not supported
-- `showDivider` - Add dividers manually between items if needed
-- `dividerProps` - Use a separate `Divider` component
-- `keepContentMounted` - Content is always mounted in v3
-- `selectionBehavior` - Not applicable with new API
-- `disallowEmptySelection` - Not applicable
-- `itemClasses` - Use `className` on individual items
-- `startContent` - Place content directly in `<Accordion.Trigger>`
-- `title` / `subtitle` props - Place content directly in `<Accordion.Trigger>`
-
-### 5. Item Identification
+### 4. Item Identification
 
 **v2:** React's `key` was used for both list reconciliation and expanded state.  
 **v3:** Use `id` on `Accordion.Item` for expanded state; keep React's `key` on items in lists.
@@ -373,7 +364,7 @@ Accordion (Root)
       ├── Accordion.Heading
       │   └── Accordion.Trigger
       │       ├── [Your content: title, subtitle, icons, etc.]
-      │       └── Accordion.Indicator
+      │       └── Accordion.Indicator (optional)
       └── Accordion.Panel
           └── Accordion.Body
               └── [Your content]

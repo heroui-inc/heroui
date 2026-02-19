@@ -58,16 +58,16 @@ export default function App() {
 **v2:** Items could be links or text  
 **v3:** Items automatically use the `Link` component when `href` is provided
 
-### 4. Removed Props
+### 4. Prop Changes
 
-The following props are no longer available in v3:
-
-- `maxItems` - No longer supported; render all items or implement collapse manually
-- `itemsBeforeCollapse` / `itemsAfterCollapse` / `renderEllipsis` - Collapse/ellipsis feature removed with `maxItems`
-- `items` prop pattern - Use children instead
-- `onAction` - Use `onPress` on individual items if needed
-- `isDisabled` - Not on root in v3; handle per item or via styling if needed
-- `classNames` / `itemClasses` - Use `className` on `Breadcrumbs` and `BreadcrumbsItem` instead
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `maxItems` | - | Removed (render all items or implement collapse manually) |
+| `itemsBeforeCollapse`, `itemsAfterCollapse`, `renderEllipsis` | - | Removed (collapse/ellipsis removed with maxItems) |
+| `items` (prop pattern) | - | Use children instead |
+| `onAction` | - | Use `onPress` on individual items if needed |
+| `isDisabled` | - | Not on root; handle per item or via styling |
+| `classNames`, `itemClasses` | - | Use `className` on Breadcrumbs and BreadcrumbsItem |
 
 ### 5. React Aria Components Integration
 

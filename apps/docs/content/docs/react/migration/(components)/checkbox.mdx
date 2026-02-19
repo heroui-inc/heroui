@@ -50,24 +50,20 @@ export default function App() {
 **v2:** Label passed as children directly to `Checkbox`  
 **v3:** Label must be wrapped in `Checkbox.Content` using the `Label` component
 
-### 3. Event Handler: `onValueChange` → `onChange`
+### 3. Prop Changes
 
-**v2:** Used `onValueChange` prop  
-**v3:** Uses `onChange` prop (from React Aria Components)
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `onValueChange` | `Checkbox` | Use `onChange` |
+| `color` | - | Removed (use Tailwind on Checkbox.Control) |
+| `size` | - | Removed (use Tailwind e.g. `size-4`, `size-5`) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-sm`) |
+| `lineThrough` | - | Removed (use Tailwind `line-through` on label) |
+| `icon` | - | Use custom content in `Checkbox.Indicator` |
+| `classNames` | - | Use `className` on parts |
+| `disableAnimation` | - | Removed |
 
-### 4. Removed Props
-
-The following props are no longer available in v3:
-
-- `color` - Use Tailwind CSS classes on `Checkbox.Control` for custom colors
-- `size` - Use Tailwind CSS classes like `size-4`, `size-5`, `size-6`
-- `radius` - Use Tailwind CSS classes like `rounded-sm`, `rounded-md`, `rounded-full`
-- `lineThrough` - Use Tailwind CSS class `line-through` on label
-- `icon` - Use custom content in `Checkbox.Indicator` instead
-- `classNames` - Use `className` props on individual components
-- `disableAnimation` - Animations are handled internally
-
-### 5. CheckboxGroup Changes
+### 4. CheckboxGroup Changes
 
 **v2:** `CheckboxGroup` (separate component) with `label` prop and simple `Checkbox` children  
 **v3:** `CheckboxGroup` (separate component) with `Label`/`Description` as children and compound `Checkbox` structure
