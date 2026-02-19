@@ -93,6 +93,12 @@ export default () => (
   name="tag-group-with-list-data"
 />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="tag-group-custom-render-function"
+/>
+
 <RelatedComponents component="taggroup" />
 
 ## Styling
@@ -200,6 +206,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `variant` | `"default" \| "surface"` | `"default"` | Visual variant of the tags |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | TagGroup content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function.|
 
 ### TagGroup.List Props
 
@@ -209,6 +216,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `renderEmptyState` | `() => ReactNode` | - | Function to render when the list is empty |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | TagList content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TagListRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Tag Props
 
@@ -219,6 +227,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `isDisabled` | `boolean` | - | Whether the tag is disabled |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Tag content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TagRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 **Note**: `size`, `variant` are inherited from the parent `TagGroup` component and cannot be set directly on individual `Tag` components.
 

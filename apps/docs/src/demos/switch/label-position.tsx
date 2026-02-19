@@ -7,10 +7,14 @@ export function LabelPosition() {
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Label after</Label>
+        <Switch.Content>
+          <Label className="text-sm">Label after</Label>
+        </Switch.Content>
       </Switch>
       <Switch>
-        <Label className="text-sm">Label before</Label>
+        <Switch.Content>
+          <Label className="text-sm">Label before</Label>
+        </Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>

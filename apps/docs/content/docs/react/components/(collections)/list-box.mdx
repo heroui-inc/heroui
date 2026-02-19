@@ -74,8 +74,14 @@ export default () => (
   name="list-box-controlled"
 />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="list-box-custom-render-function"
+/>
+
 <RelatedComponents component="list-box" />
- 
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -169,6 +175,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `variant` | `"default" \| "danger"` | `"default"` | Visual variant |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | ListBox items and sections |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ListBoxRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ListBox.Item Props
 
@@ -180,6 +187,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `variant` | `"default" \| "danger"` | `"default"` | Visual variant |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Item content or render function |
+| `render` | `(props: DetailedHTMLProps<LinkWithRequiredHref, HTMLAnchorElement> \| React.JSX.IntrinsicElements[keyof React.JSX.IntrinsicElements], renderProps: ListBoxItemRenderProps) => ReactElement` | - | Overrides the default DOM element with a custom render function.|
 
 ### ListBox.ItemIndicator Props
 

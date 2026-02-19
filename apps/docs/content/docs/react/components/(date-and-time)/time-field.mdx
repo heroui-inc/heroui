@@ -1,11 +1,12 @@
 ---
 title: TimeField
 description: Time input field with labels, descriptions, and validation built on React Aria TimeField
+icon: updated
 links:
   rac: TimeField
   source: time-field/time-field.tsx
   styles: time-field.css
-  storybook: Components/Forms/TimeField
+  storybook: Components/Date and Time/TimeField
 ---
 
 ## Import
@@ -21,16 +22,16 @@ import { TimeField } from '@heroui/react';
 ### Anatomy
 
 ```tsx
-import {TimeField, Label, DateInputGroup, Description, FieldError} from '@heroui/react';
+import {TimeField, Label, Description, FieldError} from '@heroui/react';
 
 export default () => (
   <TimeField>
     <Label />
-    <DateInputGroup>
-      <DateInputGroup.Input>
-        {(segment) => <DateInputGroup.Segment segment={segment} />}
-      </DateInputGroup.Input>
-    </DateInputGroup>
+    <TimeField.Group>
+      <TimeField.Input>
+        {(segment) => <TimeField.Segment segment={segment} />}
+      </TimeField.Input>
+    </TimeField.Group>
     <Description />
     <FieldError />
   </TimeField>
@@ -83,9 +84,9 @@ Add prefix or suffix icons to enhance the time field.
 
 <ComponentPreview name="time-field-full-width" />
 
-### In Surface
+### On Surface
 
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on DateInputGroup to apply the lower emphasis variant suitable for surface backgrounds.
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on TimeField.Group to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="time-field-on-surface" />
 
@@ -97,12 +98,18 @@ Complete form example with validation and submission handling.
 
 <RelatedComponents component="timefield" />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="time-field-custom-render-function"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
 
 ```tsx
-import {TimeField, Label, DateInputGroup, Description} from '@heroui/react';
+import {TimeField, Label, Description} from '@heroui/react';
 
 function CustomTimeField() {
   return (
@@ -110,11 +117,11 @@ function CustomTimeField() {
       <Label className="text-sm font-semibold text-default-700">
         Appointment time
       </Label>
-      <DateInputGroup className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <DateInputGroup.Input>
-          {(segment) => <DateInputGroup.Segment segment={segment} />}
-        </DateInputGroup.Input>
-      </DateInputGroup>
+      <TimeField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
+        <TimeField.Input>
+          {(segment) => <TimeField.Segment segment={segment} />}
+        </TimeField.Input>
+      </TimeField.Group>
       <Description className="text-xs text-default-500">
         Select a time for your appointment.
       </Description>
@@ -154,7 +161,7 @@ TimeField has minimal default styling. Override the `.time-field` class to custo
 
 - `.time-field` – Root container with minimal styling (`flex flex-col gap-1`)
 
-> **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options. DateInputGroup styling is documented below in the API Reference section.
+> **Note:** Child components ([Label](/docs/components/label), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options. TimeField.Group styling is documented below in the API Reference section.
 
 ### Interactive States
 
@@ -175,11 +182,12 @@ TimeField inherits all props from React Aria's [TimeField](https://react-aria.ad
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode \| (values: TimeFieldRenderProps) => React.ReactNode` | - | Child components (Label, DateInputGroup, etc.) or render function. |
+| `children` | `React.ReactNode \| (values: TimeFieldRenderProps) => React.ReactNode` | - | Child components (Label, TimeField.Group, etc.) or render function. |
 | `className` | `string \| (values: TimeFieldRenderProps) => string` | - | CSS classes for styling, supports render props. |
 | `style` | `React.CSSProperties \| (values: TimeFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the time field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TimeFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 #### Value Props
 
@@ -238,7 +246,10 @@ TimeField inherits all props from React Aria's [TimeField](https://react-aria.ad
 TimeField works with these separate components that should be imported and used directly:
 
 - **Label** - Field label component from `@heroui/react`
-- **DateInputGroup** - Date input component with segmented editing from `@heroui/react` (documented below)
+- **TimeField.Group** - Time input group component (documented below)
+- **TimeField.Input** - Input component with segmented editing from `@heroui/react`
+- **TimeField.Segment** - Individual time segment (hour, minute, second, etc.)
+- **TimeField.Prefix** / **TimeField.Suffix** - Prefix and suffix slots for the input group
 - **Description** - Helper text component from `@heroui/react`
 - **FieldError** - Validation error message from `@heroui/react`
 
@@ -246,7 +257,7 @@ Each of these components has its own props API. Use them directly within TimeFie
 
 ```tsx
 import {parseTime} from '@internationalized/date';
-import {TimeField, Label, DateInputGroup, Description, FieldError} from '@heroui/react';
+import {TimeField, Label, Description, FieldError} from '@heroui/react';
 
 <TimeField
   isRequired
@@ -257,11 +268,11 @@ import {TimeField, Label, DateInputGroup, Description, FieldError} from '@heroui
   onChange={setTime}
 >
   <Label>Appointment Time</Label>
-  <DateInputGroup>
-    <DateInputGroup.Input>
-      {(segment) => <DateInputGroup.Segment segment={segment} />}
-    </DateInputGroup.Input>
-  </DateInputGroup>
+  <TimeField.Group>
+    <TimeField.Input>
+      {(segment) => <TimeField.Segment segment={segment} />}
+    </TimeField.Input>
+  </TimeField.Group>
   <Description>Select a time between 9:00 AM and 5:00 PM.</Description>
   <FieldError>Please select a valid time.</FieldError>
 </TimeField>
@@ -309,54 +320,54 @@ When using render props with `className`, `style`, or `children`, these values a
 | `isFocusWithin` | `boolean` | Whether any child element is focused. |
 | `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
 
-### DateInputGroup Props
+### TimeField.Group Props
 
-DateInputGroup accepts all props from React Aria's `Group` component plus the following:
+TimeField.Group accepts all props from React Aria's `Group` component plus the following:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
-### DateInputGroup.Input Props
+### TimeField.Input Props
 
-DateInputGroup.Input accepts all props from React Aria's `DateInput` component plus the following:
+TimeField.Input accepts all props from React Aria's `DateInput` component plus the following:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the input. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
-The `DateInput` component accepts a render prop function that receives date segments. Each segment represents a part of the time (hour, minute, second, etc.).
+The `TimeField.Input` component accepts a render prop function that receives date segments. Each segment represents a part of the time (hour, minute, second, etc.).
 
-### DateInputGroup.Segment Props
+### TimeField.Segment Props
 
-DateInputGroup.Segment accepts all props from React Aria's `DateSegment` component:
+TimeField.Segment accepts all props from React Aria's `DateSegment` component:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `segment` | `DateSegment` | - | The date segment object from the DateInput render prop. |
+| `segment` | `DateSegment` | - | The date segment object from the TimeField.Input render prop. |
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 
-### DateInputGroup.Prefix Props
+### TimeField.Prefix Props
 
-DateInputGroup.Prefix accepts standard HTML `div` attributes:
+TimeField.Prefix accepts standard HTML `div` attributes:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the prefix slot. |
 
-### DateInputGroup.Suffix Props
+### TimeField.Suffix Props
 
-DateInputGroup.Suffix accepts standard HTML `div` attributes:
+TimeField.Suffix accepts standard HTML `div` attributes:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the suffix slot. |
 
-## DateInputGroup Styling
+## TimeField.Group Styling
 
 ### Customizing the component classes
 
@@ -407,15 +418,15 @@ The base classes power every instance. Override them once with `@layer component
 }
 ```
 
-### DateInputGroup CSS Classes
+### TimeField.Group CSS Classes
 
 - `.date-input-group` – Root container styling
 - `.date-input-group__input` – Input wrapper styling
-- `.date-input-group__segment` – Individual date segment styling
+- `.date-input-group__segment` – Individual time segment styling
 - `.date-input-group__prefix` – Prefix element styling
 - `.date-input-group__suffix` – Suffix element styling
 
-### DateInputGroup Interactive States
+### TimeField.Group Interactive States
 
 - **Hover**: `:hover` or `[data-hovered="true"]`
 - **Focus Within**: `[data-focus-within="true"]` or `:focus-within`

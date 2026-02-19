@@ -24,8 +24,22 @@
   }
 
   /* Focus within state */
-  &[data-focus-within="true"],
-  &:focus-within {
+  &[data-focus-within="true"]:not(
+      :has(
+        [data-slot="date-picker-trigger"]:focus,
+        [data-slot="date-picker-trigger"][data-focused="true"],
+        [data-slot="date-range-picker-trigger"]:focus,
+        [data-slot="date-range-picker-trigger"][data-focused="true"]
+      )
+    ),
+  &:focus-within:not(
+      :has(
+        [data-slot="date-picker-trigger"]:focus,
+        [data-slot="date-picker-trigger"][data-focused="true"],
+        [data-slot="date-range-picker-trigger"]:focus,
+        [data-slot="date-range-picker-trigger"][data-focused="true"]
+      )
+    ) {
     @apply status-focused-field;
   }
 
@@ -56,6 +70,15 @@
     @apply rounded-r-none pr-2;
   }
 
+  .date-input-group:has(.date-range-picker__range-separator) & {
+    &[slot="start"] {
+      @apply flex-none pr-0;
+    }
+    &[slot="end"] {
+      @apply pl-0;
+    }
+  }
+
   /* Focus state - handled by group */
   &:focus,
   &:focus-visible {
@@ -64,7 +87,7 @@
 }
 
 .date-input-group__segment {
-  @apply inline-block rounded-md px-0.5 text-end tabular-nums outline-none;
+  @apply inline-block rounded-md px-0.5 text-end text-nowrap outline-none;
 
   /* Segment separators styling "/" */
   &[data-type="literal"] {

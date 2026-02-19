@@ -1,7 +1,6 @@
 ---
 title: ColorSlider
 description: A color slider allows users to adjust an individual channel of a color value
-icon: new
 links:
   rac: ColorSlider
   source: color-slider/color-slider.tsx
@@ -79,6 +78,12 @@ You can also use RGB color space with red, green, and blue channels.
 
 <ComponentPreview
   name="color-slider-rgb-channels"
+/>
+
+### Custom Render Function
+
+<ComponentPreview
+  name="color-slider-custom-render-function"
 />
 
 <RelatedComponents component="color-slider" />
@@ -176,6 +181,7 @@ Inherits from [React Aria ColorSlider](https://react-spectrum.adobe.com/react-ar
 | `aria-label` | `string` | - | Accessibility label for the slider |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Slider content or render function |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSliderRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### ColorSlider.Output Props
 

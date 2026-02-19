@@ -4,6 +4,7 @@ export {Controlled} from "./controlled";
 export {ControlledMultiple} from "./controlled-multiple";
 export {ControlledOpenState} from "./controlled-open-state";
 export {CustomIndicator} from "./custom-indicator";
+export {CustomRenderFunction} from "./custom-render-function";
 export {CustomValue} from "./custom-value";
 export {CustomValueMultiple} from "./custom-value-multiple";
 export {Default} from "./default";

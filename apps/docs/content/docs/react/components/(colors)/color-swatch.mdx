@@ -1,7 +1,6 @@
 ---
 title: ColorSwatch
 description: A visual preview of a color value with accessibility support
-icon: new
 links:
   rac: ColorSwatch
   source: color-swatch/color-swatch.tsx
@@ -53,6 +52,12 @@ Use `colorName` to provide a custom accessible name for the color, and `aria-lab
 
 <ComponentPreview
   name="color-swatch-accessibility"
+/>
+
+### Custom Render Function
+
+<ComponentPreview
+  name="color-swatch-custom-render-function"
 />
 
 <RelatedComponents component="color-swatch" />
@@ -120,6 +125,7 @@ The ColorSwatch component uses these CSS classes ([View source styles](https://g
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size of the swatch |
 | `style` | `CSSProperties \| ((renderProps) => CSSProperties)` | - | Inline styles or render props function with access to color |
 | `aria-label` | `string` | - | Accessible label for the swatch |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### Style Render Props
 

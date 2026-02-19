@@ -16,7 +16,6 @@ export * from "./checkbox-group";
 export * from "./chip";
 export * from "./color-area";
 export * from "./color-field";
-export * from "./color-input-group";
 export * from "./color-picker";
 export * from "./color-slider";
 export * from "./color-swatch";
@@ -24,7 +23,8 @@ export * from "./color-swatch-picker";
 export * from "./close-button";
 export * from "./combo-box";
 export * from "./date-field";
-export * from "./date-input-group";
+export * from "./date-picker";
+export * from "./date-range-picker";
 export * from "./time-field";
 export * from "./disclosure";
 export * from "./disclosure-group";
@@ -75,6 +75,8 @@ export * from "./slider";
 
 // in progress
 export * from "./calendar";
+export * from "./calendar-year-picker";
+export * from "./range-calendar";
 
 //  ===================================
 //  Icons

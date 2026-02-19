@@ -1,8 +1,8 @@
 import {Tabs} from "@heroui/react";
 
-export function WithoutSeparator() {
+export function WithSeparator() {
   return (
-    <Tabs hideSeparator className="w-full max-w-md">
+    <Tabs className="w-full max-w-md">
       <Tabs.ListContainer>
         <Tabs.List aria-label="Options">
           <Tabs.Tab id="overview">
@@ -10,10 +10,12 @@ export function WithoutSeparator() {
             <Tabs.Indicator />
           </Tabs.Tab>
           <Tabs.Tab id="analytics">
+            <Tabs.Separator />
             Analytics
             <Tabs.Indicator />
           </Tabs.Tab>
           <Tabs.Tab id="reports">
+            <Tabs.Separator />
             Reports
             <Tabs.Indicator />
           </Tabs.Tab>

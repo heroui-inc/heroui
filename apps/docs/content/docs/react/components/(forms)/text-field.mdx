@@ -89,6 +89,12 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <RelatedShowcases component="TextField" />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="text-field-custom-render-function"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -166,6 +172,7 @@ TextField inherits all props from React Aria's [TextField](https://react-spectru
 | `style` | `React.CSSProperties \| (values: TextFieldRenderProps) => React.CSSProperties` | - | Inline styles, supports render props. |
 | `fullWidth` | `boolean` | `false` | Whether the text field should take full width of its container |
 | `id` | `string` | - | The element's unique identifier. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TextFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 #### Validation Props
 

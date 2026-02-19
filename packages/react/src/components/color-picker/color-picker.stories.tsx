@@ -8,7 +8,6 @@ import {parseColor} from "react-aria-components";
 import {Button} from "../button";
 import {ColorArea} from "../color-area";
 import {ColorField} from "../color-field";
-import {ColorInputGroup} from "../color-input-group";
 import {ColorSlider} from "../color-slider";
 import {ColorSwatch} from "../color-swatch";
 import {ColorSwatchPicker} from "../color-swatch-picker";
@@ -129,12 +128,12 @@ export const Controlled: Story = {
               </Button>
             </div>
             <ColorField aria-label="Color field">
-              <ColorInputGroup variant="secondary">
-                <ColorInputGroup.Prefix>
+              <ColorField.Group variant="secondary">
+                <ColorField.Prefix>
                   <ColorSwatch size="xs" />
-                </ColorInputGroup.Prefix>
-                <ColorInputGroup.Input />
-              </ColorInputGroup>
+                </ColorField.Prefix>
+                <ColorField.Input />
+              </ColorField.Group>
             </ColorField>
           </ColorPicker.Popover>
         </ColorPicker>
@@ -251,9 +250,9 @@ export const WidthFields: Story = {
                 channel={channel}
                 colorSpace={colorSpace}
               >
-                <ColorInputGroup variant="secondary">
-                  <ColorInputGroup.Input />
-                </ColorInputGroup>
+                <ColorField.Group variant="secondary">
+                  <ColorField.Input />
+                </ColorField.Group>
               </ColorField>
             ))}
           </div>

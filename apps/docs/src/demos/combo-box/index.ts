@@ -5,6 +5,7 @@ export {Controlled} from "./controlled";
 export {ControlledInputValue} from "./controlled-input-value";
 export {CustomFiltering} from "./custom-filtering";
 export {CustomIndicator} from "./custom-indicator";
+export {CustomRenderFunction} from "./custom-render-function";
 export {CustomValue} from "./custom-value";
 export {Default} from "./default";
 export {DefaultSelectedKey} from "./default-selected-key";

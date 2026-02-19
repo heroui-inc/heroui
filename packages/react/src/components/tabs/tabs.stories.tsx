@@ -237,10 +237,10 @@ const CustomStyleTemplate = (args: Story["args"]) => {
   );
 };
 
-const WithoutSeparatorTemplate = (args: Story["args"]) => {
+const WithSeparatorTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
-      <Tabs {...args} hideSeparator>
+      <Tabs {...args}>
         <Tabs.ListContainer>
           <Tabs.List aria-label="Options">
             <Tabs.Tab id="overview">
@@ -248,10 +248,12 @@ const WithoutSeparatorTemplate = (args: Story["args"]) => {
               <Tabs.Indicator />
             </Tabs.Tab>
             <Tabs.Tab id="analytics">
+              <Tabs.Separator />
               Analytics
               <Tabs.Indicator />
             </Tabs.Tab>
             <Tabs.Tab id="reports">
+              <Tabs.Separator />
               Reports
               <Tabs.Indicator />
             </Tabs.Tab>
@@ -490,11 +492,11 @@ export const WithCustomStyle: Story = {
   render: CustomStyleTemplate,
 };
 
-export const WithoutSeparator: Story = {
+export const WithSeparator: Story = {
   args: {
     children: null,
   },
-  render: WithoutSeparatorTemplate,
+  render: WithSeparatorTemplate,
 };
 
 export const Showcase1: Story = {

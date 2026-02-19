@@ -89,6 +89,12 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
   name="checkbox-group-features-and-addons"
 />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="checkbox-group-custom-render-function"
+/>
+
 <RelatedComponents component="checkboxgroup" />
 
 ## Styling
@@ -154,6 +160,7 @@ Inherits from [React Aria CheckboxGroup](https://react-spectrum.adobe.com/react-
 | `isInvalid` | `boolean` | `false` | Whether the checkbox group is in an invalid state |
 | `name` | `string` | - | The name of the checkbox group, used when submitting an HTML form |
 | `children` | `React.ReactNode \| (values: CheckboxGroupRenderProps) => React.ReactNode` | - | Checkbox group content or render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxGroupRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### CheckboxGroupRenderProps
 

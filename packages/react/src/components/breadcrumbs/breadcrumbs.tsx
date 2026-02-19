@@ -94,7 +94,9 @@ const BreadcrumbsItem = ({
 
         return (
           <>
-            <Link className={slots?.link()}>{children}</Link>
+            <Link className={slots?.link()} {...props}>
+              {children}
+            </Link>
             {!isCurrent && renderSeparator()}
           </>
         );

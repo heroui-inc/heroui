@@ -1,0 +1,241 @@
+---
+title: DateRangePicker
+description: Composable date range picker built on React Aria DateRangePicker with DateField and RangeCalendar composition
+icon: new
+links:
+  rac: DateRangePicker
+  source: date-range-picker/date-range-picker.tsx
+  styles: date-range-picker.css
+  storybook: Components/Date and Time/DateRangePicker
+  figma: true
+---
+
+## Import
+
+```tsx
+import { DateField, DateRangePicker, Label, RangeCalendar } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview name="date-range-picker-basic" />
+
+### Anatomy
+
+`DateRangePicker` follows a composition-first API. Compose `DateField` and `RangeCalendar` explicitly to control structure and styling.
+
+```tsx
+import {DateField, DateRangePicker, Label, RangeCalendar} from '@heroui/react';
+
+export default () => (
+  <DateRangePicker>
+    <Label />
+    <DateField.Group>
+      <DateField.Input slot="start">
+        {(segment) => <DateField.Segment segment={segment} />}
+      </DateField.Input>
+      <DateRangePicker.RangeSeparator />
+      <DateField.Input slot="end">
+        {(segment) => <DateField.Segment segment={segment} />}
+      </DateField.Input>
+      <DateField.Suffix>
+        <DateRangePicker.Trigger>
+          <DateRangePicker.TriggerIndicator />
+        </DateRangePicker.Trigger>
+      </DateField.Suffix>
+    </DateField.Group>
+    <DateRangePicker.Popover>
+      <RangeCalendar aria-label="Choose trip dates">
+        <RangeCalendar.Header>
+          <RangeCalendar.YearPickerTrigger>
+            <RangeCalendar.YearPickerTriggerHeading />
+            <RangeCalendar.YearPickerTriggerIndicator />
+          </RangeCalendar.YearPickerTrigger>
+          <RangeCalendar.NavButton slot="previous" />
+          <RangeCalendar.NavButton slot="next" />
+        </RangeCalendar.Header>
+        <RangeCalendar.Grid>
+          <RangeCalendar.GridHeader>
+            {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+          </RangeCalendar.GridHeader>
+          <RangeCalendar.GridBody>{(date) => <RangeCalendar.Cell date={date} />}</RangeCalendar.GridBody>
+        </RangeCalendar.Grid>
+      </RangeCalendar>
+    </DateRangePicker.Popover>
+  </DateRangePicker>
+)
+```
+
+### Controlled
+
+<ComponentPreview name="date-range-picker-controlled" />
+
+### Validation
+
+<ComponentPreview name="date-range-picker-with-validation" />
+
+### Format Options
+
+Control how DateRangePicker values are displayed with props such as `granularity`, `hourCycle`, `hideTimeZone`, and `shouldForceLeadingZeros`.
+
+<ComponentPreview name="date-range-picker-format-options" />
+
+### Disabled
+
+<ComponentPreview name="date-range-picker-disabled" />
+
+### Custom Indicator
+
+`DateRangePicker.TriggerIndicator` renders the default `IconCalendar` when no children are provided. Pass children to replace it.
+
+<ComponentPreview name="date-range-picker-with-custom-indicator" />
+
+### Form Example
+
+<ComponentPreview name="date-range-picker-form-example" />
+
+### International Calendar
+
+By default, DateRangePicker displays dates using the calendar system for the user's locale. You can override this by wrapping your DateRangePicker with `I18nProvider` and setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string).
+
+The example below shows the Indian calendar system:
+
+<ComponentPreview name="date-range-picker-international-calendar" />
+
+**Note:** The `onChange` event always returns dates in the same calendar system as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
+
+For a complete list of supported calendar systems and their identifiers, see:
+- [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
+- [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
+
+### Custom Render Function
+
+<ComponentPreview
+  name="date-range-picker-custom-render-function"
+/>
+
+<RelatedComponents component="daterangepicker" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+You can style each composition part independently:
+
+```tsx
+import {DateField, DateRangePicker, Label, RangeCalendar} from '@heroui/react';
+
+function CustomDateRangePicker() {
+  return (
+    <DateRangePicker className="w-[360px] gap-2">
+      <Label className="text-sm font-semibold">Trip dates</Label>
+      <DateField.Group className="rounded-xl border border-border/60 bg-surface" fullWidth variant="secondary">
+        <DateField.Input slot="start">
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateRangePicker.RangeSeparator className="px-2 text-default" />
+        <DateField.Input slot="end">
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger className="w-full">
+            <DateRangePicker.TriggerIndicator className="text-default" />
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DateRangePicker.Popover className="rounded-xl p-2">
+        <RangeCalendar aria-label="Custom range picker calendar">
+          {/* RangeCalendar parts */}
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize DateRangePicker base classes, use `@layer components`.
+
+```css
+@layer components {
+  .date-range-picker {
+    @apply inline-flex flex-col gap-1;
+  }
+
+  .date-range-picker__trigger {
+    @apply inline-flex items-center justify-between;
+  }
+
+  .date-range-picker__trigger-indicator {
+    @apply text-muted;
+  }
+
+  .date-range-picker__range-separator {
+    @apply px-2 text-default;
+  }
+
+  .date-range-picker__popover {
+    @apply min-w-[var(--trigger-width)] p-0;
+  }
+}
+```
+
+HeroUI follows [BEM](https://getbem.com/) naming for reusable customization.
+
+### CSS Classes
+
+DateRangePicker uses these classes in `packages/styles/components/date-range-picker.css`:
+
+- `.date-range-picker` - Root wrapper.
+- `.date-range-picker__trigger` - Trigger part that opens the popover.
+- `.date-range-picker__trigger-indicator` - Default/custom indicator slot.
+- `.date-range-picker__range-separator` - Separator between start and end date inputs.
+- `.date-range-picker__popover` - Popover content wrapper.
+
+### Interactive States
+
+DateRangePicker supports React Aria data attributes and pseudo states:
+
+- **Open**: `[data-open="true"]` on trigger.
+- **Disabled**: `[data-disabled="true"]` or `[aria-disabled="true"]` on trigger.
+- **Focus visible**: `:focus-visible` or `[data-focus-visible="true"]` on trigger.
+- **Hover**: `:hover` or `[data-hovered="true"]` on trigger.
+
+## API Reference
+
+### DateRangePicker Props
+
+DateRangePicker inherits all props from React Aria [DateRangePicker](https://react-aria.adobe.com/DateRangePicker).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `{ start: DateValue; end: DateValue } \| null` | - | Controlled selected date range value. |
+| `defaultValue` | `{ start: DateValue; end: DateValue } \| null` | - | Default selected range in uncontrolled mode. |
+| `onChange` | `(value: { start: DateValue; end: DateValue } \| null) => void` | - | Called when selected range changes. |
+| `isOpen` | `boolean` | - | Controlled popover open state. |
+| `defaultOpen` | `boolean` | `false` | Initial popover open state. |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | Called when popover open state changes. |
+| `isDisabled` | `boolean` | `false` | Disables range selection and trigger interactions. |
+| `isInvalid` | `boolean` | - | Marks the field as invalid for validation state. |
+| `minValue` | `DateValue` | - | Minimum selectable date. |
+| `maxValue` | `DateValue` | - | Maximum selectable date. |
+| `startName` | `string` | - | Name used for the start date in HTML form submission. |
+| `endName` | `string` | - | Name used for the end date in HTML form submission. |
+| `children` | `ReactNode \| (values: DateRangePickerRenderProps) => ReactNode` | - | Composed content or render function. |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DateRangePickerRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+
+### Composition Parts
+
+| Component | Description |
+|-----------|-------------|
+| `DateRangePicker.Root` | Root date range picker container and state owner. |
+| `DateRangePicker.Trigger` | Trigger button, usually rendered inside `DateField.Suffix`. |
+| `DateRangePicker.TriggerIndicator` | Indicator slot with default calendar icon. |
+| `DateRangePicker.RangeSeparator` | Separator part between start and end date inputs. |
+| `DateRangePicker.Popover` | Popover wrapper for `RangeCalendar` content. |
+
+### Related packages
+- [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — date types (`CalendarDate`, `CalendarDateTime`, `ZonedDateTime`) and utilities used by all date components
+- [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — override locale for a subtree
+- [`useLocale`](https://react-aria.adobe.com/useLocale) — read the current locale and layout direction

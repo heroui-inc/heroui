@@ -45,6 +45,12 @@ export default () => (
 
 <RelatedComponents component="disclosure" />
 
+### Custom Render Function
+
+<ComponentPreview
+  name="disclosure-custom-render-function"
+/>
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -130,6 +136,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `isDisabled` | `boolean` | `false` | Whether the disclosure is disabled |
 | `children` | `ReactNode \| RenderFunction` | - | Content to render |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DisclosureRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ### DisclosureTrigger Props
 
@@ -138,12 +145,14 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Trigger content |
 | `className` | `string` | - | Additional CSS classes |
 
-### DisclosurePanel Props
+### DisclosureContent Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Content to show/hide |
 | `className` | `string` | - | Additional CSS classes |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DisclosureContentRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+
 
 ### RenderProps
 

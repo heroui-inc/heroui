@@ -362,6 +362,46 @@ type MyAvatarProps = Avatar["RootProps"];
 
 **Note:** The namespace syntax `Button.RootProps` is no longer supported. Use `Button["RootProps"]` or named imports instead.
 
+## Custom DOM Element
+
+Use the `render` prop on the following components to render a custom component in place of the default DOM element.
+
+For example, you can render a [Motion](https://motion.dev/) button and use the state to drive an animation.
+
+```tsx
+import {Button} from '@heroui/react';
+import {motion} from 'motion/react';
+
+<Button
+  render={(domProps, {isPressed}) => (
+    <motion.button
+      {...domProps}
+      animate={{scale: isPressed ? 0.9 : 1}} />
+  )}>
+  Press me
+</Button>
+```
+
+The `render` prop is also useful for rendering link components from client-side routers, or reusing existing presentational components.
+
+```tsx
+import {Link} from '@heroui/react';
+import NextLink from 'next/link';
+
+<Link
+  render={({ref, ...domProps}) => (
+    <NextLink {...domProps} ref={ref as React.Ref<HTMLAnchorElement>} href="/privacy-policy" />
+  )}
+>
+  Privacy Policy
+</Link>
+```
+
+Follow these rules to avoid breaking the behavior and accessibility of the component:
+- Always render the expected element type (e.g. if `<button>` is expected, do not render an `<a>`). You will see a warning in development if a mismatch is detected.
+- Only render a single root DOM element (no fragments).
+- Always pass the provided props the underlying DOM element, merging with your own props via `mergeProps` as needed.
+
 
 ## Framework Integration
 

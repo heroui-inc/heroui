@@ -97,8 +97,33 @@ const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * Switch Content
+ * -----------------------------------------------------------------------------------------------*/
+interface SwitchContentProps extends ComponentPropsWithRef<"div"> {}
+
+const SwitchContent = ({children, className, ...props}: SwitchContentProps) => {
+  const {slots} = useContext(SwitchContext);
+
+  return (
+    <div
+      className={composeSlotClassName(slots?.content, className)}
+      data-slot="switch-content"
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon};
+export {SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon, SwitchContent};
 
-export type {SwitchRootProps, SwitchControlProps, SwitchThumbProps, SwitchIconProps};
+export type {
+  SwitchRootProps,
+  SwitchControlProps,
+  SwitchThumbProps,
+  SwitchIconProps,
+  SwitchContentProps,
+};

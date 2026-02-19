@@ -101,10 +101,17 @@ function convertStorybookTitleToPath(title: string): string {
   // Remove emojis and trim whitespace
   const cleaned = title.replace(/[\u{1F300}-\u{1F9FF}]/gu, "").trim();
 
-  // Split by "/" and convert each part to lowercase, removing spaces
+  // Split by "/" and convert each part to kebab-case
   return cleaned
     .split("/")
-    .map((part) => part.toLowerCase().replace(/\s+/g, ""))
+    .map((part) =>
+      part
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, ""),
+    )
+    .filter(Boolean)
     .join("-");
 }
 
