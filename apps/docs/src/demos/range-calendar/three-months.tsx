@@ -23,11 +23,11 @@ export function ThreeMonths() {
   return (
     <RangeCalendar
       aria-label="Vacation planning"
-      className="@container-normal w-auto"
+      className="@container-normal w-auto overflow-x-auto"
       visibleDuration={{months: 3}}
     >
       <RangeCalendar.Heading className="sr-only" />
-      <div className="flex gap-7">
+      <div className="flex w-max gap-7">
         <div className="w-64">
           <RangeCalendar.Header>
             <RangeCalendar.NavButton slot="previous" />
