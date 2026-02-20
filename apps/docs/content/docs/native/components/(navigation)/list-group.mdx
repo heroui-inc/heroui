@@ -1,0 +1,398 @@
+---
+title: ListGroup
+description: A Surface-based container that groups related list items with consistent layout and spacing.
+icon: new
+links:
+  source_native: list-group/list-group.tsx
+  styles_native: list-group/list-group.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { ListGroup } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>...</ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>...</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>...</ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+- **ListGroup**: Surface-based root container that groups related list items. Supports all Surface variants (default, secondary, tertiary, transparent).
+- **ListGroup.Item**: Pressable horizontal flex-row container for a single item, providing consistent spacing and alignment.
+- **ListGroup.ItemPrefix**: Optional leading content slot for icons, avatars, or other visual elements.
+- **ListGroup.ItemContent**: Flex-1 wrapper for title and description, occupying the remaining horizontal space.
+- **ListGroup.ItemTitle**: Primary text label styled with foreground color and medium font weight.
+- **ListGroup.ItemDescription**: Secondary text styled with muted color and smaller font size.
+- **ListGroup.ItemSuffix**: Optional trailing content slot. Renders a chevron-right icon by default; accepts children to override the default icon.
+
+## Usage
+
+### Basic Usage
+
+The ListGroup component uses compound parts to create grouped list items with title and description.
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Personal Info</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        Name, email, phone number
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Payment Methods</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        Visa ending in 4829
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### With Icons
+
+Add leading icons using the `ListGroup.ItemPrefix` slot.
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="person-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Profile</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        Name, photo, bio
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="lock-closed-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Security</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        Password, 2FA
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### Title Only
+
+Omit `ListGroup.ItemDescription` to display title-only items.
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="wifi-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Wi-Fi</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="bluetooth-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Bluetooth</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### Surface Variant
+
+Apply a different visual variant to the root container.
+
+```tsx
+<ListGroup variant="transparent">
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Wi-Fi</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### Custom Suffix
+
+Override the default chevron icon by passing children to `ListGroup.ItemSuffix`.
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Language</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>English</ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix>
+      <Icon name="arrow-forward" size={18} />
+    </ListGroup.ItemSuffix>
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Notifications</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix>
+      <Chip variant="primary" color="danger">
+        <Chip.Label className="font-bold">7</Chip.Label>
+      </Chip>
+    </ListGroup.ItemSuffix>
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### Custom Suffix Icon Props
+
+Customise the default chevron icon size and color using `iconProps`.
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Storage</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        12.4 GB of 50 GB used
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix iconProps={{ size: 18, color: mutedColor }} />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### With PressableFeedback
+
+Wrap items with `PressableFeedback` to add scale and ripple press feedback animations. When using this pattern, pass `onPress` on `PressableFeedback` instead of `ListGroup.Item` and disable the item with `disabled` prop.
+
+```tsx
+import { ListGroup, PressableFeedback, Separator } from 'heroui-native';
+
+<ListGroup>
+  <PressableFeedback animation={false} onPress={() => {}}>
+    <PressableFeedback.Scale>
+      <ListGroup.Item disabled>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Appearance</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>
+            Theme, font size, display
+          </ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+    </PressableFeedback.Scale>
+    <PressableFeedback.Ripple />
+  </PressableFeedback>
+  <Separator className="mx-4" />
+  <PressableFeedback animation={false} onPress={() => {}}>
+    <PressableFeedback.Scale>
+      <ListGroup.Item disabled>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Notifications</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>
+            Alerts, sounds, badges
+          </ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+    </PressableFeedback.Scale>
+    <PressableFeedback.Ripple />
+  </PressableFeedback>
+</ListGroup>
+```
+
+## Example
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { ListGroup, Separator, useThemeColor } from 'heroui-native';
+import { View, Text } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export default function ListGroupExample() {
+  const mutedColor = useThemeColor('muted');
+
+  return (
+    <View className="flex-1 justify-center px-5">
+      <Text className="text-sm text-muted mb-2 ml-2">Account</Text>
+      <ListGroup className="mb-6">
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="person-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>Personal Info</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              Name, email, phone number
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix />
+        </ListGroup.Item>
+        <Separator className="mx-4" />
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="card-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>Payment Methods</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              Visa ending in 4829
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix />
+        </ListGroup.Item>
+      </ListGroup>
+      <Text className="text-sm text-muted mb-2 ml-2">Preferences</Text>
+      <ListGroup>
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="color-palette-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>Appearance</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              Theme, font size, display
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix />
+        </ListGroup.Item>
+        <Separator className="mx-4" />
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="notifications-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>Notifications</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              Alerts, sounds, badges
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix iconProps={{ size: 18, color: mutedColor }} />
+        </ListGroup.Item>
+      </ListGroup>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/list-group.tsx).
+
+## API Reference
+
+### ListGroup
+
+| prop           | type                                                       | default     | description                                        |
+| -------------- | ---------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode`                                          | -           | Children elements to be rendered inside the group  |
+| `variant`      | `'default' \| 'secondary' \| 'tertiary' \| 'transparent'` | `'default'` | Visual variant of the underlying Surface container |
+| `className`    | `string`                                                   | -           | Additional CSS classes for the root container      |
+| `...ViewProps` | `ViewProps`                                                | -           | All standard React Native View props are supported |
+
+### ListGroup.Item
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `children`          | `React.ReactNode` | -       | Children elements to be rendered inside the item        |
+| `className`         | `string`          | -       | Additional CSS classes for the item                     |
+| `...PressableProps` | `PressableProps`  | -       | All standard React Native Pressable props are supported |
+
+### ListGroup.ItemPrefix
+
+| prop           | type              | default | description                                            |
+| -------------- | ----------------- | ------- | ------------------------------------------------------ |
+| `children`     | `React.ReactNode` | -       | Leading content such as icons or avatars               |
+| `className`    | `string`          | -       | Additional CSS classes for the prefix                  |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported     |
+
+### ListGroup.ItemContent
+
+| prop           | type              | default | description                                            |
+| -------------- | ----------------- | ------- | ------------------------------------------------------ |
+| `children`     | `React.ReactNode` | -       | Content area, typically title and description          |
+| `className`    | `string`          | -       | Additional CSS classes for the content area            |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported     |
+
+### ListGroup.ItemTitle
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Title text or custom content                       |
+| `className`    | `string`          | -       | Additional CSS classes for the title               |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### ListGroup.ItemDescription
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Description text or custom content                 |
+| `className`    | `string`          | -       | Additional CSS classes for the description         |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### ListGroup.ItemSuffix
+
+| prop           | type                 | default | description                                                                        |
+| -------------- | -------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`    | -       | Custom trailing content; overrides the default chevron-right icon when provided    |
+| `className`    | `string`             | -       | Additional CSS classes for the suffix                                              |
+| `iconProps`    | `ListGroupIconProps` | -       | Props to customise the default chevron-right icon. Only applies when no children   |
+| `...ViewProps` | `ViewProps`          | -       | All standard React Native View props are supported                                 |
+
+#### ListGroupIconProps
+
+| prop    | type     | default             | description                        |
+| ------- | -------- | ------------------- | ---------------------------------- |
+| `size`  | `number` | `16`                | Size of the chevron icon in pixels |
+| `color` | `string` | theme `muted` color | Color of the chevron icon          |

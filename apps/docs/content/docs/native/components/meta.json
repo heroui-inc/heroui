@@ -22,6 +22,7 @@
     "(forms)/input",
     "(forms)/input-otp",
     "(forms)/label",
+    "(navigation)/list-group",
     "(overlays)/popover",
     "(utilities)/pressable-feedback",
     "(forms)/radio-group",
