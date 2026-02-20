@@ -78,98 +78,9 @@ This will automatically open the app in Expo Go if it's installed on your device
 
 This release introduces **3 new** components:
 
-- **[SearchField](/docs/native/components/search-field)**: Compound component for filtering and querying content with built-in search icon, clearable input, and auto-hide clear button.
-- **[ListGroup](/docs/native/components/list-group)**: Surface-based grouped list component with pressable items, prefix/suffix slots, and default chevron navigation indicator.
 - **[Slider](/docs/native/components/slider)**: Slider component with single-value and range modes, horizontal/vertical orientation, custom number formatting, and spring-animated thumb feedback.
-
-<NativeVideoPlayerView
-  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-light.mp4"
-  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-dark.mp4"
-/>
-
-#### SearchField
-
-The SearchField component provides a dedicated input for search and filtering scenarios, built with the same compound-component pattern used by TextField. It includes a search icon, clearable input, and an auto-hiding clear button that disappears when the input is empty.
-
-**Features:**
-
-- Compound sub-components: `SearchField.Group`, `SearchField.SearchIcon`, `SearchField.Input`, `SearchField.ClearButton`
-- `ClearButton` auto-hides when value is empty and clears search text on press
-- `SearchIcon` supports custom children to replace the default magnifying glass SVG
-- Validation state support with visual feedback
-- Disabled state support
-- Seamless integration with Label, Description, and FieldError
-
-**Usage:**
-
-```tsx
-import { Label, SearchField } from "heroui-native";
-
-export function Example() {
-  return (
-    <SearchField>
-      <Label>Search</Label>
-      <SearchField.Group>
-        <SearchField.SearchIcon />
-        <SearchField.Input placeholder="Search components..." />
-        <SearchField.ClearButton />
-      </SearchField.Group>
-    </SearchField>
-  );
-}
-```
-
-For complete documentation and examples, see the [SearchField component page](/docs/native/components/search-field).
-
-**Related PR:** [#299](https://github.com/heroui-inc/heroui-native/pull/299)
-
-#### ListGroup
-
-The ListGroup component renders grouped list items inside a Surface container, providing a polished navigation-list pattern commonly used in settings screens, menus, and content browsers. Each item supports prefix, content (title + description), and suffix slots with a default chevron-right navigation indicator.
-
-<NativeVideoPlayerView
-  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-light.mp4"
-  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-dark.mp4"
-/>
-
-**Features:**
-
-- Surface-based container with rounded corners and consistent spacing
-- Compound sub-components: `ListGroup.Item`, `ListGroup.ItemPrefix`, `ListGroup.ItemContent`, `ListGroup.ItemTitle`, `ListGroup.ItemDescription`, `ListGroup.ItemSuffix`
-- Default chevron-right icon in `ItemSuffix` via internal `ChevronRightIcon`
-- Pressable items with PressableFeedback integration
-- Fully customizable slots for icons, badges, and other content
-
-**Usage:**
-
-```tsx
-import { ListGroup } from "heroui-native";
-
-export function Example() {
-  return (
-    <ListGroup>
-      <ListGroup.Item onPress={() => console.log("Profile")}>
-        <ListGroup.ItemContent>
-          <ListGroup.ItemTitle>Profile</ListGroup.ItemTitle>
-          <ListGroup.ItemDescription>Manage your account</ListGroup.ItemDescription>
-        </ListGroup.ItemContent>
-        <ListGroup.ItemSuffix />
-      </ListGroup.Item>
-      <ListGroup.Item onPress={() => console.log("Settings")}>
-        <ListGroup.ItemContent>
-          <ListGroup.ItemTitle>Settings</ListGroup.ItemTitle>
-          <ListGroup.ItemDescription>App preferences</ListGroup.ItemDescription>
-        </ListGroup.ItemContent>
-        <ListGroup.ItemSuffix />
-      </ListGroup.Item>
-    </ListGroup>
-  );
-}
-```
-
-For complete documentation and examples, see the [ListGroup component page](/docs/native/components/list-group).
-
-**Related PR:** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+- **[ListGroup](/docs/native/components/list-group)**: Surface-based grouped list component with pressable items, prefix/suffix slots, and default chevron navigation indicator.
+- **[SearchField](/docs/native/components/search-field)**: Compound component for filtering and querying content with built-in search icon, clearable input, and auto-hide clear button.
 
 #### Slider
 
@@ -231,6 +142,95 @@ export function RangeSlider() {
 For complete documentation and examples, see the [Slider component page](/docs/native/components/slider).
 
 **Related PR:** [#305](https://github.com/heroui-inc/heroui-native/pull/305)
+
+#### ListGroup
+
+The ListGroup component renders grouped list items inside a Surface container, providing a polished navigation-list pattern commonly used in settings screens, menus, and content browsers. Each item supports prefix, content (title + description), and suffix slots with a default chevron-right navigation indicator.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Surface-based container with rounded corners and consistent spacing
+- Compound sub-components: `ListGroup.Item`, `ListGroup.ItemPrefix`, `ListGroup.ItemContent`, `ListGroup.ItemTitle`, `ListGroup.ItemDescription`, `ListGroup.ItemSuffix`
+- Default chevron-right icon in `ItemSuffix` via internal `ChevronRightIcon`
+- Pressable items with PressableFeedback integration
+- Fully customizable slots for icons, badges, and other content
+
+**Usage:**
+
+```tsx
+import { ListGroup } from "heroui-native";
+
+export function Example() {
+  return (
+    <ListGroup>
+      <ListGroup.Item onPress={() => console.log("Profile")}>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Profile</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>Manage your account</ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+      <ListGroup.Item onPress={() => console.log("Settings")}>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Settings</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>App preferences</ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+    </ListGroup>
+  );
+}
+```
+
+For complete documentation and examples, see the [ListGroup component page](/docs/native/components/list-group).
+
+**Related PR:** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+#### SearchField
+
+The SearchField component provides a dedicated input for search and filtering scenarios, built with the same compound-component pattern used by TextField. It includes a search icon, clearable input, and an auto-hiding clear button that disappears when the input is empty.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-components: `SearchField.Group`, `SearchField.SearchIcon`, `SearchField.Input`, `SearchField.ClearButton`
+- `ClearButton` auto-hides when value is empty and clears search text on press
+- `SearchIcon` supports custom children to replace the default magnifying glass SVG
+- Validation state support with visual feedback
+- Disabled state support
+- Seamless integration with Label, Description, and FieldError
+
+**Usage:**
+
+```tsx
+import { Label, SearchField } from "heroui-native";
+
+export function Example() {
+  return (
+    <SearchField>
+      <Label>Search</Label>
+      <SearchField.Group>
+        <SearchField.SearchIcon />
+        <SearchField.Input placeholder="Search components..." />
+        <SearchField.ClearButton />
+      </SearchField.Group>
+    </SearchField>
+  );
+}
+```
+
+For complete documentation and examples, see the [SearchField component page](/docs/native/components/search-field).
+
+**Related PR:** [#299](https://github.com/heroui-inc/heroui-native/pull/299)
 
 ### Select Multi-Selection Mode
 
