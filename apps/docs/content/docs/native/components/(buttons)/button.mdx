@@ -1,6 +1,7 @@
 ---
 title: Button
 description: Interactive component that triggers an action when pressed.
+icon: updated
 links:
   source_native: button/button.tsx
   styles_native: button/button.styles.ts
@@ -101,53 +102,82 @@ Choose from seven visual variants for different emphasis levels.
 
 ### Feedback Variants
 
-Choose between highlight, ripple, or no feedback effects for press interactions.
+The `feedbackVariant` prop controls which press feedback effects are rendered:
+
+- `'scale-highlight'` (default): Built-in scale + highlight overlay
+- `'scale-ripple'`: Built-in scale + ripple overlay
+- `'scale'`: Built-in scale only (no overlay)
+- `'none'`: No feedback animations at all
 
 ```tsx
-{
-  /* Highlight feedback (default) */
-}
-<Button pressableFeedbackVariant="highlight">Highlight Effect</Button>;
+{/* Scale + Highlight (default) */}
+<Button feedbackVariant="scale-highlight">Highlight Effect</Button>
 
-{
-  /* Ripple feedback */
-}
-<Button pressableFeedbackVariant="ripple">Ripple Effect</Button>;
+{/* Scale + Ripple */}
+<Button feedbackVariant="scale-ripple">Ripple Effect</Button>
 
-{
-  /* No feedback overlay (only scale animation) */
-}
-<Button pressableFeedbackVariant="none">No Overlay</Button>;
+{/* Scale only */}
+<Button feedbackVariant="scale">Scale Only</Button>
 
-{
-  /* Customize highlight animation */
-}
+{/* No feedback */}
+<Button feedbackVariant="none">No Feedback</Button>
+```
+
+### Custom Animation
+
+The `animation` prop controls individual sub-animations. Its shape depends on the `feedbackVariant`.
+
+```tsx
+{/* Customize scale and highlight (default feedbackVariant) */}
 <Button
-  pressableFeedbackVariant="highlight"
-  pressableFeedbackHighlightProps={{
-    animation: {
+  animation={{
+    scale: { value: 0.97 },
+    highlight: {
       backgroundColor: { value: '#3b82f6' },
       opacity: { value: [0, 0.2] },
     },
   }}
 >
   Custom Highlight
-</Button>;
+</Button>
 
-{
-  /* Customize ripple animation */
-}
+{/* Customize scale and ripple */}
 <Button
-  pressableFeedbackVariant="ripple"
-  pressableFeedbackRippleProps={{
-    animation: {
+  feedbackVariant="scale-ripple"
+  animation={{
+    scale: { value: 0.97 },
+    ripple: {
       backgroundColor: { value: '#3b82f6' },
       opacity: { value: [0, 0.3, 0] },
     },
   }}
 >
   Custom Ripple
-</Button>;
+</Button>
+```
+
+### Disable Individual Animations
+
+Disable specific sub-animations by setting them to `false`:
+
+```tsx
+{/* Disable scale, keep highlight */}
+<Button animation={{ scale: false }}>No Scale</Button>
+
+{/* Disable highlight, keep scale */}
+<Button animation={{ highlight: false }}>No Highlight</Button>
+
+{/* Disable both */}
+<Button animation={{ scale: false, highlight: false }}>No Animations</Button>
+```
+
+### Disable All Animations
+
+Use `animation={false}` to disable all feedback, or `animation="disable-all"` for cascading disable:
+
+```tsx
+<Button animation={false}>Disabled</Button>
+<Button animation="disable-all">Disable All (cascading)</Button>
 ```
 
 ### Loading State with Spinner
@@ -179,17 +209,15 @@ const themeColorAccentForeground = useThemeColor('accent-foreground');
 
 ### Custom Background with LinearGradient
 
-Add gradient backgrounds using absolute positioned elements. Use `pressableFeedbackVariant="none"` to disable the default highlight overlay, or add a custom ripple effect.
+Add gradient backgrounds using absolute positioned elements. Use `feedbackVariant="none"` to disable the default highlight overlay, or use `feedbackVariant="scale-ripple"` for a custom ripple effect.
 
 ```tsx
 import { Button, PressableFeedback } from 'heroui-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet } from 'react-native';
 
-{
-  /* Gradient with no feedback overlay */
-}
-<Button pressableFeedbackVariant="none">
+{/* Gradient with no feedback overlay */}
+<Button feedbackVariant="none">
   <LinearGradient
     colors={['#9333ea', '#ec4899']}
     start={{ x: 0, y: 0 }}
@@ -197,28 +225,28 @@ import { StyleSheet } from 'react-native';
     style={StyleSheet.absoluteFill}
   />
   <Button.Label className="text-white font-bold">Gradient</Button.Label>
-</Button>;
+</Button>
 
-{
-  /* Gradient with custom ripple effect */
-}
-<Button pressableFeedbackVariant="none">
+{/* Gradient with custom ripple effect */}
+<Button
+  feedbackVariant="scale-ripple"
+  animation={{
+    ripple: {
+      backgroundColor: { value: 'white' },
+      opacity: { value: [0, 0.5, 0] },
+    },
+  }}
+>
   <LinearGradient
     colors={['#0d9488', '#ec4899']}
     start={{ x: 0, y: 0 }}
     end={{ x: 1, y: 0 }}
     style={StyleSheet.absoluteFill}
   />
-  <PressableFeedback.Ripple
-    animation={{
-      backgroundColor: { value: 'white' },
-      opacity: { value: [0, 0.5, 0] },
-    }}
-  />
   <Button.Label className="text-white font-bold" pointerEvents="none">
     Gradient with Ripple
   </Button.Label>
-</Button>;
+</Button>
 ```
 
 ## Example
@@ -277,24 +305,61 @@ export default function ButtonExample() {
 }
 ```
 
-You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/button.tsx).
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/button.tsx>).
 
 ## API Reference
 
 ### Button
 
-Button extends all props from [PressableFeedback](./pressable-feedback) component with additional button-specific props.
+Button extends all props from [PressableFeedback](./pressable-feedback) (except `animation`, which is redefined) with additional button-specific props.
 
-| prop                              | type                                                                                          | default       | description                                                    |
-| --------------------------------- | --------------------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------- |
-| `variant`                         | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'`   | Visual variant of the button                                   |
-| `size`                            | `'sm' \| 'md' \| 'lg'`                                                                        | `'md'`        | Size of the button                                             |
-| `isIconOnly`                      | `boolean`                                                                                     | `false`       | Whether the button displays an icon only (square aspect ratio) |
-| `pressableFeedbackVariant`        | `'highlight' \| 'ripple' \| 'none'`                                                           | `'highlight'` | Variant of pressable feedback effect                           |
-| `pressableFeedbackHighlightProps` | `PressableFeedbackHighlightProps`                                                             | -             | Props for PressableFeedback.Highlight component                |
-| `pressableFeedbackRippleProps`    | `PressableFeedbackRippleProps`                                                                | -             | Props for PressableFeedback.Ripple component                   |
+| prop              | type                                                                                          | default             | description                                                    |
+| ----------------- | --------------------------------------------------------------------------------------------- | ------------------- | -------------------------------------------------------------- |
+| `variant`         | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'`         | Visual variant of the button                                   |
+| `size`            | `'sm' \| 'md' \| 'lg'`                                                                        | `'md'`              | Size of the button                                             |
+| `isIconOnly`      | `boolean`                                                                                     | `false`             | Whether the button displays an icon only (square aspect ratio) |
+| `feedbackVariant` | `'scale-highlight' \| 'scale-ripple' \| 'scale' \| 'none'`                                    | `'scale-highlight'` | Determines which feedback effects are rendered                 |
+| `animation`       | `ButtonAnimation`                                                                             | -                   | Animation configuration (shape depends on `feedbackVariant`)   |
 
-For inherited props including `animation` (for root scale animation), `isDisabled`, `className`, `children`, and all Pressable props, see [PressableFeedback API Reference](./pressable-feedback#api-reference).
+For inherited props including `isDisabled`, `className`, `children`, and all Pressable props, see [PressableFeedback API Reference](./pressable-feedback#api-reference).
+
+#### ButtonAnimation
+
+The `animation` prop is a discriminated union based on `feedbackVariant`. It follows the `AnimationRoot` control flow:
+
+- `true` or `undefined`: Use default animations
+- `false` or `"disabled"`: Disable all feedback animations
+- `"disable-all"`: Cascade-disable all animations including child compound parts
+- `object`: Custom configuration with sub-animation keys (see below)
+
+**When `feedbackVariant="scale-highlight"` (default):**
+
+| prop        | type                                     | default | description                                                  |
+| ----------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| `scale`     | `PressableFeedbackScaleAnimation`        | -       | Scale animation config (`false` to disable)                  |
+| `highlight` | `PressableFeedbackHighlightAnimation`    | -       | Highlight overlay config (`false` to disable)                |
+| `state`     | `'disabled' \| 'disable-all' \| boolean` | -       | Control animation state while keeping config (runtime toggle) |
+
+**When `feedbackVariant="scale-ripple"`:**
+
+| prop     | type                                     | default | description                                                  |
+| -------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| `scale`  | `PressableFeedbackScaleAnimation`        | -       | Scale animation config (`false` to disable)                  |
+| `ripple` | `PressableFeedbackRippleAnimation`       | -       | Ripple overlay config (`false` to disable)                   |
+| `state`  | `'disabled' \| 'disable-all' \| boolean` | -       | Control animation state while keeping config (runtime toggle) |
+
+**When `feedbackVariant="scale"`:**
+
+| prop    | type                                     | default | description                                                  |
+| ------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| `scale` | `PressableFeedbackScaleAnimation`        | -       | Scale animation config (`false` to disable)                  |
+| `state` | `'disabled' \| 'disable-all' \| boolean` | -       | Control animation state while keeping config (runtime toggle) |
+
+**When `feedbackVariant="none"`:**
+
+Only `'disable-all'` is accepted as a string value. All feedback effects are disabled.
+
+For detailed animation sub-types (`PressableFeedbackScaleAnimation`, `PressableFeedbackHighlightAnimation`, `PressableFeedbackRippleAnimation`), see [PressableFeedback API Reference](./pressable-feedback#api-reference).
 
 ### Button.Label
 

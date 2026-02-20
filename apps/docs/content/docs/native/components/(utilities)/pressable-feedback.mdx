@@ -1,6 +1,7 @@
 ---
 title: PressableFeedback
 description: Container component that provides visual feedback for press interactions with automatic scale animation.
+icon: updated
 links:
   source_native: pressable-feedback/pressable-feedback.tsx
   styles_native: pressable-feedback/pressable-feedback.styles.ts
@@ -18,19 +19,34 @@ links:
 import { PressableFeedback } from 'heroui-native';
 ```
 
+## Anatomy
+
+```tsx
+<PressableFeedback>
+  <PressableFeedback.Highlight />
+  <PressableFeedback.Ripple />
+  <PressableFeedback.Scale>...</PressableFeedback.Scale>
+</PressableFeedback>
+```
+
+- **PressableFeedback**: Pressable container with built-in scale animation. Manages press state and container dimensions, providing them to child compound parts via context. Use `animation={false}` to disable the built-in scale when using `PressableFeedback.Scale` instead.
+- **PressableFeedback.Scale**: Scale animation wrapper for applying scale to a specific child element. Use this instead of the root's built-in scale when you need control over which element scales or need to apply `className` / `style` to the scale wrapper.
+- **PressableFeedback.Highlight**: Highlight overlay for iOS-style press feedback. Renders an absolute-positioned layer that fades in on press.
+- **PressableFeedback.Ripple**: Ripple overlay for Android-style press feedback. Renders a radial gradient circle that expands from the touch point.
+
 ## Usage
 
-### Basic Usage
+### Basic
 
-The PressableFeedback component wraps content to provide press feedback effects. By default, it applies a subtle scale animation when pressed.
+PressableFeedback provides press-down scale feedback out of the box. This is the recommended way to use it in most cases.
 
 ```tsx
 <PressableFeedback>...</PressableFeedback>
 ```
 
-### Highlight Effect
+### With Highlight
 
-Add a highlight overlay component for iOS-style feedback effect. The highlight uses the root's press state from context.
+Add a highlight overlay for iOS-style feedback effect alongside the built-in scale.
 
 ```tsx
 <PressableFeedback>
@@ -39,9 +55,9 @@ Add a highlight overlay component for iOS-style feedback effect. The highlight u
 </PressableFeedback>
 ```
 
-### Ripple Effect
+### With Ripple
 
-Add a ripple overlay component for Android-style feedback effect that emanates from the press point.
+Add a ripple overlay for Android-style feedback effect alongside the built-in scale.
 
 ```tsx
 <PressableFeedback>
@@ -52,7 +68,7 @@ Add a ripple overlay component for Android-style feedback effect that emanates f
 
 ### Custom Scale Animation
 
-Customize or disable the default scale animation on press.
+Customize the built-in scale animation via the `animation.scale` prop. Accepts `value`, `timingConfig`, and `ignoreScaleCoefficient`.
 
 ```tsx
 <PressableFeedback
@@ -60,6 +76,7 @@ Customize or disable the default scale animation on press.
     scale: {
       value: 0.9,
       timingConfig: { duration: 150 },
+      ignoreScaleCoefficient: true,
     },
   }}
 >
@@ -75,8 +92,8 @@ Configure highlight overlay opacity and background color.
 <PressableFeedback>
   <PressableFeedback.Highlight
     animation={{
-      opacity: { value: [0, 0.2] },
       backgroundColor: { value: '#3b82f6' },
+      opacity: { value: [0, 0.2] },
     }}
   />
   ...
@@ -100,17 +117,54 @@ Configure ripple effect color, opacity, and duration.
 </PressableFeedback>
 ```
 
+### Scale on a Specific Child (PressableFeedback.Scale)
+
+When you need to apply the scale animation to a specific element inside the container rather than the root itself, disable the root's built-in scale with `animation={false}` and use the `PressableFeedback.Scale` compound part. This gives you full control over which element scales and lets you apply `className` / `style` directly to the scale wrapper.
+
+```tsx
+<PressableFeedback animation={false}>
+  <PressableFeedback.Scale>...</PressableFeedback.Scale>
+</PressableFeedback>
+```
+
+You can combine it with Highlight or Ripple inside the Scale wrapper:
+
+```tsx
+<PressableFeedback animation={false}>
+  <PressableFeedback.Scale>
+    <PressableFeedback.Highlight />
+    ...
+  </PressableFeedback.Scale>
+</PressableFeedback>
+```
+
+### Disable All Animations
+
+Set `animation="disable-all"` on the root to cascade-disable all animations including the built-in scale and any child compound parts (Scale, Highlight, Ripple).
+
+```tsx
+<PressableFeedback animation="disable-all">...</PressableFeedback>
+```
+
+You can also disable all animations while keeping a scale config (e.g. for toggling at runtime):
+
+```tsx
+<PressableFeedback animation={{ scale: { value: 0.97 }, state: 'disable-all' }}>
+  ...
+</PressableFeedback>
+```
+
 ## Example
 
 ```tsx
 import { PressableFeedback, Card, Button } from 'heroui-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 export default function PressableFeedbackExample() {
   return (
-    <PressableFeedback className="w-full aspect-square rounded-3xl">
+    <PressableFeedback className="w-full aspect-square overflow-auto">
       <Card className="flex-1">
         <Image
           source={{
@@ -156,36 +210,61 @@ export default function PressableFeedbackExample() {
 }
 ```
 
-You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/pressable-feedback.tsx).
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/pressable-feedback.tsx>).
 
 ## API Reference
 
 ### PressableFeedback
 
-| prop                    | type                             | default | description                                                  |
-| ----------------------- | -------------------------------- | ------- | ------------------------------------------------------------ |
-| `children`              | `React.ReactNode`                | -       | Content to be wrapped with press feedback                    |
-| `isDisabled`            | `boolean`                        | `false` | Whether the pressable component is disabled                  |
-| `className`             | `string`                         | -       | Additional CSS classes                                       |
-| `animation`             | `PressableFeedbackRootAnimation` | -       | Animation configuration for scale animation only             |
-| `isAnimatedStyleActive` | `boolean`                        | `true`  | Whether animated styles (react-native-reanimated) are active |
-| `...AnimatedProps`      | `AnimatedProps<PressableProps>`  | -       | All Reanimated Animated Pressable props are supported        |
+| prop                    | type                             | default | description                                                                                                 |
+| ----------------------- | -------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                | -       | Content to be wrapped with press feedback                                                                   |
+| `isDisabled`            | `boolean`                        | `false` | Whether the pressable component is disabled                                                                 |
+| `className`             | `string`                         | -       | Additional CSS classes                                                                                      |
+| `animation`             | `PressableFeedbackRootAnimation` | -       | Customize scale via `{ scale: ... }`, `false` to disable root scale, `'disable-all'` to cascade-disable all |
+| `isAnimatedStyleActive` | `boolean`                        | `true`  | Whether the root's built-in animated styles are active                                                      |
+| `...rest`               | `AnimatedProps<PressableProps>`  | -       | All Reanimated Animated Pressable props are supported                                                       |
 
 #### PressableFeedbackRootAnimation
 
-Animation configuration for PressableFeedback root component (scale only). Can be:
+The root animation prop supports the standard `AnimationRoot` control flow:
 
-- `false` or `"disabled"`: Disable only root animations
-- `"disable-all"`: Disable all animations including children
-- `true` or `undefined`: Use default animations
-- `object`: Custom animation configuration
+- `true` or `undefined`: Use the default built-in scale animation
+- `false` or `"disabled"`: Disable the root's built-in scale (use this when applying scale via `PressableFeedback.Scale` instead)
+- `"disable-all"`: Cascade-disable all animations including the built-in scale and children (Scale, Highlight, Ripple)
+- `object`: Custom configuration for the built-in scale
 
-| prop                           | type                                     | default                                              | description                                                                |
-| ------------------------------ | ---------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
-| `state`                        | `'disabled' \| 'disable-all' \| boolean` | -                                                    | Disable animations while customizing properties                            |
-| `scale.value`                  | `number`                                 | `0.985`                                              | Scale value when pressed (automatically adjusted based on container width) |
-| `scale.timingConfig`           | `WithTimingConfig`                       | `{ duration: 300, easing: Easing.out(Easing.ease) }` | Animation timing configuration                                             |
-| `scale.ignoreScaleCoefficient` | `boolean`                                | `false`                                              | Ignore automatic scale coefficient and use the scale value directly        |
+| prop    | type                                     | default | description                                                                     |
+| ------- | ---------------------------------------- | ------- | ------------------------------------------------------------------------------- |
+| `scale` | `PressableFeedbackScaleAnimation`        | -       | Customize the built-in scale animation (value, timingConfig, etc.)              |
+| `state` | `'disabled' \| 'disable-all' \| boolean` | -       | Control animation state while keeping configuration (e.g. for runtime toggling) |
+
+### PressableFeedback.Scale
+
+Use this compound part when you need to apply scale to a specific child element inside the container, instead of scaling the root itself. Set `animation={false}` on the root to disable its built-in scale when using this component.
+
+| prop                    | type                              | default | description                                                  |
+| ----------------------- | --------------------------------- | ------- | ------------------------------------------------------------ |
+| `className`             | `string`                          | -       | Additional CSS classes                                       |
+| `animation`             | `PressableFeedbackScaleAnimation` | -       | Animation configuration for scale effect                     |
+| `isAnimatedStyleActive` | `boolean`                         | `true`  | Whether animated styles (react-native-reanimated) are active |
+| `style`                 | `ViewStyle`                       | -       | Additional styles                                            |
+| `...AnimatedProps`      | `AnimatedProps<ViewProps>`        | -       | All Reanimated Animated View props are supported             |
+
+#### PressableFeedbackScaleAnimation
+
+Animation configuration for scale effect. Can be:
+
+- `false` or `"disabled"`: Disable scale animation
+- `true` or `undefined`: Use default scale animation
+- `object`: Custom scale configuration
+
+| prop                     | type                    | default                                              | description                                                                |
+| ------------------------ | ----------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| `state`                  | `'disabled' \| boolean` | -                                                    | Disable animations while customizing properties                            |
+| `value`                  | `number`                | `0.985`                                              | Scale value when pressed (automatically adjusted based on container width) |
+| `timingConfig`           | `WithTimingConfig`      | `{ duration: 300, easing: Easing.out(Easing.ease) }` | Animation timing configuration                                             |
+| `ignoreScaleCoefficient` | `boolean`               | `false`                                              | Ignore automatic scale coefficient and use the scale value directly        |
 
 ### PressableFeedback.Highlight
 
@@ -202,7 +281,6 @@ Animation configuration for PressableFeedback root component (scale only). Can b
 Animation configuration for highlight overlay. Can be:
 
 - `false` or `"disabled"`: Disable highlight animations
-- `"disable-all"`: Disable all animations including children
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
@@ -236,7 +314,6 @@ Animation configuration for highlight overlay. Can be:
 Animation configuration for ripple overlay. Can be:
 
 - `false` or `"disabled"`: Disable ripple animations
-- `"disable-all"`: Disable all animations including children
 - `true` or `undefined`: Use default animations
 - `object`: Custom animation configuration
 
