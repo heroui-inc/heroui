@@ -23,6 +23,7 @@ const COMPONENT_GROUPS = [
       "(forms)/input-otp",
       "(forms)/label",
       "(forms)/radio-group",
+      "(forms)/search-field",
       "(forms)/select",
       "(forms)/switch",
       "(forms)/text-area",

@@ -26,6 +26,7 @@
     "(utilities)/pressable-feedback",
     "(forms)/radio-group",
     "(utilities)/scroll-shadow",
+    "(forms)/search-field",
     "(forms)/select",
     "(layout)/separator",
     "(feedback)/skeleton",
