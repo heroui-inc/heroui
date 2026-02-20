@@ -13,6 +13,10 @@ const COMPONENT_GROUPS = [
     components: ["(buttons)/button", "(buttons)/close-button"],
   },
   {
+    category: "Controls",
+    components: ["(controls)/slider", "(controls)/switch"],
+  },
+  {
     category: "Forms",
     components: [
       "(forms)/checkbox",
@@ -23,15 +27,15 @@ const COMPONENT_GROUPS = [
       "(forms)/input-otp",
       "(forms)/label",
       "(forms)/radio-group",
+      "(forms)/search-field",
       "(forms)/select",
-      "(forms)/switch",
       "(forms)/text-area",
       "(forms)/text-field",
     ],
   },
   {
     category: "Navigation",
-    components: ["(navigation)/accordion", "(navigation)/tabs"],
+    components: ["(navigation)/accordion", "(navigation)/list-group", "(navigation)/tabs"],
   },
   {
     category: "Overlays",

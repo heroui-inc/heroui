@@ -1,0 +1,440 @@
+---
+title: RC 2
+description: SearchField, ListGroup, and Slider components, Select multi-selection mode, Button feedback API refactor, peer dependency relaxation
+github:
+  pull: 298
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">February 20, 2026</span>
+</div>
+
+RC 2 continues the march toward production readiness with three new components—SearchField, ListGroup, and Slider—and a powerful multi-selection mode for Select backed by type-safe generics. The Button feedback API has been refactored into a cleaner unified `feedbackVariant` + `animation` prop pattern, and peer dependency constraints are relaxed for broader compatibility with Expo SDK 55. Several Select and Avatar bug fixes round out the release.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the RC 2 improvements in action with our preview app! You can explore the new SearchField, ListGroup, and Slider components, Select multi-selection mode, the updated Button feedback API, and all the bug fixes directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## What's New
+
+### New Components
+
+This release introduces **3 new** components:
+
+- **[Slider](/docs/native/components/slider)**: Slider component with single-value and range modes, horizontal/vertical orientation, custom number formatting, and spring-animated thumb feedback.
+- **[ListGroup](/docs/native/components/list-group)**: Surface-based grouped list component with pressable items, prefix/suffix slots, and default chevron navigation indicator.
+- **[SearchField](/docs/native/components/search-field)**: Compound component for filtering and querying content with built-in search icon, clearable input, and auto-hide clear button.
+
+#### Slider
+
+The Slider component supports single-value and range (multi-thumb) modes, horizontal and vertical orientation, custom number formatting via `Intl.NumberFormat`, and spring-animated thumb feedback. The primitive layer handles all gesture and value logic independently, making it reusable for alternative styled implementations.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-components: `Slider.Output`, `Slider.Track`, `Slider.Fill`, `Slider.Thumb`
+- Range slider: pass an array as `defaultValue`/`value` and use a render-function on `Slider.Track` to render multiple thumbs
+- Vertical orientation via `orientation="vertical"`
+- Custom formatting with `formatOptions` accepting `Intl.NumberFormatOptions` (currency, percent, unit, etc.)
+- Gesture-handler-based drag and tap-to-position on track
+- Value clamping, stepping, and multi-thumb support
+- Spring-animated thumb scale via configurable `animation` prop
+- Accessibility: each thumb receives `role="slider"` with full `accessibilityValue` (min, max, now, text)
+- `useSlider` hook exposes slider context for advanced use cases
+
+**Usage:**
+
+```tsx
+import { Slider } from "heroui-native";
+
+export function BasicSlider() {
+  return (
+    <Slider defaultValue={50} minValue={0} maxValue={100}>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+  );
+}
+
+export function RangeSlider() {
+  return (
+    <Slider defaultValue={[20, 80]} minValue={0} maxValue={100}>
+      <Slider.Output />
+      <Slider.Track>
+        {({ thumbs }) => (
+          <>
+            <Slider.Fill />
+            {thumbs.map((_, i) => (
+              <Slider.Thumb key={i} index={i} />
+            ))}
+          </>
+        )}
+      </Slider.Track>
+    </Slider>
+  );
+}
+```
+
+For complete documentation and examples, see the [Slider component page](/docs/native/components/slider).
+
+**Related PR:** [#305](https://github.com/heroui-inc/heroui-native/pull/305)
+
+#### ListGroup
+
+The ListGroup component renders grouped list items inside a Surface container, providing a polished navigation-list pattern commonly used in settings screens, menus, and content browsers. Each item supports prefix, content (title + description), and suffix slots with a default chevron-right navigation indicator.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Surface-based container with rounded corners and consistent spacing
+- Compound sub-components: `ListGroup.Item`, `ListGroup.ItemPrefix`, `ListGroup.ItemContent`, `ListGroup.ItemTitle`, `ListGroup.ItemDescription`, `ListGroup.ItemSuffix`
+- Default chevron-right icon in `ItemSuffix` via internal `ChevronRightIcon`
+- Pressable items with PressableFeedback integration
+- Fully customizable slots for icons, badges, and other content
+
+**Usage:**
+
+```tsx
+import { ListGroup } from "heroui-native";
+
+export function Example() {
+  return (
+    <ListGroup>
+      <ListGroup.Item onPress={() => console.log("Profile")}>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Profile</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>Manage your account</ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+      <ListGroup.Item onPress={() => console.log("Settings")}>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Settings</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>App preferences</ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+    </ListGroup>
+  );
+}
+```
+
+For complete documentation and examples, see the [ListGroup component page](/docs/native/components/list-group).
+
+**Related PR:** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+#### SearchField
+
+The SearchField component provides a dedicated input for search and filtering scenarios, built with the same compound-component pattern used by TextField. It includes a search icon, clearable input, and an auto-hiding clear button that disappears when the input is empty.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-components: `SearchField.Group`, `SearchField.SearchIcon`, `SearchField.Input`, `SearchField.ClearButton`
+- `ClearButton` auto-hides when value is empty and clears search text on press
+- `SearchIcon` supports custom children to replace the default magnifying glass SVG
+- Validation state support with visual feedback
+- Disabled state support
+- Seamless integration with Label, Description, and FieldError
+
+**Usage:**
+
+```tsx
+import { Label, SearchField } from "heroui-native";
+
+export function Example() {
+  return (
+    <SearchField>
+      <Label>Search</Label>
+      <SearchField.Group>
+        <SearchField.SearchIcon />
+        <SearchField.Input placeholder="Search components..." />
+        <SearchField.ClearButton />
+      </SearchField.Group>
+    </SearchField>
+  );
+}
+```
+
+For complete documentation and examples, see the [SearchField component page](/docs/native/components/search-field).
+
+**Related PR:** [#299](https://github.com/heroui-inc/heroui-native/pull/299)
+
+### Select Multi-Selection Mode
+
+The [Select](/docs/native/components/select) component now supports multi-item selection via a new `selectionMode` prop. The `RootProps` type is now generic on `SelectionMode`, so TypeScript correctly resolves `value` and `onValueChange` types per mode—`SelectOption` for single, `SelectOption[]` for multiple.
+
+**Features:**
+
+- `selectionMode="multiple"` enables toggling multiple items; `closeOnPress` defaults to `false` in multiple mode
+- Type-safe generics: `RootProps<M>` resolves `value` and `onValueChange` types via `SelectValueType<M>`
+- `Select.Value` formats multiple labels as "Apple, Banana and Cherry" using `formatSelectedLabels`
+- Single mode remains fully backward-compatible (default)
+
+**Usage:**
+
+```tsx
+import { Select } from "heroui-native";
+
+export function MultiSelect() {
+  return (
+    <Select selectionMode="multiple">
+      <Select.Trigger>
+        <Select.Value placeholder="Select fruits..." />
+        <Select.TriggerIndicator />
+      </Select.Trigger>
+      <Select.Portal>
+        <Select.Content>
+          <Select.Item value="apple" label="Apple" />
+          <Select.Item value="banana" label="Banana" />
+          <Select.Item value="cherry" label="Cherry" />
+        </Select.Content>
+      </Select.Portal>
+    </Select>
+  );
+}
+```
+
+**Related PR:** [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+
+### New Subcomponents
+
+#### PressableFeedback.Scale
+
+A new compound sub-component for opt-in scale animation composability. `PressableFeedback.Scale` lets you add scale press animations to any pressable element—such as `ListGroup.Item`—without needing the root `PressableFeedback` to manage scale.
+
+**Usage:**
+
+```tsx
+import { PressableFeedback } from "heroui-native";
+
+<PressableFeedback.Scale>
+  <ListGroup.Item onPress={handlePress}>
+    {/* item content */}
+  </ListGroup.Item>
+</PressableFeedback.Scale>
+```
+
+**Related PR:** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+## Component Improvements
+
+### Select Trigger and State Fixes
+
+The [Select](/docs/native/components/select) component has been improved with several targeted fixes to the trigger and controllable state system.
+
+**Improvements:**
+
+- Custom `className` is now correctly forwarded to the trigger's style computation, resolving cases where user-provided classes were silently dropped
+- `useControllableState` now resets internal state when transitioning from controlled to uncontrolled, preventing stale selections from persisting
+- Trigger measures position via `onLayout` to properly support `isDefaultOpen`
+- Updated trigger styles to use `gap-3`, `py-3.5` padding, and `flex-1` on the value text for improved layout
+
+**Related PR:** [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+
+### Avatar asChild Image Fix
+
+The [Avatar](/docs/native/components/avatar) component's `AvatarImage` now correctly separates `source`, `style`, and `asChild` from rest props when forwarding to the underlying primitive, fixing an issue where all props were incorrectly spread to the image component when using `asChild`.
+
+**Related PR:** [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+
+## API Enhancements
+
+### Button Feedback API Refactor
+
+The [Button](/docs/native/components/button) component's pressable feedback API has been refactored into a unified, type-safe `feedbackVariant` + `animation` prop pattern, replacing the previous multi-prop approach.
+
+**New Capability:**
+
+```tsx
+import { Button } from "heroui-native";
+
+// Scale + highlight (default)
+<Button feedbackVariant="scale-highlight">Press me</Button>
+
+// Scale + ripple
+<Button feedbackVariant="scale-ripple">Press me</Button>
+
+// Scale only
+<Button feedbackVariant="scale">Press me</Button>
+
+// Custom animation configuration
+<Button
+  feedbackVariant="scale-highlight"
+  animation={{ scale: 0.95, highlight: { color: "rgba(0,0,0,0.1)" } }}
+>
+  Press me
+</Button>
+```
+
+The `animation` prop is a discriminated union typed per variant, providing full type-safety for each feedback configuration.
+
+New utility helpers `resolveAnimationObject` and `isAnimationDisabled` in `button.utils.ts` centralise animation prop resolution.
+
+**Related PR:** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+## Dependencies
+
+### Relaxed Peer Dependency Constraints
+
+Peer dependency version constraints have been relaxed to use caret (`^`) and range (`>=`) specifiers instead of restrictive tilde (`~`) or pinned versions. This improves compatibility for consumers on newer dependency versions, particularly those using Expo SDK 55.
+
+**Changes:**
+
+- `react-native-reanimated`: `~4.1.1` → `^4.1.1` (allows minor updates)
+- `react-native-safe-area-context`: `~5.6.0` → `^5.6.0` (allows minor updates)
+- `react-native-svg`: `15.12.1` → `^15.12.1` (allows patch/minor updates)
+- `react-native-worklets`: `0.5.1` → `>=0.5.1` (allows any version 0.5.1+)
+
+No runtime code changes are included—existing projects with previously valid versions continue to work without modification.
+
+**Related PR:** [#306](https://github.com/heroui-inc/heroui-native/pull/306)
+
+## ⚠️ Breaking Changes
+
+### Button Feedback API
+
+The `pressableFeedbackVariant`, `pressableFeedbackHighlightProps`, and `pressableFeedbackRippleProps` props on Button have been removed. Consumers must migrate to `feedbackVariant` and the unified `animation` prop.
+
+**Migration:**
+
+Update all Button feedback prop usages:
+
+```tsx
+// Before
+<Button
+  pressableFeedbackVariant="highlight"
+  pressableFeedbackHighlightProps={{ color: "rgba(0,0,0,0.1)" }}
+>
+  Press me
+</Button>
+
+// After
+<Button
+  feedbackVariant="scale-highlight"
+  animation={{ scale: 0.95, highlight: { color: "rgba(0,0,0,0.1)" } }}
+>
+  Press me
+</Button>
+```
+
+**Variant mapping:**
+
+- `"highlight"` → `"scale-highlight"` (default)
+- `"ripple"` → `"scale-ripple"`
+- `"none"` → `"scale"` or `"none"`
+
+**Available options:**
+
+- `"scale-highlight"` - Scale down with highlight overlay (default)
+- `"scale-ripple"` - Scale down with ripple effect
+- `"scale"` - Scale down only
+- `"none"` - No feedback animation
+
+**Related PR:** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #291](https://github.com/heroui-inc/heroui-native/issues/291)**: Fixed `Select.Trigger` variant prop being overwritten by `className`. Custom class names passed to the trigger are now correctly forwarded to the style computation instead of being silently dropped.
+
+- **[Issue #294](https://github.com/heroui-inc/heroui-native/issues/294)**: Resolved compatibility with `react-native-worklets` 0.7.x and `react-native-reanimated` 4.2.x (Expo SDK 55). Peer dependency constraints have been relaxed to accept these newer versions without producing resolution warnings.
+
+**Related PRs:**
+
+- [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+- [#306](https://github.com/heroui-inc/heroui-native/pull/306)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [SearchField](/docs/native/components/search-field) - New component documentation with usage examples and API reference
+- [ListGroup](/docs/native/components/list-group) - New component documentation with usage examples and API reference
+- [Slider](/docs/native/components/slider) - New component documentation with usage examples and API reference
+- [Select](/docs/native/components/select) - Multi-selection mode, trigger className fix, and controllable state improvements
+- [Button](/docs/native/components/button) - Updated feedback API documentation with new `feedbackVariant` and `animation` props
+- [Avatar](/docs/native/components/avatar) - Fixed `asChild` image prop spreading documentation
+- [PressableFeedback](/docs/native/components/pressable-feedback) - New `PressableFeedback.Scale` subcomponent documentation
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!

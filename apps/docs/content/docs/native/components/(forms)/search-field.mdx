@@ -1,0 +1,242 @@
+---
+title: SearchField
+description: A compound search input for filtering and querying content.
+icon: new
+links:
+  source_native: search-field/search-field.tsx
+  styles_native: search-field/search-field.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { SearchField } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<SearchField value={value} onChange={onChange}>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+</SearchField>
+```
+
+- **SearchField**: Root container that accepts `value` and `onChange`, providing them to children via context. Also provides form field state (isDisabled, isInvalid, isRequired) and animation settings.
+- **SearchField.Group**: Flex-row container that positions the search icon, input, and clear button horizontally.
+- **SearchField.SearchIcon**: Magnifying glass icon positioned absolutely on the left side of the input. Supports custom children to replace the default icon.
+- **SearchField.Input**: Wraps the Input component with search-specific defaults. Reads `value` and `onChangeText` from the SearchField context automatically.
+- **SearchField.ClearButton**: Small icon-only button to clear the search input. Automatically hidden when value is empty. Calls `onChange("")` from context on press.
+
+## Usage
+
+### Basic Usage
+
+The SearchField component uses compound parts to create a search input. Pass `value` and `onChange` to the root; the Input and ClearButton consume them via context.
+
+```tsx
+<SearchField value={searchValue} onChange={setSearchValue}>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+</SearchField>
+```
+
+### With Label and Description
+
+Add a Label and Description outside the Group to provide context for the search field.
+
+```tsx
+<SearchField value={searchValue} onChange={setSearchValue}>
+  <Label>Find products</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+  <Description>Search by name, category, or SKU</Description>
+</SearchField>
+```
+
+### With Validation
+
+Use `isInvalid` and `isRequired` on the root to control validation state. Pair with FieldError to display error messages.
+
+```tsx
+<SearchField
+  value={searchValue}
+  onChange={setSearchValue}
+  isRequired
+  isInvalid={isInvalid}
+>
+  <Label>Search users</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+  <Description hideOnInvalid>Enter at least 3 characters to search</Description>
+  <FieldError>No results found. Please try a different search term.</FieldError>
+</SearchField>
+```
+
+### Custom Search Icon
+
+Replace the default magnifying glass icon by passing children to `SearchField.SearchIcon`.
+
+```tsx
+<SearchField value={searchValue} onChange={setSearchValue}>
+  <SearchField.Group>
+    <SearchField.SearchIcon>
+      <Text className="text-base">🔍</Text>
+    </SearchField.SearchIcon>
+    <SearchField.Input className="pl-10" />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+</SearchField>
+```
+
+### Disabled
+
+Set `isDisabled` on the root to disable all child components via context.
+
+```tsx
+<SearchField value="Previous query" isDisabled>
+  <Label>Disabled search</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+  </SearchField.Group>
+  <Description>Search is temporarily unavailable</Description>
+</SearchField>
+```
+
+## Example
+
+```tsx
+import { Description, Label, SearchField } from 'heroui-native';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+export default function SearchFieldExample() {
+  const [searchValue, setSearchValue] = useState('');
+
+  return (
+    <View className="px-5">
+      <SearchField value={searchValue} onChange={setSearchValue}>
+        <Label>Find products</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+        <Description>Search by name, category, or SKU</Description>
+      </SearchField>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/search-field.tsx>).
+
+## API Reference
+
+### SearchField
+
+| prop           | type                      | default | description                                              |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `children`     | `React.ReactNode`         | -       | Children elements to be rendered inside the search field |
+| `value`        | `string`                  | -       | Controlled search text value                             |
+| `onChange`     | `(value: string) => void` | -       | Callback fired when the search text changes              |
+| `isDisabled`   | `boolean`                 | `false` | Whether the search field is disabled                     |
+| `isInvalid`    | `boolean`                 | `false` | Whether the search field is in an invalid state          |
+| `isRequired`   | `boolean`                 | `false` | Whether the search field is required                     |
+| `className`    | `string`                  | -       | Additional CSS classes                                   |
+| `animation`    | `AnimationRootDisableAll` | -       | Animation configuration for the search field             |
+| `...ViewProps` | `ViewProps`               | -       | All standard React Native View props are supported       |
+
+#### AnimationRootDisableAll
+
+Animation configuration for the SearchField root component. Can be:
+
+- `"disable-all"`: Disable all animations including children (cascades down)
+- `undefined`: Use default animations
+
+### SearchField.Group
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Children elements to be rendered inside the group  |
+| `className`    | `string`          | -       | Additional CSS classes                             |
+| `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported |
+
+### SearchField.SearchIcon
+
+| prop           | type                             | default | description                                                                        |
+| -------------- | -------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                | -       | Custom content to replace the default search icon                                  |
+| `className`    | `string`                         | -       | Additional CSS classes                                                             |
+| `iconProps`    | `SearchFieldSearchIconIconProps` | -       | Props for customizing the default search icon (ignored when children are provided) |
+| `...ViewProps` | `ViewProps`                      | -       | All standard React Native View props are supported                                 |
+
+#### SearchFieldSearchIconIconProps
+
+| prop    | type     | default             | description       |
+| ------- | -------- | ------------------- | ----------------- |
+| `size`  | `number` | `16`                | Size of the icon  |
+| `color` | `string` | Theme `muted` color | Color of the icon |
+
+### SearchField.Input
+
+Extends [Input](./input) props with search-specific defaults (`placeholder="Search..."`, `returnKeyType="search"`, `accessibilityRole="search"`). Omits `value` and `onChangeText` because they are provided by the SearchField context.
+
+### SearchField.ClearButton
+
+Automatically hidden when the controlled `value` is an empty string. Calls `onChange("")` from context on press. Additional `onPress` handlers passed via props are called after clearing.
+
+| prop             | type                              | default | description                                      |
+| ---------------- | --------------------------------- | ------- | ------------------------------------------------ |
+| `children`       | `React.ReactNode`                 | -       | Custom content to replace the default close icon |
+| `iconProps`      | `SearchFieldClearButtonIconProps` | -       | Props for customizing the clear button icon      |
+| `className`      | `string`                          | -       | Additional CSS classes                           |
+| `...ButtonProps` | `ButtonRootProps`                 | -       | All Button root props are supported              |
+
+#### SearchFieldClearButtonIconProps
+
+| prop    | type     | default             | description       |
+| ------- | -------- | ------------------- | ----------------- |
+| `size`  | `number` | `14`                | Size of the icon  |
+| `color` | `string` | Theme `muted` color | Color of the icon |
+
+## Hooks
+
+### useSearchField
+
+Hook to access the search field state from context. Must be used within a `SearchField` component.
+
+```tsx
+import { useSearchField } from 'heroui-native';
+
+const { value, onChange, isDisabled, isInvalid, isRequired } = useSearchField();
+```
+
+#### Returns
+
+| property     | type                                     | description                                     |
+| ------------ | ---------------------------------------- | ----------------------------------------------- |
+| `value`      | `string \| undefined`                    | Current controlled search text value            |
+| `onChange`   | `((value: string) => void) \| undefined` | Callback to update the search text              |
+| `isDisabled` | `boolean`                                | Whether the search field is disabled            |
+| `isInvalid`  | `boolean`                                | Whether the search field is in an invalid state |
+| `isRequired` | `boolean`                                | Whether the search field is required            |

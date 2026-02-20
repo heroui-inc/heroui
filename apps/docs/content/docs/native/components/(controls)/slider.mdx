@@ -1,0 +1,359 @@
+---
+title: Slider
+description: A draggable input for selecting a value or range within a bounded interval.
+icon: new
+links:
+  source_native: slider/slider.tsx
+  styles_native: slider/slider.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Slider } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Slider>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+- **Slider**: Main container that manages slider value state, orientation, and provides context to all sub-components. Supports single value and range modes.
+- **Slider.Output**: Optional display of the current value(s). Supports render functions for custom formatting. Shows a formatted value label by default.
+- **Slider.Track**: Sizing container for Fill and Thumb elements. Reports its layout size for position calculations. Supports tap-to-position and render-function children for dynamic content (e.g. multiple thumbs for range sliders).
+- **Slider.Fill**: Responsive fill bar that stretches the full cross-axis of the Track. Only the main-axis position and size are computed.
+- **Slider.Thumb**: Draggable thumb element using react-native-gesture-handler. Centered on the cross-axis by the Track layout. Animates scale on press via react-native-reanimated. Each thumb gets `role="slider"` with full `accessibilityValue`.
+
+## Usage
+
+### Basic Usage
+
+The Slider component uses compound parts to create a draggable value input.
+
+```tsx
+<Slider defaultValue={30}>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### With Label and Output
+
+Display a label alongside the current value output.
+
+```tsx
+<Slider defaultValue={50}>
+  <View className="flex-row items-center justify-between">
+    <Label>Volume</Label>
+    <Slider.Output />
+  </View>
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### Vertical Orientation
+
+Render the slider vertically by setting `orientation` to `"vertical"`.
+
+```tsx
+<View className="h-48">
+  <Slider defaultValue={50} orientation="vertical">
+    <Slider.Track>
+      <Slider.Fill />
+      <Slider.Thumb />
+    </Slider.Track>
+  </Slider>
+</View>
+```
+
+### Range Slider
+
+Pass an array as the value and use a render function on `Slider.Track` to create multiple thumbs.
+
+```tsx
+<Slider
+  defaultValue={[200, 800]}
+  minValue={0}
+  maxValue={1000}
+  step={10}
+  formatOptions={{ style: 'currency', currency: 'USD' }}
+>
+  <View className="flex-row items-center justify-between">
+    <Label>Price range</Label>
+    <Slider.Output />
+  </View>
+  <Slider.Track>
+    {({ state }) => (
+      <>
+        <Slider.Fill />
+        {state.values.map((_, i) => (
+          <Slider.Thumb key={i} index={i} />
+        ))}
+      </>
+    )}
+  </Slider.Track>
+</Slider>
+```
+
+### Controlled Value
+
+Use `value` and `onChange` for controlled mode. The `onChangeEnd` callback fires when a drag or tap interaction completes.
+
+```tsx
+const [volume, setVolume] = useState(50);
+
+<Slider value={volume} onChange={setVolume} onChangeEnd={(v) => save(v)}>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>;
+```
+
+### Custom Styling
+
+Apply custom styles using `className`, `classNames`, or `styles` on the thumb and other sub-components.
+
+```tsx
+<Slider defaultValue={65}>
+  <Slider.Track className="h-3 rounded-full bg-success/10">
+    <Slider.Fill className="rounded-full bg-success" />
+    <Slider.Thumb
+      classNames={{
+        thumbContainer: 'size-6 rounded-full bg-success',
+        thumbKnob: 'bg-success-foreground rounded-full',
+      }}
+      animation={{
+        scale: { value: [1, 0.7] },
+      }}
+    />
+  </Slider.Track>
+</Slider>
+```
+
+### Disabled
+
+Disable the entire slider to prevent interaction.
+
+```tsx
+<Slider defaultValue={40} isDisabled>
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+## Example
+
+```tsx
+import { Label, Slider } from 'heroui-native';
+import { useState } from 'react';
+import { View, Text } from 'react-native';
+
+export default function SliderExample() {
+  const [price, setPrice] = useState<number[]>([200, 800]);
+
+  return (
+    <View className="px-8 gap-8">
+      <Slider defaultValue={30}>
+        <View className="flex-row items-center justify-between">
+          <Label>Volume</Label>
+          <Slider.Output />
+        </View>
+        <Slider.Track>
+          <Slider.Fill />
+          <Slider.Thumb />
+        </Slider.Track>
+      </Slider>
+
+      <Slider
+        value={price}
+        onChange={setPrice}
+        minValue={0}
+        maxValue={1000}
+        step={10}
+        formatOptions={{ style: 'currency', currency: 'USD' }}
+      >
+        <View className="flex-row items-center justify-between">
+          <Label>Price range</Label>
+          <Slider.Output />
+        </View>
+        <Slider.Track>
+          {({ state }) => (
+            <>
+              <Slider.Fill />
+              {state.values.map((_, i) => (
+                <Slider.Thumb key={i} index={i} />
+              ))}
+            </>
+          )}
+        </Slider.Track>
+      </Slider>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/beta/example/src/app/(home)/components/slider.tsx>).
+
+## API Reference
+
+### Slider
+
+| prop            | type                                  | default        | description                                                     |
+| --------------- | ------------------------------------- | -------------- | --------------------------------------------------------------- |
+| `children`      | `React.ReactNode`                     | -              | Children elements to be rendered inside the slider              |
+| `value`         | `number \| number[]`                  | -              | Current slider value (controlled mode)                          |
+| `defaultValue`  | `number \| number[]`                  | `0`            | Default slider value (uncontrolled mode)                        |
+| `minValue`      | `number`                              | `0`            | Minimum value of the slider                                     |
+| `maxValue`      | `number`                              | `100`          | Maximum value of the slider                                     |
+| `step`          | `number`                              | `1`            | Step increment for the slider                                   |
+| `formatOptions` | `Intl.NumberFormatOptions`            | -              | Number format options for value label formatting                |
+| `orientation`   | `'horizontal' \| 'vertical'`          | `'horizontal'` | Orientation of the slider                                       |
+| `isDisabled`    | `boolean`                             | `false`        | Whether the slider is disabled                                  |
+| `className`     | `string`                              | -              | Additional CSS classes                                          |
+| `animation`     | `AnimationRootDisableAll`             | -              | Animation configuration for the slider                          |
+| `onChange`      | `(value: number \| number[]) => void` | -              | Callback fired when the slider value changes during interaction |
+| `onChangeEnd`   | `(value: number \| number[]) => void` | -              | Callback fired when an interaction completes (drag end or tap)  |
+| `...ViewProps`  | `ViewProps`                           | -              | All standard React Native View props are supported              |
+
+#### AnimationRootDisableAll
+
+Animation configuration for the slider root component. Can be:
+
+- `"disable-all"`: Disable all animations including children
+- `undefined`: Use default animations
+
+### Slider.Output
+
+| prop           | type                                                                 | default | description                                                                                 |
+| -------------- | -------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode \| ((props: SliderRenderProps) => React.ReactNode)` | -       | Custom content or render function receiving slider state. Defaults to formatted value label |
+| `className`    | `string`                                                             | -       | Additional CSS classes                                                                      |
+| `...ViewProps` | `ViewProps`                                                          | -       | All standard React Native View props are supported                                          |
+
+#### SliderRenderProps
+
+| prop          | type                | description                    |
+| ------------- | ------------------- | ------------------------------ |
+| `state`       | `SliderState`       | Current slider state           |
+| `orientation` | `SliderOrientation` | Orientation of the slider      |
+| `isDisabled`  | `boolean`           | Whether the slider is disabled |
+
+#### SliderState
+
+| prop                 | type                        | description                                    |
+| -------------------- | --------------------------- | ---------------------------------------------- |
+| `values`             | `number[]`                  | Current slider value(s) by thumb index         |
+| `getThumbValueLabel` | `(index: number) => string` | Returns the formatted string label for a thumb |
+
+### Slider.Track
+
+| prop           | type                                                                 | default | description                                                                   |
+| -------------- | -------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode \| ((props: SliderRenderProps) => React.ReactNode)` | -       | Content or render function receiving slider state for dynamic thumb rendering |
+| `className`    | `string`                                                             | -       | Additional CSS classes                                                        |
+| `hitSlop`      | `number`                                                             | `8`     | Extra touch area around the track                                             |
+| `...ViewProps` | `ViewProps`                                                          | -       | All standard React Native View props are supported                            |
+
+### Slider.Fill
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `className`    | `string`    | -       | Additional CSS classes                             |
+| `...ViewProps` | `ViewProps` | -       | All standard React Native View props are supported |
+
+### Slider.Thumb
+
+| prop           | type                                     | default | description                                        |
+| -------------- | ---------------------------------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode`                        | -       | Custom thumb content. Defaults to an animated knob |
+| `index`        | `number`                                 | `0`     | Index of this thumb within the slider              |
+| `isDisabled`   | `boolean`                                | -       | Whether this individual thumb is disabled          |
+| `className`    | `string`                                 | -       | Additional CSS classes for the thumb container     |
+| `classNames`   | `ElementSlots<ThumbSlots>`               | -       | Additional CSS classes for thumb slots             |
+| `styles`       | `Partial<Record<ThumbSlots, ViewStyle>>` | -       | Inline styles for thumb slots                      |
+| `hitSlop`      | `number`                                 | `12`    | Extra touch area around the thumb                  |
+| `animation`    | `SliderThumbAnimation`                   | -       | Animation configuration for the thumb knob         |
+| `...ViewProps` | `ViewProps`                              | -       | All standard React Native View props are supported |
+
+#### ElementSlots\<ThumbSlots\>
+
+| prop             | type     | description                                     |
+| ---------------- | -------- | ----------------------------------------------- |
+| `thumbContainer` | `string` | Custom class name for the outer thumb container |
+| `thumbKnob`      | `string` | Custom class name for the inner thumb knob      |
+
+#### styles
+
+| prop             | type        | description                          |
+| ---------------- | ----------- | ------------------------------------ |
+| `thumbContainer` | `ViewStyle` | Styles for the outer thumb container |
+| `thumbKnob`      | `ViewStyle` | Styles for the inner thumb knob      |
+
+#### SliderThumbAnimation
+
+Animation configuration for the thumb knob scale effect. Can be:
+
+- `false` or `"disabled"`: Disable thumb animation
+- `undefined`: Use default animations
+- `object`: Custom scale animation configuration
+
+| prop                 | type               | default                                      | description                                     |
+| -------------------- | ------------------ | -------------------------------------------- | ----------------------------------------------- |
+| `scale.value`        | `[number, number]` | `[1, 0.9]`                                   | Scale values [idle, dragging]                   |
+| `scale.springConfig` | `WithSpringConfig` | `{ damping: 15, stiffness: 200, mass: 0.5 }` | Spring animation configuration for scale effect |
+
+## Hooks
+
+### useSlider
+
+Hook to access the slider context. Must be used within a `Slider` component.
+
+```tsx
+import { useSlider } from 'heroui-native';
+
+const { values, orientation, isDisabled, getThumbValueLabel } = useSlider();
+```
+
+#### Returns
+
+| property             | type                                         | description                                                    |
+| -------------------- | -------------------------------------------- | -------------------------------------------------------------- |
+| `values`             | `number[]`                                   | Current slider values (one per thumb)                          |
+| `minValue`           | `number`                                     | Minimum value of the slider                                    |
+| `maxValue`           | `number`                                     | Maximum value of the slider                                    |
+| `step`               | `number`                                     | Step increment                                                 |
+| `orientation`        | `'horizontal' \| 'vertical'`                 | Current orientation                                            |
+| `isDisabled`         | `boolean`                                    | Whether the slider is disabled                                 |
+| `formatOptions`      | `Intl.NumberFormatOptions \| undefined`      | Number format options for labels                               |
+| `getThumbPercent`    | `(index: number) => number`                  | Returns the percentage position (0–1) for a given thumb index  |
+| `getThumbValueLabel` | `(index: number) => string`                  | Returns the formatted label for a given thumb index            |
+| `getThumbMinValue`   | `(index: number) => number`                  | Returns the minimum allowed value for a thumb                  |
+| `getThumbMaxValue`   | `(index: number) => number`                  | Returns the maximum allowed value for a thumb                  |
+| `updateValue`        | `(index: number, newValue: number) => void`  | Updates a thumb value by index                                 |
+| `isThumbDragging`    | `(index: number) => boolean`                 | Returns whether a given thumb is currently being dragged       |
+| `setThumbDragging`   | `(index: number, dragging: boolean) => void` | Sets the dragging state of a thumb                             |
+| `trackSize`          | `number`                                     | Track layout width (horizontal) or height (vertical) in pixels |
+| `thumbSize`          | `number`                                     | Measured thumb size (main-axis dimension) in pixels            |
