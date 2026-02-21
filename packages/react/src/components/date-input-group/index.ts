@@ -2,6 +2,7 @@ import type {ComponentProps} from "react";
 
 import {
   DateInputGroupInput,
+  DateInputGroupInputContainer,
   DateInputGroupPrefix,
   DateInputGroupRoot,
   DateInputGroupSegment,
@@ -14,6 +15,7 @@ import {
 export const DateInputGroup = Object.assign(DateInputGroupRoot, {
   Root: DateInputGroupRoot,
   Input: DateInputGroupInput,
+  InputContainer: DateInputGroupInputContainer,
   Segment: DateInputGroupSegment,
   Prefix: DateInputGroupPrefix,
   Suffix: DateInputGroupSuffix,
@@ -23,6 +25,7 @@ export type DateInputGroup = {
   Props: ComponentProps<typeof DateInputGroupRoot>;
   RootProps: ComponentProps<typeof DateInputGroupRoot>;
   InputProps: ComponentProps<typeof DateInputGroupInput>;
+  InputContainerProps: ComponentProps<typeof DateInputGroupInputContainer>;
   SegmentProps: ComponentProps<typeof DateInputGroupSegment>;
   PrefixProps: ComponentProps<typeof DateInputGroupPrefix>;
   SuffixProps: ComponentProps<typeof DateInputGroupSuffix>;
@@ -33,6 +36,7 @@ export type DateInputGroup = {
  * -----------------------------------------------------------------------------------------------*/
 export {
   DateInputGroupInput,
+  DateInputGroupInputContainer,
   DateInputGroupPrefix,
   DateInputGroupRoot,
   DateInputGroupSegment,
@@ -43,6 +47,7 @@ export type {
   DateInputGroupRootProps,
   DateInputGroupRootProps as DateInputGroupProps,
   DateInputGroupInputProps,
+  DateInputGroupInputContainerProps,
   DateInputGroupSegmentProps,
   DateInputGroupPrefixProps,
   DateInputGroupSuffixProps,

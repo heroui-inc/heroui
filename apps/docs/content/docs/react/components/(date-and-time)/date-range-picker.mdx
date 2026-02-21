@@ -31,13 +31,15 @@ export default () => (
   <DateRangePicker>
     <Label />
     <DateField.Group>
-      <DateField.Input slot="start">
-        {(segment) => <DateField.Segment segment={segment} />}
-      </DateField.Input>
-      <DateRangePicker.RangeSeparator />
-      <DateField.Input slot="end">
-        {(segment) => <DateField.Segment segment={segment} />}
-      </DateField.Input>
+      <DateField.InputContainer>
+        <DateField.Input slot="start">
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateRangePicker.RangeSeparator />
+        <DateField.Input slot="end">
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+      </DateField.InputContainer>
       <DateField.Suffix>
         <DateRangePicker.Trigger>
           <DateRangePicker.TriggerIndicator />
@@ -130,13 +132,15 @@ function CustomDateRangePicker() {
     <DateRangePicker className="w-[360px] gap-2">
       <Label className="text-sm font-semibold">Trip dates</Label>
       <DateField.Group className="rounded-xl border border-border/60 bg-surface" fullWidth variant="secondary">
-        <DateField.Input slot="start">
-          {(segment) => <DateField.Segment segment={segment} />}
-        </DateField.Input>
-        <DateRangePicker.RangeSeparator className="px-2 text-default" />
-        <DateField.Input slot="end">
-          {(segment) => <DateField.Segment segment={segment} />}
-        </DateField.Input>
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator className="px-2 text-default" />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
         <DateField.Suffix>
           <DateRangePicker.Trigger className="w-full">
             <DateRangePicker.TriggerIndicator className="text-default" />
