@@ -81,10 +81,10 @@ export function FormatOptions() {
   const showTimeField = !!timeGranularity;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <DateRangePicker
         key={granularity}
-        className="w-fit min-w-72"
+        className="w-full min-w-72"
         defaultValue={defaultValue}
         endName="endDate"
         granularity={granularity}
@@ -97,20 +97,22 @@ export function FormatOptions() {
           <>
             <Label>Date range</Label>
             <DateField.Group>
-              <DateField.Input slot="start">
-                {(segment) => <DateField.Segment segment={segment} />}
-              </DateField.Input>
-              <DateRangePicker.RangeSeparator />
-              <DateField.Input slot="end">
-                {(segment) => <DateField.Segment segment={segment} />}
-              </DateField.Input>
+              <DateField.InputContainer>
+                <DateField.Input slot="start">
+                  {(segment) => <DateField.Segment segment={segment} />}
+                </DateField.Input>
+                <DateRangePicker.RangeSeparator />
+                <DateField.Input slot="end">
+                  {(segment) => <DateField.Segment segment={segment} />}
+                </DateField.Input>
+              </DateField.InputContainer>
               <DateField.Suffix>
                 <DateRangePicker.Trigger>
                   <DateRangePicker.TriggerIndicator />
                 </DateRangePicker.Trigger>
               </DateField.Suffix>
             </DateField.Group>
-            <DateRangePicker.Popover className="flex flex-col gap-3">
+            <DateRangePicker.Popover className="flex w-full flex-col gap-3">
               <RangeCalendar aria-label="Trip dates">
                 <RangeCalendar.Header>
                   <RangeCalendar.YearPickerTrigger>
