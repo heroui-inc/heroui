@@ -10,6 +10,7 @@ export const dateInputGroupVariants = tv({
   slots: {
     base: "date-input-group",
     input: "date-input-group__input",
+    inputContainer: "date-input-group__input-container",
     prefix: "date-input-group__prefix",
     segment: "date-input-group__segment",
     suffix: "date-input-group__suffix",
