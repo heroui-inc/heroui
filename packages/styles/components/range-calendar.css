@@ -134,8 +134,7 @@
  * RangeCalendar Cells
  * -------------------------------------------------------------------------- */
 .range-calendar__cell {
-  @apply relative z-1 mx-0 my-[2px] p-0 outline-none;
-
+  @apply relative z-1 mx-0 my-[2px] rounded-full p-0 outline-none;
   cursor: var(--cursor-interactive);
 
   will-change: background-color, border-color;
