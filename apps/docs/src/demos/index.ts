@@ -6,6 +6,7 @@ import * as AlertDemos from "./alert";
 import * as AlertDialogDemos from "./alert-dialog";
 import * as AutocompleteDemos from "./autocomplete";
 import * as AvatarDemos from "./avatar";
+import * as BadgeDemos from "./badge";
 import * as BreadcrumbsDemos from "./breadcrumbs";
 import * as ButtonDemos from "./button";
 import * as ButtonGroupDemos from "./button-group";
@@ -196,6 +197,35 @@ export const demos: Record<string, DemoItem> = {
   "avatar-custom-styles": {
     component: AvatarDemos.CustomStyles,
     file: "avatar/custom-styles.tsx",
+  },
+  // Badge demos
+  "badge-basic": {
+    component: BadgeDemos.Basic,
+    file: "badge/basic.tsx",
+  },
+  "badge-colors": {
+    component: BadgeDemos.Colors,
+    file: "badge/colors.tsx",
+  },
+  "badge-sizes": {
+    component: BadgeDemos.Sizes,
+    file: "badge/sizes.tsx",
+  },
+  "badge-variants": {
+    component: BadgeDemos.Variants,
+    file: "badge/variants.tsx",
+  },
+  "badge-placements": {
+    component: BadgeDemos.Placements,
+    file: "badge/placements.tsx",
+  },
+  "badge-with-content": {
+    component: BadgeDemos.WithContent,
+    file: "badge/with-content.tsx",
+  },
+  "badge-dot": {
+    component: BadgeDemos.Dot,
+    file: "badge/dot.tsx",
   },
   // Breadcrumbs demos
   "breadcrumbs-basic": {

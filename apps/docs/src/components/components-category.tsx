@@ -83,7 +83,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Data Display",
-    components: ["chip"],
+    components: ["badge", "chip"],
   },
   {
     category: "Colors",
