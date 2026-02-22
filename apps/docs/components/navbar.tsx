@@ -1,6 +1,6 @@
 "use client";
 
-import type {FC, ReactNode} from "react";
+import type {FC, Key, ReactNode} from "react";
 import type {Route} from "@/libs/docs/page";
 
 import {useRef, useState, useMemo, useCallback} from "react";
@@ -15,10 +15,14 @@ import {
   Link,
   Button,
   Kbd,
-  Chip,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownTrigger,
   Divider,
 } from "@heroui/react";
 import {dataFocusVisibleClasses} from "@heroui/theme";
+import {ChevronDownIcon, LinkIcon} from "@heroui/shared-icons";
 import {isAppleDevice} from "@react-aria/utils";
 import {cn} from "@heroui/theme";
 import NextLink from "next/link";
@@ -96,6 +100,18 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
     "data-[active=true]:text-primary data-[active=true]:font-semibold",
   );
 
+  const handleVersionChange = useCallback((key: Key) => {
+    if (key === "v3") {
+      const newWindow = window.open(
+        "https://v3.heroui.com?ref=heroui-v2",
+        "_blank",
+        "noopener,noreferrer",
+      );
+
+      if (newWindow) newWindow.opener = null;
+    }
+  }, []);
+
   const handlePressNavbarItem = useCallback(
     (name: string, url: string) => {
       posthog.capture("NavbarItem", {
@@ -134,24 +150,40 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
     </Button>
   );
 
-  const versionChip = useMemo(() => {
+  const versionDropdown = useMemo(() => {
     return ref.current ? (
-      <AnimatePresence>
-        {isMounted && (
-          <motion.div animate={{opacity: 1}} exit={{opacity: 0}} initial={{opacity: 0}}>
-            <Chip
-              className="max-w-[44px] hidden h-6 w-[44px] py-1 min-w-fit sm:flex gap-0.5 bg-default-400/20 dark:bg-default-500/20"
-              classNames={{
-                content: "font-medium text-default-500 text-xs",
-              }}
-            >
-              v{currentVersion}
-            </Chip>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Dropdown placement="bottom-start" portalContainer={ref.current}>
+        <AnimatePresence>
+          {isMounted && (
+            <motion.div animate={{opacity: 1}} exit={{opacity: 0}} initial={{opacity: 0}}>
+              <DropdownTrigger>
+                <Button
+                  className="min-w-[74px] max-w-[74px] hidden font-medium text-default-500 text-xs h-6 w-[74px] py-1 min-w-fit sm:flex gap-0.5 bg-default-400/20 dark:bg-default-500/20"
+                  endContent={<ChevronDownIcon className="text-tiny" />}
+                  radius="full"
+                  size="sm"
+                  variant="flat"
+                >
+                  v{currentVersion}
+                </Button>
+              </DropdownTrigger>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <DropdownMenu
+          aria-label="HeroUI versions"
+          defaultSelectedKeys={["v2"]}
+          selectionMode="single"
+          onAction={handleVersionChange}
+        >
+          <DropdownItem key="v2">v{currentVersion}</DropdownItem>
+          <DropdownItem key="v3" endContent={<LinkIcon />}>
+            v3.0.0 (Beta)
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
     ) : (
-      <div className="w-[44px]" />
+      <div className="w-[74px]" />
     );
   }, [ref.current, isMounted]);
 
@@ -184,7 +216,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
           >
             <Logo className="h-6" />
           </NextLink>
-          {versionChip}
+          {versionDropdown}
           {/* <Chip
             as={NextLink}
             className="hidden sm:flex bg-default-200/50 border-1 hover:bg-default-200/80 border-default-400/50 cursor-pointer"
