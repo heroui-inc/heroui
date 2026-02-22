@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Badge - Small informational badges for displaying labels, statuses, and categories.
+   ========================================================================== */
+
+/* Base styles */
+.badge {
+  @apply inline-flex shrink-0 items-center justify-center gap-0.5 font-medium;
+
+  /* Default size (matches --md) */
+  @apply min-h-7 min-w-7 rounded-3xl p-1.5 text-xs leading-[1.34];
+
+  /* Default tokens */
+  --badge-bg: var(--color-default);
+  --badge-fg: var(--color-default-foreground);
+  --badge-border: var(--color-background);
+
+  background-color: var(--badge-bg);
+  color: var(--badge-fg);
+  border: 1px solid var(--badge-border);
+}
+
+.badge__label {
+  @apply px-0.5;
+}
+
+.badge-anchor {
+  @apply relative inline-flex shrink-0;
+}
+
+/* ==========================================================================
+   Size variants
+   ========================================================================== */
+
+.badge--lg {
+  @apply min-h-8 min-w-8 rounded-2xl p-1.5 text-sm leading-[1.43];
+}
+
+.badge--md {
+  /* No styles as this is the default size */
+}
+
+.badge--sm {
+  @apply min-h-4 min-w-4 rounded-xl px-0.5 py-0 text-[10px] leading-[1.34];
+}
+
+/* ==========================================================================
+   Color variants - set foreground color
+   ========================================================================== */
+
+.badge--accent {
+  --badge-fg: var(--color-accent);
+}
+
+.badge--default {
+  --badge-fg: var(--color-default-foreground);
+}
+
+.badge--success {
+  --badge-fg: var(--color-success);
+}
+
+.badge--warning {
+  --badge-fg: var(--color-warning);
+}
+
+.badge--danger {
+  --badge-fg: var(--color-danger);
+}
+
+/* ==========================================================================
+   Variant styles
+   ========================================================================== */
+
+.badge--primary {
+  /* Solid background - compound variants below handle bg/fg per color */
+}
+
+.badge--secondary {
+  /* Default background with colored text - base behavior */
+}
+
+.badge--soft {
+  /* Soft/muted background - compound variants below handle bg/fg per color */
+}
+
+/* ==========================================================================
+   Placement variants
+   ========================================================================== */
+
+.badge--top-right {
+  @apply absolute top-0 right-0;
+  transform: translate(25%, -25%);
+}
+
+.badge--top-left {
+  @apply absolute top-0 left-0;
+  transform: translate(-25%, -25%);
+}
+
+.badge--bottom-right {
+  @apply absolute right-0 bottom-0;
+  transform: translate(25%, 25%);
+}
+
+.badge--bottom-left {
+  @apply absolute bottom-0 left-0;
+  transform: translate(-25%, 25%);
+}
+
+/* ==========================================================================
+   Compound variants - Primary (solid background)
+   ========================================================================== */
+
+.badge--primary.badge--accent {
+  --badge-bg: var(--color-accent);
+  --badge-fg: var(--color-accent-foreground);
+}
+
+.badge--primary.badge--default {
+  --badge-bg: var(--color-default);
+  --badge-fg: var(--color-default-foreground);
+}
+
+.badge--primary.badge--success {
+  --badge-bg: var(--color-success);
+  --badge-fg: var(--color-success-foreground);
+}
+
+.badge--primary.badge--warning {
+  --badge-bg: var(--color-warning);
+  --badge-fg: var(--color-warning-foreground);
+}
+
+.badge--primary.badge--danger {
+  --badge-bg: var(--color-danger);
+  --badge-fg: var(--color-danger-foreground);
+}
+
+/* ==========================================================================
+   Compound variants - Soft (muted background)
+   ========================================================================== */
+
+.badge--soft.badge--accent {
+  --badge-bg: var(--color-accent-soft);
+  --badge-fg: var(--color-accent-soft-foreground);
+}
+
+.badge--soft.badge--default {
+  --badge-bg: var(--color-default);
+  --badge-fg: var(--color-default-foreground);
+}
+
+.badge--soft.badge--success {
+  --badge-bg: var(--color-success-soft);
+  --badge-fg: var(--color-success-soft-foreground);
+}
+
+.badge--soft.badge--warning {
+  --badge-bg: var(--color-warning-soft);
+  --badge-fg: var(--color-warning-soft-foreground);
+}
+
+.badge--soft.badge--danger {
+  --badge-bg: var(--color-danger-soft);
+  --badge-fg: var(--color-danger-soft-foreground);
+}

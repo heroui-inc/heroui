@@ -12,6 +12,7 @@
     "(overlays)/alert-dialog",
     "(pickers)/autocomplete",
     "(media)/avatar",
+    "(data-display)/badge",
     "(navigation)/breadcrumbs",
     "(buttons)/button",
     "(buttons)/button-group",

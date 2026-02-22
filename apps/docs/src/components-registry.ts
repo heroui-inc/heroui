@@ -42,6 +42,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "avatar",
     title: "Avatar",
   },
+  badge: {
+    category: "display",
+    description: "Small indicator positioned relative to another element",
+    href: "/docs/components/badge",
+    name: "badge",
+    title: "Badge",
+  },
   breadcrumbs: {
     category: "navigation",
     description: "Display the user's current location within a hierarchy",
@@ -447,7 +454,8 @@ const componentRelationships: Record<string, string[]> = {
     "avatar",
     "button",
   ],
-  avatar: ["separator"],
+  avatar: ["separator", "badge"],
+  badge: ["avatar", "chip"],
   breadcrumbs: ["link", "separator", "tabs"],
   button: [
     "popover",
