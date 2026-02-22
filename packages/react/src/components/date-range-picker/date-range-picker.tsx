@@ -14,6 +14,7 @@ import {
   Popover as PopoverPrimitive,
 } from "react-aria-components";
 
+import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconCalendar} from "../icons";
 import {SurfaceContext} from "../surface";
@@ -79,6 +80,7 @@ const DateRangePickerRoot = <T extends DateValue>({
   return (
     <DateRangePickerContext value={{slots, triggerRef}}>
       <DateRangePickerPrimitive
+        data-required={dataAttr(props.isRequired)}
         data-slot="date-range-picker"
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
