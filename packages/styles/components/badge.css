@@ -7,7 +7,7 @@
   @apply inline-flex shrink-0 items-center justify-center gap-0.5 font-medium;
 
   /* Default size (matches --md) */
-  @apply min-h-7 min-w-7 rounded-3xl p-1.5 text-xs leading-[1.34];
+  @apply min-h-7 min-w-7 rounded-3xl text-xs leading-[1.34];
 
   /* Default tokens */
   --badge-bg: var(--color-default);
@@ -32,7 +32,7 @@
    ========================================================================== */
 
 .badge--lg {
-  @apply min-h-8 min-w-8 rounded-2xl p-1.5 text-sm leading-[1.43];
+  @apply min-h-8 min-w-8 rounded-2xl text-sm leading-[1.43];
 }
 
 .badge--md {
@@ -40,7 +40,7 @@
 }
 
 .badge--sm {
-  @apply min-h-4 min-w-4 rounded-xl px-0.5 py-0 text-[10px] leading-[1.34];
+  @apply min-h-4 min-w-4 rounded-xl text-[10px] leading-[1.34];
 }
 
 /* ==========================================================================
