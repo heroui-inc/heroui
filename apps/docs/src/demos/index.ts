@@ -43,6 +43,7 @@ import * as LinkDemos from "./link";
 import * as ListBoxDemos from "./list-box";
 import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
+import * as PaginationDemos from "./pagination";
 import * as PopoverDemos from "./popover";
 import * as RadioGroupDemos from "./radio-group";
 import * as RangeCalendarDemos from "./range-calendar";
@@ -2028,6 +2029,39 @@ export const demos: Record<string, DemoItem> = {
   "number-field-custom-render-function": {
     component: NumberFieldDemos.CustomRenderFunction,
     file: "number-field/custom-render-function.tsx",
+  },
+  // Pagination demos
+  "pagination-basic": {
+    component: PaginationDemos.Basic,
+    file: "pagination/basic.tsx",
+  },
+  "pagination-sizes": {
+    component: PaginationDemos.Sizes,
+    file: "pagination/sizes.tsx",
+  },
+  "pagination-with-ellipsis": {
+    component: PaginationDemos.WithEllipsis,
+    file: "pagination/with-ellipsis.tsx",
+  },
+  "pagination-simple-prev-next": {
+    component: PaginationDemos.SimplePrevNext,
+    file: "pagination/simple-prev-next.tsx",
+  },
+  "pagination-with-summary": {
+    component: PaginationDemos.WithSummary,
+    file: "pagination/with-summary.tsx",
+  },
+  "pagination-custom-icons": {
+    component: PaginationDemos.CustomIcons,
+    file: "pagination/custom-icons.tsx",
+  },
+  "pagination-controlled": {
+    component: PaginationDemos.Controlled,
+    file: "pagination/controlled.tsx",
+  },
+  "pagination-disabled": {
+    component: PaginationDemos.Disabled,
+    file: "pagination/disabled.tsx",
   },
   // Select demos
   "select-default": {

@@ -49,6 +49,7 @@
     "(collections)/list-box",
     "(overlays)/modal",
     "(forms)/number-field",
+    "(navigation)/pagination",
     "(overlays)/popover",
     "(forms)/radio-group",
     "(date-and-time)/range-calendar",

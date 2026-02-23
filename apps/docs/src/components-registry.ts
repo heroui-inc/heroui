@@ -301,6 +301,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "numberfield",
     title: "NumberField",
   },
+  pagination: {
+    category: "navigation",
+    description: "Page navigation with composable page links and controls",
+    href: "/docs/components/pagination",
+    name: "pagination",
+    title: "Pagination",
+  },
   popover: {
     category: "display",
     description: "Displays content in context with a trigger",
@@ -634,6 +641,7 @@ const componentRelationships: Record<string, string[]> = {
   listbox: ["select", "combobox", "avatar", "kbd", "separator", "surface", "dropdown"],
   modal: ["button", "tooltip", "select", "avatar"],
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
+  pagination: ["button", "link"],
   popover: ["button", "tooltip", "select", "combobox", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
   rangecalendar: [
