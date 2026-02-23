@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Pagination - Page navigation component
+   ========================================================================== */
+
+/* Base styles */
+.pagination {
+  @apply flex w-full items-center justify-between gap-4;
+}
+
+/* Summary - left side info container */
+.pagination__summary {
+  @apply flex items-center gap-2 text-sm text-muted;
+}
+
+/* Content - container for pagination items */
+.pagination__content {
+  @apply flex items-center gap-1;
+}
+
+/* Item - list item wrapper */
+.pagination__item {
+  @apply inline-flex;
+}
+
+/* Link - page number button (ghost button style) */
+.pagination__link {
+  @apply relative isolate inline-flex size-9 origin-center items-center justify-center rounded-3xl text-sm font-medium whitespace-nowrap outline-none select-none no-highlight md:size-8;
+
+  cursor: var(--cursor-interactive);
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-smooth),
+    background-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  /* Ghost button tokens */
+  --pagination-link-bg: transparent;
+  --pagination-link-bg-hover: var(--color-default-hover);
+  --pagination-link-bg-pressed: var(--color-default-hover);
+  --pagination-link-fg: var(--color-default-foreground);
+
+  background-color: var(--pagination-link-bg);
+  color: var(--pagination-link-fg);
+
+  /* Focus state */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      background-color: var(--pagination-link-bg-hover);
+    }
+  }
+
+  /* Active / pressed */
+  &:active,
+  &[data-pressed="true"] {
+    background-color: var(--pagination-link-bg-pressed);
+    transform: scale(0.97);
+  }
+
+  /* Active page - tertiary button style */
+  &[data-active="true"] {
+    --pagination-link-bg: var(--color-default);
+    --pagination-link-bg-hover: var(--color-default-hover);
+    --pagination-link-bg-pressed: var(--color-default-hover);
+  }
+}
+
+/* Ellipsis */
+.pagination__ellipsis {
+  @apply inline-flex size-9 items-center justify-center text-sm text-muted select-none md:size-8;
+}
+
+/* Navigation buttons (Previous / Next) */
+.pagination__link--nav {
+  @apply w-auto gap-1.5 px-2.5;
+}
+
+/* ==========================================================================
+   Size variants
+   ========================================================================== */
+
+.pagination--sm {
+  .pagination__link {
+    @apply size-8 text-xs md:size-7;
+
+    &:active,
+    &[data-pressed="true"] {
+      transform: scale(0.98);
+    }
+  }
+
+  .pagination__link--nav {
+    @apply w-auto px-2;
+  }
+
+  .pagination__ellipsis {
+    @apply size-8 text-xs md:size-7;
+  }
+
+  .pagination__summary {
+    @apply text-xs;
+  }
+}
+
+.pagination--md {
+  /* No styles as this is the default size */
+}
+
+.pagination--lg {
+  .pagination__link {
+    @apply size-10 text-base md:size-9;
+
+    &:active,
+    &[data-pressed="true"] {
+      transform: scale(0.96);
+    }
+  }
+
+  .pagination__link--nav {
+    @apply w-auto px-3;
+  }
+
+  .pagination__ellipsis {
+    @apply size-10 text-base md:size-9;
+  }
+
+  .pagination__summary {
+    @apply text-base;
+  }
+}
