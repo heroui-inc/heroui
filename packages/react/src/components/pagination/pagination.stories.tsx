@@ -330,7 +330,7 @@ const ControlledTemplate = (props: PaginationProps) => {
         </Pagination.Summary>
         <Pagination.Content>
           <Pagination.Item>
-            <Pagination.Previous disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
+            <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
               <Pagination.PreviousIcon />
               <span>Previous</span>
             </Pagination.Previous>
@@ -342,14 +342,14 @@ const ControlledTemplate = (props: PaginationProps) => {
               </Pagination.Item>
             ) : (
               <Pagination.Item key={p}>
-                <Pagination.Link isActive={p === page} onClick={() => setPage(p)}>
+                <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
                   {p}
                 </Pagination.Link>
               </Pagination.Item>
             ),
           )}
           <Pagination.Item>
-            <Pagination.Next disabled={page === totalPages} onClick={() => setPage((p) => p + 1)}>
+            <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
               <span>Next</span>
               <Pagination.NextIcon />
             </Pagination.Next>
@@ -372,7 +372,7 @@ const DisabledTemplate = (props: PaginationProps) => (
   <Pagination {...props}>
     <Pagination.Content>
       <Pagination.Item>
-        <Pagination.Previous disabled>
+        <Pagination.Previous isDisabled>
           <Pagination.PreviousIcon />
           <span>Previous</span>
         </Pagination.Previous>
