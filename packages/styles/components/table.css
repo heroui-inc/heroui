@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Table — Data display component for structured tabular data.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Wrapper — Outer container for table + optional footer.
+   Primary variant: gray background with the table body as a white card inside.
+   -------------------------------------------------------------------------- */
+.table-wrapper {
+  @apply relative grid w-full overflow-hidden;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Container — Allows the table to scroll horizontally while the
+   wrapper and footer remain at full width. The parent grid with
+   minmax(0, 1fr) creates a hard width boundary that table layout
+   cannot push beyond.
+   -------------------------------------------------------------------------- */
+.table__scroll-container {
+  @apply overflow-x-auto;
+}
+
+.table-wrapper--primary {
+  @apply bg-surface-secondary px-1 pb-1;
+  border-radius: calc(var(--radius) * 2.5);
+}
+
+.table-wrapper--secondary {
+  /* No background, padding, or rounding on the wrapper */
+}
+
+/* Secondary: header is a standalone rounded card */
+.table-wrapper--secondary .table__header {
+  @apply rounded-2xl border-b-0;
+}
+
+.table-wrapper--secondary .table__column:first-child {
+  border-top-left-radius: var(--radius-2xl);
+  border-bottom-left-radius: var(--radius-2xl);
+}
+
+.table-wrapper--secondary .table__column:last-child {
+  border-top-right-radius: var(--radius-2xl);
+  border-bottom-right-radius: var(--radius-2xl);
+}
+
+/* Secondary: body has no shadow or rounded corners */
+.table-wrapper--secondary .table__body {
+  box-shadow: none;
+
+  & tr:first-child td:first-child,
+  & tr:first-child td:last-child,
+  & tr:last-child td:first-child,
+  & tr:last-child td:last-child {
+    border-radius: 0;
+  }
+}
+
+/* Secondary: rows are transparent and keep bottom border on every row */
+.table-wrapper--secondary .table__row {
+  @apply bg-transparent;
+
+  .table__cell {
+    @apply border-b border-separator-tertiary/50;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table base (<table> element) — the white card inside the wrapper
+   -------------------------------------------------------------------------- */
+.table {
+  @apply w-full text-sm;
+
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Primary variant: table gets the white surface card look */
+.table-wrapper--primary .table {
+  @apply overflow-hidden rounded-2xl;
+}
+
+/* --------------------------------------------------------------------------
+   Table Header (<thead>)
+   -------------------------------------------------------------------------- */
+.table__header {
+  @apply border-b border-separator/50 bg-surface-secondary;
+}
+
+/* --------------------------------------------------------------------------
+   Table Column (<th>)
+   -------------------------------------------------------------------------- */
+.table__column {
+  @apply relative px-4 py-2.5 text-left text-xs font-medium text-muted;
+
+  /* Separator between columns — a short vertical line on the left edge */
+  &::before {
+    content: "";
+    @apply pointer-events-none absolute top-1/2 left-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+  }
+
+  &:first-child::before {
+    content: none;
+  }
+
+  /* Sortable columns */
+  &[data-allows-sorting="true"] {
+    cursor: var(--cursor-interactive);
+  }
+
+  @media (hover: hover) {
+    &[data-allows-sorting="true"]:hover,
+    &[data-allows-sorting="true"][data-hovered="true"] {
+      @apply text-foreground;
+    }
+  }
+
+  /* Focus visible */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Body (<tbody>)
+   -------------------------------------------------------------------------- */
+.table__body {
+  @apply rounded-2xl shadow-field;
+  /* box-shadow:
+    0px 2px 4px 0px var(--color-field-shadow, rgba(0, 0, 0, 0.04)),
+    0px 1px 2px 0px var(--color-field-shadow-2, rgba(0, 0, 0, 0.06)),
+    0px 0px 1px 0px var(--color-field-shadow-2, rgba(0, 0, 0, 0.06)); */
+
+  /* Rounded corners on the tbody via corner cells (border-radius on <tbody> has no effect) */
+  & tr:first-child td:first-child {
+    border-top-left-radius: var(--radius-2xl);
+  }
+  & tr:first-child td:last-child {
+    border-top-right-radius: var(--radius-2xl);
+  }
+  & tr:last-child td:first-child {
+    border-bottom-left-radius: var(--radius-2xl);
+  }
+  & tr:last-child td:last-child {
+    border-bottom-right-radius: var(--radius-2xl);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Row (<tr>)
+   -------------------------------------------------------------------------- */
+.table__row {
+  @apply relative bg-surface;
+
+  /* Bottom separator */
+  @apply border-b border-separator/50;
+
+  /* Last row in body has no bottom border */
+  &:last-child {
+    @apply border-b-0;
+  }
+
+  /**
+   * Transitions
+   */
+  transition: background-color 150ms var(--ease-out);
+  @apply motion-reduce:transition-none;
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-surface/40;
+    }
+  }
+
+  /* Selected state */
+  &[data-selected="true"] {
+    @apply bg-surface/10;
+  }
+
+  /* Disabled state */
+  &[aria-disabled="true"],
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  /* Focus visible */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Dragging state */
+  &[data-dragging="true"] {
+    @apply opacity-50;
+  }
+
+  /* Drop target state */
+  &[data-drop-target="true"] {
+    @apply bg-accent-soft;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Cell (<td>)
+   -------------------------------------------------------------------------- */
+.table__cell {
+  @apply px-4 py-3 align-middle text-sm text-foreground;
+
+  /* Focus visible */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Footer (div outside <table>, sits on gray bg)
+   -------------------------------------------------------------------------- */
+.table__footer {
+  @apply flex items-center px-4 py-2.5;
+}
