@@ -212,8 +212,8 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `isActive` | `boolean` | `false` | Whether this is the current page |
-| `disabled` | `boolean` | `false` | Whether the link is disabled |
-| `onClick` | `() => void` | - | Click handler |
+| `isDisabled` | `boolean` | `false` | Whether the link is disabled |
+| `onPress` | `(e: PressEvent) => void` | - | Press handler (from React Aria) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Page number content |
 
@@ -221,8 +221,8 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `disabled` | `boolean` | `false` | Whether the button is disabled |
-| `onClick` | `() => void` | - | Click handler |
+| `isDisabled` | `boolean` | `false` | Whether the button is disabled |
+| `onPress` | `(e: PressEvent) => void` | - | Press handler (from React Aria) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Button content (compose with PreviousIcon/NextIcon) |
 
@@ -241,11 +241,14 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## Accessibility
 
-The Pagination component provides:
+The Pagination component is built on [React Aria's Button](https://react-spectrum.adobe.com/react-aria/Button.html) primitive for all interactive elements, providing:
 
 - Semantic `<nav>` element with `aria-label="pagination"` and `role="navigation"`
 - Active page indicated via `aria-current="page"` on the current link
 - Keyboard navigation via Tab key through all interactive elements
+- Press events handled across mouse, touch, and keyboard interactions via React Aria
 - Focus ring on keyboard navigation via `:focus-visible`
 - Ellipsis marked with `aria-hidden="true"` to avoid screen reader confusion
-- Disabled states properly communicated to assistive technology
+- Disabled states properly communicated to assistive technology via `isDisabled`
+
+> **Note:** Pagination buttons use `onPress` instead of `onClick`. The `onPress` handler from React Aria normalizes press behavior across pointer types and provides accessibility improvements out of the box.
