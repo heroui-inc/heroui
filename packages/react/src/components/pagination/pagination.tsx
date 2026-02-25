@@ -5,7 +5,9 @@ import type {ComponentPropsWithRef} from "react";
 
 import {paginationVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {Button as ButtonPrimitive} from "react-aria-components";
 
+import {composeTwRenderProps} from "../../utils";
 import {composeSlotClassName} from "../../utils/compose";
 
 /* -------------------------------------------------------------------------------------------------
@@ -120,7 +122,7 @@ PaginationItem.displayName = "HeroUI.Pagination.Item";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Link
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationLinkProps extends ComponentPropsWithRef<"button"> {
+interface PaginationLinkProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   className?: string;
   children: React.ReactNode;
   isActive?: boolean;
@@ -130,16 +132,15 @@ const PaginationLink = ({children, className, isActive, ...props}: PaginationLin
   const {slots} = useContext(PaginationContext);
 
   return (
-    <button
+    <ButtonPrimitive
       aria-current={isActive ? "page" : undefined}
-      className={composeSlotClassName(slots?.link, className)}
+      className={composeTwRenderProps(className, slots?.link())}
       data-active={isActive ? "true" : undefined}
       data-slot="pagination-link"
-      type="button"
       {...props}
     >
       {children}
-    </button>
+    </ButtonPrimitive>
   );
 };
 
@@ -148,22 +149,23 @@ PaginationLink.displayName = "HeroUI.Pagination.Link";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Previous
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationPreviousProps extends ComponentPropsWithRef<"button"> {
+interface PaginationPreviousProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   className?: string;
   children: React.ReactNode;
 }
 
 const PaginationPrevious = ({children, className, ...props}: PaginationPreviousProps) => {
   const {slots} = useContext(PaginationContext);
-  const slotClass = composeSlotClassName(slots?.link, className);
-  const combinedClassName = slotClass
-    ? `${slotClass} pagination__link--nav`
-    : "pagination__link--nav";
+  const baseClass = `${slots?.link() ?? ""} pagination__link--nav`.trim();
 
   return (
-    <button className={combinedClassName} data-slot="pagination-previous" type="button" {...props}>
+    <ButtonPrimitive
+      className={composeTwRenderProps(className, baseClass)}
+      data-slot="pagination-previous"
+      {...props}
+    >
       {children}
-    </button>
+    </ButtonPrimitive>
   );
 };
 
@@ -189,22 +191,23 @@ PaginationPreviousIcon.displayName = "HeroUI.Pagination.PreviousIcon";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Next
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationNextProps extends ComponentPropsWithRef<"button"> {
+interface PaginationNextProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {
   className?: string;
   children: React.ReactNode;
 }
 
 const PaginationNext = ({children, className, ...props}: PaginationNextProps) => {
   const {slots} = useContext(PaginationContext);
-  const slotClass = composeSlotClassName(slots?.link, className);
-  const combinedClassName = slotClass
-    ? `${slotClass} pagination__link--nav`
-    : "pagination__link--nav";
+  const baseClass = `${slots?.link() ?? ""} pagination__link--nav`.trim();
 
   return (
-    <button className={combinedClassName} data-slot="pagination-next" type="button" {...props}>
+    <ButtonPrimitive
+      className={composeTwRenderProps(className, baseClass)}
+      data-slot="pagination-next"
+      {...props}
+    >
       {children}
-    </button>
+    </ButtonPrimitive>
   );
 };
 

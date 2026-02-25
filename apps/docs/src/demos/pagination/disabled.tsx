@@ -5,7 +5,7 @@ export function PaginationDisabled() {
     <Pagination className="justify-center">
       <Pagination.Content>
         <Pagination.Item>
-          <Pagination.Previous disabled>
+          <Pagination.Previous isDisabled>
             <Pagination.PreviousIcon />
             <span>Previous</span>
           </Pagination.Previous>
