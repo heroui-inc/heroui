@@ -7,8 +7,10 @@ export const IconChevronDown = (props: IconProps) => (
     aria-hidden="true"
     aria-label="Chevron down icon"
     fill="none"
+    height={16}
     role="presentation"
     viewBox="0 0 16 16"
+    width={16}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
@@ -26,8 +28,10 @@ export const IconChevronLeft = (props: IconProps) => (
     aria-hidden="true"
     aria-label="Chevron left icon"
     fill="none"
+    height={16}
     role="presentation"
     viewBox="0 0 16 16"
+    width={16}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
@@ -45,8 +49,10 @@ export const IconChevronRight = (props: IconProps) => (
     aria-hidden="true"
     aria-label="Chevron right icon"
     fill="none"
+    height={16}
     role="presentation"
     viewBox="0 0 16 16"
+    width={16}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
