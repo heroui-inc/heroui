@@ -17,7 +17,7 @@ export default {
   parameters: {
     layout: "centered",
   },
-  title: "Components/DataDisplay/Table",
+  title: "Components/Data Display/Table",
   argTypes: {
     variant: {
       control: "select",
@@ -44,7 +44,7 @@ const users: User[] = [
   {
     email: "kate@acme.com",
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
-    id: 1,
+    id: 4586932,
     name: "Kate Moore",
     role: "Chief Executive Officer",
     status: "Active",
@@ -52,7 +52,7 @@ const users: User[] = [
   {
     email: "john@acme.com",
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
-    id: 2,
+    id: 5273849,
     name: "John Smith",
     role: "Chief Technology Officer",
     status: "Active",
@@ -60,7 +60,7 @@ const users: User[] = [
   {
     email: "sara@acme.com",
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg",
-    id: 3,
+    id: 7492836,
     name: "Sara Johnson",
     role: "Chief Marketing Officer",
     status: "On Leave",
@@ -68,7 +68,7 @@ const users: User[] = [
   {
     email: "michael@acme.com",
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg",
-    id: 4,
+    id: 8293746,
     name: "Michael Brown",
     role: "Chief Financial Officer",
     status: "Active",
@@ -76,7 +76,7 @@ const users: User[] = [
   {
     email: "emily@acme.com",
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
-    id: 5,
+    id: 1234567,
     name: "Emily Davis",
     role: "Product Manager",
     status: "Inactive",
@@ -84,7 +84,7 @@ const users: User[] = [
   {
     email: "davis@acme.com",
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/black.jpg",
-    id: 6,
+    id: 9876543,
     name: "Davis Wilson",
     role: "Lead Designer",
     status: "Active",
@@ -102,7 +102,7 @@ const columns = [
  * Wrapper
  * -----------------------------------------------------------------------------------------------*/
 const Wrapper = ({children}: {children: React.ReactNode}) => (
-  <div className="w-full max-w-3xl">{children}</div>
+  <div className="w-full max-w-4xl">{children}</div>
 );
 
 /* -------------------------------------------------------------------------------------------------
@@ -283,9 +283,9 @@ const SortingTemplate = () => {
                 Name
                 {!!sortDirection && (
                   <Icon
-                    icon="gravity-ui:chevron-up-wide"
+                    icon="gravity-ui:chevron-up"
                     className={cn(
-                      "size-3 transform transition-transform duration-100",
+                      "size-3 transform transition-transform duration-100 ease-out",
                       sortDirection === "descending" ? "rotate-180" : "",
                     )}
                   />
@@ -299,9 +299,9 @@ const SortingTemplate = () => {
                 Role
                 {!!sortDirection && (
                   <Icon
-                    icon="gravity-ui:chevron-up-wide"
+                    icon="gravity-ui:chevron-up"
                     className={cn(
-                      "size-3 transform transition-transform duration-100",
+                      "size-3 transform transition-transform duration-100 ease-out",
                       sortDirection === "descending" ? "rotate-180" : "",
                     )}
                   />
@@ -414,67 +414,104 @@ const statusColorMap: Record<string, "success" | "danger" | "warning"> = {
 };
 
 export const CustomCells: Story = {
-  render: () => (
-    <Wrapper>
-      <Table aria-label="Custom cells">
-        <Table.Header>
-          <Table.Column isRowHeader>Member</Table.Column>
-          <Table.Column>Role</Table.Column>
-          <Table.Column>Status</Table.Column>
-          <Table.Column>Actions</Table.Column>
-        </Table.Header>
-        <Table.Body>
-          {users.map((user) => (
-            <Table.Row key={user.id} id={user.id}>
-              <Table.Cell>
-                <div className="flex items-center gap-3">
-                  <Avatar size="sm">
-                    <Avatar.Image src={user.image_url} />
-                    <Avatar.Fallback>
-                      {user.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </Avatar.Fallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-xs">{user.name}</span>
-                    <span className="text-xs text-muted">{user.email}</span>
+  render: () => {
+    const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set());
+
+    return (
+      <Wrapper>
+        <Table
+          aria-label="Custom cells"
+          selectedKeys={selectedKeys}
+          selectionMode="multiple"
+          variant="primary"
+          onSelectionChange={setSelectedKeys}
+        >
+          <Table.Header>
+            <Table.Column className="pr-0">
+              <Checkbox aria-label="Select all" slot="selection">
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
+              </Checkbox>
+            </Table.Column>
+            <Table.Column isRowHeader className="before:hidden">
+              Worker ID
+            </Table.Column>
+            <Table.Column>Member</Table.Column>
+            <Table.Column>Role</Table.Column>
+            <Table.Column>Status</Table.Column>
+            <Table.Column className="text-end">Actions</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            {users.map((user) => (
+              <Table.Row key={user.id} id={user.id}>
+                <Table.Cell className="pr-0">
+                  <Checkbox aria-label={`Select ${user.name}`} slot="selection" variant="secondary">
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox>
+                </Table.Cell>
+                <Table.Cell className="font-medium">
+                  <div className="flex items-center gap-2">
+                    #{user.id.toString()}{" "}
+                    <Button isIconOnly size="sm" variant="ghost">
+                      <Icon className="size-4 text-muted" icon="gravity-ui:copy" />
+                    </Button>
                   </div>
-                </div>
-              </Table.Cell>
-              <Table.Cell className="min-w-52">{user.role}</Table.Cell>
-              <Table.Cell className="min-w-25">
-                <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
-                  {user.status}
-                </Chip>
-              </Table.Cell>
-              <Table.Cell>
-                <div className="flex items-center gap-1">
-                  <Button isIconOnly size="sm" variant="tertiary">
-                    <Icon className="size-4" icon="gravity-ui:eye" />
-                  </Button>
-                  <Button isIconOnly size="sm" variant="tertiary">
-                    <Icon className="size-4" icon="gravity-ui:pencil" />
-                  </Button>
-                  <Button isIconOnly size="sm" variant="danger-soft">
-                    <Icon className="size-4" icon="gravity-ui:trash-bin" />
-                  </Button>
-                </div>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-        <Table.Footer>
-          <span className="flex-1 text-sm text-muted">1 to 3 of {users.length} results</span>
-          <div className="flex items-center gap-2">
-            <button className="rounded-full px-3 py-1 text-sm font-medium opacity-50">Prev</button>
-            <button className="rounded-full px-3 py-1 text-sm font-medium">Next</button>
-          </div>
-        </Table.Footer>
-      </Table>
-    </Wrapper>
-  ),
+                </Table.Cell>
+                <Table.Cell>
+                  <div className="flex items-center gap-3">
+                    <Avatar size="sm">
+                      <Avatar.Image src={user.image_url} />
+                      <Avatar.Fallback>
+                        {user.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </Avatar.Fallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <span className="text-xs">{user.name}</span>
+                      <span className="text-xs text-muted">{user.email}</span>
+                    </div>
+                  </div>
+                </Table.Cell>
+                <Table.Cell className="min-w-52">{user.role}</Table.Cell>
+                <Table.Cell className="min-w-25">
+                  <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
+                    {user.status}
+                  </Chip>
+                </Table.Cell>
+                <Table.Cell>
+                  <div className="flex items-center gap-1">
+                    <Button isIconOnly size="sm" variant="tertiary">
+                      <Icon className="size-4" icon="gravity-ui:eye" />
+                    </Button>
+                    <Button isIconOnly size="sm" variant="tertiary">
+                      <Icon className="size-4" icon="gravity-ui:pencil" />
+                    </Button>
+                    <Button isIconOnly size="sm" variant="danger-soft">
+                      <Icon className="size-4" icon="gravity-ui:trash-bin" />
+                    </Button>
+                  </div>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+          <Table.Footer>
+            <span className="flex-1 text-sm text-muted">1 to 3 of {users.length} results</span>
+            <div className="flex items-center gap-2">
+              <button className="rounded-full px-3 py-1 text-sm font-medium opacity-50">
+                Prev
+              </button>
+              <button className="rounded-full px-3 py-1 text-sm font-medium">Next</button>
+            </div>
+          </Table.Footer>
+        </Table>
+      </Wrapper>
+    );
+  },
 };
 
 /**

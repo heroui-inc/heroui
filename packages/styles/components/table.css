@@ -36,30 +36,35 @@
 }
 
 .table-wrapper--secondary .table__column:first-child {
-  border-top-left-radius: var(--radius-2xl);
-  border-bottom-left-radius: var(--radius-2xl);
+  @apply rounded-tl-2xl rounded-bl-2xl;
 }
 
 .table-wrapper--secondary .table__column:last-child {
-  border-top-right-radius: var(--radius-2xl);
-  border-bottom-right-radius: var(--radius-2xl);
+  @apply rounded-tr-2xl rounded-br-2xl;
 }
 
 /* Secondary: body has no shadow or rounded corners */
 .table-wrapper--secondary .table__body {
-  box-shadow: none;
+  @apply shadow-none;
 
   & tr:first-child td:first-child,
   & tr:first-child td:last-child,
   & tr:last-child td:first-child,
   & tr:last-child td:last-child {
-    border-radius: 0;
+    @apply rounded-none;
   }
 }
 
 /* Secondary: rows are transparent and keep bottom border on every row */
 .table-wrapper--secondary .table__row {
   @apply bg-transparent;
+
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default/50;
+    }
+  }
 
   .table__cell {
     @apply border-b border-separator-tertiary/50;
@@ -70,15 +75,12 @@
    Table base (<table> element) — the white card inside the wrapper
    -------------------------------------------------------------------------- */
 .table {
-  @apply w-full text-sm;
-
-  border-collapse: separate;
-  border-spacing: 0;
+  @apply w-full border-separate border-spacing-0 text-sm;
 }
 
 /* Primary variant: table gets the white surface card look */
 .table-wrapper--primary .table {
-  @apply overflow-hidden rounded-2xl;
+  @apply overflow-hidden;
 }
 
 /* --------------------------------------------------------------------------
@@ -127,24 +129,18 @@
    Table Body (<tbody>)
    -------------------------------------------------------------------------- */
 .table__body {
-  @apply rounded-2xl shadow-field;
-  /* box-shadow:
-    0px 2px 4px 0px var(--color-field-shadow, rgba(0, 0, 0, 0.04)),
-    0px 1px 2px 0px var(--color-field-shadow-2, rgba(0, 0, 0, 0.06)),
-    0px 0px 1px 0px var(--color-field-shadow-2, rgba(0, 0, 0, 0.06)); */
-
   /* Rounded corners on the tbody via corner cells (border-radius on <tbody> has no effect) */
   & tr:first-child td:first-child {
-    border-top-left-radius: var(--radius-2xl);
+    @apply rounded-tl-2xl;
   }
   & tr:first-child td:last-child {
-    border-top-right-radius: var(--radius-2xl);
+    @apply rounded-tr-2xl;
   }
   & tr:last-child td:first-child {
-    border-bottom-left-radius: var(--radius-2xl);
+    @apply rounded-bl-2xl;
   }
   & tr:last-child td:last-child {
-    border-bottom-right-radius: var(--radius-2xl);
+    @apply rounded-br-2xl;
   }
 }
 
@@ -161,12 +157,6 @@
   &:last-child {
     @apply border-b-0;
   }
-
-  /**
-   * Transitions
-   */
-  transition: background-color 150ms var(--ease-out);
-  @apply motion-reduce:transition-none;
 
   /* Hover state */
   @media (hover: hover) {
@@ -209,6 +199,8 @@
    -------------------------------------------------------------------------- */
 .table__cell {
   @apply px-4 py-3 align-middle text-sm text-foreground;
+
+  @apply border-b border-separator-tertiary/50;
 
   /* Focus visible */
   &:focus-visible,
