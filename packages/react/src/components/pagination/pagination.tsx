@@ -9,6 +9,7 @@ import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {composeSlotClassName} from "../../utils/compose";
+import {IconChevronLeft, IconChevronRight} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
  * Pagination Context
@@ -181,7 +182,7 @@ interface PaginationPreviousIconProps extends Omit<ComponentPropsWithRef<"span">
 const PaginationPreviousIcon = ({children, className, ...props}: PaginationPreviousIconProps) => {
   return (
     <span aria-hidden="true" className={className} data-slot="pagination-previous-icon" {...props}>
-      {children ?? <ChevronLeftIcon />}
+      {children ?? <IconChevronLeft />}
     </span>
   );
 };
@@ -223,7 +224,7 @@ interface PaginationNextIconProps extends Omit<ComponentPropsWithRef<"span">, "c
 const PaginationNextIcon = ({children, className, ...props}: PaginationNextIconProps) => {
   return (
     <span aria-hidden="true" className={className} data-slot="pagination-next-icon" {...props}>
-      {children ?? <ChevronRightIcon />}
+      {children ?? <IconChevronRight />}
     </span>
   );
 };
@@ -253,43 +254,6 @@ const PaginationEllipsis = ({className, ...props}: PaginationEllipsisProps) => {
 };
 
 PaginationEllipsis.displayName = "HeroUI.Pagination.Ellipsis";
-
-/* -------------------------------------------------------------------------------------------------
- * Icons
- * -----------------------------------------------------------------------------------------------*/
-const ChevronLeftIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    height="1em"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth={2}
-    viewBox="0 0 24 24"
-    width="1em"
-    {...props}
-  >
-    <path d="m15 18-6-6 6-6" />
-  </svg>
-);
-
-const ChevronRightIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    height="1em"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth={2}
-    viewBox="0 0 24 24"
-    width="1em"
-    {...props}
-  >
-    <path d="m9 18 6-6-6-6" />
-  </svg>
-);
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
