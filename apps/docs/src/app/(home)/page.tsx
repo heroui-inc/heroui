@@ -11,11 +11,11 @@ const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/native/releases/rc-2"
+      href="/docs/native/releases/rc-3"
     >
       <FrameworkChip framework="native" />
       <span className="max-w-60 truncate sm:max-w-full">
-        RC 2 (Native) — SearchField, ListGroup, Slider and Select multi-select
+        RC 3 (Native) — TagGroup, Menu, InputGroup components and Expo 55
       </span>
     </LinkRoot>
   );
