@@ -10,6 +10,7 @@ import {Button} from "../button";
 import {Checkbox} from "../checkbox";
 import {Chip} from "../chip";
 import {Pagination} from "../pagination";
+import {Spinner} from "../spinner";
 
 import {Table} from "./index";
 
@@ -566,4 +567,83 @@ export const ColumnResizing: Story = {
       </Table.ResizableContainer>
     </Wrapper>
   ),
+};
+
+/**
+ * Async loading with infinite scroll using Table.LoadMore.
+ * Simulates fetching paginated data — scroll to the bottom to load more rows.
+ */
+const ITEMS_PER_PAGE = 5;
+
+function useAsyncUsers() {
+  const [items, setItems] = React.useState<User[]>(() => users.slice(0, ITEMS_PER_PAGE));
+  const [isLoading, setIsLoading] = React.useState(false);
+  const hasMore = items.length < users.length;
+
+  const loadMore = React.useCallback(() => {
+    if (!hasMore) return;
+    setIsLoading(true);
+    // Simulate network delay
+    setTimeout(() => {
+      setItems((prev) => {
+        const next = users.slice(0, prev.length + ITEMS_PER_PAGE);
+
+        return next;
+      });
+      setIsLoading(false);
+    }, 1500);
+  }, [hasMore]);
+
+  return {hasMore, isLoading, items, loadMore};
+}
+
+const AsyncLoadingTemplate = ({variant = "primary"}: {variant?: "primary" | "secondary"}) => {
+  const {hasMore, isLoading, items, loadMore} = useAsyncUsers();
+
+  return (
+    <Wrapper>
+      <Table
+        aria-label="Async loading"
+        className="min-w-[600px]"
+        scrollContainerClassName="h-[280px] overflow-y-auto"
+        variant={variant}
+      >
+        <Table.Header className="sticky top-0 z-10 bg-surface-secondary">
+          {columns.map((col) => (
+            <Table.Column key={col.id} id={col.id} isRowHeader={col.isRowHeader}>
+              {col.name}
+            </Table.Column>
+          ))}
+        </Table.Header>
+        <Table.Body>
+          <Table.Collection items={items}>
+            {(user) => (
+              <Table.Row>
+                <Table.Cell>{user.name}</Table.Cell>
+                <Table.Cell>{user.role}</Table.Cell>
+                <Table.Cell>
+                  <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
+                    {user.status}
+                  </Chip>
+                </Table.Cell>
+                <Table.Cell>{user.email}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Collection>
+          {!!hasMore && (
+            <Table.LoadMore isLoading={isLoading} onLoadMore={loadMore}>
+              <Spinner size="md" />
+            </Table.LoadMore>
+          )}
+        </Table.Body>
+      </Table>
+    </Wrapper>
+  );
+};
+
+export const AsyncLoading: Story = {
+  args: {
+    variant: "primary",
+  },
+  render: ({variant}) => <AsyncLoadingTemplate variant={variant} />,
 };

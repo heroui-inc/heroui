@@ -14,6 +14,7 @@ import {
   Row as RowPrimitive,
   TableBody as TableBodyPrimitive,
   TableHeader as TableHeaderPrimitive,
+  TableLoadMoreItem as TableLoadMoreItemPrimitive,
   Table as TablePrimitive,
 } from "react-aria-components";
 import {cx} from "tailwind-variants";
@@ -35,11 +36,16 @@ interface TableRootProps
   className?: string;
   /** Additional className applied to the wrapper div. */
   wrapperClassName?: string;
+  /** Additional className applied to the scroll container div. */
+  scrollContainerClassName?: string;
   children?: React.ReactNode;
 }
 
 const TableRoot = React.forwardRef<HTMLDivElement, TableRootProps>(
-  ({children, className, variant, wrapperClassName, ...tableProps}, ref) => {
+  (
+    {children, className, scrollContainerClassName, variant, wrapperClassName, ...tableProps},
+    ref,
+  ) => {
     const slots = React.useMemo(() => tableVariants({variant}), [variant]);
 
     // Separate Footer children from table children (Header/Body)
@@ -61,7 +67,10 @@ const TableRoot = React.forwardRef<HTMLDivElement, TableRootProps>(
           className={slots.wrapper({className: wrapperClassName})}
           data-slot="table-wrapper"
         >
-          <div className={slots.scrollContainer()} data-slot="table-scroll-container">
+          <div
+            className={slots.scrollContainer({className: scrollContainerClassName})}
+            data-slot="table-scroll-container"
+          >
             <TablePrimitive
               className={composeTwRenderProps(className, slots.base())}
               data-slot="table"
@@ -253,6 +262,30 @@ const TableColumnResizer = React.forwardRef<HTMLDivElement, TableColumnResizerPr
 TableColumnResizer.displayName = "HeroUI.Table.ColumnResizer";
 
 /* -------------------------------------------------------------------------------------------------
+ * Table Load More Item
+ * -----------------------------------------------------------------------------------------------*/
+interface TableLoadMoreItemProps extends ComponentPropsWithRef<typeof TableLoadMoreItemPrimitive> {}
+
+const TableLoadMoreItem = React.forwardRef<HTMLTableRowElement, TableLoadMoreItemProps>(
+  ({children, className, ...props}, ref) => {
+    const {slots} = useContext(TableContext);
+
+    return (
+      <TableLoadMoreItemPrimitive
+        ref={ref}
+        className={composeSlotClassName(slots?.loadMore, className)}
+        data-slot="table-load-more"
+        {...props}
+      >
+        <div className="flex items-center justify-center">{children}</div>
+      </TableLoadMoreItemPrimitive>
+    );
+  },
+);
+
+TableLoadMoreItem.displayName = "HeroUI.Table.LoadMore";
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 // Re-export Collection from React Aria for dynamic cell rendering within rows.
@@ -271,6 +304,7 @@ export {
   TableCell,
   TableFooter,
   TableCollection,
+  TableLoadMoreItem,
   TableResizableContainer,
 };
 
@@ -283,5 +317,6 @@ export type {
   TableRowProps,
   TableCellProps,
   TableFooterProps,
+  TableLoadMoreItemProps,
   TableResizableContainerProps,
 };

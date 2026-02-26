@@ -7,7 +7,7 @@
    Primary variant: gray background with the table body as a white card inside.
    -------------------------------------------------------------------------- */
 .table-wrapper {
-  @apply relative grid w-full overflow-hidden;
+  @apply relative grid w-full overflow-clip;
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -19,6 +19,39 @@
    -------------------------------------------------------------------------- */
 .table__scroll-container {
   @apply overflow-x-auto;
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0% 0 0 / 0.15) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: oklch(0% 0 0 / 0.15);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: oklch(0% 0 0 / 0.25);
+  }
+
+  /* Dark mode scrollbar */
+  :is([data-theme="dark"], .dark) & {
+    scrollbar-color: oklch(100% 0 0 / 0.15) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background: oklch(100% 0 0 / 0.15);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: oklch(100% 0 0 / 0.25);
+    }
+  }
 }
 
 .table-wrapper--primary {
@@ -80,7 +113,7 @@
 
 /* Primary variant: table gets the white surface card look */
 .table-wrapper--primary .table {
-  @apply overflow-hidden;
+  @apply overflow-clip;
 }
 
 /* --------------------------------------------------------------------------
@@ -256,4 +289,16 @@
 /* Hide the ::after separator when a resizer is present in the column */
 .table__column:has(.table__column-resizer)::after {
   content: none;
+}
+
+/* --------------------------------------------------------------------------
+   Load More Item — sentinel row for infinite scrolling.
+   The className applies to the <tr>. React Aria renders a <td colSpan=N>
+   inside, so we target the inner cell for centering — display:flex on a <tr>
+   would break colSpan.
+   -------------------------------------------------------------------------- */
+.table__load-more {
+  & td {
+    @apply py-3 text-center;
+  }
 }
