@@ -5,8 +5,10 @@ import {
   TableCell,
   TableCollection,
   TableColumn,
+  TableColumnResizer,
   TableFooter,
   TableHeader,
+  TableResizableContainer,
   TableRoot,
   TableRow,
 } from "./table";
@@ -19,8 +21,10 @@ export const Table = Object.assign(TableRoot, {
   Cell: TableCell,
   Collection: TableCollection,
   Column: TableColumn,
+  ColumnResizer: TableColumnResizer,
   Footer: TableFooter,
   Header: TableHeader,
+  ResizableContainer: TableResizableContainer,
   Root: TableRoot,
   Row: TableRow,
 });
@@ -30,10 +34,12 @@ export type Table = {
   RootProps: ComponentProps<typeof TableRoot>;
   HeaderProps: ComponentProps<typeof TableHeader>;
   ColumnProps: ComponentProps<typeof TableColumn>;
+  ColumnResizerProps: ComponentProps<typeof TableColumnResizer>;
   BodyProps: ComponentProps<typeof TableBody>;
   RowProps: ComponentProps<typeof TableRow>;
   CellProps: ComponentProps<typeof TableCell>;
   FooterProps: ComponentProps<typeof TableFooter>;
+  ResizableContainerProps: ComponentProps<typeof TableResizableContainer>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -43,11 +49,13 @@ export {
   TableRoot,
   TableHeader,
   TableColumn,
+  TableColumnResizer,
   TableBody,
   TableRow,
   TableCell,
   TableFooter,
   TableCollection,
+  TableResizableContainer,
 };
 
 export type {
@@ -55,10 +63,12 @@ export type {
   TableRootProps as TableProps,
   TableHeaderProps,
   TableColumnProps,
+  TableColumnResizerProps,
   TableBodyProps,
   TableRowProps,
   TableCellProps,
   TableFooterProps,
+  TableResizableContainerProps,
 } from "./table";
 
 /* -------------------------------------------------------------------------------------------------

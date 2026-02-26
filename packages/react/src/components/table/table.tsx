@@ -9,11 +9,14 @@ import {
   Cell as CellPrimitive,
   Collection as CollectionPrimitive,
   Column as ColumnPrimitive,
+  ColumnResizer as ColumnResizerPrimitive,
+  ResizableTableContainer as ResizableTableContainerPrimitive,
   Row as RowPrimitive,
   TableBody as TableBodyPrimitive,
   TableHeader as TableHeaderPrimitive,
   Table as TablePrimitive,
 } from "react-aria-components";
+import {cx} from "tailwind-variants";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
@@ -206,6 +209,50 @@ const TableFooter = React.forwardRef<HTMLDivElement, TableFooterProps>(
 TableFooter.displayName = "HeroUI.Table.Footer";
 
 /* -------------------------------------------------------------------------------------------------
+ * Table Resizable Container
+ * -----------------------------------------------------------------------------------------------*/
+interface TableResizableContainerProps extends ComponentPropsWithRef<
+  typeof ResizableTableContainerPrimitive
+> {}
+
+const TableResizableContainer = React.forwardRef<HTMLDivElement, TableResizableContainerProps>(
+  ({className, ...props}, ref) => {
+    return (
+      <ResizableTableContainerPrimitive
+        ref={ref}
+        className={cx("table__resizable-container", className)}
+        data-slot="table-resizable-container"
+        {...props}
+      />
+    );
+  },
+);
+
+TableResizableContainer.displayName = "HeroUI.Table.ResizableContainer";
+
+/* -------------------------------------------------------------------------------------------------
+ * Table Column Resizer
+ * -----------------------------------------------------------------------------------------------*/
+interface TableColumnResizerProps extends ComponentPropsWithRef<typeof ColumnResizerPrimitive> {}
+
+const TableColumnResizer = React.forwardRef<HTMLDivElement, TableColumnResizerProps>(
+  ({className, ...props}, ref) => {
+    const {slots} = useContext(TableContext);
+
+    return (
+      <ColumnResizerPrimitive
+        ref={ref}
+        className={composeTwRenderProps(className, slots?.columnResizer())}
+        data-slot="table-column-resizer"
+        {...props}
+      />
+    );
+  },
+);
+
+TableColumnResizer.displayName = "HeroUI.Table.ColumnResizer";
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 // Re-export Collection from React Aria for dynamic cell rendering within rows.
@@ -218,19 +265,23 @@ export {
   TableRoot,
   TableHeader,
   TableColumn,
+  TableColumnResizer,
   TableBody,
   TableRow,
   TableCell,
   TableFooter,
   TableCollection,
+  TableResizableContainer,
 };
 
 export type {
   TableRootProps,
   TableHeaderProps,
   TableColumnProps,
+  TableColumnResizerProps,
   TableBodyProps,
   TableRowProps,
   TableCellProps,
   TableFooterProps,
+  TableResizableContainerProps,
 };

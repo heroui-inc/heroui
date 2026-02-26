@@ -96,13 +96,13 @@
 .table__column {
   @apply relative px-4 py-2.5 text-left text-xs font-medium text-muted;
 
-  /* Separator between columns — a short vertical line on the left edge */
-  &::before {
+  /* Separator between columns — a short vertical line on the right edge */
+  &::after {
     content: "";
-    @apply pointer-events-none absolute top-1/2 left-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+    @apply pointer-events-none absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   }
 
-  &:first-child::before {
+  &:last-child::after {
     content: none;
   }
 
@@ -217,4 +217,43 @@
    -------------------------------------------------------------------------- */
 .table__footer {
   @apply flex items-center px-4 py-2.5;
+}
+
+/* --------------------------------------------------------------------------
+   Resizable Container — wraps table to enable column resizing via React Aria.
+   -------------------------------------------------------------------------- */
+.table__resizable-container {
+  @apply relative overflow-auto;
+}
+
+/* --------------------------------------------------------------------------
+   Column Resizer — drag handle between resizable columns.
+   Replaces the ::after separator when present.
+   -------------------------------------------------------------------------- */
+.table__column-resizer {
+  /* Match the ::after separator: absolute, right edge, short vertical line */
+  @apply absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+  /* Make it interactive — wider hit area with transparent padding */
+  @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2;
+  /* Reset appearance */
+  @apply border-none bg-clip-content outline-none;
+
+  &[data-hovered="true"],
+  &:hover {
+    @apply h-full w-0.5 bg-accent;
+  }
+
+  &[data-resizing="true"] {
+    @apply h-full w-0.5 bg-accent;
+  }
+
+  &[data-focus-visible="true"],
+  &:focus-visible {
+    @apply h-full w-0.5 bg-focus;
+  }
+}
+
+/* Hide the ::after separator when a resizer is present in the column */
+.table__column:has(.table__column-resizer)::after {
+  content: none;
 }

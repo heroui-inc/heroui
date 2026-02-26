@@ -295,7 +295,7 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
               </Checkbox.Control>
             </Checkbox>
           </Table.Column>
-          <Table.Column allowsSorting isRowHeader className="before:hidden" id="id">
+          <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
             {({sortDirection}) => (
               <SortableColumnHeader sortDirection={sortDirection}>Worker ID</SortableColumnHeader>
             )}
@@ -521,4 +521,49 @@ const DynamicWithSelectionTemplate = () => {
 
 export const DynamicWithSelection: Story = {
   render: () => <DynamicWithSelectionTemplate />,
+};
+
+/**
+ * Column resizing with drag handles between columns.
+ */
+export const ColumnResizing: Story = {
+  render: () => (
+    <Wrapper>
+      <Table.ResizableContainer>
+        <Table aria-label="Column resizing" className="min-w-[700px]">
+          <Table.Header>
+            <Table.Column isRowHeader defaultWidth="1fr" id="name" minWidth={160}>
+              Name
+              <Table.ColumnResizer />
+            </Table.Column>
+            <Table.Column defaultWidth="1fr" id="role" minWidth={220}>
+              Role
+              <Table.ColumnResizer />
+            </Table.Column>
+            <Table.Column defaultWidth="1fr" id="status" minWidth={100}>
+              Status
+              <Table.ColumnResizer />
+            </Table.Column>
+            <Table.Column defaultWidth="1fr" id="email" minWidth={200}>
+              Email
+            </Table.Column>
+          </Table.Header>
+          <Table.Body items={users}>
+            {(user) => (
+              <Table.Row>
+                <Table.Cell>{user.name}</Table.Cell>
+                <Table.Cell>{user.role}</Table.Cell>
+                <Table.Cell>
+                  <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
+                    {user.status}
+                  </Chip>
+                </Table.Cell>
+                <Table.Cell>{user.email}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table>
+      </Table.ResizableContainer>
+    </Wrapper>
+  ),
 };
