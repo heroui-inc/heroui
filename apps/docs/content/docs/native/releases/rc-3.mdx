@@ -1,0 +1,352 @@
+---
+title: RC 3
+description: TagGroup, Menu, and InputGroup components, Bottom Sheet Android back press fix, Expo 55 compatibility
+github:
+  pull: 309
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">February 26, 2026</span>
+</div>
+
+RC 3 delivers three new components—TagGroup for selectable tag management, Menu for popover/bottom-sheet-based dropdown menus, and InputGroup for decorated text inputs with auto-measuring prefix/suffix slots. This release also brings Android hardware back button support for all bottom-sheet-based overlays, Expo 55 compatibility with a critical `combineStyles` fix that preserves Reanimated animated style bindings, and several dependency upgrades.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the RC 3 improvements in action with our preview app! You can explore the new TagGroup, Menu, and InputGroup components, Android back press support for bottom sheets, and all the bug fixes directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## What's New
+
+### New Components
+
+This release introduces **3 new** components:
+
+- **[TagGroup](/docs/native/components/tag-group)**: Compound component for displaying and managing selectable tags with optional removal, single/multiple selection, and form field integration.
+- **[Menu](/docs/native/components/menu)**: Dropdown menu system with popover and bottom-sheet presentation modes, single/multiple selection, item variants, and animated press feedback.
+- **[InputGroup](/docs/native/components/input-group)**: Decorated text input with absolutely-positioned prefix/suffix slots that auto-measure widths and apply matching padding to the input.
+
+#### TagGroup
+
+The TagGroup component provides a compound component pattern for rendering selectable tag groups with optional removal support. It supports single and multiple selection modes, controlled and uncontrolled APIs, two visual variants (default and surface), three sizes, disabled states, and full form field integration with Label, Description, and FieldError.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/tag-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/tag-group-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-components: `TagGroup.List`, `TagGroup.Item`, `TagGroup.ItemLabel`, `TagGroup.ItemRemoveButton`
+- Single and multiple selection modes with controlled/uncontrolled APIs
+- Two visual variants: `default` and `surface`
+- Three sizes: `sm`, `md`, `lg`
+- Per-item disabled state and `disabledKeys` support
+- Remove functionality via `onRemove` callback and `TagGroup.ItemRemoveButton`
+- Empty state rendering via `renderEmptyState` on `TagGroup.List`
+- Form field integration with Label, Description, FieldError, `isInvalid`, and `isRequired`
+- `useTagGroup` and `useTagGroupItem` hooks for advanced use cases
+
+**Usage:**
+
+```tsx
+import { TagGroup } from "heroui-native";
+
+export function BasicTagGroup() {
+  return (
+    <TagGroup>
+      <TagGroup.List>
+        <TagGroup.Item id="react">
+          <TagGroup.ItemLabel>React</TagGroup.ItemLabel>
+        </TagGroup.Item>
+        <TagGroup.Item id="vue">
+          <TagGroup.ItemLabel>Vue</TagGroup.ItemLabel>
+        </TagGroup.Item>
+        <TagGroup.Item id="svelte">
+          <TagGroup.ItemLabel>Svelte</TagGroup.ItemLabel>
+        </TagGroup.Item>
+      </TagGroup.List>
+    </TagGroup>
+  );
+}
+
+export function RemovableTagGroup() {
+  const [items, setItems] = useState(["React", "Vue", "Svelte"]);
+
+  return (
+    <TagGroup onRemove={(keys) => setItems((prev) => prev.filter((i) => !keys.has(i)))}>
+      <TagGroup.List>
+        {items.map((item) => (
+          <TagGroup.Item key={item} id={item}>
+            <TagGroup.ItemLabel>{item}</TagGroup.ItemLabel>
+            <TagGroup.ItemRemoveButton />
+          </TagGroup.Item>
+        ))}
+      </TagGroup.List>
+    </TagGroup>
+  );
+}
+```
+
+For complete documentation and examples, see the [TagGroup component page](/docs/native/components/tag-group).
+
+**Related PR:** [#309](https://github.com/heroui-inc/heroui-native/pull/309)
+
+#### Menu
+
+The Menu component provides a dropdown menu system built on a compound component pattern, supporting both popover and bottom-sheet presentation modes. It includes full Reanimated-based press animations, single and multiple selection modes, item variants (default and danger), indicator styles, and configurable placement.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-components: `Menu.Trigger`, `Menu.Portal`, `Menu.Overlay`, `Menu.Content`, `Menu.Label`, `Menu.Group`, `Menu.Item`, `Menu.ItemTitle`, `Menu.ItemDescription`, `Menu.ItemIndicator`
+- Two presentation modes: `popover` and `bottom-sheet` with configurable placement (`top`, `bottom`, `left`, `right`)
+- Single and multiple selection via `Menu.Group` with `selectedKeys`/`onSelectionChange`
+- Item press animations (scale + background color) via Reanimated with full customization through the `animation` prop
+- Item variants: `default` and `danger`
+- Indicator variants: `checkmark`, `dot`, and custom content
+- `Menu.Label` for section headings
+- `shouldCloseOnSelect` control per group
+
+**Usage:**
+
+```tsx
+import { Menu } from "heroui-native";
+
+export function BasicMenu() {
+  return (
+    <Menu>
+      <Menu.Trigger>
+        <Button>Open Menu</Button>
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Overlay />
+        <Menu.Content>
+          <Menu.Item>
+            <Menu.ItemTitle>Edit</Menu.ItemTitle>
+          </Menu.Item>
+          <Menu.Item>
+            <Menu.ItemTitle>Duplicate</Menu.ItemTitle>
+          </Menu.Item>
+          <Menu.Item variant="danger">
+            <Menu.ItemTitle>Delete</Menu.ItemTitle>
+          </Menu.Item>
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+}
+
+export function MenuWithSections() {
+  return (
+    <Menu>
+      <Menu.Trigger>
+        <Button>Actions</Button>
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Overlay />
+        <Menu.Content>
+          <Menu.Group selectionMode="single" selectedKeys={selected} onSelectionChange={setSelected}>
+            <Menu.Label>View</Menu.Label>
+            <Menu.Item id="list">
+              <Menu.ItemTitle>List View</Menu.ItemTitle>
+              <Menu.ItemIndicator />
+            </Menu.Item>
+            <Menu.Item id="grid">
+              <Menu.ItemTitle>Grid View</Menu.ItemTitle>
+              <Menu.ItemIndicator />
+            </Menu.Item>
+          </Menu.Group>
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+}
+```
+
+For complete documentation and examples, see the [Menu component page](/docs/native/components/menu).
+
+**Related PR:** [#312](https://github.com/heroui-inc/heroui-native/pull/312)
+
+#### InputGroup
+
+The InputGroup component provides a decorated text input with absolutely-positioned `Prefix` and `Suffix` sub-components that automatically measure their widths via `onLayout` and apply matching padding to the Input. It features a convenient `isDecorative` prop that handles accessibility and pointer-event boilerplate for decorative addons in a single boolean, and a root `isDisabled` prop that cascades disabled state to all children via context.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-group-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-components: `InputGroup.Prefix`, `InputGroup.Suffix`, `InputGroup.Input`
+- Auto-padding: Prefix/Suffix widths are measured via `onLayout` and automatically applied as `paddingLeft`/`paddingRight` on the Input
+- `isDecorative` prop on Prefix/Suffix handles `pointerEvents="none"`, `accessibilityElementsHidden`, and `importantForAccessibility` in a single boolean
+- Root `isDisabled` cascades to all children via context (Prefix/Suffix opacity + pointer-events, Input editability)
+- `InputGroup.Input` is a direct pass-through — consumers manage `value`/`onChangeText` directly on the Input
+
+**Usage:**
+
+```tsx
+import { InputGroup } from "heroui-native";
+
+export function SearchInput() {
+  return (
+    <InputGroup>
+      <InputGroup.Prefix isDecorative>
+        <SearchIcon />
+      </InputGroup.Prefix>
+      <InputGroup.Input placeholder="Search..." />
+      <InputGroup.Suffix isDecorative>
+        <ChevronIcon />
+      </InputGroup.Suffix>
+    </InputGroup>
+  );
+}
+
+export function DisabledInput() {
+  return (
+    <InputGroup isDisabled>
+      <InputGroup.Prefix isDecorative>
+        <LockIcon />
+      </InputGroup.Prefix>
+      <InputGroup.Input placeholder="Disabled input" />
+    </InputGroup>
+  );
+}
+```
+
+For complete documentation and examples, see the [InputGroup component page](/docs/native/components/input-group).
+
+**Related PR:** [#313](https://github.com/heroui-inc/heroui-native/pull/313)
+
+## Component Improvements
+
+### Bottom Sheet Android Back Press Support
+
+The [Bottom Sheet](/docs/native/components/bottom-sheet) shared container now handles the Android hardware back button, dismissing any open bottom sheet when pressed. The `BackHandler` listener is only active while the sheet is open, preventing closed instances from consuming the event. This fix applies globally to all bottom-sheet-based components.
+
+**Supported components:**
+
+- [Bottom Sheet](/docs/native/components/bottom-sheet)
+- [Popover](/docs/native/components/popover)
+- [Select](/docs/native/components/select)
+
+The fix uses React Native's `BackHandler` API which is a no-op on iOS, so no platform-specific handling is needed.
+
+**Related PR:** [#308](https://github.com/heroui-inc/heroui-native/pull/308)
+
+### Slot `combineStyles` Fix
+
+The Slot primitive's `combineStyles` function now returns style arrays instead of using `StyleSheet.flatten`, which was destroying Reanimated `SharedValue` and `useAnimatedStyle` bindings by deep-copying style objects into plain objects.
+
+**Improvements:**
+
+- `combineStyles` preserves Reanimated animated style bindings by returning arrays
+- React Native handles nested style arrays natively, so consumer behavior is unchanged
+- Fixes animation breakages across components that compose via the Slot primitive
+
+**Related PR:** [#314](https://github.com/heroui-inc/heroui-native/pull/314)
+
+## Dependencies
+
+### Expo 55 Compatibility
+
+Dependency versions have been updated for Expo SDK 55 compatibility:
+
+- `uniwind`: 1.2.7 → 1.3.2
+- `@gorhom/bottom-sheet`: ^5 → ^5.2.8
+
+The `combineStyles` fix described above is the primary code change enabling Expo 55 support, as the previous `StyleSheet.flatten` approach broke Reanimated style bindings in the new SDK.
+
+**Related PR:** [#314](https://github.com/heroui-inc/heroui-native/pull/314)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #272](https://github.com/heroui-inc/heroui-native/issues/272)**: Resolved `FullWindowOverlay` interfering with the React Native element inspector.
+
+- **[Issue #280](https://github.com/heroui-inc/heroui-native/issues/280)**: Fixed Avatar component and other Reanimated-dependent components breaking under Expo 55. The `combineStyles` function was destroying Reanimated animated style bindings via `StyleSheet.flatten`; it now returns style arrays to preserve `SharedValue` and `useAnimatedStyle` bindings.
+
+**Related PRs:**
+
+- [#308](https://github.com/heroui-inc/heroui-native/pull/308)
+- [#314](https://github.com/heroui-inc/heroui-native/pull/314)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [TagGroup](/docs/native/components/tag-group) - New component documentation with usage examples and API reference
+- [Menu](/docs/native/components/menu) - New component documentation with usage examples and API reference
+- [InputGroup](/docs/native/components/input-group) - New component documentation with usage examples and API reference
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
