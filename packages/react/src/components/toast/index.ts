@@ -59,6 +59,7 @@ export type {
   ToastIndicatorProps,
   ToastProps,
   ToastTitleProps,
+  ToastOffsetValue,
 } from "./toast";
 
 /* -------------------------------------------------------------------------------------------------
