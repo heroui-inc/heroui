@@ -118,10 +118,11 @@
     }
   }
 
-  /* Focus visible */
+  /* Focus visible — inset shadow for consistent table focus styling */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    @apply status-focused;
+    @apply rounded-lg outline-none;
+    box-shadow: inset 0 0 0 2px var(--color-focus);
   }
 }
 
@@ -177,10 +178,11 @@
     @apply status-disabled;
   }
 
-  /* Focus visible */
+  /* Focus visible — use outline instead of ring for better table row rendering */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    @apply status-focused;
+    @apply outline-none;
+    box-shadow: inset 0 0 0 2px var(--color-focus);
   }
 
   /* Dragging state */
@@ -202,10 +204,11 @@
 
   @apply border-b border-separator-tertiary/50;
 
-  /* Focus visible */
+  /* Focus visible — inset shadow so focus stays within the cell boundaries */
   &:focus-visible,
   &[data-focus-visible="true"] {
-    @apply status-focused;
+    @apply rounded-lg outline-none;
+    box-shadow: inset 0 0 0 2px var(--color-focus);
   }
 }
 
