@@ -13,6 +13,10 @@ const COMPONENT_GROUPS = [
     components: ["(buttons)/button", "(buttons)/close-button"],
   },
   {
+    category: "Collections",
+    components: ["(collections)/menu", "(collections)/tag-group"],
+  },
+  {
     category: "Controls",
     components: ["(controls)/slider", "(controls)/switch"],
   },
@@ -24,6 +28,7 @@ const COMPONENT_GROUPS = [
       "(forms)/description",
       "(forms)/field-error",
       "(forms)/input",
+      "(forms)/input-group",
       "(forms)/input-otp",
       "(forms)/label",
       "(forms)/radio-group",
