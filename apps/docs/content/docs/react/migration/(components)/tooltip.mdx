@@ -1,0 +1,312 @@
+---
+title: Tooltip
+description: Migration guide for Tooltip from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Tooltip documentation](/docs/react/components/tooltip) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, Tooltip used a `content` prop:
+
+```tsx
+import { Tooltip, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Tooltip content="I am a tooltip">
+      <Button>Hover me</Button>
+    </Tooltip>
+  );
+}
+```
+
+In v3, Tooltip requires compound components:
+
+```tsx
+import { Tooltip, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Tooltip>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        I am a tooltip
+      </Tooltip.Content>
+    </Tooltip>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Simple Tooltip with `content` prop and children as trigger  
+**v3:** Compound components (`Tooltip.Trigger`, `Tooltip.Content`, `Tooltip.Arrow`)
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `content` | — | Use `Tooltip.Content` children |
+| `showArrow` | `showArrow` (on Content) | Moved to `Tooltip.Content` |
+| `placement` | `placement` (on Content) | Moved to `Tooltip.Content` |
+| `offset` | `offset` (on Content) | Moved to `Tooltip.Content` |
+| `color` | — | Removed (use Tailwind CSS) |
+| `size` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `shadow` | — | Removed (use Tailwind CSS) |
+| `classNames` | — | Use `className` props on individual components |
+| `motionProps` | — | Removed (animations handled differently) |
+| `trigger` | `trigger` (on root) | Still exists, simplified |
+| `delay` | `delay` (on root) | Still exists |
+| `closeDelay` | `closeDelay` (on root) | Still exists |
+| `portalContainer` | — | Not exposed |
+| `updatePositionDeps` | — | Not exposed |
+| `containerPadding`, `crossOffset` | — | Not exposed |
+| `shouldFlip` | — | Handled automatically |
+| `triggerScaleOnOpen` | — | Not available |
+| `isKeyboardDismissDisabled` | — | Not available |
+| `isDismissable` | — | Not available |
+| `shouldCloseOnBlur` | — | Not available |
+| `shouldCloseOnInteractOutside` | — | Not available |
+| `onClose` | — | Use `onOpenChange` instead |
+
+### 3. Props Moved to Tooltip.Content
+
+- `showArrow` - Now on `Tooltip.Content`
+- `placement` - Now on `Tooltip.Content`
+- `offset` - Now on `Tooltip.Content`
+
+## Migration Examples
+
+### Content Configuration
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With arrow */}
+    <Tooltip content="I am a tooltip" showArrow>
+      <Button>Hover me</Button>
+    </Tooltip>
+    
+    {/* With placement */}
+    <Tooltip content="Tooltip" placement="bottom">
+      <Button>Hover me</Button>
+    </Tooltip>
+    
+    {/* With offset */}
+    <Tooltip content="Tooltip" offset={12}>
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* With arrow */}
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content showArrow>
+        <Tooltip.Arrow />
+        <p>I am a tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    
+    {/* With placement */}
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content placement="bottom">
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    
+    {/* With offset */}
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content offset={12}>
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled Tooltip
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Tooltip
+      content="I am a tooltip"
+      isOpen={isOpen}
+      onOpenChange={setIsOpen}
+    >
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Tooltip isOpen={isOpen} onOpenChange={setIsOpen} delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>I am a tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### With Delay
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Tooltip content="Tooltip" delay={500} closeDelay={200}>
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Tooltip delay={500} closeDelay={200}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Tooltip
+      content={
+        <div>
+          <strong>Title</strong>
+          <p>Description</p>
+        </div>
+      }
+    >
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <div>
+          <strong>Title</strong>
+          <p>Description</p>
+        </div>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### With Custom Trigger
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Tooltip content="Tooltip">
+      <div className="custom-trigger">Custom trigger</div>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Tooltip delay={0}>
+      <Tooltip.Trigger className="custom-trigger">
+        <div>Custom trigger</div>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Tooltip follows this structure:
+
+```
+Tooltip (Root)
+  ├── Tooltip.Trigger
+  │   └── [Trigger element]
+  └── Tooltip.Content
+      ├── Tooltip.Arrow (optional)
+      └── [Tooltip content]
+```
+
+## Important Notes
+
+### Content Prop
+
+- **v2:** Used `content` prop for tooltip text/content
+- **v3:** Content goes as children of `Tooltip.Content` component
+
+### Arrow
+
+- **v2:** Controlled by `showArrow` prop on root
+- **v3:** Use `showArrow` prop on `Tooltip.Content` and include `Tooltip.Arrow` component
+
+### Placement and Offset
+
+- **v2:** `placement` and `offset` props on root
+- **v3:** `placement` and `offset` props moved to `Tooltip.Content`
+
+### Trigger Element
+
+- **v2:** Children were automatically used as trigger
+- **v3:** Must wrap trigger element in `Tooltip.Trigger` component
+
+### Default Delay
+
+- **v2:** `delay` default was `0`
+- **v3:** `delay` default is `700` (note: examples use `delay={0}` to match v2 behavior)
+
+## Summary
+
+1. **Component Structure**: Must use compound components (`Tooltip.Trigger`, `Tooltip.Content`, `Tooltip.Arrow`)
+2. **Content Prop Removed**: `content` prop removed - use `Tooltip.Content` children
+3. **Props Moved**: `showArrow`, `placement`, `offset` moved to `Tooltip.Content`
+4. **Styling Props Removed**: `color`, `size`, `radius`, `shadow` - use Tailwind CSS
+5. **ClassNames Removed**: Use `className` props on individual components
+6. **Motion Props Removed**: `motionProps` removed - animations handled differently
+7. **Advanced Props Removed**: Many positioning and behavior props removed
+8. **Default Delay Changed**: Default delay changed from `0` to `700`

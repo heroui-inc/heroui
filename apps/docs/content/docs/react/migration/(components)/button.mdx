@@ -1,0 +1,306 @@
+---
+title: Button
+description: Migration guide for Button from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Button documentation](/docs/react/components/button) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `Button` used a combination of `color` and `variant` props:
+
+```tsx
+import { Button } from "@heroui/react";
+
+export default function App() {
+  return <Button color="primary" variant="solid">Button</Button>;
+}
+```
+
+In v3, Button uses only the `variant` prop (no separate `color` prop):
+
+```tsx
+import { Button } from "@heroui/react";
+
+export default function App() {
+  return <Button variant="primary">Button</Button>;
+}
+```
+
+## Key Changes
+
+### 1. Variants and Colors
+
+**v2:** Used `color` + `variant` combination  
+**v3:** Uses `variant` only (no separate `color` prop)
+
+| v2 Color + Variant | v3 Variant | Notes |
+|-------------------|------------|-------|
+| `color="primary" variant="solid"` | `variant="primary"` | Default primary button |
+| `color="default" variant="solid"` | `variant="primary"` | Use primary variant |
+| `color="secondary" variant="solid"` | `variant="secondary"` | Same |
+| `color="success" variant="solid"` | `variant="primary"` | Use primary with custom styling if needed |
+| `color="warning" variant="solid"` | `variant="primary"` | Use primary with custom styling if needed |
+| `color="danger" variant="solid"` | `variant="danger"` | Danger variant available |
+| `color="primary" variant="bordered"` | `variant="secondary"` | Similar appearance |
+| `color="primary" variant="light"` | `variant="tertiary"` | Similar appearance |
+| `color="primary" variant="flat"` | `variant="tertiary"` | Similar appearance |
+| `color="primary" variant="faded"` | `variant="secondary"` | Similar appearance |
+| `color="primary" variant="ghost"` | `variant="ghost"` | Same |
+| `color="danger" variant="flat"` | `variant="danger-soft"` | New soft danger variant |
+
+**v2 Variants:** `solid`, `bordered`, `light`, `flat`, `faded`, `shadow`, `ghost`  
+**v3 Variants:** `primary`, `secondary`, `tertiary`, `outline`, `ghost`, `danger`, `danger-soft`
+
+### 2. Loading State: `isLoading` → `isPending`
+
+**v2:** Used `isLoading` prop  
+**v3:** Uses `isPending` prop
+
+### 3. Default Width Behavior
+
+**v2:** Buttons had minimum widths based on size (`min-w-16` for sm, `min-w-20` for md, `min-w-24` for lg)  
+**v3:** Buttons use `w-fit` by default (width fits content, no minimum width)
+
+This means v3 buttons will be narrower than v2 buttons when they have short text. To maintain v2's minimum width behavior, add Tailwind classes see the [Minimum Width](#minimum-width) example section.
+
+### 4. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `isLoading` | `Button` | Renamed to `isPending` |
+| `color` | - | Removed (variants handle styling) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-lg`) |
+| `startContent`, `endContent` | - | Place icons as children |
+| `spinner`, `spinnerPlacement` | - | Handle loading manually with render props |
+| `disableRipple` | - | Removed (ripple removed in v3) |
+| `disableAnimation` | - | Removed (animations handled internally) |
+| `classNames` | - | Use `className` |
+
+### 5. ButtonGroup Available
+
+**v2:** Had a dedicated `ButtonGroup` component  
+**v3:** `ButtonGroup` continues to exist. See the [ButtonGroup migration guide](/docs/react/migration/button-group) for details.
+
+## Migration Examples
+
+### Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button color="primary" variant="solid">Solid</Button>
+    <Button color="primary" variant="bordered">Bordered</Button>
+    <Button color="primary" variant="ghost">Ghost</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="ghost">Ghost</Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Loading State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Simple loading */}
+    <Button isLoading color="primary">
+      Loading
+    </Button>
+    
+    {/* Loading with conditional content */}
+    <Button 
+      isLoading={isLoading}
+      spinnerPlacement="start"
+      color="primary"
+      onPress={() => setIsLoading(true)}
+    >
+      Upload File
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Spinner } from "@heroui/react";
+    import { Icon } from "@iconify/react";
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    {/* Simple loading */}
+    <Button isPending={isLoading}>
+      {({isPending}) => (
+        <>
+          {isPending && <Spinner color="current" size="sm" />}
+          Loading
+        </>
+      )}
+    </Button>
+    
+    {/* Loading with conditional content */}
+    <Button 
+      isPending={isLoading}
+      onPress={() => setIsLoading(true)}
+    >
+      {({isPending}) => (
+        <>
+          {isPending ? (
+            <Spinner color="current" size="sm" />
+          ) : (
+            <Icon icon="gravity-ui:paperclip" />
+          )}
+          {isPending ? "Uploading..." : "Upload File"}
+        </>
+      )}
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### With Icons
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button 
+      color="success" 
+      endContent={<Icon icon="gravity-ui:camera" />}
+    >
+      Take a photo
+    </Button>
+    <Button 
+      color="danger" 
+      startContent={<Icon icon="gravity-ui:trash-bin" />}
+      variant="bordered"
+    >
+      Delete user
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button variant="primary">
+      <Icon icon="gravity-ui:camera" />
+      Take a photo
+    </Button>
+    <Button variant="secondary">
+      <Icon icon="gravity-ui:trash-bin" />
+      Delete user
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Icon Only Button
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button isIconOnly color="danger">
+      <HeartIcon />
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button isIconOnly variant="danger">
+      <Icon icon="gravity-ui:heart" />
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Button Group
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup size="sm" color="primary" variant="solid">
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup size="sm" variant="primary">
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### Sizes and Minimum Width
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 automatically applies minimum widths */}
+    <Button size="md" color="primary">Save</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* v3 uses w-fit by default - add min-width to match v2 */}
+    <Button size="md" variant="primary" className="min-w-20">
+      Save
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+## Render Props Pattern
+
+v3 Button supports a render prop pattern that provides state information:
+
+```tsx
+<Button isPending={isLoading}>
+  {({isPending, isPressed, isHovered, isFocused, isDisabled}) => (
+    <>
+      {isPending && <Spinner size="sm" />}
+      {isPressed ? "Pressed!" : "Click me"}
+    </>
+  )}
+</Button>
+```
+
+Available render props:
+- `isPending` - Whether button is in loading state
+- `isPressed` - Whether button is currently pressed
+- `isHovered` - Whether button is hovered
+- `isFocused` - Whether button is focused
+- `isFocusVisible` - Whether button should show focus indicator
+- `isDisabled` - Whether button is disabled
+
+## Summary
+
+1. **Color Prop Removed**: Use `variant` prop instead of `color` + `variant`
+2. **Variants Changed**: New variant system (`primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-soft`)
+3. **isLoading → isPending**: Loading prop renamed
+4. **Default Width Changed**: Buttons now use `w-fit` instead of minimum widths - add `min-w-*` classes to match v2 behavior
+5. **Icons**: `startContent`/`endContent` removed - place icons as children
+6. **Loading Spinner**: Must handle spinner manually with render props
+7. **Radius Removed**: Use Tailwind CSS classes
+8. **Ripple Removed**: No ripple effect in v3
+9. **ButtonGroup Available**: See [ButtonGroup migration guide](/docs/react/migration/button-group)
+10. **ClassNames Removed**: Use `className` prop

@@ -1,0 +1,266 @@
+---
+title: TimeInput
+description: Migration guide for TimeInput to TimeField from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 TimeField documentation](/docs/react/components/time-field) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, TimeInput was a single component with props:
+
+```tsx
+import { TimeInput } from "@heroui/react";
+
+export default function App() {
+  return <TimeInput label="Time" name="time" />;
+}
+```
+
+In v3, TimeField requires compound components with DateInputGroup and a render prop for segments:
+
+```tsx
+import { TimeField, DateInputGroup, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <TimeField className="w-[256px]" name="time">
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </TimeField>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Naming
+
+**v2:** `TimeInput`  
+**v3:** `TimeField`
+
+### 2. Component Structure
+
+**v2:** Single component with props  
+**v3:** Compound components: `TimeField` (root) + `DateInputGroup` with `DateInputGroup.Input` (render prop) and `DateInputGroup.Segment`; optionally `DateInputGroup.Prefix` and `DateInputGroup.Suffix`
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `label` | — | Use `Label` component |
+| `description` | — | Use `Description` component |
+| `errorMessage` | — | Use `FieldError` component |
+| `value`, `defaultValue`, `onChange` | `TimeField` | Same (React Aria) |
+| `minValue`, `maxValue`, `granularity`, `placeholderValue` | `TimeField` | Same |
+| `isRequired`, `isDisabled`, `isReadOnly`, `isInvalid`, `name` | `TimeField` | Same |
+| `validationBehavior`, `shouldForceLeadingZeros` | `TimeField` | Same |
+| `variant` | `DateInputGroup` | Simplified to `primary` \| `secondary` only |
+| `fullWidth` | `TimeField` or `DateInputGroup` | On root or group |
+| `color` | — | Removed (use Tailwind CSS) |
+| `size` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `labelPlacement` | — | Handle with layout |
+| `startContent` | `DateInputGroup.Prefix` | Use Prefix child |
+| `endContent` | `DateInputGroup.Suffix` | Use Suffix child |
+| `classNames` | — | Use `className` on `TimeField` and `DateInputGroup` parts |
+| `groupProps` | — | Use `className` or DOM props on `DateInputGroup` |
+| `labelProps` | — | Use `className` on `Label` |
+| `fieldProps` | — | Use `className` on `DateInputGroup` |
+| `innerWrapperProps` | — | Use `className` on group/input parts |
+| `descriptionProps` | — | Use `className` on `Description` |
+| `errorMessageProps` | — | Use `className` on `FieldError` |
+| `inputRef` | — | Ref handled by `TimeField` / React Aria |
+
+## Migration Examples
+
+### With Description and Error
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <TimeInput
+      description="Select start time"
+      label="Start time"
+      name="startTime"
+    />
+
+    <TimeInput
+      errorMessage="Please enter a valid time"
+      isInvalid
+      label="Time"
+      name="time"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError, Label } from "@heroui/react";
+
+    <TimeField className="w-[256px]" name="startTime">
+      <Label>Start time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <Description>Select start time</Description>
+    </TimeField>
+
+    <TimeField className="w-[256px]" isInvalid name="time">
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <FieldError>Please enter a valid time</FieldError>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseTime } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState(null);
+
+    <TimeInput
+      label="Time"
+      name="time"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import type { TimeValue } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState<TimeValue | null>(null);
+
+    <TimeField
+      className="w-[256px]"
+      name="time"
+      value={value}
+      onChange={setValue}
+    >
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+### Min/Max and Granularity
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseTime } from "@internationalized/date";
+
+    <TimeInput
+      granularity="minute"
+      label="Time"
+      maxValue={parseTime("18:00")}
+      minValue={parseTime("09:00")}
+      name="time"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { parseTime } from "@internationalized/date";
+
+    <TimeField
+      className="w-[256px]"
+      granularity="minute"
+      maxValue={parseTime("18:00")}
+      minValue={parseTime("09:00")}
+      name="time"
+    >
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+### Start/End Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <TimeInput
+      endContent={<ClockIcon />}
+      label="Time"
+      name="time"
+      startContent={<ClockIcon />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <TimeField className="w-[256px]" name="time">
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Prefix>
+          <ClockIcon />
+        </DateInputGroup.Prefix>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+        <DateInputGroup.Suffix>
+          <ClockIcon />
+        </DateInputGroup.Suffix>
+      </DateInputGroup>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 TimeField follows this structure:
+
+```
+TimeField (Root)
+  ├── Label (optional)
+  ├── DateInputGroup
+  │   ├── DateInputGroup.Prefix (optional)
+  │   ├── DateInputGroup.Input → (segment) => DateInputGroup.Segment
+  │   └── DateInputGroup.Suffix (optional)
+  ├── Description (optional)
+  └── FieldError (optional)
+```
+
+## Summary
+
+1. **Component Renamed**: `TimeInput` → `TimeField`
+2. **Component Structure**: Must use compound components: `TimeField` (root) and `DateInputGroup` with `DateInputGroup.Input` (render prop) and `DateInputGroup.Segment`
+3. **Label/Description/Error**: Use separate components (`Label`, `Description`, `FieldError`)
+4. **Time Props Unchanged**: `value`, `defaultValue`, `onChange`, `minValue`, `maxValue`, `granularity`, `placeholderValue`, `isRequired`, `isDisabled`, `isInvalid`, `name`, `validationBehavior`, `shouldForceLeadingZeros` stay on `TimeField`
+5. **Variant on DateInputGroup**: v3 supports only `variant="primary"` and `variant="secondary"` on `DateInputGroup`; `color`, `size`, `radius` removed — use Tailwind CSS
+6. **Start/End Content**: `startContent`/`endContent` → `DateInputGroup.Prefix` and `DateInputGroup.Suffix`
+7. **Label Placement Removed**: `labelPlacement` removed — handle with layout
+8. **DOM/Class Props**: `groupProps`, `labelProps`, `fieldProps`, `classNames` removed — use `className` (and standard DOM props) on the relevant parts

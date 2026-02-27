@@ -1,0 +1,263 @@
+---
+title: Alert
+description: Migration guide for Alert from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Alert documentation](/docs/react/components/alert) for complete API reference, styling guide, and advanced examples.  This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `Alert` was a single component that accepted props for title, description, icon, and other elements:
+
+```tsx
+import { Alert } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Alert 
+      title="This is an alert"
+      description="Thanks for subscribing to our newsletter!"
+    />
+  );
+}
+```
+
+In v3, Alert uses a compound component pattern with explicit subcomponents:
+
+```tsx
+import { Alert } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Alert>
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>This is an alert</Alert.Title>
+        <Alert.Description>
+          Thanks for subscribing to our newsletter!
+        </Alert.Description>
+      </Alert.Content>
+    </Alert>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `Alert` component with props  
+**v3:** Compound components: `Alert`, `Alert.Indicator`, `Alert.Content`, `Alert.Title`, `Alert.Description`
+
+### 2. Color/Status Props
+
+| v2 Color | v3 Status | Notes |
+|----------|----------|-------|
+| `default` | `default` | Same |
+| `primary` | `accent` | Renamed |
+| `secondary` | `default` | Use `default` status |
+| `success` | `success` | Same |
+| `warning` | `warning` | Same |
+| `danger` | `danger` | Same |
+
+### 3. Variants Removed
+
+**v2 Variants:** `solid`, `bordered`, `flat`, `faded`  
+**v3:** No variant prop - use Tailwind CSS classes to achieve similar effects
+
+To achieve v2 variant styles in v3:
+- **v2 `solid`** → v3 `status` + add background color classes
+- **v2 `bordered`** → v3 `status` + add `border` classes
+- **v2 `flat`** → v3 default (no additional classes needed)
+- **v2 `faded`** → v3 `status` + add opacity/background classes
+
+### 4. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `variant` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-lg`) |
+| `startContent` | - | Place content before `<Alert.Indicator />` |
+| `endContent` | - | Place content after `<Alert.Content />` |
+| `hideIcon` | - | Omit `<Alert.Indicator />` |
+| `hideIconWrapper` | - | Removed (no wrapper in v3) |
+| `icon` | `Alert.Indicator` | Render icon as child of `<Alert.Indicator />` |
+| `isVisible`, `isDefaultVisible`, `onVisibleChange` | - | Removed (handle with conditional rendering) |
+| `isClosable`, `onClose`, `closeButtonProps` | - | Removed (add `CloseButton` manually) |
+| `title` | `Alert.Title` | Use `<Alert.Title>` inside `<Alert.Content>` |
+| `description` | `Alert.Description` | Use `<Alert.Description>` inside `<Alert.Content>` |
+
+### 5. Icon Handling
+
+**v2:** Used `icon` prop or `hideIcon` prop  
+**v3:** Use `<Alert.Indicator />` with custom children or omit it entirely
+
+## Migration Examples
+
+### Icon Handling
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from '@iconify/react';
+
+    {/* With custom icon */}
+    <Alert 
+      icon={<Icon icon="gravity-ui:box" />}
+      title="Custom Icon Alert"
+    />
+    
+    {/* Without icon */}
+    <Alert hideIcon title="No Icon Alert" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from '@iconify/react';
+
+    {/* With custom icon */}
+    <Alert>
+      <Alert.Indicator>
+        <Icon icon="gravity-ui:box" />
+      </Alert.Indicator>
+      <Alert.Content>
+        <Alert.Title>Custom Icon Alert</Alert.Title>
+      </Alert.Content>
+    </Alert>
+    
+    {/* Without icon */}
+    <Alert>
+      <Alert.Content>
+        <Alert.Title>No Icon Alert</Alert.Title>
+      </Alert.Content>
+    </Alert>
+    ```
+  </Tab>
+</Tabs>
+
+### With Action Button (End Content)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Alert, Button } from "@heroui/react";
+
+    <Alert
+      title="You have no credits left"
+      description="Upgrade to a paid plan to continue"
+      endContent={
+        <Button color="warning" size="sm" variant="flat">
+          Upgrade
+        </Button>
+      }
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Alert, Button } from "@heroui/react";
+
+    <Alert status="warning">
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>You have no credits left</Alert.Title>
+        <Alert.Description>
+          Upgrade to a paid plan to continue
+        </Alert.Description>
+        <Button className="mt-2" size="sm" variant="primary">
+          Upgrade
+        </Button>
+      </Alert.Content>
+    </Alert>
+    ```
+  </Tab>
+</Tabs>
+
+### Closable Alert
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Alert
+      title="Closable Alert"
+      isClosable
+      onClose={() => console.log("Closed")}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Alert, CloseButton } from "@heroui/react";
+    import { useState } from "react";
+
+    const [isVisible, setIsVisible] = useState(true);
+
+    {isVisible && (
+      <Alert>
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>Closable Alert</Alert.Title>
+        </Alert.Content>
+        <CloseButton 
+          aria-label="Close"
+          onPress={() => setIsVisible(false)}
+        />
+      </Alert>
+    )}
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Alert 
+  classNames={{
+    base: "custom-base",
+    title: "custom-title",
+    description: "custom-description"
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Alert className="custom-base">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title className="custom-title">Title</Alert.Title>
+    <Alert.Description className="custom-description">
+      Description
+    </Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+## Component Anatomy
+
+The v3 Alert follows this structure:
+
+```
+Alert (Root)
+  ├── Alert.Indicator (optional)
+  ├── Alert.Content (optional)
+  │   ├── Alert.Title (optional)
+  │   └── Alert.Description (optional)
+  └── [Additional content like buttons, close button, etc.] (optional)
+```
+
+## Summary
+
+1. **Component Structure**: Must use compound components instead of props
+2. **Color → Status**: `color` prop renamed to `status`, `primary` → `accent`, `secondary` → `default`
+3. **Variants Removed**: No `variant` prop; use Tailwind CSS classes
+4. **Radius Removed**: No `radius` prop; use Tailwind CSS classes
+5. **No Built-in Close Button**: Must add `CloseButton` manually
+6. **No Visibility Control**: Handle visibility with conditional rendering
+7. **No Start/End Content Props**: Place content directly in the component tree
+8. **Icon Handling**: Use `<Alert.Indicator />` with children or omit it

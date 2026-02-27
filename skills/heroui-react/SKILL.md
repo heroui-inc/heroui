@@ -12,6 +12,14 @@ HeroUI v3 is a component library built on **Tailwind CSS v4** and **React Aria C
 
 ---
 
+## Installation
+
+```bash
+curl -fsSL https://v3.heroui.com/install | bash -s heroui-react
+```
+
+---
+
 ## CRITICAL: v3 Only - Ignore v2 Knowledge
 
 **This guide is for HeroUI v3 ONLY.** Do NOT use any prior knowledge of HeroUI v2.
@@ -42,7 +50,7 @@ import { motion } from "framer-motion";
 
 ```tsx
 // DO THIS - v3 pattern (no provider, compound components)
-import { Card } from "@heroui/react@beta";
+import { Card } from "@heroui/react";
 
 <Card>
 	<Card.Header>

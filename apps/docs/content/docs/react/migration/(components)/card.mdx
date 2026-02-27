@@ -1,0 +1,320 @@
+---
+title: Card
+description: Migration guide for Card from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Card documentation](/docs/react/components/card) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, Card used separate components: `CardHeader`, `CardBody`, and `CardFooter`:
+
+```tsx
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Card>
+      <CardHeader>Header</CardHeader>
+      <CardBody>Body</CardBody>
+      <CardFooter>Footer</CardFooter>
+    </Card>
+  );
+}
+```
+
+In v3, Card uses a compound component pattern with explicit subcomponents:
+
+```tsx
+import { Card } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Title</Card.Title>
+        <Card.Description>Description</Card.Description>
+      </Card.Header>
+      <Card.Content>Body content</Card.Content>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Separate components: `CardHeader`, `CardBody`, `CardFooter`  
+**v3:** Compound components: `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, `Card.Footer`
+
+### 2. Component Name Changes
+
+| v2 Component | v3 Component | Notes |
+|-------------|--------------|-------|
+| `CardHeader` | `Card.Header` | Same functionality |
+| `CardBody` | `Card.Content` | Renamed |
+| `CardFooter` | `Card.Footer` | Same functionality |
+| - | `Card.Title` | New subcomponent for header titles |
+| - | `Card.Description` | New subcomponent for header descriptions |
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `shadow` | - | Removed (use Tailwind e.g. `shadow-sm`, `shadow-md`) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-lg`) |
+| `fullWidth` | - | Removed (use Tailwind `w-full`) |
+| `isHoverable` | - | Removed (use Tailwind hover classes) |
+| `isPressable` | - | Use button or link wrapper inside Card |
+| `isBlurred`, `isFooterBlurred` | - | Removed (use Tailwind `backdrop-blur-*`) |
+| `isDisabled` | - | Removed (handle with conditional rendering) |
+| `disableAnimation`, `disableRipple` | - | Removed |
+| `allowTextSelectionOnPress` | - | Removed (not applicable) |
+| `classNames` | - | Use `className` on parts |
+
+### 4. Variants
+
+**v2:** No variant prop (used shadow/radius for styling)  
+**v3:** Has `variant` prop: `transparent`, `default`, `secondary`, `tertiary`
+
+## Migration Examples
+
+### Card Structure
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Basic structure */}
+    <Card>
+      <CardHeader>Header</CardHeader>
+      <CardBody>Body content</CardBody>
+      <CardFooter>Footer</CardFooter>
+    </Card>
+    
+    {/* With title and description */}
+    <Card>
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <p className="text-tiny uppercase font-bold">Daily Mix</p>
+        <small className="text-default-500">12 Tracks</small>
+        <h4 className="font-bold text-large">Frontend Radio</h4>
+      </CardHeader>
+      <CardBody>Content</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Basic structure */}
+    <Card>
+      <Card.Header>
+        <Card.Title>Header</Card.Title>
+      </Card.Header>
+      <Card.Content>Body content</Card.Content>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+    
+    {/* With title and description */}
+    <Card>
+      <Card.Header>
+        <Card.Title>Frontend Radio</Card.Title>
+        <Card.Description>Daily Mix • 12 Tracks</Card.Description>
+      </Card.Header>
+      <Card.Content>Content</Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### Pressable Card
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Card 
+      isPressable 
+      shadow="sm" 
+      onPress={() => console.log("pressed")}
+    >
+      <CardBody>Clickable card</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Card className="shadow-sm">
+      <button
+        type="button"
+        className="w-full cursor-pointer text-left"
+        onClick={() => console.log("pressed")}
+      >
+        <Card.Content>Clickable card</Card.Content>
+      </button>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### Card with Image
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Card className="py-4">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <h4 className="font-bold text-large">Frontend Radio</h4>
+      </CardHeader>
+      <CardBody className="overflow-visible py-2">
+        <Image
+          alt="Card background"
+          className="object-cover rounded-xl"
+          src="https://example.com/image.jpg"
+          width={270}
+        />
+      </CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Card className="py-4">
+      <Card.Header>
+        <Card.Title>Frontend Radio</Card.Title>
+      </Card.Header>
+      <Card.Content className="overflow-visible py-2">
+        <img
+          alt="Card background"
+          className="object-cover rounded-xl w-full"
+          src="https://example.com/image.jpg"
+        />
+      </Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### Blurred Footer Card
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Card, CardFooter, Image, Button } from "@heroui/react";
+
+    <Card isFooterBlurred className="border-none" radius="lg">
+      <Image
+        alt="Woman listing to music"
+        className="object-cover"
+        height={200}
+        src="https://example.com/image.jpg"
+        width={200}
+      />
+      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+        <p className="text-tiny text-white/80">Available soon.</p>
+        <Button className="text-tiny text-white bg-black/20" size="sm">
+          Notify me
+        </Button>
+      </CardFooter>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Card, Button } from "@heroui/react";
+
+    <Card className="border-none rounded-lg relative overflow-hidden">
+      <img
+        alt="Woman listing to music"
+        className="object-cover w-full h-[200px]"
+        src="https://example.com/image.jpg"
+      />
+      <Card.Footer className="justify-between backdrop-blur-md bg-white/10 border-white/20 border overflow-hidden py-1 absolute rounded-lg bottom-1 w-[calc(100%_-_8px)] shadow-sm ml-1 z-10">
+        <p className="text-tiny text-white/80">Available soon.</p>
+        <Button className="text-tiny text-white bg-black/20" size="sm">
+          Notify me
+        </Button>
+      </Card.Footer>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### Card Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have variants, uses shadow/radius */}
+    <Card shadow="md" radius="lg">
+      <CardBody>Content</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Card variant="default">
+      <Card.Content>Content</Card.Content>
+    </Card>
+    <Card variant="secondary">
+      <Card.Content>Content</Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Card 
+  classNames={{
+    base: "custom-base",
+    header: "custom-header",
+    body: "custom-body",
+    footer: "custom-footer"
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Card className="custom-base">
+  <Card.Header className="custom-header">
+    <Card.Title>Title</Card.Title>
+  </Card.Header>
+  <Card.Content className="custom-body">
+    Content
+  </Card.Content>
+  <Card.Footer className="custom-footer">
+    Footer
+  </Card.Footer>
+</Card>
+```
+
+## Component Anatomy
+
+The v3 Card follows this structure:
+
+```
+Card (Root)
+  ├── Card.Header (optional)
+  │   ├── Card.Title (optional)
+  │   └── Card.Description (optional)
+  ├── Card.Content (optional)
+  └── Card.Footer (optional)
+```
+
+## Summary
+
+1. **Component Structure**: Must use compound components instead of separate components
+2. **CardBody → Card.Content**: Component renamed
+3. **New Subcomponents**: `Card.Title` and `Card.Description` for structured headers
+4. **Props Removed**: Many styling props removed; use Tailwind CSS classes
+5. **Pressable Cards**: Use a button or link inside Card instead of `isPressable`
+6. **Blur Effects**: Use Tailwind `backdrop-blur-*` classes instead of props
+7. **Variants**: New variant system for semantic prominence levels
+8. **ClassNames Removed**: Use `className` props on individual components

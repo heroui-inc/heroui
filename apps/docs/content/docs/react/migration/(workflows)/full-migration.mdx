@@ -1,0 +1,513 @@
+---
+title: Full Migration
+description: Step-by-step guide for migrating HeroUI v2 to v3 using full migration approach
+---
+
+<Callout type="warning">
+  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
+</Callout>
+
+## Overview
+
+Full migration is a structured approach to migrating from HeroUI v2 to v3. This method involves migrating all component code first, then switching dependencies, ensuring a clean transition.
+
+**Important:** Full migration means the project will be broken during migration (v2 and v3 cannot coexist). Work in a feature branch to maintain a working main branch.
+
+### AI Assistant Resources
+
+AI assistants can help with migration. Use the [Migration MCP Server](/docs/react/migration/mcp-server) for tools and prompts, [Migration Agent Skills](/docs/react/migration/agent-skills) for skill-based knowledge, or [AGENTS.md for Migration](/docs/react/migration/agents-md) to download migration docs into your project.
+
+## Migration Workflow
+
+**IMPORTANT**: Since v2 and v3 cannot coexist, the migration happens in two main stages:
+
+1. **Preparation Stage**: Migrate all component code while still on v2 dependencies (code will be broken)
+2. **Switch Stage**: Update dependencies to v3 and fix any remaining issues
+
+**⚠️ CRITICAL: Don't build to check for errors during migration**
+
+- Use **typecheck** (e.g., `tsc --noEmit`) if available to check TypeScript errors
+- Use **lint** (e.g., `eslint`, `biome check`) if available to check code quality
+- **DO NOT** run build commands (e.g., `npm run build`, `next build`, `vite build`)
+- **DO NOT** attempt to start/run the project during migration
+
+## Step-by-Step Migration Guide
+
+<section id="step-1-update-dependencies">
+
+### Step 1: Update Dependencies
+
+#### Update React
+
+v3 requires React 19+. Update your React version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+</Tabs>
+
+**Note**: These dependency updates can be done before switching HeroUI (won't break project). However, the HeroUI package switch should only happen AFTER all component code is migrated.
+
+#### Update HeroUI Packages
+
+**Important**: Do this AFTER migrating all component code. Remove v2 packages and install v3:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm uninstall @heroui/react @heroui/theme
+    npm install @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm remove @heroui/react @heroui/theme
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn remove @heroui/react @heroui/theme
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun remove @heroui/react @heroui/theme
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+#### Remove Framer Motion
+
+v3 no longer requires Framer Motion:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm uninstall framer-motion
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm remove framer-motion
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn remove framer-motion
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun remove framer-motion
+    ```
+  </Tab>
+</Tabs>
+
+#### Update Tailwind CSS
+
+Ensure you're using Tailwind CSS v4:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add tailwindcss@^4.0.0
+    ```
+  </Tab>
+</Tabs>
+
+</section>
+
+<section id="step-2-update-theming-configuration">
+
+### Step 2: Update Theming Configuration
+
+#### Remove Tailwind Plugin Configuration
+
+**v2 Configuration:**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
+  plugins: [heroui()],
+  // ... other config
+};
+```
+
+**v3 Configuration:**
+
+Remove the `heroui()` plugin from your Tailwind config. If you only used Tailwind for HeroUI and have no other customizations, you can remove `tailwind.config.js` entirely. Otherwise, keep the file but remove the HeroUI plugin configuration.
+
+#### Update CSS Imports
+
+**v2 CSS:**
+
+```css
+/* globals.css or main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+**v3 CSS:**
+
+```css
+/* globals.css or main.css */
+@import "tailwindcss";
+@import "@heroui/styles"; /* [!code highlight]*/
+```
+
+<Callout type="warning">
+  Import order matters! Always import `tailwindcss` before `@heroui/styles`.
+</Callout>
+
+#### Remove Theme Plugin File
+
+If you created a `hero.ts` file for v2, you can remove it:
+
+```bash
+rm hero.ts
+```
+
+</section>
+
+<section id="step-3-remove-herouiprovider">
+
+### Step 3: Remove HeroUIProvider
+
+v3 does not require a Provider component. Remove it from your application root.
+
+**v2 Code:**
+
+```tsx
+// app.tsx or App.tsx
+import {HeroUIProvider} from "@heroui/react";
+
+function App() {
+  return (
+    <HeroUIProvider>
+      <YourApplication />
+    </HeroUIProvider>
+  );
+}
+```
+
+**v3 Code:**
+
+```tsx
+// app.tsx or App.tsx
+function App() {
+  return <YourApplication />;
+}
+```
+
+**If you were using Provider props:**
+
+If you were using Provider props like `navigate`, `useHref`, `locale`, `disableAnimation`, etc., you'll need to handle these differently:
+
+- **Router integration**: Use React Router or your routing library directly
+- **Locale**: Use React Aria's `I18nProvider` directly if needed
+- **Animation**: See the Animation Changes section below
+
+#### Animation Changes
+
+v3 removes the Framer Motion dependency and handles animations differently:
+
+- **CSS-based animations**: v3 uses native CSS animations and transitions instead of JavaScript-based animations
+- **Better performance**: CSS animations provide better performance and smoother animations
+- **No global disable**: Unlike v2's Provider `disableAnimation` prop, there's no global animation toggle in v3
+- **Per-component control**: Control animations through CSS or component-specific props where available
+- **Custom animations**: Use standard CSS `@keyframes` and transition properties for custom animations
+
+</section>
+
+<section id="step-4-replace-removed-hooks">
+
+### Step 4: Replace Removed Hooks
+
+HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) and utility hooks like `useDisclosure`. HeroUI v3 removes most component hooks in favor of compound components, and replaces `useDisclosure` with `useOverlayState`.
+
+See the comprehensive [Hooks Migration Guide](/docs/react/migration/hooks) for:
+- Component hooks removal and migration to compound components
+- `useDisclosure` → `useOverlayState` migration
+- Migration strategies and examples
+
+</section>
+
+<section id="step-5-update-component-imports">
+
+### Step 5: Update Component Imports
+
+All components are now imported from a single package:
+
+**v2 Imports:**
+
+```tsx
+// Individual packages (if used)
+import {Button} from "@heroui/button";
+import {Card} from "@heroui/card";
+
+// Or from main package
+import {Button, Card} from "@heroui/react";
+```
+
+**v3 Imports:**
+
+```tsx
+// All components from single package
+import {Button, Card} from "@heroui/react";
+```
+
+#### TypeScript Considerations
+
+If you're using TypeScript, be aware of type changes in v3:
+
+```tsx
+// Import types alongside components
+import {Button, type ButtonProps} from "@heroui/react";
+
+// Compound component types are properly exported
+import {Checkbox, type CheckboxProps} from "@heroui/react";
+
+// Type names may have changed - check component documentation
+type MyButtonProps = ButtonProps & {
+  customProp?: string;
+};
+```
+
+**Common type changes:**
+- Component prop interfaces may have different names or properties
+- Compound component parts have their own type exports
+- Ref types updated to match React 19 patterns
+
+</section>
+
+<section id="step-6-component-migration">
+
+### Step 6: Component Migration
+
+Use the [Component Migration Reference](/docs/react/migration#component-migration-reference) table to find migration guides for each component. Migrate components according to their specific guides.
+
+**Key points:**
+- Review individual component migration guides as needed
+- Migrate component APIs, props, and structure
+- Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
+- Update group components (ButtonGroup, CheckboxGroup, RadioGroup)
+- Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User) - replace with HTML elements
+- Handle in-progress/planned components - replace with HTML elements until v3 components are available
+
+</section>
+
+<section id="step-7-update-custom-theme-overrides">
+
+### Step 7: Update Custom Theme Overrides
+
+If you had custom theme overrides in v2, you'll need to update them for v3's CSS-based theming system.
+
+**v2 Theme Customization:**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [
+    heroui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              // custom colors
+            },
+          },
+        },
+      },
+    }),
+  ],
+};
+```
+
+**v3 Theme Customization:**
+
+v3 uses CSS variables. Override them in your CSS:
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+
+:root {
+  --color-primary: /* your color */;
+  /* other CSS variables */
+}
+```
+
+Check the [Theming documentation](/docs/react/getting-started/handbook/theming) for available CSS variables.
+
+This is a good point to pause and verify component functionality before proceeding to styling migration.
+
+</section>
+
+<section id="step-8-hooks-migration">
+
+### Step 8: Hooks Migration
+
+After component migration is complete, ensure all hooks have been migrated:
+
+1. **Replace component hooks**: Replace hooks like `useSwitch`, `useInput`, `useCheckbox`, etc. with compound components
+2. **Migrate useDisclosure**: Replace `useDisclosure` with `useOverlayState` for overlay state management
+3. **Reference hooks guide**: See the [Hooks Migration Guide](/docs/react/migration/hooks) for detailed migration instructions and examples
+
+</section>
+
+<section id="step-9-styling-migration">
+
+### Step 9: Styling Migration
+
+After hooks migration is complete, proceed with styling changes. This is a separate step to ensure component functionality is verified before addressing visual changes.
+
+**Styling Migration Guide:**
+
+See the comprehensive [Styling Migration Guide](/docs/react/migration/styling) for:
+
+- Utility class changes (`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`, etc.)
+- Color token updates (`bg-primary` → `bg-accent`, `bg-content1` → `bg-surface`, etc.)
+- Component styling differences (sizes, spacing, border radius)
+- CSS variable changes
+- Visual differences and alignment changes
+
+**Key Styling Changes:**
+
+- **Utility Classes**: Custom utilities replaced with standard Tailwind classes
+- **Color Tokens**: `primary` → `accent`, `secondary` removed, `content1-4` → `surface`/`overlay`
+- **Numbered Scales**: Color scales like `primary-50`, `primary-100` removed
+- **Border Radius**: Default values changed (smaller in v3)
+- **Component Styles**: Updated default sizes, padding, and spacing
+
+**Migration Checklist:**
+
+- Review [Styling Migration Guide](/docs/react/migration/styling)
+- Update utility classes (`text-tiny` → `text-xs`, etc.)
+- Update color tokens (`bg-primary` → `bg-accent`, etc.)
+- Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
+- Update numbered color scales (`bg-primary-50` → `bg-accent-soft`)
+- Review component styling changes (sizes, spacing, border radius)
+- Test visual appearance and adjust as needed
+
+</section>
+
+<section id="step-10-testing">
+
+### Step 10: Testing
+
+After migration, thoroughly test your application:
+
+1. **Visual Testing**: Check all components render correctly
+2. **Functionality**: Test all interactions and behaviors
+3. **Accessibility**: Verify keyboard navigation and screen reader support
+4. **Responsive Design**: Test on different screen sizes
+5. **Performance**: Check bundle size and runtime performance
+
+</section>
+
+## Migration Checklist
+
+Use this checklist to track your full migration progress:
+
+### Dependencies
+- Update React to v19+
+- Update HeroUI packages to v3 (after component migration)
+- Remove Framer Motion
+- Update Tailwind CSS to v4
+
+### Configuration
+- Remove `heroui()` plugin from Tailwind config
+- Update CSS imports
+- Remove `hero.ts` file (if exists)
+
+### Application Code - Component Migration
+- Remove `HeroUIProvider` wrapper
+- Handle Provider props migration (router, locale, animations)
+- Update all component imports to `@heroui/react`
+- Migrate renamed components (Divider → Separator, Autocomplete → Combobox, NumberInput → NumberField)
+- Update compound component patterns (Checkbox, Radio, Switch, Card, Modal, etc.)
+- Update group components (ButtonGroup, CheckboxGroup, RadioGroup)
+- Update TypeScript type references (if using component types)
+- Handle removed components (Code, Image, Navbar, Ripple, Snippet, Spacer, User) - replace with HTML elements
+- Handle in-progress/planned components - replace with HTML elements until v3 components are available
+- Consider using `asChild` prop for flexible composition
+- **Verify component functionality before proceeding to hooks migration**
+
+### Application Code - Hooks Migration
+- Review [Hooks Migration Guide](/docs/react/migration/hooks)
+- Replace component hooks (`useSwitch`, `useInput`, `useCheckbox`, etc.) with compound components
+- Replace `useDisclosure` with `useOverlayState` for overlay state management
+- Update all hook usages according to migration guide
+- **Verify hooks migration before proceeding to styling migration**
+
+### Application Code - Styling Migration
+- Review [Styling Migration Guide](/docs/react/migration/styling)
+- Update utility classes (`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`, etc.)
+- Update color tokens (`bg-primary` → `bg-accent`, `bg-secondary` → `bg-default`, etc.)
+- Update content colors (`bg-content1` → `bg-surface` or `bg-overlay`)
+- Update numbered color scales (`bg-primary-50` → `bg-accent-soft`, etc.)
+- Update transition utilities (`.transition-background` → `transition-colors`, etc.)
+- Review component styling changes (sizes, spacing, border radius)
+- Update custom theme overrides to CSS variables
+- Test visual appearance and adjust as needed
+
+### Testing
+- Visual regression testing
+- Functionality testing
+- Accessibility testing
+- Performance testing
+
+## Next Steps
+
+After completing the full migration:
+
+1. Review the [v3 component documentation](/docs/react/components)
+2. Explore new components available in v3
+3. Check out the [styling guide](/docs/react/getting-started/handbook/styling)
+4. Learn about [composition patterns](/docs/react/getting-started/handbook/composition)

@@ -1,0 +1,51 @@
+---
+title: AGENTS.md
+description: Download HeroUI v2 to v3 migration docs for AI coding agents
+---
+
+Download HeroUI v2 to v3 migration documentation directly into your project for AI assistants to reference.
+
+<Callout>
+  **Note:** The `agents-md --migration` command downloads migration docs only. Use `--react` for component documentation. Only one library option is supported at a time.
+</Callout>
+
+### Usage
+
+```bash
+npx heroui-cli@latest agents-md --migration
+```
+
+Or specify output file:
+
+```bash
+npx heroui-cli@latest agents-md --migration --output AGENTS.md
+```
+
+### What It Does
+
+- Downloads migration docs to `.heroui-docs/migration/`
+- Generates an index in `AGENTS.md` or `CLAUDE.md` with migration-specific content
+- Includes workflow guides (full and incremental), component migration guides, hooks, and styling
+- Adds `.heroui-docs/` to `.gitignore` automatically
+
+### Options
+
+- `--migration` - Download migration docs only (v2 to v3)
+- `--output <files...>` - Target file(s) (e.g., `AGENTS.md` or `AGENTS.md CLAUDE.md`)
+- `--ssh` - Use SSH for git clone
+
+### Requirements
+
+Migration docs are useful for any project migrating from HeroUI v2 to v3. The target project needs:
+
+- Tailwind CSS >= v4
+- React >= 19.0.0 (for v3)
+- `@heroui/react@beta` or `@heroui/styles@beta` (after migration)
+
+## Links
+
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [Discord Community](https://discord.gg/9b6yyZKmH4)
+- [AGENTS.md](https://agents.md/) - Learn about the AGENTS.md format
+- [CLAUDE.md](https://code.claude.com/docs/en/best-practices#write-an-effective-claude-md) - Claude equivalent of AGENTS.md
+- [AGENTS.md vs Skills](https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals) - AGENTS.md performance

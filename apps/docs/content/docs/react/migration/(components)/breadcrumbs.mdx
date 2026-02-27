@@ -1,0 +1,108 @@
+---
+title: Breadcrumbs
+description: Migration guide for Breadcrumbs from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Breadcrumbs documentation](/docs/react/components/breadcrumbs) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `Breadcrumbs` accepted an `items` prop or children:
+
+```tsx
+import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Breadcrumbs>
+      <BreadcrumbItem href="#">Home</BreadcrumbItem>
+      <BreadcrumbItem href="#">Products</BreadcrumbItem>
+      <BreadcrumbItem>Current Page</BreadcrumbItem>
+    </Breadcrumbs>
+  );
+}
+```
+
+In v3, Breadcrumbs uses a compound component pattern with `Breadcrumbs` and `BreadcrumbsItem`:
+
+```tsx
+import { Breadcrumbs, BreadcrumbsItem } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Breadcrumbs>
+      <BreadcrumbsItem href="#">Home</BreadcrumbsItem>
+      <BreadcrumbsItem href="#">Products</BreadcrumbsItem>
+      <BreadcrumbsItem>Current Page</BreadcrumbsItem>
+    </Breadcrumbs>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Name: `BreadcrumbItem` → `BreadcrumbsItem`
+
+**v2:** Used `BreadcrumbItem` (singular)  
+**v3:** Uses `BreadcrumbsItem` (plural)
+
+### 2. Separator Customization
+
+**v2:** Separator was customizable via props  
+**v3:** Separator is customizable via `separator` prop on `Breadcrumbs` root
+
+### 3. Built-in Link Component
+
+**v2:** Items could be links or text  
+**v3:** Items automatically use the `Link` component when `href` is provided
+
+### 4. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `maxItems` | - | Removed (render all items or implement collapse manually) |
+| `itemsBeforeCollapse`, `itemsAfterCollapse`, `renderEllipsis` | - | Removed (collapse/ellipsis removed with maxItems) |
+| `items` (prop pattern) | - | Use children instead |
+| `onAction` | - | Use `onPress` on individual items if needed |
+| `isDisabled` | - | Not on root; handle per item or via styling |
+| `classNames`, `itemClasses` | - | Use `className` on Breadcrumbs and BreadcrumbsItem |
+
+### 5. React Aria Components Integration
+
+**v3:** Built on React Aria Components for better accessibility and keyboard navigation support
+
+## Migration Examples
+
+### Custom Separator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Breadcrumbs separator="/">
+      <BreadcrumbItem href="#">Home</BreadcrumbItem>
+      <BreadcrumbItem>Current</BreadcrumbItem>
+    </Breadcrumbs>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+    import { Breadcrumbs, BreadcrumbsItem } from "@heroui/react";
+
+    <Breadcrumbs separator={<Icon icon="gravity-ui:caret-right" />}>
+      <BreadcrumbsItem href="#">Home</BreadcrumbsItem>
+      <BreadcrumbsItem>Current</BreadcrumbsItem>
+    </Breadcrumbs>
+    ```
+  </Tab>
+</Tabs>
+
+## Summary
+
+- Rename `BreadcrumbItem` to `BreadcrumbsItem`
+- Set `separator` on the root; it can be a string or a React element (e.g. an icon)
+- Items use the built-in Link when `href` is provided
+- No `maxItems` / collapse in v3—show all items or implement yourself; use `className` instead of `classNames` / `itemClasses`
+- Built on React Aria Components for accessibility

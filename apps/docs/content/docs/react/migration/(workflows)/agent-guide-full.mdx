@@ -1,0 +1,326 @@
+---
+title: Agent Migration Guide - Full Migration
+description: Full migration guide for AI assistants helping migrate HeroUI v2 to v3
+index: false
+---
+
+<Callout type="warning">
+  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
+</Callout>
+
+## Overview
+
+This guide is designed for AI assistants (agents) helping users migrate from HeroUI v2 to v3. It implements a **full migration approach** that analyzes the project first and migrates components in manageable batches rather than all at once.
+
+<Callout type="warning">
+  **Critical Constraint**: HeroUI v2 and v3 **should not coexist** in the same project. The project will be broken during migration. Always work in a feature branch and migrate all component code before switching dependencies.
+</Callout>
+
+## Key Principles
+
+1. **Full Migration**: Never migrate all components at once. Large projects require full migration.
+2. **Project Analysis First**: Always analyze the codebase to understand component usage before creating a migration plan.
+3. **Broken State Management**: **Critical**: The project will be broken during migration. Plan for this by:
+   - Migrating in a feature branch
+   - Preparing all code changes before switching dependencies
+   - Having a rollback plan
+   - Testing in isolated environment first
+4. **All-or-Nothing Dependency Switch**: Once dependencies are updated to v3, ALL components must be migrated. Plan component migrations before switching dependencies.
+
+## Major Changes in v3
+
+<include>../index.mdx#major-changes</include>
+
+## Detailed Migration Steps
+
+For detailed step-by-step instructions, see the [Full Migration Guide](/docs/react/migration/full-migration). The guide covers:
+
+- Dependency updates
+- Theming configuration changes
+- Removing HeroUIProvider
+- Component imports and migration
+- Hooks migration
+- Styling migration
+- Testing
+
+**Agent Note**: Dependency updates (React 19, Tailwind v4) can be done before switching HeroUI (won't break project). However, the HeroUI package switch should only happen AFTER all component code is migrated.
+
+## Hooks Migration
+
+HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) and utility hooks like `useDisclosure`. HeroUI v3 removes most component hooks in favor of compound components, and replaces `useDisclosure` with `useOverlayState`.
+
+**When to migrate hooks:**
+
+- **During component migration**: Replace component hooks (`useSwitch`, `useInput`, etc.) as you migrate each component to use compound components
+- **After component migration**: Migrate `useDisclosure` → `useOverlayState` for overlay state management before styling migration
+
+**Migration Strategy:**
+
+1. **Identify hook usage**: Search codebase for imports from `@heroui/react` that include hook names (`useSwitch`, `useInput`, `useCheckbox`, `useRadio`, `useDisclosure`, etc.)
+2. **Replace component hooks**: Use compound components instead of hooks with prop getters (done during component migration)
+3. **Replace useDisclosure**: Migrate to `useOverlayState` for overlay state management (use `get_hooks_migration_guide` MCP tool)
+4. **Reference guides**: Use `get_hooks_migration_guide` MCP tool for hooks migration, `get_component_migration_guides` for component-specific guides
+
+## Component Import Changes
+
+See the [Full Migration Guide](/docs/react/migration/full-migration#step-5-update-component-imports) for detailed component import changes.
+
+## Component Migration Reference
+
+<include>../index.mdx#step-6-component-migration-reference</include>
+
+<Callout type="info">
+  **Removed/In-Progress/Planned Components**: For components marked as ❌ Removed, 🔄 In Progress, or 📋 Planned, replace them with standard HTML elements during migration. You can migrate back to HeroUI components once they become available in v3.
+</Callout>
+
+Use the `get_component_migration_guides` MCP tool to fetch detailed guides for each component.
+
+## New Components in v3
+
+<include>../index.mdx#new-components-in-v3</include>
+
+## Custom Theme Overrides
+
+See the [Full Migration Guide](/docs/react/migration/full-migration#step-7-update-custom-theme-overrides) for custom theme override migration.
+
+## Styling Migration
+
+See the [Full Migration Guide](/docs/react/migration/full-migration#step-9-styling-migration) for detailed styling migration instructions.
+
+**Agent Note**: Use the `get_styling_migration_guide` MCP tool for comprehensive styling migration details.
+
+**Important**: Styling migration happens AFTER component migration and dependency switch.
+
+## Full Migration Workflow
+
+**IMPORTANT**: Since v2 and v3 cannot coexist, the migration happens in two main stages:
+
+1. **Preparation Stage**: Migrate all component code while still on v2 dependencies (code will be broken)
+2. **Switch Stage**: Update dependencies to v3 and fix any remaining issues
+
+**⚠️ CRITICAL: Don't build to check for errors during migration**
+
+- Use **typecheck** (e.g., `tsc --noEmit`) if available to check TypeScript errors
+- Use **lint** (e.g., `eslint`, `biome check`) if available to check code quality
+- **DO NOT** run build commands (e.g., `npm run build`, `next build`, `vite build`)
+- **DO NOT** attempt to start/run the project during migration
+
+### Phase 0: Setup and Analysis
+
+1. **Create migration branch**
+   - Create a feature branch for migration work
+   - Example: `git checkout -b migrate/heroui-v3`
+
+2. **Verify Migration MCP is configured**
+   - Check that Migration MCP server is connected
+   - Ensure `heroui-react` MCP is NOT connected (to avoid confusion)
+   - Verify MCP tools are available
+
+3. **Analyze the project and create a migration plan**
+   - Use `get_migration_workflow` to fetch this guide
+   - Scan for HeroUI v2 imports, identify all components and usage
+   - Map component dependencies
+   - Create a phased migration plan (e.g., 3-5 components per phase, by-dependency strategy)
+
+### Phase 1: Dependency Preparation (Before Code Changes)
+
+These steps can be done before switching HeroUI dependencies and won't break the project:
+
+1. **Update React to v19** (if not already)
+   - This can be done before switching HeroUI
+
+2. **Update Tailwind CSS to v4** (if not already)
+   - This can be done before switching HeroUI
+
+3. **🛑 CHECKPOINT: Stop and wait for user approval**
+   - **DO NOT proceed to next phase automatically**
+   - Explain configuration changes
+   - Wait for explicit user approval before continuing
+
+### Phase 2-N: Code Migration (v2 Dependencies Still Active)
+
+**Critical**: During this phase, code will reference v3 APIs but v2 dependencies are still installed. The project will be broken. This is expected and normal.
+
+For each component group in the migration plan:
+
+1. **Fetch component-specific guides**
+   - Use `get_component_migration_guides` MCP tool for each component
+   - Review API changes, prop migrations, structure changes
+
+2. **Apply code migrations**
+   - Migrate component code to v3 API patterns
+   - Update imports, props, component structure
+   - **Note**: Code will be broken until dependencies are switched
+
+3. **Handle dependencies**
+   - If components have dependencies, migrate dependencies first
+   - Check if dependencies are already migrated
+   - Migrate shared code as needed
+
+4. **🛑 CHECKPOINT: Stop and wait for user approval**
+   - **DO NOT proceed to next phase automatically**
+   - Summarize what was migrated in this phase
+   - Wait for explicit user approval before continuing
+
+5. **Document migration status**
+   - Track which components have been migrated
+   - Note any issues or concerns
+
+### Phase Final: Dependency Switch and Fixes
+
+**Critical**: Only proceed when ALL components have been migrated to v3 API patterns.
+
+1. **Update dependencies**
+   - Remove `@heroui/react` and `@heroui/theme` (v2)
+   - Install `@heroui/react@beta` and `@heroui/styles@beta` (v3)
+   - Remove `framer-motion` if present
+   - Update CSS imports (add `@import "@heroui/styles";`)
+   - Remove HeroUIProvider from app root
+   - Update Tailwind config (remove `heroui()` plugin)
+
+2. **Fix remaining issues**
+   - Run typecheck/lint if available (do NOT build)
+   - Fix any TypeScript errors reported by typecheck
+   - Fix any linting errors
+   - Note: Do not attempt to build or run the project during migration
+
+3. **🛑 CHECKPOINT: Stop and wait for user approval**
+   - **DO NOT proceed to styling automatically**
+   - Verify components work correctly
+   - Wait for explicit user approval before styling migration
+
+4. **Continue with styling migration**
+   - Use `get_styling_migration_guide` MCP tool to fetch styling guide
+   - Apply styling updates systematically
+
+5. **Apply styling updates**
+   - Use `get_styling_migration_guide` MCP tool
+   - Update utility classes, color tokens, CSS variables
+   - Test visual appearance
+
+6. **Final verification**
+   - Run typecheck/lint one final time (do NOT build)
+   - Verify all styling updated correctly
+   - Note: Full testing (visual, functionality, accessibility) should be done after migration is complete, not during migration
+
+## Migration Strategies
+
+### Strategy 1: By Dependency (Recommended)
+
+- Migrate foundational components first (Button, Input, Card, etc.)
+- Then migrate components that depend on them
+- Best for projects with complex component hierarchies
+- Ensures dependencies are ready before dependents
+
+**Example order**:
+1. Button, Input, Link (foundational)
+2. Card, Modal (use Button)
+3. Form, Dropdown (use Input, Button)
+4. Complex components (use multiple dependencies)
+
+### Strategy 2: By Feature
+
+- Migrate all components in a feature/module together
+- Good for feature-based code organization
+- Allows feature-by-feature testing
+- May require migrating dependencies first
+
+**Example**:
+- Feature: User Authentication
+  - Migrate: Input, Button, Form, Modal (all auth-related)
+- Feature: Dashboard
+  - Migrate: Card, Tabs, Select (all dashboard-related)
+
+### Strategy 3: By Frequency
+
+- Migrate most-used components first
+- Provides quick wins and early validation
+- Good for large codebases with clear usage patterns
+- Still need to handle dependencies
+
+**Example**:
+1. Button (used 150 times)
+2. Input (used 120 times)
+3. Card (used 80 times)
+4. ... (continue by usage count)
+
+## Best Practices for Agents
+
+1. **Warn about broken state**
+   - Always inform user that project will be broken during migration
+   - Recommend using a feature branch
+   - Set expectations about when project will work again
+
+2. **Migrate all code before switching dependencies**
+   - Complete all component code migrations first
+   - Only switch dependencies when ALL components are migrated
+   - This minimizes the broken state duration
+
+3. **Use MCP tools for each phase**
+   - Use `get_migration_workflow`, `get_component_migration_guides`, `get_styling_migration_guide` as needed
+   - **Critical**: Always stop at checkpoints and wait for user approval between phases
+
+4. **Work in a feature branch**
+   - Always recommend creating a migration branch
+   - Allow user to continue working on main branch
+   - Enable easy rollback if needed
+
+5. **Document migration status**
+   - Track which components have been migrated
+   - Note any issues or concerns
+   - Keep a checklist visible
+   - Update status after each phase
+
+6. **Handle errors gracefully**
+   - If a component migration fails, document why
+   - Continue with other components
+   - Return to failed components after dependency switch
+   - Some issues may resolve once dependencies are updated
+
+7. **Verify after dependency switch**
+   - Only after dependencies are updated to v3
+   - Run typecheck/lint (do NOT build)
+   - Fix type/lint errors as they arise
+   - Don't proceed to styling until typecheck/lint passes
+
+## Common Scenarios
+
+### Large Project (100+ components)
+
+- Use smaller batch sizes (3-5 components)
+- Prioritize by dependency or frequency
+- Allow for multiple sessions
+- Create checkpoints between phases
+- Use "by-dependency" strategy
+- Document progress clearly
+
+### Small Project (\<20 components)
+
+- Can use larger batches (5-10 components)
+- May complete in fewer phases
+- Still verify incrementally (full migration approach)
+- Can use any strategy
+- Still need to migrate all code before switching deps
+
+### Mixed v2/v3 Usage (Full Migration)
+
+- **Not possible in full migration**: v2 and v3 cannot coexist in full migration approach
+- Must migrate all components before switching dependencies
+- Use feature branch to maintain working main branch
+- Complete migration in one go
+
+## Next Steps
+
+After completing migration:
+
+1. Remove v2 dependencies (already done in dependency switch)
+2. Switch from Migration MCP to `heroui-react` MCP for v3 development
+3. Update documentation references
+4. Run final verification
+5. Merge migration branch to main
+
+---
+
+<Callout type="info">
+  This agent migration guide is designed to work with the Migration MCP server. Ensure the MCP server is properly configured and tools are available before starting migration.
+</Callout>

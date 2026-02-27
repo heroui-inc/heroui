@@ -1,0 +1,342 @@
+---
+title: DateInput
+description: Migration guide for DateInput to DateField from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 DateField documentation](/docs/react/components/date-field) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, DateInput was a single component with props:
+
+```tsx
+import { DateInput } from "@heroui/react";
+
+export default function App() {
+  return <DateInput label="Date" name="date" />;
+}
+```
+
+In v3, DateField requires compound components with DateInputGroup and a render prop for segments:
+
+```tsx
+import { DateField, DateInputGroup, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Naming
+
+**v2:** `DateInput`  
+**v3:** `DateField`
+
+### 2. Component Structure
+
+**v2:** Single component with props  
+**v3:** Compound components: `DateField` (root) + `DateInputGroup` with `DateInputGroup.Input` (render prop) and `DateInputGroup.Segment`; optionally `DateInputGroup.Prefix` and `DateInputGroup.Suffix`
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `label` | - | Removed (use `Label` component) |
+| `description` | - | Removed (use `Description` component) |
+| `errorMessage` | - | Removed (use `FieldError` component) |
+| `value`, `defaultValue`, `onChange` | `DateField` | Same (React Aria) |
+| `minValue`, `maxValue`, `granularity`, `placeholderValue` | `DateField` | Same |
+| `isRequired`, `isDisabled`, `isReadOnly`, `isInvalid`, `name` | `DateField` | Same |
+| `createCalendar`, `validationBehavior` | `DateField` | Same |
+| `variant` | `DateInputGroup` | Simplified to `primary` \| `secondary` only |
+| `fullWidth` | `DateField` or `DateInputGroup` | On root or group |
+| `color` | - | Removed (use Tailwind CSS) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `labelPlacement` | - | Removed (handle with layout) |
+| `startContent` | `DateInputGroup.Prefix` | Use Prefix child |
+| `endContent` | `DateInputGroup.Suffix` | Use Suffix child |
+| `classNames` | - | Use `className` on `DateField` and `DateInputGroup` parts |
+| `groupProps` | - | Removed (use `className` or DOM props on `DateInputGroup`) |
+| `labelProps` | - | Removed (use `className` on `Label`) |
+| `fieldProps` | - | Removed (use `className` on `DateInputGroup`) |
+| `innerWrapperProps` | - | Removed (use `className` on group/input parts) |
+| `descriptionProps` | - | Removed (use `className` on `Description`) |
+| `errorMessageProps` | - | Removed (use `className` on `FieldError`) |
+| `inputRef` | - | Removed (ref is handled by `DateField` / React Aria) |
+
+## Migration Examples
+
+### Basic
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput label="Date" name="date" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### With Description and Error
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput
+      description="Select your birth date"
+      label="Birth date"
+      name="birthdate"
+    />
+
+    <DateInput
+      errorMessage="Please enter a valid date"
+      isInvalid
+      label="Date"
+      name="date"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError, Label } from "@heroui/react";
+
+    <DateField className="w-[256px]" name="birthdate">
+      <Label>Birth date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <Description>Select your birth date</Description>
+    </DateField>
+
+    <DateField className="w-[256px]" isInvalid name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <FieldError>Please enter a valid date</FieldError>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### Required
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput isRequired label="Date" name="date" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" isRequired name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseDate } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState(null);
+
+    <DateInput
+      label="Date"
+      name="date"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import type { DateValue } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState<DateValue | null>(null);
+
+    <DateField
+      className="w-[256px]"
+      name="date"
+      value={value}
+      onChange={setValue}
+    >
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### Min/Max and Granularity
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseDate } from "@internationalized/date";
+
+    <DateInput
+      granularity="day"
+      label="Date"
+      maxValue={parseDate("2025-12-31")}
+      minValue={parseDate("2020-01-01")}
+      name="date"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { parseDate } from "@internationalized/date";
+
+    <DateField
+      className="w-[256px]"
+      granularity="day"
+      maxValue={parseDate("2025-12-31")}
+      minValue={parseDate("2020-01-01")}
+      name="date"
+    >
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### Start/End Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput
+      endContent={<CalendarIcon />}
+      label="Date"
+      name="date"
+      startContent={<CalendarIcon />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Prefix>
+          <CalendarIcon />
+        </DateInputGroup.Prefix>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+        <DateInputGroup.Suffix>
+          <CalendarIcon />
+        </DateInputGroup.Suffix>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput label="Date" name="date" variant="bordered" />
+    <DateInput color="primary" label="Date" name="date" size="lg" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup variant="primary">
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup variant="secondary">
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 DateField follows this structure:
+
+```
+DateField (Root)
+  ├── Label (optional)
+  ├── DateInputGroup
+  │   ├── DateInputGroup.Prefix (optional)
+  │   ├── DateInputGroup.Input → (segment) => DateInputGroup.Segment
+  │   └── DateInputGroup.Suffix (optional)
+  ├── Description (optional)
+  └── FieldError (optional)
+```
+
+## Summary
+
+1. **Component Renamed**: `DateInput` → `DateField`
+2. **Component Structure**: Must use compound components: `DateField` (root) and `DateInputGroup` with `DateInputGroup.Input` (render prop) and `DateInputGroup.Segment`
+3. **Label/Description/Error**: Use separate components (`Label`, `Description`, `FieldError`)
+4. **Date Props Unchanged**: `value`, `defaultValue`, `onChange`, `minValue`, `maxValue`, `granularity`, `placeholderValue`, `isRequired`, `isDisabled`, `isInvalid`, `name`, `createCalendar` stay on `DateField`
+5. **Variant on DateInputGroup**: v3 supports only `variant="primary"` and `variant="secondary"` on `DateInputGroup`; `color`, `size`, `radius` removed — use Tailwind CSS
+6. **Start/End Content**: `startContent`/`endContent` → `DateInputGroup.Prefix` and `DateInputGroup.Suffix`
+7. **Label Placement Removed**: `labelPlacement` removed — handle with layout
+8. **DOM/Class Props**: `groupProps`, `labelProps`, `fieldProps`, `classNames` removed — use `className` (and standard DOM props) on the relevant parts

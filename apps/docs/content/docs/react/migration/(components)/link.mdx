@@ -1,0 +1,181 @@
+---
+title: Link
+description: Migration guide for Link from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Link documentation](/docs/react/components/link) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single component with icon props  
+**v3:** Compound component: `Link.Icon` for icons
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `showAnchorIcon`, `anchorIcon` | - | Use `Link.Icon` component with children |
+| `isExternal` | - | Use `target="_blank"` and `rel="noopener noreferrer"` |
+| `size`, `color`, `isBlock` | - | Removed (use Tailwind CSS) |
+| `disableAnimation` | - | Removed |
+| `underline` | - | Removed (use Tailwind `underline`, etc.) |
+
+## Structure Changes
+
+In v2, Link component usage:
+
+```tsx
+import { Link } from "@heroui/react";
+
+export default function App() {
+  return <Link href="#">Default Link</Link>;
+}
+```
+
+In v3, Link component usage remains the same for basic cases:
+
+```tsx
+import { Link } from "@heroui/react";
+
+export default function App() {
+  return <Link href="#">Default Link</Link>;
+}
+```
+
+## Migration Examples
+
+### With Icons
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Default icon */}
+    <Link showAnchorIcon href="#">
+      External Link
+    </Link>
+    
+    {/* Custom icon */}
+    <Link
+      showAnchorIcon
+      anchorIcon={<CustomIcon />}
+      href="#"
+    >
+      Custom Icon
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Default icon */}
+    <Link href="#">
+      External Link
+      <Link.Icon />
+    </Link>
+    
+    {/* Custom icon */}
+    <Link href="#">
+      Custom Icon
+      <Link.Icon>
+        <CustomIcon />
+      </Link.Icon>
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### External Link
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link isExternal href="https://example.com">
+      External Link
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link
+      href="https://example.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      External Link
+      <Link.Icon />
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### Underline and offset (v3: use Tailwind)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link href="#" underline="hover">
+      Hover to underline
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#" className="hover:underline">
+      Hover to underline
+    </Link>
+    <Link href="#" className="underline underline-offset-2">
+      Underline with offset
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### With routing libraries
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    <Link as={NextLink} href="/about">
+      About
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    {/* Style your router link with the same classes as Link; add an icon if needed */}
+    <NextLink href="/about" className="link hover:underline">
+      About
+    </NextLink>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Link follows this structure:
+
+```
+Link (Root)
+  ├── Link content (text)
+  └── Link.Icon (optional)
+```
+
+## Summary
+
+1. **Icon Handling**: `showAnchorIcon` and `anchorIcon` props replaced with `Link.Icon` component
+2. **External Links**: `isExternal` prop removed - handle manually with `target` and `rel`
+3. **Size Prop Removed**: Use Tailwind CSS classes (`text-sm`, `text-base`, `text-lg`)
+4. **Color Prop Removed**: Use Tailwind CSS classes (`text-primary`, `text-danger`, etc.)
+5. **Block Prop Removed**: Use Tailwind CSS classes (`block`, `hover:bg-surface`)
+6. **Underline**: No longer a prop; use Tailwind (`underline`, `hover:underline`, `no-underline`, `underline-offset-1`, etc.)
+7. **Routing**: v3 Link does not support `as` or `asChild`; use your router's Link with Tailwind classes (e.g. `link`, `link__icon`) for consistent styling
+8. **Animation Removed**: `disableAnimation` prop removed
