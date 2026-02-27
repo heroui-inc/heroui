@@ -9,6 +9,7 @@ import {Avatar} from "../avatar";
 import {Button} from "../button";
 import {Checkbox} from "../checkbox";
 import {Chip} from "../chip";
+import {EmptyState} from "../empty-state";
 import {Pagination} from "../pagination";
 import {Spinner} from "../spinner";
 
@@ -278,103 +279,112 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
 
   return (
     <Wrapper>
-      <Table
-        aria-label="Custom cells"
-        className="min-w-[800px]"
-        selectedKeys={selectedKeys}
-        selectionMode="multiple"
-        sortDescriptor={sortDescriptor}
-        variant={variant}
-        onSelectionChange={setSelectedKeys}
-        onSortChange={setSortDescriptor}
-      >
-        <Table.Header>
-          <Table.Column className="pr-0">
-            <Checkbox aria-label="Select all" slot="selection">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-            </Checkbox>
-          </Table.Column>
-          <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
-            {({sortDirection}) => (
-              <SortableColumnHeader sortDirection={sortDirection}>Worker ID</SortableColumnHeader>
-            )}
-          </Table.Column>
-          <Table.Column allowsSorting id="name">
-            {({sortDirection}) => (
-              <SortableColumnHeader sortDirection={sortDirection}>Member</SortableColumnHeader>
-            )}
-          </Table.Column>
-          <Table.Column allowsSorting id="role">
-            {({sortDirection}) => (
-              <SortableColumnHeader sortDirection={sortDirection}>Role</SortableColumnHeader>
-            )}
-          </Table.Column>
-          <Table.Column allowsSorting id="status">
-            {({sortDirection}) => (
-              <SortableColumnHeader sortDirection={sortDirection}>Status</SortableColumnHeader>
-            )}
-          </Table.Column>
-          <Table.Column className="text-end">Actions</Table.Column>
-        </Table.Header>
-        <Table.Body>
-          {pagination.paginatedItems.map((user) => (
-            <Table.Row key={user.id} id={user.id}>
-              <Table.Cell className="pr-0">
-                <Checkbox aria-label={`Select ${user.name}`} slot="selection" variant="secondary">
+      <Table variant={variant}>
+        <Table.ScrollContainer>
+          <Table.Content
+            aria-label="Custom cells"
+            className="min-w-[800px]"
+            selectedKeys={selectedKeys}
+            selectionMode="multiple"
+            sortDescriptor={sortDescriptor}
+            onSelectionChange={setSelectedKeys}
+            onSortChange={setSortDescriptor}
+          >
+            <Table.Header>
+              <Table.Column className="pr-0">
+                <Checkbox aria-label="Select all" slot="selection">
                   <Checkbox.Control>
                     <Checkbox.Indicator />
                   </Checkbox.Control>
                 </Checkbox>
-              </Table.Cell>
-              <Table.Cell className="font-medium">
-                <div className="flex items-center gap-2">
-                  #{user.id.toString()}{" "}
-                  <Button isIconOnly size="sm" variant="ghost">
-                    <Icon className="size-4 text-muted" icon="gravity-ui:copy" />
-                  </Button>
-                </div>
-              </Table.Cell>
-              <Table.Cell>
-                <div className="flex items-center gap-3">
-                  <Avatar size="sm">
-                    <Avatar.Image src={user.image_url} />
-                    <Avatar.Fallback>
-                      {user.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </Avatar.Fallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-xs">{user.name}</span>
-                    <span className="text-xs text-muted">{user.email}</span>
-                  </div>
-                </div>
-              </Table.Cell>
-              <Table.Cell className="min-w-52">{user.role}</Table.Cell>
-              <Table.Cell className="min-w-25">
-                <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
-                  {user.status}
-                </Chip>
-              </Table.Cell>
-              <Table.Cell>
-                <div className="flex items-center gap-1">
-                  <Button isIconOnly size="sm" variant="tertiary">
-                    <Icon className="size-4" icon="gravity-ui:eye" />
-                  </Button>
-                  <Button isIconOnly size="sm" variant="tertiary">
-                    <Icon className="size-4" icon="gravity-ui:pencil" />
-                  </Button>
-                  <Button isIconOnly size="sm" variant="danger-soft">
-                    <Icon className="size-4" icon="gravity-ui:trash-bin" />
-                  </Button>
-                </div>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
+              </Table.Column>
+              <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
+                {({sortDirection}) => (
+                  <SortableColumnHeader sortDirection={sortDirection}>
+                    Worker ID
+                  </SortableColumnHeader>
+                )}
+              </Table.Column>
+              <Table.Column allowsSorting id="name">
+                {({sortDirection}) => (
+                  <SortableColumnHeader sortDirection={sortDirection}>Member</SortableColumnHeader>
+                )}
+              </Table.Column>
+              <Table.Column allowsSorting id="role">
+                {({sortDirection}) => (
+                  <SortableColumnHeader sortDirection={sortDirection}>Role</SortableColumnHeader>
+                )}
+              </Table.Column>
+              <Table.Column allowsSorting id="status">
+                {({sortDirection}) => (
+                  <SortableColumnHeader sortDirection={sortDirection}>Status</SortableColumnHeader>
+                )}
+              </Table.Column>
+              <Table.Column className="text-end">Actions</Table.Column>
+            </Table.Header>
+            <Table.Body>
+              {pagination.paginatedItems.map((user) => (
+                <Table.Row key={user.id} id={user.id}>
+                  <Table.Cell className="pr-0">
+                    <Checkbox
+                      aria-label={`Select ${user.name}`}
+                      slot="selection"
+                      variant="secondary"
+                    >
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                    </Checkbox>
+                  </Table.Cell>
+                  <Table.Cell className="font-medium">
+                    <div className="flex items-center gap-2">
+                      #{user.id.toString()}{" "}
+                      <Button isIconOnly size="sm" variant="ghost">
+                        <Icon className="size-4 text-muted" icon="gravity-ui:copy" />
+                      </Button>
+                    </div>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <div className="flex items-center gap-3">
+                      <Avatar size="sm">
+                        <Avatar.Image src={user.image_url} />
+                        <Avatar.Fallback>
+                          {user.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </Avatar.Fallback>
+                      </Avatar>
+                      <div className="flex flex-col">
+                        <span className="text-xs">{user.name}</span>
+                        <span className="text-xs text-muted">{user.email}</span>
+                      </div>
+                    </div>
+                  </Table.Cell>
+                  <Table.Cell className="min-w-52">{user.role}</Table.Cell>
+                  <Table.Cell className="min-w-25">
+                    <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
+                      {user.status}
+                    </Chip>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <div className="flex items-center gap-1">
+                      <Button isIconOnly size="sm" variant="tertiary">
+                        <Icon className="size-4" icon="gravity-ui:eye" />
+                      </Button>
+                      <Button isIconOnly size="sm" variant="tertiary">
+                        <Icon className="size-4" icon="gravity-ui:pencil" />
+                      </Button>
+                      <Button isIconOnly size="sm" variant="danger-soft">
+                        <Icon className="size-4" icon="gravity-ui:trash-bin" />
+                      </Button>
+                    </div>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
         <Table.Footer>
           <TablePaginationFooter pagination={pagination} />
         </Table.Footer>
@@ -403,28 +413,34 @@ export const SecondaryVariant: Story = {
 /**
  * Empty state via user-provided renderEmptyState.
  */
-export const EmptyState: Story = {
-  render: () => (
+export const EmptyStateDemo: Story = {
+  args: {
+    variant: "primary",
+  },
+  render: ({variant}) => (
     <Wrapper>
-      <Table aria-label="Empty state">
-        <Table.Header>
-          {columns.map((col) => (
-            <Table.Column key={col.id} id={col.id} isRowHeader={col.isRowHeader}>
-              {col.name}
-            </Table.Column>
-          ))}
-        </Table.Header>
-        <Table.Body
-          renderEmptyState={() => (
-            <div className="flex min-w-xl flex-col items-center justify-center py-12 text-center">
-              <Icon className="mb-3 size-10 text-muted" icon="gravity-ui:magnifier" />
-              <p className="text-sm font-medium text-foreground">No results found</p>
-              <p className="text-xs text-muted">Try adjusting your search or filters.</p>
-            </div>
-          )}
-        >
-          {[]}
-        </Table.Body>
+      <Table className="min-h-[200px] min-w-[600px]" variant={variant}>
+        <Table.ScrollContainer>
+          <Table.Content aria-label="Empty state" className="h-full">
+            <Table.Header>
+              {columns.map((col) => (
+                <Table.Column key={col.id} id={col.id} isRowHeader={col.isRowHeader}>
+                  {col.name}
+                </Table.Column>
+              ))}
+            </Table.Header>
+            <Table.Body
+              renderEmptyState={() => (
+                <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
+                  <Icon className="size-6 text-muted" icon="gravity-ui:tray" />
+                  <span className="text-sm text-muted">No results found</span>
+                </EmptyState>
+              )}
+            >
+              {[]}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
       </Table>
     </Wrapper>
   ),
@@ -441,21 +457,25 @@ export const DynamicCollection: Story = {
 
     return (
       <Wrapper>
-        <Table aria-label="Dynamic collection" className="min-w-[600px]">
-          <Table.Header columns={columns}>
-            {(column) => (
-              <Table.Column isRowHeader={column.isRowHeader}>{column.name}</Table.Column>
-            )}
-          </Table.Header>
-          <Table.Body items={pagination.paginatedItems}>
-            {(user) => (
-              <Table.Row>
-                <Table.Collection items={columns}>
-                  {(column) => <Table.Cell>{user[column.id as keyof User]}</Table.Cell>}
-                </Table.Collection>
-              </Table.Row>
-            )}
-          </Table.Body>
+        <Table>
+          <Table.ScrollContainer>
+            <Table.Content aria-label="Dynamic collection" className="min-w-[600px]">
+              <Table.Header columns={columns}>
+                {(column) => (
+                  <Table.Column isRowHeader={column.isRowHeader}>{column.name}</Table.Column>
+                )}
+              </Table.Header>
+              <Table.Body items={pagination.paginatedItems}>
+                {(user) => (
+                  <Table.Row>
+                    <Table.Collection items={columns}>
+                      {(column) => <Table.Cell>{user[column.id as keyof User]}</Table.Cell>}
+                    </Table.Collection>
+                  </Table.Row>
+                )}
+              </Table.Body>
+            </Table.Content>
+          </Table.ScrollContainer>
           <Table.Footer>
             <TablePaginationFooter pagination={pagination} />
           </Table.Footer>
@@ -475,43 +495,51 @@ const DynamicWithSelectionTemplate = () => {
 
   return (
     <Wrapper>
-      <Table
-        aria-label="Dynamic with selection"
-        className="min-w-[650px]"
-        selectedKeys={selectedKeys}
-        selectionMode="multiple"
-        onSelectionChange={setSelectedKeys}
-      >
-        <Table.Header>
-          <Table.Column>
-            <Checkbox aria-label="Select all" slot="selection">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-            </Checkbox>
-          </Table.Column>
-          <Table.Collection items={columns}>
-            {(column) => (
-              <Table.Column isRowHeader={column.isRowHeader}>{column.name}</Table.Column>
-            )}
-          </Table.Collection>
-        </Table.Header>
-        <Table.Body items={pagination.paginatedItems}>
-          {(user) => (
-            <Table.Row>
-              <Table.Cell>
-                <Checkbox aria-label={`Select ${user.name}`} slot="selection" variant="secondary">
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content
+            aria-label="Dynamic with selection"
+            className="min-w-[650px]"
+            selectedKeys={selectedKeys}
+            selectionMode="multiple"
+            onSelectionChange={setSelectedKeys}
+          >
+            <Table.Header>
+              <Table.Column>
+                <Checkbox aria-label="Select all" slot="selection">
                   <Checkbox.Control>
                     <Checkbox.Indicator />
                   </Checkbox.Control>
                 </Checkbox>
-              </Table.Cell>
+              </Table.Column>
               <Table.Collection items={columns}>
-                {(column) => <Table.Cell>{user[column.id]}</Table.Cell>}
+                {(column) => (
+                  <Table.Column isRowHeader={column.isRowHeader}>{column.name}</Table.Column>
+                )}
               </Table.Collection>
-            </Table.Row>
-          )}
-        </Table.Body>
+            </Table.Header>
+            <Table.Body items={pagination.paginatedItems}>
+              {(user) => (
+                <Table.Row>
+                  <Table.Cell>
+                    <Checkbox
+                      aria-label={`Select ${user.name}`}
+                      slot="selection"
+                      variant="secondary"
+                    >
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                    </Checkbox>
+                  </Table.Cell>
+                  <Table.Collection items={columns}>
+                    {(column) => <Table.Cell>{user[column.id]}</Table.Cell>}
+                  </Table.Collection>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
         <Table.Footer>
           <TablePaginationFooter pagination={pagination} />
         </Table.Footer>
@@ -530,41 +558,43 @@ export const DynamicWithSelection: Story = {
 export const ColumnResizing: Story = {
   render: () => (
     <Wrapper>
-      <Table.ResizableContainer>
-        <Table aria-label="Column resizing" className="min-w-[700px]">
-          <Table.Header>
-            <Table.Column isRowHeader defaultWidth="1fr" id="name" minWidth={160}>
-              Name
-              <Table.ColumnResizer />
-            </Table.Column>
-            <Table.Column defaultWidth="1fr" id="role" minWidth={220}>
-              Role
-              <Table.ColumnResizer />
-            </Table.Column>
-            <Table.Column defaultWidth="1fr" id="status" minWidth={100}>
-              Status
-              <Table.ColumnResizer />
-            </Table.Column>
-            <Table.Column defaultWidth="1fr" id="email" minWidth={200}>
-              Email
-            </Table.Column>
-          </Table.Header>
-          <Table.Body items={users}>
-            {(user) => (
-              <Table.Row>
-                <Table.Cell>{user.name}</Table.Cell>
-                <Table.Cell>{user.role}</Table.Cell>
-                <Table.Cell>
-                  <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
-                    {user.status}
-                  </Chip>
-                </Table.Cell>
-                <Table.Cell>{user.email}</Table.Cell>
-              </Table.Row>
-            )}
-          </Table.Body>
-        </Table>
-      </Table.ResizableContainer>
+      <Table>
+        <Table.ResizableContainer>
+          <Table.Content aria-label="Column resizing" className="min-w-[700px]">
+            <Table.Header>
+              <Table.Column isRowHeader defaultWidth="1fr" id="name" minWidth={160}>
+                Name
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" id="role" minWidth={220}>
+                Role
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" id="status" minWidth={100}>
+                Status
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" id="email" minWidth={200}>
+                Email
+              </Table.Column>
+            </Table.Header>
+            <Table.Body items={users}>
+              {(user) => (
+                <Table.Row>
+                  <Table.Cell>{user.name}</Table.Cell>
+                  <Table.Cell>{user.role}</Table.Cell>
+                  <Table.Cell>
+                    <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
+                      {user.status}
+                    </Chip>
+                  </Table.Cell>
+                  <Table.Cell>{user.email}</Table.Cell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ResizableContainer>
+      </Table>
     </Wrapper>
   ),
 };
@@ -602,40 +632,39 @@ const AsyncLoadingTemplate = ({variant = "primary"}: {variant?: "primary" | "sec
 
   return (
     <Wrapper>
-      <Table
-        aria-label="Async loading"
-        className="min-w-[600px]"
-        scrollContainerClassName="h-[280px] overflow-y-auto"
-        variant={variant}
-      >
-        <Table.Header className="sticky top-0 z-10 bg-surface-secondary">
-          {columns.map((col) => (
-            <Table.Column key={col.id} id={col.id} isRowHeader={col.isRowHeader}>
-              {col.name}
-            </Table.Column>
-          ))}
-        </Table.Header>
-        <Table.Body>
-          <Table.Collection items={items}>
-            {(user) => (
-              <Table.Row>
-                <Table.Cell>{user.name}</Table.Cell>
-                <Table.Cell>{user.role}</Table.Cell>
-                <Table.Cell>
-                  <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
-                    {user.status}
-                  </Chip>
-                </Table.Cell>
-                <Table.Cell>{user.email}</Table.Cell>
-              </Table.Row>
-            )}
-          </Table.Collection>
-          {!!hasMore && (
-            <Table.LoadMore isLoading={isLoading} onLoadMore={loadMore}>
-              <Spinner size="md" />
-            </Table.LoadMore>
-          )}
-        </Table.Body>
+      <Table variant={variant}>
+        <Table.ScrollContainer className="h-[280px] overflow-y-auto">
+          <Table.Content aria-label="Async loading" className="min-w-[600px]">
+            <Table.Header className="sticky top-0 z-10 bg-surface-secondary">
+              {columns.map((col) => (
+                <Table.Column key={col.id} id={col.id} isRowHeader={col.isRowHeader}>
+                  {col.name}
+                </Table.Column>
+              ))}
+            </Table.Header>
+            <Table.Body>
+              <Table.Collection items={items}>
+                {(user) => (
+                  <Table.Row>
+                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{user.role}</Table.Cell>
+                    <Table.Cell>
+                      <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
+                        {user.status}
+                      </Chip>
+                    </Table.Cell>
+                    <Table.Cell>{user.email}</Table.Cell>
+                  </Table.Row>
+                )}
+              </Table.Collection>
+              {!!hasMore && (
+                <Table.LoadMore isLoading={isLoading} onLoadMore={loadMore}>
+                  <Spinner size="md" />
+                </Table.LoadMore>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
       </Table>
     </Wrapper>
   );

@@ -7,26 +7,26 @@ export const tableVariants = tv({
     variant: "primary",
   },
   slots: {
-    base: "table",
+    base: "table-root",
     body: "table__body",
     cell: "table__cell",
     column: "table__column",
     columnResizer: "table__column-resizer",
+    content: "table__content",
     footer: "table__footer",
     header: "table__header",
     loadMore: "table__load-more",
     resizableContainer: "table__resizable-container",
     row: "table__row",
     scrollContainer: "table__scroll-container",
-    wrapper: "table-wrapper",
   },
   variants: {
     variant: {
       primary: {
-        wrapper: "table-wrapper--primary",
+        base: "table-root--primary",
       },
       secondary: {
-        wrapper: "table-wrapper--secondary",
+        base: "table-root--secondary",
       },
     },
   },

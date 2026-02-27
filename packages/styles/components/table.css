@@ -3,10 +3,10 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Wrapper — Outer container for table + optional footer.
+   Table Root — Outer container for table + optional footer.
    Primary variant: gray background with the table body as a white card inside.
    -------------------------------------------------------------------------- */
-.table-wrapper {
+.table-root {
   @apply relative grid w-full overflow-clip;
   grid-template-columns: minmax(0, 1fr);
 }
@@ -54,30 +54,30 @@
   }
 }
 
-.table-wrapper--primary {
+.table-root--primary {
   @apply bg-surface-secondary px-1 pb-1;
   border-radius: calc(var(--radius) * 2.5);
 }
 
-.table-wrapper--secondary {
-  /* No background, padding, or rounding on the wrapper */
+.table-root--secondary {
+  /* No background, padding, or rounding on the root */
 }
 
 /* Secondary: header is a standalone rounded card */
-.table-wrapper--secondary .table__header {
+.table-root--secondary .table__header {
   @apply rounded-2xl border-b-0;
 }
 
-.table-wrapper--secondary .table__column:first-child {
+.table-root--secondary .table__column:first-child {
   @apply rounded-tl-2xl rounded-bl-2xl;
 }
 
-.table-wrapper--secondary .table__column:last-child {
+.table-root--secondary .table__column:last-child {
   @apply rounded-tr-2xl rounded-br-2xl;
 }
 
 /* Secondary: body has no shadow or rounded corners */
-.table-wrapper--secondary .table__body {
+.table-root--secondary .table__body {
   @apply shadow-none;
 
   & tr:first-child td:first-child,
@@ -89,7 +89,7 @@
 }
 
 /* Secondary: rows are transparent and keep bottom border on every row */
-.table-wrapper--secondary .table__row {
+.table-root--secondary .table__row {
   @apply bg-transparent;
 
   @media (hover: hover) {
@@ -105,14 +105,14 @@
 }
 
 /* --------------------------------------------------------------------------
-   Table base (<table> element) — the white card inside the wrapper
+   Table Content (<table> element) — the white card inside the root
    -------------------------------------------------------------------------- */
-.table {
+.table__content {
   @apply w-full border-separate border-spacing-0 text-sm;
 }
 
 /* Primary variant: table gets the white surface card look */
-.table-wrapper--primary .table {
+.table-root--primary .table__content {
   @apply overflow-clip;
 }
 
@@ -300,5 +300,8 @@
 .table__load-more {
   & td {
     @apply py-3 text-center;
+    & > * {
+      @apply mx-auto;
+    }
   }
 }

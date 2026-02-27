@@ -31,55 +31,19 @@ const TableContext = createContext<{
 /* -------------------------------------------------------------------------------------------------
  * Table Root
  * -----------------------------------------------------------------------------------------------*/
-interface TableRootProps
-  extends Omit<ComponentPropsWithRef<typeof TablePrimitive>, "className">, TableVariants {
+interface TableRootProps extends ComponentPropsWithRef<"div">, TableVariants {
   className?: string;
-  /** Additional className applied to the wrapper div. */
-  wrapperClassName?: string;
-  /** Additional className applied to the scroll container div. */
-  scrollContainerClassName?: string;
   children?: React.ReactNode;
 }
 
 const TableRoot = React.forwardRef<HTMLDivElement, TableRootProps>(
-  (
-    {children, className, scrollContainerClassName, variant, wrapperClassName, ...tableProps},
-    ref,
-  ) => {
+  ({children, className, variant, ...props}, ref) => {
     const slots = React.useMemo(() => tableVariants({variant}), [variant]);
-
-    // Separate Footer children from table children (Header/Body)
-    const tableChildren: React.ReactNode[] = [];
-    const footerChildren: React.ReactNode[] = [];
-
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement(child) && child.type === TableFooter) {
-        footerChildren.push(child);
-      } else {
-        tableChildren.push(child);
-      }
-    });
 
     return (
       <TableContext value={{slots}}>
-        <div
-          ref={ref}
-          className={slots.wrapper({className: wrapperClassName})}
-          data-slot="table-wrapper"
-        >
-          <div
-            className={slots.scrollContainer({className: scrollContainerClassName})}
-            data-slot="table-scroll-container"
-          >
-            <TablePrimitive
-              className={composeTwRenderProps(className, slots.base())}
-              data-slot="table"
-              {...tableProps}
-            >
-              {tableChildren}
-            </TablePrimitive>
-          </div>
-          {footerChildren}
+        <div ref={ref} className={slots.base({className})} data-slot="table" {...props}>
+          {children}
         </div>
       </TableContext>
     );
@@ -87,6 +51,52 @@ const TableRoot = React.forwardRef<HTMLDivElement, TableRootProps>(
 );
 
 TableRoot.displayName = "HeroUI.Table";
+
+/* -------------------------------------------------------------------------------------------------
+ * Table Scroll Container
+ * -----------------------------------------------------------------------------------------------*/
+interface TableScrollContainerProps extends ComponentPropsWithRef<"div"> {}
+
+const TableScrollContainer = React.forwardRef<HTMLDivElement, TableScrollContainerProps>(
+  ({className, ...props}, ref) => {
+    const {slots} = useContext(TableContext);
+
+    return (
+      <div
+        ref={ref}
+        className={composeSlotClassName(slots?.scrollContainer, className)}
+        data-slot="table-scroll-container"
+        {...props}
+      />
+    );
+  },
+);
+
+TableScrollContainer.displayName = "HeroUI.Table.ScrollContainer";
+
+/* -------------------------------------------------------------------------------------------------
+ * Table Content
+ * -----------------------------------------------------------------------------------------------*/
+interface TableContentProps extends Omit<
+  ComponentPropsWithRef<typeof TablePrimitive>,
+  "className"
+> {
+  className?: string;
+}
+
+function TableContent({className, ...props}: TableContentProps) {
+  const {slots} = useContext(TableContext);
+
+  return (
+    <TablePrimitive
+      className={composeTwRenderProps(className, slots?.content())}
+      data-slot="table-content"
+      {...props}
+    />
+  );
+}
+
+(TableContent as React.FC).displayName = "HeroUI.Table.Content";
 
 /* -------------------------------------------------------------------------------------------------
  * Table Header
@@ -267,7 +277,7 @@ TableColumnResizer.displayName = "HeroUI.Table.ColumnResizer";
 interface TableLoadMoreItemProps extends ComponentPropsWithRef<typeof TableLoadMoreItemPrimitive> {}
 
 const TableLoadMoreItem = React.forwardRef<HTMLTableRowElement, TableLoadMoreItemProps>(
-  ({children, className, ...props}, ref) => {
+  ({className, ...props}, ref) => {
     const {slots} = useContext(TableContext);
 
     return (
@@ -276,9 +286,7 @@ const TableLoadMoreItem = React.forwardRef<HTMLTableRowElement, TableLoadMoreIte
         className={composeSlotClassName(slots?.loadMore, className)}
         data-slot="table-load-more"
         {...props}
-      >
-        <div className="flex items-center justify-center">{children}</div>
-      </TableLoadMoreItemPrimitive>
+      />
     );
   },
 );
@@ -296,6 +304,8 @@ const TableCollection = CollectionPrimitive;
 
 export {
   TableRoot,
+  TableScrollContainer,
+  TableContent,
   TableHeader,
   TableColumn,
   TableColumnResizer,
@@ -310,6 +320,8 @@ export {
 
 export type {
   TableRootProps,
+  TableScrollContainerProps,
+  TableContentProps,
   TableHeaderProps,
   TableColumnProps,
   TableColumnResizerProps,
