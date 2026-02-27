@@ -627,52 +627,52 @@ function useAsyncUsers() {
   return {hasMore, isLoading, items, loadMore};
 }
 
-const AsyncLoadingTemplate = ({variant = "primary"}: {variant?: "primary" | "secondary"}) => {
-  const {hasMore, isLoading, items, loadMore} = useAsyncUsers();
-
-  return (
-    <Wrapper>
-      <Table variant={variant}>
-        <Table.ScrollContainer className="h-[280px] overflow-y-auto">
-          <Table.Content aria-label="Async loading" className="min-w-[600px]">
-            <Table.Header className="sticky top-0 z-10 bg-surface-secondary">
-              {columns.map((col) => (
-                <Table.Column key={col.id} id={col.id} isRowHeader={col.isRowHeader}>
-                  {col.name}
-                </Table.Column>
-              ))}
-            </Table.Header>
-            <Table.Body>
-              <Table.Collection items={items}>
-                {(user) => (
-                  <Table.Row>
-                    <Table.Cell>{user.name}</Table.Cell>
-                    <Table.Cell>{user.role}</Table.Cell>
-                    <Table.Cell>
-                      <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
-                        {user.status}
-                      </Chip>
-                    </Table.Cell>
-                    <Table.Cell>{user.email}</Table.Cell>
-                  </Table.Row>
-                )}
-              </Table.Collection>
-              {!!hasMore && (
-                <Table.LoadMore isLoading={isLoading} onLoadMore={loadMore}>
-                  <Spinner size="md" />
-                </Table.LoadMore>
-              )}
-            </Table.Body>
-          </Table.Content>
-        </Table.ScrollContainer>
-      </Table>
-    </Wrapper>
-  );
-};
-
 export const AsyncLoading: Story = {
   args: {
     variant: "primary",
   },
-  render: ({variant}) => <AsyncLoadingTemplate variant={variant} />,
+  render: ({variant}) => {
+    const {hasMore, isLoading, items, loadMore} = useAsyncUsers();
+
+    return (
+      <Wrapper>
+        <Table variant={variant}>
+          <Table.ScrollContainer className="h-[280px] overflow-y-auto">
+            <Table.Content aria-label="Async loading" className="min-w-[600px]">
+              <Table.Header className="sticky top-0 z-10 bg-surface-secondary">
+                {columns.map((col) => (
+                  <Table.Column key={col.id} id={col.id} isRowHeader={col.isRowHeader}>
+                    {col.name}
+                  </Table.Column>
+                ))}
+              </Table.Header>
+              <Table.Body>
+                <Table.Collection items={items}>
+                  {(user) => (
+                    <Table.Row>
+                      <Table.Cell>{user.name}</Table.Cell>
+                      <Table.Cell>{user.role}</Table.Cell>
+                      <Table.Cell>
+                        <Chip color={statusColorMap[user.status]} size="sm" variant="soft">
+                          {user.status}
+                        </Chip>
+                      </Table.Cell>
+                      <Table.Cell>{user.email}</Table.Cell>
+                    </Table.Row>
+                  )}
+                </Table.Collection>
+                {!!hasMore && (
+                  <Table.LoadMore isLoading={isLoading} onLoadMore={loadMore}>
+                    <div className="flex items-center justify-center gap-2 py-2">
+                      <Spinner size="md" />
+                    </div>
+                  </Table.LoadMore>
+                )}
+              </Table.Body>
+            </Table.Content>
+          </Table.ScrollContainer>
+        </Table>
+      </Wrapper>
+    );
+  },
 };
