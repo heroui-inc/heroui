@@ -51,8 +51,6 @@ export default () => (
 
 ### Secondary Variant
 
-The secondary variant removes the background container, giving the table a flat appearance with standalone rounded headers and transparent rows.
-
 <ComponentPreview
   name="table-secondary-variant"
   minHeight="320px"
@@ -77,8 +75,6 @@ Enable row selection with `selectionMode` on `Table.Content`. Use `Checkbox` wit
 />
 
 ### Custom Cells
-
-Cells can contain any React content including avatars, chips, buttons, and other components.
 
 <ComponentPreview
   name="table-custom-cells"
@@ -119,6 +115,18 @@ Use `Table.LoadMore` for infinite scrolling. It renders a sentinel row that trig
 <ComponentPreview
   name="table-async-loading"
   minHeight="380px"
+/>
+
+### TanStack Table
+
+HeroUI's Table works as a rendering layer on top of headless table libraries.
+This example uses [TanStack Table](https://tanstack.com/table) for column
+definitions, sorting, and pagination — while HeroUI handles styling and
+accessibility.
+
+<ComponentPreview
+  name="table-tanstack-table"
+  minHeight="420px"
 />
 
 <RelatedComponents component="table" />
@@ -192,7 +200,7 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The Table component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/table.css)):
 
 #### Base Classes
-- `.table-root` - Root container
+- `.table-root` - Root container (named `table-root` instead of `table` because `table` is a built-in Tailwind CSS utility class for `display: table`)
 - `.table__scroll-container` - Horizontal scroll wrapper with custom scrollbar
 - `.table__content` - The `<table>` element
 - `.table__header` - Header row (`<thead>`)

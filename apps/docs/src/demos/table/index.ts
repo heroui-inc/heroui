@@ -7,3 +7,4 @@ export {ColumnResizing} from "./column-resizing";
 export {AsyncLoading} from "./async-loading";
 export {CustomCells} from "./custom-cells";
 export {PaginationDemo} from "./pagination";
+export {TanstackTable} from "./tanstack-table";

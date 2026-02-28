@@ -1706,6 +1706,10 @@ export const demos: Record<string, DemoItem> = {
     component: TableDemos.AsyncLoading,
     file: "table/async-loading.tsx",
   },
+  "table-tanstack-table": {
+    component: TableDemos.TanstackTable,
+    file: "table/tanstack-table.tsx",
+  },
   // TextArea demos
   "textarea-basic": {
     component: TextAreaDemos.Basic,
