@@ -66,10 +66,12 @@ interface SelectTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitiv
 
 const SelectTrigger = ({children, className, ...props}: SelectTriggerProps) => {
   const {slots} = useContext(SelectContext);
+  const state = useContext(SelectStateContext);
 
   return (
     <ButtonPrimitive
       className={composeTwRenderProps(className, slots?.trigger())}
+      data-invalid={dataAttr(state?.realtimeValidation?.isInvalid)}
       data-slot="select-trigger"
       {...props}
     >
