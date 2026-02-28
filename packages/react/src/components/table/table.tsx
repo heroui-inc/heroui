@@ -294,6 +294,28 @@ const TableLoadMoreItem = React.forwardRef<HTMLTableRowElement, TableLoadMoreIte
 TableLoadMoreItem.displayName = "HeroUI.Table.LoadMore";
 
 /* -------------------------------------------------------------------------------------------------
+ * Table Load More Content
+ * -----------------------------------------------------------------------------------------------*/
+interface TableLoadMoreContentProps extends ComponentPropsWithRef<"div"> {}
+
+const TableLoadMoreContent = React.forwardRef<HTMLDivElement, TableLoadMoreContentProps>(
+  ({className, ...props}, ref) => {
+    const {slots} = useContext(TableContext);
+
+    return (
+      <div
+        ref={ref}
+        className={composeSlotClassName(slots?.loadMoreContent, className)}
+        data-slot="table-load-more-content"
+        {...props}
+      />
+    );
+  },
+);
+
+TableLoadMoreContent.displayName = "HeroUI.Table.LoadMoreContent";
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 // Re-export Collection from React Aria for dynamic cell rendering within rows.
@@ -315,6 +337,7 @@ export {
   TableFooter,
   TableCollection,
   TableLoadMoreItem,
+  TableLoadMoreContent,
   TableResizableContainer,
 };
 
@@ -330,5 +353,6 @@ export type {
   TableCellProps,
   TableFooterProps,
   TableLoadMoreItemProps,
+  TableLoadMoreContentProps,
   TableResizableContainerProps,
 };

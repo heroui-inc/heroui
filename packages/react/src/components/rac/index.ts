@@ -23,4 +23,5 @@ export type {
   ColorChannel,
   ColorChannelRange,
   ColorAxes,
+  SortDescriptor,
 } from "./types";

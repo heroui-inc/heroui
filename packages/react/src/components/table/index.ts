@@ -9,6 +9,7 @@ import {
   TableContent,
   TableFooter,
   TableHeader,
+  TableLoadMoreContent,
   TableLoadMoreItem,
   TableResizableContainer,
   TableRoot,
@@ -29,6 +30,7 @@ export const Table = Object.assign(TableRoot, {
   Footer: TableFooter,
   Header: TableHeader,
   LoadMore: TableLoadMoreItem,
+  LoadMoreContent: TableLoadMoreContent,
   ResizableContainer: TableResizableContainer,
   Root: TableRoot,
   Row: TableRow,
@@ -48,6 +50,7 @@ export type Table = {
   CellProps: ComponentProps<typeof TableCell>;
   FooterProps: ComponentProps<typeof TableFooter>;
   LoadMoreProps: ComponentProps<typeof TableLoadMoreItem>;
+  LoadMoreContentProps: ComponentProps<typeof TableLoadMoreContent>;
   ResizableContainerProps: ComponentProps<typeof TableResizableContainer>;
 };
 
@@ -67,6 +70,7 @@ export {
   TableFooter,
   TableCollection,
   TableLoadMoreItem,
+  TableLoadMoreContent,
   TableResizableContainer,
 };
 
@@ -83,6 +87,7 @@ export type {
   TableCellProps,
   TableFooterProps,
   TableLoadMoreItemProps,
+  TableLoadMoreContentProps,
   TableResizableContainerProps,
 } from "./table";
 

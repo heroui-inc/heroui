@@ -305,3 +305,11 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   Load More Content — styled container for the loading indicator inside
+   the load-more sentinel row.
+   -------------------------------------------------------------------------- */
+.table__load-more-content {
+  @apply flex items-center justify-center gap-2 py-2;
+}

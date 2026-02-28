@@ -603,24 +603,25 @@ export const ColumnResizing: Story = {
  * Async loading with infinite scroll using Table.LoadMore.
  * Simulates fetching paginated data — scroll to the bottom to load more rows.
  */
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 function useAsyncUsers() {
   const [items, setItems] = React.useState<User[]>(() => users.slice(0, ITEMS_PER_PAGE));
   const [isLoading, setIsLoading] = React.useState(false);
+  const isLoadingRef = React.useRef(false);
   const hasMore = items.length < users.length;
 
   const loadMore = React.useCallback(() => {
-    if (!hasMore) return;
+    if (!hasMore || isLoadingRef.current) return;
+    isLoadingRef.current = true;
     setIsLoading(true);
     // Simulate network delay
     setTimeout(() => {
-      setItems((prev) => {
-        const next = users.slice(0, prev.length + ITEMS_PER_PAGE);
-
-        return next;
-      });
+      setItems((prev) => users.slice(0, prev.length + ITEMS_PER_PAGE));
       setIsLoading(false);
+      requestAnimationFrame(() => {
+        isLoadingRef.current = false;
+      });
     }, 1500);
   }, [hasMore]);
 
@@ -662,10 +663,10 @@ export const AsyncLoading: Story = {
                   )}
                 </Table.Collection>
                 {!!hasMore && (
-                  <Table.LoadMore isLoading={isLoading} onLoadMore={loadMore}>
-                    <div className="flex items-center justify-center gap-2 py-2">
+                  <Table.LoadMore isLoading={isLoading} scrollOffset={0} onLoadMore={loadMore}>
+                    <Table.LoadMoreContent>
                       <Spinner size="md" />
-                    </div>
+                    </Table.LoadMoreContent>
                   </Table.LoadMore>
                 )}
               </Table.Body>
