@@ -201,6 +201,9 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: 0.13.10
         version: 0.13.10(typescript@5.9.3)(zod@4.2.1)
+      '@tanstack/react-table':
+        specifier: 8.21.3
+        version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@vercel/analytics':
         specifier: 1.6.1
         version: 1.6.1(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -3673,6 +3676,17 @@ packages:
     resolution: {integrity: sha512-jVA+/UpKL1vRLg6Hkao5jldawNmRo7mQYrZtNHMIVpLfLhDml5nMRUo/8MwoX2vNXvnaXNNMedrMfMugAVX1nA==}
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
+
+  '@tanstack/react-table@8.21.3':
+    resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+
+  '@tanstack/table-core@8.21.3':
+    resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
+    engines: {node: '>=12'}
 
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
@@ -7555,6 +7569,7 @@ packages:
   tar@7.5.7:
     resolution: {integrity: sha512-fov56fJiRuThVFXD6o6/Q354S7pnWMJIVlDBYijsTNx6jKSE4pvrDTs6lUnmGvNyfJwFQQwWy3owKz1ucIhveQ==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
@@ -11873,6 +11888,14 @@ snapshots:
       '@tailwindcss/oxide': 4.1.18
       tailwindcss: 4.1.18
       vite: 7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)
+
+  '@tanstack/react-table@8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@tanstack/table-core': 8.21.3
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+
+  '@tanstack/table-core@8.21.3': {}
 
   '@testing-library/dom@10.4.1':
     dependencies:

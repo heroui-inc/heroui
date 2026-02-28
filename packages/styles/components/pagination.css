@@ -4,17 +4,17 @@
 
 /* Base styles */
 .pagination {
-  @apply flex w-full items-center justify-between gap-4;
+  @apply flex w-full flex-col items-center justify-between gap-4 sm:flex-row;
 }
 
 /* Summary - left side info container */
 .pagination__summary {
-  @apply flex items-center gap-2 text-sm text-muted;
+  @apply flex items-center gap-2 self-start text-sm text-muted sm:self-center;
 }
 
 /* Content - container for pagination items */
 .pagination__content {
-  @apply flex items-center gap-1;
+  @apply flex items-center gap-1 self-start sm:self-center;
 }
 
 /* Item - list item wrapper */

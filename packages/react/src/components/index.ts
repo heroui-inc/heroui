@@ -74,6 +74,7 @@ export * from "./number-field";
 export * from "./pagination";
 export * from "./select";
 export * from "./slider";
+export * from "./table";
 
 // in progress
 export * from "./calendar";
