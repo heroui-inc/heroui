@@ -62,6 +62,7 @@
     "(feedback)/spinner",
     "(layout)/surface",
     "(controls)/switch",
+    "(data-display)/table",
     "(navigation)/tabs",
     "(collections)/tag-group",
     "(forms)/text-field",

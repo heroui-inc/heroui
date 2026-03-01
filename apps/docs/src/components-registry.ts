@@ -392,6 +392,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "switch",
     title: "Switch",
   },
+  table: {
+    category: "display",
+    description: "Structured data display in rows and columns",
+    href: "/docs/components/table",
+    name: "table",
+    title: "Table",
+  },
   tabs: {
     category: "layout",
     description: "Organize content into tabbed views",
@@ -701,6 +708,7 @@ const componentRelationships: Record<string, string[]> = {
     "listbox",
   ],
   switch: ["label", "description", "button", "form"],
+  table: ["pagination", "checkbox", "chip", "avatar", "button", "spinner"],
   tabs: ["breadcrumbs"],
   taggroup: ["tag", "label", "description", "errormessage", "closebutton"],
   textarea: ["textfield", "input", "label", "fielderror", "form", "surface", "description"],
