@@ -56,6 +56,7 @@ import * as SliderDemos from "./slider";
 import * as SpinnerDemos from "./spinner";
 import * as SurfaceDemos from "./surface";
 import * as SwitchDemos from "./switch";
+import * as TableDemos from "./table";
 import * as TabsDemos from "./tabs";
 import * as TagGroupDemos from "./tag-group";
 import * as TextFieldDemos from "./text-field";
@@ -1667,6 +1668,47 @@ export const demos: Record<string, DemoItem> = {
   "tag-group-custom-render-function": {
     component: TagGroupDemos.CustomRenderFunction,
     file: "tag-group/custom-render-function.tsx",
+  },
+  // Table demos
+  "table-basic": {
+    component: TableDemos.Basic,
+    file: "table/basic.tsx",
+  },
+  "table-secondary-variant": {
+    component: TableDemos.SecondaryVariant,
+    file: "table/secondary-variant.tsx",
+  },
+  "table-sorting": {
+    component: TableDemos.Sorting,
+    file: "table/sorting.tsx",
+  },
+  "table-selection": {
+    component: TableDemos.SelectionDemo,
+    file: "table/selection.tsx",
+  },
+  "table-custom-cells": {
+    component: TableDemos.CustomCells,
+    file: "table/custom-cells.tsx",
+  },
+  "table-pagination": {
+    component: TableDemos.PaginationDemo,
+    file: "table/pagination.tsx",
+  },
+  "table-column-resizing": {
+    component: TableDemos.ColumnResizing,
+    file: "table/column-resizing.tsx",
+  },
+  "table-empty-state": {
+    component: TableDemos.EmptyStateDemo,
+    file: "table/empty-state.tsx",
+  },
+  "table-async-loading": {
+    component: TableDemos.AsyncLoading,
+    file: "table/async-loading.tsx",
+  },
+  "table-tanstack-table": {
+    component: TableDemos.TanstackTable,
+    file: "table/tanstack-table.tsx",
   },
   // TextArea demos
   "textarea-basic": {

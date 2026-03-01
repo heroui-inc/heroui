@@ -11,7 +11,7 @@ export type {
   ValidationResult,
   RouterConfig,
 } from "@react-types/shared";
-export type {TimeValue, DateValue, DateRange} from "react-aria-components";
+export type {TimeValue, DateValue, DateRange, SortDescriptor} from "react-aria-components";
 export type {
   Color,
   ColorFormat,
