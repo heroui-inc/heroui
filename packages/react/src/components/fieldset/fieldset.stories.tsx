@@ -9,8 +9,8 @@ import {FieldError} from "../field-error";
 import {Form} from "../form";
 import {Input} from "../input";
 import {Label} from "../label";
-import {TextField} from "../text-field";
 import {TextArea} from "../textarea";
+import {TextField} from "../textfield";
 
 import {Fieldset} from "./index";
 

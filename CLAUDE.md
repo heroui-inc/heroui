@@ -377,7 +377,7 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 - `spinner`: Loading indicators
 - `tabs`: Tab navigation
 - `text`: Text component for paragraphs and general text
-- `text-field`: Text input field with compound components
+- `textfield`: Text input field with compound components
 - `tooltip`: Hover tooltips
 
 ## Development Workflow

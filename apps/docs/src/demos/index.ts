@@ -59,8 +59,8 @@ import * as SwitchDemos from "./switch";
 import * as TableDemos from "./table";
 import * as TabsDemos from "./tabs";
 import * as TagGroupDemos from "./tag-group";
-import * as TextFieldDemos from "./text-field";
 import * as TextAreaDemos from "./textarea";
+import * as TextFieldDemos from "./textfield";
 import * as TimeFieldDemos from "./time-field";
 import * as ToastDemos from "./toast";
 import * as TooltipDemos from "./tooltip";
@@ -1736,53 +1736,53 @@ export const demos: Record<string, DemoItem> = {
     file: "textarea/variants.tsx",
   },
   // TextField demos
-  "text-field-basic": {
+  "textfield-basic": {
     component: TextFieldDemos.Basic,
-    file: "text-field/basic.tsx",
+    file: "textfield/basic.tsx",
   },
-  "text-field-with-description": {
+  "textfield-with-description": {
     component: TextFieldDemos.WithDescription,
-    file: "text-field/with-description.tsx",
+    file: "textfield/with-description.tsx",
   },
-  "text-field-required": {
+  "textfield-required": {
     component: TextFieldDemos.Required,
-    file: "text-field/required.tsx",
+    file: "textfield/required.tsx",
   },
-  "text-field-with-error": {
+  "textfield-with-error": {
     component: TextFieldDemos.WithError,
-    file: "text-field/with-error.tsx",
+    file: "textfield/with-error.tsx",
   },
-  "text-field-disabled": {
+  "textfield-disabled": {
     component: TextFieldDemos.Disabled,
-    file: "text-field/disabled.tsx",
+    file: "textfield/disabled.tsx",
   },
-  "text-field-textarea": {
+  "textfield-textarea": {
     component: TextFieldDemos.TextArea,
-    file: "text-field/textarea.tsx",
+    file: "textfield/textarea.tsx",
   },
-  "text-field-input-types": {
+  "textfield-input-types": {
     component: TextFieldDemos.InputTypes,
-    file: "text-field/input-types.tsx",
+    file: "textfield/input-types.tsx",
   },
-  "text-field-full-width": {
+  "textfield-full-width": {
     component: TextFieldDemos.FullWidth,
-    file: "text-field/full-width.tsx",
+    file: "textfield/full-width.tsx",
   },
-  "text-field-controlled": {
+  "textfield-controlled": {
     component: TextFieldDemos.Controlled,
-    file: "text-field/controlled.tsx",
+    file: "textfield/controlled.tsx",
   },
-  "text-field-validation": {
+  "textfield-validation": {
     component: TextFieldDemos.Validation,
-    file: "text-field/validation.tsx",
+    file: "textfield/validation.tsx",
   },
-  "text-field-on-surface": {
+  "textfield-on-surface": {
     component: TextFieldDemos.OnSurface,
-    file: "text-field/on-surface.tsx",
+    file: "textfield/on-surface.tsx",
   },
-  "text-field-custom-render-function": {
+  "textfield-custom-render-function": {
     component: TextFieldDemos.CustomRenderFunction,
-    file: "text-field/custom-render-function.tsx",
+    file: "textfield/custom-render-function.tsx",
   },
   // TimeField demos
   "time-field-basic": {
