@@ -30,7 +30,7 @@ const COMPONENT_GROUPS = [
       "number-field",
       "radio-group",
       "search-field",
-      "text-field",
+      "textfield",
       "textarea",
     ],
   },

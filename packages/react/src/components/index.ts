@@ -48,7 +48,7 @@ export * from "./tooltip";
 export * from "./input";
 export * from "./input-group";
 export * from "./textarea";
-export * from "./text-field";
+export * from "./textfield";
 export * from "./search-field";
 export * from "./text";
 export * from "./label";

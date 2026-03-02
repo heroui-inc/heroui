@@ -1,6 +1,6 @@
 import type {ComponentProps} from "react";
 
-import {TextFieldRoot} from "./text-field";
+import {TextFieldRoot} from "./textfield";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
@@ -19,12 +19,12 @@ export type TextField = {
  * -----------------------------------------------------------------------------------------------*/
 export {TextFieldRoot};
 
-export type {TextFieldRootProps, TextFieldRootProps as TextFieldProps} from "./text-field";
+export type {TextFieldRootProps, TextFieldRootProps as TextFieldProps} from "./textfield";
 
 /* -------------------------------------------------------------------------------------------------
  * Context
  * -----------------------------------------------------------------------------------------------*/
-export {TextFieldContext} from "./text-field";
+export {TextFieldContext} from "./textfield";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants
