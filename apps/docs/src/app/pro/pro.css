@@ -1,0 +1,36 @@
+@keyframes progress-gradient {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes float-stars {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-40px) translateX(40px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes float-stars-reverse {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(40px) translateX(-40px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.pro-page {
+  --accent: #0485f7;
+}
