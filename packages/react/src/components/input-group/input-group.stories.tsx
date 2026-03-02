@@ -10,7 +10,7 @@ import {FieldError} from "../field-error";
 import {Kbd} from "../kbd";
 import {Label} from "../label";
 import {Spinner} from "../spinner";
-import {TextField} from "../text-field";
+import {TextField} from "../textfield";
 import {Tooltip} from "../tooltip";
 
 import {InputGroup} from "./index";

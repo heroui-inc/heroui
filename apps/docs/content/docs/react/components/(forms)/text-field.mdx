@@ -3,8 +3,8 @@ title: TextField
 description: Composition-friendly text fields with labels, descriptions, and inline validation
 links:
   rac: TextField
-  source: text-field/text-field.tsx
-  styles: text-field.css
+  source: textfield.tsx
+  styles: textfield.css
   storybook: Components/Forms/TextField
   figma: true
 ---
@@ -17,7 +17,7 @@ import { TextField } from '@heroui/react';
 
 ### Usage
 
-<ComponentPreview name="text-field-basic" />
+<ComponentPreview name="textfield-basic" />
 
 ### Anatomy
 
@@ -39,51 +39,51 @@ For standalone inputs, use **[Input](/docs/components/input)** or **[TextArea](/
 
 ### With Description
 
-<ComponentPreview name="text-field-with-description" />
+<ComponentPreview name="textfield-with-description" />
 
 ### Required Field
 
-<ComponentPreview name="text-field-required" />
+<ComponentPreview name="textfield-required" />
 
 ### Validation
 
 Use `isInvalid` together with `FieldError` to surface validation messages.
 
-<ComponentPreview name="text-field-validation" />
+<ComponentPreview name="textfield-validation" />
 
 ### Controlled
 
 Control the value to synchronize counters, previews, or formatting.
 
-<ComponentPreview name="text-field-controlled" />
+<ComponentPreview name="textfield-controlled" />
 
 ### Error Message
 
-<ComponentPreview name="text-field-with-error" />
+<ComponentPreview name="textfield-with-error" />
 
 ### Disabled State
 
-<ComponentPreview name="text-field-disabled" />
+<ComponentPreview name="textfield-disabled" />
 
 ### TextArea
 
 Use [TextArea](/docs/components/textarea) instead of [Input](/docs/components/input) for multiline content.
 
-<ComponentPreview name="text-field-textarea" />
+<ComponentPreview name="textfield-textarea" />
 
 ### Input Types
 
-<ComponentPreview name="text-field-input-types" />
+<ComponentPreview name="textfield-input-types" />
 
 ### Full Width
 
-<ComponentPreview name="text-field-full-width" />
+<ComponentPreview name="textfield-full-width" />
 
 ### In Surface
 
 When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on Input or TextArea components to apply the lower emphasis variant suitable for surface backgrounds.
 
-<ComponentPreview name="text-field-on-surface" />
+<ComponentPreview name="textfield-on-surface" />
 
 <RelatedComponents component="textfield" />
 
@@ -92,7 +92,7 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 ### Custom Render Function
 
 <ComponentPreview
-  name="text-field-custom-render-function"
+  name="textfield-custom-render-function"
 />
 
 ## Styling
@@ -119,22 +119,22 @@ function CustomTextField() {
 
 ### Customizing the component classes
 
-TextField has minimal default styling. Override the `.text-field` class to customize the container styling.
+TextField has minimal default styling. Override the `.textfield` class to customize the container styling.
 
 ```css
 @layer components {
-  .text-field {
+  .textfield {
     @apply flex flex-col gap-1;
   }
 
   /* When invalid, the description is hidden automatically */
-  .text-field[data-invalid="true"] [data-slot="description"],
-  .text-field[aria-invalid="true"] [data-slot="description"] {
+  .textfield[data-invalid="true"] [data-slot="description"],
+  .textfield[aria-invalid="true"] [data-slot="description"] {
     @apply hidden;
   }
 
   /* Description has default padding */
-  .text-field [data-slot="description"] {
+  .textfield [data-slot="description"] {
     @apply px-1;
   }
 }
@@ -142,7 +142,7 @@ TextField has minimal default styling. Override the `.text-field` class to custo
 
 ### CSS Classes
 
-- `.text-field` – Root container with minimal styling (`flex flex-col gap-1`)
+- `.textfield` – Root container with minimal styling (`flex flex-col gap-1`)
 
 > **Note:** Child components ([Label](/docs/components/label), [Input](/docs/components/input), [TextArea](/docs/components/textarea), [Description](/docs/components/description), [FieldError](/docs/components/field-error)) have their own CSS classes and styling. See their respective documentation for customization options.
 
