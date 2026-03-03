@@ -1,13 +1,16 @@
 import {Avatar, Badge} from "@heroui/react";
 
-const AVATAR_URL = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg";
+const GREEN_AVATAR_URL = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg";
+const ORANGE_AVATAR_URL =
+  "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg";
+const RED_AVATAR_URL = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg";
 
 export function BadgeBasic() {
   return (
     <div className="flex items-center gap-6">
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={AVATAR_URL} />
+          <Avatar.Image src={GREEN_AVATAR_URL} />
           <Avatar.Fallback>JD</Avatar.Fallback>
         </Avatar>
         <Badge color="danger" size="sm">
@@ -17,7 +20,7 @@ export function BadgeBasic() {
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={AVATAR_URL} />
+          <Avatar.Image src={ORANGE_AVATAR_URL} />
           <Avatar.Fallback>AB</Avatar.Fallback>
         </Avatar>
         <Badge color="accent" size="sm">
@@ -27,7 +30,7 @@ export function BadgeBasic() {
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={AVATAR_URL} />
+          <Avatar.Image src={RED_AVATAR_URL} />
           <Avatar.Fallback>CD</Avatar.Fallback>
         </Avatar>
         <Badge color="success" size="sm" />
