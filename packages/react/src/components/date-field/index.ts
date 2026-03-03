@@ -2,6 +2,7 @@ import type {ComponentProps} from "react";
 
 import {
   DateInputGroupInput,
+  DateInputGroupInputContainer,
   DateInputGroupPrefix,
   DateInputGroupRoot,
   DateInputGroupSegment,
@@ -17,6 +18,7 @@ export const DateField = Object.assign(DateFieldRoot, {
   Root: DateFieldRoot,
   Group: DateInputGroupRoot,
   Input: DateInputGroupInput,
+  InputContainer: DateInputGroupInputContainer,
   Segment: DateInputGroupSegment,
   Prefix: DateInputGroupPrefix,
   Suffix: DateInputGroupSuffix,
@@ -27,6 +29,7 @@ export type DateField = {
   RootProps: ComponentProps<typeof DateFieldRoot>;
   GroupProps: ComponentProps<typeof DateInputGroupRoot>;
   InputProps: ComponentProps<typeof DateInputGroupInput>;
+  InputContainerProps: ComponentProps<typeof DateInputGroupInputContainer>;
   SegmentProps: ComponentProps<typeof DateInputGroupSegment>;
   PrefixProps: ComponentProps<typeof DateInputGroupPrefix>;
   SuffixProps: ComponentProps<typeof DateInputGroupSuffix>;

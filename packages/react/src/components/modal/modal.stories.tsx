@@ -10,7 +10,7 @@ import {Label} from "../label";
 import {Radio} from "../radio";
 import {RadioGroup} from "../radio-group";
 import {Surface} from "../surface";
-import {TextField} from "../text-field";
+import {TextField} from "../textfield";
 
 import {Modal} from "./index";
 

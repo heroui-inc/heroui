@@ -65,7 +65,8 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  .select[data-invalid="true"] &,
+  .select[aria-invalid="true"] & {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }

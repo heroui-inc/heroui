@@ -8,7 +8,7 @@ import React, {useContext} from "react";
 import {Input as InputPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
-import {TextFieldContext} from "../text-field";
+import {TextFieldContext} from "../textfield";
 
 /* -------------------------------------------------------------------------------------------------
  * Input Root

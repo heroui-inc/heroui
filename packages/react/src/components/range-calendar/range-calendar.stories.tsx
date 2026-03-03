@@ -471,11 +471,11 @@ export const MultipleMonths: Story = {
     <RangeCalendar
       {...args}
       aria-label="Trip dates"
-      className="@container-normal w-auto"
+      className="@container-normal w-auto overflow-x-auto"
       visibleDuration={{months: 2}}
     >
       <RangeCalendar.Heading className="sr-only" />
-      <div className="flex gap-8">
+      <div className="flex w-max gap-8">
         <div className="w-64">
           <RangeCalendar.Header>
             <RangeCalendar.NavButton slot="previous" />
@@ -516,11 +516,11 @@ export const ThreeMonths: Story = {
     <RangeCalendar
       {...args}
       aria-label="Vacation planning"
-      className="@container-normal w-auto"
+      className="@container-normal w-auto overflow-x-auto"
       visibleDuration={{months: 3}}
     >
       <RangeCalendar.Heading className="sr-only" />
-      <div className="flex gap-7">
+      <div className="flex w-max gap-7">
         <div className="w-64">
           <RangeCalendar.Header>
             <RangeCalendar.NavButton slot="previous" />

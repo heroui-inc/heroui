@@ -4,7 +4,7 @@ import React from "react";
 
 import {Input} from "../input";
 import {Label} from "../label";
-import {TextField} from "../text-field";
+import {TextField} from "../textfield";
 
 import {Surface} from "./index";
 

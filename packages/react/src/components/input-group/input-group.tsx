@@ -12,7 +12,7 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
-import {TextFieldContext} from "../text-field";
+import {TextFieldContext} from "../textfield";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Context
