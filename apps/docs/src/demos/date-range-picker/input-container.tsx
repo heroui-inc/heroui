@@ -16,7 +16,7 @@ export function InputContainer() {
   return (
     <DateRangePicker
       shouldForceLeadingZeros
-      className="w-full min-w-72"
+      className="w-full max-w-2xs min-w-72"
       defaultValue={defaultValue}
       granularity="second"
       hourCycle={12}
