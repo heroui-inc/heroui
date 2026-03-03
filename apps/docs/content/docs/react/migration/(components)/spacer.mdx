@@ -1,0 +1,284 @@
+---
+title: Spacer
+description: Migration guide for Spacer from HeroUI v2 to v3
+---
+
+<Callout type="warning">
+  The Spacer component has been **removed** in HeroUI v3. Use Tailwind CSS margin utilities directly instead.
+</Callout>
+
+## Key Changes
+
+### 1. Component Removal
+
+**v2:** `<Spacer>` component from `@heroui/react`  
+**v3:** Tailwind CSS margin utilities (`ml-*`, `mr-*`, `mt-*`, `mb-*`, `mx-*`, `my-*`)
+
+### 2. Props Mapping
+
+The v2 Spacer component had the following props that map to Tailwind utilities:
+
+| v2 Prop | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `x={n}` | `ml-{n}` or `mx-{n}` | Horizontal margin (left or both sides) |
+| `y={n}` | `mt-{n}` or `my-{n}` | Vertical margin (top or both sides) |
+| `isInline` | `inline-block` or `block` | Display type |
+
+### 3. Spacing Scale
+
+The spacing values in v2 match Tailwind's spacing scale:
+- `x={1}` → `ml-1` (0.25rem / 4px)
+- `x={2}` → `ml-2` (0.5rem / 8px)
+- `x={4}` → `ml-4` (1rem / 16px)
+- `y={4}` → `mt-4` (1rem / 16px)
+- etc.
+
+## Migration Examples
+
+### Basic Spacing
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Spacer } from "@heroui/react";
+
+    {/* Vertical spacing */}
+    <div>
+      <div>Item 1</div>
+      <Spacer y={4} />
+      <div>Item 2</div>
+    </div>
+    
+    {/* Horizontal spacing */}
+    <div className="flex">
+      <div>Item 1</div>
+      <Spacer x={4} isInline />
+      <div>Item 2</div>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Vertical spacing */}
+    <div>
+      <div>Item 1</div>
+      <div className="mt-4">Item 2</div>
+    </div>
+    
+    {/* Horizontal spacing */}
+    <div className="flex">
+      <div>Item 1</div>
+      <div className="ml-4">Item 2</div>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Using Gap (Recommended)
+
+For flex and grid layouts, using `gap` is often better than Spacer:
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Spacer } from "@heroui/react";
+
+    {/* Horizontal layout */}
+    <div className="flex">
+      <div>Item 1</div>
+      <Spacer x={4} isInline />
+      <div>Item 2</div>
+    </div>
+    
+    {/* Vertical layout */}
+    <div className="flex flex-col">
+      <Button>Button 1</Button>
+      <Spacer y={2} />
+      <Button>Button 2</Button>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Horizontal layout */}
+    <div className="flex gap-4">
+      <div>Item 1</div>
+      <div>Item 2</div>
+    </div>
+    
+    {/* Vertical layout */}
+    <div className="flex flex-col gap-2">
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## Complete Example
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Spacer, Button } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div>
+          <h1>Title</h1>
+          <Spacer y={4} />
+          <p>Description text</p>
+          <Spacer y={8} />
+          <div className="flex">
+            <Button>Cancel</Button>
+            <Spacer x={4} isInline />
+            <Button>Submit</Button>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div>
+          <h1>Title</h1>
+          <p className="mt-4">Description text</p>
+          <div className="mt-8 flex gap-4">
+            <Button>Cancel</Button>
+            <Button>Submit</Button>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Spacing Scale Reference
+
+Tailwind CSS spacing scale (matches v2 Spacer values):
+
+| Value | Size | Tailwind Class |
+|-------|------|----------------|
+| `0` | 0px | `m-0`, `ml-0`, `mt-0`, etc. |
+| `px` | 1px | `m-px`, `ml-px`, `mt-px`, etc. |
+| `0.5` | 0.125rem (2px) | `m-0.5`, `ml-0.5`, `mt-0.5`, etc. |
+| `1` | 0.25rem (4px) | `m-1`, `ml-1`, `mt-1`, etc. |
+| `2` | 0.5rem (8px) | `m-2`, `ml-2`, `mt-2`, etc. |
+| `3` | 0.75rem (12px) | `m-3`, `ml-3`, `mt-3`, etc. |
+| `4` | 1rem (16px) | `m-4`, `ml-4`, `mt-4`, etc. |
+| `5` | 1.25rem (20px) | `m-5`, `ml-5`, `mt-5`, etc. |
+| `6` | 1.5rem (24px) | `m-6`, `ml-6`, `mt-6`, etc. |
+| `8` | 2rem (32px) | `m-8`, `ml-8`, `mt-8`, etc. |
+| `10` | 2.5rem (40px) | `m-10`, `ml-10`, `mt-10`, etc. |
+| `12` | 3rem (48px) | `m-12`, `ml-12`, `mt-12`, etc. |
+| `16` | 4rem (64px) | `m-16`, `ml-16`, `mt-16`, etc. |
+| `20` | 5rem (80px) | `m-20`, `ml-20`, `mt-20`, etc. |
+
+## Best Practices
+
+### 1. Use Gap for Flex/Grid Layouts
+
+Instead of Spacer components, use `gap` utilities:
+
+```tsx
+// ✅ Recommended
+<div className="flex gap-4">
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</div>
+
+// ❌ Not recommended
+<div className="flex">
+  <Button>Button 1</Button>
+  <div className="ml-4"><Button>Button 2</Button></div>
+</div>
+```
+
+### 2. Use Space Utilities for Vertical Lists
+
+```tsx
+// ✅ Recommended
+<div className="space-y-4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+
+// Alternative
+<div>
+  <div>Item 1</div>
+  <div className="mt-4">Item 2</div>
+  <div className="mt-4">Item 3</div>
+</div>
+```
+
+### 3. Use Margin Utilities Directly
+
+Apply margin directly to elements instead of using Spacer:
+
+```tsx
+// ✅ Recommended
+<div className="mt-4">Content</div>
+
+// ❌ Not recommended
+<>
+  <Spacer y={4} />
+  <div>Content</div>
+</>
+```
+
+## Summary
+
+1. **Component Removed**: `Spacer` component no longer exists in v3
+2. **Import Change**: Remove `import { Spacer } from "@heroui/react"`
+3. **Use Tailwind Utilities**: Replace with margin utilities (`ml-*`, `mt-*`, `mx-*`, `my-*`)
+4. **Use Gap**: Prefer `gap-*` utilities for flex/grid layouts
+5. **Use Space**: Prefer `space-y-*` and `space-x-*` for consistent spacing
+
+## Migration Steps
+
+1. **Remove Import**: Remove `Spacer` from `@heroui/react` imports
+2. **Replace Spacer**: Replace `<Spacer x={n} />` with `ml-{n}` or `mx-{n}` classes
+3. **Replace Spacer**: Replace `<Spacer y={n} />` with `mt-{n}` or `my-{n}` classes
+4. **Use Gap**: For flex/grid layouts, use `gap-{n}` instead of Spacer
+5. **Use Space**: For vertical/horizontal lists, use `space-y-{n}` or `space-x-{n}`
+
+## Common Patterns
+
+### Vertical Stack with Spacing
+
+```tsx
+// Using space-y utility
+<div className="space-y-4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+```
+
+### Horizontal Row with Spacing
+
+```tsx
+// Using gap utility
+<div className="flex gap-4">
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+  <Button>Button 3</Button>
+</div>
+```
+
+### Custom Spacing Between Specific Elements
+
+```tsx
+<div>
+  <div>Item 1</div>
+  <div className="mt-8">Item 2 (with custom spacing)</div>
+  <div className="mt-4">Item 3</div>
+</div>
+```

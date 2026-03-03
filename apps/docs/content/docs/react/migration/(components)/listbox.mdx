@@ -1,0 +1,295 @@
+---
+title: Listbox
+description: Migration guide for Listbox (renamed to ListBox with a capital "B") from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 ListBox documentation](/docs/react/components/listbox) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+### v2: Separate Components
+
+In v2, Listbox used separate components:
+
+```tsx
+import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Listbox>
+      <ListboxItem key="1">Item 1</ListboxItem>
+    </Listbox>
+  );
+}
+```
+
+### v3: Compound Components
+
+In v3, ListBox uses compound components:
+
+```tsx
+import { ListBox, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ListBox>
+      <ListBox.Item id="1" textValue="Item 1">
+        <Label>Item 1</Label>
+      </ListBox.Item>
+    </ListBox>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Naming
+
+**v2:** `Listbox`, `ListboxItem`, `ListboxSection`  
+**v3:** `ListBox`, `ListBox.Item`, `ListBox.Section`
+
+### 2. Item Identification
+
+**v2:** React's `key` was used for both list reconciliation and item identity (selection, focus).  
+**v3:** Use `id` for state/focus and `textValue` for accessibility (when content isn't plain text); keep React's `key` on items in lists.
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `key` (for state) | `ListBox.Item` | Use `id` for item identity (state) |
+| - | `textValue` (on ListBox.Item) | For accessibility (type-ahead) |
+| `variant`, `color` | - | Removed (use Tailwind CSS) |
+| `startContent`, `endContent` | - | Place icons manually in item content |
+| `description` | `Description` | Use `Description` component |
+| `title` (on Section) | `Header` | Use `Header` component |
+| `topContent`, `bottomContent` | - | Removed (handle separately) |
+| `itemClasses`, `classNames` | - | Use `className` on parts |
+| `hideSelectedIcon` | - | Omit `ListBox.ItemIndicator` |
+| `disableAnimation` | - | Removed |
+| `isVirtualized`, `virtualization` | - | Removed (virtualization not supported) |
+| `selectedKeys` | `ListBox` | Same (uses `Selection` type Set) |
+
+## Migration Examples
+
+### Selection
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState(new Set(["text"]));
+
+    <Listbox
+      selectedKeys={singleSelected}
+      selectionMode="single"
+      onSelectionChange={setSingleSelected}
+    >
+      <ListboxItem key="text">Text</ListboxItem>
+      <ListboxItem key="number">Number</ListboxItem>
+    </Listbox>
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState(new Set(["text"]));
+
+    <Listbox
+      selectedKeys={multiSelected}
+      selectionMode="multiple"
+      onSelectionChange={setMultiSelected}
+    >
+      <ListboxItem key="text">Text</ListboxItem>
+      <ListboxItem key="number">Number</ListboxItem>
+    </Listbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import type { Selection } from "@heroui/react";
+
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState<Selection>(new Set(["text"]));
+
+    <ListBox
+      selectedKeys={singleSelected}
+      selectionMode="single"
+      onSelectionChange={setSingleSelected}
+    >
+      <ListBox.Item id="text" textValue="Text">
+        <Label>Text</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+      <ListBox.Item id="number" textValue="Number">
+        <Label>Number</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+    </ListBox>
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState<Selection>(new Set(["text"]));
+
+    <ListBox
+      selectedKeys={multiSelected}
+      selectionMode="multiple"
+      onSelectionChange={setMultiSelected}
+    >
+      <ListBox.Item id="text" textValue="Text">
+        <Label>Text</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+      <ListBox.Item id="number" textValue="Number">
+        <Label>Number</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+    </ListBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With Description
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="new"
+      description="Create a new file"
+    >
+      New file
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, Label } from "@heroui/react";
+
+    <ListBox.Item id="new" textValue="New file">
+      <Label>New file</Label>
+      <Description>Create a new file</Description>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### With Icons
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="new"
+      startContent={<AddIcon />}
+    >
+      New file
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ListBox.Item id="new" textValue="New file">
+      <AddIcon />
+      <Label>New file</Label>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### With Sections
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Listbox>
+      <ListboxSection title="Actions">
+        <ListboxItem key="new">New file</ListboxItem>
+        <ListboxItem key="edit">Edit file</ListboxItem>
+      </ListboxSection>
+      <ListboxSection title="Danger zone">
+        <ListboxItem key="delete">Delete</ListboxItem>
+      </ListboxSection>
+    </Listbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Header, Label, Separator } from "@heroui/react";
+
+    <ListBox>
+      <ListBox.Section>
+        <Header>Actions</Header>
+        <ListBox.Item id="new" textValue="New file">
+          <Label>New file</Label>
+        </ListBox.Item>
+        <ListBox.Item id="edit" textValue="Edit file">
+          <Label>Edit file</Label>
+        </ListBox.Item>
+      </ListBox.Section>
+      <Separator />
+      <ListBox.Section>
+        <Header>Danger zone</Header>
+        <ListBox.Item id="delete" textValue="Delete" variant="danger">
+          <Label>Delete</Label>
+        </ListBox.Item>
+      </ListBox.Section>
+    </ListBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With Custom Indicator
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="1"
+      selectedIcon={<CustomCheckIcon />}
+    >
+      Item 1
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ListBox.Item id="1" textValue="Item 1">
+      <Label>Item 1</Label>
+      <ListBox.ItemIndicator>
+        {({isSelected}) =>
+          isSelected ? <CustomCheckIcon /> : null
+        }
+      </ListBox.ItemIndicator>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 ListBox follows this structure:
+
+```
+ListBox (Root)
+  ├── ListBox.Item
+  │   ├── Icon (optional, manual placement)
+  │   ├── Label (required)
+  │   ├── Description (optional)
+  │   └── ListBox.ItemIndicator (optional)
+  └── ListBox.Section (optional)
+      ├── Header (optional)
+      └── ListBox.Item
+```
+
+## Summary
+
+1. **Component Naming**: `Listbox` → `ListBox`, `ListboxItem` → `ListBox.Item`, `ListboxSection` → `ListBox.Section`
+2. **Item Structure**: Must use `Label`, `Description`, `ListBox.ItemIndicator` components
+3. **Icons**: Manual placement instead of `startContent`/`endContent` props
+4. **Sections**: Use `Header` component instead of `title` prop
+5. **Styling Props Removed**: `variant`, `color` - use Tailwind CSS
+6. **Content Props Removed**: `topContent`, `bottomContent` - handle separately
+7. **Virtualization Removed**: `isVirtualized` and `virtualization` props removed
+8. **Selection Type**: Uses `Selection` type (Set) instead of arrays

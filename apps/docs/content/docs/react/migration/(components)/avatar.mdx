@@ -1,0 +1,309 @@
+---
+title: Avatar
+description: Migration guide for Avatar from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Avatar documentation](/docs/react/components/avatar) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `Avatar` was a single component that accepted props for image source, name, fallback, and other elements:
+
+```tsx
+import { Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Avatar 
+      src="https://example.com/avatar.jpg"
+      name="John Doe"
+      showFallback
+    />
+  );
+}
+```
+
+In v3, Avatar uses a compound component pattern with explicit subcomponents:
+
+```tsx
+import { Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Avatar>
+      <Avatar.Image src="https://example.com/avatar.jpg" alt="John Doe" />
+      <Avatar.Fallback>JD</Avatar.Fallback>
+    </Avatar>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `Avatar` component with props  
+**v3:** Compound components: `Avatar`, `Avatar.Image`, `Avatar.Fallback`
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `src` | `Avatar.Image` | Use `<Avatar.Image src="..." />` |
+| `name` | - | Generate initials and pass to `<Avatar.Fallback />` |
+| `showFallback` | - | Removed (fallback shown if image fails or not provided) |
+| `fallback`, `icon` | `Avatar.Fallback` | Place content in `<Avatar.Fallback />` |
+| `color` | `Avatar` | Same; `primary` → `accent`, `secondary` → `default` |
+| `size` | `Avatar` | Same |
+| `isBordered` | - | Removed (use Tailwind e.g. `ring-2 ring-background`) |
+| `radius` | - | Removed (use Tailwind e.g. `rounded-full`) |
+| `isDisabled`, `isFocusable` | - | Removed (use Tailwind / `asChild` if needed) |
+| `getInitials` | - | Generate initials manually |
+| `ImgComponent`, `imgProps` | - | Use `asChild` on `Avatar.Image` if needed |
+| `onError` | `Avatar.Image` | Use `onError` on `<Avatar.Image />` |
+| `classNames` | - | Use `className` on parts |
+| AvatarGroup | - | No v3 equivalent; create groups with CSS |
+
+### 3. Image and Fallback Handling
+
+**v2:** Used `src`, `name`, `showFallback`, and `fallback` props  
+**v3:** Must explicitly render `<Avatar.Image />` and `<Avatar.Fallback />` components
+
+### 4. Color Props
+
+| v2 Color | v3 Color | Notes |
+|----------|---------|-------|
+| `default` | `default` | Same |
+| `primary` | `accent` | Renamed |
+| `secondary` | `default` | Use `default` color |
+| `success` | `success` | Same |
+| `warning` | `warning` | Same |
+| `danger` | `danger` | Same |
+
+### 5. AvatarGroup Removed
+
+**v2:** Had a dedicated `AvatarGroup` component  
+**v3:** No `AvatarGroup` component - create groups manually with CSS classes
+
+## Migration Examples
+
+### Sizes and Colors
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Avatar size="md" color="primary" src="..." name="John" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Avatar size="md" color="accent">
+      <Avatar.Image src="..." alt="John" />
+      <Avatar.Fallback>J</Avatar.Fallback>
+    </Avatar>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Fallback
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Avatar 
+      src="https://broken-url.com/image.jpg"
+      showFallback
+      fallback={<Icon icon="mdi:account" />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Avatar>
+      <Avatar.Image 
+        src="https://broken-url.com/image.jpg" 
+        alt="User"
+      />
+      <Avatar.Fallback>
+        <Icon icon="mdi:account" />
+      </Avatar.Fallback>
+    </Avatar>
+    ```
+  </Tab>
+</Tabs>
+
+### Avatar Group
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup isBordered>
+      <Avatar src="https://example.com/1.jpg" />
+      <Avatar src="https://example.com/2.jpg" />
+      <Avatar src="https://example.com/3.jpg" />
+    </AvatarGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    <div className="flex -space-x-2">
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
+        <Avatar.Fallback>U1</Avatar.Fallback>
+      </Avatar>
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
+        <Avatar.Fallback>U2</Avatar.Fallback>
+      </Avatar>
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
+        <Avatar.Fallback>U3</Avatar.Fallback>
+      </Avatar>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Avatar Group with Max Count
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup max={3}>
+      <Avatar src="https://example.com/1.jpg" />
+      <Avatar src="https://example.com/2.jpg" />
+      <Avatar src="https://example.com/3.jpg" />
+      <Avatar src="https://example.com/4.jpg" />
+      <Avatar src="https://example.com/5.jpg" />
+    </AvatarGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    const users = [
+      { id: 1, src: "https://example.com/1.jpg", name: "User 1" },
+      { id: 2, src: "https://example.com/2.jpg", name: "User 2" },
+      { id: 3, src: "https://example.com/3.jpg", name: "User 3" },
+      { id: 4, src: "https://example.com/4.jpg", name: "User 4" },
+      { id: 5, src: "https://example.com/5.jpg", name: "User 5" },
+    ];
+
+    <div className="flex -space-x-2">
+      {users.slice(0, 3).map((user) => (
+        <Avatar key={user.id} className="ring-2 ring-background">
+          <Avatar.Image src={user.src} alt={user.name} />
+          <Avatar.Fallback>
+            {user.name.split(" ").map(n => n[0]).join("")}
+          </Avatar.Fallback>
+        </Avatar>
+      ))}
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Fallback className="border-none">
+          +{users.length - 3}
+        </Avatar.Fallback>
+      </Avatar>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have variants, but uses color prop */}
+    <Avatar color="primary" name="John" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* v3 has variant prop */}
+    <Avatar variant="soft" color="accent">
+      <Avatar.Fallback>J</Avatar.Fallback>
+    </Avatar>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Avatar 
+  classNames={{
+    base: "custom-base",
+    img: "custom-img",
+    fallback: "custom-fallback"
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Avatar className="custom-base">
+  <Avatar.Image className="custom-img" src="..." alt="..." />
+  <Avatar.Fallback className="custom-fallback">
+    JD
+  </Avatar.Fallback>
+</Avatar>
+```
+
+## Component Anatomy
+
+The v3 Avatar follows this structure:
+
+```
+Avatar (Root)
+  ├── Avatar.Image (optional)
+  └── Avatar.Fallback (optional; shown when image fails or not provided)
+```
+
+## Helper Function for Initials
+
+Since v3 doesn't have a `name` prop, you'll need to generate initials manually:
+
+```tsx
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .map(n => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+// Usage
+<Avatar>
+  <Avatar.Fallback>{getInitials("John Doe")}</Avatar.Fallback>
+</Avatar>
+```
+
+## Summary
+
+1. **Component Structure**: Must use compound components (`Avatar.Image`, `Avatar.Fallback`)
+2. **Name Prop Removed**: Generate initials manually
+3. **ShowFallback Removed**: Fallback always shows if image fails
+4. **Color Mapping**: `primary` → `accent`, `secondary` → `default`
+5. **Bordered Removed**: Use Tailwind `ring-2 ring-background` classes
+6. **Radius Removed**: Use Tailwind `rounded-*` classes
+7. **Disabled Removed**: Use Tailwind `opacity-50` classes
+8. **AvatarGroup Removed**: Create groups manually with CSS
+9. **Icon Prop Removed**: Place icon content in `Avatar.Fallback`
+10. **ClassNames Removed**: Use `className` props on individual components

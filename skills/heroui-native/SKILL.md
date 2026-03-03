@@ -12,6 +12,14 @@ HeroUI Native is a component library built on **Uniwind (Tailwind CSS for React 
 
 ---
 
+## Installation
+
+```bash
+curl -fsSL https://v3.heroui.com/install | bash -s heroui-native
+```
+
+---
+
 ## CRITICAL: Native Only - Do Not Use Web Patterns
 
 **This guide is for HeroUI Native ONLY.** Do NOT use any prior knowledge of HeroUI React (web) patterns.
@@ -170,11 +178,11 @@ HeroUI Native uses **compound component patterns**. Each component has subcompon
 
 ```tsx
 <Card>
-	<Card.Header>
+	<Card.Header>{/* Icons, badges */}</Card.Header>
+	<Card.Body>
 		<Card.Title>Title</Card.Title>
 		<Card.Description>Description</Card.Description>
-	</Card.Header>
-	<Card.Body>{/* Content */}</Card.Body>
+	</Card.Body>
 	<Card.Footer>{/* Actions */}</Card.Footer>
 </Card>
 ```
@@ -183,7 +191,7 @@ HeroUI Native uses **compound component patterns**. Each component has subcompon
 
 - Always use compound structure - don't flatten to props
 - Subcomponents are accessed via dot notation (e.g., `Card.Header`)
-- Each subcomponent may have its own props
+- Native Card uses `Card.Body` (not `Card.Content`); Title and Description go inside Body
 - **Fetch component docs for complete anatomy and examples**
 
 ---

@@ -1,0 +1,251 @@
+---
+title: Slider
+description: Migration guide for Slider from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Slider documentation](/docs/react/components/slider) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, Slider used a simple structure with props:
+
+```tsx
+import { Slider } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Slider
+      label="Volume"
+      defaultValue={30}
+      size="md"
+      color="primary"
+    />
+  );
+}
+```
+
+In v3, Slider requires compound components:
+
+```tsx
+import { Slider, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Simple Slider with props  
+**v3:** Compound components: `Slider.Output`, `Slider.Track`, `Slider.Fill`, `Slider.Thumb`
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `label` | — | Use `Label` component |
+| `size` | — | Removed (use Tailwind CSS) |
+| `color` | — | Removed (use Tailwind CSS) |
+| `radius` | — | Removed (use Tailwind CSS) |
+| `classNames` | — | Use `className` props on individual components |
+| `showSteps` | — | Not yet supported |
+| `showTooltip` | — | Not yet supported |
+| `marks` | — | Not yet supported (see `Slider.Marks`) |
+| `startContent` | — | Customize track wrapper directly |
+| `endContent` | — | Customize track wrapper directly |
+| `hideValue` | — | Omit `Slider.Output` |
+| `hideThumb` | — | Omit `Slider.Thumb` |
+| `showOutline` | — | Use Tailwind CSS |
+| `renderThumb` | — | Use `Slider.Thumb` render prop |
+| `renderLabel` | — | Use `Label` component |
+| `renderValue` | — | Use `Slider.Output` render prop |
+| `getValue` | — | Use `Slider.Output` render prop |
+| `getTooltipValue` | — | Use `Slider.Output` render prop |
+| `fillOffset` | — | Not yet supported |
+| `disableThumbScale` | — | Use Tailwind CSS |
+| `disableAnimation` | — | Removed |
+
+## Migration Examples
+
+### Controlled Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState(25);
+
+    <Slider
+      value={value}
+      onChange={setValue}
+      label="Volume"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState(25);
+
+    <Slider value={value} onChange={setValue}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Range Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      defaultValue={[100, 500]}
+      formatOptions={{style: "currency", currency: "USD"}}
+      label="Price Range"
+      maxValue={1000}
+      minValue={0}
+      step={50}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider
+      defaultValue={[100, 500]}
+      formatOptions={{style: "currency", currency: "USD"}}
+      maxValue={1000}
+      minValue={0}
+      step={50}
+    >
+      <Label>Price Range</Label>
+      <Slider.Output />
+      <Slider.Track>
+        {({state}) => (
+          <>
+            <Slider.Fill />
+            {state.values.map((_, i) => (
+              <Slider.Thumb key={i} index={i} />
+            ))}
+          </>
+        )}
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Vertical Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      defaultValue={30}
+      orientation="vertical"
+      label="Volume"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30} orientation="vertical">
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Value Display
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      renderValue={(props) => (
+        <output {...props}>Custom: {value}</output>
+      )}
+      label="Volume"
+      defaultValue={30}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output>
+        {({state}) => `Custom: ${state.values[0]}`}
+      </Slider.Output>
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Slider follows this structure:
+
+```
+Slider (Root)
+  ├── Label (optional)
+  ├── Slider.Output (optional)
+  └── Slider.Track
+      ├── Slider.Fill
+      └── Slider.Thumb (or multiple for range)
+```
+
+For range sliders, use a render prop in `Slider.Track`:
+
+```tsx
+<Slider.Track>
+  {({state}) => (
+    <>
+      <Slider.Fill />
+      {state.values.map((_, i) => (
+        <Slider.Thumb key={i} index={i} />
+      ))}
+    </>
+  )}
+</Slider.Track>
+```
+
+## Summary
+
+1. **Component Structure**: Must use compound components (`Slider.Output`, `Slider.Track`, `Slider.Fill`, `Slider.Thumb`)
+2. **Label Handling**: `label` prop removed - use `Label` component
+3. **Styling Props Removed**: `size`, `color`, `radius` - use Tailwind CSS
+4. **ClassNames Removed**: Use `className` props on individual components
+5. **Feature Props Removed**: `showSteps`, `showTooltip`, `marks`, `startContent`, `endContent` - not yet supported or customize manually
+6. **Render Props Removed**: `renderThumb`, `renderLabel`, `renderValue` - use render props on components
+7. **Visibility Props Removed**: `hideValue`, `hideThumb` - omit components instead
+8. **Range Sliders**: Must map over thumbs in `Slider.Track` render prop

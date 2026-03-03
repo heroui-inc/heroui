@@ -1,0 +1,720 @@
+---
+title: Styling & Theming
+description: Complete guide to styling changes and theming system migration from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  This guide covers all styling-related changes between HeroUI v2 and v3, including utility classes, component styles, theme system architecture, and visual differences. For component-specific API changes, see individual component migration guides.
+</Callout>
+
+**Note:** The `classNames` prop has been replaced with `className` prop in v3. All components now use the standard React `className` prop instead of the `classNames` object prop from v2.
+
+## Overview
+
+HeroUI v3 introduces significant changes to the styling system:
+
+- **CSS-First Architecture**: Replaces Tailwind plugin with pure CSS files
+- **Standard Tailwind Utilities**: Custom utilities replaced with standard Tailwind classes
+- **CSS Variables**: New CSS variable naming and structure
+- **Component Styles**: Updated default sizes, spacing, and visual appearance
+- **No Plugin Required**: Removed dependency on Tailwind plugin configuration
+- **Color System Overhaul**: Semantic colors reorganized (`primary` → `accent`, `secondary` removed, numbered scales removed)
+- **Content Colors Removed**: `content1-4` replaced with `surface` and `overlay` system
+
+## Quick Reference
+
+### Utility Classes Mapping
+
+| v2 Utility | v3 Equivalent | Notes |
+|-----------|--------------|-------|
+| `text-tiny` | `text-xs` | Font size: 0.75rem → 0.75rem (same) |
+| `text-small` | `text-sm` | Font size: 0.875rem → 0.875rem (same) |
+| `text-medium` | `text-base` | Font size: 1rem → 1rem (same) |
+| `text-large` | `text-lg` | Font size: 1.125rem → 1.125rem (same) |
+| `rounded-small` | `rounded-sm` | Border radius: 8px → 4px (different) |
+| `rounded-medium` | `rounded-md` | Border radius: 12px → 6px (different) |
+| `rounded-large` | `rounded-lg` | Border radius: 14px → 8px (different) |
+| `border-small` | `border` | Border width: 1px → 1px (use standard Tailwind) |
+| `border-medium` | `border-2` | Border width: 2px → 2px (use standard Tailwind) |
+| `border-large` | `border-[3px]` | Border width: 3px → 3px (use arbitrary value) |
+| `bg-content1` | `bg-surface` or `bg-overlay` | Content color removed, use surface/overlay |
+| `bg-content2` | `bg-surface-secondary` | Content color removed, use surface level |
+| `bg-primary` | `bg-accent` | Primary renamed to accent |
+| `bg-secondary` | `bg-default` | Secondary color removed, use default |
+| `bg-primary-50` | `bg-accent-soft` | Numbered scales removed |
+| `bg-primary-100` | `bg-accent-soft` | Numbered scales removed |
+| `text-primary-600` | `text-accent` | Numbered scales removed |
+| `.transition-background` | Standard CSS transitions | Removed utility |
+| `.transition-colors-opacity` | Standard CSS transitions | Removed utility |
+
+## Utility Classes Migration
+
+### Text Utilities
+
+HeroUI v2 provided custom text size utilities that mapped to CSS variables. v3 uses standard Tailwind text size classes.
+
+**v2 Text Utilities:**
+
+```tsx
+// v2 - Custom utilities with CSS variables
+<div className="text-tiny">Tiny text</div>
+<div className="text-small">Small text</div>
+<div className="text-medium">Medium text</div>
+<div className="text-large">Large text</div>
+```
+
+**v3 Text Utilities:**
+
+```tsx
+// v3 - Standard Tailwind classes
+<div className="text-xs">Tiny text</div>
+<div className="text-sm">Small text</div>
+<div className="text-base">Medium text</div>
+<div className="text-lg">Large text</div>
+```
+
+**Mapping Details:**
+
+| v2 Class | Font Size | Line Height | v3 Class | Font Size | Line Height |
+|----------|-----------|-------------|----------|-----------|-------------|
+| `text-tiny` | 0.75rem (12px) | 1rem (16px) | `text-xs` | 0.75rem (12px) | 1rem (16px) |
+| `text-small` | 0.875rem (14px) | 1.25rem (20px) | `text-sm` | 0.875rem (14px) | 1.25rem (20px) |
+| `text-medium` | 1rem (16px) | 1.5rem (24px) | `text-base` | 1rem (16px) | 1.5rem (24px) |
+| `text-large` | 1.125rem (18px) | 1.75rem (28px) | `text-lg` | 1.125rem (18px) | 1.75rem (28px) |
+
+### Border Radius Utilities
+
+v2 used custom border radius utilities (`rounded-small`, `rounded-medium`, `rounded-large`) that mapped to CSS variables. v3 uses standard Tailwind border radius classes, but the actual values differ.
+
+**v2 Border Radius:**
+
+```tsx
+// v2 - Custom utilities
+<div className="rounded-small">Small radius</div>
+<div className="rounded-medium">Medium radius</div>
+<div className="rounded-large">Large radius</div>
+```
+
+**v3 Border Radius:**
+
+```tsx
+// v3 - Standard Tailwind classes
+<div className="rounded-sm">Small radius</div>
+<div className="rounded-md">Medium radius</div>
+<div className="rounded-lg">Large radius</div>
+```
+
+**Value Comparison:**
+
+| v2 Class | v2 Value | v3 Class | v3 Value | Difference |
+|----------|----------|----------|----------|------------|
+| `rounded-small` | 8px (0.5rem) | `rounded-sm` | 4px (0.25rem) | Smaller |
+| `rounded-medium` | 12px (0.75rem) | `rounded-md` | 6px (0.375rem) | Smaller |
+| `rounded-large` | 14px (0.875rem) | `rounded-lg` | 8px (0.5rem) | Smaller |
+
+**Note:** v3 uses smaller default border radius values. If you need the exact v2 values, use arbitrary values:
+
+```tsx
+// Match v2 rounded-small (8px)
+<div className="rounded-[8px]">Custom radius</div>
+
+// Match v2 rounded-medium (12px)
+<div className="rounded-[12px]">Custom radius</div>
+
+// Match v2 rounded-large (14px)
+<div className="rounded-[14px]">Custom radius</div>
+```
+
+### Border Width Utilities
+
+v2 provided custom border width utilities (`border-small`, `border-medium`, `border-large`). v3 uses standard Tailwind border width classes.
+
+**v2 Border Width:**
+
+```tsx
+// v2 - Custom utilities
+<div className="border-small border-default">1px border</div>
+<div className="border-medium border-primary">2px border</div>
+<div className="border-large border-danger">3px border</div>
+```
+
+**v3 Border Width:**
+
+```tsx
+// v3 - Standard Tailwind classes
+<div className="border border-default">1px border</div>
+<div className="border-2 border-accent">2px border</div>
+<div className="border-[3px] border-danger">3px border</div>
+```
+
+**Mapping:**
+
+| v2 Class | Width | v3 Class | Width |
+|----------|-------|----------|-------|
+| `border-small` | 1px | `border` | 1px |
+| `border-medium` | 2px | `border-2` | 2px |
+| `border-large` | 3px | `border-[3px]` | 3px (arbitrary) |
+
+### Transition Utilities
+
+v2 provided custom transition utilities for common animation patterns with a default duration of 250ms. v3 removes these utilities in favor of standard Tailwind `transition-*` utilities, where you specify which properties to transition.
+
+**v2 Transition Utilities:**
+
+v2 provided custom transition utilities with a default duration of 250ms and `ease` timing function. The following table shows which CSS properties each utility transitions:
+
+| v2 Utility | Transition Properties |
+|-----------|----------------------|
+| `.transition-background` | `background` |
+| `.transition-colors-opacity` | `color, background-color, border-color, text-decoration-color, fill, stroke, opacity` |
+| `.transition-width` | `width` |
+| `.transition-height` | `height` |
+| `.transition-size` | `width, height` |
+| `.transition-left` | `left` |
+| `.transition-transform-opacity` | `transform, scale, opacity rotate` |
+| `.transition-transform-background` | `transform, scale, background` |
+| `.transition-transform-colors` | `transform, scale, color, background, background-color, border-color, text-decoration-color, fill, stroke` |
+| `.transition-transform-colors-opacity` | `transform, scale, color, background, background-color, border-color, text-decoration-color, fill, stroke, opacity` |
+
+**Note:** These utilities are no longer available in v3. Use Tailwind's standard `transition-*` utilities to specify which properties to transition.
+
+### Other Utilities
+
+**Scrollbar Utilities:**
+
+v2 provided `.scrollbar-hide` and `.scrollbar-default` utilities. These are not included in v3 by default, but you can use Tailwind's scrollbar plugin or custom CSS.
+
+**Animation Utilities:**
+
+v2 provided spinner animation utilities (`.spinner-bar-animation`, `.spinner-dot-animation`, etc.). These are handled internally by v3 components and are not exposed as utilities.
+
+**Custom Utilities:**
+
+v2 included utilities like:
+- `.leading-inherit` → Use `leading-[inherit]`
+- `.tap-highlight-transparent` → Use `[-webkit-tap-highlight-color:transparent]`
+- `.input-search-cancel-button-none` → Use custom CSS if needed
+
+## Theme System Architecture
+
+### v2: Plugin-Based System
+
+v2 used a Tailwind CSS plugin that:
+
+1. **Generated Utilities**: Created custom utility classes via JavaScript
+2. **CSS Variables**: Injected CSS variables through the plugin
+3. **Theme Configuration**: Required configuration in `tailwind.config.js`
+4. **Runtime Generation**: Utilities generated at build time
+
+**v2 Configuration:**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [
+    heroui({
+      layout: {
+        fontSize: {
+          tiny: "0.75rem",
+          small: "0.875rem",
+          medium: "1rem",
+          large: "1.125rem",
+        },
+        radius: {
+          small: "8px",
+          medium: "12px",
+          large: "14px",
+        },
+      },
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              // color definitions
+            },
+          },
+        },
+      },
+    }),
+  ],
+};
+```
+
+### v3: CSS-First System
+
+v3 uses a pure CSS approach:
+
+1. **CSS Files**: Styles defined in CSS files (`packages/styles/`)
+2. **CSS Variables**: Variables defined in CSS, not generated
+3. **No Plugin**: No Tailwind plugin required
+4. **Import-Based**: Styles imported via CSS imports
+
+**v3 Configuration:**
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+**No Tailwind Config Required:**
+
+If you only use HeroUI, you can remove `tailwind.config.js` entirely. If you have custom Tailwind config, keep it but remove the HeroUI plugin.
+
+### Architecture Comparison
+
+| Aspect | v2 | v3 |
+|--------|----|----|
+| **Styling Method** | Tailwind plugin (JavaScript) | CSS files |
+| **Utility Generation** | Runtime via plugin | Pre-defined CSS |
+| **CSS Variables** | Generated by plugin | Defined in CSS |
+| **Configuration** | `tailwind.config.js` | CSS imports |
+| **Customization** | Plugin config | CSS variable overrides |
+| **Build Dependency** | Requires plugin | No plugin needed |
+
+## CSS Variables & Design Tokens
+
+### Variable Naming Changes
+
+v2 used the pattern `--heroui-{property}-{scale}` while v3 uses `--{property}` or `--color-{property}`.
+
+**v2 CSS Variables:**
+
+```css
+--heroui-font-size-tiny: 0.75rem;
+--heroui-font-size-small: 0.875rem;
+--heroui-radius-small: 8px;
+--heroui-radius-medium: 12px;
+--heroui-border-width-medium: 2px;
+--heroui-disabled-opacity: 0.5;
+```
+
+**v3 CSS Variables:**
+
+```css
+/* Typography - handled by Tailwind */
+/* No custom font-size variables */
+
+/* Radius */
+--radius-xs: calc(var(--radius) * 0.25);
+--radius-sm: calc(var(--radius) * 0.5);
+--radius-md: calc(var(--radius) * 0.75);
+--radius-lg: calc(var(--radius) * 1);
+--radius-xl: calc(var(--radius) * 1.5);
+
+/* Colors */
+--color-background: var(--background);
+--color-foreground: var(--foreground);
+--color-accent: var(--accent);
+--color-muted: var(--muted);
+
+/* Opacity */
+--disabled-opacity: 0.5;
+```
+
+### Color System Changes
+
+**v2 Color Structure:**
+
+```css
+--heroui-primary: 210 100% 50%;
+--heroui-primary-50: 210 100% 95%;
+--heroui-primary-100: 210 100% 90%;
+/* ... more shades ... */
+```
+
+**v3 Color Structure:**
+
+```css
+--accent: oklch(0.6204 0.195 253.83);
+--accent-foreground: var(--snow);
+--accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+```
+
+**Key Differences:**
+
+1. **Color Format**: v2 used HSL, v3 uses OKLCH
+2. **Naming**: v2 used numbered shades (50-900), v3 uses semantic names
+3. **Calculated Colors**: v3 uses `color-mix()` for hover states
+4. **Foreground Colors**: v3 explicitly defines foreground colors
+5. **Primary → Accent**: `primary` color renamed to `accent`
+6. **Secondary Color Removed**: `secondary` semantic color removed (was purple in v2)
+7. **Numbered Scales Removed**: Color scales like `primary-50`, `primary-100`, etc. no longer exist
+
+### Primary → Accent Rename
+
+v2 used `primary` as the main brand color. v3 renamed it to `accent` for better semantic clarity.
+
+**v2 Primary Color:**
+
+```tsx
+// v2 - Primary color with numbered scales
+<Button color="primary">Primary Button</Button>
+<div className="bg-primary">Primary background</div>
+<div className="bg-primary-50">Light primary</div>
+<div className="bg-primary-100">Lighter primary</div>
+<div className="text-primary-600">Primary text</div>
+```
+
+**v3 Accent Color:**
+
+```tsx
+// v3 - Accent color (no numbered scales)
+<Button variant="primary">Primary Button</Button>
+<div className="bg-accent">Accent background</div>
+<div className="bg-accent-soft">Soft accent</div>
+<div className="text-accent">Accent text</div>
+```
+
+**Migration:**
+
+| v2 Class | v3 Equivalent | Notes |
+|----------|---------------|-------|
+| `bg-primary` | `bg-accent` | Base accent color |
+| `text-primary` | `text-accent` | Accent text color |
+| `bg-primary-50` | `bg-accent-soft` | Light accent variant |
+| `bg-primary-100` | `bg-accent-soft` | Light accent variant |
+| `bg-primary-500` | `bg-accent` | Base accent color |
+| `text-primary-600` | `text-accent` | Accent text color |
+| `border-primary` | `border-accent` | Accent border |
+
+**Note:** v3 doesn't have numbered color scales (`-50`, `-100`, `-200`, etc.). Use semantic variants like `-soft`, `-hover`, or custom Tailwind classes.
+
+### Secondary Color Removed
+
+v2 provided a `secondary` semantic color (purple). This has been removed in v3. Component variants named "secondary" now use different colors.
+
+**v2 Secondary Color:**
+
+```tsx
+// v2 - Secondary as a semantic color (purple)
+<Button color="secondary">Secondary Button</Button>
+<div className="bg-secondary">Secondary background</div>
+<div className="bg-secondary-50">Light secondary</div>
+<div className="text-secondary-600">Secondary text</div>
+```
+
+**v3 Secondary Variant:**
+
+```tsx
+// v3 - Secondary is a variant, not a color
+<Button variant="secondary">Secondary Button</Button>
+<div className="bg-default">Default background (used by secondary variant)</div>
+<div className="text-accent">Accent text</div>
+```
+
+**Migration:**
+
+| v2 Class | v3 Equivalent | Notes |
+|----------|---------------|-------|
+| `bg-secondary` | `bg-default` | Secondary variant uses default color |
+| `text-secondary` | `text-accent` | Use accent for emphasis |
+| `bg-secondary-50` | `bg-default` | Use default color |
+| `border-secondary` | `border-accent` | Use accent border |
+
+**Note:** In v3, "secondary" refers to a component variant style (like `button--secondary`), not a color token. The secondary variant typically uses `bg-default` and `text-accent`.
+
+### Numbered Color Scales Removed
+
+v2 provided numbered color scales (50-900) for all semantic colors. v3 removed these in favor of semantic variants and calculated colors.
+
+**v2 Numbered Scales:**
+
+```tsx
+// v2 - Numbered color scales
+<div className="bg-primary-50">Lightest</div>
+<div className="bg-primary-100">Lighter</div>
+<div className="bg-primary-200">Light</div>
+<div className="bg-primary-500">Base</div>
+<div className="bg-primary-600">Dark</div>
+<div className="bg-primary-900">Darkest</div>
+```
+
+**v3 Semantic Variants:**
+
+```tsx
+// v3 - Semantic variants and calculated colors
+<div className="bg-accent-soft">Soft variant</div>
+<div className="bg-accent">Base color</div>
+<div className="bg-accent-hover">Hover state</div>
+```
+
+**Migration:**
+
+- **Light shades** (`-50`, `-100`, `-200`): Use `-soft` variants or custom Tailwind opacity classes
+- **Base color** (`-500`): Use base color name (`bg-accent`, `bg-danger`, etc.)
+- **Dark shades** (`-600`, `-700`, `-800`, `-900`): Use hover variants or custom Tailwind classes
+
+### Content Colors Removed
+
+v2 provided `content1`, `content2`, `content3`, and `content4` colors for layered backgrounds. These have been removed in v3 and replaced with semantic surface colors.
+
+**v2 Content Colors:**
+
+```tsx
+// v2 - Content colors for layered backgrounds
+<div className="bg-content1">Base content</div>
+<div className="bg-content2">Secondary content</div>
+<div className="bg-content3">Tertiary content</div>
+<div className="bg-content4">Quaternary content</div>
+```
+
+**v3 Surface Colors:**
+
+```tsx
+// v3 - Surface colors for non-overlay components
+<div className="bg-surface">Base surface</div>
+<div className="bg-surface-secondary">Secondary surface</div>
+<div className="bg-surface-tertiary">Tertiary surface</div>
+<div className="bg-surface-quaternary">Quaternary surface</div>
+
+// v3 - Overlay colors for floating components
+<div className="bg-overlay">Overlay (tooltips, popovers, modals)</div>
+```
+
+**Migration Mapping:**
+
+| v2 Class | v3 Equivalent | Usage |
+|----------|---------------|-------|
+| `bg-content1` | `bg-surface` | Non-overlay components (cards, accordions) |
+| `bg-content1` | `bg-overlay` | Floating components (tooltips, popovers, modals) |
+| `bg-content2` | `bg-surface-secondary` | Secondary surface level |
+| `bg-content3` | `bg-surface-tertiary` | Tertiary surface level |
+| `bg-content4` | `bg-surface-quaternary` | Quaternary surface level |
+
+**Key Changes:**
+
+1. **Semantic Naming**: `content1-4` replaced with `surface` and `overlay` for clearer semantics
+2. **Component-Specific**: Use `bg-surface` for page-level components, `bg-overlay` for floating components
+3. **Auto-Calculated**: Surface levels (`secondary`, `tertiary`, `quaternary`) are automatically calculated from the base `surface` color using `color-mix()`
+
+### Spacing & Layout Tokens
+
+**v2 Layout Tokens:**
+
+```css
+--heroui-divider-weight: 1px;
+--heroui-disabled-opacity: 0.5;
+--heroui-hover-opacity: 0.8;
+```
+
+**v3 Layout Tokens:**
+
+```css
+--border-width: 0px;
+--field-border-width: var(--border-width);
+--disabled-opacity: 0.5;
+--cursor-interactive: pointer;
+--cursor-disabled: not-allowed;
+--radius: 0.5rem;
+--field-radius: calc(var(--radius) * 1.5);
+```
+
+### Shadow Tokens
+
+**v2 Shadows:**
+
+```css
+--heroui-box-shadow-small: 0px 0px 5px 0px rgb(0 0 0 / 0.02), ...;
+--heroui-box-shadow-medium: 0px 0px 15px 0px rgb(0 0 0 / 0.03), ...;
+--heroui-box-shadow-large: 0px 0px 30px 0px rgb(0 0 0 / 0.04), ...;
+```
+
+**v3 Shadows:**
+
+```css
+--surface-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), ...;
+--overlay-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), ...;
+--field-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), ...;
+```
+
+**Key Changes:**
+
+1. **Semantic Naming**: v3 uses semantic names (`surface-shadow`, `overlay-shadow`) instead of size-based names
+2. **Component-Specific**: Shadows are tied to component types (surface, overlay, field)
+3. **Dark Mode**: Dark mode shadows are transparent in v3
+
+## Visual Differences
+
+### Alignment Changes
+
+**Button Alignment:**
+
+- v2: Icons and text aligned with `items-center justify-center`
+- v3: Same alignment, but with responsive height adjustments
+
+**Input Alignment:**
+
+- v2: Text aligned with `text-left`
+- v3: Same alignment, but padding adjustments may affect visual balance
+
+### Spacing Changes
+
+**Component Padding:**
+
+Most components have increased padding in v3:
+
+- **Card**: 12px → 16px
+- **Button**: Similar padding, but responsive heights
+- **Input**: Added vertical padding (`py-2`)
+
+**Gap Spacing:**
+
+v3 uses more consistent gap spacing:
+
+- **Card**: `gap-3` between header, content, footer
+- **Button**: `gap-2` between icon and text
+- **Chip**: `gap-1.5` between elements
+
+### Size Changes
+
+**Button Heights:**
+
+- **Small**: 32px → 36px (mobile) / 32px (desktop)
+- **Medium**: 40px → 40px (mobile) / 36px (desktop)
+- **Large**: 48px → 44px (mobile) / 40px (desktop)
+
+**Input Heights:**
+
+- **Medium**: 40px → 36px (default, only size available)
+
+### Border Radius Changes
+
+**Default Radius:**
+
+- v2: Components used `rounded-medium` (12px) by default
+- v3: Components use larger radius values:
+  - Button: `rounded-3xl` (24px)
+  - Card: `rounded-3xl` (24px)
+  - Chip: `rounded-2xl` (16px)
+  - Input: `rounded-field` (typically 12-16px)
+
+### Color Appearance Changes
+
+**Color System:**
+
+- v2: HSL color format
+- v3: OKLCH color format (more perceptually uniform)
+
+**Default Colors:**
+
+- v2: `primary`, `secondary`, `success`, `warning`, `danger`
+- v3: `accent` (replaces `primary`), `success`, `warning`, `danger`
+
+**Muted Colors:**
+
+- v2: `foreground-400`, `foreground-500` for muted text
+- v3: `muted` color token for muted text
+
+## Migration Examples
+
+### Utility Class Migration
+
+**Example: Text Utilities**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div>
+      <h1 className="text-large font-bold">Title</h1>
+      <p className="text-small text-foreground-400">Description</p>
+      <span className="text-tiny text-foreground-500">Helper</span>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div>
+      <h1 className="text-lg font-bold">Title</h1>
+      <p className="text-sm text-muted">Description</p>
+      <span className="text-xs text-muted">Helper</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Border Radius Migration
+
+**Example: Matching v2 Radius Values**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Card radius="md">
+      <CardBody>Content</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Option 1: Use standard Tailwind (smaller radius) */}
+    <Card className="rounded-md">
+      <Card.Content>Content</Card.Content>
+    </Card>
+
+    {/* Option 2: Match exact v2 value (12px) */}
+    <Card className="rounded-[12px]">
+      <Card.Content>Content</Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### Theme Customization Migration
+
+**Example: Custom Colors**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```js
+    // tailwind.config.js
+    const {heroui} = require("@heroui/react");
+
+    module.exports = {
+      plugins: [
+        heroui({
+          themes: {
+            light: {
+              colors: {
+                primary: {
+                  DEFAULT: "#006FEE",
+                  50: "#E6F1FE",
+                  // ... more shades
+                },
+              },
+            },
+          },
+        }),
+      ],
+    };
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```css
+    /* globals.css */
+    @import "tailwindcss";
+    @import "@heroui/styles";
+
+    :root {
+      --accent: oklch(0.6204 0.195 253.83);
+      --accent-foreground: oklch(0.9911 0 0);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Best Practices
+
+1. **Use Standard Tailwind**: Prefer standard Tailwind utilities over custom ones
+2. **Match v2 Values**: If exact v2 appearance is needed, use arbitrary values
+3. **Test Responsively**: v3 has responsive sizing - test on multiple screen sizes
+4. **Update CSS Variables**: If customizing, update CSS variables instead of Tailwind config
+5. **Check Component Docs**: Refer to individual component migration guides for API changes
+
+## Related Guides
+
+- [Main Migration Guide](/docs/react/migration)
+- [Theming Documentation](/docs/react/getting-started/handbook/theming)
+- [Styling Guide](/docs/react/getting-started/handbook/styling)

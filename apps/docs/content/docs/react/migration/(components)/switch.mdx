@@ -1,0 +1,317 @@
+---
+title: Switch
+description: Migration guide for Switch from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Switch documentation](/docs/react/components/switch) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, Switch used a simple structure with children as label:
+
+```tsx
+import { Switch } from "@heroui/react";
+
+export default function App() {
+  return <Switch>Enable notifications</Switch>;
+}
+```
+
+In v3, Switch requires compound components:
+
+```tsx
+import { Switch, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Switch>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Enable notifications</Label>
+    </Switch>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Simple Switch with children as label  
+**v3:** Compound components (`Switch.Control`, `Switch.Thumb`) with `Label` component
+
+### 2. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `onValueChange` | `onChange` | Renamed event handler |
+| `size` | `size` | Still exists on root (`sm` \| `md` \| `lg`) |
+| `label` | — | Use `Label` component |
+| `color` | — | Removed (use Tailwind CSS) |
+| `thumbIcon` | — | Use `Switch.Icon` inside `Switch.Thumb` |
+| `startContent` | — | Customize control directly |
+| `endContent` | — | Customize control directly |
+| `classNames` | — | Use `className` props on individual components |
+| `disableAnimation` | — | Removed (animations handled differently) |
+
+### 3. New Components
+
+- `SwitchGroup` - For grouping multiple switches
+- `Switch.Icon` - For icons inside the thumb
+
+## Migration Examples
+
+### Controlled Switch
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isSelected, setIsSelected] = useState(true);
+
+    <Switch isSelected={isSelected} onValueChange={setIsSelected}>
+      Airplane mode
+    </Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isSelected, setIsSelected] = useState(true);
+
+    <Switch isSelected={isSelected} onChange={setIsSelected}>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Airplane mode</Label>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### Without Label
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Switch defaultSelected aria-label="Automatic updates" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Switch defaultSelected aria-label="Automatic updates">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### With Thumb Icon
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Switch thumbIcon={<CheckIcon />}>Enable notifications</Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Switch>
+      <Switch.Control>
+        <Switch.Thumb>
+          <Switch.Icon>
+            <CheckIcon />
+          </Switch.Icon>
+        </Switch.Thumb>
+      </Switch.Control>
+      <Label>Enable notifications</Label>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### With Start/End Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Switch
+      startContent={<SunIcon />}
+      endContent={<MoonIcon />}
+    >
+      Dark mode
+    </Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Switch>
+      <Switch.Control className="flex items-center gap-2">
+        <SunIcon />
+        <Switch.Thumb />
+        <MoonIcon />
+      </Switch.Control>
+      <Label>Dark mode</Label>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### Sizes and Colors
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Sizes */}
+    <div className="flex gap-4">
+      <Switch size="sm">Small</Switch>
+      <Switch size="md">Medium</Switch>
+      <Switch size="lg">Large</Switch>
+    </div>
+    
+    {/* Colors */}
+    <Switch color="primary">Primary</Switch>
+    <Switch color="success">Success</Switch>
+    <Switch color="danger">Danger</Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Sizes */}
+    <div className="flex gap-4">
+      <Switch size="sm">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Small</Label>
+      </Switch>
+      <Switch size="md">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Medium</Label>
+      </Switch>
+      <Switch size="lg">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Large</Label>
+      </Switch>
+    </div>
+    
+    {/* Colors - Use Tailwind CSS classes */}
+    <Switch>
+      <Switch.Control className="data-[selected=true]:bg-accent">
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Primary</Label>
+    </Switch>
+    <Switch>
+      <Switch.Control className="data-[selected=true]:bg-success">
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Success</Label>
+    </Switch>
+    <Switch>
+      <Switch.Control className="data-[selected=true]:bg-danger">
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Danger</Label>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### Switch Group
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* No built-in group component in v2 */}
+    <div className="flex flex-col gap-2">
+      <Switch name="notifications">Allow Notifications</Switch>
+      <Switch name="marketing">Marketing emails</Switch>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { SwitchGroup } from "@heroui/react";
+
+    <SwitchGroup>
+      <Switch name="notifications">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Allow Notifications</Label>
+      </Switch>
+      <Switch name="marketing">
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Marketing emails</Label>
+      </Switch>
+    </SwitchGroup>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+The v3 Switch follows this structure:
+
+```
+Switch (Root)
+  ├── Switch.Control
+  │   └── Switch.Thumb
+  │       └── Switch.Icon (optional)
+  └── Label (optional)
+```
+
+For groups:
+
+```
+SwitchGroup
+  ├── Switch
+  │   ├── Switch.Control
+  │   │   └── Switch.Thumb
+  │   └── Label
+  └── Switch
+      ├── Switch.Control
+      │   └── Switch.Thumb
+      └── Label
+```
+
+## Important Notes
+
+### Event Handler
+
+- **v2:** `onValueChange` prop
+- **v3:** `onChange` prop (same signature: `(isSelected: boolean) => void`)
+
+### Label Handling
+
+- **v2:** Children were used as label
+- **v3:** Use `Label` component separately
+
+### Icons
+
+- **v2:** `thumbIcon` prop for icon inside thumb, `startContent`/`endContent` for icons outside
+- **v3:** Use `Switch.Icon` inside `Switch.Thumb` for thumb icon, customize `Switch.Control` for start/end content
+
+## Summary
+
+1. **Component Structure**: Must use compound components (`Switch.Control`, `Switch.Thumb`)
+2. **Label Handling**: Children no longer used as label - use `Label` component
+3. **Event Handler**: `onValueChange` → `onChange`
+4. **Styling Props Removed**: `color` - use Tailwind CSS
+5. **Icon Props Removed**: `thumbIcon`, `startContent`, `endContent` - use components or customize directly
+6. **ClassNames Removed**: Use `className` props on individual components
+7. **New Component**: `SwitchGroup` available for grouping switches

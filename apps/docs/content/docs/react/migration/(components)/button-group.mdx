@@ -1,0 +1,65 @@
+---
+title: ButtonGroup
+description: Migration guide for ButtonGroup from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 ButtonGroup documentation](/docs/react/components/button-group) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `ButtonGroup` grouped buttons together:
+
+```tsx
+import { ButtonGroup, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ButtonGroup>
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  );
+}
+```
+
+In v3, `ButtonGroup` has the same basic structure but with enhanced prop inheritance:
+
+```tsx
+import { ButtonGroup, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ButtonGroup>
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Import Path
+
+**v2:** Imported from `@heroui/react`  
+**v3:** Imported from `@heroui/react` (same package, but unified import)
+
+### 2. Prop Inheritance
+
+**v2:** ButtonGroup passed `size`, `color`, `variant`, `radius`, `isIconOnly`, `isDisabled`, `disableAnimation`, `disableRipple`, and `fullWidth` to child buttons.
+
+**v3:** ButtonGroup passes `size`, `variant`, `isDisabled`, and `fullWidth` to child buttons. Props such as `color` and `radius` no longer exist on Button (replaced by `variant`); `disableAnimation` and `disableRipple` were removed from the design system.
+
+### 3. Hide Separator
+
+**v3:** New `hideSeparator` prop to hide visual separators between buttons.
+
+## Summary
+
+- Set `size`, `variant`, `isDisabled`, and `fullWidth` on ButtonGroup to apply to all child buttons (replace v2’s `color` + `variant` with v3’s single `variant`)
+- Use the new `hideSeparator` prop to hide separators between buttons
+- Structure stays the same; removed props (`radius`, `disableAnimation`, `disableRipple`) are no longer available on Button in v3
