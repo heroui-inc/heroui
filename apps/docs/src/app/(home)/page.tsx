@@ -11,7 +11,7 @@ const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/react/releases/beta-8"
+      href="/docs/react/releases/v3-0-0-beta-8"
     >
       <FrameworkChip framework="web" />
       <span className="max-w-60 truncate sm:max-w-full">
