@@ -1,0 +1,174 @@
+---
+title: v3.0.0-beta.8
+description: 3 new components (Badge, Pagination, Table), DateField improvements, and key API/style fixes.
+github:
+  pull: 6270
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">March 2, 2026</span>
+</div>
+
+This release adds three new components: [Badge](/docs/components/badge), [Pagination](/docs/components/pagination), and [Table](/docs/components/table), plus new `InputContainer` composition APIs for [DateField](/docs/components/date-field) and [TimeField](/docs/components/time-field).
+
+⚠️ **Breaking changes**: TextField CSS classes were renamed from `.text-field` to `.textfield`.
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-8-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-8-dark@2x.jpg"
+  alt="HeroUI v3 Beta 8"
+  href="/docs/changelog/v3-0-0-beta-8"
+/>
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### New Components
+
+- **[Badge](#badge)**: Compact status + count indicator with color, variant, placement, and size options. ([Docs](/docs/components/badge))
+- **[Pagination](#pagination)**: Compound pagination primitives with summary, ellipsis, and previous/next controls. ([Docs](/docs/components/pagination))
+- **[Table](#table)**: Data table primitives with sorting, selection, resizing, async loading, and footer composition. ([Docs](/docs/components/table))
+
+### Badge
+
+New badge primitives for counters, labels, and anchored overlays with `Badge.Anchor` and `Badge.Label`.
+
+<ComponentPreview
+  name="badge-basic"
+/>
+
+### Pagination
+
+New navigation component built with composable parts (`Root`, `Content`, `Item`, `Link`, `Previous`, `Next`, `Summary`, `Ellipsis`).
+
+<ComponentPreview
+  name="pagination-with-ellipsis"
+/>
+
+### Table
+
+Compound data table on React Aria with sortable columns, row selection, custom cells, load-more sentinel rows, and resizable columns.
+
+<ComponentPreview
+  name="table-basic"
+/>
+
+**Custom Cells:**
+
+<ComponentPreview
+  name="table-custom-cells"
+/>
+
+**Pagination:**
+
+<ComponentPreview
+  name="table-pagination"
+/>
+
+**Empty State:**
+
+<ComponentPreview
+  name="table-empty-state"
+/>
+
+## Component + API Improvements
+
+### DateField and TimeField Enhancements
+
+`DateField` and `TimeField` now expose `InputContainer` to wrap input segments between prefix and suffix content.
+
+**Before:**
+```tsx
+<DateField.Group>
+  <DateField.Prefix>...</DateField.Prefix>
+  <DateField.Input>
+    {(segment) => <DateField.Segment segment={segment} />}
+  </DateField.Input>
+  <DateField.Suffix>...</DateField.Suffix>
+</DateField.Group>
+```
+
+**After:**
+```tsx
+<DateField.Group>
+  <DateField.Prefix>...</DateField.Prefix>
+  <DateField.InputContainer>
+    <DateField.Input>
+      {(segment) => <DateField.Segment segment={segment} />}
+    </DateField.Input>
+  </DateField.InputContainer>
+  <DateField.Suffix>...</DateField.Suffix>
+</DateField.Group>
+```
+
+<ComponentPreview
+  name="date-range-picker-input-container"
+/>
+
+## ⚠️ Breaking Changes
+
+### TextField Class + Path Renames
+
+TextField style naming was normalized to avoid conflicts with Tailwind's `text-*` utility prefix.
+
+| Component | Old Class Name | New Class Name | Notes |
+|-----------|---------------|----------------|-------|
+| **TextField Root** | `.text-field` | `.textfield` | Root class renamed |
+| **TextField Full Width** | `.text-field--full-width` | `.textfield--full-width` | Modifier class renamed |
+
+Additional renames in the same change:
+- Style file: `text-field.css` -> `textfield.css`
+- Styles export path: `@heroui/styles/src/components/text-field` -> `@heroui/styles/src/components/textfield`
+
+## Style Fixes
+
+- **RangeCalendar**: Added rounded corners to calendar cells for range selection visuals ([#6270](https://github.com/heroui-inc/heroui/pull/6270))
+
+## Bug Fixes
+
+- Added required-state red asterisk behavior for **DatePicker** and **DateRangePicker** by propagating `data-required` from `isRequired` ([#6270](https://github.com/heroui-inc/heroui/pull/6270))
+- Fixed missing invalid trigger styling in **Autocomplete** and **Select** by scoping invalid styles to root state ([#6270](https://github.com/heroui-inc/heroui/pull/6270))
+- Updated TextField docs/demo references to the new `textfield-*` demo keys and source/style paths ([#6270](https://github.com/heroui-inc/heroui/pull/6270))
+
+## Links
+
+- [Component Documentation](/docs/components)
+- [Design System - Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6270](https://github.com/heroui-inc/heroui/pull/6270)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

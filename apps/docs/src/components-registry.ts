@@ -42,6 +42,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "avatar",
     title: "Avatar",
   },
+  badge: {
+    category: "display",
+    description: "Small indicator positioned relative to another element",
+    href: "/docs/components/badge",
+    name: "badge",
+    title: "Badge",
+  },
   breadcrumbs: {
     category: "navigation",
     description: "Display the user's current location within a hierarchy",
@@ -294,6 +301,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "numberfield",
     title: "NumberField",
   },
+  pagination: {
+    category: "navigation",
+    description: "Page navigation with composable page links and controls",
+    href: "/docs/components/pagination",
+    name: "pagination",
+    title: "Pagination",
+  },
   popover: {
     category: "display",
     description: "Displays content in context with a trigger",
@@ -378,6 +392,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "switch",
     title: "Switch",
   },
+  table: {
+    category: "display",
+    description: "Structured data display in rows and columns",
+    href: "/docs/components/table",
+    name: "table",
+    title: "Table",
+  },
   tabs: {
     category: "layout",
     description: "Organize content into tabbed views",
@@ -447,7 +468,8 @@ const componentRelationships: Record<string, string[]> = {
     "avatar",
     "button",
   ],
-  avatar: ["separator"],
+  avatar: ["separator", "badge"],
+  badge: ["avatar", "chip"],
   breadcrumbs: ["link", "separator", "tabs"],
   button: [
     "popover",
@@ -626,6 +648,7 @@ const componentRelationships: Record<string, string[]> = {
   listbox: ["select", "combobox", "avatar", "kbd", "separator", "surface", "dropdown"],
   modal: ["button", "tooltip", "select", "avatar"],
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
+  pagination: ["button", "link"],
   popover: ["button", "tooltip", "select", "combobox", "avatar", "dropdown"],
   radiogroup: ["fieldset", "surface", "description", "form", "button", "fielderror"],
   rangecalendar: [
@@ -685,6 +708,7 @@ const componentRelationships: Record<string, string[]> = {
     "listbox",
   ],
   switch: ["label", "description", "button", "form"],
+  table: ["pagination", "checkbox", "chip", "avatar", "button", "spinner"],
   tabs: ["breadcrumbs"],
   taggroup: ["tag", "label", "description", "errormessage", "closebutton"],
   textarea: ["textfield", "input", "label", "fielderror", "form", "surface", "description"],

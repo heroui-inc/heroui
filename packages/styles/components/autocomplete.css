@@ -50,7 +50,8 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  .autocomplete[data-invalid="true"] &,
+  .autocomplete[aria-invalid="true"] & {
     @apply status-invalid-field;
     background-color: var(--color-field-focus);
   }

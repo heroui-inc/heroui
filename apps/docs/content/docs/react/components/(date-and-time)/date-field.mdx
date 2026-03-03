@@ -263,6 +263,7 @@ DateField works with these separate components that should be imported and used 
 - **Label** - Field label component from `@heroui/react`
 - **DateField.Group** - Date input group component (documented below)
 - **DateField.Input** - Input component with segmented editing from `@heroui/react`
+- **DateField.InputContainer** - Scrollable container for grouping multiple inputs (e.g. start/end range inputs) with horizontal overflow
 - **DateField.Segment** - Individual date segment (year, month, day, etc.)
 - **DateField.Prefix** / **DateField.Suffix** - Prefix and suffix slots for the input group
 - **Description** - Helper text component from `@heroui/react`
@@ -364,6 +365,15 @@ DateField.Segment accepts all props from React Aria's `DateSegment` component:
 | `segment` | `DateSegment` | - | The date segment object from the DateField.Input render prop. |
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 
+### DateField.InputContainer Props
+
+DateField.InputContainer accepts standard HTML `div` attributes:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Tailwind classes merged with the component styles. |
+| `children` | `ReactNode` | - | Content to display inside the scrollable container (typically multiple `DateField.Input` components). |
+
 ### DateField.Prefix Props
 
 DateField.Prefix accepts standard HTML `div` attributes:
@@ -426,6 +436,13 @@ The base classes power every instance. Override them once with `@layer component
     }
   }
 
+  .date-input-group__input-container {
+    @apply flex flex-1 items-center;
+    overflow-x: auto;
+    overflow-y: clip;
+    scrollbar-width: none;
+  }
+
   .date-input-group__prefix,
   .date-input-group__suffix {
     @apply pointer-events-none shrink-0 text-field-placeholder flex items-center;
@@ -437,6 +454,7 @@ The base classes power every instance. Override them once with `@layer component
 
 - `.date-input-group` – Root container styling
 - `.date-input-group__input` – Input wrapper styling
+- `.date-input-group__input-container` – Scrollable container for grouping multiple inputs
 - `.date-input-group__segment` – Individual date segment styling
 - `.date-input-group__prefix` – Prefix element styling
 - `.date-input-group__suffix` – Suffix element styling

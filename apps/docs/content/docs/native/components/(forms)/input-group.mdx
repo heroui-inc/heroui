@@ -1,0 +1,208 @@
+---
+title: InputGroup
+description: A compound layout component that groups an input with optional prefix and suffix decorators.
+icon: new
+links:
+  source_native: input-group/input-group.tsx
+  styles_native: input-group/input-group.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-group-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { InputGroup } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix>...</InputGroup.Prefix>
+  <InputGroup.Input />
+  <InputGroup.Suffix>...</InputGroup.Suffix>
+</InputGroup>
+```
+
+- **InputGroup**: Layout container that wraps Prefix, Input, and Suffix. Provides animation settings and a measurement context so Prefix/Suffix widths are automatically applied as padding on the Input.
+- **InputGroup.Prefix**: Absolutely positioned View anchored to the left side of the Input. Its measured width is applied as `paddingLeft` on InputGroup.Input automatically.
+- **InputGroup.Suffix**: Absolutely positioned View anchored to the right side of the Input. Its measured width is applied as `paddingRight` on InputGroup.Input automatically.
+- **InputGroup.Input**: Pass-through to the Input component. Accepts all Input props directly. Automatically receives paddingLeft/paddingRight from measured Prefix/Suffix.
+
+## Usage
+
+### Basic Usage
+
+The InputGroup component uses compound parts to attach prefix and suffix content to an input.
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix>...</InputGroup.Prefix>
+  <InputGroup.Input placeholder="Enter text" />
+  <InputGroup.Suffix>...</InputGroup.Suffix>
+</InputGroup>
+```
+
+### With Prefix Only
+
+Attach leading content such as icons to the input.
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix isDecorative>
+    <PersonIcon size={16} />
+  </InputGroup.Prefix>
+  <InputGroup.Input placeholder="Username" />
+</InputGroup>
+```
+
+### With Suffix Only
+
+Attach trailing content such as icons to the input.
+
+```tsx
+<InputGroup>
+  <InputGroup.Input placeholder="Search products..." />
+  <InputGroup.Suffix isDecorative>
+    <MagnifierIcon size={16} />
+  </InputGroup.Suffix>
+</InputGroup>
+```
+
+### Decorative vs Interactive
+
+Set `isDecorative` on Prefix or Suffix to make touches pass through to the Input and hide the content from screen readers. Omit it when the decorator contains interactive elements.
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix isDecorative>
+    <LockIcon size={16} />
+  </InputGroup.Prefix>
+  <InputGroup.Input placeholder="Enter your password" secureTextEntry />
+  <InputGroup.Suffix>
+    <Pressable onPress={togglePasswordVisibility}>
+      <EyeIcon size={16} />
+    </Pressable>
+  </InputGroup.Suffix>
+</InputGroup>
+```
+
+### Disabled State
+
+Disable the entire input group. The disabled state cascades to all child components.
+
+```tsx
+<InputGroup isDisabled>
+  <InputGroup.Prefix isDecorative>
+    <LockIcon size={16} />
+  </InputGroup.Prefix>
+  <InputGroup.Input placeholder="Disabled input" />
+</InputGroup>
+```
+
+### With TextField Integration
+
+Combine with TextField, Label, and Description for full form field support.
+
+```tsx
+<TextField isRequired>
+  <Label>Email</Label>
+  <InputGroup>
+    <InputGroup.Prefix isDecorative>
+      <MailIcon size={16} />
+    </InputGroup.Prefix>
+    <InputGroup.Input placeholder="you@example.com" keyboardType="email-address" />
+  </InputGroup>
+  <Description>We'll never share your email</Description>
+</TextField>
+```
+
+## Example
+
+```tsx
+import { InputGroup } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { Pressable, View } from 'react-native';
+
+export default function InputGroupExample() {
+  const [value, setValue] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  return (
+    <View className="px-5">
+      <InputGroup>
+        <InputGroup.Prefix isDecorative>
+          <Ionicons name="lock-closed-outline" size={16} color="#888" />
+        </InputGroup.Prefix>
+        <InputGroup.Input
+          value={value}
+          onChangeText={setValue}
+          placeholder="Enter your password"
+          secureTextEntry={!isPasswordVisible}
+        />
+        <InputGroup.Suffix>
+          <Pressable
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+            hitSlop={20}
+          >
+            <Ionicons
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+              size={16}
+              color="#888"
+            />
+          </Pressable>
+        </InputGroup.Suffix>
+      </InputGroup>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/input-group.tsx>).
+
+## API Reference
+
+### InputGroup
+
+| prop           | type                     | default | description                                                                  |
+| -------------- | ------------------------ | ------- | ---------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`        | -       | Children elements to be rendered inside the input group                      |
+| `className`    | `string`                 | -       | Additional CSS classes                                                       |
+| `isDisabled`   | `boolean`                | `false` | Whether the entire input group and its children are disabled                 |
+| `animation`    | `AnimationRootDisableAll`| -       | Animation configuration for input group                                      |
+| `...ViewProps` | `ViewProps`              | -       | All standard React Native View props are supported                           |
+
+#### AnimationRootDisableAll
+
+Animation configuration for the InputGroup root component. Can be:
+
+- `"disable-all"`: Disable all animations including children (cascades down)
+- `undefined`: Use default animations
+
+### InputGroup.Prefix
+
+| prop             | type              | default | description                                                                                  |
+| ---------------- | ----------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `children`       | `React.ReactNode` | -       | Content to render inside the prefix                                                          |
+| `className`      | `string`          | -       | Additional CSS classes                                                                       |
+| `isDecorative`   | `boolean`         | `false` | When true, touches pass through to the Input and content is hidden from screen readers        |
+| `...ViewProps`   | `ViewProps`       | -       | All standard React Native View props are supported                                           |
+
+### InputGroup.Suffix
+
+| prop             | type              | default | description                                                                                  |
+| ---------------- | ----------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `children`       | `React.ReactNode` | -       | Content to render inside the suffix                                                          |
+| `className`      | `string`          | -       | Additional CSS classes                                                                       |
+| `isDecorative`   | `boolean`         | `false` | When true, touches pass through to the Input and content is hidden from screen readers        |
+| `...ViewProps`   | `ViewProps`       | -       | All standard React Native View props are supported                                           |
+
+### InputGroup.Input
+
+Pass-through to the [Input](./input) component. Accepts all Input props directly.

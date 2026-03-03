@@ -1,0 +1,632 @@
+---
+title: Menu
+description: A floating context menu with positioning, selection groups, and multiple presentation modes.
+icon: new
+links:
+  source_native: menu/menu.tsx
+  styles_native: menu/menu.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Menu } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover">
+      <Menu.Close />
+      <Menu.Label>...</Menu.Label>
+      <Menu.Group>
+        <Menu.Item>
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>...</Menu.ItemTitle>
+          <Menu.ItemDescription>...</Menu.ItemDescription>
+        </Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+- **Menu**: Main container that manages open/close state, positioning, and provides context to child components.
+- **Menu.Trigger**: Clickable element that toggles the menu visibility.
+- **Menu.Portal**: Renders menu content in a portal layer above other content.
+- **Menu.Overlay**: Optional background overlay to capture outside clicks and close the menu.
+- **Menu.Content**: Container for menu content with two presentation modes: floating popover with positioning and collision detection, or bottom sheet modal.
+- **Menu.Close**: Close button that dismisses the menu when pressed.
+- **Menu.Label**: Non-interactive section heading text within the menu.
+- **Menu.Group**: Groups menu items with optional selection state (none, single, multiple).
+- **Menu.Item**: Pressable menu item with animated press feedback. Standalone or within a Group for selection.
+- **Menu.ItemTitle**: Primary label text for a menu item.
+- **Menu.ItemDescription**: Secondary description text for a menu item.
+- **Menu.ItemIndicator**: Visual selection indicator (checkmark or dot) for a menu item.
+
+## Usage
+
+### Basic Usage
+
+The Menu component uses compound parts to create a floating context menu.
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={220}>
+      <Menu.Item>
+        <Menu.ItemTitle>View Profile</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item>
+        <Menu.ItemTitle>Settings</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### With Item Descriptions
+
+Add secondary description text to menu items alongside titles.
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={260}>
+      <Menu.Item className="items-start">
+        <View className="flex-1">
+          <Menu.ItemTitle>New file</Menu.ItemTitle>
+          <Menu.ItemDescription>Create a new file</Menu.ItemDescription>
+        </View>
+      </Menu.Item>
+      <Menu.Item className="items-start">
+        <View className="flex-1">
+          <Menu.ItemTitle>Copy link</Menu.ItemTitle>
+          <Menu.ItemDescription>Copy the file link</Menu.ItemDescription>
+        </View>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### Single Selection
+
+Use `Menu.Group` with `selectionMode="single"` to allow one selected item at a time.
+
+```tsx
+const [theme, setTheme] = useState<Set<MenuKey>>(() => new Set(['system']));
+
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={180}>
+      <Menu.Label>Appearance</Menu.Label>
+      <Menu.Group
+        selectionMode="single"
+        selectedKeys={theme}
+        onSelectionChange={setTheme}
+      >
+        <Menu.Item id="light">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Light</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="dark">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Dark</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="system">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>System</Menu.ItemTitle>
+        </Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### Multiple Selection
+
+Use `selectionMode="multiple"` to allow selecting multiple items simultaneously.
+
+```tsx
+const [textStyles, setTextStyles] = useState<Set<MenuKey>>(
+  () => new Set(['bold', 'italic'])
+);
+
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={250}>
+      <Menu.Label>Text Style</Menu.Label>
+      <Menu.Group
+        selectionMode="multiple"
+        selectedKeys={textStyles}
+        onSelectionChange={setTextStyles}
+      >
+        <Menu.Item id="bold">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Bold</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="italic">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Italic</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="underline">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Underline</Menu.ItemTitle>
+        </Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### Danger Variant
+
+Use `variant="danger"` on a menu item for destructive actions.
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={220}>
+      <Menu.Item>
+        <Menu.ItemTitle>Edit</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item variant="danger">
+        <Menu.ItemTitle>Delete</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### Placements
+
+Control where the menu appears relative to the trigger.
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" placement="right" width={200}>
+      <Menu.Item>
+        <Menu.ItemTitle>Option A</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item>
+        <Menu.ItemTitle>Option B</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### Bottom Sheet Presentation
+
+Use `presentation="bottom-sheet"` to display menu content as a bottom sheet modal.
+
+```tsx
+<Menu presentation="bottom-sheet">
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="bottom-sheet">
+      <Menu.Item>
+        <Menu.ItemTitle>Option A</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item>
+        <Menu.ItemTitle>Option B</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### Dot Indicator
+
+Use `variant="dot"` on `Menu.ItemIndicator` to show a filled circle instead of a checkmark.
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={180}>
+      <Menu.Group
+        selectionMode="single"
+        selectedKeys={alignment}
+        onSelectionChange={setAlignment}
+      >
+        <Menu.Item id="left">
+          <Menu.ItemIndicator variant="dot" />
+          <Menu.ItemTitle>Left</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="center">
+          <Menu.ItemIndicator variant="dot" />
+          <Menu.ItemTitle>Center</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="right">
+          <Menu.ItemIndicator variant="dot" />
+          <Menu.ItemTitle>Right</Menu.ItemTitle>
+        </Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+## Example
+
+```tsx
+import type { MenuKey } from 'heroui-native';
+import { Button, Menu, Separator } from 'heroui-native';
+import { useState } from 'react';
+import { Text, View } from 'react-native';
+
+export default function MenuExample() {
+  const [textStyles, setTextStyles] = useState<Set<MenuKey>>(
+    () => new Set(['bold', 'italic'])
+  );
+  const [alignment, setAlignment] = useState<Set<MenuKey>>(
+    () => new Set(['left'])
+  );
+
+  return (
+    <Menu>
+      <Menu.Trigger asChild>
+        <Button variant="secondary">Styles</Button>
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Overlay />
+        <Menu.Content presentation="popover" width={250}>
+          <Menu.Label className="mb-1">Text Style</Menu.Label>
+          <Menu.Group
+            selectionMode="multiple"
+            selectedKeys={textStyles}
+            onSelectionChange={setTextStyles}
+          >
+            <Menu.Item id="bold">
+              <Menu.ItemIndicator />
+              <Menu.ItemTitle>Bold</Menu.ItemTitle>
+              <Text className="text-sm text-muted">⌘ B</Text>
+            </Menu.Item>
+            <Menu.Item id="italic">
+              <Menu.ItemIndicator />
+              <Menu.ItemTitle>Italic</Menu.ItemTitle>
+              <Text className="text-sm text-muted">⌘ I</Text>
+            </Menu.Item>
+            <Menu.Item id="underline">
+              <Menu.ItemIndicator />
+              <Menu.ItemTitle>Underline</Menu.ItemTitle>
+              <Text className="text-sm text-muted">⌘ U</Text>
+            </Menu.Item>
+          </Menu.Group>
+          <Separator className="mx-2 my-2 opacity-75" />
+          <Menu.Label className="mb-1">Text Alignment</Menu.Label>
+          <Menu.Group
+            selectionMode="single"
+            selectedKeys={alignment}
+            onSelectionChange={setAlignment}
+          >
+            <Menu.Item id="left">
+              <Menu.ItemIndicator variant="dot" />
+              <Menu.ItemTitle>Left</Menu.ItemTitle>
+            </Menu.Item>
+            <Menu.Item id="center">
+              <Menu.ItemIndicator variant="dot" />
+              <Menu.ItemTitle>Center</Menu.ItemTitle>
+            </Menu.Item>
+            <Menu.Item id="right">
+              <Menu.ItemIndicator variant="dot" />
+              <Menu.ItemTitle>Right</Menu.ItemTitle>
+            </Menu.Item>
+          </Menu.Group>
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/menu.tsx).
+
+## API Reference
+
+### Menu
+
+| prop              | type                                       | default      | description                                              |
+| ----------------- | ------------------------------------------ | ------------ | -------------------------------------------------------- |
+| `children`        | `React.ReactNode`                          | -            | The content of the menu                                  |
+| `presentation`    | `'popover' \| 'bottom-sheet'`              | `'popover'`  | Presentation mode for the menu content                   |
+| `isOpen`          | `boolean`                                  | -            | Controlled open state of the menu                        |
+| `isDefaultOpen`   | `boolean`                                  | -            | Open state when initially rendered (uncontrolled)        |
+| `isDisabled`      | `boolean`                                  | -            | Whether the menu is disabled                             |
+| `animation`       | `MenuRootAnimation`                        | -            | Animation configuration for menu root                    |
+| `onOpenChange`    | `(open: boolean) => void`                  | -            | Callback fired when the menu open state changes          |
+| `...ViewProps`    | `ViewProps`                                | -            | All standard React Native View props are supported       |
+
+#### MenuRootAnimation
+
+Animation configuration for menu root component. Can be:
+
+- `"disable-all"`: Disable all animations including children
+- `true` or `undefined`: Use default animations
+
+### Menu.Trigger
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `children`          | `React.ReactNode` | -       | The trigger element content                             |
+| `className`         | `string`          | -       | Additional CSS class for the trigger                    |
+| `isDisabled`        | `boolean`         | `false` | Whether the trigger is disabled                         |
+| `asChild`           | `boolean`         | -       | Render as child element using Slot pattern              |
+| `...PressableProps` | `PressableProps`  | -       | All standard React Native Pressable props are supported |
+
+### Menu.Portal
+
+| prop                        | type              | default | description                                                                           |
+| --------------------------- | ----------------- | ------- | ------------------------------------------------------------------------------------- |
+| `children`                  | `React.ReactNode` | -       | The portal content                                                                    |
+| `className`                 | `string`          | -       | Additional CSS class for the portal container                                         |
+| `disableFullWindowOverlay`  | `boolean`         | `false` | Use a regular View instead of FullWindowOverlay on iOS                                |
+| `hostName`                  | `string`          | -       | Optional name of the host element for the portal                                      |
+| `forceMount`                | `boolean`         | -       | Force mount the portal regardless of open state                                       |
+
+### Menu.Overlay
+
+| prop                     | type                     | default | description                                             |
+| ------------------------ | ------------------------ | ------- | ------------------------------------------------------- |
+| `className`              | `string`                 | -       | Additional CSS class for the overlay                    |
+| `closeOnPress`           | `boolean`                | `true`  | Whether to close the menu when the overlay is pressed   |
+| `animation`              | `MenuOverlayAnimation`   | -       | Animation configuration for overlay                     |
+| `isAnimatedStyleActive`  | `boolean`                | `true`  | Whether animated styles (react-native-reanimated) are active |
+| `forceMount`             | `boolean`                | -       | Force mount the overlay regardless of open state        |
+| `...PressableProps`      | `PressableProps`         | -       | All standard React Native Pressable props are supported |
+
+#### MenuOverlayAnimation
+
+Animation configuration for menu overlay component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                     | type                          | default                     | description                                          |
+| ------------------------ | ----------------------------- | --------------------------- | ---------------------------------------------------- |
+| `state`                  | `'disabled' \| boolean`       | -                           | Disable animations while customizing properties      |
+| `opacity.entering.value` | `EntryOrExitLayoutType`       | `FadeIn.duration(200)`      | Custom entering animation for overlay                |
+| `opacity.exiting.value`  | `EntryOrExitLayoutType`       | `FadeOut.duration(150)`     | Custom exiting animation for overlay                 |
+
+### Menu.Content (Popover)
+
+Props when `presentation="popover"`.
+
+| prop                | type                                                 | default          | description                                                |
+| ------------------- | ---------------------------------------------------- | ---------------- | ---------------------------------------------------------- |
+| `children`          | `React.ReactNode`                                    | -                | The menu content                                           |
+| `presentation`      | `'popover'`                                          | -                | Presentation mode (must match Menu root)                   |
+| `placement`         | `'top' \| 'bottom' \| 'left' \| 'right'`            | `'bottom'`       | Where the menu appears relative to the trigger             |
+| `align`             | `'start' \| 'center' \| 'end'`                      | `'center'`       | Alignment of the menu relative to the trigger              |
+| `avoidCollisions`   | `boolean`                                            | `true`           | Whether to reposition to avoid screen edges                |
+| `offset`            | `number`                                             | `9`              | Distance from the trigger element in pixels                |
+| `alignOffset`       | `number`                                             | `0`              | Offset along the alignment axis in pixels                  |
+| `width`             | `'content-fit' \| 'trigger' \| 'full' \| number`    | `'content-fit'`  | Content width sizing strategy                              |
+| `className`         | `string`                                             | -                | Additional CSS class for the content container             |
+| `animation`         | `MenuContentAnimation`                               | -                | Animation configuration for content                        |
+| `...ViewProps`      | `ViewProps`                                          | -                | All standard React Native View props are supported         |
+
+#### MenuContentAnimation
+
+Animation configuration for menu popover content component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop               | type                          | default                              | description                                     |
+| ------------------ | ----------------------------- | ------------------------------------ | ----------------------------------------------- |
+| `state`            | `'disabled' \| boolean`       | -                                    | Disable animations while customizing properties |
+| `entering.value`   | `EntryOrExitLayoutType`       | Scale + fade entering animation      | Custom entering animation for content           |
+| `exiting.value`    | `EntryOrExitLayoutType`       | Scale + fade exiting animation       | Custom exiting animation for content            |
+
+### Menu.Content (Bottom Sheet)
+
+Props when `presentation="bottom-sheet"`. Extends `@gorhom/bottom-sheet` BottomSheet props.
+
+| prop                           | type                                       | default | description                                    |
+| ------------------------------ | ------------------------------------------ | ------- | ---------------------------------------------- |
+| `children`                     | `React.ReactNode`                          | -       | The bottom sheet content                       |
+| `presentation`                 | `'bottom-sheet'`                           | -       | Presentation mode (must match Menu root)       |
+| `className`                    | `string`                                   | -       | Additional CSS class for the bottom sheet      |
+| `backgroundClassName`          | `string`                                   | -       | Additional CSS class for the background        |
+| `handleIndicatorClassName`     | `string`                                   | -       | Additional CSS class for the handle indicator  |
+| `contentContainerClassName`    | `string`                                   | -       | Additional CSS class for the content container |
+| `contentContainerProps`        | `Omit<BottomSheetViewProps, 'children'>`   | -       | Props for the content container                |
+| `animation`                    | `AnimationDisabled`                        | -       | Set to `false` or `"disabled"` to disable animations |
+| `...BottomSheetProps`          | `Partial<BottomSheetProps>`                | -       | All `@gorhom/bottom-sheet` props are supported |
+
+### Menu.Close
+
+Extends `CloseButtonProps`. Automatically closes the menu when pressed.
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `iconProps`         | `CloseButtonIconProps` | -  | Props for customizing the close icon                    |
+| `...ButtonProps`    | `ButtonRootProps` | -       | All Button root props are supported                     |
+
+### Menu.Group
+
+| prop                    | type                                  | default  | description                                                         |
+| ----------------------- | ------------------------------------- | -------- | ------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                     | -        | The group content (Menu.Item elements)                              |
+| `selectionMode`         | `'none' \| 'single' \| 'multiple'`   | `'none'` | The type of selection allowed in the group                          |
+| `selectedKeys`          | `Iterable<MenuKey>`                   | -        | Currently selected keys (controlled)                                |
+| `defaultSelectedKeys`   | `Iterable<MenuKey>`                   | -        | Initially selected keys (uncontrolled)                              |
+| `isDisabled`            | `boolean`                             | `false`  | Whether the entire group is disabled                                |
+| `disabledKeys`          | `Iterable<MenuKey>`                   | -        | Keys of items that should be disabled                               |
+| `shouldCloseOnSelect`   | `boolean`                             | -        | Whether selecting an item should close the menu                     |
+| `className`             | `string`                              | -        | Additional CSS class for the group container                        |
+| `onSelectionChange`     | `(keys: Set<MenuKey>) => void`        | -        | Callback fired when the selection changes                           |
+| `...ViewProps`          | `ViewProps`                           | -        | All standard React Native View props are supported                  |
+
+### Menu.Label
+
+| prop           | type              | default | description                                            |
+| -------------- | ----------------- | ------- | ------------------------------------------------------ |
+| `children`     | `React.ReactNode` | -       | The label text content                                 |
+| `className`    | `string`          | -       | Additional CSS class for the label                     |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported     |
+
+### Menu.Item
+
+| prop                    | type                                                             | default     | description                                                |
+| ----------------------- | ---------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
+| `children`              | `React.ReactNode \| ((props: MenuItemRenderProps) => ReactNode)` | -           | Child elements or a render function                        |
+| `id`                    | `MenuKey`                                                        | -           | Unique identifier, required when inside a Menu.Group       |
+| `variant`               | `'default' \| 'danger'`                                         | `'default'` | Visual variant of the menu item                            |
+| `isDisabled`            | `boolean`                                                        | `false`     | Whether the item is disabled                               |
+| `isSelected`            | `boolean`                                                        | -           | Controlled selected state for standalone items             |
+| `shouldCloseOnSelect`   | `boolean`                                                        | `true`      | Whether pressing this item should close the menu           |
+| `className`             | `string`                                                         | -           | Additional CSS class for the item                          |
+| `animation`             | `MenuItemAnimation`                                              | -           | Animation configuration for press feedback                 |
+| `isAnimatedStyleActive` | `boolean`                                                        | `true`      | Whether animated styles (react-native-reanimated) are active |
+| `onSelectedChange`      | `(selected: boolean) => void`                                    | -           | Callback when standalone item's selected state changes     |
+| `...PressableProps`     | `PressableProps`                                                 | -           | All standard React Native Pressable props are supported    |
+
+#### MenuItemRenderProps
+
+Props passed to the render function when `children` is a function.
+
+| prop         | type                    | description                              |
+| ------------ | ----------------------- | ---------------------------------------- |
+| `isSelected` | `boolean`               | Whether this item is currently selected  |
+| `isDisabled` | `boolean`               | Whether the item is disabled             |
+| `isPressed`  | `SharedValue<boolean>`  | Whether the item is currently pressed    |
+| `variant`    | `'default' \| 'danger'` | Visual variant of the item               |
+
+#### MenuItemAnimation
+
+Animation configuration for menu item press feedback. Can be:
+
+- `false` or `"disabled"`: Disable all item animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                          | type               | default                    | description                              |
+| ----------------------------- | ------------------ | -------------------------- | ---------------------------------------- |
+| `scale.value`                 | `number`           | `0.98`                     | Scale value when pressed                 |
+| `scale.timingConfig`          | `WithTimingConfig` | `{ duration: 150 }`       | Spring animation configuration for scale |
+| `backgroundColor.value`       | `string`           | `useThemeColor('default')` | Background color shown while pressed     |
+| `backgroundColor.timingConfig`| `WithTimingConfig` | `{ duration: 150 }`       | Animation timing for background color    |
+
+### Menu.ItemTitle
+
+| prop           | type              | default | description                                          |
+| -------------- | ----------------- | ------- | ---------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | The title text content                               |
+| `className`    | `string`          | -       | Additional CSS class for the item title              |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported   |
+
+### Menu.ItemDescription
+
+| prop           | type              | default | description                                          |
+| -------------- | ----------------- | ------- | ---------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | The description text content                         |
+| `className`    | `string`          | -       | Additional CSS class for the item description        |
+| `...TextProps` | `TextProps`       | -       | All standard React Native Text props are supported   |
+
+### Menu.ItemIndicator
+
+| prop           | type                         | default        | description                                            |
+| -------------- | ---------------------------- | -------------- | ------------------------------------------------------ |
+| `children`     | `React.ReactNode`            | -              | Custom indicator content, defaults to checkmark or dot |
+| `variant`      | `'checkmark' \| 'dot'`      | `'checkmark'`  | Visual variant of the indicator                        |
+| `iconProps`    | `MenuItemIndicatorIconProps` | -              | Icon configuration (checkmark variant)                 |
+| `forceMount`   | `boolean`                    | `true`         | Force mount the indicator regardless of selected state |
+| `className`    | `string`                     | -              | Additional CSS class for the item indicator            |
+| `...ViewProps` | `ViewProps`                  | -              | All standard React Native View props are supported     |
+
+#### MenuItemIndicatorIconProps
+
+| prop    | type     | default  | description                                      |
+| ------- | -------- | -------- | ------------------------------------------------ |
+| `size`  | `number` | `16`     | Size of the indicator icon (8 for dot variant)   |
+| `color` | `string` | `muted`  | Color of the indicator icon                      |
+
+## Hooks
+
+### useMenu
+
+Hook to access the menu root context. Must be used within a `Menu` component.
+
+```tsx
+import { useMenu } from 'heroui-native';
+
+const { isOpen, onOpenChange, presentation, isDisabled } = useMenu();
+```
+
+#### Returns
+
+| property        | type                           | description                                  |
+| --------------- | ------------------------------ | -------------------------------------------- |
+| `isOpen`        | `boolean`                      | Whether the menu is currently open           |
+| `onOpenChange`  | `(open: boolean) => void`      | Callback to change the open state            |
+| `presentation`  | `'popover' \| 'bottom-sheet'`  | Current presentation mode                    |
+| `isDisabled`    | `boolean \| undefined`         | Whether the menu is disabled                 |
+| `nativeID`      | `string`                       | Unique identifier for the menu instance      |
+
+### useMenuItem
+
+Hook to access the menu item context. Must be used within a `Menu.Item` component.
+
+```tsx
+import { useMenuItem } from 'heroui-native';
+
+const { id, isSelected, isDisabled, variant } = useMenuItem();
+```
+
+#### Returns
+
+| property     | type                    | description                              |
+| ------------ | ----------------------- | ---------------------------------------- |
+| `id`         | `MenuKey \| undefined`  | Item identifier                          |
+| `isSelected` | `boolean`               | Whether the item is currently selected   |
+| `isDisabled` | `boolean`               | Whether the item is disabled             |
+| `variant`    | `'default' \| 'danger'` | Visual variant of the item               |
+
+### useMenuAnimation
+
+Hook to access the menu animation context. Must be used within a `Menu` component.
+
+```tsx
+import { useMenuAnimation } from 'heroui-native';
+
+const { progress, isDragging } = useMenuAnimation();
+```
+
+#### Returns
+
+| property     | type                   | description                                            |
+| ------------ | ---------------------- | ------------------------------------------------------ |
+| `progress`   | `SharedValue<number>`  | Animation progress shared value (0=idle, 1=open, 2=close) |
+| `isDragging` | `SharedValue<boolean>` | Whether the bottom sheet is currently being dragged    |
+

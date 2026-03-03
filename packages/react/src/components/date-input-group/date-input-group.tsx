@@ -129,6 +129,29 @@ const DateInputGroupSegment = ({className, segment, ...props}: DateInputGroupSeg
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * DateInputGroup InputContainer
+ * -----------------------------------------------------------------------------------------------*/
+interface DateInputGroupInputContainerProps extends ComponentPropsWithRef<"div"> {}
+
+const DateInputGroupInputContainer = ({
+  children,
+  className,
+  ...props
+}: DateInputGroupInputContainerProps) => {
+  const {slots} = useContext(DateInputGroupContext);
+
+  return (
+    <div
+      className={composeSlotClassName(slots?.inputContainer, className)}
+      data-slot="date-input-group-input-container"
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * DateInputGroup Suffix
  * -----------------------------------------------------------------------------------------------*/
 interface DateInputGroupSuffixProps extends ComponentPropsWithRef<"div"> {}
@@ -153,6 +176,7 @@ const DateInputGroupSuffix = ({children, className, ...props}: DateInputGroupSuf
 export {
   DateInputGroupRoot,
   DateInputGroupInput,
+  DateInputGroupInputContainer,
   DateInputGroupSegment,
   DateInputGroupPrefix,
   DateInputGroupSuffix,
@@ -161,6 +185,7 @@ export {
 export type {
   DateInputGroupRootProps,
   DateInputGroupInputProps,
+  DateInputGroupInputContainerProps,
   DateInputGroupSegmentProps,
   DateInputGroupPrefixProps,
   DateInputGroupSuffixProps,

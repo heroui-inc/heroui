@@ -30,7 +30,7 @@ const COMPONENT_GROUPS = [
       "number-field",
       "radio-group",
       "search-field",
-      "text-field",
+      "textfield",
       "textarea",
     ],
   },
@@ -47,7 +47,15 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Navigation",
-    components: ["accordion", "breadcrumbs", "disclosure", "disclosure-group", "link", "tabs"],
+    components: [
+      "accordion",
+      "breadcrumbs",
+      "disclosure",
+      "disclosure-group",
+      "link",
+      "pagination",
+      "tabs",
+    ],
   },
   {
     category: "Overlays",
@@ -83,7 +91,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Data Display",
-    components: ["chip"],
+    components: ["badge", "chip", "table"],
   },
   {
     category: "Colors",

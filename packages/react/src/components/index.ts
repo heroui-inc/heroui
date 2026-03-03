@@ -7,6 +7,7 @@ export * from "./accordion";
 export * from "./alert-dialog";
 export * from "./autocomplete";
 export * from "./avatar";
+export * from "./badge";
 export * from "./breadcrumbs";
 export * from "./button";
 export * from "./button-group";
@@ -47,7 +48,7 @@ export * from "./tooltip";
 export * from "./input";
 export * from "./input-group";
 export * from "./textarea";
-export * from "./text-field";
+export * from "./textfield";
 export * from "./search-field";
 export * from "./text";
 export * from "./label";
@@ -70,8 +71,10 @@ export * from "./menu-item";
 export * from "./menu-section";
 export * from "./modal";
 export * from "./number-field";
+export * from "./pagination";
 export * from "./select";
 export * from "./slider";
+export * from "./table";
 
 // in progress
 export * from "./calendar";

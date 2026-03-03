@@ -17,7 +17,7 @@ export const COMPONENT_PATH =
     ? `${GITHUB_URL}/${REPO_NAME}/tree/v3/packages/react/src/components`
     : `${GITHUB_URL}/${REPO_NAME}/tree/main/packages/react/src/components`;
 
-export const COMPONENT_PATH_NATIVE = `${GITHUB_URL}/${REPO_NAME_NATIVE}/tree/beta/src/components`;
+export const COMPONENT_PATH_NATIVE = `${GITHUB_URL}/${REPO_NAME_NATIVE}/tree/rc/src/components`;
 
 export const DOCS_CONTENT_PATH =
   __IS_PRE_RELEASE__ || __PREVIEW__
@@ -34,7 +34,7 @@ export const COMPONENT_STYLES_PATH =
     ? `${GITHUB_URL}/${REPO_NAME}/tree/v3/packages/styles/components`
     : `${GITHUB_URL}/${REPO_NAME}/tree/main/packages/styles/components`;
 
-export const COMPONENT_STYLES_PATH_NATIVE = `${GITHUB_URL}/${REPO_NAME_NATIVE}/blob/beta/src/components`;
+export const COMPONENT_STYLES_PATH_NATIVE = `${GITHUB_URL}/${REPO_NAME_NATIVE}/blob/rc/src/components`;
 
 export const THEMES_PATH =
   __IS_PRE_RELEASE__ || __PREVIEW__

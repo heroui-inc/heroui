@@ -1,0 +1,315 @@
+/* ==========================================================================
+   Table — Data display component for structured tabular data.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Table Root — Outer container for table + optional footer.
+   Primary variant: gray background with the table body as a white card inside.
+   -------------------------------------------------------------------------- */
+.table-root {
+  @apply relative grid w-full overflow-clip;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Container — Allows the table to scroll horizontally while the
+   wrapper and footer remain at full width. The parent grid with
+   minmax(0, 1fr) creates a hard width boundary that table layout
+   cannot push beyond.
+   -------------------------------------------------------------------------- */
+.table__scroll-container {
+  @apply overflow-x-auto;
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0% 0 0 / 0.15) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: oklch(0% 0 0 / 0.15);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: oklch(0% 0 0 / 0.25);
+  }
+
+  /* Dark mode scrollbar */
+  :is([data-theme="dark"], .dark) & {
+    scrollbar-color: oklch(100% 0 0 / 0.15) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background: oklch(100% 0 0 / 0.15);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: oklch(100% 0 0 / 0.25);
+    }
+  }
+}
+
+.table-root--primary {
+  @apply bg-surface-secondary px-1 pb-1;
+  border-radius: calc(var(--radius) * 2.5);
+}
+
+.table-root--secondary {
+  /* No background, padding, or rounding on the root */
+}
+
+/* Secondary: header is a standalone rounded card */
+.table-root--secondary .table__header {
+  @apply rounded-2xl border-b-0;
+}
+
+.table-root--secondary .table__column:first-child {
+  @apply rounded-tl-2xl rounded-bl-2xl;
+}
+
+.table-root--secondary .table__column:last-child {
+  @apply rounded-tr-2xl rounded-br-2xl;
+}
+
+/* Secondary: body has no shadow or rounded corners */
+.table-root--secondary .table__body {
+  @apply shadow-none;
+
+  & tr:first-child td:first-child,
+  & tr:first-child td:last-child,
+  & tr:last-child td:first-child,
+  & tr:last-child td:last-child {
+    @apply rounded-none;
+  }
+}
+
+/* Secondary: rows are transparent and keep bottom border on every row */
+.table-root--secondary .table__row {
+  @apply bg-transparent;
+
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default/50;
+    }
+  }
+
+  .table__cell {
+    @apply border-b border-separator-tertiary/50;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Content (<table> element) — the white card inside the root
+   -------------------------------------------------------------------------- */
+.table__content {
+  @apply w-full border-separate border-spacing-0 text-sm;
+}
+
+/* Primary variant: table gets the white surface card look */
+.table-root--primary .table__content {
+  @apply overflow-clip;
+}
+
+/* --------------------------------------------------------------------------
+   Table Header (<thead>)
+   -------------------------------------------------------------------------- */
+.table__header {
+  @apply border-b border-separator/50 bg-surface-secondary;
+}
+
+/* --------------------------------------------------------------------------
+   Table Column (<th>)
+   -------------------------------------------------------------------------- */
+.table__column {
+  @apply relative px-4 py-2.5 text-left text-xs font-medium text-muted;
+
+  /* Separator between columns — a short vertical line on the right edge */
+  &::after {
+    content: "";
+    @apply pointer-events-none absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+  }
+
+  &:last-child::after {
+    content: none;
+  }
+
+  /* Sortable columns */
+  &[data-allows-sorting="true"] {
+    cursor: var(--cursor-interactive);
+  }
+
+  @media (hover: hover) {
+    &[data-allows-sorting="true"]:hover,
+    &[data-allows-sorting="true"][data-hovered="true"] {
+      @apply text-foreground;
+    }
+  }
+
+  /* Focus visible — inset shadow for consistent table focus styling */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply rounded-lg outline-none;
+    box-shadow: inset 0 0 0 2px var(--color-focus);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Body (<tbody>)
+   -------------------------------------------------------------------------- */
+.table__body {
+  /* Rounded corners on the tbody via corner cells (border-radius on <tbody> has no effect) */
+  & tr:first-child td:first-child {
+    @apply rounded-tl-2xl;
+  }
+  & tr:first-child td:last-child {
+    @apply rounded-tr-2xl;
+  }
+  & tr:last-child td:first-child {
+    @apply rounded-bl-2xl;
+  }
+  & tr:last-child td:last-child {
+    @apply rounded-br-2xl;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Row (<tr>)
+   -------------------------------------------------------------------------- */
+.table__row {
+  @apply relative bg-surface;
+
+  /* Bottom separator */
+  @apply border-b border-separator/50;
+
+  /* Last row in body has no bottom border */
+  &:last-child {
+    @apply border-b-0;
+  }
+
+  /* Hover state */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-surface/40;
+    }
+  }
+
+  /* Selected state */
+  &[data-selected="true"] {
+    @apply bg-surface/10;
+  }
+
+  /* Disabled state */
+  &[aria-disabled="true"],
+  &[data-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  /* Focus visible — use outline instead of ring for better table row rendering */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply outline-none;
+    box-shadow: inset 0 0 0 2px var(--color-focus);
+  }
+
+  /* Dragging state */
+  &[data-dragging="true"] {
+    @apply opacity-50;
+  }
+
+  /* Drop target state */
+  &[data-drop-target="true"] {
+    @apply bg-accent-soft;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Cell (<td>)
+   -------------------------------------------------------------------------- */
+.table__cell {
+  @apply px-4 py-3 align-middle text-sm text-foreground;
+
+  @apply border-b border-separator-tertiary/50;
+
+  /* Focus visible — inset shadow so focus stays within the cell boundaries */
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply rounded-lg outline-none;
+    box-shadow: inset 0 0 0 2px var(--color-focus);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Table Footer (div outside <table>, sits on gray bg)
+   -------------------------------------------------------------------------- */
+.table__footer {
+  @apply flex items-center px-4 py-2.5;
+}
+
+/* --------------------------------------------------------------------------
+   Resizable Container — wraps table to enable column resizing via React Aria.
+   -------------------------------------------------------------------------- */
+.table__resizable-container {
+  @apply relative overflow-auto;
+}
+
+/* --------------------------------------------------------------------------
+   Column Resizer — drag handle between resizable columns.
+   Replaces the ::after separator when present.
+   -------------------------------------------------------------------------- */
+.table__column-resizer {
+  /* Match the ::after separator: absolute, right edge, short vertical line */
+  @apply absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+  /* Make it interactive — wider hit area with transparent padding */
+  @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2;
+  /* Reset appearance */
+  @apply border-none bg-clip-content outline-none;
+
+  &[data-hovered="true"],
+  &:hover {
+    @apply h-full w-0.5 bg-accent;
+  }
+
+  &[data-resizing="true"] {
+    @apply h-full w-0.5 bg-accent;
+  }
+
+  &[data-focus-visible="true"],
+  &:focus-visible {
+    @apply h-full w-0.5 bg-focus;
+  }
+}
+
+/* Hide the ::after separator when a resizer is present in the column */
+.table__column:has(.table__column-resizer)::after {
+  content: none;
+}
+
+/* --------------------------------------------------------------------------
+   Load More Item — sentinel row for infinite scrolling.
+   The className applies to the <tr>. React Aria renders a <td colSpan=N>
+   inside, so we target the inner cell for centering — display:flex on a <tr>
+   would break colSpan.
+   -------------------------------------------------------------------------- */
+.table__load-more {
+  & td {
+    @apply py-3 text-center;
+    & > * {
+      @apply mx-auto;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Load More Content — styled container for the loading indicator inside
+   the load-more sentinel row.
+   -------------------------------------------------------------------------- */
+.table__load-more-content {
+  @apply flex items-center justify-center gap-2 py-2;
+}
