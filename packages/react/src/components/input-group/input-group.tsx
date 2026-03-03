@@ -99,6 +99,7 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
 
   return (
     <div
+      inert
       className={composeSlotClassName(slots?.prefix, className)}
       data-slot="input-group-prefix"
       {...props}
@@ -135,6 +136,7 @@ const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps
 
   return (
     <div
+      inert
       className={composeSlotClassName(slots?.suffix, className)}
       data-slot="input-group-suffix"
       {...props}
