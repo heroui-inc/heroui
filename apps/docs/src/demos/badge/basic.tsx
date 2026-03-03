@@ -3,7 +3,7 @@ import {Avatar, Badge} from "@heroui/react";
 const GREEN_AVATAR_URL = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg";
 const ORANGE_AVATAR_URL =
   "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg";
-const RED_AVATAR_URL = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg";
+const BLUE_AVATAR_URL = "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg";
 
 export function BadgeBasic() {
   return (
@@ -30,10 +30,10 @@ export function BadgeBasic() {
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={RED_AVATAR_URL} />
+          <Avatar.Image src={BLUE_AVATAR_URL} />
           <Avatar.Fallback>CD</Avatar.Fallback>
         </Avatar>
-        <Badge color="success" size="sm" />
+        <Badge color="success" placement="bottom-right" size="sm" />
       </Badge.Anchor>
     </div>
   );
