@@ -63,6 +63,7 @@ import * as TextAreaDemos from "./textarea";
 import * as TextFieldDemos from "./textfield";
 import * as TimeFieldDemos from "./time-field";
 import * as ToastDemos from "./toast";
+import * as ToggleButtonDemos from "./toggle-button";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -1881,6 +1882,31 @@ export const demos: Record<string, DemoItem> = {
   "toast-custom-queue": {
     component: ToastDemos.CustomQueue,
     file: "toast/custom-queue.tsx",
+  },
+  // ToggleButton demos
+  "toggle-button-basic": {
+    component: ToggleButtonDemos.Basic,
+    file: "toggle-button/basic.tsx",
+  },
+  "toggle-button-variants": {
+    component: ToggleButtonDemos.Variants,
+    file: "toggle-button/variants.tsx",
+  },
+  "toggle-button-sizes": {
+    component: ToggleButtonDemos.Sizes,
+    file: "toggle-button/sizes.tsx",
+  },
+  "toggle-button-icon-only": {
+    component: ToggleButtonDemos.IconOnly,
+    file: "toggle-button/icon-only.tsx",
+  },
+  "toggle-button-controlled": {
+    component: ToggleButtonDemos.Controlled,
+    file: "toggle-button/controlled.tsx",
+  },
+  "toggle-button-disabled": {
+    component: ToggleButtonDemos.Disabled,
+    file: "toggle-button/disabled.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

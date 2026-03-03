@@ -442,6 +442,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "toast",
     title: "Toast",
   },
+  togglebutton: {
+    category: "forms",
+    description: "Interactive toggle control for on/off states",
+    href: "/docs/components/toggle-button",
+    name: "togglebutton",
+    title: "ToggleButton",
+  },
   tooltip: {
     category: "display",
     description: "Contextual information on hover or focus",
@@ -726,6 +733,7 @@ const componentRelationships: Record<string, string[]> = {
   ],
   timefield: ["label", "fielderror", "description", "form", "surface"],
   toast: ["button", "alert", "closebutton", "spinner"],
+  togglebutton: ["button", "switch", "checkbox"],
   tooltip: ["button", "popover"],
 };
 

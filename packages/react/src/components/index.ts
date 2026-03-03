@@ -39,6 +39,7 @@ export * from "./skeleton";
 export * from "./spinner";
 export * from "./surface";
 export * from "./toast";
+export * from "./toggle-button";
 export * from "./switch";
 export * from "./switch-group";
 export * from "./tabs";

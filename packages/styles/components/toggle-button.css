@@ -1,0 +1,149 @@
+/* ==========================================================================
+   ToggleButton - Interactive toggle control for on/off states
+   ========================================================================== */
+
+/* Base styles */
+.toggle-button {
+  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-3xl px-4 text-sm font-medium whitespace-nowrap outline-none select-none no-highlight md:h-9;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-smooth),
+    background-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Default tokens (unselected state) */
+  --toggle-button-bg: var(--color-default);
+  --toggle-button-bg-hover: var(--color-default-hover);
+  --toggle-button-bg-pressed: var(--color-default-hover);
+  --toggle-button-fg: currentColor;
+
+  /* Selected state tokens */
+  --toggle-button-bg-selected: var(--color-accent-soft);
+  --toggle-button-bg-selected-hover: var(--color-accent-soft-hover);
+  --toggle-button-bg-selected-pressed: var(--color-accent-soft-hover);
+  --toggle-button-fg-selected: var(--color-accent-soft-foreground);
+
+  background-color: var(--toggle-button-bg);
+  color: var(--toggle-button-fg);
+
+  /* Focus state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+
+  /* Hover */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      background-color: var(--toggle-button-bg-hover);
+    }
+  }
+
+  /* Active / pressed */
+  &:active,
+  &[data-pressed="true"] {
+    background-color: var(--toggle-button-bg-pressed);
+    transform: scale(0.97);
+  }
+
+  /* Selected state */
+  &[data-selected="true"] {
+    background-color: var(--toggle-button-bg-selected);
+    color: var(--toggle-button-fg-selected);
+
+    @media (hover: hover) {
+      &:hover,
+      &[data-hovered="true"] {
+        background-color: var(--toggle-button-bg-selected-hover);
+      }
+    }
+
+    &:active,
+    &[data-pressed="true"] {
+      background-color: var(--toggle-button-bg-selected-pressed);
+    }
+  }
+
+  /* SVG icon styling */
+  & svg {
+    @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center sm:my-1 sm:size-4;
+  }
+}
+
+/* ==========================================================================
+   Size variants
+   ========================================================================== */
+
+.toggle-button--sm {
+  @apply h-9 px-3 md:h-8;
+
+  & svg {
+    @apply size-4;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.98);
+  }
+}
+
+.toggle-button--md {
+  /* No styles as this is the default size */
+}
+
+.toggle-button--lg {
+  @apply h-11 text-base md:h-10;
+
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.96);
+  }
+}
+
+/* ==========================================================================
+   Variant styles
+   ========================================================================== */
+
+.toggle-button--default {
+  --toggle-button-bg: var(--color-default);
+  --toggle-button-bg-hover: var(--color-default-hover);
+  --toggle-button-bg-pressed: var(--color-default-hover);
+}
+
+.toggle-button--ghost {
+  --toggle-button-bg: transparent;
+  --toggle-button-bg-hover: var(--color-default);
+  --toggle-button-bg-pressed: var(--color-default);
+  --toggle-button-fg: var(--color-default-foreground);
+}
+
+/* ==========================================================================
+   Icon-only modifier
+   ========================================================================== */
+
+.toggle-button--icon-only {
+  @apply w-10 p-0 md:w-9;
+}
+
+.toggle-button--icon-only.toggle-button--sm {
+  @apply w-9 md:w-8;
+}
+
+.toggle-button--icon-only.toggle-button--lg {
+  @apply w-11 md:w-10;
+}
