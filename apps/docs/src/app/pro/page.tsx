@@ -55,12 +55,6 @@ export default function ProContent() {
         <MobileMockup />
       </div>
 
-      <p className="mt-16 w-full max-w-lg px-6 text-center text-base leading-[normal] font-medium whitespace-pre-wrap text-muted">
-        Beautiful components for React and React Native, advanced AI tools, and ready-made
-        templates. It's a refined UI system that makes your product look right from day zero.
-      </p>
-
-      {/* Below-fold sections (dynamically loaded) */}
       <FeaturesShowcase />
       <PricingSection />
       <FaqAccordion />

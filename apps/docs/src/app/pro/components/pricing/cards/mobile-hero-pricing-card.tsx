@@ -43,7 +43,7 @@ function MobileComponentsFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         More than 50 components
       </p>
     </div>
@@ -69,7 +69,7 @@ function MobileTemplatesFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Premium templates
       </p>
     </div>
@@ -126,7 +126,7 @@ function MobileAIFeature() {
       <div className="relative size-[16px] shrink-0 overflow-clip opacity-30" data-name="brain">
         <MobileHeroBrainIcon />
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Advanced AI (Skills and MCPs)
       </p>
     </div>
@@ -154,7 +154,7 @@ function MobileDesignSystemsFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Premium design systems
       </p>
     </div>
@@ -182,7 +182,7 @@ function MobileThemeBuilderFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Advanced theme builder
       </p>
     </div>
@@ -210,7 +210,7 @@ function MobileDiscordFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Private Discord channel
       </p>
     </div>
@@ -268,7 +268,7 @@ function MobileFigmaFileFeature() {
   return (
     <div className="relative flex shrink-0 content-stretch items-center gap-[8px]">
       <SolarFigmaLinear1 />
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Figma file
       </p>
     </div>
@@ -299,7 +299,7 @@ function MobileFigmaSyncFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Figma plugin sync
       </p>
     </div>
@@ -331,7 +331,7 @@ function MobileSupportFeature() {
           </div>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Priority support
       </p>
     </div>
@@ -2494,7 +2494,7 @@ function MobileHeroCardHeader() {
   const isTeam = planType === "teams";
 
   return (
-    <div className="relative mx-2 mt-2 h-[255px] overflow-clip rounded-[16px] bg-[#efefef]">
+    <div className="relative mx-2 mt-2 mb-2 h-[255px] overflow-clip rounded-[16px] bg-[#efefef]">
       {/* Decorative backgrounds */}
       <div
         className="absolute top-[-148px] left-[-10px] flex h-[403px] w-[328px] items-center justify-center"
@@ -2519,10 +2519,10 @@ function MobileHeroCardHeader() {
         <div className="pt-4">
           <MobileHeroBadge />
         </div>
-        <p className="font-heading mt-3 text-[20px] leading-[normal] text-[#18181b] not-italic">
+        <p className="font-heading mt-3 text-[20px] leading-[normal] text-foreground not-italic">
           {isTeam ? "Mobile Heroes" : "Mobile Hero"}
         </p>
-        <p className="mt-1 w-[214px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#18181b] not-italic">
+        <p className="mt-1 w-[214px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-foreground not-italic">
           Get access to mobile library components and features
         </p>
         <div className="mt-5">

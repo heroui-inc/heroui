@@ -4,14 +4,16 @@ import {imgBlur, imgBlur1, imgBlur2, imgBlur3} from "./features-showcase-imgs";
 
 function DeepCustomizationCard() {
   return (
-    <div className="absolute top-[230px] left-[728px] h-[400px] w-[488px] overflow-clip rounded-[24px] border border-solid border-[#dedee0]">
-      <p className="absolute top-[23px] left-[232px] -translate-x-1/2 text-center text-[14px] leading-[1.43] font-medium text-[#18181b] not-italic">
-        Deep customization
-      </p>
-      <p className="absolute top-[47px] left-[calc(50%-0.5px)] w-[403px] -translate-x-1/2 text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
-        Total control over your design system. Tweak variables, fine-tune animations, and every
-        detail to fit your exact brand.
-      </p>
+    <div className="relative col-span-3 h-[400px] overflow-clip rounded-[24px] border border-solid border-border">
+      <div className="flex flex-col items-center px-10 pt-[23px]">
+        <p className="text-center text-[14px] leading-[1.43] font-medium text-foreground not-italic">
+          Deep customization
+        </p>
+        <p className="max-w-[403px] text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+          Total control over your design system. Tweak variables, fine-tune animations, and every
+          detail to fit your exact brand.
+        </p>
+      </div>
       <div
         className="absolute top-[111px] left-[calc(50%-335.42px)] h-[763px] w-[1072.969px] -translate-x-1/2 overflow-clip rounded-[20.863px] shadow-[0px_5.035px_20.14px_0px_rgba(0,0,0,0.06),0px_-15.105px_30.21px_0px_rgba(0,0,0,0.03),0px_35.245px_70.489px_0px_rgba(0,0,0,0.08)] backdrop-blur-[50.349px]"
         data-name="canvas"
@@ -106,7 +108,7 @@ function DeepCustomizationCard() {
                 </div>
               </div>
               <div
-                className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#0485f7] px-[10.429px] py-[5.959px]"
+                className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-accent px-[10.429px] py-[5.959px]"
                 data-name="Button"
               >
                 <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc] not-italic">
@@ -389,7 +391,7 @@ function DeepCustomizationCard() {
               </p>
             </div>
             <div
-              className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#0485f7] px-[10.429px] py-[5.959px]"
+              className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-accent px-[10.429px] py-[5.959px]"
               data-name="ButtonOne"
             >
               <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc] not-italic">
@@ -508,7 +510,7 @@ function DeepCustomizationCard() {
                 </div>
               </div>
               <div
-                className="relative h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] w-full shrink-0 rounded-[17.878px] bg-[#0485f7]"
+                className="relative h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] w-full shrink-0 rounded-[17.878px] bg-accent"
                 data-name="Component2"
               >
                 <div className="flex size-full max-h-[inherit] min-h-[inherit] flex-row items-center justify-center overflow-clip rounded-[inherit]">
@@ -639,7 +641,7 @@ function DeepCustomizationCard() {
                       </div>
                     </div>
                   </div>
-                  <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#0485f7] not-italic">
+                  <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-accent not-italic">
                     Continue with Google
                   </p>
                   <div
@@ -1451,7 +1453,7 @@ function DeepCustomizationCard() {
               className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#ebebec] px-[10.429px] py-[5.959px] backdrop-blur-[0px]"
               data-name="Button"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#0485f7] not-italic">
+              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-accent not-italic">
                 Share
               </p>
             </div>
@@ -1814,10 +1816,7 @@ function DeepCustomizationCard() {
                 className="relative h-[11.919px] w-[23.837px] shrink-0"
                 data-name="switch-control"
               >
-                <div
-                  className="absolute inset-0 rounded-[7448.411px] bg-[#0485f7]"
-                  data-name="base"
-                />
+                <div className="absolute inset-0 rounded-[7448.411px] bg-accent" data-name="base" />
                 <div
                   className="absolute top-[1.49px] right-[1.49px] bottom-[1.49px] w-[11.919px] rounded-[7448.411px] bg-[#fcfcfc] shadow-[0px_0px_0.745px_0px_rgba(0,0,0,0.3),0px_1.49px_7.449px_0px_rgba(0,0,0,0.06),0px_0px_3.725px_0px_rgba(0,0,0,0.02)]"
                   data-name="thumb"
@@ -1852,7 +1851,7 @@ function DeepCustomizationCard() {
                             className="relative flex shrink-0 content-stretch items-center gap-[5.961px]"
                             data-name="placeholderWrapper"
                           >
-                            <div className="relative size-[11.922px] shrink-0 rounded-[29.805px] bg-[#0485f7]">
+                            <div className="relative size-[11.922px] shrink-0 rounded-[29.805px] bg-accent">
                               <div
                                 aria-hidden="true"
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
@@ -1901,7 +1900,7 @@ function DeepCustomizationCard() {
                             className="relative flex shrink-0 content-stretch items-center gap-[5.961px]"
                             data-name="placeholderWrapper"
                           >
-                            <div className="relative size-[11.922px] shrink-0 rounded-[29.805px] bg-[#0485f7]">
+                            <div className="relative size-[11.922px] shrink-0 rounded-[29.805px] bg-accent">
                               <div
                                 aria-hidden="true"
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
@@ -2833,7 +2832,7 @@ function DeepCustomizationCard() {
                       data-name="Products"
                     >
                       <div
-                        className="relative flex h-[9.288px] w-[19.843px] shrink-0 content-stretch items-center justify-center rounded-[5.066px] bg-[#0485f7] px-[2.533px] py-[1.267px]"
+                        className="relative flex h-[9.288px] w-[19.843px] shrink-0 content-stretch items-center justify-center rounded-[5.066px] bg-accent px-[2.533px] py-[1.267px]"
                         data-name="Chip"
                       >
                         <div

@@ -1,7 +1,7 @@
 "use client";
 
+import AIWorkflowCard from "./ai-workflow-card";
 import AnimatedPreviewCard from "./animated-preview-card";
-import Container154 from "./container-154";
 import DeepCustomizationCard from "./deep-customization-card";
 import DesignSystemPreviewCard from "./design-system-preview-card";
 import FigmaIntegrationCard from "./figma-integration-card";
@@ -10,11 +10,11 @@ import VipMemberCard from "./vip-member-card";
 
 function PlatformAvailabilityLabel() {
   return (
-    <div className="absolute top-[1258px] left-1/2 flex -translate-x-1/2 flex-col content-stretch items-center gap-[4px]">
-      <p className="relative w-[172px] shrink-0 text-center text-[12px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a] not-italic">
+    <div className="mt-7 flex flex-col items-center gap-1">
+      <p className="w-[172px] shrink-0 text-center text-[12px] leading-[1.34] font-medium whitespace-pre-wrap text-muted not-italic">
         Available for web and native
       </p>
-      <div className="relative flex shrink-0 content-stretch items-center gap-[4px]">
+      <div className="flex shrink-0 items-center gap-1">
         <div className="relative size-[16px] shrink-0 overflow-clip opacity-50" data-name="display">
           <div className="absolute inset-[9.38%_6.25%]" data-name="icon">
             <svg
@@ -88,35 +88,31 @@ function MdiSlack() {
 
 function FeaturesShowcase() {
   return (
-    <div className="relative h-[1320px] w-[1440px] shrink-0" data-name="border - light">
-      <div className="font-heading absolute top-[86px] left-[calc(50%+1.5px)] -translate-x-1/2 text-center text-[48px] leading-[normal] font-medium tracking-[-0.72px] whitespace-nowrap text-[rgba(24,24,27,0.6)] not-italic">
-        <p className="mb-0 text-[#18181b]">Stop building from scratch.</p>
-        <p>Start shipping.</p>
-      </div>
-      <p className="absolute top-[46px] left-[calc(50%+1px)] -translate-x-1/2 text-center text-[16px] leading-[normal] font-medium text-[#0485f7] not-italic">
-        What's included
-      </p>
-      <DeepCustomizationCard />
-      <DesignSystemPreviewCard />
-      <AnimatedPreviewCard />
-      <Container154 />
-      <ProComponentsCard />
-      <VipMemberCard />
-      <FigmaIntegrationCard />
-      <PlatformAvailabilityLabel />
-      <div
-        className="absolute top-[985px] left-[1075px] flex size-[9.707px] items-center justify-center"
-        style={
-          {
-            "--transform-inner-height": "153.5",
-            "--transform-inner-width": "1200",
-          } as React.CSSProperties
-        }
-      >
-        <div className="flex-none rotate-[4.7deg]">
-          <MdiSlack />
+    <div className="mx-auto mt-12 w-full max-w-[992px]">
+      <div className="flex flex-col items-center justify-center gap-2">
+        <p className="text-center text-[16px] leading-[normal] font-medium text-accent not-italic">
+          What's included
+        </p>
+        <div className="font-heading text-center text-[48px] leading-[normal] font-medium tracking-[-0.72px] whitespace-nowrap">
+          <p className="mb-0">Stop building from scratch.</p>
+          <p className="text-muted/60">Start shipping.</p>
         </div>
       </div>
+      <div className="relative mt-20 grid grid-cols-6 gap-4">
+        <AIWorkflowCard />
+        <DeepCustomizationCard />
+        <ProComponentsCard />
+        <DesignSystemPreviewCard />
+        <AnimatedPreviewCard />
+        <FigmaIntegrationCard />
+        <VipMemberCard />
+        <div className="absolute right-[141px] bottom-[245px] flex size-[9.707px] items-center justify-center">
+          <div className="flex-none rotate-[4.7deg]">
+            <MdiSlack />
+          </div>
+        </div>
+      </div>
+      <PlatformAvailabilityLabel />
     </div>
   );
 }

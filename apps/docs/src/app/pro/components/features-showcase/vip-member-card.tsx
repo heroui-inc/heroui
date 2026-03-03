@@ -4,8 +4,8 @@ import {imgBlur7} from "./features-showcase-imgs";
 
 function VipMemberCard() {
   return (
-    <div className="absolute top-[942px] left-[896px] h-[288px] w-[320px] overflow-clip rounded-[24px] border border-solid border-[#dedee0]">
-      <p className="absolute top-[67px] left-1/2 -translate-x-1/2 text-center text-[14px] leading-[1.43] font-medium text-[#18181b] not-italic">
+    <div className="relative col-span-2 h-[288px] overflow-clip rounded-[24px] border border-solid border-border">
+      <p className="absolute top-[67px] left-1/2 -translate-x-1/2 text-center text-[14px] leading-[1.43] font-medium text-foreground not-italic">
         VIP member
       </p>
       <div className="absolute top-[39px] left-[126px] flex size-[12px] items-center justify-center">
@@ -28,10 +28,10 @@ function VipMemberCard() {
           </div>
         </div>
       </div>
-      <p className="absolute top-[91px] left-1/2 w-[256px] -translate-x-1/2 text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+      <p className="absolute top-[91px] left-1/2 w-[256px] -translate-x-1/2 text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
         Get high-priority support and an exclusive badge in our community.
       </p>
-      <div className="absolute top-[23px] left-[143px] size-[32px] rounded-[17px] bg-[#efefef]" />
+      <div className="absolute top-[23px] left-[143px] size-[32px] rounded-[17px] bg-default" />
       <div
         className="absolute top-[18px] left-[174px] flex size-[16.203px] items-center justify-center"
         style={
@@ -137,15 +137,15 @@ function VipMemberCard() {
             className="absolute top-0 left-0 size-[36px] rounded-[18px]"
             style={{
               backgroundImage:
-                "url(\'data:image/svg+xml;utf8,<svg viewBox=\\'0 0 36 36\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-3.2197e-14 2.9 -2.9 1.7757e-16 18 7)\\'><stop stop-color=\\'rgba(17,38,170,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(24,62,181,1)\\' offset=\\'0.125\\'/><stop stop-color=\\'rgba(32,87,191,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(47,137,213,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(61,187,234,1)\\' offset=\\'0.75\\'/><stop stop-color=\\'rgba(76,237,255,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>\')",
+                "url('data:image/svg+xml;utf8,<svg viewBox=\\'0 0 36 36\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-3.2197e-14 2.9 -2.9 1.7757e-16 18 7)\\'><stop stop-color=\\'rgba(17,38,170,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(24,62,181,1)\\' offset=\\'0.125\\'/><stop stop-color=\\'rgba(32,87,191,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(47,137,213,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(61,187,234,1)\\' offset=\\'0.75\\'/><stop stop-color=\\'rgba(76,237,255,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>')",
             }}
           />
           <div className="absolute top-[9px] left-[12px] size-[12px] rounded-[18px] bg-gradient-to-b from-[#9ae1fb] to-[#fbf9f8]" />
           <div className="absolute top-[23px] left-[6px] size-[24px] rounded-[18px] bg-gradient-to-b from-[#9ae1fb] to-[#fbf9f8]" />
           <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_0px_2px_0px_white]" />
         </div>
-        <div className="absolute top-[6px] left-[44px] h-[10px] w-[72px] rounded-[4px] bg-[#efefef]" />
-        <div className="absolute top-[22px] left-[44px] h-[10px] w-[100px] rounded-[4px] bg-[#efefef]" />
+        <div className="absolute top-[6px] left-[44px] h-[10px] w-[72px] rounded-[4px] bg-default" />
+        <div className="absolute top-[22px] left-[44px] h-[10px] w-[100px] rounded-[4px] bg-default" />
       </div>
       <div className="absolute top-[183px] left-[87px] h-[36px] w-[144px]">
         <div className="absolute top-[4px] left-[120px] size-[14px]">
@@ -203,15 +203,15 @@ function VipMemberCard() {
             className="absolute top-0 left-0 size-[36px] rounded-[18px]"
             style={{
               backgroundImage:
-                "url(\'data:image/svg+xml;utf8,<svg viewBox=\\'0 0 36 36\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-3.2197e-14 2.9 -2.9 1.7757e-16 18 7)\\'><stop stop-color=\\'rgba(73,17,170,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(119,32,183,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(164,47,196,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(210,61,209,1)\\' offset=\\'0.75\\'/><stop stop-color=\\'rgba(255,76,222,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>\')",
+                "url('data:image/svg+xml;utf8,<svg viewBox=\\'0 0 36 36\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-3.2197e-14 2.9 -2.9 1.7757e-16 18 7)\\'><stop stop-color=\\'rgba(73,17,170,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(119,32,183,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(164,47,196,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(210,61,209,1)\\' offset=\\'0.75\\'/><stop stop-color=\\'rgba(255,76,222,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>')",
             }}
           />
           <div className="absolute top-[9px] left-[12px] size-[12px] rounded-[18px] bg-gradient-to-b from-[#f69afb] to-[#faf8fb]" />
           <div className="absolute top-[23px] left-[6px] size-[24px] rounded-[18px] bg-gradient-to-b from-[#f69afb] to-[#faf8fb]" />
           <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_0px_2px_0px_white]" />
         </div>
-        <div className="absolute top-[6px] left-[44px] h-[10px] w-[72px] rounded-[4px] bg-[#efefef]" />
-        <div className="absolute top-[22px] left-[44px] h-[10px] w-[100px] rounded-[4px] bg-[#efefef]" />
+        <div className="absolute top-[6px] left-[44px] h-[10px] w-[72px] rounded-[4px] bg-default" />
+        <div className="absolute top-[22px] left-[44px] h-[10px] w-[100px] rounded-[4px] bg-default" />
       </div>
       <div className="absolute top-[227px] left-[87px] h-[36px] w-[144px]">
         <div className="absolute top-[4px] left-[120px] size-[14px]">
@@ -269,15 +269,15 @@ function VipMemberCard() {
             className="absolute top-0 left-0 size-[36px] rounded-[18px]"
             style={{
               backgroundImage:
-                "url(\'data:image/svg+xml;utf8,<svg viewBox=\\'0 0 36 36\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-3.2197e-14 2.9 -2.9 1.7757e-16 18 7)\\'><stop stop-color=\\'rgba(170,111,17,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(191,138,32,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(213,164,47,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(255,216,76,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>\')",
+                "url('data:image/svg+xml;utf8,<svg viewBox=\\'0 0 36 36\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-3.2197e-14 2.9 -2.9 1.7757e-16 18 7)\\'><stop stop-color=\\'rgba(170,111,17,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(191,138,32,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(213,164,47,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(255,216,76,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>')",
             }}
           />
           <div className="absolute top-[9px] left-[12px] size-[12px] rounded-[18px] bg-gradient-to-b from-[#fbe89a] to-[#fbf9f8]" />
           <div className="absolute top-[23px] left-[6px] size-[24px] rounded-[18px] bg-gradient-to-b from-[#fbe89a] to-[#fbf9f8]" />
           <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_0px_2px_0px_white]" />
         </div>
-        <div className="absolute top-[6px] left-[44px] h-[10px] w-[72px] rounded-[4px] bg-[#efefef]" />
-        <div className="absolute top-[22px] left-[44px] h-[10px] w-[100px] rounded-[4px] bg-[#efefef]" />
+        <div className="absolute top-[6px] left-[44px] h-[10px] w-[72px] rounded-[4px] bg-default" />
+        <div className="absolute top-[22px] left-[44px] h-[10px] w-[100px] rounded-[4px] bg-default" />
       </div>
       <div
         className="absolute bottom-[-1px] left-1/2 h-[44px] w-[272px] -translate-x-1/2"

@@ -48,7 +48,7 @@ function SuperComponentsFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         More than 100 components
       </p>
     </div>
@@ -74,7 +74,7 @@ function SuperTemplatesFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Premium templates
       </p>
     </div>
@@ -131,7 +131,7 @@ function SuperAIFeature() {
       <div className="relative size-[16px] shrink-0 overflow-clip opacity-30" data-name="brain">
         <SuperHeroBrainIcon />
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Advanced AI (Skills and MCPs)
       </p>
     </div>
@@ -159,7 +159,7 @@ function SuperDesignSystemsFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Premium design systems
       </p>
     </div>
@@ -187,7 +187,7 @@ function SuperThemeBuilderFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Advanced theme builder
       </p>
     </div>
@@ -215,7 +215,7 @@ function SuperDiscordFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Private Discord channels
       </p>
     </div>
@@ -273,7 +273,7 @@ function SuperFigmaFilesFeature() {
   return (
     <div className="relative flex shrink-0 content-stretch items-center gap-[8px]">
       <SolarFigmaLinear2 />
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Figma files (web & mobile)
       </p>
     </div>
@@ -304,7 +304,7 @@ function SuperFigmaSyncFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Figma plugin sync
       </p>
     </div>
@@ -336,7 +336,7 @@ function SuperSupportFeature() {
           </div>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Priority support
       </p>
     </div>
@@ -2511,7 +2511,7 @@ function SuperHeroCardHeader() {
         SUPER_PRICING.perpetual.price;
 
   return (
-    <div className="relative mx-2 mt-2 h-[255px] overflow-clip rounded-[16px] bg-[#efefef]">
+    <div className="relative mx-2 mt-2 mb-2 h-[255px] overflow-clip rounded-[16px] bg-[#efefef]">
       {/* Decorative backgrounds */}
       <div
         className="absolute top-[-148px] left-[-10px] flex h-[406px] w-[328px] items-center justify-center"
@@ -2541,10 +2541,10 @@ function SuperHeroCardHeader() {
               : `Save $${savings.toLocaleString("en-US")} with bundle`}
           </p>
         </div>
-        <p className="font-heading mt-3 text-[20px] leading-[normal] text-[#18181b] not-italic">
+        <p className="font-heading mt-3 text-[20px] leading-[normal] text-foreground not-italic">
           {isTeam ? "Super Heroes" : "Super Hero"}
         </p>
-        <p className="mt-1 w-[214px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#18181b] not-italic">
+        <p className="mt-1 w-[214px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-foreground not-italic">
           Get access to all HeroUI libraries components and features
         </p>
         <div className="mt-5">

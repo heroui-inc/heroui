@@ -2146,7 +2146,7 @@ function WebHeroCardHeader() {
   const isTeam = planType === "teams";
 
   return (
-    <div className="relative mx-2 mt-2 h-[255px] overflow-clip rounded-[16px] bg-[#efefef]">
+    <div className="relative mx-2 mt-2 mb-2 h-[255px] overflow-clip rounded-[16px] bg-[#efefef]">
       {/* Decorative backgrounds */}
       <div
         className="absolute top-[-148px] left-[-10px] flex h-[406px] w-[328px] items-center justify-center"
@@ -2171,10 +2171,10 @@ function WebHeroCardHeader() {
         <div className="pt-4">
           <WebHeroBadge />
         </div>
-        <p className="font-heading mt-3 text-[20px] leading-[normal] text-[#18181b] not-italic">
+        <p className="font-heading mt-3 text-[20px] leading-[normal] text-foreground">
           {isTeam ? "Web Heroes" : "Web Hero"}
         </p>
-        <p className="mt-1 w-[214px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#18181b] not-italic">
+        <p className="mt-1 w-[214px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-foreground not-italic">
           Get access to web library components and features
         </p>
         <div className="mt-5">
@@ -2223,7 +2223,7 @@ function WebComponentsFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         More than 50 components
       </p>
     </div>
@@ -2249,7 +2249,7 @@ function WebTemplatesFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Premium templates
       </p>
     </div>
@@ -2306,7 +2306,7 @@ function WebAIFeature() {
       <div className="relative size-[16px] shrink-0 overflow-clip opacity-30" data-name="brain">
         <WebHeroBrainIcon />
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Advanced AI (Skills and MCPs)
       </p>
     </div>
@@ -2334,7 +2334,7 @@ function WebDesignSystemsFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Premium design systems
       </p>
     </div>
@@ -2362,7 +2362,7 @@ function WebThemeBuilderFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Advanced theme builder
       </p>
     </div>
@@ -2390,7 +2390,7 @@ function WebDiscordFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Private Discord channel
       </p>
     </div>
@@ -2448,7 +2448,7 @@ function WebFigmaFileFeature() {
   return (
     <div className="relative flex shrink-0 content-stretch items-center gap-[8px]">
       <SolarFigmaLinear />
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Figma file
       </p>
     </div>
@@ -2479,7 +2479,7 @@ function WebFigmaSyncFeature() {
           </svg>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Figma plugin sync
       </p>
     </div>
@@ -2511,7 +2511,7 @@ function WebSupportFeature() {
           </div>
         </div>
       </div>
-      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-[#18181b] not-italic">
+      <p className="relative shrink-0 text-[12px] leading-[1.34] font-normal text-foreground not-italic">
         Priority support
       </p>
     </div>

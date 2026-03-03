@@ -5,6 +5,7 @@ import {Analytics} from "@vercel/analytics/next";
 import {NextProvider} from "fumadocs-core/framework/next";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {Inter} from "next/font/google";
+import localFont from "next/font/local";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
@@ -20,9 +21,19 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const heroSans = localFont({
+  display: "swap",
+  src: "../../public/fonts/Hero-Sans-Variable.woff2",
+  variable: "--font-hero-sans",
+});
+
 export default function Layout({children}: {children: ReactNode}) {
   return (
-    <html suppressHydrationWarning className={inter.variable} lang="en">
+    <html
+      suppressHydrationWarning
+      className={`${inter.variable} ${heroSans.variable} antialiased`}
+      lang="en"
+    >
       <body className="flex min-h-screen flex-col font-sans">
         <NuqsAdapter>
           <NextProvider>

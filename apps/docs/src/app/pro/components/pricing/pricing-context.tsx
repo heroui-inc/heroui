@@ -63,7 +63,7 @@ export function AnimatedPrice({pricing}: {pricing: PlanPricing}) {
     <NumberFlowGroup>
       <div className="flex items-baseline gap-[8px] leading-[normal] font-medium not-italic">
         <NumberFlow
-          className="part-[suffix]:font-normal part-[suffix]:text-[#71717a] part-[suffix]:text-[0.75em] part-[suffix]:ml-[0.0625em] relative shrink-0 text-[32px] font-semibold text-[#18181b]"
+          className="part-[suffix]:font-normal part-[suffix]:text-muted part-[suffix]:text-[0.75em] part-[suffix]:ml-[0.0625em] relative shrink-0 text-[32px] font-semibold text-foreground"
           format={CURRENCY_FMT}
           style={{"--number-flow-char-height": "0.85em"} as React.CSSProperties}
           suffix={isAnnual ? "/mo" : undefined}
@@ -72,12 +72,12 @@ export function AnimatedPrice({pricing}: {pricing: PlanPricing}) {
         <span className="relative shrink-0 opacity-30">
           <NumberFlow
             animated={false}
-            className="text-[32px] text-[#18181b]"
+            className="text-[32px] text-foreground"
             format={CURRENCY_FMT}
             style={{"--number-flow-char-height": "0.85em"} as React.CSSProperties}
             value={original}
           />
-          <span className="absolute top-1/2 right-0 left-0 h-[2px] bg-[#18181b]" />
+          <span className="absolute top-1/2 right-0 left-0 h-[2px] bg-foreground" />
         </span>
       </div>
     </NumberFlowGroup>
@@ -88,7 +88,7 @@ export function BillingNote({pricing}: {pricing: PlanPricing}) {
   const isAnnual = useContext(PricingModeContext);
 
   return (
-    <p className="text-[12px] leading-[1.34] font-medium text-[#71717a] not-italic">
+    <p className="text-[12px] leading-[1.34] font-medium text-muted not-italic">
       {isAnnual ? `Billed annually at $${pricing.annual.billed}` : "One-time payment"}
     </p>
   );
@@ -103,7 +103,7 @@ export function TeamAnimatedPrice({pricing}: {pricing: TeamPlanPricing}) {
     <NumberFlowGroup>
       <div className="flex items-baseline gap-[8px] leading-[normal] font-medium not-italic">
         <NumberFlow
-          className="relative shrink-0 text-[32px] font-semibold text-[#18181b]"
+          className="relative shrink-0 text-[32px] font-semibold text-foreground"
           format={CURRENCY_FMT}
           style={{"--number-flow-char-height": "0.85em"} as React.CSSProperties}
           value={price}
@@ -111,12 +111,12 @@ export function TeamAnimatedPrice({pricing}: {pricing: TeamPlanPricing}) {
         <span className="relative shrink-0 opacity-30">
           <NumberFlow
             animated={false}
-            className="text-[32px] text-[#18181b]"
+            className="text-[32px] text-foreground"
             format={CURRENCY_FMT}
             style={{"--number-flow-char-height": "0.85em"} as React.CSSProperties}
             value={original}
           />
-          <span className="absolute top-1/2 right-0 left-0 h-[2px] bg-[#18181b]" />
+          <span className="absolute top-1/2 right-0 left-0 h-[2px] bg-foreground" />
         </span>
       </div>
     </NumberFlowGroup>
@@ -127,7 +127,7 @@ export function TeamBillingNote() {
   const isAnnual = useContext(PricingModeContext);
 
   return (
-    <p className="text-[12px] leading-[1.34] font-medium text-[#71717a] not-italic">
+    <p className="text-[12px] leading-[1.34] font-medium text-muted not-italic">
       {isAnnual ? "Billed annually per seat" : "One-time payment per seat"}
     </p>
   );

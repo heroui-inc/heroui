@@ -4,7 +4,7 @@ import {imgBlur8} from "./features-showcase-imgs";
 
 function FigmaIntegrationCard() {
   return (
-    <div className="absolute top-[942px] left-[560px] h-[288px] w-[320px] overflow-clip rounded-[24px] border border-solid border-[#dedee0]">
+    <div className="relative col-span-2 h-[288px] overflow-clip rounded-[24px] border border-solid border-border">
       <div
         className="absolute bottom-[-31px] left-1/2 flex size-[192px] -translate-x-1/2 items-center justify-center"
         style={
@@ -261,31 +261,34 @@ function FigmaIntegrationCard() {
           </svg>
         </div>
       </div>
-      <p className="absolute top-[67px] left-[159px] -translate-x-1/2 text-center text-[14px] leading-[1.43] font-medium text-[#18181b] not-italic">
-        Design to Code
-      </p>
-      <p className="absolute top-[91px] left-[calc(50%+0.5px)] w-[257px] -translate-x-1/2 text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
-        Exclusive files and a plugin to keep your Figma designs in perfect sync with code.
-      </p>
-      <div className="absolute top-[23px] left-[143px] size-[32px] rounded-[17px] bg-[#efefef]" />
-      <div
-        className="absolute top-[31px] left-[151px] size-[16px]"
-        data-name="material-symbols:integration-instructions"
-      >
-        <svg
-          className="absolute block size-full"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 16 16"
-        >
-          <g id="material-symbols:integration-instructions" opacity="0.3">
-            <path
-              d="M6.4 10.4003L7.33333 9.43366L5.9 8.00033L7.33333 6.56699L6.4 5.60033L4 8.00033L6.4 10.4003ZM9.6 10.4003L12 8.00033L9.6 5.60033L8.66667 6.56699L10.1 8.00033L8.66667 9.43366L9.6 10.4003ZM3.33333 14.0003C2.96667 14.0003 2.65289 13.8699 2.392 13.609C2.13111 13.3481 2.00044 13.0341 2 12.667V3.33366C2 2.96699 2.13067 2.65321 2.392 2.39233C2.65333 2.13144 2.96711 2.00077 3.33333 2.00033H6.13333C6.27778 1.60033 6.51956 1.2781 6.85867 1.03366C7.19778 0.789214 7.57822 0.666992 8 0.666992C8.42178 0.666992 8.80244 0.789214 9.142 1.03366C9.48156 1.2781 9.72311 1.60033 9.86667 2.00033H12.6667C13.0333 2.00033 13.3473 2.13099 13.6087 2.39233C13.87 2.65366 14.0004 2.96744 14 3.33366V12.667C14 13.0337 13.8696 13.3477 13.6087 13.609C13.3478 13.8703 13.0338 14.0008 12.6667 14.0003H3.33333ZM8.35867 2.69166C8.45289 2.59744 8.5 2.4781 8.5 2.33366C8.5 2.18921 8.45267 2.06988 8.358 1.97566C8.26333 1.88144 8.144 1.8341 8 1.83366C7.856 1.83321 7.73667 1.88055 7.642 1.97566C7.54733 2.07077 7.5 2.1901 7.5 2.33366C7.5 2.47721 7.54733 2.59677 7.642 2.69233C7.73667 2.78788 7.856 2.83499 8 2.83366C8.144 2.83233 8.26356 2.78499 8.35867 2.69166Z"
-              fill="var(--fill-0, #18181B)"
-              id="Vector"
-            />
-          </g>
-        </svg>
+      <div className="relative z-10 flex flex-col items-center pt-[23px]">
+        <div className="flex size-[32px] items-center justify-center rounded-[17px] bg-[#efefef]">
+          <div
+            className="relative size-[16px]"
+            data-name="material-symbols:integration-instructions"
+          >
+            <svg
+              className="absolute block size-full"
+              fill="none"
+              preserveAspectRatio="none"
+              viewBox="0 0 16 16"
+            >
+              <g id="material-symbols:integration-instructions" opacity="0.3">
+                <path
+                  d="M6.4 10.4003L7.33333 9.43366L5.9 8.00033L7.33333 6.56699L6.4 5.60033L4 8.00033L6.4 10.4003ZM9.6 10.4003L12 8.00033L9.6 5.60033L8.66667 6.56699L10.1 8.00033L8.66667 9.43366L9.6 10.4003ZM3.33333 14.0003C2.96667 14.0003 2.65289 13.8699 2.392 13.609C2.13111 13.3481 2.00044 13.0341 2 12.667V3.33366C2 2.96699 2.13067 2.65321 2.392 2.39233C2.65333 2.13144 2.96711 2.00077 3.33333 2.00033H6.13333C6.27778 1.60033 6.51956 1.2781 6.85867 1.03366C7.19778 0.789214 7.57822 0.666992 8 0.666992C8.42178 0.666992 8.80244 0.789214 9.142 1.03366C9.48156 1.2781 9.72311 1.60033 9.86667 2.00033H12.6667C13.0333 2.00033 13.3473 2.13099 13.6087 2.39233C13.87 2.65366 14.0004 2.96744 14 3.33366V12.667C14 13.0337 13.8696 13.3477 13.6087 13.609C13.3478 13.8703 13.0338 14.0008 12.6667 14.0003H3.33333ZM8.35867 2.69166C8.45289 2.59744 8.5 2.4781 8.5 2.33366C8.5 2.18921 8.45267 2.06988 8.358 1.97566C8.26333 1.88144 8.144 1.8341 8 1.83366C7.856 1.83321 7.73667 1.88055 7.642 1.97566C7.54733 2.07077 7.5 2.1901 7.5 2.33366C7.5 2.47721 7.54733 2.59677 7.642 2.69233C7.73667 2.78788 7.856 2.83499 8 2.83366C8.144 2.83233 8.26356 2.78499 8.35867 2.69166Z"
+                  fill="var(--fill-0, #18181B)"
+                  id="Vector"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <p className="mt-[12px] text-center text-[14px] leading-[1.43] font-medium text-foreground not-italic">
+          Design to Code
+        </p>
+        <p className="max-w-[257px] text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+          Exclusive files and a plugin to keep your Figma designs in perfect sync with code.
+        </p>
       </div>
       <div
         className="absolute bottom-[-1px] left-1/2 h-[51px] w-[272px] -translate-x-1/2"

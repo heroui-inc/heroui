@@ -4,7 +4,7 @@ import {imgBlur5, imgBlur6} from "./features-showcase-imgs";
 
 function DesignSystemPreviewCard() {
   return (
-    <div className="absolute top-[646px] left-[560px] h-[280px] w-[656px] overflow-clip rounded-[24px] border border-solid border-[#dedee0]">
+    <div className="relative col-span-4 h-[280px] overflow-clip rounded-[24px] border border-solid border-border">
       <div
         className="absolute top-[calc(50%+226px)] left-[calc(50%+253.78px)] h-[508px] w-[727.559px] -translate-x-1/2 -translate-y-1/2 rounded-[22px]"
         data-name="finance-light"
@@ -677,7 +677,7 @@ function DesignSystemPreviewCard() {
                                 </defs>
                               </svg>
                             </div>
-                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#0485f7] not-italic">
+                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-accent not-italic">
                               Buy with card
                             </p>
                           </div>
@@ -702,7 +702,7 @@ function DesignSystemPreviewCard() {
                                   <p className="relative shrink-0 text-[#71717a]">1H</p>
                                   <p className="relative shrink-0 text-[#71717a]">1D</p>
                                   <p className="relative shrink-0 text-[#71717a]">1W</p>
-                                  <p className="relative shrink-0 text-[#0485f7]">1M</p>
+                                  <p className="relative shrink-0 text-accent">1M</p>
                                   <p className="relative shrink-0 text-[#71717a]">1Y</p>
                                   <p className="relative shrink-0 text-[#71717a]">ALL</p>
                                 </div>
@@ -2540,7 +2540,7 @@ function DesignSystemPreviewCard() {
                     <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
                       <p className="leading-[1.34]">10:21 AM</p>
                     </div>
-                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-[#0485f7]" />
+                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
                 <div
@@ -2694,7 +2694,7 @@ function DesignSystemPreviewCard() {
                     <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
                       <p className="leading-[1.34]">Dec 12</p>
                     </div>
-                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-[#0485f7]" />
+                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
                 <div
@@ -2910,7 +2910,7 @@ function DesignSystemPreviewCard() {
                     <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
                       <p className="leading-[1.34]">Nov 27</p>
                     </div>
-                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-[#0485f7]" />
+                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
                 <div
@@ -2983,7 +2983,7 @@ function DesignSystemPreviewCard() {
                     <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
                       <p className="leading-[1.34]">Jan 10</p>
                     </div>
-                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-[#0485f7]" />
+                    <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
                 <div
@@ -3031,10 +3031,10 @@ function DesignSystemPreviewCard() {
         </div>
         <div className="absolute top-[7px] left-[calc(50%+0.24px)] h-[12px] w-[48px] -translate-x-1/2 rounded-[999px] bg-[#71717a] opacity-10" />
       </div>
-      <p className="absolute top-[23px] left-[23px] text-[14px] leading-[1.43] font-medium text-[#18181b] not-italic">
+      <p className="absolute top-[23px] left-[23px] text-[14px] leading-[1.43] font-medium text-foreground not-italic">
         Start with templates and blocks
       </p>
-      <p className="absolute top-[47px] left-[calc(50%-304px)] w-[338px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+      <p className="absolute top-[47px] left-[calc(50%-304px)] w-[338px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
         Skip the setup. Launch instantly with full-featured templates like email, financial, and AI
         chat interfaces.
       </p>

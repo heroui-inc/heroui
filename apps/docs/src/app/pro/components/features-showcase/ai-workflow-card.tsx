@@ -1,9 +1,9 @@
 import {imgDots, imgGroup, imgGroup1} from "./features-showcase-imgs";
 
-function Container154() {
+function AIWorkflowCard() {
   return (
     <div
-      className="absolute top-[230px] left-[224px] h-[400px] w-[488px] rounded-[24px] border border-solid border-[#dedee0]"
+      className="relative col-span-3 h-[400px] rounded-[24px] border border-solid border-border"
       data-name="Container"
     >
       <div className="absolute inset-[107px_62px_43px_62px] contents" data-name="dots">
@@ -13,13 +13,15 @@ function Container154() {
           style={{maskImage: `url('${imgDots}')`}}
         />
       </div>
-      <p className="absolute top-[23px] left-[243px] -translate-x-1/2 text-center text-[14px] leading-[1.43] font-medium text-[#18181b] not-italic">
-        Supercharge your AI workflow
-      </p>
-      <p className="absolute top-[47px] left-1/2 w-[350.627px] -translate-x-1/2 text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
-        Build faster with our advanced Skills and MCPs. Give taste to your agents and build
-        beautiful interfaces by default.
-      </p>
+      <div className="flex flex-col items-center px-[62px] pt-[23px]">
+        <p className="text-center text-[14px] leading-[1.43] font-medium text-foreground not-italic">
+          Supercharge your AI workflow
+        </p>
+        <p className="max-w-[351px] text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+          Build faster with our advanced Skills and MCPs. Give taste to your agents and build
+          beautiful interfaces by default.
+        </p>
+      </div>
       <div className="absolute top-[111px] left-1/2 contents -translate-x-1/2">
         <div className="absolute top-[236.02px] left-[286.79px] flex h-0 w-[62.009px] items-center justify-center">
           <div className="flex-none rotate-180">
@@ -414,4 +416,4 @@ function Container154() {
   );
 }
 
-export default Container154;
+export default AIWorkflowCard;

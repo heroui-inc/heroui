@@ -1,6 +1,6 @@
 function AnimatedPreviewCard() {
   return (
-    <div className="absolute top-[942px] left-[224px] h-[288px] w-[320px] overflow-clip rounded-[24px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.04),0px_1px_2px_0px_rgba(0,0,0,0.06),0px_0px_1px_0px_rgba(0,0,0,0.06)]">
+    <div className="relative col-span-2 h-[288px] overflow-clip rounded-[24px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.04),0px_1px_2px_0px_rgba(0,0,0,0.06),0px_0px_1px_0px_rgba(0,0,0,0.06)]">
       <div className="absolute inset-0 rounded-[24px] bg-[#091428]" />
       <div
         className="absolute inset-0 rounded-[24px]"

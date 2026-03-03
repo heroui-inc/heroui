@@ -1,7 +1,6 @@
 /* ============================================================================
    IMPORTS
    ============================================================================ */
-@import "./fonts.css";
 @import "tailwindcss";
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
@@ -71,6 +70,10 @@
 /* @utility button {
   @apply rounded-sm;
 } */
+@theme {
+  --font-heading: var(--font-hero-sans);
+  --font-sans: var(--font-inter);
+}
 
 /* ============================================================================
    FUMADOCS UI - NAVIGATION COMPONENTS

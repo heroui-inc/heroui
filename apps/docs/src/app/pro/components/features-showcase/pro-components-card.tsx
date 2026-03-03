@@ -1,12 +1,14 @@
 function ProComponentsCard() {
   return (
-    <div className="absolute top-[646px] left-[224px] h-[280px] w-[320px] overflow-clip rounded-[24px] border border-solid border-[#dedee0]">
-      <p className="absolute top-[23px] left-[23px] text-[14px] leading-[1.43] font-medium text-[#18181b] not-italic">
-        Pro components
-      </p>
-      <p className="absolute top-[47px] left-[calc(50%-136px)] w-[257px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
-        Pre-built components crafted with care for web and React Native applications.
-      </p>
+    <div className="relative col-span-2 h-[280px] overflow-clip rounded-[24px] border border-solid border-border">
+      <div className="flex flex-col px-[23px] pt-[23px]">
+        <p className="text-[14px] leading-[1.43] font-medium text-foreground not-italic">
+          Pro components
+        </p>
+        <p className="max-w-[257px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+          Pre-built components crafted with care for web and React Native applications.
+        </p>
+      </div>
       <div
         className="absolute top-[107px] left-[77.02px] flex w-[163.014px] flex-col content-stretch items-start rounded-[16.301px] bg-white p-[2.717px] opacity-50 shadow-[0px_1.358px_5.434px_0px_rgba(0,0,0,0.06),0px_-4.075px_8.151px_0px_rgba(0,0,0,0.03),0px_9.509px_19.018px_0px_rgba(0,0,0,0.08)] backdrop-blur-[13.585px]"
         data-name="Dropdown"
@@ -53,7 +55,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Create Issue
                   </p>
                 </div>
@@ -123,7 +125,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Kanban Board
                   </p>
                 </div>
@@ -189,7 +191,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Backlog
                   </p>
                 </div>
@@ -260,7 +262,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Sprint
                   </p>
                 </div>
@@ -272,7 +274,7 @@ function ProComponentsCard() {
                     className="relative flex shrink-0 content-stretch items-center rounded-[5.434px] py-[0.679px]"
                     data-name="Keyboard"
                   >
-                    <div className="relative flex shrink-0 flex-col justify-center text-center text-[9.51px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex shrink-0 flex-col justify-center text-center text-[9.51px] leading-[0] font-medium whitespace-nowrap text-muted not-italic">
                       <p className="leading-[1.43]">Week 32</p>
                     </div>
                   </div>
@@ -318,7 +320,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Copy link
                   </p>
                 </div>
@@ -384,7 +386,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Team Settings
                   </p>
                 </div>
@@ -464,7 +466,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Kanban Board
                   </p>
                 </div>
@@ -534,7 +536,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     List View
                   </p>
                 </div>
@@ -600,7 +602,7 @@ function ProComponentsCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
                     Timeline
                   </p>
                 </div>

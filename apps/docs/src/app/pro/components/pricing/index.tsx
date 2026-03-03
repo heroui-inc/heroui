@@ -20,12 +20,12 @@ function PricingSection() {
       <PlanTypeContext.Provider value={selectedTab}>
         <div className="flex flex-col items-center gap-8 px-6 py-20" data-name="pricing - annual">
           {/* Header */}
-          <p className="text-center text-[16px] leading-[normal] font-medium text-[#0485f7] not-italic">
+          <p className="text-center text-[16px] leading-[normal] font-medium text-accent not-italic">
             Pricing
           </p>
-          <div className="font-heading -mt-4 text-center text-[48px] leading-[normal] tracking-[-0.72px] whitespace-nowrap text-[#18181b] not-italic">
+          <div className="font-heading -mt-4 text-center text-[48px] leading-[normal] tracking-[-0.72px] whitespace-nowrap text-foreground not-italic">
             <p className="mb-0">Become a hero early</p>
-            <p className="text-[rgba(24,24,27,0.6)]">at a better price</p>
+            <p className="text-foreground/60">at a better price</p>
           </div>
 
           {/* Controls row */}
@@ -65,8 +65,8 @@ function PricingSection() {
           )}
 
           {/* Footer */}
-          <p className="-mt-4 max-w-[500px] text-center font-['Inter',sans-serif] text-[14px] leading-[1.43] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
-            <span className="leading-[1.43] font-medium text-[#18181b]">Note:</span>
+          <p className="-mt-4 max-w-[500px] text-center font-sans text-[14px] leading-[1.43] font-normal whitespace-pre-wrap text-muted not-italic">
+            <span className="leading-[1.43] font-medium text-foreground">Note:</span>
             <span className="leading-[1.43]">{` if you're a HeroUI v2 Pro customer, you're eligible for an upgrade discount, check your email or contact support.`}</span>
           </p>
         </div>
