@@ -1,15 +1,15 @@
+import {Heart} from "@gravity-ui/icons";
 import {ToggleButton} from "@heroui/react";
-import {Icon} from "@iconify/react";
 
 export function Variants() {
   return (
     <div className="flex items-center gap-3">
       <ToggleButton>
-        <Icon icon="gravity-ui:heart" />
+        <Heart />
         Default
       </ToggleButton>
       <ToggleButton variant="ghost">
-        <Icon icon="gravity-ui:heart" />
+        <Heart />
         Ghost
       </ToggleButton>
     </div>

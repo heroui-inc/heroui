@@ -1,7 +1,7 @@
 "use client";
 
+import {Heart, HeartFill} from "@gravity-ui/icons";
 import {ToggleButton} from "@heroui/react";
-import {Icon} from "@iconify/react";
 import {useState} from "react";
 
 export function Controlled() {
@@ -12,7 +12,7 @@ export function Controlled() {
       <ToggleButton isSelected={isSelected} onChange={setIsSelected}>
         {({isSelected: selected}) => (
           <>
-            <Icon icon={selected ? "gravity-ui:heart-fill" : "gravity-ui:heart"} />
+            {selected ? <HeartFill /> : <Heart />}
             {selected ? "Liked" : "Like"}
           </>
         )}
