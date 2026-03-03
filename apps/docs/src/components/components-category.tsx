@@ -11,7 +11,7 @@ import {ComponentItem} from "./component-item";
 const COMPONENT_GROUPS = [
   {
     category: "Buttons",
-    components: ["button", "button-group", "close-button"],
+    components: ["button", "button-group", "close-button", "toggle-button"],
   },
   {
     category: "Forms",
