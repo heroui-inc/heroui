@@ -314,7 +314,7 @@ function AIWorkflowCard() {
           <g className="ai-workflow-fade-in" style={{animationDelay: "1.5s"}}>
             <rect
               className="ai-workflow-particle"
-              fill="#4C8CF5"
+              fill="#3983ef"
               height="2"
               rx="1"
               style={{animationDelay: "0.0s"}}
@@ -324,7 +324,7 @@ function AIWorkflowCard() {
             />
             <rect
               className="ai-workflow-particle"
-              fill="#4C8CF5"
+              fill="#3983ef"
               height="2"
               rx="1"
               style={{animationDelay: "0.3s"}}
@@ -334,7 +334,7 @@ function AIWorkflowCard() {
             />
             <rect
               className="ai-workflow-particle"
-              fill="#4C8CF5"
+              fill="#3983ef"
               height="3"
               rx="1.5"
               style={{animationDelay: "0.6s"}}
@@ -344,7 +344,7 @@ function AIWorkflowCard() {
             />
             <rect
               className="ai-workflow-particle"
-              fill="#4C8CF5"
+              fill="#3983ef"
               height="3"
               rx="1.5"
               style={{animationDelay: "0.9s"}}
@@ -354,7 +354,7 @@ function AIWorkflowCard() {
             />
             <rect
               className="ai-workflow-particle"
-              fill="#4C8CF5"
+              fill="#3983ef"
               height="3"
               rx="1.5"
               style={{animationDelay: "1.2s"}}
@@ -364,7 +364,7 @@ function AIWorkflowCard() {
             />
             <rect
               className="ai-workflow-particle"
-              fill="#4C8CF5"
+              fill="#3983ef"
               height="3"
               rx="1.5"
               style={{animationDelay: "1.5s"}}
@@ -536,10 +536,10 @@ function AIWorkflowCard() {
                 repeatCount="indefinite"
                 values="410; 0"
               />
-              <stop offset="0%" stopColor="#4C8CF5" stopOpacity="0" />
-              <stop offset="5%" stopColor="#4C8CF5" stopOpacity="1" />
-              <stop offset="32.5%" stopColor="#6366f1" stopOpacity="1" />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
+              <stop offset="0%" stopColor="#3983ef" stopOpacity="0" />
+              <stop offset="5%" stopColor="#3983ef" stopOpacity="1" />
+              <stop offset="32.5%" stopColor="#69b6ea" stopOpacity="1" />
+              <stop offset="100%" stopColor="#69b6ea" stopOpacity="0" />
             </linearGradient>
 
             <linearGradient
@@ -568,10 +568,10 @@ function AIWorkflowCard() {
                 repeatCount="indefinite"
                 values="410; 0"
               />
-              <stop offset="0%" stopColor="#4C8CF5" stopOpacity="0" />
-              <stop offset="5%" stopColor="#4C8CF5" stopOpacity="1" />
-              <stop offset="32.5%" stopColor="#6366f1" stopOpacity="1" />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
+              <stop offset="0%" stopColor="#3983ef" stopOpacity="0" />
+              <stop offset="5%" stopColor="#3983ef" stopOpacity="1" />
+              <stop offset="32.5%" stopColor="#69b6ea" stopOpacity="1" />
+              <stop offset="100%" stopColor="#69b6ea" stopOpacity="0" />
             </linearGradient>
 
             <linearGradient
@@ -600,10 +600,10 @@ function AIWorkflowCard() {
                 repeatCount="indefinite"
                 values="410; 0"
               />
-              <stop offset="0%" stopColor="#4C8CF5" stopOpacity="0" />
-              <stop offset="5%" stopColor="#4C8CF5" stopOpacity="1" />
-              <stop offset="32.5%" stopColor="#6366f1" stopOpacity="1" />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
+              <stop offset="0%" stopColor="#3983ef" stopOpacity="0" />
+              <stop offset="5%" stopColor="#3983ef" stopOpacity="1" />
+              <stop offset="32.5%" stopColor="#69b6ea" stopOpacity="1" />
+              <stop offset="100%" stopColor="#69b6ea" stopOpacity="0" />
             </linearGradient>
 
             <linearGradient
@@ -632,10 +632,10 @@ function AIWorkflowCard() {
                 repeatCount="indefinite"
                 values="410; 0"
               />
-              <stop offset="0%" stopColor="#4C8CF5" stopOpacity="0" />
-              <stop offset="5%" stopColor="#4C8CF5" stopOpacity="1" />
-              <stop offset="32.5%" stopColor="#6366f1" stopOpacity="1" />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
+              <stop offset="0%" stopColor="#3983ef" stopOpacity="0" />
+              <stop offset="5%" stopColor="#3983ef" stopOpacity="1" />
+              <stop offset="32.5%" stopColor="#69b6ea" stopOpacity="1" />
+              <stop offset="100%" stopColor="#69b6ea" stopOpacity="0" />
             </linearGradient>
 
             <linearGradient
@@ -664,10 +664,10 @@ function AIWorkflowCard() {
                 repeatCount="indefinite"
                 values="410; 0"
               />
-              <stop offset="0%" stopColor="#4C8CF5" stopOpacity="0" />
-              <stop offset="5%" stopColor="#4C8CF5" stopOpacity="1" />
-              <stop offset="32.5%" stopColor="#6366f1" stopOpacity="1" />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
+              <stop offset="0%" stopColor="#3983ef" stopOpacity="0" />
+              <stop offset="5%" stopColor="#3983ef" stopOpacity="1" />
+              <stop offset="32.5%" stopColor="#69b6ea" stopOpacity="1" />
+              <stop offset="100%" stopColor="#69b6ea" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>
