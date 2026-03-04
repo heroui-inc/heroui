@@ -34,9 +34,9 @@ import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
   name="toggle-button-group-orientation"
 />
 
-### Attached vs Detached
+### Detached
 
-Use `isAttached={false}` to separate buttons with gaps instead of connecting them.
+Use `isDetached` to separate buttons with gaps instead of connecting them.
 
 <ComponentPreview
   name="toggle-button-group-attached"
@@ -123,8 +123,7 @@ The ToggleButtonGroup component uses these CSS classes ([View source styles](htt
 - `.toggle-button-group--full-width` - Full width modifier
 
 #### State Attributes
-- `[data-attached="true"]` - Attached mode (connected buttons with dividers)
-- `[data-attached="false"]` - Detached mode (separated buttons with gaps)
+- `[data-detached="true"]` - Detached mode (separated buttons with gaps)
 - `[data-hide-separator="true"]` - Hides the separator between buttons
 - `[data-size="sm|md|lg"]` - Size propagated to child buttons
 
@@ -143,7 +142,7 @@ Inherits from [React Aria ToggleButtonGroup](https://react-aria.adobe.com/Toggle
 | `disallowEmptySelection` | `boolean` | `false` | Prevents clearing all selections |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size propagated to child ToggleButtons |
-| `isAttached` | `boolean` | `true` | Whether buttons are visually connected |
+| `isDetached` | `boolean` | `false` | Whether buttons are visually separated with gaps |
 | `hideSeparator` | `boolean` | `false` | Whether to hide the separator between buttons |
 | `fullWidth` | `boolean` | `false` | Whether the group fills available width |
 | `isDisabled` | `boolean` | `false` | Disables all buttons in the group |

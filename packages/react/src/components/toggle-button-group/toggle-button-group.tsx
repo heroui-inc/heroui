@@ -29,8 +29,8 @@ interface ToggleButtonGroupRootProps
   extends ComponentPropsWithRef<typeof ToggleButtonGroupPrimitive>, ToggleButtonGroupVariants {
   /** Size to propagate to all child ToggleButtons */
   size?: ToggleButtonVariants["size"];
-  /** Whether the group buttons are visually connected (attached) or separated (detached) */
-  isAttached?: boolean;
+  /** Whether the group buttons are visually separated (detached) instead of connected */
+  isDetached?: boolean;
   /** Whether to hide the separator between buttons */
   hideSeparator?: boolean;
 }
@@ -40,7 +40,7 @@ const ToggleButtonGroupRoot = ({
   className,
   fullWidth,
   hideSeparator = false,
-  isAttached = true,
+  isDetached = false,
   isDisabled,
   orientation = "horizontal",
   size,
@@ -55,7 +55,7 @@ const ToggleButtonGroupRoot = ({
     <ToggleButtonGroupContext value={{size, isDisabled}}>
       <ToggleButtonGroupPrimitive
         className={composeTwRenderProps(className, styles)}
-        data-attached={isAttached ? "true" : "false"}
+        data-detached={isDetached ? "true" : undefined}
         data-hide-separator={hideSeparator ? "true" : undefined}
         data-size={size ?? "md"}
         data-slot="toggle-button-group"

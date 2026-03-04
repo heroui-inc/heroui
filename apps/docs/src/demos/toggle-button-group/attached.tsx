@@ -23,7 +23,7 @@ export function Attached() {
       </div>
       <div className="flex flex-col gap-2">
         <span className="text-sm text-muted">Detached</span>
-        <ToggleButtonGroup isAttached={false} selectionMode="multiple">
+        <ToggleButtonGroup isDetached selectionMode="multiple">
           <ToggleButton isIconOnly aria-label="Bold" id="bold">
             <Bold />
           </ToggleButton>

@@ -1,3 +1,4 @@
+import type {Key} from "../rac";
 import type {Meta, StoryObj} from "@storybook/react";
 
 import {Icon} from "@iconify/react";
@@ -12,7 +13,7 @@ const meta: Meta<typeof ToggleButtonGroup> = {
     fullWidth: {
       control: "boolean",
     },
-    isAttached: {
+    isDetached: {
       control: "boolean",
     },
     isDisabled: {
@@ -177,7 +178,7 @@ export const AttachedVsDetached: Story = {
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Detached</p>
-        <ToggleButtonGroup isAttached={false} selectionMode="multiple">
+        <ToggleButtonGroup isDetached selectionMode="multiple">
           <ToggleButton isIconOnly aria-label="Bold" id="bold">
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
@@ -274,7 +275,7 @@ export const SelectionMode: Story = {
 
 export const Controlled: Story = {
   render: function ControlledStory() {
-    const [selectedKeys, setSelectedKeys] = useState(new Set(["bold"]));
+    const [selectedKeys, setSelectedKeys] = useState(new Set<Key>(["bold"]));
 
     return (
       <div className="flex flex-col gap-4">
@@ -384,8 +385,8 @@ export const WithLabels: Story = {
 
 export const Examples: Story = {
   render: function ExamplesStory() {
-    const [alignment, setAlignment] = useState(new Set(["left"]));
-    const [formatting, setFormatting] = useState(new Set(["bold", "underline"]));
+    const [alignment, setAlignment] = useState(new Set<Key>(["left"]));
+    const [formatting, setFormatting] = useState(new Set<Key>(["bold", "underline"]));
 
     return (
       <div className="flex flex-col items-start gap-8">

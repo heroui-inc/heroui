@@ -142,16 +142,16 @@
    Detached mode - buttons separated with gaps
    ========================================================================== */
 
-.toggle-button-group[data-attached="false"] {
+.toggle-button-group[data-detached="true"] {
   @apply gap-1;
 }
 
 /* Restore border radius in detached mode */
-.toggle-button-group[data-attached="false"] .toggle-button {
+.toggle-button-group[data-detached="true"] .toggle-button {
   @apply rounded-3xl;
 }
 
 /* No separator in detached mode */
-.toggle-button-group[data-attached="false"] .toggle-button:not(:first-child):before {
+.toggle-button-group[data-detached="true"] .toggle-button:not(:first-child):before {
   display: none;
 }
