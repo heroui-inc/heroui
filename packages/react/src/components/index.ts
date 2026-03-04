@@ -45,6 +45,7 @@ export * from "./switch-group";
 export * from "./tabs";
 export * from "./tag";
 export * from "./tag-group";
+export * from "./toggle-button-group";
 export * from "./tooltip";
 export * from "./input";
 export * from "./input-group";

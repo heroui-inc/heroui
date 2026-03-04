@@ -1,0 +1,158 @@
+---
+title: ToggleButtonGroup
+description: Groups multiple ToggleButtons into a unified control, allowing users to select one or multiple options.
+icon: new
+links:
+  rac: ToggleButtonGroup
+  source: toggle-button-group/toggle-button-group.tsx
+  styles: toggle-button-group.css
+  storybook: Components/Buttons/ToggleButtonGroup
+  figma: true
+---
+
+## Import
+
+```tsx
+import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="toggle-button-group-basic"
+/>
+
+### Sizes
+
+<ComponentPreview
+  name="toggle-button-group-sizes"
+/>
+
+### Orientation
+
+<ComponentPreview
+  name="toggle-button-group-orientation"
+/>
+
+### Attached vs Detached
+
+Use `isAttached={false}` to separate buttons with gaps instead of connecting them.
+
+<ComponentPreview
+  name="toggle-button-group-attached"
+/>
+
+### Full Width
+
+<ComponentPreview
+  name="toggle-button-group-full-width"
+/>
+
+### Selection Mode
+
+Use `selectionMode="single"` for mutually exclusive choices or `selectionMode="multiple"` for independent toggles.
+
+<ComponentPreview
+  name="toggle-button-group-selection-mode"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="toggle-button-group-controlled"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="toggle-button-group-disabled"
+/>
+
+### Without Separator
+
+<ComponentPreview
+  name="toggle-button-group-without-separator"
+/>
+
+<RelatedComponents component="toggle-button-group" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
+
+function CustomToggleButtonGroup() {
+  return (
+    <ToggleButtonGroup className="bg-purple-100" selectionMode="single">
+      <ToggleButton id="a">Option A</ToggleButton>
+      <ToggleButton id="b">Option B</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the ToggleButtonGroup component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .toggle-button-group {
+    @apply rounded-lg;
+  }
+
+  .toggle-button-group--full-width {
+    @apply w-full;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The ToggleButtonGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toggle-button-group.css)):
+
+#### Base & Layout Classes
+- `.toggle-button-group` - Base container styles
+- `.toggle-button-group--horizontal` - Horizontal orientation
+- `.toggle-button-group--vertical` - Vertical orientation
+- `.toggle-button-group--full-width` - Full width modifier
+
+#### State Attributes
+- `[data-attached="true"]` - Attached mode (connected buttons with dividers)
+- `[data-attached="false"]` - Detached mode (separated buttons with gaps)
+- `[data-hide-separator="true"]` - Hides the separator between buttons
+- `[data-size="sm|md|lg"]` - Size propagated to child buttons
+
+## API Reference
+
+### ToggleButtonGroup Props
+
+Inherits from [React Aria ToggleButtonGroup](https://react-aria.adobe.com/ToggleButtonGroup).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `selectionMode` | `"single" \| "multiple"` | `"single"` | Whether one or multiple buttons can be selected |
+| `selectedKeys` | `Iterable<Key>` | - | Controlled selection state |
+| `defaultSelectedKeys` | `Iterable<Key>` | - | Default selected keys (uncontrolled) |
+| `onSelectionChange` | `(keys: Set<Key>) => void` | - | Called when selection changes |
+| `disallowEmptySelection` | `boolean` | `false` | Prevents clearing all selections |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size propagated to child ToggleButtons |
+| `isAttached` | `boolean` | `true` | Whether buttons are visually connected |
+| `hideSeparator` | `boolean` | `false` | Whether to hide the separator between buttons |
+| `fullWidth` | `boolean` | `false` | Whether the group fills available width |
+| `isDisabled` | `boolean` | `false` | Disables all buttons in the group |
+| `className` | `string` | - | Additional CSS classes |
+
+### Notes
+
+- ToggleButtonGroup uses React Context to pass `size` to all child ToggleButton components
+- Each ToggleButton must have a unique `id` prop that corresponds to the keys used in `selectedKeys` / `defaultSelectedKeys`
+- The `isDisabled` prop is handled natively by React Aria and disables all child ToggleButtons — individual buttons can override this by setting `isDisabled={false}`
+- The component automatically handles border radius and separators between buttons
+- Use `disallowEmptySelection` with `selectionMode="single"` to ensure one option is always selected

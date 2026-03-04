@@ -75,4 +75,5 @@ export * from "./textarea";
 export * from "./time-field";
 export * from "./toast";
 export * from "./toggle-button";
+export * from "./toggle-button-group";
 export * from "./tooltip";
