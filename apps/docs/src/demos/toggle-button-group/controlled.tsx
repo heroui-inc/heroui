@@ -1,11 +1,13 @@
 "use client";
 
+import type {Key} from "@heroui/react";
+
 import {Bold, Italic, Strikethrough, Underline} from "@gravity-ui/icons";
 import {ToggleButton, ToggleButtonGroup} from "@heroui/react";
 import {useState} from "react";
 
 export function Controlled() {
-  const [selectedKeys, setSelectedKeys] = useState(new Set(["bold"]));
+  const [selectedKeys, setSelectedKeys] = useState(new Set<Key>(["bold"]));
 
   return (
     <div className="flex flex-col gap-4">
