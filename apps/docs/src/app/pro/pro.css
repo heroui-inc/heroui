@@ -34,3 +34,188 @@
 .pro-page {
   --accent: #0485f7;
 }
+
+/* AI Workflow Card */
+.ai-workflow-card {
+}
+
+/* AI Workflow Card Animations */
+.ai-workflow-canvas {
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.02));
+}
+
+.ai-workflow-node-origin {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ai-workflow-pop-in {
+  animation: ai-workflow-popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.ai-workflow-fade-in {
+  opacity: 0;
+  animation: ai-workflow-fadeIn 1s ease-out forwards;
+}
+
+.ai-workflow-particle {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: ai-workflow-flyParticle 1.5s infinite linear;
+}
+
+@keyframes ai-workflow-popIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ai-workflow-fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ai-workflow-flyParticle {
+  0% {
+    transform: translateX(16px) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(8px) scale(1.1);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateX(-4px) scale(1);
+  }
+  100% {
+    transform: translateX(-12px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* VIP Member Card Carousel */
+@keyframes vip-member-carousel {
+  0%,
+  18% {
+    transform: translateY(0);
+  }
+  25%,
+  43% {
+    transform: translateY(-44px);
+  }
+  50%,
+  68% {
+    transform: translateY(-88px);
+  }
+  75%,
+  93% {
+    transform: translateY(-132px);
+  }
+  100% {
+    transform: translateY(-176px);
+  }
+}
+
+.vip-member-carousel {
+  animation: vip-member-carousel 10s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vip-member-carousel {
+    animation: none;
+  }
+}
+
+/* Deep Customization Card - Cursor & Swatch Animation */
+@keyframes deep-cursor-move {
+  0%,
+  10% {
+    transform: translate(0, 0);
+  }
+  18% {
+    transform: translate(25px, 0);
+  }
+  22% {
+    transform: translate(25px, 0) scale(0.82);
+  }
+  25% {
+    transform: translate(25px, 0) scale(1);
+  }
+  50% {
+    transform: translate(25px, 0);
+  }
+  58% {
+    transform: translate(0, 0);
+  }
+  62% {
+    transform: translate(0, 0) scale(0.82);
+  }
+  65% {
+    transform: translate(0, 0) scale(1);
+  }
+  90%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes deep-swatch-ring-blue {
+  0%,
+  22% {
+    opacity: 1;
+  }
+  25%,
+  62% {
+    opacity: 0;
+  }
+  65%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes deep-swatch-ring-green {
+  0%,
+  22% {
+    opacity: 0;
+  }
+  25%,
+  58% {
+    opacity: 1;
+  }
+  62%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.deep-cursor-animated {
+  animation: deep-cursor-move 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 1s;
+}
+
+.deep-swatch-ring-blue {
+  animation: deep-swatch-ring-blue 8s ease infinite;
+  animation-delay: 1s;
+}
+
+.deep-swatch-ring-green {
+  animation: deep-swatch-ring-green 8s ease infinite;
+  animation-delay: 1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deep-cursor-animated,
+  .deep-swatch-ring-blue,
+  .deep-swatch-ring-green {
+    animation: none;
+  }
+}

@@ -4,7 +4,7 @@ import {imgBlur8} from "./features-showcase-imgs";
 
 function FigmaIntegrationCard() {
   return (
-    <div className="relative col-span-2 h-[288px] overflow-clip rounded-[24px] border border-solid border-border">
+    <div className="relative col-span-2 h-[288px] overflow-clip rounded-3xl border border-solid border-border">
       <div
         className="absolute bottom-[-31px] left-1/2 flex size-[192px] -translate-x-1/2 items-center justify-center"
         style={
@@ -31,7 +31,7 @@ function FigmaIntegrationCard() {
           </div>
         </div>
       </div>
-      <div className="absolute top-[171px] left-[132px] h-[81px] w-[54px]" data-name="logos:figma">
+      <div className="absolute top-[171px] left-[132px] h-[81px] w-[54px]">
         <div className="absolute inset-[-1.85%_-2.78%]">
           <svg
             className="block size-full"
@@ -262,11 +262,8 @@ function FigmaIntegrationCard() {
         </div>
       </div>
       <div className="relative z-10 flex flex-col items-center pt-[23px]">
-        <div className="flex size-[32px] items-center justify-center rounded-[17px] bg-[#efefef]">
-          <div
-            className="relative size-[16px]"
-            data-name="material-symbols:integration-instructions"
-          >
+        <div className="flex size-8 items-center justify-center rounded-2xl bg-[#efefef]">
+          <div className="relative size-[16px]">
             <svg
               className="absolute block size-full"
               fill="none"
@@ -283,20 +280,16 @@ function FigmaIntegrationCard() {
             </svg>
           </div>
         </div>
-        <p className="mt-[12px] text-center text-[14px] leading-[1.43] font-medium text-foreground not-italic">
+        <p className="mt-3 text-center text-sm leading-[1.43] font-medium text-foreground">
           Design to Code
         </p>
-        <p className="max-w-[257px] text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+        <p className="max-w-[257px] text-center text-xs leading-[1.34] font-normal whitespace-pre-wrap text-muted">
           Exclusive files and a plugin to keep your Figma designs in perfect sync with code.
         </p>
       </div>
-      <div
-        className="absolute bottom-[-1px] left-1/2 h-[51px] w-[272px] -translate-x-1/2"
-        data-name="ScrollShadow"
-      >
+      <div className="absolute bottom-[-1px] left-1/2 h-[51px] w-[272px] -translate-x-1/2">
         <div
           className="absolute inset-0 bg-[rgba(245,245,245,0.7)] mask-intersect mask-alpha mask-size-[100%_100%] mask-no-clip mask-position-[0px_0px] mask-no-repeat backdrop-blur-[5px]"
-          data-name="blur"
           style={{maskImage: `url('${imgBlur8}')`}}
         />
       </div>

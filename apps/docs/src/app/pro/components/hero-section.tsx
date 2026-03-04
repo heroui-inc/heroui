@@ -1,10 +1,7 @@
 "use client";
 
 import {Button} from "@heroui/react";
-import {Calligraph} from "calligraph";
 import {useEffect, useState} from "react";
-
-import {env} from "~env";
 
 function WindowDots() {
   return (
@@ -27,7 +24,7 @@ function WindowDots() {
 
 function DesktopMockup() {
   return (
-    <div className="relative mx-auto h-[567px] w-full max-w-5xl overflow-clip rounded-[35px] bg-default/20">
+    <div className="relative mx-auto h-[567px] w-full max-w-5xl overflow-clip rounded-4xl bg-default">
       <WindowDots />
     </div>
   );
@@ -35,8 +32,8 @@ function DesktopMockup() {
 
 function MobileMockup() {
   return (
-    <div className="relative mx-auto h-[652px] w-[299px] overflow-clip rounded-[35px] bg-default/40">
-      <div className="absolute top-[17px] left-[108px] h-[18px] w-[84px] rounded-[999px] bg-default" />
+    <div className="relative mx-auto h-[652px] w-[299px] overflow-clip rounded-4xl bg-default">
+      <div className="absolute top-[17px] left-[108px] h-[18px] w-[84px] rounded-full bg-default" />
     </div>
   );
 }
@@ -44,7 +41,7 @@ function MobileMockup() {
 function HeroSubtitle() {
   return (
     <div className="relative mt-2 flex shrink-0 content-stretch items-center justify-center pl-[2px]">
-      <p className="relative w-full max-w-lg shrink-0 text-center text-[16px] leading-[normal] font-medium whitespace-pre-wrap text-muted not-italic">
+      <p className="relative w-full max-w-lg shrink-0 text-center text-base leading-[normal] font-medium whitespace-pre-wrap text-muted">
         HeroUI Pro brings components, AI tools, templates, and a refined UI system together so your
         product looks right from day zero.
       </p>
@@ -54,8 +51,8 @@ function HeroSubtitle() {
 
 function HeroHeading() {
   return (
-    <div className="mx-auto mt-6 flex w-full max-w-5xl flex-col items-center justify-center gap-[6px] px-6">
-      <div className="font-heading w-full text-center text-[72px] leading-[0.9] font-medium tracking-[-1.08px] whitespace-pre-wrap text-foreground">
+    <div className="mx-auto mt-6 flex w-full max-w-5xl flex-col items-center justify-center gap-1.5 px-6">
+      <div className="font-heading w-full text-center text-7xl leading-[0.9] font-medium tracking-[-1.08px] whitespace-pre-wrap text-foreground">
         <p className="mb-0">Build faster</p>
         <p className="text-muted/70">Look better</p>
       </div>
@@ -66,7 +63,7 @@ function HeroHeading() {
 
 function PreOrderButton() {
   return (
-    <Button className="rounded-full bg-white text-foreground shadow-[0px_2px_4px_0px_rgba(0,0,0,0.04),0px_1px_2px_0px_rgba(0,0,0,0.06),0px_0px_1px_0px_rgba(0,0,0,0.06)]">
+    <Button className="bg-white text-black shadow-surface">
       Pre-order for $199 <span className="line-through opacity-50">$299</span>
     </Button>
   );
@@ -87,28 +84,28 @@ function StyleTabs() {
   }, []);
 
   return (
-    <div className="mt-8 flex items-center justify-center gap-[20px]">
+    <div className="mt-8 flex items-center justify-center gap-5">
       {STYLE_TABS.map((label, i) => {
         const isActive = i === activeIndex;
 
         return (
           <div
             key={label}
-            className="relative flex w-[56px] shrink-0 flex-col content-stretch items-center gap-[4px]"
+            className="relative flex w-14 shrink-0 flex-col content-stretch items-center gap-1"
           >
             <p
-              className={`relative w-full shrink-0 text-center text-[14px] leading-[1.43] font-medium whitespace-pre-wrap not-italic transition-colors duration-300 ${
+              className={`relative w-full shrink-0 text-center text-sm leading-[1.43] font-medium whitespace-pre-wrap transition-colors duration-300 ${
                 isActive ? "text-accent" : "text-muted"
               }`}
             >
               {label}
             </p>
-            <div className="relative h-[4px] w-full shrink-0 overflow-hidden rounded-[8px]">
-              <div className="absolute inset-0 rounded-[8px] bg-separator" />
+            <div className="relative h-1 w-full shrink-0 overflow-hidden rounded-lg">
+              <div className="absolute inset-0 rounded-lg bg-separator" />
               {!!isActive && (
                 <div
                   key={activeIndex}
-                  className="absolute inset-0 origin-left rounded-[8px]"
+                  className="absolute inset-0 origin-left rounded-lg"
                   style={{
                     animation: `progress-gradient ${CYCLE_DURATION}ms linear forwards`,
                     backgroundImage:
@@ -128,108 +125,4 @@ function StyleSelector() {
   return <StyleTabs />;
 }
 
-const PRE_SALE_END = new Date(env.NEXT_PUBLIC_PRE_SALE_END_DATE ?? "2026-03-30T00:00:00");
-
-function getTimeRemaining() {
-  const now = new Date();
-  const diff = Math.max(0, PRE_SALE_END.getTime() - now.getTime());
-  const totalSeconds = Math.floor(diff / 1000);
-  const pad = (n: number) => String(n).padStart(2, "0");
-
-  return {
-    days: pad(Math.floor(totalSeconds / 86400)),
-    hours: pad(Math.floor((totalSeconds % 86400) / 3600)),
-    minutes: pad(Math.floor((totalSeconds % 3600) / 60)),
-    seconds: pad(totalSeconds % 60),
-  };
-}
-
-function Countdown({long}: {long?: boolean}) {
-  const [time, setTime] = useState<ReturnType<typeof getTimeRemaining> | null>(null);
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => setTime(getTimeRemaining()));
-    const id = setInterval(() => setTime(getTimeRemaining()), 1000);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      clearInterval(id);
-    };
-  }, []);
-
-  if (!time) {
-    // Render placeholder with same structure to avoid layout shift
-    const placeholder = {days: "--", hours: "--", minutes: "--", seconds: "--"};
-
-    if (long) {
-      return (
-        <span className="tabular-nums">
-          <span className="font-normal text-muted">Pre-sale closes in</span>{" "}
-          <span className="font-medium text-foreground">
-            {placeholder.days} days {placeholder.hours} hours {placeholder.minutes} minutes{" "}
-            {placeholder.seconds} seconds
-          </span>
-          <span className="font-normal text-muted">. Prices increase at launch.</span>
-        </span>
-      );
-    }
-
-    return (
-      <span className="tabular-nums">
-        Pre-sale ends in {placeholder.days}d {placeholder.hours}h {placeholder.minutes}m{" "}
-        {placeholder.seconds}s
-      </span>
-    );
-  }
-
-  if (long) {
-    return (
-      <span className="tabular-nums">
-        <span className="font-normal text-muted">Pre-sale closes in</span>{" "}
-        <span className="font-medium text-foreground">
-          <Calligraph animation="snappy" variant="number">
-            {time.days}
-          </Calligraph>{" "}
-          days{" "}
-          <Calligraph animation="snappy" variant="number">
-            {time.hours}
-          </Calligraph>{" "}
-          hours{" "}
-          <Calligraph animation="snappy" variant="number">
-            {time.minutes}
-          </Calligraph>{" "}
-          minutes{" "}
-          <Calligraph animation="snappy" variant="number">
-            {time.seconds}
-          </Calligraph>{" "}
-          seconds
-        </span>
-        <span className="font-normal text-muted">. Prices increase at launch.</span>
-      </span>
-    );
-  }
-
-  return (
-    <span className="tabular-nums">
-      Pre-sale ends in{" "}
-      <Calligraph animation="snappy" variant="number">
-        {time.days}
-      </Calligraph>
-      d{" "}
-      <Calligraph animation="snappy" variant="number">
-        {time.hours}
-      </Calligraph>
-      h{" "}
-      <Calligraph animation="snappy" variant="number">
-        {time.minutes}
-      </Calligraph>
-      m{" "}
-      <Calligraph animation="snappy" variant="number">
-        {time.seconds}
-      </Calligraph>
-      s
-    </span>
-  );
-}
-
-export {Countdown, DesktopMockup, MobileMockup, HeroHeading, PreOrderButton, StyleSelector};
+export {DesktopMockup, MobileMockup, HeroHeading, PreOrderButton, StyleSelector};

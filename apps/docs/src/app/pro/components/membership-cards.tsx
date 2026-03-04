@@ -3,29 +3,26 @@ function BlueMembershipCard() {
     <div className="relative h-[437.19px] w-[292.105px]">
       <div className="absolute top-0 left-0 h-[437.19px] w-[292.105px] rounded-[19.345px] bg-gradient-to-b from-[#5781ff] to-[#0697eb]" />
       <div className="absolute top-[9.67px] left-[9.67px] h-[417.845px] w-[272.76px] rounded-[9.672px] border-[0.967px] border-solid border-[rgba(255,255,255,0.1)]" />
-      <div className="font-heading absolute top-[210.88px] left-[146.16px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[30.952px] leading-[0] font-semibold whitespace-nowrap text-white not-italic">
+      <div className="font-heading absolute top-[210.88px] left-[146.16px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[30.952px] leading-[0] font-semibold whitespace-nowrap text-white">
         <p className="leading-[normal]">Junior Garcia</p>
       </div>
-      <div className="font-heading absolute top-[236.2px] left-[146.63px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[11.607px] leading-[0] font-medium whitespace-nowrap text-white not-italic opacity-30">
+      <div className="font-heading absolute top-[236.2px] left-[146.63px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[11.607px] leading-[0] font-medium whitespace-nowrap text-white opacity-30">
         <p className="leading-[normal]">Early access</p>
       </div>
-      <p className="font-heading absolute top-[367.55px] left-[38.69px] text-[9.672px] leading-[normal] font-medium text-white not-italic opacity-30">
+      <p className="font-heading absolute top-[367.55px] left-[38.69px] text-[9.672px] leading-[normal] font-medium text-white opacity-30">
         Joined
       </p>
-      <p className="font-heading absolute top-[367.55px] left-[253.63px] -translate-x-full text-right text-[9.672px] leading-[normal] font-medium text-white not-italic opacity-30">
+      <p className="font-heading absolute top-[367.55px] left-[253.63px] -translate-x-full text-right text-[9.672px] leading-[normal] font-medium text-white opacity-30">
         Member
       </p>
-      <p className="font-heading absolute top-[383.02px] left-[38.69px] text-[15.476px] leading-[normal] font-medium text-white not-italic opacity-40">
+      <p className="font-heading absolute top-[383.02px] left-[38.69px] text-[15.476px] leading-[normal] font-medium text-white opacity-40">
         6 Feb 2026
       </p>
-      <p className="font-heading absolute top-[383.02px] left-[253.12px] flex -translate-x-full text-right text-[15.476px] leading-[0] font-semibold text-white not-italic opacity-40">
+      <p className="font-heading absolute top-[383.02px] left-[253.12px] flex -translate-x-full text-right text-[15.476px] leading-[0] font-semibold text-white opacity-40">
         <span className="leading-[normal] text-[rgba(255,255,255,0.5)]">#</span>
         <span className="leading-[normal]">{` 0046`}</span>
       </p>
-      <div
-        className="absolute top-[30.95px] left-[118px] h-[17.412px] w-[57.073px] opacity-40"
-        data-name="brand-white"
-      >
+      <div className="absolute top-[30.95px] left-[118px] h-[17.412px] w-[57.073px] opacity-40">
         <svg
           className="absolute block size-full"
           fill="none"
@@ -65,29 +62,26 @@ function OrangeMembershipCard() {
     <div className="relative h-[401.653px] w-[268.361px]">
       <div className="absolute top-0 left-0 h-[401.653px] w-[268.361px] rounded-[17.772px] bg-gradient-to-b from-[#eb57ff] to-[#eb9706]" />
       <div className="absolute top-[8.89px] left-[8.89px] h-[383.88px] w-[250.589px] rounded-[8.886px] border-[0.889px] border-solid border-[rgba(255,255,255,0.1)]" />
-      <div className="font-heading absolute top-[193.5px] left-[134.26px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[28.436px] leading-[0] font-semibold whitespace-nowrap text-white not-italic">
+      <div className="font-heading absolute top-[193.5px] left-[134.26px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[28.436px] leading-[0] font-semibold whitespace-nowrap text-white">
         <p className="leading-[normal]">Junior Garcia</p>
       </div>
-      <div className="font-heading absolute top-[216.99px] left-[134.36px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[10.663px] leading-[0] font-medium whitespace-nowrap text-white not-italic opacity-30">
+      <div className="font-heading absolute top-[216.99px] left-[134.36px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[10.663px] leading-[0] font-medium whitespace-nowrap text-white opacity-30">
         <p className="leading-[normal]">Early access</p>
       </div>
-      <p className="font-heading absolute top-[337.67px] left-[35.55px] text-[8.886px] leading-[normal] font-medium text-white not-italic opacity-30">
+      <p className="font-heading absolute top-[337.67px] left-[35.55px] text-[8.886px] leading-[normal] font-medium text-white opacity-30">
         Joined
       </p>
-      <p className="font-heading absolute top-[337.67px] left-[232.94px] -translate-x-full text-right text-[8.886px] leading-[normal] font-medium text-white not-italic opacity-30">
+      <p className="font-heading absolute top-[337.67px] left-[232.94px] -translate-x-full text-right text-[8.886px] leading-[normal] font-medium text-white opacity-30">
         Member
       </p>
-      <p className="font-heading absolute top-[351.89px] left-[35.54px] text-[14.218px] leading-[normal] font-medium text-white not-italic opacity-40">
+      <p className="font-heading absolute top-[351.89px] left-[35.54px] text-[14.218px] leading-[normal] font-medium text-white opacity-40">
         6 Feb 2026
       </p>
-      <p className="font-heading absolute top-[351.89px] left-[232.61px] flex -translate-x-full text-right text-[14.218px] leading-[0] font-semibold text-white not-italic opacity-40">
+      <p className="font-heading absolute top-[351.89px] left-[232.61px] flex -translate-x-full text-right text-[14.218px] leading-[0] font-semibold text-white opacity-40">
         <span className="leading-[normal] text-[rgba(255,255,255,0.5)]">#</span>
         <span className="leading-[normal]">{` 0046`}</span>
       </p>
-      <div
-        className="absolute top-[28.43px] left-[108.41px] h-[15.997px] w-[52.434px] opacity-40"
-        data-name="brand-white"
-      >
+      <div className="absolute top-[28.43px] left-[108.41px] h-[15.997px] w-[52.434px] opacity-40">
         <svg
           className="absolute block size-full"
           fill="none"

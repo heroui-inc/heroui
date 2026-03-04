@@ -39,7 +39,7 @@ export default function FaqSection() {
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-col items-center px-6 py-20">
       <p className="text-center text-base leading-[normal] font-medium text-accent">FAQs</p>
-      <div className="font-heading mt-2 text-center text-[48px] leading-[normal] tracking-[-0.72px] whitespace-nowrap text-foreground">
+      <div className="font-heading mt-2 text-center text-5xl leading-[normal] tracking-[-0.72px] whitespace-nowrap text-foreground">
         <p className="mb-0">Frequently asked</p>
         <p className="text-foreground/60">questions</p>
       </div>

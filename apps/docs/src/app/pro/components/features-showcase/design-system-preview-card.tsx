@@ -4,21 +4,15 @@ import {imgBlur5, imgBlur6} from "./features-showcase-imgs";
 
 function DesignSystemPreviewCard() {
   return (
-    <div className="relative col-span-4 h-[280px] overflow-clip rounded-[24px] border border-solid border-border">
-      <div
-        className="absolute top-[calc(50%+226px)] left-[calc(50%+253.78px)] h-[508px] w-[727.559px] -translate-x-1/2 -translate-y-1/2 rounded-[22px]"
-        data-name="finance-light"
-      >
+    <div className="relative col-span-4 h-[280px] overflow-clip rounded-3xl border border-solid border-border">
+      <div className="absolute top-[calc(50%+226px)] left-[calc(50%+253.78px)] h-[508px] w-[727.559px] -translate-x-1/2 -translate-y-1/2 rounded-[22px]">
         <div className="relative flex size-full content-stretch items-start overflow-clip rounded-[inherit]">
-          <div className="relative h-full w-[129.153px] shrink-0" data-name="Sidebar">
+          <div className="relative h-full w-[129.153px] shrink-0">
             <div className="relative flex size-full flex-col content-stretch items-start gap-[12.915px] overflow-clip rounded-[inherit] px-[8.61px] pt-[8.61px] pb-[12.915px]">
-              <div className="relative w-full shrink-0 rounded-[7.534px]" data-name="div.flex">
+              <div className="relative w-full shrink-0 rounded-[7.534px]">
                 <div className="flex size-full flex-row items-center">
                   <div className="relative isolate flex w-full content-stretch items-center justify-between px-[2px] py-[4px]">
-                    <div
-                      className="relative z-[2] h-[12.915px] w-[11.602px] shrink-0"
-                      data-name="logogram"
-                    >
+                    <div className="relative z-[2] h-[12.915px] w-[11.602px] shrink-0">
                       <svg
                         className="absolute block size-full"
                         fill="none"
@@ -36,10 +30,7 @@ function DesignSystemPreviewCard() {
                         </g>
                       </svg>
                     </div>
-                    <div
-                      className="relative z-[1] size-[15.068px] shrink-0 rounded-[4185.08px]"
-                      data-name="Avatar"
-                    >
+                    <div className="relative z-[1] size-[15.068px] shrink-0 rounded-[4185.08px]">
                       <img
                         alt=""
                         className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4185.08px] object-cover"
@@ -51,33 +42,18 @@ function DesignSystemPreviewCard() {
                   </div>
                 </div>
               </div>
-              <div
-                className="relative flex min-h-px w-full min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[12.915px] overflow-x-clip overflow-y-auto"
-                data-name="Listbox"
-              >
-                <div
-                  className="relative flex h-[19.373px] w-full min-w-[62.423728942871094px] shrink-0 flex-col content-stretch items-start gap-[2.153px]"
-                  data-name="SearchField"
-                >
-                  <div
-                    className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative h-[19.373px] w-full shrink-0 rounded-[6.458px] bg-white backdrop-blur-[0px]"
-                      data-name="Input"
-                    >
+              <div className="relative flex min-h-px w-full min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[12.915px] overflow-x-clip overflow-y-auto">
+                <div className="relative flex h-[19.373px] w-full min-w-[62.423728942871094px] shrink-0 flex-col content-stretch items-start gap-[2.153px]">
+                  <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                    <div className="relative h-[19.373px] w-full shrink-0 rounded-[6.458px] bg-white backdrop-blur-[0px]">
                       <div
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0 rounded-[6.458px] border-[0.538px] border-solid border-[rgba(222,222,224,0)] shadow-[0px_1.076px_2.153px_0px_rgba(0,0,0,0.04),0px_0.538px_1.076px_0px_rgba(0,0,0,0.06),0px_0px_0.538px_0px_rgba(0,0,0,0.06)]"
                       />
                       <div className="flex size-full flex-row items-center">
                         <div className="relative flex size-full content-stretch items-center gap-[3.229px] px-[6.458px] py-[4.305px]">
-                          <div
-                            className="relative flex shrink-0 content-stretch items-center"
-                            data-name="container"
-                          >
-                            <div className="relative size-[8.61px] shrink-0" data-name="magnifier">
+                          <div className="relative flex shrink-0 content-stretch items-center">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -96,11 +72,8 @@ function DesignSystemPreviewCard() {
                               </svg>
                             </div>
                           </div>
-                          <div
-                            className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[5.381px] overflow-clip"
-                            data-name="placeholderWrapper"
-                          >
-                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-normal text-[#71717a] not-italic">
+                          <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[5.381px] overflow-clip">
+                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-normal text-[#71717a]">
                               Search for an asset
                             </p>
                           </div>
@@ -111,18 +84,12 @@ function DesignSystemPreviewCard() {
                   </div>
                 </div>
                 <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[1.076px]">
-                  <div
-                    className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px] bg-[#ebebec]"
-                    data-name="DropdownItem"
-                  >
+                  <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px] bg-[#ebebec]">
                     <div className="flex size-full min-h-[inherit] flex-row items-center">
                       <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                         <div className="flex flex-row items-center self-stretch">
-                          <div
-                            className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                            data-name="container"
-                          >
-                            <div className="relative size-[8.61px] shrink-0" data-name="house">
+                          <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -142,29 +109,20 @@ function DesignSystemPreviewCard() {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                          data-name="container"
-                        >
-                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                        <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                             Dashboard
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]"
-                    data-name="DropdownItem"
-                  >
+                  <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]">
                     <div className="flex size-full min-h-[inherit] flex-row items-center">
                       <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                         <div className="flex flex-row items-center self-stretch">
-                          <div
-                            className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                            data-name="container"
-                          >
-                            <div className="relative size-[8.61px] shrink-0" data-name="chart-pie">
+                          <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -189,32 +147,20 @@ function DesignSystemPreviewCard() {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                          data-name="container"
-                        >
-                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                        <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                             Portfolio
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]"
-                    data-name="DropdownItem"
-                  >
+                  <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]">
                     <div className="flex size-full min-h-[inherit] flex-row items-center">
                       <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                         <div className="flex flex-row items-center self-stretch">
-                          <div
-                            className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                            data-name="container"
-                          >
-                            <div
-                              className="relative size-[8.61px] shrink-0"
-                              data-name="credit-card"
-                            >
+                          <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -239,29 +185,20 @@ function DesignSystemPreviewCard() {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                          data-name="container"
-                        >
-                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                        <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                             Spending
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]"
-                    data-name="DropdownItem"
-                  >
+                  <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]">
                     <div className="flex size-full min-h-[inherit] flex-row items-center">
                       <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                         <div className="flex flex-row items-center self-stretch">
-                          <div
-                            className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                            data-name="container"
-                          >
-                            <div className="relative size-[8.61px] shrink-0" data-name="receipt">
+                          <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -286,29 +223,20 @@ function DesignSystemPreviewCard() {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                          data-name="container"
-                        >
-                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                        <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                             Transactions
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]"
-                    data-name="DropdownItem"
-                  >
+                  <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]">
                     <div className="flex size-full min-h-[inherit] flex-row items-center">
                       <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                         <div className="flex flex-row items-center self-stretch">
-                          <div
-                            className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                            data-name="container"
-                          >
-                            <div className="relative size-[8.61px] shrink-0" data-name="percent">
+                          <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -328,11 +256,8 @@ function DesignSystemPreviewCard() {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                          data-name="container"
-                        >
-                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                        <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                          <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                             Earn
                           </p>
                         </div>
@@ -342,18 +267,12 @@ function DesignSystemPreviewCard() {
                 </div>
                 <div className="relative flex min-h-px w-full min-w-px flex-[1_0_0] flex-col content-stretch items-start justify-end">
                   <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[1.076px]">
-                    <div
-                      className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]"
-                      data-name="DropdownItem"
-                    >
+                    <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]">
                       <div className="flex size-full min-h-[inherit] flex-row items-center">
                         <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                           <div className="flex flex-row items-center self-stretch">
-                            <div
-                              className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                              data-name="container"
-                            >
-                              <div className="relative size-[8.61px] shrink-0" data-name="gear">
+                            <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                              <div className="relative size-[8.61px] shrink-0">
                                 <svg
                                   className="absolute block size-full"
                                   fill="none"
@@ -378,32 +297,20 @@ function DesignSystemPreviewCard() {
                               </div>
                             </div>
                           </div>
-                          <div
-                            className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                            data-name="container"
-                          >
-                            <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                          <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                            <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                               Settings
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div
-                      className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]"
-                      data-name="DropdownItem"
-                    >
+                    <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]">
                       <div className="flex size-full min-h-[inherit] flex-row items-center">
                         <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                           <div className="flex flex-row items-center self-stretch">
-                            <div
-                              className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                              data-name="container"
-                            >
-                              <div
-                                className="relative size-[8.61px] shrink-0"
-                                data-name="circle-question"
-                              >
+                            <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                              <div className="relative size-[8.61px] shrink-0">
                                 <svg
                                   className="absolute block size-full"
                                   fill="none"
@@ -428,32 +335,20 @@ function DesignSystemPreviewCard() {
                               </div>
                             </div>
                           </div>
-                          <div
-                            className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                            data-name="container"
-                          >
-                            <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                          <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                            <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                               Help & Support
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div
-                      className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]"
-                      data-name="DropdownItem"
-                    >
+                    <div className="relative min-h-[19.372880935668945px] w-full shrink-0 rounded-[10.763px]">
                       <div className="flex size-full min-h-[inherit] flex-row items-center">
                         <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[6.458px] px-[6.458px] py-[3.229px]">
                           <div className="flex flex-row items-center self-stretch">
-                            <div
-                              className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]"
-                              data-name="container"
-                            >
-                              <div
-                                className="relative size-[8.61px] shrink-0"
-                                data-name="arrow-right-from-square"
-                              >
+                            <div className="relative flex h-full shrink-0 content-stretch items-start pt-[1.614px]">
+                              <div className="relative size-[8.61px] shrink-0">
                                 <svg
                                   className="absolute block size-full"
                                   fill="none"
@@ -478,11 +373,8 @@ function DesignSystemPreviewCard() {
                               </div>
                             </div>
                           </div>
-                          <div
-                            className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                            data-name="container"
-                          >
-                            <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                          <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                            <p className="relative w-full shrink-0 text-[7.534px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                               Log out
                             </p>
                           </div>
@@ -505,18 +397,12 @@ function DesignSystemPreviewCard() {
                   <div className="relative w-full shrink-0">
                     <div className="flex size-full flex-row items-center">
                       <div className="relative flex w-full content-stretch items-center justify-between pr-[216px]">
-                        <div className="relative flex shrink-0 flex-col justify-center text-[10.763px] leading-[0] font-semibold whitespace-nowrap text-[#18181b] not-italic">
+                        <div className="relative flex shrink-0 flex-col justify-center text-[10.763px] leading-[0] font-semibold whitespace-nowrap text-[#18181b]">
                           <p className="leading-[1.6]">Good afternoon, Fred</p>
                         </div>
                         <div className="relative flex shrink-0 content-stretch items-center gap-[4.305px]">
-                          <div
-                            className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]"
-                            data-name="Button"
-                          >
-                            <div
-                              className="relative size-[8.61px] shrink-0"
-                              data-name="arrows-rotate-left"
-                            >
+                          <div className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -534,18 +420,12 @@ function DesignSystemPreviewCard() {
                                 </g>
                               </svg>
                             </div>
-                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b]">
                               Swap
                             </p>
                           </div>
-                          <div
-                            className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]"
-                            data-name="Button"
-                          >
-                            <div
-                              className="relative size-[8.61px] shrink-0"
-                              data-name="arrow-down-to-line"
-                            >
+                          <div className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -568,18 +448,12 @@ function DesignSystemPreviewCard() {
                                 </defs>
                               </svg>
                             </div>
-                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b]">
                               Receive
                             </p>
                           </div>
-                          <div
-                            className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]"
-                            data-name="Button"
-                          >
-                            <div
-                              className="relative size-[8.61px] shrink-0"
-                              data-name="paper-plane"
-                            >
+                          <div className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -602,7 +476,7 @@ function DesignSystemPreviewCard() {
                                 </defs>
                               </svg>
                             </div>
-                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b]">
                               Send
                             </p>
                           </div>
@@ -614,47 +488,26 @@ function DesignSystemPreviewCard() {
                     <div className="relative w-full shrink-0">
                       <div className="flex size-full flex-row items-center">
                         <div className="relative flex w-full content-stretch items-center justify-between pr-[248px]">
-                          <div
-                            className="relative flex shrink-0 content-stretch items-center gap-[1.076px] overflow-clip rounded-[28px] bg-[#ebebec] px-[4.305px] py-[2.153px] backdrop-blur-[0px]"
-                            data-name="Tabs"
-                          >
-                            <button
-                              className="relative flex shrink-0 cursor-pointer content-stretch items-center justify-center gap-[3.229px] px-[6.458px] py-[3.229px]"
-                              data-name="tab1"
-                            >
-                              <div
-                                className="absolute inset-[0_-2.15px] rounded-[12.915px] bg-white shadow-[0px_1.076px_4.305px_0px_rgba(0,0,0,0.06)]"
-                                data-name="base"
-                              />
-                              <div className="relative flex shrink-0 flex-col justify-center text-center text-[7.53px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+                          <div className="relative flex shrink-0 content-stretch items-center gap-[1.076px] overflow-clip rounded-[28px] bg-[#ebebec] px-[4.305px] py-[2.153px] backdrop-blur-[0px]">
+                            <button className="relative flex shrink-0 cursor-pointer content-stretch items-center justify-center gap-[3.229px] px-[6.458px] py-[3.229px]">
+                              <div className="absolute inset-[0_-2.15px] rounded-[12.915px] bg-white shadow-[0px_1.076px_4.305px_0px_rgba(0,0,0,0.06)]" />
+                              <div className="relative flex shrink-0 flex-col justify-center text-center text-[7.53px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                                 <p className="leading-[1.43]">Overview</p>
                               </div>
                             </button>
-                            <div
-                              className="relative flex shrink-0 content-stretch items-center justify-center gap-[3.229px] rounded-[10.763px] px-[6.458px] py-[3.229px]"
-                              data-name="tab2"
-                            >
-                              <div className="relative flex shrink-0 flex-col justify-center text-center text-[7.53px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                            <div className="relative flex shrink-0 content-stretch items-center justify-center gap-[3.229px] rounded-[10.763px] px-[6.458px] py-[3.229px]">
+                              <div className="relative flex shrink-0 flex-col justify-center text-center text-[7.53px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                                 <p className="leading-[1.43]">Holdings</p>
                               </div>
                             </div>
-                            <div
-                              className="relative flex shrink-0 content-stretch items-center justify-center gap-[3.229px] rounded-[10.763px] px-[6.458px] py-[3.229px]"
-                              data-name="tab3"
-                            >
-                              <div className="relative flex shrink-0 flex-col justify-center text-center text-[7.53px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                            <div className="relative flex shrink-0 content-stretch items-center justify-center gap-[3.229px] rounded-[10.763px] px-[6.458px] py-[3.229px]">
+                              <div className="relative flex shrink-0 flex-col justify-center text-center text-[7.53px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                                 <p className="leading-[1.43]">DeFi</p>
                               </div>
                             </div>
                           </div>
-                          <div
-                            className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]"
-                            data-name="Button"
-                          >
-                            <div
-                              className="relative size-[8.61px] shrink-0"
-                              data-name="credit-card"
-                            >
+                          <div className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]">
+                            <div className="relative size-[8.61px] shrink-0">
                               <svg
                                 className="absolute block size-full"
                                 fill="none"
@@ -677,7 +530,7 @@ function DesignSystemPreviewCard() {
                                 </defs>
                               </svg>
                             </div>
-                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-accent not-italic">
+                            <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-accent">
                               Buy with card
                             </p>
                           </div>
@@ -686,19 +539,16 @@ function DesignSystemPreviewCard() {
                     </div>
                     <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[6.458px]">
                       <div className="relative flex w-full shrink-0 content-stretch items-center gap-[6.458px]">
-                        <div
-                          className="relative flex w-[344.407px] shrink-0 flex-col content-stretch items-center rounded-[8.61px] bg-white px-[8.61px] pt-[8.61px] pb-[21.525px] shadow-[0px_1.076px_2.153px_0px_rgba(0,0,0,0.04),0px_0.538px_1.076px_0px_rgba(0,0,0,0.06),0px_0px_0.538px_0px_rgba(0,0,0,0.06)] backdrop-blur-[0px]"
-                          data-name="chart"
-                        >
+                        <div className="relative flex w-[344.407px] shrink-0 flex-col content-stretch items-center rounded-[8.61px] bg-white px-[8.61px] pt-[8.61px] pb-[21.525px] shadow-[0px_1.076px_2.153px_0px_rgba(0,0,0,0.04),0px_0.538px_1.076px_0px_rgba(0,0,0,0.06),0px_0px_0.538px_0px_rgba(0,0,0,0.06)] backdrop-blur-[0px]">
                           <div className="relative w-full shrink-0">
                             <div className="relative flex w-full flex-col content-stretch items-start gap-[4.305px] pt-[2.153px] pr-[8.61px] pl-[4.305px]">
                               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
                                 <div className="relative flex shrink-0 content-stretch items-center">
-                                  <p className="relative shrink-0 text-[8.61px] leading-[normal] font-semibold text-[#18181b] not-italic">
+                                  <p className="relative shrink-0 text-[8.61px] leading-[normal] font-semibold text-[#18181b]">
                                     Portfolio
                                   </p>
                                 </div>
-                                <div className="relative flex shrink-0 content-stretch items-center gap-[6.458px] text-right text-[5.381px] leading-[1.34] font-medium not-italic">
+                                <div className="relative flex shrink-0 content-stretch items-center gap-[6.458px] text-right text-[5.381px] leading-[1.34] font-medium">
                                   <p className="relative shrink-0 text-[#71717a]">1H</p>
                                   <p className="relative shrink-0 text-[#71717a]">1D</p>
                                   <p className="relative shrink-0 text-[#71717a]">1W</p>
@@ -709,14 +559,11 @@ function DesignSystemPreviewCard() {
                               </div>
                               <div className="relative flex w-[59.195px] shrink-0 flex-col content-stretch items-start">
                                 <div className="relative flex shrink-0 content-stretch items-center gap-[2.153px]">
-                                  <p className="relative shrink-0 text-[6.458px] leading-[1.34] font-medium text-[#71717a] not-italic">
+                                  <p className="relative shrink-0 text-[6.458px] leading-[1.34] font-medium text-[#71717a]">
                                     Total balance
                                   </p>
-                                  <div
-                                    className="relative size-[4.305px] shrink-0 overflow-clip"
-                                    data-name="circle-info"
-                                  >
-                                    <div className="absolute inset-[6.25%]" data-name="icon">
+                                  <div className="relative size-[4.305px] shrink-0 overflow-clip">
+                                    <div className="absolute inset-[6.25%]">
                                       <svg
                                         className="absolute block size-full"
                                         fill="none"
@@ -734,10 +581,10 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                 </div>
-                                <p className="relative w-[min-content] min-w-full shrink-0 text-[10.763px] leading-[1.6] font-semibold whitespace-pre-wrap text-[#18181b] not-italic">
+                                <p className="relative w-[min-content] min-w-full shrink-0 text-[10.763px] leading-[1.6] font-semibold whitespace-pre-wrap text-[#18181b]">
                                   $24,801.32
                                 </p>
-                                <p className="relative w-[min-content] min-w-full shrink-0 text-[5.381px] leading-[1.34] font-medium whitespace-pre-wrap text-[#17c964] not-italic">
+                                <p className="relative w-[min-content] min-w-full shrink-0 text-[5.381px] leading-[1.34] font-medium whitespace-pre-wrap text-[#17c964]">
                                   $1,242.77 (5.32%)
                                 </p>
                               </div>
@@ -765,53 +612,29 @@ function DesignSystemPreviewCard() {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className="relative h-[180.275px] min-h-px min-w-px flex-[1_0_0] rounded-[8.61px]"
-                          data-name="holdings"
-                        >
+                        <div className="relative h-[180.275px] min-h-px min-w-px flex-[1_0_0] rounded-[8.61px]">
                           <div className="size-full overflow-clip rounded-[inherit]">
                             <div className="relative flex size-full flex-col content-stretch items-start justify-between p-[8.61px]">
                               <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[8.61px]">
-                                <div
-                                  className="relative flex w-full shrink-0 content-stretch items-center justify-between"
-                                  data-name="ContentGraphWrapper"
-                                >
-                                  <div
-                                    className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.305px]"
-                                    data-name="TitleIconWrapper"
-                                  >
-                                    <p className="relative shrink-0 text-[8.61px] leading-[normal] font-semibold text-[#18181b] not-italic">
+                                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
+                                  <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.305px]">
+                                    <p className="relative shrink-0 text-[8.61px] leading-[normal] font-semibold text-[#18181b]">
                                       Holdings
                                     </p>
-                                    <div
-                                      className="relative flex shrink-0 content-stretch items-center justify-center gap-[2.153px] px-[2.153px] py-[1.076px] backdrop-blur-[0px]"
-                                      data-name="Chip"
-                                    >
-                                      <div
-                                        className="absolute inset-[0_0.69px_0.39px_0] rounded-[6.458px] bg-[#ebebec]"
-                                        data-name="base"
-                                      />
-                                      <p className="relative shrink-0 text-[6.458px] leading-[1.34] font-medium text-[#18181b] not-italic">
+                                    <div className="relative flex shrink-0 content-stretch items-center justify-center gap-[2.153px] px-[2.153px] py-[1.076px] backdrop-blur-[0px]">
+                                      <div className="absolute inset-[0_0.69px_0.39px_0] rounded-[6.458px] bg-[#ebebec]" />
+                                      <p className="relative shrink-0 text-[6.458px] leading-[1.34] font-medium text-[#18181b]">
                                         8
                                       </p>
                                     </div>
                                   </div>
                                 </div>
-                                <div
-                                  className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[1.076px] pb-[2.153px]"
-                                  data-name="list"
-                                >
-                                  <div
-                                    className="relative w-full shrink-0 rounded-[7.534px]"
-                                    data-name="item"
-                                  >
+                                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[1.076px] pb-[2.153px]">
+                                  <div className="relative w-full shrink-0 rounded-[7.534px]">
                                     <div className="flex size-full flex-row items-center">
                                       <div className="relative isolate flex w-full content-stretch items-center justify-between p-[2.153px]">
                                         <div className="relative z-[2] flex shrink-0 content-stretch items-center gap-[6.458px]">
-                                          <div
-                                            className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]"
-                                            data-name="Avatar"
-                                          >
+                                          <div className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]">
                                             <img
                                               alt=""
                                               className="absolute inset-0 size-full max-w-none rounded-[5380.818px] object-cover"
@@ -824,10 +647,7 @@ function DesignSystemPreviewCard() {
                                               className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                             />
                                           </div>
-                                          <div
-                                            className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                            data-name="caontainer"
-                                          >
+                                          <div className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap">
                                             <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                               <p className="leading-[1.34]">BTC</p>
                                             </div>
@@ -836,10 +656,7 @@ function DesignSystemPreviewCard() {
                                             </div>
                                           </div>
                                         </div>
-                                        <div
-                                          className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                          data-name="container"
-                                        >
+                                        <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap">
                                           <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                             <p className="leading-[1.34]">$16,283.84</p>
                                           </div>
@@ -850,17 +667,11 @@ function DesignSystemPreviewCard() {
                                       </div>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative w-full shrink-0 rounded-[7.534px]"
-                                    data-name="item"
-                                  >
+                                  <div className="relative w-full shrink-0 rounded-[7.534px]">
                                     <div className="flex size-full flex-row items-center">
                                       <div className="relative isolate flex w-full content-stretch items-center justify-between p-[2.153px]">
                                         <div className="relative z-[2] flex shrink-0 content-stretch items-center gap-[6.458px]">
-                                          <div
-                                            className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]"
-                                            data-name="Avatar"
-                                          >
+                                          <div className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]">
                                             <img
                                               alt=""
                                               className="absolute inset-0 size-full max-w-none rounded-[5380.818px] object-cover"
@@ -873,10 +684,7 @@ function DesignSystemPreviewCard() {
                                               className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                             />
                                           </div>
-                                          <div
-                                            className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                            data-name="caontainer"
-                                          >
+                                          <div className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap">
                                             <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                               <p className="leading-[1.34]">USDC</p>
                                             </div>
@@ -885,10 +693,7 @@ function DesignSystemPreviewCard() {
                                             </div>
                                           </div>
                                         </div>
-                                        <div
-                                          className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                          data-name="container"
-                                        >
+                                        <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap">
                                           <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                             <p className="leading-[1.34]">$2,087.25</p>
                                           </div>
@@ -899,17 +704,11 @@ function DesignSystemPreviewCard() {
                                       </div>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative w-full shrink-0 rounded-[7.534px]"
-                                    data-name="item"
-                                  >
+                                  <div className="relative w-full shrink-0 rounded-[7.534px]">
                                     <div className="flex size-full flex-row items-center">
                                       <div className="relative isolate flex w-full content-stretch items-center justify-between p-[2.153px]">
                                         <div className="relative z-[2] flex shrink-0 content-stretch items-center gap-[6.458px]">
-                                          <div
-                                            className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]"
-                                            data-name="Avatar"
-                                          >
+                                          <div className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]">
                                             <img
                                               alt=""
                                               className="absolute inset-0 size-full max-w-none rounded-[5380.818px] object-cover"
@@ -922,10 +721,7 @@ function DesignSystemPreviewCard() {
                                               className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                             />
                                           </div>
-                                          <div
-                                            className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                            data-name="caontainer"
-                                          >
+                                          <div className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap">
                                             <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                               <p className="leading-[1.34]">ETH</p>
                                             </div>
@@ -934,10 +730,7 @@ function DesignSystemPreviewCard() {
                                             </div>
                                           </div>
                                         </div>
-                                        <div
-                                          className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                          data-name="container"
-                                        >
+                                        <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap">
                                           <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                             <p className="leading-[1.34]">$1,087.25</p>
                                           </div>
@@ -948,17 +741,11 @@ function DesignSystemPreviewCard() {
                                       </div>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative w-full shrink-0 rounded-[7.534px]"
-                                    data-name="item"
-                                  >
+                                  <div className="relative w-full shrink-0 rounded-[7.534px]">
                                     <div className="flex size-full flex-row items-center">
                                       <div className="relative isolate flex w-full content-stretch items-center justify-between p-[2.153px]">
                                         <div className="relative z-[2] flex shrink-0 content-stretch items-center gap-[6.458px]">
-                                          <div
-                                            className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]"
-                                            data-name="Avatar"
-                                          >
+                                          <div className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]">
                                             <img
                                               alt=""
                                               className="absolute inset-0 size-full max-w-none rounded-[5380.818px] object-cover"
@@ -971,10 +758,7 @@ function DesignSystemPreviewCard() {
                                               className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                             />
                                           </div>
-                                          <div
-                                            className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                            data-name="caontainer"
-                                          >
+                                          <div className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap">
                                             <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                               <p className="leading-[1.34]">BNB</p>
                                             </div>
@@ -983,10 +767,7 @@ function DesignSystemPreviewCard() {
                                             </div>
                                           </div>
                                         </div>
-                                        <div
-                                          className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                          data-name="container"
-                                        >
+                                        <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap">
                                           <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                             <p className="leading-[1.34]">$4,165.20</p>
                                           </div>
@@ -997,17 +778,11 @@ function DesignSystemPreviewCard() {
                                       </div>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative w-full shrink-0 rounded-[7.534px]"
-                                    data-name="item"
-                                  >
+                                  <div className="relative w-full shrink-0 rounded-[7.534px]">
                                     <div className="flex size-full flex-row items-center">
                                       <div className="relative isolate flex w-full content-stretch items-center justify-between p-[2.153px]">
                                         <div className="relative z-[2] flex shrink-0 content-stretch items-center gap-[6.458px]">
-                                          <div
-                                            className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]"
-                                            data-name="Avatar"
-                                          >
+                                          <div className="pointer-events-none relative size-[17.22px] shrink-0 rounded-[5380.818px]">
                                             <img
                                               alt=""
                                               className="absolute inset-0 size-full max-w-none rounded-[5380.818px] object-cover"
@@ -1020,10 +795,7 @@ function DesignSystemPreviewCard() {
                                               className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                             />
                                           </div>
-                                          <div
-                                            className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                            data-name="caontainer"
-                                          >
+                                          <div className="relative flex shrink-0 flex-col content-stretch items-start text-[6.458px] leading-[0] whitespace-nowrap">
                                             <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                               <p className="leading-[1.34]">SOL</p>
                                             </div>
@@ -1032,10 +804,7 @@ function DesignSystemPreviewCard() {
                                             </div>
                                           </div>
                                         </div>
-                                        <div
-                                          className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap not-italic"
-                                          data-name="container"
-                                        >
+                                        <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-end text-[6.458px] leading-[0] whitespace-nowrap">
                                           <div className="relative flex shrink-0 flex-col justify-center font-medium text-[#18181b]">
                                             <p className="leading-[1.34]">$195.54</p>
                                           </div>
@@ -1048,13 +817,10 @@ function DesignSystemPreviewCard() {
                                   </div>
                                 </div>
                               </div>
-                              <div
-                                className="relative h-[17.22px] max-h-[17.220338821411133px] min-h-[17.220338821411133px] w-full shrink-0 rounded-[8.61px] bg-[#ebebec] backdrop-blur-[0px]"
-                                data-name="Button"
-                              >
+                              <div className="relative h-[17.22px] max-h-[17.220338821411133px] min-h-[17.220338821411133px] w-full shrink-0 rounded-[8.61px] bg-[#ebebec] backdrop-blur-[0px]">
                                 <div className="flex size-full max-h-[inherit] min-h-[inherit] flex-row items-center justify-center overflow-clip rounded-[inherit]">
                                   <div className="relative flex size-full max-h-[inherit] min-h-[inherit] content-stretch items-center justify-center gap-[2.691px] px-[5.381px] py-[3.229px]">
-                                    <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b]">
                                       See all holdings
                                     </p>
                                   </div>
@@ -1069,19 +835,13 @@ function DesignSystemPreviewCard() {
                           <div className="flex size-full flex-row items-center">
                             <div className="relative flex w-full content-stretch items-center justify-between pl-[4.305px]">
                               <div className="relative flex shrink-0 content-stretch items-center">
-                                <p className="relative shrink-0 text-[8.61px] leading-[normal] font-semibold text-[#18181b] not-italic">
+                                <p className="relative shrink-0 text-[8.61px] leading-[normal] font-semibold text-[#18181b]">
                                   Recent activity
                                 </p>
                               </div>
                               <div className="relative flex shrink-0 content-stretch items-start gap-[6.458px]">
-                                <div
-                                  className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]"
-                                  data-name="Button"
-                                >
-                                  <div
-                                    className="relative size-[8.61px] shrink-0"
-                                    data-name="sliders"
-                                  >
+                                <div className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]">
+                                  <div className="relative size-[8.61px] shrink-0">
                                     <svg
                                       className="absolute block size-full"
                                       fill="none"
@@ -1104,18 +864,12 @@ function DesignSystemPreviewCard() {
                                       </defs>
                                     </svg>
                                   </div>
-                                  <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                                  <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b]">
                                     Filter
                                   </p>
                                 </div>
-                                <div
-                                  className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]"
-                                  data-name="Button"
-                                >
-                                  <div
-                                    className="relative size-[8.61px] shrink-0"
-                                    data-name="bars-descending-align-center"
-                                  >
+                                <div className="relative flex h-[19.373px] max-h-[19.372880935668945px] min-h-[19.372880935668945px] shrink-0 content-stretch items-center justify-center gap-[4.305px] overflow-clip rounded-[12.915px] bg-[#ebebec] px-[7.534px] py-[4.305px] backdrop-blur-[0px]">
+                                  <div className="relative size-[8.61px] shrink-0">
                                     <svg
                                       className="absolute block size-full"
                                       fill="none"
@@ -1141,7 +895,7 @@ function DesignSystemPreviewCard() {
                                       </defs>
                                     </svg>
                                   </div>
-                                  <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                                  <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b]">
                                     Sort
                                   </p>
                                 </div>
@@ -1153,17 +907,11 @@ function DesignSystemPreviewCard() {
                           <div className="relative w-full shrink-0 rounded-[8.61px] bg-[#efefef]">
                             <div className="flex size-full flex-row items-center justify-center">
                               <div className="relative flex w-full content-stretch items-center justify-center gap-[8.61px] px-[8.61px] py-[5.381px]">
-                                <p className="relative min-h-px min-w-px flex-[1_0_0] text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a] not-italic">
+                                <p className="relative min-h-px min-w-px flex-[1_0_0] text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a]">
                                   Txn #
                                 </p>
-                                <div
-                                  className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]"
-                                  data-name="Separator"
-                                >
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                <div className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]">
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1181,10 +929,7 @@ function DesignSystemPreviewCard() {
                                       </svg>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1203,17 +948,11 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                 </div>
-                                <p className="relative w-[103.322px] shrink-0 text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a] not-italic">
+                                <p className="relative w-[103.322px] shrink-0 text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a]">
                                   Type
                                 </p>
-                                <div
-                                  className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]"
-                                  data-name="Separator"
-                                >
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                <div className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]">
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1231,10 +970,7 @@ function DesignSystemPreviewCard() {
                                       </svg>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1253,17 +989,11 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                 </div>
-                                <p className="relative w-[75.339px] shrink-0 text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a] not-italic">
+                                <p className="relative w-[75.339px] shrink-0 text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a]">
                                   Asset
                                 </p>
-                                <div
-                                  className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]"
-                                  data-name="Separator"
-                                >
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                <div className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]">
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1281,10 +1011,7 @@ function DesignSystemPreviewCard() {
                                       </svg>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1303,17 +1030,11 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                 </div>
-                                <p className="relative w-[77.492px] shrink-0 text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a] not-italic">
+                                <p className="relative w-[77.492px] shrink-0 text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a]">
                                   Value
                                 </p>
-                                <div
-                                  className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]"
-                                  data-name="Separator"
-                                >
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                <div className="relative flex h-[8.61px] w-[0.538px] shrink-0 flex-col content-stretch items-center justify-center overflow-clip rounded-[2.153px]">
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1331,10 +1052,7 @@ function DesignSystemPreviewCard() {
                                       </svg>
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative min-h-px w-0 min-w-px flex-[1_0_0]"
-                                    data-name="Line"
-                                  >
+                                  <div className="relative min-h-px w-0 min-w-px flex-[1_0_0]">
                                     <div className="absolute inset-[-0.5%_-0.27px]">
                                       <svg
                                         className="block size-full"
@@ -1353,7 +1071,7 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                 </div>
-                                <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a] not-italic">
+                                <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-medium whitespace-pre-wrap text-[#71717a]">
                                   Date
                                 </p>
                               </div>
@@ -1364,17 +1082,11 @@ function DesignSystemPreviewCard() {
                               <div className="flex size-full flex-row items-center justify-center">
                                 <div className="relative flex w-full content-stretch items-center justify-center gap-[8.61px] px-[8.61px] py-[6.458px]">
                                   <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.305px]">
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       0xaa2bf905...
                                     </p>
-                                    <div
-                                      className="relative size-[8.61px] shrink-0 overflow-clip"
-                                      data-name="arrow-up-right-from-square"
-                                    >
-                                      <div
-                                        className="absolute inset-[9.37%_9.38%_9.38%_9.37%]"
-                                        data-name="icon"
-                                      >
+                                    <div className="relative size-[8.61px] shrink-0 overflow-clip">
+                                      <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                                         <svg
                                           className="absolute block size-full"
                                           fill="none"
@@ -1393,25 +1105,13 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
                                   <div className="relative flex w-[103.322px] shrink-0 content-stretch items-center gap-[4.305px]">
-                                    <div
-                                      className="relative size-[8.61px] shrink-0 overflow-clip"
-                                      data-name="file-text"
-                                    >
-                                      <div
-                                        className="absolute inset-[6.25%_12.5%]"
-                                        data-name="icon"
-                                      >
+                                    <div className="relative size-[8.61px] shrink-0 overflow-clip">
+                                      <div className="absolute inset-[6.25%_12.5%]">
                                         <svg
                                           className="absolute block size-full"
                                           fill="none"
@@ -1428,29 +1128,17 @@ function DesignSystemPreviewCard() {
                                         </svg>
                                       </div>
                                     </div>
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       Contract Interaction
                                     </p>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]"
-                                      data-name="Avatar"
-                                    >
+                                  <div className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]">
+                                    <div className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]">
                                       <div
                                         aria-hidden="true"
                                         className="absolute inset-0 rounded-[5380.818px]"
@@ -1475,72 +1163,42 @@ function DesignSystemPreviewCard() {
                                         className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                       />
                                     </div>
-                                    <div
-                                      className="relative z-[1] flex shrink-0 flex-col content-stretch items-start"
-                                      data-name="div.flex"
-                                    >
-                                      <div
-                                        className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                        data-name="p.text-tiny"
-                                      >
-                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                           ETH
                                         </p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="relative w-full shrink-0"
-                                      data-name="p.text-small"
-                                    >
+                                  <div className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start">
+                                    <div className="relative w-full shrink-0">
                                       <div className="relative flex w-full flex-col content-stretch items-start pr-[18.523px]">
-                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b] not-italic">
+                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b]">
                                           <p className="leading-[1.34]">0.123124532</p>
                                         </div>
                                       </div>
                                     </div>
-                                    <div
-                                      className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                      data-name="p.text-tiny"
-                                    >
-                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic">
+                                    <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                                         <p className="leading-[1.34]">$320.65</p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a]">
                                     Dec 8, 2025 12:32 PM
                                   </p>
-                                  <div
-                                    className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50"
-                                    data-name="separator"
-                                  />
+                                  <div className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50" />
                                 </div>
                               </div>
                             </div>
@@ -1548,17 +1206,11 @@ function DesignSystemPreviewCard() {
                               <div className="flex size-full flex-row items-center justify-center">
                                 <div className="relative flex w-full content-stretch items-center justify-center gap-[8.61px] px-[8.61px] py-[6.458px]">
                                   <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.305px]">
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       0xbb4e0d712...
                                     </p>
-                                    <div
-                                      className="relative size-[8.61px] shrink-0 overflow-clip"
-                                      data-name="arrow-up-right-from-square"
-                                    >
-                                      <div
-                                        className="absolute inset-[9.37%_9.38%_9.38%_9.37%]"
-                                        data-name="icon"
-                                      >
+                                    <div className="relative size-[8.61px] shrink-0 overflow-clip">
+                                      <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                                         <svg
                                           className="absolute block size-full"
                                           fill="none"
@@ -1577,21 +1229,12 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
                                   <div className="relative flex w-[103.322px] shrink-0 content-stretch items-center gap-[4.305px]">
-                                    <div
-                                      className="relative size-[8.61px] shrink-0"
-                                      data-name="arrow-down-to-line"
-                                    >
+                                    <div className="relative size-[8.61px] shrink-0">
                                       <svg
                                         className="absolute block size-full"
                                         fill="none"
@@ -1614,29 +1257,17 @@ function DesignSystemPreviewCard() {
                                         </defs>
                                       </svg>
                                     </div>
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       Received
                                     </p>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]"
-                                      data-name="Avatar"
-                                    >
+                                  <div className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]">
+                                    <div className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]">
                                       <div
                                         aria-hidden="true"
                                         className="absolute inset-0 rounded-[5380.818px]"
@@ -1661,72 +1292,42 @@ function DesignSystemPreviewCard() {
                                         className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                       />
                                     </div>
-                                    <div
-                                      className="relative z-[1] flex shrink-0 flex-col content-stretch items-start"
-                                      data-name="div.flex"
-                                    >
-                                      <div
-                                        className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                        data-name="p.text-tiny"
-                                      >
-                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                           USDC
                                         </p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="relative w-full shrink-0"
-                                      data-name="p.text-small"
-                                    >
+                                  <div className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start">
+                                    <div className="relative w-full shrink-0">
                                       <div className="relative flex w-full flex-col content-stretch items-start pr-[18.523px]">
-                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b] not-italic">
+                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b]">
                                           <p className="leading-[1.34]">500.00</p>
                                         </div>
                                       </div>
                                     </div>
-                                    <div
-                                      className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                      data-name="p.text-tiny"
-                                    >
-                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic">
+                                    <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                                         <p className="leading-[1.34]">$500.00</p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a]">
                                     Dec 7, 2025 11:43 AM
                                   </p>
-                                  <div
-                                    className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50"
-                                    data-name="separator"
-                                  />
+                                  <div className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50" />
                                 </div>
                               </div>
                             </div>
@@ -1734,17 +1335,11 @@ function DesignSystemPreviewCard() {
                               <div className="flex size-full flex-row items-center justify-center">
                                 <div className="relative flex w-full content-stretch items-center justify-center gap-[8.61px] px-[8.61px] py-[6.458px]">
                                   <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.305px]">
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       0xcc1a2f4e3...
                                     </p>
-                                    <div
-                                      className="relative size-[8.61px] shrink-0 overflow-clip"
-                                      data-name="arrow-up-right-from-square"
-                                    >
-                                      <div
-                                        className="absolute inset-[9.37%_9.38%_9.38%_9.37%]"
-                                        data-name="icon"
-                                      >
+                                    <div className="relative size-[8.61px] shrink-0 overflow-clip">
+                                      <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                                         <svg
                                           className="absolute block size-full"
                                           fill="none"
@@ -1763,21 +1358,12 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
                                   <div className="relative flex w-[103.322px] shrink-0 content-stretch items-center gap-[4.305px]">
-                                    <div
-                                      className="relative size-[8.61px] shrink-0"
-                                      data-name="paper-plane"
-                                    >
+                                    <div className="relative size-[8.61px] shrink-0">
                                       <svg
                                         className="absolute block size-full"
                                         fill="none"
@@ -1800,29 +1386,17 @@ function DesignSystemPreviewCard() {
                                         </defs>
                                       </svg>
                                     </div>
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       Sent
                                     </p>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]"
-                                      data-name="Avatar"
-                                    >
+                                  <div className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]">
+                                    <div className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]">
                                       <div
                                         aria-hidden="true"
                                         className="absolute inset-0 rounded-[5380.818px]"
@@ -1847,72 +1421,42 @@ function DesignSystemPreviewCard() {
                                         className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                       />
                                     </div>
-                                    <div
-                                      className="relative z-[1] flex shrink-0 flex-col content-stretch items-start"
-                                      data-name="div.flex"
-                                    >
-                                      <div
-                                        className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                        data-name="p.text-tiny"
-                                      >
-                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                           DAI
                                         </p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="relative w-full shrink-0"
-                                      data-name="p.text-small"
-                                    >
+                                  <div className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start">
+                                    <div className="relative w-full shrink-0">
                                       <div className="relative flex w-full flex-col content-stretch items-start pr-[18.523px]">
-                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b] not-italic">
+                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b]">
                                           <p className="leading-[1.34]">1000.00</p>
                                         </div>
                                       </div>
                                     </div>
-                                    <div
-                                      className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                      data-name="p.text-tiny"
-                                    >
-                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic">
+                                    <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                                         <p className="leading-[1.34]">$1000.00</p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a]">
                                     Nov 28, 2025 08:14 AM
                                   </p>
-                                  <div
-                                    className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50"
-                                    data-name="separator"
-                                  />
+                                  <div className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50" />
                                 </div>
                               </div>
                             </div>
@@ -1920,17 +1464,11 @@ function DesignSystemPreviewCard() {
                               <div className="flex size-full flex-row items-center justify-center">
                                 <div className="relative flex w-full content-stretch items-center justify-center gap-[8.61px] px-[8.61px] py-[6.458px]">
                                   <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.305px]">
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       0xdd6b5a163...
                                     </p>
-                                    <div
-                                      className="relative size-[8.61px] shrink-0 overflow-clip"
-                                      data-name="arrow-up-right-from-square"
-                                    >
-                                      <div
-                                        className="absolute inset-[9.37%_9.38%_9.38%_9.37%]"
-                                        data-name="icon"
-                                      >
+                                    <div className="relative size-[8.61px] shrink-0 overflow-clip">
+                                      <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                                         <svg
                                           className="absolute block size-full"
                                           fill="none"
@@ -1949,21 +1487,12 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
                                   <div className="relative flex w-[103.322px] shrink-0 content-stretch items-center gap-[4.305px]">
-                                    <div
-                                      className="relative size-[8.61px] shrink-0"
-                                      data-name="arrows-rotate-left"
-                                    >
+                                    <div className="relative size-[8.61px] shrink-0">
                                       <svg
                                         className="absolute block size-full"
                                         fill="none"
@@ -1981,29 +1510,17 @@ function DesignSystemPreviewCard() {
                                         </g>
                                       </svg>
                                     </div>
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       Swapped
                                     </p>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]"
-                                      data-name="Avatar"
-                                    >
+                                  <div className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]">
+                                    <div className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]">
                                       <div
                                         aria-hidden="true"
                                         className="absolute inset-0 rounded-[5380.818px]"
@@ -2028,72 +1545,42 @@ function DesignSystemPreviewCard() {
                                         className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                       />
                                     </div>
-                                    <div
-                                      className="relative z-[1] flex shrink-0 flex-col content-stretch items-start"
-                                      data-name="div.flex"
-                                    >
-                                      <div
-                                        className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                        data-name="p.text-tiny"
-                                      >
-                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                           BTC
                                         </p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="relative w-full shrink-0"
-                                      data-name="p.text-small"
-                                    >
+                                  <div className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start">
+                                    <div className="relative w-full shrink-0">
                                       <div className="relative flex w-full flex-col content-stretch items-start pr-[18.523px]">
-                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b] not-italic">
+                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b]">
                                           <p className="leading-[1.34]">0.154321</p>
                                         </div>
                                       </div>
                                     </div>
-                                    <div
-                                      className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                      data-name="p.text-tiny"
-                                    >
-                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic">
+                                    <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                                         <p className="leading-[1.34]">$89,385.22</p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a]">
                                     Oct 5, 2025 06:21 PM
                                   </p>
-                                  <div
-                                    className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50"
-                                    data-name="separator"
-                                  />
+                                  <div className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50" />
                                 </div>
                               </div>
                             </div>
@@ -2101,17 +1588,11 @@ function DesignSystemPreviewCard() {
                               <div className="flex size-full flex-row items-center justify-center">
                                 <div className="relative flex w-full content-stretch items-center justify-center gap-[8.61px] px-[8.61px] py-[6.458px]">
                                   <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.305px]">
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       0xdd6b5a163...
                                     </p>
-                                    <div
-                                      className="relative size-[8.61px] shrink-0 overflow-clip"
-                                      data-name="arrow-up-right-from-square"
-                                    >
-                                      <div
-                                        className="absolute inset-[9.37%_9.38%_9.38%_9.37%]"
-                                        data-name="icon"
-                                      >
+                                    <div className="relative size-[8.61px] shrink-0 overflow-clip">
+                                      <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                                         <svg
                                           className="absolute block size-full"
                                           fill="none"
@@ -2130,21 +1611,12 @@ function DesignSystemPreviewCard() {
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
                                   <div className="relative flex w-[103.322px] shrink-0 content-stretch items-center gap-[4.305px]">
-                                    <div
-                                      className="relative size-[8.61px] shrink-0"
-                                      data-name="arrows-rotate-left"
-                                    >
+                                    <div className="relative size-[8.61px] shrink-0">
                                       <svg
                                         className="absolute block size-full"
                                         fill="none"
@@ -2162,29 +1634,17 @@ function DesignSystemPreviewCard() {
                                         </g>
                                       </svg>
                                     </div>
-                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                       Swapped
                                     </p>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]"
-                                      data-name="Avatar"
-                                    >
+                                  <div className="relative isolate flex w-[75.339px] shrink-0 content-stretch items-center gap-[6.458px]">
+                                    <div className="pointer-events-none relative z-[2] size-[12.915px] shrink-0 rounded-[5380.818px]">
                                       <div
                                         aria-hidden="true"
                                         className="absolute inset-0 rounded-[5380.818px]"
@@ -2209,98 +1669,59 @@ function DesignSystemPreviewCard() {
                                         className="absolute inset-0 rounded-[5380.818px] border-[0.538px] border-solid border-[rgba(0,0,0,0.05)]"
                                       />
                                     </div>
-                                    <div
-                                      className="relative z-[1] flex shrink-0 flex-col content-stretch items-start"
-                                      data-name="div.flex"
-                                    >
-                                      <div
-                                        className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                        data-name="p.text-tiny"
-                                      >
-                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b] not-italic">
+                                    <div className="relative z-[1] flex shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                        <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#18181b]">
                                           BTC
                                         </p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <div
-                                    className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start"
-                                    data-name="div.flex"
-                                  >
-                                    <div
-                                      className="relative w-full shrink-0"
-                                      data-name="p.text-small"
-                                    >
+                                  <div className="relative flex w-[77.492px] shrink-0 flex-col content-stretch items-start">
+                                    <div className="relative w-full shrink-0">
                                       <div className="relative flex w-full flex-col content-stretch items-start pr-[18.523px]">
-                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b] not-italic">
+                                        <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#18181b]">
                                           <p className="leading-[1.34]">0.154321</p>
                                         </div>
                                       </div>
                                     </div>
-                                    <div
-                                      className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                                      data-name="p.text-tiny"
-                                    >
-                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic">
+                                    <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                                      <div className="relative flex shrink-0 flex-col justify-center text-[6.458px] leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                                         <p className="leading-[1.34]">$89,385.22</p>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center self-stretch">
-                                    <div
-                                      className="relative flex h-full shrink-0 content-stretch items-center opacity-0"
-                                      data-name="separator"
-                                    >
-                                      <div
-                                        className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6"
-                                        data-name="Separator/vertical"
-                                      />
+                                    <div className="relative flex h-full shrink-0 content-stretch items-center opacity-0">
+                                      <div className="h-[8.61px] w-[0.538px] shrink-0 rounded-[2.153px] bg-[#18181b] opacity-6" />
                                     </div>
                                   </div>
-                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+                                  <p className="relative w-[90.407px] shrink-0 text-right text-[6.458px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a]">
                                     Oct 5, 2025 06:21 PM
                                   </p>
-                                  <div
-                                    className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50"
-                                    data-name="separator"
-                                  />
+                                  <div className="absolute right-[0.05px] bottom-[-0.22px] left-0 h-[0.538px] bg-[#e4e4e7] opacity-50" />
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div className="relative w-full shrink-0" data-name="_TableFooter">
+                          <div className="relative w-full shrink-0">
                             <div className="flex size-full flex-row items-center">
                               <div className="relative flex w-full content-stretch items-center py-[5.381px] pr-[4.305px] pl-[8.61px]">
-                                <div
-                                  className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center justify-between"
-                                  data-name="Pagination"
-                                >
-                                  <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#71717a] not-italic">
+                                <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center justify-between">
+                                  <p className="relative shrink-0 text-[7.534px] leading-[1.43] font-normal text-[#71717a]">
                                     1 to 6 of 10 transactions
                                   </p>
                                   <div className="relative flex shrink-0 content-stretch items-center justify-end gap-[4.305px]">
-                                    <div
-                                      className="relative flex h-[17.22px] max-h-[17.220338821411133px] min-h-[17.220338821411133px] shrink-0 content-stretch items-center justify-center gap-[2.691px] overflow-clip rounded-[8.61px] px-[5.381px] py-[3.229px] opacity-50"
-                                      data-name="Button"
-                                    >
-                                      <div
-                                        className="relative size-[8.61px] shrink-0 overflow-clip"
-                                        data-name="style=regular, keywords=arrow"
-                                      >
+                                    <div className="relative flex h-[17.22px] max-h-[17.220338821411133px] min-h-[17.220338821411133px] shrink-0 content-stretch items-center justify-center gap-[2.691px] overflow-clip rounded-[8.61px] px-[5.381px] py-[3.229px] opacity-50">
+                                      <div className="relative size-[8.61px] shrink-0 overflow-clip">
                                         <div className="absolute inset-[17.19%_32.81%_17.19%_29.69%] flex items-center justify-center">
                                           <div className="h-[3.229px] w-[5.65px] flex-none rotate-90">
-                                            <div className="relative size-full" data-name="icon">
+                                            <div className="relative size-full">
                                               <svg
                                                 className="absolute block size-full"
                                                 fill="none"
@@ -2319,24 +1740,18 @@ function DesignSystemPreviewCard() {
                                           </div>
                                         </div>
                                       </div>
-                                      <p className="relative shrink-0 text-[7.53px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                                      <p className="relative shrink-0 text-[7.53px] leading-[10.763px] font-medium text-[#18181b]">
                                         Prev
                                       </p>
                                     </div>
-                                    <div
-                                      className="relative flex h-[17.22px] max-h-[17.220338821411133px] min-h-[17.220338821411133px] shrink-0 content-stretch items-center justify-center gap-[2.691px] overflow-clip rounded-[8.61px] px-[5.381px] py-[3.229px]"
-                                      data-name="Button"
-                                    >
-                                      <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b] not-italic">
+                                    <div className="relative flex h-[17.22px] max-h-[17.220338821411133px] min-h-[17.220338821411133px] shrink-0 content-stretch items-center justify-center gap-[2.691px] overflow-clip rounded-[8.61px] px-[5.381px] py-[3.229px]">
+                                      <p className="relative shrink-0 text-[7.534px] leading-[10.763px] font-medium text-[#18181b]">
                                         Next
                                       </p>
-                                      <div
-                                        className="relative size-[8.61px] shrink-0 overflow-clip"
-                                        data-name="chevron-right"
-                                      >
+                                      <div className="relative size-[8.61px] shrink-0 overflow-clip">
                                         <div className="absolute inset-[17.19%_29.69%_17.19%_32.81%] flex items-center justify-center">
                                           <div className="h-[3.229px] w-[5.65px] flex-none -rotate-90">
-                                            <div className="relative size-full" data-name="icon">
+                                            <div className="relative size-full">
                                               <svg
                                                 className="absolute block size-full"
                                                 fill="none"
@@ -2375,22 +1790,16 @@ function DesignSystemPreviewCard() {
           className="pointer-events-none absolute inset-0 rounded-[22px] border border-solid border-[#e4e4e7]"
         />
       </div>
-      <div
-        className="absolute top-[111px] left-[39.08px] flex w-[161.366px] flex-col content-stretch items-start gap-[7.172px] rounded-[24px] px-[7.172px] pt-[24px] pb-[10.758px]"
-        data-name="List"
-      >
+      <div className="absolute top-[111px] left-[39.08px] flex w-[161.366px] flex-col content-stretch items-start gap-[7.172px] rounded-3xl px-[7.172px] pt-[24px] pb-[10.758px]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-[24px] border-[0.756px] border-solid border-[#e4e4e7]"
+          className="pointer-events-none absolute inset-0 rounded-3xl border-[0.756px] border-solid border-[#e4e4e7]"
         />
-        <div className="relative w-full shrink-0 rounded-[6.275px]" data-name="div.flex">
+        <div className="relative w-full shrink-0 rounded-[6.275px]">
           <div className="flex size-full flex-row items-center">
             <div className="relative isolate flex w-full content-stretch items-center justify-between px-[1.793px] py-[3.586px]">
               <div className="relative z-[2] flex shrink-0 content-stretch items-center gap-[5.379px]">
-                <div
-                  className="relative size-[16.137px] shrink-0 rounded-[4481.944px]"
-                  data-name="Avatar"
-                >
+                <div className="relative size-[16.137px] shrink-0 rounded-[4481.944px]">
                   <img
                     alt=""
                     className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4481.944px] object-cover"
@@ -2399,36 +1808,24 @@ function DesignSystemPreviewCard() {
                     src="/pro/assets/44c96be97f44bbf56a03ea1e68d90d398750ac5e.png"
                   />
                 </div>
-                <div
-                  className="relative flex shrink-0 flex-col content-stretch items-start"
-                  data-name="div.flex"
-                >
-                  <div className="relative w-full shrink-0" data-name="p.text-small">
+                <div className="relative flex shrink-0 flex-col content-stretch items-start">
+                  <div className="relative w-full shrink-0">
                     <div className="relative flex w-full flex-col content-stretch items-start pr-[15.428px]">
-                      <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+                      <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                         <p className="leading-[1.43]">Calvin Rice</p>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                    data-name="p.text-tiny"
-                  >
-                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                  <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                       <p className="leading-[1.34]">calvin@email.com</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                className="relative z-[1] flex max-h-[16.1366103887558px] min-h-[16.1366103887558px] shrink-0 content-stretch items-center justify-center overflow-clip rounded-[10.758px] bg-[#ebebec] p-[4.482px] backdrop-blur-[0px]"
-                data-name="Button"
-              >
-                <div
-                  className="relative size-[7.172px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=lines sort filter"
-                >
-                  <div className="absolute inset-[15.62%_6.25%_15.63%_6.25%]" data-name="icon">
+              <div className="relative z-[1] flex max-h-[16.1366103887558px] min-h-[16.1366103887558px] shrink-0 content-stretch items-center justify-center overflow-clip rounded-[10.758px] bg-[#ebebec] p-[4.482px] backdrop-blur-[0px]">
+                <div className="relative size-[7.172px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[15.62%_6.25%_15.63%_6.25%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -2449,33 +1846,18 @@ function DesignSystemPreviewCard() {
             </div>
           </div>
         </div>
-        <div
-          className="relative flex h-[16.137px] w-[147.022px] min-w-[51.995744585990906px] shrink-0 flex-col content-stretch items-start gap-[1.793px]"
-          data-name="SearchField"
-        >
-          <div
-            className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-            data-name="container"
-          >
-            <div
-              className="relative h-[16.137px] w-full shrink-0 rounded-[5.379px] bg-white backdrop-blur-[0px]"
-              data-name="Input"
-            >
+        <div className="relative flex h-[16.137px] w-[147.022px] min-w-[51.995744585990906px] shrink-0 flex-col content-stretch items-start gap-[1.793px]">
+          <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+            <div className="relative h-[16.137px] w-full shrink-0 rounded-[5.379px] bg-white backdrop-blur-[0px]">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 rounded-[5.379px] border-[0.448px] border-solid border-[rgba(222,222,224,0)] shadow-[0px_0.896px_1.793px_0px_rgba(0,0,0,0.04),0px_0.448px_0.896px_0px_rgba(0,0,0,0.06),0px_0px_0.448px_0px_rgba(0,0,0,0.06)]"
               />
               <div className="flex size-full flex-row items-center">
                 <div className="relative flex size-full content-stretch items-center gap-[2.689px] px-[5.379px] py-[3.586px]">
-                  <div
-                    className="relative flex shrink-0 content-stretch items-center"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[7.172px] shrink-0 overflow-clip"
-                      data-name="magnifier"
-                    >
-                      <div className="absolute inset-[6.25%_7.81%_7.81%_6.25%]" data-name="icon">
+                  <div className="relative flex shrink-0 content-stretch items-center">
+                    <div className="relative size-[7.172px] shrink-0 overflow-clip">
+                      <div className="absolute inset-[6.25%_7.81%_7.81%_6.25%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -2493,11 +1875,8 @@ function DesignSystemPreviewCard() {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.482px] overflow-clip"
-                    data-name="placeholderWrapper"
-                  >
-                    <p className="relative shrink-0 text-[6.28px] leading-[8.965px] font-normal text-[#71717a] not-italic">
+                  <div className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[4.482px] overflow-clip">
+                    <p className="relative shrink-0 text-[6.28px] leading-[8.965px] font-normal text-[#71717a]">
                       Search...
                     </p>
                   </div>
@@ -2507,16 +1886,10 @@ function DesignSystemPreviewCard() {
             </div>
           </div>
         </div>
-        <div
-          className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[0.896px]"
-          data-name="Listbox"
-        >
-          <div className="relative w-full shrink-0 rounded-[7.172px]" data-name="container">
+        <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[0.896px]">
+          <div className="relative w-full shrink-0 rounded-[7.172px]">
             <div className="relative isolate flex w-full content-stretch items-start gap-[5.379px] p-[5.379px]">
-              <div
-                className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]"
-                data-name="Avatar"
-              >
+              <div className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]">
                 <img
                   alt=""
                   className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4481.944px] object-cover"
@@ -2525,46 +1898,34 @@ function DesignSystemPreviewCard() {
                   src="/pro/assets/4486179cb0486eb409aab3366c61e47b82b036a2.png"
                 />
               </div>
-              <div
-                className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]"
-                data-name="container"
-              >
-                <div
-                  className="relative flex w-full shrink-0 content-stretch items-center justify-between"
-                  data-name="container"
-                >
-                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+              <div className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]">
+                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
+                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                     <p className="leading-[1.43]">Michael Curry</p>
                   </div>
                   <div className="relative flex shrink-0 content-stretch items-center gap-[3.586px]">
-                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                       <p className="leading-[1.34]">10:21 AM</p>
                     </div>
                     <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
-                <div
-                  className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b]">
                     <p className="overflow-hidden leading-[1.34]">{`Flash Sale for 48 Hours Only `}</p>
                   </div>
                 </div>
-                <div className="relative w-full shrink-0" data-name="container">
+                <div className="relative w-full shrink-0">
                   <div className="relative flex w-full flex-col content-stretch items-start pr-[17.93px]">
-                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                       <p className="overflow-hidden leading-[1.34]">
                         Hi Calvin, I’m excited to share that we’re running a flash sale
                       </p>
                     </div>
                   </div>
                 </div>
-                <div
-                  className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40"
-                  data-name="star"
-                >
-                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]" data-name="icon">
+                <div className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40">
+                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -2584,12 +1945,9 @@ function DesignSystemPreviewCard() {
               </div>
             </div>
           </div>
-          <div className="relative w-full shrink-0 rounded-[7.172px]" data-name="container">
+          <div className="relative w-full shrink-0 rounded-[7.172px]">
             <div className="relative isolate flex w-full content-stretch items-start gap-[5.379px] p-[5.379px]">
-              <div
-                className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]"
-                data-name="Avatar"
-              >
+              <div className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]">
                 <img
                   alt=""
                   className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4481.944px] object-cover"
@@ -2598,14 +1956,8 @@ function DesignSystemPreviewCard() {
                   src="/pro/assets/efa596a610948eb130b4e268d3336c363453f1eb.png"
                 />
               </div>
-              <div
-                className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]"
-                data-name="container"
-              >
-                <div
-                  className="relative flex w-full shrink-0 content-stretch items-center justify-between leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic"
-                  data-name="container"
-                >
+              <div className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]">
+                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                   <div className="relative flex shrink-0 flex-col justify-center text-[6.275px]">
                     <p className="leading-[1.43]">David Lee</p>
                   </div>
@@ -2613,17 +1965,14 @@ function DesignSystemPreviewCard() {
                     <p className="leading-[1.34]">Dec 14</p>
                   </div>
                 </div>
-                <div
-                  className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                     <p className="overflow-hidden leading-[1.34]">Weekly Team Meeting Reminder</p>
                   </div>
                 </div>
-                <div className="relative w-full shrink-0" data-name="container">
+                <div className="relative w-full shrink-0">
                   <div className="relative flex w-full flex-col content-stretch items-start pr-[17.93px]">
-                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                       <p className="overflow-hidden leading-[1.34]">
                         Good afternoon everyone, just a reminder about our weekly team meeting
                         scheduled for Thursday.
@@ -2631,11 +1980,8 @@ function DesignSystemPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-90"
-                  data-name="star"
-                >
-                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]" data-name="icon">
+                <div className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-90">
+                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -2653,12 +1999,9 @@ function DesignSystemPreviewCard() {
               </div>
             </div>
           </div>
-          <div className="relative w-full shrink-0 rounded-[7.172px]" data-name="container">
+          <div className="relative w-full shrink-0 rounded-[7.172px]">
             <div className="relative isolate flex w-full content-stretch items-start gap-[5.379px] p-[5.379px]">
-              <div
-                className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]"
-                data-name="Avatar"
-              >
+              <div className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 rounded-[4481.944px]"
@@ -2679,35 +2022,26 @@ function DesignSystemPreviewCard() {
                   />
                 </div>
               </div>
-              <div
-                className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]"
-                data-name="container"
-              >
-                <div
-                  className="relative flex w-full shrink-0 content-stretch items-center justify-between"
-                  data-name="container"
-                >
-                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+              <div className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]">
+                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
+                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                     <p className="leading-[1.43]">Emma Stone</p>
                   </div>
                   <div className="relative flex shrink-0 content-stretch items-center gap-[3.586px]">
-                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                       <p className="leading-[1.34]">Dec 12</p>
                     </div>
                     <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
-                <div
-                  className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b]">
                     <p className="overflow-hidden leading-[1.34]">Quarterly Budget Review</p>
                   </div>
                 </div>
-                <div className="relative w-full shrink-0" data-name="container">
+                <div className="relative w-full shrink-0">
                   <div className="relative flex w-full flex-col content-stretch items-start pr-[17.93px]">
-                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                       <p className="overflow-hidden leading-[1.34]">
                         Hi Team, please prepare your reports for the upcoming quarterly budget
                         review.
@@ -2715,11 +2049,8 @@ function DesignSystemPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40"
-                  data-name="star"
-                >
-                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]" data-name="icon">
+                <div className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40">
+                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -2739,12 +2070,9 @@ function DesignSystemPreviewCard() {
               </div>
             </div>
           </div>
-          <div className="relative w-full shrink-0 rounded-[7.172px]" data-name="container">
+          <div className="relative w-full shrink-0 rounded-[7.172px]">
             <div className="relative isolate flex w-full content-stretch items-start gap-[5.379px] p-[5.379px]">
-              <div
-                className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]"
-                data-name="Avatar"
-              >
+              <div className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]">
                 <img
                   alt=""
                   className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4481.944px] object-cover"
@@ -2753,14 +2081,8 @@ function DesignSystemPreviewCard() {
                   src="/pro/assets/b4b4dd73793d58ae6e29498254af973243738902.png"
                 />
               </div>
-              <div
-                className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]"
-                data-name="container"
-              >
-                <div
-                  className="relative flex w-full shrink-0 content-stretch items-center justify-between leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic"
-                  data-name="container"
-                >
+              <div className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]">
+                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                   <div className="relative flex shrink-0 flex-col justify-center text-[6.275px]">
                     <p className="leading-[1.43]">Liam Brown</p>
                   </div>
@@ -2768,17 +2090,14 @@ function DesignSystemPreviewCard() {
                     <p className="leading-[1.34]">Dec 12</p>
                   </div>
                 </div>
-                <div
-                  className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                     <p className="overflow-hidden leading-[1.34]">Feedback Request on Project X</p>
                   </div>
                 </div>
-                <div className="relative w-full shrink-0" data-name="container">
+                <div className="relative w-full shrink-0">
                   <div className="relative flex w-full flex-col content-stretch items-start pr-[17.93px]">
-                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                       <p className="overflow-hidden leading-[1.34]">
                         Hey everyone, I would love your feedback on Project X by the end of the
                         week.
@@ -2786,11 +2105,8 @@ function DesignSystemPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40"
-                  data-name="star"
-                >
-                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]" data-name="icon">
+                <div className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40">
+                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -2810,12 +2126,9 @@ function DesignSystemPreviewCard() {
               </div>
             </div>
           </div>
-          <div className="relative w-full shrink-0 rounded-[7.172px]" data-name="container">
+          <div className="relative w-full shrink-0 rounded-[7.172px]">
             <div className="relative isolate flex w-full content-stretch items-start gap-[5.379px] p-[5.379px]">
-              <div
-                className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]"
-                data-name="Avatar"
-              >
+              <div className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]">
                 <img
                   alt=""
                   className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4481.944px] object-cover"
@@ -2824,14 +2137,8 @@ function DesignSystemPreviewCard() {
                   src="/pro/assets/9359cf9d6ef77b16549c368f0d946d2f67b26886.png"
                 />
               </div>
-              <div
-                className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]"
-                data-name="container"
-              >
-                <div
-                  className="relative flex w-full shrink-0 content-stretch items-center justify-between leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic"
-                  data-name="container"
-                >
+              <div className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]">
+                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between leading-[0] font-normal whitespace-nowrap text-[#71717a]">
                   <div className="relative flex shrink-0 flex-col justify-center text-[6.275px]">
                     <p className="leading-[1.43]">Olivia Wang</p>
                   </div>
@@ -2839,17 +2146,14 @@ function DesignSystemPreviewCard() {
                     <p className="leading-[1.34]">Dec 12</p>
                   </div>
                 </div>
-                <div
-                  className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                     <p className="overflow-hidden leading-[1.34]">Office Holiday Party Details</p>
                   </div>
                 </div>
-                <div className="relative w-full shrink-0" data-name="container">
+                <div className="relative w-full shrink-0">
                   <div className="relative flex w-full flex-col content-stretch items-start pr-[17.93px]">
-                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                       <p className="overflow-hidden leading-[1.34]">
                         Hello all, I’m happy to announce the details for our office holiday party
                         next month!
@@ -2857,11 +2161,8 @@ function DesignSystemPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40"
-                  data-name="star"
-                >
-                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]" data-name="icon">
+                <div className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40">
+                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -2881,12 +2182,9 @@ function DesignSystemPreviewCard() {
               </div>
             </div>
           </div>
-          <div className="relative w-full shrink-0 rounded-[7.172px]" data-name="container">
+          <div className="relative w-full shrink-0 rounded-[7.172px]">
             <div className="relative isolate flex w-full content-stretch items-start gap-[5.379px] p-[5.379px]">
-              <div
-                className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]"
-                data-name="Avatar"
-              >
+              <div className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]">
                 <img
                   alt=""
                   className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4481.944px] object-cover"
@@ -2895,46 +2193,34 @@ function DesignSystemPreviewCard() {
                   src="/pro/assets/765bd204eb09836b55151b158113a47ddb0c6ec0.png"
                 />
               </div>
-              <div
-                className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]"
-                data-name="container"
-              >
-                <div
-                  className="relative flex w-full shrink-0 content-stretch items-center justify-between"
-                  data-name="container"
-                >
-                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+              <div className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]">
+                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
+                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                     <p className="leading-[1.43]">Michael Smith</p>
                   </div>
                   <div className="relative flex shrink-0 content-stretch items-center gap-[3.586px]">
-                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                       <p className="leading-[1.34]">Nov 27</p>
                     </div>
                     <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
-                <div
-                  className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b]">
                     <p className="overflow-hidden leading-[1.34]">Year-End Review Meeting</p>
                   </div>
                 </div>
-                <div className="relative w-full shrink-0" data-name="container">
+                <div className="relative w-full shrink-0">
                   <div className="relative flex w-full flex-col content-stretch items-start pr-[17.93px]">
-                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                       <p className="overflow-hidden leading-[1.34]">
                         Let’s discuss our accomplishments and set goals for the upcoming year.
                       </p>
                     </div>
                   </div>
                 </div>
-                <div
-                  className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40"
-                  data-name="star"
-                >
-                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]" data-name="icon">
+                <div className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40">
+                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -2954,12 +2240,9 @@ function DesignSystemPreviewCard() {
               </div>
             </div>
           </div>
-          <div className="relative w-full shrink-0 rounded-[7.172px]" data-name="container">
+          <div className="relative w-full shrink-0 rounded-[7.172px]">
             <div className="relative isolate flex w-full content-stretch items-start gap-[5.379px] p-[5.379px]">
-              <div
-                className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]"
-                data-name="Avatar"
-              >
+              <div className="relative z-[2] size-[16.137px] shrink-0 rounded-[4481.944px]">
                 <img
                   alt=""
                   className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[4481.944px] object-cover"
@@ -2968,35 +2251,26 @@ function DesignSystemPreviewCard() {
                   src="/pro/assets/765bd204eb09836b55151b158113a47ddb0c6ec0.png"
                 />
               </div>
-              <div
-                className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]"
-                data-name="container"
-              >
-                <div
-                  className="relative flex w-full shrink-0 content-stretch items-center justify-between"
-                  data-name="container"
-                >
-                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+              <div className="relative z-[1] flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start gap-[1.345px]">
+                <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
+                  <div className="relative flex shrink-0 flex-col justify-center text-[6.275px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                     <p className="leading-[1.43]">Sarah Brown</p>
                   </div>
                   <div className="relative flex shrink-0 content-stretch items-center gap-[3.586px]">
-                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+                    <div className="relative flex shrink-0 flex-col justify-center text-[5.379px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
                       <p className="leading-[1.34]">Jan 10</p>
                     </div>
                     <div className="size-[2.689px] shrink-0 rounded-[3.586px] bg-accent" />
                   </div>
                 </div>
-                <div
-                  className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+                  <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-medium text-ellipsis whitespace-nowrap text-[#18181b]">
                     <p className="overflow-hidden leading-[1.34]">Health and Wellness Workshop</p>
                   </div>
                 </div>
-                <div className="relative w-full shrink-0" data-name="container">
+                <div className="relative w-full shrink-0">
                   <div className="relative flex w-full flex-col content-stretch items-start pr-[17.93px]">
-                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a] not-italic">
+                    <div className="relative flex w-full shrink-0 flex-col justify-center overflow-hidden text-[5.379px] leading-[0] font-normal text-ellipsis whitespace-nowrap text-[#71717a]">
                       <p className="overflow-hidden leading-[1.34]">
                         Don’t miss our upcoming workshop focused on improving workplace wellness and
                         productivity.
@@ -3004,11 +2278,8 @@ function DesignSystemPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40"
-                  data-name="star"
-                >
-                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]" data-name="icon">
+                <div className="absolute right-[107.58px] bottom-[-7.52px] size-[7.172px] overflow-clip opacity-40">
+                  <div className="absolute inset-[0.13%_2.19%_8.19%_2.19%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -3031,30 +2302,22 @@ function DesignSystemPreviewCard() {
         </div>
         <div className="absolute top-[7px] left-[calc(50%+0.24px)] h-[12px] w-[48px] -translate-x-1/2 rounded-[999px] bg-[#71717a] opacity-10" />
       </div>
-      <p className="absolute top-[23px] left-[23px] text-[14px] leading-[1.43] font-medium text-foreground not-italic">
+      <p className="absolute top-[23px] left-[23px] text-sm leading-[1.43] font-medium text-foreground">
         Start with templates and blocks
       </p>
-      <p className="absolute top-[47px] left-[calc(50%-304px)] w-[338px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+      <p className="absolute top-[47px] left-[calc(50%-304px)] w-[338px] text-xs leading-[1.34] font-normal whitespace-pre-wrap text-muted">
         Skip the setup. Launch instantly with full-featured templates like email, financial, and AI
         chat interfaces.
       </p>
-      <div
-        className="absolute bottom-[-1px] left-1/2 h-[36px] w-[656px] -translate-x-1/2"
-        data-name="ScrollShadow"
-      >
+      <div className="absolute bottom-[-1px] left-1/2 h-[36px] w-[656px] -translate-x-1/2">
         <div
           className="absolute inset-0 bg-[rgba(245,245,245,0.7)] mask-intersect mask-alpha mask-size-[100%_100%] mask-no-clip mask-position-[0px_0px] mask-no-repeat backdrop-blur-[5px]"
-          data-name="blur"
           style={{maskImage: `url('${imgBlur5}')`}}
         />
       </div>
-      <div
-        className="absolute bottom-[-1px] left-1/2 h-[36px] w-[656px] -translate-x-1/2"
-        data-name="ScrollShadow"
-      >
+      <div className="absolute bottom-[-1px] left-1/2 h-[36px] w-[656px] -translate-x-1/2">
         <div
           className="absolute inset-0 bg-[rgba(245,245,245,0.7)] mask-intersect mask-alpha mask-size-[100%_100%] mask-no-clip mask-position-[0px_0px] mask-no-repeat backdrop-blur-[5px]"
-          data-name="blur"
           style={{maskImage: `url('${imgBlur5}')`}}
         />
       </div>
@@ -3068,10 +2331,9 @@ function DesignSystemPreviewCard() {
         }
       >
         <div className="flex-none -rotate-90">
-          <div className="relative h-[40px] w-[279px]" data-name="ScrollShadow">
+          <div className="relative h-[40px] w-[279px]">
             <div
               className="absolute inset-0 bg-[rgba(245,245,245,0.7)] mask-intersect mask-alpha mask-size-[100%_100%] mask-no-clip mask-position-[0px_0px] mask-no-repeat backdrop-blur-[5px]"
-              data-name="blur"
               style={{maskImage: `url('${imgBlur6}')`}}
             />
           </div>

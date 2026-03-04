@@ -6,10 +6,10 @@ function DeepCustomizationCard() {
   return (
     <div className="relative col-span-3 h-[400px] overflow-clip rounded-[24px] border border-solid border-border">
       <div className="flex flex-col items-center px-10 pt-[23px]">
-        <p className="text-center text-[14px] leading-[1.43] font-medium text-foreground not-italic">
+        <p className="text-center text-[14px] leading-[1.43] font-medium text-foreground">
           Deep customization
         </p>
-        <p className="max-w-[403px] text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+        <p className="max-w-[403px] text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted">
           Total control over your design system. Tweak variables, fine-tune animations, and every
           detail to fit your exact brand.
         </p>
@@ -71,7 +71,7 @@ function DeepCustomizationCard() {
             data-name="container"
           >
             <div className="relative w-full shrink-0" data-name="_CardHeader">
-              <div className="relative flex w-full flex-col content-stretch items-start gap-[2.98px] pr-[17.878px] leading-[0] not-italic">
+              <div className="relative flex w-full flex-col content-stretch items-start gap-[2.98px] pr-[17.878px] leading-[0]">
                 <div
                   className="relative flex w-full shrink-0 flex-col content-stretch items-start font-medium text-[#18181b]"
                   data-name="container"
@@ -98,7 +98,7 @@ function DeepCustomizationCard() {
               data-name="card-footer"
             >
               <div className="relative min-h-px min-w-px flex-[1_0_0]" data-name="container">
-                <div className="relative flex w-full flex-col content-stretch items-start pr-[17.878px] leading-[0] not-italic">
+                <div className="relative flex w-full flex-col content-stretch items-start pr-[17.878px] leading-[0]">
                   <div className="relative flex w-full shrink-0 flex-col justify-center text-[10.43px] font-medium text-[#18181b]">
                     <p className="leading-[1.43] whitespace-pre-wrap">$36,799</p>
                   </div>
@@ -111,7 +111,7 @@ function DeepCustomizationCard() {
                 className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-accent px-[10.429px] py-[5.959px]"
                 data-name="Button"
               >
-                <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc] not-italic">
+                <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc]">
                   Buy now
                 </p>
               </div>
@@ -164,7 +164,7 @@ function DeepCustomizationCard() {
                     </div>
                   </div>
                 </div>
-                <div className="relative flex w-[min-content] min-w-full shrink-0 flex-col justify-center text-center text-[11.92px] leading-[0] font-medium text-[#18181b] not-italic">
+                <div className="relative flex w-[min-content] min-w-full shrink-0 flex-col justify-center text-center text-[11.92px] leading-[0] font-medium text-[#18181b]">
                   <p className="leading-[normal] whitespace-pre-wrap">Verify your email</p>
                 </div>
               </div>
@@ -177,7 +177,7 @@ function DeepCustomizationCard() {
                 className="relative flex w-full shrink-0 content-stretch items-center justify-center"
                 data-name="DescriptionModal"
               >
-                <p className="relative min-h-px min-w-px flex-[1_0_0] text-center text-[10.43px] leading-[1.43] font-normal whitespace-pre-wrap text-[#71717a] not-italic">{`We've sent a code to name@email.com`}</p>
+                <p className="relative min-h-px min-w-px flex-[1_0_0] text-center text-[10.43px] leading-[1.43] font-normal whitespace-pre-wrap text-[#71717a]">{`We've sent a code to name@email.com`}</p>
               </div>
               <div
                 className="relative flex shrink-0 flex-col content-stretch items-start"
@@ -194,7 +194,7 @@ function DeepCustomizationCard() {
                     <div className="relative w-full shrink-0" data-name="Label">
                       <div className="flex size-full flex-row items-center">
                         <div className="relative flex w-full flex-wrap content-center items-center gap-[2.9796621799468994px_2.98px] pr-[5.959px]">
-                          <p className="relative shrink-0 text-[10.43px] leading-[1.43] font-medium text-[#18181b] not-italic">
+                          <p className="relative shrink-0 text-[10.43px] leading-[1.43] font-medium text-[#18181b]">
                             Verify account
                           </p>
                         </div>
@@ -203,7 +203,7 @@ function DeepCustomizationCard() {
                     <div className="relative w-full shrink-0" data-name="descriptionWrapper">
                       <div className="flex size-full flex-row items-center">
                         <div className="relative flex w-full content-stretch items-center px-[1.49px] py-[2.98px]">
-                          <p className="relative min-h-px min-w-px flex-[1_0_0] text-[10.43px] leading-[1.43] font-normal whitespace-pre-wrap text-[#71717a] not-italic">{`We’ve sent a code to a****@gmail.com `}</p>
+                          <p className="relative min-h-px min-w-px flex-[1_0_0] text-[10.43px] leading-[1.43] font-normal whitespace-pre-wrap text-[#71717a]">{`We’ve sent a code to a****@gmail.com `}</p>
                         </div>
                       </div>
                     </div>
@@ -224,7 +224,7 @@ function DeepCustomizationCard() {
                         className="relative flex w-[10.429px] shrink-0 content-stretch items-center justify-center"
                         data-name="valueWrapper"
                       >
-                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] not-italic opacity-0">
+                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] opacity-0">
                           5
                         </p>
                       </div>
@@ -242,7 +242,7 @@ function DeepCustomizationCard() {
                         className="relative flex w-[10.429px] shrink-0 content-stretch items-center justify-center"
                         data-name="valueWrapper"
                       >
-                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] not-italic opacity-0">
+                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] opacity-0">
                           5
                         </p>
                       </div>
@@ -260,7 +260,7 @@ function DeepCustomizationCard() {
                         className="relative flex w-[10.429px] shrink-0 content-stretch items-center justify-center"
                         data-name="valueWrapper"
                       >
-                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] not-italic opacity-0">
+                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] opacity-0">
                           5
                         </p>
                       </div>
@@ -319,7 +319,7 @@ function DeepCustomizationCard() {
                         className="relative flex w-[10.429px] shrink-0 content-stretch items-center justify-center"
                         data-name="valueWrapper"
                       >
-                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] not-italic opacity-0">
+                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] opacity-0">
                           5
                         </p>
                       </div>
@@ -337,7 +337,7 @@ function DeepCustomizationCard() {
                         className="relative flex w-[10.429px] shrink-0 content-stretch items-center justify-center"
                         data-name="valueWrapper"
                       >
-                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] not-italic opacity-0">
+                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] opacity-0">
                           5
                         </p>
                       </div>
@@ -355,7 +355,7 @@ function DeepCustomizationCard() {
                         className="relative flex w-[10.429px] shrink-0 content-stretch items-center justify-center"
                         data-name="valueWrapper"
                       >
-                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] not-italic opacity-0">
+                        <p className="absolute bottom-[9.68px] left-1/2 -translate-x-1/2 translate-y-full text-center text-[10.06px] leading-[13.408px] font-semibold tracking-[-0.2012px] text-[#18181b] opacity-0">
                           5
                         </p>
                       </div>
@@ -364,7 +364,7 @@ function DeepCustomizationCard() {
                   </div>
                   <div className="relative w-full shrink-0" data-name="descriptionWrapper">
                     <div className="flex size-full flex-row items-center">
-                      <div className="relative flex w-full content-stretch items-center gap-[3.725px] px-[1.49px] py-[2.98px] text-[10.43px] not-italic">
+                      <div className="relative flex w-full content-stretch items-center gap-[3.725px] px-[1.49px] py-[2.98px] text-[10.43px]">
                         <p className="relative shrink-0 leading-[1.43] font-normal text-[#71717a]">
                           Didn’t receive a code?
                         </p>
@@ -386,7 +386,7 @@ function DeepCustomizationCard() {
               className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#ebebec] px-[10.429px] py-[5.959px] backdrop-blur-[0px]"
               data-name="ButtonTwo"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b] not-italic">
+              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b]">
                 Cancel
               </p>
             </div>
@@ -394,7 +394,7 @@ function DeepCustomizationCard() {
               className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-accent px-[10.429px] py-[5.959px]"
               data-name="ButtonOne"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc] not-italic">
+              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc]">
                 Verify
               </p>
             </div>
@@ -447,7 +447,7 @@ function DeepCustomizationCard() {
                     </div>
                   </div>
                 </div>
-                <div className="relative flex w-[min-content] min-w-full shrink-0 flex-col justify-center text-center text-[11.92px] leading-[0] font-medium text-[#18181b] not-italic">
+                <div className="relative flex w-[min-content] min-w-full shrink-0 flex-col justify-center text-center text-[11.92px] leading-[0] font-medium text-[#18181b]">
                   <p className="leading-[normal] whitespace-pre-wrap">Create an account</p>
                 </div>
               </div>
@@ -460,7 +460,7 @@ function DeepCustomizationCard() {
                 className="relative flex w-full shrink-0 content-stretch items-center justify-center"
                 data-name="DescriptionModal"
               >
-                <p className="relative min-h-px min-w-px flex-[1_0_0] text-center text-[10.43px] leading-[1.43] font-normal whitespace-pre-wrap text-[#71717a] not-italic">
+                <p className="relative min-h-px min-w-px flex-[1_0_0] text-center text-[10.43px] leading-[1.43] font-normal whitespace-pre-wrap text-[#71717a]">
                   Start your free 7-day trial. Cancel anytime.
                 </p>
               </div>
@@ -470,7 +470,7 @@ function DeepCustomizationCard() {
               >
                 <div className="relative w-full shrink-0" data-name="Label">
                   <div className="flex size-full flex-row items-center">
-                    <div className="relative flex w-full flex-wrap content-center items-center gap-[2.9796621799468994px_2.98px] pr-[5.959px] text-[10.43px] leading-[1.43] font-medium not-italic">
+                    <div className="relative flex w-full flex-wrap content-center items-center gap-[2.9796621799468994px_2.98px] pr-[5.959px] text-[10.43px] leading-[1.43] font-medium">
                       <p className="relative shrink-0 text-[#18181b]">Your name</p>
                       <p className="relative shrink-0 text-[#ff383c]">*</p>
                     </div>
@@ -490,7 +490,7 @@ function DeepCustomizationCard() {
                         className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[7.449px] overflow-clip"
                         data-name="placeholderWrapper"
                       >
-                        <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-normal text-[#71717a] not-italic">
+                        <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-normal text-[#71717a]">
                           John
                         </p>
                       </div>
@@ -504,7 +504,7 @@ function DeepCustomizationCard() {
                       className="relative flex w-full shrink-0 content-stretch items-center justify-center"
                       data-name="DescriptionErrorMessage"
                     >
-                      <p className="relative min-h-px min-w-px flex-[1_0_0] text-[8.94px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a] not-italic">{`We'll never share this with anyone else`}</p>
+                      <p className="relative min-h-px min-w-px flex-[1_0_0] text-[8.94px] leading-[1.34] font-normal whitespace-pre-wrap text-[#71717a]">{`We'll never share this with anyone else`}</p>
                     </div>
                   </div>
                 </div>
@@ -515,7 +515,7 @@ function DeepCustomizationCard() {
               >
                 <div className="flex size-full max-h-[inherit] min-h-[inherit] flex-row items-center justify-center overflow-clip rounded-[inherit]">
                   <div className="relative flex size-full max-h-[inherit] min-h-[inherit] content-stretch items-center justify-center gap-[5.959px] px-[10.429px] py-[5.959px]">
-                    <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc] not-italic">
+                    <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#fcfcfc]">
                       Get Started
                     </p>
                   </div>
@@ -529,7 +529,7 @@ function DeepCustomizationCard() {
                   className="h-[0.745px] min-h-px min-w-px flex-[1_0_0] bg-[#e5e5e5]"
                   data-name="Separator"
                 />
-                <p className="relative shrink-0 text-[8.94px] leading-[1.34] font-medium text-[#737373] not-italic">
+                <p className="relative shrink-0 text-[8.94px] leading-[1.34] font-medium text-[#737373]">
                   OR
                 </p>
                 <div
@@ -641,7 +641,7 @@ function DeepCustomizationCard() {
                       </div>
                     </div>
                   </div>
-                  <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-accent not-italic">
+                  <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-accent">
                     Continue with Google
                   </p>
                   <div
@@ -701,7 +701,7 @@ function DeepCustomizationCard() {
                       </div>
                     </div>
                   </div>
-                  <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b] not-italic">
+                  <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b]">
                     Continue with Apple
                   </p>
                 </div>
@@ -743,7 +743,7 @@ function DeepCustomizationCard() {
             data-name="_CardFooter"
           >
             <div className="relative min-h-px min-w-px flex-[1_0_0]" data-name="container">
-              <div className="relative flex w-full flex-col content-stretch items-start pr-[17.878px] leading-[0] text-[#18181b] not-italic">
+              <div className="relative flex w-full flex-col content-stretch items-start pr-[17.878px] leading-[0] text-[#18181b]">
                 <div className="relative flex w-full shrink-0 flex-col justify-center text-[10.43px] font-medium">
                   <p className="leading-[1.43] whitespace-pre-wrap">NEO</p>
                 </div>
@@ -756,7 +756,7 @@ function DeepCustomizationCard() {
               className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#ebebec] px-[10.429px] py-[5.959px] backdrop-blur-[0px]"
               data-name="Button"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b] not-italic">
+              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b]">
                 Get now
               </p>
             </div>
@@ -769,7 +769,7 @@ function DeepCustomizationCard() {
           <div className="relative w-full shrink-0" data-name="container">
             <div className="flex size-full flex-row items-center">
               <div className="relative flex w-full content-stretch items-center px-[8.939px] pt-[7.449px] pb-[2.98px]">
-                <p className="relative shrink-0 text-[8.94px] leading-[1.34] font-medium text-[#71717a] not-italic">
+                <p className="relative shrink-0 text-[8.94px] leading-[1.34] font-medium text-[#71717a]">
                   Actions
                 </p>
               </div>
@@ -814,7 +814,7 @@ function DeepCustomizationCard() {
                     </div>
                   </div>
                   <div
-                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap not-italic"
+                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap"
                     data-name="container"
                   >
                     <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium text-[#18181b]">
@@ -836,11 +836,11 @@ function DeepCustomizationCard() {
                         className="relative flex shrink-0 content-stretch items-start justify-center px-[0.745px]"
                         data-name="Abbr"
                       >
-                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                           <p className="leading-[1.43]">⌘</p>
                         </div>
                       </div>
-                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                         <p className="leading-[1.43]">N</p>
                       </div>
                     </div>
@@ -883,7 +883,7 @@ function DeepCustomizationCard() {
                     </div>
                   </div>
                   <div
-                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap not-italic"
+                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap"
                     data-name="container"
                   >
                     <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium text-[#18181b]">
@@ -905,11 +905,11 @@ function DeepCustomizationCard() {
                         className="relative flex shrink-0 content-stretch items-start justify-center px-[0.745px]"
                         data-name="Abbr"
                       >
-                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                           <p className="leading-[1.43]">⌘</p>
                         </div>
                       </div>
-                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                         <p className="leading-[1.43]">L</p>
                       </div>
                     </div>
@@ -955,7 +955,7 @@ function DeepCustomizationCard() {
                     </div>
                   </div>
                   <div
-                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap not-italic"
+                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap"
                     data-name="container"
                   >
                     <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium text-[#18181b]">
@@ -977,11 +977,11 @@ function DeepCustomizationCard() {
                         className="relative flex shrink-0 content-stretch items-start justify-center px-[0.745px]"
                         data-name="Abbr"
                       >
-                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                           <p className="leading-[1.43]">⌘</p>
                         </div>
                       </div>
-                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                         <p className="leading-[1.43]">E</p>
                       </div>
                     </div>
@@ -1038,7 +1038,7 @@ function DeepCustomizationCard() {
           <div className="relative w-full shrink-0" data-name="container">
             <div className="flex size-full flex-row items-center">
               <div className="relative flex w-full content-stretch items-center px-[8.939px] pt-[7.449px] pb-[2.98px]">
-                <p className="relative shrink-0 text-[8.94px] leading-[1.34] font-medium text-[#71717a] not-italic">
+                <p className="relative shrink-0 text-[8.94px] leading-[1.34] font-medium text-[#71717a]">
                   Danger zone
                 </p>
               </div>
@@ -1083,7 +1083,7 @@ function DeepCustomizationCard() {
                     </div>
                   </div>
                   <div
-                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap not-italic"
+                    className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start whitespace-pre-wrap"
                     data-name="container"
                   >
                     <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium text-[#ff383c]">
@@ -1105,11 +1105,11 @@ function DeepCustomizationCard() {
                         className="relative flex shrink-0 content-stretch items-start justify-center px-[0.745px]"
                         data-name="Abbr"
                       >
-                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                        <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                           <p className="leading-[1.43]">⌘⇧</p>
                         </div>
                       </div>
-                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+                      <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
                         <p className="leading-[1.43]">K</p>
                       </div>
                     </div>
@@ -1152,7 +1152,7 @@ function DeepCustomizationCard() {
           <div className="relative min-h-px w-full min-w-px flex-[1_0_0]" data-name="_CardHeader">
             <div className="relative flex size-full flex-col content-stretch items-start gap-[2.98px] pr-[17.878px]">
               <div
-                className="relative flex w-full shrink-0 flex-col content-stretch items-start leading-[0] font-medium text-[#71717a] not-italic"
+                className="relative flex w-full shrink-0 flex-col content-stretch items-start leading-[0] font-medium text-[#71717a]"
                 data-name="container"
               >
                 <div className="relative flex w-full shrink-0 flex-col justify-center text-[8.94px]">
@@ -1179,7 +1179,7 @@ function DeepCustomizationCard() {
             data-name="_CardFooter"
           >
             <div className="relative min-h-px min-w-px flex-[1_0_0]" data-name="container">
-              <div className="relative flex w-full flex-col content-stretch items-start pr-[17.878px] leading-[0] not-italic">
+              <div className="relative flex w-full flex-col content-stretch items-start pr-[17.878px] leading-[0]">
                 <div className="relative flex w-full shrink-0 flex-col justify-center text-[10.43px] font-medium text-[#18181b]">
                   <p className="leading-[1.43] whitespace-pre-wrap">Available soon</p>
                 </div>
@@ -1192,7 +1192,7 @@ function DeepCustomizationCard() {
               className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#ebebec] px-[10.429px] py-[5.959px] backdrop-blur-[0px]"
               data-name="Button"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b] not-italic">
+              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b]">
                 Notify me
               </p>
             </div>
@@ -1223,11 +1223,11 @@ function DeepCustomizationCard() {
                 className="relative flex w-full shrink-0 flex-col content-stretch items-start"
                 data-name="container"
               >
-                <div className="relative flex w-full shrink-0 flex-col justify-center text-[10.43px] leading-[0] font-medium text-[#18181b] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col justify-center text-[10.43px] leading-[0] font-medium text-[#18181b]">
                   <p className="leading-[1.43] whitespace-pre-wrap">Indie Hackers</p>
                 </div>
               </div>
-              <div className="relative flex w-full shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal text-[#71717a] not-italic">
+              <div className="relative flex w-full shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal text-[#71717a]">
                 <p className="leading-[1.34] whitespace-pre-wrap">148 members</p>
               </div>
             </div>
@@ -1248,7 +1248,7 @@ function DeepCustomizationCard() {
                 src="/pro/assets/765bd204eb09836b55151b158113a47ddb0c6ec0.png"
               />
             </div>
-            <div className="relative flex shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic">
+            <div className="relative flex shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal whitespace-nowrap text-[#71717a]">
               <p className="leading-[1.34]">By John</p>
             </div>
           </div>
@@ -1278,11 +1278,11 @@ function DeepCustomizationCard() {
                 className="relative flex w-full shrink-0 flex-col content-stretch items-start"
                 data-name="container"
               >
-                <div className="relative flex w-full shrink-0 flex-col justify-center text-[10.43px] leading-[0] font-medium text-[#18181b] not-italic">
+                <div className="relative flex w-full shrink-0 flex-col justify-center text-[10.43px] leading-[0] font-medium text-[#18181b]">
                   <p className="leading-[1.43] whitespace-pre-wrap">AI Builders</p>
                 </div>
               </div>
-              <div className="relative flex w-full shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal text-[#71717a] not-italic">
+              <div className="relative flex w-full shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal text-[#71717a]">
                 <p className="leading-[1.34] whitespace-pre-wrap">362 members</p>
               </div>
             </div>
@@ -1303,7 +1303,7 @@ function DeepCustomizationCard() {
                 src="/pro/assets/7c58fdbb28ec1f7eb60691287f2865cb9766f5ae.png"
               />
             </div>
-            <div className="relative flex shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal whitespace-nowrap text-[#71717a] not-italic">
+            <div className="relative flex shrink-0 flex-col justify-center text-[8.94px] leading-[0] font-normal whitespace-nowrap text-[#71717a]">
               <p className="leading-[1.34]">By Martha</p>
             </div>
           </div>
@@ -1337,7 +1337,7 @@ function DeepCustomizationCard() {
             </div>
           </div>
           <div className="relative w-full shrink-0" data-name="_CardHeader">
-            <div className="relative flex w-full flex-col content-stretch items-start gap-[2.98px] pr-[17.878px] leading-[0] not-italic">
+            <div className="relative flex w-full flex-col content-stretch items-start gap-[2.98px] pr-[17.878px] leading-[0]">
               <div
                 className="relative flex w-full shrink-0 flex-col content-stretch items-start font-medium text-[#18181b]"
                 data-name="container"
@@ -1366,7 +1366,7 @@ function DeepCustomizationCard() {
               className="relative flex shrink-0 content-stretch items-start justify-center gap-[1.49px] px-[1.49px]"
               data-name="Link"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[13.408px] font-medium text-[#18181b] not-italic underline decoration-[#cdcdce] decoration-solid decoration-[10%] [text-decoration-skip-ink:none]">
+              <p className="relative shrink-0 text-[10.43px] leading-[13.408px] font-medium text-[#18181b] underline decoration-[#cdcdce] decoration-solid decoration-[10%] [text-decoration-skip-ink:none]">
                 Go to settings
               </p>
               <div
@@ -1453,7 +1453,7 @@ function DeepCustomizationCard() {
               className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#ebebec] px-[10.429px] py-[5.959px] backdrop-blur-[0px]"
               data-name="Button"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-accent not-italic">
+              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-accent">
                 Share
               </p>
             </div>
@@ -1648,7 +1648,7 @@ function DeepCustomizationCard() {
                   className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                   data-name="container"
                 >
-                  <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                  <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                     Predefined
                   </p>
                 </div>
@@ -1729,7 +1729,7 @@ function DeepCustomizationCard() {
                         <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_1.49px_0.745px_0px_rgba(0,0,0,0.25)]" />
                       </div>
                       <div
-                        className="absolute top-1/2 left-[calc(50%-0.02px)] size-[23.844px] -translate-x-1/2 -translate-y-1/2 rounded-[7450.427px]"
+                        className="deep-swatch-ring-blue absolute top-1/2 left-[calc(50%-0.02px)] size-[23.844px] -translate-x-1/2 -translate-y-1/2 rounded-[7450.427px]"
                         data-name="element"
                       >
                         <div
@@ -1738,15 +1738,26 @@ function DeepCustomizationCard() {
                         />
                       </div>
                     </div>
-                    <div
-                      className="pointer-events-none relative size-[17.883px] shrink-0 rounded-[7450.427px] bg-[#17c964]"
-                      data-name="element"
-                    >
+                    <div className="relative flex shrink-0 content-stretch items-center">
                       <div
-                        aria-hidden="true"
-                        className="absolute inset-0 rounded-[7450.427px] border-[0.745px] border-solid border-[rgba(0,0,0,0.1)]"
-                      />
-                      <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_1.49px_0.745px_0px_rgba(0,0,0,0.25)]" />
+                        className="pointer-events-none relative size-[17.883px] shrink-0 rounded-[7450.427px] bg-[#17c964]"
+                        data-name="element"
+                      >
+                        <div
+                          aria-hidden="true"
+                          className="absolute inset-0 rounded-[7450.427px] border-[0.745px] border-solid border-[rgba(0,0,0,0.1)]"
+                        />
+                        <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_1.49px_0.745px_0px_rgba(0,0,0,0.25)]" />
+                      </div>
+                      <div
+                        className="deep-swatch-ring-green absolute top-1/2 left-[calc(50%-0.02px)] size-[23.844px] -translate-x-1/2 -translate-y-1/2 rounded-[7450.427px] opacity-0"
+                        data-name="element"
+                      >
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 rounded-[7450.427px] border-[1.49px] border-solid border-[#17c964]"
+                        />
+                      </div>
                     </div>
                     <div
                       className="pointer-events-none relative size-[17.883px] shrink-0 rounded-[7450.427px] bg-[#f5a524]"
@@ -1808,7 +1819,7 @@ function DeepCustomizationCard() {
                 className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                 data-name="container"
               >
-                <p className="relative w-full shrink-0 text-[10.432px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                <p className="relative w-full shrink-0 text-[10.432px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                   Auto calc values
                 </p>
               </div>
@@ -1825,12 +1836,12 @@ function DeepCustomizationCard() {
             </div>
             <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[5.961px]">
               <div className="relative flex w-full shrink-0 content-stretch items-center gap-[35.766px]">
-                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b]">
                   Accent
                 </p>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Main
                 </p>
                 <div
@@ -1857,7 +1868,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               0A0A0A
                             </p>
                           </div>
@@ -1874,12 +1885,12 @@ function DeepCustomizationCard() {
             </div>
             <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[5.961px] pt-[2.98px]">
               <div className="relative flex w-full shrink-0 content-stretch items-center gap-[35.766px]">
-                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b]">
                   Default
                 </p>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Main
                 </p>
                 <div
@@ -1906,7 +1917,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               0A0A0A
                             </p>
                           </div>
@@ -1923,12 +1934,12 @@ function DeepCustomizationCard() {
             </div>
             <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[5.961px] pt-[2.98px]">
               <div className="relative flex w-full shrink-0 content-stretch items-center gap-[35.766px]">
-                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b]">
                   Success
                 </p>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Main
                 </p>
                 <div
@@ -1955,7 +1966,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               24864E
                             </p>
                           </div>
@@ -1972,12 +1983,12 @@ function DeepCustomizationCard() {
             </div>
             <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[5.961px] pt-[2.98px]">
               <div className="relative flex w-full shrink-0 content-stretch items-center gap-[35.766px]">
-                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b]">
                   Warning
                 </p>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Main
                 </p>
                 <div
@@ -2004,7 +2015,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               F5A524
                             </p>
                           </div>
@@ -2021,12 +2032,12 @@ function DeepCustomizationCard() {
             </div>
             <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[5.961px] pt-[2.98px]">
               <div className="relative flex w-full shrink-0 content-stretch items-center gap-[35.766px]">
-                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b]">
                   Danger
                 </p>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Main
                 </p>
                 <div
@@ -2053,7 +2064,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               E44C3D
                             </p>
                           </div>
@@ -2070,12 +2081,12 @@ function DeepCustomizationCard() {
             </div>
             <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[5.961px] pt-[5.961px]">
               <div className="relative flex w-full shrink-0 content-stretch items-center gap-[35.766px]">
-                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#18181b]">
                   Background
                 </p>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Main
                 </p>
                 <div
@@ -2102,7 +2113,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               FFFFFF
                             </p>
                           </div>
@@ -2117,7 +2128,7 @@ function DeepCustomizationCard() {
                 </div>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Secondary
                 </p>
                 <div
@@ -2144,7 +2155,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               F9F9F9
                             </p>
                           </div>
@@ -2159,7 +2170,7 @@ function DeepCustomizationCard() {
                 </div>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Tertiary
                 </p>
                 <div
@@ -2186,7 +2197,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               EEEEEE
                             </p>
                           </div>
@@ -2201,7 +2212,7 @@ function DeepCustomizationCard() {
                 </div>
               </div>
               <div className="relative flex w-full shrink-0 content-stretch items-center justify-between">
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#18181b]">
                   Inverse
                 </p>
                 <div
@@ -2228,7 +2239,7 @@ function DeepCustomizationCard() {
                                 className="pointer-events-none absolute inset-0 rounded-[29.805px] border-[0.745px] border-solid border-[#dedee0]"
                               />
                             </div>
-                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b] not-italic">
+                            <p className="relative shrink-0 text-[10.432px] leading-[14.902px] font-normal text-[#18181b]">
                               000000
                             </p>
                           </div>
@@ -2278,7 +2289,7 @@ function DeepCustomizationCard() {
                 </svg>
               </div>
             </div>
-            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#18181b] not-italic">
+            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#18181b]">
               <p className="leading-[1.43]">Cards</p>
             </div>
           </button>
@@ -2307,7 +2318,7 @@ function DeepCustomizationCard() {
                 </svg>
               </div>
             </div>
-            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
               <p className="leading-[1.43]">Dashboard</p>
             </div>
           </div>
@@ -2336,7 +2347,7 @@ function DeepCustomizationCard() {
                 </svg>
               </div>
             </div>
-            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
               <p className="leading-[1.43]">Mail</p>
             </div>
           </div>
@@ -2369,7 +2380,7 @@ function DeepCustomizationCard() {
                 </div>
               </div>
             </div>
-            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
               <p className="leading-[1.43]">Chat</p>
             </div>
           </div>
@@ -2398,7 +2409,7 @@ function DeepCustomizationCard() {
                 </svg>
               </div>
             </div>
-            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a] not-italic">
+            <div className="relative flex shrink-0 flex-col justify-center text-center text-[10.43px] leading-[0] font-medium whitespace-nowrap text-[#71717a]">
               <p className="leading-[1.43]">Finances</p>
             </div>
           </div>
@@ -2583,7 +2594,7 @@ function DeepCustomizationCard() {
                         className="relative flex min-h-px min-w-px flex-[1_0_0] content-stretch items-center gap-[7.449px] overflow-clip"
                         data-name="placeholderWrapper"
                       >
-                        <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-normal text-[#18181b] not-italic">
+                        <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-normal text-[#18181b]">
                           100%
                         </p>
                       </div>
@@ -2754,7 +2765,7 @@ function DeepCustomizationCard() {
               className="relative flex h-[26.817px] max-h-[26.816959619522095px] min-h-[26.816959619522095px] shrink-0 content-stretch items-center justify-center gap-[5.959px] overflow-clip rounded-[17.878px] bg-[#ebebec] px-[10.429px] py-[5.959px] backdrop-blur-[0px]"
               data-name="Button"
             >
-              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b] not-italic">
+              <p className="relative shrink-0 text-[10.43px] leading-[14.898px] font-medium text-[#18181b]">
                 Export
               </p>
               <div
@@ -2912,7 +2923,7 @@ function DeepCustomizationCard() {
               </div>
               <div className="relative flex shrink-0 flex-col content-stretch items-start gap-[2.98px]">
                 <div className="relative flex shrink-0 content-stretch items-center gap-[11.922px]">
-                  <p className="relative shrink-0 text-[10.432px] leading-[11.922px] font-medium tracking-[-0.1043px] text-[#18181b] not-italic">
+                  <p className="relative shrink-0 text-[10.432px] leading-[11.922px] font-medium tracking-[-0.1043px] text-[#18181b]">
                     Untitled
                   </p>
                   <div
@@ -2937,13 +2948,13 @@ function DeepCustomizationCard() {
                     </div>
                   </div>
                 </div>
-                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#71717a] not-italic">
+                <p className="relative shrink-0 text-[8.941px] leading-[1.34] font-normal text-[#71717a]">
                   Theme
                 </p>
               </div>
             </div>
             <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[14.902px]">
-              <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#71717a] not-italic">
+              <p className="relative shrink-0 text-[10.432px] leading-[1.43] font-medium text-[#71717a]">
                 Properties
               </p>
               <div className="relative flex w-full shrink-0 flex-col content-stretch items-start gap-[5.961px]">
@@ -2983,7 +2994,7 @@ function DeepCustomizationCard() {
                     className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                     data-name="container"
                   >
-                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                       Colors
                     </p>
                   </div>
@@ -3024,7 +3035,7 @@ function DeepCustomizationCard() {
                     className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                     data-name="container"
                   >
-                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                       Typography
                     </p>
                   </div>
@@ -3065,7 +3076,7 @@ function DeepCustomizationCard() {
                     className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                     data-name="container"
                   >
-                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                       Radius
                     </p>
                   </div>
@@ -3106,7 +3117,7 @@ function DeepCustomizationCard() {
                     className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                     data-name="container"
                   >
-                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                       Materials
                     </p>
                   </div>
@@ -3147,7 +3158,7 @@ function DeepCustomizationCard() {
                     className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                     data-name="container"
                   >
-                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                       Effects
                     </p>
                   </div>
@@ -3188,7 +3199,7 @@ function DeepCustomizationCard() {
                     className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                     data-name="container"
                   >
-                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                       Sizes
                     </p>
                   </div>
@@ -3229,7 +3240,7 @@ function DeepCustomizationCard() {
                     className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                     data-name="container"
                   >
-                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                    <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                       Icons
                     </p>
                   </div>
@@ -3272,7 +3283,7 @@ function DeepCustomizationCard() {
                 className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                 data-name="container"
               >
-                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                   Randomize
                 </p>
               </div>
@@ -3370,7 +3381,7 @@ function DeepCustomizationCard() {
                 className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                 data-name="container"
               >
-                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                   Steps
                 </p>
               </div>
@@ -3411,7 +3422,7 @@ function DeepCustomizationCard() {
                 className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                 data-name="container"
               >
-                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                   Templates
                 </p>
               </div>
@@ -3452,7 +3463,7 @@ function DeepCustomizationCard() {
                 className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                 data-name="container"
               >
-                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                   Import
                 </p>
               </div>
@@ -3493,7 +3504,7 @@ function DeepCustomizationCard() {
                 className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
                 data-name="container"
               >
-                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b] not-italic">
+                <p className="relative w-full shrink-0 text-[10.43px] leading-[1.43] font-medium whitespace-pre-wrap text-[#18181b]">
                   Help & Feedback
                 </p>
               </div>
@@ -3501,7 +3512,7 @@ function DeepCustomizationCard() {
           </div>
         </div>
         <div
-          className="absolute top-[140.98px] left-[954.39px] size-[17.622px] overflow-clip"
+          className="deep-cursor-animated absolute top-[140.98px] left-[954.39px] z-10 size-[26px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)]"
           data-name="cursor"
         >
           <div className="absolute inset-[6.25%]" data-name="Frame">
@@ -3512,6 +3523,10 @@ function DeepCustomizationCard() {
               viewBox="0 0 15.4195 15.4195"
             >
               <g id="Frame">
+                <path
+                  d="M2.20279 2.09363C2.20279 1.2695 3.16032 0.805928 3.81712 1.31176L12.8283 8.25413C13.5805 8.83327 13.167 10.0265 12.2148 10.0265H7.64523C7.3085 10.0265 6.9911 10.1784 6.78239 10.4399L3.98782 13.9398C3.3997 14.6768 2.20279 14.2647 2.20279 13.3257V2.09363Z"
+                  fill="white"
+                />
                 <path
                   d="M2.20279 2.09363C2.20279 1.2695 3.16032 0.805928 3.81712 1.31176L12.8283 8.25413C13.5805 8.83327 13.167 10.0265 12.2148 10.0265H7.64523C7.3085 10.0265 6.9911 10.1784 6.78239 10.4399L3.98782 13.9398C3.3997 14.6768 2.20279 14.2647 2.20279 13.3257V2.09363ZM12.2142 9.036L3.20299 2.09363V13.3257L5.99756 9.82579C6.19415 9.57963 6.44443 9.38071 6.72965 9.24393C7.01488 9.10715 7.32766 9.03607 7.64457 9.036H12.2142Z"
                   fill="var(--fill-0, #18181B)"

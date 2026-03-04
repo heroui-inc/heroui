@@ -11,12 +11,12 @@ import VipMemberCard from "./vip-member-card";
 function PlatformAvailabilityLabel() {
   return (
     <div className="mt-7 flex flex-col items-center gap-1">
-      <p className="w-[172px] shrink-0 text-center text-[12px] leading-[1.34] font-medium whitespace-pre-wrap text-muted not-italic">
+      <p className="w-[172px] shrink-0 text-center text-xs leading-[1.34] font-medium whitespace-pre-wrap text-muted">
         Available for web and native
       </p>
       <div className="flex shrink-0 items-center gap-1">
-        <div className="relative size-[16px] shrink-0 overflow-clip opacity-50" data-name="display">
-          <div className="absolute inset-[9.38%_6.25%]" data-name="icon">
+        <div className="relative size-4 shrink-0 overflow-clip opacity-50">
+          <div className="absolute inset-[9.38%_6.25%]">
             <svg
               className="absolute block size-full"
               fill="none"
@@ -33,14 +33,11 @@ function PlatformAvailabilityLabel() {
             </svg>
           </div>
         </div>
-        <div className="relative size-[16px] shrink-0">
-          <div
-            className="absolute top-px left-px size-[14px] overflow-clip opacity-50"
-            data-name="smartphone"
-          >
+        <div className="relative size-4 shrink-0">
+          <div className="absolute top-px left-px size-[14px] overflow-clip opacity-50">
             <div className="absolute inset-[3.12%_15.63%_3.13%_15.62%] flex items-center justify-center">
               <div className="h-[11px] w-[15px] flex-none rotate-90">
-                <div className="relative size-full" data-name="icon">
+                <div className="relative size-full">
                   <svg
                     className="absolute block size-full"
                     fill="none"
@@ -67,7 +64,7 @@ function PlatformAvailabilityLabel() {
 
 function MdiSlack() {
   return (
-    <div className="relative size-[9px]" data-name="mdi:slack">
+    <div className="relative size-[9px]">
       <svg
         className="absolute block size-full"
         fill="none"
@@ -90,10 +87,10 @@ function FeaturesShowcase() {
   return (
     <div className="mx-auto mt-12 w-full max-w-[992px]">
       <div className="flex flex-col items-center justify-center gap-2">
-        <p className="text-center text-[16px] leading-[normal] font-medium text-accent not-italic">
+        <p className="text-center text-base leading-[normal] font-medium text-accent">
           What's included
         </p>
-        <div className="font-heading text-center text-[48px] leading-[normal] font-medium tracking-[-0.72px] whitespace-nowrap">
+        <div className="font-heading text-center text-5xl leading-[normal] font-medium tracking-[-0.72px] whitespace-nowrap">
           <p className="mb-0">Stop building from scratch.</p>
           <p className="text-muted/60">Start shipping.</p>
         </div>

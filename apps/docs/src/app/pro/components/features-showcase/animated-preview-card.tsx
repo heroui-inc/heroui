@@ -1,50 +1,31 @@
 function AnimatedPreviewCard() {
   return (
-    <div className="relative col-span-2 h-[288px] overflow-clip rounded-[24px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.04),0px_1px_2px_0px_rgba(0,0,0,0.06),0px_0px_1px_0px_rgba(0,0,0,0.06)]">
-      <div className="absolute inset-0 rounded-[24px] bg-[#091428]" />
-      <div
-        className="absolute inset-0 rounded-[24px]"
-        style={{
-          background: "radial-gradient(ellipse at 50% 70%, #1a3a6e 0%, #0d2147 30%, #091428 70%)",
-        }}
+    <div className="relative col-span-2 h-[288px] overflow-clip rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.04),0px_1px_2px_0px_rgba(0,0,0,0.06),0px_0px_1px_0px_rgba(0,0,0,0.06)]">
+      <img
+        alt=""
+        className="absolute inset-0 size-full scale-110 rounded-3xl object-cover"
+        src="/images/pro/ai-workflow/premium-design-bg.png"
       />
-      <div className="absolute top-[140px] left-[40px] h-[160px] w-[240px] rounded-full bg-[#1e56a0] opacity-25 blur-[60px]" />
-      <div className="absolute top-[170px] left-[80px] h-[120px] w-[160px] rounded-full bg-[#3b7dd8] opacity-20 blur-[40px]" />
-      <div
-        className="absolute top-[151px] left-[73.92px] flex w-[172.158px] flex-col content-stretch items-start gap-[1.435px] rounded-[17.216px] bg-[rgba(40,38,54,0.4)] p-[2.869px] shadow-[0px_1.435px_5.739px_0px_rgba(0,0,0,0.06),0px_-4.304px_8.608px_0px_rgba(0,0,0,0.03),0px_10.043px_20.085px_0px_rgba(0,0,0,0.08)] backdrop-blur-[14.347px]"
-        data-name="Dropdown"
-      >
-        <div className="relative w-full shrink-0" data-name="container">
+      <div className="absolute top-[151px] left-[73.92px] flex w-[172.158px] flex-col content-stretch items-start gap-[1.435px] rounded-[17.216px] bg-[rgba(40,38,54,0.4)] p-[2.869px] shadow-[0px_1.435px_5.739px_0px_rgba(0,0,0,0.06),0px_-4.304px_8.608px_0px_rgba(0,0,0,0.03),0px_10.043px_20.085px_0px_rgba(0,0,0,0.08)] backdrop-blur-[14.347px]">
+        <div className="relative w-full shrink-0">
           <div className="flex size-full flex-row items-center">
             <div className="relative flex w-full content-stretch items-center px-[8.608px] pt-[7.173px] pb-[2.869px]">
-              <p className="relative shrink-0 text-[8.608px] leading-[1.34] font-medium text-[#a1a1aa] not-italic">
+              <p className="relative shrink-0 text-[8.608px] leading-[1.34] font-medium text-[#a1a1aa]">
                 Workspaces
               </p>
             </div>
           </div>
         </div>
-        <div
-          className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-          data-name="ListBox"
-        >
-          <div
-            className="relative min-h-[25.82375717163086px] w-full shrink-0 rounded-[14.347px]"
-            data-name="list-item_01"
-          >
+        <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+          <div className="relative min-h-[25.82375717163086px] w-full shrink-0 rounded-[14.347px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[8.608px] px-[8.608px] py-[4.304px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[12px] shrink-0 rounded-[9999px]"
-                      data-name="Avatar"
-                    >
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]">
+                    <div className="relative size-[12px] shrink-0 rounded-full">
                       <img
                         alt=""
-                        className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[9999px] object-cover"
+                        className="pointer-events-none absolute inset-0 size-full max-w-none rounded-full object-cover"
                         decoding="async"
                         loading="lazy"
                         src="/pro/assets/e1dcbcd75728309abda612a02fc10030d0e2422e.png"
@@ -55,35 +36,23 @@ function AnimatedPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[10.043px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc] not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[10.043px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc]">
                     Acme
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            className="relative min-h-[25.82375717163086px] w-full shrink-0 rounded-[14.347px]"
-            data-name="list-item_01"
-          >
+          <div className="relative min-h-[25.82375717163086px] w-full shrink-0 rounded-[14.347px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[8.608px] px-[8.608px] py-[4.304px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[12px] shrink-0 rounded-[9999px]"
-                      data-name="Avatar"
-                    >
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]">
+                    <div className="relative size-[12px] shrink-0 rounded-full">
                       <img
                         alt=""
-                        className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[9999px] object-cover"
+                        className="pointer-events-none absolute inset-0 size-full max-w-none rounded-full object-cover"
                         decoding="async"
                         loading="lazy"
                         src="/pro/assets/77c2284e6733fd645775bb9352fc0a1eea1d9c92.png"
@@ -94,31 +63,19 @@ function AnimatedPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[10.043px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc] not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[10.043px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc]">
                     Acme Labs
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            className="relative flex min-h-[25.82375693321228px] w-[166.42px] shrink-0 content-stretch items-center gap-[8.608px] rounded-[14.347px] px-[8.608px] py-[4.304px]"
-            data-name="list-item_03"
-          >
+          <div className="relative flex min-h-[25.82375693321228px] w-[166.42px] shrink-0 content-stretch items-center gap-[8.608px] rounded-[14.347px] px-[8.608px] py-[4.304px]">
             <div className="flex flex-row items-center self-stretch">
-              <div
-                className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]"
-                data-name="container"
-              >
-                <div
-                  className="relative size-[11.477px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=add new"
-                >
-                  <div className="absolute inset-[10.94%]" data-name="icon">
+              <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]">
+                <div className="relative size-[11.477px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[10.94%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -137,23 +94,17 @@ function AnimatedPreviewCard() {
                 </div>
               </div>
             </div>
-            <div
-              className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-              data-name="container"
-            >
-              <p className="relative w-full shrink-0 text-[10.04px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc] not-italic">
+            <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+              <p className="relative w-full shrink-0 text-[10.04px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc]">
                 Add workspace
               </p>
             </div>
           </div>
         </div>
-        <div className="relative w-full shrink-0 opacity-10" data-name="container">
+        <div className="relative w-full shrink-0 opacity-10">
           <div className="relative flex w-full flex-col content-stretch items-start px-[8.608px]">
-            <div
-              className="relative flex h-[0.717px] max-h-[8.607918977737427px] w-[149.204px] shrink-0 content-stretch items-center justify-center rounded-[2.869px]"
-              data-name="Separator"
-            >
-              <div className="relative h-0 min-h-px min-w-px flex-[1_0_0]" data-name="Line">
+            <div className="relative flex h-[0.717px] max-h-[8.607918977737427px] w-[149.204px] shrink-0 content-stretch items-center justify-center rounded-[2.869px]">
+              <div className="relative h-0 min-h-px min-w-px flex-[1_0_0]">
                 <div className="absolute inset-[-0.36px_-0.34%]">
                   <svg
                     className="block size-full"
@@ -171,7 +122,7 @@ function AnimatedPreviewCard() {
                   </svg>
                 </div>
               </div>
-              <div className="relative h-0 min-h-px min-w-px flex-[1_0_0]" data-name="Line">
+              <div className="relative h-0 min-h-px min-w-px flex-[1_0_0]">
                 <div className="absolute inset-[-0.36px_-0.34%]">
                   <svg
                     className="block size-full"
@@ -192,26 +143,14 @@ function AnimatedPreviewCard() {
             </div>
           </div>
         </div>
-        <div
-          className="relative flex w-[166.42px] shrink-0 flex-col content-stretch items-start"
-          data-name="ListBox2"
-        >
-          <div
-            className="relative min-h-[25.82375693321228px] w-full shrink-0 rounded-[14.347px]"
-            data-name="list-item_01"
-          >
+        <div className="relative flex w-[166.42px] shrink-0 flex-col content-stretch items-start">
+          <div className="relative min-h-[25.82375693321228px] w-full shrink-0 rounded-[14.347px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[8.608px] py-[4.304px] pr-[8.608px] pl-[6.175px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[11.477px] shrink-0 overflow-clip"
-                      data-name="style=regular, keywords=profile human user"
-                    >
-                      <div className="absolute inset-[6.25%]" data-name="icon">
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]">
+                    <div className="relative size-[11.477px] shrink-0 overflow-clip">
+                      <div className="absolute inset-[6.25%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -230,11 +169,8 @@ function AnimatedPreviewCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[10.04px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc] not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[10.04px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc]">
                     Profile
                   </p>
                 </div>
@@ -242,69 +178,12 @@ function AnimatedPreviewCard() {
             </div>
           </div>
         </div>
-        <div
-          className="relative flex w-[166.42px] shrink-0 flex-col content-stretch items-start"
-          data-name="ListBox2"
-        >
-          <div
-            className="relative min-h-[25.82375693321228px] w-full shrink-0 rounded-[14.347px]"
-            data-name="list-item_01"
-          >
-            <div className="flex size-full min-h-[inherit] flex-row items-center">
-              <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[8.608px] py-[4.304px] pr-[8.608px] pl-[6.175px]">
-                <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.152px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[11.477px] shrink-0 overflow-clip"
-                      data-name="style=regular, keywords=check"
-                    >
-                      <div className="absolute inset-[3.12%_12.5%_3.13%_12.5%] flex items-center justify-center">
-                        <div className="h-[8.608px] w-[10.76px] flex-none -rotate-90">
-                          <div className="relative size-full" data-name="icon">
-                            <svg
-                              className="absolute block size-full"
-                              fill="none"
-                              preserveAspectRatio="none"
-                              viewBox="0 0 10.7599 8.60792"
-                            >
-                              <path
-                                clipRule="evenodd"
-                                d="M9.68391 3.0845L10.7599 1.36292L9.68391 0H1.2114H0L0.556547 1.07599L1.07599 2.08025L0 3.80183L1.07599 5.52341L0 7.245L1.07599 8.60792H9.5485H10.7599L10.2034 7.53193L9.68391 6.52767L10.7599 4.80609L9.68391 3.0845ZM9.49104 4.80609L8.77147 3.65478L8.41505 3.0845L8.77147 2.51423L9.44596 1.43506L9.16248 1.07599H1.76795L2.0317 1.58591L2.31341 2.13055L1.98843 2.65052L1.26886 3.80183L1.98843 4.95314L2.34485 5.52341L1.98843 6.09369L1.31394 7.17286L1.59742 7.53193H8.99195L8.7282 7.02201L8.44649 6.47737L8.77147 5.9574L9.49104 4.80609ZM6.45594 2.15198C6.75307 2.15198 6.99393 2.39285 6.99393 2.68998L6.99393 5.91794C6.99393 6.21507 6.75307 6.45594 6.45594 6.45594C6.15881 6.45594 5.91794 6.21507 5.91794 5.91794L5.91794 2.68998C5.91794 2.39285 6.15881 2.15198 6.45594 2.15198ZM4.84195 2.68997C4.84195 2.39285 4.60109 2.15198 4.30396 2.15198C4.00683 2.15198 3.76596 2.39285 3.76596 2.68997L3.76596 4.48329C3.76596 4.78042 4.00683 5.02129 4.30396 5.02129C4.60109 5.02129 4.84195 4.78042 4.84195 4.48329L4.84195 2.68997Z"
-                                fill="var(--fill-0, #A1A1AA)"
-                                fillRule="evenodd"
-                                id="icon"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[10.04px] leading-[1.43] font-medium whitespace-pre-wrap text-[#fcfcfc] not-italic">
-                    Billing
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_0px_1px_0px_rgba(255,255,255,0.3)]" />
       </div>
-      <div className="absolute top-[24px] left-[144px] size-[32px] rounded-[17px] bg-[rgba(239,239,239,0.3)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.04)] backdrop-blur-[20px]">
+      <div className="absolute top-[24px] left-[144px] size-8 rounded-2xl bg-[rgba(239,239,239,0.3)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.04)] backdrop-blur-[20px]">
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_0px_1px_0px_rgba(255,255,255,0.3)]" />
       </div>
-      <div
-        className="absolute top-[33px] left-[153px] size-[14px]"
-        data-name="streamline-ultimate:color-bucket-brush-bold"
-      >
+      <div className="absolute top-[33px] left-[153px] size-[14px]">
         <svg
           className="absolute block size-full"
           fill="none"
@@ -329,10 +208,10 @@ function AnimatedPreviewCard() {
           </defs>
         </svg>
       </div>
-      <p className="absolute top-[68px] left-[160px] -translate-x-1/2 text-center text-[14px] leading-[1.43] font-medium text-[#fcfcfc] not-italic">
+      <p className="absolute top-[68px] left-[160px] -translate-x-1/2 text-center text-sm leading-[1.43] font-medium whitespace-nowrap text-[#fcfcfc]">
         Premium design systems
       </p>
-      <p className="absolute top-[92px] left-[calc(50%+0.5px)] w-[257px] -translate-x-1/2 text-center text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-[#a1a1aa] not-italic">
+      <p className="absolute top-[92px] left-[calc(50%+0.5px)] w-[257px] -translate-x-1/2 text-center text-xs leading-[1.34] font-normal whitespace-pre-wrap text-[#a1a1aa]">
         Switch aesthetics in a click. Includes Glass, Brutalist, and more coming soon.
       </p>
     </div>

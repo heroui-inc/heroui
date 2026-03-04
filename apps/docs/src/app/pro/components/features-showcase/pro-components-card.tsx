@@ -1,38 +1,21 @@
 function ProComponentsCard() {
   return (
-    <div className="relative col-span-2 h-[280px] overflow-clip rounded-[24px] border border-solid border-border">
+    <div className="relative col-span-2 h-[280px] overflow-clip rounded-3xl border border-solid border-border">
       <div className="flex flex-col px-[23px] pt-[23px]">
-        <p className="text-[14px] leading-[1.43] font-medium text-foreground not-italic">
-          Pro components
-        </p>
-        <p className="max-w-[257px] text-[12px] leading-[1.34] font-normal whitespace-pre-wrap text-muted not-italic">
+        <p className="text-sm leading-[1.43] font-medium text-foreground">Pro components</p>
+        <p className="max-w-[257px] text-xs leading-[1.34] font-normal whitespace-pre-wrap text-muted">
           Pre-built components crafted with care for web and React Native applications.
         </p>
       </div>
-      <div
-        className="absolute top-[107px] left-[77.02px] flex w-[163.014px] flex-col content-stretch items-start rounded-[16.301px] bg-white p-[2.717px] opacity-50 shadow-[0px_1.358px_5.434px_0px_rgba(0,0,0,0.06),0px_-4.075px_8.151px_0px_rgba(0,0,0,0.03),0px_9.509px_19.018px_0px_rgba(0,0,0,0.08)] backdrop-blur-[13.585px]"
-        data-name="Dropdown"
-      >
-        <div
-          className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-          data-name="ListBox"
-        >
-          <div
-            className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]"
-            data-name="list-item_01"
-          >
+      <div className="absolute top-[107px] left-[77.02px] flex w-[163.014px] flex-col content-stretch items-start rounded-[16.301px] bg-white p-[2.717px] opacity-50 shadow-[0px_1.358px_5.434px_0px_rgba(0,0,0,0.06),0px_-4.075px_8.151px_0px_rgba(0,0,0,0.03),0px_9.509px_19.018px_0px_rgba(0,0,0,0.08)] backdrop-blur-[13.585px]">
+        <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+          <div className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[3.691px] py-[4.075px] pr-[8.151px] pl-[3.691px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px] opacity-0"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[10.868px] shrink-0 overflow-clip"
-                      data-name="style=regular, keywords=add new"
-                    >
-                      <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]" data-name="icon">
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px] opacity-0">
+                    <div className="relative size-[10.868px] shrink-0 overflow-clip">
+                      <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -51,19 +34,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Create Issue
                   </p>
                 </div>
-                <div
-                  className="relative size-[10.868px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=add new"
-                >
-                  <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]" data-name="icon">
+                <div className="relative size-[10.868px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -83,24 +60,15 @@ function ProComponentsCard() {
               </div>
             </div>
           </div>
-          <div
-            className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]"
-            data-name="list-item_02"
-          >
+          <div className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[3.691px] py-[4.075px] pr-[8.151px] pl-[3.691px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[10.868px] shrink-0 overflow-clip"
-                      data-name="style=regular, keywords=arrow"
-                    >
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]">
+                    <div className="relative size-[10.868px] shrink-0 overflow-clip">
                       <div className="absolute inset-[17.19%_29.69%_17.19%_32.81%] flex items-center justify-center">
                         <div className="h-[4.075px] w-[7.132px] flex-none -rotate-90">
-                          <div className="relative size-full" data-name="icon">
+                          <div className="relative size-full">
                             <svg
                               className="absolute block size-full"
                               fill="none"
@@ -121,19 +89,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Kanban Board
                   </p>
                 </div>
-                <div
-                  className="relative size-[10.868px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=diagram graph plot"
-                >
-                  <div className="absolute inset-[12.5%_3.12%_12.5%_3.13%]" data-name="icon">
+                <div className="relative size-[10.868px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[12.5%_3.12%_12.5%_3.13%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -153,22 +115,13 @@ function ProComponentsCard() {
               </div>
             </div>
           </div>
-          <div
-            className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]"
-            data-name="list-item_03"
-          >
+          <div className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[3.691px] py-[4.075px] pr-[8.151px] pl-[3.691px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[10.868px] shrink-0 overflow-clip opacity-0"
-                      data-name="style=regular, keywords=edit write"
-                    >
-                      <div className="absolute inset-[6.25%_6.25%_11.09%_11.09%]" data-name="icon">
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]">
+                    <div className="relative size-[10.868px] shrink-0 overflow-clip opacity-0">
+                      <div className="absolute inset-[6.25%_6.25%_11.09%_11.09%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -187,19 +140,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Backlog
                   </p>
                 </div>
-                <div
-                  className="relative size-[10.868px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=tray box drawer"
-                >
-                  <div className="absolute inset-[12.5%_6.25%]" data-name="icon">
+                <div className="relative size-[10.868px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[12.5%_6.25%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -220,26 +167,14 @@ function ProComponentsCard() {
             </div>
           </div>
         </div>
-        <div
-          className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-          data-name="ListBox2"
-        >
-          <div
-            className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]"
-            data-name="list-item_01"
-          >
+        <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+          <div className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[3.691px] py-[4.075px] pr-[8.151px] pl-[3.691px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[10.868px] shrink-0 overflow-clip opacity-0"
-                      data-name="style=regular, keywords=delete remove trash can recycle bin"
-                    >
-                      <div className="absolute inset-[3.13%_9.37%_6.25%_9.38%]" data-name="icon">
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]">
+                    <div className="relative size-[10.868px] shrink-0 overflow-clip opacity-0">
+                      <div className="absolute inset-[3.13%_9.37%_6.25%_9.38%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -258,23 +193,14 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Sprint
                   </p>
                 </div>
-                <div
-                  className="relative flex shrink-0 content-stretch items-start"
-                  data-name="variant=light, shortcut=key"
-                >
-                  <div
-                    className="relative flex shrink-0 content-stretch items-center rounded-[5.434px] py-[0.679px]"
-                    data-name="Keyboard"
-                  >
-                    <div className="relative flex shrink-0 flex-col justify-center text-center text-[9.51px] leading-[0] font-medium whitespace-nowrap text-muted not-italic">
+                <div className="relative flex shrink-0 content-stretch items-start">
+                  <div className="relative flex shrink-0 content-stretch items-center rounded-[5.434px] py-[0.679px]">
+                    <div className="relative flex shrink-0 flex-col justify-center text-center text-[9.51px] leading-[0] font-medium whitespace-nowrap text-muted">
                       <p className="leading-[1.43]">Week 32</p>
                     </div>
                   </div>
@@ -282,22 +208,13 @@ function ProComponentsCard() {
               </div>
             </div>
           </div>
-          <div
-            className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]"
-            data-name="list-item_02"
-          >
+          <div className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[3.691px] py-[4.075px] pr-[8.151px] pl-[3.691px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[10.868px] shrink-0 overflow-clip opacity-0"
-                      data-name="style=regular, keywords=duplicate"
-                    >
-                      <div className="absolute inset-[6.25%]" data-name="icon">
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]">
+                    <div className="relative size-[10.868px] shrink-0 overflow-clip opacity-0">
+                      <div className="absolute inset-[6.25%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -316,19 +233,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Copy link
                   </p>
                 </div>
-                <div
-                  className="relative size-[10.868px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=chain"
-                >
-                  <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]" data-name="icon">
+                <div className="relative size-[10.868px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -348,22 +259,13 @@ function ProComponentsCard() {
               </div>
             </div>
           </div>
-          <div
-            className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]"
-            data-name="list-item_03"
-          >
+          <div className="relative min-h-[24.45211172103882px] w-full shrink-0 rounded-[13.585px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[3.691px] py-[4.075px] pr-[8.151px] pl-[3.691px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[10.868px] shrink-0 overflow-clip opacity-0"
-                      data-name="style=regular, keywords=edit write"
-                    >
-                      <div className="absolute inset-[6.25%_6.25%_11.09%_11.09%]" data-name="icon">
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.038px]">
+                    <div className="relative size-[10.868px] shrink-0 overflow-clip opacity-0">
+                      <div className="absolute inset-[6.25%_6.25%_11.09%_11.09%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -382,19 +284,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[9.51px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Team Settings
                   </p>
                 </div>
-                <div
-                  className="relative size-[10.868px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=group team people users"
-                >
-                  <div className="absolute inset-[9.37%_0_12.5%_0]" data-name="icon">
+                <div className="relative size-[10.868px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[9.37%_0_12.5%_0]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -417,33 +313,15 @@ function ProComponentsCard() {
         </div>
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_0px_0.679px_0px_rgba(0,0,0,0)]" />
       </div>
-      <div
-        className="absolute top-[128.74px] left-[72.73px] flex w-[171.594px] flex-col content-stretch items-start rounded-[17.159px] bg-white p-[2.86px] shadow-[0px_1.43px_5.72px_0px_rgba(0,0,0,0.06),0px_-4.29px_8.58px_0px_rgba(0,0,0,0.03),0px_10.01px_20.019px_0px_rgba(0,0,0,0.08)] backdrop-blur-[14.299px]"
-        data-name="Dropdown"
-      >
-        <div
-          className="relative flex w-full shrink-0 flex-col content-stretch items-start"
-          data-name="ListBox"
-        >
-          <div
-            className="relative min-h-[25.739065647125244px] w-full shrink-0 rounded-[14.299px]"
-            data-name="list-item_01"
-          >
+      <div className="absolute top-[128.74px] left-[72.73px] flex w-[171.594px] flex-col content-stretch items-start rounded-[17.159px] bg-white p-[2.86px] shadow-[0px_1.43px_5.72px_0px_rgba(0,0,0,0.06),0px_-4.29px_8.58px_0px_rgba(0,0,0,0.03),0px_10.01px_20.019px_0px_rgba(0,0,0,0.08)] backdrop-blur-[14.299px]">
+        <div className="relative flex w-full shrink-0 flex-col content-stretch items-start">
+          <div className="relative min-h-[25.739065647125244px] w-full shrink-0 rounded-[14.299px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[4.09px] py-[4.29px] pr-[8.58px] pl-[4.09px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.145px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[11.44px] shrink-0 overflow-clip"
-                      data-name="style=regular, keywords=arrow"
-                    >
-                      <div
-                        className="absolute inset-[32.81%_17.19%_29.69%_17.19%]"
-                        data-name="icon"
-                      >
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.145px]">
+                    <div className="relative size-[11.44px] shrink-0 overflow-clip">
+                      <div className="absolute inset-[32.81%_17.19%_29.69%_17.19%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -462,19 +340,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Kanban Board
                   </p>
                 </div>
-                <div
-                  className="relative size-[11.44px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=diagram graph plot"
-                >
-                  <div className="absolute inset-[12.5%_3.12%_12.5%_3.13%]" data-name="icon">
+                <div className="relative size-[11.44px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[12.5%_3.12%_12.5%_3.13%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -494,24 +366,15 @@ function ProComponentsCard() {
               </div>
             </div>
           </div>
-          <div
-            className="relative min-h-[25.739065647125244px] w-full shrink-0 rounded-[14.299px]"
-            data-name="list-item_02"
-          >
+          <div className="relative min-h-[25.739065647125244px] w-full shrink-0 rounded-[14.299px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[4.09px] py-[4.29px] pr-[8.58px] pl-[4.09px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.145px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[11.44px] shrink-0 overflow-clip opacity-0"
-                      data-name="style=regular, keywords=arrow"
-                    >
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.145px]">
+                    <div className="relative size-[11.44px] shrink-0 overflow-clip opacity-0">
                       <div className="absolute inset-[17.19%_29.69%_17.19%_32.81%] flex items-center justify-center">
                         <div className="h-[4.29px] w-[7.507px] flex-none -rotate-90">
-                          <div className="relative size-full" data-name="icon">
+                          <div className="relative size-full">
                             <svg
                               className="absolute block size-full"
                               fill="none"
@@ -532,19 +395,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     List View
                   </p>
                 </div>
-                <div
-                  className="relative size-[11.44px] shrink-0 overflow-clip"
-                  data-name="style=regular, aliases=-"
-                >
-                  <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]" data-name="icon">
+                <div className="relative size-[11.44px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[9.37%_9.38%_9.38%_9.37%]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
@@ -564,22 +421,13 @@ function ProComponentsCard() {
               </div>
             </div>
           </div>
-          <div
-            className="relative min-h-[25.739065647125244px] w-full shrink-0 rounded-[14.299px]"
-            data-name="list-item_03"
-          >
+          <div className="relative min-h-[25.739065647125244px] w-full shrink-0 rounded-[14.299px]">
             <div className="flex size-full min-h-[inherit] flex-row items-center">
               <div className="relative flex min-h-[inherit] w-full content-stretch items-center gap-[4.09px] py-[4.29px] pr-[8.58px] pl-[4.09px]">
                 <div className="flex flex-row items-center self-stretch">
-                  <div
-                    className="relative flex h-full shrink-0 content-stretch items-start pt-[2.145px]"
-                    data-name="container"
-                  >
-                    <div
-                      className="relative size-[11.44px] shrink-0 overflow-clip opacity-0"
-                      data-name="style=regular, keywords=edit write"
-                    >
-                      <div className="absolute inset-[6.25%_6.25%_11.09%_11.09%]" data-name="icon">
+                  <div className="relative flex h-full shrink-0 content-stretch items-start pt-[2.145px]">
+                    <div className="relative size-[11.44px] shrink-0 overflow-clip opacity-0">
+                      <div className="absolute inset-[6.25%_6.25%_11.09%_11.09%]">
                         <svg
                           className="absolute block size-full"
                           fill="none"
@@ -598,19 +446,13 @@ function ProComponentsCard() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start"
-                  data-name="container"
-                >
-                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground not-italic">
+                <div className="relative flex min-h-px min-w-px flex-[1_0_0] flex-col content-stretch items-start">
+                  <p className="relative w-full shrink-0 text-[10.01px] leading-[1.43] font-medium whitespace-pre-wrap text-foreground">
                     Timeline
                   </p>
                 </div>
-                <div
-                  className="relative size-[11.44px] shrink-0 overflow-clip"
-                  data-name="style=regular, keywords=-"
-                >
-                  <div className="absolute inset-[3.12%_0_3.13%_0]" data-name="icon">
+                <div className="relative size-[11.44px] shrink-0 overflow-clip">
+                  <div className="absolute inset-[3.12%_0_3.13%_0]">
                     <svg
                       className="absolute block size-full"
                       fill="none"
