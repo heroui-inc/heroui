@@ -39,7 +39,7 @@ export default function App() {
           className="max-w-xs"
           color={color}
           defaultItems={animals}
-          defaultSelectedKey={"cat"}
+          defaultValue={"cat"}
           label="Favorite Animal"
           placeholder="Search an animal"
         >

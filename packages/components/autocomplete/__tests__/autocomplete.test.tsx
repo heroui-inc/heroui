@@ -56,15 +56,15 @@ const itemsSectionData = [
 ];
 
 const ControlledAutocomplete = <T extends object>(props: AutocompleteProps<T>) => {
-  const [selectedKey, setSelectedKey] = React.useState<React.Key | null>("cat");
+  const [value, setValue] = React.useState<React.Key | null>("cat");
 
   return (
     <Autocomplete
       {...props}
       aria-label="Favorite Animal"
       label="Favorite Animal"
-      selectedKey={selectedKey}
-      onSelectionChange={setSelectedKey}
+      value={value}
+      onChange={setValue}
     />
   );
 };
@@ -589,7 +589,7 @@ describe("Autocomplete", () => {
       <Autocomplete
         aria-label="Favorite Animal"
         data-testid="autocomplete"
-        defaultSelectedKey="cat"
+        defaultValue="cat"
         items={itemsData}
         label="Favorite Animal"
       >
@@ -795,7 +795,7 @@ describe("Autocomplete", () => {
         let {getByRole, findByRole} = render(
           <form data-testid="form">
             <AutocompleteExample
-              defaultSelectedKey="penguin"
+              defaultValue="penguin"
               validate={(v) => (v.selectedKey === "penguin" ? "Invalid value" : null)}
               validationBehavior="aria"
             />
@@ -1021,7 +1021,7 @@ describe("focusedKey management with selected key", () => {
     user = userEvent.setup();
   });
 
-  it("should set focusedKey to the first non-disabled item when selectedKey is null", async () => {
+  it("should set focusedKey to the first non-disabled item when value is null", async () => {
     const wrapper = render(
       <Autocomplete
         aria-label="Favorite Animal"
@@ -1075,13 +1075,13 @@ describe("focusedKey management with selected key", () => {
     expect(optionItem).toHaveAttribute("data-focus", "true");
   });
 
-  it("should set focusedKey to the item's key when selectedKey prop is passed", async () => {
+  it("should set focusedKey to the item's key when value prop is passed", async () => {
     const wrapper = render(
       <Autocomplete
         aria-label="Favorite Animal"
         data-testid="autocomplete"
         label="Favorite Animal"
-        selectedKey="penguin"
+        value="penguin"
       >
         <AutocompleteItem key="penguin">Penguin</AutocompleteItem>
         <AutocompleteItem key="zebra">Zebra</AutocompleteItem>

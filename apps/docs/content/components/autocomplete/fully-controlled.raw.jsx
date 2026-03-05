@@ -44,7 +44,7 @@ export default function App() {
 
   // Specify how each of the Autocomplete values should change when an
   // option is selected from the list box
-  const onSelectionChange = (key) => {
+  const onChange = (key) => {
     setFieldState((prevState) => {
       let selectedItem = prevState.items.find((option) => option.value === key);
 
@@ -86,9 +86,9 @@ export default function App() {
       placeholder="Search an animal"
       selectedKey={fieldState.selectedKey}
       variant="bordered"
+      onChange={onChange}
       onInputChange={onInputChange}
       onOpenChange={onOpenChange}
-      onSelectionChange={onSelectionChange}
     >
       {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
     </Autocomplete>
