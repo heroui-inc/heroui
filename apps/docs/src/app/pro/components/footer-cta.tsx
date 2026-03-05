@@ -63,7 +63,7 @@ function DarkMembershipCard() {
 
 function ClaimButton() {
   return (
-    <Button className="mx-auto rounded-full bg-background text-foreground shadow-surface">
+    <Button className="mx-auto rounded-full bg-surface text-surface-foreground shadow-surface">
       Claim yours
     </Button>
   );

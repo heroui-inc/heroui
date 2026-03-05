@@ -64,7 +64,7 @@ function PlatformAvailabilityLabel() {
 
 function FeaturesShowcase() {
   return (
-    <div className="mx-auto mt-12 w-full max-w-[992px]">
+    <div className="mx-auto mt-20 w-full max-w-[992px]">
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="text-center text-base leading-[normal] font-medium text-accent">
           What's included
@@ -74,7 +74,7 @@ function FeaturesShowcase() {
           <p className="text-muted/60">Start shipping.</p>
         </div>
       </div>
-      <div className="relative mt-20 grid grid-cols-6 gap-4">
+      <div className="relative mt-12 grid grid-cols-6 gap-4">
         <AIWorkflowCard />
         <DeepCustomizationCard />
         <ProComponentsCard />
