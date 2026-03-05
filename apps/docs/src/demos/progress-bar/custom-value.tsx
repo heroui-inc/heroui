@@ -1,6 +1,6 @@
 "use client";
 
-import {Label, ListBox, NumberField, ProgressBar, Select, Separator, Slider} from "@heroui/react";
+import {Label, ListBox, NumberField, ProgressBar, Select, Separator} from "@heroui/react";
 import {useState} from "react";
 
 const formatStyleOptions: {label: string; value: string}[] = [
@@ -24,40 +24,44 @@ export function CustomValue() {
   const [format, setFormat] = useState<string>("percent");
 
   return (
-    <div className="flex w-full flex-col gap-4">
-      <ProgressBar
-        aria-label="Revenue"
-        className="w-full max-w-md"
-        formatOptions={formatOptionsMap[format]}
-        maxValue={maxValue}
-        minValue={minValue}
-        value={value}
-      >
-        <Label>Progress</Label>
-        <ProgressBar.Output />
-        <ProgressBar.Track>
-          <ProgressBar.Fill />
-        </ProgressBar.Track>
-      </ProgressBar>
-
-      <Separator className="my-5" />
-
-      <div className="flex max-w-72 flex-col gap-3">
-        <Label className="text-xs font-medium text-muted">Options</Label>
-
-        <Slider
+    <div className="flex w-full flex-col gap-6 md:flex-row md:items-center md:gap-10">
+      <div className="flex w-full max-w-md flex-1 justify-center">
+        <ProgressBar
+          aria-label="Revenue"
+          className="w-full max-w-52"
+          formatOptions={formatOptionsMap[format]}
           maxValue={maxValue}
           minValue={minValue}
           value={value}
-          onChange={(v) => setValue(v as number)}
+        >
+          <Label>Progress</Label>
+          <ProgressBar.Output />
+          <ProgressBar.Track>
+            <ProgressBar.Fill />
+          </ProgressBar.Track>
+        </ProgressBar>
+      </div>
+
+      <Separator className="md:hidden" />
+      <Separator className="hidden self-stretch md:block" orientation="vertical" />
+
+      <div className="flex max-w-52 flex-col gap-3">
+        <Label className="text-xs font-medium text-muted">Options</Label>
+
+        <NumberField
+          maxValue={maxValue}
+          minValue={minValue}
+          value={value}
+          variant="secondary"
+          onChange={(v) => setValue(v)}
         >
           <Label>Value</Label>
-          <Slider.Output />
-          <Slider.Track>
-            <Slider.Fill />
-            <Slider.Thumb />
-          </Slider.Track>
-        </Slider>
+          <NumberField.Group>
+            <NumberField.DecrementButton />
+            <NumberField.Input />
+            <NumberField.IncrementButton />
+          </NumberField.Group>
+        </NumberField>
 
         <NumberField
           maxValue={maxValue - 1}
