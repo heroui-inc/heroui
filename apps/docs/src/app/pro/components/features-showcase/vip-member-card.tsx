@@ -1,7 +1,5 @@
 "use client";
 
-import {imgBlur7} from "./features-showcase-imgs";
-
 interface UserData {
   id: string;
   avatarBg: string;
@@ -137,6 +135,27 @@ function UserRow({index, user}: {user: UserData; index: number}) {
   );
 }
 
+function MdiSlack() {
+  return (
+    <div className="relative size-[9px]">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 9 9"
+      >
+        <g id="mdi:slack" opacity="0.24">
+          <path
+            d="M2.25 5.625C2.25 5.82391 2.17098 6.01468 2.03033 6.15533C1.88968 6.29598 1.69891 6.375 1.5 6.375C1.30109 6.375 1.11032 6.29598 0.96967 6.15533C0.829018 6.01468 0.75 5.82391 0.75 5.625C0.75 5.42609 0.829018 5.23532 0.96967 5.09467C1.11032 4.95402 1.30109 4.875 1.5 4.875H2.25V5.625ZM2.625 5.625C2.625 5.42609 2.70402 5.23532 2.84467 5.09467C2.98532 4.95402 3.17609 4.875 3.375 4.875C3.57391 4.875 3.76468 4.95402 3.90533 5.09467C4.04598 5.23532 4.125 5.42609 4.125 5.625V7.5C4.125 7.69891 4.04598 7.88968 3.90533 8.03033C3.76468 8.17098 3.57391 8.25 3.375 8.25C3.17609 8.25 2.98532 8.17098 2.84467 8.03033C2.70402 7.88968 2.625 7.69891 2.625 7.5V5.625ZM3.375 2.625C3.17609 2.625 2.98532 2.54598 2.84467 2.40533C2.70402 2.26468 2.625 2.07391 2.625 1.875C2.625 1.67609 2.70402 1.48532 2.84467 1.34467C2.98532 1.20402 3.17609 1.125 3.375 1.125C3.57391 1.125 3.76468 1.20402 3.90533 1.34467C4.04598 1.48532 4.125 1.67609 4.125 1.875V2.625H3.375ZM3.375 3C3.57391 3 3.76468 3.07902 3.90533 3.21967C4.04598 3.36032 4.125 3.55109 4.125 3.75C4.125 3.94891 4.04598 4.13968 3.90533 4.28033C3.76468 4.42098 3.57391 4.5 3.375 4.5H1.5C1.30109 4.5 1.11032 4.42098 0.96967 4.28033C0.829018 4.13968 0.75 3.94891 0.75 3.75C0.75 3.55109 0.829018 3.36032 0.96967 3.21967C1.11032 3.07902 1.30109 3 1.5 3H3.375ZM6.375 3.75C6.375 3.55109 6.45402 3.36032 6.59467 3.21967C6.73532 3.07902 6.92609 3 7.125 3C7.32391 3 7.51468 3.07902 7.65533 3.21967C7.79598 3.36032 7.875 3.55109 7.875 3.75C7.875 3.94891 7.79598 4.13968 7.65533 4.28033C7.51468 4.42098 7.32391 4.5 7.125 4.5H6.375V3.75ZM6 3.75C6 3.94891 5.92098 4.13968 5.78033 4.28033C5.63968 4.42098 5.44891 4.5 5.25 4.5C5.05109 4.5 4.86032 4.42098 4.71967 4.28033C4.57902 4.13968 4.5 3.94891 4.5 3.75V1.875C4.5 1.67609 4.57902 1.48532 4.71967 1.34467C4.86032 1.20402 5.05109 1.125 5.25 1.125C5.44891 1.125 5.63968 1.20402 5.78033 1.34467C5.92098 1.48532 6 1.67609 6 1.875V3.75ZM5.25 6.75C5.44891 6.75 5.63968 6.82902 5.78033 6.96967C5.92098 7.11032 6 7.30109 6 7.5C6 7.69891 5.92098 7.88968 5.78033 8.03033C5.63968 8.17098 5.44891 8.25 5.25 8.25C5.05109 8.25 4.86032 8.17098 4.71967 8.03033C4.57902 7.88968 4.5 7.69891 4.5 7.5V6.75H5.25ZM5.25 6.375C5.05109 6.375 4.86032 6.29598 4.71967 6.15533C4.57902 6.01468 4.5 5.82391 4.5 5.625C4.5 5.42609 4.57902 5.23532 4.71967 5.09467C4.86032 4.95402 5.05109 4.875 5.25 4.875H7.125C7.32391 4.875 7.51468 4.95402 7.65533 5.09467C7.79598 5.23532 7.875 5.42609 7.875 5.625C7.875 5.82391 7.79598 6.01468 7.65533 6.15533C7.51468 6.29598 7.32391 6.375 7.125 6.375H5.25Z"
+            fill="var(--fill-0, #18181B)"
+            id="Vector"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function VipMemberCard() {
   return (
     <div className="relative col-span-2 h-[288px] overflow-clip rounded-3xl border border-solid border-border">
@@ -207,8 +226,19 @@ function VipMemberCard() {
           </div>
         </div>
       </div>
-      {/* User list carousel */}
-      <div className="absolute top-[139px] left-[87px] h-[136px] w-[144px] overflow-hidden">
+      {/* User list carousel with scroll shadow fade */}
+      <div
+        className="absolute top-[139px] left-[87px] h-[136px] w-[144px] overflow-hidden"
+        style={
+          {
+            "--scroll-shadow-size": "40px",
+            WebkitMaskImage:
+              "linear-gradient(#000, #000, transparent 0, #000 var(--scroll-shadow-size), #000 calc(100% - var(--scroll-shadow-size)), transparent)",
+            maskImage:
+              "linear-gradient(#000, #000, transparent 0, #000 var(--scroll-shadow-size), #000 calc(100% - var(--scroll-shadow-size)), transparent)",
+          } as React.CSSProperties
+        }
+      >
         <div className="vip-member-carousel flex flex-col gap-2">
           {users.map((user, i) => (
             <UserRow key={`${user.id}-${i}`} index={i} user={user} />
@@ -218,19 +248,11 @@ function VipMemberCard() {
           ))}
         </div>
       </div>
-      {/* Top blur overlay */}
-      <div className="absolute top-[119px] left-1/2 h-[28px] w-[272px] -translate-x-1/2 rotate-180">
-        <div
-          className="absolute inset-0 bg-[rgba(245,245,245,0.7)] mask-intersect mask-alpha mask-size-[100%_100%] mask-no-clip mask-position-[0px_0px] mask-no-repeat backdrop-blur-[5px]"
-          style={{maskImage: `url('${imgBlur7}')`}}
-        />
-      </div>
-      {/* Bottom blur overlay */}
-      <div className="absolute bottom-[-1px] left-1/2 h-[44px] w-[272px] -translate-x-1/2">
-        <div
-          className="absolute inset-0 bg-[rgba(245,245,245,0.7)] mask-intersect mask-alpha mask-size-[100%_100%] mask-no-clip mask-position-[0px_0px] mask-no-repeat backdrop-blur-[5px]"
-          style={{maskImage: `url('${imgBlur7}')`}}
-        />
+      {/* Slack icon */}
+      <div className="absolute right-[30px] bottom-[49px] flex size-[9.707px] items-center justify-center">
+        <div className="flex-none rotate-[4.7deg]">
+          <MdiSlack />
+        </div>
       </div>
       {/* Discord icon */}
       <div className="absolute top-[31px] left-[151px] size-[16px] overflow-clip opacity-30">
