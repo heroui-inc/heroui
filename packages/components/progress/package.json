@@ -43,8 +43,8 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-is-mounted": "workspace:*",
-    "@react-aria/progress": "3.4.29",
-    "@react-types/progress": "3.5.17"
+    "@react-aria/progress": "3.4.30",
+    "@react-types/progress": "3.5.18"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

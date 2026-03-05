@@ -45,13 +45,13 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/use-callback-ref": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/checkbox": "3.16.4",
-    "@react-aria/focus": "3.21.4",
-    "@react-aria/interactions": "3.27.0",
-    "@react-stately/checkbox": "3.7.4",
-    "@react-stately/toggle": "3.9.4",
-    "@react-types/checkbox": "3.10.3",
-    "@react-types/shared": "3.33.0"
+    "@react-aria/checkbox": "3.16.5",
+    "@react-aria/focus": "3.21.5",
+    "@react-aria/interactions": "3.27.1",
+    "@react-stately/checkbox": "3.7.5",
+    "@react-stately/toggle": "3.9.5",
+    "@react-types/checkbox": "3.10.4",
+    "@react-types/shared": "3.33.1"
   },
   "devDependencies": {
     "@heroui/shared-icons": "workspace:*",

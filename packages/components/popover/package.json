@@ -50,11 +50,11 @@
     "@heroui/use-aria-overlay": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/dialog": "3.5.33",
-    "@react-aria/focus": "3.21.4",
-    "@react-aria/overlays": "3.31.1",
-    "@react-stately/overlays": "3.6.22",
-    "@react-types/overlays": "3.9.3"
+    "@react-aria/dialog": "3.5.34",
+    "@react-aria/focus": "3.21.5",
+    "@react-aria/overlays": "3.31.2",
+    "@react-stately/overlays": "3.6.23",
+    "@react-types/overlays": "3.9.4"
   },
   "devDependencies": {
     "@heroui/card": "workspace:*",
