@@ -1,22 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 
 import {HeroUILogo} from "@/components/heroui-logo";
 
 import {PreOrderButton} from "./hero-section";
 
 export default function ProHeader() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(
+    () => typeof window !== "undefined" && window.scrollY > 20,
+  );
   const ticking = useRef(false);
 
   const updateScrolled = useCallback(() => {
     setScrolled(window.scrollY > 20);
     ticking.current = false;
   }, []);
-
-  useLayoutEffect(updateScrolled, [updateScrolled]);
 
   useEffect(() => {
     const handleScroll = () => {
