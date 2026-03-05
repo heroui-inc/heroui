@@ -287,6 +287,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "list-box",
     title: "Listbox",
   },
+  meter: {
+    category: "feedback",
+    description: "A quantity indicator within a known range",
+    href: "/docs/components/meter",
+    name: "meter",
+    title: "Meter",
+  },
   modal: {
     category: "layout",
     description: "Displays content in a modal overlay",

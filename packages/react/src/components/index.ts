@@ -74,6 +74,7 @@ export * from "./modal";
 export * from "./number-field";
 export * from "./pagination";
 export * from "./select";
+export * from "./meter";
 export * from "./slider";
 export * from "./table";
 

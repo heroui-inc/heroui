@@ -47,6 +47,7 @@
     "(forms)/label",
     "(navigation)/link",
     "(collections)/list-box",
+    "(feedback)/meter",
     "(overlays)/modal",
     "(forms)/number-field",
     "(navigation)/pagination",

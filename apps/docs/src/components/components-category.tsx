@@ -71,7 +71,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Feedback",
-    components: ["alert", "skeleton", "spinner"],
+    components: ["alert", "meter", "skeleton", "spinner"],
   },
   {
     category: "Layout",
