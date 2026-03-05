@@ -104,29 +104,8 @@ const ProgressCircleTrack = ({children, className, ...props}: ProgressCircleTrac
 ProgressCircleTrack.displayName = "HeroUI.ProgressCircle.Track";
 
 /* -------------------------------------------------------------------------------------------------
- * ProgressCircle Output
- * -----------------------------------------------------------------------------------------------*/
-interface ProgressCircleOutputProps extends ComponentPropsWithRef<"span"> {}
-
-const ProgressCircleOutput = ({children, className, ...props}: ProgressCircleOutputProps) => {
-  const {slots, state} = useContext(ProgressCircleContext);
-
-  return (
-    <span
-      className={composeSlotClassName(slots?.output, className)}
-      data-slot="progress-circle-output"
-      {...props}
-    >
-      {children ?? state?.valueText}
-    </span>
-  );
-};
-
-ProgressCircleOutput.displayName = "HeroUI.ProgressCircle.Output";
-
-/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ProgressCircleRoot, ProgressCircleTrack, ProgressCircleOutput};
+export {ProgressCircleRoot, ProgressCircleTrack};
 
-export type {ProgressCircleRootProps, ProgressCircleTrackProps, ProgressCircleOutputProps};
+export type {ProgressCircleRootProps, ProgressCircleTrackProps};

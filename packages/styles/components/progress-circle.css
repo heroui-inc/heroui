@@ -4,7 +4,7 @@
 
 /* Base styles */
 .progress-circle {
-  @apply relative inline-flex items-center justify-center;
+  @apply inline-flex items-center justify-center;
 
   /* Default color token (accent) */
   --progress-circle-stroke: var(--color-accent);
@@ -12,11 +12,7 @@
 
   .progress-circle__track {
     /* Default size (matches --md) */
-    @apply size-10;
-  }
-
-  .progress-circle__output {
-    @apply absolute inset-0 flex items-center justify-center text-xs font-medium tabular-nums;
+    @apply size-7;
   }
 
   .progress-circle__track-circle {
@@ -70,11 +66,7 @@
 
 .progress-circle--sm {
   .progress-circle__track {
-    @apply size-8;
-  }
-
-  .progress-circle__output {
-    @apply text-[10px];
+    @apply size-5;
   }
 }
 
@@ -84,11 +76,7 @@
 
 .progress-circle--lg {
   .progress-circle__track {
-    @apply size-12;
-  }
-
-  .progress-circle__output {
-    @apply text-sm;
+    @apply size-9;
   }
 }
 

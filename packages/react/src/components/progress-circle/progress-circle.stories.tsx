@@ -33,7 +33,6 @@ export const Default: Story = {
     return (
       <ProgressCircle aria-label="Loading" value={60} {...args}>
         <ProgressCircle.Track />
-        <ProgressCircle.Output />
       </ProgressCircle>
     );
   },
@@ -45,15 +44,12 @@ export const Sizes: Story = {
       <div className="flex items-center gap-6">
         <ProgressCircle aria-label="Loading" size="sm" value={40} {...args}>
           <ProgressCircle.Track />
-          <ProgressCircle.Output />
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" size="md" value={60} {...args}>
           <ProgressCircle.Track />
-          <ProgressCircle.Output />
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" size="lg" value={80} {...args}>
           <ProgressCircle.Track />
-          <ProgressCircle.Output />
         </ProgressCircle>
       </div>
     );

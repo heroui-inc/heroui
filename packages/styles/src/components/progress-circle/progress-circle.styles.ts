@@ -10,7 +10,6 @@ export const progressCircleVariants = tv({
   slots: {
     base: "progress-circle",
     fillCircle: "progress-circle__fill-circle",
-    output: "progress-circle__output",
     track: "progress-circle__track",
     trackCircle: "progress-circle__track-circle",
   },
