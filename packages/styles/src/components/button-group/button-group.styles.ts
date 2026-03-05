@@ -3,14 +3,19 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const buttonGroupVariants = tv({
-  base: "button-group",
   defaultVariants: {
     fullWidth: false,
   },
+  slots: {
+    base: "button-group",
+    separator: "button-group__separator",
+  },
   variants: {
     fullWidth: {
-      false: "",
-      true: "button-group--full-width",
+      false: {},
+      true: {
+        base: "button-group--full-width",
+      },
     },
   },
 });
