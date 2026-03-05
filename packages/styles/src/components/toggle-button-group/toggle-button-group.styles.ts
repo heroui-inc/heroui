@@ -5,6 +5,7 @@ import {tv} from "tailwind-variants";
 export const toggleButtonGroupVariants = tv({
   defaultVariants: {
     fullWidth: false,
+    isDetached: false,
     orientation: "horizontal",
   },
   slots: {
@@ -16,6 +17,12 @@ export const toggleButtonGroupVariants = tv({
       false: {},
       true: {
         base: "toggle-button-group--full-width",
+      },
+    },
+    isDetached: {
+      false: {},
+      true: {
+        base: "toggle-button-group--detached",
       },
     },
     orientation: {

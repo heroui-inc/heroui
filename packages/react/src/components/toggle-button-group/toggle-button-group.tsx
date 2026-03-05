@@ -45,16 +45,14 @@ const ToggleButtonGroupRoot = ({
   ...rest
 }: ToggleButtonGroupRootProps) => {
   const slots = React.useMemo(
-    () => toggleButtonGroupVariants({fullWidth, orientation}),
-    [fullWidth, orientation],
+    () => toggleButtonGroupVariants({fullWidth, isDetached, orientation}),
+    [fullWidth, isDetached, orientation],
   );
 
   return (
     <ToggleButtonGroupContext value={{slots, size, isDisabled}}>
       <ToggleButtonGroupPrimitive
         className={composeTwRenderProps(className, slots.base())}
-        data-detached={isDetached ? "true" : undefined}
-        data-size={size ?? "md"}
         data-slot="toggle-button-group"
         isDisabled={isDisabled}
         orientation={orientation}
