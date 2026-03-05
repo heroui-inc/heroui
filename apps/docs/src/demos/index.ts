@@ -41,6 +41,7 @@ import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
 import * as ListBoxDemos from "./list-box";
+import * as MeterDemos from "./meter";
 import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
 import * as PaginationDemos from "./pagination";
@@ -1983,6 +1984,27 @@ export const demos: Record<string, DemoItem> = {
   "list-box-custom-render-function": {
     component: ListBoxDemos.CustomRenderFunction,
     file: "list-box/custom-render-function.tsx",
+  },
+  // Meter demos
+  "meter-basic": {
+    component: MeterDemos.Basic,
+    file: "meter/basic.tsx",
+  },
+  "meter-sizes": {
+    component: MeterDemos.Sizes,
+    file: "meter/sizes.tsx",
+  },
+  "meter-colors": {
+    component: MeterDemos.Colors,
+    file: "meter/colors.tsx",
+  },
+  "meter-custom-value": {
+    component: MeterDemos.CustomValue,
+    file: "meter/custom-value.tsx",
+  },
+  "meter-without-label": {
+    component: MeterDemos.WithoutLabel,
+    file: "meter/without-label.tsx",
   },
   // Modal demos
   "modal-default": {
