@@ -3,19 +3,28 @@ import type {VariantProps} from "tailwind-variants";
 import {tv} from "tailwind-variants";
 
 export const toggleButtonGroupVariants = tv({
-  base: "toggle-button-group",
   defaultVariants: {
     fullWidth: false,
     orientation: "horizontal",
   },
+  slots: {
+    base: "toggle-button-group",
+    separator: "toggle-button-group__separator",
+  },
   variants: {
     fullWidth: {
-      false: "",
-      true: "toggle-button-group--full-width",
+      false: {},
+      true: {
+        base: "toggle-button-group--full-width",
+      },
     },
     orientation: {
-      horizontal: "toggle-button-group--horizontal",
-      vertical: "toggle-button-group--vertical",
+      horizontal: {
+        base: "toggle-button-group--horizontal",
+      },
+      vertical: {
+        base: "toggle-button-group--vertical",
+      },
     },
   },
 });

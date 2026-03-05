@@ -11,12 +11,15 @@ export function Sizes() {
             <Bold />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Strikethrough />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -28,12 +31,15 @@ export function Sizes() {
             <Bold />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Strikethrough />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -45,12 +51,15 @@ export function Sizes() {
             <Bold />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Strikethrough />
           </ToggleButton>
         </ToggleButtonGroup>

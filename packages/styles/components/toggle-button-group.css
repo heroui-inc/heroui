@@ -85,19 +85,15 @@
 }
 
 /* ==========================================================================
-   Separator between buttons (attached mode, horizontal)
+   Separator (compound component)
    ========================================================================== */
 
-.toggle-button-group--horizontal .toggle-button:not(:first-child):before {
+.toggle-button-group__separator {
   @apply bg-current opacity-15;
 
-  content: "";
   border-radius: 4px;
   position: absolute;
-  left: -1px;
-  top: 25%;
-  width: 1px;
-  height: 50%;
+  pointer-events: none;
 
   /**
    * Transitions
@@ -105,37 +101,22 @@
    */
   transition: opacity 150ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
-}
 
-/* ==========================================================================
-   Separator between buttons (attached mode, vertical)
-   ========================================================================== */
+  /* Horizontal orientation - vertical divider */
+  .toggle-button-group--horizontal & {
+    left: -1px;
+    top: 25%;
+    width: 1px;
+    height: 50%;
+  }
 
-.toggle-button-group--vertical .toggle-button:not(:first-child):before {
-  @apply bg-current opacity-15;
-
-  content: "";
-  border-radius: 4px;
-  position: absolute;
-  left: 25%;
-  top: -1px;
-  width: 50%;
-  height: 1px;
-
-  /**
-   * Transitions
-   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
-   */
-  transition: opacity 150ms var(--ease-smooth);
-  @apply motion-reduce:transition-none;
-}
-
-/* ==========================================================================
-   Hide separator when hideSeparator prop is set
-   ========================================================================== */
-
-.toggle-button-group[data-hide-separator="true"] .toggle-button:not(:first-child):before {
-  display: none;
+  /* Vertical orientation - horizontal divider */
+  .toggle-button-group--vertical & {
+    left: 25%;
+    top: -1px;
+    width: 50%;
+    height: 1px;
+  }
 }
 
 /* ==========================================================================
@@ -151,7 +132,7 @@
   @apply rounded-3xl;
 }
 
-/* No separator in detached mode */
-.toggle-button-group[data-detached="true"] .toggle-button:not(:first-child):before {
+/* Hide separators in detached mode */
+.toggle-button-group[data-detached="true"] .toggle-button-group__separator {
   display: none;
 }

@@ -51,12 +51,15 @@ export const Default: Story = {
         <Icon icon="gravity-ui:bold" />
       </ToggleButton>
       <ToggleButton isIconOnly aria-label="Italic" id="italic">
+        <ToggleButtonGroup.Separator />
         <Icon icon="gravity-ui:italic" />
       </ToggleButton>
       <ToggleButton isIconOnly aria-label="Underline" id="underline">
+        <ToggleButtonGroup.Separator />
         <Icon icon="gravity-ui:underline" />
       </ToggleButton>
       <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+        <ToggleButtonGroup.Separator />
         <Icon icon="gravity-ui:strikethrough" />
       </ToggleButton>
     </ToggleButtonGroup>
@@ -73,12 +76,15 @@ export const Sizes: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:strikethrough" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -90,12 +96,15 @@ export const Sizes: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:strikethrough" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -107,12 +116,15 @@ export const Sizes: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:strikethrough" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -131,9 +143,11 @@ export const Orientation: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -145,9 +159,11 @@ export const Orientation: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -166,12 +182,15 @@ export const AttachedVsDetached: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:strikethrough" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -205,12 +224,15 @@ export const FullWidth: Story = {
           <Icon icon="gravity-ui:bold" />
         </ToggleButton>
         <ToggleButton isIconOnly aria-label="Italic" id="italic">
+          <ToggleButtonGroup.Separator />
           <Icon icon="gravity-ui:italic" />
         </ToggleButton>
         <ToggleButton isIconOnly aria-label="Underline" id="underline">
+          <ToggleButtonGroup.Separator />
           <Icon icon="gravity-ui:underline" />
         </ToggleButton>
         <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+          <ToggleButtonGroup.Separator />
           <Icon icon="gravity-ui:strikethrough" />
         </ToggleButton>
       </ToggleButtonGroup>
@@ -220,10 +242,12 @@ export const FullWidth: Story = {
           Left
         </ToggleButton>
         <ToggleButton id="center">
+          <ToggleButtonGroup.Separator />
           <Icon icon="gravity-ui:text-align-center" />
           Center
         </ToggleButton>
         <ToggleButton id="right">
+          <ToggleButtonGroup.Separator />
           <Icon icon="gravity-ui:text-align-right" />
           Right
         </ToggleButton>
@@ -243,10 +267,12 @@ export const SelectionMode: Story = {
             Left
           </ToggleButton>
           <ToggleButton id="center">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:text-align-center" />
             Center
           </ToggleButton>
           <ToggleButton id="right">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:text-align-right" />
             Right
           </ToggleButton>
@@ -259,12 +285,15 @@ export const SelectionMode: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:strikethrough" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -288,12 +317,15 @@ export const Controlled: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:strikethrough" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -318,9 +350,11 @@ export const Disabled: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -332,9 +366,11 @@ export const Disabled: Story = {
             <Icon icon="gravity-ui:bold" />
           </ToggleButton>
           <ToggleButton isDisabled isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:italic" />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Icon icon="gravity-ui:underline" />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -345,7 +381,7 @@ export const Disabled: Story = {
 
 export const WithoutSeparator: Story = {
   render: () => (
-    <ToggleButtonGroup hideSeparator selectionMode="multiple">
+    <ToggleButtonGroup selectionMode="multiple">
       <ToggleButton isIconOnly aria-label="Bold" id="bold">
         <Icon icon="gravity-ui:bold" />
       </ToggleButton>
@@ -371,10 +407,12 @@ export const WithLabels: Story = {
           Bold
         </ToggleButton>
         <ToggleButton id="italic">
+          <ToggleButtonGroup.Separator />
           <Icon icon="gravity-ui:italic" />
           Italic
         </ToggleButton>
         <ToggleButton id="underline">
+          <ToggleButtonGroup.Separator />
           <Icon icon="gravity-ui:underline" />
           Underline
         </ToggleButton>
@@ -403,12 +441,15 @@ export const Examples: Story = {
                 <Icon icon="gravity-ui:bold" />
               </ToggleButton>
               <ToggleButton isIconOnly aria-label="Italic" id="italic">
+                <ToggleButtonGroup.Separator />
                 <Icon icon="gravity-ui:italic" />
               </ToggleButton>
               <ToggleButton isIconOnly aria-label="Underline" id="underline">
+                <ToggleButtonGroup.Separator />
                 <Icon icon="gravity-ui:underline" />
               </ToggleButton>
               <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+                <ToggleButtonGroup.Separator />
                 <Icon icon="gravity-ui:strikethrough" />
               </ToggleButton>
             </ToggleButtonGroup>
@@ -422,9 +463,11 @@ export const Examples: Story = {
                 <Icon icon="gravity-ui:text-align-left" />
               </ToggleButton>
               <ToggleButton isIconOnly aria-label="Align center" id="center">
+                <ToggleButtonGroup.Separator />
                 <Icon icon="gravity-ui:text-align-center" />
               </ToggleButton>
               <ToggleButton isIconOnly aria-label="Align right" id="right">
+                <ToggleButtonGroup.Separator />
                 <Icon icon="gravity-ui:text-align-right" />
               </ToggleButton>
             </ToggleButtonGroup>
@@ -444,9 +487,11 @@ export const Examples: Story = {
               <Icon icon="gravity-ui:layout-cells-large" />
             </ToggleButton>
             <ToggleButton isIconOnly aria-label="List view" id="list">
+              <ToggleButtonGroup.Separator />
               <Icon icon="gravity-ui:list-ul" />
             </ToggleButton>
             <ToggleButton isIconOnly aria-label="Columns view" id="columns">
+              <ToggleButtonGroup.Separator />
               <Icon icon="gravity-ui:layout-columns-3" />
             </ToggleButton>
           </ToggleButtonGroup>
@@ -460,9 +505,11 @@ export const Examples: Story = {
               <Icon icon="gravity-ui:bold" />
             </ToggleButton>
             <ToggleButton isIconOnly aria-label="Italic" id="italic">
+              <ToggleButtonGroup.Separator />
               <Icon icon="gravity-ui:italic" />
             </ToggleButton>
             <ToggleButton isIconOnly aria-label="Underline" id="underline">
+              <ToggleButtonGroup.Separator />
               <Icon icon="gravity-ui:underline" />
             </ToggleButton>
           </ToggleButtonGroup>

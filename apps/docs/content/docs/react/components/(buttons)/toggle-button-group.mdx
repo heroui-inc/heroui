@@ -22,6 +22,28 @@ import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
   name="toggle-button-group-basic"
 />
 
+### Anatomy
+
+Import the ToggleButtonGroup component and access all parts using dot notation.
+
+```tsx
+import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
+
+export default () => (
+  <ToggleButtonGroup selectionMode="multiple">
+    <ToggleButton id="first">First</ToggleButton>
+    <ToggleButton id="second">
+      <ToggleButtonGroup.Separator />
+      Second
+    </ToggleButton>
+    <ToggleButton id="third">
+      <ToggleButtonGroup.Separator />
+      Third
+    </ToggleButton>
+  </ToggleButtonGroup>
+);
+```
+
 ### Sizes
 
 <ComponentPreview
@@ -70,6 +92,8 @@ Use `selectionMode="single"` for mutually exclusive choices or `selectionMode="m
 
 ### Without Separator
 
+Simply omit the `<ToggleButtonGroup.Separator />` component from your buttons.
+
 <ComponentPreview
   name="toggle-button-group-without-separator"
 />
@@ -87,7 +111,10 @@ function CustomToggleButtonGroup() {
   return (
     <ToggleButtonGroup className="bg-purple-100" selectionMode="single">
       <ToggleButton id="a">Option A</ToggleButton>
-      <ToggleButton id="b">Option B</ToggleButton>
+      <ToggleButton id="b">
+        <ToggleButtonGroup.Separator />
+        Option B
+      </ToggleButton>
     </ToggleButtonGroup>
   );
 }
@@ -102,6 +129,10 @@ To customize the ToggleButtonGroup component classes, you can use the `@layer co
 @layer components {
   .toggle-button-group {
     @apply rounded-lg;
+  }
+
+  .toggle-button-group__separator {
+    @apply opacity-25;
   }
 
   .toggle-button-group--full-width {
@@ -121,10 +152,10 @@ The ToggleButtonGroup component uses these CSS classes ([View source styles](htt
 - `.toggle-button-group--horizontal` - Horizontal orientation
 - `.toggle-button-group--vertical` - Vertical orientation
 - `.toggle-button-group--full-width` - Full width modifier
+- `.toggle-button-group__separator` - Separator element between buttons
 
 #### State Attributes
 - `[data-detached="true"]` - Detached mode (separated buttons with gaps)
-- `[data-hide-separator="true"]` - Hides the separator between buttons
 - `[data-size="sm|md|lg"]` - Size propagated to child buttons
 
 ## API Reference
@@ -143,9 +174,14 @@ Inherits from [React Aria ToggleButtonGroup](https://react-aria.adobe.com/Toggle
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size propagated to child ToggleButtons |
 | `isDetached` | `boolean` | `false` | Whether buttons are visually separated with gaps |
-| `hideSeparator` | `boolean` | `false` | Whether to hide the separator between buttons |
 | `fullWidth` | `boolean` | `false` | Whether the group fills available width |
 | `isDisabled` | `boolean` | `false` | Disables all buttons in the group |
+| `className` | `string` | - | Additional CSS classes |
+
+### ToggleButtonGroup.Separator Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 
 ### Notes
@@ -153,5 +189,6 @@ Inherits from [React Aria ToggleButtonGroup](https://react-aria.adobe.com/Toggle
 - ToggleButtonGroup uses React Context to pass `size` to all child ToggleButton components
 - Each ToggleButton must have a unique `id` prop that corresponds to the keys used in `selectedKeys` / `defaultSelectedKeys`
 - The `isDisabled` prop is handled natively by React Aria and disables all child ToggleButtons — individual buttons can override this by setting `isDisabled={false}`
-- The component automatically handles border radius and separators between buttons
+- The component automatically handles border radius between buttons
+- Add `<ToggleButtonGroup.Separator />` inside each ToggleButton (except the first) to show dividers between buttons
 - Use `disallowEmptySelection` with `selectionMode="single"` to ensure one option is always selected

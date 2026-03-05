@@ -1,27 +1,30 @@
 import type {ComponentProps} from "react";
 
-import {ToggleButtonGroupRoot} from "./toggle-button-group";
+import {ToggleButtonGroupRoot, ToggleButtonGroupSeparator} from "./toggle-button-group";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const ToggleButtonGroup = Object.assign(ToggleButtonGroupRoot, {
   Root: ToggleButtonGroupRoot,
+  Separator: ToggleButtonGroupSeparator,
 });
 
 export type ToggleButtonGroup = {
   Props: ComponentProps<typeof ToggleButtonGroupRoot>;
   RootProps: ComponentProps<typeof ToggleButtonGroupRoot>;
+  SeparatorProps: ComponentProps<typeof ToggleButtonGroupSeparator>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {ToggleButtonGroupRoot};
+export {ToggleButtonGroupRoot, ToggleButtonGroupSeparator};
 
 export type {
   ToggleButtonGroupRootProps,
   ToggleButtonGroupRootProps as ToggleButtonGroupProps,
+  ToggleButtonGroupSeparatorProps,
 } from "./toggle-button-group";
 
 /* -------------------------------------------------------------------------------------------------

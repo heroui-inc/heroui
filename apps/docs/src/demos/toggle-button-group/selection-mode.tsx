@@ -20,10 +20,12 @@ export function SelectionMode() {
             Left
           </ToggleButton>
           <ToggleButton id="center">
+            <ToggleButtonGroup.Separator />
             <TextAlignCenter />
             Center
           </ToggleButton>
           <ToggleButton id="right">
+            <ToggleButtonGroup.Separator />
             <TextAlignRight />
             Right
           </ToggleButton>
@@ -36,12 +38,15 @@ export function SelectionMode() {
             <Bold />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+            <ToggleButtonGroup.Separator />
             <Strikethrough />
           </ToggleButton>
         </ToggleButtonGroup>

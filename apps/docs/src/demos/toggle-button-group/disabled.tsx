@@ -11,9 +11,11 @@ export function Disabled() {
             <Bold />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -25,9 +27,11 @@ export function Disabled() {
             <Bold />
           </ToggleButton>
           <ToggleButton isDisabled isIconOnly aria-label="Italic" id="italic">
+            <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
           <ToggleButton isIconOnly aria-label="Underline" id="underline">
+            <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>
         </ToggleButtonGroup>

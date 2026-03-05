@@ -4,15 +4,16 @@ import type {ToggleButtonGroupVariants, ToggleButtonVariants} from "@heroui/styl
 import type {ComponentPropsWithRef} from "react";
 
 import {toggleButtonGroupVariants} from "@heroui/styles";
-import React, {createContext} from "react";
+import React, {createContext, useContext} from "react";
 import {ToggleButtonGroup as ToggleButtonGroupPrimitive} from "react-aria-components";
 
-import {composeTwRenderProps} from "../../utils";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 
 /* -------------------------------------------------------------------------------------------------
  * ToggleButtonGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type ToggleButtonGroupContext = {
+  slots?: ReturnType<typeof toggleButtonGroupVariants>;
   size?: ToggleButtonVariants["size"];
   isDisabled?: boolean;
 };
@@ -31,32 +32,28 @@ interface ToggleButtonGroupRootProps
   size?: ToggleButtonVariants["size"];
   /** Whether the group buttons are visually separated (detached) instead of connected */
   isDetached?: boolean;
-  /** Whether to hide the separator between buttons */
-  hideSeparator?: boolean;
 }
 
 const ToggleButtonGroupRoot = ({
   children,
   className,
   fullWidth,
-  hideSeparator = false,
   isDetached = false,
   isDisabled,
   orientation = "horizontal",
   size,
   ...rest
 }: ToggleButtonGroupRootProps) => {
-  const styles = toggleButtonGroupVariants({
-    fullWidth,
-    orientation,
-  });
+  const slots = React.useMemo(
+    () => toggleButtonGroupVariants({fullWidth, orientation}),
+    [fullWidth, orientation],
+  );
 
   return (
-    <ToggleButtonGroupContext value={{size, isDisabled}}>
+    <ToggleButtonGroupContext value={{slots, size, isDisabled}}>
       <ToggleButtonGroupPrimitive
-        className={composeTwRenderProps(className, styles)}
+        className={composeTwRenderProps(className, slots.base())}
         data-detached={isDetached ? "true" : undefined}
-        data-hide-separator={hideSeparator ? "true" : undefined}
         data-size={size ?? "md"}
         data-slot="toggle-button-group"
         isDisabled={isDisabled}
@@ -70,8 +67,28 @@ const ToggleButtonGroupRoot = ({
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * ToggleButtonGroup Separator
+ * -----------------------------------------------------------------------------------------------*/
+interface ToggleButtonGroupSeparatorProps extends ComponentPropsWithRef<"span"> {
+  className?: string;
+}
+
+const ToggleButtonGroupSeparator = ({className, ...props}: ToggleButtonGroupSeparatorProps) => {
+  const {slots} = useContext(ToggleButtonGroupContext);
+
+  return (
+    <span
+      aria-hidden="true"
+      className={composeSlotClassName(slots?.separator, className)}
+      data-slot="toggle-button-group-separator"
+      {...props}
+    />
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ToggleButtonGroupRoot, ToggleButtonGroupContext};
+export {ToggleButtonGroupRoot, ToggleButtonGroupSeparator, ToggleButtonGroupContext};
 
-export type {ToggleButtonGroupRootProps};
+export type {ToggleButtonGroupRootProps, ToggleButtonGroupSeparatorProps};

@@ -3,7 +3,7 @@ import {ToggleButton, ToggleButtonGroup} from "@heroui/react";
 
 export function WithoutSeparator() {
   return (
-    <ToggleButtonGroup hideSeparator selectionMode="multiple">
+    <ToggleButtonGroup selectionMode="multiple">
       <ToggleButton isIconOnly aria-label="Bold" id="bold">
         <Bold />
       </ToggleButton>
