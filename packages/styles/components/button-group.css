@@ -1,4 +1,6 @@
-/* ButtonGroup component styles */
+/* ==========================================================================
+   ButtonGroup - Groups related buttons together
+   ========================================================================== */
 
 /* Base button group styles */
 .button-group {
@@ -31,13 +33,16 @@
   transform: none;
 }
 
-/* Separator between buttons */
-.button-group .button:not(:first-child):before {
+/* ==========================================================================
+   Separator (compound component)
+   ========================================================================== */
+
+.button-group__separator {
   @apply bg-current opacity-15;
 
-  content: "";
   border-radius: 4px;
   position: absolute;
+  pointer-events: none;
   left: -1px;
   top: 25%;
   width: 1px;
@@ -51,10 +56,9 @@
   @apply motion-reduce:transition-none;
 }
 
-/* Hide separator when hideSeparator prop is set */
-.button-group[data-hide-separator="true"] .button:not(:first-child):before {
-  display: none;
-}
+/* ==========================================================================
+   Outline button border handling
+   ========================================================================== */
 
 /* Remove adjacent borders from outline buttons in group since we have separators */
 /* First button: remove end border (right in LTR, left in RTL) */
@@ -72,7 +76,10 @@
   @apply border-x-0;
 }
 
-/* Full width modifier */
+/* ==========================================================================
+   Full width modifier
+   ========================================================================== */
+
 .button-group--full-width {
   @apply w-full;
 }

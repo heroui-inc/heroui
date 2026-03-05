@@ -12,10 +12,12 @@ export function WithIcons() {
             Search
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             <Plus />
             Add
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             <TrashBin />
             Delete
           </Button>
@@ -28,9 +30,11 @@ export function WithIcons() {
             <Globe />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <Plus />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <TrashBin />
           </Button>
         </ButtonGroup>

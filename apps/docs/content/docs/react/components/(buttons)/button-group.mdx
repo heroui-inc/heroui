@@ -1,6 +1,7 @@
 ---
 title: ButtonGroup
 description: Group related buttons together with consistent styling and spacing
+icon: updated
 links:
   rac: Button
   source: button-group/button-group.tsx
@@ -12,7 +13,7 @@ links:
 ## Import
 
 ```tsx
-import { ButtonGroup } from '@heroui/react';
+import { ButtonGroup, Button } from '@heroui/react';
 ```
 
 ### Usage
@@ -23,16 +24,24 @@ import { ButtonGroup } from '@heroui/react';
 
 ### Anatomy
 
+Import the ButtonGroup component and access all parts using dot notation.
+
 ```tsx
 import { ButtonGroup, Button } from '@heroui/react';
 
 export default () => (
   <ButtonGroup>
     <Button>First</Button>
-    <Button>Second</Button>
-    <Button>Third</Button>
+    <Button>
+      <ButtonGroup.Separator />
+      Second
+    </Button>
+    <Button>
+      <ButtonGroup.Separator />
+      Third
+    </Button>
   </ButtonGroup>
-)
+);
 ```
 
 > **ButtonGroup** wraps multiple Button components together, applying consistent styling, spacing, and automatic border radius handling. It uses React Context to pass `size`, `variant`, and `isDisabled` props to all child buttons.
@@ -69,6 +78,8 @@ export default () => (
 
 ### Without Separator
 
+Simply omit the `<ButtonGroup.Separator />` component from your buttons.
+
 <ComponentPreview
   name="button-group-without-separator"
 />
@@ -80,14 +91,20 @@ export default () => (
 ### Passing Tailwind CSS classes
 
 ```tsx
-import { ButtonGroup } from '@heroui/react';
+import { ButtonGroup, Button } from '@heroui/react';
 
 function CustomButtonGroup() {
   return (
     <ButtonGroup className="gap-2">
       <Button>First</Button>
-      <Button>Second</Button>
-      <Button>Third</Button>
+      <Button>
+        <ButtonGroup.Separator />
+        Second
+      </Button>
+      <Button>
+        <ButtonGroup.Separator />
+        Third
+      </Button>
     </ButtonGroup>
   );
 }
@@ -103,6 +120,10 @@ To customize the ButtonGroup component classes, you can use the `@layer componen
   .button-group {
     @apply gap-2 rounded-lg;
   }
+
+  .button-group__separator {
+    @apply opacity-25;
+  }
 }
 ```
 
@@ -114,6 +135,8 @@ The ButtonGroup component uses these CSS classes ([View source styles](https://g
 
 #### Base Classes
 - `.button-group` - Base button group container
+- `.button-group--full-width` - Full width modifier
+- `.button-group__separator` - Separator element between buttons
 
 The ButtonGroup component automatically applies border radius to buttons:
 - First button gets rounded left/start edge
@@ -121,7 +144,7 @@ The ButtonGroup component automatically applies border radius to buttons:
 - Middle buttons have no border radius
 - Single button gets full border radius on all edges
 
-Separators are automatically added between buttons using a pseudo-element (`:before`) on buttons that are not the first child.
+Add `<ButtonGroup.Separator />` inside each Button (except the first) to show dividers between buttons.
 
 ## API Reference
 
@@ -133,14 +156,20 @@ Separators are automatically added between buttons using a pseudo-element (`:bef
 | `size` | `'sm' \| 'md' \| 'lg'` | - | Size applied to all buttons in the group |
 | `fullWidth` | `boolean` | `false` | Whether the button group should take full width of its container |
 | `isDisabled` | `boolean` | `false` | Whether all buttons in the group are disabled (can be overridden on individual buttons) |
-| `hideSeparator` | `boolean` | `false` | Hide separator lines between buttons |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Button components to group together |
+
+### ButtonGroup.Separator Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
 
 ### Notes
 
 - ButtonGroup uses React Context to pass `size`, `variant`, and `isDisabled` props to all child Button components
 - **Only direct child buttons receive the ButtonGroup props** - Buttons nested inside other components (like Modal, Dropdown, etc.) will not inherit the group's props even if they are descendants of the ButtonGroup
 - Individual Button components can override the group's `isDisabled` prop by setting `isDisabled={false}`
-- The component automatically handles border radius and separators between buttons
+- The component automatically handles border radius between buttons
+- Add `<ButtonGroup.Separator />` inside each Button (except the first) to show dividers between buttons
 - Buttons in a group have their active/pressed scale transform removed for a more cohesive appearance

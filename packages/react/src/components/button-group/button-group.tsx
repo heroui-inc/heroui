@@ -5,17 +5,19 @@ import type {ButtonGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {buttonGroupVariants} from "@heroui/styles";
-import React, {Children, createContext, isValidElement} from "react";
+import React, {Children, createContext, isValidElement, useContext} from "react";
+
+import {composeSlotClassName} from "../../utils";
 
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type ButtonGroupContext = {
+  slots?: ReturnType<typeof buttonGroupVariants>;
   size?: ButtonProps["size"];
   variant?: ButtonProps["variant"];
   isDisabled?: ButtonProps["isDisabled"];
   fullWidth?: ButtonProps["fullWidth"];
-  hideSeparator?: boolean;
 };
 
 const ButtonGroupContext = createContext<ButtonGroupContext>({});
@@ -30,20 +32,19 @@ interface ButtonGroupRootProps
   extends
     ComponentPropsWithRef<"div">,
     Pick<ButtonProps, "size" | "variant" | "isDisabled">,
-    ButtonGroupVariants {
-  hideSeparator?: boolean;
-}
+    ButtonGroupVariants {}
 
 const ButtonGroupRoot = ({
   children,
   className,
   fullWidth,
-  hideSeparator = false,
   isDisabled,
   size,
   variant,
   ...rest
 }: ButtonGroupRootProps) => {
+  const slots = React.useMemo(() => buttonGroupVariants({fullWidth}), [fullWidth]);
+
   // Wrap only direct children with context provider
   const wrappedChildren = Children.map(children, (child) => {
     if (!isValidElement(child)) {
@@ -57,13 +58,8 @@ const ButtonGroupRoot = ({
   });
 
   return (
-    <ButtonGroupContext value={{size, variant, isDisabled, fullWidth, hideSeparator}}>
-      <div
-        className={buttonGroupVariants({className, fullWidth})}
-        data-hide-separator={hideSeparator ? "true" : undefined}
-        data-slot="button-group"
-        {...rest}
-      >
+    <ButtonGroupContext value={{slots, size, variant, isDisabled, fullWidth}}>
+      <div className={slots.base({className})} data-slot="button-group" {...rest}>
         {wrappedChildren}
       </div>
     </ButtonGroupContext>
@@ -71,8 +67,28 @@ const ButtonGroupRoot = ({
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * ButtonGroup Separator
+ * -----------------------------------------------------------------------------------------------*/
+interface ButtonGroupSeparatorProps extends ComponentPropsWithRef<"span"> {
+  className?: string;
+}
+
+const ButtonGroupSeparator = ({className, ...props}: ButtonGroupSeparatorProps) => {
+  const {slots} = useContext(ButtonGroupContext);
+
+  return (
+    <span
+      aria-hidden="true"
+      className={composeSlotClassName(slots?.separator, className)}
+      data-slot="button-group-separator"
+      {...props}
+    />
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ButtonGroupRoot, ButtonGroupContext};
+export {ButtonGroupRoot, ButtonGroupSeparator, ButtonGroupContext};
 
-export type {ButtonGroupRootProps};
+export type {ButtonGroupRootProps, ButtonGroupSeparatorProps};

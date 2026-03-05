@@ -7,48 +7,84 @@ export function Variants() {
         <p className="text-sm text-muted">Primary</p>
         <ButtonGroup variant="primary">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Secondary</p>
         <ButtonGroup variant="secondary">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Tertiary</p>
         <ButtonGroup variant="tertiary">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Outline</p>
         <ButtonGroup variant="outline">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Ghost</p>
         <ButtonGroup variant="ghost">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Danger</p>
         <ButtonGroup variant="danger">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
     </div>
