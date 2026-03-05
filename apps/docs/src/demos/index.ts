@@ -46,6 +46,8 @@ import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
 import * as PaginationDemos from "./pagination";
 import * as PopoverDemos from "./popover";
+import * as ProgressBarDemos from "./progress-bar";
+import * as ProgressCircleDemos from "./progress-circle";
 import * as RadioGroupDemos from "./radio-group";
 import * as RangeCalendarDemos from "./range-calendar";
 import * as ScrollShadowDemos from "./scroll-shadow";
@@ -2043,6 +2045,52 @@ export const demos: Record<string, DemoItem> = {
   "meter-without-label": {
     component: MeterDemos.WithoutLabel,
     file: "meter/without-label.tsx",
+  },
+  // ProgressBar demos
+  "progress-bar-basic": {
+    component: ProgressBarDemos.Basic,
+    file: "progress-bar/basic.tsx",
+  },
+  "progress-bar-sizes": {
+    component: ProgressBarDemos.Sizes,
+    file: "progress-bar/sizes.tsx",
+  },
+  "progress-bar-colors": {
+    component: ProgressBarDemos.Colors,
+    file: "progress-bar/colors.tsx",
+  },
+  "progress-bar-indeterminate": {
+    component: ProgressBarDemos.Indeterminate,
+    file: "progress-bar/indeterminate.tsx",
+  },
+  "progress-bar-custom-value": {
+    component: ProgressBarDemos.CustomValue,
+    file: "progress-bar/custom-value.tsx",
+  },
+  "progress-bar-without-label": {
+    component: ProgressBarDemos.WithoutLabel,
+    file: "progress-bar/without-label.tsx",
+  },
+  // ProgressCircle demos
+  "progress-circle-basic": {
+    component: ProgressCircleDemos.Basic,
+    file: "progress-circle/basic.tsx",
+  },
+  "progress-circle-sizes": {
+    component: ProgressCircleDemos.Sizes,
+    file: "progress-circle/sizes.tsx",
+  },
+  "progress-circle-colors": {
+    component: ProgressCircleDemos.Colors,
+    file: "progress-circle/colors.tsx",
+  },
+  "progress-circle-indeterminate": {
+    component: ProgressCircleDemos.Indeterminate,
+    file: "progress-circle/indeterminate.tsx",
+  },
+  "progress-circle-with-label": {
+    component: ProgressCircleDemos.WithLabel,
+    file: "progress-circle/with-label.tsx",
   },
   // Modal demos
   "modal-default": {

@@ -56,7 +56,7 @@
  * Trigger Button
  * -------------------------------------------------------------------------- */
 .calendar-year-picker__trigger {
-  @apply flex flex-1 items-center justify-start gap-0.5 rounded-lg outline-none;
+  @apply flex flex-1 items-center justify-start gap-1 rounded-lg outline-none;
 
   cursor: var(--cursor-interactive);
   touch-action: manipulation;
@@ -75,7 +75,7 @@
 }
 
 .calendar-year-picker__trigger-indicator {
-  @apply size-3 text-accent;
+  @apply text-xs text-accent;
 
   transition: transform 150ms var(--ease-out);
   @apply motion-reduce:transition-none;

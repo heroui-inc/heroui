@@ -1,9 +1,8 @@
 /* Slider styles */
 
 .slider {
-  @apply w-full gap-2;
+  @apply grid w-full gap-1;
 
-  display: grid;
   grid-template-areas:
     "label output"
     "track track";

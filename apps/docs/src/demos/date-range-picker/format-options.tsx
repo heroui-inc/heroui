@@ -10,6 +10,7 @@ import {
   ListBox,
   RangeCalendar,
   Select,
+  Separator,
   Switch,
   TimeField,
   useLocale,
@@ -84,7 +85,7 @@ export function FormatOptions() {
     <div className="flex w-full flex-col gap-4">
       <DateRangePicker
         key={granularity}
-        className="w-full min-w-72"
+        className="w-max min-w-72"
         defaultValue={defaultValue}
         endName="endDate"
         granularity={granularity}
@@ -113,7 +114,7 @@ export function FormatOptions() {
               </DateField.Suffix>
             </DateField.Group>
             <DateRangePicker.Popover className="flex w-full flex-col gap-3">
-              <RangeCalendar aria-label="Trip dates">
+              <RangeCalendar aria-label="Trip dates" className="w-full">
                 <RangeCalendar.Header>
                   <RangeCalendar.YearPickerTrigger>
                     <RangeCalendar.YearPickerTriggerHeading />
@@ -198,6 +199,10 @@ export function FormatOptions() {
           </>
         )}
       </DateRangePicker>
+
+      <Separator className="my-5" />
+
+      <Label className="text-xs font-medium text-muted">Format Options</Label>
 
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-col gap-1">
