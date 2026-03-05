@@ -1,6 +1,6 @@
 "use client";
 
-import type {Key} from "react-aria-components";
+import type {Key} from "@heroui/react";
 
 import {Label, ListBox, Select} from "@heroui/react";
 import {useState} from "react";

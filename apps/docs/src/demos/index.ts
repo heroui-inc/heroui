@@ -65,6 +65,7 @@ import * as TextFieldDemos from "./textfield";
 import * as TimeFieldDemos from "./time-field";
 import * as ToastDemos from "./toast";
 import * as ToggleButtonDemos from "./toggle-button";
+import * as ToggleButtonGroupDemos from "./toggle-button-group";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -1908,6 +1909,43 @@ export const demos: Record<string, DemoItem> = {
   "toggle-button-disabled": {
     component: ToggleButtonDemos.Disabled,
     file: "toggle-button/disabled.tsx",
+  },
+  // ToggleButtonGroup demos
+  "toggle-button-group-basic": {
+    component: ToggleButtonGroupDemos.Basic,
+    file: "toggle-button-group/basic.tsx",
+  },
+  "toggle-button-group-sizes": {
+    component: ToggleButtonGroupDemos.Sizes,
+    file: "toggle-button-group/sizes.tsx",
+  },
+  "toggle-button-group-orientation": {
+    component: ToggleButtonGroupDemos.Orientation,
+    file: "toggle-button-group/orientation.tsx",
+  },
+  "toggle-button-group-attached": {
+    component: ToggleButtonGroupDemos.Attached,
+    file: "toggle-button-group/attached.tsx",
+  },
+  "toggle-button-group-full-width": {
+    component: ToggleButtonGroupDemos.FullWidth,
+    file: "toggle-button-group/full-width.tsx",
+  },
+  "toggle-button-group-selection-mode": {
+    component: ToggleButtonGroupDemos.SelectionMode,
+    file: "toggle-button-group/selection-mode.tsx",
+  },
+  "toggle-button-group-controlled": {
+    component: ToggleButtonGroupDemos.Controlled,
+    file: "toggle-button-group/controlled.tsx",
+  },
+  "toggle-button-group-disabled": {
+    component: ToggleButtonGroupDemos.Disabled,
+    file: "toggle-button-group/disabled.tsx",
+  },
+  "toggle-button-group-without-separator": {
+    component: ToggleButtonGroupDemos.WithoutSeparator,
+    file: "toggle-button-group/without-separator.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

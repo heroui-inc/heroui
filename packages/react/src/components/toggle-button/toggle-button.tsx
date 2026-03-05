@@ -4,9 +4,11 @@ import type {ToggleButtonVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {toggleButtonVariants} from "@heroui/styles";
+import {useContext} from "react";
 import {ToggleButton as ToggleButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
+import {ToggleButtonGroupContext} from "../toggle-button-group";
 
 /* -------------------------------------------------------------------------------------------------
  * ToggleButton Root
@@ -23,9 +25,14 @@ const ToggleButtonRoot = ({
   variant,
   ...rest
 }: ToggleButtonRootProps) => {
+  const groupContext = useContext(ToggleButtonGroupContext);
+
+  // Merge props with precedence: direct props > context props
+  const finalSize = size ?? groupContext?.size;
+
   const styles = toggleButtonVariants({
     isIconOnly,
-    size,
+    size: finalSize,
     variant,
   });
 

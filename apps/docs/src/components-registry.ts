@@ -456,6 +456,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "togglebutton",
     title: "ToggleButton",
   },
+  togglebuttongroup: {
+    category: "forms",
+    description: "Group multiple toggle buttons into a unified control",
+    href: "/docs/components/toggle-button-group",
+    name: "togglebuttongroup",
+    title: "ToggleButtonGroup",
+  },
   tooltip: {
     category: "display",
     description: "Contextual information on hover or focus",
@@ -740,7 +747,8 @@ const componentRelationships: Record<string, string[]> = {
   ],
   timefield: ["label", "fielderror", "description", "form", "surface"],
   toast: ["button", "alert", "closebutton", "spinner"],
-  togglebutton: ["button", "switch", "checkbox"],
+  togglebutton: ["button", "switch", "checkbox", "togglebuttongroup"],
+  togglebuttongroup: ["togglebutton", "buttongroup", "button"],
   tooltip: ["button", "popover"],
 };
 
