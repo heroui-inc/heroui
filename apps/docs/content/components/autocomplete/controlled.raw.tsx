@@ -41,7 +41,7 @@ export default function App() {
         placeholder="Search an animal"
         selectedKey={key}
         variant="bordered"
-        onSelectionChange={setValue}
+        onChange={setValue}
       >
         {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
       </Autocomplete>

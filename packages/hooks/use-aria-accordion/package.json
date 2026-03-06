@@ -34,12 +34,12 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/button": "3.14.4",
-    "@react-aria/focus": "3.21.4",
-    "@react-aria/selection": "3.27.1",
-    "@react-stately/tree": "3.9.5",
+    "@react-aria/button": "3.14.5",
+    "@react-aria/focus": "3.21.5",
+    "@react-aria/selection": "3.27.2",
+    "@react-stately/tree": "3.9.6",
     "@react-types/accordion": "3.0.0-alpha.26",
-    "@react-types/shared": "3.33.0"
+    "@react-types/shared": "3.33.1"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

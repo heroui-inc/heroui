@@ -32,7 +32,7 @@ export default function App() {
   const [value, setValue] = React.useState("");
   const [selectedKey, setSelectedKey] = React.useState(null);
 
-  const onSelectionChange = (id) => {
+  const onChange = (id) => {
     setSelectedKey(id);
   };
 
@@ -48,8 +48,8 @@ export default function App() {
         defaultItems={animals}
         label="Search an animal"
         variant="bordered"
+        onChange={onChange}
         onInputChange={onInputChange}
-        onSelectionChange={onSelectionChange}
       >
         {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
       </Autocomplete>

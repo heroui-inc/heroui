@@ -52,6 +52,6 @@ export const parseDependencies = (content: string) => {
 };
 
 const fixedVersions = {
-  "@internationalized/date": "3.11.0",
+  "@internationalized/date": "3.12.0",
   "@react-aria/i18n": "3.12.15",
 };

@@ -55,11 +55,11 @@
     "@heroui/divider": "workspace:*",
     "@heroui/use-aria-accordion": "workspace:*",
     "@heroui/dom-animation": "workspace:*",
-    "@react-aria/interactions": "3.27.0",
-    "@react-aria/focus": "3.21.4",
-    "@react-stately/tree": "3.9.5",
+    "@react-aria/interactions": "3.27.1",
+    "@react-aria/focus": "3.21.5",
+    "@react-stately/tree": "3.9.6",
     "@react-types/accordion": "3.0.0-alpha.26",
-    "@react-types/shared": "3.33.0"
+    "@react-types/shared": "3.33.1"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

@@ -433,7 +433,7 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
           selectedItem.parentElement.clientHeight / 2;
       }
     }
-  }, [state.isOpen, disableAnimation, state.selectedKeys]);
+  }, [state.isOpen, disableAnimation]);
 
   const getBaseProps: PropGetter = useCallback(
     (props = {}) => ({
