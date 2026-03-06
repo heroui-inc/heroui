@@ -1,5 +1,13 @@
+"use client";
+
+import {CardStack} from "./card-stack";
 import {DarkMembershipCard} from "./footer-cta";
-import {BlueMembershipCard, OrangeMembershipCard} from "./membership-cards";
+import {
+  BlueMembershipCard,
+  OrangeMembershipCard,
+  PurpleMembershipCard,
+  TealMembershipCard,
+} from "./membership-cards";
 
 export default function CtaSection() {
   return (
@@ -10,18 +18,13 @@ export default function CtaSection() {
         <p className="text-foreground/60">before it&apos;s late</p>
       </div>
 
-      {/* Stacked membership cards */}
-      <div className="relative mt-10 h-[480px] w-[400px]">
-        <div className="absolute top-1/2 left-1/2 z-0 -translate-x-[65%] -translate-y-1/2 -rotate-2">
-          <BlueMembershipCard />
-        </div>
-        <div className="absolute top-1/2 left-1/2 z-0 -translate-x-[35%] -translate-y-1/2 rotate-[3.78deg]">
-          <OrangeMembershipCard />
-        </div>
-        <div className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-          <DarkMembershipCard />
-        </div>
-      </div>
+      <CardStack>
+        <DarkMembershipCard />
+        <BlueMembershipCard />
+        <OrangeMembershipCard />
+        <TealMembershipCard />
+        <PurpleMembershipCard />
+      </CardStack>
     </section>
   );
 }

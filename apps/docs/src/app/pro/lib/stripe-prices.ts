@@ -2,18 +2,25 @@ import type {PlanPricing, TeamPlanPricing} from "../components/pricing/pricing-c
 
 import {env} from "~env";
 
-// Original (crossed-out) prices — marketing display only, not in Stripe
 const ORIGINAL_PRICES = {
-  mobile: {annual: 21, perpetual: 749},
-  super: {annual: 29, perpetual: 997},
-  teamMobile: {annual: 33, perpetual: 1199},
-  teamSuper: {annual: 50, perpetual: 1799},
-  teamWeb: {annual: 25, perpetual: 899},
-  web: {annual: 17, perpetual: 599},
+  mobile: 399,
+  super: 499,
+  teamMobile: 349,
+  teamSuper: 449,
+  teamWeb: 249,
+  web: 299,
+};
+
+export type Discount = {
+  label: string;
+  percent: number;
+  teamPercent?: number;
 };
 
 export type AllPrices = {
+  discount: Discount | null;
   mobile: PlanPricing;
+  renewal: {individual: number; team: number};
   super: PlanPricing;
   teamMobile: TeamPlanPricing;
   teamSuper: TeamPlanPricing;
@@ -21,142 +28,103 @@ export type AllPrices = {
   web: PlanPricing;
 };
 
-type StripePrice = {
-  id: string;
-  unit_amount: number;
+type PlanPriceResponse = {
+  discountUnitAmount: number | null;
+  licenseType: string;
+  plan: string;
+  planId: string;
+  unitAmount: number | null;
 };
 
-type StripeListResponse = {
-  data: StripePrice[];
-  has_more: boolean;
+type RenewalPriceResponse = {
+  licenseType: string;
+  unitAmount: number | null;
 };
 
-async function fetchStripePrices(): Promise<Map<string, number>> {
-  if (!env.STRIPE_SECRET_KEY) {
-    return new Map();
+type PricesApiResponse = {
+  discount: Discount | null;
+  plans: PlanPriceResponse[];
+  renewal?: RenewalPriceResponse[];
+};
+
+const EMPTY_RESPONSE: PricesApiResponse = {discount: null, plans: [], renewal: []};
+
+async function fetchPricesApi(): Promise<PricesApiResponse> {
+  if (!env.DASHBOARD_API_URL) {
+    return EMPTY_RESPONSE;
   }
 
-  const priceIds = [
-    env.STRIPE_PRICE_WEB_ANNUAL,
-    env.STRIPE_PRICE_WEB_PERPETUAL,
-    env.STRIPE_PRICE_MOBILE_ANNUAL,
-    env.STRIPE_PRICE_MOBILE_PERPETUAL,
-    env.STRIPE_PRICE_SUPER_ANNUAL,
-    env.STRIPE_PRICE_SUPER_PERPETUAL,
-    env.STRIPE_PRICE_TEAM_WEB_ANNUAL,
-    env.STRIPE_PRICE_TEAM_WEB_PERPETUAL,
-    env.STRIPE_PRICE_TEAM_MOBILE_ANNUAL,
-    env.STRIPE_PRICE_TEAM_MOBILE_PERPETUAL,
-    env.STRIPE_PRICE_TEAM_SUPER_ANNUAL,
-    env.STRIPE_PRICE_TEAM_SUPER_PERPETUAL,
-  ].filter((id): id is string => !!id);
+  try {
+    const res = await fetch(`${env.DASHBOARD_API_URL}/api/prices`, {
+      next: {revalidate: 3600},
+    });
 
-  const params = new URLSearchParams({active: "true", limit: "100"});
+    if (!res.ok) {
+      console.warn(`Failed to fetch plan prices (HTTP ${res.status}), using fallback prices`);
 
-  const res = await fetch(`https://api.stripe.com/v1/prices?${params}`, {
-    headers: {Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`},
-    next: {revalidate: 3600},
-  });
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch Stripe prices: ${res.status}`);
-  }
-
-  const json = (await res.json()) as StripeListResponse;
-
-  const priceMap = new Map<string, number>();
-
-  for (const price of json.data) {
-    if (priceIds.includes(price.id)) {
-      priceMap.set(price.id, price.unit_amount / 100);
+      return EMPTY_RESPONSE;
     }
-  }
 
-  // Ensure all required prices were found
-  for (const id of priceIds) {
-    if (!priceMap.has(id)) {
-      throw new Error(`Stripe price not found: ${id}`);
-    }
-  }
+    return (await res.json()) as PricesApiResponse;
+  } catch (error) {
+    console.warn("Failed to fetch plan prices, using fallback prices:", error);
 
-  return priceMap;
+    return EMPTY_RESPONSE;
+  }
 }
 
-function getPrice(priceMap: Map<string, number>, priceId: string | undefined): number {
-  if (!priceId) return 0;
-
-  return priceMap.get(priceId) ?? 0;
+function cents(amount: number | null): number {
+  return amount != null ? amount / 100 : 0;
 }
 
-function buildPlanPricing(
-  annualAmount: number,
-  perpetualAmount: number,
-  originals: {annual: number; perpetual: number},
-): PlanPricing {
-  return {
-    annual: {
-      billed: annualAmount,
-      original: originals.annual,
-      price: Math.round(annualAmount / 12),
-    },
-    perpetual: {
-      original: originals.perpetual,
-      price: perpetualAmount,
-    },
-  };
+function buildPlanPricing(plan: PlanPriceResponse | undefined, fallback: number): PlanPricing {
+  const original = cents(plan?.unitAmount ?? null) || fallback;
+  const price = cents(plan?.discountUnitAmount ?? null) || original;
+
+  return {original, price};
 }
 
 function buildTeamPlanPricing(
-  annualAmount: number,
-  perpetualAmount: number,
-  originals: {annual: number; perpetual: number},
+  plan: PlanPriceResponse | undefined,
+  fallback: number,
 ): TeamPlanPricing {
-  return {
-    annual: {
-      billed: annualAmount,
-      original: originals.annual,
-      price: Math.round(annualAmount / 12),
-    },
-    perpetual: {
-      original: originals.perpetual,
-      price: perpetualAmount,
-    },
-  };
+  const original = cents(plan?.unitAmount ?? null) || fallback;
+  const price = cents(plan?.discountUnitAmount ?? null) || original;
+
+  return {original, price};
 }
 
 export async function fetchAllPrices(): Promise<AllPrices> {
-  const priceMap = await fetchStripePrices();
+  const body = await fetchPricesApi();
+
+  const plans = new Map<string, PlanPriceResponse>();
+
+  for (const p of body.plans ?? []) {
+    plans.set(p.planId, p);
+  }
+
+  const individualRenewal = body.renewal?.find((r) => r.licenseType === "individual");
+  const teamRenewal = body.renewal?.find((r) => r.licenseType === "team");
+
+  const rawDiscount = body.discount;
+  const discount = rawDiscount
+    ? {
+        ...rawDiscount,
+        teamPercent: rawDiscount.teamPercent ?? rawDiscount.percent,
+      }
+    : null;
 
   return {
-    mobile: buildPlanPricing(
-      getPrice(priceMap, env.STRIPE_PRICE_MOBILE_ANNUAL),
-      getPrice(priceMap, env.STRIPE_PRICE_MOBILE_PERPETUAL),
-      ORIGINAL_PRICES.mobile,
-    ),
-    super: buildPlanPricing(
-      getPrice(priceMap, env.STRIPE_PRICE_SUPER_ANNUAL),
-      getPrice(priceMap, env.STRIPE_PRICE_SUPER_PERPETUAL),
-      ORIGINAL_PRICES.super,
-    ),
-    teamMobile: buildTeamPlanPricing(
-      getPrice(priceMap, env.STRIPE_PRICE_TEAM_MOBILE_ANNUAL),
-      getPrice(priceMap, env.STRIPE_PRICE_TEAM_MOBILE_PERPETUAL),
-      ORIGINAL_PRICES.teamMobile,
-    ),
-    teamSuper: buildTeamPlanPricing(
-      getPrice(priceMap, env.STRIPE_PRICE_TEAM_SUPER_ANNUAL),
-      getPrice(priceMap, env.STRIPE_PRICE_TEAM_SUPER_PERPETUAL),
-      ORIGINAL_PRICES.teamSuper,
-    ),
-    teamWeb: buildTeamPlanPricing(
-      getPrice(priceMap, env.STRIPE_PRICE_TEAM_WEB_ANNUAL),
-      getPrice(priceMap, env.STRIPE_PRICE_TEAM_WEB_PERPETUAL),
-      ORIGINAL_PRICES.teamWeb,
-    ),
-    web: buildPlanPricing(
-      getPrice(priceMap, env.STRIPE_PRICE_WEB_ANNUAL),
-      getPrice(priceMap, env.STRIPE_PRICE_WEB_PERPETUAL),
-      ORIGINAL_PRICES.web,
-    ),
+    discount,
+    mobile: buildPlanPricing(plans.get("mobile-hero"), ORIGINAL_PRICES.mobile),
+    renewal: {
+      individual: cents(individualRenewal?.unitAmount ?? null),
+      team: cents(teamRenewal?.unitAmount ?? null),
+    },
+    super: buildPlanPricing(plans.get("super-hero"), ORIGINAL_PRICES.super),
+    teamMobile: buildTeamPlanPricing(plans.get("mobile-heroes"), ORIGINAL_PRICES.teamMobile),
+    teamSuper: buildTeamPlanPricing(plans.get("super-heroes"), ORIGINAL_PRICES.teamSuper),
+    teamWeb: buildTeamPlanPricing(plans.get("web-heroes"), ORIGINAL_PRICES.teamWeb),
+    web: buildPlanPricing(plans.get("web-hero"), ORIGINAL_PRICES.web),
   };
 }

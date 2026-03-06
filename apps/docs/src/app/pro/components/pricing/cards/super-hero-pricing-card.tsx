@@ -1,6 +1,6 @@
 "use client";
 
-import {Button} from "@heroui/react";
+import {buttonVariants} from "@heroui/styles";
 import {useContext} from "react";
 
 import {
@@ -13,9 +13,10 @@ import {
   AnimatedPrice,
   BillingNote,
   PlanTypeContext,
-  PricingModeContext,
+  RenewalNote,
   TeamAnimatedPrice,
   TeamBillingNote,
+  getDashboardCheckoutUrl,
   usePricingData,
 } from "../pricing-context";
 
@@ -36,22 +37,16 @@ import {
 } from "./cards-svgs";
 
 function SuperHeroCardHeader() {
-  const isAnnual = useContext(PricingModeContext);
   const planType = useContext(PlanTypeContext);
   const isTeam = planType === "teams";
   const prices = usePricingData();
 
+  const planId = isTeam ? "super-heroes" : "super-hero";
+  const checkoutUrl = getDashboardCheckoutUrl(planId);
+
   const savings = isTeam
-    ? isAnnual
-      ? prices.teamWeb.annual.billed +
-        prices.teamMobile.annual.billed -
-        prices.teamSuper.annual.billed
-      : prices.teamWeb.perpetual.original +
-        prices.teamMobile.perpetual.original -
-        prices.teamSuper.perpetual.original
-    : isAnnual
-      ? prices.web.annual.billed + prices.mobile.annual.billed - prices.super.annual.billed
-      : prices.web.perpetual.price + prices.mobile.perpetual.price - prices.super.perpetual.price;
+    ? prices.teamWeb.price + prices.teamMobile.price - prices.teamSuper.price
+    : prices.web.price + prices.mobile.price - prices.super.price;
 
   return (
     <div className="relative mx-2 mt-2 mb-2 h-[255px] overflow-clip rounded-2xl bg-default">
@@ -97,16 +92,16 @@ function SuperHeroCardHeader() {
             <AnimatedPrice pricing={prices.super} />
           )}
         </div>
-        <div className="mt-[7px]">
-          {isTeam ? (
-            <TeamBillingNote pricing={prices.teamSuper} />
-          ) : (
-            <BillingNote pricing={prices.super} />
-          )}
-        </div>
-        <Button className="mt-3 min-h-8 w-full bg-foreground text-background" size="sm">
+        <div className="mt-[7px]">{isTeam ? <TeamBillingNote /> : <BillingNote />}</div>
+        <a
+          href={checkoutUrl}
+          className={buttonVariants({
+            className: "mt-3 min-h-8 w-full bg-foreground text-background",
+            size: "sm",
+          })}
+        >
           Get Super edition
-        </Button>
+        </a>
       </div>
       <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_1px_0_var(--border)]" />
     </div>
@@ -148,10 +143,9 @@ function SuperHeroPricingCard() {
     <div className="flex w-[320px] flex-col rounded-3xl bg-surface shadow-surface">
       <SuperHeroCardHeader />
       <SuperHeroFeaturesList />
+      <RenewalNote />
     </div>
   );
 }
-
-// === Team-specific feature components ===
 
 export default SuperHeroPricingCard;

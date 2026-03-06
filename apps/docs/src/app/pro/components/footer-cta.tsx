@@ -8,7 +8,7 @@ function DarkMembershipCard() {
       <div className="absolute top-0 left-0 h-[452px] w-[302px] rounded-[20px] bg-gradient-to-b from-[#313131] to-[#1e1e1e]" />
       <div className="absolute top-[10px] left-[10px] h-[432px] w-[282px] rounded-[10px] border border-solid border-[rgba(255,255,255,0.1)]" />
       <div className="font-heading absolute top-[218px] left-[151px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[32px] leading-[0] font-semibold whitespace-nowrap text-white">
-        <p className="leading-[normal]">Junior Garcia</p>
+        <p className="leading-[normal]">Alex Chen</p>
       </div>
       <div className="font-heading absolute top-[244px] left-[151.5px] flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center text-center text-[12px] leading-[0] font-medium whitespace-nowrap text-white opacity-30">
         <p className="leading-[normal]">Early access</p>
@@ -20,11 +20,11 @@ function DarkMembershipCard() {
         Member
       </p>
       <p className="font-heading absolute top-[396px] left-[40px] text-[16px] leading-[normal] font-medium text-white opacity-40">
-        6 Feb 2026
+        12 Mar 2026
       </p>
       <p className="font-heading absolute top-[396px] left-[262px] flex -translate-x-full gap-1 text-right text-[16px] leading-[0] font-semibold text-white opacity-40">
         <span className="leading-[normal] text-[rgba(255,255,255,0.5)]">#</span>
-        <span className="leading-[normal]">{` 0046`}</span>
+        <span className="leading-[normal]">{` 0012`}</span>
       </p>
       <div className="absolute top-[32px] left-[122px] h-[18px] w-[59px] opacity-40">
         <svg

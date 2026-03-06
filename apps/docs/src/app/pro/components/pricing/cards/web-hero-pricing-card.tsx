@@ -1,6 +1,6 @@
 "use client";
 
-import {Button} from "@heroui/react";
+import {buttonVariants} from "@heroui/styles";
 import {useContext} from "react";
 
 import {
@@ -13,8 +13,10 @@ import {
   AnimatedPrice,
   BillingNote,
   PlanTypeContext,
+  RenewalNote,
   TeamAnimatedPrice,
   TeamBillingNote,
+  getDashboardCheckoutUrl,
   usePricingData,
 } from "../pricing-context";
 
@@ -38,6 +40,8 @@ function WebHeroCardHeader() {
   const planType = useContext(PlanTypeContext);
   const isTeam = planType === "teams";
   const prices = usePricingData();
+  const planId = isTeam ? "web-heroes" : "web-hero";
+  const checkoutUrl = getDashboardCheckoutUrl(planId);
 
   return (
     <div className="relative mx-2 mt-2 mb-2 h-[255px] overflow-clip rounded-2xl bg-default">
@@ -78,19 +82,17 @@ function WebHeroCardHeader() {
             <AnimatedPrice pricing={prices.web} />
           )}
         </div>
-        <div className="mt-[7px]">
-          {isTeam ? (
-            <TeamBillingNote pricing={prices.teamWeb} />
-          ) : (
-            <BillingNote pricing={prices.web} />
-          )}
-        </div>
-        <Button
-          className="mt-3 min-h-8 w-full bg-white text-black shadow-[inset_0_0_1px_0_var(--border)]"
-          size="sm"
+        <div className="mt-[7px]">{isTeam ? <TeamBillingNote /> : <BillingNote />}</div>
+        <a
+          href={checkoutUrl}
+          className={buttonVariants({
+            className:
+              "mt-3 min-h-8 w-full bg-white text-black shadow-[inset_0_0_1px_0_var(--border)]",
+            size: "sm",
+          })}
         >
           Get Web edition
-        </Button>
+        </a>
       </div>
       <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_1px_0_var(--border)]" />
     </div>
@@ -132,6 +134,7 @@ function WebHeroPricingCard() {
     <div className="flex w-[320px] flex-col rounded-3xl bg-surface shadow-surface">
       <WebHeroCardHeader />
       <WebHeroFeaturesList />
+      <RenewalNote />
     </div>
   );
 }

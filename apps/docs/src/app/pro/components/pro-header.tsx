@@ -8,9 +8,7 @@ import {HeroUILogo} from "@/components/heroui-logo";
 import {PreOrderButton} from "./hero-section";
 
 export default function ProHeader() {
-  const [scrolled, setScrolled] = useState(
-    () => typeof window !== "undefined" && window.scrollY > 20,
-  );
+  const [scrolled, setScrolled] = useState(false);
   const ticking = useRef(false);
 
   const updateScrolled = useCallback(() => {
@@ -19,6 +17,9 @@ export default function ProHeader() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    updateScrolled();
+
     const handleScroll = () => {
       if (!ticking.current) {
         ticking.current = true;
