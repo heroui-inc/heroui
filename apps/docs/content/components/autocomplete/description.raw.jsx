@@ -33,7 +33,7 @@ export default function App() {
     <Autocomplete
       className="max-w-xs"
       defaultItems={animals}
-      defaultValue="cat"
+      defaultSelectedKey="cat"
       description="The second most popular pet in the world"
       label="Favorite Animal"
       placeholder="Search an animal"

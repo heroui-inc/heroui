@@ -34,7 +34,7 @@ export default function App() {
       isDisabled
       className="max-w-xs"
       defaultItems={animals}
-      defaultValue="cat"
+      defaultSelectedKey="cat"
       label="Favorite Animal"
       placeholder="Search an animal"
     >
