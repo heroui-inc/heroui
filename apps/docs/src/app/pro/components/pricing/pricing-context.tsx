@@ -89,17 +89,23 @@ export function TeamBillingNote() {
   );
 }
 
-export function RenewalNote() {
+export function RenewalNote({plan}: {plan: "web" | "mobile" | "super"}) {
   const planType = useContext(PlanTypeContext);
   const prices = usePricingData();
-  const amount = planType === "teams" ? prices.renewal.team : prices.renewal.individual;
+  const isTeam = planType === "teams";
+
+  const key = isTeam
+    ? (`team${plan[0]!.toUpperCase()}${plan.slice(1)}` as keyof typeof prices)
+    : plan;
+  const pricing = prices[key];
+  const amount = pricing && "renewal" in pricing ? pricing.renewal : null;
 
   if (!amount) return null;
 
   return (
     <div className="border-t border-default px-5 py-4">
       <p className="text-xs leading-[1.34] font-medium text-foreground">
-        Optional renewal at ${amount}/yr{planType === "teams" ? "/seat" : ""}
+        Optional renewal at ${amount}/yr{isTeam ? "/seat" : ""}
       </p>
       <p className="mt-1 text-xs leading-[1.34] text-muted">
         Get another year of updates or keep using without renewing. No pressure.
@@ -118,8 +124,9 @@ export function usePricingData(): AllPrices {
   return ctx;
 }
 
-export function getDashboardCheckoutUrl(planId: string): string {
+export function getDashboardCheckoutUrl(planId: string, seats?: number): string {
   const base = env.NEXT_PUBLIC_DASHBOARD_URL;
+  const seatsQuery = seats && seats > 1 ? `&seats=${seats}` : "";
 
-  return `${base}/checkout?plan=${planId}`;
+  return `${base}/checkout?plan=${planId}${seatsQuery}`;
 }

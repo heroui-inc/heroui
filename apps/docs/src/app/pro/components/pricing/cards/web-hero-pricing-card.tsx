@@ -41,7 +41,7 @@ function WebHeroCardHeader() {
   const isTeam = planType === "teams";
   const prices = usePricingData();
   const planId = isTeam ? "web-heroes" : "web-hero";
-  const checkoutUrl = getDashboardCheckoutUrl(planId);
+  const checkoutUrl = getDashboardCheckoutUrl(planId, isTeam ? 2 : undefined);
 
   return (
     <div className="relative mx-2 mt-2 mb-2 h-[255px] overflow-clip rounded-2xl bg-default">
@@ -134,7 +134,7 @@ function WebHeroPricingCard() {
     <div className="flex w-[320px] flex-col rounded-3xl bg-surface shadow-surface">
       <WebHeroCardHeader />
       <WebHeroFeaturesList />
-      <RenewalNote />
+      <RenewalNote plan="web" />
     </div>
   );
 }

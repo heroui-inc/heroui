@@ -42,7 +42,7 @@ function SuperHeroCardHeader() {
   const prices = usePricingData();
 
   const planId = isTeam ? "super-heroes" : "super-hero";
-  const checkoutUrl = getDashboardCheckoutUrl(planId);
+  const checkoutUrl = getDashboardCheckoutUrl(planId, isTeam ? 2 : undefined);
 
   const savings = isTeam
     ? prices.teamWeb.price + prices.teamMobile.price - prices.teamSuper.price
@@ -143,7 +143,7 @@ function SuperHeroPricingCard() {
     <div className="flex w-[320px] flex-col rounded-3xl bg-surface shadow-surface">
       <SuperHeroCardHeader />
       <SuperHeroFeaturesList />
-      <RenewalNote />
+      <RenewalNote plan="super" />
     </div>
   );
 }

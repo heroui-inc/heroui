@@ -41,7 +41,7 @@ function MobileHeroCardHeader() {
   const isTeam = planType === "teams";
   const prices = usePricingData();
   const planId = isTeam ? "mobile-heroes" : "mobile-hero";
-  const checkoutUrl = getDashboardCheckoutUrl(planId);
+  const checkoutUrl = getDashboardCheckoutUrl(planId, isTeam ? 2 : undefined);
 
   return (
     <div className="relative mx-2 mt-2 mb-2 h-[255px] overflow-clip rounded-2xl bg-default">
@@ -134,7 +134,7 @@ function MobileHeroPricingCard() {
     <div className="flex w-[320px] flex-col rounded-3xl bg-surface shadow-surface">
       <MobileHeroCardHeader />
       <MobileHeroFeaturesList />
-      <RenewalNote />
+      <RenewalNote plan="mobile" />
     </div>
   );
 }

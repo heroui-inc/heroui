@@ -17,15 +17,17 @@ export type Discount = {
   teamPercent?: number;
 };
 
+export type PlanPricingWithRenewal = PlanPricing & {renewal: number};
+export type TeamPlanPricingWithRenewal = TeamPlanPricing & {renewal: number};
+
 export type AllPrices = {
   discount: Discount | null;
-  mobile: PlanPricing;
-  renewal: {individual: number; team: number};
-  super: PlanPricing;
-  teamMobile: TeamPlanPricing;
-  teamSuper: TeamPlanPricing;
-  teamWeb: TeamPlanPricing;
-  web: PlanPricing;
+  mobile: PlanPricingWithRenewal;
+  super: PlanPricingWithRenewal;
+  teamMobile: TeamPlanPricingWithRenewal;
+  teamSuper: TeamPlanPricingWithRenewal;
+  teamWeb: TeamPlanPricingWithRenewal;
+  web: PlanPricingWithRenewal;
 };
 
 type PlanPriceResponse = {
@@ -33,21 +35,16 @@ type PlanPriceResponse = {
   licenseType: string;
   plan: string;
   planId: string;
-  unitAmount: number | null;
-};
-
-type RenewalPriceResponse = {
-  licenseType: string;
+  renewalUnitAmount: number | null;
   unitAmount: number | null;
 };
 
 type PricesApiResponse = {
   discount: Discount | null;
   plans: PlanPriceResponse[];
-  renewal?: RenewalPriceResponse[];
 };
 
-const EMPTY_RESPONSE: PricesApiResponse = {discount: null, plans: [], renewal: []};
+const EMPTY_RESPONSE: PricesApiResponse = {discount: null, plans: []};
 
 async function fetchPricesApi(): Promise<PricesApiResponse> {
   if (!env.DASHBOARD_API_URL) {
@@ -77,21 +74,30 @@ function cents(amount: number | null): number {
   return amount != null ? amount / 100 : 0;
 }
 
-function buildPlanPricing(plan: PlanPriceResponse | undefined, fallback: number): PlanPricing {
+function fallbackRenewal(originalDollars: number): number {
+  return Math.floor(originalDollars / 10);
+}
+
+function buildPlanPricing(
+  plan: PlanPriceResponse | undefined,
+  fallback: number,
+): PlanPricingWithRenewal {
   const original = cents(plan?.unitAmount ?? null) || fallback;
   const price = cents(plan?.discountUnitAmount ?? null) || original;
+  const renewal = cents(plan?.renewalUnitAmount ?? null) || fallbackRenewal(fallback);
 
-  return {original, price};
+  return {original, price, renewal};
 }
 
 function buildTeamPlanPricing(
   plan: PlanPriceResponse | undefined,
   fallback: number,
-): TeamPlanPricing {
+): TeamPlanPricingWithRenewal {
   const original = cents(plan?.unitAmount ?? null) || fallback;
   const price = cents(plan?.discountUnitAmount ?? null) || original;
+  const renewal = cents(plan?.renewalUnitAmount ?? null) || fallbackRenewal(fallback);
 
-  return {original, price};
+  return {original, price, renewal};
 }
 
 export async function fetchAllPrices(): Promise<AllPrices> {
@@ -102,9 +108,6 @@ export async function fetchAllPrices(): Promise<AllPrices> {
   for (const p of body.plans ?? []) {
     plans.set(p.planId, p);
   }
-
-  const individualRenewal = body.renewal?.find((r) => r.licenseType === "individual");
-  const teamRenewal = body.renewal?.find((r) => r.licenseType === "team");
 
   const rawDiscount = body.discount;
   const discount = rawDiscount
@@ -117,10 +120,6 @@ export async function fetchAllPrices(): Promise<AllPrices> {
   return {
     discount,
     mobile: buildPlanPricing(plans.get("mobile-hero"), ORIGINAL_PRICES.mobile),
-    renewal: {
-      individual: cents(individualRenewal?.unitAmount ?? null),
-      team: cents(teamRenewal?.unitAmount ?? null),
-    },
     super: buildPlanPricing(plans.get("super-hero"), ORIGINAL_PRICES.super),
     teamMobile: buildTeamPlanPricing(plans.get("mobile-heroes"), ORIGINAL_PRICES.teamMobile),
     teamSuper: buildTeamPlanPricing(plans.get("super-heroes"), ORIGINAL_PRICES.teamSuper),
