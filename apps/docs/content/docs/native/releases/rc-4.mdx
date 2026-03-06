@@ -1,0 +1,223 @@
+---
+title: RC 4
+description: SubMenu component, Slider Output composition, PressableFeedback ripple fix, Bottom Sheet back handler fix
+github:
+  pull: 331
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">March 6, 2026</span>
+</div>
+
+RC 4 introduces the SubMenu compound component for nested expandable menus with spring-animated expand/collapse, refactors Slider Output with slot-based styling and `textProps` forwarding, and adds `disallowEmptySelection` to Menu.Group for radio-group behavior. This release also resolves the PressableFeedback ripple blink on rapid presses with a dual-layer buffer system, fixes the Bottom Sheet Android back handler to respect `enablePanDownToClose`.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the RC 4 improvements in action with our preview app! You can explore the new SubMenu component, improved Slider Output, and all the bug fixes directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## What's New
+
+### SubMenu Component
+
+The [Menu](/docs/native/components/menu) component now supports nested expandable sub-menus via the new `SubMenu` compound component. SubMenu nests inside `Menu.Content` and reveals additional items on press with spring-based expand/collapse animations and indicator rotation.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-components: `SubMenu`, `SubMenu.Trigger`, `SubMenu.TriggerIndicator`, `SubMenu.Content`
+- Spring-based expand/collapse animation with indicator rotation
+- Headless primitive layer with context, controlled/uncontrolled open state, and accessibility attributes (`role`, `aria-expanded`, `aria-disabled`)
+- Parent menu coordination: popover scales to 0.98, shadow is removed, and non-SubMenu items fade to 40% opacity with `pointer-events-none` when a SubMenu is open
+- Menu content switches to `FadeOut` exit animation when a SubMenu is open to avoid conflicting scale animations
+- `useSubMenu` hook for advanced use cases
+
+**Usage:**
+
+```tsx
+import { Menu, SubMenu } from "heroui-native";
+
+export function MenuWithSubMenu() {
+  return (
+    <Menu>
+      <Menu.Trigger>
+        <Button>Open Menu</Button>
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Overlay />
+        <Menu.Content>
+          <Menu.Item>
+            <Menu.ItemTitle>Edit</Menu.ItemTitle>
+          </Menu.Item>
+          <SubMenu>
+            <SubMenu.Trigger>
+              <Menu.ItemTitle>More Options</Menu.ItemTitle>
+              <SubMenu.TriggerIndicator />
+            </SubMenu.Trigger>
+            <SubMenu.Content>
+              <Menu.Item>
+                <Menu.ItemTitle>Import</Menu.ItemTitle>
+              </Menu.Item>
+              <Menu.Item>
+                <Menu.ItemTitle>Export</Menu.ItemTitle>
+              </Menu.Item>
+            </SubMenu.Content>
+          </SubMenu>
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+}
+```
+
+For complete documentation and examples, see the [Menu component page](/docs/native/components/menu).
+
+**Related PR:** [#331](https://github.com/heroui-inc/heroui-native/pull/331)
+
+## Component Improvements
+
+### Slider Output Composition Refactor
+
+The [Slider](/docs/native/components/slider) Output component has been refactored to use a proper slot-based architecture with `container` and `text` slots, and introduces `textProps` for forwarding props to the inner text element.
+
+**Improvements:**
+
+- Slot-based styling: `output` class split into `container` and `text` slots with a new `classNames` prop (`classNames={{ container, text }}`) for granular style targeting
+- Composition fix: `HeroText` now only renders for default content; custom children render directly without an extra text wrapper
+- New `textProps` prop on `Slider.Output` for forwarding arbitrary props (e.g., `maxFontSizeMultiplier`) to the inner text element
+- `OutputSlots` type exported from the styles module for external consumption
+
+**Related PR:** [#328](https://github.com/heroui-inc/heroui-native/pull/328)
+
+### Menu.Group `disallowEmptySelection`
+
+The [Menu](/docs/native/components/menu) `Menu.Group` component now supports a `disallowEmptySelection` prop that prevents deselecting the last item in `single` selection mode, enabling radio-group behavior.
+
+**Usage:**
+
+```tsx
+<Menu.Group
+  selectionMode="single"
+  selectedKeys={selected}
+  onSelectionChange={setSelected}
+  disallowEmptySelection
+>
+  <Menu.Item id="list">
+    <Menu.ItemTitle>List View</Menu.ItemTitle>
+    <Menu.ItemIndicator />
+  </Menu.Item>
+  <Menu.Item id="grid">
+    <Menu.ItemTitle>Grid View</Menu.ItemTitle>
+    <Menu.ItemIndicator />
+  </Menu.Item>
+</Menu.Group>
+```
+
+**Related PR:** [#331](https://github.com/heroui-inc/heroui-native/pull/331)
+
+### Bottom Sheet `enablePanDownToClose` Consistency
+
+The [Bottom Sheet](/docs/native/components/bottom-sheet) component now correctly respects the `enablePanDownToClose` prop for Android hardware back button behavior. Previously, the back button would close the sheet even when `enablePanDownToClose` was set to `false`.
+
+**Improvements:**
+
+- The `enablePanDownToClose` prop is threaded through to `BottomSheetContentContainer` (defaults to `true`)
+- The `BackHandler` event listener is only registered when both `isOpen` and `enablePanDownToClose` are `true`
+- Bottom sheets with `enablePanDownToClose={false}` are no longer dismissible via the Android back button
+
+**Related PR:** [#327](https://github.com/heroui-inc/heroui-native/pull/327)
+
+## ⚠️ Breaking Changes
+
+### Chip Component Sizing
+
+The [Chip](/docs/native/components/chip) component's size variants have been migrated from fixed heights to padding-based sizing to accommodate dynamic text scaling at larger accessibility font sizes.
+
+**Migration:**
+
+Custom styles relying on the previous `h-5`/`h-6`/`h-7` chip heights should be updated to use the new padding-based approach:
+
+```tsx
+// Before — Fixed height sizing
+// Chip used h-5 (sm), h-6 (md), h-7 (lg)
+
+// After — Padding-based sizing
+// Chip uses py-0.5 (sm), py-[3px] (md), py-1 (lg)
+// Border radius updated: rounded-xl → rounded-2xl/rounded-3xl
+```
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Menu](/docs/native/components/menu) - SubMenu component documentation with anatomy, usage examples, full API reference, and `useSubMenu` hook docs
+- [Slider](/docs/native/components/slider) - Updated Output component documentation with slot-based styling and `textProps`
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
