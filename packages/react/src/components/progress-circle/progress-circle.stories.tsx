@@ -32,7 +32,10 @@ export const Default: Story = {
   render: (args) => {
     return (
       <ProgressCircle aria-label="Loading" value={60} {...args}>
-        <ProgressCircle.Track />
+        <ProgressCircle.Track>
+          <ProgressCircle.TrackCircle />
+          <ProgressCircle.FillCircle />
+        </ProgressCircle.Track>
       </ProgressCircle>
     );
   },
@@ -43,13 +46,22 @@ export const Sizes: Story = {
     return (
       <div className="flex items-center gap-6">
         <ProgressCircle aria-label="Loading" size="sm" value={40} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" size="md" value={60} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" size="lg" value={80} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
       </div>
     );
@@ -61,19 +73,34 @@ export const Colors: Story = {
     return (
       <div className="flex items-center gap-6">
         <ProgressCircle aria-label="Loading" color="default" value={60} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" color="accent" value={60} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" color="success" value={60} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" color="warning" value={60} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
         <ProgressCircle aria-label="Loading" color="danger" value={60} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
       </div>
     );
@@ -84,7 +111,10 @@ export const Indeterminate: Story = {
   render: (args) => {
     return (
       <ProgressCircle isIndeterminate aria-label="Loading" {...args}>
-        <ProgressCircle.Track />
+        <ProgressCircle.Track>
+          <ProgressCircle.TrackCircle />
+          <ProgressCircle.FillCircle />
+        </ProgressCircle.Track>
       </ProgressCircle>
     );
   },
@@ -95,7 +125,10 @@ export const WithLabel: Story = {
     return (
       <div className="flex items-center gap-3">
         <ProgressCircle aria-label="Loading" value={75} {...args}>
-          <ProgressCircle.Track />
+          <ProgressCircle.Track>
+            <ProgressCircle.TrackCircle />
+            <ProgressCircle.FillCircle />
+          </ProgressCircle.Track>
         </ProgressCircle>
         <Label>75% Complete</Label>
       </div>

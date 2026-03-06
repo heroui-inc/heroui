@@ -11,6 +11,14 @@ import {ProgressBar as ProgressBarPrimitive} from "react-aria-components";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 /* -------------------------------------------------------------------------------------------------
+ * ProgressCircle Constants
+ * -----------------------------------------------------------------------------------------------*/
+const STROKE_WIDTH = 4;
+const CENTER = 18;
+const RADIUS = CENTER - STROKE_WIDTH / 2;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+/* -------------------------------------------------------------------------------------------------
  * ProgressCircle Context
  * -----------------------------------------------------------------------------------------------*/
 interface ProgressCircleContext {
@@ -58,44 +66,16 @@ ProgressCircleRoot.displayName = "HeroUI.ProgressCircle";
 interface ProgressCircleTrackProps extends ComponentPropsWithRef<"svg"> {}
 
 const ProgressCircleTrack = ({children, className, ...props}: ProgressCircleTrackProps) => {
-  const {slots, state} = useContext(ProgressCircleContext);
-  const percentage = state?.percentage ?? 0;
-  const isIndeterminate = state?.isIndeterminate ?? false;
-
-  const strokeWidth = 4;
-  const center = 18;
-  const radius = center - strokeWidth / 2;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const {slots} = useContext(ProgressCircleContext);
 
   return (
     <svg
       className={composeSlotClassName(slots?.track, className)}
       data-slot="progress-circle-track"
       fill="none"
-      viewBox={`0 0 ${center * 2} ${center * 2}`}
+      viewBox={`0 0 ${CENTER * 2} ${CENTER * 2}`}
       {...props}
     >
-      <circle
-        className={composeSlotClassName(slots?.trackCircle)}
-        cx={center}
-        cy={center}
-        data-slot="progress-circle-track-circle"
-        r={radius}
-        strokeWidth={strokeWidth}
-      />
-      <circle
-        className={composeSlotClassName(slots?.fillCircle)}
-        cx={center}
-        cy={center}
-        data-slot="progress-circle-fill-circle"
-        r={radius}
-        strokeDasharray={circumference}
-        strokeDashoffset={isIndeterminate ? circumference * 0.75 : strokeDashoffset}
-        strokeLinecap="round"
-        strokeWidth={strokeWidth}
-        transform={`rotate(-90 ${center} ${center})`}
-      />
       {children}
     </svg>
   );
@@ -104,8 +84,71 @@ const ProgressCircleTrack = ({children, className, ...props}: ProgressCircleTrac
 ProgressCircleTrack.displayName = "HeroUI.ProgressCircle.Track";
 
 /* -------------------------------------------------------------------------------------------------
+ * ProgressCircle TrackCircle
+ * -----------------------------------------------------------------------------------------------*/
+interface ProgressCircleTrackCircleProps extends ComponentPropsWithRef<"circle"> {}
+
+const ProgressCircleTrackCircle = ({className, ...props}: ProgressCircleTrackCircleProps) => {
+  const {slots} = useContext(ProgressCircleContext);
+
+  return (
+    <circle
+      className={composeSlotClassName(slots?.trackCircle, className)}
+      cx={CENTER}
+      cy={CENTER}
+      data-slot="progress-circle-track-circle"
+      r={RADIUS}
+      strokeWidth={STROKE_WIDTH}
+      {...props}
+    />
+  );
+};
+
+ProgressCircleTrackCircle.displayName = "HeroUI.ProgressCircle.TrackCircle";
+
+/* -------------------------------------------------------------------------------------------------
+ * ProgressCircle FillCircle
+ * -----------------------------------------------------------------------------------------------*/
+interface ProgressCircleFillCircleProps extends ComponentPropsWithRef<"circle"> {}
+
+const ProgressCircleFillCircle = ({className, ...props}: ProgressCircleFillCircleProps) => {
+  const {slots, state} = useContext(ProgressCircleContext);
+  const percentage = state?.percentage ?? 0;
+  const isIndeterminate = state?.isIndeterminate ?? false;
+  const strokeDashoffset = CIRCUMFERENCE - (percentage / 100) * CIRCUMFERENCE;
+
+  return (
+    <circle
+      className={composeSlotClassName(slots?.fillCircle, className)}
+      cx={CENTER}
+      cy={CENTER}
+      data-slot="progress-circle-fill-circle"
+      r={RADIUS}
+      strokeDasharray={CIRCUMFERENCE}
+      strokeDashoffset={isIndeterminate ? CIRCUMFERENCE * 0.75 : strokeDashoffset}
+      strokeLinecap="round"
+      strokeWidth={STROKE_WIDTH}
+      transform={`rotate(-90 ${CENTER} ${CENTER})`}
+      {...props}
+    />
+  );
+};
+
+ProgressCircleFillCircle.displayName = "HeroUI.ProgressCircle.FillCircle";
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ProgressCircleRoot, ProgressCircleTrack};
+export {
+  ProgressCircleRoot,
+  ProgressCircleTrack,
+  ProgressCircleTrackCircle,
+  ProgressCircleFillCircle,
+};
 
-export type {ProgressCircleRootProps, ProgressCircleTrackProps};
+export type {
+  ProgressCircleRootProps,
+  ProgressCircleTrackProps,
+  ProgressCircleTrackCircleProps,
+  ProgressCircleFillCircleProps,
+};

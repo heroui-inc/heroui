@@ -28,7 +28,10 @@ import { ProgressCircle } from '@heroui/react';
 
 export default () => (
   <ProgressCircle aria-label="Loading" value={60}>
-    <ProgressCircle.Track />
+    <ProgressCircle.Track>
+      <ProgressCircle.TrackCircle />
+      <ProgressCircle.FillCircle />
+    </ProgressCircle.Track>
   </ProgressCircle>
 );
 ```
@@ -59,6 +62,14 @@ Use `isIndeterminate` when progress cannot be determined.
   name="progress-circle-with-label"
 />
 
+### Custom SVG Props
+
+Since each part is a composable component, you can override SVG attributes like `strokeWidth`, `r`, `cx`, `cy`, and `viewBox` directly.
+
+<ComponentPreview
+  name="progress-circle-custom-svg"
+/>
+
 <RelatedComponents component="progress-circle" />
 
 ## Styling
@@ -73,7 +84,10 @@ import { ProgressCircle } from '@heroui/react';
 function CustomProgressCircle() {
   return (
     <ProgressCircle aria-label="Loading" value={60}>
-      <ProgressCircle.Track className="text-purple-500" />
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle className="stroke-purple-500" />
+      </ProgressCircle.Track>
     </ProgressCircle>
   );
 }

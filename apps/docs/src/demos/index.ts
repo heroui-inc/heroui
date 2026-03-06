@@ -2092,6 +2092,10 @@ export const demos: Record<string, DemoItem> = {
     component: ProgressCircleDemos.WithLabel,
     file: "progress-circle/with-label.tsx",
   },
+  "progress-circle-custom-svg": {
+    component: ProgressCircleDemos.CustomSvg,
+    file: "progress-circle/custom-svg.tsx",
+  },
   // Modal demos
   "modal-default": {
     component: ModalDemos.Default,
