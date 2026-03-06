@@ -1,5 +1,12 @@
 # @heroui/alert
 
+## 2.2.32
+
+### Patch Changes
+
+- Updated dependencies [[`7437888`](https://github.com/heroui-inc/heroui/commit/74378881829204b94173ee2d713f81df5e9e9784)]:
+  - @heroui/button@2.2.32
+
 ## 2.2.31
 
 ### Patch Changes
