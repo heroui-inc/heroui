@@ -21,6 +21,22 @@ jobs:
       - name: Build packages
         run: pnpm build
 
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Install Playwright
+        run: pnpm playwright install --with-deps --only-shell
+
+      - name: Run visual tests
+        run: pnpm test:visual
+
   eslint:
     name: ESLint
     runs-on: ubuntu-latest
