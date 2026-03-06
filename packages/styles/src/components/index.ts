@@ -48,6 +48,8 @@ export * from "./list-box-item";
 export * from "./list-box-section";
 export * from "./menu";
 export * from "./meter";
+export * from "./progress-bar";
+export * from "./progress-circle";
 export * from "./menu-item";
 export * from "./menu-section";
 export * from "./modal";

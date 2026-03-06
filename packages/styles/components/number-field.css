@@ -19,9 +19,10 @@
 }
 
 .number-field__group {
-  @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
+  @apply grid h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
+  grid-template-columns: 40px 1fr 40px;
 
   /**
    * Transitions
@@ -65,7 +66,7 @@
 }
 
 .number-field__input {
-  @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 text-base tabular-nums shadow-none outline-none sm:text-sm;
+  @apply min-w-0 rounded-none border-0 bg-transparent px-3 py-2 text-base tabular-nums shadow-none outline-none sm:text-sm;
 
   /* Remove border radius on left side when decrement button is present */
   .number-field__group:has([slot="decrement"]) & {

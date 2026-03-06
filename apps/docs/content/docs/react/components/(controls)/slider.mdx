@@ -1,6 +1,7 @@
 ---
 title: Slider
 description: A slider allows a user to select one or more values within a range
+icon: updated
 links:
   rac: Slider
   source: slider/slider.tsx
@@ -87,7 +88,7 @@ export default () => (
 />
 
 <RelatedComponents component="slider" />
- 
+
 ## Styling
 
 ### Passing Tailwind CSS classes
@@ -347,7 +348,7 @@ import { Slider, Label } from '@heroui/react';
 <Slider defaultValue={[25, 75]}>
   <Label>Range</Label>
   <Slider.Output>
-    {({state}) => 
+    {({state}) =>
       state.values.map((_, i) => state.getThumbValueLabel(i)).join(' – ')
     }
   </Slider.Output>

@@ -52,6 +52,8 @@
     "(forms)/number-field",
     "(navigation)/pagination",
     "(overlays)/popover",
+    "(feedback)/progress-bar",
+    "(feedback)/progress-circle",
     "(forms)/radio-group",
     "(date-and-time)/range-calendar",
     "(utilities)/scroll-shadow",

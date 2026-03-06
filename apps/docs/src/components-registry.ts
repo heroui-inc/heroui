@@ -322,6 +322,20 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "popover",
     title: "Popover",
   },
+  progressbar: {
+    category: "feedback",
+    description: "Shows determinate or indeterminate progress of an operation",
+    href: "/docs/components/progress-bar",
+    name: "progressbar",
+    title: "ProgressBar",
+  },
+  progresscircle: {
+    category: "feedback",
+    description: "Circular progress indicator for operations",
+    href: "/docs/components/progress-circle",
+    name: "progresscircle",
+    title: "ProgressCircle",
+  },
   radiogroup: {
     category: "forms",
     description: "Single selection from multiple options",
