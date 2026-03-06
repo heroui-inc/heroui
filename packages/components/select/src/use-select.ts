@@ -431,12 +431,6 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
           selectedItem.parentElement.offsetTop -
           scrollShadowHeight / 2 +
           selectedItem.parentElement.clientHeight / 2;
-
-        const firstSelectedKey = [...state.selectedKeys][0];
-
-        if (firstSelectedKey !== undefined) {
-          state.selectionManager.setFocusedKey(firstSelectedKey);
-        }
       }
     }
   }, [state.isOpen, disableAnimation, state.selectedKeys]);
