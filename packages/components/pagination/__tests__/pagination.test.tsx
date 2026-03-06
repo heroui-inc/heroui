@@ -141,4 +141,46 @@ describe("Pagination", () => {
 
     window.IntersectionObserver = originalIntersectionObserver;
   });
+
+  describe("custom icons", () => {
+    const originalIntersectionObserver = window.IntersectionObserver;
+
+    beforeAll(() => {
+      window.IntersectionObserver = jest.fn().mockImplementation(() => ({
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
+      }));
+    });
+
+    afterAll(() => {
+      window.IntersectionObserver = originalIntersectionObserver;
+    });
+
+    it("should render custom prevIcon when provided", () => {
+      const wrapper = render(
+        <Pagination showControls prevIcon={<span data-testid="custom-prev">←</span>} total={10} />,
+      );
+
+      expect(wrapper.getByTestId("custom-prev")).not.toBeNull();
+    });
+
+    it("should render custom nextIcon when provided", () => {
+      const wrapper = render(
+        <Pagination showControls nextIcon={<span data-testid="custom-next">→</span>} total={10} />,
+      );
+
+      expect(wrapper.getByTestId("custom-next")).not.toBeNull();
+    });
+
+    it("should render default chevron icons when prevIcon and nextIcon are not provided", () => {
+      const wrapper = render(<Pagination showControls total={10} />);
+
+      const prevButton = wrapper.getByLabelText("previous page button");
+      const nextButton = wrapper.getByLabelText("next page button");
+
+      expect(prevButton.querySelector("svg")).not.toBeNull();
+      expect(nextButton.querySelector("svg")).not.toBeNull();
+    });
+  });
 });
