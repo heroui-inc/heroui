@@ -1,5 +1,11 @@
 # @heroui/use-aria-link
 
+## 2.2.23
+
+### Patch Changes
+
+- [#6281](https://github.com/heroui-inc/heroui/pull/6281) [`7437888`](https://github.com/heroui-inc/heroui/commit/74378881829204b94173ee2d713f81df5e9e9784) Thanks [@wingkwong](https://github.com/wingkwong)! - react-aria versions (release v1.16.0)
+
 ## 2.2.22
 
 ### Patch Changes

@@ -1,5 +1,23 @@
 # @heroui/select
 
+## 2.4.33
+
+### Patch Changes
+
+- [#6269](https://github.com/heroui-inc/heroui/pull/6269) [`2db2ac7`](https://github.com/heroui-inc/heroui/commit/2db2ac726a149e0b88a3691d86a27edc0569831d) Thanks [@deepansh946](https://github.com/deepansh946)! - Fix Select to scroll to selected item when re opens (#5789)
+
+- [#6281](https://github.com/heroui-inc/heroui/pull/6281) [`7437888`](https://github.com/heroui-inc/heroui/commit/74378881829204b94173ee2d713f81df5e9e9784) Thanks [@wingkwong](https://github.com/wingkwong)! - react-aria versions (release v1.16.0)
+
+- Updated dependencies [[`7437888`](https://github.com/heroui-inc/heroui/commit/74378881829204b94173ee2d713f81df5e9e9784)]:
+  - @heroui/use-aria-multiselect@2.4.21
+  - @heroui/use-aria-button@2.2.22
+  - @heroui/aria-utils@2.2.29
+  - @heroui/listbox@2.3.31
+  - @heroui/popover@2.3.32
+  - @heroui/form@2.1.32
+  - @heroui/spinner@2.2.29
+  - @heroui/scroll-shadow@2.3.19
+
 ## 2.4.32
 
 ### Patch Changes
