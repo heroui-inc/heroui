@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Toolbar - Container for interactive controls with arrow key navigation
+   ========================================================================== */
+
+/* Base styles */
+.toolbar {
+  @apply grid w-fit grid-flow-col items-center gap-2;
+
+  .separator--vertical {
+    @apply h-1/2 self-center;
+  }
+
+  .separator--horizontal {
+    @apply w-1/2 justify-center justify-self-center;
+  }
+}
+
+/* Orientation variants */
+.toolbar--horizontal {
+}
+
+.toolbar--vertical {
+  @apply grid-flow-row items-start justify-start;
+  .button-group {
+    @apply justify-start;
+  }
+}
+
+/* Attached variant */
+.toolbar--attached {
+  @apply rounded-full bg-surface p-1 shadow-overlay;
+}

@@ -1,0 +1,108 @@
+---
+title: Toolbar
+description: A container for interactive controls with arrow key navigation.
+icon: new
+links:
+  rac: Toolbar
+  source: toolbar/toolbar.tsx
+  styles: toolbar.css
+  storybook: Components/Layout/Toolbar
+---
+
+## Import
+
+```tsx
+import { Toolbar } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="toolbar-basic"
+/>
+
+### Vertical
+
+<ComponentPreview
+  name="toolbar-vertical"
+/>
+
+### With ButtonGroup
+
+<ComponentPreview
+  name="toolbar-with-button-group"
+/>
+
+### Attached
+
+<ComponentPreview
+  name="toolbar-attached"
+/>
+
+<RelatedComponents component="toolbar" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Toolbar } from '@heroui/react';
+
+function CustomToolbar() {
+  return (
+    <Toolbar
+      aria-label="Actions"
+      className="rounded-xl border border-default bg-surface p-2"
+    >
+      {/* toolbar content */}
+    </Toolbar>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Toolbar component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .toolbar {
+    @apply gap-4 rounded-lg bg-surface p-3;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Toolbar component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toolbar.css)):
+
+- `.toolbar` - Base container
+- `.toolbar--horizontal` - Horizontal orientation (default)
+- `.toolbar--vertical` - Vertical orientation
+- `.toolbar--attached` - Attached variant with surface background and full rounding
+
+## API Reference
+
+### Toolbar Props
+
+Inherits from [React Aria Toolbar](https://react-spectrum.adobe.com/react-aria/Toolbar.html).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isAttached` | `boolean` | `false` | Whether the toolbar has a surface background with full rounding |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The orientation of the toolbar |
+| `aria-label` | `string` | - | An accessible label for the toolbar |
+| `aria-labelledby` | `string` | - | The id of an element that labels the toolbar |
+| `children` | `React.ReactNode \| (values: ToolbarRenderProps) => React.ReactNode` | - | Content or render prop |
+| `className` | `string \| (values: ToolbarRenderProps) => string` | - | Additional CSS classes |
+
+### ToolbarRenderProps
+
+When using the render prop pattern, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `orientation` | `"horizontal" \| "vertical"` | The current orientation of the toolbar |

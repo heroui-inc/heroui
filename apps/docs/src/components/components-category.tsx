@@ -11,7 +11,7 @@ import {ComponentItem} from "./component-item";
 const COMPONENT_GROUPS = [
   {
     category: "Buttons",
-    components: ["button", "button-group", "close-button"],
+    components: ["button", "button-group", "close-button", "toggle-button", "toggle-button-group"],
   },
   {
     category: "Forms",
@@ -71,11 +71,11 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Feedback",
-    components: ["alert", "skeleton", "spinner"],
+    components: ["alert", "meter", "progressbar", "progresscircle", "skeleton", "spinner"],
   },
   {
     category: "Layout",
-    components: ["card", "separator", "surface"],
+    components: ["card", "separator", "surface", "toolbar"],
   },
   {
     category: "Media",

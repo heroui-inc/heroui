@@ -1,0 +1,171 @@
+---
+title: ProgressBar
+description: A progress bar shows either determinate or indeterminate progress of an operation over time.
+icon: new
+links:
+  rac: ProgressBar
+  source: progress-bar/progress-bar.tsx
+  styles: progress-bar.css
+  storybook: Components/Feedback/ProgressBar
+---
+
+## Import
+
+```tsx
+import { ProgressBar, Label } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="progress-bar-basic"
+/>
+
+### Anatomy
+
+```tsx
+import { ProgressBar, Label } from '@heroui/react';
+
+export default () => (
+  <ProgressBar value={60}>
+    <Label>Loading</Label>
+    <ProgressBar.Output />
+    <ProgressBar.Track>
+      <ProgressBar.Fill />
+    </ProgressBar.Track>
+  </ProgressBar>
+);
+```
+
+### Sizes
+
+<ComponentPreview
+  name="progress-bar-sizes"
+/>
+
+### Colors
+
+<ComponentPreview
+  name="progress-bar-colors"
+/>
+
+### Indeterminate
+
+Use `isIndeterminate` when progress cannot be determined.
+
+<ComponentPreview
+  name="progress-bar-indeterminate"
+/>
+
+### Custom Value Scale
+
+Use `minValue`, `maxValue`, and `formatOptions` to customize the value range and display format.
+
+<ComponentPreview
+  name="progress-bar-custom-value"
+/>
+
+### Without Label
+
+When no visible label is needed, use `aria-label` for accessibility.
+
+<ComponentPreview
+  name="progress-bar-without-label"
+/>
+
+<RelatedComponents component="progress-bar" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+You can customize individual ProgressBar parts:
+
+```tsx
+import { ProgressBar, Label } from '@heroui/react';
+
+function CustomProgressBar() {
+  return (
+    <ProgressBar value={60}>
+      <Label>Loading</Label>
+      <ProgressBar.Output />
+      <ProgressBar.Track className="bg-purple-100 dark:bg-purple-900">
+        <ProgressBar.Fill className="bg-purple-500" />
+      </ProgressBar.Track>
+    </ProgressBar>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the ProgressBar component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .progress-bar {
+    @apply w-full gap-2;
+  }
+
+  .progress-bar__track {
+    @apply h-3 rounded-full;
+  }
+
+  .progress-bar__fill {
+    @apply rounded-full;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The ProgressBar component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/progress-bar.css)):
+
+#### Base & Element Classes
+- `.progress-bar` - Base container (grid layout)
+- `.progress-bar__output` - Value text display
+- `.progress-bar__track` - Track background
+- `.progress-bar__fill` - Filled portion of the track
+
+#### Size Classes
+- `.progress-bar--sm` - Small size variant (thinner track)
+- `.progress-bar--md` - Medium size variant (default)
+- `.progress-bar--lg` - Large size variant (thicker track)
+
+#### Color Classes
+- `.progress-bar--default` - Default color variant
+- `.progress-bar--accent` - Accent color variant
+- `.progress-bar--success` - Success color variant
+- `.progress-bar--warning` - Warning color variant
+- `.progress-bar--danger` - Danger color variant
+
+## API Reference
+
+### ProgressBar Props
+
+Inherits from [React Aria ProgressBar](https://react-spectrum.adobe.com/react-aria/ProgressBar.html).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | The current value |
+| `minValue` | `number` | `0` | The minimum value |
+| `maxValue` | `number` | `100` | The maximum value |
+| `isIndeterminate` | `boolean` | `false` | Whether progress is indeterminate |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the progress track |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"accent"` | Color of the fill bar |
+| `formatOptions` | `Intl.NumberFormatOptions` | `{style: 'percent'}` | Number format for the value display |
+| `valueLabel` | `ReactNode` | - | Custom value label content |
+| `children` | `ReactNode \| (values: ProgressBarRenderProps) => ReactNode` | - | Content or render prop |
+
+### ProgressBarRenderProps
+
+When using the render prop pattern, these values are provided:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `percentage` | `number` | The percentage of the progress (0-100) |
+| `valueText` | `string` | The formatted value text |
+| `isIndeterminate` | `boolean` | Whether progress is indeterminate |

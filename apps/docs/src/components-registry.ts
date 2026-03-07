@@ -287,6 +287,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "list-box",
     title: "Listbox",
   },
+  meter: {
+    category: "feedback",
+    description: "A quantity indicator within a known range",
+    href: "/docs/components/meter",
+    name: "meter",
+    title: "Meter",
+  },
   modal: {
     category: "layout",
     description: "Displays content in a modal overlay",
@@ -314,6 +321,20 @@ const componentsMap: Record<string, ComponentInfo> = {
     href: "/docs/components/popover",
     name: "popover",
     title: "Popover",
+  },
+  progressbar: {
+    category: "feedback",
+    description: "Shows determinate or indeterminate progress of an operation",
+    href: "/docs/components/progress-bar",
+    name: "progressbar",
+    title: "ProgressBar",
+  },
+  progresscircle: {
+    category: "feedback",
+    description: "Circular progress indicator for operations",
+    href: "/docs/components/progress-circle",
+    name: "progresscircle",
+    title: "ProgressCircle",
   },
   radiogroup: {
     category: "forms",
@@ -441,6 +462,27 @@ const componentsMap: Record<string, ComponentInfo> = {
     href: "/docs/components/toast",
     name: "toast",
     title: "Toast",
+  },
+  togglebutton: {
+    category: "forms",
+    description: "Interactive toggle control for on/off states",
+    href: "/docs/components/toggle-button",
+    name: "togglebutton",
+    title: "ToggleButton",
+  },
+  togglebuttongroup: {
+    category: "forms",
+    description: "Group multiple toggle buttons into a unified control",
+    href: "/docs/components/toggle-button-group",
+    name: "togglebuttongroup",
+    title: "ToggleButtonGroup",
+  },
+  toolbar: {
+    category: "layout",
+    description: "Container for interactive controls with arrow key navigation",
+    href: "/docs/components/toolbar",
+    name: "toolbar",
+    title: "Toolbar",
   },
   tooltip: {
     category: "display",
@@ -726,6 +768,9 @@ const componentRelationships: Record<string, string[]> = {
   ],
   timefield: ["label", "fielderror", "description", "form", "surface"],
   toast: ["button", "alert", "closebutton", "spinner"],
+  togglebutton: ["button", "switch", "checkbox", "togglebuttongroup"],
+  togglebuttongroup: ["togglebutton", "buttongroup", "button"],
+  toolbar: ["buttongroup", "togglebuttongroup", "separator", "button"],
   tooltip: ["button", "popover"],
 };
 

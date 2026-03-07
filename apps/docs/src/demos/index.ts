@@ -41,10 +41,13 @@ import * as KbdDemos from "./kbd";
 import * as LabelDemos from "./label";
 import * as LinkDemos from "./link";
 import * as ListBoxDemos from "./list-box";
+import * as MeterDemos from "./meter";
 import * as ModalDemos from "./modal";
 import * as NumberFieldDemos from "./number-field";
 import * as PaginationDemos from "./pagination";
 import * as PopoverDemos from "./popover";
+import * as ProgressBarDemos from "./progress-bar";
+import * as ProgressCircleDemos from "./progress-circle";
 import * as RadioGroupDemos from "./radio-group";
 import * as RangeCalendarDemos from "./range-calendar";
 import * as ScrollShadowDemos from "./scroll-shadow";
@@ -63,6 +66,9 @@ import * as TextAreaDemos from "./textarea";
 import * as TextFieldDemos from "./textfield";
 import * as TimeFieldDemos from "./time-field";
 import * as ToastDemos from "./toast";
+import * as ToggleButtonDemos from "./toggle-button";
+import * as ToggleButtonGroupDemos from "./toggle-button-group";
+import * as ToolbarDemos from "./toolbar";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -335,6 +341,10 @@ export const demos: Record<string, DemoItem> = {
   "button-group-with-icons": {
     component: ButtonGroupDemos.WithIcons,
     file: "button-group/with-icons.tsx",
+  },
+  "button-group-orientation": {
+    component: ButtonGroupDemos.Orientation,
+    file: "button-group/orientation.tsx",
   },
   "button-group-without-separator": {
     component: ButtonGroupDemos.WithoutSeparator,
@@ -1882,6 +1892,85 @@ export const demos: Record<string, DemoItem> = {
     component: ToastDemos.CustomQueue,
     file: "toast/custom-queue.tsx",
   },
+  // ToggleButton demos
+  "toggle-button-basic": {
+    component: ToggleButtonDemos.Basic,
+    file: "toggle-button/basic.tsx",
+  },
+  "toggle-button-variants": {
+    component: ToggleButtonDemos.Variants,
+    file: "toggle-button/variants.tsx",
+  },
+  "toggle-button-sizes": {
+    component: ToggleButtonDemos.Sizes,
+    file: "toggle-button/sizes.tsx",
+  },
+  "toggle-button-icon-only": {
+    component: ToggleButtonDemos.IconOnly,
+    file: "toggle-button/icon-only.tsx",
+  },
+  "toggle-button-controlled": {
+    component: ToggleButtonDemos.Controlled,
+    file: "toggle-button/controlled.tsx",
+  },
+  "toggle-button-disabled": {
+    component: ToggleButtonDemos.Disabled,
+    file: "toggle-button/disabled.tsx",
+  },
+  // ToggleButtonGroup demos
+  "toggle-button-group-basic": {
+    component: ToggleButtonGroupDemos.Basic,
+    file: "toggle-button-group/basic.tsx",
+  },
+  "toggle-button-group-sizes": {
+    component: ToggleButtonGroupDemos.Sizes,
+    file: "toggle-button-group/sizes.tsx",
+  },
+  "toggle-button-group-orientation": {
+    component: ToggleButtonGroupDemos.Orientation,
+    file: "toggle-button-group/orientation.tsx",
+  },
+  "toggle-button-group-attached": {
+    component: ToggleButtonGroupDemos.Attached,
+    file: "toggle-button-group/attached.tsx",
+  },
+  "toggle-button-group-full-width": {
+    component: ToggleButtonGroupDemos.FullWidth,
+    file: "toggle-button-group/full-width.tsx",
+  },
+  "toggle-button-group-selection-mode": {
+    component: ToggleButtonGroupDemos.SelectionMode,
+    file: "toggle-button-group/selection-mode.tsx",
+  },
+  "toggle-button-group-controlled": {
+    component: ToggleButtonGroupDemos.Controlled,
+    file: "toggle-button-group/controlled.tsx",
+  },
+  "toggle-button-group-disabled": {
+    component: ToggleButtonGroupDemos.Disabled,
+    file: "toggle-button-group/disabled.tsx",
+  },
+  "toggle-button-group-without-separator": {
+    component: ToggleButtonGroupDemos.WithoutSeparator,
+    file: "toggle-button-group/without-separator.tsx",
+  },
+  // Toolbar demos
+  "toolbar-basic": {
+    component: ToolbarDemos.Basic,
+    file: "toolbar/basic.tsx",
+  },
+  "toolbar-vertical": {
+    component: ToolbarDemos.Vertical,
+    file: "toolbar/vertical.tsx",
+  },
+  "toolbar-with-button-group": {
+    component: ToolbarDemos.WithButtonGroup,
+    file: "toolbar/with-button-group.tsx",
+  },
+  "toolbar-attached": {
+    component: ToolbarDemos.Attached,
+    file: "toolbar/custom-styles.tsx",
+  },
   // Tooltip demos
   "tooltip-basic": {
     component: TooltipDemos.Basic,
@@ -1957,6 +2046,77 @@ export const demos: Record<string, DemoItem> = {
   "list-box-custom-render-function": {
     component: ListBoxDemos.CustomRenderFunction,
     file: "list-box/custom-render-function.tsx",
+  },
+  // Meter demos
+  "meter-basic": {
+    component: MeterDemos.Basic,
+    file: "meter/basic.tsx",
+  },
+  "meter-sizes": {
+    component: MeterDemos.Sizes,
+    file: "meter/sizes.tsx",
+  },
+  "meter-colors": {
+    component: MeterDemos.Colors,
+    file: "meter/colors.tsx",
+  },
+  "meter-custom-value": {
+    component: MeterDemos.CustomValue,
+    file: "meter/custom-value.tsx",
+  },
+  "meter-without-label": {
+    component: MeterDemos.WithoutLabel,
+    file: "meter/without-label.tsx",
+  },
+  // ProgressBar demos
+  "progress-bar-basic": {
+    component: ProgressBarDemos.Basic,
+    file: "progress-bar/basic.tsx",
+  },
+  "progress-bar-sizes": {
+    component: ProgressBarDemos.Sizes,
+    file: "progress-bar/sizes.tsx",
+  },
+  "progress-bar-colors": {
+    component: ProgressBarDemos.Colors,
+    file: "progress-bar/colors.tsx",
+  },
+  "progress-bar-indeterminate": {
+    component: ProgressBarDemos.Indeterminate,
+    file: "progress-bar/indeterminate.tsx",
+  },
+  "progress-bar-custom-value": {
+    component: ProgressBarDemos.CustomValue,
+    file: "progress-bar/custom-value.tsx",
+  },
+  "progress-bar-without-label": {
+    component: ProgressBarDemos.WithoutLabel,
+    file: "progress-bar/without-label.tsx",
+  },
+  // ProgressCircle demos
+  "progress-circle-basic": {
+    component: ProgressCircleDemos.Basic,
+    file: "progress-circle/basic.tsx",
+  },
+  "progress-circle-sizes": {
+    component: ProgressCircleDemos.Sizes,
+    file: "progress-circle/sizes.tsx",
+  },
+  "progress-circle-colors": {
+    component: ProgressCircleDemos.Colors,
+    file: "progress-circle/colors.tsx",
+  },
+  "progress-circle-indeterminate": {
+    component: ProgressCircleDemos.Indeterminate,
+    file: "progress-circle/indeterminate.tsx",
+  },
+  "progress-circle-with-label": {
+    component: ProgressCircleDemos.WithLabel,
+    file: "progress-circle/with-label.tsx",
+  },
+  "progress-circle-custom-svg": {
+    component: ProgressCircleDemos.CustomSvg,
+    file: "progress-circle/custom-svg.tsx",
   },
   // Modal demos
   "modal-default": {
