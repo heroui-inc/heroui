@@ -198,7 +198,7 @@ export default function CustomSearchDialog(props: SharedProps) {
       {...restProps}
     >
       <SearchDialogOverlay />
-      <SearchDialogContent className="border-none">
+      <SearchDialogContent className="border-none bg-surface">
         <div className="border-none px-2 pt-2">
           <TagGroup
             disallowEmptySelection
@@ -223,6 +223,7 @@ export default function CustomSearchDialog(props: SharedProps) {
           <SearchDialogClose />
         </SearchDialogHeader>
         <SearchDialogList
+          className="**:aria-selected:bg-default **:aria-selected:text-foreground"
           items={
             search.length === 0
               ? defaultSuggestions.length > 0
