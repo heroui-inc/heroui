@@ -78,7 +78,6 @@ export interface Props<T extends HTMLInputElement | HTMLTextAreaElement = HTMLIn
   classNames?: SlotsToClasses<InputSlots>;
   /**
    * Callback fired when the value is cleared.
-   * if you pass this prop, the clear button will be shown.
    */
   onClear?: () => void;
   /**
@@ -242,7 +241,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
     typeof props.errorMessage === "function"
       ? props.errorMessage({isInvalid, validationErrors, validationDetails})
       : props.errorMessage || validationErrors?.join(" ");
-  const isClearable = !!onClear || originalProps.isClearable;
+  const isClearable = originalProps.isClearable ?? false;
   const hasElements = !!label || !!description || !!errorMessage;
   const hasPlaceholder = !!props.placeholder;
   const hasLabel = !!label;
@@ -363,12 +362,7 @@ export function useInput<T extends HTMLInputElement | HTMLTextAreaElement = HTML
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (
-        e.key === "Escape" &&
-        inputValue &&
-        (isClearable || onClear) &&
-        !originalProps.isReadOnly
-      ) {
+      if (e.key === "Escape" && inputValue && isClearable && !originalProps.isReadOnly) {
         setInputValue("");
         onClear?.();
       }

@@ -60,12 +60,12 @@ describe("Textarea", () => {
     expect(onClear).toHaveBeenCalledTimes(0);
   });
 
-  it("should appear clear button when just define onClear but not define isClearable", async () => {
+  it("should not appear clear button when only onClear is defined without isClearable", async () => {
     const onClear = jest.fn();
 
     const ref = React.createRef<HTMLTextAreaElement>();
 
-    const {getByRole} = render(
+    const {queryByRole} = render(
       <Textarea
         ref={ref}
         defaultValue="junior@heroui.com"
@@ -74,8 +74,8 @@ describe("Textarea", () => {
       />,
     );
 
-    const clearButton = getByRole("button");
+    const clearButton = queryByRole("button");
 
-    expect(clearButton).not.toBeNull();
+    expect(clearButton).toBeNull();
   });
 });
