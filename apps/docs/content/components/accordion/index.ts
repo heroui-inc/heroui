@@ -14,6 +14,8 @@ import indicatorFunction from "./indicator-function";
 import customMotion from "./custom-motion";
 import controlled from "./controlled";
 import customStyles from "./custom-styles";
+import transitionDuration from "./transition-duration";
+import scrollOnOpen from "./scroll-on-open";
 
 export const accordionContent = {
   usage,
@@ -32,4 +34,6 @@ export const accordionContent = {
   customMotion,
   controlled,
   customStyles,
+  transitionDuration,
+  scrollOnOpen,
 };
