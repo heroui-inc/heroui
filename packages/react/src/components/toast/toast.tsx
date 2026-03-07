@@ -6,7 +6,15 @@ import type {CSSProperties, ComponentPropsWithRef} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components";
 
 import {toastVariants} from "@heroui/styles";
-import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   Text as TextPrimitive,
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -14,8 +22,9 @@ import {
   UNSTABLE_ToastRegion as ToastRegionPrimitive,
   UNSTABLE_ToastStateContext as ToastStateContext,
 } from "react-aria-components";
+import {cx} from "tailwind-variants";
 
-import {useMeasuredHeight, useMediaQuery} from "../../hooks";
+import {useIsDocumentHidden, useMeasuredHeight, useMediaQuery} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {Button} from "../button";
@@ -26,10 +35,58 @@ import {Spinner} from "../spinner";
 import {
   DEFAULT_GAP,
   DEFAULT_MAX_VISIBLE_TOAST,
+  DEFAULT_MOBILE_OFFSET,
+  DEFAULT_OFFSET,
   DEFAULT_SCALE_FACTOR,
   DEFAULT_TOAST_WIDTH,
+  MOBILE_BREAKPOINT,
 } from "./constants";
-import {ToastQueue, toast as defaultToastQueue} from "./toast-queue";
+import {
+  ToastQueue,
+  toast as defaultToastQueue,
+  toastQueue as defaultToastQueueInstance,
+} from "./toast-queue";
+
+/* ------------------------------------------------------------------------------------------------
+ * Toast Offset
+ * --------------------------------------------------------------------------------------------- */
+export type ToastOffsetValue =
+  | number
+  | string
+  | {
+      top?: number | string;
+      right?: number | string;
+      bottom?: number | string;
+      left?: number | string;
+    };
+
+function toPixelOrString(value: number | string): string {
+  return typeof value === "number" ? `${value}px` : value;
+}
+
+function parseOffsetToCSS(offset: ToastOffsetValue): {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+} {
+  if (typeof offset === "number") {
+    const px = `${offset}px`;
+
+    return {bottom: px, left: px, right: px, top: px};
+  }
+
+  if (typeof offset === "string") {
+    return {bottom: offset, left: offset, right: offset, top: offset};
+  }
+
+  return {
+    bottom: offset.bottom !== undefined ? toPixelOrString(offset.bottom) : undefined,
+    left: offset.left !== undefined ? toPixelOrString(offset.left) : undefined,
+    right: offset.right !== undefined ? toPixelOrString(offset.right) : undefined,
+    top: offset.top !== undefined ? toPixelOrString(offset.top) : undefined,
+  };
+}
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Context
@@ -43,6 +100,9 @@ type ToastContext = {
   maxVisibleToasts?: number;
   heightsByKey?: Record<string, number>;
   onToastHeightChange?: (key: string, height: number) => void;
+  expanded?: boolean;
+  onToastMouseEnter?: () => void;
+  onToastMouseLeave?: (event: React.MouseEvent) => void;
 };
 
 const ToastContext = createContext<ToastContext>({});
@@ -65,10 +125,13 @@ const Toast = <T extends object = ToastContentValue>({
   ...rest
 }: ToastProps<T>) => {
   const {
+    expanded = false,
     gap = DEFAULT_GAP,
     heightsByKey,
     maxVisibleToasts = DEFAULT_MAX_VISIBLE_TOAST,
     onToastHeightChange,
+    onToastMouseEnter,
+    onToastMouseLeave,
     placement: contextPlacement,
     scaleFactor: contextScaleFactor,
     slots,
@@ -86,6 +149,13 @@ const Toast = <T extends object = ToastContentValue>({
   const toastKey = toast?.key;
   const toastRef = useRef<HTMLDivElement | null>(null);
   const {height: toastHeight} = useMeasuredHeight(toastRef);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   useEffect(() => {
     if (toastKey && typeof toastHeight === "number") {
@@ -99,26 +169,46 @@ const Toast = <T extends object = ToastContentValue>({
     const frontHeight =
       (frontToastKey ? heightsByKey?.[frontToastKey] : undefined) ?? toastHeight ?? 0;
 
-    const offset = index * gap;
-    const translateY = (isBottom ? -1 : 1) * offset;
-    const scale = 1 - index * finalScaleFactor;
+    let translateY: number;
+    let scale: number;
+
+    if (expanded) {
+      const toastsHeightBefore = visibleToasts.reduce((prev, t, reducerIndex) => {
+        if (reducerIndex >= index) return prev;
+        const h = t.key ? heightsByKey?.[t.key] : undefined;
+
+        return prev + (h ?? 0);
+      }, 0);
+
+      translateY = (isBottom ? -1 : 1) * (index * gap + toastsHeightBefore);
+      scale = 1;
+    } else {
+      const offset = index * gap;
+
+      translateY = (isBottom ? -1 : 1) * offset;
+      scale = 1 - index * finalScaleFactor;
+    }
+
+    const isInteractive = expanded ? !isHidden : isFrontmost;
 
     return {
-      viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
-      translate: `0 ${translateY}px 0`,
-      scale: `${scale}`,
-      zIndex: visibleToasts.length - index,
       tabindex: isFrontmost ? 0 : -1,
+      zIndex: visibleToasts.length - index,
       ...(frontHeight
         ? ({
             "--front-height": `${frontHeight}px`,
           } as CSSProperties)
         : null),
+      ...({
+        "--toast-scale": `${scale}`,
+        "--toast-translate-y": `${translateY}px`,
+      } as CSSProperties),
       opacity: isHidden ? 0 : 1,
-      pointerEvents: isHidden ? "none" : "auto",
+      pointerEvents: isHidden ? "none" : isInteractive ? "auto" : "none",
       ...rest.style,
     } as const;
   }, [
+    expanded,
     finalScaleFactor,
     gap,
     heightsByKey,
@@ -132,17 +222,32 @@ const Toast = <T extends object = ToastContentValue>({
     visibleToasts,
   ]);
 
+  const handleMouseEnter = useCallback(() => {
+    onToastMouseEnter?.();
+  }, [onToastMouseEnter]);
+
+  const handleMouseLeave = useCallback(
+    (event: React.MouseEvent) => {
+      onToastMouseLeave?.(event);
+    },
+    [onToastMouseLeave],
+  );
+
   return (
     <ToastPrimitive
       ref={toastRef}
       aria-hidden={isHidden}
       className={composeTwRenderProps(className, slots?.toast({variant}))}
+      data-expanded={dataAttr(expanded)}
       data-frontmost={dataAttr(isFrontmost)}
       data-hidden={dataAttr(isHidden)}
       data-index={index}
+      data-mounted={dataAttr(mounted)}
       data-slot="toast"
       style={style}
       toast={toast}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       {...rest}
     >
       {children}
@@ -306,36 +411,65 @@ interface ToastProviderProps<T extends object = ToastContentValue> extends Omit<
   "queue" | "children"
 > {
   children?: ToastRegionPrimitiveProps<T>["children"];
-  /** The gap between toasts. @default 8 */
+  /** Always show expanded (no stacking). @default false */
+  expand?: boolean;
+  /** The gap between toasts. @default 12 */
   gap?: number;
   /** The maximum number of toasts to display at a time (visual only). */
   maxVisibleToasts?: number;
+  /** Mobile offset applied when screen width < 600px. */
+  mobileOffset?: ToastOffsetValue;
+  /** Offset from viewport edges. */
+  offset?: ToastOffsetValue;
   /** The scale factor for toasts. @default 0.05 */
   scaleFactor?: number;
   placement?: ToastVariants["placement"];
   queue?: ToastQueue<T>;
   /** The width of the toast. @default 460 */
   width?: number | string;
+  /** Max visible toasts when expanded. @default 3 */
+  visibleToasts?: number;
 }
 
 const ToastProvider = <T extends object = ToastContentValue>({
   children,
   className,
+  expand = false,
   gap = DEFAULT_GAP,
   maxVisibleToasts,
+  mobileOffset = DEFAULT_MOBILE_OFFSET,
+  offset = DEFAULT_OFFSET,
   placement = "bottom",
   queue: queueProp,
   scaleFactor = DEFAULT_SCALE_FACTOR,
+  visibleToasts: visibleToastsProp,
   width = DEFAULT_TOAST_WIDTH,
   ...rest
 }: ToastProviderProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobileOffset = useMediaQuery(`(max-width: ${MOBILE_BREAKPOINT}px)`);
   const [toastHeights, setToastHeights] = React.useState<Record<string, number>>({});
+  const [isExpandedByHover, setIsExpandedByHover] = React.useState(false);
+  const isDocumentHidden = useIsDocumentHidden();
 
+  const pauseAllToasts = useCallback(() => {
+    if (queueProp) {
+      queueProp.pauseAll();
+    } else {
+      defaultToastQueue.pauseAll();
+    }
+  }, [queueProp]);
+
+  const resumeAllToasts = useCallback(() => {
+    if (queueProp) {
+      queueProp.resumeAll();
+    } else {
+      defaultToastQueue.resumeAll();
+    }
+  }, [queueProp]);
   const toastQueue = useMemo(() => {
     if (queueProp) {
-      // Custom toast prop provided - use it (it already has its own maxVisibleToasts limit)
       return "getQueue" in queueProp ? queueProp.getQueue() : queueProp;
     }
 
@@ -346,8 +480,74 @@ const ToastProvider = <T extends object = ToastContentValue>({
     const queueLimit =
       queueProp && "maxVisibleToasts" in queueProp ? queueProp.maxVisibleToasts : undefined;
 
-    return maxVisibleToasts ?? queueLimit ?? DEFAULT_MAX_VISIBLE_TOAST;
-  }, [maxVisibleToasts, queueProp]);
+    return maxVisibleToasts ?? visibleToastsProp ?? queueLimit ?? DEFAULT_MAX_VISIBLE_TOAST;
+  }, [maxVisibleToasts, visibleToastsProp, queueProp]);
+
+  const expanded = expand || isExpandedByHover;
+
+  const offsetCSS = useMemo(() => parseOffsetToCSS(offset), [offset]);
+  const mobileOffsetCSS = useMemo(() => parseOffsetToCSS(mobileOffset), [mobileOffset]);
+
+  const offsetStyle = useMemo(() => {
+    const active = isMobileOffset ? mobileOffsetCSS : offsetCSS;
+
+    return {
+      "--toast-mobile-offset-bottom": mobileOffsetCSS.bottom,
+      "--toast-mobile-offset-left": mobileOffsetCSS.left,
+      "--toast-mobile-offset-right": mobileOffsetCSS.right,
+      "--toast-mobile-offset-top": mobileOffsetCSS.top,
+      "--toast-offset-bottom": active.bottom,
+      "--toast-offset-left": active.left,
+      "--toast-offset-right": active.right,
+      "--toast-offset-top": active.top,
+    } as React.CSSProperties;
+  }, [isMobileOffset, mobileOffsetCSS, offsetCSS]);
+
+  useEffect(() => {
+    if (isDocumentHidden) {
+      pauseAllToasts();
+    } else {
+      resumeAllToasts();
+    }
+  }, [isDocumentHidden, pauseAllToasts, resumeAllToasts]);
+
+  const queueForSubscription = queueProp ?? defaultToastQueueInstance;
+
+  useEffect(() => {
+    const unsubscribe = queueForSubscription.subscribe(() => {
+      const count = queueForSubscription.visibleToasts.length;
+
+      if (count <= 1) {
+        setIsExpandedByHover(false);
+      }
+    });
+
+    return unsubscribe;
+  }, [queueForSubscription]);
+
+  const handleHoverEnter = useCallback(() => {
+    setIsExpandedByHover(true);
+    pauseAllToasts();
+  }, [pauseAllToasts]);
+
+  const handleHoverLeave = useCallback(
+    (event: React.MouseEvent) => {
+      const relatedTarget = event.relatedTarget as Node | null;
+
+      if (relatedTarget && typeof relatedTarget === "object") {
+        const isMovingToToastOrWrapper =
+          relatedTarget instanceof Element &&
+          (relatedTarget.closest('[data-slot="toast"]') ||
+            relatedTarget.closest('[data-slot="toast-region"]') ||
+            relatedTarget.closest('[data-slot="toast-region-wrapper"]'));
+
+        if (isMovingToToastOrWrapper) return;
+      }
+      setIsExpandedByHover(false);
+      resumeAllToasts();
+    },
+    [resumeAllToasts],
+  );
 
   const handleToastHeightChange = useCallback((key: string, height: number) => {
     setToastHeights((prev) => {
@@ -398,49 +598,70 @@ const ToastProvider = <T extends object = ToastContentValue>({
     [isMobile, placement, scaleFactor],
   );
 
-  return (
-    <ToastRegionPrimitive<T>
-      className={composeTwRenderProps(className, slots?.region())}
-      data-slot="toast-region"
-      queue={toastQueue}
-      style={{
-        // @ts-expect-error - CSS variables
-        "--gap": `${gap}px`,
-        "--scale-factor": scaleFactor,
-        "--placement": placement,
-        "--toast-width": typeof width === "number" ? `${width}px` : width,
-      }}
-      {...rest}
-    >
-      {(renderProps) => {
-        const content = renderProps.toast.content as ToastContentValue;
-        const renderPropsWithIsLoading = {
-          ...renderProps,
-          isLoading: content?.isLoading ?? false,
-        };
+  const wrapperClassName =
+    typeof className === "string"
+      ? cx(slots?.region(), "toast-region-wrapper", className)
+      : cx(slots?.region(), "toast-region-wrapper");
 
-        return (
-          <ToastContext
-            value={{
-              slots,
-              placement,
-              scaleFactor,
-              gap,
-              maxVisibleToasts: resolvedMaxVisibleToasts,
-              heightsByKey: toastHeights,
-              onToastHeightChange: handleToastHeightChange,
-              width,
-            }}
-          >
-            {typeof children === "undefined"
-              ? getDefaultChildren(renderProps)
-              : typeof children === "function"
-                ? children(renderPropsWithIsLoading)
-                : children}
-          </ToastContext>
-        );
-      }}
-    </ToastRegionPrimitive>
+  const toastRegionStyle = {
+    ...offsetStyle,
+    "--gap": `${gap}px`,
+    "--placement": placement,
+    "--scale-factor": scaleFactor,
+    "--toast-region-min-height": `${Math.max(80, ...Object.values(toastHeights))}px`,
+    "--toast-width": typeof width === "number" ? `${width}px` : width,
+  } as React.CSSProperties;
+
+  return (
+    <div
+      className={wrapperClassName}
+      data-expanded={dataAttr(expanded)}
+      data-slot="toast-region-wrapper"
+      style={{position: "relative"}}
+      onMouseEnter={handleHoverEnter}
+      onMouseLeave={handleHoverLeave}
+      onMouseMove={handleHoverEnter}
+    >
+      <ToastRegionPrimitive<T>
+        className={cx("toast-region-wrapper", slots?.region())}
+        data-slot="toast-region-wrapper"
+        queue={toastQueue}
+        style={toastRegionStyle}
+        {...rest}
+      >
+        {(renderProps) => {
+          const content = renderProps.toast.content as ToastContentValue;
+          const renderPropsWithIsLoading = {
+            ...renderProps,
+            isLoading: content?.isLoading ?? false,
+          };
+
+          return (
+            <ToastContext
+              value={{
+                expanded,
+                gap,
+                heightsByKey: toastHeights,
+                maxVisibleToasts: resolvedMaxVisibleToasts,
+                onToastHeightChange: handleToastHeightChange,
+                onToastMouseEnter: handleHoverEnter,
+                onToastMouseLeave: handleHoverLeave,
+                placement,
+                scaleFactor,
+                slots,
+                width,
+              }}
+            >
+              {typeof children === "undefined"
+                ? getDefaultChildren(renderProps)
+                : typeof children === "function"
+                  ? children(renderPropsWithIsLoading)
+                  : children}
+            </ToastContext>
+          );
+        }}
+      </ToastRegionPrimitive>
+    </div>
   );
 };
 

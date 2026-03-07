@@ -10,3 +10,9 @@ export const DEFAULT_SCALE_FACTOR = 0.05;
 export const DEFAULT_TOAST_WIDTH = 460;
 // The default timeout for toasts in milliseconds (matches sonner's default).
 export const DEFAULT_TOAST_TIMEOUT = 4000;
+// Default offset from viewport edges (matches current 1rem/16px).
+export const DEFAULT_OFFSET = 16;
+// Default mobile offset (matches Sonner).
+export const DEFAULT_MOBILE_OFFSET = 16;
+// Breakpoint for mobile offset (matches Sonner's 600px).
+export const MOBILE_BREAKPOINT = 600;
