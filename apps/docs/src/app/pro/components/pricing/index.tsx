@@ -20,7 +20,7 @@ function PricingSection({prices}: {prices: AllPrices}) {
   return (
     <PricingDataContext.Provider value={prices}>
       <PlanTypeContext.Provider value={selectedTab}>
-        <div className="flex flex-col items-center gap-4 px-6 py-20">
+        <div className="flex flex-col items-center gap-4 px-6 py-20" id="pricing">
           {/* Header */}
           <p className="text-center text-base leading-[normal] font-medium text-accent">Pricing</p>
           <div className="font-heading text-center text-5xl leading-[normal] tracking-[-0.72px] whitespace-nowrap text-foreground">
@@ -71,7 +71,7 @@ function PricingSection({prices}: {prices: AllPrices}) {
             <span className="font-medium text-foreground">Note:</span>
             <span>
               If you&apos;re a HeroUI v2 Pro customer, you&apos;re eligible for an upgrade discount,
-              check your email or contact support.
+              use the same email address or contact support.
             </span>
           </p>
         </div>

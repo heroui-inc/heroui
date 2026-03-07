@@ -62,9 +62,13 @@ function HeroHeading() {
 }
 
 function PreOrderButton() {
+  const handleClick = () => {
+    document.getElementById("pricing")?.scrollIntoView({behavior: "smooth"});
+  };
+
   return (
-    <Button className="bg-white text-black shadow-surface">
-      Pre-order for $199 <span className="line-through opacity-50">$299</span>
+    <Button className="bg-white text-black shadow-surface" onPress={handleClick}>
+      Pre-order for $149 <span className="line-through opacity-50">$299</span>
     </Button>
   );
 }

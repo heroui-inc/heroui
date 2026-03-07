@@ -3,12 +3,12 @@ import type {PlanPricing, TeamPlanPricing} from "../components/pricing/pricing-c
 import {env} from "~env";
 
 const ORIGINAL_PRICES = {
-  mobile: 399,
-  super: 499,
-  teamMobile: 349,
-  teamSuper: 449,
-  teamWeb: 249,
-  web: 299,
+  mobile: 299,
+  super: 399,
+  teamMobile: 299,
+  teamSuper: 399,
+  teamWeb: 199,
+  web: 199,
 };
 
 export type Discount = {
@@ -75,7 +75,7 @@ function cents(amount: number | null): number {
 }
 
 function fallbackRenewal(originalDollars: number): number {
-  return Math.floor(originalDollars / 10);
+  return Math.round(originalDollars / 3 / 10) * 10 - 1;
 }
 
 function buildPlanPricing(
