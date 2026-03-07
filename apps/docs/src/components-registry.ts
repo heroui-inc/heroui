@@ -477,6 +477,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "togglebuttongroup",
     title: "ToggleButtonGroup",
   },
+  toolbar: {
+    category: "layout",
+    description: "Container for interactive controls with arrow key navigation",
+    href: "/docs/components/toolbar",
+    name: "toolbar",
+    title: "Toolbar",
+  },
   tooltip: {
     category: "display",
     description: "Contextual information on hover or focus",
@@ -763,6 +770,7 @@ const componentRelationships: Record<string, string[]> = {
   toast: ["button", "alert", "closebutton", "spinner"],
   togglebutton: ["button", "switch", "checkbox", "togglebuttongroup"],
   togglebuttongroup: ["togglebutton", "buttongroup", "button"],
+  toolbar: ["buttongroup", "togglebuttongroup", "separator", "button"],
   tooltip: ["button", "popover"],
 };
 

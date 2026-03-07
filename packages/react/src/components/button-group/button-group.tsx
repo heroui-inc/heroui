@@ -6,8 +6,13 @@ import type {ComponentPropsWithRef} from "react";
 
 import {buttonGroupVariants} from "@heroui/styles";
 import React, {Children, createContext, isValidElement, useContext} from "react";
+import {
+  Group,
+  ToggleButtonGroupContext as RACToggleButtonGroupContext,
+  useSlottedContext,
+} from "react-aria-components";
 
-import {composeSlotClassName} from "../../utils";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Context
@@ -30,23 +35,33 @@ export const BUTTON_GROUP_CHILD = "__button_group_child";
  * -----------------------------------------------------------------------------------------------*/
 interface ButtonGroupRootProps
   extends
-    ComponentPropsWithRef<"div">,
-    Pick<ButtonProps, "size" | "variant" | "isDisabled">,
-    ButtonGroupVariants {}
+    ComponentPropsWithRef<typeof Group>,
+    Pick<ButtonProps, "size" | "variant">,
+    ButtonGroupVariants {
+  /** The orientation of the button group */
+  orientation?: "horizontal" | "vertical";
+}
 
 const ButtonGroupRoot = ({
   children,
   className,
   fullWidth,
   isDisabled,
+  orientation: orientationProp,
   size,
   variant,
   ...rest
 }: ButtonGroupRootProps) => {
-  const slots = React.useMemo(() => buttonGroupVariants({fullWidth}), [fullWidth]);
+  const racContext = useSlottedContext(RACToggleButtonGroupContext);
+  const orientation = orientationProp ?? racContext?.orientation ?? "horizontal";
+
+  const slots = React.useMemo(
+    () => buttonGroupVariants({fullWidth, orientation}),
+    [fullWidth, orientation],
+  );
 
   // Wrap only direct children with context provider
-  const wrappedChildren = Children.map(children, (child) => {
+  const wrappedChildren = Children.map(children as React.ReactNode, (child) => {
     if (!isValidElement(child)) {
       return child;
     }
@@ -59,9 +74,14 @@ const ButtonGroupRoot = ({
 
   return (
     <ButtonGroupContext value={{slots, size, variant, isDisabled, fullWidth}}>
-      <div className={slots.base({className})} data-slot="button-group" {...rest}>
+      <Group
+        className={composeTwRenderProps(className, slots.base())}
+        data-slot="button-group"
+        isDisabled={isDisabled}
+        {...rest}
+      >
         {wrappedChildren}
-      </div>
+      </Group>
     </ButtonGroupContext>
   );
 };

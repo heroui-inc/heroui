@@ -43,7 +43,7 @@ export function CustomValue() {
       </div>
 
       <Separator className="md:hidden" />
-      <Separator className="hidden self-stretch md:block" orientation="vertical" />
+      <Separator className="hidden md:block" orientation="vertical" />
 
       <div className="flex max-w-52 flex-col gap-3">
         <Label className="text-xs font-medium text-muted">Options</Label>

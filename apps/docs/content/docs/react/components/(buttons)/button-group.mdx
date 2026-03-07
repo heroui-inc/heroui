@@ -58,6 +58,14 @@ export default () => (
   name="button-group-sizes"
 />
 
+### Orientation
+
+Use the `orientation` prop to arrange buttons horizontally or vertically.
+
+<ComponentPreview
+  name="button-group-orientation"
+/>
+
 ### With Icons
 
 <ComponentPreview
@@ -154,6 +162,7 @@ Add `<ButtonGroup.Separator />` inside each Button (except the first) to show di
 |------|------|---------|-------------|
 | `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger'` | - | Visual style variant applied to all buttons in the group |
 | `size` | `'sm' \| 'md' \| 'lg'` | - | Size applied to all buttons in the group |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the button group |
 | `fullWidth` | `boolean` | `false` | Whether the button group should take full width of its container |
 | `isDisabled` | `boolean` | `false` | Whether all buttons in the group are disabled (can be overridden on individual buttons) |
 | `className` | `string` | - | Additional CSS classes |

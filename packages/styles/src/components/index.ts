@@ -79,4 +79,5 @@ export * from "./time-field";
 export * from "./toast";
 export * from "./toggle-button";
 export * from "./toggle-button-group";
+export * from "./toolbar";
 export * from "./tooltip";

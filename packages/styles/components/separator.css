@@ -14,7 +14,7 @@
 }
 
 .separator--vertical {
-  @apply h-auto min-h-2 w-px;
+  @apply h-auto min-h-2 w-px self-stretch;
 }
 
 /* Color variants */
