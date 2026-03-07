@@ -3,7 +3,8 @@
 import type {AllPrices} from "../../lib/stripe-prices";
 
 import {Tabs} from "@heroui/react";
-import {useState} from "react";
+import {useSearchParams} from "next/navigation";
+import {useCallback, useState} from "react";
 
 import {Countdown} from "../countdown";
 
@@ -13,8 +14,24 @@ import WebHeroPricingCard from "./cards/web-hero-pricing-card";
 import {EnterpriseSection} from "./enterprise-section";
 import {PlanTypeContext, PricingDataContext} from "./pricing-context";
 
+type PlanTab = "individuals" | "teams";
+
 function PricingSection({prices}: {prices: AllPrices}) {
-  const [selectedTab, setSelectedTab] = useState<"individuals" | "teams">("individuals");
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get("tab") === "teams" ? "teams" : "individuals";
+  const [selectedTab, setSelectedTab] = useState<PlanTab>(initialTab);
+
+  const handleTabChange = useCallback((key: PlanTab) => {
+    setSelectedTab(key);
+    const url = new URL(window.location.href);
+
+    if (key === "teams") {
+      url.searchParams.set("tab", "teams");
+    } else {
+      url.searchParams.delete("tab");
+    }
+    window.history.replaceState(null, "", url.toString());
+  }, []);
   const isTeams = selectedTab === "teams";
 
   return (
@@ -35,7 +52,7 @@ function PricingSection({prices}: {prices: AllPrices}) {
           <div className="mt-4 flex w-full max-w-[1008px] items-center justify-center">
             <Tabs
               selectedKey={selectedTab}
-              onSelectionChange={(key) => setSelectedTab(key as "individuals" | "teams")}
+              onSelectionChange={(key) => handleTabChange(key as PlanTab)}
             >
               <Tabs.ListContainer>
                 <Tabs.List aria-label="Plan type">
