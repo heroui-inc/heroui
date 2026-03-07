@@ -39,15 +39,12 @@ export default function App() {
     <div className="flex w-full max-w-xs flex-col gap-2">
       <Autocomplete
         fullWidth
-        color={color}
         defaultItems={animals}
         label="Favorite Animal"
         value={value}
-        variant={variant}
         onChange={onChange}
-        {...args}
       >
-        {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+        {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
       </Autocomplete>
       <p className="text-default-500">Selected: {value}</p>
     </div>
