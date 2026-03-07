@@ -5,7 +5,11 @@ import type {ComponentPropsWithRef} from "react";
 
 import {toggleButtonGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {ToggleButtonGroup as ToggleButtonGroupPrimitive} from "react-aria-components";
+import {
+  ToggleButtonGroupContext as RACToggleButtonGroupContext,
+  ToggleButtonGroup as ToggleButtonGroupPrimitive,
+  useSlottedContext,
+} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 
@@ -40,10 +44,13 @@ const ToggleButtonGroupRoot = ({
   fullWidth,
   isDetached = false,
   isDisabled,
-  orientation = "horizontal",
+  orientation: orientationProp,
   size,
   ...rest
 }: ToggleButtonGroupRootProps) => {
+  const racContext = useSlottedContext(RACToggleButtonGroupContext);
+  const orientation = orientationProp ?? racContext?.orientation ?? "horizontal";
+
   const slots = React.useMemo(
     () => toggleButtonGroupVariants({fullWidth, isDetached, orientation}),
     [fullWidth, isDetached, orientation],

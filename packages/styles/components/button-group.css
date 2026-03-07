@@ -7,23 +7,50 @@
   @apply inline-flex h-auto items-center justify-center gap-0;
 }
 
+/* ==========================================================================
+   Orientation variants
+   ========================================================================== */
+
+.button-group--horizontal {
+  @apply flex-row;
+}
+
+.button-group--vertical {
+  @apply flex-col;
+}
+
 /* Remove border radius from all buttons in group */
 .button-group .button {
   @apply rounded-none;
 }
 
-/* Apply border radius to first button (left/start edge) */
-.button-group .button:first-child {
+/* Apply border radius to first button (start edge) */
+.button-group--horizontal .button:first-child {
   @apply rounded-s-3xl;
 }
 
-/* Apply border radius to last button (right/end edge) */
-.button-group .button:last-child {
+/* Apply border radius to last button (end edge) */
+.button-group--horizontal .button:last-child {
   @apply rounded-e-3xl;
 }
 
 /* If only one button, apply both rounded edges */
-.button-group .button:first-child:last-child {
+.button-group--horizontal .button:first-child:last-child {
+  @apply rounded-3xl;
+}
+
+/* Apply border radius to first button (top edge) in vertical */
+.button-group--vertical .button:first-child {
+  @apply rounded-t-3xl;
+}
+
+/* Apply border radius to last button (bottom edge) in vertical */
+.button-group--vertical .button:last-child {
+  @apply rounded-b-3xl;
+}
+
+/* If only one button in vertical, apply all rounded edges */
+.button-group--vertical .button:first-child:last-child {
   @apply rounded-3xl;
 }
 
@@ -31,6 +58,13 @@
 .button-group .button:active,
 .button-group .button[data-pressed="true"] {
   transform: none;
+}
+
+/* Override focus ring to use inset style so it stays within button bounds */
+.button-group .button:focus-visible:not(:focus),
+.button-group .button[data-focus-visible="true"] {
+  --tw-ring-offset-width: 0px;
+  @apply ring-inset;
 }
 
 /* ==========================================================================
@@ -43,10 +77,6 @@
   border-radius: 4px;
   position: absolute;
   pointer-events: none;
-  left: -1px;
-  top: 25%;
-  width: 1px;
-  height: 50%;
 
   /**
    * Transitions
@@ -54,26 +84,58 @@
    */
   transition: opacity 150ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
+
+  /* Horizontal orientation - vertical divider */
+  .button-group--horizontal & {
+    left: -1px;
+    top: 25%;
+    width: 1px;
+    height: 50%;
+  }
+
+  /* Vertical orientation - horizontal divider */
+  .button-group--vertical & {
+    left: 25%;
+    top: -1px;
+    width: 50%;
+    height: 1px;
+  }
 }
 
 /* ==========================================================================
    Outline button border handling
    ========================================================================== */
 
-/* Remove adjacent borders from outline buttons in group since we have separators */
+/* Remove adjacent borders from outline buttons in horizontal group */
 /* First button: remove end border (right in LTR, left in RTL) */
-.button-group .button--outline:first-child {
+.button-group--horizontal .button--outline:first-child {
   @apply border-e-0;
 }
 
 /* Last button: remove start border (left in LTR, right in RTL) */
-.button-group .button--outline:last-child {
+.button-group--horizontal .button--outline:last-child {
   @apply border-s-0;
 }
 
 /* Middle buttons: remove both inline borders */
-.button-group .button--outline:not(:first-child):not(:last-child) {
+.button-group--horizontal .button--outline:not(:first-child):not(:last-child) {
   @apply border-x-0;
+}
+
+/* Remove adjacent borders from outline buttons in vertical group */
+/* First button: remove bottom border */
+.button-group--vertical .button--outline:first-child {
+  @apply border-b-0;
+}
+
+/* Last button: remove top border */
+.button-group--vertical .button--outline:last-child {
+  @apply border-t-0;
+}
+
+/* Middle buttons: remove both block borders */
+.button-group--vertical .button--outline:not(:first-child):not(:last-child) {
+  @apply border-y-0;
 }
 
 /* ==========================================================================

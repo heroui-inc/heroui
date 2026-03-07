@@ -75,7 +75,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Layout",
-    components: ["card", "separator", "surface"],
+    components: ["card", "separator", "surface", "toolbar"],
   },
   {
     category: "Media",

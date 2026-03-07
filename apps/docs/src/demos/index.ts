@@ -68,6 +68,7 @@ import * as TimeFieldDemos from "./time-field";
 import * as ToastDemos from "./toast";
 import * as ToggleButtonDemos from "./toggle-button";
 import * as ToggleButtonGroupDemos from "./toggle-button-group";
+import * as ToolbarDemos from "./toolbar";
 import * as TooltipDemos from "./tooltip";
 
 export interface DemoItem {
@@ -340,6 +341,10 @@ export const demos: Record<string, DemoItem> = {
   "button-group-with-icons": {
     component: ButtonGroupDemos.WithIcons,
     file: "button-group/with-icons.tsx",
+  },
+  "button-group-orientation": {
+    component: ButtonGroupDemos.Orientation,
+    file: "button-group/orientation.tsx",
   },
   "button-group-without-separator": {
     component: ButtonGroupDemos.WithoutSeparator,
@@ -1948,6 +1953,23 @@ export const demos: Record<string, DemoItem> = {
   "toggle-button-group-without-separator": {
     component: ToggleButtonGroupDemos.WithoutSeparator,
     file: "toggle-button-group/without-separator.tsx",
+  },
+  // Toolbar demos
+  "toolbar-basic": {
+    component: ToolbarDemos.Basic,
+    file: "toolbar/basic.tsx",
+  },
+  "toolbar-vertical": {
+    component: ToolbarDemos.Vertical,
+    file: "toolbar/vertical.tsx",
+  },
+  "toolbar-with-button-group": {
+    component: ToolbarDemos.WithButtonGroup,
+    file: "toolbar/with-button-group.tsx",
+  },
+  "toolbar-attached": {
+    component: ToolbarDemos.Attached,
+    file: "toolbar/custom-styles.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {

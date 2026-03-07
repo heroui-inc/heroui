@@ -72,6 +72,7 @@
     "(forms)/text-area",
     "(date-and-time)/time-field",
     "(overlays)/toast",
+    "(layout)/toolbar",
     "(buttons)/toggle-button",
     "(buttons)/toggle-button-group",
     "(overlays)/tooltip"
