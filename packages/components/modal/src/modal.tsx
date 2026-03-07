@@ -9,9 +9,6 @@ import {useModal} from "./use-modal";
 import {ModalProvider} from "./modal-context";
 
 export interface ModalProps extends UseModalProps {
-  /**
-   * The content of the modal. Usually the ModalContent
-   */
   children: ReactNode;
 }
 
@@ -19,7 +16,10 @@ const Modal = forwardRef<"div", ModalProps>((props, ref) => {
   const {children, ...otherProps} = props;
   const context = useModal({...otherProps, ref});
 
-  const overlay = <Overlay portalContainer={context.portalContainer}>{children}</Overlay>;
+  const portalContainer =
+    typeof document !== "undefined" ? context.portalContainer || document.body : undefined;
+
+  const overlay = <Overlay portalContainer={portalContainer}>{children}</Overlay>;
 
   return (
     <ModalProvider value={context}>
