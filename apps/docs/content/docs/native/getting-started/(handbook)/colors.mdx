@@ -362,7 +362,7 @@ You can now select multiple colors at once, which is useful when you need to wor
 import { useThemeColor } from 'heroui-native';
 
 // Select multiple colors at once
-const { accent, accentForeground, success, danger } = useThemeColor([
+const [accent, accentForeground, success, danger] = useThemeColor([
   'accent',
   'accentForeground',
   'success',
