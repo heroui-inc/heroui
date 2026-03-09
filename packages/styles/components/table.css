@@ -63,9 +63,14 @@
   /* No background, padding, or rounding on the root */
 }
 
-/* Secondary: header is a standalone rounded card */
+/* Secondary: header is a standalone rounded card.
+   Background is on cells (not <thead>) because Firefox does not support */
 .table-root--secondary .table__header {
-  @apply rounded-2xl border-b-0;
+  @apply border-b-0 bg-transparent;
+}
+
+.table-root--secondary .table__column {
+  @apply bg-surface-secondary;
 }
 
 .table-root--secondary .table__column:first-child {
