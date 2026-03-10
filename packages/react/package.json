@@ -50,8 +50,8 @@
     "add:component": "node scripts/add-component.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "prepack": "node scripts/generate-exports.mjs && clean-package",
-    "postpack": "clean-package restore && node scripts/remove-exports.mjs"
+    "prepack": "clean-package && node scripts/update-exports.mjs",
+    "postpack": "clean-package restore"
   },
   "clean-package": "./clean-package.config.json",
   "dependencies": {
