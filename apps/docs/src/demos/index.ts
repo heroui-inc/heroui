@@ -1720,6 +1720,10 @@ export const demos: Record<string, DemoItem> = {
     component: TableDemos.AsyncLoading,
     file: "table/async-loading.tsx",
   },
+  "table-virtualization": {
+    component: TableDemos.Virtualization,
+    file: "table/virtualization.tsx",
+  },
   "table-tanstack-table": {
     component: TableDemos.TanstackTable,
     file: "table/tanstack-table.tsx",
