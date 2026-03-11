@@ -1,4 +1,4 @@
-export {isRTL, useLocale, useFilter} from "react-aria-components";
+export {isRTL, useLocale, useFilter, Virtualizer, TableLayout} from "react-aria-components";
 export {getLocalizationScript} from "react-aria-components/i18n";
 export {Collection, ListBoxLoadMoreItem, RouterProvider, I18nProvider} from "./components";
 export {parseColor} from "./utils";
