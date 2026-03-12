@@ -13,6 +13,7 @@ const TABS_COUNT = 10;
 const BROWSER_WIDTH = 1280;
 const BROWSER_HEIGHT = 720;
 
+const FROZEN_DATE = new Date("2025-01-15T12:00:00Z");
 const DISABLE_ANIMATIONS_DELAY = 200;
 const ACQUIRE_PAGE_TIMEOUT = 10;
 const DISABLE_ANIMATIONS_CSS = `
@@ -85,6 +86,7 @@ describe("Visual Regression Tests", () => {
     const page = await acquirePage();
 
     try {
+      await page.clock.setFixedTime(FROZEN_DATE);
       await page.goto(`${STORYBOOK_URL}/iframe.html?id=${story.id}`, {
         waitUntil: "networkidle",
       });
@@ -100,7 +102,7 @@ describe("Visual Regression Tests", () => {
       await expect(screenshotPath).toMatchImageSnapshot({
         failureThreshold: 0.01,
         failureThresholdType: "percent",
-        method: "bin",
+        method: "core-native",
         snapshotIdentifier: story.id,
         snapshotsDir: SNAPSHOTS_DIR,
       });

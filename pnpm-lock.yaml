@@ -22,8 +22,8 @@ importers:
         specifier: 7.28.5
         version: 7.28.5(@babel/core@7.28.5)
       '@blazediff/vitest':
-        specifier: 1.1.8
-        version: 1.1.8(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: 1.1.9
+        version: 1.1.9(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))
       '@changesets/changelog-github':
         specifier: 0.5.2
         version: 0.5.2(encoding@0.1.13)
@@ -782,44 +782,47 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@blazediff/bin-darwin-arm64@3.5.0':
-    resolution: {integrity: sha512-+KykGNPT/j3ZVb5JxBVjEZtkIMT4oCNvhKkAyLmn8QUs0aI+rOQxu2LNtJ5HnT9+qYXmKwQfQMMJPkCSE8GyFw==}
+  '@blazediff/codec-pngjs@3.0.0':
+    resolution: {integrity: sha512-DIkJ4AzfHFe0uyFL9UXTnyNxFSgXSM+r/3j6jlxswSjWC/htBIKf37uujUHml/mu5Dk7eKiNcQcPWfaO386x3g==}
+
+  '@blazediff/core-native-darwin-arm64@4.0.0':
+    resolution: {integrity: sha512-ToH+n/HJ1LWU0yKRFm9HZjCFK05rIRyLL0fOhhM7XoyyidZaRhsg858u/Q5LVFq7f7u80THxTFjfjdBCA9NQ9g==}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  '@blazediff/bin-darwin-x64@3.5.0':
-    resolution: {integrity: sha512-zWZGLx5ooos3ZRLM5qXcLP6ltG5FXF/1+kAKCIGggjQCgbtSvuh/cV7dvdAir3gHy+kUGZ2j0Q8luh61ZAztAw==}
+  '@blazediff/core-native-darwin-x64@4.0.0':
+    resolution: {integrity: sha512-oEu/2raLk7WPFxzK9WYsmRaRZxncSoUkZgKColYL+BavM0IwJJ66sKPqtEsjk7bXu/oP42/wrz3MAg0gfCZxxw==}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  '@blazediff/bin-linux-arm64@3.5.0':
-    resolution: {integrity: sha512-CVRyuJZJvMc3+rS15RqBbyS9L2VuamPAY9BPwyO3nA3+c24VoDGUl1bMi5qPqlnUPP+dAHDR30aFP60Ppnnjkg==}
+  '@blazediff/core-native-linux-arm64@4.0.0':
+    resolution: {integrity: sha512-GN6ovYP74NQVG6syO9x3w5LZhECvkrxk91oz64JFi3WVGqnWTn7HRBqH966xa1Tknx/GX6rkAxTag1M9+3Z8PA==}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  '@blazediff/bin-linux-x64@3.5.0':
-    resolution: {integrity: sha512-u1tJZIOmSaiNMHaOmcttw0T+Fgp/OTpoyaoZ57vxmFs7As9LJGEuviUkhNhac9lB0GiVXnY6MR9S7zQdDmvePQ==}
+  '@blazediff/core-native-linux-x64@4.0.0':
+    resolution: {integrity: sha512-DW0yQL/5VTCduPee5BKYlNs4lpI1ZajRsUcIlhjbdHRtQkvwOxHNVZI0bhTsrcWz9Rue/CplW2I08iHpbb/DIg==}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  '@blazediff/bin-win32-arm64@3.5.0':
-    resolution: {integrity: sha512-wo2ni6jvwzJJIdchADT9G6FWwBrufs0RZi9X+MoOFXvBFAQbzfpJIO5SHk61OqvndEEuJBYwEyybYx02dUAZaQ==}
+  '@blazediff/core-native-win32-arm64@4.0.0':
+    resolution: {integrity: sha512-vZED/fcRxjCxXhI5jtfUUP7vbQjT0RjXz0JJDcKqtmfL/CEC0UmJvuf5MuHnD2D77233G7qPeR9WO0iZwedtDA==}
     cpu: [arm64]
     os: [win32]
     hasBin: true
 
-  '@blazediff/bin-win32-x64@3.5.0':
-    resolution: {integrity: sha512-hgSmQ61mLIOvpEatIdKi5Mi9lIIvBVZS5m/+q3wd/oXhmqYguUC5qatXV/uP4auG4Oze52Hj5cjRHhcZHCSOvw==}
+  '@blazediff/core-native-win32-x64@4.0.0':
+    resolution: {integrity: sha512-92GgnGBi8JwF6LJHSt449DRksfqIHXxbFWGddTE9oOTabpGnDgI1ZgM3FZyQ1RFqHCD3zDPt6UhHSnxGHwV3TA==}
     cpu: [x64]
     os: [win32]
     hasBin: true
 
-  '@blazediff/bin@3.5.0':
-    resolution: {integrity: sha512-zp+iDDQnYWmUnq6NFeFIkfxxzSDhianr6aj4jBI50cKs5bksDDQkleOwgzZZrLmLP+E5wudgU/FYECCsXw47Xg==}
+  '@blazediff/core-native@4.0.0':
+    resolution: {integrity: sha512-xXObOXF6M2RVpPOLMjEP57cYi/cdJ3IiTNQRiKW6OJqb7jQQFltXrQfzyZQ/eMvUdmQ3roq5XenE4J2g+VuuCw==}
 
   '@blazediff/core@1.9.1':
     resolution: {integrity: sha512-ehg3jIkYKulZh+8om/O25vkvSsXXwC+skXmyA87FFx6A/45eqOkZsBltMw/TVteb0mloiGT8oGRTcjRAz66zaA==}
@@ -827,17 +830,14 @@ packages:
   '@blazediff/gmsd@1.7.1':
     resolution: {integrity: sha512-ypgVDWo8tn+mSoClBBVw3+7spNBO34ebHKPdPkdZEwFEYjzOK+OYqTCF6cqnlnMBYqGxESlyh3wqEzb5Zd/u6A==}
 
-  '@blazediff/matcher@1.3.0':
-    resolution: {integrity: sha512-sZ6V0a/XCA1BbdnRKgnPrCty6wOCIlcDS3pzPYPjaySsuEitzc4lWCPMS9tZrT69ZIadytYxaWCiBBcSdYg8UQ==}
-
-  '@blazediff/pngjs-transformer@2.1.1':
-    resolution: {integrity: sha512-D0l8YtVC9vBWQtrjmvNqPUkGiggH7ssNPOp4UDd9KlZn8ylTyBkKUPfukvehZcPiJGasiqJ2h2bnxLOc9+ySgg==}
+  '@blazediff/matcher@1.3.1':
+    resolution: {integrity: sha512-BZC5bQdoVftN6JCZcXw57R3iKOhkALv1KtJSrKAX5fgvjy16YvziaWf8ndaxMkim+KL5gVe7QWb8pGIw9lvI6A==}
 
   '@blazediff/ssim@1.7.1':
     resolution: {integrity: sha512-CxdtlPLijlp2tbwDavEOlDCtonWroHpXBfp/Ptue8IRTKeKnuDCotWZliH0tFJRYpsORxBUKXAc4vWVBrPUnPw==}
 
-  '@blazediff/vitest@1.1.8':
-    resolution: {integrity: sha512-SumwPrxuO2xacT20VOyYAOqMMNibege5VliWchEm8rnUZL6KbKHeqI+x1vh5profkjVBNDdh3L9YRlTuVRO/NQ==}
+  '@blazediff/vitest@1.1.9':
+    resolution: {integrity: sha512-g4NJyBX2p0iBPpXj2a4w26XYS5von2EA5raqSWEuzP6cOEjBhAX9hVxhsvOIp9WCcDIxYnSkReQ4m8cn5iE3VA==}
     peerDependencies:
       vitest: '>=1.0.0'
 
@@ -5701,11 +5701,13 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@11.1.0:
     resolution: {integrity: sha512-vuNwKSaKiqm7g0THUBu2x7ckSs3XJLXE+2ssL7/MfTGPLLcrJQ/4Uq1CjPTtO5cCIiRxqvN6Twy1qOwhL0Xjcw==}
     engines: {node: 20 || >=22}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@13.0.0:
@@ -8941,55 +8943,55 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@blazediff/bin-darwin-arm64@3.5.0':
+  '@blazediff/codec-pngjs@3.0.0':
+    dependencies:
+      pngjs: 7.0.0
+
+  '@blazediff/core-native-darwin-arm64@4.0.0':
     optional: true
 
-  '@blazediff/bin-darwin-x64@3.5.0':
+  '@blazediff/core-native-darwin-x64@4.0.0':
     optional: true
 
-  '@blazediff/bin-linux-arm64@3.5.0':
+  '@blazediff/core-native-linux-arm64@4.0.0':
     optional: true
 
-  '@blazediff/bin-linux-x64@3.5.0':
+  '@blazediff/core-native-linux-x64@4.0.0':
     optional: true
 
-  '@blazediff/bin-win32-arm64@3.5.0':
+  '@blazediff/core-native-win32-arm64@4.0.0':
     optional: true
 
-  '@blazediff/bin-win32-x64@3.5.0':
+  '@blazediff/core-native-win32-x64@4.0.0':
     optional: true
 
-  '@blazediff/bin@3.5.0':
+  '@blazediff/core-native@4.0.0':
     optionalDependencies:
-      '@blazediff/bin-darwin-arm64': 3.5.0
-      '@blazediff/bin-darwin-x64': 3.5.0
-      '@blazediff/bin-linux-arm64': 3.5.0
-      '@blazediff/bin-linux-x64': 3.5.0
-      '@blazediff/bin-win32-arm64': 3.5.0
-      '@blazediff/bin-win32-x64': 3.5.0
+      '@blazediff/core-native-darwin-arm64': 4.0.0
+      '@blazediff/core-native-darwin-x64': 4.0.0
+      '@blazediff/core-native-linux-arm64': 4.0.0
+      '@blazediff/core-native-linux-x64': 4.0.0
+      '@blazediff/core-native-win32-arm64': 4.0.0
+      '@blazediff/core-native-win32-x64': 4.0.0
 
   '@blazediff/core@1.9.1': {}
 
   '@blazediff/gmsd@1.7.1': {}
 
-  '@blazediff/matcher@1.3.0':
+  '@blazediff/matcher@1.3.1':
     dependencies:
-      '@blazediff/bin': 3.5.0
+      '@blazediff/codec-pngjs': 3.0.0
       '@blazediff/core': 1.9.1
+      '@blazediff/core-native': 4.0.0
       '@blazediff/gmsd': 1.7.1
-      '@blazediff/pngjs-transformer': 2.1.1
       '@blazediff/ssim': 1.7.1
       picocolors: 1.1.1
 
-  '@blazediff/pngjs-transformer@2.1.1':
-    dependencies:
-      pngjs: 7.0.0
-
   '@blazediff/ssim@1.7.1': {}
 
-  '@blazediff/vitest@1.1.8(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))':
+  '@blazediff/vitest@1.1.9(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
-      '@blazediff/matcher': 1.3.0
+      '@blazediff/matcher': 1.3.1
       vitest: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.2)
 
   '@changesets/apply-release-plan@7.0.14':
