@@ -2051,6 +2051,10 @@ export const demos: Record<string, DemoItem> = {
     component: ListBoxDemos.CustomRenderFunction,
     file: "list-box/custom-render-function.tsx",
   },
+  "list-box-virtualization": {
+    component: ListBoxDemos.Virtualization,
+    file: "list-box/virtualization.tsx",
+  },
   // Meter demos
   "meter-basic": {
     component: MeterDemos.Basic,
