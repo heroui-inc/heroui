@@ -5,7 +5,7 @@
 
 /* Avatar fallback element */
 .avatar__fallback {
-  @apply flex size-full items-center justify-center rounded-full bg-default text-sm font-medium;
+  @apply flex size-full items-center justify-center bg-default text-sm font-medium;
 }
 
 /* Avatar image element */
