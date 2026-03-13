@@ -59,7 +59,7 @@ const COMPONENT_GROUPS = [
   },
   {
     category: "Overlays",
-    components: ["alert-dialog", "modal", "popover", "toast", "tooltip"],
+    components: ["alert-dialog", "drawer", "modal", "popover", "toast", "tooltip"],
   },
   {
     category: "Collections",
