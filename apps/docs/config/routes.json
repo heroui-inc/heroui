@@ -515,12 +515,6 @@
           "title": "Figma",
           "keywords": "figma, heroui, design, ui kit",
           "path": "/docs/guide/figma.mdx"
-        },
-        {
-          "key": "roadmap",
-          "title": "Roadmap",
-          "keywords": "roadmap, heroui",
-          "path": "#"
         }
       ]
     }

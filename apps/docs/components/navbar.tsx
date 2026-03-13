@@ -33,8 +33,6 @@ import {usePress} from "@react-aria/interactions";
 import {useFocusRing} from "@react-aria/focus";
 import {usePostHog} from "posthog-js/react";
 
-import {FbRoadmapLink} from "./featurebase/fb-roadmap-link";
-
 import {currentVersion} from "@/utils/version";
 import {siteConfig} from "@/config/site";
 import {Logo, ThemeSwitch} from "@/components";
@@ -347,9 +345,6 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
             >
               Theme
             </NextLink>
-          </NavbarItem>
-          <NavbarItem>
-            <FbRoadmapLink className={navLinkClasses} />
           </NavbarItem>
         </ul>
         <Divider className="h-7 hidden lg:flex" orientation="vertical" />
