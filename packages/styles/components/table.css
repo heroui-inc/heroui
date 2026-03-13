@@ -80,11 +80,17 @@
 .table-root--secondary .table__body {
   @apply shadow-none;
 
+  /* Non-virtualized */
   & tr:first-child td:first-child,
   & tr:first-child td:last-child,
   & tr:last-child td:first-child,
   & tr:last-child td:last-child {
     @apply rounded-none;
+  }
+
+  /* Virtualized: undo the rounding applied by .table__body:not(tbody) */
+  &:not(tbody) {
+    @apply overflow-visible rounded-none;
   }
 }
 
@@ -135,7 +141,7 @@
     @apply pointer-events-none absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   }
 
-  &:last-child::after {
+  &:last-child:not(:only-child)::after {
     content: none;
   }
 
@@ -163,7 +169,8 @@
    Table Body (<tbody>)
    -------------------------------------------------------------------------- */
 .table__body {
-  /* Rounded corners on the tbody via corner cells (border-radius on <tbody> has no effect) */
+  /* Non-virtualized: round corners via first/last cells
+     (border-radius on <tbody> itself has no effect) */
   & tr:first-child td:first-child {
     @apply rounded-tl-2xl;
   }
@@ -176,13 +183,20 @@
   & tr:last-child td:last-child {
     @apply rounded-br-2xl;
   }
+
+  /* Virtualized: elements are divs, not tr/td. VirtualizerItem wrappers
+     break :first-child/:last-child on rows and cells, so round the body
+     itself and clip overflow instead. */
+  &:not(tbody) {
+    @apply relative h-full overflow-clip rounded-2xl;
+  }
 }
 
 /* --------------------------------------------------------------------------
    Table Row (<tr>)
    -------------------------------------------------------------------------- */
 .table__row {
-  @apply relative bg-surface;
+  @apply relative h-full bg-surface;
 
   /* Bottom separator */
   @apply border-b border-separator/50;
@@ -233,7 +247,7 @@
    Table Cell (<td>)
    -------------------------------------------------------------------------- */
 .table__cell {
-  @apply px-4 py-3 align-middle text-sm text-foreground;
+  @apply h-full px-4 py-3 align-middle text-sm text-foreground;
 
   @apply border-b border-separator-tertiary/50;
 
@@ -293,12 +307,12 @@
 
 /* --------------------------------------------------------------------------
    Load More Item — sentinel row for infinite scrolling.
-   The className applies to the <tr>. React Aria renders a <td colSpan=N>
-   inside, so we target the inner cell for centering — display:flex on a <tr>
-   would break colSpan.
+   Non-virtualized: <tr> with <td colSpan=N> inside.
+   Virtualized: <div> with <div role="rowheader"> inside.
    -------------------------------------------------------------------------- */
 .table__load-more {
-  & td {
+  & td,
+  & [role="rowheader"] {
     @apply py-3 text-center;
     & > * {
       @apply mx-auto;

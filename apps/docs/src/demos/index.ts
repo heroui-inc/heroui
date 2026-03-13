@@ -1720,6 +1720,10 @@ export const demos: Record<string, DemoItem> = {
     component: TableDemos.AsyncLoading,
     file: "table/async-loading.tsx",
   },
+  "table-virtualization": {
+    component: TableDemos.Virtualization,
+    file: "table/virtualization.tsx",
+  },
   "table-tanstack-table": {
     component: TableDemos.TanstackTable,
     file: "table/tanstack-table.tsx",
@@ -2046,6 +2050,10 @@ export const demos: Record<string, DemoItem> = {
   "list-box-custom-render-function": {
     component: ListBoxDemos.CustomRenderFunction,
     file: "list-box/custom-render-function.tsx",
+  },
+  "list-box-virtualization": {
+    component: ListBoxDemos.Virtualization,
+    file: "list-box/virtualization.tsx",
   },
   // Meter demos
   "meter-basic": {

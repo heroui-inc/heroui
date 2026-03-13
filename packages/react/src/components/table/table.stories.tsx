@@ -4,6 +4,7 @@ import type {Selection, SortDescriptor} from "react-aria-components";
 import {cn} from "@heroui/styles";
 import {Icon} from "@iconify/react";
 import React from "react";
+import {TableLayout, Virtualizer} from "react-aria-components";
 
 import {Avatar} from "../avatar";
 import {Button} from "../button";
@@ -674,6 +675,134 @@ export const AsyncLoading: Story = {
           </Table.ScrollContainer>
         </Table>
       </Wrapper>
+    );
+  },
+};
+
+export const Virtualization: Story = {
+  render: () => {
+    const roles = [
+      "Software Engineer",
+      "Senior Engineer",
+      "Staff Engineer",
+      "Product Manager",
+      "Designer",
+      "Data Analyst",
+      "QA Engineer",
+      "DevOps Engineer",
+      "Marketing Manager",
+      "Sales Representative",
+    ];
+
+    const statuses: User["status"][] = ["Active", "Inactive", "On Leave"];
+
+    const firstNames = [
+      "Emma",
+      "Liam",
+      "Olivia",
+      "Noah",
+      "Ava",
+      "James",
+      "Sophia",
+      "Oliver",
+      "Isabella",
+      "Lucas",
+      "Mia",
+      "Ethan",
+      "Charlotte",
+      "Mason",
+      "Amelia",
+      "Logan",
+      "Harper",
+      "Alexander",
+      "Ella",
+      "Benjamin",
+    ];
+
+    const lastNames = [
+      "Smith",
+      "Johnson",
+      "Williams",
+      "Brown",
+      "Jones",
+      "Garcia",
+      "Miller",
+      "Davis",
+      "Rodriguez",
+      "Martinez",
+      "Anderson",
+      "Taylor",
+      "Thomas",
+      "Jackson",
+      "White",
+      "Harris",
+      "Clark",
+      "Lewis",
+      "Robinson",
+      "Walker",
+    ];
+
+    function generateUsers(n: number): User[] {
+      const users: User[] = [];
+
+      for (let i = 0; i < n; i++) {
+        const firstName = firstNames[i % firstNames.length];
+        const lastName = lastNames[Math.floor(i / firstNames.length) % lastNames.length];
+        const name = `${firstName} ${lastName}`;
+
+        users.push({
+          id: i + 1,
+          name,
+          image_url: `https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg`,
+          role: roles[i % roles.length],
+          status: statuses[i % statuses.length],
+          email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@acme.com`,
+        });
+      }
+
+      return users;
+    }
+
+    const virtualizedUsers = generateUsers(1000);
+
+    return (
+      <Virtualizer
+        layout={TableLayout}
+        layoutOptions={{
+          rowHeight: 42,
+          headingHeight: 42,
+        }}
+      >
+        <Table>
+          <Table.ScrollContainer>
+            <Table.Content
+              aria-label="Virtualized table with 1000 rows"
+              className="h-[500px] min-w-[700px] overflow-auto"
+            >
+              <Table.Header className="h-full w-full">
+                <Table.Column isRowHeader id="name" minWidth={160}>
+                  Name
+                </Table.Column>
+                <Table.Column id="role" minWidth={220}>
+                  Role
+                </Table.Column>
+                <Table.Column id="email" minWidth={240}>
+                  Email
+                </Table.Column>
+              </Table.Header>
+              <Table.Body items={virtualizedUsers}>
+                {(user) => (
+                  <Table.Row>
+                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{user.role}</Table.Cell>
+                    <Table.Cell>{user.email}</Table.Cell>
+                  </Table.Row>
+                )}
+              </Table.Body>
+            </Table.Content>
+          </Table.ScrollContainer>
+        </Table>
+      </Virtualizer>
     );
   },
 };
