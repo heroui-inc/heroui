@@ -272,14 +272,12 @@ export default function PopoverExample() {
     <Popover>
       <Popover.Trigger asChild>
         <Button variant="tertiary" size="sm">
-          <Button.StartContent>
-            <Ionicons
-              name="information-circle"
-              size={20}
-              color={themeColorMuted}
-            />
-          </Button.StartContent>
-          <Button.LabelContent>Show Info</Button.LabelContent>
+          <Ionicons
+            name="information-circle"
+            size={20}
+            color={themeColorMuted}
+          />
+          <Button.Label>Show Info</Button.Label>
         </Button>
       </Popover.Trigger>
       <Popover.Portal>
