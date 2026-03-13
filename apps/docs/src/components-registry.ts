@@ -203,6 +203,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "disclosuregroup",
     title: "DisclosureGroup",
   },
+  drawer: {
+    category: "layout",
+    description: "Slide-out panel for supplementary content and actions",
+    href: "/docs/components/drawer",
+    name: "drawer",
+    title: "Drawer",
+  },
   dropdown: {
     category: "display",
     description: "Context menu with actions and options",
@@ -611,6 +618,7 @@ const componentRelationships: Record<string, string[]> = {
   ],
   disclosure: ["accordion", "disclosuregroup", "button"],
   disclosuregroup: ["accordion", "disclosure", "button", "separator"],
+  drawer: ["modal", "button", "closebutton", "alertdialog"],
   dropdown: ["button", "popover", "separator", "listbox"],
   errormessage: ["taggroup"],
   fielderror: [
@@ -688,7 +696,7 @@ const componentRelationships: Record<string, string[]> = {
   ],
   link: ["breadcrumbs"],
   listbox: ["select", "combobox", "avatar", "kbd", "separator", "surface", "dropdown"],
-  modal: ["button", "tooltip", "select", "avatar"],
+  modal: ["button", "tooltip", "select", "avatar", "drawer"],
   numberfield: ["label", "description", "fielderror", "form", "surface", "button"],
   pagination: ["button", "link"],
   popover: ["button", "tooltip", "select", "combobox", "avatar", "dropdown"],

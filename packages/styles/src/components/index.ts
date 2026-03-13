@@ -29,6 +29,7 @@ export * from "./date-picker";
 export * from "./date-range-picker";
 export * from "./date-input-group";
 export * from "./description";
+export * from "./drawer";
 export * from "./disclosure";
 export * from "./disclosure-group";
 export * from "./dropdown";

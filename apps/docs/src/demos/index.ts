@@ -29,6 +29,7 @@ import * as DateRangePickerDemos from "./date-range-picker";
 import * as DescriptionDemos from "./description";
 import * as DisclosureDemos from "./disclosure";
 import * as DisclosureGroupDemos from "./disclosure-group";
+import * as DrawerDemos from "./drawer";
 import * as DropdownDemos from "./dropdown";
 import * as ErrorMessageDemos from "./error-message";
 import * as FieldErrorDemos from "./field-error";
@@ -976,6 +977,39 @@ export const demos: Record<string, DemoItem> = {
   "combo-box-custom-render-function": {
     component: ComboBoxDemos.CustomRenderFunction,
     file: "combo-box/custom-render-function.tsx",
+  },
+  // Drawer demos
+  "drawer-basic": {
+    component: DrawerDemos.Basic,
+    file: "drawer/basic.tsx",
+  },
+  "drawer-placements": {
+    component: DrawerDemos.Placements,
+    file: "drawer/placements.tsx",
+  },
+  "drawer-backdrop-variants": {
+    component: DrawerDemos.BackdropVariants,
+    file: "drawer/backdrop-variants.tsx",
+  },
+  "drawer-with-form": {
+    component: DrawerDemos.WithForm,
+    file: "drawer/with-form.tsx",
+  },
+  "drawer-scrollable-content": {
+    component: DrawerDemos.ScrollableContent,
+    file: "drawer/scrollable-content.tsx",
+  },
+  "drawer-navigation": {
+    component: DrawerDemos.Navigation,
+    file: "drawer/navigation.tsx",
+  },
+  "drawer-non-dismissable": {
+    component: DrawerDemos.NonDismissable,
+    file: "drawer/non-dismissable.tsx",
+  },
+  "drawer-controlled": {
+    component: DrawerDemos.Controlled,
+    file: "drawer/controlled.tsx",
   },
   // Disclosure demos
   "disclosure-basic": {

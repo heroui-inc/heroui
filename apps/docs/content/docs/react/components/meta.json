@@ -35,6 +35,7 @@
     "(forms)/description",
     "(navigation)/disclosure",
     "(navigation)/disclosure-group",
+    "(overlays)/drawer",
     "(collections)/dropdown",
     "(forms)/error-message",
     "(forms)/field-error",

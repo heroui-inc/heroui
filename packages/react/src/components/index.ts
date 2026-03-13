@@ -26,6 +26,7 @@ export * from "./combo-box";
 export * from "./date-field";
 export * from "./date-picker";
 export * from "./date-range-picker";
+export * from "./drawer";
 export * from "./progress-bar";
 export * from "./progress-circle";
 export * from "./time-field";
