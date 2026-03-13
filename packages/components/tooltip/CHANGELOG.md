@@ -1,5 +1,16 @@
 # @heroui/tooltip
 
+## 2.2.29
+
+### Patch Changes
+
+- [#6281](https://github.com/heroui-inc/heroui/pull/6281) [`7437888`](https://github.com/heroui-inc/heroui/commit/74378881829204b94173ee2d713f81df5e9e9784) Thanks [@wingkwong](https://github.com/wingkwong)! - react-aria versions (release v1.16.0)
+
+- Updated dependencies [[`7437888`](https://github.com/heroui-inc/heroui/commit/74378881829204b94173ee2d713f81df5e9e9784)]:
+  - @heroui/use-aria-overlay@2.0.6
+  - @heroui/aria-utils@2.2.29
+  - @heroui/framer-utils@2.1.28
+
 ## 2.2.28
 
 ### Patch Changes

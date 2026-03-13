@@ -34,7 +34,7 @@ HeroUI exports 3 autocomplete-related components:
 
 - **Autocomplete**: The main component, which is a wrapper for the other components.
 - **AutocompleteSection**: The component that contains a group of autocomplete items.
-- **AutocompleteItem**: The component that represents a autocomplete item.
+- **AutocompleteItem**: The component that represents an autocomplete item.
 
 <ImportTabs
   commands={{
@@ -176,30 +176,30 @@ You can combine the `isInvalid` and `errorMessage` properties to show an invalid
 ### Events
 
 The `Autocomplete` component supports selection via mouse, keyboard, and touch. You can handle all of these
-via the `onSelectionChange` prop. `Autocomplete` will pass the selected key to the onSelectionChange handler.
+via the `onChange` prop. `Autocomplete` will pass the selected key to the onChange handler.
 Additionally, ComboBox accepts an `onInputChange` prop which is triggered whenever the value is edited by the user,
 whether through typing or option selection.
 
-The example below uses `onSelectionChange` and `onInputChange` to update the selection and input value stored in
+The example below uses `onChange` and `onInputChange` to update the selection and input value stored in
 React state.
 
 <CodeDemo title="Events" files={autocompleteContent.events} />
 
 ### Controlled
 
-You can use the `selectedKey` and `onSelectionChange` properties to control the select value.
+You can use the `value` and `onChange` properties to control the select value.
 
 <CodeDemo
-  title="Controlled with onSelectionChange"
+  title="Controlled with onChange"
   files={autocompleteContent.controlled}
 />
 
 ### Fully Controlled
 
-By passing in `inputValue`, `selectedKey`, and `items` to the `Autocomplete` you can control exactly what your `Autocomplete` should display.
+By passing in `inputValue`, `value`, and `items` to the `Autocomplete` you can control exactly what your `Autocomplete` should display.
 
 The following example shows how you would create a controlled `Autocomplete`, controlling everything from the selected value
-`selectedKey` to the combobox options `items`.
+`value` to the combobox options `items`.
 
 We recommend using the `useFilter` hook from [@react-aria/i18n](https://react-spectrum.adobe.com/react-aria/useFilter.html#usefilter) to manage the filtering of the items.
 
@@ -224,7 +224,7 @@ import {useFilter} from "@react-aria/i18n";
   files={autocompleteContent.fullyControlled}
 />
 
-> **Note**: It is important to note that you don't have to control every single aspect of a `Autocomplete`. If you decide to only control a single property of the `Autocomplete`, be sure to provide the change handler for that prop as well e.g. controlling `selectedKey` would require `onSelectionChange`.
+> **Note**: It is important to note that you don't have to control every single aspect of a `Autocomplete`. If you decide to only control a single property of the `Autocomplete`, be sure to provide the change handler for that prop as well e.g. controlling `value` would require `onChange`.
 
 ### Custom Items
 
@@ -395,7 +395,7 @@ properties to customize the popover, listbox and input components.
 - **data-disabled**:
   When the autocomplete item is disabled. Based on autocomplete `disabledKeys` prop.
 - **data-selected**:
-  When the autocomplete item is selected. Based on autocomplete `selectedKey` prop.
+  When the autocomplete item is selected. Based on autocomplete `value` prop.
 - **data-hover**:
   When the autocomplete item is being hovered. Based on [useHover](https://react-spectrum.adobe.com/react-aria/useHover.html)
 - **data-pressed**:
@@ -547,13 +547,13 @@ properties to customize the popover, listbox and input components.
       default: "inside"
     },
     {
-      attribute: "selectedKey",
+      attribute: "value",
       type: "React.Key",
       description: "The currently selected key in the collection (controlled).",
       default: "-"
     },
     {
-      attribute: "defaultSelectedKey",
+      attribute: "defaultValue",
       type: "React.Key",
       description: "The initial selected key in the collection (uncontrolled).",
       default: "-"
@@ -572,7 +572,7 @@ properties to customize the popover, listbox and input components.
     },
     {
       attribute: "validate",
-      type: "(value: { inputValue: string, selectedKey: React.Key }) => ValidationError | true | null | undefined",
+      type: "(value: { inputValue: string, value: React.Key }) => ValidationError | true | null | undefined",
       description: "Validate input values when committing (e.g. on blur), and return error messages for invalid values.",
       default: "-"
     },
@@ -764,7 +764,7 @@ properties to customize the popover, listbox and input components.
       default: "-"
     },
     {
-      attribute: "onSelectionChange",
+      attribute: "onChange",
       type: "(key: React.Key) => void",
       description: "Handler that is called when the Autocomplete selection changes.",
       default: "-"

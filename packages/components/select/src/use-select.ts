@@ -417,6 +417,24 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
     }
   }, [state.isOpen]);
 
+  // scroll the listbox to the selected item when reopened
+  useEffect(() => {
+    if (state.isOpen && popoverRef.current && listBoxRef.current) {
+      let selectedItem = listBoxRef.current.querySelector("[aria-selected=true] [data-label=true]");
+      let scrollShadow = scrollShadowRef.current;
+
+      if (selectedItem && scrollShadow && selectedItem.parentElement) {
+        let scrollShadowRect = scrollShadow.getBoundingClientRect();
+        let scrollShadowHeight = scrollShadowRect.height;
+
+        scrollShadow.scrollTop =
+          selectedItem.parentElement.offsetTop -
+          scrollShadowHeight / 2 +
+          selectedItem.parentElement.clientHeight / 2;
+      }
+    }
+  }, [state.isOpen, disableAnimation]);
+
   const getBaseProps: PropGetter = useCallback(
     (props = {}) => ({
       "data-slot": "base",

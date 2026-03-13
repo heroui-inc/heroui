@@ -35,7 +35,7 @@ const animals = [
 ];
 
 type FieldState = {
-  selectedKey: React.Key | null;
+  value: React.Key | null;
   inputValue: string;
   items: typeof animals;
 };
@@ -44,7 +44,7 @@ export default function Page() {
   // Store ComboBox input value, selected option, open state, and items
   // in a state tracker
   const [fieldState, setFieldState] = React.useState<FieldState>({
-    selectedKey: "",
+    value: "",
     inputValue: "",
     items: animals,
   });
@@ -55,13 +55,13 @@ export default function Page() {
 
   // Specify how each of the Autocomplete values should change when an
   // option is selected from the list box
-  const onSelectionChange = (key: React.Key | null) => {
+  const onChange = (key: React.Key | null) => {
     setFieldState((prevState) => {
       let selectedItem = prevState.items.find((option) => option.value === key);
 
       return {
         inputValue: selectedItem?.label || "",
-        selectedKey: key,
+        value: key,
         items: animals.filter((item) => startsWith(item.label, selectedItem?.label || "")),
       };
     });
@@ -72,7 +72,7 @@ export default function Page() {
   const onInputChange = (value: string) => {
     setFieldState((prevState) => ({
       inputValue: value,
-      selectedKey: value === "" ? null : prevState.selectedKey,
+      value: value === "" ? null : prevState.value,
       items: animals.filter((item) => startsWith(item.label, value)),
     }));
   };
@@ -82,7 +82,7 @@ export default function Page() {
     if (menuTrigger === "manual" && isOpen) {
       setFieldState((prevState) => ({
         inputValue: prevState.inputValue,
-        selectedKey: prevState.selectedKey,
+        value: prevState.value,
         items: animals,
       }));
     }
@@ -96,11 +96,11 @@ export default function Page() {
         items={fieldState.items}
         label="Favorite Animal"
         placeholder="Select an animal"
-        selectedKey={fieldState.selectedKey}
+        value={fieldState.value}
         variant="bordered"
+        onChange={onChange}
         onInputChange={onInputChange}
         onOpenChange={onOpenChange}
-        onSelectionChange={onSelectionChange}
       >
         {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
       </Autocomplete>

@@ -29,23 +29,24 @@ export const animals = [
 ];
 
 export default function App() {
-  const colors = ["default", "primary", "secondary", "success", "warning", "danger"];
+  const [value, setValue] = React.useState("cat");
+
+  const onChange = (key) => {
+    setValue(key);
+  };
 
   return (
-    <div className="w-full flex flex-row flex-wrap gap-4">
-      {colors.map((color) => (
-        <Autocomplete
-          key={color}
-          className="max-w-xs"
-          color={color}
-          defaultItems={animals}
-          defaultSelectedKey={"cat"}
-          label="Favorite Animal"
-          placeholder="Search an animal"
-        >
-          {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
-        </Autocomplete>
-      ))}
+    <div className="flex w-full max-w-xs flex-col gap-2">
+      <Autocomplete
+        fullWidth
+        defaultItems={animals}
+        label="Favorite Animal"
+        value={value}
+        onChange={onChange}
+      >
+        {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
+      </Autocomplete>
+      <p className="text-default-500">Selected: {value}</p>
     </div>
   );
 }
