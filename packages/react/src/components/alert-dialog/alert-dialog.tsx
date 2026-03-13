@@ -102,6 +102,7 @@ const AlertDialogBackdrop = ({
   className,
   isDismissable = false,
   isKeyboardDismissDisabled = true,
+  onClick,
   variant,
   ...props
 }: AlertDialogBackdropProps) => {
@@ -120,6 +121,10 @@ const AlertDialogBackdrop = ({
       data-slot="alert-dialog-backdrop"
       isDismissable={isDismissable}
       isKeyboardDismissDisabled={isKeyboardDismissDisabled}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.(e);
+      }}
       {...props}
     >
       {(renderProps) => (
