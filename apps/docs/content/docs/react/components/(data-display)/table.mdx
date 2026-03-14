@@ -118,6 +118,15 @@ Use `Table.LoadMore` for infinite scrolling. It renders a sentinel row that trig
   minHeight="380px"
 />
 
+### Virtualization
+
+Table supports virtualization through [Virtualizer](https://react-aria.adobe.com/Virtualizer), enabling efficient rendering of large datasets by displaying only the rows visible within the viewport.
+
+<ComponentPreview
+  name="table-virtualization"
+  minHeight="380px"
+/>
+
 ### TanStack Table
 
 HeroUI's Table works as a rendering layer on top of headless table libraries.
@@ -364,3 +373,17 @@ Re-exported from React Aria `Collection`. Used to render dynamic cells within ro
 |------|------|---------|-------------|
 | `items` | `T[]` | - | Collection items |
 | `children` | `(item: T) => React.ReactNode` | - | Render prop for each item |
+
+
+### TableLayout
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `rowHeight` | `number \| undefined` | 48 | The fixed height of a row in px. |
+| `estimatedRowHeight` | `number \| undefined` | — | The estimated height of a row, when row heights are variable. |
+| `headingHeight` | `number \| undefined` | 48 | The fixed height of a section header in px. |
+| `estimatedHeadingHeight` | `number \| undefined` | — | The estimated height of a section header, when the height is variable. |
+| `loaderHeight` | `number \| undefined` | 48 | The fixed height of a loader element in px. This loader is specifically for "load more" elements rendered when loading more rows at the root level or inside nested row/sections. |
+| `dropIndicatorThickness` | `number \| undefined` | 2 | The thickness of the drop indicator. |
+| `gap` | `number \| undefined` | 0 | The gap between items. |
+| `padding` | `number \| undefined` | 0 | The padding around the list. |

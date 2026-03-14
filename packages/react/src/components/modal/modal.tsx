@@ -102,6 +102,7 @@ const ModalBackdrop = ({
   children,
   className,
   isDismissable = true,
+  onClick,
   variant,
   ...props
 }: ModalBackdropProps) => {
@@ -119,6 +120,10 @@ const ModalBackdrop = ({
       className={composeTwRenderProps(className, updatedSlots?.backdrop())}
       data-slot="modal-backdrop"
       isDismissable={isDismissable}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.(e);
+      }}
       {...props}
     >
       {(renderProps) => (

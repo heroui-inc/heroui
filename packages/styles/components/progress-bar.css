@@ -1,0 +1,128 @@
+/* ==========================================================================
+   ProgressBar - Shows determinate or indeterminate progress
+   ========================================================================== */
+
+/* Base styles */
+.progress-bar {
+  @apply grid w-full gap-1;
+  grid-template-areas:
+    "label output"
+    "track track";
+  grid-template-columns: 1fr auto;
+
+  /* Default color token (accent) */
+  --progress-bar-fill: var(--color-accent);
+
+  [data-slot="label"] {
+    @apply w-fit text-sm font-medium;
+
+    grid-area: label;
+  }
+
+  .progress-bar__output {
+    @apply text-sm font-medium tabular-nums;
+
+    grid-area: output;
+  }
+
+  .progress-bar__track {
+    @apply relative overflow-hidden rounded-full bg-default;
+
+    grid-area: track;
+
+    /* Default height (matches --md) */
+    @apply h-2;
+  }
+
+  .progress-bar__fill {
+    @apply absolute top-0 left-0 h-full rounded-full;
+
+    background-color: var(--progress-bar-fill);
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: width 300ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+  }
+
+  /* Indeterminate state - when no aria-valuenow is set */
+  &:not([aria-valuenow]) {
+    .progress-bar__fill {
+      @apply w-2/5;
+
+      animation: progress-bar-indeterminate 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+
+      @apply motion-reduce:animate-none;
+    }
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+
+    [data-slot="label"] {
+      @apply opacity-100;
+    }
+  }
+}
+
+/* ==========================================================================
+   Indeterminate animation
+   ========================================================================== */
+
+@keyframes progress-bar-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+/* ==========================================================================
+   Size variants
+   ========================================================================== */
+
+.progress-bar--sm {
+  .progress-bar__track {
+    @apply h-1;
+  }
+}
+
+.progress-bar--md {
+  /* No styles as this is the default size */
+}
+
+.progress-bar--lg {
+  .progress-bar__track {
+    @apply h-3;
+  }
+}
+
+/* ==========================================================================
+   Color variants
+   ========================================================================== */
+
+.progress-bar--default {
+  --progress-bar-fill: var(--color-default-foreground);
+}
+
+.progress-bar--accent {
+  --progress-bar-fill: var(--color-accent);
+}
+
+.progress-bar--success {
+  --progress-bar-fill: var(--color-success);
+}
+
+.progress-bar--warning {
+  --progress-bar-fill: var(--color-warning);
+}
+
+.progress-bar--danger {
+  --progress-bar-fill: var(--color-danger);
+}

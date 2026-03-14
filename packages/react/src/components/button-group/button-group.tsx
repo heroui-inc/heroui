@@ -5,17 +5,24 @@ import type {ButtonGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {buttonGroupVariants} from "@heroui/styles";
-import React, {Children, createContext, isValidElement} from "react";
+import React, {Children, createContext, isValidElement, useContext} from "react";
+import {
+  Group,
+  ToggleButtonGroupContext as RACToggleButtonGroupContext,
+  useSlottedContext,
+} from "react-aria-components";
+
+import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type ButtonGroupContext = {
+  slots?: ReturnType<typeof buttonGroupVariants>;
   size?: ButtonProps["size"];
   variant?: ButtonProps["variant"];
   isDisabled?: ButtonProps["isDisabled"];
   fullWidth?: ButtonProps["fullWidth"];
-  hideSeparator?: boolean;
 };
 
 const ButtonGroupContext = createContext<ButtonGroupContext>({});
@@ -28,24 +35,33 @@ export const BUTTON_GROUP_CHILD = "__button_group_child";
  * -----------------------------------------------------------------------------------------------*/
 interface ButtonGroupRootProps
   extends
-    ComponentPropsWithRef<"div">,
-    Pick<ButtonProps, "size" | "variant" | "isDisabled">,
+    ComponentPropsWithRef<typeof Group>,
+    Pick<ButtonProps, "size" | "variant">,
     ButtonGroupVariants {
-  hideSeparator?: boolean;
+  /** The orientation of the button group */
+  orientation?: "horizontal" | "vertical";
 }
 
 const ButtonGroupRoot = ({
   children,
   className,
   fullWidth,
-  hideSeparator = false,
   isDisabled,
+  orientation: orientationProp,
   size,
   variant,
   ...rest
 }: ButtonGroupRootProps) => {
+  const racContext = useSlottedContext(RACToggleButtonGroupContext);
+  const orientation = orientationProp ?? racContext?.orientation ?? "horizontal";
+
+  const slots = React.useMemo(
+    () => buttonGroupVariants({fullWidth, orientation}),
+    [fullWidth, orientation],
+  );
+
   // Wrap only direct children with context provider
-  const wrappedChildren = Children.map(children, (child) => {
+  const wrappedChildren = Children.map(children as React.ReactNode, (child) => {
     if (!isValidElement(child)) {
       return child;
     }
@@ -57,22 +73,42 @@ const ButtonGroupRoot = ({
   });
 
   return (
-    <ButtonGroupContext value={{size, variant, isDisabled, fullWidth, hideSeparator}}>
-      <div
-        className={buttonGroupVariants({className, fullWidth})}
-        data-hide-separator={hideSeparator ? "true" : undefined}
+    <ButtonGroupContext value={{slots, size, variant, isDisabled, fullWidth}}>
+      <Group
+        className={composeTwRenderProps(className, slots.base())}
         data-slot="button-group"
+        isDisabled={isDisabled}
         {...rest}
       >
         {wrappedChildren}
-      </div>
+      </Group>
     </ButtonGroupContext>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * ButtonGroup Separator
+ * -----------------------------------------------------------------------------------------------*/
+interface ButtonGroupSeparatorProps extends ComponentPropsWithRef<"span"> {
+  className?: string;
+}
+
+const ButtonGroupSeparator = ({className, ...props}: ButtonGroupSeparatorProps) => {
+  const {slots} = useContext(ButtonGroupContext);
+
+  return (
+    <span
+      aria-hidden="true"
+      className={composeSlotClassName(slots?.separator, className)}
+      data-slot="button-group-separator"
+      {...props}
+    />
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ButtonGroupRoot, ButtonGroupContext};
+export {ButtonGroupRoot, ButtonGroupSeparator, ButtonGroupContext};
 
-export type {ButtonGroupRootProps};
+export type {ButtonGroupRootProps, ButtonGroupSeparatorProps};

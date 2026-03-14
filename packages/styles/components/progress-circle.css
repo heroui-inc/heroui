@@ -1,0 +1,105 @@
+/* ==========================================================================
+   ProgressCircle - Circular progress indicator
+   ========================================================================== */
+
+/* Base styles */
+.progress-circle {
+  @apply inline-flex items-center justify-center;
+
+  /* Default color token (accent) */
+  --progress-circle-stroke: var(--color-accent);
+  --progress-circle-track-stroke: var(--color-default);
+
+  .progress-circle__track {
+    /* Default size (matches --md) */
+    @apply size-7;
+  }
+
+  .progress-circle__track-circle {
+    stroke: var(--progress-circle-track-stroke);
+  }
+
+  .progress-circle__fill-circle {
+    stroke: var(--progress-circle-stroke);
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: stroke-dashoffset 300ms var(--ease-out);
+    @apply motion-reduce:transition-none;
+  }
+
+  /* Indeterminate state - when no aria-valuenow is set */
+  &:not([aria-valuenow]) {
+    .progress-circle__track {
+      animation: progress-circle-spin 1s linear infinite;
+
+      @apply motion-reduce:animate-none;
+    }
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @apply status-disabled;
+  }
+}
+
+/* ==========================================================================
+   Indeterminate animation
+   ========================================================================== */
+
+@keyframes progress-circle-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Size variants
+   ========================================================================== */
+
+.progress-circle--sm {
+  .progress-circle__track {
+    @apply size-5;
+  }
+}
+
+.progress-circle--md {
+  /* No styles as this is the default size */
+}
+
+.progress-circle--lg {
+  .progress-circle__track {
+    @apply size-9;
+  }
+}
+
+/* ==========================================================================
+   Color variants
+   ========================================================================== */
+
+.progress-circle--default {
+  --progress-circle-stroke: var(--color-default-foreground);
+}
+
+.progress-circle--accent {
+  --progress-circle-stroke: var(--color-accent);
+}
+
+.progress-circle--success {
+  --progress-circle-stroke: var(--color-success);
+}
+
+.progress-circle--warning {
+  --progress-circle-stroke: var(--color-warning);
+}
+
+.progress-circle--danger {
+  --progress-circle-stroke: var(--color-danger);
+}

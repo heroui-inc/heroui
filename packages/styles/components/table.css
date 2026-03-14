@@ -63,9 +63,14 @@
   /* No background, padding, or rounding on the root */
 }
 
-/* Secondary: header is a standalone rounded card */
+/* Secondary: header is a standalone rounded card.
+   Background is on cells (not <thead>) because Firefox does not support */
 .table-root--secondary .table__header {
-  @apply rounded-2xl border-b-0;
+  @apply border-b-0 bg-transparent;
+}
+
+.table-root--secondary .table__column {
+  @apply bg-surface-secondary;
 }
 
 .table-root--secondary .table__column:first-child {
@@ -80,27 +85,31 @@
 .table-root--secondary .table__body {
   @apply shadow-none;
 
+  /* Non-virtualized */
   & tr:first-child td:first-child,
   & tr:first-child td:last-child,
   & tr:last-child td:first-child,
   & tr:last-child td:last-child {
     @apply rounded-none;
   }
+
+  /* Virtualized: undo the rounding applied by .table__body:not(tbody) */
+  &:not(tbody) {
+    @apply overflow-visible rounded-none;
+  }
 }
 
 /* Secondary: rows are transparent and keep bottom border on every row */
 .table-root--secondary .table__row {
-  @apply bg-transparent;
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-default/50;
-    }
+  .table__cell {
+    @apply border-b border-separator-tertiary/50 bg-transparent;
   }
 
-  .table__cell {
-    @apply border-b border-separator-tertiary/50;
+  @media (hover: hover) {
+    &:hover .table__cell,
+    &[data-hovered="true"] .table__cell {
+      @apply bg-default/50;
+    }
   }
 }
 
@@ -135,7 +144,7 @@
     @apply pointer-events-none absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   }
 
-  &:last-child::after {
+  &:last-child:not(:only-child)::after {
     content: none;
   }
 
@@ -163,7 +172,8 @@
    Table Body (<tbody>)
    -------------------------------------------------------------------------- */
 .table__body {
-  /* Rounded corners on the tbody via corner cells (border-radius on <tbody> has no effect) */
+  /* Non-virtualized: round corners via first/last cells
+     (border-radius on <tbody> itself has no effect) */
   & tr:first-child td:first-child {
     @apply rounded-tl-2xl;
   }
@@ -176,13 +186,20 @@
   & tr:last-child td:last-child {
     @apply rounded-br-2xl;
   }
+
+  /* Virtualized: elements are divs, not tr/td. VirtualizerItem wrappers
+     break :first-child/:last-child on rows and cells, so round the body
+     itself and clip overflow instead. */
+  &:not(tbody) {
+    @apply relative h-full overflow-clip rounded-2xl;
+  }
 }
 
 /* --------------------------------------------------------------------------
    Table Row (<tr>)
    -------------------------------------------------------------------------- */
 .table__row {
-  @apply relative bg-surface;
+  @apply relative h-full;
 
   /* Bottom separator */
   @apply border-b border-separator/50;
@@ -192,16 +209,16 @@
     @apply border-b-0;
   }
 
-  /* Hover state */
+  /* Hover state — applied to cells so Firefox clips bg to border-radius */
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
+    &:hover .table__cell,
+    &[data-hovered="true"] .table__cell {
       @apply bg-surface/40;
     }
   }
 
   /* Selected state */
-  &[data-selected="true"] {
+  &[data-selected="true"] .table__cell {
     @apply bg-surface/10;
   }
 
@@ -224,7 +241,7 @@
   }
 
   /* Drop target state */
-  &[data-drop-target="true"] {
+  &[data-drop-target="true"] .table__cell {
     @apply bg-accent-soft;
   }
 }
@@ -233,7 +250,7 @@
    Table Cell (<td>)
    -------------------------------------------------------------------------- */
 .table__cell {
-  @apply px-4 py-3 align-middle text-sm text-foreground;
+  @apply h-full bg-surface px-4 py-3 align-middle text-sm text-foreground;
 
   @apply border-b border-separator-tertiary/50;
 
@@ -293,12 +310,12 @@
 
 /* --------------------------------------------------------------------------
    Load More Item — sentinel row for infinite scrolling.
-   The className applies to the <tr>. React Aria renders a <td colSpan=N>
-   inside, so we target the inner cell for centering — display:flex on a <tr>
-   would break colSpan.
+   Non-virtualized: <tr> with <td colSpan=N> inside.
+   Virtualized: <div> with <div role="rowheader"> inside.
    -------------------------------------------------------------------------- */
 .table__load-more {
-  & td {
+  & td,
+  & [role="rowheader"] {
     @apply py-3 text-center;
     & > * {
       @apply mx-auto;

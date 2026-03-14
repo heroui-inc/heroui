@@ -11,11 +11,11 @@ const VersionChip = () => {
   return (
     <LinkRoot
       className="chip rounded-full bg-surface-secondary text-xs text-muted"
-      href="/docs/native/releases/rc-4"
+      href="/docs/react/releases/v3-0-0-rc-1"
     >
-      <FrameworkChip framework="native" />
+      <FrameworkChip framework="web" />
       <span className="max-w-60 truncate sm:max-w-full">
-        RC 4 (Native) — SubMenu, Bottom Sheet back handler and ripple improvements
+        RC 1 (React) — Drawer, ToggleButton, Meter, Progress, and Toolbar
       </span>
     </LinkRoot>
   );

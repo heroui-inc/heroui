@@ -190,7 +190,7 @@ const CalendarYearPickerTriggerIndicator = ({
     >
       {typeof children === "function"
         ? children({monthYear, ...values})
-        : children || <IconChevronRight />}
+        : children || <IconChevronRight height="1em" width="1em" />}
     </span>
   );
 };

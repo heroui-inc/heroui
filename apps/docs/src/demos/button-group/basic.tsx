@@ -27,6 +27,7 @@ export function Basic() {
           <Button>Merge pull request</Button>
           <Dropdown>
             <Button isIconOnly aria-label="More options">
+              <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
             <Dropdown.Popover className="max-w-[290px]" placement="bottom end">
@@ -80,6 +81,7 @@ export function Basic() {
               </Chip>
             </Button>
             <Button isIconOnly>
+              <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
           </ButtonGroup>
@@ -87,7 +89,10 @@ export function Basic() {
             <Button isIconOnly>
               <QrCode />
             </Button>
-            <Button>Scan to pay</Button>
+            <Button>
+              <ButtonGroup.Separator />
+              Scan to pay
+            </Button>
           </ButtonGroup>
           <ButtonGroup variant="tertiary">
             <Button>
@@ -95,6 +100,7 @@ export function Basic() {
               <span className="text-xs font-semibold">2.4K</span>
             </Button>
             <Button isIconOnly>
+              <ButtonGroup.Separator />
               <ThumbsDown />
             </Button>
           </ButtonGroup>
@@ -104,6 +110,7 @@ export function Basic() {
               Star
             </Button>
             <Button className="px-2">
+              <ButtonGroup.Separator />
               <Chip color="accent" size="sm" variant="soft">
                 104
               </Chip>
@@ -115,6 +122,7 @@ export function Basic() {
               Pinned
             </Button>
             <Button isIconOnly>
+              <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
           </ButtonGroup>
@@ -129,6 +137,7 @@ export function Basic() {
             Previous
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             Next
             <ChevronRight />
           </Button>
@@ -143,10 +152,12 @@ export function Basic() {
             Photos
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             <Video />
             Videos
           </Button>
           <Button isIconOnly aria-label="More options">
+            <ButtonGroup.Separator />
             <Ellipsis />
           </Button>
         </ButtonGroup>
@@ -156,8 +167,14 @@ export function Basic() {
       <div className="flex flex-col gap-2">
         <ButtonGroup variant="tertiary">
           <Button>Left</Button>
-          <Button>Center</Button>
-          <Button>Right</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Center
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Right
+          </Button>
         </ButtonGroup>
       </div>
 
@@ -168,12 +185,15 @@ export function Basic() {
             <TextAlignLeft />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <TextAlignCenter />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <TextAlignRight />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <TextAlignJustify />
           </Button>
         </ButtonGroup>

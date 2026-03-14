@@ -1,0 +1,300 @@
+---
+title: Drawer
+description: Slide-out panel for supplementary content and actions
+icon: new
+links:
+  rac: Modal
+  source: drawer/drawer.tsx
+  styles: drawer.css
+  storybook: Components/Overlays/Drawer
+---
+
+## Import
+
+```tsx
+import { Drawer, Button } from "@heroui/react";
+```
+
+### Usage
+
+<ComponentPreview name="drawer-basic" />
+
+### Anatomy
+
+```tsx
+import { Drawer, Button } from "@heroui/react";
+
+export default () => (
+  <Drawer>
+    <Button>Open Drawer</Button>
+    <Drawer.Backdrop>
+      <Drawer.Content>
+        <Drawer.Dialog>
+          <Drawer.Handle /> {/* Optional: Drag handle */}
+          <Drawer.CloseTrigger /> {/* Optional: Close button */}
+          <Drawer.Header>
+            <Drawer.Heading />
+          </Drawer.Header>
+          <Drawer.Body />
+          <Drawer.Footer />
+        </Drawer.Dialog>
+      </Drawer.Content>
+    </Drawer.Backdrop>
+  </Drawer>
+);
+```
+
+### Placement
+
+<ComponentPreview name="drawer-placements" />
+
+### Backdrop Variants
+
+<ComponentPreview name="drawer-backdrop-variants" />
+
+### Non-Dismissable
+
+Set `isDismissable={false}` on `Drawer.Backdrop` to prevent closing by clicking outside or dragging. The user must interact with the drawer's action buttons.
+
+<ComponentPreview name="drawer-non-dismissable" />
+
+### Scrollable Content
+
+The `Drawer.Body` automatically handles overflow with native scrolling. Drag-to-dismiss is excluded from the body area to avoid scroll conflicts.
+
+<ComponentPreview name="drawer-scrollable-content" />
+
+### Controlled State
+
+<ComponentPreview name="drawer-controlled" />
+
+### With Form
+
+<ComponentPreview name="drawer-with-form" />
+
+### Navigation Drawer
+
+<ComponentPreview name="drawer-navigation" />
+
+<RelatedComponents component="drawer" />
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+```tsx
+import { Drawer, Button } from "@heroui/react";
+
+function CustomDrawer() {
+  return (
+    <Drawer>
+      <Button>Open Drawer</Button>
+      <Drawer.Backdrop className="bg-black/80">
+        <Drawer.Content>
+          <Drawer.Dialog className="bg-linear-to-br from-purple-500 to-pink-500 text-white">
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Custom Styled Drawer</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>
+              <p>This drawer has custom styling applied via Tailwind classes.</p>
+            </Drawer.Body>
+            <Drawer.Footer>
+              <Button slot="close">Close</Button>
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the Drawer component classes, you can use the `@layer components` directive.
+
+<br />
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .drawer__backdrop {
+    @apply bg-gradient-to-br from-black/50 to-black/70;
+  }
+
+  .drawer__dialog {
+    @apply rounded-2xl border border-white/10 shadow-2xl;
+  }
+
+  .drawer__header {
+    @apply text-center;
+  }
+
+  .drawer__close-trigger {
+    @apply rounded-full bg-white/10 hover:bg-white/20;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Drawer component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/drawer.css)):
+
+#### Base Classes
+
+- `.drawer__trigger` - Trigger element that opens the drawer
+- `.drawer__backdrop` - Overlay backdrop behind the drawer
+- `.drawer__content` - Positioning wrapper for the drawer panel
+- `.drawer__dialog` - The drawer panel itself
+- `.drawer__header` - Header section for titles
+- `.drawer__heading` - Main title text
+- `.drawer__body` - Main scrollable content area
+- `.drawer__footer` - Footer section for actions
+- `.drawer__handle` - Visual drag handle indicator
+- `.drawer__close-trigger` - Close button element
+
+#### Backdrop Variants
+
+- `.drawer__backdrop--opaque` - Opaque colored backdrop (default)
+- `.drawer__backdrop--blur` - Blurred backdrop with glass effect
+- `.drawer__backdrop--transparent` - Transparent backdrop (no overlay)
+
+#### Placement Variants
+
+- `.drawer__content--bottom` - Slides up from the bottom edge (default)
+- `.drawer__content--top` - Slides down from the top edge
+- `.drawer__content--left` - Slides in from the left edge
+- `.drawer__content--right` - Slides in from the right edge
+
+#### Dialog Variants
+
+- `.drawer__dialog--top` - Slides down from the top edge
+- `.drawer__dialog--bottom` - Slides up from the bottom edge
+- `.drawer__dialog--left` - Slides in from the left edge
+- `.drawer__dialog--right` - Slides in from the right edge
+
+### Interactive States
+
+The component supports these interactive states:
+
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` - Applied to trigger and close button
+- **Hover**: `:hover` or `[data-hovered="true"]` - Applied to close button on hover
+- **Active**: `:active` or `[data-pressed="true"]` - Applied to trigger and close button when pressed
+- **Entering**: `[data-entering]` - Applied during drawer opening animation
+- **Exiting**: `[data-exiting]` - Applied during drawer closing animation
+- **Placement**: `[data-placement="*"]` - Applied based on drawer position (top, bottom, left, right)
+
+## API Reference
+
+### Drawer
+
+| Prop       | Type                   | Default | Description                    |
+| ---------- | ---------------------- | ------- | ------------------------------ |
+| `children` | `ReactNode`            | -       | Trigger and backdrop elements  |
+| `state`    | `UseOverlayStateReturn` | -      | Controlled overlay state       |
+
+### Drawer.Trigger
+
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Custom trigger content |
+| `className` | `string`    | -       | CSS classes            |
+
+### Drawer.Backdrop
+
+| Prop                        | Type                                  | Default    | Description               |
+| --------------------------- | ------------------------------------- | ---------- | ------------------------- |
+| `variant`                   | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | Backdrop overlay style    |
+| `isDismissable`             | `boolean`                             | `true`     | Close on backdrop click   |
+| `isKeyboardDismissDisabled` | `boolean`                             | `false`    | Disable ESC key to close  |
+| `isOpen`                    | `boolean`                             | -          | Controlled open state     |
+| `onOpenChange`              | `(isOpen: boolean) => void`           | -          | Open state change handler |
+| `className`                 | `string \| (values) => string`        | -          | Backdrop CSS classes      |
+
+### Drawer.Content
+
+| Prop        | Type                                          | Default    | Description               |
+| ----------- | --------------------------------------------- | ---------- | ------------------------- |
+| `placement` | `"top" \| "bottom" \| "left" \| "right"`      | `"bottom"` | Edge the drawer slides from |
+| `className` | `string \| (values) => string`                | -          | Content CSS classes       |
+
+### Drawer.Dialog
+
+| Prop               | Type                           | Default    | Description                |
+| ------------------ | ------------------------------ | ---------- | -------------------------- |
+| `children`         | `ReactNode`                    | -          | Dialog content             |
+| `className`        | `string`                       | -          | CSS classes                |
+| `role`             | `string`                       | `"dialog"` | ARIA role                  |
+| `aria-label`       | `string`                       | -          | Accessibility label        |
+| `aria-labelledby`  | `string`                       | -          | ID of label element        |
+
+### Drawer.Header
+
+| Prop        | Type        | Default | Description    |
+| ----------- | ----------- | ------- | -------------- |
+| `children`  | `ReactNode` | -       | Header content |
+| `className` | `string`    | -       | CSS classes    |
+
+### Drawer.Heading
+
+| Prop        | Type        | Default | Description  |
+| ----------- | ----------- | ------- | ------------ |
+| `children`  | `ReactNode` | -       | Title text   |
+| `className` | `string`    | -       | CSS classes  |
+
+### Drawer.Body
+
+| Prop        | Type        | Default | Description  |
+| ----------- | ----------- | ------- | ------------ |
+| `children`  | `ReactNode` | -       | Body content |
+| `className` | `string`    | -       | CSS classes  |
+
+### Drawer.Footer
+
+| Prop        | Type        | Default | Description    |
+| ----------- | ----------- | ------- | -------------- |
+| `children`  | `ReactNode` | -       | Footer content |
+| `className` | `string`    | -       | CSS classes    |
+
+### Drawer.Handle
+
+| Prop        | Type     | Default | Description          |
+| ----------- | -------- | ------- | -------------------- |
+| `className` | `string` | -       | CSS classes          |
+
+### Drawer.CloseTrigger
+
+| Prop        | Type                           | Default | Description         |
+| ----------- | ------------------------------ | ------- | ------------------- |
+| `children`  | `ReactNode`                    | -       | Custom close button |
+| `className` | `string \| (values) => string` | -       | CSS classes         |
+
+### useOverlayState Hook
+
+```tsx
+import { useOverlayState } from "@heroui/react";
+
+const state = useOverlayState({
+  defaultOpen: false,
+  onOpenChange: (isOpen) => console.log(isOpen),
+});
+
+state.isOpen; // Current state
+state.open(); // Open drawer
+state.close(); // Close drawer
+state.toggle(); // Toggle state
+state.setOpen(); // Set state directly
+```
+
+## Accessibility
+
+Implements [WAI-ARIA Dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/):
+
+- **Focus trap**: Focus locked within drawer when open
+- **Keyboard**: `ESC` closes (when dismissable), `Tab` cycles elements
+- **Screen readers**: Proper ARIA attributes via React Aria
+- **Scroll lock**: Body scroll disabled when open
+- **Drag to dismiss**: Supports pointer-based drag gestures on handle, header, and footer areas

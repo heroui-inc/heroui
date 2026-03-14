@@ -1,0 +1,248 @@
+---
+title: v3.0.0-rc.1
+description: 7 new components (Drawer, ToggleButton, ToggleButtonGroup, Meter, ProgressBar, ProgressCircle, Toolbar), Table & ListBox virtualization, ButtonGroup improvements, and bug fixes.
+github:
+  pull: 6285
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">March 14, 2026</span>
+</div>
+
+Seven new components: [Drawer](/docs/components/drawer), [ToggleButton](/docs/components/toggle-button), [ToggleButtonGroup](/docs/components/toggle-button-group), [Meter](/docs/components/meter), [ProgressBar](/docs/components/progress-bar), [ProgressCircle](/docs/components/progress-circle), and [Toolbar](/docs/components/toolbar). Table and ListBox gain virtualization, ButtonGroup gets a `Separator` sub-component + vertical orientation, and React Aria Components is bumped to v1.16.0.
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/rc-1-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/rc-1-dark@2x.jpg"
+  alt="HeroUI v3 RC 1"
+  href="/docs/changelog/v3-0-0-rc-1"
+/>
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### New Components
+
+- **[Drawer](#drawer)**: Slide-out panel with drag-to-dismiss, 4 placements, backdrop variants, scrollable body ([Docs](/docs/components/drawer))
+- **[ToggleButton](#toggle-button)**: Selected/unselected toggle with all button variants + icon-only mode ([Docs](/docs/components/toggle-button))
+- **[ToggleButtonGroup](#toggle-button-group)**: Single or multi-select toggle group, attached/detached layouts, orientation ([Docs](/docs/components/toggle-button-group))
+- **[Meter](#meter)**: Value within a known range — disk usage, password strength, quotas ([Docs](/docs/components/meter))
+- **[ProgressBar](#progress-bar)**: Linear progress, determinate + indeterminate, colors, custom formatting ([Docs](/docs/components/progress-bar))
+- **[ProgressCircle](#progress-circle)**: Circular SVG progress with customizable track + fill circles ([Docs](/docs/components/progress-circle))
+- **[Toolbar](#toolbar)**: Groups buttons, toggles, and separators with horizontal or vertical orientation ([Docs](/docs/components/toolbar))
+
+### Drawer
+
+Slide-out panel overlay with top/bottom/left/right placement, drag-to-dismiss gestures, and backdrop variants. Compound parts: `Trigger`, `Backdrop`, `Content`, `Dialog`, `Header`, `Heading`, `Body`, `Footer`, `Handle`, `CloseTrigger`.
+
+<ComponentPreview
+  name="drawer-basic"
+/>
+
+**Placements:**
+
+<ComponentPreview
+  name="drawer-placements"
+/>
+
+**With Form:**
+
+<ComponentPreview
+  name="drawer-with-form"
+/>
+
+### Toggle Button
+
+Stateful toggle between selected and unselected. All button variants and sizes, icon-only mode, controlled or uncontrolled.
+
+<ComponentPreview
+  name="toggle-button-basic"
+/>
+
+**Variants:**
+
+<ComponentPreview
+  name="toggle-button-variants"
+/>
+
+### Toggle Button Group
+
+Single or multi-select toggle group. Attached (connected) and detached layouts, vertical orientation, full-width, and a `Separator` sub-component.
+
+<ComponentPreview
+  name="toggle-button-group-basic"
+/>
+
+**Selection Mode:**
+
+<ComponentPreview
+  name="toggle-button-group-selection-mode"
+/>
+
+**Attached Mode:**
+
+<ComponentPreview
+  name="toggle-button-group-attached"
+/>
+
+### Meter
+
+Value within a known range — disk usage, password strength, quotas. Compound parts: `Root`, `Output`, `Track`, `Fill`.
+
+<ComponentPreview
+  name="meter-basic"
+/>
+
+**Colors:**
+
+<ComponentPreview
+  name="meter-colors"
+/>
+
+### Progress Bar
+
+Linear progress indicator with determinate + indeterminate states, color variants, sizes, and custom value display. Compound parts: `Root`, `Output`, `Track`, `Fill`.
+
+<ComponentPreview
+  name="progress-bar-basic"
+/>
+
+**Indeterminate:**
+
+<ComponentPreview
+  name="progress-bar-indeterminate"
+/>
+
+### Progress Circle
+
+Circular SVG progress with `TrackCircle` and `FillCircle` sub-components for direct SVG control. Determinate + indeterminate states.
+
+<ComponentPreview
+  name="progress-circle-basic"
+/>
+
+**Custom SVG:**
+
+<ComponentPreview
+  name="progress-circle-custom-svg"
+/>
+
+### Toolbar
+
+Groups buttons, toggle buttons, and separators into an accessible toolbar. Horizontal or vertical orientation, composes with `ButtonGroup` and `ToggleButtonGroup`.
+
+<ComponentPreview
+  name="toolbar-basic"
+/>
+
+**With Button Group:**
+
+<ComponentPreview
+  name="toolbar-with-button-group"
+/>
+
+## Component Improvements
+
+### ButtonGroup Enhancements
+
+New `ButtonGroup.Separator` sub-component adds an explicit visual divider between buttons. Works in both horizontal and vertical orientations.
+
+<ComponentPreview
+  name="button-group-basic"
+/>
+
+### Table & ListBox Virtualization
+
+Table and ListBox now support virtualization via React Aria's `Virtualizer` for large datasets. `Virtualizer`, `TableLayout`, and `ListLayout` are re-exported from `@heroui/react`.
+
+<ComponentPreview
+  name="table-virtualization"
+/>
+
+### ButtonGroup Orientation
+
+`ButtonGroup` accepts an `orientation` prop (`"horizontal"` | `"vertical"`) with correct border-radius handling and separator direction for both axes. The root element was upgraded from `<div>` to React Aria's `Group` for proper `role="group"` semantics.
+
+<ComponentPreview
+  name="button-group-orientation"
+/>
+
+### ButtonGroup Focus Ring
+
+Focus rings on grouped buttons now use `ring-inset` so they stay within button bounds instead of overlapping neighbors.
+
+### Granular Component Imports
+
+`@heroui/react` now supports per-component subpath entrypoints for more explicit imports ([#6301](https://github.com/heroui-inc/heroui/pull/6301)):
+
+```tsx
+// Before — root entrypoint
+import { Button } from "@heroui/react";
+
+// After — granular subpath import
+import { Button } from "@heroui/react/button";
+```
+
+## Dependencies
+
+Upgraded `react-aria-components` from v1.15.1 to v1.16.0 and related packages:
+
+| Package | Old | New |
+|---------|-----|-----|
+| `react-aria-components` | 1.15.1 | 1.16.0 |
+| `@react-aria/i18n` | 3.12.15 | 3.12.16 |
+| `@react-aria/utils` | 3.33.0 | 3.33.1 |
+| `@react-types/shared` | 3.33.0 | 3.33.1 |
+| `@react-types/color` | 3.1.3 | 3.1.4 |
+| `@internationalized/date` | 3.11.0 | 3.12.0 |
+| `@react-stately/data` | 3.15.1 | 3.15.2 |
+
+## Bug Fixes
+
+- **InputGroup**: Focus styles now trigger only when the actual input/textarea is focused (`:has([data-slot]:focus)`) instead of any focusable child via `:focus-within` ([#6274](https://github.com/heroui-inc/heroui/pull/6274))
+- **Avatar**: Fallback element inherits `border-radius` from the parent instead of hardcoding `rounded-full`, so `className` overrides apply correctly ([#6300](https://github.com/heroui-inc/heroui/pull/6300))
+- **Modal & AlertDialog**: Backdrop click events no longer propagate through portals to parent elements ([#6297](https://github.com/heroui-inc/heroui/pull/6297))
+- **Table**: Fixed header rounding and background color bleeding in Firefox ([#6298](https://github.com/heroui-inc/heroui/pull/6298))
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6285](https://github.com/heroui-inc/heroui/pull/6285)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

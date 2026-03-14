@@ -1,0 +1,138 @@
+/* ==========================================================================
+   ToggleButtonGroup - Groups multiple ToggleButtons into a unified control
+   ========================================================================== */
+
+/* Base styles */
+.toggle-button-group {
+  @apply inline-flex h-auto w-fit items-center justify-center gap-0;
+}
+
+/* ==========================================================================
+   Orientation variants
+   ========================================================================== */
+
+.toggle-button-group--horizontal {
+  @apply flex-row;
+}
+
+.toggle-button-group--vertical {
+  @apply flex-col;
+}
+
+/* ==========================================================================
+   Full width modifier
+   ========================================================================== */
+
+.toggle-button-group--full-width {
+  @apply w-full;
+}
+
+/* ==========================================================================
+   Attached mode (default) - buttons connected with dividers
+   ========================================================================== */
+
+/* Remove border radius from all toggle buttons in attached group */
+.toggle-button-group .toggle-button {
+  @apply rounded-none;
+}
+
+/* Apply border radius to first button (start edge) */
+.toggle-button-group--horizontal .toggle-button:first-child {
+  @apply rounded-s-3xl;
+}
+
+/* Apply border radius to last button (end edge) */
+.toggle-button-group--horizontal .toggle-button:last-child {
+  @apply rounded-e-3xl;
+}
+
+/* If only one button, apply both rounded edges */
+.toggle-button-group--horizontal .toggle-button:first-child:last-child {
+  @apply rounded-3xl;
+}
+
+/* Apply border radius to first button (top edge) in vertical */
+.toggle-button-group--vertical .toggle-button:first-child {
+  @apply rounded-t-3xl;
+}
+
+/* Apply border radius to last button (bottom edge) in vertical */
+.toggle-button-group--vertical .toggle-button:last-child {
+  @apply rounded-b-3xl;
+}
+
+/* If only one button in vertical, apply all rounded edges */
+.toggle-button-group--vertical .toggle-button:first-child:last-child {
+  @apply rounded-3xl;
+}
+
+/* Remove scale transform on active/pressed state for buttons in group */
+.toggle-button-group .toggle-button:active,
+.toggle-button-group .toggle-button[data-pressed="true"] {
+  transform: none;
+}
+
+/* Override focus ring to use inset style so it stays within button bounds */
+.toggle-button-group .toggle-button:focus-visible:not(:focus),
+.toggle-button-group .toggle-button[data-focus-visible="true"] {
+  --tw-ring-offset-width: 0px;
+  @apply ring-inset;
+}
+
+/* Full width: stretch each toggle button */
+.toggle-button-group--full-width .toggle-button {
+  @apply flex-1;
+}
+
+/* ==========================================================================
+   Separator (compound component)
+   ========================================================================== */
+
+.toggle-button-group__separator {
+  @apply bg-current opacity-15;
+
+  border-radius: 4px;
+  position: absolute;
+  pointer-events: none;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition: opacity 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+
+  /* Horizontal orientation - vertical divider */
+  .toggle-button-group--horizontal & {
+    left: -1px;
+    top: 25%;
+    width: 1px;
+    height: 50%;
+  }
+
+  /* Vertical orientation - horizontal divider */
+  .toggle-button-group--vertical & {
+    left: 25%;
+    top: -1px;
+    width: 50%;
+    height: 1px;
+  }
+}
+
+/* ==========================================================================
+   Detached mode - buttons separated with gaps
+   ========================================================================== */
+
+.toggle-button-group--detached {
+  @apply gap-1;
+}
+
+/* Restore border radius in detached mode */
+.toggle-button-group--detached .toggle-button {
+  @apply rounded-3xl;
+}
+
+/* Hide separators in detached mode */
+.toggle-button-group--detached .toggle-button-group__separator {
+  display: none;
+}

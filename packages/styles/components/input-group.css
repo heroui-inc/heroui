@@ -1,6 +1,6 @@
 /* Input group styles */
 .input-group {
-  @apply inline-flex min-h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
+  @apply inline-flex min-h-9 items-center rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--color-field-border);
 
@@ -29,9 +29,9 @@
     }
   }
 
-  /* Focus within state */
-  &[data-focus-within="true"],
-  &:focus-within {
+  /* Focus within state - only when input/textarea is focused */
+  &:has([data-slot="input-group-input"]:focus),
+  &:has([data-slot="input-group-textarea"]:focus) {
     @apply status-focused-field;
     border-color: var(--color-field-border-focus);
     background-color: var(--color-field-focus);

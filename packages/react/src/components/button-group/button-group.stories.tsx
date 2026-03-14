@@ -28,8 +28,14 @@ export const Default: Story = {
   render: () => (
     <ButtonGroup>
       <Button>First</Button>
-      <Button>Second</Button>
-      <Button>Third</Button>
+      <Button>
+        <ButtonGroup.Separator />
+        Second
+      </Button>
+      <Button>
+        <ButtonGroup.Separator />
+        Third
+      </Button>
     </ButtonGroup>
   ),
 };
@@ -41,24 +47,42 @@ export const Sizes: Story = {
         <p className="text-sm text-muted">Small</p>
         <ButtonGroup size="sm">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Medium (default)</p>
         <ButtonGroup size="md">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Large</p>
         <ButtonGroup size="lg">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
     </div>
@@ -70,17 +94,25 @@ export const FullWidth: Story = {
     <div className="w-[400px] space-y-3">
       <ButtonGroup fullWidth>
         <Button>First</Button>
-        <Button>Second</Button>
-        <Button>Third</Button>
+        <Button>
+          <ButtonGroup.Separator />
+          Second
+        </Button>
+        <Button>
+          <ButtonGroup.Separator />
+          Third
+        </Button>
       </ButtonGroup>
       <ButtonGroup fullWidth>
         <Button isIconOnly>
           <Icon icon="gravity-ui:text-align-left" />
         </Button>
         <Button isIconOnly>
+          <ButtonGroup.Separator />
           <Icon icon="gravity-ui:text-align-center" />
         </Button>
         <Button isIconOnly>
+          <ButtonGroup.Separator />
           <Icon icon="gravity-ui:text-align-right" />
         </Button>
       </ButtonGroup>
@@ -95,48 +127,84 @@ export const Variants: Story = {
         <p className="text-sm text-muted">Primary</p>
         <ButtonGroup variant="primary">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Secondary</p>
         <ButtonGroup variant="secondary">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Tertiary</p>
         <ButtonGroup variant="tertiary">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Outline</p>
         <ButtonGroup variant="outline">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Ghost</p>
         <ButtonGroup variant="ghost">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Danger</p>
         <ButtonGroup variant="danger">
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
     </div>
@@ -150,16 +218,28 @@ export const Disabled: Story = {
         <p className="text-sm text-muted">All buttons disabled</p>
         <ButtonGroup isDisabled>
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button>Third</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Third
+          </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm text-muted">Group disabled, but one button overrides</p>
         <ButtonGroup isDisabled>
           <Button>First</Button>
-          <Button>Second</Button>
-          <Button isDisabled={false}>Third (enabled)</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Second
+          </Button>
+          <Button isDisabled={false}>
+            <ButtonGroup.Separator />
+            Third (enabled)
+          </Button>
         </ButtonGroup>
       </div>
     </div>
@@ -177,10 +257,12 @@ export const WithIcons: Story = {
             Search
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:plus" />
             Add
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:trash-bin" />
             Delete
           </Button>
@@ -193,9 +275,11 @@ export const WithIcons: Story = {
             <Icon icon="gravity-ui:globe" />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:plus" />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:trash-bin" />
           </Button>
         </ButtonGroup>
@@ -206,7 +290,7 @@ export const WithIcons: Story = {
 
 export const WithoutSeparator: Story = {
   render: () => (
-    <ButtonGroup hideSeparator>
+    <ButtonGroup>
       <Button>First</Button>
       <Button>Second</Button>
       <Button>Third</Button>
@@ -224,6 +308,7 @@ export const Examples: Story = {
           <Button>Merge pull request</Button>
           <Dropdown>
             <Button isIconOnly aria-label="More options">
+              <ButtonGroup.Separator />
               <Icon icon="gravity-ui:chevron-down" />
             </Button>
             <Dropdown.Popover className="max-w-[290px]" placement="bottom end">
@@ -278,6 +363,7 @@ export const Examples: Story = {
               </Chip>
             </Button>
             <Button isIconOnly>
+              <ButtonGroup.Separator />
               <Icon icon="gravity-ui:chevron-down" />
             </Button>
           </ButtonGroup>
@@ -285,7 +371,10 @@ export const Examples: Story = {
             <Button isIconOnly>
               <Icon icon="gravity-ui:qr-code" />
             </Button>
-            <Button>Scan to pay</Button>
+            <Button>
+              <ButtonGroup.Separator />
+              Scan to pay
+            </Button>
           </ButtonGroup>
           <ButtonGroup variant="tertiary">
             <Button>
@@ -293,6 +382,7 @@ export const Examples: Story = {
               <span className="text-xs font-semibold">2.4K</span>
             </Button>
             <Button isIconOnly>
+              <ButtonGroup.Separator />
               <Icon icon="gravity-ui:thumbs-down" />
             </Button>
           </ButtonGroup>
@@ -302,6 +392,7 @@ export const Examples: Story = {
               Star
             </Button>
             <Button className="px-2">
+              <ButtonGroup.Separator />
               <Chip color="accent" size="sm" variant="soft">
                 104
               </Chip>
@@ -313,6 +404,7 @@ export const Examples: Story = {
               Pinned
             </Button>
             <Button isIconOnly>
+              <ButtonGroup.Separator />
               <Icon icon="gravity-ui:chevron-down" />
             </Button>
           </ButtonGroup>
@@ -328,6 +420,7 @@ export const Examples: Story = {
             Previous
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             Next
             <Icon icon="gravity-ui:chevron-right" />
           </Button>
@@ -343,10 +436,12 @@ export const Examples: Story = {
             Photos
           </Button>
           <Button>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:video" />
             Videos
           </Button>
           <Button isIconOnly aria-label="More options">
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:ellipsis" />
           </Button>
         </ButtonGroup>
@@ -357,8 +452,14 @@ export const Examples: Story = {
         <p className="text-sm text-muted">Text alignment</p>
         <ButtonGroup variant="tertiary">
           <Button>Left</Button>
-          <Button>Center</Button>
-          <Button>Right</Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Center
+          </Button>
+          <Button>
+            <ButtonGroup.Separator />
+            Right
+          </Button>
         </ButtonGroup>
       </div>
 
@@ -370,12 +471,15 @@ export const Examples: Story = {
             <Icon icon="gravity-ui:text-align-left" />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:text-align-center" />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:text-align-right" />
           </Button>
           <Button isIconOnly>
+            <ButtonGroup.Separator />
             <Icon icon="gravity-ui:text-align-justify" />
           </Button>
         </ButtonGroup>
