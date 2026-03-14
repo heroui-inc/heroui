@@ -96,10 +96,6 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
 
   const baseStyles = cn(classNames?.base, className);
 
-  if (isReadOnly) {
-    itemProps = removeEvents(itemProps);
-  }
-
   const isHighlighted =
     (shouldHighlightOnFocus && isFocused) ||
     (isMobile ? isHovered || isPressed : isHovered || (isFocused && !isFocusVisible));
@@ -115,17 +111,15 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     }
   };
 
-  const getItemProps: PropGetter = (props = {}) => ({
+  const getItemProps: PropGetter = (userProps = {}) => ({
     ref: domRef,
     onFocusCapture: handleFocusCapture,
     ...mergeProps(
-      itemProps,
+      filterDOMProps(otherProps, {enabled: shouldFilterDOMProps}),
+      isReadOnly ? removeEvents(itemProps) : itemProps,
       isReadOnly ? {} : focusProps,
       hoverProps,
-      filterDOMProps(otherProps, {
-        enabled: shouldFilterDOMProps,
-      }),
-      props,
+      userProps,
     ),
     "data-selectable": dataAttr(isSelectable),
     "data-focus": dataAttr(isFocused),
@@ -134,7 +128,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     "data-selected": dataAttr(isSelected),
     "data-pressed": dataAttr(isPressed),
     "data-focus-visible": dataAttr(isFocusVisible),
-    className: slots.base({class: cn(baseStyles, props.className)}),
+    className: slots.base({class: cn(baseStyles, userProps.className)}),
   });
 
   const getLabelProps: PropGetter = (props = {}) => ({
