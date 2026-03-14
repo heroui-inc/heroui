@@ -63,9 +63,14 @@
   /* No background, padding, or rounding on the root */
 }
 
-/* Secondary: header is a standalone rounded card */
+/* Secondary: header is a standalone rounded card.
+   Background is on cells (not <thead>) because Firefox does not support */
 .table-root--secondary .table__header {
-  @apply rounded-2xl border-b-0;
+  @apply border-b-0 bg-transparent;
+}
+
+.table-root--secondary .table__column {
+  @apply bg-surface-secondary;
 }
 
 .table-root--secondary .table__column:first-child {
@@ -96,17 +101,15 @@
 
 /* Secondary: rows are transparent and keep bottom border on every row */
 .table-root--secondary .table__row {
-  @apply bg-transparent;
-
-  @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
-      @apply bg-default/50;
-    }
+  .table__cell {
+    @apply border-b border-separator-tertiary/50 bg-transparent;
   }
 
-  .table__cell {
-    @apply border-b border-separator-tertiary/50;
+  @media (hover: hover) {
+    &:hover .table__cell,
+    &[data-hovered="true"] .table__cell {
+      @apply bg-default/50;
+    }
   }
 }
 
@@ -196,7 +199,7 @@
    Table Row (<tr>)
    -------------------------------------------------------------------------- */
 .table__row {
-  @apply relative h-full bg-surface;
+  @apply relative h-full;
 
   /* Bottom separator */
   @apply border-b border-separator/50;
@@ -206,16 +209,16 @@
     @apply border-b-0;
   }
 
-  /* Hover state */
+  /* Hover state — applied to cells so Firefox clips bg to border-radius */
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
+    &:hover .table__cell,
+    &[data-hovered="true"] .table__cell {
       @apply bg-surface/40;
     }
   }
 
   /* Selected state */
-  &[data-selected="true"] {
+  &[data-selected="true"] .table__cell {
     @apply bg-surface/10;
   }
 
@@ -238,7 +241,7 @@
   }
 
   /* Drop target state */
-  &[data-drop-target="true"] {
+  &[data-drop-target="true"] .table__cell {
     @apply bg-accent-soft;
   }
 }
@@ -247,7 +250,7 @@
    Table Cell (<td>)
    -------------------------------------------------------------------------- */
 .table__cell {
-  @apply h-full px-4 py-3 align-middle text-sm text-foreground;
+  @apply h-full bg-surface px-4 py-3 align-middle text-sm text-foreground;
 
   @apply border-b border-separator-tertiary/50;
 
