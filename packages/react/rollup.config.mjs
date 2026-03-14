@@ -48,6 +48,9 @@ const external = [
   /^react-dom($|\/)/,
   /^@react-aria/,
   /^@react-stately/,
+  /^@react-types\//,
+  /^@internationalized\//,
+  /^react-aria-components($|\/)/,
   /^tailwind-merge/,
   /^tailwind-variants/,
 ];
