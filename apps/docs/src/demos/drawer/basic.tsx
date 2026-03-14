@@ -5,9 +5,8 @@ export function Basic() {
     <Drawer>
       <Button variant="secondary">Open Drawer</Button>
       <Drawer.Backdrop>
-        <Drawer.Content>
+        <Drawer.Content placement="right">
           <Drawer.Dialog>
-            <Drawer.Handle />
             <Drawer.Header>
               <Drawer.Heading>Drawer Title</Drawer.Heading>
             </Drawer.Header>

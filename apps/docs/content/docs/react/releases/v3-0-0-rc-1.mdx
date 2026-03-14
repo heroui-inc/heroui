@@ -25,22 +25,22 @@ Update to the latest version:
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
   <Tab value="npm">
     ```bash
-    npm i @heroui/styles@beta @heroui/react@beta
+    npm i @heroui/styles@rc @heroui/react@rc
     ```
   </Tab>
   <Tab value="pnpm">
     ```bash
-    pnpm add @heroui/styles@beta @heroui/react@beta
+    pnpm add @heroui/styles@rc @heroui/react@rc
     ```
   </Tab>
   <Tab value="yarn">
     ```bash
-    yarn add @heroui/styles@beta @heroui/react@beta
+    yarn add @heroui/styles@rc @heroui/react@rc
     ```
   </Tab>
   <Tab value="bun">
     ```bash
-    bun add @heroui/styles@beta @heroui/react@beta
+    bun add @heroui/styles@rc @heroui/react@rc
     ```
   </Tab>
 </Tabs>
@@ -201,6 +201,18 @@ Table and ListBox now support virtualization via React Aria's `Virtualizer` for 
 
 Focus rings on grouped buttons now use `ring-inset` so they stay within button bounds instead of overlapping neighbors.
 
+### Granular Component Imports
+
+`@heroui/react` now supports per-component subpath entrypoints for more explicit imports ([#6301](https://github.com/heroui-inc/heroui/pull/6301)):
+
+```tsx
+// Before — root entrypoint
+import { Button } from "@heroui/react";
+
+// After — granular subpath import
+import { Button } from "@heroui/react/button";
+```
+
 ## Dependencies
 
 Upgraded `react-aria-components` from v1.15.1 to v1.16.0 and related packages:
@@ -220,6 +232,7 @@ Upgraded `react-aria-components` from v1.15.1 to v1.16.0 and related packages:
 - **InputGroup**: Focus styles now trigger only when the actual input/textarea is focused (`:has([data-slot]:focus)`) instead of any focusable child via `:focus-within` ([#6274](https://github.com/heroui-inc/heroui/pull/6274))
 - **Avatar**: Fallback element inherits `border-radius` from the parent instead of hardcoding `rounded-full`, so `className` overrides apply correctly ([#6300](https://github.com/heroui-inc/heroui/pull/6300))
 - **Modal & AlertDialog**: Backdrop click events no longer propagate through portals to parent elements ([#6297](https://github.com/heroui-inc/heroui/pull/6297))
+- **Table**: Fixed header rounding and background color bleeding in Firefox ([#6298](https://github.com/heroui-inc/heroui/pull/6298))
 
 ## Links
 
