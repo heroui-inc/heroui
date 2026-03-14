@@ -317,7 +317,7 @@ describe("Listbox", () => {
     const onPressChange = jest.fn();
 
     const {getAllByRole} = render(
-      <Listbox aria-label="Actions">
+      <Listbox aria-label="Actions" selectionMode="single">
         <ListboxItem
           key="new"
           onPress={onPress}
