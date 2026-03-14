@@ -193,7 +193,7 @@
   @apply relative;
   @apply flex flex-col;
   @apply bg-overlay shadow-overlay outline-none;
-  @apply p-6 pt-2;
+  @apply p-6;
   @apply pointer-events-auto;
 
   /* Bottom/top placement: full width, auto height */
