@@ -11,7 +11,7 @@ import {useListBox as useAriaListbox} from "@react-aria/listbox";
 import {useProviderContext} from "@heroui/system";
 import {listbox} from "@heroui/theme";
 import {useListState} from "@react-stately/list";
-import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {useMemo} from "react";
 import {cn} from "@heroui/theme";
 
@@ -119,11 +119,9 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     hideEmptyContent = false,
     shouldHighlightOnFocus = false,
     classNames,
-    ...otherProps
   } = props;
 
   const Component = as || "ul";
-  const shouldFilterDOMProps = typeof Component === "string";
 
   const domRef = useDOMRef(ref);
 
@@ -141,9 +139,6 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
       ref: domRef,
       "data-slot": "base",
       className: slots.base({class: baseStyles}),
-      ...filterDOMProps(otherProps, {
-        enabled: shouldFilterDOMProps,
-      }),
       ...props,
     };
   };
