@@ -1,5 +1,19 @@
 # @heroui/react
 
+## 2.8.11
+
+### Patch Changes
+
+- Updated dependencies [[`c2252c2`](https://github.com/heroui-inc/heroui/commit/c2252c2bd45cb803ff6a437c39eb1e9f3ffbb535)]:
+  - @heroui/listbox@2.3.32
+  - @heroui/menu@2.2.32
+  - @heroui/autocomplete@2.3.35
+  - @heroui/select@2.4.34
+  - @heroui/dropdown@2.3.33
+  - @heroui/modal@2.2.29
+  - @heroui/breadcrumbs@2.2.25
+  - @heroui/navbar@2.2.30
+
 ## 2.8.10
 
 ### Patch Changes
