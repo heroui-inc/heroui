@@ -11,7 +11,7 @@ import {useFocusRing} from "@react-aria/focus";
 import {filterDOMProps} from "@heroui/react-utils";
 import {dataAttr, objectToDeps, removeEvents, mergeProps} from "@heroui/shared-utils";
 import {useOption} from "@react-aria/listbox";
-import {useHover, usePress} from "@react-aria/interactions";
+import {useHover} from "@react-aria/interactions";
 import {useIsMobile} from "@heroui/use-is-mobile";
 
 interface Props<T extends object> extends ListboxItemBaseProps<T> {
@@ -40,12 +40,6 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     className,
     classNames,
     autoFocus,
-    onPress,
-    onPressUp,
-    onPressStart,
-    onPressEnd,
-    onPressChange,
-    onClick,
     shouldHighlightOnFocus,
     hideSelectedIcon = false,
     isReadOnly = false,
@@ -67,17 +61,6 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
 
   const isMobile = useIsMobile();
 
-  const {pressProps, isPressed} = usePress({
-    ref: domRef,
-    isDisabled,
-    onClick,
-    onPress,
-    onPressUp,
-    onPressStart,
-    onPressEnd,
-    onPressChange,
-  });
-
   const {isHovered, hoverProps} = useHover({
     isDisabled,
   });
@@ -86,7 +69,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     autoFocus,
   });
 
-  const {isFocused, isSelected, optionProps, labelProps, descriptionProps} = useOption(
+  const {optionProps, labelProps, descriptionProps, isFocused, isSelected, isPressed} = useOption(
     {
       key,
       isDisabled,
@@ -113,10 +96,6 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
 
   const baseStyles = cn(classNames?.base, className);
 
-  if (isReadOnly) {
-    itemProps = removeEvents(itemProps);
-  }
-
   const isHighlighted =
     (shouldHighlightOnFocus && isFocused) ||
     (isMobile ? isHovered || isPressed : isHovered || (isFocused && !isFocusVisible));
@@ -132,17 +111,15 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     }
   };
 
-  const getItemProps: PropGetter = (props = {}) => ({
+  const getItemProps: PropGetter = (userProps = {}) => ({
     ref: domRef,
     onFocusCapture: handleFocusCapture,
     ...mergeProps(
-      itemProps,
-      isReadOnly ? {} : mergeProps(focusProps, pressProps),
+      filterDOMProps(otherProps, {enabled: shouldFilterDOMProps}),
+      isReadOnly ? removeEvents(itemProps) : itemProps,
+      isReadOnly ? {} : focusProps,
       hoverProps,
-      filterDOMProps(otherProps, {
-        enabled: shouldFilterDOMProps,
-      }),
-      props,
+      userProps,
     ),
     "data-selectable": dataAttr(isSelectable),
     "data-focus": dataAttr(isFocused),
@@ -151,7 +128,7 @@ export function useListboxItem<T extends object>(originalProps: UseListboxItemPr
     "data-selected": dataAttr(isSelected),
     "data-pressed": dataAttr(isPressed),
     "data-focus-visible": dataAttr(isFocusVisible),
-    className: slots.base({class: cn(baseStyles, props.className)}),
+    className: slots.base({class: cn(baseStyles, userProps.className)}),
   });
 
   const getLabelProps: PropGetter = (props = {}) => ({
