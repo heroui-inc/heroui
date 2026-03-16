@@ -11,7 +11,7 @@ import {useProviderContext} from "@heroui/system";
 import {useMenu as useAriaMenu} from "@react-aria/menu";
 import {menu} from "@heroui/theme";
 import {useTreeState} from "@react-stately/tree";
-import {filterDOMProps, useDOMRef} from "@heroui/react-utils";
+import {useDOMRef} from "@heroui/react-utils";
 import {useMemo} from "react";
 import {cn} from "@heroui/theme";
 
@@ -126,7 +126,6 @@ export function useMenu<T extends object>(props: UseMenuProps<T>) {
   const Component = as || "ul";
 
   const domRef = useDOMRef(ref);
-  const shouldFilterDOMProps = typeof Component === "string";
 
   const innerState = useTreeState({...otherProps, ...userMenuProps, children});
 
@@ -142,9 +141,6 @@ export function useMenu<T extends object>(props: UseMenuProps<T>) {
       ref: domRef,
       "data-slot": "base",
       className: slots.base({class: baseStyles}),
-      ...filterDOMProps(otherProps, {
-        enabled: shouldFilterDOMProps,
-      }),
       ...props,
     };
   };
