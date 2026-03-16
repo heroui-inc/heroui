@@ -73,6 +73,8 @@ export default function App() {
 | `color` | — | Removed (use Tailwind CSS) |
 | `classNames` | — | Use `className` props on individual components |
 | `disableAnimation` | — | Removed (animations handled differently) |
+| — | `variant` | New prop on `RadioGroup`: `"primary"` (default) or `"secondary"` for lower emphasis styling |
+| — | `isReadOnly` | New prop on `RadioGroup`: prevents value changes while keeping the group focusable |
 
 ## Migration Examples
 
@@ -216,6 +218,64 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### Variants
+
+v3 introduces a `variant` prop on `RadioGroup` with `"primary"` (default) and `"secondary"` options:
+
+```tsx
+{/* Primary variant (default) */}
+<RadioGroup variant="primary">
+  <Label>Select city</Label>
+  <Radio value="london">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>London</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+
+{/* Secondary variant - lower emphasis, suitable for Surface components */}
+<RadioGroup variant="secondary">
+  <Label>Select city</Label>
+  <Radio value="london">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>London</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+```
+
+### Read Only
+
+v3 supports `isReadOnly` on `RadioGroup`, which prevents value changes while keeping the group focusable:
+
+```tsx
+<RadioGroup isReadOnly defaultValue="london">
+  <Label>Select city</Label>
+  <Radio value="london">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>London</Label>
+    </Radio.Content>
+  </Radio>
+  <Radio value="tokyo">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>Tokyo</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+```
+
 ## Component Anatomy
 
 The v3 Radio follows this structure:
@@ -241,3 +301,5 @@ RadioGroup (Root)
 5. **Styling Props Removed**: `size`, `color` - use Tailwind CSS
 6. **ClassNames Removed**: Use `className` props on individual components
 7. **Error Message**: Use `FieldError` component instead of `errorMessage` prop
+8. **New `variant` Prop**: `RadioGroup` supports `"primary"` (default) and `"secondary"` for lower emphasis styling
+9. **New `isReadOnly` Prop**: `RadioGroup` supports `isReadOnly` to prevent value changes while keeping the group focusable

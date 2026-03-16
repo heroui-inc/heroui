@@ -206,6 +206,23 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### Synchronized Shimmer Effect
+
+In v3, you can create a synchronized shimmer that passes over all skeleton elements at once. Apply the `skeleton--shimmer` class to a parent container and set `animationType="none"` on each child Skeleton:
+
+```tsx
+{/* The parent container drives a single shimmer across all children */}
+<div className="skeleton--shimmer space-y-4 rounded-lg p-4">
+  <Skeleton animationType="none" className="h-32 rounded-lg" />
+  <div className="space-y-3">
+    <Skeleton animationType="none" className="h-3 w-3/5 rounded-lg" />
+    <Skeleton animationType="none" className="h-3 w-4/5 rounded-lg" />
+  </div>
+</div>
+```
+
+This is useful for card-like layouts where you want a single, unified shimmer sweep instead of each skeleton animating independently.
+
 ## Global Animation Configuration
 
 In v3, you can set a default animation type globally using CSS variables:
@@ -225,3 +242,4 @@ This can be overridden by the `animationType` prop on individual components.
 3. **Animation Control**: `disableAnimation` → `animationType` (`"shimmer"`, `"pulse"`, `"none"`)
 4. **Styling**: `classNames` → `className` prop directly
 5. **Simplified API**: Much simpler component focused on being a placeholder
+6. **Synchronized Shimmer**: Use `skeleton--shimmer` class on a parent container with `animationType="none"` on children for a unified shimmer sweep

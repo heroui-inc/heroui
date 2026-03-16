@@ -38,8 +38,8 @@ export default function App() {
 
 ### 1. Component Structure
 
-**v2:** Single component with `keys` prop  
-**v3:** Compound components: `Kbd.Abbr`, `Kbd.Content`
+**v2:** Single component with `keys` prop
+**v3:** Compound components: `Kbd.Abbr`, `Kbd.Key`, `Kbd.Content`
 
 ### 2. Prop Changes
 
@@ -48,6 +48,7 @@ export default function App() {
 | `keys` | - | Removed (use `Kbd.Abbr` with `keyValue`) |
 | `classNames` | - | Use `className` |
 | - | `Kbd` | New `variant` prop (`default` \| `light`) |
+| - | `Kbd.Key` | New subcomponent for key text (alternative to `Kbd.Content`) |
 
 ## Migration Examples
 
@@ -73,6 +74,29 @@ export default function App() {
   </Tab>
 </Tabs>
 
+## Kbd.Key vs Kbd.Content
+
+v3 provides two subcomponents for key text content:
+
+- **`Kbd.Key`**: Used for the text content of the key (e.g., a letter or number). Accepts `children` and `className` props.
+- **`Kbd.Content`**: An alias/alternative for wrapping content text. Accepts `children` and `className` props.
+
+Both can be used interchangeably for wrapping the non-modifier key text:
+
+```tsx
+{/* Using Kbd.Key */}
+<Kbd>
+  <Kbd.Abbr keyValue="command" />
+  <Kbd.Key>K</Kbd.Key>
+</Kbd>
+
+{/* Using Kbd.Content */}
+<Kbd>
+  <Kbd.Abbr keyValue="command" />
+  <Kbd.Content>K</Kbd.Content>
+</Kbd>
+```
+
 ## Component Anatomy
 
 The v3 Kbd follows this structure:
@@ -81,7 +105,7 @@ The v3 Kbd follows this structure:
 Kbd (Root)
   ├── Kbd.Abbr (keyValue="command")
   ├── Kbd.Abbr (keyValue="shift") [optional, multiple]
-  └── Kbd.Content [optional, for text content]
+  └── Kbd.Key or Kbd.Content [optional, for text content]
 ```
 
 ## Available Key Values
@@ -107,3 +131,4 @@ The `keyValue` prop accepts the same keyboard key types as v2:
 3. **Children Wrapping**: Wrap text content in `Kbd.Content` component
 4. **ClassNames Removed**: Use `className` props on individual components
 5. **New Variant Prop**: Added `variant` prop for styling (`default` \| `light`)
+6. **Kbd.Key Subcomponent**: New `Kbd.Key` subcomponent available as an alternative to `Kbd.Content` for key text

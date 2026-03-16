@@ -91,6 +91,7 @@ export default function App() {
 | `classNames` (on DropdownItem) | - | Use `className` on item |
 | `isSelected` | `Dropdown.Menu` | Use `selectedKeys` on Menu |
 | `isDisabled` | `Dropdown.Menu` | Use `disabledKeys` on Menu |
+| `trigger` (on Dropdown) | `Dropdown` | Still supported: `"press"` (default) or `"longPress"` |
 
 ### 5. New Components
 
@@ -317,12 +318,115 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### With Keyboard Shortcuts
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownItem key="copy" shortcut="⌘C">
+      Copy
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Label, Kbd } from "@heroui/react";
+
+    <Dropdown.Item id="copy" textValue="Copy">
+      <Label>Copy</Label>
+      <Kbd slot="keyboard" variant="light">
+        <Kbd.Abbr keyValue="command" />
+        <Kbd.Content>C</Kbd.Content>
+      </Kbd>
+    </Dropdown.Item>
+    ```
+
+    The `slot="keyboard"` prop on `Kbd` positions the shortcut at the end of the menu item, replacing the v2 `shortcut` prop.
+  </Tab>
+</Tabs>
+
+### With Submenus
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 did not have built-in submenu support */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Label } from "@heroui/react";
+
+    <Dropdown.Menu>
+      <Dropdown.Item id="copy-link" textValue="Copy Link">
+        <Label>Copy Link</Label>
+      </Dropdown.Item>
+      <Dropdown.SubmenuTrigger>
+        <Dropdown.Item id="share" textValue="Share">
+          <Label>Share</Label>
+          <Dropdown.SubmenuIndicator />
+        </Dropdown.Item>
+        <Dropdown.Popover>
+          <Dropdown.Menu>
+            <Dropdown.Item id="whatsapp" textValue="WhatsApp">
+              <Label>WhatsApp</Label>
+            </Dropdown.Item>
+            <Dropdown.Item id="telegram" textValue="Telegram">
+              <Label>Telegram</Label>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown.SubmenuTrigger>
+    </Dropdown.Menu>
+    ```
+
+    Use `Dropdown.SubmenuTrigger` to wrap an item that opens a nested menu. Place `Dropdown.SubmenuIndicator` inside the item to render a chevron icon.
+  </Tab>
+</Tabs>
+
+### Long Press Trigger
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Dropdown>
+      <DropdownTrigger>
+        <Button>Long press me</Button>
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownItem key="cut">Cut</DropdownItem>
+        <DropdownItem key="copy">Copy</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown trigger="longPress">
+      <Button>Long press me</Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu>
+          <Dropdown.Item id="cut" textValue="Cut">
+            <Label>Cut</Label>
+          </Dropdown.Item>
+          <Dropdown.Item id="copy" textValue="Copy">
+            <Label>Copy</Label>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+    ```
+
+    The `trigger` prop on `Dropdown` accepts `"press"` (default) or `"longPress"` to control how the menu is opened.
+  </Tab>
+</Tabs>
+
 ## Component Anatomy
 
 The v3 Dropdown follows this structure:
 
 ```
-Dropdown (Root)
+Dropdown (Root) — accepts trigger="press" | "longPress"
   ├── Dropdown.Trigger (optional, defaults to first child)
   ├── Dropdown.Popover (required wrapper)
   │   └── Dropdown.Menu
@@ -330,12 +434,19 @@ Dropdown (Root)
   │       │   ├── Icon (optional, first child)
   │       │   ├── Label (required for text)
   │       │   ├── Description (optional)
-  │       │   ├── Kbd (optional, for shortcuts)
+  │       │   ├── Kbd slot="keyboard" (optional, for shortcuts)
   │       │   └── Dropdown.ItemIndicator (optional, for selection)
   │       ├── Separator (for dividers)
-  │       └── Dropdown.Section
-  │           ├── Header (optional)
-  │           └── Dropdown.Item
+  │       ├── Dropdown.Section
+  │       │   ├── Header (optional)
+  │       │   └── Dropdown.Item
+  │       └── Dropdown.SubmenuTrigger
+  │           ├── Dropdown.Item
+  │           │   ├── Label
+  │           │   └── Dropdown.SubmenuIndicator (chevron icon)
+  │           └── Dropdown.Popover
+  │               └── Dropdown.Menu
+  │                   └── Dropdown.Item
 ```
 
 ## Summary
@@ -344,10 +455,12 @@ Dropdown (Root)
 2. **Dropdown.Popover Required**: `Dropdown.Menu` must be wrapped in `Dropdown.Popover`
 3. **Label Component**: Item text must use `Label` component
 4. **Description Component**: Use `Description` component instead of `description` prop
-5. **Kbd Component**: Use `Kbd` component instead of `shortcut` prop
+5. **Kbd Component**: Use `Kbd` with `slot="keyboard"` instead of the `shortcut` prop — the slot positions the shortcut at the end of the menu item
 6. **Icons as Children**: Icons go as first child, not `startContent` prop
 7. **Separator Component**: Use `Separator` instead of `showDivider` prop
 8. **ItemIndicator Component**: Use `Dropdown.ItemIndicator` for selection indicators
 9. **Variant Instead of Color**: Use `variant="danger"` instead of `color="danger"`
 10. **No Menu Variants**: `Dropdown.Menu` no longer supports `variant` or `color` props
 11. **ClassNames Removed**: Use `className` props on individual components
+12. **Submenu Support**: Use `Dropdown.SubmenuTrigger` to wrap an item that opens a nested menu, and `Dropdown.SubmenuIndicator` inside the item for a chevron icon
+13. **Trigger Prop**: Use `trigger="longPress"` on `Dropdown` root to open the menu on long press instead of the default press

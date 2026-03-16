@@ -63,8 +63,8 @@ export default function App() {
 
 ### 2. Item Components
 
-**v2:** `SelectItem`, `SelectSection`  
-**v3:** `ListBox.Item`, `ListBox.Section` (with `Header` and `Separator`)
+**v2:** `SelectItem`, `SelectSection`
+**v3:** `ListBox.Item`, `ListBox.Section` (with `Header` for section titles and `Separator` between sections)
 
 ### 3. Prop Changes
 
@@ -87,6 +87,11 @@ export default function App() {
 | `isClearable` | — | Implement clear button manually |
 | `renderValue` | — | Use `Select.Value` render prop |
 | `labelPlacement` | — | Labels are always outside |
+| `isRequired` | `isRequired` | Still exists |
+| `disabledKeys` | `disabledKeys` | Still exists |
+| `isOpen` | `isOpen` | New: controls the open state of the popover (controlled) |
+| `defaultOpen` | `defaultOpen` | New: sets the default open state of the popover (uncontrolled) |
+| `onOpenChange` | `onOpenChange` | New: handler called when the open state changes |
 | `selectionMode` | `selectionMode` | Still exists |
 | `disableAnimation` | — | Removed (animations handled differently) |
 | `popoverProps`, `listboxProps`, `scrollShadowProps` | — | Use props on `Select.Popover`, `ListBox`, etc. directly |
@@ -309,6 +314,133 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### Controlled Open State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 did not have controlled open state */}
+    <Select label="Select animal">
+      <SelectItem key="cat">Cat</SelectItem>
+      <SelectItem key="dog">Dog</SelectItem>
+    </Select>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Select, Label, ListBox } from "@heroui/react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Select isOpen={isOpen} onOpenChange={setIsOpen} placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+    ```
+  </Tab>
+</Tabs>
+
+### Disabled Options
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Select, SelectItem } from "@heroui/react";
+
+    <Select label="Select animal" disabledKeys={["dog"]}>
+      <SelectItem key="cat">Cat</SelectItem>
+      <SelectItem key="dog">Dog</SelectItem>
+      <SelectItem key="parrot">Parrot</SelectItem>
+    </Select>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Select, Label, ListBox } from "@heroui/react";
+
+    <Select disabledKeys={["dog"]} placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="parrot" textValue="Parrot">
+            Parrot
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+    ```
+  </Tab>
+</Tabs>
+
+### Required
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Select, SelectItem } from "@heroui/react";
+
+    <Select isRequired label="Select animal">
+      <SelectItem key="cat">Cat</SelectItem>
+      <SelectItem key="dog">Dog</SelectItem>
+    </Select>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Select, Label, ListBox } from "@heroui/react";
+
+    <Select isRequired placeholder="Choose one">
+      <Label>Select animal</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Select.Popover>
+    </Select>
+    ```
+  </Tab>
+</Tabs>
+
 ### Custom Indicator
 
 <Tabs items={["v2", "v3"]}>
@@ -359,9 +491,10 @@ Select (Root)
   │       │   ├── Label (optional)
   │       │   ├── Description (optional)
   │       │   └── ListBox.ItemIndicator
-  │       └── ListBox.Section (optional)
-  │           ├── Header
-  │           └── ListBox.Item
+  │       ├── ListBox.Section (optional)
+  │       │   ├── Header (section title)
+  │       │   └── ListBox.Item
+  │       └── Separator (optional, between sections)
   └── FieldError (optional)
 ```
 
@@ -397,11 +530,14 @@ The `isClearable` prop has been removed. To implement a clear button:
 ## Summary
 
 1. **Component Structure**: Must use compound components (`Select.Trigger`, `Select.Value`, `Select.Indicator`, `Select.Popover`)
-2. **Item Components**: `SelectItem` → `ListBox.Item`, `SelectSection` → `ListBox.Section`
+2. **Item Components**: `SelectItem` → `ListBox.Item`, `SelectSection` → `ListBox.Section` (use `Header` for section titles and `Separator` between sections)
 3. **Label/Description/Error**: Use separate components instead of props
 4. **Selection Props**: `selectedKeys`/`onSelectionChange` → `value`/`onChange`
-5. **Styling**: `variant` simplified to `primary` \| `secondary`; `color`, `size`, `radius` removed - use Tailwind for more
-6. **ClassNames Removed**: Use `className` props on individual components
-7. **Content Props Removed**: `startContent`, `endContent` - customize trigger directly
-8. **Clear Button**: `isClearable` removed - implement manually
-9. **Custom Value**: Use `Select.Value` render prop instead of `renderValue`
+5. **Controlled Open State**: New `isOpen`, `defaultOpen`, and `onOpenChange` props for controlling the popover open state
+6. **Disabled Options**: `disabledKeys` prop still supported for disabling specific items
+7. **Required**: `isRequired` prop still supported for marking the field as required
+8. **Styling**: `variant` simplified to `primary` \| `secondary`; `color`, `size`, `radius` removed - use Tailwind for more
+9. **ClassNames Removed**: Use `className` props on individual components
+10. **Content Props Removed**: `startContent`, `endContent` - customize trigger directly
+11. **Clear Button**: `isClearable` removed - implement manually
+12. **Custom Value**: Use `Select.Value` render prop instead of `renderValue`

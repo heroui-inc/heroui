@@ -1,0 +1,228 @@
+---
+title: CircularProgress
+description: Migration guide for CircularProgress from HeroUI v2 to v3 (now ProgressCircle)
+---
+
+<Callout type="info">
+  Refer to the [v3 ProgressCircle documentation](/docs/react/components/progress-circle) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+<Callout type="warning">
+  Looking for the Progress (linear) migration? See the [Progress migration guide](/docs/react/migration/progress).
+</Callout>
+
+## Component Rename
+
+`CircularProgress` has been renamed to `ProgressCircle` in v3.
+
+## Structure Changes
+
+In v2, `CircularProgress` was a single component configured with props:
+
+```tsx
+import { CircularProgress } from "@heroui/react";
+
+export default function App() {
+  return (
+    <CircularProgress label="Loading..." value={60} />
+  );
+}
+```
+
+In v3, `ProgressCircle` uses a compound component pattern:
+
+```tsx
+import { ProgressCircle } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ProgressCircle aria-label="Loading" value={60}>
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `CircularProgress` component with internal SVG rendering
+**v3:** Compound components: `ProgressCircle`, `ProgressCircle.Track` (SVG element), `ProgressCircle.TrackCircle` (background circle), `ProgressCircle.FillCircle` (progress arc)
+
+### 2. Colors
+
+**v2:** `default`, `primary`, `secondary`, `success`, `warning`, `danger`
+**v3:** `default`, `accent`, `success`, `warning`, `danger`
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `value` | `value` | Same |
+| `minValue` | `minValue` | Same |
+| `maxValue` | `maxValue` | Same |
+| `isIndeterminate` | `isIndeterminate` | Default changed: `true` in v2 → `false` in v3 |
+| `formatOptions` | `formatOptions` | Same |
+| `size` | `size` | Same (`sm`, `md`, `lg`) |
+| `color` | `color` | `primary` → `accent`, `secondary` removed |
+| `label` | - | Use `Label` component |
+| `valueLabel` | - | Use render prop pattern |
+| `showValueLabel` | - | Place value content inside `ProgressCircle` |
+| `strokeWidth` | - | Set `strokeWidth` directly on `ProgressCircle.TrackCircle` and `ProgressCircle.FillCircle` |
+| `isDisabled` | - | Removed |
+| `disableAnimation` | - | Removed |
+| `classNames` | - | Use `className` on individual compound components |
+
+## Migration Examples
+
+### Basic CircularProgress
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { CircularProgress } from "@heroui/react";
+
+    <CircularProgress aria-label="Loading..." value={60} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ProgressCircle } from "@heroui/react";
+
+    <ProgressCircle aria-label="Loading..." value={60}>
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+    ```
+  </Tab>
+</Tabs>
+
+### Indeterminate
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <CircularProgress aria-label="Loading..." />
+    {/* isIndeterminate defaults to true in v2 */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressCircle isIndeterminate aria-label="Loading...">
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+    {/* isIndeterminate defaults to false in v3, must be explicit */}
+    ```
+  </Tab>
+</Tabs>
+
+### With Label
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <CircularProgress
+      label="Loading..."
+      value={70}
+      showValueLabel
+      size="lg"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ProgressCircle, Label } from "@heroui/react";
+
+    <div className="flex flex-col items-center gap-2">
+      <ProgressCircle aria-label="Loading" value={70} size="lg">
+        <ProgressCircle.Track>
+          <ProgressCircle.TrackCircle />
+          <ProgressCircle.FillCircle />
+        </ProgressCircle.Track>
+      </ProgressCircle>
+      <Label>Loading...</Label>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom SVG Props
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <CircularProgress
+      value={60}
+      strokeWidth={6}
+      aria-label="Loading"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressCircle aria-label="Loading" value={60}>
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle strokeWidth={6} />
+        <ProgressCircle.FillCircle strokeWidth={6} />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<CircularProgress
+  classNames={{
+    base: "custom-base",
+    svg: "custom-svg",
+    track: "custom-track",
+    indicator: "custom-fill",
+    label: "custom-label",
+    value: "custom-value",
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<ProgressCircle className="custom-base" value={60}>
+  <ProgressCircle.Track className="custom-svg">
+    <ProgressCircle.TrackCircle className="custom-track" />
+    <ProgressCircle.FillCircle className="custom-fill" />
+  </ProgressCircle.Track>
+</ProgressCircle>
+```
+
+## Component Anatomy
+
+```
+ProgressCircle (Root)
+  └── ProgressCircle.Track (SVG element)
+      ├── ProgressCircle.TrackCircle (background circle)
+      └── ProgressCircle.FillCircle (progress arc)
+```
+
+## Summary
+
+1. **Renamed**: `CircularProgress` → `ProgressCircle`
+2. **Component Structure**: Single component → compound components (`ProgressCircle.Track`, `ProgressCircle.TrackCircle`, `ProgressCircle.FillCircle`)
+3. **Indeterminate Default Changed**: `isIndeterminate` defaults to `false` in v3 (was `true` in v2)
+4. **Label**: `label` prop → `Label` component
+5. **SVG Props**: `strokeWidth` on root → set directly on `TrackCircle` and `FillCircle`
+6. **Color Changes**: `primary` → `accent`, `secondary` removed
+7. **Removed Props**: `isDisabled`, `disableAnimation` → use Tailwind CSS
+8. **ClassNames Removed**: Use `className` on individual compound components

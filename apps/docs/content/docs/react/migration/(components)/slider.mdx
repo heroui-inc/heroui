@@ -77,6 +77,7 @@ export default function App() {
 | `fillOffset` | — | Not yet supported |
 | `disableThumbScale` | — | Use Tailwind CSS |
 | `disableAnimation` | — | Removed |
+| `onChangeEnd` | `Slider` | Still supported — handler called when the user finishes dragging a thumb |
 
 ## Migration Examples
 
@@ -249,3 +250,4 @@ For range sliders, use a render prop in `Slider.Track`:
 6. **Render Props Removed**: `renderThumb`, `renderLabel`, `renderValue` - use render props on components
 7. **Visibility Props Removed**: `hideValue`, `hideThumb` - omit components instead
 8. **Range Sliders**: Must map over thumbs in `Slider.Track` render prop
+9. **onChangeEnd**: Still supported on `Slider` — fires when the user finishes dragging a thumb

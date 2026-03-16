@@ -1,0 +1,275 @@
+---
+title: Badge
+description: Migration guide for Badge from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Badge documentation](/docs/react/components/badge) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `Badge` was a wrapper component that positioned content relative to its children:
+
+```tsx
+import { Badge, Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Badge content="5" color="primary">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+  );
+}
+```
+
+In v3, Badge uses a compound component pattern with `Badge.Anchor` for positioning:
+
+```tsx
+import { Badge, Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="accent">5</Badge>
+    </Badge.Anchor>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `Badge` component wrapping children, with `content` prop for badge text
+**v3:** Compound components: `Badge.Anchor` (positioning wrapper), `Badge` (the badge itself), `Badge.Label` (text slot, auto-wrapped for strings)
+
+### 2. Variants
+
+**v2:** `solid`, `flat`, `faded`, `shadow`
+**v3:** `primary`, `secondary`, `soft`
+
+### 3. Colors
+
+**v2:** `default`, `primary`, `secondary`, `success`, `warning`, `danger`
+**v3:** `default`, `accent`, `success`, `warning`, `danger`
+
+### 4. Prop Changes
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| `content` | `Badge` children | Content is now passed as children |
+| `children` | `Badge.Anchor` | The anchored element goes inside `Badge.Anchor` |
+| `variant` | `Badge` | Values changed (see variant mapping) |
+| `color` | `Badge` | `primary` → `accent`, `secondary` removed |
+| `size` | `Badge` | Same (`sm`, `md`, `lg`) |
+| `placement` | `Badge` | Same (`top-right`, `top-left`, `bottom-right`, `bottom-left`) |
+| `shape` | - | Removed (use Tailwind CSS) |
+| `showOutline` | - | Removed (use Tailwind CSS e.g. `border-2`) |
+| `disableOutline` | - | Removed |
+| `disableAnimation` | - | Removed |
+| `isInvisible` | - | Removed (use conditional rendering) |
+| `isOneChar` | - | Removed (use Tailwind CSS) |
+| `isDot` | - | Omit children to render as dot |
+| `classNames` | - | Use `className` on individual components |
+
+### 5. Variant Mapping
+
+| v2 Variant | v3 Equivalent | Notes |
+|-----------|---------------|-------|
+| `solid` | `primary` | Filled background |
+| `flat` | `soft` | Light background |
+| `faded` | `secondary` | Border with background |
+| `shadow` | `primary` | Use Tailwind `shadow-*` classes |
+
+### 6. Color Mapping
+
+| v2 Color | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `default` | `default` | Same |
+| `primary` | `accent` | Renamed |
+| `secondary` | `default` or `accent` | Depends on context |
+| `success` | `success` | Same |
+| `warning` | `warning` | Same |
+| `danger` | `danger` | Same |
+
+## Migration Examples
+
+### Basic Badge
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Badge, Avatar } from "@heroui/react";
+
+    <Badge content="5" color="primary">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Badge, Avatar } from "@heroui/react";
+
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="accent">5</Badge>
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### Dot Badge
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Badge content="" isDot color="success">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="success" />
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### Placement
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Badge content="5" placement="bottom-right" color="danger">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge placement="bottom-right" color="danger">5</Badge>
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### Visibility Toggle
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const [isInvisible, setIsInvisible] = useState(false);
+
+    <Badge content="5" isInvisible={isInvisible} color="danger">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [isVisible, setIsVisible] = useState(true);
+
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      {isVisible && <Badge color="danger">5</Badge>}
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### With Icon Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Badge content={<Icon icon="gravity-ui:check" />} color="success">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="success">
+        <Icon icon="gravity-ui:check" />
+      </Badge>
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Badge
+  classNames={{
+    base: "custom-base",
+    badge: "custom-badge"
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Badge.Anchor className="custom-anchor">
+  <Avatar />
+  <Badge className="custom-badge">
+    <Badge.Label className="custom-label">5</Badge.Label>
+  </Badge>
+</Badge.Anchor>
+```
+
+## Component Anatomy
+
+The v3 Badge follows this structure:
+
+```
+Badge.Anchor (positioning wrapper)
+  ├── [Anchored element: Avatar, Button, etc.]
+  └── Badge (the badge indicator)
+      └── Badge.Label (auto-wrapped for string/number children)
+```
+
+## Summary
+
+1. **Component Structure**: `Badge` wrapping children → `Badge.Anchor` + `Badge` as siblings
+2. **Content Prop Removed**: `content` prop → pass content as `Badge` children
+3. **Dot Badge**: `isDot` prop → omit children
+4. **Visibility**: `isInvisible` prop → conditional rendering
+5. **Variants Reduced**: From 4 to 3 variants (`primary`, `secondary`, `soft`)
+6. **Color Changes**: `primary` → `accent`, `secondary` removed
+7. **Removed Props**: `shape`, `showOutline`, `disableAnimation`, `isOneChar` — use Tailwind CSS
+8. **ClassNames Removed**: Use `className` on individual compound components

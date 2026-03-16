@@ -61,7 +61,9 @@ export default function App() {
 |---------|-------------|-------|
 | `key` (for state) | `ListBox.Item` | Use `id` for item identity (state) |
 | - | `textValue` (on ListBox.Item) | For accessibility (type-ahead) |
-| `variant`, `color` | - | Removed (use Tailwind CSS) |
+| `variant`, `color` | `variant` on `ListBox` or `ListBox.Item` | Simplified to `"default"` \| `"danger"` (no `color` prop) |
+| `onAction` | `ListBox` | Callback fired when an item is pressed (`(key: Key) => void`) |
+| `disabledKeys` | `ListBox` | Same — set of keys for items that should be non-interactive |
 | `startContent`, `endContent` | - | Place icons manually in item content |
 | `description` | `Description` | Use `Description` component |
 | `title` (on Section) | `Header` | Use `Header` component |
@@ -69,7 +71,7 @@ export default function App() {
 | `itemClasses`, `classNames` | - | Use `className` on parts |
 | `hideSelectedIcon` | - | Omit `ListBox.ItemIndicator` |
 | `disableAnimation` | - | Removed |
-| `isVirtualized`, `virtualization` | - | Removed (virtualization not supported) |
+| `isVirtualized`, `virtualization` | React Aria `Virtualizer` | Use React Aria's `<Virtualizer>` wrapper (see example below) |
 | `selectedKeys` | `ListBox` | Same (uses `Selection` type Set) |
 
 ## Migration Examples
@@ -267,6 +269,98 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### Variant Prop
+
+In v3, both `ListBox` and `ListBox.Item` accept a `variant` prop with values `"default"` (default) or `"danger"`. Setting `variant` on the root `ListBox` applies to all items; setting it on an individual `ListBox.Item` overrides the root value for that item.
+
+```tsx
+{/* Root-level variant — all items inherit "danger" styling */}
+<ListBox variant="danger">
+  <ListBox.Item id="delete" textValue="Delete">
+    <Label>Delete</Label>
+  </ListBox.Item>
+</ListBox>
+
+{/* Per-item variant */}
+<ListBox>
+  <ListBox.Item id="edit" textValue="Edit">
+    <Label>Edit</Label>
+  </ListBox.Item>
+  <ListBox.Item id="delete" textValue="Delete" variant="danger">
+    <Label>Delete</Label>
+  </ListBox.Item>
+</ListBox>
+```
+
+### onAction Handler
+
+The `onAction` callback is fired when an item is pressed (click or Enter). It receives the item's `id` as a `Key`.
+
+```tsx
+<ListBox onAction={(key) => alert(`Action on ${key}`)}>
+  <ListBox.Item id="copy" textValue="Copy">
+    <Label>Copy</Label>
+  </ListBox.Item>
+  <ListBox.Item id="paste" textValue="Paste">
+    <Label>Paste</Label>
+  </ListBox.Item>
+</ListBox>
+```
+
+### Disabled Keys
+
+Use `disabledKeys` to make specific items non-interactive:
+
+```tsx
+<ListBox disabledKeys={new Set(["paste"])}>
+  <ListBox.Item id="copy" textValue="Copy">
+    <Label>Copy</Label>
+  </ListBox.Item>
+  <ListBox.Item id="paste" textValue="Paste">
+    <Label>Paste</Label>
+  </ListBox.Item>
+</ListBox>
+```
+
+### Render Props on ListBox.Item
+
+`ListBox.Item` supports render props, giving you access to the current interaction state. The available render prop values are `isSelected`, `isFocused`, `isDisabled`, and `isPressed`:
+
+```tsx
+<ListBox selectionMode="single">
+  <ListBox.Item id="item1" textValue="Item 1">
+    {({isSelected, isFocused, isDisabled, isPressed}) => (
+      <>
+        <Label className={isSelected ? "font-bold" : ""}>Item 1</Label>
+        {isSelected && <ListBox.ItemIndicator />}
+      </>
+    )}
+  </ListBox.Item>
+</ListBox>
+```
+
+### Virtualization
+
+Virtualization is **still supported** in v3 via React Aria's `<Virtualizer>` component. Wrap your `ListBox` items with `Virtualizer` for efficient rendering of large lists:
+
+```tsx
+import {Virtualizer} from "react-aria-components";
+
+<ListBox
+  aria-label="Large list"
+  items={items}
+  selectionMode="multiple"
+>
+  <Virtualizer>
+    {(item) => (
+      <ListBox.Item id={item.id} textValue={item.name}>
+        <Label>{item.name}</Label>
+      </ListBox.Item>
+    )}
+  </Virtualizer>
+</ListBox>
+```
+
 ## Component Anatomy
 
 The v3 ListBox follows this structure:
@@ -289,7 +383,10 @@ ListBox (Root)
 2. **Item Structure**: Must use `Label`, `Description`, `ListBox.ItemIndicator` components
 3. **Icons**: Manual placement instead of `startContent`/`endContent` props
 4. **Sections**: Use `Header` component instead of `title` prop
-5. **Styling Props Removed**: `variant`, `color` - use Tailwind CSS
-6. **Content Props Removed**: `topContent`, `bottomContent` - handle separately
-7. **Virtualization Removed**: `isVirtualized` and `virtualization` props removed
-8. **Selection Type**: Uses `Selection` type (Set) instead of arrays
+5. **Variant Prop**: `variant` and `color` replaced by a single `variant` prop (`"default"` | `"danger"`) on both `ListBox` and `ListBox.Item`
+6. **onAction**: New `onAction` callback on `ListBox` for item press handling
+7. **disabledKeys**: Supported on `ListBox` to disable specific items
+8. **Render Props**: `ListBox.Item` provides `isSelected`, `isFocused`, `isDisabled`, `isPressed` via render props
+9. **Content Props Removed**: `topContent`, `bottomContent` - handle separately
+10. **Virtualization**: Still supported via React Aria's `<Virtualizer>` component (replaces `isVirtualized` prop)
+11. **Selection Type**: Uses `Selection` type (Set) instead of arrays

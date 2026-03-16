@@ -65,16 +65,119 @@ export default function App() {
 **v2:** Separate components (`Modal`, `ModalContent`, `ModalHeader`, `ModalBody`, `ModalFooter`)  
 **v3:** Compound components (`Modal.Backdrop`, `Modal.Container`, `Modal.Dialog`, `Modal.Header`, `Modal.Body`, `Modal.Footer`)
 
-### 2. State Management
+### 2. Built-in Trigger with `Modal.Trigger`
 
-**v2:** Uses `useDisclosure` hook  
-**v3:** Built-in trigger or controlled with `isOpen`/`onOpenChange` on `Modal.Backdrop`, or use `useOverlayState` and pass `state` to the root
+**v2:** Required `useDisclosure` hook and manual `onPress` wiring to open the modal
+**v3:** Provides `Modal.Trigger` as a built-in trigger component that automatically opens the modal when pressed — no state management needed
+
+<Tabs items={["v2", "v3 (Button trigger)", "v3 (Modal.Trigger)"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Modal, ModalContent, Button, useDisclosure } from "@heroui/react";
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    <Button onPress={onOpen}>Open Modal</Button>
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (Button trigger)">
+    ```tsx
+    import { Modal, Button } from "@heroui/react";
+
+    {/* A Button placed as a direct child of Modal automatically becomes the trigger */}
+    <Modal>
+      <Button>Open Modal</Button>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>{/* content */}</Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (Modal.Trigger)">
+    ```tsx
+    import { Modal } from "@heroui/react";
+
+    {/* Use Modal.Trigger for custom trigger elements (cards, links, etc.) */}
+    <Modal>
+      <Modal.Trigger className="flex items-center gap-3 rounded-2xl bg-surface p-4">
+        <p className="font-semibold">Settings</p>
+        <p className="text-xs text-muted">Manage your preferences</p>
+      </Modal.Trigger>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>{/* content */}</Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+</Tabs>
+
+`Modal.Trigger` wraps any content in a pressable element that opens the modal. Use it when you need a custom trigger beyond a standard `Button`.
+
+### 3. State Management
+
+**v2:** Uses `useDisclosure` hook
+**v3:** Built-in trigger (no state needed), controlled with `isOpen`/`onOpenChange` on `Modal.Backdrop`, or use `useOverlayState` and pass `state` to the root
+
+#### `useOverlayState` replaces `useDisclosure`
+
+The `useOverlayState` hook is a direct replacement for v2's `useDisclosure`. It supports both controlled and uncontrolled modes:
+
+```tsx
+import { useOverlayState } from "@heroui/react";
+
+// Uncontrolled (manages its own state)
+const state = useOverlayState();
+
+// Uncontrolled with default open
+const state = useOverlayState({ defaultOpen: true });
+
+// With callback
+const state = useOverlayState({
+  onOpenChange: (isOpen) => console.log("Modal is now:", isOpen),
+});
+
+// Controlled (you manage the state)
+const [isOpen, setIsOpen] = useState(false);
+const state = useOverlayState({ isOpen, onOpenChange: setIsOpen });
+```
+
+**Hook API:**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `state.isOpen` | `boolean` | Whether the overlay is currently open |
+| `state.open()` | `() => void` | Opens the overlay |
+| `state.close()` | `() => void` | Closes the overlay |
+| `state.toggle()` | `() => void` | Toggles the overlay open/closed |
+| `state.setOpen(isOpen)` | `(isOpen: boolean) => void` | Sets the open state directly |
+
+Pass `state` to the `Modal` root to connect it:
+
+```tsx
+const state = useOverlayState();
+
+<Modal state={state}>
+  <Button onPress={state.open}>Open</Button>
+  <Modal.Backdrop>
+    <Modal.Container>
+      <Modal.Dialog>{/* content */}</Modal.Dialog>
+    </Modal.Container>
+  </Modal.Backdrop>
+</Modal>
+```
 
 <Callout type="info">
   For detailed migration from `useDisclosure` to `useOverlayState`, see the [Hooks Migration Guide](/docs/react/migration/hooks).
 </Callout>
 
-### 3. Prop Changes
+### 4. Prop Changes
 
 | v2 Prop | v3 Location | Notes |
 |---------|-------------|-------|
@@ -100,7 +203,7 @@ export default function App() {
 
 ### Controlled Modal
 
-<Tabs items={["v2", "v3 (useState)", "v3 (useOverlayState)"]}>
+<Tabs items={["v2", "v3 (useState)", "v3 (useOverlayState)", "v3 (state prop)"]}>
   <Tab value="v2">
     ```tsx
     import { useDisclosure } from "@heroui/react";
@@ -153,6 +256,32 @@ export default function App() {
     <Modal>
       <Button onPress={state.open}>Open</Button>
       <Modal.Backdrop isOpen={state.isOpen} onOpenChange={state.setOpen}>
+        <Modal.Container>
+          <Modal.Dialog>
+            {({close}) => (
+              <>
+                <Modal.Header>
+                  <Modal.Heading>Title</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>Content</Modal.Body>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (state prop)">
+    ```tsx
+    import { useOverlayState } from "@heroui/react";
+
+    // Pass state directly to Modal root — no need to wire isOpen/onOpenChange manually
+    const state = useOverlayState();
+
+    <Modal state={state}>
+      <Button onPress={state.open}>Open</Button>
+      <Modal.Backdrop>
         <Modal.Container>
           <Modal.Dialog>
             {({close}) => (
@@ -262,6 +391,51 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### Custom Trigger
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Modal, ModalContent, useDisclosure } from "@heroui/react";
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    {/* Any element needed manual onPress + useDisclosure */}
+    <div onClick={onOpen} className="cursor-pointer rounded-xl bg-surface p-4">
+      <p className="font-semibold">Settings</p>
+      <p className="text-xs text-muted">Manage your preferences</p>
+    </div>
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Modal } from "@heroui/react";
+
+    {/* Modal.Trigger handles press events and accessibility automatically */}
+    <Modal>
+      <Modal.Trigger className="rounded-xl bg-surface p-4">
+        <p className="font-semibold">Settings</p>
+        <p className="text-xs text-muted">Manage your preferences</p>
+      </Modal.Trigger>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>Settings</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>{/* content */}</Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+</Tabs>
+
 ### With Icon and Heading
 
 <Tabs items={["v2", "v3"]}>
@@ -306,12 +480,13 @@ Modal (Root)
 ## Summary
 
 1. **Component Structure**: Must use compound components (`Modal.Container`, `Modal.Dialog`, etc.)
-2. **State Management**: Built-in trigger or controlled state on `Modal.Container`
-3. **Props Moved**: Many props moved from `Modal` to `Modal.Container`
-4. **Close Handler**: `onClose` callback replaced with `close` render prop
-5. **Close Button**: `hideCloseButton`/`closeButton` replaced with `Modal.CloseTrigger`
-6. **Size**: Use `size` on `Modal.Container` (xs, sm, md, lg, cover, full); `radius` and `shadow` removed — use Tailwind
-7. **Backdrop**: `backdrop` → `variant` on `Modal.Backdrop` (values: `opaque`, `blur`, `transparent`)
-8. **Scroll Renamed**: `scrollBehavior` → `scroll` (`normal` → `inside`)
-9. **Motion Removed**: `motionProps` removed, animations handled differently
-10. **New Components**: `Modal.Icon`, `Modal.Heading`, `Modal.Trigger`
+2. **Built-in Trigger**: Use `Modal.Trigger` for custom trigger elements or place a `Button` as a direct child of `Modal` -- no manual state wiring needed
+3. **State Management**: `useDisclosure` replaced by `useOverlayState` hook; supports controlled/uncontrolled modes and a `state` prop on `Modal` root
+4. **Props Moved**: Many props moved from `Modal` to `Modal.Backdrop` and `Modal.Container`
+5. **Close Handler**: `onClose` callback replaced with `close` render prop on `Modal.Dialog`
+6. **Close Button**: `hideCloseButton`/`closeButton` replaced with `Modal.CloseTrigger`
+7. **Size**: Use `size` on `Modal.Container` (xs, sm, md, lg, cover, full); `radius` and `shadow` removed -- use Tailwind
+8. **Backdrop**: `backdrop` → `variant` on `Modal.Backdrop` (values: `opaque`, `blur`, `transparent`)
+9. **Scroll Renamed**: `scrollBehavior` → `scroll` (`normal` → `inside`)
+10. **Motion Removed**: `motionProps` removed, animations handled differently
+11. **New Components**: `Modal.Trigger`, `Modal.Icon`, `Modal.Heading`, `Modal.CloseTrigger`

@@ -56,6 +56,7 @@ export default function App() {
 | `showFallback` | - | Removed (fallback shown if image fails or not provided) |
 | `fallback`, `icon` | `Avatar.Fallback` | Place content in `<Avatar.Fallback />` |
 | `color` | `Avatar` | Same; `primary` → `accent`, `secondary` → `default` |
+| `variant` | `Avatar` | New in v3; `"default"` \| `"soft"` |
 | `size` | `Avatar` | Same |
 | `isBordered` | - | Removed (use Tailwind e.g. `ring-2 ring-background`) |
 | `radius` | - | Removed (use Tailwind e.g. `rounded-full`) |
@@ -63,15 +64,59 @@ export default function App() {
 | `getInitials` | - | Generate initials manually |
 | `ImgComponent`, `imgProps` | - | Use `asChild` on `Avatar.Image` if needed |
 | `onError` | `Avatar.Image` | Use `onError` on `<Avatar.Image />` |
+| - | `Avatar.Image` | New: `srcSet`, `sizes`, `loading` for responsive images |
+| - | `Avatar.Fallback` | New: `delayMs` to delay fallback display (prevents flash) |
 | `classNames` | - | Use `className` on parts |
 | AvatarGroup | - | No v3 equivalent; create groups with CSS |
 
-### 3. Image and Fallback Handling
+### 3. Variant Prop (New in v3)
+
+**v2:** No `variant` prop; styling controlled only through `color`
+**v3:** New `variant` prop with `"default"` and `"soft"` options. The `"soft"` variant applies a lighter background style.
+
+```tsx
+<Avatar variant="soft" color="accent">
+  <Avatar.Image src="..." alt="User" />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### 4. Avatar.Image Responsive Attributes (New in v3)
+
+**v2:** Limited to `src` and `onError`
+**v3:** `Avatar.Image` now supports `srcSet`, `sizes`, and `loading` for responsive image handling
+
+```tsx
+<Avatar>
+  <Avatar.Image
+    src="avatar-400.jpg"
+    srcSet="avatar-200.jpg 200w, avatar-400.jpg 400w"
+    sizes="(max-width: 600px) 200px, 400px"
+    loading="lazy"
+    alt="User"
+  />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### 5. Avatar.Fallback `delayMs` Prop (New in v3)
+
+**v2:** Fallback shown immediately or controlled via `showFallback`
+**v3:** `Avatar.Fallback` supports a `delayMs` prop to delay rendering, preventing flash of fallback content when images load quickly
+
+```tsx
+<Avatar>
+  <Avatar.Image src="..." alt="User" />
+  <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### 6. Image and Fallback Handling
 
 **v2:** Used `src`, `name`, `showFallback`, and `fallback` props  
 **v3:** Must explicitly render `<Avatar.Image />` and `<Avatar.Fallback />` components
 
-### 4. Color Props
+### 7. Color Props
 
 | v2 Color | v3 Color | Notes |
 |----------|---------|-------|
@@ -82,7 +127,7 @@ export default function App() {
 | `warning` | `warning` | Same |
 | `danger` | `danger` | Same |
 
-### 5. AvatarGroup Removed
+### 8. AvatarGroup Removed
 
 **v2:** Had a dedicated `AvatarGroup` component  
 **v3:** No `AvatarGroup` component - create groups manually with CSS classes
@@ -300,10 +345,13 @@ function getInitials(name: string): string {
 1. **Component Structure**: Must use compound components (`Avatar.Image`, `Avatar.Fallback`)
 2. **Name Prop Removed**: Generate initials manually
 3. **ShowFallback Removed**: Fallback always shows if image fails
-4. **Color Mapping**: `primary` → `accent`, `secondary` → `default`
-5. **Bordered Removed**: Use Tailwind `ring-2 ring-background` classes
-6. **Radius Removed**: Use Tailwind `rounded-*` classes
-7. **Disabled Removed**: Use Tailwind `opacity-50` classes
-8. **AvatarGroup Removed**: Create groups manually with CSS
-9. **Icon Prop Removed**: Place icon content in `Avatar.Fallback`
-10. **ClassNames Removed**: Use `className` props on individual components
+4. **Variant Prop Added**: New `variant` prop (`"default"` | `"soft"`) for visual style control
+5. **Responsive Image Support**: `Avatar.Image` now supports `srcSet`, `sizes`, and `loading` attributes
+6. **Fallback Delay**: `Avatar.Fallback` supports `delayMs` to prevent flash of fallback content
+7. **Color Mapping**: `primary` → `accent`, `secondary` → `default`
+8. **Bordered Removed**: Use Tailwind `ring-2 ring-background` classes
+9. **Radius Removed**: Use Tailwind `rounded-*` classes
+10. **Disabled Removed**: Use Tailwind `opacity-50` classes
+11. **AvatarGroup Removed**: Create groups manually with CSS
+12. **Icon Prop Removed**: Place icon content in `Avatar.Fallback`
+13. **ClassNames Removed**: Use `className` props on individual components

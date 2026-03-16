@@ -56,6 +56,10 @@ export default function App() {
 | `variant` | `InputOTP` | Simplified to `primary` \| `secondary` only |
 | `color`, `size`, `radius` | - | Removed (use Tailwind CSS) |
 | `classNames` | - | Use `className` on parts |
+| - | `textAlign` | New prop: text alignment within slots (`'left'` \| `'center'` \| `'right'`) |
+| - | `inputMode` | New prop: virtual keyboard type on mobile (default `'numeric'`) |
+| - | `placeholder` | New prop: placeholder text for empty slots |
+| - | `pasteTransformer` | New prop: transform pasted text (e.g., remove hyphens) |
 
 ## Migration Examples
 
@@ -206,6 +210,54 @@ InputOTP (Root)
       └── InputOTP.Slot (index={...})
 ```
 
+## New Props in v3
+
+v3 introduces several new props not available in v2:
+
+- **`textAlign`**: Controls text alignment within slots (`'left'` | `'center'` | `'right'`, default `'left'`)
+- **`inputMode`**: Sets the virtual keyboard type on mobile devices (`'numeric'` | `'text'` | `'decimal'` | `'tel'` | `'search'` | `'email'` | `'url'`, default `'numeric'`)
+- **`placeholder`**: Sets placeholder text for empty slots
+- **`pasteTransformer`**: A function `(text: string) => string` to transform pasted text (e.g., removing hyphens from a pasted code)
+
+```tsx
+<InputOTP
+  maxLength={6}
+  inputMode="numeric"
+  textAlign="center"
+  placeholder="-"
+  pasteTransformer={(text) => text.replace(/-/g, "")}
+>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>
+```
+
+## Exported Regex Patterns
+
+HeroUI re-exports common regex patterns from the input-otp library for convenience:
+
+```tsx
+import { REGEXP_ONLY_DIGITS, REGEXP_ONLY_CHARS, REGEXP_ONLY_DIGITS_AND_CHARS } from "@heroui/react";
+
+// Use with the pattern prop
+<InputOTP pattern={REGEXP_ONLY_DIGITS} maxLength={6}>
+  {/* ... */}
+</InputOTP>
+```
+
+- **`REGEXP_ONLY_DIGITS`** - Only numeric characters (0-9)
+- **`REGEXP_ONLY_CHARS`** - Only alphabetic characters (a-z, A-Z)
+- **`REGEXP_ONLY_DIGITS_AND_CHARS`** - Alphanumeric characters (0-9, a-z, A-Z)
+
 ## Summary
 
 1. **Component Structure**: Must manually define slots using `InputOTP.Group` and `InputOTP.Slot`
@@ -219,3 +271,5 @@ InputOTP (Root)
 9. **Sizes Removed**: Use Tailwind CSS classes for styling
 10. **Radius Removed**: Use Tailwind CSS classes for styling
 11. **ClassNames Removed**: Use `className` props on individual components
+12. **New Props**: v3 adds `textAlign`, `inputMode`, `placeholder`, and `pasteTransformer` props
+13. **Exported Patterns**: Use `REGEXP_ONLY_DIGITS`, `REGEXP_ONLY_CHARS`, and `REGEXP_ONLY_DIGITS_AND_CHARS` for the `pattern` prop

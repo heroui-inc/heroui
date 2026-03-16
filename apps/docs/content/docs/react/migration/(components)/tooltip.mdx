@@ -63,9 +63,10 @@ export default function App() {
 | `shadow` | — | Removed (use Tailwind CSS) |
 | `classNames` | — | Use `className` props on individual components |
 | `motionProps` | — | Removed (animations handled differently) |
-| `trigger` | `trigger` (on root) | Still exists, simplified |
-| `delay` | `delay` (on root) | Still exists |
-| `closeDelay` | `closeDelay` (on root) | Still exists |
+| `trigger` | `trigger` (on root) | Still exists: `"hover"` \| `"focus"` (default `"hover"`) |
+| `isDisabled` | `isDisabled` (on root) | New in v3: disables the tooltip entirely |
+| `delay` | `delay` (on root) | Still exists (default changed from `0` to `700`) |
+| `closeDelay` | `closeDelay` (on root) | Still exists (default `0`) |
 | `portalContainer` | — | Not exposed |
 | `updatePositionDeps` | — | Not exposed |
 | `containerPadding`, `crossOffset` | — | Not exposed |
@@ -273,6 +274,43 @@ Tooltip (Root)
       └── [Tooltip content]
 ```
 
+## New Props in v3
+
+### isDisabled
+
+The `isDisabled` prop allows you to completely disable the tooltip. When disabled, the tooltip will not appear on hover or focus:
+
+```tsx
+<Tooltip isDisabled>
+  <Tooltip.Trigger>
+    <Button>No tooltip</Button>
+  </Tooltip.Trigger>
+  <Tooltip.Content>
+    <p>This will not show</p>
+  </Tooltip.Content>
+</Tooltip>
+```
+
+### trigger
+
+The `trigger` prop controls how the tooltip is activated. It accepts `"hover"` (default) or `"focus"`:
+
+```tsx
+{/* Show tooltip only on focus */}
+<Tooltip trigger="focus">
+  <Tooltip.Trigger>
+    <Button>Focus me</Button>
+  </Tooltip.Trigger>
+  <Tooltip.Content>
+    <p>Shown on focus only</p>
+  </Tooltip.Content>
+</Tooltip>
+```
+
+### Custom Render Function
+
+`Tooltip.Content` and `Tooltip.Arrow` both support a `render` prop that allows you to override the default DOM element with a custom render function for advanced use cases.
+
 ## Important Notes
 
 ### Content Prop
@@ -310,3 +348,6 @@ Tooltip (Root)
 6. **Motion Props Removed**: `motionProps` removed - animations handled differently
 7. **Advanced Props Removed**: Many positioning and behavior props removed
 8. **Default Delay Changed**: Default delay changed from `0` to `700`
+9. **isDisabled Prop**: New `isDisabled` prop to completely disable the tooltip
+10. **trigger Prop**: Accepts `"hover"` (default) or `"focus"` to control activation method
+11. **Render Props**: `Tooltip.Content` and `Tooltip.Arrow` support a `render` prop for custom DOM rendering

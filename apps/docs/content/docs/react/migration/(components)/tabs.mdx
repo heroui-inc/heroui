@@ -54,7 +54,7 @@ export default function App() {
 ### 1. Component Structure
 
 **v2:** `Tabs` with `Tab` children (title prop + children as panel)  
-**v3:** Compound components (`Tabs.ListContainer`, `Tabs.List`, `Tabs.Tab`, `Tabs.Indicator`, `Tabs.Panel`)
+**v3:** Compound components (`Tabs.ListContainer`, `Tabs.List`, `Tabs.Tab`, `Tabs.Indicator`, `Tabs.Separator`, `Tabs.Panel`)
 
 ### 2. Prop Changes
 
@@ -79,6 +79,7 @@ export default function App() {
 - **Tab content**: `title` prop → direct children in `Tabs.Tab`
 - **Panel content**: Tab children → separate `Tabs.Panel` component
 - **Indicator**: Automatic cursor → explicit `Tabs.Indicator` component
+- **Separator**: New `Tabs.Separator` component to display separator lines between tabs
 
 ## Migration Examples
 
@@ -153,6 +154,36 @@ export default function App() {
   </Tab>
 </Tabs>
 
+### With Separator
+
+In v3, you can add `Tabs.Separator` inside each `Tabs.Tab` (except the first) to display separator lines between tabs. This is a new feature with no v2 equivalent.
+
+```tsx
+<Tabs>
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="photos">
+        Photos
+        <Tabs.Indicator />
+      </Tabs.Tab>
+      <Tabs.Tab id="music">
+        <Tabs.Separator />
+        Music
+        <Tabs.Indicator />
+      </Tabs.Tab>
+      <Tabs.Tab id="videos">
+        <Tabs.Separator />
+        Videos
+        <Tabs.Indicator />
+      </Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+  <Tabs.Panel id="photos">Photos content</Tabs.Panel>
+  <Tabs.Panel id="music">Music content</Tabs.Panel>
+  <Tabs.Panel id="videos">Videos content</Tabs.Panel>
+</Tabs>
+```
+
 ## Component Anatomy
 
 The v3 Tabs follows this structure:
@@ -162,13 +193,14 @@ Tabs (Root)
   ├── Tabs.ListContainer
   │   └── Tabs.List
   │       └── Tabs.Tab
+  │           ├── Tabs.Separator (optional, omit on first tab)
   │           └── Tabs.Indicator (optional)
   └── Tabs.Panel (one per tab, matching id)
 ```
 
 ## Summary
 
-1. **Component Structure**: Must use compound components (`Tabs.ListContainer`, `Tabs.List`, `Tabs.Tab`, `Tabs.Indicator`, `Tabs.Panel`)
+1. **Component Structure**: Must use compound components (`Tabs.ListContainer`, `Tabs.List`, `Tabs.Tab`, `Tabs.Indicator`, `Tabs.Separator`, `Tabs.Panel`)
 2. **Tab Identification**: `key` → `id` (must match between tab and panel)
 3. **Tab Content**: `title` prop removed - content goes directly in `Tabs.Tab`
 4. **Panel Separation**: Panel content moved to separate `Tabs.Panel` component
@@ -176,3 +208,4 @@ Tabs (Root)
 6. **Orientation**: `isVertical` → `orientation` prop
 7. **Styling**: `variant` simplified to `primary` \| `secondary`; `color`, `size`, `radius`, `placement` removed - use Tailwind for more
 8. **ClassNames Removed**: Use `className` props on individual components
+9. **Separator (New)**: Use `Tabs.Separator` inside `Tabs.Tab` to display separator lines between tabs (no v2 equivalent)

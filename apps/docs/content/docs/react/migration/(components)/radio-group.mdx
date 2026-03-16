@@ -92,7 +92,11 @@ export default function App() {
 
 ### 6. Variant Support
 
-**v3:** New `variant` prop for styling the group container
+**v3:** New `variant` prop: `"primary"` (default) or `"secondary"` for lower emphasis styling suitable for Surface components
+
+### 7. Read Only Support
+
+**v3:** New `isReadOnly` prop prevents value changes while keeping the group focusable
 
 ## Migration Examples
 
@@ -135,6 +139,78 @@ export default function App() {
     ```
   </Tab>
 </Tabs>
+
+### Variants
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 did not have variant support */}
+    <RadioGroup label="Select plan">
+      <Radio value="basic">Basic</Radio>
+      <Radio value="pro">Pro</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { RadioGroup, Radio, Label } from "@heroui/react";
+
+    {/* Primary variant (default) */}
+    <RadioGroup variant="primary" name="plan">
+      <Label>Select plan</Label>
+      <Radio value="basic">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Basic</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+
+    {/* Secondary variant - lower emphasis, suitable for Surface components */}
+    <RadioGroup variant="secondary" name="plan">
+      <Label>Select plan</Label>
+      <Radio value="basic">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Basic</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### Read Only
+
+```tsx
+import { RadioGroup, Radio, Label } from "@heroui/react";
+
+{/* Prevents value changes while keeping the group focusable */}
+<RadioGroup isReadOnly defaultValue="basic" name="plan">
+  <Label>Select plan</Label>
+  <Radio value="basic">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>Basic</Label>
+    </Radio.Content>
+  </Radio>
+  <Radio value="pro">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>Pro</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+```
 
 ### Controlled RadioGroup
 
@@ -189,4 +265,6 @@ export default function App() {
 - Replace `description` prop on Radio with `Description` component inside `Radio.Content`
 - Change `onValueChange` to `onChange`
 - Add `name` prop for form integration
+- New `variant` prop: `"primary"` (default) or `"secondary"` for lower emphasis styling
+- New `isReadOnly` prop: prevents value changes while keeping the group focusable
 - Better accessibility through React Aria Components

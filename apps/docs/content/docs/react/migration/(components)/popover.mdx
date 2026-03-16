@@ -231,6 +231,40 @@ Popover (Root)
           └── Content
 ```
 
+## New Capabilities in v3
+
+### Popover.Arrow Component
+
+In v2, the arrow was controlled by the `showArrow` boolean prop on the root `Popover`. In v3, `Popover.Arrow` is a dedicated component placed inside `Popover.Content`, giving you full control over its rendering:
+
+```tsx
+<Popover>
+  <Button>Open</Button>
+  <Popover.Content>
+    <Popover.Arrow className="custom-arrow" />
+    <Popover.Dialog>
+      <div>Content</div>
+    </Popover.Dialog>
+  </Popover.Content>
+</Popover>
+```
+
+`Popover.Arrow` also accepts a `render` prop for fully custom arrow rendering.
+
+### Controlled Open State
+
+Controlled open state remains on the root `Popover` component, using the same prop names as v2:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isOpen` | `boolean` | - | Controls popover visibility (controlled) |
+| `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | Called when open state changes |
+
+### Custom Render Function
+
+`Popover.Content` and `Popover.Arrow` both support a `render` prop that allows you to override the default DOM element with a custom render function for advanced use cases.
+
 ## Summary
 
 1. **Component Structure**: Must use compound components (`Popover.Content`, `Popover.Dialog`, etc.)

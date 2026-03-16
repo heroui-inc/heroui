@@ -1,0 +1,424 @@
+---
+title: Pagination
+description: Migration guide for Pagination from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Pagination documentation](/docs/react/components/pagination) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `Pagination` was a single component that handled all rendering internally via props:
+
+```tsx
+import { Pagination } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Pagination total={10} initialPage={1} showControls />
+  );
+}
+```
+
+In v3, Pagination uses a compound component pattern where you compose each part explicitly:
+
+```tsx
+import { Pagination } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous>
+            <Pagination.PreviousIcon />
+          </Pagination.Previous>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link isActive>1</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link>2</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link>3</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Ellipsis />
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link>10</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Next>
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `Pagination` component that auto-generates page items from `total` prop
+**v3:** Compound components: `Pagination`, `Pagination.Summary`, `Pagination.Content`, `Pagination.Item`, `Pagination.Link`, `Pagination.Previous`, `Pagination.PreviousIcon`, `Pagination.Next`, `Pagination.NextIcon`, `Pagination.Ellipsis`
+
+### 2. Page Generation
+
+**v2:** Pages auto-generated from `total`, `siblings`, `boundaries` props
+**v3:** You compose page items manually, giving full control over layout and behavior. Build your own pagination logic or use a pagination hook.
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `total` | - | Removed (compose items manually) |
+| `page` | - | Manage active state via `isActive` on `Pagination.Link` |
+| `initialPage` | - | Manage state externally |
+| `onChange` | - | Use `onPress` on individual `Pagination.Link` components |
+| `siblings` | - | Removed (compose items manually) |
+| `boundaries` | - | Removed (compose items manually) |
+| `dotsJump` | - | Removed (handle ellipsis click manually) |
+| `loop` | - | Removed (implement manually) |
+| `showControls` | - | Compose `Pagination.Previous` and `Pagination.Next` |
+| `isCompact` | - | Removed (style with Tailwind CSS) |
+| `showShadow` | - | Removed (use Tailwind `shadow-*` classes) |
+| `size` | `Pagination` `size` | Same (`sm`, `md`, `lg`) |
+| `variant` | - | Removed (use Tailwind CSS) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `isDisabled` | `isDisabled` on `Pagination.Link`, `Pagination.Previous`, `Pagination.Next` | Per-item instead of global |
+| `disableCursorAnimation` | - | Removed |
+| `disableAnimation` | - | Removed |
+| `renderItem` | - | Compose items directly |
+| `getItemAriaLabel` | - | Set `aria-label` on individual items |
+| `classNames` | - | Use `className` on individual compound components |
+
+### 4. Hook Changes
+
+**v2:** `usePagination` hook available for custom implementations
+**v3:** No built-in hook — compose pagination items directly or build your own pagination logic
+
+## Migration Examples
+
+### Basic Pagination
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Pagination } from "@heroui/react";
+
+    <Pagination total={10} initialPage={1} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Pagination } from "@heroui/react";
+
+    const [page, setPage] = useState(1);
+    const totalPages = 10;
+
+    <Pagination>
+      <Pagination.Content>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <Pagination.Item key={p}>
+            <Pagination.Link isActive={page === p} onPress={() => setPage(p)}>
+              {p}
+            </Pagination.Link>
+          </Pagination.Item>
+        ))}
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### With Previous / Next Controls
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Pagination total={10} initialPage={1} showControls />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const totalPages = 10;
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous
+            isDisabled={page === 1}
+            onPress={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            <Pagination.PreviousIcon />
+          </Pagination.Previous>
+        </Pagination.Item>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <Pagination.Item key={p}>
+            <Pagination.Link isActive={page === p} onPress={() => setPage(p)}>
+              {p}
+            </Pagination.Link>
+          </Pagination.Item>
+        ))}
+        <Pagination.Item>
+          <Pagination.Next
+            isDisabled={page === totalPages}
+            onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
+          >
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### With Ellipsis
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Pagination total={20} initialPage={1} siblings={1} boundaries={1} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const totalPages = 20;
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous
+            isDisabled={page === 1}
+            onPress={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            <Pagination.PreviousIcon />
+          </Pagination.Previous>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link isActive={page === 1} onPress={() => setPage(1)}>
+            1
+          </Pagination.Link>
+        </Pagination.Item>
+        {page > 3 && (
+          <Pagination.Item>
+            <Pagination.Ellipsis />
+          </Pagination.Item>
+        )}
+        {[page - 1, page, page + 1]
+          .filter((p) => p > 1 && p < totalPages)
+          .map((p) => (
+            <Pagination.Item key={p}>
+              <Pagination.Link isActive={page === p} onPress={() => setPage(p)}>
+                {p}
+              </Pagination.Link>
+            </Pagination.Item>
+          ))}
+        {page < totalPages - 2 && (
+          <Pagination.Item>
+            <Pagination.Ellipsis />
+          </Pagination.Item>
+        )}
+        <Pagination.Item>
+          <Pagination.Link
+            isActive={page === totalPages}
+            onPress={() => setPage(totalPages)}
+          >
+            {totalPages}
+          </Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Next
+            isDisabled={page === totalPages}
+            onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
+          >
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### Simple Previous / Next Only
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 didn't have a built-in simple prev/next pattern */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const totalPages = 10;
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous
+            isDisabled={page === 1}
+            onPress={() => setPage((p) => p - 1)}
+          >
+            <Pagination.PreviousIcon />
+            <span>Previous</span>
+          </Pagination.Previous>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Next
+            isDisabled={page === totalPages}
+            onPress={() => setPage((p) => p + 1)}
+          >
+            <span>Next</span>
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### With Summary
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 didn't have a built-in summary slot */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const perPage = 10;
+    const total = 100;
+
+    <Pagination>
+      <Pagination.Summary>
+        Showing {(page - 1) * perPage + 1}-{Math.min(page * perPage, total)} of {total}
+      </Pagination.Summary>
+      <Pagination.Content>
+        {/* Pagination items */}
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Icons
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 required renderItem for custom icons */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous onPress={() => setPage((p) => p - 1)}>
+            <Pagination.PreviousIcon>
+              <Icon icon="gravity-ui:arrow-left" />
+            </Pagination.PreviousIcon>
+          </Pagination.Previous>
+        </Pagination.Item>
+        {/* Page links */}
+        <Pagination.Item>
+          <Pagination.Next onPress={() => setPage((p) => p + 1)}>
+            <Pagination.NextIcon>
+              <Icon icon="gravity-ui:arrow-right" />
+            </Pagination.NextIcon>
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Pagination
+  classNames={{
+    base: "custom-base",
+    wrapper: "custom-wrapper",
+    prev: "custom-prev",
+    next: "custom-next",
+    item: "custom-item",
+    cursor: "custom-cursor",
+    ellipsis: "custom-ellipsis",
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Pagination className="custom-base">
+  <Pagination.Content className="custom-wrapper">
+    <Pagination.Item className="custom-item">
+      <Pagination.Previous className="custom-prev">
+        <Pagination.PreviousIcon />
+      </Pagination.Previous>
+    </Pagination.Item>
+    <Pagination.Item>
+      <Pagination.Link isActive className="custom-cursor">1</Pagination.Link>
+    </Pagination.Item>
+    <Pagination.Item>
+      <Pagination.Ellipsis className="custom-ellipsis" />
+    </Pagination.Item>
+    <Pagination.Item>
+      <Pagination.Next className="custom-next">
+        <Pagination.NextIcon />
+      </Pagination.Next>
+    </Pagination.Item>
+  </Pagination.Content>
+</Pagination>
+```
+
+## Component Anatomy
+
+The v3 Pagination follows this structure:
+
+```
+Pagination (Root, nav element)
+  ├── Pagination.Summary (optional, info text)
+  └── Pagination.Content (ul container)
+      └── Pagination.Item (li wrapper, repeated)
+          ├── Pagination.Previous (with Pagination.PreviousIcon)
+          ├── Pagination.Link (page number, isActive for current)
+          ├── Pagination.Ellipsis
+          └── Pagination.Next (with Pagination.NextIcon)
+```
+
+## Summary
+
+1. **Component Structure**: Single auto-generating component → compound components with manual composition
+2. **Page Generation**: `total`/`siblings`/`boundaries` props → compose page items manually with your own pagination logic
+3. **Active Page**: `page`/`initialPage` props → `isActive` prop on individual `Pagination.Link`
+4. **Navigation Controls**: `showControls` prop → compose `Pagination.Previous` and `Pagination.Next` directly
+5. **Ellipsis**: Auto-generated → compose `Pagination.Ellipsis` manually where needed
+6. **Events**: Single `onChange` → individual `onPress` handlers on each `Pagination.Link`
+7. **New Features**: `Pagination.Summary` for showing result counts, custom icons via `PreviousIcon`/`NextIcon` children
+8. **Hook Removed**: `usePagination` → build your own pagination logic
+9. **Styling Props Removed**: `variant`, `color`, `radius`, `isCompact`, `showShadow` → use Tailwind CSS
+10. **ClassNames Removed**: Use `className` on individual compound components

@@ -24,6 +24,10 @@ description: Migration guide for Link from HeroUI v2 to v3
 | `disableAnimation` | - | Removed |
 | `underline` | - | Removed (use Tailwind `underline`, etc.) |
 
+### 3. New Props
+
+- `onPress` - Event handler fired when the link is activated (via click or keyboard). Accepts a `(e: PressEvent) => void` callback.
+
 ## Structure Changes
 
 In v2, Link component usage:
@@ -179,3 +183,4 @@ Link (Root)
 6. **Underline**: No longer a prop; use Tailwind (`underline`, `hover:underline`, `no-underline`, `underline-offset-1`, etc.)
 7. **Routing**: v3 Link does not support `as` or `asChild`; use your router's Link with Tailwind classes (e.g. `link`, `link__icon`) for consistent styling
 8. **Animation Removed**: `disableAnimation` prop removed
+9. **`onPress` Handler**: New `onPress` prop available for handling link activation events (click or keyboard)

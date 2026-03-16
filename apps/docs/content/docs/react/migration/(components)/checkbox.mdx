@@ -62,6 +62,7 @@ export default function App() {
 | `icon` | - | Use custom content in `Checkbox.Indicator` |
 | `classNames` | - | Use `className` on parts |
 | `disableAnimation` | - | Removed |
+| — | `variant` | New prop: `"primary"` (default) or `"secondary"` for lower emphasis styling |
 
 ### 4. CheckboxGroup Changes
 
@@ -247,6 +248,32 @@ For migrating checkbox groups, see the [CheckboxGroup migration guide](/docs/rea
   </Tab>
 </Tabs>
 
+### Variants
+
+v3 introduces a `variant` prop with `"primary"` (default) and `"secondary"` options:
+
+```tsx
+{/* Primary variant (default) */}
+<Checkbox variant="primary" id="primary-option">
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label htmlFor="primary-option">Primary</Label>
+  </Checkbox.Content>
+</Checkbox>
+
+{/* Secondary variant - lower emphasis, suitable for Surface components */}
+<Checkbox variant="secondary" id="secondary-option">
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label htmlFor="secondary-option">Secondary</Label>
+  </Checkbox.Content>
+</Checkbox>
+```
+
 ### Indeterminate State
 
 <Tabs items={["v2", "v3"]}>
@@ -287,6 +314,23 @@ v3 Checkbox supports a render prop pattern that provides state information:
       </Checkbox.Content>
     </>
   )}
+</Checkbox>
+```
+
+`Checkbox.Indicator` also supports a render prop pattern, providing the same state values. This is useful for rendering custom indicator content based on the checkbox state:
+
+```tsx
+<Checkbox id="custom">
+  <Checkbox.Control>
+    <Checkbox.Indicator>
+      {({isSelected, isIndeterminate}) =>
+        isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null
+      }
+    </Checkbox.Indicator>
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label htmlFor="custom">Custom indicator</Label>
+  </Checkbox.Content>
 </Checkbox>
 ```
 
@@ -355,3 +399,5 @@ Checkbox (Root)
 8. **Icon Prop Removed**: Use custom content in `Checkbox.Indicator`
 9. **CheckboxGroup**: Same component name; use `Label`/`Description` as children and compound `Checkbox` structure
 10. **ClassNames Removed**: Use `className` props on individual components
+11. **New `variant` Prop**: Supports `"primary"` (default) and `"secondary"` for lower emphasis styling
+12. **Indicator Render Props**: `Checkbox.Indicator` accepts a render function with state values (`isSelected`, `isIndeterminate`, etc.)

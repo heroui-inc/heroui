@@ -79,7 +79,9 @@ export default function App() {
 | `label` | `Label` | Use `Label` component inside `TextField` |
 | `description` | `Description` | Use `Description` component inside `TextField` |
 | `errorMessage` | `FieldError` | Use `FieldError` component inside `TextField` |
-| `variant`, `color`, `size`, `radius` | - | Removed (use Tailwind CSS) |
+| `variant` | `Input` | Changed from multiple variants (flat, bordered, underlined, faded) to `"primary"` (default, with shadow) and `"secondary"` (lower emphasis, no shadow, for surfaces) |
+| `color`, `size`, `radius` | - | Removed (use Tailwind CSS) |
+| `fullWidth` | `Input` or `TextField` | Still supported on both `Input` and `TextField` (`fullWidth` boolean prop) |
 | `labelPlacement` | - | Use layout with `Label` |
 | `startContent` | `InputGroup.Prefix` | Use `InputGroup` with `InputGroup.Prefix` inside `TextField` |
 | `endContent` | `InputGroup.Suffix` | Use `InputGroup` with `InputGroup.Suffix` inside `TextField` |
@@ -270,9 +272,10 @@ For inputs with prefix or suffix content, use the **InputGroup** compound compon
 5. **Validation**: Move `validate` function from `Input` to `TextField`
 6. **Start/End Content**: Use `InputGroup` with `InputGroup.Prefix`/`InputGroup.Suffix` inside `TextField`
 7. **Clear Button**: Implement manually with `CloseButton`
-8. **Variants Removed**: Use Tailwind CSS classes
-9. **Colors Removed**: Use Tailwind CSS classes
-10. **Sizes Removed**: Use Tailwind CSS classes
-11. **Radius Removed**: Use Tailwind CSS classes
+8. **Variants Simplified**: v2 had multiple variants (flat, bordered, underlined, faded); v3 has `"primary"` (default) and `"secondary"` (for surfaces)
+9. **Full Width**: `fullWidth` prop is still available on both `Input` and `TextField`
+10. **Colors Removed**: Use Tailwind CSS classes
+11. **Sizes Removed**: Use Tailwind CSS classes
+12. **Radius Removed**: Use Tailwind CSS classes
 12. **onValueChange Removed**: Use `onChange` event handler
 13. **ClassNames Removed**: Use `className` props on individual components
