@@ -8,6 +8,11 @@ export const env = createEnv({
     NEXT_PUBLIC_HEROUI_PRO_URL: z.url().min(1).optional(),
     NEXT_PUBLIC_POSTHOG_HOST: z.url().min(1).optional(),
     NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
+    NEXT_PUBLIC_PRO_API_URL: z.url().min(1).optional(),
+    NEXT_PUBLIC_SHOW_PRE_SALE_BANNER: z
+      .enum(["true", "false"])
+      .default("false")
+      .transform((v) => v === "true"),
   },
   runtimeEnv: {
     FEATUREBASE_API_ENDPOINT: process.env["FEATUREBASE_API_ENDPOINT"],
@@ -19,6 +24,8 @@ export const env = createEnv({
     NEXT_PUBLIC_HEROUI_PRO_URL: process.env["NEXT_PUBLIC_HEROUI_PRO_URL"],
     NEXT_PUBLIC_POSTHOG_HOST: process.env["NEXT_PUBLIC_POSTHOG_HOST"],
     NEXT_PUBLIC_POSTHOG_KEY: process.env["NEXT_PUBLIC_POSTHOG_KEY"],
+    NEXT_PUBLIC_PRO_API_URL: process.env["NEXT_PUBLIC_PRO_API_URL"],
+    NEXT_PUBLIC_SHOW_PRE_SALE_BANNER: process.env["NEXT_PUBLIC_SHOW_PRE_SALE_BANNER"],
     NODE_ENV: process.env["NODE_ENV"],
   },
   server: {
