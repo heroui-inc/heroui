@@ -8,6 +8,7 @@ import React, {useContext} from "react";
 import {Input as InputPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
+import {ComboBoxContext} from "../combo-box";
 import {TextFieldContext} from "../textfield";
 
 /* -------------------------------------------------------------------------------------------------
@@ -16,9 +17,11 @@ import {TextFieldContext} from "../textfield";
 interface InputRootProps extends ComponentPropsWithRef<typeof InputPrimitive>, InputVariants {}
 
 const InputRoot = ({className, fullWidth, variant: variantProp, ...rest}: InputRootProps) => {
-  const context = useContext(TextFieldContext);
+  const textFieldContext = useContext(TextFieldContext);
+  const comboBoxContext = useContext(ComboBoxContext);
+
   // Use variant from context if not explicitly provided
-  const variant = variantProp ?? context.variant;
+  const variant = variantProp ?? textFieldContext.variant ?? comboBoxContext.variant;
 
   return (
     <InputPrimitive
