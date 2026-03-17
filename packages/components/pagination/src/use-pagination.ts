@@ -129,6 +129,14 @@ interface Props extends Omit<HTMLHeroUIProps<"nav">, "onChange"> {
    */
   showControls?: boolean;
   /**
+   * Custom icon for the previous page control.
+   */
+  prevIcon?: ReactNode;
+  /**
+   * Custom icon for the next page control.
+   */
+  nextIcon?: ReactNode;
+  /**
    * Render a custom pagination item.
    * @param props Pagination item props
    * @returns ReactNode
@@ -182,6 +190,8 @@ export function usePagination(originalProps: UsePaginationProps) {
     boundaries,
     onChange,
     className,
+    prevIcon,
+    nextIcon,
     renderItem,
     getItemAriaLabel: getItemAriaLabelProp,
     ...otherProps
@@ -418,6 +428,8 @@ export function usePagination(originalProps: UsePaginationProps) {
     getItemRef,
     disableAnimation,
     disableCursorAnimation,
+    prevIcon,
+    nextIcon,
     setPage,
     onPrevious,
     onNext,
