@@ -1,5 +1,12 @@
 # @heroui/autocomplete
 
+## 2.3.35
+
+### Patch Changes
+
+- Updated dependencies [[`c2252c2`](https://github.com/heroui-inc/heroui/commit/c2252c2bd45cb803ff6a437c39eb1e9f3ffbb535)]:
+  - @heroui/listbox@2.3.32
+
 ## 2.3.34
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @heroui/menu
 
+## 2.2.32
+
+### Patch Changes
+
+- [#6316](https://github.com/heroui-inc/heroui/pull/6316) [`c2252c2`](https://github.com/heroui-inc/heroui/commit/c2252c2bd45cb803ff6a437c39eb1e9f3ffbb535) Thanks [@wingkwong](https://github.com/wingkwong)! - fix: remove duplicate DOM props from base wrapper element (#6306)
+
 ## 2.2.31
 
 ### Patch Changes
