@@ -1,0 +1,523 @@
+---
+title: Table
+description: Migration guide for Table from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Table documentation](/docs/react/components/table) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, Table used separate named imports for each part:
+
+```tsx
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Table aria-label="Example table">
+      <TableHeader>
+        <TableColumn>Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>Kate Moore</TableCell>
+          <TableCell>CEO</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+In v3, Table uses the compound component pattern with dot notation and adds `Table.ScrollContainer` and `Table.Content`:
+
+```tsx
+import { Table } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Example table">
+          <Table.Header>
+            <Table.Column>Name</Table.Column>
+            <Table.Column>Role</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>Kate Moore</Table.Cell>
+              <Table.Cell>CEO</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Separate named imports (`Table`, `TableHeader`, `TableColumn`, `TableBody`, `TableRow`, `TableCell`)
+**v3:** Single import with dot notation: `Table`, `Table.ScrollContainer`, `Table.Content`, `Table.Header`, `Table.Column`, `Table.Body`, `Table.Row`, `Table.Cell`, `Table.Footer`
+
+### 2. New Wrapper Components
+
+- **`Table`** is now the root container (styling wrapper)
+- **`Table.ScrollContainer`** handles horizontal scrolling with custom scrollbar
+- **`Table.Content`** is the actual `<table>` element (where `aria-label`, `selectionMode`, `sortDescriptor` etc. go)
+- **`Table.Footer`** replaces `bottomContent` for pagination and other footer content
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `aria-label` | `Table.Content` `aria-label` | Moved to `Table.Content` |
+| `selectionMode` | `Table.Content` `selectionMode` | Moved to `Table.Content` |
+| `selectedKeys` | `Table.Content` `selectedKeys` | Moved to `Table.Content` |
+| `defaultSelectedKeys` | `Table.Content` `defaultSelectedKeys` | Moved to `Table.Content` |
+| `onSelectionChange` | `Table.Content` `onSelectionChange` | Moved to `Table.Content` |
+| `sortDescriptor` | `Table.Content` `sortDescriptor` | Moved to `Table.Content` |
+| `onSortChange` | `Table.Content` `onSortChange` | Moved to `Table.Content` |
+| `disabledKeys` | `Table.Content` `disabledKeys` | Moved to `Table.Content` |
+| `disallowEmptySelection` | `Table.Content` `disallowEmptySelection` | Moved to `Table.Content` |
+| `selectionBehavior` | `Table.Content` `selectionBehavior` | Moved to `Table.Content` |
+| `disabledBehavior` | `Table.Content` `disabledBehavior` | Moved to `Table.Content` |
+| `onRowAction` | `Table.Content` `onRowAction` | Moved to `Table.Content` |
+| `onCellAction` | `Table.Content` `onCellAction` | Moved to `Table.Content` |
+| `topContent` | - | Place content inside `Table` before `Table.ScrollContainer` |
+| `bottomContent` | - | Use `Table.Footer` |
+| `topContentPlacement` | - | Removed (compose layout directly) |
+| `bottomContentPlacement` | - | Removed (compose layout directly) |
+| `color` | - | Removed (use Tailwind CSS) |
+| `variant` | `Table` `variant` | Changed to `"primary"` (card-style, default) or `"secondary"` (flat) |
+| `layout` | - | Removed |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `shadow` | - | Removed (use Tailwind CSS) |
+| `isStriped` | - | Removed (use Tailwind CSS) |
+| `isCompact` | - | Removed (use Tailwind CSS) |
+| `isHeaderSticky` | - | Removed (use Tailwind CSS `sticky top-0`) |
+| `fullWidth` | - | Removed (full width by default) |
+| `removeWrapper` | - | Removed (compose layout directly) |
+| `hideHeader` | - | Removed (omit `Table.Header` or use CSS) |
+| `isVirtualized` | - | Use React Aria `Virtualizer` wrapper |
+| `maxTableHeight` | - | Use CSS or Virtualizer |
+| `rowHeight` | - | Use `TableLayout` with Virtualizer |
+| `isKeyboardNavigationDisabled` | - | Removed |
+| `disableAnimation` | - | Removed |
+| `classNames` | - | Use `className` on individual compound components |
+
+### 4. Selection with Checkboxes
+
+**v2:** Checkboxes auto-rendered by the table when `selectionMode` is set
+**v3:** Use `Checkbox` with `slot="selection"` explicitly in columns and rows
+
+### 5. Loading and Empty States
+
+**v2:** `loadingState`, `loadingContent`, `emptyContent` props on `TableBody`
+**v3:** `renderEmptyState` prop on `Table.Body`; use `Table.LoadMore` for infinite scroll loading
+
+### 6. Pagination
+
+**v2:** `bottomContent` prop on `Table`
+**v3:** `Table.Footer` compound component
+
+### 7. Column Resizing
+
+**v2:** Not built-in
+**v3:** `Table.ResizableContainer` + `Table.ColumnResizer` compound components
+
+## Migration Examples
+
+### Basic Table
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
+
+    <Table aria-label="Users">
+      <TableHeader>
+        <TableColumn>Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+        <TableColumn>Status</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>Kate Moore</TableCell>
+          <TableCell>CEO</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+        <TableRow key="2">
+          <TableCell>John Doe</TableCell>
+          <TableCell>Developer</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Table } from "@heroui/react";
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Users">
+          <Table.Header>
+            <Table.Column>Name</Table.Column>
+            <Table.Column>Role</Table.Column>
+            <Table.Column>Status</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="1">
+              <Table.Cell>Kate Moore</Table.Cell>
+              <Table.Cell>CEO</Table.Cell>
+              <Table.Cell>Active</Table.Cell>
+            </Table.Row>
+            <Table.Row id="2">
+              <Table.Cell>John Doe</Table.Cell>
+              <Table.Cell>Developer</Table.Cell>
+              <Table.Cell>Active</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### Dynamic Rows
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const columns = [
+      { key: "name", label: "Name" },
+      { key: "role", label: "Role" },
+    ];
+    const rows = [
+      { key: "1", name: "Kate", role: "CEO" },
+      { key: "2", name: "John", role: "Developer" },
+    ];
+
+    <Table aria-label="Users">
+      <TableHeader columns={columns}>
+        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+      </TableHeader>
+      <TableBody items={rows}>
+        {(item) => (
+          <TableRow key={item.key}>
+            {(columnKey) => <TableCell>{item[columnKey]}</TableCell>}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const columns = [
+      { id: "name", label: "Name" },
+      { id: "role", label: "Role" },
+    ];
+    const rows = [
+      { id: "1", name: "Kate", role: "CEO" },
+      { id: "2", name: "John", role: "Developer" },
+    ];
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Users">
+          <Table.Header columns={columns}>
+            {(column) => <Table.Column id={column.id}>{column.label}</Table.Column>}
+          </Table.Header>
+          <Table.Body items={rows}>
+            {(item) => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.role}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### Selection
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["1"]));
+
+    <Table
+      aria-label="Users"
+      selectionMode="multiple"
+      selectedKeys={selectedKeys}
+      onSelectionChange={setSelectedKeys}
+    >
+      <TableHeader>
+        <TableColumn>Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>Kate</TableCell>
+          <TableCell>CEO</TableCell>
+        </TableRow>
+        <TableRow key="2">
+          <TableCell>John</TableCell>
+          <TableCell>Developer</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Table, Checkbox } from "@heroui/react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["1"]));
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content
+          aria-label="Users"
+          selectionMode="multiple"
+          selectedKeys={selectedKeys}
+          onSelectionChange={setSelectedKeys}
+        >
+          <Table.Header>
+            <Table.Column>
+              <Checkbox slot="selection" />
+            </Table.Column>
+            <Table.Column>Name</Table.Column>
+            <Table.Column>Role</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="1">
+              <Table.Cell>
+                <Checkbox slot="selection" />
+              </Table.Cell>
+              <Table.Cell>Kate</Table.Cell>
+              <Table.Cell>CEO</Table.Cell>
+            </Table.Row>
+            <Table.Row id="2">
+              <Table.Cell>
+                <Checkbox slot="selection" />
+              </Table.Cell>
+              <Table.Cell>John</Table.Cell>
+              <Table.Cell>Developer</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### Sorting
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const [sortDescriptor, setSortDescriptor] = useState({
+      column: "name",
+      direction: "ascending",
+    });
+
+    <Table
+      aria-label="Users"
+      sortDescriptor={sortDescriptor}
+      onSortChange={setSortDescriptor}
+    >
+      <TableHeader>
+        <TableColumn key="name" allowsSorting>Name</TableColumn>
+        <TableColumn key="role" allowsSorting>Role</TableColumn>
+      </TableHeader>
+      <TableBody items={sortedItems}>
+        {(item) => (
+          <TableRow key={item.key}>
+            {(columnKey) => <TableCell>{item[columnKey]}</TableCell>}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [sortDescriptor, setSortDescriptor] = useState({
+      column: "name",
+      direction: "ascending",
+    });
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content
+          aria-label="Users"
+          sortDescriptor={sortDescriptor}
+          onSortChange={setSortDescriptor}
+        >
+          <Table.Header>
+            <Table.Column id="name" allowsSorting>Name</Table.Column>
+            <Table.Column id="role" allowsSorting>Role</Table.Column>
+          </Table.Header>
+          <Table.Body items={sortedItems}>
+            {(item) => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.role}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### With Pagination (Bottom Content)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Table
+      aria-label="Users"
+      bottomContent={
+        <Pagination total={10} page={page} onChange={setPage} />
+      }
+      bottomContentPlacement="outside"
+    >
+      {/* ... */}
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Users">
+          {/* Header and Body */}
+        </Table.Content>
+      </Table.ScrollContainer>
+      <Table.Footer>
+        {/* Pagination component */}
+      </Table.Footer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### Empty State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <TableBody emptyContent="No rows to display.">
+      {[]}
+    </TableBody>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Table.Body
+      items={[]}
+      renderEmptyState={() => (
+        <p className="text-center py-4">No rows to display.</p>
+      )}
+    >
+      {[]}
+    </Table.Body>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Table
+  classNames={{
+    base: "custom-base",
+    wrapper: "custom-wrapper",
+    table: "custom-table",
+    thead: "custom-header",
+    tbody: "custom-body",
+    tr: "custom-row",
+    th: "custom-column",
+    td: "custom-cell",
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Table className="custom-base">
+  <Table.ScrollContainer className="custom-wrapper">
+    <Table.Content aria-label="Table" className="custom-table">
+      <Table.Header className="custom-header">
+        <Table.Column className="custom-column">Name</Table.Column>
+      </Table.Header>
+      <Table.Body className="custom-body">
+        <Table.Row className="custom-row">
+          <Table.Cell className="custom-cell">Value</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Content>
+  </Table.ScrollContainer>
+</Table>
+```
+
+## Component Anatomy
+
+The v3 Table follows this structure:
+
+```
+Table (Root container)
+  ├── Table.ScrollContainer (horizontal scroll)
+  │   └── Table.Content (<table> element, aria-label, selectionMode, etc.)
+  │       ├── Table.Header (<thead>)
+  │       │   └── Table.Column (<th>, allowsSorting, etc.)
+  │       │       └── Table.ColumnResizer (optional)
+  │       └── Table.Body (<tbody>, items, renderEmptyState)
+  │           ├── Table.Row (<tr>)
+  │           │   └── Table.Cell (<td>)
+  │           └── Table.LoadMore (optional, infinite scroll)
+  │               └── Table.LoadMoreContent
+  └── Table.Footer (optional, pagination, etc.)
+```
+
+## Item Identity
+
+**v2:** React's `key` was used for both list reconciliation and selection state.
+**v3:** Use `id` on `Table.Row` and `Table.Column` for selection/sort state; keep React's `key` for lists.
+
+## Summary
+
+1. **Imports**: Separate named imports → single `Table` import with dot notation
+2. **New Wrappers**: `Table.ScrollContainer` and `Table.Content` wrap the table structure
+3. **Props Moved**: `aria-label`, `selectionMode`, `sortDescriptor`, etc. moved from `Table` to `Table.Content`
+4. **Bottom Content**: `bottomContent` prop → `Table.Footer` compound component
+5. **Top Content**: `topContent` prop → place content inside `Table` before `Table.ScrollContainer`
+6. **Selection Checkboxes**: Auto-rendered → explicit `Checkbox` with `slot="selection"`
+7. **Empty State**: `emptyContent` prop → `renderEmptyState` on `Table.Body`
+8. **Loading**: `loadingState`/`loadingContent` → `Table.LoadMore` for infinite scroll
+9. **Column Resizing**: New `Table.ResizableContainer` and `Table.ColumnResizer`
+10. **Item Identity**: `key` → `id` on rows and columns
+11. **Styling Props Removed**: `color`, `radius`, `shadow`, `isStriped`, `isCompact` → use Tailwind CSS
+12. **ClassNames Removed**: Use `className` on individual compound components

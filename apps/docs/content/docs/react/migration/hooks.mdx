@@ -1,0 +1,282 @@
+---
+title: Hooks
+description: Migration guide for HeroUI hooks from v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 component documentation](/docs/components-list) for complete API reference. This guide focuses on migrating hooks from HeroUI v2.
+</Callout>
+
+## Overview
+
+HeroUI v3 removes most component hooks that existed in v2, replacing them with compound components and a new hook for overlay state management. This guide covers:
+
+- Component hooks removal (useSwitch, useInput, useCheckbox, etc.)
+- useDisclosure → useOverlayState migration
+- Migration strategies and examples
+
+## Component Hooks Removal
+
+HeroUI v2 provided component hooks (like `useSwitch`, `useInput`, `useCheckbox`, etc.) that returned prop getters (`getBaseProps`, `getWrapperProps`, `getThumbProps`, etc.) to customize component structure when users couldn't directly modify inner child components. HeroUI v3 solves this with compound components, eliminating the need for hooks.
+
+### Why Hooks Existed in v2
+
+In v2, components had fixed internal structures. To customize these structures, users needed to use hooks that provided prop getters. For example, `useSwitch` returned `getBaseProps()`, `getWrapperProps()`, `getThumbProps()`, etc., which users could spread onto custom elements to build their own Switch structure.
+
+### v3 Solution: Compound Components
+
+v3 uses compound component patterns that give you direct access to component parts. Instead of using hooks with prop getters, you compose components directly using subcomponents like `Switch.Control`, `Switch.Thumb`, `Checkbox.Control`, `Checkbox.Indicator`, etc.
+
+### Migration Strategy
+
+1. **Identify hook usage**: Search your codebase for imports from `@heroui/react` that include hook names (`useSwitch`, `useInput`, `useCheckbox`, `useRadio`, etc.)
+2. **Replace with compound components**: Instead of using hooks with prop getters, use the compound component pattern
+3. **Preserve original structure**: When migrating, try to keep the same component structure you had with hooks. For example:
+   - If you used `useSwitch` to create a switch **without** a thumb, don't add `Switch.Thumb` in v3
+   - If you used `useCheckbox` to create a checkbox **without** an indicator, don't add `Checkbox.Indicator` in v3
+   - Only include the subcomponents that were actually used in your hook-based implementation
+4. **Reference component guides**: Check individual component migration guides for specific examples
+
+### Key Differences
+
+- **v2**: Hooks provided prop getters to customize fixed component structures
+- **v3**: Compound components allow direct composition of component parts
+
+### Preserving Structure Example
+
+**v2: Switch without thumb**
+```tsx
+import { useSwitch } from "@heroui/react";
+
+function CustomSwitch() {
+  const { getBaseProps } = useSwitch();
+  
+  return (
+    <div {...getBaseProps()}>
+      {/* No thumb element */}
+    </div>
+  );
+}
+```
+
+**v3: Equivalent structure**
+```tsx
+import { Switch } from "@heroui/react";
+
+function CustomSwitch() {
+  return (
+    <Switch.Control>
+      {/* No Switch.Thumb - preserving the original structure */}
+    </Switch.Control>
+  );
+}
+```
+
+For detailed migration examples for specific components, see the individual component migration guides.
+
+## useDisclosure → useOverlayState
+
+The `useDisclosure` hook from v2 has been replaced with `useOverlayState` in v3. This hook manages open/close state for modals, popovers, and other overlay components.
+
+### v2: useDisclosure
+
+**API:**
+```tsx
+const {isOpen, onOpen, onClose, onOpenChange, isControlled, getButtonProps, getDisclosureProps} = useDisclosure({
+  isOpen?: boolean;
+  defaultOpen?: boolean;
+  onClose?(): void;
+  onOpen?(): void;
+  onChange?(isOpen: boolean | undefined): void;
+  id?: string;
+});
+```
+
+**Example:**
+```tsx
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+
+export default function App() {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+  return (
+    <>
+      <Button onPress={onOpen}>Open Modal</Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Title</ModalHeader>
+          <ModalBody>Content</ModalBody>
+          <ModalFooter>
+            <Button onPress={onOpenChange}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
+### v3: useOverlayState
+
+**API:**
+```tsx
+const state = useOverlayState({
+  isOpen?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+});
+
+// Returns:
+// {
+//   isOpen: boolean;
+//   open(): void;
+//   close(): void;
+//   toggle(): void;
+//   setOpen(isOpen: boolean): void;
+// }
+```
+
+**Example:**
+```tsx
+import { Modal, Button, useOverlayState } from "@heroui/react";
+
+export default function App() {
+  const state = useOverlayState();
+
+  return (
+    <Modal>
+      <Button onPress={state.open}>Open Modal</Button>
+      <Modal.Container isOpen={state.isOpen} onOpenChange={state.setOpen}>
+        <Modal.Dialog>
+          {({close}) => (
+            <>
+              <Modal.Header>
+                <Modal.Heading>Title</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>Content</Modal.Body>
+              <Modal.Footer>
+                <Button onPress={close}>Close</Button>
+              </Modal.Footer>
+            </>
+          )}
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal>
+  );
+}
+```
+
+### Migration Guide
+
+#### Basic Migration
+
+**v2:**
+```tsx
+const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
+```
+
+**v3:**
+```tsx
+const state = useOverlayState();
+// Use state.open(), state.close(), state.toggle(), state.setOpen(boolean)
+```
+
+#### Controlled State
+
+**v2:**
+```tsx
+const {isOpen, onOpenChange} = useDisclosure({
+  isOpen: controlledIsOpen,
+  onChange: (isOpen) => setControlledIsOpen(isOpen)
+});
+```
+
+**v3:**
+```tsx
+const state = useOverlayState({
+  isOpen: controlledIsOpen,
+  onOpenChange: setControlledIsOpen
+});
+```
+
+#### Uncontrolled State
+
+**v2:**
+```tsx
+const {isOpen, onOpen, onClose} = useDisclosure({
+  defaultOpen: false
+});
+```
+
+**v3:**
+```tsx
+const state = useOverlayState({
+  defaultOpen: false
+});
+// Use state.open(), state.close(), state.toggle()
+```
+
+### API Differences
+
+| v2 (useDisclosure) | v3 (useOverlayState) | Notes |
+|-------------------|---------------------|-------|
+| `isOpen` | `isOpen` | Same |
+| `onOpen()` | `open()` | Renamed method |
+| `onClose()` | `close()` | Renamed method |
+| `onOpenChange()` | `toggle()` | New method for toggling |
+| `onOpenChange` (prop) | `setOpen(boolean)` | Different API |
+| `isControlled` | - | Removed (handled internally) |
+| `getButtonProps()` | - | Removed (use compound components) |
+| `getDisclosureProps()` | - | Removed (use compound components) |
+
+### Benefits of useOverlayState
+
+- **Cleaner API**: Dedicated methods (`open()`, `close()`, `toggle()`) instead of callbacks
+- **Simpler state management**: Works seamlessly with both controlled and uncontrolled patterns
+- **Better TypeScript support**: Improved type inference and autocomplete
+- **Consistent with React Aria**: Aligns with React Aria Components patterns
+
+### Alternative: useState
+
+For simple cases, you can also use React's `useState` directly:
+
+```tsx
+import { useState } from "react";
+import { Modal, Button } from "@heroui/react";
+
+export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Modal>
+      <Button onPress={() => setIsOpen(true)}>Open</Button>
+      <Modal.Container isOpen={isOpen} onOpenChange={setIsOpen}>
+        <Modal.Dialog>
+          {/* content */}
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal>
+  );
+}
+```
+
+However, `useOverlayState` provides a cleaner API with dedicated methods for common operations.
+
+## Removed Hooks
+
+The following hooks from v2 have been removed in v3:
+
+- **useDraggable**: Removed
+- **useClipboard**: Removed
+- **usePagination**: Removed
+- **useToast**: Removed
+
+## Summary
+
+- **Component hooks** (`useSwitch`, `useInput`, etc.) → Use **compound components** instead
+- **useDisclosure** → Use **useOverlayState** for overlay state management
+- **useOverlayState** provides a cleaner API with `open()`, `close()`, `toggle()`, and `setOpen()` methods
+- **Removed hooks**: `useDraggable`, `useClipboard`, `usePagination`, `useToast` are no longer available
+- For simple cases, `useState` can be used directly, but `useOverlayState` offers better ergonomics
+
+For component-specific hook migration examples, refer to the individual component migration guides.

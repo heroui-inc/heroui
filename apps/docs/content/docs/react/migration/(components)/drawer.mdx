@@ -1,0 +1,427 @@
+---
+title: Drawer
+description: Migration guide for Drawer from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 Drawer documentation](/docs/react/components/drawer) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `Drawer` shared the same API as `Modal`, using `DrawerContent`, `DrawerHeader`, `DrawerBody`, and `DrawerFooter` with a render callback pattern:
+
+```tsx
+import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Button, useDisclosure } from "@heroui/react";
+
+export default function App() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  return (
+    <>
+      <Button onPress={onOpen}>Open Drawer</Button>
+      <Drawer isOpen={isOpen} onOpenChange={onOpenChange} placement="right">
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader>Drawer Title</DrawerHeader>
+              <DrawerBody>
+                <p>Drawer content goes here.</p>
+              </DrawerBody>
+              <DrawerFooter>
+                <Button onPress={onClose}>Close</Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+```
+
+In v3, Drawer uses a compound component pattern with explicit subcomponents and built-in trigger support:
+
+```tsx
+import { Drawer, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Drawer>
+      <Button>Open Drawer</Button>
+      <Drawer.Backdrop>
+        <Drawer.Content placement="right">
+          <Drawer.Dialog>
+            <Drawer.Handle />
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Drawer Title</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>
+              <p>Drawer content goes here.</p>
+            </Drawer.Body>
+            <Drawer.Footer>
+              <Button slot="close">Close</Button>
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** `Drawer` wrapping `DrawerContent` with a render callback pattern; separate trigger via `useDisclosure`
+**v3:** Compound components: `Drawer`, `Drawer.Backdrop`, `Drawer.Content`, `Drawer.Dialog`, `Drawer.Header`, `Drawer.Heading`, `Drawer.Body`, `Drawer.Footer`, `Drawer.Handle`, `Drawer.CloseTrigger`. Trigger is the first child of `Drawer`.
+
+### 2. Trigger Pattern
+
+**v2:** External trigger using `useDisclosure` hook with `isOpen`/`onOpenChange`
+**v3:** Built-in trigger — first child of `Drawer` becomes the trigger automatically. Controlled state available via `useOverlayState` hook.
+
+### 3. New Features in v3
+
+- **Drag to dismiss**: Built-in pointer-based drag gestures on handle, header, and footer areas
+- **Drag handle**: `Drawer.Handle` component for visual drag indicator
+- **Built-in close trigger**: `Drawer.CloseTrigger` renders a close button
+- **Slot-based close**: Buttons with `slot="close"` automatically close the drawer
+
+### 4. Prop Changes
+
+| v2 Prop | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `isOpen` | `Drawer.Backdrop` `isOpen` | Or use `useOverlayState` |
+| `onOpenChange` | `Drawer.Backdrop` `onOpenChange` | Or use `useOverlayState` |
+| `onClose` | - | Use `onOpenChange` or `slot="close"` on buttons |
+| `placement` | `Drawer.Content` `placement` | `"right"` → `"right"`, `"left"` → `"left"`, `"top"` → `"top"`, `"bottom"` → `"bottom"`. Default changed from `"right"` to `"bottom"` |
+| `size` | - | Removed (use Tailwind CSS on `Drawer.Dialog`) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `backdrop` | `Drawer.Backdrop` `variant` | Same values: `"opaque"`, `"blur"`, `"transparent"` |
+| `isDismissable` | `Drawer.Backdrop` `isDismissable` | Same |
+| `isKeyboardDismissDisabled` | `Drawer.Backdrop` `isKeyboardDismissDisabled` | Same |
+| `shouldBlockScroll` | - | Always blocks scroll in v3 |
+| `hideCloseButton` | - | Omit `Drawer.CloseTrigger` to hide |
+| `closeButton` | - | Pass custom content to `Drawer.CloseTrigger` |
+| `motionProps` | - | Removed (CSS-based animations in v3) |
+| `disableAnimation` | - | Removed |
+| `portalContainer` | - | Removed |
+| `classNames` | - | Use `className` on individual compound components |
+
+### 5. Hook Changes
+
+**v2:** `useDisclosure` hook for open/close state
+**v3:** `useOverlayState` hook (replaces `useDisclosure`)
+
+```tsx
+// v2
+const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+// v3
+const state = useOverlayState();
+// state.isOpen, state.open(), state.close(), state.toggle()
+```
+
+## Migration Examples
+
+### Basic Drawer
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Button, useDisclosure } from "@heroui/react";
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    <>
+      <Button onPress={onOpen}>Open</Button>
+      <Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader>Title</DrawerHeader>
+              <DrawerBody>Content</DrawerBody>
+              <DrawerFooter>
+                <Button onPress={onClose}>Close</Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Drawer, Button } from "@heroui/react";
+
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop>
+        <Drawer.Content>
+          <Drawer.Dialog>
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Title</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Content</Drawer.Body>
+            <Drawer.Footer>
+              <Button slot="close">Close</Button>
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+### Placement
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Drawer isOpen={isOpen} onOpenChange={onOpenChange} placement="left">
+      <DrawerContent>
+        {(onClose) => (
+          <>
+            <DrawerHeader>Left Drawer</DrawerHeader>
+            <DrawerBody>Content</DrawerBody>
+          </>
+        )}
+      </DrawerContent>
+    </Drawer>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop>
+        <Drawer.Content placement="left">
+          <Drawer.Dialog>
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Left Drawer</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Content</Drawer.Body>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+### Backdrop Variant
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Drawer isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
+      <DrawerContent>
+        {(onClose) => (
+          <>
+            <DrawerHeader>Blurred Backdrop</DrawerHeader>
+            <DrawerBody>Content</DrawerBody>
+          </>
+        )}
+      </DrawerContent>
+    </Drawer>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop variant="blur">
+        <Drawer.Content>
+          <Drawer.Dialog>
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Blurred Backdrop</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Content</Drawer.Body>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useDisclosure } from "@heroui/react";
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    <>
+      <Button onPress={onOpen}>Open</Button>
+      <Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader>Controlled</DrawerHeader>
+              <DrawerBody>Content</DrawerBody>
+              <DrawerFooter>
+                <Button onPress={onClose}>Close</Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useOverlayState } from "@heroui/react";
+
+    const state = useOverlayState();
+
+    <>
+      <Button onPress={state.open}>Open</Button>
+      <Drawer state={state}>
+        <Drawer.Backdrop>
+          <Drawer.Content>
+            <Drawer.Dialog>
+              <Drawer.CloseTrigger />
+              <Drawer.Header>
+                <Drawer.Heading>Controlled</Drawer.Heading>
+              </Drawer.Header>
+              <Drawer.Body>Content</Drawer.Body>
+              <Drawer.Footer>
+                <Button onPress={state.close}>Close</Button>
+              </Drawer.Footer>
+            </Drawer.Dialog>
+          </Drawer.Content>
+        </Drawer.Backdrop>
+      </Drawer>
+    </>
+    ```
+  </Tab>
+</Tabs>
+
+### Non-Dismissable
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Drawer
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      isDismissable={false}
+      hideCloseButton
+    >
+      <DrawerContent>
+        {(onClose) => (
+          <>
+            <DrawerHeader>Confirm Action</DrawerHeader>
+            <DrawerBody>Are you sure?</DrawerBody>
+            <DrawerFooter>
+              <Button onPress={onClose}>Confirm</Button>
+            </DrawerFooter>
+          </>
+        )}
+      </DrawerContent>
+    </Drawer>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop isDismissable={false}>
+        <Drawer.Content>
+          <Drawer.Dialog>
+            <Drawer.Header>
+              <Drawer.Heading>Confirm Action</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Are you sure?</Drawer.Body>
+            <Drawer.Footer>
+              <Button slot="close">Confirm</Button>
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Drawer
+  classNames={{
+    wrapper: "custom-wrapper",
+    base: "custom-base",
+    backdrop: "custom-backdrop",
+    header: "custom-header",
+    body: "custom-body",
+    footer: "custom-footer",
+    closeButton: "custom-close",
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<Drawer>
+  <Button>Open</Button>
+  <Drawer.Backdrop className="custom-backdrop">
+    <Drawer.Content>
+      <Drawer.Dialog className="custom-base">
+        <Drawer.CloseTrigger className="custom-close" />
+        <Drawer.Header className="custom-header">
+          <Drawer.Heading>Title</Drawer.Heading>
+        </Drawer.Header>
+        <Drawer.Body className="custom-body">Content</Drawer.Body>
+        <Drawer.Footer className="custom-footer">Actions</Drawer.Footer>
+      </Drawer.Dialog>
+    </Drawer.Content>
+  </Drawer.Backdrop>
+</Drawer>
+```
+
+## Component Anatomy
+
+The v3 Drawer follows this structure:
+
+```
+Drawer (Root)
+  ├── [Trigger element] (first child becomes trigger)
+  └── Drawer.Backdrop
+      └── Drawer.Content (placement)
+          └── Drawer.Dialog
+              ├── Drawer.Handle (optional, drag indicator)
+              ├── Drawer.CloseTrigger (optional, close button)
+              ├── Drawer.Header
+              │   └── Drawer.Heading
+              ├── Drawer.Body (scrollable)
+              └── Drawer.Footer
+```
+
+## Summary
+
+1. **Component Structure**: Render callback pattern → compound components with explicit subcomponents
+2. **Trigger Pattern**: External `useDisclosure` + `onPress` → built-in trigger (first child of `Drawer`)
+3. **State Hook**: `useDisclosure` → `useOverlayState` with `open()`, `close()`, `toggle()` methods
+4. **Placement**: Prop on `Drawer` → prop on `Drawer.Content`. Default changed from `"right"` to `"bottom"`
+5. **Backdrop**: `backdrop` prop → `Drawer.Backdrop` `variant` prop
+6. **Close Button**: `hideCloseButton`/`closeButton` props → omit or customize `Drawer.CloseTrigger`
+7. **Slot-Based Close**: Buttons with `slot="close"` automatically close the drawer
+8. **New Features**: Drag-to-dismiss with `Drawer.Handle`, velocity-based dismissal
+9. **Animations**: `motionProps` (Framer Motion) → CSS-based animations
+10. **Styling Props Removed**: `size`, `radius` → use Tailwind CSS
+11. **ClassNames Removed**: Use `className` on individual compound components

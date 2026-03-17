@@ -1,0 +1,140 @@
+---
+title: MCP Server
+description: Access HeroUI v2 to v3 migration guides in your AI assistant
+---
+
+The HeroUI Migration MCP Server gives AI assistants direct access to HeroUI v2 to v3 migration documentation.
+
+The Migration MCP server uses **Streamable HTTP transport** (URL-based) and is deployed at `https://migration-mcp.heroui.com`. View the source code on [GitHub](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
+
+<Callout>
+  The Migration MCP is for **migration only**. After completing migration, switch to the [HeroUI React MCP Server](/docs/react/getting-started/mcp-server) for v3 component development.
+</Callout>
+
+## Quick Setup
+
+### Cursor
+
+Add to **Cursor Settings** → **Tools** → **MCP Servers** or your project's `.cursor/mcp.json`:
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+To learn more, see the [Cursor documentation](https://cursor.com/docs/context/mcp).
+
+### Claude Code
+
+Add to your project's `.mcp.json` file:
+
+```json title=".mcp.json"
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+After adding the configuration, restart Claude Code and run `/mcp` to see the HeroUI Migration MCP server in the list. If you see **Connected**, you're ready to use it.
+
+See the [Claude Code MCP documentation](https://docs.claude.com/en/docs/claude-code/mcp) for more details.
+
+### Windsurf
+
+Add the Migration MCP server to your project's `.windsurf/mcp.json` configuration file:
+
+```json title=".windsurf/mcp.json"
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+After adding the configuration, restart Windsurf to activate the MCP server.
+
+See the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp) for more details.
+
+### Zed
+
+Add the Migration MCP server to your `settings.json` configuration file. Open settings via Command Palette (`zed: open settings`) or use `Cmd-,` (Mac) / `Ctrl-,` (Linux):
+
+```json title="settings.json"
+{
+  "context_servers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+See the [Zed MCP documentation](https://zed.dev/docs/ai/mcp) for more details.
+
+### VS Code
+
+To configure MCP in VS Code with GitHub Copilot, add the Migration MCP server to your project's `.vscode/mcp.json` configuration file:
+
+```json title=".vscode/mcp.json"
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+After adding the configuration, open `.vscode/mcp.json` and click **Start** next to the heroui-migration server.
+
+See the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) for more details.
+
+## Usage
+
+Once configured, ask your AI assistant questions like:
+
+- "Help me migrate Button from HeroUI v2 to v3"
+- "Get the full migration workflow for my project"
+- "What are the Checkbox migration changes?"
+- "Show me the migration guide for Card and Modal"
+- "Get the styling migration guide"
+- "What hooks do I need to migrate?"
+
+## Available Tools
+
+The Migration MCP server provides these tools to AI assistants:
+
+| Tool | Description |
+|------|-------------|
+| `get_migration_workflow` | Get the comprehensive migration guide. Use `migrationType: "full"` (default) or `"incremental"` for full vs incremental migration approach |
+| `list_component_migration_guides` | List all 39 available component migration guides |
+| `get_component_migration_guides` | Get migration guides for specific components. Pass `components: ["button", "card"]` (kebab-case) |
+| `get_styling_migration_guide` | Get the styling migration guide (utility classes, color tokens, CSS variables) |
+| `get_hooks_migration_guide` | Get the hooks migration guide (useDisclosure → useOverlayState, etc.) |
+
+## Available Prompts
+
+The Migration MCP server provides guided prompts that can be used with slash commands in your agent chat:
+
+| Prompt | Description |
+|--------|-------------|
+| `analyze-and-plan` | Analyze the project to identify all HeroUI v2 components and create a migration plan. Use this as the first step in migration. Optional: `migrationType: "full"` (default) or `"incremental"` |
+| `implement-migration` | Implement component migrations phase by phase with checkpoints for user approval. Migrates components, switches dependencies, then guides through hooks and styling. Optional: `migrationType: "full"` (default) or `"incremental"` |
+
+**Workflow:** Run `analyze-and-plan` first to create your migration plan, then use `implement-migration` to execute it step by step.
+
+## Links
+
+- [GitHub Repository](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp)
+- [Discord Community](https://discord.gg/9b6yyZKmH4)
+- [Model Context Protocol](https://modelcontextprotocol.io/) - Learn about MCP

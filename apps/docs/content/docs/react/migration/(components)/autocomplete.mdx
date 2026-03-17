@@ -1,0 +1,584 @@
+---
+title: Autocomplete
+description: Migration guide for Autocomplete from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  In v3, the v2 `Autocomplete` can be migrated to either the [v3 Autocomplete](/docs/react/components/autocomplete) or the [v3 ComboBox](/docs/react/components/combo-box), depending on your use case. See the section below on choosing the right component. This guide focuses on migrating from HeroUI v2.
+</Callout>
+
+## Choosing Between Autocomplete and ComboBox
+
+V3 provides two components that replace the v2 Autocomplete:
+
+| Component | Best For | Input Style | Built on |
+|-----------|----------|-------------|----------|
+| **Autocomplete** | Select-style picker with a search/filter field inside the popover | Button trigger that shows selected value; search input inside popover | React Aria `Select` + `Autocomplete` |
+| **ComboBox** | Text input that filters a dropdown list as you type | Inline text input with dropdown trigger | React Aria `ComboBox` |
+
+**Use Autocomplete** when the user picks from a predefined list and the search field should appear inside the dropdown (similar to a searchable select).
+
+**Use ComboBox** when the user types directly into a visible input field to filter or search options (similar to v2 behavior).
+
+## Structure Changes
+
+In v2, Autocomplete was a single component that wrapped Input internally:
+
+```tsx
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Autocomplete label="Select an animal">
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+  );
+}
+```
+
+### Migrating to v3 ComboBox (closest to v2 behavior)
+
+ComboBox provides the most similar experience to the v2 Autocomplete, with an inline text input that filters options:
+
+```tsx
+import { ComboBox, Input, Label, ListBox } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ComboBox>
+      <Label>Select an animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+  );
+}
+```
+
+### Migrating to v3 Autocomplete (searchable select)
+
+Autocomplete provides a select-style trigger with a search/filter field inside the popover:
+
+```tsx
+import { Autocomplete, Label, SearchField, ListBox, useFilter } from "@heroui/react";
+
+export default function App() {
+  const { contains } = useFilter({ sensitivity: "base" });
+
+  return (
+    <Autocomplete>
+      <Label>Select an animal</Label>
+      <Autocomplete.Trigger>
+        <Autocomplete.Value />
+        <Autocomplete.ClearButton />
+        <Autocomplete.Indicator />
+      </Autocomplete.Trigger>
+      <Autocomplete.Popover>
+        <Autocomplete.Filter filter={contains}>
+          <SearchField>
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input placeholder="Search..." />
+            </SearchField.Group>
+          </SearchField>
+          <ListBox>
+            <ListBox.Item id="cat" textValue="Cat">
+              Cat
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="dog" textValue="Dog">
+              Dog
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Autocomplete.Filter>
+      </Autocomplete.Popover>
+    </Autocomplete>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Two Replacement Components
+
+**v2:** `Autocomplete` (single component)
+**v3:** `ComboBox` (inline input + dropdown) or `Autocomplete` (select-style with search in popover)
+
+### 2. Component Structure
+
+**v2:** Single component with internal Input
+**v3 ComboBox:** Compound components (`ComboBox.InputGroup`, `ComboBox.Trigger`, `ComboBox.Popover`)
+**v3 Autocomplete:** Compound components (`Autocomplete.Trigger`, `Autocomplete.Value`, `Autocomplete.ClearButton`, `Autocomplete.Indicator`, `Autocomplete.Popover`, `Autocomplete.Filter`)
+
+### 3. Item Components
+
+**v2:** `AutocompleteItem`, `AutocompleteSection`
+**v3:** `ListBox.Item`, `ListBox.Section` (from ListBox component)
+
+### 4. Item Identification
+
+**v2:** React's `key` was used for both list reconciliation and item identity (selection).
+**v3:** Use `id` and `textValue` on `ListBox.Item` (state and accessibility); keep React's `key` on items in lists.
+
+### 5. Autocomplete-Specific Subcomponents (v3)
+
+The v3 Autocomplete introduces several subcomponents not present in v2:
+
+| Subcomponent | Purpose |
+|--------------|---------|
+| `Autocomplete.Trigger` | The button group that opens the popover |
+| `Autocomplete.Value` | Displays the currently selected value or placeholder |
+| `Autocomplete.ClearButton` | Clears the current selection |
+| `Autocomplete.Indicator` | Dropdown chevron icon (rotates when open) |
+| `Autocomplete.Popover` | The dropdown popover container |
+| `Autocomplete.Filter` | Wraps `SearchField` and `ListBox` to enable filtering; accepts a `filter` function, `inputValue`, and `onInputChange` |
+
+### 6. SearchField Integration
+
+The v3 Autocomplete uses `SearchField` inside `Autocomplete.Filter` for the search input within the popover:
+
+```tsx
+<Autocomplete.Filter filter={contains}>
+  <SearchField>
+    <SearchField.Group>
+      <SearchField.SearchIcon />
+      <SearchField.Input placeholder="Search..." />
+    </SearchField.Group>
+  </SearchField>
+  <ListBox>...</ListBox>
+</Autocomplete.Filter>
+```
+
+`SearchField` has its own subcomponents: `SearchField.Group`, `SearchField.Input`, `SearchField.SearchIcon`, and `SearchField.ClearButton`.
+
+### 7. useFilter Hook
+
+The v3 Autocomplete uses the `useFilter` hook (from React Aria, re-exported by `@heroui/react`) to provide locale-aware filtering functions:
+
+```tsx
+import { useFilter } from "@heroui/react";
+
+const { contains } = useFilter({ sensitivity: "base" });
+
+// Pass to Autocomplete.Filter
+<Autocomplete.Filter filter={contains}>
+  ...
+</Autocomplete.Filter>
+```
+
+The hook returns `contains`, `startsWith`, and `endsWith` functions. The `sensitivity` option controls locale-aware matching (`"base"`, `"accent"`, `"case"`, `"variant"`).
+
+### 8. Prop Changes (ComboBox)
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| - | `id` (on ListBox.Item) | Item identifier for state |
+| - | `textValue` (on ListBox.Item) | For accessibility (type-ahead) |
+| `label` | `Label` | Use `Label` component |
+| `description` | `Description` | Use `Description` component |
+| `placeholder` | `Input` | `placeholder` on Input |
+| `selectedKey`, `onSelectionChange`, `inputValue`, `onInputChange` | `ComboBox` | Same |
+| `allowsCustomValue`, `allowsEmptyCollection`, `defaultFilter` | `ComboBox` | Same |
+| `disabledKeys`, `isDisabled`, `isRequired`, `isInvalid`, `name` | `ComboBox` | Same |
+| `menuTrigger` | `ComboBox` | `"focus"` (default), `"input"`, or `"manual"` |
+| `variant`, `color`, `size`, `radius` | - | Removed (use Tailwind CSS) |
+| `labelPlacement` | - | Removed (use Label positioning) |
+| `startContent`, `endContent` | - | Add to Input or InputGroup |
+| `selectorIcon`, `clearIcon` | - | Customize ComboBox.Trigger or implement manually |
+| `isClearable` | - | Implement manually |
+| `showScrollIndicators` | - | Removed |
+| `classNames` | - | Use `className` on parts |
+| `popoverProps`, `listboxProps`, `inputProps` | - | Configure components directly |
+| `scrollShadowProps`, `scrollRef` | - | Removed |
+| `selectorButtonProps`, `clearButtonProps`, `disableSelectorIconRotation` | - | Removed |
+| `isReadOnly` | `ComboBox` | `isReadOnly` prop on ComboBox |
+| `fullWidth` | `ComboBox` | `fullWidth` prop on ComboBox |
+| `isVirtualized`, `maxListboxHeight`, `itemHeight` | - | Removed |
+| `onClose`, `onClear` | - | Use other event handlers |
+| `validationBehavior`, `validate` | `ComboBox` | Props on ComboBox |
+
+### 9. Prop Changes (Autocomplete)
+
+| v2 Prop | v3 Location | Notes |
+|---------|-------------|-------|
+| - | `id` (on ListBox.Item) | Item identifier for state |
+| - | `textValue` (on ListBox.Item) | For accessibility (type-ahead) |
+| `label` | `Label` | Use `Label` component |
+| `description` | `Description` | Use `Description` component |
+| `placeholder` | `Autocomplete` | `placeholder` prop on root |
+| `selectedKey` / `onSelectionChange` | `value` / `onChange` | Renamed props on Autocomplete |
+| `selectionMode` | `Autocomplete` | `"single"` (default) or `"multiple"` |
+| `inputValue`, `onInputChange` | `Autocomplete.Filter` | `inputValue` and `onInputChange` on Filter |
+| `disabledKeys`, `isDisabled`, `isRequired`, `isInvalid`, `name` | `Autocomplete` | Same |
+| `variant`, `color`, `size`, `radius` | - | Removed (use Tailwind CSS); `variant` supports `"primary"` / `"secondary"` |
+| `isClearable` | `Autocomplete.ClearButton` | Built-in subcomponent |
+| `selectorIcon` | `Autocomplete.Indicator` | Pass custom icon as children |
+| `onClear` | `Autocomplete` | `onClear` prop on root |
+| `fullWidth` | `Autocomplete` | `fullWidth` prop on root |
+| `classNames` | - | Use `className` on parts |
+| `popoverProps`, `listboxProps`, `inputProps` | - | Configure components directly |
+
+## Migration Examples
+
+### Controlled Selection (ComboBox)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKey, setSelectedKey] = useState("cat");
+
+    <Autocomplete
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+      label="Animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import type { Key } from "@heroui/react";
+
+    const [selectedKey, setSelectedKey] = useState<Key | null>("cat");
+
+    <ComboBox
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+    >
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled Selection (Autocomplete)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKey, setSelectedKey] = useState("cat");
+
+    <Autocomplete
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+      label="Animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import type { Key } from "@heroui/react";
+    import { Autocomplete, Label, SearchField, ListBox, useFilter } from "@heroui/react";
+
+    const [value, setValue] = useState<Key | Key[] | null>("cat");
+    const { contains } = useFilter({ sensitivity: "base" });
+
+    <Autocomplete value={value} onChange={setValue}>
+      <Label>Animal</Label>
+      <Autocomplete.Trigger>
+        <Autocomplete.Value />
+        <Autocomplete.ClearButton />
+        <Autocomplete.Indicator />
+      </Autocomplete.Trigger>
+      <Autocomplete.Popover>
+        <Autocomplete.Filter filter={contains}>
+          <SearchField>
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input placeholder="Search..." />
+            </SearchField.Group>
+          </SearchField>
+          <ListBox>
+            <ListBox.Item id="cat" textValue="Cat">
+              <Label>Cat</Label>
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="dog" textValue="Dog">
+              <Label>Dog</Label>
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Autocomplete.Filter>
+      </Autocomplete.Popover>
+    </Autocomplete>
+    ```
+  </Tab>
+</Tabs>
+
+### With Sections
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete label="Country">
+      <AutocompleteSection title="North America">
+        <AutocompleteItem key="usa">United States</AutocompleteItem>
+        <AutocompleteItem key="canada">Canada</AutocompleteItem>
+      </AutocompleteSection>
+      <AutocompleteSection title="Europe">
+        <AutocompleteItem key="uk">United Kingdom</AutocompleteItem>
+      </AutocompleteSection>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Header, Separator } from "@heroui/react";
+
+    <ComboBox>
+      <Label>Country</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search countries..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Section>
+            <Header>North America</Header>
+            <ListBox.Item id="usa" textValue="United States">
+              United States
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="canada" textValue="Canada">
+              Canada
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox.Section>
+          <Separator />
+          <ListBox.Section>
+            <Header>Europe</Header>
+            <ListBox.Item id="uk" textValue="United Kingdom">
+              United Kingdom
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox.Section>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### With useFilter (Autocomplete)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 handled filtering internally */}
+    <Autocomplete label="Animal">
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Autocomplete, Label, SearchField, ListBox, useFilter } from "@heroui/react";
+
+    function FilterExample() {
+      const { contains } = useFilter({ sensitivity: "base" });
+
+      return (
+        <Autocomplete>
+          <Label>Animal</Label>
+          <Autocomplete.Trigger>
+            <Autocomplete.Value />
+            <Autocomplete.ClearButton />
+            <Autocomplete.Indicator />
+          </Autocomplete.Trigger>
+          <Autocomplete.Popover>
+            <Autocomplete.Filter filter={contains}>
+              <SearchField>
+                <SearchField.Group>
+                  <SearchField.SearchIcon />
+                  <SearchField.Input placeholder="Search..." />
+                </SearchField.Group>
+              </SearchField>
+              <ListBox>
+                <ListBox.Item id="cat" textValue="Cat">
+                  <Label>Cat</Label>
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="dog" textValue="Dog">
+                  <Label>Dog</Label>
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </Autocomplete.Filter>
+          </Autocomplete.Popover>
+        </Autocomplete>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Form Validation
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Required field */}
+    <Autocomplete label="Animal" isRequired>
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+
+    {/* With error message */}
+    <Autocomplete
+      label="Animal"
+      isInvalid
+      errorMessage="Please select an animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { FieldError, Form } from "@heroui/react";
+
+    {/* Required field */}
+    <Form>
+      <ComboBox isRequired name="animal">
+        <Label>Animal</Label>
+        <ComboBox.InputGroup>
+          <Input placeholder="Search animals..." />
+          <ComboBox.Trigger />
+        </ComboBox.InputGroup>
+        <ComboBox.Popover>
+          <ListBox>
+            <ListBox.Item id="cat" textValue="Cat">
+              Cat
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </ComboBox.Popover>
+        <FieldError />
+      </ComboBox>
+    </Form>
+
+    {/* With error message */}
+    <ComboBox isInvalid>
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+      <FieldError>Please select an animal</FieldError>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+## Component Anatomy
+
+### ComboBox Anatomy
+
+```
+ComboBox (Root)
+  ├── Label
+  ├── ComboBox.InputGroup
+  │   ├── Input
+  │   └── ComboBox.Trigger
+  ├── Description (optional)
+  ├── ComboBox.Popover
+  │   └── ListBox
+  │       ├── ListBox.Item
+  │       │   ├── [Content]
+  │       │   └── ListBox.ItemIndicator (optional)
+  │       └── ListBox.Section (optional)
+  │           ├── Header
+  │           └── ListBox.Item
+  └── FieldError (optional)
+```
+
+### Autocomplete Anatomy
+
+```
+Autocomplete (Root)
+  ├── Label
+  ├── Autocomplete.Trigger
+  │   ├── Autocomplete.Value
+  │   ├── Autocomplete.ClearButton
+  │   └── Autocomplete.Indicator
+  ├── Description (optional)
+  ├── Autocomplete.Popover
+  │   └── Autocomplete.Filter
+  │       ├── SearchField
+  │       │   └── SearchField.Group
+  │       │       ├── SearchField.SearchIcon
+  │       │       └── SearchField.Input
+  │       └── ListBox
+  │           ├── ListBox.Item
+  │           │   ├── [Content]
+  │           │   └── ListBox.ItemIndicator (optional)
+  │           └── ListBox.Section (optional)
+  │               ├── Header
+  │               └── ListBox.Item
+  └── FieldError (optional)
+```
+
+## Summary
+
+1. **Two Replacement Components**: v2 `Autocomplete` can be migrated to v3 `ComboBox` (inline input) or v3 `Autocomplete` (searchable select with filter in popover)
+2. **Component Structure**: Single component with props becomes compound components with explicit subcomponents
+3. **Item Components**: `AutocompleteItem` becomes `ListBox.Item`; `AutocompleteSection` becomes `ListBox.Section`
+4. **Item Identity**: Use `id` and `textValue` on items; keep React's `key` for list reconciliation
+5. **Input**: v3 ComboBox requires explicit `Input`; v3 Autocomplete uses `SearchField` inside `Autocomplete.Filter`
+6. **Label/Description**: Props become separate `Label` and `Description` components
+7. **Filtering**: v3 Autocomplete uses `Autocomplete.Filter` with `useFilter` hook for locale-aware filtering; v3 ComboBox uses `defaultFilter` prop
+8. **Clear Button**: v3 Autocomplete has built-in `Autocomplete.ClearButton`; v3 ComboBox requires manual implementation
+9. **Selection Value Display**: v3 Autocomplete has `Autocomplete.Value` for displaying the selected value with render prop support
+10. **Styling Props Removed**: `color`, `size`, `radius` removed (use Tailwind CSS); `variant` now supports `"primary"` / `"secondary"`
+11. **ClassNames Object Removed**: Use `className` props on individual subcomponents
+12. **useFilter Hook**: New in v3, provides `contains`, `startsWith`, `endsWith` for locale-aware text matching
