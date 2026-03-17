@@ -4,7 +4,12 @@
 
   /* Breadcrumb link */
   .breadcrumbs__link {
-    @apply relative px-0.5 text-sm leading-5 font-medium text-muted opacity-100;
+    @apply relative px-0.5 text-sm leading-5 font-medium text-muted no-underline opacity-100;
+
+    &:hover,
+    &[data-hovered="true"] {
+      @apply underline;
+    }
 
     &[data-current="true"] {
       @apply text-link opacity-100;
