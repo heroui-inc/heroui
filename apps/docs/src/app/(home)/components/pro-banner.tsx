@@ -17,7 +17,8 @@ interface DiscountData {
 }
 
 const PRO_API_URL = env.NEXT_PUBLIC_PRO_API_URL;
-const SHOW_BANNER = env.NEXT_PUBLIC_SHOW_PRE_SALE_BANNER;
+
+export const SHOW_BANNER = env.NEXT_PUBLIC_SHOW_PRE_SALE_BANNER;
 
 const HEROUI_PRO_URL = env.NEXT_PUBLIC_HEROUI_PRO_URL ?? "https://heroui.pro";
 
