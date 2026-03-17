@@ -7,9 +7,11 @@ import {GitHubIcon} from "@/icons/github";
 
 import {DemoShowcase} from "./components/demo-showcase";
 import {ProBadge} from "./components/pro-badge";
-import {ProBanner} from "./components/pro-banner";
+import {ProBanner, SHOW_BANNER} from "./components/pro-banner";
 
 const ProChip = () => {
+  if (!SHOW_BANNER) return null;
+
   return (
     <a
       className="chip animate-shine relative gap-1 rounded-full bg-accent/10 px-2 py-1 text-xs text-accent"
