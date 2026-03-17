@@ -21,7 +21,7 @@ export function OnSurface() {
         <ComboBox isRequired className="w-full" name="animal">
           <Label>Favorite Animal</Label>
           <ComboBox.InputGroup>
-            <Input placeholder="Search animals..." />
+            <Input placeholder="Search animals..." variant="secondary" />
             <ComboBox.Trigger />
           </ComboBox.InputGroup>
           <ComboBox.Popover>
