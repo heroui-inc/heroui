@@ -112,11 +112,16 @@ export default function CustomSearchDialog(props: SharedProps) {
     const tagPrefix = selectedTag === "web" ? "/docs/react/" : "/docs/native/";
     const releasePrefix =
       selectedTag === "web" ? "/docs/react/releases/" : "/docs/native/releases/";
+    const migrationPrefix = "/docs/react/migration";
 
     for (const page of allPages) {
+      const isMigrationSubPage =
+        page.url?.startsWith(migrationPrefix) && page.url !== migrationPrefix;
+
       if (
         page.url?.startsWith(tagPrefix) &&
         !page.url.startsWith(releasePrefix) &&
+        !isMigrationSubPage &&
         typeof page.name === "string"
       ) {
         map.set(page.name.toLowerCase(), page);
@@ -183,11 +188,20 @@ export default function CustomSearchDialog(props: SharedProps) {
     return `/docs/${selectedTag === "web" ? "react" : "native"}/releases`;
   }, [selectedTag]);
 
+  const migrationPath = "/docs/react/migration";
+
   const queryData = useMemo(() => {
     if (!query.data || query.data === "empty") return null;
 
-    return query.data.filter((item) => !item.url.startsWith(releasesPath));
-  }, [query.data, releasesPath]);
+    return query.data.filter((item) => {
+      if (item.url.startsWith(releasesPath)) return false;
+      if (item.url.startsWith(migrationPath) && item.url !== migrationPath) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [query.data, releasesPath, migrationPath]);
 
   return (
     <SearchDialog
