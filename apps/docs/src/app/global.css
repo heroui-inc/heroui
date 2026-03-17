@@ -7,6 +7,30 @@
 @import "fumadocs-ui/css/preset.css";
 @import "@heroui/styles";
 
+@keyframes float-stars {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-40px) translateX(40px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes float-stars-reverse {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(40px) translateX(-40px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
 /* ============================================================================
    CSS VARIABLES - ROOT & THEMES
    ============================================================================ */
@@ -543,6 +567,15 @@ code {
    ANIMATIONS & KEYFRAMES
    ============================================================================ */
 
+@keyframes shine {
+  0% {
+    translate: -100% 0;
+  }
+  100% {
+    translate: 100% 0;
+  }
+}
+
 @keyframes scrolling-banner {
   from {
     transform: translateX(0);
@@ -597,6 +630,27 @@ code {
 
 .animate-scrolling-banner-vertical {
   animation: scrolling-banner-vertical var(--duration) linear infinite;
+}
+
+@utility animate-shine {
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.3) 45%,
+      rgba(255, 255, 255, 0.1) 55%,
+      transparent 90%
+    );
+    animation: shine 3s ease-in-out infinite;
+    pointer-events: none;
+  }
 }
 
 @utility mask-to-t {

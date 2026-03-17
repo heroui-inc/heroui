@@ -33,11 +33,18 @@ export {
 
 export const tabs = [
   {disabled: false, label: "components"},
-  {disabled: true, label: "dashboard"},
-  {disabled: true, label: "mail"},
-  {disabled: true, label: "chat"},
-  {disabled: true, label: "finances"},
+  {disabled: false, label: "dashboard"},
+  {disabled: false, label: "mail"},
+  {disabled: false, label: "chat"},
+  {disabled: false, label: "finances"},
 ];
+
+export const iframeTabs: Record<string, string> = {
+  chat: "https://heroui.pro/templates/chat",
+  dashboard: "https://heroui.pro/templates/dashboard",
+  finances: "http://localhost:3001/templates/finances",
+  mail: "https://heroui.pro/templates/mail",
+};
 
 /**
  * Adaptive colors that need different values in light vs dark modes.
