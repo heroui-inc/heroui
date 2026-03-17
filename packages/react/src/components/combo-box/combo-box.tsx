@@ -35,6 +35,11 @@ const ComboBoxContext = createContext<ComboBoxContext>({});
 interface ComboBoxRootProps<T extends object>
   extends ComponentPropsWithRef<typeof ComboBoxPrimitive<T>>, ComboBoxVariants {
   items?: Iterable<T>;
+  /**
+   * The variant of the combo box.
+   * @default "primary"
+   */
+  variant?: "primary" | "secondary";
 }
 
 const ComboBoxRoot = <T extends object = object>({
