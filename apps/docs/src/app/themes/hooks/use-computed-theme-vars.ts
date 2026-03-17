@@ -23,9 +23,16 @@ import {
 
 import {useVariablesState} from "./use-variables-state";
 
+export interface FontMeta {
+  cdnUrl: string;
+  variable: string;
+  family: string;
+}
+
 interface ComputedThemeVars {
   fullLightVars: Record<string, string>;
   fullDarkVars: Record<string, string>;
+  fontMeta: FontMeta;
 }
 
 function getCommonVars(
@@ -89,16 +96,36 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
     ? themeValuesById[matchingThemeId].semanticOverrides
     : undefined;
 
-  // Resolve font variable
+  // Resolve font variable and metadata
   const fontFamily = variables.fontFamily;
   let fontVariable: string;
+  let fontMeta: FontMeta;
 
   if (isCustomFontUrl(fontFamily)) {
     const customFontInfo = getCustomFontInfoFromUrl(fontFamily);
 
-    fontVariable = customFontInfo?.variable ?? fontMap.inter.variable;
+    if (customFontInfo) {
+      fontVariable = customFontInfo.variable;
+      fontMeta = {
+        cdnUrl: customFontInfo.url,
+        family: customFontInfo.fontFamily,
+        variable: customFontInfo.variable,
+      };
+    } else {
+      const interFont = fontMap.inter;
+
+      fontVariable = interFont.variable;
+      fontMeta = {cdnUrl: interFont.cdnUrl, family: interFont.label, variable: interFont.variable};
+    }
   } else {
-    fontVariable = (fontMap[fontFamily as keyof typeof fontMap] ?? fontMap.inter).variable;
+    const predefinedFont = fontMap[fontFamily as keyof typeof fontMap] ?? fontMap.inter;
+
+    fontVariable = predefinedFont.variable;
+    fontMeta = {
+      cdnUrl: predefinedFont.cdnUrl,
+      family: predefinedFont.label,
+      variable: predefinedFont.variable,
+    };
   }
 
   const commonVars = getCommonVars(
@@ -140,6 +167,7 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
     const colorDarkVars = getDerivedColorVars(darkVars, darkAccentVars);
 
     return {
+      fontMeta,
       fullDarkVars: {...commonVars, ...colorDarkVars},
       fullLightVars: {...commonVars, ...colorLightVars},
     };
@@ -169,6 +197,7 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
   const colorDarkVars = getDerivedColorVars(darkVars, accentDerivedDark);
 
   return {
+    fontMeta,
     fullDarkVars: {...commonVars, ...colorDarkVars},
     fullLightVars: {...commonVars, ...colorLightVars},
   };

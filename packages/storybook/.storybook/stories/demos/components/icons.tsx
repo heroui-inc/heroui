@@ -1,6 +1,6 @@
 import type {Ref, SVGProps} from "react";
 
-import React, {forwardRef, memo} from "react";
+import React, {forwardRef, memo, useId} from "react";
 import {cn} from "tailwind-variants";
 
 const AppleIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => {
@@ -69,6 +69,10 @@ export const GoogleIcon = memo(forwardRef(GoogleIconRender));
 const VerifiedBadgeIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => {
   const {className, ...restProps} = props;
 
+  const uid = useId();
+  const filterId = `verified-badge-filter-${uid}`;
+  const gradientId = `verified-badge-gradient-${uid}`;
+
   return (
     <svg
       ref={ref}
@@ -85,7 +89,7 @@ const VerifiedBadgeIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVG
     >
       <path
         d="M13.9844 3.40625L14.2471 3.65625L14.6055 3.60645L18.0098 3.13281L18.5977 6.48145L18.6611 6.84375L18.9873 7.01562L22.0059 8.60156L20.4941 11.6963L20.332 12.0283L20.4961 12.3594L22.002 15.3994L18.9873 16.9844L18.6611 17.1562L18.5977 17.5186L18.0098 20.8662L14.6055 20.3936L14.2471 20.3438L13.9844 20.5938L11.5 22.9629L9.01562 20.5938L8.75293 20.3438L8.39453 20.3936L4.98926 20.8662L4.40234 17.5186L4.33887 17.1562L4.0127 16.9844L0.99707 15.3994L2.50391 12.3594L2.66797 12.0283L2.50586 11.6963L0.993164 8.60156L4.0127 7.01562L4.33887 6.84375L4.40234 6.48145L4.98926 3.13281L8.39453 3.60645L8.75293 3.65625L9.01562 3.40625L11.5 1.03613L13.9844 3.40625Z"
-        fill="url(#paint0_linear_1_1856)"
+        fill={`url(#${gradientId})`}
       />
       <path
         d="M13.9844 3.40625L14.2471 3.65625L14.6055 3.60645L18.0098 3.13281L18.5977 6.48145L18.6611 6.84375L18.9873 7.01562L22.0059 8.60156L20.4941 11.6963L20.332 12.0283L20.4961 12.3594L22.002 15.3994L18.9873 16.9844L18.6611 17.1562L18.5977 17.5186L18.0098 20.8662L14.6055 20.3936L14.2471 20.3438L13.9844 20.5938L11.5 22.9629L9.01562 20.5938L8.75293 20.3438L8.39453 20.3936L4.98926 20.8662L4.40234 17.5186L4.33887 17.1562L4.0127 16.9844L0.99707 15.3994L2.50391 12.3594L2.66797 12.0283L2.50586 11.6963L0.993164 8.60156L4.0127 7.01562L4.33887 6.84375L4.40234 6.48145L4.98926 3.13281L8.39453 3.60645L8.75293 3.65625L9.01562 3.40625L11.5 1.03613L13.9844 3.40625Z"
@@ -93,7 +97,7 @@ const VerifiedBadgeIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVG
         strokeWidth="1.5"
         style={{mixBlendMode: "overlay" as const}}
       />
-      <g filter="url(#filter0_ddddddd_1_1856)">
+      <g filter={`url(#${filterId})`}>
         <path
           d="M6 12.3279L9.76623 16L16 9.35519L14.5281 8L9.67965 13.1585L7.42857 10.929L6 12.3279Z"
           fill="#F4F4F5"
@@ -104,7 +108,7 @@ const VerifiedBadgeIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVG
           colorInterpolationFilters="sRGB"
           filterUnits="userSpaceOnUse"
           height="10.1"
-          id="filter0_ddddddd_1_1856"
+          id={filterId}
           width="10"
           x="6"
           y="8"
@@ -234,7 +238,7 @@ const VerifiedBadgeIconRender = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVG
         </filter>
         <linearGradient
           gradientUnits="userSpaceOnUse"
-          id="paint0_linear_1_1856"
+          id={gradientId}
           x1="6"
           x2="16.5"
           y1="1"

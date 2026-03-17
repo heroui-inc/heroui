@@ -20,7 +20,7 @@ export function PreviewContainer() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const {selectedTab} = usePreviewTab();
   const {resolvedTheme} = useTheme();
-  const {fullDarkVars, fullLightVars} = useComputedThemeVars();
+  const {fontMeta, fullDarkVars, fullLightVars} = useComputedThemeVars();
 
   const themeVars = useMemo(
     () => (resolvedTheme === "light" ? fullLightVars : fullDarkVars),
@@ -50,7 +50,16 @@ export function PreviewContainer() {
     if (!iframe?.contentWindow) return;
     iframe.contentWindow.postMessage({theme: resolvedTheme ?? "dark", type: "heroui-theme"}, "*");
     iframe.contentWindow.postMessage({type: "heroui-accent", vars: themeVars}, "*");
-  }, [themeVars, resolvedTheme]);
+    iframe.contentWindow.postMessage(
+      {
+        cdnUrl: fontMeta.cdnUrl,
+        family: fontMeta.family,
+        type: "heroui-font",
+        variable: fontMeta.variable,
+      },
+      "*",
+    );
+  }, [themeVars, resolvedTheme, fontMeta]);
 
   useEffect(() => {
     sendMessageToIframe();
@@ -93,16 +102,16 @@ export function PreviewContainer() {
           {isMounted ? <DemoComponents /> : null}
         </div>
         {/* Desktop: respect tab selection */}
-        <div className="hidden lg:flex lg:h-full lg:w-full lg:flex-1 lg:items-center">
+        <div className="hidden lg:flex lg:h-full lg:min-h-0 lg:w-full lg:flex-1 lg:items-center">
           {isComponentsTab ? (
             isMounted ? (
               <DemoComponents />
             ) : null
           ) : iframeSrc ? (
-            <div className="relative h-full min-h-[650px] w-full">
+            <div className="relative h-full min-h-0 w-full flex-1">
               <iframe
                 ref={iframeRef}
-                className="min-h-[650px] w-full border-none"
+                className="absolute inset-0 h-full w-full border-none"
                 src={iframeSrc}
                 title={selectedTab}
                 onLoad={handleIframeLoad}
@@ -117,7 +126,7 @@ export function PreviewContainer() {
               </div>
             </div>
           ) : (
-            <div className="flex h-[400px] w-full items-center justify-center text-muted">
+            <div className="flex h-full w-full items-center justify-center text-muted">
               Coming soon
             </div>
           )}

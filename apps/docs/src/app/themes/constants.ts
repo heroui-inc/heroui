@@ -1,6 +1,8 @@
 import type {RadiusId, ThemeId} from "./theme-values";
 import type {StaticImageData} from "next/image";
 
+import {env} from "~env";
+
 import airbnbTheme from "@/assets/themes/airbnb.png";
 import blackTheme from "@/assets/themes/black.png";
 import coinbaseTheme from "@/assets/themes/coinbase.png";
@@ -31,19 +33,19 @@ export {
   themeValuesById,
 } from "./theme-values";
 
-export const tabs = [
-  {disabled: false, label: "components"},
-  {disabled: false, label: "dashboard"},
-  {disabled: false, label: "mail"},
-  {disabled: false, label: "chat"},
-  {disabled: false, label: "finances"},
-];
+export const tabLabels = ["components", "dashboard", "mail", "chat", "finances"] as const;
+
+export type TabLabel = (typeof tabLabels)[number];
+
+export const tabs = tabLabels.map((label) => ({disabled: false, label}));
+
+export const HEROUI_PRO_URL = env.NEXT_PUBLIC_HEROUI_PRO_URL ?? "http://localhost:3001";
 
 export const iframeTabs: Record<string, string> = {
-  chat: "https://heroui.pro/templates/chat",
-  dashboard: "https://heroui.pro/templates/dashboard",
-  finances: "http://localhost:3001/templates/finances",
-  mail: "https://heroui.pro/templates/mail",
+  chat: `${HEROUI_PRO_URL}/templates/chat`,
+  dashboard: `${HEROUI_PRO_URL}/templates/dashboard`,
+  finances: `${HEROUI_PRO_URL}/templates/finances`,
+  mail: `${HEROUI_PRO_URL}/templates/mail`,
 };
 
 /**
