@@ -39,7 +39,7 @@ export type TabLabel = (typeof tabLabels)[number];
 
 export const tabs = tabLabels.map((label) => ({disabled: false, label}));
 
-export const HEROUI_PRO_URL = env.NEXT_PUBLIC_HEROUI_PRO_URL ?? "http://localhost:3001";
+export const HEROUI_PRO_URL = env.NEXT_PUBLIC_PRO_URL ?? "https://heroui.pro";
 
 export const iframeTabs: Record<string, string> = {
   chat: `${HEROUI_PRO_URL}/templates/chat`,
