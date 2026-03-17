@@ -1,40 +1,14 @@
 "use client";
 
-import type {ReactElement, ReactNode} from "react";
+import {parseAsStringLiteral, useQueryState} from "nuqs";
 
-import {createContext, useContext, useMemo, useState} from "react";
+import {tabLabels} from "../constants";
 
-interface PreviewTabContextType {
-  selectedTab: string;
-  setSelectedTab: (tab: string) => void;
-}
-
-const PreviewTabContext = createContext<PreviewTabContextType | undefined>(undefined);
-
-export function usePreviewTab(): PreviewTabContextType {
-  const context = useContext(PreviewTabContext);
-
-  if (!context) {
-    throw new Error("usePreviewTab must be used within PreviewTabProvider");
-  }
-
-  return context;
-}
-
-interface PreviewTabProviderProps {
-  children: ReactNode;
-}
-
-export function PreviewTabProvider({children}: PreviewTabProviderProps): ReactElement {
-  const [selectedTab, setSelectedTab] = useState("components");
-
-  const value = useMemo(
-    () => ({
-      selectedTab,
-      setSelectedTab,
-    }),
-    [selectedTab],
+export function usePreviewTab() {
+  const [selectedTab, setSelectedTab] = useQueryState(
+    "template",
+    parseAsStringLiteral(tabLabels).withDefault("components"),
   );
 
-  return <PreviewTabContext value={value}>{children}</PreviewTabContext>;
+  return {selectedTab, setSelectedTab};
 }

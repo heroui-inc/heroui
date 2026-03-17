@@ -651,6 +651,17 @@ code {
     animation: shine 3s ease-in-out infinite;
     pointer-events: none;
   }
+
+  [data-theme="dark"] &::after,
+  .dark &::after {
+    background: linear-gradient(
+      120deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.04) 55%,
+      transparent 90%
+    );
+  }
 }
 
 @utility mask-to-t {

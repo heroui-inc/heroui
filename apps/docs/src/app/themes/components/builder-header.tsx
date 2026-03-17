@@ -1,5 +1,7 @@
 "use client";
 
+import type {TabLabel} from "../constants";
+
 import {
   ArrowUturnCcwLeft,
   ArrowUturnCwRight,
@@ -39,7 +41,7 @@ export function BuilderHeader() {
   useKeyPress("ArrowRight", () => redo(), {enabled: canRedo});
 
   return (
-    <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 min-[1200px]:mb-6 min-[1200px]:px-0">
+    <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 min-[1200px]:mb-4 min-[1200px]:px-0">
       <div className="flex h-14 w-full max-w-[1400px] items-center justify-between min-[1200px]:h-14">
         <div className="flex items-center gap-4">
           <Link href="/">
@@ -100,7 +102,7 @@ export function BuilderHeader() {
         <div className="relative hidden min-[1200px]:block">
           <Tabs
             selectedKey={selectedTab}
-            onSelectionChange={(key) => setSelectedTab(key as string)}
+            onSelectionChange={(key) => setSelectedTab(key as TabLabel)}
           >
             <Tabs.ListContainer>
               <Tabs.List>

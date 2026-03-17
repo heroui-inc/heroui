@@ -18,11 +18,11 @@ export const ThemeBuilderContent = () => {
       hideScrollBar
       visibility="none"
       className={cn(
-        "mx-auto flex h-full w-full max-w-[1400px] flex-col items-center overflow-scroll rounded-2xl border border-separator p-0",
-        !isComponentsTab && "lg:h-fit lg:self-center",
+        "mx-auto flex h-full w-full max-w-[1400px] flex-col items-center rounded-2xl border border-separator p-0",
+        isComponentsTab ? "overflow-scroll" : "overflow-hidden",
       )}
     >
-      <div className="relative flex w-full flex-1 items-center justify-center">
+      <div className="relative flex min-h-0 w-full flex-1 items-center justify-center">
         <PreviewContainer />
         <ThemeCodePanel />
       </div>

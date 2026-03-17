@@ -28,18 +28,17 @@ export default function HomePage() {
   return (
     <main className="flex h-[calc(100vh-4rem)] flex-col">
       {/* Hero Section */}
-      <section className="z-10 flex flex-col items-center px-4 pt-20 text-center">
-        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-y-4">
+      <section className="z-10 flex flex-col items-center px-4 pt-12 text-center">
+        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <ProChip />
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            Beautiful by default.{" "}
-            <span className="text-foreground/60">Customizable by design.</span>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
+            Beautiful by default. <span className="text-muted/70">Customizable by design.</span>
           </h1>
           <p className="text-balance text-muted md:text-lg">
             HeroUI is the modern UI library for web and mobile, built to help you move fast, stay
             consistent, and deliver delightful user experiences.
           </p>
-          <div className="mt-2 flex gap-3">
+          <div className="mt-4 flex gap-3">
             <LinkRoot
               className={buttonVariants({variant: "primary"})}
               href="/docs/react/getting-started"
@@ -53,12 +52,17 @@ export default function HomePage() {
               View components
             </LinkRoot>
           </div>
-          <div className="flex items-center justify-around gap-2 text-xs text-muted">
+          <a
+            className="mt-2 flex items-center justify-around gap-2 text-xs text-muted transition-colors hover:text-foreground lg:mt-4"
+            href="https://github.com/heroui-inc/heroui"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <GitHubIcon className="size-4" />
             <span>
               Open source with <StarsCount className="p-0 font-normal" /> stars
             </span>
-          </div>
+          </a>
         </div>
         <DemoShowcase />
       </section>

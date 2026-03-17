@@ -12,6 +12,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
 import {DemoComponents} from "@/components/demo";
 
+import {HEROUI_PRO_URL, iframeTabs} from "../../themes/constants";
 import {
   calculateAccentForeground,
   getAccentDerivedVariables,
@@ -25,13 +26,6 @@ const tabs = [
   {label: "finances"},
 ];
 
-const iframeTabs: Record<string, string> = {
-  chat: "https://heroui.pro/templates/chat",
-  dashboard: "https://heroui.pro/templates/dashboard",
-  finances: "https://heroui.pro/templates/finances",
-  mail: "https://heroui.pro/templates/mail",
-};
-
 const colors = [
   "#FF81B9", // pink
   "#FF8289", // red
@@ -44,6 +38,17 @@ const colors = [
 ];
 
 const toOklch = converter("oklch");
+
+function getProUrl(utm: {campaign?: string; content?: string; medium: string}) {
+  const url = new URL(HEROUI_PRO_URL);
+
+  url.searchParams.set("utm_source", "heroui.com");
+  url.searchParams.set("utm_medium", utm.medium);
+  if (utm.campaign) url.searchParams.set("utm_campaign", utm.campaign);
+  if (utm.content) url.searchParams.set("utm_content", utm.content);
+
+  return url.toString();
+}
 
 function getAccentStyleVars(color: Color): Record<string, string> {
   const oklch = toOklch(color.toString("css"));
@@ -76,6 +81,26 @@ export function DemoShowcase() {
     [selectedColor],
   );
 
+  const themeBuilderHref = useMemo(() => {
+    const params = new URLSearchParams();
+
+    if (selectedTab !== "components") {
+      params.set("template", selectedTab);
+    }
+    if (selectedColor) {
+      const oklch = toOklch(selectedColor.toString("css"));
+
+      if (oklch) {
+        params.set("lightness", String(oklch.l ?? 0));
+        params.set("chroma", String(oklch.c ?? 0));
+        params.set("hue", String(oklch.h ?? 0));
+      }
+    }
+    const qs = params.toString();
+
+    return qs ? `/themes?${qs}` : "/themes";
+  }, [selectedTab, selectedColor]);
+
   const sendMessageToIframe = useCallback(() => {
     const iframe = iframeRef.current;
 
@@ -105,8 +130,8 @@ export function DemoShowcase() {
   }, [sendMessageToIframe]);
 
   return (
-    <div className="w-full max-w-[1200px] py-24 pb-1">
-      <div className="mb-4 hidden w-full flex-col justify-between gap-4 lg:flex lg:flex-row lg:items-center">
+    <div className="w-full max-w-[1200px] py-12">
+      <div className="mb-4 hidden w-full flex-col justify-between gap-4 px-2 lg:flex lg:flex-row lg:items-center">
         <Tabs selectedKey={selectedTab} onSelectionChange={(key) => setSelectedTab(key as string)}>
           <Tabs.ListContainer>
             <Tabs.List>
@@ -119,7 +144,7 @@ export function DemoShowcase() {
             </Tabs.List>
           </Tabs.ListContainer>
         </Tabs>
-        <ColorSwatchPicker onChange={setSelectedColor}>
+        <ColorSwatchPicker size="sm" onChange={setSelectedColor}>
           {colors.map((color) => (
             <ColorSwatchPicker.Item key={color} color={color}>
               <ColorSwatchPicker.Swatch />
@@ -129,24 +154,35 @@ export function DemoShowcase() {
         </ColorSwatchPicker>
       </div>
       <div
-        className="flex max-w-[1200px] flex-col gap-1.5 rounded-[35px] bg-surface-secondary/50 pt-3 pb-1"
+        className="flex max-w-[1200px] flex-col gap-0.5 rounded-3xl bg-surface-secondary/80 p-2 pt-0"
         style={accentVars as CSSProperties}
       >
-        <div className="flex items-center justify-between pr-4 pl-5">
-          <div className="flex flex-1 items-center gap-3">
-            <div className="size-3.5 rounded-full bg-muted opacity-30" />
-            <div className="size-3.5 rounded-full bg-muted opacity-30" />
-            <div className="size-3.5 rounded-full bg-muted opacity-30" />
+        <div className="flex h-9 items-center justify-between pt-1 pr-2 pl-2">
+          <div className="flex flex-1 items-center gap-2.5">
+            <div className="size-3 rounded-full bg-muted opacity-30" />
+            <div className="size-3 rounded-full bg-muted opacity-30" />
+            <div className="size-3 rounded-full bg-muted opacity-30" />
           </div>
-          {selectedTab !== "components" && (
-            <div className="flex items-center gap-2">
-              <p className="text-sm font-medium text-muted">Available in Pro as template</p>
-            </div>
-          )}
+          <a
+            className={`text-[13px] font-medium text-muted transition-opacity duration-300 hover:text-foreground ${selectedTab !== "components" ? "opacity-100" : "pointer-events-none opacity-0"}`}
+            rel="noopener noreferrer"
+            target="_blank"
+            href={getProUrl({
+              campaign: "demo-showcase",
+              content: `template-${selectedTab}`,
+              medium: "homepage",
+            })}
+          >
+            Available in Pro as template
+          </a>
           <div className="flex flex-1 justify-end">
             <LinkRoot
-              className={buttonVariants({className: "text-muted", size: "sm", variant: "ghost"})}
-              href="/themes"
+              href={themeBuilderHref}
+              className={buttonVariants({
+                className: "text-[13px] text-muted",
+                size: "sm",
+                variant: "ghost",
+              })}
             >
               <Palette className="size-4" />
               Open in theme builder
@@ -158,19 +194,20 @@ export function DemoShowcase() {
           <DemoComponents />
         </div>
         {/* Desktop: respect tab selection */}
-        <div className="hidden lg:block">
-          {selectedTab === "components" ? (
+        <div className="relative hidden lg:block">
+          <div
+            className={`overflow-hidden rounded-2xl border border-border/50 bg-background py-8 ${selectedTab !== "components" ? "invisible" : ""}`}
+          >
             <DemoComponents />
-          ) : iframeTabs[selectedTab] ? (
+          </div>
+          {selectedTab !== "components" && iframeTabs[selectedTab] != null && (
             <iframe
               ref={iframeRef}
-              className="h-[650px] w-full rounded-[28px] border-none px-1"
+              className="absolute inset-0 h-full w-full rounded-2xl border border-border/50"
               src={iframeTabs[selectedTab]}
               title={selectedTab}
               onLoad={sendMessageToIframe}
             />
-          ) : (
-            <div className="flex h-[400px] items-center justify-center text-muted">Coming soon</div>
           )}
         </div>
       </div>

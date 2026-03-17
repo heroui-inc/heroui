@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, buttonVariants} from "@heroui/react";
+import {Button, CloseButton, buttonVariants} from "@heroui/react";
 import {useEffect, useState} from "react";
 
 import {FloatingStars} from "./floating-stars";
@@ -148,6 +148,11 @@ export function ProBanner() {
         <span className="relative text-xs text-[#4E75A5]">{formatTime(time)}</span>
       </div>
 
+      <CloseButton
+        className="absolute top-2 right-2 bg-transparent text-white/50 hover:bg-white/10 hover:text-white"
+        onPress={() => setVisible(false)}
+      />
+
       {/* Content section */}
       <div className="flex flex-col gap-3 p-4">
         <div className="flex flex-col gap-1.5">
@@ -164,7 +169,7 @@ export function ProBanner() {
           <a
             href="https://heroui.pro"
             className={buttonVariants({
-              className: "bg-black text-white",
+              className: "bg-black text-white dark:bg-white dark:text-black",
               fullWidth: true,
               size: "md",
               variant: "primary",

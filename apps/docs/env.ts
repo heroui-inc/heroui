@@ -5,6 +5,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_APP_ENV: z.enum(["production", "preview", "development"]).default("development"),
     NEXT_PUBLIC_CDN_URL: z.url().min(1),
+    NEXT_PUBLIC_HEROUI_PRO_URL: z.url().min(1).optional(),
     NEXT_PUBLIC_POSTHOG_HOST: z.url().min(1).optional(),
     NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
   },
@@ -15,6 +16,7 @@ export const env = createEnv({
     LOOPS_API_KEY: process.env["LOOPS_API_KEY"],
     NEXT_PUBLIC_APP_ENV: process.env["NEXT_PUBLIC_APP_ENV"],
     NEXT_PUBLIC_CDN_URL: process.env["NEXT_PUBLIC_CDN_URL"],
+    NEXT_PUBLIC_HEROUI_PRO_URL: process.env["NEXT_PUBLIC_HEROUI_PRO_URL"],
     NEXT_PUBLIC_POSTHOG_HOST: process.env["NEXT_PUBLIC_POSTHOG_HOST"],
     NEXT_PUBLIC_POSTHOG_KEY: process.env["NEXT_PUBLIC_POSTHOG_KEY"],
     NODE_ENV: process.env["NODE_ENV"],
