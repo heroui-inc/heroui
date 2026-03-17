@@ -7,7 +7,7 @@ import {GitHubIcon} from "@/icons/github";
 
 import {DemoShowcase} from "./components/demo-showcase";
 import {ProBadge} from "./components/pro-badge";
-import {ProBanner, SHOW_BANNER} from "./components/pro-banner";
+import {PRO_URL, ProBanner, SHOW_BANNER} from "./components/pro-banner";
 
 const ProChip = () => {
   if (!SHOW_BANNER) return null;
@@ -15,7 +15,9 @@ const ProChip = () => {
   return (
     <a
       className="chip animate-shine relative gap-1 rounded-full bg-accent/10 px-2 py-1 text-xs text-accent"
-      href="https://heroui.pro"
+      href={`${PRO_URL}?utm_source=heroui.com&utm_medium=hero_chip&utm_campaign=presale`}
+      rel="noopener noreferrer"
+      target="_blank"
     >
       <ProBadge />
       <span className="max-w-60 truncate sm:max-w-full">Get Pro at a better price now</span>

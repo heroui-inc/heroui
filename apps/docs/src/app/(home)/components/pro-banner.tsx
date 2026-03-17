@@ -20,7 +20,7 @@ const PRO_API_URL = env.NEXT_PUBLIC_PRO_API_URL;
 
 export const SHOW_BANNER = env.NEXT_PUBLIC_SHOW_PRE_SALE_BANNER;
 
-const HEROUI_PRO_URL = env.NEXT_PUBLIC_HEROUI_PRO_URL ?? "https://heroui.pro";
+export const PRO_URL = env.NEXT_PUBLIC_PRO_URL ?? "https://heroui.pro";
 
 const PLACEHOLDER = {days: "--", hours: "--", minutes: "--", seconds: "--"};
 
@@ -104,7 +104,7 @@ export function HeaderBanner() {
   return (
     <a
       className="flex h-8 w-full items-center justify-center gap-1.5 bg-surface-secondary transition-colors hover:bg-surface-secondary/80"
-      href={`${HEROUI_PRO_URL}?utm_source=heroui.com&utm_medium=banner&utm_campaign=presale`}
+      href={`${PRO_URL}?utm_source=heroui.com&utm_medium=banner&utm_campaign=presale`}
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -319,7 +319,9 @@ export function ProBanner() {
                 Close
               </Button>
               <a
-                href="https://heroui.pro"
+                href={`${PRO_URL}?utm_source=heroui.com&utm_medium=pro_banner&utm_campaign=presale`}
+                rel="noopener noreferrer"
+                target="_blank"
                 className={buttonVariants({
                   className: "bg-black text-white dark:bg-white dark:text-black",
                   fullWidth: true,
