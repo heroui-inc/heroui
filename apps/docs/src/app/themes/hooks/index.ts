@@ -1,6 +1,8 @@
+export {useComputedThemeVars} from "./use-computed-theme-vars";
 export {useCssSync} from "./use-css-sync";
 export {useCustomFonts} from "./use-custom-fonts";
 export type {CustomFont} from "./use-custom-fonts";
+export {usePreviewTab, PreviewTabProvider} from "./use-preview-tab";
 export {useRandomizeVariables} from "./use-randomize-variables";
 export {useResetVariables} from "./use-reset-variables";
 export {useVariableSetter} from "./use-variable-setter";

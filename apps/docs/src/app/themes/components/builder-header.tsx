@@ -7,7 +7,7 @@ import {
   Link as LinkIcon,
   NodesRight,
 } from "@gravity-ui/icons";
-import {Button, Chip, Kbd, Separator, Tabs, Tooltip, toast} from "@heroui/react";
+import {Button, Kbd, Separator, Tabs, Tooltip, toast} from "@heroui/react";
 import Link from "next/link";
 
 import {HeroUILogo} from "@/components/heroui-logo";
@@ -15,7 +15,7 @@ import {useCodePanel} from "@/hooks/use-code-panel";
 import useKeyPress from "@/hooks/use-key-press";
 
 import {tabs} from "../constants";
-import {useUndoRedo} from "../hooks";
+import {usePreviewTab, useUndoRedo} from "../hooks";
 
 import {ResetButton} from "./reset-button";
 import {ShuffleButton} from "./shuffle-button";
@@ -24,6 +24,7 @@ import {SwitchMode} from "./switch-mode";
 export function BuilderHeader() {
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
   const {isCodeVisible, toggleCode} = useCodePanel();
+  const {selectedTab, setSelectedTab} = usePreviewTab();
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -97,38 +98,21 @@ export function BuilderHeader() {
           </div>
         </div>
         <div className="relative hidden min-[1200px]:block">
-          <Tabs>
+          <Tabs
+            selectedKey={selectedTab}
+            onSelectionChange={(key) => setSelectedTab(key as string)}
+          >
             <Tabs.ListContainer>
               <Tabs.List>
                 {tabs.map((tab) => (
-                  <Tabs.Tab
-                    key={tab.label}
-                    className="pointer-events-auto cursor-not-allowed capitalize"
-                    id={tab.label}
-                    isDisabled={tab.disabled}
-                  >
-                    {tab.disabled ? (
-                      <Tooltip>
-                        <Tooltip.Trigger className="cursor-not-allowed">
-                          {tab.label}
-                        </Tooltip.Trigger>
-                        <Tooltip.Content>
-                          <Tooltip.Arrow />
-                          <p>Soon</p>
-                        </Tooltip.Content>
-                      </Tooltip>
-                    ) : (
-                      tab.label
-                    )}
+                  <Tabs.Tab key={tab.label} className="capitalize" id={tab.label}>
+                    {tab.label}
                     <Tabs.Indicator />
                   </Tabs.Tab>
                 ))}
               </Tabs.List>
             </Tabs.ListContainer>
           </Tabs>
-          <Chip className="absolute -top-1 -right-3" color="accent" size="sm" variant="soft">
-            Soon
-          </Chip>
         </div>
         <div className="flex w-auto justify-end gap-3 min-[1200px]:w-[244px]">
           <div className="flex h-auto items-center">
