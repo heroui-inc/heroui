@@ -88,8 +88,9 @@ To configure MCP in VS Code with GitHub Copilot, add the Migration MCP server to
 
 ```json title=".vscode/mcp.json"
 {
-  "mcpServers": {
+  "servers": {
     "heroui-migration": {
+      "type": "http",
       "url": "https://migration-mcp.heroui.com"
     }
   }

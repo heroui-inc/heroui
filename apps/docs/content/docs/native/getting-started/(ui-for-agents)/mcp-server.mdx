@@ -111,8 +111,9 @@ See the [Zed MCP documentation](https://zed.dev/docs/ai/mcp) for more details.
 
 ```json title=".vscode/mcp.json"
 {
-  "mcpServers": {
+  "servers": {
     "heroui-native": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "@heroui/native-mcp@latest"]
     }
