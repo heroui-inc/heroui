@@ -24,6 +24,7 @@ import {SurfaceContext} from "../surface";
  * -----------------------------------------------------------------------------------------------*/
 type ComboBoxContext = {
   slots?: ReturnType<typeof comboBoxVariants>;
+  variant?: "primary" | "secondary";
 };
 
 const ComboBoxContext = createContext<ComboBoxContext>({});
@@ -34,6 +35,11 @@ const ComboBoxContext = createContext<ComboBoxContext>({});
 interface ComboBoxRootProps<T extends object>
   extends ComponentPropsWithRef<typeof ComboBoxPrimitive<T>>, ComboBoxVariants {
   items?: Iterable<T>;
+  /**
+   * The variant of the combo box.
+   * @default "primary"
+   */
+  variant?: "primary" | "secondary";
 }
 
 const ComboBoxRoot = <T extends object = object>({
@@ -41,12 +47,13 @@ const ComboBoxRoot = <T extends object = object>({
   className,
   fullWidth,
   menuTrigger = "focus",
+  variant,
   ...props
 }: ComboBoxRootProps<T>) => {
   const slots = React.useMemo(() => comboBoxVariants({fullWidth}), [fullWidth]);
 
   return (
-    <ComboBoxContext value={{slots}}>
+    <ComboBoxContext value={{slots, variant}}>
       <ComboBoxPrimitive
         data-slot="combo-box"
         menuTrigger={menuTrigger}
@@ -137,7 +144,7 @@ const ComboBoxPopover = ({
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ComboBoxRoot, ComboBoxInputGroup, ComboBoxTrigger, ComboBoxPopover};
+export {ComboBoxRoot, ComboBoxInputGroup, ComboBoxTrigger, ComboBoxPopover, ComboBoxContext};
 
 export type {
   ComboBoxRootProps,
