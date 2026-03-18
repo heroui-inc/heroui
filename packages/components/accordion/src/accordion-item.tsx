@@ -1,9 +1,9 @@
 import type {Variants} from "framer-motion";
-import type {ReactNode} from "react";
 import type {UseAccordionItemProps} from "./use-accordion-item";
+import type {ReactNode} from "react";
 
 import {forwardRef} from "@heroui/system";
-import {useMemo} from "react";
+import {useMemo, useRef, useLayoutEffect} from "react";
 import {ChevronIcon} from "@heroui/shared-icons";
 import {AnimatePresence, LazyMotion, m, useWillChange} from "framer-motion";
 import {TRANSITION_VARIANTS} from "@heroui/framer-utils";
@@ -31,6 +31,8 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
     keepContentMounted,
     disableAnimation,
     motionProps,
+    scrollOnOpen,
+    transitionDuration,
     getBaseProps,
     getHeadingProps,
     getButtonProps,
@@ -41,6 +43,35 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
   } = useAccordionItem({...props, ref});
 
   const willChange = useWillChange();
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Handle scrolling to content when opened
+  useLayoutEffect(() => {
+    const frameIds: number[] = [];
+
+    if (isOpen && scrollOnOpen && contentRef.current) {
+      // Use double RAF to ensure the animation has started and layout is updated
+      frameIds.push(
+        requestAnimationFrame(() => {
+          frameIds.push(
+            requestAnimationFrame(() => {
+              // Re-check current state before scrolling
+              if (contentRef.current && isOpen) {
+                contentRef.current.scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                });
+              }
+            }),
+          );
+        }),
+      );
+    }
+
+    return () => {
+      frameIds.forEach(cancelAnimationFrame);
+    };
+  }, [isOpen, scrollOnOpen]);
 
   const indicatorContent = useMemo<ReactNode>(() => {
     if (typeof indicator === "function") {
@@ -57,15 +88,33 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
   const content = useMemo(() => {
     if (disableAnimation) {
       if (keepContentMounted) {
-        return <div {...getContentProps()}>{children}</div>;
+        return (
+          <div ref={contentRef} {...getContentProps()}>
+            {children}
+          </div>
+        );
       }
 
-      return isOpen && <div {...getContentProps()}>{children}</div>;
+      return (
+        isOpen && (
+          <div ref={contentRef} {...getContentProps()}>
+            {children}
+          </div>
+        )
+      );
     }
 
     const transitionVariants: Variants = {
-      exit: {...TRANSITION_VARIANTS.collapse.exit, overflowY: "hidden"},
-      enter: {...TRANSITION_VARIANTS.collapse.enter, overflowY: "unset"},
+      exit: {
+        ...TRANSITION_VARIANTS.collapse.exit,
+        overflowY: "hidden",
+        transition: {duration: transitionDuration ? transitionDuration / 1000 : 0.3},
+      },
+      enter: {
+        ...TRANSITION_VARIANTS.collapse.enter,
+        overflowY: "unset",
+        transition: {duration: transitionDuration ? transitionDuration / 1000 : 0.3},
+      },
     };
 
     return keepContentMounted ? (
@@ -82,7 +131,9 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
           }}
           {...motionProps}
         >
-          <div {...getContentProps()}>{children}</div>
+          <div ref={contentRef} {...getContentProps()}>
+            {children}
+          </div>
         </m.section>
       </LazyMotion>
     ) : (
@@ -101,13 +152,15 @@ const AccordionItem = forwardRef<"button", AccordionItemProps>((props, ref) => {
               }}
               {...motionProps}
             >
-              <div {...getContentProps()}>{children}</div>
+              <div ref={contentRef} {...getContentProps()}>
+                {children}
+              </div>
             </m.section>
           </LazyMotion>
         )}
       </AnimatePresence>
     );
-  }, [isOpen, disableAnimation, keepContentMounted, children, motionProps]);
+  }, [isOpen, disableAnimation, keepContentMounted, children, motionProps, transitionDuration]);
 
   return (
     <Component {...getBaseProps()}>
