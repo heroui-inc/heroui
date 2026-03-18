@@ -119,8 +119,9 @@ To configure MCP in VS Code with GitHub Copilot, add the HeroUI server to your p
 
 ```json title=".vscode/mcp.json"
 {
-  "mcpServers": {
+  "servers": {
     "heroui-react": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "@heroui/react-mcp@latest"]
     }
