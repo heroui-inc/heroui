@@ -1,0 +1,165 @@
+---
+title: LinkButton
+description: A ghost-variant button with no highlight feedback, designed for inline link-style interactions.
+icon: new
+links:
+  source_native: link-button/link-button.tsx
+  styles_native: link-button/link-button.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { LinkButton } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<LinkButton>
+  <LinkButton.Label>...</LinkButton.Label>
+</LinkButton>
+```
+
+- **LinkButton**: Root pressable container. Renders a `Button` with the `ghost` variant and disabled highlight feedback enforced internally. These cannot be overridden by consumers.
+- **LinkButton.Label**: Text content of the link button. Inherits size and variant styling from the parent context.
+
+## Usage
+
+### Basic Usage
+
+The LinkButton component renders inline link-style text that responds to press events.
+
+```tsx
+<LinkButton onPress={handlePress}>Learn more</LinkButton>
+```
+
+### Sizes
+
+Control the text size with the `size` prop.
+
+```tsx
+<LinkButton size="sm">
+  Small
+</LinkButton>
+
+<LinkButton size="md">
+  Medium
+</LinkButton>
+
+<LinkButton size="lg">
+  Large
+</LinkButton>
+```
+
+### Disabled State
+
+Disable the link button to prevent interaction.
+
+```tsx
+<LinkButton isDisabled>Disabled link</LinkButton>
+```
+
+### Custom Styling
+
+Apply custom styles using the `className` prop on both root and label.
+
+```tsx
+<LinkButton className="px-2">
+  <LinkButton.Label className="text-accent underline">
+    Styled link
+  </LinkButton.Label>
+</LinkButton>
+```
+
+### Inline with Text
+
+Place link buttons inline alongside regular text for terms, policies, or contextual navigation.
+
+```tsx
+<View className="flex-row flex-wrap">
+  <Text className="text-sm text-muted">I agree to the </Text>
+  <LinkButton size="sm" onPress={handleTermsPress}>
+    <LinkButton.Label className="text-accent">
+      Terms of Service
+    </LinkButton.Label>
+  </LinkButton>
+  <Text className="text-sm text-muted"> and </Text>
+  <LinkButton size="sm" onPress={handlePrivacyPress}>
+    <LinkButton.Label className="text-accent">Privacy Policy</LinkButton.Label>
+  </LinkButton>
+</View>
+```
+
+## Example
+
+```tsx
+import { Button, Checkbox, ControlField, LinkButton } from 'heroui-native';
+import React from 'react';
+import { Alert, View } from 'react-native';
+
+export default function LinkButtonExample() {
+  const [isAgreed, setIsAgreed] = React.useState(false);
+
+  const handleTermsPress = () => Alert.alert('Terms', 'Navigate to Terms');
+  const handlePrivacyPress = () =>
+    Alert.alert('Privacy', 'Navigate to Privacy Policy');
+
+  return (
+    <View className="flex-1 px-5 items-center justify-center">
+      <View className="w-full max-w-xs gap-6">
+        <ControlField
+          isSelected={isAgreed}
+          onSelectedChange={setIsAgreed}
+          className="items-start"
+        >
+          <ControlField.Indicator>
+            <Checkbox className="mt-0.5" />
+          </ControlField.Indicator>
+          <View className="flex-row flex-wrap flex-1">
+            <Text className="text-sm text-muted">I agree to the </Text>
+            <LinkButton size="sm" onPress={handleTermsPress}>
+              <LinkButton.Label className="text-accent">
+                Terms of Service
+              </LinkButton.Label>
+            </LinkButton>
+            <Text className="text-sm text-muted"> and </Text>
+            <LinkButton size="sm" onPress={handlePrivacyPress}>
+              <LinkButton.Label className="text-accent">
+                Privacy Policy
+              </LinkButton.Label>
+            </LinkButton>
+          </View>
+        </ControlField>
+        <Button isDisabled={!isAgreed}>Sign up</Button>
+      </View>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/link-button.tsx>).
+
+## API Reference
+
+### LinkButton
+
+Extends all [Button](./button#button) props except `variant` (enforced as `ghost` internally).
+
+**Behavioral overrides applied internally:**
+
+| override    | value        | description                                         |
+| ----------- | ------------ | --------------------------------------------------- |
+| `variant`   | `ghost`      | Always renders as a ghost button, cannot be changed |
+| `highlight` | `false`      | Highlight feedback is disabled, cannot be changed   |
+| `className` | `h-auto p-0` | Removes default button height and padding           |
+
+### LinkButton.Label
+
+Equivalent to [Button.Label](./button#buttonlabel). Accepts the same props.
