@@ -197,6 +197,34 @@ Use render props in Group to create custom slot layouts.
 </InputOTP>
 ```
 
+### Inside a Bottom Sheet
+
+When rendering an InputOTP inside a `BottomSheet`, use the `useBottomSheetAwareHandlers` hook to wire keyboard avoidance handlers. Pass the returned `onFocus` and `onBlur` to InputOTP.
+
+```tsx
+import { InputOTP, useBottomSheetAwareHandlers } from 'heroui-native';
+
+const BottomSheetOTPInput = () => {
+  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+
+  return (
+    <InputOTP maxLength={6} onFocus={onFocus} onBlur={onBlur}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+      </InputOTP.Group>
+      <InputOTP.Separator />
+      <InputOTP.Group>
+        <InputOTP.Slot index={3} />
+        <InputOTP.Slot index={4} />
+        <InputOTP.Slot index={5} />
+      </InputOTP.Group>
+    </InputOTP>
+  );
+};
+```
+
 ## Example
 
 ```tsx
