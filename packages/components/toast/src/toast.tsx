@@ -82,6 +82,11 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
       ? closeIcon({})
       : isValidElement(closeIcon) && cloneElement(closeIcon as ReactElement, {});
 
+  const customEndContent =
+    typeof endContent === "function"
+      ? endContent((getCloseButtonProps() as ButtonProps).onPress as () => void)
+      : endContent;
+
   const toastContent = (
     <Component ref={domRef} {...getToastProps()}>
       <div {...getContentProps()}>
@@ -104,7 +109,7 @@ const Toast = forwardRef<"div", ToastProps>((props, ref) => {
       <Button isIconOnly {...(getCloseButtonProps() as ButtonProps)}>
         {customCloseIcon || <CloseIcon {...getCloseIconProps()} />}
       </Button>
-      {endContent}
+      {customEndContent}
     </Component>
   );
 
