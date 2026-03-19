@@ -93,8 +93,8 @@ export function PreviewContainer() {
         ref={container}
         id={THEME_BUILDER_CONTENT_ID}
         className={cn(
-          "flex h-full w-full flex-1 items-center bg-background px-4 py-8 font-sans xl:px-5 xl:py-7",
-          !isComponentsTab && "lg:p-0!",
+          "flex h-full w-full flex-1 bg-background px-4 py-8 font-sans xl:px-5 xl:py-7",
+          isComponentsTab ? "items-start" : "items-center lg:p-0 lg:pb-0!",
         )}
       >
         {/* Mobile: always show DemoComponents */}
@@ -102,7 +102,12 @@ export function PreviewContainer() {
           {isMounted ? <DemoComponents /> : null}
         </div>
         {/* Desktop: respect tab selection */}
-        <div className="hidden lg:flex lg:h-full lg:min-h-0 lg:w-full lg:flex-1 lg:items-center">
+        <div
+          className={cn(
+            "hidden lg:flex lg:h-full lg:min-h-0 lg:w-full lg:flex-1",
+            !isComponentsTab && "lg:items-center",
+          )}
+        >
           {isComponentsTab ? (
             isMounted ? (
               <DemoComponents />

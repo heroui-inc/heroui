@@ -2,6 +2,8 @@ import {Suspense} from "react";
 
 import {CodePanelProvider} from "@/hooks/use-code-panel";
 
+import {ProBanner} from "../(home)/components/pro-banner";
+
 import {
   AccentColorSelector,
   BaseColorSlider,
@@ -51,6 +53,7 @@ export default function ThemeBuilderPage() {
           <MobileFooter />
         </div>
         <Onboarding />
+        <ProBanner />
       </Suspense>
     </CodePanelProvider>
   );
