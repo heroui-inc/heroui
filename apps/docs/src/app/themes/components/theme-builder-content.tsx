@@ -22,7 +22,12 @@ export const ThemeBuilderContent = () => {
         isComponentsTab ? "overflow-scroll" : "overflow-hidden",
       )}
     >
-      <div className="relative flex min-h-0 w-full flex-1 items-center justify-center">
+      <div
+        className={cn(
+          "relative flex min-h-0 w-full flex-1",
+          isComponentsTab ? "items-start" : "items-center justify-center",
+        )}
+      >
         <PreviewContainer />
         <ThemeCodePanel />
       </div>
