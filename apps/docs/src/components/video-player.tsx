@@ -15,6 +15,7 @@ interface VideoPlayerProps {
   src: string;
   playMode?: "auto" | "manual";
   autoPlay?: boolean;
+  muted?: boolean;
   poster?: string;
   width?: number;
   height?: number;
@@ -28,6 +29,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
   className,
   controls = false,
   height,
+  muted = false,
   onPlayingChange,
   playMode = "auto",
   poster,
@@ -36,7 +38,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(muted);
   const isMobile = useIsMobileDevice();
 
   const videoRef = useRef<HTMLVideoElement>(null);
