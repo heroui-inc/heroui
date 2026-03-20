@@ -40,7 +40,7 @@ export function DemoComponents() {
         <AllowNotificationsDemo />
       </div>
       {/* Right */}
-      <div className="order-3 col-span-1 grid grid-cols-1 grid-rows-2 justify-items-center gap-5 md:col-span-2 md:grid-cols-2 md:grid-rows-[auto_auto] lg:col-span-1 lg:max-w-[360px] lg:grid-cols-1">
+      <div className="order-3 col-span-1 grid grid-cols-1 grid-rows-2 justify-items-center gap-5 self-start md:col-span-2 md:grid-cols-2 md:grid-rows-[auto_auto] lg:col-span-1 lg:max-w-[360px] lg:grid-cols-1">
         <div className="row-span-2">
           <LoginDemo />
         </div>
