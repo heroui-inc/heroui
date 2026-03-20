@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {env} from "~env";
 
 import {FloatingStars} from "./floating-stars";
+import {PRO_URL, SHOW_BANNER} from "./pro-constants";
 import {ProTitle} from "./pro-title";
 
 interface DiscountData {
@@ -17,10 +18,6 @@ interface DiscountData {
 }
 
 const PRO_API_URL = env.NEXT_PUBLIC_PRO_API_URL;
-
-export const SHOW_BANNER = env.NEXT_PUBLIC_SHOW_PRE_SALE_BANNER;
-
-export const PRO_URL = env.NEXT_PUBLIC_PRO_URL ?? "https://heroui.pro";
 
 const PLACEHOLDER = {days: "--", hours: "--", minutes: "--", seconds: "--"};
 
