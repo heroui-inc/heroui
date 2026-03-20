@@ -25,7 +25,7 @@ export function FumadocsCustomCodeblock({
       // @ts-expect-error - TODO: fumadocs-ui error
       viewportProps={{ref: areaRef}}
       Actions={(actionsProps) => (
-        <div {...actionsProps} className={cn("empty:hidden", actionsProps.className)}>
+        <div {...actionsProps} className={cn("z-1! empty:hidden", actionsProps.className)}>
           {!!allowCopy && <CopyButton containerRef={areaRef} />}
         </div>
       )}

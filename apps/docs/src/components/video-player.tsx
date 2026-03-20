@@ -2,6 +2,7 @@
 
 import type {FC} from "react";
 
+import {ArrowRotateLeft, VolumeFill, VolumeSlashFill} from "@gravity-ui/icons";
 import {Button, Spinner, Tooltip, cn} from "@heroui/react";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {useIntersectionObserver} from "usehooks-ts";
@@ -35,6 +36,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const isMobile = useIsMobileDevice();
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -75,7 +77,13 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     }
 
     if (isVisible) {
-      videoRef.current.play();
+      videoRef.current.play().catch(() => {
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+          setIsMuted(true);
+          videoRef.current.play().catch(() => {});
+        }
+      });
     } else {
       videoRef.current.pause();
     }
@@ -125,6 +133,20 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     }
   }, [isPlaying]);
 
+  const onToggleMute = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted((v) => !v);
+    }
+  }, [isMuted]);
+
+  const onRestart = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+    }
+  }, []);
+
   const handleVideoClick = useCallback(() => {
     if (videoRef.current) {
       if (!isPlaying) {
@@ -146,39 +168,74 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
           color="accent"
           size="md"
         />
-      ) : !isPlaying ? (
-        <Tooltip delay={1000}>
+      ) : null}
+
+      <div className="absolute right-3 bottom-3 z-4 flex items-center gap-1">
+        <Tooltip delay={500}>
           <Tooltip.Trigger>
             <Button
               isIconOnly
-              className="absolute top-1/2 left-1/2 z-3 -translate-x-1/2 -translate-y-1/2 bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
+              className="bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
               size="sm"
               variant="tertiary"
               onPress={onTogglePlay}
             >
               {isPlaying ? (
-                <Iconify icon="gravity-ui:pause-fill" width={16} />
+                <Iconify className="text-white" icon="gravity-ui:pause-fill" width={16} />
               ) : (
-                <Iconify icon="gravity-ui:play-fill" width={16} />
+                <Iconify className="text-white" icon="gravity-ui:play-fill" width={16} />
               )}
             </Button>
           </Tooltip.Trigger>
           <Tooltip.Content>{isPlaying ? "Pause" : "Play"}</Tooltip.Content>
         </Tooltip>
-      ) : null}
-      {/* Absolute overlay for clicking anywhere on the video to play/pause */}
-      {/* z-0 ensures it's below buttons (preview button is z-1, play button is z-50) */}
+
+        <Tooltip delay={500}>
+          <Tooltip.Trigger>
+            <Button
+              isIconOnly
+              className="bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
+              size="sm"
+              variant="tertiary"
+              onPress={onToggleMute}
+            >
+              {isMuted ? (
+                <VolumeSlashFill className="size-4 text-white" />
+              ) : (
+                <VolumeFill className="size-4 text-white" />
+              )}
+            </Button>
+          </Tooltip.Trigger>
+          <Tooltip.Content>{isMuted ? "Unmute" : "Mute"}</Tooltip.Content>
+        </Tooltip>
+
+        <Tooltip delay={500}>
+          <Tooltip.Trigger>
+            <Button
+              isIconOnly
+              className="bg-transparent before:absolute before:inset-0 before:z-[-1] before:block before:rounded-lg before:bg-black/10 before:backdrop-blur-md before:backdrop-saturate-150 before:content-['']"
+              size="sm"
+              variant="tertiary"
+              onPress={onRestart}
+            >
+              <ArrowRotateLeft className="size-4 text-white" />
+            </Button>
+          </Tooltip.Trigger>
+          <Tooltip.Content>Restart</Tooltip.Content>
+        </Tooltip>
+      </div>
+
       <div className="absolute inset-0 z-3 cursor-pointer" onClick={handleVideoClick} />
 
       <video
         ref={setVideoRef}
         loop
-        muted
         playsInline
         autoPlay={!!autoPlay && effectivePlayMode === "auto"}
         className={cn("object-fit aspect-video w-full", className)}
         controls={controls}
         height={height}
+        muted={isMuted}
         poster={poster}
         src={src}
         width={width}

@@ -7,7 +7,8 @@ import {GitHubIcon} from "@/icons/github";
 
 import {DemoShowcase} from "./components/demo-showcase";
 import {ProBadge} from "./components/pro-badge";
-import {PRO_URL, ProBanner, SHOW_BANNER} from "./components/pro-banner";
+import {ProBanner} from "./components/pro-banner";
+import {PRO_URL, SHOW_BANNER} from "./components/pro-constants";
 
 const ProChip = () => {
   if (!SHOW_BANNER) return null;

@@ -1,0 +1,627 @@
+---
+title: Introducing HeroUI v3
+description: A ground-up rewrite for React and React Native. 75+ web components, 37 native components, Tailwind CSS v4, React Aria, compound architecture, and built for AI-assisted development.
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">March 2026</span>
+</div>
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/heroui-v3-release.mp4"
+  height={430}
+/>
+
+HeroUI started as a React library with nice defaults and Framer Motion animations. v3 is something different: a design system for React and React Native, built on Tailwind CSS v4 and compound components. 75+ web components. 37 native components. Shared design tokens and compound architecture across both, but each platform is built to feel native on its own. APIs and components differ where React and React Native differ.
+
+The web library was rewritten from scratch. New rendering model, new styling system, new component API. No runtime style engine, no provider wrappers, no Framer Motion dependency. CSS variables, CSS transitions, and [React Aria Components](https://react-aria.adobe.com/) for accessibility.
+
+## Design Principles
+
+Three ideas shaped every decision in v3.
+
+**Composition over configuration.** Components expose their internal pieces as real elements. You compose what you need, rearrange parts, swap them out. No prop soup, no render prop escape hatches.
+
+**CSS-first.** Styles live in CSS files, themed through CSS variables, scoped with BEM classes. Tailwind v4's `@theme` directive maps tokens directly. No JavaScript style objects at runtime.
+
+**Accessible from the start.** v2 used React Aria hooks. v3 migrated to [React Aria Components](https://react-aria.adobe.com/), the higher-level component layer. Keyboard navigation, focus management, screen reader announcements, and ARIA attributes are built in, not bolted on.
+
+## Compound Components
+
+In v2, components took flat props: `<Card title="X" description="Y">`. Clean at first. But customization hit walls fast. How do you style just the header? How do you slot an icon between the title and description?
+
+v3 components use compound structure:
+
+```tsx
+<Card>
+  <Card.Header>
+    <Card.Title>Product</Card.Title>
+    <Card.Description>Details about this product.</Card.Description>
+  </Card.Header>
+  <Card.Body>
+    <p>Card content goes here.</p>
+  </Card.Body>
+  <Card.Footer>
+    <Button variant="primary">Buy now</Button>
+  </Card.Footer>
+</Card>
+```
+
+More lines of code. But every piece is a real element you can style, move, or replace. The pattern runs through the entire library, from Accordion to Toast.
+
+<ComponentPreview
+  name="accordion-basic"
+/>
+
+Each compound component shares state through React context. The root component creates a style context, and every child consumes it. You never pass classNames down manually:
+
+```tsx
+<Alert status="success">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>Profile updated</Alert.Title>
+    <Alert.Description>Your changes have been saved.</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+<ComponentPreview
+  name="alert-basic"
+/>
+
+### Progressive Disclosure
+
+Components support both simple and compound usage. Start with the one-liner. Add structure when you need it:
+
+```tsx
+// One line
+<Button>Submit</Button>
+
+// With icon
+<Button>
+  <Icon icon="gravity-ui:check" />
+  Submit
+</Button>
+
+// Full control
+<Button variant="primary" size="lg" isDisabled={isLoading}>
+  {isLoading ? <Spinner size="sm" /> : <Icon icon="gravity-ui:check" />}
+  {isLoading ? "Saving..." : "Submit"}
+</Button>
+```
+
+<ComponentPreview
+  name="button-variants"
+/>
+
+## Tailwind CSS v4 + CSS Variables
+
+HeroUI v3 dropped runtime styles entirely. The theming system runs on Tailwind CSS v4's native CSS variable layer with OKLCH colors.
+
+Every design token is a CSS variable:
+
+```css
+:root {
+  --background: oklch(0.9702 0 0);
+  --foreground: oklch(0.2103 0.0059 285.89);
+  --accent: oklch(0.6204 0.195 253.83);
+  --surface: oklch(100% 0 0);
+  --danger: oklch(0.6532 0.2328 25.74);
+  --radius: 0.5rem;
+}
+```
+
+Tailwind's `@theme` directive maps these tokens to utility classes. `bg-accent`, `text-foreground`, `rounded-lg` all resolve to CSS variables. Light and dark mode switch by swapping the values:
+
+```css
+.dark, [data-theme="dark"] {
+  --background: oklch(12% 0.005 285.823);
+  --foreground: oklch(0.9911 0 0);
+  --surface: oklch(0.2103 0.0059 285.89);
+}
+```
+
+No provider component. No JavaScript theme object. One CSS import, two lines:
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+### BEM Classes
+
+Component styles use BEM naming: `.button`, `.button--primary`, `.button--lg`, `.card__header`, `.accordion__trigger`. Override any component globally through standard CSS:
+
+```css
+@layer components {
+  .button {
+    @apply font-semibold tracking-wide;
+  }
+
+  .button--primary {
+    @apply bg-blue-600 hover:bg-blue-700;
+  }
+}
+```
+
+No className threading. No style prop gymnastics. Your design system overrides happen in CSS, where they belong.
+
+### Custom Themes
+
+Create a theme by defining your own token set. Everything cascades from there:
+
+```css
+@layer base {
+  [data-theme="ocean"] {
+    --accent: oklch(0.450 0.150 230);
+    --background: oklch(0.985 0.015 225);
+    --radius: 0.75rem;
+    --border: oklch(0.50 0.060 230 / 22%);
+  }
+}
+```
+
+Apply it with a single data attribute:
+
+```html
+<html data-theme="ocean">
+```
+
+The [Theme Builder](/themes) generates these variables visually. Pick colors, adjust radius and spacing, export the CSS.
+
+### Selective Imports
+
+Import the full library or pick individual component styles:
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles/base" layer(base);
+@import "@heroui/styles/themes/default" layer(theme);
+@import "@heroui/styles/components/button.css" layer(components);
+@import "@heroui/styles/components/card.css" layer(components);
+```
+
+Ship only the CSS you use. No unused component styles in production.
+
+## Animation That Respects Users
+
+Every HeroUI component uses CSS transitions tied to data attributes. Popovers fade in with `[data-entering]`. Buttons scale on `[data-pressed]`. Accordions expand with `[aria-hidden="false"]`. No JavaScript animation runtime.
+
+```css
+.popover[data-entering] {
+  @apply animate-in zoom-in-90 fade-in-0 duration-200;
+}
+
+.button:active,
+.button[data-pressed="true"] {
+  transform: scale(0.97);
+}
+```
+
+### Reduce Motion
+
+Some users need animations disabled. HeroUI extends Tailwind's `motion-reduce:` variant to support both the system preference and a data attribute:
+
+```css
+.button {
+  @apply transition-colors motion-reduce:transition-none;
+}
+```
+
+This responds to the native `prefers-reduced-motion: reduce` media query. It also responds to `data-reduce-motion="true"` on the HTML element, for app-level control:
+
+```html
+<html data-reduce-motion="true">
+  <!-- All HeroUI animations are disabled -->
+</html>
+```
+
+The data attribute overrides the system setting. Set `data-reduce-motion="false"` to force animations on, or remove the attribute to defer to the OS. Every animated component respects this. No opt-in required.
+
+### Bring Your Own Animation Library
+
+Framer Motion, Motion One, or any CSS animation library works alongside HeroUI's built-in transitions:
+
+```tsx
+import { motion } from "framer-motion";
+import { Button } from "@heroui/react";
+
+const MotionButton = motion(Button);
+
+<MotionButton whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+  Animated
+</MotionButton>
+```
+
+## 75+ Components for React
+
+75+ components covering forms, data display, navigation, overlays, feedback, layout, date and time, and color.
+
+### Date & Time
+
+Six components: Calendar, RangeCalendar, DateField, DatePicker, DateRangePicker, and TimeField. Built on React Aria's internationalized date library with Gregorian, Buddhist, Persian, and other calendar systems by default. Keyboard navigation, screen reader labels, and locale-aware formatting come free.
+
+<ComponentPreview
+  name="date-picker-basic"
+/>
+
+<ComponentPreview
+  name="range-calendar-basic"
+/>
+
+### Color
+
+Six color components: ColorPicker, ColorArea, ColorSlider, ColorField, ColorSwatch, and ColorSwatchPicker. Pick from a 2D area, adjust hue and alpha sliders, enter hex values, or select from a swatch palette.
+
+<ComponentPreview
+  name="color-picker-basic"
+/>
+
+### Data
+
+Need a table with sorting, row selection, column resizing, async loading, and custom cells? Table does all of that. Large datasets get virtualization via React Aria's `Virtualizer`. ListBox shares the same virtualization support.
+
+<ComponentPreview
+  name="table-virtualization"
+/>
+
+### Forms
+
+Thirteen form components: TextField, Select, Autocomplete, ComboBox, Checkbox, CheckboxGroup, RadioGroup, Switch, InputOTP, NumberField, SearchField, Slider, and Fieldset. All integrate with React Aria's form validation. `isRequired`, `isInvalid`, and custom error messages through FieldError work across every one.
+
+<ComponentPreview
+  name="select-default"
+/>
+
+<ComponentPreview
+  name="input-otp-basic"
+/>
+
+### Overlays
+
+Seven overlay components. Drawer supports four placements with drag-to-dismiss gestures. Toast stacks notifications with auto-dismiss and promise support. Menu composes with submenus and sections. Plus Modal, AlertDialog, Popover, and Tooltip.
+
+<ComponentPreview
+  name="drawer-basic"
+/>
+
+<ComponentPreview
+  name="toast-default"
+/>
+
+### Navigation
+
+Tabs, Accordion, Breadcrumbs, Pagination, and Link. Tabs support horizontal and vertical orientation. Accordion supports single or multiple expanded panels.
+
+<ComponentPreview
+  name="tabs-basic"
+/>
+
+### Feedback
+
+ProgressBar and ProgressCircle handle determinate + indeterminate states. Meter maps values to semantic colors: green for safe, yellow for cautious, red for critical. Skeleton and Spinner round out the set.
+
+<ComponentPreview
+  name="meter-colors"
+/>
+
+<ComponentPreview
+  name="skeleton-basic"
+/>
+
+### Buttons & Toggles
+
+Button, ButtonGroup, ToggleButton, ToggleButtonGroup, CloseButton, and Toolbar. ButtonGroup connects buttons with shared borders and supports vertical orientation. Toolbar groups buttons, toggles, and separators into an accessible `role="toolbar"` container.
+
+<ComponentPreview
+  name="toggle-button-group-attached"
+/>
+
+### Granular Imports
+
+Import from the root or from per-component subpaths. Both work:
+
+```tsx
+// Root import
+import { Button, Card, Table } from "@heroui/react";
+
+// Subpath import
+import { Button } from "@heroui/react/button";
+import { Card } from "@heroui/react/card";
+import { Table } from "@heroui/react/table";
+```
+
+## UI for Agents
+
+More developers build by prompting than by reading API docs. HeroUI v3 accounts for that.
+
+### MCP Server
+
+The HeroUI MCP Server connects AI coding assistants (Cursor, Claude Code, VS Code Copilot, Windsurf, Zed) to component docs, props, source code, CSS styles, and theme variables. The AI reads the source of truth directly instead of guessing from training data.
+
+```json
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+Ask your AI assistant "update HeroUI to the latest version" and it will compare versions, review the changelog for breaking changes, and apply the necessary code updates automatically.
+
+### Agent Skills
+
+Installable knowledge packs for Cursor and Claude Code. Component patterns, variant usage, theming instructions, and upgrade guides. Preloaded context so the AI writes correct HeroUI code on the first attempt.
+
+### LLMs.txt
+
+Structured documentation files optimized for AI context windows. Published at `/llms.txt` and `/llms-components.txt`, these give any LLM-powered tool a machine-readable summary of HeroUI's API surface.
+
+MCP server, agent skills, LLMs.txt. Three layers that give AI assistants the same access to HeroUI that human developers get from docs.
+
+## HeroUI Native
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/heroui-native-v1-release-.mp4"
+  height={430}
+/>
+
+HeroUI Native ships alongside HeroUI v3 for the web. Shared design tokens. Shared compound component pattern. Where the platforms diverge, the APIs adapt to feel native on each. Different rendering engine, same mental model.
+
+### 37 Components
+
+Forms, navigation, overlays, feedback, layout. From Button, Input, and Checkbox to Dialog, BottomSheet, Select, Toast, and InputOTP. Components follow the compound pattern:
+
+```tsx
+import { Dialog, Button } from "heroui-native";
+
+<Dialog>
+  <Dialog.Trigger asChild>
+    <Button variant="primary">Open</Button>
+  </Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay />
+    <Dialog.Content>
+      <Dialog.Close />
+      <Dialog.Title>Confirm action</Dialog.Title>
+      <Dialog.Description>This cannot be undone.</Dialog.Description>
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+### Familiar Across Platforms
+
+If you know HeroUI on the web, most of that knowledge carries over. Familiar component names, dot notation, and prop patterns wherever possible. Where the platforms diverge (layout primitives, gestures, navigation), the APIs adapt to feel native. The mental model stays the same:
+
+```tsx
+// React (web)
+<Alert status="success">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>Profile updated</Alert.Title>
+    <Alert.Description>Your changes have been saved.</Alert.Description>
+  </Alert.Content>
+</Alert>
+
+// React Native — similar API, native behavior
+<Alert status="success">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>Profile updated</Alert.Title>
+    <Alert.Description>Your changes have been saved.</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+Teams working on both web and mobile share knowledge and patterns. The learning curve between platforms is minimal, even where the components differ.
+
+### Shared Design Tokens
+
+Both platforms read from the same token set. Colors like `accent`, `surface`, `danger`, and `success` resolve identically across web and native. Your brand stays consistent without maintaining two separate systems.
+
+```tsx
+import { View, Text } from "react-native";
+
+<View className="bg-surface p-4 rounded-lg">
+  <Text className="text-foreground text-lg font-semibold">Card Title</Text>
+  <Text className="text-muted text-sm">Consistent on web and mobile.</Text>
+</View>
+```
+
+Tailwind CSS v4 on both platforms. [Uniwind](https://uniwind.dev/) on native, standard Tailwind on web.
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/native-v1-demo/v-1-demo-2.mp4"
+  height={430}
+/>
+
+### Unified Animation API
+
+Every animated native component exposes a single `animation` prop. Values, timing, spring configs, enter/exit transitions controlled from one place. Reanimated powers the math, but you never touch it directly:
+
+```tsx
+import { Switch } from "heroui-native";
+
+<Switch
+  animation={{
+    scale: { value: [1, 0.9] },
+    backgroundColor: { value: ["#172554", "#eab308"] },
+  }}
+>
+  <Switch.Thumb />
+</Switch>
+```
+
+Disable animations at any level. Per-component, per-tree, or globally:
+
+```tsx
+// Single component
+<Switch.Thumb animation={false} />
+
+// Entire subtree
+<Card animation="disable-all">...</Card>
+
+// App-wide
+<HeroUINativeProvider config={{ animation: "disable-all" }}>
+  <App />
+</HeroUINativeProvider>
+```
+
+Reduce Motion is automatic. When a user enables it in system settings, all animations stop. No extra code.
+
+### Adaptive Presentation Modes
+
+Popover, Select, and Menu switch between popover, bottom-sheet, and dialog with a single prop. Same component, different presentation depending on context:
+
+```tsx
+<Select presentation="popover">...</Select>
+<Select presentation="bottom-sheet">...</Select>
+<Select presentation="dialog">...</Select>
+```
+
+No other React Native component library does this.
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/native-v1-demo/v-1-demo-3.mp4"
+  height={430}
+/>
+
+### Granular Imports
+
+Each native component has its own entry point. Import only what you use:
+
+```tsx
+import { HeroUINativeProvider } from "heroui-native/provider";
+import { Button } from "heroui-native/button";
+import { Card } from "heroui-native/card";
+```
+
+### AI Tooling for Native
+
+HeroUI Native ships with its own MCP Server, agent skills, and LLMs.txt. Same tooling structure as the web library:
+
+```json
+{
+  "mcpServers": {
+    "heroui-native": {
+      "command": "npx",
+      "args": ["-y", "@heroui/native-mcp@latest"]
+    }
+  }
+}
+```
+
+## HeroUI Pro
+
+Alongside v3, the pre-release of [HeroUI Pro](https://heroui.pro) is live. Premium components, templates, and AI tooling for both React and React Native.
+
+### Pro Components
+
+Six components beyond the core library: Command palette, Kanban board, Stats dashboard, Filters, Agenda, and DataGrid. Accessibility, animations, and platform edge cases are handled. Available for both web and native.
+
+### Templates
+
+Full-page, responsive starter templates: Dashboard, Mail, Chat, and Finances. Real layouts with real structure. Start from something that works and customize from there.
+
+### Advanced AI Tooling
+
+Pro licenses include premium MCP servers and agent skills with Pro component docs, usage patterns, and upgrade paths baked in.
+
+Pre-sale pricing is live. v2 Pro customers get an upgrade discount. Use the same email or contact support.
+
+[See plans and pricing at heroui.pro](https://heroui.pro)
+
+## Get Started
+
+### React (Web)
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles @heroui/react
+    ```
+  </Tab>
+</Tabs>
+
+Add two lines to your CSS:
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+### React Native
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install heroui-native
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add heroui-native
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add heroui-native
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add heroui-native
+    ```
+  </Tab>
+</Tabs>
+
+See the [React docs](/docs/react/getting-started/quick-start) and [React Native docs](/docs/native/getting-started/quick-start) for full setup guides (peer dependencies, Uniwind config, and provider setup).
+
+## Figma Kit v3
+
+Every component in HeroUI v3 has a 1:1 match in Figma. Same variants, same naming, same structure. The kit uses auto layout throughout, Figma variables that map directly to code tokens (`--accent`, `--surface`, `--radius`), and Figma's new [slots](https://help.figma.com/hc/en-us/articles/38231200344599-Use-slots-to-build-flexible-components-in-Figma) for flexible component composition. Designers rearrange, swap, and customize parts the same way developers do in code.
+
+<iframe
+  style={{border: "1px solid rgba(0, 0, 0, 0.1)"}}
+  className="w-full rounded-xl"
+  width="800"
+  height="450"
+  src="https://embed.figma.com/design/H0xHxBB8qOKjHHAUCsvgHc/HeroUI-Figma-Kit-V3?m=auto&node-id=2912-29668&embed-host=share"
+  allowFullScreen
+/>
+
+[Get the Figma Kit](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+
+## Acknowledgments
+
+[React Aria](https://react-aria.adobe.com/) gave us the accessibility layer we couldn't build as well on our own. Tailwind CSS v4's native CSS variable approach shaped the entire theming system. The compound component pattern was refined by studying how [Radix](https://www.radix-ui.com/), [Ark UI](https://ark-ui.com/), and [Base UI](https://base-ui.com/) solved composition.
+
+Thanks to every community member who filed issues, tested betas, and gave feedback throughout the alpha and RC cycle. The library is better because of you.
+
+## Links
+
+- [React Docs](/docs/react/getting-started/quick-start)
+- [React Native Docs](/docs/native/getting-started/quick-start)
+- [Theme Builder](/themes)
+- [MCP Server](/docs/ui-for-agents/mcp-server)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
