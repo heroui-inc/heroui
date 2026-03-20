@@ -164,7 +164,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
       className="not-prose relative overflow-hidden rounded-xl border border-separator"
       data-playing={isPlaying}
     >
-      {isLoading && !isPlaying ? (
+      {isLoading ? (
         <Spinner
           className="absolute top-1/2 left-1/2 z-2 -translate-x-1/2 -translate-y-1/2"
           color="accent"
