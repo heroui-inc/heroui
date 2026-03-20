@@ -12,9 +12,27 @@ description: A ground-up rewrite for React and React Native. 75+ web components,
   height={430}
 />
 
-HeroUI started as a React library with nice defaults and Framer Motion animations. v3 is something different: a design system for React and React Native, built on Tailwind CSS v4 and compound components. 75+ web components. 37 native components. Shared design tokens and compound architecture across both, but each platform is built to feel native on its own. APIs and components differ where React and React Native differ.
+HeroUI started as a React library with nice defaults and Framer Motion animations. v3 is a ground-up rewrite for React and React Native. New architecture, new styling system, 112+ components across both platforms.
 
-The web library was rewritten from scratch. New rendering model, new styling system, new component API. No runtime style engine, no provider wrappers, no Framer Motion dependency. CSS variables, CSS transitions, and [React Aria Components](https://react-aria.adobe.com/) for accessibility.
+## Overview
+
+### React (Web)
+
+75+ components covering forms, data display, navigation, overlays, feedback, layout, date and time, and color. Compound component architecture on [React Aria Components](https://react-aria.adobe.com/), styled with Tailwind CSS v4 and CSS variables. No runtime styles.
+
+[Jump to details](#compound-components)
+
+### React Native
+
+37 components with shared design tokens, compound pattern, unified animation API, and adaptive presentation modes. Built native on each platform with [Uniwind](https://uniwind.dev/) for Tailwind CSS v4 support.
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/heroui-native-v1-release-.mp4"
+  playMode="manual"
+  height={430}
+/>
+
+[Jump to details](#heroui-native)
 
 ## Design Principles
 
@@ -235,8 +253,6 @@ const MotionButton = motion(Button);
 
 ## 75+ Components for React
 
-75+ components covering forms, data display, navigation, overlays, feedback, layout, date and time, and color.
-
 ### Date & Time
 
 Six components: Calendar, RangeCalendar, DateField, DatePicker, DateRangePicker, and TimeField. Built on React Aria's internationalized date library with Gregorian, Buddhist, Persian, and other calendar systems by default. Keyboard navigation, screen reader labels, and locale-aware formatting come free.
@@ -370,6 +386,26 @@ MCP server, agent skills, LLMs.txt. Three layers that give AI assistants the sam
 />
 
 HeroUI Native ships alongside HeroUI v3 for the web. Shared design tokens. Shared compound component pattern. Where the platforms diverge, the APIs adapt to feel native on each. Different rendering engine, same mental model.
+
+### Try It on Your Device
+
+Scan the QR code with your device's camera or [Expo Go](https://expo.dev/go) to explore all 37 components live:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+<div className="flex justify-center">
+  **[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+</div>
+
+<Callout type="info">
+  **Android users:** If scanning the QR code redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+</Callout>
 
 ### 37 Components
 
