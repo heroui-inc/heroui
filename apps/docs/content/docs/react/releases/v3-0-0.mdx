@@ -12,13 +12,13 @@ description: A ground-up rewrite for React and React Native. 75+ web components,
   height={430}
 />
 
-HeroUI started as a React library with nice defaults and Framer Motion animations. v3 is a ground-up rewrite for React and React Native. New architecture, new styling system, 112+ components across both platforms.
+Every component rewritten. Every animation moved to CSS. Styles decoupled from implementation. A brand-new React Native library. And tooling that treats AI assistants as a primary development interface.
 
 ## Overview
 
 ### React (Web)
 
-75+ components covering forms, data display, navigation, overlays, feedback, layout, date and time, and color. Compound component architecture on [React Aria Components](https://react-aria.adobe.com/), styled with Tailwind CSS v4 and CSS variables. No runtime styles.
+75+ components. [React Aria Components](https://react-aria.adobe.com/) for accessibility. Tailwind CSS v4 + CSS variables for theming. Styles in a standalone package you can use with any framework.
 
 [Jump to details](#compound-components)
 
@@ -34,21 +34,34 @@ HeroUI started as a React library with nice defaults and Framer Motion animation
 
 [Jump to details](#heroui-native)
 
+### HeroUI Pro
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-pro@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-pro-dark@2x.jpg"
+  alt="HeroUI Pro"
+  href="https://heroui.pro"
+/>
+
+Premium components, templates, and AI tooling for React and React Native. Command palette, Kanban, DataGrid, Dashboard templates, and more. Pre-sale pricing at [heroui.pro](https://heroui.pro).
+
+[Jump to details](#heroui-pro)
+
 ## Design Principles
 
-Three ideas shaped every decision in v3.
+**Composition over configuration:** v2 components were black boxes. v3 adopts compound components: every internal piece is a real element you can style, move, swap, or remove.
 
-**Composition over configuration.** Components expose their internal pieces as real elements. You compose what you need, rearrange parts, swap them out. No prop soup, no render prop escape hatches.
+**Styles separated from implementation:** `@heroui/styles` is standalone CSS. `@heroui/react` handles behavior. Use the styles with React, plain HTML + Tailwind, or any framework. BEM class names make every slot customizable globally. Swap themes to change not just variables, but how components look and feel.
 
-**CSS-first.** Styles live in CSS files, themed through CSS variables, scoped with BEM classes. Tailwind v4's `@theme` directive maps tokens directly. No JavaScript style objects at runtime.
+**Headless when you want it:** Remove the `@heroui/styles` import and you have a headless library. We maintain functionality and accessibility. You focus on your product.
 
-**Accessible from the start.** v2 used React Aria hooks. v3 migrated to [React Aria Components](https://react-aria.adobe.com/), the higher-level component layer. Keyboard navigation, focus management, screen reader announcements, and ARIA attributes are built in, not bolted on.
+**Performance by default:** v2 used Framer Motion for every animation. v3 replaced it with native CSS transitions and keyframes. Lighter bundles, GPU-accelerated, no JS animation runtime.
+
+**Accessible from the start:** Migrated from React Aria hooks to [React Aria Components](https://react-aria.adobe.com/). Keyboard navigation, focus management, screen readers, and ARIA attributes are built in.
 
 ## Compound Components
 
-In v2, components took flat props: `<Card title="X" description="Y">`. Clean at first. But customization hit walls fast. How do you style just the header? How do you slot an icon between the title and description?
-
-v3 components use compound structure:
+Here's what the compound pattern looks like in practice:
 
 ```tsx
 <Card>
@@ -114,9 +127,7 @@ Components support both simple and compound usage. Start with the one-liner. Add
 
 ## Tailwind CSS v4 + CSS Variables
 
-HeroUI v3 dropped runtime styles entirely. The theming system runs on Tailwind CSS v4's native CSS variable layer with OKLCH colors.
-
-Every design token is a CSS variable:
+Theming runs on Tailwind CSS v4's native CSS variable layer with OKLCH colors. Every design token is a CSS variable:
 
 ```css
 :root {
@@ -148,7 +159,7 @@ No provider component. No JavaScript theme object. One CSS import, two lines:
 
 ### BEM Classes
 
-Component styles use BEM naming: `.button`, `.button--primary`, `.button--lg`, `.card__header`, `.accordion__trigger`. Override any component globally through standard CSS:
+Override any component globally through standard CSS:
 
 ```css
 @layer components {
@@ -203,7 +214,7 @@ Ship only the CSS you use. No unused component styles in production.
 
 ## Animation That Respects Users
 
-Every HeroUI component uses CSS transitions tied to data attributes. Popovers fade in with `[data-entering]`. Buttons scale on `[data-pressed]`. Accordions expand with `[aria-hidden="false"]`. No JavaScript animation runtime.
+All component animations use CSS transitions and keyframes tied to data attributes. Popovers fade in with `[data-entering]`. Buttons scale on `[data-pressed]`. Accordions expand with `[aria-hidden="false"]`.
 
 ```css
 .popover[data-entering] {
@@ -385,7 +396,7 @@ MCP server, agent skills, LLMs.txt. Three layers that give AI assistants the sam
   height={430}
 />
 
-HeroUI Native ships alongside HeroUI v3 for the web. Shared design tokens. Shared compound component pattern. Where the platforms diverge, the APIs adapt to feel native on each. Different rendering engine, same mental model.
+HeroUI Native is a brand-new library shipping alongside v3 for the web. Different rendering engine, same mental model. Where the platforms diverge, the APIs adapt to feel native on each.
 
 ### Try It on Your Device
 
@@ -638,6 +649,8 @@ Add two lines to your CSS:
 </Tabs>
 
 See the [React docs](/docs/react/getting-started/quick-start) and [React Native docs](/docs/native/getting-started/quick-start) for full setup guides (peer dependencies, Uniwind config, and provider setup).
+
+**Coming from HeroUI v2?** Follow the [Migration Guide](/docs/react/migration) for step-by-step upgrade instructions.
 
 ## Figma Kit v3
 

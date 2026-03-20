@@ -53,14 +53,13 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     (element: HTMLVideoElement | null) => {
       videoRef.current = element;
       if (element) {
-        // Call intersectionRef if it's a function (ref callback)
+        if (element.readyState >= 3) {
+          setIsLoading(false);
+        }
         if (typeof intersectionRef === "function") {
           intersectionRef(element);
         }
-        // Note: If intersectionRef is a ref object, we can't mutate it as it's a hook return value
-        // The intersection observer hook should handle ref assignment internally
       } else {
-        // Cleanup: call with null when element is removed
         if (typeof intersectionRef === "function") {
           intersectionRef(null);
         }
@@ -104,24 +103,6 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
     setIsPlaying(false);
     onPlayingChange?.(false);
   }, [onPlayingChange]);
-
-  useEffect(() => {
-    const videoEl = videoRef.current;
-
-    if (videoEl) {
-      // Check if video is already ready, but update state via event handler to avoid setState in effect
-      if (videoEl.readyState > 3) {
-        // Trigger the event handler asynchronously to avoid setState in effect
-        videoEl.dispatchEvent(new Event("canplaythrough"));
-      }
-      videoEl.addEventListener("canplaythrough", handleCanPlay);
-
-      // Cleanup the event listener
-      return () => {
-        videoEl.removeEventListener("canplaythrough", handleCanPlay);
-      };
-    }
-  }, [handleCanPlay]);
 
   const onTogglePlay = useCallback(() => {
     if (videoRef.current) {

@@ -2,7 +2,7 @@ import type {ReactNode} from "react";
 
 import {Separator} from "@heroui/react";
 
-import {HeaderBanner} from "@/app/(home)/components/pro-banner";
+import {HeaderBanner, ProBanner} from "@/app/(home)/components/pro-banner";
 import {baseOptions} from "@/app/layout.config";
 import {FrameworksTabs} from "@/components/frameworks-tabs";
 import {DocsLayout} from "@/components/fumadocs/layouts/notebook";
@@ -76,6 +76,7 @@ export default function Layout({children}: {children: ReactNode}) {
       >
         {children}
       </DocsLayout>
+      <ProBanner />
     </>
   );
 }
