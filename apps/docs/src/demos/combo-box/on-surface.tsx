@@ -18,7 +18,7 @@ export function OnSurface() {
   return (
     <Surface className="w-[320px] rounded-3xl p-6">
       <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-        <ComboBox isRequired className="w-full" name="animal">
+        <ComboBox isRequired className="w-full" name="animal" variant="secondary">
           <Label>Favorite Animal</Label>
           <ComboBox.InputGroup>
             <Input placeholder="Search animals..." />

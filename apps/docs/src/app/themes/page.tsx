@@ -1,20 +1,20 @@
-import {ScrollShadow} from "@heroui/react";
 import {Suspense} from "react";
 
 import {CodePanelProvider} from "@/hooks/use-code-panel";
+
+import {ProBanner} from "../(home)/components/pro-banner";
 
 import {
   AccentColorSelector,
   BaseColorSlider,
   BuilderHeader,
   FontFamilyPopover,
-  PreviewContainer,
   RadiusPopover,
-  ThemeCodePanel,
   ThemePopover,
 } from "./components";
 import {MobileFooter} from "./components/mobile-footer";
 import {Onboarding} from "./components/onboarding";
+import {ThemeBuilderContent} from "./components/theme-builder-content";
 import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
 
 export default function ThemeBuilderPage() {
@@ -26,16 +26,7 @@ export default function ThemeBuilderPage() {
           id={THEME_BUILDER_PAGE_ID}
         >
           <BuilderHeader />
-          <ScrollShadow
-            hideScrollBar
-            className="mx-auto flex h-full w-full max-w-[1400px] flex-col items-center overflow-scroll rounded-2xl border border-separator p-0"
-            visibility="none"
-          >
-            <div className="relative flex w-full flex-1 items-center justify-center">
-              <PreviewContainer />
-              <ThemeCodePanel />
-            </div>
-          </ScrollShadow>
+          <ThemeBuilderContent />
           <div className="mx-auto hidden items-center justify-between gap-4 py-6 max-[1200px]:flex-col sm:flex">
             <div className="flex items-center gap-4">
               <AccentColorSelector />
@@ -62,6 +53,7 @@ export default function ThemeBuilderPage() {
           <MobileFooter />
         </div>
         <Onboarding />
+        <ProBanner />
       </Suspense>
     </CodePanelProvider>
   );

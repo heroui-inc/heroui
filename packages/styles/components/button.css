@@ -115,8 +115,8 @@
 .button--ghost,
 .button--outline {
   --button-bg: transparent;
-  --button-bg-hover: var(--color-default-hover);
-  --button-bg-pressed: var(--color-default-hover);
+  --button-bg-hover: var(--color-default);
+  --button-bg-pressed: var(--color-default);
   --button-fg: var(--color-default-foreground);
 }
 

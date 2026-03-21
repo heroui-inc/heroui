@@ -1,6 +1,8 @@
 import type {RadiusId, ThemeId} from "./theme-values";
 import type {StaticImageData} from "next/image";
 
+import {env} from "~env";
+
 import airbnbTheme from "@/assets/themes/airbnb.png";
 import blackTheme from "@/assets/themes/black.png";
 import coinbaseTheme from "@/assets/themes/coinbase.png";
@@ -31,13 +33,20 @@ export {
   themeValuesById,
 } from "./theme-values";
 
-export const tabs = [
-  {disabled: false, label: "components"},
-  {disabled: true, label: "dashboard"},
-  {disabled: true, label: "mail"},
-  {disabled: true, label: "chat"},
-  {disabled: true, label: "finances"},
-];
+export const tabLabels = ["components", "dashboard", "mail", "chat", "finances"] as const;
+
+export type TabLabel = (typeof tabLabels)[number];
+
+export const tabs = tabLabels.map((label) => ({disabled: false, label}));
+
+export const HEROUI_PRO_URL = env.NEXT_PUBLIC_PRO_URL ?? "https://heroui.pro";
+
+export const iframeTabs: Record<string, string> = {
+  chat: `${HEROUI_PRO_URL}/templates/chat`,
+  dashboard: `${HEROUI_PRO_URL}/templates/dashboard`,
+  finances: `${HEROUI_PRO_URL}/templates/finances`,
+  mail: `${HEROUI_PRO_URL}/templates/mail`,
+};
 
 /**
  * Adaptive colors that need different values in light vs dark modes.

@@ -23,6 +23,7 @@
     "(forms)/input-group",
     "(forms)/input-otp",
     "(forms)/label",
+    "(buttons)/link-button",
     "(navigation)/list-group",
     "(collections)/menu",
     "(overlays)/popover",

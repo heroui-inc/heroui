@@ -6,6 +6,7 @@ on:
       - canary
       - v3
       - "beta-*"
+      - "rc-*"
 
 jobs:
   build:

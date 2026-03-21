@@ -3,10 +3,6 @@ title: Incremental Migration
 description: Step-by-step guide for migrating HeroUI v2 to v3 incrementally while keeping both versions working side-by-side
 ---
 
-<Callout type="warning">
-  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
-</Callout>
-
 ## Overview
 
 Incremental migration with coexistence allows you to migrate from HeroUI v2 to v3 component-by-component while keeping your project functional throughout the migration process. This approach uses special setup strategies to allow both v2 and v3 components to work side-by-side.
@@ -54,8 +50,8 @@ This strategy uses pnpm package aliases to install v3 packages under different n
   "dependencies": {
     "@heroui/react": "2.8.6",
     "@heroui/theme": "2.4.24",
-    "@heroui-v3/react": "npm:@heroui/react@beta",
-    "@heroui-v3/styles": "npm:@heroui/styles@beta"
+    "@heroui-v3/react": "npm:@heroui/react@latest",
+    "@heroui-v3/styles": "npm:@heroui/styles@latest"
   }
 }
 ```
@@ -110,8 +106,8 @@ This strategy uses v2's component-specific packages alongside v3's unified packa
 ```json
 {
   "dependencies": {
-    "@heroui/react": "beta", // v3
-    "@heroui/styles": "beta", // v3
+    "@heroui/react": "latest", // v3
+    "@heroui/styles": "latest", // v3
     "@heroui/button": "2.8.6", // v2
     "@heroui/card": "2.8.6", // v2
     // ... other v2 component packages as needed
@@ -133,7 +129,7 @@ import {Card} from "@heroui/card"; // v2
 
 ### Migration Process
 
-1. **Install v3 packages** (`@heroui/react@beta`, `@heroui/styles@beta`)
+1. **Install v3 packages** (`@heroui/react`, `@heroui/styles`)
 2. **Install v2 component packages** for components not yet migrated
 3. **Migrate one component at a time:**
    - Remove the v2 component package from dependencies

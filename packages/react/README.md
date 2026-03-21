@@ -16,23 +16,18 @@
   </a>
 </p>
 
-> **⚠️ Note:** You're currently viewing **HeroUI v3** (beta), which is in active development and close to stable. If you need v2, check out the [`v2` branch](https://github.com/heroui-inc/heroui/tree/v2).
-
 HeroUI is the modern UI library built to help you move fast, stay consistent, and deliver delightful user experiences.
-
-## Version Status
-
-**HeroUI v3** is currently in **beta** and approaching stable release. We're actively working on finalizing v3 and expect to reach stable status soon.
-
-If you need v2, you can find it on the [`v2` branch](https://github.com/heroui-inc/heroui/tree/v2). Your feedback and contributions to v3 are welcome!
 
 ## Getting Started
 
-Visit <a aria-label="heroui learn" href="https://v3.heroui.com/docs/quick-start">https://v3.heroui.com/docs/quick-start</a> to get started with HeroUI v3.
+Visit <a aria-label="heroui learn" href="https://heroui.com/docs/quick-start">https://heroui.com/docs/quick-start</a> to get started with HeroUI.
 
 ## Documentation
 
-Visit [https://v3.heroui.com/docs](https://v3.heroui.com/docs) to view the full documentation.
+It's the [heroui.com](https://heroui.com) website for the latest version of HeroUI.
+
+- **Latest (v3)**: [https://heroui.com](https://heroui.com)
+- **v2**: [https://v2.heroui.com](https://v2.heroui.com)
 
 ## Storybook
 
