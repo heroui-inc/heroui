@@ -1,9 +1,0 @@
-{
-  "mode": "pre",
-  "tag": "beta",
-  "initialVersions": {
-    "@heroui/react": "3.0.0-rc.1",
-    "@heroui/styles": "3.0.0-rc.1"
-  },
-  "changesets": ["pink-monkeys-notice"]
-}
