@@ -4,13 +4,14 @@ import type {CSSProperties} from "react";
 import type {Color} from "react-aria-components";
 
 import {Palette} from "@gravity-ui/icons";
-import {ColorSwatchPicker, Tabs, buttonVariants} from "@heroui/react";
+import {ColorSwatchPicker, Spinner, Tabs, buttonVariants} from "@heroui/react";
 import {converter} from "culori";
 import LinkRoot from "fumadocs-core/link";
 import {useTheme} from "next-themes";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
 import {DemoComponents} from "@/components/demo";
+import {cn} from "@/utils/cn";
 
 import {HEROUI_PRO_URL, iframeTabs} from "../../themes/constants";
 import {
@@ -70,9 +71,12 @@ function getAccentStyleVars(color: Color): Record<string, string> {
   };
 }
 
+const LOADER_DURATION_MS = 250;
+
 export function DemoShowcase() {
   const [selectedTab, setSelectedTab] = useState("components");
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
+  const [iframeLoading, setIframeLoading] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const {resolvedTheme} = useTheme();
 
@@ -101,6 +105,15 @@ export function DemoShowcase() {
     return qs ? `/themes?${qs}` : "/themes";
   }, [selectedTab, selectedColor]);
 
+  const [prevSelectedTab, setPrevSelectedTab] = useState(selectedTab);
+
+  if (selectedTab !== prevSelectedTab) {
+    setPrevSelectedTab(selectedTab);
+    if (!iframeLoading) {
+      setIframeLoading(true);
+    }
+  }
+
   const sendMessageToIframe = useCallback(() => {
     const iframe = iframeRef.current;
 
@@ -127,6 +140,13 @@ export function DemoShowcase() {
     window.addEventListener("message", handleMessage);
 
     return () => window.removeEventListener("message", handleMessage);
+  }, [sendMessageToIframe]);
+
+  const handleIframeLoad = useCallback(() => {
+    sendMessageToIframe();
+    setTimeout(() => {
+      setIframeLoading(false);
+    }, LOADER_DURATION_MS);
   }, [sendMessageToIframe]);
 
   return (
@@ -203,13 +223,23 @@ export function DemoShowcase() {
             </div>
           </div>
           {selectedTab !== "components" && iframeTabs[selectedTab] != null && (
-            <iframe
-              ref={iframeRef}
-              className="absolute inset-0 h-full w-full rounded-2xl border border-border/50"
-              src={iframeTabs[selectedTab]}
-              title={selectedTab}
-              onLoad={sendMessageToIframe}
-            />
+            <div className="absolute inset-0">
+              <iframe
+                ref={iframeRef}
+                className="absolute inset-0 h-full w-full rounded-2xl border border-border/50"
+                src={iframeTabs[selectedTab]}
+                title={selectedTab}
+                onLoad={handleIframeLoad}
+              />
+              <div
+                className={cn(
+                  "pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-background transition-opacity duration-300",
+                  iframeLoading ? "opacity-100" : "opacity-0",
+                )}
+              >
+                <Spinner />
+              </div>
+            </div>
           )}
         </div>
       </div>

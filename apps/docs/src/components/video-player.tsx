@@ -142,7 +142,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
   return (
     <div
-      className="not-prose relative overflow-hidden rounded-xl border border-separator"
+      className="not-prose relative z-1 overflow-hidden rounded-xl border border-separator"
       data-playing={isPlaying}
     >
       {isLoading ? (
@@ -153,7 +153,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         />
       ) : null}
 
-      <div className="absolute right-3 bottom-3 z-1 flex items-center gap-1">
+      <div className="absolute right-3 bottom-3 z-2 flex items-center gap-1">
         <Tooltip delay={500}>
           <Tooltip.Trigger>
             <Button
@@ -208,7 +208,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         </Tooltip>
       </div>
 
-      <div className="absolute inset-0 z-3 cursor-pointer" onClick={handleVideoClick} />
+      <div className="absolute inset-0 z-1 cursor-pointer" onClick={handleVideoClick} />
 
       <video
         ref={setVideoRef}
