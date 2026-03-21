@@ -1,3 +1,4 @@
+import {Rocket} from "@gravity-ui/icons";
 import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 
@@ -6,25 +7,7 @@ import {StarsCount} from "@/components/github-link";
 import {GitHubIcon} from "@/icons/github";
 
 import {DemoShowcase} from "./components/demo-showcase";
-import {ProBadge} from "./components/pro-badge";
 import {ProBanner} from "./components/pro-banner";
-import {PRO_URL, SHOW_BANNER} from "./components/pro-constants";
-
-const ProChip = () => {
-  if (!SHOW_BANNER) return null;
-
-  return (
-    <a
-      className="chip animate-shine relative gap-1 rounded-full bg-accent/10 px-2 py-1 text-xs text-accent"
-      href={`${PRO_URL}?utm_source=heroui.com&utm_medium=hero_chip&utm_campaign=presale`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <ProBadge />
-      <span className="max-w-60 truncate sm:max-w-full">Get Pro at a better price now</span>
-    </a>
-  );
-};
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -35,7 +18,13 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="z-10 flex min-h-0 flex-1 flex-col items-center px-4 pt-12 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
-          <ProChip />
+          <LinkRoot
+            className="flex items-center gap-1 rounded-full bg-accent/10 px-2 py-1 text-xs text-accent transition-colors hover:bg-accent-soft-hover"
+            href="/docs/react/releases/v3-0-0"
+          >
+            <Rocket className="size-3 text-accent" />
+            <span className="max-w-60 truncate sm:max-w-full">Introducing HeroUI v3</span>
+          </LinkRoot>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
             Beautiful by default. <span className="text-muted/70">Customizable by design.</span>
           </h1>
