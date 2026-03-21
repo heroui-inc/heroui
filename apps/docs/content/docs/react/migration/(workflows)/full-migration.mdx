@@ -3,10 +3,6 @@ title: Full Migration
 description: Step-by-step guide for migrating HeroUI v2 to v3 using full migration approach
 ---
 
-<Callout type="warning">
-  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
-</Callout>
-
 ## Overview
 
 Full migration is a structured approach to migrating from HeroUI v2 to v3. This method involves migrating all component code first, then switching dependencies, ensuring a clean transition.
@@ -74,25 +70,25 @@ v3 requires React 19+. Update your React version:
   <Tab value="npm">
     ```bash
     npm uninstall @heroui/react @heroui/theme
-    npm install @heroui/styles@beta @heroui/react@beta
+    npm install @heroui/styles @heroui/react
     ```
   </Tab>
   <Tab value="pnpm">
     ```bash
     pnpm remove @heroui/react @heroui/theme
-    pnpm add @heroui/styles@beta @heroui/react@beta
+    pnpm add @heroui/styles @heroui/react
     ```
   </Tab>
   <Tab value="yarn">
     ```bash
     yarn remove @heroui/react @heroui/theme
-    yarn add @heroui/styles@beta @heroui/react@beta
+    yarn add @heroui/styles @heroui/react
     ```
   </Tab>
   <Tab value="bun">
     ```bash
     bun remove @heroui/react @heroui/theme
-    bun add @heroui/styles@beta @heroui/react@beta
+    bun add @heroui/styles @heroui/react
     ```
   </Tab>
 </Tabs>

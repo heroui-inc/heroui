@@ -4,10 +4,6 @@ description: Incremental coexistence migration guide for AI assistants helping m
 index: false
 ---
 
-<Callout type="warning">
-  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
-</Callout>
-
 ## Overview
 
 This guide is designed for AI assistants (agents) helping users migrate from HeroUI v2 to v3 using **incremental coexistence migration**. This approach allows v2 and v3 components to work side-by-side, enabling component-by-component migration while keeping the project functional.
@@ -45,12 +41,12 @@ For detailed setup and migration instructions, see the [Incremental Migration Gu
 For projects using incremental coexistence strategies, agents should:
 
 1. **Identify the strategy**: Check if project uses pnpm aliases (Strategy A) or component packages (Strategy B)
-   - **Strategy A**: Look for aliases like `"@heroui-v3/react": "npm:@heroui/react@beta"` in package.json
-   - **Strategy B**: Look for component-specific packages like `@heroui/button`, `@heroui/card` alongside `@heroui/react@beta`
+   - **Strategy A**: Look for aliases like `"@heroui-v3/react": "npm:@heroui/react@latest"` in package.json
+   - **Strategy B**: Look for component-specific packages like `@heroui/button`, `@heroui/card` alongside `@heroui/react`
 
 2. **Verify setup**: Ensure the coexistence setup is correct:
    - Strategy A: Both `@heroui/react` (v2) and `@heroui-v3/react` (v3 alias) are installed
-   - Strategy B: `@heroui/react@beta` (v3) and component packages like `@heroui/button` (v2) are installed
+   - Strategy B: `@heroui/react` (v3) and component packages like `@heroui/button` (v2) are installed
    - CSS is configured for both versions (see CSS Configuration section)
 
 ## Component-by-Component Migration Guidance
