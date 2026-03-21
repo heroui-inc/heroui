@@ -153,7 +153,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         />
       ) : null}
 
-      <div className="absolute right-3 bottom-3 z-4 flex items-center gap-1">
+      <div className="absolute right-3 bottom-3 z-1 flex items-center gap-1">
         <Tooltip delay={500}>
           <Tooltip.Trigger>
             <Button
