@@ -94,7 +94,7 @@ export function PreviewContainer() {
         id={THEME_BUILDER_CONTENT_ID}
         className={cn(
           "flex h-full w-full flex-1 bg-background px-4 py-8 font-sans xl:px-5 xl:py-7",
-          isComponentsTab ? "items-start" : "items-center lg:p-0 lg:pb-0!",
+          isComponentsTab ? "" : "items-center lg:p-0 lg:pb-0!",
         )}
       >
         {/* Mobile: always show DemoComponents */}
@@ -105,12 +105,16 @@ export function PreviewContainer() {
         <div
           className={cn(
             "hidden lg:flex lg:h-full lg:min-h-0 lg:w-full lg:flex-1",
-            !isComponentsTab && "lg:items-center",
+            isComponentsTab
+              ? "lg:flex-col lg:justify-center lg:overflow-x-hidden lg:overflow-y-auto"
+              : "lg:items-center",
           )}
         >
           {isComponentsTab ? (
             isMounted ? (
-              <DemoComponents />
+              <div className="my-auto flex justify-center">
+                <DemoComponents />
+              </div>
             ) : null
           ) : iframeSrc ? (
             <div className="relative h-full min-h-0 w-full flex-1">

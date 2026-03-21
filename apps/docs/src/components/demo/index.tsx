@@ -19,7 +19,7 @@ import {XProfileDemo} from "./x-profile-demo";
 
 export function DemoComponents() {
   return (
-    <div className="mx-auto grid grid-cols-1 gap-8 min-[1200px]:grid-cols-3! md:grid-cols-2 lg:grid-cols-[1fr_auto_1fr]">
+    <div className="mx-auto grid w-fit grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[auto_auto_auto]">
       {/* Left */}
       <div className="order-2 flex max-w-[360px] flex-col items-center gap-10 md:order-1">
         <TextfieldDemo />
