@@ -3,7 +3,7 @@
 import {Button, CloseButton, buttonVariants} from "@heroui/react";
 import {Calligraph} from "calligraph";
 import {AnimatePresence, motion} from "motion/react";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useSyncExternalStore} from "react";
 
 import {env} from "~env";
 
@@ -137,12 +137,32 @@ export function HeaderBanner() {
   );
 }
 
+const PRO_BANNER_DISMISSED_KEY = "heroui-pro-banner-dismissed";
+
+const subscribeToDismissed = (callback: () => void) => {
+  window.addEventListener("storage", callback);
+
+  return () => window.removeEventListener("storage", callback);
+};
+const getDismissedSnapshot = () => localStorage.getItem(PRO_BANNER_DISMISSED_KEY) === "true";
+const getDismissedServerSnapshot = () => true;
+
 export function ProBanner() {
-  const [visible, setVisible] = useState(true);
+  const wasPreviouslyDismissed = useSyncExternalStore(
+    subscribeToDismissed,
+    getDismissedSnapshot,
+    getDismissedServerSnapshot,
+  );
+  const [dismissed, setDismissed] = useState(false);
   const discount = useProDiscount();
   const time = useCountdown(discount?.endsAt ?? null);
 
-  if (!SHOW_BANNER) return null;
+  const visible = SHOW_BANNER && !wasPreviouslyDismissed && !dismissed;
+
+  const handleDismiss = () => {
+    setDismissed(true);
+    localStorage.setItem(PRO_BANNER_DISMISSED_KEY, "true");
+  };
 
   return (
     <AnimatePresence>
@@ -297,7 +317,7 @@ export function ProBanner() {
 
           <CloseButton
             className="absolute top-2 right-2 bg-transparent text-white/50 hover:bg-white/10 hover:text-white"
-            onPress={() => setVisible(false)}
+            onPress={handleDismiss}
           />
 
           {/* Content section */}
@@ -312,7 +332,7 @@ export function ProBanner() {
               </p>
             </div>
             <div className="flex items-center gap-2 pt-1">
-              <Button size="md" variant="outline" onPress={() => setVisible(false)}>
+              <Button size="md" variant="outline" onPress={handleDismiss}>
                 Close
               </Button>
               <a
