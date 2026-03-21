@@ -27,7 +27,7 @@ export function VersionSelector({className}: {className?: string}) {
         )}
       >
         <span className="max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap">
-          {currentVersion}
+          v{currentVersion}
         </span>
         <Iconify icon="chevron-down" />
       </Popover.Trigger>
