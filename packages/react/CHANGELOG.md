@@ -1,5 +1,14 @@
 # @heroui/react
 
+## 3.0.1
+
+### Patch Changes
+
+- README updated
+
+- Updated dependencies []:
+  - @heroui/styles@3.0.1
+
 ## 3.0.0
 
 ### Patch Changes

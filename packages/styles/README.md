@@ -2,6 +2,13 @@
 
 The core HeroUI styles package containing CSS files for components, themes, and utilities. This package provides the foundation for HeroUI's design system using Tailwind CSS v4 and is framework-agnostic.
 
+## Documentation
+
+It's the [heroui.com](https://heroui.com) website for the latest version of HeroUI.
+
+- **Latest (v3)**: [https://heroui.com](https://heroui.com)
+- **v2**: [https://v2.heroui.com](https://v2.heroui.com)
+
 ## Installation
 
 ```bash
