@@ -1,0 +1,60 @@
+---
+title: Agent Skills
+description: Enable AI assistants to migrate HeroUI v2 to v3
+---
+
+HeroUI Migration Skills give your AI assistant comprehensive knowledge of HeroUI v2 to v3 migration workflows, component guides, and best practices.
+
+### Installation
+
+```bash
+curl -fsSL https://v3.heroui.com/install | bash -s heroui-migration
+```
+
+Or using the skills package:
+
+```bash
+npx skills add heroui-inc/heroui
+```
+
+<span className="text-sm text-muted">
+Support Claude Code, Cursor, OpenCode and more.
+</span>
+
+### Usage
+
+Skills are **automatically discovered** by your AI assistant, or call it directly using `/heroui-migration` command.
+
+Simply ask your AI assistant to:
+- Migrate components from HeroUI v2 to v3
+- Get the full or incremental migration workflow
+- Fetch component-specific migration guides
+- Access hooks and styling migration documentation
+
+### What's Included
+
+- Migration workflows (full and incremental)
+- Component-specific migration guides (39 components)
+- Hooks migration guide (useDisclosure → useOverlayState, etc.)
+- Styling migration guide (utility classes, color tokens, CSS variables)
+- Key API changes and compound component patterns
+
+### Structure
+
+```
+skills/heroui-migration/
+├── SKILL.md                    # Main skill documentation
+├── LICENSE.txt                 # MIT license
+└── scripts/                    # Utility scripts
+    ├── list_migration_guides.mjs
+    ├── get_migration_guide.mjs
+    ├── get_component_migration_guides.mjs
+    ├── get_styling_migration_guide.mjs
+    └── get_hooks_migration_guide.mjs
+```
+
+## Links
+
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [Discord Community](https://discord.gg/9b6yyZKmH4)
+- [Agent Skills](https://agentskills.io/) - Learn about the Agent Skills format

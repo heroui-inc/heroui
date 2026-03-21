@@ -1,0 +1,457 @@
+---
+title: DatePicker
+description: Migration guide for DatePicker from HeroUI v2 to v3
+---
+
+<Callout type="info">
+  Refer to the [v3 DatePicker documentation](/docs/react/components/date-picker) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+## Structure Changes
+
+In v2, `DatePicker` was a single self-contained component with props for label, description, calendar, and time input:
+
+```tsx
+import { DatePicker } from "@heroui/react";
+
+export default function App() {
+  return (
+    <DatePicker label="Birth date" />
+  );
+}
+```
+
+In v3, DatePicker uses a composition-first API where you compose `DateField` and `Calendar` explicitly:
+
+```tsx
+import { DatePicker, DateField, Calendar, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <DatePicker>
+      <Label>Birth date</Label>
+      <DateField.Group>
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DatePicker.Trigger>
+            <DatePicker.TriggerIndicator />
+          </DatePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DatePicker.Popover>
+        <Calendar aria-label="Choose date">
+          <Calendar.Header>
+            <Calendar.YearPickerTrigger>
+              <Calendar.YearPickerTriggerHeading />
+              <Calendar.YearPickerTriggerIndicator />
+            </Calendar.YearPickerTrigger>
+            <Calendar.NavButton slot="previous" />
+            <Calendar.NavButton slot="next" />
+          </Calendar.Header>
+          <Calendar.Grid>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>
+              {(date) => <Calendar.Cell date={date} />}
+            </Calendar.GridBody>
+          </Calendar.Grid>
+        </Calendar>
+      </DatePicker.Popover>
+    </DatePicker>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `DatePicker` component with all parts (input, calendar, label, popover) handled internally via props
+**v3:** Composition-based API with `DatePicker`, `DateField`, `Calendar`, and `Label` composed together. Each part is a separate component.
+
+### 2. Composition Parts
+
+| v3 Component | Description |
+|-----------|-------------|
+| `DatePicker` | Root container and state owner |
+| `DatePicker.Trigger` | Button that opens the calendar popover |
+| `DatePicker.TriggerIndicator` | Calendar icon (default) or custom indicator |
+| `DatePicker.Popover` | Popover wrapper for the calendar |
+| `DateField.Group` | Input group wrapper |
+| `DateField.Input` | Segmented date input |
+| `DateField.Segment` | Individual date segment (month, day, year) |
+| `DateField.Suffix` | Suffix slot for the trigger button |
+| `Calendar` | Full calendar component (see [Calendar migration](/docs/react/migration/calendar)) |
+| `Label` | External label component |
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `value` | `value` | Same |
+| `defaultValue` | `defaultValue` | Same |
+| `onChange` | `onChange` | Same |
+| `minValue` | `minValue` | Same |
+| `maxValue` | `maxValue` | Same |
+| `isDateUnavailable` | `isDateUnavailable` | Same |
+| `isDisabled` | `isDisabled` | Same |
+| `isReadOnly` | `isReadOnly` | Same |
+| `isRequired` | `isRequired` | Same |
+| `isInvalid` | `isInvalid` | Same |
+| `granularity` | `granularity` | Same |
+| `hourCycle` | `hourCycle` | Same |
+| `hideTimeZone` | `hideTimeZone` | Same |
+| `shouldForceLeadingZeros` | `shouldForceLeadingZeros` | Same |
+| `pageBehavior` | - | Set on `Calendar` directly |
+| `label` | - | Use `Label` component |
+| `description` | - | Use `Description` component |
+| `errorMessage` | - | Use `FieldError` component |
+| `variant` | - | Use `DateField.Group` `variant` prop or Tailwind CSS |
+| `color` | - | Removed (use Tailwind CSS) |
+| `size` | - | Removed (use Tailwind CSS) |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `labelPlacement` | - | Control layout with Tailwind CSS |
+| `startContent` | - | Compose inside `DateField.Group` |
+| `endContent` | - | Compose inside `DateField.Group` |
+| `selectorIcon` | - | Pass children to `DatePicker.TriggerIndicator` |
+| `visibleMonths` | - | Use `Calendar` `visibleDuration` prop |
+| `showMonthAndYearPickers` | - | Use `Calendar.YearPickerTrigger` and `Calendar.YearPickerGrid` |
+| `calendarProps` | - | Pass props directly to `Calendar` |
+| `popoverProps` | - | Pass props directly to `DatePicker.Popover` |
+| `selectorButtonProps` | - | Pass props directly to `DatePicker.Trigger` |
+| `timeInputProps` | - | Compose time input separately |
+| `CalendarBottomContent` | - | Place content inside `DatePicker.Popover` after `Calendar` |
+| `validate` | - | Handle validation externally |
+| `placeholderValue` | `placeholderValue` | Same |
+| `autoFocus` | `autoFocus` | Same |
+| `disableAnimation` | - | Removed |
+| `classNames` | - | Use `className` on individual components |
+
+## Migration Examples
+
+### Basic DatePicker
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { DatePicker } from "@heroui/react";
+
+    <DatePicker label="Birth date" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { DatePicker, DateField, Calendar, Label } from "@heroui/react";
+
+    <DatePicker>
+      <Label>Birth date</Label>
+      <DateField.Group>
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DatePicker.Trigger>
+            <DatePicker.TriggerIndicator />
+          </DatePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DatePicker.Popover>
+        <Calendar aria-label="Choose date">
+          <Calendar.Header>
+            <Calendar.YearPickerTrigger>
+              <Calendar.YearPickerTriggerHeading />
+              <Calendar.YearPickerTriggerIndicator />
+            </Calendar.YearPickerTrigger>
+            <Calendar.NavButton slot="previous" />
+            <Calendar.NavButton slot="next" />
+          </Calendar.Header>
+          <Calendar.Grid>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>
+              {(date) => <Calendar.Cell date={date} />}
+            </Calendar.GridBody>
+          </Calendar.Grid>
+        </Calendar>
+      </DatePicker.Popover>
+    </DatePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### Controlled State
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { DatePicker } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState(parseDate("2024-03-07"));
+
+    <DatePicker
+      label="Date"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { DatePicker, DateField, Calendar, Label } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState(parseDate("2024-03-07"));
+
+    <DatePicker value={value} onChange={setValue}>
+      <Label>Date</Label>
+      <DateField.Group>
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DatePicker.Trigger>
+            <DatePicker.TriggerIndicator />
+          </DatePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DatePicker.Popover>
+        <Calendar aria-label="Choose date">
+          <Calendar.Header>
+            <Calendar.Heading />
+            <Calendar.NavButton slot="previous" />
+            <Calendar.NavButton slot="next" />
+          </Calendar.Header>
+          <Calendar.Grid>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>
+              {(date) => <Calendar.Cell date={date} />}
+            </Calendar.GridBody>
+          </Calendar.Grid>
+        </Calendar>
+      </DatePicker.Popover>
+    </DatePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### With Description and Error Message
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DatePicker
+      label="Event date"
+      description="Choose a future date"
+      errorMessage="Date must be in the future"
+      isInvalid={isInvalid}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { DatePicker, DateField, Calendar, Label, Description, FieldError } from "@heroui/react";
+
+    <DatePicker isInvalid={isInvalid}>
+      <Label>Event date</Label>
+      <DateField.Group>
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DatePicker.Trigger>
+            <DatePicker.TriggerIndicator />
+          </DatePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <Description>Choose a future date</Description>
+      <FieldError>Date must be in the future</FieldError>
+      <DatePicker.Popover>
+        <Calendar aria-label="Choose date">
+          {/* Calendar compound components */}
+        </Calendar>
+      </DatePicker.Popover>
+    </DatePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Selector Icon
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <DatePicker
+      label="Date"
+      selectorIcon={<Icon icon="gravity-ui:calendar" />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <DatePicker>
+      <Label>Date</Label>
+      <DateField.Group>
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DatePicker.Trigger>
+            <DatePicker.TriggerIndicator>
+              <Icon icon="gravity-ui:calendar" />
+            </DatePicker.TriggerIndicator>
+          </DatePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DatePicker.Popover>
+        <Calendar aria-label="Choose date">
+          {/* Calendar compound components */}
+        </Calendar>
+      </DatePicker.Popover>
+    </DatePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### With Month/Year Pickers and Calendar Bottom Content
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DatePicker
+      label="Date"
+      showMonthAndYearPickers
+      CalendarBottomContent={
+        <button onClick={() => setValue(today(getLocalTimeZone()))}>Today</button>
+      }
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DatePicker>
+      <Label>Date</Label>
+      <DateField.Group>
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DatePicker.Trigger>
+            <DatePicker.TriggerIndicator />
+          </DatePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DatePicker.Popover>
+        <Calendar aria-label="Choose date">
+          <Calendar.Header>
+            <Calendar.YearPickerTrigger>
+              <Calendar.YearPickerTriggerHeading />
+              <Calendar.YearPickerTriggerIndicator />
+            </Calendar.YearPickerTrigger>
+            <Calendar.NavButton slot="previous" />
+            <Calendar.NavButton slot="next" />
+          </Calendar.Header>
+          <Calendar.Grid>
+            <Calendar.GridHeader>
+              {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+            </Calendar.GridHeader>
+            <Calendar.GridBody>
+              {(date) => <Calendar.Cell date={date} />}
+            </Calendar.GridBody>
+          </Calendar.Grid>
+          <Calendar.YearPickerGrid>
+            <Calendar.YearPickerGridBody>
+              {(year) => <Calendar.YearPickerCell date={year} />}
+            </Calendar.YearPickerGridBody>
+          </Calendar.YearPickerGrid>
+        </Calendar>
+        <button onClick={() => setValue(today(getLocalTimeZone()))}>Today</button>
+      </DatePicker.Popover>
+    </DatePicker>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<DatePicker
+  classNames={{
+    base: "custom-base",
+    selectorButton: "custom-trigger",
+    selectorIcon: "custom-icon",
+    popoverContent: "custom-popover",
+    calendar: "custom-calendar",
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<DatePicker className="custom-base">
+  <Label>Date</Label>
+  <DateField.Group>
+    <DateField.Input>
+      {(segment) => <DateField.Segment segment={segment} />}
+    </DateField.Input>
+    <DateField.Suffix>
+      <DatePicker.Trigger className="custom-trigger">
+        <DatePicker.TriggerIndicator className="custom-icon" />
+      </DatePicker.Trigger>
+    </DateField.Suffix>
+  </DateField.Group>
+  <DatePicker.Popover className="custom-popover">
+    <Calendar aria-label="Choose date" className="custom-calendar">
+      {/* Calendar compound components */}
+    </Calendar>
+  </DatePicker.Popover>
+</DatePicker>
+```
+
+## Component Anatomy
+
+The v3 DatePicker follows this structure:
+
+```
+DatePicker (Root)
+  ├── Label
+  ├── DateField.Group
+  │   ├── DateField.Input
+  │   │   └── DateField.Segment (render prop per segment)
+  │   └── DateField.Suffix
+  │       └── DatePicker.Trigger
+  │           └── DatePicker.TriggerIndicator
+  ├── Description (optional)
+  ├── FieldError (optional)
+  └── DatePicker.Popover
+      ├── Calendar (see Calendar migration guide)
+      └── [Custom bottom content]
+```
+
+## Summary
+
+1. **Component Structure**: Single component → composition of `DatePicker`, `DateField`, `Calendar`, and `Label`
+2. **Label**: `label` prop → `Label` component
+3. **Description/Error**: Props → `Description` and `FieldError` components
+4. **Calendar**: Built-in → compose `Calendar` with its own compound components inside `DatePicker.Popover`
+5. **Selector Icon**: `selectorIcon` prop → pass children to `DatePicker.TriggerIndicator`
+6. **Year Picker**: `showMonthAndYearPickers` prop → use `Calendar.YearPickerTrigger` and `Calendar.YearPickerGrid`
+7. **Calendar Bottom Content**: `CalendarBottomContent` prop → place content inside `DatePicker.Popover` after `Calendar`
+8. **Styling Props Removed**: `variant`, `color`, `size`, `radius` → use Tailwind CSS or `DateField.Group` variant
+9. **ClassNames Removed**: Use `className` on individual compound components
+10. **Multiple Months**: `visibleMonths` prop → use `Calendar` `visibleDuration` prop

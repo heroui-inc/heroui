@@ -1,0 +1,223 @@
+---
+title: Progress
+description: Migration guide for Progress from HeroUI v2 to v3 (now ProgressBar)
+---
+
+<Callout type="info">
+  Refer to the [v3 ProgressBar documentation](/docs/react/components/progress-bar) for complete API reference, styling guide, and advanced examples. This guide only focuses on migrating from HeroUI v2.
+</Callout>
+
+<Callout type="warning">
+  Looking for the CircularProgress migration? See the [CircularProgress migration guide](/docs/react/migration/circular-progress).
+</Callout>
+
+## Component Rename
+
+`Progress` has been renamed to `ProgressBar` in v3.
+
+## Structure Changes
+
+In v2, `Progress` was a single component configured with props:
+
+```tsx
+import { Progress } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Progress label="Loading..." value={60} />
+  );
+}
+```
+
+In v3, `ProgressBar` uses a compound component pattern:
+
+```tsx
+import { ProgressBar, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ProgressBar value={60}>
+      <Label>Loading...</Label>
+      <ProgressBar.Output />
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+  );
+}
+```
+
+## Key Changes
+
+### 1. Component Structure
+
+**v2:** Single `Progress` component with all parts rendered internally
+**v3:** Compound components: `ProgressBar`, `ProgressBar.Output`, `ProgressBar.Track`, `ProgressBar.Fill`, plus external `Label`
+
+### 2. Colors
+
+**v2:** `default`, `primary`, `secondary`, `success`, `warning`, `danger`
+**v3:** `default`, `accent`, `success`, `warning`, `danger`
+
+### 3. Prop Changes
+
+| v2 Prop | v3 Equivalent | Notes |
+|---------|---------------|-------|
+| `value` | `value` | Same |
+| `minValue` | `minValue` | Same |
+| `maxValue` | `maxValue` | Same |
+| `isIndeterminate` | `isIndeterminate` | Same |
+| `formatOptions` | `formatOptions` | Same |
+| `size` | `size` | Same (`sm`, `md`, `lg`) |
+| `color` | `color` | `primary` → `accent`, `secondary` removed |
+| `label` | - | Use `Label` component |
+| `valueLabel` | `valueLabel` | Same |
+| `showValueLabel` | - | Include or omit `ProgressBar.Output` |
+| `radius` | - | Removed (use Tailwind CSS) |
+| `isStriped` | - | Removed (use Tailwind CSS on `ProgressBar.Fill`) |
+| `isDisabled` | - | Removed |
+| `disableAnimation` | - | Removed |
+| `classNames` | - | Use `className` on individual compound components |
+
+## Migration Examples
+
+### Basic Progress
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Progress } from "@heroui/react";
+
+    <Progress label="Loading..." value={60} color="primary" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ProgressBar, Label } from "@heroui/react";
+
+    <ProgressBar value={60} color="accent">
+      <Label>Loading...</Label>
+      <ProgressBar.Output />
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+### Indeterminate
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Progress isIndeterminate aria-label="Loading..." size="sm" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressBar isIndeterminate aria-label="Loading..." size="sm">
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+### Without Label (Accessibility)
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Progress aria-label="Loading..." value={70} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressBar aria-label="Loading..." value={70}>
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+### Custom Formatting
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Progress
+      label="Budget"
+      formatOptions={{ style: "currency", currency: "USD" }}
+      maxValue={10000}
+      value={4000}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressBar
+      formatOptions={{ style: "currency", currency: "USD" }}
+      maxValue={10000}
+      value={4000}
+    >
+      <Label>Budget</Label>
+      <ProgressBar.Output />
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling Changes
+
+### v2: `classNames` Prop
+
+```tsx
+<Progress
+  classNames={{
+    base: "custom-base",
+    track: "custom-track",
+    indicator: "custom-fill",
+    label: "custom-label",
+    value: "custom-value",
+  }}
+/>
+```
+
+### v3: Direct `className` Props
+
+```tsx
+<ProgressBar className="custom-base" value={60}>
+  <Label className="custom-label">Loading</Label>
+  <ProgressBar.Output className="custom-value" />
+  <ProgressBar.Track className="custom-track">
+    <ProgressBar.Fill className="custom-fill" />
+  </ProgressBar.Track>
+</ProgressBar>
+```
+
+## Component Anatomy
+
+```
+ProgressBar (Root)
+  ├── Label (optional)
+  ├── ProgressBar.Output (optional, formatted value display)
+  └── ProgressBar.Track
+      └── ProgressBar.Fill
+```
+
+## Summary
+
+1. **Renamed**: `Progress` → `ProgressBar`
+2. **Component Structure**: Single component → compound components (`ProgressBar.Output`, `ProgressBar.Track`, `ProgressBar.Fill`)
+3. **Label**: `label` prop → `Label` component
+4. **Value Display**: `showValueLabel` prop → include or omit `ProgressBar.Output`
+5. **Color Changes**: `primary` → `accent`, `secondary` removed
+6. **Removed Props**: `radius`, `isStriped`, `isDisabled`, `disableAnimation` → use Tailwind CSS
+7. **ClassNames Removed**: Use `className` on individual compound components
