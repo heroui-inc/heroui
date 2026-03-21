@@ -93,8 +93,8 @@ export function PreviewContainer() {
         ref={container}
         id={THEME_BUILDER_CONTENT_ID}
         className={cn(
-          "flex h-full w-full flex-1 bg-background px-4 py-8 font-sans xl:px-5 xl:py-7",
-          isComponentsTab ? "" : "items-center lg:p-0 lg:pb-0!",
+          "flex w-full flex-1 bg-background px-4 py-8 font-sans xl:px-5 xl:py-7",
+          isComponentsTab ? "min-h-full" : "h-full items-center lg:p-0 lg:pb-0!",
         )}
       >
         {/* Mobile: always show DemoComponents */}
@@ -104,10 +104,8 @@ export function PreviewContainer() {
         {/* Desktop: respect tab selection */}
         <div
           className={cn(
-            "hidden lg:flex lg:h-full lg:min-h-0 lg:w-full lg:flex-1",
-            isComponentsTab
-              ? "lg:flex-col lg:justify-center lg:overflow-x-hidden lg:overflow-y-auto"
-              : "lg:items-center",
+            "hidden lg:flex lg:w-full lg:flex-1",
+            isComponentsTab ? "lg:flex-col" : "lg:h-full lg:min-h-0 lg:items-center",
           )}
         >
           {isComponentsTab ? (

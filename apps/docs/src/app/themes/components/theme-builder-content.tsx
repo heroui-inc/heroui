@@ -56,8 +56,10 @@ export const ThemeBuilderContent = () => {
       >
         <div
           className={cn(
-            "relative flex min-h-0 w-full flex-1",
-            isComponentsTab ? "items-start" : "items-center justify-center",
+            "relative flex w-full",
+            isComponentsTab
+              ? "min-h-full items-start"
+              : "min-h-0 flex-1 items-center justify-center",
           )}
         >
           <PreviewContainer />

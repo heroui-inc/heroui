@@ -130,7 +130,7 @@ export function DemoShowcase() {
   }, [sendMessageToIframe]);
 
   return (
-    <div className="flex min-h-0 w-full max-w-[1200px] flex-1 flex-col py-12">
+    <div className="flex min-h-0 w-full max-w-[1200px] flex-1 flex-col py-6 lg:py-10">
       <div className="mb-4 hidden w-full flex-col justify-between gap-4 px-2 lg:flex lg:flex-row lg:items-center">
         <Tabs selectedKey={selectedTab} onSelectionChange={(key) => setSelectedTab(key as string)}>
           <Tabs.ListContainer>
@@ -154,7 +154,7 @@ export function DemoShowcase() {
         </ColorSwatchPicker>
       </div>
       <div
-        className="flex min-h-0 max-w-[1200px] flex-1 flex-col gap-0.5 rounded-3xl bg-surface-secondary/80 p-2 pt-0"
+        className="flex min-h-[420px] max-w-[1200px] flex-1 flex-col gap-0.5 rounded-3xl bg-surface-secondary/80 p-2 pt-0"
         style={accentVars as CSSProperties}
       >
         <div className="flex h-9 items-center justify-between pt-1 pr-2 pl-2">
