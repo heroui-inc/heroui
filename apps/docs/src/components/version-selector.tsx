@@ -43,7 +43,7 @@ export function VersionSelector({className}: {className?: string}) {
             </div>
             <Link
               className="flex items-center justify-between rounded-3xl px-3 py-2 text-sm text-muted hover:bg-default-hover hover:text-foreground"
-              href="https://heroui.com"
+              href="https://v2.heroui.com"
               rel="noopener noreferrer"
               target="_blank"
             >
