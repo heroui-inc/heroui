@@ -5,8 +5,8 @@ import {Icon} from "@iconify/react/dist/offline";
 import arrowRightUpIcon from "@iconify/icons-solar/arrow-right-up-linear";
 
 const releaseInfo = {
-  title: "HeroUI v3.0.0 (Beta)",
-  href: "https://v3.heroui.com?ref=heroui-v2",
+  title: "HeroUI v3.0.0 is here!",
+  href: "https://heroui.com?ref=heroui-v2",
   emoji: "🔥",
 };
 

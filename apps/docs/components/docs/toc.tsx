@@ -9,8 +9,6 @@ import {Divider, Spacer} from "@heroui/react";
 import {ChevronCircleTopLinearIcon} from "@heroui/shared-icons";
 import scrollIntoView from "scroll-into-view-if-needed";
 
-import {HeroUIProCallout} from "./heroui-pro-callout";
-
 import {useScrollSpy} from "@/hooks/use-scroll-spy";
 import {useScrollPosition} from "@/hooks/use-scroll-position";
 import emitter from "@/libs/emitter";
@@ -127,7 +125,6 @@ export const DocsToc: FC<DocsTocProps> = ({headings}) => {
           </li>
         </ul>
       </div>
-      <HeroUIProCallout />
     </div>
   );
 };

@@ -176,7 +176,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
         >
           <DropdownItem key="v2">v{currentVersion}</DropdownItem>
           <DropdownItem key="v3" endContent={<LinkIcon />}>
-            v3.0.0 (Beta)
+            v3.0.0
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
@@ -299,7 +299,7 @@ export const Navbar: FC<NavbarProps> = ({children, routes, mobileRoutes = [], sl
               Components
             </NextLink>
           </NavbarItem>
-          {/* 
+          {/*
           // TODO: add playground
           <NavbarItem>
             <NextLink
