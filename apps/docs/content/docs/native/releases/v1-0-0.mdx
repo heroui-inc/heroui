@@ -1,0 +1,229 @@
+---
+title: v1.0.0
+description: LinkButton component, sub-menu conflict resolution, optional @gorhom/bottom-sheet, ThemeColorValue branded type
+github:
+  pull: 347
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">March 19, 2026</span>
+</div>
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/heroui-native-v1-release-.mp4"
+  height={430}
+/>
+
+🎉 HeroUI Native reaches v1.0.0 — the first stable release, marking the library's graduation from beta and release candidate stages into a production-ready foundation for React Native apps. Alongside this milestone, the release includes the new LinkButton component, sub-menu conflict resolution, an optional `@gorhom/bottom-sheet` peer dependency, and improved type safety for `useThemeColor`.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the v1.0.0 improvements in action with our preview app! You can explore the new LinkButton component, improved sub-menu behavior, and all the fixes directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## What's New
+
+### LinkButton Component
+
+The new [LinkButton](/docs/native/components/button) compound component renders a ghost-variant button with no highlight feedback, designed for inline link-style interactions such as "Terms of Service" or "Privacy Policy" links. It delegates entirely to the existing Button infrastructure while enforcing ghost variant and disabled highlight internally.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Compound sub-component: `LinkButton.Label` for styled text content
+- Ghost variant enforced internally — no `variant` prop exposed
+- Highlight feedback disabled by default via `resolveAnimationObject`
+- `h-auto p-0` base class removes default button height and padding for inline use
+- Consumer animation config merged while preserving `highlight: false`
+
+**Usage:**
+
+```tsx
+import { LinkButton } from "heroui-native";
+
+export function TermsLink() {
+  return (
+    <LinkButton onPress={() => openURL("https://example.com/terms")}>
+      <LinkButton.Label>Terms of Service</LinkButton.Label>
+    </LinkButton>
+  );
+}
+```
+
+**Related PR:** [#341](https://github.com/heroui-inc/heroui-native/pull/341)
+
+## Component Improvements
+
+### Sub-Menu Single-Open Enforcement and Backdrop Close
+
+The [Menu](/docs/native/components/menu) sub-menu system has been refactored to track the active sub-menu by ID instead of a simple boolean, enforcing single-open behavior across sibling sub-menus. A backdrop pressable overlay now renders over the menu content area when a sub-menu is open, allowing users to dismiss it by tapping outside.
+
+**Improvements:**
+
+- `openSubMenuId` replaces the boolean flag — only one sub-menu can be active at a time; opening a new one automatically closes the previous
+- A `Pressable` overlay renders over the menu content when a sub-menu is open, allowing tap-to-dismiss
+- Non-active sub-menu triggers receive `opacity-40` and `pointer-events-none` via the new `isOtherSubMenuOpen` style variant
+- Open sub-menu content uses `z-50`; closed uses `z-40` to avoid stacking issues
+- New "Two Sub Menus" example added to the demo app showcasing multiple sub-menus in a single menu
+
+**Related PR:** [#343](https://github.com/heroui-inc/heroui-native/pull/343)
+
+### Button Label Ref Type Fix
+
+The `ButtonLabel` ref type has been corrected from `View` to `TextRef`, and an unused `View` import has been removed from `button.tsx`. This fix aligns the ref type with the actual rendered element.
+
+**Related PR:** [#341](https://github.com/heroui-inc/heroui-native/pull/341)
+
+## API Enhancements
+
+### `ThemeColorValue` Branded Type for `useThemeColor`
+
+The `useThemeColor` hook now returns a `ThemeColorValue` branded type for single-color calls, making misuse of array destructuring immediately visible as a `never` type in the IDE. The non-null assertion operator (`!`) has also been replaced with a safe nullish coalescing fallback.
+
+**New behavior:**
+
+```tsx
+import { useThemeColor } from "heroui-native";
+
+// Correct — direct assignment
+const mutedColor = useThemeColor("muted");
+
+// Incorrect — IDE immediately surfaces `never` type
+const [color] = useThemeColor("muted"); // color: never
+```
+
+`ThemeColorValue` extends `string`, so it is assignable everywhere a `string` is expected. Existing call sites are unaffected at runtime. The `_colorValueBrand` symbol is declared with `declare const` so it has zero runtime footprint.
+
+**Related PR:** [#337](https://github.com/heroui-inc/heroui-native/pull/337)
+
+### `useBottomSheetAwareHandlers` Public Hook
+
+The `useBottomSheetAwareHandlers` hook is now exported as a public API, giving consumers explicit control over keyboard avoidance wiring inside bottom sheets. This replaces the implicit `isBottomSheetAware` prop that was previously available on `Input` and `InputOTP`.
+
+**Usage:**
+
+```tsx
+import { useBottomSheetAwareHandlers, Input } from "heroui-native";
+
+export function BottomSheetInput() {
+  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+
+  return <Input onFocus={onFocus} onBlur={onBlur} placeholder="Type here..." />;
+}
+```
+
+**Related PR:** [#347](https://github.com/heroui-inc/heroui-native/pull/347)
+
+## ⚠️ Breaking Changes
+
+### `Input` and `InputOTP` Inside Bottom Sheet
+
+The `isBottomSheetAware` prop has been removed from `Input` and `InputOTP`. Previously, keyboard avoidance inside bottom sheets was handled automatically under the hood. Now you must explicitly use the `useBottomSheetAwareHandlers` hook and pass the handlers yourself. This change keeps the Input component lighter by removing the implicit `@gorhom/bottom-sheet` import, allowing the package to be an optional peer dependency for projects that don't use bottom sheet features.
+
+**Migration:**
+
+```tsx
+// Before
+<Input isBottomSheetAware placeholder="Type here..." />
+
+// After
+import { useBottomSheetAwareHandlers } from "heroui-native";
+
+const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+<Input onFocus={onFocus} onBlur={onBlur} placeholder="Type here..." />
+```
+
+This applies to any `Input` or `InputOTP` rendered inside a `BottomSheet`. Components used outside of bottom sheets are unaffected.
+
+**Related PR:** [#347](https://github.com/heroui-inc/heroui-native/pull/347)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #330](https://github.com/heroui-inc/heroui-native/issues/330)**: Resolved `Input` unconditionally importing `@gorhom/bottom-sheet` at the module level even when `isBottomSheetAware` was `false`. The package is now loaded lazily via an optional `try/catch` wrapper, so projects that don't use bottom sheet features no longer need it installed.
+
+- **[Issue #340](https://github.com/heroui-inc/heroui-native/issues/340)**: Fixed sub-menu content appearing behind sibling sub-menu triggers. The sub-menu system now tracks the active sub-menu by ID, enforces single-open behavior, and applies correct z-index layering (`z-50` for open, `z-40` for closed).
+
+**Related PRs:**
+
+- [#347](https://github.com/heroui-inc/heroui-native/pull/347)
+- [#343](https://github.com/heroui-inc/heroui-native/pull/343)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [LinkButton](/docs/native/components/link-button) - LinkButton compound component documentation with anatomy, usage examples, and API reference
+- [Menu](/docs/native/components/menu) - Updated sub-menu documentation with single-open enforcement and backdrop close behavior
+- [Input](/docs/native/components/input) - Updated bottom sheet usage examples with `useBottomSheetAwareHandlers` hook pattern
+- [InputOTP](/docs/native/components/input-otp) - Updated bottom sheet usage examples with `useBottomSheetAwareHandlers` hook pattern
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!

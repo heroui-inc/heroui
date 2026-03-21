@@ -36,22 +36,22 @@ icon: rocket
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
   <Tab value="npm">
     ```bash
-    npm install react-native-screens@^4.16.0 react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0 @gorhom/bottom-sheet@^5.2.8
+    npm install react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
     ```
   </Tab>
   <Tab value="pnpm">
     ```bash
-    pnpm add react-native-screens@^4.16.0 react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0 @gorhom/bottom-sheet@^5.2.8
+    pnpm add react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
     ```
   </Tab>
   <Tab value="yarn">
     ```bash
-    yarn add react-native-screens@^4.16.0 react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0 @gorhom/bottom-sheet@^5.2.8
+    yarn add react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
     ```
   </Tab>
   <Tab value="bun">
     ```bash
-    bun add react-native-screens@^4.16.0 react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0 @gorhom/bottom-sheet@^5.2.8
+    bun add react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
     ```
   </Tab>
 </Tabs>
@@ -60,13 +60,22 @@ icon: rocket
   It's recommended to use the exact versions specified above to avoid compatibility issues. Version mismatches may cause unexpected bugs.
 </Callout>
 
-### 3. Set Up Uniwind
+### 3. Optional Dependencies
+
+These packages are only needed if you use specific components or features:
+
+| Package | Version | Required for |
+| --- | --- | --- |
+| `react-native-screens` | `^4.16.0` | BottomSheet, Dialog, Menu, Popover, Select, Toast |
+| `@gorhom/bottom-sheet` | `^5.2.8` | BottomSheet, Menu / Popover / Select when `presentation="bottom-sheet"` |
+
+### 4. Set Up Uniwind
 
 Follow the [Uniwind installation guide](https://docs.uniwind.dev/quickstart) to set up Tailwind CSS for React Native.
 
 If you're migrating from NativeWind, see the [migration guide](https://docs.uniwind.dev/migration-from-nativewind).
 
-### 4. Configure global.css
+### 5. Configure global.css
 
 Inside your `global.css` file add the following imports:
 
@@ -85,7 +94,7 @@ Inside your `global.css` file add the following imports:
 @source './node_modules/heroui-native/lib';
 ```
 
-### 5. Wrap Your App with Provider
+### 6. Wrap Your App with Provider
 
 Wrap your application with `HeroUINativeProvider`. You must wrap it with `GestureHandlerRootView`:
 
@@ -104,7 +113,7 @@ export default function App() {
 
 > **Note**: For advanced configuration options including text props, animation settings, and toast configuration, see the [Provider documentation](/docs/native/getting-started/provider).
 
-### 6. Use Your First Component
+### 7. Use Your First Component
 
 ```tsx
 import { Button } from 'heroui-native';
@@ -119,7 +128,7 @@ export default function MyComponent() {
 }
 ```
 
-### 7. Reduce Bundle Size with Granular Exports
+### 8. Reduce Bundle Size with Granular Exports
 
 If you want to reduce bundle size and import only the components you need, our library provides granular exports for each component:
 
@@ -149,7 +158,7 @@ Granular imports are ideal when you only need a few components, as they help kee
   **Important**: To keep the bundle size under control, you must follow the pattern with granular imports consistently. Even one general import from `heroui-native` will break this optimization strategy.
 </Callout>
 
-> **Tip**: For even more control over your bundle, consider using [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider) — a lightweight provider that excludes `ToastProvider` and `PortalHost`, making dependencies like `react-native-screens`, `@gorhom/bottom-sheet`, and `react-native-svg` fully optional.
+> **Tip**: For even more control over your bundle, consider using [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider) — a lightweight provider that excludes `ToastProvider` and `PortalHost`.
 
 ## What's Next?
 

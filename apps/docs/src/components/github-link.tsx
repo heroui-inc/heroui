@@ -124,7 +124,13 @@ export function GitHubLinkSmall({className}: {className?: string}) {
   );
 }
 
-function StarsCountInner({framework}: {framework: "web" | "native"}) {
+function StarsCountInner({
+  className,
+  framework,
+}: {
+  framework: "web" | "native";
+  className?: string;
+}) {
   const repo = getGitHubRepo(framework);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -197,14 +203,14 @@ function StarsCountInner({framework}: {framework: "web" | "native"}) {
   }
 
   return (
-    <span className="pt-px text-xs font-medium text-muted tabular-nums">
+    <span className={cn("pt-px text-xs font-medium text-muted tabular-nums", className)}>
       {formatStarsCount(displayCount)}
     </span>
   );
 }
 
-export function StarsCount() {
+export function StarsCount({className}: {className?: string}) {
   const framework = useCurrentFramework();
 
-  return <StarsCountInner framework={framework} />;
+  return <StarsCountInner className={className} framework={framework} />;
 }

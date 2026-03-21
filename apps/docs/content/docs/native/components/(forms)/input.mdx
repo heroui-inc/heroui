@@ -1,6 +1,7 @@
 ---
 title: Input
 description: A text input component with styled border and background for collecting user input.
+icon: updated
 links:
   source_native: input/input.tsx
   styles_native: input/input.styles.ts
@@ -118,6 +119,28 @@ import { Input, Label, TextField } from 'heroui-native';
 </TextField>;
 ```
 
+### Inside a Bottom Sheet
+
+When rendering an Input inside a `BottomSheet`, use the `useBottomSheetAwareHandlers` hook to wire keyboard avoidance handlers. Pass the returned `onFocus` and `onBlur` to the Input.
+
+```tsx
+import { Input, TextField, useBottomSheetAwareHandlers } from 'heroui-native';
+
+const BottomSheetTextInput = () => {
+  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+
+  return (
+    <TextField>
+      <Input
+        placeholder="Type here..."
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
+    </TextField>
+  );
+};
+```
+
 ## Example
 
 ```tsx
@@ -184,7 +207,7 @@ export const TextInputContent = () => {
 };
 ```
 
-You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/rc/example/src/app/(home)/components/input.tsx).
+You can find more examples in the [GitHub repository](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/input.tsx).
 
 ## API Reference
 

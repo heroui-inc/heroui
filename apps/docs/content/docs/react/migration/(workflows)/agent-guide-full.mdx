@@ -4,10 +4,6 @@ description: Full migration guide for AI assistants helping migrate HeroUI v2 to
 index: false
 ---
 
-<Callout type="warning">
-  HeroUI v3 is currently in **beta**. Expect breaking changes before the stable release. Test thoroughly in a development environment before migrating production applications.
-</Callout>
-
 ## Overview
 
 This guide is designed for AI assistants (agents) helping users migrate from HeroUI v2 to v3. It implements a **full migration approach** that analyzes the project first and migrates components in manageable batches rather than all at once.
@@ -172,7 +168,7 @@ For each component group in the migration plan:
 
 1. **Update dependencies**
    - Remove `@heroui/react` and `@heroui/theme` (v2)
-   - Install `@heroui/react@beta` and `@heroui/styles@beta` (v3)
+   - Install `@heroui/react` and `@heroui/styles` (v3)
    - Remove `framer-motion` if present
    - Update CSS imports (add `@import "@heroui/styles";`)
    - Remove HeroUIProvider from app root

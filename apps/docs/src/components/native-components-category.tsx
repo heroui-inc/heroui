@@ -10,7 +10,7 @@ import {NativeComponentItem} from "./native-component-item";
 const COMPONENT_GROUPS = [
   {
     category: "Buttons",
-    components: ["(buttons)/button", "(buttons)/close-button"],
+    components: ["(buttons)/button", "(buttons)/close-button", "(buttons)/link-button"],
   },
   {
     category: "Collections",
