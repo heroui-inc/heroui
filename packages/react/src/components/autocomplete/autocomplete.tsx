@@ -268,6 +268,7 @@ const AutocompleteClearButton = ({
       data-empty={dataAttr(state?.selectionManager.selectedKeys.size === 0)}
       data-slot="autocomplete-clear-button"
       onClick={handleClick}
+      type="button"
       {...props}
     >
       <CloseIcon data-slot="autocomplete-clear-button-icon" />
