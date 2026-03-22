@@ -5,11 +5,11 @@ import {Blockquote} from "./components/blockquote";
 export const DeprecationMessage = () => {
   return (
     <Blockquote color="warning">
-      ⚠️ <b>Deprecation Notice:</b> HeroUI v2 is deprecated. We recommend starting with{" "}
+      <b>HeroUI v3 is here!</b> We recommend starting new projects with{" "}
       <a className="underline" href="https://heroui.com/" rel="noopener noreferrer" target="_blank">
         <b>HeroUI v3</b>
-      </a>{" "}
-      for new projects.
+      </a>
+      . v2 will continue to receive patches and critical fixes.
     </Blockquote>
   );
 };
