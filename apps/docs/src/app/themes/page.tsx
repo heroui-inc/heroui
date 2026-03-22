@@ -22,7 +22,7 @@ export default function ThemeBuilderPage() {
     <CodePanelProvider>
       <Suspense>
         <div
-          className="grid h-full grid-rows-[auto_1fr_auto] bg-background px-4 sm:h-screen sm:overflow-hidden sm:px-6"
+          className="grid h-dvh grid-rows-[auto_1fr_auto] bg-background px-4 sm:overflow-hidden sm:px-6"
           id={THEME_BUILDER_PAGE_ID}
         >
           <BuilderHeader />
