@@ -3,7 +3,7 @@ name: heroui-migration
 description: "HeroUI v2 to v3 migration guide for agents. Use when migrating HeroUI v2 apps to v3, upgrading components, or accessing migration documentation. Keywords: HeroUI migration, v2 to v3, migration guide, upgrade HeroUI."
 metadata:
   author: heroui
-  version: "1.0.0"
+  version: "2.0.0"
   status: preview
 ---
 
@@ -16,7 +16,7 @@ This skill helps agents migrate HeroUI v2 applications to v3. HeroUI v3 introduc
 ## Installation
 
 ```bash
-curl -fsSL https://v3.heroui.com/install | bash -s heroui-migration
+curl -fsSL https://heroui.com/install | bash -s heroui-migration
 ```
 
 ---
@@ -34,7 +34,7 @@ curl -fsSL https://v3.heroui.com/install | bash -s heroui-migration
 | Event handlers | `onClick`                 | `onPress`                              |
 | Styling       | `classNames` prop         | `className` prop                       |
 | Hooks         | `useSwitch`, `useDisclosure`, etc. | Compound components, `useOverlayState` |
-| Packages      | `@heroui/system`, `@heroui/theme` | `@heroui/react@beta`, `@heroui/styles@beta` |
+| Packages      | `@heroui/system`, `@heroui/theme` | `@heroui/react`, `@heroui/styles` |
 
 ---
 
@@ -137,4 +137,4 @@ When using Cursor or other MCP clients, configure the Migration MCP server for t
 
 ## Preview Mode
 
-This skill targets the staging deployment of the `docs/migration` branch. Once docs are merged to main and live on v3.heroui.com, set `HEROUI_MIGRATION_DOCS_BASE=https://v3.heroui.com/docs/react/migration` or update the default in scripts.
+This skill targets the staging deployment of the `docs/migration` branch. Once docs are merged to main and live on heroui.com, set `HEROUI_MIGRATION_DOCS_BASE=https://heroui.com/docs/react/migration` or update the default in scripts.

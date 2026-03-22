@@ -3,7 +3,7 @@ name: heroui-react
 description: "HeroUI v3 React component library (Tailwind CSS v4 + React Aria). Use when building UIs with HeroUI — creating Buttons, Modals, Forms, Cards; installing @heroui/react; configuring dark/light themes with oklch variables; or fetching component docs. Keywords: HeroUI, Hero UI, heroui, @heroui/react, @heroui/styles."
 metadata:
   author: heroui
-  version: "2.0.0"
+  version: "3.0.0"
 ---
 
 # HeroUI v3 React Development Guide
@@ -15,7 +15,7 @@ HeroUI v3 is a component library built on **Tailwind CSS v4** and **React Aria C
 ## Installation
 
 ```bash
-curl -fsSL https://v3.heroui.com/install | bash -s heroui-react
+curl -fsSL https://heroui.com/install | bash -s heroui-react
 ```
 
 ---
@@ -29,8 +29,8 @@ curl -fsSL https://v3.heroui.com/install | bash -s heroui-react
 | Provider      | `<HeroUIProvider>` required       | **No Provider needed**                      |
 | Animations    | `framer-motion` package           | CSS-based, no extra deps                    |
 | Component API | Flat props: `<Card title="x">`    | Compound: `<Card><Card.Header>`             |
-| Styling       | Tailwind v3 + `@heroui/theme`     | Tailwind v4 + `@heroui/styles@beta`         |
-| Packages      | `@heroui/system`, `@heroui/theme` | `@heroui/react@beta`, `@heroui/styles@beta` |
+| Styling       | Tailwind v3 + `@heroui/theme`     | Tailwind v4 + `@heroui/styles`         	  |
+| Packages      | `@heroui/system`, `@heroui/theme` | `@heroui/react`, `@heroui/styles` 		  |
 
 ```tsx
 // DO NOT DO THIS - v2 pattern
@@ -98,15 +98,15 @@ node scripts/get_docs.mjs /docs/react/getting-started/theming
 
 ### Direct MDX URLs
 
-Component docs: `https://v3.heroui.com/docs/react/components/{component-name}.mdx`
+Component docs: `https://heroui.com/docs/react/components/{component-name}.mdx`
 
 Examples:
 
-- Button: `https://v3.heroui.com/docs/react/components/button.mdx`
-- Modal: `https://v3.heroui.com/docs/react/components/modal.mdx`
-- Form: `https://v3.heroui.com/docs/react/components/form.mdx`
+- Button: `https://heroui.com/docs/react/components/button.mdx`
+- Modal: `https://heroui.com/docs/react/components/modal.mdx`
+- Form: `https://heroui.com/docs/react/components/form.mdx`
 
-Getting started guides: `https://v3.heroui.com/docs/react/getting-started/{topic}.mdx`
+Getting started guides: `https://heroui.com/docs/react/getting-started/{topic}.mdx`
 
 **Important:** Always fetch component docs before implementing. The MDX docs include complete examples, props, anatomy, and API references.
 
@@ -114,12 +114,10 @@ Getting started guides: `https://v3.heroui.com/docs/react/getting-started/{topic
 
 ## Installation Essentials
 
-**CRITICAL**: HeroUI v3 is currently in BETA. Always use `@beta` tag when installing packages.
-
 ### Quick Install
 
 ```bash
-npm i @heroui/styles@beta @heroui/react@beta tailwind-variants
+npm i @heroui/styles @heroui/react tailwind-variants
 ```
 
 ### Framework Setup (Next.js App Router - Recommended)
@@ -127,7 +125,7 @@ npm i @heroui/styles@beta @heroui/react@beta tailwind-variants
 1. **Install dependencies:**
 
 ```bash
-npm i @heroui/styles@beta @heroui/react@beta tailwind-variants tailwindcss @tailwindcss/postcss postcss
+npm i @heroui/styles @heroui/react tailwind-variants tailwindcss @tailwindcss/postcss postcss
 ```
 
 2. **Create/update `app/globals.css`:**
@@ -233,4 +231,4 @@ node scripts/get_theme.mjs
 <html class="dark" data-theme="dark"></html>
 ```
 
-For detailed theming, fetch: `https://v3.heroui.com/docs/react/getting-started/theming.mdx`
+For detailed theming, fetch: `https://heroui.com/docs/react/getting-started/theming.mdx`
