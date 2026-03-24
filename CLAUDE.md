@@ -542,8 +542,9 @@ This workflow ensures thorough understanding, proper planning, and high-quality 
    - HeroUI components are pre-imported
 
 4. **Version Management**:
-   - Uses Changesets for versioning
-   - Run `pnpm changeset` to document changes
+   - Uses [bumpp](https://github.com/antfu/bumpp) for version bumping
+   - Run `pnpm version:bump` to interactively bump the version, commit, and tag
+   - Pushing a `v*` tag triggers the release CI workflow
    - Follow semantic versioning
 
 ## Icon Library
