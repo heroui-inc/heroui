@@ -8,6 +8,8 @@ import {Input} from "../input";
 import {Label} from "../label";
 import {TextField} from "../textfield";
 
+import {useOverlayState} from "../../hooks/use-overlay-state";
+
 import {Drawer} from "./index";
 
 export default {
@@ -303,6 +305,58 @@ export const Controlled = () => {
           </Drawer.Dialog>
         </Drawer.Content>
       </Drawer.Backdrop>
+    </div>
+  );
+};
+
+/**
+ * Controlled drawer using `useOverlayState` + `Drawer` root without a trigger child.
+ * This pattern is common for drawers opened by external events (URL changes, row clicks, etc.).
+ * Before the fix, this would not work because `DrawerRoot` always wrapped children
+ * in `DialogTrigger`, which requires a pressable trigger as its first child.
+ */
+export const ControlledWithoutTrigger = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const state = useOverlayState({isOpen, onOpenChange: setIsOpen});
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-3">
+        <Button variant="secondary" onPress={() => setIsOpen(true)}>
+          Open Drawer (External)
+        </Button>
+        <p className="text-sm text-muted">
+          Status:{" "}
+          <span className="font-mono font-medium text-foreground">
+            {isOpen ? "open" : "closed"}
+          </span>
+        </p>
+      </div>
+
+      <Drawer state={state}>
+        <Drawer.Backdrop>
+          <Drawer.Content placement="right">
+            <Drawer.Dialog>
+              <Drawer.CloseTrigger />
+              <Drawer.Header>
+                <Drawer.Heading>Controlled Without Trigger</Drawer.Heading>
+              </Drawer.Header>
+              <Drawer.Body>
+                <p>
+                  This drawer is opened externally via <code>useOverlayState</code> without a trigger
+                  child inside the Drawer root. This is useful for drawers driven by URL params,
+                  row selections, or other external events.
+                </p>
+              </Drawer.Body>
+              <Drawer.Footer>
+                <Button variant="secondary" onPress={() => setIsOpen(false)}>
+                  Close
+                </Button>
+              </Drawer.Footer>
+            </Drawer.Dialog>
+          </Drawer.Content>
+        </Drawer.Backdrop>
+      </Drawer>
     </div>
   );
 };

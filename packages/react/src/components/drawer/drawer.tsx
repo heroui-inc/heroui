@@ -228,6 +228,21 @@ const DrawerRoot = ({children, state, ...props}: DrawerRootProps) => {
     [state],
   );
 
+  // When a controlled `state` is provided, skip the DialogTrigger wrapper.
+  // DialogTrigger expects its first child to be a pressable trigger element,
+  // which breaks controlled drawers that have no trigger (e.g. opened via URL params).
+  // Instead, provide the overlay state directly via OverlayTriggerStateContext
+  // so that ModalOverlay (Drawer.Backdrop) can read it from context.
+  if (state) {
+    return (
+      <DrawerContext value={drawerContext}>
+        <OverlayTriggerStateContext value={state}>
+          {children}
+        </OverlayTriggerStateContext>
+      </DrawerContext>
+    );
+  }
+
   return (
     <DrawerContext value={drawerContext}>
       <DrawerTriggerPrimitive data-slot="drawer-root" {...mergeProps(props, controlledProps)}>
