@@ -42,6 +42,58 @@ HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss
 <html class="dark" data-theme="dark">
 ```
 
+**Switch themes programmatically with [next-themes](https://github.com/pacocoursey/next-themes) (For Next.js):**
+
+First, wrap your app with `ThemeProvider`:
+
+```tsx
+// app/providers.tsx
+"use client";
+
+import { ThemeProvider } from "next-themes";
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="light">
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+```tsx
+// app/layout.tsx
+import { Providers } from "./providers";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-background text-foreground">
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+Then use `useTheme` to toggle between themes:
+
+```tsx
+"use client";
+
+import { useTheme } from "next-themes";
+
+export function ThemeSwitch() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      Toggle {theme === "dark" ? "Light" : "Dark"} Mode
+    </button>
+  );
+}
+```
+
 **Override colors:**
 
 ```css
