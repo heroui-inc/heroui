@@ -34,7 +34,7 @@ export function ThemeCodePanel() {
       isVisible={isCodeVisible}
       lang="css"
       sourceCode={deferredCssCode}
-      title="index.css"
+      title="globals.css"
       onClose={toggleCode}
     />
   );
