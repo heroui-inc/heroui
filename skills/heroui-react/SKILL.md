@@ -3,7 +3,7 @@ name: heroui-react
 description: "HeroUI v3 React component library (Tailwind CSS v4 + React Aria). Use when building UIs with HeroUI — creating Buttons, Modals, Forms, Cards; installing @heroui/react; configuring dark/light themes with oklch variables; or fetching component docs. Keywords: HeroUI, Hero UI, heroui, @heroui/react, @heroui/styles."
 metadata:
   author: heroui
-  version: "3.0.0"
+  version: "3.0.1"
 ---
 
 # HeroUI v3 React Development Guide
