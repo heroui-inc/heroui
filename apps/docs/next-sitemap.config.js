@@ -16,6 +16,6 @@ export default {
       },
     ],
   },
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://v3.heroui.com",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://heroui.com",
   sitemapSize: 5000,
 };

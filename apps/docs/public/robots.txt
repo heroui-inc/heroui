@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://v3.heroui.com
+Host: https://heroui.com
 
 # Sitemaps
-Sitemap: https://v3.heroui.com/sitemap.xml
+Sitemap: https://heroui.com/sitemap.xml

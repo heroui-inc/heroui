@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://v3.heroui.com">
+  <a href="https://heroui.com">
       <img 
         alt="HeroUI v3 logo" 
         width="100%" 

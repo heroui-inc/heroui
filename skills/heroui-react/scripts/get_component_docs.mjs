@@ -11,7 +11,7 @@
  */
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
-const FALLBACK_BASE = "https://v3.heroui.com";
+const FALLBACK_BASE = "https://heroui.com";
 const APP_PARAM = "app=react-skills";
 
 /**

@@ -11,7 +11,7 @@
 
 const API_BASE = process.env.HEROUI_API_BASE || "https://mcp-api.heroui.com";
 const APP_PARAM = "app=react-skills";
-const LLMS_TXT_URL = "https://v3.heroui.com/react/llms.txt";
+const LLMS_TXT_URL = "https://heroui.com/react/llms.txt";
 
 /**
  * Fetch data from HeroUI API with app parameter for analytics.
@@ -74,7 +74,7 @@ async function fetchFallback() {
       }
 
       // Extract component name from markdown link pattern
-      // Match: - [ComponentName](https://v3.heroui.com/docs/react/components/component-name)
+      // Match: - [ComponentName](https://heroui.com/docs/react/components/component-name)
       // Skip "All Components" which links to /components without a specific component
       if (inComponentsSection) {
         const match = line.match(
