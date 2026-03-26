@@ -74,11 +74,11 @@ async function fetchFallback() {
       }
 
       // Extract component name from markdown link pattern
-      // Match: - [ComponentName](https://heroui.com/docs/native/components/component-name)
+      // Match: - [ComponentName](https://www.heroui.com/docs/native/components/component-name)
       // Skip "All Components" which links to /components without a specific component
       if (inComponentsSection) {
         const match = line.match(
-          /^\s*-\s*\[([^\]]+)\]\(https:\/\/v3\.heroui\.com\/docs\/native\/components\/[a-z]/,
+          /^\s*-\s*\[([^\]]+)\]\(https:\/\/www\.heroui\.com\/docs\/native\/components\/[a-z]/,
         );
 
         if (match) {
