@@ -1,11 +1,4 @@
 //  ===================================
-//  Prerelease Warning
-//  ===================================
-
-import {handlePrereleaseWarning} from "./prerelease";
-
-handlePrereleaseWarning();
-//  ===================================
 //  Components
 //  ===================================
 export * from "./components";
