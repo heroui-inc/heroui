@@ -149,8 +149,8 @@
     }
   }
 
-  &:focus-within,
-  &[data-focus-within="true"] {
+  &:has([data-slot="input-group-input"]:focus),
+  &:has([data-slot="input-group-textarea"]:focus) {
     background-color: var(--input-group-bg-focus);
   }
 
