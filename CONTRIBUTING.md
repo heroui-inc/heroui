@@ -19,8 +19,8 @@ Hello!, I am very excited that you are interested in contributing with HeroUI. H
   testing
 - [Testing Library](https://testing-library.com/) for testing components and
   hooks
-- [Changeset](https://github.com/atlassian/changesets) for changes
-  documentation, changelog generation, and release management.
+- [bumpp](https://github.com/antfu/bumpp) for version bumping and release
+  management.
 
 
 ### Commit Convention
@@ -85,18 +85,9 @@ https://www.conventionalcommits.org/ or check out the
 
    > To know more about the `--filter` option, please check the turborepo [docs](https://turborepo.org/docs/core-concepts/filtering).
 
-4. Run `pnpm changeset` to create a detailed description of your changes. This
-   will be used to generate a changelog when we publish an update.
-   [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
-   Please note that you might have to run `git fetch origin main:master` (where
-   origin will be your fork on GitHub) before `pnpm changeset` works.
-5. Also, if you provide `jsx` snippets to the changeset, please turn off the
-   live preview by doing the following at the beginning of the snippet:
-   ` ```jsx live=false`
-
-> If you made minor changes like CI config, prettier, etc, you can run
-> `pnpm changeset add --empty` to generate an empty changeset file to document
-> your changes.
+4. Version bumping is handled by maintainers using `pnpm version:bump` which
+   uses [bumpp](https://github.com/antfu/bumpp) to interactively bump the
+   version, create a git commit, and push a tag that triggers the release CI.
 
 ## Development Setup
 

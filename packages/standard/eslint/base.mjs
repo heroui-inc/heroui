@@ -177,7 +177,6 @@ const config = defineConfig([
       "**/.cache/**",
       "**/.build/**",
       "**/.vercel/**",
-      "**/.changeset/**",
       "**/.DS_Store",
       "**/dist/**",
       "**/build/**",

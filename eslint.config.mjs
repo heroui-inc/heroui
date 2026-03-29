@@ -29,7 +29,6 @@ const config = defineConfig([
       "**/__snapshots__",
       // OS files
       "**/.DS_Store",
-      "**/.changeset",
       // Exceptions - files we want to lint
       "!public/manifest.json",
       "!.vscode",
