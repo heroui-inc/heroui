@@ -95,6 +95,7 @@ const TagRemoveButton = ({children, className, ...restProps}: TagRemoveButtonPro
 
   return (
     <CloseButton
+      aria-label="Remove tag"
       className={composeTwRenderProps(className, slots?.removeButton())}
       data-slot="tag-remove-button"
       slot="remove"
