@@ -11,6 +11,7 @@ import {cn} from "@/utils/cn";
 export function CodeBlock({
   children,
   className,
+  code,
   collapsible,
   isIsolated = false,
   preview,
@@ -20,6 +21,7 @@ export function CodeBlock({
 }: {
   isIsolated?: boolean;
   lang?: string;
+  code?: string;
   collapsible?: boolean;
   showLineNumbers?: boolean;
   title: string | undefined;
@@ -31,6 +33,7 @@ export function CodeBlock({
   if (!collapsible) {
     return (
       <BaseCodeBlock
+        code={code}
         title={title}
         className={cn(
           "code-block-wrapper docs-code-block",
@@ -56,6 +59,7 @@ export function CodeBlock({
         )}
       >
         <BaseCodeBlock
+          code={code}
           title={title}
           className={cn(
             "docs-code-block shadow-none",

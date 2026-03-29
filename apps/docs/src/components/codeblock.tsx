@@ -73,6 +73,7 @@ export async function CodeBlock({
   return (
     <CodeBlockClient
       className={className}
+      code={code?.trim() || ""}
       collapsible={collapsible}
       isIsolated={isIsolated}
       lang={lang}

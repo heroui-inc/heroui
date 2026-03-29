@@ -14,8 +14,9 @@ import {cn} from "@/utils/cn";
 export function FumadocsCustomCodeblock({
   allowCopy = true,
   children,
+  code,
   ...props
-}: {children: React.ReactNode} & CodeBlockProps) {
+}: {children: React.ReactNode; code?: string} & CodeBlockProps) {
   const areaRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -26,7 +27,7 @@ export function FumadocsCustomCodeblock({
       viewportProps={{ref: areaRef}}
       Actions={(actionsProps) => (
         <div {...actionsProps} className={cn("z-1! empty:hidden", actionsProps.className)}>
-          {!!allowCopy && <CopyButton containerRef={areaRef} />}
+          {!!allowCopy && <CopyButton code={code} containerRef={areaRef} />}
         </div>
       )}
     >
@@ -37,12 +38,20 @@ export function FumadocsCustomCodeblock({
 
 function CopyButton({
   className,
+  code,
   containerRef,
   ...props
 }: ComponentProps<"button"> & {
+  code?: string;
   containerRef: RefObject<HTMLElement | null>;
 }) {
   const [checked, onClick] = useCopyButton(() => {
+    if (code) {
+      void navigator.clipboard.writeText(code);
+
+      return;
+    }
+
     const pre = containerRef.current?.getElementsByTagName("pre").item(0);
 
     if (!pre) return;
