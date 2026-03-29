@@ -25,7 +25,6 @@ export default defineConfig([globalIgnores([
     ".now/*",
     ".next/*",
     "**/*.css",
-    "**/.changeset",
     "**/dist",
     "esm/*",
     "public/*",

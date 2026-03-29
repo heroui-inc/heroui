@@ -40,12 +40,9 @@
     "create:cmp": "plop component",
     "create:pkg": "plop package",
     "create:hook": "plop hook",
-    "changeset:canary": "changeset pre enter canary",
-    "changeset:beta": "changeset pre enter beta",
-    "version": "changeset version",
-    "release": "changeset publish",
-    "version:canary": "changeset version --snapshot canary",
-    "release:canary": "changeset publish --snapshot --no-git-tag --tag canary",
+    "version:bump": "bumpp",
+    "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s --commit-path .",
+    "release": "pnpm run test && pnpm run build && bumpp --execute='pnpm run changelog' --all",
     "postinstall": "husky install && pnpm --filter @heroui/theme build"
   },
   "devDependencies": {
@@ -56,11 +53,6 @@
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
-    "@changesets/changelog-github": "0.5.0",
-    "@changesets/cli": "2.27.10",
-    "@changesets/get-github-info": "0.6.0",
-    "@changesets/get-release-plan": "4.0.5",
-    "@changesets/types": "6.0.0",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
     "@eslint/compat": "^1.2.9",
@@ -83,6 +75,7 @@
     "@types/shelljs": "^0.8.9",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
+    "bumpp": "11.0.1",
     "chalk": "^4.1.2",
     "commitlint-plugin-function-rules": "^1.7.1",
     "concurrently": "^7.6.0",
@@ -140,8 +133,7 @@
   "pnpm": {
     "overrides": {
       "react": "18.3.0",
-      "react-dom": "18.3.0",
-      "@changesets/get-github-info": "0.6.0"
+      "react-dom": "18.3.0"
     }
   },
   "engines": {
