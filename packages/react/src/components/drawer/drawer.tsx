@@ -219,7 +219,7 @@ interface DrawerRootProps extends ComponentPropsWithRef<typeof DrawerTriggerPrim
 
 const DrawerRoot = ({children, state, ...props}: DrawerRootProps) => {
   const drawerContext = useMemo<DrawerContext>(
-    () => ({slots: drawerVariants(), placement: undefined, isDismissable: true}),
+    () => ({isDismissable: true, placement: undefined, slots: drawerVariants()}),
     [],
   );
 
@@ -236,9 +236,7 @@ const DrawerRoot = ({children, state, ...props}: DrawerRootProps) => {
   if (state) {
     return (
       <DrawerContext value={drawerContext}>
-        <OverlayTriggerStateContext value={state}>
-          {children}
-        </OverlayTriggerStateContext>
+        <OverlayTriggerStateContext value={state}>{children}</OverlayTriggerStateContext>
       </DrawerContext>
     );
   }
@@ -299,7 +297,7 @@ const DrawerBackdrop = ({
   const updatedSlots = useMemo(() => drawerVariants({variant}), [variant]);
 
   const updatedDrawerContext = useMemo<DrawerContext>(
-    () => ({slots: {...contextSlots, ...updatedSlots}, isDismissable}),
+    () => ({isDismissable, slots: {...contextSlots, ...updatedSlots}}),
     [contextSlots, updatedSlots, isDismissable],
   );
 
@@ -342,7 +340,7 @@ const DrawerContent = ({
   const updatedSlots = useMemo(() => drawerVariants({placement}), [placement]);
 
   const updatedDrawerContext = useMemo<DrawerContext>(
-    () => ({placement, isDismissable, slots: {...contextSlots, ...updatedSlots}}),
+    () => ({isDismissable, placement, slots: {...contextSlots, ...updatedSlots}}),
     [contextSlots, placement, isDismissable, updatedSlots],
   );
 

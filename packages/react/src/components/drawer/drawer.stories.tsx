@@ -3,12 +3,11 @@ import type {Meta} from "@storybook/react";
 import {Icon} from "@iconify/react";
 import React from "react";
 
+import {useOverlayState} from "../../hooks/use-overlay-state";
 import {Button} from "../button";
 import {Input} from "../input";
 import {Label} from "../label";
 import {TextField} from "../textfield";
-
-import {useOverlayState} from "../../hooks/use-overlay-state";
 
 import {Drawer} from "./index";
 
@@ -343,9 +342,9 @@ export const ControlledWithoutTrigger = () => {
               </Drawer.Header>
               <Drawer.Body>
                 <p>
-                  This drawer is opened externally via <code>useOverlayState</code> without a trigger
-                  child inside the Drawer root. This is useful for drawers driven by URL params,
-                  row selections, or other external events.
+                  This drawer is opened externally via <code>useOverlayState</code> without a
+                  trigger child inside the Drawer root. This is useful for drawers driven by URL
+                  params, row selections, or other external events.
                 </p>
               </Drawer.Body>
               <Drawer.Footer>
