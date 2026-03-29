@@ -13,6 +13,8 @@ node_modules
 coverage
 __snapshots__
 coverage.json
+__visual_snapshots_temporary__/
+__visual_snapshots__/__diff_output__/
 
 # next.js
 .next

@@ -21,6 +21,9 @@ importers:
       '@babel/preset-typescript':
         specifier: 7.28.5
         version: 7.28.5(@babel/core@7.28.5)
+      '@blazediff/vitest':
+        specifier: 1.1.12
+        version: 1.1.12(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2))
       '@commitlint/cli':
         specifier: 20.2.0
         version: 20.2.0(@types/node@25.0.3)(typescript@5.9.3)
@@ -51,6 +54,9 @@ importers:
       '@rollup/plugin-typescript':
         specifier: 12.3.0
         version: 12.3.0(rollup@4.54.0)(tslib@2.8.1)(typescript@5.9.3)
+      '@storybook/types':
+        specifier: 8.6.14
+        version: 8.6.14
       '@types/node':
         specifier: 25.0.3
         version: 25.0.3
@@ -113,7 +119,7 @@ importers:
         version: 1.1.2
       eslint-plugin-storybook:
         specifier: 10.1.10
-        version: 10.1.10(eslint@9.39.2(jiti@2.6.1))(storybook@10.1.10(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
+        version: 10.1.10(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       eslint-plugin-unused-imports:
         specifier: 4.3.0
         version: 4.3.0(@typescript-eslint/eslint-plugin@8.50.1(@typescript-eslint/parser@8.50.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))
@@ -132,6 +138,9 @@ importers:
       parcel:
         specifier: 2.16.3
         version: 2.16.3(@swc/helpers@0.5.18)
+      playwright:
+        specifier: 1.58.2
+        version: 1.58.2
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -742,6 +751,65 @@ packages:
   '@babel/types@7.28.5':
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
+
+  '@blazediff/codec-pngjs@4.0.0':
+    resolution: {integrity: sha512-UYLYIEaRRHJdjuVtbYvQxKZz3zNAdNLGPu8aJFFEaHGuDEPzYeFaQNCwAy52laJug9wAFB+q0Bidh0FLdkuBGQ==}
+
+  '@blazediff/core-native-darwin-arm64@4.2.0':
+    resolution: {integrity: sha512-FG1b00aZ301EeBTyFbPlGqkmcBvmSFXnJlPd+LjfDW14vGI8T5sOGqEglIZqzdHPtCEZOCa5H6Y8DXn4Wvm6mw==}
+    cpu: [arm64]
+    os: [darwin]
+    hasBin: true
+
+  '@blazediff/core-native-darwin-x64@4.2.0':
+    resolution: {integrity: sha512-f+IG1F0ECGOAc3/hpXfNs/O00pbCdhnPIhtq/7k75mVo8NRV7Da/Tif1vvAtsGCU4iY2RdEPOolt0XoXyCHgsg==}
+    cpu: [x64]
+    os: [darwin]
+    hasBin: true
+
+  '@blazediff/core-native-linux-arm64@4.2.0':
+    resolution: {integrity: sha512-5ianKM591Ry9VYjKUCQxSixzE5Jiybw7GtjjprItTpdwhZIA2QiphYwBfSMDrOv1EP5US9Ln8B/ebPMRBJpfkA==}
+    cpu: [arm64]
+    os: [linux]
+    hasBin: true
+
+  '@blazediff/core-native-linux-x64@4.2.0':
+    resolution: {integrity: sha512-E2r1h4aX2s6RzS3gIgmMHnBlHj95pjv3TxmjwXq6SE8e/DKWgg+4kWw0vfFBgyLxJQQYU2QloreKu7aGOhjE8g==}
+    cpu: [x64]
+    os: [linux]
+    hasBin: true
+
+  '@blazediff/core-native-win32-arm64@4.2.0':
+    resolution: {integrity: sha512-AHgtH4D0QDlPb7ACDh7EXTqLFFWMQAEcKVD1hT0FuUl/88pWfTN9iE3ghwyVsnER3WFPv87ZzMnz188JFUxqtA==}
+    cpu: [arm64]
+    os: [win32]
+    hasBin: true
+
+  '@blazediff/core-native-win32-x64@4.2.0':
+    resolution: {integrity: sha512-1s2XWIppBllQibCYvxWLeZqzm377M04NhfgArFI6vIhBYmx7N/YKzb6qr80bvjkRMac5NXgU3fYjFlHKF49JZg==}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
+
+  '@blazediff/core-native@4.2.0':
+    resolution: {integrity: sha512-G4i08d1LEcSlx4oDaroEYWS39xosXcS7thLZKLwirmYEX9huFSw5TFWLcwrmy/5VeRdvyeoNcwqnOBJyXJrYpg==}
+
+  '@blazediff/core@1.9.1':
+    resolution: {integrity: sha512-ehg3jIkYKulZh+8om/O25vkvSsXXwC+skXmyA87FFx6A/45eqOkZsBltMw/TVteb0mloiGT8oGRTcjRAz66zaA==}
+
+  '@blazediff/gmsd@1.7.1':
+    resolution: {integrity: sha512-ypgVDWo8tn+mSoClBBVw3+7spNBO34ebHKPdPkdZEwFEYjzOK+OYqTCF6cqnlnMBYqGxESlyh3wqEzb5Zd/u6A==}
+
+  '@blazediff/matcher@1.4.2':
+    resolution: {integrity: sha512-xwP9HAYK1l71mbDbggthfxEtDlJ1odzhDY9pY9oJQjZdDpJDSHhEn20ddKy7iC7PkqMLU0tjdX9v4oc5oPZcJQ==}
+
+  '@blazediff/ssim@1.7.1':
+    resolution: {integrity: sha512-CxdtlPLijlp2tbwDavEOlDCtonWroHpXBfp/Ptue8IRTKeKnuDCotWZliH0tFJRYpsORxBUKXAc4vWVBrPUnPw==}
+
+  '@blazediff/vitest@1.1.12':
+    resolution: {integrity: sha512-ys3QzdKi495wpVUHhVdDtk02EDgYWvjX9v0msqplqA2HOCJOOACpHxJCq/LaK1+oLjvx2Lp7Q8JDQpimZbnAxA==}
+    peerDependencies:
+      vitest: '>=1.0.0'
 
   '@clack/core@0.3.5':
     resolution: {integrity: sha512-5cfhQNH+1VQ2xLQlmzXMqUoiaH0lRBq9/CLW9lTyMbuKLC3+xEK01tHVvyut++mLOn5urSHmkm6I0Lg9MaJSTQ==}
@@ -3391,6 +3459,11 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  '@storybook/types@8.6.14':
+    resolution: {integrity: sha512-33kzHZa7h6/EygeLZDcm1PNRTlybokz8dzAh2JYjpETf77pG8jhPmEfrI2oHSAdgNeK7A3OMcGA/EwEN7EJdzw==}
+    peerDependencies:
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
   '@swc/core-darwin-arm64@1.15.7':
     resolution: {integrity: sha512-+hNVUfezUid7LeSHqnhoC6Gh3BROABxjlDNInuZ/fie1RUxaEX4qzDwdTgozJELgHhvYxyPIg1ro8ibnKtgO4g==}
@@ -6444,10 +6517,24 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  playwright-core@1.58.2:
+    resolution: {integrity: sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   playwright@1.57.0:
     resolution: {integrity: sha512-ilYQj1s8sr2ppEJ2YVadYBN0Mb3mdo9J0wQ+UuDhzYqURwSoW4n1Xs5vs7ORwgDGmyEh33tRMeS8KhdkMoLXQw==}
     engines: {node: '>=18'}
     hasBin: true
+
+  playwright@1.58.2:
+    resolution: {integrity: sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  pngjs@7.0.0:
+    resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
+    engines: {node: '>=14.19.0'}
 
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
@@ -8145,6 +8232,57 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
+  '@blazediff/codec-pngjs@4.0.0':
+    dependencies:
+      pngjs: 7.0.0
+
+  '@blazediff/core-native-darwin-arm64@4.2.0':
+    optional: true
+
+  '@blazediff/core-native-darwin-x64@4.2.0':
+    optional: true
+
+  '@blazediff/core-native-linux-arm64@4.2.0':
+    optional: true
+
+  '@blazediff/core-native-linux-x64@4.2.0':
+    optional: true
+
+  '@blazediff/core-native-win32-arm64@4.2.0':
+    optional: true
+
+  '@blazediff/core-native-win32-x64@4.2.0':
+    optional: true
+
+  '@blazediff/core-native@4.2.0':
+    optionalDependencies:
+      '@blazediff/core-native-darwin-arm64': 4.2.0
+      '@blazediff/core-native-darwin-x64': 4.2.0
+      '@blazediff/core-native-linux-arm64': 4.2.0
+      '@blazediff/core-native-linux-x64': 4.2.0
+      '@blazediff/core-native-win32-arm64': 4.2.0
+      '@blazediff/core-native-win32-x64': 4.2.0
+
+  '@blazediff/core@1.9.1': {}
+
+  '@blazediff/gmsd@1.7.1': {}
+
+  '@blazediff/matcher@1.4.2':
+    dependencies:
+      '@blazediff/codec-pngjs': 4.0.0
+      '@blazediff/core': 1.9.1
+      '@blazediff/core-native': 4.2.0
+      '@blazediff/gmsd': 1.7.1
+      '@blazediff/ssim': 1.7.1
+      picocolors: 1.1.1
+
+  '@blazediff/ssim@1.7.1': {}
+
+  '@blazediff/vitest@1.1.12(vitest@4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2))':
+    dependencies:
+      '@blazediff/matcher': 1.4.2
+      vitest: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)
+
   '@clack/core@0.3.5':
     dependencies:
       picocolors: 1.1.1
@@ -8198,7 +8336,7 @@ snapshots:
   '@commitlint/is-ignored@20.2.0':
     dependencies:
       '@commitlint/types': 20.2.0
-      semver: 7.7.3
+      semver: 7.7.4
 
   '@commitlint/lint@20.2.0':
     dependencies:
@@ -9122,7 +9260,7 @@ snapshots:
       '@parcel/rust': 2.16.3
       '@parcel/utils': 2.16.3
       nullthrows: 1.1.1
-      semver: 7.7.3
+      semver: 7.7.4
     transitivePeerDependencies:
       - '@parcel/core'
       - napi-wasm
@@ -9396,7 +9534,7 @@ snapshots:
       browserslist: 4.28.1
       json5: 2.2.3
       nullthrows: 1.1.1
-      semver: 7.7.3
+      semver: 7.7.4
     transitivePeerDependencies:
       - '@parcel/core'
       - napi-wasm
@@ -9446,7 +9584,7 @@ snapshots:
       browserslist: 4.28.1
       nullthrows: 1.1.1
       regenerator-runtime: 0.14.1
-      semver: 7.7.3
+      semver: 7.7.4
     transitivePeerDependencies:
       - napi-wasm
 
@@ -9474,7 +9612,7 @@ snapshots:
       clone: 2.1.2
       nullthrows: 1.1.1
       postcss-value-parser: 4.2.0
-      semver: 7.7.3
+      semver: 7.7.4
     transitivePeerDependencies:
       - '@parcel/core'
       - napi-wasm
@@ -11368,6 +11506,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@storybook/types@8.6.14': {}
+
   '@swc/core-darwin-arm64@1.15.7':
     optional: true
 
@@ -12995,11 +13135,10 @@ snapshots:
       natural-compare: 1.4.0
       requireindex: 1.2.0
 
-  eslint-plugin-storybook@10.1.10(eslint@9.39.2(jiti@2.6.1))(storybook@10.1.10(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3):
+  eslint-plugin-storybook@10.1.10(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/utils': 8.50.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.39.2(jiti@2.6.1)
-      storybook: 10.1.10(@testing-library/dom@10.4.1)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -13661,7 +13800,7 @@ snapshots:
 
   is-bun-module@2.0.0:
     dependencies:
-      semver: 7.7.3
+      semver: 7.7.4
 
   is-callable@1.2.7: {}
 
@@ -14835,11 +14974,21 @@ snapshots:
 
   playwright-core@1.57.0: {}
 
+  playwright-core@1.58.2: {}
+
   playwright@1.57.0:
     dependencies:
       playwright-core: 1.57.0
     optionalDependencies:
       fsevents: 2.3.2
+
+  playwright@1.58.2:
+    dependencies:
+      playwright-core: 1.58.2
+    optionalDependencies:
+      fsevents: 2.3.2
+
+  pngjs@7.0.0: {}
 
   possible-typed-array-names@1.1.0: {}
 
@@ -15685,7 +15834,7 @@ snapshots:
     dependencies:
       '@img/colour': 1.0.0
       detect-libc: 2.1.2
-      semver: 7.7.3
+      semver: 7.7.4
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.34.5
       '@img/sharp-darwin-x64': 0.34.5
