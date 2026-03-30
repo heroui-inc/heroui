@@ -7,6 +7,7 @@
  * Element: trigger - the element that opens the modal
  */
 .alert-dialog__trigger {
+  @apply inline-block;
   @apply cursor-(--cursor-interactive);
 
   /**

@@ -7,6 +7,7 @@
 }
 
 .dropdown__trigger {
+  @apply inline-block;
   /* Only visible when using a custom trigger  - not passing "Button" as a child - hence we use some button styles (custom trigger) */
   @apply outline-none;
   /**

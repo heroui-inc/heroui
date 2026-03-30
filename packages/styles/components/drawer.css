@@ -7,7 +7,7 @@
  * Element: trigger - the element that opens the drawer
  */
 .drawer__trigger {
-  @apply cursor-(--cursor-interactive);
+  @apply inline-block cursor-(--cursor-interactive);
 
   /**
    * Transitions

@@ -68,6 +68,8 @@
 
 /* Popover trigger */
 .popover__trigger {
+  @apply inline-block;
+
   /**
    * Transitions
    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
