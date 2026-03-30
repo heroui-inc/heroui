@@ -90,6 +90,9 @@
     --focus: var(--accent);
     --link: var(--foreground);
 
+    /* Backdrop */
+    --backdrop: rgba(0, 0, 0, 0.5);
+
     /* Shadows */
     /* --surface-shadow: 0 0px 0px 0 rgba(24, 24, 27, 0.03), 0 2px 10px 0 rgba(24, 24, 27, 0.08); */
     --surface-shadow:
@@ -153,6 +156,9 @@
     --separator: oklch(25% 0.006 286.033);
     --focus: var(--accent);
     --link: var(--foreground);
+
+    /* Backdrop */
+    --backdrop: rgba(0, 0, 0, 0.6);
 
     /* Shadows */
     --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
