@@ -15,8 +15,8 @@ export const NativeImageHeroView: FC = () => {
       <NativeQRPreviewPopover />
       <DocsImage
         alt="HeroUI v3 Introduction"
-        darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-dark-1.jpg"
-        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-light-1.jpg"
+        darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-dark-1.webp"
+        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-light-1.webp"
       />
     </div>
   );
