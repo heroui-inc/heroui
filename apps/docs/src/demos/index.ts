@@ -116,6 +116,10 @@ export const demos: Record<string, DemoItem> = {
     component: AccordionDemos.CustomRenderFunction,
     file: "accordion/custom-render-function.tsx",
   },
+  "accordion-controlled": {
+    component: AccordionDemos.Controlled,
+    file: "accordion/controlled.tsx",
+  },
   // Alert demos
   "alert-basic": {
     component: AlertDemos.Basic,
