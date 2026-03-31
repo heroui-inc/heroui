@@ -78,15 +78,14 @@
  * Modifier: backdrop--opaque
  */
 .modal__backdrop--opaque {
-  background-color: var(--backdrop);
+  @apply bg-backdrop;
 }
 
 /**
  * Modifier: backdrop--blur
  */
 .modal__backdrop--blur {
-  background-color: var(--backdrop);
-  @apply backdrop-blur-md;
+  @apply bg-backdrop backdrop-blur-md;
 }
 
 /**
