@@ -365,9 +365,11 @@ const CalendarYearPickerGrid = ({
 
   const handleYearSelect = React.useCallback(
     (year: number) => {
-      const newDate = state.focusedDate.set({year});
+      if (year !== state.focusedDate.year) {
+        const newDate = state.focusedDate.set({year});
 
-      state.setFocusedDate(newDate);
+        state.setFocusedDate(newDate);
+      }
       setIsYearPickerOpen(false);
     },
     [setIsYearPickerOpen, state],
