@@ -24,7 +24,12 @@ export function AsynchronousFiltering() {
   });
 
   return (
-    <Autocomplete className="w-[256px]" placeholder="Search..." selectionMode="single">
+    <Autocomplete
+      allowsEmptyCollection
+      className="w-[256px]"
+      placeholder="Search..."
+      selectionMode="single"
+    >
       <Label>Search a Star Wars characters</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
