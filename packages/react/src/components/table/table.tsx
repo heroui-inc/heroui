@@ -103,13 +103,16 @@ function TableContent({className, ...props}: TableContentProps) {
  * -----------------------------------------------------------------------------------------------*/
 interface TableHeaderProps<T extends object> extends ComponentPropsWithRef<
   typeof TableHeaderPrimitive<T>
-> {}
+> {
+  suppressHydrationWarning?: boolean;
+}
 
 function TableHeader<T extends object>({className, ...props}: TableHeaderProps<T>) {
   const {slots} = useContext(TableContext);
 
   return (
     <TableHeaderPrimitive
+      suppressHydrationWarning
       className={composeTwRenderProps(className, slots?.header())}
       data-slot="table-header"
       {...props}
@@ -122,7 +125,9 @@ function TableHeader<T extends object>({className, ...props}: TableHeaderProps<T
 /* -------------------------------------------------------------------------------------------------
  * Table Column
  * -----------------------------------------------------------------------------------------------*/
-interface TableColumnProps extends ComponentPropsWithRef<typeof ColumnPrimitive> {}
+interface TableColumnProps extends ComponentPropsWithRef<typeof ColumnPrimitive> {
+  suppressHydrationWarning?: boolean;
+}
 
 const TableColumn = React.forwardRef<HTMLTableCellElement, TableColumnProps>(
   ({className, ...props}, ref) => {
@@ -131,6 +136,7 @@ const TableColumn = React.forwardRef<HTMLTableCellElement, TableColumnProps>(
     return (
       <ColumnPrimitive
         ref={ref}
+        suppressHydrationWarning
         className={composeTwRenderProps(className, slots?.column())}
         data-slot="table-column"
         {...props}
@@ -146,13 +152,16 @@ TableColumn.displayName = "HeroUI.Table.Column";
  * -----------------------------------------------------------------------------------------------*/
 interface TableBodyProps<T extends object> extends ComponentPropsWithRef<
   typeof TableBodyPrimitive<T>
-> {}
+> {
+  suppressHydrationWarning?: boolean;
+}
 
 function TableBody<T extends object>({className, ...props}: TableBodyProps<T>) {
   const {slots} = useContext(TableContext);
 
   return (
     <TableBodyPrimitive
+      suppressHydrationWarning
       className={composeTwRenderProps(className, slots?.body())}
       data-slot="table-body"
       {...props}
@@ -165,13 +174,16 @@ function TableBody<T extends object>({className, ...props}: TableBodyProps<T>) {
 /* -------------------------------------------------------------------------------------------------
  * Table Row
  * -----------------------------------------------------------------------------------------------*/
-interface TableRowProps<T extends object> extends ComponentPropsWithRef<typeof RowPrimitive<T>> {}
+interface TableRowProps<T extends object> extends ComponentPropsWithRef<typeof RowPrimitive<T>> {
+  suppressHydrationWarning?: boolean;
+}
 
 function TableRow<T extends object>({className, ...props}: TableRowProps<T>) {
   const {slots} = useContext(TableContext);
 
   return (
     <RowPrimitive
+      suppressHydrationWarning
       className={composeTwRenderProps(className, slots?.row())}
       data-slot="table-row"
       {...props}
@@ -184,7 +196,9 @@ function TableRow<T extends object>({className, ...props}: TableRowProps<T>) {
 /* -------------------------------------------------------------------------------------------------
  * Table Cell
  * -----------------------------------------------------------------------------------------------*/
-interface TableCellProps extends ComponentPropsWithRef<typeof CellPrimitive> {}
+interface TableCellProps extends ComponentPropsWithRef<typeof CellPrimitive> {
+  suppressHydrationWarning?: boolean;
+}
 
 const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
   ({className, ...props}, ref) => {
@@ -193,6 +207,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
     return (
       <CellPrimitive
         ref={ref}
+        suppressHydrationWarning
         className={composeTwRenderProps(className, slots?.cell())}
         data-slot="table-cell"
         {...props}
