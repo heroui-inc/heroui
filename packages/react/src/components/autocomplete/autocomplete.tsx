@@ -49,6 +49,7 @@ interface AutocompleteRootProps<T extends object, M extends "single" | "multiple
 }
 
 const AutocompleteRoot = <T extends object = object, M extends "single" | "multiple" = "single">({
+  allowsEmptyCollection = true,
   children,
   className,
   fullWidth,
@@ -66,6 +67,7 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
   return (
     <AutocompleteContext value={{slots, triggerRef, clearButtonRef, onClear}}>
       <SelectPrimitive
+        allowsEmptyCollection={allowsEmptyCollection}
         data-slot="autocomplete"
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
