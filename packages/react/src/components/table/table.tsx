@@ -26,6 +26,7 @@ import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
  * -----------------------------------------------------------------------------------------------*/
 const TableContext = createContext<{
   slots?: ReturnType<typeof tableVariants>;
+  id?: string;
 }>({});
 
 /* -------------------------------------------------------------------------------------------------
@@ -34,15 +35,18 @@ const TableContext = createContext<{
 interface TableRootProps extends ComponentPropsWithRef<"div">, TableVariants {
   className?: string;
   children?: React.ReactNode;
+  id?: string;
 }
 
 const TableRoot = React.forwardRef<HTMLDivElement, TableRootProps>(
-  ({children, className, variant, ...props}, ref) => {
+  ({children, className, id: idProp, variant, ...props}, ref) => {
     const slots = React.useMemo(() => tableVariants({variant}), [variant]);
+    const reactId = React.useId();
+    const id = idProp || reactId;
 
     return (
-      <TableContext value={{slots}}>
-        <div ref={ref} className={slots.base({className})} data-slot="table" {...props}>
+      <TableContext value={{slots, id}}>
+        <div ref={ref} className={slots.base({className})} data-slot="table" id={id} {...props}>
           {children}
         </div>
       </TableContext>
@@ -82,15 +86,17 @@ interface TableContentProps extends Omit<
   "className"
 > {
   className?: string;
+  id?: string;
 }
 
 function TableContent({className, ...props}: TableContentProps) {
-  const {slots} = useContext(TableContext);
+  const {id, slots} = useContext(TableContext);
 
   return (
     <TablePrimitive
       className={composeTwRenderProps(className, slots?.content())}
       data-slot="table-content"
+      id={id}
       {...props}
     />
   );
