@@ -1,7 +1,7 @@
 {
   "name": "heroui",
   "private": true,
-  "version": "3.0.0-rc.1",
+  "version": "3.0.1",
   "license": "MIT",
   "author": {
     "name": "HeroUI",
@@ -34,9 +34,8 @@
     "typecheck:react": "turbo typecheck --filter=@heroui/react",
     "typecheck:storybook": "dotenv -- turbo typecheck --filter=@heroui/storybook",
     "typegen:docs": "dotenv -- pnpm --filter @heroui/docs typegen",
-    "version:bump": "bumpp",
-    "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s --commit-path .",
-    "release": "pnpm run test && pnpm run build && bumpp --execute='pnpm run changelog' --all",
+    "version:bump": "bumpp package.json packages/react/package.json packages/styles/package.json",
+    "release": "pnpm run build && bumpp package.json packages/react/package.json packages/styles/package.json --all",
     "clean": "pnpm clean:cache && pnpm i",
     "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name 'pnpm-lock.yaml' \\) -prune -exec rm -rf '{}' +",
     "upli": "pnpm up --filter \"./**\"  -L -i",
