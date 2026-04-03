@@ -113,6 +113,7 @@ For consistent form field styling across input components:
     { name: "Border", variable: "--border" },
     { name: "Focus", variable: "--focus" },
     { name: "Link", variable: "--link" },
+    { name: "Backdrop", variable: "--backdrop" },
     { name: "Scrollbar", variable: "--scrollbar" },
   ]}
 />
@@ -242,6 +243,9 @@ The complete theme definition can be found in ([variables.css](https://github.co
       --focus: var(--accent);
       --link: var(--foreground);
 
+      /* Backdrop */
+      --backdrop: rgba(0, 0, 0, 0.5);
+
       /* Shadows */
       --surface-shadow:
         0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
@@ -298,6 +302,9 @@ The complete theme definition can be found in ([variables.css](https://github.co
       --separator: oklch(22% 0.006 286.033);
       --focus: var(--accent);
       --link: var(--foreground);
+
+      /* Backdrop */
+      --backdrop: rgba(0, 0, 0, 0.6);
 
       /* Shadows */
       --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
