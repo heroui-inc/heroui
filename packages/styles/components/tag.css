@@ -53,11 +53,11 @@
 
 /* Size */
 .tag--sm {
-  @apply px-1 py-0.5 text-xs;
+  @apply px-2 py-0.5 text-xs;
 }
 
 .tag--md {
-  @apply px-1.5 py-1 text-xs;
+  @apply px-2 py-1 text-xs;
 }
 
 .tag--lg {

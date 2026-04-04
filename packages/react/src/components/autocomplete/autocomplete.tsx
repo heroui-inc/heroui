@@ -6,8 +6,8 @@ import type {AutocompleteVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
-import {mergeRefs} from "@react-aria/utils";
-import React, {createContext, useContext, useRef} from "react";
+import {mergeRefs, useResizeObserver} from "@react-aria/utils";
+import React, {createContext, useCallback, useContext, useRef, useState} from "react";
 import {
   Autocomplete as AutocompletePrimitive,
   Button as ButtonPrimitive,
@@ -194,9 +194,19 @@ const AutocompletePopover = ({
   children,
   className,
   placement = "bottom",
+  style,
   ...props
 }: AutocompletePopoverProps) => {
   const {slots, triggerRef} = useContext(AutocompleteContext);
+  const [triggerWidth, setTriggerWidth] = useState<string | null>(null);
+
+  const onResize = useCallback(() => {
+    if (triggerRef.current) {
+      setTriggerWidth(triggerRef.current.offsetWidth + "px");
+    }
+  }, [triggerRef]);
+
+  useResizeObserver({ref: triggerRef, onResize});
 
   return (
     <SurfaceContext
@@ -210,6 +220,12 @@ const AutocompletePopover = ({
         data-slot="autocomplete-popover"
         placement={placement}
         triggerRef={triggerRef}
+        style={
+          {
+            "--trigger-width": triggerWidth,
+            ...(typeof style === "object" && style !== null ? style : {}),
+          } as React.CSSProperties
+        }
       >
         {children}
       </PopoverPrimitive>

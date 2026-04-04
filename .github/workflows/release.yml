@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (publish without actually uploading to npm)"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Determine previous tag
+        id: prev-tag
+        run: |
+          PREV=$(git tag -l 'v*' --sort=-v:refname | grep -v "$(git describe --tags --exact-match 2>/dev/null || echo '')" | head -1)
+          echo "tag=${PREV:-}" >> $GITHUB_OUTPUT
+          echo "Previous tag: ${PREV:-none}"
+
+      - name: Create GitHub Release
+        if: ${{ !inputs.dry_run }}
+        run: npx changelogithub --from ${{ steps.prev-tag.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: Configure npm auth
+        run: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @heroui/styles
+        id: publish-styles
+        run: pnpm --filter @heroui/styles publish --no-git-checks --access public ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Publish @heroui/react
+        if: steps.publish-styles.outcome == 'success'
+        run: pnpm --filter @heroui/react publish --no-git-checks --access public ${{ inputs.dry_run && '--dry-run' || '' }}

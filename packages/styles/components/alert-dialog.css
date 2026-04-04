@@ -7,6 +7,7 @@
  * Element: trigger - the element that opens the modal
  */
 .alert-dialog__trigger {
+  @apply inline-block;
   @apply cursor-(--cursor-interactive);
 
   /**
@@ -78,14 +79,14 @@
  * Modifier: backdrop--opaque
  */
 .alert-dialog__backdrop--opaque {
-  @apply bg-black/50 dark:bg-black/60;
+  @apply bg-backdrop;
 }
 
 /**
  * Modifier: backdrop--blur
  */
 .alert-dialog__backdrop--blur {
-  @apply bg-black/50 backdrop-blur-md dark:bg-black/60;
+  @apply bg-backdrop backdrop-blur-md;
 }
 
 /**

@@ -7,7 +7,7 @@
  * Element: trigger - the element that opens the modal
  */
 .modal__trigger {
-  @apply cursor-(--cursor-interactive);
+  @apply inline-block cursor-(--cursor-interactive);
 
   /**
    * Transitions
@@ -78,14 +78,14 @@
  * Modifier: backdrop--opaque
  */
 .modal__backdrop--opaque {
-  @apply bg-black/50 dark:bg-black/60;
+  @apply bg-backdrop;
 }
 
 /**
  * Modifier: backdrop--blur
  */
 .modal__backdrop--blur {
-  @apply bg-black/50 backdrop-blur-md dark:bg-black/60;
+  @apply bg-backdrop backdrop-blur-md;
 }
 
 /**

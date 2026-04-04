@@ -1,0 +1,93 @@
+---
+title: v3.0.2
+description: Bug fixes, smoother Drawer transitions, new --backdrop theme variable, and style refinements for triggers, arrows, and tags.
+github:
+  pull: 6364
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">April 3, 2026</span>
+</div>
+
+Patch release with bug fixes, style refinements, and a new `--backdrop` theme variable. Drawer transitions are rewritten to native CSS for smoother animations. Overlay triggers now display as `inline-block`, and the default arrow shape for Tooltip + Popover is updated.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### `--backdrop` Theme Variable
+
+New `--backdrop` CSS variable for overlay backdrops ([#6375](https://github.com/heroui-inc/heroui/pull/6375)). Light theme defaults to `rgba(0, 0, 0, 0.5)`, dark to `rgba(0, 0, 0, 0.6)`. [Modal](/docs/components/modal), [AlertDialog](/docs/components/alert-dialog), and [Drawer](/docs/components/drawer) now reference this variable instead of hardcoded values.
+
+Override it globally:
+
+```css
+:root {
+  --backdrop: rgba(0, 0, 0, 0.7);
+}
+```
+
+Or use the utility class directly: `bg-backdrop`.
+
+## Style Improvements
+
+### Trigger `inline-block` Display
+
+Trigger elements across Popover, Tooltip, Dropdown, Modal, AlertDialog, Drawer, and Disclosure now apply `inline-block` to prevent layout collapse when the trigger wraps inline content ([#6373](https://github.com/heroui-inc/heroui/pull/6373)).
+
+### Tooltip & Popover Arrow
+
+Default arrow SVG path updated from a quadratic curve to a cubic bezier for a smoother, more natural shape ([#6372](https://github.com/heroui-inc/heroui/pull/6372)).
+
+### Tag Spacing
+
+Increased horizontal padding on `sm` (`px-1` to `px-2`) and `md` (`px-1.5` to `px-2`) Tag sizes for better readability ([#6315](https://github.com/heroui-inc/heroui/pull/6315)).
+
+## Bug Fixes
+
+- **Autocomplete**: `--trigger-width` CSS variable on the popover now tracks the trigger element's width via `useResizeObserver`, fixing misaligned dropdown widths ([#6374](https://github.com/heroui-inc/heroui/pull/6374))
+- **Drawer**: Panel transitions rewritten from Tailwind `animate-in`/`animate-out` to native CSS `translate` transitions for smoother open/close animations across all placements ([#6393](https://github.com/heroui-inc/heroui/pull/6393))
+- **InputGroup**: Secondary variant focus background now triggers only when the actual input or textarea is focused, not on any focusable child within the group ([#6362](https://github.com/heroui-inc/heroui/pull/6362))
+- **Tag**: `CloseButton` inside Tag now has an explicit `aria-label="Remove tag"` for screen readers ([#6341](https://github.com/heroui-inc/heroui/pull/6341))
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6364](https://github.com/heroui-inc/heroui/pull/6364)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
