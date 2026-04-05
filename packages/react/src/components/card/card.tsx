@@ -1,13 +1,15 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {CardVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {cardVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {SurfaceContext} from "../surface";
 
 /* -------------------------------------------------------------------------------------------------
@@ -22,15 +24,28 @@ const CardContext = createContext<CardContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Card Root
  * -----------------------------------------------------------------------------------------------*/
-interface CardRootProps extends ComponentPropsWithRef<"div">, CardVariants {}
+interface CardRootProps<E extends keyof React.JSX.IntrinsicElements = "div"> extends DOMRenderProps<
+  E,
+  undefined
+> {
+  children: ReactNode;
+  className?: string;
+  /** Visual variant. @default "default" */
+  variant?: CardVariants["variant"];
+}
 
-const CardRoot = ({children, className, variant = "default", ...props}: CardRootProps) => {
+const CardRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  variant = "default",
+  ...props
+}: CardRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardRootProps<E>>) => {
   const slots = React.useMemo(() => cardVariants({variant}), [variant]);
 
   const content = (
-    <div className={slots.base({className})} data-slot="card" {...props}>
+    <dom.div className={slots.base({className})} data-slot="card" {...(props as any)}>
       {children}
-    </div>
+    </dom.div>
   );
 
   return (
