@@ -25,6 +25,7 @@ import {
   getColorVariablesForElement,
   getFieldDerivedVariables,
   getSemanticDerivedVariables,
+  parseOklch,
 } from "./generate-theme-colors";
 
 /**
@@ -190,8 +191,15 @@ export function generateCssVariables(
 
   // Check if this is an adaptive color that needs light/dark variants
   if (adaptiveConfig) {
-    const lightFg = calculateAccentForeground(1, 0, 0); // Light accent needs dark fg
-    const darkFg = calculateAccentForeground(0, 0, 0); // Dark accent needs light fg
+    const lightAccent = parseOklch(adaptiveConfig.light);
+    const darkAccent = parseOklch(adaptiveConfig.dark);
+
+    const lightFg = lightAccent
+      ? calculateAccentForeground(lightAccent.l, lightAccent.c, lightAccent.h)
+      : calculateAccentForeground(0, 0, 0);
+    const darkFg = darkAccent
+      ? calculateAccentForeground(darkAccent.l, darkAccent.c, darkAccent.h)
+      : calculateAccentForeground(1, 0, 0);
 
     // For adaptive colors, we override the accent with predefined values
     const lightVars = getColorVariablesForElement(colors, "light");
@@ -382,8 +390,15 @@ export function generateMinimalCssVariables(
 
   // Override accent for adaptive colors (like black/white)
   if (adaptiveConfig) {
-    const lightFg = calculateAccentForeground(1, 0, 0);
-    const darkFg = calculateAccentForeground(0, 0, 0);
+    const lightAccent = parseOklch(adaptiveConfig.light);
+    const darkAccent = parseOklch(adaptiveConfig.dark);
+
+    const lightFg = lightAccent
+      ? calculateAccentForeground(lightAccent.l, lightAccent.c, lightAccent.h)
+      : calculateAccentForeground(0, 0, 0);
+    const darkFg = darkAccent
+      ? calculateAccentForeground(darkAccent.l, darkAccent.c, darkAccent.h)
+      : calculateAccentForeground(1, 0, 0);
 
     lightVars["--accent"] = adaptiveConfig.light;
     lightVars["--accent-foreground"] = lightFg;
