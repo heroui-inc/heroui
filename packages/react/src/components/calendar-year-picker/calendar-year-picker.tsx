@@ -388,7 +388,7 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
   );
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown?.(e);
+    (onKeyDown as React.KeyboardEventHandler<HTMLDivElement>)?.(e);
 
     if (e.defaultPrevented) {
       return;
