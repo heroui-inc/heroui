@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {TableVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tableVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -20,6 +21,7 @@ import {
 import {cx} from "tailwind-variants";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Table Context
@@ -31,24 +33,31 @@ const TableContext = createContext<{
 /* -------------------------------------------------------------------------------------------------
  * Table Root
  * -----------------------------------------------------------------------------------------------*/
-interface TableRootProps extends ComponentPropsWithRef<"div">, TableVariants {
+interface TableRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
-  children?: React.ReactNode;
+  /** Visual variant. */
+  variant?: TableVariants["variant"];
 }
 
-const TableRoot = React.forwardRef<HTMLDivElement, TableRootProps>(
-  ({children, className, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => tableVariants({variant}), [variant]);
+const TableRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  variant,
+  ...props
+}: TableRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TableRootProps<E>>) => {
+  const slots = React.useMemo(() => tableVariants({variant}), [variant]);
 
-    return (
-      <TableContext value={{slots}}>
-        <div ref={ref} className={slots.base({className})} data-slot="table" {...props}>
-          {children}
-        </div>
-      </TableContext>
-    );
-  },
-);
+  return (
+    <TableContext value={{slots}}>
+      <dom.div className={slots.base({className})} data-slot="table" {...(props as any)}>
+        {children}
+      </dom.div>
+    </TableContext>
+  );
+};
 
 TableRoot.displayName = "HeroUI.Table";
 
