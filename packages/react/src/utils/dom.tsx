@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable no-console */
 /*
  * From https://github.com/adobe/react-spectrum/blob/0e69a1bf028448551b8e6c3ee936f41b8f70109a/packages/react-aria-components/src/utils.tsx
