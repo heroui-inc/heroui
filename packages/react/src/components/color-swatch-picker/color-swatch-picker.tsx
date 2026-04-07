@@ -1,5 +1,6 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ColorSwatchPickerVariants} from "@heroui/styles";
 import type {CSSProperties, ComponentPropsWithRef} from "react";
 import type {ColorSwatchPickerItemRenderProps} from "react-aria-components";
@@ -13,6 +14,7 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Context
@@ -114,8 +116,11 @@ const ColorSwatchPickerSwatch = ({className, ...props}: ColorSwatchPickerSwatchP
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Indicator
 | * -----------------------------------------------------------------------------------------------*/
-interface ColorSwatchPickerIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
+interface ColorSwatchPickerIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   children?: React.ReactNode | ((props: ColorSwatchPickerItemRenderProps) => React.ReactNode);
+  className?: string;
 }
 
 /**
@@ -133,11 +138,12 @@ function getColorLuminance(color: ColorSwatchPickerItemRenderProps["color"]): nu
   return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
 }
 
-const ColorSwatchPickerIndicator = ({
+const ColorSwatchPickerIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...props
-}: ColorSwatchPickerIndicatorProps) => {
+}: ColorSwatchPickerIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ColorSwatchPickerIndicatorProps<E>>) => {
   const {slots} = useContext(ColorSwatchPickerContext);
   const {state} = useContext(ColorSwatchPickerItemContext);
 
@@ -167,15 +173,15 @@ const ColorSwatchPickerIndicator = ({
     );
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.indicator, className)}
       data-light-color={isLightColor ? "true" : undefined}
       data-slot="color-swatch-picker-indicator"
-      {...props}
+      {...(props as any)}
     >
       {content}
-    </span>
+    </dom.span>
   );
 };
 

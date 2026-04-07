@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ProgressBarVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ProgressBarRenderProps} from "react-aria-components";
 
 import {progressBarVariants} from "@heroui/styles";
@@ -9,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {ProgressBar as ProgressBarPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ProgressBar Context
@@ -49,19 +51,29 @@ ProgressBarRoot.displayName = "HeroUI.ProgressBar";
 /* -------------------------------------------------------------------------------------------------
  * ProgressBar Output
  * -----------------------------------------------------------------------------------------------*/
-interface ProgressBarOutputProps extends ComponentPropsWithRef<"span"> {}
+interface ProgressBarOutputProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ProgressBarOutput = ({children, className, ...props}: ProgressBarOutputProps) => {
+const ProgressBarOutput = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: ProgressBarOutputProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarOutputProps<E>>) => {
   const {slots, state} = useContext(ProgressBarContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.output, className)}
       data-slot="progress-bar-output"
-      {...props}
+      {...(props as any)}
     >
       {children ?? state?.valueText}
-    </span>
+    </dom.span>
   );
 };
 
@@ -70,19 +82,29 @@ ProgressBarOutput.displayName = "HeroUI.ProgressBar.Output";
 /* -------------------------------------------------------------------------------------------------
  * ProgressBar Track
  * -----------------------------------------------------------------------------------------------*/
-interface ProgressBarTrackProps extends ComponentPropsWithRef<"div"> {}
+interface ProgressBarTrackProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ProgressBarTrack = ({children, className, ...props}: ProgressBarTrackProps) => {
+const ProgressBarTrack = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ProgressBarTrackProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarTrackProps<E>>) => {
   const {slots} = useContext(ProgressBarContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.track, className)}
       data-slot="progress-bar-track"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -91,20 +113,31 @@ ProgressBarTrack.displayName = "HeroUI.ProgressBar.Track";
 /* -------------------------------------------------------------------------------------------------
  * ProgressBar Fill
  * -----------------------------------------------------------------------------------------------*/
-interface ProgressBarFillProps extends ComponentPropsWithRef<"div"> {}
+interface ProgressBarFillProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}
 
-const ProgressBarFill = ({className, style, ...props}: ProgressBarFillProps) => {
+const ProgressBarFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  style,
+  ...props
+}: ProgressBarFillProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarFillProps<E>>) => {
   const {slots, state} = useContext(ProgressBarContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.fill, className)}
       data-slot="progress-bar-fill"
       style={{
         ...style,
         width: state?.isIndeterminate ? undefined : `${state?.percentage ?? 0}%`,
       }}
-      {...props}
+      {...(props as any)}
     />
   );
 };

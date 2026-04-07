@@ -2,7 +2,7 @@
 
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ChipVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {ReactNode} from "react";
 
 import {chipVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -69,21 +69,28 @@ const ChipRoot = <E extends keyof React.JSX.IntrinsicElements = "span">({
 /* -------------------------------------------------------------------------------------------------
  * Chip Label
  * -----------------------------------------------------------------------------------------------*/
-interface ChipLabelProps extends ComponentPropsWithRef<"span"> {
+interface ChipLabelProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const ChipLabel = ({children, className, ...props}: ChipLabelProps) => {
+const ChipLabel = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: ChipLabelProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ChipLabelProps<E>>) => {
   const {slots} = useContext(ChipContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.label, className)}
       data-slot="chip-label"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 

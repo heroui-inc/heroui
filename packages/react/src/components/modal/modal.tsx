@@ -1,6 +1,7 @@
 "use client";
 
 import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-overlay-state";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {ModalVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
@@ -22,6 +23,7 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
 
@@ -67,21 +69,30 @@ const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface ModalTriggerProps extends ComponentPropsWithRef<"div"> {}
+interface ModalTriggerProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ModalTrigger = ({children, className, ...props}: ModalTriggerProps) => {
+const ModalTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ModalTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalTriggerProps<E>>) => {
   const {slots} = useContext(ModalContext);
 
   return (
     <PressablePrimitive>
-      <div
+      <dom.div
         className={composeSlotClassName(slots?.trigger, className)}
         data-slot="modal-trigger"
         role="button"
-        {...props}
+        {...(props as any)}
       >
         {children}
-      </div>
+      </dom.div>
     </PressablePrimitive>
   );
 };
@@ -205,53 +216,84 @@ const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Modal Header
  * -----------------------------------------------------------------------------------------------*/
-interface ModalHeaderProps extends ComponentPropsWithRef<"div"> {}
+interface ModalHeaderProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ModalHeader = ({children, className, ...props}: ModalHeaderProps) => {
+const ModalHeader = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ModalHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalHeaderProps<E>>) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.header, className)}
       data-slot="modal-header"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Body
  * -----------------------------------------------------------------------------------------------*/
-interface ModalBodyProps extends ComponentPropsWithRef<"div"> {}
+interface ModalBodyProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ModalBody = ({children, className, ...props}: ModalBodyProps) => {
+const ModalBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ModalBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalBodyProps<E>>) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div className={composeSlotClassName(slots?.body, className)} data-slot="modal-body" {...props}>
+    <dom.div
+      className={composeSlotClassName(slots?.body, className)}
+      data-slot="modal-body"
+      {...(props as any)}
+    >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Footer
  * -----------------------------------------------------------------------------------------------*/
-interface ModalFooterProps extends ComponentPropsWithRef<"div"> {}
+interface ModalFooterProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ModalFooter = ({children, className, ...props}: ModalFooterProps) => {
+const ModalFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ModalFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalFooterProps<E>>) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.footer, className)}
       data-slot="modal-footer"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -278,15 +320,28 @@ const ModalHeading = ({children, className, ...props}: ModalHeadingProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Icon
  * -----------------------------------------------------------------------------------------------*/
-interface ModalIconProps extends ComponentPropsWithRef<"div"> {}
+interface ModalIconProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ModalIcon = ({children, className, ...props}: ModalIconProps) => {
+const ModalIcon = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ModalIconProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalIconProps<E>>) => {
   const {slots} = useContext(ModalContext);
 
   return (
-    <div className={composeSlotClassName(slots?.icon, className)} data-slot="modal-icon" {...props}>
+    <dom.div
+      className={composeSlotClassName(slots?.icon, className)}
+      data-slot="modal-icon"
+      {...(props as any)}
+    >
       {children}
-    </div>
+    </dom.div>
   );
 };
 

@@ -3,7 +3,7 @@
 import type {KbdKey} from "./kbd.constants";
 import type {DOMRenderProps} from "../../utils/dom";
 import type {KbdVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {ReactNode} from "react";
 
 import {kbdVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -55,43 +55,54 @@ const KbdRoot = <E extends keyof React.JSX.IntrinsicElements = "kbd">({
 /* -------------------------------------------------------------------------------------------------
  * Kbd Abbr
  * -----------------------------------------------------------------------------------------------*/
-interface KbdAbbrProps extends ComponentPropsWithRef<"abbr"> {
+interface KbdAbbrProps<E extends keyof React.JSX.IntrinsicElements = "abbr"> extends DOMRenderProps<
+  E,
+  undefined
+> {
   className?: string;
-  /**
-   * The keyboard key to display
-   */
+  /** The keyboard key to display */
   keyValue: KbdKey;
 }
 
-const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
+const KbdAbbr = <E extends keyof React.JSX.IntrinsicElements = "abbr">({
+  className,
+  keyValue,
+  ...props
+}: KbdAbbrProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdAbbrProps<E>>) => {
   const {slots} = useContext(KbdContext);
 
   return (
-    <abbr
+    <dom.abbr
       className={composeSlotClassName(slots?.abbr, className)}
       title={kbdKeysLabelMap[keyValue]}
-      {...props}
+      {...(props as any)}
     >
       {kbdKeysMap[keyValue]}
-    </abbr>
+    </dom.abbr>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Kbd Content
  * -----------------------------------------------------------------------------------------------*/
-interface KbdContentProps extends ComponentPropsWithRef<"span"> {
-  children: React.ReactNode;
+interface KbdContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
 }
 
-const KbdContent = ({children, className, ...props}: KbdContentProps) => {
+const KbdContent = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: KbdContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdContentProps<E>>) => {
   const {slots} = useContext(KbdContext);
 
   return (
-    <span className={composeSlotClassName(slots?.content, className)} {...props}>
+    <dom.span className={composeSlotClassName(slots?.content, className)} {...(props as any)}>
       {children}
-    </span>
+    </dom.span>
   );
 };
 

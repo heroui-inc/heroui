@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ProgressCircleVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ProgressBarRenderProps} from "react-aria-components";
 
 import {progressCircleVariants} from "@heroui/styles";
@@ -9,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {ProgressBar as ProgressBarPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ProgressCircle Constants
@@ -63,21 +65,31 @@ ProgressCircleRoot.displayName = "HeroUI.ProgressCircle";
 /* -------------------------------------------------------------------------------------------------
  * ProgressCircle Track
  * -----------------------------------------------------------------------------------------------*/
-interface ProgressCircleTrackProps extends ComponentPropsWithRef<"svg"> {}
+interface ProgressCircleTrackProps<
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ProgressCircleTrack = ({children, className, ...props}: ProgressCircleTrackProps) => {
+const ProgressCircleTrack = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+  children,
+  className,
+  ...props
+}: ProgressCircleTrackProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackProps<E>>) => {
   const {slots} = useContext(ProgressCircleContext);
 
   return (
-    <svg
+    <dom.svg
       className={composeSlotClassName(slots?.track, className)}
       data-slot="progress-circle-track"
       fill="none"
       viewBox={`0 0 ${CENTER * 2} ${CENTER * 2}`}
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </svg>
+    </dom.svg>
   );
 };
 
@@ -86,20 +98,29 @@ ProgressCircleTrack.displayName = "HeroUI.ProgressCircle.Track";
 /* -------------------------------------------------------------------------------------------------
  * ProgressCircle TrackCircle
  * -----------------------------------------------------------------------------------------------*/
-interface ProgressCircleTrackCircleProps extends ComponentPropsWithRef<"circle"> {}
+interface ProgressCircleTrackCircleProps<
+  E extends keyof React.JSX.IntrinsicElements = "circle",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ProgressCircleTrackCircle = ({className, ...props}: ProgressCircleTrackCircleProps) => {
+const ProgressCircleTrackCircle = <E extends keyof React.JSX.IntrinsicElements = "circle">({
+  className,
+  ...props
+}: ProgressCircleTrackCircleProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackCircleProps<E>>) => {
   const {slots} = useContext(ProgressCircleContext);
 
   return (
-    <circle
+    <dom.circle
       className={composeSlotClassName(slots?.trackCircle, className)}
       cx={CENTER}
       cy={CENTER}
       data-slot="progress-circle-track-circle"
       r={RADIUS}
       strokeWidth={STROKE_WIDTH}
-      {...props}
+      {...(props as any)}
     />
   );
 };
@@ -109,16 +130,25 @@ ProgressCircleTrackCircle.displayName = "HeroUI.ProgressCircle.TrackCircle";
 /* -------------------------------------------------------------------------------------------------
  * ProgressCircle FillCircle
  * -----------------------------------------------------------------------------------------------*/
-interface ProgressCircleFillCircleProps extends ComponentPropsWithRef<"circle"> {}
+interface ProgressCircleFillCircleProps<
+  E extends keyof React.JSX.IntrinsicElements = "circle",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ProgressCircleFillCircle = ({className, ...props}: ProgressCircleFillCircleProps) => {
+const ProgressCircleFillCircle = <E extends keyof React.JSX.IntrinsicElements = "circle">({
+  className,
+  ...props
+}: ProgressCircleFillCircleProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleFillCircleProps<E>>) => {
   const {slots, state} = useContext(ProgressCircleContext);
   const percentage = state?.percentage ?? 0;
   const isIndeterminate = state?.isIndeterminate ?? false;
   const strokeDashoffset = CIRCUMFERENCE - (percentage / 100) * CIRCUMFERENCE;
 
   return (
-    <circle
+    <dom.circle
       className={composeSlotClassName(slots?.fillCircle, className)}
       cx={CENTER}
       cy={CENTER}
@@ -129,7 +159,7 @@ const ProgressCircleFillCircle = ({className, ...props}: ProgressCircleFillCircl
       strokeLinecap="round"
       strokeWidth={STROKE_WIDTH}
       transform={`rotate(-90 ${CENTER} ${CENTER})`}
-      {...props}
+      {...(props as any)}
     />
   );
 };

@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {CheckboxVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {CheckboxRenderProps} from "react-aria-components";
 
 import {checkboxVariants} from "@heroui/styles";
@@ -9,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {Checkbox as CheckboxPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";
 
 interface CheckboxContext {
@@ -49,29 +51,47 @@ const CheckboxRoot = ({children, className, variant, ...props}: CheckboxRootProp
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface CheckboxControlProps extends ComponentPropsWithRef<"span"> {}
+interface CheckboxControlProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const CheckboxControl = ({children, className, ...props}: CheckboxControlProps) => {
+const CheckboxControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: CheckboxControlProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof CheckboxControlProps<E>>) => {
   const {slots} = useContext(CheckboxContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.control, className)}
       data-slot="checkbox-control"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface CheckboxIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
-  children?: React.ReactNode | ((props: CheckboxRenderProps) => React.ReactNode);
+interface CheckboxIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode | ((props: CheckboxRenderProps) => ReactNode);
+  className?: string;
 }
 
-const CheckboxIndicator = ({children, className, ...props}: CheckboxIndicatorProps) => {
+const CheckboxIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: CheckboxIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof CheckboxIndicatorProps<E>>) => {
   const {slots, state} = useContext(CheckboxContext);
 
   const isSelected = state?.isSelected;
@@ -115,32 +135,42 @@ const CheckboxIndicator = ({children, className, ...props}: CheckboxIndicatorPro
     );
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.indicator, className)}
       data-slot="checkbox-indicator"
-      {...props}
+      {...(props as any)}
     >
       {content}
-    </span>
+    </dom.span>
   );
 };
 
 /* -----------------------------------------------------------------------------------------------*/
 
-interface CheckboxContentProps extends ComponentPropsWithRef<"div"> {}
+interface CheckboxContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const CheckboxContent = ({children, className, ...props}: CheckboxContentProps) => {
+const CheckboxContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: CheckboxContentProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof CheckboxContentProps<E>>) => {
   const {slots} = useContext(CheckboxContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.content, className)}
       data-slot="checkbox-content"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 

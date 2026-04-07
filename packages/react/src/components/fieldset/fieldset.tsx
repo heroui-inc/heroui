@@ -1,7 +1,7 @@
 "use client";
 
 import type {DOMRenderProps} from "../../utils/dom";
-import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {ReactNode} from "react";
 
 import {fieldsetVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -44,16 +44,24 @@ const FieldsetRoot = <E extends keyof React.JSX.IntrinsicElements = "fieldset">(
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Legend
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetLegendProps extends ComponentPropsWithRef<"legend"> {}
+interface FieldsetLegendProps<
+  E extends keyof React.JSX.IntrinsicElements = "legend",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const FieldsetLegend = ({className, ...props}: FieldsetLegendProps) => {
+const FieldsetLegend = <E extends keyof React.JSX.IntrinsicElements = "legend">({
+  className,
+  ...props
+}: FieldsetLegendProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetLegendProps<E>>) => {
   const {slots} = useContext(FieldsetContext);
 
   return (
-    <legend
+    <dom.legend
       className={composeSlotClassName(slots?.legend, className)}
       data-slot="fieldset-legend"
-      {...props}
+      {...(props as any)}
     />
   );
 };
@@ -61,16 +69,24 @@ const FieldsetLegend = ({className, ...props}: FieldsetLegendProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Field Group
  * -----------------------------------------------------------------------------------------------*/
-interface FieldGroupProps extends ComponentPropsWithRef<"div"> {}
+interface FieldGroupProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const FieldGroup = ({className, ...rest}: FieldGroupProps) => {
+const FieldGroup = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...rest
+}: FieldGroupProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldGroupProps<E>>) => {
   const {slots} = useContext(FieldsetContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.fieldGroup, className)}
       data-slot="fieldset-field-group"
-      {...rest}
+      {...(rest as any)}
     />
   );
 };
@@ -78,19 +94,29 @@ const FieldGroup = ({className, ...rest}: FieldGroupProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Field Actions
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetActionsProps extends ComponentPropsWithRef<"div"> {}
+interface FieldsetActionsProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const FieldsetActions = ({children, className, ...rest}: FieldsetActionsProps) => {
+const FieldsetActions = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...rest
+}: FieldsetActionsProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof FieldsetActionsProps<E>>) => {
   const {slots} = useContext(FieldsetContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.actions, className)}
       data-slot="fieldset-actions"
-      {...rest}
+      {...(rest as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 

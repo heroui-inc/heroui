@@ -2,7 +2,7 @@
 
 import type {DOMRenderProps} from "../../utils/dom";
 import type {BadgeVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {ReactNode} from "react";
 
 import {badgeVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -23,20 +23,26 @@ const BadgeContext = createContext<BadgeContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Badge Anchor
  * -----------------------------------------------------------------------------------------------*/
-interface BadgeAnchorProps extends ComponentPropsWithRef<"span"> {
+interface BadgeAnchorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const BadgeAnchor = ({children, className, ...props}: BadgeAnchorProps) => {
+const BadgeAnchor = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: BadgeAnchorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof BadgeAnchorProps<E>>) => {
   return (
-    <span
-      {...props}
+    <dom.span
+      {...(props as any)}
       className={cx("badge-anchor", className) ?? undefined}
       data-slot="badge-anchor"
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 
@@ -96,21 +102,28 @@ const BadgeRoot = <E extends keyof React.JSX.IntrinsicElements = "span">({
 /* -------------------------------------------------------------------------------------------------
  * Badge Label
  * -----------------------------------------------------------------------------------------------*/
-interface BadgeLabelProps extends ComponentPropsWithRef<"span"> {
+interface BadgeLabelProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const BadgeLabel = ({children, className, ...props}: BadgeLabelProps) => {
+const BadgeLabel = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: BadgeLabelProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof BadgeLabelProps<E>>) => {
   const {slots} = useContext(BadgeContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.label, className)}
       data-slot="badge-label"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 

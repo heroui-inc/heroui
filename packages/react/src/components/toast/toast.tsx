@@ -1,8 +1,9 @@
 "use client";
 
 import type {ToastContentValue} from "./toast-queue";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ToastVariants} from "@heroui/styles";
-import type {CSSProperties, ComponentPropsWithRef} from "react";
+import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components";
 
 import {toastVariants} from "@heroui/styles";
@@ -18,6 +19,7 @@ import {
 import {useMeasuredHeight, useMediaQuery} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {Button} from "../button";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
@@ -174,11 +176,20 @@ const ToastContent = ({children, className, ...rest}: ToastContentProps) => {
 /* ------------------------------------------------------------------------------------------------
  * Toast Indicator
  * --------------------------------------------------------------------------------------------- */
-interface ToastIndicatorProps extends ComponentPropsWithRef<"div"> {
+interface ToastIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
   variant?: ToastVariants["variant"];
 }
 
-const ToastIndicator = ({children, className, variant, ...rest}: ToastIndicatorProps) => {
+const ToastIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  variant,
+  ...rest
+}: ToastIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ToastIndicatorProps<E>>) => {
   const {slots} = useContext(ToastContext);
 
   const getDefaultIcon = useCallback(() => {
@@ -197,13 +208,13 @@ const ToastIndicator = ({children, className, variant, ...rest}: ToastIndicatorP
   }, [variant]);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.indicator, className)}
       data-slot="toast-indicator"
-      {...rest}
+      {...(rest as any)}
     >
       {children ?? getDefaultIcon()}
-    </div>
+    </dom.div>
   );
 };
 

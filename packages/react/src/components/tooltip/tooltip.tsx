@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {TooltipVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tooltipVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -13,6 +14,7 @@ import {
 } from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Context
@@ -116,21 +118,30 @@ const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Trigger
  * -----------------------------------------------------------------------------------------------*/
-interface TooltipTriggerProps extends ComponentPropsWithRef<"div"> {}
+interface TooltipTriggerProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const TooltipTrigger = ({children, className, ...props}: TooltipTriggerProps) => {
+const TooltipTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: TooltipTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TooltipTriggerProps<E>>) => {
   const {slots} = useContext(TooltipContext);
 
   return (
     <FocusablePrimitive>
-      <div
+      <dom.div
         className={composeSlotClassName(slots?.trigger, className)}
         data-slot="tooltip-trigger"
         role="button"
-        {...props}
+        {...(props as any)}
       >
         {children}
-      </div>
+      </dom.div>
     </FocusablePrimitive>
   );
 };

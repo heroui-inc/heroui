@@ -1,8 +1,9 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {RangeCalendarVariants} from "@heroui/styles";
 import type {CalendarIdentifier} from "@internationalized/date";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {DateValue} from "react-aria-components";
 
 import {rangeCalendarVariants} from "@heroui/styles";
@@ -25,6 +26,7 @@ import {
 import {dataAttr} from "../../utils/assertion";
 import {getGregorianYearOffset} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {
   YearPickerContext,
   YearPickerStateContext,
@@ -137,21 +139,29 @@ RangeCalendarRoot.displayName = "HeroUI.RangeCalendar";
 /* -------------------------------------------------------------------------------------------------
 | * RangeCalendar Header
 | * -----------------------------------------------------------------------------------------------*/
-interface RangeCalendarHeaderProps extends ComponentPropsWithRef<"header"> {
+interface RangeCalendarHeaderProps<
+  E extends keyof React.JSX.IntrinsicElements = "header",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const RangeCalendarHeader = ({children, className, ...props}: RangeCalendarHeaderProps) => {
+const RangeCalendarHeader = <E extends keyof React.JSX.IntrinsicElements = "header">({
+  children,
+  className,
+  ...props
+}: RangeCalendarHeaderProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof RangeCalendarHeaderProps<E>>) => {
   const {slots} = useContext(RangeCalendarContext);
 
   return (
-    <header
+    <dom.header
       className={composeSlotClassName(slots?.header, className)}
       data-slot="range-calendar-header"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </header>
+    </dom.header>
   );
 };
 
@@ -349,17 +359,25 @@ RangeCalendarCell.displayName = "HeroUI.RangeCalendar.Cell";
 /* -------------------------------------------------------------------------------------------------
 | * RangeCalendar Cell Indicator
 | * -----------------------------------------------------------------------------------------------*/
-interface RangeCalendarCellIndicatorProps extends ComponentPropsWithRef<"span"> {}
+interface RangeCalendarCellIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  className?: string;
+}
 
-const RangeCalendarCellIndicator = ({className, ...props}: RangeCalendarCellIndicatorProps) => {
+const RangeCalendarCellIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  className,
+  ...props
+}: RangeCalendarCellIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof RangeCalendarCellIndicatorProps<E>>) => {
   const {slots} = useContext(RangeCalendarContext);
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.cellIndicator, className)}
       data-slot="range-calendar-cell-indicator"
-      {...props}
+      {...(props as any)}
     />
   );
 };

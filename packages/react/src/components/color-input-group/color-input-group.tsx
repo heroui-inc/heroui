@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ColorInputGroupVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {InputProps as InputPrimitiveProps} from "react-aria-components";
 
 import {colorInputGroupVariants} from "@heroui/styles";
@@ -9,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {Group as GroupPrimitive, Input as InputPrimitive} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Context
@@ -53,19 +55,29 @@ const ColorInputGroupRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Prefix
  * -----------------------------------------------------------------------------------------------*/
-interface ColorInputGroupPrefixProps extends ComponentPropsWithRef<"div"> {}
+interface ColorInputGroupPrefixProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ColorInputGroupPrefix = ({children, className, ...props}: ColorInputGroupPrefixProps) => {
+const ColorInputGroupPrefix = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ColorInputGroupPrefixProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupPrefixProps<E>>) => {
   const {slots} = useContext(ColorInputGroupContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.prefix, className)}
       data-slot="color-input-group-prefix"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -91,19 +103,29 @@ const ColorInputGroupInput = ({className, ...props}: ColorInputGroupInputProps) 
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Suffix
  * -----------------------------------------------------------------------------------------------*/
-interface ColorInputGroupSuffixProps extends ComponentPropsWithRef<"div"> {}
+interface ColorInputGroupSuffixProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const ColorInputGroupSuffix = ({children, className, ...props}: ColorInputGroupSuffixProps) => {
+const ColorInputGroupSuffix = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: ColorInputGroupSuffixProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupSuffixProps<E>>) => {
   const {slots} = useContext(ColorInputGroupContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.suffix, className)}
       data-slot="color-input-group-suffix"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
