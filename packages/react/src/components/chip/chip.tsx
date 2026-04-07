@@ -1,12 +1,14 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ChipVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {chipVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Chip Context
@@ -20,12 +22,27 @@ const ChipContext = createContext<ChipContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Chip Root
  * -----------------------------------------------------------------------------------------------*/
-interface ChipRootProps extends Omit<ComponentPropsWithRef<"div">, "type" | "color">, ChipVariants {
+interface ChipRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
-  children: React.ReactNode;
+  /** Chip color. */
+  color?: ChipVariants["color"];
+  /** Chip size. */
+  size?: ChipVariants["size"];
+  /** Chip variant. */
+  variant?: ChipVariants["variant"];
 }
 
-const ChipRoot = ({children, className, color, size, variant, ...props}: ChipRootProps) => {
+const ChipRoot = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  color,
+  size,
+  variant,
+  ...props
+}: ChipRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ChipRootProps<E>>) => {
   const slots = React.useMemo(() => chipVariants({color, size, variant}), [color, size, variant]);
 
   const chipChildren = React.useMemo(() => {
@@ -38,9 +55,13 @@ const ChipRoot = ({children, className, color, size, variant, ...props}: ChipRoo
 
   return (
     <ChipContext value={{slots}}>
-      <span {...props} className={composeSlotClassName(slots.base, className)} data-slot="chip">
+      <dom.span
+        {...(props as any)}
+        className={composeSlotClassName(slots.base, className)}
+        data-slot="chip"
+      >
         {chipChildren}
-      </span>
+      </dom.span>
     </ChipContext>
   );
 };
