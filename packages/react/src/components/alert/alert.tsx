@@ -1,13 +1,15 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {AlertVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {alertVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -24,9 +26,21 @@ const AlertContext = createContext<AlertContext>({});
 /* ------------------------------------------------------------------------------------------------
  * Alert Root
  * --------------------------------------------------------------------------------------------- */
-interface AlertRootProps extends ComponentPropsWithRef<"div">, AlertVariants {}
+interface AlertRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
+  className?: string;
+  /** Alert status. */
+  status?: AlertVariants["status"];
+}
 
-const AlertRoot = ({children, className, status, ...rest}: AlertRootProps) => {
+const AlertRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  status,
+  ...rest
+}: AlertRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertRootProps<E>>) => {
   const slots = React.useMemo(() => alertVariants({status}), [status]);
 
   return (
@@ -36,9 +50,9 @@ const AlertRoot = ({children, className, status, ...rest}: AlertRootProps) => {
           variant: "default" as SurfaceVariants["variant"],
         }}
       >
-        <div className={slots?.base({className})} data-slot="alert-root" {...rest}>
+        <dom.div className={slots?.base({className})} data-slot="alert-root" {...(rest as any)}>
           {children}
-        </div>
+        </dom.div>
       </SurfaceContext>
     </AlertContext>
   );
