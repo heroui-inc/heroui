@@ -1,13 +1,15 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {BadgeVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {badgeVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {cx} from "tailwind-variants";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Badge Context
@@ -41,12 +43,22 @@ const BadgeAnchor = ({children, className, ...props}: BadgeAnchorProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Badge Root
  * -----------------------------------------------------------------------------------------------*/
-interface BadgeRootProps extends Omit<ComponentPropsWithRef<"span">, "color">, BadgeVariants {
+interface BadgeRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
-  children?: React.ReactNode;
+  /** Badge color. */
+  color?: BadgeVariants["color"];
+  /** Badge placement. */
+  placement?: BadgeVariants["placement"];
+  /** Badge size. */
+  size?: BadgeVariants["size"];
+  /** Badge variant. */
+  variant?: BadgeVariants["variant"];
 }
 
-const BadgeRoot = ({
+const BadgeRoot = <E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   color,
@@ -54,7 +66,7 @@ const BadgeRoot = ({
   size,
   variant,
   ...props
-}: BadgeRootProps) => {
+}: BadgeRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof BadgeRootProps<E>>) => {
   const slots = React.useMemo(
     () => badgeVariants({color, placement, size, variant}),
     [color, placement, size, variant],
@@ -70,9 +82,13 @@ const BadgeRoot = ({
 
   return (
     <BadgeContext value={{slots}}>
-      <span {...props} className={composeSlotClassName(slots.base, className)} data-slot="badge">
+      <dom.span
+        {...(props as any)}
+        className={composeSlotClassName(slots.base, className)}
+        data-slot="badge"
+      >
         {badgeChildren}
-      </span>
+      </dom.span>
     </BadgeContext>
   );
 };
