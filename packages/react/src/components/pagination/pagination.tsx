@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {PaginationVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {paginationVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -9,6 +10,7 @@ import {Button as ButtonPrimitive} from "react-aria-components";
 
 import {composeTwRenderProps} from "../../utils";
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {IconChevronLeft, IconChevronRight} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
@@ -23,25 +25,34 @@ const PaginationContext = createContext<PaginationContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Pagination Root
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationRootProps extends ComponentPropsWithRef<"nav">, PaginationVariants {
+interface PaginationRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "nav",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
-  children: React.ReactNode;
+  /** Pagination size. */
+  size?: PaginationVariants["size"];
 }
 
-const PaginationRoot = ({children, className, size, ...props}: PaginationRootProps) => {
+const PaginationRoot = <E extends keyof React.JSX.IntrinsicElements = "nav">({
+  children,
+  className,
+  size,
+  ...props
+}: PaginationRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof PaginationRootProps<E>>) => {
   const slots = React.useMemo(() => paginationVariants({size}), [size]);
 
   return (
     <PaginationContext value={{slots}}>
-      <nav
+      <dom.nav
         aria-label="pagination"
         data-slot="pagination"
         role="navigation"
-        {...props}
+        {...(props as any)}
         className={composeSlotClassName(slots.base, className)}
       >
         {children}
-      </nav>
+      </dom.nav>
     </PaginationContext>
   );
 };
