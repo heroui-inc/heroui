@@ -1,12 +1,13 @@
 "use client";
 
-import type {FieldsetVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {DOMRenderProps} from "../../utils/dom";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {fieldsetVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Context
@@ -20,14 +21,22 @@ const FieldsetContext = createContext<FieldsetContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Root
  * -----------------------------------------------------------------------------------------------*/
-interface FieldsetRootProps extends ComponentPropsWithRef<"fieldset">, FieldsetVariants {}
+interface FieldsetRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "fieldset",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const FieldsetRoot = ({className, ...props}: FieldsetRootProps) => {
+const FieldsetRoot = <E extends keyof React.JSX.IntrinsicElements = "fieldset">({
+  className,
+  ...props
+}: FieldsetRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetRootProps<E>>) => {
   const slots = React.useMemo(() => fieldsetVariants({}), []);
 
   return (
     <FieldsetContext value={{slots}}>
-      <fieldset className={slots?.base({className})} data-slot="fieldset" {...props} />
+      <dom.fieldset className={slots?.base({className})} data-slot="fieldset" {...(props as any)} />
     </FieldsetContext>
   );
 };
