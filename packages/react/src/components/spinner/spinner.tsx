@@ -1,10 +1,13 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SpinnerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {spinnerVariants} from "@heroui/styles";
-import {useId} from "react";
+import React, {useId} from "react";
+
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Internal
@@ -60,21 +63,34 @@ const SpinnerPrimitive = ({...props}: SpinnerPrimitiveProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Spinner Root
  * -----------------------------------------------------------------------------------------------*/
-interface SpinnerRootProps
-  extends Omit<ComponentPropsWithRef<"svg">, "display" | "opacity" | "color">, SpinnerVariants {}
+interface SpinnerRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  className?: string;
+  /** Spinner color. */
+  color?: SpinnerVariants["color"];
+  /** Spinner size. */
+  size?: SpinnerVariants["size"];
+}
 
-const SpinnerRoot = ({className, color, size, ...props}: SpinnerRootProps) => {
+const SpinnerRoot = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  className,
+  color,
+  size,
+  ...props
+}: SpinnerRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SpinnerRootProps<E>>) => {
   return (
-    <span
+    <dom.span
       data-slot="spinner"
+      {...(props as any)}
       className={spinnerVariants({
         className,
         color,
         size,
       })}
     >
-      <SpinnerPrimitive aria-hidden aria-label="Loading" role="presentation" {...props} />
-    </span>
+      <SpinnerPrimitive aria-hidden aria-label="Loading" role="presentation" />
+    </dom.span>
   );
 };
 
