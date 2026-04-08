@@ -12,6 +12,46 @@ import {flushSync} from "react-dom";
 
 import {DEFAULT_RAC_MAX_VISIBLE_TOAST, DEFAULT_TOAST_TIMEOUT} from "./constants";
 
+type ViewTransitionLike = {
+  finished?: Promise<unknown>;
+  ready?: Promise<unknown>;
+  updateCallbackDone?: Promise<unknown>;
+};
+
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (update: () => void) => ViewTransitionLike;
+};
+
+function safelyRunWithViewTransition(update: () => void) {
+  if (typeof document === "undefined") {
+    update();
+
+    return;
+  }
+
+  const startViewTransition = (document as ViewTransitionDocument).startViewTransition;
+
+  if (typeof startViewTransition !== "function") {
+    update();
+
+    return;
+  }
+
+  try {
+    const transition = startViewTransition.call(document, () => {
+      flushSync(update);
+    });
+
+    // View transitions are purely cosmetic here, so absorb browser aborts during
+    // navigation/unmounts rather than surfacing unhandled promise rejections.
+    void transition?.ready?.catch(() => {});
+    void transition?.finished?.catch(() => {});
+    void transition?.updateCallbackDone?.catch(() => {});
+  } catch {
+    update();
+  }
+}
+
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Options
  * --------------------------------------------------------------------------------------------- */
@@ -33,17 +73,7 @@ export class ToastQueue<T extends object = ToastContentValue> {
     this.maxVisibleToasts = options?.maxVisibleToasts;
     this.queue = new ToastQueuePrimitive<T>({
       maxVisibleToasts: DEFAULT_RAC_MAX_VISIBLE_TOAST,
-      wrapUpdate: options?.wrapUpdate
-        ? options.wrapUpdate
-        : (fn: () => void) => {
-            if ("startViewTransition" in document) {
-              document.startViewTransition(() => {
-                flushSync(fn);
-              });
-            } else {
-              fn();
-            }
-          },
+      wrapUpdate: options?.wrapUpdate ? options.wrapUpdate : safelyRunWithViewTransition,
     });
   }
 
@@ -123,20 +153,20 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
 
     return queue.add(
       {
-        title: message,
+        actionProps: options?.actionProps,
         description: options?.description,
         indicator: options?.indicator,
-        variant: options?.variant || "default",
-        actionProps: options?.actionProps,
         isLoading: options?.isLoading,
+        title: message,
+        variant: options?.variant || "default",
       },
       {
-        timeout,
         onClose: () => {
           requestAnimationFrame(() => {
             options?.onClose?.();
           });
         },
+        timeout,
       },
     );
   };
@@ -166,9 +196,9 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
     const promiseFn = typeof promise === "function" ? promise() : promise;
     const loadingId = queue.add(
       {
+        isLoading: true,
         title: options.loading,
         variant: "default",
-        isLoading: true,
       },
       {
         timeout: 0, // Don't auto-close loading toasts
