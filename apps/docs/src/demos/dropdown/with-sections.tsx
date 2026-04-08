@@ -1,17 +1,14 @@
 "use client";
 
 import {EllipsisVertical, Pencil, SquarePlus, TrashBin} from "@gravity-ui/icons";
-import {Description, Dropdown, Header, Kbd, Label, Separator} from "@heroui/react";
+import {Button, Description, Dropdown, Header, Kbd, Label, Separator} from "@heroui/react";
 
 export function WithSections() {
   return (
     <Dropdown>
-      <Dropdown.Trigger
-        aria-label="Menu"
-        className="button button-md button--secondary button--icon-only data-[focus-visible=true]:status-focused"
-      >
+      <Button isIconOnly aria-label="Menu" variant="secondary">
         <EllipsisVertical className="outline-none" />
-      </Dropdown.Trigger>
+      </Button>
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Section>
