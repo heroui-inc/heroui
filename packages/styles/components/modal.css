@@ -7,7 +7,7 @@
  * Element: trigger - the element that opens the modal
  */
 .modal__trigger {
-  @apply inline-block cursor-(--cursor-interactive);
+  @apply inline-flex cursor-(--cursor-interactive) items-center justify-center;
 
   /**
    * Transitions

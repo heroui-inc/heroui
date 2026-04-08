@@ -59,7 +59,7 @@
 
 /* Tooltip trigger */
 .tooltip__trigger {
-  @apply inline-block;
+  @apply inline-flex items-center justify-center;
 
   /**
    * Transitions

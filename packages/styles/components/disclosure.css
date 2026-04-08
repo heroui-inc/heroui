@@ -9,7 +9,7 @@
 
 .disclosure__trigger {
   cursor: var(--cursor-interactive);
-  @apply inline-block no-highlight;
+  @apply inline-flex items-center justify-center no-highlight;
 
   /* Focus state */
   &:focus-visible:not(:focus),
