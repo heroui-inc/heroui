@@ -12,6 +12,7 @@ import {
   NumberField as NumberFieldPrimitive,
 } from "react-aria-components";
 
+import {shallowEqual} from "../../utils/assertion";
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconMinus, IconPlus} from "../icons";
 
@@ -33,6 +34,7 @@ interface NumberFieldRootProps
 const NumberFieldRoot = ({
   children,
   className,
+  formatOptions,
   fullWidth,
   variant,
   ...props
@@ -41,11 +43,21 @@ const NumberFieldRoot = ({
     () => numberFieldVariants({fullWidth, variant}),
     [fullWidth, variant],
   );
+  const [prevFormatOptions, setPrevFormatOptions] = React.useState(formatOptions);
+  const [stableFormatOptions, setStableFormatOptions] = React.useState(formatOptions);
+
+  if (prevFormatOptions !== formatOptions) {
+    setPrevFormatOptions(formatOptions);
+    if (!shallowEqual(stableFormatOptions, formatOptions)) {
+      setStableFormatOptions(formatOptions);
+    }
+  }
 
   return (
     <NumberFieldContext value={{slots}}>
       <NumberFieldPrimitive
         data-slot="number-field"
+        formatOptions={stableFormatOptions}
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
       >

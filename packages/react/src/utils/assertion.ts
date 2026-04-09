@@ -34,3 +34,17 @@ export const dataAttr = (condition: boolean | undefined) =>
 
 export const isNumeric = (value?: string | number) =>
   value != null && parseInt(value.toString(), 10) > 0;
+
+export function shallowEqual<T extends object>(
+  a: T | null | undefined,
+  b: T | null | undefined,
+): boolean {
+  if (a === b) return true;
+  if (!a || !b) return false;
+  const keysA = Object.keys(a) as (keyof T)[];
+  const keysB = Object.keys(b) as (keyof T)[];
+
+  if (keysA.length !== keysB.length) return false;
+
+  return keysA.every((k) => Object.is(a[k], b[k]));
+}
