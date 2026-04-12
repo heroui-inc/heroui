@@ -177,9 +177,6 @@
    ========================================================================== */
 
 .tabs--secondary {
-  /* Scope all secondary styles through direct > .tabs__list-container child
-     to prevent leaking into nested Tabs with a different variant (#6381) */
-
   /* Tab list - remove background, add bottom/left border */
   > .tabs__list-container > .tabs__list {
     @apply bg-transparent p-0;
