@@ -311,8 +311,6 @@ export const Controlled = () => {
 /**
  * Controlled drawer using `useOverlayState` + `Drawer` root without a trigger child.
  * This pattern is common for drawers opened by external events (URL changes, row clicks, etc.).
- * Before the fix, this would not work because `DrawerRoot` always wrapped children
- * in `DialogTrigger`, which requires a pressable trigger as its first child.
  */
 export const ControlledWithoutTrigger = () => {
   const [isOpen, setIsOpen] = React.useState(false);
