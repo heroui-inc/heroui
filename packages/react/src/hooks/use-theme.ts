@@ -75,9 +75,14 @@ export function useTheme(defaultTheme: Theme = ThemeProps.SYSTEM) {
         ThemeProps.LIGHT,
         ThemeProps.DARK,
         ThemeProps.SYSTEM,
-        // Custom theme if it exists
-        localStorage.getItem(ThemeProps.CUSTOM_THEME_KEY) ?? "",
       );
+
+      // Custom theme if it exists
+      const customTheme = localStorage.getItem(ThemeProps.CUSTOM_THEME_KEY);
+
+      if (customTheme) {
+        document.documentElement.classList.remove(customTheme);
+      }
 
       document.documentElement.classList.add(targetTheme);
       document.documentElement.setAttribute("data-theme", targetTheme);
