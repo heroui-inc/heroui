@@ -5,7 +5,9 @@ import {useCallback, useEffect, useState} from "react";
 // constant properties for Theme
 export const ThemeProps = {
   // localStorage key for storing the current theme
-  KEY: "heroui-theme",
+  THEME_KEY: "heroui-theme",
+  // localStorage key for storing the custom theme
+  CUSTOM_THEME_KEY: "heroui-custom-theme",
   // light theme
   LIGHT: "light",
   // dark theme
@@ -22,23 +24,6 @@ export type Theme =
   | typeof ThemeProps.SYSTEM
   | customTheme;
 
-const PREFERS_COLOR_SCHEME_MEDIA = "(prefers-color-scheme: dark)";
-
-function applyThemeToDocument(nextTheme: Theme) {
-  const resolvedTheme =
-    nextTheme === ThemeProps.SYSTEM
-      ? window.matchMedia?.(PREFERS_COLOR_SCHEME_MEDIA).matches
-        ? ThemeProps.DARK
-        : ThemeProps.LIGHT
-      : nextTheme;
-
-  localStorage.setItem(ThemeProps.KEY, nextTheme);
-
-  document.documentElement.classList.remove(ThemeProps.LIGHT, ThemeProps.DARK, ThemeProps.SYSTEM);
-
-  document.documentElement.classList.add(resolvedTheme);
-}
-
 /**
  * React hook to switch between themes
  *
@@ -46,8 +31,10 @@ function applyThemeToDocument(nextTheme: Theme) {
  * @returns An object containing the current theme and theme manipulation functions
  */
 export function useTheme(defaultTheme: Theme = ThemeProps.SYSTEM) {
+  const PREFERS_COLOR_SCHEME_MEDIA = "(prefers-color-scheme: dark)";
+
   const [theme, setThemeState] = useState<Theme>(() => {
-    const storedTheme = localStorage.getItem(ThemeProps.KEY) as Theme | null;
+    const storedTheme = localStorage.getItem(ThemeProps.THEME_KEY) as Theme | null;
 
     // return stored theme if it is selected previously
     if (storedTheme) return storedTheme;
@@ -63,10 +50,42 @@ export function useTheme(defaultTheme: Theme = ThemeProps.SYSTEM) {
     return defaultTheme;
   });
 
-  const setTheme = useCallback((newTheme: Theme) => {
-    applyThemeToDocument(newTheme);
-    setThemeState(newTheme);
-  }, []);
+  const setTheme = useCallback(
+    (newTheme: Theme) => {
+      const targetTheme =
+        newTheme === ThemeProps.SYSTEM
+          ? window.matchMedia?.(PREFERS_COLOR_SCHEME_MEDIA).matches
+            ? ThemeProps.DARK
+            : ThemeProps.LIGHT
+          : newTheme;
+
+      localStorage.setItem(ThemeProps.THEME_KEY, newTheme);
+
+      const isBuiltinTheme =
+        newTheme === ThemeProps.LIGHT ||
+        newTheme === ThemeProps.DARK ||
+        newTheme === ThemeProps.SYSTEM;
+
+      if (!isBuiltinTheme) {
+        localStorage.setItem(ThemeProps.CUSTOM_THEME_KEY, newTheme);
+      }
+
+      document.documentElement.classList.remove(
+        // Built-in theme
+        ThemeProps.LIGHT,
+        ThemeProps.DARK,
+        ThemeProps.SYSTEM,
+        // Custom theme if it exists
+        localStorage.getItem(ThemeProps.CUSTOM_THEME_KEY) ?? "",
+      );
+
+      document.documentElement.classList.add(targetTheme);
+      document.documentElement.setAttribute("data-theme", targetTheme);
+
+      setThemeState(newTheme);
+    },
+    [theme],
+  );
 
   const handleMediaQuery = useCallback(
     (e: MediaQueryListEvent | MediaQueryList) => {
@@ -78,8 +97,10 @@ export function useTheme(defaultTheme: Theme = ThemeProps.SYSTEM) {
   );
 
   useEffect(() => {
-    applyThemeToDocument(theme);
-  }, [theme]);
+    queueMicrotask(() => {
+      setTheme(theme);
+    });
+  }, [theme, setTheme]);
 
   useEffect(() => {
     const media = window.matchMedia(PREFERS_COLOR_SCHEME_MEDIA);
