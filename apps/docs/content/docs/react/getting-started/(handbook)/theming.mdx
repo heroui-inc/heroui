@@ -42,58 +42,6 @@ HeroUI's theming system is built on top of [Tailwind CSS v4](https://tailwindcss
 <html class="dark" data-theme="dark">
 ```
 
-**Switch themes programmatically with [next-themes](https://github.com/pacocoursey/next-themes) (For Next.js):**
-
-First, wrap your app with `ThemeProvider`:
-
-```tsx
-// app/providers.tsx
-"use client";
-
-import { ThemeProvider } from "next-themes";
-
-export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <ThemeProvider attribute="class" defaultTheme="light">
-      {children}
-    </ThemeProvider>
-  );
-}
-```
-
-```tsx
-// app/layout.tsx
-import { Providers } from "./providers";
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-background text-foreground">
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
-}
-```
-
-Then use `useTheme` to toggle between themes:
-
-```tsx
-"use client";
-
-import { useTheme } from "next-themes";
-
-export function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
-
-  return (
-    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-      Toggle {theme === "dark" ? "Light" : "Dark"} Mode
-    </button>
-  );
-}
-```
-
 **Override colors:**
 
 ```css
@@ -279,6 +227,96 @@ Apply your theme:
 
 <!-- Dark ocean -->
 <html data-theme="ocean-dark">
+```
+
+## Dark Mode
+
+Switch between light, dark, or any custom theme by using [next-themes](https://github.com/pacocoursey/next-themes) on Next.js, or HeroUI's `useTheme` hook from `@heroui/react`.
+
+### **next-themes**
+
+First, wrap your app with `ThemeProvider`:
+
+```tsx
+// app/providers.tsx
+"use client";
+
+import { ThemeProvider } from "next-themes";
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="light">
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+```tsx
+// app/layout.tsx
+import { Providers } from "./providers";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-background text-foreground">
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+Then use `useTheme` from `next-themes` to toggle between themes:
+
+```tsx
+"use client";
+
+import { useTheme } from "next-themes";
+
+export function ThemeSwitch() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      Toggle {theme === "dark" ? "Light" : "Dark"} Mode
+    </button>
+  );
+}
+```
+
+### useTheme
+
+In case you're using plain React with Vite or Create React App, you can use the `useTheme` hook from `@heroui/react` to switch between themes. It persists the value in `localStorage`, sets `data-theme` and `class` on `<html>` to the selected name (`light`, `dark`, or a custom theme id), and applies the resolved `light` / `dark` class (including when `system` follows `prefers-color-scheme`) or your custom theme.
+
+```tsx
+"use client";
+
+import { ThemeProps, useTheme } from "@heroui/react";
+
+export function ThemeSwitch() {
+  // The default theme is `ThemeProps.SYSTEM`
+  // Example: override the default system theme with a light theme
+  const { theme, setTheme } = useTheme(ThemeProps.LIGHT);
+
+  return (
+    <div className="flex gap-2">
+      <button onClick={() => setTheme(ThemeProps.LIGHT)}>
+        Light
+      </button>
+      <button onClick={() => setTheme(ThemeProps.DARK)}>
+        Dark
+      </button>
+      <button onClick={() => setTheme(ThemeProps.SYSTEM)}>
+        System
+      </button>
+      <button onClick={() => setTheme('your-custom-theme')}>
+        Custom Theme
+      </button>
+      <span className="text-sm opacity-70">Current: {theme}</span>
+    </div>
+  );
+}
 ```
 
 ## Customize Components
