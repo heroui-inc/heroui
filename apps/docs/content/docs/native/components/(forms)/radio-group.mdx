@@ -244,17 +244,73 @@ You can find more examples in the [GitHub repository](<https://github.com/heroui
 
 ### Radio (inside RadioGroup.Item)
 
-The [Radio](./radio) component is used inside `RadioGroup.Item` to render the radio indicator. When placed inside a `RadioGroup.Item`, the Radio component automatically detects the `RadioGroupItem` context and derives `isSelected`, `isDisabled`, `isInvalid`, and `variant` from it — no manual prop passing is needed.
+The `Radio` component is used inside `RadioGroup.Item` to render the radio indicator. When placed inside a `RadioGroup.Item`, the Radio component automatically detects the `RadioGroupItem` context and derives `isSelected`, `isDisabled`, `isInvalid`, and `variant` from it — no manual prop passing is needed.
 
 Use `<Radio />` for the default indicator, or compose with `Radio.Indicator` and `Radio.IndicatorThumb` for custom styling.
 
-**Note:** For complete Radio prop documentation (including `Radio.Indicator` and `Radio.IndicatorThumb`), see the [Radio component documentation](./radio).
+| prop                | type                                                                | default     | description                                                               |
+| ------------------- | ------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode \| ((props: RadioRenderProps) => React.ReactNode)` | `undefined` | Child elements or render function to customize the radio                  |
+| `variant`           | `'primary' \| 'secondary'`                                          | `'primary'` | Variant style for the radio                                               |
+| `isSelected`        | `boolean`                                                           | `undefined` | Whether the radio is currently selected                                   |
+| `isDisabled`        | `boolean`                                                           | `undefined` | Whether the radio is disabled and cannot be interacted with               |
+| `isInvalid`         | `boolean`                                                           | `false`     | Whether the radio is invalid (shows danger color)                         |
+| `className`         | `string`                                                            | `undefined` | Additional CSS classes to apply                                           |
+| `animation`         | `RadioRootAnimation`                                                | -           | Animation configuration for radio                                         |
+| `onSelectedChange`  | `(isSelected: boolean) => void`                                     | `undefined` | Callback fired when the radio selection state changes                     |
+| `...PressableProps` | `PressableProps`                                                    | -           | All standard React Native Pressable props are supported (except disabled) |
+
+#### RadioRenderProps
+
+| prop         | type      | description                   |
+| ------------ | --------- | ----------------------------- |
+| `isSelected` | `boolean` | Whether the radio is selected |
+| `isDisabled` | `boolean` | Whether the radio is disabled |
+| `isInvalid`  | `boolean` | Whether the radio is invalid  |
+
+#### RadioRootAnimation
+
+Animation configuration for radio root component. Can be:
+
+- `"disable-all"`: Disable all animations including children (Indicator, IndicatorThumb)
+- `undefined`: Use default animations
+
+### Radio.Indicator
+
+| prop                   | type                       | default     | description                                      |
+| ---------------------- | -------------------------- | ----------- | ------------------------------------------------ |
+| `children`             | `React.ReactNode`          | `undefined` | Content for the radio indicator                  |
+| `className`            | `string`                   | `undefined` | Additional CSS classes for the indicator         |
+| `...AnimatedViewProps` | `AnimatedProps<ViewProps>` | -           | All Reanimated Animated.View props are supported |
+
+### Radio.IndicatorThumb
+
+| prop                    | type                           | default     | description                                                  |
+| ----------------------- | ------------------------------ | ----------- | ------------------------------------------------------------ |
+| `className`             | `string`                       | `undefined` | Additional CSS classes for the thumb                         |
+| `animation`             | `RadioIndicatorThumbAnimation` | -           | Animation configuration for the thumb                        |
+| `isAnimatedStyleActive` | `boolean`                      | `true`      | Whether animated styles (react-native-reanimated) are active |
+| `...AnimatedViewProps`  | `AnimatedProps<ViewProps>`     | -           | All Reanimated Animated.View props are supported             |
+
+#### RadioIndicatorThumbAnimation
+
+Animation configuration for radio indicator thumb component. Can be:
+
+- `false` or `"disabled"`: Disable all animations
+- `true` or `undefined`: Use default animations
+- `object`: Custom animation configuration
+
+| prop                 | type                    | default                                              | description                                     |
+| -------------------- | ----------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| `state`              | `'disabled' \| boolean` | -                                                    | Disable animations while customizing properties |
+| `scale.value`        | `[number, number]`      | `[1.5, 1]`                                           | Scale values [unselected, selected]             |
+| `scale.timingConfig` | `WithTimingConfig`      | `{ duration: 300, easing: Easing.out(Easing.ease) }` | Animation timing configuration                  |
 
 **Note:** For labels, descriptions, and error messages, use the base components directly:
 
-- Use [Label](./label) component for labels
-- Use [Description](./description) component for descriptions
-- Use [FieldError](./field-error) component for error messages
+- Use [Label](../label/label.md) component for labels
+- Use [Description](../description/description.md) component for descriptions
+- Use [FieldError](../field-error/field-error.md) component for error messages
 
 ## Hooks
 
