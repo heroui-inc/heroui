@@ -1742,6 +1742,10 @@ export const demos: Record<string, DemoItem> = {
     component: TableDemos.CustomCells,
     file: "table/custom-cells.tsx",
   },
+  "table-expandable-rows": {
+    component: TableDemos.ExpandableRows,
+    file: "table/expandable-rows.tsx",
+  },
   "table-pagination": {
     component: TableDemos.PaginationDemo,
     file: "table/pagination.tsx",
