@@ -7,15 +7,15 @@ import type {
   DateSegmentProps as DateSegmentPrimitiveProps,
   DateInputProps as TimeInputPrimitiveProps,
   DateSegmentProps as TimeSegmentPrimitiveProps,
-} from "react-aria-components";
+} from "react-aria-components/DateField";
 
 import {dateInputGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {
   DateInput as DateInputPrimitive,
   DateSegment as DateSegmentPrimitive,
-  Group as GroupPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/DateField";
+import {Group as GroupPrimitive} from "react-aria-components/Group";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 

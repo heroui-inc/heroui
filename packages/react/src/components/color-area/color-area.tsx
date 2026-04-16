@@ -8,7 +8,7 @@ import React, {createContext, useContext} from "react";
 import {
   ColorArea as ColorAreaPrimitive,
   ColorThumb as ColorThumbPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/ColorArea";
 
 import {composeTwRenderProps} from "../../utils/compose";
 

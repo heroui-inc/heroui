@@ -5,9 +5,9 @@ import type {ReactNode} from "react";
 import type {
   ToastOptions as RACToastOptions,
   UNSTABLE_ToastQueue as ToastQueuePrimitiveType,
-} from "react-aria-components";
+} from "react-aria-components/Toast";
 
-import {UNSTABLE_ToastQueue as ToastQueuePrimitive} from "react-aria-components";
+import {UNSTABLE_ToastQueue as ToastQueuePrimitive} from "react-aria-components/Toast";
 import {flushSync} from "react-dom";
 
 import {DEFAULT_RAC_MAX_VISIBLE_TOAST, DEFAULT_TOAST_TIMEOUT} from "./constants";

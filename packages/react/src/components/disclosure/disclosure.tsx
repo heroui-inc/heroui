@@ -3,17 +3,17 @@
 import type {Booleanish} from "../../utils/assertion";
 import type {DisclosureVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {ButtonProps} from "react-aria-components";
+import type {ButtonProps} from "react-aria-components/Button";
 
 import {disclosureVariants} from "@heroui/styles";
 import React, {createContext, useContext, useRef} from "react";
+import {Button} from "react-aria-components/Button";
 import {
-  Button,
-  Heading as DisclosureHeadingPrimitive,
   DisclosurePanel,
   Disclosure as DisclosurePrimitive,
   DisclosureStateContext,
-} from "react-aria-components";
+} from "react-aria-components/Disclosure";
+import {Heading as DisclosureHeadingPrimitive} from "react-aria-components/Heading";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

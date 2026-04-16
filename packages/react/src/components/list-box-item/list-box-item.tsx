@@ -2,11 +2,11 @@
 
 import type {ListBoxItemVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {ListBoxItemRenderProps} from "react-aria-components";
+import type {ListBoxItemRenderProps} from "react-aria-components/ListBox";
 
 import {listboxItemVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {ListBoxItem as ListBoxItemPrimitive} from "react-aria-components";
+import {ListBoxItem as ListBoxItemPrimitive} from "react-aria-components/ListBox";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 

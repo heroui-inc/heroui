@@ -4,7 +4,7 @@ import type {LabelVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {labelVariants} from "@heroui/styles";
-import {Label as LabelPrimitive} from "react-aria-components";
+import {Label as LabelPrimitive} from "react-aria-components/Label";
 
 /* -------------------------------------------------------------------------------------------------
  * Label Root

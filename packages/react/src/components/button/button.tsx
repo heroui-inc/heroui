@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {buttonVariants} from "@heroui/styles";
 import {useContext} from "react";
-import {Button as ButtonPrimitive} from "react-aria-components";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {composeTwRenderProps} from "../../utils";
 import {BUTTON_GROUP_CHILD, ButtonGroupContext} from "../button-group";

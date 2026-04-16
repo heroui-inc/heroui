@@ -5,11 +5,9 @@ import type {ComponentPropsWithRef} from "react";
 
 import {inputGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {
-  Group as GroupPrimitive,
-  Input as InputPrimitive,
-  TextArea as TextAreaPrimitive,
-} from "react-aria-components";
+import {Group as GroupPrimitive} from "react-aria-components/Group";
+import {Input as InputPrimitive} from "react-aria-components/Input";
+import {TextArea as TextAreaPrimitive} from "react-aria-components/TextArea";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {TextFieldContext} from "../textfield";

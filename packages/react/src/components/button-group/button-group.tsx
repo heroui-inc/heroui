@@ -6,11 +6,9 @@ import type {ComponentPropsWithRef} from "react";
 
 import {buttonGroupVariants} from "@heroui/styles";
 import React, {Children, createContext, isValidElement, useContext} from "react";
-import {
-  Group,
-  ToggleButtonGroupContext as RACToggleButtonGroupContext,
-  useSlottedContext,
-} from "react-aria-components";
+import {Group} from "react-aria-components/Group";
+import {useSlottedContext} from "react-aria-components/slots";
+import {ToggleButtonGroupContext as RACToggleButtonGroupContext} from "react-aria-components/ToggleButtonGroup";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 

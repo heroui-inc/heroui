@@ -5,12 +5,10 @@ import type {ComponentPropsWithRef} from "react";
 
 import {numberFieldVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {
-  Button as ButtonPrimitive,
-  Group as GroupPrimitive,
-  Input as InputPrimitive,
-  NumberField as NumberFieldPrimitive,
-} from "react-aria-components";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
+import {Group as GroupPrimitive} from "react-aria-components/Group";
+import {Input as InputPrimitive} from "react-aria-components/Input";
+import {NumberField as NumberFieldPrimitive} from "react-aria-components/NumberField";
 
 import {composeTwRenderProps} from "../../utils/compose";
 import {IconMinus, IconPlus} from "../icons";

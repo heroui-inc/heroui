@@ -2,11 +2,11 @@
 
 import type {CheckboxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {CheckboxRenderProps} from "react-aria-components";
+import type {CheckboxRenderProps} from "react-aria-components/Checkbox";
 
 import {checkboxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Checkbox as CheckboxPrimitive} from "react-aria-components";
+import {Checkbox as CheckboxPrimitive} from "react-aria-components/Checkbox";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";

@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {radioGroupVariants} from "@heroui/styles";
 import React from "react";
-import {RadioGroup as RadioGroupPrimitive} from "react-aria-components";
+import {RadioGroup as RadioGroupPrimitive} from "react-aria-components/RadioGroup";
 
 import {composeTwRenderProps} from "../../utils/compose";
 

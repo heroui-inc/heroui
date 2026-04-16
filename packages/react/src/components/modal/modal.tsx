@@ -4,10 +4,8 @@ import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-
 import type {SurfaceVariants} from "../surface";
 import type {ModalVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
-import type {
-  Button as ButtonPrimitive,
-  DialogProps as DialogPrimitiveProps,
-} from "react-aria-components";
+import type {Button as ButtonPrimitive} from "react-aria-components/Button";
+import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Dialog";
 
 import {modalVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
@@ -15,11 +13,13 @@ import {createContext, useContext, useMemo} from "react";
 import {
   Dialog as DialogPrimitive,
   Heading as HeadingPrimitive,
+  DialogTrigger as ModalTriggerPrimitive,
+} from "react-aria-components/Dialog";
+import {
   ModalOverlay as ModalOverlayPrimitive,
   Modal as ModalPrimitive,
-  DialogTrigger as ModalTriggerPrimitive,
   Pressable as PressablePrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Modal";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";

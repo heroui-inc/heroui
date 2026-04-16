@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {listboxVariants} from "@heroui/styles";
 import React from "react";
-import {ListBox as ListBoxPrimitive} from "react-aria-components";
+import {ListBox as ListBoxPrimitive} from "react-aria-components/ListBox";
 
 import {composeTwRenderProps} from "../../utils";
 

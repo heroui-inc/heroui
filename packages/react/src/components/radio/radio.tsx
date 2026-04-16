@@ -1,11 +1,11 @@
 "use client";
 
 import type {ComponentPropsWithRef} from "react";
-import type {RadioRenderProps} from "react-aria-components";
+import type {RadioRenderProps} from "react-aria-components/RadioGroup";
 
 import {radioVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Radio as RadioPrimitive} from "react-aria-components";
+import {Radio as RadioPrimitive} from "react-aria-components/RadioGroup";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 

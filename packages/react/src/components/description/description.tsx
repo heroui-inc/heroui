@@ -2,10 +2,10 @@
 
 import type {DescriptionVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {TextProps} from "react-aria-components";
+import type {TextProps} from "react-aria-components/Text";
 
 import {descriptionVariants} from "@heroui/styles";
-import {Text} from "react-aria-components";
+import {Text} from "react-aria-components/Text";
 
 /* -------------------------------------------------------------------------------------------------
  * Description Root

@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {checkboxGroupVariants} from "@heroui/styles";
 import React, {createContext} from "react";
-import {CheckboxGroup as CheckboxGroupPrimitive} from "react-aria-components";
+import {CheckboxGroup as CheckboxGroupPrimitive} from "react-aria-components/CheckboxGroup";
 
 import {composeTwRenderProps} from "../../utils/compose";
 

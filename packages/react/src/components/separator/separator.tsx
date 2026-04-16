@@ -5,11 +5,8 @@ import type {ComponentPropsWithRef} from "react";
 
 import {separatorVariants} from "@heroui/styles";
 import React from "react";
-import {
-  SeparatorContext,
-  Separator as SeparatorPrimitive,
-  useSlottedContext,
-} from "react-aria-components";
+import {SeparatorContext, Separator as SeparatorPrimitive} from "react-aria-components/Separator";
+import {useSlottedContext} from "react-aria-components/slots";
 
 /* -------------------------------------------------------------------------------------------------
  * Separator Root

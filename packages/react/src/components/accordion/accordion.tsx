@@ -6,14 +6,14 @@ import type {ComponentPropsWithRef} from "react";
 
 import {accordionVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {Button} from "react-aria-components/Button";
 import {
-  Button,
   Disclosure,
-  DisclosureGroup,
   Heading as DisclosureHeading,
   DisclosurePanel,
   DisclosureStateContext,
-} from "react-aria-components";
+} from "react-aria-components/Disclosure";
+import {DisclosureGroup} from "react-aria-components/DisclosureGroup";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

@@ -3,17 +3,17 @@
 import type {StatelyToastQueue, ToastContentValue} from "./toast-queue";
 import type {ToastVariants} from "@heroui/styles";
 import type {CSSProperties, ComponentPropsWithRef} from "react";
-import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components";
+import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
 import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
-  Text as TextPrimitive,
   UNSTABLE_ToastContent as ToastContentPrimitive,
   UNSTABLE_Toast as ToastPrimitive,
   UNSTABLE_ToastRegion as ToastRegionPrimitive,
   UNSTABLE_ToastStateContext as ToastStateContext,
-} from "react-aria-components";
+} from "react-aria-components/Toast";
 
 import {useMeasuredHeight, useMediaQuery} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
