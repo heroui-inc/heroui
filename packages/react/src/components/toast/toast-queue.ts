@@ -25,6 +25,9 @@ export interface ToastQueueOptions {
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue
  * --------------------------------------------------------------------------------------------- */
+/** The underlying react-stately queue passed to `ToastRegion` (not the HeroUI `ToastQueue` wrapper). */
+export type StatelyToastQueue<T extends object = ToastContentValue> = ToastQueuePrimitiveType<T>;
+
 export class ToastQueue<T extends object = ToastContentValue> {
   private queue: ToastQueuePrimitiveType<T>;
   readonly maxVisibleToasts?: number;
