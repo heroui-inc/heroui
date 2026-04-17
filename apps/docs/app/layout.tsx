@@ -51,9 +51,9 @@ export const metadata: Metadata = {
   ],
   creator: "heroui-inc",
   alternates: {
-    canonical: "https://heroui.com",
+    canonical: "https://v2.heroui.com",
     types: {
-      "application/rss+xml": [{url: "https://heroui.com/feed.xml", title: "HeroUI RSS Feed"}],
+      "application/rss+xml": [{url: "https://v2.heroui.com/feed.xml", title: "HeroUI RSS Feed"}],
     },
   },
 };

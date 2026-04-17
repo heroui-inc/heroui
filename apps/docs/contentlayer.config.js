@@ -69,7 +69,7 @@ export const BlogPost = defineDocumentType(() => ({
       resolve: (doc) => {
         const image = doc.image;
         if (image) {
-          return `https://heroui.com${image}`;
+          return `https://v2.heroui.com${image}`;
         }
       },
     },

@@ -2,7 +2,7 @@ import {DiscordIcon, GithubIcon, XIcon} from "@/components/icons";
 import {siteConfig} from "@/config/site";
 
 export const TWITTER_USER_NAME = "hero_ui";
-export const SITE_URL = "https://heroui.com";
+export const SITE_URL = "https://v2.heroui.com";
 
 export const communityAccounts = [
   {
