@@ -24,7 +24,7 @@ export default function HomePage() {
           >
             <Rocket className="size-3 text-accent" />
             <span className="max-w-60 truncate sm:max-w-full">
-              HeroUI v3.0.3 – RAC 1.17, 90% fewer deps, expandable rows & more
+              HeroUI v3.0.3 – 90% fewer deps, expandable rows & more
             </span>
           </LinkRoot>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
