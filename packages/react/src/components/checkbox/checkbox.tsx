@@ -6,7 +6,7 @@ import type {CheckboxRenderProps} from "react-aria-components";
 
 import {checkboxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Checkbox as CheckboxPrimitive} from "react-aria-components";
+import {Checkbox as CheckboxPrimitive, LabelContext} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";
@@ -40,7 +40,15 @@ const CheckboxRoot = ({children, className, variant, ...props}: CheckboxRootProp
     >
       {(values) => (
         <CheckboxContext value={{slots, state: values}}>
-          {typeof children === "function" ? children(values) : children}
+          {/*
+           * Override LabelContext so that any <Label> rendered inside the
+           * Checkbox (which itself renders as <label>) uses a <span> instead.
+           * Nested <label> elements are invalid HTML per the spec.
+           * https://github.com/heroui-inc/heroui/issues/6434
+           */}
+          <LabelContext.Provider value={{elementType: "span"}}>
+            {typeof children === "function" ? children(values) : children}
+          </LabelContext.Provider>
         </CheckboxContext>
       )}
     </CheckboxPrimitive>
