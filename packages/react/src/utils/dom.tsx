@@ -46,10 +46,6 @@ function DOMElement(
         console.warn(
           "Ref was not connected to DOM element returned by custom `render` function. Did you forget to pass through or merge the `ref`?",
         );
-      } else if (elementRef.current.localName !== ElementType) {
-        console.warn(
-          `Unexpected DOM element returned by custom \`render\` function. Expected <${ElementType}>, got <${elementRef.current.localName}>. This may break the component behavior and accessibility.`,
-        );
       }
     }
   }, [ElementType, render]);
