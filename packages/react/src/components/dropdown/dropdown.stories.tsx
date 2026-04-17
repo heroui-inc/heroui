@@ -507,9 +507,12 @@ export const WithDescriptions: Story = {
 export const WithSections: Story = {
   render: () => (
     <Dropdown>
-      <Button isIconOnly aria-label="Menu" variant="secondary">
+      <Dropdown.Trigger
+        aria-label="Menu"
+        className="button button-md button--secondary button--icon-only data-[focus-visible=true]:status-focused"
+      >
         <Icon className="outline-none" icon="gravity-ui:ellipsis-vertical" />
-      </Button>
+      </Dropdown.Trigger>
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
           <Dropdown.Section>

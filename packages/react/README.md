@@ -9,7 +9,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/heroui-inc/heroui/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-Apache%202.0-blue?style=flat" alt="Apache License 2.0">
+    <img src="https://img.shields.io/npm/l/@heroui/react?style=flat" alt="License">
   </a>
   <a href="https://www.npmjs.com/package/@heroui/react">
     <img src="https://img.shields.io/npm/dm/@heroui/react.svg?style=flat-round" alt="npm downloads">
@@ -60,4 +60,4 @@ Please adhere to this project's [CODE_OF_CONDUCT](https://github.com/heroui-inc/
 
 ## License
 
-Apache License 2.0
+[MIT](https://choosealicense.com/licenses/mit/)

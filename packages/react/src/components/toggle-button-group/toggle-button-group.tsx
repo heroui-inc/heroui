@@ -1,5 +1,6 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ToggleButtonGroupVariants, ToggleButtonVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
@@ -12,6 +13,7 @@ import {
 } from "react-aria-components/ToggleButtonGroup";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ToggleButtonGroup Context
@@ -74,19 +76,25 @@ const ToggleButtonGroupRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * ToggleButtonGroup Separator
  * -----------------------------------------------------------------------------------------------*/
-interface ToggleButtonGroupSeparatorProps extends ComponentPropsWithRef<"span"> {
+interface ToggleButtonGroupSeparatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   className?: string;
 }
 
-const ToggleButtonGroupSeparator = ({className, ...props}: ToggleButtonGroupSeparatorProps) => {
+const ToggleButtonGroupSeparator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  className,
+  ...props
+}: ToggleButtonGroupSeparatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ToggleButtonGroupSeparatorProps<E>>) => {
   const {slots} = useContext(ToggleButtonGroupContext);
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.separator, className)}
       data-slot="toggle-button-group-separator"
-      {...props}
+      {...(props as any)}
     />
   );
 };

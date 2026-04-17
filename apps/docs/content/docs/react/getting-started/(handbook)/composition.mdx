@@ -364,6 +364,8 @@ type MyAvatarProps = Avatar["RootProps"];
 
 ## Custom DOM Element
 
+### React Aria's render prop
+
 Use the `render` prop on the following components to render a custom component in place of the default DOM element.
 
 For example, you can render a [Motion](https://motion.dev/) button and use the state to drive an animation.
@@ -402,6 +404,19 @@ Follow these rules to avoid breaking the behavior and accessibility of the compo
 - Only render a single root DOM element (no fragments).
 - Always pass the provided props the underlying DOM element, merging with your own props via `mergeProps` as needed.
 
+### HeroUI's render prop
+
+Several compound parts are implemented with HeroUI’s internal `dom` helper - for example `Chip`, `Link.Icon`, `Alert` / `Card` subparts, `Checkbox` / `Radio` visual slots, and similar. They accept an optional `render` callback in the same general form as React Spectrum’s DOM render pattern: `(props, renderProps) => ReactElement`. 
+
+Example: Rendering Chip as a button
+
+```tsx
+import {Chip} from '@heroui/react';
+
+<Chip<"button"> render={(props) => <button {...props} />}>
+  Label
+</Chip>
+```
 
 ## Framework Integration
 

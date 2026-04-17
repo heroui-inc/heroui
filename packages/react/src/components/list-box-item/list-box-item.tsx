@@ -1,5 +1,6 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {ListBoxItemVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {ListBoxItemRenderProps} from "react-aria-components/ListBox";
@@ -9,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {ListBoxItem as ListBoxItemPrimitive} from "react-aria-components/ListBox";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ListBox Item Context
@@ -49,11 +51,19 @@ const ListBoxItemRoot = ({children, className, variant, ...props}: ListBoxItemRo
 /* -------------------------------------------------------------------------------------------------
  * ListBox Item Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface ListBoxItemIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
+interface ListBoxItemIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   children?: React.ReactNode | ((props: ListBoxItemRenderProps) => React.ReactNode);
+  className?: string;
 }
 
-const ListBoxItemIndicator = ({children, className, ...props}: ListBoxItemIndicatorProps) => {
+const ListBoxItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: ListBoxItemIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof ListBoxItemIndicatorProps<E>>) => {
   const {slots, state} = useContext(ListBoxItemContext);
   const isSelected = state?.isSelected;
 
@@ -81,15 +91,15 @@ const ListBoxItemIndicator = ({children, className, ...props}: ListBoxItemIndica
     );
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.indicator, className)}
       data-slot="list-box-item-indicator"
       data-visible={isSelected || undefined}
-      {...props}
+      {...(props as any)}
     >
       {content}
-    </span>
+    </dom.span>
   );
 };
 

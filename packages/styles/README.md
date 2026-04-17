@@ -262,4 +262,4 @@ This package is designed to work with any framework. For React-specific componen
 
 ## License
 
-Apache License 2.0
+MIT

@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {PaginationVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {paginationVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -9,6 +10,7 @@ import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {composeTwRenderProps} from "../../utils";
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {IconChevronLeft, IconChevronRight} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
@@ -23,25 +25,34 @@ const PaginationContext = createContext<PaginationContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Pagination Root
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationRootProps extends ComponentPropsWithRef<"nav">, PaginationVariants {
+interface PaginationRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "nav",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
-  children: React.ReactNode;
+  /** Pagination size. */
+  size?: PaginationVariants["size"];
 }
 
-const PaginationRoot = ({children, className, size, ...props}: PaginationRootProps) => {
+const PaginationRoot = <E extends keyof React.JSX.IntrinsicElements = "nav">({
+  children,
+  className,
+  size,
+  ...props
+}: PaginationRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof PaginationRootProps<E>>) => {
   const slots = React.useMemo(() => paginationVariants({size}), [size]);
 
   return (
     <PaginationContext value={{slots}}>
-      <nav
+      <dom.nav
         aria-label="pagination"
         data-slot="pagination"
         role="navigation"
-        {...props}
+        {...(props as any)}
         className={composeSlotClassName(slots.base, className)}
       >
         {children}
-      </nav>
+      </dom.nav>
     </PaginationContext>
   );
 };
@@ -51,22 +62,29 @@ PaginationRoot.displayName = "HeroUI.Pagination";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Summary
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationSummaryProps extends ComponentPropsWithRef<"div"> {
+interface PaginationSummaryProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
-  children: React.ReactNode;
 }
 
-const PaginationSummary = ({children, className, ...props}: PaginationSummaryProps) => {
+const PaginationSummary = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: PaginationSummaryProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof PaginationSummaryProps<E>>) => {
   const {slots} = useContext(PaginationContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.summary, className)}
       data-slot="pagination-summary"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -75,22 +93,29 @@ PaginationSummary.displayName = "HeroUI.Pagination.Summary";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Content
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationContentProps extends ComponentPropsWithRef<"ul"> {
+interface PaginationContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "ul",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
-  children: React.ReactNode;
 }
 
-const PaginationContent = ({children, className, ...props}: PaginationContentProps) => {
+const PaginationContent = <E extends keyof React.JSX.IntrinsicElements = "ul">({
+  children,
+  className,
+  ...props
+}: PaginationContentProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof PaginationContentProps<E>>) => {
   const {slots} = useContext(PaginationContext);
 
   return (
-    <ul
+    <dom.ul
       className={composeSlotClassName(slots?.content, className)}
       data-slot="pagination-content"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </ul>
+    </dom.ul>
   );
 };
 
@@ -99,22 +124,28 @@ PaginationContent.displayName = "HeroUI.Pagination.Content";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Item
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationItemProps extends ComponentPropsWithRef<"li"> {
+interface PaginationItemProps<
+  E extends keyof React.JSX.IntrinsicElements = "li",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
-  children: React.ReactNode;
 }
 
-const PaginationItem = ({children, className, ...props}: PaginationItemProps) => {
+const PaginationItem = <E extends keyof React.JSX.IntrinsicElements = "li">({
+  children,
+  className,
+  ...props
+}: PaginationItemProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof PaginationItemProps<E>>) => {
   const {slots} = useContext(PaginationContext);
 
   return (
-    <li
+    <dom.li
       className={composeSlotClassName(slots?.item, className)}
       data-slot="pagination-item"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </li>
+    </dom.li>
   );
 };
 
@@ -175,15 +206,28 @@ PaginationPrevious.displayName = "HeroUI.Pagination.Previous";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Previous Icon
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationPreviousIconProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
-  children?: React.ReactNode;
+interface PaginationPreviousIconProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
 }
 
-const PaginationPreviousIcon = ({children, className, ...props}: PaginationPreviousIconProps) => {
+const PaginationPreviousIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: PaginationPreviousIconProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof PaginationPreviousIconProps<E>>) => {
   return (
-    <span aria-hidden="true" className={className} data-slot="pagination-previous-icon" {...props}>
+    <dom.span
+      aria-hidden="true"
+      className={className}
+      data-slot="pagination-previous-icon"
+      {...(props as any)}
+    >
       {children ?? <IconChevronLeft />}
-    </span>
+    </dom.span>
   );
 };
 
@@ -217,15 +261,28 @@ PaginationNext.displayName = "HeroUI.Pagination.Next";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Next Icon
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationNextIconProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
-  children?: React.ReactNode;
+interface PaginationNextIconProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
 }
 
-const PaginationNextIcon = ({children, className, ...props}: PaginationNextIconProps) => {
+const PaginationNextIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: PaginationNextIconProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof PaginationNextIconProps<E>>) => {
   return (
-    <span aria-hidden="true" className={className} data-slot="pagination-next-icon" {...props}>
+    <dom.span
+      aria-hidden="true"
+      className={className}
+      data-slot="pagination-next-icon"
+      {...(props as any)}
+    >
       {children ?? <IconChevronRight />}
-    </span>
+    </dom.span>
   );
 };
 
@@ -234,22 +291,28 @@ PaginationNextIcon.displayName = "HeroUI.Pagination.NextIcon";
 /* -------------------------------------------------------------------------------------------------
  * Pagination Ellipsis
  * -----------------------------------------------------------------------------------------------*/
-interface PaginationEllipsisProps extends ComponentPropsWithRef<"span"> {
+interface PaginationEllipsisProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   className?: string;
 }
 
-const PaginationEllipsis = ({className, ...props}: PaginationEllipsisProps) => {
+const PaginationEllipsis = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  className,
+  ...props
+}: PaginationEllipsisProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof PaginationEllipsisProps<E>>) => {
   const {slots} = useContext(PaginationContext);
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.ellipsis, className)}
       data-slot="pagination-ellipsis"
-      {...props}
+      {...(props as any)}
     >
       &hellip;
-    </span>
+    </dom.span>
   );
 };
 

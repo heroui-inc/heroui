@@ -1,8 +1,9 @@
 "use client";
 
 import type {Booleanish} from "../../utils/assertion";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {DisclosureVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components/Button";
 
 import {disclosureVariants} from "@heroui/styles";
@@ -17,6 +18,7 @@ import {Heading as DisclosureHeadingPrimitive} from "react-aria-components/Headi
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {IconChevronDown} from "../icons";
 
 /* ------------------------------------------------------------------------------------------------
@@ -117,28 +119,44 @@ const DisclosureContent = ({children, className, ...props}: DisclosureContentPro
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Body
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureBodyContentProps extends ComponentPropsWithRef<"div"> {
+interface DisclosureBodyContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const DisclosureBody = ({children, className, ...props}: DisclosureBodyContentProps) => {
+const DisclosureBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: DisclosureBodyContentProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof DisclosureBodyContentProps<E>>) => {
   const {slots} = useContext(DisclosureContext);
 
   return (
-    <div className={slots?.body({})} data-slot="disclosure-body" {...props}>
+    <dom.div className={slots?.body({})} data-slot="disclosure-body" {...(props as any)}>
       <div className={composeSlotClassName(slots?.bodyInner, className)}>{children}</div>
-    </div>
+    </dom.div>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface DisclosureIndicatorProps extends ComponentPropsWithRef<"svg"> {
+interface DisclosureIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicatorProps) => {
+const DisclosureIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+  children,
+  className,
+  ...props
+}: DisclosureIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof DisclosureIndicatorProps<E>>) => {
   const {isExpanded} = useContext(DisclosureStateContext)!;
   const {slots} = useContext(DisclosureContext);
 
@@ -150,7 +168,7 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
         "data-expanded"?: Booleanish;
       }>,
       {
-        ...props,
+        ...(props as any),
         "data-expanded": dataAttr(isExpanded),
         className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "disclosure-indicator",
@@ -163,7 +181,7 @@ const DisclosureIndicator = ({children, className, ...props}: DisclosureIndicato
       className={composeSlotClassName(slots?.indicator, className)}
       data-expanded={dataAttr(isExpanded)}
       data-slot="disclosure-indicator"
-      {...props}
+      {...(props as any)}
     />
   );
 };

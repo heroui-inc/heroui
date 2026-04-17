@@ -1,5 +1,6 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {DatePickerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
@@ -16,6 +17,7 @@ import {
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {IconCalendar} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -129,26 +131,30 @@ DatePickerTrigger.displayName = "HeroUI.DatePicker.Trigger";
 /* -------------------------------------------------------------------------------------------------
  * DatePicker Trigger Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface DatePickerTriggerIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
+interface DatePickerTriggerIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const DatePickerTriggerIndicator = ({
+const DatePickerTriggerIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...props
-}: DatePickerTriggerIndicatorProps) => {
+}: DatePickerTriggerIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof DatePickerTriggerIndicatorProps<E>>) => {
   const {slots} = useContext(DatePickerContext);
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.triggerIndicator, className)}
       data-slot="date-picker-trigger-indicator"
-      {...props}
+      {...(props as any)}
     >
       {children || <IconCalendar />}
-    </span>
+    </dom.span>
   );
 };
 

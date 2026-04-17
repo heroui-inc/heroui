@@ -1,5 +1,6 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SliderVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {SliderRenderProps} from "react-aria-components/Slider";
@@ -15,6 +16,7 @@ import {
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Component Status: Preview
@@ -127,9 +129,17 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
  * -----------------------------------------------------------------------------------------------*/
-interface SliderFillProps extends ComponentPropsWithRef<"div"> {}
+interface SliderFillProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  className?: string;
+}
 
-const SliderFill = ({className, style, ...props}: SliderFillProps) => {
+const SliderFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  style,
+  ...props
+}: SliderFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderFillProps<E>>) => {
   const {slots, state} = useContext(SliderContext);
 
   const {getThumbPercent, orientation, values} = state?.state || {};
@@ -142,7 +152,7 @@ const SliderFill = ({className, style, ...props}: SliderFillProps) => {
   const isVertical = orientation === "vertical";
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.fill, className)}
       data-disabled={dataAttr(state?.isDisabled)}
       data-slot="slider-fill"
@@ -158,7 +168,7 @@ const SliderFill = ({className, style, ...props}: SliderFillProps) => {
               width: `${(endOffset! - startOffset!) * 100}%`,
             }),
       }}
-      {...props}
+      {...(props as any)}
     />
   );
 };
@@ -185,16 +195,23 @@ const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
 /* -------------------------------------------------------------------------------------------------
  * TODO: Slider Marks
  * -----------------------------------------------------------------------------------------------*/
-interface SliderMarksProps extends ComponentPropsWithRef<"div"> {}
+interface SliderMarksProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  className?: string;
+}
 
-const SliderMarks = ({className, ...props}: SliderMarksProps) => {
+const SliderMarks = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: SliderMarksProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderMarksProps<E>>) => {
   const {slots} = useContext(SliderContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.marks, className)}
       data-slot="slider-marks"
-      {...props}
+      {...(props as any)}
     />
   );
 };

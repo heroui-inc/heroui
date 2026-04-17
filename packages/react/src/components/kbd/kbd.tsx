@@ -1,13 +1,15 @@
 "use client";
 
 import type {KbdKey} from "./kbd.constants";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {KbdVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ReactNode} from "react";
 
 import {kbdVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 import {kbdKeysLabelMap, kbdKeysMap} from "./kbd.constants";
 
@@ -23,19 +25,29 @@ const KbdContext = createContext<KbdContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Kbd Root
  * -----------------------------------------------------------------------------------------------*/
-interface KbdRootProps extends ComponentPropsWithRef<"kbd">, KbdVariants {
-  children: React.ReactNode;
+interface KbdRootProps<E extends keyof React.JSX.IntrinsicElements = "kbd"> extends DOMRenderProps<
+  E,
+  undefined
+> {
+  children: ReactNode;
   className?: string;
+  /** Visual variant. */
+  variant?: KbdVariants["variant"];
 }
 
-const KbdRoot = ({children, className, variant, ...props}: KbdRootProps) => {
+const KbdRoot = <E extends keyof React.JSX.IntrinsicElements = "kbd">({
+  children,
+  className,
+  variant,
+  ...props
+}: KbdRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdRootProps<E>>) => {
   const slots = React.useMemo(() => kbdVariants({variant}), [variant]);
 
   return (
     <KbdContext value={{slots}}>
-      <kbd {...props} className={slots.base({className})}>
+      <dom.kbd {...(props as any)} className={slots.base({className})}>
         {children}
-      </kbd>
+      </dom.kbd>
     </KbdContext>
   );
 };
@@ -43,43 +55,54 @@ const KbdRoot = ({children, className, variant, ...props}: KbdRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Kbd Abbr
  * -----------------------------------------------------------------------------------------------*/
-interface KbdAbbrProps extends ComponentPropsWithRef<"abbr"> {
+interface KbdAbbrProps<E extends keyof React.JSX.IntrinsicElements = "abbr"> extends DOMRenderProps<
+  E,
+  undefined
+> {
   className?: string;
-  /**
-   * The keyboard key to display
-   */
+  /** The keyboard key to display */
   keyValue: KbdKey;
 }
 
-const KbdAbbr = ({className, keyValue, ...props}: KbdAbbrProps) => {
+const KbdAbbr = <E extends keyof React.JSX.IntrinsicElements = "abbr">({
+  className,
+  keyValue,
+  ...props
+}: KbdAbbrProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdAbbrProps<E>>) => {
   const {slots} = useContext(KbdContext);
 
   return (
-    <abbr
+    <dom.abbr
       className={composeSlotClassName(slots?.abbr, className)}
       title={kbdKeysLabelMap[keyValue]}
-      {...props}
+      {...(props as any)}
     >
       {kbdKeysMap[keyValue]}
-    </abbr>
+    </dom.abbr>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Kbd Content
  * -----------------------------------------------------------------------------------------------*/
-interface KbdContentProps extends ComponentPropsWithRef<"span"> {
-  children: React.ReactNode;
+interface KbdContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children: ReactNode;
   className?: string;
 }
 
-const KbdContent = ({children, className, ...props}: KbdContentProps) => {
+const KbdContent = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: KbdContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdContentProps<E>>) => {
   const {slots} = useContext(KbdContext);
 
   return (
-    <span className={composeSlotClassName(slots?.content, className)} {...props}>
+    <dom.span className={composeSlotClassName(slots?.content, className)} {...(props as any)}>
       {children}
-    </span>
+    </dom.span>
   );
 };
 

@@ -1,9 +1,10 @@
 "use client";
 
 import type {Booleanish} from "../../utils/assertion";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {AutocompleteVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, RefObject} from "react";
+import type {ComponentPropsWithRef, ReactNode, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
 import {mergeRefs, useResizeObserver} from "@react-aria/utils";
@@ -20,6 +21,7 @@ import {
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {CloseIcon, IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -144,11 +146,19 @@ const AutocompleteValue = ({children, className, ...props}: AutocompleteValuePro
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface AutocompleteIndicatorProps extends ComponentPropsWithRef<"svg"> {
+interface AutocompleteIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const AutocompleteIndicator = ({children, className, ...props}: AutocompleteIndicatorProps) => {
+const AutocompleteIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+  children,
+  className,
+  ...props
+}: AutocompleteIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof AutocompleteIndicatorProps<E>>) => {
   const {slots} = useContext(AutocompleteContext);
   const state = useContext(SelectStateContext);
 
@@ -160,7 +170,7 @@ const AutocompleteIndicator = ({children, className, ...props}: AutocompleteIndi
         "data-open"?: Booleanish;
       }>,
       {
-        ...props,
+        ...(props as any),
         className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "autocomplete-indicator",
         "data-open": dataAttr(state?.isOpen),
@@ -174,7 +184,7 @@ const AutocompleteIndicator = ({children, className, ...props}: AutocompleteIndi
         className={composeSlotClassName(slots?.indicator, className)}
         data-open={dataAttr(state?.isOpen)}
         data-slot="autocomplete-default-indicator"
-        {...props}
+        {...(props as any)}
       />
     </ButtonPrimitive>
   );
@@ -249,14 +259,20 @@ const AutocompleteFilter = ({children, ...props}: AutocompleteFilterProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Autocomplete Clear Button
  * -----------------------------------------------------------------------------------------------*/
-interface AutocompleteClearButtonProps extends ComponentPropsWithRef<"button"> {}
+interface AutocompleteClearButtonProps<
+  E extends keyof React.JSX.IntrinsicElements = "button",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const AutocompleteClearButton = ({
+const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "button">({
   className,
   onClick,
   ref,
   ...props
-}: AutocompleteClearButtonProps) => {
+}: AutocompleteClearButtonProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof AutocompleteClearButtonProps<E>>) => {
   const {slots} = useContext(AutocompleteContext);
   const state = useContext(SelectStateContext);
   const {clearButtonRef, onClear} = useContext(AutocompleteContext);
@@ -269,25 +285,25 @@ const AutocompleteClearButton = ({
   );
 
   // Merge context ref callback with user-provided ref
-  const mergedRef = mergeRefs(clearButtonRefCallback, ref);
+  const mergedRef = mergeRefs(clearButtonRefCallback, ref as any);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     state?.selectionManager.setSelectedKeys(new Set());
     onClear?.();
-    onClick?.(e);
+    onClick?.(e as any);
   };
 
   return (
-    <button
+    <dom.button
       ref={mergedRef}
       className={slots?.clearButton({className})}
       data-empty={dataAttr(state?.selectionManager.selectedKeys.size === 0)}
       data-slot="autocomplete-clear-button"
       onClick={handleClick}
-      {...props}
+      {...(props as any)}
     >
       <CloseIcon data-slot="autocomplete-clear-button-icon" />
-    </button>
+    </dom.button>
   );
 };
 

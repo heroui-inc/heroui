@@ -1,8 +1,9 @@
 "use client";
 
 import type {Booleanish} from "../../utils/assertion";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {AccordionVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {accordionVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -17,6 +18,7 @@ import {DisclosureGroup} from "react-aria-components/DisclosureGroup";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -87,11 +89,19 @@ const AccordionItem = ({className, ...props}: AccordionItemProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionIndicator
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionIndicatorProps extends ComponentPropsWithRef<"svg"> {
+interface AccordionIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorProps) => {
+const AccordionIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+  children,
+  className,
+  ...props
+}: AccordionIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof AccordionIndicatorProps<E>>) => {
   const {slots} = useContext(AccordionContext);
   const {isExpanded} = useContext(DisclosureStateContext)!;
 
@@ -103,7 +113,7 @@ const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorP
         "data-expanded"?: Booleanish;
       }>,
       {
-        ...props,
+        ...(props as any),
         "data-expanded": dataAttr(isExpanded),
         className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "accordion-indicator",
@@ -116,7 +126,7 @@ const AccordionIndicator = ({children, className, ...props}: AccordionIndicatorP
       className={composeSlotClassName(slots?.indicator, className)}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-indicator"
-      {...props}
+      {...(props as any)}
     />
   );
 };
@@ -165,17 +175,24 @@ const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * AccordionBody
  * -----------------------------------------------------------------------------------------------*/
-interface AccordionBodyProps extends ComponentPropsWithRef<"div"> {
+interface AccordionBodyProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const AccordionBody = ({children, className, ...props}: AccordionBodyProps) => {
+const AccordionBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: AccordionBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AccordionBodyProps<E>>) => {
   const {slots} = useContext(AccordionContext);
 
   return (
-    <div className={slots?.body({})} data-slot="accordion-body" {...props}>
+    <dom.div className={slots?.body({})} data-slot="accordion-body" {...(props as any)}>
       <div className={composeSlotClassName(slots?.bodyInner, className)}>{children}</div>
-    </div>
+    </dom.div>
   );
 };
 

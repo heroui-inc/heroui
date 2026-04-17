@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {MeterVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {MeterRenderProps} from "react-aria-components/Meter";
 
 import {meterVariants} from "@heroui/styles";
@@ -9,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {Meter as MeterPrimitive} from "react-aria-components/Meter";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Meter Context
@@ -48,19 +50,28 @@ MeterRoot.displayName = "HeroUI.Meter";
 /* -------------------------------------------------------------------------------------------------
  * Meter Output
  * -----------------------------------------------------------------------------------------------*/
-interface MeterOutputProps extends ComponentPropsWithRef<"span"> {}
+interface MeterOutputProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const MeterOutput = ({children, className, ...props}: MeterOutputProps) => {
+const MeterOutput = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: MeterOutputProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterOutputProps<E>>) => {
   const {slots, state} = useContext(MeterContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.output, className)}
       data-slot="meter-output"
-      {...props}
+      {...(props as any)}
     >
       {children ?? state?.valueText}
-    </span>
+    </dom.span>
   );
 };
 
@@ -69,19 +80,28 @@ MeterOutput.displayName = "HeroUI.Meter.Output";
 /* -------------------------------------------------------------------------------------------------
  * Meter Track
  * -----------------------------------------------------------------------------------------------*/
-interface MeterTrackProps extends ComponentPropsWithRef<"div"> {}
+interface MeterTrackProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const MeterTrack = ({children, className, ...props}: MeterTrackProps) => {
+const MeterTrack = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: MeterTrackProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterTrackProps<E>>) => {
   const {slots} = useContext(MeterContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.track, className)}
       data-slot="meter-track"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -90,20 +110,30 @@ MeterTrack.displayName = "HeroUI.Meter.Track";
 /* -------------------------------------------------------------------------------------------------
  * Meter Fill
  * -----------------------------------------------------------------------------------------------*/
-interface MeterFillProps extends ComponentPropsWithRef<"div"> {}
+interface MeterFillProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}
 
-const MeterFill = ({className, style, ...props}: MeterFillProps) => {
+const MeterFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  style,
+  ...props
+}: MeterFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterFillProps<E>>) => {
   const {slots, state} = useContext(MeterContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.fill, className)}
       data-slot="meter-fill"
       style={{
         ...style,
         width: `${state?.percentage ?? 0}%`,
       }}
-      {...props}
+      {...(props as any)}
     />
   );
 };

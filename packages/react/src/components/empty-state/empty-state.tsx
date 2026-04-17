@@ -1,19 +1,30 @@
-import type {EmptyStateVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {DOMRenderProps} from "../../utils/dom";
+import type {ReactNode} from "react";
 
 import {emptyStateVariants} from "@heroui/styles";
 import React from "react";
 
+import {dom} from "../../utils/dom";
+
 /* -------------------------------------------------------------------------------------------------
  * EmptyState Root
  * -----------------------------------------------------------------------------------------------*/
-interface EmptyStateRootProps extends ComponentPropsWithRef<"div">, EmptyStateVariants {}
+interface EmptyStateRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const EmptyStateRoot = ({children, className, ...rest}: EmptyStateRootProps) => {
+const EmptyStateRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...rest
+}: EmptyStateRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof EmptyStateRootProps<E>>) => {
   return (
-    <div className={emptyStateVariants({className})} data-slot="empty-state" {...rest}>
+    <dom.div className={emptyStateVariants({className})} data-slot="empty-state" {...(rest as any)}>
       {children || "No results found"}
-    </div>
+    </dom.div>
   );
 };
 

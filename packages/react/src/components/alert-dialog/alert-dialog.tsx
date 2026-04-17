@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {AlertDialogVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, HTMLAttributes} from "react";
+import type {ComponentPropsWithRef, HTMLAttributes, ReactNode} from "react";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components/Button";
 import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Dialog";
 
@@ -19,6 +20,7 @@ import {
 } from "react-aria-components/Modal";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 
@@ -284,7 +286,11 @@ const AlertDialogFooter = ({children, className, ...props}: AlertDialogFooterPro
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Icon
  * -----------------------------------------------------------------------------------------------*/
-interface AlertDialogIconProps extends ComponentPropsWithRef<"div"> {
+interface AlertDialogIconProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
   /**
    * The semantic status of the icon, affects background color and default icon
    * @default "danger"
@@ -292,12 +298,13 @@ interface AlertDialogIconProps extends ComponentPropsWithRef<"div"> {
   status?: AlertDialogStatus;
 }
 
-const AlertDialogIcon = ({
+const AlertDialogIcon = <E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   status = "danger",
   ...props
-}: AlertDialogIconProps) => {
+}: AlertDialogIconProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof AlertDialogIconProps<E>>) => {
   const slots = useMemo(() => alertDialogVariants({status}), [status]);
 
   const getDefaultIcon = () => {
@@ -318,9 +325,9 @@ const AlertDialogIcon = ({
   };
 
   return (
-    <div className={slots?.icon({className})} data-slot="alert-dialog-icon" {...props}>
+    <dom.div className={slots?.icon({className})} data-slot="alert-dialog-icon" {...(props as any)}>
       {children ?? getDefaultIcon()}
-    </div>
+    </dom.div>
   );
 };
 

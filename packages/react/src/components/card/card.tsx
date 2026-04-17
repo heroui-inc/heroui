@@ -1,13 +1,15 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {CardVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ReactNode} from "react";
 
 import {cardVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {SurfaceContext} from "../surface";
 
 /* -------------------------------------------------------------------------------------------------
@@ -22,15 +24,28 @@ const CardContext = createContext<CardContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Card Root
  * -----------------------------------------------------------------------------------------------*/
-interface CardRootProps extends ComponentPropsWithRef<"div">, CardVariants {}
+interface CardRootProps<E extends keyof React.JSX.IntrinsicElements = "div"> extends DOMRenderProps<
+  E,
+  undefined
+> {
+  children: ReactNode;
+  className?: string;
+  /** Visual variant. @default "default" */
+  variant?: CardVariants["variant"];
+}
 
-const CardRoot = ({children, className, variant = "default", ...props}: CardRootProps) => {
+const CardRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  variant = "default",
+  ...props
+}: CardRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardRootProps<E>>) => {
   const slots = React.useMemo(() => cardVariants({variant}), [variant]);
 
   const content = (
-    <div className={slots.base({className})} data-slot="card" {...props}>
+    <dom.div className={slots.base({className})} data-slot="card" {...(props as any)}>
       {children}
-    </div>
+    </dom.div>
   );
 
   return (
@@ -54,16 +69,24 @@ const CardRoot = ({children, className, variant = "default", ...props}: CardRoot
 /* -------------------------------------------------------------------------------------------------
  * Card Header
  * -----------------------------------------------------------------------------------------------*/
-interface CardHeaderProps extends ComponentPropsWithRef<"div"> {}
+interface CardHeaderProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const CardHeader = ({className, ...props}: CardHeaderProps) => {
+const CardHeader = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: CardHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardHeaderProps<E>>) => {
   const {slots} = useContext(CardContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.header, className)}
       data-slot="card-header"
-      {...props}
+      {...(props as any)}
     />
   );
 };
@@ -71,50 +94,82 @@ const CardHeader = ({className, ...props}: CardHeaderProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Card Title
  * -----------------------------------------------------------------------------------------------*/
-interface CardTitleProps extends ComponentPropsWithRef<"h3"> {}
+interface CardTitleProps<E extends keyof React.JSX.IntrinsicElements = "h3"> extends DOMRenderProps<
+  E,
+  undefined
+> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const CardTitle = ({children, className, ...props}: CardTitleProps) => {
+const CardTitle = <E extends keyof React.JSX.IntrinsicElements = "h3">({
+  children,
+  className,
+  ...props
+}: CardTitleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardTitleProps<E>>) => {
   const {slots} = useContext(CardContext);
 
   return (
-    <h3 className={composeSlotClassName(slots?.title, className)} data-slot="card-title" {...props}>
+    <dom.h3
+      className={composeSlotClassName(slots?.title, className)}
+      data-slot="card-title"
+      {...(props as any)}
+    >
       {children}
-    </h3>
+    </dom.h3>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Card Description
  * -----------------------------------------------------------------------------------------------*/
-interface CardDescriptionProps extends ComponentPropsWithRef<"p"> {}
+interface CardDescriptionProps<
+  E extends keyof React.JSX.IntrinsicElements = "p",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const CardDescription = ({children, className, ...props}: CardDescriptionProps) => {
+const CardDescription = <E extends keyof React.JSX.IntrinsicElements = "p">({
+  children,
+  className,
+  ...props
+}: CardDescriptionProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof CardDescriptionProps<E>>) => {
   const {slots} = useContext(CardContext);
 
   return (
-    <p
+    <dom.p
       className={composeSlotClassName(slots?.description, className)}
       data-slot="card-description"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </p>
+    </dom.p>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Card Content
  * -----------------------------------------------------------------------------------------------*/
-interface CardContentProps extends ComponentPropsWithRef<"div"> {}
+interface CardContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const CardContent = ({className, ...props}: CardContentProps) => {
+const CardContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: CardContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardContentProps<E>>) => {
   const {slots} = useContext(CardContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.content, className)}
       data-slot="card-content"
-      {...props}
+      {...(props as any)}
     />
   );
 };
@@ -122,16 +177,24 @@ const CardContent = ({className, ...props}: CardContentProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Card Footer
  * -----------------------------------------------------------------------------------------------*/
-interface CardFooterProps extends ComponentPropsWithRef<"div"> {}
+interface CardFooterProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const CardFooter = ({className, ...props}: CardFooterProps) => {
+const CardFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: CardFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardFooterProps<E>>) => {
   const {slots} = useContext(CardContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.footer, className)}
       data-slot="card-footer"
-      {...props}
+      {...(props as any)}
     />
   );
 };

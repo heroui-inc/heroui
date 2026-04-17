@@ -1,5 +1,6 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {MenuItemVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 import type {MenuItemRenderProps} from "react-aria-components/Menu";
@@ -9,6 +10,7 @@ import React, {createContext, useContext} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components/Menu";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
+import {dom} from "../../utils/dom";
 import {IconChevronRight} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
@@ -50,17 +52,21 @@ const MenuItemRoot = ({children, className, variant, ...props}: MenuItemRootProp
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
+interface MenuItemIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   children?: React.ReactNode | ((props: MenuItemRenderProps) => React.ReactNode);
+  className?: string;
   type?: "checkmark" | "dot";
 }
 
-const MenuItemIndicator = ({
+const MenuItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   type = "checkmark",
   ...props
-}: MenuItemIndicatorProps) => {
+}: MenuItemIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof MenuItemIndicatorProps<E>>) => {
   const {slots, state} = useContext(MenuItemContext);
   const isSelected = state?.isSelected;
 
@@ -100,35 +106,38 @@ const MenuItemIndicator = ({
     );
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.indicator, className)}
       data-slot="menu-item-indicator"
       data-type={type}
       data-visible={isSelected || undefined}
-      {...props}
+      {...(props as any)}
     >
       {content}
-    </span>
+    </dom.span>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Submenu Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface MenuItemSubmenuIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
+interface MenuItemSubmenuIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const MenuItemSubmenuIndicator = ({
+const MenuItemSubmenuIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...props
-}: MenuItemSubmenuIndicatorProps) => {
+}: MenuItemSubmenuIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof MenuItemSubmenuIndicatorProps<E>>) => {
   const {slots, state} = useContext(MenuItemContext);
   const hasSubmenu = state?.hasSubmenu;
 
-  // Only render if hasSubmenu is true
   if (!hasSubmenu) {
     return null;
   }
@@ -137,14 +146,14 @@ const MenuItemSubmenuIndicator = ({
   const content = children ?? defaultContent;
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.submenuIndicator, className)}
       data-slot="submenu-indicator"
-      {...props}
+      {...(props as any)}
     >
       {content}
-    </span>
+    </dom.span>
   );
 };
 

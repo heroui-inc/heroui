@@ -1,6 +1,7 @@
 "use client";
 
 import type {Booleanish} from "../../utils/assertion";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
@@ -100,11 +101,19 @@ const SelectValue = ({children, className, ...props}: SelectValueProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Select Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface SelectIndicatorProps extends ComponentPropsWithRef<"svg"> {
+interface SelectIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+> extends DOMRenderProps<E, undefined> {
+  children?: React.ReactNode;
   className?: string;
 }
 
-const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) => {
+const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+  children,
+  className,
+  ...props
+}: SelectIndicatorProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof SelectIndicatorProps<E>>) => {
   const {slots} = useContext(SelectContext);
   const state = useContext(SelectStateContext);
 
@@ -116,7 +125,7 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
         "data-open"?: Booleanish;
       }>,
       {
-        ...props,
+        ...(props as any),
         className: composeSlotClassName(slots?.indicator, className),
         "data-slot": "select-indicator",
         "data-open": dataAttr(state?.isOpen),
@@ -129,7 +138,7 @@ const SelectIndicator = ({children, className, ...props}: SelectIndicatorProps) 
       className={composeSlotClassName(slots?.indicator, className)}
       data-open={dataAttr(state?.isOpen)}
       data-slot="select-default-indicator"
-      {...props}
+      {...(props as any)}
     />
   );
 };

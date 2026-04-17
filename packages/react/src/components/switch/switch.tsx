@@ -1,13 +1,15 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SwitchVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {switchVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
 import {Switch as SwitchPrimitive} from "react-aria-components/Switch";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Switch Context
@@ -42,76 +44,112 @@ const SwitchRoot = ({children, className, size, ...props}: SwitchRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Switch Control
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchControlProps extends ComponentPropsWithRef<"span"> {}
+interface SwitchControlProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const SwitchControl = ({children, className, ...props}: SwitchControlProps) => {
+const SwitchControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: SwitchControlProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchControlProps<E>>) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.control, className)}
       data-slot="switch-control"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Switch Thumb
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchThumbProps extends ComponentPropsWithRef<"span"> {}
+interface SwitchThumbProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const SwitchThumb = ({children, className, ...props}: SwitchThumbProps) => {
+const SwitchThumb = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: SwitchThumbProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchThumbProps<E>>) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.thumb, className)}
       data-slot="switch-thumb"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Switch Icon
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchIconProps extends ComponentPropsWithRef<"span"> {}
+interface SwitchIconProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const SwitchIcon = ({children, className, ...props}: SwitchIconProps) => {
+const SwitchIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: SwitchIconProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchIconProps<E>>) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.icon, className)}
       data-slot="switch-icon"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Switch Content
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchContentProps extends ComponentPropsWithRef<"div"> {}
+interface SwitchContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const SwitchContent = ({children, className, ...props}: SwitchContentProps) => {
+const SwitchContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: SwitchContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchContentProps<E>>) => {
   const {slots} = useContext(SwitchContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.content, className)}
       data-slot="switch-content"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 

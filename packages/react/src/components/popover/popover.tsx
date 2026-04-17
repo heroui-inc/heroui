@@ -1,8 +1,9 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {PopoverVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {popoverVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -18,6 +19,7 @@ import {
 } from "react-aria-components/Popover";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {SurfaceContext} from "../surface";
 
 /* -------------------------------------------------------------------------------------------------
@@ -139,21 +141,30 @@ const PopoverDialog = ({children, className, ...props}: PopoverDialogProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Popover Trigger
  * -----------------------------------------------------------------------------------------------*/
-type PopoverTriggerProps = ComponentPropsWithRef<"div">;
+interface PopoverTriggerProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const PopoverTrigger = ({children, className, ...props}: PopoverTriggerProps) => {
+const PopoverTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: PopoverTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof PopoverTriggerProps<E>>) => {
   const {slots} = useContext(PopoverContext);
 
   return (
     <PressablePrimitive>
-      <div
+      <dom.div
         className={composeSlotClassName(slots?.trigger, className)}
         data-slot="popover-trigger"
         role="button"
-        {...props}
+        {...(props as any)}
       >
         {children}
-      </div>
+      </dom.div>
     </PressablePrimitive>
   );
 };

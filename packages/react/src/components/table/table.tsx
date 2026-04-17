@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {TableVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tableVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -20,6 +21,7 @@ import {
 import {cx} from "tailwind-variants";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Table Context
@@ -31,46 +33,59 @@ const TableContext = createContext<{
 /* -------------------------------------------------------------------------------------------------
  * Table Root
  * -----------------------------------------------------------------------------------------------*/
-interface TableRootProps extends ComponentPropsWithRef<"div">, TableVariants {
+interface TableRootProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
-  children?: React.ReactNode;
+  /** Visual variant. */
+  variant?: TableVariants["variant"];
 }
 
-const TableRoot = React.forwardRef<HTMLDivElement, TableRootProps>(
-  ({children, className, variant, ...props}, ref) => {
-    const slots = React.useMemo(() => tableVariants({variant}), [variant]);
+const TableRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  variant,
+  ...props
+}: TableRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TableRootProps<E>>) => {
+  const slots = React.useMemo(() => tableVariants({variant}), [variant]);
 
-    return (
-      <TableContext value={{slots}}>
-        <div ref={ref} className={slots.base({className})} data-slot="table" {...props}>
-          {children}
-        </div>
-      </TableContext>
-    );
-  },
-);
+  return (
+    <TableContext value={{slots}}>
+      <dom.div className={slots.base({className})} data-slot="table" {...(props as any)}>
+        {children}
+      </dom.div>
+    </TableContext>
+  );
+};
 
 TableRoot.displayName = "HeroUI.Table";
 
 /* -------------------------------------------------------------------------------------------------
  * Table Scroll Container
  * -----------------------------------------------------------------------------------------------*/
-interface TableScrollContainerProps extends ComponentPropsWithRef<"div"> {}
+interface TableScrollContainerProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const TableScrollContainer = React.forwardRef<HTMLDivElement, TableScrollContainerProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableScrollContainer = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: TableScrollContainerProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof TableScrollContainerProps<E>>) => {
+  const {slots} = useContext(TableContext);
 
-    return (
-      <div
-        ref={ref}
-        className={composeSlotClassName(slots?.scrollContainer, className)}
-        data-slot="table-scroll-container"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <dom.div
+      className={composeSlotClassName(slots?.scrollContainer, className)}
+      data-slot="table-scroll-container"
+      {...(props as any)}
+    />
+  );
+};
 
 TableScrollContainer.displayName = "HeroUI.Table.ScrollContainer";
 
@@ -206,24 +221,27 @@ TableCell.displayName = "HeroUI.Table.Cell";
 /* -------------------------------------------------------------------------------------------------
  * Table Footer
  * -----------------------------------------------------------------------------------------------*/
-interface TableFooterProps extends ComponentPropsWithRef<"div"> {
+interface TableFooterProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const TableFooter = React.forwardRef<HTMLDivElement, TableFooterProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: TableFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TableFooterProps<E>>) => {
+  const {slots} = useContext(TableContext);
 
-    return (
-      <div
-        ref={ref}
-        className={composeSlotClassName(slots?.footer, className)}
-        data-slot="table-footer"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <dom.div
+      className={composeSlotClassName(slots?.footer, className)}
+      data-slot="table-footer"
+      {...(props as any)}
+    />
+  );
+};
 
 TableFooter.displayName = "HeroUI.Table.Footer";
 
@@ -296,22 +314,28 @@ TableLoadMoreItem.displayName = "HeroUI.Table.LoadMore";
 /* -------------------------------------------------------------------------------------------------
  * Table Load More Content
  * -----------------------------------------------------------------------------------------------*/
-interface TableLoadMoreContentProps extends ComponentPropsWithRef<"div"> {}
+interface TableLoadMoreContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const TableLoadMoreContent = React.forwardRef<HTMLDivElement, TableLoadMoreContentProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableLoadMoreContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: TableLoadMoreContentProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof TableLoadMoreContentProps<E>>) => {
+  const {slots} = useContext(TableContext);
 
-    return (
-      <div
-        ref={ref}
-        className={composeSlotClassName(slots?.loadMoreContent, className)}
-        data-slot="table-load-more-content"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <dom.div
+      className={composeSlotClassName(slots?.loadMoreContent, className)}
+      data-slot="table-load-more-content"
+      {...(props as any)}
+    />
+  );
+};
 
 TableLoadMoreContent.displayName = "HeroUI.Table.LoadMoreContent";
 

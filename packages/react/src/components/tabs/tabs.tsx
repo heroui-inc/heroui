@@ -1,7 +1,8 @@
 "use client";
 
+import type {DOMRenderProps} from "../../utils/dom";
 import type {TabsVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tabsVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -14,6 +15,7 @@ import {
 } from "react-aria-components/Tabs";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs Context
@@ -59,21 +61,29 @@ const TabsRoot = ({
 /* -------------------------------------------------------------------------------------------------
  * Tabs List Container
  * -----------------------------------------------------------------------------------------------*/
-interface TabListContainerProps extends ComponentPropsWithRef<"div"> {
+interface TabListContainerProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
   className?: string;
 }
 
-const TabListContainer = ({children, className, ...props}: TabListContainerProps) => {
+const TabListContainer = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: TabListContainerProps<E> &
+  Omit<React.JSX.IntrinsicElements[E], keyof TabListContainerProps<E>>) => {
   const {slots} = useContext(TabsContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.tabListContainer, className)}
       data-slot="tabs-list-container"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -164,19 +174,24 @@ const TabPanel = ({children, className, ...props}: TabPanelProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Tab Separator
  * -----------------------------------------------------------------------------------------------*/
-interface TabSeparatorProps extends ComponentPropsWithRef<"span"> {
+interface TabSeparatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   className?: string;
 }
 
-const TabSeparator = ({className, ...props}: TabSeparatorProps) => {
+const TabSeparator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  className,
+  ...props
+}: TabSeparatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TabSeparatorProps<E>>) => {
   const {slots} = useContext(TabsContext);
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.separator, className)}
       data-slot="tabs-separator"
-      {...props}
+      {...(props as any)}
     />
   );
 };

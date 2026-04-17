@@ -1,6 +1,7 @@
 "use client";
 
-import type {ComponentPropsWithRef} from "react";
+import type {DOMRenderProps} from "../../utils/dom";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {RadioRenderProps} from "react-aria-components/RadioGroup";
 
 import {radioVariants} from "@heroui/styles";
@@ -8,6 +9,7 @@ import React, {createContext, useContext} from "react";
 import {Radio as RadioPrimitive} from "react-aria-components/RadioGroup";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Context
@@ -48,62 +50,87 @@ const RadioRoot = ({children, className, ...props}: RadioRootProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Radio Control
  * -----------------------------------------------------------------------------------------------*/
-interface RadioControlProps extends ComponentPropsWithRef<"span"> {}
+interface RadioControlProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const RadioControl = ({children, className, ...props}: RadioControlProps) => {
+const RadioControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: RadioControlProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof RadioControlProps<E>>) => {
   const {slots} = useContext(RadioContext);
 
   return (
-    <span
+    <dom.span
       className={composeSlotClassName(slots?.control, className)}
       data-slot="radio-control"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </span>
+    </dom.span>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Indicator
  * -----------------------------------------------------------------------------------------------*/
-interface RadioIndicatorProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
+interface RadioIndicatorProps<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+> extends DOMRenderProps<E, undefined> {
   children?: React.ReactNode | ((props: RadioRenderProps) => React.ReactNode);
+  className?: string;
 }
 
-const RadioIndicator = ({children, className, ...props}: RadioIndicatorProps) => {
+const RadioIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+  children,
+  className,
+  ...props
+}: RadioIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof RadioIndicatorProps<E>>) => {
   const {slots, state} = useContext(RadioContext);
   const content =
     typeof children === "function" ? children(state ?? ({} as RadioRenderProps)) : children;
 
   return (
-    <span
+    <dom.span
       aria-hidden="true"
       className={composeSlotClassName(slots?.indicator, className)}
       data-slot="radio-indicator"
-      {...props}
+      {...(props as any)}
     >
       {content}
-    </span>
+    </dom.span>
   );
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Radio Content
  * -----------------------------------------------------------------------------------------------*/
-interface RadioContentProps extends ComponentPropsWithRef<"div"> {}
+interface RadioContentProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const RadioContent = ({children, className, ...props}: RadioContentProps) => {
+const RadioContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: RadioContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof RadioContentProps<E>>) => {
   const {slots} = useContext(RadioContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.content, className)}
       data-slot="radio-content"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 

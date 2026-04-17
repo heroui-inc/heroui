@@ -1,6 +1,7 @@
 "use client";
 
 import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-overlay-state";
+import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {DrawerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
@@ -9,7 +10,7 @@ import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Di
 
 import {drawerVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
-import {createContext, useCallback, useContext, useMemo, useRef} from "react";
+import React, {createContext, useCallback, useContext, useMemo, useRef} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
   Dialog as DialogPrimitive,
@@ -23,6 +24,7 @@ import {
 } from "react-aria-components/Modal";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
 
@@ -380,19 +382,28 @@ DrawerDialog.displayName = "HeroUI.Drawer.Dialog";
 /* -------------------------------------------------------------------------------------------------
  * Drawer Header
  * -----------------------------------------------------------------------------------------------*/
-interface DrawerHeaderProps extends ComponentPropsWithRef<"div"> {}
+interface DrawerHeaderProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const DrawerHeader = ({children, className, ...props}: DrawerHeaderProps) => {
+const DrawerHeader = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: DrawerHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHeaderProps<E>>) => {
   const {slots} = useContext(DrawerContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.header, className)}
       data-slot="drawer-header"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -401,20 +412,29 @@ DrawerHeader.displayName = "HeroUI.Drawer.Header";
 /* -------------------------------------------------------------------------------------------------
  * Drawer Body
  * -----------------------------------------------------------------------------------------------*/
-interface DrawerBodyProps extends ComponentPropsWithRef<"div"> {}
+interface DrawerBodyProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const DrawerBody = ({children, className, ...props}: DrawerBodyProps) => {
+const DrawerBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: DrawerBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerBodyProps<E>>) => {
   const {slots} = useContext(DrawerContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.body, className)}
       data-slot="drawer-body"
       style={{touchAction: "pan-y"}}
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -423,19 +443,28 @@ DrawerBody.displayName = "HeroUI.Drawer.Body";
 /* -------------------------------------------------------------------------------------------------
  * Drawer Footer
  * -----------------------------------------------------------------------------------------------*/
-interface DrawerFooterProps extends ComponentPropsWithRef<"div"> {}
+interface DrawerFooterProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const DrawerFooter = ({children, className, ...props}: DrawerFooterProps) => {
+const DrawerFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  children,
+  className,
+  ...props
+}: DrawerFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerFooterProps<E>>) => {
   const {slots} = useContext(DrawerContext);
 
   return (
-    <div
+    <dom.div
       className={composeSlotClassName(slots?.footer, className)}
       data-slot="drawer-footer"
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </div>
+    </dom.div>
   );
 };
 
@@ -466,20 +495,28 @@ DrawerHeading.displayName = "HeroUI.Drawer.Heading";
 /* -------------------------------------------------------------------------------------------------
  * Drawer Handle
  * -----------------------------------------------------------------------------------------------*/
-interface DrawerHandleProps extends ComponentPropsWithRef<"div"> {}
+interface DrawerHandleProps<
+  E extends keyof React.JSX.IntrinsicElements = "div",
+> extends DOMRenderProps<E, undefined> {
+  children?: ReactNode;
+  className?: string;
+}
 
-const DrawerHandle = ({className, ...props}: DrawerHandleProps) => {
+const DrawerHandle = <E extends keyof React.JSX.IntrinsicElements = "div">({
+  className,
+  ...props
+}: DrawerHandleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHandleProps<E>>) => {
   const {slots} = useContext(DrawerContext);
 
   return (
-    <div
+    <dom.div
       aria-hidden="true"
       className={composeSlotClassName(slots?.handle, className)}
       data-slot="drawer-handle"
-      {...props}
+      {...(props as any)}
     >
       <div data-slot="drawer-handle-bar" />
-    </div>
+    </dom.div>
   );
 };
 
