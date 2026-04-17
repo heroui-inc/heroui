@@ -1,6 +1,7 @@
 ---
 title: BottomSheet
 description: Displays a bottom sheet that slides up from the bottom with animated transitions and swipe-to-dismiss gestures.
+icon: updated
 links:
   source_native: bottom-sheet/bottom-sheet.tsx
   styles_native: bottom-sheet/bottom-sheet.styles.ts
@@ -232,14 +233,15 @@ Animation configuration for bottom sheet root component. Can be:
 
 ### BottomSheet.Portal
 
-| prop                       | type                   | default | description                                                                                                                   |
-| -------------------------- | ---------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `children`                 | `React.ReactNode`      | -       | Portal content (overlay and bottom sheet)                                                                                     |
-| `disableFullWindowOverlay` | `boolean`              | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
-| `className`                | `string`               | -       | Additional CSS classes for portal container                                                                                   |
-| `style`                    | `StyleProp<ViewStyle>` | -       | Additional styles for portal container                                                                                        |
-| `hostName`                 | `string`               | -       | Optional portal host name for specific container                                                                              |
-| `forceMount`               | `boolean`              | -       | Force mount when closed for animation purposes                                                                                |
+| prop                                         | type                   | default | description                                                                                                                                                                                                      |
+| -------------------------------------------- | ---------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`                                   | `React.ReactNode`      | -       | Portal content (overlay and bottom sheet)                                                                                                                                                                        |
+| `disableFullWindowOverlay`                   | `boolean`              | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals                                                                                    |
+| `unstable_accessibilityContainerViewIsModal` | `boolean`              | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
+| `className`                                  | `string`               | -       | Additional CSS classes for portal container                                                                                                                                                                      |
+| `style`                                      | `StyleProp<ViewStyle>` | -       | Additional styles for portal container                                                                                                                                                                           |
+| `hostName`                                   | `string`               | -       | Optional portal host name for specific container                                                                                                                                                                 |
+| `forceMount`                                 | `boolean`              | -       | Force mount when closed for animation purposes                                                                                                                                                                   |
 
 ### BottomSheet.Overlay
 

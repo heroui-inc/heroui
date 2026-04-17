@@ -1,6 +1,7 @@
 ---
 title: Select
 description: Displays a list of options for the user to pick from — triggered by a button.
+icon: updated
 links:
   source_native: select/select.tsx
   styles_native: select/select.styles.ts
@@ -537,6 +538,7 @@ Animation configuration for Select.TriggerIndicator component. Can be:
 | -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `children`                 | `ReactNode` | -       | The portal content (required)                                                                                                 |
 | `disableFullWindowOverlay` | `boolean`   | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
 | `className`                | `string`    | -       | Additional CSS classes for the portal container                                                                               |
 | `hostName`                 | `string`    | -       | Optional name of the host element for the portal                                                                              |
 | `forceMount`               | `boolean`   | -       | Whether to force mount the component in the DOM                                                                               |

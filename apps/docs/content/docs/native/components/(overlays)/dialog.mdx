@@ -1,6 +1,7 @@
 ---
 title: Dialog
 description: Displays a modal overlay with animated transitions and gesture-based dismissal.
+icon: updated
 links:
   source_native: dialog/dialog.tsx
   styles_native: dialog/dialog.styles.ts
@@ -182,6 +183,7 @@ Animation configuration for dialog root component. Can be:
 | -------------------------- | ---------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `children`                 | `React.ReactNode`      | -       | Portal content (overlay and dialog)                                                                                           |
 | `disableFullWindowOverlay` | `boolean`              | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
 | `className`                | `string`               | -       | Additional CSS classes for portal container                                                                                   |
 | `style`                    | `StyleProp<ViewStyle>` | -       | Additional styles for portal container                                                                                        |
 | `hostName`                 | `string`               | -       | Optional portal host name for specific container                                                                              |

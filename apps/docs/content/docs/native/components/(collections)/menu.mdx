@@ -444,6 +444,7 @@ Animation configuration for menu root component. Can be:
 | `children`                 | `React.ReactNode` | -       | The portal content                                     |
 | `className`                | `string`          | -       | Additional CSS class for the portal container          |
 | `disableFullWindowOverlay` | `boolean`         | `false` | Use a regular View instead of FullWindowOverlay on iOS |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
 | `hostName`                 | `string`          | -       | Optional name of the host element for the portal       |
 | `forceMount`               | `boolean`         | -       | Force mount the portal regardless of open state        |
 

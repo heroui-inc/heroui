@@ -1,0 +1,198 @@
+---
+title: v1.0.2
+description:
+  asChild slot pattern for PressableFeedback and Surface, Portal accessibility modal prop, Button Android variant fix, Input and Select style refinements
+github:
+  pull: 380
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">April 15, 2026</span>
+</div>
+
+HeroUI Native v1.0.2 introduces the `asChild` slot pattern for PressableFeedback and Surface components, adds VoiceOver modal containment support across all portal-based overlay components, and fixes an Android-specific Button variant styling issue. This release also refines Input and Select visual styles and improves RadioGroup documentation with inline API references.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the v1.0.2 improvements in action with our preview app! You can explore the new `asChild` slot pattern, portal accessibility improvements, improved Button behavior on Android, and the refined Input and Select styles directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## API Enhancements
+
+### `asChild` Slot Pattern for PressableFeedback and Surface
+
+The [PressableFeedback](/docs/native/components/pressable-feedback) and [Surface](/docs/native/components/surface) components now support the `asChild` prop, enabling the Slot pattern for polymorphic rendering. When `asChild` is `true`, each component merges its behavior and styling onto a single child element instead of wrapping it in an additional node.
+
+**PressableFeedback** uses `Animated.createAnimatedComponent(Slot.Pressable)` to merge press handling and animated styles onto the child element. **Surface** uses `Slot.View` to merge surface styling (elevation, background, className) onto the child element.
+
+**New capability:**
+
+```tsx
+import { PressableFeedback, Surface } from "heroui-native";
+
+// PressableFeedback merges press handling onto the child
+<PressableFeedback asChild onPress={() => console.log("pressed")}>
+  <MyCustomComponent />
+</PressableFeedback>
+
+// Surface merges surface styling onto the child
+<Surface asChild elevation={2}>
+  <MyCustomCard />
+</Surface>
+```
+
+The `asChild` prop defaults to `false`, preserving existing behavior. No migration is required. The child must be a single React element when `asChild` is enabled. Both implementations follow the established Slot primitive pattern already used in the codebase.
+
+**Related PR:** [#380](https://github.com/heroui-inc/heroui-native/pull/380)
+
+### `unstable_accessibilityContainerViewIsModal` for Portal Components
+
+A new `unstable_accessibilityContainerViewIsModal` prop has been added to all portal-based overlay components, giving consumers control over whether iOS VoiceOver treats the overlay window as a modal container. When enabled, VoiceOver focus is restricted to elements inside the overlay, preventing navigation to content behind it.
+
+**Supported components:**
+
+- [BottomSheet](/docs/native/components/bottom-sheet) (`BottomSheet.Portal`)
+- [Dialog](/docs/native/components/dialog) (`Dialog.Portal`)
+- [Menu](/docs/native/components/menu) (`Menu.Portal`)
+- [Popover](/docs/native/components/popover) (`Popover.Portal`)
+- [Select](/docs/native/components/select) (`Select.Portal`)
+- [Toast](/docs/native/components/toast) (`ToastProvider`)
+
+**New capability:**
+
+```tsx
+import { Dialog } from "heroui-native";
+
+<Dialog>
+  <Dialog.Portal unstable_accessibilityContainerViewIsModal>
+    <Dialog.Content>
+      {/* VoiceOver focus is restricted to this overlay on iOS */}
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+The prop defaults to `false`, preserving existing behavior. It is marked `unstable` because it maps directly to the native `accessibilityViewIsModal` on `FullWindowOverlay` from `react-native-screens` and may change with future releases of that library.
+
+**Related PR:** [#383](https://github.com/heroui-inc/heroui-native/pull/383)
+
+## Style Fixes
+
+### Input and Select Visual Refinements
+
+Refined the visual styling of the [Input](/docs/native/components/input) and [Select](/docs/native/components/select) components for a cleaner, more balanced appearance.
+
+**Fixes:**
+
+- **Input**: Border width reduced from `border-2` (2px) to `border-[1.5px]` for a subtler, less heavy border appearance
+- **Select**: Trigger vertical padding reduced from `py-3.5` to `py-3` for tighter, more compact spacing
+
+These are purely cosmetic adjustments with no API or behavioral changes. Visual regression testing is recommended to confirm the updated styles render as expected across iOS and Android.
+
+**Related PR:** [#381](https://github.com/heroui-inc/heroui-native/pull/381)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #363](https://github.com/heroui-inc/heroui-native/issues/363)**: Fixed the Button outline variant on Android where the border would persist when switching to another variant via a conditional prop. React Native on Android sometimes retains the `borderWidth` property during variant transitions. All button variants except `outline` now include explicit `border-0` classes to ensure `borderWidth` is reset to `0` whenever the variant changes.
+
+- **[Issue #357](https://github.com/heroui-inc/heroui-native/issues/357)**: Resolved the request for `asChild` support on Card for pressable card patterns. The new `asChild` slot pattern on PressableFeedback and Surface enables developers to compose pressable card layouts by merging press handling and surface styling onto a single child element without additional wrapper nodes.
+
+**Related PRs:**
+
+- [#370](https://github.com/heroui-inc/heroui-native/pull/370)
+- [#380](https://github.com/heroui-inc/heroui-native/pull/380)
+
+## Documentation
+
+### RadioGroup Inline API Reference
+
+The [RadioGroup](/docs/native/components/radio-group) documentation now embeds full API reference tables for `Radio`, `Radio.Indicator`, and `Radio.IndicatorThumb` directly within the page. This removes the need for readers to navigate to a separate Radio doc file to understand the props available when composing radios inside a `RadioGroup.Item`.
+
+**Improvements:**
+
+- Full prop tables for `Radio`, `Radio.Indicator`, and `Radio.IndicatorThumb` embedded inline
+- Added documentation for `RadioRenderProps`, `RadioRootAnimation`, and `RadioIndicatorThumbAnimation` types
+- Replaced external markdown links with inline code formatting for consistency
+
+**Related PR:** [#384](https://github.com/heroui-inc/heroui-native/pull/384)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [RadioGroup](/docs/native/components/radio-group) - Inline API reference tables for Radio, Radio.Indicator, and Radio.IndicatorThumb
+- [PressableFeedback](/docs/native/components/pressable-feedback) - Added `asChild` prop documentation
+- [Surface](/docs/native/components/surface) - Added `asChild` prop documentation
+- [BottomSheet](/docs/native/components/bottom-sheet) - Added `unstable_accessibilityContainerViewIsModal` prop documentation
+- [Dialog](/docs/native/components/dialog) - Added `unstable_accessibilityContainerViewIsModal` prop documentation
+- [Menu](/docs/native/components/menu) - Added `unstable_accessibilityContainerViewIsModal` prop documentation
+- [Popover](/docs/native/components/popover) - Added `unstable_accessibilityContainerViewIsModal` prop documentation
+- [Select](/docs/native/components/select) - Added `unstable_accessibilityContainerViewIsModal` prop documentation
+- [Toast](/docs/native/components/toast) - Added `unstable_accessibilityContainerViewIsModal` prop documentation
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
