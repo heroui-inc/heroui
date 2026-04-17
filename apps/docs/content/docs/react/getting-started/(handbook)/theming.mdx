@@ -287,31 +287,29 @@ export function ThemeSwitch() {
 
 ### useTheme
 
-In case you're using plain React with Vite or Create React App, you can use the `useTheme` hook from `@heroui/react` to switch between themes. It persists the value in `localStorage`, sets `data-theme` and `class` on `<html>` to the selected name (`light`, `dark`, or a custom theme id), and applies the resolved `light` / `dark` class (including when `system` follows `prefers-color-scheme`) or your custom theme.
+In case you're using plain React with Vite or Create React App, you can use the `useTheme` hook from `@heroui/react` to switch between themes. It accepts any theme name (`"light"`, `"dark"`, `"brutalism-light"`, etc.). Pass `"system"` to follow the OS preference. It persists the value in `localStorage`, and sets both `data-theme` and `class` on `<html>` to the resolved theme name.
 
 ```tsx
 "use client";
 
-import { ThemeProps, useTheme } from "@heroui/react";
+import { useTheme } from "@heroui/react";
 
 export function ThemeSwitch() {
-  // The default theme is `ThemeProps.SYSTEM`
-  // Example: override the default system theme with a light theme
-  const { theme, setTheme } = useTheme(ThemeProps.LIGHT);
+  const { theme, setTheme } = useTheme("light");
 
   return (
     <div className="flex gap-2">
-      <button onClick={() => setTheme(ThemeProps.LIGHT)}>
+      <button onClick={() => setTheme("light")}>
         Light
       </button>
-      <button onClick={() => setTheme(ThemeProps.DARK)}>
+      <button onClick={() => setTheme("dark")}>
         Dark
       </button>
-      <button onClick={() => setTheme(ThemeProps.SYSTEM)}>
+      <button onClick={() => setTheme("system")}>
         System
       </button>
-      <button onClick={() => setTheme('your-custom-theme')}>
-        Custom Theme
+      <button onClick={() => setTheme("brutalism-light")}>
+        Brutalism Light
       </button>
       <span className="text-sm opacity-70">Current: {theme}</span>
     </div>
