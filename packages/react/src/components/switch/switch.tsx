@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {switchVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Switch as SwitchPrimitive} from "react-aria-components";
+import {Switch as SwitchPrimitive, LabelContext} from "react-aria-components";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
@@ -33,7 +33,11 @@ const SwitchRoot = ({children, className, size, ...props}: SwitchRootProps) => {
         {...props}
         className={composeTwRenderProps(className, slots.base())}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {(values) => (
+          <LabelContext.Provider value={{elementType: "span"}}>
+            {typeof children === "function" ? children(values) : children}
+          </LabelContext.Provider>
+        )}
       </SwitchPrimitive>
     </SwitchContext>
   );
