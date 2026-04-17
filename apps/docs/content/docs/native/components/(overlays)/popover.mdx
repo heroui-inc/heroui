@@ -1,6 +1,7 @@
 ---
 title: Popover
 description: Displays a floating content panel anchored to a trigger element with placement and alignment options.
+icon: updated
 links:
   source_native: popover/popover.tsx
   styles_native: popover/popover.styles.ts
@@ -340,6 +341,7 @@ Animation configuration for popover root component. Can be:
 | -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `children`                 | `ReactNode` | -       | The portal content (required)                                                                                                 |
 | `disableFullWindowOverlay` | `boolean`   | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
 | `hostName`                 | `string`    | -       | Optional name of the host element for the portal                                                                              |
 | `forceMount`               | `boolean`   | -       | Whether to force mount the component in the DOM                                                                               |
 | `className`                | `string`    | -       | Additional CSS classes for the portal container                                                                               |
