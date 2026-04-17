@@ -3,7 +3,7 @@
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ColorSwatchPickerVariants} from "@heroui/styles";
 import type {CSSProperties, ComponentPropsWithRef} from "react";
-import type {ColorSwatchPickerItemRenderProps} from "react-aria-components";
+import type {ColorSwatchPickerItemRenderProps} from "react-aria-components/ColorSwatchPicker";
 
 import {colorSwatchPickerVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -11,7 +11,7 @@ import {
   ColorSwatchPickerItem as ColorSwatchPickerItemPrimitive,
   ColorSwatchPicker as ColorSwatchPickerPrimitive,
   ColorSwatch as ColorSwatchPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/ColorSwatchPicker";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";

@@ -3,11 +3,12 @@
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ColorInputGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
-import type {InputProps as InputPrimitiveProps} from "react-aria-components";
+import type {InputProps as InputPrimitiveProps} from "react-aria-components/Input";
 
 import {colorInputGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Group as GroupPrimitive, Input as InputPrimitive} from "react-aria-components";
+import {Group as GroupPrimitive} from "react-aria-components/Group";
+import {Input as InputPrimitive} from "react-aria-components/Input";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";

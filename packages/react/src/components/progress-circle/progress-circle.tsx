@@ -3,11 +3,11 @@
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ProgressCircleVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
-import type {ProgressBarRenderProps} from "react-aria-components";
+import type {ProgressBarRenderProps} from "react-aria-components/ProgressBar";
 
 import {progressCircleVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {ProgressBar as ProgressBarPrimitive} from "react-aria-components";
+import {ProgressBar as ProgressBarPrimitive} from "react-aria-components/ProgressBar";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";

@@ -3,16 +3,16 @@
 import type {SurfaceVariants} from "../surface";
 import type {ColorPickerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {ColorPickerProps as ColorPickerPrimitiveProps} from "react-aria-components";
+import type {ColorPickerProps as ColorPickerPrimitiveProps} from "react-aria-components/ColorPicker";
 
 import {colorPickerVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
+import {ColorPicker as ColorPickerPrimitive} from "react-aria-components/ColorPicker";
 import {
-  Button as ButtonPrimitive,
-  ColorPicker as ColorPickerPrimitive,
   DialogTrigger as DialogTriggerPrimitive,
   Popover as PopoverPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Popover";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";

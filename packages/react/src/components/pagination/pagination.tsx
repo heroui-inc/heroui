@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {paginationVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Button as ButtonPrimitive} from "react-aria-components";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {composeTwRenderProps} from "../../utils";
 import {composeSlotClassName} from "../../utils/compose";

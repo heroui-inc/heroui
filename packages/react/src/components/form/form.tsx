@@ -3,7 +3,7 @@
 import type {ComponentPropsWithRef} from "react";
 
 import React from "react";
-import {Form as FormPrimitive} from "react-aria-components";
+import {Form as FormPrimitive} from "react-aria-components/Form";
 
 /* -------------------------------------------------------------------------------------------------
  * Form Root

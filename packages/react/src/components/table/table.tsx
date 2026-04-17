@@ -17,7 +17,7 @@ import {
   TableHeader as TableHeaderPrimitive,
   TableLoadMoreItem as TableLoadMoreItemPrimitive,
   Table as TablePrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Table";
 import {cx} from "tailwind-variants";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

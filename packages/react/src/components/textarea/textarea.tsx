@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {textAreaVariants} from "@heroui/styles";
 import React, {useContext} from "react";
-import {TextArea as TextAreaPrimitive} from "react-aria-components";
+import {TextArea as TextAreaPrimitive} from "react-aria-components/TextArea";
 
 import {composeTwRenderProps} from "../../utils";
 import {TextFieldContext} from "../textfield";

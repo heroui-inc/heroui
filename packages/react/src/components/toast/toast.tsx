@@ -1,20 +1,20 @@
 "use client";
 
-import type {ToastContentValue} from "./toast-queue";
+import type {StatelyToastQueue, ToastContentValue} from "./toast-queue";
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ToastVariants} from "@heroui/styles";
 import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
-import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components";
+import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
 import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
-  Text as TextPrimitive,
   UNSTABLE_ToastContent as ToastContentPrimitive,
   UNSTABLE_Toast as ToastPrimitive,
   UNSTABLE_ToastRegion as ToastRegionPrimitive,
   UNSTABLE_ToastStateContext as ToastStateContext,
-} from "react-aria-components";
+} from "react-aria-components/Toast";
 
 import {useMeasuredHeight, useMediaQuery} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
@@ -344,13 +344,13 @@ const ToastProvider = <T extends object = ToastContentValue>({
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [toastHeights, setToastHeights] = React.useState<Record<string, number>>({});
 
-  const toastQueue = useMemo(() => {
+  const toastQueue = useMemo((): StatelyToastQueue<T> => {
     if (queueProp) {
-      // Custom toast prop provided - use it (it already has its own maxVisibleToasts limit)
-      return "getQueue" in queueProp ? queueProp.getQueue() : queueProp;
+      // Region consumes the underlying react-stately queue, not the HeroUI wrapper.
+      return queueProp.getQueue();
     }
 
-    return defaultToastQueue.getQueue() as ToastQueue<T>;
+    return defaultToastQueue.getQueue() as StatelyToastQueue<T>;
   }, [queueProp]);
 
   const resolvedMaxVisibleToasts = useMemo(() => {

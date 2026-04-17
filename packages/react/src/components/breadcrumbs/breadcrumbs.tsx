@@ -9,7 +9,7 @@ import React, {createContext, useContext} from "react";
 import {
   Breadcrumb as BreadcrumbPrimitive,
   Breadcrumbs as BreadcrumbsPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Breadcrumbs";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronRight} from "../icons";

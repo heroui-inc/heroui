@@ -263,6 +263,16 @@
 }
 
 /* --------------------------------------------------------------------------
+   Tree / expandable rows — indent the tree column by depth (any level).
+   React Aria sets `--table-row-level` (1-based) on each body row and
+   `data-level` on cells; tree column cells expose `[data-tree-column]`.
+   The row custom property inherits onto cells (1rem per level).
+   -------------------------------------------------------------------------- */
+.table__cell[data-tree-column] {
+  padding-inline-start: calc(1rem * var(--table-row-level, 1));
+}
+
+/* --------------------------------------------------------------------------
    Table Footer (div outside <table>, sits on gray bg)
    -------------------------------------------------------------------------- */
 .table__footer {

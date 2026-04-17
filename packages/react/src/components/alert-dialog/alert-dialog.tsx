@@ -3,10 +3,8 @@
 import type {DOMRenderProps} from "../../utils/dom";
 import type {AlertDialogVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, HTMLAttributes, ReactNode} from "react";
-import type {
-  ButtonProps as ButtonPrimitiveProps,
-  DialogProps as DialogPrimitiveProps,
-} from "react-aria-components";
+import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components/Button";
+import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Dialog";
 
 import {alertDialogVariants} from "@heroui/styles";
 import {createContext, useContext, useMemo} from "react";
@@ -14,10 +12,12 @@ import {
   DialogTrigger as AlertDialogTriggerPrimitive,
   Dialog as DialogPrimitive,
   Heading as HeadingPrimitive,
+} from "react-aria-components/Dialog";
+import {
   ModalOverlay as ModalOverlayPrimitive,
   Modal as ModalPrimitive,
   Pressable as PressablePrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Modal";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";

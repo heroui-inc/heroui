@@ -6,11 +6,9 @@ import type {ComponentPropsWithRef} from "react";
 
 import {searchFieldVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {
-  Group as GroupPrimitive,
-  Input as InputPrimitive,
-  SearchField as SearchFieldPrimitive,
-} from "react-aria-components";
+import {Group as GroupPrimitive} from "react-aria-components/Group";
+import {Input as InputPrimitive} from "react-aria-components/Input";
+import {SearchField as SearchFieldPrimitive} from "react-aria-components/SearchField";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";

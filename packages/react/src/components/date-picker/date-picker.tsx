@@ -4,16 +4,16 @@ import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {DatePickerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {DateValue} from "react-aria-components";
+import type {DateValue} from "react-aria-components/Calendar";
 
 import {datePickerVariants} from "@heroui/styles";
 import {mergeRefs} from "@react-aria/utils";
 import React, {createContext, useContext, useEffect, useRef} from "react";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
-  Button as ButtonPrimitive,
   DatePicker as DatePickerPrimitive,
   Popover as PopoverPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/DatePicker";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

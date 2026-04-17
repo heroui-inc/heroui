@@ -4,7 +4,7 @@ import type {TextVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {textVariants} from "@heroui/styles";
-import {Text as TextPrimitive} from "react-aria-components";
+import {Text as TextPrimitive} from "react-aria-components/Text";
 
 /* -------------------------------------------------------------------------------------------------
  * Text Root

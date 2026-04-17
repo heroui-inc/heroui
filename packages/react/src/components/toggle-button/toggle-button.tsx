@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {toggleButtonVariants} from "@heroui/styles";
 import {useContext} from "react";
-import {ToggleButton as ToggleButtonPrimitive} from "react-aria-components";
+import {ToggleButton as ToggleButtonPrimitive} from "react-aria-components/ToggleButton";
 
 import {composeTwRenderProps} from "../../utils";
 import {ToggleButtonGroupContext} from "../toggle-button-group";

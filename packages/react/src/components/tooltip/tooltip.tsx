@@ -6,12 +6,12 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tooltipVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {Focusable as FocusablePrimitive} from "react-aria-components/Focusable";
 import {
-  Focusable as FocusablePrimitive,
   OverlayArrow,
   Tooltip as TooltipPrimitive,
   TooltipTrigger as TooltipTriggerPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Tooltip";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";

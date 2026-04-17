@@ -5,23 +5,23 @@ import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "../surface";
 import type {DrawerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
-import type {
-  ButtonProps as ButtonPrimitiveProps,
-  DialogProps as DialogPrimitiveProps,
-} from "react-aria-components";
+import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components/Button";
+import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Dialog";
 
 import {drawerVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
 import React, {createContext, useCallback, useContext, useMemo, useRef} from "react";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
-  Button as ButtonPrimitive,
   Dialog as DialogPrimitive,
   DialogTrigger as DrawerTriggerPrimitive,
   Heading as HeadingPrimitive,
+  OverlayTriggerStateContext,
+} from "react-aria-components/Dialog";
+import {
   ModalOverlay as ModalOverlayPrimitive,
   Modal as ModalPrimitive,
-  OverlayTriggerStateContext,
-} from "react-aria-components";
+} from "react-aria-components/Modal";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";

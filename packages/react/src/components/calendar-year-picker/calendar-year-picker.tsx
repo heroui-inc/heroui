@@ -7,7 +7,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import {calendarYearPickerVariants} from "@heroui/styles";
 import {useDateFormatter} from "@react-aria/i18n";
 import React from "react";
-import {Button as ButtonPrimitive} from "react-aria-components";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {getYearRange} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

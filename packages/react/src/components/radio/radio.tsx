@@ -2,11 +2,11 @@
 
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ComponentPropsWithRef, ReactNode} from "react";
-import type {RadioRenderProps} from "react-aria-components";
+import type {RadioRenderProps} from "react-aria-components/RadioGroup";
 
 import {radioVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Radio as RadioPrimitive} from "react-aria-components";
+import {Radio as RadioPrimitive} from "react-aria-components/RadioGroup";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
