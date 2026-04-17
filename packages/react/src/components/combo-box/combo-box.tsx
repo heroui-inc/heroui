@@ -3,16 +3,16 @@
 import type {SurfaceVariants} from "../surface";
 import type {ComboBoxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
-import type {ButtonProps} from "react-aria-components";
+import type {ButtonProps} from "react-aria-components/Button";
 
 import {comboBoxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {Button} from "react-aria-components/Button";
 import {
-  Button,
   ComboBox as ComboBoxPrimitive,
   ComboBoxStateContext,
   Popover as PopoverPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/ComboBox";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

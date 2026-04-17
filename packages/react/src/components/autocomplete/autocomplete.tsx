@@ -8,15 +8,15 @@ import type {ComponentPropsWithRef, RefObject} from "react";
 import {autocompleteVariants} from "@heroui/styles";
 import {mergeRefs, useResizeObserver} from "@react-aria/utils";
 import React, {createContext, useCallback, useContext, useRef, useState} from "react";
+import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
+import {Group as GroupPrimitive} from "react-aria-components/Group";
+import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
-  Autocomplete as AutocompletePrimitive,
-  Button as ButtonPrimitive,
-  Group as GroupPrimitive,
-  Popover as PopoverPrimitive,
   Select as SelectPrimitive,
   SelectStateContext,
   SelectValue as SelectValuePrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Select";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

@@ -2,11 +2,11 @@
 
 import type {MenuItemVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {MenuItemRenderProps} from "react-aria-components";
+import type {MenuItemRenderProps} from "react-aria-components/Menu";
 
 import {menuItemVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {MenuItem as MenuItemPrimitive} from "react-aria-components";
+import {MenuItem as MenuItemPrimitive} from "react-aria-components/Menu";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
 import {IconChevronRight} from "../icons";

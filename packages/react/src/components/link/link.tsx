@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {linkVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Link as LinkPrimitive} from "react-aria-components";
+import {Link as LinkPrimitive} from "react-aria-components/Link";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

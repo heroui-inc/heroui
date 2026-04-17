@@ -5,13 +5,13 @@ import type {ComponentPropsWithRef} from "react";
 
 import {tabsVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {SelectionIndicator as SelectionIndicatorPrimitive} from "react-aria-components/SelectionIndicator";
 import {
-  SelectionIndicator as SelectionIndicatorPrimitive,
   TabList as TabListPrimitive,
   TabPanel as TabPanelPrimitive,
   Tab as TabPrimitive,
   Tabs as TabsPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Tabs";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 

@@ -82,6 +82,15 @@ Enable row selection with `selectionMode` on `Table.Content`. Use `Checkbox` wit
   minHeight="420px"
 />
 
+### Expandable Rows
+
+Rows can be nested to display hierarchical data. Use the `treeColumn` prop to designate a column, and render a `Button` with `slot="chevron"` in that column’s cells so users can expand and collapse the row. Use the `expandedKeys` prop to control which rows are expanded.
+
+<ComponentPreview
+  name="table-expandable-rows"
+  minHeight="420px"
+/>
+
 ### Pagination
 
 Use `Table.Footer` to add a pagination component below the table.

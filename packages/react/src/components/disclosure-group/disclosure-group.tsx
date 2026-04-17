@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {disclosureGroupVariants} from "@heroui/styles";
 import React, {createContext} from "react";
-import {DisclosureGroup as DisclosureGroupPrimitive} from "react-aria-components";
+import {DisclosureGroup as DisclosureGroupPrimitive} from "react-aria-components/DisclosureGroup";
 
 import {composeTwRenderProps} from "../../utils/compose";
 

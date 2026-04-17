@@ -5,7 +5,10 @@ import type {ComponentPropsWithRef} from "react";
 
 import {tagGroupVariants} from "@heroui/styles";
 import React, {createContext, useContext, useMemo} from "react";
-import {TagGroup as TagGroupPrimitive, TagList as TagListPrimitive} from "react-aria-components";
+import {
+  TagGroup as TagGroupPrimitive,
+  TagList as TagListPrimitive,
+} from "react-aria-components/TagGroup";
 
 import {composeTwRenderProps} from "../../utils/compose";
 

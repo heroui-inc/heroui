@@ -3,14 +3,14 @@
 import type {CalendarVariants} from "@heroui/styles";
 import type {CalendarIdentifier} from "@internationalized/date";
 import type {ComponentPropsWithRef} from "react";
-import type {DateValue} from "react-aria-components";
+import type {DateValue} from "react-aria-components/Calendar";
 
 import {calendarVariants} from "@heroui/styles";
 import {CalendarDate, DateFormatter, createCalendar} from "@internationalized/date";
 import {useControlledState} from "@react-stately/utils";
 import React, {createContext, useContext} from "react";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
-  Button as ButtonPrimitive,
   CalendarCell as CalendarCellPrimitive,
   CalendarGridBody as CalendarGridBodyPrimitive,
   CalendarGridHeader as CalendarGridHeaderPrimitive,
@@ -19,8 +19,8 @@ import {
   Calendar as CalendarPrimitive,
   CalendarStateContext,
   Heading as HeadingPrimitive,
-  useLocale,
-} from "react-aria-components";
+} from "react-aria-components/Calendar";
+import {useLocale} from "react-aria-components/I18nProvider";
 
 import {getGregorianYearOffset} from "../../utils/calendar";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

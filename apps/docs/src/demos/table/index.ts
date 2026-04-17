@@ -6,6 +6,7 @@ export {EmptyStateDemo} from "./empty-state";
 export {ColumnResizing} from "./column-resizing";
 export {AsyncLoading} from "./async-loading";
 export {CustomCells} from "./custom-cells";
+export {ExpandableRows} from "./expandable-rows";
 export {PaginationDemo} from "./pagination";
 export {Virtualization} from "./virtualization";
 export {TanstackTable} from "./tanstack-table";

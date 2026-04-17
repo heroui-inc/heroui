@@ -7,13 +7,13 @@ import type {ComponentPropsWithRef} from "react";
 
 import {selectVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {Button as ButtonPrimitive} from "react-aria-components/Button";
+import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
-  Button as ButtonPrimitive,
-  Popover as PopoverPrimitive,
   Select as SelectPrimitive,
   SelectStateContext,
   SelectValue as SelectValuePrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Select";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

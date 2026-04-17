@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {inputVariants} from "@heroui/styles";
 import React, {useContext} from "react";
-import {Input as InputPrimitive} from "react-aria-components";
+import {Input as InputPrimitive} from "react-aria-components/Input";
 
 import {composeTwRenderProps} from "../../utils";
 import {ComboBoxContext} from "../combo-box";

@@ -2,11 +2,11 @@
 
 import type {ProgressBarVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {ProgressBarRenderProps} from "react-aria-components";
+import type {ProgressBarRenderProps} from "react-aria-components/ProgressBar";
 
 import {progressBarVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {ProgressBar as ProgressBarPrimitive} from "react-aria-components";
+import {ProgressBar as ProgressBarPrimitive} from "react-aria-components/ProgressBar";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 

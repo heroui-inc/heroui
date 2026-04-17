@@ -2,7 +2,7 @@
 
 import type {SliderVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
-import type {SliderRenderProps} from "react-aria-components";
+import type {SliderRenderProps} from "react-aria-components/Slider";
 
 import {sliderVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
@@ -11,7 +11,7 @@ import {
   Slider as SliderPrimitive,
   SliderThumb as SliderThumbPrimitive,
   SliderTrack as SliderTrackPrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Slider";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";

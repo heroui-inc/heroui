@@ -9,11 +9,13 @@ import React, {createContext, useContext} from "react";
 import {
   Dialog as DialogPrimitive,
   Heading as HeadingPrimitive,
+  DialogTrigger as PopoverTriggerPrimitive,
+} from "react-aria-components/Dialog";
+import {
   OverlayArrow,
   Popover as PopoverPrimitive,
-  DialogTrigger as PopoverTriggerPrimitive,
   Pressable as PressablePrimitive,
-} from "react-aria-components";
+} from "react-aria-components/Popover";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";

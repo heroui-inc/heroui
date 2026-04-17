@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {switchVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Switch as SwitchPrimitive} from "react-aria-components";
+import {Switch as SwitchPrimitive} from "react-aria-components/Switch";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 

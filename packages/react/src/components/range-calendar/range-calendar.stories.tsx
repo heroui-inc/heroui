@@ -11,7 +11,8 @@ import {
   today,
 } from "@internationalized/date";
 import React, {useState} from "react";
-import {I18nProvider, RangeCalendarStateContext, useLocale} from "react-aria-components";
+import {I18nProvider, useLocale} from "react-aria-components/I18nProvider";
+import {RangeCalendarStateContext} from "react-aria-components/RangeCalendar";
 
 import {Button} from "../button";
 import {ButtonGroup} from "../button-group";
