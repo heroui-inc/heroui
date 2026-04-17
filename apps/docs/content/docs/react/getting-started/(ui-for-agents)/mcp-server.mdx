@@ -133,6 +133,40 @@ After adding the configuration, open `.vscode/mcp.json` and click **Start** next
 
 See the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) for more details.
 
+### Codex
+
+Add the HeroUI server to your `~/.codex/config.toml` (or a project-scoped `.codex/config.toml`):
+
+```toml title="config.toml"
+[mcp_servers.heroui-react]
+command = "npx"
+args = ["-y", "@heroui/react-mcp@latest"]
+```
+
+After adding the configuration, restart Codex and run `/mcp` in the TUI to verify the server is active.
+
+See the [Codex MCP documentation](https://developers.openai.com/codex/mcp) for more details.
+
+### OpenCode
+
+Add the HeroUI server to your project's `opencode.json` configuration file:
+
+```json title="opencode.json"
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "heroui-react": {
+      "type": "local",
+      "command": ["npx", "-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+After adding the configuration, restart OpenCode to activate the MCP server.
+
+See the [OpenCode MCP documentation](https://open-code.ai/docs/en/mcp-servers) for more details.
+
 ## Usage
 
 Once configured, ask your AI assistant questions like:
