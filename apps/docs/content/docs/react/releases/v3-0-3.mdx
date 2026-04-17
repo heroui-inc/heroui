@@ -1,0 +1,123 @@
+---
+title: v3.0.3
+description: Bug fixes, React Aria Components 1.17.0 Upgrade, useTheme hook, Table with expandable rows and DOM polymorphic render-prop API for lightweight components.
+github:
+  pull: TBC
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">April 17, 2026</span>
+</div>
+
+Patch release: React Aria Components 1.17.0 Upgrade, the `useTheme` hook for Vite and CRA apps, Table with expandable rows, a DOM polymorphic utility for render-prop element swaps, and bug fixes for NumberField and Tabs.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### React Aria upgrade
+
+This release bumps React Aria Components to [v1.17.0](https://react-aria.adobe.com/releases/v1-17-0). Thanks to dependency consolidation, RAC has 90% fewer dependencies and speeds up builds. 
+
+Table also gains expandable rows for Finder-style trees: pick a `treeColumn` and render a chevron in those cells to expand and collapse child rows.
+
+<ComponentPreview
+  name="table-expandable-rows"
+/>
+
+### useTheme hook
+
+For plain React with Vite or Create React App (no Next.js theme provider), import `useTheme` from `@heroui/react`. It persists the choice in `localStorage`, writes `data-theme` and the theme id on `<html>` (`light`, `dark`, a custom id, or `system`), and applies the resolved `light` or `dark` class—including when `system` tracks `prefers-color-scheme`—or your custom theme.
+
+```tsx
+"use client";
+
+import { ThemeProps, useTheme } from "@heroui/react";
+
+export function ThemeSwitch() {
+  // The default theme is `ThemeProps.SYSTEM`
+  // Example: override the default system theme with a light theme
+  const { theme, setTheme } = useTheme(ThemeProps.LIGHT);
+
+  return (
+    <div className="flex gap-2">
+      <button onClick={() => setTheme(ThemeProps.LIGHT)}>
+        Light
+      </button>
+      <button onClick={() => setTheme(ThemeProps.DARK)}>
+        Dark
+      </button>
+      <button onClick={() => setTheme(ThemeProps.SYSTEM)}>
+        System
+      </button>
+      <button onClick={() => setTheme('your-custom-theme')}>
+        Custom Theme
+      </button>
+      <span className="text-sm opacity-70">Current: {theme}</span>
+    </div>
+  );
+}
+```
+
+### DOM polymorphic utility
+
+The DOM polymorphic helper lets lightweight components that are not built on React Aria primitives change their host element through a render prop.
+
+**Example:** rendering a Card component as `<button />`
+
+```tsx
+<Card<"button"> render={(props) => <button {...props} />} />
+```
+
+## Bug Fixes
+
+- **Tabs**: scope secondary-variant styles so nested tab groups no longer inherit the parent variant ([#6384](https://github.com/heroui-inc/heroui/pull/6384))
+
+## Dependencies
+
+- **React Aria Components**: Updated from `1.16.0` to `1.17.0`
+- **@react-aria/utils**: Updated from `3.33.1` to `3.34.0`
+- **@react-types/shared**: Updated from `3.33.1` to `3.34.0`
+- **@internationalized/date**: Updated from `3.12.0` to `3.12.1`
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #TBC](https://github.com/heroui-inc/heroui/pull/TBC)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
