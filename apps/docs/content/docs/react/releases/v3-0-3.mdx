@@ -61,25 +61,25 @@ For plain React with Vite or Create React App (no Next.js theme provider), impor
 ```tsx
 "use client";
 
-import { useTheme } from "@heroui/react";
+import { Button, useTheme } from "@heroui/react";
 
 export function ThemeSwitch() {
   const { theme, setTheme } = useTheme("light");
 
   return (
     <div className="flex gap-2">
-      <button onClick={() => setTheme("light")}>
+      <Button onPress={() => setTheme("light")}>
         Light
-      </button>
-      <button onClick={() => setTheme("dark")}>
+      </Button>
+      <Button onPress={() => setTheme("dark")}>
         Dark
-      </button>
-      <button onClick={() => setTheme("system")}>
+      </Button>
+      <Button onPress={() => setTheme("system")}>
         System
-      </button>
-      <button onClick={() => setTheme("brutalism-light")}>
+      </Button>
+      <Button onPress={() => setTheme("brutalism-light")}>
         Brutalism Light
-      </button>
+      </Button>
       <span className="text-sm opacity-70">Current: {theme}</span>
     </div>
   );
