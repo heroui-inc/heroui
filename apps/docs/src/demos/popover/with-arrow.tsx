@@ -18,7 +18,7 @@ export function PopoverWithArrow() {
       </Popover>
 
       <Popover>
-        <Button isIconOnly variant="tertiary">
+        <Button aria-label="More options" isIconOnly variant="tertiary">
           <Ellipsis />
         </Button>
         <Popover.Content className="max-w-64" offset={10}>

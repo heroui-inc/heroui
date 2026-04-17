@@ -12,7 +12,7 @@ export function TooltipBasic() {
       </Tooltip>
 
       <Tooltip delay={0}>
-        <Button isIconOnly variant="tertiary">
+        <Button aria-label="More information" isIconOnly variant="tertiary">
           <CircleInfo />
         </Button>
         <Tooltip.Content>

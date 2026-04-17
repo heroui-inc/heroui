@@ -164,7 +164,7 @@ export function CustomCells() {
                 <Table.Cell className="font-medium">
                   <div className="flex items-center gap-2">
                     #{user.id.toString()}{" "}
-                    <Button isIconOnly size="sm" variant="ghost">
+                    <Button aria-label={`Copy ID #${user.id}`} isIconOnly size="sm" variant="ghost">
                       <Icon className="size-4 text-muted" icon="gravity-ui:copy" />
                     </Button>
                   </div>
@@ -194,13 +194,13 @@ export function CustomCells() {
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex items-center gap-1">
-                    <Button isIconOnly size="sm" variant="tertiary">
+                    <Button aria-label={`View ${user.name}`} isIconOnly size="sm" variant="tertiary">
                       <Icon className="size-4" icon="gravity-ui:eye" />
                     </Button>
-                    <Button isIconOnly size="sm" variant="tertiary">
+                    <Button aria-label={`Edit ${user.name}`} isIconOnly size="sm" variant="tertiary">
                       <Icon className="size-4" icon="gravity-ui:pencil" />
                     </Button>
-                    <Button isIconOnly size="sm" variant="danger-soft">
+                    <Button aria-label={`Delete ${user.name}`} isIconOnly size="sm" variant="danger-soft">
                       <Icon className="size-4" icon="gravity-ui:trash-bin" />
                     </Button>
                   </div>
