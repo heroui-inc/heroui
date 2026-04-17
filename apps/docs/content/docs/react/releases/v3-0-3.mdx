@@ -1,6 +1,6 @@
 ---
 title: v3.0.3
-description: Apache 2.0 license, React Aria Components 1.17.0 Upgrade, useTheme hook, Table with expandable rows, DOM polymorphic render-prop API, and bug fixes.
+description: RAC 1.17 with 90% fewer deps, expandable Table rows, Apache 2.0 license, useTheme hook, DOM polymorphic render-prop API, and bug fixes.
 github:
   pull: 6441
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">April 17, 2026</span>
 </div>
 
-Patch release: Apache 2.0 license, React Aria Components 1.17.0 Upgrade, the `useTheme` hook for Vite and CRA apps, Table with expandable rows, a DOM polymorphic utility for render-prop element swaps, and bug fixes.
+Patch release: React Aria Components 1.17 with 90% fewer dependencies, expandable Table rows, Apache 2.0 license, the `useTheme` hook for Vite and CRA apps, a DOM polymorphic utility for render-prop element swaps, and bug fixes.
 
 ## Installation
 
@@ -44,11 +44,13 @@ Update to the latest version:
 
 ## What's New
 
-### React Aria upgrade
+### React Aria Components 1.17
 
-This release bumps React Aria Components to [v1.17.0](https://react-aria.adobe.com/releases/v1-17-0). Thanks to dependency consolidation, RAC has 90% fewer dependencies and speeds up builds. 
+This release upgrades React Aria Components to [v1.17.0](https://react-aria.adobe.com/releases/v1-17-0). The highlight: dependency consolidation drops **90% of RAC's transitive dependencies**, resulting in faster installs and builds. See the full [RAC 1.17 release notes](https://react-aria.adobe.com/releases/v1-17-0) for details.
 
-Table also gains expandable rows for Finder-style trees: pick a `treeColumn` and render a chevron in those cells to expand and collapse child rows.
+### Expandable Table rows
+
+Table now supports expandable rows for tree-style data. Set a `treeColumn` and render a chevron in those cells to expand and collapse child rows — perfect for file browsers, nested categories, and hierarchical data.
 
 <ComponentPreview
   name="table-expandable-rows"
@@ -106,7 +108,7 @@ HeroUI is now licensed under the [Apache License 2.0](https://www.apache.org/lic
 
 ## Dependencies
 
-- **React Aria Components**: Updated from `1.16.0` to `1.17.0`
+- **React Aria Components**: Updated from `1.16.0` to [`1.17.0`](https://react-aria.adobe.com/releases/v1-17-0)
 - **@react-aria/utils**: Updated from `3.33.1` to `3.34.0`
 - **@react-types/shared**: Updated from `3.33.1` to `3.34.0`
 - **@internationalized/date**: Updated from `3.12.0` to `3.12.1`
