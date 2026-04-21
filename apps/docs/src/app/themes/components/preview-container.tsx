@@ -93,8 +93,8 @@ export function PreviewContainer() {
         ref={container}
         id={THEME_BUILDER_CONTENT_ID}
         className={cn(
-          "flex w-full flex-1 bg-background px-4 py-8 font-sans xl:px-5 xl:py-7",
-          isComponentsTab ? "min-h-full" : "h-full items-center lg:p-0 lg:pb-0!",
+          "flex w-full flex-1 bg-background font-sans",
+          isComponentsTab ? "min-h-full px-4 py-8" : "h-full items-center p-0",
         )}
       >
         {/* Mobile: always show DemoComponents */}
