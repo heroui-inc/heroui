@@ -45,7 +45,7 @@ export const iframeTabs: Record<string, string> = {
   chat: `${HEROUI_PRO_URL}/templates/chat`,
   dashboard: `${HEROUI_PRO_URL}/templates/dashboard`,
   finances: `${HEROUI_PRO_URL}/templates/finances`,
-  mail: `${HEROUI_PRO_URL}/templates/mail`,
+  mail: `${HEROUI_PRO_URL}/templates/email`,
 };
 
 /**
