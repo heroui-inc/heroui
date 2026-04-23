@@ -9,14 +9,14 @@ export function Controlled() {
 
   return (
     <div className="flex w-full max-w-64 flex-col gap-4">
-      <TextField name="name" onChange={setName}>
+      <TextField name="name" value={name} onChange={setName}>
         <Label>Display name</Label>
-        <Input placeholder="Jane" value={name} />
+        <Input placeholder="Jane" />
         <Description>Characters: {name.length}</Description>
       </TextField>
-      <TextField name="bio" onChange={setBio}>
+      <TextField name="bio" value={bio} onChange={setBio}>
         <Label>Bio</Label>
-        <TextArea placeholder="Tell us about yourself..." value={bio} />
+        <TextArea placeholder="Tell us about yourself..." />
         <Description>Characters: {bio.length} / 200</Description>
       </TextField>
     </div>

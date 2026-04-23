@@ -12,9 +12,15 @@ export function Validation() {
 
   return (
     <div className="flex w-full max-w-64 flex-col gap-4">
-      <TextField isRequired isInvalid={isUsernameInvalid} name="username" onChange={setUsername}>
+      <TextField
+        isRequired
+        isInvalid={isUsernameInvalid}
+        name="username"
+        value={username}
+        onChange={setUsername}
+      >
         <Label>Username</Label>
-        <Input placeholder="jane_doe" value={username} />
+        <Input placeholder="jane_doe" />
         {isUsernameInvalid ? (
           <FieldError>Username must be at least 3 characters.</FieldError>
         ) : (
@@ -22,9 +28,9 @@ export function Validation() {
         )}
       </TextField>
 
-      <TextField isRequired isInvalid={isBioInvalid} name="bio" onChange={setBio}>
+      <TextField isRequired isInvalid={isBioInvalid} name="bio" value={bio} onChange={setBio}>
         <Label>Bio</Label>
-        <TextArea placeholder="Tell us about yourself..." value={bio} />
+        <TextArea placeholder="Tell us about yourself..." />
         {isBioInvalid ? (
           <FieldError>Bio must contain at least 20 characters.</FieldError>
         ) : (

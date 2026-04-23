@@ -172,18 +172,14 @@ export const Controlled: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <TextField name="name" onChange={setInputValue}>
+        <TextField name="name" value={inputValue} onChange={setInputValue}>
           <Label>Your name</Label>
-          <Input className="w-[280px]" placeholder="John" value={inputValue} />
+          <Input className="w-[280px]" placeholder="John" />
           <Description>Character count: {inputValue.length}</Description>
         </TextField>
-        <TextField name="bio" onChange={setTextAreaValue}>
+        <TextField name="bio" value={TextAreaValue} onChange={setTextAreaValue}>
           <Label>Your bio</Label>
-          <TextArea
-            className="w-[280px]"
-            placeholder="Tell us about yourself..."
-            value={TextAreaValue}
-          />
+          <TextArea className="w-[280px]" placeholder="Tell us about yourself..." />
           <Description>Character count: {TextAreaValue.length} / 500</Description>
         </TextField>
       </div>
@@ -200,18 +196,24 @@ export const WithValidation: Story = {
 
     return (
       <div className="flex flex-col gap-4">
-        <TextField isRequired isInvalid={isUsernameInvalid} name="username" onChange={setUsername}>
+        <TextField
+          isRequired
+          isInvalid={isUsernameInvalid}
+          name="username"
+          value={username}
+          onChange={setUsername}
+        >
           <Label>Username</Label>
-          <Input className="w-[280px]" placeholder="john_doe" value={username} />
+          <Input className="w-[280px]" placeholder="john_doe" />
           {isUsernameInvalid ? (
             <FieldError>Username must be at least 3 characters</FieldError>
           ) : (
             <Description>Choose a unique username</Description>
           )}
         </TextField>
-        <TextField isRequired isInvalid={isBioInvalid} name="bio" onChange={setBio}>
+        <TextField isRequired isInvalid={isBioInvalid} name="bio" value={bio} onChange={setBio}>
           <Label>Bio</Label>
-          <TextArea className="w-[280px]" placeholder="Tell us about yourself..." value={bio} />
+          <TextArea className="w-[280px]" placeholder="Tell us about yourself..." />
           {isBioInvalid ? (
             <FieldError>Bio must be at least 20 characters</FieldError>
           ) : (
