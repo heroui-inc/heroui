@@ -101,7 +101,7 @@ export function HeaderBanner() {
   return (
     <a
       className="flex h-8 w-full items-center justify-center gap-1.5 bg-surface-secondary transition-colors hover:bg-surface-secondary/80"
-      href={`${PRO_URL}?utm_source=heroui.com&utm_medium=banner&utm_campaign=presale`}
+      href={`${PRO_URL}?utm_source=heroui.com&utm_medium=banner&utm_campaign=launch_discount`}
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -109,7 +109,7 @@ export function HeaderBanner() {
         Pro
       </span>
       <span className="hidden text-xs font-medium text-foreground sm:inline">
-        Pre-sale is live!
+        Launch discount is live!
       </span>
       <span className="text-xs font-medium text-foreground">
         <span className="tabular-nums">{percent}%</span> off
@@ -324,11 +324,11 @@ export function ProBanner() {
           <div className="flex flex-col gap-3 p-4">
             <div className="flex flex-col gap-1.5">
               <h3 className="text-base font-semibold text-foreground">
-                HeroUI Pro pre-sale is live!
+                HeroUI Pro launch discount is live!
               </h3>
               <p className="text-sm leading-relaxed text-muted">
                 More components, charts, advanced MCP &amp; Skills, and a complete theme builder.
-                Get your license now at a better price before launch.
+                Get your license now at a discounted price for a limited time.
               </p>
             </div>
             <div className="flex items-center gap-2 pt-1">
@@ -336,7 +336,7 @@ export function ProBanner() {
                 Close
               </Button>
               <a
-                href={`${PRO_URL}?utm_source=heroui.com&utm_medium=pro_banner&utm_campaign=presale`}
+                href={`${PRO_URL}?utm_source=heroui.com&utm_medium=pro_banner&utm_campaign=launch_discount`}
                 rel="noopener noreferrer"
                 target="_blank"
                 className={buttonVariants({
