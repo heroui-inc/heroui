@@ -5,7 +5,7 @@ import type {Item, Node} from "fumadocs-core/page-tree";
 import type {SearchItemType, SharedProps} from "fumadocs-ui/components/dialog/search";
 import type {ComponentProps} from "react";
 
-import {Kbd, Tag, TagGroup} from "@heroui/react";
+import {Chip, Kbd, Tag, TagGroup} from "@heroui/react";
 import {useDocsSearch} from "fumadocs-core/search/client";
 import {
   SearchDialog,
@@ -20,7 +20,7 @@ import {useI18n} from "fumadocs-ui/contexts/i18n";
 import {useTreeContext} from "fumadocs-ui/contexts/tree";
 import {ArrowRight} from "lucide-react";
 import {usePathname, useRouter} from "next/navigation";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {tv} from "tailwind-variants";
 
 // Default suggested pages for each tag
@@ -41,6 +41,68 @@ const DEFAULT_SUGGESTIONS: Record<"native" | "web", string[]> = {
     "/docs/react/getting-started/theming",
   ],
 };
+
+const PRO_URL = process.env["NEXT_PUBLIC_PRO_URL"] ?? "https://heroui.pro";
+const PRO_SEARCH_DEBOUNCE_MS = 150;
+
+interface ProComponent {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+}
+
+function useProSearch(query: string, tag: "web" | "native") {
+  const [results, setResults] = useState<ProComponent[]>([]);
+  const abortRef = useRef<AbortController | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const fetchResults = useCallback(
+    (q: string) => {
+      abortRef.current?.abort();
+
+      if (!q) {
+        setResults([]);
+
+        return;
+      }
+
+      const controller = new AbortController();
+
+      abortRef.current = controller;
+
+      fetch(`${PRO_URL}/docs/api/pro-components/search?q=${encodeURIComponent(q)}&tag=${tag}`, {
+        signal: controller.signal,
+      })
+        .then((res) => (res.ok ? res.json() : {results: []}))
+        .then((data: {results: ProComponent[]}) => {
+          if (!controller.signal.aborted) {
+            setResults(data.results);
+          }
+        })
+        .catch(() => {
+          // aborted or network error — ignore
+        });
+    },
+    [tag],
+  );
+
+  useEffect(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    timerRef.current = setTimeout(() => fetchResults(query), PRO_SEARCH_DEBOUNCE_MS);
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [query, fetchResults]);
+
+  useEffect(() => {
+    return () => abortRef.current?.abort();
+  }, []);
+
+  return results;
+}
 
 const tagStyles = tv({
   base: "bg-default/80 px-2 data-[selected=true]:bg-accent-soft data-[selected=true]:text-accent",
@@ -184,6 +246,27 @@ export default function CustomSearchDialog(props: SharedProps) {
     }
   }
 
+  const proComponents = useProSearch(search, selectedTag);
+
+  const proResults: SearchItemType[] = useMemo(() => {
+    if (search.length === 0) return [];
+
+    return proComponents.map((comp) => ({
+      id: `pro-${comp.slug}`,
+      node: (
+        <div className="inline-flex w-full items-center gap-2">
+          <ArrowRight className="text-fd-muted-foreground size-4" />
+          <p className="truncate">{comp.title}</p>
+          <Chip className="ml-auto shrink-0" color="accent" size="sm" variant="soft">
+            PRO
+          </Chip>
+        </div>
+      ),
+      onSelect: () => window.open(`${PRO_URL}${comp.slug}`, "_blank"),
+      type: "action" as const,
+    }));
+  }, [proComponents, search]);
+
   const releasesPath = useMemo(() => {
     return `/docs/${selectedTag === "web" ? "react" : "native"}/releases`;
   }, [selectedTag]);
@@ -243,9 +326,10 @@ export default function CustomSearchDialog(props: SharedProps) {
               ? defaultSuggestions.length > 0
                 ? defaultSuggestions
                 : null
-              : queryData || pageTreeAction
+              : queryData || pageTreeAction || proResults.length > 0
                 ? [
                     ...(pageTreeAction ? [pageTreeAction] : []),
+                    ...proResults,
                     ...(Array.isArray(queryData) ? queryData : []),
                   ]
                 : null
