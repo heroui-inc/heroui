@@ -262,7 +262,11 @@ export default function CustomSearchDialog(props: SharedProps) {
           </Chip>
         </div>
       ),
-      onSelect: () => window.open(`${PRO_URL}${comp.slug}`, "_blank"),
+      onSelect: () =>
+        window.open(
+          `${PRO_URL}${comp.slug}?utm_source=heroui_docs&utm_medium=search&utm_campaign=pro_components`,
+          "_blank",
+        ),
       type: "action" as const,
     }));
   }, [proComponents, search]);
