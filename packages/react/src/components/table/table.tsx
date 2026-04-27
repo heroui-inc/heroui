@@ -3,9 +3,14 @@
 import type {DOMRenderProps} from "../../utils/dom";
 import type {TableVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {CollectionRenderer} from "react-aria-components/CollectionBuilder";
 
 import {tableVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {
+  CollectionRendererContext,
+  DefaultCollectionRenderer,
+} from "react-aria-components/CollectionBuilder";
 import {
   Cell as CellPrimitive,
   Collection as CollectionPrimitive,
@@ -22,6 +27,30 @@ import {cx} from "tailwind-variants";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+
+/* -------------------------------------------------------------------------------------------------
+ * DivTableProvider — Forces RAC Table components to render <div> elements with ARIA roles
+ * instead of native <table>/<tr>/<td> elements, by setting isVirtualized in the
+ * CollectionRendererContext. When a real Virtualizer is already present (isVirtualized
+ * is already true), this provider is a no-op to avoid overriding the Virtualizer's
+ * CollectionRoot.
+ * -----------------------------------------------------------------------------------------------*/
+const divCollectionRenderer: CollectionRenderer = {
+  ...DefaultCollectionRenderer,
+  isVirtualized: true,
+};
+
+function DivTableProvider({children}: {children: ReactNode}) {
+  const existing = useContext(CollectionRendererContext);
+
+  if (existing.isVirtualized) {
+    return children;
+  }
+
+  return (
+    <CollectionRendererContext value={divCollectionRenderer}>{children}</CollectionRendererContext>
+  );
+}
 
 /* -------------------------------------------------------------------------------------------------
  * Table Context
@@ -103,11 +132,13 @@ function TableContent({className, ...props}: TableContentProps) {
   const {slots} = useContext(TableContext);
 
   return (
-    <TablePrimitive
-      className={composeTwRenderProps(className, slots?.content())}
-      data-slot="table-content"
-      {...props}
-    />
+    <DivTableProvider>
+      <TablePrimitive
+        className={composeTwRenderProps(className, slots?.content())}
+        data-slot="table-content"
+        {...props}
+      />
+    </DivTableProvider>
   );
 }
 
@@ -139,7 +170,7 @@ function TableHeader<T extends object>({className, ...props}: TableHeaderProps<T
  * -----------------------------------------------------------------------------------------------*/
 interface TableColumnProps extends ComponentPropsWithRef<typeof ColumnPrimitive> {}
 
-const TableColumn = React.forwardRef<HTMLTableCellElement, TableColumnProps>(
+const TableColumn = React.forwardRef<HTMLDivElement, TableColumnProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(TableContext);
 
@@ -201,20 +232,18 @@ function TableRow<T extends object>({className, ...props}: TableRowProps<T>) {
  * -----------------------------------------------------------------------------------------------*/
 interface TableCellProps extends ComponentPropsWithRef<typeof CellPrimitive> {}
 
-const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableCell = React.forwardRef<HTMLDivElement, TableCellProps>(({className, ...props}, ref) => {
+  const {slots} = useContext(TableContext);
 
-    return (
-      <CellPrimitive
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.cell())}
-        data-slot="table-cell"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <CellPrimitive
+      ref={ref}
+      className={composeTwRenderProps(className, slots?.cell())}
+      data-slot="table-cell"
+      {...props}
+    />
+  );
+});
 
 TableCell.displayName = "HeroUI.Table.Cell";
 
@@ -294,13 +323,13 @@ TableColumnResizer.displayName = "HeroUI.Table.ColumnResizer";
  * -----------------------------------------------------------------------------------------------*/
 interface TableLoadMoreItemProps extends ComponentPropsWithRef<typeof TableLoadMoreItemPrimitive> {}
 
-const TableLoadMoreItem = React.forwardRef<HTMLTableRowElement, TableLoadMoreItemProps>(
+const TableLoadMoreItem = React.forwardRef<HTMLDivElement, TableLoadMoreItemProps>(
   ({className, ...props}, ref) => {
     const {slots} = useContext(TableContext);
 
     return (
       <TableLoadMoreItemPrimitive
-        ref={ref}
+        ref={ref as React.Ref<HTMLTableRowElement>}
         className={composeSlotClassName(slots?.loadMore, className)}
         data-slot="table-load-more"
         {...props}
