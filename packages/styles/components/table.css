@@ -37,8 +37,12 @@
     align-items: center;
   }
 
-  &:has(.table__body [aria-colspan]) .table__header > [role="row"] {
-    align-items: start;
+  &:has(.table__body [aria-colspan]) {
+    grid-template-rows: auto 1fr;
+
+    & .table__header > [role="row"] {
+      align-items: start;
+    }
   }
 
   & .table__body {
