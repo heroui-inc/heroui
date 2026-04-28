@@ -58,6 +58,11 @@ export const homeLayoutLinks = [
   {
     items: [
       {
+        icon: <Iconify icon="pen-line" />,
+        text: "Blog",
+        url: "/blog",
+      },
+      {
         external: true,
         icon: <Iconify icon="figma" />,
         text: "Figma",
@@ -95,7 +100,12 @@ export const homeLayoutLinks = [
   {
     active: "nested-url" as const,
     on: "nav" as const,
-    text: "React Native",
+    text: (
+      <>
+        <span className="md:hidden">Native</span>
+        <span className="hidden md:inline">React Native</span>
+      </>
+    ),
     url: "/docs/native/getting-started",
   },
   // {
@@ -104,6 +114,12 @@ export const homeLayoutLinks = [
   //   text: "Showcase",
   //   url: "/showcase",
   // },
+  {
+    active: "nested-url" as const,
+    on: "nav" as const,
+    text: "Blog",
+    url: "/blog",
+  },
   {
     children: <ExternalLink href="https://herouiv3.featurebase.app/roadmap">Roadmap</ExternalLink>,
     on: "nav" as const,

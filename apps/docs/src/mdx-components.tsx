@@ -21,6 +21,7 @@ import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {VideoPlayer} from "./components/video-player";
+import {getComponentCount, getExampleCount} from "./demos";
 import {FumadocsCustomCodeblock as CodeBlock} from "./mdx-components/fumadocs-custom-codeblock";
 import {PackageManagers} from "./mdx-components/package-managers";
 import {cn} from "./utils/cn";
@@ -34,6 +35,14 @@ const X = (props: any) => <Iconify {...props} icon="xmark" />;
 const Star = (props: any) => <Iconify {...props} icon="star-fill" />;
 
 const Icon = (props: any) => <Iconify {...props} />;
+
+function ComponentCount() {
+  return <>{getComponentCount()}</>;
+}
+
+function ExampleCount() {
+  return <>{getExampleCount()}</>;
+}
 
 const MAX_LINES_FOR_LINE_NUMBERS = 20;
 
@@ -105,10 +114,12 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CodeBlock,
     CollapsibleCode,
     ComponentCard,
+    ComponentCount,
     ComponentGrid,
     ComponentPreview,
     ComponentsCategory,
     DocsImage,
+    ExampleCount,
     Icon,
     Info,
     Link,

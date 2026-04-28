@@ -19,6 +19,7 @@ import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
+import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {
@@ -68,17 +69,46 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   // Fetch PR contributors if github info is available
   const contributors = githubInfo?.pull ? await fetchPRContributors(githubInfo.pull) : undefined;
 
+  const slugParts = params.slug ?? [];
+  const pageUrl = `/docs/${slugParts.join("/")}`;
+
+  const breadcrumbItems = [
+    {name: "Home", url: "https://heroui.com"},
+    {name: "Docs", url: "https://heroui.com/docs"},
+    ...slugParts.map((segment, i) => ({
+      name: segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
+      url: `https://heroui.com/docs/${slugParts.slice(0, i + 1).join("/")}`,
+    })),
+  ];
+
   return (
-    <DocsPage
-      full={page.data.full}
-      toc={page.data.toc}
-      // TODO: add github last edit
-      // lastUpdate={lastEditTime}
-      tableOfContent={{
-        footer: <NewsletterForm />,
-        style: "normal",
-      }}
-    >
+    <>
+      <script
+        dangerouslySetInnerHTML={{__html: JSON.stringify(getBreadcrumbJsonLd(breadcrumbItems))}}
+        type="application/ld+json"
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            getTechArticleJsonLd({
+              title: page.data.title,
+              description: page.data.description ?? "",
+              url: `https://heroui.com${pageUrl}`,
+            }),
+          ),
+        }}
+        type="application/ld+json"
+      />
+      <DocsPage
+        full={page.data.full}
+        toc={page.data.toc}
+        // TODO: add github last edit
+        // lastUpdate={lastEditTime}
+        tableOfContent={{
+          footer: <NewsletterForm />,
+          style: "normal",
+        }}
+      >
       <section className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <DocsTitle className="flex items-center gap-2">
@@ -109,6 +139,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
         />
       </DocsBody>
     </DocsPage>
+    </>
   );
 }
 
@@ -130,10 +161,18 @@ export async function generateMetadata(props: {
   // Ensure absolute URL for Open Graph
   const imageUrl = image.startsWith("http") ? image : new URL(image, siteConfig.siteUrl).toString();
 
+  const url = `/docs/${(params.slug ?? []).join("/")}`;
+
   return {
+    alternates: {
+      canonical: url,
+    },
     description: page.data.description,
     openGraph: {
+      description: page.data.description,
       images: imageUrl,
+      title: page.data.title,
+      url,
     },
     title: page.data.title,
     twitter: {

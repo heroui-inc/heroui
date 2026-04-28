@@ -1,0 +1,188 @@
+---
+title: Why HeroUI
+description: Why teams choose HeroUI as their React component library. Built on React Aria and Tailwind CSS v4, HeroUI delivers accessible, beautiful components with AI-native developer tooling.
+icon: heart
+---
+
+HeroUI is an open-source React UI library that combines enterprise-grade accessibility, modern styling, and AI-native tooling into a single cohesive package. Originally launched as NextUI in 2021, it has been adopted by thousands of developers and teams worldwide. With v3, the library has been rebuilt from the ground up for React 19, Tailwind CSS v4, and the era of AI-assisted development.
+
+There are many React component libraries available today — MUI, Ant Design, shadcn/ui, Radix, Mantine, and others. Each has real strengths. This page explains what makes HeroUI different and where it fits in that landscape.
+
+## Built on the best foundations
+
+HeroUI doesn't reinvent the wheel. It builds on battle-tested open-source projects and adds a polished, opinionated layer on top.
+
+### React Aria Components (Adobe)
+
+Every HeroUI component is built on [React Aria](https://react-spectrum.adobe.com/react-aria/), Adobe's accessibility primitives used in production across Adobe's own product suite. This gives you WCAG 2.1 AA compliance out of the box:
+
+- Correct ARIA roles, states, and properties on every component
+- Full keyboard navigation — tab order, arrow keys, escape to close, enter to confirm
+- Screen reader announcements for dynamic content, loading states, and selection changes
+- Focus management across modals, popovers, and complex composite widgets
+- Right-to-left (RTL) layout support and internationalized date/number formatting
+
+You don't need to audit accessibility after building your UI. It's handled at the foundation layer.
+
+### Tailwind CSS v4
+
+Styles are powered by the latest version of Tailwind CSS with zero runtime overhead. Unlike CSS-in-JS libraries like MUI or Chakra UI, HeroUI's styles are resolved entirely at build time — no style injection at runtime, no hydration mismatch issues, no flash of unstyled content.
+
+HeroUI's styling system uses BEM-structured CSS classes generated through [Tailwind Variants](https://www.tailwind-variants.org/), which means you can customize any component at any level: override CSS variables for global changes, apply Tailwind utilities for one-off tweaks, or extend variant functions for systematic customization.
+
+### React 19 compatible
+
+HeroUI v3 is designed for modern React. Server components work without client boundary wrappers. There's no context provider wrapping your app, no client-only dependencies forced on your entire tree. Components that need interactivity are properly marked as client components internally — your pages stay as lean as possible.
+
+### Full TypeScript
+
+Every component, every prop, every hook, every event handler is fully typed. IntelliSense and auto-completion work everywhere. If it compiles, the props are correct. Generic components like `Select` and `Table` propagate your data types through to render functions and event callbacks.
+
+## Beautiful by default
+
+Most component libraries give you unstyled or minimally styled building blocks and expect you to make them look good. HeroUI takes the opposite approach: components look polished and professional from the first render.
+
+- **Production-ready design** — Buttons, inputs, modals, tables, and every other component ship with carefully crafted styles. No extra CSS or design tweaking required to look professional.
+- **Smooth animations** — Interactive components include physics-based, GPU-accelerated CSS animations. Accordions expand fluidly. Tooltips fade in with easing. Menus transition smoothly. All without Framer Motion or any JavaScript animation runtime.
+- **Theming built in** — Dark mode, light mode, and fully custom themes are supported through CSS variables. Switch themes with a single class. Customize colors, radii, spacing, and typography globally or per-component.
+- **Consistent design language** — Every component shares the same spacing scale, color system, border radii, and interaction patterns. Your UI looks cohesive without extra effort.
+
+While copy-paste approaches like shadcn/ui give you full control over source code, they also give you full responsibility for design consistency, accessibility, animation, and maintenance across every component you copy. HeroUI gives you that same level of customizability through its styling system — BEM classes, CSS variables, Tailwind Variants — while maintaining a consistent, tested, and upgradeable baseline across your entire UI.
+
+## Developer experience
+
+HeroUI is designed to be fast to learn and fast to use.
+
+### Compound component API
+
+Components use a composable, dot-notation API that reads like the UI it produces:
+
+```tsx
+import { Card } from "@heroui/react";
+
+<Card>
+  <Card.Header>
+    <Card.Title>Team Plan</Card.Title>
+    <Card.Description>For growing teams</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    <p>$29/month per seat</p>
+  </Card.Content>
+  <Card.Footer>
+    <Button variant="primary">Upgrade</Button>
+  </Card.Footer>
+</Card>
+```
+
+This approach is more readable and flexible than single-component APIs with dozens of props. You compose what you need, omit what you don't, and rearrange parts freely. Both dot notation (`Card.Header`) and named exports (`CardHeader`) are supported — use whichever style your team prefers.
+
+### Semantic variants
+
+Components use semantic variant names — `primary`, `secondary`, `tertiary`, `danger` — instead of visual descriptions like `solid`, `bordered`, or `flat`. This makes your code self-documenting: `variant="primary"` communicates intent (this is the main action), not appearance (this button is solid blue).
+
+### No Provider wrapper
+
+There's no `<HeroUIProvider>` wrapping your app. Import a component and use it. That's the entire setup — besides adding the CSS import to your stylesheet.
+
+```tsx
+import { Button } from "@heroui/react";
+
+export default function Page() {
+  return <Button variant="primary">Get Started</Button>;
+}
+```
+
+### Styles separate from logic
+
+The style layer (`@heroui/styles`) is a standalone package. You can use HeroUI's CSS classes with plain HTML, server-rendered templates, or any framework — not just React. This also means you can adopt HeroUI's design system incrementally, one component at a time, in an existing project.
+
+### Tree-shakeable
+
+Import only what you use. Unused components are automatically excluded from your bundle. Your production build only includes the code your app actually needs.
+
+### Framework agnostic
+
+HeroUI works with any React framework or build tool:
+
+- **Next.js** (App Router and Pages Router)
+- **Remix**
+- **Vite** (React, React + SWC)
+- **Astro**
+- **Any React 19+ environment**
+
+## AI-native development
+
+This is where HeroUI is genuinely different from every other React component library. HeroUI is the first component library designed specifically for AI-assisted development, with four dedicated integration points for AI tools.
+
+### MCP Server
+
+The [`@heroui/react-mcp`](https://www.npmjs.com/package/@heroui/react-mcp) package is a [Model Context Protocol](https://modelcontextprotocol.io/) server that gives AI assistants deep, structured knowledge of HeroUI. When connected, your AI assistant can:
+
+- Look up any component's props, variants, slots, and events
+- Read your project's theme configuration and design tokens
+- Access example code for every component pattern
+- Understand compound component relationships (e.g., which sub-components belong to `Card`)
+
+The result: AI generates correct HeroUI code on the first try — right components, right props, right patterns. No hallucinated APIs.
+
+### llms.txt
+
+HeroUI publishes structured [llms.txt](/docs/react/getting-started/llms-txt) files following the [llms.txt standard](https://llmstxt.org/) — machine-readable documentation that any LLM or AI tool can consume. This includes full API references, usage examples, and component relationships in a format optimized for language model context windows.
+
+### Agent Skills
+
+Installable knowledge packs for [Cursor, Claude Code, and other AI coding assistants](/docs/react/getting-started/agent-skills). Agent Skills give your AI editor deep familiarity with HeroUI's patterns, compound component conventions, styling system, and best practices. Instead of generating generic React code and hoping it works, your AI writes idiomatic HeroUI code that follows the library's conventions.
+
+### AGENTS.md
+
+HeroUI provides [AGENTS.md](/docs/react/getting-started/agents-md) files — a convention that AI coding agents (like Claude Code, Codex, and Cursor background agents) read automatically when they enter a repository. These files describe project structure, coding standards, testing expectations, and component patterns. AI agents working in your codebase follow HeroUI's conventions from their first edit.
+
+### Why AI integration matters
+
+Most React UI libraries were built before AI-assisted coding became mainstream. Their documentation exists as HTML pages designed for human reading — not structured data designed for machine consumption. When an AI assistant encounters these libraries, it relies on training data that may be months or years out of date, leading to hallucinated props, deprecated patterns, and incorrect usage.
+
+HeroUI takes a fundamentally different approach. By providing AI tools with structured, up-to-date, authoritative documentation through MCP, llms.txt, Agent Skills, and AGENTS.md, HeroUI ensures that AI assistants always have access to the current API surface. The practical impact: fewer round-trips to fix AI-generated code, fewer "that prop doesn't exist" errors, and a dramatically faster development loop when working with AI.
+
+## Production ready
+
+HeroUI is not a new experiment. It's a mature project with a track record.
+
+- **Established since 2021** — Originally NextUI, adopted by thousands of developers and teams across startups, agencies, and enterprises.
+- **Active development** — Regular releases with a transparent, public [roadmap](https://herouiv3.featurebase.app/roadmap). Breaking changes are documented and migration paths are provided.
+- **Community** — Active Discord server with thousands of members, GitHub discussions, and a growing ecosystem of contributors.
+- **Figma design kit** — A [community Figma file](https://www.figma.com/community/file/1546526812159103429) for design-to-code workflows, so designers and developers work from the same source of truth.
+- **HeroUI Pro** — For teams that need more, [HeroUI Pro](/pro) offers premium components for dashboards, complex data tables, advanced charts, multi-step forms, file uploaders, and other patterns that production applications demand.
+
+## Who uses HeroUI
+
+HeroUI is used across a wide range of React applications:
+
+- **SaaS products** — Admin dashboards, settings panels, onboarding flows, billing pages
+- **E-commerce** — Product catalogs, checkout flows, inventory management, order tracking
+- **Marketing sites** — Landing pages, pricing pages, feature showcases, documentation sites
+- **Internal tools** — Data tables, form builders, reporting dashboards, CRM interfaces
+- **Mobile apps** — [HeroUI Native](/docs/native) brings the same component system and design language to React Native
+
+## How HeroUI compares
+
+| | **HeroUI** | **MUI** | **shadcn/ui** | **Radix + custom CSS** |
+|---|---|---|---|---|
+| **Styling** | Tailwind CSS v4 (build-time) | CSS-in-JS (runtime) | Tailwind CSS | Any |
+| **Accessibility** | React Aria (built-in) | Custom (built-in) | Radix (built-in) | Radix (built-in) |
+| **Component API** | Compound components | Prop-heavy | Copy-paste source | Primitives only |
+| **Theming** | CSS variables + BEM | Theme object | CSS variables | Manual |
+| **AI tooling** | MCP, llms.txt, Agent Skills, AGENTS.md | None | None | None |
+| **Animations** | GPU-accelerated CSS | CSS transitions | Manual | Manual |
+| **Bundle approach** | Tree-shakeable package | Tree-shakeable package | Copied into your repo | Tree-shakeable package |
+| **Design out of box** | Full design system | Full design system | Minimal, customizable | Unstyled |
+
+Every library in this space has strengths. MUI has the largest ecosystem and the most components. shadcn/ui gives you maximum control over source code. Radix provides excellent unstyled primitives. HeroUI's differentiator is the combination: accessible foundations, polished defaults, modern styling, and first-class AI integration — in a single, cohesive package.
+
+## Get started
+
+Install HeroUI and build your first page in under five minutes:
+
+1. **[Quick Start Guide](/docs/react/getting-started/quick-start)** — Install, configure, and render your first component
+2. **[Design Principles](/docs/react/getting-started/design-principles)** — Understand the philosophy behind HeroUI's API design
+3. **[Browse Components](/docs/react/components)** — Explore the full component library with live examples
+4. **[Theming](/docs/react/getting-started/theming)** — Customize colors, spacing, and typography to match your brand

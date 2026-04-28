@@ -6,6 +6,7 @@
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
 @import "@heroui/styles";
+@plugin "@tailwindcss/typography";
 
 @keyframes float-stars {
   0% {
@@ -468,8 +469,32 @@ code {
   @apply border-separator bg-transparent px-[3px];
 }
 
-/* Table styles for .prose-no-margin */
-.prose-no-margin {
+.prose .blog-table-heading {
+  color: var(--muted) !important;
+  font-size: 1.25rem !important;
+}
+
+/* Table styles for prose content */
+.prose-no-margin table th,
+.prose-no-margin table td {
+  padding-block: 0.75rem !important;
+  padding-inline: 1rem !important;
+}
+
+.prose-no-margin table th:first-child,
+.prose-no-margin table td:first-child {
+  padding-inline-start: 1.25rem !important;
+}
+
+.prose-no-margin table th {
+  color: var(--muted) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  text-align: left !important;
+}
+
+.prose-no-margin,
+.prose {
   table {
     @apply border-none bg-transparent;
     border-collapse: separate;
@@ -478,10 +503,10 @@ code {
     thead {
       tr {
         th {
-          @apply border-none bg-default dark:bg-default/50;
+          @apply border-none bg-default px-4 py-3 text-left text-sm font-medium text-muted dark:bg-default/50;
 
           &:first-child {
-            @apply rounded-tl-xl rounded-bl-xl;
+            @apply rounded-tl-xl rounded-bl-xl pl-5;
           }
 
           &:last-child {
@@ -494,7 +519,11 @@ code {
     tbody {
       tr {
         td {
-          @apply border-none;
+          @apply border-none px-4 py-3;
+
+          &:first-child {
+            @apply pl-5;
+          }
         }
       }
     }

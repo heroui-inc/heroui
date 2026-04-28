@@ -6,6 +6,7 @@
   "pages": [
     "---Overview---",
     "index",
+    "(overview)/why-heroui",
     "(overview)/quick-start",
     "(overview)/design-principles",
     "[sparkles][Showcase](/showcase)",
