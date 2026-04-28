@@ -21,6 +21,8 @@
    -------------------------------------------------------------------------- */
 .table__content:not(:has(> .table__body > [role="presentation"])) {
   display: grid;
+  width: max-content;
+  min-width: 100%;
 
   & .table__header {
     display: grid;
@@ -43,7 +45,6 @@
     display: grid;
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
-    @apply overflow-clip rounded-2xl;
   }
 
   & .table__row {
@@ -77,6 +78,10 @@
 .table-root--primary {
   @apply bg-surface-secondary px-1 pb-1;
   border-radius: calc(var(--radius) * 2.5);
+
+  .table__body {
+    @apply overflow-clip rounded-2xl;
+  }
 }
 
 .table-root--secondary {
@@ -145,13 +150,15 @@
 }
 
 .table-root--secondary .table__row {
+  @apply bg-transparent;
+
   .table__cell {
     @apply border-b border-separator-tertiary/50;
   }
 
   @media (hover: hover) {
-    &:hover .table__cell,
-    &[data-hovered="true"] .table__cell {
+    &:hover,
+    &[data-hovered="true"] {
       @apply bg-default/50;
     }
   }
