@@ -41,7 +41,7 @@
    ========================================================================== */
 
 .color-area__thumb {
-  @apply size-4 rounded-full will-change-[width,height];
+  @apply size-4 rounded-xl will-change-[width,height];
 
   /* Current color from React Aria */
   background-color: var(--color-area-thumb-color);

@@ -32,7 +32,7 @@
 }
 
 .calendar__nav-button {
-  @apply flex size-6 items-center justify-center rounded-full text-accent;
+  @apply flex size-6 items-center justify-center rounded-2xl text-accent;
 
   will-change: scale;
 
@@ -209,7 +209,7 @@
 
 /* Cell indicator - small dot at bottom center of cell */
 .calendar__cell-indicator {
-  @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-full bg-muted;
+  @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-xs bg-muted;
 
   /* Indicator color changes when cell is selected */
   [data-selected="true"] > & {

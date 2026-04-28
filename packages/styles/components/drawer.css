@@ -258,7 +258,7 @@
 
   /* The handle bar */
   & > [data-slot="drawer-handle-bar"] {
-    @apply h-1 w-9 rounded-full;
+    @apply h-1 w-9 rounded-xs;
     @apply bg-separator;
   }
 }

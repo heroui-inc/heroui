@@ -28,7 +28,7 @@
    ========================================================================== */
 
 .radio__control {
-  @apply relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-full border [border-width:var(--border-width-field)] bg-field shadow-field outline-none no-highlight;
+  @apply relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-lg border [border-width:var(--border-width-field)] bg-field shadow-field outline-none no-highlight;
 
   /**
    * Transitions
@@ -112,7 +112,7 @@
    (e.g., custom icon). When custom content is present, these default dot styles are not applied. */
 .radio__indicator:empty::before {
   content: "";
-  @apply rounded-full bg-field;
+  @apply rounded-lg bg-field;
 
   width: 100%;
   height: 100%;

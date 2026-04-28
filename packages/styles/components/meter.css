@@ -26,7 +26,7 @@
   }
 
   .meter__track {
-    @apply relative overflow-hidden rounded-full bg-default;
+    @apply relative overflow-hidden rounded-sm bg-default;
 
     grid-area: track;
 
@@ -35,7 +35,7 @@
   }
 
   .meter__fill {
-    @apply absolute top-0 left-0 h-full rounded-full;
+    @apply absolute top-0 left-0 h-full rounded-sm;
 
     background-color: var(--meter-fill);
 
@@ -65,7 +65,11 @@
 
 .meter--sm {
   .meter__track {
-    @apply h-1;
+    @apply h-1 rounded-xs;
+  }
+
+  .meter__fill {
+    @apply rounded-xs;
   }
 }
 
@@ -75,7 +79,11 @@
 
 .meter--lg {
   .meter__track {
-    @apply h-3;
+    @apply h-3 rounded-md;
+  }
+
+  .meter__fill {
+    @apply rounded-md;
   }
 }
 

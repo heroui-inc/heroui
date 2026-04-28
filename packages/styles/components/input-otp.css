@@ -77,12 +77,12 @@
 
 /* Caret */
 .input-otp__caret {
-  @apply absolute h-4 w-[2px] animate-caret-blink rounded-[4px] bg-field-placeholder;
+  @apply absolute h-4 w-[2px] animate-caret-blink rounded-sm bg-field-placeholder;
 }
 
 /* Separator */
 .input-otp__separator {
-  @apply h-[2px] w-[6px] shrink-0 rounded-[4px] bg-separator;
+  @apply h-[2px] w-[6px] shrink-0 rounded-sm bg-separator;
 }
 
 /* Variant property definitions */

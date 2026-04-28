@@ -228,7 +228,7 @@
 .alert-dialog__icon {
   @apply flex items-center justify-center;
   @apply size-10 shrink-0;
-  @apply rounded-full select-none;
+  @apply rounded-3xl select-none;
 
   [data-slot="alert-dialog-default-icon"] {
     @apply box-content size-5;

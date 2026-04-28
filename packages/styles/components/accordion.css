@@ -40,7 +40,7 @@
 
 .accordion__item::after {
   content: "";
-  @apply absolute bottom-0 left-0 h-px w-full rounded-full bg-separator;
+  @apply absolute bottom-0 left-0 h-px w-full rounded-xs bg-separator;
 }
 
 .accordion__item:last-child::after {

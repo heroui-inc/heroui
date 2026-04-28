@@ -89,9 +89,7 @@
    ========================================================================== */
 
 .toggle-button-group__separator {
-  @apply bg-current opacity-15;
-
-  border-radius: 4px;
+  @apply rounded-sm bg-current opacity-15;
   position: absolute;
   pointer-events: none;
 
