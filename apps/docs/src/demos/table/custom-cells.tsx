@@ -122,7 +122,7 @@ export function CustomCells() {
           onSortChange={setSortDescriptor}
         >
           <Table.Header>
-            <Table.Column className="pr-0">
+            <Table.Column>
               <Checkbox aria-label="Select all" slot="selection">
                 <Checkbox.Control>
                   <Checkbox.Indicator />
@@ -149,12 +149,12 @@ export function CustomCells() {
                 <SortableColumnHeader sortDirection={sortDirection}>Status</SortableColumnHeader>
               )}
             </Table.Column>
-            <Table.Column className="text-end">Actions</Table.Column>
+            <Table.Column className="text-start">Actions</Table.Column>
           </Table.Header>
           <Table.Body>
             {sortedUsers.map((user) => (
               <Table.Row key={user.id} id={user.id}>
-                <Table.Cell className="pr-0">
+                <Table.Cell>
                   <Checkbox aria-label={`Select ${user.name}`} slot="selection" variant="secondary">
                     <Checkbox.Control>
                       <Checkbox.Indicator />
@@ -193,7 +193,7 @@ export function CustomCells() {
                   </Chip>
                 </Table.Cell>
                 <Table.Cell>
-                  <div className="flex items-center gap-1">
+                  <div className="ml-auto flex items-center gap-1">
                     <Button isIconOnly size="sm" variant="tertiary">
                       <Icon className="size-4" icon="gravity-ui:eye" />
                     </Button>

@@ -2,11 +2,11 @@
 
 import type {DOMRenderProps} from "../../utils/dom";
 import type {TableVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
 import type {CollectionRenderer} from "react-aria-components/CollectionBuilder";
 
 import {tableVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, useContext, useMemo} from "react";
 import {
   CollectionRendererContext,
   DefaultCollectionRenderer,
@@ -128,16 +128,63 @@ interface TableContentProps extends Omit<
   className?: string;
 }
 
-function TableContent({className, ...props}: TableContentProps) {
+/**
+ * Count the columns inside the `Table.Header` child. We do this at render
+ * time (SSR-safe) and pass the result to the grid layout via the
+ * `--table-col-count` CSS custom property. This avoids reading
+ * `aria-colcount` from CSS via `attr(... type(<integer>))`, which Lightning
+ * CSS / Turbopack mangles in dev mode.
+ *
+ * The `Table.Header` is conventionally the first child of `Table.Content`,
+ * so we read its `columns` (dynamic) or `children` (static) prop. We use
+ * positional rather than type-based detection because Client Component
+ * references inside Server Components are wrapped in `React.lazy`-like
+ * objects that don't expose the original `displayName`.
+ */
+function countTableColumns(children: ReactNode): number {
+  const validChildren = React.Children.toArray(children).filter(React.isValidElement) as Array<
+    React.ReactElement<{columns?: unknown[]; children?: ReactNode}>
+  >;
+
+  const header = validChildren[0];
+
+  if (!header) return 1;
+  const props = header.props;
+
+  if (Array.isArray(props.columns)) {
+    return props.columns.length || 1;
+  }
+  if (props.children !== undefined) {
+    return React.Children.count(props.children) || 1;
+  }
+
+  return 1;
+}
+
+function TableContent({children, className, style, ...props}: TableContentProps) {
   const {slots} = useContext(TableContext);
+  const columnCount = useMemo(() => countTableColumns(children), [children]);
+
+  const mergedStyle = useMemo<TableContentProps["style"]>(() => {
+    const colCountVar = {"--table-col-count": columnCount} as CSSProperties;
+
+    if (typeof style === "function") {
+      return (values) => ({...style(values), ...colCountVar});
+    }
+
+    return {...style, ...colCountVar};
+  }, [style, columnCount]);
 
   return (
     <DivTableProvider>
       <TablePrimitive
         className={composeTwRenderProps(className, slots?.content())}
         data-slot="table-content"
+        style={mergedStyle}
         {...props}
-      />
+      >
+        {children}
+      </TablePrimitive>
     </DivTableProvider>
   );
 }

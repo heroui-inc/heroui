@@ -27,7 +27,7 @@ export function SelectionDemo() {
             onSelectionChange={setSelectedKeys}
           >
             <Table.Header>
-              <Table.Column className="pr-0">
+              <Table.Column>
                 <Checkbox aria-label="Select all" slot="selection">
                   <Checkbox.Control>
                     <Checkbox.Indicator />
@@ -42,7 +42,7 @@ export function SelectionDemo() {
             <Table.Body>
               {users.map((user) => (
                 <Table.Row key={user.id} id={user.id}>
-                  <Table.Cell className="pr-0">
+                  <Table.Cell>
                     <Checkbox
                       aria-label={`Select ${user.name}`}
                       slot="selection"

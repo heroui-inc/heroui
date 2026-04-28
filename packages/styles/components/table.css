@@ -3,26 +3,43 @@
    All elements are <div> with ARIA roles (role="grid", role="row", etc.).
 
    NON-VIRTUALIZED tables use CSS Grid with subgrid so every level
-   (content → rowgroup → row) shares the same column tracks. This lets us
-   use border-radius and overflow directly on the body — no first/last
-   cell hacks needed.
+   (content → rowgroup → row) shares the same column tracks. The column
+   count comes from a CSS custom property `--table-col-count` set inline
+   by the React component during render (counted from TableHeader's
+   children/columns prop). This is SSR-safe and avoids Lightning CSS /
+   Turbopack mangling the `attr(aria-colcount type(<integer>))` syntax.
 
-   VIRTUALIZED tables (wrapped in a <Virtualizer>) use absolute
-   positioning managed by the Virtualizer — grid rules are gated behind
-   :not(:has(…)) so they never interfere.
+   The table fills the container width (`width: 100%`). Data columns size
+   to content (auto), and a trailing `minmax(2rem, 1fr)` filler track
+   ensures at least 32px of breathing room past the last column so the
+   body's `rounded-2xl` (16px) corner can curve cleanly with visible
+   straight edge before it. The track grows to 1fr to absorb leftover
+   space when the container is wider. The surrounding ScrollContainer or
+   ResizableContainer triggers scroll via overflow: auto.
+
+   ResizableContainer overrides `width: max-content` so column resizing
+   can expand the grid beyond the container.
+
+   VIRTUALIZED tables (wrapped in a <Virtualizer>) use absolute positioning
+   managed by the Virtualizer — grid rules are gated behind :not(:has(…))
+   so they never interfere.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    Non-virtualized layout — CSS Grid with subgrid for shared column tracks.
-   aria-colcount is set on the grid element by React Aria when isVirtualized
-   is true; we read it via attr() to set grid-template-columns dynamically.
-   Subgrid on header, body, and rows ensures columns align across all levels.
-   border-radius applies directly to the body.
+   Subgrid on header, body, and rows ensures columns align across all
+   levels. border-radius applies directly to the body.
    -------------------------------------------------------------------------- */
 .table__content:not(:has(> .table__body > [role="presentation"])) {
   display: grid;
-  width: max-content;
+  /* Fills the container width. The first N-1 columns size to content
+     (auto); the last column uses minmax(auto, 1fr) so it sizes to at
+     least its content but absorbs leftover space — keeping the body's
+     rounded corners flush with the container's right edge without a
+     separate filler track. */
+  width: 100%;
   min-width: 100%;
+  grid-template-columns: repeat(calc(var(--table-col-count, 1) - 1), auto) minmax(auto, 1fr);
 
   & .table__header {
     display: grid;
@@ -35,6 +52,11 @@
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
     align-items: center;
+  }
+
+  & .table__column:last-child,
+  & .table__cell:last-child {
+    @apply pr-8;
   }
 
   &:has(.table__body [aria-colspan]) {
@@ -57,6 +79,10 @@
     grid-template-columns: subgrid;
   }
 
+  & .table__load-more {
+    grid-column: 1 / -1;
+  }
+
   & .table__cell {
     border-bottom: none;
   }
@@ -64,11 +90,6 @@
   & [role="rowheader"][aria-colspan] > * {
     grid-column: 1 / -1;
   }
-}
-
-/* Grid column tracks from aria-colcount */
-.table__content:not(:has(> .table__body > [role="presentation"])) {
-  grid-template-columns: repeat(attr(aria-colcount type(<integer>), 1), auto);
 }
 
 /* --------------------------------------------------------------------------
@@ -84,7 +105,7 @@
   border-radius: calc(var(--radius) * 2.5);
 
   .table__body {
-    @apply overflow-clip rounded-2xl;
+    @apply overflow-clip rounded-2xl ring-1 ring-separator/40 ring-inset;
   }
 }
 
@@ -102,6 +123,7 @@
 
   &::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
   }
 
   &::-webkit-scrollbar-track {
@@ -133,6 +155,14 @@
 /* --------------------------------------------------------------------------
    Secondary variant overrides
    -------------------------------------------------------------------------- */
+
+/* In secondary, columns are individual rounded pills with their own
+   background. Use equal `1fr` tracks (no auto + filler) so the pills
+   stretch evenly across the container width together. */
+.table-root--secondary .table__content:not(:has(> .table__body > [role="presentation"])) {
+  grid-template-columns: repeat(var(--table-col-count, 1), minmax(0, 1fr));
+}
+
 .table-root--secondary .table__header {
   @apply bg-transparent;
 }
@@ -173,10 +203,6 @@
    -------------------------------------------------------------------------- */
 .table__content {
   @apply w-full text-sm;
-}
-
-.table-root--primary .table__content {
-  @apply overflow-clip;
 }
 
 /* --------------------------------------------------------------------------
@@ -280,7 +306,7 @@
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-default/40;
+      @apply bg-surface/40;
     }
   }
 
@@ -322,6 +348,18 @@
 }
 
 /* --------------------------------------------------------------------------
+   Selection column / cell — when a column or cell contains a Checkbox with
+   slot="selection" (the React Aria pattern for select-all and per-row
+   selection), tighten the right padding so the column auto-sizes to the
+   checkbox without leaving big gaps, while still giving a comfortable
+   space between the checkbox and the column separator.
+   -------------------------------------------------------------------------- */
+.table__column:has(> [slot="selection"]),
+.table__cell:has(> [slot="selection"]) {
+  @apply pr-2;
+}
+
+/* --------------------------------------------------------------------------
    Tree / expandable rows
    -------------------------------------------------------------------------- */
 .table__cell[data-tree-column] {
@@ -336,10 +374,16 @@
 }
 
 /* --------------------------------------------------------------------------
-   Resizable Container
+   Resizable Container — when wrapping the table, columns can be resized
+   wider than the container. Override width to max-content so the grid
+   grows with the column widths and triggers horizontal scroll.
    -------------------------------------------------------------------------- */
 .table__resizable-container {
   @apply relative overflow-auto;
+}
+
+.table__resizable-container .table__content:not(:has(> .table__body > [role="presentation"])) {
+  width: max-content;
 }
 
 /* --------------------------------------------------------------------------
@@ -370,21 +414,19 @@
 }
 
 /* --------------------------------------------------------------------------
-   Load More Item
-   -------------------------------------------------------------------------- */
-.table__load-more {
-  & .table__cell,
-  & [role="rowheader"] {
-    @apply py-3 text-center;
-    & > * {
-      @apply mx-auto;
-    }
-  }
-}
+   Load More Content — RAC's TableLoadingIndicator renders the visible loader
+   row with a single rowheader cell that has `style={display: 'contents'}`
+   inline (when virtualized — which we always are via DivTableProvider). The
+   inline `display: contents` makes the rowheader transparent to grid layout,
+   so its children become direct children of the row's subgrid and would land
+   in the first column track only — that's why the spinner appears
+   left-aligned otherwise.
 
-/* --------------------------------------------------------------------------
-   Load More Content
+   Fix: span the LoadMoreContent across the full row via `grid-column: 1 / -1`
+   and center its content with flex. No `!important` needed because the
+   rowheader is layout-transparent.
    -------------------------------------------------------------------------- */
 .table__load-more-content {
-  @apply flex items-center justify-center gap-2 py-2;
+  @apply flex w-full items-center justify-center gap-2 py-3;
+  grid-column: 1 / -1;
 }
