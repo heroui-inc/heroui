@@ -1015,6 +1015,10 @@ export const demos: Record<string, DemoItem> = {
     component: DrawerDemos.Controlled,
     file: "drawer/controlled.tsx",
   },
+  "drawer-confirm-close": {
+    component: DrawerDemos.ConfirmClose,
+    file: "drawer/confirm-close.tsx",
+  },
   // Disclosure demos
   "disclosure-basic": {
     component: DisclosureDemos.Basic,
