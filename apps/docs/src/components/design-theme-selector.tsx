@@ -1,12 +1,15 @@
 "use client";
 
+import type {ThemeId} from "@/app/themes/constants";
 import type {StaticImageData} from "next/image";
 
-import {BucketPaint} from "@gravity-ui/icons";
-import {Button, ListBox, Popover} from "@heroui/react";
+import {BucketPaint, Palette} from "@gravity-ui/icons";
+import {Button, ListBox, Popover, buttonVariants} from "@heroui/react";
+import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 
+import {themeValuesById} from "@/app/themes/constants";
 import blackTheme from "@/assets/themes/black.png";
 import defaultTheme from "@/assets/themes/default.png";
 import lavenderTheme from "@/assets/themes/lavender.png";
@@ -53,6 +56,7 @@ export function DesignThemeSelector() {
   const [active, setActive] = useState("default");
   const [mounted, setMounted] = useState(false);
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
@@ -63,6 +67,7 @@ export function DesignThemeSelector() {
       applyTheme(stored);
     }
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleSelect = useCallback((keys: "all" | Set<React.Key>) => {
     if (keys === "all") return;
@@ -76,6 +81,23 @@ export function DesignThemeSelector() {
 
   const current = THEMES.find((t) => t.id === active);
   const showAvatar = mounted && active !== "default" && current;
+
+  const themeBuilderHref = useMemo(() => {
+    const themeId = active as ThemeId;
+    const values = themeValuesById[themeId];
+
+    if (!values) {
+      return "/themes";
+    }
+
+    const params = new URLSearchParams();
+
+    params.set("lightness", String(values.lightness));
+    params.set("chroma", String(values.chroma));
+    params.set("hue", String(values.hue));
+
+    return `/themes?${params.toString()}`;
+  }, [active]);
 
   return (
     <>
@@ -158,6 +180,18 @@ export function DesignThemeSelector() {
                 </ListBox.Item>
               )}
             </ListBox>
+            <LinkRoot
+              href={themeBuilderHref}
+              className={buttonVariants({
+                className: "mt-3 rounded-full text-[13px] text-muted",
+                fullWidth: true,
+                size: "sm",
+                variant: "outline",
+              })}
+            >
+              <Palette className="size-4" />
+              Edit theme
+            </LinkRoot>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>
