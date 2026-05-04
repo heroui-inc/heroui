@@ -101,7 +101,18 @@
     "overrides": {
       "shiki": "3.20.0",
       "ts-morph": "27.0.2"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@swc/core",
+      "core-js",
+      "esbuild",
+      "lmdb",
+      "msgpackr-extract",
+      "protobufjs",
+      "sharp",
+      "unrs-resolver"
+    ]
   },
   "engines": {
     "node": ">=20.x",
