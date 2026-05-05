@@ -37,7 +37,7 @@ const dateInput = tv({
       "data-[invalid=true]:focus:bg-danger-400/50 dark:data-[invalid=true]:focus:bg-danger-400/20",
       "data-[invalid=true]:data-[editable=true]:focus:text-danger",
     ],
-    helperWrapper: "hidden group-data-[has-helper=true]:flex p-1 relative flex-col gap-1.5",
+    helperWrapper: "hidden group-data-[has-helper=true]:flex py-1 relative flex-col gap-1.5",
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
   },

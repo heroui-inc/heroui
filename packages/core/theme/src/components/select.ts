@@ -49,7 +49,7 @@ const select = tv({
       // focus ring
       ...dataFocusVisibleClasses,
     ],
-    helperWrapper: "p-1 flex relative flex-col gap-1.5 group-data-[has-helper=true]:flex",
+    helperWrapper: "py-1 flex relative flex-col gap-1.5 group-data-[has-helper=true]:flex",
     description: "text-tiny text-foreground-400",
     errorMessage: "text-tiny text-danger",
     endWrapper: "flex end-18",
