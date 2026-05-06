@@ -7,7 +7,7 @@ links:
   tailwind: theme
 ---
 
-import {ColorSectionSideBySide, ColorSectionStacked, ColorSectionFormField} from "@/components/color-section";
+import {ColorSectionSideBySide, ColorSectionStacked, ColorSectionFormField, ColorSectionPrimitive} from "@/components/color-section";
 
 HeroUI Native's color system is built around semantic intent, not visual abundance. Instead of exposing large raw palettes, the system defines a small, meaningful set of color roles that cover the majority of interface needs.
 
@@ -212,6 +212,19 @@ Other colors serve specific utility roles across the interface. They exist to st
     { label: "Backdrop", variable: "--backdrop" },
     { label: "Overlay", variable: "--overlay", border: true },
     { label: "Segment", variable: "--segment", border: true },
+  ]}
+/>
+
+## Primitive
+
+Primitive colors are mode agnostic values used as foundations for semantic color tokens. They do not change between light and dark themes.
+
+<ColorSectionPrimitive
+  colors={[
+    { label: "White", variable: "--white", border: true, tooltip: "--white: oklch(100% 0 0)" },
+    { label: "Black", variable: "--black", tooltip: "--black: oklch(0% 0 0)" },
+    { label: "Snow", variable: "--snow", border: true, tooltip: "--snow: oklch(0.9911 0 0)" },
+    { label: "Eclipse", variable: "--eclipse", tooltip: "--eclipse: oklch(0.2103 0.0059 285.89)" },
   ]}
 />
 

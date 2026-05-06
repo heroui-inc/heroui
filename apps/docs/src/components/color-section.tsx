@@ -1,6 +1,6 @@
 "use client";
 
-import {Chip} from "@heroui/react";
+import {Chip, Tooltip} from "@heroui/react";
 import * as React from "react";
 
 import {Iconify} from "@/components/iconify";
@@ -14,28 +14,53 @@ const contrastStyle = (bgVar: string): React.CSSProperties => ({
   filter: "invert(1) grayscale(1) contrast(100)",
 });
 
+function ColorTooltip({
+  children,
+  className,
+  content,
+}: {
+  children: React.ReactNode;
+  content?: string;
+  className?: string;
+}) {
+  return (
+    <Tooltip delay={0}>
+      <Tooltip.Trigger className={className}>{children}</Tooltip.Trigger>
+      <Tooltip.Content className="max-w-xs">
+        <pre className="font-mono text-xs leading-relaxed whitespace-pre-wrap">{content}</pre>
+      </Tooltip.Content>
+    </Tooltip>
+  );
+}
+
 interface SideBySideProps {
   name: string;
   baseVariable: string;
+  baseTooltip?: string;
   hoverVariable: string;
   hoverCssValue?: string;
+  hoverTooltip?: string;
   foregroundVariable: string;
+  foregroundTooltip?: string;
   soft?: {
     baseVariable: string;
     baseCssValue?: string;
+    baseTooltip?: string;
     hoverVariable: string;
     hoverCssValue?: string;
+    hoverTooltip?: string;
     foregroundVariable: string;
     foregroundCssValue?: string;
+    foregroundTooltip?: string;
   };
 }
 
 interface StackedColor {
   label: string;
   variable: string;
-  /** Raw CSS color expression (e.g. color-mix). When set, used instead of var(variable). */
   cssValue?: string;
   border?: boolean;
+  tooltip?: string;
 }
 
 function ThemeChip({theme}: {theme: "Light" | "Dark"}) {
@@ -53,31 +78,27 @@ function ColorHeader({
   bgVariable,
   name,
   theme,
+  tooltip,
 }: {
   name: string;
   theme: "Light" | "Dark";
   bgVariable: string;
+  tooltip: string;
 }) {
   return (
-    <div
-      className="flex items-center justify-between rounded-xl px-4 py-3"
-      style={{backgroundColor: `var(${bgVariable})`}}
-    >
-      <div className="flex flex-col">
+    <ColorTooltip content={tooltip}>
+      <div
+        className="flex cursor-default items-center justify-between rounded-xl px-4 py-3"
+        style={{backgroundColor: `var(${bgVariable})`}}
+      >
         <span className="text-lg font-medium tracking-tight" style={contrastStyle(bgVariable)}>
           {name}
         </span>
-        <span
-          className="font-mono text-[10px] leading-tight opacity-50"
-          style={contrastStyle(bgVariable)}
-        >
-          {bgVariable}
+        <span className="text-xs font-medium" style={contrastStyle(bgVariable)}>
+          {theme}
         </span>
       </div>
-      <span className="text-xs font-medium" style={contrastStyle(bgVariable)}>
-        {theme}
-      </span>
-    </div>
+    </ColorTooltip>
   );
 }
 
@@ -86,43 +107,40 @@ function ColorBlock({
   cssValue,
   hasBorder,
   label,
-  varName,
+  tooltip,
 }: {
   label: string;
   bgVariable: string;
-  /** Raw CSS color expression (e.g. color-mix). When set, used for background instead of var(bgVariable). */
   cssValue?: string;
   hasBorder?: boolean;
-  /** Variable name to display. Defaults to bgVariable. */
-  varName?: string;
+  tooltip: string;
 }) {
   const bgValue = cssValue || `var(${bgVariable})`;
 
   return (
-    <div
-      style={{backgroundColor: bgValue}}
-      className={cn(
-        "flex flex-col justify-center rounded-xl px-4 py-2",
-        hasBorder && "border border-black/12 dark:border-white/12",
-      )}
-    >
-      <span className="text-sm font-medium tracking-tight" style={contrastStyle(bgVariable)}>
-        {label}
-      </span>
-      <span
-        className="font-mono text-[10px] leading-tight opacity-50"
-        style={contrastStyle(bgVariable)}
+    <ColorTooltip className="block w-full" content={tooltip}>
+      <div
+        style={{backgroundColor: bgValue}}
+        className={cn(
+          "flex w-full cursor-default items-center rounded-xl px-4 py-2.5",
+          hasBorder && "border border-black/12 dark:border-white/12",
+        )}
       >
-        {varName || bgVariable}
-      </span>
-    </div>
+        <span className="text-sm font-medium tracking-tight" style={contrastStyle(bgVariable)}>
+          {label}
+        </span>
+      </div>
+    </ColorTooltip>
   );
 }
 
 function ThemeColumn({
+  baseTooltip,
   baseVariable,
+  foregroundTooltip,
   foregroundVariable,
   hoverCssValue,
+  hoverTooltip,
   hoverVariable,
   name,
   soft,
@@ -131,15 +149,18 @@ function ThemeColumn({
   theme: "Light" | "Dark";
   name: string;
   baseVariable: string;
+  baseTooltip: string;
   hoverVariable: string;
   hoverCssValue?: string;
+  hoverTooltip: string;
   foregroundVariable: string;
+  foregroundTooltip: string;
   soft?: SideBySideProps["soft"];
 }) {
   return (
     <div className="flex flex-1 flex-col gap-2" data-theme={theme.toLowerCase()}>
-      <ColorHeader bgVariable={baseVariable} name={name} theme={theme} />
-      <div className={cn("flex gap-2", soft ? "flex-row" : "flex-col")}>
+      <ColorHeader bgVariable={baseVariable} name={name} theme={theme} tooltip={baseTooltip} />
+      <div className={cn("flex gap-2", soft ? "flex-col sm:flex-row" : "flex-col")}>
         <div
           className="flex flex-1 flex-col gap-1.5 rounded-xl p-3"
           style={{backgroundColor: `var(${baseVariable})`}}
@@ -154,12 +175,12 @@ function ThemeColumn({
             bgVariable={hoverVariable}
             cssValue={hoverCssValue}
             label="Hover"
-            varName={`${baseVariable}-hover`}
+            tooltip={hoverTooltip}
           />
           <ColorBlock
             bgVariable={foregroundVariable}
             label="Foreground"
-            varName={`${baseVariable}-foreground`}
+            tooltip={foregroundTooltip}
           />
         </div>
         {!!soft && (
@@ -173,22 +194,21 @@ function ThemeColumn({
               {name} Soft
             </span>
             <div className="relative">
-              <div
-                className="flex flex-col justify-center rounded-xl border border-black/12 px-4 py-2 dark:border-white/12"
-                style={{backgroundColor: soft.hoverCssValue || `var(${soft.hoverVariable})`}}
-              >
-                <span className="text-sm font-medium tracking-tight text-foreground">Hover</span>
-                <span className="font-mono text-[10px] leading-tight text-foreground opacity-50">
-                  {baseVariable}-soft-hover
-                </span>
-              </div>
+              <ColorTooltip className="block w-full" content={soft.hoverTooltip}>
+                <div
+                  className="flex w-full cursor-default items-center rounded-xl border border-black/12 px-4 py-2.5 dark:border-white/12"
+                  style={{backgroundColor: soft.hoverCssValue || `var(${soft.hoverVariable})`}}
+                >
+                  <span className="text-sm font-medium tracking-tight text-foreground">Hover</span>
+                </div>
+              </ColorTooltip>
             </div>
             <div className="relative">
               <ColorBlock
                 bgVariable={soft.foregroundVariable}
                 cssValue={soft.foregroundCssValue}
                 label="Foreground"
-                varName={`${baseVariable}-soft-foreground`}
+                tooltip={soft.foregroundTooltip}
               />
             </div>
           </div>
@@ -199,9 +219,12 @@ function ThemeColumn({
 }
 
 export function ColorSectionSideBySide({
+  baseTooltip,
   baseVariable,
+  foregroundTooltip,
   foregroundVariable,
   hoverCssValue,
+  hoverTooltip,
   hoverVariable,
   name,
   soft,
@@ -209,18 +232,24 @@ export function ColorSectionSideBySide({
   return (
     <div className="not-prose flex flex-col gap-4 sm:flex-row">
       <ThemeColumn
+        baseTooltip={baseTooltip}
         baseVariable={baseVariable}
+        foregroundTooltip={foregroundTooltip}
         foregroundVariable={foregroundVariable}
         hoverCssValue={hoverCssValue}
+        hoverTooltip={hoverTooltip}
         hoverVariable={hoverVariable}
         name={name}
         soft={soft}
         theme="Light"
       />
       <ThemeColumn
+        baseTooltip={baseTooltip}
         baseVariable={baseVariable}
+        foregroundTooltip={foregroundTooltip}
         foregroundVariable={foregroundVariable}
         hoverCssValue={hoverCssValue}
+        hoverTooltip={hoverTooltip}
         hoverVariable={hoverVariable}
         name={name}
         soft={soft}
@@ -234,32 +263,31 @@ function StackedSwatch({
   border,
   cssValue,
   label,
+  tooltip,
   variable,
 }: {
   label: string;
   variable: string;
   cssValue?: string;
   border?: boolean;
+  tooltip: string;
 }) {
   const bgValue = cssValue || `var(${variable})`;
 
   return (
-    <div className="flex flex-1 flex-col">
+    <ColorTooltip className="min-w-0 basis-[calc(50%-4px)] sm:flex-1 sm:basis-0" content={tooltip}>
       <div
         style={{backgroundColor: bgValue}}
         className={cn(
-          "flex h-16 flex-col justify-center rounded-xl px-4 py-2",
+          "flex h-14 w-full cursor-default items-center rounded-xl px-4",
           border && "border border-border",
         )}
       >
         <span className="text-sm font-medium tracking-tight" style={contrastStyle(variable)}>
           {label}
         </span>
-        <span className="font-mono text-[10px] opacity-60" style={contrastStyle(variable)}>
-          {variable}
-        </span>
       </div>
-    </div>
+    </ColorTooltip>
   );
 }
 
@@ -275,13 +303,14 @@ export function ColorSectionStacked({
       <div data-theme="light">
         <div className="flex flex-col gap-2">
           <ThemeChip theme="Light" />
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 sm:flex-nowrap">
             {lightColors.map((color) => (
               <StackedSwatch
-                key={color.variable}
+                key={color.variable + color.label}
                 border={color.border}
                 cssValue={color.cssValue}
                 label={color.label}
+                tooltip={color.tooltip}
                 variable={color.variable}
               />
             ))}
@@ -291,13 +320,14 @@ export function ColorSectionStacked({
       <div data-theme="dark">
         <div className="flex flex-col gap-2">
           <ThemeChip theme="Dark" />
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 sm:flex-nowrap">
             {darkColors.map((color) => (
               <StackedSwatch
-                key={color.variable}
+                key={color.variable + color.label}
                 border={color.border}
                 cssValue={color.cssValue}
                 label={color.label}
+                tooltip={color.tooltip}
                 variable={color.variable}
               />
             ))}
@@ -308,11 +338,33 @@ export function ColorSectionStacked({
   );
 }
 
+export function ColorSectionPrimitive({colors}: {colors: StackedColor[]}) {
+  return (
+    <div className="not-prose flex flex-wrap gap-2 sm:flex-nowrap">
+      {colors.map((color) => (
+        <StackedSwatch
+          key={color.variable + color.label}
+          border={color.border}
+          cssValue={color.cssValue}
+          label={color.label}
+          tooltip={color.tooltip}
+          variable={color.variable}
+        />
+      ))}
+    </div>
+  );
+}
+
 interface FormFieldColors {
   bg: string;
+  bgTooltip?: string;
   bgHover: string;
+  bgHoverTooltip?: string;
+  bgFocusTooltip?: string;
   placeholder: string;
+  placeholderTooltip?: string;
   foreground: string;
+  foregroundTooltip?: string;
 }
 
 function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "light" | "dark"}) {
@@ -320,40 +372,37 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
     <div data-theme={theme}>
       <div className="flex flex-col gap-2">
         <ThemeChip theme={theme === "light" ? "Light" : "Dark"} />
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <div
             className="flex flex-1 flex-col gap-1.5 rounded-xl border border-black/12 p-3"
             style={{backgroundColor: `var(${colors.bg})`}}
           >
-            <div>
+            <ColorTooltip content={colors.bgTooltip}>
               <span
-                className="text-base font-medium tracking-tight"
+                className="cursor-default text-base font-medium tracking-tight"
                 style={contrastStyle(colors.bg)}
               >
                 Bg
               </span>
-              <div className="font-mono text-[10px] opacity-60" style={contrastStyle(colors.bg)}>
-                {colors.bg}
-              </div>
-            </div>
+            </ColorTooltip>
             <ColorBlock
               hasBorder
               bgVariable={colors.bg}
               cssValue={colors.bgHover}
               label="Hover"
-              varName="--color-field-hover"
+              tooltip={colors.bgHoverTooltip}
             />
             <ColorBlock
               hasBorder
               bgVariable={colors.bg}
               label="Focus"
-              varName="--color-field-focus"
+              tooltip={colors.bgFocusTooltip}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex-1">
+          <div className="flex min-w-0 flex-row gap-2 sm:w-40 sm:flex-col">
+            <ColorTooltip className="min-w-0 flex-1" content={colors.placeholderTooltip}>
               <div
-                className="flex h-full flex-col justify-center rounded-xl border border-border px-4 py-3"
+                className="flex h-full cursor-default items-center rounded-xl border border-border px-4 py-3"
                 style={{backgroundColor: `var(${colors.placeholder})`}}
               >
                 <span
@@ -362,17 +411,11 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
                 >
                   Placeholder
                 </span>
-                <span
-                  className="font-mono text-[10px] opacity-60"
-                  style={contrastStyle(colors.placeholder)}
-                >
-                  {colors.placeholder}
-                </span>
               </div>
-            </div>
-            <div className="flex-1">
+            </ColorTooltip>
+            <ColorTooltip className="min-w-0 flex-1" content={colors.foregroundTooltip}>
               <div
-                className="flex h-full flex-col justify-center rounded-xl px-4 py-3"
+                className="flex h-full cursor-default items-center rounded-xl px-4 py-3"
                 style={{backgroundColor: `var(${colors.foreground})`}}
               >
                 <span
@@ -381,14 +424,8 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
                 >
                   Foreground
                 </span>
-                <span
-                  className="font-mono text-[10px] opacity-60"
-                  style={contrastStyle(colors.foreground)}
-                >
-                  {colors.foreground}
-                </span>
               </div>
-            </div>
+            </ColorTooltip>
           </div>
         </div>
       </div>
