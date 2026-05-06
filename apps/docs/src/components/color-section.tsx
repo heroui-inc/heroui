@@ -60,12 +60,20 @@ function ColorHeader({
 }) {
   return (
     <div
-      className="flex h-16 items-center justify-between rounded-xl px-4 py-5"
+      className="flex items-center justify-between rounded-xl px-4 py-3"
       style={{backgroundColor: `var(${bgVariable})`}}
     >
-      <span className="text-lg font-medium tracking-tight" style={contrastStyle(bgVariable)}>
-        {name}
-      </span>
+      <div className="flex flex-col">
+        <span className="text-lg font-medium tracking-tight" style={contrastStyle(bgVariable)}>
+          {name}
+        </span>
+        <span
+          className="font-mono text-[10px] leading-tight opacity-50"
+          style={contrastStyle(bgVariable)}
+        >
+          {bgVariable}
+        </span>
+      </div>
       <span className="text-xs font-medium" style={contrastStyle(bgVariable)}>
         {theme}
       </span>
@@ -78,12 +86,15 @@ function ColorBlock({
   cssValue,
   hasBorder,
   label,
+  varName,
 }: {
   label: string;
   bgVariable: string;
   /** Raw CSS color expression (e.g. color-mix). When set, used for background instead of var(bgVariable). */
   cssValue?: string;
   hasBorder?: boolean;
+  /** Variable name to display. Defaults to bgVariable. */
+  varName?: string;
 }) {
   const bgValue = cssValue || `var(${bgVariable})`;
 
@@ -91,12 +102,18 @@ function ColorBlock({
     <div
       style={{backgroundColor: bgValue}}
       className={cn(
-        "flex h-[45px] items-center rounded-xl px-4 py-3.5",
+        "flex flex-col justify-center rounded-xl px-4 py-2",
         hasBorder && "border border-black/12 dark:border-white/12",
       )}
     >
       <span className="text-sm font-medium tracking-tight" style={contrastStyle(bgVariable)}>
         {label}
+      </span>
+      <span
+        className="font-mono text-[10px] leading-tight opacity-50"
+        style={contrastStyle(bgVariable)}
+      >
+        {varName || bgVariable}
       </span>
     </div>
   );
@@ -133,8 +150,17 @@ function ThemeColumn({
           >
             {name}
           </span>
-          <ColorBlock bgVariable={hoverVariable} cssValue={hoverCssValue} label="Hover" />
-          <ColorBlock bgVariable={foregroundVariable} label="Foreground" />
+          <ColorBlock
+            bgVariable={hoverVariable}
+            cssValue={hoverCssValue}
+            label="Hover"
+            varName={`${baseVariable}-hover`}
+          />
+          <ColorBlock
+            bgVariable={foregroundVariable}
+            label="Foreground"
+            varName={`${baseVariable}-foreground`}
+          />
         </div>
         {!!soft && (
           <div className="relative flex flex-1 flex-col gap-2.5 overflow-hidden rounded-xl p-4">
@@ -148,10 +174,13 @@ function ThemeColumn({
             </span>
             <div className="relative">
               <div
-                className="flex h-[45px] items-center rounded-xl border border-black/12 px-4 py-3.5 dark:border-white/12"
+                className="flex flex-col justify-center rounded-xl border border-black/12 px-4 py-2 dark:border-white/12"
                 style={{backgroundColor: soft.hoverCssValue || `var(${soft.hoverVariable})`}}
               >
                 <span className="text-sm font-medium tracking-tight text-foreground">Hover</span>
+                <span className="font-mono text-[10px] leading-tight text-foreground opacity-50">
+                  {baseVariable}-soft-hover
+                </span>
               </div>
             </div>
             <div className="relative">
@@ -159,6 +188,7 @@ function ThemeColumn({
                 bgVariable={soft.foregroundVariable}
                 cssValue={soft.foregroundCssValue}
                 label="Foreground"
+                varName={`${baseVariable}-soft-foreground`}
               />
             </div>
           </div>
@@ -218,12 +248,15 @@ function StackedSwatch({
       <div
         style={{backgroundColor: bgValue}}
         className={cn(
-          "flex h-16 items-center justify-between rounded-xl px-4 py-5",
+          "flex h-16 flex-col justify-center rounded-xl px-4 py-2",
           border && "border border-border",
         )}
       >
-        <span className="text-lg font-medium tracking-tight" style={contrastStyle(variable)}>
+        <span className="text-sm font-medium tracking-tight" style={contrastStyle(variable)}>
           {label}
+        </span>
+        <span className="font-mono text-[10px] opacity-60" style={contrastStyle(variable)}>
+          {variable}
         </span>
       </div>
     </div>
@@ -292,36 +325,67 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
             className="flex flex-1 flex-col gap-2.5 rounded-xl border border-black/12 p-4"
             style={{backgroundColor: `var(${colors.bg})`}}
           >
-            <span className="text-base font-medium tracking-tight" style={contrastStyle(colors.bg)}>
-              Bg
-            </span>
-            <ColorBlock hasBorder bgVariable={colors.bg} cssValue={colors.bgHover} label="Hover" />
-            <ColorBlock hasBorder bgVariable={colors.bg} label="Focus" />
+            <div>
+              <span
+                className="text-base font-medium tracking-tight"
+                style={contrastStyle(colors.bg)}
+              >
+                Bg
+              </span>
+              <div className="font-mono text-[10px] opacity-60" style={contrastStyle(colors.bg)}>
+                {colors.bg}
+              </div>
+            </div>
+            <ColorBlock
+              hasBorder
+              bgVariable={colors.bg}
+              cssValue={colors.bgHover}
+              label="Hover"
+              varName="--color-field-hover"
+            />
+            <ColorBlock
+              hasBorder
+              bgVariable={colors.bg}
+              label="Focus"
+              varName="--color-field-focus"
+            />
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex-1">
               <div
-                className="flex h-full items-center rounded-xl border border-border px-4 py-5"
+                className="flex h-full flex-col justify-center rounded-xl border border-border px-4 py-3"
                 style={{backgroundColor: `var(${colors.placeholder})`}}
               >
                 <span
-                  className="text-lg font-medium tracking-tight"
+                  className="text-sm font-medium tracking-tight"
                   style={contrastStyle(colors.placeholder)}
                 >
                   Placeholder
+                </span>
+                <span
+                  className="font-mono text-[10px] opacity-60"
+                  style={contrastStyle(colors.placeholder)}
+                >
+                  {colors.placeholder}
                 </span>
               </div>
             </div>
             <div className="flex-1">
               <div
-                className="flex h-full items-center rounded-xl px-4 py-5"
+                className="flex h-full flex-col justify-center rounded-xl px-4 py-3"
                 style={{backgroundColor: `var(${colors.foreground})`}}
               >
                 <span
-                  className="text-lg font-medium tracking-tight"
+                  className="text-sm font-medium tracking-tight"
                   style={contrastStyle(colors.foreground)}
                 >
                   Foreground
+                </span>
+                <span
+                  className="font-mono text-[10px] opacity-60"
+                  style={contrastStyle(colors.foreground)}
+                >
+                  {colors.foreground}
                 </span>
               </div>
             </div>
