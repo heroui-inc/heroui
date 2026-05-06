@@ -137,11 +137,11 @@ function ThemeColumn({
   soft?: SideBySideProps["soft"];
 }) {
   return (
-    <div className="flex flex-1 flex-col gap-3" data-theme={theme.toLowerCase()}>
+    <div className="flex flex-1 flex-col gap-2" data-theme={theme.toLowerCase()}>
       <ColorHeader bgVariable={baseVariable} name={name} theme={theme} />
-      <div className={cn("flex gap-3", soft ? "flex-row" : "flex-col")}>
+      <div className={cn("flex gap-2", soft ? "flex-row" : "flex-col")}>
         <div
-          className="flex flex-1 flex-col gap-2.5 rounded-xl p-4"
+          className="flex flex-1 flex-col gap-1.5 rounded-xl p-3"
           style={{backgroundColor: `var(${baseVariable})`}}
         >
           <span
@@ -163,7 +163,7 @@ function ThemeColumn({
           />
         </div>
         {!!soft && (
-          <div className="relative flex flex-1 flex-col gap-2.5 overflow-hidden rounded-xl p-4">
+          <div className="relative flex flex-1 flex-col gap-1.5 overflow-hidden rounded-xl p-3">
             <div className="absolute inset-0" style={{backgroundColor: "var(--surface)"}} />
             <div
               className="absolute inset-0"
@@ -207,7 +207,7 @@ export function ColorSectionSideBySide({
   soft,
 }: SideBySideProps) {
   return (
-    <div className="not-prose flex flex-col gap-8 sm:flex-row">
+    <div className="not-prose flex flex-col gap-4 sm:flex-row">
       <ThemeColumn
         baseVariable={baseVariable}
         foregroundVariable={foregroundVariable}
@@ -271,11 +271,11 @@ export function ColorSectionStacked({
   darkColors: StackedColor[];
 }) {
   return (
-    <div className="not-prose flex flex-col gap-4">
+    <div className="not-prose flex flex-col gap-2">
       <div data-theme="light">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <ThemeChip theme="Light" />
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-2">
             {lightColors.map((color) => (
               <StackedSwatch
                 key={color.variable}
@@ -289,9 +289,9 @@ export function ColorSectionStacked({
         </div>
       </div>
       <div data-theme="dark">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <ThemeChip theme="Dark" />
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-2">
             {darkColors.map((color) => (
               <StackedSwatch
                 key={color.variable}
@@ -318,11 +318,11 @@ interface FormFieldColors {
 function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "light" | "dark"}) {
   return (
     <div data-theme={theme}>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <ThemeChip theme={theme === "light" ? "Light" : "Dark"} />
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-2">
           <div
-            className="flex flex-1 flex-col gap-2.5 rounded-xl border border-black/12 p-4"
+            className="flex flex-1 flex-col gap-1.5 rounded-xl border border-black/12 p-3"
             style={{backgroundColor: `var(${colors.bg})`}}
           >
             <div>
@@ -350,7 +350,7 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
               varName="--color-field-focus"
             />
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             <div className="flex-1">
               <div
                 className="flex h-full flex-col justify-center rounded-xl border border-border px-4 py-3"
@@ -398,7 +398,7 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
 
 export function ColorSectionFormField({colors}: {colors: FormFieldColors}) {
   return (
-    <div className="not-prose flex flex-col gap-4">
+    <div className="not-prose flex flex-col gap-2">
       <FormFieldThemeBlock colors={colors} theme="light" />
       <FormFieldThemeBlock colors={colors} theme="dark" />
     </div>
