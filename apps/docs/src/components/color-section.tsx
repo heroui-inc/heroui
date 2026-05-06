@@ -1,6 +1,7 @@
 "use client";
 
-import {Chip, Tooltip} from "@heroui/react";
+import {Chip, Tooltip, toast} from "@heroui/react";
+import {converter, parse} from "culori";
 import * as React from "react";
 
 import {Iconify} from "@/components/iconify";
@@ -14,6 +15,51 @@ const contrastStyle = (bgVar: string): React.CSSProperties => ({
   filter: "invert(1) grayscale(1) contrast(100)",
 });
 
+const getTokenName = (content: string | undefined, fallback: string) => {
+  if (!content) return fallback;
+
+  return content.split(":")[0]?.trim() || fallback;
+};
+
+const toOklch = converter("oklch");
+
+const formatNumber = (value: number | undefined) => {
+  if (typeof value !== "number") return "0";
+
+  return Number(value.toFixed(4)).toString();
+};
+
+const toOklchCss = (value: string) => {
+  const parsed = parse(value);
+
+  if (!parsed) return value;
+
+  const oklch = toOklch(parsed);
+
+  if (!oklch) return value;
+
+  if (typeof oklch.alpha === "number" && oklch.alpha < 1) {
+    return `oklch(${formatNumber(oklch.l)} ${formatNumber(oklch.c)} ${formatNumber(oklch.h)} / ${formatNumber(oklch.alpha)})`;
+  }
+
+  return `oklch(${formatNumber(oklch.l)} ${formatNumber(oklch.c)} ${formatNumber(oklch.h)})`;
+};
+
+const copyColorValue = async (
+  event: React.MouseEvent<HTMLElement>,
+  fallback: string | undefined,
+) => {
+  const computedValue = getComputedStyle(event.currentTarget).backgroundColor || fallback;
+  const value = computedValue ? toOklchCss(computedValue) : fallback || "";
+
+  if (!value) return;
+
+  await navigator.clipboard.writeText(value);
+  toast.success("Copied color value", {
+    description: value,
+  });
+};
+
 function ColorTooltip({
   children,
   className,
@@ -23,6 +69,10 @@ function ColorTooltip({
   content?: string;
   className?: string;
 }) {
+  if (!content) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <Tooltip delay={0}>
       <Tooltip.Trigger className={className}>{children}</Tooltip.Trigger>
@@ -83,17 +133,28 @@ function ColorHeader({
   name: string;
   theme: "Light" | "Dark";
   bgVariable: string;
-  tooltip: string;
+  tooltip?: string;
 }) {
+  const token = getTokenName(tooltip, bgVariable);
+
   return (
     <ColorTooltip content={tooltip}>
       <div
-        className="flex cursor-default items-center justify-between rounded-xl px-4 py-3"
+        className="flex cursor-pointer items-center justify-between rounded-xl px-4 py-3"
         style={{backgroundColor: `var(${bgVariable})`}}
+        onClick={copyColorValue}
       >
-        <span className="text-lg font-medium tracking-tight" style={contrastStyle(bgVariable)}>
-          {name}
-        </span>
+        <div className="flex flex-col">
+          <span className="text-lg font-medium tracking-tight" style={contrastStyle(bgVariable)}>
+            {name}
+          </span>
+          <span
+            className="font-mono text-[10px] leading-tight opacity-60 sm:hidden"
+            style={contrastStyle(bgVariable)}
+          >
+            {token}
+          </span>
+        </div>
         <span className="text-xs font-medium" style={contrastStyle(bgVariable)}>
           {theme}
         </span>
@@ -113,21 +174,29 @@ function ColorBlock({
   bgVariable: string;
   cssValue?: string;
   hasBorder?: boolean;
-  tooltip: string;
+  tooltip?: string;
 }) {
   const bgValue = cssValue || `var(${bgVariable})`;
+  const token = getTokenName(tooltip, bgVariable);
 
   return (
     <ColorTooltip className="block w-full" content={tooltip}>
       <div
         style={{backgroundColor: bgValue}}
         className={cn(
-          "flex w-full cursor-default items-center rounded-xl px-4 py-2.5",
+          "flex w-full cursor-pointer flex-col justify-center rounded-xl px-4 py-2.5",
           hasBorder && "border border-black/12 dark:border-white/12",
         )}
+        onClick={(event) => copyColorValue(event, cssValue || bgVariable)}
       >
         <span className="text-sm font-medium tracking-tight" style={contrastStyle(bgVariable)}>
           {label}
+        </span>
+        <span
+          className="font-mono text-[10px] leading-tight opacity-60 sm:hidden"
+          style={contrastStyle(bgVariable)}
+        >
+          {token}
         </span>
       </div>
     </ColorTooltip>
@@ -149,12 +218,12 @@ function ThemeColumn({
   theme: "Light" | "Dark";
   name: string;
   baseVariable: string;
-  baseTooltip: string;
+  baseTooltip?: string;
   hoverVariable: string;
   hoverCssValue?: string;
-  hoverTooltip: string;
+  hoverTooltip?: string;
   foregroundVariable: string;
-  foregroundTooltip: string;
+  foregroundTooltip?: string;
   soft?: SideBySideProps["soft"];
 }) {
   return (
@@ -194,14 +263,28 @@ function ThemeColumn({
               {name} Soft
             </span>
             <div className="relative">
-              <ColorTooltip className="block w-full" content={soft.hoverTooltip}>
-                <div
-                  className="flex w-full cursor-default items-center rounded-xl border border-black/12 px-4 py-2.5 dark:border-white/12"
-                  style={{backgroundColor: soft.hoverCssValue || `var(${soft.hoverVariable})`}}
-                >
-                  <span className="text-sm font-medium tracking-tight text-foreground">Hover</span>
-                </div>
-              </ColorTooltip>
+              {(() => {
+                const token = getTokenName(soft.hoverTooltip, soft.hoverVariable);
+
+                return (
+                  <ColorTooltip className="block w-full" content={soft.hoverTooltip}>
+                    <div
+                      className="flex w-full cursor-pointer flex-col justify-center rounded-xl border border-black/12 px-4 py-2.5 dark:border-white/12"
+                      style={{backgroundColor: soft.hoverCssValue || `var(${soft.hoverVariable})`}}
+                      onClick={(event) =>
+                        copyColorValue(event, soft.hoverCssValue || soft.hoverVariable)
+                      }
+                    >
+                      <span className="text-sm font-medium tracking-tight text-foreground">
+                        Hover
+                      </span>
+                      <span className="font-mono text-[10px] leading-tight text-foreground opacity-60 sm:hidden">
+                        {token}
+                      </span>
+                    </div>
+                  </ColorTooltip>
+                );
+              })()}
             </div>
             <div className="relative">
               <ColorBlock
@@ -270,21 +353,29 @@ function StackedSwatch({
   variable: string;
   cssValue?: string;
   border?: boolean;
-  tooltip: string;
+  tooltip?: string;
 }) {
   const bgValue = cssValue || `var(${variable})`;
+  const token = getTokenName(tooltip, variable);
 
   return (
-    <ColorTooltip className="min-w-0 basis-[calc(50%-4px)] sm:flex-1 sm:basis-0" content={tooltip}>
+    <ColorTooltip className="min-w-0 basis-full sm:flex-1 sm:basis-0" content={tooltip}>
       <div
         style={{backgroundColor: bgValue}}
         className={cn(
-          "flex h-14 w-full cursor-default items-center rounded-xl px-4",
+          "flex min-h-14 w-full cursor-pointer flex-col justify-center rounded-xl px-4 py-2",
           border && "border border-border",
         )}
+        onClick={(event) => copyColorValue(event, cssValue || variable)}
       >
         <span className="text-sm font-medium tracking-tight" style={contrastStyle(variable)}>
           {label}
+        </span>
+        <span
+          className="truncate font-mono text-[10px] leading-tight opacity-60 sm:hidden"
+          style={contrastStyle(variable)}
+        >
+          {token}
         </span>
       </div>
     </ColorTooltip>
@@ -402,8 +493,9 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
           <div className="flex min-w-0 flex-row gap-2 sm:w-40 sm:flex-col">
             <ColorTooltip className="min-w-0 flex-1" content={colors.placeholderTooltip}>
               <div
-                className="flex h-full cursor-default items-center rounded-xl border border-border px-4 py-3"
+                className="flex h-full cursor-pointer items-center rounded-xl border border-border px-4 py-3"
                 style={{backgroundColor: `var(${colors.placeholder})`}}
+                onClick={(event) => copyColorValue(event, colors.placeholder)}
               >
                 <span
                   className="text-sm font-medium tracking-tight"
@@ -415,8 +507,9 @@ function FormFieldThemeBlock({colors, theme}: {colors: FormFieldColors; theme: "
             </ColorTooltip>
             <ColorTooltip className="min-w-0 flex-1" content={colors.foregroundTooltip}>
               <div
-                className="flex h-full cursor-default items-center rounded-xl px-4 py-3"
+                className="flex h-full cursor-pointer items-center rounded-xl px-4 py-3"
                 style={{backgroundColor: `var(${colors.foreground})`}}
+                onClick={(event) => copyColorValue(event, colors.foreground)}
               >
                 <span
                   className="text-sm font-medium tracking-tight"
