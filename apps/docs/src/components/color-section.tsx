@@ -142,7 +142,7 @@ function ColorHeader({
       <div
         className="flex cursor-pointer items-center justify-between rounded-xl px-4 py-3"
         style={{backgroundColor: `var(${bgVariable})`}}
-        onClick={copyColorValue}
+        onClick={(event) => copyColorValue(event, bgVariable)}
       >
         <div className="flex flex-col">
           <span className="text-lg font-medium tracking-tight" style={contrastStyle(bgVariable)}>
