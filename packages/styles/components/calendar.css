@@ -53,7 +53,7 @@
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-default text-accent;
+      @apply bg-default text-accent-soft-foreground;
     }
   }
 
