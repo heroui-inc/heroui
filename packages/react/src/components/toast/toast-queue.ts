@@ -183,9 +183,15 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
         const successMessage =
           typeof options.success === "function" ? options.success(data) : options.success;
 
+        // Defer the success toast to the next task to avoid triggering two
+        // ViewTransitions in the same microtask. The View Transitions API only
+        // allows one active transition — starting a second aborts the first
+        // with a DOMException.
         queue.close(loadingId);
 
-        return toastFn.success(successMessage);
+        setTimeout(() => {
+          toastFn.success(successMessage);
+        }, 0);
       })
       .catch((error: Error) => {
         const errorMessage =
@@ -193,7 +199,9 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
 
         queue.close(loadingId);
 
-        return toastFn.danger(errorMessage);
+        setTimeout(() => {
+          toastFn.danger(errorMessage);
+        }, 0);
       });
 
     return loadingId;
