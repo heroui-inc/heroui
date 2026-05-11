@@ -20,11 +20,11 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <LinkRoot
             className="flex items-center gap-1 rounded-full bg-accent-soft px-2 py-1 text-xs text-accent-soft-foreground transition-colors hover:bg-accent-soft-hover"
-            href="/docs/react/releases/v3-0-4"
+            href="/docs/native/releases/v1-0-3"
           >
             <Rocket className="size-3 text-accent-soft-foreground" />
             <span className="max-w-60 truncate sm:max-w-full">
-              HeroUI v3.0.4 – Text component, theme selector & fixes
+              HeroUI Native v1.0.3 – Text component, ScrollShadow & Tabs fixes
             </span>
           </LinkRoot>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">

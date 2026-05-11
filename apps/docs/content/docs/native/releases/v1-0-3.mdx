@@ -1,0 +1,257 @@
+---
+title: v1.0.3
+description:
+  New Text typography component, ScrollShadow inverted support, Tabs RTL indicator fix, optional Avatar alt prop, Select indicator unification, and form field style refinements
+github:
+  pull: 400
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">May 11, 2026</span>
+</div>
+
+HeroUI Native v1.0.3 introduces the new `Text` typography primitive with a compound API for headings, paragraphs, and inline code, while delivering important fixes for `ScrollShadow` with inverted lists, `Tabs` indicator alignment in RTL layouts, and `Select.TriggerIndicator` animation when using custom children. This release also refines visual styles across `Button`, `Chip`, and `Input`, makes the `Avatar` `alt` prop optional, and corrects inner padding behavior for `TextField` and `SearchField`.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It Out
+
+Experience all the v1.0.3 improvements in action with our preview app! You can explore the new `Text` component, the RTL-aware `Tabs` indicator, `ScrollShadow` with inverted lists, the refined `Button`, `Chip`, and `Input` styles, and the unified `Select.TriggerIndicator` animation directly on your device.
+
+### Prerequisites
+
+Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
+
+### How to Access
+
+**Option 1: Scan the QR Code**
+
+Use your device's camera or Expo Go app to scan:
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go QR Code"
+  />
+</div>
+
+> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
+
+**Option 2: Click the Link**
+
+**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
+
+This will automatically open the app in Expo Go if it's installed on your device.
+
+## What's New
+
+### New Components
+
+This release introduces **1 new** typography component:
+
+- **[Text](/docs/native/components/text)**: Primitive typography component with semantic `type` variants and `Heading`, `Paragraph`, and `Code` sub-components. ([Documentation](/docs/native/components/text))
+
+#### Text
+
+The `Text` component is a typography primitive that renders styled text via semantic presets. It exposes a compound API with `Text.Heading`, `Text.Paragraph`, and `Text.Code` sub-components, and layers orthogonal `align`, `color`, `weight`, and `truncate` props on top of `tailwind-variants` so typography can be composed without bespoke styles on every call site.
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-dark.mp4"
+/>
+
+**Features:**
+
+- Semantic `type` variants: `h1`–`h6`, `body`, `body-sm`, `body-xs`, and `code`
+- `Text.Heading` automatically sets `accessibilityRole="header"` and narrows `type` to heading levels
+- `Text.Paragraph` narrows `type` to body variants for readable copy
+- `Text.Code` renders chip-styled, inline monospaced text with a platform-appropriate `fontFamily` (Menlo on iOS, `monospace` elsewhere)
+- RTL-aware `align` prop with `start`, `center`, `end`, and `justify` (iOS-only justification)
+- Semantic `color` presets (`default`, `muted`) with `className` escape hatch for other theme colors
+- `weight` override that wins over `type`'s implied weight via `tailwind-merge`
+- `truncate` boolean shortcut for `numberOfLines={1}`; an explicit `numberOfLines` always takes precedence
+
+**Usage:**
+
+```tsx
+import { Text } from "heroui-native";
+import { View } from "react-native";
+
+export function Example() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-4">
+      <Text.Heading type="h1">Welcome</Text.Heading>
+      <Text.Heading type="h3">Getting Started</Text.Heading>
+      <Text.Paragraph>
+        This is a body paragraph rendered with the Text component.
+      </Text.Paragraph>
+      <Text.Paragraph color="muted" type="body-sm">
+        Smaller supporting text for captions or footnotes.
+      </Text.Paragraph>
+      <Text.Code>npm install heroui-native</Text.Code>
+    </View>
+  );
+}
+```
+
+For complete documentation and examples, see the [Text component page](/docs/native/components/text).
+
+**Related PR:** [#400](https://github.com/heroui-inc/heroui-native/pull/400)
+
+## Component Improvements
+
+### ScrollShadow Inverted Child Support
+
+The [ScrollShadow](/docs/native/components/scroll-shadow) component now correctly handles inverted scrollable children such as `<FlatList inverted>` or `<FlashList inverted>`.
+
+**Improvements:**
+
+- `ScrollShadowRoot` now reads the `inverted` prop from its scrollable child, mirroring the existing `childHorizontal` auto-detection pattern
+- Swaps which animated style drives each visual edge so shadows render at the correct side
+- No public API changes — the fix activates only when the child has `inverted={true}`, which previously rendered the gradients on the wrong edges
+
+Previously, wrapping an inverted list would render the gradient shadow on the top edge while scrollable content was below, and omit the bottom shadow even when more content was available. Indicators now point in the correct visual direction for inverted feeds, chat lists, and similar reverse-ordered scroll surfaces.
+
+**Related PR:** [#398](https://github.com/heroui-inc/heroui-native/pull/398)
+
+### Tabs RTL Indicator Alignment
+
+The [Tabs](/docs/native/components/tabs) component's indicator now positions correctly when React Native is running in RTL mode.
+
+**Improvements:**
+
+- Tab strip width is now tracked through the tabs measurements context
+- `Tabs.List` layout width is used for fixed tab layouts
+- `Tabs.ScrollView` content width is used for scrollable tab layouts
+- The indicator's `translateX` is mirrored only when `I18nManager.isRTL` is enabled
+
+The indicator uses an absolute `left` anchor combined with a measured `translateX`. In RTL, React Native swaps the absolute anchor automatically, but the measured transform still needed to be mirrored — this is now handled internally. Both fixed and scrollable tab lists are fixed, and the public API is unchanged.
+
+**Related PR:** [#396](https://github.com/heroui-inc/heroui-native/pull/396)
+
+### Select Trigger Indicator Unified Rendering
+
+The [Select](/docs/native/components/select) component's `Select.TriggerIndicator` now applies the open/close rotation animation consistently, regardless of whether the default icon or custom `children` are rendered.
+
+**Improvements:**
+
+- Custom `children` now receive the same animated container style as the default icon
+- `ChevronDownIcon` is rendered as a fallback via `children ?? <ChevronDownIcon />`
+- Collapsed the previously separate render branches into a single, unified render path
+
+Previously, passing custom `children` to `Select.TriggerIndicator` bypassed the animated rotation transform, leaving the indicator static on open/close. The unified branch ensures the rotation animation always plays without changing the public API.
+
+**Related PR:** [#409](https://github.com/heroui-inc/heroui-native/pull/409)
+
+## API Enhancements
+
+### Optional `alt` Prop on Avatar
+
+The [Avatar](/docs/native/components/avatar) component's `alt` prop is now optional and defaults to `'Avatar'`, reducing boilerplate for decorative or contextually obvious avatars while preserving accessibility support.
+
+**New Capability:**
+
+```tsx
+import { Avatar } from "heroui-native";
+
+<Avatar>
+  <Avatar.Image source={{ uri: "https://example.com/avatar.jpg" }} />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>;
+```
+
+Existing code that passes an explicit `alt` continues to work unchanged — the prop simply gains a sensible default when omitted. The `RootProps` type now reflects `alt?: string` with a JSDoc `@default 'Avatar'`, and the component documentation has been updated to match.
+
+**Related PR:** [#404](https://github.com/heroui-inc/heroui-native/pull/404)
+
+## Style Fixes
+
+### Button, Chip, and Input Style Refinements
+
+Refined sizing and color styling across [Button](/docs/native/components/button), [Chip](/docs/native/components/chip), and [Input](/docs/native/components/input) to standardize on Tailwind utility classes and semantic soft color tokens.
+
+**Fixes:**
+
+- **Button**: Sizes now use Tailwind height utilities (`h-10`, `h-12`, `h-14`) instead of arbitrary pixel values; the `sm` height is adjusted from 36px to 40px for better tap-target ergonomics
+- **Chip**: Vertical padding for `md`/`lg` refined (`py-[3px]` → `py-1`, `py-1` → `py-1.5`) for more balanced spacing
+- **Chip**: Soft variants now use semantic `bg-{color}-soft` tokens instead of opacity-based `bg-{color}/15` backgrounds
+- **Input**: Switched from `py-3.5` to `min-h-12` so the field maintains consistent height regardless of content
+- **Input**: Primary variant border now correctly uses the `border-field-border` token instead of `border-field`
+
+Minor pixel-level differences in Button `sm` size (+4px) and Chip `md`/`lg` paddings should be reviewed visually. No API changes were made — only style tokens in `button.styles.ts`, `chip.styles.ts`, and `input.styles.ts` were updated.
+
+**Related PR:** [#406](https://github.com/heroui-inc/heroui-native/pull/406)
+
+### TextField and SearchField Inner Padding Fix
+
+The [TextField](/docs/native/components/text-field) and [SearchField](/docs/native/components/search-field) components no longer apply extra horizontal padding to nested `Label`, `Description`, and `FieldError` components.
+
+**Fixes:**
+
+- `TextField` now provides `hasFieldPadding: false` to its `FormFieldContext`
+- `SearchField` now provides `hasFieldPadding: false` to its `FormFieldContext`
+- `Label`, `Description`, and `FieldError` rendered inside these fields no longer pick up the extra `px-1.5` side padding
+- Visual alignment is now consistent across all form field containers (`ControlField`, `RadioGroup`, `TagGroup` already used `hasFieldPadding: false`)
+
+The change is isolated to two `useMemo` values that provide `FormFieldContext`. Consumers that previously relied on the unintended inner padding can restore the spacing by adding `className="px-1.5"` to the affected child components.
+
+**Related PR:** [#407](https://github.com/heroui-inc/heroui-native/pull/407)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #334](https://github.com/heroui-inc/heroui-native/issues/334)**: Resolved `Tabs.Indicator` mispositioning in RTL layouts. The indicator combines an absolute `left` anchor with a measured `translateX`; React Native swaps the anchor automatically in RTL but the transform still needed to be mirrored. The tabs measurements context now tracks the tab strip width and mirrors `translateX` only when `I18nManager.isRTL` is enabled, fixing both fixed and scrollable tab lists.
+- **[Issue #393](https://github.com/heroui-inc/heroui-native/issues/393)**: Fixed `ScrollShadow` ignoring its child's `inverted` prop. `ScrollShadowRoot` now reads `inverted` from the scrollable child (mirroring the existing `childHorizontal` auto-detection) and swaps which animated style drives each visual edge so the gradients render on the correct sides for inverted feeds and chat-style lists.
+
+**Related PRs:**
+
+- [#396](https://github.com/heroui-inc/heroui-native/pull/396)
+- [#398](https://github.com/heroui-inc/heroui-native/pull/398)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Text](/docs/native/components/text) - New component documentation, anatomy, usage, and full API reference
+- [Avatar](/docs/native/components/avatar) - `alt` prop documented as optional with default `'Avatar'`
+- [All Components](/docs/native/components) - Added the new Typography category alongside the existing categories
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
