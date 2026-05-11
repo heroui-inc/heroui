@@ -122,6 +122,8 @@ import { Input, Label, TextField } from 'heroui-native';
 
 When rendering an Input inside a `BottomSheet`, use the `useBottomSheetAwareHandlers` hook to wire keyboard avoidance handlers. Pass the returned `onFocus` and `onBlur` to the Input.
 
+> **Note**: `useBottomSheetAwareHandlers` must be used inside a `BottomSheet`. Call it from a child component rendered inside `BottomSheet.Content` — outside of a `BottomSheet` context the returned handlers are no-ops.
+
 ```tsx
 import { Input, TextField, useBottomSheetAwareHandlers } from 'heroui-native';
 
