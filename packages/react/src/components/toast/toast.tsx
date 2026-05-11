@@ -360,6 +360,30 @@ const ToastProvider = <T extends object = ToastContentValue>({
     return maxVisibleToasts ?? queueLimit ?? DEFAULT_MAX_VISIBLE_TOAST;
   }, [maxVisibleToasts, queueProp]);
 
+  // Clean up stale height entries when toasts are dismissed
+  const visibleToasts = toastQueue.visibleToasts;
+
+  useEffect(() => {
+    setToastHeights((prev) => {
+      const visibleKeys = new Set(visibleToasts.map((t) => String(t.key)));
+      const staleKeys = Object.keys(prev).filter((key) => !visibleKeys.has(key));
+
+      if (staleKeys.length === 0) {
+        return prev;
+      }
+
+      const next: Record<string, number> = {};
+
+      for (const key of Object.keys(prev)) {
+        if (visibleKeys.has(key)) {
+          next[key] = prev[key];
+        }
+      }
+
+      return next;
+    });
+  }, [visibleToasts]);
+
   const handleToastHeightChange = useCallback((key: string, height: number) => {
     setToastHeights((prev) => {
       if (prev[key] === height) {
