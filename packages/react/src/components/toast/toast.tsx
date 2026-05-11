@@ -110,7 +110,6 @@ const Toast = <T extends object = ToastContentValue>({
       translate: `0 ${translateY}px 0`,
       scale: `${scale}`,
       zIndex: visibleToasts.length - index,
-      tabindex: isFrontmost ? 0 : -1,
       ...(frontHeight
         ? ({
             "--front-height": `${frontHeight}px`,
@@ -144,6 +143,7 @@ const Toast = <T extends object = ToastContentValue>({
       data-index={index}
       data-slot="toast"
       style={style}
+      tabIndex={isFrontmost ? 0 : -1}
       toast={toast}
       {...rest}
     >
