@@ -7,7 +7,7 @@ import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
-import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -16,7 +16,7 @@ import {
   UNSTABLE_ToastStateContext as ToastStateContext,
 } from "react-aria-components/Toast";
 
-import {useMeasuredHeight, useMediaQuery} from "../../hooks";
+import {useMeasuredHeight} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -341,7 +341,23 @@ const ToastProvider = <T extends object = ToastContentValue>({
   ...rest
 }: ToastProviderProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  // Use a client-only state for mobile detection to avoid SSR hydration mismatch.
+  // Default to false (desktop layout) on the server and first client render,
+  // then update after hydration via useEffect.
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 768px)");
+
+    setIsMobile(mql.matches);
+
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+
+    mql.addEventListener("change", handler);
+
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
   const [toastHeights, setToastHeights] = React.useState<Record<string, number>>({});
 
   const toastQueue = useMemo((): StatelyToastQueue<T> => {
