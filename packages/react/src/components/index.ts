@@ -56,7 +56,7 @@ export * from "./input-group";
 export * from "./textarea";
 export * from "./textfield";
 export * from "./search-field";
-export * from "./text";
+export * from "./typography";
 export * from "./label";
 export * from "./description";
 export * from "./empty-state";

@@ -1,4 +1,4 @@
-.text {
+.typography {
   @apply text-foreground;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .typography-prose blockquote {
-  @apply mt-4 border-l-4 border-border pl-4 italic text-muted;
+  @apply mt-4 border-l-4 border-border pl-4 text-muted italic;
 }
 
 .typography-prose ul {
