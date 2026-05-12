@@ -32,7 +32,7 @@
 }
 
 .range-calendar__nav-button {
-  @apply flex size-6 items-center justify-center rounded-full text-accent;
+  @apply flex size-6 items-center justify-center rounded-xl text-accent;
 
   will-change: scale;
 
@@ -134,7 +134,7 @@
  * RangeCalendar Cells
  * -------------------------------------------------------------------------- */
 .range-calendar__cell {
-  @apply relative z-1 mx-0 my-[2px] rounded-full p-0 outline-none;
+  @apply relative z-1 mx-0 my-[2px] rounded-3xl p-0 outline-none;
   cursor: var(--cursor-interactive);
 
   will-change: background-color, border-color;
@@ -149,7 +149,7 @@
 
   /* Inner interactive circle/capsule (equivalent to React Aria "button-base") */
   .range-calendar__cell-button {
-    @apply flex aspect-square w-full items-center justify-center rounded-full text-sm font-medium text-foreground no-highlight;
+    @apply flex aspect-square w-full items-center justify-center rounded-3xl text-sm font-medium text-foreground no-highlight;
 
     will-change: scale;
     transition: scale 200ms var(--ease-out);
@@ -182,14 +182,14 @@
   &[data-selected="true"]:is(td:first-child > *, [aria-disabled] + td > *) {
     @apply rounded-ss-lg rounded-es-lg;
     &[data-selection-start="true"] {
-      @apply rounded-ss-full rounded-es-full;
+      @apply rounded-ss-3xl rounded-es-3xl;
     }
   }
 
   &[data-selected="true"]:is(td:last-child > *, td:has(+ [aria-disabled]) > *) {
     @apply rounded-se-lg rounded-ee-lg;
     &[data-selection-end="true"] {
-      @apply rounded-se-full rounded-ee-full;
+      @apply rounded-se-3xl rounded-ee-3xl;
     }
   }
 
@@ -208,11 +208,11 @@
   } */
 
   &[data-selection-start="true"]:not([data-outside-month="true"]) {
-    @apply rounded-tl-full rounded-bl-full;
+    @apply rounded-tl-3xl rounded-bl-3xl;
   }
 
   &[data-selection-end="true"]:not([data-outside-month="true"]) {
-    @apply rounded-tr-full rounded-br-full;
+    @apply rounded-tr-3xl rounded-br-3xl;
   }
 
   /* Pressed state */
@@ -275,7 +275,7 @@
 
   &[data-outside-month="true"],
   &[data-selection-start="true"] {
-    @apply rounded-ss-full rounded-es-full;
+    @apply rounded-ss-3xl rounded-es-3xl;
   }
 }
 
@@ -289,13 +289,13 @@
 
   &[data-outside-month="true"],
   &[data-selection-end="true"] {
-    @apply rounded-se-full rounded-ee-full;
+    @apply rounded-se-3xl rounded-ee-3xl;
   }
 }
 
 /* Cell indicator - small dot at bottom center of cell */
 .range-calendar__cell-indicator {
-  @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-full bg-muted;
+  @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-xs bg-muted;
 
   /* Indicator color changes when cell is selected */
   [data-selected="true"] > & {

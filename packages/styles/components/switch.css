@@ -52,7 +52,7 @@
 /* Switch control (track) */
 .switch__control {
   /* Default size (medium) */
-  @apply relative flex shrink-0 items-center overflow-hidden rounded-full;
+  @apply relative flex shrink-0 items-center overflow-hidden rounded-xl;
   height: 1.25rem; /* 20px on desktop (14px base), 20px on mobile (16px base) - scales with font-size */
   width: 2.5rem; /* 35px on desktop, 40px on mobile - scales with font-size */
 
@@ -111,6 +111,7 @@
 
 /* Size-specific control dimensions */
 .switch--sm .switch__control {
+  @apply rounded-lg;
   height: 1rem; /* ~14px on desktop, ~16px on mobile */
   width: 2rem; /* ~32px on desktop, ~36px on mobile */
 }
@@ -127,7 +128,7 @@
 /* Switch thumb */
 .switch__thumb {
   /* Default size (medium) with margin-based positioning */
-  @apply ms-0.5 flex origin-center rounded-full bg-white text-black shadow-field;
+  @apply ms-0.5 flex origin-center rounded-lg bg-white text-black shadow-field;
   height: 1rem; /* ~14px on desktop, ~16px on mobile */
   width: 1.375rem; /* ~19px on desktop, ~22px on mobile */
 
@@ -157,6 +158,7 @@
 
 /* Size-specific thumb dimensions */
 .switch--sm .switch__thumb {
+  @apply rounded-md;
   height: 0.75rem; /* ~10.5px on desktop, ~12px on mobile */
   width: 1.03125rem; /* ~14.4px on desktop, ~16.5px on mobile - maintains 1.375:1 ratio */
 
@@ -168,6 +170,7 @@
 }
 
 .switch--lg .switch__thumb {
+  @apply rounded-xl;
   height: 1.25rem; /* ~17.5px on desktop, ~20px on mobile */
   width: 1.71875rem; /* ~24px on desktop, ~27.5px on mobile - maintains 1.375:1 ratio */
 

@@ -693,18 +693,36 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
  * -----------------------------------------------------------------------------------------------*/
 
 /**
+ * For light accents (lightness > 0.65), return a darker OKLCH string
+ * so text on secondary buttons, chips, and badges stays readable.
+ */
+function darkenForSoftForeground(oklchValue: string): string {
+  const color = parseOklch(oklchValue);
+
+  if (!color || color.l <= 0.65) return oklchValue;
+
+  return formatOklch({
+    c: Math.min(color.c * 1.4, 0.25),
+    h: color.h,
+    l: Math.max(color.l - 0.35, 0.35),
+  });
+}
+
+/**
  * Accent-derived CSS variables that use color-mix for hover/soft variants
  */
 export function getAccentDerivedVariables(
   accentValue: string,
   accentFgValue: string,
 ): Record<string, string> {
+  const softFg = darkenForSoftForeground(accentValue);
+
   return {
     "--color-accent": "var(--accent)",
     "--color-accent-foreground": "var(--accent-foreground)",
     "--color-accent-hover": `color-mix(in oklab, ${accentValue} 90%, ${accentFgValue} 10%)`,
     "--color-accent-soft": `color-mix(in oklab, ${accentValue} 15%, transparent)`,
-    "--color-accent-soft-foreground": accentValue,
+    "--color-accent-soft-foreground": softFg,
     "--color-accent-soft-hover": `color-mix(in oklab, ${accentValue} 20%, transparent)`,
     "--color-focus": "var(--focus)",
     "--tw-ring-color": "var(--focus)",
@@ -719,12 +737,14 @@ export function getSemanticDerivedVariables(
   colorValue: string,
   foregroundValue: string,
 ): Record<string, string> {
+  const softFg = darkenForSoftForeground(colorValue);
+
   return {
     [`--color-${colorName}`]: `var(--${colorName})`,
     [`--color-${colorName}-foreground`]: `var(--${colorName}-foreground)`,
     [`--color-${colorName}-hover`]: `color-mix(in oklab, ${colorValue} 90%, ${foregroundValue} 10%)`,
     [`--color-${colorName}-soft`]: `color-mix(in oklab, ${colorValue} 15%, transparent)`,
-    [`--color-${colorName}-soft-foreground`]: colorValue,
+    [`--color-${colorName}-soft-foreground`]: softFg,
     [`--color-${colorName}-soft-hover`]: `color-mix(in oklab, ${colorValue} 20%, transparent)`,
   };
 }

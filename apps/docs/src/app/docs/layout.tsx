@@ -5,6 +5,7 @@ import {Separator} from "@heroui/react";
 import {HeaderBanner, ProBanner} from "@/app/(home)/components/pro-banner";
 import {SHOW_BANNER} from "@/app/(home)/components/pro-constants";
 import {baseOptions} from "@/app/layout.config";
+import {DesignThemeSelector} from "@/components/design-theme-selector";
 import {FrameworksTabs} from "@/components/frameworks-tabs";
 import {DocsLayout} from "@/components/fumadocs/layouts/notebook";
 import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
@@ -76,6 +77,7 @@ export default function Layout({children}: {children: ReactNode}) {
           ...baseOptions.nav,
           children: (
             <div className="mr-2 flex items-center gap-3 md:mr-0" id="nd-nav-actions">
+              <DesignThemeSelector />
               <GitHubLinkSmall />
             </div>
           ),

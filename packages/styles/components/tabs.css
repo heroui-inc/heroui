@@ -21,7 +21,7 @@
 .tabs__list {
   @apply inline-flex bg-default p-1;
 
-  border-radius: calc(var(--radius-2xl) + 0.25rem);
+  border-radius: calc(var(--radius) * 2.5);
 
   /* Horizontal orientation */
   &[data-orientation="horizontal"] {
@@ -96,9 +96,7 @@
 
 /* Tab separator */
 .tabs__separator {
-  @apply bg-muted/25;
-
-  border-radius: 4px;
+  @apply rounded-sm bg-muted/25;
   position: absolute;
   pointer-events: none;
 

@@ -13,7 +13,7 @@
 
 /* Shape variants */
 .color-swatch--circle {
-  @apply rounded-full;
+  @apply rounded-2xl;
 }
 
 .color-swatch--square {
@@ -23,20 +23,36 @@
 /* Size variants */
 .color-swatch--xs {
   @apply size-4;
+
+  &.color-swatch--circle {
+    @apply rounded-lg;
+  }
 }
 
 .color-swatch--sm {
   @apply size-6;
+
+  &.color-swatch--circle {
+    @apply rounded-xl;
+  }
 }
 
 .color-swatch--md {
-  /* No styles as this is the default size */
+  /* No additional styles — default size (32px) uses circle's base rounded-2xl */
 }
 
 .color-swatch--lg {
   @apply size-9;
+
+  &.color-swatch--circle {
+    @apply rounded-3xl;
+  }
 }
 
 .color-swatch--xl {
   @apply size-10;
+
+  &.color-swatch--circle {
+    @apply rounded-3xl;
+  }
 }

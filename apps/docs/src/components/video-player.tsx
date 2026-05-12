@@ -215,7 +215,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         loop
         playsInline
         autoPlay={!!autoPlay && effectivePlayMode === "auto"}
-        className={cn("object-fit aspect-video w-full", className)}
+        className={cn("aspect-video w-full object-cover", className)}
         controls={controls}
         height={height}
         muted={isMuted}

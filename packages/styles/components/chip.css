@@ -16,7 +16,7 @@
 
 /* Color variants - set foreground color */
 .chip--accent {
-  --chip-fg: var(--color-accent);
+  --chip-fg: var(--color-accent-soft-foreground);
 }
 
 .chip--danger {

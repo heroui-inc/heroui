@@ -44,7 +44,8 @@
   left: 0;
   right: 0;
 
-  @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 rounded-3xl bg-surface px-4 py-3 shadow-overlay;
+  @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
+  border-radius: min(32px, var(--radius-3xl));
 }
 
 .toast--bottom,

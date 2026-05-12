@@ -7,108 +7,224 @@ links:
   tailwind: theme
 ---
 
-import {ColorSwatch, ColorPalette} from "@/components/color-swatch";
+import {ColorSectionSideBySide, ColorSectionStacked, ColorSectionFormField, ColorSectionPrimitive} from "@/components/color-section";
 
-HeroUI Native uses CSS variables for colors that automatically switch between light and dark themes. All colors use the `oklch` color space for better color transitions.
+HeroUI Native's color system is built around semantic intent, not visual abundance. Instead of exposing large raw palettes, the system defines a small, meaningful set of color roles that cover the majority of interface needs.
 
-## How It Works
+Most colors in the system are derived automatically from a limited number of base values. This allows HeroUI to maintain consistent contrast, hierarchy, and theming behavior while keeping the system easy to reason about and modify.
 
-HeroUI Native's color system is built on top of [Tailwind CSS v4](https://tailwindcss.com/docs/theme)'s theme via [Uniwind](https://uniwind.dev/). When you import `heroui-native/styles`, it uses Tailwind's built-in color palettes and maps them to semantic variables.
+Colors should communicate purpose and state first. Visual variation comes from scale, emphasis, and context.
 
-**Naming pattern:**
+## Accent
 
-- Colors without a suffix are backgrounds (e.g., `--accent`)
-- Colors with `-foreground` are for text on that background (e.g., `--accent-foreground`)
+The accent color represents the primary brand or product identity. It is used to draw attention to key actions, highlights, and moments of emphasis.
 
-**Usage:**
+Accent should be used intentionally and sparingly. Overuse reduces its impact and can harm visual hierarchy. In most cases, components derive multiple accent-related values (hover, subtle backgrounds, focus states) automatically from the base accent color.
 
-```tsx
-import { View, Text } from 'react-native';
+<ColorSectionSideBySide
+  name="Accent"
+  baseVariable="--accent"
+  hoverVariable="--accent"
+  hoverCssValue="color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%)"
+  foregroundVariable="--accent-foreground"
+  soft={{
+    baseVariable: "--accent",
+    baseCssValue: "color-mix(in oklab, var(--accent) 15%, transparent)",
+    hoverVariable: "--accent",
+    hoverCssValue: "color-mix(in oklab, var(--accent) 20%, transparent)",
+    foregroundVariable: "--accent",
+    foregroundCssValue: "var(--accent)",
+  }}
+/>
 
-// This gives you the right background and text colors
-<View className="bg-background flex-1">
-  <View className="bg-accent p-4 rounded-lg">
-    <Text className="text-accent-foreground">Hello</Text>
-  </View>
-</View>;
-```
+## Default (neutrals)
 
-### Base Colors
+Default colors form the neutral backbone of the system. They are used for most non-emphasized UI elements.
 
-These four colors stay the same in all themes:
+<ColorSectionSideBySide
+  name="Default"
+  baseVariable="--default"
+  hoverVariable="--default"
+  hoverCssValue="color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%)"
+  foregroundVariable="--default-foreground"
+/>
 
-<div className="flex flex-wrap gap-4 sm:gap-6">
-  <ColorSwatch name="White" variable="--white" />
-  <ColorSwatch name="Black" variable="--black" />
-  <ColorSwatch name="Snow" variable="--snow" />
-  <ColorSwatch name="Eclipse" variable="--eclipse" />
-</div>
+## Success
 
-### Background & Surface
+Success colors communicate positive outcomes, confirmations, and completed states. They are typically used in feedback components, status indicators, and validation states.
 
-<ColorPalette
-  colors={[
-    { name: "Background", variable: "--background", foreground: "--foreground" },
-    { name: "Foreground", variable: "--foreground" },
-    { name: "Surface", variable: "--surface", foreground: "--surface-foreground" },
-    { name: "Surface Foreground", variable: "--surface-foreground" },
-    { name: "Overlay", variable: "--overlay", foreground: "--overlay-foreground" },
-    { name: "Overlay Foreground", variable: "--overlay-foreground" },
+<ColorSectionSideBySide
+  name="Success"
+  baseVariable="--success"
+  hoverVariable="--success"
+  hoverCssValue="color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%)"
+  foregroundVariable="--success-foreground"
+  soft={{
+    baseVariable: "--success",
+    baseCssValue: "color-mix(in oklab, var(--success) 15%, transparent)",
+    hoverVariable: "--success",
+    hoverCssValue: "color-mix(in oklab, var(--success) 20%, transparent)",
+    foregroundVariable: "--success",
+    foregroundCssValue: "var(--success)",
+  }}
+/>
+
+## Warning
+
+Warning colors indicate caution, risk, or actions that require attention but are not destructive. They are commonly used for alerts, messages, and transitional states where the user should pause or review information.
+
+<ColorSectionSideBySide
+  name="Warning"
+  baseVariable="--warning"
+  hoverVariable="--warning"
+  hoverCssValue="color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%)"
+  foregroundVariable="--warning-foreground"
+  soft={{
+    baseVariable: "--warning",
+    baseCssValue: "color-mix(in oklab, var(--warning) 15%, transparent)",
+    hoverVariable: "--warning",
+    hoverCssValue: "color-mix(in oklab, var(--warning) 20%, transparent)",
+    foregroundVariable: "--warning",
+    foregroundCssValue: "var(--warning)",
+  }}
+/>
+
+## Danger
+
+Danger colors represent destructive, irreversible, or critical actions and states. They should be immediately recognizable and used consistently for errors, destructive buttons, and critical alerts.
+
+<ColorSectionSideBySide
+  name="Danger"
+  baseVariable="--danger"
+  hoverVariable="--danger"
+  hoverCssValue="color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%)"
+  foregroundVariable="--danger-foreground"
+  soft={{
+    baseVariable: "--danger",
+    baseCssValue: "color-mix(in oklab, var(--danger) 15%, transparent)",
+    hoverVariable: "--danger",
+    hoverCssValue: "color-mix(in oklab, var(--danger) 20%, transparent)",
+    foregroundVariable: "--danger",
+    foregroundCssValue: "var(--danger)",
+  }}
+/>
+
+## Foreground
+
+Foreground colors are used for primary content such as text and icons. These colors are optimized for readability and accessibility and adapt automatically to background and surface contexts. Foreground colors should never be hard-coded at the component level.
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "Foreground", variable: "--foreground" },
+    { label: "Muted", variable: "--muted" },
+    { label: "Segment", variable: "--segment" },
+    { label: "Overlay", variable: "--overlay" },
+    { label: "Link", variable: "--link" },
+  ]}
+  darkColors={[
+    { label: "Foreground", variable: "--foreground", border: true },
+    { label: "Muted", variable: "--muted", border: true },
+    { label: "Segment", variable: "--segment", border: true },
+    { label: "Overlay", variable: "--overlay", border: true },
+    { label: "Link", variable: "--link", border: true },
   ]}
 />
 
-### Primary Colors
+## Background
 
-**Accent** — Your main brand color (used for primary actions)
-**Accent Soft** — A lighter version for secondary actions
+Background colors define the base canvas of the interface. They establish overall contrast and mood while staying visually quiet.
 
-<ColorPalette
-  colors={[
-    { name: "Accent", variable: "--accent", foreground: "--accent-foreground" },
-    { name: "Accent Foreground", variable: "--accent-foreground" },
-    { name: "Accent Soft", variable: "--accent-soft", foreground: "--accent-soft-foreground" },
-    { name: "Accent Soft Foreground", variable: "--accent-soft-foreground" },
+<ColorSectionStacked
+  lightColors={[
+    { label: "Background", variable: "--background", border: true },
+    { label: "Secondary", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 96%, var(--foreground) 4%)", border: true },
+    { label: "Tertiary", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 92%, var(--foreground) 8%)", border: true },
+    { label: "Inverse", variable: "--foreground" },
+  ]}
+  darkColors={[
+    { label: "Background", variable: "--background", border: true },
+    { label: "Secondary", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 96%, var(--foreground) 4%)", border: true },
+    { label: "Tertiary", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 92%, var(--foreground) 8%)", border: true },
+    { label: "Inverse", variable: "--foreground", border: true },
   ]}
 />
 
-### Status Colors
+## Surface
 
-For alerts, validation, and status messages:
+Surface colors sit on top of backgrounds and are used for containers such as cards, panels, modals, and dropdown. Surfaces help create visual separation and hierarchy through elevation, contrast, and layering rather than strong color shifts.
 
-<ColorPalette
-  colors={[
-    { name: "Success", variable: "--success", foreground: "--success-foreground" },
-    { name: "Success Foreground", variable: "--success-foreground" },
-    { name: "Warning", variable: "--warning", foreground: "--warning-foreground" },
-    { name: "Warning Foreground", variable: "--warning-foreground" },
-    { name: "Danger", variable: "--danger", foreground: "--danger-foreground" },
-    { name: "Danger Foreground", variable: "--danger-foreground" },
+<ColorSectionStacked
+  lightColors={[
+    { label: "Surface", variable: "--surface", border: true },
+    { label: "Secondary", variable: "--surface-secondary", border: true },
+    { label: "Tertiary", variable: "--surface-tertiary", border: true },
+  ]}
+  darkColors={[
+    { label: "Surface", variable: "--surface", border: true },
+    { label: "Secondary", variable: "--surface-secondary", border: true },
+    { label: "Tertiary", variable: "--surface-tertiary", border: true },
   ]}
 />
 
-### Form Field Colors
+## Form field
 
-For consistent form field styling across input components:
+Form field colors are specialized tokens used for inputs, controls, and interactive fields. They account for multiple states such as default, focus, and hover. Isolating them ensures form elements have a distinct visual language from buttons and the rest of the UI.
 
-<ColorPalette
-  colors={[
-    { name: "Field Background", variable: "--field-background", foreground: "--field-foreground" },
-    { name: "Field Foreground", variable: "--field-foreground" },
-    { name: "Field Placeholder", variable: "--field-placeholder" },
-    { name: "Field Border", variable: "--field-border" },
+<ColorSectionFormField
+  colors={{
+    bg: "--field-background",
+    bgHover: "color-mix(in oklab, var(--field-background) 90%, var(--field-foreground) 10%)",
+    placeholder: "--field-placeholder",
+    foreground: "--field-foreground",
+  }}
+/>
+
+## Separator
+
+Separator colors are used for dividers, outlines, and subtle boundaries. They exist to structure content and guide the eye without adding noise. Separator colors should remain low contrast and unobtrusive.
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "Separator", variable: "--separator", border: true },
+    { label: "Secondary", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%)", border: true },
+    { label: "Tertiary", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%)", border: true },
+  ]}
+  darkColors={[
+    { label: "Separator", variable: "--separator", border: true },
+    { label: "Secondary", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%)", border: true },
+    { label: "Tertiary", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%)", border: true },
   ]}
 />
 
-### Other Colors
+## Other
 
-<ColorPalette
+Other colors serve specific utility roles across the interface. They exist to structure content and guide the eye without adding noise.
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "Border", variable: "--border" },
+    { label: "Backdrop", variable: "--backdrop" },
+    { label: "Overlay", variable: "--overlay", border: true },
+    { label: "Segment", variable: "--segment", border: true },
+  ]}
+  darkColors={[
+    { label: "Border", variable: "--border" },
+    { label: "Backdrop", variable: "--backdrop" },
+    { label: "Overlay", variable: "--overlay", border: true },
+    { label: "Segment", variable: "--segment", border: true },
+  ]}
+/>
+
+## Primitive
+
+Primitive colors are mode agnostic values used as foundations for semantic color tokens. They do not change between light and dark themes.
+
+<ColorSectionPrimitive
   colors={[
-    { name: "Default", variable: "--default", foreground: "--default-foreground" },
-    { name: "Default Foreground", variable: "--default-foreground" },
-    { name: "Muted", variable: "--muted", foreground: "--foreground" },
-    { name: "Border", variable: "--border" },
-    { name: "Focus", variable: "--focus" },
-    { name: "Link", variable: "--link" },
+    { label: "White", variable: "--white", border: true, tooltip: "--white: oklch(100% 0 0)" },
+    { label: "Black", variable: "--black", tooltip: "--black: oklch(0% 0 0)" },
+    { label: "Snow", variable: "--snow", border: true, tooltip: "--snow: oklch(0.9911 0 0)" },
+    { label: "Eclipse", variable: "--eclipse", tooltip: "--eclipse: oklch(0.2103 0.0059 285.89)" },
   ]}
 />
 
@@ -118,7 +234,6 @@ For consistent form field styling across input components:
 
 ```tsx
 import { View, Text } from 'react-native';
-import { Button } from 'heroui-native';
 
 <View className="bg-background flex-1 p-4">
   <Text className="text-foreground mb-4">Content</Text>
@@ -171,7 +286,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --background: oklch(0.9702 0 0);
         --foreground: var(--eclipse);
 
-        /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+        /* Surface */
         --surface: var(--white);
         --surface-foreground: var(--foreground);
 
@@ -181,7 +296,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --surface-tertiary: oklch(0.9373 0.0013 286.37);
         --surface-tertiary-foreground: var(--foreground);
 
-        /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+        /* Overlay */
         --overlay: var(--white);
         --overlay-foreground: var(--foreground);
         --backdrop: oklch(0% 0 0 / 20%);
@@ -198,7 +313,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --field-background: var(--white);
         --field-foreground: oklch(0.2103 0.0059 285.89);
         --field-placeholder: var(--muted);
-        --field-border: transparent; /* no border by default on form fields */
+        --field-border: transparent;
 
         /* Status Colors */
         --success: oklch(0.7329 0.1935 150.81);
@@ -219,17 +334,6 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --separator: oklch(74% 0.004 286.32);
         --focus: var(--accent);
         --link: var(--foreground);
-
-        /* Shadows */
-        --surface-shadow:
-          0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
-          0 0 1px 0 rgba(0, 0, 0, 0.06);
-        --overlay-shadow:
-          0 2px 8px 0 rgba(0, 0, 0, 0.02), 0 -6px 12px 0 rgba(0, 0, 0, 0.01),
-          0 14px 28px 0 rgba(0, 0, 0, 0.03);
-        --field-shadow:
-          0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
-          0 0 1px 0 rgba(0, 0, 0, 0.06);
       }
 
       @variant dark {
@@ -237,7 +341,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --background: oklch(12% 0.005 285.823);
         --foreground: var(--snow);
 
-        /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+        /* Surface */
         --surface: oklch(0.2103 0.0059 285.89);
         --surface-foreground: var(--foreground);
 
@@ -247,7 +351,7 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --surface-tertiary: oklch(0.2721 0.0024 247.91);
         --surface-tertiary-foreground: var(--foreground);
 
-        /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) - lighter for contrast */
+        /* Overlay */
         --overlay: oklch(0.2103 0.0059 285.89);
         --overlay-foreground: var(--foreground);
         --backdrop: oklch(0% 0 0 / 20%);
@@ -260,11 +364,11 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --accent: oklch(0.6204 0.195 253.83);
         --accent-foreground: var(--snow);
 
-        /* Form Field Defaults - Colors (only the ones that are different from light theme) */
+        /* Form Fields */
         --field-background: oklch(0.2103 0.0059 285.89);
         --field-foreground: var(--foreground);
         --field-placeholder: var(--muted);
-        --field-border: transparent; /* no border by default on form fields */
+        --field-border: transparent;
 
         /* Status Colors */
         --success: oklch(0.7329 0.1935 150.81);
@@ -285,17 +389,11 @@ The complete theme definition can be found in ([variables.css](https://github.co
         --separator: oklch(40% 0.006 286.033);
         --focus: var(--accent);
         --link: var(--foreground);
-
-        /* Shadows */
-        --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
-        --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.2) inset;
-        --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
       }
     }
   }
 `}
 />
-
 
 ## Customizing Colors
 
@@ -378,16 +476,3 @@ const [accent, accentForeground, success, danger] = useThemeColor([
 ```
 
 This enhancement improves performance when working with multiple color values and makes it easier to manage complex theming scenarios where multiple colors need to be selected and applied together.
-
-## Quick Tips
-
-- Always use color variables, not hard-coded values
-- Use foreground/background pairs for good contrast
-- Test in both light and dark modes
-- The system respects user's theme preference automatically
-
-## Related
-
-- [Theming](/docs/native/getting-started/theming) - Learn about the theming system
-- [Styling](/docs/native/getting-started/styling) - Styling components with CSS
-- [Design Principles](/docs/native/getting-started/design-principles) - Understanding HeroUI's design philosophy

@@ -56,7 +56,7 @@
 
 .table-root--primary {
   @apply bg-surface-secondary px-1 pb-1;
-  border-radius: calc(var(--radius) * 2.5);
+  border-radius: min(32px, calc(var(--radius) * 2.5));
 }
 
 .table-root--secondary {
@@ -74,11 +74,13 @@
 }
 
 .table-root--secondary .table__column:first-child {
-  @apply rounded-tl-2xl rounded-bl-2xl;
+  border-top-left-radius: min(32px, var(--radius-2xl));
+  border-bottom-left-radius: min(32px, var(--radius-2xl));
 }
 
 .table-root--secondary .table__column:last-child {
-  @apply rounded-tr-2xl rounded-br-2xl;
+  border-top-right-radius: min(32px, var(--radius-2xl));
+  border-bottom-right-radius: min(32px, var(--radius-2xl));
 }
 
 /* Secondary: body has no shadow or rounded corners */
@@ -175,23 +177,24 @@
   /* Non-virtualized: round corners via first/last cells
      (border-radius on <tbody> itself has no effect) */
   & tr:first-child td:first-child {
-    @apply rounded-tl-2xl;
+    border-top-left-radius: min(32px, var(--radius-2xl));
   }
   & tr:first-child td:last-child {
-    @apply rounded-tr-2xl;
+    border-top-right-radius: min(32px, var(--radius-2xl));
   }
   & tr:last-child td:first-child {
-    @apply rounded-bl-2xl;
+    border-bottom-left-radius: min(32px, var(--radius-2xl));
   }
   & tr:last-child td:last-child {
-    @apply rounded-br-2xl;
+    border-bottom-right-radius: min(32px, var(--radius-2xl));
   }
 
   /* Virtualized: elements are divs, not tr/td. VirtualizerItem wrappers
      break :first-child/:last-child on rows and cells, so round the body
      itself and clip overflow instead. */
   &:not(tbody) {
-    @apply relative h-full overflow-clip rounded-2xl;
+    @apply relative h-full overflow-clip;
+    border-radius: min(32px, var(--radius-2xl));
   }
 }
 
@@ -228,11 +231,10 @@
     @apply status-disabled;
   }
 
-  /* Focus visible — use outline instead of ring for better table row rendering */
+  /* Row focus ring: see “Table row focus ring” block below (after `.table__cell`). */
   &:focus-visible,
   &[data-focus-visible="true"] {
     @apply outline-none;
-    box-shadow: inset 0 0 0 2px var(--color-focus);
   }
 
   /* Dragging state */
@@ -260,6 +262,48 @@
     @apply rounded-lg outline-none;
     box-shadow: inset 0 0 0 2px var(--color-focus);
   }
+}
+
+/* --------------------------------------------------------------------------
+   Table row focus ring — must follow `.table__cell` (cascade). One continuous
+   inset ring split across cells; `:is(.table__cell, .table__column)` + direct vs
+   `> *:…` covers virtualized wrappers. `:is(:focus-visible, [data-focus-visible])`
+   matches row keyboard focus from RAC.
+   -------------------------------------------------------------------------- */
+.table__row:is(:focus-visible, [data-focus-visible="true"]) :is(.table__cell, .table__column) {
+  @apply shadow-none;
+}
+
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > :is(.table__cell, .table__column):only-child,
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > *:only-child
+  :is(.table__cell, .table__column) {
+  @apply rounded-lg shadow-[inset_0_0_0_2px_var(--color-focus)] outline-none;
+}
+
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > :is(.table__cell, .table__column):first-child:not(:only-child),
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > *:first-child:not(:only-child)
+  :is(.table__cell, .table__column) {
+  @apply rounded-l-lg shadow-[inset_2px_0_0_0_var(--color-focus),inset_0_2px_0_0_var(--color-focus),inset_0_-2px_0_0_var(--color-focus)] outline-none;
+}
+
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > :is(.table__cell, .table__column):last-child:not(:only-child),
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > *:last-child:not(:only-child)
+  :is(.table__cell, .table__column) {
+  @apply rounded-r-lg shadow-[inset_-2px_0_0_0_var(--color-focus),inset_0_2px_0_0_var(--color-focus),inset_0_-2px_0_0_var(--color-focus)] outline-none;
+}
+
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > :is(.table__cell, .table__column):not(:first-child):not(:last-child):not(:only-child),
+.table__row:is(:focus-visible, [data-focus-visible="true"])
+  > *:not(:first-child):not(:last-child):not(:only-child)
+  :is(.table__cell, .table__column) {
+  @apply shadow-[inset_0_2px_0_0_var(--color-focus),inset_0_-2px_0_0_var(--color-focus)] outline-none;
 }
 
 /* --------------------------------------------------------------------------

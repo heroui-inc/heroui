@@ -69,6 +69,7 @@
     "(data-display)/table",
     "(navigation)/tabs",
     "(collections)/tag-group",
+    "(typography)/text",
     "(forms)/text-field",
     "(forms)/text-area",
     "(date-and-time)/time-field",

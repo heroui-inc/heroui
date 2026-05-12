@@ -40,7 +40,7 @@
 
 .accordion__item::after {
   content: "";
-  @apply absolute bottom-0 left-0 h-px w-full rounded-full bg-separator;
+  @apply absolute bottom-0 left-0 h-px w-full rounded-xs bg-separator;
 }
 
 .accordion__item:last-child::after {
@@ -115,7 +115,8 @@
 
 /* Surface variant */
 .accordion--surface {
-  @apply rounded-3xl bg-surface;
+  @apply bg-surface;
+  border-radius: min(32px, var(--radius-3xl));
 
   .accordion__trigger {
     @media (hover: hover) {
@@ -139,11 +140,13 @@
 
   /* Special rounding for first and last items in surface variant */
   &:first-child [data-slot="accordion-trigger"] {
-    @apply rounded-t-3xl;
+    border-top-left-radius: min(32px, var(--radius-3xl));
+    border-top-right-radius: min(32px, var(--radius-3xl));
   }
 
   &:last-child:not(:has([data-slot="accordion-trigger"][aria-expanded="true"]))
     [data-slot="accordion-trigger"] {
-    @apply rounded-b-3xl;
+    border-bottom-left-radius: min(32px, var(--radius-3xl));
+    border-bottom-right-radius: min(32px, var(--radius-3xl));
   }
 }

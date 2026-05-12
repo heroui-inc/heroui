@@ -1,0 +1,357 @@
+---
+title: CLI
+description: Use the CLI to manage HeroUI dependencies and initialize projects.
+icon: terminal
+---
+
+The CLI offers a comprehensive suite of commands to initialize, manage, and improve your HeroUI projects. It enables you to `install`, `uninstall`, or `upgrade` individual components, assess the health of your project, and more.
+
+## Installation
+
+Requirements:
+
+- [Node.js version 22.22.0 or later](https://nodejs.org/en/)
+
+
+### Global Installation
+
+To install `heroui-cli` globally, execute one of the following commands in your terminal:
+
+
+```npm
+npm install heroui-cli@latest -g
+```
+
+### Without Installation
+
+Alternatively, you can use `heroui-cli` without a global installation by running one of the following:
+
+<Tabs items={["pnpm", "npm", "yarn", "bun"]}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx heroui-cli@latest
+    ```
+  </Tab>
+  <Tab value="npm">
+    ```bash
+    npx heroui-cli@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dlx heroui-cli@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx heroui-cli@latest
+    ```
+  </Tab>
+</Tabs>
+
+## Quick Start
+
+Once `heroui-cli` is installed, run the following command to display available commands:
+
+```bash
+heroui
+```
+
+This will produce the following help output:
+
+```bash
+Usage: heroui [command]
+
+Options:
+  -v, --version                  Output the current version
+  --no-cache                     Disable cache, by default data will be cached for 30m after the first request
+  -d, --debug                    Debug mode will not install dependencies
+  -h --help                      Display help information for commands
+
+Commands:
+  init [options] [projectName]   Initializes a new project
+  install [options]              Installs @heroui/react and @heroui/styles to your project
+  upgrade [options]              Upgrades @heroui/react and @heroui/styles to the latest versions
+  uninstall [options]            Uninstall @heroui/react and @heroui/styles from the project
+  list [options]                 Lists installed HeroUI packages (@heroui/react, @heroui/styles)
+  env [options]                  Displays debugging information for the local environment
+  doctor [options]               Checks for issues in the project
+  help [command]                 Display help for command
+```
+
+### init
+
+Initialize a new HeroUI project using the `init` command. This sets up your project with the necessary configurations.
+
+```bash
+heroui init
+```
+output:
+
+```bash
+HeroUI CLI <version>
+
+┌  Create a new project
+│
+◇  Select a template (Enter to select)
+│  ● App (A Next.js 16 with app directory template pre-configured with HeroUI (v3) and Tailwind CSS.)
+│  ○ Pages (A Next.js 16 with pages directory template pre-configured with HeroUI (v3) and Tailwind CSS.)
+│  ○ Vite (A Vite template pre-configured with HeroUI (v3) and Tailwind CSS.)
+│
+◇  New project name (Enter to skip with default name)
+│  my-heroui-app
+│
+◇  Select a package manager (Enter to select)
+│  ● npm
+│  ○ yarn
+│  ○ pnpm
+│  ○ bun
+│
+◇  Template created successfully!
+│
+◇  Next steps ───────╮
+│                    │
+│  cd my-heroui-app  │
+│  npm install       │
+│                    │
+├────────────────────╯
+│
+└  🚀 Get started with npm run dev
+```
+
+
+Install the dependencies to start the local server:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    cd my-heroui-app && npm install
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    cd my-heroui-app && pnpm install
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    cd my-heroui-app && yarn install
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    cd my-heroui-app && bun install
+    ```
+  </Tab>
+</Tabs>
+
+Start the local server:
+
+```npm
+npm run dev
+```
+
+### Install
+
+Install `@heroui/react` and `@heroui/styles` to your project, along with their peer dependencies. If they are already installed, the command does nothing.
+
+```bash
+heroui install [options]
+```
+
+**Options:**
+
+- `-p --packagePath` [string] The path to the package.json file
+
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+📦 Packages to be installed:
+╭─────────────────────────────────────────────────────────────────────────────╮
+│   Package          │   Version        │   Status   │   Docs                 │
+│─────────────────────────────────────────────────────────────────────────────│
+│   @heroui/react    │   3.0.0          │   stable   │   https://heroui.com   │
+│   @heroui/styles   │   3.0.0          │   stable   │   https://heroui.com   │
+╰─────────────────────────────────────────────────────────────────────────────╯
+
+╭─────────────── PeerDependencies ────────────────╮
+│  react@18.3.1                      latest       │
+│  react-dom@18.3.1                  latest       │
+│  tailwindcss@4.2.2                 latest       │
+╰─────────────────────────────────────────────────╯
+? Proceed with installation? › - Use arrow-keys. Return to submit.
+❯   Yes
+    No
+
+✅ @heroui/react and @heroui/styles installed successfully
+```
+
+### upgrade
+
+
+Upgrade `@heroui/react` and `@heroui/styles` with their peer dependencies to the latest versions.
+
+```bash
+heroui upgrade [options]
+```
+
+**Options:**
+
+- `-p --packagePath` [string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+╭──────────────────────────── Upgrade ────────────────────────────╮
+│  @heroui/react               ^3.0.0  ->  ^3.1.0                │
+│  @heroui/styles              ^3.0.0  ->  ^3.1.0                │
+╰─────────────────────────────────────────────────────────────────╯
+
+? Would you like to proceed with the upgrade? › - Use arrow-keys. Return to submit.
+❯   Yes
+    No
+
+✅ Upgrade complete. All packages are up to date.
+```
+
+### uninstall
+
+Uninstall `@heroui/react` and `@heroui/styles` from your project. Peer dependencies will not be uninstalled.
+
+```bash
+heroui uninstall [options]
+```
+
+**Options:**
+
+- `-p --packagePath` [string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+❗️ Packages slated for uninstallation:
+╭──────────────────────────────────────────────────────────────────────────────────────╮
+│   Package          │   Version   │   Status   │   Docs                               │
+│──────────────────────────────────────────────────────────────────────────────────────│
+│   @heroui/react    │   3.0.0     │   stable   │   https://heroui.com                 │
+│   @heroui/styles   │   3.0.0     │   stable   │   https://heroui.com                 │
+╰──────────────────────────────────────────────────────────────────────────────────────╯
+? Confirm uninstallation of these packages: › - Use arrow-keys. Return to submit.
+❯   Yes
+    No
+
+✅ Successfully uninstalled: @heroui/react, @heroui/styles
+```
+
+### list
+
+List the installed HeroUI packages (`@heroui/react`, `@heroui/styles`).
+
+```bash
+heroui list [options]
+```
+
+**Options:**
+
+- `-p --packagePath` [string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+Current installed packages:
+
+╭──────────────────────────────────────────────────────────────────────────────────────╮
+│   Package          │   Version          │   Status   │   Docs                        │
+│──────────────────────────────────────────────────────────────────────────────────────│
+│   @heroui/react    │   3.0.0 🚀latest   │   stable   │   https://heroui.com          │
+│   @heroui/styles   │   3.0.0 🚀latest   │   stable   │   https://heroui.com          │
+╰──────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+### doctor
+
+Check for issues in your project.
+- Check whether `@heroui/react` and `@heroui/styles` are installed
+- Check whether `required peer dependencies` are installed and matched minimal requirements in the project
+
+
+```bash
+heroui doctor [options]
+```
+
+**Options:**
+
+- `-p --packagePath` [string] The path to the package.json file
+
+**Output:**
+
+If there is a problem in your project, the `doctor` command will display the problem information.
+
+```bash
+HeroUI CLI <version>
+
+HeroUI CLI: ❌ Your project has 1 issue that require attention
+
+❗️Issue 1: missingHeroUIPackages
+
+The following HeroUI packages are not installed:
+- @heroui/styles
+
+Run `heroui install` to install them.
+```
+
+Otherwise, the `doctor` command will display the following message.
+
+```bash
+HeroUI CLI <version>
+
+✅ Your project has no detected issues.
+```
+
+### env
+
+Display debug information about the local environment.
+
+```bash
+heroui env [options]
+```
+
+**Options:**
+
+- `-p --packagePath` [string] The path to the package.json file
+
+**Output:**
+
+```bash
+HeroUI CLI <version>
+
+Current installed packages:
+
+╭──────────────────────────────────────────────────────────────────────────────────────╮
+│   Package          │   Version          │   Status   │   Docs                        │
+│──────────────────────────────────────────────────────────────────────────────────────│
+│   @heroui/react    │   3.0.0 🚀latest   │   stable   │   https://heroui.com          │
+│   @heroui/styles   │   3.0.0 🚀latest   │   stable   │   https://heroui.com          │
+╰──────────────────────────────────────────────────────────────────────────────────────╯
+
+Environment Info:
+  System:
+    OS: darwin
+    CPU: arm64
+  Binaries:
+    Node: v25.8.1
+```
+
+## Reporting issues
+
+If you found a bug, please report it in [heroui-cli Issues](https://github.com/heroui-inc/heroui-cli/issues).
+

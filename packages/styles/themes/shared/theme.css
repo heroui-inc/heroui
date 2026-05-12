@@ -94,21 +94,33 @@
   );
 
   /* Soft Colors */
-  --color-accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
-  --color-accent-soft-foreground: var(--accent);
-  --color-accent-soft-hover: color-mix(in oklab, var(--accent) 20%, transparent);
+  --color-accent-soft: var(--accent-soft, color-mix(in oklab, var(--accent) 15%, transparent));
+  --color-accent-soft-foreground: var(--accent-soft-foreground, var(--accent));
+  --color-accent-soft-hover: var(
+    --accent-soft-hover,
+    color-mix(in oklab, var(--accent) 20%, transparent)
+  );
 
-  --color-danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
-  --color-danger-soft-foreground: var(--danger);
-  --color-danger-soft-hover: color-mix(in oklab, var(--danger) 20%, transparent);
+  --color-danger-soft: var(--danger-soft, color-mix(in oklab, var(--danger) 15%, transparent));
+  --color-danger-soft-foreground: var(--danger-soft-foreground, var(--danger));
+  --color-danger-soft-hover: var(
+    --danger-soft-hover,
+    color-mix(in oklab, var(--danger) 20%, transparent)
+  );
 
-  --color-warning-soft: color-mix(in oklab, var(--warning) 15%, transparent);
-  --color-warning-soft-foreground: var(--warning);
-  --color-warning-soft-hover: color-mix(in oklab, var(--warning) 20%, transparent);
+  --color-warning-soft: var(--warning-soft, color-mix(in oklab, var(--warning) 15%, transparent));
+  --color-warning-soft-foreground: var(--warning-soft-foreground, var(--warning));
+  --color-warning-soft-hover: var(
+    --warning-soft-hover,
+    color-mix(in oklab, var(--warning) 20%, transparent)
+  );
 
-  --color-success-soft: color-mix(in oklab, var(--success) 15%, transparent);
-  --color-success-soft-foreground: var(--success);
-  --color-success-soft-hover: color-mix(in oklab, var(--success) 20%, transparent);
+  --color-success-soft: var(--success-soft, color-mix(in oklab, var(--success) 15%, transparent));
+  --color-success-soft-foreground: var(--success-soft-foreground, var(--success));
+  --color-success-soft-hover: var(
+    --success-soft-hover,
+    color-mix(in oklab, var(--success) 20%, transparent)
+  );
 
   /* Separator Colors - Levels */
   --color-separator-secondary: color-mix(

@@ -1,6 +1,6 @@
 /* Base avatar styles */
 .avatar {
-  @apply relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-default;
+  @apply relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-default;
 }
 
 /* Avatar fallback element */
@@ -20,7 +20,7 @@
 
 /* Size modifiers */
 .avatar--sm {
-  @apply size-8;
+  @apply size-8 rounded-2xl;
 }
 
 .avatar--md {
@@ -28,7 +28,7 @@
 }
 
 .avatar--lg {
-  @apply size-12;
+  @apply size-12 rounded-3xl;
 
   .avatar__fallback {
     @apply text-base;

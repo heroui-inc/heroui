@@ -26,7 +26,7 @@
   }
 
   .progress-bar__track {
-    @apply relative overflow-hidden rounded-full bg-default;
+    @apply relative overflow-hidden rounded-sm bg-default;
 
     grid-area: track;
 
@@ -35,7 +35,7 @@
   }
 
   .progress-bar__fill {
-    @apply absolute top-0 left-0 h-full rounded-full;
+    @apply absolute top-0 left-0 h-full rounded-sm;
 
     background-color: var(--progress-bar-fill);
 
@@ -89,7 +89,11 @@
 
 .progress-bar--sm {
   .progress-bar__track {
-    @apply h-1;
+    @apply h-1 rounded-xs;
+  }
+
+  .progress-bar__fill {
+    @apply rounded-xs;
   }
 }
 
@@ -99,7 +103,11 @@
 
 .progress-bar--lg {
   .progress-bar__track {
-    @apply h-3;
+    @apply h-3 rounded-md;
+  }
+
+  .progress-bar__fill {
+    @apply rounded-md;
   }
 }
 

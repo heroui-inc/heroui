@@ -37,7 +37,6 @@
   &[data-indeterminate="true"] {
     .checkbox__indicator {
       border-color: var(--accent-foreground);
-      background: var(--accent-hover);
     }
   }
 

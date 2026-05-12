@@ -2,7 +2,8 @@
 
 /* Base tooltip styles */
 .tooltip {
-  @apply max-w-xs origin-(--trigger-anchor-point) rounded-xl bg-overlay px-2 py-1 text-xs break-all;
+  @apply max-w-xs origin-(--trigger-anchor-point) bg-overlay p-2 text-xs break-all;
+  border-radius: min(32px, var(--radius-xl));
   box-shadow: var(--shadow-overlay);
 
   /* Entering animations */

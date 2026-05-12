@@ -12,7 +12,7 @@
    ========================================================================== */
 
 .color-swatch-picker__item {
-  @apply relative flex size-8 items-center justify-center rounded-full border-2 border-transparent outline-none no-highlight;
+  @apply relative flex size-8 items-center justify-center rounded-2xl border-2 border-transparent outline-none no-highlight;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -121,13 +121,13 @@
 
 .color-swatch-picker--xs {
   .color-swatch-picker__item {
-    @apply size-4 border;
+    @apply size-4 rounded-lg border;
   }
 }
 
 .color-swatch-picker--sm {
   .color-swatch-picker__item {
-    @apply size-6 border-2;
+    @apply size-6 rounded-xl border-2;
   }
 }
 
@@ -139,13 +139,13 @@
 
 .color-swatch-picker--lg {
   .color-swatch-picker__item {
-    @apply size-9 border-3;
+    @apply size-9 rounded-3xl border-3;
   }
 }
 
 .color-swatch-picker--xl {
   .color-swatch-picker__item {
-    @apply size-10 border-3;
+    @apply size-10 rounded-3xl border-3;
   }
 }
 
@@ -155,7 +155,7 @@
 
 /* Circle variant (default) - no additional styles needed */
 .color-swatch-picker--circle .color-swatch-picker__item {
-  /* Default is already circle (border-radius: 9999px) */
+  /* Default is already circle - radius set per size */
 }
 
 /* Square variant */

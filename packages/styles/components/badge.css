@@ -48,7 +48,7 @@
    ========================================================================== */
 
 .badge--accent {
-  --badge-fg: var(--color-accent);
+  --badge-fg: var(--color-accent-soft-foreground);
 }
 
 .badge--default {

@@ -14,6 +14,11 @@ export default defineConfig({
       // meta: true,
     },
     rehypePlugins: [],
+    remarkNpmOptions: {
+      persist: {
+        id: "package-manager",
+      },
+    },
     remarkPlugins: [],
   },
 });

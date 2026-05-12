@@ -150,7 +150,7 @@
  * Year Cell
  * -------------------------------------------------------------------------- */
 .calendar-year-picker__year-cell {
-  @apply relative inline-flex items-center justify-center rounded-full px-2.5 py-1.5 text-sm font-medium outline-none select-none no-highlight;
+  @apply relative inline-flex h-8 items-center justify-center rounded-3xl px-2.5 text-sm font-medium outline-none select-none no-highlight;
   touch-action: manipulation;
 
   /**

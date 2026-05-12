@@ -13,10 +13,6 @@
     @apply w-fit;
   }
 
-  [data-slot="description"] {
-    @apply px-1;
-  }
-
   &[data-empty="true"] {
     [data-slot="search-field-clear-button"] {
       @apply pointer-events-none opacity-0;

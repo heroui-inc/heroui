@@ -19,12 +19,12 @@ export default function HomePage() {
       <section className="z-10 flex min-h-0 flex-1 flex-col items-center px-4 pt-12 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <LinkRoot
-            className="flex items-center gap-1 rounded-full bg-accent/10 px-2 py-1 text-xs text-accent transition-colors hover:bg-accent-soft-hover"
-            href="/docs/react/releases/v3-0-3"
+            className="flex items-center gap-1 rounded-full bg-accent-soft px-2 py-1 text-xs text-accent-soft-foreground transition-colors hover:bg-accent-soft-hover"
+            href="/docs/native/releases/v1-0-3"
           >
-            <Rocket className="size-3 text-accent" />
+            <Rocket className="size-3 text-accent-soft-foreground" />
             <span className="max-w-60 truncate sm:max-w-full">
-              HeroUI v3.0.3 – 90% fewer deps, expandable Table rows & more
+              HeroUI Native v1.0.3 – Text component, ScrollShadow & Tabs fixes
             </span>
           </LinkRoot>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
