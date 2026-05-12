@@ -1,0 +1,190 @@
+"use client";
+
+import type {TimeValue} from "@heroui/react";
+import type {DateValue} from "@internationalized/date";
+
+import {
+  Calendar,
+  DateField,
+  DatePicker,
+  Label,
+  ListBox,
+  Select,
+  Switch,
+  TimeField,
+} from "@heroui/react";
+import {getLocalTimeZone, parseDate, parseZonedDateTime} from "@internationalized/date";
+import {useMemo, useState} from "react";
+
+type Granularity = "day" | "hour" | "minute" | "second";
+type HourCycle = 12 | 24;
+const granularityOptions: {label: string; value: Granularity}[] = [
+  {label: "Day", value: "day"},
+  {label: "Hour", value: "hour"},
+  {label: "Minute", value: "minute"},
+  {label: "Second", value: "second"},
+];
+const hourCycleOptions: {label: string; value: HourCycle}[] = [
+  {label: "12-hour", value: 12},
+  {label: "24-hour", value: 24},
+];
+
+export function FormatOptions() {
+  const [granularity, setGranularity] = useState<Granularity>("minute");
+  const [hourCycle, setHourCycle] = useState<HourCycle>(12);
+  const [hideTimeZone, setHideTimeZone] = useState(false);
+  const [shouldForceLeadingZeros, setShouldForceLeadingZeros] = useState(false);
+  const timeGranularity = granularity !== "day" ? granularity : undefined;
+  const showTimeField = !!timeGranularity;
+  const defaultValue = useMemo<DateValue>(() => {
+    const localTimeZone = getLocalTimeZone();
+
+    if (granularity === "day") {
+      return parseDate("2026-02-03");
+    }
+
+    return parseZonedDateTime(`2026-02-03T08:45:00[${localTimeZone}]`);
+  }, [granularity]);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <DatePicker
+        key={granularity}
+        className="w-fit min-w-64"
+        defaultValue={defaultValue}
+        granularity={granularity}
+        hideTimeZone={hideTimeZone}
+        hourCycle={hourCycle}
+        name="date"
+        shouldForceLeadingZeros={shouldForceLeadingZeros}
+      >
+        {({state}) => (
+          <>
+            <Label>Date and time</Label>
+            <DateField.Group fullWidth>
+              <DateField.Input>
+                {(segment) => <DateField.Segment segment={segment} />}
+              </DateField.Input>
+              <DateField.Suffix>
+                <DatePicker.Trigger>
+                  <DatePicker.TriggerIndicator />
+                </DatePicker.Trigger>
+              </DateField.Suffix>
+            </DateField.Group>
+            <DatePicker.Popover className="flex flex-col gap-3">
+              <Calendar aria-label="Event date">
+                <Calendar.Header>
+                  <Calendar.YearPickerTrigger>
+                    <Calendar.YearPickerTriggerHeading />
+                    <Calendar.YearPickerTriggerIndicator />
+                  </Calendar.YearPickerTrigger>
+                  <Calendar.NavButton slot="previous" />
+                  <Calendar.NavButton slot="next" />
+                </Calendar.Header>
+                <Calendar.Grid>
+                  <Calendar.GridHeader>
+                    {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+                  </Calendar.GridHeader>
+                  <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+                </Calendar.Grid>
+                <Calendar.YearPickerGrid>
+                  <Calendar.YearPickerGridBody>
+                    {({year}) => <Calendar.YearPickerCell year={year} />}
+                  </Calendar.YearPickerGridBody>
+                </Calendar.YearPickerGrid>
+              </Calendar>
+              {!!showTimeField && (
+                <div className="flex items-center justify-between">
+                  <Label>Time</Label>
+                  <TimeField
+                    aria-label="Time"
+                    granularity={timeGranularity}
+                    hideTimeZone={hideTimeZone}
+                    hourCycle={hourCycle}
+                    name="time"
+                    shouldForceLeadingZeros={shouldForceLeadingZeros}
+                    value={state.timeValue}
+                    onChange={(v) => state.setTimeValue(v as TimeValue)}
+                  >
+                    <TimeField.Group variant="secondary">
+                      <TimeField.Input>
+                        {(segment) => <TimeField.Segment segment={segment} />}
+                      </TimeField.Input>
+                    </TimeField.Group>
+                  </TimeField>
+                </div>
+              )}
+            </DatePicker.Popover>
+          </>
+        )}
+      </DatePicker>
+
+      <div className="flex flex-wrap gap-4">
+        <div className="flex flex-col gap-1">
+          <Select
+            className="w-[120px]"
+            value={granularity}
+            variant="secondary"
+            onChange={(value) => setGranularity(value as Granularity)}
+          >
+            <Label>Granularity</Label>
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>
+                {granularityOptions.map((option) => (
+                  <ListBox.Item key={option.value} id={option.value} textValue={option.label}>
+                    {option.label}
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                ))}
+              </ListBox>
+            </Select.Popover>
+          </Select>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <Select
+            className="w-[120px]"
+            value={hourCycle}
+            variant="secondary"
+            onChange={(value) => setHourCycle(Number(value) as HourCycle)}
+          >
+            <Label>Hour cycle</Label>
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>
+                {hourCycleOptions.map((option) => (
+                  <ListBox.Item key={option.value} id={option.value} textValue={option.label}>
+                    {option.label}
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                ))}
+              </ListBox>
+            </Select.Popover>
+          </Select>
+        </div>
+      </div>
+
+      <div className="flex min-w-80 flex-col gap-2">
+        <Switch isSelected={hideTimeZone} onChange={setHideTimeZone}>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Hide timezone</Label>
+        </Switch>
+        <Switch isSelected={shouldForceLeadingZeros} onChange={setShouldForceLeadingZeros}>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Force leading zeros</Label>
+        </Switch>
+      </div>
+    </div>
+  );
+}
