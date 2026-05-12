@@ -232,7 +232,7 @@
   @apply shadow-none;
   background-color: var(--checkbox-control-bg);
 
-  --checkbox-control-bg: var(--color-default);
+  --checkbox-control-bg: var(--default);
 
   /* Hover state */
   .checkbox:hover &,

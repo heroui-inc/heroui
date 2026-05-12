@@ -75,7 +75,7 @@
 }
 
 .calendar-year-picker__trigger-indicator {
-  @apply text-xs text-accent;
+  @apply text-xs text-accent-soft-foreground;
 
   transition: transform 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
@@ -87,7 +87,7 @@
 }
 
 .calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-heading {
-  @apply text-accent;
+  @apply text-accent-soft-foreground;
 }
 
 /* -----------------------------------------------------------------------------

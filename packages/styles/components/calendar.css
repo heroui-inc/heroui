@@ -32,7 +32,7 @@
 }
 
 .calendar__nav-button {
-  @apply flex size-6 items-center justify-center rounded-2xl text-accent;
+  @apply flex size-6 items-center justify-center rounded-2xl text-accent-soft-foreground;
 
   will-change: scale;
 
@@ -53,7 +53,7 @@
   @media (hover: hover) {
     &:hover,
     &[data-hovered="true"] {
-      @apply bg-default text-accent;
+      @apply bg-default text-accent-soft-foreground;
     }
   }
 
@@ -157,7 +157,7 @@
 
   /* Today indicator */
   &[data-today="true"] {
-    @apply text-accent;
+    @apply text-accent-soft-foreground;
   }
 
   /* Selected state */

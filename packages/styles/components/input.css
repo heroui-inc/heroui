@@ -2,7 +2,7 @@
   @apply rounded-field border bg-field px-3 py-2 text-base text-field-foreground shadow-field outline-none placeholder:text-field-placeholder sm:text-sm;
 
   border-width: var(--border-width-field);
-  border-color: var(--color-field-border);
+  border-color: var(--field-border);
 
   /**
    * Transitions
@@ -18,7 +18,7 @@
     &:hover:not(:focus):not(:focus-visible),
     &[data-hovered="true"]:not([data-focused="true"]):not([data-focus-visible="true"]) {
       @apply bg-field-hover;
-      border-color: var(--color-field-border-hover);
+      border-color: var(--field-border-hover);
     }
   }
 
@@ -26,8 +26,8 @@
   &:focus,
   &[data-focused="true"] {
     @apply status-focused-field;
-    border-color: var(--color-field-border-focus);
-    background-color: var(--color-field-focus);
+    border-color: var(--field-border-focus);
+    background-color: var(--field-focus);
   }
 
   /* Focus visible state */
@@ -38,7 +38,7 @@
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-field-focus);
+    background-color: var(--field-focus);
   }
 
   /* Disabled state */
@@ -57,9 +57,9 @@
   @apply shadow-none;
   background-color: var(--input-bg);
 
-  --input-bg: var(--color-default);
-  --input-bg-hover: var(--color-default-hover);
-  --input-bg-focus: var(--color-default);
+  --input-bg: var(--default);
+  --input-bg-hover: var(--default-hover);
+  --input-bg-focus: var(--default);
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),
