@@ -1,0 +1,248 @@
+---
+title: 动画
+description: 为 HeroUI v3 组件添加流畅的动画和过渡
+icon: copy-transparent
+---
+
+HeroUI 组件支持多种动画方法：内置 CSS 过渡、自定义 CSS 动画以及 Framer Motion 等 JavaScript 库。
+
+## 内置动画
+
+HeroUI 组件使用数据属性来公开其动画状态：
+
+```css
+/* Popover entrance/exit */
+.popover[data-entering] {
+  @apply animate-in zoom-in-90 fade-in-0 duration-200;
+}
+
+.popover[data-exiting] {
+  @apply animate-out zoom-out-95 fade-out duration-150;
+}
+
+/* Button press effect */
+.button:active,
+.button[data-pressed="true"] {
+  transform: scale(0.97);
+}
+
+/* Accordion expansion */
+.accordion__panel[aria-hidden="false"] {
+  @apply h-[var(--panel-height)] opacity-100;
+}
+```
+
+**状态样式属性：**
+- `[data-hovered="true"]`- 悬停状态
+- `[data-pressed="true"]`- 活动/按下状态
+- `[data-focus-visible="true"]`- 键盘焦点
+- `[data-disabled="true"]`- 禁用状态
+- `[data-entering]` / `[data-exiting]`- 过渡状态
+- `[aria-expanded="true"]`- 展开状态
+
+## CSS 动画
+
+**使用 Tailwind 实用程序：**
+
+```tsx
+// Pulse on hover
+<Button className="hover:animate-pulse">
+  Hover me
+</Button>
+
+// Fade in entrance
+<Alert className="animate-fade-in">
+  Welcome message
+</Alert>
+
+// Staggered list
+<div className="space-y-2">
+  <Card className="animate-fade-in animate-delay-100">Item 1</Card>
+  <Card className="animate-fade-in animate-delay-200">Item 2</Card>
+</div>
+```
+
+**自定义过渡：**
+
+```css
+/* Slower accordion */
+.accordion__panel {
+  @apply transition-all duration-500;
+}
+
+/* Bouncy button */
+.button:active {
+  animation: bounce 0.3s;
+}
+
+@keyframes bounce {
+  50% { transform: scale(0.95); }
+}
+```
+
+## Framer Motion
+
+HeroUI 组件与 Framer Motion 无缝协作，实现高级动画。
+
+**基本用法：**
+
+```tsx
+import { motion } from 'framer-motion';
+import { Button } from '@heroui/react';
+
+const MotionButton = motion(Button);
+
+<MotionButton
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  Animated Button
+</MotionButton>
+```
+
+**入口动画：**
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+>
+  <Alert>
+    <Alert.Title>Welcome!</Alert.Title>
+  </Alert>
+</motion.div>
+```
+
+**布局动画：**
+
+```tsx
+import { AnimatePresence, motion } from 'framer-motion';
+
+function Tabs({ items, selected }) {
+  return (
+    <div className="flex gap-2">
+      {items.map((item, i) => (
+        <Button key={i} onPress={() => setSelected(i)}>
+          {item}
+          {selected === i && (
+            <motion.div
+              layoutId="active"
+              className="absolute inset-0 bg-accent"
+              transition={{ type: "spring", bounce: 0.2 }}
+            />
+          )}
+        </Button>
+      ))}
+    </div>
+  );
+}
+```
+
+## 渲染属性
+
+根据组件状态应用动态动画：
+
+```tsx
+<Button>
+  {({ isPressed, isHovered }) => (
+    <motion.span
+      animate={{
+        scale: isPressed ? 0.95 : isHovered ? 1.05 : 1
+      }}
+    >
+      Interactive Button
+    </motion.span>
+  )}
+</Button>
+```
+
+## 无障碍
+
+**尊重动态偏好：** HeroUI 使用 Tailwind 的 motion-reduce 工具自动尊重用户动态效果偏好。当用户在系统设置中启用“减少动态效果”时，所有内置的过渡和动画效果都将被禁用。
+
+HeroUI 扩展了 Tailwind 的 motion-reduce: 变体，以同时支持原生 `prefers-reduced-motion` 媒体查询和 `data-reduce-motion` 属性。
+
+```css
+/* HeroUI pattern - uses Tailwind's motion-reduce: */
+.button {
+  @apply transition-colors motion-reduce:transition-none;
+}
+
+/* Expands to support both approaches: */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
+
+[data-reduce-motion="true"] .button {
+  transition: none;
+}
+```
+
+使用Framer Motion：
+
+```tsx
+import { useReducedMotion } from 'framer-motion';
+
+function AnimatedCard() {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+    >
+      <Card>Content</Card>
+    </motion.div>
+  );
+}
+```
+
+**全局禁用动画：** 添加`data-reduce-motion="true"`到`<html>`或者`<body>`标签：
+
+```html
+<html data-reduce-motion="true">
+  <!-- All HeroUI animations will be disabled -->
+</html>
+```
+
+HeroUI自动检测用户的`prefers-reduced-motion: reduce`相应地设置并禁用动画。
+
+## 性能技巧
+
+**使用 GPU 加速属性**： 首选`transform`和`opacity`对于流畅的动画：
+
+```css
+/* Good - GPU accelerated */
+.slide-in {
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+/* Avoid - Triggers layout */
+.slide-in {
+  left: -100%;
+  transition: left 0.3s;
+}
+```
+
+**`will-change`优化**： 使用`will-change`优化动画，但在不设置动画时将其删除：
+
+```css
+.button {
+  will-change: transform;
+}
+
+.button:not(:hover) {
+  will-change: auto;
+}
+```
+
+## 下一步
+
+- 了解[样式](/docs/handbook/styling)方法
+- 探索[组件](/docs/react/components)示例
+- 查看[主题](/docs/handbook/theming)文档
