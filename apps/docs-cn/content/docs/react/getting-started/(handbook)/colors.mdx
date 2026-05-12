@@ -1,0 +1,381 @@
+---
+title: 颜色
+description: HeroUI v3 的调色板和主题系统
+icon: bucket-paint
+links:
+  themes: true
+  tailwind: theme
+---
+
+import {ColorSwatch, ColorPalette} from "@/components/color-swatch";
+
+HeroUI 使用 CSS 变量来管理颜色，可在浅色和深色主题之间自动切换。所有颜色均采用 `oklch` 色彩空间，以获得更平滑的色彩过渡。
+
+<Callout type="info">
+  **想要创建你自己的主题？** 试试 [主题构建器](/themes)，以可视化方式自定义颜色、圆角、字体等，然后导出 CSS 用于你的项目。
+</Callout>
+
+## 工作原理
+
+HeroUI 的颜色系统构建于 Tailwind CSS v4 的主题之上。当你导入 `@heroui/styles` 时，它会使用 Tailwind 的内置调色板，并将其映射到语义化变量。
+
+**命名规则：**
+- 不带后缀的颜色用作背景（例如 `--accent`）
+- 带 `-foreground` 后缀的颜色用于该背景上的文本（例如 `--accent-foreground`）
+
+**用法：**
+```html
+<html class="light" data-theme="light">
+  <body class="bg-background text-foreground">
+    <!-- Your app -->
+  </body>
+</html>
+```
+
+```tsx
+// This gives you the right background and text colors
+<div className="bg-accent text-accent-foreground">Hello</div>
+```
+
+### 基础颜色
+
+这四种颜色在所有主题中保持不变：
+
+<div className="flex flex-wrap gap-4 sm:gap-6">
+  <ColorSwatch name="White" variable="--white" />
+  <ColorSwatch name="Black" variable="--black" />
+  <ColorSwatch name="Snow" variable="--snow" />
+  <ColorSwatch name="Eclipse" variable="--eclipse" />
+</div>
+
+### 背景和表面
+
+<ColorPalette
+  colors={[
+    { name: "Background", variable: "--background", foreground: "--foreground" },
+    { name: "Foreground", variable: "--foreground" },
+    { name: "Surface", variable: "--surface", foreground: "--surface-foreground" },
+    { name: "Surface Foreground", variable: "--surface-foreground" },
+    { name: "Overlay", variable: "--overlay", foreground: "--overlay-foreground" },
+    { name: "Overlay Foreground", variable: "--overlay-foreground" },
+  ]}
+/>
+
+### 主要颜色
+
+**Accent** — 你的主品牌色（用于主要操作）
+**Accent Soft** — 一种更浅的版本，用于次要操作
+
+<ColorPalette
+  colors={[
+    { name: "Accent", variable: "--accent", foreground: "--accent-foreground" },
+    { name: "Accent Foreground", variable: "--accent-foreground" },
+    { name: "Accent Soft", variable: "--accent-soft", foreground: "--accent-soft-foreground" },
+    { name: "Accent Soft Foreground", variable: "--accent-soft-foreground" },
+  ]}
+/>
+
+### 状态颜色
+
+对于警报、验证和状态消息：
+
+<ColorPalette
+  colors={[
+    { name: "Success", variable: "--success", foreground: "--success-foreground" },
+    { name: "Success Foreground", variable: "--success-foreground" },
+    { name: "Warning", variable: "--warning", foreground: "--warning-foreground" },
+    { name: "Warning Foreground", variable: "--warning-foreground" },
+    { name: "Danger", variable: "--danger", foreground: "--danger-foreground" },
+    { name: "Danger Foreground", variable: "--danger-foreground" },
+  ]}
+/>
+
+### 表单字段颜色
+
+用于在各输入类组件中保持一致的表单字段样式：
+
+<ColorPalette
+  colors={[
+    { name: "Field Background", variable: "--field-background", foreground: "--field-foreground" },
+    { name: "Field Foreground", variable: "--field-foreground" },
+    { name: "Field Placeholder", variable: "--field-placeholder" },
+    { name: "Field Border", variable: "--field-border" },
+  ]}
+/>
+
+### 其他颜色
+
+<ColorPalette
+  colors={[
+    { name: "Default", variable: "--default", foreground: "--default-foreground" },
+    { name: "Default Foreground", variable: "--default-foreground" },
+    { name: "Muted", variable: "--muted", foreground: "--foreground" },
+    { name: "Border", variable: "--border" },
+    { name: "Focus", variable: "--focus" },
+    { name: "Link", variable: "--link" },
+    { name: "Backdrop", variable: "--backdrop" },
+    { name: "Scrollbar", variable: "--scrollbar" },
+  ]}
+/>
+
+## 如何使用颜色
+
+**在你的组件中：**
+```jsx
+<div className="bg-background text-foreground">
+  <button className="bg-accent text-accent-foreground hover:bg-accent-hover">
+    Click me
+  </button>
+</div>
+```
+
+**在 CSS 文件中：**
+
+```css title="global.css"
+/* Direct CSS variables */
+.my-component {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  border: 1px solid var(--border);
+}
+
+/* With @apply and @layer */
+@layer components {
+  .button {
+    @apply bg-accent text-accent-foreground;
+
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-accent-hover;
+    }
+
+    &:active,
+    &[data-pressed="true"] {
+      @apply bg-accent-hover;
+      transform: scale(0.97);
+    }
+  }
+}
+```
+
+## 默认主题
+
+完整的主题定义可以在 [variables.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 中找到。该主题会根据 `class="dark"` 或 `data-theme="dark"` 属性，自动在浅色和深色模式之间切换。
+
+<CollapsibleCode lang="css" code={`  @layer base {
+    /* HeroUI Default Theme */
+    :root {
+      color-scheme: light;
+
+      /* == Common Variables == */
+
+      /* Primitive Colors (Do not change between light and dark) */
+      --white: oklch(100% 0 0);
+      --black: oklch(0% 0 0);
+      --snow: oklch(0.9911 0 0);
+      --eclipse: oklch(0.2103 0.0059 285.89);
+
+      /* Spacing scale */
+      --spacing: 0.25rem;
+
+      /* Border */
+      --border-width: 1px;
+      --field-border-width: 0px;
+      --disabled-opacity: 0.5;
+
+      /* Ring offset - Used for focus ring */
+      --ring-offset-width: 2px;
+
+      /* Cursor */
+      --cursor-interactive: pointer;
+      --cursor-disabled: not-allowed;
+
+      /* Radius */
+      --radius: 0.5rem;
+      --field-radius: calc(var(--radius) * 1.5);
+
+      /* == Light Theme Variables == */
+
+      /* Base Colors */
+      --background: oklch(0.9702 0 0);
+      --foreground: var(--eclipse);
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: var(--white);
+      --surface-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components (tooltips, popovers, modals, menus) */
+      --overlay: var(--white);
+      --overlay-foreground: var(--foreground);
+
+      --muted: oklch(0.5517 0.0138 285.94);
+      --scrollbar: oklch(87.1% 0.006 286.286);
+
+      --default: oklch(94% 0.001 286.375);
+      --default-foreground: var(--eclipse);
+
+      --accent: oklch(0.6204 0.195 253.83);
+      --accent-foreground: var(--snow);
+
+      /* Form Field Defaults - Colors */
+      --field-background: var(--white);
+      --field-foreground: oklch(0.2103 0.0059 285.89);
+      --field-placeholder: var(--muted);
+      --field-border: transparent; /* no border by default on form fields */
+
+      /* Status Colors */
+      --success: oklch(0.7329 0.1935 150.81);
+      --success-foreground: var(--eclipse);
+
+      --warning: oklch(0.7819 0.1585 72.33);
+      --warning-foreground: var(--eclipse);
+
+      --danger: oklch(0.6532 0.2328 25.74);
+      --danger-foreground: var(--snow);
+
+      /* Component Colors */
+      --segment: var(--white);
+      --segment-foreground: var(--eclipse);
+
+      /* Misc Colors */
+      --border: oklch(92% 0.004 286.32);
+      --separator: oklch(92% 0.004 286.32);
+      --focus: var(--accent);
+      --link: var(--foreground);
+
+      /* Backdrop */
+      --backdrop: rgba(0, 0, 0, 0.5);
+
+      /* Shadows */
+      --surface-shadow:
+        0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+        0 0 1px 0 rgba(0, 0, 0, 0.06);
+      /* Overlay shadow */
+      --overlay-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
+      --field-shadow:
+        0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+        0 0 1px 0 rgba(0, 0, 0, 0.06);
+      /* Skeleton Default Global Animation */
+      --skeleton-animation: shimmer; /* shimmer, pulse, none */
+    }
+
+    .dark,
+    [data-theme="dark"] {
+      color-scheme: dark;
+      /* == Dark Theme Variables == */
+
+      /* Base Colors */
+      --background: oklch(12% 0.005 285.823);
+      --foreground: var(--snow);
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: oklch(0.2103 0.0059 285.89);
+      --surface-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components (tooltips, popovers, modals, menus) - lighter for contrast */
+      --overlay: oklch(0.22 0.0059 285.89); /* A bit lighter than surface for visibility in dark mode */
+      --overlay-foreground: var(--foreground);
+
+      --muted: oklch(70.5% 0.015 286.067);
+      --scrollbar: oklch(70.5% 0.015 286.067);
+
+      --default: oklch(27.4% 0.006 286.033);
+      --default-foreground: var(--snow);
+
+      /* Form Field Defaults - Colors (only the ones that are different from light theme) */
+      --field-background: var(--default);
+      --field-foreground: var(--foreground);
+
+      /* Status Colors */
+      --warning: oklch(0.8203 0.1388 76.34);
+      --warning-foreground: var(--eclipse);
+
+      --danger: oklch(0.594 0.1967 24.63);
+      --danger-foreground: var(--snow);
+
+      /* Component Colors */
+      --segment: oklch(0.3964 0.01 285.93);
+      --segment-foreground: var(--foreground);
+
+      /* Misc Colors */
+      --border: oklch(22% 0.006 286.033);
+      --separator: oklch(22% 0.006 286.033);
+      --focus: var(--accent);
+      --link: var(--foreground);
+
+      /* Backdrop */
+      --backdrop: rgba(0, 0, 0, 0.6);
+
+      /* Shadows */
+      --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+      --overlay-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+      --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
+    }
+  }
+`}
+/>
+
+
+## 自定义颜色
+
+**覆盖现有颜色：**
+
+```css
+:root {
+  /* Override default colors */
+  --accent: oklch(0.7 0.15 250);
+  --success: oklch(0.65 0.15 155);
+}
+
+[data-theme="dark"] {
+  /* Override dark theme colors */
+  --accent: oklch(0.8 0.12 250);
+  --success: oklch(0.75 0.12 155);
+}
+```
+
+**提示：** 你可以在 [oklch.com](https://oklch.com) 转换颜色。
+
+**添加你自己的颜色：**
+
+```css
+:root,
+[data-theme="light"] {
+  --info: oklch(0.6 0.15 210);
+  --info-foreground: oklch(0.98 0 0);
+}
+
+.dark,
+[data-theme="dark"] {
+  --info: oklch(0.7 0.12 210);
+  --info-foreground: oklch(0.15 0 0);
+}
+
+/* Make the color available to Tailwind */
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+```
+
+现在你可以使用它：
+
+```tsx
+<div className="bg-info text-info-foreground">Info message</div>
+```
+
+> **注意**：要进一步了解主题变量以及它们在 Tailwind CSS v4 中的工作方式，请参阅 [Tailwind CSS 主题文档](https://tailwindcss.com/docs/theme)。
+
+
+## 快速提示
+
+- 始终使用颜色变量，而不是硬编码的色值
+- 使用前景/背景配对，以获得良好的对比度
+- 在浅色和深色模式下都进行测试
+- 系统会自动遵循用户的主题偏好
+
+## 相关内容
+
+- [主题](/docs/handbook/theming) — 了解主题系统
+- [样式](/docs/handbook/styling) — 使用 CSS 为组件设置样式
+- [设计原则](/docs/getting-started/design-principles) — 了解 HeroUI 的设计理念

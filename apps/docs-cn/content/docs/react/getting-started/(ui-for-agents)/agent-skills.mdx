@@ -1,0 +1,71 @@
+---
+title: Agent Skills
+description: 让 AI 助手能够使用 HeroUI v3 组件来构建 UI
+---
+
+HeroUI Skills 为你的 AI 助手提供关于 HeroUI v3 组件、模式与最佳实践的全面知识。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills-dark.jpg"
+  alt="HeroUI v3 MCP 服务器"
+/>
+
+### 安装
+
+```bash
+curl -fsSL https://heroui.com/install | bash -s heroui-react
+```
+
+或者使用 skills 包：
+
+```bash
+npx skills add heroui-inc/heroui
+```
+
+<span className="text-sm text-muted">
+支持 Claude Code、Cursor、OpenCode 等。
+</span>
+
+### 使用方法
+
+Skills 会被你的 AI 助手 **自动发现**，你也可以通过 `/heroui-react` 命令直接调用。
+
+只需让你的 AI 助手：
+- 使用 HeroUI v3 构建组件
+- 使用 HeroUI 组件创建页面
+- 自定义主题和样式
+- 查阅组件文档
+
+<Callout>
+  对于更复杂的使用场景，请使用 [MCP 服务器](/docs/react/getting-started/mcp-server)，它提供对组件文档与源代码的实时访问。
+</Callout>
+
+### 包含的内容
+
+- HeroUI v3 安装指南
+- 所有 HeroUI v3 组件，包含 props、示例与使用模式
+- 主题与样式指南
+- 设计原则与组合模式
+
+### 结构
+
+```
+skills/heroui-react/
+├── SKILL.md              # Main skill documentation
+├── LICENSE.txt           # Apache License 2.0
+└── scripts/              # Utility scripts
+    ├── list_components.mjs
+    ├── get_component_docs.mjs
+    ├── get_source.mjs
+    ├── get_styles.mjs
+    ├── get_theme.mjs
+    └── get_docs.mjs
+```
+
+### 相关文档
+
+- [Agent Skills 规范](https://agentskills.io/home) — 了解 Agent Skills 的格式
+- [Claude Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) — Claude 的 Skills 文档
+- [Cursor Skills](https://cursor.com/docs/context/skills) — 在 Cursor 中使用 Skills
+- [OpenCode Skills](https://opencode.ai/docs/skills) — 在 OpenCode 中使用 Skills

@@ -1,0 +1,221 @@
+---
+title: MCP 服务器
+description: 直接在你的 AI 助手中访问 HeroUI v3 文档
+---
+
+HeroUI MCP 服务器让 AI 助手可以直接访问 HeroUI v3 组件文档，从而更轻松地在 AI 驱动的开发环境中使用 HeroUI 进行构建。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/hero-react-mcp-light-new-2.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/hero-react-mcp-dark-new.jpg"
+  alt="HeroUI v3 MCP 服务器"
+/>
+
+
+MCP 服务器目前仅支持 **@heroui/react v3**，并使用 [stdio 传输](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio)。已在 npm 上以 `@heroui/react-mcp` 发布。源代码请查看 [GitHub](https://github.com/heroui-inc/heroui-mcp)。
+
+<Callout>
+  随着我们向 HeroUI v3 添加更多组件，它们也将在 MCP 服务器中可用。
+</Callout>
+
+## 快速设置
+
+### Cursor
+
+<div className="flex items-center gap-3 mb-4">
+  <a
+    href="https://link.heroui.com/mcp-cursor-install"
+    className="button button--tertiary button--sm no-underline"
+  >
+    <svg viewBox="0 0 466.73 532.09" className="w-5 h-5 fill-current">
+      <path d="M457.43,125.94L244.42,2.96c-6.84-3.95-15.28-3.95-22.12,0L9.3,125.94c-5.75,3.32-9.3,9.46-9.3,16.11v247.99c0,6.65,3.55,12.79,9.3,16.11l213.01,122.98c6.84,3.95,15.28,3.95,22.12,0l213.01-122.98c5.75-3.32,9.3-9.46,9.3-16.11v-247.99c0-6.65-3.55-12.79-9.3-16.11h-.01ZM444.05,151.99l-205.63,356.16c-1.39,2.4-5.06,1.42-5.06-1.36v-233.21c0-4.66-2.49-8.97-6.53-11.31L24.87,145.67c-2.4-1.39-1.42-5.06,1.36-5.06h411.26c5.84,0,9.49,6.33,6.57,11.39h-.01Z"/>
+    </svg>
+    <span  >Install in Cursor</span>
+  </a>
+</div>
+
+或者手动添加到 **Cursor Settings** → **Tools** → **MCP Servers**：
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+或者，将以下内容添加到你的 `~/.cursor/mcp.json` 文件。更多信息请参阅 [Cursor 文档](https://cursor.com/docs/context/mcp)。
+
+### Claude Code
+
+在终端中运行此命令：
+
+```bash
+claude mcp add heroui-react -- npx -y @heroui/react-mcp@latest
+```
+
+或者手动添加到你项目的 `.mcp.json` 文件：
+
+```json title=".mcp.json"
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+添加配置后，重启 Claude Code 并运行 `/mcp`，即可在列表中看到 HeroUI MCP 服务器。如果你看到 **Connected**，就可以开始使用了。
+
+更多详情请参阅 [Claude Code MCP 文档](https://docs.claude.com/en/docs/claude-code/mcp)。
+
+### Windsurf
+
+将 HeroUI 服务器添加到你项目的 `.windsurf/mcp.json` 配置文件：
+
+```json title=".windsurf/mcp.json"
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+添加配置后，重新启动 Windsurf 以激活 MCP 服务器。
+
+更多详情请参阅 [Windsurf MCP 文档](https://docs.windsurf.com/windsurf/cascade/mcp)。
+
+### Zed
+
+将 HeroUI 服务器添加到你的 `settings.json` 配置文件。通过命令面板打开设置（`zed: open settings`），或使用 `Cmd-,`（Mac）/ `Ctrl-,`（Linux）：
+
+```json title="settings.json"
+{
+  "context_servers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+添加配置后，重新启动 Zed 并打开 Agent Panel 设置视图。检查 heroui 服务器旁边的指示点是否为绿色，且 tooltip 显示为 "Server is active"。
+
+更多详情请参阅 [Zed MCP 文档](https://zed.dev/docs/ai/mcp)。
+
+### VS Code
+
+要在 VS Code 中通过 GitHub Copilot 配置 MCP，请将 HeroUI 服务器添加到项目的 `.vscode/mcp.json` 配置文件：
+
+```json title=".vscode/mcp.json"
+{
+  "servers": {
+    "heroui-react": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+添加配置后，打开 `.vscode/mcp.json`，然后点击 heroui-react 服务器旁边的 **Start**。
+
+更多详情请参阅 [VS Code MCP 文档](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)。
+
+### Codex
+
+将 HeroUI 服务器添加到你的 `~/.codex/config.toml`（或项目级的 `.codex/config.toml`）：
+
+```toml title="config.toml"
+[mcp_servers.heroui-react]
+command = "npx"
+args = ["-y", "@heroui/react-mcp@latest"]
+```
+
+添加配置后，重启 Codex 并在 TUI 中运行 `/mcp`，以验证服务器是否处于活动状态。
+
+更多详情请参阅 [Codex MCP 文档](https://developers.openai.com/codex/mcp)。
+
+### OpenCode
+
+将 HeroUI 服务器添加到你项目的 `opencode.json` 配置文件：
+
+```json title="opencode.json"
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "heroui-react": {
+      "type": "local",
+      "command": ["npx", "-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+添加配置后，重新启动 OpenCode 以激活 MCP 服务器。
+
+更多详情请参阅 [OpenCode MCP 文档](https://open-code.ai/docs/en/mcp-servers)。
+
+## 用法
+
+配置完成后，可以这样询问你的 AI 助手：
+
+- “帮我在 Next.js / Vite / Astro 应用中安装 HeroUI v3”
+- “显示所有 HeroUI 组件”
+- “Button 组件有哪些 props？”
+- “给我一个使用 Card 组件的示例”
+- “获取 Button 组件的源代码”
+- “显示 Card 组件的 CSS 样式”
+- “深色模式下有哪些主题变量？”
+
+### 自动更新
+
+MCP 服务器可以帮助你升级到最新的 HeroUI 版本：
+
+```bash
+"Hey Cursor, update HeroUI to the latest version"
+```
+
+你的 AI 助手会自动完成以下事项：
+- 将你当前的版本与最新发布的版本进行比较
+- 查看变更日志，了解破坏性变更
+- 将必要的代码更新应用到你的项目中
+
+无论是更新到最新的稳定版还是预发布版，这一流程都适用于任何版本升级。
+
+## 可用工具
+
+MCP 服务器为 AI 助手提供以下工具：
+
+| 工具 | 描述 |
+|------|-------------|
+| `list_components` | 列出所有可用的 HeroUI v3 组件 |
+| `get_component_docs` | 获取一个或多个组件的完整文档，包括组件结构、props、示例和使用模式 |
+| `get_component_source_code` | 获取组件的 React/TypeScript 源代码（.tsx 文件） |
+| `get_component_source_styles` | 查看组件的 CSS 样式（.css 文件） |
+| `get_theme_variables` | 获取颜色、排版、间距相关的主题变量，支持浅色/深色模式 |
+| `get_docs` | 浏览完整的 HeroUI v3 文档，包括指南和设计原则（如需安装说明，请使用路径 `/docs/react/getting-started/quick-start`） |
+
+
+## 故障排查
+
+**环境要求：** Node.js 22 或更高版本。使用 `npx` 时会自动下载该包。
+
+**需要帮助？** [GitHub Issues](https://github.com/heroui-inc/heroui-mcp/issues) | [Discord 社区](https://discord.gg/heroui)
+
+## 链接
+
+- [npm 包](https://www.npmjs.com/package/@heroui/react-mcp)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-mcp)
+- [贡献指南](https://github.com/heroui-inc/heroui-mcp/blob/main/CONTRIBUTING.md)
