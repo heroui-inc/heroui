@@ -1,0 +1,396 @@
+---
+title: Table
+description: 表格以行和列展示结构化数据，支持排序、选择、列宽调整与无限滚动。
+icon: new
+links:
+  rac: Table
+  source: table/table.tsx
+  styles: table.css
+  storybook: Components/Data Display/Table
+---
+
+## 引入
+
+```tsx
+import { Table } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="table-basic"
+  minHeight="320px"
+/>
+
+### 组件结构
+
+引入 Table 组件，并通过点语法访问各部分。
+
+```tsx
+import { Table } from '@heroui/react';
+
+export default () => (
+  <Table>
+    <Table.ScrollContainer>
+      <Table.Content aria-label="Example table">
+        <Table.Header>
+          <Table.Column>Name</Table.Column>
+          <Table.Column>Role</Table.Column>
+        </Table.Header>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>Kate Moore</Table.Cell>
+            <Table.Cell>CEO</Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table.Content>
+    </Table.ScrollContainer>
+    <Table.Footer>{/* Optional footer content */}</Table.Footer>
+  </Table>
+);
+```
+
+### 次要变体
+
+<ComponentPreview
+  name="table-secondary-variant"
+  minHeight="320px"
+/>
+
+### 排序
+
+在 `Table.Column` 上设置 `allowsSorting` 可将列设为可排序。在 `Table.Content` 上使用 `sortDescriptor` 与 `onSortChange` 管理排序状态。
+
+<ComponentPreview
+  name="table-sorting"
+  minHeight="380px"
+/>
+
+### 选择
+
+在 `Table.Content` 上设置 `selectionMode` 以启用行选择。全选与每行复选框可使用带 `slot="selection"` 的 `Checkbox`。
+
+<ComponentPreview
+  name="table-selection"
+  minHeight="380px"
+/>
+
+### 自定义单元格
+
+<ComponentPreview
+  name="table-custom-cells"
+  minHeight="420px"
+/>
+
+### 可展开行
+
+行可以嵌套以展示层级数据。使用 `treeColumn` 指定列，并在该列单元格内渲染带 `slot="chevron"` 的 `Button`，以便用户展开/收起行。使用 `expandedKeys` 控制哪些行处于展开状态。
+
+<ComponentPreview
+  name="table-expandable-rows"
+  minHeight="420px"
+/>
+
+### 分页
+
+使用 `Table.Footer` 在表格下方添加分页组件。
+
+<ComponentPreview
+  name="table-pagination"
+  minHeight="400px"
+/>
+
+### 列宽调整
+
+使用 `Table.ResizableContainer` 包裹表格，并在每个可调整宽度的列中加入 `Table.ColumnResizer`。
+
+<ComponentPreview
+  name="table-column-resizing"
+  minHeight="420px"
+/>
+
+### 空状态
+
+在 `Table.Body` 上使用 `renderEmptyState`，在表格无数据时展示自定义内容。
+
+<ComponentPreview
+  name="table-empty-state"
+  minHeight="300px"
+/>
+
+### 异步加载
+
+使用 `Table.LoadMore` 实现无限滚动：会渲染一行哨兵节点，在进入视口时触发 `onLoadMore`。
+
+<ComponentPreview
+  name="table-async-loading"
+  minHeight="380px"
+/>
+
+### 虚拟化
+
+Table 通过 [Virtualizer](https://react-aria.adobe.com/Virtualizer) 支持虚拟化，仅渲染视口内可见行，从而高效处理大数据集。
+
+<ComponentPreview
+  name="table-virtualization"
+  minHeight="380px"
+/>
+
+### TanStack Table
+
+HeroUI 的 Table 可作为无头表格库之上的渲染层。
+本示例使用 [TanStack Table](https://tanstack.com/table) 处理列定义、排序与分页，而样式与无障碍由 HeroUI 负责。
+
+<ComponentPreview
+  name="table-tanstack-table"
+  minHeight="420px"
+/>
+
+<RelatedComponents component="table" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以为 Table 的各个部分分别传入类名：
+
+```tsx
+import { Table } from '@heroui/react';
+
+function CustomTable() {
+  return (
+    <Table className="border border-purple-200">
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Custom styled table">
+          <Table.Header className="bg-purple-50">
+            <Table.Column>Name</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row className="hover:bg-purple-50">
+              <Table.Cell>Kate Moore</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Table 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .table-root {
+    @apply relative grid w-full overflow-clip;
+  }
+
+  .table__header {
+    @apply bg-gray-100;
+  }
+
+  .table__column {
+    @apply px-4 py-2.5 text-left text-xs font-medium text-gray-600;
+  }
+
+  .table__row {
+    @apply bg-white border-b border-gray-200;
+  }
+
+  .table__cell {
+    @apply px-4 py-3 text-sm;
+  }
+
+  .table__footer {
+    @apply flex items-center px-4 py-2.5;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Table 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/table.css)）：
+
+#### 基础类
+- `.table-root` - 根容器（命名为 `table-root` 而非 `table`，因为 `table` 是 Tailwind CSS 内置的 `display: table` 工具类）
+- `.table__scroll-container` - 横向滚动包裹层与自定义滚动条
+- `.table__content` - `<table>` 元素
+- `.table__header` - 表头行（`<thead>`）
+- `.table__column` - 列表头单元格（`<th>`）
+- `.table__body` - 表体（`<tbody>`）
+- `.table__row` - 行（`<tr>`）
+- `.table__cell` - 数据单元格（`<td>`）
+- `.table__footer` - 表底容器（位于 table 外部）
+
+#### 进阶类
+- `.table__column-resizer` - 列宽拖拽手柄
+- `.table__resizable-container` - 启用列宽调整的包裹层
+- `.table__load-more` - 无限滚动的哨兵行
+- `.table__load-more-content` - 加载指示器的样式容器
+
+#### 变体类
+- `.table-root--primary` - 灰色背景容器与卡片式表体（默认）
+- `.table-root--secondary` - 无背景，独立圆角表头
+
+### 交互状态
+
+Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制：
+
+- **悬停**：`:hover` 或 `[data-hovered="true"]`（行背景变化）
+- **已选中**：`[data-selected="true"]`（行高亮）
+- **聚焦**：`:focus-visible` 或 `[data-focus-visible="true"]`（行、列与单元格的内嵌焦点环）
+- **禁用**：`:disabled` 或 `[aria-disabled="true"]`（降低透明度）
+- **可排序**：`[data-allows-sorting="true"]`（列上的交互指针样式）
+- **拖动中**：`[data-dragging="true"]`（降低透明度）
+- **放置目标**：`[data-drop-target="true"]`（强调色背景）
+
+## API 参考
+
+### Table Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉变体。Primary 为灰色背景容器；Secondary 为扁平透明行。 |
+| `className` | `string` | - | 根容器的额外 CSS 类。 |
+| `children` | `React.ReactNode` | - | 表格内容（ScrollContainer、Footer 等）。 |
+
+### Table.ScrollContainer Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `React.ReactNode` | - | `Table.Content` 元素。 |
+
+### Table.Content Props
+
+继承自 [React Aria Table](https://react-spectrum.adobe.com/react-aria/Table.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `aria-label` | `string` | - | 表格的无障碍标签。 |
+| `selectionMode` | `"none" \| "single" \| "multiple"` | `"none"` | 选择行为。 |
+| `selectedKeys` | `Selection` | - | 受控的已选中 key。 |
+| `onSelectionChange` | `(keys: Selection) => void` | - | 选择变化时的事件处理函数。 |
+| `sortDescriptor` | `SortDescriptor` | - | 当前排序状态。 |
+| `onSortChange` | `(descriptor: SortDescriptor) => void` | - | 排序变化时的事件处理函数。 |
+| `className` | `string` | - | 额外的 CSS 类。 |
+
+### Table.Header Props
+
+继承自 [React Aria TableHeader](https://react-spectrum.adobe.com/react-aria/Table.html#tableheader)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `columns` | `T[]` | - | 渲染函数模式下的动态列数据。 |
+| `children` | `React.ReactNode \| (column: T) => React.ReactNode` | - | 静态列或渲染函数。 |
+
+### Table.Column Props
+
+继承自 [React Aria Column](https://react-spectrum.adobe.com/react-aria/Table.html#column)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `id` | `string` | - | 列标识符。 |
+| `allowsSorting` | `boolean` | `false` | 列是否可排序。 |
+| `isRowHeader` | `boolean` | `false` | 该列是否作为行表头。 |
+| `defaultWidth` | `string \| number` | - | 可调整列的默认宽度。 |
+| `minWidth` | `number` | - | 可调整列的最小宽度。 |
+| `children` | `React.ReactNode \| (values: ColumnRenderProps) => React.ReactNode` | - | 列内容或带排序方向的渲染函数。 |
+
+### Table.Body Props
+
+继承自 [React Aria TableBody](https://react-spectrum.adobe.com/react-aria/Table.html#tablebody)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `items` | `T[]` | - | 渲染函数模式下的动态行数据。 |
+| `renderEmptyState` | `() => React.ReactNode` | - | 表格为空时展示的内容。 |
+| `children` | `React.ReactNode \| (item: T) => React.ReactNode` | - | 静态行或渲染函数。 |
+
+### Table.Row Props
+
+继承自 [React Aria Row](https://react-spectrum.adobe.com/react-aria/Table.html#row)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `id` | `string \| number` | - | 行标识符。 |
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `React.ReactNode` | - | 行单元格。 |
+
+### Table.Cell Props
+
+继承自 [React Aria Cell](https://react-spectrum.adobe.com/react-aria/Table.html#cell)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `React.ReactNode` | - | 单元格内容。 |
+
+### Table.Footer Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `React.ReactNode` | - | 表底内容（例如分页）。 |
+
+### Table.ColumnResizer Props
+
+继承自 [React Aria ColumnResizer](https://react-spectrum.adobe.com/react-aria/Table.html#columnresizer)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+
+### Table.ResizableContainer Props
+
+继承自 [React Aria ResizableTableContainer](https://react-spectrum.adobe.com/react-aria/Table.html#resizabletablecontainer)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `React.ReactNode` | - | `Table.Content` 元素。 |
+
+### Table.LoadMore Props
+
+继承自 [React Aria TableLoadMoreItem](https://react-spectrum.adobe.com/react-aria/Table.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isLoading` | `boolean` | `false` | 数据是否正在加载。 |
+| `onLoadMore` | `() => void` | - | 哨兵行可见时的事件处理函数。 |
+| `children` | `React.ReactNode` | - | 加载指示器内容。 |
+
+### Table.LoadMoreContent Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `React.ReactNode` | - | 加载指示器内容（例如 Spinner）。 |
+
+### Table.Collection Props
+
+由 React Aria `Collection` 重新导出。用于在行内与静态单元格并存时渲染动态单元格（例如复选框）。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `items` | `T[]` | - | 集合条目。 |
+| `children` | `(item: T) => React.ReactNode` | - | 每个条目的渲染函数。 |
+
+
+### TableLayout
+
+| Name | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `rowHeight` | `number \| undefined` | 48 | 行的固定高度（px）。 |
+| `estimatedRowHeight` | `number \| undefined` | — | 行高可变时的估算高度。 |
+| `headingHeight` | `number \| undefined` | 48 | 分区表头的固定高度（px）。 |
+| `estimatedHeadingHeight` | `number \| undefined` | — | 表头高度可变时的估算高度。 |
+| `loaderHeight` | `number \| undefined` | 48 | 加载器元素的固定高度（px）。该加载器用于在根级或嵌套行/分区中渲染「加载更多」等加载行。 |
+| `dropIndicatorThickness` | `number \| undefined` | 2 | 放置指示器的线条粗细。 |
+| `gap` | `number \| undefined` | 0 | 条目之间的间距。 |
+| `padding` | `number \| undefined` | 0 | 列表的内边距。 |

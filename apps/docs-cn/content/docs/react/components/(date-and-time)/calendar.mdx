@@ -1,0 +1,265 @@
+---
+title: Calendar
+description: 基于 React Aria Calendar 的可组合日期选择器，包含月份网格、导航与年份选择器支持。
+links:
+  rac: Calendar
+  source: calendar/calendar.tsx
+  styles: calendar.css
+  storybook: Components/Date and Time/Calendar
+---
+
+## 引入
+
+```tsx
+import { Calendar } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="calendar-basic" />
+
+### 组件结构
+
+```tsx
+import {Calendar} from '@heroui/react';
+
+export default () => (
+  <Calendar aria-label="Event date">
+    <Calendar.Header>
+      <Calendar.Heading />
+      <Calendar.NavButton slot="previous" />
+      <Calendar.NavButton slot="next" />
+    </Calendar.Header>
+    <Calendar.Grid>
+      <Calendar.GridHeader>
+        {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+      </Calendar.GridHeader>
+      <Calendar.GridBody>
+        {(date) => <Calendar.Cell date={date} />}
+      </Calendar.GridBody>
+    </Calendar.Grid>
+  </Calendar>
+)
+```
+
+### 年份选择器
+
+`Calendar.YearPickerTrigger`、`Calendar.YearPickerGrid` 以及对应的 body/cell 子组件提供一体化的年份导航模式。
+
+<ComponentPreview name="calendar-year-picker" />
+
+### 默认值
+
+<ComponentPreview name="calendar-default-value" />
+
+### 受控
+
+使用受控的 `value` 与 `focusedValue` 与外部状态协同，并支持自定义快捷键。
+
+<ComponentPreview name="calendar-controlled" />
+
+### 最小与最大日期
+
+<ComponentPreview name="calendar-min-max-dates" />
+
+### 不可用日期
+
+使用 `isDateUnavailable` 禁用周末、节假日或已被预订等日期。
+
+<ComponentPreview name="calendar-unavailable-dates" />
+
+### 禁用
+
+<ComponentPreview name="calendar-disabled" />
+
+### 只读
+
+<ComponentPreview name="calendar-read-only" />
+
+### 焦点值
+
+使用 `focusedValue` 与 `onFocusChange` 以编程方式控制焦点落在哪一天。
+
+<ComponentPreview name="calendar-focused-value" />
+
+### 单元格指示器
+
+你可以自定义 `Calendar.Cell` 的子节点，并使用 `Calendar.CellIndicator` 展示活动等元数据。
+
+<ComponentPreview name="calendar-with-indicators" />
+
+### 多个月份
+
+使用 `visibleDuration` 与 `offset` 渲染多个月份网格，适用于预订与规划场景。
+
+<ComponentPreview name="calendar-multiple-months" />
+
+### 国际化日历
+
+默认情况下，Calendar 使用用户语言环境对应的历法系统显示日期。你可以使用 `I18nProvider` 包裹 Calendar，并通过 [Unicode 历法语言扩展](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string) 覆盖。
+
+下方示例展示印度历法系统：
+
+<ComponentPreview name="calendar-international-calendar" />
+
+**提示：** `onChange` 事件始终返回与 `value` 或 `defaultValue` 相同历法系统中的日期（若未提供值则为公历），与界面展示的语言环境无关。这样应用逻辑可以始终使用单一历法系统，同时仍可按用户偏好的格式展示日期。
+
+### 自定义导航图标
+
+向 `Calendar.NavButton` 传入子节点即可替换默认的箭头图标。
+
+<ComponentPreview name="calendar-custom-icons" />
+
+### 真实场景示例
+
+<ComponentPreview name="calendar-booking-calendar" />
+
+### 自定义样式
+
+<ComponentPreview name="calendar-custom-styles" />
+
+<RelatedComponents component="calendar" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {Calendar} from '@heroui/react';
+
+function CustomCalendar() {
+  return (
+    <Calendar aria-label="Custom calendar" className="w-72 rounded-2xl border border-border bg-surface p-3 shadow-sm">
+      <Calendar.Header className="pb-3">
+        <Calendar.Heading className="text-default" />
+        <Calendar.NavButton slot="previous" className="text-default" />
+        <Calendar.NavButton slot="next" className="text-default" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar>
+  );
+}
+```
+
+### 自定义组件类
+
+```css
+@layer components {
+  .calendar {
+    @apply w-72 rounded-2xl border border-border bg-surface p-3 shadow-sm;
+  }
+
+  .calendar__heading {
+    @apply text-sm font-semibold text-default-700;
+  }
+
+  .calendar__cell[data-selected="true"] {
+    @apply bg-accent text-accent-foreground;
+  }
+}
+```
+
+### CSS 类
+
+Calendar 在 `packages/styles/components/calendar.css` 与 `packages/styles/components/calendar-year-picker.css` 中使用以下类：
+
+- `.calendar` - 根容器。
+- `.calendar__header` - 包含导航按钮与标题的头部行。
+- `.calendar__heading` - 当前月份标签。
+- `.calendar__nav-button` - 上一月/下一月导航控件。
+- `.calendar__grid` - 主体日期网格。
+- `.calendar__grid-header` - 星期标题行容器。
+- `.calendar__grid-body` - 日期行容器。
+- `.calendar__header-cell` - 星期标题单元格。
+- `.calendar__cell` - 可交互的日期单元格。
+- `.calendar__cell-indicator` - 日期单元格内的点状指示器。
+- `.calendar-year-picker__trigger` - 年份选择器切换按钮。
+- `.calendar-year-picker__trigger-heading` - 年份选择触发器内的标题文本。
+- `.calendar-year-picker__trigger-indicator` - 年份选择触发器内的指示图标。
+- `.calendar-year-picker__year-grid` - 可选年份的覆盖网格。
+- `.calendar-year-picker__year-cell` - 单个年份选项。
+
+### 交互状态
+
+Calendar 同时支持伪类与 React Aria 的 data 属性：
+
+- **已选中**：`[data-selected="true"]`
+- **今天**：`[data-today="true"]`
+- **不可用**：`[data-unavailable="true"]`
+- **跨月**：`[data-outside-month="true"]`
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **按下**：`:active` 或 `[data-pressed="true"]`
+- **可见焦点**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **禁用**：`:disabled` 或 `[data-disabled="true"]`
+
+## API 参考
+
+### Calendar Props
+
+Calendar 继承 React Aria [Calendar](https://react-spectrum.adobe.com/react-aria/Calendar.html) 的全部 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `DateValue \| null` | - | 受控的选中日期。 |
+| `defaultValue` | `DateValue \| null` | - | 初始选中日期（非受控）。 |
+| `onChange` | `(value: DateValue) => void` | - | 选中变化时调用。 |
+| `focusedValue` | `DateValue` | - | 受控的焦点日期。 |
+| `onFocusChange` | `(value: DateValue) => void` | - | 焦点移动到其它日期时调用。 |
+| `minValue` | `DateValue` | 历法感知的 `1900-01-01` | 最早可选日期。 |
+| `maxValue` | `DateValue` | 历法感知的 `2099-12-31` | 最晚可选日期。 |
+| `isDateUnavailable` | `(date: DateValue) => boolean` | - | 将日期标记为不可用。 |
+| `isDisabled` | `boolean` | `false` | 禁用交互与选择。 |
+| `isReadOnly` | `boolean` | `false` | 内容只读，无法更改选中。 |
+| `isInvalid` | `boolean` | `false` | 将日历标记为无效以配合校验 UI。 |
+| `visibleDuration` | `{months?: number}` | `{months: 1}` | 可见月份数量。 |
+| `defaultYearPickerOpen` | `boolean` | `false` | 内置年份选择器的初始展开状态。 |
+| `isYearPickerOpen` | `boolean` | - | 受控的年份选择器展开状态。 |
+| `onYearPickerOpenChange` | `(isOpen: boolean) => void` | - | 年份选择器展开状态变化时调用。 |
+
+### 组合部件
+
+| Component | 描述 |
+|-----------|------|
+| `Calendar.Header` | 导航与标题的头部容器。 |
+| `Calendar.Heading` | 当前月/年标题。 |
+| `Calendar.NavButton` | 上一月/下一月导航控件（`slot="previous"` 或 `slot="next"`）。 |
+| `Calendar.Grid` | 单个月的日期网格（多月份布局支持 `offset`）。 |
+| `Calendar.GridHeader` | 星期标题容器。 |
+| `Calendar.GridBody` | 日期单元格主体容器。 |
+| `Calendar.HeaderCell` | 星期标签单元格。 |
+| `Calendar.Cell` | 单个日期单元格。 |
+| `Calendar.CellIndicator` | 用于自定义元数据的可选指示元素。 |
+| `Calendar.YearPickerTrigger` | 切换年份选择模式的触发器。 |
+| `Calendar.YearPickerTriggerHeading` | 年份选择触发器内的本地化标题内容。 |
+| `Calendar.YearPickerTriggerIndicator` | 年份选择触发器内的切换图标。 |
+| `Calendar.YearPickerGrid` | 年份选择覆盖网格容器。 |
+| `Calendar.YearPickerGridBody` | 年份网格单元格的 body 渲染器。 |
+| `Calendar.YearPickerCell` | 单个年份选项单元格。 |
+
+### Calendar.Cell Render Props
+
+当 `Calendar.Cell` 的 `children` 为函数时，可使用 React Aria 的渲染参数：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `formattedDate` | `string` | 单元格日期的本地化标签。 |
+| `isSelected` | `boolean` | 该日期是否被选中。 |
+| `isUnavailable` | `boolean` | 该日期是否不可用。 |
+| `isDisabled` | `boolean` | 单元格是否禁用。 |
+| `isOutsideMonth` | `boolean` | 是否属于相邻月份。 |
+
+支持的历法系统及其标识符完整列表见：
+- [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
+- [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
+
+### Related packages
+- [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — 各日期组件共用的日期类型（`CalendarDate`、`CalendarDateTime`、`ZonedDateTime`）与工具函数
+- [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — 为子树覆盖语言环境
+- [`useLocale`](https://react-aria.adobe.com/useLocale) — 读取当前语言环境与书写方向

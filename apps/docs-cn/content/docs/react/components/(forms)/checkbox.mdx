@@ -1,0 +1,247 @@
+---
+title: Checkbox
+description: 复选框允许用户从多个独立选项中选择多项，或将单个独立选项标记为已选。
+links:
+  rac: Checkbox
+  source: checkbox/checkbox.tsx
+  styles: checkbox.css
+  storybook: Components/Forms/Checkbox
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Checkbox, Label } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="checkbox-basic"
+/>
+
+### 组件结构
+
+引入 Checkbox 后，可通过点语法访问各个部分。
+
+```tsx
+import { Checkbox, Label, Description } from '@heroui/react';
+
+export default () => (
+  <Checkbox>
+    <Checkbox.Control>
+      <Checkbox.Indicator />  
+    </Checkbox.Control>
+    <Checkbox.Content>
+      <Label />
+      <Description /> {/* Optional */}
+    </Checkbox.Content>
+  </Checkbox>
+);
+```
+
+### 禁用
+
+<ComponentPreview
+  name="checkbox-disabled"
+/>
+
+### 默认选中
+
+<ComponentPreview
+  name="checkbox-default-selected"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="checkbox-controlled"
+/>
+
+### 不定状态
+
+<ComponentPreview
+  name="checkbox-indeterminate"
+/>
+
+### 带标签
+
+<ComponentPreview
+  name="checkbox-with-label"
+/>
+
+### 带说明
+
+<ComponentPreview
+  name="checkbox-with-description"
+/>
+
+### 渲染 props
+
+<ComponentPreview
+  name="checkbox-render-props"
+/>
+
+### 表单集成
+
+<ComponentPreview
+  name="checkbox-form"
+/>
+
+### 无效
+
+<ComponentPreview
+  name="checkbox-invalid"
+/>
+
+### 自定义指示器
+
+<ComponentPreview
+  name="checkbox-custom-indicator"
+/>
+
+### 全圆角
+
+<ComponentPreview
+  name="checkbox-full-rounded"
+/>
+
+### 变体
+
+Checkbox 支持两种视觉变体：
+
+- **`primary`**（默认）— 常规样式与默认背景，适用于大多数场景
+- **`secondary`** — 弱强调变体，适合用于 Surface 等组件内部
+
+<ComponentPreview name="checkbox-variants" />
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="checkbox-custom-render-function"
+/>
+
+<RelatedComponents component="checkbox" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以单独定制各个 Checkbox：
+
+```tsx
+import { Checkbox, Label } from '@heroui/react';
+
+function CustomCheckbox() {
+  return (
+    <Checkbox name="custom">
+      <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
+        <Checkbox.Indicator className="text-white" />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label>Custom Checkbox</Label>
+      </Checkbox.Content>
+    </Checkbox>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Checkbox 的组件类名，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .checkbox {
+    @apply inline-flex gap-3 items-center;
+  }
+
+  .checkbox__control {
+    @apply size-5 border-2 border-gray-400 rounded data-[selected=true]:bg-blue-500 data-[selected=true]:border-blue-500;
+
+    /* Animated background indicator */
+    &::before {
+      @apply bg-accent pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md opacity-0 content-[''];
+      
+      transition:
+        scale 200ms linear,
+        opacity 200ms linear,
+        background-color 200ms ease-out;
+    }
+
+    /* Show indicator when selected */
+    &[data-selected="true"]::before {
+      @apply scale-100 opacity-100;
+    }
+  }
+
+  .checkbox__indicator {
+    @apply text-white;
+  }
+
+  .checkbox__content {
+    @apply flex flex-col gap-1;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+
+### CSS 类
+
+Checkbox 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/checkbox.css)）：
+
+- `.checkbox` - Checkbox 根容器
+- `.checkbox__control` - Checkbox 控件方框
+- `.checkbox__indicator` - Checkbox 勾选指示器
+- `.checkbox__content` - 可选内容容器
+
+### 交互状态
+
+Checkbox 同时支持 CSS 伪类与 data 属性，以获得更好的灵活性：
+
+- **选中**：`[data-selected="true"]` 或 `[aria-checked="true"]`（显示勾选与背景色变化）
+- **不定**：`[data-indeterminate="true"]`（以横线表示不定状态）
+- **无效**：`[data-invalid="true"]` 或 `[aria-invalid="true"]`（以危险色显示错误状态）
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **焦点**：`:focus-visible` 或 `[data-focus-visible="true"]`（显示焦点环）
+- **禁用**：`:disabled` 或 `[aria-disabled="true"]`（降低透明度并禁用指针事件）
+- **按下**：`:active` 或 `[data-pressed="true"]`
+
+## API 参考
+
+### Checkbox Props
+
+继承自 [React Aria Checkbox](https://react-spectrum.adobe.com/react-aria/Checkbox.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isSelected` | `boolean` | `false` | Checkbox 是否选中 |
+| `defaultSelected` | `boolean` | `false` | Checkbox 默认是否选中（非受控） |
+| `isIndeterminate` | `boolean` | `false` | Checkbox 是否处于不定状态 |
+| `isDisabled` | `boolean` | `false` | Checkbox 是否禁用 |
+| `isInvalid` | `boolean` | `false` | Checkbox 是否无效 |
+| `isReadOnly` | `boolean` | `false` | Checkbox 是否只读 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为弱强调、无阴影变体，适合用于 surface 上。 |
+| `name` | `string` | - | input 元素的 name，用于提交 HTML 表单 |
+| `value` | `string` | - | input 元素的 value，用于提交 HTML 表单 |
+| `onChange` | `(isSelected: boolean) => void` | - | Checkbox 值变化时调用 |
+| `children` | `React.ReactNode \| (values: CheckboxRenderProps) => React.ReactNode` | - | Checkbox 内容或渲染 prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+### CheckboxRenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isSelected` | `boolean` | Checkbox 当前是否选中 |
+| `isIndeterminate` | `boolean` | Checkbox 是否处于不定状态 |
+| `isHovered` | `boolean` | Checkbox 是否处于悬停状态 |
+| `isPressed` | `boolean` | Checkbox 当前是否处于按下状态 |
+| `isFocused` | `boolean` | Checkbox 是否聚焦 |
+| `isFocusVisible` | `boolean` | Checkbox 是否处于键盘可见焦点状态 |
+| `isDisabled` | `boolean` | Checkbox 是否禁用 |
+| `isReadOnly` | `boolean` | Checkbox 是否只读 |

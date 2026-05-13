@@ -1,0 +1,389 @@
+---
+title: Autocomplete
+description: 自动完成将选择与过滤结合，让用户可以搜索并从选项列表中选择。
+icon: updated
+links:
+  rac: Select
+  source: autocomplete/autocomplete.tsx
+  styles: autocomplete.css
+  storybook: Components/Pickers/Autocomplete
+---
+
+## 引入
+
+```tsx
+import { Autocomplete, useFilter } from "@heroui/react";
+```
+
+### 用法
+
+<ComponentPreview name="autocomplete-default" />
+
+### 组件结构
+
+导入 Autocomplete 组件后，可通过点语法访问各个子部分。
+
+```tsx
+import {Autocomplete, Label, Description, SearchField, ListBox} from "@heroui/react";
+
+export default () => (
+  <Autocomplete>
+    <Label />
+    <Autocomplete.Trigger>
+      <Autocomplete.Value />
+      <Autocomplete.ClearButton />
+      <Autocomplete.Indicator />
+    </Autocomplete.Trigger>
+    <Description />
+    <Autocomplete.Popover>
+      <Autocomplete.Filter>
+        <SearchField>
+          <SearchField.Group>
+            <SearchField.SearchIcon />
+            <SearchField.Input />
+          </SearchField.Group>
+        </SearchField>
+        <ListBox>
+          <ListBox.Item>
+            <Label />
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </Autocomplete.Filter>
+    </Autocomplete.Popover>
+  </Autocomplete>
+);
+```
+
+### 带描述
+
+<ComponentPreview name="autocomplete-with-description" />
+
+### 多选
+
+<ComponentPreview name="autocomplete-multiple-select" />
+
+### 分组
+
+<ComponentPreview name="autocomplete-with-sections" />
+
+### 含禁用选项
+
+<ComponentPreview name="autocomplete-with-disabled-options" />
+
+### 允许空集合
+
+`allowsEmptyCollection` prop 让自动完成在集合中没有任何条目时仍可使用。适用于列表初始可能为空，或过滤后没有结果等场景。
+
+<ComponentPreview name="autocomplete-allows-empty-collection" />
+
+### 自定义指示器
+
+<ComponentPreview name="autocomplete-custom-indicator" />
+
+### 必填
+
+<ComponentPreview name="autocomplete-required" />
+
+### 全宽
+
+<ComponentPreview name="autocomplete-full-width" />
+
+### 变体
+
+Autocomplete 支持两种视觉变体：
+
+- **`primary`**（默认）— 带阴影的标准样式，适用于大多数场景
+- **`secondary`** — 低强调、无阴影，适合用于 Surface 组件
+
+<ComponentPreview name="autocomplete-variants" />
+
+### 在 Surface 中
+
+在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="autocomplete-full-width" />
+
+### 自定义值
+
+你可以使用渲染 prop 自定义展示的值：
+
+<ComponentPreview name="autocomplete-user-selection" />
+
+### 受控
+
+<ComponentPreview name="autocomplete-controlled" />
+
+### 受控多选
+
+<ComponentPreview name="autocomplete-multiple-select" />
+
+### 受控展开状态
+
+<ComponentPreview name="autocomplete-controlled-open-state" />
+
+### 异步过滤
+
+<ComponentPreview name="autocomplete-asynchronous-filtering" />
+
+### 禁用
+
+<ComponentPreview name="autocomplete-disabled" />
+
+### 进阶示例
+
+#### 用户选择
+
+<ComponentPreview name="autocomplete-user-selection" />
+
+#### 用户多选
+
+<ComponentPreview name="autocomplete-user-selection-multiple" />
+
+#### 地点搜索
+
+<ComponentPreview name="autocomplete-location-search" />
+
+#### Tag Group 选择
+
+<ComponentPreview name="autocomplete-tag-group-selection" />
+
+#### 邮件收件人
+
+<ComponentPreview name="autocomplete-email-recipients" />
+
+<RelatedComponents component="autocomplete" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {Autocomplete, SearchField, ListBox} from "@heroui/react";
+
+function CustomAutocomplete() {
+  return (
+    <Autocomplete className="w-full">
+      <Label>State</Label>
+      <Autocomplete.Trigger className="rounded-lg border bg-surface p-2">
+        <Autocomplete.Value />
+        <Autocomplete.ClearButton />
+        <Autocomplete.Indicator />
+      </Autocomplete.Trigger>
+      <Autocomplete.Popover>
+        <Autocomplete.Filter>
+          <SearchField>
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input placeholder="Search..." />
+            </SearchField.Group>
+          </SearchField>
+          <ListBox>
+            <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
+              Item 1
+            </ListBox.Item>
+          </ListBox>
+        </Autocomplete.Filter>
+      </Autocomplete.Popover>
+    </Autocomplete>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 Autocomplete 的组件类，可使用 `@layer components` 指令。
+
+<br />
+[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .autocomplete {
+    @apply flex flex-col gap-1;
+  }
+
+  .autocomplete__trigger {
+    @apply rounded-lg border border-border bg-surface p-2;
+  }
+
+  .autocomplete__value {
+    @apply text-current;
+  }
+
+  .autocomplete__clear-button {
+    @apply text-muted hover:text-foreground;
+  }
+
+  .autocomplete__indicator {
+    @apply text-muted;
+  }
+
+  .autocomplete__popover {
+    @apply rounded-lg border border-border bg-surface p-2;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Autocomplete 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/autocomplete.css)）：
+
+#### 基础类
+
+- `.autocomplete` - 自动完成根容器
+- `.autocomplete__trigger` - 触发自动完成的按钮
+- `.autocomplete__value` - 显示的值或占位符
+- `.autocomplete__clear-button` - 清除已选值的按钮
+- `.autocomplete__indicator` - 下拉指示图标
+- `.autocomplete__popover` - 弹出层容器
+- `.autocomplete__filter` - 过滤区域包裹层
+
+#### 变体类
+
+- `.autocomplete--primary` - 主变体，带阴影（默认）
+- `.autocomplete--secondary` - 次变体，无阴影，适合用于 Surface
+
+#### 状态类
+
+- `.autocomplete[data-invalid="true"]` - 无效状态
+- `.autocomplete__trigger[data-focus-visible="true"]` - 触发器聚焦状态
+- `.autocomplete__trigger[data-disabled="true"]` - 触发器禁用状态
+- `.autocomplete__value[data-placeholder="true"]` - 占位符状态
+- `.autocomplete__clear-button[data-empty="true"]` - 无选中时隐藏清除按钮
+- `.autocomplete__indicator[data-open="true"]` - 展开时的指示器状态
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，便于灵活编写样式：
+
+- **悬停**：触发器上 `:hover` 或 `[data-hovered="true"]`
+- **聚焦**：触发器上 `:focus-visible` 或 `[data-focus-visible="true"]`
+- **禁用**：自动完成上 `:disabled` 或 `[data-disabled="true"]`
+- **展开**：指示器上 `[data-open="true"]`
+
+## API 参考
+
+### Autocomplete Props
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `placeholder` | `string` | `'Select an item'` | 自动完成为空时显示的占位文本 |
+| `selectionMode` | `"single" \| "multiple"` | `"single"` | 启用单选或多选 |
+| `allowsEmptyCollection` | `boolean` | `false` | 是否允许空集合。为 `true` 时，即使没有任何条目也可使用自动完成。 |
+| `isOpen` | `boolean` | - | 设置弹出层的打开状态（受控） |
+| `defaultOpen` | `boolean` | - | 设置弹出层的默认打开状态（非受控） |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | 打开状态变化时触发的事件处理函数 |
+| `disabledKeys` | `Iterable<Key>` | - | 禁用条目的 key |
+| `isDisabled` | `boolean` | - | 是否禁用自动完成 |
+| `value` | `Key \| Key[] \| null` | - | 当前值（受控） |
+| `defaultValue` | `Key \| Key[] \| null` | - | 默认值（非受控） |
+| `onChange` | `(value: Key \| Key[] \| null) => void` | - | 值变化时触发的事件处理函数 |
+| `isRequired` | `boolean` | - | 是否要求用户输入 |
+| `isInvalid` | `boolean` | - | 自动完成的值是否无效 |
+| `name` | `string` | - | 输入的 name，用于提交 HTML 表单 |
+| `fullWidth` | `boolean` | `false` | 自动完成是否占满容器宽度 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉变体。`primary` 为默认带阴影样式；`secondary` 为低强调、无阴影，适合用于 Surface。 |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode \| RenderFunction` | - | 自动完成内容或渲染函数 |
+
+### Autocomplete.Trigger Props
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode \| RenderFunction` | - | 触发器内容或渲染函数 |
+
+### Autocomplete.Value Props
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode \| RenderFunction` | - | 值区域内容或渲染函数 |
+
+### Autocomplete.Indicator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 自定义指示器内容 |
+
+### Autocomplete.ClearButton Props
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `onClick` | `(e: MouseEvent) => void` | - | 点击按钮时触发的事件处理函数 |
+| `ref` | `RefObject<HTMLButtonElement>` | - | 清除按钮元素的 ref |
+
+### Autocomplete.Popover Props
+
+| Prop        | 类型                                                                                                                                                                                                                                                                                                                     | 默认值    | 描述 |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------ |
+| `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | 弹出层相对触发器的位置 |
+| `className` | `string`                                                                                                                                                                                                                                                                                                                 | -          | 额外的 CSS 类 |
+| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | 子内容 |
+
+### Autocomplete.Filter Props
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `filter` | `(text: string, input: string) => boolean` | - | 自定义过滤函数 |
+| `inputValue` | `string` | - | 受控的输入值 |
+| `onInputChange` | `(value: string) => void` | - | 输入值变化时触发的事件处理函数 |
+| `children` | `ReactNode` | - | 过滤内容（SearchField 与 ListBox） |
+
+### useFilter Hook
+
+React Aria 的 `useFilter` hook 为自动完成提供过滤函数。
+
+```tsx
+import {useFilter} from "@heroui/react";
+
+const {contains} = useFilter({sensitivity: "base"});
+
+<Autocomplete.Filter filter={contains}>
+  <SearchField>...</SearchField>
+  <ListBox>...</ListBox>
+</Autocomplete.Filter>
+```
+
+**选项：**
+
+| 选项 | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `sensitivity` | `"base" \| "accent" \| "case" \| "variant"` | `"base"` | 匹配的本地化敏感度 |
+
+**返回值：**
+
+| 函数 | 类型 | 描述 |
+| --- | --- | --- |
+| `contains` | `(string: string, substring: string) => boolean` | 判断字符串是否包含给定子串 |
+| `startsWith` | `(string: string, substring: string) => boolean` | 判断字符串是否以给定子串开头 |
+| `endsWith` | `(string: string, substring: string) => boolean` | 判断字符串是否以给定子串结尾 |
+
+### RenderProps
+
+对 `Autocomplete.Value` 使用渲染函数时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+| --- | --- | --- |
+| `defaultChildren` | `ReactNode` | 默认渲染的值 |
+| `isPlaceholder` | `boolean` | 值是否为占位符 |
+| `state` | `SelectState` | 自动完成的状态 |
+| `selectedItems` | `Node[]` | 当前选中的条目 |
+
+## 无障碍
+
+Autocomplete 实现带过滤的 ARIA 选择模式，并提供：
+
+- 完整键盘导航支持
+- 选择变化时的屏幕阅读器播报
+- 合理的焦点管理
+- 禁用状态支持
+- 可搜索与过滤
+- HTML 表单集成
+
+更多信息见 [React Aria Select 文档](https://react-spectrum.adobe.com/react-aria/Select.html)。

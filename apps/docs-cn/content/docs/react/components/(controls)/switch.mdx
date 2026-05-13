@@ -1,0 +1,314 @@
+---
+title: Switch
+description: 用于布尔状态的开关组件。
+links:
+  rac: Switch
+  source: switch/switch.tsx
+  styles: switch.css
+  storybook: Components/Controls/Switch
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Switch, SwitchGroup, Label } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="switch-basic"
+/>
+
+### 组件结构
+
+引入 Switch 组件，并通过点语法访问各部分。
+
+```tsx
+import { Switch, Label, Description } from '@heroui/react';
+
+export default () => (
+  <Switch>
+    <Switch.Control>
+      <Switch.Thumb>
+        <Switch.Icon/> {/* Optional */}
+      </Switch.Thumb>
+    </Switch.Control>
+    <Switch.Content>
+      <Label />
+      <Description /> {/* Optional */}
+    </Switch.Content>
+  </Switch>
+);
+```
+
+要对多个 Switch 进行分组，请使用 `SwitchGroup` 组件：
+
+```tsx
+import { Switch, SwitchGroup, Label } from '@heroui/react';
+
+export default () => (
+  <SwitchGroup>
+    <Switch>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 1</Label>
+    </Switch>
+    <Switch>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 2</Label>
+    </Switch>
+  </SwitchGroup>
+);
+```
+
+### 禁用
+
+<ComponentPreview
+  name="switch-disabled"
+/>
+
+### 默认选中
+
+<ComponentPreview
+  name="switch-default-selected"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="switch-controlled"
+/>
+
+### 无标签
+
+<ComponentPreview
+  name="switch-without-label"
+/>
+
+### 尺寸
+
+<ComponentPreview
+  name="switch-sizes"
+/>
+
+### 标签位置
+
+<ComponentPreview
+  name="switch-label-position"
+/>
+
+### 带图标
+
+<ComponentPreview
+  name="switch-with-icons"
+/>
+
+### 带描述
+
+<ComponentPreview
+  name="switch-with-description"
+/>
+
+### 分组
+
+<ComponentPreview
+  name="switch-group"
+/>
+
+### 横向分组
+
+<ComponentPreview
+  name="switch-group-horizontal"
+/>
+
+### Render Props
+
+<ComponentPreview
+  name="switch-render-props"
+/>
+
+### 表单集成
+
+<ComponentPreview
+  name="switch-form"
+/>
+
+### 自定义样式
+
+<ComponentPreview
+  name="switch-custom-styles"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="switch-custom-render-function"
+/>
+
+<RelatedComponents component="switch" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以自定义各个 Switch：
+
+```tsx
+import { Switch, Label } from '@heroui/react';
+
+function CustomSwitch() {
+  return (
+    <Switch>
+      {({isSelected}) => (
+        <>
+          <Switch.Control
+            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
+          >
+            <Switch.Thumb
+              className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
+            />
+          </Switch.Control>
+          <Label>Custom Switch</Label>
+        </>
+      )}
+    </Switch>
+  );
+}
+```
+
+或自定义 SwitchGroup 布局：
+
+```tsx
+import { Switch, SwitchGroup, Label } from '@heroui/react';
+
+function CustomSwitchGroup() {
+  return (
+    <SwitchGroup className="gap-8" orientation="horizontal">
+      <Switch>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 1</Label>
+      </Switch>
+      <Switch>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 2</Label>
+      </Switch>
+    </SwitchGroup>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Switch 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .switch {
+    @apply inline-flex gap-3 items-center;
+  }
+
+  .switch__control {
+    @apply h-5 w-8 bg-gray-400 data-[selected=true]:bg-blue-500;
+  }
+
+  .switch__thumb {
+    @apply bg-white shadow-sm;
+  }
+
+  .switch__content {
+    @apply flex flex-col gap-1;
+  }
+
+  .switch__icon {
+    @apply h-3 w-3 text-current;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+#### Switch 类
+
+Switch 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)）：
+
+- `.switch` - Switch 根容器
+- `.switch__content` - 可选内容容器
+- `.switch__control` - Switch 轨道
+- `.switch__thumb` - 可移动的滑块
+- `.switch__icon` - 滑块内可选图标
+- `.switch--sm` - 小尺寸变体
+- `.switch--md` - 中尺寸变体（默认）
+- `.switch--lg` - 大尺寸变体
+
+#### SwitchGroup 类
+
+SwitchGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch-group.css)）：
+
+- `.switch-group` - Switch 组容器
+- `.switch-group__items` - Switch 项容器
+- `.switch-group--horizontal` - 横向布局
+- `.switch-group--vertical` - 纵向布局（默认）
+
+### 交互状态
+
+该 Switch 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制：
+
+- **已选中**：`[data-selected="true"]`（滑块位置与背景色变化）
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **聚焦**：`:focus-visible` 或 `[data-focus-visible="true"]`（显示焦点环）
+- **禁用**：`:disabled` 或 `[aria-disabled="true"]`（降低透明度，禁用指针事件）
+- **按压**：`:active` 或 `[data-pressed="true"]`
+
+## API 参考
+
+### Switch Props
+
+继承自 [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Switch 尺寸。 |
+| `isSelected` | `boolean` | `false` | Switch 是否打开。 |
+| `defaultSelected` | `boolean` | `false` | 默认是否打开（非受控）。 |
+| `isDisabled` | `boolean` | `false` | Switch 是否禁用。 |
+| `name` | `string` | - | 输入元素名称，用于提交 HTML 表单。 |
+| `value` | `string` | - | 输入元素值，用于提交 HTML 表单。 |
+| `onChange` | `(isSelected: boolean) => void` | - | Switch 值变化时的事件处理函数。 |
+| `onPress` | `(e: PressEvent) => void` | - | Switch 被按下时的事件处理函数。 |
+| `children` | `React.ReactNode \| (values: SwitchRenderProps) => React.ReactNode` | - | Switch 内容或渲染 prop。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### SwitchRenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isSelected` | `boolean` | Switch 当前是否打开。 |
+| `isHovered` | `boolean` | Switch 是否处于悬停状态。 |
+| `isPressed` | `boolean` | Switch 当前是否被按压。 |
+| `isFocused` | `boolean` | Switch 是否聚焦。 |
+| `isFocusVisible` | `boolean` | Switch 是否处于键盘聚焦状态。 |
+| `isDisabled` | `boolean` | Switch 是否禁用。 |
+| `isReadOnly` | `boolean` | Switch 是否只读。 |
+| `state` | `-` | Switch 的状态。 |
+
+### SwitchGroup Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | Switch 组方向。 |
+| `children` | `React.ReactNode` | - | 要渲染的 Switch 项。 |
+| `className` | `string` | - | 额外的 CSS 类。 |

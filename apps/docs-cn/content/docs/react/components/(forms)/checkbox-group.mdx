@@ -1,0 +1,175 @@
+---
+title: CheckboxGroup
+description: 用于管理多项复选框选择的 CheckboxGroup 组件。
+links:
+  rac: CheckboxGroup
+  source: checkbox-group/checkbox-group.tsx
+  styles: checkbox-group.css
+  storybook: Components/Forms/CheckboxGroup
+---
+
+## 引入
+
+```tsx
+import { CheckboxGroup, Checkbox, Label, Description } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="checkbox-group-basic"
+/>
+
+### 组件结构
+
+导入 CheckboxGroup 组件，并通过点语法访问所有子部分。
+
+```tsx
+import {CheckboxGroup, Checkbox, Label, Description, FieldError} from '@heroui/react';
+
+export default () => (
+  <CheckboxGroup name="interests">
+    <Label />
+    <Description /> {/* Optional */}
+    <Checkbox value="option1">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label />
+        <Description /> {/* Optional */}
+      </Checkbox.Content>
+    </Checkbox>
+    <FieldError /> {/* Optional */}
+  </CheckboxGroup>
+);
+```
+
+### 在 Surface 内
+
+置于 [Surface](/docs/components/surface) 中时，使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview
+  name="checkbox-group-on-surface"
+/>
+
+### 自定义指示器
+
+<ComponentPreview
+  name="checkbox-group-with-custom-indicator"
+/>
+
+### 不定状态
+
+<ComponentPreview
+  name="checkbox-group-indeterminate"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="checkbox-group-controlled"
+/>
+
+### 校验
+
+<ComponentPreview
+  name="checkbox-group-validation"
+/>
+
+### 禁用
+
+<ComponentPreview
+  name="checkbox-group-disabled"
+/>
+
+### 特性与附加示例
+
+<ComponentPreview
+  name="checkbox-group-features-and-addons"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="checkbox-group-custom-render-function"
+/>
+
+<RelatedComponents component="checkboxgroup" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以自定义 CheckboxGroup 组件：
+
+```tsx
+import { CheckboxGroup, Checkbox, Label } from '@heroui/react';
+
+function CustomCheckboxGroup() {
+  return (
+    <CheckboxGroup className="gap-4" name="custom">
+      <Checkbox value="option1">
+        <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
+          <Checkbox.Indicator className="text-white" />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Option 1</Label>
+        </Checkbox.Content>
+      </Checkbox>
+    </CheckboxGroup>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 CheckboxGroup 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .checkbox-group {
+    @apply flex flex-col gap-2;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+CheckboxGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/checkbox-group.css)）：
+
+- `.checkbox-group` - 复选框组合容器基础样式
+
+## API 参考
+
+### CheckboxGroup Props
+
+继承自 [React Aria CheckboxGroup](https://react-spectrum.adobe.com/react-aria/CheckboxGroup.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `string[]` | - | 当前选中值（受控） |
+| `defaultValue` | `string[]` | - | 默认选中值（非受控） |
+| `onChange` | `(value: string[]) => void` | - | 选中值变化时调用的处理函数 |
+| `isDisabled` | `boolean` | `false` | 是否禁用整个复选框组合 |
+| `isRequired` | `boolean` | `false` | 是否必填 |
+| `isReadOnly` | `boolean` | `false` | 是否只读 |
+| `isInvalid` | `boolean` | `false` | 是否处于无效状态 |
+| `name` | `string` | - | 提交 HTML 表单时复选框组合的名称 |
+| `children` | `React.ReactNode \| (values: CheckboxGroupRenderProps) => React.ReactNode` | - | 复选框组合内容或渲染 prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxGroupRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+### CheckboxGroupRenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `value` | `string[]` | 当前选中值 |
+| `isDisabled` | `boolean` | 是否禁用 |
+| `isReadOnly` | `boolean` | 是否只读 |
+| `isInvalid` | `boolean` | 是否处于无效状态 |
+| `isRequired` | `boolean` | 是否必填 |
