@@ -22,12 +22,12 @@ export const getRSS = async (): Promise<string> => {
   const baseUrl = siteConfig.siteUrl;
 
   const feed = new Feed({
-    copyright: `${currentYear} NextUI Inc. All rights reserved.`,
+    copyright: `${currentYear} NextUI Inc. 保留所有权利`,
     description: siteConfig.description,
     favicon: new URL("/favicon-dark.svg", baseUrl).toString(),
     id: baseUrl.toString(),
     image: new URL(siteConfig.ogImage, baseUrl).toString(),
-    language: "en-US",
+    language: "zh-CN",
     link: baseUrl.toString(),
     title: siteConfig.name,
   });
@@ -43,7 +43,7 @@ export const getRSS = async (): Promise<string> => {
         },
       ],
       date: lastModified,
-      description: page.data.description || "HeroUI documentation page",
+      description: page.data.description || "HeroUI 文档页面",
       id: page.url,
       link: pageUrl.toString(),
       title: page.data.title,
