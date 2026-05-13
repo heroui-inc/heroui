@@ -1,0 +1,285 @@
+---
+title: Spacer
+description: Spacer 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="warning">
+  Spacer 组件已在 HeroUI v3 中**移除**。请改为直接使用 Tailwind CSS 的 margin 工具类。
+</Callout>
+
+## 关键变化
+
+### 1. 组件移除
+
+**v2：** 来自 `@heroui/react` 的 `<Spacer>` 组件  
+**v3：** Tailwind CSS margin 工具类（`ml-*`、`mr-*`、`mt-*`、`mb-*`、`mx-*`、`my-*`）
+
+### 2. Prop 对应关系
+
+v2 的 Spacer 组件提供以下 prop，可映射到 Tailwind 工具类：
+
+| v2 prop | v3 对应 | 说明 |
+| --- | --- | --- |
+| `x={n}` | `ml-{n}` 或 `mx-{n}` | 水平外边距（左侧或两侧） |
+| `y={n}` | `mt-{n}` 或 `my-{n}` | 垂直外边距（顶部或两侧） |
+| `isInline` | `inline-block` 或 `block` | 显示类型 |
+
+### 3. 间距刻度
+
+v2 中的间距数值与 Tailwind 的 spacing 刻度一致：
+
+- `x={1}` → `ml-1`（0.25rem / 4px）
+- `x={2}` → `ml-2`（0.5rem / 8px）
+- `x={4}` → `ml-4`（1rem / 16px）
+- `y={4}` → `mt-4`（1rem / 16px）
+- 以此类推。
+
+## 迁移示例
+
+### 基础间距
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Spacer } from "@heroui/react";
+
+    {/* Vertical spacing */}
+    <div>
+      <div>Item 1</div>
+      <Spacer y={4} />
+      <div>Item 2</div>
+    </div>
+    
+    {/* Horizontal spacing */}
+    <div className="flex">
+      <div>Item 1</div>
+      <Spacer x={4} isInline />
+      <div>Item 2</div>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* 垂直间距 */}
+    <div>
+      <div>Item 1</div>
+      <div className="mt-4">Item 2</div>
+    </div>
+    
+    {/* 水平间距 */}
+    <div className="flex">
+      <div>Item 1</div>
+      <div className="ml-4">Item 2</div>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 使用 gap（推荐）
+
+在 flex 与 grid 布局中，使用 `gap` 往往比 Spacer 更合适：
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Spacer } from "@heroui/react";
+
+    {/* Horizontal layout */}
+    <div className="flex">
+      <div>Item 1</div>
+      <Spacer x={4} isInline />
+      <div>Item 2</div>
+    </div>
+    
+    {/* Vertical layout */}
+    <div className="flex flex-col">
+      <Button>Button 1</Button>
+      <Spacer y={2} />
+      <Button>Button 2</Button>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* 水平布局 */}
+    <div className="flex gap-4">
+      <div>Item 1</div>
+      <div>Item 2</div>
+    </div>
+    
+    {/* 垂直布局 */}
+    <div className="flex flex-col gap-2">
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## 完整示例
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Spacer, Button } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div>
+          <h1>Title</h1>
+          <Spacer y={4} />
+          <p>Description text</p>
+          <Spacer y={8} />
+          <div className="flex">
+            <Button>Cancel</Button>
+            <Spacer x={4} isInline />
+            <Button>Submit</Button>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div>
+          <h1>Title</h1>
+          <p className="mt-4">Description text</p>
+          <div className="mt-8 flex gap-4">
+            <Button>Cancel</Button>
+            <Button>Submit</Button>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## 间距刻度参考
+
+Tailwind CSS spacing 刻度（与 v2 Spacer 数值对应）：
+
+| 数值 | 尺寸 | Tailwind class |
+| --- | --- | --- |
+| `0` | 0px | `m-0`、`ml-0`、`mt-0` 等 |
+| `px` | 1px | `m-px`、`ml-px`、`mt-px` 等 |
+| `0.5` | 0.125rem（2px） | `m-0.5`、`ml-0.5`、`mt-0.5` 等 |
+| `1` | 0.25rem（4px） | `m-1`、`ml-1`、`mt-1` 等 |
+| `2` | 0.5rem（8px） | `m-2`、`ml-2`、`mt-2` 等 |
+| `3` | 0.75rem（12px） | `m-3`、`ml-3`、`mt-3` 等 |
+| `4` | 1rem（16px） | `m-4`、`ml-4`、`mt-4` 等 |
+| `5` | 1.25rem（20px） | `m-5`、`ml-5`、`mt-5` 等 |
+| `6` | 1.5rem（24px） | `m-6`、`ml-6`、`mt-6` 等 |
+| `8` | 2rem（32px） | `m-8`、`ml-8`、`mt-8` 等 |
+| `10` | 2.5rem（40px） | `m-10`、`ml-10`、`mt-10` 等 |
+| `12` | 3rem（48px） | `m-12`、`ml-12`、`mt-12` 等 |
+| `16` | 4rem（64px） | `m-16`、`ml-16`、`mt-16` 等 |
+| `20` | 5rem（80px） | `m-20`、`ml-20`、`mt-20` 等 |
+
+## 最佳实践
+
+### 1. 在 flex / grid 布局中使用 gap
+
+用 `gap` 工具类替代 Spacer 组件：
+
+```tsx
+// ✅ 推荐
+<div className="flex gap-4">
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</div>
+
+// ❌ 不推荐
+<div className="flex">
+  <Button>Button 1</Button>
+  <div className="ml-4"><Button>Button 2</Button></div>
+</div>
+```
+
+### 2. 垂直列表使用 space 工具类
+
+```tsx
+// ✅ 推荐
+<div className="space-y-4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+
+// 备选
+<div>
+  <div>Item 1</div>
+  <div className="mt-4">Item 2</div>
+  <div className="mt-4">Item 3</div>
+</div>
+```
+
+### 3. 直接使用 margin 工具类
+
+将 margin 直接写在元素上，而不是使用 Spacer：
+
+```tsx
+// ✅ 推荐
+<div className="mt-4">Content</div>
+
+// ❌ 不推荐
+<>
+  <Spacer y={4} />
+  <div>Content</div>
+</>
+```
+
+## 总结
+
+1. **组件已移除**：v3 中不再提供 `Spacer` 组件。
+2. **导入调整**：移除 `import { Spacer } from "@heroui/react"`。
+3. **使用 Tailwind 工具类**：改用 margin 工具类（`ml-*`、`mt-*`、`mx-*`、`my-*` 等）。
+4. **优先使用 gap**：在 flex / grid 布局中优先使用 `gap-*`。
+5. **优先使用 space**：在列表中优先使用 `space-y-*` 与 `space-x-*` 保持一致的间距。
+
+## 迁移步骤
+
+1. **移除导入**：从 `@heroui/react` 的导入中删除 `Spacer`。
+2. **替换 Spacer**：将 `<Spacer x={n} />` 替换为 `ml-{n}` 或 `mx-{n}` 等 class。
+3. **替换 Spacer**：将 `<Spacer y={n} />` 替换为 `mt-{n}` 或 `my-{n}` 等 class。
+4. **使用 gap**：在 flex / grid 布局中用 `gap-{n}` 替代 Spacer。
+5. **使用 space**：在垂直 / 水平列表中用 `space-y-{n}` 或 `space-x-{n}`。
+
+## 常见模式
+
+### 垂直堆叠与间距
+
+```tsx
+// 使用 space-y 工具类
+<div className="space-y-4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+```
+
+### 水平行与间距
+
+```tsx
+// 使用 gap 工具类
+<div className="flex gap-4">
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+  <Button>Button 3</Button>
+</div>
+```
+
+### 特定元素之间的自定义间距
+
+```tsx
+<div>
+  <div>Item 1</div>
+  <div className="mt-8">Item 2 (with custom spacing)</div>
+  <div className="mt-4">Item 3</div>
+</div>
+```

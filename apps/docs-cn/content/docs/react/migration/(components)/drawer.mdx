@@ -1,0 +1,427 @@
+---
+title: Drawer
+description: Drawer 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Drawer 文档](/docs/react/components/drawer)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Drawer` 与 `Modal` 共享相同的 API，使用 `DrawerContent`、`DrawerHeader`、`DrawerBody` 和 `DrawerFooter`，并采用渲染回调模式：
+
+```tsx
+import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Button, useDisclosure } from "@heroui/react";
+
+export default function App() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  return (
+    <>
+      <Button onPress={onOpen}>Open Drawer</Button>
+      <Drawer isOpen={isOpen} onOpenChange={onOpenChange} placement="right">
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader>Drawer Title</DrawerHeader>
+              <DrawerBody>
+                <p>Drawer content goes here.</p>
+              </DrawerBody>
+              <DrawerFooter>
+                <Button onPress={onClose}>Close</Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+```
+
+在 v3 中，Drawer 改用复合组件模式，提供显式子组件与内置触发器支持：
+
+```tsx
+import { Drawer, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Drawer>
+      <Button>Open Drawer</Button>
+      <Drawer.Backdrop>
+        <Drawer.Content placement="right">
+          <Drawer.Dialog>
+            <Drawer.Handle />
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Drawer Title</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>
+              <p>Drawer content goes here.</p>
+            </Drawer.Body>
+            <Drawer.Footer>
+              <Button slot="close">Close</Button>
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** `Drawer` 包裹 `DrawerContent`，并使用渲染回调模式；触发器需要通过 `useDisclosure` 单独管理  
+**v3：** 复合组件：`Drawer`、`Drawer.Backdrop`、`Drawer.Content`、`Drawer.Dialog`、`Drawer.Header`、`Drawer.Heading`、`Drawer.Body`、`Drawer.Footer`、`Drawer.Handle`、`Drawer.CloseTrigger`。`Drawer` 的第一个子节点会成为触发器。
+
+### 2. 触发模式
+
+**v2：** 使用外部触发器，并通过 `useDisclosure` 钩子与 `isOpen` / `onOpenChange` 管理状态  
+**v3：** 内置触发器，`Drawer` 的第一个子节点会自动成为触发器。受控状态可通过 `useOverlayState` 钩子管理。
+
+### 3. v3 新特性
+
+- **拖动关闭**：在手柄、头部和底部区域内置基于指针的拖动手势
+- **拖动手柄**：`Drawer.Handle` 是视觉拖动指示器组件
+- **内置关闭触发器**：`Drawer.CloseTrigger` 会渲染一个关闭按钮
+- **基于 slot 的关闭**：带有 `slot="close"` 的按钮会自动关闭 Drawer
+
+### 4. Prop 变更
+
+| v2 prop | v3 等效项 | 说明 |
+| ------- | ----------- | ---- |
+| `isOpen` | `Drawer.Backdrop` 的 `isOpen` | 或使用 `useOverlayState` |
+| `onOpenChange` | `Drawer.Backdrop` 的 `onOpenChange` | 或使用 `useOverlayState` |
+| `onClose` | - | 在按钮上使用 `onOpenChange` 或 `slot="close"` |
+| `placement` | `Drawer.Content` 的 `placement` | `"right"` → `"right"`、`"left"` → `"left"`、`"top"` → `"top"`、`"bottom"` → `"bottom"`。默认值从 `"right"` 改为 `"bottom"` |
+| `size` | - | 已移除（请在 `Drawer.Dialog` 上使用 Tailwind CSS） |
+| `radius` | - | 已移除（请改用 Tailwind CSS） |
+| `backdrop` | `Drawer.Backdrop` 的 `variant` | 值保持一致：`"opaque"`、`"blur"`、`"transparent"` |
+| `isDismissable` | `Drawer.Backdrop` 的 `isDismissable` | 保持一致 |
+| `isKeyboardDismissDisabled` | `Drawer.Backdrop` 的 `isKeyboardDismissDisabled` | 保持一致 |
+| `shouldBlockScroll` | - | v3 中始终会阻止滚动 |
+| `hideCloseButton` | - | 省略 `Drawer.CloseTrigger` 即可隐藏 |
+| `closeButton` | - | 将自定义内容传给 `Drawer.CloseTrigger` |
+| `motionProps` | - | 已移除（v3 使用基于 CSS 的动画） |
+| `disableAnimation` | - | 已移除 |
+| `portalContainer` | - | 已移除 |
+| `classNames` | - | 在各个复合组件上使用 `className` |
+
+### 5. Hook 变更
+
+**v2：** 使用 `useDisclosure` 钩子管理打开 / 关闭状态  
+**v3：** 使用 `useOverlayState` 钩子（替代 `useDisclosure`）
+
+```tsx
+// v2
+const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+// v3
+const state = useOverlayState();
+// state.isOpen, state.open(), state.close(), state.toggle()
+```
+
+## 迁移示例
+
+### 基本抽屉
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, Button, useDisclosure } from "@heroui/react";
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    <>
+      <Button onPress={onOpen}>Open</Button>
+      <Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader>Title</DrawerHeader>
+              <DrawerBody>Content</DrawerBody>
+              <DrawerFooter>
+                <Button onPress={onClose}>Close</Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Drawer, Button } from "@heroui/react";
+
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop>
+        <Drawer.Content>
+          <Drawer.Dialog>
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Title</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Content</Drawer.Body>
+            <Drawer.Footer>
+              <Button slot="close">Close</Button>
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+### 位置
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Drawer isOpen={isOpen} onOpenChange={onOpenChange} placement="left">
+      <DrawerContent>
+        {(onClose) => (
+          <>
+            <DrawerHeader>Left Drawer</DrawerHeader>
+            <DrawerBody>Content</DrawerBody>
+          </>
+        )}
+      </DrawerContent>
+    </Drawer>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop>
+        <Drawer.Content placement="left">
+          <Drawer.Dialog>
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Left Drawer</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Content</Drawer.Body>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+### 遮罩变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Drawer isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
+      <DrawerContent>
+        {(onClose) => (
+          <>
+            <DrawerHeader>Blurred Backdrop</DrawerHeader>
+            <DrawerBody>Content</DrawerBody>
+          </>
+        )}
+      </DrawerContent>
+    </Drawer>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop variant="blur">
+        <Drawer.Content>
+          <Drawer.Dialog>
+            <Drawer.CloseTrigger />
+            <Drawer.Header>
+              <Drawer.Heading>Blurred Backdrop</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Content</Drawer.Body>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useDisclosure } from "@heroui/react";
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    <>
+      <Button onPress={onOpen}>Open</Button>
+      <Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader>Controlled</DrawerHeader>
+              <DrawerBody>Content</DrawerBody>
+              <DrawerFooter>
+                <Button onPress={onClose}>Close</Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useOverlayState } from "@heroui/react";
+
+    const state = useOverlayState();
+
+    <>
+      <Button onPress={state.open}>Open</Button>
+      <Drawer state={state}>
+        <Drawer.Backdrop>
+          <Drawer.Content>
+            <Drawer.Dialog>
+              <Drawer.CloseTrigger />
+              <Drawer.Header>
+                <Drawer.Heading>Controlled</Drawer.Heading>
+              </Drawer.Header>
+              <Drawer.Body>Content</Drawer.Body>
+              <Drawer.Footer>
+                <Button onPress={state.close}>Close</Button>
+              </Drawer.Footer>
+            </Drawer.Dialog>
+          </Drawer.Content>
+        </Drawer.Backdrop>
+      </Drawer>
+    </>
+    ```
+  </Tab>
+</Tabs>
+
+### 不可关闭
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Drawer
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      isDismissable={false}
+      hideCloseButton
+    >
+      <DrawerContent>
+        {(onClose) => (
+          <>
+            <DrawerHeader>Confirm Action</DrawerHeader>
+            <DrawerBody>Are you sure?</DrawerBody>
+            <DrawerFooter>
+              <Button onPress={onClose}>Confirm</Button>
+            </DrawerFooter>
+          </>
+        )}
+      </DrawerContent>
+    </Drawer>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Drawer>
+      <Button>Open</Button>
+      <Drawer.Backdrop isDismissable={false}>
+        <Drawer.Content>
+          <Drawer.Dialog>
+            <Drawer.Header>
+              <Drawer.Heading>Confirm Action</Drawer.Heading>
+            </Drawer.Header>
+            <Drawer.Body>Are you sure?</Drawer.Body>
+            <Drawer.Footer>
+              <Button slot="close">Confirm</Button>
+            </Drawer.Footer>
+          </Drawer.Dialog>
+        </Drawer.Content>
+      </Drawer.Backdrop>
+    </Drawer>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<Drawer
+  classNames={{
+    wrapper: "custom-wrapper",
+    base: "custom-base",
+    backdrop: "custom-backdrop",
+    header: "custom-header",
+    body: "custom-body",
+    footer: "custom-footer",
+    closeButton: "custom-close",
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<Drawer>
+  <Button>Open</Button>
+  <Drawer.Backdrop className="custom-backdrop">
+    <Drawer.Content>
+      <Drawer.Dialog className="custom-base">
+        <Drawer.CloseTrigger className="custom-close" />
+        <Drawer.Header className="custom-header">
+          <Drawer.Heading>Title</Drawer.Heading>
+        </Drawer.Header>
+        <Drawer.Body className="custom-body">Content</Drawer.Body>
+        <Drawer.Footer className="custom-footer">Actions</Drawer.Footer>
+      </Drawer.Dialog>
+    </Drawer.Content>
+  </Drawer.Backdrop>
+</Drawer>
+```
+
+## 组件结构
+
+v3 Drawer 遵循以下结构：
+
+```
+Drawer (Root)
+  ├── [Trigger element] (first child becomes trigger)
+  └── Drawer.Backdrop
+      └── Drawer.Content (placement)
+          └── Drawer.Dialog
+              ├── Drawer.Handle (optional, drag indicator)
+              ├── Drawer.CloseTrigger (optional, close button)
+              ├── Drawer.Header
+              │   └── Drawer.Heading
+              ├── Drawer.Body (scrollable)
+              └── Drawer.Footer
+```
+
+## 总结
+
+1. **组件结构**：渲染回调模式 → 带显式子组件的复合组件
+2. **触发模式**：外部 `useDisclosure` + `onPress` → 内置触发器（`Drawer` 的第一个子节点）
+3. **状态钩子**：`useDisclosure` → `useOverlayState`，并使用 `open()`、`close()`、`toggle()` 方法
+4. **位置**：`Drawer` 上的 prop → `Drawer.Content` 上的 prop。默认值从 `"right"` 改为 `"bottom"`
+5. **遮罩**：`backdrop` prop → `Drawer.Backdrop` 的 `variant` prop
+6. **关闭按钮**：`hideCloseButton` / `closeButton` props → 省略或自定义 `Drawer.CloseTrigger`
+7. **基于 slot 的关闭**：带有 `slot="close"` 的按钮会自动关闭 Drawer
+8. **新功能**：通过 `Drawer.Handle` 拖动关闭，并支持基于速度的关闭
+9. **动画**：`motionProps`（Framer Motion）→ 基于 CSS 的动画
+10. **已移除样式 prop**：`size`、`radius` → 使用 Tailwind CSS
+11. **已移除 classNames**：在各个复合组件上使用 `className`

@@ -1,0 +1,424 @@
+---
+title: Pagination
+description: Pagination 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Pagination 文档](/docs/react/components/pagination)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Pagination` 是单个组件，通过 props 在内部完成所有渲染：
+
+```tsx
+import { Pagination } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Pagination total={10} initialPage={1} showControls />
+  );
+}
+```
+
+在 v3 中，Pagination 采用复合组件模式，需要显式组合各个部分：
+
+```tsx
+import { Pagination } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous>
+            <Pagination.PreviousIcon />
+          </Pagination.Previous>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link isActive>1</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link>2</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link>3</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Ellipsis />
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link>10</Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Next>
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单个 `Pagination` 组件，通过 `total` prop 自动生成页码项  
+**v3：** 复合组件：`Pagination`、`Pagination.Summary`、`Pagination.Content`、`Pagination.Item`、`Pagination.Link`、`Pagination.Previous`、`Pagination.PreviousIcon`、`Pagination.Next`、`Pagination.NextIcon`、`Pagination.Ellipsis`
+
+### 2. 页码生成
+
+**v2：** 由 `total`、`siblings`、`boundaries` 等 props 自动生成页码  
+**v3：** 手动组合页码项，完全掌控布局与行为；可自行实现分页逻辑或使用分页 hook。
+
+### 3. Prop 变更
+
+| v2 prop | v3 对应 | 说明 |
+| ------- | ------- | ---- |
+| `total` | — | 已移除（请手动组合条目） |
+| `page` | — | 通过在 `Pagination.Link` 上使用 `isActive` 管理当前页 |
+| `initialPage` | — | 请在外部自行管理状态 |
+| `onChange` | — | 请在各个 `Pagination.Link` 上使用 `onPress` |
+| `siblings` | — | 已移除（请手动组合条目） |
+| `boundaries` | — | 已移除（请手动组合条目） |
+| `dotsJump` | — | 已移除（省略号点击请自行处理） |
+| `loop` | — | 已移除（请自行实现） |
+| `showControls` | — | 请组合 `Pagination.Previous` 与 `Pagination.Next` |
+| `isCompact` | — | 已移除（请用 Tailwind CSS 控制样式） |
+| `showShadow` | — | 已移除（请使用 Tailwind `shadow-*` 类） |
+| `size` | `Pagination` 上的 `size` | 与 v2 相同（`sm`、`md`、`lg`） |
+| `variant` | — | 已移除（请使用 Tailwind CSS） |
+| `color` | — | 已移除（请使用 Tailwind CSS） |
+| `radius` | — | 已移除（请使用 Tailwind CSS） |
+| `isDisabled` | `Pagination.Link`、`Pagination.Previous`、`Pagination.Next` 上的 `isDisabled` | 按条目分别控制，而非全局 |
+| `disableCursorAnimation` | — | 已移除 |
+| `disableAnimation` | — | 已移除 |
+| `renderItem` | — | 请直接组合子节点 |
+| `getItemAriaLabel` | — | 请在各条目上设置 `aria-label` |
+| `classNames` | — | 请在各复合子组件上使用 `className` |
+
+### 4. Hook 变化
+
+**v2：** 提供 `usePagination` hook，便于自定义实现  
+**v3：** 无内置 hook——请直接组合分页项，或自行实现分页逻辑
+
+## 迁移示例
+
+### 基础分页
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Pagination } from "@heroui/react";
+
+    <Pagination total={10} initialPage={1} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Pagination } from "@heroui/react";
+
+    const [page, setPage] = useState(1);
+    const totalPages = 10;
+
+    <Pagination>
+      <Pagination.Content>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <Pagination.Item key={p}>
+            <Pagination.Link isActive={page === p} onPress={() => setPage(p)}>
+              {p}
+            </Pagination.Link>
+          </Pagination.Item>
+        ))}
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### 上一页 / 下一页控件
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Pagination total={10} initialPage={1} showControls />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const totalPages = 10;
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous
+            isDisabled={page === 1}
+            onPress={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            <Pagination.PreviousIcon />
+          </Pagination.Previous>
+        </Pagination.Item>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <Pagination.Item key={p}>
+            <Pagination.Link isActive={page === p} onPress={() => setPage(p)}>
+              {p}
+            </Pagination.Link>
+          </Pagination.Item>
+        ))}
+        <Pagination.Item>
+          <Pagination.Next
+            isDisabled={page === totalPages}
+            onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
+          >
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### 含省略号
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Pagination total={20} initialPage={1} siblings={1} boundaries={1} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const totalPages = 20;
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous
+            isDisabled={page === 1}
+            onPress={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            <Pagination.PreviousIcon />
+          </Pagination.Previous>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Link isActive={page === 1} onPress={() => setPage(1)}>
+            1
+          </Pagination.Link>
+        </Pagination.Item>
+        {page > 3 && (
+          <Pagination.Item>
+            <Pagination.Ellipsis />
+          </Pagination.Item>
+        )}
+        {[page - 1, page, page + 1]
+          .filter((p) => p > 1 && p < totalPages)
+          .map((p) => (
+            <Pagination.Item key={p}>
+              <Pagination.Link isActive={page === p} onPress={() => setPage(p)}>
+                {p}
+              </Pagination.Link>
+            </Pagination.Item>
+          ))}
+        {page < totalPages - 2 && (
+          <Pagination.Item>
+            <Pagination.Ellipsis />
+          </Pagination.Item>
+        )}
+        <Pagination.Item>
+          <Pagination.Link
+            isActive={page === totalPages}
+            onPress={() => setPage(totalPages)}
+          >
+            {totalPages}
+          </Pagination.Link>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Next
+            isDisabled={page === totalPages}
+            onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
+          >
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### 仅上一页 / 下一页
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 无内置的仅 prev/next 模式 */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const totalPages = 10;
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous
+            isDisabled={page === 1}
+            onPress={() => setPage((p) => p - 1)}
+          >
+            <Pagination.PreviousIcon />
+            <span>Previous</span>
+          </Pagination.Previous>
+        </Pagination.Item>
+        <Pagination.Item>
+          <Pagination.Next
+            isDisabled={page === totalPages}
+            onPress={() => setPage((p) => p + 1)}
+          >
+            <span>Next</span>
+            <Pagination.NextIcon />
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### 使用 `Pagination.Summary`
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 无内置 summary 插槽 */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [page, setPage] = useState(1);
+    const perPage = 10;
+    const total = 100;
+
+    <Pagination>
+      <Pagination.Summary>
+        Showing {(page - 1) * perPage + 1}-{Math.min(page * perPage, total)} of {total}
+      </Pagination.Summary>
+      <Pagination.Content>
+        {/* Pagination items */}
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 需借助 renderItem 才能自定义图标 */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Pagination>
+      <Pagination.Content>
+        <Pagination.Item>
+          <Pagination.Previous onPress={() => setPage((p) => p - 1)}>
+            <Pagination.PreviousIcon>
+              <Icon icon="gravity-ui:arrow-left" />
+            </Pagination.PreviousIcon>
+          </Pagination.Previous>
+        </Pagination.Item>
+        {/* Page links */}
+        <Pagination.Item>
+          <Pagination.Next onPress={() => setPage((p) => p + 1)}>
+            <Pagination.NextIcon>
+              <Icon icon="gravity-ui:arrow-right" />
+            </Pagination.NextIcon>
+          </Pagination.Next>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<Pagination
+  classNames={{
+    base: "custom-base",
+    wrapper: "custom-wrapper",
+    prev: "custom-prev",
+    next: "custom-next",
+    item: "custom-item",
+    cursor: "custom-cursor",
+    ellipsis: "custom-ellipsis",
+  }}
+/>
+```
+
+### v3：直接使用 `className`
+
+```tsx
+<Pagination className="custom-base">
+  <Pagination.Content className="custom-wrapper">
+    <Pagination.Item className="custom-item">
+      <Pagination.Previous className="custom-prev">
+        <Pagination.PreviousIcon />
+      </Pagination.Previous>
+    </Pagination.Item>
+    <Pagination.Item>
+      <Pagination.Link isActive className="custom-cursor">1</Pagination.Link>
+    </Pagination.Item>
+    <Pagination.Item>
+      <Pagination.Ellipsis className="custom-ellipsis" />
+    </Pagination.Item>
+    <Pagination.Item>
+      <Pagination.Next className="custom-next">
+        <Pagination.NextIcon />
+      </Pagination.Next>
+    </Pagination.Item>
+  </Pagination.Content>
+</Pagination>
+```
+
+## 组件剖析
+
+v3 Pagination 的结构如下：
+
+```
+Pagination (Root, nav element)
+  ├── Pagination.Summary (optional, info text)
+  └── Pagination.Content (ul container)
+      └── Pagination.Item (li wrapper, repeated)
+          ├── Pagination.Previous (with Pagination.PreviousIcon)
+          ├── Pagination.Link (page number, isActive for current)
+          ├── Pagination.Ellipsis
+          └── Pagination.Next (with Pagination.NextIcon)
+```
+
+## 总结
+
+1. **组件结构**：由单个自动生成式组件，改为需手动组合的复合组件。
+2. **页码生成**：`total` / `siblings` / `boundaries` props → 结合自定义分页逻辑手动渲染页码项。
+3. **当前页**：`page` / `initialPage` props → 在各个 `Pagination.Link` 上使用 `isActive`。
+4. **导航控件**：`showControls` prop → 直接组合 `Pagination.Previous` 与 `Pagination.Next`。
+5. **省略号**：由自动生成 → 在需要处手动放置 `Pagination.Ellipsis`。
+6. **事件**：单一 `onChange` → 各 `Pagination.Link` 上的独立 `onPress` 处理函数。
+7. **新能力**：`Pagination.Summary` 用于展示结果数量；可通过 `PreviousIcon` / `NextIcon` 的 children 自定义图标。
+8. **Hook 移除**：`usePagination` → 请自行实现分页逻辑。
+9. **样式 props 移除**：`variant`、`color`、`radius`、`isCompact`、`showShadow` → 请使用 Tailwind CSS。
+10. **`classNames` 移除**：请在各复合子组件上使用 `className`。

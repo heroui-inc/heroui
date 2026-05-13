@@ -1,0 +1,65 @@
+---
+title: ButtonGroup
+description: ButtonGroup 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 ButtonGroup 文档](/docs/react/components/button-group)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`ButtonGroup` 用于将按钮分组：
+
+```tsx
+import { ButtonGroup, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ButtonGroup>
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  );
+}
+```
+
+在 v3 中，`ButtonGroup` 的基本结构相同，但加强了 prop 继承：
+
+```tsx
+import { ButtonGroup, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ButtonGroup>
+      <Button>First</Button>
+      <Button>Second</Button>
+      <Button>Third</Button>
+    </ButtonGroup>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 导入路径
+
+**v2：** 从 `@heroui/react` 导入  
+**v3：** 从 `@heroui/react` 导入（同一个包，但导入方式已统一）
+
+### 2. Prop 继承
+
+**v2：** ButtonGroup 会向子按钮传递 `size`、`color`、`variant`、`radius`、`isIconOnly`、`isDisabled`、`disableAnimation`、`disableRipple` 与 `fullWidth`。
+
+**v3：** ButtonGroup 会向子按钮传递 `size`、`variant`、`isDisabled` 与 `fullWidth`。`color` 与 `radius` 等 prop 在按钮上已不存在（由 `variant` 取代），`disableAnimation` 与 `disableRipple` 已从设计系统中移除。
+
+### 3. 隐藏分隔符
+
+**v3：** 新增 `hideSeparator` prop，可隐藏按钮之间的视觉分隔线。
+
+## 总结
+
+- 在 ButtonGroup 上设置 `size`、`variant`、`isDisabled` 与 `fullWidth`，会作用到所有子按钮（v3 用单一的 `variant` 取代了 v2 的 `color` + `variant` 组合）
+- 使用新增的 `hideSeparator` prop 可隐藏按钮之间的分隔线
+- 结构保持不变；已被移除的 prop（`radius`、`disableAnimation`、`disableRipple`）在 v3 的 Button 上已不再可用

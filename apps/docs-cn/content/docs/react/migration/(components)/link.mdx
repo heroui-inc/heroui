@@ -1,0 +1,186 @@
+---
+title: Link
+description: Link 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Link 文档](/docs/react/components/link)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单个组件，通过 prop 配置图标  
+**v3：** 复合组件：使用 `Link.Icon` 子组件渲染图标
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `showAnchorIcon`、`anchorIcon` | - | 改用 `Link.Icon` 子组件配合 children |
+| `isExternal` | - | 改用 `target="_blank"` 与 `rel="noopener noreferrer"` |
+| `size`、`color`、`isBlock` | - | 已移除（请改用 Tailwind CSS） |
+| `disableAnimation` | - | 已移除 |
+| `underline` | - | 已移除（请使用 Tailwind 工具类，如 `underline` 等） |
+
+### 3. 新增 prop
+
+- `onPress` —— 链接被激活（通过点击或键盘）时触发的事件处理函数。接受 `(e: PressEvent) => void` 回调。
+
+## 结构变化
+
+在 v2 中，Link 组件的用法：
+
+```tsx
+import { Link } from "@heroui/react";
+
+export default function App() {
+  return <Link href="#">Default Link</Link>;
+}
+```
+
+在 v3 中，Link 组件在基本场景下的使用方式保持不变：
+
+```tsx
+import { Link } from "@heroui/react";
+
+export default function App() {
+  return <Link href="#">Default Link</Link>;
+}
+```
+
+## 迁移示例
+
+### 带图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Default icon */}
+    <Link showAnchorIcon href="#">
+      External Link
+    </Link>
+    
+    {/* Custom icon */}
+    <Link
+      showAnchorIcon
+      anchorIcon={<CustomIcon />}
+      href="#"
+    >
+      Custom Icon
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Default icon */}
+    <Link href="#">
+      External Link
+      <Link.Icon />
+    </Link>
+    
+    {/* Custom icon */}
+    <Link href="#">
+      Custom Icon
+      <Link.Icon>
+        <CustomIcon />
+      </Link.Icon>
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### 外部链接
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link isExternal href="https://example.com">
+      External Link
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link
+      href="https://example.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      External Link
+      <Link.Icon />
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### 下划线与偏移（v3：使用 Tailwind）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Link href="#" underline="hover">
+      Hover to underline
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Link href="#" className="hover:underline">
+      Hover to underline
+    </Link>
+    <Link href="#" className="underline underline-offset-2">
+      Underline with offset
+    </Link>
+    ```
+  </Tab>
+</Tabs>
+
+### 配合路由库
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    <Link as={NextLink} href="/about">
+      About
+    </Link>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import NextLink from "next/link";
+    import { Link } from "@heroui/react";
+
+    {/* Style your router link with the same classes as Link; add an icon if needed */}
+    <NextLink href="/about" className="link hover:underline">
+      About
+    </NextLink>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件结构
+
+v3 Link 遵循以下结构：
+
+```
+Link (Root)
+  ├── Link content (text)
+  └── Link.Icon (optional)
+```
+
+## 总结
+
+1. **图标处理**：`showAnchorIcon` 与 `anchorIcon` prop 由 `Link.Icon` 子组件取代
+2. **外部链接**：`isExternal` prop 已移除——请手动设置 `target` 与 `rel`
+3. **移除 size prop**：改用 Tailwind CSS 类（`text-sm`、`text-base`、`text-lg`）
+4. **移除 color prop**：改用 Tailwind CSS 类（`text-primary`、`text-danger` 等）
+5. **移除 isBlock prop**：改用 Tailwind CSS 类（`block`、`hover:bg-surface`）
+6. **下划线**：不再是 prop；请使用 Tailwind（`underline`、`hover:underline`、`no-underline`、`underline-offset-1` 等）
+7. **路由**：v3 Link 不再支持 `as` 或 `asChild`；请直接使用路由库的 Link 并配合相同的 Tailwind 类（例如 `link`、`link__icon`）保持视觉一致
+8. **移除动画**：`disableAnimation` prop 已移除
+9. **`onPress` 处理函数**：新增 `onPress` prop，可用于处理链接激活事件（点击或键盘）

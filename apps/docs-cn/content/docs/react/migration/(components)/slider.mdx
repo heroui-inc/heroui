@@ -1,0 +1,253 @@
+---
+title: Slider
+description: Slider 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Slider 文档](/docs/react/components/slider)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Slider 是结构简单、通过 prop 配置的组件：
+
+```tsx
+import { Slider } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Slider
+      label="Volume"
+      defaultValue={30}
+      size="md"
+      color="primary"
+    />
+  );
+}
+```
+
+在 v3 中，Slider 改为复合组件：
+
+```tsx
+import { Slider, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 通过 prop 配置的简单 Slider  
+**v3：** 复合组件：`Slider.Output`、`Slider.Track`、`Slider.Fill`、`Slider.Thumb`
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `label` | — | 改用 `Label` 组件 |
+| `size` | — | 已移除（请改用 Tailwind CSS） |
+| `color` | — | 已移除（请改用 Tailwind CSS） |
+| `radius` | — | 已移除（请改用 Tailwind CSS） |
+| `classNames` | — | 改在各子组件上使用 `className` prop |
+| `showSteps` | — | 暂不支持 |
+| `showTooltip` | — | 暂不支持 |
+| `marks` | — | 暂不支持（请参阅 `Slider.Marks`） |
+| `startContent` | — | 直接在 Track 包装层中自定义 |
+| `endContent` | — | 直接在 Track 包装层中自定义 |
+| `hideValue` | — | 省略 `Slider.Output` |
+| `hideThumb` | — | 省略 `Slider.Thumb` |
+| `showOutline` | — | 改用 Tailwind CSS |
+| `renderThumb` | — | 使用 `Slider.Thumb` 的 render prop |
+| `renderLabel` | — | 改用 `Label` 组件 |
+| `renderValue` | — | 使用 `Slider.Output` 的 render prop |
+| `getValue` | — | 使用 `Slider.Output` 的 render prop |
+| `getTooltipValue` | — | 使用 `Slider.Output` 的 render prop |
+| `fillOffset` | — | 暂不支持 |
+| `disableThumbScale` | — | 改用 Tailwind CSS |
+| `disableAnimation` | — | 已移除 |
+| `onChangeEnd` | `Slider` | 仍支持——当用户完成拖动 thumb 时触发 |
+
+## 迁移示例
+
+### 受控 Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState(25);
+
+    <Slider
+      value={value}
+      onChange={setValue}
+      label="Volume"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState(25);
+
+    <Slider value={value} onChange={setValue}>
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### 区间 Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      defaultValue={[100, 500]}
+      formatOptions={{style: "currency", currency: "USD"}}
+      label="Price Range"
+      maxValue={1000}
+      minValue={0}
+      step={50}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider
+      defaultValue={[100, 500]}
+      formatOptions={{style: "currency", currency: "USD"}}
+      maxValue={1000}
+      minValue={0}
+      step={50}
+    >
+      <Label>Price Range</Label>
+      <Slider.Output />
+      <Slider.Track>
+        {({state}) => (
+          <>
+            <Slider.Fill />
+            {state.values.map((_, i) => (
+              <Slider.Thumb key={i} index={i} />
+            ))}
+          </>
+        )}
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### 垂直 Slider
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      defaultValue={30}
+      orientation="vertical"
+      label="Volume"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30} orientation="vertical">
+      <Label>Volume</Label>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义数值显示
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Slider
+      renderValue={(props) => (
+        <output {...props}>Custom: {value}</output>
+      )}
+      label="Volume"
+      defaultValue={30}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Slider defaultValue={30}>
+      <Label>Volume</Label>
+      <Slider.Output>
+        {({state}) => `Custom: ${state.values[0]}`}
+      </Slider.Output>
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件结构
+
+v3 Slider 遵循以下结构：
+
+```
+Slider (Root)
+  ├── Label (optional)
+  ├── Slider.Output (optional)
+  └── Slider.Track
+      ├── Slider.Fill
+      └── Slider.Thumb (or multiple for range)
+```
+
+对于区间 Slider，请使用 `Slider.Track` 的 render prop：
+
+```tsx
+<Slider.Track>
+  {({state}) => (
+    <>
+      <Slider.Fill />
+      {state.values.map((_, i) => (
+        <Slider.Thumb key={i} index={i} />
+      ))}
+    </>
+  )}
+</Slider.Track>
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Slider.Output`、`Slider.Track`、`Slider.Fill`、`Slider.Thumb`）
+2. **标签处理**：移除 `label` prop——改用 `Label` 组件
+3. **移除样式 prop**：`size`、`color`、`radius` —— 改用 Tailwind CSS
+4. **移除 classNames**：改在各子组件上使用 `className` prop
+5. **移除功能性 prop**：`showSteps`、`showTooltip`、`marks`、`startContent`、`endContent` —— 暂不支持，或自行手动定制
+6. **移除 render prop**：`renderThumb`、`renderLabel`、`renderValue` —— 改用各组件自身的 render prop
+7. **移除可见性 prop**：`hideValue`、`hideThumb` —— 通过省略对应子组件实现
+8. **区间 Slider**：必须在 `Slider.Track` 的 render prop 中遍历多个 thumb
+9. **onChangeEnd**：在 `Slider` 上仍受支持——当用户结束拖动 thumb 时触发

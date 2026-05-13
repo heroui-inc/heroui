@@ -1,0 +1,305 @@
+---
+title: Radio
+description: Radio 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Radio 文档](/docs/react/components/radio-group)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Radio 使用较为扁平的结构，通过 prop 配置：
+
+```tsx
+import { RadioGroup, Radio } from "@heroui/react";
+
+export default function App() {
+  return (
+    <RadioGroup label="Select city">
+      <Radio value="london">London</Radio>
+      <Radio value="tokyo" description="Capital of Japan">Tokyo</Radio>
+    </RadioGroup>
+  );
+}
+```
+
+在 v3 中，Radio 需要使用复合组件：
+
+```tsx
+import { RadioGroup, Radio, Label, Description } from "@heroui/react";
+
+export default function App() {
+  return (
+    <RadioGroup>
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <Radio value="tokyo">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Tokyo</Label>
+          <Description>Capital of Japan</Description>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+  );
+}
+```
+
+## 关键变化
+
+### 1. 组件结构
+
+**v2：** 简单的 Radio，`children` 作为标签文案  
+**v3：** 复合组件：`Radio.Control`、`Radio.Indicator`、`Radio.Content`
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| --- | --- | --- |
+| `onValueChange` | `onChange` | 事件处理函数已重命名 |
+| `label`（在 RadioGroup 上） | — | 使用 `Label` 组件 |
+| `description`（在 Radio 上） | — | 在 `Radio.Content` 内使用 `Description` 组件 |
+| `size` | — | 已移除（请改用 Tailwind CSS） |
+| `color` | — | 已移除（请改用 Tailwind CSS） |
+| `classNames` | — | 在各子组件上使用 `className` prop |
+| `disableAnimation` | — | 已移除（动画机制已不同） |
+| — | `variant` | `RadioGroup` 上的新 prop：`"primary"`（默认）或 `"secondary"`，用于较低强调度的样式 |
+| — | `isReadOnly` | `RadioGroup` 上的新 prop：在保持组合可聚焦的同时阻止更改选中值 |
+
+## 迁移示例
+
+### 表单校验
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With description */}
+    <RadioGroup label="Select city">
+      <Radio value="london" description="Capital of England">
+        London
+      </Radio>
+    </RadioGroup>
+    
+    {/* With validation */}
+    <RadioGroup
+      isInvalid
+      errorMessage="Please select an option"
+      label="Select city"
+    >
+      <Radio value="london">London</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Label, Description, FieldError } from "@heroui/react";
+
+    {/* 带描述 */}
+    <RadioGroup>
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+          <Description>Capital of England</Description>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    
+    {/* 带校验 */}
+    <RadioGroup isInvalid>
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <FieldError>Please select an option</FieldError>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selected, setSelected] = useState("london");
+
+    <RadioGroup
+      value={selected}
+      onValueChange={setSelected}
+    >
+      <Radio value="london">London</Radio>
+      <Radio value="tokyo">Tokyo</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [selected, setSelected] = useState("london");
+
+    <RadioGroup value={selected} onChange={setSelected}>
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <Radio value="tokyo">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Tokyo</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### 水平方向
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <RadioGroup orientation="horizontal" label="Select city">
+      <Radio value="london">London</Radio>
+      <Radio value="tokyo">Tokyo</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <RadioGroup orientation="horizontal">
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <Radio value="tokyo">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Tokyo</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### 变体
+
+v3 在 `RadioGroup` 上新增 `variant` prop，可选 `"primary"`（默认）与 `"secondary"`：
+
+```tsx
+{/* Primary variant (default) */}
+<RadioGroup variant="primary">
+  <Label>Select city</Label>
+  <Radio value="london">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>London</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+
+{/* Secondary：视觉强调更低，适合配合 Surface 组件 */}
+<RadioGroup variant="secondary">
+  <Label>Select city</Label>
+  <Radio value="london">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>London</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+```
+
+### 只读
+
+v3 支持在 `RadioGroup` 上使用 `isReadOnly`：在保持组合可聚焦的同时阻止更改选中值。
+
+```tsx
+<RadioGroup isReadOnly defaultValue="london">
+  <Label>Select city</Label>
+  <Radio value="london">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>London</Label>
+    </Radio.Content>
+  </Radio>
+  <Radio value="tokyo">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>Tokyo</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+```
+
+## 组件组成
+
+v3 的 Radio 结构如下：
+
+```
+RadioGroup (Root)
+  ├── Label (optional)
+  ├── Radio
+  │   ├── Radio.Control
+  │   │   └── Radio.Indicator
+  │   └── Radio.Content
+  │       ├── Label
+  │       └── Description (optional)
+  └── FieldError (optional)
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Radio.Control`、`Radio.Indicator`、`Radio.Content`）。
+2. **标签**：已移除 `label` prop，请使用 `Label` 组件。
+3. **描述**：已移除 `description` prop，请在 `Radio.Content` 内使用 `Description` 组件。
+4. **事件处理函数**：`onValueChange` → `onChange`。
+5. **样式相关 prop 已移除**：`size`、`color` 等请改用 Tailwind CSS。
+6. **`classNames` 已移除**：在各子组件上使用 `className` prop。
+7. **错误信息**：使用 `FieldError` 组件，而不是 `errorMessage` prop。
+8. **新增 `variant` prop**：`RadioGroup` 支持 `"primary"`（默认）与 `"secondary"`，用于较低强调度的样式。
+9. **新增 `isReadOnly` prop**：`RadioGroup` 支持 `isReadOnly`，在保持组合可聚焦的同时阻止更改选中值。

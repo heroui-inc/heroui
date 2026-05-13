@@ -1,0 +1,263 @@
+---
+title: Alert
+description: Alert 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Alert 文档](/docs/react/components/alert)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Alert` 是单个组件，通过 prop 接收标题、描述、图标等内容：
+
+```tsx
+import { Alert } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Alert 
+      title="This is an alert"
+      description="Thanks for subscribing to our newsletter!"
+    />
+  );
+}
+```
+
+在 v3 中，Alert 改为复合组件模式，子节点显式声明：
+
+```tsx
+import { Alert } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Alert>
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>This is an alert</Alert.Title>
+        <Alert.Description>
+          Thanks for subscribing to our newsletter!
+        </Alert.Description>
+      </Alert.Content>
+    </Alert>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单一 `Alert` 组件，通过 prop 配置  
+**v3：** 复合组件：`Alert`、`Alert.Indicator`、`Alert.Content`、`Alert.Title`、`Alert.Description`
+
+### 2. Color / Status prop
+
+| v2 颜色 | v3 状态 | 说明 |
+| ------- | ------- | ---- |
+| `default` | `default` | 相同 |
+| `primary` | `accent` | 已重命名 |
+| `secondary` | `default` | 改用 `default` 状态 |
+| `success` | `success` | 相同 |
+| `warning` | `warning` | 相同 |
+| `danger` | `danger` | 相同 |
+
+### 3. 移除变体
+
+**v2 变体：** `solid`、`bordered`、`flat`、`faded`  
+**v3：** 不再提供 `variant` prop——请使用 Tailwind CSS 类来实现类似效果
+
+要在 v3 中复刻 v2 的变体外观：
+- **v2 `solid`** → v3 `status` + 添加背景颜色类
+- **v2 `bordered`** → v3 `status` + 添加 `border` 类
+- **v2 `flat`** → v3 默认效果（无需额外类）
+- **v2 `faded`** → v3 `status` + 添加透明度 / 背景类
+
+### 4. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `variant` | - | 已移除（请改用 Tailwind CSS） |
+| `radius` | - | 已移除（请改用 Tailwind，例如 `rounded-lg`） |
+| `startContent` | - | 将内容放在 `<Alert.Indicator />` 之前 |
+| `endContent` | - | 将内容放在 `<Alert.Content />` 之后 |
+| `hideIcon` | - | 省略 `<Alert.Indicator />` |
+| `hideIconWrapper` | - | 已移除（v3 不再有图标包装层） |
+| `icon` | `Alert.Indicator` | 将图标作为 `<Alert.Indicator />` 的子节点 |
+| `isVisible`、`isDefaultVisible`、`onVisibleChange` | - | 已移除（请通过条件渲染控制） |
+| `isClosable`、`onClose`、`closeButtonProps` | - | 已移除（请手动添加 `CloseButton`） |
+| `title` | `Alert.Title` | 在 `<Alert.Content>` 内部使用 `<Alert.Title>` |
+| `description` | `Alert.Description` | 在 `<Alert.Content>` 内部使用 `<Alert.Description>` |
+
+### 5. 图标处理
+
+**v2：** 通过 `icon` prop 设置或 `hideIcon` 隐藏  
+**v3：** 使用 `<Alert.Indicator />`，通过子节点自定义图标，或完全省略它
+
+## 迁移示例
+
+### 图标处理
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from '@iconify/react';
+
+    {/* With custom icon */}
+    <Alert 
+      icon={<Icon icon="gravity-ui:box" />}
+      title="Custom Icon Alert"
+    />
+    
+    {/* Without icon */}
+    <Alert hideIcon title="No Icon Alert" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from '@iconify/react';
+
+    {/* With custom icon */}
+    <Alert>
+      <Alert.Indicator>
+        <Icon icon="gravity-ui:box" />
+      </Alert.Indicator>
+      <Alert.Content>
+        <Alert.Title>Custom Icon Alert</Alert.Title>
+      </Alert.Content>
+    </Alert>
+    
+    {/* Without icon */}
+    <Alert>
+      <Alert.Content>
+        <Alert.Title>No Icon Alert</Alert.Title>
+      </Alert.Content>
+    </Alert>
+    ```
+  </Tab>
+</Tabs>
+
+### 带操作按钮（end content）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Alert, Button } from "@heroui/react";
+
+    <Alert
+      title="You have no credits left"
+      description="Upgrade to a paid plan to continue"
+      endContent={
+        <Button color="warning" size="sm" variant="flat">
+          Upgrade
+        </Button>
+      }
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Alert, Button } from "@heroui/react";
+
+    <Alert status="warning">
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>You have no credits left</Alert.Title>
+        <Alert.Description>
+          Upgrade to a paid plan to continue
+        </Alert.Description>
+        <Button className="mt-2" size="sm" variant="primary">
+          Upgrade
+        </Button>
+      </Alert.Content>
+    </Alert>
+    ```
+  </Tab>
+</Tabs>
+
+### 可关闭的 Alert
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Alert
+      title="Closable Alert"
+      isClosable
+      onClose={() => console.log("Closed")}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Alert, CloseButton } from "@heroui/react";
+    import { useState } from "react";
+
+    const [isVisible, setIsVisible] = useState(true);
+
+    {isVisible && (
+      <Alert>
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>Closable Alert</Alert.Title>
+        </Alert.Content>
+        <CloseButton 
+          aria-label="Close"
+          onPress={() => setIsVisible(false)}
+        />
+      </Alert>
+    )}
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变更
+
+### v2：`classNames` prop
+
+```tsx
+<Alert 
+  classNames={{
+    base: "custom-base",
+    title: "custom-title",
+    description: "custom-description"
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<Alert className="custom-base">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title className="custom-title">Title</Alert.Title>
+    <Alert.Description className="custom-description">
+      Description
+    </Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+## 组件结构
+
+v3 Alert 遵循以下结构：
+
+```
+Alert (Root)
+  ├── Alert.Indicator (optional)
+  ├── Alert.Content (optional)
+  │   ├── Alert.Title (optional)
+  │   └── Alert.Description (optional)
+  └── [Additional content like buttons, close button, etc.] (optional)
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件，而不是 prop
+2. **Color → Status**：`color` prop 已重命名为 `status`，`primary` → `accent`，`secondary` → `default`
+3. **移除 variant**：不再提供 `variant` prop；请使用 Tailwind CSS 类
+4. **移除 radius**：不再提供 `radius` prop；请使用 Tailwind CSS 类
+5. **不再内置关闭按钮**：必须手动添加 `CloseButton`
+6. **不再内置可见性控制**：请通过条件渲染处理可见性
+7. **不再有 startContent / endContent prop**：直接将内容放入组件树中
+8. **图标处理**：使用 `<Alert.Indicator />` 配合子节点，或省略它

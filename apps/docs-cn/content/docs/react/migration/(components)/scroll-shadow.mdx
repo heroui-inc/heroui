@@ -1,0 +1,148 @@
+---
+title: ScrollShadow
+description: ScrollShadow 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 ScrollShadow 文档](/docs/react/components/scroll-shadow)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`ScrollShadow` 是一个包装组件：
+
+```tsx
+import { ScrollShadow } from "@heroui/scroll-shadow";
+
+export default function App() {
+  return (
+    <ScrollShadow>
+      {/* scrollable content */}
+    </ScrollShadow>
+  );
+}
+```
+
+在 v3 中，`ScrollShadow` 的基本结构相同，但提供了更多配置项：
+
+```tsx
+import { ScrollShadow } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ScrollShadow>
+      {/* scrollable content */}
+    </ScrollShadow>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 导入路径
+
+**v2：** 从 `@heroui/scroll-shadow` 包导入  
+**v3：** 从统一封装的 `@heroui/react` 导入
+
+### 2. 可见性控制
+
+**v2：** `visibility` prop 控制阴影位置  
+**v3：** `visibility` prop 选项更丰富，并新增 `onVisibilityChange` 回调
+
+### 3. 阴影尺寸控制
+
+**v2：** 阴影尺寸固定，定制能力有限  
+**v3：** `size` prop 允许自定义阴影尺寸（单位：像素）
+
+### 4. 增强的 prop
+
+**v3：** 新增的 prop：
+- `size` —— 阴影尺寸，单位为像素（默认值：40）
+- `offset` —— 触发阴影显示前的滚动偏移（默认值：0）
+- `isEnabled` —— 启用/禁用阴影检测（默认值：true）
+- `hideScrollBar` —— 隐藏滚动条但保留滚动能力
+- `variant` —— 阴影效果类型（默认：`fade`）
+- `onVisibilityChange` —— 阴影可见性变化时触发的回调
+
+## 迁移示例
+
+### 自定义阴影尺寸
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ScrollShadow>
+      {/* Shadow size was fixed */}
+    </ScrollShadow>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ScrollShadow size={80} className="max-h-[400px]">
+      {/* Large shadow */}
+    </ScrollShadow>
+    ```
+  </Tab>
+</Tabs>
+
+### 增强的可见性控制
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ScrollShadow visibility="bottom">
+      {/* content */}
+    </ScrollShadow>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { ScrollShadow } from "@heroui/react";
+
+    function App() {
+      const [visibility, setVisibility] = useState("none");
+
+      return (
+        <>
+          <p>Shadow state: {visibility}</p>
+          <ScrollShadow
+            onVisibilityChange={setVisibility}
+            className="max-h-[400px]"
+          >
+            {/* content */}
+          </ScrollShadow>
+        </>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ScrollShadow>
+      {/* v2 used theme variants (e.g. orientation, hideScrollBar) */}
+    </ScrollShadow>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ScrollShadow variant="fade" className="max-h-[400px]">
+      {/* Shadow effect controlled by variant (default: fade) */}
+    </ScrollShadow>
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+- 将导入从 `@heroui/scroll-shadow` 更新为 `@heroui/react`
+- 增强的 API，提供更多配置项
+- 更好的阴影检测与可见性控制
+- 同样支持横向 / 纵向方向；统一从 `@heroui/react` 导入
+- 可自定义阴影尺寸与变体（例如 fade）
+- 性能与无障碍均有改进

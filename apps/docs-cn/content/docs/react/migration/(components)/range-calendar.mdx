@@ -1,0 +1,446 @@
+---
+title: RangeCalendar
+description: RangeCalendar 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 RangeCalendar 文档](/docs/react/components/range-calendar)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`RangeCalendar` 是一个完全通过 props 配置的单一组件：
+
+```tsx
+import { RangeCalendar } from "@heroui/react";
+import { today, getLocalTimeZone } from "@internationalized/date";
+
+export default function App() {
+  return (
+    <RangeCalendar
+      aria-label="Trip dates"
+      defaultValue={{
+        start: today(getLocalTimeZone()),
+        end: today(getLocalTimeZone()).add({ weeks: 1 }),
+      }}
+    />
+  );
+}
+```
+
+在 v3 中，RangeCalendar 改用带显式子组件的复合组件模式：
+
+```tsx
+import { RangeCalendar } from "@heroui/react";
+import { today, getLocalTimeZone } from "@internationalized/date";
+
+export default function App() {
+  return (
+    <RangeCalendar
+      aria-label="Trip dates"
+      defaultValue={{
+        start: today(getLocalTimeZone()),
+        end: today(getLocalTimeZone()).add({ weeks: 1 }),
+      }}
+    >
+      <RangeCalendar.Header>
+        <RangeCalendar.Heading />
+        <RangeCalendar.NavButton slot="previous" />
+        <RangeCalendar.NavButton slot="next" />
+      </RangeCalendar.Header>
+      <RangeCalendar.Grid>
+        <RangeCalendar.GridHeader>
+          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+        </RangeCalendar.GridHeader>
+        <RangeCalendar.GridBody>
+          {(date) => <RangeCalendar.Cell date={date} />}
+        </RangeCalendar.GridBody>
+      </RangeCalendar.Grid>
+    </RangeCalendar>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单一 `RangeCalendar` 组件，所有布局都在内部处理  
+**v3：** 复合组件：`RangeCalendar.Header`、`RangeCalendar.Heading`、`RangeCalendar.NavButton`、`RangeCalendar.Grid`、`RangeCalendar.GridHeader`、`RangeCalendar.GridBody`、`RangeCalendar.HeaderCell`、`RangeCalendar.Cell`、`RangeCalendar.CellIndicator`
+
+### 2. 年份选择器
+
+**v2：** 通过 `showMonthAndYearPickers` prop 提供内置月份 / 年份选择器  
+**v3：** 使用专用复合组件：`RangeCalendar.YearPickerTrigger`、`RangeCalendar.YearPickerGrid`、`RangeCalendar.YearPickerGridBody`、`RangeCalendar.YearPickerCell`
+
+### 3. Prop 变更
+
+| v2 prop | v3 等效项 | 说明 |
+| ------- | ----------- | ---- |
+| `value` | `value` | 保持一致 |
+| `defaultValue` | `defaultValue` | 保持一致 |
+| `onChange` | `onChange` | 保持一致 |
+| `focusedValue` | `focusedValue` | 保持一致 |
+| `onFocusChange` | `onFocusChange` | 保持一致 |
+| `minValue` | `minValue` | 保持一致 |
+| `maxValue` | `maxValue` | 保持一致 |
+| `isDateUnavailable` | `isDateUnavailable` | 保持一致 |
+| `allowsNonContiguousRanges` | `allowsNonContiguousRanges` | 保持一致 |
+| `isDisabled` | `isDisabled` | 保持一致 |
+| `isReadOnly` | `isReadOnly` | 保持一致 |
+| `isInvalid` | `isInvalid` | 保持一致 |
+| `pageBehavior` | `pageBehavior` | 保持一致 |
+| `visibleMonths` | `visibleDuration` | 改为 `{months: number}` 对象 |
+| `showMonthAndYearPickers` | - | 使用 `RangeCalendar.YearPickerTrigger` 和 `RangeCalendar.YearPickerGrid` |
+| `onHeaderExpandedChange` | `onYearPickerOpenChange` | 已重命名 |
+| `color` | - | 已移除（请改用 Tailwind CSS） |
+| `calendarWidth` | - | 已移除（请改用 `className` 或 Tailwind CSS） |
+| `weekdayStyle` | - | 已移除 |
+| `firstDayOfWeek` | - | 改用 `I18nProvider` 的 locale |
+| `topContent` | - | 将自定义内容作为 `RangeCalendar` children 放在网格之前 |
+| `bottomContent` | - | 将自定义内容作为 `RangeCalendar` children 放在网格之后 |
+| `errorMessage` | - | 已移除（请在外部处理校验） |
+| `showHelper` | - | 已移除 |
+| `disableAnimation` | - | 已移除 |
+| `classNames` | - | 在各个复合组件上使用 `className` |
+
+## 迁移示例
+
+### 基本范围选择
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { RangeCalendar } from "@heroui/react";
+    import { today, getLocalTimeZone } from "@internationalized/date";
+
+    <RangeCalendar
+      aria-label="Trip dates"
+      defaultValue={{
+        start: today(getLocalTimeZone()),
+        end: today(getLocalTimeZone()).add({ weeks: 1 }),
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { RangeCalendar } from "@heroui/react";
+    import { today, getLocalTimeZone } from "@internationalized/date";
+
+    <RangeCalendar
+      aria-label="Trip dates"
+      defaultValue={{
+        start: today(getLocalTimeZone()),
+        end: today(getLocalTimeZone()).add({ weeks: 1 }),
+      }}
+    >
+      <RangeCalendar.Header>
+        <RangeCalendar.Heading />
+        <RangeCalendar.NavButton slot="previous" />
+        <RangeCalendar.NavButton slot="next" />
+      </RangeCalendar.Header>
+      <RangeCalendar.Grid>
+        <RangeCalendar.GridHeader>
+          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+        </RangeCalendar.GridHeader>
+        <RangeCalendar.GridBody>
+          {(date) => <RangeCalendar.Cell date={date} />}
+        </RangeCalendar.GridBody>
+      </RangeCalendar.Grid>
+    </RangeCalendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { RangeCalendar } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState({
+      start: parseDate("2024-03-01"),
+      end: parseDate("2024-03-07"),
+    });
+
+    <RangeCalendar
+      aria-label="Trip dates"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { RangeCalendar } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState({
+      start: parseDate("2024-03-01"),
+      end: parseDate("2024-03-07"),
+    });
+
+    <RangeCalendar
+      aria-label="Trip dates"
+      value={value}
+      onChange={setValue}
+    >
+      <RangeCalendar.Header>
+        <RangeCalendar.Heading />
+        <RangeCalendar.NavButton slot="previous" />
+        <RangeCalendar.NavButton slot="next" />
+      </RangeCalendar.Header>
+      <RangeCalendar.Grid>
+        <RangeCalendar.GridHeader>
+          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+        </RangeCalendar.GridHeader>
+        <RangeCalendar.GridBody>
+          {(date) => <RangeCalendar.Cell date={date} />}
+        </RangeCalendar.GridBody>
+      </RangeCalendar.Grid>
+    </RangeCalendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 月份和年份选择器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <RangeCalendar
+      aria-label="Trip dates"
+      showMonthAndYearPickers
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <RangeCalendar aria-label="Trip dates">
+      <RangeCalendar.Header>
+        <RangeCalendar.YearPickerTrigger>
+          <RangeCalendar.YearPickerTriggerHeading />
+          <RangeCalendar.YearPickerTriggerIndicator />
+        </RangeCalendar.YearPickerTrigger>
+        <RangeCalendar.NavButton slot="previous" />
+        <RangeCalendar.NavButton slot="next" />
+      </RangeCalendar.Header>
+      <RangeCalendar.Grid>
+        <RangeCalendar.GridHeader>
+          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+        </RangeCalendar.GridHeader>
+        <RangeCalendar.GridBody>
+          {(date) => <RangeCalendar.Cell date={date} />}
+        </RangeCalendar.GridBody>
+      </RangeCalendar.Grid>
+      <RangeCalendar.YearPickerGrid>
+        <RangeCalendar.YearPickerGridBody>
+          {(year) => <RangeCalendar.YearPickerCell date={year} />}
+        </RangeCalendar.YearPickerGridBody>
+      </RangeCalendar.YearPickerGrid>
+    </RangeCalendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 多个月份
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <RangeCalendar
+      aria-label="Trip dates"
+      visibleMonths={2}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <RangeCalendar aria-label="Trip dates" visibleDuration={{months: 2}}>
+      <RangeCalendar.Header>
+        <RangeCalendar.Heading />
+        <RangeCalendar.NavButton slot="previous" />
+        <RangeCalendar.NavButton slot="next" />
+      </RangeCalendar.Header>
+      <div className="flex gap-4">
+        <RangeCalendar.Grid>
+          <RangeCalendar.GridHeader>
+            {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+          </RangeCalendar.GridHeader>
+          <RangeCalendar.GridBody>
+            {(date) => <RangeCalendar.Cell date={date} />}
+          </RangeCalendar.GridBody>
+        </RangeCalendar.Grid>
+        <RangeCalendar.Grid offset={{months: 1}}>
+          <RangeCalendar.GridHeader>
+            {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+          </RangeCalendar.GridHeader>
+          <RangeCalendar.GridBody>
+            {(date) => <RangeCalendar.Cell date={date} />}
+          </RangeCalendar.GridBody>
+        </RangeCalendar.Grid>
+      </div>
+    </RangeCalendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 带非连续范围的不可用日期
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { isWeekend } from "@internationalized/date";
+    import { useLocale } from "@react-aria/i18n";
+
+    const { locale } = useLocale();
+
+    <RangeCalendar
+      aria-label="Trip dates"
+      isDateUnavailable={(date) => isWeekend(date, locale)}
+      allowsNonContiguousRanges
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { isWeekend } from "@internationalized/date";
+    import { useLocale } from "@react-aria/i18n";
+
+    const { locale } = useLocale();
+
+    <RangeCalendar
+      aria-label="Trip dates"
+      isDateUnavailable={(date) => isWeekend(date, locale)}
+      allowsNonContiguousRanges
+    >
+      <RangeCalendar.Header>
+        <RangeCalendar.Heading />
+        <RangeCalendar.NavButton slot="previous" />
+        <RangeCalendar.NavButton slot="next" />
+      </RangeCalendar.Header>
+      <RangeCalendar.Grid>
+        <RangeCalendar.GridHeader>
+          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+        </RangeCalendar.GridHeader>
+        <RangeCalendar.GridBody>
+          {(date) => <RangeCalendar.Cell date={date} />}
+        </RangeCalendar.GridBody>
+      </RangeCalendar.Grid>
+    </RangeCalendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 顶部与底部内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <RangeCalendar
+      aria-label="Trip dates"
+      topContent={<p>Select your travel dates</p>}
+      bottomContent={
+        <button onClick={handleReset}>Reset</button>
+      }
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <RangeCalendar aria-label="Trip dates">
+      <p>Select your travel dates</p>
+      <RangeCalendar.Header>
+        <RangeCalendar.Heading />
+        <RangeCalendar.NavButton slot="previous" />
+        <RangeCalendar.NavButton slot="next" />
+      </RangeCalendar.Header>
+      <RangeCalendar.Grid>
+        <RangeCalendar.GridHeader>
+          {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+        </RangeCalendar.GridHeader>
+        <RangeCalendar.GridBody>
+          {(date) => <RangeCalendar.Cell date={date} />}
+        </RangeCalendar.GridBody>
+      </RangeCalendar.Grid>
+      <button onClick={handleReset}>Reset</button>
+    </RangeCalendar>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<RangeCalendar
+  classNames={{
+    base: "custom-base",
+    prevButton: "custom-prev",
+    nextButton: "custom-next",
+    title: "custom-title",
+    cell: "custom-cell",
+    cellButton: "custom-cell-button",
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<RangeCalendar className="custom-base">
+  <RangeCalendar.Header>
+    <RangeCalendar.Heading className="custom-title" />
+    <RangeCalendar.NavButton slot="previous" className="custom-prev" />
+    <RangeCalendar.NavButton slot="next" className="custom-next" />
+  </RangeCalendar.Header>
+  <RangeCalendar.Grid>
+    <RangeCalendar.GridHeader>
+      {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+    </RangeCalendar.GridHeader>
+    <RangeCalendar.GridBody>
+      {(date) => <RangeCalendar.Cell date={date} className="custom-cell" />}
+    </RangeCalendar.GridBody>
+  </RangeCalendar.Grid>
+</RangeCalendar>
+```
+
+## 组件结构
+
+v3 RangeCalendar 遵循以下结构：
+
+```
+RangeCalendar (Root)
+  ├── [Custom top content]
+  ├── RangeCalendar.Header
+  │   ├── RangeCalendar.Heading (or RangeCalendar.YearPickerTrigger)
+  │   ├── RangeCalendar.NavButton slot="previous"
+  │   └── RangeCalendar.NavButton slot="next"
+  ├── RangeCalendar.Grid (one per visible month)
+  │   ├── RangeCalendar.GridHeader
+  │   │   └── RangeCalendar.HeaderCell (render prop)
+  │   └── RangeCalendar.GridBody
+  │       └── RangeCalendar.Cell (render prop)
+  │           └── RangeCalendar.CellIndicator (optional)
+  ├── RangeCalendar.YearPickerGrid (optional)
+  │   └── RangeCalendar.YearPickerGridBody
+  │       └── RangeCalendar.YearPickerCell
+  └── [Custom bottom content]
+```
+
+## 总结
+
+1. **组件结构**：单一组件 → 带显式布局控制的复合组件
+2. **年份选择器**：`showMonthAndYearPickers` prop → 专用的 `RangeCalendar.YearPickerTrigger` 和 `RangeCalendar.YearPickerGrid` 组件
+3. **多个月份**：`visibleMonths={n}` → `visibleDuration={{months: n}}`，并使用多个带 `offset` 的 `RangeCalendar.Grid` 组件
+4. **color 已移除**：请改用 Tailwind CSS 类
+5. **顶部 / 底部内容**：prop 已移除 → 直接将内容作为 children 放在 `RangeCalendar` 内
+6. **单元格自定义**：新增 `RangeCalendar.CellIndicator`，且 `RangeCalendar.Cell` 支持渲染 prop
+7. **样式**：`classNames` prop → 各个复合组件上的 `className`
+8. **已移除 prop**：`calendarWidth`、`weekdayStyle`、`showHelper`、`errorMessage`、`disableAnimation` —— 请使用 Tailwind CSS 或在外部处理

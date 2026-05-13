@@ -1,0 +1,287 @@
+---
+title: Code
+description: Code 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="warning">
+  Code 组件已在 HeroUI v3 中**移除**。请改为使用原生 HTML `<code>` 元素，并配合 Tailwind CSS class 编写样式。
+</Callout>
+
+## 关键变化
+
+### 1. 组件移除
+
+**v2：** 来自 `@heroui/react` 的 `<Code>` 组件  
+**v3：** 原生 HTML `<code>` 元素与 Tailwind CSS class
+
+### 2. 变体映射
+
+v2 的 Code 组件提供以下变体，需要在迁移时替换：
+
+| v2 变体 | v3 对应 | 说明 |
+| --- | --- | --- |
+| `color="default"` | `bg-default/40 text-default-700` | 使用 Tailwind 不透明度工具类 |
+| `color="primary"` | `bg-accent/20 text-accent-600` | v3 中 `primary` 已重命名为 `accent` |
+| `color="secondary"` | `bg-default/40 text-default-700` | 与 default 相近 |
+| `color="success"` | `bg-success/20 text-success-700` | 颜色名相同 |
+| `color="warning"` | `bg-warning/20 text-warning-700` | 颜色名相同 |
+| `color="danger"` | `bg-danger/20 text-danger-600` | 颜色名相同 |
+| `size="sm"` | `text-sm` | Tailwind 字号 |
+| `size="md"` | `text-base` | Tailwind 字号 |
+| `size="lg"` | `text-lg` | Tailwind 字号 |
+| `radius="none"` | `rounded-none` | Tailwind 圆角 |
+| `radius="sm"` | `rounded-sm` | Tailwind 圆角 |
+| `radius="md"` | `rounded-md` | Tailwind 圆角 |
+| `radius="lg"` | `rounded-lg` | Tailwind 圆角 |
+| `radius="full"` | `rounded-full` | Tailwind 圆角 |
+
+## 结构变化
+
+在 v2 中，`Code` 是对原生 `<code>` 元素的组件封装：
+
+```tsx
+import { Code } from "@heroui/react";
+
+export default function App() {
+  return <Code>npm install @heroui/react</Code>;
+}
+```
+
+在 v3 中，请直接使用原生 `<code>` 元素，并为其添加 Tailwind CSS class：
+
+```tsx
+export default function App() {
+  return (
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+      npm install @heroui/react
+    </code>
+  );
+}
+```
+
+## 迁移示例
+
+### 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Colors */}
+    <Code color="primary">Primary code</Code>
+    <Code color="success">Success code</Code>
+    
+    {/* Sizes */}
+    <Code size="md">Medium code</Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* 颜色 */}
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-accent/20 text-accent-600 text-sm">
+      Primary code
+    </code>
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-success/20 text-success-700 text-sm">
+      Success code
+    </code>
+    
+    {/* 尺寸 */}
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-base">
+      Medium code
+    </code>
+    ```
+  </Tab>
+</Tabs>
+
+### 组合变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Code color="primary" size="md" radius="lg">
+      npm install @heroui/react
+    </Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-lg bg-accent/20 text-accent-600 text-base">
+      npm install @heroui/react
+    </code>
+    ```
+  </Tab>
+</Tabs>
+
+## 创建可复用的 Code 组件（可选）
+
+如果你经常需要行内代码样式，可以封装一个简单的包装组件：
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Code } from "@heroui/react";
+
+    <Code color="primary" size="md">Code snippet</Code>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    // components/Code.tsx
+    import { cn } from "@/lib/utils"; // 或使用你自己的 cn 工具函数
+
+    interface CodeProps extends React.HTMLAttributes<HTMLElement> {
+      color?: "default" | "accent" | "success" | "warning" | "danger";
+      size?: "sm" | "md" | "lg";
+      radius?: "none" | "sm" | "md" | "lg" | "full";
+    }
+
+    const colorClasses = {
+      default: "bg-default/40 text-default-700",
+      accent: "bg-accent/20 text-accent-600",
+      success: "bg-success/20 text-success-700",
+      warning: "bg-warning/20 text-warning-700",
+      danger: "bg-danger/20 text-danger-600",
+    };
+
+    const sizeClasses = {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+    };
+
+    const radiusClasses = {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      full: "rounded-full",
+    };
+
+    export function Code({
+      children,
+      className,
+      color = "default",
+      size = "sm",
+      radius = "sm",
+      ...props
+    }: CodeProps) {
+      return (
+        <code
+          className={cn(
+            "px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap",
+            colorClasses[color],
+            sizeClasses[size],
+            radiusClasses[radius],
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </code>
+      );
+    }
+
+    // 用法
+    <Code color="accent" size="md">Code snippet</Code>
+    ```
+  </Tab>
+</Tabs>
+
+## 完整示例
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Code } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <p>
+            Install HeroUI with <Code>npm install @heroui/react</Code>
+          </p>
+          <div className="flex gap-2">
+            <Code color="primary">Primary</Code>
+            <Code color="success">Success</Code>
+            <Code color="warning">Warning</Code>
+            <Code color="danger">Danger</Code>
+          </div>
+          <div className="flex gap-2 items-center">
+            <Code size="sm">Small</Code>
+            <Code size="md">Medium</Code>
+            <Code size="lg">Large</Code>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <p>
+            Install HeroUI with{" "}
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+              npm install @heroui/react
+            </code>
+          </p>
+          <div className="flex gap-2">
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-accent/20 text-accent-600 text-sm">
+              Primary
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-success/20 text-success-700 text-sm">
+              Success
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-warning/20 text-warning-700 text-sm">
+              Warning
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-danger/20 text-danger-600 text-sm">
+              Danger
+            </code>
+          </div>
+          <div className="flex gap-2 items-center">
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-sm">
+              Small
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-base">
+              Medium
+            </code>
+            <code className="px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap rounded-sm bg-default/40 text-default-700 text-lg">
+              Large
+            </code>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## 基础样式参考
+
+v2 的 Code 组件使用以下基础样式，迁移时建议一并保留：
+
+- `px-2` — 水平内边距
+- `py-1` — 垂直内边距
+- `h-fit` — 高度随内容收缩
+- `font-mono` — 等宽字体
+- `font-normal` — 常规字重
+- `inline-block` — 行内块级显示
+- `whitespace-nowrap` — 禁止换行
+
+## 总结
+
+1. **组件已移除**：v3 中不再提供 `Code` 组件。
+2. **导入调整**：移除 `import { Code } from "@heroui/react"`。
+3. **使用原生元素**：改为原生 `<code>` HTML 元素。
+4. **样式**：直接编写 Tailwind CSS class。
+5. **颜色映射**：在 v3 中将 `primary` 对应到 `accent` 色系 class。
+
+## 迁移步骤
+
+1. **移除导入**：从 `@heroui/react` 的导入中删除 `Code`。
+2. **替换组件**：将所有 `<Code>` 替换为 `<code>` 元素。
+3. **添加 Tailwind class**：为元素补充等价的样式 class。
+4. **更新颜色**：将 `color="primary"` 改为使用 `accent` 相关 class。
+5. **可选**：若行内代码使用频繁，可封装可复用的包装组件。

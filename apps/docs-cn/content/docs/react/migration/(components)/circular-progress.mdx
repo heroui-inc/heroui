@@ -1,0 +1,228 @@
+---
+title: CircularProgress
+description: CircularProgress 从 HeroUI v2 到 v3（现在称为 ProgressCircle）的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 ProgressCircle 文档](/docs/react/components/progress-circle)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+<Callout type="warning">
+  正在寻找 Progress（线性）的迁移说明？请参阅 [Progress 迁移指南](/docs/react/migration/progress)。
+</Callout>
+
+## 组件重命名
+
+`CircularProgress` 在 v3 中已重命名为 `ProgressCircle`。
+
+## 结构变化
+
+在 v2 中，`CircularProgress` 是单个组件，通过 prop 进行配置：
+
+```tsx
+import { CircularProgress } from "@heroui/react";
+
+export default function App() {
+  return (
+    <CircularProgress label="Loading..." value={60} />
+  );
+}
+```
+
+在 v3 中，`ProgressCircle` 改为复合组件模式：
+
+```tsx
+import { ProgressCircle } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ProgressCircle aria-label="Loading" value={60}>
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单一 `CircularProgress` 组件，SVG 在内部渲染  
+**v3：** 复合组件：`ProgressCircle`、`ProgressCircle.Track`（SVG 元素）、`ProgressCircle.TrackCircle`（背景圆环）、`ProgressCircle.FillCircle`（进度弧）
+
+### 2. 颜色
+
+**v2：** `default`、`primary`、`secondary`、`success`、`warning`、`danger`  
+**v3：** `default`、`accent`、`success`、`warning`、`danger`
+
+### 3. Prop 变更
+
+| v2 prop | v3 对应项 | 说明 |
+| ------- | --------- | ---- |
+| `value` | `value` | 相同 |
+| `minValue` | `minValue` | 相同 |
+| `maxValue` | `maxValue` | 相同 |
+| `isIndeterminate` | `isIndeterminate` | 默认值变化：v2 为 `true`，v3 为 `false` |
+| `formatOptions` | `formatOptions` | 相同 |
+| `size` | `size` | 相同（`sm`、`md`、`lg`） |
+| `color` | `color` | `primary` → `accent`，`secondary` 已移除 |
+| `label` | - | 改用 `Label` 组件 |
+| `valueLabel` | - | 改用 render prop 模式 |
+| `showValueLabel` | - | 将值的内容直接放入 `ProgressCircle` 中 |
+| `strokeWidth` | - | 直接设置在 `ProgressCircle.TrackCircle` 与 `ProgressCircle.FillCircle` 上 |
+| `isDisabled` | - | 已移除 |
+| `disableAnimation` | - | 已移除 |
+| `classNames` | - | 改在各复合子组件上使用 `className` |
+
+## 迁移示例
+
+### 基本环形进度
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { CircularProgress } from "@heroui/react";
+
+    <CircularProgress aria-label="Loading..." value={60} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ProgressCircle } from "@heroui/react";
+
+    <ProgressCircle aria-label="Loading..." value={60}>
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+    ```
+  </Tab>
+</Tabs>
+
+### 不确定状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <CircularProgress aria-label="Loading..." />
+    {/* isIndeterminate defaults to true in v2 */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressCircle isIndeterminate aria-label="Loading...">
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+    {/* isIndeterminate defaults to false in v3, must be explicit */}
+    ```
+  </Tab>
+</Tabs>
+
+### 带标签
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <CircularProgress
+      label="Loading..."
+      value={70}
+      showValueLabel
+      size="lg"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ProgressCircle, Label } from "@heroui/react";
+
+    <div className="flex flex-col items-center gap-2">
+      <ProgressCircle aria-label="Loading" value={70} size="lg">
+        <ProgressCircle.Track>
+          <ProgressCircle.TrackCircle />
+          <ProgressCircle.FillCircle />
+        </ProgressCircle.Track>
+      </ProgressCircle>
+      <Label>Loading...</Label>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义 SVG prop
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <CircularProgress
+      value={60}
+      strokeWidth={6}
+      aria-label="Loading"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressCircle aria-label="Loading" value={60}>
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle strokeWidth={6} />
+        <ProgressCircle.FillCircle strokeWidth={6} />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变更
+
+### v2：`classNames` prop
+
+```tsx
+<CircularProgress
+  classNames={{
+    base: "custom-base",
+    svg: "custom-svg",
+    track: "custom-track",
+    indicator: "custom-fill",
+    label: "custom-label",
+    value: "custom-value",
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<ProgressCircle className="custom-base" value={60}>
+  <ProgressCircle.Track className="custom-svg">
+    <ProgressCircle.TrackCircle className="custom-track" />
+    <ProgressCircle.FillCircle className="custom-fill" />
+  </ProgressCircle.Track>
+</ProgressCircle>
+```
+
+## 组件结构
+
+```
+ProgressCircle (Root)
+  └── ProgressCircle.Track (SVG element)
+      ├── ProgressCircle.TrackCircle (background circle)
+      └── ProgressCircle.FillCircle (progress arc)
+```
+
+## 总结
+
+1. **重命名**：`CircularProgress` → `ProgressCircle`
+2. **组件结构**：单组件 → 复合组件（`ProgressCircle.Track`、`ProgressCircle.TrackCircle`、`ProgressCircle.FillCircle`）
+3. **不确定状态默认值变化**：`isIndeterminate` 在 v3 中默认为 `false`（v2 中为 `true`）
+4. **标签**：`label` prop → `Label` 组件
+5. **SVG prop**：原本在根上的 `strokeWidth` → 直接设置在 `TrackCircle` 与 `FillCircle` 上
+6. **颜色变化**：`primary` → `accent`，`secondary` 已移除
+7. **移除的 prop**：`isDisabled`、`disableAnimation` → 请改用 Tailwind CSS
+8. **移除 classNames**：改在各复合子组件上使用 `className`

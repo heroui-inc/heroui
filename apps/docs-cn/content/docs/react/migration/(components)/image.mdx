@@ -1,0 +1,522 @@
+---
+title: Image
+description: Image 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="warning">
+  HeroUI v3 **已移除** `Image` 组件。请改用原生 HTML `img` 元素或 Next.js 的 `Image` 组件，并结合 Tailwind CSS 类进行样式与效果处理。
+</Callout>
+
+## 主要变化
+
+### 1. 组件移除
+
+**v2：** `@heroui/react` 的 `<Image>` 组件  
+**v3：** 原生 HTML `img` 元素，或 Next.js `Image` 组件
+
+### 2. 能力对照
+
+v2 的 `Image` 提供的能力，在 v3 中需要分别替换：
+
+| v2 能力                         | v3 对应做法                         | 说明                                      |
+| ------------------------------- | ----------------------------------- | ----------------------------------------- |
+| `radius` prop                   | Tailwind `rounded-*` 类            | 如 `rounded-sm`、`rounded-md`、`rounded-lg`、`rounded-full` |
+| `shadow` prop                   | Tailwind `shadow-*` 类             | 如 `shadow-sm`、`shadow-md`、`shadow-lg` |
+| `isBlurred` prop                | 手动实现模糊                        | 使用 CSS `filter: blur()` 或 Tailwind `blur-*` |
+| `isZoomed` prop                 | 手动实现悬停缩放                    | 使用 Tailwind `hover:scale-*`            |
+| `fallbackSrc` prop              | 手动错误回退                        | 使用 `onError` + 状态切换 `src`           |
+| `disableSkeleton` / 加载骨架图 | 手动加载态                          | 使用 React state + 条件渲染               |
+| `removeWrapper` prop            | 直接渲染                            | 无需额外 wrapper，直接渲染 `img`        |
+
+## 结构变化
+
+在 v2 中，`Image` 是对原生 `img` 的封装组件：
+
+```tsx
+import { Image } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Image
+      src="https://example.com/image.jpg"
+      alt="Example image"
+      width={300}
+      height={200}
+    />
+  );
+}
+```
+
+在 v3 中，直接使用原生 `img`，并用 Tailwind CSS 控制样式：
+
+```tsx
+export default function App() {
+  return (
+    <img
+      src="https://example.com/image.jpg"
+      alt="Example image"
+      width={300}
+      height={200}
+      className="rounded-lg"
+    />
+  );
+}
+```
+
+## 迁移示例
+
+### 使用 Next.js `Image`（推荐）
+
+若使用 Next.js，推荐使用其优化的 `Image` 组件：
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Image } from "@heroui/react";
+
+    <Image
+      src="/image.jpg"
+      alt="Example"
+      width={300}
+      height={200}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import Image from "next/image";
+
+    <Image
+      src="/image.jpg"
+      alt="Example"
+      width={300}
+      height={200}
+      className="rounded-lg"
+    />
+    ```
+  </Tab>
+</Tabs>
+
+### 悬停放大（对应 `isZoomed`）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image isZoomed src="..." alt="..." />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="relative overflow-hidden rounded-lg">
+      <img
+        src="..."
+        alt="..."
+        className="object-cover transition-transform duration-300 hover:scale-125"
+      />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 模糊效果（对应 `isBlurred`）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image isBlurred src="..." alt="..." />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="relative">
+      <img
+        src="..."
+        alt="..."
+        className="relative z-10"
+      />
+      <img
+        src="..."
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 z-0 h-full w-full scale-105 object-cover blur-lg opacity-30 saturate-150"
+      />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 回退图片（对应 `fallbackSrc`）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image
+      src="https://example.com/image.jpg"
+      fallbackSrc="/fallback.jpg"
+      alt="Example"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    function ImageWithFallback({ src, fallbackSrc, alt, ...props }) {
+      const [imgSrc, setImgSrc] = useState(src);
+
+      return (
+        <img
+          src={imgSrc}
+          alt={alt}
+          onError={() => setImgSrc(fallbackSrc)}
+          {...props}
+        />
+      );
+    }
+
+    <ImageWithFallback
+      src="https://example.com/image.jpg"
+      fallbackSrc="/fallback.jpg"
+      alt="Example"
+    />
+    ```
+  </Tab>
+</Tabs>
+
+### 加载骨架（对应 skeleton）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image
+      src="https://example.com/image.jpg"
+      alt="Example"
+      disableSkeleton={false}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    function ImageWithSkeleton({ src, alt, ...props }) {
+      const [isLoading, setIsLoading] = useState(true);
+      const [hasError, setHasError] = useState(false);
+
+      return (
+        <div className="relative overflow-hidden rounded-lg bg-default-200">
+          {isLoading && (
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-default-300 to-transparent" />
+          )}
+          <img
+            src={src}
+            alt={alt}
+            className={`transition-opacity duration-300 ${
+              isLoading ? "opacity-0" : "opacity-100"
+            }`}
+            onLoad={() => setIsLoading(false)}
+            onError={() => {
+              setIsLoading(false);
+              setHasError(true);
+            }}
+            {...props}
+          />
+        </div>
+      );
+    }
+
+    <ImageWithSkeleton src="https://example.com/image.jpg" alt="Example" />
+    ```
+  </Tab>
+</Tabs>
+
+### 组合效果
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Image
+      src="https://example.com/image.jpg"
+      alt="Example"
+      radius="lg"
+      shadow="md"
+      isZoomed
+      isBlurred
+      width={400}
+      height={300}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div className="relative overflow-hidden rounded-lg shadow-md">
+      <img
+        src="https://example.com/image.jpg"
+        alt="Example"
+        width={400}
+        height={300}
+        className="relative z-10 object-cover transition-transform duration-300 hover:scale-125"
+      />
+      <img
+        src="https://example.com/image.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 z-0 h-full w-full scale-105 object-cover blur-lg opacity-30 saturate-150"
+      />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## 创建可复用的图片组件（可选）
+
+如果你经常在同类场景重复使用图片能力，可以封装一个可复用组件：
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Image } from "@heroui/react";
+
+    <Image
+      src="..."
+      radius="lg"
+      shadow="md"
+      isZoomed
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { cn } from "@/lib/utils"; // 或你项目里的 cn 工具
+
+    interface CustomImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+      radius?: "none" | "sm" | "md" | "lg" | "full";
+      shadow?: "none" | "sm" | "md" | "lg";
+      isZoomed?: boolean;
+      isBlurred?: boolean;
+      fallbackSrc?: string;
+    }
+
+    const radiusClasses = {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      full: "rounded-full",
+    };
+
+    const shadowClasses = {
+      none: "shadow-none",
+      sm: "shadow-sm",
+      md: "shadow-md",
+      lg: "shadow-lg",
+    };
+
+    export function CustomImage({
+      src,
+      alt,
+      className,
+      radius = "lg",
+      shadow = "none",
+      isZoomed = false,
+      isBlurred = false,
+      fallbackSrc,
+      onError,
+      ...props
+    }: CustomImageProps) {
+      const [imgSrc, setImgSrc] = useState(src);
+      const [isLoading, setIsLoading] = useState(true);
+
+      const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        if (fallbackSrc && imgSrc !== fallbackSrc) {
+          setImgSrc(fallbackSrc);
+        }
+        onError?.(e);
+      };
+
+      const imageElement = (
+        <img
+          src={imgSrc}
+          alt={alt}
+          className={cn(
+            radiusClasses[radius],
+            shadowClasses[shadow],
+            isZoomed && "object-cover transition-transform duration-300 hover:scale-125",
+            isLoading && "opacity-0",
+            "transition-opacity duration-300",
+            className
+          )}
+          onLoad={() => setIsLoading(false)}
+          onError={handleError}
+          {...props}
+        />
+      );
+
+      if (isBlurred) {
+        return (
+          <div className={cn("relative", radiusClasses[radius], shadowClasses[shadow])}>
+            {imageElement}
+            <img
+              src={imgSrc}
+              alt=""
+              aria-hidden="true"
+              className={cn(
+                "absolute inset-0 z-0 h-full w-full scale-105 object-cover blur-lg opacity-30 saturate-150",
+                radiusClasses[radius]
+              )}
+            />
+          </div>
+        );
+      }
+
+      if (isZoomed || isLoading) {
+        return (
+          <div className={cn("relative overflow-hidden", radiusClasses[radius], shadowClasses[shadow])}>
+            {isLoading && (
+              <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-default-300 to-transparent" />
+            )}
+            {imageElement}
+          </div>
+        );
+      }
+
+      return imageElement;
+    }
+
+    // 用法
+    <CustomImage
+      src="..."
+      alt="Example"
+      radius="lg"
+      shadow="md"
+      isZoomed
+      isBlurred
+      fallbackSrc="/fallback.jpg"
+    />
+    ```
+  </Tab>
+</Tabs>
+
+## 完整示例
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Image } from "@heroui/react";
+
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <Image
+            src="https://example.com/image1.jpg"
+            alt="Image 1"
+            width={300}
+            height={200}
+            radius="lg"
+            shadow="md"
+          />
+          <Image
+            src="https://example.com/image2.jpg"
+            alt="Image 2"
+            width={300}
+            height={200}
+            isZoomed
+            radius="lg"
+          />
+          <Image
+            src="https://example.com/image3.jpg"
+            alt="Image 3"
+            width={300}
+            height={200}
+            isBlurred
+            radius="full"
+          />
+        </div>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    export default function App() {
+      return (
+        <div className="space-y-4">
+          <img
+            src="https://example.com/image1.jpg"
+            alt="Image 1"
+            width={300}
+            height={200}
+            className="rounded-lg shadow-md"
+          />
+          <div className="relative overflow-hidden rounded-lg">
+            <img
+              src="https://example.com/image2.jpg"
+              alt="Image 2"
+              width={300}
+              height={200}
+              className="object-cover transition-transform duration-300 hover:scale-125"
+            />
+          </div>
+          <div className="relative rounded-full">
+            <img
+              src="https://example.com/image3.jpg"
+              alt="Image 3"
+              width={300}
+              height={300}
+              className="relative z-10 rounded-full"
+            />
+            <img
+              src="https://example.com/image3.jpg"
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 z-0 h-full w-full scale-105 object-cover rounded-full blur-lg opacity-30 saturate-150"
+            />
+          </div>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+1. **组件已移除**：v3 不再提供 `Image` 组件。
+2. **调整 import**：移除 `import { Image } from "@heroui/react"`。
+3. **使用原生标签**：用原生 `img`，或 Next.js `Image`。
+4. **能力补齐**：模糊、悬停放大、骨架屏与回退图需自行组合实现。
+5. **样式方式**：圆角、阴影与视觉效果直接用 Tailwind CSS 类控制。
+
+## 迁移步骤
+
+1. **移除 import**：从 `@heroui/react` 的 import 中删除 `Image`。
+2. **替换标签**：把所有 `<Image>` 替换为 `img`（或 Next.js `Image`）。
+3. **补齐 Tailwind 类**：用等价类表达圆角、阴影等视觉样式。
+4. **按需实现行为**：如需模糊、放大、骨架屏、回退图，请自行实现。
+5. **Next.js 项目**：可优先使用 `next/image` 做图片优化。
+6. **可选**：对常用模式封装可复用组件。
+
+## Next.js 的 `Image` 组件
+
+在 Next.js 中，`next/image` 的 `Image` 组件提供：
+
+- 自动图片优化
+- 默认懒加载
+- 响应式 `srcSet`
+- 占位模糊（placeholder blur）
+- 内置加载体验
+
+```tsx
+import Image from "next/image";
+
+<Image
+  src="/image.jpg"
+  alt="Example"
+  width={300}
+  height={200}
+  className="rounded-lg shadow-md"
+  placeholder="blur" // 可选：模糊占位
+  blurDataURL="data:image/..." // 可选：base64 模糊数据
+/>
+```

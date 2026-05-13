@@ -1,0 +1,523 @@
+---
+title: Table
+description: Table 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Table 文档](/docs/react/components/table)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Table 对每个部分使用独立的命名导入：
+
+```tsx
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Table aria-label="Example table">
+      <TableHeader>
+        <TableColumn>Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>Kate Moore</TableCell>
+          <TableCell>CEO</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+在 v3 中，Table 使用点语法的复合组件，并新增 `Table.ScrollContainer` 与 `Table.Content`：
+
+```tsx
+import { Table } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Example table">
+          <Table.Header>
+            <Table.Column>Name</Table.Column>
+            <Table.Column>Role</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>Kate Moore</Table.Cell>
+              <Table.Cell>CEO</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 独立的命名导入（`Table`、`TableHeader`、`TableColumn`、`TableBody`、`TableRow`、`TableCell`）  
+**v3：** 单一 `Table` 导入配合点语法：`Table`、`Table.ScrollContainer`、`Table.Content`、`Table.Header`、`Table.Column`、`Table.Body`、`Table.Row`、`Table.Cell`、`Table.Footer`
+
+### 2. 新增包裹层
+
+- **`Table`**：根容器（样式外层）
+- **`Table.ScrollContainer`**：横向滚动与自定义滚动条
+- **`Table.Content`**：实际的 `<table>` 元素（`aria-label`、`selectionMode`、`sortDescriptor` 等放在这里）
+- **`Table.Footer`**：替代 `bottomContent`，用于分页等底部内容
+
+### 3. Prop 变更
+
+| v2 prop                   | v3 对应位置                     | 说明                                      |
+| ------------------------- | ------------------------------- | ----------------------------------------- |
+| `aria-label`              | `Table.Content` 的 `aria-label` | 移到 `Table.Content`                      |
+| `selectionMode`           | `Table.Content`                 | 移到 `Table.Content`                      |
+| `selectedKeys`            | `Table.Content`                 | 移到 `Table.Content`                      |
+| `defaultSelectedKeys`     | `Table.Content`                 | 移到 `Table.Content`                      |
+| `onSelectionChange`       | `Table.Content`                 | 移到 `Table.Content`                      |
+| `sortDescriptor`          | `Table.Content`                 | 移到 `Table.Content`                      |
+| `onSortChange`            | `Table.Content`                 | 移到 `Table.Content`                      |
+| `disabledKeys`            | `Table.Content`                 | 移到 `Table.Content`                      |
+| `disallowEmptySelection`  | `Table.Content`                 | 移到 `Table.Content`                      |
+| `selectionBehavior`       | `Table.Content`                 | 移到 `Table.Content`                      |
+| `disabledBehavior`        | `Table.Content`                 | 移到 `Table.Content`                      |
+| `onRowAction`             | `Table.Content`                 | 移到 `Table.Content`                      |
+| `onCellAction`            | `Table.Content`                 | 移到 `Table.Content`                      |
+| `topContent`              | —                               | 放在 `Table` 内、`Table.ScrollContainer` 之前 |
+| `bottomContent`           | —                               | 使用 `Table.Footer`                       |
+| `topContentPlacement`     | —                               | 已移除（直接组合布局）                    |
+| `bottomContentPlacement`  | —                               | 已移除（直接组合布局）                    |
+| `color`                   | —                               | 已移除（请用 Tailwind CSS）               |
+| `variant`                 | `Table` 的 `variant`            | 变为 `"primary"`（卡片式，默认）或 `"secondary"`（扁平） |
+| `layout`                  | —                               | 已移除                                    |
+| `radius`                  | —                               | 已移除（请用 Tailwind CSS）               |
+| `shadow`                  | —                               | 已移除（请用 Tailwind CSS）               |
+| `isStriped`               | —                               | 已移除（请用 Tailwind CSS）               |
+| `isCompact`               | —                               | 已移除（请用 Tailwind CSS）               |
+| `isHeaderSticky`          | —                               | 已移除（请用 Tailwind CSS，例如 `sticky top-0`） |
+| `fullWidth`               | —                               | 已移除（默认全宽）                        |
+| `removeWrapper`           | —                               | 已移除（直接组合布局）                    |
+| `hideHeader`              | —                               | 已移除（省略 `Table.Header` 或用 CSS）    |
+| `isVirtualized`           | —                               | 使用 React Aria 的 `Virtualizer` 包裹     |
+| `maxTableHeight`          | —                               | 使用 CSS 或 Virtualizer                   |
+| `rowHeight`               | —                               | 与 Virtualizer 一起使用 `TableLayout`     |
+| `isKeyboardNavigationDisabled` | —                          | 已移除                                    |
+| `disableAnimation`        | —                               | 已移除                                    |
+| `classNames`              | —                               | 在各复合子组件上使用 `className`          |
+
+### 4. 使用 Checkbox 的选择
+
+**v2：** 设置 `selectionMode` 后由表格自动渲染 Checkbox。  
+**v3：** 在列与行中显式使用带 `slot="selection"` 的 `Checkbox`。
+
+### 5. 加载与空状态
+
+**v2：** `TableBody` 上的 `loadingState`、`loadingContent`、`emptyContent`。  
+**v3：** `Table.Body` 上的 `renderEmptyState`；无限滚动加载用 `Table.LoadMore`。
+
+### 6. 分页
+
+**v2：** `Table` 上的 `bottomContent`。  
+**v3：** `Table.Footer` 复合组件。
+
+### 7. 列宽调整
+
+**v2：** 非内置能力。  
+**v3：** `Table.ResizableContainer` + `Table.ColumnResizer` 复合组件。
+
+## 迁移示例
+
+### 基础表格
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
+
+    <Table aria-label="Users">
+      <TableHeader>
+        <TableColumn>Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+        <TableColumn>Status</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>Kate Moore</TableCell>
+          <TableCell>CEO</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+        <TableRow key="2">
+          <TableCell>John Doe</TableCell>
+          <TableCell>Developer</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Table } from "@heroui/react";
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Users">
+          <Table.Header>
+            <Table.Column>Name</Table.Column>
+            <Table.Column>Role</Table.Column>
+            <Table.Column>Status</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="1">
+              <Table.Cell>Kate Moore</Table.Cell>
+              <Table.Cell>CEO</Table.Cell>
+              <Table.Cell>Active</Table.Cell>
+            </Table.Row>
+            <Table.Row id="2">
+              <Table.Cell>John Doe</Table.Cell>
+              <Table.Cell>Developer</Table.Cell>
+              <Table.Cell>Active</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### 动态行
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const columns = [
+      { key: "name", label: "Name" },
+      { key: "role", label: "Role" },
+    ];
+    const rows = [
+      { key: "1", name: "Kate", role: "CEO" },
+      { key: "2", name: "John", role: "Developer" },
+    ];
+
+    <Table aria-label="Users">
+      <TableHeader columns={columns}>
+        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+      </TableHeader>
+      <TableBody items={rows}>
+        {(item) => (
+          <TableRow key={item.key}>
+            {(columnKey) => <TableCell>{item[columnKey]}</TableCell>}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const columns = [
+      { id: "name", label: "Name" },
+      { id: "role", label: "Role" },
+    ];
+    const rows = [
+      { id: "1", name: "Kate", role: "CEO" },
+      { id: "2", name: "John", role: "Developer" },
+    ];
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Users">
+          <Table.Header columns={columns}>
+            {(column) => <Table.Column id={column.id}>{column.label}</Table.Column>}
+          </Table.Header>
+          <Table.Body items={rows}>
+            {(item) => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.role}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### 选择
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["1"]));
+
+    <Table
+      aria-label="Users"
+      selectionMode="multiple"
+      selectedKeys={selectedKeys}
+      onSelectionChange={setSelectedKeys}
+    >
+      <TableHeader>
+        <TableColumn>Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow key="1">
+          <TableCell>Kate</TableCell>
+          <TableCell>CEO</TableCell>
+        </TableRow>
+        <TableRow key="2">
+          <TableCell>John</TableCell>
+          <TableCell>Developer</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Table, Checkbox } from "@heroui/react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["1"]));
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content
+          aria-label="Users"
+          selectionMode="multiple"
+          selectedKeys={selectedKeys}
+          onSelectionChange={setSelectedKeys}
+        >
+          <Table.Header>
+            <Table.Column>
+              <Checkbox slot="selection" />
+            </Table.Column>
+            <Table.Column>Name</Table.Column>
+            <Table.Column>Role</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="1">
+              <Table.Cell>
+                <Checkbox slot="selection" />
+              </Table.Cell>
+              <Table.Cell>Kate</Table.Cell>
+              <Table.Cell>CEO</Table.Cell>
+            </Table.Row>
+            <Table.Row id="2">
+              <Table.Cell>
+                <Checkbox slot="selection" />
+              </Table.Cell>
+              <Table.Cell>John</Table.Cell>
+              <Table.Cell>Developer</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### 排序
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const [sortDescriptor, setSortDescriptor] = useState({
+      column: "name",
+      direction: "ascending",
+    });
+
+    <Table
+      aria-label="Users"
+      sortDescriptor={sortDescriptor}
+      onSortChange={setSortDescriptor}
+    >
+      <TableHeader>
+        <TableColumn key="name" allowsSorting>Name</TableColumn>
+        <TableColumn key="role" allowsSorting>Role</TableColumn>
+      </TableHeader>
+      <TableBody items={sortedItems}>
+        {(item) => (
+          <TableRow key={item.key}>
+            {(columnKey) => <TableCell>{item[columnKey]}</TableCell>}
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [sortDescriptor, setSortDescriptor] = useState({
+      column: "name",
+      direction: "ascending",
+    });
+
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content
+          aria-label="Users"
+          sortDescriptor={sortDescriptor}
+          onSortChange={setSortDescriptor}
+        >
+          <Table.Header>
+            <Table.Column id="name" allowsSorting>Name</Table.Column>
+            <Table.Column id="role" allowsSorting>Role</Table.Column>
+          </Table.Header>
+          <Table.Body items={sortedItems}>
+            {(item) => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.role}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### 分页（底部内容）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Table
+      aria-label="Users"
+      bottomContent={
+        <Pagination total={10} page={page} onChange={setPage} />
+      }
+      bottomContentPlacement="outside"
+    >
+      {/* ... */}
+    </Table>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Users">
+          {/* Header and Body */}
+        </Table.Content>
+      </Table.ScrollContainer>
+      <Table.Footer>
+        {/* Pagination component */}
+      </Table.Footer>
+    </Table>
+    ```
+  </Tab>
+</Tabs>
+
+### 空状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <TableBody emptyContent="No rows to display.">
+      {[]}
+    </TableBody>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Table.Body
+      items={[]}
+      renderEmptyState={() => (
+        <p className="text-center py-4">No rows to display.</p>
+      )}
+    >
+      {[]}
+    </Table.Body>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式相关变化
+
+### v2：`classNames` prop
+
+```tsx
+<Table
+  classNames={{
+    base: "custom-base",
+    wrapper: "custom-wrapper",
+    table: "custom-table",
+    thead: "custom-header",
+    tbody: "custom-body",
+    tr: "custom-row",
+    th: "custom-column",
+    td: "custom-cell",
+  }}
+/>
+```
+
+### v3：直接使用 `className`
+
+```tsx
+<Table className="custom-base">
+  <Table.ScrollContainer className="custom-wrapper">
+    <Table.Content aria-label="Table" className="custom-table">
+      <Table.Header className="custom-header">
+        <Table.Column className="custom-column">Name</Table.Column>
+      </Table.Header>
+      <Table.Body className="custom-body">
+        <Table.Row className="custom-row">
+          <Table.Cell className="custom-cell">Value</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Content>
+  </Table.ScrollContainer>
+</Table>
+```
+
+## 组件结构（Anatomy）
+
+v3 的 Table 结构如下：
+
+```
+Table (Root container)
+  ├── Table.ScrollContainer (horizontal scroll)
+  │   └── Table.Content (<table> element, aria-label, selectionMode, etc.)
+  │       ├── Table.Header (<thead>)
+  │       │   └── Table.Column (<th>, allowsSorting, etc.)
+  │       │       └── Table.ColumnResizer (optional)
+  │       └── Table.Body (<tbody>, items, renderEmptyState)
+  │           ├── Table.Row (<tr>)
+  │           │   └── Table.Cell (<td>)
+  │           └── Table.LoadMore (optional, infinite scroll)
+  │               └── Table.LoadMoreContent
+  └── Table.Footer (optional, pagination, etc.)
+```
+
+## 数据项标识
+
+**v2：** React 的 `key` 同时用于列表调和与选择状态。  
+**v3：** 在 `Table.Row` 与 `Table.Column` 上使用 `id` 承载选择/排序状态；列表渲染仍保留 React 的 `key`。
+
+## 总结
+
+1. **导入方式**：由多个命名导入 → 单一 `Table` 导入配合点语法。
+2. **新增包裹层**：`Table.ScrollContainer` 与 `Table.Content` 包裹表格结构。
+3. **prop 迁移**：`aria-label`、`selectionMode`、`sortDescriptor` 等从 `Table` 移到 `Table.Content`。
+4. **底部区域**：`bottomContent` → `Table.Footer`。
+5. **顶部区域**：`topContent` → 放在 `Table` 内、`Table.ScrollContainer` 之前。
+6. **选择用 Checkbox**：由自动渲染 → 显式使用 `slot="selection"` 的 `Checkbox`。
+7. **空状态**：`emptyContent` → `Table.Body` 的 `renderEmptyState`。
+8. **加载**：`loadingState` / `loadingContent` → 无限滚动场景用 `Table.LoadMore`。
+9. **列宽调整**：新增 `Table.ResizableContainer` 与 `Table.ColumnResizer`。
+10. **标识字段**：行/列由 `key` 表达业务标识 → 使用 `id`。
+11. **样式类 prop 移除**：`color`、`radius`、`shadow`、`isStriped`、`isCompact` 等 → 请用 Tailwind CSS。
+12. **`classNames` 移除**：在各复合子组件上使用 `className`。

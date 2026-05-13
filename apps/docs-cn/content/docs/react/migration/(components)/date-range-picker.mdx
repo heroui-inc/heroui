@@ -1,0 +1,522 @@
+---
+title: DateRangePicker
+description: DateRangePicker 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 DateRangePicker 文档](/docs/react/components/date-range-picker)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`DateRangePicker` 是单一自包含组件，通过 prop 配置标签、输入、日历与时间字段等：
+
+```tsx
+import { DateRangePicker } from "@heroui/react";
+
+export default function App() {
+  return (
+    <DateRangePicker label="Trip dates" />
+  );
+}
+```
+
+在 v3 中，DateRangePicker 采用“组合优先”的 API，需要你显式组合 `DateField` 与 `RangeCalendar`：
+
+```tsx
+import { DateField, DateRangePicker, Label, RangeCalendar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <DateRangePicker>
+      <Label>Trip dates</Label>
+      <DateField.Group>
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger>
+            <DateRangePicker.TriggerIndicator />
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DateRangePicker.Popover>
+        <RangeCalendar aria-label="Choose trip dates">
+          <RangeCalendar.Header>
+            <RangeCalendar.YearPickerTrigger>
+              <RangeCalendar.YearPickerTriggerHeading />
+              <RangeCalendar.YearPickerTriggerIndicator />
+            </RangeCalendar.YearPickerTrigger>
+            <RangeCalendar.NavButton slot="previous" />
+            <RangeCalendar.NavButton slot="next" />
+          </RangeCalendar.Header>
+          <RangeCalendar.Grid>
+            <RangeCalendar.GridHeader>
+              {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+            </RangeCalendar.GridHeader>
+            <RangeCalendar.GridBody>
+              {(date) => <RangeCalendar.Cell date={date} />}
+            </RangeCalendar.GridBody>
+          </RangeCalendar.Grid>
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单一 `DateRangePicker`，两个输入、分隔符、日历、标签、popover 等主要由内部 prop 处理。  
+**v3：** 组合式 API：将 `DateRangePicker`、`DateField`、`RangeCalendar` 与 `Label` 等组合在一起；两个 `DateField.Input` 分别使用 `slot="start"` 与 `slot="end"` 表示范围输入。
+
+### 2. 组合结构说明
+
+| v3 组件                           | 说明                                                         |
+| --------------------------------- | ------------------------------------------------------------ |
+| `DateRangePicker`                 | 根容器与状态持有者                                           |
+| `DateRangePicker.Trigger`         | 打开日历 popover 的按钮                                     |
+| `DateRangePicker.TriggerIndicator`| 日历图标（默认）或自定义指示器                               |
+| `DateRangePicker.RangeSeparator`  | 开始/结束日期输入之间的分隔符（默认 `" - "`）               |
+| `DateRangePicker.Popover`         | 包裹范围日历的 popover                                       |
+| `DateField.Group`                 | 输入组外层                                                   |
+| `DateField.InputContainer`        | 开始/结束输入与分隔符容器                                   |
+| `DateField.Input slot="start"`    | 开始日期的分段输入                                           |
+| `DateField.Input slot="end"`      | 结束日期的分段输入                                           |
+| `DateField.Segment`               | 单个日期片段（月/日/年等）                                   |
+| `DateField.Suffix`                | 触发按钮的后缀插槽                                           |
+| `RangeCalendar`                   | 完整范围日历（参见 [RangeCalendar 迁移](/docs/react/migration/range-calendar)） |
+| `Label`                           | 外部标签组件                                                 |
+
+### 3. Prop 变更
+
+| v2 prop                   | v3 对应                         | 说明                                                         |
+| ------------------------- | ------------------------------- | ------------------------------------------------------------ |
+| `value`                   | `value`                         | 相同                                                         |
+| `defaultValue`            | `defaultValue`                  | 相同                                                         |
+| `onChange`                | `onChange`                      | 相同                                                         |
+| `minValue`                | `minValue`                      | 相同                                                         |
+| `maxValue`                | `maxValue`                      | 相同                                                         |
+| `isDisabled`              | `isDisabled`                    | 相同                                                         |
+| `isReadOnly`              | `isReadOnly`                    | 相同                                                         |
+| `isRequired`              | `isRequired`                    | 相同                                                         |
+| `isInvalid`               | `isInvalid`                     | 相同                                                         |
+| `isOpen`                  | `isOpen`                        | 相同                                                         |
+| `defaultOpen`             | `defaultOpen`                   | 相同                                                         |
+| `onOpenChange`            | `onOpenChange`                  | 相同                                                         |
+| `granularity`             | `granularity`                   | 相同                                                         |
+| `hourCycle`               | `hourCycle`                     | 相同                                                         |
+| `hideTimeZone`            | `hideTimeZone`                  | 相同                                                         |
+| `shouldForceLeadingZeros` | `shouldForceLeadingZeros`       | 相同                                                         |
+| `allowsNonContiguousRanges` | —                             | 直接在 `RangeCalendar` 上设置                                |
+| `pageBehavior`            | —                               | 直接在 `RangeCalendar` 上设置                                |
+| `label`                   | —                               | 使用 `Label` 组件                                            |
+| `description`             | —                               | 使用 `Description` 组件                                      |
+| `errorMessage`            | —                               | 使用 `FieldError` 组件                                       |
+| `variant`                 | —                               | 使用 `DateField.Group` 的 `variant` prop，或 Tailwind CSS    |
+| `color`                   | —                               | 已移除（请用 Tailwind CSS）                                  |
+| `size`                    | —                               | 已移除（请用 Tailwind CSS）                                  |
+| `radius`                  | —                               | 已移除（请用 Tailwind CSS）                                  |
+| `labelPlacement`          | —                               | 用 Tailwind CSS 控制布局                                     |
+| `selectorIcon`            | —                               | 将 children 传给 `DateRangePicker.TriggerIndicator`          |
+| `selectorButtonPlacement` | —                               | 通过 `DateField.Prefix` 或 `DateField.Suffix` 组合触发器位置 |
+| `visibleMonths`           | —                               | 使用 `RangeCalendar` 的 `visibleDuration` prop               |
+| `showMonthAndYearPickers` | —                               | 使用 `RangeCalendar.YearPickerTrigger` 与 `RangeCalendar.YearPickerGrid` |
+| `calendarProps`           | —                               | 直接将 prop 传给 `RangeCalendar`                           |
+| `popoverProps`            | —                               | 直接将 prop 传给 `DateRangePicker.Popover`                   |
+| `selectorButtonProps`     | —                               | 直接将 prop 传给 `DateRangePicker.Trigger`                   |
+| `timeInputProps`          | —                               | 时间输入需单独组合实现                                       |
+| `calendarWidth`           | —                               | 已移除（请用 Tailwind CSS）                                  |
+| `validate`                | —                               | 在外部处理校验                                               |
+| `placeholderValue`        | `placeholderValue`              | 相同                                                         |
+| `autoFocus`               | `autoFocus`                     | 相同                                                         |
+| `disableAnimation`        | —                               | 已移除                                                       |
+| `classNames`              | —                               | 在各子组件上使用 `className`                                 |
+
+## 迁移示例
+
+### 基础 DateRangePicker
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { DateRangePicker } from "@heroui/react";
+
+    <DateRangePicker label="Trip dates" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { DateField, DateRangePicker, Label, RangeCalendar } from "@heroui/react";
+
+    <DateRangePicker>
+      <Label>Trip dates</Label>
+      <DateField.Group>
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger>
+            <DateRangePicker.TriggerIndicator />
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DateRangePicker.Popover>
+        <RangeCalendar aria-label="Choose trip dates">
+          <RangeCalendar.Header>
+            <RangeCalendar.YearPickerTrigger>
+              <RangeCalendar.YearPickerTriggerHeading />
+              <RangeCalendar.YearPickerTriggerIndicator />
+            </RangeCalendar.YearPickerTrigger>
+            <RangeCalendar.NavButton slot="previous" />
+            <RangeCalendar.NavButton slot="next" />
+          </RangeCalendar.Header>
+          <RangeCalendar.Grid>
+            <RangeCalendar.GridHeader>
+              {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+            </RangeCalendar.GridHeader>
+            <RangeCalendar.GridBody>
+              {(date) => <RangeCalendar.Cell date={date} />}
+            </RangeCalendar.GridBody>
+          </RangeCalendar.Grid>
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { DateRangePicker } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState({
+      start: parseDate("2024-03-01"),
+      end: parseDate("2024-03-14"),
+    });
+
+    <DateRangePicker
+      label="Trip dates"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { DateField, DateRangePicker, Label, RangeCalendar } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState({
+      start: parseDate("2024-03-01"),
+      end: parseDate("2024-03-14"),
+    });
+
+    <DateRangePicker value={value} onChange={setValue}>
+      <Label>Trip dates</Label>
+      <DateField.Group>
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger>
+            <DateRangePicker.TriggerIndicator />
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DateRangePicker.Popover>
+        <RangeCalendar aria-label="Choose trip dates">
+          <RangeCalendar.Header>
+            <RangeCalendar.Heading />
+            <RangeCalendar.NavButton slot="previous" />
+            <RangeCalendar.NavButton slot="next" />
+          </RangeCalendar.Header>
+          <RangeCalendar.Grid>
+            <RangeCalendar.GridHeader>
+              {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+            </RangeCalendar.GridHeader>
+            <RangeCalendar.GridBody>
+              {(date) => <RangeCalendar.Cell date={date} />}
+            </RangeCalendar.GridBody>
+          </RangeCalendar.Grid>
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### 描述与错误信息
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateRangePicker
+      label="Trip dates"
+      description="Select your travel period"
+      errorMessage="End date must be after start date"
+      isInvalid={isInvalid}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { DateField, DateRangePicker, Label, Description, FieldError, RangeCalendar } from "@heroui/react";
+
+    <DateRangePicker isInvalid={isInvalid}>
+      <Label>Trip dates</Label>
+      <DateField.Group>
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger>
+            <DateRangePicker.TriggerIndicator />
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <Description>Select your travel period</Description>
+      <FieldError>End date must be after start date</FieldError>
+      <DateRangePicker.Popover>
+        <RangeCalendar aria-label="Choose trip dates">
+          {/* RangeCalendar compound components */}
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义选择器图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <DateRangePicker
+      label="Trip dates"
+      selectorIcon={<Icon icon="gravity-ui:calendar" />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <DateRangePicker>
+      <Label>Trip dates</Label>
+      <DateField.Group>
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger>
+            <DateRangePicker.TriggerIndicator>
+              <Icon icon="gravity-ui:calendar" />
+            </DateRangePicker.TriggerIndicator>
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DateRangePicker.Popover>
+        <RangeCalendar aria-label="Choose trip dates">
+          {/* RangeCalendar compound components */}
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+    ```
+  </Tab>
+</Tabs>
+
+### 多月份显示与年份选择器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateRangePicker
+      label="Trip dates"
+      visibleMonths={2}
+      showMonthAndYearPickers
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateRangePicker>
+      <Label>Trip dates</Label>
+      <DateField.Group>
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger>
+            <DateRangePicker.TriggerIndicator />
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DateRangePicker.Popover>
+        <RangeCalendar aria-label="Choose trip dates" visibleDuration={{months: 2}}>
+          <RangeCalendar.Header>
+            <RangeCalendar.YearPickerTrigger>
+              <RangeCalendar.YearPickerTriggerHeading />
+              <RangeCalendar.YearPickerTriggerIndicator />
+            </RangeCalendar.YearPickerTrigger>
+            <RangeCalendar.NavButton slot="previous" />
+            <RangeCalendar.NavButton slot="next" />
+          </RangeCalendar.Header>
+          <div className="flex gap-4">
+            <RangeCalendar.Grid>
+              <RangeCalendar.GridHeader>
+                {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+              </RangeCalendar.GridHeader>
+              <RangeCalendar.GridBody>
+                {(date) => <RangeCalendar.Cell date={date} />}
+              </RangeCalendar.GridBody>
+            </RangeCalendar.Grid>
+            <RangeCalendar.Grid offset={{months: 1}}>
+              <RangeCalendar.GridHeader>
+                {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+              </RangeCalendar.GridHeader>
+              <RangeCalendar.GridBody>
+                {(date) => <RangeCalendar.Cell date={date} />}
+              </RangeCalendar.GridBody>
+            </RangeCalendar.Grid>
+          </div>
+          <RangeCalendar.YearPickerGrid>
+            <RangeCalendar.YearPickerGridBody>
+              {(year) => <RangeCalendar.YearPickerCell date={year} />}
+            </RangeCalendar.YearPickerGridBody>
+          </RangeCalendar.YearPickerGrid>
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式相关变化
+
+### v2：`classNames` prop
+
+```tsx
+<DateRangePicker
+  classNames={{
+    base: "custom-base",
+    label: "custom-label",
+    selectorButton: "custom-trigger",
+    selectorIcon: "custom-icon",
+    separator: "custom-separator",
+    popoverContent: "custom-popover",
+    calendar: "custom-calendar",
+  }}
+/>
+```
+
+### v3：直接使用 `className`
+
+```tsx
+<DateRangePicker className="custom-base">
+  <Label className="custom-label">Trip dates</Label>
+  <DateField.Group>
+    <DateField.InputContainer>
+      <DateField.Input slot="start">
+        {(segment) => <DateField.Segment segment={segment} />}
+      </DateField.Input>
+      <DateRangePicker.RangeSeparator className="custom-separator" />
+      <DateField.Input slot="end">
+        {(segment) => <DateField.Segment segment={segment} />}
+      </DateField.Input>
+    </DateField.InputContainer>
+    <DateField.Suffix>
+      <DateRangePicker.Trigger className="custom-trigger">
+        <DateRangePicker.TriggerIndicator className="custom-icon" />
+      </DateRangePicker.Trigger>
+    </DateField.Suffix>
+  </DateField.Group>
+  <DateRangePicker.Popover className="custom-popover">
+    <RangeCalendar aria-label="Choose trip dates" className="custom-calendar">
+      {/* RangeCalendar compound components */}
+    </RangeCalendar>
+  </DateRangePicker.Popover>
+</DateRangePicker>
+```
+
+## 组件结构（Anatomy）
+
+v3 的 DateRangePicker 结构如下：
+
+```
+DateRangePicker (Root)
+  ├── Label
+  ├── DateField.Group
+  │   ├── DateField.InputContainer
+  │   │   ├── DateField.Input slot="start"
+  │   │   │   └── DateField.Segment（每个 segment 的渲染 prop）
+  │   │   ├── DateRangePicker.RangeSeparator
+  │   │   └── DateField.Input slot="end"
+  │   │       └── DateField.Segment（每个 segment 的渲染 prop）
+  │   └── DateField.Suffix
+  │       └── DateRangePicker.Trigger
+  │           └── DateRangePicker.TriggerIndicator
+  ├── Description (optional)
+  ├── FieldError (optional)
+  └── DateRangePicker.Popover
+      └── RangeCalendar (参见 RangeCalendar 迁移指南)
+```
+
+## 总结
+
+1. **组件结构**：由单一组件 → 组合 `DateRangePicker`、`DateField`、`RangeCalendar` 与 `Label` 等。
+2. **双输入**：内置起止输入 → 两个 `DateField.Input`，分别使用 `slot="start"` 与 `slot="end"`。
+3. **分隔符**：内置分隔 → `DateRangePicker.RangeSeparator`。
+4. **标签**：`label` prop → `Label` 组件。
+5. **描述/错误**：prop → `Description` 与 `FieldError` 组件。
+6. **日历**：内置日历 → 在 `DateRangePicker.Popover` 内组合 `RangeCalendar` 及其子组件。
+7. **选择器图标**：`selectorIcon` prop → 将 children 传给 `DateRangePicker.TriggerIndicator`。
+8. **年份选择器**：`showMonthAndYearPickers` prop → 使用 `RangeCalendar.YearPickerTrigger` 与 `RangeCalendar.YearPickerGrid`。
+9. **样式类 prop 移除**：`variant`、`color`、`size`、`radius` → 使用 Tailwind CSS，或 `DateField.Group` 的 `variant`。
+10. **`classNames` 移除**：在各复合子组件上使用 `className`。

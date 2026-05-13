@@ -1,0 +1,309 @@
+---
+title: Chip
+description: Chip 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Chip 文档](/docs/react/components/chip)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 关键变化
+
+### 1. 变体
+
+**v2：** `solid`、`bordered`、`light`、`flat`、`faded`、`shadow`、`dot`  
+**v3：** `primary`、`secondary`、`tertiary`、`soft`
+
+### 2. 颜色
+
+**v2：** `default`、`primary`、`secondary`、`success`、`warning`、`danger`  
+**v3：** `default`、`accent`、`success`、`warning`、`danger`
+
+### 3. 复合组件模式
+
+v3 引入复合组件模式，并提供 `Chip.Label` 子组件：
+
+- **`Chip.Label`**：渲染 Chip 内的标签文本。纯文本 `children` 会自动包在 `<Chip.Label>` 中，因此多数场景不必手写；需要自定义 `className` 时可显式使用。
+
+```tsx
+{/* Implicit label -- plain text is auto-wrapped in Chip.Label */}
+<Chip>Badge</Chip>
+
+{/* Explicit label -- useful when you need a custom className */}
+<Chip>
+  <Chip.Label className="uppercase tracking-wide">Badge</Chip.Label>
+</Chip>
+```
+
+### 4. 尺寸变体
+
+**v2：** `sm`、`md`、`lg`（通过 `size` prop）  
+**v3：** `sm`、`md`、`lg`（通过 `size` prop，API 相同）
+
+可用尺寸与 v2 一致，但 v3 通过 BEM 风格的 CSS class（`chip--sm`、`chip--md`、`chip--lg`）应用。默认尺寸为 `md`。
+
+```tsx
+<Chip size="sm">Small</Chip>
+<Chip size="md">Medium (default)</Chip>
+<Chip size="lg">Large</Chip>
+```
+
+### 5. 复合变体 class
+
+v3 支持组合变体与颜色 class，以实现更精细的样式。下列复合 class 在 CSS 中带有默认样式：
+
+**primary 变体组合：** `.chip--primary.chip--accent`、`.chip--primary.chip--success`、`.chip--primary.chip--warning`、`.chip--primary.chip--danger`
+
+**soft 变体组合：** `.chip--accent.chip--soft`、`.chip--success.chip--soft`、`.chip--warning.chip--soft`、`.chip--danger.chip--soft`
+
+你也可以在 CSS 中通过 `@layer components` 为其他任意组合（例如 `.chip--secondary.chip--accent`）补充样式。
+
+### 6. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| --- | --- | --- |
+| `radius` | — | 已移除（例如使用 Tailwind `rounded-full`） |
+| `avatar` | — | 使用 `children`（例如将 `<Avatar />` 作为第一个子节点） |
+| `startContent`、`endContent` | — | 直接使用 `children` |
+| `onClose` | — | 手动实现关闭（例如使用 `CloseButton`） |
+| `classNames` | — | 使用 `className` |
+| `isDisabled` | — | 使用条件渲染或 Tailwind（例如 `opacity-50`） |
+
+### 7. 变体映射
+
+| v2 变体 | v3 对应 | 说明 |
+| --- | --- | --- |
+| `solid` | `primary` | 实心背景 |
+| `bordered` | `secondary` | 边框 + 透明背景 |
+| `light` | `soft` | 浅色背景 |
+| `flat` | `tertiary` | 透明背景 |
+| `faded` | `secondary` | 观感相近 |
+| `shadow` | `primary` | 配合 Tailwind `shadow-*` class |
+| `dot` | — | 不再内置，请自行实现 |
+
+### 8. 颜色映射
+
+| v2 颜色 | v3 对应 | 说明 |
+| --- | --- | --- |
+| `default` | `default` | 相同 |
+| `primary` | `accent` | 已重命名 |
+| `secondary` | `default` 或 `accent` | 视场景选择 |
+| `success` | `success` | 相同 |
+| `warning` | `warning` | 相同 |
+| `danger` | `danger` | 相同 |
+
+## 结构变化
+
+在 v2 中，`Chip` 是一个通过大量 prop 控制样式的组件：
+
+```tsx
+import { Chip } from "@heroui/react";
+
+export default function App() {
+  return <Chip>Chip</Chip>;
+}
+```
+
+在 v3 中，`Chip` 的 API 更精简，变体更少：
+
+```tsx
+import { Chip } from "@heroui/react";
+
+export default function App() {
+  return <Chip>Chip</Chip>;
+}
+```
+
+## 迁移示例
+
+### 变体与颜色
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Variants */}
+    <Chip variant="solid">Solid</Chip>
+    <Chip variant="bordered">Bordered</Chip>
+    <Chip variant="light">Light</Chip>
+    
+    {/* Colors */}
+    <Chip color="primary">Primary</Chip>
+    <Chip color="success">Success</Chip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Variants */}
+    <Chip variant="primary">Primary</Chip>
+    <Chip variant="secondary">Secondary</Chip>
+    <Chip variant="soft">Soft</Chip>
+    
+    {/* Colors */}
+    <Chip color="accent">Accent</Chip>
+    <Chip color="success">Success</Chip>
+    ```
+  </Tab>
+</Tabs>
+
+### 带图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    {/* Start content */}
+    <Chip startContent={<Icon icon="gravity-ui:check" />}>
+      Chip
+    </Chip>
+    
+    {/* End content */}
+    <Chip endContent={<Icon icon="gravity-ui:chevron-down" />}>
+      Chip
+    </Chip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    {/* 前置图标 */}
+    <Chip>
+      <Icon icon="gravity-ui:check" />
+      Chip
+    </Chip>
+    
+    {/* 后置图标 */}
+    <Chip>
+      Chip
+      <Icon icon="gravity-ui:chevron-down" />
+    </Chip>
+    ```
+  </Tab>
+</Tabs>
+
+### 带 Avatar
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    <Chip
+      avatar={<Avatar name="JW" src="https://example.com/avatar.jpg" />}
+      variant="flat"
+    >
+      Avatar
+    </Chip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, Chip } from "@heroui/react";
+
+    <Chip variant="tertiary">
+      <Avatar size="sm">
+        <Avatar.Image src="https://example.com/avatar.jpg" alt="JW" />
+        <Avatar.Fallback>JW</Avatar.Fallback>
+      </Avatar>
+      Avatar
+    </Chip>
+    ```
+  </Tab>
+</Tabs>
+
+### 带关闭按钮
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Chip onClose={() => console.log("close")}>
+      Chip
+    </Chip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { CloseButton } from "@heroui/react";
+
+    <Chip>
+      Chip
+      <CloseButton 
+        aria-label="Close chip"
+        onPress={() => console.log("close")}
+      />
+    </Chip>
+    ```
+  </Tab>
+</Tabs>
+
+### 已移除的变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Dot variant */}
+    <Chip variant="dot">Dot</Chip>
+    
+    {/* Shadow variant */}
+    <Chip variant="shadow">Shadow</Chip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    {/* dot：自行实现 */}
+    <Chip>
+      <Icon icon="gravity-ui:circle-fill" width={6} />
+      Dot
+    </Chip>
+    
+    {/* shadow：使用 Tailwind class */}
+    <Chip variant="primary" className="shadow-md">
+      Shadow
+    </Chip>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<Chip 
+  classNames={{
+    base: "custom-base",
+    content: "custom-content",
+    dot: "custom-dot",
+    avatar: "custom-avatar",
+    closeButton: "custom-close-button"
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<Chip className="custom-base">
+  {/* Content with custom classes */}
+  <span className="custom-content">Chip</span>
+</Chip>
+```
+
+## 总结
+
+1. **变体收敛**：由 7 种变体收敛为 4 种。
+2. **颜色调整**：`primary` → `accent`，并弱化 `secondary` 的对应关系。
+3. **复合组件**：新增 `Chip.Label`；纯文本 `children` 会自动包在 `Chip.Label` 中。
+4. **尺寸变体**：仍可通过 `size` prop 使用 `sm`、`md`、`lg`，并以 BEM class（`chip--sm`、`chip--md`、`chip--lg`）落地。
+5. **复合变体 class**：变体 + 颜色组合（例如 `.chip--primary.chip--accent`、`.chip--soft.chip--success`）具备内置样式，并可在 `@layer components` 中扩展。
+6. **`radius` 已移除**：请改用 Tailwind CSS class。
+7. **`avatar` prop 已移除**：请改用 `children`。
+8. **`startContent` / `endContent` 已移除**：请改用 `children`。
+9. **关闭能力已移除**：请使用 `CloseButton` 自行组合。
+10. **`dot` 变体已移除**：请用图标等方式自行实现。
+11. **`shadow` 变体已移除**：请使用 Tailwind `shadow-*` class。
+12. **`isDisabled` prop 已移除**：请使用条件渲染或 CSS class。
+13. **`classNames` 已移除**：请直接使用 `className` prop。

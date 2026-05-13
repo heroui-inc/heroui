@@ -1,0 +1,424 @@
+---
+title: Snippet
+description: Snippet 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="warning">
+  Snippet 组件在 HeroUI v3 中已**移除**。请使用原生 HTML 元素配合 Tailwind CSS，并通过 Clipboard API 自行实现复制能力。
+</Callout>
+
+## 主要变化
+
+### 1. 组件移除
+
+**v2：** 来自 `@heroui/react` 的 `<Snippet>` 组件  
+**v3：** 原生 HTML 元素（`<pre>`、`<code>`）+ 手动实现复制逻辑
+
+### 2. 功能对照
+
+v2 的 Snippet 具备以下能力，需要在 v3 中分别替代：
+
+| v2 功能 | v3 替代 | 说明 |
+| ------- | ------- | ---- |
+| 复制按钮 | Button + Clipboard API | 使用 `navigator.clipboard.writeText()` |
+| 复制提示 | Tooltip 组件 | 使用 v3 的 Tooltip |
+| 符号前缀 | 手动渲染 | 将符号作为文本内容输出 |
+| 多行支持 | 数组映射 | 对字符串数组做 `map` |
+| 变体（`flat`、`solid`、`bordered`、`shadow`） | Tailwind 类 | 使用背景 / 边框等工具类 |
+| 颜色（`default`、`primary` 等） | Tailwind 类 | 使用颜色相关工具类 |
+| 尺寸（`sm`、`md`、`lg`） | Tailwind 字号 | 使用 `text-sm`、`text-base`、`text-lg` |
+| 圆角 | Tailwind 圆角 | 使用 `rounded-*` 类 |
+
+## 结构变化
+
+在 v2 中，`Snippet` 是带内置复制能力的包装组件：
+
+```tsx
+import { Snippet } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Snippet symbol="$">
+      npm install @heroui/react
+    </Snippet>
+  );
+}
+```
+
+在 v3 中，请使用原生 HTML 元素并手动实现复制：
+
+```tsx
+import { Button, Tooltip } from "@heroui/react";
+import { useState } from "react";
+
+export default function App() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText("npm install @heroui/react");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="flex items-center gap-2 rounded-lg bg-default-100 px-3 py-1.5">
+      <pre className="text-sm font-mono">
+        <span className="text-default-500">$ </span>
+        npm install @heroui/react
+      </pre>
+      <Tooltip>
+        <Button
+          isIconOnly
+          aria-label="Copy"
+          size="sm"
+          variant="ghost"
+          onPress={handleCopy}
+        >
+          {copied ? "✓" : "📋"}
+        </Button>
+        <Tooltip.Content>{copied ? "Copied!" : "Copy to clipboard"}</Tooltip.Content>
+      </Tooltip>
+    </div>
+  );
+}
+```
+
+## 迁移示例
+
+### 多行 Snippet
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Snippet symbol="$">
+      {[
+        "npm install @heroui/react",
+        "yarn add @heroui/react",
+        "pnpm add @heroui/react"
+      ]}
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, Tooltip } from "@heroui/react";
+    import { useState } from "react";
+
+    function MultiLineSnippet() {
+      const [copied, setCopied] = useState(false);
+      const lines = [
+        "npm install @heroui/react",
+        "yarn add @heroui/react",
+        "pnpm add @heroui/react"
+      ];
+      const codeString = lines.join("\n");
+
+      const handleCopy = async () => {
+        await navigator.clipboard.writeText(codeString);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      };
+
+      return (
+        <div className="flex items-start gap-2 rounded-lg bg-default-100 p-3">
+          <div className="flex-1 space-y-1">
+            {lines.map((line, index) => (
+              <pre key={index} className="text-sm font-mono">
+                <span className="text-default-500">$ </span>
+                {line}
+              </pre>
+            ))}
+          </div>
+          <Tooltip>
+            <Button
+              isIconOnly
+              aria-label="Copy"
+              size="sm"
+              variant="ghost"
+              onPress={handleCopy}
+            >
+              {copied ? "✓" : "📋"}
+            </Button>
+            <Tooltip.Content>{copied ? "Copied!" : "Copy to clipboard"}</Tooltip.Content>
+          </Tooltip>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### 样式选项
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With variants */}
+    <Snippet variant="bordered" color="primary">
+      npm install @heroui/react
+    </Snippet>
+    
+    {/* Without symbol */}
+    <Snippet hideSymbol>
+      npm install @heroui/react
+    </Snippet>
+    
+    {/* Without copy button */}
+    <Snippet hideCopyButton>
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* With variants */}
+    <div className="flex items-center gap-2 rounded-lg border border-accent bg-transparent px-3 py-1.5">
+      <pre className="text-sm font-mono text-accent">
+        <span className="text-accent/60">$ </span>
+        npm install @heroui/react
+      </pre>
+      {/* Copy button */}
+    </div>
+    
+    {/* Without symbol */}
+    <div className="flex items-center gap-2 rounded-lg bg-default-100 px-3 py-1.5">
+      <pre className="text-sm font-mono">
+        npm install @heroui/react
+      </pre>
+      {/* Copy button */}
+    </div>
+    
+    {/* Without copy button */}
+    <div className="rounded-lg bg-default-100 px-3 py-1.5">
+      <pre className="text-sm font-mono">
+        <span className="text-default-500">$ </span>
+        npm install @heroui/react
+      </pre>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## 创建可复用的 Snippet 组件（推荐）
+
+Snippet 类需求很常见，下面是一个完整的可复用组件示例：
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Snippet } from "@heroui/react";
+
+    <Snippet
+      symbol="$"
+      variant="bordered"
+      color="primary"
+      size="md"
+    >
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, Tooltip } from "@heroui/react";
+    import { useState, ReactNode } from "react";
+    import { cn } from "@/lib/utils"; // or your cn utility
+
+    interface SnippetProps {
+      children: string | string[];
+      symbol?: string | ReactNode;
+      variant?: "flat" | "solid" | "bordered" | "shadow";
+      color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+      size?: "sm" | "md" | "lg";
+      radius?: "none" | "sm" | "md" | "lg" | "full";
+      hideSymbol?: boolean;
+      hideCopyButton?: boolean;
+      disableCopy?: boolean;
+      disableTooltip?: boolean;
+      className?: string;
+      codeString?: string;
+      onCopy?: (value: string) => void;
+    }
+
+    const variantClasses = {
+      flat: "bg-default-100",
+      solid: "bg-default-200",
+      bordered: "border border-default-200 bg-transparent",
+      shadow: "bg-default-100 shadow-sm",
+    };
+
+    const colorClasses = {
+      default: "text-default-foreground",
+      primary: "text-accent",
+      secondary: "text-default-600",
+      success: "text-success",
+      warning: "text-warning",
+      danger: "text-danger",
+    };
+
+    const sizeClasses = {
+      sm: "px-1.5 py-0.5 text-xs",
+      md: "px-3 py-1.5 text-sm",
+      lg: "px-4 py-2 text-base",
+    };
+
+    const radiusClasses = {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      full: "rounded-full",
+    };
+
+    export function Snippet({
+      children,
+      symbol = "$",
+      variant = "flat",
+      color = "default",
+      size = "md",
+      radius = "md",
+      hideSymbol = false,
+      hideCopyButton = false,
+      disableCopy = false,
+      disableTooltip = false,
+      className,
+      codeString,
+      onCopy,
+    }: SnippetProps) {
+      const [copied, setCopied] = useState(false);
+      const isMultiLine = Array.isArray(children);
+      const lines = isMultiLine ? children : [children];
+      const textToCopy = codeString || (isMultiLine ? lines.join("\n") : String(children));
+
+      const handleCopy = async () => {
+        if (disableCopy) return;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+          onCopy?.(textToCopy);
+        } catch (error) {
+          console.error("Failed to copy:", error);
+        }
+      };
+
+      const symbolElement = hideSymbol ? null : (
+        <span className={cn("text-default-500", colorClasses[color], "opacity-60")}>
+          {symbol}{typeof symbol === "string" ? " " : ""}
+        </span>
+      );
+
+      const copyButton = hideCopyButton ? null : (
+        <Tooltip isDisabled={disableTooltip || disableCopy}>
+          <Button
+            isIconOnly
+            aria-label="Copy"
+            size="sm"
+            variant="ghost"
+            onPress={handleCopy}
+            isDisabled={disableCopy}
+            className="shrink-0"
+          >
+            {copied ? (
+              <span className="text-success">✓</span>
+            ) : (
+              <span>📋</span>
+            )}
+          </Button>
+          <Tooltip.Content>{copied ? "Copied!" : "Copy to clipboard"}</Tooltip.Content>
+        </Tooltip>
+      );
+
+      return (
+        <div
+          className={cn(
+            "flex items-start gap-2 font-mono",
+            variantClasses[variant],
+            sizeClasses[size],
+            radiusClasses[radius],
+            className
+          )}
+        >
+          <div className="flex-1 min-w-0">
+            {isMultiLine ? (
+              <div className="space-y-1">
+                {lines.map((line, index) => (
+                  <pre key={index} className={cn("m-0", colorClasses[color])}>
+                    {symbolElement}
+                    {line}
+                  </pre>
+                ))}
+              </div>
+            ) : (
+              <pre className={cn("m-0", colorClasses[color])}>
+                {symbolElement}
+                {children}
+              </pre>
+            )}
+          </div>
+          {copyButton}
+        </div>
+      );
+    }
+
+    // Usage
+    <Snippet
+      symbol="$"
+      variant="bordered"
+      color="primary"
+      size="md"
+    >
+      npm install @heroui/react
+    </Snippet>
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+1. **组件已移除**：v3 不再提供 `Snippet` 组件。
+2. **导入调整**：移除 `import { Snippet } from "@heroui/react"`。
+3. **使用原生元素**：改用原生 `<pre>`、`<code>` 等元素。
+4. **手动复制**：使用 Clipboard API 实现复制。
+5. **样式**：直接用 Tailwind CSS 类表达变体、颜色、尺寸。
+6. **Tooltip**：复制按钮的提示请使用 v3 Tooltip。
+7. **Button**：复制按钮请使用 v3 Button。
+
+## 迁移步骤
+
+1. **移除导入**：从 `@heroui/react` 的导入中删除 `Snippet`。
+2. **替换组件**：将所有 `<Snippet>` 替换为原生 HTML 结构。
+3. **实现复制**：使用 `navigator.clipboard.writeText()` 等方法。
+4. **添加复制按钮**：使用 v3 的 Button 与 Tooltip。
+5. **应用样式**：用 Tailwind CSS 表达变体、颜色、尺寸。
+6. **处理多行**：多行场景对数组做映射渲染。
+7. **（可选）** 在应用中封装可复用的 Snippet 组件。
+
+## Clipboard API 说明
+
+Clipboard API 需要：
+
+- HTTPS（本地开发可使用 localhost）
+- 用户手势触发（不能自动调用）
+- 现代浏览器支持
+
+如需兼容旧浏览器，可采用回退方案：
+
+```tsx
+const handleCopy = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (error) {
+    // 旧版浏览器回退
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+  }
+};
+```

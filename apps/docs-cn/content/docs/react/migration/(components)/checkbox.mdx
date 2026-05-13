@@ -1,0 +1,404 @@
+---
+title: Checkbox
+description: Checkbox 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Checkbox 文档](/docs/react/components/checkbox)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Checkbox` 将 `children` 作为标签文本：
+
+```tsx
+import { Checkbox } from "@heroui/react";
+
+export default function App() {
+  return <Checkbox defaultSelected>Option</Checkbox>;
+}
+```
+
+在 v3 中，Checkbox 采用复合组件模式，并使用显式子组件：
+
+```tsx
+import { Checkbox, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Checkbox defaultSelected id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+      </Checkbox.Content>
+    </Checkbox>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 简单组件，`children` 即标签  
+**v3：** 复合组件：`Checkbox.Control`、`Checkbox.Indicator`、`Checkbox.Content`
+
+### 2. 标签处理
+
+**v2：** 标签直接作为 `children` 传入 `Checkbox`  
+**v3：** 标签须放在 `Checkbox.Content` 内，并使用 `Label` 组件
+
+### 3. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `onValueChange` | `Checkbox` | 请使用 `onChange` |
+| `color` | — | 已移除（请在 `Checkbox.Control` 上使用 Tailwind） |
+| `size` | — | 已移除（请使用 Tailwind，例如 `size-4`、`size-5`） |
+| `radius` | — | 已移除（请使用 Tailwind，例如 `rounded-sm`） |
+| `lineThrough` | — | 已移除（请在标签上使用 Tailwind `line-through`） |
+| `icon` | — | 请在 `Checkbox.Indicator` 内使用自定义内容 |
+| `classNames` | — | 请在各部分上使用 `className` |
+| `disableAnimation` | — | 已移除 |
+| — | `variant` | 新增 prop：`"primary"`（默认）或 `"secondary"`，用于较低强调度的样式 |
+
+### 4. CheckboxGroup 变化
+
+**v2：** `CheckboxGroup`（独立组件）使用 `label` prop，子节点为简单的 `Checkbox`  
+**v3：** `CheckboxGroup`（独立组件）将 `Label` / `Description` 作为子节点，且每个 `Checkbox` 使用复合结构
+
+迁移 CheckboxGroup 时请参阅 [CheckboxGroup 迁移指南](/docs/react/migration/checkbox-group)。
+
+## 迁移示例
+
+### 受控 Checkbox
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isSelected, setIsSelected] = useState(false);
+
+    <Checkbox isSelected={isSelected} onValueChange={setIsSelected}>
+      Subscribe
+    </Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Label } from "@heroui/react";
+
+    const [isSelected, setIsSelected] = useState(false);
+
+    <Checkbox id="subscribe" isSelected={isSelected} onChange={setIsSelected}>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="subscribe">Subscribe</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### 含描述的 Checkbox
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 无内置描述 */}
+    <Checkbox defaultSelected>
+      Option
+    </Checkbox>
+    <p className="text-sm text-default-500">Description text</p>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Checkbox, Label, Description } from "@heroui/react";
+
+    <Checkbox id="option" defaultSelected>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+        <Description>Description text</Description>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### CheckboxGroup
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Checkbox, CheckboxGroup } from "@heroui/react";
+
+    <CheckboxGroup label="Select cities">
+      <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
+      <Checkbox value="sydney">Sydney</Checkbox>
+      <Checkbox value="san-francisco">San Francisco</Checkbox>
+    </CheckboxGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { CheckboxGroup, Checkbox, Label, Description } from "@heroui/react";
+
+    <CheckboxGroup name="cities">
+      <Label>Select cities</Label>
+      <Description>Choose all that apply</Description>
+      <Checkbox value="buenos-aires">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Buenos Aires</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="sydney">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>Sydney</Label>
+        </Checkbox.Content>
+      </Checkbox>
+      <Checkbox value="san-francisco">
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Checkbox.Content>
+          <Label>San Francisco</Label>
+        </Checkbox.Content>
+      </Checkbox>
+    </CheckboxGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### 颜色与尺寸
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Colors */}
+    <Checkbox defaultSelected color="primary">Primary</Checkbox>
+    
+    {/* Sizes */}
+    <Checkbox defaultSelected size="md">Medium</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Colors - use Tailwind classes */}
+    <Checkbox defaultSelected id="primary">
+      <Checkbox.Control className="data-[selected=true]:bg-primary data-[selected=true]:border-primary">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="primary">Primary</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    
+    {/* Sizes - use Tailwind classes */}
+    <Checkbox defaultSelected id="medium">
+      <Checkbox.Control className="size-5">
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="medium">Medium</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义图标 / 指示器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox defaultSelected icon={<HeartIcon />}>
+      Option
+    </Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox defaultSelected id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator>
+          {({isSelected}) => isSelected ? <HeartIcon /> : null}
+        </Checkbox.Indicator>
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+### 变体
+
+v3 引入 `variant` prop，可选 `"primary"`（默认）与 `"secondary"`：
+
+```tsx
+{/* Primary variant (default) */}
+<Checkbox variant="primary" id="primary-option">
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label htmlFor="primary-option">Primary</Label>
+  </Checkbox.Content>
+</Checkbox>
+
+{/* Secondary variant - lower emphasis, suitable for Surface components */}
+<Checkbox variant="secondary" id="secondary-option">
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label htmlFor="secondary-option">Secondary</Label>
+  </Checkbox.Content>
+</Checkbox>
+```
+
+### 半选（indeterminate）状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Checkbox isIndeterminate>Option</Checkbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Checkbox isIndeterminate id="option">
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="option">Option</Label>
+      </Checkbox.Content>
+    </Checkbox>
+    ```
+  </Tab>
+</Tabs>
+
+## 渲染 prop 模式
+
+v3 Checkbox 支持渲染 prop，用于暴露状态信息：
+
+```tsx
+<Checkbox id="terms">
+  {({isSelected, isIndeterminate, isHovered, isPressed, isFocused, isDisabled}) => (
+    <>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Content>
+        <Label htmlFor="terms">
+          {isSelected ? "Terms accepted" : "Accept terms"}
+        </Label>
+      </Checkbox.Content>
+    </>
+  )}
+</Checkbox>
+```
+
+`Checkbox.Indicator` 也支持渲染 prop，并提供相同的状态字段。便于根据 Checkbox 状态渲染自定义指示器：
+
+```tsx
+<Checkbox id="custom">
+  <Checkbox.Control>
+    <Checkbox.Indicator>
+      {({isSelected, isIndeterminate}) =>
+        isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null
+      }
+    </Checkbox.Indicator>
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label htmlFor="custom">Custom indicator</Label>
+  </Checkbox.Content>
+</Checkbox>
+```
+
+可用的渲染 prop 字段：
+
+- `isSelected`：是否选中
+- `isIndeterminate`：是否为半选状态
+- `isHovered`：是否悬停
+- `isPressed`：是否处于按下中
+- `isFocused`：是否聚焦
+- `isFocusVisible`：是否应显示焦点环
+- `isDisabled`：是否禁用
+- `isReadOnly`：是否只读
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<Checkbox 
+  classNames={{
+    base: "custom-base",
+    wrapper: "custom-wrapper",
+    icon: "custom-icon",
+    label: "custom-label"
+  }}
+/>
+```
+
+### v3：直接使用 `className`
+
+```tsx
+<Checkbox className="custom-base" id="option">
+  <Checkbox.Control className="custom-control">
+    <Checkbox.Indicator className="custom-indicator" />
+  </Checkbox.Control>
+  <Checkbox.Content className="custom-content">
+    <Label htmlFor="option" className="custom-label">
+      Option
+    </Label>
+  </Checkbox.Content>
+</Checkbox>
+```
+
+## 组件剖析
+
+v3 Checkbox 的结构如下：
+
+```
+Checkbox (Root)
+  ├── Checkbox.Control
+  │   └── Checkbox.Indicator
+  └── Checkbox.Content (optional)
+      ├── Label (required if using Content)
+      └── Description (optional)
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Control`、`Indicator`、`Content`）。
+2. **标签处理**：标签须使用 `Label`，并放在 `Checkbox.Content` 内。
+3. **`onValueChange` → `onChange`**：事件处理函数 prop 已重命名。
+4. **颜色已移除**：请在 `Checkbox.Control` 上使用 Tailwind CSS 类。
+5. **尺寸已移除**：请在 `Checkbox.Control` 上使用 Tailwind CSS 类。
+6. **圆角已移除**：请在 `Checkbox.Control` 上使用 Tailwind CSS 类。
+7. **`lineThrough` 已移除**：请在标签上使用 Tailwind `line-through` 类。
+8. **`icon` prop 已移除**：请在 `Checkbox.Indicator` 内使用自定义内容。
+9. **CheckboxGroup**：组件名不变；子节点使用 `Label` / `Description`，且 `Checkbox` 使用复合结构。
+10. **`classNames` 已移除**：请在各子组件上使用 `className`。
+11. **新增 `variant` prop**：支持 `"primary"`（默认）与 `"secondary"`，用于较低强调度样式。
+12. **指示器渲染 prop**：`Checkbox.Indicator` 可传入渲染函数，参数包含 `isSelected`、`isIndeterminate` 等状态。

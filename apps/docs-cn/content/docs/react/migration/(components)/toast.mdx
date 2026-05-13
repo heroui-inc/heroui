@@ -1,0 +1,220 @@
+---
+title: Toast
+description: Toast 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Toast 文档](/docs/react/components/toast)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Toast 采用 Provider + Hook 模式：
+
+```tsx
+import { ToastProvider, useToast } from "@heroui/react";
+
+function App() {
+  return (
+    <ToastProvider>
+      <MyComponent />
+    </ToastProvider>
+  );
+}
+
+function MyComponent() {
+  const { toast } = useToast();
+
+  return (
+    <button onClick={() => toast.show("Hello!")}>
+      Show Toast
+    </button>
+  );
+}
+```
+
+在 v3 中，Toast 改为 Provider 组件 + 全局 `toast()` 函数：
+
+```tsx
+import { Toast } from "@heroui/react";
+
+function App() {
+  return (
+    <>
+      <Toast.Provider />
+      <MyComponent />
+    </>
+  );
+}
+
+function MyComponent() {
+  return (
+    <button onClick={() => toast("Hello!")}>
+      Show Toast
+    </button>
+  );
+}
+```
+
+## 主要变化
+
+### 1. Provider 模式
+
+**v2：** 必须使用 `ToastProvider` 包裹  
+**v3：** 改用 `Toast.Provider` 组件（可放置在任意位置）
+
+### 2. Hook → 函数
+
+**v2：** 使用 `useToast()` Hook  
+**v3：** 直接调用 `toast()` 函数
+
+### 3. API 变更
+
+**v2：** 使用 `toast.show()` 方法  
+**v3：** `toast()` 是带有辅助方法的函数（`toast.success()`、`toast.danger()` 等）
+
+### 4. 变体名称
+
+**v2：** 变体如 `success`、`error`、`warning`、`info`  
+**v3：** 变体：`default`、`accent`、`success`、`warning`、`danger`
+
+### 5. 复合组件结构
+
+**v3：** Toast 通过复合组件支持自定义渲染：
+- `Toast` —— Toast 主容器
+- `Toast.Content` —— 内容包装器
+- `Toast.Title` —— 标题文字
+- `Toast.Description` —— 描述文字
+- `Toast.Indicator` —— 图标 / 指示器
+- `Toast.CloseButton` —— 关闭按钮
+- `Toast.ActionButton` —— 操作按钮
+
+### 6. Promise 支持
+
+**v3：** 内置 `toast.promise()` 方法，可处理异步操作
+
+## 迁移示例
+
+### 带标题与描述的 Toast
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({
+      title: "Success",
+      description: "Your changes have been saved",
+      variant: "success"
+    });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    toast.success("Success", {
+      description: "Your changes have been saved"
+    });
+    ```
+  </Tab>
+</Tabs>
+
+### 各变体的辅助方法
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({ variant: "success", title: "Success" });
+    toast.show({ variant: "error", title: "Error" });
+    toast.show({ variant: "warning", title: "Warning" });
+    toast.show({ variant: "info", title: "Info" });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    toast.success("Success");
+    toast.danger("Error");
+    toast.warning("Warning");
+    toast.info("Info");
+    ```
+  </Tab>
+</Tabs>
+
+### Promise 支持
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    const handleAsync = async () => {
+      try {
+        await someAsyncOperation();
+        toast.show({ title: "Success", variant: "success" });
+      } catch {
+        toast.show({ title: "Error", variant: "error" });
+      }
+    };
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { toast } from "@heroui/react";
+
+    const handleAsync = async () => {
+      toast.promise(someAsyncOperation(), {
+        loading: "Processing...",
+        success: "Operation completed!",
+        error: "Operation failed"
+      });
+    };
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义 Toast 渲染
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const { toast } = useToast();
+
+    toast.show({
+      title: "Custom",
+      render: (toast) => (
+        <div>Custom content</div>
+      )
+    });
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Toast, ToastContent, ToastTitle } from "@heroui/react";
+
+    <Toast.Provider>
+      {({ toast: toastItem }) => (
+        <Toast toast={toastItem}>
+          <ToastContent>
+            <ToastTitle>Custom content</ToastTitle>
+          </ToastContent>
+        </Toast>
+      )}
+    </Toast.Provider>
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+- 用 `Toast.Provider` 取代 `ToastProvider`
+- 用 `toast()` 函数取代 `useToast()` Hook
+- 更新变体名称（`error` → `danger`、`info` → `accent`）
+- 使用辅助方法：`toast.success()`、`toast.danger()` 等
+- 用 `toast.promise()` 处理异步操作
+- 通过复合组件结构实现自定义渲染
+- 更好的 TypeScript 支持与队列管理

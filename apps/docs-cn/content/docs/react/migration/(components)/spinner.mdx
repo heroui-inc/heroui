@@ -1,0 +1,184 @@
+---
+title: Spinner
+description: Spinner 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Spinner 文档](/docs/react/components/spinner)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Spinner 支持多种变体与标签：
+
+```tsx
+import { Spinner } from "@heroui/react";
+
+export default function App() {
+  return <Spinner variant="default" label="Loading..." color="primary" />;
+}
+```
+
+在 v3 中，Spinner 已简化为单一圆形变体：
+
+```tsx
+import { Spinner } from "@heroui/react";
+
+export default function App() {
+  return <Spinner color="accent" />;
+}
+```
+
+## 主要变化
+
+### 1. 组件行为
+
+**v2：** 支持多种变体（`default`、`simple`、`gradient`、`wave`、`dots`、`spinner`）以及标签  
+**v3：** 仅保留单一圆形旋转变体，不再支持标签
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `label` | — | 如有需要，请使用单独的元素手动添加标签 |
+| `variant` | — | 仅提供一种 spinner 变体 |
+| `labelColor` | — | 不再支持标签 |
+| `classNames` | — | 直接使用 `className` prop |
+| `size` | `size` | 取值变化：`"sm" \| "md" \| "lg"` → `"sm" \| "md" \| "lg" \| "xl"` |
+| `color` | `color` | 取值有变化（详见下文） |
+
+### 3. 颜色值变化
+
+- `"default"` → `"current"`（继承当前文本颜色）
+- `"primary"` → `"accent"`
+- `"secondary"` → 已移除（请改用 `"current"` 或 `"accent"`）
+- `"success"`、`"warning"`、`"danger"` → 仍可使用
+
+## 迁移示例
+
+### 带标签
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Simple label */}
+    <Spinner label="Loading..." />
+    
+    {/* With label color and custom styling */}
+    <Spinner
+      label="Loading..."
+      labelColor="primary"
+      classNames={{
+        label: "text-foreground mt-4"
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Simple label */}
+    <div className="flex flex-col items-center gap-2">
+      <Spinner />
+      <span>Loading...</span>
+    </div>
+    
+    {/* With custom styling */}
+    <div className="flex flex-col items-center gap-2">
+      <Spinner />
+      <span className="text-foreground mt-4">Loading...</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 尺寸与颜色
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Sizes */}
+    <div className="flex gap-4">
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
+    </div>
+    
+    {/* Colors */}
+    <div className="flex gap-4">
+      <Spinner color="default" />
+      <Spinner color="primary" />
+      <Spinner color="secondary" />
+      <Spinner color="success" />
+      <Spinner color="warning" />
+      <Spinner color="danger" />
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Sizes */}
+    <div className="flex gap-4">
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
+      <Spinner size="xl" />
+    </div>
+    
+    {/* Colors */}
+    <div className="flex gap-4">
+      <Spinner color="current" />
+      <Spinner color="accent" />
+      <Spinner color="success" />
+      <Spinner color="warning" />
+      <Spinner color="danger" />
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 变体（已移除）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div className="flex gap-4">
+      <Spinner variant="default" />
+      <Spinner variant="simple" />
+      <Spinner variant="gradient" />
+      <Spinner variant="wave" />
+      <Spinner variant="dots" />
+      <Spinner variant="spinner" />
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Only one variant available - circular spinner */}
+    <Spinner />
+    
+    {/* For other spinner styles, consider using CSS animations */}
+    ```
+  </Tab>
+</Tabs>
+
+## 颜色映射
+
+迁移颜色时，可参考以下映射：
+
+| v2 颜色 | v3 颜色 | 说明 |
+| ------- | ------- | ---- |
+| `"default"` | `"current"` | 继承当前文本颜色 |
+| `"primary"` | `"accent"` | 使用强调色 |
+| `"secondary"` | `"current"` 或 `"accent"` | 改用当前色或强调色 |
+| `"success"` | `"success"` | 不变 |
+| `"warning"` | `"warning"` | 不变 |
+| `"danger"` | `"danger"` | 不变 |
+
+## 总结
+
+1. **不再支持标签**：移除 `label` prop——如有需要请手动添加标签
+2. **不再有变体**：移除 `variant` prop——仅保留单一圆形 spinner
+3. **不再有标签颜色**：移除 `labelColor` prop——请自行为标签设置样式
+4. **颜色值变化**：`"default"` → `"current"`、`"primary"` → `"accent"`、`"secondary"` 已移除
+5. **新增尺寸**：新增 `"xl"` 尺寸可选
+6. **移除 classNames**：直接使用 `className` prop

@@ -1,0 +1,99 @@
+---
+title: Divider
+description: Divider（已重命名为 Separator）从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Separator 文档](/docs/react/components/separator)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 组件重命名
+
+**v2：** `Divider`  
+**v3：** `Separator`
+
+## 主要变化
+
+### 1. 组件名称
+
+**v2：** `Divider`  
+**v3：** `Separator`
+
+### 2. 变体 prop
+
+**v3：** Separator 新增 `variant` prop，可选 `default`、`secondary`、`tertiary`，对应不同的强调层级（v2 的 Divider 没有变体）。
+
+### 3. Prop 对比
+
+| 属性 | v2 | v3 | 说明 |
+| ---- | -- | -- | ---- |
+| `orientation` | ✅ | ✅ | 相同：`"horizontal"` \| `"vertical"` |
+| `className` | ✅ | ✅ | 相同 |
+| `variant` | ❌ | ✅ | 新增：`"default"` \| `"secondary"` \| `"tertiary"` |
+
+## 结构变化
+
+在 v2 中，组件名为 `Divider`：
+
+```tsx
+import { Divider } from "@heroui/react";
+
+export default function App() {
+  return (
+    <div>
+      <p>Content above</p>
+      <Divider />
+      <p>Content below</p>
+    </div>
+  );
+}
+```
+
+在 v3 中，组件已重命名为 `Separator`：
+
+```tsx
+import { Separator } from "@heroui/react";
+
+export default function App() {
+  return (
+    <div>
+      <p>Content above</p>
+      <Separator />
+      <p>Content below</p>
+    </div>
+  );
+}
+```
+
+## 迁移示例
+
+### 使用变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 没有 variant prop */}
+    <Divider />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Separator />
+    <Separator variant="secondary" />
+    <Separator variant="tertiary" />
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+1. **组件已重命名**：`Divider` → `Separator`
+2. **导入变化**：将导入从 `Divider` 更新为 `Separator`
+3. **v3 新增功能**：`variant` prop（`default`、`secondary`、`tertiary`），用于区分强调层级
+
+## 迁移步骤
+
+1. **更新导入**：将 `import { Divider }` 改为 `import { Separator }`
+2. **替换组件**：把所有 `<Divider />` 替换为 `<Separator />`
+3. **保留相同的 prop**：`orientation` 与 `className` 行为不变
+4. **可选**：使用 `variant="secondary"` 或 `variant="tertiary"` 表达不同的强调层级

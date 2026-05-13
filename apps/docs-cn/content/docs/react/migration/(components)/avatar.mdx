@@ -1,0 +1,357 @@
+---
+title: Avatar
+description: Avatar 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Avatar 文档](/docs/react/components/avatar)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Avatar` 是单个组件，通过 props 传入图片地址、姓名、后备内容等：
+
+```tsx
+import { Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Avatar 
+      src="https://example.com/avatar.jpg"
+      name="John Doe"
+      showFallback
+    />
+  );
+}
+```
+
+在 v3 中，`Avatar` 采用显式子组件的复合组件模式：
+
+```tsx
+import { Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Avatar>
+      <Avatar.Image src="https://example.com/avatar.jpg" alt="John Doe" />
+      <Avatar.Fallback>JD</Avatar.Fallback>
+    </Avatar>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单个带 props 的 `Avatar`  
+**v3：** 复合组件：`Avatar`、`Avatar.Image`、`Avatar.Fallback`
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `src` | `Avatar.Image` | 使用 `<Avatar.Image src="..." />` |
+| `name` | — | 请自行生成首字母缩写并传入 `<Avatar.Fallback />` |
+| `showFallback` | — | 已移除（图片加载失败或未提供时显示后备） |
+| `fallback`, `icon` | `Avatar.Fallback` | 将内容放在 `<Avatar.Fallback />` 内 |
+| `color` | `Avatar` | 相同；`primary` → `accent`，`secondary` → `default` |
+| `variant` | `Avatar` | v3 新增；`"default"` \| `"soft"` |
+| `size` | `Avatar` | 相同 |
+| `isBordered` | — | 已移除（请使用 Tailwind，例如 `ring-2 ring-background`） |
+| `radius` | — | 已移除（请使用 Tailwind，例如 `rounded-full`） |
+| `isDisabled`, `isFocusable` | — | 已移除（如需请用 Tailwind / `asChild`） |
+| `getInitials` | — | 请手动生成首字母缩写 |
+| `ImgComponent`, `imgProps` | — | 如需请在 `Avatar.Image` 上使用 `asChild` |
+| `onError` | `Avatar.Image` | 在 `<Avatar.Image />` 上使用 `onError` |
+| — | `Avatar.Image` | 新增：`srcSet`、`sizes`、`loading`（响应式图片） |
+| — | `Avatar.Fallback` | 新增：`delayMs` 延迟显示后备（减少闪烁） |
+| `classNames` | — | 请在各部分使用 `className` |
+| `AvatarGroup` | — | 无 v3 等价组件；请用 CSS 自行成组 |
+
+### 3. `variant` prop（v3 新增）
+
+**v2：** 无 `variant` prop，仅通过 `color` 控制样式  
+**v3：** 新增 `variant` prop，可选 `"default"` 与 `"soft"`。`"soft"` 使用更浅的背景样式。
+
+```tsx
+<Avatar variant="soft" color="accent">
+  <Avatar.Image src="..." alt="User" />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### 4. `Avatar.Image` 响应式属性（v3 新增）
+
+**v2：** 仅支持 `src` 与 `onError`  
+**v3：** `Avatar.Image` 现支持 `srcSet`、`sizes`、`loading`，用于响应式图片
+
+```tsx
+<Avatar>
+  <Avatar.Image
+    src="avatar-400.jpg"
+    srcSet="avatar-200.jpg 200w, avatar-400.jpg 400w"
+    sizes="(max-width: 600px) 200px, 400px"
+    loading="lazy"
+    alt="User"
+  />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### 5. `Avatar.Fallback` 的 `delayMs` prop（v3 新增）
+
+**v2：** 立即显示后备，或由 `showFallback` 控制  
+**v3：** `Avatar.Fallback` 支持 `delayMs`，可延后渲染，避免图片很快加载完成时出现后备闪烁
+
+```tsx
+<Avatar>
+  <Avatar.Image src="..." alt="User" />
+  <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### 6. 图片与后备内容
+
+**v2：** 使用 `src`、`name`、`showFallback`、`fallback` 等 props  
+**v3：** 需显式渲染 `<Avatar.Image />` 与 `<Avatar.Fallback />`
+
+### 7. `color` 映射
+
+| v2 color | v3 color | 说明 |
+| -------- | -------- | ---- |
+| `default` | `default` | 相同 |
+| `primary` | `accent` | 已重命名 |
+| `secondary` | `default` | 使用 `default` |
+| `success` | `success` | 相同 |
+| `warning` | `warning` | 相同 |
+| `danger` | `danger` | 相同 |
+
+### 8. `AvatarGroup` 已移除
+
+**v2：** 提供独立的 `AvatarGroup` 组件  
+**v3：** 无 `AvatarGroup` — 请用 CSS 类手动成组
+
+## 迁移示例
+
+### 尺寸与颜色
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Avatar size="md" color="primary" src="..." name="John" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Avatar size="md" color="accent">
+      <Avatar.Image src="..." alt="John" />
+      <Avatar.Fallback>J</Avatar.Fallback>
+    </Avatar>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义后备
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Avatar 
+      src="https://broken-url.com/image.jpg"
+      showFallback
+      fallback={<Icon icon="mdi:account" />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Avatar>
+      <Avatar.Image 
+        src="https://broken-url.com/image.jpg" 
+        alt="User"
+      />
+      <Avatar.Fallback>
+        <Icon icon="mdi:account" />
+      </Avatar.Fallback>
+    </Avatar>
+    ```
+  </Tab>
+</Tabs>
+
+### Avatar 组
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup isBordered>
+      <Avatar src="https://example.com/1.jpg" />
+      <Avatar src="https://example.com/2.jpg" />
+      <Avatar src="https://example.com/3.jpg" />
+    </AvatarGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    <div className="flex -space-x-2">
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Image src="https://example.com/1.jpg" alt="User 1" />
+        <Avatar.Fallback>U1</Avatar.Fallback>
+      </Avatar>
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Image src="https://example.com/2.jpg" alt="User 2" />
+        <Avatar.Fallback>U2</Avatar.Fallback>
+      </Avatar>
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Image src="https://example.com/3.jpg" alt="User 3" />
+        <Avatar.Fallback>U3</Avatar.Fallback>
+      </Avatar>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 带头像数量上限的组
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Avatar, AvatarGroup } from "@heroui/react";
+
+    <AvatarGroup max={3}>
+      <Avatar src="https://example.com/1.jpg" />
+      <Avatar src="https://example.com/2.jpg" />
+      <Avatar src="https://example.com/3.jpg" />
+      <Avatar src="https://example.com/4.jpg" />
+      <Avatar src="https://example.com/5.jpg" />
+    </AvatarGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    const users = [
+      { id: 1, src: "https://example.com/1.jpg", name: "User 1" },
+      { id: 2, src: "https://example.com/2.jpg", name: "User 2" },
+      { id: 3, src: "https://example.com/3.jpg", name: "User 3" },
+      { id: 4, src: "https://example.com/4.jpg", name: "User 4" },
+      { id: 5, src: "https://example.com/5.jpg", name: "User 5" },
+    ];
+
+    <div className="flex -space-x-2">
+      {users.slice(0, 3).map((user) => (
+        <Avatar key={user.id} className="ring-2 ring-background">
+          <Avatar.Image src={user.src} alt={user.name} />
+          <Avatar.Fallback>
+            {user.name.split(" ").map(n => n[0]).join("")}
+          </Avatar.Fallback>
+        </Avatar>
+      ))}
+      <Avatar className="ring-2 ring-background">
+        <Avatar.Fallback className="border-none">
+          +{users.length - 3}
+        </Avatar.Fallback>
+      </Avatar>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have variants, but uses color prop */}
+    <Avatar color="primary" name="John" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* v3 has variant prop */}
+    <Avatar variant="soft" color="accent">
+      <Avatar.Fallback>J</Avatar.Fallback>
+    </Avatar>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<Avatar 
+  classNames={{
+    base: "custom-base",
+    img: "custom-img",
+    fallback: "custom-fallback"
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<Avatar className="custom-base">
+  <Avatar.Image className="custom-img" src="..." alt="..." />
+  <Avatar.Fallback className="custom-fallback">
+    JD
+  </Avatar.Fallback>
+</Avatar>
+```
+
+## 组件组成
+
+v3 `Avatar` 的结构如下：
+
+```
+Avatar (Root)
+  ├── Avatar.Image (optional)
+  └── Avatar.Fallback (optional; shown when image fails or not provided)
+```
+
+## 生成首字母缩写的辅助函数
+
+v3 没有 `name` prop，需要自行生成首字母缩写：
+
+```tsx
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .map(n => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+// Usage
+<Avatar>
+  <Avatar.Fallback>{getInitials("John Doe")}</Avatar.Fallback>
+</Avatar>
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Avatar.Image`、`Avatar.Fallback`）
+2. **`name` prop 已移除**：请手动生成首字母缩写
+3. **`showFallback` 已移除**：图片失败时仍会显示后备
+4. **新增 `variant` prop**：`"default"` \| `"soft"`，用于视觉样式
+5. **响应式图片**：`Avatar.Image` 支持 `srcSet`、`sizes`、`loading`
+6. **后备延迟**：`Avatar.Fallback` 支持 `delayMs`，减轻后备闪烁
+7. **颜色映射**：`primary` → `accent`，`secondary` → `default`
+8. **`isBordered` 已移除**：请使用 Tailwind `ring-2 ring-background` 等类
+9. **`radius` 已移除**：请使用 Tailwind `rounded-*` 类
+10. **`isDisabled` 等已移除**：请使用 Tailwind `opacity-50` 等类
+11. **`AvatarGroup` 已移除**：请用 CSS 手动成组
+12. **`icon` prop 已移除**：请将图标内容放入 `Avatar.Fallback`
+13. **`classNames` 已移除**：请在各子组件上使用 `className` prop

@@ -1,0 +1,275 @@
+---
+title: InputOTP
+description: InputOTP 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 InputOTP 文档](/docs/react/components/input-otp)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，InputOtp 根据 `length` prop 自动渲染插槽：
+
+```tsx
+import { InputOtp } from "@heroui/react";
+
+export default function App() {
+  return <InputOtp length={4} />;
+}
+```
+
+在 v3 中，InputOTP 改为复合组件，需要手动声明插槽：
+
+```tsx
+import { InputOTP } from "@heroui/react";
+
+export default function App() {
+  return (
+    <InputOTP maxLength={4}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+        <InputOTP.Slot index={3} />
+      </InputOTP.Group>
+    </InputOTP>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单个组件，自动渲染各个分段  
+**v3：** 复合组件：`InputOTP.Group`、`InputOTP.Slot`、`InputOTP.Separator`
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `length` | `InputOTP` | 已重命名为 `maxLength` |
+| `allowedKeys` | `InputOTP` | 已重命名为 `pattern`（正则表达式） |
+| `onValueChange` | `InputOTP` | 改用 `onChange` |
+| `description`、`errorMessage` | - | 通过外部 Description / FieldError 处理 |
+| `variant` | `InputOTP` | 简化为仅 `primary` \| `secondary` |
+| `color`、`size`、`radius` | - | 已移除（请改用 Tailwind CSS） |
+| `classNames` | - | 改在各子组件上使用 `className` |
+| - | `textAlign` | 新增 prop：插槽内的文本对齐（`'left'` \| `'center'` \| `'right'`） |
+| - | `inputMode` | 新增 prop：移动端的虚拟键盘类型（默认 `'numeric'`） |
+| - | `placeholder` | 新增 prop：空插槽的占位符文本 |
+| - | `pasteTransformer` | 新增 prop：转换粘贴的文本（例如去掉连字符） |
+
+## 迁移示例
+
+### 受控 InputOTP
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState("");
+
+    <InputOtp length={4} value={value} onValueChange={setValue} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState("");
+
+    <InputOTP maxLength={4} value={value} onChange={setValue}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+        <InputOTP.Slot index={3} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+### 使用 allowedKeys / pattern
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp allowedKeys="^[a-z]*$" length={4} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { REGEXP_ONLY_CHARS } from "@heroui/react";
+
+    <InputOTP maxLength={4} pattern={REGEXP_ONLY_CHARS}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+        <InputOTP.Slot index={3} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+### 表单校验
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With description */}
+    <InputOtp description="Enter the code sent to your email" length={4} />
+    
+    {/* With error message */}
+    <InputOtp errorMessage="Invalid code" isInvalid length={4} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError } from "@heroui/react";
+
+    {/* With description */}
+    <div className="flex flex-col gap-2">
+      <InputOTP maxLength={4}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+          <InputOTP.Slot index={3} />
+        </InputOTP.Group>
+      </InputOTP>
+      <Description>Enter the code sent to your email</Description>
+    </div>
+    
+    {/* With error message */}
+    <div className="flex flex-col gap-2">
+      <InputOTP isInvalid maxLength={4}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+          <InputOTP.Slot index={3} />
+        </InputOTP.Group>
+      </InputOTP>
+      <FieldError>Invalid code</FieldError>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 使用 onComplete 回调
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <InputOtp
+      length={6}
+      onComplete={(value) => console.log("Complete:", value)}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <InputOTP
+      maxLength={6}
+      onComplete={(value) => console.log("Complete:", value)}
+    >
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+      </InputOTP.Group>
+      <InputOTP.Separator />
+      <InputOTP.Group>
+        <InputOTP.Slot index={3} />
+        <InputOTP.Slot index={4} />
+        <InputOTP.Slot index={5} />
+      </InputOTP.Group>
+    </InputOTP>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件结构
+
+v3 InputOTP 遵循以下结构：
+
+```
+InputOTP (Root)
+  ├── InputOTP.Group
+  │   ├── InputOTP.Slot (index={0})
+  │   ├── InputOTP.Slot (index={1})
+  │   └── ...
+  ├── InputOTP.Separator (optional)
+  └── InputOTP.Group (optional, for grouping)
+      └── InputOTP.Slot (index={...})
+```
+
+## v3 中的新增 prop
+
+v3 引入了几个 v2 中没有的 prop：
+
+- **`textAlign`**：控制插槽内的文本对齐（`'left'` | `'center'` | `'right'`，默认 `'left'`）
+- **`inputMode`**：设置移动端虚拟键盘类型（`'numeric'` | `'text'` | `'decimal'` | `'tel'` | `'search'` | `'email'` | `'url'`，默认 `'numeric'`）
+- **`placeholder`**：设置空插槽的占位符文本
+- **`pasteTransformer`**：`(text: string) => string` 类型的函数，用于转换粘贴的文本（例如从粘贴的代码中移除连字符）
+
+```tsx
+<InputOTP
+  maxLength={6}
+  inputMode="numeric"
+  textAlign="center"
+  placeholder="-"
+  pasteTransformer={(text) => text.replace(/-/g, "")}
+>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>
+```
+
+## 导出的正则表达式模式
+
+为方便使用，HeroUI 从 input-otp 库再导出了几个常用的正则模式：
+
+```tsx
+import { REGEXP_ONLY_DIGITS, REGEXP_ONLY_CHARS, REGEXP_ONLY_DIGITS_AND_CHARS } from "@heroui/react";
+
+// Use with the pattern prop
+<InputOTP pattern={REGEXP_ONLY_DIGITS} maxLength={6}>
+  {/* ... */}
+</InputOTP>
+```
+
+- **`REGEXP_ONLY_DIGITS`** —— 仅限数字字符（0-9）
+- **`REGEXP_ONLY_CHARS`** —— 仅限字母字符（a-z、A-Z）
+- **`REGEXP_ONLY_DIGITS_AND_CHARS`** —— 字母数字字符（0-9、a-z、A-Z）
+
+## 总结
+
+1. **组件结构**：必须用 `InputOTP.Group` 与 `InputOTP.Slot` 手动声明插槽
+2. **length → maxLength**：prop 重命名
+3. **allowedKeys → pattern**：prop 重命名，改为接收正则表达式
+4. **onValueChange → onChange**：事件处理函数重命名
+5. **移除 description**：改用独立的 `Description` 组件
+6. **移除 errorMessage**：改用独立的错误展示组件
+7. **简化变体**：v3 仅支持 `variant="primary"` 与 `variant="secondary"`
+8. **移除 color**：请用 Tailwind CSS 类设置样式
+9. **移除 size**：请用 Tailwind CSS 类设置样式
+10. **移除 radius**：请用 Tailwind CSS 类设置样式
+11. **移除 classNames**：改在各子组件上使用 `className` prop
+12. **新增 prop**：v3 新增了 `textAlign`、`inputMode`、`placeholder` 与 `pasteTransformer`
+13. **导出的正则模式**：可使用 `REGEXP_ONLY_DIGITS`、`REGEXP_ONLY_CHARS`、`REGEXP_ONLY_DIGITS_AND_CHARS` 作为 `pattern` 的取值

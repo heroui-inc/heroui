@@ -1,0 +1,211 @@
+---
+title: Tabs
+description: Tabs 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Tabs 文档](/docs/react/components/tabs)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Tabs 使用 `Tab` 子组件，通过 `title` prop 设置标题，子节点作为面板内容：
+
+```tsx
+import { Tabs, Tab } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Tabs aria-label="Options">
+      <Tab key="photos" title="Photos">
+        <Card>Content here</Card>
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+在 v3 中，Tabs 改为复合组件，Tab 与 Panel 分别独立：
+
+```tsx
+import { Tabs } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Tabs>
+      <Tabs.ListContainer>
+        <Tabs.List aria-label="Options">
+          <Tabs.Tab id="photos">
+            Photos
+            <Tabs.Indicator />
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs.ListContainer>
+      <Tabs.Panel id="photos">
+        <Card>Content here</Card>
+      </Tabs.Panel>
+    </Tabs>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** `Tabs` 与 `Tab` 子节点（`title` prop + 子节点作为面板）  
+**v3：** 复合组件（`Tabs.ListContainer`、`Tabs.List`、`Tabs.Tab`、`Tabs.Indicator`、`Tabs.Separator`、`Tabs.Panel`）
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `key`（在 Tab 上） | `id`（在 Tab 与 Panel 上） | prop 名称变更 |
+| `title`（在 Tab 上） | — | 内容直接放入 `Tabs.Tab` |
+| `isVertical` | `orientation` | 改为 `"horizontal"` \| `"vertical"` |
+| `placement` | — | 通过 `orientation` 与布局表达 |
+| `variant` | `variant` | 简化为仅 `primary` \| `secondary` |
+| `color` | — | 已移除（请改用 Tailwind CSS） |
+| `size` | — | 已移除（请改用 Tailwind CSS） |
+| `radius` | — | 已移除（请改用 Tailwind CSS） |
+| `classNames` | — | 改在各子组件上使用 `className` prop |
+| `disableCursorAnimation` | — | 改用 `Tabs.Indicator` 子组件控制 |
+| `disableAnimation` | — | 已移除（动画机制已不同） |
+| `fullWidth` | — | 已移除（请改用 Tailwind CSS） |
+
+### 3. 组件层面的变化
+
+- **Tab 标识**：`key` → `id`（`Tabs.Tab` 与 `Tabs.Panel` 之间必须一致）
+- **Tab 内容**：`title` prop → 直接将子节点放入 `Tabs.Tab`
+- **Panel 内容**：原本作为 Tab 子节点 → 改为独立的 `Tabs.Panel` 组件
+- **指示器**：自动光标 → 显式的 `Tabs.Indicator` 子组件
+- **分隔符**：新增 `Tabs.Separator` 组件，用于在 Tab 之间显示分隔线
+
+## 迁移示例
+
+### 受控 Tabs
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selected, setSelected] = useState("photos");
+
+    <Tabs selectedKey={selected} onSelectionChange={setSelected}>
+      <Tab key="photos" title="Photos">Content</Tab>
+      <Tab key="music" title="Music">Content</Tab>
+    </Tabs>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [selected, setSelected] = useState("photos");
+
+    <Tabs selectedKey={selected} onSelectionChange={setSelected}>
+      <Tabs.ListContainer>
+        <Tabs.List aria-label="Options">
+          <Tabs.Tab id="photos">
+            Photos
+            <Tabs.Indicator />
+          </Tabs.Tab>
+          <Tabs.Tab id="music">
+            Music
+            <Tabs.Indicator />
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs.ListContainer>
+      <Tabs.Panel id="photos">Content</Tabs.Panel>
+      <Tabs.Panel id="music">Content</Tabs.Panel>
+    </Tabs>
+    ```
+  </Tab>
+</Tabs>
+
+### 带图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Tabs aria-label="Options">
+      <Tab key="photos" title={<><PhotoIcon /> Photos</>}>
+        Content
+      </Tab>
+    </Tabs>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Tabs>
+      <Tabs.ListContainer>
+        <Tabs.List aria-label="Options">
+          <Tabs.Tab id="photos">
+            <PhotoIcon />
+            Photos
+            <Tabs.Indicator />
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs.ListContainer>
+      <Tabs.Panel id="photos">Content</Tabs.Panel>
+    </Tabs>
+    ```
+  </Tab>
+</Tabs>
+
+### 带分隔符
+
+在 v3 中，你可以在每个 `Tabs.Tab` 内部（除第一个之外）放入 `Tabs.Separator` 来显示 Tab 之间的分隔线。这是 v2 没有的新增能力。
+
+```tsx
+<Tabs>
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="photos">
+        Photos
+        <Tabs.Indicator />
+      </Tabs.Tab>
+      <Tabs.Tab id="music">
+        <Tabs.Separator />
+        Music
+        <Tabs.Indicator />
+      </Tabs.Tab>
+      <Tabs.Tab id="videos">
+        <Tabs.Separator />
+        Videos
+        <Tabs.Indicator />
+      </Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+  <Tabs.Panel id="photos">Photos content</Tabs.Panel>
+  <Tabs.Panel id="music">Music content</Tabs.Panel>
+  <Tabs.Panel id="videos">Videos content</Tabs.Panel>
+</Tabs>
+```
+
+## 组件结构
+
+v3 Tabs 遵循以下结构：
+
+```
+Tabs (Root)
+  ├── Tabs.ListContainer
+  │   └── Tabs.List
+  │       └── Tabs.Tab
+  │           ├── Tabs.Separator (optional, omit on first tab)
+  │           └── Tabs.Indicator (optional)
+  └── Tabs.Panel (one per tab, matching id)
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Tabs.ListContainer`、`Tabs.List`、`Tabs.Tab`、`Tabs.Indicator`、`Tabs.Separator`、`Tabs.Panel`）
+2. **Tab 标识**：`key` → `id`（Tab 与 Panel 之间需保持一致）
+3. **Tab 内容**：移除 `title` prop——内容直接放入 `Tabs.Tab`
+4. **Panel 分离**：面板内容移至独立的 `Tabs.Panel` 组件
+5. **指示器**：必须显式在每个 Tab 内使用 `Tabs.Indicator`
+6. **方向**：`isVertical` → `orientation` prop
+7. **样式**：`variant` 简化为 `primary` \| `secondary`；`color`、`size`、`radius`、`placement` 已移除——更多自定义请使用 Tailwind
+8. **移除 classNames**：改在各子组件上使用 `className` prop
+9. **分隔符（新增）**：在 `Tabs.Tab` 内使用 `Tabs.Separator` 显示 Tab 之间的分隔线（v2 无对应能力）

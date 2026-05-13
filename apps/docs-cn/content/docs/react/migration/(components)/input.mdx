@@ -1,0 +1,281 @@
+---
+title: Input
+description: Input 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Input 文档](/docs/react/components/input)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 关键变化：Input → TextField
+
+**v2：** `Input` 是功能完备的组件，内置标签、描述、错误信息、校验、变体、颜色、尺寸等。
+
+**v3：** `Input` 现在只是一个原语组件（仅是输入元素本身）。对于表单字段，请使用 `TextField`，它由 `Input` 与 `Label`、`Description`、`FieldError` 等子组件组成。在 v2 中并没有独立的 TextField 或 InputGroup；单一的 Input 组件就负责标签、描述、起止内容与校验等所有职责。
+
+## 何时使用 Input vs TextField
+
+### 使用 TextField（大多数场景）
+
+当你需要以下能力时，请使用 `TextField`：
+- 标签
+- 描述
+- 错误信息
+- 校验
+- 表单集成
+
+### 使用 Input（仅原语）
+
+当你需要以下能力时，请使用 `Input`：
+- 仅一个基础的 input 元素
+- 自定义的标签 / 错误处理
+- 与自定义表单组件集成
+
+## 结构变化
+
+在 v2 中，`Input` 是功能完备的组件，通过 prop 接收标签、描述、占位符等：
+
+```tsx
+import { Input } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Input
+      label="Email"
+      placeholder="Enter your email"
+      type="email"
+    />
+  );
+}
+```
+
+在 v3 中，`Input` 是原语组件。对于带标签与校验的表单字段，请使用 `TextField`，将 `Input` 与 `Label`、`Description`、`FieldError` 组合在一起：
+
+```tsx
+import { TextField, Label, Input, FieldError } from "@heroui/react";
+
+export default function App() {
+  return (
+    <TextField name="email" type="email">
+      <Label>Email</Label>
+      <Input placeholder="Enter your email" />
+      <FieldError />
+    </TextField>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件拆分
+
+**v2：** 单一 `Input` 组件，承担所有职责  
+**v3：** 拆分为 `Input`（原语）与 `TextField`（复合组件）
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `label` | `Label` | 在 `TextField` 内使用 `Label` 组件 |
+| `description` | `Description` | 在 `TextField` 内使用 `Description` 组件 |
+| `errorMessage` | `FieldError` | 在 `TextField` 内使用 `FieldError` 组件 |
+| `variant` | `Input` | 从多种变体（flat、bordered、underlined、faded）改为 `"primary"`（默认，带阴影）与 `"secondary"`（弱化、无阴影，适合 Surface 场景） |
+| `color`、`size`、`radius` | - | 已移除（请改用 Tailwind CSS） |
+| `fullWidth` | `Input` 或 `TextField` | `Input` 与 `TextField` 上均仍支持 `fullWidth` 布尔属性 |
+| `labelPlacement` | - | 通过 `Label` 的布局自行处理 |
+| `startContent` | `InputGroup.Prefix` | 在 `TextField` 内使用 `InputGroup` 与 `InputGroup.Prefix` |
+| `endContent` | `InputGroup.Suffix` | 在 `TextField` 内使用 `InputGroup` 与 `InputGroup.Suffix` |
+| `isClearable` | - | 请通过按钮手动实现 |
+| `isRequired`、`isInvalid` | `TextField` | 请设置在 `TextField` 上 |
+| `validate` | `TextField` | 在 `TextField` 上使用 `validate` |
+| `classNames` | - | 改在各子组件上使用 `className` |
+| `onValueChange` | `Input` | 改用 `onChange` 事件处理函数 |
+
+## 迁移示例
+
+### 表单校验
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With description */}
+    <Input
+      description="We'll never share your email"
+      label="Email"
+      type="email"
+    />
+    
+    {/* With error message */}
+    <Input
+      errorMessage="Please enter a valid email"
+      isInvalid
+      label="Email"
+      type="email"
+    />
+    
+    {/* Required */}
+    <Input isRequired label="Email" type="email" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description } from "@heroui/react";
+
+    {/* With description */}
+    <TextField name="email" type="email">
+      <Label>Email</Label>
+      <Input />
+      <Description>We'll never share your email</Description>
+      <FieldError />
+    </TextField>
+    
+    {/* With error message */}
+    <TextField
+      isInvalid
+      name="email"
+      type="email"
+      validate={(value) => {
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+          return "Please enter a valid email";
+        }
+        return null;
+      }}
+    >
+      <Label>Email</Label>
+      <Input />
+      <FieldError />
+    </TextField>
+    
+    {/* Required */}
+    <TextField isRequired name="email" type="email">
+      <Label>Email</Label>
+      <Input />
+      <FieldError />
+    </TextField>
+    ```
+  </Tab>
+</Tabs>
+
+### Input 起止内容
+
+对于带前缀或后缀内容的输入，请使用 **InputGroup** 复合组件：
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Input
+      label="Price"
+      startContent={<span>$</span>}
+      type="number"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { InputGroup } from "@heroui/react";
+
+    <TextField name="price" type="number">
+      <Label>Price</Label>
+      <InputGroup>
+        <InputGroup.Prefix>$</InputGroup.Prefix>
+        <InputGroup.Input />
+      </InputGroup>
+      <FieldError />
+    </TextField>
+    ```
+  </Tab>
+</Tabs>
+
+**InputGroup** 为前缀 / 后缀内容提供合适的样式与布局。其中：
+- `InputGroup.Prefix` 表示位于输入之前的内容（取代 `startContent`）
+- `InputGroup.Suffix` 表示位于输入之后的内容（取代 `endContent`）
+- `InputGroup.Input` 表示输入元素本身
+
+### 带清除按钮的 Input
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Input
+      isClearable
+      label="Email"
+      onClear={() => console.log("cleared")}
+      type="email"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { CloseButton } from "@heroui/react";
+
+    const [value, setValue] = useState("");
+
+    <TextField name="email" type="email">
+      <Label>Email</Label>
+      <div className="flex items-center">
+        <Input value={value} onChange={(e) => setValue(e.target.value)} />
+        {value && (
+          <CloseButton
+            aria-label="Clear"
+            onPress={() => setValue("")}
+          />
+        )}
+      </div>
+      <FieldError />
+    </TextField>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控 Input
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState("");
+
+    <Input
+      label="Email"
+      onValueChange={setValue}
+      type="email"
+      value={value}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState("");
+
+    <TextField name="email" type="email">
+      <Label>Email</Label>
+      <Input
+        onChange={(e) => setValue(e.target.value)}
+        value={value}
+      />
+      <FieldError />
+    </TextField>
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+1. **组件拆分**：表单字段使用 `TextField`，仅原语输入使用 `Input`
+2. **标签必须显式声明**：必须使用 `Label` 组件而不是 `label` prop
+3. **错误展示**：必须使用 `FieldError` 组件而不是 `errorMessage` prop
+4. **描述**：必须使用 `Description` 组件而不是 `description` prop
+5. **校验**：将 `validate` 函数从 `Input` 移到 `TextField` 上
+6. **起止内容**：在 `TextField` 内使用 `InputGroup` 与 `InputGroup.Prefix` / `InputGroup.Suffix`
+7. **清除按钮**：请手动实现 `CloseButton`
+8. **简化变体**：v2 提供多种变体（flat、bordered、underlined、faded）；v3 提供 `"primary"`（默认）与 `"secondary"`（适合 Surface）
+9. **fullWidth**：`fullWidth` prop 在 `Input` 与 `TextField` 上均可用
+10. **移除 color**：请改用 Tailwind CSS 类
+11. **移除 size**：请改用 Tailwind CSS 类
+12. **移除 radius**：请改用 Tailwind CSS 类
+13. **移除 onValueChange**：改用 `onChange` 事件处理函数
+14. **移除 classNames**：改在各子组件上使用 `className` prop

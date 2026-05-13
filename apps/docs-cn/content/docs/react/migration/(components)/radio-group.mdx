@@ -1,0 +1,270 @@
+---
+title: RadioGroup
+description: RadioGroup 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 RadioGroup 文档](/docs/react/components/radio-group)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`RadioGroup` 通过 `label` prop 设置标题：
+
+```tsx
+import { RadioGroup, Radio } from "@heroui/react";
+
+export default function App() {
+  return (
+    <RadioGroup label="Select city">
+      <Radio value="london">London</Radio>
+      <Radio value="tokyo" description="Capital of Japan">Tokyo</Radio>
+      <Radio value="paris">Paris</Radio>
+    </RadioGroup>
+  );
+}
+```
+
+在 v3 中，`RadioGroup` 改用 `Label` 组件，并配合 Radio 的复合结构：
+
+```tsx
+import { RadioGroup, Radio, Label, Description } from "@heroui/react";
+
+export default function App() {
+  return (
+    <RadioGroup name="city">
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <Radio value="tokyo">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Tokyo</Label>
+          <Description>Capital of Japan</Description>
+        </Radio.Content>
+      </Radio>
+      <Radio value="paris">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Paris</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+  );
+}
+```
+
+## 主要变化
+
+### 1. label prop → Label 组件
+
+**v2：** 在 `RadioGroup` 上使用 `label` prop  
+**v3：** 改用 `Label` 组件作为 `RadioGroup` 的子节点
+
+### 2. Radio 结构
+
+**v2：** 简单的 Radio 组件，子节点直接作为标签  
+**v3：** 复合 Radio 组件，由 `Radio.Control`、`Radio.Indicator` 与 `Radio.Content` 组成
+
+### 3. 描述处理
+
+**v2：** 在单个 `Radio` 组件上使用 `description` prop  
+**v3：** 在 `Radio.Content` 内部使用 `Description` 组件
+
+### 4. 事件处理函数
+
+**v2：** 使用 `onValueChange` prop  
+**v3：** 改用 `onChange` prop（来自 React Aria Components）
+
+### 5. name prop
+
+**v3：** 集成到表单时需要 `name` prop
+
+### 6. 变体支持
+
+**v3：** 新增 `variant` prop：`"primary"`（默认）或 `"secondary"`，后者用于较弱的视觉强调，适合 Surface 组件场景
+
+### 7. 只读支持
+
+**v3：** 新增 `isReadOnly` prop，可阻止值变化但仍保持分组可聚焦
+
+## 迁移示例
+
+### 带描述的 RadioGroup
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <RadioGroup label="Select plan">
+      <Radio value="basic" description="Basic features">Basic</Radio>
+      <Radio value="pro" description="All features">Pro</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { RadioGroup, Radio, Label, Description } from "@heroui/react";
+
+    <RadioGroup name="plan">
+      <Label>Select plan</Label>
+      <Radio value="basic">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Basic</Label>
+          <Description>Basic features</Description>
+        </Radio.Content>
+      </Radio>
+      <Radio value="pro">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Pro</Label>
+          <Description>All features</Description>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 did not have variant support */}
+    <RadioGroup label="Select plan">
+      <Radio value="basic">Basic</Radio>
+      <Radio value="pro">Pro</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { RadioGroup, Radio, Label } from "@heroui/react";
+
+    {/* Primary variant (default) */}
+    <RadioGroup variant="primary" name="plan">
+      <Label>Select plan</Label>
+      <Radio value="basic">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Basic</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+
+    {/* Secondary variant - lower emphasis, suitable for Surface components */}
+    <RadioGroup variant="secondary" name="plan">
+      <Label>Select plan</Label>
+      <Radio value="basic">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Basic</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### 只读
+
+```tsx
+import { RadioGroup, Radio, Label } from "@heroui/react";
+
+{/* Prevents value changes while keeping the group focusable */}
+<RadioGroup isReadOnly defaultValue="basic" name="plan">
+  <Label>Select plan</Label>
+  <Radio value="basic">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>Basic</Label>
+    </Radio.Content>
+  </Radio>
+  <Radio value="pro">
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Radio.Content>
+      <Label>Pro</Label>
+    </Radio.Content>
+  </Radio>
+</RadioGroup>
+```
+
+### 受控 RadioGroup
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { RadioGroup, Radio } from "@heroui/react";
+
+    const [value, setValue] = useState("london");
+
+    <RadioGroup value={value} onValueChange={setValue} label="Select city">
+      <Radio value="london">London</Radio>
+      <Radio value="tokyo">Tokyo</Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { RadioGroup, Radio, Label } from "@heroui/react";
+
+    const [value, setValue] = useState("london");
+
+    <RadioGroup name="city" value={value} onChange={setValue}>
+      <Label>Select city</Label>
+      <Radio value="london">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>London</Label>
+        </Radio.Content>
+      </Radio>
+      <Radio value="tokyo">
+        <Radio.Control>
+          <Radio.Indicator />
+        </Radio.Control>
+        <Radio.Content>
+          <Label>Tokyo</Label>
+        </Radio.Content>
+      </Radio>
+    </RadioGroup>
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+- 用 `Label` 子组件取代 `label` prop
+- 将 Radio 子项更新为复合组件结构
+- 用 `Radio.Content` 内部的 `Description` 组件取代 Radio 的 `description` prop
+- 将 `onValueChange` 改为 `onChange`
+- 添加 `name` prop 以便集成到表单中
+- 新增 `variant` prop：`"primary"`（默认）或 `"secondary"`，用于较弱的视觉强调
+- 新增 `isReadOnly` prop：阻止值变化但保持分组可聚焦
+- 通过 React Aria Components 提供更好的无障碍体验

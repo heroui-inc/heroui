@@ -1,0 +1,466 @@
+---
+title: Dropdown
+description: Dropdown 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Dropdown 文档](/docs/react/components/dropdown)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Dropdown 使用相互独立的组件：`DropdownTrigger`、`DropdownMenu`、`DropdownItem`、`DropdownSection`：
+
+```tsx
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <Button>Open Menu</Button>
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownItem key="new">New file</DropdownItem>
+        <DropdownItem key="copy">Copy link</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+}
+```
+
+在 v3 中，Dropdown 采用复合组件模式，并提供显式的子组件结构：
+
+```tsx
+import { Dropdown, Button, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Dropdown>
+      <Button>Open Menu</Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu>
+          <Dropdown.Item id="new" textValue="New file">
+            <Label>New file</Label>
+          </Dropdown.Item>
+          <Dropdown.Item id="copy" textValue="Copy link">
+            <Label>Copy link</Label>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 相互独立的组件：`DropdownTrigger`、`DropdownMenu`、`DropdownItem`、`DropdownSection`  
+**v3：** 复合组件：`Dropdown.Trigger`、`Dropdown.Popover`、`Dropdown.Menu`、`Dropdown.Item`、`Dropdown.Section`
+
+### 2. 组件名称变更
+
+| v2 组件           | v3 组件              | 说明                                      |
+| ----------------- | -------------------- | ----------------------------------------- |
+| `DropdownTrigger` | `Dropdown.Trigger`   | 功能相同                                  |
+| `DropdownMenu`    | `Dropdown.Menu`      | 需包裹在 `Dropdown.Popover` 内          |
+| `DropdownItem`    | `Dropdown.Item`      | 使用 `id` 与 `textValue`；列表项保留 `key` |
+| `DropdownSection` | `Dropdown.Section`   | 功能相同                                  |
+| —                 | `Dropdown.Popover`   | 新增包裹组件（必填）                      |
+
+### 3. 菜单项标识
+
+**v2：** 菜单项内容通过 children 传递；React 的 `key` 同时用于列表调和与菜单项标识（选择、焦点）。  
+**v3：** 菜单项的可见文本必须使用 `Label` 组件。为每个菜单项提供 `id`（状态/焦点）与 `textValue`（当内容不是纯文本时用于无障碍）。列表中的菜单项仍应保留 React 的 `key`。
+
+### 4. Prop 变更
+
+| v2 prop                              | v3 位置           | 说明                                                |
+| ------------------------------------ | ----------------- | --------------------------------------------------- |
+| `variant`、`color`（在 `DropdownMenu` 上） | —                 | 已移除（菜单不再有 variant/color）                  |
+| `classNames`、`itemClasses`（在 `DropdownMenu` 上） | —                 | 在 `Menu` 与菜单项上使用 `className`                |
+| `color`（在 `DropdownItem` 上）      | `Dropdown.Item`   | 使用 `variant="danger"` 表示危险操作                |
+| `title`                              | —                 | 使用 `Label` 子组件                                 |
+| `description`                      | —                 | 使用 `Description` 子组件                           |
+| `shortcut`                         | —                 | 使用 `Kbd` 子组件                                   |
+| `startContent`、`endContent`         | —                 | 将图标或组件作为 children 放置                      |
+| `selectedIcon`                     | —                 | 使用 `Dropdown.ItemIndicator`                       |
+| `showDivider`                      | —                 | 在菜单项之间使用 `Separator`                        |
+| `classNames`（在 `DropdownItem` 上） | —                 | 在菜单项上使用 `className`                          |
+| `isSelected`                       | `Dropdown.Menu`   | 在 `Menu` 上使用 `selectedKeys`                     |
+| `isDisabled`                       | `Dropdown.Menu`   | 在 `Menu` 上使用 `disabledKeys`                     |
+| `trigger`（在 `Dropdown` 上）      | `Dropdown`        | 仍支持：`"press"`（默认）或 `"longPress"`           |
+
+### 5. 新增子组件
+
+- `Dropdown.Popover`：`Dropdown.Menu` 的必填外层包裹
+- `Dropdown.ItemIndicator`：用于选择指示（对勾/圆点等）
+- `Dropdown.SubmenuTrigger`：子菜单触发结构
+- `Dropdown.SubmenuIndicator`：子菜单 chevron 指示
+
+## 迁移示例
+
+### 使用 onAction
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownMenu onAction={(key) => alert(key)}>
+      <DropdownItem key="new">New file</DropdownItem>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown.Menu onAction={(key) => alert(key)}>
+      <Dropdown.Item id="new" textValue="New file">
+        <Label>New file</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### 菜单项内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With icon */}
+    <DropdownItem
+      key="new"
+      startContent={<AddNoteIcon />}
+    >
+      New file
+    </DropdownItem>
+    
+    {/* With description */}
+    <DropdownItem
+      key="edit"
+      description="Edit the file"
+    >
+      Edit file
+    </DropdownItem>
+    
+    {/* With shortcut */}
+    <DropdownItem
+      key="copy"
+      shortcut="⌘C"
+    >
+      Copy
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+    import { Label, Description, Kbd } from "@heroui/react";
+
+    {/* With icon */}
+    <Dropdown.Item id="new" textValue="New file">
+      <Icon icon="gravity-ui:square-plus" />
+      <Label>New file</Label>
+    </Dropdown.Item>
+    
+    {/* With description */}
+    <Dropdown.Item id="edit" textValue="Edit file">
+      <Label>Edit file</Label>
+      <Description>Edit the file</Description>
+    </Dropdown.Item>
+    
+    {/* With shortcut */}
+    <Dropdown.Item id="copy" textValue="Copy">
+      <Label>Copy</Label>
+      <Kbd slot="keyboard" variant="light">
+        <Kbd.Abbr keyValue="command" />
+        <Kbd.Content>C</Kbd.Content>
+      </Kbd>
+    </Dropdown.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### 危险菜单项
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownItem
+      key="delete"
+      className="text-danger"
+      color="danger"
+    >
+      Delete file
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown.Item id="delete" textValue="Delete file" variant="danger">
+      <Label>Delete file</Label>
+    </Dropdown.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### 使用分组（Section）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownMenu>
+      <DropdownSection showDivider title="Actions">
+        <DropdownItem key="new">New file</DropdownItem>
+        <DropdownItem key="edit">Edit file</DropdownItem>
+      </DropdownSection>
+      <DropdownSection title="Danger zone">
+        <DropdownItem key="delete" color="danger">Delete file</DropdownItem>
+      </DropdownSection>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Header, Separator } from "@heroui/react";
+
+    <Dropdown.Menu>
+      <Dropdown.Section>
+        <Header>Actions</Header>
+        <Dropdown.Item id="new" textValue="New file">
+          <Label>New file</Label>
+        </Dropdown.Item>
+        <Dropdown.Item id="edit" textValue="Edit file">
+          <Label>Edit file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+      <Separator />
+      <Dropdown.Section>
+        <Header>Danger zone</Header>
+        <Dropdown.Item id="delete" textValue="Delete file" variant="danger">
+          <Label>Delete file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### 选择
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState(new Set(["text"]));
+    <DropdownMenu
+      selectedKeys={singleSelected}
+      selectionMode="single"
+      onSelectionChange={setSingleSelected}
+    >
+      <DropdownItem key="text">Text</DropdownItem>
+      <DropdownItem key="number">Number</DropdownItem>
+    </DropdownMenu>
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState(new Set(["bold"]));
+    <DropdownMenu
+      selectedKeys={multiSelected}
+      selectionMode="multiple"
+      onSelectionChange={setMultiSelected}
+    >
+      <DropdownItem key="bold">Bold</DropdownItem>
+      <DropdownItem key="italic">Italic</DropdownItem>
+    </DropdownMenu>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState(new Set(["text"]));
+    <Dropdown.Menu
+      selectedKeys={singleSelected}
+      selectionMode="single"
+      onSelectionChange={setSingleSelected}
+    >
+      <Dropdown.Item id="text" textValue="Text">
+        <Dropdown.ItemIndicator />
+        <Label>Text</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="number" textValue="Number">
+        <Dropdown.ItemIndicator />
+        <Label>Number</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState(new Set(["bold"]));
+    <Dropdown.Menu
+      selectedKeys={multiSelected}
+      selectionMode="multiple"
+      onSelectionChange={setMultiSelected}
+    >
+      <Dropdown.Item id="bold" textValue="Bold">
+        <Dropdown.ItemIndicator />
+        <Label>Bold</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="italic" textValue="Italic">
+        <Dropdown.ItemIndicator />
+        <Label>Italic</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+    ```
+  </Tab>
+</Tabs>
+
+### 键盘快捷键
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DropdownItem key="copy" shortcut="⌘C">
+      Copy
+    </DropdownItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Label, Kbd } from "@heroui/react";
+
+    <Dropdown.Item id="copy" textValue="Copy">
+      <Label>Copy</Label>
+      <Kbd slot="keyboard" variant="light">
+        <Kbd.Abbr keyValue="command" />
+        <Kbd.Content>C</Kbd.Content>
+      </Kbd>
+    </Dropdown.Item>
+    ```
+
+    `Kbd` 的 `slot="keyboard"` prop 会把快捷键放在菜单项末尾，用以替代 v2 的 `shortcut` prop。
+  </Tab>
+</Tabs>
+
+### 子菜单
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 did not have built-in submenu support */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Label } from "@heroui/react";
+
+    <Dropdown.Menu>
+      <Dropdown.Item id="copy-link" textValue="Copy Link">
+        <Label>Copy Link</Label>
+      </Dropdown.Item>
+      <Dropdown.SubmenuTrigger>
+        <Dropdown.Item id="share" textValue="Share">
+          <Label>Share</Label>
+          <Dropdown.SubmenuIndicator />
+        </Dropdown.Item>
+        <Dropdown.Popover>
+          <Dropdown.Menu>
+            <Dropdown.Item id="whatsapp" textValue="WhatsApp">
+              <Label>WhatsApp</Label>
+            </Dropdown.Item>
+            <Dropdown.Item id="telegram" textValue="Telegram">
+              <Label>Telegram</Label>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown.SubmenuTrigger>
+    </Dropdown.Menu>
+    ```
+
+    使用 `Dropdown.SubmenuTrigger` 包裹会打开嵌套菜单的菜单项；在菜单项内放置 `Dropdown.SubmenuIndicator` 以显示子菜单指示图标。
+  </Tab>
+</Tabs>
+
+### 长按触发
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Dropdown>
+      <DropdownTrigger>
+        <Button>Long press me</Button>
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownItem key="cut">Cut</DropdownItem>
+        <DropdownItem key="copy">Copy</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Dropdown trigger="longPress">
+      <Button>Long press me</Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu>
+          <Dropdown.Item id="cut" textValue="Cut">
+            <Label>Cut</Label>
+          </Dropdown.Item>
+          <Dropdown.Item id="copy" textValue="Copy">
+            <Label>Copy</Label>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+    ```
+
+    根组件 `Dropdown` 的 `trigger` prop 接受 `"press"`（默认）或 `"longPress"`，用于控制如何打开菜单。
+  </Tab>
+</Tabs>
+
+## 组件结构（Anatomy）
+
+v3 的 Dropdown 结构如下：
+
+```
+Dropdown (Root) — accepts trigger="press" | "longPress"
+  ├── Dropdown.Trigger (optional, defaults to first child)
+  ├── Dropdown.Popover (required wrapper)
+  │   └── Dropdown.Menu
+  │       ├── Dropdown.Item
+  │       │   ├── Icon (optional, first child)
+  │       │   ├── Label (required for text)
+  │       │   ├── Description (optional)
+  │       │   ├── Kbd slot="keyboard" (optional, for shortcuts)
+  │       │   └── Dropdown.ItemIndicator (optional, for selection)
+  │       ├── Separator (for dividers)
+  │       ├── Dropdown.Section
+  │       │   ├── Header (optional)
+  │       │   └── Dropdown.Item
+  │       └── Dropdown.SubmenuTrigger
+  │           ├── Dropdown.Item
+  │           │   ├── Label
+  │           │   └── Dropdown.SubmenuIndicator (chevron icon)
+  │           └── Dropdown.Popover
+  │               └── Dropdown.Menu
+  │                   └── Dropdown.Item
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Dropdown.Trigger`、`Dropdown.Popover`、`Dropdown.Menu` 等）。
+2. **`Dropdown.Popover` 为必填**：`Dropdown.Menu` 必须包裹在 `Dropdown.Popover` 内。
+3. **`Label` 组件**：菜单项文本必须使用 `Label`。
+4. **`Description` 组件**：用 `Description` 替代 `description` prop。
+5. **`Kbd` 组件**：用带 `slot="keyboard"` 的 `Kbd` 替代 `shortcut` prop；slot 用于把快捷键放到菜单项末尾。
+6. **图标作为 children**：图标作为第一个 child 放置，不再使用 `startContent` prop。
+7. **`Separator` 组件**：用 `Separator` 替代 `showDivider` prop。
+8. **`ItemIndicator` 组件**：用 `Dropdown.ItemIndicator` 表示选择状态。
+9. **用 variant 表示危险**：用 `variant="danger"` 替代 `color="danger"`。
+10. **菜单样式 prop 移除**：`Dropdown.Menu` 不再支持 `variant` 或 `color` prop。
+11. **`classNames` 移除**：在各自子组件上使用 `className`。
+12. **子菜单**：用 `Dropdown.SubmenuTrigger` 包裹会打开嵌套菜单的项，并在项内使用 `Dropdown.SubmenuIndicator`。
+13. **`trigger` prop**：在根 `Dropdown` 上使用 `trigger="longPress"` 以长按打开菜单（默认为按压打开）。

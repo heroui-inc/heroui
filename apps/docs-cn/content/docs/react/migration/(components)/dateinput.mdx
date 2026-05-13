@@ -1,0 +1,342 @@
+---
+title: DateInput
+description: DateInput 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 DateField 文档](/docs/react/components/date-field)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`DateInput` 是单个通过 props 配置的组件：
+
+```tsx
+import { DateInput } from "@heroui/react";
+
+export default function App() {
+  return <DateInput label="Date" name="date" />;
+}
+```
+
+在 v3 中，`DateField` 需要配合 `DateInputGroup` 使用复合组件，并通过 render prop 渲染各段位（segment）：
+
+```tsx
+import { DateField, DateInputGroup, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件命名
+
+**v2：** `DateInput`  
+**v3：** `DateField`
+
+### 2. 组件结构
+
+**v2：** 单个带 props 的组件  
+**v3：** 复合组件：`DateField`（根）+ `DateInputGroup`，其中包含 `DateInputGroup.Input`（render prop）与 `DateInputGroup.Segment`；可选 `DateInputGroup.Prefix` 与 `DateInputGroup.Suffix`
+
+### 3. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `label` | — | 已移除（请使用 `Label` 组件） |
+| `description` | — | 已移除（请使用 `Description` 组件） |
+| `errorMessage` | — | 已移除（请使用 `FieldError` 组件） |
+| `value`, `defaultValue`, `onChange` | `DateField` | 相同（React Aria） |
+| `minValue`, `maxValue`, `granularity`, `placeholderValue` | `DateField` | 相同 |
+| `isRequired`, `isDisabled`, `isReadOnly`, `isInvalid`, `name` | `DateField` | 相同 |
+| `createCalendar`, `validationBehavior` | `DateField` | 相同 |
+| `variant` | `DateInputGroup` | 仅简化为 `primary` \| `secondary` |
+| `fullWidth` | `DateField` 或 `DateInputGroup` | 可在根或组上设置 |
+| `color` | — | 已移除（请使用 Tailwind CSS） |
+| `size` | — | 已移除（请使用 Tailwind CSS） |
+| `radius` | — | 已移除（请使用 Tailwind CSS） |
+| `labelPlacement` | — | 已移除（请通过布局自行处理） |
+| `startContent` | `DateInputGroup.Prefix` | 使用 Prefix 子节点 |
+| `endContent` | `DateInputGroup.Suffix` | 使用 Suffix 子节点 |
+| `classNames` | — | 请在 `DateField` 与 `DateInputGroup` 各部分使用 `className` |
+| `groupProps` | — | 已移除（请在 `DateInputGroup` 上使用 `className` 或 DOM 属性） |
+| `labelProps` | — | 已移除（请在 `Label` 上使用 `className`） |
+| `fieldProps` | — | 已移除（请在 `DateInputGroup` 上使用 `className`） |
+| `innerWrapperProps` | — | 已移除（请在组 / 输入相关部分使用 `className`） |
+| `descriptionProps` | — | 已移除（请在 `Description` 上使用 `className`） |
+| `errorMessageProps` | — | 已移除（请在 `FieldError` 上使用 `className`） |
+| `inputRef` | — | 已移除（ref 由 `DateField` / React Aria 处理） |
+
+## 迁移示例
+
+### 基础用法
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput label="Date" name="date" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### 含描述与错误
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput
+      description="Select your birth date"
+      label="Birth date"
+      name="birthdate"
+    />
+
+    <DateInput
+      errorMessage="Please enter a valid date"
+      isInvalid
+      label="Date"
+      name="date"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError, Label } from "@heroui/react";
+
+    <DateField className="w-[256px]" name="birthdate">
+      <Label>Birth date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <Description>Select your birth date</Description>
+    </DateField>
+
+    <DateField className="w-[256px]" isInvalid name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <FieldError>Please enter a valid date</FieldError>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### 必填
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput isRequired label="Date" name="date" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" isRequired name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseDate } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState(null);
+
+    <DateInput
+      label="Date"
+      name="date"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import type { DateValue } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState<DateValue | null>(null);
+
+    <DateField
+      className="w-[256px]"
+      name="date"
+      value={value}
+      onChange={setValue}
+    >
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### 最小值、最大值与粒度
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseDate } from "@internationalized/date";
+
+    <DateInput
+      granularity="day"
+      label="Date"
+      maxValue={parseDate("2025-12-31")}
+      minValue={parseDate("2020-01-01")}
+      name="date"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { parseDate } from "@internationalized/date";
+
+    <DateField
+      className="w-[256px]"
+      granularity="day"
+      maxValue={parseDate("2025-12-31")}
+      minValue={parseDate("2020-01-01")}
+      name="date"
+    >
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### 起始与结束内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput
+      endContent={<CalendarIcon />}
+      label="Date"
+      name="date"
+      startContent={<CalendarIcon />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup>
+        <DateInputGroup.Prefix>
+          <CalendarIcon />
+        </DateInputGroup.Prefix>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+        <DateInputGroup.Suffix>
+          <CalendarIcon />
+        </DateInputGroup.Suffix>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+### 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <DateInput label="Date" name="date" variant="bordered" />
+    <DateInput color="primary" label="Date" name="date" size="lg" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup variant="primary">
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+
+    <DateField className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateInputGroup variant="secondary">
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </DateField>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件组成
+
+v3 `DateField` 的结构如下：
+
+```
+DateField (Root)
+  ├── Label (optional)
+  ├── DateInputGroup
+  │   ├── DateInputGroup.Prefix (optional)
+  │   ├── DateInputGroup.Input → (segment) => DateInputGroup.Segment
+  │   └── DateInputGroup.Suffix (optional)
+  ├── Description (optional)
+  └── FieldError (optional)
+```
+
+## 总结
+
+1. **组件已重命名**：`DateInput` → `DateField`
+2. **组件结构**：必须使用复合组件：`DateField`（根）、`DateInputGroup`，以及 `DateInputGroup.Input`（render prop）与 `DateInputGroup.Segment`
+3. **标签 / 描述 / 错误**：请使用独立组件（`Label`、`Description`、`FieldError`）
+4. **日期相关 prop 不变**：`value`、`defaultValue`、`onChange`、`minValue`、`maxValue`、`granularity`、`placeholderValue`、`isRequired`、`isDisabled`、`isInvalid`、`name`、`createCalendar` 等仍位于 `DateField`
+5. **`DateInputGroup` 的变体**：v3 仅在 `DateInputGroup` 上支持 `variant="primary"` 与 `variant="secondary"`；`color`、`size`、`radius` 已移除 — 请使用 Tailwind CSS
+6. **起始 / 结束内容**：`startContent` / `endContent` → `DateInputGroup.Prefix` 与 `DateInputGroup.Suffix`
+7. **`labelPlacement` 已移除**：请通过布局自行处理
+8. **DOM / 类名相关 prop**：`groupProps`、`labelProps`、`fieldProps`、`classNames` 已移除 — 请在对应部分使用 `className`（及标准 DOM 属性）
