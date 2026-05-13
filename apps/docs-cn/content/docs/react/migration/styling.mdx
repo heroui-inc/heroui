@@ -1,0 +1,720 @@
+---
+title: 样式与主题
+description: 从 HeroUI v2 到 v3 的样式变更与主题系统迁移完整指南
+---
+
+<Callout type="info">
+  本指南涵盖了 HeroUI v2 与 v3 之间所有与样式相关的变更，包括工具类、组件样式、主题系统架构以及视觉差异。具体组件的 API 变更请参阅各个组件的迁移指南。
+</Callout>
+
+**注：** v3 已将 `classNames` 这一对象类型的 prop 替换为标准的 React `className` prop。所有组件现在都使用标准的 React `className` prop，而不再使用 v2 中的 `classNames` 对象属性。
+
+## 概述
+
+HeroUI v3 对样式系统进行了重大变更：
+
+- **CSS 优先架构**：以纯 CSS 文件取代 Tailwind 插件
+- **标准 Tailwind 工具类**：以标准 Tailwind 类取代自定义工具类
+- **CSS 变量**：全新的 CSS 变量命名与结构
+- **组件样式**：调整了默认尺寸、间距与视觉表现
+- **无需插件**：移除了对 Tailwind 插件配置的依赖
+- **颜色系统重构**：语义颜色被重新组织（`primary` → `accent`，移除 `secondary`，移除数字色阶）
+- **移除 Content 颜色**：`content1-4` 由 `surface` 与 `overlay` 体系替代
+
+## 快速参考
+
+### 工具类对照
+
+| v2 工具类 | v3 对应类 | 说明 |
+|-----------|--------------|-------|
+| `text-tiny` | `text-xs` | 字体大小：0.75rem → 0.75rem（相同） |
+| `text-small` | `text-sm` | 字体大小：0.875rem → 0.875rem（相同） |
+| `text-medium` | `text-base` | 字体大小：1rem → 1rem（相同） |
+| `text-large` | `text-lg` | 字体大小：1.125rem → 1.125rem（相同） |
+| `rounded-small` | `rounded-sm` | 圆角：8px → 4px（不同） |
+| `rounded-medium` | `rounded-md` | 圆角：12px → 6px（不同） |
+| `rounded-large` | `rounded-lg` | 圆角：14px → 8px（不同） |
+| `border-small` | `border` | 边框宽度：1px → 1px（使用标准 Tailwind） |
+| `border-medium` | `border-2` | 边框宽度：2px → 2px（使用标准 Tailwind） |
+| `border-large` | `border-[3px]` | 边框宽度：3px → 3px（使用任意值） |
+| `bg-content1` | `bg-surface` 或 `bg-overlay` | Content 颜色已移除，请改用 surface / overlay |
+| `bg-content2` | `bg-surface-secondary` | Content 颜色已移除，请改用 surface 层级 |
+| `bg-primary` | `bg-accent` | `primary` 已重命名为 `accent` |
+| `bg-secondary` | `bg-default` | `secondary` 颜色已移除，请改用 `default` |
+| `bg-primary-50` | `bg-accent-soft` | 数字色阶已移除 |
+| `bg-primary-100` | `bg-accent-soft` | 数字色阶已移除 |
+| `text-primary-600` | `text-accent` | 数字色阶已移除 |
+| `.transition-background` | 标准 CSS 过渡 | 已移除的工具类 |
+| `.transition-colors-opacity` | 标准 CSS 过渡 | 已移除的工具类 |
+
+## 工具类迁移
+
+### 文本工具类
+
+HeroUI v2 提供了一组自定义的文本尺寸工具类，并映射到 CSS 变量。v3 改用标准的 Tailwind 文本尺寸类。
+
+**v2 文本工具类：**
+
+```tsx
+// v2 - Custom utilities with CSS variables
+<div className="text-tiny">Tiny text</div>
+<div className="text-small">Small text</div>
+<div className="text-medium">Medium text</div>
+<div className="text-large">Large text</div>
+```
+
+**v3 文本工具类：**
+
+```tsx
+// v3 - Standard Tailwind classes
+<div className="text-xs">Tiny text</div>
+<div className="text-sm">Small text</div>
+<div className="text-base">Medium text</div>
+<div className="text-lg">Large text</div>
+```
+
+**对照详情：**
+
+| v2 类 | 字体大小 | 行高 | v3 类 | 字体大小 | 行高 |
+|----------|-----------|-------------|----------|-----------|-------------|
+| `text-tiny` | 0.75rem（12px） | 1rem（16px） | `text-xs` | 0.75rem（12px） | 1rem（16px） |
+| `text-small` | 0.875rem（14px） | 1.25rem（20px） | `text-sm` | 0.875rem（14px） | 1.25rem（20px） |
+| `text-medium` | 1rem（16px） | 1.5rem（24px） | `text-base` | 1rem（16px） | 1.5rem（24px） |
+| `text-large` | 1.125rem（18px） | 1.75rem（28px） | `text-lg` | 1.125rem（18px） | 1.75rem（28px） |
+
+### 圆角工具类
+
+v2 使用了自定义的圆角工具类（`rounded-small`、`rounded-medium`、`rounded-large`），并映射到 CSS 变量。v3 改用标准的 Tailwind 圆角类，但实际取值有所不同。
+
+**v2 圆角：**
+
+```tsx
+// v2 - Custom utilities
+<div className="rounded-small">Small radius</div>
+<div className="rounded-medium">Medium radius</div>
+<div className="rounded-large">Large radius</div>
+```
+
+**v3 圆角：**
+
+```tsx
+// v3 - Standard Tailwind classes
+<div className="rounded-sm">Small radius</div>
+<div className="rounded-md">Medium radius</div>
+<div className="rounded-lg">Large radius</div>
+```
+
+**取值对比：**
+
+| v2 类 | v2 取值 | v3 类 | v3 取值 | 差异 |
+|----------|----------|----------|----------|------------|
+| `rounded-small` | 8px（0.5rem） | `rounded-sm` | 4px（0.25rem） | 更小 |
+| `rounded-medium` | 12px（0.75rem） | `rounded-md` | 6px（0.375rem） | 更小 |
+| `rounded-large` | 14px（0.875rem） | `rounded-lg` | 8px（0.5rem） | 更小 |
+
+**注意：** v3 默认的圆角取值更小。如果你需要精确还原 v2 的取值，请使用任意值：
+
+```tsx
+// Match v2 rounded-small (8px)
+<div className="rounded-[8px]">Custom radius</div>
+
+// Match v2 rounded-medium (12px)
+<div className="rounded-[12px]">Custom radius</div>
+
+// Match v2 rounded-large (14px)
+<div className="rounded-[14px]">Custom radius</div>
+```
+
+### 边框宽度工具类
+
+v2 提供了自定义的边框宽度工具类（`border-small`、`border-medium`、`border-large`）。v3 改用标准的 Tailwind 边框宽度类。
+
+**v2 边框宽度：**
+
+```tsx
+// v2 - Custom utilities
+<div className="border-small border-default">1px border</div>
+<div className="border-medium border-primary">2px border</div>
+<div className="border-large border-danger">3px border</div>
+```
+
+**v3 边框宽度：**
+
+```tsx
+// v3 - Standard Tailwind classes
+<div className="border border-default">1px border</div>
+<div className="border-2 border-accent">2px border</div>
+<div className="border-[3px] border-danger">3px border</div>
+```
+
+**对照：**
+
+| v2 类 | 宽度 | v3 类 | 宽度 |
+|----------|-------|----------|-------|
+| `border-small` | 1px | `border` | 1px |
+| `border-medium` | 2px | `border-2` | 2px |
+| `border-large` | 3px | `border-[3px]` | 3px（任意值） |
+
+### 过渡工具类
+
+v2 为常见的动画模式提供了一组自定义的过渡工具类，默认持续时间为 250ms。v3 移除了这些工具类，转而推荐使用标准的 Tailwind `transition-*` 工具类，由你显式指定要应用过渡的属性。
+
+**v2 过渡工具类：**
+
+v2 提供了默认持续时间为 250ms、缓动函数为 `ease` 的自定义过渡工具类。下表展示了每个工具类对应的 CSS 过渡属性：
+
+| v2 工具类 | 过渡属性 |
+|-----------|----------------------|
+| `.transition-background` | `background` |
+| `.transition-colors-opacity` | `color, background-color, border-color, text-decoration-color, fill, stroke, opacity` |
+| `.transition-width` | `width` |
+| `.transition-height` | `height` |
+| `.transition-size` | `width, height` |
+| `.transition-left` | `left` |
+| `.transition-transform-opacity` | `transform, scale, opacity rotate` |
+| `.transition-transform-background` | `transform, scale, background` |
+| `.transition-transform-colors` | `transform, scale, color, background, background-color, border-color, text-decoration-color, fill, stroke` |
+| `.transition-transform-colors-opacity` | `transform, scale, color, background, background-color, border-color, text-decoration-color, fill, stroke, opacity` |
+
+**注意：** 这些工具类在 v3 中不再可用。请使用 Tailwind 标准的 `transition-*` 工具类，并显式指定要应用过渡的属性。
+
+### 其他工具类
+
+**滚动条工具类：**
+
+v2 提供了 `.scrollbar-hide` 和 `.scrollbar-default` 工具类。v3 默认不再包含这些工具类，你可以使用 Tailwind 的滚动条插件或自定义 CSS。
+
+**动画工具类：**
+
+v2 提供了 spinner 相关的动画工具类（如 `.spinner-bar-animation`、`.spinner-dot-animation` 等）。在 v3 中，这些动画由组件内部处理，不再作为公开的工具类暴露。
+
+**其他自定义工具类：**
+
+v2 中还包含一些自定义工具类，例如：
+- `.leading-inherit` → 改用 `leading-[inherit]`
+- `.tap-highlight-transparent` → 改用 `[-webkit-tap-highlight-color:transparent]`
+- `.input-search-cancel-button-none` → 如有需要，请使用自定义 CSS
+
+## 主题系统架构
+
+### v2：基于插件的体系
+
+v2 采用了 Tailwind CSS 插件方式：
+
+1. **生成工具类**：通过 JavaScript 创建自定义工具类
+2. **CSS 变量**：通过插件注入 CSS 变量
+3. **主题配置**：需要在 `tailwind.config.js` 中进行配置
+4. **构建时生成**：工具类在构建时生成
+
+**v2 配置：**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [
+    heroui({
+      layout: {
+        fontSize: {
+          tiny: "0.75rem",
+          small: "0.875rem",
+          medium: "1rem",
+          large: "1.125rem",
+        },
+        radius: {
+          small: "8px",
+          medium: "12px",
+          large: "14px",
+        },
+      },
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              // color definitions
+            },
+          },
+        },
+      },
+    }),
+  ],
+};
+```
+
+### v3：CSS 优先体系
+
+v3 采用纯 CSS 的方式：
+
+1. **CSS 文件**：样式直接定义在 CSS 文件中（位于 `packages/styles/`）
+2. **CSS 变量**：变量在 CSS 中定义，而非由插件生成
+3. **无需插件**：不再需要 Tailwind 插件
+4. **基于导入**：通过 CSS `@import` 引入样式
+
+**v3 配置：**
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+**无需 Tailwind 配置：**
+
+如果你只使用 HeroUI，可以完全删除 `tailwind.config.js`。如果你已有自定义的 Tailwind 配置，请保留它，但移除其中的 HeroUI 插件。
+
+### 架构对比
+
+| 对比项 | v2 | v3 |
+|--------|----|----|
+| **样式方案** | Tailwind 插件（JavaScript） | CSS 文件 |
+| **工具类生成方式** | 由插件在构建时生成 | 预定义的 CSS |
+| **CSS 变量** | 由插件生成 | 在 CSS 中定义 |
+| **配置方式** | `tailwind.config.js` | CSS 导入 |
+| **定制方式** | 插件配置 | 覆盖 CSS 变量 |
+| **构建依赖** | 需要插件 | 无需插件 |
+
+## CSS 变量与设计 token
+
+### 变量命名变更
+
+v2 采用 `--heroui-{property}-{scale}` 的命名模式，而 v3 改用 `--{property}` 或 `--color-{property}`。
+
+**v2 CSS 变量：**
+
+```css
+--heroui-font-size-tiny: 0.75rem;
+--heroui-font-size-small: 0.875rem;
+--heroui-radius-small: 8px;
+--heroui-radius-medium: 12px;
+--heroui-border-width-medium: 2px;
+--heroui-disabled-opacity: 0.5;
+```
+
+**v3 CSS 变量：**
+
+```css
+/* Typography - handled by Tailwind */
+/* No custom font-size variables */
+
+/* Radius */
+--radius-xs: calc(var(--radius) * 0.25);
+--radius-sm: calc(var(--radius) * 0.5);
+--radius-md: calc(var(--radius) * 0.75);
+--radius-lg: calc(var(--radius) * 1);
+--radius-xl: calc(var(--radius) * 1.5);
+
+/* Colors */
+--color-background: var(--background);
+--color-foreground: var(--foreground);
+--color-accent: var(--accent);
+--color-muted: var(--muted);
+
+/* Opacity */
+--disabled-opacity: 0.5;
+```
+
+### 颜色系统变更
+
+**v2 颜色结构：**
+
+```css
+--heroui-primary: 210 100% 50%;
+--heroui-primary-50: 210 100% 95%;
+--heroui-primary-100: 210 100% 90%;
+/* ... more shades ... */
+```
+
+**v3 颜色结构：**
+
+```css
+--accent: oklch(0.6204 0.195 253.83);
+--accent-foreground: var(--snow);
+--accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+```
+
+**主要差异：**
+
+1. **颜色格式**：v2 使用 HSL，v3 使用 OKLCH
+2. **命名**：v2 使用数字色阶（50-900），v3 使用语义命名
+3. **计算颜色**：v3 通过 `color-mix()` 计算悬停等状态色
+4. **前景色**：v3 显式定义了前景色
+5. **primary → accent**：`primary` 颜色已重命名为 `accent`
+6. **移除 secondary 颜色**：v2 中的 `secondary` 语义颜色（紫色）已被移除
+7. **移除数字色阶**：`primary-50`、`primary-100` 等数字色阶不再存在
+
+### primary → accent 重命名
+
+v2 使用 `primary` 作为主品牌色。v3 将其重命名为 `accent`，使语义更加清晰。
+
+**v2 中的 primary 颜色：**
+
+```tsx
+// v2 - Primary color with numbered scales
+<Button color="primary">Primary Button</Button>
+<div className="bg-primary">Primary background</div>
+<div className="bg-primary-50">Light primary</div>
+<div className="bg-primary-100">Lighter primary</div>
+<div className="text-primary-600">Primary text</div>
+```
+
+**v3 中的 accent 颜色：**
+
+```tsx
+// v3 - Accent color (no numbered scales)
+<Button variant="primary">Primary Button</Button>
+<div className="bg-accent">Accent background</div>
+<div className="bg-accent-soft">Soft accent</div>
+<div className="text-accent">Accent text</div>
+```
+
+**迁移：**
+
+| v2 类 | v3 对应类 | 说明 |
+|----------|---------------|-------|
+| `bg-primary` | `bg-accent` | 基础 accent 色 |
+| `text-primary` | `text-accent` | accent 文本颜色 |
+| `bg-primary-50` | `bg-accent-soft` | 浅色 accent 变体 |
+| `bg-primary-100` | `bg-accent-soft` | 浅色 accent 变体 |
+| `bg-primary-500` | `bg-accent` | 基础 accent 色 |
+| `text-primary-600` | `text-accent` | accent 文本颜色 |
+| `border-primary` | `border-accent` | accent 边框 |
+
+**注意：** v3 不再提供数字色阶（`-50`、`-100`、`-200` 等）。请使用语义化的变体（如 `-soft`、`-hover`），或自定义的 Tailwind 类。
+
+### secondary 颜色已移除
+
+v2 提供了 `secondary` 语义颜色（紫色），该颜色已在 v3 中移除。名为「secondary」的组件变体现在改用其他颜色。
+
+**v2 中的 secondary 颜色：**
+
+```tsx
+// v2 - Secondary as a semantic color (purple)
+<Button color="secondary">Secondary Button</Button>
+<div className="bg-secondary">Secondary background</div>
+<div className="bg-secondary-50">Light secondary</div>
+<div className="text-secondary-600">Secondary text</div>
+```
+
+**v3 中的 secondary 变体：**
+
+```tsx
+// v3 - Secondary is a variant, not a color
+<Button variant="secondary">Secondary Button</Button>
+<div className="bg-default">Default background (used by secondary variant)</div>
+<div className="text-accent">Accent text</div>
+```
+
+**迁移：**
+
+| v2 类 | v3 对应类 | 说明 |
+|----------|---------------|-------|
+| `bg-secondary` | `bg-default` | secondary 变体改用 default 颜色 |
+| `text-secondary` | `text-accent` | 使用 accent 进行强调 |
+| `bg-secondary-50` | `bg-default` | 改用 default 颜色 |
+| `border-secondary` | `border-accent` | 使用 accent 边框 |
+
+**注意：** 在 v3 中，「secondary」指的是组件变体样式（例如 `button--secondary`），而不是颜色 token。secondary 变体通常使用 `bg-default` 和 `text-accent`。
+
+### 数字色阶已移除
+
+v2 为所有语义颜色都提供了 50–900 的数字色阶。v3 移除了这些数字色阶，改用语义化的变体与计算得出的颜色。
+
+**v2 数字色阶：**
+
+```tsx
+// v2 - Numbered color scales
+<div className="bg-primary-50">Lightest</div>
+<div className="bg-primary-100">Lighter</div>
+<div className="bg-primary-200">Light</div>
+<div className="bg-primary-500">Base</div>
+<div className="bg-primary-600">Dark</div>
+<div className="bg-primary-900">Darkest</div>
+```
+
+**v3 语义化变体：**
+
+```tsx
+// v3 - Semantic variants and calculated colors
+<div className="bg-accent-soft">Soft variant</div>
+<div className="bg-accent">Base color</div>
+<div className="bg-accent-hover">Hover state</div>
+```
+
+**迁移：**
+
+- **浅色调**（`-50`、`-100`、`-200`）：改用 `-soft` 变体或自定义的 Tailwind 透明度类
+- **基础色**（`-500`）：直接使用基础色名（`bg-accent`、`bg-danger` 等）
+- **深色调**（`-600`、`-700`、`-800`、`-900`）：改用 hover 变体或自定义的 Tailwind 类
+
+### Content 颜色已移除
+
+v2 提供了 `content1`、`content2`、`content3` 和 `content4` 颜色，用于分层背景。这些颜色已在 v3 中移除，并由语义化的 surface 颜色替代。
+
+**v2 Content 颜色：**
+
+```tsx
+// v2 - Content colors for layered backgrounds
+<div className="bg-content1">Base content</div>
+<div className="bg-content2">Secondary content</div>
+<div className="bg-content3">Tertiary content</div>
+<div className="bg-content4">Quaternary content</div>
+```
+
+**v3 Surface 颜色：**
+
+```tsx
+// v3 - Surface colors for non-overlay components
+<div className="bg-surface">Base surface</div>
+<div className="bg-surface-secondary">Secondary surface</div>
+<div className="bg-surface-tertiary">Tertiary surface</div>
+<div className="bg-surface-quaternary">Quaternary surface</div>
+
+// v3 - Overlay colors for floating components
+<div className="bg-overlay">Overlay (tooltips, popovers, modals)</div>
+```
+
+**迁移对照：**
+
+| v2 类 | v3 对应类 | 用法 |
+|----------|---------------|-------|
+| `bg-content1` | `bg-surface` | 非浮层组件（Card、Accordion 等） |
+| `bg-content1` | `bg-overlay` | 浮层组件（Tooltip、Popover、Modal 等） |
+| `bg-content2` | `bg-surface-secondary` | 二级 surface 层级 |
+| `bg-content3` | `bg-surface-tertiary` | 三级 surface 层级 |
+| `bg-content4` | `bg-surface-quaternary` | 四级 surface 层级 |
+
+**主要变化：**
+
+1. **语义命名**：`content1-4` 已替换为 `surface` 与 `overlay`，使语义更清晰
+2. **针对不同组件**：页面级组件使用 `bg-surface`，浮层组件使用 `bg-overlay`
+3. **自动计算**：surface 的各级（`secondary`、`tertiary`、`quaternary`）通过 `color-mix()` 从基础 `surface` 颜色自动计算得出
+
+### 间距与布局 token
+
+**v2 布局 token：**
+
+```css
+--heroui-divider-weight: 1px;
+--heroui-disabled-opacity: 0.5;
+--heroui-hover-opacity: 0.8;
+```
+
+**v3 布局 token：**
+
+```css
+--border-width: 0px;
+--field-border-width: var(--border-width);
+--disabled-opacity: 0.5;
+--cursor-interactive: pointer;
+--cursor-disabled: not-allowed;
+--radius: 0.5rem;
+--field-radius: calc(var(--radius) * 1.5);
+```
+
+### 阴影 token
+
+**v2 阴影：**
+
+```css
+--heroui-box-shadow-small: 0px 0px 5px 0px rgb(0 0 0 / 0.02), ...;
+--heroui-box-shadow-medium: 0px 0px 15px 0px rgb(0 0 0 / 0.03), ...;
+--heroui-box-shadow-large: 0px 0px 30px 0px rgb(0 0 0 / 0.04), ...;
+```
+
+**v3 阴影：**
+
+```css
+--surface-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), ...;
+--overlay-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), ...;
+--field-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), ...;
+```
+
+**主要变化：**
+
+1. **语义命名**：v3 使用语义名称（`surface-shadow`、`overlay-shadow`），而非按尺寸命名
+2. **针对不同组件**：阴影与组件类型（surface、overlay、field）相绑定
+3. **深色模式**：在 v3 中，深色模式下的阴影为透明
+
+## 视觉差异
+
+### 对齐变化
+
+**Button 对齐：**
+
+- v2：图标与文本通过 `items-center justify-center` 对齐
+- v3：对齐方式相同，但加入了响应式高度调整
+
+**Input 对齐：**
+
+- v2：文本通过 `text-left` 对齐
+- v3：对齐方式相同，但内边距的调整可能影响视觉平衡
+
+### 间距变化
+
+**组件内边距：**
+
+v3 中大多数组件的内边距都有所增加：
+
+- **Card**：12px → 16px
+- **Button**：内边距相近，但高度改为响应式
+- **Input**：新增垂直内边距（`py-2`）
+
+**间隙（gap）：**
+
+v3 使用更一致的间隙：
+
+- **Card**：页眉、内容、页脚之间使用 `gap-3`
+- **Button**：图标与文字之间使用 `gap-2`
+- **Chip**：元素之间使用 `gap-1.5`
+
+### 尺寸变化
+
+**Button 高度：**
+
+- **Small**：32px → 36px（移动端）/ 32px（桌面端）
+- **Medium**：40px → 40px（移动端）/ 36px（桌面端）
+- **Large**：48px → 44px（移动端）/ 40px（桌面端）
+
+**Input 高度：**
+
+- **Medium**：40px → 36px（默认值，且为唯一可用尺寸）
+
+### 圆角变化
+
+**默认圆角：**
+
+- v2：组件默认使用 `rounded-medium`（12px）
+- v3：组件使用更大的圆角值：
+  - Button：`rounded-3xl`（24px）
+  - Card：`rounded-3xl`（24px）
+  - Chip：`rounded-2xl`（16px）
+  - Input：`rounded-field`（通常为 12–16px）
+
+### 颜色表现变化
+
+**颜色系统：**
+
+- v2：HSL 颜色格式
+- v3：OKLCH 颜色格式（在感知上更均匀）
+
+**默认颜色：**
+
+- v2：`primary`、`secondary`、`success`、`warning`、`danger`
+- v3：`accent`（替代 `primary`）、`success`、`warning`、`danger`
+
+**Muted 颜色：**
+
+- v2：使用 `foreground-400`、`foreground-500` 表示弱化文本
+- v3：使用 `muted` 颜色 token 表示弱化文本
+
+## 迁移示例
+
+### 工具类迁移
+
+**示例：文本工具类**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <div>
+      <h1 className="text-large font-bold">Title</h1>
+      <p className="text-small text-foreground-400">Description</p>
+      <span className="text-tiny text-foreground-500">Helper</span>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <div>
+      <h1 className="text-lg font-bold">Title</h1>
+      <p className="text-sm text-muted">Description</p>
+      <span className="text-xs text-muted">Helper</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 圆角迁移
+
+**示例：还原 v2 的圆角取值**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Card radius="md">
+      <CardBody>Content</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Option 1: Use standard Tailwind (smaller radius) */}
+    <Card className="rounded-md">
+      <Card.Content>Content</Card.Content>
+    </Card>
+
+    {/* Option 2: Match exact v2 value (12px) */}
+    <Card className="rounded-[12px]">
+      <Card.Content>Content</Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### 主题定制迁移
+
+**示例：自定义颜色**
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```js
+    // tailwind.config.js
+    const {heroui} = require("@heroui/react");
+
+    module.exports = {
+      plugins: [
+        heroui({
+          themes: {
+            light: {
+              colors: {
+                primary: {
+                  DEFAULT: "#006FEE",
+                  50: "#E6F1FE",
+                  // ... more shades
+                },
+              },
+            },
+          },
+        }),
+      ],
+    };
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```css
+    /* globals.css */
+    @import "tailwindcss";
+    @import "@heroui/styles";
+
+    :root {
+      --accent: oklch(0.6204 0.195 253.83);
+      --accent-foreground: oklch(0.9911 0 0);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## 最佳实践
+
+1. **优先使用标准 Tailwind**：相比自定义工具类，优先使用标准的 Tailwind 工具类
+2. **还原 v2 取值**：如果需要精确还原 v2 的视觉效果，请使用任意值
+3. **响应式测试**：v3 支持响应式尺寸——请在多种屏幕尺寸下进行测试
+4. **更新 CSS 变量**：自定义时请通过覆盖 CSS 变量来实现，而非修改 Tailwind 配置
+5. **查阅组件文档**：API 变更请参阅各个组件的迁移指南
+
+## 相关指南
+
+- [迁移总指南](/docs/react/migration)
+- [主题文档](/docs/react/getting-started/handbook/theming)
+- [样式指南](/docs/react/getting-started/handbook/styling)
