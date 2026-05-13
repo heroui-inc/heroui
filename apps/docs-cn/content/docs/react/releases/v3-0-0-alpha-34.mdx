@@ -1,0 +1,165 @@
+---
+title: v3.0.0-alpha.34
+description: 用 Form、TextField、RadioGroup、Label、Input、Fieldset 等简洁 API 构建表单的核心组件。
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2025 年 10 月 15 日</span>
+</div>
+
+此版本引入了一系列基于表单的组件、表单字段 token，重新组织了 Storybook，并对各组件之间的 data-slot 标识做了统一对齐。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### 基于表单的组件
+
+我们引入了一整套基于 React Aria Components 构建的表单类组件，为构建表单提供了无障碍且可组合的基础构件。这些组件包括 [Description](/docs/components/description)、[FieldError](/docs/components/field-error)、[Fieldset](/docs/components/fieldset)、[Form](/docs/components/form)、[Input](/docs/components/input)、[Label](/docs/components/label)、[RadioGroup](/docs/components/radio-group)、[TextField](/docs/components/text-field) 与 [TextArea](/docs/components/textarea)。
+
+#### Description
+
+<ComponentPreview
+  name="description-basic"
+/>
+
+#### FieldError
+
+<ComponentPreview
+  name="field-error-basic"
+/>
+
+#### Fieldset
+
+<ComponentPreview
+  name="fieldset-basic"
+/>
+
+#### Form
+
+<ComponentPreview
+  name="form-basic"
+/>
+
+#### Input
+
+<ComponentPreview
+  name="input-basic"
+/>
+
+#### Label
+
+<ComponentPreview
+  name="label-basic"
+/>
+
+#### RadioGroup
+
+<ComponentPreview
+  name="radio-group-basic"
+/>
+
+#### TextField
+
+<ComponentPreview
+  name="text-field-basic"
+/>
+
+#### TextArea
+
+<ComponentPreview
+  name="textarea-basic"
+/>
+
+### 表单字段 token
+
+引入 `--field-*` 表单字段 token，确保各表单组件之间样式保持一致。`--field-*` 变量的具体说明请参阅 [主题](/docs/handbook/theming#calculated-variables-tailwind)。
+
+### Storybook 重新组织
+
+按类别重新组织了 Storybook，方便导航与组件查找。
+
+### Skeleton 动画 token
+
+**🚧 破坏性变更：** 为了与其他组件 token 保持一致，[Skeleton](/docs/components/skeleton) 中的 `--skeleton-default-animation-type` 已重命名为 `--skeleton-animation`。
+
+### data-slot 对齐
+
+我们统一了各组件的 data-slot 标识，使样式与定制更加一致。这项标准化让通过 CSS 选择器定位特定组件部件变得更容易，整体上也优化了自定义组件样式时的开发体验。
+
+组件现在使用一致的 `data-slot` 属性，例如：
+- `data-slot="base"` —— 用于根元素
+- `data-slot="label"` —— 用于标签文本
+- `data-slot="description"` —— 用于描述文本
+- `data-slot="error"` —— 用于错误信息
+
+这样在所有表单组件中都能用可预期的方式进行 CSS 定位：
+
+```css
+.radio {
+  [data-slot="label"] {
+    /* Styles apply to radio labels */
+  }
+}
+```
+
+## 文档改进
+
+### 组件文档
+- **[Link](/docs/components/link)**：新增 anatomy 与带图标的示例，更新了 Link 与 Link.Icon 的 prop 章节。
+- **[Description](/docs/components/description)**、**[FieldError](/docs/components/field-error)**、**[Fieldset](/docs/components/fieldset)**、**[Form](/docs/components/form)**、**[Input](/docs/components/input)**、**[Label](/docs/components/label)**、**[RadioGroup](/docs/components/radio-group)**、**[TextField](/docs/components/text-field)**，以及 **[TextArea](/docs/components/textarea)**：附带使用示例的全新文档
+
+
+## 迁移指南
+
+### Skeleton 组件迁移
+
+1. **更新动画 token：**
+   - 将 `--skeleton-default-animation-type` 替换为 `--skeleton-animation`
+
+## 链接
+
+- [GitHub PR #5780](https://github.com/heroui-inc/heroui/pull/5780)
+- [Description 组件](/docs/components/description)
+- [FieldError 组件](/docs/components/field-error)
+- [Fieldset 组件](/docs/components/fieldset)
+- [Form 组件](/docs/components/form)
+- [Input 组件](/docs/components/input)
+- [Label 组件](/docs/components/label)
+- [RadioGroup 组件](/docs/components/radio-group)
+- [TextField 组件](/docs/components/text-field)
+- [TextArea 组件](/docs/components/textarea)
+- [Skeleton 组件](/docs/components/skeleton)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！

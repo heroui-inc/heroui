@@ -1,0 +1,324 @@
+---
+title: v3.0.0-beta.7
+description: 新增 4 个组件（Calendar、RangeCalendar、DatePicker、DateRangePicker）以及多项 API 改进。
+github:
+  pull: 6237
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 2 月 19 日</span>
+</div>
+
+本次发布新增 4 个组件：[Calendar](/docs/components/calendar)、[RangeCalendar](/docs/components/range-calendar)、[DatePicker](/docs/components/date-picker) 与 [DateRangePicker](/docs/components/date-range-picker)。同时还引入了 [Switch.Content](#switchcontent)，用于将 label 与 description 组合到 Switch 控件旁边；以及 [Tabs.Separator](#tabsseparator)，用于在 Tab 之间按需添加分隔线。
+
+⚠️ **破坏性变更**：从 Tabs 中移除了 `hideSeparator`；`DateInputGroup` 与 `ColorInputGroup` 已分别合并到 `DateField.Group`、`TimeField.Group` 与 `ColorField.Group` 之下。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-7-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-7-dark@2x.jpg"
+  alt="HeroUI v3 Beta 7"
+  href="/docs/changelog/v3-0-0-beta-7"
+/>
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### 日期与时间体系
+
+**日期与时间** —— Calendar、DatePicker、RangeCalendar 与 DateRangePicker 均基于 React Aria 的日期基元构建。支持国际化、时区，以及完整的键盘导航与 ARIA 无障碍能力。
+
+**主要特性：**
+- **历法系统**：公历、佛历、波斯历等
+- **年份选择器**：用于快速跳转年份的浮层
+- **单元格指示器**：在单元格上展示事件、可用状态或状态点
+- **范围选择**：日期范围带有视觉高亮
+- **无障碍**：键盘导航、屏幕阅读器、ARIA 全部支持
+
+所有日期值都使用 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) 提供的类型（`CalendarDate`、`CalendarDateTime`、`ZonedDateTime`）。可以用 [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) 覆盖区域设置，并通过 [`useLocale`](https://react-aria.adobe.com/useLocale) 读取它。
+
+### 新组件
+
+- **[Calendar](#calendar)**：单日期选择，支持年份选择器、指示器与多月份显示。（[文档](/docs/components/calendar)）
+- **[RangeCalendar](#rangecalendar)**：日期范围选择，支持范围高亮与多月份显示。（[文档](/docs/components/range-calendar)）
+- **[DatePicker](#datepicker)**：日期输入框 + popover 日历。（[文档](/docs/components/date-picker)）
+- **[DateRangePicker](#daterangepicker)**：两个日期输入框 + popover 范围日历。（[文档](/docs/components/date-range-picker)）
+
+### Calendar
+
+支持单日期选择的日历，包含年份选择器、单元格指示器、多月份视图以及国际化历法。
+
+<ComponentPreview
+  name="calendar-basic"
+/>
+
+**年份选择器：**
+
+<ComponentPreview
+  name="calendar-year-picker"
+/>
+
+
+**国际化历法：**
+
+<ComponentPreview
+  name="calendar-international-calendar"
+/>
+
+### RangeCalendar
+
+日期范围选择，支持范围高亮与多月份视图。
+
+<ComponentPreview
+  name="range-calendar-basic"
+/>
+
+**多月份显示：**
+
+<ComponentPreview
+  name="range-calendar-multiple-months"
+/>
+
+### DatePicker
+
+日期输入框 + popover 日历。支持格式选项、国际化、自定义指示器与表单校验。
+
+<ComponentPreview
+  name="date-picker-basic"
+/>
+
+**日期与时间（搭配 TimeField）：**
+
+<ComponentPreview
+  name="date-picker-format-options"
+/>
+
+### DateRangePicker
+
+两个日期输入框 + popover 范围日历。
+
+<ComponentPreview
+  name="date-range-picker-basic"
+/>
+
+## API 改进
+
+### Switch.Content
+
+`Switch.Content` 用于将 label 与 description 组合到 Switch 控件旁边（[#6240](https://github.com/heroui-inc/heroui/pull/6240)）。
+
+**之前：**
+```tsx
+import { Switch, Label, Description } from '@heroui/react';
+
+<Switch>
+  <Switch.Control>
+    <Switch.Thumb />
+  </Switch.Control>
+  <Switch.Content>
+    <Label>Email notifications</Label>
+    <Description>Get notified when someone mentions you</Description>
+  </Switch.Content>
+</Switch>
+```
+
+### Tabs.Separator
+
+[Tabs](/docs/components/tabs) 组件现在新增了一个显式的 `Tabs.Separator` 子组件，用于在 Tab 之间添加视觉分隔线。它取代了之前自动生成的 CSS 伪元素分隔线以及 `hideSeparator` prop（[#6243](https://github.com/heroui-inc/heroui/pull/6243)）。
+
+分隔线现在改为 **按需启用** —— 在希望出现分隔线的 `<Tabs.Tab>` 内部添加 `<Tabs.Separator />` 即可。
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-with-separator"
+/>
+
+### Field 子组件的合并
+
+`DateField`、`TimeField` 与 `ColorField` 现在直接暴露各自的输入组子组件，不再需要单独引入 `DateInputGroup` 或 `ColorInputGroup`。具体的迁移方式请参阅 [破坏性变更](#-breaking-changes)。
+
+### Breadcrumbs 修复
+
+传给 `Breadcrumbs.Item` 的 props 现在会正确转发到底层的 `Link`（[#6233](https://github.com/heroui-inc/heroui/pull/6233)）。
+
+## 样式修复
+
+- **ListBox Item**：将悬停背景色从 `bg-default-hover` 调整为 `bg-default`，以保持一致性
+- **Date Input Group**：将段（segment）文本从 `tabular-nums` 调整为 `text-nowrap`，优化布局
+- **Date Input Group**：改进 focus-within 样式，使其将日期选择器触发器排除在字段聚焦高亮之外
+
+## 依赖更新
+
+- **React Aria Components**：从 `1.14.0` 升级到 `1.15.0` —— 新增了 [`render` prop](https://react-aria.adobe.com/customization#dom-elements)，可用于自定义任何 React Aria 组件渲染的 DOM 元素（适用于路由链接、Motion 等动画库）
+- **@react-aria/utils**：从 `3.32.0` 升级到 `3.33.0`
+- **@react-types/shared**：从 `3.32.1` 升级到 `3.33.0`
+- **@internationalized/date**：从 `3.10.1` 升级到 `3.11.0` —— 日期字段现在改为在失焦时进行约束，而不是在输入过程中实时约束
+- 新增 `@react-aria/i18n` 与 `@react-stately/utils`，用于日历的国际化
+
+## ⚠️ 破坏性变更
+
+### Tabs —— 移除 `hideSeparator` prop
+
+`hideSeparator` prop 已从 Tabs 组件中移除。分隔线现在改为 **按需启用**，通过新增的 `<Tabs.Separator />` 子组件来添加，而不再通过 CSS 伪元素自动生成（[#6243](https://github.com/heroui-inc/heroui/pull/6243)）。
+
+**之前：**
+```tsx
+{/* Separators shown by default, hidden via prop */}
+<Tabs hideSeparator>
+  <Tabs.List>
+    <Tabs.Tab id="tab1">Tab 1<Tabs.Indicator /></Tabs.Tab>
+    <Tabs.Tab id="tab2">Tab 2<Tabs.Indicator /></Tabs.Tab>
+  </Tabs.List>
+</Tabs>
+```
+
+**之后：**
+```tsx
+{/* No separators by default — explicitly add them where needed */}
+<Tabs>
+  <Tabs.List>
+    <Tabs.Tab id="tab1"><Tabs.Indicator />Tab 1</Tabs.Tab>
+    <Tabs.Tab id="tab2"><Tabs.Separator /><Tabs.Indicator />Tab 2</Tabs.Tab>
+  </Tabs.List>
+</Tabs>
+```
+
+**CSS 变更：**
+- Tab 的分隔线样式已从伪元素（`.tabs__tab:not(:first-child):before`）迁移到独立的 `.tabs__separator` 类
+- 已移除 `[data-hide-separator]` 这一 data 属性
+
+### Field 子组件 API 变更
+
+`DateInputGroup` 与 `ColorInputGroup` 不再从 `@heroui/react` 直接导出。它们的子组件已分别合并到对应的 Field 组件之下（`DateField`、`TimeField`、`ColorField`）。
+
+#### DateField 变更
+
+**之前：**
+```tsx
+import {DateField, Label, DateInputGroup, Description} from '@heroui/react';
+
+<DateField>
+  <Label>Date</Label>
+  <DateInputGroup>
+    <DateInputGroup.Prefix>...</DateInputGroup.Prefix>
+    <DateInputGroup.Input>
+      {(segment) => <DateInputGroup.Segment segment={segment} />}
+    </DateInputGroup.Input>
+    <DateInputGroup.Suffix>...</DateInputGroup.Suffix>
+  </DateInputGroup>
+  <Description>Pick a date</Description>
+</DateField>
+```
+
+**之后：**
+```tsx
+import {DateField, Label, Description} from '@heroui/react';
+
+<DateField>
+  <Label>Date</Label>
+  <DateField.Group>
+    <DateField.Prefix>...</DateField.Prefix>
+    <DateField.Input>
+      {(segment) => <DateField.Segment segment={segment} />}
+    </DateField.Input>
+    <DateField.Suffix>...</DateField.Suffix>
+  </DateField.Group>
+  <Description>Pick a date</Description>
+</DateField>
+```
+
+#### TimeField 变更
+
+模式与 DateField 相同：
+
+| 之前 | 之后 |
+|------|------|
+| `DateInputGroup` | `TimeField.Group` |
+| `DateInputGroup.Input` | `TimeField.Input` |
+| `DateInputGroup.Segment` | `TimeField.Segment` |
+| `DateInputGroup.Prefix` | `TimeField.Prefix` |
+| `DateInputGroup.Suffix` | `TimeField.Suffix` |
+
+#### ColorField 变更
+
+| 之前 | 之后 |
+|------|------|
+| `ColorInputGroup` | `ColorField.Group` |
+| `ColorInputGroup.Input` | `ColorField.Input` |
+| `ColorInputGroup.Prefix` | `ColorField.Prefix` |
+| `ColorInputGroup.Suffix` | `ColorField.Suffix` |
+
+**用法：**
+
+```tsx
+import {ColorField, Label, ColorInputGroup, ColorSwatch} from '@heroui/react';
+
+<ColorField>
+  <Label>Color</Label>
+  <ColorInputGroup>
+    <ColorInputGroup.Prefix>
+      <ColorSwatch color="#000" />
+    </ColorInputGroup.Prefix>
+    <ColorInputGroup.Input />
+  </ColorInputGroup>
+</ColorField>
+```
+
+**之后：**
+```tsx
+import {ColorField, Label, ColorSwatch} from '@heroui/react';
+
+<ColorField>
+  <Label>Color</Label>
+  <ColorField.Group>
+    <ColorField.Prefix>
+      <ColorSwatch color="#000" />
+    </ColorField.Prefix>
+    <ColorField.Input />
+  </ColorField.Group>
+</ColorField>
+```
+
+> **说明：** 底层的 CSS 类名（`.date-input-group`、`.color-input-group` 等）保持不变，仅 JavaScript 引入路径与组件名称发生了变化。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [设计系统 - Figma Kit v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6237](https://github.com/heroui-inc/heroui/pull/6237)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

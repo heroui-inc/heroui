@@ -1,0 +1,174 @@
+---
+title: v3.0.0-beta.8
+description: 新增 3 个组件（Badge、Pagination、Table）、DateField 的多项改进，以及关键的 API / 样式修复。
+github:
+  pull: 6270
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 3 月 2 日</span>
+</div>
+
+本次发布新增三个组件：[Badge](/docs/components/badge)、[Pagination](/docs/components/pagination) 与 [Table](/docs/components/table)，并为 [DateField](/docs/components/date-field) 与 [TimeField](/docs/components/time-field) 提供了新的 `InputContainer` 组合 API。
+
+⚠️ **破坏性变更**：TextField 的 CSS 类已从 `.text-field` 重命名为 `.textfield`。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-8-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-8-dark@2x.jpg"
+  alt="HeroUI v3 Beta 8"
+  href="/docs/changelog/v3-0-0-beta-8"
+/>
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### 新组件
+
+- **[Badge](#badge)**：紧凑的状态 + 计数指示器，可配置颜色、变体、放置位置与尺寸。（[文档](/docs/components/badge)）
+- **[Pagination](#pagination)**：分页相关的复合组件基元，提供摘要、省略号以及上一页 / 下一页等控件。（[文档](/docs/components/pagination)）
+- **[Table](#table)**：数据表格基元，支持排序、选择、列宽调整、异步加载以及表脚组合。（[文档](/docs/components/table)）
+
+### Badge
+
+新增徽章基元，可用于计数、标签以及通过 `Badge.Anchor` 与 `Badge.Label` 锚定的浮层。
+
+<ComponentPreview
+  name="badge-basic"
+/>
+
+### Pagination
+
+新增导航组件，由可组合的部件构成（`Root`、`Content`、`Item`、`Link`、`Previous`、`Next`、`Summary`、`Ellipsis`）。
+
+<ComponentPreview
+  name="pagination-with-ellipsis"
+/>
+
+### Table
+
+基于 React Aria 构建的复合数据表格，支持可排序的列、行选择、自定义单元格、加载更多哨兵行以及可调整宽度的列。
+
+<ComponentPreview
+  name="table-basic"
+/>
+
+**自定义单元格：**
+
+<ComponentPreview
+  name="table-custom-cells"
+/>
+
+**分页：**
+
+<ComponentPreview
+  name="table-pagination"
+/>
+
+**空状态：**
+
+<ComponentPreview
+  name="table-empty-state"
+/>
+
+## 组件 + API 改进
+
+### DateField 与 TimeField 的增强
+
+`DateField` 与 `TimeField` 现在暴露了 `InputContainer`，用于在前缀与后缀内容之间包裹输入段（segment）。
+
+**之前：**
+```tsx
+<DateField.Group>
+  <DateField.Prefix>...</DateField.Prefix>
+  <DateField.Input>
+    {(segment) => <DateField.Segment segment={segment} />}
+  </DateField.Input>
+  <DateField.Suffix>...</DateField.Suffix>
+</DateField.Group>
+```
+
+**之后：**
+```tsx
+<DateField.Group>
+  <DateField.Prefix>...</DateField.Prefix>
+  <DateField.InputContainer>
+    <DateField.Input>
+      {(segment) => <DateField.Segment segment={segment} />}
+    </DateField.Input>
+  </DateField.InputContainer>
+  <DateField.Suffix>...</DateField.Suffix>
+</DateField.Group>
+```
+
+<ComponentPreview
+  name="date-range-picker-input-container"
+/>
+
+## ⚠️ 破坏性变更
+
+### TextField 类名 + 路径重命名
+
+为避免与 Tailwind 的 `text-*` 工具类前缀冲突，TextField 的样式命名已统一调整。
+
+| 组件 | 旧类名 | 新类名 | 说明 |
+|------|--------|--------|------|
+| **TextField Root** | `.text-field` | `.textfield` | 根类名重命名 |
+| **TextField Full Width** | `.text-field--full-width` | `.textfield--full-width` | 修饰类重命名 |
+
+同一变更涉及的其他重命名：
+- 样式文件：`text-field.css` -> `textfield.css`
+- 样式导出路径：`@heroui/styles/src/components/text-field` -> `@heroui/styles/src/components/textfield`
+
+## 样式修复
+
+- **RangeCalendar**：为日历单元格添加圆角，优化范围选择的视觉效果（[#6270](https://github.com/heroui-inc/heroui/pull/6270)）
+
+## Bug 修复
+
+- 通过将 `isRequired` 转化为 `data-required`，为 **DatePicker** 与 **DateRangePicker** 补齐了必填状态的红色星号行为（[#6270](https://github.com/heroui-inc/heroui/pull/6270)）
+- 修复了 **Autocomplete** 与 **Select** 中触发器无效状态样式缺失的问题——将 invalid 样式限定在根状态范围内（[#6270](https://github.com/heroui-inc/heroui/pull/6270)）
+- 更新了 TextField 的文档与演示引用，使其指向新的 `textfield-*` demo key 以及对应的源码 / 样式路径（[#6270](https://github.com/heroui-inc/heroui/pull/6270)）
+
+## 链接
+
+- [组件文档](/docs/components)
+- [设计系统 - Figma Kit v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6270](https://github.com/heroui-inc/heroui/pull/6270)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

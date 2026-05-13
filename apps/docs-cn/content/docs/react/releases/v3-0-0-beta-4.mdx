@@ -1,0 +1,328 @@
+---
+title: v3.0.0-beta.4
+description: 全新的主题构建器、三个新组件（Autocomplete、Breadcrumbs、Toast）、Tabs 的 secondary 变体、Input / InputGroup 变体，以及多项改进。
+github:
+  pull: 6121
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 1 月 20 日</span>
+</div>
+
+<Callout type="warning">
+  **已修复关键构建问题**：此版本（beta.4）存在一个关键构建问题，已在 **beta.5** 中修复。请升级到 `@heroui/styles@3.0.0-beta.5` 与 `@heroui/react@3.0.0-beta.5`，以确保 TypeScript 声明文件能正确生成、导出能正确解析。
+</Callout>
+
+此版本引入了用于可视化主题定制的全新 [主题构建器](/themes)，三个新组件（[Autocomplete](/docs/components/autocomplete)、[Breadcrumbs](/docs/components/breadcrumbs)、[Toast](/docs/components/toast)），为 [Tabs](/docs/components/tabs) 添加 secondary 变体，为 [Input](/docs/components/input) 与 [InputGroup](/docs/components/input-group) 添加 primary / secondary 变体，InputGroup 新增对 TextArea 的支持，以及 ⚠️ **破坏性变更**：移除 Link 的下划线变体，并从表单组件中移除 `isInSurface` prop。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-4-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-4-dark@2x.jpg"
+  alt="HeroUI v3 Beta 4"
+  href="/docs/changelog/v3-0-0-beta-4"
+/>
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### 主题构建器
+
+我们很高兴推出 **[主题构建器](/themes)** —— 用于创建与定制 HeroUI 主题的强大可视化工具。可在实时预览中构建你专属的主题，并导出可直接使用的 CSS。
+
+**主要特性：**
+- **可视化颜色编辑**：通过 OKLCH 颜色选择器以及直观的亮度、色度、色相滑块来调整颜色
+- **实时预览**：在实时组件预览中立即查看你的修改
+- **自定义强调色**：定义你的品牌色，并观察它如何贯穿到所有组件
+- **预设主题**：从精选预设（如 Default、Airbnb、Coinbase、Discord）入手
+- **导出即可用**：生成 CSS 变量，直接复制到你的项目即可
+- **浅色与深色模式**：可联动也可独立地同时定制两套主题
+- **键盘快捷键**：支持撤销 / 重做以及快速操作，提升工作流效率
+
+立即在 [v3.heroui.com/themes](/themes) 上试用。
+
+### 新组件
+
+本次发布共引入 **3 个** 新的基础组件：
+
+- **[Autocomplete](#autocomplete)**：将 Select 与过滤功能结合，让用户可以在选项列表中搜索并选择。（[文档](/docs/components/autocomplete)）
+- **[Breadcrumbs](#breadcrumbs)**：导航面包屑，用于展示当前页面在层级结构中的位置。（[文档](/docs/components/breadcrumbs)）
+- **[Toast](#toast)**：用于展示临时通知与消息，支持自动关闭以及自定义放置位置。（[文档](/docs/components/toast)）
+
+### Autocomplete
+
+<ComponentPreview
+  name="autocomplete-default"
+/>
+
+### Breadcrumbs
+
+<ComponentPreview
+  name="breadcrumbs-basic"
+/>
+
+### Toast
+
+<Callout type="warning">
+  该组件目前处于预览阶段，部分功能可能尚未按预期工作。
+</Callout>
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+## 组件改进
+
+### Tabs 的 secondary 变体
+
+为 [Tabs](/docs/components/tabs) 新增 `secondary` 变体，使用下划线指示器样式。该变体同时支持水平与垂直方向。
+
+<ComponentPreview
+  name="tabs-secondary"
+/>
+
+**用法：**
+
+```tsx
+<Tabs variant="secondary">
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="overview">
+        Overview
+        <Tabs.Indicator />
+      </Tabs.Tab>
+      <Tabs.Tab id="analytics">
+        Analytics
+        <Tabs.Indicator />
+      </Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+  <Tabs.Panel id="overview">Content</Tabs.Panel>
+  <Tabs.Panel id="analytics">Content</Tabs.Panel>
+</Tabs>
+```
+
+### Input 变体
+
+为 [Input](/docs/components/input) 组件新增 `primary` 与 `secondary` 变体：
+
+- **`primary`**（默认）：带阴影的标准样式，适用于大多数场景
+- **`secondary`**：不带阴影的低调变体，适合在 Surface 组件内部使用
+
+<ComponentPreview
+  name="input-variants"
+/>
+
+### InputGroup 增强
+
+[InputGroup](/docs/components/input-group) 组件获得多项改进：
+
+**TextArea 支持**：可使用 `InputGroup.TextArea` 来构建带有 prefix 与 suffix 的多行文本输入。
+
+<ComponentPreview
+  name="input-group-with-textarea"
+/>
+
+**变体**：新增与 Input 组件相匹配的 `primary` 与 `secondary` 变体。
+
+<ComponentPreview
+  name="input-group-variants"
+/>
+
+### Button 与 ButtonGroup 的 outline 变体
+
+为 [Button](/docs/components/button) 与 [ButtonGroup](/docs/components/button-group) 同时新增 `outline` 变体，用于呈现描边样式。
+
+<ComponentPreview
+  name="button-outline-variant"
+/>
+
+### AlertDialog 尺寸支持
+
+为 [AlertDialog](/docs/components/alert-dialog) 组件新增尺寸支持，让你可以控制对话框的大小。
+
+<ComponentPreview
+  name="alert-dialog-sizes"
+/>
+
+### Checkbox 动画改进
+
+为 [Checkbox](/docs/components/checkbox) 提供更快的动画与更粗的描边宽度，反馈更明显。
+
+<ComponentPreview
+  name="checkbox-basic"
+/>
+
+### Link 的文本装饰
+
+[Link](/docs/components/link) 组件现在使用 Tailwind CSS 类来设置文本装饰，而不再依赖内置变体。这样既更灵活，也更贴合 Tailwind 的使用习惯。
+
+**可用的 Tailwind 工具类：**
+- `underline` —— 始终显示下划线
+- `no-underline` —— 移除下划线
+- `hover:underline` —— 仅在悬停时显示下划线
+- `decoration-primary`、`decoration-secondary` 等 —— 设置下划线颜色
+- `decoration-1`、`decoration-2`、`decoration-4` —— 控制下划线粗细
+- `underline-offset-1`、`underline-offset-2` 等 —— 调整下划线偏移
+
+<ComponentPreview
+  name="link-underline-and-offset"
+/>
+
+## ⚠️ 破坏性变更
+
+### Link 组件 —— 移除下划线相关变体
+
+Link 组件内置的 `underline` 与 `underlineOffset` prop 已被移除。请改用 Tailwind CSS 类来控制文本装饰。
+
+**之前：**
+```tsx
+<Link href="#" underline="hover" underlineOffset={4}>
+  Link text
+</Link>
+```
+
+**之后：**
+```tsx
+<Link href="#" className="hover:underline underline-offset-4">
+  Link text
+</Link>
+```
+
+**可用的 Tailwind 类：**
+- `underline`、`no-underline`、`hover:underline` —— 装饰线
+- `decoration-primary`、`decoration-muted` 等 —— 装饰线颜色
+- `decoration-solid`、`decoration-dashed`、`decoration-dotted` —— 装饰线样式
+- `decoration-1`、`decoration-2`、`decoration-4` —— 装饰线粗细
+- `underline-offset-1`、`underline-offset-2`、`underline-offset-4` —— 下划线偏移
+
+详见 [Link 文档](/docs/components/link)。
+
+### 表单组件 —— 移除 `isInSurface` prop
+
+`isInSurface` prop 以及自动 surface 检测已从基于表单的组件中移除。当你将表单组件放置在 Surface、Card 或其他基于 Surface 的容器中时，请改用 `variant="secondary"`。
+
+**之前：**
+```tsx
+<Surface>
+  {/* Input automatically detected surface context */}
+  <Input isInSurface />
+</Surface>
+```
+
+**之后：**
+```tsx
+<Surface>
+  {/* Use variant="secondary" for surface backgrounds */}
+  <Input variant="secondary" />
+</Surface>
+```
+
+**受影响的组件：**
+- Input
+- InputGroup
+- TextField
+- TextArea
+- SearchField
+- NumberField
+- DateField
+- TimeField
+- Select
+- ComboBox
+- Autocomplete
+
+`secondary` 变体提供不带阴影的低调样式，更适合在 surface 背景上使用。
+
+## 样式修复
+
+- **Button**：更新 secondary 按钮颜色，提升视觉一致性
+- **Checkbox**：优化动画速度并加粗描边，反馈更明显（详见 [Checkbox 动画改进](#checkbox-animation-improvements)）
+- **Link**：更新装饰线样式与过渡时长
+- **Focus Visible**：在 focus-visible 选择器中加入 `:not(:focus)`，避免与 hover 状态冲突
+- **Separator**：将固定样式仅应用到水平方向的分隔线
+
+## Bug 修复
+
+- 修复使用按钮变体样式的 Link
+- 修复 Safari 中 BEM 样式下 Fieldset 的 Flexbox 兼容性问题
+- 修复 SearchField 在空状态时未正确禁用清除按钮的问题
+- 修复 ButtonGroup 的 context 仅对直接子元素生效的问题
+- 修复 ButtonGroup 中 `BUTTON_GROUP_CHILD` 重新导出的类型声明
+
+## 依赖更新
+
+### 直接从 React Aria Components 重新导出
+
+HeroUI 现在直接从 `react-aria-components` 重新导出了一系列基元与工具，方便你访问。这些导出对于 [React Aria 框架配置](https://react-aria.adobe.com/frameworks) 尤其有用。
+
+**Provider：**
+- `RouterProvider` —— 配置 React Aria 的 Link 使用客户端路由器
+- `I18nProvider` —— 设置 React Aria Components 使用的 locale
+
+**Hook 与工具：**
+- `isRTL` —— 检查某个 locale 是否为从右到左
+- `useLocale` —— 访问当前 locale 与方向
+- `useFilter` —— 对集合进行过滤与排序
+
+**组件：**
+- `Collection` —— 用于管理列表的集合组件
+- `ListBoxLoadMoreItem` —— 用于加载更多条目的 ListBox 项
+
+**国际化工具：**
+- `getLocalizationScript` —— 获取用于服务端渲染的本地化脚本（来自 `react-aria-components/i18n`）
+
+以上这些都可以直接从 `@heroui/react` 引入：
+
+```tsx
+import {
+  RouterProvider,
+  I18nProvider,
+  isRTL,
+  useLocale,
+  useFilter,
+  getLocalizationScript
+} from "@heroui/react";
+```
+
+## 链接
+
+- [主题构建器](/themes)
+- [组件文档](/docs/react/components)
+- [设计系统 - Figma Kit v3（已更新）](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6121](https://github.com/heroui-inc/heroui/pull/6121)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

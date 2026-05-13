@@ -1,0 +1,248 @@
+---
+title: v3.0.0-rc.1
+description: 新增 7 个组件（Drawer、ToggleButton、ToggleButtonGroup、Meter、ProgressBar、ProgressCircle、Toolbar），Table 与 ListBox 支持虚拟化，ButtonGroup 多项改进，以及若干 bug 修复。
+github:
+  pull: 6285
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 3 月 14 日</span>
+</div>
+
+新增七个组件：[Drawer](/docs/components/drawer)、[ToggleButton](/docs/components/toggle-button)、[ToggleButtonGroup](/docs/components/toggle-button-group)、[Meter](/docs/components/meter)、[ProgressBar](/docs/components/progress-bar)、[ProgressCircle](/docs/components/progress-circle) 与 [Toolbar](/docs/components/toolbar)。Table 与 ListBox 支持虚拟化，ButtonGroup 新增 `Separator` 子组件并支持垂直方向，React Aria Components 升级到 v1.16.0。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/rc-1-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/rc-1-dark@2x.jpg"
+  alt="HeroUI v3 RC 1"
+  href="/docs/changelog/v3-0-0-rc-1"
+/>
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@rc @heroui/react@rc
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### 新组件
+
+- **[Drawer](#drawer)**：滑出式面板，支持拖拽关闭、4 种放置位置、多种背景遮罩变体以及可滚动的内容区（[文档](/docs/components/drawer)）
+- **[ToggleButton](#toggle-button)**：选中 / 未选中两态的切换按钮，支持全部按钮变体以及仅图标模式（[文档](/docs/components/toggle-button)）
+- **[ToggleButtonGroup](#toggle-button-group)**：单选或多选的切换按钮组，支持 attached / detached 布局以及方向设置（[文档](/docs/components/toggle-button-group)）
+- **[Meter](#meter)**：在已知范围内呈现某个数值——例如磁盘占用、密码强度、配额等（[文档](/docs/components/meter)）
+- **[ProgressBar](#progress-bar)**：线性进度条，支持确定 / 不确定态、多种颜色与自定义格式（[文档](/docs/components/progress-bar)）
+- **[ProgressCircle](#progress-circle)**：基于 SVG 的环形进度条，可自定义轨道圆与填充圆（[文档](/docs/components/progress-circle)）
+- **[Toolbar](#toolbar)**：将按钮、切换控件与分隔线按水平或垂直方向组合在一起的工具栏组件（[文档](/docs/components/toolbar)）
+
+### Drawer
+
+带有背景遮罩的滑出式浮层面板，支持顶部 / 底部 / 左侧 / 右侧四种放置位置、拖拽关闭手势以及多种背景遮罩变体。复合部件包括：`Trigger`、`Backdrop`、`Content`、`Dialog`、`Header`、`Heading`、`Body`、`Footer`、`Handle`、`CloseTrigger`。
+
+<ComponentPreview
+  name="drawer-basic"
+/>
+
+**放置位置：**
+
+<ComponentPreview
+  name="drawer-placements"
+/>
+
+**配合表单使用：**
+
+<ComponentPreview
+  name="drawer-with-form"
+/>
+
+### Toggle Button
+
+具备状态的切换按钮，可在选中与未选中之间切换。支持全部按钮变体与尺寸、仅图标模式，以及受控 / 非受控两种使用方式。
+
+<ComponentPreview
+  name="toggle-button-basic"
+/>
+
+**变体：**
+
+<ComponentPreview
+  name="toggle-button-variants"
+/>
+
+### Toggle Button Group
+
+单选或多选的切换按钮组。支持 attached（连接式）与 detached（分离式）两种布局、垂直方向、整宽展示，以及一个 `Separator` 子组件。
+
+<ComponentPreview
+  name="toggle-button-group-basic"
+/>
+
+**选择模式：**
+
+<ComponentPreview
+  name="toggle-button-group-selection-mode"
+/>
+
+**Attached 模式：**
+
+<ComponentPreview
+  name="toggle-button-group-attached"
+/>
+
+### Meter
+
+在已知范围内呈现某个数值——例如磁盘占用、密码强度、配额等。复合部件包括：`Root`、`Output`、`Track`、`Fill`。
+
+<ComponentPreview
+  name="meter-basic"
+/>
+
+**颜色：**
+
+<ComponentPreview
+  name="meter-colors"
+/>
+
+### Progress Bar
+
+线性进度指示器，支持确定 / 不确定态、颜色变体、多种尺寸以及自定义数值显示。复合部件包括：`Root`、`Output`、`Track`、`Fill`。
+
+<ComponentPreview
+  name="progress-bar-basic"
+/>
+
+**不确定态：**
+
+<ComponentPreview
+  name="progress-bar-indeterminate"
+/>
+
+### Progress Circle
+
+基于 SVG 的环形进度条，提供 `TrackCircle` 与 `FillCircle` 两个子组件，便于直接控制 SVG。同时支持确定与不确定态。
+
+<ComponentPreview
+  name="progress-circle-basic"
+/>
+
+**自定义 SVG：**
+
+<ComponentPreview
+  name="progress-circle-custom-svg"
+/>
+
+### Toolbar
+
+将按钮、切换按钮与分隔线组合到一个具备无障碍语义的工具栏中。支持水平或垂直方向，可与 `ButtonGroup` 和 `ToggleButtonGroup` 组合使用。
+
+<ComponentPreview
+  name="toolbar-basic"
+/>
+
+**配合 Button Group 使用：**
+
+<ComponentPreview
+  name="toolbar-with-button-group"
+/>
+
+## 组件改进
+
+### ButtonGroup 的增强
+
+新增的 `ButtonGroup.Separator` 子组件可在按钮之间显式插入一条视觉分隔线。在水平和垂直两种方向下都能正常工作。
+
+<ComponentPreview
+  name="button-group-basic"
+/>
+
+### Table 与 ListBox 的虚拟化
+
+Table 与 ListBox 现在可以借助 React Aria 的 `Virtualizer` 来支持大数据集的虚拟化渲染。`Virtualizer`、`TableLayout` 和 `ListLayout` 都已从 `@heroui/react` 重新导出。
+
+<ComponentPreview
+  name="table-virtualization"
+/>
+
+### ButtonGroup 的方向
+
+`ButtonGroup` 现在接受一个 `orientation` prop（`"horizontal"` | `"vertical"`），并在两种方向下都正确处理边框圆角与分隔线方向。根元素也已从 `<div>` 升级为 React Aria 的 `Group`，从而具备正确的 `role="group"` 语义。
+
+<ComponentPreview
+  name="button-group-orientation"
+/>
+
+### ButtonGroup 的焦点环
+
+成组按钮上的焦点环现在使用 `ring-inset`，确保焦点环留在按钮内部边界，而不会与相邻按钮重叠。
+
+### 细粒度的组件引入
+
+`@heroui/react` 现在支持按组件的子路径入口，方便更明确地按需引入（[#6301](https://github.com/heroui-inc/heroui/pull/6301)）：
+
+```tsx
+// Before — root entrypoint
+import { Button } from "@heroui/react";
+
+// After — granular subpath import
+import { Button } from "@heroui/react/button";
+```
+
+## 依赖更新
+
+将 `react-aria-components` 从 v1.15.1 升级到 v1.16.0，同时升级了相关包：
+
+| 包名 | 旧版本 | 新版本 |
+|------|--------|--------|
+| `react-aria-components` | 1.15.1 | 1.16.0 |
+| `@react-aria/i18n` | 3.12.15 | 3.12.16 |
+| `@react-aria/utils` | 3.33.0 | 3.33.1 |
+| `@react-types/shared` | 3.33.0 | 3.33.1 |
+| `@react-types/color` | 3.1.3 | 3.1.4 |
+| `@internationalized/date` | 3.11.0 | 3.12.0 |
+| `@react-stately/data` | 3.15.1 | 3.15.2 |
+
+## Bug 修复
+
+- **InputGroup**：聚焦样式现在仅在实际的 input / textarea 获得焦点时（`:has([data-slot]:focus)`）才会触发，不再因 `:focus-within` 而被任意可聚焦的子元素触发（[#6274](https://github.com/heroui-inc/heroui/pull/6274)）
+- **Avatar**：fallback 元素现在会从父级继承 `border-radius`，而不再硬编码为 `rounded-full`，因此 `className` 覆盖能够正确生效（[#6300](https://github.com/heroui-inc/heroui/pull/6300)）
+- **Modal 与 AlertDialog**：背景遮罩的点击事件不会再透过 portal 传播到父级元素（[#6297](https://github.com/heroui-inc/heroui/pull/6297)）
+- **Table**：修复了 Firefox 中表头圆角与背景色溢出的问题（[#6298](https://github.com/heroui-inc/heroui/pull/6298)）
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [Figma Kit v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6285](https://github.com/heroui-inc/heroui/pull/6285)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

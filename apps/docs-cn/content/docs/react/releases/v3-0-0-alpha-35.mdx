@@ -1,0 +1,401 @@
+---
+title: v3.0.0-alpha.35
+description: 复合组件支持 React Server Components、面向 React 19 的改进，以及关键 bug 修复。
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2025 年 10 月 21 日</span>
+</div>
+
+此版本修复了一个关键问题：**复合组件在 React Server Components（RSC）中无法正常工作**。同时，本版本采用了 React 19 的最佳实践，移除了 `forwardRef`，并简化了 Context 的使用方式。Switch 组件已经过重构，与 Radio / RadioGroup 模式保持一致，提供更清晰、更统一的 API。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### React Server Components 支持
+
+复合组件现在可以在 React Server Components 中正常工作。此前的实现把复合模式逻辑放在了组件内部，与 `"use client"` 指令存在冲突。通过将模式逻辑迁移到组件的索引文件中，这一问题已被修复。
+
+### 面向 React 19 的改进
+
+本版本采用了 React 19 的最佳实践：
+
+1. **移除 `forwardRef`**：在 React 19 中已不再需要，`ref` 现在可以作为普通的 prop 使用（参见 [React 19 文档](https://react.dev/blog/2024/12/05/react-19#ref-as-a-prop)）
+2. **简化 Context**：将 `Context.Provider` 替换为直接使用 `Context`（参见 [React 19 文档](https://react.dev/blog/2024/12/05/react-19#context-as-a-provider)）
+
+### Switch 组件架构改进
+
+Switch 组件已经过重构，遵循与 Radio / RadioGroup 相同的清晰拆分模式：
+
+- **拆分组件**：Switch 与 SwitchGroup 现在是独立的组件（此前合并在一起）
+- **更清晰的 API**：用 `<SwitchGroup>` 取代了嵌套的 `<Switch.Group>` 与 `<Switch.GroupItems>` 模式
+- **更合理的组织**：每个组件都有各自独立的样式、类型与实现
+- **一致的模式**：与 Radio / RadioGroup 架构保持一致，API 更具可预测性
+
+**之前：**
+```tsx
+<Switch.Group>
+  <Switch.GroupItems>
+    <Switch.Root>...</Switch.Root>
+  </Switch.GroupItems>
+</Switch.Group>
+```
+
+**之后：**
+```tsx
+<SwitchGroup>
+  <Switch.Root>...</Switch.Root>
+  <Switch.Root>...</Switch.Root>
+</SwitchGroup>
+```
+
+## ⚠️ 破坏性变更
+
+### 主组件需要使用 `.Root` 后缀
+
+为支持 React Server Components，复合组件模式已经过重构。在使用复合写法时，主组件现在需要带上 `.Root` 后缀。
+
+**之前：**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar>
+  <Avatar.Image src="/images/avatar.jpeg" alt="Junior Garcia" />
+  <Avatar.Fallback>JR</Avatar.Fallback>
+</Avatar>
+```
+
+**之后：**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar.Root>
+  <Avatar.Image src="/images/avatar.jpeg" alt="Junior Garcia" />
+  <Avatar.Fallback>JR</Avatar.Fallback>
+</Avatar.Root>
+```
+
+**说明：** 命名导出（例如 `<Avatar>`、`<AvatarImage>`、`<AvatarFallback>`）保持不变，依然完全支持。
+
+### Switch 组件 API 变更
+
+Switch 组件的分组 API 已经过重构，与 Radio / RadioGroup 模式保持一致：
+
+**之前：**
+```tsx
+import { Switch } from "@heroui/react"
+
+<Switch.Group orientation="horizontal">
+  <Switch.GroupItems>
+    <Switch.Root name="notifications">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Notifications</Label>
+    </Switch.Root>
+    <Switch.Root name="marketing">
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Marketing</Label>
+    </Switch.Root>
+  </Switch.GroupItems>
+</Switch.Group>
+```
+
+**之后：**
+```tsx
+import { Switch, SwitchGroup } from "@heroui/react"
+
+<SwitchGroup orientation="horizontal">
+  <Switch.Root name="notifications">
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Notifications</Label>
+  </Switch.Root>
+  <Switch.Root name="marketing">
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Marketing</Label>
+  </Switch.Root>
+</SwitchGroup>
+```
+
+这次变更带来了：
+
+- **拆分组件**：Switch 与 SwitchGroup 现在是独立的组件（此前合并在一起）
+- **更清晰的 API**：用 `<SwitchGroup>` 取代了嵌套的 `<Switch.Group>` 与 `<Switch.GroupItems>` 模式
+- **更合理的组织**：每个组件都有各自独立的样式、类型与实现
+- **一致的模式**：与 Radio / RadioGroup 架构保持一致，API 更具可预测性
+
+
+**迁移步骤：**
+1. 单独导入 `SwitchGroup`：`import { Switch, SwitchGroup } from "@heroui/react"`
+2. 将 `<Switch.Group>` 替换为 `<SwitchGroup>`
+3. 移除嵌套的 `<Switch.GroupItems>` 包装
+4. 单个的 `Switch.Root` 组件保持不变
+
+#### 受影响的组件
+
+所有复合组件都受到影响：
+
+- `Accordion` → `Accordion.Root`
+- `Avatar` → `Avatar.Root`
+- `Card` → `Card.Root`
+- `Disclosure` → `Disclosure.Root`
+- `Fieldset` → `Fieldset.Root`
+- `Kbd` → `Kbd.Root`
+- `Link` → `Link.Root`
+- `Popover` → `Popover.Root`
+- `RadioGroup` → `RadioGroup.Root`
+- `Switch` → `Switch.Root`
+- `Tabs` → `Tabs.Root`
+- `Tooltip` → `Tooltip.Root`
+
+## 迁移指南
+
+使用 HeroUI 的复合组件有两种选择：
+
+### 选项 1：改为使用 `.Root`（复合写法）
+
+如果你使用的是复合写法（点号语法），请将主组件改为使用 `.Root`：
+
+**Card 示例：**
+```tsx
+import { Card } from "@heroui/react"
+
+<Card.Root>
+  <Card.Header>
+    <Card.Title>Card Title</Card.Title>
+    <Card.Description>Card description</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    Card content
+  </Card.Content>
+  <Card.Footer>
+    Card footer
+  </Card.Footer>
+</Card.Root>
+```
+
+**Tabs 示例：**
+```tsx
+import { Tabs } from "@heroui/react"
+
+<Tabs.Root>
+  <Tabs.ListWrapper>
+    <Tabs.List>
+      <Tabs.Tab id="tab1">Tab 1<Tabs.Indicator /></Tabs.Tab>
+      <Tabs.Tab id="tab2">Tab 2<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListWrapper>
+  <Tabs.Panel id="tab1">Panel 1</Tabs.Panel>
+  <Tabs.Panel id="tab2">Panel 2</Tabs.Panel>
+</Tabs.Root>
+```
+
+[更多示例请参阅文档](/docs/components/card)
+
+**Avatar 示例：**
+```tsx
+import { Avatar } from "@heroui/react"
+
+<Avatar.Root>
+  <Avatar.Image alt="John Doe" src="..." />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar.Root>
+```
+
+[更多示例请参阅文档](/docs/components/avatar)
+
+### 选项 2：使用命名导出
+
+我们已经为所有复合组件添加了命名导出支持，你可以这样使用：
+
+**Card 示例：**
+```tsx
+import {
+  CardRoot,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@heroui/react"
+
+<CardRoot>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    Card content
+  </CardContent>
+  <CardFooter>
+    Card footer
+  </CardFooter>
+</CardRoot>
+```
+
+**Tabs 示例：**
+```tsx
+import { TabsRoot, TabListContainer, TabList, Tab, TabIndicator, TabPanel } from "@heroui/react"
+
+<TabsRoot>
+  <TabListContainer>
+    <TabList>
+      <Tab id="tab1">Tab 1<TabIndicator /></Tab>
+      <Tab id="tab2">Tab 2<TabIndicator /></Tab>
+    </TabList>
+  </TabListContainer>
+  <TabPanel id="tab1">Panel 1</TabPanel>
+  <TabPanel id="tab2">Panel 2</TabPanel>
+</TabsRoot>
+```
+
+**Avatar 示例：**
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from "@heroui/react"
+
+<Avatar>
+  <AvatarImage alt="John Doe" src="..." />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+### 迁移步骤
+
+如果你使用的是复合写法，只需将主组件改为使用 `.Root`：
+
+1. **查找复合组件的所有使用位置**（例如内部包含 `<Avatar.Image>` 等的 `<Avatar>`）
+
+2. **为主组件添加 `.Root`**：
+   ```tsx
+   // Before
+   <Avatar>
+     <Avatar.Image ... />
+   </Avatar>
+
+   // After
+   <Avatar.Root>
+     <Avatar.Image ... />
+   </Avatar.Root>
+   ```
+
+3. **就这样！** 所有子组件（如 `Avatar.Image`、`Avatar.Fallback`）保持不变。
+
+### 完整的迁移参考
+
+| 组件 | 命名导出写法 | 复合写法（带 `.Root`） | 额外变更 |
+|------|--------------|------------------------|----------|
+| **Accordion** | `<Accordion>` | `<Accordion.Root>` | - |
+| **Avatar** | `<Avatar>` | `<Avatar.Root>` | - |
+| **Card** | `<Card>` | `<Card.Root>` | - |
+| **Disclosure** | `<Disclosure>`  | `<Disclosure.Root>`  | - |
+| **Fieldset** | `<Fieldset>`  | `<Fieldset.Root>` | - |
+| **Kbd** | `<Kbd>` | `<Kbd.Root>`  | - |
+| **Link** | `<Link>` | `<Link.Root>` | - |
+| **Popover** | `<Popover>` | `<Popover.Root>` | - |
+| **Radio** |  `<Radio>` | `<Radio.Root>` | - |
+| **Switch** | `<Switch>`、`<SwitchControl>` | `<Switch.Root>`、`<Switch.Control>` | `<Switch.Group>` → `<SwitchGroup>`（独立组件）|
+| **Tabs** | `<Tabs>`、`<TabList>` | `<Tabs.Root>`、`<Tabs.List>` | - |
+| **Tooltip** | `<Tooltip>`、`<TooltipTrigger>` | `<Tooltip.Root>`、`<Tooltip.Trigger>` | - |
+
+### 自动化迁移
+
+对于使用复合写法的大型代码库，可以借助查找 / 替换：
+
+```bash
+# Example for Avatar component
+# Update the main component to use .Root
+sed -i 's/<Avatar>/<Avatar.Root>/g' **/*.tsx
+sed -i 's/<\/Avatar>/<\/Avatar.Root>/g' **/*.tsx
+
+# Switch component requires additional steps
+# First, ensure SwitchGroup is imported
+# Then replace Switch.Group with SwitchGroup
+sed -i 's/<Switch\.Group/<SwitchGroup/g' **/*.tsx
+sed -i 's/<\/Switch\.Group>/<\/SwitchGroup>/g' **/*.tsx
+
+# Remove Switch.GroupItems wrapper
+sed -i 's/<Switch\.GroupItems>//g' **/*.tsx
+sed -i 's/<\/Switch\.GroupItems>//g' **/*.tsx
+
+# Repeat for other compound components (Card, Tabs, etc.)
+# Note: This only affects files using the compound pattern
+```
+
+**重要事项：**
+- 使用自动替换时务必小心，确保只替换复合写法的用法，而不要影响命名导出。
+- Switch 的迁移完成后，请确认 `SwitchGroup` 已被导入：`import { Switch, SwitchGroup } from "@heroui/react"`
+- 在执行完自动迁移后请测试代码，确认所有变更均符合预期。
+
+## 为什么需要这次变更？
+
+这次变更是修复 React Server Components 兼容性所必需的。此前的实现存在一些架构上的限制：
+
+1. **RSC 兼容性**：复合模式逻辑与 `"use client"` 指令存在冲突
+2. **拥抱 React 19**：移除了 `forwardRef` 与 `Context.Provider` 等已被弃用的写法
+3. **更清晰的架构**：模式逻辑现在位于索引文件中，而不是组件文件中
+4. **更彻底的拆分**：服务端组件与客户端组件现在可以无缝协作
+
+## 文档更新
+
+组件文档将同步更新，以反映新的写法：
+
+- 示例将展示带 `.Root` 的复合写法
+- 命名导出形式的示例依然有效且仍受支持
+- 迁移指南将帮助你顺利完成升级
+- 两种写法都获得完整支持，行为完全一致
+
+## 需要帮助？
+
+如果你在迁移过程中遇到任何问题：
+
+1. **复合写法用户**：将主组件改为使用 `.Root`（例如 `<Avatar>` → `<Avatar.Root>`）
+2. **命名导出用户**：无需做任何修改，你的代码仍可正常工作
+3. 查阅组件文档中的示例
+4. 反馈问题：[GitHub Issues](https://github.com/heroui-inc/heroui/issues)
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [React Server Components](https://react.dev/reference/rsc/server-components)
+- [React 19 发布](https://react.dev/blog/2024/12/05/react-19)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者，是你们让 React Server Components 支持与 React 19 兼容性得到了改进！

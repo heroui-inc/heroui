@@ -1,0 +1,183 @@
+---
+title: v3.0.0-alpha.32
+description: Card 组件重新设计、CloseButton 组件，以及面向 AI 助手的 MCP 服务器。
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2025 年 10 月 1 日</span>
+</div>
+
+此版本新增了用于 AI 开发的工具，并更新了 [Card 组件](/docs/components/card) 的 API，以提升开发者体验。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+## 新增功能
+
+### MCP 服务器
+
+HeroUI 现已包含一个 [MCP 服务器](/docs/ui-for-agents/mcp-server)，可让 Cursor、Claude Code、VS Code Copilot 等 AI 助手直接访问 HeroUI v3 的文档与组件信息。
+
+**快速配置：**
+
+### Cursor
+
+<div className="flex items-center gap-3 mb-4">
+  <a
+    href="https://link.heroui.com/mcp-cursor-install"
+    className="button button--tertiary button--sm no-underline bg-default/50 dark:bg-default/30"
+  >
+    <svg viewBox="0 0 466.73 532.09" className="w-5 h-5 fill-current">
+      <path d="M457.43,125.94L244.42,2.96c-6.84-3.95-15.28-3.95-22.12,0L9.3,125.94c-5.75,3.32-9.3,9.46-9.3,16.11v247.99c0,6.65,3.55,12.79,9.3,16.11l213.01,122.98c6.84,3.95,15.28,3.95,22.12,0l213.01-122.98c5.75-3.32,9.3-9.46,9.3-16.11v-247.99c0-6.65-3.55-12.79-9.3-16.11h-.01ZM444.05,151.99l-205.63,356.16c-1.39,2.4-5.06,1.42-5.06-1.36v-233.21c0-4.66-2.49-8.97-6.53-11.31L24.87,145.67c-2.4-1.39-1.42-5.06,1.36-5.06h411.26c5.84,0,9.49,6.33,6.57,11.39h-.01Z"/>
+    </svg>
+    <span className="text-accent">Install in Cursor</span>
+  </a>
+</div>
+
+或在 **Cursor Settings** → **Tools** → **MCP Servers** 中手动添加：
+
+```json
+{
+  "mcpServers": {
+    "heroui-react": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp@latest"]
+    }
+  }
+}
+```
+
+### Claude Code
+
+在终端中运行以下命令：
+
+```bash
+claude mcp add heroui-react -- npx -y @heroui/react-mcp@latest
+```
+
+[了解更多](/docs/ui-for-agents/mcp-server)
+
+### Card 组件 API 重新设计
+
+[Card 组件](/docs/components/card) 已升级到全新的变体系统，使用更加灵活。
+
+**破坏性变更：**
+- 将 `surface` prop 替换为新的 `variant` 系统
+- 移除了 `Card.Image`、`Card.Details` 与 `Card.CloseButton`（请改用组合方式实现）
+- 新增变体：`flat`、`outlined`、`elevated`、`filled`
+
+**之前：**
+```tsx
+<Card surface="1">
+  <Card.Image src="/image.jpg" />
+  <Card.Details>
+    <Card.Title>Old Card</Card.Title>
+  </Card.Details>
+</Card>
+```
+
+**之后：**
+```tsx
+<Card variant="outlined">
+  <Card.Header>
+    <img src="/image.jpg" alt="Card image" />
+  </Card.Header>
+  <Card.Body>
+    <Card.Title>New Card</Card.Title>
+  </Card.Body>
+</Card>
+```
+
+**新功能：**
+- 支持水平布局
+- 与 Avatar 集成
+- 支持背景图片
+- 通过语义化 HTML 提升无障碍体验
+
+[查看 Card 组件文档](/docs/components/card)
+
+### CloseButton 组件
+
+新增 [CloseButton 组件](/docs/components/close-button)，用于关闭对话框、模态框以及其他可关闭的元素。
+
+```tsx
+import {CloseButton} from "@heroui/react";
+
+// Basic usage
+<CloseButton onPress={() => console.log("Closed")} />
+
+// With custom icon
+<CloseButton>
+  <XMarkIcon className="size-4" />
+</CloseButton>
+```
+
+## 文档改进
+
+### 面向 AI 的 UI
+- **[MCP 服务器文档](/docs/ui-for-agents/mcp-server)** —— 介绍如何借助 AI 助手进行开发
+- **[llms.txt](/docs/ui-for-agents/llms-txt)** —— 对 LLM 更友好的文档文件
+- 主流 AI 编码工具的配置指南
+
+### 组件文档
+- **[Card](/docs/components/card)**：重写了文档，包含 anatomy、变体与更多示例
+- **[Switch](/docs/components/switch)**：新增 anatomy 示意图与更完善的示例
+- **[CloseButton](/docs/components/close-button)**：全新文档，附带使用示例
+
+
+## 迁移指南
+
+### Card 组件迁移
+
+1. **更新 variant prop：**
+   - `surface="1"` → `variant="flat"`
+   - `surface="2"` → `variant="outlined"`
+   - `surface="3"` → `variant="elevated"`
+   - `surface="4"` → `variant="filled"`
+   - 自定义 surface → 改用新的变体系统
+
+2. **更新组件结构：**
+   - 将 `Card.Image` 替换为放在 `Card.Header` 中的 `<img>`
+   - 将 `Card.Details` 替换为 `Card.Body`
+   - 将 `Card.CloseButton` 迁移为使用新的 `CloseButton` 组件
+
+3. **更新导入：**
+   ```tsx
+   // Add CloseButton if needed
+   import {Card, CloseButton} from "@heroui/react";
+   ```
+
+## 链接
+
+- [GitHub PR #5747](https://github.com/heroui-inc/heroui/pull/5747)
+- [MCP 服务器文档](/docs/ui-for-agents/mcp-server)
+- [Card 组件指南](/docs/components/card)
+- [CloseButton 组件](/docs/components/close-button)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！

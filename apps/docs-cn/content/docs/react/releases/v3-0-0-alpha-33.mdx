@@ -1,0 +1,112 @@
+---
+title: v3.0.0-alpha.33
+description: 升级 RAC、重新设计 Tabs 指示器、新增 Switch 尺寸变体，以及相关示例展示。
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2025 年 10 月 5 日</span>
+</div>
+
+此版本升级了 React Aria Components，重新设计了 Tabs 指示器，为 Switch 新增尺寸支持，并补充了一系列组件示例。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@alpha @heroui/react@alpha
+    ```
+  </Tab>
+</Tabs>
+
+## 新增功能
+
+### RAC 升级
+
+将 React Aria Components 升级到 [2025 年 10 月 2 日发布版本](https://react-spectrum.adobe.com/releases/2025-10-02.html)。
+
+本次升级包括：
+- 用于动画的 CSS 变量
+- 更好的 SSR 支持
+- 选择指示器的性能改进
+
+### Disclosure 与 DisclosureGroup 更新
+
+[Disclosure](/docs/components/disclosure) 与 [DisclosureGroup](/docs/components/disclosure-group) 现在使用 React Aria 的 CSS 变量来驱动动画。组件会通过 `--disclosure-panel-width` 与 `--disclosure-panel-height` 变量在展开 / 折叠期间跟踪面板的实际尺寸。
+
+### Tabs 指示器重新设计
+
+[Tabs](/docs/components/tabs) 现在使用 React Aria 的 `SelectionIndicator` 并支持 SSR，这修复了初次渲染时的布局抖动问题。
+
+**🚧 破坏性变更：**
+
+- 将 `Tabs.Indicator` 移至每一个 `Tabs.Tab` 内部
+
+**之前：**
+```diff tsx
+<Tabs>
+  <Tabs.ListWrapper>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab>
++       <Tabs.Indicator />
+      </Tabs.Tab>
+    </Tabs.List>
+-   <Tabs.Indicator />
+  </Tabs.ListWrapper>
+  <Tabs.Panel/>
+</Tabs>
+```
+
+### Switch 更新
+
+[Switch](/docs/components/switch) 的样式与动画都得到了更新。新增 `size` prop，可选值为 `sm`、`md`、`lg`。
+
+<ComponentPreview name="switch-sizes" />
+
+### 相关示例
+
+我们在 [Button](/docs/components/button)、[Disclosure](/docs/components/disclosure)、[DisclosureGroup](/docs/components/disclosure-group) 与 [Tabs](/docs/components/tabs) 中新增了「相关示例」展示。
+
+## 文档改进
+
+### 组件文档
+- **[Tabs](/docs/components/tabs)**：更新了 anatomy，根据新的指示器设计重写了示例，并新增了相关示例展示
+- **[Switch](/docs/components/switch)**：新增尺寸示例，并重写了 with-icon 示例
+- **[Button](/docs/components/button)**、**[Disclosure](/docs/components/disclosure)**、**[DisclosureGroup](/docs/components/disclosure-group)**：新增相关示例展示
+
+## 迁移指南
+
+### Tabs 组件迁移
+
+1. **更新组件结构：**
+   - 将 `<Tabs.Indicator />` 移至每一个 `<Tabs.Tab />` 内部
+
+## 链接
+
+- [GitHub PR #5777](https://github.com/heroui-inc/heroui/pull/5777)
+- [Tabs 组件](/docs/components/tabs)
+- [Switch 组件](/docs/components/switch)
+- [Button 组件](/docs/components/button)
+- [Disclosure 组件](/docs/components/disclosure)
+- [DisclosureGroup 组件](/docs/components/disclosure-group)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！

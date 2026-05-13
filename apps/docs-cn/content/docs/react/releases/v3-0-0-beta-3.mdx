@@ -1,0 +1,285 @@
+---
+title: v3.0.0-beta.3
+description: 七个新组件、fullWidth 与 hideSeparator 支持、样式修复，以及 AlertDialog / Modal backdrop 变体调整与移除 asChild prop 等破坏性变更。
+github:
+  pull: 5923
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2025 年 12 月 19 日</span>
+</div>
+
+此版本引入了七个新组件（[ButtonGroup](/docs/components/button-group)、[DateField](/docs/components/date-field)、[ErrorMessage](/docs/components/error-message)、[ScrollShadow](/docs/components/scroll-shadow)、[SearchField](/docs/components/search-field)、[TagGroup](/docs/components/tag-group)、[TimeField](/docs/components/time-field)），为表单组件添加 `fullWidth` 支持，为 [Tabs](/docs/components/tabs)、[ButtonGroup](/docs/components/button-group) 与 [Accordion](/docs/components/accordion) 引入 `hideSeparator`，包含若干样式修复，以及 ⚠️ **破坏性变更**：移除 `asChild` prop，并更新了 [AlertDialog](/docs/components/alert-dialog) 与 [Modal](/docs/components/modal) 的 backdrop 变体。
+
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-3-dark@2x.jpg"
+  alt="HeroUI v3 Beta 3"
+  href="/docs/changelog/v3-0-0-beta-3"
+/>
+
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### 新组件
+
+本次发布引入了 **7 个** 新的基础组件：
+
+- **[ButtonGroup](#button-group)**：以一致的样式与间距将相关按钮分组。（[文档](/docs/components/button-group)）
+- **[DateField](#date-field)**：日期输入字段，支持 label、description 与表单校验，基于 React Aria DateField 构建。（[文档](/docs/components/date-field)）
+- **[ErrorMessage](#error-message)**：底层的错误信息组件，用于在非表单组件中展示错误。（[文档](/docs/components/error-message)）
+- **[ScrollShadow](#scroll-shadow)**：通过视觉阴影提示可滚动内容溢出，并可自动检测滚动位置。（[文档](/docs/components/scroll-shadow)）
+- **[SearchField](#search-field)**：带有内置搜索图标与清除按钮的搜索输入字段。（[文档](/docs/components/search-field)）
+- **[TagGroup](#tag-group)**：一组可聚焦的标签，支持键盘导航、选择与删除。（[文档](/docs/components/tag-group)）
+- **[TimeField](#time-field)**：时间输入字段，支持 label、description 与表单校验，基于 React Aria TimeField 构建。（[文档](/docs/components/time-field)）
+
+### ButtonGroup
+
+<ComponentPreview
+  name="button-group-basic"
+/>
+
+### DateField
+
+<ComponentPreview
+  name="date-field-basic"
+/>
+
+### ErrorMessage
+
+<ComponentPreview
+  name="error-message-basic"
+/>
+
+### SearchField
+
+<ComponentPreview
+  name="search-field-basic"
+/>
+
+### ScrollShadow
+
+<ComponentPreview
+  name="scroll-shadow-orientation"
+/>
+
+### TagGroup
+
+<ComponentPreview
+  name="tag-group-basic"
+/>
+
+### TimeField
+
+<ComponentPreview
+  name="time-field-basic"
+/>
+
+
+### 全宽支持
+
+为表单与输入组件新增 `fullWidth` 支持，可以让它们撑满容器的整个宽度。这在构建一致的表单布局与响应式设计时尤其有用。
+
+**支持的组件：**
+- [ButtonGroup](/docs/components/button-group)
+- [Button](/docs/components/button)
+- [ComboBox](/docs/components/combo-box)
+- [DateField](/docs/components/date-field)
+- [DateInputGroup](/docs/components/date-input-group)
+- [InputGroup](/docs/components/input-group)
+- [Input](/docs/components/input)
+- [NumberField](/docs/components/number-field)
+- [SearchField](/docs/components/search-field)
+- [Select](/docs/components/select)
+- [TextField](/docs/components/text-field)
+- [TextArea](/docs/components/textarea)
+- [TimeField](/docs/components/time-field)
+
+## 组件改进
+
+### 分隔线控制增强
+
+为 [Tabs](/docs/components/tabs)、[ButtonGroup](/docs/components/button-group) 与 [Accordion](/docs/components/accordion) 组件新增 `hideSeparator` 支持，可隐藏条目之间的分隔线，呈现更简洁、更纯粹的外观。
+
+**Tabs：**
+```tsx
+<Tabs hideSeparator>
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Options">
+      <Tabs.Tab id="overview">Overview<Tabs.Indicator /></Tabs.Tab>
+      <Tabs.Tab id="analytics">Analytics<Tabs.Indicator /></Tabs.Tab>
+    </Tabs.List>
+  </Tabs.ListContainer>
+</Tabs>
+```
+
+**ButtonGroup：**
+```tsx
+<ButtonGroup hideSeparator>
+  <Button>First</Button>
+  <Button>Second</Button>
+  <Button>Third</Button>
+</ButtonGroup>
+```
+
+**Accordion：**
+```tsx
+<Accordion hideSeparator>
+  <Accordion.Item>
+    <Accordion.Heading>
+      <Accordion.Trigger>Item 1</Accordion.Trigger>
+    </Accordion.Heading>
+    <Accordion.Panel>
+      <Accordion.Body>Content</Accordion.Body>
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
+
+### 文档图标集成
+
+将 [@gravity-ui/icons](https://github.com/gravity-ui/icons) 集成到文档组件中，统一图标渲染，同时改进了 SSR 支持并提升了性能。
+
+## 依赖更新
+
+### React Aria Components v1.14.0
+
+将 [React Aria Components](https://react-aria.adobe.com/releases/v1-14-0) 升级到 v1.14.0。本次升级包含：
+
+**增强：**
+- SearchField：新增 `isReadOnly` 与 `isRequired` 渲染属性
+- Tooltip：新增 `shouldCloseOnPress` 属性
+- Tabs：支持在 tab 面板之间进行动画过渡
+- 其他：`useControlledState` 现已在 `setState` 回调中提供支持
+
+**修复：**
+- ComboBox：修复 VoiceOver 不读取 ListBox 项 `aria-label` 的问题
+- 日期与时间：增强了对 absolute 日期与日期时间字符串的错误处理
+- NumberField：在移动端滚动时不再误触发递增 / 递减
+- Overlay：修复了设置 boundary container 时 overlay 定位与 flip 的问题
+- Table：修复了在键盘导航期间进行拖放时的崩溃问题
+- 其他多项 bug 修复与改进
+
+完整变更请参阅 [React Aria Components v1.14.0 发布说明](https://react-aria.adobe.com/releases/v1-14-0)。
+
+### 其他依赖升级
+
+- `@internationalized/date`：3.10.0 → 3.10.1
+- `@radix-ui/react-avatar`：1.1.10 → 1.1.11
+- `tailwind-merge`：3.3.1 → 3.4.0
+- `tailwind-variants`：3.1.1 → 3.2.2
+
+## 样式修复
+
+### 表单组件的禁用状态
+
+修复了 [Input](/docs/components/input) 与 [TextArea](/docs/components/textarea) 组件的禁用状态样式。
+
+### 样式优化
+
+- **提高选择器精确度**：增强 CSS 选择器特异性，让样式隔离更好、性能更优
+- **动画增强**：改进了多个组件的动画性能与流畅度
+- **新增 no-highlight 工具类**：新增 `no-highlight` 工具类，用于防止交互元素中的文字被选中，从而提升体验
+- **优化 will-change 属性**：在多个组件中调整 `will-change` CSS 属性，以获得更好的动画性能
+- **移除全局滚动条样式**：移除了全局滚动条样式，避免与自定义滚动条实现冲突，并修复了 modal / overlay 的交互问题
+
+## ⚠️ 破坏性变更
+
+### AlertDialog 与 Modal 的 backdrop 变体
+
+`backdropVariant` / `variant` prop 的取值已从 `"solid"` 重命名为 `"opaque"`，以提升语义清晰度——「opaque」（不透明）更准确地描述了遮罩的视觉外观。
+
+**迁移：**
+
+将 AlertDialog 中所有 `backdropVariant="solid"` 替换为 `backdropVariant="opaque"`，将 Modal 中所有 `variant="solid"` 替换为 `variant="opaque"`：
+
+```tsx
+// Before
+<AlertDialog.Backdrop backdropVariant="solid">
+  <AlertDialog.Container>
+    {/* content */}
+  </AlertDialog.Container>
+</AlertDialog.Backdrop>
+
+<Modal.Backdrop variant="solid">
+  <Modal.Container>
+    {/* content */}
+  </Modal.Container>
+</Modal.Backdrop>
+
+// After
+<AlertDialog.Backdrop backdropVariant="opaque">
+  <AlertDialog.Container>
+    {/* content */}
+  </AlertDialog.Container>
+</AlertDialog.Backdrop>
+
+<Modal.Backdrop variant="opaque">
+  <Modal.Container>
+    {/* content */}
+  </Modal.Container>
+</Modal.Backdrop>
+```
+
+**可用的 backdrop 变体：**
+- `"opaque"` —— 深色不透明遮罩，完全遮挡背景（即此前的 `"solid"`）
+- `"blur"` —— 模糊遮罩，柔和地遮挡背景
+- `"transparent"` —— 透明遮罩，保持背景可见
+
+### 移除 `asChild` prop
+
+为提供更清晰的 API、更强的类型安全性以及更简单的使用方式，组件中的 `asChild` 模式已被移除。
+
+关于组件组合模式的更多细节，请参阅 [组合指南](/docs/handbook/composition)。
+
+## Bug 修复
+
+- 修复了 `isInvalid` 样式在 surface 背景上使用相关组件时的表现
+- 修复了 AlertDialog 与 Modal 关闭后重新渲染的问题
+- 修复了浮层关闭时未能正确清理的问题
+- 修复了文档中 Storybook 链接与导航的问题
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [设计系统 - Figma Kit v3（已更新）](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #5923](https://github.com/heroui-inc/heroui/pull/5923)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />
