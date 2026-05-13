@@ -1,0 +1,22 @@
+{
+  "title": "发布说明",
+  "description": "HeroUI Native 发布说明",
+  "icon": "rocket",
+  "root": true,
+  "pages": [
+    "---概述---",
+    "index",
+    "---版本列表---",
+    "v1-0-2",
+    "v1-0-1",
+    "v1-0-0",
+    "rc-4",
+    "rc-3",
+    "rc-2",
+    "rc-1",
+    "beta-13",
+    "beta-12",
+    "beta-11",
+    "beta-10"
+  ]
+}
