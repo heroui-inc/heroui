@@ -73,6 +73,10 @@ const COMPONENT_GROUPS = [
     components: ["(data-display)/chip"],
   },
   {
+    category: "Typography",
+    components: ["(typography)/text"],
+  },
+  {
     category: "Utilities",
     components: ["(utilities)/pressable-feedback", "(utilities)/scroll-shadow"],
   },

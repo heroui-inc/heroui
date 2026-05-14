@@ -1,0 +1,103 @@
+---
+title: v3.0.4
+description: New Text component, docs theme selector, border-radius design tokens with min() capping, table focus ring rework, and bug fixes.
+github:
+  pull: 6483
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">May 2026</span>
+</div>
+
+Patch release: new `Text` compound component ported from HeroUI Pro, a docs theme selector for previewing components in different themes, `min()`-capped border-radius tokens across 45+ component CSS files, reworked Table focus rings, and fixes for Checkbox, Autocomplete, Tooltip, and form field padding.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### Text Component
+
+New compound component for structured typography, ported from HeroUI Pro ([#6479](https://github.com/heroui-inc/heroui/pull/6479)). Renders the right HTML element automatically — `<h1>`–`<h6>`, `<p>`, or `<code>` — based on the sub-component or `type` prop.
+
+<ComponentPreview name="text-typography-scale" />
+
+Sub-components: `Text.Heading`, `Text.Paragraph`, `Text.Code`, `Text.Prose`.
+
+Props on all sub-components: `align`, `color`, `weight`, `truncate`. `Text.Heading` accepts `level` (1–6). `Text.Paragraph` accepts `size` (`"base"`, `"sm"`, `"xs"`).
+
+Wrap mixed content in `Text.Prose` for automatic prose spacing:
+
+```tsx
+<Text.Prose>
+  <Text.Heading level={3}>Getting Started</Text.Heading>
+  <Text.Paragraph>Install the package and import the component.</Text.Paragraph>
+</Text.Prose>
+```
+
+### Docs Theme Selector
+
+The documentation site now includes a theme selector that lets you preview every component in different themes — light, dark, brutalism, and more. Your choice is saved to `localStorage` so it persists across sessions ([#6471](https://github.com/heroui-inc/heroui/pull/6471)).
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/heroui-oss-3.0.4-4k.mp4"
+  muted
+/>
+
+### Border-Radius Design Tokens
+
+All `rounded-full` and hardcoded `border-radius` values across ~45 component CSS files now use `min()` to cap the computed radius ([#6465](https://github.com/heroui-inc/heroui/pull/6465)). Components no longer look broken when users set very large custom radius themes — the radius stops growing once it would exceed the element's dimensions.
+
+### Table Focus Ring Rework
+
+Table row focus indicators are split across individual cells using per-cell inset shadows instead of a single `box-shadow` on the row. The ring now looks continuous across all cells and works correctly with virtualized table wrappers.
+
+## Bug Fixes
+
+- **Checkbox**: removed hardcoded `accent-hover` background from selected/indeterminate indicator state ([#6487](https://github.com/heroui-inc/heroui/pull/6487))
+- **Autocomplete**: `isDisabled` now propagates from root to `Trigger` and `ClearButton` via context ([#6443](https://github.com/heroui-inc/heroui/pull/6443))
+- **Description**: removed unnecessary horizontal padding from description text in form fields (textfield, color-field, date-field, number-field, search-field, time-field) ([#6484](https://github.com/heroui-inc/heroui/pull/6484))
+- **Tooltip**: changed padding from `px-2 py-1` to `p-2` and switched border-radius to design token ([#6481](https://github.com/heroui-inc/heroui/pull/6481))
+- **Theme Builder**: fixed swapped `accent-foreground` values ([#6401](https://github.com/heroui-inc/heroui/pull/6401))
+- **Soft color contrast**: `accent-soft-foreground` now uses a darker shade for light accent themes (Sky, Lavender, Mint), fixing barely-visible text on secondary buttons, chips, and badges. The shared theme now reads from `--accent-soft-foreground` with a fallback to `--accent`
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6483](https://github.com/heroui-inc/heroui/pull/6483)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

@@ -11,7 +11,7 @@
   grid-template-columns: 1fr auto;
 
   /* Default color token (accent) */
-  --progress-bar-fill: var(--color-accent);
+  --progress-bar-fill: var(--accent);
 
   [data-slot="label"] {
     @apply w-fit text-sm font-medium;
@@ -26,7 +26,7 @@
   }
 
   .progress-bar__track {
-    @apply relative overflow-hidden rounded-full bg-default;
+    @apply relative overflow-hidden rounded-sm bg-default;
 
     grid-area: track;
 
@@ -35,7 +35,7 @@
   }
 
   .progress-bar__fill {
-    @apply absolute top-0 left-0 h-full rounded-full;
+    @apply absolute top-0 left-0 h-full rounded-sm;
 
     background-color: var(--progress-bar-fill);
 
@@ -89,7 +89,11 @@
 
 .progress-bar--sm {
   .progress-bar__track {
-    @apply h-1;
+    @apply h-1 rounded-xs;
+  }
+
+  .progress-bar__fill {
+    @apply rounded-xs;
   }
 }
 
@@ -99,7 +103,11 @@
 
 .progress-bar--lg {
   .progress-bar__track {
-    @apply h-3;
+    @apply h-3 rounded-md;
+  }
+
+  .progress-bar__fill {
+    @apply rounded-md;
   }
 }
 
@@ -108,21 +116,21 @@
    ========================================================================== */
 
 .progress-bar--default {
-  --progress-bar-fill: var(--color-default-foreground);
+  --progress-bar-fill: var(--default-foreground);
 }
 
 .progress-bar--accent {
-  --progress-bar-fill: var(--color-accent);
+  --progress-bar-fill: var(--accent);
 }
 
 .progress-bar--success {
-  --progress-bar-fill: var(--color-success);
+  --progress-bar-fill: var(--success);
 }
 
 .progress-bar--warning {
-  --progress-bar-fill: var(--color-warning);
+  --progress-bar-fill: var(--warning);
 }
 
 .progress-bar--danger {
-  --progress-bar-fill: var(--color-danger);
+  --progress-bar-fill: var(--danger);
 }

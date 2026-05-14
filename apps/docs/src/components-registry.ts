@@ -420,6 +420,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "switch",
     title: "Switch",
   },
+  text: {
+    category: "display",
+    description: "Semantic typography primitive for headings, body copy, and inline code",
+    href: "/docs/components/text",
+    name: "text",
+    title: "Text",
+  },
   table: {
     category: "display",
     description: "Structured data display in rows and columns",

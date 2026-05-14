@@ -12,10 +12,6 @@
   [data-slot="label"] {
     @apply w-fit;
   }
-
-  [data-slot="description"] {
-    @apply px-1;
-  }
 }
 
 /* Full width modifier */

@@ -1,0 +1,163 @@
+.text {
+  @apply text-foreground;
+}
+
+.text-prose {
+  @apply text-foreground;
+}
+
+.text-prose h1 {
+  @apply text-4xl font-semibold tracking-tight;
+}
+
+.text-prose h2 {
+  @apply text-3xl font-semibold tracking-tight;
+}
+
+.text-prose h3 {
+  @apply text-2xl font-semibold tracking-tight;
+}
+
+.text-prose h4 {
+  @apply text-xl font-semibold tracking-tight;
+}
+
+.text-prose h5 {
+  @apply text-lg font-semibold tracking-tight;
+}
+
+.text-prose h6 {
+  @apply text-base font-semibold tracking-tight;
+}
+
+.text-prose p {
+  @apply text-base leading-7;
+}
+
+.text-prose code {
+  @apply rounded-md bg-default px-1.5 py-0.5 font-mono text-sm text-foreground;
+}
+
+.text-prose a {
+  @apply font-medium text-link underline underline-offset-4;
+}
+
+.text-prose blockquote {
+  @apply mt-4 border-l-4 border-border pl-4 italic text-muted;
+}
+
+.text-prose ul {
+  @apply my-4 list-disc space-y-2 pl-6;
+}
+
+.text-prose ol {
+  @apply my-4 list-decimal space-y-2 pl-6;
+}
+
+.text-prose li {
+  @apply text-base leading-7;
+}
+
+.text-prose hr {
+  @apply my-8 border-separator;
+}
+
+.text-prose pre {
+  @apply my-4 overflow-x-auto rounded-xl bg-default p-4 font-mono text-sm leading-relaxed;
+}
+
+.text-prose strong {
+  @apply font-semibold text-foreground;
+}
+
+.text-prose em {
+  @apply italic;
+}
+
+.text-prose img {
+  @apply my-4 rounded-xl;
+}
+
+.text--h1 {
+  @apply text-4xl font-semibold tracking-tight;
+}
+
+.text--h2 {
+  @apply text-3xl font-semibold tracking-tight;
+}
+
+.text--h3 {
+  @apply text-2xl font-semibold tracking-tight;
+}
+
+.text--h4 {
+  @apply text-xl font-semibold tracking-tight;
+}
+
+.text--h5 {
+  @apply text-lg font-semibold tracking-tight;
+}
+
+.text--h6 {
+  @apply text-base font-semibold tracking-tight;
+}
+
+.text--body {
+  @apply text-base leading-7;
+}
+
+.text--body-sm {
+  @apply text-sm leading-6;
+}
+
+.text--body-xs {
+  @apply text-xs leading-5;
+}
+
+.text--code {
+  @apply rounded-md bg-default px-1.5 py-0.5 font-mono text-sm text-foreground;
+}
+
+.text--align-start {
+  @apply text-left rtl:text-right;
+}
+
+.text--align-center {
+  @apply text-center;
+}
+
+.text--align-end {
+  @apply text-right rtl:text-left;
+}
+
+.text--align-justify {
+  @apply text-justify;
+}
+
+.text--color-default {
+  @apply text-foreground;
+}
+
+.text--color-muted {
+  @apply text-muted;
+}
+
+.text--truncate {
+  @apply block truncate;
+}
+
+.text--weight-normal {
+  @apply font-normal;
+}
+
+.text--weight-medium {
+  @apply font-medium;
+}
+
+.text--weight-semibold {
+  @apply font-semibold;
+}
+
+.text--weight-bold {
+  @apply font-bold;
+}

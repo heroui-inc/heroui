@@ -12,10 +12,6 @@
   [data-slot="label"] {
     @apply w-fit;
   }
-
-  [data-slot="description"] {
-    @apply px-1;
-  }
 }
 
 .select__trigger {
@@ -35,7 +31,7 @@
   cursor: var(--cursor-interactive);
 
   border-width: var(--border-width-field);
-  border-color: var(--color-field-border);
+  border-color: var(--field-border);
 
   /* Add padding-right when indicator is present */
   &:has(.select__indicator) {
@@ -47,7 +43,7 @@
     &:hover,
     &[data-hovered="true"] {
       @apply bg-field-hover;
-      border-color: var(--color-field-border-hover);
+      border-color: var(--field-border-hover);
     }
   }
 
@@ -55,8 +51,8 @@
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
     @apply status-focused;
-    border-color: var(--color-field-border-focus);
-    background-color: var(--color-field-focus);
+    border-color: var(--field-border-focus);
+    background-color: var(--field-focus);
   }
 
   /* Focus state */
@@ -68,7 +64,7 @@
   .select[data-invalid="true"] &,
   .select[aria-invalid="true"] & {
     @apply status-invalid-field;
-    background-color: var(--color-field-focus);
+    background-color: var(--field-focus);
   }
 
   /* Disabled state */
@@ -88,9 +84,9 @@
   @apply shadow-none;
   background-color: var(--select-trigger-bg);
 
-  --select-trigger-bg: var(--color-default);
-  --select-trigger-bg-hover: var(--color-default-hover);
-  --select-trigger-bg-focus: var(--color-default);
+  --select-trigger-bg: var(--default);
+  --select-trigger-bg-hover: var(--default-hover);
+  --select-trigger-bg-focus: var(--default);
 
   @media (hover: hover) {
     &:hover,
@@ -136,7 +132,8 @@
 
 /* Similar to popover content styles */
 .select__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 text-sm;
+  border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */

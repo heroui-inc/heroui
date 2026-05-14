@@ -153,13 +153,17 @@
 
   /* Bottom/top placement: full width, auto height */
   &[data-placement="bottom"] {
-    @apply w-full rounded-t-2xl;
+    @apply w-full;
     @apply max-h-[85vh];
+    border-top-left-radius: min(32px, var(--radius-2xl));
+    border-top-right-radius: min(32px, var(--radius-2xl));
   }
 
   &[data-placement="top"] {
-    @apply w-full rounded-b-2xl;
+    @apply w-full;
     @apply max-h-[85vh];
+    border-bottom-left-radius: min(32px, var(--radius-2xl));
+    border-bottom-right-radius: min(32px, var(--radius-2xl));
   }
 
   /* Left/right placement: auto width, full height */
@@ -258,7 +262,7 @@
 
   /* The handle bar */
   & > [data-slot="drawer-handle-bar"] {
-    @apply h-1 w-9 rounded-full;
+    @apply h-1 w-9 rounded-xs;
     @apply bg-separator;
   }
 }

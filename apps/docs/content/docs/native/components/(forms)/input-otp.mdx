@@ -201,6 +201,8 @@ Use render props in Group to create custom slot layouts.
 
 When rendering an InputOTP inside a `BottomSheet`, use the `useBottomSheetAwareHandlers` hook to wire keyboard avoidance handlers. Pass the returned `onFocus` and `onBlur` to InputOTP.
 
+> **Note**: `useBottomSheetAwareHandlers` must be used inside a `BottomSheet`. Call it from a child component rendered inside `BottomSheet.Content` — outside of a `BottomSheet` context the returned handlers are no-ops.
+
 ```tsx
 import { InputOTP, useBottomSheetAwareHandlers } from 'heroui-native';
 

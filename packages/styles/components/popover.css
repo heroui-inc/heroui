@@ -2,7 +2,8 @@
 
 /* Base popover styles */
 .popover {
-  @apply origin-(--trigger-anchor-point) rounded-3xl bg-overlay p-0 text-sm;
+  @apply origin-(--trigger-anchor-point) bg-overlay p-0 text-sm;
+  border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
   /* Entering animations */

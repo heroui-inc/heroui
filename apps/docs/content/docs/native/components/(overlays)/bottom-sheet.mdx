@@ -1,7 +1,6 @@
 ---
 title: BottomSheet
 description: Displays a bottom sheet that slides up from the bottom with animated transitions and swipe-to-dismiss gestures.
-icon: updated
 links:
   source_native: bottom-sheet/bottom-sheet.tsx
   styles_native: bottom-sheet/bottom-sheet.styles.ts
@@ -91,17 +90,32 @@ Bottom sheet that appears detached from the bottom edge with custom spacing.
 
 Bottom sheet with multiple snap points and scrollable content.
 
+To make scrollable content work correctly inside `BottomSheet.Content`, follow these base principles:
+
+- Use a scrollable from [`@gorhom/bottom-sheet`](https://gorhom.dev/react-native-bottom-sheet/components/bottomsheetscrollview) (e.g. `BottomSheetScrollView`, `BottomSheetFlatList`, `BottomSheetSectionList`, `BottomSheetVirtualizedList`). A plain `ScrollView`/`FlatList` from `react-native` will let the sheet intercept the scroll gesture.
+- On `BottomSheet.Content`, disable over-drag and dynamic sizing so the sheet does not grow with its content or absorb the scroll: `enableOverDrag={false}` and `enableDynamicSizing={false}`.
+- Give `BottomSheet.Content` a fixed height via `contentContainerClassName="h-full"` (or any other fixed height). The constraint must be on `BottomSheet.Content`, not on the scrollable child — the scrollable needs a bounded parent to scroll inside.
+
 ```tsx
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+
 <BottomSheet>
   <BottomSheet.Trigger>...</BottomSheet.Trigger>
   <BottomSheet.Portal>
     <BottomSheet.Overlay />
-    <BottomSheet.Content snapPoints={['25%', '50%', '90%']}>
-      <ScrollView>...</ScrollView>
+    <BottomSheet.Content
+      snapPoints={['40%', '80%']}
+      enableOverDrag={false}
+      enableDynamicSizing={false}
+      contentContainerClassName="h-full"
+    >
+      <BottomSheetScrollView>...</BottomSheetScrollView>
     </BottomSheet.Content>
   </BottomSheet.Portal>
-</BottomSheet>
+</BottomSheet>;
 ```
+
+See the full example with a sticky footer (`BottomSheetFooter`) in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/components/bottom-sheet/scrollable-with-snap-points.tsx>).
 
 ### Custom Overlay
 
@@ -147,6 +161,36 @@ export const BottomSheetBlurOverlay = () => {
   </BottomSheet.Portal>
 </BottomSheet>
 ```
+
+### With Keyboard-Aware Input
+
+When rendering an `Input` or `InputOTP` inside `BottomSheet.Content`, use the `useBottomSheetAwareHandlers` hook to wire keyboard avoidance handlers. Pass the returned `onFocus` / `onBlur` to your input.
+
+> **Note**: `useBottomSheetAwareHandlers` must be used inside a `BottomSheet`. Call it from a child component rendered inside `BottomSheet.Content` — outside of a `BottomSheet` context the returned handlers are no-ops.
+
+For scrollable content, also configure `BottomSheet.Content` with `keyboardBehavior="extend"` (or `"interactive"`) and `keyboardShouldPersistTaps="handled"` on the scrollable so taps don't dismiss the keyboard before reaching their target.
+
+```tsx
+import { BottomSheet, Input, useBottomSheetAwareHandlers } from 'heroui-native';
+
+const BottomSheetTextInput = () => {
+  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+
+  return <Input placeholder="Type here..." onFocus={onFocus} onBlur={onBlur} />;
+};
+
+<BottomSheet>
+  <BottomSheet.Trigger>...</BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content keyboardBehavior="extend">
+      <BottomSheetTextInput />
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>;
+```
+
+See full examples for [`Input`](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/components/bottom-sheet/with-text-input.tsx>) and [`InputOTP`](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/components/bottom-sheet/with-otp-input.tsx>) inside a bottom sheet.
 
 ## Example
 
@@ -233,15 +277,15 @@ Animation configuration for bottom sheet root component. Can be:
 
 ### BottomSheet.Portal
 
-| prop                                         | type                   | default | description                                                                                                                                                                                                      |
-| -------------------------------------------- | ---------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `children`                                   | `React.ReactNode`      | -       | Portal content (overlay and bottom sheet)                                                                                                                                                                        |
-| `disableFullWindowOverlay`                   | `boolean`              | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals                                                                                    |
-| `unstable_accessibilityContainerViewIsModal` | `boolean`              | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
-| `className`                                  | `string`               | -       | Additional CSS classes for portal container                                                                                                                                                                      |
-| `style`                                      | `StyleProp<ViewStyle>` | -       | Additional styles for portal container                                                                                                                                                                           |
-| `hostName`                                   | `string`               | -       | Optional portal host name for specific container                                                                                                                                                                 |
-| `forceMount`                                 | `boolean`              | -       | Force mount when closed for animation purposes                                                                                                                                                                   |
+| prop                       | type                   | default | description                                                                                                                   |
+| -------------------------- | ---------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `children`                 | `React.ReactNode`      | -       | Portal content (overlay and bottom sheet)                                                                                     |
+| `disableFullWindowOverlay` | `boolean`              | `false` | When true on iOS, uses View instead of FullWindowOverlay. Enables element inspector; overlay won't appear above native modals |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | Controls whether VoiceOver treats the overlay window as a modal container. When `true`, VoiceOver is restricted to elements inside the overlay. iOS only. Unstable: may change with react-native-screens updates |
+| `className`                | `string`               | -       | Additional CSS classes for portal container                                                                                   |
+| `style`                    | `StyleProp<ViewStyle>` | -       | Additional styles for portal container                                                                                        |
+| `hostName`                 | `string`               | -       | Optional portal host name for specific container                                                                              |
+| `forceMount`               | `boolean`              | -       | Force mount when closed for animation purposes                                                                                |
 
 ### BottomSheet.Overlay
 
@@ -331,6 +375,19 @@ const { progress } = useBottomSheetAnimation();
 | property   | type                  | description                                  |
 | ---------- | --------------------- | -------------------------------------------- |
 | `progress` | `SharedValue<number>` | Animation progress (0=idle, 1=open, 2=close) |
+
+### useBottomSheetAwareHandlers
+
+Hook that returns `onFocus` and `onBlur` handlers for keyboard avoidance when an `Input` or `InputOTP` is rendered inside `BottomSheet.Content`. Must be used inside a `BottomSheet` — outside of a `BottomSheet` context, the returned handlers are no-ops.
+
+```tsx
+const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+```
+
+| property  | type                      | description                                                                          |
+| --------- | ------------------------- | ------------------------------------------------------------------------------------ |
+| `onFocus` | `(e: FocusEvent) => void` | Focus handler that notifies the bottom sheet about the keyboard target               |
+| `onBlur`  | `(e: BlurEvent) => void`  | Blur handler that conditionally clears the keyboard target in the bottom sheet state |
 
 ## Special Notes
 

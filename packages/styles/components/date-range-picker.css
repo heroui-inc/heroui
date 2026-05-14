@@ -48,7 +48,7 @@
   @apply motion-reduce:transition-none;
 
   box-shadow: var(--shadow-overlay);
-  border-radius: calc(var(--radius) * 2.5);
+  border-radius: min(32px, calc(var(--radius) * 2.5));
 
   &::-webkit-scrollbar {
     display: none;

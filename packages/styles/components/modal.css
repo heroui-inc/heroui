@@ -169,7 +169,8 @@
 .modal__dialog {
   @apply relative;
   @apply flex w-full flex-col;
-  @apply rounded-3xl bg-overlay shadow-overlay outline-none;
+  @apply bg-overlay shadow-overlay outline-none;
+  border-radius: min(32px, var(--radius-3xl));
   @apply p-6;
   @apply pointer-events-auto;
 
@@ -276,7 +277,7 @@
 .modal__icon {
   @apply flex items-center justify-center;
   @apply size-10 shrink-0;
-  @apply rounded-full select-none;
+  @apply rounded-3xl select-none;
 }
 
 /**

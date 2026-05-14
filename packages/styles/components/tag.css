@@ -2,7 +2,7 @@
 .tag {
   --optical-offset: 0.031em;
 
-  @apply relative inline-flex items-center gap-1 rounded-full font-medium select-none no-highlight;
+  @apply relative inline-flex items-center gap-1 rounded-xl font-medium select-none no-highlight;
 
   /**
    * Transitions
@@ -61,7 +61,7 @@
 }
 
 .tag--lg {
-  @apply px-2.5 py-1.5 text-sm;
+  @apply rounded-2xl px-2.5 py-1.5 text-sm;
 }
 
 /* Variant */

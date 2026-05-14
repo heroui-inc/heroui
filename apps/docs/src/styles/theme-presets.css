@@ -1,0 +1,1647 @@
+/* ============================================================================
+   Auto-generated theme presets for docs.
+   Run: node apps/docs/scripts/build-theme-presets.mjs
+   ============================================================================ */
+@layer base {
+  /* Sky theme */
+  [data-design-theme="sky"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.015 230.34);
+    --border: oklch(90% 0.015 230.34);
+    --default: oklch(94% 0.015 230.34);
+    --default-foreground: oklch(21.03% 0.0059 230.34);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(94% 0.015 230.34) 96%,
+      oklch(21.03% 0.015 230.34) 4%
+    );
+    --field-background: oklch(100% 0.0075 230.34);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.0075 230.34) 90%,
+      oklch(21.03% 0.015 230.34) 2%
+    );
+    --field-border: oklch(90% 0.015 230.34);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.015 230.34) 74%,
+      oklch(21.03% 0.015 230.34) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.015 230.34) 88%,
+      oklch(21.03% 0.015 230.34) 10%
+    );
+    --field-foreground: oklch(21.03% 0.015 230.34);
+    --field-placeholder: oklch(55.17% 0.03 230.34);
+    --foreground: oklch(21.03% 0.015 230.34);
+    --link: oklch(21.03% 0.015 230.34);
+    --muted: oklch(55.17% 0.03 230.34);
+    --overlay: oklch(100% 0.0045 230.34);
+    --overlay-foreground: oklch(21.03% 0.015 230.34);
+    --scrollbar: oklch(87.1% 0.015 230.34);
+    --segment: oklch(100% 0.015 230.34);
+    --segment-foreground: oklch(21.03% 0.015 230.34);
+    --separator: oklch(92% 0.015 230.34);
+    --surface: oklch(100% 0.0075 230.34);
+    --surface-foreground: oklch(21.03% 0.015 230.34);
+    --surface-secondary: oklch(95.24% 0.0225 230.34);
+    --surface-secondary-foreground: oklch(21.03% 0.015 230.34);
+    --surface-tertiary: oklch(93.73% 0.0225 230.34);
+    --surface-tertiary-foreground: oklch(21.03% 0.015 230.34);
+    --accent: oklch(82.76% 0.1013 230.34);
+    --accent-foreground: oklch(15% 0.0203 230.34);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(82.76% 0.1013 230.34) 90%,
+      oklch(15% 0.0203 230.34) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(82.76% 0.1013 230.34) 15%, transparent);
+    --accent-soft-foreground: oklch(47.76% 0.1419 230.34);
+    --accent-soft-hover: color-mix(in oklab, oklch(82.76% 0.1013 230.34) 20%, transparent);
+    --focus: oklch(82.76% 0.1013 230.34);
+    --success: oklch(73.29% 0.1992 148.02);
+    --success-foreground: oklch(21.03% 0.0059 148.02);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(73.29% 0.1992 148.02) 90%,
+      oklch(21.03% 0.0059 148.02) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(73.29% 0.1992 148.02) 15%, transparent);
+    --success-soft-foreground: oklch(73.29% 0.1992 148.02);
+    --success-soft-hover: color-mix(in oklab, oklch(73.29% 0.1992 148.02) 20%, transparent);
+    --warning: oklch(78.19% 0.1631 69.51);
+    --warning-foreground: oklch(21.03% 0.0059 69.51);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1631 69.51) 90%,
+      oklch(21.03% 0.0059 69.51) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1631 69.51) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1631 69.51);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1631 69.51) 20%, transparent);
+    --danger: oklch(65.32% 0.2398 22.91);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(65.32% 0.2398 22.91) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(65.32% 0.2398 22.91) 15%, transparent);
+    --danger-soft-foreground: oklch(65.32% 0.2398 22.91);
+    --danger-soft-hover: color-mix(in oklab, oklch(65.32% 0.2398 22.91) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="sky"].dark,
+  [data-design-theme="sky"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.015 230.34);
+    --border: oklch(28% 0.015 230.34);
+    --default: oklch(27.4% 0.015 230.34);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(27.4% 0.015 230.34) 96%,
+      oklch(99.11% 0.015 230.34) 4%
+    );
+    --field-background: oklch(21.03% 0.03 230.34);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.03 230.34) 90%,
+      oklch(99.11% 0.015 230.34) 2%
+    );
+    --field-border: oklch(28% 0.015 230.34);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.015 230.34) 74%,
+      oklch(99.11% 0.015 230.34) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.015 230.34) 88%,
+      oklch(99.11% 0.015 230.34) 10%
+    );
+    --field-foreground: oklch(99.11% 0.015 230.34);
+    --field-placeholder: oklch(70.5% 0.03 230.34);
+    --foreground: oklch(99.11% 0.015 230.34);
+    --link: oklch(99.11% 0.015 230.34);
+    --muted: oklch(70.5% 0.03 230.34);
+    --overlay: oklch(21.03% 0.03 230.34);
+    --overlay-foreground: oklch(99.11% 0.015 230.34);
+    --scrollbar: oklch(70.5% 0.015 230.34);
+    --segment: oklch(39.64% 0.015 230.34);
+    --segment-foreground: oklch(99.11% 0.015 230.34);
+    --separator: oklch(25% 0.015 230.34);
+    --surface: oklch(21.03% 0.03 230.34);
+    --surface-foreground: oklch(99.11% 0.015 230.34);
+    --surface-secondary: oklch(25.7% 0.0225 230.34);
+    --surface-secondary-foreground: oklch(99.11% 0.015 230.34);
+    --surface-tertiary: oklch(27.21% 0.0225 230.34);
+    --surface-tertiary-foreground: oklch(99.11% 0.015 230.34);
+    --accent: oklch(82.76% 0.1013 230.34);
+    --accent-foreground: oklch(15% 0.0203 230.34);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(82.76% 0.1013 230.34) 90%,
+      oklch(15% 0.0203 230.34) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(82.76% 0.1013 230.34) 15%, transparent);
+    --accent-soft-foreground: oklch(47.76% 0.1419 230.34);
+    --accent-soft-hover: color-mix(in oklab, oklch(82.76% 0.1013 230.34) 20%, transparent);
+    --focus: oklch(82.76% 0.1013 230.34);
+    --success: oklch(73.29% 0.1992 148.02);
+    --success-foreground: oklch(21.03% 0.0059 148.02);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(73.29% 0.1992 148.02) 90%,
+      oklch(21.03% 0.0059 148.02) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(73.29% 0.1992 148.02) 15%, transparent);
+    --success-soft-foreground: oklch(73.29% 0.1992 148.02);
+    --success-soft-hover: color-mix(in oklab, oklch(73.29% 0.1992 148.02) 20%, transparent);
+    --warning: oklch(78.19% 0.1631 69.51);
+    --warning-foreground: oklch(21.03% 0.0059 69.51);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1631 69.51) 90%,
+      oklch(21.03% 0.0059 69.51) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1631 69.51) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1631 69.51);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1631 69.51) 20%, transparent);
+    --danger: oklch(65.32% 0.2398 22.91);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(65.32% 0.2398 22.91) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(65.32% 0.2398 22.91) 15%, transparent);
+    --danger-soft-foreground: oklch(65.32% 0.2398 22.91);
+    --danger-soft-hover: color-mix(in oklab, oklch(65.32% 0.2398 22.91) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Lavender theme */
+  [data-design-theme="lavender"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.015 305.49);
+    --border: oklch(90% 0.015 305.49);
+    --default: oklch(94% 0.015 305.49);
+    --default-foreground: oklch(21.03% 0.0059 305.49);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(94% 0.015 305.49) 96%,
+      oklch(21.03% 0.015 305.49) 4%
+    );
+    --field-background: oklch(100% 0.0075 305.49);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.0075 305.49) 90%,
+      oklch(21.03% 0.015 305.49) 2%
+    );
+    --field-border: oklch(90% 0.015 305.49);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.015 305.49) 74%,
+      oklch(21.03% 0.015 305.49) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.015 305.49) 88%,
+      oklch(21.03% 0.015 305.49) 10%
+    );
+    --field-foreground: oklch(21.03% 0.015 305.49);
+    --field-placeholder: oklch(55.17% 0.03 305.49);
+    --foreground: oklch(21.03% 0.015 305.49);
+    --link: oklch(21.03% 0.015 305.49);
+    --muted: oklch(55.17% 0.03 305.49);
+    --overlay: oklch(100% 0.0045 305.49);
+    --overlay-foreground: oklch(21.03% 0.015 305.49);
+    --scrollbar: oklch(87.1% 0.015 305.49);
+    --segment: oklch(100% 0.015 305.49);
+    --segment-foreground: oklch(21.03% 0.015 305.49);
+    --separator: oklch(92% 0.015 305.49);
+    --surface: oklch(100% 0.0075 305.49);
+    --surface-foreground: oklch(21.03% 0.015 305.49);
+    --surface-secondary: oklch(95.24% 0.0225 305.49);
+    --surface-secondary-foreground: oklch(21.03% 0.015 305.49);
+    --surface-tertiary: oklch(93.73% 0.0225 305.49);
+    --surface-tertiary-foreground: oklch(21.03% 0.015 305.49);
+    --accent: oklch(72.17% 0.1768 305.49);
+    --accent-foreground: oklch(15% 0.03 305.49);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(72.17% 0.1768 305.49) 90%,
+      oklch(15% 0.03 305.49) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(72.17% 0.1768 305.49) 15%, transparent);
+    --accent-soft-foreground: oklch(37.17% 0.2475 305.49);
+    --accent-soft-hover: color-mix(in oklab, oklch(72.17% 0.1768 305.49) 20%, transparent);
+    --focus: oklch(72.17% 0.1768 305.49);
+    --success: oklch(73.29% 0.1992 157.03);
+    --success-foreground: oklch(21.03% 0.0059 157.03);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(73.29% 0.1992 157.03) 90%,
+      oklch(21.03% 0.0059 157.03) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(73.29% 0.1992 157.03) 15%, transparent);
+    --success-soft-foreground: oklch(73.29% 0.1992 157.03);
+    --success-soft-hover: color-mix(in oklab, oklch(73.29% 0.1992 157.03) 20%, transparent);
+    --warning: oklch(78.19% 0.1631 78.52);
+    --warning-foreground: oklch(21.03% 0.0059 78.52);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1631 78.52) 90%,
+      oklch(21.03% 0.0059 78.52) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1631 78.52) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1631 78.52);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1631 78.52) 20%, transparent);
+    --danger: oklch(65.32% 0.2398 31.93);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(65.32% 0.2398 31.93) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(65.32% 0.2398 31.93) 15%, transparent);
+    --danger-soft-foreground: oklch(65.32% 0.2398 31.93);
+    --danger-soft-hover: color-mix(in oklab, oklch(65.32% 0.2398 31.93) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="lavender"].dark,
+  [data-design-theme="lavender"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.015 305.49);
+    --border: oklch(28% 0.015 305.49);
+    --default: oklch(27.4% 0.015 305.49);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(27.4% 0.015 305.49) 96%,
+      oklch(99.11% 0.015 305.49) 4%
+    );
+    --field-background: oklch(21.03% 0.03 305.49);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.03 305.49) 90%,
+      oklch(99.11% 0.015 305.49) 2%
+    );
+    --field-border: oklch(28% 0.015 305.49);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.015 305.49) 74%,
+      oklch(99.11% 0.015 305.49) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.015 305.49) 88%,
+      oklch(99.11% 0.015 305.49) 10%
+    );
+    --field-foreground: oklch(99.11% 0.015 305.49);
+    --field-placeholder: oklch(70.5% 0.03 305.49);
+    --foreground: oklch(99.11% 0.015 305.49);
+    --link: oklch(99.11% 0.015 305.49);
+    --muted: oklch(70.5% 0.03 305.49);
+    --overlay: oklch(21.03% 0.03 305.49);
+    --overlay-foreground: oklch(99.11% 0.015 305.49);
+    --scrollbar: oklch(70.5% 0.015 305.49);
+    --segment: oklch(39.64% 0.015 305.49);
+    --segment-foreground: oklch(99.11% 0.015 305.49);
+    --separator: oklch(25% 0.015 305.49);
+    --surface: oklch(21.03% 0.03 305.49);
+    --surface-foreground: oklch(99.11% 0.015 305.49);
+    --surface-secondary: oklch(25.7% 0.0225 305.49);
+    --surface-secondary-foreground: oklch(99.11% 0.015 305.49);
+    --surface-tertiary: oklch(27.21% 0.0225 305.49);
+    --surface-tertiary-foreground: oklch(99.11% 0.015 305.49);
+    --accent: oklch(72.17% 0.1768 305.49);
+    --accent-foreground: oklch(15% 0.03 305.49);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(72.17% 0.1768 305.49) 90%,
+      oklch(15% 0.03 305.49) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(72.17% 0.1768 305.49) 15%, transparent);
+    --accent-soft-foreground: oklch(37.17% 0.2475 305.49);
+    --accent-soft-hover: color-mix(in oklab, oklch(72.17% 0.1768 305.49) 20%, transparent);
+    --focus: oklch(72.17% 0.1768 305.49);
+    --success: oklch(73.29% 0.1992 157.03);
+    --success-foreground: oklch(21.03% 0.0059 157.03);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(73.29% 0.1992 157.03) 90%,
+      oklch(21.03% 0.0059 157.03) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(73.29% 0.1992 157.03) 15%, transparent);
+    --success-soft-foreground: oklch(73.29% 0.1992 157.03);
+    --success-soft-hover: color-mix(in oklab, oklch(73.29% 0.1992 157.03) 20%, transparent);
+    --warning: oklch(78.19% 0.1631 78.52);
+    --warning-foreground: oklch(21.03% 0.0059 78.52);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1631 78.52) 90%,
+      oklch(21.03% 0.0059 78.52) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1631 78.52) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1631 78.52);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1631 78.52) 20%, transparent);
+    --danger: oklch(65.32% 0.2398 31.93);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(65.32% 0.2398 31.93) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(65.32% 0.2398 31.93) 15%, transparent);
+    --danger-soft-foreground: oklch(65.32% 0.2398 31.93);
+    --danger-soft-hover: color-mix(in oklab, oklch(65.32% 0.2398 31.93) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Mint theme */
+  [data-design-theme="mint"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.015 154.48);
+    --border: oklch(90% 0.015 154.48);
+    --default: oklch(94% 0.015 154.48);
+    --default-foreground: oklch(21.03% 0.0059 154.48);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(94% 0.015 154.48) 96%,
+      oklch(21.03% 0.015 154.48) 4%
+    );
+    --field-background: oklch(100% 0.0075 154.48);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.0075 154.48) 90%,
+      oklch(21.03% 0.015 154.48) 2%
+    );
+    --field-border: oklch(90% 0.015 154.48);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.015 154.48) 74%,
+      oklch(21.03% 0.015 154.48) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.015 154.48) 88%,
+      oklch(21.03% 0.015 154.48) 10%
+    );
+    --field-foreground: oklch(21.03% 0.015 154.48);
+    --field-placeholder: oklch(55.17% 0.03 154.48);
+    --foreground: oklch(21.03% 0.015 154.48);
+    --link: oklch(21.03% 0.015 154.48);
+    --muted: oklch(55.17% 0.03 154.48);
+    --overlay: oklch(100% 0.0045 154.48);
+    --overlay-foreground: oklch(21.03% 0.015 154.48);
+    --scrollbar: oklch(87.1% 0.015 154.48);
+    --segment: oklch(100% 0.015 154.48);
+    --segment-foreground: oklch(21.03% 0.015 154.48);
+    --separator: oklch(92% 0.015 154.48);
+    --surface: oklch(100% 0.0075 154.48);
+    --surface-foreground: oklch(21.03% 0.015 154.48);
+    --surface-secondary: oklch(95.24% 0.0225 154.48);
+    --surface-secondary-foreground: oklch(21.03% 0.015 154.48);
+    --surface-tertiary: oklch(93.73% 0.0225 154.48);
+    --surface-tertiary-foreground: oklch(21.03% 0.015 154.48);
+    --accent: oklch(87.12% 0.1363 154.48);
+    --accent-foreground: oklch(15% 0.0273 154.48);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(87.12% 0.1363 154.48) 90%,
+      oklch(15% 0.0273 154.48) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(87.12% 0.1363 154.48) 15%, transparent);
+    --accent-soft-foreground: oklch(52.12% 0.1908 154.48);
+    --accent-soft-hover: color-mix(in oklab, oklch(87.12% 0.1363 154.48) 20%, transparent);
+    --focus: oklch(87.12% 0.1363 154.48);
+    --success: oklch(73.29% 0.1992 138.91);
+    --success-foreground: oklch(21.03% 0.0059 138.91);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(73.29% 0.1992 138.91) 90%,
+      oklch(21.03% 0.0059 138.91) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(73.29% 0.1992 138.91) 15%, transparent);
+    --success-soft-foreground: oklch(73.29% 0.1992 138.91);
+    --success-soft-hover: color-mix(in oklab, oklch(73.29% 0.1992 138.91) 20%, transparent);
+    --warning: oklch(78.19% 0.1631 60.4);
+    --warning-foreground: oklch(21.03% 0.0059 60.4);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1631 60.4) 90%,
+      oklch(21.03% 0.0059 60.4) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1631 60.4) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1631 60.4);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1631 60.4) 20%, transparent);
+    --danger: oklch(65.32% 0.2398 13.81);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(65.32% 0.2398 13.81) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(65.32% 0.2398 13.81) 15%, transparent);
+    --danger-soft-foreground: oklch(65.32% 0.2398 13.81);
+    --danger-soft-hover: color-mix(in oklab, oklch(65.32% 0.2398 13.81) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="mint"].dark,
+  [data-design-theme="mint"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.015 154.48);
+    --border: oklch(28% 0.015 154.48);
+    --default: oklch(27.4% 0.015 154.48);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(27.4% 0.015 154.48) 96%,
+      oklch(99.11% 0.015 154.48) 4%
+    );
+    --field-background: oklch(21.03% 0.03 154.48);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.03 154.48) 90%,
+      oklch(99.11% 0.015 154.48) 2%
+    );
+    --field-border: oklch(28% 0.015 154.48);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.015 154.48) 74%,
+      oklch(99.11% 0.015 154.48) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.015 154.48) 88%,
+      oklch(99.11% 0.015 154.48) 10%
+    );
+    --field-foreground: oklch(99.11% 0.015 154.48);
+    --field-placeholder: oklch(70.5% 0.03 154.48);
+    --foreground: oklch(99.11% 0.015 154.48);
+    --link: oklch(99.11% 0.015 154.48);
+    --muted: oklch(70.5% 0.03 154.48);
+    --overlay: oklch(21.03% 0.03 154.48);
+    --overlay-foreground: oklch(99.11% 0.015 154.48);
+    --scrollbar: oklch(70.5% 0.015 154.48);
+    --segment: oklch(39.64% 0.015 154.48);
+    --segment-foreground: oklch(99.11% 0.015 154.48);
+    --separator: oklch(25% 0.015 154.48);
+    --surface: oklch(21.03% 0.03 154.48);
+    --surface-foreground: oklch(99.11% 0.015 154.48);
+    --surface-secondary: oklch(25.7% 0.0225 154.48);
+    --surface-secondary-foreground: oklch(99.11% 0.015 154.48);
+    --surface-tertiary: oklch(27.21% 0.0225 154.48);
+    --surface-tertiary-foreground: oklch(99.11% 0.015 154.48);
+    --accent: oklch(87.12% 0.1363 154.48);
+    --accent-foreground: oklch(15% 0.0273 154.48);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(87.12% 0.1363 154.48) 90%,
+      oklch(15% 0.0273 154.48) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(87.12% 0.1363 154.48) 15%, transparent);
+    --accent-soft-foreground: oklch(52.12% 0.1908 154.48);
+    --accent-soft-hover: color-mix(in oklab, oklch(87.12% 0.1363 154.48) 20%, transparent);
+    --focus: oklch(87.12% 0.1363 154.48);
+    --success: oklch(73.29% 0.1992 138.91);
+    --success-foreground: oklch(21.03% 0.0059 138.91);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(73.29% 0.1992 138.91) 90%,
+      oklch(21.03% 0.0059 138.91) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(73.29% 0.1992 138.91) 15%, transparent);
+    --success-soft-foreground: oklch(73.29% 0.1992 138.91);
+    --success-soft-hover: color-mix(in oklab, oklch(73.29% 0.1992 138.91) 20%, transparent);
+    --warning: oklch(78.19% 0.1631 60.4);
+    --warning-foreground: oklch(21.03% 0.0059 60.4);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1631 60.4) 90%,
+      oklch(21.03% 0.0059 60.4) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1631 60.4) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1631 60.4);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1631 60.4) 20%, transparent);
+    --danger: oklch(65.32% 0.2398 13.81);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(65.32% 0.2398 13.81) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(65.32% 0.2398 13.81) 15%, transparent);
+    --danger-soft-foreground: oklch(65.32% 0.2398 13.81);
+    --danger-soft-hover: color-mix(in oklab, oklch(65.32% 0.2398 13.81) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Netflix theme */
+  [data-design-theme="netflix"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.008 27.98);
+    --border: oklch(90% 0.008 27.98);
+    --default: oklch(94% 0.008 27.98);
+    --default-foreground: oklch(21.03% 0.0059 27.98);
+    --default-hover: color-mix(in oklab, oklch(94% 0.008 27.98) 96%, oklch(21.03% 0.008 27.98) 4%);
+    --field-background: oklch(100% 0.004 27.98);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.004 27.98) 90%,
+      oklch(21.03% 0.008 27.98) 2%
+    );
+    --field-border: oklch(90% 0.008 27.98);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.008 27.98) 74%,
+      oklch(21.03% 0.008 27.98) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.008 27.98) 88%,
+      oklch(21.03% 0.008 27.98) 10%
+    );
+    --field-foreground: oklch(21.03% 0.008 27.98);
+    --field-placeholder: oklch(55.17% 0.016 27.98);
+    --foreground: oklch(21.03% 0.008 27.98);
+    --link: oklch(21.03% 0.008 27.98);
+    --muted: oklch(55.17% 0.016 27.98);
+    --overlay: oklch(100% 0.0024 27.98);
+    --overlay-foreground: oklch(21.03% 0.008 27.98);
+    --scrollbar: oklch(87.1% 0.008 27.98);
+    --segment: oklch(100% 0.008 27.98);
+    --segment-foreground: oklch(21.03% 0.008 27.98);
+    --separator: oklch(92% 0.008 27.98);
+    --surface: oklch(100% 0.004 27.98);
+    --surface-foreground: oklch(21.03% 0.008 27.98);
+    --surface-secondary: oklch(95.24% 0.012 27.98);
+    --surface-secondary-foreground: oklch(21.03% 0.008 27.98);
+    --surface-tertiary: oklch(93.73% 0.012 27.98);
+    --surface-tertiary-foreground: oklch(21.03% 0.008 27.98);
+    --accent: oklch(58.14% 0.2348 27.98);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(58.14% 0.2348 27.98) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(58.14% 0.2348 27.98) 15%, transparent);
+    --accent-soft-foreground: oklch(58.14% 0.2348 27.98);
+    --accent-soft-hover: color-mix(in oklab, oklch(58.14% 0.2348 27.98) 20%, transparent);
+    --focus: oklch(58.14% 0.2348 27.98);
+    --success: oklch(0.5148 0.1337 146.82);
+    --success-foreground: oklch(99.11% 0 0);
+    --success-hover: color-mix(in oklab, oklch(0.5148 0.1337 146.82) 90%, oklch(99.11% 0 0) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.5148 0.1337 146.82) 15%, transparent);
+    --success-soft-foreground: oklch(0.5148 0.1337 146.82);
+    --success-soft-hover: color-mix(in oklab, oklch(0.5148 0.1337 146.82) 20%, transparent);
+    --warning: oklch(0.561 0.116571 78.9352);
+    --warning-foreground: oklch(99.11% 0 0);
+    --warning-hover: color-mix(in oklab, oklch(0.561 0.116571 78.9352) 90%, oklch(99.11% 0 0) 10%);
+    --warning-soft: color-mix(in oklab, oklch(0.561 0.116571 78.9352) 15%, transparent);
+    --warning-soft-foreground: oklch(0.561 0.116571 78.9352);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.561 0.116571 78.9352) 20%, transparent);
+    --danger: oklch(0.4823 0.1938 27.64);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.4823 0.1938 27.64) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.4823 0.1938 27.64) 15%, transparent);
+    --danger-soft-foreground: oklch(0.4823 0.1938 27.64);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.4823 0.1938 27.64) 20%, transparent);
+    --radius: 0.125rem;
+    --field-radius: 0.125rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="netflix"].dark,
+  [data-design-theme="netflix"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.008 27.98);
+    --border: oklch(28% 0.008 27.98);
+    --default: oklch(27.4% 0.008 27.98);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(27.4% 0.008 27.98) 96%,
+      oklch(99.11% 0.008 27.98) 4%
+    );
+    --field-background: oklch(21.03% 0.016 27.98);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.016 27.98) 90%,
+      oklch(99.11% 0.008 27.98) 2%
+    );
+    --field-border: oklch(28% 0.008 27.98);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.008 27.98) 74%,
+      oklch(99.11% 0.008 27.98) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.008 27.98) 88%,
+      oklch(99.11% 0.008 27.98) 10%
+    );
+    --field-foreground: oklch(99.11% 0.008 27.98);
+    --field-placeholder: oklch(70.5% 0.016 27.98);
+    --foreground: oklch(99.11% 0.008 27.98);
+    --link: oklch(99.11% 0.008 27.98);
+    --muted: oklch(70.5% 0.016 27.98);
+    --overlay: oklch(21.03% 0.016 27.98);
+    --overlay-foreground: oklch(99.11% 0.008 27.98);
+    --scrollbar: oklch(70.5% 0.008 27.98);
+    --segment: oklch(39.64% 0.008 27.98);
+    --segment-foreground: oklch(99.11% 0.008 27.98);
+    --separator: oklch(25% 0.008 27.98);
+    --surface: oklch(21.03% 0.016 27.98);
+    --surface-foreground: oklch(99.11% 0.008 27.98);
+    --surface-secondary: oklch(25.7% 0.012 27.98);
+    --surface-secondary-foreground: oklch(99.11% 0.008 27.98);
+    --surface-tertiary: oklch(27.21% 0.012 27.98);
+    --surface-tertiary-foreground: oklch(99.11% 0.008 27.98);
+    --accent: oklch(58.14% 0.2348 27.98);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(58.14% 0.2348 27.98) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(58.14% 0.2348 27.98) 15%, transparent);
+    --accent-soft-foreground: oklch(58.14% 0.2348 27.98);
+    --accent-soft-hover: color-mix(in oklab, oklch(58.14% 0.2348 27.98) 20%, transparent);
+    --focus: oklch(58.14% 0.2348 27.98);
+    --success: oklch(0.7677 0.1899 148.1);
+    --success-foreground: oklch(15% 0.05 148.1);
+    --success-hover: color-mix(in oklab, oklch(0.7677 0.1899 148.1) 90%, oklch(15% 0.05 148.1) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.7677 0.1899 148.1) 15%, transparent);
+    --success-soft-foreground: oklch(0.7677 0.1899 148.1);
+    --success-soft-hover: color-mix(in oklab, oklch(0.7677 0.1899 148.1) 20%, transparent);
+    --warning: oklch(0.8239 0.153 74.6);
+    --warning-foreground: oklch(15% 0.0459 74.6);
+    --warning-hover: color-mix(in oklab, oklch(0.8239 0.153 74.6) 90%, oklch(15% 0.0459 74.6) 10%);
+    --warning-soft: color-mix(in oklab, oklch(0.8239 0.153 74.6) 15%, transparent);
+    --warning-soft-foreground: oklch(0.8239 0.153 74.6);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.8239 0.153 74.6) 20%, transparent);
+    --danger: oklch(0.4964 0.1994 28.56);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.4964 0.1994 28.56) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.4964 0.1994 28.56) 15%, transparent);
+    --danger-soft-foreground: oklch(0.4964 0.1994 28.56);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.4964 0.1994 28.56) 20%, transparent);
+    --radius: 0.125rem;
+    --field-radius: 0.125rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Uber theme */
+  [data-design-theme="uber"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.005 0);
+    --border: oklch(90% 0.005 0);
+    --default: oklch(94% 0.005 0);
+    --default-foreground: oklch(21.03% 0.0059 0);
+    --default-hover: color-mix(in oklab, oklch(94% 0.005 0) 96%, oklch(21.03% 0.005 0) 4%);
+    --field-background: oklch(100% 0.0025 0);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.0025 0) 90%,
+      oklch(21.03% 0.005 0) 2%
+    );
+    --field-border: oklch(90% 0.005 0);
+    --field-border-focus: color-mix(in oklab, oklch(90% 0.005 0) 74%, oklch(21.03% 0.005 0) 22%);
+    --field-border-hover: color-mix(in oklab, oklch(90% 0.005 0) 88%, oklch(21.03% 0.005 0) 10%);
+    --field-foreground: oklch(21.03% 0.005 0);
+    --field-placeholder: oklch(55.17% 0.01 0);
+    --foreground: oklch(21.03% 0.005 0);
+    --link: oklch(21.03% 0.005 0);
+    --muted: oklch(55.17% 0.01 0);
+    --overlay: oklch(100% 0.0015 0);
+    --overlay-foreground: oklch(21.03% 0.005 0);
+    --scrollbar: oklch(87.1% 0.005 0);
+    --segment: oklch(100% 0.005 0);
+    --segment-foreground: oklch(21.03% 0.005 0);
+    --separator: oklch(92% 0.005 0);
+    --surface: oklch(100% 0.0025 0);
+    --surface-foreground: oklch(21.03% 0.005 0);
+    --surface-secondary: oklch(95.24% 0.0075 0);
+    --surface-secondary-foreground: oklch(21.03% 0.005 0);
+    --surface-tertiary: oklch(93.73% 0.0075 0);
+    --surface-tertiary-foreground: oklch(21.03% 0.005 0);
+    --accent: oklch(0% 0 0);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(0% 0 0) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(0% 0 0) 15%, transparent);
+    --accent-soft-foreground: oklch(0% 0 0);
+    --accent-soft-hover: color-mix(in oklab, oklch(0% 0 0) 20%, transparent);
+    --focus: oklch(0% 0 0);
+    --success: oklch(0.6277 0.1604 153.06);
+    --success-foreground: oklch(99.11% 0 0);
+    --success-hover: color-mix(in oklab, oklch(0.6277 0.1604 153.06) 90%, oklch(99.11% 0 0) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.6277 0.1604 153.06) 15%, transparent);
+    --success-soft-foreground: oklch(0.6277 0.1604 153.06);
+    --success-soft-hover: color-mix(in oklab, oklch(0.6277 0.1604 153.06) 20%, transparent);
+    --warning: oklch(0.8446 0.1525 80.6);
+    --warning-foreground: oklch(15% 0.0457 80.6);
+    --warning-hover: color-mix(in oklab, oklch(0.8446 0.1525 80.6) 90%, oklch(15% 0.0457 80.6) 10%);
+    --warning-soft: color-mix(in oklab, oklch(0.8446 0.1525 80.6) 15%, transparent);
+    --warning-soft-foreground: oklch(0.8446 0.1525 80.6);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.8446 0.1525 80.6) 20%, transparent);
+    --danger: oklch(0.573 0.2249 21.97);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.573 0.2249 21.97) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.573 0.2249 21.97) 15%, transparent);
+    --danger-soft-foreground: oklch(0.573 0.2249 21.97);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.573 0.2249 21.97) 20%, transparent);
+    --radius: 0.25rem;
+    --field-radius: 0.25rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="uber"].dark,
+  [data-design-theme="uber"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.005 0);
+    --border: oklch(28% 0.005 0);
+    --default: oklch(27.4% 0.005 0);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(in oklab, oklch(27.4% 0.005 0) 96%, oklch(99.11% 0.005 0) 4%);
+    --field-background: oklch(21.03% 0.01 0);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.01 0) 90%,
+      oklch(99.11% 0.005 0) 2%
+    );
+    --field-border: oklch(28% 0.005 0);
+    --field-border-focus: color-mix(in oklab, oklch(28% 0.005 0) 74%, oklch(99.11% 0.005 0) 22%);
+    --field-border-hover: color-mix(in oklab, oklch(28% 0.005 0) 88%, oklch(99.11% 0.005 0) 10%);
+    --field-foreground: oklch(99.11% 0.005 0);
+    --field-placeholder: oklch(70.5% 0.01 0);
+    --foreground: oklch(99.11% 0.005 0);
+    --link: oklch(99.11% 0.005 0);
+    --muted: oklch(70.5% 0.01 0);
+    --overlay: oklch(21.03% 0.01 0);
+    --overlay-foreground: oklch(99.11% 0.005 0);
+    --scrollbar: oklch(70.5% 0.005 0);
+    --segment: oklch(39.64% 0.005 0);
+    --segment-foreground: oklch(99.11% 0.005 0);
+    --separator: oklch(25% 0.005 0);
+    --surface: oklch(21.03% 0.01 0);
+    --surface-foreground: oklch(99.11% 0.005 0);
+    --surface-secondary: oklch(25.7% 0.0075 0);
+    --surface-secondary-foreground: oklch(99.11% 0.005 0);
+    --surface-tertiary: oklch(27.21% 0.0075 0);
+    --surface-tertiary-foreground: oklch(99.11% 0.005 0);
+    --accent: oklch(0% 0 0);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(0% 0 0) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(0% 0 0) 15%, transparent);
+    --accent-soft-foreground: oklch(0% 0 0);
+    --accent-soft-hover: color-mix(in oklab, oklch(0% 0 0) 20%, transparent);
+    --focus: oklch(0% 0 0);
+    --success: oklch(0.6514 0.1321 156.22);
+    --success-foreground: oklch(15% 0.0396 156.22);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(0.6514 0.1321 156.22) 90%,
+      oklch(15% 0.0396 156.22) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(0.6514 0.1321 156.22) 15%, transparent);
+    --success-soft-foreground: oklch(0.6514 0.1321 156.22);
+    --success-soft-hover: color-mix(in oklab, oklch(0.6514 0.1321 156.22) 20%, transparent);
+    --warning: oklch(0.8803 0.1348 86.06);
+    --warning-foreground: oklch(15% 0.0404 86.06);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(0.8803 0.1348 86.06) 90%,
+      oklch(15% 0.0404 86.06) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(0.8803 0.1348 86.06) 15%, transparent);
+    --warning-soft-foreground: oklch(0.8803 0.1348 86.06);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.8803 0.1348 86.06) 20%, transparent);
+    --danger: oklch(0.7044 0.1872 23.19);
+    --danger-foreground: oklch(15% 0.05 23.19);
+    --danger-hover: color-mix(in oklab, oklch(0.7044 0.1872 23.19) 90%, oklch(15% 0.05 23.19) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.7044 0.1872 23.19) 15%, transparent);
+    --danger-soft-foreground: oklch(0.7044 0.1872 23.19);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.7044 0.1872 23.19) 20%, transparent);
+    --radius: 0.25rem;
+    --field-radius: 0.25rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Spotify theme */
+  [data-design-theme="spotify"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.002 148.69);
+    --border: oklch(90% 0.002 148.69);
+    --default: oklch(94% 0.002 148.69);
+    --default-foreground: oklch(21.03% 0.0059 148.69);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(94% 0.002 148.69) 96%,
+      oklch(21.03% 0.002 148.69) 4%
+    );
+    --field-background: oklch(100% 0.001 148.69);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.001 148.69) 90%,
+      oklch(21.03% 0.002 148.69) 2%
+    );
+    --field-border: oklch(90% 0.002 148.69);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.002 148.69) 74%,
+      oklch(21.03% 0.002 148.69) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.002 148.69) 88%,
+      oklch(21.03% 0.002 148.69) 10%
+    );
+    --field-foreground: oklch(21.03% 0.002 148.69);
+    --field-placeholder: oklch(55.17% 0.004 148.69);
+    --foreground: oklch(21.03% 0.002 148.69);
+    --link: oklch(21.03% 0.002 148.69);
+    --muted: oklch(55.17% 0.004 148.69);
+    --overlay: oklch(100% 0.0006 148.69);
+    --overlay-foreground: oklch(21.03% 0.002 148.69);
+    --scrollbar: oklch(87.1% 0.002 148.69);
+    --segment: oklch(100% 0.002 148.69);
+    --segment-foreground: oklch(21.03% 0.002 148.69);
+    --separator: oklch(92% 0.002 148.69);
+    --surface: oklch(100% 0.001 148.69);
+    --surface-foreground: oklch(21.03% 0.002 148.69);
+    --surface-secondary: oklch(95.24% 0.003 148.69);
+    --surface-secondary-foreground: oklch(21.03% 0.002 148.69);
+    --surface-tertiary: oklch(93.73% 0.003 148.69);
+    --surface-tertiary-foreground: oklch(21.03% 0.002 148.69);
+    --accent: oklch(76.97% 0.2123 148.69);
+    --accent-foreground: oklch(15% 0.03 148.69);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(76.97% 0.2123 148.69) 90%,
+      oklch(15% 0.03 148.69) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(76.97% 0.2123 148.69) 15%, transparent);
+    --accent-soft-foreground: oklch(41.97% 0.25 148.69);
+    --accent-soft-hover: color-mix(in oklab, oklch(76.97% 0.2123 148.69) 20%, transparent);
+    --focus: oklch(76.97% 0.2123 148.69);
+    --success: oklch(0.6072 0.1647 149.02);
+    --success-foreground: oklch(99.11% 0 0);
+    --success-hover: color-mix(in oklab, oklch(0.6072 0.1647 149.02) 90%, oklch(99.11% 0 0) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.6072 0.1647 149.02) 15%, transparent);
+    --success-soft-foreground: oklch(0.6072 0.1647 149.02);
+    --success-soft-hover: color-mix(in oklab, oklch(0.6072 0.1647 149.02) 20%, transparent);
+    --warning: oklch(0.6972 0.1687 54.22);
+    --warning-foreground: oklch(15% 0.05 54.22);
+    --warning-hover: color-mix(in oklab, oklch(0.6972 0.1687 54.22) 90%, oklch(15% 0.05 54.22) 10%);
+    --warning-soft: color-mix(in oklab, oklch(0.6972 0.1687 54.22) 15%, transparent);
+    --warning-soft-foreground: oklch(0.6972 0.1687 54.22);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.6972 0.1687 54.22) 20%, transparent);
+    --danger: oklch(0.5509 0.2166 25.29);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.5509 0.2166 25.29) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.5509 0.2166 25.29) 15%, transparent);
+    --danger-soft-foreground: oklch(0.5509 0.2166 25.29);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.5509 0.2166 25.29) 20%, transparent);
+    --field-radius: 0.125rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="spotify"].dark,
+  [data-design-theme="spotify"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.002 148.69);
+    --border: oklch(28% 0.002 148.69);
+    --default: oklch(27.4% 0.002 148.69);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(27.4% 0.002 148.69) 96%,
+      oklch(99.11% 0.002 148.69) 4%
+    );
+    --field-background: oklch(21.03% 0.004 148.69);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.004 148.69) 90%,
+      oklch(99.11% 0.002 148.69) 2%
+    );
+    --field-border: oklch(28% 0.002 148.69);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.002 148.69) 74%,
+      oklch(99.11% 0.002 148.69) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.002 148.69) 88%,
+      oklch(99.11% 0.002 148.69) 10%
+    );
+    --field-foreground: oklch(99.11% 0.002 148.69);
+    --field-placeholder: oklch(70.5% 0.004 148.69);
+    --foreground: oklch(99.11% 0.002 148.69);
+    --link: oklch(99.11% 0.002 148.69);
+    --muted: oklch(70.5% 0.004 148.69);
+    --overlay: oklch(21.03% 0.004 148.69);
+    --overlay-foreground: oklch(99.11% 0.002 148.69);
+    --scrollbar: oklch(70.5% 0.002 148.69);
+    --segment: oklch(39.64% 0.002 148.69);
+    --segment-foreground: oklch(99.11% 0.002 148.69);
+    --separator: oklch(25% 0.002 148.69);
+    --surface: oklch(21.03% 0.004 148.69);
+    --surface-foreground: oklch(99.11% 0.002 148.69);
+    --surface-secondary: oklch(25.7% 0.003 148.69);
+    --surface-secondary-foreground: oklch(99.11% 0.002 148.69);
+    --surface-tertiary: oklch(27.21% 0.003 148.69);
+    --surface-tertiary-foreground: oklch(99.11% 0.002 148.69);
+    --accent: oklch(76.97% 0.2123 148.69);
+    --accent-foreground: oklch(15% 0.03 148.69);
+    --accent-hover: color-mix(
+      in oklab,
+      oklch(76.97% 0.2123 148.69) 90%,
+      oklch(15% 0.03 148.69) 10%
+    );
+    --accent-soft: color-mix(in oklab, oklch(76.97% 0.2123 148.69) 15%, transparent);
+    --accent-soft-foreground: oklch(41.97% 0.25 148.69);
+    --accent-soft-hover: color-mix(in oklab, oklch(76.97% 0.2123 148.69) 20%, transparent);
+    --focus: oklch(76.97% 0.2123 148.69);
+    --success: oklch(0.7697 0.2124 148.67);
+    --success-foreground: oklch(15% 0.05 148.67);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(0.7697 0.2124 148.67) 90%,
+      oklch(15% 0.05 148.67) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(0.7697 0.2124 148.67) 15%, transparent);
+    --success-soft-foreground: oklch(0.7697 0.2124 148.67);
+    --success-soft-hover: color-mix(in oklab, oklch(0.7697 0.2124 148.67) 20%, transparent);
+    --warning: oklch(0.7921 0.1626 67.42);
+    --warning-foreground: oklch(15% 0.0488 67.42);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(0.7921 0.1626 67.42) 90%,
+      oklch(15% 0.0488 67.42) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(0.7921 0.1626 67.42) 15%, transparent);
+    --warning-soft-foreground: oklch(0.7921 0.1626 67.42);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.7921 0.1626 67.42) 20%, transparent);
+    --danger: oklch(0.5931 0.2338 25.42);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.5931 0.2338 25.42) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.5931 0.2338 25.42) 15%, transparent);
+    --danger-soft-foreground: oklch(0.5931 0.2338 25.42);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.5931 0.2338 25.42) 20%, transparent);
+    --field-radius: 0.125rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Coinbase theme */
+  [data-design-theme="coinbase"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.002 277.63);
+    --border: oklch(90% 0.002 277.63);
+    --default: oklch(94% 0.002 277.63);
+    --default-foreground: oklch(21.03% 0.0059 277.63);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(94% 0.002 277.63) 96%,
+      oklch(21.03% 0.002 277.63) 4%
+    );
+    --field-background: oklch(100% 0.001 277.63);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.001 277.63) 90%,
+      oklch(21.03% 0.002 277.63) 2%
+    );
+    --field-border: oklch(90% 0.002 277.63);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.002 277.63) 74%,
+      oklch(21.03% 0.002 277.63) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.002 277.63) 88%,
+      oklch(21.03% 0.002 277.63) 10%
+    );
+    --field-foreground: oklch(21.03% 0.002 277.63);
+    --field-placeholder: oklch(55.17% 0.004 277.63);
+    --foreground: oklch(21.03% 0.002 277.63);
+    --link: oklch(21.03% 0.002 277.63);
+    --muted: oklch(55.17% 0.004 277.63);
+    --overlay: oklch(100% 0.0006 277.63);
+    --overlay-foreground: oklch(21.03% 0.002 277.63);
+    --scrollbar: oklch(87.1% 0.002 277.63);
+    --segment: oklch(100% 0.002 277.63);
+    --segment-foreground: oklch(21.03% 0.002 277.63);
+    --separator: oklch(92% 0.002 277.63);
+    --surface: oklch(100% 0.001 277.63);
+    --surface-foreground: oklch(21.03% 0.002 277.63);
+    --surface-secondary: oklch(95.24% 0.003 277.63);
+    --surface-secondary-foreground: oklch(21.03% 0.002 277.63);
+    --surface-tertiary: oklch(93.73% 0.003 277.63);
+    --surface-tertiary-foreground: oklch(21.03% 0.002 277.63);
+    --accent: oklch(50.31% 0.2262 277.63);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(50.31% 0.2262 277.63) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(50.31% 0.2262 277.63) 15%, transparent);
+    --accent-soft-foreground: oklch(50.31% 0.2262 277.63);
+    --accent-soft-hover: color-mix(in oklab, oklch(50.31% 0.2262 277.63) 20%, transparent);
+    --focus: oklch(50.31% 0.2262 277.63);
+    --success: oklch(0.5438 0.1268 157.17);
+    --success-foreground: oklch(99.11% 0 0);
+    --success-hover: color-mix(in oklab, oklch(0.5438 0.1268 157.17) 90%, oklch(99.11% 0 0) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.5438 0.1268 157.17) 15%, transparent);
+    --success-soft-foreground: oklch(0.5438 0.1268 157.17);
+    --success-soft-hover: color-mix(in oklab, oklch(0.5438 0.1268 157.17) 20%, transparent);
+    --warning: oklch(0.8095 0.1119 61.69);
+    --warning-foreground: oklch(15% 0.0336 61.69);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(0.8095 0.1119 61.69) 90%,
+      oklch(15% 0.0336 61.69) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(0.8095 0.1119 61.69) 15%, transparent);
+    --warning-soft-foreground: oklch(0.8095 0.1119 61.69);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.8095 0.1119 61.69) 20%, transparent);
+    --danger: oklch(0.5507 0.2062 24);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.5507 0.2062 24) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.5507 0.2062 24) 15%, transparent);
+    --danger-soft-foreground: oklch(0.5507 0.2062 24);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.5507 0.2062 24) 20%, transparent);
+    --field-radius: 0.125rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="coinbase"].dark,
+  [data-design-theme="coinbase"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.002 277.63);
+    --border: oklch(28% 0.002 277.63);
+    --default: oklch(27.4% 0.002 277.63);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(27.4% 0.002 277.63) 96%,
+      oklch(99.11% 0.002 277.63) 4%
+    );
+    --field-background: oklch(21.03% 0.004 277.63);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.004 277.63) 90%,
+      oklch(99.11% 0.002 277.63) 2%
+    );
+    --field-border: oklch(28% 0.002 277.63);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.002 277.63) 74%,
+      oklch(99.11% 0.002 277.63) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.002 277.63) 88%,
+      oklch(99.11% 0.002 277.63) 10%
+    );
+    --field-foreground: oklch(99.11% 0.002 277.63);
+    --field-placeholder: oklch(70.5% 0.004 277.63);
+    --foreground: oklch(99.11% 0.002 277.63);
+    --link: oklch(99.11% 0.002 277.63);
+    --muted: oklch(70.5% 0.004 277.63);
+    --overlay: oklch(21.03% 0.004 277.63);
+    --overlay-foreground: oklch(99.11% 0.002 277.63);
+    --scrollbar: oklch(70.5% 0.002 277.63);
+    --segment: oklch(39.64% 0.002 277.63);
+    --segment-foreground: oklch(99.11% 0.002 277.63);
+    --separator: oklch(25% 0.002 277.63);
+    --surface: oklch(21.03% 0.004 277.63);
+    --surface-foreground: oklch(99.11% 0.002 277.63);
+    --surface-secondary: oklch(25.7% 0.003 277.63);
+    --surface-secondary-foreground: oklch(99.11% 0.002 277.63);
+    --surface-tertiary: oklch(27.21% 0.003 277.63);
+    --surface-tertiary-foreground: oklch(99.11% 0.002 277.63);
+    --accent: oklch(50.31% 0.2262 277.63);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(50.31% 0.2262 277.63) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(50.31% 0.2262 277.63) 15%, transparent);
+    --accent-soft-foreground: oklch(50.31% 0.2262 277.63);
+    --accent-soft-hover: color-mix(in oklab, oklch(50.31% 0.2262 277.63) 20%, transparent);
+    --focus: oklch(50.31% 0.2262 277.63);
+    --success: oklch(0.7574 0.180554 156.931);
+    --success-foreground: oklch(15% 0.05 156.93);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(0.7574 0.180554 156.931) 90%,
+      oklch(15% 0.05 156.93) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(0.7574 0.180554 156.931) 15%, transparent);
+    --success-soft-foreground: oklch(0.7574 0.180554 156.931);
+    --success-soft-hover: color-mix(in oklab, oklch(0.7574 0.180554 156.931) 20%, transparent);
+    --warning: oklch(0.8095 0.1119 61.69);
+    --warning-foreground: oklch(15% 0.0336 61.69);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(0.8095 0.1119 61.69) 90%,
+      oklch(15% 0.0336 61.69) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(0.8095 0.1119 61.69) 15%, transparent);
+    --warning-soft-foreground: oklch(0.8095 0.1119 61.69);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.8095 0.1119 61.69) 20%, transparent);
+    --danger: oklch(0.6545 0.2145 22.31);
+    --danger-foreground: oklch(15% 0.05 22.31);
+    --danger-hover: color-mix(in oklab, oklch(0.6545 0.2145 22.31) 90%, oklch(15% 0.05 22.31) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.6545 0.2145 22.31) 15%, transparent);
+    --danger-soft-foreground: oklch(0.6545 0.2145 22.31);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.6545 0.2145 22.31) 20%, transparent);
+    --field-radius: 0.125rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Airbnb theme */
+  [data-design-theme="airbnb"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0 22.37);
+    --border: oklch(90% 0 22.37);
+    --default: oklch(94% 0 22.37);
+    --default-foreground: oklch(21.03% 0.0059 22.37);
+    --default-hover: color-mix(in oklab, oklch(94% 0 22.37) 96%, oklch(21.03% 0 22.37) 4%);
+    --field-background: oklch(100% 0 22.37);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0 22.37) 90%,
+      oklch(21.03% 0 22.37) 2%
+    );
+    --field-border: oklch(90% 0 22.37);
+    --field-border-focus: color-mix(in oklab, oklch(90% 0 22.37) 74%, oklch(21.03% 0 22.37) 22%);
+    --field-border-hover: color-mix(in oklab, oklch(90% 0 22.37) 88%, oklch(21.03% 0 22.37) 10%);
+    --field-foreground: oklch(21.03% 0 22.37);
+    --field-placeholder: oklch(55.17% 0 22.37);
+    --foreground: oklch(21.03% 0 22.37);
+    --link: oklch(21.03% 0 22.37);
+    --muted: oklch(55.17% 0 22.37);
+    --overlay: oklch(100% 0 22.37);
+    --overlay-foreground: oklch(21.03% 0 22.37);
+    --scrollbar: oklch(87.1% 0 22.37);
+    --segment: oklch(100% 0 22.37);
+    --segment-foreground: oklch(21.03% 0 22.37);
+    --separator: oklch(92% 0 22.37);
+    --surface: oklch(100% 0 22.37);
+    --surface-foreground: oklch(21.03% 0 22.37);
+    --surface-secondary: oklch(95.24% 0 22.37);
+    --surface-secondary-foreground: oklch(21.03% 0 22.37);
+    --surface-tertiary: oklch(93.73% 0 22.37);
+    --surface-tertiary-foreground: oklch(21.03% 0 22.37);
+    --accent: oklch(68.92% 0.2004 22.37);
+    --accent-foreground: oklch(0.9911 0 0);
+    --accent-hover: color-mix(in oklab, oklch(68.92% 0.2004 22.37) 90%, oklch(0.9911 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(68.92% 0.2004 22.37) 15%, transparent);
+    --accent-soft-foreground: oklch(35% 0.25 22.37);
+    --accent-soft-hover: color-mix(in oklab, oklch(68.92% 0.2004 22.37) 20%, transparent);
+    --focus: oklch(68.92% 0.2004 22.37);
+    --success: oklch(0.5573 0.0947 199.48);
+    --success-foreground: oklch(0.9911 0 0);
+    --success-hover: color-mix(in oklab, oklch(0.5573 0.0947 199.48) 90%, oklch(0.9911 0 0) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.5573 0.0947 199.48) 15%, transparent);
+    --success-soft-foreground: oklch(0.5573 0.0947 199.48);
+    --success-soft-hover: color-mix(in oklab, oklch(0.5573 0.0947 199.48) 20%, transparent);
+    --warning: oklch(0.6904 0.1972 38.75);
+    --warning-foreground: oklch(0.9911 0 0);
+    --warning-hover: color-mix(in oklab, oklch(0.6904 0.1972 38.75) 90%, oklch(0.9911 0 0) 10%);
+    --warning-soft: color-mix(in oklab, oklch(0.6904 0.1972 38.75) 15%, transparent);
+    --warning-soft-foreground: oklch(0.6904 0.1972 38.75);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.6904 0.1972 38.75) 20%, transparent);
+    --danger: oklch(0.5392 0.1816 33.72);
+    --danger-foreground: oklch(0.9911 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.5392 0.1816 33.72) 90%, oklch(0.9911 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.5392 0.1816 33.72) 15%, transparent);
+    --danger-soft-foreground: oklch(0.5392 0.1816 33.72);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.5392 0.1816 33.72) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="airbnb"].dark,
+  [data-design-theme="airbnb"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0 22.37);
+    --border: oklch(28% 0 22.37);
+    --default: oklch(27.4% 0 22.37);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(in oklab, oklch(27.4% 0 22.37) 96%, oklch(99.11% 0 22.37) 4%);
+    --field-background: oklch(21.03% 0 22.37);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0 22.37) 90%,
+      oklch(99.11% 0 22.37) 2%
+    );
+    --field-border: oklch(28% 0 22.37);
+    --field-border-focus: color-mix(in oklab, oklch(28% 0 22.37) 74%, oklch(99.11% 0 22.37) 22%);
+    --field-border-hover: color-mix(in oklab, oklch(28% 0 22.37) 88%, oklch(99.11% 0 22.37) 10%);
+    --field-foreground: oklch(99.11% 0 22.37);
+    --field-placeholder: oklch(70.5% 0 22.37);
+    --foreground: oklch(99.11% 0 22.37);
+    --link: oklch(99.11% 0 22.37);
+    --muted: oklch(70.5% 0 22.37);
+    --overlay: oklch(21.03% 0 22.37);
+    --overlay-foreground: oklch(99.11% 0 22.37);
+    --scrollbar: oklch(70.5% 0 22.37);
+    --segment: oklch(39.64% 0 22.37);
+    --segment-foreground: oklch(99.11% 0 22.37);
+    --separator: oklch(25% 0 22.37);
+    --surface: oklch(21.03% 0 22.37);
+    --surface-foreground: oklch(99.11% 0 22.37);
+    --surface-secondary: oklch(25.7% 0 22.37);
+    --surface-secondary-foreground: oklch(99.11% 0 22.37);
+    --surface-tertiary: oklch(27.21% 0 22.37);
+    --surface-tertiary-foreground: oklch(99.11% 0 22.37);
+    --accent: oklch(68.92% 0.2004 22.37);
+    --accent-foreground: oklch(0.9911 0 0);
+    --accent-hover: color-mix(in oklab, oklch(68.92% 0.2004 22.37) 90%, oklch(0.9911 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(68.92% 0.2004 22.37) 15%, transparent);
+    --accent-soft-foreground: oklch(35% 0.25 22.37);
+    --accent-soft-hover: color-mix(in oklab, oklch(68.92% 0.2004 22.37) 20%, transparent);
+    --focus: oklch(68.92% 0.2004 22.37);
+    --success: oklch(0.652 0.114864 185.0749);
+    --success-foreground: oklch(0.9911 0 0);
+    --success-hover: color-mix(in oklab, oklch(0.652 0.114864 185.0749) 90%, oklch(0.9911 0 0) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.652 0.114864 185.0749) 15%, transparent);
+    --success-soft-foreground: oklch(0.652 0.114864 185.0749);
+    --success-soft-hover: color-mix(in oklab, oklch(0.652 0.114864 185.0749) 20%, transparent);
+    --warning: oklch(0.8197 0.170602 78.4658);
+    --warning-foreground: oklch(15% 0.05 78.47);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(0.8197 0.170602 78.4658) 90%,
+      oklch(15% 0.05 78.47) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(0.8197 0.170602 78.4658) 15%, transparent);
+    --warning-soft-foreground: oklch(0.8197 0.170602 78.4658);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.8197 0.170602 78.4658) 20%, transparent);
+    --danger: oklch(0.5392 0.1816 33.72);
+    --danger-foreground: oklch(0.9911 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.5392 0.1816 33.72) 90%, oklch(0.9911 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.5392 0.1816 33.72) 15%, transparent);
+    --danger-soft-foreground: oklch(0.5392 0.1816 33.72);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.5392 0.1816 33.72) 20%, transparent);
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Discord theme */
+  [data-design-theme="discord"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.01 273.85);
+    --border: oklch(90% 0.01 273.85);
+    --default: oklch(94% 0.01 273.85);
+    --default-foreground: oklch(21.03% 0.0059 273.85);
+    --default-hover: color-mix(in oklab, oklch(94% 0.01 273.85) 96%, oklch(21.03% 0.01 273.85) 4%);
+    --field-background: oklch(100% 0.005 273.85);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.005 273.85) 90%,
+      oklch(21.03% 0.01 273.85) 2%
+    );
+    --field-border: oklch(90% 0.01 273.85);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.01 273.85) 74%,
+      oklch(21.03% 0.01 273.85) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.01 273.85) 88%,
+      oklch(21.03% 0.01 273.85) 10%
+    );
+    --field-foreground: oklch(21.03% 0.01 273.85);
+    --field-placeholder: oklch(55.17% 0.02 273.85);
+    --foreground: oklch(21.03% 0.01 273.85);
+    --link: oklch(21.03% 0.01 273.85);
+    --muted: oklch(55.17% 0.02 273.85);
+    --overlay: oklch(100% 0.003 273.85);
+    --overlay-foreground: oklch(21.03% 0.01 273.85);
+    --scrollbar: oklch(87.1% 0.01 273.85);
+    --segment: oklch(100% 0.01 273.85);
+    --segment-foreground: oklch(21.03% 0.01 273.85);
+    --separator: oklch(92% 0.01 273.85);
+    --surface: oklch(100% 0.005 273.85);
+    --surface-foreground: oklch(21.03% 0.01 273.85);
+    --surface-secondary: oklch(95.24% 0.015 273.85);
+    --surface-secondary-foreground: oklch(21.03% 0.01 273.85);
+    --surface-tertiary: oklch(93.73% 0.015 273.85);
+    --surface-tertiary-foreground: oklch(21.03% 0.01 273.85);
+    --accent: oklch(57.74% 0.2092 273.85);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(57.74% 0.2092 273.85) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(57.74% 0.2092 273.85) 15%, transparent);
+    --accent-soft-foreground: oklch(57.74% 0.2092 273.85);
+    --accent-soft-hover: color-mix(in oklab, oklch(57.74% 0.2092 273.85) 20%, transparent);
+    --focus: oklch(57.74% 0.2092 273.85);
+    --success: oklch(0.532 0.1238 151.57);
+    --success-foreground: oklch(99.11% 0 0);
+    --success-hover: color-mix(in oklab, oklch(0.532 0.1238 151.57) 90%, oklch(99.11% 0 0) 10%);
+    --success-soft: color-mix(in oklab, oklch(0.532 0.1238 151.57) 15%, transparent);
+    --success-soft-foreground: oklch(0.532 0.1238 151.57);
+    --success-soft-hover: color-mix(in oklab, oklch(0.532 0.1238 151.57) 20%, transparent);
+    --warning: oklch(0.9218 0.1571 99.87);
+    --warning-foreground: oklch(15% 0.0471 99.87);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(0.9218 0.1571 99.87) 90%,
+      oklch(15% 0.0471 99.87) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(0.9218 0.1571 99.87) 15%, transparent);
+    --warning-soft-foreground: oklch(0.9218 0.1571 99.87);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.9218 0.1571 99.87) 20%, transparent);
+    --danger: oklch(0.5884 0.1993 24.39);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.5884 0.1993 24.39) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.5884 0.1993 24.39) 15%, transparent);
+    --danger-soft-foreground: oklch(0.5884 0.1993 24.39);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.5884 0.1993 24.39) 20%, transparent);
+    --radius: 0.25rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="discord"].dark,
+  [data-design-theme="discord"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.01 273.85);
+    --border: oklch(28% 0.01 273.85);
+    --default: oklch(27.4% 0.01 273.85);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(
+      in oklab,
+      oklch(27.4% 0.01 273.85) 96%,
+      oklch(99.11% 0.01 273.85) 4%
+    );
+    --field-background: oklch(21.03% 0.02 273.85);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.02 273.85) 90%,
+      oklch(99.11% 0.01 273.85) 2%
+    );
+    --field-border: oklch(28% 0.01 273.85);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.01 273.85) 74%,
+      oklch(99.11% 0.01 273.85) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.01 273.85) 88%,
+      oklch(99.11% 0.01 273.85) 10%
+    );
+    --field-foreground: oklch(99.11% 0.01 273.85);
+    --field-placeholder: oklch(70.5% 0.02 273.85);
+    --foreground: oklch(99.11% 0.01 273.85);
+    --link: oklch(99.11% 0.01 273.85);
+    --muted: oklch(70.5% 0.02 273.85);
+    --overlay: oklch(21.03% 0.02 273.85);
+    --overlay-foreground: oklch(99.11% 0.01 273.85);
+    --scrollbar: oklch(70.5% 0.01 273.85);
+    --segment: oklch(39.64% 0.01 273.85);
+    --segment-foreground: oklch(99.11% 0.01 273.85);
+    --separator: oklch(25% 0.01 273.85);
+    --surface: oklch(21.03% 0.02 273.85);
+    --surface-foreground: oklch(99.11% 0.01 273.85);
+    --surface-secondary: oklch(25.7% 0.015 273.85);
+    --surface-secondary-foreground: oklch(99.11% 0.01 273.85);
+    --surface-tertiary: oklch(27.21% 0.015 273.85);
+    --surface-tertiary-foreground: oklch(99.11% 0.01 273.85);
+    --accent: oklch(57.74% 0.2092 273.85);
+    --accent-foreground: oklch(99.11% 0 0);
+    --accent-hover: color-mix(in oklab, oklch(57.74% 0.2092 273.85) 90%, oklch(99.11% 0 0) 10%);
+    --accent-soft: color-mix(in oklab, oklch(57.74% 0.2092 273.85) 15%, transparent);
+    --accent-soft-foreground: oklch(57.74% 0.2092 273.85);
+    --accent-soft-hover: color-mix(in oklab, oklch(57.74% 0.2092 273.85) 20%, transparent);
+    --focus: oklch(57.74% 0.2092 273.85);
+    --success: oklch(0.8548 0.1967 150.16);
+    --success-foreground: oklch(15% 0.05 150.16);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(0.8548 0.1967 150.16) 90%,
+      oklch(15% 0.05 150.16) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(0.8548 0.1967 150.16) 15%, transparent);
+    --success-soft-foreground: oklch(0.8548 0.1967 150.16);
+    --success-soft-hover: color-mix(in oklab, oklch(0.8548 0.1967 150.16) 20%, transparent);
+    --warning: oklch(0.9218 0.1571 99.87);
+    --warning-foreground: oklch(15% 0.0471 99.87);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(0.9218 0.1571 99.87) 90%,
+      oklch(15% 0.0471 99.87) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(0.9218 0.1571 99.87) 15%, transparent);
+    --warning-soft-foreground: oklch(0.9218 0.1571 99.87);
+    --warning-soft-hover: color-mix(in oklab, oklch(0.9218 0.1571 99.87) 20%, transparent);
+    --danger: oklch(0.6318 0.2075 24.57);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.6318 0.2075 24.57) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.6318 0.2075 24.57) 15%, transparent);
+    --danger-soft-foreground: oklch(0.6318 0.2075 24.57);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.6318 0.2075 24.57) 20%, transparent);
+    --radius: 0.25rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  /* Rabbit theme */
+  [data-design-theme="rabbit"]:not(.dark):not([data-theme="dark"]) {
+    --background: oklch(97.02% 0.01 43.48);
+    --border: oklch(90% 0.01 43.48);
+    --default: oklch(94% 0.01 43.48);
+    --default-foreground: oklch(21.03% 0.0059 43.48);
+    --default-hover: color-mix(in oklab, oklch(94% 0.01 43.48) 96%, oklch(21.03% 0.01 43.48) 4%);
+    --field-background: oklch(100% 0.005 43.48);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(100% 0.005 43.48) 90%,
+      oklch(21.03% 0.01 43.48) 2%
+    );
+    --field-border: oklch(90% 0.01 43.48);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(90% 0.01 43.48) 74%,
+      oklch(21.03% 0.01 43.48) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(90% 0.01 43.48) 88%,
+      oklch(21.03% 0.01 43.48) 10%
+    );
+    --field-foreground: oklch(21.03% 0.01 43.48);
+    --field-placeholder: oklch(55.17% 0.02 43.48);
+    --foreground: oklch(21.03% 0.01 43.48);
+    --link: oklch(21.03% 0.01 43.48);
+    --muted: oklch(55.17% 0.02 43.48);
+    --overlay: oklch(100% 0.003 43.48);
+    --overlay-foreground: oklch(21.03% 0.01 43.48);
+    --scrollbar: oklch(87.1% 0.01 43.48);
+    --segment: oklch(100% 0.01 43.48);
+    --segment-foreground: oklch(21.03% 0.01 43.48);
+    --separator: oklch(92% 0.01 43.48);
+    --surface: oklch(100% 0.005 43.48);
+    --surface-foreground: oklch(21.03% 0.01 43.48);
+    --surface-secondary: oklch(95.24% 0.015 43.48);
+    --surface-secondary-foreground: oklch(21.03% 0.01 43.48);
+    --surface-tertiary: oklch(93.73% 0.015 43.48);
+    --surface-tertiary-foreground: oklch(21.03% 0.01 43.48);
+    --accent: oklch(69.58% 0.2042 43.48);
+    --accent-foreground: oklch(15% 0.03 43.48);
+    --accent-hover: color-mix(in oklab, oklch(69.58% 0.2042 43.48) 90%, oklch(15% 0.03 43.48) 10%);
+    --accent-soft: color-mix(in oklab, oklch(69.58% 0.2042 43.48) 15%, transparent);
+    --accent-soft-foreground: oklch(35% 0.25 43.48);
+    --accent-soft-hover: color-mix(in oklab, oklch(69.58% 0.2042 43.48) 20%, transparent);
+    --focus: oklch(69.58% 0.2042 43.48);
+    --success: oklch(0.7113 0.2043 140.81);
+    --success-foreground: oklch(15% 0.05 140.81);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(0.7113 0.2043 140.81) 90%,
+      oklch(15% 0.05 140.81) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(0.7113 0.2043 140.81) 15%, transparent);
+    --success-soft-foreground: oklch(0.7113 0.2043 140.81);
+    --success-soft-hover: color-mix(in oklab, oklch(0.7113 0.2043 140.81) 20%, transparent);
+    --warning: oklch(78.19% 0.1616 47.08);
+    --warning-foreground: oklch(21.03% 0.0059 47.08);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1616 47.08) 90%,
+      oklch(21.03% 0.0059 47.08) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1616 47.08) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1616 47.08);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1616 47.08) 20%, transparent);
+    --danger: oklch(0.6291 0.2565 29.09);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.6291 0.2565 29.09) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.6291 0.2565 29.09) 15%, transparent);
+    --danger-soft-foreground: oklch(0.6291 0.2565 29.09);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.6291 0.2565 29.09) 20%, transparent);
+    --field-radius: 1rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+
+  [data-design-theme="rabbit"].dark,
+  [data-design-theme="rabbit"][data-theme="dark"] {
+    color-scheme: dark;
+    --background: oklch(12% 0.01 43.48);
+    --border: oklch(28% 0.01 43.48);
+    --default: oklch(27.4% 0.01 43.48);
+    --default-foreground: oklch(99.11% 0 0);
+    --default-hover: color-mix(in oklab, oklch(27.4% 0.01 43.48) 96%, oklch(99.11% 0.01 43.48) 4%);
+    --field-background: oklch(21.03% 0.02 43.48);
+    --field-background-hover: color-mix(
+      in oklab,
+      oklch(21.03% 0.02 43.48) 90%,
+      oklch(99.11% 0.01 43.48) 2%
+    );
+    --field-border: oklch(28% 0.01 43.48);
+    --field-border-focus: color-mix(
+      in oklab,
+      oklch(28% 0.01 43.48) 74%,
+      oklch(99.11% 0.01 43.48) 22%
+    );
+    --field-border-hover: color-mix(
+      in oklab,
+      oklch(28% 0.01 43.48) 88%,
+      oklch(99.11% 0.01 43.48) 10%
+    );
+    --field-foreground: oklch(99.11% 0.01 43.48);
+    --field-placeholder: oklch(70.5% 0.02 43.48);
+    --foreground: oklch(99.11% 0.01 43.48);
+    --link: oklch(99.11% 0.01 43.48);
+    --muted: oklch(70.5% 0.02 43.48);
+    --overlay: oklch(21.03% 0.02 43.48);
+    --overlay-foreground: oklch(99.11% 0.01 43.48);
+    --scrollbar: oklch(70.5% 0.01 43.48);
+    --segment: oklch(39.64% 0.01 43.48);
+    --segment-foreground: oklch(99.11% 0.01 43.48);
+    --separator: oklch(25% 0.01 43.48);
+    --surface: oklch(21.03% 0.02 43.48);
+    --surface-foreground: oklch(99.11% 0.01 43.48);
+    --surface-secondary: oklch(25.7% 0.015 43.48);
+    --surface-secondary-foreground: oklch(99.11% 0.01 43.48);
+    --surface-tertiary: oklch(27.21% 0.015 43.48);
+    --surface-tertiary-foreground: oklch(99.11% 0.01 43.48);
+    --accent: oklch(69.58% 0.2042 43.48);
+    --accent-foreground: oklch(15% 0.03 43.48);
+    --accent-hover: color-mix(in oklab, oklch(69.58% 0.2042 43.48) 90%, oklch(15% 0.03 43.48) 10%);
+    --accent-soft: color-mix(in oklab, oklch(69.58% 0.2042 43.48) 15%, transparent);
+    --accent-soft-foreground: oklch(35% 0.25 43.48);
+    --accent-soft-hover: color-mix(in oklab, oklch(69.58% 0.2042 43.48) 20%, transparent);
+    --focus: oklch(69.58% 0.2042 43.48);
+    --success: oklch(0.7113 0.2043 140.81);
+    --success-foreground: oklch(15% 0.05 140.81);
+    --success-hover: color-mix(
+      in oklab,
+      oklch(0.7113 0.2043 140.81) 90%,
+      oklch(15% 0.05 140.81) 10%
+    );
+    --success-soft: color-mix(in oklab, oklch(0.7113 0.2043 140.81) 15%, transparent);
+    --success-soft-foreground: oklch(0.7113 0.2043 140.81);
+    --success-soft-hover: color-mix(in oklab, oklch(0.7113 0.2043 140.81) 20%, transparent);
+    --warning: oklch(78.19% 0.1616 47.08);
+    --warning-foreground: oklch(21.03% 0.0059 47.08);
+    --warning-hover: color-mix(
+      in oklab,
+      oklch(78.19% 0.1616 47.08) 90%,
+      oklch(21.03% 0.0059 47.08) 10%
+    );
+    --warning-soft: color-mix(in oklab, oklch(78.19% 0.1616 47.08) 15%, transparent);
+    --warning-soft-foreground: oklch(78.19% 0.1616 47.08);
+    --warning-soft-hover: color-mix(in oklab, oklch(78.19% 0.1616 47.08) 20%, transparent);
+    --danger: oklch(0.6291 0.2565 29.09);
+    --danger-foreground: oklch(99.11% 0 0);
+    --danger-hover: color-mix(in oklab, oklch(0.6291 0.2565 29.09) 90%, oklch(99.11% 0 0) 10%);
+    --danger-soft: color-mix(in oklab, oklch(0.6291 0.2565 29.09) 15%, transparent);
+    --danger-soft-foreground: oklch(0.6291 0.2565 29.09);
+    --danger-soft-hover: color-mix(in oklab, oklch(0.6291 0.2565 29.09) 20%, transparent);
+    --field-radius: 1rem;
+    --chart-1: oklch(from var(--accent) calc(l - 0.24) c h);
+    --chart-2: oklch(from var(--accent) calc(l - 0.12) c h);
+    --chart-3: var(--accent);
+    --chart-4: oklch(from var(--accent) calc(l + 0.12) c h);
+    --chart-5: oklch(from var(--accent) calc(l + 0.24) c h);
+  }
+}

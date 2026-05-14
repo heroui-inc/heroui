@@ -33,11 +33,13 @@ type AutocompleteContext = {
   onClear?: () => void;
   triggerRef: RefObject<HTMLElement | null>;
   clearButtonRef: RefObject<HTMLButtonElement | null>;
+  isDisabled?: boolean;
 };
 
 const AutocompleteContext = createContext<AutocompleteContext>({
   triggerRef: {current: null} as RefObject<HTMLElement | null>,
   clearButtonRef: {current: null} as RefObject<HTMLButtonElement | null>,
+  isDisabled: false,
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -54,6 +56,7 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
   children,
   className,
   fullWidth,
+  isDisabled,
   onClear,
   variant,
   ...props
@@ -66,11 +69,12 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
   const clearButtonRef = useRef<HTMLButtonElement | null>(null);
 
   return (
-    <AutocompleteContext value={{slots, triggerRef, clearButtonRef, onClear}}>
+    <AutocompleteContext value={{slots, triggerRef, clearButtonRef, onClear, isDisabled}}>
       <SelectPrimitive
         data-slot="autocomplete"
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
+        isDisabled={isDisabled}
       >
         {(values) => <>{typeof children === "function" ? children(values) : children}</>}
       </SelectPrimitive>
@@ -84,9 +88,15 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
 interface AutocompleteTriggerProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
 
 const AutocompleteTrigger = React.forwardRef<HTMLDivElement, AutocompleteTriggerProps>(
-  ({children, className, onClick, ...props}, ref) => {
-    const {clearButtonRef, slots, triggerRef} = useContext(AutocompleteContext);
+  ({children, className, isDisabled: isDisabledProp, onClick, ...props}, ref) => {
+    const {
+      clearButtonRef,
+      isDisabled: rootDisabled,
+      slots,
+      triggerRef,
+    } = useContext(AutocompleteContext);
     const state = useContext(SelectStateContext);
+    const isDisabled = isDisabledProp ?? rootDisabled ?? false;
 
     // Callback ref to update context ref
     const contextRefCallback = React.useCallback(
@@ -113,6 +123,7 @@ const AutocompleteTrigger = React.forwardRef<HTMLDivElement, AutocompleteTrigger
         ref={mergedRef}
         className={composeTwRenderProps(className, slots?.trigger())}
         data-slot="autocomplete-trigger"
+        isDisabled={isDisabled}
         onClick={handleClick}
         {...props}
       >
@@ -273,9 +284,8 @@ const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "
   ...props
 }: AutocompleteClearButtonProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof AutocompleteClearButtonProps<E>>) => {
-  const {slots} = useContext(AutocompleteContext);
+  const {clearButtonRef, isDisabled, onClear, slots} = useContext(AutocompleteContext);
   const state = useContext(SelectStateContext);
-  const {clearButtonRef, onClear} = useContext(AutocompleteContext);
 
   const clearButtonRefCallback = React.useCallback(
     (node: HTMLButtonElement | null) => {
@@ -296,9 +306,11 @@ const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "
   return (
     <dom.button
       ref={mergedRef}
+      aria-label="Clear selection"
       className={slots?.clearButton({className})}
       data-empty={dataAttr(state?.selectionManager.selectedKeys.size === 0)}
       data-slot="autocomplete-clear-button"
+      disabled={isDisabled ?? false}
       onClick={handleClick}
       {...(props as any)}
     >

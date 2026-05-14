@@ -53,7 +53,7 @@
   }
 
   .color-slider__track {
-    @apply relative rounded-full;
+    @apply relative rounded-2xl;
 
     grid-area: track;
     /* Edge cap pseudo-elements */
@@ -68,7 +68,7 @@
 
   .color-slider__thumb {
     /* Flex container for centering */
-    @apply absolute flex cursor-grab items-center justify-center rounded-full no-highlight;
+    @apply absolute flex cursor-grab items-center justify-center rounded-2xl no-highlight;
 
     /* Border to create white ring around the thumb */
     @apply border-3 border-white shadow-overlay;
@@ -133,9 +133,8 @@
       }
 
       &::before {
+        @apply rounded-tl-2xl rounded-bl-2xl;
         left: -0.625rem;
-        border-top-left-radius: 999px;
-        border-bottom-left-radius: 999px;
         box-shadow:
           inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
           inset 0 1px 0 0 rgba(0, 0, 0, 0.1),
@@ -146,9 +145,8 @@
       }
 
       &::after {
+        @apply rounded-tr-2xl rounded-br-2xl;
         right: -0.625rem;
-        border-top-right-radius: 999px;
-        border-bottom-right-radius: 999px;
         box-shadow:
           inset -1px 0 0 0 rgba(0, 0, 0, 0.1),
           inset 0 1px 0 0 rgba(0, 0, 0, 0.1),

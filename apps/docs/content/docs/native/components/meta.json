@@ -41,6 +41,7 @@
     "(controls)/switch",
     "(navigation)/tabs",
     "(collections)/tag-group",
+    "(typography)/text",
     "(forms)/text-area",
     "(forms)/text-field",
     "(overlays)/toast"

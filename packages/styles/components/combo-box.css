@@ -13,10 +13,6 @@
     @apply w-fit;
   }
 
-  [data-slot="description"] {
-    @apply px-1;
-  }
-
   [data-slot="input"] {
     @apply min-w-0 flex-1;
 
@@ -29,8 +25,8 @@
     &:focus,
     &[data-focus] {
       @apply status-focused-field;
-      border-color: var(--color-field-border-focus);
-      background-color: var(--color-field-focus);
+      border-color: var(--field-border-focus);
+      background-color: var(--field-focus);
     }
 
     /* Disabled state */
@@ -90,7 +86,8 @@
 
 /* Similar to popover content styles */
 .combo-box__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain rounded-3xl bg-overlay p-0 text-sm;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 text-sm;
+  border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
   /* Focus state */

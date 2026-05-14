@@ -39,7 +39,7 @@ const CACHE_CONFIG = {
 
 const COMMITS_PER_PAGE = 100;
 
-const BOT_LOGINS = new Set(["web-flow", "ghost"]);
+const BOT_LOGINS = new Set(["web-flow", "ghost", "cursoragent"]);
 
 /* -------------------------------------------------------------------------------------------------
  * Utilities

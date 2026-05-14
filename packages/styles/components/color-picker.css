@@ -51,7 +51,7 @@
 .color-picker__popover {
   @apply min-w-62 origin-(--trigger-anchor-point) overflow-x-hidden overflow-y-auto overscroll-contain bg-overlay px-2 pt-2 pb-3;
   box-shadow: var(--shadow-overlay);
-  border-radius: calc(var(--radius) * 2.5);
+  border-radius: min(32px, calc(var(--radius) * 2.5));
   /* Content layout */
   @apply flex flex-col gap-3;
 

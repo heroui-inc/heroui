@@ -5,7 +5,7 @@
   min-height: 38px;
 
   border-width: var(--border-width-field);
-  border-color: var(--color-field-border);
+  border-color: var(--field-border);
 
   /**
    * Transitions
@@ -21,7 +21,7 @@
     &:hover:not(:focus):not(:focus-visible),
     &[data-hovered="true"]:not([data-focused="true"]):not([data-focus-visible="true"]) {
       @apply bg-field-hover;
-      border-color: var(--color-field-border-hover);
+      border-color: var(--field-border-hover);
     }
   }
 
@@ -29,8 +29,8 @@
   &:focus,
   &[data-focused="true"] {
     @apply status-focused-field;
-    border-color: var(--color-field-border-focus);
-    background-color: var(--color-field-focus);
+    border-color: var(--field-border-focus);
+    background-color: var(--field-focus);
   }
 
   /* Focus visible state */
@@ -40,7 +40,7 @@
 
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-field-focus);
+    background-color: var(--field-focus);
   }
 
   /* Disabled state */
@@ -59,9 +59,9 @@
   @apply shadow-none;
   background-color: var(--textarea-bg);
 
-  --textarea-bg: var(--color-default);
-  --textarea-bg-hover: var(--color-default-hover);
-  --textarea-bg-focus: var(--color-default);
+  --textarea-bg: var(--default);
+  --textarea-bg-hover: var(--default-hover);
+  --textarea-bg-focus: var(--default);
 
   @media (hover: hover) {
     &:hover:not(:focus):not(:focus-visible),

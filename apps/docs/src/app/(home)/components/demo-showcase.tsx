@@ -4,7 +4,7 @@ import type {CSSProperties} from "react";
 import type {Color} from "react-aria-components";
 
 import {Palette} from "@gravity-ui/icons";
-import {ColorSwatchPicker, Spinner, Tabs, buttonVariants} from "@heroui/react";
+import {ColorSwatchPicker, Spinner, Tabs, Tooltip, buttonVariants} from "@heroui/react";
 import {converter} from "culori";
 import LinkRoot from "fumadocs-core/link";
 import {useTheme} from "next-themes";
@@ -164,25 +164,7 @@ export function DemoShowcase() {
             </Tabs.List>
           </Tabs.ListContainer>
         </Tabs>
-        <ColorSwatchPicker size="sm" onChange={setSelectedColor}>
-          {colors.map((color) => (
-            <ColorSwatchPicker.Item key={color} color={color}>
-              <ColorSwatchPicker.Swatch />
-              <ColorSwatchPicker.Indicator />
-            </ColorSwatchPicker.Item>
-          ))}
-        </ColorSwatchPicker>
-      </div>
-      <div
-        className="flex min-h-[420px] max-w-[1200px] flex-1 flex-col gap-0.5 rounded-3xl bg-surface-secondary/80 p-2 pt-0"
-        style={accentVars as CSSProperties}
-      >
-        <div className="flex h-9 items-center justify-between pt-1 pr-2 pl-2">
-          <div className="flex flex-1 items-center gap-2.5">
-            <div className="size-3 rounded-full bg-muted opacity-30" />
-            <div className="size-3 rounded-full bg-muted opacity-30" />
-            <div className="size-3 rounded-full bg-muted opacity-30" />
-          </div>
+        <div className="flex items-center gap-3">
           <a
             className={`text-[13px] font-medium text-muted transition-opacity duration-300 hover:text-foreground ${selectedTab !== "components" ? "opacity-100" : "pointer-events-none opacity-0"}`}
             rel="noopener noreferrer"
@@ -195,22 +177,40 @@ export function DemoShowcase() {
           >
             Available in Pro as template
           </a>
-          <div className="flex flex-1 justify-end">
-            <LinkRoot
-              href={themeBuilderHref}
-              className={buttonVariants({
-                className: "text-[13px] text-muted",
-                size: "sm",
-                variant: "ghost",
-              })}
-            >
-              <Palette className="size-4" />
-              Open in theme builder
-            </LinkRoot>
+          <div className="flex items-center gap-1">
+            <ColorSwatchPicker size="sm" onChange={setSelectedColor}>
+              {colors.map((color) => (
+                <ColorSwatchPicker.Item key={color} color={color}>
+                  <ColorSwatchPicker.Swatch />
+                  <ColorSwatchPicker.Indicator />
+                </ColorSwatchPicker.Item>
+              ))}
+            </ColorSwatchPicker>
+            <Tooltip delay={0}>
+              <Tooltip.Trigger>
+                <LinkRoot
+                  href={themeBuilderHref}
+                  className={buttonVariants({
+                    className: "text-muted",
+                    isIconOnly: true,
+                    size: "sm",
+                    variant: "ghost",
+                  })}
+                >
+                  <Palette className="size-4" />
+                </LinkRoot>
+              </Tooltip.Trigger>
+              <Tooltip.Content className="py-0">Open in theme builder</Tooltip.Content>
+            </Tooltip>
           </div>
         </div>
+      </div>
+      <div
+        className="flex min-h-[420px] max-w-[1200px] flex-1 flex-col"
+        style={accentVars as CSSProperties}
+      >
         {/* Mobile: always show DemoComponents */}
-        <div className="mt-5 flex w-full justify-center lg:hidden">
+        <div className="flex w-full justify-center rounded-2xl bg-background py-8 lg:hidden">
           <DemoComponents />
         </div>
         {/* Desktop: respect tab selection */}
