@@ -1,0 +1,60 @@
+import {Suspense} from "react";
+
+import {CodePanelProvider} from "@/hooks/use-code-panel";
+
+import {ProBanner} from "../(home)/components/pro-banner";
+
+import {
+  AccentColorSelector,
+  BaseColorSlider,
+  BuilderHeader,
+  FontFamilyPopover,
+  RadiusPopover,
+  ThemePopover,
+} from "./components";
+import {MobileFooter} from "./components/mobile-footer";
+import {Onboarding} from "./components/onboarding";
+import {ThemeBuilderContent} from "./components/theme-builder-content";
+import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
+
+export default function ThemeBuilderPage() {
+  return (
+    <CodePanelProvider>
+      <Suspense>
+        <div
+          className="grid h-dvh grid-rows-[auto_1fr_auto] bg-background px-4 sm:overflow-hidden sm:px-6"
+          id={THEME_BUILDER_PAGE_ID}
+        >
+          <BuilderHeader />
+          <ThemeBuilderContent />
+          <div className="mx-auto hidden items-center justify-between gap-4 py-6 max-[1200px]:flex-col sm:flex">
+            <div className="flex items-center gap-4">
+              <AccentColorSelector />
+              <BaseColorSlider />
+              <FontFamilyPopover />
+            </div>
+            <div className="flex items-center gap-4">
+              <RadiusPopover
+                description="Affects the overall UI, like menus and modals"
+                label="Radius"
+                radiusOptions={radiusOptions}
+                variableKey="radius"
+              />
+              <RadiusPopover
+                description="Affects form elements, like inputs and selects"
+                label="Radius Form"
+                radiusOptions={formRadiusOptions}
+                variableKey="formRadius"
+              />
+              <ThemePopover />
+            </div>
+          </div>
+          <div className="h-20 w-full sm:hidden" />
+          <MobileFooter />
+        </div>
+        <Onboarding />
+        <ProBanner />
+      </Suspense>
+    </CodePanelProvider>
+  );
+}
