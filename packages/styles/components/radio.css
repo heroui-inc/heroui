@@ -28,7 +28,7 @@
    ========================================================================== */
 
 .radio__control {
-  @apply relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-lg border [border-width:var(--border-width-field)] bg-field shadow-field outline-none no-highlight;
+  @apply relative mt-[3px] inline-flex size-4 shrink-0 items-center justify-center rounded-lg border [border-width:var(--border-width-field)] border-field-border bg-field shadow-field outline-none no-highlight;
 
   /**
    * Transitions
