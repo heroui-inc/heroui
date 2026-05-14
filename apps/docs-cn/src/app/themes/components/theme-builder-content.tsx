@@ -26,15 +26,12 @@ export const ThemeBuilderContent = () => {
   const isComponentsTab = selectedTab === "components";
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-[1400px] flex-col gap-0.5 rounded-3xl bg-surface-secondary/80 p-2 pt-0">
-      <div className="flex h-9 shrink-0 items-center justify-between pt-1 pr-2 pl-2">
-        <div className="flex flex-1 items-center gap-2.5">
-          <div className="size-3 rounded-full bg-muted opacity-30" />
-          <div className="size-3 rounded-full bg-muted opacity-30" />
-          <div className="size-3 rounded-full bg-muted opacity-30" />
-        </div>
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-[1400px] flex-col">
+      <div
+        className={`flex shrink-0 justify-end px-2 pb-1 transition-opacity duration-300 ${!isComponentsTab ? "opacity-100" : "pointer-events-none opacity-0"}`}
+      >
         <a
-          className={`text-end text-[13px] font-medium text-muted transition-opacity duration-300 hover:text-foreground ${!isComponentsTab ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          className="text-[13px] font-medium text-muted hover:text-foreground"
           rel="noopener noreferrer"
           target="_blank"
           href={getProUrl({

@@ -19,10 +19,10 @@ export default function HomePage() {
       <section className="z-10 flex min-h-0 flex-1 flex-col items-center px-4 pt-12 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <LinkRoot
-            className="flex items-center gap-1 rounded-full bg-accent/10 px-2 py-1 text-xs text-accent transition-colors hover:bg-accent-soft-hover"
+            className="flex items-center gap-1 rounded-full bg-accent-soft px-2 py-1 text-xs text-accent-soft-foreground transition-colors hover:bg-accent-soft-hover"
             href="/docs/react/releases/v3-0-4"
           >
-            <Rocket className="size-3 text-accent" />
+            <Rocket className="size-3 text-accent-soft-foreground" />
             <span className="max-w-60 truncate sm:max-w-full">
               HeroUI v3.0.4：全新 Text 组件、文档主题选择与多项修复
             </span>
