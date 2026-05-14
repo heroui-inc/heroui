@@ -75,27 +75,27 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
       ) : null}
       {componentLinks.source ? (
         <ButtonLink href={componentLinks.source} startContent={<GithubIcon size={20} />}>
-          Source
+          源码
         </ButtonLink>
       ) : null}
       {componentLinks.source_native ? (
         <ButtonLink href={componentLinks.source_native} startContent={<GithubIcon size={20} />}>
-          Source
+          源码
         </ButtonLink>
       ) : null}
       {componentLinks.styles ? (
         <ButtonLink href={componentLinks.styles} startContent={<GithubIcon size={20} />}>
-          Styles source
+          样式源码
         </ButtonLink>
       ) : null}
       {componentLinks.styles_native ? (
         <ButtonLink href={componentLinks.styles_native} startContent={<GithubIcon size={20} />}>
-          Styles source
+          样式源码
         </ButtonLink>
       ) : null}
       {componentLinks.themes ? (
         <ButtonLink href={componentLinks.themes} startContent={<GithubIcon size={20} />}>
-          Theme source
+          主题源码
         </ButtonLink>
       ) : null}
       {componentLinks.tailwind ? (
