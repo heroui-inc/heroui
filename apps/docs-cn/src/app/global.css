@@ -1,0 +1,734 @@
+/* ============================================================================
+   IMPORTS
+   ============================================================================ */
+
+@import "tailwindcss";
+@import "fumadocs-ui/css/black.css";
+@import "fumadocs-ui/css/preset.css";
+@import "@heroui/styles";
+
+@keyframes float-stars {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-40px) translateX(40px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes float-stars-reverse {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(40px) translateX(-40px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+/* ============================================================================
+   CSS VARIABLES - ROOT & THEMES
+   ============================================================================ */
+
+:root {
+  /* Brand Accent Colors (Optional Overrides) */
+  /* --accent: oklch(0.7 0.25 260); */
+  /* --accent-foreground: oklch(0.98 0 0); */
+  /* --accent: var(--color-blue-600); */
+  /* --accent-soft: var(--color-blue-100); */
+
+  /* Fumadocs UI Variables */
+  --fd-layout-width: 1400px;
+  --color-fd-background: var(--background);
+  --color-fd-foreground: var(--foreground);
+  --color-fd-primary: oklch(0.14 0 0);
+  --color-fd-secondary: #f9f9f9;
+  --color-fd-card: #f9f9f9;
+  --spacing-fd-container: 1120px;
+  --color-fd-border: oklch(0 0 0 / 10%);
+  --color-fd-accent: #f9f9f9;
+  --color-fd-muted-foreground: var(--color-neutral-500);
+  --color-backdrop: rgba(255, 255, 255, 0.4);
+  /* Fumadocs UI Animations */
+  --animate-fd-fade-in: custom-fade-in 200ms ease-out forwards;
+  --animate-fd-fade-out: custom-fade-out 150ms ease-out forwards;
+
+  /* Default font - can be overridden by theme builder */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme="light"],
+.light {
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"],
+.dark {
+  /* Custom Values (Optional) */
+  /* --radius: 0.5rem; */
+  /* --cursor: default; */
+
+  /* Fumadocs UI Dark Theme */
+  --color-fd-primary: oklch(0.99 0 0);
+  --color-fd-card: rgba(40, 40, 40, 0.4);
+  --color-fd-secondary: #18181b;
+  --color-fd-accent: #2c2c2c;
+  --color-fd-popover: #383435;
+  --color-fd-border: rgba(255, 255, 255, 0.1);
+  --color-backdrop: rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================================
+   HEROUI COMPONENT OVERRIDES
+   ============================================================================ */
+
+/* HeroUI Component Style Overrides */
+/* @utility button {
+  @apply rounded-sm;
+} */
+
+/* ============================================================================
+   FUMADOCS UI - NAVIGATION COMPONENTS
+   ============================================================================ */
+
+#nd-notebook-layout {
+  transition: none;
+}
+
+[data-theme-toggle] {
+  @apply border-none bg-default/80;
+}
+
+/* Home Layout Navigation */
+#nd-home-layout {
+  #nd-nav {
+    @apply bg-background blur-none backdrop-blur-none;
+
+    [data-theme-toggle] {
+      margin-left: 4px;
+    }
+
+    > div {
+      border: none;
+    }
+
+    nav {
+      @apply px-6;
+    }
+  }
+}
+
+.showcase-detail-page #nd-home-layout {
+  padding-top: 0;
+}
+
+/* Main Navigation */
+#nd-nav {
+  border: none;
+  background-color: transparent;
+
+  /* Only affects the Docs/Components ul, not the search/theme toggle */
+  ul:first-of-type {
+    padding-top: 4px;
+    gap: 0;
+  }
+
+  ul:last-of-type {
+    li > a:last-of-type {
+      @apply ml-1 inline-flex items-center rounded-full border p-1.5 text-foreground;
+    }
+  }
+
+  li > a {
+    color: var(--muted);
+  }
+
+  [data-search-full] {
+    @apply rounded-field border-none bg-default/80;
+
+    kbd {
+      @apply border-none bg-surface px-1 font-sans text-xs font-medium text-muted;
+    }
+  }
+
+  [aria-label="GitHub"] {
+    @apply w-0 opacity-0;
+  }
+}
+
+/* Sub Navigation */
+#nd-subnav {
+  @apply gap-0 bg-background md:gap-1;
+  backdrop-filter: none;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 1px;
+    z-index: 1;
+    background: var(--separator);
+  }
+
+  [data-header-body] {
+    @apply h-13 border-none md:h-14;
+  }
+
+  [data-header-tabs] {
+    @apply gap-1 border-none px-4 md:gap-3 md:px-6;
+
+    a {
+      @apply px-1 pb-2;
+    }
+
+    .border-fd-primary {
+      border-color: var(--color-accent);
+    }
+
+    [data-frameworks-tabs] {
+      @apply flex items-center;
+
+      .tabs__list-container {
+        @apply w-auto;
+      }
+
+      .tabs__list {
+        @apply w-auto;
+      }
+    }
+  }
+
+  [data-search-full] {
+    @apply rounded-field border-none bg-field shadow-field sm:max-w-[300px] md:max-w-[400px] lg:mr-12 dark:bg-field/80 dark:backdrop-blur-md;
+
+    kbd {
+      @apply border-none bg-default dark:bg-surface;
+    }
+  }
+}
+
+/* Sidebar */
+#nd-sidebar {
+  @apply items-start pt-4 pl-3 transition-none;
+
+  @media (min-width: 600px) {
+    --fd-sidebar-width: 220px;
+  }
+
+  & > div {
+    width: 100% !important;
+    max-width: var(--fd-sidebar-width);
+  }
+
+  & > :last-child {
+    border-top: none;
+  }
+
+  [data-radix-scroll-area-viewport] {
+    @apply px-1 pt-2;
+
+    p {
+      @apply font-medium;
+    }
+
+    p:not(:first-child) {
+      @apply mt-4;
+    }
+  }
+
+  [data-fd-if-empty] {
+    @apply hidden;
+  }
+}
+
+#nd-sidebar a {
+  @apply rounded-field;
+
+  transition: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &[data-active="true"] {
+    @apply bg-surface shadow-surface;
+  }
+}
+
+/* Nested items inside open groups */
+#nd-sidebar [data-state="open"] > [data-state="open"] {
+  padding: 4px 16px;
+
+  a {
+    padding-left: 14px;
+    &::before {
+      display: none;
+    }
+  }
+}
+
+/* External link icon for sidebar links */
+#nd-sidebar a[rel="noreferrer noopener"]::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: -6px;
+  margin-bottom: 8px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+#nd-sidebar a[rel="noreferrer noopener"]:hover::after {
+  opacity: 1;
+}
+
+#nd-sidebar-mobile {
+  [data-radix-scroll-area-viewport] {
+    p {
+      @apply font-medium;
+    }
+  }
+}
+
+/* ============================================================================
+   FUMADOCS UI - LAYOUT COMPONENTS
+   ============================================================================ */
+
+#nd-docs-layout {
+  position: relative;
+
+  @media (min-width: 48rem) {
+    --fd-sidebar-width: 220px;
+  }
+}
+
+#nd-notebook-layout {
+  @media (min-width: 48rem) {
+    --fd-sidebar-width: 220px;
+  }
+  grid-template:
+    ". header header header ."
+    ". sidebar toc-popover toc-popover ."
+    ". sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(
+      0,
+      calc(var(--fd-layout-width, 97rem) - var(--fd-sidebar-col) - var(--fd-toc-width))
+    )
+    var(--fd-toc-width) minmax(min-content, 1fr) !important;
+}
+
+#nd-page {
+  @apply mt-4 gap-4 p-4 px-6 sm:px-4 md:px-6 md:pt-0 xl:px-12 xl:pt-8;
+
+  > article {
+    @apply p-8;
+
+    position: static;
+  }
+
+  @media (min-width: 80rem) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 48rem) {
+    > article {
+      @apply p-2;
+    }
+  }
+
+  .component-preview-container {
+    /* Preview and code are now displayed vertically */
+
+    .code-section {
+      .code-block-wrapper {
+        @apply rounded-none rounded-b-xl;
+      }
+    }
+  }
+}
+
+/* ============================================================================
+   FUMADOCS UI - TABLE OF CONTENTS
+   ============================================================================ */
+
+#nd-toc {
+  @apply right-0 pt-6 pl-4 transition-none;
+  --fd-toc-width: 220px;
+  --color-fd-foreground: transparent;
+  /* Disables the active indicator */
+  [role="none"] {
+    display: none;
+    background: transparent;
+  }
+
+  /* Selects all links inside the toc (active and not active)*/
+  [data-active] {
+    @apply truncate pr-2 text-[13px];
+  }
+
+  @media (min-width: 600px) {
+    --fd-toc-width: 240px;
+  }
+}
+
+#nd-tocnav {
+  border-radius: 0rem;
+  top: calc(var(--fd-banner-height) + var(--fd-nav-height) - 12px) !important;
+  margin-right: 0rem;
+  margin-left: 0rem;
+  margin-top: 0px;
+  background: var(--background);
+  backdrop-filter: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--separator) !important;
+
+  @media (min-width: 600px) {
+    margin-right: 1rem;
+    border-bottom: 0px solid var(--separator) !important;
+  }
+}
+
+[data-toc-popover] {
+  @apply top-[93px] z-2 md:top-[101px];
+  header {
+    @apply border-b border-separator md:border-b-0;
+    padding: 0 0.5rem;
+    background: var(--background) !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* ============================================================================
+   PROSE & CONTENT STYLES
+   ============================================================================ */
+
+.prose {
+  .shiki {
+    @apply border-none;
+    background: transparent;
+    box-shadow: none;
+
+    /* Code block wrapper */
+    figure {
+      padding: 0;
+    }
+
+    /* Copy button */
+    div:first-of-type {
+      border: none;
+      background: transparent;
+
+      button:hover {
+        background: transparent;
+      }
+    }
+
+    /* Scroll container */
+    .fd-scroll-container {
+      @apply border-none px-1;
+
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    li > code {
+      @apply bg-default;
+    }
+  }
+}
+
+.prose .shiki .fd-scroll-container {
+  max-height: fit-content;
+}
+
+[role="tabpanel"] .mdx-code-block {
+  padding: 0;
+}
+
+code {
+  @apply border-separator bg-transparent px-[3px];
+}
+
+/* Table styles for .prose-no-margin */
+.prose-no-margin {
+  table {
+    @apply border-none bg-transparent;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    thead {
+      tr {
+        th {
+          @apply border-none bg-default dark:bg-default/50;
+
+          &:first-child {
+            @apply rounded-tl-xl rounded-bl-xl;
+          }
+
+          &:last-child {
+            @apply rounded-tr-xl rounded-br-xl;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          @apply border-none;
+        }
+      }
+    }
+  }
+}
+
+/* ============================================================================
+   CODE BLOCK STYLES
+   ============================================================================ */
+
+.docs-code-block {
+  @apply m-0 rounded-none border-none pt-4 pr-2 pl-2;
+
+  .fd-scroll-container {
+    @apply rounded-none border-none bg-transparent! p-0;
+  }
+
+  .line {
+    @apply pl-0!;
+  }
+
+  [role="region"] {
+    max-height: 75vh;
+  }
+}
+
+/* Apply !important only for isolated code blocks (not code-block-wrapper) */
+.is-isolated .docs-code-block {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+.code-block-wrapper {
+  @apply rounded-xl;
+}
+
+.docs-code-block-line-numbers {
+  code {
+    counter-reset: step;
+    counter-increment: step 0;
+  }
+
+  code .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: right;
+    color: rgba(115, 138, 148, 0.4);
+  }
+}
+
+.shiki:not(.not-fumadocs-codeblock *) code .highlighted {
+  border-radius: 4px;
+  background-color: #d6d8e3 !important;
+}
+
+.showcase-source-wrapper {
+  .code-block-wrapper {
+    background: transparent !important;
+  }
+
+  .fd-scroll-container {
+    max-height: 100%;
+    background: transparent;
+  }
+}
+
+/* ============================================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================================ */
+
+@keyframes shine {
+  0% {
+    translate: -100% 0;
+  }
+  100% {
+    translate: 100% 0;
+  }
+}
+
+@keyframes scrolling-banner {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
+}
+
+@keyframes scrolling-banner-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-50% - var(--gap) / 2));
+  }
+}
+
+@keyframes custom-fade-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px) saturate(0%);
+    background-color: transparent;
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px) saturate(180%);
+    background-color: var(--color-backdrop);
+  }
+}
+
+@keyframes custom-fade-out {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.animate-scrolling-banner {
+  animation: scrolling-banner var(--duration) linear infinite;
+}
+
+.animate-scrolling-banner-vertical {
+  animation: scrolling-banner-vertical var(--duration) linear infinite;
+}
+
+@utility animate-shine {
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.3) 45%,
+      rgba(255, 255, 255, 0.1) 55%,
+      transparent 90%
+    );
+    animation: shine 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  [data-theme="dark"] &::after,
+  .dark &::after {
+    background: linear-gradient(
+      120deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.04) 55%,
+      transparent 90%
+    );
+  }
+}
+
+@utility mask-to-t {
+  mask: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 1) 100%);
+}
+
+@utility mask-to-bottom {
+  mask: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* ============================================================================
+   DARK THEME OVERRIDES
+   ============================================================================ */
+
+[data-theme="dark"],
+.dark {
+  /* Navigation Components */
+
+  #nd-sidebar a {
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &[data-active="true"] {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  #nd-sidebar a[rel="noreferrer noopener"]::after {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"><path d="M6 18L18 6m0 0H9m9 0v9" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>');
+  }
+
+  /* Prose & Code Blocks */
+  .prose {
+    .shiki {
+      background: transparent;
+
+      figure {
+        background: red;
+      }
+
+      /* Scroll container */
+      .fd-scroll-container {
+        background: rgba(40, 40, 40, 0.4);
+      }
+    }
+  }
+
+  .docs-code-block {
+    background: rgba(40, 40, 40, 0.4);
+
+    .fd-scroll-container {
+      background: transparent !important;
+    }
+  }
+
+  /* Apply !important only for isolated code blocks (not code-block-wrapper) */
+  .is-isolated .docs-code-block {
+    background: rgba(40, 40, 40, 0.4) !important;
+  }
+
+  .shiki:not(.not-fumadocs-codeblock *) code .highlighted {
+    background-color: #2d2d2d !important;
+  }
+}
