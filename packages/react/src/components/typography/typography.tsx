@@ -1,19 +1,19 @@
 "use client";
 
-import type {TextVariants} from "@heroui/styles";
+import type {TypographyVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
-import {textVariants} from "@heroui/styles";
+import {typographyVariants} from "@heroui/styles";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 
 import {composeSlotClassName} from "../../utils/compose";
 
-type TextType = NonNullable<TextVariants["type"]>;
-type TextAlign = NonNullable<TextVariants["align"]>;
-type TextColor = NonNullable<TextVariants["color"]>;
-type TextWeight = NonNullable<TextVariants["weight"]>;
+type TypographyType = NonNullable<TypographyVariants["type"]>;
+type TypographyAlign = NonNullable<TypographyVariants["align"]>;
+type TypographyColor = NonNullable<TypographyVariants["color"]>;
+type TypographyWeight = NonNullable<TypographyVariants["weight"]>;
 
-const defaultElementByType: Record<TextType, string> = {
+const defaultElementByType: Record<TypographyType, string> = {
   body: "p",
   "body-sm": "p",
   "body-xs": "p",
@@ -26,20 +26,20 @@ const defaultElementByType: Record<TextType, string> = {
   h6: "h6",
 };
 
-interface TextRootProps extends Omit<
+interface TypographyRootProps extends Omit<
   ComponentPropsWithRef<typeof TextPrimitive>,
   "className" | "elementType"
 > {
-  align?: TextAlign;
+  align?: TypographyAlign;
   children?: ReactNode;
   className?: string;
-  color?: TextColor;
-  type?: TextType;
+  color?: TypographyColor;
+  type?: TypographyType;
   truncate?: boolean;
-  weight?: TextWeight;
+  weight?: TypographyWeight;
 }
 
-const TextRoot = ({
+const TypographyRoot = ({
   align = "start",
   children,
   className,
@@ -48,13 +48,13 @@ const TextRoot = ({
   type = "body",
   weight,
   ...props
-}: TextRootProps) => {
-  const slots = textVariants({align, color, truncate, type, weight});
+}: TypographyRootProps) => {
+  const slots = typographyVariants({align, color, truncate, type, weight});
 
   return (
     <TextPrimitive
       className={composeSlotClassName(slots.base, className)}
-      data-slot="text"
+      data-slot="typography"
       data-type={type}
       elementType={defaultElementByType[type]}
       {...props}
@@ -64,28 +64,28 @@ const TextRoot = ({
   );
 };
 
-interface HeadingProps extends Omit<TextRootProps, "type"> {
+interface HeadingProps extends Omit<TypographyRootProps, "type"> {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 const Heading = ({level = 1, ...props}: HeadingProps) => {
-  return <TextRoot type={`h${level}` as TextType} {...props} />;
+  return <TypographyRoot type={`h${level}` as TypographyType} {...props} />;
 };
 
-interface ParagraphProps extends Omit<TextRootProps, "type"> {
+interface ParagraphProps extends Omit<TypographyRootProps, "type"> {
   size?: "base" | "sm" | "xs";
 }
 
 const Paragraph = ({size = "base", ...props}: ParagraphProps) => {
-  const type = size === "base" ? "body" : (`body-${size}` as TextType);
+  const type = size === "base" ? "body" : (`body-${size}` as TypographyType);
 
-  return <TextRoot type={type} {...props} />;
+  return <TypographyRoot type={type} {...props} />;
 };
 
-interface CodeProps extends Omit<TextRootProps, "type"> {}
+interface CodeProps extends Omit<TypographyRootProps, "type"> {}
 
 const Code = (props: CodeProps) => {
-  return <TextRoot type="code" {...props} />;
+  return <TypographyRoot type="code" {...props} />;
 };
 
 interface ProseProps extends Omit<ComponentPropsWithRef<"div">, "color"> {
@@ -93,7 +93,7 @@ interface ProseProps extends Omit<ComponentPropsWithRef<"div">, "color"> {
 }
 
 const Prose = ({children, className, ...props}: ProseProps) => {
-  const slots = textVariants();
+  const slots = typographyVariants();
 
   return (
     <div className={composeSlotClassName(slots.prose, className)} data-slot="prose" {...props}>
@@ -102,6 +102,6 @@ const Prose = ({children, className, ...props}: ProseProps) => {
   );
 };
 
-export {Code, Heading, Paragraph, Prose, TextRoot};
+export {Code, Heading, Paragraph, Prose, TypographyRoot};
 
-export type {CodeProps, HeadingProps, ParagraphProps, ProseProps, TextRootProps};
+export type {CodeProps, HeadingProps, ParagraphProps, ProseProps, TypographyRootProps};

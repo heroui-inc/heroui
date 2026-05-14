@@ -1,6 +1,6 @@
 ---
 title: v3.0.4
-description: New Text component, docs theme selector, border-radius design tokens with min() capping, table focus ring rework, and bug fixes.
+description: New Typography component, docs theme selector, border-radius design tokens with min() capping, table focus ring rework, and bug fixes.
 github:
   pull: 6483
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">May 2026</span>
 </div>
 
-Patch release: new `Text` compound component ported from HeroUI Pro, a docs theme selector for previewing components in different themes, `min()`-capped border-radius tokens across 45+ component CSS files, reworked Table focus rings, and fixes for Checkbox, Autocomplete, Tooltip, and form field padding.
+Patch release: new `Typography` compound component ported from HeroUI Pro, a docs theme selector for previewing components in different themes, `min()`-capped border-radius tokens across 45+ component CSS files, reworked Table focus rings, and fixes for Checkbox, Autocomplete, Tooltip, and form field padding.
 
 ## Installation
 
@@ -44,23 +44,23 @@ Update to the latest version:
 
 ## What's New
 
-### Text Component
+### Typography Component
 
 New compound component for structured typography, ported from HeroUI Pro ([#6479](https://github.com/heroui-inc/heroui/pull/6479)). Renders the right HTML element automatically — `<h1>`–`<h6>`, `<p>`, or `<code>` — based on the sub-component or `type` prop.
 
-<ComponentPreview name="text-typography-scale" />
+<ComponentPreview name="typography-typography-scale" />
 
-Sub-components: `Text.Heading`, `Text.Paragraph`, `Text.Code`, `Text.Prose`.
+Sub-components: `Typography.Heading`, `Typography.Paragraph`, `Typography.Code`, `Typography.Prose`.
 
-Props on all sub-components: `align`, `color`, `weight`, `truncate`. `Text.Heading` accepts `level` (1–6). `Text.Paragraph` accepts `size` (`"base"`, `"sm"`, `"xs"`).
+Props on all sub-components: `align`, `color`, `weight`, `truncate`. `Typography.Heading` accepts `level` (1–6). `Typography.Paragraph` accepts `size` (`"base"`, `"sm"`, `"xs"`).
 
-Wrap mixed content in `Text.Prose` for automatic prose spacing:
+Wrap mixed content in `Typography.Prose` for automatic prose spacing:
 
 ```tsx
-<Text.Prose>
-  <Text.Heading level={3}>Getting Started</Text.Heading>
-  <Text.Paragraph>Install the package and import the component.</Text.Paragraph>
-</Text.Prose>
+<Typography.Prose>
+  <Typography.Heading level={3}>Getting Started</Typography.Heading>
+  <Typography.Paragraph>Install the package and import the component.</Typography.Paragraph>
+</Typography.Prose>
 ```
 
 ### Docs Theme Selector
