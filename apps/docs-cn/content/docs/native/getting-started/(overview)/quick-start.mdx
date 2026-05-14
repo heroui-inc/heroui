@@ -1,0 +1,173 @@
+---
+title: 快速开始
+description: 几分钟内上手 HeroUI Native
+icon: rocket
+---
+
+## 入门
+
+### 1. 安装 HeroUI Native
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install heroui-native
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add heroui-native
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add heroui-native
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add heroui-native
+    ```
+  </Tab>
+</Tabs>
+
+### 2. 安装必需的 peer 依赖
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add react-native-reanimated@^4.1.1 react-native-gesture-handler@^2.28.0 react-native-worklets@^0.5.1 react-native-safe-area-context@^5.6.0 react-native-svg@^15.12.1 tailwind-variants@^3.2.2 tailwind-merge@^3.4.0
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warning">
+  建议使用上文列出的确切版本，以避免兼容性问题。版本不一致可能导致难以预期的缺陷。
+</Callout>
+
+### 3. 可选依赖
+
+仅在用到对应组件或能力时需要安装：
+
+| Package | Version | 用途 |
+| --- | --- | --- |
+| `react-native-screens` | `^4.16.0` | BottomSheet、Dialog、Menu、Popover、Select、Toast |
+| `@gorhom/bottom-sheet` | `^5.2.8` | BottomSheet；Menu / Popover / Select 使用 `presentation="bottom-sheet"` 时 |
+
+### 4. 配置 Uniwind
+
+请按 [Uniwind 安装指南](https://docs.uniwind.dev/quickstart) 为 React Native 接入 Tailwind CSS。
+
+若从 NativeWind 迁移，参见 [迁移指南](https://docs.uniwind.dev/migration-from-nativewind)。
+
+### 5. 配置 global.css
+
+在 `global.css` 中加入以下导入：
+
+```css
+@import 'tailwindcss';
+@import 'uniwind';
+
+@import 'heroui-native/styles';
+
+/* Path to the heroui-native lib inside node_modules relative to global.css */
+/* Examples:
+ *   - If global.css is at project root: ./node_modules/heroui-native/lib
+ *   - If global.css is in app/: ../node_modules/heroui-native/lib
+ *   - If global.css is in src/styles/: ../../node_modules/heroui-native/lib
+ */
+@source './node_modules/heroui-native/lib';
+```
+
+### 6. 使用 Provider 包裹应用
+
+使用 `HeroUINativeProvider` 包裹应用，并务必外层再包一层 `GestureHandlerRootView`：
+
+```tsx
+import { HeroUINativeProvider } from 'heroui-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <HeroUINativeProvider>{/* Your app content */}</HeroUINativeProvider>
+    </GestureHandlerRootView>
+  );
+}
+```
+
+> **说明：** 关于文本属性、动画、Toast 等高级配置，请参阅 [Provider 文档](/docs/native/getting-started/provider)。
+
+### 7. 使用第一个组件
+
+```tsx
+import { Button } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function MyComponent() {
+  return (
+    <View className="flex-1 justify-center items-center bg-background">
+      <Button onPress={() => console.log('Pressed!')}>Get Started</Button>
+    </View>
+  );
+}
+```
+
+### 8. 通过细粒度导出减小包体
+
+若希望减小包体、仅引入用到的组件，可使用细粒度导出：
+
+```tsx
+// Granular imports - use when you need only a few components
+import { HeroUINativeProvider } from "heroui-native/provider";
+import { Button } from "heroui-native/button";
+import { Card } from "heroui-native/card";
+
+// General import - imports the whole library, use when you're using many components
+import { Button, Card } from "heroui-native";
+```
+
+细粒度导入适合只用少量组件的场景，有助于控制包体。从 `heroui-native` 整体导入会包含完整库，适合在应用中广泛使用多组件时采用。
+
+**可用的细粒度入口：**
+
+- `heroui-native/provider` — Provider
+- `heroui-native/provider-raw` — 轻量 Provider（最小依赖起点）
+- `heroui-native/[component-name]` — 单个组件
+- `heroui-native/portal` — Portal 工具
+- `heroui-native/toast` — Toast Provider 与工具
+- `heroui-native/utils` — 工具函数
+- `heroui-native/hooks` — 自定义 Hooks
+
+<Callout type="warning">
+  **重要：** 为控制包体，请**始终**坚持使用细粒度导入策略。只要存在一处从 `heroui-native` 的整体导入，就可能使上述优化失效。
+</Callout>
+
+> **提示：** 若需要更强控制，可使用 [`HeroUINativeProviderRaw`](/docs/native/getting-started/provider#raw-provider) — 轻量 Provider，不包含 `ToastProvider` 与 `PortalHost`。
+
+## 接下来
+
+- [HeroUI Native Provider](/docs/native/getting-started/provider)
+- [样式指南](/docs/native/getting-started/styling)
+- [主题文档](/docs/native/getting-started/theming)
+
+## 在 Web（Expo）上运行
+
+<Callout type="warning">
+  HeroUI Native **目前不建议用于 Web**。我们优先聚焦 iOS 与 Android。Web 开发请使用 [HeroUI React](/docs/react/getting-started/quick-start)。
+</Callout>

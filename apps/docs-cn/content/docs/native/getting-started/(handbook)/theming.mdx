@@ -1,0 +1,473 @@
+---
+title: 主题
+description: 使用 CSS 变量与全局样式定制 HeroUI Native 设计系统
+icon: palette
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI Native 使用 CSS 变量实现主题化，可用标准 CSS 覆盖从颜色到组件样式的一切。
+
+## 工作原理
+
+主题系统建立在 [Tailwind CSS v4](https://tailwindcss.com/docs/theme) 的主题能力之上，并通过 [Uniwind](https://uniwind.dev/) 接入 React Native。导入 `heroui-native/styles` 后，会使用 Tailwind 内置色板并映射到语义变量，自动在明暗主题间切换，并借助 CSS 层与 `@theme` 进行组织。
+
+**命名约定：**
+
+- 无后缀的颜色一般用作背景（如 `--accent`）
+- 带 `-foreground` 后缀的用于该背景上的文字（如 `--accent-foreground`）
+
+## 快速开始
+
+**在组件中应用颜色：**
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="bg-background flex-1">
+  <Text className="text-foreground">Your app content</Text>
+</View>;
+```
+
+**切换主题：**
+
+通过 [Uniwind](https://docs.uniwind.dev/theming/basics)，HeroUI Native 自动支持深色模式；可跟随系统，也可手动切换明暗变体：
+
+```tsx
+import { Uniwind, useUniwind } from 'uniwind';
+import { Button } from 'heroui-native';
+
+function ThemeToggle() {
+  const { theme } = useUniwind();
+
+  return (
+    <Button
+      onPress={() => Uniwind.setTheme(theme === 'light' ? 'dark' : 'light')}
+    >
+      <Button.Label>
+        Toggle {theme === 'light' ? 'Dark' : 'Light'} Mode
+      </Button.Label>
+    </Button>
+  );
+}
+```
+
+**覆盖颜色：**
+
+```css
+/* global.css */
+@layer theme {
+  @variant light {
+    /* Override any color variable */
+    --accent: oklch(0.65 0.25 270); /* Custom indigo accent */
+    --success: oklch(0.65 0.15 155);
+  }
+
+  @variant dark {
+    --accent: oklch(0.65 0.25 270);
+    --success: oklch(0.75 0.12 155);
+  }
+}
+```
+
+> **说明：** 完整色板与可视化参考见 [颜色](/docs/native/getting-started/colors)。
+
+**创建自定义主题：**
+
+可借助 Uniwind 的变体系统定义多套主题。完整自定义主题文档见 [Uniwind 自定义主题指南](https://docs.uniwind.dev/theming/custom-themes)。
+
+<Callout type="warning">
+  **重要：** 所有主题必须定义**相同**的变量集合。必填变量清单见 [默认主题](/docs/native/getting-started/colors#default-theme)。
+</Callout>
+
+```css
+/* global.css */
+@layer theme {
+  :root {
+    @variant ocean-light {
+      /* Base Colors */
+      --background: oklch(0.95 0.02 230);
+      --foreground: oklch(0.25 0.04 230);
+
+     /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: oklch(0.98 0.01 230);
+      --surface-foreground: oklch(0.3 0.045 230);
+
+      --surface-secondary: oklch(0.96 0.012 230);
+      --surface-secondary-foreground: oklch(0.3 0.045 230);
+
+      --surface-tertiary: oklch(0.94 0.015 230);
+      --surface-tertiary-foreground: oklch(0.3 0.045 230);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+      --overlay: oklch(0.998 0.003 230);
+      --overlay-foreground: oklch(0.3 0.045 230);
+      --backdrop: oklch(0% 0 0 / 20%);
+
+      --muted: oklch(0.55 0.035 230);
+
+      --default: oklch(0.94 0.018 230);
+      --default-foreground: oklch(0.4 0.05 230);
+
+      /* Accent */
+      --accent: oklch(0.6 0.2 230);
+      --accent-foreground: oklch(0.98 0.005 230);
+
+      /* Form Field Defaults - Colors */
+      --field-background: oklch(0.98 0.01 230);
+      --field-foreground: oklch(0.25 0.04 230);
+      --field-placeholder: var(--muted);
+      --field-border: transparent;
+
+      /* Status Colors */
+      --success: oklch(0.72 0.14 165);
+      --success-foreground: oklch(0.25 0.08 165);
+
+      --warning: oklch(0.78 0.12 85);
+      --warning-foreground: oklch(0.3 0.08 85);
+
+      --danger: oklch(0.68 0.18 15);
+      --danger-foreground: oklch(0.98 0.005 15);
+
+      /* Component Colors */
+      --segment: oklch(0.98 0.01 230);
+      --segment-foreground: oklch(0.25 0.04 230);
+
+      /* Misc Colors */
+      --border: oklch(0 0 0 / 0%);
+      --separator: oklch(0.91 0.015 230);
+      --focus: var(--accent);
+      --link: oklch(0.62 0.17 230);
+
+      /* Shadows */
+      --surface-shadow:
+        0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+        0 0 1px 0 rgba(0, 0, 0, 0.06);
+      --overlay-shadow:
+        0 2px 8px 0 rgba(0, 0, 0, 0.02), 0 -6px 12px 0 rgba(0, 0, 0, 0.01),
+        0 14px 28px 0 rgba(0, 0, 0, 0.03);
+      --field-shadow:
+        0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+        0 0 1px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    @variant ocean-dark {
+      /* Base Colors */
+      --background: oklch(0.15 0.04 230);
+      --foreground: oklch(0.94 0.01 230);
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: oklch(0.2 0.048 230);
+      --surface-foreground: oklch(0.9 0.015 230);
+
+      --surface-secondary: oklch(0.24 0.046 230);
+      --surface-secondary-foreground: oklch(0.9 0.015 230);
+
+      --surface-tertiary: oklch(0.27 0.044 230);
+      --surface-tertiary-foreground: oklch(0.9 0.015 230);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+      --overlay: oklch(0.23 0.045 230);
+      --overlay-foreground: oklch(0.9 0.015 230);
+      --backdrop: oklch(0% 0 0 / 20%);
+
+      --muted: oklch(0.5 0.04 230);
+
+      --default: oklch(0.25 0.05 230);
+      --default-foreground: oklch(0.88 0.018 230);
+
+      /* Accent */
+      --accent: oklch(0.72 0.21 230);
+      --accent-foreground: oklch(0.15 0.04 230);
+
+      /* Form Field Defaults - Colors */
+      --field-background: var(--default);
+      --field-foreground: var(--foreground);
+      --field-placeholder: var(--muted);
+      --field-border: transparent;
+
+      /* Status Colors */
+      --success: oklch(0.68 0.16 165);
+      --success-foreground: oklch(0.95 0.008 165);
+
+      --warning: oklch(0.75 0.14 90);
+      --warning-foreground: oklch(0.2 0.04 90);
+
+      --danger: oklch(0.65 0.2 20);
+      --danger-foreground: oklch(0.95 0.008 20);
+
+      /* Component Colors */
+      --segment: oklch(0.22 0.046 230);
+      --segment-foreground: oklch(0.9 0.015 230);
+
+      /* Misc Colors */
+      --border: oklch(0 0 0 / 0%);
+      --separator: oklch(0.28 0.045 230);
+      --focus: var(--accent);
+      --link: oklch(0.75 0.18 230);
+
+      /* Shadows */
+      --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+      --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+      --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
+    }
+  }
+}
+```
+
+**重要：** 添加自定义主题后，必须在 Metro 配置中注册：
+
+```js
+// metro.config.js
+const { withUniwindConfig } = require('uniwind/metro');
+const {
+  wrapWithReanimatedMetroConfig,
+} = require('react-native-reanimated/metro-config');
+
+const config = {
+  // ... your existing config
+};
+
+module.exports = withUniwindConfig(wrapWithReanimatedMetroConfig(config), {
+  cssEntryFile: './global.css',
+  dtsFile: './src/uniwind.d.ts',
+  extraThemes: ['ocean-light', 'ocean-dark'],
+});
+```
+
+在应用中切换主题：
+
+```tsx
+import { Uniwind } from 'uniwind';
+import { Button } from 'heroui-native';
+
+function App() {
+  return (
+    <Button onPress={() => Uniwind.setTheme('ocean-light')}>
+      <Button.Label>Ocean Theme</Button.Label>
+    </Button>
+  );
+}
+```
+
+## 添加自定义颜色
+
+在主题中加入自定义语义色：
+
+```css
+@layer theme {
+  @variant light {
+    --info: oklch(0.6 0.15 210);
+    --info-foreground: oklch(0.98 0 0);
+  }
+
+  @variant dark {
+    --info: oklch(0.7 0.12 210);
+    --info-foreground: oklch(0.15 0 0);
+  }
+}
+
+/* 让颜色可被 Tailwind 使用 */
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+```
+
+在组件中使用：
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="bg-info p-4 rounded-lg">
+  <Text className="text-info-foreground">Info message</Text>
+</View>;
+```
+
+## 自定义字体
+
+要在应用中使用自定义字体，需要先加载字体，再覆盖字体相关的 CSS 变量。
+
+### 1. 在应用中加载字体
+
+先加载字体（例如使用 Expo 的 `useFonts`）：
+
+```tsx
+import { useFonts } from 'expo-font';
+import { HeroUINativeProvider } from 'heroui-native';
+import {
+  YourFont_400Regular,
+  YourFont_500Medium,
+  YourFont_600SemiBold,
+} from '@expo-google-fonts/your-font';
+
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    YourFont_400Regular,
+    YourFont_500Medium,
+    YourFont_600SemiBold,
+  });
+
+  if (!fontsLoaded) {
+    return null; // Or return a loading screen
+  }
+
+  return <HeroUINativeProvider>{/* Your app content */}</HeroUINativeProvider>;
+}
+```
+
+### 2. 配置字体 CSS 变量
+
+加载完成后，在 `global.css` 中覆盖字体变量：
+
+```css
+@theme {
+  --font-normal: 'YourFont-400Regular';
+  --font-medium: 'YourFont-500Medium';
+  --font-semibold: 'YourFont-600SemiBold';
+}
+```
+
+**说明：** CSS 变量中的字体名应与已加载字体的 PostScript 名称一致。请查阅字体包文档，或直接使用 `useFonts` 中出现的名称。
+
+所有 HeroUI Native 组件会自动使用这些字体变量，以保持排版一致。
+
+## 变量参考
+
+HeroUI 定义三类变量：
+
+1. **基础变量** — 如 `--white`、`--black` 等不随主题切换的值
+2. **主题变量** — 随明暗主题切换的颜色
+3. **计算变量** — 自动生成的按压态（hover）与尺寸变体等
+
+完整参考：[颜色文档](/docs/native/getting-started/colors)、[默认主题变量](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/variables.css)、[共享主题工具](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/theme.css)
+
+**计算变量（Tailwind）：**
+
+我们通过 Tailwind 的 `@theme` 指令自动生成按压态与圆角等计算变量，定义见 [theme.css](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/theme.css)：
+<CollapsibleCode lang="css" code={`  @theme inline static {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-surface-hover: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
+
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-secondary-foreground: var(--surface-secondary-foreground);
+
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-tertiary-foreground: var(--surface-tertiary-foreground);
+
+  --color-overlay: var(--overlay);
+  --color-overlay-foreground: var(--overlay-foreground);
+  --color-backdrop: var(--backdrop);
+  
+
+  --color-muted: var(--muted);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-segment: var(--segment);
+  --color-segment-foreground: var(--segment-foreground);
+
+  --color-border: var(--border);
+  --color-separator: var(--separator);
+  --color-focus: var(--focus);
+  --color-link: var(--link);
+
+  --color-default: var(--default);
+  --color-default-foreground: var(--default-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  /* Form Field Tokens */
+  --color-field: var(--field-background, var(--default));
+  --color-field-foreground: var(--field-foreground, var(--foreground));
+  --color-field-placeholder: var(--field-placeholder, var(--muted));
+  --color-field-border: var(--field-border, var(--border));
+  --radius-field: var(--field-radius, var(--radius-xl));
+  --border-width-field: var(--field-border-width, var(--border-width));
+
+  --shadow-surface: var(--surface-shadow);
+  --shadow-overlay: var(--overlay-shadow);
+  --shadow-field: var(--field-shadow);
+
+  /* Calculated Variables */
+
+  /* Colors */
+
+  /* --- background shades --- */
+  --color-background-secondary: color-mix(in oklab, var(--background) 96%, var(--foreground) 4%);
+  --color-background-tertiary: color-mix(in oklab, var(--background) 92%, var(--foreground) 8%);
+  --color-background-inverse: var(--foreground);
+
+  /* ------------------------- */
+  --color-default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
+  --color-accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+  --color-success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
+  --color-warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
+  --color-danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+
+  /* Form Field Colors */ 
+  --color-field-hover: color-mix(in oklab, var(--field-background, var(--default)) 90%, var(--field-foreground, var(--foreground)) 2%);
+  --color-field-focus: var(--field-background, var(--default));
+  --color-field-border-hover: color-mix(in oklab, var(--field-border, var(--border)) 88%, var(--field-foreground, var(--foreground)) 10%);
+  --color-field-border-focus: color-mix(in oklab, var(--field-border, var(--border)) 74%, var(--field-foreground, var(--foreground)) 22%);
+
+  /* Soft Colors */
+  --color-accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
+  --color-accent-soft-foreground: var(--accent);
+  --color-accent-soft-hover: color-mix(in oklab, var(--accent) 20%, transparent);
+
+  --color-danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
+  --color-danger-soft-foreground: var(--danger);
+  --color-danger-soft-hover: color-mix(in oklab, var(--danger) 20%, transparent);
+
+  --color-warning-soft: color-mix(in oklab, var(--warning) 15%, transparent);
+  --color-warning-soft-foreground: var(--warning);
+  --color-warning-soft-hover: color-mix(in oklab, var(--warning) 20%, transparent);
+
+  --color-success-soft: color-mix(in oklab, var(--success) 15%, transparent);
+  --color-success-soft-foreground: var(--success);
+  --color-success-soft-hover: color-mix(in oklab, var(--success) 20%, transparent);
+
+  /* Separator Colors - Levels */
+  --color-separator-secondary: color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%);
+  --color-separator-tertiary: color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%);
+
+  /* Border Colors - Levels (progressive contrast: default → secondary → tertiary) */
+  /* Light mode: lighter → darker | Dark mode: darker → lighter */
+  --color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+  --color-border-tertiary: color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%);
+
+  /* Radius and default sizes - defaults can change by just changing the --radius */
+  --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */
+  --radius-sm: calc(var(--radius) * 0.5); /* 0.25rem (4px) */
+  --radius-md: calc(var(--radius) * 0.75); /* 0.375rem (6px) */
+  --radius-lg: calc(var(--radius) * 1); /* 0.5rem (8px) */
+  --radius-xl: calc(var(--radius) * 1.5); /* 0.75rem (12px) */
+  --radius-2xl: calc(var(--radius) * 2); /* 1rem (16px) */
+  --radius-3xl: calc(var(--radius) * 3); /* 1.5rem (24px) */
+  --radius-4xl: calc(var(--radius) * 4); /* 2rem (32px) */
+}
+`}
+/>
+
+表单控件依赖 `--field-*` 变量及其计算出的 hover/focus 变体。在主题中调整它们即可重塑输入框、复选框、单选与 OTP 等，而不会影响按钮、卡片等 Surface 组件的观感。
+
+## 相关资源
+
+- [颜色](/docs/native/getting-started/colors)
+- [样式指南](/docs/native/getting-started/styling)
+- [Tailwind CSS v4 主题](https://tailwindcss.com/docs/theme)
+- [OKLCH 调色工具](https://oklch.com)
