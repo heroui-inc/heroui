@@ -1,0 +1,131 @@
+---
+title: 所有版本
+description: HeroUI Native 的全部更新与变更，包括新功能、问题修复与破坏性变更。
+---
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 最新版本
+
+### v1.0.2
+
+**2026 年 4 月**
+
+本补丁版本为 PressableFeedback 与 Surface 引入 `asChild` 插槽模式；为所有基于 Portal 的遮罩增加 VoiceOver 模态包容支持；修复 Android 上 Button outline 变体的样式问题；并微调 Input 与 Select 的视觉效果。
+
+[阅读完整更新说明 →](/docs/native/releases/v1-0-2)
+
+---
+
+### v1.0.1
+
+**2026 年 4 月**
+
+本补丁版本修复 Toast 提供程序中 `total` SharedValue 与实际 Toast 数量不同步的竞态；将七个组件的禁用态样式改为使用原生 `disabled:` 修饰符；并为主题系统新增供遮罩组件使用的 `--backdrop` 变量。
+
+[阅读完整更新说明 →](/docs/native/releases/v1-0-1)
+
+---
+
+### v1.0.0
+
+**2026 年 3 月**
+
+🎉 HeroUI Native 迎来首个稳定版本，从 beta 与候选发布阶段毕业。本里程碑包含全新 LinkButton 组件、子菜单冲突处理、可选的 `@gorhom/bottom-sheet` 对等依赖，以及更强的 `useThemeColor` 类型安全。
+
+[阅读完整更新说明 →](/docs/native/releases/v1-0-0)
+
+---
+
+### RC 4
+
+**2026 年 3 月**
+
+本版本引入用于嵌套可展开菜单的 SubMenu 复合组件（带动画展开/收起）；以基于插槽的样式与 `textProps` 透传重构 Slider Output；并修复快速连按时 PressableFeedback 水波纹动画闪烁。
+
+[阅读完整更新说明 →](/docs/native/releases/rc-4)
+
+---
+
+### RC 3
+
+**2026 年 2 月**
+
+本版本新增 TagGroup、Menu、InputGroup 三个组件；为所有基于 Bottom Sheet 的遮罩增加 Android 实体返回键支持；并通过关键的 `combineStyles` 修复保留 Reanimated 动画样式绑定，实现 Expo 55 兼容。
+
+[阅读完整更新说明 →](/docs/native/releases/rc-3)
+
+---
+
+### RC 2
+
+**2026 年 2 月**
+
+本版本新增 SearchField、ListGroup、Slider 三个组件；为 Select 增加由类型安全泛型支撑的多选模式；将 Button 反馈 API 重构为统一的 `feedbackVariant` + `animation`。放宽对等依赖约束以更好兼容 Expo SDK 55，并修复若干 Select 与 Avatar 问题。
+
+[阅读完整更新说明 →](/docs/native/releases/rc-2)
+
+---
+
+### RC 1
+
+**2026 年 2 月**
+
+本版本引入含五种状态变体与无障碍原语的 Alert 复合组件；将 Radio 抽为可双模式运行的独立组件；新增带动画的 Select.TriggerIndicator。另提供用于精简包体的 HeroUINativeProviderRaw、用于 iOS 调试的 `disableFullWindowOverlay`、六个组件统一的 `styles` 属性，以及以各主题显式定义取代计算型的 surface 主题变量重构。
+
+[阅读完整更新说明 →](/docs/native/releases/rc-1)
+
+---
+
+### Beta 13
+
+**2026 年 2 月**
+
+本版本引入多行输入组件 TextArea、Button outline 变体，为所有组件导出样式类名，并提供可复用的 CloseButton。同时重构 Tabs（动画与变体命名改进）、将表单相关能力拆为独立原语，并增加细粒度导出以优化包体。另含主题色与组件字符串化等关键修复。
+
+[阅读完整更新说明 →](/docs/native/releases/beta-13)
+
+---
+
+### Beta 12
+
+**2026 年 1 月**
+
+本版本新增 InputOTP、Label、Description 三个核心表单组件，强化 React Native 中的表单搭建能力。另含 Popover 关闭行为、弹层受控状态、圆角配置等关键修复，并为多个表单组件增加变体样式属性支持。
+
+[阅读完整更新说明 →](/docs/native/releases/beta-12)
+
+---
+
+### Beta 11
+
+**2026 年 1 月**
+
+本版本通过 Bottom Sheet 关闭协同改进、Dialog 侧滑关闭手势修复、TextField 样式优化，以及面向高级 Portal 挂载场景的 PortalHost 导出，提升组件可靠性与开发者体验，使交互更顺滑、自定义布局更灵活。
+
+[阅读完整更新说明 →](/docs/native/releases/beta-11)
+
+---
+
+### Beta 10
+
+**2025 年 12 月**
+
+本版本引入新的 [Bottom Sheet](/docs/native/components/bottom-sheet) 组件；重构 [PressableFeedback](/docs/native/components/pressable-feedback) 并改进 API；扩展动画 API 以支持 State Prop；增强 `use-theme-color` 钩子以支持多色选取；并包含若干问题修复与文档改进。
+
+[阅读完整更新说明 →](/docs/native/releases/beta-10)
+
+---
+
+## 发布周期
+
+HeroUI Native 遵循常规发布周期：
+
+- **稳定版**：v1.0.0 已于 2026 年第一季度发布
+- **补丁版**：按需发布问题修复与小幅改进
+
+## 参与贡献
+
+发现问题或想参与贡献？请访问我们的 [GitHub 仓库](https://github.com/heroui-inc/heroui-native)。
