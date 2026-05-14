@@ -1,0 +1,358 @@
+---
+title: Slider
+description: 在有限区间内通过拖拽选择单个值或区间的输入控件。
+links:
+  source_native: slider/slider.tsx
+  styles_native: slider/slider.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Slider } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Slider>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+- **Slider**：主容器，管理滑块数值、方向，并为所有子组件提供上下文。支持单值与区间模式。
+- **Slider.Output**：可选，显示当前值；支持渲染函数以自定义格式；默认显示格式化后的数值标签。
+- **Slider.Track**：为 Fill 与 Thumb 提供尺寸的容器；上报布局尺寸用于位置计算；支持点击定位与渲染函数子节点（例如区间滑块的多拇指）。
+- **Slider.Fill**：沿轨道交叉轴铺满的填充条；仅计算主轴位置与尺寸。
+- **Slider.Thumb**：基于 react-native-gesture-handler 的可拖拽拇指；由 Track 布局在交叉轴居中；通过 react-native-reanimated 在按压时缩放。每个拇指具备 `role="slider"` 与完整 `accessibilityValue`。
+
+## 用法
+
+### 基础用法
+
+Slider 通过复合部件组成可拖拽的数值输入。
+
+```tsx
+<Slider defaultValue={30}>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### 标签与输出
+
+在数值输出旁显示标签。
+
+```tsx
+<Slider defaultValue={50}>
+  <View className="flex-row items-center justify-between">
+    <Label>Volume</Label>
+    <Slider.Output />
+  </View>
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### 纵向
+
+将 `orientation` 设为 `"vertical"` 以纵向渲染。
+
+```tsx
+<View className="h-48">
+  <Slider defaultValue={50} orientation="vertical">
+    <Slider.Track>
+      <Slider.Fill />
+      <Slider.Thumb />
+    </Slider.Track>
+  </Slider>
+</View>
+```
+
+### 区间滑块
+
+将 `value`/`defaultValue` 设为数组，并在 `Slider.Track` 上使用渲染函数以渲染多个拇指。
+
+```tsx
+<Slider
+  defaultValue={[200, 800]}
+  minValue={0}
+  maxValue={1000}
+  step={10}
+  formatOptions={{ style: 'currency', currency: 'USD' }}
+>
+  <View className="flex-row items-center justify-between">
+    <Label>Price range</Label>
+    <Slider.Output />
+  </View>
+  <Slider.Track>
+    {({ state }) => (
+      <>
+        <Slider.Fill />
+        {state.values.map((_, i) => (
+          <Slider.Thumb key={i} index={i} />
+        ))}
+      </>
+    )}
+  </Slider.Track>
+</Slider>
+```
+
+### 受控值
+
+使用 `value` 与 `onChange` 进入受控模式。`onChangeEnd` 在拖拽结束或点击定位完成后触发。
+
+```tsx
+const [volume, setVolume] = useState(50);
+
+<Slider value={volume} onChange={setVolume} onChangeEnd={(v) => save(v)}>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>;
+```
+
+### 自定义样式
+
+在拇指等子组件上使用 `className`、`classNames` 或 `styles` 自定义样式。
+
+```tsx
+<Slider defaultValue={65}>
+  <Slider.Track className="h-3 rounded-full bg-success/10">
+    <Slider.Fill className="rounded-full bg-success" />
+    <Slider.Thumb
+      classNames={{
+        thumbContainer: 'size-6 rounded-full bg-success',
+        thumbKnob: 'bg-success-foreground rounded-full',
+      }}
+      animation={{
+        scale: { value: [1, 0.7] },
+      }}
+    />
+  </Slider.Track>
+</Slider>
+```
+
+### 禁用
+
+禁用整个滑块以禁止交互。
+
+```tsx
+<Slider defaultValue={40} isDisabled>
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+## 示例
+
+```tsx
+import { Label, Slider } from 'heroui-native';
+import { useState } from 'react';
+import { View, Text } from 'react-native';
+
+export default function SliderExample() {
+  const [price, setPrice] = useState<number[]>([200, 800]);
+
+  return (
+    <View className="px-8 gap-8">
+      <Slider defaultValue={30}>
+        <View className="flex-row items-center justify-between">
+          <Label>Volume</Label>
+          <Slider.Output />
+        </View>
+        <Slider.Track>
+          <Slider.Fill />
+          <Slider.Thumb />
+        </Slider.Track>
+      </Slider>
+
+      <Slider
+        value={price}
+        onChange={setPrice}
+        minValue={0}
+        maxValue={1000}
+        step={10}
+        formatOptions={{ style: 'currency', currency: 'USD' }}
+      >
+        <View className="flex-row items-center justify-between">
+          <Label>Price range</Label>
+          <Slider.Output />
+        </View>
+        <Slider.Track>
+          {({ state }) => (
+            <>
+              <Slider.Fill />
+              {state.values.map((_, i) => (
+                <Slider.Thumb key={i} index={i} />
+              ))}
+            </>
+          )}
+        </Slider.Track>
+      </Slider>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/slider.tsx>)。
+
+## API 参考
+
+### Slider
+
+| prop            | type                                  | default        | description                                                     |
+| --------------- | ------------------------------------- | -------------- | --------------------------------------------------------------- |
+| `children`      | `React.ReactNode`                     | -              | 滑块内部子元素                                                   |
+| `value`         | `number \| number[]`                  | -              | 当前值（受控）                                                   |
+| `defaultValue`  | `number \| number[]`                  | `0`            | 默认值（非受控）                                                 |
+| `minValue`      | `number`                              | `0`            | 最小值                                                           |
+| `maxValue`      | `number`                              | `100`          | 最大值                                                           |
+| `step`          | `number`                              | `1`            | 步进                                                             |
+| `formatOptions` | `Intl.NumberFormatOptions`            | -              | 数值标签的 `Intl` 格式化选项                                     |
+| `orientation`   | `'horizontal' \| 'vertical'`          | `'horizontal'` | 方向                                                             |
+| `isDisabled`    | `boolean`                             | `false`        | 是否禁用                                                         |
+| `className`     | `string`                              | -              | 额外 class                                                       |
+| `animation`     | `AnimationRootDisableAll`             | -              | 根级动画配置                                                     |
+| `onChange`      | `(value: number \| number[]) => void` | -              | 交互过程中数值变化时触发                                         |
+| `onChangeEnd`   | `(value: number \| number[]) => void` | -              | 交互结束（拖放结束或点击定位）时触发                             |
+| `...ViewProps`  | `ViewProps`                           | -              | 支持 React Native `View` 的全部标准属性                          |
+
+#### AnimationRootDisableAll
+
+滑块根组件动画配置，可为：
+
+- `"disable-all"`：关闭所有动画（含子级）
+- `undefined`：使用默认动画
+
+### Slider.Output
+
+| prop           | type                                                                 | default | description                                                                                 |
+| -------------- | -------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode \| ((props: SliderRenderProps) => React.ReactNode)` | -       | 自定义内容或接收滑块状态的渲染函数；默认显示格式化数值标签                                   |
+| `className`    | `string`                                                             | -       | 额外 class                                                                                  |
+| `...ViewProps` | `ViewProps`                                                          | -       | 支持 React Native `View` 的全部标准属性                                                    |
+
+#### SliderRenderProps
+
+| prop          | type                | description                    |
+| ------------- | ------------------- | ------------------------------ |
+| `state`       | `SliderState`       | 当前滑块状态                   |
+| `orientation` | `SliderOrientation` | 滑块方向                       |
+| `isDisabled`  | `boolean`           | 是否禁用                       |
+
+#### SliderState
+
+| prop                 | type                        | description                                    |
+| -------------------- | --------------------------- | ---------------------------------------------- |
+| `values`             | `number[]`                  | 按拇指索引的当前数值数组                       |
+| `getThumbValueLabel` | `(index: number) => string` | 返回指定拇指的格式化字符串标签                 |
+
+### Slider.Track
+
+| prop           | type                                                                 | default | description                                                                   |
+| -------------- | -------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode \| ((props: SliderRenderProps) => React.ReactNode)` | -       | 子内容或接收滑块状态的渲染函数，用于动态渲染多拇指等                           |
+| `className`    | `string`                                                             | -       | 额外 class                                                                    |
+| `hitSlop`      | `number`                                                             | `8`     | 轨道周围扩展点击区域（像素）                                                   |
+| `...ViewProps` | `ViewProps`                                                          | -       | 支持 React Native `View` 的全部标准属性                                       |
+
+### Slider.Fill
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `className`    | `string`    | -       | 额外 class                                         |
+| `...ViewProps` | `ViewProps` | -       | 支持 React Native `View` 的全部标准属性          |
+
+### Slider.Thumb
+
+| prop           | type                                     | default | description                                        |
+| -------------- | ---------------------------------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode`                        | -       | 自定义拇指内容；默认可动画圆钮                   |
+| `index`        | `number`                                 | `0`     | 该拇指在滑块中的索引                               |
+| `isDisabled`   | `boolean`                                | -       | 是否仅禁用该拇指                                   |
+| `className`    | `string`                                 | -       | 拇指容器额外 class                                 |
+| `classNames`   | `ElementSlots<ThumbSlots>`               | -       | 各拇指插槽的额外 class                             |
+| `styles`       | `Partial<Record<ThumbSlots, ViewStyle>>` | -       | 各拇指插槽的行内样式                               |
+| `hitSlop`      | `number`                                 | `12`    | 拇指周围扩展点击区域（像素）                       |
+| `animation`    | `SliderThumbAnimation`                   | -       | 拇指圆钮动画配置                                   |
+| `...ViewProps` | `ViewProps`                              | -       | 支持 React Native `View` 的全部标准属性          |
+
+#### ElementSlots\<ThumbSlots\>
+
+| prop             | type     | description                     |
+| ---------------- | -------- | ------------------------------- |
+| `thumbContainer` | `string` | 外层拇指容器自定义 class       |
+| `thumbKnob`      | `string` | 内层圆钮自定义 class           |
+
+#### styles
+
+| prop             | type        | description           |
+| ---------------- | ----------- | --------------------- |
+| `thumbContainer` | `ViewStyle` | 外层拇指容器样式      |
+| `thumbKnob`      | `ViewStyle` | 内层圆钮样式          |
+
+#### SliderThumbAnimation
+
+拇指缩放动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭拇指动画
+- `undefined`：使用默认动画
+- `object`：自定义缩放动画
+
+| prop                 | type               | default                                      | description                     |
+| -------------------- | ------------------ | -------------------------------------------- | ------------------------------- |
+| `scale.value`        | `[number, number]` | `[1, 0.9]`                                   | 缩放值 [空闲, 拖拽中]           |
+| `scale.springConfig` | `WithSpringConfig` | `{ damping: 15, stiffness: 200, mass: 0.5 }` | 缩放弹簧配置                    |
+
+## Hooks
+
+### useSlider
+
+访问滑块上下文，须在 `Slider` 内使用。
+
+```tsx
+import { useSlider } from 'heroui-native';
+
+const { values, orientation, isDisabled, getThumbValueLabel } = useSlider();
+```
+
+#### 返回值
+
+| property             | type                                         | description                                                    |
+| -------------------- | -------------------------------------------- | -------------------------------------------------------------- |
+| `values`             | `number[]`                                   | 当前各拇指的数值                                               |
+| `minValue`           | `number`                                     | 最小值                                                         |
+| `maxValue`           | `number`                                     | 最大值                                                         |
+| `step`               | `number`                                     | 步进                                                           |
+| `orientation`        | `'horizontal' \| 'vertical'`                 | 当前方向                                                       |
+| `isDisabled`         | `boolean`                                    | 是否禁用                                                       |
+| `formatOptions`      | `Intl.NumberFormatOptions \| undefined`      | 标签数字格式化选项                                             |
+| `getThumbPercent`    | `(index: number) => number`                  | 返回指定拇指位置百分比（0–1）                                  |
+| `getThumbValueLabel` | `(index: number) => string`                  | 返回指定拇指的格式化标签                                       |
+| `getThumbMinValue`   | `(index: number) => number`                  | 返回指定拇指允许的最小值                                       |
+| `getThumbMaxValue`   | `(index: number) => number`                  | 返回指定拇指允许的最大值                                       |
+| `updateValue`        | `(index: number, newValue: number) => void`  | 按索引更新拇指数值                                             |
+| `isThumbDragging`    | `(index: number) => boolean`                 | 指定拇指是否正在拖拽                                           |
+| `setThumbDragging`   | `(index: number, dragging: boolean) => void` | 设置拇指拖拽状态                                               |
+| `trackSize`          | `number`                                     | 轨道布局宽度（横向）或高度（纵向），单位像素                   |
+| `thumbSize`          | `number`                                     | 已测量的拇指尺寸（主轴方向），单位像素                         |

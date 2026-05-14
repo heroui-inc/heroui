@@ -1,0 +1,414 @@
+---
+title: TagGroup
+description: 用于展示与管理可选标签的复合组件，支持可选移除。
+links:
+  source_native: tag-group/tag-group.tsx
+  styles_native: tag-group/tag-group.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/tag-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/tag-group-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { TagGroup } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<TagGroup>
+  <TagGroup.List>
+    <TagGroup.Item id="tag-1">
+      <TagGroup.ItemLabel>...</TagGroup.ItemLabel>
+      <TagGroup.ItemRemoveButton />
+    </TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+- **TagGroup**：主容器，管理标签选中状态、禁用键与移除能力，并向子组件提供尺寸与变体上下文。
+- **TagGroup.List**：渲染标签列表的容器，可渲染空状态。
+- **TagGroup.Item**：组内单个标签。支持字符串子节点（自动包在 `TagGroup.ItemLabel`）、渲染函数子节点或自定义布局。
+- **TagGroup.ItemLabel**：标签文字。提供字符串子节点时会自动渲染，也可显式使用。
+- **TagGroup.ItemRemoveButton**：移除按钮；需要移除能力时需显式放置。仅当 `TagGroup` 传入 `onRemove` 时生效。
+
+## 用法
+
+### 基础用法
+
+展示一个简单的可选标签组。
+
+```tsx
+<TagGroup selectionMode="single">
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+    <TagGroup.Item id="travel">旅行</TagGroup.Item>
+    <TagGroup.Item id="gaming">游戏</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+### 单选模式
+
+同一时间只能选中一个标签。
+
+```tsx
+<TagGroup selectionMode="single" defaultSelectedKeys={['news']}>
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+    <TagGroup.Item id="travel">旅行</TagGroup.Item>
+    <TagGroup.Item id="gaming">游戏</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+### 多选模式
+
+允许多个标签同时选中。
+
+```tsx
+<TagGroup selectionMode="multiple" defaultSelectedKeys={['news', 'travel']}>
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+    <TagGroup.Item id="travel">旅行</TagGroup.Item>
+    <TagGroup.Item id="gaming">游戏</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+### 受控选中
+
+通过 `selectedKeys` 与 `onSelectionChange` 控制选中状态。
+
+```tsx
+const [selected, setSelected] = useState(new Set(['news']));
+
+<TagGroup
+  selectionMode="single"
+  selectedKeys={selected}
+  onSelectionChange={setSelected}
+>
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+    <TagGroup.Item id="travel">旅行</TagGroup.Item>
+    <TagGroup.Item id="gaming">游戏</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>;
+```
+
+### 变体
+
+为标签应用不同视觉变体。
+
+```tsx
+<TagGroup selectionMode="single" variant="default">
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+    <TagGroup.Item id="travel">旅行</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+
+<TagGroup selectionMode="single" variant="surface">
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+    <TagGroup.Item id="travel">旅行</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+### 尺寸
+
+控制组内所有标签的尺寸。
+
+```tsx
+<TagGroup selectionMode="single" size="sm">
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+
+<TagGroup selectionMode="single" size="md">
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+
+<TagGroup selectionMode="single" size="lg">
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+### 带移除按钮
+
+提供 `onRemove`，并在每个条目中放置 `TagGroup.ItemRemoveButton` 以显示移除按钮。
+
+```tsx
+const [tags, setTags] = useState([
+  { id: 'news', name: '新闻' },
+  { id: 'travel', name: '旅行' },
+]);
+
+const onRemove = (keys) => {
+  setTags((prev) => prev.filter((tag) => !keys.has(tag.id)));
+};
+
+<TagGroup selectionMode="single" onRemove={onRemove}>
+  <TagGroup.List>
+    {tags.map((tag) => (
+      <TagGroup.Item key={tag.id} id={tag.id}>
+        <TagGroup.ItemLabel>{tag.name}</TagGroup.ItemLabel>
+        <TagGroup.ItemRemoveButton />
+      </TagGroup.Item>
+    ))}
+  </TagGroup.List>
+</TagGroup>;
+```
+
+### 渲染函数子节点
+
+使用渲染函数访问 `isSelected`、`isDisabled` 以自定义布局。
+
+```tsx
+<TagGroup selectionMode="single">
+  <TagGroup.List>
+    <TagGroup.Item id="news">
+      {({ isSelected }) => (
+        <>
+          <SquareArticleIcon
+            size={16}
+            colorClassName={
+              isSelected
+                ? 'accent-accent-soft-foreground'
+                : 'accent-field-foreground'
+            }
+          />
+          <TagGroup.ItemLabel>新闻</TagGroup.ItemLabel>
+        </>
+      )}
+    </TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+### 空状态
+
+列表无标签时渲染自定义内容。
+
+```tsx
+<TagGroup onRemove={onRemove}>
+  <TagGroup.List
+    renderEmptyState={() => (
+      <Text className="text-sm text-muted">暂无分类</Text>
+    )}
+  >
+    {tags.map((tag) => (
+      <TagGroup.Item key={tag.id} id={tag.id}>
+        <TagGroup.ItemLabel>{tag.name}</TagGroup.ItemLabel>
+        <TagGroup.ItemRemoveButton />
+      </TagGroup.Item>
+    ))}
+  </TagGroup.List>
+</TagGroup>
+```
+
+### 禁用标签
+
+禁用单个标签或整个组。
+
+```tsx
+<TagGroup selectionMode="single" disabledKeys={new Set(['travel'])}>
+  <TagGroup.List>
+    <TagGroup.Item id="news">新闻</TagGroup.Item>
+    <TagGroup.Item id="travel">旅行</TagGroup.Item>
+    <TagGroup.Item id="gaming" isDisabled>
+      游戏
+    </TagGroup.Item>
+  </TagGroup.List>
+</TagGroup>
+```
+
+## 示例
+
+```tsx
+import { TagGroup, Label, Description, FieldError } from 'heroui-native';
+import { useState, useMemo } from 'react';
+import { View } from 'react-native';
+
+export default function TagGroupExample() {
+  const [selected, setSelected] = useState(new Set());
+  const isInvalid = useMemo(
+    () => Array.from(selected).length === 0,
+    [selected]
+  );
+
+  return (
+    <View className="gap-4">
+      <TagGroup
+        selectedKeys={selected}
+        selectionMode="multiple"
+        onSelectionChange={setSelected}
+        isInvalid={isInvalid}
+      >
+        <Label isInvalid={false}>设施</Label>
+        <TagGroup.List>
+          <TagGroup.Item id="laundry">洗衣</TagGroup.Item>
+          <TagGroup.Item id="fitness">健身房</TagGroup.Item>
+          <TagGroup.Item id="parking">停车</TagGroup.Item>
+          <TagGroup.Item id="pool">泳池</TagGroup.Item>
+          <TagGroup.Item id="breakfast">早餐</TagGroup.Item>
+        </TagGroup.List>
+        <Description hideOnInvalid>
+          {`已选：${Array.from(selected).join('、')}`}
+        </Description>
+        <FieldError>请至少选择一个分类</FieldError>
+      </TagGroup>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/tag-group.tsx>)。
+
+## API 参考
+
+### TagGroup
+
+| prop                  | type                               | default     | description                                                      |
+| --------------------- | ---------------------------------- | ----------- | ---------------------------------------------------------------- |
+| `children`            | `React.ReactNode`                  | -           | 渲染在标签组内的子节点                                           |
+| `size`                | `'sm' \| 'md' \| 'lg'`             | `'md'`      | 组内所有标签的尺寸                                               |
+| `variant`             | `'default' \| 'surface'`           | `'default'` | 组内所有标签的视觉变体                                           |
+| `selectionMode`       | `'none' \| 'single' \| 'multiple'` | `'none'`    | 允许的选中类型                                                   |
+| `selectedKeys`        | `Iterable<TagKey>`                 | -           | 当前选中键（受控）                                               |
+| `defaultSelectedKeys` | `Iterable<TagKey>`                 | -           | 初始选中键（非受控）                                             |
+| `disabledKeys`        | `Iterable<TagKey>`                 | -           | 应被禁用的标签键                                                 |
+| `isDisabled`          | `boolean`                          | `false`     | 是否禁用整个标签组                                               |
+| `isInvalid`           | `boolean`                          | `false`     | 是否处于非法状态                                                 |
+| `isRequired`          | `boolean`                          | `false`     | 是否必填                                                         |
+| `className`           | `string`                           | -           | 标签组容器的额外 class                                           |
+| `style`               | `StyleProp<ViewStyle>`             | -           | 标签组容器的额外样式                                             |
+| `animation`           | `"disable-all" \| undefined`       | -           | 设为 `"disable-all"` 可禁用全部动画（含子级）                    |
+| `onSelectionChange`   | `(keys: Set<TagKey>) => void`      | -           | 选中变化时调用                                                   |
+| `onRemove`            | `(keys: Set<TagKey>) => void`      | -           | 移除标签时调用                                                   |
+| `...ViewProps`        | `ViewProps`                        | -           | 支持 React Native `View` 的全部属性                              |
+
+#### TagKey
+
+`string | number` — 在 `TagGroup` 内标识标签的键类型。
+
+#### Animation
+
+使用 `animation="disable-all"` 可禁用全部动画（含子级）。省略或使用 `undefined` 为默认动画。
+
+### TagGroup.List
+
+| prop               | type                    | default | description                                        |
+| ------------------ | ----------------------- | ------- | -------------------------------------------------- |
+| `children`         | `React.ReactNode`       | -       | 列表内的子节点                                     |
+| `className`        | `string`                | -       | 列表容器的额外 class                               |
+| `style`            | `StyleProp<ViewStyle>`  | -       | 列表容器的额外样式                                 |
+| `renderEmptyState` | `() => React.ReactNode` | -       | 无标签时调用的渲染函数                             |
+| `...ViewProps`     | `ViewProps`             | -       | 支持 React Native `View` 的全部属性                |
+
+### TagGroup.Item
+
+| prop                | type                                                                    | default | description                                                                  |
+| ------------------- | ----------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode \| ((renderProps: TagRenderProps) => React.ReactNode)` | -       | 标签内容：字符串、元素，或接收 `TagRenderProps` 的渲染函数                   |
+| `id`                | `TagKey`                                                                | -       | 该标签的唯一标识                                                             |
+| `isDisabled`        | `boolean`                                                               | -       | 是否禁用该标签                                                               |
+| `className`         | `string`                                                                | -       | 标签的额外 class                                                             |
+| `style`             | `StyleProp<ViewStyle>`                                                  | -       | 标签的额外样式                                                               |
+| `...PressableProps` | `PressableProps`                                                        | -       | 支持 React Native `Pressable` 的全部属性                                       |
+
+#### TagRenderProps
+
+| prop         | type      | description                                                                 |
+| ------------ | --------- | --------------------------------------------------------------------------- |
+| `isSelected` | `boolean` | 当前是否选中                                                                 |
+| `isDisabled` | `boolean` | 是否禁用（根级、`disabledKeys` 与条目属性合并后的结果）                     |
+
+### TagGroup.ItemLabel
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 要渲染的文字内容                                   |
+| `className`    | `string`          | -       | 标签文字的额外 class                               |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                |
+
+### TagGroup.ItemRemoveButton
+
+| prop                | type                       | default | description                                                                              |
+| ------------------- | -------------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode`          | -       | 自定义图标或内容；省略时默认为关闭图标                                                   |
+| `className`         | `string`                   | -       | 移除按钮的额外 class                                                                     |
+| `iconProps`         | `TagRemoveButtonIconProps` | -       | 自定义默认关闭图标的属性；仅在没有 `children` 时生效                                     |
+| `hitSlop`           | `number`                   | `8`     | 扩大可点击区域                                                                           |
+| `...PressableProps` | `PressableProps`           | -       | 支持 React Native `Pressable` 的全部属性                                                 |
+
+#### TagRemoveButtonIconProps
+
+| prop    | type     | default | description |
+| ------- | -------- | ------- | ----------- |
+| `size`  | `number` | `12`    | 图标尺寸    |
+| `color` | `string` | -       | 图标颜色    |
+
+## Hooks
+
+### useTagGroup
+
+访问标签组根上下文，必须在 `TagGroup` 内使用。
+
+```tsx
+import { useTagGroup } from 'heroui-native';
+
+const {
+  selectedKeys,
+  disabledKeys,
+  selectionMode,
+  onSelectionChange,
+  onRemove,
+  isDisabled,
+  isInvalid,
+  isRequired,
+} = useTagGroup();
+```
+
+#### 返回值
+
+| property            | type                                         | description                    |
+| ------------------- | -------------------------------------------- | ------------------------------ |
+| `selectionMode`     | `'none' \| 'single' \| 'multiple'`           | 允许的选中类型                 |
+| `selectedKeys`      | `Set<TagKey>`                                | 当前选中的标签键               |
+| `disabledKeys`      | `Set<TagKey>`                                | 被禁用的标签键                 |
+| `onSelectionChange` | `(keys: Set<TagKey>) => void`                | 选中变化回调                   |
+| `onRemove`          | `((keys: Set<TagKey>) => void) \| undefined` | 移除标签回调                   |
+| `isDisabled`        | `boolean`                                    | 是否禁用整个标签组             |
+| `isInvalid`         | `boolean`                                    | 是否处于非法状态               |
+| `isRequired`        | `boolean`                                    | 是否必填                       |
+
+### useTagGroupItem
+
+访问单个标签上下文，必须在 `TagGroup.Item` 内使用。
+
+```tsx
+import { useTagGroupItem } from 'heroui-native';
+
+const { id, isSelected, isDisabled, allowsRemoving } = useTagGroupItem();
+```
+
+#### 返回值
+
+| property         | type      | description                                                                 |
+| ---------------- | --------- | --------------------------------------------------------------------------- |
+| `id`             | `TagKey`  | 该标签的唯一标识                                                            |
+| `isSelected`     | `boolean` | 当前是否选中                                                                |
+| `isDisabled`     | `boolean` | 是否禁用                                                                    |
+| `allowsRemoving` | `boolean` | 是否允许移除（当 `TagGroup` 提供 `onRemove` 时为 true）                      |

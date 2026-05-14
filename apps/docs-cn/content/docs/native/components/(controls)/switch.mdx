@@ -1,0 +1,344 @@
+---
+title: Switch
+description: 在开与关两种状态之间切换的拨动控件。
+links:
+  source_native: switch/switch.tsx
+  styles_native: switch/switch.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/switch-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/switch-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Switch } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Switch>
+  <Switch.Thumb>...</Switch.Thumb>
+  <Switch.StartContent>...</Switch.StartContent>
+  <Switch.EndContent>...</Switch.EndContent>
+</Switch>
+```
+
+- **Switch**：主容器，处理开关状态与用户交互。未提供子节点时渲染默认拇指；根据选中状态对缩放（按压）与背景色做动画；整块可点以切换。
+- **Switch.Thumb**：可选滑动拇指，在位置间移动，弹簧过渡。可放自定义内容（图标等）或通过样式与动画定制。
+- **Switch.StartContent**：可选，显示在开关左侧；常用于关态时的图标或文字；在容器内绝对定位。
+- **Switch.EndContent**：可选，显示在开关右侧；常用于开态时的图标或文字；在容器内绝对定位。
+
+## 用法
+
+### 基础用法
+
+未提供子节点时，Switch 使用默认拇指渲染。
+
+```tsx
+<Switch isSelected={isSelected} onSelectedChange={setIsSelected} />
+```
+
+### 自定义拇指
+
+通过 Thumb 子组件替换默认拇指。
+
+```tsx
+<Switch isSelected={isSelected} onSelectedChange={setIsSelected}>
+  <Switch.Thumb>...</Switch.Thumb>
+</Switch>
+```
+
+### 首尾内容
+
+在开关两侧添加图标或文字。
+
+```tsx
+<Switch isSelected={isSelected} onSelectedChange={setIsSelected}>
+  <Switch.Thumb />
+  <Switch.StartContent>...</Switch.StartContent>
+  <Switch.EndContent>...</Switch.EndContent>
+</Switch>
+```
+
+### 渲染函数
+
+根据开关状态用渲染函数动态渲染内容。
+
+```tsx
+<Switch isSelected={isSelected} onSelectedChange={setIsSelected}>
+  {({ isSelected, isDisabled }) => (
+    <>
+      <Switch.Thumb>
+        {({ isSelected }) => (isSelected ? <CheckIcon /> : <XIcon />)}
+      </Switch.Thumb>
+    </>
+  )}
+</Switch>
+```
+
+### 自定义动画
+
+为开关根与拇指自定义动画。
+
+```tsx
+<Switch
+  animation={{
+    scale: {
+      value: [1, 0.9],
+      timingConfig: { duration: 200 },
+    },
+    backgroundColor: {
+      value: ['#172554', '#eab308'],
+    },
+  }}
+>
+  <Switch.Thumb
+    animation={{
+      left: {
+        value: 4,
+        springConfig: {
+          damping: 30,
+          stiffness: 300,
+          mass: 1,
+        },
+      },
+      backgroundColor: {
+        value: ['#dbeafe', '#854d0e'],
+      },
+    }}
+  />
+</Switch>
+```
+
+### 关闭动画
+
+可整体关闭动画，或仅关闭部分组件的动画。
+
+```tsx
+{
+  /* 关闭所有动画（含子级） */
+}
+<Switch animation="disable-all">
+  <Switch.Thumb />
+</Switch>;
+
+{
+  /* 仅关闭根动画，拇指仍可动画 */
+}
+<Switch>
+  <Switch.Thumb animation={false} />
+</Switch>;
+```
+
+## 示例
+
+```tsx
+import { Switch } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { View } from 'react-native';
+import Animated, { ZoomIn } from 'react-native-reanimated';
+
+export default function SwitchExample() {
+  const [darkMode, setDarkMode] = React.useState(false);
+
+  return (
+    <View className="flex-row gap-4">
+      <Switch
+        isSelected={darkMode}
+        onSelectedChange={setDarkMode}
+        className="w-[56px] h-[32px]"
+        animation={{
+          backgroundColor: {
+            value: ['#172554', '#eab308'],
+          },
+        }}
+      >
+        <Switch.Thumb
+          className="size-[22px]"
+          animation={{
+            left: {
+              value: 4,
+              springConfig: {
+                damping: 30,
+                stiffness: 300,
+                mass: 1,
+              },
+            },
+          }}
+        />
+        <Switch.StartContent className="left-2">
+          {darkMode && (
+            <Animated.View key="sun" entering={ZoomIn.springify()}>
+              <Ionicons name="sunny" size={16} color="#854d0e" />
+            </Animated.View>
+          )}
+        </Switch.StartContent>
+        <Switch.EndContent className="right-2">
+          {!darkMode && (
+            <Animated.View key="moon" entering={ZoomIn.springify()}>
+              <Ionicons name="moon" size={16} color="#dbeafe" />
+            </Animated.View>
+          )}
+        </Switch.EndContent>
+      </Switch>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/switch.tsx)。
+
+## API 参考
+
+### Switch
+
+| prop                        | type                                                                 | default     | description                                                  |
+| --------------------------- | -------------------------------------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`                  | `React.ReactNode \| ((props: SwitchRenderProps) => React.ReactNode)` | `undefined` | 开关内部内容或渲染函数                                       |
+| `isSelected`                | `boolean`                                                            | `undefined` | 是否选中                                                     |
+| `isDisabled`                | `boolean`                                                            | `false`     | 是否禁用、不可交互                                           |
+| `className`                 | `string`                                                             | `undefined` | 根节点自定义 class                                           |
+| `animation`                 | `SwitchRootAnimation`                                                | -           | 动画配置                                                     |
+| `isAnimatedStyleActive`     | `boolean`                                                            | `true`      | 是否启用 Reanimated 动画样式                                 |
+| `onSelectedChange`          | `(isSelected: boolean) => void`                                      | -           | 选中状态变化时回调                                           |
+| `...AnimatedPressableProps` | `AnimatedProps<PressableProps>`                                      | -           | 支持 Reanimated Pressable 的全部属性                         |
+
+#### SwitchRenderProps
+
+| prop         | type      | description                    |
+| ------------ | --------- | ------------------------------ |
+| `isSelected` | `boolean` | 是否选中                       |
+| `isDisabled` | `boolean` | 是否禁用                       |
+
+#### SwitchRootAnimation
+
+Switch 根组件动画配置，可为：
+
+- `false` 或 `"disabled"`：仅关闭根动画
+- `"disable-all"`：关闭所有动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                           | type                                     | default                                                        | description                                     |
+| ------------------------------ | ---------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------- |
+| `state`                        | `'disabled' \| 'disable-all' \| boolean` | -                                                              | 关闭动画的同时仍允许自定义属性                  |
+| `scale.value`                  | `[number, number]`                       | `[1, 0.96]`                                                    | 缩放值 [未按压, 按压]                           |
+| `scale.timingConfig`           | `WithTimingConfig`                       | `{ duration: 150 }`                                            | 动画时间配置                                    |
+| `backgroundColor.value`        | `[string, string]`                       | 使用主题色                                                     | 背景色 [未选中, 选中]                           |
+| `backgroundColor.timingConfig` | `WithTimingConfig`                       | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | 背景色过渡时间配置                              |
+
+### Switch.Thumb
+
+| prop                    | type                                                                 | default     | description                                                  |
+| ----------------------- | -------------------------------------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode \| ((props: SwitchRenderProps) => React.ReactNode)` | `undefined` | 拇指内内容或渲染函数                                         |
+| `className`             | `string`                                                             | `undefined` | 拇指元素自定义 class                                         |
+| `animation`             | `SwitchThumbAnimation`                                               | -           | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                                                            | `true`      | 是否启用 Reanimated 动画样式                                 |
+| `...ViewProps`          | `ViewProps`                                                          | -           | 支持 React Native `View` 的全部标准属性                      |
+
+#### SwitchThumbAnimation
+
+`Switch.Thumb` 动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                           | type                    | default                                                        | description                                                             |
+| ------------------------------ | ----------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `state`                        | `'disabled' \| boolean` | -                                                              | 关闭动画的同时仍允许自定义属性                                          |
+| `left.value`                   | `number`                | `2`                                                            | 距边缘偏移（未选中偏左，选中偏右）                                      |
+| `left.springConfig`            | `WithSpringConfig`      | `{ damping: 120, stiffness: 1600, mass: 2 }`                   | 拇指位置弹簧配置                                                        |
+| `backgroundColor.value`        | `[string, string]`      | `['white', theme accent-foreground color]`                     | 背景色 [未选中, 选中]                                                   |
+| `backgroundColor.timingConfig` | `WithTimingConfig`      | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | 背景色过渡时间配置                                                      |
+
+### Switch.StartContent
+
+| prop           | type              | default     | description                                        |
+| -------------- | ----------------- | ----------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | `undefined` | 左侧区域内容                                       |
+| `className`    | `string`          | `undefined` | 内容区域自定义 class                               |
+| `...ViewProps` | `ViewProps`       | -           | 支持 React Native `View` 的全部标准属性            |
+
+### Switch.EndContent
+
+| prop           | type              | default     | description                                        |
+| -------------- | ----------------- | ----------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | `undefined` | 右侧区域内容                                       |
+| `className`    | `string`          | `undefined` | 内容区域自定义 class                               |
+| `...ViewProps` | `ViewProps`       | -           | 支持 React Native `View` 的全部标准属性            |
+
+## Hooks
+
+### useSwitch
+
+用于访问 Switch 上下文，便于在子组件中读取开关状态或封装自定义结构。
+
+**返回值：**
+
+| Property     | Type      | Description                    |
+| ------------ | --------- | ------------------------------ |
+| `isSelected` | `boolean` | 是否选中                       |
+| `isDisabled` | `boolean` | 是否禁用                       |
+
+**示例：**
+
+```tsx
+import { useSwitch } from 'heroui-native';
+
+function CustomSwitchContent() {
+  const { isSelected, isDisabled } = useSwitch();
+
+  return (
+    <View>
+      <Text>Status: {isSelected ? 'On' : 'Off'}</Text>
+      {isDisabled && <Text>Disabled</Text>}
+    </View>
+  );
+}
+
+// 用法
+<Switch>
+  <CustomSwitchContent />
+  <Switch.Thumb />
+</Switch>;
+```
+
+## 特别说明
+
+### 边框样式
+
+若需为开关根节点加边框，请使用 `outline` 相关样式而非 `border`，避免影响拇指位置的内部宽度计算：
+
+```tsx
+<Switch className="outline outline-accent">
+  <Switch.Thumb />
+</Switch>
+```
+
+使用 `outline` 可在不改变内部宽度计算的前提下显示边框，确保拇指动画正确。
+
+### 与 ControlField 组合
+
+Switch 可与 ControlField 组合以共享按压态、扩大点击区域：
+
+```tsx
+import { Description, ControlField, Label } from 'heroui-native';
+
+<ControlField isSelected={isSelected} onSelectedChange={setIsSelected}>
+  <View className="flex-1">
+    <Label>Enable notifications</Label>
+    <Description>Receive push notifications</Description>
+  </View>
+  <ControlField.Indicator />
+</ControlField>
+```
+
+包在 ControlField 内时，整个容器上的按压都会驱动开关，触控目标更大、体验更好。

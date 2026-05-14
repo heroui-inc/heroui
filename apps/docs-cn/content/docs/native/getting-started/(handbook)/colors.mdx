@@ -1,0 +1,393 @@
+---
+title: Colors
+description: HeroUI Native 的色板与主题系统
+icon: bucket-paint
+links:
+  themes: true
+  tailwind: theme
+---
+
+import {ColorSwatch, ColorPalette} from "@/components/color-swatch";
+
+HeroUI Native 使用 CSS 变量定义颜色，并可在浅色与深色主题间自动切换。所有颜色采用 `oklch` 色彩空间，便于获得更平滑的过渡。
+
+## 工作原理
+
+HeroUI Native 的颜色系统建立在 [Tailwind CSS v4](https://tailwindcss.com/docs/theme) 主题之上，并通过 [Uniwind](https://uniwind.dev/) 接入。导入 `heroui-native/styles` 时，会使用 Tailwind 内置调色板并映射到语义化变量。
+
+**命名约定：**
+
+- 无后缀色一般为背景色（如 `--accent`）
+- 带 `-foreground` 的一般为该背景上的文字色（如 `--accent-foreground`）
+
+**用法：**
+
+```tsx
+import { View, Text } from 'react-native';
+
+// 同时获得合适的背景与文字色
+<View className="bg-background flex-1">
+  <View className="bg-accent p-4 rounded-lg">
+    <Text className="text-accent-foreground">你好</Text>
+  </View>
+</View>;
+```
+
+### 基础色
+
+以下四种颜色在各主题中保持不变：
+
+<div className="flex flex-wrap gap-4 sm:gap-6">
+  <ColorSwatch name="白色" variable="--white" />
+  <ColorSwatch name="黑色" variable="--black" />
+  <ColorSwatch name="雪白" variable="--snow" />
+  <ColorSwatch name="月蚀" variable="--eclipse" />
+</div>
+
+### 背景与表面
+
+<ColorPalette
+  colors={[
+    { name: "背景", variable: "--background", foreground: "--foreground" },
+    { name: "前景", variable: "--foreground" },
+    { name: "表面", variable: "--surface", foreground: "--surface-foreground" },
+    { name: "表面前景", variable: "--surface-foreground" },
+    { name: "遮罩层", variable: "--overlay", foreground: "--overlay-foreground" },
+    { name: "遮罩前景", variable: "--overlay-foreground" },
+  ]}
+/>
+
+### 主色
+
+**强调色（Accent）** — 主品牌色，用于主要操作  
+**柔和强调（Accent Soft）** — 较浅版本，用于次要操作
+
+<ColorPalette
+  colors={[
+    { name: "强调色", variable: "--accent", foreground: "--accent-foreground" },
+    { name: "强调色前景", variable: "--accent-foreground" },
+    { name: "柔和强调", variable: "--accent-soft", foreground: "--accent-soft-foreground" },
+    { name: "柔和强调前景", variable: "--accent-soft-foreground" },
+  ]}
+/>
+
+### 状态色
+
+用于提示、校验与状态信息：
+
+<ColorPalette
+  colors={[
+    { name: "成功", variable: "--success", foreground: "--success-foreground" },
+    { name: "成功前景", variable: "--success-foreground" },
+    { name: "警告", variable: "--warning", foreground: "--warning-foreground" },
+    { name: "警告前景", variable: "--warning-foreground" },
+    { name: "危险", variable: "--danger", foreground: "--danger-foreground" },
+    { name: "危险前景", variable: "--danger-foreground" },
+  ]}
+/>
+
+### 表单字段色
+
+用于各输入类组件的一致表单样式：
+
+<ColorPalette
+  colors={[
+    { name: "字段背景", variable: "--field-background", foreground: "--field-foreground" },
+    { name: "字段前景", variable: "--field-foreground" },
+    { name: "字段占位", variable: "--field-placeholder" },
+    { name: "字段边框", variable: "--field-border" },
+  ]}
+/>
+
+### 其他颜色
+
+<ColorPalette
+  colors={[
+    { name: "默认", variable: "--default", foreground: "--default-foreground" },
+    { name: "默认前景", variable: "--default-foreground" },
+    { name: "弱化", variable: "--muted", foreground: "--foreground" },
+    { name: "边框", variable: "--border" },
+    { name: "聚焦", variable: "--focus" },
+    { name: "链接", variable: "--link" },
+  ]}
+/>
+
+## 如何使用颜色
+
+**在组件中：**
+
+```tsx
+import { View, Text } from 'react-native';
+import { Button } from 'heroui-native';
+
+<View className="bg-background flex-1 p-4">
+  <Text className="text-foreground mb-4">内容</Text>
+  <Button variant="primary" className="bg-accent">
+    <Button.Label className="text-accent-foreground">点我</Button.Label>
+  </Button>
+</View>;
+```
+
+**在 CSS 文件中：**
+
+```css title="global.css"
+/* 直接使用 CSS 变量 */
+.container {
+  flex: 1;
+  background-color: var(--accent);
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius);
+}
+```
+
+## 默认主题
+
+完整主题定义见仓库中的 [variables.css](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/variables.css)。主题会通过 [Uniwind 主题系统](https://docs.uniwind.dev/theming/basics) 在浅色与深色间自动切换，并支持跟随系统与程序化切换。
+
+<CollapsibleCode lang="css" code={`  @theme {
+    /* Primitive Colors (Do not change between light and dark) */
+    --white: oklch(100% 0 0);
+    --black: oklch(0% 0 0);
+    --snow: oklch(0.9911 0 0);
+    --eclipse: oklch(0.2103 0.0059 285.89);
+
+    /* Border */
+    --border-width: 1px;
+    --field-border-width: 0px;
+
+    /* Base radius */
+    --radius: 0.5rem;
+    --field-radius: calc(var(--radius) * 1.5);
+
+    /* Opacity */
+    --opacity-disabled: 0.5;
+}
+
+@layer theme {
+    :root {
+      @variant light {
+        /* Base Colors */
+        --background: oklch(0.9702 0 0);
+        --foreground: var(--eclipse);
+
+        /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+        --surface: var(--white);
+        --surface-foreground: var(--foreground);
+
+        --surface-secondary: oklch(0.9524 0.0013 286.37);
+        --surface-secondary-foreground: var(--foreground);
+
+        --surface-tertiary: oklch(0.9373 0.0013 286.37);
+        --surface-tertiary-foreground: var(--foreground);
+
+        /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+        --overlay: var(--white);
+        --overlay-foreground: var(--foreground);
+        --backdrop: oklch(0% 0 0 / 20%);
+
+        --muted: oklch(0.5517 0.0138 285.94);
+
+        --default: oklch(94% 0.001 286.375);
+        --default-foreground: var(--eclipse);
+
+        --accent: oklch(0.6204 0.195 253.83);
+        --accent-foreground: var(--snow);
+
+        /* Form Fields */
+        --field-background: var(--white);
+        --field-foreground: oklch(0.2103 0.0059 285.89);
+        --field-placeholder: var(--muted);
+        --field-border: transparent; /* no border by default on form fields */
+
+        /* Status Colors */
+        --success: oklch(0.7329 0.1935 150.81);
+        --success-foreground: var(--eclipse);
+
+        --warning: oklch(0.7819 0.1585 72.33);
+        --warning-foreground: var(--eclipse);
+
+        --danger: oklch(0.6532 0.2328 25.74);
+        --danger-foreground: var(--snow);
+
+        /* Component Colors */
+        --segment: var(--white);
+        --segment-foreground: var(--eclipse);
+
+        /* Misc Colors */
+        --border: oklch(90% 0.004 286.32);
+        --separator: oklch(74% 0.004 286.32);
+        --focus: var(--accent);
+        --link: var(--foreground);
+
+        /* Shadows */
+        --surface-shadow:
+          0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+          0 0 1px 0 rgba(0, 0, 0, 0.06);
+        --overlay-shadow:
+          0 2px 8px 0 rgba(0, 0, 0, 0.02), 0 -6px 12px 0 rgba(0, 0, 0, 0.01),
+          0 14px 28px 0 rgba(0, 0, 0, 0.03);
+        --field-shadow:
+          0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+          0 0 1px 0 rgba(0, 0, 0, 0.06);
+      }
+
+      @variant dark {
+        /* Base Colors */
+        --background: oklch(12% 0.005 285.823);
+        --foreground: var(--snow);
+
+        /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+        --surface: oklch(0.2103 0.0059 285.89);
+        --surface-foreground: var(--foreground);
+
+        --surface-secondary: oklch(0.257 0.0037 286.14);
+        --surface-secondary-foreground: var(--foreground);
+
+        --surface-tertiary: oklch(0.2721 0.0024 247.91);
+        --surface-tertiary-foreground: var(--foreground);
+
+        /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) - lighter for contrast */
+        --overlay: oklch(0.2103 0.0059 285.89);
+        --overlay-foreground: var(--foreground);
+        --backdrop: oklch(0% 0 0 / 20%);
+
+        --muted: oklch(70.5% 0.015 286.067);
+
+        --default: oklch(27.4% 0.006 286.033);
+        --default-foreground: var(--snow);
+
+        --accent: oklch(0.6204 0.195 253.83);
+        --accent-foreground: var(--snow);
+
+        /* Form Field Defaults - Colors (only the ones that are different from light theme) */
+        --field-background: oklch(0.2103 0.0059 285.89);
+        --field-foreground: var(--foreground);
+        --field-placeholder: var(--muted);
+        --field-border: transparent; /* no border by default on form fields */
+
+        /* Status Colors */
+        --success: oklch(0.7329 0.1935 150.81);
+        --success-foreground: var(--eclipse);
+
+        --warning: oklch(0.8203 0.1388 76.34);
+        --warning-foreground: var(--eclipse);
+
+        --danger: oklch(0.594 0.1967 24.63);
+        --danger-foreground: var(--snow);
+
+        /* Component Colors */
+        --segment: oklch(0.3964 0.01 285.93);
+        --segment-foreground: var(--foreground);
+
+        /* Misc Colors */
+        --border: oklch(28% 0.006 286.033);
+        --separator: oklch(40% 0.006 286.033);
+        --focus: var(--accent);
+        --link: var(--foreground);
+
+        /* Shadows */
+        --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+        --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+        --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
+      }
+    }
+  }
+`}
+/>
+
+
+## 自定义颜色
+
+**覆盖已有颜色：**
+
+```css
+@layer theme {
+  @variant light {
+    /* Override default colors */
+    --accent: oklch(0.65 0.25 270); /* Custom indigo accent */
+    --success: oklch(0.65 0.15 155);
+  }
+
+  @variant dark {
+    /* Override dark theme colors */
+    --accent: oklch(0.65 0.25 270);
+    --success: oklch(0.75 0.12 155);
+  }
+}
+```
+
+**提示：** 可在 [oklch.com](https://oklch.com) 转换颜色。
+
+**添加自定义颜色：**
+
+```css
+@layer theme {
+  @variant light {
+    --info: oklch(0.6 0.15 210);
+    --info-foreground: oklch(0.98 0 0);
+  }
+
+  @variant dark {
+    --info: oklch(0.7 0.12 210);
+    --info-foreground: oklch(0.15 0 0);
+  }
+}
+
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+```
+
+随后即可使用：
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="bg-info p-4 rounded-lg">
+  <Text className="text-info-foreground">提示信息</Text>
+</View>;
+```
+
+> **说明**：更多主题变量及其在 Tailwind CSS v4 中的工作方式，见 [Tailwind CSS Theme 文档](https://tailwindcss.com/docs/theme)。
+
+## useThemeColor 钩子
+
+`useThemeColor` 已支持一次选取多种颜色，便于复杂主题场景。
+
+**多色选取：**
+
+可一次读取多个相关颜色，适合需要成组使用的场景：
+
+```tsx
+import { useThemeColor } from 'heroui-native';
+
+// 一次选取多个颜色
+const [accent, accentForeground, success, danger] = useThemeColor([
+  'accent',
+  'accentForeground',
+  'success',
+  'danger',
+]);
+
+// 使用选取的颜色
+<View style={{ backgroundColor: accent }}>
+  <Text style={{ color: accentForeground }}>强调色文字</Text>
+</View>;
+```
+
+该能力在需要同时读取并应用多色时，可减少重复调用、简化主题相关代码。
+
+## 实用建议
+
+- 尽量使用颜色变量，避免硬编码色值
+- 前景/背景成对使用以保证对比度
+- 在浅色与深色模式下分别测试
+- 系统会尊重用户的主题偏好设置
+
+## 相关文档
+
+- [主题](/docs/native/getting-started/theming) — 了解主题系统
+- [样式](/docs/native/getting-started/styling) — 使用 CSS 为组件添加样式
+- [设计原则](/docs/native/getting-started/design-principles) — 理解 HeroUI 的设计理念
