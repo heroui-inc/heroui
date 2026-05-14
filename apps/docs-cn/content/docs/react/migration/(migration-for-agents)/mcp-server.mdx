@@ -1,0 +1,175 @@
+---
+title: MCP服务器
+description: 在 AI 助手中访问 HeroUI v2 到 v3 的迁移指南
+---
+
+HeroUI 迁移 MCP 服务器使 AI 助手可以直接访问 HeroUI v2 到 v3 的迁移文档。
+
+迁移 MCP 服务器使用 **Streamable HTTP 传输**（基于 URL）并部署在`https://migration-mcp.heroui.com`。查看源代码[GitHub](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp).
+
+<Callout>
+  迁移 MCP 仅用于**迁移**。完成迁移后，切换到[HeroUI React MCP 服务器](/docs/react/getting-started/mcp-server)用于 v3 组件开发。
+</Callout>
+
+## 快速设置
+
+### Cursor
+
+添加到 **Cursor 设置** → **工具** → **MCP 服务器**，或项目的 `.cursor/mcp.json`：
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+要了解更多信息，请参阅 [Cursor 文档](https://cursor.com/docs/context/mcp)。
+
+### Claude Code
+
+添加到项目的 `.mcp.json`：
+
+```json title=".mcp.json"
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "type": "http",
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+添加配置后，重启 Claude Code 并运行 `/mcp`，在列表中查看 HeroUI 迁移 MCP。若显示 **已连接**，即可开始使用。
+
+请参阅 [Claude Code MCP 文档](https://docs.claude.com/en/docs/claude-code/mcp)了解更多详情。
+
+### Windsurf
+
+将迁移 MCP 服务器添加到您的项目`.windsurf/mcp.json`配置文件：
+
+```json title=".windsurf/mcp.json"
+{
+  "mcpServers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+添加配置后，重新启动Windsurf以激活MCP服务器。
+
+请参阅[Windsurf MCP 文档](https://docs.windsurf.com/windsurf/cascade/mcp)了解更多详情。
+
+### Zed
+
+将迁移 MCP 添加到你的 `settings.json`。通过命令面板打开设置（`zed: open settings`）或使用 `Cmd-,`（macOS）/ `Ctrl-,`（Linux）：
+
+```json title="settings.json"
+{
+  "context_servers": {
+    "heroui-migration": {
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+请参阅[Zed MCP 文档](https://zed.dev/docs/ai/mcp)了解更多详情。
+
+### VS Code
+
+若要在 VS Code 中通过 GitHub Copilot 配置 MCP，请将迁移 MCP 添加到项目的 `.vscode/mcp.json`：
+
+```json title=".vscode/mcp.json"
+{
+  "servers": {
+    "heroui-migration": {
+      "type": "http",
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+添加配置后，打开`.vscode/mcp.json`然后单击herui-migration 服务器旁边的**开始**。
+
+请参阅[VS Code MCP 文档](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)了解更多详情。
+
+### Codex
+
+将迁移 MCP 添加到 `~/.codex/config.toml`（或项目内的 `.codex/config.toml`）：
+
+```toml title="config.toml"
+[mcp_servers.heroui-migration]
+url = "https://migration-mcp.heroui.com"
+```
+
+添加配置后，重启 Codex 并在 TUI 中运行 `/mcp` 以确认服务器已激活。
+
+请参阅 [Codex MCP 文档](https://developers.openai.com/codex/mcp)了解更多详情。
+
+### OpenCode
+
+将迁移 MCP 添加到项目的 `opencode.json`：
+
+```json title="opencode.json"
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "heroui-migration": {
+      "type": "remote",
+      "url": "https://migration-mcp.heroui.com"
+    }
+  }
+}
+```
+
+添加配置后，重新启动OpenCode以激活MCP服务器。
+
+请参阅[OpenCode MCP 文档](https://open-code.ai/docs/en/mcp-servers)了解更多详情。
+
+## 用法
+
+配置完成后，向您的 AI 助手询问以下问题：
+
+- “帮我将 Button 从 HeroUI v2 迁移到 v3”
+- “获取我的项目的完整迁移工作流程”
+- “复选框迁移有何变化？”
+- “显示 Card 和 Modal 的迁移指南”
+- “获取样式迁移指南”
+- “我需要迁移哪些钩子？”
+
+## 可用工具
+
+Migration MCP 服务器为 AI 助手提供以下工具：
+
+|工具|描述|
+|------|-------------|
+| `get_migration_workflow` |获取全面的迁移指南。使用`migrationType: "full"`（默认）或`"incremental"`完整迁移方法与增量迁移方法|
+| `list_component_migration_guides` |列出所有 39 个可用组件迁移指南|
+| `get_component_migration_guides` | 获取指定组件的迁移指南。传入 `components: ["button", "card"]`（kebab-case） |
+| `get_styling_migration_guide` |获取样式迁移指南（实用程序类、颜色标记、CSS 变量）|
+| `get_hooks_migration_guide` |获取 hooks 迁移指南（useDisclosure → useOverlayState 等）|
+
+## 可用提示
+
+迁移 MCP 服务器提供引导提示，可在代理聊天中与斜杠命令一起使用：
+
+| 提示词 | 描述 |
+|--------|-------------|
+| `analyze-and-plan` | 分析项目以识别所有 HeroUI v2 组件并创建迁移计划。建议作为迁移第一步。可选：`migrationType: "full"`（默认）或 `"incremental"` |
+| `implement-migration` | 分阶段实施组件迁移，并设置检查点供用户确认。完成组件迁移与依赖切换后，继续指导 hooks 与样式迁移。可选：`migrationType: "full"`（默认）或 `"incremental"` |
+
+**工作流程：** 运行`analyze-and-plan`首先创建您的迁移计划，然后使用`implement-migration`一步步执行它。
+
+## 链接
+
+- [GitHub 存储库](https://github.com/heroui-inc/heroui-mcp/tree/main/apps/migration-mcp)
+- [Discord 社区](https://discord.gg/9b6yyZKmH4)
+- [Model Context Protocol](https://modelcontextprotocol.io/) — 了解 MCP
