@@ -1,9 +1,11 @@
-import type {ReactNode} from "react";
+import type {CSSProperties, ReactNode} from "react";
 
 import {Separator} from "@heroui/react";
 
 import {HeaderBanner, ProBanner} from "@/app/(home)/components/pro-banner";
+import {SHOW_BANNER} from "@/app/(home)/components/pro-constants";
 import {baseOptions} from "@/app/layout.config";
+import {DesignThemeSelector} from "@/components/design-theme-selector";
 import {FrameworksTabs} from "@/components/frameworks-tabs";
 import {DocsLayout} from "@/components/fumadocs/layouts/notebook";
 import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
@@ -12,11 +14,21 @@ import {HeroUILogo} from "@/components/heroui-logo";
 import {VersionSelector} from "@/components/version-selector";
 import {source} from "@/lib/source";
 
+const DOCS_TOP_BANNER_HEIGHT = "2rem";
+
 export default function Layout({children}: {children: ReactNode}) {
+  // The top banner is rendered in normal flow, so --fd-banner-height would incorrectly
+  // offset sticky docs elements after the banner scrolls away. Reduce only the docs
+  // viewport height to keep the sidebar scroll area inside the visible viewport.
+  const layoutStyle = SHOW_BANNER
+    ? ({"--fd-docs-height": `calc(100dvh - ${DOCS_TOP_BANNER_HEIGHT})`} as CSSProperties)
+    : undefined;
+
   return (
     <>
       <HeaderBanner />
       <DocsLayout
+        containerProps={{style: layoutStyle}}
         tabMode="navbar"
         tree={source.pageTree}
         sidebar={{
@@ -65,6 +77,7 @@ export default function Layout({children}: {children: ReactNode}) {
           ...baseOptions.nav,
           children: (
             <div className="mr-2 flex items-center gap-3 md:mr-0" id="nd-nav-actions">
+              <DesignThemeSelector />
               <GitHubLinkSmall />
             </div>
           ),

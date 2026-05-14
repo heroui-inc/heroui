@@ -63,6 +63,7 @@ import * as SwitchDemos from "./switch";
 import * as TableDemos from "./table";
 import * as TabsDemos from "./tabs";
 import * as TagGroupDemos from "./tag-group";
+import * as TextDemos from "./text";
 import * as TextAreaDemos from "./textarea";
 import * as TextFieldDemos from "./textfield";
 import * as TimeFieldDemos from "./time-field";
@@ -1794,6 +1795,27 @@ export const demos: Record<string, DemoItem> = {
   "textarea-variants": {
     component: TextAreaDemos.Variants,
     file: "textarea/variants.tsx",
+  },
+  // Text demos
+  "text-default": {
+    component: TextDemos.Default,
+    file: "text/default.tsx",
+  },
+  "text-primitives": {
+    component: TextDemos.Primitives,
+    file: "text/primitives.tsx",
+  },
+  "text-prose": {
+    component: TextDemos.Prose,
+    file: "text/prose.tsx",
+  },
+  "text-render-props": {
+    component: TextDemos.RenderProps,
+    file: "text/render-props.tsx",
+  },
+  "text-typography-scale": {
+    component: TextDemos.TypographyScale,
+    file: "text/typography-scale.tsx",
   },
   // TextField demos
   "textfield-basic": {

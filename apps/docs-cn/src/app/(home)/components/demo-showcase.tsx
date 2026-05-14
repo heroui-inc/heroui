@@ -210,7 +210,7 @@ export function DemoShowcase() {
           </div>
         </div>
         {/* Mobile: always show DemoComponents */}
-        <div className="mt-5 flex w-full justify-center lg:hidden">
+        <div className="flex w-full justify-center rounded-2xl bg-background py-8 lg:hidden">
           <DemoComponents />
         </div>
         {/* Desktop: respect tab selection */}

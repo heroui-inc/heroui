@@ -20,11 +20,11 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <LinkRoot
             className="flex items-center gap-1 rounded-full bg-accent/10 px-2 py-1 text-xs text-accent transition-colors hover:bg-accent-soft-hover"
-            href="/docs/react/releases/v3-0-3"
+            href="/docs/react/releases/v3-0-4"
           >
             <Rocket className="size-3 text-accent" />
             <span className="max-w-60 truncate sm:max-w-full">
-              HeroUI v3.0.3 — 依赖减少约 90%，表格行可展开等更多更新
+              HeroUI v3.0.4：全新 Text 组件、文档主题选择与多项修复
             </span>
           </LinkRoot>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">

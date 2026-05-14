@@ -6,6 +6,7 @@
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
 @import "@heroui/styles";
+@import "../styles/theme-presets.css";
 
 @keyframes float-stars {
   0% {
