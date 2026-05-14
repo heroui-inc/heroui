@@ -124,7 +124,7 @@ export function NewsletterForm() {
             onChange={setEmail}
           >
             <Label className="pb-1 text-sm font-medium tracking-[-0.07px] after:hidden">
-              Hero Newsletter
+              Hero 通讯
             </Label>
             <Input placeholder="name@email.com" value={email} />
             <FieldError className="mt-1 px-1 text-xs" />

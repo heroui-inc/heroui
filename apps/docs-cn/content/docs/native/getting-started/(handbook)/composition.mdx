@@ -1,5 +1,5 @@
 ---
-title: Composition
+title: 组合
 description: 用组件组合模式搭建灵活 UI
 icon: layers
 ---
@@ -17,14 +17,14 @@ function DialogExample() {
   return (
     <Dialog>
       <Dialog.Trigger>
-        Open Dialog
+        打开对话框
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content>
           <Dialog.Close />
-          <Dialog.Title>Dialog Title</Dialog.Title>
-          <Dialog.Description>Dialog description</Dialog.Description>
+          <Dialog.Title>对话框标题</Dialog.Title>
+          <Dialog.Description>对话框说明</Dialog.Description>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog>
@@ -44,17 +44,17 @@ function DialogExample() {
     <Dialog>
       {/* asChild：Button 直接作为触发器，无额外包裹 */}
       <Dialog.Trigger asChild>
-        <Button variant="primary">Open Dialog</Button>
+        <Button variant="primary">打开对话框</Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content>
           {/* Dialog.Close 也可使用 asChild */}
           <Dialog.Close asChild>
-            <Button variant="ghost" size="sm">Cancel</Button>
+            <Button variant="ghost" size="sm">取消</Button>
           </Dialog.Close>
-          <Dialog.Title>Dialog Title</Dialog.Title>
-          <Dialog.Description>Dialog description</Dialog.Description>
+          <Dialog.Title>对话框标题</Dialog.Title>
+          <Dialog.Description>对话框说明</Dialog.Description>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog>
@@ -81,7 +81,7 @@ function ProductCard({ title, description, price, onBuy, ...props }) {
       </Card.Body>
       <Card.Footer>
         <Button variant="primary" onPress={onBuy}>
-          <Button.Label>Buy now</Button.Label>
+          <Button.Label>立即购买</Button.Label>
         </Button>
       </Card.Footer>
     </Card>
@@ -110,19 +110,19 @@ function PopoverButton({ children, popoverContent, ...props }) {
 
 // 用法
 <ProductCard
-  title="Living room Sofa"
-  description="Perfect for modern spaces"
+  title="客厅沙发"
+  description="适合现代家居空间"
   price="$450"
-  onBuy={() => console.log('Buy')}
+  onBuy={() => console.log('购买')}
 />
 
 <PopoverButton variant="tertiary" popoverContent={
   <View>
-    <Popover.Title>Information</Popover.Title>
-    <Popover.Description>Additional details here</Popover.Description>
+    <Popover.Title>说明</Popover.Title>
+    <Popover.Description>更多详情见此处</Popover.Description>
   </View>
 }>
-  Show Info
+  显示说明
 </PopoverButton>
 ```
 

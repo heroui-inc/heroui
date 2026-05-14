@@ -1,5 +1,5 @@
 ---
-title: Colors
+title: 颜色
 description: HeroUI Native 的色板与主题系统
 icon: bucket-paint
 links:
@@ -146,32 +146,28 @@ import { Button } from 'heroui-native';
 完整主题定义见仓库中的 [variables.css](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/variables.css)。主题会通过 [Uniwind 主题系统](https://docs.uniwind.dev/theming/basics) 在浅色与深色间自动切换，并支持跟随系统与程序化切换。
 
 <CollapsibleCode lang="css" code={`  @theme {
-    /* Primitive Colors (Do not change between light and dark) */
+    /* 原色（浅/深色下保持不变） */
     --white: oklch(100% 0 0);
     --black: oklch(0% 0 0);
     --snow: oklch(0.9911 0 0);
     --eclipse: oklch(0.2103 0.0059 285.89);
 
-    /* Border */
+    /* 边框 */
     --border-width: 1px;
     --field-border-width: 0px;
 
-    /* Base radius */
+    /* 基础圆角 */
     --radius: 0.5rem;
     --field-radius: calc(var(--radius) * 1.5);
 
-    /* Opacity */
+    /* 不透明度 */
     --opacity-disabled: 0.5;
 }
 
 @layer theme {
     :root {
       @variant light {
-        /* Base Colors */
-        --background: oklch(0.9702 0 0);
-        --foreground: var(--eclipse);
-
-        /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+        /* 界面基准（背景与主文本） */
         --surface: var(--white);
         --surface-foreground: var(--foreground);
 
@@ -181,7 +177,7 @@ import { Button } from 'heroui-native';
         --surface-tertiary: oklch(0.9373 0.0013 286.37);
         --surface-tertiary-foreground: var(--foreground);
 
-        /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+        /* 遮罩层：用于浮层组件（对话框、气泡、模态框、菜单等） */
         --overlay: var(--white);
         --overlay-foreground: var(--foreground);
         --backdrop: oklch(0% 0 0 / 20%);
@@ -194,13 +190,13 @@ import { Button } from 'heroui-native';
         --accent: oklch(0.6204 0.195 253.83);
         --accent-foreground: var(--snow);
 
-        /* Form Fields */
+        /* 表单字段 */
         --field-background: var(--white);
         --field-foreground: oklch(0.2103 0.0059 285.89);
         --field-placeholder: var(--muted);
-        --field-border: transparent; /* no border by default on form fields */
+        --field-border: transparent; /* 表单字段默认无边框 */
 
-        /* Status Colors */
+        /* 状态色 */
         --success: oklch(0.7329 0.1935 150.81);
         --success-foreground: var(--eclipse);
 
@@ -210,17 +206,17 @@ import { Button } from 'heroui-native';
         --danger: oklch(0.6532 0.2328 25.74);
         --danger-foreground: var(--snow);
 
-        /* Component Colors */
+        /* 组件色 */
         --segment: var(--white);
         --segment-foreground: var(--eclipse);
 
-        /* Misc Colors */
+        /* 其他 */
         --border: oklch(90% 0.004 286.32);
         --separator: oklch(74% 0.004 286.32);
         --focus: var(--accent);
         --link: var(--foreground);
 
-        /* Shadows */
+        /* 阴影 */
         --surface-shadow:
           0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
           0 0 1px 0 rgba(0, 0, 0, 0.06);
@@ -233,11 +229,11 @@ import { Button } from 'heroui-native';
       }
 
       @variant dark {
-        /* Base Colors */
+        /* 界面基准（背景与主文本） */
         --background: oklch(12% 0.005 285.823);
         --foreground: var(--snow);
 
-        /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+        /* 表面：用于非浮层组件（卡片、手风琴、折叠组等） */
         --surface: oklch(0.2103 0.0059 285.89);
         --surface-foreground: var(--foreground);
 
@@ -247,7 +243,7 @@ import { Button } from 'heroui-native';
         --surface-tertiary: oklch(0.2721 0.0024 247.91);
         --surface-tertiary-foreground: var(--foreground);
 
-        /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) - lighter for contrast */
+        /* 遮罩层：用于浮层组件（对话框、气泡、模态框、菜单等）——深色下略浅以保证对比度 */
         --overlay: oklch(0.2103 0.0059 285.89);
         --overlay-foreground: var(--foreground);
         --backdrop: oklch(0% 0 0 / 20%);
@@ -260,13 +256,13 @@ import { Button } from 'heroui-native';
         --accent: oklch(0.6204 0.195 253.83);
         --accent-foreground: var(--snow);
 
-        /* Form Field Defaults - Colors (only the ones that are different from light theme) */
+        /* 表单字段默认值——颜色（仅列出与浅色主题不同的项） */
         --field-background: oklch(0.2103 0.0059 285.89);
         --field-foreground: var(--foreground);
         --field-placeholder: var(--muted);
-        --field-border: transparent; /* no border by default on form fields */
+        --field-border: transparent; /* 表单字段默认无边框 */
 
-        /* Status Colors */
+        /* 状态色 */
         --success: oklch(0.7329 0.1935 150.81);
         --success-foreground: var(--eclipse);
 
@@ -276,20 +272,20 @@ import { Button } from 'heroui-native';
         --danger: oklch(0.594 0.1967 24.63);
         --danger-foreground: var(--snow);
 
-        /* Component Colors */
+        /* 组件色 */
         --segment: oklch(0.3964 0.01 285.93);
         --segment-foreground: var(--foreground);
 
-        /* Misc Colors */
+        /* 其他 */
         --border: oklch(28% 0.006 286.033);
         --separator: oklch(40% 0.006 286.033);
         --focus: var(--accent);
         --link: var(--foreground);
 
-        /* Shadows */
-        --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+        /* 阴影 */
+        --surface-shadow: 0 0 0 0 transparent inset; /* 深色模式下无表面阴影 */
         --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.2) inset;
-        --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
+        --field-shadow: 0 0 0 0 transparent inset; /* 透明阴影，便于 ring 工具类生效 */
       }
     }
   }
@@ -304,13 +300,13 @@ import { Button } from 'heroui-native';
 ```css
 @layer theme {
   @variant light {
-    /* Override default colors */
-    --accent: oklch(0.65 0.25 270); /* Custom indigo accent */
+    /* 覆盖默认颜色 */
+    --accent: oklch(0.65 0.25 270); /* 自定义靛蓝强调色 */
     --success: oklch(0.65 0.15 155);
   }
 
   @variant dark {
-    /* Override dark theme colors */
+    /* 覆盖深色主题颜色 */
     --accent: oklch(0.65 0.25 270);
     --success: oklch(0.75 0.12 155);
   }
