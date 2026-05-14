@@ -1,0 +1,808 @@
+---
+title: Select
+description: 通过按钮触发，展示可选列表供用户选择。
+icon: updated
+links:
+  source_native: select/select.tsx
+  styles_native: select/select.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/select-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/select-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Select } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Select>
+  <Select.Trigger>
+    <Select.Value />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content>
+      <Select.Close />
+      <Select.ListLabel>...</Select.ListLabel>
+      <Select.Item>
+        <Select.ItemLabel />
+        <Select.ItemDescription>...</Select.ItemDescription>
+        <Select.ItemIndicator />
+      </Select.Item>
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+- **Select**：根容器，管理打开/关闭、选中值，并向子组件提供上下文。
+- **Select.Trigger**：可点击的触发器，用于切换选择器显示。为任意子元素包裹按压处理，支持 `variant`（`'default'` 或 `'unstyled'`）。
+- **Select.Value**：显示当前选中值或占位符；选中变化时自动更新，样式随是否有选中值变化。
+- **Select.TriggerIndicator**：可选的视觉指示器，表示开/关状态；默认渲染带动画的双角标，随打开/关闭旋转。
+- **Select.Portal**：在门户层渲染内容，保证正确的层级与定位。
+- **Select.Overlay**：可选的背景遮罩，可透明或半透明，用于捕获外部点击。
+- **Select.Content**：内容容器，支持三种呈现：气泡（浮动定位）、底部抽屉或对话框。
+- **Select.Close**：关闭按钮；可传入自定义子节点，否则使用默认关闭图标。
+- **Select.ListLabel**：列表标题，使用预设排版样式。
+- **Select.Item**：可选中的选项，处理选中态与按压。
+- **Select.ItemLabel**：选项主文案。
+- **Select.ItemDescription**：可选的说明文字，弱化样式。
+- **Select.ItemIndicator**：选中项的可选指示器，默认渲染对勾图标。
+
+## 用法
+
+### 基础用法
+
+Select 通过复合子组件构建下拉选择界面。
+
+```tsx
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="1" label="选项 1" />
+      <Select.Item value="2" label="选项 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 在触发器显示选中值
+
+使用 Value 在触发器区域展示当前选中项。
+
+```tsx
+<Select>
+  <Select.Trigger>
+    <Select.Value placeholder="请选择一项" />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="apple" label="苹果" />
+      <Select.Item value="orange" label="橙子" />
+      <Select.Item value="banana" label="香蕉" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 气泡（Popover）呈现
+
+使用 `presentation="popover"` 获得带自动定位的浮动内容。
+
+```tsx
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover" placement="bottom" align="center">
+      <Select.Item value="1" label="项 1" />
+      <Select.Item value="2" label="项 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 宽度控制
+
+通过 `width` 控制内容宽度；仅对气泡呈现生效。
+
+```tsx
+{
+  /* 固定像素宽度 */
+}
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover" width={280}>
+      <Select.Item value="1" label="项 1" />
+    </Select.Content>
+  </Select.Portal>
+</Select>;
+
+{
+  /* 与触发器同宽 */
+}
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover" width="trigger">
+      <Select.Item value="1" label="项 1" />
+    </Select.Content>
+  </Select.Portal>
+</Select>;
+
+{
+  /* 全宽（100%） */
+}
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover" width="full">
+      <Select.Item value="1" label="项 1" />
+    </Select.Content>
+  </Select.Portal>
+</Select>;
+
+{
+  /* 随内容自适应（默认） */
+}
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover" width="content-fit">
+      <Select.Item value="1" label="项 1" />
+    </Select.Content>
+  </Select.Portal>
+</Select>;
+```
+
+### 底部抽屉呈现
+
+使用底部抽屉以获得更贴近移动端的体验。
+
+```tsx
+<Select presentation="bottom-sheet">
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="bottom-sheet" snapPoints={['35%']}>
+      <Select.Item value="1" label="项 1" />
+      <Select.Item value="2" label="项 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 对话框呈现
+
+使用对话框呈现居中模态式选择。
+
+```tsx
+<Select presentation="dialog">
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="dialog">
+      <Select.Close />
+      <Select.ListLabel>请选择一项</Select.ListLabel>
+      <Select.Item value="1" label="项 1" />
+      <Select.Item value="2" label="项 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 自定义选项内容
+
+通过自定义子节点与指示器定制选项外观。
+
+```tsx
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="us" label="美国">
+        <View className="flex-row items-center gap-3 flex-1">
+          <Text>🇺🇸</Text>
+          <Select.ItemLabel />
+        </View>
+        <Select.ItemIndicator />
+      </Select.Item>
+      <Select.Item value="uk" label="英国">
+        <View className="flex-row items-center gap-3 flex-1">
+          <Text>🇬🇧</Text>
+          <Select.ItemLabel />
+        </View>
+        <Select.ItemIndicator />
+      </Select.Item>
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 使用渲染函数
+
+在 `Select.Item` 上使用渲染函数，根据选中态等自定义内容。
+
+```tsx
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="us" label="美国">
+        {({ isSelected, value, isDisabled }) => (
+          <>
+            <View className="flex-row items-center gap-3 flex-1">
+              <Text>🇺🇸</Text>
+              <Select.ItemLabel
+                className={
+                  isSelected ? 'text-accent font-medium' : 'text-foreground'
+                }
+              />
+            </View>
+            <Select.ItemIndicator />
+          </>
+        )}
+      </Select.Item>
+      <Select.Item value="uk" label="英国">
+        {({ isSelected }) => (
+          <>
+            <View className="flex-row items-center gap-3 flex-1">
+              <Text>🇬🇧</Text>
+              <Select.ItemLabel
+                className={
+                  isSelected ? 'text-accent font-medium' : 'text-foreground'
+                }
+              />
+            </View>
+            <Select.ItemIndicator />
+          </>
+        )}
+      </Select.Item>
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 带选项说明
+
+为选项添加说明以提供更多上下文。
+
+```tsx
+<Select>
+  <Select.Trigger>...</Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="basic" label="基础版">
+        <View className="flex-1">
+          <Select.ItemLabel />
+          <Select.ItemDescription>
+            面向个人使用的必备功能
+          </Select.ItemDescription>
+        </View>
+        <Select.ItemIndicator />
+      </Select.Item>
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 带触发器指示器
+
+添加视觉指示器表示开/关状态；打开/关闭时会旋转。
+
+```tsx
+<Select>
+  <Select.Trigger>
+    <Select.Value placeholder="请选择一项" />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="1" label="选项 1" />
+      <Select.Item value="2" label="选项 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 无样式触发器与自定义组合
+
+使用 `unstyled` 变体，将触发器与 Button 等组件组合。
+
+```tsx
+<Select>
+  <Select.Trigger variant="unstyled" asChild>
+    <Button variant="secondary">
+      <Select.Value placeholder="请选择…" />
+      <Select.TriggerIndicator />
+    </Button>
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="1" label="选项 1" />
+      <Select.Item value="2" label="选项 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+### 受控模式
+
+以编程方式控制打开状态与选中值。
+
+```tsx
+const [value, setValue] = useState();
+const [isOpen, setIsOpen] = useState(false);
+
+<Select
+  value={value}
+  onValueChange={setValue}
+  isOpen={isOpen}
+  onOpenChange={setIsOpen}
+>
+  <Select.Trigger>
+    <Select.Value placeholder="请选择…" />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Overlay />
+    <Select.Content presentation="popover">
+      <Select.Item value="1" label="选项 1" />
+      <Select.Item value="2" label="选项 2" />
+    </Select.Content>
+  </Select.Portal>
+</Select>;
+```
+
+## 示例
+
+```tsx
+import { Select, Separator } from 'heroui-native';
+import React, { useState } from 'react';
+
+type SelectOption = {
+  value: string;
+  label: string;
+};
+
+const US_STATES: SelectOption[] = [
+  { value: 'CA', label: '加利福尼亚' },
+  { value: 'NY', label: '纽约' },
+  { value: 'TX', label: '得克萨斯' },
+  { value: 'FL', label: '佛罗里达' },
+];
+
+export default function SelectExample() {
+  const [value, setValue] = useState<SelectOption | undefined>();
+
+  return (
+    <Select value={value} onValueChange={setValue}>
+      <Select.Trigger>
+        <Select.Value placeholder="请选择一项" />
+        <Select.TriggerIndicator />
+      </Select.Trigger>
+      <Select.Portal>
+        <Select.Overlay />
+        <Select.Content presentation="popover" width="trigger">
+          <Select.ListLabel className="mb-2">选择州/省</Select.ListLabel>
+          {US_STATES.map((state, index) => (
+            <React.Fragment key={state.value}>
+              <Select.Item value={state.value} label={state.label} />
+              {index < US_STATES.length - 1 && <Separator />}
+            </React.Fragment>
+          ))}
+        </Select.Content>
+      </Select.Portal>
+    </Select>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/select.tsx)。
+
+## API 参考
+
+### Select
+
+| prop            | type                                      | default     | description                                                            |
+| --------------- | ----------------------------------------- | ----------- | ---------------------------------------------------------------------- |
+| `children`      | `ReactNode`                               | -           | 选择器子内容                                                           |
+| `value`         | `SelectOption \| SelectOption[]`                  | -           | 当前选中值（受控）                                                     |
+| `onValueChange` | `(value: SelectOption \| SelectOption[]) => void` | -           | 选中值变化时的回调                                                     |
+| `defaultValue`  | `SelectOption \| SelectOption[]`                  | -           | 默认选中值（非受控）                                                   |
+| `isOpen`        | `boolean`                                 | -           | 是否打开（受控）                                                       |
+| `isDefaultOpen` | `boolean`                                 | -           | 初始是否打开（非受控）                                                 |
+| `onOpenChange`  | `(isOpen: boolean) => void`               | -           | 打开状态变化时的回调                                                   |
+| `isDisabled`    | `boolean`                                 | `false`     | 是否禁用                                                               |
+| `presentation`  | `'popover' \| 'bottom-sheet' \| 'dialog'` | `'popover'` | 内容呈现方式                                                           |
+| `animation`     | `SelectRootAnimation`                     | -           | 动画配置                                                               |
+| `asChild`       | `boolean`                                 | `false`     | 是否将子元素作为实际渲染节点                                           |
+| `...ViewProps`  | `ViewProps`                               | -           | 支持全部标准 React Native `View` 属性                                  |
+
+#### SelectRootAnimation
+
+Select 根级动画配置，可为：
+
+- `false` 或 `"disabled"`：仅禁用根动画
+- `"disable-all"`：禁用根与子级全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop             | type                                             | default | description                                     |
+| ---------------- | ------------------------------------------------ | ------- | ----------------------------------------------- |
+| `state`          | `'disabled' \| 'disable-all' \| boolean`         | -       | 在自定义属性时用于禁用动画                      |
+| `entering.value` | `SpringAnimationConfig \| TimingAnimationConfig` | -       | 打开时的动画配置                                |
+| `exiting.value`  | `SpringAnimationConfig \| TimingAnimationConfig` | -       | 关闭时的动画配置                                |
+
+#### SpringAnimationConfig
+
+| prop     | type               | default | description                               |
+| -------- | ------------------ | ------- | ----------------------------------------- |
+| `type`   | `'spring'`         | -       | 动画类型（须为 `'spring'`）               |
+| `config` | `WithSpringConfig` | -       | Reanimated 弹簧动画配置                   |
+
+#### TimingAnimationConfig
+
+| prop     | type               | default | description                               |
+| -------- | ------------------ | ------- | ----------------------------------------- |
+| `type`   | `'timing'`         | -       | 动画类型（须为 `'timing'`）               |
+| `config` | `WithTimingConfig` | -       | Reanimated 时长动画配置                   |
+
+### Select.Trigger
+
+| prop                | type                      | default     | description                                                                                                       |
+| ------------------- | ------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| `variant`           | `'default' \| 'unstyled'` | `'default'` | 触发器变体：`'default'` 应用预设容器样式，`'unstyled'` 移除默认样式                                               |
+| `children`          | `ReactNode`               | -           | 触发器内容                                                                                                       |
+| `className`         | `string`                  | -           | 触发器额外 class                                                                                                 |
+| `asChild`           | `boolean`                 | `true`      | 是否将子元素作为实际渲染节点                                                                                     |
+| `isDisabled`        | `boolean`                 | -           | 是否禁用触发器                                                                                                   |
+| `...PressableProps` | `PressableProps`          | -           | 支持全部标准 React Native `Pressable` 属性                                                                       |
+
+### Select.Value
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `placeholder`  | `string`    | -       | 未选中时的占位文案                                 |
+| `className`    | `string`    | -       | 值区域额外 class                                   |
+| `...TextProps` | `TextProps` | -       | 支持全部标准 React Native `Text` 属性              |
+
+**说明：** 值组件会根据是否有选中项自动应用不同文字颜色：
+
+- 已选中：`text-foreground`
+- 未选中（占位）：`text-field-placeholder`
+
+### Select.TriggerIndicator
+
+| prop                    | type                              | default | description                                                  |
+| ----------------------- | --------------------------------- | ------- | ------------------------------------------------------------ |
+| `children`              | `ReactNode`                       | -       | 自定义指示器内容；默认带动画的双角标                         |
+| `className`             | `string`                          | -       | 指示器额外 class                                             |
+| `style`                 | `ViewStyle`                       | -       | 指示器自定义样式                                             |
+| `iconProps`             | `SelectTriggerIndicatorIconProps` | -       | 双角标图标配置                                               |
+| `animation`             | `SelectTriggerIndicatorAnimation` | -       | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                         | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `...ViewProps`          | `ViewProps`                       | -       | 支持全部标准 React Native `View` 属性                        |
+
+**说明：** 以下样式属性由动画占用，不能通过 `className` 设置：
+
+- `transform`（尤其是 `rotate`）— 用于开/关旋转过渡
+
+若要自定义，请使用 `animation`。若需完全关闭动画样式并自行用 `className` 或 `style` 控制，请设置 `isAnimatedStyleActive={false}`。
+
+#### SelectTriggerIndicatorIconProps
+
+| prop    | type     | default | description                                            |
+| ------- | -------- | ------- | ------------------------------------------------------ |
+| `size`  | `number` | `16`    | 图标尺寸                                               |
+| `color` | `string` | -       | 图标颜色（默认同前景主题色）                           |
+
+#### SelectTriggerIndicatorAnimation
+
+`Select.TriggerIndicator` 的动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画（0° 到 -180° 旋转）
+- `object`：自定义动画配置
+
+| prop                    | type                    | default                                      | description                                     |
+| ----------------------- | ----------------------- | -------------------------------------------- | ----------------------------------------------- |
+| `state`                 | `'disabled' \| boolean` | -                                            | 在自定义属性时用于禁用动画                      |
+| `rotation.value`        | `[number, number]`      | `[0, -180]`                                  | 旋转角度 [关闭, 打开]，单位度                   |
+| `rotation.springConfig` | `WithSpringConfig`      | `{ damping: 140, stiffness: 1000, mass: 4 }` | 旋转弹簧动画配置                                |
+
+### Select.Portal
+
+| prop                       | type        | default | description                                                                                                                   |
+| -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `children`                 | `ReactNode` | -       | 门户内容（必填）                                                                                                              |
+| `disableFullWindowOverlay` | `boolean`   | `false` | 在 iOS 为 `true` 时使用 `View` 代替 `FullWindowOverlay`，便于元素检查器；遮罩将无法叠在原生模态之上                           |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | 控制 VoiceOver 是否将遮罩窗口视为模态容器。为 `true` 时，VoiceOver 仅聚焦遮罩内元素。仅 iOS；API 不稳定，可能随 react-native-screens 变更 |
+| `className`                | `string`    | -       | 门户容器额外 class                                                                                                            |
+| `hostName`                 | `string`    | -       | 门户宿主元素的可选名称                                                                                                        |
+| `forceMount`               | `boolean`   | -       | 是否强制挂载到 DOM                                                                                                            |
+| `...ViewProps`             | `ViewProps` | -       | 支持全部标准 React Native `View` 属性                                                                                       |
+
+### Select.Overlay
+
+| prop                    | type                     | default | description                                                  |
+| ----------------------- | ------------------------ | ------- | ------------------------------------------------------------ |
+| `className`             | `string`                 | -       | 遮罩额外 class                                               |
+| `animation`             | `SelectOverlayAnimation` | -       | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `closeOnPress`          | `boolean`                | `true`  | 点击遮罩是否关闭选择器                                       |
+| `forceMount`            | `boolean`                | -       | 是否强制挂载到 DOM                                           |
+| `asChild`               | `boolean`                | `false` | 是否将子元素作为实际渲染节点                                 |
+| `...Animated.ViewProps` | `Animated.ViewProps`     | -       | 支持 Reanimated `Animated.View` 的全部属性                   |
+
+#### SelectOverlayAnimation
+
+`Select.Overlay` 的动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画（底部抽屉/对话框为基于进度的透明度；气泡为关键帧动画）
+- `object`：自定义动画配置
+
+| prop            | type                       | default     | description                                                                  |
+| --------------- | -------------------------- | ----------- | ---------------------------------------------------------------------------- |
+| `state`         | `'disabled' \| boolean`    | -           | 在自定义属性时用于禁用动画                                                   |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | 透明度 [空闲, 打开, 关闭]（用于底部抽屉/对话框呈现）                        |
+| `entering`      | `EntryOrExitLayoutType`    | -           | 进入过渡自定义关键帧（用于气泡呈现）                                         |
+| `exiting`       | `EntryOrExitLayoutType`    | -           | 退出过渡自定义关键帧（用于气泡呈现）                                       |
+
+### Select.Content（气泡呈现）
+
+| prop                    | type                                             | default         | description                                            |
+| ----------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------ |
+| `children`              | `ReactNode`                                      | -               | 选择器内容                                             |
+| `width`                 | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | 内容宽度策略                                           |
+| `presentation`          | `'popover'`                                      | `'popover'`     | 呈现模式                                               |
+| `placement`             | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | 相对触发器的方位                                       |
+| `align`                 | `'start' \| 'center' \| 'end'`                   | `'center'`      | 沿放置轴的对齐方式                                     |
+| `avoidCollisions`       | `boolean`                                        | `true`          | 靠近视口边缘时是否翻转 placement                       |
+| `offset`                | `number`                                         | `8`             | 与触发器的间距（像素）                                 |
+| `alignOffset`           | `number`                                         | `0`             | 沿对齐轴的偏移（像素）                                 |
+| `className`             | `string`                                         | -               | 内容容器额外 class                                     |
+| `animation`             | `SelectContentPopoverAnimation`                  | -               | 动画配置                                               |
+| `forceMount`            | `boolean`                                        | -               | 是否强制挂载到 DOM                                     |
+| `insets`                | `Insets`                                         | -               | 定位时需遵守的屏幕边距                                 |
+| `asChild`               | `boolean`                                        | `false`         | 是否将子元素作为实际渲染节点                           |
+| `...Animated.ViewProps` | `Animated.ViewProps`                             | -               | 支持 Reanimated `Animated.View` 的全部属性           |
+
+#### SelectContentPopoverAnimation
+
+`Select.Content`（气泡呈现）的动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认关键帧（按 placement 的 translateY/translateX、scale、opacity）
+- `object`：自定义 `entering` 和/或 `exiting` 关键帧
+
+| prop       | type                    | default | description                                                                                                                                |
+| ---------- | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `state`    | `'disabled' \| boolean` | -       | 在自定义属性时用于禁用动画                                                                                                                 |
+| `entering` | `EntryOrExitLayoutType` | -       | 进入过渡关键帧（默认：按 placement 的 translateY/translateX、scale、opacity，200ms）                                                       |
+| `exiting`  | `EntryOrExitLayoutType` | -       | 退出过渡关键帧（默认：与进入镜像，150ms）                                                                                                  |
+
+### Select.Content（底部抽屉呈现）
+
+| prop                        | type               | default | description                                      |
+| --------------------------- | ------------------ | ------- | ------------------------------------------------ |
+| `children`                  | `ReactNode`        | -       | 底部抽屉内容                                     |
+| `presentation`              | `'bottom-sheet'`   | -       | 呈现模式                                         |
+| `contentContainerClassName` | `string`           | -       | 内容容器额外 class                               |
+| `...BottomSheetProps`       | `BottomSheetProps` | -       | 支持 `@gorhom/bottom-sheet` 的全部属性           |
+
+### Select.Content（对话框呈现）
+
+| prop           | type                                                     | default | description                                         |
+| -------------- | -------------------------------------------------------- | ------- | --------------------------------------------------- |
+| `children`     | `ReactNode`                                              | -       | 对话框内容                                          |
+| `presentation` | `'dialog'`                                               | -       | 呈现模式                                            |
+| `classNames`   | `{ wrapper?: string; content?: string }`                 | -       | 包裹层与内容区额外 class                            |
+| `styles`       | `Partial<Record<DialogContentFallbackSlots, ViewStyle>>` | -       | 对话框各部分的样式                                  |
+| `animation`    | `SelectContentAnimation`                                 | -       | 动画配置                                            |
+| `isSwipeable`  | `boolean`                                                | `true`  | 是否允许滑动关闭                                    |
+| `forceMount`   | `boolean`                                                | -       | 是否强制挂载到 DOM                                  |
+| `asChild`      | `boolean`                                                | `false` | 是否将子元素作为实际渲染节点                        |
+| `...ViewProps` | `ViewProps`                                              | -       | 支持全部标准 React Native `View` 属性             |
+
+#### `styles`
+
+| prop      | type        | description                      |
+| --------- | ----------- | -------------------------------- |
+| `wrapper` | `ViewStyle` | 外层包裹容器样式                 |
+| `content` | `ViewStyle` | 对话框内容区样式                 |
+
+#### SelectContentAnimation
+
+`Select.Content`（对话框呈现）的动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认关键帧（scale 与 opacity）
+- `object`：自定义 `entering` 和/或 `exiting` 关键帧
+
+| prop       | type                    | default | description                                                                                              |
+| ---------- | ----------------------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `state`    | `'disabled' \| boolean` | -       | 在自定义属性时用于禁用动画                                                                               |
+| `entering` | `EntryOrExitLayoutType` | -       | 进入过渡关键帧（默认：scale 与 opacity，200ms）                                                          |
+| `exiting`  | `EntryOrExitLayoutType` | -       | 退出过渡关键帧（默认：与进入镜像，150ms）                                                              |
+
+### Select.Close
+
+`Select.Close` 继承 [CloseButton](./close-button)，按下时自动关闭选择器。
+
+### Select.ListLabel
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode` | -       | 列表标题文案                                       |
+| `className`    | `string`    | -       | 列表标题额外 class                                 |
+| `...TextProps` | `TextProps` | -       | 支持全部标准 React Native `Text` 属性            |
+
+### Select.Item
+
+| prop                | type                                                         | default | description                                                                |
+| ------------------- | ------------------------------------------------------------ | ------- | -------------------------------------------------------------------------- |
+| `children`          | `ReactNode \| ((props: SelectItemRenderProps) => ReactNode)` | -       | 自定义选项内容；默认可为标签+指示器，或渲染函数                            |
+| `value`             | `any`                                                        | -       | 选项关联的值（必填）                                                       |
+| `label`             | `string`                                                     | -       | 选项标签文案（必填）                                                       |
+| `isDisabled`        | `boolean`                                                    | `false` | 是否禁用该选项                                                             |
+| `className`         | `string`                                                     | -       | 选项额外 class                                                             |
+| `...PressableProps` | `PressableProps`                                             | -       | 支持全部标准 React Native `Pressable` 属性                                 |
+
+#### SelectItemRenderProps
+
+使用渲染函数作为 `children` 时，会传入以下属性：
+
+| property     | type      | description                             |
+| ------------ | --------- | --------------------------------------- |
+| `isSelected` | `boolean` | 当前项是否选中                          |
+| `value`      | `string`  | 当前项的值                              |
+| `isDisabled` | `boolean` | 当前项是否禁用                          |
+
+### Select.ItemLabel
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `className`    | `string`    | -       | 选项标签额外 class                                 |
+| `...TextProps` | `TextProps` | -       | 支持全部标准 React Native `Text` 属性            |
+
+### Select.ItemDescription
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode` | -       | 说明文案                                           |
+| `className`    | `string`    | -       | 说明额外 class                                     |
+| `...TextProps` | `TextProps` | -       | 支持全部标准 React Native `Text` 属性            |
+
+### Select.ItemIndicator
+
+| prop           | type                           | default | description                                        |
+| -------------- | ------------------------------ | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode`                    | -       | 自定义指示器；默认对勾图标                         |
+| `className`    | `string`                       | -       | 指示器额外 class                                   |
+| `iconProps`    | `SelectItemIndicatorIconProps` | -       | 对勾图标配置                                       |
+| `...ViewProps` | `ViewProps`                    | -       | 支持全部标准 React Native `View` 属性            |
+
+#### SelectItemIndicatorIconProps
+
+| prop    | type     | default          | description       |
+| ------- | -------- | ---------------- | ----------------- |
+| `size`  | `number` | `16`             | 图标尺寸          |
+| `color` | `string` | `--colors-muted` | 图标颜色          |
+
+## Hooks
+
+### useSelect
+
+用于读取 Select 根上下文，返回状态与控制方法。
+
+```tsx
+import { useSelect } from 'heroui-native';
+
+const {
+  isOpen,
+  onOpenChange,
+  isDefaultOpen,
+  isDisabled,
+  presentation,
+  triggerPosition,
+  setTriggerPosition,
+  contentLayout,
+  setContentLayout,
+  nativeID,
+  value,
+  onValueChange,
+} = useSelect();
+```
+
+#### 返回值
+
+| property             | type                                         | description                                               |
+| -------------------- | -------------------------------------------- | --------------------------------------------------------- |
+| `isOpen`             | `boolean`                                    | 当前是否打开                                              |
+| `onOpenChange`       | `(open: boolean) => void`                    | 修改打开状态的回调                                        |
+| `isDefaultOpen`      | `boolean \| undefined`                       | 默认是否打开（非受控）                                    |
+| `isDisabled`         | `boolean \| undefined`                       | 是否禁用                                                  |
+| `presentation`       | `'popover' \| 'bottom-sheet' \| 'dialog'`    | 内容呈现方式                                              |
+| `triggerPosition`    | `LayoutPosition \| null`                     | 触发器相对视口的位置                                      |
+| `setTriggerPosition` | `(position: LayoutPosition \| null) => void` | 更新触发器位置                                            |
+| `contentLayout`      | `LayoutRectangle \| null`                    | 选择器内容的布局测量                                      |
+| `setContentLayout`   | `(layout: LayoutRectangle \| null) => void`  | 更新内容布局测量                                          |
+| `nativeID`           | `string`                                     | 当前实例的唯一标识                                        |
+| `value`              | `SelectOption \| SelectOption[]`                   | 当前选中项                                                |
+| `onValueChange`      | `(option: SelectOption \| SelectOption[]) => void` | 选中值变化时的回调                                        |
+
+**说明：** 必须在 `Select` 内使用；在上下文外调用将抛错。
+
+### useSelectAnimation
+
+用于在自定义或复合子组件中读取 Select 动画相关共享值。
+
+```tsx
+import { useSelectAnimation } from 'heroui-native';
+
+const { selectState, progress, isDragging, isGestureReleaseAnimationRunning } =
+  useSelectAnimation();
+```
+
+#### 返回值
+
+| property                           | type                   | description                                                |
+| ---------------------------------- | ---------------------- | ---------------------------------------------------------- |
+| `progress`                         | `SharedValue<number>`  | 动画进度（0=空闲，1=打开，2=关闭）                         |
+| `isDragging`                       | `SharedValue<boolean>` | 内容是否正在被拖拽                                         |
+| `isGestureReleaseAnimationRunning` | `SharedValue<boolean>` | 手势释放后的动画是否正在运行                               |
+
+**说明：** 必须在 `Select` 内使用；在动画上下文外调用将抛错。
+
+#### SelectOption
+
+| property | type     | description                  |
+| -------- | -------- | ---------------------------- |
+| `value`  | `string` | 选项值                       |
+| `label`  | `string` | 选项显示标签                 |
+
+### useSelectItem
+
+用于读取 Select Item 上下文，返回当前项的值与标签。
+
+```tsx
+import { useSelectItem } from 'heroui-native';
+
+const { itemValue, label } = useSelectItem();
+```
+
+#### 返回值
+
+| property    | type     | description                        |
+| ----------- | -------- | ---------------------------------- |
+| `itemValue` | `string` | 当前项的值                         |
+| `label`     | `string` | 当前项的标签文案                   |
+
+## 特别说明
+
+### 元素检查器（iOS）
+
+Select 在 iOS 上使用 `FullWindowOverlay`。开发时若需启用 React Native 元素检查器，请在 `Select.Portal` 上设置 `disableFullWindowOverlay={true}`。代价是下拉层将无法叠在原生模态之上。

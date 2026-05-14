@@ -1,0 +1,140 @@
+---
+title: TextArea
+description: 多行文本输入，带样式边框与背景，用于收集较长内容。
+links:
+  source_native: text-area/text-area.tsx
+  styles_native: text-area/text-area.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { TextArea } from 'heroui-native';
+```
+
+## 用法
+
+### 基础用法
+
+`TextArea` 可单独使用，也可放在 `TextField` 内。
+
+```tsx
+import { TextArea } from 'heroui-native';
+
+<TextArea placeholder="请输入留言" />
+```
+
+### 与 TextField 组合
+
+与 `TextField` 搭配形成完整表单结构。
+
+```tsx
+import { Description, Label, TextArea, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>留言</Label>
+  <TextArea placeholder="请在此输入留言…" />
+  <Description>请尽量提供详细信息。</Description>
+</TextField>
+```
+
+### 校验状态
+
+非法时展示错误样式。
+
+```tsx
+import { FieldError, Label, TextArea, TextField } from 'heroui-native';
+
+<TextField isRequired isInvalid={true}>
+  <Label>留言</Label>
+  <TextArea placeholder="请输入留言" />
+  <FieldError>请输入有效留言</FieldError>
+</TextField>
+```
+
+### 禁用状态
+
+禁用后不可编辑。
+
+```tsx
+import { Label, TextArea, TextField } from 'heroui-native';
+
+<TextField isDisabled>
+  <Label>禁用字段</Label>
+  <TextArea placeholder="不可编辑" value="只读内容" />
+</TextField>
+```
+
+### 变体
+
+按场景使用不同视觉变体。
+
+```tsx
+import { Label, TextArea, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>主要变体</Label>
+  <TextArea placeholder="主要样式文本域" variant="primary" />
+</TextField>
+
+<TextField>
+  <Label>次要变体</Label>
+  <TextArea placeholder="次要样式文本域" variant="secondary" />
+</TextField>
+```
+
+### 自定义样式
+
+通过 `className` 自定义外观。
+
+```tsx
+import { Label, TextArea, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>自定义样式</Label>
+  <TextArea
+    placeholder="自定义颜色"
+    className="bg-blue-50 border-blue-500 focus:border-blue-700"
+  />
+</TextField>
+```
+
+## 示例
+
+```tsx
+import { Description, FieldError, Label, TextArea, TextField } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function TextAreaExample() {
+  return (
+    <View className="gap-8">
+      <TextField>
+        <Label>主要变体</Label>
+        <TextArea placeholder="主要样式文本域" variant="primary" />
+        <Description>默认变体，主要样式</Description>
+      </TextField>
+
+      <TextField>
+        <Label>次要变体</Label>
+        <TextArea
+          placeholder="次要样式文本域"
+          variant="secondary"
+        />
+        <Description>用于表面上的次要变体</Description>
+      </TextField>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/text-area.tsx)。
+
+## API 参考
+
+`TextArea` 继承 [Input](./input) 的全部属性。区别仅为默认值：`multiline` 默认为 `true`，`textAlignVertical` 默认为 `'top'`。

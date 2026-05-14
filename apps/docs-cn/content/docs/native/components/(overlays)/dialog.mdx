@@ -1,0 +1,299 @@
+---
+title: Dialog
+description: 模态浮层，带动画过渡并支持手势关闭。
+icon: updated
+links:
+  source_native: dialog/dialog.tsx
+  styles_native: dialog/dialog.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/dialog-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/dialog-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Dialog } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Dialog>
+  <Dialog.Trigger>...</Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay>...</Dialog.Overlay>
+    <Dialog.Content>
+      <Dialog.Close>...</Dialog.Close>
+      <Dialog.Title>...</Dialog.Title>
+      <Dialog.Description>...</Dialog.Description>
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+- **Dialog**：根组件，管理开关状态并向子级提供上下文。
+- **Dialog.Trigger**：按下后打开对话框的可按压区域。
+- **Dialog.Portal**：在 Portal 中渲染内容，居中布局并控制动画。
+- **Dialog.Overlay**：内容背后的遮罩，按下通常可关闭对话框。
+- **Dialog.Content**：主容器，支持拖拽关闭等手势。
+- **Dialog.Close**：关闭按钮；可自定义子节点或使用默认关闭图标。
+- **Dialog.Title**：标题，语义为标题角色。
+- **Dialog.Description**：补充说明文字。
+
+## 用法
+
+### 基础对话框
+
+包含标题、描述与关闭按钮的简单对话框。
+
+```tsx
+<Dialog isOpen={isOpen} onOpenChange={setIsOpen}>
+  <Dialog.Trigger asChild>
+    <Button>打开对话框</Button>
+  </Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay />
+    <Dialog.Content>
+      <Dialog.Close />
+      <Dialog.Title>...</Dialog.Title>
+      <Dialog.Description>...</Dialog.Description>
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+### 可滚动内容
+
+长内容使用滚动容器承载。
+
+```tsx
+<Dialog isOpen={isOpen} onOpenChange={setIsOpen}>
+  <Dialog.Trigger>...</Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay />
+    <Dialog.Content>
+      <Dialog.Close />
+      <Dialog.Title>...</Dialog.Title>
+      <View className="h-[300px]">
+        <ScrollView>...</ScrollView>
+      </View>
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+### 表单对话框
+
+包含输入与键盘避让的对话框。
+
+```tsx
+<Dialog isOpen={isOpen} onOpenChange={setIsOpen}>
+  <Dialog.Trigger>...</Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay />
+    <KeyboardAvoidingView behavior="padding">
+      <Dialog.Content>
+        <Dialog.Close />
+        <Dialog.Title>...</Dialog.Title>
+        <TextField>...</TextField>
+        <Button onPress={handleSubmit}>提交</Button>
+      </Dialog.Content>
+    </KeyboardAvoidingView>
+  </Dialog.Portal>
+</Dialog>
+```
+
+## 示例
+
+```tsx
+import { Button, Dialog } from 'heroui-native';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+export default function DialogExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Dialog isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Dialog.Trigger asChild>
+        <Button variant="primary">打开对话框</Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <Dialog.Content>
+          <Dialog.Close variant="ghost" />
+          <View className="mb-5 gap-1.5">
+            <Dialog.Title>确认操作</Dialog.Title>
+            <Dialog.Description>
+              确定要继续吗？此操作无法撤销。
+            </Dialog.Description>
+          </View>
+          <View className="flex-row justify-end gap-3">
+            <Button variant="ghost" size="sm" onPress={() => setIsOpen(false)}>
+              取消
+            </Button>
+            <Button size="sm">确认</Button>
+          </View>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/dialog.tsx)。
+
+## API 参考
+
+### Dialog
+
+| prop            | type                       | default | description                                        |
+| --------------- | -------------------------- | ------- | -------------------------------------------------- |
+| `children`      | `React.ReactNode`          | -       | 触发器与对话框内容                                 |
+| `isOpen`        | `boolean`                  | -       | 受控开关状态                                       |
+| `isDefaultOpen` | `boolean`                  | `false` | 非受控初始是否打开                                 |
+| `animation`     | `AnimationRootDisableAll`  | -       | 动画配置                                           |
+| `onOpenChange`  | `(value: boolean) => void` | -       | 开关状态变化回调                                   |
+| `...ViewProps`  | `ViewProps`                | -       | 支持 React Native `View` 的全部属性                |
+
+#### AnimationRootDisableAll
+
+根动画配置，可为：
+
+- `false` 或 `"disabled"`：仅禁用根级动画
+- `"disable-all"`：禁用全部动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+
+### Dialog.Trigger
+
+| prop                       | type                    | default | description                                                    |
+| -------------------------- | ----------------------- | ------- | -------------------------------------------------------------- |
+| `children`                 | `React.ReactNode`       | -       | 触发器内容                                                     |
+| `asChild`                  | `boolean`               | -       | 是否无包裹渲染为子元素                                         |
+| `...TouchableOpacityProps` | `TouchableOpacityProps` | -       | 支持 React Native `TouchableOpacity` 的全部属性                |
+
+### Dialog.Portal
+
+| prop                       | type                   | default | description                                                                                                                   |
+| -------------------------- | ---------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `children`                 | `React.ReactNode`      | -       | Portal 内容（遮罩与对话框）                                                                                                   |
+| `disableFullWindowOverlay` | `boolean`              | `false` | iOS 为 true 时使用普通 `View` 替代 `FullWindowOverlay`，便于检查器；遮罩不再叠在原生模态之上                                   |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | 是否将覆盖窗口视为模态容器（VoiceOver）。仅 iOS；可能随 react-native-screens 变化                                              |
+| `className`                | `string`               | -       | Portal 容器额外 class                                                                                                         |
+| `style`                    | `StyleProp<ViewStyle>` | -       | Portal 容器额外样式                                                                                                           |
+| `hostName`                 | `string`               | -       | 可选 Portal 宿主名                                                                                                            |
+| `forceMount`               | `boolean`              | -       | 关闭时仍挂载以配合动画                                                                                                        |
+
+### Dialog.Overlay
+
+| prop                    | type                     | default | description                                                  |
+| ----------------------- | ------------------------ | ------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode`        | -       | 自定义遮罩内容                                               |
+| `className`             | `string`                 | -       | 遮罩额外 class                                               |
+| `style`                 | `ViewStyle`              | -       | 遮罩容器样式                                                 |
+| `animation`             | `DialogOverlayAnimation` | -       | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `isCloseOnPress`        | `boolean`                | `true`  | 按下遮罩是否关闭                                             |
+| `forceMount`            | `boolean`                | -       | 关闭时仍挂载以配合动画                                       |
+| `...PressableProps`     | `PressableProps`         | -       | 支持 React Native `Pressable` 的全部属性                     |
+
+#### DialogOverlayAnimation
+
+遮罩动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop            | type                       | default                 | description                                                                  |
+| --------------- | -------------------------- | ----------------------- | ---------------------------------------------------------------------------- |
+| `state`         | `'disabled' \| boolean`    | -                       | 在自定义属性时禁用动画                                                       |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]`             | 不透明度 [空闲, 打开, 关闭]（基于进度，用于呈现）                             |
+| `entering`      | `EntryOrExitLayoutType`    | `FadeIn.duration(200)`  | 自定义进入动画（Popover 呈现用）                                             |
+| `exiting`       | `EntryOrExitLayoutType`    | `FadeOut.duration(150)` | 自定义退出动画（Popover 呈现用）                                             |
+
+### Dialog.Content
+
+| prop                    | type                     | default | description                                         |
+| ----------------------- | ------------------------ | ------- | --------------------------------------------------- |
+| `children`              | `React.ReactNode`        | -       | 对话框内容                                          |
+| `className`             | `string`                 | -       | 内容容器额外 class                                    |
+| `style`                 | `StyleProp<ViewStyle>`   | -       | 内容容器额外样式                                      |
+| `animation`             | `DialogContentAnimation` | -       | 动画配置                                            |
+| `isSwipeable`           | `boolean`                | `true`  | 是否可滑动关闭                                      |
+| `forceMount`            | `boolean`                | -       | 关闭时仍挂载以配合动画                              |
+| `...Animated.ViewProps` | `Animated.ViewProps`     | -       | 支持 Reanimated `Animated.View` 的全部属性          |
+
+#### DialogContentAnimation
+
+内容动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop       | type                    | default                                                                                     | description                                     |
+| ---------- | ----------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `state`    | `'disabled' \| boolean` | -                                                                                           | 在自定义属性时禁用动画                          |
+| `entering` | `EntryOrExitLayoutType` | 关键帧 `scale: 0.96→1` 与 `opacity: 0→1`（200ms，缓动 `Easing.out(Easing.ease)`）           | 自定义进入动画                                  |
+| `exiting`  | `EntryOrExitLayoutType` | 关键帧 `scale: 1→0.96` 与 `opacity: 1→0`（150ms，缓动 `Easing.in(Easing.ease)`）            | 自定义退出动画                                  |
+
+### Dialog.Close
+
+`Dialog.Close` 继承 [CloseButton](./close-button)，按下时自动关闭对话框。
+
+### Dialog.Title
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 标题内容                                           |
+| `className`    | `string`          | -       | 标题额外 class                                     |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                  |
+
+### Dialog.Description
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 描述内容                                           |
+| `className`    | `string`          | -       | 描述额外 class                                     |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                |
+
+## Hooks
+
+### useDialog
+
+访问对话框原语上下文。
+
+```tsx
+const { isOpen, onOpenChange } = useDialog();
+```
+
+| property       | type                       | description     |
+| -------------- | -------------------------- | ----------------- |
+| `isOpen`       | `boolean`                  | 当前是否打开      |
+| `onOpenChange` | `(value: boolean) => void` | 修改开关状态      |
+
+### useDialogAnimation
+
+访问对话框动画上下文，用于高级定制。
+
+```tsx
+const { progress, isDragging, isGestureReleaseAnimationRunning } =
+  useDialogAnimation();
+```
+
+| property                           | type                   | description                                  |
+| ---------------------------------- | ---------------------- | -------------------------------------------- |
+| `progress`                         | `SharedValue<number>`  | 动画进度（0=空闲，1=打开，2=关闭）           |
+| `isDragging`                       | `SharedValue<boolean>` | 是否正在拖拽                                 |
+| `isGestureReleaseAnimationRunning` | `SharedValue<boolean>` | 手势释放动画是否进行中                       |
+
+## 特别说明
+
+### 元素检查器（iOS）
+
+`Dialog` 在 iOS 使用 `FullWindowOverlay`。开发时若需启用 React Native 元素检查器，可在 `Dialog.Portal` 设置 `disableFullWindowOverlay={true}`。代价：对话框将无法叠在原生系统模态之上。

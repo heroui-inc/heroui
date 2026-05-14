@@ -1,0 +1,396 @@
+---
+title: Avatar
+description: 展示用户头像，支持图片、文字首字母或回退图标。
+links:
+  source_native: avatar/avatar.tsx
+  styles_native: avatar/avatar.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/avatar-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/avatar-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Avatar } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Avatar>
+  <Avatar.Image />
+  <Avatar.Fallback />
+</Avatar>
+```
+
+- **Avatar**：主容器，管理头像展示状态，向子组件提供尺寸与颜色上下文；可通过动画配置统一控制子级动画。
+- **Avatar.Image**：可选图片组件，展示头像；自动处理加载与错误，并以不透明度淡入。
+- **Avatar.Fallback**：图片加载失败或不可用时显示；无子节点时显示默认人像图标；支持可配置的进入动画与延迟。
+
+## 用法
+
+### 基础用法
+
+未提供图片或文字时，显示默认人像图标。
+
+```tsx
+<Avatar>
+  <Avatar.Fallback />
+</Avatar>
+```
+
+### 使用图片
+
+展示头像图片并自动处理回退。
+
+```tsx
+<Avatar>
+  <Avatar.Image source={{ uri: 'https://example.com/avatar.jpg' }} />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+### 文字首字母
+
+使用首字母作为头像内容。
+
+```tsx
+<Avatar>
+  <Avatar.Fallback>AB</Avatar.Fallback>
+</Avatar>
+```
+
+### 自定义图标
+
+以自定义图标作为回退内容。
+
+```tsx
+<Avatar>
+  <Avatar.Fallback>
+    <Ionicons name="person" size={18} />
+  </Avatar.Fallback>
+</Avatar>
+```
+
+### 尺寸
+
+使用 `size` 控制头像大小。
+
+```tsx
+<Avatar size="sm">
+  <Avatar.Fallback />
+</Avatar>
+
+<Avatar size="md">
+  <Avatar.Fallback />
+</Avatar>
+
+<Avatar size="lg">
+  <Avatar.Fallback />
+</Avatar>
+```
+
+### 变体
+
+使用 `variant` 切换视觉风格。
+
+```tsx
+<Avatar variant="default">
+  <Avatar.Fallback>DF</Avatar.Fallback>
+</Avatar>
+
+<Avatar variant="soft">
+  <Avatar.Fallback>SF</Avatar.Fallback>
+</Avatar>
+```
+
+### 颜色
+
+应用不同颜色变体。
+
+```tsx
+<Avatar color="default">
+  <Avatar.Fallback>DF</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="accent">
+  <Avatar.Fallback>AC</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="success">
+  <Avatar.Fallback>SC</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="warning">
+  <Avatar.Fallback>WR</Avatar.Fallback>
+</Avatar>
+
+<Avatar color="danger">
+  <Avatar.Fallback>DG</Avatar.Fallback>
+</Avatar>
+```
+
+### 延迟显示回退
+
+延迟显示回退，避免图片加载时的闪烁。
+
+```tsx
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} />
+  <Avatar.Fallback delayMs={600}>NA</Avatar.Fallback>
+</Avatar>
+```
+
+### 自定义图片组件
+
+配合 `asChild` 使用自定义图片组件。
+
+```tsx
+import { Image } from 'expo-image';
+
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} asChild>
+    <Image style={{ width: '100%', height: '100%' }} contentFit="cover" />
+  </Avatar.Image>
+  <Avatar.Fallback>EI</Avatar.Fallback>
+</Avatar>;
+```
+
+### 动画控制
+
+在 Avatar 不同层级控制动画。
+
+#### 禁用全部动画
+
+在根组件禁用自身及子级的全部动画：
+
+```tsx
+<Avatar animation="disable-all">
+  <Avatar.Image source={{ uri: imageUrl }} />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+#### 自定义图片动画
+
+自定义图片不透明度动画：
+
+```tsx
+<Avatar>
+  <Avatar.Image
+    source={{ uri: imageUrl }}
+    animation={{
+      opacity: {
+        value: [0.3, 1],
+        timingConfig: { duration: 300 },
+      },
+    }}
+  />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>
+```
+
+#### 自定义回退动画
+
+自定义回退进入动画：
+
+```tsx
+import { FadeInDown } from 'react-native-reanimated';
+
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} />
+  <Avatar.Fallback
+    animation={{
+      entering: {
+        value: FadeInDown.duration(400),
+      },
+    }}
+  >
+    JD
+  </Avatar.Fallback>
+</Avatar>;
+```
+
+#### 单独禁用动画
+
+对指定子组件禁用动画：
+
+```tsx
+<Avatar>
+  <Avatar.Image source={{ uri: imageUrl }} animation={false} />
+  <Avatar.Fallback animation="disabled">JD</Avatar.Fallback>
+</Avatar>
+```
+
+## 示例
+
+```tsx
+import { Avatar } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function AvatarExample() {
+  const users = [
+    { id: 1, image: 'https://example.com/user1.jpg', name: '张 三' },
+    { id: 2, image: 'https://example.com/user2.jpg', name: '李 四' },
+    { id: 3, image: 'https://example.com/user3.jpg', name: '王 五' },
+  ];
+
+  return (
+    <View className="flex-row gap-4">
+      {users.map((user) => (
+        <Avatar key={user.id} size="lg" color="accent">
+          <Avatar.Image source={{ uri: user.image }} />
+          <Avatar.Fallback>
+            {user.name
+              .split(' ')
+              .map((n) => n[0])
+              .join('')}
+          </Avatar.Fallback>
+        </Avatar>
+      ))}
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/avatar.tsx)。
+
+## API 参考
+
+### Avatar
+
+| prop           | type                                                          | default     | description                                                                               |
+| -------------- | ------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                                             | -           | 头像内容（`Image` 与/或 `Fallback`）                                                     |
+| `size`         | `'sm' \| 'md' \| 'lg'`                                        | `'md'`      | 尺寸                                                                                      |
+| `variant`      | `'default' \| 'soft'`                                         | `'default'` | 视觉变体                                                                                  |
+| `color`        | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'accent'`  | 颜色变体                                                                                  |
+| `className`    | `string`                                                      | -           | 额外的 class                                                                              |
+| `animation`    | `"disable-all"` \| `undefined`                                | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级的全部动画                                       |
+| `alt`          | `string`                                                      | -           | 无障碍替代文本描述                                                                        |
+| `...ViewProps` | `ViewProps`                                                   | -           | 支持 React Native `View` 的全部属性                                                       |
+
+### Avatar.Image
+
+根据 `asChild` 扩展不同的基础类型：
+
+- `asChild={false}`（默认）：扩展自 React Native Reanimated 的 `AnimatedProps<ImageProps>`
+- `asChild={true}`：扩展自定义图片组件的原语图片属性
+
+**说明：** `asChild={true}` 时，取决于自定义组件实现，`className` 可能不会生效；请确保自定义组件正确处理样式 props。
+
+| prop                    | type                                           | default | description                                                  |
+| ----------------------- | ---------------------------------------------- | ------- | ------------------------------------------------------------ |
+| `source`                | `ImageSourcePropType`                          | -       | 图片源（`asChild={false}` 时必填）                         |
+| `asChild`               | `boolean`                                      | `false` | 是否使用自定义图片子组件                                     |
+| `className`             | `string`                                       | -       | 额外的 class                                                 |
+| `animation`             | `AvatarImageAnimation`                         | -       | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                                      | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `...AnimatedProps`      | `AnimatedProps<ImageProps>` or primitive props | -       | 随 `asChild` 变化的额外属性                                  |
+
+#### AvatarImageAnimation
+
+图片动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                   | type                    | default                                             | description                          |
+| ---------------------- | ----------------------- | --------------------------------------------------- | ------------------------------------ |
+| `state`                | `'disabled' \| boolean` | -                                                   | 在自定义属性时禁用动画               |
+| `opacity.value`        | `[number, number]`      | `[0, 1]`                                            | 不透明度 [初始, 已加载]              |
+| `opacity.timingConfig` | `WithTimingConfig`      | `{ duration: 200, easing: Easing.in(Easing.ease) }` | 时间曲线配置                         |
+
+**说明：** `asChild={true}` 时动画会自动禁用。
+
+### Avatar.Fallback
+
+| prop                    | type                                                          | default               | description                                                                       |
+| ----------------------- | ------------------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                                             | -                     | 回退内容（文字、图标或自定义节点）                                                |
+| `delayMs`               | `number`                                                      | `0`                   | 显示回退前的延迟（毫秒），作用于进入动画                                          |
+| `color`                 | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | inherited from parent | 回退颜色变体                                                                      |
+| `className`             | `string`                                                      | -                     | 容器额外 class                                                                    |
+| `classNames`            | `ElementSlots<AvatarFallbackSlots>`                           | -                     | 各部分额外 class                                                                  |
+| `styles`                | `{ container?: ViewStyle; text?: TextStyle }`                 | -                     | 回退各部分的样式                                                                  |
+| `textProps`             | `TextProps`                                                   | -                     | 子节点为字符串时传给 `Text` 的属性                                                |
+| `iconProps`             | `PersonIconProps`                                             | -                     | 自定义默认人像图标的属性                                                          |
+| `animation`             | `AvatarFallbackAnimation`                                     | -                     | 动画配置                                                                          |
+| `...Animated.ViewProps` | `Animated.ViewProps`                                          | -                     | 支持 Reanimated `Animated.View` 的全部属性                                        |
+
+**classNames：** `ElementSlots<AvatarFallbackSlots>` 提供类型安全的 class。可用插槽：`container`、`text`。
+
+#### `styles`
+
+| prop        | type        | description |
+| ----------- | ----------- | ----------- |
+| `container` | `ViewStyle` | 容器样式    |
+| `text`      | `TextStyle` | 文字样式    |
+
+#### AvatarFallbackAnimation
+
+回退动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop             | type                    | default                                                                             | description              |
+| ---------------- | ----------------------- | ----------------------------------------------------------------------------------- | ------------------------ |
+| `state`          | `'disabled' \| boolean` | -                                                                                   | 在自定义属性时禁用动画   |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))`<br/>`.delay(0)` | 自定义进入动画           |
+
+#### PersonIconProps
+
+| prop    | type     | description      |
+| ------- | -------- | ---------------- |
+| `size`  | `number` | 图标尺寸（可选） |
+| `color` | `string` | 图标颜色（可选） |
+
+## Hooks
+
+### useAvatar
+
+访问 Avatar 根上下文，获取头像状态。
+
+**说明：** `status` 常用于在图片加载时显示骨架屏。
+
+```tsx
+import { Avatar, useAvatar, Skeleton } from 'heroui-native';
+
+function AvatarWithSkeleton() {
+  return (
+    <Avatar>
+      <Avatar.Image source={{ uri: imageUrl }} />
+      <AvatarContent />
+      <Avatar.Fallback>JD</Avatar.Fallback>
+    </Avatar>
+  );
+}
+
+function AvatarContent() {
+  const { status } = useAvatar();
+
+  if (status === 'loading') {
+    return <Skeleton className="absolute inset-0 rounded-full" />;
+  }
+
+  return null;
+}
+```
+
+| property    | type                                                 | description                          |
+| ----------- | ---------------------------------------------------- | ------------------------------------ |
+| `status`    | `'loading' \| 'loaded' \| 'error'`                   | 当前图片加载状态                     |
+| `setStatus` | `(status: 'loading' \| 'loaded' \| 'error') => void` | 手动设置状态（高级用法）             |
+
+**状态含义：**
+
+- `'loading'`：图片加载中，可显示骨架屏
+- `'loaded'`：图片加载成功
+- `'error'`：加载失败或资源无效，会自动显示回退

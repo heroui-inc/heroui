@@ -1,0 +1,391 @@
+---
+title: Button
+description: 按下时触发操作的交互组件。
+links:
+  source_native: button/button.tsx
+  styles_native: button/button.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/button-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Button } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Button>
+  <Button.Label>...</Button.Label>
+</Button>
+```
+
+- **Button**：主容器，负责按压交互、动画与变体。字符串子节点会渲染为标签，也可使用复合子组件自定义布局。
+- **Button.Label**：按钮文字，继承父级 Button 上下文中的尺寸与变体样式。
+
+## 用法
+
+### 基础用法
+
+`Button` 可直接传入字符串子节点，会自动渲染为标签。
+
+```tsx
+<Button>基础按钮</Button>
+```
+
+### 使用复合子组件
+
+使用 `Button.Label` 显式控制标签部分。
+
+```tsx
+<Button>
+  <Button.Label>点我</Button.Label>
+</Button>
+```
+
+### 与图标组合
+
+将图标与文字组合，增强可读性。
+
+```tsx
+<Button>
+  <Icon name="add" size={20} />
+  <Button.Label>添加项目</Button.Label>
+</Button>
+
+<Button>
+  <Button.Label>下载</Button.Label>
+  <Icon name="download" size={18} />
+</Button>
+```
+
+### 仅图标
+
+使用 `isIconOnly` 创建方形纯图标按钮。
+
+```tsx
+<Button isIconOnly>
+  <Icon name="heart" size={18} />
+</Button>
+```
+
+### 尺寸
+
+通过三种尺寸控制按钮大小。
+
+```tsx
+<Button size="sm">小</Button>
+<Button size="md">中</Button>
+<Button size="lg">大</Button>
+```
+
+### 变体
+
+提供七种视觉变体，用于不同强调层级。
+
+```tsx
+<Button variant="primary">主要</Button>
+<Button variant="secondary">次要</Button>
+<Button variant="tertiary">第三级</Button>
+<Button variant="outline">描边</Button>
+<Button variant="ghost">幽灵</Button>
+<Button variant="danger">危险</Button>
+<Button variant="danger-soft">柔和危险</Button>
+```
+
+### 反馈变体
+
+`feedbackVariant` 控制渲染哪些按压反馈效果：
+
+- `'scale-highlight'`（默认）：内置缩放 + 高亮遮罩
+- `'scale-ripple'`：内置缩放 + 水波纹遮罩
+- `'scale'`：仅内置缩放（无遮罩）
+- `'none'`：无任何反馈动画
+
+```tsx
+{/* 缩放 + 高亮（默认） */}
+<Button feedbackVariant="scale-highlight">高亮效果</Button>
+
+{/* 缩放 + 水波纹 */}
+<Button feedbackVariant="scale-ripple">水波纹效果</Button>
+
+{/* 仅缩放 */}
+<Button feedbackVariant="scale">仅缩放</Button>
+
+{/* 无反馈 */}
+<Button feedbackVariant="none">无反馈</Button>
+```
+
+### 自定义动画
+
+`animation` 控制各子动画，其结构取决于 `feedbackVariant`。
+
+```tsx
+{/* 自定义缩放与高亮（默认 feedbackVariant） */}
+<Button
+  animation={{
+    scale: { value: 0.97 },
+    highlight: {
+      backgroundColor: { value: '#3b82f6' },
+      opacity: { value: [0, 0.2] },
+    },
+  }}
+>
+  自定义高亮
+</Button>
+
+{/* 自定义缩放与水波纹 */}
+<Button
+  feedbackVariant="scale-ripple"
+  animation={{
+    scale: { value: 0.97 },
+    ripple: {
+      backgroundColor: { value: '#3b82f6' },
+      opacity: { value: [0, 0.3, 0] },
+    },
+  }}
+>
+  自定义水波纹
+</Button>
+```
+
+### 关闭部分子动画
+
+将某个子动画设为 `false` 即可单独关闭：
+
+```tsx
+{/* 关闭缩放，保留高亮 */}
+<Button animation={{ scale: false }}>无缩放</Button>
+
+{/* 关闭高亮，保留缩放 */}
+<Button animation={{ highlight: false }}>无高亮</Button>
+
+{/* 两者都关 */}
+<Button animation={{ scale: false, highlight: false }}>无动画</Button>
+```
+
+### 关闭全部动画
+
+使用 `animation={false}` 关闭所有反馈，或使用 `animation="disable-all"` 级联关闭：
+
+```tsx
+<Button animation={false}>已禁用动画</Button>
+<Button animation="disable-all">全部禁用（级联）</Button>
+```
+
+### 加载态与 Spinner
+
+配合 Spinner 展示加载状态。
+
+```tsx
+const themeColorAccentForeground = useThemeColor('accent-foreground');
+
+<Button
+  layout={LinearTransition.springify()}
+  variant="primary"
+  onPress={() => {
+    setIsDownloading(true);
+    setTimeout(() => {
+      setIsDownloading(false);
+    }, 3000);
+  }}
+  isIconOnly={isDownloading}
+  className="self-center"
+>
+  {isDownloading ? (
+    <Spinner entering={FadeIn.delay(50)} color={themeColorAccentForeground} />
+  ) : (
+    '立即下载'
+  )}
+</Button>;
+```
+
+### 使用 LinearGradient 自定义背景
+
+通过绝对定位元素添加渐变背景。使用 `feedbackVariant="none"` 关闭默认高亮遮罩，或使用 `feedbackVariant="scale-ripple"` 自定义水波纹。
+
+```tsx
+import { Button, PressableFeedback } from 'heroui-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet } from 'react-native';
+
+{/* 无反馈遮罩的渐变 */}
+<Button feedbackVariant="none">
+  <LinearGradient
+    colors={['#9333ea', '#ec4899']}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 1, y: 0 }}
+    style={StyleSheet.absoluteFill}
+  />
+  <Button.Label className="text-white font-bold">渐变</Button.Label>
+</Button>
+
+{/* 带自定义水波纹的渐变 */}
+<Button
+  feedbackVariant="scale-ripple"
+  animation={{
+    ripple: {
+      backgroundColor: { value: 'white' },
+      opacity: { value: [0, 0.5, 0] },
+    },
+  }}
+>
+  <LinearGradient
+    colors={['#0d9488', '#ec4899']}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 1, y: 0 }}
+    style={StyleSheet.absoluteFill}
+  />
+  <Button.Label className="text-white font-bold" pointerEvents="none">
+    带水波纹的渐变
+  </Button.Label>
+</Button>
+```
+
+## 示例
+
+```tsx
+import { Button, useThemeColor } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+
+export default function ButtonExample() {
+  const [
+    themeColorAccentForeground,
+    themeColorAccentSoftForeground,
+    themeColorDangerForeground,
+    themeColorDefaultForeground,
+  ] = useThemeColor([
+    'accent-foreground',
+    'accent-soft-foreground',
+    'danger-foreground',
+    'default-foreground',
+  ]);
+
+  return (
+    <View className="gap-4 p-4">
+      <Button variant="primary">
+        <Ionicons name="add" size={20} color={themeColorAccentForeground} />
+        <Button.Label>添加项目</Button.Label>
+      </Button>
+
+      <View className="flex-row gap-4">
+        <Button size="sm" isIconOnly>
+          <Ionicons name="heart" size={16} color={themeColorAccentForeground} />
+        </Button>
+        <Button size="sm" variant="secondary" isIconOnly>
+          <Ionicons
+            name="bookmark"
+            size={16}
+            color={themeColorAccentSoftForeground}
+          />
+        </Button>
+        <Button size="sm" variant="danger" isIconOnly>
+          <Ionicons name="trash" size={16} color={themeColorDangerForeground} />
+        </Button>
+      </View>
+
+      <Button variant="tertiary">
+        <Button.Label>了解更多</Button.Label>
+        <Ionicons
+          name="chevron-forward"
+          size={18}
+          color={themeColorDefaultForeground}
+        />
+      </Button>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/button.tsx>)。
+
+## API 参考
+
+### Button
+
+`Button` 继承 [PressableFeedback](./pressable-feedback) 的全部属性（`animation` 除外，已重新定义），并增加按钮专用属性。
+
+| prop              | type                                                                                          | default             | description                                                    |
+| ----------------- | --------------------------------------------------------------------------------------------- | ------------------- | -------------------------------------------------------------- |
+| `variant`         | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger' \| 'danger-soft'` | `'primary'`         | 按钮视觉变体                                   |
+| `size`            | `'sm' \| 'md' \| 'lg'`                                                                        | `'md'`              | 按钮尺寸                                             |
+| `isIconOnly`      | `boolean`                                                                                     | `false`             | 是否为仅图标按钮（方形比例） |
+| `feedbackVariant` | `'scale-highlight' \| 'scale-ripple' \| 'scale' \| 'none'`                                    | `'scale-highlight'` | 决定渲染哪些反馈效果                 |
+| `animation`       | `ButtonAnimation`                                                                             | -                   | 动画配置（结构取决于 `feedbackVariant`）   |
+
+继承属性（含 `isDisabled`、`className`、`children` 及所有 Pressable 属性）见 [PressableFeedback API 参考](./pressable-feedback#api-reference)。
+
+#### ButtonAnimation
+
+`animation` 是按 `feedbackVariant` 区分的联合类型，遵循 `AnimationRoot` 控制流：
+
+- `true` 或 `undefined`：使用默认动画
+- `false` 或 `"disabled"`：关闭所有反馈动画
+- `"disable-all"`：级联关闭所有动画（含子复合部件）
+- `object`：自定义子动画配置（见下）
+
+**当 `feedbackVariant="scale-highlight"`（默认）时：**
+
+| prop        | type                                     | default | description                                                  |
+| ----------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| `scale`     | `PressableFeedbackScaleAnimation`        | -       | 缩放动画配置（`false` 为关闭）                  |
+| `highlight` | `PressableFeedbackHighlightAnimation`    | -       | 高亮遮罩配置（`false` 为关闭）                |
+| `state`     | `'disabled' \| 'disable-all' \| boolean` | -       | 在保留配置的同时控制动画状态（运行时切换） |
+
+**当 `feedbackVariant="scale-ripple"` 时：**
+
+| prop     | type                                     | default | description                                                  |
+| -------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| `scale`  | `PressableFeedbackScaleAnimation`        | -       | 缩放动画配置（`false` 为关闭）                  |
+| `ripple` | `PressableFeedbackRippleAnimation`       | -       | 水波纹遮罩配置（`false` 为关闭）                   |
+| `state`  | `'disabled' \| 'disable-all' \| boolean` | -       | 在保留配置的同时控制动画状态（运行时切换） |
+
+**当 `feedbackVariant="scale"` 时：**
+
+| prop    | type                                     | default | description                                                  |
+| ------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| `scale` | `PressableFeedbackScaleAnimation`        | -       | 缩放动画配置（`false` 为关闭）                  |
+| `state` | `'disabled' \| 'disable-all' \| boolean` | -       | 在保留配置的同时控制动画状态（运行时切换） |
+
+**当 `feedbackVariant="none"` 时：**
+
+仅接受字符串 `'disable-all'`。所有反馈效果均被禁用。
+
+动画子类型（`PressableFeedbackScaleAnimation`、`PressableFeedbackHighlightAnimation`、`PressableFeedbackRippleAnimation`）详见 [PressableFeedback API 参考](./pressable-feedback#api-reference)。
+
+### Button.Label
+
+| prop           | type              | default | description                           |
+| -------------- | ----------------- | ------- | ------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 作为标签渲染的内容       |
+| `className`    | `string`          | -       | 额外 CSS 类                |
+| `...TextProps` | `TextProps`       | -       | 支持全部标准 Text 属性 |
+
+## Hooks
+
+### useButton
+
+用于读取 Button 上下文，返回尺寸、变体与禁用状态。
+
+```tsx
+import { useButton } from 'heroui-native';
+
+const { size, variant, isDisabled } = useButton();
+```
+
+#### 返回值
+
+| property     | type                                                                                          | description                    |
+| ------------ | --------------------------------------------------------------------------------------------- | ------------------------------ |
+| `size`       | `'sm' \| 'md' \| 'lg'`                                                                        | 按钮尺寸             |
+| `variant`    | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger' \| 'danger-soft'` | 按钮视觉变体   |
+| `isDisabled` | `boolean`                                                                                     | 是否禁用 |
+
+**说明：** 必须在 `Button` 内使用；在按钮上下文外调用会抛错。

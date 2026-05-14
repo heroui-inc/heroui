@@ -1,0 +1,359 @@
+---
+title: BottomSheet
+description: 自底部滑入的底部表单，带动画与下滑关闭手势。
+icon: updated
+links:
+  source_native: bottom-sheet/bottom-sheet.tsx
+  styles_native: bottom-sheet/bottom-sheet.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { BottomSheet } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>...</BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay>...</BottomSheet.Overlay>
+    <BottomSheet.Content>
+      <BottomSheet.Close />
+      <BottomSheet.Title>...</BottomSheet.Title>
+      <BottomSheet.Description>...</BottomSheet.Description>
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
+- **BottomSheet**：根组件，管理开关状态并向子级提供上下文。
+- **BottomSheet.Trigger**：按下后打开底部表单的可按压区域。
+- **BottomSheet.Portal**：在 Portal 中渲染，使用全屏覆盖层。
+- **BottomSheet.Overlay**：覆盖全屏的背景层，按下通常可关闭。
+- **BottomSheet.Content**：主容器，基于 @gorhom/bottom-sheet 渲染并支持手势。
+- **BottomSheet.Close**：关闭按钮；可自定义子节点或使用默认关闭图标。
+- **BottomSheet.Title**：标题，语义标题角色并关联无障碍。
+- **BottomSheet.Description**：说明文字，并关联无障碍。
+
+## 用法
+
+### 基础底部表单
+
+包含标题、描述与关闭按钮的简单示例。
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger asChild>
+    <Button>打开底部表单</Button>
+  </BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content>
+      <BottomSheet.Close />
+      <BottomSheet.Title>...</BottomSheet.Title>
+      <BottomSheet.Description>...</BottomSheet.Description>
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
+### 悬浮（Detached）
+
+与底边留出间距的悬浮样式。
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>...</BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content
+      detached={true}
+      bottomInset={insets.bottom + 12}
+      className="mx-4"
+      backgroundClassName="rounded-[32px]"
+    >
+      ...
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
+### 多停靠点与滚动
+
+多档高度与可滚动内容。
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>...</BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content snapPoints={['25%', '50%', '90%']}>
+      <ScrollView>...</ScrollView>
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
+### 自定义遮罩
+
+用模糊等自定义内容替换默认遮罩。
+
+```tsx
+import { useBottomSheet, useBottomSheetAnimation } from 'heroui-native';
+import { StyleSheet, Pressable } from 'react-native';
+import { interpolate, useDerivedValue } from 'react-native-reanimated';
+import { AnimatedBlurView } from './animated-blur-view';
+import { useUniwind } from 'uniwind';
+
+export const BottomSheetBlurOverlay = () => {
+  const { theme } = useUniwind();
+  const { onOpenChange } = useBottomSheet();
+  const { progress } = useBottomSheetAnimation();
+
+  const blurIntensity = useDerivedValue(() => {
+    return interpolate(progress.get(), [0, 1, 2], [0, 40, 0]);
+  });
+
+  return (
+    <Pressable
+      style={StyleSheet.absoluteFill}
+      onPress={() => onOpenChange(false)}
+    >
+      <AnimatedBlurView
+        blurIntensity={blurIntensity}
+        tint={theme === 'dark' ? 'dark' : 'systemUltraThinMaterialDark'}
+        style={StyleSheet.absoluteFill}
+      />
+    </Pressable>
+  );
+};
+```
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>...</BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheetBlurOverlay />
+    <BottomSheet.Content>...</BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
+## 示例
+
+```tsx
+import { BottomSheet, Button } from 'heroui-native';
+import { useState } from 'react';
+import { View } from 'react-native';
+import { withUniwind } from 'uniwind';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export default function BottomSheetExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <BottomSheet isOpen={isOpen} onOpenChange={setIsOpen}>
+      <BottomSheet.Trigger asChild>
+        <Button variant="secondary">打开底部表单</Button>
+      </BottomSheet.Trigger>
+      <BottomSheet.Portal>
+        <BottomSheet.Overlay />
+        <BottomSheet.Content>
+          <View className="items-center mb-5">
+            <View className="size-20 items-center justify-center rounded-full bg-green-500/10">
+              <StyledIonicons
+                name="shield-checkmark"
+                size={40}
+                className="text-green-500"
+              />
+            </View>
+          </View>
+          <View className="mb-8 gap-2 items-center">
+            <BottomSheet.Title className="text-center">
+              保持安全
+            </BottomSheet.Title>
+            <BottomSheet.Description className="text-center">
+              将软件更新到最新版本，以获得更好的安全性与性能。
+            </BottomSheet.Description>
+          </View>
+          <View className="gap-3">
+            <Button onPress={() => setIsOpen(false)}>立即更新</Button>
+            <Button variant="tertiary" onPress={() => setIsOpen(false)}>
+              稍后
+            </Button>
+          </View>
+        </BottomSheet.Content>
+      </BottomSheet.Portal>
+    </BottomSheet>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/bottom-sheet.tsx)。
+
+## API 参考
+
+### BottomSheet
+
+| prop            | type                       | default | description                                        |
+| --------------- | -------------------------- | ------- | -------------------------------------------------- |
+| `children`      | `React.ReactNode`          | -       | 触发器与底部表单内容                               |
+| `isOpen`        | `boolean`                  | -       | 受控开关状态                                       |
+| `isDefaultOpen` | `boolean`                  | `false` | 非受控初始是否打开                                 |
+| `animation`     | `AnimationRootDisableAll`  | -       | 动画配置                                           |
+| `onOpenChange`  | `(value: boolean) => void` | -       | 开关状态变化回调                                   |
+| `...ViewProps`  | `ViewProps`                | -       | 支持 React Native `View` 的全部属性                |
+
+#### 动画配置
+
+根动画配置，可为：
+
+- `"disable-all"`：禁用全部动画（含子级）
+- `undefined`：使用默认动画
+
+### BottomSheet.Trigger
+
+| prop                       | type                    | default | description                                                    |
+| -------------------------- | ----------------------- | ------- | -------------------------------------------------------------- |
+| `children`                 | `React.ReactNode`       | -       | 触发器内容                                                     |
+| `asChild`                  | `boolean`               | -       | 是否无包裹渲染为子元素                                         |
+| `...TouchableOpacityProps` | `TouchableOpacityProps` | -       | 支持 React Native `TouchableOpacity` 的全部属性                |
+
+### BottomSheet.Portal
+
+| prop                                         | type                   | default | description                                                                                                                                                                                                      |
+| -------------------------------------------- | ---------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`                                   | `React.ReactNode`      | -       | Portal 内容（遮罩与底部表单）                                                                                                                                                                                    |
+| `disableFullWindowOverlay`                   | `boolean`              | `false` | iOS 为 true 时使用普通 `View` 替代 `FullWindowOverlay`，便于检查器；遮罩不再叠在原生模态之上                                                                                                                    |
+| `unstable_accessibilityContainerViewIsModal` | `boolean`              | `false` | 是否将覆盖窗口视为模态容器（VoiceOver）。仅 iOS；可能随 react-native-screens 变化                                                                                                                                 |
+| `className`                                  | `string`               | -       | Portal 容器额外 class                                                                                                                                                                                            |
+| `style`                                      | `StyleProp<ViewStyle>` | -       | Portal 容器额外样式                                                                                                                                                                                              |
+| `hostName`                                   | `string`               | -       | 可选 Portal 宿主名                                                                                                                                                                                               |
+| `forceMount`                                 | `boolean`              | -       | 关闭时仍挂载以配合动画                                                                                                                                                                                           |
+
+### BottomSheet.Overlay
+
+| prop                    | type                                                   | default | description                                                  |
+| ----------------------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode`                                      | -       | 自定义遮罩内容                                               |
+| `className`             | `string`                                               | -       | 遮罩额外 class                                               |
+| `style`                 | `ViewStyle`                                            | -       | 遮罩容器样式                                                 |
+| `animation`             | `Omit<PopupOverlayAnimation, 'entering' \| 'exiting'>` | -       | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                                              | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `isCloseOnPress`        | `boolean`                                              | `true`  | 按下遮罩是否关闭                                             |
+| `...PressableProps`     | `PressableProps`                                       | -       | 支持 React Native `Pressable` 的全部属性                     |
+
+#### 动画配置
+
+遮罩动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置（不含 `entering` / `exiting`）
+
+| prop            | type                       | default     | description                                     |
+| --------------- | -------------------------- | ----------- | ----------------------------------------------- |
+| `state`         | `'disabled' \| boolean`    | -           | 在自定义属性时禁用动画                          |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]` | 不透明度 [空闲, 打开, 关闭]                     |
+
+### BottomSheet.Content
+
+| prop                        | type                                     | default | description                                                                                        |
+| --------------------------- | ---------------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `children`                  | `React.ReactNode`                        | -       | 底部表单内容                                                                                       |
+| `className`                 | `string`                                 | -       | 容器额外 class                                                                                     |
+| `containerClassName`        | `string`                                 | -       | 外层容器 class                                                                                     |
+| `contentContainerClassName` | `string`                                 | -       | 内容区 class                                                                                       |
+| `backgroundClassName`       | `string`                                 | -       | 背景 class                                                                                         |
+| `handleClassName`           | `string`                                 | -       | 拖动手柄区域 class                                                                                 |
+| `handleIndicatorClassName`  | `string`                                 | -       | 手柄指示条 class                                                                                   |
+| `contentContainerProps`     | `Omit<BottomSheetViewProps, 'children'>` | -       | 内容容器 props                                                                                     |
+| `animation`                 | `AnimationDisabled`                      | -       | 动画配置                                                                                           |
+| `...GorhomBottomSheetProps` | `Partial<GorhomBottomSheetProps>`        | -       | 支持 [@gorhom/bottom-sheet 全部 props](https://gorhom.dev/react-native-bottom-sheet/props)        |
+
+**说明：** 内容区内可使用 [@gorhom/bottom-sheet 组件](https://gorhom.dev/react-native-bottom-sheet/components/bottomsheetview)，如 `BottomSheetView`、`BottomSheetScrollView`、`BottomSheetFlatList` 等。
+
+### BottomSheet.Close
+
+`BottomSheet.Close` 继承 [CloseButton](./close-button)，按下时自动关闭底部表单。
+
+### BottomSheet.Title
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 标题内容                                           |
+| `className`    | `string`          | -       | 标题额外 class                                     |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                  |
+
+### BottomSheet.Description
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 描述内容                                           |
+| `className`    | `string`          | -       | 描述额外 class                                     |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                |
+
+## Hooks
+
+### useBottomSheet
+
+访问底部表单原语上下文。
+
+```tsx
+const { isOpen, onOpenChange } = useBottomSheet();
+```
+
+| property       | type                       | description     |
+| -------------- | -------------------------- | ----------------- |
+| `isOpen`       | `boolean`                  | 当前是否打开      |
+| `onOpenChange` | `(value: boolean) => void` | 修改开关状态      |
+
+### useBottomSheetAnimation
+
+访问底部表单动画上下文。
+
+```tsx
+const { progress } = useBottomSheetAnimation();
+```
+
+| property   | type                  | description                                  |
+| ---------- | --------------------- | -------------------------------------------- |
+| `progress` | `SharedValue<number>` | 动画进度（0=空闲，1=打开，2=关闭）           |
+
+## 特别说明
+
+### 元素检查器（iOS）
+
+`BottomSheet` 在 iOS 使用 `FullWindowOverlay`，位于独立原生窗口，会破坏 React Native 元素检查器。开发时可在 `BottomSheet.Portal` 设置 `disableFullWindowOverlay={true}`。代价：底部表单将无法叠在原生系统模态之上。
+
+### 关闭回调
+
+建议使用 `BottomSheet` 的 `onOpenChange` 处理关闭逻辑，可在所有关闭场景可靠触发（下滑、点遮罩、点关闭、程序化关闭等）。
+
+```tsx
+<BottomSheet
+  isOpen={isOpen}
+  onOpenChange={(value) => {
+    setIsOpen(value);
+    if (!value) {
+      // 任意方式关闭时都会执行
+      yourCallbackOnClose();
+    }
+  }}
+>
+  ...
+</BottomSheet>
+```
+
+**说明：** `@gorhom/bottom-sheet` 在 `BottomSheet.Content` 上的 `onClose` 仅在下滑关闭时触发，点遮罩、关闭按钮或程序化关闭不会触发。需要可靠关闭回调时请使用根组件的 `onOpenChange`。

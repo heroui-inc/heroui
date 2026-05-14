@@ -1,0 +1,270 @@
+---
+title: Alert
+description: 向用户展示重要消息与通知，并带有状态指示。
+links:
+  source_native: alert/alert.tsx
+  styles_native: alert/alert.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Alert } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Alert>
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>...</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+- **Alert**：根容器，`role="alert"`，按状态应用样式；通过原语上下文向子组件提供状态。
+- **Alert.Indicator**：默认渲染与状态匹配的图标；可传入自定义子节点覆盖；支持 `iconProps` 调整尺寸与颜色。
+- **Alert.Content**：包裹标题与描述，提供文字布局结构。
+- **Alert.Title**：标题文字，颜色随状态变化；通过 `aria-labelledby` 与根关联。
+- **Alert.Description**：正文，弱化色；通过 `aria-describedby` 与根关联。
+
+## 用法
+
+### 基础用法
+
+使用复合子部件展示带图标、标题与描述的通知。
+
+```tsx
+<Alert>
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>新功能已上线</Alert.Title>
+    <Alert.Description>
+      查看最新更新，包括深色模式支持与无障碍改进等。
+    </Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+### 状态变体
+
+使用 `status` 控制图标与标题颜色。可选：`default`、`accent`、`success`、`warning`、`danger`。
+
+```tsx
+<Alert status="success">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>成功</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+
+<Alert status="warning">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>计划维护</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+
+<Alert status="danger">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>无法连接</Alert.Title>
+    <Alert.Description>...</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+### 仅标题
+
+省略 `Alert.Description` 以得到紧凑单行提示。
+
+```tsx
+<Alert status="success" className="items-center">
+  <Alert.Indicator className="pt-0" />
+  <Alert.Content>
+    <Alert.Title>资料已成功更新</Alert.Title>
+  </Alert.Content>
+</Alert>
+```
+
+### 操作按钮
+
+在内容旁放置按钮等额外元素。
+
+```tsx
+<Alert status="accent">
+  <Alert.Indicator />
+  <Alert.Content>
+    <Alert.Title>有可用更新</Alert.Title>
+    <Alert.Description>
+      应用有新版本可用。
+    </Alert.Description>
+  </Alert.Content>
+  <Button size="sm" variant="primary">
+    刷新
+  </Button>
+</Alert>
+```
+
+### 自定义指示器
+
+向 `Alert.Indicator` 传入自定义子节点以替换默认状态图标。
+
+```tsx
+<Alert status="accent">
+  <Alert.Indicator>
+    <Spinner>
+      <Spinner.Indicator iconProps={{ width: 20, height: 20 }} />
+    </Spinner>
+  </Alert.Indicator>
+  <Alert.Content>
+    <Alert.Title>正在处理请求</Alert.Title>
+    <Alert.Description>请稍候，正在同步您的数据。</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+### 自定义样式
+
+在根与各复合部件上使用 `className`。
+
+```tsx
+<Alert className="bg-accent/10 rounded-xl">
+  <Alert.Indicator className="pt-1" />
+  <Alert.Content className="gap-1">
+    <Alert.Title className="text-lg">...</Alert.Title>
+    <Alert.Description className="text-base">...</Alert.Description>
+  </Alert.Content>
+</Alert>
+```
+
+## 示例
+
+```tsx
+import { Alert, Button, CloseButton } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function AlertExample() {
+  return (
+    <View className="w-full gap-4">
+      <Alert status="accent">
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>有可用更新</Alert.Title>
+          <Alert.Description>
+            应用有新版本。请刷新以获取最新功能与问题修复。
+          </Alert.Description>
+        </Alert.Content>
+        <Button size="sm" variant="primary">
+          刷新
+        </Button>
+      </Alert>
+
+      <Alert status="danger">
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>无法连接服务器</Alert.Title>
+          <Alert.Description>
+            无法连接到服务器。请检查网络后重试。
+          </Alert.Description>
+        </Alert.Content>
+        <Button size="sm" variant="danger">
+          重试
+        </Button>
+      </Alert>
+
+      <Alert status="success" className="items-center">
+        <Alert.Indicator className="pt-0" />
+        <Alert.Content>
+          <Alert.Title>资料已成功更新</Alert.Title>
+        </Alert.Content>
+        <CloseButton />
+      </Alert>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/alert.tsx>)。
+
+## API 参考
+
+### Alert
+
+| prop           | type                                                          | default     | description                                                       |
+| -------------- | ------------------------------------------------------------- | ----------- | ----------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                                             | -           | 渲染在 Alert 内的子节点                                           |
+| `status`       | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | 状态，控制图标与着色                                              |
+| `id`           | `string \| number`                                            | -           | 唯一标识；未提供时自动生成                                       |
+| `className`    | `string`                                                      | -           | 额外的 class                                                      |
+| `style`        | `ViewStyle`                                                   | -           | 根容器额外样式                                                    |
+| `...ViewProps` | `ViewProps`                                                   | -           | 支持 React Native `View` 的全部属性                               |
+
+### Alert.Indicator
+
+| prop           | type              | default | description                                                        |
+| -------------- | ----------------- | ------- | ------------------------------------------------------------------ |
+| `children`     | `React.ReactNode` | -       | 自定义子节点，替代默认状态图标                                     |
+| `className`    | `string`          | -       | 额外的 class                                                       |
+| `iconProps`    | `AlertIconProps`  | -       | 传给默认状态图标的属性（尺寸、颜色等）                             |
+| `...ViewProps` | `ViewProps`       | -       | 支持 React Native `View` 的全部属性                               |
+
+#### AlertIconProps
+
+| prop    | type     | default      | description        |
+| ------- | -------- | ------------ | ------------------ |
+| `size`  | `number` | `18`         | 图标尺寸（像素）   |
+| `color` | `string` | 随状态着色   | 图标颜色字符串     |
+
+### Alert.Content
+
+| prop           | type              | default | description                                                     |
+| -------------- | ----------------- | ------- | --------------------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 子节点（通常为 `Alert.Title` 与 `Alert.Description`）           |
+| `className`    | `string`          | -       | 额外的 class                                                    |
+| `...ViewProps` | `ViewProps`       | -       | 支持 React Native `View` 的全部属性                             |
+
+### Alert.Title
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 标题文字                                           |
+| `className`    | `string`          | -       | 额外的 class                                       |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                |
+
+### Alert.Description
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 描述文字                                           |
+| `className`    | `string`          | -       | 额外的 class                                       |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                |
+
+## Hooks
+
+### useAlert
+
+访问 Alert 根上下文，必须在 `Alert` 内使用。
+
+```tsx
+import { useAlert } from 'heroui-native';
+
+const { status, nativeID } = useAlert();
+```
+
+#### 返回值
+
+| property   | type                                                          | description                              |
+| ---------- | ------------------------------------------------------------- | ---------------------------------------- |
+| `status`   | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | 当前状态，供子组件样式使用               |
+| `nativeID` | `string`                                                      | 无障碍与 ARIA 使用的唯一标识             |

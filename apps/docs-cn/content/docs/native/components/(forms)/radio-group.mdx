@@ -1,0 +1,339 @@
+---
+title: RadioGroup
+description: 单选按钮组，同一时间只能选中一个选项。
+links:
+  source_native: radio-group/radio-group.tsx
+  styles_native: radio-group/radio-group.styles.ts
+  figma: true
+---
+
+<NativeVideoPlayerView
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/radio-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/radio-group-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { RadioGroup } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<RadioGroup>
+  <RadioGroup.Item>
+    <Label>...</Label>
+    <Description>...</Description>
+    <Radio>
+      <Radio.Indicator>
+        <Radio.IndicatorThumb />
+      </Radio.Indicator>
+    </Radio>
+  </RadioGroup.Item>
+  <FieldError>...</FieldError>
+</RadioGroup>
+```
+
+- **RadioGroup**：管理单选项选中状态的容器，支持横向与纵向布局。
+- **RadioGroup.Item**：组内单个选项，必须放在 `RadioGroup` 内。处理选中状态；在仅提供文本子节点时会渲染默认 `<Radio />` 指示器。支持渲染函数子节点以访问状态（`isSelected`、`isInvalid`、`isDisabled`）。
+- **Label**：可选的可点击文字标签，与单选项关联以提升无障碍。请直接使用 [Label](./label) 组件。
+- **Description**：标签下方的可选说明文字。请直接使用 [Description](./description) 组件。
+- **Radio**：置于 `RadioGroup.Item` 内的 [Radio](./radio) 组件，用于渲染单选指示器。会自动识别 `RadioGroupItem` 上下文并从中获取 `isSelected`、`isDisabled`、`isInvalid` 与 `variant`。
+- **Radio.Indicator**：单选圆环的可选容器；无子节点时渲染默认拇指样式，管理选中视觉。完整 API 见 [Radio](./radio)。
+- **Radio.IndicatorThumb**：选中时显示的可选内圆，随选中状态缩放动画；可替换为自定义内容。见 [Radio](./radio)。
+- **FieldError**：在组无效时显示的错误信息，带动画显示在组内容下方。请直接使用 [FieldError](./field-error) 组件。
+
+## 用法
+
+### 基础用法
+
+使用简单字符串子节点时，会自动渲染标题与指示器。
+
+```tsx
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="option1">选项 1</RadioGroup.Item>
+  <RadioGroup.Item value="option2">选项 2</RadioGroup.Item>
+  <RadioGroup.Item value="option3">选项 3</RadioGroup.Item>
+</RadioGroup>
+```
+
+### 带说明文字
+
+在每个选项下方添加描述以补充上下文。
+
+```tsx
+import { RadioGroup, Radio, Label, Description } from 'heroui-native';
+import { View } from 'react-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="standard">
+    <View>
+      <Label>标准配送</Label>
+      <Description>5–7 个工作日送达</Description>
+    </View>
+    <Radio />
+  </RadioGroup.Item>
+  <RadioGroup.Item value="express">
+    <View>
+      <Label>加急配送</Label>
+      <Description>2–3 个工作日送达</Description>
+    </View>
+    <Radio />
+  </RadioGroup.Item>
+</RadioGroup>;
+```
+
+### 自定义指示器
+
+使用 `Radio` 子组件将默认拇指替换为自定义内容。
+
+```tsx
+import { RadioGroup, Radio, Label } from 'heroui-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="custom">
+    {({ isSelected }) => (
+      <>
+        <Label>自定义选项</Label>
+        <Radio>
+          <Radio.Indicator>
+            {isSelected && (
+              <Animated.View entering={FadeIn}>
+                <Icon name="check" size={12} />
+              </Animated.View>
+            )}
+          </Radio.Indicator>
+        </Radio>
+      </>
+    )}
+  </RadioGroup.Item>
+</RadioGroup>;
+```
+
+### 使用渲染函数
+
+在 `RadioGroup.Item` 上使用渲染函数以访问状态并自定义整块内容。
+
+```tsx
+import { RadioGroup, Radio, Label } from 'heroui-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="option1">
+    {({ isSelected, isInvalid, isDisabled }) => (
+      <>
+        <Label>选项 1</Label>
+        <Radio>
+          <Radio.Indicator>{isSelected && <CustomIcon />}</Radio.Indicator>
+        </Radio>
+      </>
+    )}
+  </RadioGroup.Item>
+</RadioGroup>;
+```
+
+### 显示错误信息
+
+在单选组下方展示校验错误。
+
+```tsx
+import { RadioGroup, FieldError } from 'heroui-native';
+
+function RadioGroupWithError() {
+  const [value, setValue] = React.useState<string | undefined>(undefined);
+
+  return (
+    <RadioGroup value={value} onValueChange={setValue} isInvalid={!value}>
+      <RadioGroup.Item value="agree">我同意条款</RadioGroup.Item>
+      <RadioGroup.Item value="disagree">我不同意</RadioGroup.Item>
+      <FieldError isInvalid={!value}>
+        请选择一项以继续
+      </FieldError>
+    </RadioGroup>
+  );
+}
+```
+
+## 示例
+
+```tsx
+import {
+  Description,
+  Label,
+  Radio,
+  RadioGroup,
+  Separator,
+  Surface,
+} from 'heroui-native';
+import React from 'react';
+import { View } from 'react-native';
+
+export default function RadioGroupExample() {
+  const [selection, setSelection] = React.useState('desc1');
+
+  return (
+    <Surface className="w-full">
+      <RadioGroup value={selection} onValueChange={setSelection}>
+        <RadioGroup.Item value="desc1">
+          <View>
+            <Label>标准配送</Label>
+            <Description>5–7 个工作日送达</Description>
+          </View>
+          <Radio />
+        </RadioGroup.Item>
+        <Separator className="my-1" />
+        <RadioGroup.Item value="desc2">
+          <View>
+            <Label>加急配送</Label>
+            <Description>2–3 个工作日送达</Description>
+          </View>
+          <Radio />
+        </RadioGroup.Item>
+        <Separator className="my-1" />
+        <RadioGroup.Item value="desc3">
+          <View>
+            <Label>次日达</Label>
+            <Description>下一个工作日送达</Description>
+          </View>
+          <Radio />
+        </RadioGroup.Item>
+      </RadioGroup>
+    </Surface>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/radio-group.tsx>)。
+
+## API 参考
+
+### RadioGroup
+
+| prop            | type                         | default     | description                                                                               |
+| --------------- | ---------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `children`      | `React.ReactNode`            | `undefined` | 单选组内容                                                                       |
+| `value`         | `string \| undefined`        | `undefined` | 当前选中值                                           |
+| `onValueChange` | `(val: string) => void`      | `undefined` | 选中值变化时的回调                                            |
+| `isDisabled`    | `boolean`                    | `false`     | 是否禁用整个单选组                                                |
+| `isInvalid`     | `boolean`                    | `false`     | 组是否处于无效状态                                                        |
+| `variant`       | `'primary' \| 'secondary'`   | `undefined` | 单选组样式变体（子项未单独设置时继承）                 |
+| `animation`     | `"disable-all" \| undefined` | `undefined` | 动画配置。使用 `"disable-all"` 可关闭包含子节点在内的全部动画 |
+| `className`     | `string`                     | `undefined` | 自定义 className                                                                         |
+| `...ViewProps`  | `ViewProps`                  | -           | 支持全部标准 React Native View 属性                                        |
+
+### RadioGroup.Item
+
+| prop                | type                                                                         | default     | description                                                               |
+| ------------------- | ---------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode \| ((props: RadioGroupItemRenderProps) => React.ReactNode)` | `undefined` | 选项内容，或用于自定义项的渲染函数         |
+| `value`             | `string`                                                                     | `undefined` | 该选项关联的值                                 |
+| `isDisabled`        | `boolean`                                                                    | `false`     | 是否禁用该选项                              |
+| `isInvalid`         | `boolean`                                                                    | `false`     | 该选项是否无效                                         |
+| `variant`           | `'primary' \| 'secondary'`                                                   | `'primary'` | 该选项的样式变体                                          |
+| `hitSlop`           | `number`                                                                     | `6`         | 可点击区域的热区扩展                                           |
+| `className`         | `string`                                                                     | `undefined` | 自定义 className                                                         |
+| `...PressableProps` | `PressableProps`                                                             | -           | 支持全部标准 Pressable 属性（不含 disabled） |
+
+#### RadioGroupItemRenderProps
+
+| prop         | type      | description                        |
+| ------------ | --------- | ---------------------------------- |
+| `isSelected` | `boolean` | 该选项是否选中 |
+| `isInvalid`  | `boolean` | 该选项是否无效  |
+| `isDisabled` | `boolean` | 该选项是否禁用 |
+
+### Radio（位于 RadioGroup.Item 内）
+
+`Radio` 放在 `RadioGroup.Item` 内用于渲染单选指示器。此时会自动识别 `RadioGroupItem` 上下文并从中获取 `isSelected`、`isDisabled`、`isInvalid` 与 `variant`，无需手动传参。
+
+使用 `<Radio />` 获得默认指示器，或组合 `Radio.Indicator` 与 `Radio.IndicatorThumb` 自定义样式。
+
+| prop                | type                                                                | default     | description                                                               |
+| ------------------- | ------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode \| ((props: RadioRenderProps) => React.ReactNode)` | `undefined` | 子元素或渲染函数以自定义单选                  |
+| `variant`           | `'primary' \| 'secondary'`                                          | `'primary'` | 单选视觉变体                                               |
+| `isSelected`        | `boolean`                                                           | `undefined` | 是否选中                                   |
+| `isDisabled`        | `boolean`                                                           | `undefined` | 是否禁用且不可交互               |
+| `isInvalid`         | `boolean`                                                           | `false`     | 是否无效（危险色）                         |
+| `className`         | `string`                                                            | `undefined` | 额外 CSS 类                                           |
+| `animation`         | `RadioRootAnimation`                                                | -           | 单选根动画配置                                         |
+| `onSelectedChange`  | `(isSelected: boolean) => void`                                     | `undefined` | 选中状态变化时的回调                     |
+| `...PressableProps` | `PressableProps`                                                    | -           | 支持全部标准 Pressable 属性（不含 disabled） |
+
+#### RadioRenderProps
+
+| prop         | type      | description                   |
+| ------------ | --------- | ----------------------------- |
+| `isSelected` | `boolean` | 是否选中 |
+| `isDisabled` | `boolean` | 是否禁用 |
+| `isInvalid`  | `boolean` | 是否无效  |
+
+#### RadioRootAnimation
+
+单选根组件的动画配置，可为：
+
+- `"disable-all"`：关闭包含子节点（Indicator、IndicatorThumb）在内的全部动画
+- `undefined`：使用默认动画
+
+### Radio.Indicator
+
+| prop                   | type                       | default     | description                                      |
+| ---------------------- | -------------------------- | ----------- | ------------------------------------------------ |
+| `children`             | `React.ReactNode`          | `undefined` | 指示器内容                  |
+| `className`            | `string`                   | `undefined` | 指示器额外 CSS 类         |
+| `...AnimatedViewProps` | `AnimatedProps<ViewProps>` | -           | 支持全部 Reanimated Animated.View 属性 |
+
+### Radio.IndicatorThumb
+
+| prop                    | type                           | default     | description                                                  |
+| ----------------------- | ------------------------------ | ----------- | ------------------------------------------------------------ |
+| `className`             | `string`                       | `undefined` | 拇指区域额外 CSS 类                         |
+| `animation`             | `RadioIndicatorThumbAnimation` | -           | 拇指动画配置                        |
+| `isAnimatedStyleActive` | `boolean`                      | `true`      | 是否启用 Reanimated 动画样式 |
+| `...AnimatedViewProps`  | `AnimatedProps<ViewProps>`     | -           | 支持全部 Reanimated Animated.View 属性             |
+
+#### RadioIndicatorThumbAnimation
+
+单选指示器拇指的动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                 | type                    | default                                              | description                                     |
+| -------------------- | ----------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| `state`              | `'disabled' \| boolean` | -                                                    | 在自定义属性时用于禁用动画 |
+| `scale.value`        | `[number, number]`      | `[1.5, 1]`                                           | 缩放值 [未选中, 已选中]             |
+| `scale.timingConfig` | `WithTimingConfig`      | `{ duration: 300, easing: Easing.out(Easing.ease) }` | 动画时间配置                  |
+
+**说明：** 标签、说明与错误信息请直接使用基础组件：
+
+- 标签使用 [Label](../label/label.md)
+- 说明使用 [Description](../description/description.md)
+- 错误使用 [FieldError](../field-error/field-error.md)
+
+## Hooks
+
+### useRadioGroup
+
+#### 返回值
+
+| 属性        | 类型                       | 描述                                    |
+| --------------- | -------------------------- | ---------------------------------------------- |
+| `value`         | `string \| undefined`      | 当前选中值                       |
+| `isDisabled`    | `boolean`                  | 单选组是否禁用            |
+| `isInvalid`     | `boolean`                  | 单选组是否无效 |
+| `variant`       | `'primary' \| 'secondary'` | 单选组样式变体              |
+| `onValueChange` | `(value: string) => void`  | 修改选中值的函数          |
+
+### useRadioGroupItem
+
+#### 返回值
+
+| 属性           | 类型                                           | 描述                                                             |
+| ------------------ | ---------------------------------------------- | ----------------------------------------------------------------------- |
+| `isSelected`       | `boolean`                                      | 该选项是否选中                                      |
+| `isDisabled`       | `boolean \| undefined`                         | 该选项是否禁用                                      |
+| `isInvalid`        | `boolean \| undefined`                         | 该选项是否无效                                       |
+| `variant`          | `'primary' \| 'secondary' \| undefined`        | 该选项的样式变体                                        |
+| `onSelectedChange` | `((isSelected: boolean) => void) \| undefined` | 修改选中状态的回调（在组内选中该项） |
