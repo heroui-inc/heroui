@@ -22,7 +22,7 @@ function CalendarMonthHeading({offset = 0}: {offset?: number}) {
 export function MultipleMonths() {
   return (
     <Calendar
-      aria-label="Trip dates"
+      aria-label="出行日期"
       className="@container-normal w-auto overflow-x-auto"
       visibleDuration={{months: 2}}
     >

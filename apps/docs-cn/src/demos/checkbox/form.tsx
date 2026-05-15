@@ -9,7 +9,7 @@ export function Form() {
     const formData = new FormData(e.target as HTMLFormElement);
 
     alert(
-      `Form submitted with:\n${Array.from(formData.entries())
+      `表单已提交，内容如下：\n${Array.from(formData.entries())
         .map(([key, value]) => `${key}: ${value}`)
         .join("\n")}`,
     );
@@ -25,7 +25,7 @@ export function Form() {
             </Checkbox.Control>
           </Checkbox>
           <Checkbox.Content>
-            <Label htmlFor="form-notifications">Enable notifications</Label>
+            <Label htmlFor="form-notifications">启用通知</Label>
           </Checkbox.Content>
         </div>
         <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ export function Form() {
             </Checkbox.Control>
           </Checkbox>
           <Checkbox.Content>
-            <Label htmlFor="form-newsletter">Subscribe to newsletter</Label>
+            <Label htmlFor="form-newsletter">订阅邮件通讯</Label>
           </Checkbox.Content>
         </div>
         <div className="flex items-center gap-3">
@@ -45,12 +45,12 @@ export function Form() {
             </Checkbox.Control>
           </Checkbox>
           <Checkbox.Content>
-            <Label htmlFor="form-marketing">Receive marketing updates</Label>
+            <Label htmlFor="form-marketing">接收营销资讯</Label>
           </Checkbox.Content>
         </div>
       </div>
       <Button className="mt-4" size="sm" type="submit" variant="primary">
-        Submit
+        提交
       </Button>
     </form>
   );

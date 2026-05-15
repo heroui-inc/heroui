@@ -11,8 +11,8 @@ export function CustomTrigger() {
           <TrashBin className="size-6" />
         </div>
         <div className="flex flex-1 flex-col gap-0.5">
-          <p className="text-sm font-semibold">Delete Item</p>
-          <p className="text-xs text-muted">Permanently remove this item</p>
+          <p className="text-sm font-semibold">删除条目</p>
+          <p className="text-xs text-muted">永久移除此条目</p>
         </div>
       </AlertDialog.Trigger>
       <AlertDialog.Backdrop>
@@ -23,21 +23,20 @@ export function CustomTrigger() {
               <AlertDialog.Icon status="danger">
                 <TrashBin className="size-5" />
               </AlertDialog.Icon>
-              <AlertDialog.Heading>Delete this item?</AlertDialog.Heading>
+              <AlertDialog.Heading>要删除此条目吗？</AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>
               <p>
-                Use <code>AlertDialog.Trigger</code> to create custom trigger elements beyond
-                standard buttons. This example shows a card-style trigger with icons and descriptive
-                text.
+                使用 <code>AlertDialog.Trigger</code>{" "}
+                可在标准按钮之外自定义触发区域。此示例展示带图标与说明文字的卡片式触发器。
               </p>
             </AlertDialog.Body>
             <AlertDialog.Footer>
               <Button slot="close" variant="tertiary">
-                Cancel
+                取消
               </Button>
               <Button slot="close" variant="danger">
-                Delete Item
+                删除条目
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

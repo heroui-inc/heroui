@@ -36,12 +36,12 @@ export function TagGroupSelection() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select tags"
+      placeholder="选择标签"
       selectionMode="multiple"
       value={selectedKeys}
       onChange={(keys) => setSelectedKeys(keys as Key[])}
     >
-      <Label>Tags</Label>
+      <Label>标签</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
           {({defaultChildren, isPlaceholder, state}) => {
@@ -78,11 +78,11 @@ export function TagGroupSelection() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search tags..." />
+              <SearchField.Input placeholder="搜索标签…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No tags found</EmptyState>}>
+          <ListBox renderEmptyState={() => <EmptyState>未找到标签</EmptyState>}>
             {tags.map((tag) => (
               <ListBox.Item key={tag.id} id={tag.id} textValue={tag.name}>
                 {tag.name}

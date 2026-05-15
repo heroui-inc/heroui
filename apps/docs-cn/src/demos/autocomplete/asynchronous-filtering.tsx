@@ -27,10 +27,10 @@ export function AsynchronousFiltering() {
     <Autocomplete
       allowsEmptyCollection
       className="w-[256px]"
-      placeholder="Search..."
+      placeholder="搜索…"
       selectionMode="single"
     >
-      <Label>Search a Star Wars characters</Label>
+      <Label>搜索《星球大战》角色</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
         <Autocomplete.ClearButton />
@@ -41,7 +41,7 @@ export function AsynchronousFiltering() {
           <SearchField autoFocus className="sticky top-0 z-10" name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search characters..." />
+              <SearchField.Input placeholder="搜索角色…" />
               <Spinner
                 size="sm"
                 className={cn("absolute top-1/2 right-2 -translate-y-1/2", {
@@ -56,7 +56,7 @@ export function AsynchronousFiltering() {
           <ListBox
             className="max-h-[420px] overflow-y-auto"
             items={list.items}
-            renderEmptyState={() => <EmptyState>No results found</EmptyState>}
+            renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}
           >
             {(item: Character) => (
               <ListBox.Item id={item.name} textValue={item.name}>

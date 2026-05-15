@@ -4,7 +4,7 @@ export function FullRounded() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3">
-        <Label className="text-muted">Rounded checkboxes</Label>
+        <Label className="text-muted">圆角复选框</Label>
         <Checkbox
           className="[&_[data-slot='checkbox-default-indicator--checkmark']]:size-2"
           name="small-rounded"
@@ -13,7 +13,7 @@ export function FullRounded() {
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Small size</Label>
+            <Label>小尺寸</Label>
           </Checkbox.Content>
         </Checkbox>
       </div>
@@ -23,7 +23,7 @@ export function FullRounded() {
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Default size</Label>
+            <Label>默认尺寸</Label>
           </Checkbox.Content>
         </Checkbox>
       </div>
@@ -33,7 +33,7 @@ export function FullRounded() {
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Large size</Label>
+            <Label>大尺寸</Label>
           </Checkbox.Content>
         </Checkbox>
       </div>
@@ -46,7 +46,7 @@ export function FullRounded() {
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Extra large size</Label>
+            <Label>特大尺寸</Label>
           </Checkbox.Content>
         </Checkbox>
       </div>

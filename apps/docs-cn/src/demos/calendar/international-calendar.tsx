@@ -7,7 +7,7 @@ import {I18nProvider} from "react-aria-components";
 export function InternationalCalendar() {
   return (
     <I18nProvider locale="hi-IN-u-ca-indian">
-      <Calendar aria-label="Event date" defaultValue={today(getLocalTimeZone())}>
+      <Calendar aria-label="活动日期" defaultValue={today(getLocalTimeZone())}>
         <Calendar.Header>
           <Calendar.YearPickerTrigger>
             <Calendar.YearPickerTriggerHeading />

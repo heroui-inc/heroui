@@ -33,9 +33,9 @@ export function CustomAnimations() {
         ].join(" "),
       },
       description:
-        "Physics-based elastic scaling. Simulates a high-damping spring system with fast transient response and prolonged settling time. Ideal for Alert Dialogs and Modals.",
+        "基于物理感的弹性缩放，模拟高阻尼弹簧：瞬态响应快、回落时间长，适合警告框与模态框。",
       icon: "gravity-ui:sparkles",
-      name: "Kinematic Scale",
+      name: "运动学缩放",
     },
     {
       classNames: {
@@ -59,9 +59,9 @@ export function CustomAnimations() {
         ].join(" "),
       },
       description:
-        "Simulates movement through a medium with fluid resistance. Eliminates mechanical linearity for a natural, grounded feel. Perfect for Bottom Sheets or Toasts.",
+        "模拟在介质中运动并受流体阻力影响，避免机械式线性，更自然、更贴地，适合底部抽屉或 Toast。",
       icon: "gravity-ui:arrow-up-from-line",
-      name: "Fluid Slide",
+      name: "流体滑入",
     },
   ];
 
@@ -81,16 +81,16 @@ export function CustomAnimations() {
                     <AlertDialog.Icon status="accent">
                       {!!IconComponent && <IconComponent className="size-5" />}
                     </AlertDialog.Icon>
-                    <AlertDialog.Heading>{name} Animation</AlertDialog.Heading>
+                    <AlertDialog.Heading>{name} 动画</AlertDialog.Heading>
                   </AlertDialog.Header>
                   <AlertDialog.Body>
                     <p className="mt-1">{description}</p>
                   </AlertDialog.Body>
                   <AlertDialog.Footer>
                     <Button slot="close" variant="tertiary">
-                      Close
+                      关闭
                     </Button>
-                    <Button slot="close">Try Again</Button>
+                    <Button slot="close">再试一次</Button>
                   </AlertDialog.Footer>
                 </AlertDialog.Dialog>
               </AlertDialog.Container>

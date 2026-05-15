@@ -19,41 +19,35 @@ export function CustomIndicator() {
       <Accordion.Item id="1">
         <Accordion.Heading>
           <Accordion.Trigger>
-            Using Plus/Minus Icon
+            使用加号/减号图标
             <Accordion.Indicator>
               {expandedKeys.has("1") ? <Minus /> : <Plus />}
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>
         <Accordion.Panel>
-          <Accordion.Body>
-            This accordion uses a plus icon that transforms when expanded. The icon automatically
-            rotates 45 degrees to form an X.
-          </Accordion.Body>
+          <Accordion.Body>折叠时显示加号图标，展开时切换为减号图标。</Accordion.Body>
         </Accordion.Panel>
       </Accordion.Item>
 
       <Accordion.Item id="2">
         <Accordion.Heading>
           <Accordion.Trigger>
-            Using Caret Icon
+            使用圆形箭头图标
             <Accordion.Indicator>
               <CircleChevronDown />
             </Accordion.Indicator>
           </Accordion.Trigger>
         </Accordion.Heading>
         <Accordion.Panel>
-          <Accordion.Body>
-            This item uses a caret icon for the indicator. The rotation animation is applied
-            automatically.
-          </Accordion.Body>
+          <Accordion.Body>此项使用圆形内的箭头作为指示器，旋转动画会自动应用。</Accordion.Body>
         </Accordion.Panel>
       </Accordion.Item>
 
       <Accordion.Item id="3">
         <Accordion.Heading>
           <Accordion.Trigger>
-            Using Arrow Icon
+            使用双箭头图标
             <Accordion.Indicator>
               <ChevronsDown />
             </Accordion.Indicator>
@@ -61,8 +55,7 @@ export function CustomIndicator() {
         </Accordion.Heading>
         <Accordion.Panel>
           <Accordion.Body>
-            This item uses an arrow icon. Any icon you pass will receive the rotation animation when
-            the item expands.
+            此项使用双箭头图标。传入任意图标后，在条目展开时都会获得旋转动画。
           </Accordion.Body>
         </Accordion.Panel>
       </Accordion.Item>

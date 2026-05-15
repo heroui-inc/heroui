@@ -7,7 +7,7 @@ const datesWithEvents = [3, 7, 12, 15, 21, 28];
 
 export function WithIndicators() {
   return (
-    <Calendar aria-label="Event date">
+    <Calendar aria-label="活动日期">
       <Calendar.Header>
         <Calendar.Heading />
         <Calendar.NavButton slot="previous" />

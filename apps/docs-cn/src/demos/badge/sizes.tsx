@@ -10,7 +10,7 @@ export function BadgeSizes() {
       {sizes.map((size) => (
         <Badge.Anchor key={size}>
           <Avatar size={size}>
-            <Avatar.Image src={AVATAR_URL} />
+            <Avatar.Image alt="头像" src={AVATAR_URL} />
             <Avatar.Fallback>JD</Avatar.Fallback>
           </Avatar>
           <Badge color="danger" size={size}>

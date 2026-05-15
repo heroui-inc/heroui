@@ -11,10 +11,10 @@ export default function BreadcrumbsCustomSeparator() {
         </svg>
       }
     >
-      <Breadcrumbs.Item href="#">Home</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="#">Products</Breadcrumbs.Item>
-      <Breadcrumbs.Item href="#">Electronics</Breadcrumbs.Item>
-      <Breadcrumbs.Item>Laptop</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="#">首页</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="#">产品</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="#">电子产品</Breadcrumbs.Item>
+      <Breadcrumbs.Item>笔记本电脑</Breadcrumbs.Item>
     </Breadcrumbs>
   );
 }

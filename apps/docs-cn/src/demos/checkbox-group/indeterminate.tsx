@@ -21,7 +21,7 @@ export function Indeterminate() {
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Select all</Label>
+          <Label>全选</Label>
         </Checkbox.Content>
       </Checkbox>
       <div className="ml-6 flex flex-col gap-2">
@@ -31,7 +31,7 @@ export function Indeterminate() {
               <Checkbox.Indicator />
             </Checkbox.Control>
             <Checkbox.Content>
-              <Label>Coding</Label>
+              <Label>编程</Label>
             </Checkbox.Content>
           </Checkbox>
           <Checkbox value="design">
@@ -39,7 +39,7 @@ export function Indeterminate() {
               <Checkbox.Indicator />
             </Checkbox.Control>
             <Checkbox.Content>
-              <Label>Design</Label>
+              <Label>设计</Label>
             </Checkbox.Content>
           </Checkbox>
           <Checkbox value="writing">
@@ -47,7 +47,7 @@ export function Indeterminate() {
               <Checkbox.Indicator />
             </Checkbox.Control>
             <Checkbox.Content>
-              <Label>Writing</Label>
+              <Label>写作</Label>
             </Checkbox.Content>
           </Checkbox>
         </CheckboxGroup>

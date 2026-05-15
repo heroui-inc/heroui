@@ -6,51 +6,46 @@ export function FAQ() {
     {
       items: [
         {
-          content:
-            "Browse our products, add items to your cart, and proceed to checkout. You'll need to provide shipping and payment information to complete your purchase.",
-          title: "How do I place an order?",
+          content: "浏览我们的商品，将商品加入购物车并前往结账。完成购买需要提供收货与支付信息。",
+          title: "如何下单？",
         },
         {
-          content:
-            "Yes, you can modify or cancel your order before it's shipped. Once your order is processed, you can't make changes.",
-          title: "Can I modify or cancel my order?",
+          content: "可以，在订单发货前你可以修改或取消。订单一旦进入处理流程，将无法再更改。",
+          title: "可以修改或取消订单吗？",
         },
       ],
-      title: "General",
+      title: "常规",
     },
     {
       items: [
         {
-          content:
-            "You can purchase a license directly from our website. Select the license type that fits your needs and proceed to checkout.",
-          title: "How do I purchase a license?",
+          content: "你可以直接在官网购买许可证，选择适合的许可证类型后前往结账即可。",
+          title: "如何购买许可证？",
         },
         {
-          content:
-            "A standard license is for personal use or small projects, while a pro license includes commercial use rights and priority support.",
-          title: "What is the difference between a standard and a pro license?",
+          content: "标准版适用于个人或小项目；专业版包含商业使用授权与优先支持。",
+          title: "标准版与专业版有什么区别？",
         },
       ],
-      title: "Licensing",
+      title: "许可",
     },
     {
       items: [
         {
-          content:
-            "You can reach our support team through the contact form on our website, or email us directly at support@example.com.",
-          title: "How do I get support?",
+          content: "可通过网站上的联系表单联系支持团队，或直接发送邮件至 support@example.com。",
+          title: "如何获取支持？",
         },
       ],
-      title: "Support",
+      title: "支持",
     },
   ];
 
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="flex flex-col gap-1">
-        <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-bold">常见问题</h2>
         <p className="mb-4 text-lg font-medium text-muted">
-          Everything you need to know about licensing and usage.
+          关于许可与使用，你需要了解的内容都在这里。
         </p>
       </div>
       {categories.map((category) => (

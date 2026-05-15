@@ -6,16 +6,16 @@ export function CustomRenderFunction() {
   return (
     <Breadcrumbs render={(props) => <ol {...props} data-custom="foo" />}>
       <Breadcrumbs.Item render={(props) => <li {...(props as any)} data-custom="bar" />}>
-        Home
+        首页
       </Breadcrumbs.Item>
       <Breadcrumbs.Item render={(props) => <li {...(props as any)} data-custom="bar" />}>
-        Products
+        产品
       </Breadcrumbs.Item>
       <Breadcrumbs.Item render={(props) => <li {...(props as any)} data-custom="bar" />}>
-        Electronics
+        电子产品
       </Breadcrumbs.Item>
       <Breadcrumbs.Item render={(props) => <li {...(props as any)} data-custom="bar" />}>
-        Laptop
+        笔记本电脑
       </Breadcrumbs.Item>
     </Breadcrumbs>
   );

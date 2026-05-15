@@ -40,11 +40,11 @@ export function Controlled() {
     <div className="w-full max-w-md">
       <div className="mb-4 flex items-center justify-between">
         <p className="text-sm text-muted">
-          Expanded: <strong>{[...expandedKeys].join(", ") || "none"}</strong>
+          已展开：<strong>{[...expandedKeys].join("、") || "无"}</strong>
         </p>
         <div className="flex gap-2">
           <Button
-            aria-label="Previous item"
+            aria-label="上一项"
             isDisabled={isPrevDisabled}
             size="sm"
             variant="secondary"
@@ -53,7 +53,7 @@ export function Controlled() {
             <ChevronUp className="size-4" />
           </Button>
           <Button
-            aria-label="Next item"
+            aria-label="下一项"
             isDisabled={isNextDisabled}
             size="sm"
             variant="secondary"

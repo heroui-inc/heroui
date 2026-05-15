@@ -13,34 +13,34 @@ export function WithForm() {
       data[key] = value.toString();
     });
 
-    alert("Form submitted successfully!");
+    alert("表单提交成功！");
   };
 
   return (
     <Card className="w-full max-w-md">
       <Card.Header>
-        <Card.Title>Login</Card.Title>
-        <Card.Description>Enter your credentials to access your account</Card.Description>
+        <Card.Title>登录</Card.Title>
+        <Card.Description>输入账号信息以访问您的账户</Card.Description>
       </Card.Header>
       <Form onSubmit={onSubmit}>
         <Card.Content>
           <div className="flex flex-col gap-4">
             <TextField name="email" type="email">
-              <Label>Email</Label>
+              <Label>邮箱</Label>
               <Input placeholder="email@example.com" variant="secondary" />
             </TextField>
             <TextField name="password" type="password">
-              <Label>Password</Label>
+              <Label>密码</Label>
               <Input placeholder="••••••••" variant="secondary" />
             </TextField>
           </div>
         </Card.Content>
         <Card.Footer className="mt-4 flex flex-col gap-2">
           <Button className="w-full" type="submit">
-            Sign In
+            登录
           </Button>
           <Link className="text-center text-sm" href="#">
-            Forgot password?
+            忘记密码？
           </Link>
         </Card.Footer>
       </Form>

@@ -7,7 +7,7 @@ export function WithLabel() {
         <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
-        <Label htmlFor="label-marketing">Send me marketing emails</Label>
+        <Label htmlFor="label-marketing">接收营销邮件</Label>
       </Checkbox.Content>
     </Checkbox>
   );

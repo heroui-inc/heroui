@@ -29,12 +29,12 @@ export function WithDescription() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select one"
+      placeholder="请选择一项"
       selectionMode="single"
       value={selectedKey}
       onChange={setSelectedKey}
     >
-      <Label>State</Label>
+      <Label>州</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
         <Autocomplete.ClearButton />
@@ -45,11 +45,11 @@ export function WithDescription() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search states..." />
+              <SearchField.Input placeholder="搜索州名…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
+          <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
             {items.map((item) => (
               <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                 {item.name}
@@ -59,7 +59,7 @@ export function WithDescription() {
           </ListBox>
         </Autocomplete.Filter>
       </Autocomplete.Popover>
-      <Description>Select your state of residence</Description>
+      <Description>请选择你的居住州</Description>
     </Autocomplete>
   );
 }

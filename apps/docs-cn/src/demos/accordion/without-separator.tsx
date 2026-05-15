@@ -3,21 +3,19 @@ import {Accordion} from "@heroui/react";
 
 const items = [
   {
-    content:
-      "Browse our products, add items to your cart, and proceed to checkout. You'll need to provide shipping and payment information to complete your purchase.",
+    content: "浏览我们的商品，将商品加入购物车并前往结账。完成购买需要提供收货与支付信息。",
     icon: <ShoppingBag />,
-    title: "How do I place an order?",
+    title: "如何下单？",
   },
   {
-    content:
-      "Yes, you can modify or cancel your order before it's shipped. Once your order is processed, you can't make changes.",
+    content: "可以，在订单发货前你可以修改或取消。订单一旦进入处理流程，将无法再更改。",
     icon: <Receipt />,
-    title: "Can I modify or cancel my order?",
+    title: "可以修改或取消订单吗？",
   },
   {
-    content: "We accept all major credit cards, including Visa, Mastercard, and American Express.",
+    content: "我们接受主流信用卡，包括 Visa、Mastercard 和 American Express。",
     icon: <CreditCard />,
-    title: "What payment methods do you accept?",
+    title: "支持哪些支付方式？",
   },
 ];
 

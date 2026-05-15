@@ -12,7 +12,7 @@ export function UnavailableDates() {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <Calendar aria-label="Appointment date" isDateUnavailable={isDateUnavailable}>
+      <Calendar aria-label="预约日期" isDateUnavailable={isDateUnavailable}>
         <Calendar.Header>
           <Calendar.Heading />
           <Calendar.NavButton slot="previous" />
@@ -25,7 +25,7 @@ export function UnavailableDates() {
           <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
         </Calendar.Grid>
       </Calendar>
-      <Description className="text-center">Weekends are unavailable</Description>
+      <Description className="text-center">周末不可选</Description>
     </div>
   );
 }

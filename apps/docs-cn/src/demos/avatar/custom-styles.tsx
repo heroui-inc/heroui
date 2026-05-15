@@ -3,29 +3,29 @@ import {Avatar} from "@heroui/react";
 export function CustomStyles() {
   return (
     <div className="flex items-center gap-4">
-      {/* Custom size with Tailwind classes */}
+      {/* 使用 Tailwind 自定义尺寸 */}
       <Avatar className="size-16">
         <Avatar.Image
-          alt="Extra Large"
+          alt="超大头像"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg"
         />
         <Avatar.Fallback>XL</Avatar.Fallback>
       </Avatar>
 
-      {/* Square avatar */}
+      {/* 方形头像 */}
       <Avatar className="rounded-lg">
         <Avatar.Image
-          alt="Square Avatar"
+          alt="方形头像"
           src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg"
         />
         <Avatar.Fallback className="rounded-lg">SQ</Avatar.Fallback>
       </Avatar>
 
-      {/* Gradient border */}
+      {/* 渐变描边 */}
       <Avatar className="bg-gradient-to-tr from-pink-500 to-yellow-500 p-0.5">
         <div className="size-full rounded-full bg-background p-0.5">
           <Avatar.Image
-            alt="Gradient Border"
+            alt="渐变描边头像"
             className="rounded-full"
             src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg"
           />
@@ -33,11 +33,11 @@ export function CustomStyles() {
         </div>
       </Avatar>
 
-      {/* Status indicator */}
+      {/* 在线状态指示 */}
       <div className="relative">
         <Avatar>
           <Avatar.Image
-            alt="Online User"
+            alt="在线用户"
             src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg"
           />
           <Avatar.Fallback>ON</Avatar.Fallback>

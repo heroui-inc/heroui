@@ -10,7 +10,7 @@ export function MinMaxDates() {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <Calendar aria-label="Appointment date" maxValue={maxDate} minValue={minDate}>
+      <Calendar aria-label="预约日期" maxValue={maxDate} minValue={minDate}>
         <Calendar.Header>
           <Calendar.Heading />
           <Calendar.NavButton slot="previous" />
@@ -24,7 +24,7 @@ export function MinMaxDates() {
         </Calendar.Grid>
       </Calendar>
       <Description className="text-center">
-        Select a date between today and {maxDate.toString()}
+        请在今天与 {maxDate.toString()} 之间选择日期。
       </Description>
     </div>
   );

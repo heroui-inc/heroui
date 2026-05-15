@@ -4,7 +4,7 @@ import {Calendar} from "@heroui/react";
 
 export function YearPicker() {
   return (
-    <Calendar aria-label="Event date">
+    <Calendar aria-label="活动日期">
       <Calendar.Header>
         <Calendar.YearPickerTrigger>
           <Calendar.YearPickerTriggerHeading />

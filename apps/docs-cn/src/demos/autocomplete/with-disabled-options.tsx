@@ -13,12 +13,12 @@ export function WithDisabledOptions() {
     <Autocomplete
       className="w-[256px]"
       disabledKeys={["cat", "kangaroo"]}
-      placeholder="Select an animal"
+      placeholder="选择一种动物"
       selectionMode="single"
       value={selectedKey}
       onChange={setSelectedKey}
     >
-      <Label>Animal</Label>
+      <Label>动物</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
         <Autocomplete.ClearButton />
@@ -29,33 +29,33 @@ export function WithDisabledOptions() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search animals..." />
+              <SearchField.Input placeholder="搜索动物…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
-            <ListBox.Item id="dog" textValue="Dog">
-              Dog
+          <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
+            <ListBox.Item id="dog" textValue="狗">
+              狗
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="cat" textValue="Cat">
-              Cat
+            <ListBox.Item id="cat" textValue="猫">
+              猫
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="bird" textValue="Bird">
-              Bird
+            <ListBox.Item id="bird" textValue="鸟">
+              鸟
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="kangaroo" textValue="Kangaroo">
-              Kangaroo
+            <ListBox.Item id="kangaroo" textValue="袋鼠">
+              袋鼠
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="elephant" textValue="Elephant">
-              Elephant
+            <ListBox.Item id="elephant" textValue="象">
+              象
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="tiger" textValue="Tiger">
-              Tiger
+            <ListBox.Item id="tiger" textValue="老虎">
+              老虎
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>

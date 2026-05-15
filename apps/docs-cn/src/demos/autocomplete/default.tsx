@@ -35,12 +35,12 @@ export default function Default() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select states"
+      placeholder="选择州/省"
       selectionMode="multiple"
       value={selectedKeys}
       onChange={(keys: Key | Key[] | null) => setSelectedKeys(keys as Key[])}
     >
-      <Label>States to Visit</Label>
+      <Label>计划前往的州</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
           {({defaultChildren, isPlaceholder, state}: any) => {
@@ -76,11 +76,11 @@ export default function Default() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search..." />
+              <SearchField.Input placeholder="搜索…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
+          <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
             {items.map((item) => (
               <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                 {item.name}

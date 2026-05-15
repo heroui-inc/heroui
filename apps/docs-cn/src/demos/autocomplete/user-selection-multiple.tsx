@@ -68,12 +68,12 @@ export function UserSelectionMultiple() {
     <Autocomplete
       className="w-[256px]"
       defaultValue={["1", "2"]}
-      placeholder="Select your teammates"
+      placeholder="选择队友"
       selectionMode="multiple"
       value={selectedKeys}
       onChange={(keys) => setSelectedKeys(keys as Key[])}
     >
-      <Label>Users</Label>
+      <Label>用户</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
           {({defaultChildren, isPlaceholder, state}) => {
@@ -116,11 +116,11 @@ export function UserSelectionMultiple() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search users..." />
+              <SearchField.Input placeholder="搜索用户…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
+          <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
             {users.map((user) => (
               <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
                 <Avatar size="sm">

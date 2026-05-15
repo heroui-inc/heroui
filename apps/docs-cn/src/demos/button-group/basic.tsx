@@ -21,12 +21,12 @@ import {Button, ButtonGroup, Chip, Description, Dropdown, Label} from "@heroui/r
 export function Basic() {
   return (
     <div className="flex flex-col items-start gap-6">
-      {/* Single button with dropdown */}
+      {/* 单个按钮与下拉菜单 */}
       <div className="flex flex-col gap-2">
         <ButtonGroup>
-          <Button>Merge pull request</Button>
+          <Button>合并拉取请求</Button>
           <Dropdown>
-            <Button isIconOnly aria-label="More options">
+            <Button isIconOnly aria-label="更多选项">
               <ButtonGroup.Separator />
               <ChevronDown />
             </Button>
@@ -35,33 +35,26 @@ export function Basic() {
                 <Dropdown.Item
                   className="flex flex-col items-start gap-1"
                   id="merge"
-                  textValue="Create a merge commit"
+                  textValue="创建合并提交"
                 >
-                  <Label>Create a merge commit</Label>
-                  <Description>
-                    All commits from this branch will be added to the base branch
-                  </Description>
+                  <Label>创建合并提交</Label>
+                  <Description>此分支上的所有提交都将加入基础分支</Description>
                 </Dropdown.Item>
                 <Dropdown.Item
                   className="flex flex-col items-start gap-1"
                   id="squash-and-merge"
-                  textValue="Squash and merge"
+                  textValue="压缩并合并"
                 >
-                  <Label>Squash and merge</Label>
-                  <Description>
-                    The 14 commits from this branch will be combined into one commit in the base
-                    branch
-                  </Description>
+                  <Label>压缩并合并</Label>
+                  <Description>此分支上的 14 个提交将合并为一次提交并加入基础分支</Description>
                 </Dropdown.Item>
                 <Dropdown.Item
                   className="flex flex-col items-start gap-1"
                   id="rebase-and-merge"
-                  textValue="Rebase and merge"
+                  textValue="变基并合并"
                 >
-                  <Label>Rebase and merge</Label>
-                  <Description>
-                    The 14 commits from this branch will be rebased and added to the base branch
-                  </Description>
+                  <Label>变基并合并</Label>
+                  <Description>此分支上的 14 个提交将变基后加入基础分支</Description>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown.Popover>
@@ -69,13 +62,13 @@ export function Basic() {
         </ButtonGroup>
       </div>
 
-      {/* Individual buttons */}
+      {/* 独立按钮 */}
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap gap-x-2 gap-y-4">
           <ButtonGroup variant="tertiary">
             <Button>
               <CodeFork className="size-3.5" />
-              Fork
+              复刻
               <Chip color="accent" size="sm" variant="soft">
                 24
               </Chip>
@@ -91,7 +84,7 @@ export function Basic() {
             </Button>
             <Button>
               <ButtonGroup.Separator />
-              Scan to pay
+              扫码支付
             </Button>
           </ButtonGroup>
           <ButtonGroup variant="tertiary">
@@ -107,7 +100,7 @@ export function Basic() {
           <ButtonGroup variant="tertiary">
             <Button>
               <Star className="size-3.5" />
-              Star
+              星标
             </Button>
             <Button className="px-2">
               <ButtonGroup.Separator />
@@ -119,7 +112,7 @@ export function Basic() {
           <ButtonGroup variant="tertiary">
             <Button>
               <Pin />
-              Pinned
+              已置顶
             </Button>
             <Button isIconOnly>
               <ButtonGroup.Separator />
@@ -129,56 +122,56 @@ export function Basic() {
         </div>
       </div>
 
-      {/* Previous/Next Button Group */}
+      {/* 上一页 / 下一页 */}
       <div className="flex flex-col gap-2">
         <ButtonGroup variant="tertiary">
           <Button>
             <ChevronLeft />
-            Previous
+            上一页
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Next
+            下一页
             <ChevronRight />
           </Button>
         </ButtonGroup>
       </div>
 
-      {/* Content Selection Button Group */}
+      {/* 内容类型选择 */}
       <div className="flex flex-col gap-2">
         <ButtonGroup variant="tertiary">
           <Button>
             <Picture />
-            Photos
+            照片
           </Button>
           <Button>
             <ButtonGroup.Separator />
             <Video />
-            Videos
+            视频
           </Button>
-          <Button isIconOnly aria-label="More options">
+          <Button isIconOnly aria-label="更多选项">
             <ButtonGroup.Separator />
             <Ellipsis />
           </Button>
         </ButtonGroup>
       </div>
 
-      {/* Text Alignment Button Group */}
+      {/* 文本对齐 */}
       <div className="flex flex-col gap-2">
         <ButtonGroup variant="tertiary">
-          <Button>Left</Button>
+          <Button>左对齐</Button>
           <Button>
             <ButtonGroup.Separator />
-            Center
+            居中
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Right
+            右对齐
           </Button>
         </ButtonGroup>
       </div>
 
-      {/* Icon-Only Alignment Button Group */}
+      {/* 仅图标：对齐 */}
       <div className="flex flex-col gap-2">
         <ButtonGroup variant="tertiary">
           <Button isIconOnly>

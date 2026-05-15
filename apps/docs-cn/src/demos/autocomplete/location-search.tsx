@@ -20,16 +20,16 @@ interface City {
 
 export function LocationSearch() {
   const allCities: City[] = [
-    {country: "USA", name: "New York"},
-    {country: "USA", name: "Los Angeles"},
-    {country: "USA", name: "Chicago"},
-    {country: "UK", name: "London"},
-    {country: "France", name: "Paris"},
-    {country: "Japan", name: "Tokyo"},
-    {country: "Australia", name: "Sydney"},
-    {country: "Canada", name: "Toronto"},
-    {country: "Germany", name: "Berlin"},
-    {country: "Spain", name: "Madrid"},
+    {country: "美国", name: "纽约"},
+    {country: "美国", name: "洛杉矶"},
+    {country: "美国", name: "芝加哥"},
+    {country: "英国", name: "伦敦"},
+    {country: "法国", name: "巴黎"},
+    {country: "日本", name: "东京"},
+    {country: "澳大利亚", name: "悉尼"},
+    {country: "加拿大", name: "多伦多"},
+    {country: "德国", name: "柏林"},
+    {country: "西班牙", name: "马德里"},
   ];
 
   const [selectedKey, setSelectedKey] = useState<Key | null>(null);
@@ -48,12 +48,12 @@ export function LocationSearch() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Search for a city"
+      placeholder="搜索城市"
       selectionMode="single"
       value={selectedKey}
       onChange={setSelectedKey}
     >
-      <Label>City</Label>
+      <Label>城市</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
         <Autocomplete.ClearButton />
@@ -64,17 +64,19 @@ export function LocationSearch() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search cities..." />
+              <SearchField.Input placeholder="搜索城市…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
           <ListBox
-            renderEmptyState={() => (
-              <EmptyState>{isLoading ? "Searching..." : "No cities found"}</EmptyState>
-            )}
+            renderEmptyState={() => <EmptyState>{isLoading ? "搜索中…" : "未找到城市"}</EmptyState>}
           >
             {allCities.map((city) => (
-              <ListBox.Item key={city.name} id={city.name} textValue={city.name}>
+              <ListBox.Item
+                key={city.name}
+                id={city.name}
+                textValue={`${city.name} ${city.country}`}
+              >
                 <div className="flex flex-col">
                   <Label>{city.name}</Label>
                   <Description>{city.country}</Description>

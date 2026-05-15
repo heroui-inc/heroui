@@ -4,86 +4,86 @@ export function Variants() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-muted">Primary</p>
+        <p className="text-sm text-muted">主要</p>
         <ButtonGroup variant="primary">
-          <Button>First</Button>
+          <Button>第一项</Button>
           <Button>
             <ButtonGroup.Separator />
-            Second
+            第二项
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Third
+            第三项
           </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-muted">Secondary</p>
+        <p className="text-sm text-muted">次要</p>
         <ButtonGroup variant="secondary">
-          <Button>First</Button>
+          <Button>第一项</Button>
           <Button>
             <ButtonGroup.Separator />
-            Second
+            第二项
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Third
+            第三项
           </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-muted">Tertiary</p>
+        <p className="text-sm text-muted">第三</p>
         <ButtonGroup variant="tertiary">
-          <Button>First</Button>
+          <Button>第一项</Button>
           <Button>
             <ButtonGroup.Separator />
-            Second
+            第二项
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Third
+            第三项
           </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-muted">Outline</p>
+        <p className="text-sm text-muted">线框</p>
         <ButtonGroup variant="outline">
-          <Button>First</Button>
+          <Button>第一项</Button>
           <Button>
             <ButtonGroup.Separator />
-            Second
+            第二项
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Third
+            第三项
           </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-muted">Ghost</p>
+        <p className="text-sm text-muted">幽灵</p>
         <ButtonGroup variant="ghost">
-          <Button>First</Button>
+          <Button>第一项</Button>
           <Button>
             <ButtonGroup.Separator />
-            Second
+            第二项
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Third
+            第三项
           </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-muted">Danger</p>
+        <p className="text-sm text-muted">危险</p>
         <ButtonGroup variant="danger">
-          <Button>First</Button>
+          <Button>第一项</Button>
           <Button>
             <ButtonGroup.Separator />
-            Second
+            第二项
           </Button>
           <Button>
             <ButtonGroup.Separator />
-            Third
+            第三项
           </Button>
         </ButtonGroup>
       </div>

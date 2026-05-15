@@ -6,19 +6,19 @@ export function WithIcons() {
     <div className="flex flex-wrap gap-3">
       <Button>
         <Globe />
-        Search
+        搜索
       </Button>
       <Button variant="secondary">
         <Plus />
-        Add Member
+        添加成员
       </Button>
       <Button variant="tertiary">
         <Envelope />
-        Email
+        邮件
       </Button>
       <Button variant="danger">
         <TrashBin />
-        Delete
+        删除
       </Button>
     </div>
   );

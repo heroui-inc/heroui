@@ -39,5 +39,5 @@ function CustomButton({className, radius, variant, ...props}: MyButtonProps) {
 }
 
 export function CustomVariants() {
-  return <CustomButton>Custom Button</CustomButton>;
+  return <CustomButton>自定义按钮</CustomButton>;
 }

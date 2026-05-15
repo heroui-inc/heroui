@@ -29,11 +29,11 @@ export function ControlledOpenState() {
       <Autocomplete
         className="w-[256px]"
         isOpen={isOpen}
-        placeholder="Select one"
+        placeholder="请选择一项"
         selectionMode="single"
         onOpenChange={setIsOpen}
       >
-        <Label>State</Label>
+        <Label>州</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
           <Autocomplete.ClearButton />
@@ -44,11 +44,11 @@ export function ControlledOpenState() {
             <SearchField autoFocus name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
-                <SearchField.Input placeholder="Search states..." />
+                <SearchField.Input placeholder="搜索州名…" />
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
+            <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
               {items.map((item) => (
                 <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
                   {item.name}
@@ -59,8 +59,8 @@ export function ControlledOpenState() {
           </Autocomplete.Filter>
         </Autocomplete.Popover>
       </Autocomplete>
-      <Button onPress={() => setIsOpen(!isOpen)}>{isOpen ? "Close" : "Open"} Autocomplete</Button>
-      <p className="text-sm text-muted">Autocomplete is {isOpen ? "open" : "closed"}</p>
+      <Button onPress={() => setIsOpen(!isOpen)}>{isOpen ? "关闭" : "打开"} 自动完成</Button>
+      <p className="text-sm text-muted">自动完成处于{isOpen ? "打开" : "关闭"}状态</p>
     </div>
   );
 }

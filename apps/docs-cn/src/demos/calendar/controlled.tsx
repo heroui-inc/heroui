@@ -29,7 +29,7 @@ export function Controlled() {
             setFocusedDate(todayDate);
           }}
         >
-          Today
+          今天
         </Button>
         <Button
           onPress={() => {
@@ -39,7 +39,7 @@ export function Controlled() {
             setFocusedDate(nextWeekStart);
           }}
         >
-          Week
+          本周
         </Button>
         <Button
           onPress={() => {
@@ -49,12 +49,12 @@ export function Controlled() {
             setFocusedDate(nextMonthStart);
           }}
         >
-          Month
+          本月
         </Button>
       </ButtonGroup>
 
       <Calendar
-        aria-label="Event date"
+        aria-label="活动日期"
         focusedValue={focusedDate}
         value={value}
         onChange={setValue}
@@ -74,7 +74,7 @@ export function Controlled() {
       </Calendar>
 
       <Description className="text-center">
-        Selected date: {value ? value.toString() : "(none)"}
+        已选日期：{value ? value.toString() : "（未选）"}
       </Description>
 
       <div className="flex gap-2">
@@ -88,7 +88,7 @@ export function Controlled() {
             setFocusedDate(todayDate);
           }}
         >
-          Set Today
+          设为今天
         </Button>
         <Button
           size="sm"
@@ -100,10 +100,10 @@ export function Controlled() {
             setFocusedDate(christmasDate);
           }}
         >
-          Set Christmas
+          设为圣诞节
         </Button>
         <Button size="sm" variant="tertiary" onPress={() => setValue(null)}>
-          Clear
+          清空
         </Button>
       </div>
     </div>

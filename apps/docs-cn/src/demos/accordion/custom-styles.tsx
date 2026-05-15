@@ -3,24 +3,23 @@ import {Accordion, cn} from "@heroui/react";
 
 const items = [
   {
-    content: "Stay informed about your account activity with real-time notifications. ",
+    content: "通过实时通知及时了解账户动态。",
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/bell-small.png",
-    subtitle: "Receive account activity updates",
-    title: "Set Up Notifications",
+    subtitle: "接收账户活动更新",
+    title: "开启通知",
   },
   {
-    content: "Enhance your browsing experience by installing our official browser extension",
+    content: "安装我们的官方浏览器扩展，获得更顺畅的浏览体验。",
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/compass-small.png",
-    subtitle: "Connect you browser to your account",
-    title: "Set up Browser Extension",
+    subtitle: "将浏览器连接到你的账户",
+    title: "安装浏览器扩展",
   },
   {
-    content:
-      "Begin your journey into the world of digital collectibles by creating your first NFT. ",
+    content: "创建你的第一件数字藏品，开启数字收藏之旅。",
     iconUrl:
       "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/mint-collective-small.png",
-    subtitle: "Create your first collectible",
-    title: "Mint Collectible",
+    subtitle: "创建你的第一件收藏品",
+    title: "铸造收藏品",
   },
 ];
 

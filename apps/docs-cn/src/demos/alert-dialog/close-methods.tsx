@@ -6,31 +6,35 @@ export function CloseMethods() {
   return (
     <div className="flex max-w-2xl flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <h3 className="text-lg font-semibold">Using slot="close"</h3>
+        <h3 className="text-lg font-semibold">
+          使用 <code className="text-sm">slot=&quot;close&quot;</code>
+        </h3>
         <p className="text-sm text-muted">
-          The simplest way to close a dialog. Add <code>slot="close"</code> to any Button component
-          within the dialog. When clicked, it will automatically close the dialog.
+          最简单的关闭方式：在对话框内的任意 <code>Button</code> 上添加{" "}
+          <code>slot=&quot;close&quot;</code>，点击后会自动关闭对话框。
         </p>
         <AlertDialog>
-          <Button variant="secondary">Open Dialog</Button>
+          <Button variant="secondary">打开对话框</Button>
           <AlertDialog.Backdrop>
             <AlertDialog.Container>
               <AlertDialog.Dialog className="sm:max-w-[400px]">
                 <AlertDialog.Header>
                   <AlertDialog.Icon status="accent" />
-                  <AlertDialog.Heading>Using slot="close"</AlertDialog.Heading>
+                  <AlertDialog.Heading>
+                    使用 <code className="text-sm">slot=&quot;close&quot;</code>
+                  </AlertDialog.Heading>
                 </AlertDialog.Header>
                 <AlertDialog.Body>
                   <p>
-                    Click either button below - both have <code>slot="close"</code> and will close
-                    the dialog automatically.
+                    点击下方任一按钮——它们都带有 <code>slot=&quot;close&quot;</code>
+                    ，点击后会自动关闭对话框。
                   </p>
                 </AlertDialog.Body>
                 <AlertDialog.Footer>
                   <Button slot="close" variant="tertiary">
-                    Cancel
+                    取消
                   </Button>
-                  <Button slot="close">Confirm</Button>
+                  <Button slot="close">确认</Button>
                 </AlertDialog.Footer>
               </AlertDialog.Dialog>
             </AlertDialog.Container>
@@ -39,14 +43,13 @@ export function CloseMethods() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-lg font-semibold">Using Dialog render props</h3>
+        <h3 className="text-lg font-semibold">使用 Dialog 的 render props</h3>
         <p className="text-sm text-muted">
-          Access the <code>close</code> method from the Dialog's render props. This gives you full
-          control over when and how to close the dialog, allowing you to add custom logic before
-          closing.
+          通过 Dialog 的 render props 获取 <code>close</code>{" "}
+          方法，从而完全控制关闭时机与方式，便于在关闭前加入校验等自定义逻辑。
         </p>
         <AlertDialog>
-          <Button variant="secondary">Open Dialog</Button>
+          <Button variant="secondary">打开对话框</Button>
           <AlertDialog.Backdrop>
             <AlertDialog.Container>
               <AlertDialog.Dialog className="sm:max-w-[400px]">
@@ -54,20 +57,19 @@ export function CloseMethods() {
                   <>
                     <AlertDialog.Header>
                       <AlertDialog.Icon status="success" />
-                      <AlertDialog.Heading>Using Dialog render props</AlertDialog.Heading>
+                      <AlertDialog.Heading>使用 Dialog render props</AlertDialog.Heading>
                     </AlertDialog.Header>
                     <AlertDialog.Body>
                       <p>
-                        The buttons below use the <code>close</code> method from render props. You
-                        can add validation or other logic before calling{" "}
-                        <code>renderProps.close()</code>.
+                        下方按钮使用 render props 提供的 <code>close</code> 方法。你可以在调用{" "}
+                        <code>renderProps.close()</code> 之前加入校验或其他逻辑。
                       </p>
                     </AlertDialog.Body>
                     <AlertDialog.Footer>
                       <Button variant="tertiary" onPress={() => renderProps.close()}>
-                        Cancel
+                        取消
                       </Button>
-                      <Button onPress={() => renderProps.close()}>Confirm</Button>
+                      <Button onPress={() => renderProps.close()}>确认</Button>
                     </AlertDialog.Footer>
                   </>
                 )}

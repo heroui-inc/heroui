@@ -14,12 +14,12 @@ export function Controlled() {
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label htmlFor="email-notifications">Email notifications</Label>
+            <Label htmlFor="email-notifications">邮件通知</Label>
           </Checkbox.Content>
         </Checkbox>
       </div>
       <p className="text-sm text-muted">
-        Status: <span className="font-medium">{isSelected ? "Enabled" : "Disabled"}</span>
+        状态：<span className="font-medium">{isSelected ? "已勾选" : "未勾选"}</span>
       </p>
     </div>
   );

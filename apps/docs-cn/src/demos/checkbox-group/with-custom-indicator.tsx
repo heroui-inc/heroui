@@ -5,8 +5,8 @@ import {Checkbox, CheckboxGroup, Description, Label} from "@heroui/react";
 export function WithCustomIndicator() {
   return (
     <CheckboxGroup name="features">
-      <Label>Features</Label>
-      <Description>Select the features you want</Description>
+      <Label>功能</Label>
+      <Description>选择你需要的功能</Description>
       <Checkbox value="notifications">
         <Checkbox.Control>
           <Checkbox.Indicator>
@@ -27,8 +27,8 @@ export function WithCustomIndicator() {
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Email notifications</Label>
-          <Description>Receive updates via email</Description>
+          <Label>邮件通知</Label>
+          <Description>通过邮件接收更新</Description>
         </Checkbox.Content>
       </Checkbox>
       <Checkbox value="newsletter">
@@ -51,8 +51,8 @@ export function WithCustomIndicator() {
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Newsletter</Label>
-          <Description>Get weekly newsletters</Description>
+          <Label>邮件通讯</Label>
+          <Description>每周接收邮件简报</Description>
         </Checkbox.Content>
       </Checkbox>
     </CheckboxGroup>

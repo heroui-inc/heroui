@@ -7,7 +7,7 @@ export function DefaultSelected() {
         <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
-        <Label htmlFor="default-notifications">Enable email notifications</Label>
+        <Label htmlFor="default-notifications">启用邮件通知</Label>
       </Checkbox.Content>
     </Checkbox>
   );

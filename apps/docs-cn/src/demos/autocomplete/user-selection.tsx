@@ -61,12 +61,12 @@ export function UserSelection() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Select a user"
+      placeholder="选择用户"
       selectionMode="single"
       value={selectedKey}
       onChange={setSelectedKey}
     >
-      <Label>User</Label>
+      <Label>用户</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
           {({defaultChildren, isPlaceholder, state}) => {
@@ -77,7 +77,7 @@ export function UserSelection() {
             const selectedItems = state.selectedItems;
 
             if (selectedItems.length > 1) {
-              return `${selectedItems.length} users selected`;
+              return `已选择 ${selectedItems.length} 位用户`;
             }
 
             const selectedItem = users.find((user) => user.id === selectedItems[0]?.key);
@@ -105,11 +105,11 @@ export function UserSelection() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search users..." />
+              <SearchField.Input placeholder="搜索用户…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
+          <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
             {users.map((user) => (
               <ListBox.Item key={user.id} id={user.id} textValue={user.name}>
                 <Avatar size="sm">

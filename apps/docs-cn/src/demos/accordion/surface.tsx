@@ -11,39 +11,34 @@ import {Accordion} from "@heroui/react";
 
 const items = [
   {
-    content:
-      "Browse our products, add items to your cart, and proceed to checkout. You'll need to provide shipping and payment information to complete your purchase.",
+    content: "浏览我们的商品，将商品加入购物车并前往结账。完成购买需要提供收货与支付信息。",
     icon: <ShoppingBag />,
-    title: "How do I place an order?",
+    title: "如何下单？",
   },
   {
-    content:
-      "Yes, you can modify or cancel your order before it's shipped. Once your order is processed, you can't make changes.",
+    content: "可以，在订单发货前你可以修改或取消。订单一旦进入处理流程，将无法再更改。",
     icon: <Receipt />,
-    title: "Can I modify or cancel my order?",
+    title: "可以修改或取消订单吗？",
   },
   {
-    content: "We accept all major credit cards, including Visa, Mastercard, and American Express.",
+    content: "我们接受主流信用卡，包括 Visa、Mastercard 和 American Express。",
     icon: <CreditCard />,
-    title: "What payment methods do you accept?",
+    title: "支持哪些支付方式？",
   },
   {
-    content:
-      "Shipping costs vary based on your location and the size of your order. We offer free shipping for orders over $50.",
+    content: "运费因收货地址与订单体积而异。订单满 50 美元可享受免运费。",
     icon: <Box />,
-    title: "How much does shipping cost?",
+    title: "运费如何计算？",
   },
   {
-    content:
-      "Yes, we ship to most countries. Please check our shipping rates and policies for more information.",
+    content: "是的，我们可向多数国家/地区发货。请查看运费说明与政策了解更多信息。",
     icon: <PlanetEarth />,
-    title: "Do you ship internationally?",
+    title: "是否提供国际配送？",
   },
   {
-    content:
-      "If you're not satisfied with your purchase, you can request a refund within 30 days of purchase. Please contact our customer support team for assistance.",
+    content: "若对购买不满意，可在购买后 30 天内申请退款。请联系客服团队协助处理。",
     icon: <ArrowsRotateLeft />,
-    title: "How do I request a refund?",
+    title: "如何申请退款？",
   },
 ];
 

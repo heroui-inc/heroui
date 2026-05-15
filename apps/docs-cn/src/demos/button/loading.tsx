@@ -9,7 +9,7 @@ export function Loading() {
       {({isPending}) => (
         <>
           {isPending ? <Spinner color="current" size="sm" /> : null}
-          Uploading...
+          上传中…
         </>
       )}
     </Button>

@@ -6,15 +6,15 @@ export function Social() {
     <div className="flex w-full max-w-xs flex-col gap-3">
       <Button className="w-full" variant="tertiary">
         <Icon icon="devicon:google" />
-        Sign in with Google
+        使用 Google 登录
       </Button>
       <Button className="w-full" variant="tertiary">
         <Icon icon="mdi:github" />
-        Sign in with GitHub
+        使用 GitHub 登录
       </Button>
       <Button className="w-full" variant="tertiary">
         <Icon icon="ion:logo-apple" />
-        Sign in with Apple
+        使用 Apple 登录
       </Button>
     </div>
   );

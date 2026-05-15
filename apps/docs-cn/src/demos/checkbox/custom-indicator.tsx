@@ -21,7 +21,7 @@ export function CustomIndicator() {
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Heart</Label>
+          <Label>心形</Label>
         </Checkbox.Content>
       </Checkbox>
       <Checkbox defaultSelected name="plus">
@@ -50,7 +50,7 @@ export function CustomIndicator() {
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Plus</Label>
+          <Label>加号</Label>
         </Checkbox.Content>
       </Checkbox>
       <Checkbox isIndeterminate name="indeterminate">
@@ -66,7 +66,7 @@ export function CustomIndicator() {
           </Checkbox.Indicator>
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Indeterminate</Label>
+          <Label>部分选中</Label>
         </Checkbox.Content>
       </Checkbox>
     </div>

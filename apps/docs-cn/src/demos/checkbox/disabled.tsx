@@ -7,8 +7,8 @@ export function Disabled() {
         <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
-        <Label htmlFor="feature">Premium Feature</Label>
-        <Description>This feature is coming soon</Description>
+        <Label htmlFor="feature">高级功能</Label>
+        <Description>该功能即将推出</Description>
       </Checkbox.Content>
     </Checkbox>
   );

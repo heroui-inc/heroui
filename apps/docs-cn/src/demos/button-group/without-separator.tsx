@@ -3,9 +3,9 @@ import {Button, ButtonGroup} from "@heroui/react";
 export function WithoutSeparator() {
   return (
     <ButtonGroup>
-      <Button>First</Button>
-      <Button>Second</Button>
-      <Button>Third</Button>
+      <Button>第一项</Button>
+      <Button>第二项</Button>
+      <Button>第三项</Button>
     </ButtonGroup>
   );
 }

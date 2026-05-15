@@ -8,7 +8,7 @@ export function BadgeWithContent() {
     <div className="flex items-center gap-6">
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={AVATAR_URL} />
+          <Avatar.Image alt="头像" src={AVATAR_URL} />
           <Avatar.Fallback>JD</Avatar.Fallback>
         </Avatar>
         <Badge color="danger" size="sm">
@@ -18,17 +18,17 @@ export function BadgeWithContent() {
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={AVATAR_URL} />
+          <Avatar.Image alt="头像" src={AVATAR_URL} />
           <Avatar.Fallback>JD</Avatar.Fallback>
         </Avatar>
         <Badge color="danger" size="sm">
-          New
+          新
         </Badge>
       </Badge.Anchor>
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={AVATAR_URL} />
+          <Avatar.Image alt="头像" src={AVATAR_URL} />
           <Avatar.Fallback>JD</Avatar.Fallback>
         </Avatar>
         <Badge color="danger" size="sm">
@@ -38,7 +38,7 @@ export function BadgeWithContent() {
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={AVATAR_URL} />
+          <Avatar.Image alt="头像" src={AVATAR_URL} />
           <Avatar.Fallback>JD</Avatar.Fallback>
         </Avatar>
         <Badge color="accent" size="sm">

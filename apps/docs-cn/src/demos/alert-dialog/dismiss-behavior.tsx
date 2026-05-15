@@ -9,12 +9,11 @@ export function DismissBehavior() {
       <div className="flex flex-col gap-2">
         <h3 className="text-lg font-semibold">isDismissable</h3>
         <p className="text-sm text-muted">
-          Controls whether the alert dialog can be dismissed by clicking the overlay backdrop. Alert
-          dialogs typically require explicit action, so this defaults to <code>false</code>. Set to{" "}
-          <code>true</code> for less critical confirmations.
+          控制是否允许通过点击遮罩关闭对话框。警告框通常需要明确操作，因此默认为 <code>false</code>
+          。对重要性较低的确认，可设为 <code>true</code>。
         </p>
         <AlertDialog>
-          <Button variant="secondary">Open Alert Dialog</Button>
+          <Button variant="secondary">打开警告对话框</Button>
           <AlertDialog.Backdrop isDismissable={false}>
             <AlertDialog.Container>
               <AlertDialog.Dialog className="sm:max-w-[400px]">
@@ -24,21 +23,16 @@ export function DismissBehavior() {
                     <CircleInfo className="size-5" />
                   </AlertDialog.Icon>
                   <AlertDialog.Heading>isDismissable = false</AlertDialog.Heading>
-                  <p className="text-sm leading-5 text-muted">
-                    Clicking the backdrop won't close this alert dialog
-                  </p>
+                  <p className="text-sm leading-5 text-muted">点击遮罩不会关闭此对话框</p>
                 </AlertDialog.Header>
                 <AlertDialog.Body>
-                  <p>
-                    Try clicking outside this alert dialog on the overlay - it won't close. You must
-                    use the action buttons to dismiss it.
-                  </p>
+                  <p>尝试点击遮罩区域——对话框不会关闭，必须通过底部操作按钮关闭。</p>
                 </AlertDialog.Body>
                 <AlertDialog.Footer>
                   <Button slot="close" variant="tertiary">
-                    Cancel
+                    取消
                   </Button>
-                  <Button slot="close">Confirm</Button>
+                  <Button slot="close">确认</Button>
                 </AlertDialog.Footer>
               </AlertDialog.Dialog>
             </AlertDialog.Container>
@@ -49,12 +43,11 @@ export function DismissBehavior() {
       <div className="flex flex-col gap-2">
         <h3 className="text-lg font-semibold">isKeyboardDismissDisabled</h3>
         <p className="text-sm text-muted">
-          Controls whether the ESC key can dismiss the alert dialog. Alert dialogs typically require
-          explicit action, so this defaults to <code>true</code>. When set to <code>false</code>,
-          the ESC key will be enabled.
+          控制是否允许通过 ESC 关闭。警告框通常需要明确操作，因此默认为 <code>true</code>（禁用
+          ESC）。设为 <code>false</code> 时将允许 ESC 关闭。
         </p>
         <AlertDialog>
-          <Button variant="secondary">Open Alert Dialog</Button>
+          <Button variant="secondary">打开警告对话框</Button>
           <AlertDialog.Backdrop isKeyboardDismissDisabled>
             <AlertDialog.Container>
               <AlertDialog.Dialog className="sm:max-w-[400px]">
@@ -64,19 +57,16 @@ export function DismissBehavior() {
                     <CircleInfo className="size-5" />
                   </AlertDialog.Icon>
                   <AlertDialog.Heading>isKeyboardDismissDisabled = true</AlertDialog.Heading>
-                  <p className="text-sm leading-5 text-muted">ESC key is disabled</p>
+                  <p className="text-sm leading-5 text-muted">已禁用 ESC 关闭</p>
                 </AlertDialog.Header>
                 <AlertDialog.Body>
-                  <p>
-                    Press ESC - nothing happens. You must use the action buttons to dismiss this
-                    alert dialog.
-                  </p>
+                  <p>按下 ESC 不会有任何反应，必须通过操作按钮关闭此对话框。</p>
                 </AlertDialog.Body>
                 <AlertDialog.Footer>
                   <Button slot="close" variant="tertiary">
-                    Cancel
+                    取消
                   </Button>
-                  <Button slot="close">Confirm</Button>
+                  <Button slot="close">确认</Button>
                 </AlertDialog.Footer>
               </AlertDialog.Dialog>
             </AlertDialog.Container>

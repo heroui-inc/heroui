@@ -7,7 +7,7 @@ export function CustomStyles() {
         <Checkbox.Indicator className="text-white" />
       </Checkbox.Control>
       <Checkbox.Content>
-        <Label htmlFor="custom">Custom styled checkbox</Label>
+        <Label htmlFor="custom">自定义样式复选框</Label>
       </Checkbox.Content>
     </Checkbox>
   );

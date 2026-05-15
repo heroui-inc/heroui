@@ -4,7 +4,7 @@ import {Calendar} from "@heroui/react";
 
 export function CustomStyles() {
   return (
-    <Calendar aria-label="Custom styled calendar">
+    <Calendar aria-label="自定义样式日历">
       <Calendar.Header>
         <Calendar.NavButton className="text-foreground" slot="previous" />
         <Calendar.YearPickerTrigger className="w-full justify-center">

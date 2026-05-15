@@ -5,14 +5,14 @@ export function FullWidth() {
   return (
     <div className="w-[400px] space-y-3">
       <ButtonGroup fullWidth>
-        <Button>First</Button>
+        <Button>第一项</Button>
         <Button>
           <ButtonGroup.Separator />
-          Second
+          第二项
         </Button>
         <Button>
           <ButtonGroup.Separator />
-          Third
+          第三项
         </Button>
       </ButtonGroup>
       <ButtonGroup fullWidth>

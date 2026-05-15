@@ -21,8 +21,8 @@ export function Indeterminate() {
         <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
-        <Label htmlFor="select-all">Select all</Label>
-        <Description>Shows indeterminate state (dash icon)</Description>
+        <Label htmlFor="select-all">全选</Label>
+        <Description>展示部分选中状态（短横线图标）</Description>
       </Checkbox.Content>
     </Checkbox>
   );

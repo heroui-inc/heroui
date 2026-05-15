@@ -12,17 +12,17 @@ export function Validation() {
         const formData = new FormData(e.currentTarget);
         const values = formData.getAll("preferences");
 
-        alert(`Selected preferences: ${values.join(", ")}`);
+        alert(`已选偏好：${values.join(", ")}`);
       }}
     >
       <CheckboxGroup isRequired name="preferences">
-        <Label>Preferences</Label>
+        <Label>偏好设置</Label>
         <Checkbox value="email">
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Email notifications</Label>
+            <Label>邮件通知</Label>
           </Checkbox.Content>
         </Checkbox>
         <Checkbox value="sms">
@@ -30,7 +30,7 @@ export function Validation() {
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label>SMS notifications</Label>
+            <Label>短信通知</Label>
           </Checkbox.Content>
         </Checkbox>
         <Checkbox value="push">
@@ -38,12 +38,12 @@ export function Validation() {
             <Checkbox.Indicator />
           </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Push notifications</Label>
+            <Label>推送通知</Label>
           </Checkbox.Content>
         </Checkbox>
-        <FieldError>Please select at least one notification method.</FieldError>
+        <FieldError>请至少选择一种通知方式。</FieldError>
       </CheckboxGroup>
-      <Button type="submit">Submit</Button>
+      <Button type="submit">提交</Button>
     </Form>
   );
 }

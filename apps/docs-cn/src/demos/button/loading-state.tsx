@@ -17,7 +17,7 @@ export function LoadingState() {
       {({isPending}) => (
         <>
           {isPending ? <Spinner color="current" size="sm" /> : <Paperclip />}
-          {isPending ? "Uploading..." : "Upload File"}
+          {isPending ? "上传中…" : "上传文件"}
         </>
       )}
     </Button>

@@ -7,8 +7,8 @@ export function WithDescription() {
         <Checkbox.Indicator />
       </Checkbox.Control>
       <Checkbox.Content>
-        <Label htmlFor="description-notifications">Email notifications</Label>
-        <Description>Get notified when someone mentions you in a comment</Description>
+        <Label htmlFor="description-notifications">邮件通知</Label>
+        <Description>当有人在评论中@你时收到通知</Description>
       </Checkbox.Content>
     </Checkbox>
   );

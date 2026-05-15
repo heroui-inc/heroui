@@ -5,21 +5,21 @@ import clsx from "clsx";
 export function FeaturesAndAddOns() {
   const addOns = [
     {
-      description: "Receive updates via email",
+      description: "通过邮件接收更新",
       icon: Envelope,
-      title: "Email Notifications",
+      title: "邮件通知",
       value: "email",
     },
     {
-      description: "Get instant SMS notifications",
+      description: "即时短信通知",
       icon: Comment,
-      title: "SMS Alerts",
+      title: "短信提醒",
       value: "sms",
     },
     {
-      description: "Browser and mobile push alerts",
+      description: "浏览器与移动端推送提醒",
       icon: Bell,
-      title: "Push Notifications",
+      title: "推送通知",
       value: "push",
     },
   ];
@@ -28,8 +28,8 @@ export function FeaturesAndAddOns() {
     <div className="flex w-full flex-col items-center gap-10 px-4 py-8">
       <section className="flex w-full min-w-[320px] flex-col gap-4">
         <CheckboxGroup name="notification-preferences">
-          <Label>Notification preferences</Label>
-          <Description>Choose how you want to receive updates</Description>
+          <Label>通知偏好</Label>
+          <Description>选择接收更新的方式</Description>
           <div className="flex flex-col gap-2">
             {addOns.map((addon) => (
               <Checkbox

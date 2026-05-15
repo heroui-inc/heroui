@@ -9,7 +9,7 @@ export function CustomRenderFunction() {
         <button {...props} data-custom={isPressed ? "pressed" : "bar"} />
       )}
     >
-      Press me
+      点按
     </Button>
   );
 }

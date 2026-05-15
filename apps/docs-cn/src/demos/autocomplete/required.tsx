@@ -23,7 +23,7 @@ export function Required() {
       data[key] = value.toString();
     });
 
-    alert("Form submitted successfully!");
+    alert("表单提交成功！");
   };
 
   const {contains} = useFilter({sensitivity: "base"});
@@ -52,10 +52,10 @@ export function Required() {
         isRequired
         className="w-full"
         name="state"
-        placeholder="Select one"
+        placeholder="请选择一项"
         selectionMode="single"
       >
-        <Label>State</Label>
+        <Label>州</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
           <Autocomplete.ClearButton />
@@ -66,11 +66,11 @@ export function Required() {
             <SearchField autoFocus name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
-                <SearchField.Input placeholder="Search states..." />
+                <SearchField.Input placeholder="搜索州名…" />
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
+            <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
               {states.map((state) => (
                 <ListBox.Item key={state.id} id={state.id} textValue={state.name}>
                   {state.name}
@@ -86,10 +86,10 @@ export function Required() {
         isRequired
         className="w-full"
         name="country"
-        placeholder="Select a country"
+        placeholder="选择一个国家"
         selectionMode="single"
       >
-        <Label>Country</Label>
+        <Label>国家</Label>
         <Autocomplete.Trigger>
           <Autocomplete.Value />
           <Autocomplete.ClearButton />
@@ -100,11 +100,11 @@ export function Required() {
             <SearchField autoFocus name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
-                <SearchField.Input placeholder="Search countries..." />
+                <SearchField.Input placeholder="搜索国家…" />
                 <SearchField.ClearButton />
               </SearchField.Group>
             </SearchField>
-            <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>}>
+            <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>}>
               {countries.map((country) => (
                 <ListBox.Item key={country.id} id={country.id} textValue={country.name}>
                   {country.name}
@@ -116,7 +116,7 @@ export function Required() {
         </Autocomplete.Popover>
         <FieldError />
       </Autocomplete>
-      <Button type="submit">Submit</Button>
+      <Button type="submit">提交</Button>
     </Form>
   );
 }

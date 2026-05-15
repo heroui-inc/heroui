@@ -34,12 +34,12 @@ export function EmailRecipients() {
   return (
     <Autocomplete
       className="w-[256px]"
-      placeholder="Add recipients"
+      placeholder="添加收件人"
       selectionMode="multiple"
       value={selectedKeys}
       onChange={(keys) => setSelectedKeys(keys as Key[])}
     >
-      <Label>To</Label>
+      <Label>收件人</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value>
           {({defaultChildren, isPlaceholder, state}) => {
@@ -76,11 +76,11 @@ export function EmailRecipients() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search emails..." />
+              <SearchField.Input placeholder="搜索邮箱…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No recipients found</EmptyState>}>
+          <ListBox renderEmptyState={() => <EmptyState>未找到收件人</EmptyState>}>
             {emails.map((email) => (
               <ListBox.Item key={email.id} id={email.id} textValue={email.email}>
                 <div className="flex flex-col">

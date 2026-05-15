@@ -10,7 +10,7 @@ export function BadgeBasic() {
     <div className="flex items-center gap-6">
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={GREEN_AVATAR_URL} />
+          <Avatar.Image alt="头像" src={GREEN_AVATAR_URL} />
           <Avatar.Fallback>JD</Avatar.Fallback>
         </Avatar>
         <Badge color="danger" size="sm">
@@ -20,17 +20,17 @@ export function BadgeBasic() {
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={ORANGE_AVATAR_URL} />
+          <Avatar.Image alt="头像" src={ORANGE_AVATAR_URL} />
           <Avatar.Fallback>AB</Avatar.Fallback>
         </Avatar>
         <Badge color="accent" size="sm">
-          New
+          新
         </Badge>
       </Badge.Anchor>
 
       <Badge.Anchor>
         <Avatar>
-          <Avatar.Image src={BLUE_AVATAR_URL} />
+          <Avatar.Image alt="头像" src={BLUE_AVATAR_URL} />
           <Avatar.Fallback>CD</Avatar.Fallback>
         </Avatar>
         <Badge color="success" placement="bottom-right" size="sm" />

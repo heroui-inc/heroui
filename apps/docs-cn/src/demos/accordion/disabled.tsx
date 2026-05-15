@@ -4,76 +4,70 @@ export function Disabled() {
   return (
     <div className="flex w-full flex-col items-center gap-8">
       <div className="w-full max-w-md space-y-2">
-        <h3 className="text-sm font-medium text-muted">Entire accordion disabled</h3>
+        <h3 className="text-sm font-medium text-muted">整个手风琴禁用</h3>
         <Accordion isDisabled className="w-full max-w-md">
           <Accordion.Item>
             <Accordion.Heading>
               <Accordion.Trigger>
-                Disabled Item 1
+                禁用项 1
                 <Accordion.Indicator />
               </Accordion.Trigger>
             </Accordion.Heading>
             <Accordion.Panel>
-              <Accordion.Body>
-                This content cannot be accessed when the accordion is disabled.
-              </Accordion.Body>
+              <Accordion.Body>手风琴禁用时无法查看此内容。</Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
 
           <Accordion.Item>
             <Accordion.Heading>
               <Accordion.Trigger>
-                Disabled Item 2
+                禁用项 2
                 <Accordion.Indicator />
               </Accordion.Trigger>
             </Accordion.Heading>
             <Accordion.Panel>
-              <Accordion.Body>
-                This content cannot be accessed when the accordion is disabled.
-              </Accordion.Body>
+              <Accordion.Body>手风琴禁用时无法查看此内容。</Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
       </div>
 
       <div className="w-full max-w-md space-y-2">
-        <h3 className="text-sm font-medium text-muted">Individual items disabled</h3>
+        <h3 className="text-sm font-medium text-muted">单独禁用条目</h3>
         <Accordion className="w-full max-w-md">
           <Accordion.Item>
             <Accordion.Heading>
               <Accordion.Trigger>
-                Active Item
+                可用项
                 <Accordion.Indicator />
               </Accordion.Trigger>
             </Accordion.Heading>
             <Accordion.Panel>
-              <Accordion.Body>This item is active and can be toggled normally.</Accordion.Body>
+              <Accordion.Body>此项可用，可正常展开与折叠。</Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
 
           <Accordion.Item isDisabled>
             <Accordion.Heading>
               <Accordion.Trigger>
-                Disabled Item
+                禁用项
                 <Accordion.Indicator />
               </Accordion.Trigger>
             </Accordion.Heading>
             <Accordion.Panel>
-              <Accordion.Body>
-                This content cannot be accessed when the item is disabled.
-              </Accordion.Body>
+              <Accordion.Body>条目禁用时无法查看此内容。</Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
 
           <Accordion.Item>
             <Accordion.Heading>
               <Accordion.Trigger>
-                Another Active Item
+                另一可用项
                 <Accordion.Indicator />
               </Accordion.Trigger>
             </Accordion.Heading>
             <Accordion.Panel>
-              <Accordion.Body>This item is also active and can be toggled.</Accordion.Body>
+              <Accordion.Body>此项同样可用，可正常切换。</Accordion.Body>
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>

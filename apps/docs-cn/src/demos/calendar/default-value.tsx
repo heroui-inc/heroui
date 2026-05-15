@@ -5,7 +5,7 @@ import {parseDate} from "@internationalized/date";
 
 export function DefaultValue() {
   return (
-    <Calendar aria-label="Event date" defaultValue={parseDate("2025-02-14")}>
+    <Calendar aria-label="活动日期" defaultValue={parseDate("2025-02-14")}>
       <Calendar.Header>
         <Calendar.Heading />
         <Calendar.NavButton slot="previous" />

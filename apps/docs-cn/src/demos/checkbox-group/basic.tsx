@@ -3,15 +3,15 @@ import {Checkbox, CheckboxGroup, Description, Label} from "@heroui/react";
 export function Basic() {
   return (
     <CheckboxGroup name="interests">
-      <Label>Select your interests</Label>
-      <Description>Choose all that apply</Description>
+      <Label>选择你的兴趣</Label>
+      <Description>可多选</Description>
       <Checkbox value="coding">
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Coding</Label>
-          <Description>Love building software</Description>
+          <Label>编程</Label>
+          <Description>热爱构建软件</Description>
         </Checkbox.Content>
       </Checkbox>
       <Checkbox value="design">
@@ -19,8 +19,8 @@ export function Basic() {
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Design</Label>
-          <Description>Enjoy creating beautiful interfaces</Description>
+          <Label>设计</Label>
+          <Description>喜欢打造精美界面</Description>
         </Checkbox.Content>
       </Checkbox>
       <Checkbox value="writing">
@@ -28,8 +28,8 @@ export function Basic() {
           <Checkbox.Indicator />
         </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Writing</Label>
-          <Description>Passionate about content creation</Description>
+          <Label>写作</Label>
+          <Description>热衷于内容创作</Description>
         </Checkbox.Content>
       </Checkbox>
     </CheckboxGroup>

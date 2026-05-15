@@ -5,26 +5,26 @@ export function WithIcons() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col items-start gap-2">
-        <p className="text-sm text-muted">With icons</p>
+        <p className="text-sm text-muted">带图标</p>
         <ButtonGroup variant="secondary">
           <Button>
             <Globe />
-            Search
+            搜索
           </Button>
           <Button>
             <ButtonGroup.Separator />
             <Plus />
-            Add
+            添加
           </Button>
           <Button>
             <ButtonGroup.Separator />
             <TrashBin />
-            Delete
+            删除
           </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col items-start gap-2">
-        <p className="text-sm text-muted">Icon only buttons</p>
+        <p className="text-sm text-muted">仅图标按钮</p>
         <ButtonGroup variant="tertiary">
           <Button isIconOnly>
             <Globe />

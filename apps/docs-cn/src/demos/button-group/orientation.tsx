@@ -5,7 +5,7 @@ export function Orientation() {
   return (
     <div className="flex items-start gap-8">
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">Horizontal</span>
+        <span className="text-sm text-muted">横向</span>
         <ButtonGroup orientation="horizontal" variant="tertiary">
           <Button isIconOnly>
             <TextAlignLeft />
@@ -25,7 +25,7 @@ export function Orientation() {
         </ButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">Vertical</span>
+        <span className="text-sm text-muted">纵向</span>
         <ButtonGroup orientation="vertical" variant="tertiary">
           <Button isIconOnly>
             <TextAlignLeft />

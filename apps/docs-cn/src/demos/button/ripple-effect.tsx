@@ -9,7 +9,7 @@ export function RippleEffect() {
   return (
     <Button variant="secondary">
       <Ripple />
-      Click me
+      点我
     </Button>
   );
 }

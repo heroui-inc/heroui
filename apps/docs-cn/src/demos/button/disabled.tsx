@@ -3,21 +3,21 @@ import {Button} from "@heroui/react";
 export function Disabled() {
   return (
     <div className="flex flex-wrap gap-3">
-      <Button isDisabled>Primary</Button>
+      <Button isDisabled>主要</Button>
       <Button isDisabled variant="secondary">
-        Secondary
+        次要
       </Button>
       <Button isDisabled variant="tertiary">
-        Tertiary
+        第三
       </Button>
       <Button isDisabled variant="outline">
-        Outline
+        线框
       </Button>
       <Button isDisabled variant="ghost">
-        Ghost
+        幽灵
       </Button>
       <Button isDisabled variant="danger">
-        Danger
+        危险
       </Button>
     </div>
   );

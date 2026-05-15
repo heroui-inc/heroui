@@ -8,13 +8,13 @@ export function WithCustomIcon() {
         <CloseButton>
           <CircleXmark />
         </CloseButton>
-        <span className="text-xs text-muted">Custom Icon</span>
+        <span className="text-xs text-muted">自定义图标</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <CloseButton>
           <Xmark />
         </CloseButton>
-        <span className="text-xs text-muted">Alternative Icon</span>
+        <span className="text-xs text-muted">备选图标</span>
       </div>
     </div>
   );

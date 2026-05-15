@@ -10,7 +10,7 @@ export function BadgeColors() {
       {colors.map((color) => (
         <Badge.Anchor key={color}>
           <Avatar>
-            <Avatar.Image src={AVATAR_URL} />
+            <Avatar.Image alt="头像" src={AVATAR_URL} />
             <Avatar.Fallback>JD</Avatar.Fallback>
           </Avatar>
           <Badge color={color} size="sm" />

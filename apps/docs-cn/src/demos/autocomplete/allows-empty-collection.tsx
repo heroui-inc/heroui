@@ -9,10 +9,10 @@ export function AllowsEmptyCollection() {
     <Autocomplete
       allowsEmptyCollection
       className="w-[256px]"
-      placeholder="Select one"
+      placeholder="请选择一项"
       selectionMode="single"
     >
-      <Label>State</Label>
+      <Label>州</Label>
       <Autocomplete.Trigger>
         <Autocomplete.Value />
         <Autocomplete.ClearButton />
@@ -23,11 +23,11 @@ export function AllowsEmptyCollection() {
           <SearchField autoFocus name="search" variant="secondary">
             <SearchField.Group>
               <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search states..." />
+              <SearchField.Input placeholder="搜索州名…" />
               <SearchField.ClearButton />
             </SearchField.Group>
           </SearchField>
-          <ListBox renderEmptyState={() => <EmptyState>No results found</EmptyState>} />
+          <ListBox renderEmptyState={() => <EmptyState>未找到结果</EmptyState>} />
         </Autocomplete.Filter>
       </Autocomplete.Popover>
     </Autocomplete>
