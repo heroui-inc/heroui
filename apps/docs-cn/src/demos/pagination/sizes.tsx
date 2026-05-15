@@ -3,6 +3,12 @@
 import {Pagination} from "@heroui/react";
 import {useState} from "react";
 
+const SIZE_LABELS = {
+  lg: "大",
+  md: "中",
+  sm: "小",
+} as const;
+
 function SizePagination({size}: {size: "sm" | "md" | "lg"}) {
   const [page, setPage] = useState(1);
   const totalPages = 3;

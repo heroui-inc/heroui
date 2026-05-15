@@ -26,7 +26,7 @@ export function Attached() {
       </div>
       <div className="flex flex-col gap-2">
         <span className="text-sm text-muted">分离</span>
-        <ToggleButtonGroup is分离 selectionMode="multiple">
+        <ToggleButtonGroup isDetached selectionMode="multiple">
           <ToggleButton isIconOnly aria-label="粗体" id="bold">
             <Bold />
           </ToggleButton>
