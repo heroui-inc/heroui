@@ -99,8 +99,6 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "19.2.14",
-      "@types/react-dom": "19.2.3",
       "shiki": "3.20.0",
       "ts-morph": "27.0.2"
     },
