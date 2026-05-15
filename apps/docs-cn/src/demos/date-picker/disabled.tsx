@@ -6,7 +6,7 @@ import {getLocalTimeZone, today} from "@internationalized/date";
 export function Disabled() {
   return (
     <DatePicker isDisabled className="w-64" name="date" value={today(getLocalTimeZone())}>
-      <Label>Date</Label>
+      <Label>日期</Label>
       <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         <DateField.Suffix>
@@ -15,9 +15,9 @@ export function Disabled() {
           </DatePicker.Trigger>
         </DateField.Suffix>
       </DateField.Group>
-      <Description>This date picker is disabled.</Description>
+      <Description>该日期选择器已禁用。</Description>
       <DatePicker.Popover>
-        <Calendar aria-label="Event date">
+        <Calendar aria-label="活动日期">
           <Calendar.Header>
             <Calendar.YearPickerTrigger>
               <Calendar.YearPickerTriggerHeading />

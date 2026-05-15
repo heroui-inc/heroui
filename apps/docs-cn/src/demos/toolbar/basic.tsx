@@ -10,26 +10,26 @@ import {
 
 export function Basic() {
   return (
-    <Toolbar aria-label="Text formatting">
-      <ToggleButtonGroup aria-label="Text style" selectionMode="multiple">
-        <ToggleButton isIconOnly aria-label="Bold" id="bold">
+    <Toolbar aria-label="文本格式">
+      <ToggleButtonGroup aria-label="文本样式" selectionMode="multiple">
+        <ToggleButton isIconOnly aria-label="粗体" id="bold">
           <Bold />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="Italic" id="italic">
+        <ToggleButton isIconOnly aria-label="斜体" id="italic">
           <ToggleButtonGroup.Separator />
           <Italic />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="Underline" id="underline">
+        <ToggleButton isIconOnly aria-label="下划线" id="underline">
           <ToggleButtonGroup.Separator />
           <Underline />
         </ToggleButton>
       </ToggleButtonGroup>
       <Separator />
       <ButtonGroup variant="tertiary">
-        <Button isIconOnly aria-label="Copy">
+        <Button isIconOnly aria-label="复制">
           <Copy />
         </Button>
-        <Button isIconOnly aria-label="Cut">
+        <Button isIconOnly aria-label="剪切">
           <ButtonGroup.Separator />
           <Scissors />
         </Button>

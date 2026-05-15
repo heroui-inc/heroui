@@ -12,7 +12,7 @@ export function InternationalCalendar() {
         defaultValue={today(getLocalTimeZone())}
         name="international-date"
       >
-        <Label>Event date</Label>
+        <Label>活动日期</Label>
         <DateField.Group fullWidth>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
           <DateField.Suffix>
@@ -22,7 +22,7 @@ export function InternationalCalendar() {
           </DateField.Suffix>
         </DateField.Group>
         <DatePicker.Popover>
-          <Calendar aria-label="Event date">
+          <Calendar aria-label="活动日期">
             <Calendar.Header>
               <Calendar.YearPickerTrigger>
                 <Calendar.YearPickerTriggerHeading />

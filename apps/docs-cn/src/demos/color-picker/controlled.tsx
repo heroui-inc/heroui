@@ -42,7 +42,7 @@ export function Controlled() {
       <ColorPicker value={color} onChange={setColor}>
         <ColorPicker.Trigger>
           <ColorSwatch size="lg" />
-          <Label>Pick a color</Label>
+          <Label>选择颜色</Label>
         </ColorPicker.Trigger>
         <ColorPicker.Popover className="gap-2">
           <ColorSwatchPicker className="justify-center pt-2" size="xs">
@@ -53,7 +53,7 @@ export function Controlled() {
             ))}
           </ColorSwatchPicker>
           <ColorArea
-            aria-label="Color area"
+            aria-label="取色区域"
             className="max-w-full"
             colorSpace="hsb"
             xChannel="saturation"
@@ -62,14 +62,14 @@ export function Controlled() {
             <ColorArea.Thumb />
           </ColorArea>
           <div className="flex items-center gap-2 px-1">
-            <ColorSlider aria-label="Hue slider" channel="hue" className="flex-1" colorSpace="hsb">
+            <ColorSlider aria-label="色相滑块" channel="hue" className="flex-1" colorSpace="hsb">
               <ColorSlider.Track>
                 <ColorSlider.Thumb />
               </ColorSlider.Track>
             </ColorSlider>
             <Button
               isIconOnly
-              aria-label="Shuffle color"
+              aria-label="随机颜色"
               size="sm"
               variant="tertiary"
               onPress={shuffleColor}
@@ -77,7 +77,7 @@ export function Controlled() {
               <Icon className="size-4" icon="gravity-ui:shuffle" />
             </Button>
           </div>
-          <ColorField aria-label="Color field">
+          <ColorField aria-label="颜色">
             <ColorField.Group variant="secondary">
               <ColorField.Prefix>
                 <ColorSwatch size="xs" />
@@ -88,7 +88,7 @@ export function Controlled() {
         </ColorPicker.Popover>
       </ColorPicker>
       <p className="w-60 text-sm text-muted">
-        Selected: <span className="font-medium">{color.toString("hex")}</span>
+        已选：<span className="font-medium">{color.toString("hex")}</span>
       </p>
     </div>
   );

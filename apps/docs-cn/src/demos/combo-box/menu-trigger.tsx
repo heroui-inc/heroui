@@ -6,124 +6,122 @@ export function MenuTrigger() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Focus (default)</p>
+        <p className="text-sm font-medium text-muted">聚焦（默认）</p>
         <ComboBox className="w-[256px]" menuTrigger="focus">
-          <Label>Favorite Animal</Label>
+          <Label>最喜欢的动物</Label>
           <ComboBox.InputGroup>
-            <Input placeholder="Search animals..." />
+            <Input placeholder="搜索动物…" />
             <ComboBox.Trigger />
           </ComboBox.InputGroup>
           <ComboBox.Popover>
             <ListBox>
-              <ListBox.Item id="aardvark" textValue="Aardvark">
-                Aardvark
+              <ListBox.Item id="aardvark" textValue="土豚">
+                土豚
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="cat" textValue="Cat">
-                Cat
+              <ListBox.Item id="cat" textValue="猫">
+                猫
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="dog" textValue="Dog">
-                Dog
+              <ListBox.Item id="dog" textValue="狗">
+                狗
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="kangaroo" textValue="Kangaroo">
-                Kangaroo
+              <ListBox.Item id="kangaroo" textValue="袋鼠">
+                袋鼠
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="panda" textValue="Panda">
-                Panda
+              <ListBox.Item id="panda" textValue="熊猫">
+                熊猫
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="snake" textValue="Snake">
-                Snake
+              <ListBox.Item id="snake" textValue="蛇">
+                蛇
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             </ListBox>
           </ComboBox.Popover>
-          <Description>Popover opens when the input is focused</Description>
+          <Description>输入框获得焦点时打开弹出层</Description>
         </ComboBox>
       </div>
 
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Input</p>
+        <p className="text-sm font-medium text-muted">输入</p>
         <ComboBox className="w-[256px]" menuTrigger="input">
-          <Label>Favorite Animal</Label>
+          <Label>最喜欢的动物</Label>
           <ComboBox.InputGroup>
-            <Input placeholder="Search animals..." />
+            <Input placeholder="搜索动物…" />
             <ComboBox.Trigger />
           </ComboBox.InputGroup>
           <ComboBox.Popover>
             <ListBox>
-              <ListBox.Item id="aardvark" textValue="Aardvark">
-                Aardvark
+              <ListBox.Item id="aardvark" textValue="土豚">
+                土豚
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="cat" textValue="Cat">
-                Cat
+              <ListBox.Item id="cat" textValue="猫">
+                猫
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="dog" textValue="Dog">
-                Dog
+              <ListBox.Item id="dog" textValue="狗">
+                狗
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="kangaroo" textValue="Kangaroo">
-                Kangaroo
+              <ListBox.Item id="kangaroo" textValue="袋鼠">
+                袋鼠
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="panda" textValue="Panda">
-                Panda
+              <ListBox.Item id="panda" textValue="熊猫">
+                熊猫
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="snake" textValue="Snake">
-                Snake
+              <ListBox.Item id="snake" textValue="蛇">
+                蛇
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             </ListBox>
           </ComboBox.Popover>
-          <Description>Popover opens when the user edits the input text</Description>
+          <Description>用户编辑输入文本时打开弹出层</Description>
         </ComboBox>
       </div>
 
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Manual</p>
+        <p className="text-sm font-medium text-muted">手动</p>
         <ComboBox className="w-[256px]" menuTrigger="manual">
-          <Label>Favorite Animal</Label>
+          <Label>最喜欢的动物</Label>
           <ComboBox.InputGroup>
-            <Input placeholder="Search animals..." />
+            <Input placeholder="搜索动物…" />
             <ComboBox.Trigger />
           </ComboBox.InputGroup>
           <ComboBox.Popover>
             <ListBox>
-              <ListBox.Item id="aardvark" textValue="Aardvark">
-                Aardvark
+              <ListBox.Item id="aardvark" textValue="土豚">
+                土豚
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="cat" textValue="Cat">
-                Cat
+              <ListBox.Item id="cat" textValue="猫">
+                猫
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="dog" textValue="Dog">
-                Dog
+              <ListBox.Item id="dog" textValue="狗">
+                狗
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="kangaroo" textValue="Kangaroo">
-                Kangaroo
+              <ListBox.Item id="kangaroo" textValue="袋鼠">
+                袋鼠
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="panda" textValue="Panda">
-                Panda
+              <ListBox.Item id="panda" textValue="熊猫">
+                熊猫
                 <ListBox.ItemIndicator />
               </ListBox.Item>
-              <ListBox.Item id="snake" textValue="Snake">
-                Snake
+              <ListBox.Item id="snake" textValue="蛇">
+                蛇
                 <ListBox.ItemIndicator />
               </ListBox.Item>
             </ListBox>
           </ComboBox.Popover>
-          <Description>
-            Popover only opens when the trigger button is pressed or arrow keys are used
-          </Description>
+          <Description>仅在按下触发按钮或使用方向键时打开弹出层</Description>
         </ComboBox>
       </div>
     </div>

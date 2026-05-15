@@ -22,64 +22,64 @@ export function Callbacks() {
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast("File saved", {
+            toast("文件已保存", {
               onClose: () => {
-                addToHistory("File saved (closed after 3 seconds)");
+                addToHistory("文件已保存（3 秒后关闭）");
               },
               timeout: 3000,
             })
           }
         >
-          Custom timeout (3s)
+          自定义超时（3 秒）
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast("Changes saved", {
+            toast("更改已保存", {
               onClose: () => {
-                addToHistory("Changes saved (closed after 10 seconds)");
+                addToHistory("更改已保存（10 秒后关闭）");
               },
               timeout: 10000,
             })
           }
         >
-          Custom timeout (10s)
+          自定义超时（10 秒）
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast.success("Event created", {
+            toast.success("活动已创建", {
               onClose: () => {
-                addToHistory("Event created (closed after default timeout)");
+                addToHistory("活动已创建（默认超时后关闭）");
               },
             })
           }
         >
-          With onClose callback
+          使用 onClose 回调
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast("Important notification", {
-              description: "This toast will stay until dismissed",
+            toast("重要通知", {
+              description: "此 Toast 将保持显示直至关闭",
               onClose: () => {
-                addToHistory("Important notification (manually closed)");
+                addToHistory("重要通知（手动关闭）");
               },
               timeout: 0,
             })
           }
         >
-          Persistent toast
+          持久显示 Toast
         </Button>
       </div>
 
-      {/* Closed History Panel */}
+      {/* 关闭历史 Panel */}
       <div className="w-full space-y-2">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium">Closed History</h3>
+          <h3 className="text-sm font-medium">关闭历史</h3>
           {closedHistory.length > 0 && (
             <Button
               className="h-6 text-xs"
@@ -87,13 +87,13 @@ export function Callbacks() {
               variant="tertiary"
               onPress={() => setClosedHistory([])}
             >
-              Clear
+              清空
             </Button>
           )}
         </div>
         <div className="min-h-[120px] space-y-2 rounded-lg border border-border bg-surface p-4">
           {closedHistory.length === 0 ? (
-            <p className="text-sm text-muted">No toasts closed yet. Try closing one above!</p>
+            <p className="text-sm text-muted">尚无已关闭的 Toast。请尝试关闭上方的 Toast！</p>
           ) : (
             closedHistory.map((item, index) => (
               <div

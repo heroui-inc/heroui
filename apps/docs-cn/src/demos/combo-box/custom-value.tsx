@@ -52,9 +52,9 @@ export function CustomValue() {
 
   return (
     <ComboBox className="w-[256px]">
-      <Label>User</Label>
+      <Label>用户</Label>
       <ComboBox.InputGroup>
-        <Input placeholder="Search users..." />
+        <Input placeholder="搜索用户…" />
         <ComboBox.Trigger />
       </ComboBox.InputGroup>
       <ComboBox.Popover>

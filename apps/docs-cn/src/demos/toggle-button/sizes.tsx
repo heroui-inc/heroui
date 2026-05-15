@@ -6,26 +6,23 @@ export function Sizes() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-3">
         <ToggleButton size="sm">
-          <Heart />
-          Small
+          <Heart />小
         </ToggleButton>
         <ToggleButton size="md">
-          <Heart />
-          Medium
+          <Heart />中
         </ToggleButton>
         <ToggleButton size="lg">
-          <Heart />
-          Large
+          <Heart />大
         </ToggleButton>
       </div>
       <div className="flex items-center gap-3">
-        <ToggleButton isIconOnly aria-label="Like" size="sm">
+        <ToggleButton isIconOnly aria-label="点赞" size="sm">
           <Heart />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="Like" size="md">
+        <ToggleButton isIconOnly aria-label="点赞" size="md">
           <Heart />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="Like" size="lg">
+        <ToggleButton isIconOnly aria-label="点赞" size="lg">
           <Heart />
         </ToggleButton>
       </div>

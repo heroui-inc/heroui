@@ -15,7 +15,7 @@ export function Controlled() {
     <div className="space-y-4">
       <Surface className="w-[256px] rounded-3xl shadow-surface">
         <ListBox
-          aria-label="Users"
+          aria-label="用户"
           selectedKeys={selected}
           selectionMode="multiple"
           onSelectionChange={setSelected}
@@ -71,7 +71,7 @@ export function Controlled() {
         </ListBox>
       </Surface>
       <p className="text-sm text-muted">
-        Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
+        已选：{selectedItems.length > 0 ? selectedItems.join("、") : "无"}
       </p>
     </div>
   );

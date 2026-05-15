@@ -6,18 +6,18 @@ export function Invalid() {
   return (
     <div className="flex flex-col gap-4">
       <TimeField isInvalid isRequired className="w-[256px]" name="time">
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
-        <FieldError>Please enter a valid time</FieldError>
+        <FieldError>请输入有效时间</FieldError>
       </TimeField>
       <TimeField isInvalid className="w-[256px]" name="invalid-time">
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
-        <FieldError>Time must be within business hours</FieldError>
+        <FieldError>时间须在工作时间内</FieldError>
       </TimeField>
     </div>
   );

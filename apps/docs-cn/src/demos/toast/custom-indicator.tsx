@@ -10,12 +10,12 @@ export function CustomIndicator() {
         size="sm"
         variant="secondary"
         onPress={() =>
-          toast("Custom icon indicator", {
+          toast("自定义图标指示器", {
             indicator: <Star />,
           })
         }
       >
-        Custom indicator
+        自定义指示器
       </Button>
     </div>
   );

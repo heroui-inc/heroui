@@ -17,13 +17,13 @@ export function CustomQueue() {
           variant="secondary"
           onPress={() => {
             notificationQueue.add({
-              description: "You have a new message",
-              title: "New notification",
+              description: "您有一条新消息",
+              title: "新通知",
               variant: "default",
             });
           }}
         >
-          Add notification (max 2)
+          添加通知（最多 2 条）
         </Button>
       </div>
 
@@ -35,13 +35,13 @@ export function CustomQueue() {
           variant="danger-soft"
           onPress={() => {
             errorQueue.add({
-              description: "Failed to save changes",
-              title: "Error occurred",
+              description: "保存更改失败",
+              title: "发生错误",
               variant: "danger",
             });
           }}
         >
-          Add error (max 3)
+          添加错误（最多 3 条）
         </Button>
       </div>
 
@@ -54,13 +54,13 @@ export function CustomQueue() {
           variant="secondary"
           onPress={() => {
             successQueue.add({
-              description: `Operation ${Date.now()}`,
-              title: "Success!",
+              description: `操作 ${Date.now()}`,
+              title: "成功！",
               variant: "success",
             });
           }}
         >
-          Add success (max 1)
+          添加成功（最多 1 条）
         </Button>
       </div>
     </div>

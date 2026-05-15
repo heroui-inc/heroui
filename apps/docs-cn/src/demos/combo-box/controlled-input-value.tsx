@@ -9,41 +9,41 @@ export function ControlledInputValue() {
   return (
     <div className="space-y-2">
       <ComboBox className="w-[256px]" inputValue={inputValue} onInputChange={setInputValue}>
-        <Label>Search (controlled input)</Label>
+        <Label>搜索（受控输入）</Label>
         <ComboBox.InputGroup>
-          <Input placeholder="Type to search..." />
+          <Input placeholder="输入以搜索…" />
           <ComboBox.Trigger />
         </ComboBox.InputGroup>
         <ComboBox.Popover>
           <ListBox>
-            <ListBox.Item id="aardvark" textValue="Aardvark">
-              Aardvark
+            <ListBox.Item id="aardvark" textValue="土豚">
+              土豚
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="cat" textValue="Cat">
-              Cat
+            <ListBox.Item id="cat" textValue="猫">
+              猫
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="dog" textValue="Dog">
-              Dog
+            <ListBox.Item id="dog" textValue="狗">
+              狗
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="kangaroo" textValue="Kangaroo">
-              Kangaroo
+            <ListBox.Item id="kangaroo" textValue="袋鼠">
+              袋鼠
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="panda" textValue="Panda">
-              Panda
+            <ListBox.Item id="panda" textValue="熊猫">
+              熊猫
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="snake" textValue="Snake">
-              Snake
+            <ListBox.Item id="snake" textValue="蛇">
+              蛇
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
         </ComboBox.Popover>
       </ComboBox>
-      <p className="text-sm text-muted">Input value: {inputValue || "(empty)"}</p>
+      <p className="text-sm text-muted">输入值：{inputValue || "（空）"}</p>
     </div>
   );
 }

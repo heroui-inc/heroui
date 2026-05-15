@@ -33,7 +33,7 @@ export function Controlled() {
             setFocusedDate(start);
           }}
         >
-          This week
+          本周
         </Button>
         <Button
           onPress={() => {
@@ -42,7 +42,7 @@ export function Controlled() {
             setFocusedDate(nextWeekStart);
           }}
         >
-          Next week
+          下周
         </Button>
         <Button
           onPress={() => {
@@ -51,12 +51,12 @@ export function Controlled() {
             setFocusedDate(nextMonthStart);
           }}
         >
-          Next month
+          下月
         </Button>
       </ButtonGroup>
 
       <RangeCalendar
-        aria-label="Trip dates"
+        aria-label="行程日期"
         firstDayOfWeek="mon"
         focusedValue={focusedDate}
         value={value}
@@ -79,7 +79,7 @@ export function Controlled() {
       </RangeCalendar>
 
       <Description className="text-center">
-        Selected range: {value ? `${value.start.toString()} -> ${value.end.toString()}` : "(none)"}
+        已选区间： {value ? `${value.start.toString()} -> ${value.end.toString()}` : "（无）"}
       </Description>
 
       <div className="flex gap-2">
@@ -93,7 +93,7 @@ export function Controlled() {
             setFocusedDate(start);
           }}
         >
-          Set 1 week
+          设为 1 周
         </Button>
         <Button
           size="sm"
@@ -105,10 +105,10 @@ export function Controlled() {
             setFocusedDate(start);
           }}
         >
-          Set Holidays
+          设为节假日
         </Button>
         <Button size="sm" variant="tertiary" onPress={() => setValue(null)}>
-          Clear
+          清空
         </Button>
       </div>
     </div>

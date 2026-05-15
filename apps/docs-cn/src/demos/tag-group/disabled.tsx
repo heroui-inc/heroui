@@ -6,23 +6,23 @@ export function TagGroupDisabled() {
   return (
     <div className="flex flex-col gap-4">
       <TagGroup selectionMode="single">
-        <Label>Disabled Tags</Label>
+        <Label>已禁用的标签</Label>
         <TagGroup.List>
-          <Tag isDisabled>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag isDisabled>Gaming</Tag>
+          <Tag isDisabled>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag isDisabled>游戏</Tag>
         </TagGroup.List>
-        <Description>Some tags are disabled</Description>
+        <Description>部分标签已禁用</Description>
       </TagGroup>
 
       <TagGroup disabledKeys={["travel"]} selectionMode="single">
-        <Label>Disabled Keys</Label>
+        <Label>禁用的键</Label>
         <TagGroup.List>
-          <Tag id="news">News</Tag>
-          <Tag id="travel">Travel</Tag>
-          <Tag id="gaming">Gaming</Tag>
+          <Tag id="news">资讯</Tag>
+          <Tag id="travel">旅行</Tag>
+          <Tag id="gaming">游戏</Tag>
         </TagGroup.List>
-        <Description>Tags disabled via disabledKeys prop</Description>
+        <Description>通过 disabledKeys 属性禁用的标签</Description>
       </TagGroup>
     </div>
   );

@@ -30,27 +30,27 @@ export function CustomTrigger() {
           </div>
         </div>
         <Dropdown.Menu>
-          <Dropdown.Item id="dashboard" textValue="Dashboard">
-            <Label>Dashboard</Label>
+          <Dropdown.Item id="dashboard" textValue="仪表盘">
+            <Label>仪表盘</Label>
           </Dropdown.Item>
-          <Dropdown.Item id="profile" textValue="Profile">
-            <Label>Profile</Label>
+          <Dropdown.Item id="profile" textValue="个人资料">
+            <Label>个人资料</Label>
           </Dropdown.Item>
-          <Dropdown.Item id="settings" textValue="Settings">
+          <Dropdown.Item id="settings" textValue="设置">
             <div className="flex w-full items-center justify-between gap-2">
-              <Label>Settings</Label>
+              <Label>设置</Label>
               <Gear className="size-3.5 text-muted" />
             </div>
           </Dropdown.Item>
-          <Dropdown.Item id="new-project" textValue="New project">
+          <Dropdown.Item id="new-project" textValue="新建项目">
             <div className="flex w-full items-center justify-between gap-2">
-              <Label>Create Team</Label>
+              <Label>创建团队</Label>
               <Persons className="size-3.5 text-muted" />
             </div>
           </Dropdown.Item>
-          <Dropdown.Item id="logout" textValue="Logout" variant="danger">
+          <Dropdown.Item id="logout" textValue="退出登录" variant="danger">
             <div className="flex w-full items-center justify-between gap-2">
-              <Label>Log Out</Label>
+              <Label>退出登录</Label>
               <ArrowRightFromSquare className="size-3.5 text-danger" />
             </div>
           </Dropdown.Item>

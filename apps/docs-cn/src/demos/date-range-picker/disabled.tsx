@@ -14,7 +14,7 @@ export function Disabled() {
       startName="startDate"
       value={{end: start.add({days: 4}), start}}
     >
-      <Label>Trip dates</Label>
+      <Label>出行日期</Label>
       <DateField.Group fullWidth>
         <DateField.Input slot="start">
           {(segment) => <DateField.Segment segment={segment} />}
@@ -29,9 +29,9 @@ export function Disabled() {
           </DateRangePicker.Trigger>
         </DateField.Suffix>
       </DateField.Group>
-      <Description>This date range picker is disabled.</Description>
+      <Description>该日期范围选择器已禁用。</Description>
       <DateRangePicker.Popover>
-        <RangeCalendar aria-label="Trip dates">
+        <RangeCalendar aria-label="出行日期">
           <RangeCalendar.Header>
             <RangeCalendar.YearPickerTrigger>
               <RangeCalendar.YearPickerTriggerHeading />

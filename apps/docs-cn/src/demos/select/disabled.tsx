@@ -3,36 +3,36 @@ import {Label, ListBox, Select} from "@heroui/react";
 export function Disabled() {
   return (
     <div className="flex flex-col gap-4">
-      <Select isDisabled className="w-[256px]" defaultValue="california" placeholder="Select one">
-        <Label>State</Label>
+      <Select isDisabled className="w-[256px]" defaultValue="california" placeholder="请选择">
+        <Label>州</Label>
         <Select.Trigger>
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
         <Select.Popover>
           <ListBox>
-            <ListBox.Item id="florida" textValue="Florida">
-              Florida
+            <ListBox.Item id="florida" textValue="佛罗里达">
+              佛罗里达
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="delaware" textValue="Delaware">
-              Delaware
+            <ListBox.Item id="delaware" textValue="特拉华">
+              特拉华
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="california" textValue="California">
-              California
+            <ListBox.Item id="california" textValue="加利福尼亚">
+              加利福尼亚
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="texas" textValue="Texas">
-              Texas
+            <ListBox.Item id="texas" textValue="德克萨斯">
+              德克萨斯
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="new-york" textValue="New York">
-              New York
+            <ListBox.Item id="new-york" textValue="纽约">
+              纽约
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="washington" textValue="Washington">
-              Washington
+            <ListBox.Item id="washington" textValue="华盛顿">
+              华盛顿
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
@@ -42,38 +42,38 @@ export function Disabled() {
         isDisabled
         className="w-[256px]"
         defaultValue={["argentina", "japan", "france"]}
-        placeholder="Select countries"
+        placeholder="请选择国家"
         selectionMode="multiple"
       >
-        <Label>Countries to Visit</Label>
+        <Label>拟访问国家</Label>
         <Select.Trigger>
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
         <Select.Popover>
           <ListBox>
-            <ListBox.Item id="argentina" textValue="Argentina">
-              Argentina
+            <ListBox.Item id="argentina" textValue="阿根廷">
+              阿根廷
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="venezuela" textValue="Venezuela">
-              Venezuela
+            <ListBox.Item id="venezuela" textValue="委内瑞拉">
+              委内瑞拉
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="japan" textValue="Japan">
-              Japan
+            <ListBox.Item id="japan" textValue="日本">
+              日本
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="france" textValue="France">
-              France
+            <ListBox.Item id="france" textValue="法国">
+              法国
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="italy" textValue="Italy">
-              Italy
+            <ListBox.Item id="italy" textValue="意大利">
+              意大利
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="spain" textValue="Spain">
-              Spain
+            <ListBox.Item id="spain" textValue="西班牙">
+              西班牙
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>

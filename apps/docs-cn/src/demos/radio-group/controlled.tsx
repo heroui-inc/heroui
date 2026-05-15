@@ -9,14 +9,14 @@ export function Controlled() {
   return (
     <div className="flex flex-col gap-4">
       <RadioGroup name="plan-controlled" value={value} onChange={setValue}>
-        <Label>Subscription plan</Label>
+        <Label>订阅套餐</Label>
         <Radio value="starter">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
           <Radio.Content>
-            <Label>Starter</Label>
-            <Description>For side projects and small teams</Description>
+            <Label>入门版</Label>
+            <Description>适合副项目和小型团队</Description>
           </Radio.Content>
         </Radio>
         <Radio value="pro">
@@ -24,8 +24,8 @@ export function Controlled() {
             <Radio.Indicator />
           </Radio.Control>
           <Radio.Content>
-            <Label>Pro</Label>
-            <Description>Advanced reporting and analytics</Description>
+            <Label>专业版</Label>
+            <Description>高级报表与分析</Description>
           </Radio.Content>
         </Radio>
         <Radio value="teams">
@@ -33,13 +33,13 @@ export function Controlled() {
             <Radio.Indicator />
           </Radio.Control>
           <Radio.Content>
-            <Label>Teams</Label>
-            <Description>Share access with up to 10 teammates</Description>
+            <Label>团队版</Label>
+            <Description>最多可与 10 名队友共享访问权限</Description>
           </Radio.Content>
         </Radio>
       </RadioGroup>
       <p className="text-sm text-muted">
-        Selected plan: <span className="font-medium">{value}</span>
+        已选套餐： <span className="font-medium">{value}</span>
       </p>
     </div>
   );

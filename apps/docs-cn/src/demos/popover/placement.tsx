@@ -11,7 +11,7 @@ export function PopoverPlacement() {
         <Popover.Content placement="top">
           <Popover.Dialog>
             <Popover.Arrow />
-            <p className="text-sm">Top placement</p>
+            <p className="text-sm">顶部位置</p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>
@@ -24,13 +24,13 @@ export function PopoverPlacement() {
         <Popover.Content placement="left">
           <Popover.Dialog>
             <Popover.Arrow />
-            <p className="text-sm">Left placement</p>
+            <p className="text-sm">左侧位置</p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>
 
       <div className="flex items-center justify-center">
-        <span className="text-sm text-muted">Click buttons</span>
+        <span className="text-sm text-muted">点击按钮</span>
       </div>
 
       <Popover>
@@ -40,7 +40,7 @@ export function PopoverPlacement() {
         <Popover.Content placement="right">
           <Popover.Dialog>
             <Popover.Arrow />
-            <p className="text-sm">Right placement</p>
+            <p className="text-sm">右侧位置</p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>
@@ -53,7 +53,7 @@ export function PopoverPlacement() {
         <Popover.Content placement="bottom">
           <Popover.Dialog>
             <Popover.Arrow />
-            <p className="text-sm">Bottom placement</p>
+            <p className="text-sm">底部位置</p>
           </Popover.Dialog>
         </Popover.Content>
       </Popover>

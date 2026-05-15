@@ -19,7 +19,7 @@ export function Controlled() {
         ))}
       </ColorSwatchPicker>
       <p className="text-sm text-muted">
-        Selected: <span className="font-medium">{value.toString("hex")}</span>
+        已选：<span className="font-medium">{value.toString("hex")}</span>
       </p>
     </div>
   );

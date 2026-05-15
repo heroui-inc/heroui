@@ -4,7 +4,7 @@ export function Variants() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <Label>Primary variant</Label>
+        <Label>主要变体</Label>
         <InputOTP maxLength={6} variant="primary">
           <InputOTP.Group>
             <InputOTP.Slot index={0} />
@@ -20,7 +20,7 @@ export function Variants() {
         </InputOTP>
       </div>
       <div className="flex flex-col gap-2">
-        <Label>Secondary variant</Label>
+        <Label>次要变体</Label>
         <InputOTP maxLength={6} variant="secondary">
           <InputOTP.Group>
             <InputOTP.Slot index={0} />

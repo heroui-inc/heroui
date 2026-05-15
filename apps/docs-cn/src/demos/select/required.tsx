@@ -13,84 +13,84 @@ export function Required() {
       data[key] = value.toString();
     });
 
-    alert("Form submitted successfully!");
+    alert("表单提交成功！");
   };
 
   return (
     <Form className="flex w-[256px] flex-col gap-4" onSubmit={onSubmit}>
-      <Select isRequired className="w-full" name="state" placeholder="Select one">
-        <Label>State</Label>
+      <Select isRequired className="w-full" name="state" placeholder="请选择">
+        <Label>州</Label>
         <Select.Trigger>
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
         <Select.Popover>
           <ListBox>
-            <ListBox.Item id="florida" textValue="Florida">
-              Florida
+            <ListBox.Item id="florida" textValue="佛罗里达">
+              佛罗里达
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="delaware" textValue="Delaware">
-              Delaware
+            <ListBox.Item id="delaware" textValue="特拉华">
+              特拉华
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="california" textValue="California">
-              California
+            <ListBox.Item id="california" textValue="加利福尼亚">
+              加利福尼亚
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="texas" textValue="Texas">
-              Texas
+            <ListBox.Item id="texas" textValue="德克萨斯">
+              德克萨斯
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="new-york" textValue="New York">
-              New York
+            <ListBox.Item id="new-york" textValue="纽约">
+              纽约
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="washington" textValue="Washington">
-              Washington
+            <ListBox.Item id="washington" textValue="华盛顿">
+              华盛顿
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
         </Select.Popover>
         <FieldError />
       </Select>
-      <Select isRequired className="w-full" name="country" placeholder="Select a country">
-        <Label>Country</Label>
+      <Select isRequired className="w-full" name="country" placeholder="请选择国家">
+        <Label>国家</Label>
         <Select.Trigger>
           <Select.Value />
           <Select.Indicator />
         </Select.Trigger>
         <Select.Popover>
           <ListBox>
-            <ListBox.Item id="usa" textValue="United States">
-              United States
+            <ListBox.Item id="usa" textValue="美国">
+              美国
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="canada" textValue="Canada">
-              Canada
+            <ListBox.Item id="canada" textValue="加拿大">
+              加拿大
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="mexico" textValue="Mexico">
-              Mexico
+            <ListBox.Item id="mexico" textValue="墨西哥">
+              墨西哥
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="uk" textValue="United Kingdom">
-              United Kingdom
+            <ListBox.Item id="uk" textValue="英国">
+              英国
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="france" textValue="France">
-              France
+            <ListBox.Item id="france" textValue="法国">
+              法国
               <ListBox.ItemIndicator />
             </ListBox.Item>
-            <ListBox.Item id="germany" textValue="Germany">
-              Germany
+            <ListBox.Item id="germany" textValue="德国">
+              德国
               <ListBox.ItemIndicator />
             </ListBox.Item>
           </ListBox>
         </Select.Popover>
         <FieldError />
       </Select>
-      <Button type="submit">Submit</Button>
+      <Button type="submit">提交</Button>
     </Form>
   );
 }

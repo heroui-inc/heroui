@@ -6,7 +6,7 @@ import {DateField, Description, Label} from "@heroui/react";
 export function WithPrefixAndSuffix() {
   return (
     <DateField className="w-[256px]" name="date">
-      <Label>Date</Label>
+      <Label>日期</Label>
       <DateField.Group>
         <DateField.Prefix>
           <Calendar className="size-4 text-muted" />
@@ -16,7 +16,7 @@ export function WithPrefixAndSuffix() {
           <ChevronDown className="size-4 text-muted" />
         </DateField.Suffix>
       </DateField.Group>
-      <Description>Enter a date</Description>
+      <Description>输入日期</Description>
     </DateField>
   );
 }

@@ -50,8 +50,8 @@ export function CustomValue() {
   ];
 
   return (
-    <Select className="w-[256px]" placeholder="Select a user">
-      <Label>User</Label>
+    <Select className="w-[256px]" placeholder="请选择用户">
+      <Label>用户</Label>
       <Select.Trigger>
         <Select.Value>
           {({defaultChildren, isPlaceholder, state}) => {
@@ -62,7 +62,7 @@ export function CustomValue() {
             const selectedItems = state.selectedItems;
 
             if (selectedItems.length > 1) {
-              return `${selectedItems.length} users selected`;
+              return `${selectedItems.length} 位用户已选`;
             }
 
             const selectedItem = users.find((user) => user.id === selectedItems[0]?.key);

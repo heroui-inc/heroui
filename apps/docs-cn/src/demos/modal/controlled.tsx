@@ -12,26 +12,26 @@ export function Controlled() {
   return (
     <div className="flex max-w-md flex-col gap-8">
       <div className="flex flex-col gap-3">
-        <h3 className="text-lg font-semibold text-foreground">With React.useState()</h3>
+        <h3 className="text-lg font-semibold text-foreground">配合 React.useState()</h3>
         <p className="text-sm leading-relaxed text-pretty text-muted">
-          Control the modal using React's <code className="text-foreground">useState</code> hook for
-          simple state management. Perfect for basic use cases.
+          使用 React 的 <code className="text-foreground">useState</code>{" "}
+          管理模态框开关，适合简单场景。
         </p>
         <div className="flex flex-col items-start gap-3 rounded-2xl bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
             <p className="text-xs text-muted">
-              Status:{" "}
+              状态：{" "}
               <span className="font-mono font-medium text-foreground">
-                {isOpen ? "open" : "closed"}
+                {isOpen ? "打开" : "关闭"}
               </span>
             </p>
           </div>
           <div className="flex gap-2">
             <Button size="sm" variant="secondary" onPress={() => setIsOpen(true)}>
-              Open Modal
+              打开模态框
             </Button>
             <Button size="sm" variant="tertiary" onPress={() => setIsOpen(!isOpen)}>
-              Toggle
+              切换
             </Button>
           </div>
         </div>
@@ -44,20 +44,19 @@ export function Controlled() {
                 <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                   <CircleCheck className="size-5" />
                 </Modal.Icon>
-                <Modal.Heading>Controlled with useState()</Modal.Heading>
+                <Modal.Heading>由 useState() 控制</Modal.Heading>
               </Modal.Header>
               <Modal.Body>
                 <p>
-                  This modal is controlled by React's <code>useState</code> hook. Pass{" "}
-                  <code>isOpen</code> and <code>onOpenChange</code> props to manage the modal state
-                  externally.
+                  该模态框由 React 的 <code>useState</code> 控制。将 <code>isOpen</code> 与{" "}
+                  <code>onOpenChange</code> 传入即可在外部管理状态。
                 </p>
               </Modal.Body>
               <Modal.Footer>
                 <Button slot="close" variant="secondary">
-                  Cancel
+                  取消
                 </Button>
-                <Button slot="close">Confirm</Button>
+                <Button slot="close">确认</Button>
               </Modal.Footer>
             </Modal.Dialog>
           </Modal.Container>
@@ -65,27 +64,26 @@ export function Controlled() {
       </div>
 
       <div className="flex flex-col gap-3">
-        <h3 className="text-lg font-semibold text-foreground">With useOverlayState()</h3>
+        <h3 className="text-lg font-semibold text-foreground">配合 useOverlayState()</h3>
         <p className="text-sm leading-relaxed text-pretty text-muted">
-          Use the <code className="text-foreground">useOverlayState</code> hook for a cleaner API
-          with convenient methods like <code>open()</code>, <code>close()</code>, and{" "}
-          <code>toggle()</code>.
+          使用 <code className="text-foreground">useOverlayState</code> 获得更简洁的 API，内置{" "}
+          <code>open()</code>、<code>close()</code>、<code>toggle()</code> 等方法。
         </p>
         <div className="flex flex-col items-start gap-3 rounded-2xl bg-surface p-4 shadow-sm">
           <div className="flex w-full items-center justify-between">
             <p className="text-xs text-muted">
-              Status:{" "}
+              状态：{" "}
               <span className="font-mono font-medium text-foreground">
-                {state.isOpen ? "open" : "closed"}
+                {state.isOpen ? "打开" : "关闭"}
               </span>
             </p>
           </div>
           <div className="flex gap-2">
             <Button size="sm" variant="secondary" onPress={state.open}>
-              Open Modal
+              打开模态框
             </Button>
             <Button size="sm" variant="tertiary" onPress={state.toggle}>
-              Toggle
+              切换
             </Button>
           </div>
         </div>
@@ -98,21 +96,20 @@ export function Controlled() {
                 <Modal.Icon className="bg-success-soft text-success-soft-foreground">
                   <CircleCheck className="size-5" />
                 </Modal.Icon>
-                <Modal.Heading>Controlled with useOverlayState()</Modal.Heading>
+                <Modal.Heading>由 useOverlayState() 控制</Modal.Heading>
               </Modal.Header>
               <Modal.Body>
                 <p>
-                  The <code>useOverlayState</code> hook provides dedicated methods for common
-                  operations. No need to manually create callbacks—just use{" "}
-                  <code>state.open()</code>, <code>state.close()</code>, or{" "}
-                  <code>state.toggle()</code>.
+                  <code>useOverlayState</code> 为常见操作提供专用方法，无需手写回调，直接使用{" "}
+                  <code>state.open()</code>、<code>state.close()</code> 或{" "}
+                  <code>state.toggle()</code> 即可。
                 </p>
               </Modal.Body>
               <Modal.Footer>
                 <Button slot="close" variant="secondary">
-                  Cancel
+                  取消
                 </Button>
-                <Button slot="close">Confirm</Button>
+                <Button slot="close">确认</Button>
               </Modal.Footer>
             </Modal.Dialog>
           </Modal.Container>

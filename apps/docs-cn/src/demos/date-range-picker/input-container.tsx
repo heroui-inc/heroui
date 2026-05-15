@@ -23,7 +23,7 @@ export function InputContainer() {
     >
       {({state}) => (
         <>
-          <Label>Date range</Label>
+          <Label>日期范围</Label>
           <DateField.Group>
             <DateField.InputContainer>
               <DateField.Input slot="start">
@@ -41,7 +41,7 @@ export function InputContainer() {
             </DateField.Suffix>
           </DateField.Group>
           <DateRangePicker.Popover className="flex w-full flex-col gap-3">
-            <RangeCalendar aria-label="Trip dates">
+            <RangeCalendar aria-label="出行日期">
               <RangeCalendar.Header>
                 <RangeCalendar.YearPickerTrigger>
                   <RangeCalendar.YearPickerTriggerHeading />
@@ -66,10 +66,10 @@ export function InputContainer() {
             </RangeCalendar>
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <Label>Start Time</Label>
+                <Label>开始时间</Label>
                 <TimeField
                   shouldForceLeadingZeros
-                  aria-label="Start Time"
+                  aria-label="开始时间"
                   granularity="second"
                   hourCycle={12}
                   value={state.timeRange?.start ?? null}
@@ -88,10 +88,10 @@ export function InputContainer() {
                 </TimeField>
               </div>
               <div className="flex items-center justify-between">
-                <Label>End Time</Label>
+                <Label>结束时间</Label>
                 <TimeField
                   shouldForceLeadingZeros
-                  aria-label="End Time"
+                  aria-label="结束时间"
                   granularity="second"
                   hourCycle={12}
                   value={state.timeRange?.end ?? null}

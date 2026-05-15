@@ -10,21 +10,21 @@ export function Channels() {
   return (
     <div className="flex w-full max-w-xs flex-col gap-4">
       <ColorSlider channel="hue" value={color} onChange={setColor}>
-        <Label>Hue</Label>
+        <Label>色相</Label>
         <ColorSlider.Output />
         <ColorSlider.Track>
           <ColorSlider.Thumb />
         </ColorSlider.Track>
       </ColorSlider>
       <ColorSlider channel="saturation" value={color} onChange={setColor}>
-        <Label>Saturation</Label>
+        <Label>饱和度</Label>
         <ColorSlider.Output />
         <ColorSlider.Track>
           <ColorSlider.Thumb />
         </ColorSlider.Track>
       </ColorSlider>
       <ColorSlider channel="lightness" value={color} onChange={setColor}>
-        <Label>Lightness</Label>
+        <Label>明度</Label>
         <ColorSlider.Output />
         <ColorSlider.Track>
           <ColorSlider.Thumb />
@@ -33,7 +33,7 @@ export function Channels() {
       <div className="flex items-center gap-2">
         <ColorSwatch color={color} size="sm" />
         <p className="text-sm text-muted">
-          Current color: <code className="font-mono">{color.toString("hsl")}</code>
+          当前颜色：<code className="font-mono">{color.toString("hsl")}</code>
         </p>
       </div>
     </div>

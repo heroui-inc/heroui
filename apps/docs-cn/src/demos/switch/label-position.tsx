@@ -8,12 +8,12 @@ export function LabelPosition() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Label after</Label>
+          <Label className="text-sm">标签在后</Label>
         </Switch.Content>
       </Switch>
       <Switch>
         <Switch.Content>
-          <Label className="text-sm">Label before</Label>
+          <Label className="text-sm">标签在前</Label>
         </Switch.Content>
         <Switch.Control>
           <Switch.Thumb />

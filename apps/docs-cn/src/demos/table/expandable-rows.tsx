@@ -20,29 +20,29 @@ export function ExpandableRows() {
       children: [
         {
           children: [
-            {children: [], date: "7/10/2025", id: "3", title: "Weekly Report", type: "File"},
-            {children: [], date: "8/20/2025", id: "4", title: "Budget", type: "File"},
+            {children: [], date: "7/10/2025", id: "3", title: "周报", type: "文件"},
+            {children: [], date: "8/20/2025", id: "4", title: "预算", type: "文件"},
           ],
           date: "8/2/2025",
           id: "2",
-          title: "Project",
-          type: "Directory",
+          title: "项目",
+          type: "文件夹",
         },
       ],
       date: "10/20/2025",
       id: "1",
-      title: "Documents",
-      type: "Directory",
+      title: "文档",
+      type: "文件夹",
     },
     {
       children: [
-        {children: [], date: "1/23/2026", id: "6", title: "Image 1", type: "File"},
-        {children: [], date: "2/3/2026", id: "7", title: "Image 2", type: "File"},
+        {children: [], date: "1/23/2026", id: "6", title: "图片 1", type: "文件"},
+        {children: [], date: "2/3/2026", id: "7", title: "图片 2", type: "文件"},
       ],
       date: "2/3/2026",
       id: "5",
-      title: "Photos",
-      type: "Directory",
+      title: "照片",
+      type: "文件夹",
     },
   ];
 
@@ -57,7 +57,7 @@ export function ExpandableRows() {
               {hasChildItems && isTreeColumn ? (
                 <Button
                   isIconOnly
-                  aria-label="Toggle row"
+                  aria-label="切换行"
                   isDisabled={isDisabled}
                   size="sm"
                   slot="chevron"
@@ -88,7 +88,7 @@ export function ExpandableRows() {
     <Table>
       <Table.ScrollContainer>
         <Table.Content
-          aria-label="Files"
+          aria-label="文件"
           className="min-w-[520px]"
           expandedKeys={expandedKeys}
           treeColumn="name"
@@ -96,10 +96,10 @@ export function ExpandableRows() {
         >
           <Table.Header>
             <Table.Column isRowHeader id="name">
-              Name
+              姓名
             </Table.Column>
-            <Table.Column id="type">Type</Table.Column>
-            <Table.Column id="date">Date Modified</Table.Column>
+            <Table.Column id="type">类型</Table.Column>
+            <Table.Column id="date">修改日期</Table.Column>
           </Table.Header>
           <Table.Body items={data}>{renderExpandableRow}</Table.Body>
         </Table.Content>

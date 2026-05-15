@@ -12,11 +12,11 @@ export function Controlled() {
   return (
     <div className="flex flex-col gap-4">
       <TimeField className="w-[256px]" name="time" value={value} onChange={setValue}>
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
-        <Description>Current value: {value ? value.toString() : "(empty)"}</Description>
+        <Description>当前值：{value ? value.toString() : "（空）"}</Description>
       </TimeField>
       <div className="flex gap-2">
         <Button
@@ -27,10 +27,10 @@ export function Controlled() {
             setValue(new Time(currentTime.hour, currentTime.minute, currentTime.second));
           }}
         >
-          Set now
+          设为当前时间
         </Button>
         <Button variant="tertiary" onPress={() => setValue(null)}>
-          Clear
+          清空
         </Button>
       </div>
     </div>

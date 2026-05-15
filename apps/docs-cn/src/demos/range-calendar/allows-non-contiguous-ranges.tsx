@@ -20,7 +20,7 @@ export function AllowsNonContiguousRanges() {
     <div className="flex flex-col items-center gap-4">
       <RangeCalendar
         allowsNonContiguousRanges
-        aria-label="Trip dates"
+        aria-label="行程日期"
         defaultValue={{end: now.add({days: 9}), start: now.add({days: 1})}}
         firstDayOfWeek="mon"
         isDateUnavailable={isDateUnavailable}
@@ -39,9 +39,7 @@ export function AllowsNonContiguousRanges() {
           </RangeCalendar.GridBody>
         </RangeCalendar.Grid>
       </RangeCalendar>
-      <Description className="text-center">
-        Non-contiguous ranges are allowed across unavailable dates
-      </Description>
+      <Description className="text-center">允许跨不可选日期选择非连续区间</Description>
     </div>
   );
 }

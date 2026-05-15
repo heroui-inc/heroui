@@ -8,7 +8,7 @@ export function GroupHorizontal() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Notifications</Label>
+          <Label className="text-sm">通知</Label>
         </Switch.Content>
       </Switch>
       <Switch name="marketing">
@@ -16,7 +16,7 @@ export function GroupHorizontal() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Marketing</Label>
+          <Label className="text-sm">营销</Label>
         </Switch.Content>
       </Switch>
       <Switch name="social">
@@ -24,7 +24,7 @@ export function GroupHorizontal() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Social</Label>
+          <Label className="text-sm">社交</Label>
         </Switch.Content>
       </Switch>
     </SwitchGroup>

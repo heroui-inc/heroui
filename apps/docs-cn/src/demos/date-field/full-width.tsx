@@ -7,13 +7,13 @@ export function FullWidth() {
   return (
     <div className="w-[400px] space-y-4">
       <DateField fullWidth name="date">
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
       </DateField>
       <DateField fullWidth name="date-icons">
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group>
           <DateField.Prefix>
             <Calendar className="size-4 text-muted" />

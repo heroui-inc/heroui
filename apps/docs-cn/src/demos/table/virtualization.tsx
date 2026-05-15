@@ -11,16 +11,16 @@ interface User {
 
 export function Virtualization() {
   const roles = [
-    "Software Engineer",
-    "Senior Engineer",
-    "Staff Engineer",
-    "Product Manager",
-    "Designer",
-    "Data Analyst",
-    "QA Engineer",
-    "DevOps Engineer",
-    "Marketing Manager",
-    "Sales Representative",
+    "软件工程师",
+    "高级工程师",
+    "资深工程师",
+    "产品经理",
+    "设计师",
+    "数据分析师",
+    "测试工程师",
+    "DevOps 工程师",
+    "营销经理",
+    "销售代表",
   ];
 
   const firstNames = [
@@ -101,18 +101,18 @@ export function Virtualization() {
       <Table>
         <Table.ScrollContainer>
           <Table.Content
-            aria-label="Virtualized table with 1000 rows"
+            aria-label="1000 行虚拟化表格"
             className="h-[300px] min-w-[700px] overflow-auto"
           >
             <Table.Header className="h-full w-full">
               <Table.Column isRowHeader id="name" minWidth={160}>
-                Name
+                姓名
               </Table.Column>
               <Table.Column id="role" minWidth={220}>
-                Role
+                角色
               </Table.Column>
               <Table.Column id="email" minWidth={240}>
-                Email
+                邮箱
               </Table.Column>
             </Table.Header>
             <Table.Body items={virtualizedUsers}>

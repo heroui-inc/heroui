@@ -14,6 +14,17 @@ import {
 } from "@heroui/react";
 import {useState} from "react";
 
+const CHANNEL_LABELS: Record<ColorChannel, string> = {
+  alpha: "透明度",
+  blue: "蓝",
+  brightness: "亮度",
+  green: "绿",
+  hue: "色相",
+  lightness: "明度",
+  red: "红",
+  saturation: "饱和度",
+};
+
 export function WithFields() {
   const [colorSpace, setColorSpace] = useState<ColorSpace>("hsl");
 
@@ -27,7 +38,7 @@ export function WithFields() {
     <ColorPicker defaultValue="hsla(220, 90%, 50%, 0.8)">
       <ColorPicker.Trigger>
         <ColorSwatch size="lg" />
-        <Label>Pick a color</Label>
+        <Label>选择颜色</Label>
       </ColorPicker.Trigger>
       <ColorPicker.Popover className="max-w-62 gap-2">
         <ColorArea
@@ -39,14 +50,14 @@ export function WithFields() {
           <ColorArea.Thumb />
         </ColorArea>
         <ColorSlider channel="hue" className="gap-1 px-1" colorSpace="hsb">
-          <Label>Hue</Label>
+          <Label>色相</Label>
           <ColorSlider.Output className="text-muted" />
           <ColorSlider.Track>
             <ColorSlider.Thumb />
           </ColorSlider.Track>
         </ColorSlider>
         <Select
-          aria-label="Color space"
+          aria-label="色彩空间"
           value={colorSpace}
           variant="secondary"
           onChange={(value) => setColorSpace(value as ColorSpace)}
@@ -70,7 +81,7 @@ export function WithFields() {
           {colorChannelsByColorSpace[colorSpace].map((channel) => (
             <ColorField
               key={channel}
-              aria-label={channel}
+              aria-label={CHANNEL_LABELS[channel]}
               channel={channel}
               colorSpace={colorSpace}
             >

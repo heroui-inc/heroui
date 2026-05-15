@@ -13,79 +13,78 @@ export function Variants() {
           size="sm"
           variant="tertiary"
           onPress={() => {
-            toast("You have been invited to join a team", {
+            toast("您已被邀请加入团队", {
               actionProps: {
-                children: "Dismiss",
+                children: "忽略",
                 onPress: () => toast.clear(),
                 variant: "tertiary",
               },
-              description: "Bob sent you an invitation to join HeroUI team",
+              description: "Bob 邀请您加入 HeroUI 团队",
               indicator: <Persons />,
               variant: "default",
             });
           }}
         >
-          Default toast
+          默认 Toast
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() =>
-            toast.info("You have 2 credits left", {
-              actionProps: {children: "Upgrade", onPress: noop},
-              description: "Get a paid plan for more credits",
+            toast.info("您还剩 2 个积分", {
+              actionProps: {children: "升级", onPress: noop},
+              description: "升级付费方案以获取更多积分",
             })
           }
         >
-          Accent toast
+          强调 Toast
         </Button>
         <Button
           className="text-success"
           size="sm"
           variant="tertiary"
           onPress={() =>
-            toast.success("You have upgraded your plan", {
+            toast.success("您已升级方案", {
               actionProps: {
-                children: "Billing",
+                children: "账单",
                 className: "bg-success text-success-foreground",
                 onPress: noop,
               },
-              description: "You can continue using HeroUI Chat",
+              description: "您可以继续使用 HeroUI Chat",
             })
           }
         >
-          Success toast
+          成功 Toast
         </Button>
         <Button
           className="text-warning"
           size="sm"
           variant="tertiary"
           onPress={() =>
-            toast.warning("You have no credits left", {
+            toast.warning("您的积分已用完", {
               actionProps: {
-                children: "Upgrade",
+                children: "升级",
                 className: "bg-warning text-warning-foreground",
                 onPress: noop,
               },
-              description: "Upgrade to a paid plan to continue",
+              description: "升级付费方案以继续使用",
             })
           }
         >
-          Warning toast
+          警告 Toast
         </Button>
         <Button
           size="sm"
           variant="danger-soft"
           onPress={() =>
-            toast.danger("Storage is full", {
-              actionProps: {children: "Remove", onPress: noop, variant: "danger"},
-              description:
-                "Remove files to release space. Adding more text to demonstrate longer content display",
+            toast.danger("存储空间已满", {
+              actionProps: {children: "删除", onPress: noop, variant: "danger"},
+              description: "删除文件以释放空间。此处增加更多文字以演示较长内容的显示效果",
               indicator: <HardDrive />,
             })
           }
         >
-          Danger toast
+          危险 Toast
         </Button>
       </div>
     </div>

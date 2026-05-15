@@ -5,23 +5,23 @@ import {Tag, TagGroup} from "@heroui/react";
 
 export function TagGroupBasic() {
   return (
-    <TagGroup aria-label="Tags" selectionMode="single">
+    <TagGroup aria-label="标签" selectionMode="single">
       <TagGroup.List>
         <Tag id="default-news">
           <SquareArticle />
-          News
+          资讯
         </Tag>
         <Tag id="default-travel">
           <PlanetEarth />
-          Travel
+          旅行
         </Tag>
         <Tag id="default-gaming">
           <Rocket />
-          Gaming
+          游戏
         </Tag>
         <Tag id="default-shopping">
           <ShoppingBag />
-          Shopping
+          购物
         </Tag>
       </TagGroup.List>
     </TagGroup>

@@ -3,8 +3,8 @@ import {Description, InputOTP, Label, REGEXP_ONLY_CHARS} from "@heroui/react";
 export function WithPattern() {
   return (
     <div className="flex w-[280px] flex-col gap-2">
-      <Label>Enter code (letters only)</Label>
-      <Description>Only alphabetic characters are allowed</Description>
+      <Label>输入验证码（仅字母）</Label>
+      <Description>仅允许输入字母</Description>
       <InputOTP maxLength={6} pattern={REGEXP_ONLY_CHARS}>
         <InputOTP.Group>
           <InputOTP.Slot index={0} />

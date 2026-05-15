@@ -8,7 +8,7 @@ export function Disabled() {
       className="w-full max-w-xs"
       defaultValue="hsl(200, 100%, 50%)"
     >
-      <Label>Hue</Label>
+      <Label>色相</Label>
       <ColorSlider.Output />
       <ColorSlider.Track>
         <ColorSlider.Thumb />

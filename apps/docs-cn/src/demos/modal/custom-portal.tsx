@@ -16,11 +16,11 @@ export function CustomPortal() {
     <div className="flex flex-col gap-4">
       <div>
         <p className="text-sm">
-          Render modals inside a custom container instead of <code>document.body</code>
+          在自定义容器内渲染模态框，而非 <code>document.body</code>
         </p>
         <p className="text-sm text-muted">
-          Apply <code className="rounded px-1 py-0.5 text-xs">transform: translateZ(0)</code> to the
-          container to create a new stacking context.
+          为容器应用 <code className="rounded px-1 py-0.5 text-xs">transform: translateZ(0)</code>{" "}
+          以创建新的层叠上下文。
         </p>
       </div>
       <div
@@ -31,13 +31,13 @@ export function CustomPortal() {
       >
         {!!portalContainer && (
           <Modal>
-            <Button>Open Modal</Button>
+            <Button>打开模态框</Button>
             <Modal.Backdrop className="h-full" UNSTABLE_portalContainer={portalContainer}>
               <Modal.Container className="h-full max-h-full">
                 <Modal.Dialog className="h-full max-h-full sm:max-w-md">
                   <Modal.CloseTrigger />
                   <Modal.Header>
-                    <Modal.Heading>Custom Portal</Modal.Heading>
+                    <Modal.Heading>自定义 Portal</Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
                     <p className="text-sm text-muted">
@@ -58,7 +58,7 @@ export function CustomPortal() {
                   </Modal.Body>
                   <Modal.Footer>
                     <Button slot="close" variant="secondary">
-                      Close
+                      关闭
                     </Button>
                   </Modal.Footer>
                 </Modal.Dialog>

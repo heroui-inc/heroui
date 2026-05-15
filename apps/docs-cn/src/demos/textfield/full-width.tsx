@@ -4,13 +4,13 @@ export function FullWidth() {
   return (
     <div className="w-[400px] space-y-4">
       <TextField fullWidth name="name">
-        <Label>Your name</Label>
+        <Label>你的姓名</Label>
         <Input placeholder="John" />
       </TextField>
       <TextField fullWidth isInvalid isRequired name="password" type="password">
-        <Label>Password</Label>
+        <Label>密码</Label>
         <Input />
-        <FieldError>Password must be longer than 8 characters</FieldError>
+        <FieldError>密码长度必须超过 8 个字符</FieldError>
       </TextField>
     </div>
   );

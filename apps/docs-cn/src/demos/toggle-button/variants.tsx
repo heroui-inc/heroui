@@ -6,11 +6,11 @@ export function Variants() {
     <div className="flex items-center gap-3">
       <ToggleButton>
         <Heart />
-        Default
+        默认
       </ToggleButton>
       <ToggleButton variant="ghost">
         <Heart />
-        Ghost
+        幽灵
       </ToggleButton>
     </div>
   );

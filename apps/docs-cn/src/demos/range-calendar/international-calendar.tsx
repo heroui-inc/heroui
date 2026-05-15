@@ -6,7 +6,7 @@ import {I18nProvider} from "react-aria-components";
 export function InternationalCalendar() {
   return (
     <I18nProvider locale="hi-IN-u-ca-indian">
-      <RangeCalendar aria-label="Trip dates">
+      <RangeCalendar aria-label="行程日期">
         <RangeCalendar.Header>
           <RangeCalendar.YearPickerTrigger>
             <RangeCalendar.YearPickerTriggerHeading />

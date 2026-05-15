@@ -10,21 +10,21 @@ export function RGBChannels() {
   return (
     <div className="flex w-full max-w-xs flex-col gap-4">
       <ColorSlider channel="red" value={color} onChange={setColor}>
-        <Label>Red</Label>
+        <Label>红</Label>
         <ColorSlider.Output />
         <ColorSlider.Track>
           <ColorSlider.Thumb />
         </ColorSlider.Track>
       </ColorSlider>
       <ColorSlider channel="green" value={color} onChange={setColor}>
-        <Label>Green</Label>
+        <Label>绿</Label>
         <ColorSlider.Output />
         <ColorSlider.Track>
           <ColorSlider.Thumb />
         </ColorSlider.Track>
       </ColorSlider>
       <ColorSlider channel="blue" value={color} onChange={setColor}>
-        <Label>Blue</Label>
+        <Label>蓝</Label>
         <ColorSlider.Output />
         <ColorSlider.Track>
           <ColorSlider.Thumb />
@@ -33,7 +33,7 @@ export function RGBChannels() {
       <div className="flex items-center gap-2">
         <ColorSwatch color={color} size="sm" />
         <p className="text-sm text-muted">
-          Current color: <code className="font-mono">{color.toString("rgb")}</code>
+          当前颜色：<code className="font-mono">{color.toString("rgb")}</code>
         </p>
       </div>
     </div>

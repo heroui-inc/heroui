@@ -19,22 +19,22 @@ export function Validation() {
         value={username}
         onChange={setUsername}
       >
-        <Label>Username</Label>
+        <Label>用户名</Label>
         <Input placeholder="jane_doe" />
         {isUsernameInvalid ? (
-          <FieldError>Username must be at least 3 characters.</FieldError>
+          <FieldError>用户名至少需要 3 个字符。</FieldError>
         ) : (
-          <Description>Choose a unique username for your profile.</Description>
+          <Description>为你的资料选择一个唯一的用户名。</Description>
         )}
       </TextField>
 
       <TextField isRequired isInvalid={isBioInvalid} name="bio" value={bio} onChange={setBio}>
-        <Label>Bio</Label>
-        <TextArea placeholder="Tell us about yourself..." />
+        <Label>个人简介</Label>
+        <TextArea placeholder="介绍一下你自己…" />
         {isBioInvalid ? (
-          <FieldError>Bio must contain at least 20 characters.</FieldError>
+          <FieldError>个人简介至少需要 20 个字符。</FieldError>
         ) : (
-          <Description>Minimum 20 characters ({bio.length}/20).</Description>
+          <Description>至少 20 个字符 ({bio.length}/20).</Description>
         )}
       </TextField>
     </div>

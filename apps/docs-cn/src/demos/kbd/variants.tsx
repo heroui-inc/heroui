@@ -4,7 +4,7 @@ export function Variants() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
-        <span>Copy:</span>
+        <span>复制：</span>
         <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>C</Kbd.Content>
@@ -15,7 +15,7 @@ export function Variants() {
         </Kbd>
       </div>
       <div className="flex items-center gap-2">
-        <span>Paste:</span>
+        <span>粘贴：</span>
         <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>V</Kbd.Content>
@@ -26,7 +26,7 @@ export function Variants() {
         </Kbd>
       </div>
       <div className="flex items-center gap-2">
-        <span>Cut:</span>
+        <span>剪切：</span>
         <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>X</Kbd.Content>
@@ -37,7 +37,7 @@ export function Variants() {
         </Kbd>
       </div>
       <div className="flex items-center gap-2">
-        <span>Undo:</span>
+        <span>撤销：</span>
         <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>Z</Kbd.Content>
@@ -48,7 +48,7 @@ export function Variants() {
         </Kbd>
       </div>
       <div className="flex items-center gap-2">
-        <span>Redo:</span>
+        <span>重做：</span>
         <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Abbr keyValue="shift" />

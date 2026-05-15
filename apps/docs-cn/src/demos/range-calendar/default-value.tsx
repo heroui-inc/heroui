@@ -6,7 +6,7 @@ import {parseDate} from "@internationalized/date";
 export function DefaultValue() {
   return (
     <RangeCalendar
-      aria-label="Trip dates"
+      aria-label="行程日期"
       defaultValue={{end: parseDate("2025-02-12"), start: parseDate("2025-02-03")}}
       firstDayOfWeek="mon"
     >

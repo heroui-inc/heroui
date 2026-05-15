@@ -42,9 +42,9 @@ export function AsynchronousLoading() {
       inputValue={list.filterText}
       onInputChange={list.setFilterText}
     >
-      <Label>Pick a Character</Label>
+      <Label>选择角色</Label>
       <ComboBox.InputGroup>
-        <Input placeholder="Star Wars characters..." />
+        <Input placeholder="星球大战角色…" />
         <ComboBox.Trigger />
       </ComboBox.InputGroup>
       <ComboBox.Popover>
@@ -63,7 +63,7 @@ export function AsynchronousLoading() {
           >
             <div className="flex items-center justify-center gap-2 py-2">
               <Spinner size="sm" />
-              <span className="muted text-sm">Loading more...</span>
+              <span className="muted text-sm">加载更多…</span>
             </div>
           </ListBoxLoadMoreItem>
         </ListBox>

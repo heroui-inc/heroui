@@ -2,7 +2,7 @@ import {Avatar, Description, Label, ListBox} from "@heroui/react";
 
 export function Default() {
   return (
-    <ListBox aria-label="Users" className="w-[220px]" selectionMode="single">
+    <ListBox aria-label="用户" className="w-[220px]" selectionMode="single">
       <ListBox.Item id="1" textValue="Bob">
         <Avatar size="sm">
           <Avatar.Image

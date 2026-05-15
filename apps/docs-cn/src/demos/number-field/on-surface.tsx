@@ -4,13 +4,13 @@ export function OnSurface() {
   return (
     <Surface className="flex w-full max-w-[280px] flex-col gap-4 rounded-3xl p-6">
       <NumberField defaultValue={1024} minValue={0} name="width" variant="secondary">
-        <Label>Width</Label>
+        <Label>宽度</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-full" />
           <NumberField.IncrementButton />
         </NumberField.Group>
-        <Description>Enter the width in pixels</Description>
+        <Description>以像素为单位输入宽度</Description>
       </NumberField>
       <NumberField
         defaultValue={0.5}
@@ -21,13 +21,13 @@ export function OnSurface() {
         step={0.1}
         variant="secondary"
       >
-        <Label>Percentage</Label>
+        <Label>百分比</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-full" />
           <NumberField.IncrementButton />
         </NumberField.Group>
-        <Description>Value must be between 0 and 100</Description>
+        <Description>取值须在 0 到 100 之间</Description>
       </NumberField>
     </Surface>
   );

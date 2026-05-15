@@ -5,32 +5,32 @@ export function Disabled() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">All buttons disabled</span>
+        <span className="text-sm text-muted">全部按钮已禁用</span>
         <ToggleButtonGroup isDisabled selectionMode="multiple">
-          <ToggleButton isIconOnly aria-label="Bold" id="bold">
+          <ToggleButton isIconOnly aria-label="粗体" id="bold">
             <Bold />
           </ToggleButton>
-          <ToggleButton isIconOnly aria-label="Italic" id="italic">
+          <ToggleButton isIconOnly aria-label="斜体" id="italic">
             <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
-          <ToggleButton isIconOnly aria-label="Underline" id="underline">
+          <ToggleButton isIconOnly aria-label="下划线" id="underline">
             <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>
         </ToggleButtonGroup>
       </div>
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">Individual button disabled</span>
+        <span className="text-sm text-muted">单个按钮已禁用</span>
         <ToggleButtonGroup selectionMode="multiple">
-          <ToggleButton isIconOnly aria-label="Bold" id="bold">
+          <ToggleButton isIconOnly aria-label="粗体" id="bold">
             <Bold />
           </ToggleButton>
-          <ToggleButton isDisabled isIconOnly aria-label="Italic" id="italic">
+          <ToggleButton isDisabled isIconOnly aria-label="斜体" id="italic">
             <ToggleButtonGroup.Separator />
             <Italic />
           </ToggleButton>
-          <ToggleButton isIconOnly aria-label="Underline" id="underline">
+          <ToggleButton isIconOnly aria-label="下划线" id="underline">
             <ToggleButtonGroup.Separator />
             <Underline />
           </ToggleButton>

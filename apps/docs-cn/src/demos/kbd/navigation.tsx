@@ -4,7 +4,7 @@ export function NavigationKeys() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
-        <span className="text-sm text-muted">Arrow Keys:</span>
+        <span className="text-sm text-muted">方向键：</span>
         <div className="flex items-center gap-2">
           <Kbd>
             <Kbd.Abbr keyValue="up" />
@@ -21,7 +21,7 @@ export function NavigationKeys() {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm text-muted">Page Navigation:</span>
+        <span className="text-sm text-muted">页面导航：</span>
         <div className="flex items-center gap-2">
           <Kbd>
             <Kbd.Abbr keyValue="pageup" />

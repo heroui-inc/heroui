@@ -6,7 +6,7 @@ import {Icon} from "@iconify/react";
 export function WithCustomIndicator() {
   return (
     <DateRangePicker className="w-72" endName="endDate" startName="startDate">
-      <Label>Trip dates</Label>
+      <Label>出行日期</Label>
       <DateField.Group fullWidth>
         <DateField.Input slot="start">
           {(segment) => <DateField.Segment segment={segment} />}
@@ -23,9 +23,9 @@ export function WithCustomIndicator() {
           </DateRangePicker.Trigger>
         </DateField.Suffix>
       </DateField.Group>
-      <Description>Replace the default calendar icon by passing custom children.</Description>
+      <Description>通过传入自定义子元素替换默认日历图标。</Description>
       <DateRangePicker.Popover>
-        <RangeCalendar aria-label="Trip dates">
+        <RangeCalendar aria-label="出行日期">
           <RangeCalendar.Header>
             <RangeCalendar.YearPickerTrigger>
               <RangeCalendar.YearPickerTriggerHeading />

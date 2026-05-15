@@ -7,21 +7,21 @@ export function OnSurface() {
   return (
     <Surface className="flex w-full max-w-sm flex-col gap-4 rounded-3xl p-6">
       <TimeField className="w-full" name="time">
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group variant="secondary">
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
-        <Description>Enter a time</Description>
+        <Description>输入时间</Description>
       </TimeField>
       <TimeField className="w-full" name="time-2">
-        <Label>Appointment time</Label>
+        <Label>预约时间</Label>
         <TimeField.Group variant="secondary">
           <TimeField.Prefix>
             <Clock className="size-4 text-muted" />
           </TimeField.Prefix>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
-        <Description>Enter a time for your appointment</Description>
+        <Description>输入预约时间</Description>
       </TimeField>
     </Surface>
   );

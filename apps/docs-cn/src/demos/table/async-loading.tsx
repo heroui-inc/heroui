@@ -12,93 +12,93 @@ interface User {
 }
 
 const statusColorMap: Record<string, "success" | "danger" | "warning"> = {
-  Active: "success",
-  Inactive: "danger",
-  "On Leave": "warning",
+  休假: "warning",
+  在职: "success",
+  未激活: "danger",
 };
 
 const allUsers: User[] = [
-  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "CEO", status: "Active"},
-  {email: "john@acme.com", id: 2, name: "John Smith", role: "CTO", status: "Active"},
-  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "CMO", status: "On Leave"},
-  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "CFO", status: "Active"},
+  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "首席执行官", status: "在职"},
+  {email: "john@acme.com", id: 2, name: "John Smith", role: "首席技术官", status: "在职"},
+  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "首席营销官", status: "休假"},
+  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "首席财务官", status: "在职"},
   {
     email: "emily@acme.com",
     id: 5,
     name: "Emily Davis",
-    role: "Product Manager",
-    status: "Inactive",
+    role: "产品经理",
+    status: "未激活",
   },
-  {email: "davis@acme.com", id: 6, name: "Davis Wilson", role: "Lead Designer", status: "Active"},
+  {email: "davis@acme.com", id: 6, name: "Davis Wilson", role: "首席设计师", status: "在职"},
   {
     email: "olivia@acme.com",
     id: 7,
     name: "Olivia Martinez",
-    role: "Frontend Engineer",
-    status: "Active",
+    role: "前端工程师",
+    status: "在职",
   },
   {
     email: "james@acme.com",
     id: 8,
     name: "James Taylor",
-    role: "Backend Engineer",
-    status: "Active",
+    role: "后端工程师",
+    status: "在职",
   },
   {
     email: "sophia@acme.com",
     id: 9,
     name: "Sophia Anderson",
-    role: "QA Engineer",
-    status: "On Leave",
+    role: "测试工程师",
+    status: "休假",
   },
-  {email: "liam@acme.com", id: 10, name: "Liam Thomas", role: "DevOps Engineer", status: "Active"},
+  {email: "liam@acme.com", id: 10, name: "Liam Thomas", role: "DevOps 工程师", status: "在职"},
   {
     email: "lucas@acme.com",
     id: 11,
     name: "Lucas Martinez",
-    role: "Product Manager",
-    status: "Active",
+    role: "产品经理",
+    status: "在职",
   },
   {
     email: "emma@acme.com",
     id: 12,
     name: "Emma Johnson",
-    role: "Frontend Engineer",
-    status: "Active",
+    role: "前端工程师",
+    status: "在职",
   },
-  {email: "noah@acme.com", id: 13, name: "Noah Davis", role: "Backend Engineer", status: "Active"},
-  {email: "ava@acme.com", id: 14, name: "Ava Wilson", role: "Lead Designer", status: "Active"},
+  {email: "noah@acme.com", id: 13, name: "Noah Davis", role: "后端工程师", status: "在职"},
+  {email: "ava@acme.com", id: 14, name: "Ava Wilson", role: "首席设计师", status: "在职"},
   {
     email: "oliver@acme.com",
     id: 15,
     name: "Oliver Martinez",
-    role: "Frontend Engineer",
-    status: "Active",
+    role: "前端工程师",
+    status: "在职",
   },
   {
     email: "isabella@acme.com",
     id: 16,
     name: "Isabella Johnson",
-    role: "Backend Engineer",
-    status: "Active",
+    role: "后端工程师",
+    status: "在职",
   },
-  {email: "mia@acme.com", id: 17, name: "Mia Davis", role: "Lead Designer", status: "Active"},
+  {email: "mia@acme.com", id: 17, name: "Mia Davis", role: "首席设计师", status: "在职"},
   {
     email: "william@acme.com",
     id: 18,
     name: "William Wilson",
-    role: "Frontend Engineer",
-    status: "Active",
+    role: "前端工程师",
+    status: "在职",
   },
 ];
 
 const ITEMS_PER_PAGE = 6;
 
 const columns = [
-  {id: "name", name: "Name"},
-  {id: "role", name: "Role"},
-  {id: "status", name: "Status"},
-  {id: "email", name: "Email"},
+  {id: "name", name: "姓名"},
+  {id: "role", name: "角色"},
+  {id: "status", name: "状态"},
+  {id: "email", name: "邮箱"},
 ];
 
 export function AsyncLoading() {
@@ -123,7 +123,7 @@ export function AsyncLoading() {
   return (
     <Table>
       <Table.ScrollContainer className="h-[280px] overflow-y-auto">
-        <Table.Content aria-label="Async loading table" className="min-w-[600px]">
+        <Table.Content aria-label="异步加载表格" className="min-w-[600px]">
           <Table.Header className="sticky top-0 z-10 bg-surface-secondary">
             {columns.map((col) => (
               <Table.Column key={col.id} id={col.id} isRowHeader={col.id === "name"}>

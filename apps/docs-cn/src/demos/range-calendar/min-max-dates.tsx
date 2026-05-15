@@ -10,7 +10,7 @@ export function MinMaxDates() {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <RangeCalendar aria-label="Trip dates" maxValue={maxDate} minValue={minDate}>
+      <RangeCalendar aria-label="行程日期" maxValue={maxDate} minValue={minDate}>
         <RangeCalendar.Header>
           <RangeCalendar.Heading />
           <RangeCalendar.NavButton slot="previous" />
@@ -26,7 +26,7 @@ export function MinMaxDates() {
         </RangeCalendar.Grid>
       </RangeCalendar>
       <Description className="text-center">
-        Select dates between today and {maxDate.toString()}
+        请在今天与 {maxDate.toString()} 之间选择日期。
       </Description>
     </div>
   );

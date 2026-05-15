@@ -10,8 +10,8 @@ export function CustomRenderFunction() {
       render={(props) => <div {...props} data-custom="foo" />}
       type="email"
     >
-      <Label>Email</Label>
-      <Input placeholder="Enter your email" />
+      <Label>邮箱</Label>
+      <Input placeholder="输入你的邮箱" />
     </TextField>
   );
 }

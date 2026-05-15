@@ -5,40 +5,40 @@ import {ComboBox, Description, Input, Label, ListBox} from "@heroui/react";
 export function AllowsCustomValue() {
   return (
     <ComboBox allowsCustomValue className="w-[256px]">
-      <Label>Favorite Animal</Label>
+      <Label>最喜欢的动物</Label>
       <ComboBox.InputGroup>
-        <Input placeholder="Search or type an animal..." />
+        <Input placeholder="搜索或输入动物…" />
         <ComboBox.Trigger />
       </ComboBox.InputGroup>
       <ComboBox.Popover>
         <ListBox>
-          <ListBox.Item id="aardvark" textValue="Aardvark">
-            Aardvark
+          <ListBox.Item id="aardvark" textValue="土豚">
+            土豚
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="cat" textValue="Cat">
-            Cat
+          <ListBox.Item id="cat" textValue="猫">
+            猫
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="dog" textValue="Dog">
-            Dog
+          <ListBox.Item id="dog" textValue="狗">
+            狗
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="kangaroo" textValue="Kangaroo">
-            Kangaroo
+          <ListBox.Item id="kangaroo" textValue="袋鼠">
+            袋鼠
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="panda" textValue="Panda">
-            Panda
+          <ListBox.Item id="panda" textValue="熊猫">
+            熊猫
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item id="snake" textValue="Snake">
-            Snake
+          <ListBox.Item id="snake" textValue="蛇">
+            蛇
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>
       </ComboBox.Popover>
-      <Description>You can type any animal name, even if it's not in the list</Description>
+      <Description>可输入任意动物名称，即使不在列表中</Description>
     </ComboBox>
   );
 }

@@ -4,22 +4,22 @@ export function WithDescription() {
   return (
     <div className="flex flex-col gap-4">
       <SearchField name="search">
-        <Label>Search products</Label>
+        <Label>搜索产品</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />
-          <SearchField.Input className="w-[280px]" placeholder="Search products..." />
+          <SearchField.Input className="w-[280px]" placeholder="搜索产品…" />
           <SearchField.ClearButton />
         </SearchField.Group>
-        <Description>Enter keywords to search for products</Description>
+        <Description>输入关键词进行搜索 for products</Description>
       </SearchField>
       <SearchField name="search-users">
-        <Label>Search users</Label>
+        <Label>搜索用户</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />
-          <SearchField.Input className="w-[280px]" placeholder="Search users..." />
+          <SearchField.Input className="w-[280px]" placeholder="搜索用户…" />
           <SearchField.ClearButton />
         </SearchField.Group>
-        <Description>Search by name, email, or username</Description>
+        <Description>按姓名、邮箱或用户名搜索</Description>
       </SearchField>
     </div>
   );

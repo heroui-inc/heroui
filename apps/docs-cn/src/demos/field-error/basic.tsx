@@ -9,14 +9,14 @@ export function Basic() {
 
   return (
     <TextField className="w-64" isInvalid={isInvalid}>
-      <Label htmlFor="username">Username</Label>
+      <Label htmlFor="username">用户名</Label>
       <Input
         id="username"
-        placeholder="Enter username"
+        placeholder="输入用户名"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <FieldError>Username must be at least 3 characters</FieldError>
+      <FieldError>用户名至少需要 3 个字符</FieldError>
     </TextField>
   );
 }

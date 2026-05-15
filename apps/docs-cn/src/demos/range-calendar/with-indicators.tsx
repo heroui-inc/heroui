@@ -7,7 +7,7 @@ const datesWithEvents = [3, 7, 12, 15, 21, 28];
 
 export function WithIndicators() {
   return (
-    <RangeCalendar aria-label="Trip dates">
+    <RangeCalendar aria-label="行程日期">
       <RangeCalendar.Header>
         <RangeCalendar.Heading />
         <RangeCalendar.NavButton slot="previous" />

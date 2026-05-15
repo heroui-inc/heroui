@@ -15,16 +15,16 @@ interface User {
 }
 
 const users: User[] = [
-  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "CEO", status: "Active"},
-  {email: "john@acme.com", id: 2, name: "John Smith", role: "CTO", status: "Active"},
-  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "CMO", status: "On Leave"},
-  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "CFO", status: "Active"},
+  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "首席执行官", status: "在职"},
+  {email: "john@acme.com", id: 2, name: "John Smith", role: "首席技术官", status: "在职"},
+  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "首席营销官", status: "休假"},
+  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "首席财务官", status: "在职"},
   {
     email: "emily@acme.com",
     id: 5,
     name: "Emily Davis",
-    role: "Product Manager",
-    status: "Inactive",
+    role: "产品经理",
+    status: "未激活",
   },
 ];
 
@@ -76,7 +76,7 @@ export function Sorting() {
     <Table>
       <Table.ScrollContainer>
         <Table.Content
-          aria-label="Sortable table"
+          aria-label="可排序表格"
           className="min-w-[600px]"
           sortDescriptor={sortDescriptor}
           onSortChange={setSortDescriptor}
@@ -84,22 +84,22 @@ export function Sorting() {
           <Table.Header>
             <Table.Column allowsSorting isRowHeader id="name">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Name</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>姓名</SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="role">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Role</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>角色</SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="status">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Status</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>状态</SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="email">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Email</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>邮箱</SortableColumnHeader>
               )}
             </Table.Column>
           </Table.Header>

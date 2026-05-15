@@ -16,26 +16,26 @@ export function Controlled() {
         selectionMode="multiple"
         onSelectionChange={setSelectedKeys}
       >
-        <ToggleButton isIconOnly aria-label="Bold" id="bold">
+        <ToggleButton isIconOnly aria-label="粗体" id="bold">
           <Bold />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="Italic" id="italic">
+        <ToggleButton isIconOnly aria-label="斜体" id="italic">
           <ToggleButtonGroup.Separator />
           <Italic />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="Underline" id="underline">
+        <ToggleButton isIconOnly aria-label="下划线" id="underline">
           <ToggleButtonGroup.Separator />
           <Underline />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="Strikethrough" id="strikethrough">
+        <ToggleButton isIconOnly aria-label="删除线" id="strikethrough">
           <ToggleButtonGroup.Separator />
           <Strikethrough />
         </ToggleButton>
       </ToggleButtonGroup>
       <p className="text-sm text-muted">
-        Selected:{" "}
+        已选：
         <span className="font-medium">
-          {selectedKeys.size > 0 ? [...selectedKeys].join(", ") : "None"}
+          {selectedKeys.size > 0 ? [...selectedKeys].join(", ") : "无"}
         </span>
       </p>
     </div>

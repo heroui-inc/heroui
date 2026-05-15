@@ -9,23 +9,23 @@ export function Controlled() {
   const animals = [
     {
       id: "cat",
-      name: "Cat",
+      name: "猫",
     },
     {
       id: "dog",
-      name: "Dog",
+      name: "狗",
     },
     {
       id: "bird",
-      name: "Bird",
+      name: "鸟",
     },
     {
       id: "fish",
-      name: "Fish",
+      name: "鱼",
     },
     {
       id: "hamster",
-      name: "Hamster",
+      name: "仓鼠",
     },
   ];
 
@@ -40,9 +40,9 @@ export function Controlled() {
         selectedKey={selectedKey}
         onSelectionChange={(key) => setSelectedKey(key)}
       >
-        <Label>Animal (controlled)</Label>
+        <Label>动物（受控）</Label>
         <ComboBox.InputGroup>
-          <Input placeholder="Search animals..." />
+          <Input placeholder="搜索动物…" />
           <ComboBox.Trigger />
         </ComboBox.InputGroup>
         <ComboBox.Popover>
@@ -56,7 +56,7 @@ export function Controlled() {
           </ListBox>
         </ComboBox.Popover>
       </ComboBox>
-      <p className="text-sm text-muted">Selected: {selectedAnimal?.name || "None"}</p>
+      <p className="text-sm text-muted">已选：{selectedAnimal?.name || "无"}</p>
     </div>
   );
 }

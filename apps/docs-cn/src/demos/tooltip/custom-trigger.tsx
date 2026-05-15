@@ -5,7 +5,7 @@ export function TooltipCustomTrigger() {
   return (
     <div className="flex items-center gap-6">
       <Tooltip delay={0}>
-        <Tooltip.Trigger aria-label="User avatar">
+        <Tooltip.Trigger aria-label="用户头像">
           <Avatar size="sm">
             <Avatar.Image
               alt="Jane Doe"
@@ -24,10 +24,10 @@ export function TooltipCustomTrigger() {
       </Tooltip>
 
       <Tooltip delay={0}>
-        <Tooltip.Trigger aria-label="Status chip">
+        <Tooltip.Trigger aria-label="状态标签">
           <Chip color="success">
             <CircleCheckFill width={12} />
-            <Chip.Label>Active</Chip.Label>
+            <Chip.Label>活跃</Chip.Label>
           </Chip>
         </Tooltip.Trigger>
         <Tooltip.Content className="flex items-center gap-1.5">
@@ -35,12 +35,12 @@ export function TooltipCustomTrigger() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
             <span className="relative inline-flex size-2 rounded-full bg-success" />
           </span>
-          <p>Jane is currently online</p>
+          <p>Jane 当前在线</p>
         </Tooltip.Content>
       </Tooltip>
 
       <Tooltip delay={0}>
-        <Tooltip.Trigger aria-label="Info icon">
+        <Tooltip.Trigger aria-label="信息图标">
           <div className="rounded-full bg-accent-soft p-2">
             <CircleQuestion className="text-accent" />
           </div>
@@ -48,10 +48,8 @@ export function TooltipCustomTrigger() {
         <Tooltip.Content showArrow>
           <Tooltip.Arrow />
           <div className="max-w-xs px-1 py-1.5">
-            <p className="mb-1 font-semibold">Help Information</p>
-            <p className="text-sm text-muted">
-              This is a helpful tooltip with more detailed information about this feature.
-            </p>
+            <p className="mb-1 font-semibold">帮助信息</p>
+            <p className="text-sm text-muted">这是包含有关此功能更详细信息的实用工具提示。</p>
           </div>
         </Tooltip.Content>
       </Tooltip>

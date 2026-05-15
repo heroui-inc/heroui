@@ -7,21 +7,21 @@ export function OnSurface() {
   return (
     <Surface className="flex w-full max-w-sm flex-col gap-4 rounded-3xl p-6">
       <DateField className="w-full" name="date">
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group variant="secondary">
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
-        <Description>Enter a date</Description>
+        <Description>输入日期</Description>
       </DateField>
       <DateField className="w-full" name="date-2">
-        <Label>Appointment date</Label>
+        <Label>预约日期</Label>
         <DateField.Group variant="secondary">
           <DateField.Prefix>
             <Calendar className="size-4 text-muted" />
           </DateField.Prefix>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
-        <Description>Enter a date for your appointment</Description>
+        <Description>输入预约日期</Description>
       </DateField>
     </Surface>
   );

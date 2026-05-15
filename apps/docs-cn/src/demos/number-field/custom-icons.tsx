@@ -4,7 +4,7 @@ export function CustomIcons() {
   return (
     <div className="flex w-full max-w-64 flex-col gap-4">
       <NumberField defaultValue={1024} minValue={0} name="width">
-        <Label>Width (Custom Icons)</Label>
+        <Label>宽度（自定义图标）</Label>
         <NumberField.Group>
           <NumberField.DecrementButton>
             <svg height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@ export function CustomIcons() {
             </svg>
           </NumberField.IncrementButton>
         </NumberField.Group>
-        <Description>Custom icon children</Description>
+        <Description>自定义图标子元素</Description>
       </NumberField>
     </div>
   );

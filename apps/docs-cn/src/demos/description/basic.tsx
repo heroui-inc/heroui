@@ -3,7 +3,7 @@ import {Description, Input, Label} from "@heroui/react";
 export function Basic() {
   return (
     <div className="flex flex-col gap-1">
-      <Label htmlFor="email">Email</Label>
+      <Label htmlFor="email">邮箱</Label>
       <Input
         aria-describedby="email-description"
         className="w-64"
@@ -11,9 +11,7 @@ export function Basic() {
         placeholder="you@example.com"
         type="email"
       />
-      <Description id="email-description">
-        We'll never share your email with anyone else.
-      </Description>
+      <Description id="email-description">我们不会将你的邮箱分享给任何人。</Description>
     </div>
   );
 }

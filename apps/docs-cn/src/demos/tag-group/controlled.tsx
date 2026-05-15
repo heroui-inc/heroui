@@ -15,15 +15,15 @@ export function TagGroupControlled() {
         selectionMode="multiple"
         onSelectionChange={(keys) => setSelected(keys)}
       >
-        <Label>Categories (controlled)</Label>
+        <Label>分类（受控）</Label>
         <TagGroup.List>
-          <Tag id="news">News</Tag>
-          <Tag id="travel">Travel</Tag>
-          <Tag id="gaming">Gaming</Tag>
-          <Tag id="shopping">Shopping</Tag>
+          <Tag id="news">资讯</Tag>
+          <Tag id="travel">旅行</Tag>
+          <Tag id="gaming">游戏</Tag>
+          <Tag id="shopping">购物</Tag>
         </TagGroup.List>
         <Description>
-          Selected: {Array.from(selected).length > 0 ? Array.from(selected).join(", ") : "None"}
+          已选：{Array.from(selected).length > 0 ? Array.from(selected).join(", ") : "无"}
         </Description>
       </TagGroup>
     </div>

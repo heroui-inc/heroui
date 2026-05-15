@@ -10,14 +10,12 @@ export function Controlled() {
     <div className="flex w-96 flex-col gap-2">
       <TextArea
         aria-describedby="textarea-controlled-description"
-        aria-label="Announcement"
-        placeholder="Compose an announcement..."
+        aria-label="公告"
+        placeholder="撰写公告…"
         value={value}
         onChange={(event) => setValue(event.target.value)}
       />
-      <Description id="textarea-controlled-description">
-        Characters: {value.length} / 280
-      </Description>
+      <Description id="textarea-controlled-description">字符数： {value.length} / 280</Description>
     </div>
   );
 }

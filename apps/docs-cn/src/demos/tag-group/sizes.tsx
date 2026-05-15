@@ -6,27 +6,27 @@ export function TagGroupSizes() {
   return (
     <div className="flex flex-col gap-6">
       <TagGroup selectionMode="single" size="sm">
-        <Label>Small</Label>
+        <Label>小</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
+          <Tag>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag>游戏</Tag>
         </TagGroup.List>
       </TagGroup>
       <TagGroup selectionMode="single" size="md">
-        <Label>Medium</Label>
+        <Label>中</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
+          <Tag>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag>游戏</Tag>
         </TagGroup.List>
       </TagGroup>
       <TagGroup selectionMode="single" size="lg">
-        <Label>Large</Label>
+        <Label>大</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
+          <Tag>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag>游戏</Tag>
         </TagGroup.List>
       </TagGroup>
     </div>

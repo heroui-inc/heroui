@@ -4,22 +4,22 @@ export function OnSurface() {
   return (
     <Surface className="flex w-full max-w-sm flex-col gap-4 rounded-3xl p-6">
       <SearchField name="search" variant="secondary">
-        <Label>Search</Label>
+        <Label>搜索</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />
-          <SearchField.Input className="w-full" placeholder="Search..." />
+          <SearchField.Input className="w-full" placeholder="搜索…" />
           <SearchField.ClearButton />
         </SearchField.Group>
-        <Description>Enter keywords to search</Description>
+        <Description>输入关键词进行搜索</Description>
       </SearchField>
       <SearchField name="search-2" variant="secondary">
-        <Label>Advanced search</Label>
+        <Label>高级搜索</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />
-          <SearchField.Input className="w-full" placeholder="Advanced search..." />
+          <SearchField.Input className="w-full" placeholder="高级搜索…" />
           <SearchField.ClearButton />
         </SearchField.Group>
-        <Description>Use filters to refine your search</Description>
+        <Description>使用筛选条件细化搜索</Description>
       </SearchField>
     </Surface>
   );

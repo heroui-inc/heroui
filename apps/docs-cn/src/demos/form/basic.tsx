@@ -14,7 +14,7 @@ export function Basic() {
       data[key] = value.toString();
     });
 
-    alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
+    alert(`表单提交数据：${JSON.stringify(data, null, 2)}`);
   };
 
   return (
@@ -25,13 +25,13 @@ export function Basic() {
         type="email"
         validate={(value) => {
           if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-            return "Please enter a valid email address";
+            return "请输入有效的邮箱地址";
           }
 
           return null;
         }}
       >
-        <Label>Email</Label>
+        <Label>邮箱</Label>
         <Input placeholder="john@example.com" />
         <FieldError />
       </TextField>
@@ -43,31 +43,31 @@ export function Basic() {
         type="password"
         validate={(value) => {
           if (value.length < 8) {
-            return "Password must be at least 8 characters";
+            return "密码至少需要 8 个字符";
           }
           if (!/[A-Z]/.test(value)) {
-            return "Password must contain at least one uppercase letter";
+            return "密码至少需要包含一个大写字母";
           }
           if (!/[0-9]/.test(value)) {
-            return "Password must contain at least one number";
+            return "密码至少需要包含一个数字";
           }
 
           return null;
         }}
       >
-        <Label>Password</Label>
-        <Input placeholder="Enter your password" />
-        <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
+        <Label>密码</Label>
+        <Input placeholder="输入密码" />
+        <Description>至少 8 个字符，且包含 1 个大写字母和 1 个数字</Description>
         <FieldError />
       </TextField>
 
       <div className="flex gap-2">
         <Button type="submit">
           <Check />
-          Submit
+          提交
         </Button>
         <Button type="reset" variant="secondary">
-          Reset
+          重置
         </Button>
       </div>
     </Form>

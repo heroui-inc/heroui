@@ -3,19 +3,19 @@ import {Separator} from "@heroui/react";
 const items = [
   {
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/bell-small.png",
-    subtitle: "Receive account activity updates",
-    title: "Set Up Notifications",
+    subtitle: "接收账户活动更新",
+    title: "设置通知",
   },
   {
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/compass-small.png",
-    subtitle: "Connect your browser to your account",
-    title: "Set up Browser Extension",
+    subtitle: "将浏览器连接到你的账户",
+    title: "设置浏览器扩展",
   },
   {
     iconUrl:
       "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/mint-collective-small.png",
-    subtitle: "Create your first collectible",
-    title: "Mint Collectible",
+    subtitle: "创建你的第一件收藏品",
+    title: "铸造收藏品",
   },
 ];
 

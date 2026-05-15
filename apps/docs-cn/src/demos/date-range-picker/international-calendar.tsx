@@ -15,7 +15,7 @@ export function InternationalCalendar() {
         endName="endDate"
         startName="startDate"
       >
-        <Label>Trip dates</Label>
+        <Label>出行日期</Label>
         <DateField.Group fullWidth>
           <DateField.Input slot="start">
             {(segment) => <DateField.Segment segment={segment} />}
@@ -31,7 +31,7 @@ export function InternationalCalendar() {
           </DateField.Suffix>
         </DateField.Group>
         <DateRangePicker.Popover>
-          <RangeCalendar aria-label="Trip dates">
+          <RangeCalendar aria-label="出行日期">
             <RangeCalendar.Header>
               <RangeCalendar.YearPickerTrigger>
                 <RangeCalendar.YearPickerTriggerHeading />

@@ -7,13 +7,13 @@ export function CloseMethods() {
   return (
     <div className="flex max-w-2xl flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <h3 className="text-lg font-semibold">Using slot="close"</h3>
+        <h3 className="text-lg font-semibold">使用 slot="close"</h3>
         <p className="text-sm text-muted">
-          The simplest way to close a modal. Add <code>slot="close"</code> to any Button component
-          within the modal. When clicked, it will automatically close the modal.
+          关闭模态框的最简方式：为模态框内任意 Button 添加 <code>slot="close"</code>
+          ，点击即可自动关闭。
         </p>
         <Modal>
-          <Button variant="secondary">Open Modal</Button>
+          <Button variant="secondary">打开模态框</Button>
           <Modal.Backdrop>
             <Modal.Container>
               <Modal.Dialog className="sm:max-w-[360px]">
@@ -21,19 +21,18 @@ export function CloseMethods() {
                   <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                     <CircleInfo className="size-5" />
                   </Modal.Icon>
-                  <Modal.Heading>Using slot="close"</Modal.Heading>
+                  <Modal.Heading>使用 slot="close"</Modal.Heading>
                 </Modal.Header>
                 <Modal.Body>
                   <p>
-                    Click either button below - both have <code>slot="close"</code> and will close
-                    the modal automatically.
+                    点击下方任一按钮——它们都带有 <code>slot="close"</code>，会自动关闭模态框。
                   </p>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button slot="close" variant="secondary">
-                    Cancel
+                    取消
                   </Button>
-                  <Button slot="close">Confirm</Button>
+                  <Button slot="close">确认</Button>
                 </Modal.Footer>
               </Modal.Dialog>
             </Modal.Container>
@@ -42,14 +41,13 @@ export function CloseMethods() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-lg font-semibold">Using Dialog render props</h3>
+        <h3 className="text-lg font-semibold">使用 Dialog 渲染属性</h3>
         <p className="text-sm text-muted">
-          Access the <code>close</code> method from the Dialog's render props. This gives you full
-          control over when and how to close the modal, allowing you to add custom logic before
-          closing.
+          通过 Dialog 的渲染属性访问 <code>close</code>{" "}
+          方法，可完全控制关闭时机与方式，并在关闭前加入自定义逻辑。
         </p>
         <Modal>
-          <Button variant="secondary">Open Modal</Button>
+          <Button variant="secondary">打开模态框</Button>
           <Modal.Backdrop>
             <Modal.Container>
               <Modal.Dialog className="sm:max-w-[360px]">
@@ -59,20 +57,19 @@ export function CloseMethods() {
                       <Modal.Icon className="bg-success-soft text-success-soft-foreground">
                         <CircleCheck className="size-5" />
                       </Modal.Icon>
-                      <Modal.Heading>Using Dialog render props</Modal.Heading>
+                      <Modal.Heading>使用 Dialog 渲染属性</Modal.Heading>
                     </Modal.Header>
                     <Modal.Body>
                       <p>
-                        The buttons below use the <code>close</code> method from render props. You
-                        can add validation or other logic before calling{" "}
-                        <code>renderProps.close()</code>.
+                        下方按钮使用渲染属性中的 <code>close</code> 方法。可在调用{" "}
+                        <code>renderProps.close()</code> 前进行校验或其他逻辑。
                       </p>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onPress={() => renderProps.close()}>
-                        Cancel
+                        取消
                       </Button>
-                      <Button onPress={() => renderProps.close()}>Confirm</Button>
+                      <Button onPress={() => renderProps.close()}>确认</Button>
                     </Modal.Footer>
                   </>
                 )}

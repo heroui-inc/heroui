@@ -10,8 +10,8 @@ export function WithSingleSelection() {
 
   return (
     <Dropdown>
-      <Button aria-label="Menu" variant="secondary">
-        Fruit
+      <Button aria-label="菜单" variant="secondary">
+        水果
       </Button>
       <Dropdown.Popover className="min-w-[256px]">
         <Dropdown.Menu
@@ -20,27 +20,27 @@ export function WithSingleSelection() {
           onSelectionChange={setSelected}
         >
           <Dropdown.Section>
-            <Header>Select a fruit</Header>
-            <Dropdown.Item id="apple" textValue="Apple">
+            <Header>选择水果</Header>
+            <Dropdown.Item id="apple" textValue="苹果">
               <Dropdown.ItemIndicator />
-              <Label>Apple</Label>
+              <Label>苹果</Label>
             </Dropdown.Item>
-            <Dropdown.Item id="banana" textValue="Banana">
+            <Dropdown.Item id="banana" textValue="香蕉">
               <Dropdown.ItemIndicator />
-              <Label>Banana</Label>
+              <Label>香蕉</Label>
             </Dropdown.Item>
-            <Dropdown.Item id="cherry" textValue="Cherry">
+            <Dropdown.Item id="cherry" textValue="樱桃">
               <Dropdown.ItemIndicator />
-              <Label>Cherry</Label>
+              <Label>樱桃</Label>
             </Dropdown.Item>
           </Dropdown.Section>
-          <Dropdown.Item id="orange" textValue="Orange">
+          <Dropdown.Item id="orange" textValue="橙子">
             <Dropdown.ItemIndicator />
-            <Label>Orange</Label>
+            <Label>橙子</Label>
           </Dropdown.Item>
-          <Dropdown.Item id="pear" textValue="Pear">
+          <Dropdown.Item id="pear" textValue="梨">
             <Dropdown.ItemIndicator />
-            <Label>Pear</Label>
+            <Label>梨</Label>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>

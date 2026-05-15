@@ -10,7 +10,7 @@ export function ChannelEditing() {
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-sm text-muted">Edit individual HSL channels:</p>
+      <p className="text-sm text-muted">分别编辑 HSL 通道：</p>
       <div className="flex gap-4">
         <ColorField
           channel="hue"
@@ -20,7 +20,7 @@ export function ChannelEditing() {
           value={color}
           onChange={setColor}
         >
-          <Label>Hue</Label>
+          <Label>色相</Label>
           <ColorField.Group>
             <ColorField.Input />
           </ColorField.Group>
@@ -33,7 +33,7 @@ export function ChannelEditing() {
           value={color}
           onChange={setColor}
         >
-          <Label>Saturation</Label>
+          <Label>饱和度</Label>
           <ColorField.Group>
             <ColorField.Input />
             <ColorField.Suffix>
@@ -49,7 +49,7 @@ export function ChannelEditing() {
           value={color}
           onChange={setColor}
         >
-          <Label>Lightness</Label>
+          <Label>明度</Label>
           <ColorField.Group>
             <ColorField.Input />
             <ColorField.Suffix>
@@ -60,7 +60,7 @@ export function ChannelEditing() {
       </div>
       <div className="flex items-center gap-2">
         <ColorSwatch color={color ?? undefined} size="md" />
-        <span className="text-sm">Current: {color ? color.toString("hex") : "(empty)"}</span>
+        <span className="text-sm">当前：{color ? color.toString("hex") : "（空）"}</span>
       </div>
     </div>
   );

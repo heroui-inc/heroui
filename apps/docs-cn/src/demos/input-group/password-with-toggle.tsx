@@ -9,7 +9,7 @@ export function PasswordWithToggle() {
 
   return (
     <TextField className="w-full max-w-[280px]" name="password">
-      <Label>Password</Label>
+      <Label>密码</Label>
       <InputGroup>
         <InputGroup.Input
           className="w-full max-w-[280px]"
@@ -19,7 +19,7 @@ export function PasswordWithToggle() {
         <InputGroup.Suffix className="pr-0">
           <Button
             isIconOnly
-            aria-label={isVisible ? "Hide password" : "Show password"}
+            aria-label={isVisible ? "隐藏密码" : "显示密码"}
             size="sm"
             variant="ghost"
             onPress={() => setIsVisible(!isVisible)}

@@ -5,23 +5,23 @@ export function CustomStyles() {
     <Tabs className="w-full max-w-lg text-center">
       <Tabs.ListContainer>
         <Tabs.List
-          aria-label="Options"
+          aria-label="选项"
           className="w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal *:data-[selected=true]:text-accent-foreground"
         >
           <Tabs.Tab id="daily">
-            Daily
+            每日
             <Tabs.Indicator className="bg-accent" />
           </Tabs.Tab>
           <Tabs.Tab id="weekly">
-            Weekly
+            每周
             <Tabs.Indicator className="bg-accent" />
           </Tabs.Tab>
           <Tabs.Tab id="bi-weekly">
-            Bi-Weekly
+            每两周
             <Tabs.Indicator className="bg-accent" />
           </Tabs.Tab>
           <Tabs.Tab id="monthly">
-            Monthly
+            每月
             <Tabs.Indicator className="bg-accent" />
           </Tabs.Tab>
         </Tabs.List>

@@ -3,6 +3,15 @@
 import {Rocket} from "@gravity-ui/icons";
 import {Button, Modal} from "@heroui/react";
 
+const SIZE_LABELS = {
+  cover: "通栏",
+  full: "全屏",
+  lg: "大",
+  md: "中",
+  sm: "小",
+  xs: "超小",
+} as const;
+
 export function Sizes() {
   const sizes = ["xs", "sm", "md", "lg", "cover", "full"] as const;
 
@@ -10,7 +19,7 @@ export function Sizes() {
     <div className="flex flex-wrap gap-4">
       {sizes.map((size) => (
         <Modal key={size}>
-          <Button variant="secondary">{size.charAt(0).toUpperCase() + size.slice(1)}</Button>
+          <Button variant="secondary">{SIZE_LABELS[size]}</Button>
           <Modal.Backdrop>
             <Modal.Container size={size}>
               <Modal.Dialog>
@@ -19,40 +28,34 @@ export function Sizes() {
                   <Modal.Icon className="bg-default text-foreground">
                     <Rocket className="size-5" />
                   </Modal.Icon>
-                  <Modal.Heading>
-                    Size: {size.charAt(0).toUpperCase() + size.slice(1)}
-                  </Modal.Heading>
+                  <Modal.Heading>尺寸：{SIZE_LABELS[size]}</Modal.Heading>
                 </Modal.Header>
                 <Modal.Body>
                   <p>
                     {size === "cover" ? (
                       <>
-                        This modal uses the <code>cover</code> size variant. It spans the full
-                        screen with margins: 16px on mobile and 40px on desktop. Maintains rounded
-                        corners and standard padding. Perfect for cover-style content that needs
-                        maximum width while preserving modal aesthetics.
+                        此模态框使用 <code>cover</code> 尺寸：在移动端与桌面端保留边距（移动端约
+                        16px、桌面端约
+                        40px）铺满可视区域，仍保持圆角与标准内边距，适合需要最大宽度又保留模态框气质的内容展示。
                       </>
                     ) : size === "full" ? (
                       <>
-                        This modal uses the <code>full</code> size variant. It occupies the entire
-                        viewport without any margins, rounded corners, or shadows, creating a true
-                        fullscreen experience. Ideal for immersive content or full-page
-                        interactions.
+                        此模态框使用 <code>full</code>{" "}
+                        尺寸，占满整个视口，无边距、圆角或阴影，提供真正的全屏体验，适合沉浸式内容或全页交互。
                       </>
                     ) : (
                       <>
-                        This modal uses the <code>{size}</code> size variant. On mobile devices, all
-                        sizes adapt to near full-width for optimal viewing. On desktop, each size
-                        provides a different maximum width to suit various content needs.
+                        此模态框使用 <code>{size}</code>{" "}
+                        尺寸。在移动端各尺寸都会接近全宽以便阅读；在桌面端则对应不同的最大宽度，以适配不同信息量。
                       </>
                     )}
                   </p>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button slot="close" variant="secondary">
-                    Cancel
+                    取消
                   </Button>
-                  <Button slot="close">Confirm</Button>
+                  <Button slot="close">确认</Button>
                 </Modal.Footer>
               </Modal.Dialog>
             </Modal.Container>

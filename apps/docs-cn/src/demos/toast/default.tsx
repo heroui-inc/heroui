@@ -10,19 +10,19 @@ export function Default() {
         size="sm"
         variant="secondary"
         onPress={() => {
-          toast("You have been invited to join a team", {
+          toast("您已被邀请加入团队", {
             actionProps: {
-              children: "Dismiss",
+              children: "忽略",
               onPress: () => toast.clear(),
               variant: "tertiary",
             },
-            description: "Bob sent you an invitation to join HeroUI team",
+            description: "Bob 邀请您加入 HeroUI 团队",
             indicator: <Persons />,
             variant: "default",
           });
         }}
       >
-        Show toast
+        显示 Toast
       </Button>
     </div>
   );

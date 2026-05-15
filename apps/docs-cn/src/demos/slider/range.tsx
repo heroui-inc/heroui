@@ -12,7 +12,7 @@ export function Range() {
       minValue={0}
       step={50}
     >
-      <Label>Price Range</Label>
+      <Label>价格区间</Label>
       <Slider.Output />
       <Slider.Track>
         {({state}) => (

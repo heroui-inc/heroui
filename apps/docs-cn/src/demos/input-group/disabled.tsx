@@ -12,7 +12,7 @@ export function Disabled() {
         defaultValue="name@email.com"
         name="email"
       >
-        <Label>Email address</Label>
+        <Label>邮箱地址</Label>
         <InputGroup>
           <InputGroup.Prefix>
             <Envelope className="size-4 text-muted" />
@@ -21,7 +21,7 @@ export function Disabled() {
         </InputGroup>
       </TextField>
       <TextField isDisabled className="w-full max-w-[280px]" defaultValue="10" name="price">
-        <Label>Set a price</Label>
+        <Label>设置价格</Label>
         <InputGroup>
           <InputGroup.Prefix>$</InputGroup.Prefix>
           <InputGroup.Input className="w-full max-w-[200px]" type="number" />

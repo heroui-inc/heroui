@@ -11,7 +11,7 @@ export function RenderProps() {
             <Switch.Thumb />
           </Switch.Control>
           <Switch.Content>
-            <Label className="text-sm">{isSelected ? "Enabled" : "Disabled"}</Label>
+            <Label className="text-sm">{isSelected ? "已开启" : "已关闭"}</Label>
           </Switch.Content>
         </>
       )}

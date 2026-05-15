@@ -4,7 +4,7 @@ export function CustomIcons() {
   return (
     <div className="flex flex-col gap-4">
       <SearchField name="search-custom">
-        <Label>Search (Custom Icons)</Label>
+        <Label>搜索（自定义图标）</Label>
         <SearchField.Group>
           <SearchField.SearchIcon>
             <svg height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@ export function CustomIcons() {
               />
             </svg>
           </SearchField.SearchIcon>
-          <SearchField.Input className="w-[280px]" placeholder="Search..." />
+          <SearchField.Input className="w-[280px]" placeholder="搜索…" />
           <SearchField.ClearButton>
             <svg height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -28,7 +28,7 @@ export function CustomIcons() {
             </svg>
           </SearchField.ClearButton>
         </SearchField.Group>
-        <Description>Custom icon children</Description>
+        <Description>自定义图标子元素</Description>
       </SearchField>
     </div>
   );

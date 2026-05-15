@@ -10,7 +10,7 @@ export function CustomRenderFunction() {
       defaultValue="hsl(0, 100%, 50%)"
       render={(props) => <div {...props} data-custom="foo" />}
     >
-      <Label>Hue</Label>
+      <Label>色相</Label>
       <ColorSlider.Output />
       <ColorSlider.Track>
         <ColorSlider.Thumb />

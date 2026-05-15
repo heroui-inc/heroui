@@ -16,15 +16,15 @@ export function ErrorMessageWithTagGroup() {
       selectionMode="multiple"
       onSelectionChange={(keys) => setSelected(keys)}
     >
-      <Label>Required Categories</Label>
+      <Label>必选分类</Label>
       <TagGroup.List>
-        <Tag id="news">News</Tag>
-        <Tag id="travel">Travel</Tag>
-        <Tag id="gaming">Gaming</Tag>
-        <Tag id="shopping">Shopping</Tag>
+        <Tag id="news">新闻</Tag>
+        <Tag id="travel">旅游</Tag>
+        <Tag id="gaming">游戏</Tag>
+        <Tag id="shopping">购物</Tag>
       </TagGroup.List>
-      <Description>Select at least one category</Description>
-      <ErrorMessage>{!!isInvalid && <>Please select at least one category</>}</ErrorMessage>
+      <Description>请至少选择一个分类</Description>
+      <ErrorMessage>{!!isInvalid && <>请至少选择一个分类</>}</ErrorMessage>
     </TagGroup>
   );
 }

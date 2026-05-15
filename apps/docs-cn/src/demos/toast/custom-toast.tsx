@@ -50,13 +50,13 @@ export function CustomToast() {
         variant="secondary"
         onPress={() => {
           customQueue.add({
-            description: "This uses a custom render function",
-            title: "Custom layout toast",
+            description: "使用自定义渲染函数",
+            title: "自定义布局 Toast",
             variant: "default",
           });
         }}
       >
-        Custom toast
+        自定义 Toast
       </Button>
     </div>
   );

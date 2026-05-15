@@ -14,15 +14,15 @@ export default function Orientation() {
   return (
     <div className="w-full sm:max-w-sm">
       <div className="mb-8 w-full">
-        <h4 className="mb-2 text-sm font-semibold">Vertical</h4>
+        <h4 className="mb-2 text-sm font-semibold">垂直</h4>
         <Card className="w-full p-0">
           <ScrollShadow className="max-h-[240px] p-4" orientation="vertical">
             <div className="space-y-4">
               {Array.from({length: 10}).map((_, idx) => (
                 <p key={`scroll-shadow-lorem-content-${idx}`}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-                  risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-                  quam. Morbi accumsan cursus enim, sed ultricies sapien.
+                  段落 {idx + 1}：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                  pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit
+                  risus, sed porttitor quam. Morbi accumsan cursus enim, sed ultricies sapien.
                 </p>
               ))}
             </div>
@@ -31,7 +31,7 @@ export default function Orientation() {
       </div>
 
       <div className="w-full">
-        <h4 className="mb-2 text-sm font-semibold">Horizontal</h4>
+        <h4 className="mb-2 text-sm font-semibold">水平</h4>
         <Card className="w-full p-0">
           <ScrollShadow className="p-4" orientation="horizontal">
             <div className="flex flex-row gap-4">
@@ -42,14 +42,14 @@ export default function Orientation() {
                   variant="transparent"
                 >
                   <img
-                    alt="Lorem Card"
+                    alt="示例卡片"
                     className="aspect-square h-16 w-16 shrink-0 rounded-xl object-cover select-none sm:h-20 sm:w-20"
                     loading="lazy"
                     src={getRandomImage(idx)}
                   />
                   <div className="flex flex-1 flex-col justify-center gap-1">
-                    <Card.Title className="text-sm">Bridging the Future</Card.Title>
-                    <Card.Description className="text-xs">Today, 6:30 PM</Card.Description>
+                    <Card.Title className="text-sm">连接未来</Card.Title>
+                    <Card.Description className="text-xs">今天 18:30</Card.Description>
                   </div>
                 </Card>
               ))}

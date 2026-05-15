@@ -19,7 +19,7 @@ export function UnavailableDates() {
   return (
     <div className="flex flex-col items-center gap-4">
       <RangeCalendar
-        aria-label="Trip dates"
+        aria-label="行程日期"
         defaultValue={{end: now.add({days: 9}), start: now.add({days: 6})}}
         firstDayOfWeek="mon"
         isDateUnavailable={isDateUnavailable}
@@ -38,7 +38,7 @@ export function UnavailableDates() {
           </RangeCalendar.GridBody>
         </RangeCalendar.Grid>
       </RangeCalendar>
-      <Description className="text-center">Some days are unavailable</Description>
+      <Description className="text-center">部分日期不可选</Description>
     </div>
   );
 }

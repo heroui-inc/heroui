@@ -7,13 +7,13 @@ export function FullWidth() {
   return (
     <div className="w-[400px] space-y-4">
       <TimeField fullWidth name="time">
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group fullWidth>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
       </TimeField>
       <TimeField fullWidth name="time-icons">
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group fullWidth>
           <TimeField.Prefix>
             <Clock className="size-4 text-muted" />

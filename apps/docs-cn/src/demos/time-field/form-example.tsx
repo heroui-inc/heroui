@@ -43,7 +43,7 @@ export function FormExample() {
         value={value}
         onChange={setValue}
       >
-        <Label>Appointment time</Label>
+        <Label>预约时间</Label>
         <TimeField.Group>
           <TimeField.Prefix>
             <Clock className="size-4 text-muted" />
@@ -51,9 +51,9 @@ export function FormExample() {
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
         {isInvalid ? (
-          <FieldError>Time must be between 9:00 AM and 5:00 PM</FieldError>
+          <FieldError>时间须在上午 9:00 至下午 5:00 之间</FieldError>
         ) : (
-          <Description>Enter a time between 9:00 AM and 5:00 PM</Description>
+          <Description>输入上午 9:00 至下午 5:00 之间的时间</Description>
         )}
       </TimeField>
       <Button
@@ -63,7 +63,7 @@ export function FormExample() {
         type="submit"
         variant="primary"
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
+        {isSubmitting ? "提交中…" : "提交"}
       </Button>
     </Form>
   );

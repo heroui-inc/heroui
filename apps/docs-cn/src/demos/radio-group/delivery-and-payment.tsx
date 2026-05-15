@@ -5,40 +5,40 @@ import clsx from "clsx";
 export function DeliveryAndPayment() {
   const deliveryOptions = [
     {
-      description: "4-10 business days",
+      description: "4–10 个工作日",
       price: "$5.00",
-      title: "Standard",
+      title: "标准",
       value: "standard",
     },
     {
-      description: "2-5 business days",
+      description: "2–5 个工作日",
       price: "$16.00",
-      title: "Express",
+      title: "快递",
       value: "express",
     },
     {
-      description: "1 business day",
+      description: "1 个工作日",
       price: "$25.00",
-      title: "Super Fast",
+      title: "极速",
       value: "super-fast",
     },
   ];
 
   const paymentOptions = [
     {
-      description: "Exp. on 01/2026",
+      description: "有效期至 2026/01",
       icon: "uim:master-card",
       title: "**** 8304",
       value: "mastercard",
     },
     {
-      description: "Exp. on 01/2026",
+      description: "有效期至 2026/01",
       icon: "streamline-logos:visa-logo-solid",
       title: "**** 0123",
       value: "visa",
     },
     {
-      description: "Pay with PayPal",
+      description: "使用 PayPal 支付",
       icon: "ic:baseline-paypal",
       title: "PayPal",
       value: "paypal",
@@ -60,7 +60,7 @@ export function DeliveryAndPayment() {
     >
       <section className="flex w-full max-w-lg flex-col gap-4">
         <RadioGroup defaultValue="express" name="delivery" variant="secondary">
-          <Label>Delivery method</Label>
+          <Label>配送方式</Label>
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
               <Radio
@@ -89,7 +89,7 @@ export function DeliveryAndPayment() {
       <section className="flex w-full max-w-lg flex-col gap-4">
         <RadioGroup defaultValue="visa" name="payment" variant="secondary">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <Label>Payment method</Label>
+            <Label>支付方式</Label>
           </div>
           <div className="grid gap-x-4 md:grid-cols-2">
             {paymentOptions.map((option) => (

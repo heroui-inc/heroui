@@ -9,7 +9,7 @@ export function CustomRenderFunction() {
       name="time"
       render={(props) => <div {...props} data-custom="foo" />}
     >
-      <Label>Time</Label>
+      <Label>时间</Label>
       <TimeField.Group>
         <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
       </TimeField.Group>

@@ -24,11 +24,11 @@ export function WithSwatches() {
     <ColorPicker defaultValue="#F43F5E">
       <ColorPicker.Trigger>
         <ColorSwatch size="lg" />
-        <Label>Brand Color</Label>
+        <Label>品牌色</Label>
       </ColorPicker.Trigger>
       <ColorPicker.Popover>
         <ColorArea
-          aria-label="Color area"
+          aria-label="取色区域"
           className="max-w-full"
           colorSpace="hsb"
           xChannel="saturation"
@@ -36,8 +36,8 @@ export function WithSwatches() {
         >
           <ColorArea.Thumb />
         </ColorArea>
-        <ColorSlider aria-label="Hue slider" channel="hue" className="gap-1 px-1" colorSpace="hsb">
-          <Label>Hue</Label>
+        <ColorSlider aria-label="色相滑块" channel="hue" className="gap-1 px-1" colorSpace="hsb">
+          <Label>色相</Label>
           <ColorSlider.Output className="text-muted" />
           <ColorSlider.Track>
             <ColorSlider.Thumb />

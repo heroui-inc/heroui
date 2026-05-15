@@ -6,7 +6,7 @@ export function Variants() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">Circle (default)</span>
+        <span className="text-sm text-muted">圆形（默认）</span>
         <ColorSwatchPicker variant="circle">
           {colors.map((color) => (
             <ColorSwatchPicker.Item key={color} color={color}>
@@ -17,7 +17,7 @@ export function Variants() {
         </ColorSwatchPicker>
       </div>
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">Square</span>
+        <span className="text-sm text-muted">方形</span>
         <ColorSwatchPicker variant="square">
           {colors.map((color) => (
             <ColorSwatchPicker.Item key={color} color={color}>

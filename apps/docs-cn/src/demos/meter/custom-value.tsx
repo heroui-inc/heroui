@@ -9,7 +9,7 @@ export function CustomValue() {
       minValue={0}
       value={750}
     >
-      <Label>Revenue</Label>
+      <Label>收入</Label>
       <Meter.Output />
       <Meter.Track>
         <Meter.Fill />

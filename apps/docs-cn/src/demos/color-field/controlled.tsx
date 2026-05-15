@@ -11,24 +11,24 @@ export function Controlled() {
   return (
     <div className="flex flex-col gap-4">
       <ColorField className="w-[280px]" name="color" value={value} onChange={setValue}>
-        <Label>Color</Label>
+        <Label>颜色</Label>
         <ColorField.Group>
           <ColorField.Prefix>
             <ColorSwatch color={value ?? undefined} size="xs" />
           </ColorField.Prefix>
           <ColorField.Input />
         </ColorField.Group>
-        <Description>Current value: {value ? value.toString("hex") : "(empty)"}</Description>
+        <Description>当前值：{value ? value.toString("hex") : "（空）"}</Description>
       </ColorField>
       <div className="flex gap-2">
         <Button variant="tertiary" onPress={() => setValue(parseColor("#EF4444"))}>
-          Set Red
+          设为红色
         </Button>
         <Button variant="tertiary" onPress={() => setValue(parseColor("#10B981"))}>
-          Set Green
+          设为绿色
         </Button>
         <Button variant="tertiary" onPress={() => setValue(null)}>
-          Clear
+          清空
         </Button>
       </div>
     </div>

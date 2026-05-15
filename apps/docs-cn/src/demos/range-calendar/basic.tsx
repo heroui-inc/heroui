@@ -4,7 +4,7 @@ import {RangeCalendar} from "@heroui/react";
 
 export function Basic() {
   return (
-    <RangeCalendar aria-label="Trip dates" firstDayOfWeek="mon">
+    <RangeCalendar aria-label="行程日期" firstDayOfWeek="mon">
       <RangeCalendar.Header>
         <RangeCalendar.Heading />
         <RangeCalendar.NavButton slot="previous" />

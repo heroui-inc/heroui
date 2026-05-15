@@ -33,22 +33,22 @@ export function WithKeyboardShortcut() {
     <div className="flex flex-col gap-4">
       <div>
         <SearchField name="search" value={value} onChange={setValue}>
-          <Label>Search</Label>
+          <Label>搜索</Label>
           <SearchField.Group>
             <SearchField.SearchIcon />
-            <SearchField.Input ref={inputRef} className="w-[280px]" placeholder="Search..." />
+            <SearchField.Input ref={inputRef} className="w-[280px]" placeholder="搜索…" />
             <SearchField.ClearButton />
           </SearchField.Group>
-          <Description>Use keyboard shortcut to quickly focus this field</Description>
+          <Description>使用键盘快捷键快速聚焦此输入框</Description>
         </SearchField>
       </div>
       <div className="text-default-500 flex items-center gap-2 text-sm">
-        <span>Press</span>
+        <span>按</span>
         <Kbd>
           <Kbd.Abbr keyValue="shift" />
           <Kbd.Content>S</Kbd.Content>
         </Kbd>
-        <span>to focus the search field</span>
+        <span>聚焦搜索框</span>
       </div>
     </div>
   );

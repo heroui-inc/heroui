@@ -29,7 +29,7 @@ export function Controlled() {
           <h3 className="text-lg font-semibold">HeroUI Native</h3>
           <div className="flex gap-2">
             <Button
-              aria-label="Previous disclosure"
+              aria-label="上一个折叠项"
               isDisabled={isPrevDisabled}
               size="sm"
               variant="secondary"
@@ -38,7 +38,7 @@ export function Controlled() {
               <ChevronUp className="size-4" />
             </Button>
             <Button
-              aria-label="Next disclosure"
+              aria-label="下一个折叠项"
               isDisabled={isNextDisabled}
               size="sm"
               variant="secondary"
@@ -49,7 +49,7 @@ export function Controlled() {
           </div>
         </div>
         <DisclosureGroup expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
-          <Disclosure aria-label="Preview HeroUI Native" id="preview">
+          <Disclosure aria-label="预览 HeroUI Native" id="preview">
             <Disclosure.Heading>
               <Button
                 slot="trigger"
@@ -60,7 +60,7 @@ export function Controlled() {
               >
                 <div className="flex w-full items-center justify-start gap-2">
                   <QrCode />
-                  Preview HeroUI Native
+                  预览 HeroUI Native
                 </div>
                 <Disclosure.Indicator className="text-muted" />
               </Button>
@@ -68,24 +68,24 @@ export function Controlled() {
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-sm text-muted">
-                  Scan this QR code with your camera app to preview the HeroUI native components.
+                  使用手机相机扫描此二维码，即可预览 HeroUI Native 组件。
                 </p>
                 <img
-                  alt="Expo Go QR Code"
+                  alt="Expo Go 二维码"
                   className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-sm text-muted">Expo must be installed on your device.</p>
+                <p className="text-sm text-muted">设备需已安装 Expo。</p>
                 <Button className="mt-4" variant="primary">
-                  <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />
-                  Preview on Expo Go
+                  <Icon className="[&_path]:fill-accent-foreground" icon="logos:expo-icon" />在 Expo
+                  Go 预览
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>
           </Disclosure>
           <Separator className="my-2" />
           <Disclosure id="download">
-            <Disclosure.Heading aria-label="Download HeroUI Native">
+            <Disclosure.Heading aria-label="下载 HeroUI Native">
               <Button
                 slot="trigger"
                 variant={expandedKeys.has("download") ? "secondary" : "tertiary"}
@@ -95,7 +95,7 @@ export function Controlled() {
               >
                 <div className="flex w-full items-center justify-start gap-2">
                   <Icon icon="tabler:brand-apple-filled" />
-                  Download HeroUI Native
+                  下载 HeroUI Native
                 </div>
                 <Disclosure.Indicator className="text-muted" />
               </Button>
@@ -103,17 +103,16 @@ export function Controlled() {
             <Disclosure.Content>
               <Disclosure.Body className="mx-2 flex flex-col items-center gap-2 p-4 text-center">
                 <p className="text-sm text-muted">
-                  Scan this QR code with your camera app to preview the HeroUI native components.
+                  使用手机相机扫描此二维码，即可预览 HeroUI Native 组件。
                 </p>
                 <img
-                  alt="Expo Go QR Code"
+                  alt="Expo Go 二维码"
                   className="aspect-square w-full max-w-54 object-cover"
                   src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
                 />
-                <p className="text-sm text-muted">Expo must be installed on your device.</p>
+                <p className="text-sm text-muted">设备需已安装 Expo。</p>
                 <Button className="mt-4" variant="primary">
-                  <Icon icon="tabler:brand-apple-filled" />
-                  Download on App Store
+                  <Icon icon="tabler:brand-apple-filled" />在 App Store 下载
                 </Button>
               </Disclosure.Body>
             </Disclosure.Content>

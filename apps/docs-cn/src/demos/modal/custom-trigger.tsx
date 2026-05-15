@@ -11,8 +11,8 @@ export function CustomTrigger() {
           <Gear className="size-6" />
         </div>
         <div className="flex flex-1 flex-col gap-0.5">
-          <p className="text-sm font-semibold">Settings</p>
-          <p className="text-xs text-muted">Manage your preferences</p>
+          <p className="text-sm font-semibold">设置</p>
+          <p className="text-xs text-muted">管理你的偏好设置</p>
         </div>
       </Modal.Trigger>
       <Modal.Backdrop>
@@ -23,19 +23,19 @@ export function CustomTrigger() {
               <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                 <Gear className="size-5" />
               </Modal.Icon>
-              <Modal.Heading>Settings</Modal.Heading>
+              <Modal.Heading>设置</Modal.Heading>
             </Modal.Header>
             <Modal.Body>
               <p>
-                Use <code>Modal.Trigger</code> to create custom trigger elements beyond standard
-                buttons. This example shows a card-style trigger with icons and descriptive text.
+                使用 <code>Modal.Trigger</code>{" "}
+                可在标准按钮之外创建自定义触发器。此示例展示带图标与说明文字的卡片式触发器。
               </p>
             </Modal.Body>
             <Modal.Footer>
               <Button slot="close" variant="secondary">
-                Cancel
+                取消
               </Button>
-              <Button slot="close">Save</Button>
+              <Button slot="close">保存</Button>
             </Modal.Footer>
           </Modal.Dialog>
         </Modal.Container>

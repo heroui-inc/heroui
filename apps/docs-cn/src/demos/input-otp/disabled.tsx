@@ -3,8 +3,8 @@ import {Description, InputOTP, Label} from "@heroui/react";
 export function Disabled() {
   return (
     <div className="flex w-[280px] flex-col gap-2">
-      <Label isDisabled>Verify account</Label>
-      <Description>Code verification is currently disabled</Description>
+      <Label isDisabled>验证账户</Label>
+      <Description>验证码校验当前已禁用</Description>
       <InputOTP isDisabled maxLength={6}>
         <InputOTP.Group>
           <InputOTP.Slot index={0} />

@@ -8,7 +8,7 @@ export function Group() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Allow Notifications</Label>
+          <Label className="text-sm">允许通知</Label>
         </Switch.Content>
       </Switch>
       <Switch name="marketing">
@@ -16,7 +16,7 @@ export function Group() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Marketing emails</Label>
+          <Label className="text-sm">营销邮件</Label>
         </Switch.Content>
       </Switch>
       <Switch name="social">
@@ -24,7 +24,7 @@ export function Group() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Social media updates</Label>
+          <Label className="text-sm">社交媒体更新</Label>
         </Switch.Content>
       </Switch>
     </SwitchGroup>

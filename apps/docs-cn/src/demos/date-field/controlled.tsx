@@ -12,18 +12,18 @@ export function Controlled() {
   return (
     <div className="flex flex-col gap-4">
       <DateField className="w-[256px]" name="date" value={value} onChange={setValue}>
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
-        <Description>Current value: {value ? value.toString() : "(empty)"}</Description>
+        <Description>当前值：{value ? value.toString() : "（空）"}</Description>
       </DateField>
       <div className="flex gap-2">
         <Button variant="tertiary" onPress={() => setValue(today(getLocalTimeZone()))}>
-          Set today
+          设为今天
         </Button>
         <Button variant="tertiary" onPress={() => setValue(null)}>
-          Clear
+          清空
         </Button>
       </div>
     </div>

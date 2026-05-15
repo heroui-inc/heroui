@@ -9,7 +9,7 @@ export function CustomRenderFunction() {
       name="date"
       render={(props) => <div {...props} data-custom="date-picker" />}
     >
-      <Label render={(props) => <span {...props} data-custom="date-picker-label" />}>Date</Label>
+      <Label render={(props) => <span {...props} data-custom="date-picker-label" />}>日期</Label>
       <DateField.Group
         fullWidth
         render={(props) => <div {...props} data-custom="date-field-group" />}
@@ -31,7 +31,7 @@ export function CustomRenderFunction() {
         </DateField.Suffix>
       </DateField.Group>
       <DatePicker.Popover>
-        <Calendar aria-label="Event date">
+        <Calendar aria-label="活动日期">
           <Calendar.Header>
             <Calendar.YearPickerTrigger>
               <Calendar.YearPickerTriggerHeading />

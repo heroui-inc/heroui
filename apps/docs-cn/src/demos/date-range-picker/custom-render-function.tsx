@@ -10,7 +10,7 @@ export function CustomRenderFunction() {
       render={(props) => <div data-custom="foo" {...props} />}
       startName="startDate"
     >
-      <Label>Trip dates</Label>
+      <Label>出行日期</Label>
       <DateField.Group fullWidth>
         <DateField.Input slot="start">
           {(segment) => <DateField.Segment segment={segment} />}
@@ -26,7 +26,7 @@ export function CustomRenderFunction() {
         </DateField.Suffix>
       </DateField.Group>
       <DateRangePicker.Popover>
-        <RangeCalendar aria-label="Trip dates">
+        <RangeCalendar aria-label="出行日期">
           <RangeCalendar.Header>
             <RangeCalendar.YearPickerTrigger>
               <RangeCalendar.YearPickerTriggerHeading />

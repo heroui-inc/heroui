@@ -21,7 +21,7 @@ export function WithValidation() {
       value={value}
       onChange={setValue}
     >
-      <Label>Appointment date</Label>
+      <Label>预约日期</Label>
       <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         <DateField.Suffix>
@@ -30,9 +30,9 @@ export function WithValidation() {
           </DatePicker.Trigger>
         </DateField.Suffix>
       </DateField.Group>
-      <FieldError>Date must be today or in the future.</FieldError>
+      <FieldError>日期须为今天或将来。</FieldError>
       <DatePicker.Popover>
-        <Calendar aria-label="Event date">
+        <Calendar aria-label="活动日期">
           <Calendar.Header>
             <Calendar.YearPickerTrigger>
               <Calendar.YearPickerTriggerHeading />

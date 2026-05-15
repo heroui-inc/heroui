@@ -11,7 +11,7 @@ export function CustomRenderFunction() {
       name="width"
       render={(props) => <div {...props} data-custom="foo" />}
     >
-      <Label>Width</Label>
+      <Label>宽度</Label>
       <NumberField.Group>
         <NumberField.DecrementButton />
         <NumberField.Input className="w-[120px]" />

@@ -22,8 +22,8 @@ export function SingleWithCustomIndicator() {
 
   return (
     <Dropdown>
-      <Button aria-label="Menu" variant="secondary">
-        Fruits
+      <Button aria-label="菜单" variant="secondary">
+        水果
       </Button>
       <Dropdown.Popover className="min-w-[256px]">
         <Dropdown.Menu
@@ -32,37 +32,37 @@ export function SingleWithCustomIndicator() {
           onSelectionChange={setSelected}
         >
           <Dropdown.Section>
-            <Header>Select a fruit</Header>
-            <Dropdown.Item id="apple" textValue="Apple">
+            <Header>选择水果</Header>
+            <Dropdown.Item id="apple" textValue="苹果">
               <Dropdown.ItemIndicator>
                 {({isSelected}) => (isSelected ? CustomCheckmarkIcon : null)}
               </Dropdown.ItemIndicator>
-              <Label>Apple</Label>
+              <Label>苹果</Label>
             </Dropdown.Item>
-            <Dropdown.Item id="banana" textValue="Banana">
+            <Dropdown.Item id="banana" textValue="香蕉">
               <Dropdown.ItemIndicator>
                 {({isSelected}) => (isSelected ? CustomCheckmarkIcon : null)}
               </Dropdown.ItemIndicator>
-              <Label>Banana</Label>
+              <Label>香蕉</Label>
             </Dropdown.Item>
-            <Dropdown.Item id="cherry" textValue="Cherry">
+            <Dropdown.Item id="cherry" textValue="樱桃">
               <Dropdown.ItemIndicator>
                 {({isSelected}) => (isSelected ? CustomCheckmarkIcon : null)}
               </Dropdown.ItemIndicator>
-              <Label>Cherry</Label>
+              <Label>樱桃</Label>
             </Dropdown.Item>
           </Dropdown.Section>
-          <Dropdown.Item id="orange" textValue="Orange">
+          <Dropdown.Item id="orange" textValue="橙子">
             <Dropdown.ItemIndicator>
               {({isSelected}) => (isSelected ? CustomCheckmarkIcon : null)}
             </Dropdown.ItemIndicator>
-            <Label>Orange</Label>
+            <Label>橙子</Label>
           </Dropdown.Item>
-          <Dropdown.Item id="pear" textValue="Pear">
+          <Dropdown.Item id="pear" textValue="梨">
             <Dropdown.ItemIndicator>
               {({isSelected}) => (isSelected ? CustomCheckmarkIcon : null)}
             </Dropdown.ItemIndicator>
-            <Label>Pear</Label>
+            <Label>梨</Label>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>

@@ -51,7 +51,7 @@ export function FormExample() {
         value={value}
         onChange={setValue}
       >
-        <Label>Trip dates</Label>
+        <Label>出行日期</Label>
         <DateField.Group fullWidth>
           <DateField.Input slot="start">
             {(segment) => <DateField.Segment segment={segment} />}
@@ -67,12 +67,12 @@ export function FormExample() {
           </DateField.Suffix>
         </DateField.Group>
         {isInvalid ? (
-          <FieldError>Please choose a valid range in the future.</FieldError>
+          <FieldError>请选择从今天起的有效日期范围。</FieldError>
         ) : (
-          <Description>Select your check-in and check-out dates.</Description>
+          <Description>选择入住与退房日期。</Description>
         )}
         <DateRangePicker.Popover>
-          <RangeCalendar aria-label="Trip dates">
+          <RangeCalendar aria-label="出行日期">
             <RangeCalendar.Header>
               <RangeCalendar.YearPickerTrigger>
                 <RangeCalendar.YearPickerTriggerHeading />
@@ -103,7 +103,7 @@ export function FormExample() {
         isPending={isSubmitting}
         type="submit"
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
+        {isSubmitting ? "提交中…" : "提交"}
       </Button>
     </Form>
   );

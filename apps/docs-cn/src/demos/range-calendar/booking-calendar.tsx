@@ -24,7 +24,7 @@ export function BookingCalendar() {
   return (
     <div className="flex flex-col items-center gap-4">
       <RangeCalendar
-        aria-label="Booking range"
+        aria-label="预订区间"
         isDateUnavailable={isDateUnavailable}
         minValue={today(getLocalTimeZone())}
         value={selectedRange}
@@ -58,15 +58,15 @@ export function BookingCalendar() {
       <div className="flex flex-col gap-2 text-center">
         <div className="flex items-center justify-center gap-4 text-xs text-muted">
           <span className="flex items-center gap-1">
-            <span className="size-2 rounded-full bg-muted" /> Blocked dates
+            <span className="size-2 rounded-full bg-muted" /> 不可订日期
           </span>
           <span className="flex items-center gap-1">
-            <span className="size-2 rounded-full bg-default" /> Weekend/Unavailable
+            <span className="size-2 rounded-full bg-default" /> 周末/不可用
           </span>
         </div>
         {selectedRange ? (
           <Button size="sm" variant="primary">
-            Book {selectedRange.start.toString()} -&gt; {selectedRange.end.toString()}
+            预订 {selectedRange.start.toString()} → {selectedRange.end.toString()}
           </Button>
         ) : null}
       </div>

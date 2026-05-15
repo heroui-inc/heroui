@@ -1,24 +1,23 @@
 import {Spinner} from "@heroui/react";
 
+const SIZE_LABELS = {
+  lg: "大",
+  md: "中",
+  sm: "小",
+  xl: "特大",
+} as const;
+
+const sizes = ["sm", "md", "lg", "xl"] as const;
+
 export function SpinnerSizes() {
   return (
     <div className="flex items-center gap-8">
-      <div className="flex flex-col items-center gap-2">
-        <Spinner size="sm" />
-        <span className="text-xs text-muted">Small</span>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner size="md" />
-        <span className="text-xs text-muted">Medium</span>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner size="lg" />
-        <span className="text-xs text-muted">Large</span>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner size="xl" />
-        <span className="text-xs text-muted">Extra Large</span>
-      </div>
+      {sizes.map((size) => (
+        <div key={size} className="flex flex-col items-center gap-2">
+          <Spinner size={size} />
+          <span className="text-xs text-muted">{SIZE_LABELS[size]}</span>
+        </div>
+      ))}
     </div>
   );
 }

@@ -24,14 +24,14 @@ export function WithValidation() {
         value={value}
         onChange={setValue}
       >
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
         {isInvalid ? (
-          <FieldError>Time must be between 9:00 AM and 5:00 PM</FieldError>
+          <FieldError>时间须在上午 9:00 至下午 5:00 之间</FieldError>
         ) : (
-          <Description>Enter a time between 9:00 AM and 5:00 PM</Description>
+          <Description>输入上午 9:00 至下午 5:00 之间的时间</Description>
         )}
       </TimeField>
     </div>

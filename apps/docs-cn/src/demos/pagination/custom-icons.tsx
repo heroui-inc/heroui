@@ -16,7 +16,7 @@ export function PaginationCustomIcons() {
             <Pagination.PreviousIcon>
               <Icon icon="gravity-ui:arrow-left" />
             </Pagination.PreviousIcon>
-            <span>Back</span>
+            <span>返回</span>
           </Pagination.Previous>
         </Pagination.Item>
         {Array.from({length: totalPages}, (_, i) => i + 1).map((p) => (
@@ -28,7 +28,7 @@ export function PaginationCustomIcons() {
         ))}
         <Pagination.Item>
           <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
-            <span>Forward</span>
+            <span>前进</span>
             <Pagination.NextIcon>
               <Icon icon="gravity-ui:arrow-right" />
             </Pagination.NextIcon>

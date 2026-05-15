@@ -1,43 +1,27 @@
 import {Label, Meter} from "@heroui/react";
 
+const colors = ["default", "accent", "success", "warning", "danger"] as const;
+
+const COLOR_LABELS: Record<(typeof colors)[number], string> = {
+  accent: "强调",
+  danger: "危险",
+  default: "默认",
+  success: "成功",
+  warning: "警告",
+};
+
 export function Colors() {
   return (
     <div className="flex w-64 flex-col gap-6">
-      <Meter color="default" value={50}>
-        <Label>Default</Label>
-        <Meter.Output />
-        <Meter.Track>
-          <Meter.Fill />
-        </Meter.Track>
-      </Meter>
-      <Meter color="accent" value={50}>
-        <Label>Accent</Label>
-        <Meter.Output />
-        <Meter.Track>
-          <Meter.Fill />
-        </Meter.Track>
-      </Meter>
-      <Meter color="success" value={50}>
-        <Label>Success</Label>
-        <Meter.Output />
-        <Meter.Track>
-          <Meter.Fill />
-        </Meter.Track>
-      </Meter>
-      <Meter color="warning" value={50}>
-        <Label>Warning</Label>
-        <Meter.Output />
-        <Meter.Track>
-          <Meter.Fill />
-        </Meter.Track>
-      </Meter>
-      <Meter color="danger" value={50}>
-        <Label>Danger</Label>
-        <Meter.Output />
-        <Meter.Track>
-          <Meter.Fill />
-        </Meter.Track>
-      </Meter>
+      {colors.map((color) => (
+        <Meter key={color} color={color} value={50}>
+          <Label>{COLOR_LABELS[color]}</Label>
+          <Meter.Output />
+          <Meter.Track>
+            <Meter.Fill />
+          </Meter.Track>
+        </Meter>
+      ))}
     </div>
   );
 }

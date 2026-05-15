@@ -8,8 +8,8 @@ export function WithDescription() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Public profile</Label>
-          <Description>Allow others to see your profile information</Description>
+          <Label className="text-sm">公开资料</Label>
+          <Description>允许他人查看你的资料信息</Description>
         </Switch.Content>
       </Switch>
     </div>

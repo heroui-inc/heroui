@@ -24,7 +24,7 @@ export function FormExample() {
 
     // Simulate API call
     setTimeout(() => {
-      console.log("Date submitted:", {date: value});
+      console.log("已提交日期：", {date: value});
       setValue(null);
       setIsSubmitting(false);
     }, 1500);
@@ -41,7 +41,7 @@ export function FormExample() {
         value={value}
         onChange={setValue}
       >
-        <Label>Appointment date</Label>
+        <Label>预约日期</Label>
         <DateField.Group>
           <DateField.Prefix>
             <Calendar className="size-4 text-muted" />
@@ -49,9 +49,9 @@ export function FormExample() {
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
         {isInvalid ? (
-          <FieldError>Date must be today or in the future</FieldError>
+          <FieldError>日期须为今天或将来</FieldError>
         ) : (
-          <Description>Enter a date from today onwards</Description>
+          <Description>输入日期 from today onwards</Description>
         )}
       </DateField>
       <Button
@@ -61,7 +61,7 @@ export function FormExample() {
         type="submit"
         variant="primary"
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
+        {isSubmitting ? "提交中…" : "Submit"}
       </Button>
     </Form>
   );

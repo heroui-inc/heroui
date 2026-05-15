@@ -7,9 +7,9 @@ export function ColorSwatchCustomStyles() {
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Glow effect */}
+      {/* 发光效果 */}
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">Glow Effect</span>
+        <span className="text-sm text-muted">发光效果</span>
         <div className="flex items-center gap-4">
           {colors.map((color) => (
             <ColorSwatch
@@ -24,9 +24,9 @@ export function ColorSwatchCustomStyles() {
         </div>
       </div>
 
-      {/* Gradient swatch */}
+      {/* 渐变色块 */}
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-muted">Gradient</span>
+        <span className="text-sm text-muted">渐变</span>
         <div className="flex items-center gap-4">
           {colors.map((color) => (
             <ColorSwatch

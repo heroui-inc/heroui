@@ -9,11 +9,11 @@ export function DismissBehavior() {
       <div className="flex flex-col gap-2">
         <h3 className="text-lg font-semibold">isDismissable</h3>
         <p className="text-sm text-muted">
-          Controls whether the modal can be dismissed by clicking the overlay backdrop. Defaults to{" "}
-          <code>true</code>. Set to <code>false</code> to require explicit close action.
+          控制是否允许通过点击遮罩关闭模态框。默认为 <code>true</code>。设为 <code>false</code>{" "}
+          时需通过明确操作关闭。
         </p>
         <Modal>
-          <Button variant="secondary">Open Modal</Button>
+          <Button variant="secondary">打开模态框</Button>
           <Modal.Backdrop isDismissable={false}>
             <Modal.Container>
               <Modal.Dialog className="sm:max-w-[360px]">
@@ -23,19 +23,14 @@ export function DismissBehavior() {
                     <CircleInfo className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>isDismissable = false</Modal.Heading>
-                  <p className="text-sm leading-5 text-muted">
-                    Clicking the backdrop won't close this modal
-                  </p>
+                  <p className="text-sm leading-5 text-muted">点击遮罩不会关闭此模态框</p>
                 </Modal.Header>
                 <Modal.Body>
-                  <p>
-                    Try clicking outside this modal on the overlay - it won't close. You must use
-                    the close button or press ESC to dismiss it.
-                  </p>
+                  <p>尝试点击遮罩区域——模态框不会关闭，必须使用关闭按钮或按 ESC 键关闭。</p>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button className="w-full" slot="close">
-                    Close
+                    关闭
                   </Button>
                 </Modal.Footer>
               </Modal.Dialog>
@@ -47,11 +42,11 @@ export function DismissBehavior() {
       <div className="flex flex-col gap-2">
         <h3 className="text-lg font-semibold">isKeyboardDismissDisabled</h3>
         <p className="text-sm text-muted">
-          Controls whether the ESC key can dismiss the modal. When set to <code>true</code>, the ESC
-          key will be disabled and users must use explicit close actions.
+          控制是否允许通过 ESC 关闭模态框。设为 <code>true</code> 时将禁用
+          ESC，用户须通过明确操作关闭。
         </p>
         <Modal>
-          <Button variant="secondary">Open Modal</Button>
+          <Button variant="secondary">打开模态框</Button>
           <Modal.Backdrop isKeyboardDismissDisabled>
             <Modal.Container>
               <Modal.Dialog className="sm:max-w-[360px]">
@@ -61,17 +56,14 @@ export function DismissBehavior() {
                     <CircleInfo className="size-5" />
                   </Modal.Icon>
                   <Modal.Heading>isKeyboardDismissDisabled = true</Modal.Heading>
-                  <p className="text-sm leading-5 text-muted">ESC key is disabled</p>
+                  <p className="text-sm leading-5 text-muted">已禁用 ESC 键</p>
                 </Modal.Header>
                 <Modal.Body>
-                  <p>
-                    Press ESC - nothing happens. You must use the close button or click the overlay
-                    backdrop to dismiss this modal.
-                  </p>
+                  <p>按 ESC 无反应。必须使用关闭按钮或点击遮罩才能关闭此模态框。</p>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button className="w-full" slot="close">
-                    Close
+                    关闭
                   </Button>
                 </Modal.Footer>
               </Modal.Dialog>

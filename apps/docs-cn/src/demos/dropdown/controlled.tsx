@@ -13,11 +13,11 @@ export function Controlled() {
   return (
     <div className="flex min-w-sm flex-col items-center justify-center gap-4">
       <p className="text-sm text-muted">
-        Selected: {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
+        已选：{selectedItems.length > 0 ? selectedItems.join("、") : "无"}
       </p>
       <Dropdown>
-        <Button aria-label="Menu" variant="secondary">
-          Actions
+        <Button aria-label="菜单" variant="secondary">
+          操作
         </Button>
         <Dropdown.Popover>
           <Dropdown.Menu
@@ -25,16 +25,16 @@ export function Controlled() {
             selectionMode="multiple"
             onSelectionChange={setSelected}
           >
-            <Dropdown.Item id="bold" textValue="Bold">
-              <Label>Bold</Label>
+            <Dropdown.Item id="bold" textValue="粗体">
+              <Label>粗体</Label>
               <Dropdown.ItemIndicator />
             </Dropdown.Item>
-            <Dropdown.Item id="italic" textValue="Italic">
-              <Label>Italic</Label>
+            <Dropdown.Item id="italic" textValue="斜体">
+              <Label>斜体</Label>
               <Dropdown.ItemIndicator />
             </Dropdown.Item>
-            <Dropdown.Item id="underline" textValue="Underline">
-              <Label>Underline</Label>
+            <Dropdown.Item id="underline" textValue="下划线">
+              <Label>下划线</Label>
               <Dropdown.ItemIndicator />
             </Dropdown.Item>
           </Dropdown.Menu>

@@ -1,43 +1,27 @@
 import {Label, ProgressBar} from "@heroui/react";
 
+const colors = ["default", "accent", "success", "warning", "danger"] as const;
+
+const COLOR_LABELS: Record<(typeof colors)[number], string> = {
+  accent: "强调",
+  danger: "危险",
+  default: "默认",
+  success: "成功",
+  warning: "警告",
+};
+
 export function Colors() {
   return (
     <div className="flex w-64 flex-col gap-6">
-      <ProgressBar aria-label="Default" color="default" value={50}>
-        <Label>Default</Label>
-        <ProgressBar.Output />
-        <ProgressBar.Track>
-          <ProgressBar.Fill />
-        </ProgressBar.Track>
-      </ProgressBar>
-      <ProgressBar aria-label="Accent" color="accent" value={50}>
-        <Label>Accent</Label>
-        <ProgressBar.Output />
-        <ProgressBar.Track>
-          <ProgressBar.Fill />
-        </ProgressBar.Track>
-      </ProgressBar>
-      <ProgressBar aria-label="Success" color="success" value={50}>
-        <Label>Success</Label>
-        <ProgressBar.Output />
-        <ProgressBar.Track>
-          <ProgressBar.Fill />
-        </ProgressBar.Track>
-      </ProgressBar>
-      <ProgressBar aria-label="Warning" color="warning" value={50}>
-        <Label>Warning</Label>
-        <ProgressBar.Output />
-        <ProgressBar.Track>
-          <ProgressBar.Fill />
-        </ProgressBar.Track>
-      </ProgressBar>
-      <ProgressBar aria-label="Danger" color="danger" value={50}>
-        <Label>Danger</Label>
-        <ProgressBar.Output />
-        <ProgressBar.Track>
-          <ProgressBar.Fill />
-        </ProgressBar.Track>
-      </ProgressBar>
+      {colors.map((color) => (
+        <ProgressBar key={color} aria-label={COLOR_LABELS[color]} color={color} value={50}>
+          <Label>{COLOR_LABELS[color]}</Label>
+          <ProgressBar.Output />
+          <ProgressBar.Track>
+            <ProgressBar.Fill />
+          </ProgressBar.Track>
+        </ProgressBar>
+      ))}
     </div>
   );
 }

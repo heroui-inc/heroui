@@ -18,14 +18,14 @@ export function TagGroupSelectionModes() {
         selectionMode="single"
         onSelectionChange={(keys) => setSingleSelected(keys)}
       >
-        <Label>Single Selection</Label>
+        <Label>单选</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
-          <Tag>Shopping</Tag>
+          <Tag>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag>游戏</Tag>
+          <Tag>购物</Tag>
         </TagGroup.List>
-        <Description>Choose one category</Description>
+        <Description>选择一个分类</Description>
       </TagGroup>
 
       <TagGroup
@@ -33,14 +33,14 @@ export function TagGroupSelectionModes() {
         selectionMode="multiple"
         onSelectionChange={(keys) => setMultipleSelected(keys)}
       >
-        <Label>Multiple Selection</Label>
+        <Label>多选</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
-          <Tag>Shopping</Tag>
+          <Tag>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag>游戏</Tag>
+          <Tag>购物</Tag>
         </TagGroup.List>
-        <Description>Choose multiple categories</Description>
+        <Description>选择多个分类</Description>
       </TagGroup>
     </div>
   );

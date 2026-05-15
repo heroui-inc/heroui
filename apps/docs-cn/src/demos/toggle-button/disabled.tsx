@@ -6,11 +6,11 @@ export function Disabled() {
     <div className="flex items-center gap-3">
       <ToggleButton isDisabled>
         <Heart />
-        Like
+        点赞
       </ToggleButton>
       <ToggleButton defaultSelected isDisabled>
         <HeartFill />
-        Like
+        点赞
       </ToggleButton>
     </div>
   );

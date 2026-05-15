@@ -8,7 +8,7 @@ export function Sizes() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-xs">Small</Label>
+          <Label className="text-xs">小</Label>
         </Switch.Content>
       </Switch>
       <Switch size="md">
@@ -16,7 +16,7 @@ export function Sizes() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Medium</Label>
+          <Label className="text-sm">中</Label>
         </Switch.Content>
       </Switch>
       <Switch size="lg">
@@ -24,7 +24,7 @@ export function Sizes() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-base">Large</Label>
+          <Label className="text-base">大</Label>
         </Switch.Content>
       </Switch>
     </div>

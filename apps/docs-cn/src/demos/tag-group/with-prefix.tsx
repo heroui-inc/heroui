@@ -7,7 +7,7 @@ export function TagGroupWithPrefix() {
   return (
     <div className="flex flex-col gap-8">
       <TagGroup selectionMode="single">
-        <Label>With Icons</Label>
+        <Label>带图标</Label>
         <TagGroup.List>
           <Tag>
             <SquareArticle />
@@ -26,11 +26,11 @@ export function TagGroupWithPrefix() {
             Shopping
           </Tag>
         </TagGroup.List>
-        <Description>Tags with icons</Description>
+        <Description>带图标的标签</Description>
       </TagGroup>
 
       <TagGroup selectionMode="single">
-        <Label>With Avatars</Label>
+        <Label>带头像</Label>
         <TagGroup.List>
           <Tag>
             <Avatar className="size-4">
@@ -54,7 +54,7 @@ export function TagGroupWithPrefix() {
             Jane
           </Tag>
         </TagGroup.List>
-        <Description>Tags with avatars</Description>
+        <Description>带头像的标签</Description>
       </TagGroup>
     </div>
   );

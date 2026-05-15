@@ -4,9 +4,9 @@ import {InputGroup, Kbd, TextField} from "@heroui/react";
 
 export function WithKeyboardShortcut() {
   return (
-    <TextField aria-label="Command" className="w-full max-w-[280px]" name="command">
+    <TextField aria-label="命令" className="w-full max-w-[280px]" name="command">
       <InputGroup>
-        <InputGroup.Input className="w-full max-w-[280px]" placeholder="Command" />
+        <InputGroup.Input className="w-full max-w-[280px]" placeholder="命令" />
         <InputGroup.Suffix className="pr-2">
           <Kbd>
             <Kbd.Abbr keyValue="command" />

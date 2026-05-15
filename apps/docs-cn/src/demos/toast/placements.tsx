@@ -16,8 +16,8 @@ const placementQueues = Object.fromEntries(
 export function Placements() {
   const showToast = (placement: Placement) => {
     placementQueues[placement].add({
-      description: "Event has been created",
-      title: "Event created",
+      description: "活动已创建",
+      title: "活动已创建",
       variant: "default",
     });
   };

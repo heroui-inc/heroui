@@ -40,13 +40,13 @@ export function PaginationWithSummary() {
   return (
     <Pagination className="w-full">
       <Pagination.Summary>
-        Showing {startItem}-{endItem} of {totalItems} results
+        显示第 {startItem}–{endItem} 条，共 {totalItems} 条结果
       </Pagination.Summary>
       <Pagination.Content>
         <Pagination.Item>
           <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
             <Pagination.PreviousIcon />
-            <span>Previous</span>
+            <span>上一页</span>
           </Pagination.Previous>
         </Pagination.Item>
         {getPageNumbers().map((p, i) =>
@@ -64,7 +64,7 @@ export function PaginationWithSummary() {
         )}
         <Pagination.Item>
           <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
-            <span>Next</span>
+            <span>下一页</span>
             <Pagination.NextIcon />
           </Pagination.Next>
         </Pagination.Item>

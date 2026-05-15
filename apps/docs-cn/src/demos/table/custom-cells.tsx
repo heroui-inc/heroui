@@ -11,14 +11,14 @@ interface User {
   name: string;
   image_url: string;
   role: string;
-  status: "Active" | "Inactive" | "On Leave";
+  status: "在职" | "未激活" | "休假";
   email: string;
 }
 
 const statusColorMap: Record<string, "success" | "danger" | "warning"> = {
-  Active: "success",
-  Inactive: "danger",
-  "On Leave": "warning",
+  休假: "warning",
+  在职: "success",
+  未激活: "danger",
 };
 
 const users: User[] = [
@@ -27,40 +27,40 @@ const users: User[] = [
     id: 4586932,
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/red.jpg",
     name: "Kate Moore",
-    role: "Chief Executive Officer",
-    status: "Active",
+    role: "首席执行官",
+    status: "在职",
   },
   {
     email: "john@acme.com",
     id: 5273849,
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/green.jpg",
     name: "John Smith",
-    role: "Chief Technology Officer",
-    status: "Active",
+    role: "首席技术官",
+    status: "在职",
   },
   {
     email: "sara@acme.com",
     id: 7492836,
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue.jpg",
     name: "Sara Johnson",
-    role: "Chief Marketing Officer",
-    status: "On Leave",
+    role: "首席营销官",
+    status: "休假",
   },
   {
     email: "michael@acme.com",
     id: 8293746,
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/purple.jpg",
     name: "Michael Brown",
-    role: "Chief Financial Officer",
-    status: "Active",
+    role: "首席财务官",
+    status: "在职",
   },
   {
     email: "emily@acme.com",
     id: 1234567,
     image_url: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg",
     name: "Emily Davis",
-    role: "Product Manager",
-    status: "Inactive",
+    role: "产品经理",
+    status: "未激活",
   },
 ];
 
@@ -113,7 +113,7 @@ export function CustomCells() {
     <Table>
       <Table.ScrollContainer>
         <Table.Content
-          aria-label="Table with custom cells"
+          aria-label="自定义单元格表格"
           className="min-w-[800px]"
           selectedKeys={selectedKeys}
           selectionMode="multiple"
@@ -123,7 +123,7 @@ export function CustomCells() {
         >
           <Table.Header>
             <Table.Column className="pr-0">
-              <Checkbox aria-label="Select all" slot="selection">
+              <Checkbox aria-label="全选" slot="selection">
                 <Checkbox.Control>
                   <Checkbox.Indicator />
                 </Checkbox.Control>
@@ -131,31 +131,31 @@ export function CustomCells() {
             </Table.Column>
             <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Worker ID</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>员工 ID</SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="name">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Member</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>成员</SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="role">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Role</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>角色</SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="status">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>Status</SortableColumnHeader>
+                <SortableColumnHeader sortDirection={sortDirection}>状态</SortableColumnHeader>
               )}
             </Table.Column>
-            <Table.Column className="text-end">Actions</Table.Column>
+            <Table.Column className="text-end">操作</Table.Column>
           </Table.Header>
           <Table.Body>
             {sortedUsers.map((user) => (
               <Table.Row key={user.id} id={user.id}>
                 <Table.Cell className="pr-0">
-                  <Checkbox aria-label={`Select ${user.name}`} slot="selection" variant="secondary">
+                  <Checkbox aria-label={`选择 ${user.name}`} slot="selection" variant="secondary">
                     <Checkbox.Control>
                       <Checkbox.Indicator />
                     </Checkbox.Control>

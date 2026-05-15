@@ -15,18 +15,18 @@ export function Validation() {
         const formData = new FormData(e.currentTarget);
         const value = formData.get("plan-validation");
 
-        setMessage(`Your chosen plan is: ${value}`);
+        setMessage(`你选择的套餐是： ${value}`);
       }}
     >
       <RadioGroup isRequired name="plan-validation">
-        <Label>Subscription plan</Label>
+        <Label>订阅套餐</Label>
         <Radio value="starter">
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
           <Radio.Content>
-            <Label>Starter</Label>
-            <Description>For side projects and small teams</Description>
+            <Label>入门版</Label>
+            <Description>适合副项目和小型团队</Description>
           </Radio.Content>
         </Radio>
         <Radio value="pro">
@@ -34,8 +34,8 @@ export function Validation() {
             <Radio.Indicator />
           </Radio.Control>
           <Radio.Content>
-            <Label>Pro</Label>
-            <Description>Advanced reporting and analytics</Description>
+            <Label>专业版</Label>
+            <Description>高级报表与分析</Description>
           </Radio.Content>
         </Radio>
         <Radio value="teams">
@@ -43,11 +43,11 @@ export function Validation() {
             <Radio.Indicator />
           </Radio.Control>
           <Radio.Content>
-            <Label>Teams</Label>
-            <Description>Share access with up to 10 teammates</Description>
+            <Label>团队版</Label>
+            <Description>最多可与 10 名队友共享访问权限</Description>
           </Radio.Content>
         </Radio>
-        <FieldError>Choose a subscription before continuing.</FieldError>
+        <FieldError>请先选择订阅套餐再继续。</FieldError>
       </RadioGroup>
       <Button className="mt-2 w-fit" type="submit">
         Submit

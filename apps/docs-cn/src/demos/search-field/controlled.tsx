@@ -9,20 +9,20 @@ export function Controlled() {
   return (
     <div className="flex flex-col gap-4">
       <SearchField name="search" value={value} onChange={setValue}>
-        <Label>Search</Label>
+        <Label>搜索</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />
-          <SearchField.Input className="w-[280px]" placeholder="Search..." />
+          <SearchField.Input className="w-[280px]" placeholder="搜索…" />
           <SearchField.ClearButton />
         </SearchField.Group>
-        <Description>Current value: {value || "(empty)"}</Description>
+        <Description>当前值： {value || "（空）"}</Description>
       </SearchField>
       <div className="flex gap-2">
         <Button variant="tertiary" onPress={() => setValue("")}>
           Clear
         </Button>
-        <Button variant="tertiary" onPress={() => setValue("example query")}>
-          Set example
+        <Button variant="tertiary" onPress={() => setValue("示例查询")}>
+          设置示例
         </Button>
       </div>
     </div>

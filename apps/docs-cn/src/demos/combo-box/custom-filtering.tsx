@@ -4,11 +4,11 @@ import {ComboBox, Input, Label, ListBox} from "@heroui/react";
 
 export function CustomFiltering() {
   const animals = [
-    {id: "cat", name: "Cat"},
-    {id: "dog", name: "Dog"},
-    {id: "bird", name: "Bird"},
-    {id: "fish", name: "Fish"},
-    {id: "hamster", name: "Hamster"},
+    {id: "cat", name: "猫"},
+    {id: "dog", name: "狗"},
+    {id: "bird", name: "鸟"},
+    {id: "fish", name: "鱼"},
+    {id: "hamster", name: "仓鼠"},
   ];
 
   return (
@@ -20,9 +20,9 @@ export function CustomFiltering() {
         return text.toLowerCase().includes(inputValue.toLowerCase());
       }}
     >
-      <Label>Animal (custom filter)</Label>
+      <Label>动物（自定义筛选）</Label>
       <ComboBox.InputGroup>
-        <Input placeholder="Search animals..." />
+        <Input placeholder="搜索动物…" />
         <ComboBox.Trigger />
       </ComboBox.InputGroup>
       <ComboBox.Popover>

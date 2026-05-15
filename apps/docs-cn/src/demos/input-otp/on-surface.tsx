@@ -4,8 +4,8 @@ export function OnSurface() {
   return (
     <Surface className="flex w-full flex-col gap-2 rounded-3xl p-6">
       <div className="flex flex-col gap-1">
-        <Label>Verify account</Label>
-        <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
+        <Label>验证账户</Label>
+        <p className="text-sm text-muted">我们已向 a****@gmail.com 发送验证码</p>
       </div>
       <InputOTP maxLength={6} variant="secondary">
         <InputOTP.Group>
@@ -21,9 +21,9 @@ export function OnSurface() {
         </InputOTP.Group>
       </InputOTP>
       <div className="flex items-center gap-[5px] px-1 pt-1">
-        <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
+        <p className="text-sm text-muted">没有收到验证码？</p>
         <Link className="text-foreground underline" href="#">
-          Resend
+          重新发送
         </Link>
       </div>
     </Surface>

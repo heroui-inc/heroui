@@ -18,7 +18,7 @@ export function Controlled() {
   return (
     <div className="flex w-72 flex-col gap-4">
       <DateRangePicker endName="endDate" startName="startDate" value={value} onChange={setValue}>
-        <Label>Trip dates</Label>
+        <Label>出行日期</Label>
         <DateField.Group fullWidth>
           <DateField.Input slot="start">
             {(segment) => <DateField.Segment segment={segment} />}
@@ -34,7 +34,7 @@ export function Controlled() {
           </DateField.Suffix>
         </DateField.Group>
         <DateRangePicker.Popover>
-          <RangeCalendar aria-label="Trip dates">
+          <RangeCalendar aria-label="出行日期">
             <RangeCalendar.Header>
               <RangeCalendar.YearPickerTrigger>
                 <RangeCalendar.YearPickerTriggerHeading />
@@ -60,7 +60,7 @@ export function Controlled() {
         </DateRangePicker.Popover>
       </DateRangePicker>
       <Description>
-        Current value: {value ? `${value.start.toString()} -> ${value.end.toString()}` : "(empty)"}
+        当前值：{value ? `${value.start.toString()} 至 ${value.end.toString()}` : "（空）"}
       </Description>
       <div className="flex gap-2">
         <Button
@@ -71,10 +71,10 @@ export function Controlled() {
             setValue({end: nextStart.add({days: 6}), start: nextStart});
           }}
         >
-          Set week
+          设为一周
         </Button>
         <Button variant="tertiary" onPress={() => setValue(null)}>
-          Clear
+          清空
         </Button>
       </div>
     </div>

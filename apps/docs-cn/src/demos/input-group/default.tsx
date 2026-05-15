@@ -6,7 +6,7 @@ import {InputGroup, Label, TextField} from "@heroui/react";
 export function Default() {
   return (
     <TextField className="w-full max-w-[280px]" name="email">
-      <Label>Email address</Label>
+      <Label>邮箱地址</Label>
       <InputGroup>
         <InputGroup.Prefix>
           <Envelope className="size-4 text-muted" />

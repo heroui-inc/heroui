@@ -20,7 +20,7 @@ export function FormExample() {
 
     // Simulate API call
     setTimeout(() => {
-      console.log("Color submitted:", {color: value.toString("hex")});
+      console.log("已提交颜色：", {color: value.toString("hex")});
       setValue(null);
       setIsSubmitting(false);
     }, 1500);
@@ -36,14 +36,14 @@ export function FormExample() {
         value={value}
         onChange={setValue}
       >
-        <Label>Brand Color</Label>
+        <Label>品牌色</Label>
         <ColorField.Group>
           <ColorField.Prefix>
             <ColorSwatch color={value ?? undefined} size="xs" />
           </ColorField.Prefix>
           <ColorField.Input placeholder="#000000" />
         </ColorField.Group>
-        <Description>Choose your brand's primary color</Description>
+        <Description>选择品牌主色</Description>
       </ColorField>
       <Button
         className="w-full"
@@ -52,7 +52,7 @@ export function FormExample() {
         type="submit"
         variant="primary"
       >
-        {isSubmitting ? "Saving..." : "Save Color"}
+        {isSubmitting ? "保存中…" : "保存颜色"}
       </Button>
     </Form>
   );

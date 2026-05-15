@@ -1,5 +1,5 @@
 import {Input} from "@heroui/react";
 
 export function Basic() {
-  return <Input aria-label="Name" className="w-64" placeholder="Enter your name" />;
+  return <Input aria-label="姓名" className="w-64" placeholder="输入你的姓名" />;
 }

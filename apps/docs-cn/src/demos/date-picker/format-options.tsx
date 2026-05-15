@@ -19,14 +19,14 @@ import {useMemo, useState} from "react";
 type Granularity = "day" | "hour" | "minute" | "second";
 type HourCycle = 12 | 24;
 const granularityOptions: {label: string; value: Granularity}[] = [
-  {label: "Day", value: "day"},
-  {label: "Hour", value: "hour"},
-  {label: "Minute", value: "minute"},
-  {label: "Second", value: "second"},
+  {label: "日", value: "day"},
+  {label: "时", value: "hour"},
+  {label: "分", value: "minute"},
+  {label: "秒", value: "second"},
 ];
 const hourCycleOptions: {label: string; value: HourCycle}[] = [
-  {label: "12-hour", value: 12},
-  {label: "24-hour", value: 24},
+  {label: "12 小时制", value: 12},
+  {label: "24 小时制", value: 24},
 ];
 
 export function FormatOptions() {
@@ -60,7 +60,7 @@ export function FormatOptions() {
       >
         {({state}) => (
           <>
-            <Label>Date and time</Label>
+            <Label>日期和时间</Label>
             <DateField.Group fullWidth>
               <DateField.Input>
                 {(segment) => <DateField.Segment segment={segment} />}
@@ -72,7 +72,7 @@ export function FormatOptions() {
               </DateField.Suffix>
             </DateField.Group>
             <DatePicker.Popover className="flex flex-col gap-3">
-              <Calendar aria-label="Event date">
+              <Calendar aria-label="活动日期">
                 <Calendar.Header>
                   <Calendar.YearPickerTrigger>
                     <Calendar.YearPickerTriggerHeading />
@@ -95,9 +95,9 @@ export function FormatOptions() {
               </Calendar>
               {!!showTimeField && (
                 <div className="flex items-center justify-between">
-                  <Label>Time</Label>
+                  <Label>时间</Label>
                   <TimeField
-                    aria-label="Time"
+                    aria-label="时间"
                     granularity={timeGranularity}
                     hideTimeZone={hideTimeZone}
                     hourCycle={hourCycle}
@@ -127,7 +127,7 @@ export function FormatOptions() {
             variant="secondary"
             onChange={(value) => setGranularity(value as Granularity)}
           >
-            <Label>Granularity</Label>
+            <Label>粒度</Label>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -152,7 +152,7 @@ export function FormatOptions() {
             variant="secondary"
             onChange={(value) => setHourCycle(Number(value) as HourCycle)}
           >
-            <Label>Hour cycle</Label>
+            <Label>小时制</Label>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -176,13 +176,13 @@ export function FormatOptions() {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Hide timezone</Label>
+          <Label className="text-sm">隐藏时区</Label>
         </Switch>
         <Switch isSelected={shouldForceLeadingZeros} onChange={setShouldForceLeadingZeros}>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Force leading zeros</Label>
+          <Label className="text-sm">强制前导零</Label>
         </Switch>
       </div>
     </div>

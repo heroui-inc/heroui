@@ -12,7 +12,7 @@ export function FocusedValue() {
   return (
     <div className="flex flex-col items-center gap-4">
       <RangeCalendar
-        aria-label="Trip dates"
+        aria-label="行程日期"
         firstDayOfWeek="mon"
         focusedValue={focusedDate}
         onFocusChange={setFocusedDate}
@@ -31,28 +31,28 @@ export function FocusedValue() {
           </RangeCalendar.GridBody>
         </RangeCalendar.Grid>
       </RangeCalendar>
-      <Description className="text-center">Focused: {focusedDate.toString()}</Description>
+      <Description className="text-center">聚焦： {focusedDate.toString()}</Description>
       <div className="flex flex-wrap justify-center gap-2">
         <Button
           size="sm"
           variant="secondary"
           onPress={() => setFocusedDate(parseDate("2025-01-01"))}
         >
-          Go to Jan
+          跳转到一月
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() => setFocusedDate(parseDate("2025-06-15"))}
         >
-          Go to Jun
+          跳转到六月
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onPress={() => setFocusedDate(parseDate("2025-12-25"))}
         >
-          Go to Christmas
+          跳转到圣诞节
         </Button>
       </div>
     </div>

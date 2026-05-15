@@ -16,20 +16,18 @@ export function TagGroupWithErrorMessage() {
       selectionMode="multiple"
       onSelectionChange={(keys) => setSelected(keys)}
     >
-      <Label>Amenities</Label>
+      <Label>设施</Label>
       <TagGroup.List>
-        <Tag id="laundry">Laundry</Tag>
-        <Tag id="fitness">Fitness center</Tag>
-        <Tag id="parking">Parking</Tag>
-        <Tag id="pool">Swimming pool</Tag>
-        <Tag id="breakfast">Breakfast</Tag>
+        <Tag id="laundry">洗衣</Tag>
+        <Tag id="fitness">健身中心</Tag>
+        <Tag id="parking">停车</Tag>
+        <Tag id="pool">游泳池</Tag>
+        <Tag id="breakfast">早餐</Tag>
       </TagGroup.List>
       <Description>
-        {isInvalid
-          ? "Select at least one category"
-          : "Selected: " + Array.from(selected).join(", ")}
+        {isInvalid ? "请至少选择一个分类" : "已选：" + Array.from(selected).join(", ")}
       </Description>
-      <ErrorMessage>{!!isInvalid && <>Please select at least one category</>}</ErrorMessage>
+      <ErrorMessage>{!!isInvalid && <>请至少选择一个分类</>}</ErrorMessage>
     </TagGroup>
   );
 }

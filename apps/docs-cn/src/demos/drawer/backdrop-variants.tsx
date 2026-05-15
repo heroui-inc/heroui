@@ -1,5 +1,11 @@
 import {Button, Drawer} from "@heroui/react";
 
+const VARIANT_LABELS = {
+  blur: "模糊",
+  opaque: "不透明",
+  transparent: "透明",
+} as const;
+
 export function BackdropVariants() {
   const variants = ["opaque", "blur", "transparent"] as const;
 
@@ -7,25 +13,23 @@ export function BackdropVariants() {
     <div className="flex flex-wrap gap-4">
       {variants.map((variant) => (
         <Drawer key={variant}>
-          <Button variant="secondary">{variant.charAt(0).toUpperCase() + variant.slice(1)}</Button>
+          <Button variant="secondary">{VARIANT_LABELS[variant]}</Button>
           <Drawer.Backdrop variant={variant}>
             <Drawer.Content>
               <Drawer.Dialog>
                 <Drawer.Handle />
                 <Drawer.CloseTrigger />
                 <Drawer.Header>
-                  <Drawer.Heading>
-                    Backdrop: {variant.charAt(0).toUpperCase() + variant.slice(1)}
-                  </Drawer.Heading>
+                  <Drawer.Heading>背景：{VARIANT_LABELS[variant]}</Drawer.Heading>
                 </Drawer.Header>
                 <Drawer.Body>
                   <p>
-                    This drawer uses the <code>{variant}</code> backdrop variant.
+                    此抽屉使用 <code>{variant}</code> 背景变体。
                   </p>
                 </Drawer.Body>
                 <Drawer.Footer>
                   <Button className="w-full" slot="close">
-                    Close
+                    关闭
                   </Button>
                 </Drawer.Footer>
               </Drawer.Dialog>

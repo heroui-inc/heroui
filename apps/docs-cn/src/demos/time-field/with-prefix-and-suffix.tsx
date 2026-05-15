@@ -6,7 +6,7 @@ import {Description, Label, TimeField} from "@heroui/react";
 export function WithPrefixAndSuffix() {
   return (
     <TimeField className="w-[256px]" name="time">
-      <Label>Time</Label>
+      <Label>时间</Label>
       <TimeField.Group>
         <TimeField.Prefix>
           <Clock className="size-4 text-muted" />
@@ -16,7 +16,7 @@ export function WithPrefixAndSuffix() {
           <ChevronDown className="size-4 text-muted" />
         </TimeField.Suffix>
       </TimeField.Group>
-      <Description>Enter a time</Description>
+      <Description>输入时间</Description>
     </TimeField>
   );
 }

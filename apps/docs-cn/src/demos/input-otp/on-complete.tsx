@@ -28,7 +28,7 @@ export function OnComplete() {
 
   return (
     <Form className="flex w-[280px] flex-col gap-2" onSubmit={handleSubmit}>
-      <Label>Verify account</Label>
+      <Label>验证账户</Label>
       <InputOTP
         maxLength={6}
         value={value}
@@ -60,10 +60,10 @@ export function OnComplete() {
         {isSubmitting ? (
           <>
             <Spinner color="current" size="sm" />
-            Verifying...
+            验证中…
           </>
         ) : (
-          "Verify Code"
+          "验证验证码"
         )}
       </Button>
     </Form>

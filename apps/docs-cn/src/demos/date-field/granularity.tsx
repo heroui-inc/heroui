@@ -9,10 +9,10 @@ import {useState} from "react";
 
 export function Granularity() {
   const granularityOptions = [
-    {id: "day", label: "Day"},
-    {id: "hour", label: "Hour"},
-    {id: "minute", label: "Minute"},
-    {id: "second", label: "Second"},
+    {id: "day", label: "日"},
+    {id: "hour", label: "时"},
+    {id: "minute", label: "分"},
+    {id: "second", label: "秒"},
   ] as const;
 
   const [granularity, setGranularity] = useState<"day" | "hour" | "minute" | "second">("day");
@@ -35,29 +35,26 @@ export function Granularity() {
         granularity={granularity}
         name="granularity-date"
       >
-        <Label>Appointment Date</Label>
+        <Label>预约日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
       </DateField>
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
-          <Label>Granularity</Label>
+          <Label>粒度</Label>
           <Tooltip delay={0}>
-            <Tooltip.Trigger aria-label="Granularity information">
+            <Tooltip.Trigger aria-label="粒度说明">
               <CircleQuestion className="size-4 text-muted" />
             </Tooltip.Trigger>
             <Tooltip.Content placement="bottom start">
-              <p>
-                Determines the smallest unit displayed in the date picker. By default, this is "day"
-                for dates, and "minute" for times.
-              </p>
+              <p>决定日期选择器显示的最小单位。默认情况下，日期为「日」，时间为「分」。</p>
             </Tooltip.Content>
           </Tooltip>
         </div>
         <Select
           className="w-[110px]"
-          placeholder="Select granularity"
+          placeholder="选择粒度"
           value={granularity}
           variant="secondary"
           onChange={(value) => setGranularity(value as typeof granularity)}

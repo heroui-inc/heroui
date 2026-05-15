@@ -13,10 +13,10 @@ export function Controlled() {
           <Switch.Thumb />
         </Switch.Control>
         <Switch.Content>
-          <Label className="text-sm">Enable notifications</Label>
+          <Label className="text-sm">启用通知</Label>
         </Switch.Content>
       </Switch>
-      <p className="text-sm text-muted">Switch is {isSelected ? "on" : "off"}</p>
+      <p className="text-sm text-muted">开关{isSelected ? "已打开" : "已关闭"}</p>
     </div>
   );
 }

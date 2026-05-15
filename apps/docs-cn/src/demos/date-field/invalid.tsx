@@ -6,18 +6,18 @@ export function Invalid() {
   return (
     <div className="flex flex-col gap-4">
       <DateField isInvalid isRequired className="w-[256px]" name="date">
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
-        <FieldError>Please enter a valid date</FieldError>
+        <FieldError>请输入有效日期</FieldError>
       </DateField>
       <DateField isInvalid className="w-[256px]" name="invalid-date">
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
-        <FieldError>Date must be in the future</FieldError>
+        <FieldError>日期须为将来</FieldError>
       </DateField>
     </div>
   );

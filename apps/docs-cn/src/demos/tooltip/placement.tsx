@@ -10,7 +10,7 @@ export function TooltipPlacement() {
         </Button>
         <Tooltip.Content showArrow placement="top">
           <Tooltip.Arrow />
-          <p>Top placement</p>
+          <p>顶部位置</p>
         </Tooltip.Content>
       </Tooltip>
       <div />
@@ -21,12 +21,12 @@ export function TooltipPlacement() {
         </Button>
         <Tooltip.Content showArrow placement="left">
           <Tooltip.Arrow />
-          <p>Left placement</p>
+          <p>左侧位置</p>
         </Tooltip.Content>
       </Tooltip>
 
       <div className="flex items-center justify-center">
-        <span className="text-sm text-muted">Hover buttons</span>
+        <span className="text-sm text-muted">悬停按钮</span>
       </div>
 
       <Tooltip delay={0}>
@@ -35,7 +35,7 @@ export function TooltipPlacement() {
         </Button>
         <Tooltip.Content showArrow placement="right">
           <Tooltip.Arrow />
-          <p>Right placement</p>
+          <p>右侧位置</p>
         </Tooltip.Content>
       </Tooltip>
 
@@ -46,7 +46,7 @@ export function TooltipPlacement() {
         </Button>
         <Tooltip.Content showArrow placement="bottom">
           <Tooltip.Arrow />
-          <p>Bottom placement</p>
+          <p>底部位置</p>
         </Tooltip.Content>
       </Tooltip>
       <div />

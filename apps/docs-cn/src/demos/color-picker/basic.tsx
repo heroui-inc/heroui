@@ -5,11 +5,11 @@ export function Basic() {
     <ColorPicker defaultValue="#0485F7">
       <ColorPicker.Trigger>
         <ColorSwatch size="lg" />
-        <Label>Pick a color</Label>
+        <Label>选择颜色</Label>
       </ColorPicker.Trigger>
       <ColorPicker.Popover>
         <ColorArea
-          aria-label="Color area"
+          aria-label="取色区域"
           className="max-w-full"
           colorSpace="hsb"
           xChannel="saturation"
@@ -18,7 +18,7 @@ export function Basic() {
           <ColorArea.Thumb />
         </ColorArea>
         <ColorSlider channel="hue" className="gap-1 px-1" colorSpace="hsb">
-          <Label>Hue</Label>
+          <Label>色相</Label>
           <ColorSlider.Output className="text-muted" />
           <ColorSlider.Track>
             <ColorSlider.Thumb />

@@ -7,9 +7,9 @@ export function CustomRenderFunction() {
   return (
     <div className="flex items-center gap-4">
       <Tooltip delay={0}>
-        <Button variant="secondary">Hover me</Button>
+        <Button variant="secondary">悬停查看</Button>
         <Tooltip.Content render={(props) => <div {...props} data-custom="foo" />}>
-          <p>This is a tooltip</p>
+          <p>这是一个工具提示</p>
         </Tooltip.Content>
       </Tooltip>
 
@@ -18,7 +18,7 @@ export function CustomRenderFunction() {
           <CircleInfo />
         </Button>
         <Tooltip.Content render={(props) => <div {...props} data-custom="foo" />}>
-          <p>More information</p>
+          <p>更多信息</p>
         </Tooltip.Content>
       </Tooltip>
     </div>

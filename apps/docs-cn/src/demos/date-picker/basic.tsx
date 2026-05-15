@@ -5,7 +5,7 @@ import {Calendar, DateField, DatePicker, Label} from "@heroui/react";
 export function Basic() {
   return (
     <DatePicker className="w-64" name="date">
-      <Label>Date</Label>
+      <Label>日期</Label>
       <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         <DateField.Suffix>
@@ -15,7 +15,7 @@ export function Basic() {
         </DateField.Suffix>
       </DateField.Group>
       <DatePicker.Popover>
-        <Calendar aria-label="Event date">
+        <Calendar aria-label="活动日期">
           <Calendar.Header>
             <Calendar.YearPickerTrigger>
               <Calendar.YearPickerTriggerHeading />

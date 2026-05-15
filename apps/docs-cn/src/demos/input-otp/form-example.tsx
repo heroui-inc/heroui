@@ -13,7 +13,7 @@ export function FormExample() {
     setError("");
 
     if (value.length !== 6) {
-      setError("Please enter all 6 digits");
+      setError("请输入全部 6 位数字");
 
       return;
     }
@@ -26,7 +26,7 @@ export function FormExample() {
         console.log("Code verified successfully!");
         setValue("");
       } else {
-        setError("Invalid code. Please try again.");
+        setError("验证码无效，请重试。");
       }
       setIsSubmitting(false);
     }, 1500);
@@ -35,8 +35,8 @@ export function FormExample() {
   return (
     <Form className="flex w-[280px] flex-col gap-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
-        <Label>Two-factor authentication</Label>
-        <Description>Enter the 6-digit code from your authenticator app</Description>
+        <Label>双重身份验证</Label>
+        <Description>请输入身份验证器应用中的 6 位验证码</Description>
         <InputOTP
           isInvalid={!!error}
           maxLength={6}
@@ -72,16 +72,16 @@ export function FormExample() {
         {isSubmitting ? (
           <>
             <Spinner color="current" size="sm" />
-            Verifying...
+            验证中…
           </>
         ) : (
-          "Verify"
+          "验证"
         )}
       </Button>
       <div className="flex items-center justify-center gap-1">
-        <p className="text-sm text-muted">Having trouble?</p>
+        <p className="text-sm text-muted">遇到问题？</p>
         <Link className="text-sm text-foreground underline" href="#">
-          Use backup code
+          使用备用码
         </Link>
       </div>
     </Form>

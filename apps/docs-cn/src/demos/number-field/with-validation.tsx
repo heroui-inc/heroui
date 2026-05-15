@@ -20,16 +20,16 @@ export function WithValidation() {
         value={value}
         onChange={setValue}
       >
-        <Label>Percentage</Label>
+        <Label>百分比</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-[120px]" />
           <NumberField.IncrementButton />
         </NumberField.Group>
         {isInvalid ? (
-          <FieldError>Percentage must be between 0 and 100</FieldError>
+          <FieldError>百分比必须在 0 到 100 之间</FieldError>
         ) : (
-          <Description>Enter a value between 0 and 100</Description>
+          <Description>请输入 0 到 100 之间的值</Description>
         )}
       </NumberField>
     </div>

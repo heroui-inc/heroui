@@ -5,7 +5,7 @@ import {Description, RangeCalendar} from "@heroui/react";
 export function Disabled() {
   return (
     <div className="flex flex-col items-center gap-4">
-      <RangeCalendar isDisabled aria-label="Trip dates">
+      <RangeCalendar isDisabled aria-label="行程日期">
         <RangeCalendar.Header>
           <RangeCalendar.Heading />
           <RangeCalendar.NavButton slot="previous" />
@@ -20,7 +20,7 @@ export function Disabled() {
           </RangeCalendar.GridBody>
         </RangeCalendar.Grid>
       </RangeCalendar>
-      <Description className="text-center">Range calendar is disabled</Description>
+      <Description className="text-center">区间日历已禁用</Description>
     </div>
   );
 }

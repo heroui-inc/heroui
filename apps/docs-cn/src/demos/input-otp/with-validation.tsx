@@ -21,7 +21,7 @@ export function WithValidation() {
     setIsInvalid(false);
     setValue("");
 
-    alert("Code verified successfully!");
+    alert("验证码校验成功！");
   };
 
   const handleChange = (val: string) => {
@@ -32,8 +32,8 @@ export function WithValidation() {
   return (
     <div className="flex w-[280px] flex-col gap-2">
       <Form className="flex flex-col gap-2" onSubmit={onSubmit}>
-        <Label>Verify account</Label>
-        <Description>Hint: The code is 123456</Description>
+        <Label>验证账户</Label>
+        <Description>提示：验证码为 123456</Description>
         <InputOTP
           aria-describedby={isInvalid ? "code-error" : undefined}
           isInvalid={isInvalid}
@@ -55,10 +55,10 @@ export function WithValidation() {
           </InputOTP.Group>
         </InputOTP>
         <span className="field-error" data-visible={isInvalid} id="code-error">
-          Invalid code. Please try again.
+          验证码无效，请重试。
         </span>
         <Button isDisabled={value.length !== 6} type="submit">
-          Submit
+          提交
         </Button>
       </Form>
     </div>

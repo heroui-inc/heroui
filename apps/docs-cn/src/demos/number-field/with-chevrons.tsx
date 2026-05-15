@@ -13,7 +13,7 @@ export function WithChevrons() {
         style: "currency",
       }}
     >
-      <Label>Number field with chevrons</Label>
+      <Label>带 Chevron 的数字输入框</Label>
       <NumberField.Group>
         <NumberField.Input />
         <div className="flex h-[calc(100%+2px)] flex-col border-l border-field-placeholder/15">

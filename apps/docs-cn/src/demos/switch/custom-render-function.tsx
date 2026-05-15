@@ -8,7 +8,7 @@ export function CustomRenderFunction() {
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
-      <Label className="text-sm">Enable notifications</Label>
+      <Label className="text-sm">启用通知</Label>
     </Switch>
   );
 }

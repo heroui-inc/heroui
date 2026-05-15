@@ -5,7 +5,7 @@ export function Variants() {
   return (
     <div className="flex flex-col gap-4">
       <TextField className="w-[280px]" name="primary">
-        <Label>Primary variant</Label>
+        <Label>主要变体</Label>
         <InputGroup variant="primary">
           <InputGroup.Prefix>
             <Envelope className="size-4 text-muted" />
@@ -14,7 +14,7 @@ export function Variants() {
         </InputGroup>
       </TextField>
       <TextField className="w-[280px]" name="secondary">
-        <Label>Secondary variant</Label>
+        <Label>次要变体</Label>
         <InputGroup variant="secondary">
           <InputGroup.Prefix>
             <Envelope className="size-4 text-muted" />

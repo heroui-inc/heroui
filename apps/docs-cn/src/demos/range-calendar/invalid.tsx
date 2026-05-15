@@ -22,7 +22,7 @@ export function Invalid() {
   return (
     <div className="flex flex-col items-center gap-4">
       <RangeCalendar
-        aria-label="Trip dates"
+        aria-label="行程日期"
         firstDayOfWeek="mon"
         isInvalid={isInvalid}
         value={value}
@@ -43,9 +43,9 @@ export function Invalid() {
         </RangeCalendar.Grid>
       </RangeCalendar>
       {isInvalid ? (
-        <p className="text-sm text-danger">Maximum stay duration is 1 week</p>
+        <p className="text-sm text-danger">最长入住时间为 1 周</p>
       ) : (
-        <Description className="text-center">Select a stay of up to 7 days</Description>
+        <Description className="text-center">请选择最多 7 天的入住区间</Description>
       )}
     </div>
   );

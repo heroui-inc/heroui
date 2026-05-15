@@ -37,16 +37,16 @@ export function FormExample() {
         value={value}
         onChange={setValue}
       >
-        <Label>Order quantity</Label>
+        <Label>订购数量</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-[120px]" />
           <NumberField.IncrementButton />
         </NumberField.Group>
         {isOutOfStock ? (
-          <FieldError>Only {STOCK_AVAILABLE} items left in stock</FieldError>
+          <FieldError>仅剩 {STOCK_AVAILABLE} 件库存</FieldError>
         ) : (
-          <Description>Only {STOCK_AVAILABLE} items available</Description>
+          <Description>仅剩 {STOCK_AVAILABLE} 件可购</Description>
         )}
       </NumberField>
       <Button
@@ -59,10 +59,10 @@ export function FormExample() {
         {isSubmitting ? (
           <>
             <Spinner color="current" size="sm" />
-            Processing...
+            处理中…
           </>
         ) : (
-          "Place Order"
+          "下单"
         )}
       </Button>
     </Form>

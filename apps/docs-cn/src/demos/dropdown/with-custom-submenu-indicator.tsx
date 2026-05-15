@@ -6,20 +6,20 @@ import {Button, Dropdown, Label} from "@heroui/react";
 export function WithCustomSubmenuIndicator() {
   return (
     <Dropdown>
-      <Button aria-label="Menu" variant="secondary">
-        Share
+      <Button aria-label="菜单" variant="secondary">
+        分享
       </Button>
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-          <Dropdown.Item id="copy-link" textValue="Copy Link">
-            <Label>Copy Link</Label>
+          <Dropdown.Item id="copy-link" textValue="复制链接">
+            <Label>复制链接</Label>
           </Dropdown.Item>
           <Dropdown.Item id="facebook" textValue="Facebook">
             <Label>Facebook</Label>
           </Dropdown.Item>
           <Dropdown.SubmenuTrigger>
-            <Dropdown.Item id="share" textValue="Share">
-              <Label>More options</Label>
+            <Dropdown.Item id="share" textValue="分享">
+              <Label>更多选项</Label>
               <Dropdown.SubmenuIndicator>
                 <ArrowRight className="size-3.5 text-muted" />
               </Dropdown.SubmenuIndicator>
@@ -33,7 +33,7 @@ export function WithCustomSubmenuIndicator() {
                   <Label>Telegram</Label>
                 </Dropdown.Item>
                 <Dropdown.SubmenuTrigger>
-                  <Dropdown.Item id="email" textValue="Email">
+                  <Dropdown.Item id="email" textValue="邮件">
                     <Label>Email</Label>
                     <Dropdown.SubmenuIndicator>
                       <svg
@@ -51,11 +51,11 @@ export function WithCustomSubmenuIndicator() {
                   </Dropdown.Item>
                   <Dropdown.Popover>
                     <Dropdown.Menu>
-                      <Dropdown.Item id="work" textValue="Work email">
-                        <Label>Work email</Label>
+                      <Dropdown.Item id="work" textValue="工作邮箱">
+                        <Label>工作邮箱</Label>
                       </Dropdown.Item>
-                      <Dropdown.Item id="personal" textValue="Personal email">
-                        <Label>Personal email</Label>
+                      <Dropdown.Item id="personal" textValue="个人邮箱">
+                        <Label>个人邮箱</Label>
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown.Popover>
@@ -67,8 +67,8 @@ export function WithCustomSubmenuIndicator() {
             </Dropdown.Popover>
           </Dropdown.SubmenuTrigger>
           <Dropdown.SubmenuTrigger>
-            <Dropdown.Item id="other" textValue="Other">
-              <Label>Other (default indicator)</Label>
+            <Dropdown.Item id="other" textValue="其他">
+              <Label>其他（默认指示器）</Label>
               <Dropdown.SubmenuIndicator />
             </Dropdown.Item>
             <Dropdown.Popover>

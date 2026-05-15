@@ -9,13 +9,13 @@ function SizePagination({size}: {size: "sm" | "md" | "lg"}) {
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-xs font-medium text-muted capitalize">{size}</span>
+      <span className="text-xs font-medium text-muted">{SIZE_LABELS[size]}</span>
       <Pagination className="justify-center" size={size}>
         <Pagination.Content>
           <Pagination.Item>
             <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
               <Pagination.PreviousIcon />
-              <span>Previous</span>
+              <span>上一页</span>
             </Pagination.Previous>
           </Pagination.Item>
           {Array.from({length: totalPages}, (_, i) => i + 1).map((p) => (
@@ -27,7 +27,7 @@ function SizePagination({size}: {size: "sm" | "md" | "lg"}) {
           ))}
           <Pagination.Item>
             <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
-              <span>Next</span>
+              <span>下一页</span>
               <Pagination.NextIcon />
             </Pagination.Next>
           </Pagination.Item>

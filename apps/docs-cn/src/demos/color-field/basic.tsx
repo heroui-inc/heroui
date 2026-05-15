@@ -10,7 +10,7 @@ export function Basic() {
 
   return (
     <ColorField className="w-[280px]" name="color" value={color} onChange={setColor}>
-      <Label>Color</Label>
+      <Label>颜色</Label>
       <ColorField.Group>
         <ColorField.Prefix>
           <ColorSwatch color={color ?? undefined} size="xs" />

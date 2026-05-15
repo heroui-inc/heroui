@@ -12,7 +12,7 @@ export function Controlled() {
   return (
     <div className="flex w-64 flex-col gap-4">
       <DatePicker name="date" value={value} onChange={setValue}>
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group fullWidth>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
           <DateField.Suffix>
@@ -22,7 +22,7 @@ export function Controlled() {
           </DateField.Suffix>
         </DateField.Group>
         <DatePicker.Popover>
-          <Calendar aria-label="Event date">
+          <Calendar aria-label="活动日期">
             <Calendar.Header>
               <Calendar.YearPickerTrigger>
                 <Calendar.YearPickerTriggerHeading />
@@ -45,13 +45,13 @@ export function Controlled() {
           </Calendar>
         </DatePicker.Popover>
       </DatePicker>
-      <Description>Current value: {value ? value.toString() : "(empty)"}</Description>
+      <Description>当前值：{value ? value.toString() : "（空）"}</Description>
       <div className="flex gap-2">
         <Button variant="tertiary" onPress={() => setValue(today(getLocalTimeZone()))}>
-          Set today
+          设为今天
         </Button>
         <Button variant="tertiary" onPress={() => setValue(null)}>
-          Clear
+          清空
         </Button>
       </div>
     </div>

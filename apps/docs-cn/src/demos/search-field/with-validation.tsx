@@ -10,16 +10,16 @@ export function WithValidation() {
   return (
     <div className="flex flex-col gap-4">
       <SearchField isRequired isInvalid={isInvalid} name="search" value={value} onChange={setValue}>
-        <Label>Search</Label>
+        <Label>搜索</Label>
         <SearchField.Group>
           <SearchField.SearchIcon />
-          <SearchField.Input className="w-[280px]" placeholder="Search..." />
+          <SearchField.Input className="w-[280px]" placeholder="搜索…" />
           <SearchField.ClearButton />
         </SearchField.Group>
         {isInvalid ? (
-          <FieldError>Search query must be at least 3 characters</FieldError>
+          <FieldError>搜索内容至少需要 3 个字符</FieldError>
         ) : (
-          <Description>Enter at least 3 characters to search</Description>
+          <Description>请输入至少 3 个字符后再搜索</Description>
         )}
       </SearchField>
     </div>

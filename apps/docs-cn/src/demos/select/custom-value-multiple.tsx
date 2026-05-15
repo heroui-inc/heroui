@@ -54,10 +54,10 @@ export function CustomValueMultiple() {
     <Select
       className="w-[256px]"
       defaultValue={["1", "2"]}
-      placeholder="Select your teammates"
+      placeholder="请选择队友"
       selectionMode="multiple"
     >
-      <Label>Users</Label>
+      <Label>用户</Label>
       <Select.Trigger>
         <Select.Value className="no-truncate flex flex-wrap gap-2">
           {({defaultChildren, isPlaceholder, state}) => {

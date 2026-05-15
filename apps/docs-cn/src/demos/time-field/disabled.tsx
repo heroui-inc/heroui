@@ -10,18 +10,18 @@ export function Disabled() {
   return (
     <div className="flex flex-col gap-4">
       <TimeField isDisabled className="w-[256px]" name="time" value={timeValue}>
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
-        <Description>This time field is disabled</Description>
+        <Description>此时间字段已禁用</Description>
       </TimeField>
       <TimeField isDisabled className="w-[256px]" name="time-empty">
-        <Label>Time</Label>
+        <Label>时间</Label>
         <TimeField.Group>
           <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
         </TimeField.Group>
-        <Description>This time field is disabled</Description>
+        <Description>此时间字段已禁用</Description>
       </TimeField>
     </div>
   );

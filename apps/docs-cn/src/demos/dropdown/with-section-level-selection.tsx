@@ -11,29 +11,29 @@ export function WithSectionLevelSelection() {
 
   return (
     <Dropdown>
-      <Button aria-label="Menu" variant="secondary">
-        Styles
+      <Button aria-label="菜单" variant="secondary">
+        样式
       </Button>
       <Dropdown.Popover className="min-w-[256px]">
         <Dropdown.Menu>
           <Dropdown.Section>
-            <Header>Actions</Header>
-            <Dropdown.Item id="cut" textValue="Cut">
-              <Label>Cut</Label>
+            <Header>操作</Header>
+            <Dropdown.Item id="cut" textValue="剪切">
+              <Label>剪切</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>X</Kbd.Content>
               </Kbd>
             </Dropdown.Item>
-            <Dropdown.Item id="copy" textValue="Copy">
-              <Label>Copy</Label>
+            <Dropdown.Item id="copy" textValue="复制">
+              <Label>复制</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>C</Kbd.Content>
               </Kbd>
             </Dropdown.Item>
-            <Dropdown.Item id="paste" textValue="Paste">
-              <Label>Paste</Label>
+            <Dropdown.Item id="paste" textValue="粘贴">
+              <Label>粘贴</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>U</Kbd.Content>
@@ -46,26 +46,26 @@ export function WithSectionLevelSelection() {
             selectionMode="multiple"
             onSelectionChange={setTextStyles}
           >
-            <Header>Text Style</Header>
-            <Dropdown.Item id="bold" textValue="Bold">
+            <Header>文本样式</Header>
+            <Dropdown.Item id="bold" textValue="粗体">
               <Dropdown.ItemIndicator />
-              <Label>Bold</Label>
+              <Label>粗体</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>B</Kbd.Content>
               </Kbd>
             </Dropdown.Item>
-            <Dropdown.Item id="italic" textValue="Italic">
+            <Dropdown.Item id="italic" textValue="斜体">
               <Dropdown.ItemIndicator />
-              <Label>Italic</Label>
+              <Label>斜体</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>I</Kbd.Content>
               </Kbd>
             </Dropdown.Item>
-            <Dropdown.Item id="underline" textValue="Underline">
+            <Dropdown.Item id="underline" textValue="下划线">
               <Dropdown.ItemIndicator />
-              <Label>Underline</Label>
+              <Label>下划线</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>U</Kbd.Content>
@@ -78,26 +78,26 @@ export function WithSectionLevelSelection() {
             selectionMode="single"
             onSelectionChange={setTextAlignment}
           >
-            <Header>Text Alignment</Header>
-            <Dropdown.Item id="left" textValue="Left">
+            <Header>文本对齐</Header>
+            <Dropdown.Item id="left" textValue="左对齐">
               <Dropdown.ItemIndicator type="dot" />
-              <Label>Left</Label>
+              <Label>左对齐</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="alt" />
                 <Kbd.Content>A</Kbd.Content>
               </Kbd>
             </Dropdown.Item>
-            <Dropdown.Item id="center" textValue="Center">
+            <Dropdown.Item id="center" textValue="居中">
               <Dropdown.ItemIndicator type="dot" />
-              <Label>Center</Label>
+              <Label>居中</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="alt" />
                 <Kbd.Content>H</Kbd.Content>
               </Kbd>
             </Dropdown.Item>
-            <Dropdown.Item id="right" textValue="Right">
+            <Dropdown.Item id="right" textValue="右对齐">
               <Dropdown.ItemIndicator type="dot" />
-              <Label>Right</Label>
+              <Label>右对齐</Label>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="alt" />
                 <Kbd.Content>D</Kbd.Content>

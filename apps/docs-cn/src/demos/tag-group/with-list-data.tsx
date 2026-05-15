@@ -67,10 +67,10 @@ export function TagGroupWithListData() {
         onRemove={onRemove}
         onSelectionChange={(keys) => list.setSelectedKeys(keys)}
       >
-        <Label>Team Members</Label>
+        <Label>团队成员</Label>
         <TagGroup.List
           items={list.items}
-          renderEmptyState={() => <EmptyState className="p-1">No team members</EmptyState>}
+          renderEmptyState={() => <EmptyState className="p-1">暂无团队成员</EmptyState>}
         >
           {(user) => (
             <Tag key={user.id} id={user.id} textValue={user.name}>
@@ -82,11 +82,11 @@ export function TagGroupWithListData() {
             </Tag>
           )}
         </TagGroup.List>
-        <Description>Select team members for your project</Description>
+        <Description>为项目选择团队成员</Description>
       </TagGroup>
       {list.selectedKeys !== "all" && Array.from(list.selectedKeys).length > 0 && (
         <div className="mt-4 flex flex-col gap-2">
-          <p className="text-sm font-medium text-muted">Selected:</p>
+          <p className="text-sm font-medium text-muted">已选：</p>
           <div className="flex flex-wrap gap-2">
             {Array.from(list.selectedKeys).map((key) => {
               const user = list.getItem(key);

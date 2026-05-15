@@ -39,7 +39,7 @@ export function PaginationWithEllipsis() {
           <Pagination.Item>
             <Pagination.Previous isDisabled={page === 1} onPress={() => setPage((p) => p - 1)}>
               <Pagination.PreviousIcon />
-              <span>Previous</span>
+              <span>上一页</span>
             </Pagination.Previous>
           </Pagination.Item>
           {getPageNumbers().map((p, i) =>
@@ -57,7 +57,7 @@ export function PaginationWithEllipsis() {
           )}
           <Pagination.Item>
             <Pagination.Next isDisabled={page === totalPages} onPress={() => setPage((p) => p + 1)}>
-              <span>Next</span>
+              <span>下一页</span>
               <Pagination.NextIcon />
             </Pagination.Next>
           </Pagination.Item>

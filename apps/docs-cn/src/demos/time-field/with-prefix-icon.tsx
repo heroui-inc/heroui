@@ -6,7 +6,7 @@ import {Label, TimeField} from "@heroui/react";
 export function WithPrefixIcon() {
   return (
     <TimeField className="w-[256px]" name="time">
-      <Label>Time</Label>
+      <Label>时间</Label>
       <TimeField.Group>
         <TimeField.Prefix>
           <Clock className="size-4 text-muted" />

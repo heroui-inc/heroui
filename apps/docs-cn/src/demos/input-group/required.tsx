@@ -7,7 +7,7 @@ export function Required() {
   return (
     <div className="flex flex-col gap-4">
       <TextField isRequired className="w-full max-w-[280px]" name="email">
-        <Label>Email address</Label>
+        <Label>邮箱地址</Label>
         <InputGroup>
           <InputGroup.Prefix>
             <Envelope className="size-4 text-muted" />
@@ -16,13 +16,13 @@ export function Required() {
         </InputGroup>
       </TextField>
       <TextField isRequired className="w-full max-w-[280px]" name="price">
-        <Label>Set a price</Label>
+        <Label>设置价格</Label>
         <InputGroup>
           <InputGroup.Prefix>$</InputGroup.Prefix>
           <InputGroup.Input className="w-full max-w-[200px]" placeholder="0" type="number" />
           <InputGroup.Suffix>USD</InputGroup.Suffix>
         </InputGroup>
-        <Description>What customers would pay</Description>
+        <Description>客户将支付的价格</Description>
       </TextField>
     </div>
   );

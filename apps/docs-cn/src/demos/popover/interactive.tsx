@@ -9,7 +9,7 @@ export function PopoverInteractive() {
   return (
     <div className="flex items-center gap-6">
       <Popover>
-        <Popover.Trigger aria-label="User profile">
+        <Popover.Trigger aria-label="用户资料">
           <div className="flex items-center gap-2">
             <Avatar size="sm">
               <Avatar.Image
@@ -47,21 +47,19 @@ export function PopoverInteractive() {
                   variant={isFollowing ? "tertiary" : "primary"}
                   onPress={() => setIsFollowing(!isFollowing)}
                 >
-                  {isFollowing ? "Following" : "Follow"}
+                  {isFollowing ? "已关注" : "关注"}
                 </Button>
               </div>
             </Popover.Heading>
-            <p className="mt-3 text-sm text-muted">
-              Product designer and creative director. Building beautiful experiences that matter.
-            </p>
+            <p className="mt-3 text-sm text-muted">产品设计师兼创意总监，打造有意义的美好体验。</p>
             <div className="mt-3 flex gap-4">
               <div>
                 <span className="font-semibold">892</span>
-                <span className="ml-1 text-sm text-muted">Following</span>
+                <span className="ml-1 text-sm text-muted">关注中</span>
               </div>
               <div>
                 <span className="font-semibold">12.5K</span>
-                <span className="ml-1 text-sm text-muted">Followers</span>
+                <span className="ml-1 text-sm text-muted">粉丝</span>
               </div>
             </div>
           </Popover.Dialog>

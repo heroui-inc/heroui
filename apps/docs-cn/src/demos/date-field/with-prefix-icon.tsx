@@ -6,7 +6,7 @@ import {DateField, Label} from "@heroui/react";
 export function WithPrefixIcon() {
   return (
     <DateField className="w-[256px]" name="date">
-      <Label>Date</Label>
+      <Label>日期</Label>
       <DateField.Group>
         <DateField.Prefix>
           <Calendar className="size-4 text-muted" />

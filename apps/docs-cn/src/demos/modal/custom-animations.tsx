@@ -33,9 +33,9 @@ export function CustomAnimations() {
         ].join(" "),
       },
       description:
-        "Physics-based elastic scaling. Simulates a high-damping spring system with fast transient response and prolonged settling time. Ideal for Modals and Popovers.",
+        "基于物理的弹性缩放，模拟高阻尼弹簧系统：快速瞬态响应与较长 settling 时间。适用于模态框与弹出层。",
       icon: "gravity-ui:sparkles",
-      name: "Kinematic Scale",
+      name: "运动缩放",
     },
     {
       classNames: {
@@ -59,9 +59,9 @@ export function CustomAnimations() {
         ].join(" "),
       },
       description:
-        "Simulates movement through a medium with fluid resistance. Eliminates mechanical linearity for a natural, grounded feel. Perfect for Bottom Sheets or Toasts.",
+        "模拟流体阻力中的运动，摆脱机械式线性动画，呈现更自然、沉稳的质感。适用于底部抽屉或 Toast。",
       icon: "gravity-ui:arrow-up-from-line",
-      name: "Fluid Slide",
+      name: "流体滑入",
     },
   ];
 
@@ -81,16 +81,16 @@ export function CustomAnimations() {
                     <Modal.Icon className="bg-default text-foreground">
                       {!!IconComponent && <IconComponent className="size-5" />}
                     </Modal.Icon>
-                    <Modal.Heading>{name} Animation</Modal.Heading>
+                    <Modal.Heading>{name} 动画</Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
                     <p className="mt-1">{description}</p>
                   </Modal.Body>
                   <Modal.Footer>
                     <Button slot="close" variant="tertiary">
-                      Close
+                      关闭
                     </Button>
-                    <Button slot="close">Try Again</Button>
+                    <Button slot="close">再试一次</Button>
                   </Modal.Footer>
                 </Modal.Dialog>
               </Modal.Container>

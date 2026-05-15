@@ -16,7 +16,7 @@ export function CustomRenderFunction() {
       value={color}
       onChange={setColor}
     >
-      <Label>Color</Label>
+      <Label>颜色</Label>
       <ColorField.Group render={(props) => <div {...props} data-custom="foo" />}>
         <ColorField.Prefix>
           <ColorSwatch color={color ?? undefined} size="xs" />

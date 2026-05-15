@@ -5,26 +5,26 @@ import {Button, Drawer} from "@heroui/react";
 
 export function Navigation() {
   const navItems: {icon: ComponentType<SVGProps<SVGSVGElement>>; label: string}[] = [
-    {icon: House, label: "Home"},
-    {icon: Magnifier, label: "Search"},
-    {icon: Bell, label: "Notifications"},
-    {icon: Envelope, label: "Messages"},
-    {icon: Person, label: "Profile"},
-    {icon: Gear, label: "Settings"},
+    {icon: House, label: "首页"},
+    {icon: Magnifier, label: "搜索"},
+    {icon: Bell, label: "通知"},
+    {icon: Envelope, label: "消息"},
+    {icon: Person, label: "个人资料"},
+    {icon: Gear, label: "设置"},
   ];
 
   return (
     <Drawer>
       <Button variant="secondary">
         <Bars />
-        Menu
+        菜单
       </Button>
       <Drawer.Backdrop>
         <Drawer.Content placement="left">
           <Drawer.Dialog>
             <Drawer.CloseTrigger />
             <Drawer.Header>
-              <Drawer.Heading>Navigation</Drawer.Heading>
+              <Drawer.Heading>导航</Drawer.Heading>
             </Drawer.Header>
             <Drawer.Body>
               <nav className="flex flex-col gap-1">

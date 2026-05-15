@@ -4,38 +4,38 @@ export function InlineUsage() {
   return (
     <div className="space-y-4">
       <p className="text-sm">
-        Press{" "}
+        按{" "}
         <Kbd>
           <Kbd.Content>Esc</Kbd.Content>
         </Kbd>{" "}
-        to close the dialog.
+        关闭对话框。
       </p>
       <p className="text-sm">
-        Use{" "}
+        使用{" "}
         <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>K</Kbd.Content>
         </Kbd>{" "}
-        to open the command palette.
+        打开命令面板。
       </p>
       <p className="text-sm">
-        Navigate with{" "}
+        使用{" "}
         <Kbd>
           <Kbd.Abbr keyValue="up" />
         </Kbd>{" "}
-        and{" "}
+        和{" "}
         <Kbd>
           <Kbd.Abbr keyValue="down" />
         </Kbd>{" "}
-        arrow keys.
+        方向键进行导航。
       </p>
       <p className="text-sm">
-        Save your work with{" "}
+        使用{" "}
         <Kbd>
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>S</Kbd.Content>
         </Kbd>{" "}
-        regularly.
+        定期保存你的工作。
       </p>
     </div>
   );

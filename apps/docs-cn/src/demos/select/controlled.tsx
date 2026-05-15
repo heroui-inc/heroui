@@ -9,27 +9,27 @@ export function Controlled() {
   const states = [
     {
       id: "california",
-      name: "California",
+      name: "加利福尼亚",
     },
     {
       id: "texas",
-      name: "Texas",
+      name: "德克萨斯",
     },
     {
       id: "florida",
-      name: "Florida",
+      name: "佛罗里达",
     },
     {
       id: "new-york",
-      name: "New York",
+      name: "纽约",
     },
     {
       id: "illinois",
-      name: "Illinois",
+      name: "伊利诺伊",
     },
     {
       id: "pennsylvania",
-      name: "Pennsylvania",
+      name: "宾夕法尼亚",
     },
   ];
 
@@ -41,11 +41,11 @@ export function Controlled() {
     <div className="space-y-2">
       <Select
         className="w-[256px]"
-        placeholder="Select a state"
+        placeholder="请选择州"
         value={state}
         onChange={(value) => setState(value)}
       >
-        <Label>State (controlled)</Label>
+        <Label>州（受控）</Label>
         <Select.Trigger>
           <Select.Value />
           <Select.Indicator />
@@ -61,7 +61,7 @@ export function Controlled() {
           </ListBox>
         </Select.Popover>
       </Select>
-      <p className="text-sm text-muted">Selected: {selectedState?.name || "None"}</p>
+      <p className="text-sm text-muted">已选：{selectedState?.name || "无"}</p>
     </div>
   );
 }

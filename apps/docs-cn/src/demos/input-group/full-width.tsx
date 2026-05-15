@@ -5,7 +5,7 @@ export function FullWidth() {
   return (
     <div className="w-[400px] space-y-4">
       <TextField fullWidth name="email">
-        <Label>Email address</Label>
+        <Label>邮箱地址</Label>
         <InputGroup fullWidth>
           <InputGroup.Prefix>
             <Envelope className="size-4 text-muted" />
@@ -14,9 +14,9 @@ export function FullWidth() {
         </InputGroup>
       </TextField>
       <TextField fullWidth name="password">
-        <Label>Password</Label>
+        <Label>密码</Label>
         <InputGroup fullWidth>
-          <InputGroup.Input placeholder="Enter password" type="password" />
+          <InputGroup.Input placeholder="输入密码" type="password" />
           <InputGroup.Suffix>
             <Eye className="size-4 text-muted" />
           </InputGroup.Suffix>

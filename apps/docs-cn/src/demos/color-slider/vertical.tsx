@@ -4,7 +4,7 @@ export function Vertical() {
   return (
     <div className="flex h-48 gap-4">
       <ColorSlider
-        aria-label="Hue"
+        aria-label="色相"
         channel="hue"
         defaultValue="hsl(0, 100%, 50%)"
         orientation="vertical"
@@ -14,7 +14,7 @@ export function Vertical() {
         </ColorSlider.Track>
       </ColorSlider>
       <ColorSlider
-        aria-label="Saturation"
+        aria-label="饱和度"
         channel="saturation"
         defaultValue="hsl(0, 100%, 50%)"
         orientation="vertical"
@@ -24,7 +24,7 @@ export function Vertical() {
         </ColorSlider.Track>
       </ColorSlider>
       <ColorSlider
-        aria-label="Lightness"
+        aria-label="明度"
         channel="lightness"
         defaultValue="hsl(0, 100%, 50%)"
         orientation="vertical"

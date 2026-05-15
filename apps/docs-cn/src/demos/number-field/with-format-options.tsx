@@ -13,13 +13,13 @@ export function WithFormatOptions() {
           style: "currency",
         }}
       >
-        <Label>Currency (EUR - Accounting)</Label>
+        <Label>货币（EUR - 会计格式）</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-[120px]" />
           <NumberField.IncrementButton />
         </NumberField.Group>
-        <Description>Accounting format with EUR currency</Description>
+        <Description>欧元会计记账格式</Description>
       </NumberField>
       <NumberField
         defaultValue={99.99}
@@ -30,13 +30,13 @@ export function WithFormatOptions() {
           style: "currency",
         }}
       >
-        <Label>Currency (USD)</Label>
+        <Label>货币（USD）</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-[120px]" />
           <NumberField.IncrementButton />
         </NumberField.Group>
-        <Description>Standard USD currency format</Description>
+        <Description>标准美元货币格式</Description>
       </NumberField>
       <NumberField
         defaultValue={0.5}
@@ -46,13 +46,13 @@ export function WithFormatOptions() {
         name="percentage"
         step={0.01}
       >
-        <Label>Percentage</Label>
+        <Label>百分比</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-[120px]" />
           <NumberField.IncrementButton />
         </NumberField.Group>
-        <Description>Percentage format (0-1, where 0.5 = 50%)</Description>
+        <Description>百分比格式（0–1，0.5 表示 50%）</Description>
       </NumberField>
       <NumberField
         defaultValue={1234.56}
@@ -64,13 +64,13 @@ export function WithFormatOptions() {
           style: "decimal",
         }}
       >
-        <Label>Decimal (2 decimal places)</Label>
+        <Label>小数（保留 2 位）</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-[120px]" />
           <NumberField.IncrementButton />
         </NumberField.Group>
-        <Description>Decimal format with 2 decimal places</Description>
+        <Description>保留 2 位小数格式</Description>
       </NumberField>
       <NumberField
         defaultValue={1000}
@@ -82,13 +82,13 @@ export function WithFormatOptions() {
           unitDisplay: "short",
         }}
       >
-        <Label>Unit (Kilograms)</Label>
+        <Label>单位（千克）</Label>
         <NumberField.Group>
           <NumberField.DecrementButton />
           <NumberField.Input className="w-[120px]" />
           <NumberField.IncrementButton />
         </NumberField.Group>
-        <Description>Unit format with kilograms</Description>
+        <Description>千克单位格式</Description>
       </NumberField>
     </div>
   );

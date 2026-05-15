@@ -3,24 +3,21 @@ import {Button, Drawer} from "@heroui/react";
 export function NonDismissable() {
   return (
     <Drawer>
-      <Button variant="secondary">Important Action</Button>
+      <Button variant="secondary">重要操作</Button>
       <Drawer.Backdrop isDismissable={false}>
         <Drawer.Content>
           <Drawer.Dialog>
             <Drawer.Header>
-              <Drawer.Heading>Confirm Action</Drawer.Heading>
+              <Drawer.Heading>确认操作</Drawer.Heading>
             </Drawer.Header>
             <Drawer.Body>
-              <p>
-                This drawer cannot be dismissed by clicking outside or dragging. You must use one of
-                the buttons below.
-              </p>
+              <p>此抽屉无法通过点击外部或拖拽关闭。你必须使用下方按钮之一来完成操作。</p>
             </Drawer.Body>
             <Drawer.Footer>
               <Button slot="close" variant="secondary">
-                Cancel
+                取消
               </Button>
-              <Button slot="close">Confirm</Button>
+              <Button slot="close">确认</Button>
             </Drawer.Footer>
           </Drawer.Dialog>
         </Drawer.Content>

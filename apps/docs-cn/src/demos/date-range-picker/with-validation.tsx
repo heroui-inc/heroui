@@ -28,7 +28,7 @@ export function WithValidation() {
       value={value}
       onChange={setValue}
     >
-      <Label>Booking period</Label>
+      <Label>预订时段</Label>
       <DateField.Group fullWidth>
         <DateField.Input slot="start">
           {(segment) => <DateField.Segment segment={segment} />}
@@ -43,9 +43,9 @@ export function WithValidation() {
           </DateRangePicker.Trigger>
         </DateField.Suffix>
       </DateField.Group>
-      <FieldError>Select a valid range starting today or later.</FieldError>
+      <FieldError>请选择从今天起的有效日期范围。</FieldError>
       <DateRangePicker.Popover>
-        <RangeCalendar aria-label="Booking period">
+        <RangeCalendar aria-label="预订时段">
           <RangeCalendar.Header>
             <RangeCalendar.YearPickerTrigger>
               <RangeCalendar.YearPickerTriggerHeading />

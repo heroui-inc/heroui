@@ -10,10 +10,10 @@ export function TagGroupWithRemoveButton() {
   type TagItem = {id: string; name: string};
 
   const [tags, setTags] = useState<TagItem[]>([
-    {id: "news", name: "News"},
-    {id: "travel", name: "Travel"},
-    {id: "gaming", name: "Gaming"},
-    {id: "shopping", name: "Shopping"},
+    {id: "news", name: "资讯"},
+    {id: "travel", name: "旅行"},
+    {id: "gaming", name: "游戏"},
+    {id: "shopping", name: "购物"},
   ]);
 
   const [frameworks, setFrameworks] = useState<TagItem[]>([
@@ -35,10 +35,10 @@ export function TagGroupWithRemoveButton() {
     <div className="flex flex-col gap-8">
       <div className="w-sm">
         <TagGroup selectionMode="single" onRemove={onRemoveTags}>
-          <Label>Default Remove Button</Label>
+          <Label>默认移除按钮</Label>
           <TagGroup.List
             items={tags}
-            renderEmptyState={() => <EmptyState className="p-1">No categories found</EmptyState>}
+            renderEmptyState={() => <EmptyState className="p-1">未找到分类</EmptyState>}
           >
             {(tag) => (
               <Tag key={tag.name} id={tag.id} textValue={tag.name}>
@@ -46,16 +46,16 @@ export function TagGroupWithRemoveButton() {
               </Tag>
             )}
           </TagGroup.List>
-          <Description>Click the X to remove tags</Description>
+          <Description>点击 × 移除标签</Description>
         </TagGroup>
       </div>
 
       <div className="w-md">
         <TagGroup selectionMode="single" onRemove={onRemoveFrameworks}>
-          <Label>Custom Remove Button</Label>
+          <Label>自定义移除按钮</Label>
           <TagGroup.List
             items={frameworks}
-            renderEmptyState={() => <EmptyState className="p-1">No frameworks found</EmptyState>}
+            renderEmptyState={() => <EmptyState className="p-1">未找到框架</EmptyState>}
           >
             {(tag) => (
               <Tag key={tag.id} id={tag.id} textValue={tag.name}>
@@ -72,7 +72,7 @@ export function TagGroupWithRemoveButton() {
               </Tag>
             )}
           </TagGroup.List>
-          <Description>Custom remove button with icon</Description>
+          <Description>带图标的自定义移除按钮</Description>
         </TagGroup>
       </div>
     </div>

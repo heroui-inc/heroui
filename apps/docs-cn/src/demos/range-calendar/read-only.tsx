@@ -8,7 +8,7 @@ export function ReadOnly() {
     <div className="flex flex-col items-center gap-4">
       <RangeCalendar
         isReadOnly
-        aria-label="Trip dates"
+        aria-label="行程日期"
         defaultValue={{
           end: today(getLocalTimeZone()).add({days: 4}),
           start: today(getLocalTimeZone()),
@@ -28,7 +28,7 @@ export function ReadOnly() {
           </RangeCalendar.GridBody>
         </RangeCalendar.Grid>
       </RangeCalendar>
-      <Description className="text-center">Range calendar is read-only</Description>
+      <Description className="text-center">区间日历为只读</Description>
     </div>
   );
 }

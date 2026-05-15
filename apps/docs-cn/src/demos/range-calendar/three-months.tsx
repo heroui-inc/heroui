@@ -22,7 +22,7 @@ function RangeCalendarMonthHeading({offset = 0}: {offset?: number}) {
 export function ThreeMonths() {
   return (
     <RangeCalendar
-      aria-label="Vacation planning"
+      aria-label="假期规划"
       className="@container-normal w-auto overflow-x-auto"
       visibleDuration={{months: 3}}
     >

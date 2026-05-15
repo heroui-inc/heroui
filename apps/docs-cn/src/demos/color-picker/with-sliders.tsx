@@ -5,6 +5,17 @@ import type {ColorChannel, ColorSpace} from "@heroui/react";
 import {ColorPicker, ColorSlider, ColorSwatch, Label, ListBox, Select} from "@heroui/react";
 import {useState} from "react";
 
+const CHANNEL_LABELS: Record<ColorChannel, string> = {
+  alpha: "透明度",
+  blue: "蓝",
+  brightness: "亮度",
+  green: "绿",
+  hue: "色相",
+  lightness: "明度",
+  red: "红",
+  saturation: "饱和度",
+};
+
 export function WithSliders() {
   const [colorSpace, setColorSpace] = useState<ColorSpace>("hsl");
 
@@ -18,11 +29,11 @@ export function WithSliders() {
     <ColorPicker defaultValue="hsl(219, 58%, 93%)">
       <ColorPicker.Trigger>
         <ColorSwatch size="lg" />
-        <Label>Pick a color</Label>
+        <Label>选择颜色</Label>
       </ColorPicker.Trigger>
       <ColorPicker.Popover className="max-w-62 gap-2 px-2 py-3">
         <Select
-          aria-label="Color space"
+          aria-label="色彩空间"
           value={colorSpace}
           variant="secondary"
           onChange={(value) => setColorSpace(value as ColorSpace)}
@@ -47,12 +58,12 @@ export function WithSliders() {
             // @ts-expect-error - TypeScript can't correlate dynamic colorSpace with channel type
             <ColorSlider
               key={channel}
-              aria-label={channel}
+              aria-label={CHANNEL_LABELS[channel]}
               channel={channel}
               className="gap-1 px-1"
               colorSpace={colorSpace}
             >
-              <Label className="capitalize">{channel}</Label>
+              <Label>{CHANNEL_LABELS[channel]}</Label>
               <ColorSlider.Output className="text-muted" />
               <ColorSlider.Track>
                 <ColorSlider.Thumb />

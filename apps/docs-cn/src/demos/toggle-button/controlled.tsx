@@ -13,12 +13,12 @@ export function Controlled() {
         {({isSelected: selected}) => (
           <>
             {selected ? <HeartFill /> : <Heart />}
-            {selected ? "Liked" : "Like"}
+            {selected ? "已点赞" : "点赞"}
           </>
         )}
       </ToggleButton>
       <p className="text-sm text-muted">
-        Status: <span className="font-medium">{isSelected ? "Selected" : "Not selected"}</span>
+        状态：<span className="font-medium">{isSelected ? "已选" : "未选"}</span>
       </p>
     </div>
   );

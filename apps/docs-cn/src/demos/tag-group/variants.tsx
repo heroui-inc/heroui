@@ -6,20 +6,20 @@ export function TagGroupVariants() {
   return (
     <div className="flex flex-col gap-8">
       <TagGroup selectionMode="single" variant="default">
-        <Label>Default</Label>
+        <Label>默认</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
+          <Tag>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag>游戏</Tag>
         </TagGroup.List>
       </TagGroup>
 
       <TagGroup selectionMode="single" variant="surface">
-        <Label>Surface</Label>
+        <Label>表面</Label>
         <TagGroup.List>
-          <Tag>News</Tag>
-          <Tag>Travel</Tag>
-          <Tag>Gaming</Tag>
+          <Tag>资讯</Tag>
+          <Tag>旅行</Tag>
+          <Tag>游戏</Tag>
         </TagGroup.List>
       </TagGroup>
     </div>

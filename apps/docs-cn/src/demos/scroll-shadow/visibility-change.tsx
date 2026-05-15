@@ -11,6 +11,16 @@ const images = [
   "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/oranges.jpeg",
 ];
 
+const VISIBILITY_LABELS: Record<ScrollShadowVisibility, string> = {
+  auto: "自动",
+  both: "两侧",
+  bottom: "底部",
+  left: "左侧",
+  none: "无",
+  right: "右侧",
+  top: "顶部",
+};
+
 export default function VisibilityChange() {
   const [verticalState, setVerticalState] = useState<ScrollShadowVisibility>("none");
   const [horizontalState, setHorizontalState] = useState<ScrollShadowVisibility>("none");
@@ -23,7 +33,7 @@ export default function VisibilityChange() {
     <div className="w-full sm:max-w-sm">
       <div className="mb-8 flex flex-col gap-2">
         <div className="rounded bg-default p-4">
-          <p className="text-sm font-semibold">Vertical Shadow State: {verticalState}</p>
+          <p className="text-sm font-semibold">垂直阴影状态：{VISIBILITY_LABELS[verticalState]}</p>
         </div>
         <div className="w-full">
           <ScrollShadow
@@ -34,9 +44,9 @@ export default function VisibilityChange() {
             <div className="space-y-4">
               {Array.from({length: 10}).map((_, idx) => (
                 <p key={`scroll-shadow-lorem-content-${idx}`}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-                  risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-                  quam. Morbi accumsan cursus enim, sed ultricies sapien.
+                  段落 {idx + 1}：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                  pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet hendrerit
+                  risus, sed porttitor quam. Morbi accumsan cursus enim, sed ultricies sapien.
                 </p>
               ))}
             </div>
@@ -46,7 +56,9 @@ export default function VisibilityChange() {
 
       <div className="flex flex-col gap-2">
         <div className="rounded bg-default p-4">
-          <p className="text-sm font-semibold">Horizontal Shadow State: {horizontalState}</p>
+          <p className="text-sm font-semibold">
+            水平阴影状态：{VISIBILITY_LABELS[horizontalState]}
+          </p>
         </div>
         <div className="w-full">
           <ScrollShadow
@@ -62,14 +74,14 @@ export default function VisibilityChange() {
                   variant="transparent"
                 >
                   <img
-                    alt="Lorem Card"
+                    alt="示例卡片"
                     className="aspect-square h-16 w-16 shrink-0 rounded-xl object-cover select-none sm:h-20 sm:w-20"
                     loading="lazy"
                     src={getRandomImage(idx)}
                   />
                   <div className="flex flex-1 flex-col justify-center gap-1">
-                    <Card.Title className="text-sm">Bridging the Future</Card.Title>
-                    <Card.Description className="text-xs">Today, 6:30 PM</Card.Description>
+                    <Card.Title className="text-sm">连接未来</Card.Title>
+                    <Card.Description className="text-xs">今天 18:30</Card.Description>
                   </div>
                 </Card>
               ))}

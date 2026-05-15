@@ -5,7 +5,7 @@ export function Basic() {
   return (
     <ToggleButton>
       <Heart />
-      Like
+      点赞
     </ToggleButton>
   );
 }

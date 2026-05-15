@@ -13,7 +13,7 @@ export function PaginationDisabled() {
         <Pagination.Item>
           <Pagination.Previous isDisabled onPress={() => setPage((p) => p - 1)}>
             <Pagination.PreviousIcon />
-            <span>Previous</span>
+            <span>上一页</span>
           </Pagination.Previous>
         </Pagination.Item>
         {Array.from({length: totalPages}, (_, i) => i + 1).map((p) => (
@@ -25,7 +25,7 @@ export function PaginationDisabled() {
         ))}
         <Pagination.Item>
           <Pagination.Next isDisabled onPress={() => setPage((p) => p + 1)}>
-            <span>Next</span>
+            <span>下一页</span>
             <Pagination.NextIcon />
           </Pagination.Next>
         </Pagination.Item>

@@ -4,10 +4,10 @@ import {Label, ListBox, NumberField, ProgressBar, Select, Separator} from "@hero
 import {useState} from "react";
 
 const formatStyleOptions: {label: string; value: string}[] = [
-  {label: "Currency", value: "currency"},
-  {label: "Percent", value: "percent"},
-  {label: "Decimal", value: "decimal"},
-  {label: "Unit", value: "unit"},
+  {label: "货币", value: "currency"},
+  {label: "百分比", value: "percent"},
+  {label: "小数", value: "decimal"},
+  {label: "单位", value: "unit"},
 ];
 
 const formatOptionsMap: Record<string, Intl.NumberFormatOptions> = {
@@ -27,14 +27,14 @@ export function CustomValue() {
     <div className="flex w-full flex-col gap-6 md:flex-row md:items-center md:gap-10">
       <div className="flex w-full max-w-md flex-1 justify-center">
         <ProgressBar
-          aria-label="Revenue"
+          aria-label="收入"
           className="w-full max-w-52"
           formatOptions={formatOptionsMap[format]}
           maxValue={maxValue}
           minValue={minValue}
           value={value}
         >
-          <Label>Progress</Label>
+          <Label>进度</Label>
           <ProgressBar.Output />
           <ProgressBar.Track>
             <ProgressBar.Fill />
@@ -46,7 +46,7 @@ export function CustomValue() {
       <Separator className="hidden md:block" orientation="vertical" />
 
       <div className="flex max-w-52 flex-col gap-3">
-        <Label className="text-xs font-medium text-muted">Options</Label>
+        <Label className="text-xs font-medium text-muted">选项</Label>
 
         <NumberField
           maxValue={maxValue}
@@ -55,7 +55,7 @@ export function CustomValue() {
           variant="secondary"
           onChange={(v) => setValue(v)}
         >
-          <Label>Value</Label>
+          <Label>值</Label>
           <NumberField.Group>
             <NumberField.DecrementButton />
             <NumberField.Input />
@@ -73,7 +73,7 @@ export function CustomValue() {
             if (value < v) setValue(v);
           }}
         >
-          <Label>Min Value</Label>
+          <Label>最小值</Label>
           <NumberField.Group>
             <NumberField.DecrementButton />
             <NumberField.Input />
@@ -91,7 +91,7 @@ export function CustomValue() {
             if (value > v) setValue(v);
           }}
         >
-          <Label>Max Value</Label>
+          <Label>最大值</Label>
           <NumberField.Group>
             <NumberField.DecrementButton />
             <NumberField.Input />
@@ -100,7 +100,7 @@ export function CustomValue() {
         </NumberField>
 
         <Select value={format} variant="secondary" onChange={(key) => setFormat(key as string)}>
-          <Label>Format</Label>
+          <Label>格式</Label>
           <Select.Trigger>
             <Select.Value />
             <Select.Indicator />

@@ -20,42 +20,42 @@ interface User {
   id: number;
   name: string;
   role: string;
-  status: "Active" | "Inactive" | "On Leave";
+  status: "在职" | "未激活" | "休假";
   email: string;
 }
 
 const statusColorMap: Record<string, "success" | "danger" | "warning"> = {
-  Active: "success",
-  Inactive: "danger",
-  "On Leave": "warning",
+  休假: "warning",
+  在职: "success",
+  未激活: "danger",
 };
 
 const users: User[] = [
-  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "CEO", status: "Active"},
-  {email: "john@acme.com", id: 2, name: "John Smith", role: "CTO", status: "Active"},
-  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "CMO", status: "On Leave"},
-  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "CFO", status: "Active"},
+  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "首席执行官", status: "在职"},
+  {email: "john@acme.com", id: 2, name: "John Smith", role: "首席技术官", status: "在职"},
+  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "首席营销官", status: "休假"},
+  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "首席财务官", status: "在职"},
   {
     email: "emily@acme.com",
     id: 5,
     name: "Emily Davis",
-    role: "Product Manager",
-    status: "Inactive",
+    role: "产品经理",
+    status: "未激活",
   },
-  {email: "davis@acme.com", id: 6, name: "Davis Wilson", role: "Lead Designer", status: "Active"},
+  {email: "davis@acme.com", id: 6, name: "Davis Wilson", role: "首席设计师", status: "在职"},
   {
     email: "olivia@acme.com",
     id: 7,
     name: "Olivia Martinez",
-    role: "Frontend Engineer",
-    status: "Active",
+    role: "前端工程师",
+    status: "在职",
   },
   {
     email: "james@acme.com",
     id: 8,
     name: "James Taylor",
-    role: "Backend Engineer",
-    status: "Active",
+    role: "后端工程师",
+    status: "在职",
   },
 ];
 
@@ -63,17 +63,17 @@ const users: User[] = [
 const columnHelper = createColumnHelper<User>();
 
 const columns = [
-  columnHelper.accessor("name", {header: "Name"}),
-  columnHelper.accessor("role", {header: "Role"}),
+  columnHelper.accessor("name", {header: "姓名"}),
+  columnHelper.accessor("role", {header: "角色"}),
   columnHelper.accessor("status", {
     cell: (info) => (
       <Chip color={statusColorMap[info.getValue()]} size="sm" variant="soft">
         {info.getValue()}
       </Chip>
     ),
-    header: "Status",
+    header: "状态",
   }),
-  columnHelper.accessor("email", {header: "Email"}),
+  columnHelper.accessor("email", {header: "邮箱"}),
 ];
 
 // --- Sorting Bridge -------------------------------------------------------
@@ -148,7 +148,7 @@ export function TanstackTable() {
     <Table>
       <Table.ScrollContainer>
         <Table.Content
-          aria-label="TanStack Table example"
+          aria-label="TanStack 表格示例"
           className="min-w-[600px]"
           sortDescriptor={sortDescriptor}
           onSortChange={(d) => setSorting(toSortingState(d))}
@@ -185,7 +185,7 @@ export function TanstackTable() {
       <Table.Footer>
         <Pagination size="sm">
           <Pagination.Summary>
-            {start} to {end} of {users.length} results
+            {start}–{end} / 共 {users.length} 条
           </Pagination.Summary>
           <Pagination.Content>
             <Pagination.Item>
@@ -194,7 +194,7 @@ export function TanstackTable() {
                 onPress={() => table.previousPage()}
               >
                 <Pagination.PreviousIcon />
-                Prev
+                上一页
               </Pagination.Previous>
             </Pagination.Item>
             {pages.map((p) => (
@@ -212,7 +212,7 @@ export function TanstackTable() {
                 isDisabled={!table.getCanNextPage()}
                 onPress={() => table.nextPage()}
               >
-                Next
+                下一页
                 <Pagination.NextIcon />
               </Pagination.Next>
             </Pagination.Item>

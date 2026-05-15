@@ -22,7 +22,7 @@ function RangeCalendarMonthHeading({offset = 0}: {offset?: number}) {
 export function MultipleMonths() {
   return (
     <RangeCalendar
-      aria-label="Trip dates"
+      aria-label="行程日期"
       className="@container-normal w-auto overflow-x-auto"
       visibleDuration={{months: 2}}
     >

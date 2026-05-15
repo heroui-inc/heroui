@@ -78,7 +78,7 @@ export function Virtualization() {
   return (
     <Virtualizer layout={ListLayout} layoutOptions={{rowHeight: 50}}>
       <ListBox
-        aria-label="Virtualized list with 1000 items"
+        aria-label="包含 1000 项的虚拟化列表"
         className="h-[400px] w-[300px] overflow-y-auto"
         items={users}
       >

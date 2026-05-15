@@ -3,7 +3,7 @@ import {Avatar, Description, Label, ListBox, Surface} from "@heroui/react";
 export function MultiSelect() {
   return (
     <Surface className="w-[256px] rounded-3xl shadow-surface">
-      <ListBox aria-label="Users" selectionMode="multiple">
+      <ListBox aria-label="用户" selectionMode="multiple">
         <ListBox.Item id="1" textValue="Bob">
           <Avatar size="sm">
             <Avatar.Image

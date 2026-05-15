@@ -4,18 +4,18 @@ export function TooltipWithArrow() {
   return (
     <div className="flex items-center gap-4">
       <Tooltip delay={0}>
-        <Button variant="secondary">With Arrow</Button>
+        <Button variant="secondary">带箭头</Button>
         <Tooltip.Content showArrow>
           <Tooltip.Arrow />
-          <p>Tooltip with arrow indicator</p>
+          <p>带箭头指示器的工具提示</p>
         </Tooltip.Content>
       </Tooltip>
 
       <Tooltip delay={0}>
-        <Button variant="primary">Custom Offset</Button>
+        <Button variant="primary">自定义偏移</Button>
         <Tooltip.Content showArrow offset={12}>
           <Tooltip.Arrow />
-          <p>Custom offset from trigger</p>
+          <p>与触发器的自定义偏移</p>
         </Tooltip.Content>
       </Tooltip>
     </div>

@@ -6,33 +6,33 @@ import {Button, Description, Dropdown, Header, Kbd, Label, Separator} from "@her
 export function WithSections() {
   return (
     <Dropdown>
-      <Button isIconOnly aria-label="Menu" variant="secondary">
+      <Button isIconOnly aria-label="菜单" variant="secondary">
         <EllipsisVertical className="outline-none" />
       </Button>
       <Dropdown.Popover>
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Section>
-            <Header>Actions</Header>
-            <Dropdown.Item id="new-file" textValue="New file">
+            <Header>操作</Header>
+            <Dropdown.Item id="new-file" textValue="新建文件">
               <div className="flex h-8 items-start justify-center pt-px">
                 <SquarePlus className="size-4 shrink-0 text-muted" />
               </div>
               <div className="flex flex-col">
-                <Label>New file</Label>
-                <Description>Create a new file</Description>
+                <Label>新建文件</Label>
+                <Description>创建新文件</Description>
               </div>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>N</Kbd.Content>
               </Kbd>
             </Dropdown.Item>
-            <Dropdown.Item id="edit-file" textValue="Edit file">
+            <Dropdown.Item id="edit-file" textValue="编辑文件">
               <div className="flex h-8 items-start justify-center pt-px">
                 <Pencil className="size-4 shrink-0 text-muted" />
               </div>
               <div className="flex flex-col">
-                <Label>Edit file</Label>
-                <Description>Make changes</Description>
+                <Label>编辑文件</Label>
+                <Description>进行修改</Description>
               </div>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
@@ -42,14 +42,14 @@ export function WithSections() {
           </Dropdown.Section>
           <Separator />
           <Dropdown.Section>
-            <Header>Danger zone</Header>
-            <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
+            <Header>危险区域</Header>
+            <Dropdown.Item id="delete-file" textValue="删除文件" variant="danger">
               <div className="flex h-8 items-start justify-center pt-px">
                 <TrashBin className="size-4 shrink-0 text-danger" />
               </div>
               <div className="flex flex-col">
-                <Label>Delete file</Label>
-                <Description>Move to trash</Description>
+                <Label>删除文件</Label>
+                <Description>移至废纸篓</Description>
               </div>
               <Kbd className="ms-auto" slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />

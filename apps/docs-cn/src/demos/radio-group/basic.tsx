@@ -3,15 +3,15 @@ import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 export function Basic() {
   return (
     <RadioGroup defaultValue="premium" name="plan">
-      <Label>Plan selection</Label>
-      <Description>Choose the plan that suits you best</Description>
+      <Label>选择套餐</Label>
+      <Description>选择最适合你的套餐</Description>
       <Radio value="basic">
         <Radio.Control>
           <Radio.Indicator />
         </Radio.Control>
         <Radio.Content>
-          <Label>Basic Plan</Label>
-          <Description>Includes 100 messages per month</Description>
+          <Label>基础版</Label>
+          <Description>每月包含 100 条消息</Description>
         </Radio.Content>
       </Radio>
       <Radio value="premium">
@@ -19,8 +19,8 @@ export function Basic() {
           <Radio.Indicator />
         </Radio.Control>
         <Radio.Content>
-          <Label>Premium Plan</Label>
-          <Description>Includes 200 messages per month</Description>
+          <Label>高级版</Label>
+          <Description>每月包含 200 条消息</Description>
         </Radio.Content>
       </Radio>
       <Radio value="business">
@@ -28,8 +28,8 @@ export function Basic() {
           <Radio.Indicator />
         </Radio.Control>
         <Radio.Content>
-          <Label>Business Plan</Label>
-          <Description>Unlimited messages</Description>
+          <Label>商业版</Label>
+          <Description>无限消息</Description>
         </Radio.Content>
       </Radio>
     </RadioGroup>

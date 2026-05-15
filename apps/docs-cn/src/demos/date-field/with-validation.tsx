@@ -22,14 +22,14 @@ export function WithValidation() {
         value={value}
         onChange={setValue}
       >
-        <Label>Date</Label>
+        <Label>日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
         {isInvalid ? (
-          <FieldError>Date must be today or in the future</FieldError>
+          <FieldError>日期须为今天或将来</FieldError>
         ) : (
-          <Description>Enter a date from today onwards</Description>
+          <Description>输入日期 from today onwards</Description>
         )}
       </DateField>
     </div>

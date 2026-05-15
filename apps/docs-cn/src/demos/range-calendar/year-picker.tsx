@@ -4,7 +4,7 @@ import {RangeCalendar} from "@heroui/react";
 
 export function YearPicker() {
   return (
-    <RangeCalendar aria-label="Trip dates">
+    <RangeCalendar aria-label="行程日期">
       <RangeCalendar.Header>
         <RangeCalendar.YearPickerTrigger>
           <RangeCalendar.YearPickerTriggerHeading />

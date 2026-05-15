@@ -31,15 +31,15 @@ type DateRange = {
 };
 
 const granularityOptions: {label: string; value: Granularity}[] = [
-  {label: "Day", value: "day"},
-  {label: "Hour", value: "hour"},
-  {label: "Minute", value: "minute"},
-  {label: "Second", value: "second"},
+  {label: "日", value: "day"},
+  {label: "时", value: "hour"},
+  {label: "分", value: "minute"},
+  {label: "秒", value: "second"},
 ];
 
 const hourCycleOptions: {label: string; value: HourCycle}[] = [
-  {label: "12-hour", value: 12},
-  {label: "24-hour", value: 24},
+  {label: "12 小时制", value: 12},
+  {label: "24 小时制", value: 24},
 ];
 
 export function FormatOptions() {
@@ -96,7 +96,7 @@ export function FormatOptions() {
       >
         {({state}) => (
           <>
-            <Label>Date range</Label>
+            <Label>日期范围</Label>
             <DateField.Group>
               <DateField.InputContainer>
                 <DateField.Input slot="start">
@@ -114,7 +114,7 @@ export function FormatOptions() {
               </DateField.Suffix>
             </DateField.Group>
             <DateRangePicker.Popover className="flex w-full flex-col gap-3">
-              <RangeCalendar aria-label="Trip dates" className="w-full">
+              <RangeCalendar aria-label="出行日期" className="w-full">
                 <RangeCalendar.Header>
                   <RangeCalendar.YearPickerTrigger>
                     <RangeCalendar.YearPickerTriggerHeading />
@@ -140,9 +140,9 @@ export function FormatOptions() {
               {!!showTimeField && (
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between">
-                    <Label>Start Time</Label>
+                    <Label>开始时间</Label>
                     <TimeField
-                      aria-label="Start Time"
+                      aria-label="开始时间"
                       granularity={timeGranularity}
                       hideTimeZone={hideTimeZone}
                       hourCycle={hourCycle}
@@ -164,9 +164,9 @@ export function FormatOptions() {
                     </TimeField>
                   </div>
                   <div className="flex items-center justify-between">
-                    <Label>End Time</Label>
+                    <Label>结束时间</Label>
                     <TimeField
-                      aria-label="End Time"
+                      aria-label="结束时间"
                       granularity={timeGranularity}
                       hideTimeZone={hideTimeZone}
                       hourCycle={hourCycle}
@@ -190,10 +190,10 @@ export function FormatOptions() {
                 </div>
               )}
               <span className="mt-1 text-xs text-muted">
-                Selected:{" "}
+                已选：{" "}
                 {state.value && state.value.start && state.value.end
                   ? formatDate({end: state.value.end, start: state.value.start})
-                  : "No date selected"}
+                  : "未选择日期"}
               </span>
             </DateRangePicker.Popover>
           </>
@@ -202,7 +202,7 @@ export function FormatOptions() {
 
       <Separator className="my-5" />
 
-      <Label className="text-xs font-medium text-muted">Format Options</Label>
+      <Label className="text-xs font-medium text-muted">格式选项</Label>
 
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-col gap-1">
@@ -213,7 +213,7 @@ export function FormatOptions() {
             variant="secondary"
             onChange={(value) => setGranularity(value as Granularity)}
           >
-            <Label>Granularity</Label>
+            <Label>粒度</Label>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -238,7 +238,7 @@ export function FormatOptions() {
             variant="secondary"
             onChange={(value) => setHourCycle(Number(value) as HourCycle)}
           >
-            <Label>Hour cycle</Label>
+            <Label>小时制</Label>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -262,13 +262,13 @@ export function FormatOptions() {
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Hide timezone</Label>
+          <Label className="text-sm">隐藏时区</Label>
         </Switch>
         <Switch isSelected={shouldForceLeadingZeros} onChange={setShouldForceLeadingZeros}>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Force leading zeros</Label>
+          <Label className="text-sm">强制前导零</Label>
         </Switch>
       </div>
     </div>

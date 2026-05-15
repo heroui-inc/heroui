@@ -6,18 +6,18 @@ export function WithDescription() {
   return (
     <div className="flex flex-col gap-4">
       <DateField className="w-[256px]" name="date">
-        <Label>Birth date</Label>
+        <Label>出生日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
-        <Description>Enter your date of birth</Description>
+        <Description>输入出生日期</Description>
       </DateField>
       <DateField className="w-[256px]" name="appointment-date">
-        <Label>Appointment date</Label>
+        <Label>预约日期</Label>
         <DateField.Group>
           <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
         </DateField.Group>
-        <Description>Enter a date for your appointment</Description>
+        <Description>输入预约日期</Description>
       </DateField>
     </div>
   );

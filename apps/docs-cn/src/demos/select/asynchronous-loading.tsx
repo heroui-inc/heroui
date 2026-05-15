@@ -22,8 +22,8 @@ export function AsynchronousLoading() {
   });
 
   return (
-    <Select className="w-[256px]" placeholder="Select a Pokemon">
-      <Label>Pick a Pokemon</Label>
+    <Select className="w-[256px]" placeholder="请选择宝可梦">
+      <Label>选择宝可梦</Label>
       <Select.Trigger>
         <Select.Value />
         <Select.Indicator />
@@ -44,7 +44,7 @@ export function AsynchronousLoading() {
           >
             <div className="flex items-center justify-center gap-2 py-2">
               <Spinner size="sm" />
-              <span className="text-sm text-muted">Loading more...</span>
+              <span className="text-sm text-muted">加载更多…</span>
             </div>
           </ListBoxLoadMoreItem>
         </ListBox>

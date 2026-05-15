@@ -4,38 +4,38 @@ import {Pagination, Table} from "@heroui/react";
 import {useMemo, useState} from "react";
 
 const columns = [
-  {id: "name", name: "Name"},
-  {id: "role", name: "Role"},
-  {id: "status", name: "Status"},
-  {id: "email", name: "Email"},
+  {id: "name", name: "姓名"},
+  {id: "role", name: "角色"},
+  {id: "status", name: "状态"},
+  {id: "email", name: "邮箱"},
 ];
 
 const users = [
-  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "CEO", status: "Active"},
-  {email: "john@acme.com", id: 2, name: "John Smith", role: "CTO", status: "Active"},
-  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "CMO", status: "On Leave"},
-  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "CFO", status: "Active"},
+  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "首席执行官", status: "在职"},
+  {email: "john@acme.com", id: 2, name: "John Smith", role: "首席技术官", status: "在职"},
+  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "首席营销官", status: "休假"},
+  {email: "michael@acme.com", id: 4, name: "Michael Brown", role: "首席财务官", status: "在职"},
   {
     email: "emily@acme.com",
     id: 5,
     name: "Emily Davis",
-    role: "Product Manager",
-    status: "Inactive",
+    role: "产品经理",
+    status: "未激活",
   },
-  {email: "davis@acme.com", id: 6, name: "Davis Wilson", role: "Lead Designer", status: "Active"},
+  {email: "davis@acme.com", id: 6, name: "Davis Wilson", role: "首席设计师", status: "在职"},
   {
     email: "olivia@acme.com",
     id: 7,
     name: "Olivia Martinez",
-    role: "Frontend Engineer",
-    status: "Active",
+    role: "前端工程师",
+    status: "在职",
   },
   {
     email: "james@acme.com",
     id: 8,
     name: "James Taylor",
-    role: "Backend Engineer",
-    status: "Active",
+    role: "后端工程师",
+    status: "在职",
   },
 ];
 
@@ -58,7 +58,7 @@ export function PaginationDemo() {
   return (
     <Table>
       <Table.ScrollContainer>
-        <Table.Content aria-label="Table with pagination" className="min-w-[600px]">
+        <Table.Content aria-label="带分页的表格" className="min-w-[600px]">
           <Table.Header columns={columns}>
             {(column) => (
               <Table.Column isRowHeader={column.id === "name"}>{column.name}</Table.Column>
@@ -78,7 +78,7 @@ export function PaginationDemo() {
       <Table.Footer>
         <Pagination size="sm">
           <Pagination.Summary>
-            {start} to {end} of {users.length} results
+            {start}–{end} / 共 {users.length} 条
           </Pagination.Summary>
           <Pagination.Content>
             <Pagination.Item>
@@ -87,7 +87,7 @@ export function PaginationDemo() {
                 onPress={() => setPage((p) => Math.max(1, p - 1))}
               >
                 <Pagination.PreviousIcon />
-                Prev
+                上一页
               </Pagination.Previous>
             </Pagination.Item>
             {pages.map((p) => (
@@ -102,7 +102,7 @@ export function PaginationDemo() {
                 isDisabled={page === totalPages}
                 onPress={() => setPage((p) => Math.min(totalPages, p + 1))}
               >
-                Next
+                下一页
                 <Pagination.NextIcon />
               </Pagination.Next>
             </Pagination.Item>
