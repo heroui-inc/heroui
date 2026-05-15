@@ -90,23 +90,77 @@ CSS BEM classes change too: `.text` → `.typography`, `.text--body-sm` → `.ty
 
 ### Unprefixed source color tokens
 
-All derived color tokens — `*-hover`, `*-soft`, `*-soft-foreground`, `border-secondary`, etc. — moved from `@theme inline` aliases in `theme.css` into `variables.css` as unprefixed source variables ([#6499](https://github.com/heroui-inc/heroui/pull/6499)).
+All derived color tokens — `*-hover`, `*-soft`, `*-soft-foreground`, `border-secondary`, etc. — moved from `@theme inline` aliases in `theme.css` into `variables.css` as unprefixed source variables, and 24 component CSS files now reference source tokens directly ([#6499](https://github.com/heroui-inc/heroui/pull/6499)).
 
-Component CSS now references source tokens directly:
+**1. `color-mix` formulas moved from `theme.css` to `variables.css`**
+
+Before — the calculation lived inside the `@theme inline` block:
 
 ```css
+/* packages/styles/themes/shared/theme.css */
+--color-accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+--color-accent-soft: var(--accent-soft, color-mix(in oklab, var(--accent) 15%, transparent));
+--color-accent-soft-foreground: var(--accent-soft-foreground, var(--accent));
+--color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+```
+
+After — `theme.css` is pure aliases; the formulas live in `variables.css`:
+
+```css
+/* packages/styles/themes/default/variables.css */
+--accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+--accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
+--accent-soft-foreground: var(--accent);
+--border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+
+/* packages/styles/themes/shared/theme.css */
+--color-accent-hover: var(--accent-hover);
+--color-accent-soft: var(--accent-soft);
+--color-accent-soft-foreground: var(--accent-soft-foreground);
+--color-border-secondary: var(--border-secondary);
+```
+
+**2. Component CSS uses source tokens directly**
+
+Before — `var(--color-*)` references everywhere:
+
+```css
+/* packages/styles/components/button.css */
 .button--primary {
-  background-color: var(--accent);
+  --button-bg: var(--color-accent);
+  --button-bg-hover: var(--color-accent-hover);
+  --button-fg: var(--color-accent-foreground);
 }
 
-.button--primary:hover {
-  background-color: var(--accent-hover);
+.button--secondary {
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-fg: var(--color-accent-soft-foreground);
 }
 ```
 
-instead of the previous Tailwind-namespaced form (`var(--color-accent)`, `var(--color-accent-hover)`). The `@theme inline` block still exposes every `--color-*` Tailwind utility as an alias, so user-land class usage (`bg-accent`, `text-accent`, …) is unaffected.
+After — unprefixed source tokens:
 
-The theme builder consolidates its three derived-token helpers (`getAccentDerivedVariables`, `getSemanticDerivedVariables`, `getFieldDerivedVariables`) into a single `getDerivedColorVariables()` that emits the full unprefixed set, including the `darkenForSoftForeground` logic that keeps soft-foreground text readable on light accent themes.
+```css
+/* packages/styles/components/button.css */
+.button--primary {
+  --button-bg: var(--accent);
+  --button-bg-hover: var(--accent-hover);
+  --button-fg: var(--accent-foreground);
+}
+
+.button--secondary {
+  --button-bg: var(--default);
+  --button-bg-hover: var(--default-hover);
+  --button-fg: var(--accent-soft-foreground);
+}
+```
+
+The `@theme inline` block still exposes every `--color-*` Tailwind utility as an alias, so user-land class usage (`bg-accent`, `text-accent`, …) is unaffected.
+
+**3. Theme builder consolidated**
+
+Three derived-token helpers (`getAccentDerivedVariables`, `getSemanticDerivedVariables`, `getFieldDerivedVariables`) collapsed into a single `getDerivedColorVariables()` that emits the full unprefixed set, including the `darkenForSoftForeground` logic that keeps soft-foreground text readable on light accent themes.
 
 ## Style Fixes
 
