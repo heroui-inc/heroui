@@ -25,8 +25,8 @@
     &:focus,
     &[data-focus] {
       @apply status-focused-field;
-      border-color: var(--color-field-border-focus);
-      background-color: var(--color-field-focus);
+      border-color: var(--field-border-focus);
+      background-color: var(--field-focus);
     }
 
     /* Disabled state */

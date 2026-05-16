@@ -23,7 +23,7 @@
 .search-field__group {
   @apply relative inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
-  border-color: var(--color-field-border);
+  border-color: var(--field-border);
 
   /**
    * Transitions
@@ -40,7 +40,7 @@
     &:hover:not(:focus-within),
     &[data-hovered="true"]:not([data-focus-within="true"]) {
       @apply bg-field-hover;
-      border-color: var(--color-field-border-hover);
+      border-color: var(--field-border-hover);
     }
   }
 
@@ -53,7 +53,7 @@
   /* Invalid state */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-field-focus);
+    background-color: var(--field-focus);
     border-color: var(--color-field-border-invalid);
   }
 
@@ -114,9 +114,9 @@
   @apply shadow-none;
   background-color: var(--search-field-group-bg);
 
-  --search-field-group-bg: var(--color-default);
-  --search-field-group-bg-hover: var(--color-default-hover);
-  --search-field-group-bg-focus: var(--color-default);
+  --search-field-group-bg: var(--default);
+  --search-field-group-bg-hover: var(--default-hover);
+  --search-field-group-bg-focus: var(--default);
 
   @media (hover: hover) {
     &:hover:not(:focus-within),

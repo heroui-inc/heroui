@@ -40,7 +40,7 @@ const packageManagers: PackageManager[] = [
 ];
 
 export interface PackageManagersProps {
-  commands: Partial<Record<PackageManagerName, React.Key>>;
+  commands: Partial<Record<PackageManagerName, string>>;
 }
 
 export const PackageManagers = ({commands}: PackageManagersProps) => {

@@ -18,10 +18,8 @@ import {getCustomFontInfoFromUrl, injectFontLink, isCustomFontUrl} from "../util
 import {
   calculateAccentForeground,
   generateThemeColors,
-  getAccentDerivedVariables,
   getColorVariablesForElement,
-  getFieldDerivedVariables,
-  getSemanticDerivedVariables,
+  getDerivedColorVariables,
   radiusDerivedVariables,
 } from "../utils/generate-theme-colors";
 
@@ -78,7 +76,9 @@ function buildVarsCSS(vars: Record<string, string>): string {
 }
 
 /**
- * Get common variables (radius, font) that apply to both light and dark modes
+ * Get common variables (radius, font) that apply to both light and dark modes.
+ * Derived radius values must be re-declared on scoped elements because
+ * CSS custom properties resolve var() at the level they are defined.
  */
 function getCommonVariables(
   radius: string,
@@ -131,91 +131,33 @@ function getAdaptiveColorCSS(
   const lightVars = getColorVariablesForElement(lightColors, "light");
   const darkVars = getColorVariablesForElement(darkColors, "dark");
 
-  // Get derived variables for accent
-  const accentDerivedLight = getAccentDerivedVariables(adaptiveConfig.light, lightFg);
-  const accentDerivedDark = getAccentDerivedVariables(adaptiveConfig.dark, darkFg);
-
-  // Get semantic derived variables
-  const successDerivedLight = getSemanticDerivedVariables(
-    "success",
-    lightVars["--success"] ?? "",
-    lightVars["--success-foreground"] ?? "",
-  );
-  const warningDerivedLight = getSemanticDerivedVariables(
-    "warning",
-    lightVars["--warning"] ?? "",
-    lightVars["--warning-foreground"] ?? "",
-  );
-  const dangerDerivedLight = getSemanticDerivedVariables(
-    "danger",
-    lightVars["--danger"] ?? "",
-    lightVars["--danger-foreground"] ?? "",
-  );
-
-  const successDerivedDark = getSemanticDerivedVariables(
-    "success",
-    darkVars["--success"] ?? "",
-    darkVars["--success-foreground"] ?? "",
-  );
-  const warningDerivedDark = getSemanticDerivedVariables(
-    "warning",
-    darkVars["--warning"] ?? "",
-    darkVars["--warning-foreground"] ?? "",
-  );
-  const dangerDerivedDark = getSemanticDerivedVariables(
-    "danger",
-    darkVars["--danger"] ?? "",
-    darkVars["--danger-foreground"] ?? "",
-  );
-
   const lightAccentVars = {
     "--accent": adaptiveConfig.light,
     "--accent-foreground": lightFg,
     "--focus": adaptiveConfig.light,
-    ...accentDerivedLight,
   };
 
   const darkAccentVars = {
     "--accent": adaptiveConfig.dark,
     "--accent-foreground": darkFg,
     "--focus": adaptiveConfig.dark,
-    ...accentDerivedDark,
   };
 
-  // Get field derived variables
-  const fieldDerivedLight = getFieldDerivedVariables(
-    lightVars["--field-background"] ?? "",
-    lightVars["--field-foreground"] ?? "",
-    lightVars["--field-placeholder"] ?? "",
-    lightVars["--border"] ?? "",
-  );
-  const fieldDerivedDark = getFieldDerivedVariables(
-    darkVars["--field-background"] ?? "",
-    darkVars["--field-foreground"] ?? "",
-    darkVars["--field-placeholder"] ?? "",
-    darkVars["--border"] ?? "",
-  );
-
-  // Colors only (for page level)
+  // Derived vars must be re-declared on scoped elements because
+  // CSS custom properties resolve var() at the level they are defined,
+  // not where they are inherited.
   const colorLightVars = {
     ...lightVars,
     ...lightAccentVars,
-    ...successDerivedLight,
-    ...warningDerivedLight,
-    ...dangerDerivedLight,
-    ...fieldDerivedLight,
+    ...getDerivedColorVariables({...lightVars, ...lightAccentVars}),
   };
-
   const colorDarkVars = {
     ...darkVars,
     ...darkAccentVars,
-    ...successDerivedDark,
-    ...warningDerivedDark,
-    ...dangerDerivedDark,
-    ...fieldDerivedDark,
+    ...getDerivedColorVariables({...darkVars, ...darkAccentVars}),
   };
 
-  // Full theme vars (colors + radius + fonts for content level)
+  // Content level: colors + radius + fonts
   const fullLightVars = {...commonVars, ...colorLightVars};
   const fullDarkVars = {...commonVars, ...colorDarkVars};
 
@@ -244,7 +186,8 @@ function getAdaptiveColorCSS(
 
 /**
  * Generates CSS for theme-aware colors (light/dark mode support).
- * This handles all generated theme colors including semantic colors.
+ * Derived vars must be re-declared on scoped elements because
+ * CSS custom properties resolve var() at the level they are defined.
  */
 function getThemeColorsCSS(
   chroma: number,
@@ -254,96 +197,15 @@ function getThemeColorsCSS(
   commonVars: Record<string, string>,
   semanticOverrides?: SemanticOverrides,
 ): string {
-  // Generate full theme colors
   const colors = generateThemeColors({chroma, grayChroma, hue, lightness, semanticOverrides});
 
-  // Get color variables for both modes
   const lightVars = getColorVariablesForElement(colors, "light");
   const darkVars = getColorVariablesForElement(colors, "dark");
 
-  // Get accent derived variables
-  const accentLight = colors.accent.oklchLight;
-  const accentFgLight = colors.accentForeground.oklchLight;
-  const accentDerivedLight = getAccentDerivedVariables(accentLight, accentFgLight);
+  const colorLightVars = {...lightVars, ...getDerivedColorVariables(lightVars)};
+  const colorDarkVars = {...darkVars, ...getDerivedColorVariables(darkVars)};
 
-  const accentDark = colors.accent.oklchDark;
-  const accentFgDark = colors.accentForeground.oklchDark;
-  const accentDerivedDark = getAccentDerivedVariables(accentDark, accentFgDark);
-
-  // Get semantic derived variables for light mode
-  const successDerivedLight = getSemanticDerivedVariables(
-    "success",
-    lightVars["--success"] ?? "",
-    lightVars["--success-foreground"] ?? "",
-  );
-  const warningDerivedLight = getSemanticDerivedVariables(
-    "warning",
-    lightVars["--warning"] ?? "",
-    lightVars["--warning-foreground"] ?? "",
-  );
-  const dangerDerivedLight = getSemanticDerivedVariables(
-    "danger",
-    lightVars["--danger"] ?? "",
-    lightVars["--danger-foreground"] ?? "",
-  );
-
-  // Get semantic derived variables for dark mode
-  const successDerivedDark = getSemanticDerivedVariables(
-    "success",
-    darkVars["--success"] ?? "",
-    darkVars["--success-foreground"] ?? "",
-  );
-  const warningDerivedDark = getSemanticDerivedVariables(
-    "warning",
-    darkVars["--warning"] ?? "",
-    darkVars["--warning-foreground"] ?? "",
-  );
-  const dangerDerivedDark = getSemanticDerivedVariables(
-    "danger",
-    darkVars["--danger"] ?? "",
-    darkVars["--danger-foreground"] ?? "",
-  );
-
-  // Default hover
-  const defaultHoverLight = `color-mix(in oklab, ${lightVars["--default"]} 90%, ${lightVars["--foreground"]} 10%)`;
-  const defaultHoverDark = `color-mix(in oklab, ${darkVars["--default"]} 90%, ${darkVars["--foreground"]} 10%)`;
-
-  // Get field derived variables
-  const fieldDerivedLight = getFieldDerivedVariables(
-    lightVars["--field-background"] ?? "",
-    lightVars["--field-foreground"] ?? "",
-    lightVars["--field-placeholder"] ?? "",
-    lightVars["--border"] ?? "",
-  );
-  const fieldDerivedDark = getFieldDerivedVariables(
-    darkVars["--field-background"] ?? "",
-    darkVars["--field-foreground"] ?? "",
-    darkVars["--field-placeholder"] ?? "",
-    darkVars["--border"] ?? "",
-  );
-
-  // Colors only (for page level)
-  const colorLightVars = {
-    ...lightVars,
-    ...accentDerivedLight,
-    ...successDerivedLight,
-    ...warningDerivedLight,
-    ...dangerDerivedLight,
-    ...fieldDerivedLight,
-    "--color-default-hover": defaultHoverLight,
-  };
-
-  const colorDarkVars = {
-    ...darkVars,
-    ...accentDerivedDark,
-    ...successDerivedDark,
-    ...warningDerivedDark,
-    ...dangerDerivedDark,
-    ...fieldDerivedDark,
-    "--color-default-hover": defaultHoverDark,
-  };
-
-  // Full theme vars (colors + radius + fonts for content level)
+  // Content level: colors + radius + fonts
   const fullLightVars = {...commonVars, ...colorLightVars};
   const fullDarkVars = {...commonVars, ...colorDarkVars};
 
