@@ -34,19 +34,46 @@ export class ToastQueue<T extends object = ToastContentValue> {
 
   constructor(options?: ToastQueueOptions) {
     this.maxVisibleToasts = options?.maxVisibleToasts;
+
+    // Chain successive ViewTransitions so that back-to-back mutations (e.g.
+    // close + add inside toast.promise()) don't collide. The View Transitions
+    // API only allows one active transition at a time — starting a second
+    // while the first is still in-flight aborts the first with a
+    // "Skipped ViewTransition due to another transition starting" DOMException.
+    // Holding a reference to the in-flight transition and awaiting its
+    // .finished promise before starting the next serializes them.
+    let activeTransition: ViewTransition | null = null;
+
+    const defaultWrapUpdate = (fn: () => void): void => {
+      if (typeof document === "undefined" || !("startViewTransition" in document)) {
+        fn();
+
+        return;
+      }
+
+      const runTransition = () => {
+        const transition = document.startViewTransition(() => {
+          flushSync(fn);
+        });
+
+        activeTransition = transition;
+        transition.finished.finally(() => {
+          if (activeTransition === transition) {
+            activeTransition = null;
+          }
+        });
+      };
+
+      if (activeTransition) {
+        activeTransition.finished.then(runTransition, runTransition);
+      } else {
+        runTransition();
+      }
+    };
+
     this.queue = new ToastQueuePrimitive<T>({
       maxVisibleToasts: DEFAULT_RAC_MAX_VISIBLE_TOAST,
-      wrapUpdate: options?.wrapUpdate
-        ? options.wrapUpdate
-        : (fn: () => void) => {
-            if ("startViewTransition" in document) {
-              document.startViewTransition(() => {
-                flushSync(fn);
-              });
-            } else {
-              fn();
-            }
-          },
+      wrapUpdate: options?.wrapUpdate ?? defaultWrapUpdate,
     });
   }
 
@@ -183,15 +210,9 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
         const successMessage =
           typeof options.success === "function" ? options.success(data) : options.success;
 
-        // Defer the success toast to the next task to avoid triggering two
-        // ViewTransitions in the same microtask. The View Transitions API only
-        // allows one active transition — starting a second aborts the first
-        // with a DOMException.
         queue.close(loadingId);
 
-        setTimeout(() => {
-          toastFn.success(successMessage);
-        }, 0);
+        return toastFn.success(successMessage);
       })
       .catch((error: Error) => {
         const errorMessage =
@@ -199,9 +220,7 @@ function createToastFunction(queue: ToastQueue<ToastContentValue>) {
 
         queue.close(loadingId);
 
-        setTimeout(() => {
-          toastFn.danger(errorMessage);
-        }, 0);
+        return toastFn.danger(errorMessage);
       });
 
     return loadingId;
