@@ -95,6 +95,18 @@ const Toast = <T extends object = ToastContentValue>({
     }
   }, [toastKey, toastHeight, onToastHeightChange]);
 
+  // ToastProps from react-aria-components does not expose tabIndex as a typed
+  // prop, so set it imperatively on the underlying DOM node. Only the frontmost
+  // toast is reachable via keyboard; stacked/hidden toasts are removed from
+  // the tab order.
+  useEffect(() => {
+    const el = toastRef.current;
+
+    if (el) {
+      el.tabIndex = isFrontmost ? 0 : -1;
+    }
+  }, [isFrontmost]);
+
   const style = useMemo<CSSProperties>(() => {
     const frontToastKey = visibleToasts[0]?.key;
 
@@ -143,7 +155,6 @@ const Toast = <T extends object = ToastContentValue>({
       data-index={index}
       data-slot="toast"
       style={style}
-      tabIndex={isFrontmost ? 0 : -1}
       toast={toast}
       {...rest}
     >
