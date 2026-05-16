@@ -106,11 +106,11 @@ const Toast = <T extends object = ToastContentValue>({
     const scale = 1 - index * finalScaleFactor;
 
     return {
-      viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
-      translate: `0 ${translateY}px 0`,
       scale: `${scale}`,
-      zIndex: visibleToasts.length - index,
       tabindex: isFrontmost ? 0 : -1,
+      translate: `0 ${translateY}px 0`,
+      viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
+      zIndex: visibleToasts.length - index,
       ...(frontHeight
         ? ({
             "--front-height": `${frontHeight}px`,
@@ -360,42 +360,45 @@ const ToastProvider = <T extends object = ToastContentValue>({
     return maxVisibleToasts ?? queueLimit ?? DEFAULT_MAX_VISIBLE_TOAST;
   }, [maxVisibleToasts, queueProp]);
 
-  // Clean up stale height entries when toasts are dismissed
-  const visibleToasts = toastQueue.visibleToasts;
+  // Stale entries are pruned opportunistically inside handleToastHeightChange
+  // rather than via a separate effect — every mounted toast measures its
+  // height on appear, which gives us a natural point to drop entries for
+  // toasts that are no longer visible. This bounds the size of toastHeights
+  // to the set of currently visible toasts plus the one being measured.
+  const handleToastHeightChange = useCallback(
+    (key: string, height: number) => {
+      setToastHeights((prev) => {
+        const visibleKeys = new Set(toastQueue.visibleToasts.map((t) => String(t.key)));
 
-  useEffect(() => {
-    setToastHeights((prev) => {
-      const visibleKeys = new Set(visibleToasts.map((t) => String(t.key)));
-      const staleKeys = Object.keys(prev).filter((key) => !visibleKeys.has(key));
+        visibleKeys.add(key);
 
-      if (staleKeys.length === 0) {
-        return prev;
-      }
+        let hasStale = false;
 
-      const next: Record<string, number> = {};
-
-      for (const key of Object.keys(prev)) {
-        if (visibleKeys.has(key)) {
-          next[key] = prev[key];
+        for (const k of Object.keys(prev)) {
+          if (!visibleKeys.has(k)) {
+            hasStale = true;
+            break;
+          }
         }
-      }
 
-      return next;
-    });
-  }, [visibleToasts]);
+        if (!hasStale && prev[key] === height) {
+          return prev;
+        }
 
-  const handleToastHeightChange = useCallback((key: string, height: number) => {
-    setToastHeights((prev) => {
-      if (prev[key] === height) {
-        return prev;
-      }
+        const next: Record<string, number> = {};
 
-      return {
-        ...prev,
-        [key]: height,
-      };
-    });
-  }, []);
+        for (const [k, v] of Object.entries(prev)) {
+          if (visibleKeys.has(k)) {
+            next[k] = v;
+          }
+        }
+        next[key] = height;
+
+        return next;
+      });
+    },
+    [toastQueue],
+  );
 
   const getDefaultChildren = useCallback(
     (renderProps: {toast: QueuedToast<T>}) => {
@@ -441,8 +444,8 @@ const ToastProvider = <T extends object = ToastContentValue>({
       style={{
         // @ts-expect-error - CSS variables
         "--gap": `${gap}px`,
-        "--scale-factor": scaleFactor,
         "--placement": placement,
+        "--scale-factor": scaleFactor,
         "--toast-width": typeof width === "number" ? `${width}px` : width,
       }}
       {...rest}
@@ -457,13 +460,13 @@ const ToastProvider = <T extends object = ToastContentValue>({
         return (
           <ToastContext
             value={{
-              slots,
+              gap,
+              heightsByKey: toastHeights,
+              maxVisibleToasts: resolvedMaxVisibleToasts,
+              onToastHeightChange: handleToastHeightChange,
               placement,
               scaleFactor,
-              gap,
-              maxVisibleToasts: resolvedMaxVisibleToasts,
-              heightsByKey: toastHeights,
-              onToastHeightChange: handleToastHeightChange,
+              slots,
               width,
             }}
           >
