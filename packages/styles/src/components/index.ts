@@ -73,7 +73,7 @@ export * from "./table";
 export * from "./tabs";
 export * from "./tag";
 export * from "./tag-group";
-export * from "./text";
+export * from "./typography";
 export * from "./textfield";
 export * from "./textarea";
 export * from "./time-field";

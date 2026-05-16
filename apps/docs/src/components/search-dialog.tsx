@@ -105,7 +105,7 @@ function useProSearch(query: string, tag: "web" | "native") {
 }
 
 const tagStyles = tv({
-  base: "bg-default/80 px-2 data-[selected=true]:bg-accent-soft data-[selected=true]:text-accent",
+  base: "bg-default/80 px-2 data-[selected=true]:bg-accent-soft data-[selected=true]:text-accent-soft-foreground",
 });
 
 export default function CustomSearchDialog(props: SharedProps) {

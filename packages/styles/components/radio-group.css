@@ -23,8 +23,8 @@
   @apply shadow-none;
   background-color: var(--radio-control-bg);
 
-  --radio-control-bg: var(--color-default);
-  --radio-control-bg-hover: var(--color-default-hover);
+  --radio-control-bg: var(--default);
+  --radio-control-bg-hover: var(--default-hover);
 
   /* Hover state */
   .radio:hover &,

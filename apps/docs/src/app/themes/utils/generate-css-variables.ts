@@ -21,16 +21,14 @@ export interface CustomFontInfo {
 import {
   calculateAccentForeground,
   generateThemeColors,
-  getAccentDerivedVariables,
   getColorVariablesForElement,
-  getFieldDerivedVariables,
-  getSemanticDerivedVariables,
+  getDerivedColorVariables,
   parseOklch,
 } from "./generate-theme-colors";
 
 /**
- * Get only the base CSS variables (those defined in variables.css)
- * Excludes derived variables like --color-accent-hover, --color-accent-soft, etc.
+ * Get only the authored CSS variables that users need to customize.
+ * Derived variables are provided by the default theme stylesheet.
  */
 function getBaseColorVariables(
   colors: GeneratedThemeColors,
@@ -49,6 +47,7 @@ function getBaseColorVariables(
     "--default": getValue(colors.default),
     "--default-foreground": getValue(colors.defaultForeground),
     "--field-background": getValue(colors.fieldBackground),
+    "--field-border": "transparent",
     "--field-foreground": getValue(colors.fieldForeground),
     "--field-placeholder": getValue(colors.fieldPlaceholder),
     "--focus": getValue(colors.focus),
@@ -82,50 +81,12 @@ function buildColorVarsCSS(
   indentation = "  ",
 ): string {
   const vars = getColorVariablesForElement(colors, theme);
-
-  // Get accent derived variables
-  const accentValue = theme === "light" ? colors.accent.oklchLight : colors.accent.oklchDark;
-  const accentFgValue =
-    theme === "light" ? colors.accentForeground.oklchLight : colors.accentForeground.oklchDark;
-  const accentDerived = getAccentDerivedVariables(accentValue, accentFgValue);
-
-  // Get semantic derived variables
-  const successDerived = getSemanticDerivedVariables(
-    "success",
-    vars["--success"] ?? "",
-    vars["--success-foreground"] ?? "",
-  );
-  const warningDerived = getSemanticDerivedVariables(
-    "warning",
-    vars["--warning"] ?? "",
-    vars["--warning-foreground"] ?? "",
-  );
-  const dangerDerived = getSemanticDerivedVariables(
-    "danger",
-    vars["--danger"] ?? "",
-    vars["--danger-foreground"] ?? "",
-  );
-
-  // Default hover
-  const defaultHover = `color-mix(in oklab, ${vars["--default"]} 90%, ${vars["--foreground"]} 10%)`;
-
-  // Get field derived variables
-  const fieldDerived = getFieldDerivedVariables(
-    vars["--field-background"] ?? "",
-    vars["--field-foreground"] ?? "",
-    vars["--field-placeholder"] ?? "",
-    vars["--border"] ?? "",
-  );
+  const derivedVars = getDerivedColorVariables(vars);
 
   // Merge all vars
   const allVars = {
     ...vars,
-    ...accentDerived,
-    ...successDerived,
-    ...warningDerived,
-    ...dangerDerived,
-    ...fieldDerived,
-    "--color-default-hover": defaultHover,
+    ...derivedVars,
   };
 
   return Object.entries(allVars)
@@ -205,61 +166,6 @@ export function generateCssVariables(
     const lightVars = getColorVariablesForElement(colors, "light");
     const darkVars = getColorVariablesForElement(colors, "dark");
 
-    // Get accent derived for both modes
-    const accentDerivedLight = getAccentDerivedVariables(adaptiveConfig.light, lightFg);
-    const accentDerivedDark = getAccentDerivedVariables(adaptiveConfig.dark, darkFg);
-
-    // Get semantic derived for both modes
-    const successDerivedLight = getSemanticDerivedVariables(
-      "success",
-      lightVars["--success"] ?? "",
-      lightVars["--success-foreground"] ?? "",
-    );
-    const warningDerivedLight = getSemanticDerivedVariables(
-      "warning",
-      lightVars["--warning"] ?? "",
-      lightVars["--warning-foreground"] ?? "",
-    );
-    const dangerDerivedLight = getSemanticDerivedVariables(
-      "danger",
-      lightVars["--danger"] ?? "",
-      lightVars["--danger-foreground"] ?? "",
-    );
-
-    const successDerivedDark = getSemanticDerivedVariables(
-      "success",
-      darkVars["--success"] ?? "",
-      darkVars["--success-foreground"] ?? "",
-    );
-    const warningDerivedDark = getSemanticDerivedVariables(
-      "warning",
-      darkVars["--warning"] ?? "",
-      darkVars["--warning-foreground"] ?? "",
-    );
-    const dangerDerivedDark = getSemanticDerivedVariables(
-      "danger",
-      darkVars["--danger"] ?? "",
-      darkVars["--danger-foreground"] ?? "",
-    );
-
-    // Default hover
-    const defaultHoverLight = `color-mix(in oklab, ${lightVars["--default"]} 90%, ${lightVars["--foreground"]} 10%)`;
-    const defaultHoverDark = `color-mix(in oklab, ${darkVars["--default"]} 90%, ${darkVars["--foreground"]} 10%)`;
-
-    // Get field derived for both modes
-    const fieldDerivedLight = getFieldDerivedVariables(
-      lightVars["--field-background"] ?? "",
-      lightVars["--field-foreground"] ?? "",
-      lightVars["--field-placeholder"] ?? "",
-      lightVars["--border"] ?? "",
-    );
-    const fieldDerivedDark = getFieldDerivedVariables(
-      darkVars["--field-background"] ?? "",
-      darkVars["--field-foreground"] ?? "",
-      darkVars["--field-placeholder"] ?? "",
-      darkVars["--border"] ?? "",
-    );
-
     // Build light mode vars string
     const lightAccentVars = {
       "--accent": adaptiveConfig.light,
@@ -269,12 +175,7 @@ export function generateCssVariables(
     const allLightVars = {
       ...lightVars,
       ...lightAccentVars,
-      ...accentDerivedLight,
-      ...successDerivedLight,
-      ...warningDerivedLight,
-      ...dangerDerivedLight,
-      ...fieldDerivedLight,
-      "--color-default-hover": defaultHoverLight,
+      ...getDerivedColorVariables({...lightVars, ...lightAccentVars}),
     };
     const lightVarsCSS = Object.entries(allLightVars)
       .map(([prop, val]) => `  ${prop}: ${val};`)
@@ -289,12 +190,7 @@ export function generateCssVariables(
     const allDarkVars = {
       ...darkVars,
       ...darkAccentVars,
-      ...accentDerivedDark,
-      ...successDerivedDark,
-      ...warningDerivedDark,
-      ...dangerDerivedDark,
-      ...fieldDerivedDark,
-      "--color-default-hover": defaultHoverDark,
+      ...getDerivedColorVariables({...darkVars, ...darkAccentVars}),
     };
     const darkVarsCSS = Object.entries(allDarkVars)
       .map(([prop, val]) => `  ${prop}: ${val};`)
@@ -355,9 +251,8 @@ ${darkVarsCSS}
 }
 
 /**
- * Generates CSS output with only the base variables found in variables.css.
- * Does not include derived variables like --color-accent-hover, --color-accent-soft, etc.
- * These derived variables are automatically computed by theme.css.
+ * Generates CSS output with only the variables users need to customize.
+ * Derived variables are automatically computed by the default theme stylesheet.
  *
  * @param variables - Theme variables from the builder
  * @param customFont - Optional custom font info when using a CDN font
@@ -437,7 +332,7 @@ export function generateMinimalCssVariables(
   return `/*
  * HeroUI Theme Customization
  * Add this to your global.css after importing @heroui/styles
- * Only includes base variables from variables.css
+ * Only includes variables users need to customize
  * @see https://heroui.com/docs/react/getting-started/theming
  */
 

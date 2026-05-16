@@ -11,7 +11,7 @@
   grid-template-columns: 1fr auto;
 
   /* Default color tokens (accent) */
-  --meter-fill: var(--color-accent);
+  --meter-fill: var(--accent);
 
   [data-slot="label"] {
     @apply w-fit text-sm font-medium;
@@ -92,21 +92,21 @@
    ========================================================================== */
 
 .meter--default {
-  --meter-fill: var(--color-default-foreground);
+  --meter-fill: var(--default-foreground);
 }
 
 .meter--accent {
-  --meter-fill: var(--color-accent);
+  --meter-fill: var(--accent);
 }
 
 .meter--success {
-  --meter-fill: var(--color-success);
+  --meter-fill: var(--success);
 }
 
 .meter--warning {
-  --meter-fill: var(--color-warning);
+  --meter-fill: var(--warning);
 }
 
 .meter--danger {
-  --meter-fill: var(--color-danger);
+  --meter-fill: var(--danger);
 }

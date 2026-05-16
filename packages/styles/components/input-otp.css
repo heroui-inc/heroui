@@ -19,7 +19,7 @@
   @apply rounded-field text-sm font-semibold outline-none;
 
   border-width: var(--border-width-field);
-  border-color: var(--color-field-border);
+  border-color: var(--field-border);
 
   /**
    * Transitions
@@ -36,7 +36,7 @@
     &:hover,
     &[data-hovered="true"] {
       @apply bg-field-hover;
-      border-color: var(--color-field-border-hover);
+      border-color: var(--field-border-hover);
     }
   }
 
@@ -58,7 +58,7 @@
   /* Invalid */
   &[data-invalid="true"] {
     @apply status-invalid-field;
-    background-color: var(--color-field-focus);
+    background-color: var(--field-focus);
   }
 }
 
@@ -94,9 +94,9 @@
   @apply shadow-none;
   background-color: var(--input-otp-slot-bg);
 
-  --input-otp-slot-bg: var(--color-default);
-  --input-otp-slot-bg-hover: var(--color-default-hover);
-  --input-otp-slot-bg-focus: var(--color-default);
+  --input-otp-slot-bg: var(--default);
+  --input-otp-slot-bg-hover: var(--default-hover);
+  --input-otp-slot-bg-focus: var(--default);
 
   @media (hover: hover) {
     &:hover,
