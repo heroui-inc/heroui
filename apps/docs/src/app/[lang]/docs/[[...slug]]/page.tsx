@@ -9,12 +9,14 @@ import {notFound} from "next/navigation";
 
 import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
+import {ComponentsCategory} from "@/components/components-category";
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle,
 } from "@/components/fumadocs/layouts/notebook/page";
+import {NativeComponentsCategory} from "@/components/native-components-category";
 import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
@@ -100,6 +102,10 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
       <DocsBody className="prose-sm">
         <MDXContent
           components={getMDXComponents({
+            ComponentsCategory: (props) => <ComponentsCategory {...props} locale={params.lang} />,
+            NativeComponentsCategory: (props) => (
+              <NativeComponentsCategory {...props} locale={params.lang} />
+            ),
             PRContributors: () => (
               <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
             ),

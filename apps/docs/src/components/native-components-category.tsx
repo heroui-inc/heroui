@@ -102,6 +102,7 @@ interface ComponentWithStatus {
 
 interface ComponentCategory {
   category: string;
+  locale: string;
 }
 
 function getComponentNameFromPath(path: string): string {
@@ -133,20 +134,14 @@ function isRouteGroup(part: string): boolean {
   return part.startsWith("(") && part.endsWith(")");
 }
 
-function getComponentWithStatus(path: string): ComponentWithStatus | null {
-  // Route groups (parentheses) are part of the file path but filtered out in URL paths
-  // So "(buttons)/button" becomes "button" in the URL
+function getComponentWithStatus(path: string, locale: string): ComponentWithStatus | null {
   const pathWithoutRouteGroups = path
     .split("/")
     .filter((part) => !isRouteGroup(part))
     .join("/");
 
-  // Construct href - route groups are filtered out in the URL path
-  const href = `/docs/native/components/${pathWithoutRouteGroups}`;
-
-  // Get page data from source - use path without route groups
   const pagePath = ["native", "components", ...pathWithoutRouteGroups.split("/")].filter(Boolean);
-  const page = source.getPage(pagePath);
+  const page = source.getPage(pagePath, locale);
 
   if (!page) return null;
 
@@ -166,7 +161,7 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
     component: {
       category: undefined,
       description,
-      href,
+      href: page.url,
       name: componentName,
       title,
     },
@@ -176,13 +171,13 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
   };
 }
 
-export function NativeComponentsCategory({category}: ComponentCategory) {
+export function NativeComponentsCategory({category, locale}: ComponentCategory) {
   const group = COMPONENT_GROUPS.find((group) => group.category === category);
 
   if (!group) return null;
 
   const components = group.components
-    .map(getComponentWithStatus)
+    .map((path) => getComponentWithStatus(path, locale))
     .filter((item): item is ComponentWithStatus => item !== null);
 
   if (components.length === 0) return null;
