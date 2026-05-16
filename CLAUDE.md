@@ -376,7 +376,7 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 - `popover`: Popover overlays
 - `spinner`: Loading indicators
 - `tabs`: Tab navigation
-- `text`: Text component for paragraphs and general text
+- `typography`: Typography component for headings, body copy, and prose
 - `textfield`: Text input field with compound components
 - `tooltip`: Hover tooltips
 

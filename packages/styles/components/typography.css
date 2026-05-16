@@ -1,163 +1,163 @@
-.text {
+.typography {
   @apply text-foreground;
 }
 
-.text-prose {
+.typography-prose {
   @apply text-foreground;
 }
 
-.text-prose h1 {
+.typography-prose h1 {
   @apply text-4xl font-semibold tracking-tight;
 }
 
-.text-prose h2 {
+.typography-prose h2 {
   @apply text-3xl font-semibold tracking-tight;
 }
 
-.text-prose h3 {
+.typography-prose h3 {
   @apply text-2xl font-semibold tracking-tight;
 }
 
-.text-prose h4 {
+.typography-prose h4 {
   @apply text-xl font-semibold tracking-tight;
 }
 
-.text-prose h5 {
+.typography-prose h5 {
   @apply text-lg font-semibold tracking-tight;
 }
 
-.text-prose h6 {
+.typography-prose h6 {
   @apply text-base font-semibold tracking-tight;
 }
 
-.text-prose p {
+.typography-prose p {
   @apply text-base leading-7;
 }
 
-.text-prose code {
+.typography-prose code {
   @apply rounded-md bg-default px-1.5 py-0.5 font-mono text-sm text-foreground;
 }
 
-.text-prose a {
+.typography-prose a {
   @apply font-medium text-link underline underline-offset-4;
 }
 
-.text-prose blockquote {
-  @apply mt-4 border-l-4 border-border pl-4 italic text-muted;
+.typography-prose blockquote {
+  @apply mt-4 border-l-4 border-border pl-4 text-muted italic;
 }
 
-.text-prose ul {
+.typography-prose ul {
   @apply my-4 list-disc space-y-2 pl-6;
 }
 
-.text-prose ol {
+.typography-prose ol {
   @apply my-4 list-decimal space-y-2 pl-6;
 }
 
-.text-prose li {
+.typography-prose li {
   @apply text-base leading-7;
 }
 
-.text-prose hr {
+.typography-prose hr {
   @apply my-8 border-separator;
 }
 
-.text-prose pre {
+.typography-prose pre {
   @apply my-4 overflow-x-auto rounded-xl bg-default p-4 font-mono text-sm leading-relaxed;
 }
 
-.text-prose strong {
+.typography-prose strong {
   @apply font-semibold text-foreground;
 }
 
-.text-prose em {
+.typography-prose em {
   @apply italic;
 }
 
-.text-prose img {
+.typography-prose img {
   @apply my-4 rounded-xl;
 }
 
-.text--h1 {
+.typography--h1 {
   @apply text-4xl font-semibold tracking-tight;
 }
 
-.text--h2 {
+.typography--h2 {
   @apply text-3xl font-semibold tracking-tight;
 }
 
-.text--h3 {
+.typography--h3 {
   @apply text-2xl font-semibold tracking-tight;
 }
 
-.text--h4 {
+.typography--h4 {
   @apply text-xl font-semibold tracking-tight;
 }
 
-.text--h5 {
+.typography--h5 {
   @apply text-lg font-semibold tracking-tight;
 }
 
-.text--h6 {
+.typography--h6 {
   @apply text-base font-semibold tracking-tight;
 }
 
-.text--body {
+.typography--body {
   @apply text-base leading-7;
 }
 
-.text--body-sm {
+.typography--body-sm {
   @apply text-sm leading-6;
 }
 
-.text--body-xs {
+.typography--body-xs {
   @apply text-xs leading-5;
 }
 
-.text--code {
+.typography--code {
   @apply rounded-md bg-default px-1.5 py-0.5 font-mono text-sm text-foreground;
 }
 
-.text--align-start {
+.typography--align-start {
   @apply text-left rtl:text-right;
 }
 
-.text--align-center {
+.typography--align-center {
   @apply text-center;
 }
 
-.text--align-end {
+.typography--align-end {
   @apply text-right rtl:text-left;
 }
 
-.text--align-justify {
+.typography--align-justify {
   @apply text-justify;
 }
 
-.text--color-default {
+.typography--color-default {
   @apply text-foreground;
 }
 
-.text--color-muted {
+.typography--color-muted {
   @apply text-muted;
 }
 
-.text--truncate {
+.typography--truncate {
   @apply block truncate;
 }
 
-.text--weight-normal {
+.typography--weight-normal {
   @apply font-normal;
 }
 
-.text--weight-medium {
+.typography--weight-medium {
   @apply font-medium;
 }
 
-.text--weight-semibold {
+.typography--weight-semibold {
   @apply font-semibold;
 }
 
-.text--weight-bold {
+.typography--weight-bold {
   @apply font-bold;
 }

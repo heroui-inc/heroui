@@ -13,10 +13,8 @@ import {getCustomFontInfoFromUrl, isCustomFontUrl} from "../utils/font-utils";
 import {
   calculateAccentForeground,
   generateThemeColors,
-  getAccentDerivedVariables,
   getColorVariablesForElement,
-  getFieldDerivedVariables,
-  getSemanticDerivedVariables,
+  getDerivedColorVariables,
   parseOklch,
   radiusDerivedVariables,
 } from "../utils/generate-theme-colors";
@@ -45,44 +43,6 @@ function getCommonVars(
     "--font-sans": `var(${fontVariable})`,
     "--radius": radius,
     ...radiusDerivedVariables,
-  };
-}
-
-function getDerivedColorVars(
-  baseVars: Record<string, string>,
-  accentDerived: Record<string, string>,
-) {
-  const successDerived = getSemanticDerivedVariables(
-    "success",
-    baseVars["--success"] ?? "",
-    baseVars["--success-foreground"] ?? "",
-  );
-  const warningDerived = getSemanticDerivedVariables(
-    "warning",
-    baseVars["--warning"] ?? "",
-    baseVars["--warning-foreground"] ?? "",
-  );
-  const dangerDerived = getSemanticDerivedVariables(
-    "danger",
-    baseVars["--danger"] ?? "",
-    baseVars["--danger-foreground"] ?? "",
-  );
-  const fieldDerived = getFieldDerivedVariables(
-    baseVars["--field-background"] ?? "",
-    baseVars["--field-foreground"] ?? "",
-    baseVars["--field-placeholder"] ?? "",
-    baseVars["--border"] ?? "",
-  );
-  const defaultHover = `color-mix(in oklab, ${baseVars["--default"]} 90%, ${baseVars["--foreground"]} 10%)`;
-
-  return {
-    ...baseVars,
-    ...accentDerived,
-    ...successDerived,
-    ...warningDerived,
-    ...dangerDerived,
-    ...fieldDerived,
-    "--color-default-hover": defaultHover,
   };
 }
 
@@ -154,17 +114,23 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
       "--accent": adaptiveConfig.light,
       "--accent-foreground": lightFg,
       "--focus": adaptiveConfig.light,
-      ...getAccentDerivedVariables(adaptiveConfig.light, lightFg),
     };
     const darkAccentVars = {
       "--accent": adaptiveConfig.dark,
       "--accent-foreground": darkFg,
       "--focus": adaptiveConfig.dark,
-      ...getAccentDerivedVariables(adaptiveConfig.dark, darkFg),
     };
 
-    const colorLightVars = getDerivedColorVars(lightVars, lightAccentVars);
-    const colorDarkVars = getDerivedColorVars(darkVars, darkAccentVars);
+    const colorLightVars = {
+      ...lightVars,
+      ...lightAccentVars,
+      ...getDerivedColorVariables({...lightVars, ...lightAccentVars}),
+    };
+    const colorDarkVars = {
+      ...darkVars,
+      ...darkAccentVars,
+      ...getDerivedColorVariables({...darkVars, ...darkAccentVars}),
+    };
 
     return {
       fontMeta,
@@ -184,17 +150,8 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
   const lightVars = getColorVariablesForElement(colors, "light");
   const darkVars = getColorVariablesForElement(colors, "dark");
 
-  const accentDerivedLight = getAccentDerivedVariables(
-    colors.accent.oklchLight,
-    colors.accentForeground.oklchLight,
-  );
-  const accentDerivedDark = getAccentDerivedVariables(
-    colors.accent.oklchDark,
-    colors.accentForeground.oklchDark,
-  );
-
-  const colorLightVars = getDerivedColorVars(lightVars, accentDerivedLight);
-  const colorDarkVars = getDerivedColorVars(darkVars, accentDerivedDark);
+  const colorLightVars = {...lightVars, ...getDerivedColorVariables(lightVars)};
+  const colorDarkVars = {...darkVars, ...getDerivedColorVariables(darkVars)};
 
   return {
     fontMeta,

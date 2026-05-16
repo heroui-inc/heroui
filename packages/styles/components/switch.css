@@ -6,11 +6,11 @@
   cursor: var(--cursor-interactive);
 
   /* Default tokens for switch control states */
-  --switch-control-bg: var(--color-default);
+  --switch-control-bg: var(--default);
   --switch-control-bg-hover: color-mix(in oklab, var(--switch-control-bg), transparent 20%);
   --switch-control-bg-pressed: var(--switch-control-bg-hover);
-  --switch-control-bg-checked: var(--color-accent);
-  --switch-control-bg-checked-hover: var(--color-accent-hover);
+  --switch-control-bg-checked: var(--accent);
+  --switch-control-bg-checked-hover: var(--accent-hover);
 
   /* Disabled state */
   &:disabled,

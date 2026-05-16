@@ -72,7 +72,7 @@
   @media (hover: hover) {
     &:hover:not([aria-expanded="true"]),
     &[data-hovered="true"]:not([aria-expanded="true"]) {
-      background-color: color-mix(in oklab, var(--color-foreground) 3%, transparent 90%);
+      background-color: color-mix(in oklab, var(--foreground) 3%, transparent 90%);
     }
   }
 

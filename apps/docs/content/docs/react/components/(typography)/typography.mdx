@@ -1,41 +1,41 @@
 ---
-title: Text
+title: Typography
 description: A semantic typography primitive for headings, body copy, and inline code built on React Aria Components Text.
 icon: new
 links:
-  source: text/text.tsx
-  styles: text.css
-  storybook: Components/Typography/Text
+  source: typography/typography.tsx
+  styles: typography.css
+  storybook: Components/Typography
 ---
 
 ## Import
 
 ```tsx
-import {Text} from "@heroui/react";
+import {Typography} from "@heroui/react";
 ```
 
 ## Usage
 
-<ComponentPreview name="text-typography-scale" />
+<ComponentPreview name="typography-typography-scale" />
 
-`Text` maps visual `type` values to semantic elements by default.
+`Typography` maps visual `type` values to semantic elements by default.
 
 ## Primitives
 
-<ComponentPreview name="text-primitives" />
+<ComponentPreview name="typography-primitives" />
 
-- `Text.Heading` maps `level={1..6}` to `type="h1"` through `type="h6"`.
-- `Text.Paragraph` maps `size="base" | "sm" | "xs"` to body text styles.
-- `Text.Code` maps to the inline code style.
-- `Text.Prose` styles rich content passed as regular HTML children.
+- `Typography.Heading` maps `level={1..6}` to `type="h1"` through `type="h6"`.
+- `Typography.Paragraph` maps `size="base" | "sm" | "xs"` to body text styles.
+- `Typography.Code` maps to the inline code style.
+- `Typography.Prose` styles rich content passed as regular HTML children.
 
 ## Prose
 
-<ComponentPreview name="text-prose" />
+<ComponentPreview name="typography-prose" />
 
 ## Render Prop
 
-<ComponentPreview name="text-render-props" />
+<ComponentPreview name="typography-render-props" />
 
 Use the React Aria Components-style `render` prop when you need to customize the rendered element.
 
@@ -43,25 +43,25 @@ Use the React Aria Components-style `render` prop when you need to customize the
 
 ### Base Classes
 
-- `.text` - Base typography primitive
-- `.text-prose` - Rich prose container
+- `.typography` - Base typography primitive
+- `.typography-prose` - Rich prose container
 
 ### Type Classes
 
-- `.text--h1` through `.text--h6`
-- `.text--body`, `.text--body-sm`, `.text--body-xs`
-- `.text--code`
+- `.typography--h1` through `.typography--h6`
+- `.typography--body`, `.typography--body-sm`, `.typography--body-xs`
+- `.typography--code`
 
 ### Modifier Classes
 
-- `.text--align-start`, `.text--align-center`, `.text--align-end`, `.text--align-justify`
-- `.text--color-default`, `.text--color-muted`
-- `.text--truncate`
-- `.text--weight-normal`, `.text--weight-medium`, `.text--weight-semibold`, `.text--weight-bold`
+- `.typography--align-start`, `.typography--align-center`, `.typography--align-end`, `.typography--align-justify`
+- `.typography--color-default`, `.typography--color-muted`
+- `.typography--truncate`
+- `.typography--weight-normal`, `.typography--weight-medium`, `.typography--weight-semibold`, `.typography--weight-bold`
 
 ## API Reference
 
-### Text Props
+### Typography Props
 
 | Prop       | Type                                                                                           | Default     | Description                                    |
 | ---------- | ---------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------- |

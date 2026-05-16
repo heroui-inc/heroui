@@ -63,7 +63,6 @@ import * as SwitchDemos from "./switch";
 import * as TableDemos from "./table";
 import * as TabsDemos from "./tabs";
 import * as TagGroupDemos from "./tag-group";
-import * as TextDemos from "./text";
 import * as TextAreaDemos from "./textarea";
 import * as TextFieldDemos from "./textfield";
 import * as TimeFieldDemos from "./time-field";
@@ -72,6 +71,7 @@ import * as ToggleButtonDemos from "./toggle-button";
 import * as ToggleButtonGroupDemos from "./toggle-button-group";
 import * as ToolbarDemos from "./toolbar";
 import * as TooltipDemos from "./tooltip";
+import * as TypographyDemos from "./typography";
 
 export interface DemoItem {
   component: ComponentType;
@@ -1796,26 +1796,26 @@ export const demos: Record<string, DemoItem> = {
     component: TextAreaDemos.Variants,
     file: "textarea/variants.tsx",
   },
-  // Text demos
-  "text-default": {
-    component: TextDemos.Default,
-    file: "text/default.tsx",
+  // Typography demos
+  "typography-default": {
+    component: TypographyDemos.Default,
+    file: "typography/default.tsx",
   },
-  "text-primitives": {
-    component: TextDemos.Primitives,
-    file: "text/primitives.tsx",
+  "typography-primitives": {
+    component: TypographyDemos.Primitives,
+    file: "typography/primitives.tsx",
   },
-  "text-prose": {
-    component: TextDemos.Prose,
-    file: "text/prose.tsx",
+  "typography-prose": {
+    component: TypographyDemos.Prose,
+    file: "typography/prose.tsx",
   },
-  "text-render-props": {
-    component: TextDemos.RenderProps,
-    file: "text/render-props.tsx",
+  "typography-render-props": {
+    component: TypographyDemos.RenderProps,
+    file: "typography/render-props.tsx",
   },
-  "text-typography-scale": {
-    component: TextDemos.TypographyScale,
-    file: "text/typography-scale.tsx",
+  "typography-typography-scale": {
+    component: TypographyDemos.TypographyScale,
+    file: "typography/typography-scale.tsx",
   },
   // TextField demos
   "textfield-basic": {

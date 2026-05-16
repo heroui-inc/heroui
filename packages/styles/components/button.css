@@ -93,50 +93,50 @@
 
 /* Color variants - only set custom property values */
 .button--primary {
-  --button-bg: var(--color-accent);
-  --button-bg-hover: var(--color-accent-hover);
-  --button-bg-pressed: var(--color-accent-hover);
-  --button-fg: var(--color-accent-foreground);
+  --button-bg: var(--accent);
+  --button-bg-hover: var(--accent-hover);
+  --button-bg-pressed: var(--accent-hover);
+  --button-fg: var(--accent-foreground);
 }
 
 .button--secondary {
-  --button-bg: var(--color-default);
-  --button-bg-hover: var(--color-default-hover);
-  --button-bg-pressed: var(--color-default-hover);
-  --button-fg: var(--color-accent-soft-foreground);
+  --button-bg: var(--default);
+  --button-bg-hover: var(--default-hover);
+  --button-bg-pressed: var(--default-hover);
+  --button-fg: var(--accent-soft-foreground);
 }
 
 .button--tertiary {
-  --button-bg: var(--color-default);
-  --button-bg-hover: var(--color-default-hover);
-  --button-bg-pressed: var(--color-default-hover);
+  --button-bg: var(--default);
+  --button-bg-hover: var(--default-hover);
+  --button-bg-pressed: var(--default-hover);
 }
 
 .button--ghost,
 .button--outline {
   --button-bg: transparent;
-  --button-bg-hover: var(--color-default);
-  --button-bg-pressed: var(--color-default);
-  --button-fg: var(--color-default-foreground);
+  --button-bg-hover: var(--default);
+  --button-bg-pressed: var(--default);
+  --button-fg: var(--default-foreground);
 }
 
 .button--outline {
   @apply border border-border;
-  --button-bg-hover: color-mix(in srgb, var(--color-default) 60%, transparent);
+  --button-bg-hover: color-mix(in srgb, var(--default) 60%, transparent);
 }
 
 .button--danger {
-  --button-bg: var(--color-danger);
-  --button-bg-hover: var(--color-danger-hover);
-  --button-bg-pressed: var(--color-danger-hover);
-  --button-fg: var(--color-danger-foreground);
+  --button-bg: var(--danger);
+  --button-bg-hover: var(--danger-hover);
+  --button-bg-pressed: var(--danger-hover);
+  --button-fg: var(--danger-foreground);
 }
 
 .button--danger-soft {
-  --button-bg: var(--color-danger-soft);
-  --button-bg-hover: var(--color-danger-soft-hover);
-  --button-bg-pressed: var(--color-danger-soft-hover);
-  --button-fg: var(--color-danger-soft-foreground);
+  --button-bg: var(--danger-soft);
+  --button-bg-hover: var(--danger-soft-hover);
+  --button-bg-pressed: var(--danger-soft-hover);
+  --button-fg: var(--danger-soft-foreground);
 }
 
 /* Icon-only modifier */

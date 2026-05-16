@@ -166,7 +166,7 @@
   &:focus-visible,
   &[data-focus-visible="true"] {
     @apply rounded-lg outline-none;
-    box-shadow: inset 0 0 0 2px var(--color-focus);
+    box-shadow: inset 0 0 0 2px var(--focus);
   }
 }
 
@@ -260,7 +260,7 @@
   &:focus-visible,
   &[data-focus-visible="true"] {
     @apply rounded-lg outline-none;
-    box-shadow: inset 0 0 0 2px var(--color-focus);
+    box-shadow: inset 0 0 0 2px var(--focus);
   }
 }
 
@@ -279,7 +279,7 @@
 .table__row:is(:focus-visible, [data-focus-visible="true"])
   > *:only-child
   :is(.table__cell, .table__column) {
-  @apply rounded-lg shadow-[inset_0_0_0_2px_var(--color-focus)] outline-none;
+  @apply rounded-lg shadow-[inset_0_0_0_2px_var(--focus)] outline-none;
 }
 
 .table__row:is(:focus-visible, [data-focus-visible="true"])
@@ -287,7 +287,7 @@
 .table__row:is(:focus-visible, [data-focus-visible="true"])
   > *:first-child:not(:only-child)
   :is(.table__cell, .table__column) {
-  @apply rounded-l-lg shadow-[inset_2px_0_0_0_var(--color-focus),inset_0_2px_0_0_var(--color-focus),inset_0_-2px_0_0_var(--color-focus)] outline-none;
+  @apply rounded-l-lg shadow-[inset_2px_0_0_0_var(--focus),inset_0_2px_0_0_var(--focus),inset_0_-2px_0_0_var(--focus)] outline-none;
 }
 
 .table__row:is(:focus-visible, [data-focus-visible="true"])
@@ -295,7 +295,7 @@
 .table__row:is(:focus-visible, [data-focus-visible="true"])
   > *:last-child:not(:only-child)
   :is(.table__cell, .table__column) {
-  @apply rounded-r-lg shadow-[inset_-2px_0_0_0_var(--color-focus),inset_0_2px_0_0_var(--color-focus),inset_0_-2px_0_0_var(--color-focus)] outline-none;
+  @apply rounded-r-lg shadow-[inset_-2px_0_0_0_var(--focus),inset_0_2px_0_0_var(--focus),inset_0_-2px_0_0_var(--focus)] outline-none;
 }
 
 .table__row:is(:focus-visible, [data-focus-visible="true"])
@@ -303,7 +303,7 @@
 .table__row:is(:focus-visible, [data-focus-visible="true"])
   > *:not(:first-child):not(:last-child):not(:only-child)
   :is(.table__cell, .table__column) {
-  @apply shadow-[inset_0_2px_0_0_var(--color-focus),inset_0_-2px_0_0_var(--color-focus)] outline-none;
+  @apply shadow-[inset_0_2px_0_0_var(--focus),inset_0_-2px_0_0_var(--focus)] outline-none;
 }
 
 /* --------------------------------------------------------------------------

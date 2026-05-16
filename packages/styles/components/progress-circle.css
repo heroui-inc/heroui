@@ -7,8 +7,8 @@
   @apply inline-flex items-center justify-center;
 
   /* Default color token (accent) */
-  --progress-circle-stroke: var(--color-accent);
-  --progress-circle-track-stroke: var(--color-default);
+  --progress-circle-stroke: var(--accent);
+  --progress-circle-track-stroke: var(--default);
 
   .progress-circle__track {
     /* Default size (matches --md) */
@@ -85,21 +85,21 @@
    ========================================================================== */
 
 .progress-circle--default {
-  --progress-circle-stroke: var(--color-default-foreground);
+  --progress-circle-stroke: var(--default-foreground);
 }
 
 .progress-circle--accent {
-  --progress-circle-stroke: var(--color-accent);
+  --progress-circle-stroke: var(--accent);
 }
 
 .progress-circle--success {
-  --progress-circle-stroke: var(--color-success);
+  --progress-circle-stroke: var(--success);
 }
 
 .progress-circle--warning {
-  --progress-circle-stroke: var(--color-warning);
+  --progress-circle-stroke: var(--warning);
 }
 
 .progress-circle--danger {
-  --progress-circle-stroke: var(--color-danger);
+  --progress-circle-stroke: var(--danger);
 }
