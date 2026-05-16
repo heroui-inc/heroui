@@ -1,0 +1,197 @@
+---
+title: v3.0.5
+description: Text renamed to Typography (breaking), color tokens refactored to unprefixed source variables, Checkbox + Radio border fixes, and a new CLI docs page.
+github:
+  pull: 6503
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">May 15, 2026</span>
+</div>
+
+Patch release: `Text` is renamed to `Typography` to resolve a `tailwind-merge` collision that silently dropped variant classes. Derived color tokens (`hover`, `soft`, `border-secondary`, …) moved from `@theme inline` aliases into `variables.css` as unprefixed source tokens, so component CSS can reference them directly. Plus Checkbox and Radio border alignment fixes, an `accent-soft-foreground` hover refinement for Calendar, and a new CLI docs page.
+
+⚠️ **Breaking change**: `Text` → `Typography`. The BEM block changes from `text` to `typography` (e.g. `text--body-sm` → `typography--body-sm`).
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## ⚠️ Breaking Changes
+
+### `Text` → `Typography`
+
+The component shipped in [v3.0.4](/docs/releases/v3-0-4) used `text-*` BEM modifiers, which collide with Tailwind's `text-*` utility family. `tailwind-variants` runs `tailwind-merge` on every variant composition and dedupes `text--body-sm`, `text--color-muted`, `text--weight-normal` to a single class — silently dropping the others.
+
+Renaming the block to `typography` permanently fixes the collision ([#6505](https://github.com/heroui-inc/heroui/pull/6505), closes [#6497](https://github.com/heroui-inc/heroui/issues/6497)).
+
+**Before:**
+
+```tsx
+import {Text} from "@heroui/react";
+
+<Text type="body-sm" color="muted" weight="medium">
+  Hello world
+</Text>;
+```
+
+**After:**
+
+```tsx
+import {Typography} from "@heroui/react";
+
+<Typography type="body-sm" color="muted" weight="medium">
+  Hello world
+</Typography>;
+```
+
+Sub-components rename the same way:
+
+| Before              | After                     |
+| ------------------- | ------------------------- |
+| `Text`              | `Typography`              |
+| `Text.Heading`      | `Typography.Heading`      |
+| `Text.Paragraph`    | `Typography.Paragraph`    |
+| `Text.Code`         | `Typography.Code`         |
+| `Text.Prose`        | `Typography.Prose`        |
+
+CSS BEM classes change too: `.text` → `.typography`, `.text--body-sm` → `.typography--body-sm`, etc. See the [Typography docs](/docs/components/typography) for the full class reference.
+
+<ComponentPreview name="typography-typography-scale" />
+
+## Style Refactor
+
+### Unprefixed source color tokens
+
+All derived color tokens — `*-hover`, `*-soft`, `*-soft-foreground`, `border-secondary`, etc. — moved from `@theme inline` aliases in `theme.css` into `variables.css` as unprefixed source variables, and 24 component CSS files now reference source tokens directly ([#6499](https://github.com/heroui-inc/heroui/pull/6499)).
+
+**1. `color-mix` formulas moved from `theme.css` to `variables.css`**
+
+Before — the calculation lived inside the `@theme inline` block:
+
+```css
+/* packages/styles/themes/shared/theme.css */
+--color-accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+--color-accent-soft: var(--accent-soft, color-mix(in oklab, var(--accent) 15%, transparent));
+--color-accent-soft-foreground: var(--accent-soft-foreground, var(--accent));
+--color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+```
+
+After — `theme.css` is pure aliases; the formulas live in `variables.css`:
+
+```css
+/* packages/styles/themes/default/variables.css */
+--accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+--accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
+--accent-soft-foreground: var(--accent);
+--border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+
+/* packages/styles/themes/shared/theme.css */
+--color-accent-hover: var(--accent-hover);
+--color-accent-soft: var(--accent-soft);
+--color-accent-soft-foreground: var(--accent-soft-foreground);
+--color-border-secondary: var(--border-secondary);
+```
+
+**2. Component CSS uses source tokens directly**
+
+Before — `var(--color-*)` references everywhere:
+
+```css
+/* packages/styles/components/button.css */
+.button--primary {
+  --button-bg: var(--color-accent);
+  --button-bg-hover: var(--color-accent-hover);
+  --button-fg: var(--color-accent-foreground);
+}
+
+.button--secondary {
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-fg: var(--color-accent-soft-foreground);
+}
+```
+
+After — unprefixed source tokens:
+
+```css
+/* packages/styles/components/button.css */
+.button--primary {
+  --button-bg: var(--accent);
+  --button-bg-hover: var(--accent-hover);
+  --button-fg: var(--accent-foreground);
+}
+
+.button--secondary {
+  --button-bg: var(--default);
+  --button-bg-hover: var(--default-hover);
+  --button-fg: var(--accent-soft-foreground);
+}
+```
+
+The `@theme inline` block still exposes every `--color-*` Tailwind utility as an alias, so user-land class usage (`bg-accent`, `text-accent`, …) is unaffected.
+
+**3. Theme builder consolidated**
+
+Three derived-token helpers (`getAccentDerivedVariables`, `getSemanticDerivedVariables`, `getFieldDerivedVariables`) collapsed into a single `getDerivedColorVariables()` that emits the full unprefixed set, including the `darkenForSoftForeground` logic that keeps soft-foreground text readable on light accent themes.
+
+## Style Fixes
+
+- **Calendar / Range Calendar**: default day-cell hover now uses `accent-soft-foreground` instead of `accent`, so hovered cells stay legible on light accent themes. The docs search tag selected state was aligned the same way ([#6500](https://github.com/heroui-inc/heroui/pull/6500)).
+- **Checkbox**: `.checkbox__control` now carries the same `border`, `border-field-border`, and `[border-width:var(--border-width-field)]` base styling that `.radio__control` already used, with `border-color` added to the transition list ([#6521](https://github.com/heroui-inc/heroui/pull/6521)).
+- **Radio**: `.radio__control` default border now uses `border-field-border` instead of the generic Tailwind `border` color, matching Input, Select, TextArea, and NumberField ([#6522](https://github.com/heroui-inc/heroui/pull/6522)).
+
+## Docs
+
+### CLI page
+
+New [CLI docs page](/docs/react/getting-started/cli) covers installation, `init`, `install`, `upgrade`, `uninstall`, `list`, `doctor`, and `env` with example outputs ([#6498](https://github.com/heroui-inc/heroui/pull/6498)).
+
+## Dependencies
+
+Bumped across packages ([#6529](https://github.com/heroui-inc/heroui/pull/6529)):
+
+- **`react` / `react-dom`**: `19.2.3` → `19.2.6`
+- **`@types/react`**: `19.2.7` → `19.2.14`
+- **`next`** (docs): `16.1.1` → `16.2.6`
+- **CI actions**: `actions/checkout@v6`, `actions/setup-node@v6`, `actions/cache@v5`, `pnpm/action-setup@v6`
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6503](https://github.com/heroui-inc/heroui/pull/6503)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
