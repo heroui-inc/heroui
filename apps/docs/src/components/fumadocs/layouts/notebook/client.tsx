@@ -113,50 +113,52 @@ export type LayoutHeaderTabsProps = ComponentProps<"div"> & {
 };
 
 /**
- * Extract the first two path segments from a pathname
- * Example: "/docs/react/getting-started" -> ["docs", "react"]
+ * Path prefix through the docs framework segment.
+ * e.g. "/en/docs/react/getting-started" -> ["en", "docs", "react"]
+ *      "/docs/native/components" -> ["docs", "native"]
  */
-function getFirstTwoPathSegments(pathname: string): string[] | null {
+function getDocsFrameworkPrefix(pathname: string): string[] | null {
   const segments = pathname.split("/").filter(Boolean);
+  const docsIndex = segments.indexOf("docs");
 
-  if (segments.length < 2) {
+  if (docsIndex === -1 || segments.length <= docsIndex + 1) {
     return null;
   }
 
-  return segments.slice(0, 2);
+  return segments.slice(0, docsIndex + 2);
+}
+
+function prefixesEqual(a: string[], b: string[]): boolean {
+  return a.length === b.length && a.every((segment, index) => segment === b[index]);
 }
 
 /**
- * Filter tabs based on the current pathname by comparing the first two path segments
- * Only show tabs where the tab URL's first two path segments match the current pathname's first two segments
+ * Filter tabs to the current docs framework (react vs native).
+ * With i18n, URLs are /{lang}/docs/{framework}/... — comparing only the first two
+ * segments would match every framework tab under the same locale.
  */
 export function filterTabsByPathname(
   tabs: SidebarTabWithProps[],
   pathname: string,
 ): SidebarTabWithProps[] {
-  const currentSegments = getFirstTwoPathSegments(pathname);
+  const currentPrefix = getDocsFrameworkPrefix(pathname);
 
-  // If pathname has fewer than 2 segments, don't filter (show all tabs)
-  if (!currentSegments) {
+  if (!currentPrefix) {
     return tabs;
   }
 
-  // Filter tabs to only show those matching the first two path segments
   return tabs.filter((tab) => {
     if (!tab.url) {
-      // If tab URL has fewer than 2 segments, include it (don't filter out)
       return true;
     }
 
-    const tabSegments = getFirstTwoPathSegments(tab.url);
+    const tabPrefix = getDocsFrameworkPrefix(tab.url);
 
-    // If tab URL has fewer than 2 segments, include it (don't filter out)
-    if (!tabSegments) {
+    if (!tabPrefix) {
       return true;
     }
 
-    // Compare first two segments
-    return currentSegments[0] === tabSegments[0] && currentSegments[1] === tabSegments[1];
+    return prefixesEqual(currentPrefix, tabPrefix);
   });
 }
 

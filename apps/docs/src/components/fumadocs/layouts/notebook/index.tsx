@@ -199,6 +199,7 @@ export function DocsLayout(props: DocsLayoutProps) {
             {tabs.length > 0 && (
               <FilteredSidebarTabsDropdown
                 className={cn(tabMode === "navbar" && "lg:hidden")}
+                filterByPathname={headerTabsProps?.filterByPathname}
                 options={tabs}
               />
             )}
@@ -236,7 +237,12 @@ export function DocsLayout(props: DocsLayoutProps) {
             >
               <X />
             </SidebarTrigger>
-            {tabs.length > 0 && <FilteredSidebarTabsDropdown options={tabs} />}
+            {tabs.length > 0 && (
+              <FilteredSidebarTabsDropdown
+                filterByPathname={headerTabsProps?.filterByPathname}
+                options={tabs}
+              />
+            )}
           </Header>
           {viewport}
           <Footer
