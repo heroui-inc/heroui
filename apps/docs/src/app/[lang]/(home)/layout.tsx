@@ -2,7 +2,7 @@ import type {ReactNode} from "react";
 
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 
-import {baseOptions, homeLayoutLinks} from "@/app/layout.config";
+import {baseOptions, homeLayoutLinks} from "@/app/[lang]/layout.config";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
 import {GitHubLinkSmall} from "@/components/github-link";
 
