@@ -8,7 +8,7 @@ import {Tabs} from "@heroui/react";
 import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useRef, useState} from "react";
 
-import {defaultRoutes, useCurrentFramework} from "@/hooks/use-current-framework";
+import {getDefaultRoute, useCurrentFramework} from "@/hooks/use-current-framework";
 import {cn} from "@/utils/cn";
 
 export function FrameworksTabs({className}: {className?: string}) {
@@ -45,10 +45,10 @@ export function FrameworksTabs({className}: {className?: string}) {
 
       // Navigate to default route for target framework after a short delay to allow animation to play
       setTimeout(() => {
-        router.push(defaultRoutes[targetFramework] as any);
+        router.push(getDefaultRoute(targetFramework, pathname) as any);
       }, 150); // Small delay to let animation start
     },
-    [currentFramework, router],
+    [currentFramework, pathname, router],
   );
 
   // Sync selectedKey with pathname changes (e.g., browser back/forward)
