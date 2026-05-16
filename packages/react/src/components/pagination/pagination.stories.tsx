@@ -400,3 +400,71 @@ export const Disabled = {
   args: defaultArgs,
   render: DisabledTemplate,
 };
+
+/* -------------------------------------------------------------------------------------------------
+ * On Surface (demonstrates contrast on gray backgrounds)
+ * -----------------------------------------------------------------------------------------------*/
+const OnSurfaceTemplate = (props: PaginationProps) => {
+  const [page, setPage] = React.useState(1);
+  const pages = [1, 2, 3, 4, 5];
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <span className="text-sm font-semibold text-muted">On white background (default)</span>
+        <div className="rounded-xl bg-surface p-4">
+          <Pagination {...props}>
+            <Pagination.Content>
+              {pages.map((p) => (
+                <Pagination.Item key={p}>
+                  <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
+                    {p}
+                  </Pagination.Link>
+                </Pagination.Item>
+              ))}
+            </Pagination.Content>
+          </Pagination>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2">
+        <span className="text-sm font-semibold text-muted">
+          On surface-secondary (e.g. table footer)
+        </span>
+        <div className="rounded-xl bg-surface-secondary p-4">
+          <Pagination {...props}>
+            <Pagination.Content>
+              {pages.map((p) => (
+                <Pagination.Item key={p}>
+                  <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
+                    {p}
+                  </Pagination.Link>
+                </Pagination.Item>
+              ))}
+            </Pagination.Content>
+          </Pagination>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2">
+        <span className="text-sm font-semibold text-muted">On surface-tertiary</span>
+        <div className="rounded-xl bg-surface-tertiary p-4">
+          <Pagination {...props}>
+            <Pagination.Content>
+              {pages.map((p) => (
+                <Pagination.Item key={p}>
+                  <Pagination.Link isActive={p === page} onPress={() => setPage(p)}>
+                    {p}
+                  </Pagination.Link>
+                </Pagination.Item>
+              ))}
+            </Pagination.Content>
+          </Pagination>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const OnSurface = {
+  args: defaultArgs,
+  render: OnSurfaceTemplate,
+};

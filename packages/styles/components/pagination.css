@@ -74,11 +74,20 @@
     transform: scale(0.97);
   }
 
-  /* Active page - tertiary button style */
+  /* Active page - high-contrast inverted style for visibility on all surfaces */
   &[data-active="true"] {
-    --pagination-link-bg: var(--color-default);
-    --pagination-link-bg-hover: var(--color-default-hover);
-    --pagination-link-bg-pressed: var(--color-default-hover);
+    --pagination-link-bg: var(--color-foreground);
+    --pagination-link-bg-hover: color-mix(
+      in oklab,
+      var(--color-foreground) 85%,
+      var(--color-background) 15%
+    );
+    --pagination-link-bg-pressed: color-mix(
+      in oklab,
+      var(--color-foreground) 80%,
+      var(--color-background) 20%
+    );
+    --pagination-link-fg: var(--color-background);
   }
 }
 
