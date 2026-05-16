@@ -30,9 +30,9 @@ import {
 
 const componentStatusIcons = ["preview", "new", "updated"];
 
-async function getRawMDXContent(pagePath: string): Promise<string> {
+async function getRawMDXContent(pagePath: string, locale: string): Promise<string> {
   try {
-    const filePath = join(process.cwd(), "content/docs", pagePath);
+    const filePath = join(process.cwd(), "content/docs", locale, pagePath);
 
     return await readFile(filePath, "utf-8");
   } catch {
@@ -40,9 +40,10 @@ async function getRawMDXContent(pagePath: string): Promise<string> {
   }
 }
 
-export default async function Page(props: {params: Promise<{slug?: string[]}>}) {
+export default async function Page(props: {params: Promise<{lang: string; slug?: string[]}>}) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+
+  const page = source.getPage(params.slug, params.lang);
 
   if (!page) notFound();
 
@@ -57,7 +58,7 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   // });
 
   // Read raw MDX content for frontmatter extraction
-  const rawContent = await getRawMDXContent(page.path);
+  const rawContent = await getRawMDXContent(page.path, params.lang);
 
   // Extract links from MDX content
   const links = extractLinksFromMDX(rawContent);
@@ -113,15 +114,15 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{slug?: string[]}>;
+  params: Promise<{lang: string; slug?: string[]}>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = source.getPage(params.slug, params.lang);
 
   if (!page) notFound();
 
   // Read raw MDX to extract image from frontmatter
-  const rawContent = await getRawMDXContent(page.path);
+  const rawContent = await getRawMDXContent(page.path, params.lang);
   const frontmatterImage = extractImageFromMDX(rawContent);
 
   // Determine image URL
@@ -144,5 +145,7 @@ export async function generateMetadata(props: {
 }
 
 export async function generateStaticParams() {
-  return source.generateParams().filter((param) => param.slug && param.slug.length > 0);
+  return source
+    .generateParams("slug", "lang")
+    .filter((param) => param.slug && param.slug.length > 0);
 }

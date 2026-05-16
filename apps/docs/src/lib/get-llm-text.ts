@@ -31,10 +31,10 @@ function normalizePagePath(pagePath: string): string {
   return pagePath.endsWith(".mdx") ? pagePath : `${pagePath}.mdx`;
 }
 
-async function getRawMDXContent(pagePath: string): Promise<string> {
+async function getRawMDXContent(pagePath: string, locale: string): Promise<string> {
   try {
     const normalizedPath = normalizePagePath(pagePath);
-    const filePath = join(process.cwd(), CONTENT_DIR, normalizedPath);
+    const filePath = join(process.cwd(), CONTENT_DIR, locale, normalizedPath);
     const content = await readFile(filePath, "utf-8");
 
     if (!content.trim()) {
@@ -88,7 +88,7 @@ export async function getLLMText(page: Page) {
   const url = page.url || "";
   const normalizedPath = normalizePagePath(page.path);
 
-  const rawContent = await getRawMDXContent(page.path);
+  const rawContent = await getRawMDXContent(page.path, page.locale);
   const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
   if (!rawContent) {
@@ -285,7 +285,7 @@ export async function getLLMRawText(page: Page) {
   const normalizedPath = normalizePagePath(page.path);
   const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
-  const rawContent = await getRawMDXContent(page.path);
+  const rawContent = await getRawMDXContent(page.path, page.locale);
 
   if (!rawContent) {
     return `<page url="${url}">

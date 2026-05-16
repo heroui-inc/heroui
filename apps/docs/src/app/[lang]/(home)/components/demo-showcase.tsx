@@ -10,14 +10,13 @@ import LinkRoot from "fumadocs-core/link";
 import {useTheme} from "next-themes";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
-import {DemoComponents} from "@/components/demo";
-import {cn} from "@/utils/cn";
-
-import {HEROUI_PRO_URL, iframeTabs} from "../../themes/constants";
+import {HEROUI_PRO_URL, iframeTabs} from "@/app/themes/constants";
 import {
   calculateAccentForeground,
   getAccentDerivedVariables,
-} from "../../themes/utils/generate-theme-colors";
+} from "@/app/themes/utils/generate-theme-colors";
+import {DemoComponents} from "@/components/demo";
+import {cn} from "@/utils/cn";
 
 const tabs = [
   {label: "components"},

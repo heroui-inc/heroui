@@ -2,8 +2,8 @@ import type {CSSProperties, ReactNode} from "react";
 
 import {Separator} from "@heroui/react";
 
-import {HeaderBanner, ProBanner} from "@/app/(home)/components/pro-banner";
-import {SHOW_BANNER} from "@/app/(home)/components/pro-constants";
+import {HeaderBanner, ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
+import {SHOW_BANNER} from "@/app/[lang]/(home)/components/pro-constants";
 import {baseOptions} from "@/app/[lang]/layout.config";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
 import {FrameworksTabs} from "@/components/frameworks-tabs";
@@ -16,7 +16,13 @@ import {source} from "@/lib/source";
 
 const DOCS_TOP_BANNER_HEIGHT = "2rem";
 
-export default function Layout({children}: {children: ReactNode}) {
+export default async function Layout({
+  children,
+  params,
+}: {
+  params: Promise<{lang: string}>;
+  children: ReactNode;
+}) {
   // The top banner is rendered in normal flow, so --fd-banner-height would incorrectly
   // offset sticky docs elements after the banner scrolls away. Reduce only the docs
   // viewport height to keep the sidebar scroll area inside the visible viewport.
@@ -24,13 +30,15 @@ export default function Layout({children}: {children: ReactNode}) {
     ? ({"--fd-docs-height": `calc(100dvh - ${DOCS_TOP_BANNER_HEIGHT})`} as CSSProperties)
     : undefined;
 
+  const {lang} = await params;
+
   return (
     <>
       <HeaderBanner />
       <DocsLayout
         containerProps={{style: layoutStyle}}
         tabMode="navbar"
-        tree={source.pageTree}
+        tree={source.getPageTree(lang)}
         sidebar={{
           banner: () => (
             <div className="flex flex-col items-start justify-center gap-4 px-4 pt-4 sm:hidden">

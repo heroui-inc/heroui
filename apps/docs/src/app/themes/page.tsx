@@ -1,8 +1,7 @@
 import {Suspense} from "react";
 
+import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {CodePanelProvider} from "@/hooks/use-code-panel";
-
-import {ProBanner} from "../(home)/components/pro-banner";
 
 import {
   AccentColorSelector,

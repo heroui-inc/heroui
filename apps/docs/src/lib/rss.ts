@@ -6,9 +6,10 @@ import {Feed} from "feed";
 import {siteConfig} from "@/config/site";
 import {source} from "@/lib/source";
 
-async function getFileLastModified(pagePath: string): Promise<Date> {
+async function getFileLastModified(pagePath: string, locale: string): Promise<Date> {
   try {
-    const filePath = join(process.cwd(), "content/docs", `${pagePath}.mdx`);
+    const normalizedPath = pagePath.endsWith(".mdx") ? pagePath : `${pagePath}.mdx`;
+    const filePath = join(process.cwd(), "content/docs", locale, normalizedPath);
     const stats = await stat(filePath);
 
     return stats.mtime;
@@ -34,7 +35,7 @@ export const getRSS = async (): Promise<string> => {
 
   for (const page of source.getPages()) {
     const pageUrl = new URL(page.url, baseUrl);
-    const lastModified = await getFileLastModified(page.path);
+    const lastModified = await getFileLastModified(page.path, page.locale);
 
     feed.addItem({
       author: [

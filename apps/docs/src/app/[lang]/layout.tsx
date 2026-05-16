@@ -13,20 +13,28 @@ import {__BASE_URL__} from "@/utils/env";
 
 import {CustomRootProvider} from "../custom-root-provider";
 
-import "./global.css";
+import "../global.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-export default function Layout({children}: {children: ReactNode}) {
+export default async function Layout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: Promise<{lang: string}>;
+}) {
+  const {lang} = await params;
+
   return (
-    <html suppressHydrationWarning className={inter.variable} lang="en">
+    <html suppressHydrationWarning className={inter.variable} lang={lang}>
       <body className="flex min-h-screen flex-col font-sans">
         <NuqsAdapter>
           <NextProvider>
-            <TreeContextProvider tree={source.pageTree}>
+            <TreeContextProvider tree={source.getPageTree(lang)}>
               <CustomRootProvider>{children}</CustomRootProvider>
             </TreeContextProvider>
           </NextProvider>
