@@ -40,9 +40,9 @@
 
   /* Ghost button tokens */
   --pagination-link-bg: transparent;
-  --pagination-link-bg-hover: var(--color-default-hover);
-  --pagination-link-bg-pressed: var(--color-default-hover);
-  --pagination-link-fg: var(--color-default-foreground);
+  --pagination-link-bg-hover: var(--default-hover);
+  --pagination-link-bg-pressed: var(--default-hover);
+  --pagination-link-fg: var(--default-foreground);
 
   background-color: var(--pagination-link-bg);
   color: var(--pagination-link-fg);
@@ -76,9 +76,9 @@
 
   /* Active page - tertiary button style */
   &[data-active="true"] {
-    --pagination-link-bg: var(--color-default);
-    --pagination-link-bg-hover: var(--color-default-hover);
-    --pagination-link-bg-pressed: var(--color-default-hover);
+    --pagination-link-bg: var(--default);
+    --pagination-link-bg-hover: var(--default-hover);
+    --pagination-link-bg-pressed: var(--default-hover);
   }
 }
 

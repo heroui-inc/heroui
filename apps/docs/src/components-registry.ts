@@ -505,6 +505,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "tooltip",
     title: "Tooltip",
   },
+  typography: {
+    category: "display",
+    description: "Semantic typography primitive for headings, body copy, and inline code",
+    href: "/docs/components/typography",
+    name: "typography",
+    title: "Typography",
+  },
 };
 
 // Define relationships between components

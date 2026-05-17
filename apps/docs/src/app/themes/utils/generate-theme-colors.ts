@@ -709,7 +709,7 @@ function darkenForSoftForeground(oklchValue: string): string {
 }
 
 /**
- * Accent-derived CSS variables that use color-mix for hover/soft variants
+ * Accent-derived source variables used by @theme color aliases.
  */
 export function getAccentDerivedVariables(
   accentValue: string,
@@ -718,19 +718,16 @@ export function getAccentDerivedVariables(
   const softFg = darkenForSoftForeground(accentValue);
 
   return {
-    "--color-accent": "var(--accent)",
-    "--color-accent-foreground": "var(--accent-foreground)",
-    "--color-accent-hover": `color-mix(in oklab, ${accentValue} 90%, ${accentFgValue} 10%)`,
-    "--color-accent-soft": `color-mix(in oklab, ${accentValue} 15%, transparent)`,
-    "--color-accent-soft-foreground": softFg,
-    "--color-accent-soft-hover": `color-mix(in oklab, ${accentValue} 20%, transparent)`,
-    "--color-focus": "var(--focus)",
+    "--accent-hover": `color-mix(in oklab, ${accentValue} 90%, ${accentFgValue} 10%)`,
+    "--accent-soft": `color-mix(in oklab, ${accentValue} 15%, transparent)`,
+    "--accent-soft-foreground": softFg,
+    "--accent-soft-hover": `color-mix(in oklab, ${accentValue} 20%, transparent)`,
     "--tw-ring-color": "var(--focus)",
   };
 }
 
 /**
- * Semantic color derived variables (hover, soft variants)
+ * Semantic color derived source variables (hover, soft variants).
  */
 export function getSemanticDerivedVariables(
   colorName: string,
@@ -740,35 +737,71 @@ export function getSemanticDerivedVariables(
   const softFg = darkenForSoftForeground(colorValue);
 
   return {
-    [`--color-${colorName}`]: `var(--${colorName})`,
-    [`--color-${colorName}-foreground`]: `var(--${colorName}-foreground)`,
-    [`--color-${colorName}-hover`]: `color-mix(in oklab, ${colorValue} 90%, ${foregroundValue} 10%)`,
-    [`--color-${colorName}-soft`]: `color-mix(in oklab, ${colorValue} 15%, transparent)`,
-    [`--color-${colorName}-soft-foreground`]: softFg,
-    [`--color-${colorName}-soft-hover`]: `color-mix(in oklab, ${colorValue} 20%, transparent)`,
+    [`--${colorName}-hover`]: `color-mix(in oklab, ${colorValue} 90%, ${foregroundValue} 10%)`,
+    [`--${colorName}-soft`]: `color-mix(in oklab, ${colorValue} 15%, transparent)`,
+    [`--${colorName}-soft-foreground`]: softFg,
+    [`--${colorName}-soft-hover`]: `color-mix(in oklab, ${colorValue} 20%, transparent)`,
   };
 }
 
 /**
- * Field-derived CSS variables (from theme.css)
- * These are the computed field tokens based on base field variables
+ * Field-derived source variables based on base field variables.
  */
 export function getFieldDerivedVariables(
   fieldBgValue: string,
   fieldFgValue: string,
-  fieldPlaceholderValue: string,
-  borderValue: string,
+  fieldBorderValue: string,
 ): Record<string, string> {
   return {
-    // Base field color tokens (sorted alphabetically)
-    "--color-field": fieldBgValue,
-    "--color-field-border": borderValue,
-    "--color-field-border-focus": `color-mix(in oklab, ${borderValue} 74%, ${fieldFgValue} 22%)`,
-    "--color-field-border-hover": `color-mix(in oklab, ${borderValue} 88%, ${fieldFgValue} 10%)`,
-    "--color-field-focus": fieldBgValue,
-    "--color-field-foreground": fieldFgValue,
-    "--color-field-hover": `color-mix(in oklab, ${fieldBgValue} 90%, ${fieldFgValue} 2%)`,
-    "--color-field-placeholder": fieldPlaceholderValue,
+    "--field-border-focus": `color-mix(in oklab, ${fieldBorderValue} 74%, ${fieldFgValue} 22%)`,
+    "--field-border-hover": `color-mix(in oklab, ${fieldBorderValue} 88%, ${fieldFgValue} 10%)`,
+    "--field-focus": fieldBgValue,
+    "--field-hover": `color-mix(in oklab, ${fieldBgValue} 90%, ${fieldFgValue} 2%)`,
+  };
+}
+
+/**
+ * Derived source variables that mirror packages/styles/themes/default/variables.css.
+ */
+export function getDerivedColorVariables(vars: Record<string, string>): Record<string, string> {
+  const background = vars["--background"] ?? "";
+  const border = vars["--border"] ?? "";
+  const defaultColor = vars["--default"] ?? "";
+  const defaultForeground = vars["--default-foreground"] ?? "";
+  const fieldBackground = vars["--field-background"] ?? "";
+  const fieldBorder = vars["--field-border"] ?? border;
+  const fieldForeground = vars["--field-foreground"] ?? "";
+  const foreground = vars["--foreground"] ?? "";
+  const surface = vars["--surface"] ?? "";
+  const surfaceForeground = vars["--surface-foreground"] ?? "";
+
+  return {
+    "--background-inverse": foreground,
+    "--background-secondary": `color-mix(in oklab, ${background} 96%, ${foreground} 4%)`,
+    "--background-tertiary": `color-mix(in oklab, ${background} 92%, ${foreground} 8%)`,
+    "--border-secondary": `color-mix(in oklab, ${surface} 78%, ${surfaceForeground} 22%)`,
+    "--border-tertiary": `color-mix(in oklab, ${surface} 66%, ${surfaceForeground} 34%)`,
+    "--default-hover": `color-mix(in oklab, ${defaultColor} 96%, ${defaultForeground} 4%)`,
+    "--separator-secondary": `color-mix(in oklab, ${surface} 85%, ${surfaceForeground} 15%)`,
+    "--separator-tertiary": `color-mix(in oklab, ${surface} 81%, ${surfaceForeground} 19%)`,
+    "--surface-hover": `color-mix(in oklab, ${surface} 92%, ${surfaceForeground} 8%)`,
+    ...getAccentDerivedVariables(vars["--accent"] ?? "", vars["--accent-foreground"] ?? ""),
+    ...getSemanticDerivedVariables(
+      "success",
+      vars["--success"] ?? "",
+      vars["--success-foreground"] ?? "",
+    ),
+    ...getSemanticDerivedVariables(
+      "warning",
+      vars["--warning"] ?? "",
+      vars["--warning-foreground"] ?? "",
+    ),
+    ...getSemanticDerivedVariables(
+      "danger",
+      vars["--danger"] ?? "",
+      vars["--danger-foreground"] ?? "",
+    ),
+    ...getFieldDerivedVariables(fieldBackground, fieldForeground, fieldBorder),
   };
 }
 
@@ -801,9 +834,7 @@ export function getColorVariablesForElement(
 
   // Core colors
   vars["--background"] = getValue(colors.background);
-  vars["--color-background"] = getValue(colors.background);
   vars["--foreground"] = getValue(colors.foreground);
-  vars["--color-foreground"] = getValue(colors.foreground);
 
   // Accent
   vars["--accent"] = getValue(colors.accent);
@@ -812,49 +843,34 @@ export function getColorVariablesForElement(
 
   // UI colors
   vars["--muted"] = getValue(colors.muted);
-  vars["--color-muted"] = getValue(colors.muted);
 
   vars["--default"] = getValue(colors.default);
-  vars["--color-default"] = getValue(colors.default);
   vars["--default-foreground"] = getValue(colors.defaultForeground);
-  vars["--color-default-foreground"] = getValue(colors.defaultForeground);
 
   vars["--surface"] = getValue(colors.surface);
-  vars["--color-surface"] = getValue(colors.surface);
   vars["--surface-foreground"] = getValue(colors.surfaceForeground);
-  vars["--color-surface-foreground"] = getValue(colors.surfaceForeground);
 
   vars["--surface-secondary"] = getValue(colors.surfaceSecondary);
-  vars["--color-surface-secondary"] = getValue(colors.surfaceSecondary);
   vars["--surface-secondary-foreground"] = getValue(colors.surfaceSecondaryForeground);
-  vars["--color-surface-secondary-foreground"] = getValue(colors.surfaceSecondaryForeground);
 
   vars["--surface-tertiary"] = getValue(colors.surfaceTertiary);
-  vars["--color-surface-tertiary"] = getValue(colors.surfaceTertiary);
   vars["--surface-tertiary-foreground"] = getValue(colors.surfaceTertiaryForeground);
-  vars["--color-surface-tertiary-foreground"] = getValue(colors.surfaceTertiaryForeground);
 
   vars["--overlay"] = getValue(colors.overlay);
-  vars["--color-overlay"] = getValue(colors.overlay);
   vars["--overlay-foreground"] = getValue(colors.overlayForeground);
-  vars["--color-overlay-foreground"] = getValue(colors.overlayForeground);
 
   vars["--scrollbar"] = getValue(colors.scrollbar);
-  vars["--color-scrollbar"] = getValue(colors.scrollbar);
 
   vars["--segment"] = getValue(colors.segment);
-  vars["--color-segment"] = getValue(colors.segment);
   vars["--segment-foreground"] = getValue(colors.segmentForeground);
-  vars["--color-segment-foreground"] = getValue(colors.segmentForeground);
 
   vars["--border"] = getValue(colors.border);
-  vars["--color-border"] = getValue(colors.border);
 
   vars["--separator"] = getValue(colors.separator);
-  vars["--color-separator"] = getValue(colors.separator);
 
   // Field colors
   vars["--field-background"] = getValue(colors.fieldBackground);
+  vars["--field-border"] = "transparent";
   vars["--field-foreground"] = getValue(colors.fieldForeground);
   vars["--field-placeholder"] = getValue(colors.fieldPlaceholder);
 

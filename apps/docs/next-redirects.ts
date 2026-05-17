@@ -200,6 +200,11 @@ export async function getRedirects(): Promise<Redirect[]> {
   // Component name redirects - backward compatibility for renamed components
   redirects.push(
     {
+      destination: "/docs/react/components/typography",
+      permanent: true,
+      source: "/docs/react/components/text",
+    },
+    {
       destination: "/docs/react/components/text-area",
       permanent: true,
       source: "/docs/react/components/textarea",

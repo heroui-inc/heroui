@@ -1,4 +1,4 @@
-import {Text} from "@heroui/react";
+import {Typography} from "@heroui/react";
 
 const scale = [
   {
@@ -72,7 +72,7 @@ export const TypographyScale = () => {
             <span className="text-sm font-semibold text-foreground">{row.label}</span>
             <span className="text-xs whitespace-nowrap text-muted">{row.meta}</span>
           </div>
-          <Text type={row.type}>{row.sample}</Text>
+          <Typography type={row.type}>{row.sample}</Typography>
         </div>
       ))}
     </div>
