@@ -1,5 +1,7 @@
 import type {Metadata} from "next";
 
+import {Suspense} from "react";
+
 import {siteConfig} from "@/config/site";
 import {getAllBlogPosts} from "@/lib/blog";
 import {getBlogJsonLd} from "@/lib/json-ld";
@@ -41,7 +43,9 @@ export default function BlogPage() {
         dangerouslySetInnerHTML={{__html: JSON.stringify(blogJsonLd)}}
         type="application/ld+json"
       />
-      <BlogContent posts={posts} />
+      <Suspense>
+        <BlogContent posts={posts} />
+      </Suspense>
     </>
   );
 }
