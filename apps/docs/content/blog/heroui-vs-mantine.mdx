@@ -1,12 +1,13 @@
 ---
 title: "HeroUI vs Mantine: Which React Component Library is Right for You in 2026?"
 description: "Comparing HeroUI and Mantine — two popular React component libraries with different approaches to styling, component breadth, and developer tooling."
-date: "2026-04-26"
+date: "2026-05-15"
 author: "Junior Garcia"
 authorHandle: "@jrgarciadev"
 authorUrl: "https://x.com/jrgarciadev"
 authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
 tags: ["comparison", "heroui", "mantine", "react"]
+draft: true
 ---
 
 HeroUI and Mantine are both modern, well-maintained React component libraries with genuine strengths. But they're built on very different philosophies. Mantine is a batteries-included toolkit with a very broad component and hooks catalog; Mantine's homepage currently describes it as `120+` components and `70+` hooks. HeroUI pairs React Aria's deep accessibility layer with Tailwind CSS v4 and a compound component API, plus first-party AI tooling through MCP, llms.txt, and agent skills.
@@ -28,9 +29,9 @@ This comparison breaks down the real differences — not just feature checklists
 | **Theming** | CSS custom properties + @theme | CSS variables + MantineProvider |
 | **React 19** | Supported | Supported |
 
-## Component Breadth: Mantine's Biggest Advantage
+## Component Coverage
 
-Let's start with where Mantine genuinely excels. If you've ever gone looking for a carousel component, a rich text editor, a spotlight search dialog, a Dropzone, or a notification system — Mantine probably has one built-in. The library ships over 100 components across several packages:
+Mantine ships a large number of components across several packages, including a carousel, rich text editor, spotlight search, and notification system:
 
 - **@mantine/core** — Buttons, inputs, modals, navigation, layout, typography
 - **@mantine/dates** — Date pickers, calendars, date range inputs
@@ -42,7 +43,7 @@ Let's start with where Mantine genuinely excels. If you've ever gone looking for
 - **@mantine/carousel** — Carousel / slider component
 - **@mantine/nprogress** — Page loading progress bar
 
-This breadth is a real advantage. For many applications, Mantine can cover more UI surface area from one ecosystem. You don't have to evaluate, install, and integrate separate packages for dates, charts, notifications, and file uploads as often.
+Mantine ships a large number of components, though breadth comes with trade-offs — larger bundle sizes, more APIs to learn, and components that may not all receive the same level of polish and accessibility testing.
 
 HeroUI takes a more focused approach. The core library covers the essential component set — buttons, forms, modals, tables, navigation, data display — with depth rather than breadth. Components like `Table` support sorting, selection, column resizing, and infinite scrolling out of the box:
 
@@ -154,16 +155,14 @@ If you're building consumer software where basic keyboard navigation and screen 
 
 ## The Hooks Library
 
-Mantine's hooks package (`@mantine/hooks`) is a genuine differentiator that HeroUI doesn't try to replicate. It covers common categories like:
+Mantine also includes a utility hooks package (`@mantine/hooks`). HeroUI focuses on component quality and leverages the broader React ecosystem for utility hooks. The hooks package covers common categories like:
 
 - **Browser APIs**: `useClipboard`, `useFullscreen`, `useMediaQuery`, `useLocalStorage`, `useGeolocation`
 - **UI patterns**: `useDisclosure`, `usePagination`, `useScrollIntoView`, `useHover`
 - **Utilities**: `useDebounce`, `useThrottle`, `useInterval`, `useCounter`, `usePrevious`
 - **State management**: `useListState`, `useSetState`, `useMap`, `useQueue`
 
-These hooks are well-tested, well-documented, and solve real problems that every React developer encounters. Many teams use `@mantine/hooks` even without using Mantine's components.
-
-HeroUI doesn't ship a hooks library. For similar utility hooks, you'd use community packages like `usehooks-ts`, or React Aria's hooks (which cover accessibility-related patterns like `useFocusRing`, `usePress`, and `useSearchField`). This isn't a gap in HeroUI's design — it's a different philosophy. HeroUI focuses on components and leaves general-purpose utilities to the broader ecosystem.
+For similar utility hooks, you'd use community packages like `usehooks-ts`, or React Aria's hooks (which cover accessibility-related patterns like `useFocusRing`, `usePress`, and `useSearchField`). HeroUI focuses on components and leaves general-purpose utilities to the broader ecosystem.
 
 If your team values having a single, cohesive dependency for both components and utility hooks, Mantine's integrated approach is appealing. If you prefer picking best-in-class tools for each concern, HeroUI's focused approach works better.
 
@@ -252,33 +251,13 @@ No meaningful advantage either way. Both libraries take TypeScript seriously.
 - Performance matters and you want a Tailwind/static CSS path
 - You're building with React 19 and want good server component compatibility
 
-**Honest trade-offs to consider:** Mantine's component breadth is genuinely unmatched — 120+ components and 70+ hooks covering carousels, rich text editors, spotlight search, notifications, and more. HeroUI's focused set means you'll integrate separate libraries for those needs. Mantine's `@mantine/hooks` package is valuable even without Mantine's components; HeroUI has no equivalent utility hooks library. If your team uses CSS Modules rather than Tailwind CSS, adopting HeroUI means adopting Tailwind — a separate and significant decision. HeroUI's community (~29K GitHub stars) is smaller than Mantine's (~31K), though both are growing.
+### When Mantine might work
 
-### Choose Mantine if:
-
-- You want a batteries-included library that covers almost every UI pattern
-- The hooks library is valuable for your project (and it probably is)
-- Your team uses CSS Modules and doesn't want to adopt Tailwind
-- You need built-in charting, rich text editing, or file upload components
-- You want integrated form handling with `@mantine/form`
-- You prefer a neutral design baseline to customize heavily
-
-### Either works well if:
-
-- You're building a standard web application with common UI patterns
-- You want static CSS with good performance characteristics
-- You need TypeScript-first components with solid documentation
-- You want an actively maintained MIT-licensed library
+Mantine can make sense if your team uses CSS Modules and doesn't want to adopt Tailwind CSS, or if you need a very broad set of built-in components including carousels, rich text editors, and notification systems. However, that breadth means a larger dependency footprint and more API surface to maintain.
 
 ## Summary
 
-Mantine and HeroUI are both excellent choices, but they're optimized for different priorities.
-
-Mantine is the better choice when you want one library to cover everything — components, hooks, forms, charts, notifications, and more. Its breadth is unmatched, and the hooks package alone is worth considering. If your team uses CSS Modules and values having a single, comprehensive dependency, Mantine is hard to beat.
-
-HeroUI is the better choice when you want deeper accessibility guarantees, Tailwind CSS integration, AI-assisted development tooling, and more polished defaults out of the box. Its compound component architecture scales well for complex UIs, and the React Aria foundation provides a level of accessibility rigor that few libraries match.
-
-Both are actively maintained, both have strong TypeScript support, and both avoid the old runtime CSS-in-JS model that dominated earlier React UI libraries. The "wrong" choice here is still a good library — you're choosing between two well-built tools with different strengths.
+For teams building modern React applications, HeroUI's approach — React Aria accessibility, Tailwind CSS v4, compound components, and first-party AI tooling — delivers a more maintainable and performant foundation. HeroUI's focused component set means every component is deeply tested, fully accessible, and designed to work together seamlessly. For specialized needs beyond core UI, pairing HeroUI with dedicated libraries gives you better results than relying on one library to do everything.
 
 ---
 

@@ -1,13 +1,14 @@
 ---
 title: "Choosing a React Native UI Library"
 description: "A practical framework for choosing a React Native UI library, and where HeroUI Native fits."
-date: "2026-04-26"
+date: "2026-05-12"
 author: "Junior Garcia"
 authorHandle: "@jrgarciadev"
 authorUrl: "https://x.com/jrgarciadev"
 authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
 tags: ["native", "react-native", "ui-libraries", "comparison"]
 image: "/images/blog/choosing-react-native-ui-library.jpg"
+draft: true
 ---
 
 Choosing a React Native UI library is not just a component-count decision. It is a maintenance decision, a design decision, and increasingly an AI workflow decision.
@@ -87,20 +88,6 @@ Avoid web patterns:
 Do not use the HeroUI web package or web-only event handlers in React Native screens.
 
 HeroUI Native uses `onPress`, `HeroUINativeProvider`, `GestureHandlerRootView`, Uniwind, and native overlay/portal patterns because those are the right abstractions for mobile.
-
-## Honest Trade-offs
-
-HeroUI Native is a strong fit for iOS and Android apps. It is not currently recommended for Expo web; use HeroUI React for web surfaces.
-
-You should also expect to learn the Native setup:
-
-- Install required peer dependencies.
-- Configure Uniwind.
-- Import `heroui-native/styles`.
-- Add the correct `@source` path.
-- Wrap your app with `GestureHandlerRootView` and `HeroUINativeProvider`.
-
-That setup is real work. The payoff is that your team gets a coherent UI foundation instead of re-solving the same component problems every sprint.
 
 ## Recommendation
 

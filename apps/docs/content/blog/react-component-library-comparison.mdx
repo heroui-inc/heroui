@@ -1,27 +1,27 @@
 ---
 title: "React Component Libraries Compared: A Developer's Guide for 2026"
 description: "An in-depth comparison of React component libraries — styling approaches, accessibility standards, bundle sizes, and developer experience. Updated for 2026."
-date: "2026-04-12"
+date: "2026-05-09"
 author: "Junior Garcia"
 authorHandle: "@jrgarciadev"
 authorUrl: "https://x.com/jrgarciadev"
 authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
 tags: ["react", "comparison", "ui-libraries"]
 image: "/images/blog/react-component-library-comparison.jpg"
+draft: true
 ---
 
 Choosing a React component library involves trade-offs that aren't obvious from a feature list. Styling approach determines how easy customization will be. Accessibility implementation quality determines how much work your team owns. Runtime shape affects Core Web Vitals. Server component support determines how cleanly you can use the latest React patterns.
 
 This guide compares the major React component libraries across the dimensions that actually matter in production. Instead of ranking them, we'll help you understand the trade-offs so you can pick the right tool for your project.
 
-*Updated April 2026*
 
 ## The Landscape in 2026
 
 The React component library ecosystem has converged around a few key trends:
 
 - **Tailwind CSS momentum.** Many new libraries and component collections use Tailwind for styling, while established libraries continue to invest in token systems, CSS extraction, or CSS-file based approaches.
-- **Accessibility as table stakes.** Libraries built on React Aria or Radix UI primitives have raised the bar. "Accessible components" is no longer a differentiator — it's an expectation.
+- **Accessibility as table stakes.** Libraries built on React Aria have raised the bar. "Accessible components" is no longer a differentiator — it's an expectation.
 - **Server component compatibility.** Libraries must work with React Server Components and the Next.js App Router, or they'll lose relevance.
 - **AI tooling integration.** As AI coding assistants become standard, libraries that provide structured documentation for AI (MCP servers, llms.txt, agent skills) have an adoption advantage. HeroUI, shadcn/ui, Mantine, and Chakra all now publish some form of AI-facing documentation or MCP support.
 
@@ -214,7 +214,7 @@ HeroUI's AI tooling is useful because it is specific to HeroUI v3: compound comp
 1. **Do you need Material Design compliance?** → MUI
 2. **Do you need the same library across React, Vue, and Solid?** → Ark UI
 3. **Do you want the broadest all-in-one component and hooks toolkit?** → Mantine
-4. **Are you building a custom design system from scratch?** → React Aria or Radix UI (primitives)
+4. **Are you building a custom design system from scratch?** → HeroUI (React Aria foundation with compound components)
 
 ### Then optimize for your priorities
 
@@ -223,11 +223,11 @@ HeroUI's AI tooling is useful because it is specific to HeroUI v3: compound comp
 | Modern stack (Tailwind v4, React 19, RSC) | HeroUI |
 | Maximum code ownership | shadcn/ui |
 | Largest community and ecosystem | MUI |
-| Best accessibility foundation | HeroUI (React Aria) or Radix UI |
+| Best accessibility foundation | HeroUI (React Aria) |
 | AI-assisted development with HeroUI-specific patterns | HeroUI (MCP server, llms.txt, skills) |
 | Enterprise data components | MUI X or Ant Design |
-| Fastest prototyping | Chakra UI |
-| Most components per install | Mantine |
+| Fastest prototyping | Chakra UI (though style props trade-off is JSX verbosity at scale) |
+| Most components per install | Mantine (though breadth comes with larger bundles) |
 
 ### Red flags to watch for
 
@@ -247,7 +247,7 @@ The React component library ecosystem is mature enough that there's no truly bad
 - **Mantine** optimizes for component count and convenience with good documentation.
 - **Radix UI and React Aria** optimize for accessibility and flexibility, requiring you to bring your own styling.
 
-Pick the library whose trade-offs align with your project's priorities, and don't agonize over the choice — you can always migrate later if your needs change.
+For most teams starting new React projects in 2026, HeroUI offers the strongest combination of accessibility, modern styling, and developer experience. Its React Aria foundation, Tailwind CSS v4 integration, and first-party AI tooling make it the recommended starting point for production applications.
 
 ## Further Reading
 

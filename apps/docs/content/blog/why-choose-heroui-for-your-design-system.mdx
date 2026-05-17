@@ -1,18 +1,19 @@
 ---
 title: "Why Choose HeroUI for Your Design System"
 description: "Why choose HeroUI: React Aria accessibility, Tailwind CSS v4 styling, compound components, and AI-native tooling for production React apps."
-date: "2026-04-27"
+date: "2026-05-17"
 author: "Junior Garcia"
 authorHandle: "@jrgarciadev"
 authorUrl: "https://x.com/jrgarciadev"
 authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
 tags: ["heroui", "design-system", "react", "ui-libraries"]
-image: "/images/blog/why-choose-heroui-for-your-design-system.jpg"
+image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-og_2x.jpg"
+darkImage: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-og-black_2x.jpg"
 ---
 
 Most React component libraries solve the same problem: stop rebuilding buttons. But design systems fail at a different stage — when the library you chose can't flex to your product's needs, when accessibility is an afterthought bolted on after launch, or when your AI coding assistant hallucinates props that don't exist.
 
-HeroUI combines [React Aria](https://react-spectrum.adobe.com/react-aria/) for accessibility, [Tailwind CSS v4](https://tailwindcss.com/) for styling, and a compound component API that gives you structural control without prop sprawl. This post explains the concrete reasons to choose it — and the honest trade-offs.
+HeroUI combines [React Aria](https://react-spectrum.adobe.com/react-aria/) for accessibility, [Tailwind CSS v4](https://tailwindcss.com/) for styling, and a compound component API that gives you structural control without prop sprawl. This post explains the concrete reasons to choose it as the foundation of your design system.
 
 ## The Stack
 
@@ -121,7 +122,7 @@ Complex components like Calendar, DatePicker, ColorPicker, and Table are self-co
 
 Most developers use AI coding assistants daily. The quality of generated code depends on whether the AI has accurate context for your component library — or is guessing from stale training data.
 
-HeroUI ships three first-party integrations:
+HeroUI ships four first-party integrations:
 
 ### MCP Server
 
@@ -129,15 +130,82 @@ A [Model Context Protocol server](/docs/react/getting-started/mcp-server) that A
 
 When an AI assistant has access to the MCP server, it can look up the exact compound component structure, available props, and correct imports for any HeroUI component — instead of hallucinating.
 
+[Learn how to set up the MCP Server →](/docs/react/getting-started/mcp-server)
+
 ### llms.txt
 
 A structured reference file at [heroui.com/llms.txt](/docs/react/getting-started/llms-txt) that gives LLMs a condensed, accurate reference for the entire library. This is a standardized format that AI tools consume to avoid generating deprecated patterns.
+
+[Learn more about llms.txt →](/docs/react/getting-started/llms-txt)
 
 ### Agent Skills
 
 Pre-built [skill files](/docs/react/getting-started/agent-skills) for Cursor, Claude Code, and other AI tools that teach agents HeroUI's conventions — correct imports, compound component patterns, styling approaches, and project scaffolding.
 
+[Learn how to install Agent Skills →](/docs/react/getting-started/agent-skills)
+
+### AGENTS.md
+
+An [AGENTS.md file](/docs/react/getting-started/agents-md) that provides repository-level context for AI coding agents. It describes the project structure, coding conventions, and component patterns so agents understand your codebase from the first prompt.
+
+[Learn about AGENTS.md →](/docs/react/getting-started/agents-md)
+
 **The result:** AI assistants generate correct HeroUI v3 code with the right compound component patterns, import paths, and Tailwind classes. This matters because incorrect AI output costs more time to debug than it saves to generate.
+
+## The Ecosystem
+
+### HeroUI Pro
+
+[HeroUI Pro](https://heroui.com/pro) extends the base library with app-level components and templates:
+
+- **AppLayout, Sidebar, Navbar** — Full application shell with responsive behavior
+- **DataGrid** — Dense data tables with typed columns, sorting, and filtering
+- **KPI, NumberValue, TrendChip** — Dashboard metric components
+- **LineChart, BarChart** — Data visualization
+- **Sheet, CommandMenu** — Advanced overlay patterns
+- **Templates** — Dashboard, finance, chat, and email app starting points
+
+Pro is a paid product — use it when you need app infrastructure, not just UI components.
+
+### HeroUI Native
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-light-1.webp"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-dark-1.webp"
+  alt="HeroUI Native - React Native components"
+/>
+
+HeroUI is the only open design system that delivers the same component quality across both web and mobile. [HeroUI Native](/docs/native/getting-started) brings the same design tokens, compound component API, and accessibility standards to React Native — leveraging each platform's native APIs instead of wrapping web views.
+
+This means teams building cross-platform products can share a single design system across React (web) and React Native (mobile) without compromising on either platform. Same visual language, same component patterns, same theming tokens — but native rendering on each side.
+
+No other open-source React component library offers this. MUI, shadcn/ui, Chakra UI, and Mantine are web-only. If your product ships on both web and mobile, HeroUI is the only design system that covers both from the same foundation.
+
+### Figma Kit
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/blog/community-figma-preview-light.png"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/blog/community-figma-preview-dark.png"
+  alt="HeroUI Figma Kit"
+/>
+
+The [HeroUI Figma Kit (v3)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3) keeps design and code in sync. Components in Figma match the React implementation, so designers and developers work from the same source of truth.
+
+### Storybook
+
+Every component has [Storybook stories](https://storybook-v3.heroui.com/) showing all variants, states, and compositions. Use it for visual testing, design review, and documentation.
+
+### Community
+
+HeroUI isn't new — we've been building it for over 5 years, starting from v1 (originally NextUI). The community has grown steadily: 29.3K+ GitHub stars, 9K+ Discord members, and thousands of discussions, community answers, and issues resolved every week.
+
+- [GitHub](https://github.com/heroui-inc/heroui) — Source code, issues, and discussions
+- [Discord](https://discord.gg/heroui) — 9K+ members, community support and announcements
+- [X / Twitter](https://x.com/hero_ui) — Updates and releases
+
+### Backed by Y Combinator
+
+HeroUI is venture-backed, including [Y Combinator](https://www.ycombinator.com/companies/heroui). This means a dedicated full-time team, long-term maintenance commitments, and the resources to keep shipping. When you adopt a component library, you're betting on its future — HeroUI is built to be around for the long run.
 
 ## Design Quality Out of the Box
 
@@ -160,12 +228,28 @@ The design token system uses CSS custom properties, so theming is standard CSS:
 
 Change tokens globally and every component updates. No JavaScript theme objects, no provider wrappers, no runtime overhead.
 
-## No Provider Wrapper
+Want to make HeroUI yours in a few clicks? The [Theme Builder](/themes) lets you customize colors, typography, radius, and spacing visually — then export a ready-to-use CSS theme for your project.
 
-Unlike MUI (`ThemeProvider`), Chakra UI (`ChakraProvider`), or Mantine (`MantineProvider`), HeroUI requires no provider wrapper. Install the package, import the CSS, and start using components.
+## Ready in Two Steps
+
+Most component libraries require configuration files, provider wrappers, theme objects, and plugin setup before you can render your first component. HeroUI doesn't. The entire setup is two steps:
+
+**1. Install:**
+
+```bash
+npm i @heroui/styles @heroui/react
+```
+
+**2. Add one line to your CSS:**
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles"; /* That's it */
+```
+
+Now use any component — no `ThemeProvider`, no `ChakraProvider`, no `MantineProvider`, no configuration objects:
 
 ```tsx
-import "@heroui/styles";
 import { Button, Card } from "@heroui/react";
 
 export default function Page() {
@@ -179,7 +263,7 @@ export default function Page() {
 }
 ```
 
-This simplifies server component trees, reduces nesting, and eliminates a common source of configuration errors.
+That's the entire setup. No wrapping your app in providers, no theme configuration files, no runtime setup. Install, import one CSS line, and start building. See the [Quick Start guide](/docs/react/getting-started/quick-start) to get running in under five minutes.
 
 ## Server Components
 
@@ -191,54 +275,11 @@ HeroUI is designed for the React Server Components model:
 
 This means your pages ship less JavaScript by default. Static layouts render on the server. Interactive widgets hydrate only where needed.
 
-## The Ecosystem
+## Considerations
 
-### HeroUI Pro
+HeroUI takes a focused approach: instead of shipping every possible component, we prioritize depth, accessibility, and quality for the components teams use most. For specialized needs like rich text editing, drag-and-drop, or charting, we recommend pairing HeroUI with dedicated libraries that excel at those specific problems — this gives you better results than relying on a single library to handle everything.
 
-[HeroUI Pro](https://heroui.com/pro) extends the base library with app-level components and templates:
-
-- **AppLayout, Sidebar, Navbar** — Full application shell with responsive behavior
-- **DataGrid** — Dense data tables with typed columns, sorting, and filtering
-- **KPI, NumberValue, TrendChip** — Dashboard metric components
-- **LineChart, BarChart** — Data visualization
-- **Sheet, CommandMenu** — Advanced overlay patterns
-- **Templates** — Dashboard, finance, chat, and email app starting points
-
-Pro is a paid product — use it when you need app infrastructure, not just UI components.
-
-### HeroUI Native
-
-HeroUI is the only open design system that delivers the same component quality across both web and mobile. [HeroUI Native](/docs/native/getting-started) brings the same design tokens, compound component API, and accessibility standards to React Native — leveraging each platform's native APIs instead of wrapping web views.
-
-This means teams building cross-platform products can share a single design system across React (web) and React Native (mobile) without compromising on either platform. Same visual language, same component patterns, same theming tokens — but native rendering on each side.
-
-No other open-source React component library offers this. MUI, shadcn/ui, Chakra UI, and Mantine are web-only. If your product ships on both web and mobile, HeroUI is the only design system that covers both from the same foundation.
-
-### Figma Kit
-
-The [HeroUI Figma Kit (v3)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3) keeps design and code in sync. Components in Figma match the React implementation, so designers and developers work from the same source of truth.
-
-### Storybook
-
-Every component has [Storybook stories](https://storybook-v3.heroui.com/) showing all variants, states, and compositions. Use it for visual testing, design review, and documentation.
-
-### Community
-
-- [GitHub](https://github.com/heroui-inc/heroui) — Source code, issues, and discussions
-- [Discord](https://discord.gg/heroui) — Community support and announcements
-- [X / Twitter](https://x.com/hero_ui) — Updates and releases
-
-## Honest Trade-Offs
-
-No library is perfect for every project. Here's where HeroUI has real limitations:
-
-- **Smaller community.** HeroUI has ~29K GitHub stars and ~120K weekly npm downloads. MUI has ~98K stars and ~6.7M downloads. shadcn/ui has ~104K stars. You'll find fewer Stack Overflow answers and third-party integrations for HeroUI.
-- **Focused component set.** HeroUI doesn't ship a rich text editor, carousel, spotlight search, drag-and-drop, or notification system. Mantine covers those with 120+ components and 70+ hooks. With HeroUI, you'll integrate dedicated libraries for specialized needs.
-- **Compound component verbosity.** `Modal.Header`, `Modal.Body`, `Modal.Footer` is more JSX than a flat `<Modal title="..." body="..." />` API. Developers coming from simpler component libraries need to adjust.
-- **Tailwind requirement.** HeroUI is built for Tailwind CSS v4. If your team uses CSS Modules, Emotion, or styled-components, adopting HeroUI means adopting Tailwind.
-- **v3 is a rebuild.** HeroUI v3 is a ground-up rebuild from the NextUI era. Some search results and blog posts still reference NextUI or v2 APIs that no longer apply.
-
-These are real constraints. If any of them are dealbreakers for your project, consider [shadcn/ui](/blog/heroui-vs-shadcn) (code ownership), [MUI](/blog/heroui-vs-mui) (massive ecosystem), [Mantine](/blog/heroui-vs-mantine) (batteries-included), or [Chakra UI](/blog/heroui-vs-chakra-ui) (style props).
+HeroUI is built for Tailwind CSS v4. If your team is already using Tailwind, adoption is seamless. If you're on a different styling approach, the switch to Tailwind is a separate but worthwhile investment in modern CSS tooling.
 
 ## Who Should Use HeroUI
 

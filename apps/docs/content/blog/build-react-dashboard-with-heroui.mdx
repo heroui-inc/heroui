@@ -1,16 +1,16 @@
 ---
 title: "How to Build a React Dashboard with HeroUI Pro"
 description: "Create responsive admin dashboards with HeroUI and HeroUI Pro using AppLayout, Sidebar, Navbar, KPI, DataGrid, and chart components."
-date: "2026-04-26"
+date: "2026-05-11"
 author: "Junior Garcia"
 authorHandle: "@jrgarciadev"
 authorUrl: "https://x.com/jrgarciadev"
 authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
 tags: ["react", "dashboard", "tutorial", "heroui", "admin"]
 image: "/images/blog/build-react-dashboard-with-heroui.jpg"
+draft: true
 ---
 
-*Updated April 2026*
 
 I've watched too many teams spend their first two sprints hand-rolling a sidebar, a responsive navbar, and a metrics card layout — only to rip it out later when the requirements get real. If you have HeroUI Pro, skip that phase entirely.
 
@@ -405,8 +405,6 @@ Dashboards are dense — data tables, form controls, navigation, and overlays on
 - **Static CSS for data-heavy pages.** Tailwind v4 generates all styles at build time. Dashboards with KPI cards, charts, and grids don't pay a runtime styling tax.
 - **Pro primitives instead of hand-rolled infrastructure.** AppLayout, Sidebar, Navbar, KPI, DataGrid, and chart components from [HeroUI Pro](https://heroui.com/pro) save weeks of dashboard scaffold work.
 - **AI assistants that know the Pro API.** The [MCP server](/docs/react/getting-started/mcp-server) and [agent skills](/docs/react/getting-started/agent-skills) let AI tools scaffold dashboard views with correct component APIs instead of guessing.
-
-**Trade-offs:** HeroUI Pro is a paid product — the dashboard components (AppLayout, DataGrid, KPI, charts) are not included in the free base library. HeroUI has a smaller community than MUI; if you need MUI X-level features like row grouping, column pinning, or server-side pagination with millions of rows, MUI's Data Grid is still best-in-class for that specific use case.
 
 ## Next Steps
 

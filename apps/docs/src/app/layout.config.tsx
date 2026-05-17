@@ -80,19 +80,19 @@ export const homeLayoutLinks = [
     type: "menu" as const,
   },
   {
-    active: "none" as const,
+    active: "nested-url" as const,
     on: "nav" as const,
     text: "Docs",
     url: "/docs/react/getting-started",
   },
   {
-    active: "none" as const,
+    active: "nested-url" as const,
     on: "nav" as const,
     text: "Themes",
     url: "/themes",
   },
   {
-    active: "none" as const,
+    active: "nested-url" as const,
     on: "nav" as const,
     text: "Components",
     url: "/docs/react/components",

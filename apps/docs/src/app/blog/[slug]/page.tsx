@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 
 import {ChevronLeft} from "@gravity-ui/icons";
+import {Chip} from "@heroui/react";
 import {rehypeCode, rehypeCodeDefaultOptions} from "fumadocs-core/mdx-plugins";
 import Link from "next/link";
 import {notFound} from "next/navigation";
@@ -8,10 +9,13 @@ import {compileMDX} from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 
 import {ProBanner} from "@/app/(home)/components/pro-banner";
+import {DocsImage} from "@/components/docs-image";
 import {siteConfig} from "@/config/site";
 import {getAllBlogPosts, getBlogPost, getRelatedPosts} from "@/lib/blog";
 import {getTechArticleJsonLd} from "@/lib/json-ld";
 import {getMDXComponents} from "@/mdx-components";
+
+import {PostCard} from "../post-card";
 
 interface BlogPostPageProps {
   params: Promise<{slug: string}>;
@@ -91,51 +95,69 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
         dangerouslySetInnerHTML={{__html: JSON.stringify(articleJsonLd)}}
         type="application/ld+json"
       />
-      <main className="container mx-auto max-w-3xl px-4 py-16">
-        <Link className="button button--tertiary -ml-2 mb-12 inline-flex items-center gap-1" href="/blog">
+      <main className="mx-auto w-full max-w-3xl px-6 py-16 sm:px-8">
+        <Link
+          className="button button--tertiary mb-12 -ml-2 inline-flex items-center gap-1"
+          href="/blog"
+        >
           <ChevronLeft className="size-4" />
           Back to Blog
         </Link>
 
         <article>
-          <header className="border-fd-border mb-12 border-b pb-10">
-            <time className="text-fd-muted-foreground text-sm" dateTime={post.date}>
+          <header className="mb-10">
+            {!!post.draft && (
+              <Chip className="mb-3" color="warning" size="sm" variant="soft">
+                Draft
+              </Chip>
+            )}
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+              {post.title}
+            </h1>
+            <p className="text-fd-muted-foreground mt-4 text-lg leading-relaxed">
+              {post.description}
+            </p>
+          </header>
+
+          {!!post.image && post.image.startsWith("http") && (
+            <div className="mb-8">
+              <DocsImage alt={post.title} darkSrc={post.darkImage} src={post.image} />
+            </div>
+          )}
+
+          <div className="text-fd-muted-foreground mb-10 flex items-center gap-2 text-sm">
+            {post.authorUrl ? (
+              <a
+                className="group/author hover:text-fd-foreground flex items-center transition-colors"
+                href={post.authorUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {post.authorAvatar ? (
+                  <img
+                    alt=""
+                    className="mr-0 size-0 rounded-full opacity-0 transition-all group-hover/author:mr-2 group-hover/author:size-6 group-hover/author:opacity-100"
+                    src={post.authorAvatar}
+                  />
+                ) : null}
+                <span>{post.author}</span>
+              </a>
+            ) : (
+              <span>{post.author}</span>
+            )}
+            <span>&middot;</span>
+            <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               })}
             </time>
-            <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              {post.title}
-            </h1>
-            <p className="text-fd-muted-foreground mt-4 text-lg leading-relaxed">
-              {post.description}
-            </p>
-            <div className="text-fd-muted-foreground mt-6 flex items-center gap-3 text-sm">
-              {post.authorAvatar ? (
-                <img
-                  alt=""
-                  className="size-8 rounded-full"
-                  height={32}
-                  src={post.authorAvatar}
-                  width={32}
-                />
-              ) : null}
-              <div className="flex flex-col">
-                <span className="text-fd-foreground font-medium">{post.author}</span>
-                {post.authorUrl && post.authorHandle ? (
-                  <a className="hover:text-fd-foreground" href={post.authorUrl}>
-                    {post.authorHandle}
-                  </a>
-                ) : post.authorHandle ? (
-                  <span>{post.authorHandle}</span>
-                ) : null}
-              </div>
-            </div>
-          </header>
+          </div>
 
-          <div className="prose prose-neutral dark:prose-invert max-w-none">{content}</div>
+          <div className="prose prose-neutral dark:prose-invert max-w-none [&_pre]:overflow-x-auto [&_table]:overflow-x-auto">
+            {content}
+          </div>
 
           <ProBanner />
 
@@ -146,19 +168,12 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
 
             return (
               <nav aria-label="Related posts" className="border-fd-border mt-12 border-t pt-10">
-                <h2 className="text-lg font-semibold">Related Posts</h2>
-                <ul className="mt-4 space-y-3">
+                <h2 className="mb-6 text-lg font-semibold">Related Posts</h2>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {related.map((r) => (
-                    <li key={r.slug}>
-                      <Link
-                        className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-                        href={`/blog/${r.slug}`}
-                      >
-                        {r.title}
-                      </Link>
-                    </li>
+                    <PostCard key={r.slug} compact post={r} />
                   ))}
-                </ul>
+                </div>
               </nav>
             );
           })()}

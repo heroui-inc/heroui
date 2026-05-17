@@ -1,20 +1,20 @@
 ---
 title: "HeroUI vs shadcn/ui: Which React UI Library Should You Choose in 2026?"
 description: "A comprehensive comparison of HeroUI and shadcn/ui — two popular React component libraries with very different approaches to styling, ownership, and developer experience."
-date: "2026-04-08"
+date: "2026-05-07"
 author: "Junior Garcia"
 authorHandle: "@jrgarciadev"
 authorUrl: "https://x.com/jrgarciadev"
 authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
 tags: ["comparison", "heroui", "shadcn", "react"]
 image: "/images/blog/heroui-vs-shadcn.jpg"
+draft: true
 ---
 
 HeroUI and shadcn/ui are two of the most popular choices for React developers building production applications with Tailwind CSS. HeroUI is an installed npm package built on React Aria and Tailwind CSS v4, shipping compound components with accessibility handled out of the box. shadcn/ui is a copy-paste component collection built on Radix UI. Both produce good-looking, accessible UIs — but they take fundamentally different approaches to distribution, styling, and maintenance that matter more than feature lists suggest.
 
 This isn't a "which is better" article. It's a guide to understanding the trade-offs so you can make an informed choice for your specific project.
 
-*Updated April 2026*
 
 ## The TL;DR
 
@@ -27,7 +27,6 @@ This isn't a "which is better" article. It's a guide to understanding the trade-
 | **Component API** | Compound components (`Card.Header`) | Flat components with variant props |
 | **AI tooling** | MCP server, llms.txt, agent skills | MCP server, llms.txt, skills |
 | **Code ownership** | In node_modules | In your repo |
-| **Community size** | Growing (~29K GitHub stars) | Very large (~104K GitHub stars) |
 
 ## The Fundamental Difference
 
@@ -244,17 +243,9 @@ Choose HeroUI when:
 - **You want a design system foundation.** HeroUI's design tokens and theming system give you a consistent visual language out of the box.
 - **Your team doesn't have time to maintain component code.** HeroUI handles updates, bug fixes, and accessibility improvements through npm.
 
-**Honest trade-offs to consider:** HeroUI has a smaller community than shadcn/ui (~29K vs ~104K GitHub stars) and fewer third-party extensions. The component set is focused — you won't find a built-in rich text editor or spotlight search. The compound component pattern (`Card.Header`, `Modal.Body`) is more verbose than flat APIs, which takes adjustment if you're coming from simpler component libraries. HeroUI v3 is a ground-up rebuild, so some older NextUI content in search results may not apply to current APIs.
+### When shadcn/ui might work
 
-## When to Choose shadcn/ui
-
-Choose shadcn/ui when:
-
-- **You need maximum code ownership.** If company policy requires all code to be in your repository (not in node_modules), shadcn/ui's model fits.
-- **You need heavy visual customization.** If your design diverges significantly from any library's defaults, owning the source code makes divergent changes easier.
-- **You have accessibility expertise in-house.** Your team can maintain Radix-based accessibility as you modify components.
-- **You want to learn how components work.** Having the source code in your project is educational — you can read and understand every line.
-- **You're comfortable with the maintenance trade-off.** You accept that updates are manual and you're willing to invest the time.
+shadcn/ui can make sense if your company policy requires all component code to live in your repository rather than in node_modules, or if your design diverges so heavily from any library's defaults that you need to modify component internals. Keep in mind that this means your team owns all maintenance, accessibility updates, and breaking changes — a cost that grows with every component you copy in. Additionally, shadcn/ui is built on Radix UI, whose original team has shifted focus to Base UI, raising long-term maintenance questions.
 
 ## Can You Use Both?
 
@@ -264,11 +255,7 @@ This hybrid approach gives you the best of both worlds: React Aria's accessibili
 
 ## Conclusion
 
-HeroUI and shadcn/ui are both excellent choices for different reasons. HeroUI gives you a cohesive, accessible, AI-friendly component library that's easy to maintain. shadcn/ui gives you full code ownership with the trade-off of manual maintenance.
-
-The decision usually comes down to one question: **Do you want a maintained package with a consistent design system, or copied source with maximum ownership?**
-
-Most teams building products (SaaS, internal tools, consumer apps) benefit more from HeroUI's approach. Teams building custom design systems or needing pixel-perfect brand control may prefer shadcn/ui.
+For most teams building products — SaaS apps, internal tools, consumer applications — HeroUI's approach delivers better results: maintained accessibility through React Aria, consistent updates via npm, a cohesive design system, and AI tooling that works out of the box. You get the benefits of Tailwind CSS without the maintenance burden of owning every component's source code.
 
 ## Get Started
 
