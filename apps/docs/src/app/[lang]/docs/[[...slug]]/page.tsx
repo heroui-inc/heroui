@@ -91,16 +91,16 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
         type="application/ld+json"
       />
       <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             getTechArticleJsonLd({
-              title: page.data.title,
               description: page.data.description ?? "",
+              title: page.data.title,
               url: `https://heroui.com${pageUrl}`,
             }),
           ),
         }}
-        type="application/ld+json"
       />
       <DocsPage
         full={page.data.full}
@@ -112,40 +112,40 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
           style: "normal",
         }}
       >
-      <section className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <DocsTitle className="flex items-center gap-2">
-            {page.data.title}
-            {!!isComponentStatusIcon && (
-              <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
+        <section className="flex flex-col gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <DocsTitle className="flex items-center gap-2">
+              {page.data.title}
+              {!!isComponentStatusIcon && (
+                <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
+              )}
+            </DocsTitle>
+            {page.data.toc.length > 0 && (
+              <div className="flex items-center gap-2">
+                <ViewOptions markdownUrl={`${page.url}.mdx`} />
+              </div>
             )}
-          </DocsTitle>
-          {page.data.toc.length > 0 && (
-            <div className="flex items-center gap-2">
-              <ViewOptions markdownUrl={`${page.url}.mdx`} />
-            </div>
-          )}
-        </div>
-        <DocsDescription className="text-md mt-2 mb-4">{page.data.description}</DocsDescription>
-        {!!links && <ComponentLinks links={links} />}
-      </section>
-      <DocsBody className="prose-sm">
-        <MDXContent
-          components={getMDXComponents({
-            ComponentsCategory: (props) => <ComponentsCategory {...props} locale={params.lang} />,
-            NativeComponentsCategory: (props) => (
-              <NativeComponentsCategory {...props} locale={params.lang} />
-            ),
-            PRContributors: () => (
-              <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
-            ),
+          </div>
+          <DocsDescription className="text-md mt-2 mb-4">{page.data.description}</DocsDescription>
+          {!!links && <ComponentLinks links={links} />}
+        </section>
+        <DocsBody className="prose-sm">
+          <MDXContent
+            components={getMDXComponents({
+              ComponentsCategory: (props) => <ComponentsCategory {...props} locale={params.lang} />,
+              NativeComponentsCategory: (props) => (
+                <NativeComponentsCategory {...props} locale={params.lang} />
+              ),
+              PRContributors: () => (
+                <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
+              ),
 
-            // this allows you to link to other pages with relative file paths
-            a: createRelativeLink(source, page),
-          })}
-        />
-      </DocsBody>
-    </DocsPage>
+              // this allows you to link to other pages with relative file paths
+              a: createRelativeLink(source, page),
+            })}
+          />
+        </DocsBody>
+      </DocsPage>
     </>
   );
 }

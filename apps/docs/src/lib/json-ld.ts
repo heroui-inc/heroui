@@ -4,14 +4,10 @@ export function getOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "HeroUI",
-    url: "https://heroui.com",
     logo: "https://heroui.com/icons/favicon.svg",
-    sameAs: [
-      siteConfig.links.github,
-      siteConfig.links.twitter,
-      siteConfig.links.discord,
-    ],
+    name: "HeroUI",
+    sameAs: [siteConfig.links.github, siteConfig.links.twitter, siteConfig.links.discord],
+    url: "https://heroui.com",
   };
 }
 
@@ -19,13 +15,13 @@ export function getWebSiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "HeroUI",
-    url: "https://heroui.com",
     description: siteConfig.description,
+    name: "HeroUI",
     publisher: {
       "@type": "Organization",
       name: "HeroUI",
     },
+    url: "https://heroui.com",
   };
 }
 
@@ -33,17 +29,17 @@ export function getSoftwareApplicationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "HeroUI",
     applicationCategory: "DeveloperApplication",
-    operatingSystem: "Any",
+    description: siteConfig.description,
+    downloadUrl: "https://www.npmjs.com/package/@heroui/react",
+    name: "HeroUI",
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
     },
-    description: siteConfig.description,
+    operatingSystem: "Any",
     url: "https://heroui.com",
-    downloadUrl: "https://www.npmjs.com/package/@heroui/react",
   };
 }
 
@@ -53,9 +49,9 @@ export function getBreadcrumbJsonLd(items: {name: string; url: string}[]) {
     "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
       item: item.url,
+      name: item.name,
+      position: index + 1,
     })),
   };
 }
@@ -73,13 +69,6 @@ export function getTechArticleJsonLd(params: {
   return {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    headline: params.title,
-    description: params.description,
-    url: params.url,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": params.url,
-    },
     author: params.authorName
       ? {
           "@type": "Person",
@@ -90,14 +79,21 @@ export function getTechArticleJsonLd(params: {
           "@type": "Organization",
           name: "HeroUI",
         },
+    description: params.description,
+    headline: params.title,
+    mainEntityOfPage: {
+      "@id": params.url,
+      "@type": "WebPage",
+    },
     publisher: {
       "@type": "Organization",
-      name: "HeroUI",
       logo: {
         "@type": "ImageObject",
         url: "https://heroui.com/icons/favicon.svg",
       },
+      name: "HeroUI",
     },
+    url: params.url,
     ...(params.datePublished && {datePublished: params.datePublished}),
     ...(params.dateModified && {dateModified: params.dateModified || params.datePublished}),
     ...(params.image && {image: params.image}),
@@ -111,24 +107,24 @@ export function getBlogJsonLd(params: {
   return {
     "@context": "https://schema.org",
     "@type": "Blog",
-    url: params.url,
-    name: "HeroUI Blog",
+    blogPost: params.posts.map((post) => ({
+      "@type": "BlogPosting",
+      datePublished: post.datePublished,
+      description: post.description,
+      headline: post.title,
+      url: post.url,
+    })),
     description:
       "Guides, tutorials, and resources for building modern React applications with HeroUI.",
+    name: "HeroUI Blog",
     publisher: {
       "@type": "Organization",
-      name: "HeroUI",
       logo: {
         "@type": "ImageObject",
         url: "https://heroui.com/icons/favicon.svg",
       },
+      name: "HeroUI",
     },
-    blogPost: params.posts.map((post) => ({
-      "@type": "BlogPosting",
-      headline: post.title,
-      url: post.url,
-      datePublished: post.datePublished,
-      description: post.description,
-    })),
+    url: params.url,
   };
 }
