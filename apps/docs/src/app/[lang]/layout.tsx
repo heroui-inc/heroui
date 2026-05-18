@@ -50,7 +50,7 @@ export default async function Layout({
         <NuqsAdapter>
           <NextProvider>
             <TreeContextProvider tree={source.getPageTree(lang)}>
-              <CustomRootProvider>{children}</CustomRootProvider>
+              <CustomRootProvider lang={lang}>{children}</CustomRootProvider>
             </TreeContextProvider>
           </NextProvider>
         </NuqsAdapter>

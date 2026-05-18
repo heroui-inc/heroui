@@ -1,6 +1,5 @@
 import type {MDXComponents} from "mdx/types";
 
-import Link from "fumadocs-core/link";
 import {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {Pre} from "fumadocs-ui/components/codeblock";
@@ -13,6 +12,7 @@ import {ComponentPreview} from "./components/component-preview";
 import {ComponentsCategory} from "./components/components-category";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
+import {LocaleLink} from "./components/locale-link";
 import {NativeComponentsCategory} from "./components/native-components-category";
 import {NativeImageHeroView} from "./components/native-image-hero-view";
 import {NativeQRPreviewPopover} from "./components/native-qr-preview-popover";
@@ -68,10 +68,13 @@ function ComponentCard({
   href: string;
 }) {
   return (
-    <a className="block rounded-lg border p-4 transition-colors hover:bg-muted/50" href={href}>
+    <LocaleLink
+      className="block rounded-lg border p-4 transition-colors hover:bg-muted/50"
+      href={href}
+    >
       <h3 className="mb-2 font-semibold">{name}</h3>
       <p className="text-sm text-muted">{description}</p>
-    </a>
+    </LocaleLink>
   );
 }
 
@@ -122,7 +125,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ExampleCount,
     Icon,
     Info,
-    Link,
+    Link: LocaleLink,
     NativeComponentsCategory,
     NativeImageHeroView,
     NativeQRPreviewPopover,

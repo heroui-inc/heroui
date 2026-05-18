@@ -16,6 +16,7 @@ import {
   DocsPage,
   DocsTitle,
 } from "@/components/fumadocs/layouts/notebook/page";
+import {LocaleLink} from "@/components/locale-link";
 import {NativeComponentsCategory} from "@/components/native-components-category";
 import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
@@ -141,7 +142,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
               ),
 
               // this allows you to link to other pages with relative file paths
-              a: createRelativeLink(source, page),
+              a: createRelativeLink(source, page, LocaleLink),
             })}
           />
         </DocsBody>

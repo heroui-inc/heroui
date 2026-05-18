@@ -36,6 +36,7 @@ export default async function Layout({
     <>
       <HeaderBanner />
       <DocsLayout
+        i18n
         containerProps={{style: layoutStyle}}
         tabMode="navbar"
         tree={source.getPageTree(lang)}

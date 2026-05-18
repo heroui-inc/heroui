@@ -2,11 +2,10 @@
 
 import type {ComponentInfo} from "../components-registry";
 import type {StatusChipStatus} from "./status-chip";
-import type {UrlObject} from "url";
 
 import {Link} from "@heroui/react";
+import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
-import NextLink from "next/link";
 
 import {cn} from "@/utils/cn";
 import {CDN_URL} from "@/utils/constants";
@@ -79,9 +78,9 @@ function ConditionalLink({
   }
 
   return (
-    <NextLink className={className} href={href as unknown as UrlObject}>
+    <LinkRoot className={className} href={href}>
       {children}
-    </NextLink>
+    </LinkRoot>
   );
 }
 

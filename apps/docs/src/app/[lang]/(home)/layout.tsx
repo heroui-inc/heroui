@@ -10,6 +10,7 @@ export default function Layout({children}: {children: ReactNode}) {
   return (
     <HomeLayout
       {...baseOptions}
+      i18n
       links={[
         ...homeLayoutLinks,
         {
