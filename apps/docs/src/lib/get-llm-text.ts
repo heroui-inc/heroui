@@ -13,6 +13,7 @@ import remarkMdx from "remark-mdx";
 import {getRelatedComponents} from "@/components-registry";
 import {siteConfig} from "@/config/site";
 import {getDemo} from "@/demos";
+import {i18n} from "@/lib/i18n";
 
 const processor = remark()
   .use(remarkMdx)
@@ -88,7 +89,7 @@ export async function getLLMText(page: Page) {
   const url = page.url || "";
   const normalizedPath = normalizePagePath(page.path);
 
-  const rawContent = await getRawMDXContent(page.path, page.locale);
+  const rawContent = await getRawMDXContent(page.path, page.locale ?? i18n.defaultLanguage);
   const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
   if (!rawContent) {
@@ -285,7 +286,7 @@ export async function getLLMRawText(page: Page) {
   const normalizedPath = normalizePagePath(page.path);
   const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
-  const rawContent = await getRawMDXContent(page.path, page.locale);
+  const rawContent = await getRawMDXContent(page.path, page.locale ?? i18n.defaultLanguage);
 
   if (!rawContent) {
     return `<page url="${url}">

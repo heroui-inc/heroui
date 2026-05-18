@@ -5,6 +5,7 @@ import {Feed} from "feed";
 
 import {siteConfig} from "@/config/site";
 import {getAllBlogPosts} from "@/lib/blog";
+import {i18n} from "@/lib/i18n";
 import {source} from "@/lib/source";
 
 async function getFileLastModified(pagePath: string, locale: string): Promise<Date> {
@@ -49,7 +50,7 @@ export const getRSS = async (): Promise<string> => {
 
   for (const page of source.getPages()) {
     const pageUrl = new URL(page.url, baseUrl);
-    const lastModified = await getFileLastModified(page.path, page.locale);
+    const lastModified = await getFileLastModified(page.path, page.locale ?? i18n.defaultLanguage);
 
     feed.addItem({
       author: [

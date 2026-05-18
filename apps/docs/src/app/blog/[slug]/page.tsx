@@ -8,7 +8,7 @@ import {notFound} from "next/navigation";
 import {compileMDX} from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 
-import {ProBanner} from "@/app/(home)/components/pro-banner";
+import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {DocsImage} from "@/components/docs-image";
 import {siteConfig} from "@/config/site";
 import {getAllBlogPosts, getBlogPost, getRelatedPosts} from "@/lib/blog";

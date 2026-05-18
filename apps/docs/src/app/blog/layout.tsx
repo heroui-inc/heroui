@@ -2,7 +2,7 @@ import type {ReactNode} from "react";
 
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 
-import {baseOptions, homeLayoutLinks} from "@/app/layout.config";
+import {baseOptions, homeLayoutLinks} from "@/app/[lang]/layout.config";
 
 export default function BlogLayout({children}: {children: ReactNode}) {
   return (

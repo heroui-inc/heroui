@@ -6,7 +6,7 @@ import {Tag, TagGroup} from "@heroui/react";
 import {parseAsStringLiteral, useQueryState} from "nuqs";
 import {useMemo} from "react";
 
-import {ProBanner} from "@/app/(home)/components/pro-banner";
+import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 
 import {PostCard} from "./post-card";
 

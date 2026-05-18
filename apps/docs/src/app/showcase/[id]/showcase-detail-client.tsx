@@ -1,6 +1,7 @@
 "use client";
 
 import type {ShowcaseItem as ShowcaseItemType} from "@/showcases";
+import type {UrlObject} from "url";
 
 import {chipVariants} from "@heroui/react";
 import LinkRoot from "next/link";
@@ -111,13 +112,15 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
               {showcase.components.map((component) => (
                 <LinkRoot
                   key={component}
-                  href={`/docs/components/${component.toLowerCase().replace(/group$/, "-group")}`}
                   className={cn(
                     chipVariants({
                       class: "rounded-full text-muted hover:bg-default/50",
                       variant: "tertiary",
                     }),
                   )}
+                  href={
+                    `/docs/react/components/${component.toLowerCase().replace(/group$/, "-group")}` as unknown as UrlObject
+                  }
                 >
                   {component}
                 </LinkRoot>

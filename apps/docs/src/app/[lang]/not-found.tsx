@@ -39,7 +39,7 @@ export default function NotFound() {
         <p className="mt-2 max-w-sm text-balance text-muted">
           Sorry, the page you're looking for could not be found.
         </p>
-        <Link className="button button--tertiary mt-4" href="/">
+        <Link className="button button--tertiary mt-4" href="/en">
           Return Home
         </Link>
       </div>
