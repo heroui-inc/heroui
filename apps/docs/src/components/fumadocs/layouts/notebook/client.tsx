@@ -252,7 +252,7 @@ export function NavbarLinkItem({
     <LinkItem
       item={item}
       className={cn(
-        "text-fd-muted-foreground hover:text-fd-accent-foreground data-[active=true]:text-fd-primary text-sm transition-colors",
+        "text-fd-muted-foreground hover:text-fd-accent-foreground data-[active=true]:text-fd-foreground text-sm transition-colors",
         className,
       )}
       {...props}

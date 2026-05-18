@@ -8,6 +8,7 @@ import {Inter} from "next/font/google";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
+import {getOrganizationJsonLd, getSoftwareApplicationJsonLd, getWebSiteJsonLd} from "@/lib/json-ld";
 import {source} from "@/lib/source";
 import {__BASE_URL__} from "@/utils/env";
 
@@ -31,6 +32,20 @@ export default async function Layout({
 
   return (
     <html suppressHydrationWarning className={inter.variable} lang={lang}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{__html: JSON.stringify(getOrganizationJsonLd())}}
+          type="application/ld+json"
+        />
+        <script
+          dangerouslySetInnerHTML={{__html: JSON.stringify(getWebSiteJsonLd())}}
+          type="application/ld+json"
+        />
+        <script
+          dangerouslySetInnerHTML={{__html: JSON.stringify(getSoftwareApplicationJsonLd())}}
+          type="application/ld+json"
+        />
+      </head>
       <body className="flex min-h-screen flex-col font-sans">
         <NuqsAdapter>
           <NextProvider>
@@ -47,7 +62,7 @@ export default async function Layout({
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: "/",
+    canonical: __BASE_URL__.toString(),
     types: {
       "application/rss+xml": [
         {
@@ -86,6 +101,16 @@ export const metadata: Metadata = {
     "UI Library",
     "UI Framework",
     "UI Design System",
+    "React UI library",
+    "React component library",
+    "Tailwind CSS components",
+    "accessible React components",
+    "React design system",
+    "best React UI library",
+    "React UI kit",
+    "shadcn alternative",
+    "MUI alternative",
+    "Chakra UI alternative",
   ],
   metadataBase: __BASE_URL__,
   openGraph: {
@@ -97,16 +122,16 @@ export const metadata: Metadata = {
       },
     ],
     locale: "en_US",
-    siteName: siteConfig.name,
+    siteName: siteConfig.fullName,
     type: "website",
-    url: "/",
+    url: __BASE_URL__.toString(),
   },
   robots: {
     follow: true,
     index: true,
   },
   title: {
-    default: siteConfig.name,
+    default: siteConfig.fullName,
     template: `%s | ${siteConfig.name}`,
   },
   twitter: {
@@ -114,7 +139,7 @@ export const metadata: Metadata = {
     creator: "@hero_ui",
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    title: siteConfig.name,
+    title: siteConfig.fullName,
   },
 };
 
