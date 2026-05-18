@@ -1,15 +1,23 @@
+import LinkRoot from "fumadocs-core/link";
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 import Image from "next/image";
-import Link from "next/link";
 
-import {baseOptions, homeLayoutLinks} from "@/app/[lang]/layout.config";
+import {getDictionary, getRequestLocale} from "@/app/[lang]/dictionaries";
 import {Footer} from "@/components/footer";
 
-export default function NotFound() {
+import {getHomeLayoutLinks} from "./(home)/home-layout-links";
+import {baseOptions} from "./layout.config";
+
+export default async function NotFound() {
+  const locale = await getRequestLocale();
+  const dict = await getDictionary(locale);
+  const {notFound} = dict;
+
   return (
     <HomeLayout
       {...baseOptions}
-      links={homeLayoutLinks}
+      i18n
+      links={getHomeLayoutLinks(dict)}
       themeSwitch={{
         mode: "light-dark-system",
       }}
@@ -18,7 +26,7 @@ export default function NotFound() {
         <div className="relative h-[275px] w-full max-w-[658px]">
           <Image
             priority
-            alt="404 Not Found"
+            alt={notFound.imageAlt}
             className="absolute inset-0 block h-full w-full object-cover dark:hidden"
             height={275}
             quality={100}
@@ -27,7 +35,7 @@ export default function NotFound() {
           />
           <Image
             priority
-            alt="404 Not Found"
+            alt={notFound.imageAlt}
             className="absolute inset-0 hidden h-full w-full object-cover dark:block"
             height={275}
             quality={100}
@@ -35,13 +43,11 @@ export default function NotFound() {
             width={658}
           />
         </div>
-        <h2 className="text-4xl font-bold">404</h2>
-        <p className="mt-2 max-w-sm text-balance text-muted">
-          Sorry, the page you're looking for could not be found.
-        </p>
-        <Link className="button button--tertiary mt-4" href="/en">
-          Return Home
-        </Link>
+        <h2 className="text-4xl font-bold">{notFound.title}</h2>
+        <p className="mt-2 max-w-sm text-balance text-muted">{notFound.description}</p>
+        <LinkRoot className="button button--tertiary mt-4" href={`/${locale}`}>
+          {notFound.returnHome}
+        </LinkRoot>
       </div>
       <Footer />
     </HomeLayout>

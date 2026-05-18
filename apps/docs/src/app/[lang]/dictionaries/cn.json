@@ -1,0 +1,35 @@
+{
+  "home": {
+    "releaseBadge": "HeroUI v3.0.5 - Typography 重命名、令牌重构与修复",
+    "titleMain": "开箱即美。",
+    "titleMuted": "设计灵活可定制。",
+    "description": "HeroUI 是面向 Web 与移动端的现代 UI 库，助你快速迭代、保持一致，并打造令人愉悦的用户体验。",
+    "getStarted": "快速开始",
+    "viewComponents": "查看组件",
+    "githubStarsPrefix": "开源项目，已有",
+    "githubStarsSuffix": "颗星",
+    "demo": {
+      "proTemplate": "Pro 模板可用",
+      "themeBuilder": "在主题编辑器中打开"
+    }
+  },
+  "nav": {
+    "documentation": "文档",
+    "resources": "资源",
+    "gettingStarted": "快速开始",
+    "themes": "主题",
+    "components": "组件",
+    "reactNative": "React Native",
+    "reactNativeShort": "Native",
+    "releases": "版本发布",
+    "blog": "博客",
+    "docs": "文档",
+    "roadmap": "路线图"
+  },
+  "notFound": {
+    "imageAlt": "404 未找到",
+    "title": "404",
+    "description": "抱歉，找不到您要访问的页面。",
+    "returnHome": "返回首页"
+  }
+}

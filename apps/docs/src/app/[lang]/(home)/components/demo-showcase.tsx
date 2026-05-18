@@ -1,5 +1,6 @@
 "use client";
 
+import type {Dictionary} from "@/app/[lang]/dictionaries";
 import type {CSSProperties} from "react";
 import type {Color} from "react-aria-components";
 
@@ -72,7 +73,7 @@ function getAccentStyleVars(color: Color): Record<string, string> {
 
 const LOADER_DURATION_MS = 250;
 
-export function DemoShowcase() {
+export function DemoShowcase({demo}: {demo: Dictionary["home"]["demo"]}) {
   const [selectedTab, setSelectedTab] = useState("components");
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const [iframeLoading, setIframeLoading] = useState(true);
@@ -174,7 +175,7 @@ export function DemoShowcase() {
               medium: "homepage",
             })}
           >
-            Available in Pro as template
+            {demo.proTemplate}
           </a>
           <div className="flex items-center gap-1">
             <ColorSwatchPicker size="sm" onChange={setSelectedColor}>
@@ -199,7 +200,7 @@ export function DemoShowcase() {
                   <Palette className="size-4" />
                 </LinkRoot>
               </Tooltip.Trigger>
-              <Tooltip.Content className="py-0">Open in theme builder</Tooltip.Content>
+              <Tooltip.Content className="py-0">{demo.themeBuilder}</Tooltip.Content>
             </Tooltip>
           </div>
         </div>

@@ -2,13 +2,17 @@ import type {ReactNode} from "react";
 
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 
-import {baseOptions, homeLayoutLinks} from "@/app/[lang]/layout.config";
+import {getHomeLayoutLinks} from "@/app/[lang]/(home)/home-layout-links";
+import {getDictionary} from "@/app/[lang]/dictionaries";
+import {baseOptions} from "@/app/[lang]/layout.config";
 
-export default function BlogLayout({children}: {children: ReactNode}) {
+export default async function BlogLayout({children}: {children: ReactNode}) {
+  const dict = await getDictionary("en");
+
   return (
     <HomeLayout
       {...baseOptions}
-      links={homeLayoutLinks}
+      links={getHomeLayoutLinks(dict)}
       themeSwitch={{
         mode: "light-dark-system",
       }}

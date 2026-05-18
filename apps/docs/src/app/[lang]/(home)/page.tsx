@@ -1,10 +1,13 @@
 import {Rocket} from "@gravity-ui/icons";
 import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
+import {notFound} from "next/navigation";
 
+import {getDictionary, hasLocale} from "@/app/[lang]/dictionaries";
 import {Footer} from "@/components/footer";
 import {StarsCount} from "@/components/github-link";
 import {GitHubIcon} from "@/icons/github";
+import {i18n} from "@/lib/i18n";
 
 import {DemoShowcase} from "./components/demo-showcase";
 import {ProBanner} from "./components/pro-banner";
@@ -12,10 +15,20 @@ import {ProBanner} from "./components/pro-banner";
 export const dynamic = "force-static";
 export const revalidate = false;
 
-export default function HomePage() {
+export function generateStaticParams() {
+  return i18n.languages.map((lang) => ({lang}));
+}
+
+export default async function HomePage({params}: {params: Promise<{lang: string}>}) {
+  const {lang} = await params;
+
+  if (!hasLocale(lang)) notFound();
+
+  const dict = await getDictionary(lang);
+  const {home} = dict;
+
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col">
-      {/* Hero Section */}
       <section className="z-10 flex min-h-0 flex-1 flex-col items-center px-4 pt-12 text-center">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center">
           <LinkRoot
@@ -23,29 +36,24 @@ export default function HomePage() {
             href="/docs/react/releases/v3-0-5"
           >
             <Rocket className="size-3 text-accent-soft-foreground" />
-            <span className="max-w-60 truncate sm:max-w-full">
-              HeroUI v3.0.5 – Typography rename, token refactor & fixes
-            </span>
+            <span className="max-w-60 truncate sm:max-w-full">{home.releaseBadge}</span>
           </LinkRoot>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
-            Beautiful by default. <span className="text-muted/70">Customizable by design.</span>
+            {home.titleMain} <span className="text-muted/70">{home.titleMuted}</span>
           </h1>
-          <p className="text-balance text-muted md:text-lg">
-            HeroUI is the modern UI library for web and mobile, built to help you move fast, stay
-            consistent, and deliver delightful user experiences.
-          </p>
+          <p className="text-balance text-muted md:text-lg">{home.description}</p>
           <div className="mt-4 flex gap-3">
             <LinkRoot
               className={buttonVariants({variant: "primary"})}
               href="/docs/react/getting-started"
             >
-              Get started
+              {home.getStarted}
             </LinkRoot>
             <LinkRoot
               className={buttonVariants({variant: "outline"})}
               href="/docs/react/components"
             >
-              View components
+              {home.viewComponents}
             </LinkRoot>
           </div>
           <a
@@ -56,11 +64,12 @@ export default function HomePage() {
           >
             <GitHubIcon className="size-4" />
             <span>
-              Open source with <StarsCount className="p-0 font-normal" /> stars
+              {home.githubStarsPrefix} <StarsCount className="p-0 font-normal" />{" "}
+              {home.githubStarsSuffix}
             </span>
           </a>
         </div>
-        <DemoShowcase />
+        <DemoShowcase demo={home.demo} />
       </section>
       <Footer />
       <ProBanner />

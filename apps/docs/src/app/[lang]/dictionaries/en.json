@@ -1,0 +1,35 @@
+{
+  "home": {
+    "releaseBadge": "HeroUI v3.0.5 – Typography rename, token refactor & fixes",
+    "titleMain": "Beautiful by default.",
+    "titleMuted": "Customizable by design.",
+    "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
+    "getStarted": "Get started",
+    "viewComponents": "View components",
+    "githubStarsPrefix": "Open source with",
+    "githubStarsSuffix": "stars",
+    "demo": {
+      "proTemplate": "Available in Pro as template",
+      "themeBuilder": "Open in theme builder"
+    }
+  },
+  "nav": {
+    "documentation": "Documentation",
+    "resources": "Resources",
+    "gettingStarted": "Getting Started",
+    "themes": "Themes",
+    "components": "Components",
+    "reactNative": "React Native",
+    "reactNativeShort": "Native",
+    "releases": "Releases",
+    "blog": "Blog",
+    "docs": "Docs",
+    "roadmap": "Roadmap"
+  },
+  "notFound": {
+    "imageAlt": "404 Not Found",
+    "title": "404",
+    "description": "Sorry, the page you're looking for could not be found.",
+    "returnHome": "Return Home"
+  }
+}
