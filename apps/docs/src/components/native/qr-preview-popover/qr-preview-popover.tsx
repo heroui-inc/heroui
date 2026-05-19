@@ -30,12 +30,13 @@ function readOrigin(): string {
 
 /**
  * Regex matching the docs-app pathname for an individual Native component
- * page. Group 1 captures the slug. Next.js strips the `/docs` basePath from
- * `usePathname()` (when it exists), and Fumadocs route groups like
- * `(buttons)` are stripped from the URL too, but the optional non-capturing
- * group keeps the regex robust to any future inclusion.
+ * page. Group 1 captures the slug. `usePathname()` returns the full browser
+ * pathname (the docs site does NOT set a Next.js `basePath` — the leading
+ * `/docs` is a real route segment), so the regex must include it. Fumadocs
+ * route groups like `(buttons)` are stripped from the URL, but the optional
+ * non-capturing group keeps the regex defensive against any future inclusion.
  */
-const COMPONENT_PATHNAME = /^\/native\/components\/(?:\([^)]+\)\/)?([^/]+)$/;
+const COMPONENT_PATHNAME = /^\/docs\/native\/components\/(?:\([^)]+\)\/)?([^/]+)$/;
 
 /**
  * Resolve which native-app screen the QR should deep-link into based on the
