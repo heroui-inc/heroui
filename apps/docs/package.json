@@ -26,6 +26,7 @@
     "@iconify-json/gravity-ui": "1.2.10",
     "@iconify/react": "6.0.2",
     "@internationalized/date": "3.12.1",
+    "@lglab/react-qr-code": "1.7.0",
     "@react-aria/overlays": "3.32.0",
     "@react-stately/data": "3.16.0",
     "@t3-oss/env-nextjs": "0.13.10",
