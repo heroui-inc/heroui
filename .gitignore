@@ -88,3 +88,6 @@ storybook-static
 
 # Pre-built skill tarballs (generated during build)
 apps/docs/public/skills
+
+# SEO analysis output
+.seo-output

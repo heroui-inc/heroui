@@ -706,7 +706,7 @@ code {
       background: transparent;
 
       figure {
-        background: red;
+        padding: 0;
       }
 
       /* Scroll container */

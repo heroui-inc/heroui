@@ -1,0 +1,414 @@
+---
+title: "How to Build a React Dashboard with HeroUI Pro"
+description: "Create responsive admin dashboards with HeroUI and HeroUI Pro using AppLayout, Sidebar, Navbar, KPI, DataGrid, and chart components."
+date: "2026-05-11"
+author: "Junior Garcia"
+authorHandle: "@jrgarciadev"
+authorUrl: "https://x.com/jrgarciadev"
+authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
+tags: ["react", "dashboard", "tutorial", "heroui", "admin"]
+image: "/images/blog/build-react-dashboard-with-heroui.jpg"
+draft: true
+---
+
+
+I've watched too many teams spend their first two sprints hand-rolling a sidebar, a responsive navbar, and a metrics card layout — only to rip it out later when the requirements get real. If you have HeroUI Pro, skip that phase entirely.
+
+This post shows the Pro-first approach: start with `AppLayout`, `Sidebar`, `Navbar`, `KPI`, `DataGrid`, and chart components, then plug in your data. The dashboard template already handles the layout, responsive behavior, and mobile navigation.
+
+## Project Setup
+
+Install HeroUI and HeroUI Pro packages:
+
+```bash
+npm install @heroui/styles @heroui/react @heroui-pro/react
+```
+
+HeroUI Pro requires access to the Pro package registry. The dashboard template uses these style imports:
+
+```css
+@import "@heroui/styles/css";
+@import "@heroui-pro/react/css";
+
+@source "../**/*.{ts,tsx}";
+
+body {
+  background-color: var(--background);
+}
+```
+
+## Use AppLayout for the Frame
+
+The app frame should come from HeroUI Pro `AppLayout`, not a custom flex layout.
+
+```tsx
+"use client";
+
+import type {ReactNode} from "react";
+
+import {AppLayout} from "@heroui-pro/react";
+import {usePathname, useRouter} from "next/navigation";
+import {useCallback} from "react";
+
+import {DashboardNavbar} from "./dashboard-navbar";
+import {DashboardSidebar} from "./dashboard-sidebar";
+
+export function AppShell({children}: {children: ReactNode}) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const navigate = useCallback((href: string) => router.push(href), [router]);
+
+  return (
+    <AppLayout
+      navbar={<DashboardNavbar title="Dashboard" />}
+      navigate={navigate}
+      sidebar={<DashboardSidebar pathname={pathname} />}
+      sidebarCollapsible="offcanvas"
+    >
+      {children}
+    </AppLayout>
+  );
+}
+```
+
+`AppLayout` handles the relationship between the sidebar, navbar, mobile menu, and content region. Keep it as the app shell and customize inside the slots.
+
+## Use Pro Sidebar and Navbar
+
+HeroUI Pro ships a `Sidebar` compound component and a `Navbar` compound component. The dashboard template uses both.
+
+```tsx
+"use client";
+
+import {Bell, Magnifier} from "@gravity-ui/icons";
+import {Button} from "@heroui/react";
+import {AppLayout, Navbar, Sidebar} from "@heroui-pro/react";
+
+export function DashboardNavbar({title}: {title: string}) {
+  return (
+    <Navbar maxWidth="full">
+      <Navbar.Header>
+        <AppLayout.MenuToggle />
+        <Sidebar.Trigger />
+        <h1 className="text-foreground truncate text-xl font-semibold">{title}</h1>
+        <Navbar.Spacer />
+        <Button isIconOnly aria-label="Search" size="sm" variant="tertiary">
+          <Magnifier className="size-4" />
+        </Button>
+        <Button isIconOnly aria-label="Notifications" size="sm" variant="tertiary">
+          <Bell className="size-4" />
+        </Button>
+      </Navbar.Header>
+    </Navbar>
+  );
+}
+```
+
+For navigation, render `Sidebar.MenuItem` items instead of building custom active-link styles:
+
+```tsx
+"use client";
+
+import {ChartColumn, Gear, House, Receipt} from "@gravity-ui/icons";
+import {Sidebar} from "@heroui-pro/react";
+
+const items = [
+  {href: "/", icon: House, label: "Dashboard"},
+  {href: "/orders", icon: Receipt, label: "Orders"},
+  {href: "/analytics", icon: ChartColumn, label: "Analytics"},
+  {href: "/settings", icon: Gear, label: "Settings"},
+];
+
+export function DashboardSidebar({pathname}: {pathname: string}) {
+  return (
+    <>
+      <Sidebar>
+        <Sidebar.Content>
+          <Sidebar.Group>
+            <Sidebar.Menu aria-label="Dashboard navigation">
+              {items.map((item) => {
+                const Icon = item.icon;
+                const isCurrent =
+                  item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+
+                return (
+                  <Sidebar.MenuItem
+                    key={item.href}
+                    href={item.href}
+                    id={item.href}
+                    isCurrent={isCurrent}
+                    textValue={item.label}
+                  >
+                    <Sidebar.MenuIcon>
+                      <Icon className="size-4" />
+                    </Sidebar.MenuIcon>
+                    <Sidebar.MenuLabel>{item.label}</Sidebar.MenuLabel>
+                  </Sidebar.MenuItem>
+                );
+              })}
+            </Sidebar.Menu>
+          </Sidebar.Group>
+        </Sidebar.Content>
+      </Sidebar>
+      <Sidebar.Mobile>{/* Reuse the same menu content for mobile. */}</Sidebar.Mobile>
+    </>
+  );
+}
+```
+
+The full Pro template also includes a header profile area, footer items, badges, and mobile content reuse.
+
+## Use KPI for Metrics
+
+Do not rebuild metric cards with `Card` unless you need a one-off design. Use `KPI` from HeroUI Pro.
+
+```tsx
+"use client";
+
+import {KPI} from "@heroui-pro/react";
+
+const chartData = [
+  {x: 1, y: 12},
+  {x: 2, y: 18},
+  {x: 3, y: 16},
+  {x: 4, y: 24},
+];
+
+export function KpiRow() {
+  return (
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <KPI>
+        <KPI.Header>
+          <KPI.Title>Revenue</KPI.Title>
+        </KPI.Header>
+        <KPI.Content>
+          <KPI.Value currency="USD" maximumFractionDigits={0} style="currency" value={45231} />
+          <KPI.Trend trend="up">12.5%</KPI.Trend>
+        </KPI.Content>
+        <KPI.Chart color="var(--color-accent)" data={chartData} height={60} strokeWidth={1.5} />
+      </KPI>
+    </div>
+  );
+}
+```
+
+The dashboard template uses this same pattern for analytics KPIs and finance KPIs.
+
+## Use Pro Charts
+
+HeroUI Pro chart components keep chart styling aligned with the rest of the design system.
+
+```tsx
+"use client";
+
+import {Card} from "@heroui/react";
+import {LineChart, NumberValue, TrendChip} from "@heroui-pro/react";
+
+const data = [
+  {day: "Mon", sessions: 1800, users: 1200},
+  {day: "Tue", sessions: 2400, users: 1700},
+  {day: "Wed", sessions: 2200, users: 1600},
+  {day: "Thu", sessions: 3100, users: 2100},
+];
+
+export function SessionsCard() {
+  const total = data.reduce((sum, point) => sum + point.sessions, 0);
+
+  return (
+    <Card className="rounded-2xl">
+      <Card.Header className="flex-row items-start justify-between gap-4">
+        <div className="flex flex-col gap-1">
+          <Card.Title className="text-base">Sessions over time</Card.Title>
+          <div className="flex items-baseline gap-2">
+            <NumberValue
+              className="text-foreground text-2xl font-semibold tabular-nums"
+              maximumFractionDigits={0}
+              value={total}
+            />
+            <TrendChip trend="up">18.3%</TrendChip>
+          </div>
+          <span className="text-muted text-xs">vs. previous 30 days</span>
+        </div>
+      </Card.Header>
+      <Card.Content>
+        <LineChart data={data} height={240}>
+          <LineChart.Grid vertical={false} />
+          <LineChart.XAxis dataKey="day" minTickGap={32} tickMargin={8} />
+          <LineChart.YAxis width={40} />
+          <LineChart.Line
+            dataKey="sessions"
+            dot={false}
+            name="Sessions"
+            stroke="var(--chart-2)"
+            strokeWidth={2}
+            type="monotone"
+          />
+          <LineChart.Line
+            dataKey="users"
+            dot={false}
+            name="Users"
+            stroke="var(--chart-4)"
+            strokeWidth={2}
+            type="monotone"
+          />
+          <LineChart.Tooltip content={<LineChart.TooltipContent />} />
+        </LineChart>
+      </Card.Content>
+    </Card>
+  );
+}
+```
+
+Use the chart components from Pro for dashboard analytics, then swap the sample arrays for your real metrics.
+
+## Use DataGrid for Tables
+
+Dashboards usually need dense, sortable tables. Use Pro `DataGrid` instead of composing raw table markup.
+
+```tsx
+"use client";
+
+import type {DataGridColumn, DataGridSortDescriptor} from "@heroui-pro/react";
+
+import {Avatar, SearchField} from "@heroui/react";
+import {DataGrid} from "@heroui-pro/react";
+import {useMemo, useState} from "react";
+
+type Member = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  role: string;
+};
+
+const members: Member[] = [
+  {
+    id: "1",
+    name: "Kate Moore",
+    email: "kate@example.com",
+    avatar: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/blue-light.jpg",
+    role: "Admin",
+  },
+];
+
+export function MembersTable() {
+  const [search, setSearch] = useState("");
+  const [sortDescriptor, setSortDescriptor] = useState<DataGridSortDescriptor>({
+    column: "name",
+    direction: "ascending",
+  });
+
+  const filteredMembers = useMemo(() => {
+    if (!search) return members;
+    const q = search.toLowerCase();
+
+    return members.filter(
+      (member) => member.name.toLowerCase().includes(q) || member.email.toLowerCase().includes(q),
+    );
+  }, [search]);
+
+  const columns = useMemo<DataGridColumn<Member>[]>(
+    () => [
+      {
+        accessorKey: "name",
+        allowsSorting: true,
+        cell: (item) => (
+          <div className="flex items-center gap-3">
+            <Avatar className="size-8">
+              <Avatar.Image alt={item.name} src={item.avatar} />
+              <Avatar.Fallback>{item.name[0]}</Avatar.Fallback>
+            </Avatar>
+            <div className="flex min-w-0 flex-col">
+              <span className="text-xs font-medium">{item.name}</span>
+              <span className="text-muted text-xs">{item.email}</span>
+            </div>
+          </div>
+        ),
+        header: "Member",
+        id: "name",
+        isRowHeader: true,
+        minWidth: 220,
+      },
+      {
+        accessorKey: "role",
+        allowsSorting: true,
+        header: "Role",
+        id: "role",
+        minWidth: 160,
+      },
+    ],
+    [],
+  );
+
+  return (
+    <div className="flex flex-col gap-4">
+      <SearchField className="w-full sm:w-[220px]" name="member-search" onChange={setSearch}>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input placeholder="Search..." />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+      </SearchField>
+
+      <DataGrid
+        aria-label="Members"
+        columns={columns}
+        contentClassName="min-w-[520px]"
+        data={filteredMembers}
+        getRowId={(item) => item.id}
+        sortDescriptor={sortDescriptor}
+        onSortChange={setSortDescriptor}
+      />
+    </div>
+  );
+}
+```
+
+This matches the template's table direction: typed columns, a controlled sort descriptor, search outside the grid, and `getRowId` for stable row identity.
+
+## Compose the Dashboard Page
+
+The page should mostly assemble widgets. In the Pro template, the dashboard view looks like this:
+
+```tsx
+"use client";
+
+import {DashboardToolbar} from "../widgets/dashboard-toolbar";
+import {EmployeesTable} from "../widgets/employees-table";
+import {KpiRow} from "../widgets/kpi-row";
+import {SalesPerformanceCard} from "../widgets/sales-performance-card";
+import {TrafficSourceCard} from "../widgets/traffic-source-card";
+
+export function DashboardPage() {
+  return (
+    <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 pb-10 pt-4">
+      <DashboardToolbar />
+      <KpiRow />
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <SalesPerformanceCard />
+        <TrafficSourceCard />
+      </div>
+      <EmployeesTable />
+    </div>
+  );
+}
+```
+
+That is the main architectural point: the page should read like product composition, not infrastructure.
+
+## Why HeroUI for Dashboards
+
+Dashboards are dense — data tables, form controls, navigation, and overlays on a single screen. HeroUI handles the accessibility and styling for all of those pieces so you can focus on your data layer.
+
+- **Data tables that handle accessibility for you.** Sortable columns, row selection, keyboard navigation, and screen reader announcements come from React Aria. You don't reimplement them per table.
+- **Static CSS for data-heavy pages.** Tailwind v4 generates all styles at build time. Dashboards with KPI cards, charts, and grids don't pay a runtime styling tax.
+- **Pro primitives instead of hand-rolled infrastructure.** AppLayout, Sidebar, Navbar, KPI, DataGrid, and chart components from [HeroUI Pro](https://heroui.com/pro) save weeks of dashboard scaffold work.
+- **AI assistants that know the Pro API.** The [MCP server](/docs/react/getting-started/mcp-server) and [agent skills](/docs/react/getting-started/agent-skills) let AI tools scaffold dashboard views with correct component APIs instead of guessing.
+
+## Next Steps
+
+- Start from the [HeroUI Pro](https://heroui.com/pro) dashboard template if you have Pro access.
+- Replace the mock files in `src/data/*` with your API, database, or analytics source.
+- Keep `AppLayout`, `Sidebar`, `Navbar`, `KPI`, `DataGrid`, and Pro charts as the foundation.
+- Use base [HeroUI components](/docs/react/components) for local UI that does not need a Pro primitive.

@@ -1,0 +1,266 @@
+---
+title: "HeroUI vs Mantine: Which React Component Library is Right for You in 2026?"
+description: "Comparing HeroUI and Mantine — two popular React component libraries with different approaches to styling, component breadth, and developer tooling."
+date: "2026-05-15"
+author: "Junior Garcia"
+authorHandle: "@jrgarciadev"
+authorUrl: "https://x.com/jrgarciadev"
+authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
+tags: ["comparison", "heroui", "mantine", "react"]
+draft: true
+---
+
+HeroUI and Mantine are both modern, well-maintained React component libraries with genuine strengths. But they're built on very different philosophies. Mantine is a batteries-included toolkit with a very broad component and hooks catalog; Mantine's homepage currently describes it as `120+` components and `70+` hooks. HeroUI pairs React Aria's deep accessibility layer with Tailwind CSS v4 and a compound component API, plus first-party AI tooling through MCP, llms.txt, and agent skills.
+
+This comparison breaks down the real differences — not just feature checklists, but the trade-offs that actually affect your daily development workflow.
+
+## Quick Comparison
+
+| Feature | HeroUI v3 | Mantine v8 |
+|---------|-----------|------------|
+| **Components** | Broad focused set | 120+ components |
+| **Styling** | Tailwind CSS v4 (CSS-first) | CSS files / CSS Modules + PostCSS |
+| **Accessibility** | React Aria (Adobe) | Built into Mantine components |
+| **Hooks library** | None (use React Aria hooks for interaction/accessibility needs) | 70+ hooks |
+| **Component API** | Compound components | Flat components with props |
+| **AI tooling** | MCP server, llms.txt, agent skills | MCP server, llms.txt, skills |
+| **Form handling** | Works with any form library | Built-in @mantine/form |
+| **CSS runtime** | Zero | Zero |
+| **Theming** | CSS custom properties + @theme | CSS variables + MantineProvider |
+| **React 19** | Supported | Supported |
+
+## Component Coverage
+
+Mantine ships a large number of components across several packages, including a carousel, rich text editor, spotlight search, and notification system:
+
+- **@mantine/core** — Buttons, inputs, modals, navigation, layout, typography
+- **@mantine/dates** — Date pickers, calendars, date range inputs
+- **@mantine/charts** — Charts built on Recharts
+- **@mantine/notifications** — Toast notifications system
+- **@mantine/tiptap** — Rich text editor
+- **@mantine/spotlight** — Command palette / spotlight search
+- **@mantine/dropzone** — File upload with drag-and-drop
+- **@mantine/carousel** — Carousel / slider component
+- **@mantine/nprogress** — Page loading progress bar
+
+Mantine ships a large number of components, though breadth comes with trade-offs — larger bundle sizes, more APIs to learn, and components that may not all receive the same level of polish and accessibility testing.
+
+HeroUI takes a more focused approach. The core library covers the essential component set — buttons, forms, modals, tables, navigation, data display — with depth rather than breadth. Components like `Table` support sorting, selection, column resizing, and infinite scrolling out of the box:
+
+```tsx
+import { Table } from "@heroui/react";
+
+<Table>
+  <Table.ScrollContainer>
+    <Table.Content aria-label="Users">
+      <Table.Header>
+        <Table.Column allowsSorting>Name</Table.Column>
+        <Table.Column allowsSorting>Role</Table.Column>
+        <Table.Column>Status</Table.Column>
+      </Table.Header>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Kate Moore</Table.Cell>
+          <Table.Cell>Engineer</Table.Cell>
+          <Table.Cell>Active</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Content>
+  </Table.ScrollContainer>
+</Table>
+```
+
+For charts, notifications, rich text editing, and other specialized needs, you'll combine HeroUI with dedicated libraries. This is a trade-off: more integration work, but you pick the best tool for each job.
+
+## Styling Approaches
+
+This is where the libraries diverge most sharply.
+
+### Mantine: CSS Modules + PostCSS
+
+Mantine uses CSS Modules for component styling. Each component has its own scoped CSS, and you customize components by targeting specific class selectors or using Mantine's `classNames` prop:
+
+```tsx
+import { Button } from "@mantine/core";
+import classes from "./MyButton.module.css";
+
+<Button classNames={{ root: classes.root, label: classes.label }}>
+  Click me
+</Button>
+```
+
+This approach is familiar to anyone who's used CSS Modules. Styles are scoped, there's no runtime overhead, and you have direct access to override any part of a component. Mantine also supports a `styles` prop for inline style overrides and a global theme object for system-wide customization.
+
+The downside is that you need to understand Mantine's internal class structure to customize deeply. Each component has its own set of "style names" (like `root`, `label`, `inner` for Button), and you need to reference the docs to know which ones to target.
+
+### HeroUI: Tailwind CSS v4
+
+HeroUI components are styled with Tailwind CSS v4 utilities. You customize components the same way you style everything else in a Tailwind project — with `className`:
+
+```tsx
+import { Button } from "@heroui/react";
+
+<Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg">
+  Click me
+</Button>
+```
+
+For component sub-parts, HeroUI's compound component pattern lets you apply classes to any section:
+
+```tsx
+import { Card } from "@heroui/react";
+
+<Card className="max-w-md">
+  <Card.Header className="pb-0">
+    <Card.Title className="text-xl font-bold">Title</Card.Title>
+    <Card.Description>Subtitle here</Card.Description>
+  </Card.Header>
+  <Card.Content className="py-4">
+    Content goes here
+  </Card.Content>
+  <Card.Footer className="justify-end gap-2">
+    <Button variant="ghost">Cancel</Button>
+    <Button>Save</Button>
+  </Card.Footer>
+</Card>
+```
+
+Because each sub-component accepts `className`, you don't need to learn a separate styling API or memorize internal class name structures. If you know Tailwind, you know how to customize HeroUI.
+
+### The practical trade-off
+
+If your project already uses Tailwind CSS, HeroUI fits like a glove — there's no second styling system to learn. If your project uses CSS Modules or plain CSS, Mantine aligns more naturally with your existing approach. Adopting HeroUI without Tailwind means adopting Tailwind, which is a separate (and significant) decision.
+
+Both approaches produce zero runtime CSS overhead. Neither ships CSS-in-JS to the browser.
+
+## Accessibility
+
+This is where the difference in architectural foundations becomes most apparent.
+
+### HeroUI: React Aria (Enterprise-Grade)
+
+HeroUI is built on [React Aria](https://react-spectrum.adobe.com/react-aria/), Adobe's accessibility primitive library. React Aria handles screen reader support, keyboard navigation, focus management, ARIA attributes, internationalization, and interaction patterns for every component.
+
+React Aria is one of the most thoroughly tested accessibility layers available for React. It powers Adobe's Spectrum design system and handles details like keyboard behavior, focus management, screen reader announcements, touch interactions, and internationalization. Components like date pickers, comboboxes, and tables benefit from that depth in places most teams do not want to reimplement themselves.
+
+### Mantine: Good Built-In Accessibility
+
+Mantine has solid accessibility built into its components. WAI-ARIA attributes, keyboard navigation, and focus management are handled for common patterns. For the vast majority of applications, Mantine's accessibility is perfectly adequate.
+
+The gap appears in complex, interaction-heavy components. Mantine doesn't use an external accessibility layer like React Aria or Radix — it implements accessibility in-house. This means the depth of testing and edge case coverage is necessarily narrower than a dedicated accessibility library backed by a company the size of Adobe.
+
+### When does this matter?
+
+If you're building consumer software where basic keyboard navigation and screen reader support are sufficient, both libraries will serve you well. If you're building for government, healthcare, finance, or any domain with strict WCAG compliance requirements, HeroUI's React Aria foundation provides a higher assurance level.
+
+## The Hooks Library
+
+Mantine also includes a utility hooks package (`@mantine/hooks`). HeroUI focuses on component quality and leverages the broader React ecosystem for utility hooks. The hooks package covers common categories like:
+
+- **Browser APIs**: `useClipboard`, `useFullscreen`, `useMediaQuery`, `useLocalStorage`, `useGeolocation`
+- **UI patterns**: `useDisclosure`, `usePagination`, `useScrollIntoView`, `useHover`
+- **Utilities**: `useDebounce`, `useThrottle`, `useInterval`, `useCounter`, `usePrevious`
+- **State management**: `useListState`, `useSetState`, `useMap`, `useQueue`
+
+For similar utility hooks, you'd use community packages like `usehooks-ts`, or React Aria's hooks (which cover accessibility-related patterns like `useFocusRing`, `usePress`, and `useSearchField`). HeroUI focuses on components and leaves general-purpose utilities to the broader ecosystem.
+
+If your team values having a single, cohesive dependency for both components and utility hooks, Mantine's integrated approach is appealing. If you prefer picking best-in-class tools for each concern, HeroUI's focused approach works better.
+
+## AI Tooling
+
+This is an area where HeroUI has invested heavily and Mantine hasn't.
+
+### HeroUI's AI developer tools
+
+HeroUI ships three first-class integrations for AI coding assistants:
+
+- **MCP server.** A [Model Context Protocol server](/docs/react/getting-started/mcp-server) that AI agents can query for component documentation, APIs, and usage examples. When your AI assistant is connected to this server, it can look up the exact compound component structure, available props, and correct imports for any HeroUI component in real time.
+
+- **llms.txt.** A structured reference file at [heroui.com/llms.txt](/docs/react/getting-started/llms-txt) that gives large language models a condensed, accurate reference for the entire library. This is a standardized format that AI tools can consume to avoid hallucinating APIs.
+
+- **Agent skills.** Pre-built [skill files](/docs/react/getting-started/agent-skills) for tools like Cursor and Claude Code that teach AI agents HeroUI's patterns — correct imports, compound component structures, styling conventions, and project scaffolding.
+
+The result is that AI assistants have a better chance of generating current HeroUI code. They can use the correct compound component patterns (`Modal.Header`, `Card.Content`, `Table.Row`), the right import paths, and actual v3 APIs instead of guessing from mixed training data.
+
+### Mantine's AI story
+
+Mantine has strong AI-facing documentation too: its homepage documents `llms.txt`, skills, and `@mantine/mcp-server`. The practical difference is not "HeroUI has AI and Mantine does not." It is that HeroUI's AI context is specific to HeroUI's compound components, Tailwind v4 styling, and package API, while Mantine's context teaches Mantine's component and hooks ecosystem.
+
+### Why this matters in 2026
+
+Most developers use AI assistants daily. When your component library has first-class AI tooling, agents can verify current APIs before writing code. That matters for both libraries.
+
+## Design Quality and Polish
+
+Both libraries ship good-looking defaults, but the design sensibilities are different.
+
+HeroUI's defaults are more opinionated and "designed." Components ship with refined animations, carefully balanced spacing, smooth transitions, and attention to micro-interactions. Buttons have subtle press states. Modals animate in with spring physics. Cards have balanced padding and shadow hierarchies. The library includes theme variants (like "glass" and "brutalism") for distinct visual identities without custom CSS.
+
+Mantine's defaults are clean and professional but more utilitarian. Components are well-proportioned and consistent, but they're designed to be a neutral starting point rather than a finished look. If you're planning to apply significant custom styling, this is actually an advantage — there's less opinionated design to override.
+
+The trade-off is straightforward: HeroUI looks more polished out of the box with less effort. Mantine gives you a more neutral canvas to build on.
+
+## TypeScript Support
+
+Both libraries have excellent TypeScript support. Components are fully typed, props interfaces are well-documented, and autocomplete works as expected in modern editors.
+
+HeroUI's compound component pattern means TypeScript can verify the structure of your component trees:
+
+```tsx
+import { Tabs } from "@heroui/react";
+
+<Tabs>
+  <Tabs.ListContainer>
+    <Tabs.List aria-label="Sections">
+      <Tabs.Tab id="profile">Profile</Tabs.Tab>
+      <Tabs.Tab id="settings">Settings</Tabs.Tab>
+      <Tabs.Indicator />
+    </Tabs.List>
+  </Tabs.ListContainer>
+  <Tabs.Panel id="profile">Profile content</Tabs.Panel>
+  <Tabs.Panel id="settings">Settings content</Tabs.Panel>
+</Tabs>
+```
+
+Mantine provides equally strong types with a different API surface:
+
+```tsx
+import { Tabs } from "@mantine/core";
+
+<Tabs defaultValue="profile">
+  <Tabs.List>
+    <Tabs.Tab value="profile">Profile</Tabs.Tab>
+    <Tabs.Tab value="settings">Settings</Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="profile">Profile content</Tabs.Panel>
+  <Tabs.Panel value="settings">Settings content</Tabs.Panel>
+</Tabs>
+```
+
+No meaningful advantage either way. Both libraries take TypeScript seriously.
+
+## When to Choose Each
+
+### Choose HeroUI if:
+
+- You're using Tailwind CSS v4 (or want to adopt it)
+- Accessibility compliance is a hard requirement (healthcare, government, finance)
+- You use AI coding assistants and want first-class tooling support
+- You prefer compound component APIs with structural flexibility
+- You want polished, animated defaults without heavy custom theming
+- Performance matters and you want a Tailwind/static CSS path
+- You're building with React 19 and want good server component compatibility
+
+### When Mantine might work
+
+Mantine can make sense if your team uses CSS Modules and doesn't want to adopt Tailwind CSS, or if you need a very broad set of built-in components including carousels, rich text editors, and notification systems. However, that breadth means a larger dependency footprint and more API surface to maintain.
+
+## Summary
+
+For teams building modern React applications, HeroUI's approach — React Aria accessibility, Tailwind CSS v4, compound components, and first-party AI tooling — delivers a more maintainable and performant foundation. HeroUI's focused component set means every component is deeply tested, fully accessible, and designed to work together seamlessly. For specialized needs beyond core UI, pairing HeroUI with dedicated libraries gives you better results than relying on one library to do everything.
+
+---
+
+## Get Started with HeroUI
+
+Want to see how HeroUI works in practice? The [quick start guide](/docs/react/getting-started/quick-start) gets you set up in under five minutes. Explore the [component docs](/docs/react/components) for interactive examples, or connect the [MCP server](/docs/react/getting-started/mcp-server) to your AI assistant for the best development experience.

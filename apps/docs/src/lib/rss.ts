@@ -4,6 +4,7 @@ import {join} from "node:path";
 import {Feed} from "feed";
 
 import {siteConfig} from "@/config/site";
+import {getAllBlogPosts} from "@/lib/blog";
 import {source} from "@/lib/source";
 
 async function getFileLastModified(pagePath: string): Promise<Date> {
@@ -22,15 +23,28 @@ export const getRSS = async (): Promise<string> => {
   const baseUrl = siteConfig.siteUrl;
 
   const feed = new Feed({
-    copyright: `${currentYear} NextUI Inc. All rights reserved.`,
+    copyright: `${currentYear} HeroUI Inc. All rights reserved.`,
     description: siteConfig.description,
     favicon: new URL("/favicon-dark.svg", baseUrl).toString(),
     id: baseUrl.toString(),
     image: new URL(siteConfig.ogImage, baseUrl).toString(),
     language: "en-US",
     link: baseUrl.toString(),
-    title: siteConfig.name,
+    title: siteConfig.fullName,
   });
+
+  for (const post of getAllBlogPosts()) {
+    const postUrl = new URL(`/blog/${post.slug}`, baseUrl);
+
+    feed.addItem({
+      author: [{name: post.author}],
+      date: new Date(post.date),
+      description: post.description,
+      id: `/blog/${post.slug}`,
+      link: postUrl.toString(),
+      title: post.title,
+    });
+  }
 
   for (const page of source.getPages()) {
     const pageUrl = new URL(page.url, baseUrl);
