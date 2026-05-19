@@ -1,0 +1,35 @@
+/* =============================================================================
+ * HeroUI scrollbar system
+ *
+ * Modes via data-scrollbar on any ancestor (default on :root = custom):
+ *   custom — thin thumb from --scrollbar-thumb tokens + stable gutter
+ *   native — OS default (auto)
+ *   none   — hidden (inherited to descendants using @apply scrollbar)
+ *
+ * Each scroll container applies @apply scrollbar | scrollbar-none | scrollbar-native
+ * in its own component CSS file.
+ * ============================================================================= */
+
+:root {
+  --scrollbar-width-effective: thin;
+  --scrollbar-color-effective: var(--scrollbar-thumb) var(--scrollbar-track);
+  --scrollbar-gutter-effective: var(--scrollbar-gutter);
+}
+
+[data-scrollbar="custom"] {
+  --scrollbar-width-effective: thin;
+  --scrollbar-color-effective: var(--scrollbar-thumb) var(--scrollbar-track);
+  --scrollbar-gutter-effective: var(--scrollbar-gutter);
+}
+
+[data-scrollbar="native"] {
+  --scrollbar-width-effective: auto;
+  --scrollbar-color-effective: auto;
+  --scrollbar-gutter-effective: auto;
+}
+
+[data-scrollbar="none"] {
+  --scrollbar-width-effective: none;
+  --scrollbar-color-effective: auto;
+  --scrollbar-gutter-effective: auto;
+}

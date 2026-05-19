@@ -54,3 +54,24 @@
 @utility status-pending {
   @apply pointer-events-none;
 }
+
+/* === Scrollbars (standards-only; apply per scroll slot in component CSS) === */
+@utility scrollbar {
+  scrollbar-width: var(--scrollbar-width-effective);
+  scrollbar-color: var(--scrollbar-color-effective);
+  scrollbar-gutter: var(--scrollbar-gutter-effective);
+}
+
+@utility scrollbar-native {
+  scrollbar-width: auto;
+  scrollbar-color: auto;
+  scrollbar-gutter: auto;
+}
+
+/* Direct properties only — does not inherit none to nested scroll slots */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  scrollbar-color: auto;
+  scrollbar-gutter: auto;
+  -ms-overflow-style: none;
+}

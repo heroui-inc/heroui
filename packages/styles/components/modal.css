@@ -140,7 +140,7 @@
  * Modifier: container--scroll-outside
  */
 .modal__container--scroll-outside {
-  @apply overflow-y-auto;
+  @apply overflow-y-auto scrollbar;
   @apply pointer-events-auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -293,7 +293,7 @@
  * Modifier: body--scroll-inside
  */
 .modal__body--scroll-inside {
-  @apply overflow-y-auto;
+  @apply overflow-y-auto scrollbar;
   -webkit-overflow-scrolling: touch;
 }
 

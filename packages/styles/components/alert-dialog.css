@@ -275,7 +275,7 @@
  * Element: body - the main content area
  */
 .alert-dialog__body {
-  @apply min-h-0 flex-1;
+  @apply min-h-0 flex-1 scrollbar;
   @apply text-sm leading-[1.43] text-muted;
   @apply my-0;
   @apply overflow-y-auto;
