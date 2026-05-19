@@ -9,19 +9,17 @@ links:
   storybook: Components/Feedback/ProgressCircle
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ProgressCircle } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="progress-circle-basic"
 />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import { ProgressCircle } from '@heroui/react';
@@ -35,6 +33,8 @@ export default () => (
   </ProgressCircle>
 );
 ```
+
+## Examples
 
 ### Sizes
 
@@ -70,33 +70,16 @@ Since each part is a composable component, you can override SVG attributes like 
   name="progress-circle-custom-svg"
 />
 
-<RelatedComponents component="progress-circle" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="progress-circle-custom-styles" />
 
-You can customize individual ProgressCircle parts:
-
-```tsx
-import { ProgressCircle } from '@heroui/react';
-
-function CustomProgressCircle() {
-  return (
-    <ProgressCircle aria-label="Loading" value={60}>
-      <ProgressCircle.Track>
-        <ProgressCircle.TrackCircle />
-        <ProgressCircle.FillCircle className="stroke-purple-500" />
-      </ProgressCircle.Track>
-    </ProgressCircle>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ProgressCircle component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -114,24 +97,26 @@ To customize the ProgressCircle component classes, you can use the `@layer compo
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ProgressCircle component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/progress-circle.css)):
 
-#### Base & Element Classes
+#### Base & Element Classes [!toc]
 - `.progress-circle` - Base container
 - `.progress-circle__track` - SVG element
 - `.progress-circle__track-circle` - Background circle
 - `.progress-circle__fill-circle` - Progress arc
 
-#### Size Classes
+#### Size Classes [!toc]
 - `.progress-circle--sm` - Small size variant
 - `.progress-circle--md` - Medium size variant (default)
 - `.progress-circle--lg` - Large size variant
 
-#### Color Classes
+#### Color Classes [!toc]
 - `.progress-circle--default` - Default color variant
 - `.progress-circle--accent` - Accent color variant
 - `.progress-circle--success` - Success color variant
@@ -140,7 +125,7 @@ The ProgressCircle component uses these CSS classes ([View source styles](https:
 
 ## API Reference
 
-### ProgressCircle Props
+### ProgressCircle
 
 Inherits from [React Aria ProgressBar](https://react-spectrum.adobe.com/react-aria/ProgressBar.html).
 
@@ -155,7 +140,7 @@ Inherits from [React Aria ProgressBar](https://react-spectrum.adobe.com/react-ar
 | `formatOptions` | `Intl.NumberFormatOptions` | `{style: 'percent'}` | Number format for the value display |
 | `children` | `ReactNode \| (values: ProgressBarRenderProps) => ReactNode` | - | Content or render prop |
 
-### ProgressBarRenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -164,3 +149,7 @@ When using the render prop pattern, these values are provided:
 | `percentage` | `number` | The percentage of the progress (0-100) |
 | `valueText` | `string` | The formatted value text |
 | `isIndeterminate` | `boolean` | Whether progress is indeterminate |
+
+## Related Components
+
+<RelatedComponents component="progress-circle" />

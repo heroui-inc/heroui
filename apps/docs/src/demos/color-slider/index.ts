@@ -7,3 +7,4 @@ export {Vertical} from "./vertical";
 export {Disabled} from "./disabled";
 export {Controlled} from "./controlled";
 export {CustomRenderFunction} from "./custom-render-function";
+export {CustomStyles} from "./custom-styles";

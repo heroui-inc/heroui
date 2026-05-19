@@ -5,3 +5,4 @@ export {List} from "./list";
 export {AnimationTypes} from "./animation-types";
 export {Grid} from "./grid";
 export {SingleShimmer} from "./single-shimmer";
+export {CustomStyles} from "./custom-styles";

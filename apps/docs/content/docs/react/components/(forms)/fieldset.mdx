@@ -7,15 +7,15 @@ links:
   storybook: Components/Forms/Fieldset
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Fieldset } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="fieldset-basic" />
+
+## Examples
 
 ### In Surface
 
@@ -23,9 +23,7 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <ComponentPreview name="fieldset-on-surface" />
 
-### Anatomy
-
-Import the Fieldset component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Fieldset } from '@heroui/react';
@@ -43,40 +41,13 @@ export default () => (
 )
 ```
 
-<RelatedComponents component="fieldset" />
+## Customization
 
-<RelatedShowcases component="Fieldset" />
+### Tailwind CSS
 
-## Styling
+<ComponentPreview name="fieldset-custom-styles" />
 
-### Passing Tailwind CSS classes
-
-```tsx
-import { Fieldset, TextField, Label, Input } from '@heroui/react';
-
-function CustomFieldset() {
-  return (
-    <Fieldset className="rounded-xl border border-border bg-surface p-6 shadow-sm">
-      <Fieldset.Legend className="text-lg font-semibold">Team members</Fieldset.Legend>
-      <Fieldset.Group className="grid gap-4 md:grid-cols-2">
-        <TextField>
-          <Label>First name</Label>
-          <Input className="rounded-full border-border/60" placeholder="Jane" />
-        </TextField>
-        <TextField>
-          <Label>Last name</Label>
-          <Input className="rounded-full border-border/60" placeholder="Doe" />
-        </TextField>
-      </Fieldset.Group>
-      <Fieldset.Actions className="justify-end gap-3">
-        {/* Action buttons */}
-      </Fieldset.Actions>
-    </Fieldset>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 Use the `@layer components` directive to target Fieldset [BEM](https://getbem.com/)-style classes.
 
@@ -100,6 +71,8 @@ Use the `@layer components` directive to target Fieldset [BEM](https://getbem.co
 }
 ```
 
+## Styling Reference
+
 ### CSS Classes
 
 The Fieldset compound component exposes these CSS selectors:
@@ -111,7 +84,7 @@ The Fieldset compound component exposes these CSS selectors:
 
 ## API Reference
 
-### Fieldset Props
+### Fieldset
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -119,7 +92,7 @@ The Fieldset compound component exposes these CSS selectors:
 | `children` | `React.ReactNode` | - | Fieldset content (legend, groups, descriptions, actions). |
 | `nativeProps` | `React.HTMLAttributes<HTMLFieldSetElement>` | Supports native fieldset attributes and events. |
 
-### Fieldset.Legend Props
+### Fieldset.Legend
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -127,7 +100,7 @@ The Fieldset compound component exposes these CSS selectors:
 | `children` | `React.ReactNode` | - | Legend content, usually plain text. |
 | `nativeProps` | `React.HTMLAttributes<HTMLLegendElement>` |  - | Native legend attributes. |
 
-### Fieldset.Group Props
+### Fieldset.Group
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -135,10 +108,18 @@ The Fieldset compound component exposes these CSS selectors:
 | `children` | `React.ReactNode` | - | Form controls to group inside the fieldset. |
 | `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
 
-### Fieldset.Actions Props
+### Fieldset.Actions
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Tailwind classes to align action buttons or text. |
 | `children` | `React.ReactNode` | - | Action buttons or helper text. |
 | `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | Native div attributes. |
+
+## Related Showcases
+
+<RelatedShowcases component="Fieldset" />
+
+## Related Components
+
+<RelatedComponents component="fieldset" />

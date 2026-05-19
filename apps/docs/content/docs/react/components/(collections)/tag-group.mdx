@@ -8,19 +8,17 @@ links:
   storybook: Components/Collections/TagGroup
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { TagGroup } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="tag-group-basic"
 />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import { TagGroup, Tag, Label, Description, ErrorMessage } from '@heroui/react';
@@ -38,6 +36,8 @@ export default () => (
   </TagGroup>
 )
 ```
+
+## Examples
 
 ### Sizes
 
@@ -75,6 +75,12 @@ export default () => (
   name="tag-group-with-error-message"
 />
 
+### With List Data
+
+<ComponentPreview
+  name="tag-group-with-list-data"
+/>
+
 ### With Prefix
 
 <ComponentPreview
@@ -87,45 +93,22 @@ export default () => (
   name="tag-group-with-remove-button"
 />
 
-### With List Data
-
-<ComponentPreview
-  name="tag-group-with-list-data"
-/>
-
 ### Custom Render Function
 
 <ComponentPreview
   name="tag-group-custom-render-function"
 />
 
-<RelatedComponents component="taggroup" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="tag-group-custom-styles" />
 
-```tsx
-import { TagGroup, Tag, Label } from '@heroui/react';
-
-function CustomTagGroup() {
-  return (
-    <TagGroup className="w-full">
-      <Label>Categories</Label>
-      <TagGroup.List className="gap-2">
-        <Tag className="rounded-lg px-4 py-2 font-bold">
-          Custom Styled
-        </Tag>
-      </TagGroup.List>
-    </TagGroup>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the TagGroup component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -147,32 +130,34 @@ To customize the TagGroup component classes, you can use the `@layer components`
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The TagGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tag-group.css) and [tag.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tag.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.tag-group` - Base tag group container
 - `.tag-group__list` - Container for the list of tags
 - `.tag` - Base tag styles
 - `.tag__remove-button` - Remove button trigger
 
-#### Slot Classes
+#### Slot Classes [!toc]
 - `.tag-group [slot="description"]` - Description slot styles
 - `.tag-group [slot="errorMessage"]` - ErrorMessage slot styles
 
-#### Size Classes
+#### Size Classes [!toc]
 - `.tag--sm` - Small size tag
 - `.tag--md` - Medium size tag (default)
 - `.tag--lg` - Large size tag
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.tag--default` - Default variant
 - `.tag--surface` - Surface variant with surface background
 
-#### State Classes
+#### State Classes [!toc]
 - `.tag[data-selected="true"]` - Selected tag state
 - `.tag[data-disabled="true"]` - Disabled tag state
 - `.tag[data-hovered="true"]` - Hovered tag state
@@ -191,7 +176,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### TagGroup Props
+### TagGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -208,7 +193,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | TagGroup content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function.|
 
-### TagGroup.List Props
+### TagGroup.List
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -218,7 +203,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | TagList content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TagListRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Tag Props
+### Tag
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -231,7 +216,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 **Note**: `size`, `variant` are inherited from the parent `TagGroup` component and cannot be set directly on individual `Tag` components.
 
-### Tag.RemoveButton Props
+### Tag.RemoveButton
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -284,7 +269,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 </Tag>
 ```
 
-### RenderProps
+### Render Props
 
 When using render functions with TagGroup.List, these values are provided:
 
@@ -296,3 +281,7 @@ When using render functions with TagGroup.List, these values are provided:
 | `isPressed` | `boolean` | Whether the tag is pressed |
 | `isFocused` | `boolean` | Whether the tag is focused |
 | `isFocusVisible` | `boolean` | Whether the tag has keyboard focus |
+
+## Related Components
+
+<RelatedComponents component="taggroup" />

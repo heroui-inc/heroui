@@ -7,21 +7,17 @@ links:
   storybook: surface
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Surface } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="surface-variants"
 />
 
-## Overview
-
-The Surface component is a semantic container that provides different levels of visual prominence through variants.
+## Examples
 
 ### Variants
 
@@ -31,7 +27,7 @@ Surface comes in semantic variants that describe their prominence level:
 - **`secondary`** - Medium prominence (bg-surface-secondary)
 - **`tertiary`** - Higher prominence (bg-surface-tertiary)
 
-## Usage with Form Components
+### With Form Components
 
 When using form components inside a Surface, use the `variant="secondary"` prop to apply the lower emphasis variant suitable for surface backgrounds.
 
@@ -48,32 +44,16 @@ function App() {
 }
 ```
 
-<RelatedComponents component="surface" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="surface-custom-styles" />
 
-```tsx
-import { Surface } from '@heroui/react';
-
-function CustomSurface() {
-  return (
-    <Surface
-      className="rounded-2xl p-8 shadow-lg"
-      variant="secondary"
-    >
-      <h2>Custom Styled Surface</h2>
-      <p>Content goes here</p>
-    </Surface>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Surface component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -87,23 +67,25 @@ To customize the Surface component classes, you can use the `@layer components` 
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Surface component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/surface.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.surface` - Base surface container
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.surface--default` - Default surface variant (bg-surface)
 - `.surface--secondary` - Secondary surface variant (bg-surface-secondary)
 - `.surface--tertiary` - Tertiary surface variant (bg-surface-tertiary)
 
 ## API Reference
 
-### Surface Props
+### Surface
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -127,3 +109,6 @@ function MyComponent() {
 }
 ```
 
+## Related Components
+
+<RelatedComponents component="surface" />

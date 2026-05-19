@@ -733,3 +733,24 @@ code {
     background-color: #2d2d2d !important;
   }
 }
+
+@utility gradient-border {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    padding: var(--gradient-border-width, 1px);
+    background: var(--gradient-border);
+    pointer-events: none;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+}

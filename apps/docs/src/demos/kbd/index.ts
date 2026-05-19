@@ -4,3 +4,4 @@ export {InlineUsage} from "./inline";
 export {SpecialKeys} from "./special";
 export {InstructionalText} from "./instructional";
 export {Variants} from "./variants";
+export {CustomStyles} from "./custom-styles";

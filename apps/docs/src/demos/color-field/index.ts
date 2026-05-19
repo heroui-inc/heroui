@@ -10,3 +10,4 @@ export {OnSurface} from "./on-surface";
 export {Required} from "./required";
 export {Variants} from "./variants";
 export {WithDescription} from "./with-description";
+export {CustomStyles} from "./custom-styles";

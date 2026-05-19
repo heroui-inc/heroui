@@ -14,3 +14,4 @@ export {WithPrefixAndSuffix} from "./with-prefix-and-suffix";
 export {WithPrefixIcon} from "./with-prefix-icon";
 export {WithSuffixIcon} from "./with-suffix-icon";
 export {WithValidation} from "./with-validation";
+export {CustomStyles} from "./custom-styles";

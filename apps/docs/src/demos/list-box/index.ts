@@ -7,3 +7,4 @@ export {Virtualization} from "./virtualization";
 export {WithDisabledItems} from "./with-disabled-items";
 export {WithSections} from "./with-sections";
 export {CustomRenderFunction} from "./custom-render-function";
+export {CustomStyles} from "./custom-styles";

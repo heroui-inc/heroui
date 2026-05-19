@@ -9,15 +9,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Chip } from '@heroui/react';
 ```
 
-## Anatomy
+<ComponentPreview
+  name="chip-basic"
+/>
 
-Import the Chip component and access all parts using dot notation.
+## Anatomy
 
 > Plain-text children are automatically wrapped in `<Chip.Label>`.
 
@@ -27,22 +29,12 @@ Import the Chip component and access all parts using dot notation.
 </Chip>
 ```
 
-### Usage
-
-<ComponentPreview
-  name="chip-basic"
-/>
+## Examples
 
 ### Variants
 
 <ComponentPreview
   name="chip-variants"
-/>
-
-### With Icons
-
-<ComponentPreview
-  name="chip-with-icon"
 />
 
 ### Statuses
@@ -51,32 +43,22 @@ Import the Chip component and access all parts using dot notation.
   name="chip-statuses"
 />
 
-<RelatedComponents component="chip" />
+### With Icons
 
-## Styling
+<ComponentPreview
+  name="chip-with-icon"
+/>
 
-### Passing Tailwind CSS classes
+## Customization
 
-You can style the root container and individual slots:
+### Tailwind CSS
 
-```tsx
-import {Chip} from '@heroui/react';
+<ComponentPreview name="chip-custom-styles" />
 
-function CustomChip() {
-  return (
-    <Chip className="rounded-full px-4 py-2 font-bold">
-      <Chip.Label className="text-lg uppercase">
-        Custom Styled
-      </Chip.Label>
-    </Chip>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Chip component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -98,35 +80,37 @@ To customize the Chip component classes, you can use the `@layer components` dir
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Chip component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/chip.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.chip` - Base chip container styles
 - `.chip__label` - Label text slot styles
 
-#### Color Classes
+#### Color Classes [!toc]
 - `.chip--accent` - Accent color variant
 - `.chip--danger` - Danger color variant
 - `.chip--default` - Default color variant
 - `.chip--success` - Success color variant
 - `.chip--warning` - Warning color variant
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.chip--primary` - Primary variant with filled background
 - `.chip--secondary` - Secondary variant with border
 - `.chip--tertiary` - Tertiary variant with transparent background
 - `.chip--soft` - Soft variant with lighter background
 
-#### Size Classes
+#### Size Classes [!toc]
 - `.chip--sm` - Small size
 - `.chip--md` - Medium size (default)
 - `.chip--lg` - Large size
 
-#### Compound Variant Classes
+#### Compound Variant Classes [!toc]
 
 Chips support combining variant and color classes (e.g., `.chip--secondary.chip--accent`). The following combinations have default styles defined:
 
@@ -146,7 +130,7 @@ Chips support combining variant and color classes (e.g., `.chip--secondary.chip-
 
 ## API Reference
 
-### Chip Props
+### Chip
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -156,9 +140,13 @@ Chips support combining variant and color classes (e.g., `.chip--secondary.chip-
 | `variant` | `"primary" \| "secondary" \| "tertiary" \| "soft"` | `"secondary"` | Visual style variant |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the chip |
 
-### Chip.Label Props
+### Chip.Label
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Label text content |
 | `className` | `string` | - | Additional CSS classes for the label slot |
+
+## Related Components
+
+<RelatedComponents component="chip" />

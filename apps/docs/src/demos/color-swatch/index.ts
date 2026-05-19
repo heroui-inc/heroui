@@ -3,5 +3,6 @@ export {ColorSwatchSizes as Sizes} from "./sizes";
 export {ColorSwatchShapes as Shapes} from "./shapes";
 export {ColorSwatchTransparency as Transparency} from "./transparency";
 export {ColorSwatchCustomStyles as CustomStyles} from "./custom-styles";
+export {ColorSwatchWithRenderProps as WithRenderProps} from "./with-render-props";
 export {ColorSwatchAccessibility as Accessibility} from "./accessibility";
 export {CustomRenderFunction} from "./custom-render-function";

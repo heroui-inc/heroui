@@ -10,21 +10,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Checkbox, Label } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="checkbox-basic"
 />
 
-### Anatomy
-
-Import the Checkbox component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Checkbox, Label, Description } from '@heroui/react';
@@ -42,28 +38,27 @@ export default () => (
 );
 ```
 
+## Examples
+
+### Variants
+
+The Checkbox component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with default background, suitable for most use cases
+- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
+
+<ComponentPreview name="checkbox-variants" />
+
+### Full Rounded
+
+<ComponentPreview
+  name="checkbox-full-rounded"
+/>
+
 ### Disabled
 
 <ComponentPreview
   name="checkbox-disabled"
-/>
-
-### Default Selected
-
-<ComponentPreview
-  name="checkbox-default-selected"
-/>
-
-### Controlled
-
-<ComponentPreview
-  name="checkbox-controlled"
-/>
-
-### Indeterminate
-
-<ComponentPreview
-  name="checkbox-indeterminate"
 />
 
 ### With Label
@@ -78,16 +73,10 @@ export default () => (
   name="checkbox-with-description"
 />
 
-### Render Props
+### Default Selected
 
 <ComponentPreview
-  name="checkbox-render-props"
-/>
-
-### Form Integration
-
-<ComponentPreview
-  name="checkbox-form"
+  name="checkbox-default-selected"
 />
 
 ### Invalid
@@ -96,26 +85,35 @@ export default () => (
   name="checkbox-invalid"
 />
 
+### Controlled
+
+<ComponentPreview
+  name="checkbox-controlled"
+/>
+
+### Indeterminate
+
+<ComponentPreview
+  name="checkbox-indeterminate"
+/>
+
+### Form Integration
+
+<ComponentPreview
+  name="checkbox-form"
+/>
+
+### Render
+
+<ComponentPreview
+  name="checkbox-render-props"
+/>
+
 ### Custom Indicator
 
 <ComponentPreview
   name="checkbox-custom-indicator"
 />
-
-### Full Rounded
-
-<ComponentPreview
-  name="checkbox-full-rounded"
-/>
-
-### Variants
-
-The Checkbox component supports two visual variants:
-
-- **`primary`** (default) - Standard styling with default background, suitable for most use cases
-- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
-
-<ComponentPreview name="checkbox-variants" />
 
 ### Custom Render Function
 
@@ -123,35 +121,16 @@ The Checkbox component supports two visual variants:
   name="checkbox-custom-render-function"
 />
 
-<RelatedComponents component="checkbox" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="checkbox-custom-styles" />
 
-You can customize individual Checkbox components:
-
-```tsx
-import { Checkbox, Label } from '@heroui/react';
-
-function CustomCheckbox() {
-  return (
-    <Checkbox name="custom">
-      <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
-        <Checkbox.Indicator className="text-white" />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label>Custom Checkbox</Label>
-      </Checkbox.Content>
-    </Checkbox>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Checkbox component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -188,6 +167,8 @@ To customize the Checkbox component classes, you can use the `@layer components`
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
@@ -213,7 +194,7 @@ The checkbox supports both CSS pseudo-classes and data attributes for flexibilit
 
 ## API Reference
 
-### Checkbox Props
+### Checkbox
 
 Inherits from [React Aria Checkbox](https://react-spectrum.adobe.com/react-aria/Checkbox.html).
 
@@ -232,7 +213,7 @@ Inherits from [React Aria Checkbox](https://react-spectrum.adobe.com/react-aria/
 | `children` | `React.ReactNode \| (values: CheckboxRenderProps) => React.ReactNode` | - | Checkbox content or render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### CheckboxRenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -246,3 +227,7 @@ When using the render prop pattern, these values are provided:
 | `isFocusVisible` | `boolean` | Whether the checkbox is keyboard focused |
 | `isDisabled` | `boolean` | Whether the checkbox is disabled |
 | `isReadOnly` | `boolean` | Whether the checkbox is read only |
+
+## Related Components
+
+<RelatedComponents component="checkbox" />

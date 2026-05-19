@@ -14,3 +14,4 @@ export {WithDescription} from "./with-description";
 export {WithFormatOptions} from "./with-format-options";
 export {WithStep} from "./with-step";
 export {WithValidation} from "./with-validation";
+export {CustomStyles} from "./custom-styles";

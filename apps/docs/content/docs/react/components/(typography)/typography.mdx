@@ -8,19 +8,33 @@ links:
   storybook: Components/Typography
 ---
 
-## Import
+## Usage
 
 ```tsx
 import {Typography} from "@heroui/react";
 ```
 
-## Usage
+<ComponentPreview name="typography-default" />
 
-<ComponentPreview name="typography-typography-scale" />
+## Anatomy
 
 `Typography` maps visual `type` values to semantic elements by default.
 
-## Primitives
+```tsx
+import {Typography} from "@heroui/react";
+
+export default () => (
+  <Typography type="h1">Heading</Typography>
+);
+```
+
+## Examples
+
+### Typography Scale
+
+<ComponentPreview name="typography-typography-scale" />
+
+### Primitives
 
 <ComponentPreview name="typography-primitives" />
 
@@ -29,30 +43,58 @@ import {Typography} from "@heroui/react";
 - `Typography.Code` maps to the inline code style.
 - `Typography.Prose` styles rich content passed as regular HTML children.
 
-## Prose
+### Prose
 
 <ComponentPreview name="typography-prose" />
 
-## Render Prop
+### Render Prop
 
 <ComponentPreview name="typography-render-props" />
 
 Use the React Aria Components-style `render` prop when you need to customize the rendered element.
 
-## CSS Classes
+## Customization
 
-### Base Classes
+### Tailwind CSS
+
+<ComponentPreview name="typography-custom-styles" />
+
+### Global CSS
+
+To customize the Typography component classes, you can use the `@layer components` directive. [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .typography--h1 {
+    @apply font-extrabold tracking-tight;
+  }
+
+  .typography--code {
+    @apply rounded-md bg-default-100 font-mono dark:bg-default-50/20;
+  }
+}
+```
+
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The Typography component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/typography.css)):
+
+#### Base Classes [!toc]
 
 - `.typography` - Base typography primitive
 - `.typography-prose` - Rich prose container
 
-### Type Classes
+#### Type Classes [!toc]
 
 - `.typography--h1` through `.typography--h6`
 - `.typography--body`, `.typography--body-sm`, `.typography--body-xs`
 - `.typography--code`
 
-### Modifier Classes
+#### Modifier Classes [!toc]
 
 - `.typography--align-start`, `.typography--align-center`, `.typography--align-end`, `.typography--align-justify`
 - `.typography--color-default`, `.typography--color-muted`
@@ -61,7 +103,7 @@ Use the React Aria Components-style `render` prop when you need to customize the
 
 ## API Reference
 
-### Typography Props
+### Typography
 
 | Prop       | Type                                                                                           | Default     | Description                                    |
 | ---------- | ---------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------- |
@@ -72,3 +114,7 @@ Use the React Aria Components-style `render` prop when you need to customize the
 | `truncate` | `boolean`                                                                                      | -           | Truncates the text to one line with ellipsis.  |
 | `render`   | `DOMRenderFunction`                                                                            | -           | Custom render function from React Aria.        |
 | `children` | `ReactNode`                                                                                    | -           | Text content.                                  |
+
+## Related Components
+
+<RelatedComponents component="typography" />

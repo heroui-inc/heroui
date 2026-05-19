@@ -8,17 +8,15 @@ links:
   storybook: Components/Colors/ColorField
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ColorField, parseColor } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="color-field-basic" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import {ColorField, Label, ColorSwatch, Description, FieldError, parseColor} from '@heroui/react';
@@ -40,6 +38,23 @@ export default () => (
 
 > **ColorField** combines label, color input, description, and error into a single accessible component.
 
+## Examples
+
+### Variants
+
+The ColorField.Group component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="color-field-variants" />
+
+### On Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on ColorField.Group to apply the lower emphasis variant suitable for surface backgrounds.
+
+<ComponentPreview name="color-field-on-surface" />
+
 ### With Description
 
 <ComponentPreview name="color-field-with-description" />
@@ -47,6 +62,14 @@ export default () => (
 ### Required Field
 
 <ComponentPreview name="color-field-required" />
+
+### Disabled State
+
+<ComponentPreview name="color-field-disabled" />
+
+### Full Width
+
+<ComponentPreview name="color-field-full-width" />
 
 ### Validation
 
@@ -66,29 +89,6 @@ Control the value to synchronize with other components or state management.
 
 <ComponentPreview name="color-field-controlled" />
 
-### Disabled State
-
-<ComponentPreview name="color-field-disabled" />
-
-### Full Width
-
-<ComponentPreview name="color-field-full-width" />
-
-### Variants
-
-The ColorField.Group component supports two visual variants:
-
-- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
-- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
-
-<ComponentPreview name="color-field-variants" />
-
-### On Surface
-
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on ColorField.Group to apply the lower emphasis variant suitable for surface backgrounds.
-
-<ComponentPreview name="color-field-on-surface" />
-
 ### Form Example
 
 Complete form example with validation and submission handling.
@@ -101,36 +101,13 @@ Complete form example with validation and submission handling.
   name="color-field-custom-render-function"
 />
 
-<RelatedComponents component="colorfield" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="color-field-custom-styles" />
 
-```tsx
-import {ColorField, Label, ColorSwatch, Description} from '@heroui/react';
-
-function CustomColorField() {
-  return (
-    <ColorField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Brand Color
-      </Label>
-      <ColorField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <ColorField.Prefix>
-          <ColorSwatch color="#3B82F6" />
-        </ColorField.Prefix>
-        <ColorField.Input />
-      </ColorField.Group>
-      <Description className="text-xs text-default-500">
-        Select your brand's primary color.
-      </Description>
-    </ColorField>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 ColorField has minimal default styling. Override the `.color-field` class to customize the container styling.
 
@@ -157,6 +134,8 @@ ColorField has minimal default styling. Override the `.color-field` class to cus
 }
 ```
 
+## Styling Reference
+
 ### CSS Classes
 
 - `.color-field` – Root container with minimal styling (`flex flex-col gap-1`)
@@ -174,7 +153,7 @@ ColorField automatically manages these data attributes based on its state:
 
 ## API Reference
 
-### ColorField Props
+### ColorField
 
 ColorField inherits all props from React Aria's [ColorField](https://react-aria.adobe.com/ColorField.md) component.
 
@@ -294,7 +273,7 @@ const rgb = color.toString('rgb'); // "rgb(59, 130, 246)"
 </ColorField>
 ```
 
-### ColorFieldRenderProps
+### Render Props
 
 When using render props with `className`, `style`, or `children`, these values are available:
 
@@ -308,7 +287,7 @@ When using render props with `className`, `style`, or `children`, these values a
 | `isFocusWithin` | `boolean` | Whether any child element is focused. |
 | `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
 
-### ColorField.Group Props
+### ColorField.Group
 
 ColorField.Group accepts all props from React Aria's `Group` component plus the following:
 
@@ -319,7 +298,7 @@ ColorField.Group accepts all props from React Aria's `Group` component plus the 
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, GroupRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### ColorField.Input Props
+### ColorField.Input
 
 ColorField.Input accepts all props from React Aria's `Input` component plus the following:
 
@@ -328,7 +307,7 @@ ColorField.Input accepts all props from React Aria's `Input` component plus the 
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `placeholder` | `string` | - | Placeholder text shown when empty. |
 
-### ColorField.Prefix Props
+### ColorField.Prefix
 
 ColorField.Prefix accepts standard HTML `div` attributes:
 
@@ -337,7 +316,7 @@ ColorField.Prefix accepts standard HTML `div` attributes:
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the prefix slot. |
 
-### ColorField.Suffix Props
+### ColorField.Suffix
 
 ColorField.Suffix accepts standard HTML `div` attributes:
 
@@ -401,3 +380,7 @@ The base classes power every instance. Override them once with `@layer component
 - **Focus Within**: `[data-focus-within="true"]` or `:focus-within`
 - **Invalid**: `[data-invalid="true"]` (also syncs with `aria-invalid`)
 - **Disabled**: `[data-disabled="true"]` or `[aria-disabled="true"]`
+
+## Related Components
+
+<RelatedComponents component="colorfield" />

@@ -9,22 +9,18 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Disclosure } from '@heroui/react';
 ```
-
-### Usage
 
 <ComponentPreview
   name="disclosure-basic"
   minHeight="440px"
 />
 
-### Anatomy
-
-Import the Disclosure component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Disclosure } from '@heroui/react';
@@ -41,9 +37,7 @@ export default () => (
 )
 ```
 
-<RelatedShowcases component="Disclosure" />
-
-<RelatedComponents component="disclosure" />
+## Examples
 
 ### Custom Render Function
 
@@ -51,36 +45,16 @@ export default () => (
   name="disclosure-custom-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import { Disclosure } from '@heroui/react';
+<ComponentPreview name="disclosure-custom-styles" />
 
-function CustomDisclosure() {
-  return (
-    <Disclosure className="border rounded-lg p-4">
-      <Disclosure.Heading>
-        <Disclosure.Trigger className="text-lg font-semibold">
-          Click to expand
-          <Disclosure.Indicator />
-        </Disclosure.Trigger>
-      </Disclosure.Heading>
-      <Disclosure.Content>
-        <Disclosure.Body className="mt-4 text-gray-600">
-          Hidden content
-        </Disclosure.Body>
-      </Disclosure.Content>
-    </Disclosure>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Disclosure component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -102,13 +76,15 @@ To customize the Disclosure component classes, you can use the `@layer component
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Disclosure component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/disclosure.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.disclosure` - Base container styles
 - `.disclosure__heading` - Heading wrapper
 - `.disclosure__trigger` - Trigger button styles
@@ -124,10 +100,9 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 - **Disabled**: `:disabled` or `[aria-disabled="true"]` on trigger
 - **Hidden**: `[aria-hidden="false"]` on content for visibility
 
-
 ## API Reference
 
-### Disclosure Props
+### Disclosure
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -138,14 +113,14 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DisclosureRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### DisclosureTrigger Props
+### DisclosureTrigger
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode \| RenderFunction` | - | Trigger content |
 | `className` | `string` | - | Additional CSS classes |
 
-### DisclosureContent Props
+### DisclosureContent
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -153,8 +128,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DisclosureContentRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-
-### RenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -162,3 +136,11 @@ When using the render prop pattern, these values are provided:
 |------|------|-------------|
 | `isExpanded` | `boolean` | Current expanded state |
 | `isDisabled` | `boolean` | Whether disclosure is disabled |
+
+## Related Showcases
+
+<RelatedShowcases component="Disclosure" />
+
+## Related Components
+
+<RelatedComponents component="disclosure" />

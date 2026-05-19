@@ -9,19 +9,17 @@ links:
   storybook: Components/Feedback/Meter
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Meter, Label } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="meter-basic"
 />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import { Meter, Label } from '@heroui/react';
@@ -37,6 +35,8 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### Sizes
 
 <ComponentPreview
@@ -49,14 +49,6 @@ export default () => (
   name="meter-colors"
 />
 
-### Custom Value Scale
-
-Use `minValue`, `maxValue`, and `formatOptions` to customize the value range and display format.
-
-<ComponentPreview
-  name="meter-custom-value"
-/>
-
 ### Without Label
 
 When no visible label is needed, use `aria-label` for accessibility.
@@ -65,34 +57,24 @@ When no visible label is needed, use `aria-label` for accessibility.
   name="meter-without-label"
 />
 
-<RelatedComponents component="meter" />
+### Custom Value Scale
 
-## Styling
+Use `minValue`, `maxValue`, and `formatOptions` to customize the value range and display format.
 
-### Passing Tailwind CSS classes
+<ComponentPreview
+  name="meter-custom-value"
+/>
 
-You can customize individual Meter parts:
+## Customization
 
-```tsx
-import { Meter, Label } from '@heroui/react';
+### Tailwind CSS
 
-function CustomMeter() {
-  return (
-    <Meter value={60}>
-      <Label>Storage</Label>
-      <Meter.Output />
-      <Meter.Track className="bg-purple-100 dark:bg-purple-900">
-        <Meter.Fill className="bg-purple-500" />
-      </Meter.Track>
-    </Meter>
-  );
-}
-```
+<ComponentPreview name="meter-custom-styles" />
 
-### Customizing the component classes
+### Global CSS
 
 To customize the Meter component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -110,24 +92,26 @@ To customize the Meter component classes, you can use the `@layer components` di
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Meter component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/meter.css)):
 
-#### Base & Element Classes
+#### Base & Element Classes [!toc]
 - `.meter` - Base container (grid layout)
 - `.meter__output` - Value text display
 - `.meter__track` - Track background
 - `.meter__fill` - Filled portion of the track
 
-#### Size Classes
+#### Size Classes [!toc]
 - `.meter--sm` - Small size variant (thinner track)
 - `.meter--md` - Medium size variant (default)
 - `.meter--lg` - Large size variant (thicker track)
 
-#### Color Classes
+#### Color Classes [!toc]
 - `.meter--default` - Default color variant
 - `.meter--accent` - Accent color variant
 - `.meter--success` - Success color variant
@@ -136,7 +120,7 @@ The Meter component uses these CSS classes ([View source styles](https://github.
 
 ## API Reference
 
-### Meter Props
+### Meter
 
 Inherits from [React Aria Meter](https://react-spectrum.adobe.com/react-aria/Meter.html).
 
@@ -151,7 +135,7 @@ Inherits from [React Aria Meter](https://react-spectrum.adobe.com/react-aria/Met
 | `valueLabel` | `ReactNode` | - | Custom value label content |
 | `children` | `ReactNode \| (values: MeterRenderProps) => ReactNode` | - | Content or render prop |
 
-### MeterRenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -159,3 +143,7 @@ When using the render prop pattern, these values are provided:
 |------|------|-------------|
 | `percentage` | `number` | The percentage of the meter (0-100) |
 | `valueText` | `string` | The formatted value text |
+
+## Related Components
+
+<RelatedComponents component="meter" />

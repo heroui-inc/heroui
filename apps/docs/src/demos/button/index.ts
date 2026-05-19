@@ -13,3 +13,4 @@ export {Variants} from "./variants";
 export {WithIcons} from "./with-icons";
 export {RippleEffect} from "./ripple-effect";
 export {CustomRenderFunction} from "./custom-render-function";
+export {CustomStyles} from "./custom-styles";

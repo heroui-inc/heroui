@@ -12,3 +12,4 @@ export {Placements} from "./placements";
 export {Sizes} from "./sizes";
 export {Statuses} from "./statuses";
 export {WithCloseButton} from "./with-close-button";
+export {CustomStyles} from "./custom-styles";

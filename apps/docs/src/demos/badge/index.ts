@@ -5,3 +5,4 @@ export {BadgePlacements as Placements} from "./placements";
 export {BadgeSizes as Sizes} from "./sizes";
 export {BadgeVariants as Variants} from "./variants";
 export {BadgeWithContent as WithContent} from "./with-content";
+export {CustomStyles} from "./custom-styles";

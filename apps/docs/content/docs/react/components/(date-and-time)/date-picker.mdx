@@ -10,17 +10,15 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { DatePicker, DateField, Calendar, Label } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="date-picker-basic" />
 
-### Anatomy
+## Anatomy
 
 `DatePicker` follows a composition-first API. Compose `DateField` and `Calendar` explicitly to control structure and styling.
 
@@ -62,6 +60,12 @@ export default () => (
 )
 ```
 
+## Examples
+
+### Disabled
+
+<ComponentPreview name="date-picker-disabled" />
+
 ### Controlled
 
 <ComponentPreview name="date-picker-controlled" />
@@ -76,9 +80,9 @@ Control how DatePicker values are displayed with props such as `granularity`, `h
 
 <ComponentPreview name="date-picker-format-options" />
 
-### Disabled
+### Form Example
 
-<ComponentPreview name="date-picker-disabled" />
+<ComponentPreview name="date-picker-form-example" />
 
 ### Custom Indicator
 
@@ -86,9 +90,11 @@ Control how DatePicker values are displayed with props such as `granularity`, `h
 
 <ComponentPreview name="date-picker-with-custom-indicator" />
 
-### Form Example
+### Custom Render Function
 
-<ComponentPreview name="date-picker-form-example" />
+<ComponentPreview
+  name="date-picker-custom-render-function"
+/>
 
 ### International Calendar
 
@@ -104,48 +110,13 @@ For a complete list of supported calendar systems and their identifiers, see:
 - [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
 - [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
 
-### Custom Render Function
+## Customization
 
-<ComponentPreview
-  name="date-picker-custom-render-function"
-/>
+### Tailwind CSS
 
-<RelatedComponents component="datepicker" />
+<ComponentPreview name="date-picker-custom-styles" />
 
-## Styling
-
-### Passing Tailwind CSS classes
-
-You can style each composition part independently:
-
-```tsx
-import {Calendar, DateField, DatePicker, Label} from '@heroui/react';
-
-function CustomDatePicker() {
-  return (
-    <DatePicker className="w-[320px] gap-2">
-      <Label className="text-sm font-semibold">Date</Label>
-      <DateField.Group className="rounded-xl border border-border/60 bg-surface" fullWidth variant="secondary">
-        <DateField.Input>
-          {(segment) => <DateField.Segment segment={segment} />}
-        </DateField.Input>
-        <DateField.Suffix>
-          <DatePicker.Trigger className="w-full">
-            <DatePicker.TriggerIndicator className="text-default-600" />
-          </DatePicker.Trigger>
-        </DateField.Suffix>
-      </DateField.Group>
-      <DatePicker.Popover className="rounded-xl p-2">
-        <Calendar aria-label="Custom date picker calendar">
-          {/* Calendar parts */}
-        </Calendar>
-      </DatePicker.Popover>
-    </DatePicker>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize DatePicker base classes, use `@layer components`.
 
@@ -169,6 +140,8 @@ To customize DatePicker base classes, use `@layer components`.
 }
 ```
 
+## Styling Reference
+
 HeroUI follows [BEM](https://getbem.com/) naming for reusable customization.
 
 ### CSS Classes
@@ -191,7 +164,7 @@ DatePicker supports React Aria data attributes and pseudo states:
 
 ## API Reference
 
-### DatePicker Props
+### DatePicker
 
 DatePicker inherits all props from React Aria [DatePicker](https://react-aria.adobe.com/DatePicker.md).
 
@@ -224,3 +197,7 @@ DatePicker inherits all props from React Aria [DatePicker](https://react-aria.ad
 - [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — date types (`CalendarDate`, `CalendarDateTime`, `ZonedDateTime`) and utilities used by all date components
 - [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — override locale for a subtree
 - [`useLocale`](https://react-aria.adobe.com/useLocale) — read the current locale and layout direction
+
+## Related Components
+
+<RelatedComponents component="datepicker" />

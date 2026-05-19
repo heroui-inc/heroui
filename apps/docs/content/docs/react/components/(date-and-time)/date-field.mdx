@@ -9,17 +9,15 @@ links:
   storybook: Components/Date and Time/DateField
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { DateField } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="date-field-basic" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import {DateField, Label, Description, FieldError} from '@heroui/react';
@@ -40,39 +38,7 @@ export default () => (
 
 > **DateField** combines label, date input, description, and error into a single accessible component.
 
-### With Description
-
-<ComponentPreview name="date-field-with-description" />
-
-### Required Field
-
-<ComponentPreview name="date-field-required" />
-
-### Validation
-
-Use `isInvalid` together with `FieldError` to surface validation messages.
-
-<ComponentPreview name="date-field-invalid" />
-
-### With Validation
-
-DateField supports validation with `minValue`, `maxValue`, and custom validation logic.
-
-<ComponentPreview name="date-field-with-validation" />
-
-### Granularity
-
-<ComponentPreview name="date-field-granularity" />
-
-### Controlled
-
-Control the value to synchronize with other components or state management.
-
-<ComponentPreview name="date-field-controlled" />
-
-### Disabled State
-
-<ComponentPreview name="date-field-disabled" />
+## Examples
 
 ### With Icons
 
@@ -83,10 +49,6 @@ Add prefix or suffix icons to enhance the date field.
 <ComponentPreview name="date-field-with-suffix-icon" />
 
 <ComponentPreview name="date-field-with-prefix-and-suffix" />
-
-### Full Width
-
-<ComponentPreview name="date-field-full-width" />
 
 ### Variants
 
@@ -103,13 +65,49 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <ComponentPreview name="date-field-on-surface" />
 
+### With Description
+
+<ComponentPreview name="date-field-with-description" />
+
+### Required Field
+
+<ComponentPreview name="date-field-required" />
+
+### Disabled State
+
+<ComponentPreview name="date-field-disabled" />
+
+### Full Width
+
+<ComponentPreview name="date-field-full-width" />
+
+### Validation
+
+Use `isInvalid` together with `FieldError` to surface validation messages.
+
+<ComponentPreview name="date-field-invalid" />
+
+### Granularity
+
+<ComponentPreview name="date-field-granularity" />
+
+### Controlled
+
+Control the value to synchronize with other components or state management.
+
+<ComponentPreview name="date-field-controlled" />
+
 ### Form Example
 
 Complete form example with validation and submission handling.
 
 <ComponentPreview name="date-field-form-example" />
 
-<RelatedComponents component="datefield" />
+### With Validation
+
+DateField supports validation with `minValue`, `maxValue`, and custom validation logic.
+
+<ComponentPreview name="date-field-with-validation" />
 
 ### Custom Render Function
 
@@ -117,33 +115,13 @@ Complete form example with validation and submission handling.
   name="date-field-custom-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import {DateField, Label, Description} from '@heroui/react';
+<ComponentPreview name="date-field-custom-styles" />
 
-function CustomDateField() {
-  return (
-    <DateField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Appointment date
-      </Label>
-      <DateField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <DateField.Input>
-          {(segment) => <DateField.Segment segment={segment} />}
-        </DateField.Input>
-      </DateField.Group>
-      <Description className="text-xs text-default-500">
-        Select a date for your appointment.
-      </Description>
-    </DateField>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 DateField has minimal default styling. Override the `.date-field` class to customize the container styling.
 
@@ -170,6 +148,8 @@ DateField has minimal default styling. Override the `.date-field` class to custo
 }
 ```
 
+## Styling Reference
+
 ### CSS Classes
 
 - `.date-field` – Root container with minimal styling (`flex flex-col gap-1`)
@@ -187,7 +167,7 @@ DateField automatically manages these data attributes based on its state:
 
 ## API Reference
 
-### DateField Props
+### DateField
 
 DateField inherits all props from React Aria's [DateField](https://react-aria.adobe.com/DateField.md) component.
 
@@ -321,7 +301,7 @@ const todayDate = today(getLocalTimeZone());
 
 > **Note:** DateField uses the [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) package for date manipulation, parsing, and type definitions. See the [Internationalized Date documentation](https://react-aria.adobe.com/internationalized/date/) for more information about available types and functions.
 
-### DateFieldRenderProps
+### Render Props
 
 When using render props with `className`, `style`, or `children`, these values are available:
 
@@ -335,7 +315,7 @@ When using render props with `className`, `style`, or `children`, these values a
 | `isFocusWithin` | `boolean` | Whether any child element is focused. |
 | `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
 
-### DateField.Group Props
+### DateField.Group
 
 DateField.Group accepts all props from React Aria's `Group` component plus the following:
 
@@ -345,7 +325,7 @@ DateField.Group accepts all props from React Aria's `Group` component plus the f
 | `fullWidth` | `boolean` | `false` | Whether the date input group should take full width of its container |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
-### DateField.Input Props
+### DateField.Input
 
 DateField.Input accepts all props from React Aria's `DateInput` component plus the following:
 
@@ -356,7 +336,7 @@ DateField.Input accepts all props from React Aria's `DateInput` component plus t
 
 The `DateField.Input` component accepts a render prop function that receives date segments. Each segment represents a part of the date (year, month, day, etc.).
 
-### DateField.Segment Props
+### DateField.Segment
 
 DateField.Segment accepts all props from React Aria's `DateSegment` component:
 
@@ -365,7 +345,7 @@ DateField.Segment accepts all props from React Aria's `DateSegment` component:
 | `segment` | `DateSegment` | - | The date segment object from the DateField.Input render prop. |
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 
-### DateField.InputContainer Props
+### DateField.InputContainer
 
 DateField.InputContainer accepts standard HTML `div` attributes:
 
@@ -374,7 +354,7 @@ DateField.InputContainer accepts standard HTML `div` attributes:
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display inside the scrollable container (typically multiple `DateField.Input` components). |
 
-### DateField.Prefix Props
+### DateField.Prefix
 
 DateField.Prefix accepts standard HTML `div` attributes:
 
@@ -383,7 +363,7 @@ DateField.Prefix accepts standard HTML `div` attributes:
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the prefix slot. |
 
-### DateField.Suffix Props
+### DateField.Suffix
 
 DateField.Suffix accepts standard HTML `div` attributes:
 
@@ -467,3 +447,7 @@ The base classes power every instance. Override them once with `@layer component
 - **Disabled**: `[data-disabled="true"]` or `[aria-disabled="true"]`
 - **Segment Focus**: `:focus` or `[data-focused="true"]` on segment elements
 - **Segment Placeholder**: `[data-placeholder="true"]` on segment elements
+
+## Related Components
+
+<RelatedComponents component="datefield" />

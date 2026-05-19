@@ -7,3 +7,4 @@ export {Disabled} from "./disabled";
 export {Sizes} from "./sizes";
 export {StackLayout} from "./stack-layout";
 export {Variants} from "./variants";
+export {CustomStyles} from "./custom-styles";

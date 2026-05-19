@@ -8,10 +8,13 @@ import {
   Toolbar,
 } from "@heroui/react";
 
-export function Attached() {
+export function CustomStyles() {
   return (
-    <Toolbar isAttached aria-label="Text formatting">
-      <ToggleButtonGroup aria-label="Text style" selectionMode="multiple">
+    <Toolbar
+      aria-label="Text formatting"
+      className="inline-flex items-center gap-1 rounded-xl border border-border/80 bg-surface p-1.5 shadow-sm ring-1 ring-black/5 dark:ring-white/10"
+    >
+      <ToggleButtonGroup aria-label="Text style" className="gap-0.5" selectionMode="multiple">
         <ToggleButton isIconOnly aria-label="Bold" id="bold">
           <Bold />
         </ToggleButton>
@@ -24,8 +27,11 @@ export function Attached() {
           <Underline />
         </ToggleButton>
       </ToggleButtonGroup>
-      <Separator />
-      <ButtonGroup variant="tertiary">
+      <Separator
+        className="mx-1 h-6 w-px bg-neutral-200 dark:bg-neutral-700"
+        orientation="vertical"
+      />
+      <ButtonGroup className="gap-0.5" variant="tertiary">
         <Button isIconOnly aria-label="Copy">
           <Copy />
         </Button>

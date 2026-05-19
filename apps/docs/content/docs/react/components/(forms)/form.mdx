@@ -6,19 +6,15 @@ links:
   rac: https://react-spectrum.adobe.com/react-aria/Form.html
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Form } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="form-basic" />
 
-### Anatomy
-
-Import all parts and piece them together.
+## Anatomy
 
 ```tsx
 import {Form, Button} from '@heroui/react';
@@ -32,42 +28,23 @@ export default () => (
 )
 ```
 
+## Examples
+
 ### Custom Render Function
 
 <ComponentPreview
   name="form-custom-render-function"
 />
 
-<RelatedComponents component="form" />
+## Customization
 
-<RelatedShowcases component="Form" />
+### Tailwind CSS
 
-## Styling
-
-### Passing Tailwind CSS classes
-
-```tsx
-import {Form, TextField, Label, Input, FieldError, Button} from '@heroui/react';
-
-function CustomForm() {
-  return (
-    <Form className="w-full max-w-md space-y-4 rounded-lg border border-border bg-surface p-6">
-      <TextField>
-        <Label className="text-sm font-medium">Email</Label>
-        <Input className="rounded-full border-border/60" placeholder="Enter your email" />
-        <FieldError className="text-xs" />
-      </TextField>
-      <Button type="submit" className="w-full">
-        Submit
-      </Button>
-    </Form>
-  );
-}
-```
+<ComponentPreview name="form-custom-styles" />
 
 ## API Reference
 
-### Form Props
+### Form
 
 The Form component is a wrapper around React Aria's Form primitive that provides form validation and submission handling capabilities.
 
@@ -138,15 +115,6 @@ The Form component works seamlessly with HeroUI's form field components:
 
 All field components automatically integrate with the Form's validation and submission behavior when placed inside it.
 
-### Accessibility
-
-Forms are accessible by default when using React Aria components. Key features include:
-
-- Native `<form>` element semantics
-- Form landmark creation with `aria-label` or `aria-labelledby`
-- Automatic focus management on validation errors
-- ARIA validation attributes when using `validationBehavior="aria"`
-
 ### Advanced Usage
 
 For more advanced use cases including:
@@ -156,3 +124,20 @@ For more advanced use cases including:
 - Custom focus management on validation errors
 
 Please refer to the [React Aria Form documentation](https://react-spectrum.adobe.com/react-aria/Form.html).
+
+## Accessibility
+
+Forms are accessible by default when using React Aria components. Key features include:
+
+- Native `<form>` element semantics
+- Form landmark creation with `aria-label` or `aria-labelledby`
+- Automatic focus management on validation errors
+- ARIA validation attributes when using `validationBehavior="aria"`
+
+## Related Showcases
+
+<RelatedShowcases component="Form" />
+
+## Related Components
+
+<RelatedComponents component="form" />

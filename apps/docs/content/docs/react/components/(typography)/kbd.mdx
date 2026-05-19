@@ -8,21 +8,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Kbd } from "@heroui/react";
 ```
 
-### Usage
-
 <ComponentPreview 
   name="kbd-basic"
 />
 
-### Anatomy
-
-Import the Kbd component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Kbd } from "@heroui/react";
@@ -34,6 +30,14 @@ export default () => (
   </Kbd>
 );
 ```
+
+## Examples
+
+### Variants
+
+<ComponentPreview 
+  name="kbd-variants"
+/>
 
 ### Navigation Keys
 
@@ -59,34 +63,16 @@ export default () => (
   name="kbd-special-keys"
 />
 
-### Variants
+## Customization
 
-<ComponentPreview 
-  name="kbd-variants"
-/>
+### Tailwind CSS
 
-<RelatedComponents component="kbd" />
+<ComponentPreview name="kbd-custom-styles" />
 
-## Styling
-
-### Passing Tailwind CSS classes
-
-```tsx
-import { Kbd } from "@heroui/react";
-
-function CustomKbd() {
-  return (
-    <Kbd className="bg-gray-100 dark:bg-gray-800">
-      <Kbd.Content>K</Kbd.Content>
-    </Kbd>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Kbd component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -104,13 +90,15 @@ To customize the Kbd component classes, you can use the `@layer components` dire
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Kbd component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/kbd.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 
 - `.kbd` - Base keyboard key styles with background, border, and spacing
 - `.kbd__abbr` - Abbreviation element for modifier keys
@@ -118,7 +106,7 @@ The Kbd component uses these CSS classes ([View source styles](https://github.co
 
 ## API Reference
 
-### Kbd Props
+### Kbd
 
 | Prop        | Type              | Default | Description            |
 | ----------- | ----------------- | ------- | ---------------------- |
@@ -126,7 +114,7 @@ The Kbd component uses these CSS classes ([View source styles](https://github.co
 | `variant`   | `"default" | "light"` | `default`       | Variant of the keyboard key |
 | `className` | `string`          | -       | Custom CSS classes     |
 
-### Kbd.Abbr Props
+### Kbd.Abbr
 
 | Prop        | Type     | Default | Description                                                                                                                               |
 | ----------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -134,7 +122,7 @@ The Kbd component uses these CSS classes ([View source styles](https://github.co
 | `children`  | `React.ReactNode` | -       | The symbol or text to display (e.g., ⌘, ⌥, ⇧)                                                                                          |
 | `className` | `string` | -       | Custom CSS classes                                                                                                                       |
 
-### Kbd.Key Props
+### Kbd.Key
 
 | Prop        | Type              | Default | Description                        |
 | ----------- | ----------------- | ------- | ---------------------------------- |
@@ -155,3 +143,7 @@ Available key values for the `keyValue` prop:
 | `win`         | `capslock`   | `pagedown`      |               |
 |               | `help`       | `home`          |               |
 |               |              | `end`           |               |
+
+## Related Components
+
+<RelatedComponents component="kbd" />

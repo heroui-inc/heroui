@@ -9,21 +9,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Link } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="link-basic"
 />
 
-### Anatomy
-
-Import the Link component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Link } from '@heroui/react';
@@ -36,11 +32,7 @@ export default () => (
 );
 ```
 
-### Custom Icon
-
-<ComponentPreview
-  name="link-custom-icon"
-/>
+## Examples
 
 ### Icon Placement
 
@@ -83,12 +75,15 @@ For more details, see the Tailwind CSS documentation:
 - [text-decoration-thickness](https://tailwindcss.com/docs/text-decoration-thickness)
 - [text-underline-offset](https://tailwindcss.com/docs/text-underline-offset)
 
-
 Available BEM classes:
 - Base: `link`
 - Icon: `link__icon`
 
-<RelatedComponents component="link" />
+### Custom Icon
+
+<ComponentPreview
+  name="link-custom-icon"
+/>
 
 ### Custom Render Function
 
@@ -96,29 +91,16 @@ Available BEM classes:
   name="link-custom-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import { Link } from '@heroui/react';
+<ComponentPreview name="link-custom-styles" />
 
-function CustomLink() {
-  return (
-    <Link
-      href="#"
-      className="text-lg font-bold text-accent hover:text-accent/80"
-    >
-      Custom styled link
-    </Link>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Link component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -128,13 +110,15 @@ To customize the Link component classes, you can use the `@layer components` dir
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Link component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/link.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.link` - Base link styles
 - `.link__icon` - Link icon styles
 
@@ -147,7 +131,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Link Props
+### Link
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -162,14 +146,12 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `autoFocus` | `boolean` | - | Whether the element should receive focus on render |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, LinkRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Link.Icon Props
+### Link.Icon
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Custom icon element; defaults to the built-in arrow icon when omitted |
 | `className` | `string` | - | Additional CSS classes |
-
-
 
 ### Using with Routing Libraries
 
@@ -218,3 +200,7 @@ export default function NativeLink() {
   );
 }
 ```
+
+## Related Components
+
+<RelatedComponents component="link" />

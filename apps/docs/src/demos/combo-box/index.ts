@@ -17,3 +17,4 @@ export {Required} from "./required";
 export {WithDescription} from "./with-description";
 export {WithDisabledOptions} from "./with-disabled-options";
 export {WithSections} from "./with-sections";
+export {CustomStyles} from "./custom-styles";

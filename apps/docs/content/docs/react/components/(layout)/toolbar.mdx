@@ -9,28 +9,22 @@ links:
   storybook: Components/Layout/Toolbar
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Toolbar } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="toolbar-basic"
 />
+
+## Examples
 
 ### Vertical
 
 <ComponentPreview
   name="toolbar-vertical"
-/>
-
-### With ButtonGroup
-
-<ComponentPreview
-  name="toolbar-with-button-group"
 />
 
 ### Attached
@@ -39,31 +33,22 @@ import { Toolbar } from '@heroui/react';
   name="toolbar-attached"
 />
 
-<RelatedComponents component="toolbar" />
+### With ButtonGroup
 
-## Styling
+<ComponentPreview
+  name="toolbar-with-button-group"
+/>
 
-### Passing Tailwind CSS classes
+## Customization
 
-```tsx
-import { Toolbar } from '@heroui/react';
+### Tailwind CSS
 
-function CustomToolbar() {
-  return (
-    <Toolbar
-      aria-label="Actions"
-      className="rounded-xl border border-default bg-surface p-2"
-    >
-      {/* toolbar content */}
-    </Toolbar>
-  );
-}
-```
+<ComponentPreview name="toolbar-custom-styles" />
 
-### Customizing the component classes
+### Global CSS
 
 To customize the Toolbar component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -72,6 +57,8 @@ To customize the Toolbar component classes, you can use the `@layer components` 
   }
 }
 ```
+
+## Styling Reference
 
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
@@ -86,7 +73,7 @@ The Toolbar component uses these CSS classes ([View source styles](https://githu
 
 ## API Reference
 
-### Toolbar Props
+### Toolbar
 
 Inherits from [React Aria Toolbar](https://react-spectrum.adobe.com/react-aria/Toolbar.html).
 
@@ -99,10 +86,14 @@ Inherits from [React Aria Toolbar](https://react-spectrum.adobe.com/react-aria/T
 | `children` | `React.ReactNode \| (values: ToolbarRenderProps) => React.ReactNode` | - | Content or render prop |
 | `className` | `string \| (values: ToolbarRenderProps) => string` | - | Additional CSS classes |
 
-### ToolbarRenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
 | Prop | Type | Description |
 |------|------|-------------|
 | `orientation` | `"horizontal" \| "vertical"` | The current orientation of the toolbar |
+
+## Related Components
+
+<RelatedComponents component="toolbar" />

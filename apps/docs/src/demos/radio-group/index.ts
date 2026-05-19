@@ -9,3 +9,4 @@ export {OnSurface} from "./on-surface";
 export {Uncontrolled} from "./uncontrolled";
 export {Validation} from "./validation";
 export {Variants} from "./variants";
+export {CustomStyles} from "./custom-styles";

@@ -24,10 +24,10 @@
     "(buttons)/close-button",
     "(colors)/color-area",
     "(colors)/color-field",
+    "(colors)/color-picker",
     "(colors)/color-slider",
     "(colors)/color-swatch",
     "(colors)/color-swatch-picker",
-    "(colors)/color-picker",
     "(pickers)/combo-box",
     "(date-and-time)/date-field",
     "(date-and-time)/date-picker",
@@ -69,14 +69,14 @@
     "(data-display)/table",
     "(navigation)/tabs",
     "(collections)/tag-group",
-    "(typography)/typography",
-    "(forms)/text-field",
     "(forms)/text-area",
+    "(forms)/text-field",
     "(date-and-time)/time-field",
     "(overlays)/toast",
-    "(layout)/toolbar",
     "(buttons)/toggle-button",
     "(buttons)/toggle-button-group",
-    "(overlays)/tooltip"
+    "(layout)/toolbar",
+    "(overlays)/tooltip",
+    "(typography)/typography"
   ]
 }

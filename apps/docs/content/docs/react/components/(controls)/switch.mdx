@@ -9,21 +9,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Switch, SwitchGroup, Label } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="switch-basic"
 />
 
-### Anatomy
-
-Import the Switch component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Switch, Label, Description } from '@heroui/react';
@@ -66,10 +62,36 @@ export default () => (
 );
 ```
 
+## Examples
+
+### Sizes
+
+<ComponentPreview
+  name="switch-sizes"
+/>
+
+### With Icons
+
+<ComponentPreview
+  name="switch-with-icons"
+/>
+
 ### Disabled
 
 <ComponentPreview
   name="switch-disabled"
+/>
+
+### Without Label
+
+<ComponentPreview
+  name="switch-without-label"
+/>
+
+### With Description
+
+<ComponentPreview
+  name="switch-with-description"
 />
 
 ### Default Selected
@@ -84,34 +106,10 @@ export default () => (
   name="switch-controlled"
 />
 
-### Without Label
-
-<ComponentPreview
-  name="switch-without-label"
-/>
-
-### Sizes
-
-<ComponentPreview
-  name="switch-sizes"
-/>
-
 ### Label Position
 
 <ComponentPreview
   name="switch-label-position"
-/>
-
-### With Icons
-
-<ComponentPreview
-  name="switch-with-icons"
-/>
-
-### With Description
-
-<ComponentPreview
-  name="switch-with-description"
 />
 
 ### Group
@@ -126,22 +124,16 @@ export default () => (
   name="switch-group-horizontal"
 />
 
-### Render Props
-
-<ComponentPreview
-  name="switch-render-props"
-/>
-
 ### Form Integration
 
 <ComponentPreview
   name="switch-form"
 />
 
-### Custom Styles
+### Render
 
 <ComponentPreview
-  name="switch-custom-styles"
+  name="switch-render-props"
 />
 
 ### Custom Render Function
@@ -150,66 +142,16 @@ export default () => (
   name="switch-custom-render-function"
 />
 
-<RelatedComponents component="switch" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="switch-custom-styles" />
 
-You can customize individual Switch components:
-
-```tsx
-import { Switch, Label } from '@heroui/react';
-
-function CustomSwitch() {
-  return (
-    <Switch>
-      {({isSelected}) => (
-        <>
-          <Switch.Control
-            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
-          >
-            <Switch.Thumb
-              className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
-            />
-          </Switch.Control>
-          <Label>Custom Switch</Label>
-        </>
-      )}
-    </Switch>
-  );
-}
-```
-
-Or customize the SwitchGroup layout:
-
-```tsx
-import { Switch, SwitchGroup, Label } from '@heroui/react';
-
-function CustomSwitchGroup() {
-  return (
-    <SwitchGroup className="gap-8" orientation="horizontal">
-      <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Option 1</Label>
-      </Switch>
-      <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Option 2</Label>
-      </Switch>
-    </SwitchGroup>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Switch component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -235,11 +177,13 @@ To customize the Switch component classes, you can use the `@layer components` d
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
-#### Switch Classes
+#### Switch Classes [!toc]
 
 The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
 
@@ -252,7 +196,7 @@ The Switch component uses these CSS classes ([View source styles](https://github
 - `.switch--md` - Medium size variant (default)
 - `.switch--lg` - Large size variant
 
-#### SwitchGroup Classes
+#### SwitchGroup Classes [!toc]
 
 The SwitchGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch-group.css)):
 
@@ -273,7 +217,7 @@ The switch supports both CSS pseudo-classes and data attributes for flexibility:
 
 ## API Reference
 
-### Switch Props
+### Switch
 
 Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html).
 
@@ -290,7 +234,7 @@ Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Sw
 | `children` | `React.ReactNode \| (values: SwitchRenderProps) => React.ReactNode` | - | Switch content or render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### SwitchRenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -305,10 +249,14 @@ When using the render prop pattern, these values are provided:
 | `isReadOnly` | `boolean` | Whether the switch is read only |
 | `state` | `-` | State of the switch. |
 
-### SwitchGroup Props
+### SwitchGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the switch group |
 | `children` | `React.ReactNode` | - | The switch items to render |
 | `className` | `string` | - | Additional CSS class names |
+
+## Related Components
+
+<RelatedComponents component="switch" />

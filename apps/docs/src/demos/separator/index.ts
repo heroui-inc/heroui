@@ -5,3 +5,4 @@ export {Vertical} from "./vertical";
 export {WithContent} from "./with-content";
 export {Variants} from "./variants";
 export {CustomRenderFunction} from "./custom-render-function";
+export {CustomStyles} from "./custom-styles";

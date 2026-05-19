@@ -8,21 +8,17 @@ links:
   storybook: Components/Forms/CheckboxGroup
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { CheckboxGroup, Checkbox, Label, Description } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="checkbox-group-basic"
 />
 
-### Anatomy
-
-Import the CheckboxGroup component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import {CheckboxGroup, Checkbox, Label, Description, FieldError} from '@heroui/react';
@@ -45,6 +41,8 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### In Surface
 
 When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
@@ -53,10 +51,10 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
   name="checkbox-group-on-surface"
 />
 
-### With Custom Indicator
+### Disabled
 
 <ComponentPreview
-  name="checkbox-group-with-custom-indicator"
+  name="checkbox-group-disabled"
 />
 
 ### Indeterminate
@@ -77,16 +75,16 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
   name="checkbox-group-validation"
 />
 
-### Disabled
-
-<ComponentPreview
-  name="checkbox-group-disabled"
-/>
-
 ### Features and Add-ons Example
 
 <ComponentPreview
   name="checkbox-group-features-and-addons"
+/>
+
+### With Custom Indicator
+
+<ComponentPreview
+  name="checkbox-group-with-custom-indicator"
 />
 
 ### Custom Render Function
@@ -95,37 +93,16 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
   name="checkbox-group-custom-render-function"
 />
 
-<RelatedComponents component="checkboxgroup" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="checkbox-group-custom-styles" />
 
-You can customize the CheckboxGroup component:
-
-```tsx
-import { CheckboxGroup, Checkbox, Label } from '@heroui/react';
-
-function CustomCheckboxGroup() {
-  return (
-    <CheckboxGroup className="gap-4" name="custom">
-      <Checkbox value="option1">
-        <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
-          <Checkbox.Indicator className="text-white" />
-        </Checkbox.Control>
-        <Checkbox.Content>
-          <Label>Option 1</Label>
-        </Checkbox.Content>
-      </Checkbox>
-    </CheckboxGroup>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the CheckboxGroup component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -134,6 +111,8 @@ To customize the CheckboxGroup component classes, you can use the `@layer compon
   }
 }
 ```
+
+## Styling Reference
 
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
@@ -145,7 +124,7 @@ The CheckboxGroup component uses these CSS classes ([View source styles](https:/
 
 ## API Reference
 
-### CheckboxGroup Props
+### CheckboxGroup
 
 Inherits from [React Aria CheckboxGroup](https://react-spectrum.adobe.com/react-aria/CheckboxGroup.html).
 
@@ -162,7 +141,7 @@ Inherits from [React Aria CheckboxGroup](https://react-spectrum.adobe.com/react-
 | `children` | `React.ReactNode \| (values: CheckboxGroupRenderProps) => React.ReactNode` | - | Checkbox group content or render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxGroupRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### CheckboxGroupRenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -174,3 +153,6 @@ When using the render prop pattern, these values are provided:
 | `isInvalid` | `boolean` | Whether the checkbox group is in an invalid state |
 | `isRequired` | `boolean` | Whether the checkbox group is required |
 
+## Related Components
+
+<RelatedComponents component="checkboxgroup" />

@@ -9,17 +9,15 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { SearchField } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="search-field-basic" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import {SearchField, Label, Description, FieldError} from '@heroui/react';
@@ -40,45 +38,7 @@ export default () => (
 
 > **SearchField** allows users to enter and clear a search query. It includes a search icon and an optional clear button for easy reset.
 
-### With Description
-
-<ComponentPreview name="search-field-with-description" />
-
-### Required Field
-
-<ComponentPreview name="search-field-required" />
-
-### Validation
-
-Use `isInvalid` together with `FieldError` to surface validation messages.
-
-<ComponentPreview name="search-field-validation" />
-
-### Disabled State
-
-<ComponentPreview name="search-field-disabled" />
-
-### Controlled
-
-Control the value to synchronize with other components or perform custom formatting.
-
-<ComponentPreview name="search-field-controlled" />
-
-### With Validation
-
-Implement custom validation logic with controlled values.
-
-<ComponentPreview name="search-field-with-validation" />
-
-### Custom Icons
-
-Customize the search icon and clear button icons.
-
-<ComponentPreview name="search-field-custom-icons" />
-
-### Full Width
-
-<ComponentPreview name="search-field-full-width" />
+## Examples
 
 ### Variants
 
@@ -95,11 +55,51 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <ComponentPreview name="search-field-on-surface" />
 
+### With Description
+
+<ComponentPreview name="search-field-with-description" />
+
+### Required Field
+
+<ComponentPreview name="search-field-required" />
+
+### Disabled State
+
+<ComponentPreview name="search-field-disabled" />
+
+### Full Width
+
+<ComponentPreview name="search-field-full-width" />
+
+### Validation
+
+Use `isInvalid` together with `FieldError` to surface validation messages.
+
+<ComponentPreview name="search-field-validation" />
+
+### Controlled
+
+Control the value to synchronize with other components or perform custom formatting.
+
+<ComponentPreview name="search-field-controlled" />
+
 ### Form Example
 
 Complete form integration with validation and submission handling.
 
 <ComponentPreview name="search-field-form-example" />
+
+### With Validation
+
+Implement custom validation logic with controlled values.
+
+<ComponentPreview name="search-field-with-validation" />
+
+### Custom Icons
+
+Customize the search icon and clear button icons.
+
+<ComponentPreview name="search-field-custom-icons" />
 
 ### With Keyboard Shortcut
 
@@ -107,38 +107,19 @@ Add keyboard shortcuts to quickly focus the search field.
 
 <ComponentPreview name="search-field-with-keyboard-shortcut" />
 
-<RelatedComponents component="searchfield" />
-
-<RelatedShowcases component="SearchField" />
-
 ### Custom Render Function
 
 <ComponentPreview
   name="search-field-custom-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import {SearchField, Label} from '@heroui/react';
+<ComponentPreview name="search-field-custom-styles" />
 
-function CustomSearchField() {
-  return (
-    <SearchField className="gap-2">
-      <Label className="text-sm font-semibold">Search</Label>
-      <SearchField.Group className="rounded-xl border-2">
-        <SearchField.SearchIcon className="text-blue-500" />
-        <SearchField.Input className="text-center font-bold" />
-        <SearchField.ClearButton className="text-red-500" />
-      </SearchField.Group>
-    </SearchField>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 SearchField uses CSS classes that can be customized. Override the component classes to match your design system.
 
@@ -174,6 +155,8 @@ SearchField uses CSS classes that can be customized. Override the component clas
 }
 ```
 
+## Styling Reference
+
 ### CSS Classes
 
 - `.search-field` – Root container with minimal styling (`flex flex-col gap-1`)
@@ -201,7 +184,7 @@ Additional attributes are available through render props (see SearchFieldRenderP
 
 ## API Reference
 
-### SearchField Props
+### SearchField
 
 SearchField inherits all props from React Aria's [SearchField](https://react-spectrum.adobe.com/react-aria/SearchField.html) component.
 
@@ -331,7 +314,7 @@ SearchField.ClearButton inherits props from React Aria's [Button](https://react-
 | `className` | `string` | - | CSS classes for styling. |
 | `slot` | `"clear"` | `"clear"` | Must be set to "clear" (automatically set). |
 
-### SearchFieldRenderProps
+### Render Props
 
 When using render props with `className`, `style`, or `children`, these values are available:
 
@@ -347,3 +330,10 @@ When using render props with `className`, `style`, or `children`, these values a
 | `value` | `string` | Current value. |
 | `isEmpty` | `boolean` | Whether the field is empty. |
 
+## Related Showcases
+
+<RelatedShowcases component="SearchField" />
+
+## Related Components
+
+<RelatedComponents component="searchfield" />

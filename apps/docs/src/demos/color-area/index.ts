@@ -4,3 +4,4 @@ export {ColorAreaSpaceAndChannels as SpaceAndChannels} from "./space-and-channel
 export {ColorAreaControlled as Controlled} from "./controlled";
 export {ColorAreaDisabled as Disabled} from "./disabled";
 export {CustomRenderFunction} from "./custom-render-function";
+export {CustomStyles} from "./custom-styles";

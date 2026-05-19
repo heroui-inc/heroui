@@ -9,17 +9,15 @@ links:
   storybook: Components/Overlays/Drawer
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Drawer, Button } from "@heroui/react";
 ```
 
-### Usage
-
 <ComponentPreview name="drawer-basic" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import { Drawer, Button } from "@heroui/react";
@@ -44,13 +42,11 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### Placement
 
 <ComponentPreview name="drawer-placements" />
-
-### Backdrop Variants
-
-<ComponentPreview name="drawer-backdrop-variants" />
 
 ### Non-Dismissable
 
@@ -76,45 +72,20 @@ The `Drawer.Body` automatically handles overflow with native scrolling. Drag-to-
 
 <ComponentPreview name="drawer-navigation" />
 
-<RelatedComponents component="drawer" />
+### Backdrop Variants
 
-## Styling
+<ComponentPreview name="drawer-backdrop-variants" />
 
-### Passing Tailwind CSS classes
+## Customization
 
-```tsx
-import { Drawer, Button } from "@heroui/react";
+### Tailwind CSS
 
-function CustomDrawer() {
-  return (
-    <Drawer>
-      <Button>Open Drawer</Button>
-      <Drawer.Backdrop className="bg-black/80">
-        <Drawer.Content>
-          <Drawer.Dialog className="bg-linear-to-br from-purple-500 to-pink-500 text-white">
-            <Drawer.CloseTrigger />
-            <Drawer.Header>
-              <Drawer.Heading>Custom Styled Drawer</Drawer.Heading>
-            </Drawer.Header>
-            <Drawer.Body>
-              <p>This drawer has custom styling applied via Tailwind classes.</p>
-            </Drawer.Body>
-            <Drawer.Footer>
-              <Button slot="close">Close</Button>
-            </Drawer.Footer>
-          </Drawer.Dialog>
-        </Drawer.Content>
-      </Drawer.Backdrop>
-    </Drawer>
-  );
-}
-```
+<ComponentPreview name="drawer-custom-styles" />
 
-### Customizing the component classes
+### Global CSS
 
 To customize the Drawer component classes, you can use the `@layer components` directive.
 
-<br />
 [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
@@ -137,13 +108,15 @@ To customize the Drawer component classes, you can use the `@layer components` d
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Drawer component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/drawer.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 
 - `.drawer__trigger` - Trigger element that opens the drawer
 - `.drawer__backdrop` - Overlay backdrop behind the drawer
@@ -156,20 +129,20 @@ The Drawer component uses these CSS classes ([View source styles](https://github
 - `.drawer__handle` - Visual drag handle indicator
 - `.drawer__close-trigger` - Close button element
 
-#### Backdrop Variants
+#### Backdrop Variants [!toc]
 
 - `.drawer__backdrop--opaque` - Opaque colored backdrop (default)
 - `.drawer__backdrop--blur` - Blurred backdrop with glass effect
 - `.drawer__backdrop--transparent` - Transparent backdrop (no overlay)
 
-#### Placement Variants
+#### Placement Variants [!toc]
 
 - `.drawer__content--bottom` - Slides up from the bottom edge (default)
 - `.drawer__content--top` - Slides down from the top edge
 - `.drawer__content--left` - Slides in from the left edge
 - `.drawer__content--right` - Slides in from the right edge
 
-#### Dialog Variants
+#### Dialog Variants [!toc]
 
 - `.drawer__dialog--top` - Slides down from the top edge
 - `.drawer__dialog--bottom` - Slides up from the bottom edge
@@ -298,3 +271,7 @@ Implements [WAI-ARIA Dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/di
 - **Screen readers**: Proper ARIA attributes via React Aria
 - **Scroll lock**: Body scroll disabled when open
 - **Drag to dismiss**: Supports pointer-based drag gestures on handle, header, and footer areas
+
+## Related Components
+
+<RelatedComponents component="drawer" />

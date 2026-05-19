@@ -10,3 +10,4 @@ export {TextAreaExample as TextArea} from "./textarea";
 export {Validation} from "./validation";
 export {WithDescription} from "./with-description";
 export {WithError} from "./with-error";
+export {CustomStyles} from "./custom-styles";

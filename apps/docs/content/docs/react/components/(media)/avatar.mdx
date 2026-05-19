@@ -9,19 +9,15 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Avatar } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="avatar-basic" />
 
-### Anatomy
-
-Import the Avatar component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Avatar } from '@heroui/react';
@@ -33,6 +29,8 @@ export default () => (
   </Avatar>
 )
 ```
+
+## Examples
 
 ### Sizes
 
@@ -54,33 +52,16 @@ export default () => (
 
 <ComponentPreview name="avatar-group" />
 
-### Custom Styles
+## Customization
+
+### Tailwind CSS
 
 <ComponentPreview name="avatar-custom-styles" />
 
-<RelatedComponents component="avatar" />
-
-## Styling
-
-### Passing Tailwind CSS classes
-
-```tsx
-import { Avatar } from '@heroui/react';
-
-function CustomAvatar() {
-  return (
-    <Avatar className="size-20">
-      <Avatar.Image src="..." alt="..." />
-      <Avatar.Fallback>XL</Avatar.Fallback>
-    </Avatar>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Avatar component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -94,26 +75,28 @@ To customize the Avatar component classes, you can use the `@layer components` d
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Avatar component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/avatar.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.avatar` - Base container with default size (size-10)
 - `.avatar__image` - Image element with aspect-square sizing
 - `.avatar__fallback` - Fallback container with centered content
 
-#### Size Modifiers
+#### Size Modifiers [!toc]
 - `.avatar--sm` - Small avatar (size-8)
 - `.avatar--md` - Medium avatar (default, no additional styles)
 - `.avatar--lg` - Large avatar (size-12)
 
-#### Variant Modifiers
+#### Variant Modifiers [!toc]
 - `.avatar--soft` - Soft variant with lighter background
 
-#### Color Modifiers
+#### Color Modifiers [!toc]
 - `.avatar__fallback--default` - Default text color
 - `.avatar__fallback--accent` - Accent text color
 - `.avatar__fallback--success` - Success text color
@@ -122,7 +105,7 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 
 ## API Reference
 
-### Avatar Props
+### Avatar
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -131,7 +114,7 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 | `variant` | `'default' \| 'soft'` | `'default'` | Visual style variant |
 | `className` | `string` | - | Additional CSS classes |
 
-### Avatar.Image Props
+### Avatar.Image
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -145,10 +128,14 @@ The Avatar component uses these CSS classes ([View source styles](https://github
 | `loading` | `'eager' \| 'lazy'` | - | Native lazy loading attribute |
 | `className` | `string` | - | Additional CSS classes |
 
-### Avatar.Fallback Props
+### Avatar.Fallback
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `delayMs` | `number` | - | Delay before showing fallback (prevents flash) |
 | `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | Override color from parent |
 | `className` | `string` | - | Additional CSS classes |
+
+## Related Components
+
+<RelatedComponents component="avatar" />

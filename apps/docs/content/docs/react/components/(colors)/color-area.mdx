@@ -9,19 +9,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ColorArea } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="color-area-basic"
 />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import { ColorArea } from '@heroui/react';
@@ -33,18 +31,13 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### With Dots
 
 <ComponentPreview
   name="color-area-with-dots"
 />
-
-### Controlled
-
-<ComponentPreview
-  name="color-area-controlled"
-/>
-
 
 ### Color Space & Channels
 
@@ -60,34 +53,28 @@ Use `colorSpace` to set the color space (RGB, HSL, HSB) and `xChannel`/`yChannel
   name="color-area-disabled"
 />
 
+### Controlled
+
+<ComponentPreview
+  name="color-area-controlled"
+/>
+
 ### Custom Render Function
 
 <ComponentPreview
   name="color-area-custom-render-function"
 />
 
-<RelatedComponents component="color-area" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="color-area-custom-styles" />
 
-```tsx
-import { ColorArea } from '@heroui/react';
-
-function CustomColorArea() {
-  return (
-    <ColorArea className="max-w-72 rounded-3xl">
-      <ColorArea.Thumb />
-    </ColorArea>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ColorArea component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -101,17 +88,19 @@ To customize the ColorArea component classes, you can use the `@layer components
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ColorArea component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-area.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.color-area` - Base styles with gradient background and inner shadow
 - `.color-area--show-dots` - Adds dot grid overlay for precision picking
 
-#### Element Classes
+#### Element Classes [!toc]
 - `.color-area__thumb` - Draggable thumb indicator
 
 ### Interactive States
@@ -124,7 +113,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### ColorArea Props
+### ColorArea
 
 Inherits from [React Aria ColorArea](https://react-spectrum.adobe.com/react-aria/ColorArea.html).
 
@@ -142,10 +131,14 @@ Inherits from [React Aria ColorArea](https://react-spectrum.adobe.com/react-aria
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorAreaRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### ColorArea.Thumb Props
+### ColorArea.Thumb
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `style` | `CSSProperties \| ((renderProps) => CSSProperties)` | - | Inline styles or render props function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorThumbRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+
+## Related Components
+
+<RelatedComponents component="color-area" />

@@ -10,17 +10,15 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { NumberField } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="number-field-basic" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import {NumberField, Label, Description, FieldError} from '@heroui/react';
@@ -41,63 +39,7 @@ export default () => (
 
 > **NumberField** allows users to enter numeric values with optional increment/decrement buttons. It supports internationalized formatting, validation, and keyboard navigation.
 
-### With Description
-
-<ComponentPreview name="number-field-with-description" />
-
-### Required Field
-
-<ComponentPreview name="number-field-required" />
-
-### Validation
-
-Use `isInvalid` together with `FieldError` to surface validation messages.
-
-<ComponentPreview name="number-field-validation" />
-
-### Controlled
-
-Control the value to synchronize with other components or perform custom formatting.
-
-<ComponentPreview name="number-field-controlled" />
-
-### With Validation
-
-Implement custom validation logic with controlled values.
-
-<ComponentPreview name="number-field-with-validation" />
-
-### Step Values
-
-Configure increment/decrement step values for precise control.
-
-<ComponentPreview name="number-field-with-step" />
-
-### Format Options
-
-Format numbers as currency, percentages, decimals, or units with internationalization support.
-
-<ComponentPreview name="number-field-with-format-options" />
-
-### Custom Icons
-
-Customize the increment and decrement button icons.
-
-<ComponentPreview name="number-field-custom-icons" />
-
-### With Chevrons
-
-Use chevron icons in a vertical layout for a different visual style.
-
-<ComponentPreview name="number-field-with-chevrons" />
-
-### Disabled State
-
-<ComponentPreview name="number-field-disabled" />
-
-### Full Width
-
-<ComponentPreview name="number-field-full-width" />
+## Examples
 
 ### Variants
 
@@ -114,15 +56,69 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <ComponentPreview name="number-field-on-surface" />
 
+### With Description
+
+<ComponentPreview name="number-field-with-description" />
+
+### Required Field
+
+<ComponentPreview name="number-field-required" />
+
+### Disabled State
+
+<ComponentPreview name="number-field-disabled" />
+
+### Full Width
+
+<ComponentPreview name="number-field-full-width" />
+
+### Validation
+
+Use `isInvalid` together with `FieldError` to surface validation messages.
+
+<ComponentPreview name="number-field-validation" />
+
+### Controlled
+
+Control the value to synchronize with other components or perform custom formatting.
+
+<ComponentPreview name="number-field-controlled" />
+
+### Step Values
+
+Configure increment/decrement step values for precise control.
+
+<ComponentPreview name="number-field-with-step" />
+
+### Format Options
+
+Format numbers as currency, percentages, decimals, or units with internationalization support.
+
+<ComponentPreview name="number-field-with-format-options" />
+
 ### Form Example
 
 Complete form integration with validation and submission handling.
 
 <ComponentPreview name="number-field-form-example" />
 
-<RelatedComponents component="numberfield" />
+### With Validation
 
-<RelatedShowcases component="NumberField" />
+Implement custom validation logic with controlled values.
+
+<ComponentPreview name="number-field-with-validation" />
+
+### Custom Icons
+
+Customize the increment and decrement button icons.
+
+<ComponentPreview name="number-field-custom-icons" />
+
+### With Chevrons
+
+Use chevron icons in a vertical layout for a different visual style.
+
+<ComponentPreview name="number-field-with-chevrons" />
 
 ### Custom Render Function
 
@@ -130,28 +126,13 @@ Complete form integration with validation and submission handling.
   name="number-field-custom-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import {NumberField, Label} from '@heroui/react';
+<ComponentPreview name="number-field-custom-styles" />
 
-function CustomNumberField() {
-  return (
-    <NumberField className="gap-2">
-      <Label className="text-sm font-semibold">Quantity</Label>
-      <NumberField.Group className="rounded-xl border-2">
-        <NumberField.DecrementButton className="bg-gray-100" />
-        <NumberField.Input className="text-center font-bold" />
-        <NumberField.IncrementButton className="bg-gray-100" />
-      </NumberField.Group>
-    </NumberField>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 NumberField uses CSS classes that can be customized. Override the component classes to match your design system.
 
@@ -182,6 +163,8 @@ NumberField uses CSS classes that can be customized. Override the component clas
 }
 ```
 
+## Styling Reference
+
 ### CSS Classes
 
 - `.number-field` – Root container with minimal styling (`flex flex-col gap-1`)
@@ -208,7 +191,7 @@ Additional attributes are available through render props (see NumberFieldRenderP
 
 ## API Reference
 
-### NumberField Props
+### NumberField
 
 NumberField inherits all props from React Aria's [NumberField](https://react-spectrum.adobe.com/react-aria/NumberField.html) component.
 
@@ -345,7 +328,7 @@ NumberField.DecrementButton inherits props from React Aria's [Button](https://re
 | `className` | `string` | - | CSS classes for styling. |
 | `slot` | `"decrement"` | `"decrement"` | Must be set to "decrement" (automatically set). |
 
-### NumberFieldRenderProps
+### Render Props
 
 When using render props with `className`, `style`, or `children`, these values are available:
 
@@ -363,3 +346,10 @@ When using render props with `className`, `style`, or `children`, these values a
 | `maxValue` | `number \| undefined` | Maximum allowed value. |
 | `step` | `number` | Step value for increment/decrement. |
 
+## Related Showcases
+
+<RelatedShowcases component="NumberField" />
+
+## Related Components
+
+<RelatedComponents component="numberfield" />

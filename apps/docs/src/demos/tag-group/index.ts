@@ -9,3 +9,4 @@ export {TagGroupWithPrefix as WithPrefix} from "./with-prefix";
 export {TagGroupWithRemoveButton as WithRemoveButton} from "./with-remove-button";
 export {TagGroupWithListData as WithListData} from "./with-list-data";
 export {CustomRenderFunction} from "./custom-render-function";
+export {CustomStyles} from "./custom-styles";

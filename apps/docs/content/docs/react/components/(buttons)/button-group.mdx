@@ -10,21 +10,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ButtonGroup, Button } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="button-group-basic"
 />
 
-### Anatomy
-
-Import the ButtonGroup component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { ButtonGroup, Button } from '@heroui/react';
@@ -45,6 +41,8 @@ export default () => (
 ```
 
 > **ButtonGroup** wraps multiple Button components together, applying consistent styling, spacing, and automatic border radius handling. It uses React Context to pass `size`, `variant`, and `isDisabled` props to all child buttons.
+
+## Examples
 
 ### Variants
 
@@ -92,36 +90,16 @@ Simply omit the `<ButtonGroup.Separator />` component from your buttons.
   name="button-group-without-separator"
 />
 
-<RelatedComponents component="button-group" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="button-group-custom-styles" />
 
-```tsx
-import { ButtonGroup, Button } from '@heroui/react';
-
-function CustomButtonGroup() {
-  return (
-    <ButtonGroup className="gap-2">
-      <Button>First</Button>
-      <Button>
-        <ButtonGroup.Separator />
-        Second
-      </Button>
-      <Button>
-        <ButtonGroup.Separator />
-        Third
-      </Button>
-    </ButtonGroup>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ButtonGroup component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -135,13 +113,15 @@ To customize the ButtonGroup component classes, you can use the `@layer componen
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ButtonGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/button-group.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.button-group` - Base button group container
 - `.button-group--full-width` - Full width modifier
 - `.button-group__separator` - Separator element between buttons
@@ -156,7 +136,7 @@ Add `<ButtonGroup.Separator />` inside each Button (except the first) to show di
 
 ## API Reference
 
-### ButtonGroup Props
+### ButtonGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -168,13 +148,13 @@ Add `<ButtonGroup.Separator />` inside each Button (except the first) to show di
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Button components to group together |
 
-### ButtonGroup.Separator Props
+### ButtonGroup.Separator
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 
-### Notes
+## Note
 
 - ButtonGroup uses React Context to pass `size`, `variant`, and `isDisabled` props to all child Button components
 - **Only direct child buttons receive the ButtonGroup props** - Buttons nested inside other components (like Modal, Dropdown, etc.) will not inherit the group's props even if they are descendants of the ButtonGroup
@@ -182,3 +162,7 @@ Add `<ButtonGroup.Separator />` inside each Button (except the first) to show di
 - The component automatically handles border radius between buttons
 - Add `<ButtonGroup.Separator />` inside each Button (except the first) to show dividers between buttons
 - Buttons in a group have their active/pressed scale transform removed for a more cohesive appearance
+
+## Related Components
+
+<RelatedComponents component="button-group" />

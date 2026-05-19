@@ -8,19 +8,15 @@ links:
   storybook: Components/Overlays/AlertDialog
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { AlertDialog } from "@heroui/react";
 ```
 
-### Usage
-
 <ComponentPreview name="alert-dialog-default" />
 
-### Anatomy
-
-Import the AlertDialog component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import {AlertDialog, Button} from "@heroui/react";
@@ -45,6 +41,8 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### Statuses
 
 <ComponentPreview name="alert-dialog-statuses" />
@@ -53,17 +51,25 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-placements" />
 
-### Backdrop Variants
-
-<ComponentPreview name="alert-dialog-backdrop-variants" />
-
 ### Sizes
 
 <ComponentPreview name="alert-dialog-sizes" />
 
+### Controlled State
+
+<ComponentPreview name="alert-dialog-controlled" />
+
 ### Custom Icon
 
 <ComponentPreview name="alert-dialog-custom-icon" />
+
+### Custom Trigger
+
+<ComponentPreview name="alert-dialog-custom-trigger" />
+
+### Backdrop Variants
+
+<ComponentPreview name="alert-dialog-backdrop-variants" />
 
 ### Custom Backdrop
 
@@ -77,14 +83,6 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-close-methods" />
 
-### Controlled State
-
-<ComponentPreview name="alert-dialog-controlled" />
-
-### Custom Trigger
-
-<ComponentPreview name="alert-dialog-custom-trigger" />
-
 ### Custom Animations
 
 <ComponentPreview name="alert-dialog-custom-animations" />
@@ -93,51 +91,16 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-custom-portal" />
 
-<RelatedComponents component="alert-dialog" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="alert-dialog-custom-styles" />
 
-```tsx
-import {AlertDialog, Button} from "@heroui/react";
-
-function CustomAlertDialog() {
-  return (
-    <AlertDialog>
-      <Button variant="danger">Delete</Button>
-      <AlertDialog.Backdrop className="bg-red-950/90">
-        <AlertDialog.Container className="items-start pt-20">
-          <AlertDialog.Dialog className="border-2 border-red-500 sm:max-w-[400px]">
-            <AlertDialog.CloseTrigger />
-            <AlertDialog.Header>
-              <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>Custom Styled Alert</AlertDialog.Heading>
-            </AlertDialog.Header>
-            <AlertDialog.Body>
-              <p>This alert dialog has custom styling applied via Tailwind classes</p>
-            </AlertDialog.Body>
-            <AlertDialog.Footer>
-              <Button slot="close" variant="tertiary">
-                Cancel
-              </Button>
-              <Button slot="close" variant="danger">
-                Delete
-              </Button>
-            </AlertDialog.Footer>
-          </AlertDialog.Dialog>
-        </AlertDialog.Container>
-      </AlertDialog.Backdrop>
-    </AlertDialog>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the AlertDialog component classes, you can use the `@layer components` directive.
 
-<br />
 [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
@@ -164,13 +127,15 @@ To customize the AlertDialog component classes, you can use the `@layer componen
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The AlertDialog component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/alert-dialog.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 
 - `.alert-dialog__trigger` - Trigger element that opens the alert dialog
 - `.alert-dialog__backdrop` - Overlay backdrop behind the dialog
@@ -183,13 +148,13 @@ The AlertDialog component uses these CSS classes ([View source styles](https://g
 - `.alert-dialog__icon` - Icon container with status colors
 - `.alert-dialog__close-trigger` - Close button element
 
-#### Backdrop Variants
+#### Backdrop Variants [!toc]
 
 - `.alert-dialog__backdrop--opaque` - Opaque colored backdrop (default)
 - `.alert-dialog__backdrop--blur` - Blurred backdrop with glass effect
 - `.alert-dialog__backdrop--transparent` - Transparent backdrop (no overlay)
 
-#### Status Variants (Icon)
+#### Status Variants (Icon) [!toc]
 
 - `.alert-dialog__icon--default` - Default gray status
 - `.alert-dialog__icon--accent` - Accent blue status
@@ -323,3 +288,7 @@ Implements [WAI-ARIA AlertDialog pattern](https://www.w3.org/WAI/ARIA/apg/patter
 - **Screen readers**: Proper ARIA attributes with `role="alertdialog"`
 - **Scroll lock**: Body scroll disabled when open
 - **Required action**: Defaults to requiring explicit user action (no backdrop/ESC dismiss)
+
+## Related Components
+
+<RelatedComponents component="alert-dialog" />

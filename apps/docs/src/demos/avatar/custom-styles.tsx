@@ -22,7 +22,7 @@ export function CustomStyles() {
       </Avatar>
 
       {/* Gradient border */}
-      <Avatar className="bg-gradient-to-tr from-pink-500 to-yellow-500 p-0.5">
+      <Avatar className="bg-linear-to-tr from-pink-500 to-yellow-500 p-0.5">
         <div className="size-full rounded-full bg-background p-0.5">
           <Avatar.Image
             alt="Gradient Border"

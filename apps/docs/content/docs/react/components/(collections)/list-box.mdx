@@ -8,21 +8,17 @@ links:
   storybook: Components/Collections/ListBox
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ListBox } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="list-box-default"
 />
 
-### Anatomy
-
-Import the ListBox component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { ListBox, Label, Description, Header } from '@heroui/react';
@@ -44,6 +40,14 @@ export default () => (
 )
 ```
 
+## Examples
+
+### With Disabled Items
+
+<ComponentPreview
+  name="list-box-with-disabled-items"
+/>
+
 ### With Sections
 
 <ComponentPreview
@@ -56,28 +60,10 @@ export default () => (
   name="list-box-multi-select"
 />
 
-### With Disabled Items
-
-<ComponentPreview
-  name="list-box-with-disabled-items"
-/>
-
-### Custom Check Icon
-
-<ComponentPreview
-  name="list-box-custom-check-icon"
-/>
-
 ### Controlled
 
 <ComponentPreview
   name="list-box-controlled"
-/>
-
-### Custom Render Function
-
-<ComponentPreview
-  name="list-box-custom-render-function"
 />
 
 ### Virtualization
@@ -88,30 +74,28 @@ ListBox supports virtualization through [Virtualizer](https://react-aria.adobe.c
   name="list-box-virtualization"
 />
 
-<RelatedComponents component="list-box" />
+### Custom Check Icon
 
-## Styling
+<ComponentPreview
+  name="list-box-custom-check-icon"
+/>
 
-### Passing Tailwind CSS classes
+### Custom Render Function
 
-```tsx
-import { ListBox } from '@heroui/react';
+<ComponentPreview
+  name="list-box-custom-render-function"
+/>
 
-function CustomListBox() {
-  return (
-    <ListBox className="border rounded-lg p-2 bg-surface">
-      <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
-        Item 1
-      </ListBox.Item>
-    </ListBox>
-  );
-}
-```
+## Customization
 
-### Customizing the component classes
+### Tailwind CSS
+
+<ComponentPreview name="list-box-custom-styles" />
+
+### Global CSS
 
 To customize the ListBox component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -133,25 +117,27 @@ To customize the ListBox component classes, you can use the `@layer components` 
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ListBox component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/list-box.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.list-box` - Base listbox container
 - `.list-box-item` - Individual listbox item
 - `.list-box-item__indicator` - Selection indicator icon
 - `.list-box-section` - Section container for grouping items
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.list-box--default` - Default variant styling
 - `.list-box--danger` - Danger variant styling
 - `.list-box-item--default` - Default item variant
 - `.list-box-item--danger` - Danger item variant
 
-#### State Classes
+#### State Classes [!toc]
 - `.list-box-item[data-selected="true"]` - Selected item state
 - `.list-box-item[data-focus-visible="true"]` - Focused item state
 - `.list-box-item[data-disabled="true"]` - Disabled item state
@@ -168,7 +154,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### ListBox Props
+### ListBox
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -185,7 +171,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode` | - | ListBox items and sections |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ListBoxRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### ListBox.Item Props
+### ListBox.Item
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -197,21 +183,21 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Item content or render function |
 | `render` | `(props: DetailedHTMLProps<LinkWithRequiredHref, HTMLAnchorElement> \| React.JSX.IntrinsicElements[keyof React.JSX.IntrinsicElements], renderProps: ListBoxItemRenderProps) => ReactElement` | - | Overrides the default DOM element with a custom render function.|
 
-### ListBox.ItemIndicator Props
+### ListBox.ItemIndicator
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Custom indicator content or render function |
 
-### ListBox.Section Props
+### ListBox.Section
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Section content including Header and Items |
 
-### RenderProps
+### Render Props
 
 When using render functions with ListBox.Item or ListBox.ItemIndicator, these values are provided:
 
@@ -327,3 +313,6 @@ The ListBox component implements the ARIA listbox pattern and provides:
 
 For more information, see the [React Aria ListBox documentation](https://react-spectrum.adobe.com/react-aria/ListBox.html).
 
+## Related Components
+
+<RelatedComponents component="list-box" />

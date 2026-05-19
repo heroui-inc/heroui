@@ -9,22 +9,18 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Tabs } from '@heroui/react';
 ```
-
-### Usage
 
 <ComponentPreview
   isBgSolid
   name="tabs-basic"
 />
 
-### Anatomy
-
-Import the Tabs component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Tabs } from '@heroui/react';
@@ -44,35 +40,7 @@ export default () => (
 )
 ```
 
-### Vertical
-
-<ComponentPreview
-  isBgSolid
-  name="tabs-vertical"
-/>
-
-### Disabled Tab
-
-<ComponentPreview
-  isBgSolid
-  name="tabs-disabled"
-/>
-
-### With Separator
-
-Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display separator lines between tabs.
-
-<ComponentPreview
-  isBgSolid
-  name="tabs-with-separator"
-/>
-
-### Custom Styles
-
-<ComponentPreview
-  isBgSolid
-  name="tabs-custom-styles"
-/>
+## Examples
 
 ### Secondary Variant
 
@@ -88,9 +56,28 @@ Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display 
   name="tabs-secondary-vertical"
 />
 
-<RelatedShowcases component="Tabs" />
+### Disabled Tab
 
-<RelatedComponents component="tabs" />
+<ComponentPreview
+  isBgSolid
+  name="tabs-disabled"
+/>
+
+### Vertical
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-vertical"
+/>
+
+### With Separator
+
+Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display separator lines between tabs.
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-with-separator"
+/>
 
 ### Custom Render Function
 
@@ -98,53 +85,19 @@ Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display 
   name="tabs-custom-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-<CollapsibleCode lang="tsx" code={`
-import { Tabs } from '@heroui/react';
+<ComponentPreview name="tabs-custom-styles" />
 
-function CustomTabs() {
-  return (
-    <Tabs className="w-full max-w-lg text-center">
-      <Tabs.ListContainer>
-        <Tabs.List
-          aria-label="Options"
-          className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
-        >
-          <Tabs.Tab id="daily">Daily<Tabs.Indicator /></Tabs.Tab>
-          <Tabs.Tab id="weekly">Weekly<Tabs.Indicator /></Tabs.Tab>
-          <Tabs.Tab id="bi-weekly">Bi-Weekly<Tabs.Indicator /></Tabs.Tab>
-          <Tabs.Tab id="monthly">Monthly<Tabs.Indicator /></Tabs.Tab>
-        </Tabs.List>
-      </Tabs.ListContainer>
-      <Tabs.Panel className="px-4" id="daily">
-        <h3 className="mb-2 font-semibold">Daily</h3>
-        <p className="text-sm text-gray-600">Manage your daily tasks and goals.</p>
-      </Tabs.Panel>
-      <Tabs.Panel className="px-4" id="weekly">
-        <h3 className="mb-2 font-semibold">Weekly</h3>
-        <p className="text-sm text-gray-600">Manage your weekly tasks and goals.</p>
-      </Tabs.Panel>
-      <Tabs.Panel className="px-4" id="bi-weekly">
-        <h3 className="mb-2 font-semibold">Bi-Weekly</h3>
-        <p className="text-sm text-gray-600">Manage your bi-weekly tasks and goals.</p>
-      </Tabs.Panel>
-      <Tabs.Panel className="px-4" id="monthly">
-        <h3 className="mb-2 font-semibold">Monthly</h3>
-        <p className="text-sm text-gray-600">Manage your monthly tasks and goals.</p>
-      </Tabs.Panel>
-    </Tabs>
-  );
-}
-`} />
+## Styling Reference
 
 ### CSS Classes
 
 The Tabs component uses these CSS classes:
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.tabs` - Base tabs container
 - `.tabs__list-container` - Tab list container wrapper
 - `.tabs__list` - Tab list container
@@ -153,11 +106,11 @@ The Tabs component uses these CSS classes:
 - `.tabs__panel` - Tab panel content
 - `.tabs__indicator` - Tab indicator
 
-#### Orientation Attributes
+#### Orientation Attributes [!toc]
 - `.tabs[data-orientation="horizontal"]` - Horizontal tab layout (default)
 - `.tabs[data-orientation="vertical"]` - Vertical tab layout
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.tabs--secondary` - Secondary variant with underline indicator
 
 ### Interactive States
@@ -169,11 +122,9 @@ The component supports both CSS pseudo-classes and data attributes:
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
 - **Disabled**: `[aria-disabled="true"]`
 
-
-
 ## API Reference
 
-### Tabs Props
+### Tabs
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -185,7 +136,7 @@ The component supports both CSS pseudo-classes and data attributes:
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabsRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Tabs.List Props
+### Tabs.List
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -193,7 +144,7 @@ The component supports both CSS pseudo-classes and data attributes:
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabListRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Tabs.Tab Props
+### Tabs.Tab
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -202,16 +153,24 @@ The component supports both CSS pseudo-classes and data attributes:
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Tabs.Separator Props
+### Tabs.Separator
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 
-### Tabs.Panel Props
+### Tabs.Panel
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `id` | `string` | - | Panel identifier matching tab id |
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabPanelRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+
+## Related Showcases
+
+<RelatedShowcases component="Tabs" />
+
+## Related Components
+
+<RelatedComponents component="tabs" />

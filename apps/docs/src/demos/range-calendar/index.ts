@@ -14,3 +14,4 @@ export {ThreeMonths} from "./three-months";
 export {UnavailableDates} from "./unavailable-dates";
 export {WithIndicators} from "./with-indicators";
 export {YearPicker} from "./year-picker";
+export {CustomStyles} from "./custom-styles";

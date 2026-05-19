@@ -10,11 +10,15 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Badge } from '@heroui/react';
 ```
+
+<ComponentPreview
+  name="badge-basic"
+/>
 
 ## Anatomy
 
@@ -29,16 +33,12 @@ Badge is designed to be positioned relative to another element using `Badge.Anch
 </Badge.Anchor>
 ```
 
-### Usage
+## Examples
+
+### Variants
 
 <ComponentPreview
-  name="badge-basic"
-/>
-
-### Colors
-
-<ComponentPreview
-  name="badge-colors"
+  name="badge-variants"
 />
 
 ### Sizes
@@ -47,24 +47,16 @@ Badge is designed to be positioned relative to another element using `Badge.Anch
   name="badge-sizes"
 />
 
-### Variants
+### Colors
 
 <ComponentPreview
-  name="badge-variants"
+  name="badge-colors"
 />
 
 ### Placements
 
 <ComponentPreview
   name="badge-placements"
-/>
-
-### With Content
-
-Badge supports text, numbers, and icons as content. When no children are provided, it renders as a dot indicator.
-
-<ComponentPreview
-  name="badge-with-content"
 />
 
 ### Dot Badge
@@ -75,33 +67,24 @@ Empty badges act as status indicators — useful for online/offline states or ac
   name="badge-dot"
 />
 
-<RelatedComponents component="badge" />
+### With Content
 
-## Styling
+Badge supports text, numbers, and icons as content. When no children are provided, it renders as a dot indicator.
 
-### Passing Tailwind CSS classes
+<ComponentPreview
+  name="badge-with-content"
+/>
 
-You can style the root container and individual slots:
+## Customization
 
-```tsx
-import {Badge, Avatar} from '@heroui/react';
+### Tailwind CSS
 
-function CustomBadge() {
-  return (
-    <Badge.Anchor>
-      <Avatar />
-      <Badge className="border-2 border-white" color="danger">
-        <Badge.Label className="font-bold">99+</Badge.Label>
-      </Badge>
-    </Badge.Anchor>
-  );
-}
-```
+<ComponentPreview name="badge-custom-styles" />
 
-### Customizing the component classes
+### Global CSS
 
 To customize the Badge component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -119,41 +102,43 @@ To customize the Badge component classes, you can use the `@layer components` di
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Badge component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/badge.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.badge` - Base badge container styles
 - `.badge__label` - Label text slot styles
 - `.badge-anchor` - Positioning wrapper for the anchored element
 
-#### Color Classes
+#### Color Classes [!toc]
 - `.badge--accent` - Accent color variant
 - `.badge--danger` - Danger color variant
 - `.badge--default` - Default color variant
 - `.badge--success` - Success color variant
 - `.badge--warning` - Warning color variant
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.badge--primary` - Primary variant with filled background
 - `.badge--secondary` - Secondary variant with default background
 - `.badge--soft` - Soft variant with lighter background
 
-#### Size Classes
+#### Size Classes [!toc]
 - `.badge--sm` - Small size
 - `.badge--md` - Medium size (default)
 - `.badge--lg` - Large size
 
-#### Placement Classes
+#### Placement Classes [!toc]
 - `.badge--top-right` - Position at top-right corner (default)
 - `.badge--top-left` - Position at top-left corner
 - `.badge--bottom-right` - Position at bottom-right corner
 - `.badge--bottom-left` - Position at bottom-left corner
 
-#### Compound Variant Classes
+#### Compound Variant Classes [!toc]
 
 Badges support combining variant and color classes (e.g., `.badge--primary.badge--accent`). The following combinations have default styles defined:
 
@@ -173,7 +158,7 @@ Badges support combining variant and color classes (e.g., `.badge--primary.badge
 
 ## API Reference
 
-### Badge Props
+### Badge
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -184,16 +169,20 @@ Badges support combining variant and color classes (e.g., `.badge--primary.badge
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size of the badge |
 | `placement` | `"top-right" \| "top-left" \| "bottom-right" \| "bottom-left"` | `"top-right"` | Position of the badge relative to its anchor |
 
-### Badge.Anchor Props
+### Badge.Anchor
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | The element to anchor the badge to, plus the Badge itself |
 | `className` | `string` | - | Additional CSS classes for the anchor wrapper |
 
-### Badge.Label Props
+### Badge.Label
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Label text content |
 | `className` | `string` | - | Additional CSS classes for the label slot |
+
+## Related Components
+
+<RelatedComponents component="badge" />

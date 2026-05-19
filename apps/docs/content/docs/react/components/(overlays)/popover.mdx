@@ -8,21 +8,17 @@ links:
   storybook: Components/Overlays/Popover
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Popover } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="popover-basic"
 />
 
-### Anatomy
-
-Import the Popover component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Popover } from '@heroui/react';
@@ -41,16 +37,12 @@ export default () => (
 )
 ```
 
+## Examples
+
 ### With Arrow
 
 <ComponentPreview
   name="popover-with-arrow"
-/>
-
-### Placement
-
-<ComponentPreview
-  name="popover-placement"
 />
 
 ### Interactive Content
@@ -59,7 +51,11 @@ export default () => (
   name="popover-interactive"
 />
 
-<RelatedComponents component="popover" />
+### Placement
+
+<ComponentPreview
+  name="popover-placement"
+/>
 
 ### Custom Render Function
 
@@ -67,34 +63,16 @@ export default () => (
   name="popover-custom-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import { Popover, Button } from '@heroui/react';
+<ComponentPreview name="popover-custom-styles" />
 
-function CustomPopover() {
-  return (
-    <Popover>
-      <Popover.Trigger>
-        <Button>Open</Button>
-      </Popover.Trigger>
-      <Popover.Content className="bg-accent text-accent-foreground">
-        <Popover.Dialog>
-          <h3>Custom Styled</h3>
-          <p>This popover has custom styling</p>
-        </Popover.Dialog>
-      </Popover.Content>
-    </Popover>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Popover component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -112,13 +90,15 @@ To customize the Popover component classes, you can use the `@layer components` 
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Popover component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/popover.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.popover` - Base popover container styles
 - `.popover__dialog` - Dialog content wrapper
 - `.popover__heading` - Heading text styles
@@ -135,7 +115,7 @@ The component supports animation states:
 
 ## API Reference
 
-### Popover Props
+### Popover
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -144,7 +124,7 @@ The component supports animation states:
 | `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
 | `onOpenChange` | `(isOpen: boolean) => void` | - | Called when open state changes |
 
-### Popover.Content Props
+### Popover.Content
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -155,24 +135,28 @@ The component supports animation states:
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, PopoverRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Popover.Dialog Props
+### Popover.Dialog
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Dialog content |
 | `className` | `string` | - | Additional CSS classes |
 
-### Popover.Trigger Props
+### Popover.Trigger
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Element that triggers the popover |
 | `className` | `string` | - | Additional CSS classes |
 
-### Popover.Arrow Props
+### Popover.Arrow
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Custom arrow element |
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, OverlayArrowRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+
+## Related Components
+
+<RelatedComponents component="popover" />

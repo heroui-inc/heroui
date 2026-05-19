@@ -12,3 +12,4 @@ export {Variants} from "./variants";
 export {WithDescription} from "./with-description";
 export {WithKeyboardShortcut} from "./with-keyboard-shortcut";
 export {WithValidation} from "./with-validation";
+export {CustomStyles} from "./custom-styles";
