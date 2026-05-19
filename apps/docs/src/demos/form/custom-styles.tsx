@@ -4,10 +4,10 @@ import {Check} from "@gravity-ui/icons";
 import {Button, Description, FieldError, Form, Input, Label, TextField} from "@heroui/react";
 
 const shell =
-  "flex w-96 flex-col gap-4 rounded-xl border border-border/70 bg-linear-to-b from-neutral-50/90 to-white p-4 ring-1 ring-black/5 dark:from-neutral-900/80 dark:to-neutral-900 dark:ring-white/10";
+  "flex w-96 flex-col gap-4 rounded-xl border border-border bg-surface p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/10";
 
 const field =
-  "rounded-xl border border-border/80 bg-surface shadow-sm ring-1 ring-black/5 transition-[box-shadow,border-color] focus-visible:ring-2 focus-visible:ring-neutral-400/25 dark:ring-white/10 dark:focus-visible:ring-neutral-500/30";
+  "rounded-xl border border-border bg-surface shadow-sm ring-1 ring-black/5 transition-[box-shadow,border-color] focus-visible:ring-2 focus-visible:ring-foreground/15 dark:ring-white/10";
 
 export function CustomStyles() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +36,7 @@ export function CustomStyles() {
           return null;
         }}
       >
-        <Label className="font-medium text-neutral-800 dark:text-neutral-100">Email</Label>
+        <Label className="font-medium text-foreground">Email</Label>
         <Input className={field} placeholder="john@example.com" />
         <FieldError />
       </TextField>
@@ -60,10 +60,10 @@ export function CustomStyles() {
           return null;
         }}
       >
-        <Label className="font-medium text-neutral-800 dark:text-neutral-100">Password</Label>
+        <Label className="font-medium text-foreground">Password</Label>
         <Input className={field} placeholder="Enter your password" />
-        <Description className="text-neutral-600 dark:text-neutral-400">
-          Must be at least 8 characters with 1 uppercase and 1 number
+        <Description className="text-muted">
+          Use at least 8 characters with 1 uppercase and 1 number
         </Description>
         <FieldError />
       </TextField>

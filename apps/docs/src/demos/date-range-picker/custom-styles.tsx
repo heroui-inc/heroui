@@ -2,11 +2,117 @@
 
 import {DateField, DateRangePicker, Label, RangeCalendar} from "@heroui/react";
 
-const fieldGroup =
-  "rounded-xl border border-border/80 bg-surface shadow-sm ring-1 ring-black/5 focus-within:ring-2 focus-within:ring-neutral-400/30 dark:ring-white/10 dark:focus-within:ring-neutral-500/40";
+/**
+ * Range selection is styled in two layers: the outer `.range-calendar__cell` draws the
+ * in-range track, and the inner `.range-calendar__cell-button` styles the start/end caps.
+ * Add `range-calendar--custom-demo` to your global CSS (e.g. `src/app/globals.css`), then
+ * pass `className="range-calendar--custom-demo"` on `<RangeCalendar />`. Days marked as today
+ * inside the in-range middle segment keep the default `text-accent-soft-foreground` styling.
+ *
+ * ```css
+ * @layer components {
+ *   .range-calendar--custom-demo .range-calendar__cell {
+ *     @apply rounded-none;
+ *   }
+ *
+ *   .range-calendar--custom-demo .range-calendar__cell .range-calendar__cell-button {
+ *     @apply rounded-none;
+ *   }
+ *
+ *   .range-calendar--custom-demo .range-calendar__cell[data-selected="true"]:not([data-outside-month="true"]) {
+ *     @apply rounded-none bg-muted/50;
+ *   }
+ *
+ *   .dark .range-calendar--custom-demo .range-calendar__cell[data-selected="true"]:not([data-outside-month="true"]) {
+ *     @apply bg-muted/35;
+ *   }
+ *
+ *   .range-calendar--custom-demo .range-calendar__cell[data-selected="true"]:is(td:first-child > *) {
+ *     @apply rounded-ss-none rounded-es-none;
+ *
+ *     &[data-selection-start="true"] {
+ *       @apply rounded-ss-none rounded-es-none;
+ *     }
+ *   }
+ *
+ *   .range-calendar--custom-demo .range-calendar__cell[data-selected="true"]:is(td:last-child > *) {
+ *     @apply rounded-se-none rounded-ee-none;
+ *
+ *     &[data-selection-end="true"] {
+ *       @apply rounded-se-none rounded-ee-none;
+ *     }
+ *   }
+ *
+ *   .range-calendar--custom-demo
+ *     .range-calendar__grid-body
+ *     td:has(> .range-calendar__cell[data-outside-month="true"])
+ *     + td
+ *     > .range-calendar__cell[data-selected="true"] {
+ *     @apply rounded-ss-none rounded-es-none;
+ *
+ *     &[data-selection-start="true"] {
+ *       @apply rounded-ss-none rounded-es-none;
+ *     }
+ *   }
+ *
+ *   .range-calendar--custom-demo
+ *     .range-calendar__grid-body
+ *     td:has(> .range-calendar__cell[data-selected="true"]):has(
+ *       + td > .range-calendar__cell[data-outside-month="true"]
+ *     )
+ *     > .range-calendar__cell[data-selected="true"] {
+ *     @apply rounded-se-none rounded-ee-none;
+ *
+ *     &[data-selection-end="true"] {
+ *       @apply rounded-se-none rounded-ee-none;
+ *     }
+ *   }
+ *
+ *   .range-calendar--custom-demo
+ *     .range-calendar__cell[data-selection-start="true"]:not([data-outside-month="true"]) {
+ *     @apply rounded-none;
+ *   }
+ *
+ *   .range-calendar--custom-demo .range-calendar__cell[data-selection-end="true"]:not([data-outside-month="true"]) {
+ *     @apply rounded-none;
+ *   }
+ *
+ *   .range-calendar--custom-demo .range-calendar__cell[data-selected="true"] .range-calendar__cell-button {
+ *     @apply rounded-none;
+ *   }
+ *
+ *   .range-calendar--custom-demo
+ *     .range-calendar__cell[data-selection-start="true"]:not([data-outside-month="true"])
+ *     .range-calendar__cell-button,
+ *   .range-calendar--custom-demo
+ *     .range-calendar__cell[data-selection-end="true"]:not([data-outside-month="true"])
+ *     .range-calendar__cell-button {
+ *     @apply bg-foreground text-background;
+ *   }
+ *
+ *   .range-calendar--custom-demo
+ *     .range-calendar__cell[data-selection-start="true"][data-pressed="true"]:not([data-outside-month="true"])
+ *     .range-calendar__cell-button,
+ *   .range-calendar--custom-demo
+ *     .range-calendar__cell[data-selection-end="true"][data-pressed="true"]:not([data-outside-month="true"])
+ *     .range-calendar__cell-button {
+ *     @apply bg-foreground/90;
+ *   }
+ *
+ *   @media (hover: hover) {
+ *     .range-calendar--custom-demo .range-calendar__cell[data-hovered="true"]:not([data-selected="true"])
+ *       .range-calendar__cell-button,
+ *     .range-calendar--custom-demo .range-calendar__cell:hover:not([data-selected="true"])
+ *       .range-calendar__cell-button {
+ *       @apply rounded-none bg-muted/70;
+ *     }
+ *   }
+ * }
+ * ```
+ */
 
-const dayCell =
-  "rounded-lg data-[selected=true]:bg-neutral-900 data-[selected=true]:text-white data-[selection-start=true]:rounded-l-lg data-[selection-end=true]:rounded-r-lg data-[focused=true]:ring-2 data-[focused=true]:ring-neutral-400/40 dark:data-[selected=true]:bg-neutral-100 dark:data-[selected=true]:text-neutral-900";
+const fieldGroup =
+  "rounded-xl border border-border bg-surface shadow-sm ring-1 ring-black/5 focus-within:ring-2 focus-within:ring-foreground/15 dark:ring-white/10";
 
 export function CustomStyles() {
   return (
@@ -26,19 +132,19 @@ export function CustomStyles() {
           </DateRangePicker.Trigger>
         </DateField.Suffix>
       </DateField.Group>
-      <DateRangePicker.Popover className="rounded-xl border border-border/80 bg-surface p-2 shadow-xl ring-1 ring-black/5 dark:ring-white/10">
-        <RangeCalendar aria-label="Stay dates">
+      <DateRangePicker.Popover className="rounded-xl border border-border bg-surface p-2 shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+        <RangeCalendar aria-label="Stay dates" className="range-calendar--custom-demo">
           <RangeCalendar.Header className="mb-2">
             <RangeCalendar.YearPickerTrigger>
               <RangeCalendar.YearPickerTriggerHeading className="font-semibold text-foreground" />
               <RangeCalendar.YearPickerTriggerIndicator className="text-muted" />
             </RangeCalendar.YearPickerTrigger>
             <RangeCalendar.NavButton
-              className="rounded-lg text-muted hover:bg-muted/60"
+              className="rounded-lg text-muted hover:bg-muted/70"
               slot="previous"
             />
             <RangeCalendar.NavButton
-              className="rounded-lg text-muted hover:bg-muted/60"
+              className="rounded-lg text-muted hover:bg-muted/70"
               slot="next"
             />
           </RangeCalendar.Header>
@@ -51,7 +157,7 @@ export function CustomStyles() {
               )}
             </RangeCalendar.GridHeader>
             <RangeCalendar.GridBody>
-              {(date) => <RangeCalendar.Cell className={dayCell} date={date} />}
+              {(date) => <RangeCalendar.Cell date={date} />}
             </RangeCalendar.GridBody>
           </RangeCalendar.Grid>
           <RangeCalendar.YearPickerGrid>

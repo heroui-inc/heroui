@@ -4,10 +4,10 @@ import {Pagination} from "@heroui/react";
 import {useState} from "react";
 
 const linkBase =
-  "min-w-9 rounded-none border-0 bg-transparent text-neutral-600 shadow-none hover:bg-neutral-100/80 dark:text-neutral-400 dark:hover:bg-neutral-800/80";
+  "size-8 min-w-8 rounded-md! border-0 bg-transparent! text-sm font-medium text-muted shadow-none hover:bg-muted/50! data-[hovered=true]:bg-muted/50!";
 
 const activeLink =
-  "bg-neutral-900 font-medium text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200";
+  "rounded-md! bg-foreground! font-medium text-background shadow-sm hover:bg-foreground/90! data-[active=true]:bg-foreground! data-[hovered=true]:bg-foreground/90!";
 
 export function CustomStyles() {
   const [page, setPage] = useState(2);
@@ -15,10 +15,10 @@ export function CustomStyles() {
 
   return (
     <Pagination className="justify-center">
-      <Pagination.Content className="gap-0 overflow-hidden rounded-full border border-border/80 bg-surface p-1 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-        <Pagination.Item>
+      <Pagination.Content className="gradient-border relative gap-1.5 rounded-xl bg-linear-to-b from-neutral-50/95 to-white p-1.5 shadow-sm ring-1 ring-black/5 [--gradient-border-width:1px] [--gradient-border:linear-gradient(315deg,#e5e5e5_0%,#fafafa_50%,#c4c4c4_100%)] dark:from-neutral-900/95 dark:to-neutral-950 dark:ring-white/10 dark:[--gradient-border:linear-gradient(315deg,#404040_0%,#262626_50%,#525252_100%)]">
+        <Pagination.Item className="mr-0.5">
           <Pagination.Previous
-            className={`${linkBase} rounded-l-full pl-3`}
+            className={`${linkBase} min-w-auto gap-1 px-2.5`}
             isDisabled={page === 1}
             onPress={() => setPage((p) => p - 1)}
           >
@@ -36,9 +36,9 @@ export function CustomStyles() {
             </Pagination.Link>
           </Pagination.Item>
         ))}
-        <Pagination.Item>
+        <Pagination.Item className="ml-0.5">
           <Pagination.Next
-            className={`${linkBase} rounded-r-full pr-3`}
+            className={`${linkBase} min-w-auto gap-1 px-2.5`}
             isDisabled={page === totalPages}
             onPress={() => setPage((p) => p + 1)}
           >

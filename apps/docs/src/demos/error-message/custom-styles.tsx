@@ -25,7 +25,7 @@ export function CustomStyles() {
       <Description className="text-xs tracking-wide text-muted">
         Pick at least one topic
       </Description>
-      <ErrorMessage className="text-xs font-medium tracking-wide text-danger">
+      <ErrorMessage className="text-xs font-medium tracking-wide">
         {!!isInvalid && <>Choose at least one topic</>}
       </ErrorMessage>
     </TagGroup>

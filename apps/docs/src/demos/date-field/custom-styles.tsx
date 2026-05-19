@@ -3,7 +3,7 @@
 import {DateField, Label} from "@heroui/react";
 
 const fieldGroup =
-  "rounded-xl border border-border/80 bg-surface shadow-sm ring-1 ring-black/5 transition-[box-shadow] focus-within:ring-2 focus-within:ring-neutral-400/30 dark:ring-white/10 dark:focus-within:ring-neutral-500/40";
+  "rounded-xl border border-border bg-surface shadow-sm ring-1 ring-black/5 transition-[box-shadow] focus-within:ring-2 focus-within:ring-foreground/15 dark:ring-white/10";
 
 export function CustomStyles() {
   return (

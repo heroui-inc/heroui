@@ -23,24 +23,21 @@ export function CustomStyles() {
 
           return (
             <Toast
-              className="rounded-xl border border-border/80 bg-surface shadow-lg ring-1 ring-black/5 dark:ring-white/10"
+              className="rounded-xl border border-border bg-surface shadow-lg ring-1 ring-black/5 dark:ring-white/10"
               toast={toastItem}
               variant={content.variant}
             >
               <ToastContent>
                 <div className="flex items-center gap-2.5">
-                  <ToastIndicator
-                    className="text-neutral-600 dark:text-neutral-400"
-                    variant={content.variant}
-                  />
+                  <ToastIndicator className="text-muted" variant={content.variant} />
                   <div className="flex flex-col gap-0.5">
                     {content.title ? (
-                      <ToastTitle className="text-sm font-medium text-neutral-900 dark:text-neutral-50">
+                      <ToastTitle className="text-sm font-medium text-foreground">
                         {content.title}
                       </ToastTitle>
                     ) : null}
                     {content.description ? (
-                      <ToastDescription className="text-sm text-neutral-600 dark:text-neutral-400">
+                      <ToastDescription className="text-sm text-muted">
                         {content.description}
                       </ToastDescription>
                     ) : null}

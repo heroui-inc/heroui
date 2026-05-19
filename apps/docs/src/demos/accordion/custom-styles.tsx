@@ -32,7 +32,7 @@ export function CustomStyles() {
           key={index}
           className={cn(
             "group/item",
-            "first:[&_[data-slot=accordion-trigger]]:rounded-t-2xl", // First trigger we want to round the top
+            "first:**:data-[slot=accordion-trigger]:rounded-t-2xl", // First trigger we want to round the top
             "last:[&:not(:has([data-slot=accordion-trigger][aria-expanded='true']))_[data-slot=accordion-trigger]]:rounded-b-2xl", // Last trigger we want to round the bottom
           )}
         >
