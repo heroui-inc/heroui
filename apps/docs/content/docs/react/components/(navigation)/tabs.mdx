@@ -91,11 +91,42 @@ Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display 
 
 <ComponentPreview name="tabs-custom-styles" />
 
+### Global CSS
+
+To customize the Tabs component classes, you can use the `@layer components` directive.
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .tabs__list {
+    @apply rounded-xl border border-border bg-surface p-1;
+  }
+
+  .tabs__tab {
+    @apply rounded-lg font-medium;
+  }
+
+  .tabs__indicator {
+    @apply rounded-lg bg-foreground shadow-sm;
+  }
+
+  .tabs--secondary > .tabs__list-container > .tabs__list {
+    @apply border-b border-border bg-transparent p-0;
+  }
+
+  .tabs--secondary > .tabs__list-container .tabs__indicator {
+    @apply rounded-none bg-accent;
+  }
+}
+```
+
 ## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
-The Tabs component uses these CSS classes:
+The Tabs component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tabs.css)):
 
 #### Base Classes [!toc]
 - `.tabs` - Base tabs container

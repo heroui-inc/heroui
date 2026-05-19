@@ -42,6 +42,35 @@ export default () => (
 
 <ComponentPreview name="form-custom-styles" />
 
+### Global CSS
+
+To customize form layout and spacing, use the `className` prop on `<Form>` or add a project-level class with the `@layer components` directive.
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+`Form` renders a native `<form>` element and focuses on validation and submission. It does not include dedicated BEM classes in `@heroui/styles`—apply container styles from global CSS, and use field components for control-level customization.
+
+```css
+@layer components {
+  .form-layout {
+    @apply flex flex-col gap-4 rounded-xl border border-border bg-surface p-4 shadow-sm;
+  }
+}
+```
+
+```tsx
+<Form className="form-layout" onSubmit={handleSubmit}>
+  {/* TextField, Input, Button, etc. */}
+</Form>
+```
+
+For grouped fields with shared layout, use [Fieldset](./fieldset) and target `.fieldset`, `.fieldset__legend`, and related classes. For individual controls, see **Global CSS** on [TextField](./text-field), [Input](./input), [Label](./label), and [FieldError](./field-error).
+
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology for components that ship styles in `@heroui/styles`.
+
+`Form` renders a native `<form>` element without dedicated BEM classes. Apply layout, spacing, and surface styles through `className`. Field appearance and validation states come from child components such as `TextField`, `Input`, `Label`, `Description`, and `FieldError`. For structured multi-field layouts, compose with [Fieldset](./fieldset).
+
 ## API Reference
 
 ### Form
