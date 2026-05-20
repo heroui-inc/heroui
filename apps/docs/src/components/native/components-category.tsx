@@ -1,12 +1,18 @@
-import type {StatusChipStatus} from "./status-chip";
+import type {StatusChipStatus} from "../status-chip";
 
 import {cn} from "@/utils/cn";
 
-import {source} from "../lib/source";
+import {source} from "../../lib/source";
 
-import {NativeComponentItem} from "./native-component-item";
+import {ComponentItem} from "./component-item";
 
-// Component groups matching meta.json structure
+/**
+ * Catalogue of every native component, grouped by category. This list mirrors
+ * the structure of `meta.json` under `content/docs/native/components` —
+ * keeping it in code (rather than auto-deriving from the filesystem) gives
+ * the docs team explicit control over category ordering and lets new
+ * components show up only after they're intentionally added here.
+ */
 const COMPONENT_GROUPS = [
   {
     category: "Buttons",
@@ -105,21 +111,19 @@ interface ComponentCategory {
 }
 
 function getComponentNameFromPath(path: string): string {
-  // Extract component name from path like "(buttons)/button" -> "button"
-  // or "(forms)/text-field" -> "text-field"
   return path.split("/").pop() || path;
 }
 
-// Overrides for components that use different video filenames than their component name
+/**
+ * Overrides for components whose preview video filename doesn't match the
+ * component name 1:1. Right now only `skeleton-group` reuses the `skeleton`
+ * video — the rest fall through to the default name-based pattern.
+ */
 const VIDEO_NAME_OVERRIDES: Record<string, string> = {
   "skeleton-group": "skeleton",
 };
 
 function constructVideoUrls(componentName: string): {srcLight: string; srcDark: string} {
-  // Convert component name to video filename pattern
-  // e.g., "button" -> "button-docs-light.mp4"
-  // e.g., "text-field" -> "text-field-docs-light.mp4"
-  // Use override if available, otherwise use component name
   const videoName = VIDEO_NAME_OVERRIDES[componentName.toLowerCase()] || componentName;
   const baseName = videoName.toLowerCase();
 
@@ -133,18 +137,21 @@ function isRouteGroup(part: string): boolean {
   return part.startsWith("(") && part.endsWith(")");
 }
 
+/**
+ * Pull metadata for a single component out of Fumadocs' page tree. Returns
+ * `null` when the page isn't found so the caller can `.filter()` missing
+ * entries away without throwing.
+ */
 function getComponentWithStatus(path: string): ComponentWithStatus | null {
-  // Route groups (parentheses) are part of the file path but filtered out in URL paths
-  // So "(buttons)/button" becomes "button" in the URL
+  // Route groups (parentheses) are part of the file path but filtered out
+  // in URL paths. So `(buttons)/button` becomes `button` in the URL.
   const pathWithoutRouteGroups = path
     .split("/")
     .filter((part) => !isRouteGroup(part))
     .join("/");
 
-  // Construct href - route groups are filtered out in the URL path
   const href = `/docs/native/components/${pathWithoutRouteGroups}`;
 
-  // Get page data from source - use path without route groups
   const pagePath = ["native", "components", ...pathWithoutRouteGroups.split("/")].filter(Boolean);
   const page = source.getPage(pagePath);
 
@@ -154,12 +161,10 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
   const description = page.data.description || "";
   const componentName = getComponentNameFromPath(path);
 
-  // Get status icon if present
   const icon = page.data.icon;
   const status: StatusChipStatus | undefined =
     icon && componentStatusIcons.includes(icon) ? (icon as StatusChipStatus) : undefined;
 
-  // Construct video URLs
   const {srcDark, srcLight} = constructVideoUrls(componentName);
 
   return {
@@ -176,7 +181,15 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
   };
 }
 
-export function NativeComponentsCategory({category}: ComponentCategory) {
+/**
+ * Render a single category section of the components overview, used in
+ * MDX as `<ComponentsCategory category="Forms" />`.
+ *
+ * Renders nothing when the category name isn't recognised or when every
+ * component in the category fails to resolve to a page — this keeps the MDX
+ * surface forgiving while a category is being built out.
+ */
+export function ComponentsCategory({category}: ComponentCategory) {
   const group = COMPONENT_GROUPS.find((group) => group.category === category);
 
   if (!group) return null;
@@ -192,7 +205,7 @@ export function NativeComponentsCategory({category}: ComponentCategory) {
       <div key={group.category} className="flex flex-col gap-6">
         <div className={cn("grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2")}>
           {components.map(({component, srcDark, srcLight, status}) => (
-            <NativeComponentItem
+            <ComponentItem
               key={component.name}
               component={component}
               openInNewTab={false}

@@ -13,10 +13,13 @@ import {ComponentPreview} from "./components/component-preview";
 import {ComponentsCategory} from "./components/components-category";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
-import {NativeComponentsCategory} from "./components/native-components-category";
-import {NativeImageHeroView} from "./components/native-image-hero-view";
-import {NativeQRPreviewPopover} from "./components/native-qr-preview-popover";
-import {NativeVideoPlayerView} from "./components/native-video-player-view";
+import {
+  ComponentsCategory as NativeComponentsCategory,
+  ImageHeroView as NativeImageHeroView,
+  QRPreviewPopover as NativeQRPreviewPopover,
+  TryOnDevice as NativeTryOnDevice,
+  VideoPlayerView as NativeVideoPlayerView,
+} from "./components/native";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
@@ -126,6 +129,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     NativeComponentsCategory,
     NativeImageHeroView,
     NativeQRPreviewPopover,
+    NativeTryOnDevice,
     NativeVideoPlayerView,
     NewsletterForm,
     PackageManagers,

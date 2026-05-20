@@ -493,6 +493,10 @@ For a complete reference, see: [Colors Documentation](/docs/handbook/colors), [D
     --color-field-border-focus: var(--field-border-focus);
 
     /* Soft Colors */
+    --color-default-soft: var(--default-soft);
+    --color-default-soft-foreground: var(--default-soft-foreground);
+    --color-default-soft-hover: var(--default-soft-hover);
+
     --color-accent-soft: var(--accent-soft);
     --color-accent-soft-foreground: var(--accent-soft-foreground);
     --color-accent-soft-hover: var(--accent-soft-hover);
@@ -642,6 +646,26 @@ HeroUI applies a shared scrollbar style to component scroll areas (tables, popov
 **Custom overflow areas** — use the `scrollbar`, `scrollbar-default`, or `scrollbar-none` utilities from `@heroui/styles` on your own elements. See [Styling](/docs/handbook/styling) for class-based overrides.
 
 > **Note**: Some components hide scrollbars by default (date picker popovers, color picker, secondary tabs). Nested scroll slots (e.g. the calendar year picker inside a date picker) keep HeroUI scrollbars because `scrollbar-none` only affects the element it is applied to, not descendants using `@apply scrollbar`.
+
+## Vibrant Palette
+
+By default, HeroUI uses accessible soft foreground colors that mix the semantic color with the foreground for better contrast. If you prefer more saturated, vibrant soft foreground colors, add the `data-vibrant-palette` attribute to your root element:
+
+```html
+<html data-vibrant-palette="true">
+```
+
+This switches all `*-soft-foreground` variables (accent, success, warning, danger) to use 92% of the semantic color with only 8% foreground mixed in — closer to the raw color but with a slight contrast boost.
+
+| Mode | Accessible (default) | Vibrant |
+|------|----------------------|---------|
+| Soft foreground | `color-mix(color 70-80%, foreground 30-40%)` | `color-mix(color 92%, foreground 8%)` |
+
+<Callout type="warn">
+  The vibrant palette prioritizes visual saturation over contrast. It may not meet WCAG accessibility guidelines for some color combinations, especially with lighter accent colors.
+</Callout>
+
+You can also enable vibrant palette in the [Theme Builder](/themes) via the "Vibrant palette" toggle in the theme popover.
 
 ## Resources
 

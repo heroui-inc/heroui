@@ -33,7 +33,9 @@ export function Controlled() {
               <Description>bob@heroui.com</Description>
             </div>
             <ListBox.ItemIndicator>
-              {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
+              {({isSelected}) =>
+                isSelected ? <Check className="size-4 text-accent-soft-foreground" /> : null
+              }
             </ListBox.ItemIndicator>
           </ListBox.Item>
           <ListBox.Item id="2" textValue="Fred">
@@ -49,7 +51,9 @@ export function Controlled() {
               <Description>fred@heroui.com</Description>
             </div>
             <ListBox.ItemIndicator>
-              {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
+              {({isSelected}) =>
+                isSelected ? <Check className="size-4 text-accent-soft-foreground" /> : null
+              }
             </ListBox.ItemIndicator>
           </ListBox.Item>
           <ListBox.Item id="3" textValue="Martha">
@@ -65,7 +69,9 @@ export function Controlled() {
               <Description>martha@heroui.com</Description>
             </div>
             <ListBox.ItemIndicator>
-              {({isSelected}) => (isSelected ? <Check className="size-4 text-accent" /> : null)}
+              {({isSelected}) =>
+                isSelected ? <Check className="size-4 text-accent-soft-foreground" /> : null
+              }
             </ListBox.ItemIndicator>
           </ListBox.Item>
         </ListBox>

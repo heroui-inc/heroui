@@ -42,6 +42,7 @@
   }
 
   /* Disabled state */
+  &:disabled,
   &[data-disabled="true"],
   &[aria-disabled="true"] {
     @apply status-disabled;

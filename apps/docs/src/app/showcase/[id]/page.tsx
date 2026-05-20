@@ -28,16 +28,16 @@ export async function generateMetadata({params}: ShowcasePageProps): Promise<Met
   if (!showcase) return {};
 
   return {
-    title: `${showcase.name} - HeroUI Showcase`,
-    description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
     alternates: {
       canonical: `/showcase/${id}`,
     },
+    description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
     openGraph: {
-      title: `${showcase.name} - HeroUI Showcase`,
       description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
+      title: `${showcase.name} - HeroUI Showcase`,
       url: `/showcase/${id}`,
     },
+    title: `${showcase.name} - HeroUI Showcase`,
   };
 }
 

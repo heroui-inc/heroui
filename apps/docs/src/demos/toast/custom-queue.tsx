@@ -49,7 +49,7 @@ export function CustomQueue() {
       <Toast.Provider placement="bottom end" queue={successQueue} />
       <div className="flex justify-center gap-2">
         <Button
-          className="text-success"
+          className="text-success-soft-foreground"
           size="sm"
           variant="secondary"
           onPress={() => {

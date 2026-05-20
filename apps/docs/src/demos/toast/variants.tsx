@@ -40,7 +40,7 @@ export function Variants() {
           Accent toast
         </Button>
         <Button
-          className="text-success"
+          className="text-success-soft-foreground"
           size="sm"
           variant="tertiary"
           onPress={() =>
@@ -57,7 +57,7 @@ export function Variants() {
           Success toast
         </Button>
         <Button
-          className="text-warning"
+          className="text-warning-soft-foreground"
           size="sm"
           variant="tertiary"
           onPress={() =>

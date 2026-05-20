@@ -42,35 +42,9 @@ Update to the latest version:
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
 </Callout>
 
-## Try It Out
+## Try It on Your Device
 
-Experience all the RC 2 improvements in action with our preview app! You can explore the new SearchField, ListGroup, and Slider components, Select multi-selection mode, the updated Button feedback API, and all the bug fixes directly on your device.
-
-### Prerequisites
-
-Make sure you have the latest version of [Expo Go](https://expo.dev/go) installed on your mobile device.
-
-### How to Access
-
-**Option 1: Scan the QR Code**
-
-Use your device's camera or Expo Go app to scan:
-
-<div className="flex justify-center my-6">
-  <img
-    width="200"
-    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
-    alt="Expo Go QR Code"
-  />
-</div>
-
-> **Note for Android users:** If scanning the QR code with your device's camera or other scanner apps redirects to a browser and shows a 404 error, open Expo Go first and use its built-in QR scanner instead.
-
-**Option 2: Click the Link**
-
-**[📱 Open Demo App in Expo Go](https://link.heroui.com/native-demo)**
-
-This will automatically open the app in Expo Go if it's installed on your device.
+<NativeTryOnDevice />
 
 ## What's New
 
@@ -87,6 +61,8 @@ This release introduces **3 new** components:
 The Slider component supports single-value and range (multi-thumb) modes, horizontal and vertical orientation, custom number formatting via `Intl.NumberFormat`, and spring-animated thumb feedback. The primitive layer handles all gesture and value logic independently, making it reusable for alternative styled implementations.
 
 <NativeVideoPlayerView
+  target="component"
+  slug="slider"
   srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-light.mp4"
   srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-dark.mp4"
 />
@@ -148,6 +124,8 @@ For complete documentation and examples, see the [Slider component page](/docs/n
 The ListGroup component renders grouped list items inside a Surface container, providing a polished navigation-list pattern commonly used in settings screens, menus, and content browsers. Each item supports prefix, content (title + description), and suffix slots with a default chevron-right navigation indicator.
 
 <NativeVideoPlayerView
+  target="component"
+  slug="list-group"
   srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-light.mp4"
   srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-dark.mp4"
 />
@@ -196,6 +174,8 @@ For complete documentation and examples, see the [ListGroup component page](/doc
 The SearchField component provides a dedicated input for search and filtering scenarios, built with the same compound-component pattern used by TextField. It includes a search icon, clearable input, and an auto-hiding clear button that disappears when the input is empty.
 
 <NativeVideoPlayerView
+  target="component"
+  slug="search-field"
   srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-light.mp4"
   srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-dark.mp4"
 />
