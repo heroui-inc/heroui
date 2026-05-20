@@ -237,6 +237,8 @@ export type ThemeVariables = {
   fontFamily: (typeof fontIds)[number] | string;
   formRadius: RadiusId;
   radius: RadiusId;
+  /** Use vibrant (more saturated) soft foreground colors instead of accessible defaults */
+  vibrantPalette?: boolean;
 };
 
 export const themeVariableKeys = [

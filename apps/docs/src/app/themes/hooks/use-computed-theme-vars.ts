@@ -94,6 +94,8 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
     fontVariable,
   );
 
+  const derivedOpts = {vibrant: variables.vibrantPalette ?? false};
+
   if (isAdaptive) {
     const adaptiveConfig = adaptiveColors[accentColor]!;
     const lightAccent = parseOklch(adaptiveConfig.light);
@@ -125,12 +127,12 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
 
     const colorLightVars = {
       ...lightVars,
-      ...getDerivedColorFormulas("light"),
+      ...getDerivedColorFormulas("light", derivedOpts),
       ...lightAccentVars,
     };
     const colorDarkVars = {
       ...darkVars,
-      ...getDerivedColorFormulas("dark"),
+      ...getDerivedColorFormulas("dark", derivedOpts),
       ...darkAccentVars,
     };
 
@@ -152,8 +154,8 @@ function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): C
   const lightVars = getColorVariablesForElement(colors, "light");
   const darkVars = getColorVariablesForElement(colors, "dark");
 
-  const colorLightVars = {...lightVars, ...getDerivedColorFormulas("light")};
-  const colorDarkVars = {...darkVars, ...getDerivedColorFormulas("dark")};
+  const colorLightVars = {...lightVars, ...getDerivedColorFormulas("light", derivedOpts)};
+  const colorDarkVars = {...darkVars, ...getDerivedColorFormulas("dark", derivedOpts)};
 
   return {
     fontMeta,

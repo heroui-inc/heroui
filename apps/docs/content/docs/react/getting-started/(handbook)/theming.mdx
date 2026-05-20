@@ -597,6 +597,26 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
 
 Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
 
+## Vibrant Palette
+
+By default, HeroUI uses accessible soft foreground colors that mix the semantic color with the foreground for better contrast. If you prefer more saturated, vibrant soft foreground colors, add the `data-vibrant-palette` attribute to your root element:
+
+```html
+<html data-vibrant-palette="true">
+```
+
+This switches all `*-soft-foreground` variables (accent, success, warning, danger) to use 92% of the semantic color with only 8% foreground mixed in — closer to the raw color but with a slight contrast boost.
+
+| Mode | Accessible (default) | Vibrant |
+|------|----------------------|---------|
+| Soft foreground | `color-mix(color 70-80%, foreground 30-40%)` | `color-mix(color 92%, foreground 8%)` |
+
+<Callout type="warn">
+  The vibrant palette prioritizes visual saturation over contrast. It may not meet WCAG accessibility guidelines for some color combinations, especially with lighter accent colors.
+</Callout>
+
+You can also enable vibrant palette in the [Theme Builder](/themes) via the "Vibrant palette" toggle in the theme popover.
+
 ## Resources
 
 - [Colors Documentation](/docs/handbook/colors)

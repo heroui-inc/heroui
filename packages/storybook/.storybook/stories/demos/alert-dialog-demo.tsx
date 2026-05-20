@@ -6,7 +6,7 @@ export function AlertDialogDemo() {
   return (
     <Card className="h-[208px] w-[340px] items-start justify-center p-5">
       <Card.Header className="flex w-full items-start justify-center gap-2 px-1">
-        <Avatar color="default" variant="soft">
+        <Avatar color="warning" variant="soft">
           <Avatar.Fallback>
             <FloppyDisk className="text-lg" />
           </Avatar.Fallback>

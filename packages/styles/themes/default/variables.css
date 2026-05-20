@@ -277,4 +277,20 @@
     --border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
     --border-tertiary: color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%);
   }
+
+  /* Vibrant palette - more saturated soft foregrounds, less contrast */
+  [data-vibrant-palette="true"]:not(.dark):not([data-theme="dark"]) {
+    --accent-soft-foreground: color-mix(in oklab, var(--accent) 92%, var(--foreground) 8%);
+    --danger-soft-foreground: color-mix(in oklab, var(--danger) 92%, var(--foreground) 8%);
+    --warning-soft-foreground: color-mix(in oklab, var(--warning) 92%, var(--foreground) 8%);
+    --success-soft-foreground: color-mix(in oklab, var(--success) 92%, var(--foreground) 8%);
+  }
+
+  [data-vibrant-palette="true"].dark,
+  [data-vibrant-palette="true"][data-theme="dark"] {
+    --accent-soft-foreground: color-mix(in oklab, var(--accent) 92%, var(--foreground) 8%);
+    --danger-soft-foreground: color-mix(in oklab, var(--danger) 92%, var(--foreground) 8%);
+    --warning-soft-foreground: color-mix(in oklab, var(--warning) 92%, var(--foreground) 8%);
+    --success-soft-foreground: color-mix(in oklab, var(--success) 92%, var(--foreground) 8%);
+  }
 }

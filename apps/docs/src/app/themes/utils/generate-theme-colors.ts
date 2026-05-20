@@ -701,16 +701,27 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
  *   - Light: accent/warning/success soft 15%/20%, danger 15%/20%
  *   - Dark:  accent/warning/success soft 12%/16%, danger 15%/20%
  */
-export function getDerivedColorFormulas(theme: "light" | "dark"): Record<string, string> {
+export function getDerivedColorFormulas(
+  theme: "light" | "dark",
+  options?: {vibrant?: boolean},
+): Record<string, string> {
   const isLight = theme === "light";
+  const vibrant = options?.vibrant ?? false;
   const [softPct, softHoverPct] = isLight ? ["15%", "20%"] : ["12%", "16%"];
+
+  const vibrantSoftFg = "color-mix(in oklab, var(--VAR) 92%, var(--foreground) 8%)";
+  const sfFg = (colorVar: string, accessibleFormula: string) =>
+    vibrant ? vibrantSoftFg.replace("--VAR", colorVar) : accessibleFormula;
 
   return {
     "--accent-hover": "color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%)",
     "--accent-soft": `color-mix(in oklab, var(--accent) ${softPct}, transparent)`,
-    "--accent-soft-foreground": isLight
-      ? "color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%)"
-      : "color-mix(in oklab, var(--accent) 80%, var(--foreground) 30%)",
+    "--accent-soft-foreground": sfFg(
+      "accent",
+      isLight
+        ? "color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%)"
+        : "color-mix(in oklab, var(--accent) 80%, var(--foreground) 30%)",
+    ),
     "--accent-soft-hover": `color-mix(in oklab, var(--accent) ${softHoverPct}, transparent)`,
     "--background-inverse": "var(--foreground)",
     "--background-secondary": "color-mix(in oklab, var(--background) 96%, var(--foreground) 4%)",
@@ -719,9 +730,12 @@ export function getDerivedColorFormulas(theme: "light" | "dark"): Record<string,
     "--border-tertiary": "color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%)",
     "--danger-hover": "color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%)",
     "--danger-soft": "color-mix(in oklab, var(--danger) 15%, transparent)",
-    "--danger-soft-foreground": isLight
-      ? "color-mix(in oklab, var(--danger) 70%, var(--foreground) 40%)"
-      : "color-mix(in oklab, var(--danger) 80%, var(--foreground) 30%)",
+    "--danger-soft-foreground": sfFg(
+      "danger",
+      isLight
+        ? "color-mix(in oklab, var(--danger) 70%, var(--foreground) 40%)"
+        : "color-mix(in oklab, var(--danger) 80%, var(--foreground) 30%)",
+    ),
     "--danger-soft-hover": "color-mix(in oklab, var(--danger) 20%, transparent)",
     "--default-hover": "color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%)",
     "--default-soft": "color-mix(in oklab, var(--default) 50%, transparent)",
@@ -740,17 +754,23 @@ export function getDerivedColorFormulas(theme: "light" | "dark"): Record<string,
       "color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%)",
     "--success-hover": "color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%)",
     "--success-soft": `color-mix(in oklab, var(--success) ${softPct}, transparent)`,
-    "--success-soft-foreground": isLight
-      ? "color-mix(in oklab, var(--success) 80%, var(--foreground) 60%)"
-      : "color-mix(in oklab, var(--success) 80%, var(--foreground) 30%)",
+    "--success-soft-foreground": sfFg(
+      "success",
+      isLight
+        ? "color-mix(in oklab, var(--success) 80%, var(--foreground) 60%)"
+        : "color-mix(in oklab, var(--success) 80%, var(--foreground) 30%)",
+    ),
     "--success-soft-hover": `color-mix(in oklab, var(--success) ${softHoverPct}, transparent)`,
     "--surface-hover": "color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%)",
     "--tw-ring-color": "var(--focus)",
     "--warning-hover": "color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%)",
     "--warning-soft": `color-mix(in oklab, var(--warning) ${softPct}, transparent)`,
-    "--warning-soft-foreground": isLight
-      ? "color-mix(in oklab, var(--warning) 80%, var(--foreground) 70%)"
-      : "color-mix(in oklab, var(--warning) 80%, var(--foreground) 30%)",
+    "--warning-soft-foreground": sfFg(
+      "warning",
+      isLight
+        ? "color-mix(in oklab, var(--warning) 80%, var(--foreground) 70%)"
+        : "color-mix(in oklab, var(--warning) 80%, var(--foreground) 30%)",
+    ),
     "--warning-soft-hover": `color-mix(in oklab, var(--warning) ${softHoverPct}, transparent)`,
   };
 }

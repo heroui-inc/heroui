@@ -104,6 +104,7 @@ function getAdaptiveColorCSS(
   lightness: number,
   commonVars: Record<string, string>,
   semanticOverrides?: SemanticOverrides,
+  vibrant?: boolean,
 ): string | null {
   const adaptiveConfig = adaptiveColors[accentColor];
 
@@ -145,14 +146,16 @@ function getAdaptiveColorCSS(
     "--focus": adaptiveConfig.dark,
   };
 
+  const derivedOpts = {vibrant};
+
   const colorLightVars = {
     ...lightVars,
-    ...getDerivedColorFormulas("light"),
+    ...getDerivedColorFormulas("light", derivedOpts),
     ...lightAccentVars,
   };
   const colorDarkVars = {
     ...darkVars,
-    ...getDerivedColorFormulas("dark"),
+    ...getDerivedColorFormulas("dark", derivedOpts),
     ...darkAccentVars,
   };
 
@@ -195,14 +198,16 @@ function getThemeColorsCSS(
   grayChroma: number,
   commonVars: Record<string, string>,
   semanticOverrides?: SemanticOverrides,
+  vibrant?: boolean,
 ): string {
   const colors = generateThemeColors({chroma, grayChroma, hue, lightness, semanticOverrides});
 
   const lightVars = getColorVariablesForElement(colors, "light");
   const darkVars = getColorVariablesForElement(colors, "dark");
 
-  const colorLightVars = {...lightVars, ...getDerivedColorFormulas("light")};
-  const colorDarkVars = {...darkVars, ...getDerivedColorFormulas("dark")};
+  const derivedOpts = {vibrant};
+  const colorLightVars = {...lightVars, ...getDerivedColorFormulas("light", derivedOpts)};
+  const colorDarkVars = {...darkVars, ...getDerivedColorFormulas("dark", derivedOpts)};
 
   // Content level: colors + radius + fonts
   const fullLightVars = {...commonVars, ...colorLightVars};
@@ -336,6 +341,14 @@ export function useCssSync() {
 
     cleanupStyles();
 
+    const vibrant = variables.vibrantPalette ?? false;
+
+    if (vibrant) {
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
+    } else {
+      document.documentElement.removeAttribute("data-vibrant-palette");
+    }
+
     if (isAdaptive) {
       // Inject CSS for adaptive colors (different accent values for light/dark)
       const adaptiveCSS = getAdaptiveColorCSS(
@@ -345,6 +358,7 @@ export function useCssSync() {
         lightness,
         commonVars,
         semanticOverrides,
+        vibrant,
       );
 
       if (adaptiveCSS) {
@@ -359,15 +373,15 @@ export function useCssSync() {
         base,
         commonVars,
         semanticOverrides,
+        vibrant,
       );
 
       injectStyleElement(THEME_COLORS_STYLE_ID, themeColorsCSS);
     }
 
-    // Cleanup: remove injected styles when unmounting
     return () => {
       cleanupStyles();
-      // Also remove font var style on unmount
+      document.documentElement.removeAttribute("data-vibrant-palette");
       const existingFontVar = document.getElementById(FONT_VAR_STYLE_ID);
 
       if (existingFontVar) {
@@ -382,6 +396,7 @@ export function useCssSync() {
     variables.fontFamily,
     variables.formRadius,
     variables.radius,
+    variables.vibrantPalette,
     base,
   ]);
 }

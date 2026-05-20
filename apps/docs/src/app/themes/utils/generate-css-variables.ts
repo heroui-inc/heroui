@@ -147,13 +147,23 @@ export function generateMinimalCssVariables(
     fontSansValue = "var(--font-sans)";
   }
 
+  const vibrantComment = variables.vibrantPalette
+    ? `
+/*
+ * Vibrant Palette: Add data-vibrant-palette="true" to your <html> element
+ * for more saturated soft foreground colors (less accessible contrast).
+ * Example: <html data-vibrant-palette="true">
+ */
+`
+    : "";
+
   return `/*
  * HeroUI Theme Customization
  * Add this to your global.css after importing @heroui/styles
  * Only includes variables users need to customize
  * @see https://heroui.com/docs/react/getting-started/theming
  */
-
+${vibrantComment}
 :root,
 .light,
 .default,

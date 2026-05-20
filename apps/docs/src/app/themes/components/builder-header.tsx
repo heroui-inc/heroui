@@ -92,7 +92,10 @@ export function BuilderHeader() {
                 </Tooltip.Content>
               </Tooltip.Trigger>
             </Tooltip>
-            <Separator className="hidden h-6 min-[1200px]:block" orientation="vertical" />
+            <Separator
+              className="hidden h-6 self-center min-[1200px]:block"
+              orientation="vertical"
+            />
             <ResetButton />
             <div className="hidden sm:block">
               <ShuffleButton />
