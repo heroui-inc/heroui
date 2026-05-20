@@ -8,6 +8,46 @@ import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 
 import {HeroUIPlainLogo} from "../heroui-plain-logo";
 
+/**
+ * In-app route segment that hosts component screens. This matches the
+ * `app/components/[slug].tsx` Expo Router file in the native app — it is part
+ * of the deep-linking contract between the docs site and the native app.
+ *
+ * The native app's `+native-intent.ts` only rewrites `https:` URLs (those
+ * coming via Universal Links / App Links). For our custom-scheme URLs it
+ * returns the path unchanged and Expo Router routes it natively, which means
+ * the URL must already encode the in-app route — i.e.
+ * `herouinative://components/{slug}` becomes `/components/{slug}` and
+ * `herouinative://` opens the initial route.
+ */
+const IN_APP_COMPONENT_PATH = "components";
+
+/**
+ * Convert the canonical Universal Link URL into the matching custom-scheme
+ * URL that Expo Router can navigate without going through `+native-intent`.
+ *
+ * Examples:
+ *  - `https://heroui.com/docs/native-showcase/components/button` ->
+ *    `herouinative://components/button`
+ *  - `https://heroui.com/docs/native-showcase/components/`       ->
+ *    `herouinative://`  (open at the app's initial route)
+ *  - `""` (origin not yet resolved on the client) -> `""`
+ */
+function toCustomSchemeUrl(universalLinkUrl: string): string {
+  if (!universalLinkUrl) return "";
+
+  const prefixIdx = universalLinkUrl.indexOf(NATIVE_APP.SHOWCASE_PATH_PREFIX);
+
+  if (prefixIdx === -1) return `${NATIVE_APP.SCHEME}://`;
+
+  const remainder = universalLinkUrl.slice(prefixIdx + NATIVE_APP.SHOWCASE_PATH_PREFIX.length);
+  const slug = remainder.replace(/^\//, "").split("/")[0] ?? "";
+
+  return slug
+    ? `${NATIVE_APP.SCHEME}://${IN_APP_COMPONENT_PATH}/${slug}`
+    : `${NATIVE_APP.SCHEME}://`;
+}
+
 interface DeepLinkQRCodeProps {
   /**
    * The Universal Link URL to encode into the QR code (desktop) or display as
@@ -37,14 +77,15 @@ export const DeepLinkQRCode = ({size = 160, url}: DeepLinkQRCodeProps) => {
   const isMobile = useIsMobileDevice();
 
   if (isMobile) {
-    // Swap `https://heroui.com` for the registered custom URL scheme
-    // (`herouinative://`). Tapping a Universal Link from inside Safari to the
-    // same domain does NOT trigger iOS's app-handoff — Safari treats it as
-    // an in-page navigation — so we fire the custom scheme directly. The
-    // path part is preserved, so the native app's `+native-intent` handler
-    // sees the same path regardless of entry point (Camera QR scan, in-page
-    // tap, link from Notes, etc.).
-    const mobileUrl = url ? url.replace(/^https?:\/\/[^/]+/, `${NATIVE_APP.SCHEME}://`) : "";
+    // Tapping a Universal Link from inside Safari to the same domain does NOT
+    // trigger iOS's app handoff — Safari treats it as an in-page navigation.
+    // So on mobile we fire the custom URL scheme directly, encoded in the
+    // shape Expo Router's deep-link handler expects:
+    // `herouinative://components/{slug}` (or `herouinative://` for home).
+    // The native app's `+native-intent.ts` deliberately only rewrites
+    // `https:` URLs and returns custom-scheme paths unchanged, so the URL
+    // itself must already be in the in-app route format.
+    const mobileUrl = toCustomSchemeUrl(url);
 
     return (
       <Link
