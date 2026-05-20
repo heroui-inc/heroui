@@ -150,7 +150,13 @@ export function ThemeSwitch() {
       --overlay-foreground: var(--foreground);
 
       --muted: oklch(0.5517 0.0138 285.94);
-      --scrollbar: oklch(87.1% 0.006 286.286);
+
+      --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+      --scrollbar-track: transparent;
+      --scrollbar-gutter: auto;
+      --scrollbar-width: thin;
+      --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      --scrollbar: var(--scrollbar-thumb);
 
       --default: oklch(94% 0.001 286.375);
       --default-foreground: var(--eclipse);
@@ -215,7 +221,13 @@ export function ThemeSwitch() {
       --overlay-foreground: var(--foreground);
 
       --muted: oklch(70.5% 0.015 286.067);
-      --scrollbar: oklch(70.5% 0.015 286.067);
+
+      --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+      --scrollbar-track: transparent;
+      --scrollbar-gutter: auto;
+      --scrollbar-width: thin;
+      --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      --scrollbar: var(--scrollbar-thumb);
 
       --default: oklch(27.4% 0.006 286.033);
       --default-foreground: var(--snow);
@@ -396,23 +408,24 @@ Now use it in your components:
 
 ## Variables Reference
 
-HeroUI defines three types of variables:
+HeroUI defines three types of variables in [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css):
+
 1. **Base Variables** — Non-changing values like `--white`, `--black`, spacing, and typography
 2. **Theme Variables** — Colors that change between light/dark themes, plus scrollbar tokens (`--scrollbar-thumb`, `--scrollbar-width`, etc.)
-3. **Calculated Variables** — Automatically generated hover states and size variants
+3. **Calculated Variables** — Hover states, soft variants, and border/separator levels (the **Calculated Colors** block in each light/dark theme, using `color-mix()`)
 
 For a complete reference, see: [Colors Documentation](/docs/handbook/colors), [Default Theme Variables](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css), [Shared Theme Utilities](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css)
 
-**Calculated variables (Tailwind):**
+**Tailwind theme bridge (`@theme inline`):**
 
-We use Tailwind's `@theme` directive to automatically create calculated variables for hover states and radius variants. These are defined in `themes/shared/theme.css`:
+[`themes/shared/theme.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css) maps semantic variables to Tailwind tokens (`--color-*`, `--radius-*`, `--ease-*`). Calculated colors reference underlying vars (e.g. `--surface-hover`, `--accent-soft`) from `variables.css` — they are not inlined with `color-mix()` in this file:
 <CollapsibleCode lang="css" code={`  @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
     --color-surface: var(--surface);
     --color-surface-foreground: var(--surface-foreground);
-    --color-surface-hover: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
+    --color-surface-hover: var(--surface-hover);
 
     --color-surface-secondary: var(--surface-secondary);
     --color-surface-secondary-foreground: var(--surface-secondary-foreground);
@@ -456,77 +469,53 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
 
     /* Form Field Tokens */
     --color-field: var(--field-background, var(--default));
+    --color-field-hover: var(--field-hover);
     --color-field-foreground: var(--field-foreground, var(--foreground));
     --color-field-placeholder: var(--field-placeholder, var(--muted));
     --color-field-border: var(--field-border, var(--border));
     --radius-field: var(--field-radius, calc(var(--radius) * 1.5));
     --border-width-field: var(--field-border-width, var(--border-width));
 
-    /* Calculated Variables */
+    /* Color Tokens */
+    --color-background-secondary: var(--background-secondary);
+    --color-background-tertiary: var(--background-tertiary);
+    --color-background-inverse: var(--background-inverse);
 
-    /* --- background shades --- */
-    --color-background-secondary: color-mix(in oklab, var(--background) 96%, var(--foreground) 4%);
-    --color-background-tertiary: color-mix(in oklab, var(--background) 92%, var(--foreground) 8%);
-    --color-background-inverse: var(--foreground);
-
-    /* ------------------------- */
-    --color-default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
-    --color-accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
-    --color-success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
-    --color-warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
-    --color-danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+    --color-default-hover: var(--default-hover);
+    --color-accent-hover: var(--accent-hover);
+    --color-success-hover: var(--success-hover);
+    --color-warning-hover: var(--warning-hover);
+    --color-danger-hover: var(--danger-hover);
 
     /* Form Field Colors */
-    --color-field-hover: color-mix(
-      in oklab,
-      var(--field-background, var(--default)) 90%,
-      var(--field-foreground, var(--foreground)) 2%
-    );
-    --color-field-focus: var(--field-background, var(--default));
-    --color-field-border-hover: color-mix(
-      in oklab,
-      var(--field-border, var(--border)) 88%,
-      var(--field-foreground, var(--foreground)) 10%
-    );
-    --color-field-border-focus: color-mix(
-      in oklab,
-      var(--field-border, var(--border)) 74%,
-      var(--field-foreground, var(--foreground)) 22%
-    );
+    --color-field-focus: var(--field-focus);
+    --color-field-border-hover: var(--field-border-hover);
+    --color-field-border-focus: var(--field-border-focus);
 
     /* Soft Colors */
-    --color-accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
-    --color-accent-soft-foreground: var(--accent);
-    --color-accent-soft-hover: color-mix(in oklab, var(--accent) 20%, transparent);
+    --color-accent-soft: var(--accent-soft);
+    --color-accent-soft-foreground: var(--accent-soft-foreground);
+    --color-accent-soft-hover: var(--accent-soft-hover);
 
-    --color-danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
-    --color-danger-soft-foreground: var(--danger);
-    --color-danger-soft-hover: color-mix(in oklab, var(--danger) 20%, transparent);
+    --color-danger-soft: var(--danger-soft);
+    --color-danger-soft-foreground: var(--danger-soft-foreground);
+    --color-danger-soft-hover: var(--danger-soft-hover);
 
-    --color-warning-soft: color-mix(in oklab, var(--warning) 15%, transparent);
-    --color-warning-soft-foreground: var(--warning);
-    --color-warning-soft-hover: color-mix(in oklab, var(--warning) 20%, transparent);
+    --color-warning-soft: var(--warning-soft);
+    --color-warning-soft-foreground: var(--warning-soft-foreground);
+    --color-warning-soft-hover: var(--warning-soft-hover);
 
-    --color-success-soft: color-mix(in oklab, var(--success) 15%, transparent);
-    --color-success-soft-foreground: var(--success);
-    --color-success-soft-hover: color-mix(in oklab, var(--success) 20%, transparent);
+    --color-success-soft: var(--success-soft);
+    --color-success-soft-foreground: var(--success-soft-foreground);
+    --color-success-soft-hover: var(--success-soft-hover);
 
     /* Separator Colors - Levels */
-    --color-separator-secondary: color-mix(
-      in oklab,
-      var(--surface) 85%,
-      var(--surface-foreground) 15%
-    );
-    --color-separator-tertiary: color-mix(
-      in oklab,
-      var(--surface) 81%,
-      var(--surface-foreground) 19%
-    );
+    --color-separator-secondary: var(--separator-secondary);
+    --color-separator-tertiary: var(--separator-tertiary);
 
-    /* Border Colors - Levels (progressive contrast: default → secondary → tertiary) */
-    /* Light mode: lighter → darker | Dark mode: darker → lighter */
-    --color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
-    --color-border-tertiary: color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%);
+    /* Border Colors - Levels */
+    --color-border-secondary: var(--border-secondary);
+    --color-border-tertiary: var(--border-tertiary);
 
     /* Radius and default sizes - defaults can change by just changing the --radius */
     --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */
@@ -595,7 +584,7 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
 `}
 />
 
-Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
+Form controls rely on `--field-*` theme variables. Hover, focus, and border variants are defined under **Calculated Colors** in `variables.css` and mapped to Tailwind in `theme.css` (e.g. `--color-field-hover: var(--field-hover)`). Override `--field-background`, `--field-hover`, and related tokens in your theme to restyle inputs, checkboxes, radios, and OTP slots without affecting surfaces like buttons or cards.
 
 ## Scrollbars
 
