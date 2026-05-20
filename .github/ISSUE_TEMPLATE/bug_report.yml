@@ -26,18 +26,22 @@ body:
     attributes:
       label: HeroUI Version
       description: |
-        Please provide the version of HeroUI you are using.
-        You can find the version number in the package.json file.
-        For global installation, please state the version only. (e.g. 2.4.2)
-        For individual installation, please state the package name as well. (e.g. @heroui/button@2.0.34)
-      placeholder: ex. 2.4.2
+        Please provide the version of HeroUI you are using (e.g. 3.0.5). Do NOT just put "latest" or "latest version".
+      placeholder: ex. 3.0.5
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
       label: Describe the bug
-      description: Provide a clear and concise description of the challenge you are running into.
+      description: |
+        Provide a clear and concise description of the challenge you are running into.
+      placeholder: |
+        This issue page is ONLY for HeroUI's core library. If you are facing an issue with a specific product, please refer to the following links:
+        - HeroUI Pro: Report in HeroUI Pro Discord Channel or Contact Support in Pro Dashboard
+        - HeroUI CLI: Report in https://github.com/heroui-inc/heroui-cli/issues
+        - HeroUI Native: Report in https://github.com/heroui-inc/heroui-native/issues
+        - Tailwind Variants: Report in https://github.com/heroui-inc/tailwind-variants/issues
     validations:
       required: true
   - type: input

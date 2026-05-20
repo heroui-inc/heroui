@@ -4,7 +4,7 @@ description: Use the CLI to manage HeroUI dependencies and initialize projects.
 icon: terminal
 ---
 
-The CLI offers a comprehensive suite of commands to initialize, manage, and improve your HeroUI projects. It enables you to `install`, `uninstall`, or `upgrade` individual components, assess the health of your project, and more.
+The CLI offers a comprehensive suite of commands to initialize, manage, and improve your HeroUI projects. It enables you to `install`, `uninstall`, or `upgrade` individual components, assess the health of your project, download documentation for AI coding agents, and more.
 
 ## Installation
 
@@ -76,6 +76,7 @@ Commands:
   list [options]                 Lists installed HeroUI packages (@heroui/react, @heroui/styles)
   env [options]                  Displays debugging information for the local environment
   doctor [options]               Checks for issues in the project
+  agents-md [options]            Downloads HeroUI documentation for AI coding agents
   help [command]                 Display help for command
 ```
 
@@ -84,8 +85,14 @@ Commands:
 Initialize a new HeroUI project using the `init` command. This sets up your project with the necessary configurations.
 
 ```bash
-heroui init
+heroui init [options]
 ```
+
+**Options:**
+
+- `-t --template [string]` The template to use for the new project e.g. app, pages, vite
+- `-p --package [string]` The package manager to use for the new project
+
 output:
 
 ```bash
@@ -350,6 +357,58 @@ Environment Info:
   Binaries:
     Node: v25.8.1
 ```
+
+### agents-md
+
+Download HeroUI documentation for AI coding agents (Claude, Cursor, etc.). The command clones the latest docs from the HeroUI repository and injects a compact index into `AGENTS.md` or `CLAUDE.md` so assistants can reference your project's HeroUI setup.
+
+```bash
+heroui agents-md [options]
+```
+
+**Options:**
+
+- `--react` [boolean] Include React docs only (one library at a time)
+- `--native` [boolean] Include Native docs only
+- `--migration` [boolean] Include HeroUI v2 to v3 migration docs only
+- `--output <file>` [string] Target file path (e.g., `AGENTS.md`, `CLAUDE.md`)
+- `--ssh` [boolean] Use SSH instead of HTTPS for git clone
+
+**Examples:**
+
+Run without flags to enter interactive mode:
+
+```bash
+heroui agents-md
+```
+
+Download React docs to a specific file:
+
+```bash
+heroui agents-md --react --output AGENTS.md
+```
+
+Download Native or migration docs:
+
+```bash
+heroui agents-md --native --output CLAUDE.md
+heroui agents-md --migration --output AGENTS.md
+```
+
+**How it works:**
+
+1. Clones documentation from the `v3` branch using git sparse-checkout
+2. Generates a compact index of doc and demo files
+3. Injects the index into your markdown file between markers (`<!-- HEROUI-REACT-AGENTS-MD-START -->` / `<!-- HEROUI-REACT-AGENTS-MD-END -->`, and similar for Native and Migration)
+4. Adds `.heroui-docs/` to `.gitignore`
+
+Only one of `--react`, `--native`, or `--migration` can be selected at a time.
+
+For more details, see [AGENTS.md](/docs/react/getting-started/agents-md).
+
+<Callout>
+  The `agents-md` command collects anonymous usage data (selection, output file names, duration, success or error). Set `HEROUI_ANALYTICS_DISABLED=1` to opt out.
+</Callout>
 
 ## Reporting issues
 
