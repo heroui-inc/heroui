@@ -31,6 +31,16 @@ export const NATIVE_APP = {
    */
   PLAY_STORE_URL: null,
   /**
+   * Custom URL scheme registered by the native app. Used by the in-page
+   * "Open in app" tap link on mobile to bypass iOS's same-domain Safari
+   * limitation (Universal Links don't fire when tapping a link to the same
+   * domain you're already on in Safari — see
+   * https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html).
+   * The scheme path mirrors the Universal Link path so the native app's
+   * `+native-intent` handler can route both transparently.
+   */
+  SCHEME: "herouinative",
+  /**
    * URL path prefix used by the docs app to serve the web fallback for
    * `/docs/native-showcase/components/{slug}` Universal Links. The same prefix
    * is encoded into the QR code on every component page so that:
@@ -44,6 +54,7 @@ export const NATIVE_APP = {
   APP_STORE_URL: string;
   NAME: string;
   PLAY_STORE_URL: string | null;
+  SCHEME: string;
   SHOWCASE_PATH_PREFIX: string;
 };
 

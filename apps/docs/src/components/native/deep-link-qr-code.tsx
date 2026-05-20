@@ -6,6 +6,8 @@ import {ReactQRCode} from "@lglab/react-qr-code";
 import {NATIVE_APP} from "@/config/native-app";
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 
+import {HeroUIPlainLogo} from "../heroui-plain-logo";
+
 interface DeepLinkQRCodeProps {
   /**
    * The Universal Link URL to encode into the QR code (desktop) or display as
@@ -33,25 +35,31 @@ interface DeepLinkQRCodeProps {
  */
 export const DeepLinkQRCode = ({size = 160, url}: DeepLinkQRCodeProps) => {
   const isMobile = useIsMobileDevice();
-  // Strip protocol from the display URL for a cleaner mobile card —
-  // `heroui.com/docs/...` reads much better than the full `https://...`.
-  const displayUrl = url.replace(/^https?:\/\//, "");
 
   if (isMobile) {
+    // Swap `https://heroui.com` for the registered custom URL scheme
+    // (`herouinative://`). Tapping a Universal Link from inside Safari to the
+    // same domain does NOT trigger iOS's app-handoff — Safari treats it as
+    // an in-page navigation — so we fire the custom scheme directly. The
+    // path part is preserved, so the native app's `+native-intent` handler
+    // sees the same path regardless of entry point (Camera QR scan, in-page
+    // tap, link from Notes, etc.).
+    const mobileUrl = url ? url.replace(/^https?:\/\/[^/]+/, `${NATIVE_APP.SCHEME}://`) : "";
+
     return (
       <Link
-        className="flex w-full items-center gap-3 rounded-xl border border-foreground/20 p-3 px-4"
-        href={url || "#"}
-        rel="noopener noreferrer"
-        target="_blank"
+        className="mb-4 flex w-full flex-col items-center justify-center gap-3 bg-surface-secondary/70 px-2 py-4 no-underline"
+        href={mobileUrl || "#"}
       >
-        <div className="flex flex-1 flex-col gap-1 overflow-hidden">
-          <span className="text-sm font-semibold text-foreground">
+        <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-foreground text-background">
+          <HeroUIPlainLogo size={18} />
+        </div>
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <span className="truncate text-sm font-semibold text-foreground">
             {["Open in ", NATIVE_APP.NAME].join("")}
           </span>
-          <span className="truncate text-xs text-muted/75">{displayUrl || "Loading..."}</span>
+          <span className="truncate text-xs text-muted">Tap to launch the app</span>
         </div>
-        <Link.Icon />
       </Link>
     );
   }
