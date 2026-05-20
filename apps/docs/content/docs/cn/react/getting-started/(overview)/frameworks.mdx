@@ -1,0 +1,145 @@
+---
+title: 框架集成
+description: 将 HeroUI 集成到你的框架中
+icon: layers
+---
+
+## Next.js
+
+### 1. 创建 Next.js 项目
+
+```bash
+npx heroui-cli@latest init
+```
+
+<Callout>
+  当出现提示时，选择 **App** 或 **Pages** 模板。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+</Callout>
+
+### 2. 使用你的第一个 HeroUI 组件
+
+<Tabs items={["App Router", "Pages Router"]}>
+  <Tab value="App Router">
+    示例：`app/page.tsx`
+
+    ```tsx
+    import {Button} from "@heroui/react";
+
+    export default function HomePage() {
+      return (
+        <main className="flex min-h-screen items-center justify-center">
+          <Button variant="tertiary">Hello HeroUI</Button>
+        </main>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="Pages Router">
+    示例：`pages/index.tsx`
+
+    ```tsx
+    import {Button} from "@heroui/react";
+
+    export default function HomePage() {
+      return (
+        <main className="flex min-h-screen items-center justify-center">
+          <Button variant="tertiary">Hello HeroUI</Button>
+        </main>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Callout>
+  HeroUI v3 无需 Provider。安装并导入样式后，组件即可直接使用。
+</Callout>
+
+### 3. 区域设置（可选）
+
+为了与 Next.js 集成，请确保服务端的区域设置与客户端一致。
+
+在根布局中，确定用户的首选语言，并在 `<html>` 元素上设置 `lang` 和 `dir` 属性。
+
+```tsx
+// app/layout.tsx
+import {headers} from 'next/headers';
+import {isRTL} from '@heroui/react';
+import {ClientProviders} from './provider';
+
+export default async function RootLayout({children}) {
+  // Get the user's preferred language from the Accept-Language header.
+  // You could also get this from a database, URL param, etc.
+  const acceptLanguage = (await headers()).get('accept-language');
+  const lang = acceptLanguage?.split(/[,;]/)[0] || 'en-US';
+
+  return (
+    <html lang={lang} dir={isRTL(lang) ? 'rtl' : 'ltr'}>
+      <body>
+        <ClientProviders lang={lang}>
+          {children}
+        </ClientProviders>
+      </body>
+    </html>
+  );
+}
+```
+
+创建 `app/provider.tsx`，其中应渲染一个 `I18nProvider`，用于设置 React Aria 所使用的区域设置。
+
+```tsx
+// app/provider.tsx
+"use client";
+
+import {I18nProvider} from '@heroui/react';
+
+export function ClientProviders({lang, children}) {
+  return (
+    <I18nProvider locale={lang}>
+      {children}
+    </I18nProvider>
+  );
+}
+```
+
+如果你使用了带 nonce 的 [内容安全策略](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP)（CSP），请在文档的 head 中添加 `<meta property="csp-nonce">` 标签，并将其 content 属性设置为生成的 nonce 值。React Aria 会自动从该标签读取 nonce。
+
+## Vite
+
+### 1. 创建 Vite 项目
+
+```bash
+npx heroui-cli@latest init
+```
+
+<Callout>
+  当出现提示时，选择 **Vite** 模板。然后进入新创建的文件夹并安装依赖（例如 `pnpm install`）。
+</Callout>
+
+### 2. 使用你的第一个 HeroUI 组件
+
+示例：`src/App.tsx`
+
+```tsx
+import {Button} from "@heroui/react";
+
+function App() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button variant="tertiary">Hello HeroUI</Button>
+    </main>
+  );
+}
+
+export default App;
+```
+
+<Callout>
+  HeroUI v3 无需 Provider。安装并导入样式后，组件即可直接使用。
+</Callout>
+
+## 下一步
+
+- [快速入门](/docs/react/getting-started/quick-start) — 最快上手的方式
+- [主题](/docs/react/getting-started/theming) — 自定义颜色和设计令牌
+- [组件](/docs/react/components) — 探索所有可用的组件
