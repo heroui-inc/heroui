@@ -398,7 +398,7 @@ Now use it in your components:
 
 HeroUI defines three types of variables:
 1. **Base Variables** — Non-changing values like `--white`, `--black`, spacing, and typography
-2. **Theme Variables** — Colors that change between light/dark themes
+2. **Theme Variables** — Colors that change between light/dark themes, plus scrollbar tokens (`--scrollbar-thumb`, `--scrollbar-width`, etc.)
 3. **Calculated Variables** — Automatically generated hover states and size variants
 
 For a complete reference, see: [Colors Documentation](/docs/handbook/colors), [Default Theme Variables](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css), [Shared Theme Utilities](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css)
@@ -596,6 +596,63 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
 />
 
 Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
+
+## Scrollbars
+
+HeroUI applies a shared scrollbar style to component scroll areas (tables, popovers, drawers, and similar). Scrollbars use standard CSS properties (`scrollbar-width`, `scrollbar-color`, `scrollbar-gutter`) — no `::-webkit-scrollbar` overrides.
+
+**Modes** — set `data-scrollbar` on `<html>`, a component root, or a scroll slot:
+
+| Mode | `data-scrollbar` | Behavior |
+|------|------------------|----------|
+| HeroUI (default) | *(unset)* | Thin thumb from theme tokens |
+| OS / browser | `default` | Native scrollbars (`auto`) |
+| Hidden | `none` | No visible scrollbar (`scrollbar-width: none`) |
+
+```html
+<!-- Native scrollbars everywhere -->
+<html data-scrollbar="default">
+
+<!-- Hide scrollbars in one subtree (e.g. a popover) -->
+<div data-scrollbar="none">
+  ...
+</div>
+```
+
+**Theme variables** — defined in light and dark theme blocks in [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css):
+
+| Variable | Description |
+|----------|-------------|
+| `--scrollbar-thumb` | Thumb color (default: 15% `--foreground` via `color-mix`) |
+| `--scrollbar-track` | Track color (default: `transparent`) |
+| `--scrollbar-gutter` | Gutter (default: `auto`) |
+| `--scrollbar-width` | `scrollbar-width` (default: `thin`) |
+| `--scrollbar-color` | `scrollbar-color` (default: thumb + track) |
+| `--scrollbar` | Legacy alias of `--scrollbar-thumb` |
+
+**Customize globally:**
+
+```css
+/* app/globals.css */
+:root {
+  --scrollbar-thumb: color-mix(in oklch, var(--accent) 30%, transparent);
+  --scrollbar-gutter: auto;
+}
+```
+
+**Per scroll slot** — pass `data-scrollbar` on a component or override tokens on a wrapper:
+
+```tsx
+<Table data-scrollbar="default">
+  ...
+</Table>
+
+<Calendar.YearPickerGrid data-scrollbar="none" />
+```
+
+**Custom overflow areas** — use the `scrollbar`, `scrollbar-default`, or `scrollbar-none` utilities from `@heroui/styles` on your own elements. See [Styling](/docs/handbook/styling) for class-based overrides.
+
+> **Note**: Some components hide scrollbars by default (date picker popovers, color picker, secondary tabs). Nested scroll slots (e.g. the calendar year picker inside a date picker) keep HeroUI scrollbars because `scrollbar-none` only affects the element it is applied to, not descendants using `@apply scrollbar`.
 
 ## Resources
 
