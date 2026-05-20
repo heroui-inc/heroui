@@ -16,7 +16,7 @@ import {cn} from "@/utils/cn";
 import {HEROUI_PRO_URL, iframeTabs} from "../../themes/constants";
 import {
   calculateAccentForeground,
-  getAccentDerivedVariables,
+  getDerivedColorFormulas,
 } from "../../themes/utils/generate-theme-colors";
 
 const tabs = [
@@ -51,7 +51,7 @@ function getProUrl(utm: {campaign?: string; content?: string; medium: string}) {
   return url.toString();
 }
 
-function getAccentStyleVars(color: Color): Record<string, string> {
+function getAccentStyleVars(color: Color, theme: "light" | "dark"): Record<string, string> {
   const oklch = toOklch(color.toString("css"));
 
   if (!oklch) return {};
@@ -67,7 +67,7 @@ function getAccentStyleVars(color: Color): Record<string, string> {
     "--accent": accent,
     "--accent-foreground": accentFg,
     "--focus": accent,
-    ...getAccentDerivedVariables(accent, accentFg),
+    ...getDerivedColorFormulas(theme),
   };
 }
 
@@ -80,9 +80,11 @@ export function DemoShowcase() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const {resolvedTheme} = useTheme();
 
+  const currentTheme = (resolvedTheme === "dark" ? "dark" : "light") as "light" | "dark";
+
   const accentVars = useMemo(
-    () => (selectedColor ? getAccentStyleVars(selectedColor) : {}),
-    [selectedColor],
+    () => (selectedColor ? getAccentStyleVars(selectedColor, currentTheme) : {}),
+    [selectedColor, currentTheme],
   );
 
   const themeBuilderHref = useMemo(() => {

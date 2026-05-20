@@ -19,7 +19,7 @@ import {
   calculateAccentForeground,
   generateThemeColors,
   getColorVariablesForElement,
-  getDerivedColorVariables,
+  getDerivedColorFormulas,
   radiusDerivedVariables,
 } from "../utils/generate-theme-colors";
 
@@ -131,30 +131,29 @@ function getAdaptiveColorCSS(
   const lightVars = getColorVariablesForElement(lightColors, "light");
   const darkVars = getColorVariablesForElement(darkColors, "dark");
 
-  const lightAccentVars = {
+  const lightAccentVars: Record<string, string> = {
     "--accent": adaptiveConfig.light,
     "--accent-foreground": lightFg,
+    "--accent-soft-foreground": adaptiveConfig.light,
     "--focus": adaptiveConfig.light,
   };
 
-  const darkAccentVars = {
+  const darkAccentVars: Record<string, string> = {
     "--accent": adaptiveConfig.dark,
     "--accent-foreground": darkFg,
+    "--accent-soft-foreground": adaptiveConfig.dark,
     "--focus": adaptiveConfig.dark,
   };
 
-  // Derived vars must be re-declared on scoped elements because
-  // CSS custom properties resolve var() at the level they are defined,
-  // not where they are inherited.
   const colorLightVars = {
     ...lightVars,
+    ...getDerivedColorFormulas("light"),
     ...lightAccentVars,
-    ...getDerivedColorVariables({...lightVars, ...lightAccentVars}),
   };
   const colorDarkVars = {
     ...darkVars,
+    ...getDerivedColorFormulas("dark"),
     ...darkAccentVars,
-    ...getDerivedColorVariables({...darkVars, ...darkAccentVars}),
   };
 
   // Content level: colors + radius + fonts
@@ -202,8 +201,8 @@ function getThemeColorsCSS(
   const lightVars = getColorVariablesForElement(colors, "light");
   const darkVars = getColorVariablesForElement(colors, "dark");
 
-  const colorLightVars = {...lightVars, ...getDerivedColorVariables(lightVars)};
-  const colorDarkVars = {...darkVars, ...getDerivedColorVariables(darkVars)};
+  const colorLightVars = {...lightVars, ...getDerivedColorFormulas("light")};
+  const colorDarkVars = {...darkVars, ...getDerivedColorFormulas("dark")};
 
   // Content level: colors + radius + fonts
   const fullLightVars = {...commonVars, ...colorLightVars};
