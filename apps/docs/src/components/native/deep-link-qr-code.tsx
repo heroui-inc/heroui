@@ -89,16 +89,14 @@ export const DeepLinkQRCode = ({size = 160, url}: DeepLinkQRCodeProps) => {
 
     return (
       <Link
-        className="mb-4 flex w-full flex-col items-center justify-center gap-3 bg-surface-secondary/70 px-2 py-4 no-underline"
+        className="mt-1 mb-3 flex w-full flex-col items-center justify-center gap-3 border border-dashed border-border px-2 py-4 no-underline"
         href={mobileUrl || "#"}
       >
         <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-foreground text-background">
           <HeroUIPlainLogo size={18} />
         </div>
         <div className="flex flex-1 flex-col items-center justify-center">
-          <span className="truncate text-sm font-semibold text-foreground">
-            {["Open in ", NATIVE_APP.NAME].join("")}
-          </span>
+          <span className="truncate text-sm font-semibold text-foreground">{NATIVE_APP.NAME}</span>
           <span className="truncate text-xs text-muted">Tap to launch the app</span>
         </div>
       </Link>

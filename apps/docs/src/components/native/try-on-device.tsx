@@ -3,7 +3,6 @@
 import {useState} from "react";
 
 import {NATIVE_APP} from "@/config/native-app";
-import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 
 import {DeepLinkQRCode} from "./deep-link-qr-code";
 import {StoreButtons} from "./store-buttons";
@@ -39,7 +38,6 @@ function readOrigin(): string {
  * app's `+native-intent` redirect as the app-root entrypoint.
  */
 export const TryOnDevice = () => {
-  const isMobile = useIsMobileDevice();
   // Lazy initializer reads `window.location.origin` once during mount on the
   // client; on the server it returns "" so the markup is identical between
   // SSR and the first client render (no hydration warning).
@@ -50,18 +48,10 @@ export const TryOnDevice = () => {
   return (
     <div className="not-prose my-8 w-full overflow-hidden rounded-xl border border-separator">
       <div className="flex flex-col items-center gap-6 px-6 py-10">
-        <p className="max-w-sm text-center text-sm text-muted">
-          {isMobile
-            ? ["Tap below to open all components in the ", NATIVE_APP.NAME, " app:"].join("")
-            : [
-                "Scan the QR code with your device's camera to explore every component live in the ",
-                NATIVE_APP.NAME,
-                " app:",
-              ].join("")}
-        </p>
-
         <DeepLinkQRCode size={200} url={deepLinkUrl} />
-
+        <span className="mb-2 text-center text-xs text-foreground">
+          {["Don't have the ", NATIVE_APP.NAME, " app yet? Download it below."].join("")}
+        </span>
         <StoreButtons className="flex w-full max-w-xs flex-col items-stretch gap-2" />
       </div>
     </div>
