@@ -42,7 +42,7 @@ export function TooltipCustomTrigger() {
       <Tooltip delay={0}>
         <Tooltip.Trigger aria-label="Info icon">
           <div className="rounded-full bg-accent-soft p-2">
-            <CircleQuestion className="text-accent" />
+            <CircleQuestion className="text-accent-soft-foreground" />
           </div>
         </Tooltip.Trigger>
         <Tooltip.Content showArrow>

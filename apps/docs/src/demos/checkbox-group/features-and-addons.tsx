@@ -45,7 +45,7 @@ export function FeaturesAndAddOns() {
                   <Checkbox.Indicator />
                 </Checkbox.Control>
                 <Checkbox.Content className="flex flex-row items-start justify-start gap-4">
-                  <addon.icon className="size-5 text-accent" />
+                  <addon.icon className="size-5 text-accent-soft-foreground" />
                   <div className="flex flex-col gap-1">
                     <Label>{addon.title}</Label>
                     <Description>{addon.description}</Description>

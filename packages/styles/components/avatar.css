@@ -37,23 +37,23 @@
 
 /* Color modifiers for fallback */
 .avatar__fallback--accent {
-  @apply text-accent;
+  @apply text-accent-soft-foreground;
 }
 
 .avatar__fallback--default {
-  @apply text-default-foreground;
+  @apply text-default-soft-foreground;
 }
 
 .avatar__fallback--success {
-  @apply text-success;
+  @apply text-success-soft-foreground;
 }
 
 .avatar__fallback--warning {
-  @apply text-warning;
+  @apply text-warning-soft-foreground;
 }
 
 .avatar__fallback--danger {
-  @apply text-danger;
+  @apply text-danger-soft-foreground;
 }
 
 /* Variant modifiers */
@@ -71,6 +71,10 @@
 
 .avatar--soft .avatar__fallback--warning {
   @apply bg-warning-soft text-warning-soft-foreground;
+}
+
+.avatar--soft .avatar__fallback--default {
+  @apply bg-default-soft text-default-soft-foreground;
 }
 
 .avatar--soft .avatar__fallback--danger {
