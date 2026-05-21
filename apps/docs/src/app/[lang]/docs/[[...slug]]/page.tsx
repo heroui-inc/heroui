@@ -18,7 +18,7 @@ import {
   DocsTitle,
 } from "@/components/fumadocs/layouts/notebook/page";
 import {LocaleLink} from "@/components/locale-link";
-import {NativeComponentsCategory} from "@/components/native-components-category";
+import {ComponentsCategory as NativeComponentsCategory} from "@/components/native/components-category";
 import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";

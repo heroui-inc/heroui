@@ -26,6 +26,19 @@ const config: NextConfig = {
         ],
         source: "/:path*",
       },
+      {
+        // Apple requires the AASA file to be served with `application/json`
+        // exactly — any other content type (the default `application/octet-stream`
+        // for extensionless files, or `text/plain`) causes silent rejection by
+        // iOS, which then refuses to handle Universal Links for the domain.
+        // The short cache window lets us roll out AASA changes without waiting
+        // hours for stale CDN/iOS caches to expire.
+        headers: [
+          {key: "Content-Type", value: "application/json"},
+          {key: "Cache-Control", value: "public, max-age=3600, must-revalidate"},
+        ],
+        source: "/.well-known/apple-app-site-association",
+      },
     ];
   },
   images: {

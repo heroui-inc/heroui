@@ -5,6 +5,7 @@ import type {ReactNode} from "react";
 
 import {fieldsetVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {Provider, RadioGroupContext, SliderContext} from "react-aria-components";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -29,14 +30,43 @@ interface FieldsetRootProps<
 }
 
 const FieldsetRoot = <E extends keyof React.JSX.IntrinsicElements = "fieldset">({
+  children,
   className,
   ...props
 }: FieldsetRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetRootProps<E>>) => {
   const slots = React.useMemo(() => fieldsetVariants({}), []);
 
+  // Mirror native `<fieldset disabled>` as `data-disabled="true"` so the
+  // existing `[data-disabled="true"] .label` (and similar) ancestor selectors
+  // cascade disabled styling to descendant fields, just like a direct
+  // `isDisabled` prop on TextField/Checkbox/etc. would.
+  const isDisabled = "disabled" in props && props.disabled === true;
+
   return (
     <FieldsetContext value={{slots}}>
-      <dom.fieldset className={slots?.base({className})} data-slot="fieldset" {...(props as any)} />
+      <dom.fieldset
+        className={slots?.base({className})}
+        data-disabled={isDisabled || undefined}
+        data-slot="fieldset"
+        {...(props as any)}
+      >
+        {isDisabled ? (
+          // Slider and RadioGroup render as <div> (no native form controls),
+          // so the browser doesn't propagate <fieldset disabled> to them.
+          // Forward `isDisabled` explicitly via React Aria's context so their
+          // wrapper elements receive `data-disabled` and behave as disabled.
+          <Provider
+            values={[
+              [RadioGroupContext, {isDisabled: true}],
+              [SliderContext, {isDisabled: true}],
+            ]}
+          >
+            {children}
+          </Provider>
+        ) : (
+          children
+        )}
+      </dom.fieldset>
     </FieldsetContext>
   );
 };

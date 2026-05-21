@@ -29,10 +29,15 @@ export function CustomToast() {
             >
               <ToastContent>
                 <div className="flex items-center gap-2">
-                  <ToastIndicator className="text-accent" variant={content.variant} />
+                  <ToastIndicator
+                    className="text-accent-soft-foreground"
+                    variant={content.variant}
+                  />
                   <div className="flex flex-col pr-6">
                     {content.title ? (
-                      <ToastTitle className="text-accent">{content.title}</ToastTitle>
+                      <ToastTitle className="text-accent-soft-foreground">
+                        {content.title}
+                      </ToastTitle>
                     ) : null}
                     {content.description ? (
                       <ToastDescription>{content.description}</ToastDescription>

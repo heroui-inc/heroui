@@ -4,7 +4,7 @@ import type {ThemeId} from "@/app/themes/constants";
 import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
-import {Button, ListBox, Popover, buttonVariants} from "@heroui/react";
+import {Button, Description, Label, ListBox, Popover, Switch, buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 import {useCallback, useEffect, useMemo, useState} from "react";
@@ -24,6 +24,7 @@ import spotifyTheme from "@/assets/themes/spotify.png";
 import {cn} from "@/utils/cn";
 
 const STORAGE_KEY = "heroui-docs-design-theme";
+const VIBRANT_STORAGE_KEY = "heroui-docs-vibrant-palette";
 
 interface ThemeOption {
   id: string;
@@ -64,6 +65,7 @@ function applyTheme(themeId: string) {
 
 export function DesignThemeSelector() {
   const [active, setActive] = useState("default");
+  const [vibrant, setVibrant] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -76,6 +78,13 @@ export function DesignThemeSelector() {
       setActive(stored);
       applyTheme(stored);
     }
+
+    const storedVibrant = localStorage.getItem(VIBRANT_STORAGE_KEY);
+
+    if (storedVibrant === "true") {
+      setVibrant(true);
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
+    }
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -87,6 +96,17 @@ export function DesignThemeSelector() {
     setActive(selected);
     localStorage.setItem(STORAGE_KEY, selected);
     applyTheme(selected);
+  }, []);
+
+  const handleVibrantToggle = useCallback((isSelected: boolean) => {
+    setVibrant(isSelected);
+    localStorage.setItem(VIBRANT_STORAGE_KEY, String(isSelected));
+
+    if (isSelected) {
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
+    } else {
+      document.documentElement.removeAttribute("data-vibrant-palette");
+    }
   }, []);
 
   const current = THEMES.find((t) => t.id === active);
@@ -190,6 +210,19 @@ export function DesignThemeSelector() {
                 </ListBox.Item>
               )}
             </ListBox>
+            <div className="mt-4 border-t border-separator pt-4">
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-0.5">
+                  <Label className="text-xs">Vibrant palette</Label>
+                  <Description className="text-[10px]">More saturated, less contrast</Description>
+                </div>
+                <Switch isSelected={vibrant} onChange={handleVibrantToggle}>
+                  <Switch.Control>
+                    <Switch.Thumb />
+                  </Switch.Control>
+                </Switch>
+              </div>
+            </div>
             <LinkRoot
               href={themeBuilderHref}
               className={buttonVariants({

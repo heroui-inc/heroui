@@ -1,6 +1,6 @@
 "use client";
 
-import type {StatusChipStatus} from "./status-chip";
+import type {StatusChipStatus} from "../status-chip";
 
 import {Link as LocalLinkIcon} from "@gravity-ui/icons";
 import {Link} from "@heroui/react";
@@ -9,9 +9,15 @@ import LinkRoot from "fumadocs-core/link";
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 import {cn} from "@/utils/cn";
 
-import {NativeVideoPlayerView} from "./native-video-player-view";
-import StatusChip from "./status-chip";
+import StatusChip from "../status-chip";
 
+import {VideoPlayerView} from "./video-player-view";
+
+/**
+ * Title + optional status-chip pair, factored out so it can render inside
+ * both the in-page `NextLink` and the external `Link` variants without
+ * duplicating layout markup.
+ */
 function ComponentTitleContent({status, title}: {status?: StatusChipStatus; title: string}) {
   return (
     <div className="flex items-center gap-2">
@@ -21,6 +27,10 @@ function ComponentTitleContent({status, title}: {status?: StatusChipStatus; titl
   );
 }
 
+/**
+ * Helper that picks between Next.js client routing (`NextLink`) and the
+ * HeroUI `<Link>` based on whether the destination should open in a new tab.
+ */
 function ConditionalLink({
   children,
   className,
@@ -59,7 +69,7 @@ interface NativeComponentInfo {
   category?: string;
 }
 
-interface NativeComponentItemProps extends React.ComponentProps<"div"> {
+interface ComponentItemProps extends React.ComponentProps<"div"> {
   component: NativeComponentInfo;
   srcLight: string;
   srcDark: string;
@@ -68,14 +78,24 @@ interface NativeComponentItemProps extends React.ComponentProps<"div"> {
   openInNewTab?: boolean;
 }
 
-export function NativeComponentItem({
+/**
+ * ComponentItem renders a single native-component preview tile: a video
+ * (theme-aware) and the component's title with optional status chip. Used by
+ * {@link ComponentsCategory} to lay out the components-overview index.
+ *
+ * `target="auto"` on the inner VideoPlayerView is safe here because this
+ * component is only rendered from index pages that don't show the QR popover
+ * (`showQRCode={false}`) — the `target` is required by the type but never
+ * actually consumed.
+ */
+export function ComponentItem({
   className,
   component,
   openInNewTab = false,
   srcDark,
   srcLight,
   status,
-}: NativeComponentItemProps) {
+}: ComponentItemProps) {
   const {href, title} = component;
   const isMobile = useIsMobileDevice();
 
@@ -97,7 +117,7 @@ export function NativeComponentItem({
       </div>
       <div className="relative order-2 overflow-hidden rounded-xl sm:order-1">
         {isMobile ? (
-          <NativeVideoPlayerView
+          <VideoPlayerView
             autoPlay
             className="w-full"
             height={300}
@@ -105,10 +125,11 @@ export function NativeComponentItem({
             showQRCode={false}
             srcDark={srcDark}
             srcLight={srcLight}
+            target="auto"
           />
         ) : (
           <ConditionalLink className="block" href={href} openInNewTab={openInNewTab}>
-            <NativeVideoPlayerView
+            <VideoPlayerView
               autoPlay
               className="w-full"
               height={300}
@@ -116,6 +137,7 @@ export function NativeComponentItem({
               showQRCode={false}
               srcDark={srcDark}
               srcLight={srcLight}
+              target="auto"
             />
           </ConditionalLink>
         )}

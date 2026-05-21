@@ -133,6 +133,7 @@ const ComboBoxPopover = ({
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}
+        data-slot="combo-box-popover"
         placement={placement}
       >
         {children}

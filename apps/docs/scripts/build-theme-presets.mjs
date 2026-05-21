@@ -126,18 +126,9 @@ function genAccent(l, c, h, fgOverride) {
   const accent = fmt({c, h, l});
   const fg = fgOverride ?? accentForeground(l, c, h);
 
-  // For light accents (l > 0.65), derive a darker version for soft-foreground
-  // so text on secondary buttons and chips stays readable.
-  const softFg =
-    l > 0.65 ? fmt({c: Math.min(c * 1.4, 0.25), h, l: Math.max(l - 0.35, 0.35)}) : accent;
-
   return {
     "--accent": accent,
     "--accent-foreground": fg,
-    "--accent-hover": `color-mix(in oklab, ${accent} 90%, ${fg} 10%)`,
-    "--accent-soft": `color-mix(in oklab, ${accent} 15%, transparent)`,
-    "--accent-soft-foreground": softFg,
-    "--accent-soft-hover": `color-mix(in oklab, ${accent} 20%, transparent)`,
     "--focus": accent,
   };
 }
@@ -168,12 +159,8 @@ function genNeutrals(hue, grayChroma, mode) {
     "--border": border,
     "--default": defaultBg,
     "--default-foreground": defaultFg,
-    "--default-hover": `color-mix(in oklab, ${defaultBg} 96%, ${fg} 4%)`,
     "--field-background": fieldBg,
-    "--field-background-hover": `color-mix(in oklab, ${fieldBg} 90%, ${fg} 2%)`,
     "--field-border": border,
-    "--field-border-focus": `color-mix(in oklab, ${border} 74%, ${fg} 22%)`,
-    "--field-border-hover": `color-mix(in oklab, ${border} 88%, ${fg} 10%)`,
     "--field-foreground": fieldFg,
     "--field-placeholder": muted,
     "--foreground": fg,
@@ -205,10 +192,6 @@ function genSemanticFromHex(name, hex, baseHue, grayChroma) {
   return {
     [`--${name}`]: color,
     [`--${name}-foreground`]: fg,
-    [`--${name}-hover`]: `color-mix(in oklab, ${color} 90%, ${fg} 10%)`,
-    [`--${name}-soft`]: `color-mix(in oklab, ${color} 15%, transparent)`,
-    [`--${name}-soft-foreground`]: color,
-    [`--${name}-soft-hover`]: `color-mix(in oklab, ${color} 20%, transparent)`,
   };
 }
 
@@ -232,10 +215,6 @@ function genSemanticFromOklch(name, oklchStr, fgOverride) {
   return {
     [`--${name}`]: oklchStr,
     [`--${name}-foreground`]: fg,
-    [`--${name}-hover`]: `color-mix(in oklab, ${oklchStr} 90%, ${fg} 10%)`,
-    [`--${name}-soft`]: `color-mix(in oklab, ${oklchStr} 15%, transparent)`,
-    [`--${name}-soft-foreground`]: oklchStr,
-    [`--${name}-soft-hover`]: `color-mix(in oklab, ${oklchStr} 20%, transparent)`,
   };
 }
 
@@ -306,6 +285,7 @@ const PRESETS = [
   {
     accentHex: "#000000",
     base: 0.005,
+    darkAccentHex: "#FBFBFB",
     formRadius: "small",
     id: "uber",
     radius: "small",
@@ -424,13 +404,15 @@ const PRESETS = [
 // ---------------------------------------------------------------------------
 
 function generatePresetCss(preset) {
-  const accent = hexToOklch(preset.accentHex);
-  const hue = accent.h;
+  const lightAccent = hexToOklch(preset.accentHex);
+  const darkAccent = preset.darkAccentHex ? hexToOklch(preset.darkAccentHex) : lightAccent;
+  const hue = lightAccent.h;
   const grayChroma = preset.base;
   const so = preset.semanticOverrides;
 
   function modeVars(mode) {
-    const accentVars = genAccent(accent.l, accent.c, hue, so?.[mode]?.accentForeground);
+    const accent = mode === "dark" ? darkAccent : lightAccent;
+    const accentVars = genAccent(accent.l, accent.c, accent.h, so?.[mode]?.accentForeground);
     const neutrals = genNeutrals(hue, grayChroma, mode);
 
     let semantics = {};
