@@ -137,6 +137,7 @@
 
   /* Entering animations */
   &[data-entering="true"] {
+    transition-property: opacity, transform;
     @apply animate-in duration-250 ease-out-fluid fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */

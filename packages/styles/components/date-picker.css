@@ -59,6 +59,7 @@
   }
 
   &[data-entering="true"] {
+    transition-property: opacity, transform;
     @apply animate-in duration-150 ease-smooth fade-in-0 zoom-in-95;
 
     &[data-placement^="top"] {
