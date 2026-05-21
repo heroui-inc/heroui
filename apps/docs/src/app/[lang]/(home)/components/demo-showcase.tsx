@@ -1,6 +1,6 @@
 "use client";
 
-import type {Dictionary} from "@/app/[lang]/dictionaries";
+import type {Dictionary} from "@/lib/dictionaries";
 import type {CSSProperties} from "react";
 import type {Color} from "react-aria-components";
 

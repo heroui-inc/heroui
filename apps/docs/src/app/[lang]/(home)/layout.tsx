@@ -3,10 +3,10 @@ import type {ReactNode} from "react";
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 import {notFound} from "next/navigation";
 
-import {getDictionary, hasLocale} from "@/app/[lang]/dictionaries";
 import {baseOptions} from "@/app/[lang]/layout.config";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
 import {GitHubLinkSmall} from "@/components/github-link";
+import {getDictionary, hasLocale} from "@/lib/dictionaries";
 
 import {getHomeLayoutLinks} from "./home-layout-links";
 

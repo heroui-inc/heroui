@@ -31,5 +31,34 @@
     "title": "404",
     "description": "抱歉，找不到您要访问的页面。",
     "returnHome": "返回首页"
+  },
+  "pageActions": {
+    "copyMarkdown": "复制 Markdown",
+    "copied": "已复制",
+    "moreOptions": "更多选项",
+    "askWithUrl": "请阅读 {url}，我想就此进行提问。",
+    "askFallback": "我想就这份文档进行提问。",
+    "items": {
+      "markdown": {
+        "title": "查看 Markdown",
+        "description": "以 Markdown 格式查看页面"
+      },
+      "cursor": {
+        "title": "添加到 Cursor",
+        "description": "在 Cursor 中安装 MCP 服务器"
+      },
+      "vscode": {
+        "title": "添加到 VS Code",
+        "description": "在 VS Code 中安装 MCP 服务器"
+      },
+      "chatgpt": {
+        "title": "在 ChatGPT 中打开",
+        "description": "就此页面进行提问"
+      },
+      "claude": {
+        "title": "在 Claude 中打开",
+        "description": "就此页面进行提问"
+      }
+    }
   }
 }

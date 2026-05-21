@@ -1,6 +1,6 @@
 {
   "home": {
-    "releaseBadge": "HeroUI v3.0.5 – Typography rename, token refactor & fixes",
+    "releaseBadge": "HeroUI v3.0.5 - Typography rename, token refactor & fixes",
     "titleMain": "Beautiful by default.",
     "titleMuted": "Customizable by design.",
     "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
@@ -31,5 +31,34 @@
     "title": "404",
     "description": "Sorry, the page you're looking for could not be found.",
     "returnHome": "Return Home"
+  },
+  "pageActions": {
+    "copyMarkdown": "Copy Markdown",
+    "copied": "Copied",
+    "moreOptions": "More options",
+    "askWithUrl": "Read {url}, I want to ask questions about it.",
+    "askFallback": "I want to ask questions about this documentation.",
+    "items": {
+      "markdown": {
+        "title": "View as Markdown",
+        "description": "View page as Markdown format"
+      },
+      "cursor": {
+        "title": "Add to Cursor",
+        "description": "Install MCP Server on Cursor"
+      },
+      "vscode": {
+        "title": "Add to VS Code",
+        "description": "Install MCP Server on VS Code"
+      },
+      "chatgpt": {
+        "title": "Open in ChatGPT",
+        "description": "Ask questions about this page"
+      },
+      "claude": {
+        "title": "Open in Claude",
+        "description": "Ask questions about this page"
+      }
+    }
   }
 }

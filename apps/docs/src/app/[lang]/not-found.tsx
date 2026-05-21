@@ -2,8 +2,8 @@ import LinkRoot from "fumadocs-core/link";
 import {HomeLayout} from "fumadocs-ui/layouts/home";
 import Image from "next/image";
 
-import {getDictionary, getRequestLocale} from "@/app/[lang]/dictionaries";
 import {Footer} from "@/components/footer";
+import {getDictionary, getRequestLocale} from "@/lib/dictionaries";
 
 import {getHomeLayoutLinks} from "./(home)/home-layout-links";
 import {baseOptions} from "./layout.config";

@@ -3,10 +3,10 @@ import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import {notFound} from "next/navigation";
 
-import {getDictionary, hasLocale} from "@/app/[lang]/dictionaries";
 import {Footer} from "@/components/footer";
 import {StarsCount} from "@/components/github-link";
 import {GitHubIcon} from "@/icons/github";
+import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
 
 import {DemoShowcase} from "./components/demo-showcase";

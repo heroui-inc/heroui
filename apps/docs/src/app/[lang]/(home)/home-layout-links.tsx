@@ -1,5 +1,5 @@
-import type {Dictionary} from "@/app/[lang]/dictionaries";
 import type {LinkItemType} from "@/components/fumadocs/ui/link-item";
+import type {Dictionary} from "@/lib/dictionaries";
 
 import {ExternalLink} from "@/components/external-link";
 import {Iconify} from "@/components/iconify";
