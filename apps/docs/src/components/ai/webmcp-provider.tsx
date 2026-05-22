@@ -188,37 +188,83 @@ const tools: WebMCPTool[] = [
   },
 ];
 
+const WEBMCP_REGISTRATION_RETRY_MS = 100;
+const WEBMCP_REGISTRATION_TIMEOUT_MS = 5000;
+
 export function WebMCPProvider() {
   useEffect(() => {
-    const modelContext = navigator.modelContext;
-
-    if (!modelContext) return;
-
     const abortController = new AbortController();
     const registeredTools: string[] = [];
     let cleanup: (() => void) | void;
+    let didRegister = false;
+    let didWarn = false;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
-    try {
-      if (typeof modelContext.registerTool === "function") {
-        for (const tool of tools) {
-          modelContext.registerTool(tool);
-          registeredTools.push(tool.name);
+    const registerTools = (modelContext: WebMCPModelContext | undefined): boolean => {
+      if (!modelContext || didRegister) return didRegister;
+
+      try {
+        if (typeof modelContext.provideContext === "function") {
+          cleanup = modelContext.provideContext({tools}, {signal: abortController.signal});
+          didRegister = true;
+
+          return true;
         }
-      } else if (typeof modelContext.provideTools === "function") {
-        cleanup = modelContext.provideTools(tools, {signal: abortController.signal});
-      } else if (typeof modelContext.provideContext === "function") {
-        cleanup = modelContext.provideContext({tools}, {signal: abortController.signal});
+
+        if (typeof modelContext.provideTools === "function") {
+          cleanup = modelContext.provideTools(tools, {signal: abortController.signal});
+          didRegister = true;
+
+          return true;
+        }
+
+        if (typeof modelContext.registerTool === "function") {
+          for (const tool of tools) {
+            modelContext.registerTool(tool);
+            registeredTools.push(tool.name);
+          }
+
+          didRegister = true;
+
+          return true;
+        }
+      } catch (error) {
+        if (!didWarn) {
+          console.warn("Unable to register HeroUI WebMCP tools", error);
+          didWarn = true;
+        }
       }
-    } catch (error) {
-      console.warn("Unable to register HeroUI WebMCP tools", error);
+
+      return false;
+    };
+
+    if (!registerTools(navigator.modelContext)) {
+      intervalId = setInterval(() => {
+        if (registerTools(navigator.modelContext) && intervalId) {
+          clearInterval(intervalId);
+          intervalId = undefined;
+        }
+      }, WEBMCP_REGISTRATION_RETRY_MS);
+
+      timeoutId = setTimeout(() => {
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = undefined;
+        }
+      }, WEBMCP_REGISTRATION_TIMEOUT_MS);
     }
 
     return () => {
       abortController.abort();
 
+      if (intervalId) clearInterval(intervalId);
+      if (timeoutId) clearTimeout(timeoutId);
       if (typeof cleanup === "function") cleanup();
 
-      if (typeof modelContext.unregisterTool === "function") {
+      const modelContext = navigator.modelContext;
+
+      if (typeof modelContext?.unregisterTool === "function") {
         for (const toolName of registeredTools) {
           modelContext.unregisterTool(toolName);
         }
