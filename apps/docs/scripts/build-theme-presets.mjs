@@ -306,6 +306,7 @@ const PRESETS = [
   {
     accentHex: "#000000",
     base: 0.005,
+    darkAccent: {c: 0, h: 0, l: 0.9848},
     formRadius: "small",
     id: "uber",
     radius: "small",
@@ -430,7 +431,13 @@ function generatePresetCss(preset) {
   const so = preset.semanticOverrides;
 
   function modeVars(mode) {
-    const accentVars = genAccent(accent.l, accent.c, hue, so?.[mode]?.accentForeground);
+    const modeAccent = preset[`${mode}Accent`] ?? accent;
+    const accentVars = genAccent(
+      modeAccent.l,
+      modeAccent.c,
+      modeAccent.h,
+      so?.[mode]?.accentForeground,
+    );
     const neutrals = genNeutrals(hue, grayChroma, mode);
 
     let semantics = {};
