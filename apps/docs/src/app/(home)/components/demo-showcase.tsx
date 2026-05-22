@@ -1,5 +1,6 @@
 "use client";
 
+import type {ThemeId} from "../../themes/constants";
 import type {CSSProperties} from "react";
 import type {Color} from "react-aria-components";
 
@@ -12,8 +13,16 @@ import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
 import {DemoComponents} from "@/components/demo";
 import {cn} from "@/utils/cn";
+import {
+  DEFAULT_DESIGN_THEME,
+  DESIGN_THEME_CHANGE_EVENT,
+  DESIGN_THEME_STORAGE_KEY,
+  getStoredDesignTheme,
+  isDesignThemeId,
+} from "@/utils/design-theme";
 
-import {HEROUI_PRO_URL, iframeTabs} from "../../themes/constants";
+import {HEROUI_PRO_URL, iframeTabs, themeValuesById} from "../../themes/constants";
+import {computeThemeVars} from "../../themes/hooks";
 import {
   calculateAccentForeground,
   getAccentDerivedVariables,
@@ -76,6 +85,7 @@ const LOADER_DURATION_MS = 250;
 export function DemoShowcase() {
   const [selectedTab, setSelectedTab] = useState("components");
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
+  const [activeDesignTheme, setActiveDesignTheme] = useState<ThemeId>(getStoredDesignTheme);
   const [iframeLoading, setIframeLoading] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const {resolvedTheme} = useTheme();
@@ -84,6 +94,20 @@ export function DemoShowcase() {
     () => (selectedColor ? getAccentStyleVars(selectedColor) : {}),
     [selectedColor],
   );
+
+  const computedDesignThemeVars = useMemo(
+    () => computeThemeVars(themeValuesById[activeDesignTheme]),
+    [activeDesignTheme],
+  );
+
+  const iframeThemeVars = useMemo(() => {
+    const modeVars =
+      resolvedTheme === "light"
+        ? computedDesignThemeVars.fullLightVars
+        : computedDesignThemeVars.fullDarkVars;
+
+    return Object.keys(accentVars).length > 0 ? {...modeVars, ...accentVars} : modeVars;
+  }, [accentVars, computedDesignThemeVars, resolvedTheme]);
 
   const themeBuilderHref = useMemo(() => {
     const params = new URLSearchParams();
@@ -114,15 +138,51 @@ export function DemoShowcase() {
     }
   }
 
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setActiveDesignTheme(getStoredDesignTheme());
+    });
+
+    function handleDesignThemeChange(event: Event) {
+      const themeId = (event as CustomEvent<{themeId?: string}>).detail?.themeId;
+
+      if (isDesignThemeId(themeId)) {
+        setActiveDesignTheme(themeId);
+      }
+    }
+
+    function handleStorage(event: StorageEvent) {
+      if (event.key !== DESIGN_THEME_STORAGE_KEY) return;
+
+      setActiveDesignTheme(isDesignThemeId(event.newValue) ? event.newValue : DEFAULT_DESIGN_THEME);
+    }
+
+    window.addEventListener(DESIGN_THEME_CHANGE_EVENT, handleDesignThemeChange);
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.removeEventListener(DESIGN_THEME_CHANGE_EVENT, handleDesignThemeChange);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
+
   const sendMessageToIframe = useCallback(() => {
     const iframe = iframeRef.current;
 
     if (!iframe?.contentWindow) return;
     iframe.contentWindow.postMessage({theme: resolvedTheme ?? "dark", type: "heroui-theme"}, "*");
-    if (Object.keys(accentVars).length > 0) {
-      iframe.contentWindow.postMessage({type: "heroui-accent", vars: accentVars}, "*");
-    }
-  }, [accentVars, resolvedTheme]);
+    iframe.contentWindow.postMessage({type: "heroui-accent", vars: iframeThemeVars}, "*");
+    iframe.contentWindow.postMessage(
+      {
+        cdnUrl: computedDesignThemeVars.fontMeta.cdnUrl,
+        family: computedDesignThemeVars.fontMeta.family,
+        type: "heroui-font",
+        variable: computedDesignThemeVars.fontMeta.variable,
+      },
+      "*",
+    );
+  }, [computedDesignThemeVars.fontMeta, iframeThemeVars, resolvedTheme]);
 
   // Re-send whenever theme or accent changes
   useEffect(() => {
