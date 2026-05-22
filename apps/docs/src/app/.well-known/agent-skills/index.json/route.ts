@@ -10,6 +10,7 @@ import {
 } from "@/lib/agent-discovery";
 import {VALID_SKILLS} from "@/lib/skills-constants.mjs";
 
+export const dynamic = "force-dynamic";
 export const revalidate = false;
 
 async function getSkillDigest(skillName: string): Promise<string> {

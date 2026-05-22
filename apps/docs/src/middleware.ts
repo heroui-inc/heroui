@@ -6,7 +6,7 @@ import {getHomepageLinkHeader} from "@/lib/agent-discovery";
 import {acceptsMarkdown} from "@/lib/agent-markdown";
 
 const MARKDOWN_EXCLUDED_PREFIXES = [
-  "/_agent",
+  "/agent-markdown",
   "/_next",
   "/api",
   "/.well-known",
@@ -60,11 +60,22 @@ export function middleware(request: NextRequest) {
   ) {
     const url = request.nextUrl.clone();
 
-    url.pathname = "/_agent/markdown";
+    url.pathname = "/agent-markdown";
     url.search = "";
     url.searchParams.set("path", pathname);
 
-    return addHomepageDiscoveryHeaders(NextResponse.rewrite(url), pathname);
+    const requestHeaders = new Headers(request.headers);
+
+    requestHeaders.set("x-heroui-markdown-path", pathname);
+
+    return addHomepageDiscoveryHeaders(
+      NextResponse.rewrite(url, {
+        request: {
+          headers: requestHeaders,
+        },
+      }),
+      pathname,
+    );
   }
 
   return addHomepageDiscoveryHeaders(NextResponse.next(), pathname);

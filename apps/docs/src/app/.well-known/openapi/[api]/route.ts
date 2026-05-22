@@ -8,6 +8,7 @@ import {
   getRequestOrigin,
 } from "@/lib/agent-discovery";
 
+export const dynamic = "force-dynamic";
 export const revalidate = false;
 
 type OpenAPIDocument = Record<string, unknown>;

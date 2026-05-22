@@ -1,5 +1,6 @@
 import {absoluteUrl, getRequestOrigin, jsonResponse} from "@/lib/agent-discovery";
 
+export const dynamic = "force-dynamic";
 export const revalidate = false;
 
 export async function GET(request: Request) {

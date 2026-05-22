@@ -9,6 +9,7 @@ import {
 import {getLLMText} from "@/lib/get-llm-text";
 import {source} from "@/lib/source";
 
+export const dynamic = "force-dynamic";
 export const revalidate = false;
 
 function markdownResponse(markdown: string, init: ResponseInit = {}): Response {
@@ -24,7 +25,10 @@ function markdownResponse(markdown: string, init: ResponseInit = {}): Response {
 
 async function getMarkdownForPath(request: NextRequest): Promise<Response> {
   const origin = getRequestOrigin(request);
-  const pathname = request.nextUrl.searchParams.get("path") || "/";
+  const pathname =
+    request.headers.get("x-heroui-markdown-path") ??
+    request.nextUrl.searchParams.get("path") ??
+    "/";
 
   if (pathname === "/") {
     return markdownResponse(getHomepageMarkdown(origin), {

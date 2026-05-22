@@ -3,6 +3,7 @@ import type {NextRequest} from "next/server";
 import {getAgentDocPage} from "@/lib/agent-api";
 import {jsonResponse} from "@/lib/agent-discovery";
 
+export const dynamic = "force-dynamic";
 export const revalidate = false;
 
 export async function GET(request: NextRequest) {
