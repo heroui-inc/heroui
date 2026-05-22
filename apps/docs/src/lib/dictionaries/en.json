@@ -45,6 +45,11 @@
     "web": "Web",
     "native": "Native"
   },
+  "componentLinks": {
+    "source": "Source",
+    "stylesSource": "Styles source",
+    "themeSource": "Theme source"
+  },
   "themes": {
     "theme": "Theme",
     "custom": "Custom",

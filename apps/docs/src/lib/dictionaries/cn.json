@@ -45,6 +45,11 @@
     "web": "Web",
     "native": "Native"
   },
+  "componentLinks": {
+    "source": "源代码",
+    "stylesSource": "样式源代码",
+    "themeSource": "主题源代码"
+  },
   "themes": {
     "theme": "主题",
     "custom": "自定义",

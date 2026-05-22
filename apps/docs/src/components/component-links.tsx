@@ -1,5 +1,8 @@
+"use client";
+
 import type {ComponentLinksType} from "@/utils/extract-links";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {
   FigmaIcon,
   GithubIcon,
@@ -38,6 +41,7 @@ const ButtonLink = ({
 };
 
 export const ComponentLinks = ({links}: ComponentLinksProps) => {
+  const dict = useDictionary().componentLinks;
   const componentLinks = generateComponentLinks(links || null);
 
   if (!componentLinks) {
@@ -75,27 +79,27 @@ export const ComponentLinks = ({links}: ComponentLinksProps) => {
       ) : null}
       {componentLinks.source ? (
         <ButtonLink href={componentLinks.source} startContent={<GithubIcon size={20} />}>
-          Source
+          {dict.source}
         </ButtonLink>
       ) : null}
       {componentLinks.source_native ? (
         <ButtonLink href={componentLinks.source_native} startContent={<GithubIcon size={20} />}>
-          Source
+          {dict.source}
         </ButtonLink>
       ) : null}
       {componentLinks.styles ? (
         <ButtonLink href={componentLinks.styles} startContent={<GithubIcon size={20} />}>
-          Styles source
+          {dict.stylesSource}
         </ButtonLink>
       ) : null}
       {componentLinks.styles_native ? (
         <ButtonLink href={componentLinks.styles_native} startContent={<GithubIcon size={20} />}>
-          Styles source
+          {dict.stylesSource}
         </ButtonLink>
       ) : null}
       {componentLinks.themes ? (
         <ButtonLink href={componentLinks.themes} startContent={<GithubIcon size={20} />}>
-          Theme source
+          {dict.themeSource}
         </ButtonLink>
       ) : null}
       {componentLinks.tailwind ? (
