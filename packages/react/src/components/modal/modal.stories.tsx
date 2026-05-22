@@ -593,7 +593,7 @@ export const WithForm = () => (
               the keyboard appears on mobile.
             </p>
           </Modal.Header>
-          <Modal.Body className="p-6">
+          <Modal.Body>
             <Surface variant="default">
               <form className="flex flex-col gap-4">
                 <TextField className="w-full" name="name" type="text">
