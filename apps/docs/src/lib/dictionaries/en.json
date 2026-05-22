@@ -35,6 +35,11 @@
   "footer": {
     "allRightsReserved": "All rights reserved."
   },
+  "statusChip": {
+    "new": "New",
+    "preview": "Preview",
+    "updated": "Updated"
+  },
   "themes": {
     "theme": "Theme",
     "custom": "Custom",

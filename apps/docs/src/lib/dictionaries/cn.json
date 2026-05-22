@@ -35,6 +35,11 @@
   "footer": {
     "allRightsReserved": "保留所有权利。"
   },
+  "statusChip": {
+    "new": "新",
+    "preview": "预览",
+    "updated": "更新"
+  },
   "themes": {
     "theme": "主题",
     "custom": "自定义",
