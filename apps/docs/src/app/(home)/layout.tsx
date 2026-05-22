@@ -4,6 +4,7 @@ import {HomeLayout} from "fumadocs-ui/layouts/home";
 
 import {baseOptions, homeLayoutLinks} from "@/app/layout.config";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
+import {SearchToggle} from "@/components/fumadocs/ui/search-toggle";
 import {GitHubLinkSmall} from "@/components/github-link";
 
 export default function Layout({children}: {children: ReactNode}) {
@@ -19,11 +20,27 @@ export default function Layout({children}: {children: ReactNode}) {
               <GitHubLinkSmall />
             </div>
           ),
-          on: "all" as const,
+          on: "nav" as const,
+          secondary: true,
+          type: "custom" as const,
+        },
+        {
+          children: <GitHubLinkSmall />,
+          on: "menu" as const,
           secondary: true,
           type: "custom" as const,
         },
       ]}
+      searchToggle={{
+        components: {
+          sm: (
+            <>
+              <DesignThemeSelector />
+              <SearchToggle hideIfDisabled className="p-2" />
+            </>
+          ),
+        },
+      }}
       themeSwitch={{
         mode: "light-dark-system",
       }}
