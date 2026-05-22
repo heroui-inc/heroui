@@ -2,9 +2,9 @@ import type {BreadcrumbProps, FooterProps} from "./client";
 import type {AnchorProviderProps, TOCItemType} from "fumadocs-core/toc";
 import type {ComponentProps, ReactNode} from "react";
 
+import {TOCProvider, TOCScrollArea} from "fumadocs-ui/components/toc";
 import * as TocClerk from "fumadocs-ui/components/toc/clerk";
 import * as TocDefault from "fumadocs-ui/components/toc/default";
-import {TOCProvider, TOCScrollArea} from "fumadocs-ui/components/toc/index";
 import {buttonVariants} from "fumadocs-ui/components/ui/button";
 import {I18nLabel} from "fumadocs-ui/contexts/i18n";
 

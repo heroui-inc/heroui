@@ -58,12 +58,12 @@
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
-    "@tailwindcss/cli": "4.1.18",
+    "@tailwindcss/cli": "4.3.0",
     "@types/fs-extra": "11.0.4",
     "clean-package": "2.2.0",
     "fs-extra": "11.3.3",
     "rimraf": "6.1.2",
-    "tailwindcss": "4.1.18",
+    "tailwindcss": "4.3.0",
     "typescript": "5.8.3"
   },
   "peerDependencies": {

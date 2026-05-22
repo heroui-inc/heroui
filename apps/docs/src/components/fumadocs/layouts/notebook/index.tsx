@@ -2,13 +2,13 @@ import type {LayoutHeaderTabsProps} from "./client";
 import type {LinkItemType} from "@/components/fumadocs/ui/link-item";
 import type * as PageTree from "fumadocs-core/page-tree";
 import type {SidebarPageTreeComponents} from "fumadocs-ui/components/sidebar/page-tree";
+import type {GetSidebarTabsOptions} from "fumadocs-ui/components/sidebar/tabs";
 import type {SidebarTabWithProps} from "fumadocs-ui/components/sidebar/tabs/dropdown";
-import type {GetSidebarTabsOptions} from "fumadocs-ui/components/sidebar/tabs/index";
 import type {BaseLayoutProps} from "fumadocs-ui/layouts/shared";
 import type {ComponentProps, FC, HTMLAttributes, ReactNode} from "react";
 
 import Link from "fumadocs-core/link";
-import {getSidebarTabs} from "fumadocs-ui/components/sidebar/tabs/index";
+import {getSidebarTabs} from "fumadocs-ui/components/sidebar/tabs";
 import {buttonVariants} from "fumadocs-ui/components/ui/button";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {resolveLinkItems} from "fumadocs-ui/layouts/shared";

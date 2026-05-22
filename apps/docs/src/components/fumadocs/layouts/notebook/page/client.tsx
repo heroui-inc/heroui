@@ -9,7 +9,7 @@ import {getBreadcrumbItemsFromPath} from "fumadocs-core/breadcrumb";
 import {usePathname} from "fumadocs-core/framework";
 import Link from "fumadocs-core/link";
 import {useActiveAnchor} from "fumadocs-core/toc";
-import {useTOCItems} from "fumadocs-ui/components/toc/index";
+import {useTOCItems} from "fumadocs-ui/components/toc";
 import {
   Collapsible,
   CollapsibleContent,
