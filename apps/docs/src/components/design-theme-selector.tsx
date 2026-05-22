@@ -1,6 +1,7 @@
 "use client";
 
 import type {ThemeId} from "@/app/themes/constants";
+import type {ButtonProps} from "@heroui/react";
 import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
@@ -62,7 +63,11 @@ function applyTheme(themeId: string) {
   removeThemeCssLink();
 }
 
-export function DesignThemeSelector() {
+export function DesignThemeSelector({
+  triggerVariant = "tertiary",
+}: {
+  triggerVariant?: ButtonProps["variant"];
+}) {
   const [active, setActive] = useState("default");
   const [mounted, setMounted] = useState(false);
 
@@ -130,7 +135,7 @@ export function DesignThemeSelector() {
           <Button
             aria-label="Design theme"
             size="sm"
-            variant="tertiary"
+            variant={triggerVariant}
             className={cn(
               "text-xs text-muted",
               showAvatar &&

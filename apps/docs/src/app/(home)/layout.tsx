@@ -16,7 +16,7 @@ export default function Layout({children}: {children: ReactNode}) {
         {
           children: (
             <div className="flex items-center gap-1.5">
-              <DesignThemeSelector />
+              <DesignThemeSelector triggerVariant="ghost" />
               <GitHubLinkSmall />
             </div>
           ),
@@ -35,7 +35,7 @@ export default function Layout({children}: {children: ReactNode}) {
         components: {
           sm: (
             <>
-              <DesignThemeSelector />
+              <DesignThemeSelector triggerVariant="ghost" />
               <SearchToggle hideIfDisabled className="p-2" />
             </>
           ),
