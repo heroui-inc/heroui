@@ -98,7 +98,8 @@ export function ComponentItem({
   status,
 }: ComponentItemProps) {
   const {href, title} = component;
-  const imageName = title.toLowerCase();
+  // to cater chinese component title: <English> <Chinese>
+  const imageName = title.toLowerCase().split(" ")[0];
   const lightSrc = `${CDN_URL}/docs/related-components/light-${imageName}.png`;
   const darkSrc = `${CDN_URL}/docs/related-components/dark-${imageName}.png`;
 
