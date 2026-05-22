@@ -35,6 +35,15 @@
   "footer": {
     "allRightsReserved": "All rights reserved."
   },
+  "newsletter": {
+    "label": "Hero Newsletter",
+    "placeholder": "name@email.com",
+    "subscribe": "Subscribe",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email.",
+    "apiError": "Failed to subscribe newsletter",
+    "genericError": "Something went wrong. Please try again."
+  },
   "statusChip": {
     "new": "New",
     "preview": "Preview",

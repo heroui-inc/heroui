@@ -5,7 +5,10 @@ import {AnimatePresence, LazyMotion, domAnimation} from "motion/react";
 import * as m from "motion/react-m";
 import React from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 export function NewsletterForm() {
+  const dict = useDictionary().newsletter;
   const [email, setEmail] = React.useState("");
   const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [apiErrorMessage, setApiErrorMessage] = React.useState<string | null>(null);
@@ -22,8 +25,8 @@ export function NewsletterForm() {
   );
 
   const subscribeButton = {
-    error: "Subscribe",
-    idle: "Subscribe",
+    error: dict.subscribe,
+    idle: dict.subscribe,
     loading: (
       <div className="flex w-full items-center justify-center">
         <Spinner color="current" size="sm" />
@@ -66,7 +69,7 @@ export function NewsletterForm() {
       const newsletterResData = await newsletterResponse.json();
 
       if (!newsletterResData.success) {
-        throw new Error(newsletterResData.error || "Failed to subscribe newsletter");
+        throw new Error(newsletterResData.error || dict.apiError);
       }
 
       // Temporarily disable changelog subscription
@@ -92,9 +95,7 @@ export function NewsletterForm() {
       setTimeout(() => setStatus("idle"), 3000);
     } catch (error) {
       setStatus("error");
-      setApiErrorMessage(
-        error instanceof Error ? error.message : "Something went wrong. Please try again.",
-      );
+      setApiErrorMessage(error instanceof Error ? error.message : dict.genericError);
       setTimeout(() => setStatus("idle"), 3000);
     }
   };
@@ -112,11 +113,11 @@ export function NewsletterForm() {
             value={email}
             validate={(value) => {
               if (!value) {
-                return "Email is required";
+                return dict.emailRequired;
               }
 
               if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                return "Please enter a valid email.";
+                return dict.emailInvalid;
               }
 
               return null;
@@ -124,9 +125,9 @@ export function NewsletterForm() {
             onChange={setEmail}
           >
             <Label className="pb-1 text-sm font-medium tracking-[-0.07px] after:hidden">
-              Hero Newsletter
+              {dict.label}
             </Label>
-            <Input placeholder="name@email.com" value={email} />
+            <Input placeholder={dict.placeholder} value={email} />
             <FieldError className="mt-1 px-1 text-xs" />
             {apiErrorMessage && status === "error" ? (
               <p className="mt-1 px-1 text-xs text-danger">{apiErrorMessage}</p>

@@ -35,6 +35,15 @@
   "footer": {
     "allRightsReserved": "保留所有权利。"
   },
+  "newsletter": {
+    "label": "Hero 新闻通讯",
+    "placeholder": "name@email.com",
+    "subscribe": "订阅",
+    "emailRequired": "请输入邮箱地址",
+    "emailInvalid": "请输入有效的邮箱地址。",
+    "apiError": "订阅失败，请稍后再试",
+    "genericError": "出现错误，请稍后再试。"
+  },
   "statusChip": {
     "new": "新",
     "preview": "预览",
