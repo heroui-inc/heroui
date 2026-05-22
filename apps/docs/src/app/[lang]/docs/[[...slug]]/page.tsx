@@ -34,9 +34,11 @@ import {
 
 const componentStatusIcons = ["preview", "new", "updated"];
 
-async function getRawMDXContent(pagePath: string, locale: string): Promise<string> {
+async function getRawMDXContent(pagePath: string): Promise<string> {
   try {
-    const filePath = join(process.cwd(), "content/docs", locale, pagePath);
+    // `page.path` already includes the locale prefix when using
+    // `parser: "dir"`, so we must not prepend the locale again.
+    const filePath = join(process.cwd(), "content/docs", pagePath);
 
     return await readFile(filePath, "utf-8");
   } catch {
@@ -62,7 +64,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
   // });
 
   // Read raw MDX content for frontmatter extraction
-  const rawContent = await getRawMDXContent(page.path, params.lang);
+  const rawContent = await getRawMDXContent(page.path);
 
   // Extract links from MDX content
   const links = extractLinksFromMDX(rawContent);
@@ -160,7 +162,7 @@ export async function generateMetadata(props: {
   if (!page) notFound();
 
   // Read raw MDX to extract image from frontmatter
-  const rawContent = await getRawMDXContent(page.path, params.lang);
+  const rawContent = await getRawMDXContent(page.path);
   const frontmatterImage = extractImageFromMDX(rawContent);
 
   // Determine image URL
