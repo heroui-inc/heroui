@@ -35,6 +35,15 @@
   "footer": {
     "allRightsReserved": "All rights reserved."
   },
+  "themes": {
+    "theme": "Theme",
+    "custom": "Custom",
+    "designTheme": "Design theme",
+    "editTheme": "Edit theme",
+    "vibrantPalette": "Vibrant palette",
+    "vibrantPaletteDescription": "More saturated, less contrast",
+    "pickRandomHint": "Press {kbd} to pick random"
+  },
   "pageActions": {
     "copyMarkdown": "Copy Markdown",
     "copied": "Copied",

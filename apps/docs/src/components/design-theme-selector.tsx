@@ -1,6 +1,7 @@
 "use client";
 
 import type {ThemeId} from "@/app/themes/constants";
+import type {Dictionary} from "@/lib/dictionaries";
 import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
@@ -63,7 +64,7 @@ function applyTheme(themeId: string) {
   removeThemeCssLink();
 }
 
-export function DesignThemeSelector() {
+export function DesignThemeSelector({dict}: {dict: Dictionary["themes"]}) {
   const [active, setActive] = useState("default");
   const [vibrant, setVibrant] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -148,7 +149,7 @@ export function DesignThemeSelector() {
       <Popover>
         <Popover.Trigger>
           <Button
-            aria-label="Design theme"
+            aria-label={dict.designTheme}
             size="sm"
             variant="tertiary"
             className={cn(
@@ -169,13 +170,13 @@ export function DesignThemeSelector() {
             ) : (
               <BucketPaint className="size-3.5 text-foreground" />
             )}
-            <span className="hidden sm:inline">{showAvatar ? current.label : "Theme"}</span>
+            <span className="hidden sm:inline">{showAvatar ? current.label : dict.theme}</span>
           </Button>
         </Popover.Trigger>
         <Popover.Content className="w-[248px] rounded-3xl" placement="bottom">
           <Popover.Dialog className="p-4">
             <ListBox
-              aria-label="Design theme"
+              aria-label={dict.designTheme}
               className="grid grid-cols-4 gap-3"
               items={THEMES}
               layout="grid"
@@ -213,8 +214,10 @@ export function DesignThemeSelector() {
             <div className="mt-4 border-t border-separator pt-4">
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-0.5">
-                  <Label className="text-xs">Vibrant palette</Label>
-                  <Description className="text-[10px]">More saturated, less contrast</Description>
+                  <Label className="text-xs">{dict.vibrantPalette}</Label>
+                  <Description className="text-[10px]">
+                    {dict.vibrantPaletteDescription}
+                  </Description>
                 </div>
                 <Switch isSelected={vibrant} onChange={handleVibrantToggle}>
                   <Switch.Control>
@@ -233,7 +236,7 @@ export function DesignThemeSelector() {
               })}
             >
               <Palette className="size-4" />
-              Edit theme
+              {dict.editTheme}
             </LinkRoot>
           </Popover.Dialog>
         </Popover.Content>

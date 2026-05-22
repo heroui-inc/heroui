@@ -1,6 +1,7 @@
 "use client";
 
 import type {ThemeId} from "../constants";
+import type {Dictionary} from "@/lib/dictionaries";
 
 import {BucketPaint, ChevronsExpandVertical} from "@gravity-ui/icons";
 import {Description, InputGroup, Kbd, Label, ListBox, Popover, Switch} from "@heroui/react";
@@ -12,7 +13,9 @@ import {cn} from "@/utils/cn";
 import {findMatchingTheme, themeValuesById, themes} from "../constants";
 import {useVariablesState} from "../hooks/use-variables-state";
 
-export function ThemePopover() {
+export function ThemePopover({dict}: {dict: Dictionary["themes"]}) {
+  const [pickRandomPrefix, pickRandomSuffix] = dict.pickRandomHint.split("{kbd}");
+
   const [variables, setVariables] = useVariablesState();
   const currentThemeId = findMatchingTheme(variables);
   const currentTheme = currentThemeId ? themes.find((t) => t.id === currentThemeId) : undefined;
@@ -44,7 +47,7 @@ export function ThemePopover() {
   return (
     <Popover>
       <div className="flex flex-col gap-1">
-        <Label>Theme</Label>
+        <Label>{dict.theme}</Label>
         <Popover.Trigger>
           <InputGroup className="w-40 cursor-pointer">
             <InputGroup.Prefix className="w-10">
@@ -55,7 +58,7 @@ export function ThemePopover() {
               className="max-w-20 cursor-pointer capitalize"
               id="theme"
               name="theme"
-              value={currentTheme?.label ?? "Custom"}
+              value={currentTheme?.label ?? dict.custom}
             />
             <InputGroup.Suffix className="w-10">
               <ChevronsExpandVertical className="size-3" />
@@ -66,7 +69,7 @@ export function ThemePopover() {
       <Popover.Content className="w-[228px] rounded-3xl" placement="top">
         <Popover.Dialog className="p-4">
           <ListBox
-            aria-label="Theme"
+            aria-label={dict.theme}
             className="grid grid-cols-4 gap-3"
             items={themes}
             layout="grid"
@@ -108,8 +111,8 @@ export function ThemePopover() {
           <div className="mt-4 border-t border-separator pt-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-0.5">
-                <Label className="text-xs">Vibrant palette</Label>
-                <Description className="text-[10px]">More saturated, less contrast</Description>
+                <Label className="text-xs">{dict.vibrantPalette}</Label>
+                <Description className="text-[10px]">{dict.vibrantPaletteDescription}</Description>
               </div>
               <Switch
                 isSelected={variables.vibrantPalette ?? false}
@@ -122,11 +125,11 @@ export function ThemePopover() {
             </div>
           </div>
           <p className="mt-4 text-xs text-muted">
-            Press{" "}
+            {pickRandomPrefix}
             <Kbd>
               <Kbd.Content>T</Kbd.Content>
-            </Kbd>{" "}
-            to pick random
+            </Kbd>
+            {pickRandomSuffix}
           </p>
         </Popover.Dialog>
       </Popover.Content>

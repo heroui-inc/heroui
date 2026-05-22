@@ -2,6 +2,7 @@ import {Suspense} from "react";
 
 import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {CodePanelProvider} from "@/hooks/use-code-panel";
+import {getDictionary, getRequestLocale} from "@/lib/dictionaries";
 
 import {
   AccentColorSelector,
@@ -16,7 +17,10 @@ import {Onboarding} from "./components/onboarding";
 import {ThemeBuilderContent} from "./components/theme-builder-content";
 import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
 
-export default function ThemeBuilderPage() {
+export default async function ThemeBuilderPage() {
+  const locale = await getRequestLocale();
+  const dict = await getDictionary(locale);
+
   return (
     <CodePanelProvider>
       <Suspense>
@@ -45,7 +49,7 @@ export default function ThemeBuilderPage() {
                 radiusOptions={formRadiusOptions}
                 variableKey="formRadius"
               />
-              <ThemePopover />
+              <ThemePopover dict={dict.themes} />
             </div>
           </div>
           <div className="h-20 w-full sm:hidden" />

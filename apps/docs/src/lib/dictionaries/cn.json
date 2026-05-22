@@ -35,6 +35,15 @@
   "footer": {
     "allRightsReserved": "保留所有权利。"
   },
+  "themes": {
+    "theme": "主题",
+    "custom": "自定义",
+    "designTheme": "设计主题",
+    "editTheme": "编辑主题",
+    "vibrantPalette": "鲜艳调色板",
+    "vibrantPaletteDescription": "更饱和，对比更低",
+    "pickRandomHint": "按 {kbd} 随机选择"
+  },
   "pageActions": {
     "copyMarkdown": "复制 Markdown",
     "copied": "已复制",
