@@ -27,7 +27,7 @@ export interface FontMeta {
   family: string;
 }
 
-interface ComputedThemeVars {
+export interface ComputedThemeVars {
   fullLightVars: Record<string, string>;
   fullDarkVars: Record<string, string>;
   fontMeta: FontMeta;
@@ -46,7 +46,9 @@ function getCommonVars(
   };
 }
 
-function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): ComputedThemeVars {
+export function computeThemeVars(
+  variables: ReturnType<typeof useVariablesState>[0],
+): ComputedThemeVars {
   const {base, chroma, hue, lightness} = variables;
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
   const isAdaptive = accentColor in adaptiveColors;
