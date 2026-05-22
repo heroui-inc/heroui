@@ -69,7 +69,7 @@ export default async function HomePage({params}: {params: Promise<{lang: string}
             </span>
           </a>
         </div>
-        <DemoShowcase demo={home.demo} />
+        <DemoShowcase />
       </section>
       <Footer dict={dict.footer} />
       <ProBanner />

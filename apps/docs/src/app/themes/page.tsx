@@ -2,6 +2,7 @@ import {Suspense} from "react";
 
 import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {CodePanelProvider} from "@/hooks/use-code-panel";
+import {DictionaryProvider} from "@/hooks/use-dictionary";
 import {getDictionary, getRequestLocale} from "@/lib/dictionaries";
 
 import {
@@ -22,42 +23,44 @@ export default async function ThemeBuilderPage() {
   const dict = await getDictionary(locale);
 
   return (
-    <CodePanelProvider>
-      <Suspense>
-        <div
-          className="grid h-dvh grid-rows-[auto_1fr_auto] bg-background px-4 sm:overflow-hidden sm:px-6"
-          id={THEME_BUILDER_PAGE_ID}
-        >
-          <BuilderHeader />
-          <ThemeBuilderContent />
-          <div className="mx-auto hidden items-center justify-between gap-4 py-6 max-[1200px]:flex-col sm:flex">
-            <div className="flex items-center gap-4">
-              <AccentColorSelector />
-              <BaseColorSlider />
-              <FontFamilyPopover />
+    <DictionaryProvider dict={dict}>
+      <CodePanelProvider>
+        <Suspense>
+          <div
+            className="grid h-dvh grid-rows-[auto_1fr_auto] bg-background px-4 sm:overflow-hidden sm:px-6"
+            id={THEME_BUILDER_PAGE_ID}
+          >
+            <BuilderHeader />
+            <ThemeBuilderContent />
+            <div className="mx-auto hidden items-center justify-between gap-4 py-6 max-[1200px]:flex-col sm:flex">
+              <div className="flex items-center gap-4">
+                <AccentColorSelector />
+                <BaseColorSlider />
+                <FontFamilyPopover />
+              </div>
+              <div className="flex items-center gap-4">
+                <RadiusPopover
+                  description="Affects the overall UI, like menus and modals"
+                  label="Radius"
+                  radiusOptions={radiusOptions}
+                  variableKey="radius"
+                />
+                <RadiusPopover
+                  description="Affects form elements, like inputs and selects"
+                  label="Radius Form"
+                  radiusOptions={formRadiusOptions}
+                  variableKey="formRadius"
+                />
+                <ThemePopover />
+              </div>
             </div>
-            <div className="flex items-center gap-4">
-              <RadiusPopover
-                description="Affects the overall UI, like menus and modals"
-                label="Radius"
-                radiusOptions={radiusOptions}
-                variableKey="radius"
-              />
-              <RadiusPopover
-                description="Affects form elements, like inputs and selects"
-                label="Radius Form"
-                radiusOptions={formRadiusOptions}
-                variableKey="formRadius"
-              />
-              <ThemePopover dict={dict.themes} />
-            </div>
+            <div className="h-20 w-full sm:hidden" />
+            <MobileFooter />
           </div>
-          <div className="h-20 w-full sm:hidden" />
-          <MobileFooter />
-        </div>
-        <Onboarding />
-        <ProBanner />
-      </Suspense>
-    </CodePanelProvider>
+          <Onboarding />
+          <ProBanner />
+        </Suspense>
+      </CodePanelProvider>
+    </DictionaryProvider>
   );
 }

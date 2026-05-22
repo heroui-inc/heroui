@@ -1,6 +1,5 @@
 "use client";
 
-import type {Dictionary} from "@/lib/dictionaries";
 import type {CSSProperties} from "react";
 import type {Color} from "react-aria-components";
 
@@ -17,6 +16,7 @@ import {
   getDerivedColorFormulas,
 } from "@/app/themes/utils/generate-theme-colors";
 import {DemoComponents} from "@/components/demo";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 const tabs = [
@@ -73,7 +73,8 @@ function getAccentStyleVars(color: Color, theme: "light" | "dark"): Record<strin
 
 const LOADER_DURATION_MS = 250;
 
-export function DemoShowcase({demo}: {demo: Dictionary["home"]["demo"]}) {
+export function DemoShowcase() {
+  const demo = useDictionary().home.demo;
   const [selectedTab, setSelectedTab] = useState("components");
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const [iframeLoading, setIframeLoading] = useState(true);

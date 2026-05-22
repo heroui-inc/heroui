@@ -1,19 +1,20 @@
 "use client";
 
 import type {ThemeId} from "../constants";
-import type {Dictionary} from "@/lib/dictionaries";
 
 import {BucketPaint, ChevronsExpandVertical} from "@gravity-ui/icons";
 import {Description, InputGroup, Kbd, Label, ListBox, Popover, Switch} from "@heroui/react";
 import Image from "next/image";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import useKeyPress from "@/hooks/use-key-press";
 import {cn} from "@/utils/cn";
 
 import {findMatchingTheme, themeValuesById, themes} from "../constants";
 import {useVariablesState} from "../hooks/use-variables-state";
 
-export function ThemePopover({dict}: {dict: Dictionary["themes"]}) {
+export function ThemePopover() {
+  const dict = useDictionary().themes;
   const [pickRandomPrefix, pickRandomSuffix] = dict.pickRandomHint.split("{kbd}");
 
   const [variables, setVariables] = useVariablesState();

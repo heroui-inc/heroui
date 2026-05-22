@@ -12,7 +12,6 @@ import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
 import {GitHubLinkSmall} from "@/components/github-link";
 import {HeroUILogo} from "@/components/heroui-logo";
 import {VersionSelector} from "@/components/version-selector";
-import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {source} from "@/lib/source";
 
 const DOCS_TOP_BANNER_HEIGHT = "2rem";
@@ -32,7 +31,6 @@ export default async function Layout({
     : undefined;
 
   const {lang} = await params;
-  const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
 
   return (
     <>
@@ -88,7 +86,7 @@ export default async function Layout({
           ...baseOptions.nav,
           children: (
             <div className="mr-2 flex items-center gap-3 md:mr-0" id="nd-nav-actions">
-              <DesignThemeSelector dict={dict.themes} />
+              <DesignThemeSelector />
               <GitHubLinkSmall />
             </div>
           ),

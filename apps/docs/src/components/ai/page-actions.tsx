@@ -1,13 +1,12 @@
 "use client";
 
-import type {Dictionary} from "@/lib/dictionaries";
-
 import {Button, ButtonGroup, Description, Dropdown, Label} from "@heroui/react";
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
 import {ChevronDown} from "lucide-react";
 import {useMemo, useState} from "react";
 import {cn} from "tailwind-variants";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {ClaudeIcon, CursorIcon, MarkdownIcon, OpenAIIcon, VSCodeIcon} from "@/icons/dev";
 import {__DEV__} from "@/utils/env";
 
@@ -34,9 +33,8 @@ function markdownUrlToSlug(markdownUrl: string): string {
   return slug || "index";
 }
 
-export type PageActionsDict = Dictionary["pageActions"];
-
-export function ViewOptions({dict, markdownUrl}: {dict: PageActionsDict; markdownUrl: string}) {
+export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
+  const dict = useDictionary().pageActions;
   const items = useMemo(() => {
     let fullMarkdownUrl = "";
 

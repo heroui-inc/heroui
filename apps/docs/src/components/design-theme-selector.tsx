@@ -1,7 +1,6 @@
 "use client";
 
 import type {ThemeId} from "@/app/themes/constants";
-import type {Dictionary} from "@/lib/dictionaries";
 import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
@@ -22,6 +21,7 @@ import netflixTheme from "@/assets/themes/netflix.png";
 import rabbitTheme from "@/assets/themes/rabbit.png";
 import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 const STORAGE_KEY = "heroui-docs-design-theme";
@@ -64,7 +64,8 @@ function applyTheme(themeId: string) {
   removeThemeCssLink();
 }
 
-export function DesignThemeSelector({dict}: {dict: Dictionary["themes"]}) {
+export function DesignThemeSelector() {
+  const dict = useDictionary().themes;
   const [active, setActive] = useState("default");
   const [vibrant, setVibrant] = useState(false);
   const [mounted, setMounted] = useState(false);

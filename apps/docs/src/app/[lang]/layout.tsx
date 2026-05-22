@@ -8,6 +8,7 @@ import {Inter} from "next/font/google";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 import {siteConfig} from "@/config/site";
+import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {getOrganizationJsonLd, getSoftwareApplicationJsonLd, getWebSiteJsonLd} from "@/lib/json-ld";
 import {source} from "@/lib/source";
 import {__BASE_URL__} from "@/utils/env";
@@ -29,6 +30,7 @@ export default async function Layout({
   params: Promise<{lang: string}>;
 }) {
   const {lang} = await params;
+  const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
 
   return (
     <html suppressHydrationWarning className={inter.variable} lang={lang}>
@@ -50,7 +52,9 @@ export default async function Layout({
         <NuqsAdapter>
           <NextProvider>
             <TreeContextProvider tree={source.getPageTree(lang)}>
-              <CustomRootProvider lang={lang}>{children}</CustomRootProvider>
+              <CustomRootProvider dict={dict} lang={lang}>
+                {children}
+              </CustomRootProvider>
             </TreeContextProvider>
           </NextProvider>
         </NuqsAdapter>

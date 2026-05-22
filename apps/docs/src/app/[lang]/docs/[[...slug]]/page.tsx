@@ -1,5 +1,4 @@
 import type {StatusChipStatus} from "@/components/status-chip";
-import type {Locale} from "@/lib/dictionaries";
 import type {Metadata} from "next";
 
 import {readFile} from "node:fs/promises";
@@ -23,8 +22,6 @@ import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
-import {getDictionary, hasLocale} from "@/lib/dictionaries";
-import {i18n} from "@/lib/i18n";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
@@ -53,9 +50,6 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
   const page = source.getPage(params.slug, params.lang);
 
   if (!page) notFound();
-
-  const locale: Locale = hasLocale(params.lang) ? params.lang : (i18n.defaultLanguage as Locale);
-  const dict = await getDictionary(locale);
 
   const MDXContent = page.data.body;
   const isComponentStatusIcon = page.data.icon && componentStatusIcons.includes(page.data.icon);
@@ -129,7 +123,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
             </DocsTitle>
             {page.data.toc.length > 0 && (
               <div className="flex items-center gap-2">
-                <ViewOptions dict={dict.pageActions} markdownUrl={`${page.url}.mdx`} />
+                <ViewOptions markdownUrl={`${page.url}.mdx`} />
               </div>
             )}
           </div>
