@@ -40,6 +40,11 @@
     "preview": "预览",
     "updated": "更新"
   },
+  "frameworksTabs": {
+    "ariaLabel": "文档框架",
+    "web": "Web",
+    "native": "Native"
+  },
   "themes": {
     "theme": "主题",
     "custom": "自定义",

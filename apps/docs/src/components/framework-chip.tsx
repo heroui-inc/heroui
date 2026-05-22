@@ -2,6 +2,7 @@
 
 import {Globe, Smartphone} from "@gravity-ui/icons";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 export function FrameworkChip({
@@ -11,9 +12,10 @@ export function FrameworkChip({
   className?: string;
   framework: "web" | "native";
 }) {
+  const dict = useDictionary().frameworksTabs;
   const isWeb = framework === "web";
   const Icon = isWeb ? Globe : Smartphone;
-  const frameworkName = isWeb ? "Web" : "Native";
+  const frameworkName = isWeb ? dict.web : dict.native;
   const colorClass = isWeb ? "text-sky-400" : "text-indigo-500";
 
   return (

@@ -9,9 +9,11 @@ import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useRef, useState} from "react";
 
 import {getDefaultRoute, useCurrentFramework} from "@/hooks/use-current-framework";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 export function FrameworksTabs({className}: {className?: string}) {
+  const dict = useDictionary().frameworksTabs;
   const pathname = usePathname();
   const router = useRouter();
   const isNavigatingRef = useRef(false);
@@ -74,15 +76,15 @@ export function FrameworksTabs({className}: {className?: string}) {
     <div className={cn("ml-auto", className)}>
       <Tabs selectedKey={selectedKey} onSelectionChange={handleTabChange}>
         <Tabs.ListContainer className="pb-1.5">
-          <Tabs.List aria-label="Documentation framework">
+          <Tabs.List aria-label={dict.ariaLabel}>
             <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-sky-400" id="web">
               <Globe className="mr-1 size-4" />
-              Web
+              {dict.web}
               <Tabs.Indicator />
             </Tabs.Tab>
             <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-indigo-500" id="native">
               <Smartphone className="mr-1 size-4" />
-              Native
+              {dict.native}
               <Tabs.Indicator />
             </Tabs.Tab>
           </Tabs.List>

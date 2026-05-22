@@ -40,6 +40,11 @@
     "preview": "Preview",
     "updated": "Updated"
   },
+  "frameworksTabs": {
+    "ariaLabel": "Documentation framework",
+    "web": "Web",
+    "native": "Native"
+  },
   "themes": {
     "theme": "Theme",
     "custom": "Custom",
