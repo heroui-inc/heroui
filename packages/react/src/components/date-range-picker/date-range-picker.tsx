@@ -219,6 +219,7 @@ const DateRangePickerPopover = ({
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}
+        data-slot="date-range-picker-popover"
         placement={placement}
       >
         {children}

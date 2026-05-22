@@ -18,40 +18,8 @@
    cannot push beyond.
    -------------------------------------------------------------------------- */
 .table__scroll-container {
-  @apply overflow-x-auto;
-  /* Custom scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: oklch(0% 0 0 / 0.15) transparent;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: oklch(0% 0 0 / 0.15);
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: oklch(0% 0 0 / 0.25);
-  }
-
-  /* Dark mode scrollbar */
-  :is([data-theme="dark"], .dark) & {
-    scrollbar-color: oklch(100% 0 0 / 0.15) transparent;
-
-    &::-webkit-scrollbar-thumb {
-      background: oklch(100% 0 0 / 0.15);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: oklch(100% 0 0 / 0.25);
-    }
-  }
+  @apply overflow-x-auto scrollbar;
+  scrollbar-gutter: auto;
 }
 
 .table-root--primary {
@@ -327,7 +295,8 @@
    Resizable Container — wraps table to enable column resizing via React Aria.
    -------------------------------------------------------------------------- */
 .table__resizable-container {
-  @apply relative overflow-auto;
+  @apply relative overflow-auto scrollbar;
+  scrollbar-gutter: auto;
 }
 
 /* --------------------------------------------------------------------------

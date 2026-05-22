@@ -777,7 +777,7 @@ export const Virtualization: Story = {
           <Table.ScrollContainer>
             <Table.Content
               aria-label="Virtualized table with 1000 rows"
-              className="h-[500px] min-w-[700px] overflow-auto"
+              className="h-[500px] min-w-[700px] overflow-auto scrollbar"
             >
               <Table.Header className="h-full w-full">
                 <Table.Column isRowHeader id="name" minWidth={160}>

@@ -2,6 +2,7 @@
 
 import {
   parseAsArrayOf,
+  parseAsBoolean,
   parseAsFloat,
   parseAsString,
   parseAsStringLiteral,
@@ -22,6 +23,7 @@ export function useVariablesState() {
       lightness: parseAsFloat.withDefault(defaultThemeVariables.lightness),
       lockedVariables: parseAsArrayOf(parseAsStringLiteral(themeVariableKeys)).withDefault([]),
       radius: parseAsStringLiteral(radiusIds).withDefault(defaultThemeVariables.radius),
+      vibrantPalette: parseAsBoolean.withDefault(false),
     },
     {
       history: "push",

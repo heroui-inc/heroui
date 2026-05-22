@@ -72,6 +72,10 @@
   --color-field-border-focus: var(--field-border-focus);
 
   /* Soft Colors */
+  --color-default-soft: var(--default-soft);
+  --color-default-soft-foreground: var(--default-soft-foreground);
+  --color-default-soft-hover: var(--default-soft-hover);
+
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-foreground: var(--accent-soft-foreground);
   --color-accent-soft-hover: var(--accent-soft-hover);

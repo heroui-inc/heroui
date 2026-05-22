@@ -56,7 +56,12 @@
 
     --muted: oklch(0.5517 0.0138 285.94);
 
-    --scrollbar: oklch(87.1% 0.006 286.286);
+    --scrollbar: var(--scrollbar-thumb);
+    --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+    --scrollbar-track: transparent;
+    --scrollbar-gutter: auto;
+    --scrollbar-width: thin;
+    --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 
     --default: oklch(94% 0.001 286.375);
     --default-foreground: var(--eclipse);
@@ -123,20 +128,24 @@
       var(--field-foreground, var(--foreground)) 22%
     );
 
+    --default-soft: color-mix(in oklab, var(--default) 50%, transparent);
+    --default-soft-foreground: var(--default-foreground);
+    --default-soft-hover: color-mix(in oklab, var(--default) 60%, transparent);
+
     --accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
-    --accent-soft-foreground: var(--accent);
+    --accent-soft-foreground: color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%);
     --accent-soft-hover: color-mix(in oklab, var(--accent) 20%, transparent);
 
     --danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
-    --danger-soft-foreground: var(--danger);
+    --danger-soft-foreground: color-mix(in oklab, var(--danger) 70%, var(--foreground) 40%);
     --danger-soft-hover: color-mix(in oklab, var(--danger) 20%, transparent);
 
     --warning-soft: color-mix(in oklab, var(--warning) 15%, transparent);
-    --warning-soft-foreground: var(--warning);
+    --warning-soft-foreground: color-mix(in oklab, var(--warning) 80%, var(--foreground) 70%);
     --warning-soft-hover: color-mix(in oklab, var(--warning) 20%, transparent);
 
     --success-soft: color-mix(in oklab, var(--success) 15%, transparent);
-    --success-soft-foreground: var(--success);
+    --success-soft-foreground: color-mix(in oklab, var(--success) 80%, var(--foreground) 60%);
     --success-soft-hover: color-mix(in oklab, var(--success) 20%, transparent);
 
     --separator-secondary: color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%);
@@ -183,7 +192,12 @@
 
     --muted: oklch(70.5% 0.015 286.067);
 
-    --scrollbar: oklch(70.5% 0.015 286.067);
+    --scrollbar: var(--scrollbar-thumb);
+    --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+    --scrollbar-track: transparent;
+    --scrollbar-gutter: auto;
+    --scrollbar-width: thin;
+    --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 
     --default: oklch(27.4% 0.006 286.033);
     --default-foreground: var(--snow);
@@ -216,5 +230,77 @@
     --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
     --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
     --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
+
+    /* Calculated Colors */
+    --surface-hover: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
+
+    --background-secondary: color-mix(in oklab, var(--background) 96%, var(--foreground) 4%);
+    --background-tertiary: color-mix(in oklab, var(--background) 92%, var(--foreground) 8%);
+    --background-inverse: var(--foreground);
+
+    --default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
+    --accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+    --success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
+    --warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
+    --danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+
+    --field-hover: color-mix(
+      in oklab,
+      var(--field-background, var(--default)) 90%,
+      var(--field-foreground, var(--foreground)) 2%
+    );
+    --field-focus: var(--field-background, var(--default));
+    --field-border-hover: color-mix(
+      in oklab,
+      var(--field-border, var(--border)) 88%,
+      var(--field-foreground, var(--foreground)) 10%
+    );
+    --field-border-focus: color-mix(
+      in oklab,
+      var(--field-border, var(--border)) 74%,
+      var(--field-foreground, var(--foreground)) 22%
+    );
+
+    --default-soft: color-mix(in oklab, var(--default) 50%, transparent);
+    --default-soft-foreground: var(--default-foreground);
+    --default-soft-hover: color-mix(in oklab, var(--default) 60%, transparent);
+
+    --accent-soft: color-mix(in oklab, var(--accent) 12%, transparent);
+    --accent-soft-foreground: color-mix(in oklab, var(--accent) 80%, var(--foreground) 30%);
+    --accent-soft-hover: color-mix(in oklab, var(--accent) 16%, transparent);
+
+    --danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
+    --danger-soft-foreground: color-mix(in oklab, var(--danger) 80%, var(--foreground) 30%);
+    --danger-soft-hover: color-mix(in oklab, var(--danger) 20%, transparent);
+
+    --warning-soft: color-mix(in oklab, var(--warning) 12%, transparent);
+    --warning-soft-foreground: color-mix(in oklab, var(--warning) 80%, var(--foreground) 30%);
+    --warning-soft-hover: color-mix(in oklab, var(--warning) 16%, transparent);
+
+    --success-soft: color-mix(in oklab, var(--success) 12%, transparent);
+    --success-soft-foreground: color-mix(in oklab, var(--success) 80%, var(--foreground) 30%);
+    --success-soft-hover: color-mix(in oklab, var(--success) 16%, transparent);
+
+    --separator-secondary: color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%);
+    --separator-tertiary: color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%);
+
+    --border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+    --border-tertiary: color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%);
+  }
+
+  /* Vibrant palette - more saturated soft foregrounds, less contrast */
+  [data-vibrant-palette="true"]:not(.dark):not([data-theme="dark"]) {
+    --accent-soft-foreground: color-mix(in oklab, var(--accent) 92%, var(--foreground) 8%);
+    --danger-soft-foreground: color-mix(in oklab, var(--danger) 92%, var(--foreground) 8%);
+    --warning-soft-foreground: color-mix(in oklab, var(--warning) 92%, var(--foreground) 8%);
+    --success-soft-foreground: color-mix(in oklab, var(--success) 92%, var(--foreground) 8%);
+  }
+
+  [data-vibrant-palette="true"].dark,
+  [data-vibrant-palette="true"][data-theme="dark"] {
+    --accent-soft-foreground: color-mix(in oklab, var(--accent) 92%, var(--foreground) 8%);
+    --danger-soft-foreground: color-mix(in oklab, var(--danger) 92%, var(--foreground) 8%);
+    --warning-soft-foreground: color-mix(in oklab, var(--warning) 92%, var(--foreground) 8%);
+    --success-soft-foreground: color-mix(in oklab, var(--success) 92%, var(--foreground) 8%);
   }
 }

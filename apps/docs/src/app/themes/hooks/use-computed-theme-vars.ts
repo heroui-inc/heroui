@@ -16,7 +16,7 @@ import {
   calculateAccentForeground,
   generateThemeColors,
   getColorVariablesForElement,
-  getDerivedColorVariables,
+  getDerivedColorFormulas,
   parseOklch,
   radiusDerivedVariables,
 } from "../utils/generate-theme-colors";
@@ -96,6 +96,8 @@ export function computeThemeVars(variables: ThemeValues): ComputedThemeVars {
     fontVariable,
   );
 
+  const derivedOpts = {vibrant: variables.vibrantPalette ?? false};
+
   if (isAdaptive) {
     const adaptiveConfig = adaptiveColors[accentColor]!;
     const lightAccent = parseOklch(adaptiveConfig.light);
@@ -112,26 +114,28 @@ export function computeThemeVars(variables: ThemeValues): ComputedThemeVars {
     const lightVars = getColorVariablesForElement(colors, "light");
     const darkVars = getColorVariablesForElement(colors, "dark");
 
-    const lightAccentVars = {
+    const lightAccentVars: Record<string, string> = {
       "--accent": adaptiveConfig.light,
       "--accent-foreground": lightFg,
+      "--accent-soft-foreground": adaptiveConfig.light,
       "--focus": adaptiveConfig.light,
     };
-    const darkAccentVars = {
+    const darkAccentVars: Record<string, string> = {
       "--accent": adaptiveConfig.dark,
       "--accent-foreground": darkFg,
+      "--accent-soft-foreground": adaptiveConfig.dark,
       "--focus": adaptiveConfig.dark,
     };
 
     const colorLightVars = {
       ...lightVars,
+      ...getDerivedColorFormulas("light", derivedOpts),
       ...lightAccentVars,
-      ...getDerivedColorVariables({...lightVars, ...lightAccentVars}),
     };
     const colorDarkVars = {
       ...darkVars,
+      ...getDerivedColorFormulas("dark", derivedOpts),
       ...darkAccentVars,
-      ...getDerivedColorVariables({...darkVars, ...darkAccentVars}),
     };
 
     return {
@@ -152,8 +156,8 @@ export function computeThemeVars(variables: ThemeValues): ComputedThemeVars {
   const lightVars = getColorVariablesForElement(colors, "light");
   const darkVars = getColorVariablesForElement(colors, "dark");
 
-  const colorLightVars = {...lightVars, ...getDerivedColorVariables(lightVars)};
-  const colorDarkVars = {...darkVars, ...getDerivedColorVariables(darkVars)};
+  const colorLightVars = {...lightVars, ...getDerivedColorFormulas("light", derivedOpts)};
+  const colorDarkVars = {...darkVars, ...getDerivedColorFormulas("dark", derivedOpts)};
 
   return {
     fontMeta,

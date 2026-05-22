@@ -9,7 +9,7 @@
  * Base RangeCalendar Styles
  * -------------------------------------------------------------------------- */
 .range-calendar {
-  @apply w-63 max-w-full;
+  @apply w-63 max-w-63;
 
   container-type: inline-size;
 }
@@ -169,7 +169,16 @@
   /* Today indicator */
   &[data-today="true"] {
     .range-calendar__cell-button {
-      @apply text-accent-soft-foreground;
+      @apply bg-accent-soft text-accent-soft-foreground;
+    }
+
+    @media (hover: hover) {
+      &:hover:not([data-selected="true"]),
+      &[data-hovered="true"]:not([data-selected="true"]) {
+        .range-calendar__cell-button {
+          @apply bg-accent-soft-hover;
+        }
+      }
     }
   }
 

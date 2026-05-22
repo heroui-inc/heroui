@@ -187,6 +187,7 @@ const DatePickerPopover = ({
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}
+        data-slot="date-picker-popover"
         placement={placement}
       >
         {children}

@@ -56,15 +56,15 @@
 }
 
 .badge--success {
-  --badge-fg: var(--success);
+  --badge-fg: var(--success-soft-foreground);
 }
 
 .badge--warning {
-  --badge-fg: var(--warning);
+  --badge-fg: var(--warning-soft-foreground);
 }
 
 .badge--danger {
-  --badge-fg: var(--danger);
+  --badge-fg: var(--danger-soft-foreground);
 }
 
 /* ==========================================================================
@@ -146,8 +146,8 @@
 }
 
 .badge--soft.badge--default {
-  --badge-bg: var(--default);
-  --badge-fg: var(--default-foreground);
+  --badge-bg: var(--default-soft);
+  --badge-fg: var(--default-soft-foreground);
 }
 
 .badge--soft.badge--success {
