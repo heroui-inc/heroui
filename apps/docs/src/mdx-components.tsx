@@ -39,12 +39,12 @@ const Star = (props: any) => <Iconify {...props} icon="star-fill" />;
 
 const Icon = (props: any) => <Iconify {...props} />;
 
-function ComponentCount() {
-  return <>{getComponentCount()}</>;
+function ComponentCount({locale}: {locale?: string} = {}) {
+  return <>{getComponentCount(locale)}</>;
 }
 
-function ExampleCount() {
-  return <>{getExampleCount()}</>;
+function ExampleCount({locale}: {locale?: string} = {}) {
+  return <>{getExampleCount(locale)}</>;
 }
 
 const MAX_LINES_FOR_LINE_NUMBERS = 20;

@@ -104,7 +104,7 @@ ${header}
   }
 
   // First, process MDX content to replace ComponentPreview, CollapsibleCode, etc.
-  const processedContent = await processMDXContent(rawContent);
+  const processedContent = await processMDXContent(rawContent, page.locale);
 
   // Then process with remark to convert MDX to markdown
   const processed = await processor.process({
@@ -130,7 +130,7 @@ ${finalContent}
 const COMPONENT_PREVIEW_REGEX = /<ComponentPreview\s+name\s*=\s*["']([^"']+)["'][^/>]*\/>/g;
 const REGEX_ESCAPE = /[.*+?^${}()|[\]\\]/g;
 
-async function replaceComponentPreview(content: string): Promise<string> {
+async function replaceComponentPreview(content: string, lang?: string): Promise<string> {
   const matches = Array.from(content.matchAll(COMPONENT_PREVIEW_REGEX));
 
   if (matches.length === 0) return content;
@@ -144,7 +144,7 @@ async function replaceComponentPreview(content: string): Promise<string> {
         return {match: fullMatch, replacement: fullMatch};
       }
 
-      const demo = getDemo(demoName);
+      const demo = getDemo(demoName, lang);
 
       if (!demo?.file) {
         return {match: fullMatch, replacement: fullMatch};
@@ -271,10 +271,10 @@ function cleanContentForLLM(content: string): string {
   return processed;
 }
 
-async function processMDXContent(content: string): Promise<string> {
+async function processMDXContent(content: string, lang?: string): Promise<string> {
   let processed = replaceCollapsibleCode(content);
 
-  processed = await replaceComponentPreview(processed);
+  processed = await replaceComponentPreview(processed, lang);
   processed = replaceRelatedComponents(processed);
   processed = cleanContentForLLM(processed);
 
@@ -301,7 +301,7 @@ ${header}
 </page>`;
   }
 
-  const processedContent = await processMDXContent(rawContent);
+  const processedContent = await processMDXContent(rawContent, page.locale);
 
   if (!processedContent.trim()) {
     return `<page url="${url}">

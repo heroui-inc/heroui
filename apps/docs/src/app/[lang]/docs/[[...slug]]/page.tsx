@@ -9,6 +9,7 @@ import {notFound} from "next/navigation";
 
 import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
+import {ComponentPreview} from "@/components/component-preview";
 import {ComponentsCategory} from "@/components/components-category";
 import {
   DocsBody,
@@ -22,6 +23,7 @@ import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
+import {getComponentCount, getExampleCount} from "@/demos";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
@@ -135,7 +137,10 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
         <DocsBody className="prose-sm">
           <MDXContent
             components={getMDXComponents({
+              ComponentCount: () => <>{getComponentCount(params.lang)}</>,
+              ComponentPreview: (props) => <ComponentPreview {...props} locale={params.lang} />,
               ComponentsCategory: (props) => <ComponentsCategory {...props} locale={params.lang} />,
+              ExampleCount: () => <>{getExampleCount(params.lang)}</>,
               NativeComponentsCategory: (props) => (
                 <NativeComponentsCategory {...props} locale={params.lang} />
               ),
