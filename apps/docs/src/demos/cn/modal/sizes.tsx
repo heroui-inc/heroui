@@ -1,0 +1,67 @@
+"use client";
+
+import {Rocket} from "@gravity-ui/icons";
+import {Button, Modal} from "@heroui/react";
+
+const SIZE_LABELS = {
+  cover: "通栏",
+  full: "全屏",
+  lg: "大",
+  md: "中",
+  sm: "小",
+  xs: "超小",
+} as const;
+
+export function Sizes() {
+  const sizes = ["xs", "sm", "md", "lg", "cover", "full"] as const;
+
+  return (
+    <div className="flex flex-wrap gap-4">
+      {sizes.map((size) => (
+        <Modal key={size}>
+          <Button variant="secondary">{SIZE_LABELS[size]}</Button>
+          <Modal.Backdrop>
+            <Modal.Container size={size}>
+              <Modal.Dialog>
+                <Modal.CloseTrigger />
+                <Modal.Header>
+                  <Modal.Icon className="bg-default text-foreground">
+                    <Rocket className="size-5" />
+                  </Modal.Icon>
+                  <Modal.Heading>尺寸：{SIZE_LABELS[size]}</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>
+                  <p>
+                    {size === "cover" ? (
+                      <>
+                        此模态框使用 <code>cover</code> 尺寸：在移动端与桌面端保留边距（移动端约
+                        16px、桌面端约
+                        40px）铺满可视区域，仍保持圆角与标准内边距，适合需要最大宽度又保留模态框气质的内容展示。
+                      </>
+                    ) : size === "full" ? (
+                      <>
+                        此模态框使用 <code>full</code>{" "}
+                        尺寸，占满整个视口，无边距、圆角或阴影，提供真正的全屏体验，适合沉浸式内容或全页交互。
+                      </>
+                    ) : (
+                      <>
+                        此模态框使用 <code>{size}</code>{" "}
+                        尺寸。在移动端各尺寸都会接近全宽以便阅读；在桌面端则对应不同的最大宽度，以适配不同信息量。
+                      </>
+                    )}
+                  </p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button slot="close" variant="secondary">
+                    取消
+                  </Button>
+                  <Button slot="close">确认</Button>
+                </Modal.Footer>
+              </Modal.Dialog>
+            </Modal.Container>
+          </Modal.Backdrop>
+        </Modal>
+      ))}
+    </div>
+  );
+}
