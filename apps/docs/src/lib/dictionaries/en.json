@@ -32,6 +32,9 @@
     "description": "Sorry, the page you're looking for could not be found.",
     "returnHome": "Return Home"
   },
+  "footer": {
+    "allRightsReserved": "All rights reserved."
+  },
   "pageActions": {
     "copyMarkdown": "Copy Markdown",
     "copied": "Copied",

@@ -49,7 +49,7 @@ export default async function NotFound() {
           {notFound.returnHome}
         </LinkRoot>
       </div>
-      <Footer />
+      <Footer dict={dict.footer} />
     </HomeLayout>
   );
 }

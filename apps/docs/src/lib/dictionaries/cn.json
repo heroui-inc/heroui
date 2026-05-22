@@ -32,6 +32,9 @@
     "description": "抱歉，找不到您要访问的页面。",
     "returnHome": "返回首页"
   },
+  "footer": {
+    "allRightsReserved": "保留所有权利。"
+  },
   "pageActions": {
     "copyMarkdown": "复制 Markdown",
     "copied": "已复制",
