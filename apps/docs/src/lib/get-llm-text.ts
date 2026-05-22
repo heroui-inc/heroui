@@ -13,7 +13,6 @@ import remarkMdx from "remark-mdx";
 import {getRelatedComponents} from "@/components-registry";
 import {siteConfig} from "@/config/site";
 import {getDemo} from "@/demos";
-import {i18n} from "@/lib/i18n";
 
 const processor = remark()
   .use(remarkMdx)
@@ -32,10 +31,14 @@ function normalizePagePath(pagePath: string): string {
   return pagePath.endsWith(".mdx") ? pagePath : `${pagePath}.mdx`;
 }
 
-async function getRawMDXContent(pagePath: string, locale: string): Promise<string> {
+async function getRawMDXContent(pagePath: string): Promise<string> {
   try {
     const normalizedPath = normalizePagePath(pagePath);
-    const filePath = join(process.cwd(), CONTENT_DIR, locale, normalizedPath);
+    // `page.path` already includes the locale prefix when using `parser: "dir"`
+    // (e.g. `en/react/components/(navigation)/accordion.mdx`), so we must not
+    // prepend the locale again here.
+    const filePath = join(process.cwd(), CONTENT_DIR, normalizedPath);
+
     const content = await readFile(filePath, "utf-8");
 
     if (!content.trim()) {
@@ -89,7 +92,7 @@ export async function getLLMText(page: Page) {
   const url = page.url || "";
   const normalizedPath = normalizePagePath(page.path);
 
-  const rawContent = await getRawMDXContent(page.path, page.locale ?? i18n.defaultLanguage);
+  const rawContent = await getRawMDXContent(page.path);
   const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
   if (!rawContent) {
@@ -286,7 +289,7 @@ export async function getLLMRawText(page: Page) {
   const normalizedPath = normalizePagePath(page.path);
   const header = formatLLMHeader(category, title, url, normalizedPath, description);
 
-  const rawContent = await getRawMDXContent(page.path, page.locale ?? i18n.defaultLanguage);
+  const rawContent = await getRawMDXContent(page.path);
 
   if (!rawContent) {
     return `<page url="${url}">

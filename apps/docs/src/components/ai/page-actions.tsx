@@ -27,10 +27,15 @@ function setCache(key: string, value: string) {
   cache.set(key, value);
 }
 
-function markdownUrlToSlug(markdownUrl: string): string {
-  const slug = markdownUrl.replace(/^\/docs\//, "").replace(/\.mdx$/, "");
+function parseMarkdownUrl(markdownUrl: string): {slug: string; lang?: string} {
+  const url = markdownUrl.replace(/\.mdx$/, "");
+  const match = url.match(/^\/(?:(en|cn)\/)?docs\/(.*)$/);
 
-  return slug || "index";
+  if (!match) return {slug: "index"};
+
+  const [, lang, rest] = match;
+
+  return {lang, slug: rest || "index"};
 }
 
 export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
@@ -101,9 +106,9 @@ export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
       }
     }
 
-    const slug = markdownUrlToSlug(markdownUrl);
+    const {lang, slug} = parseMarkdownUrl(markdownUrl);
     const slugArray = slug.split("/").filter(Boolean);
-    const apiUrl = `/llms-raw.mdx/${slugArray.join("/")}`;
+    const apiUrl = `/llms-raw.mdx/${[lang, ...slugArray].filter(Boolean).join("/")}`;
 
     setLoading(true);
 
