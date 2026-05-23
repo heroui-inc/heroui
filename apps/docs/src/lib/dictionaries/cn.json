@@ -192,6 +192,101 @@
       "finances": "财务"
     }
   },
+  "demos": {
+    "alert": {
+      "title": "您还剩 2 次额度",
+      "description": "升级到付费计划获取更多额度",
+      "action": "升级"
+    },
+    "alertDialog": {
+      "title": "未保存的更改",
+      "description": "您要保存还是放弃更改？",
+      "discard": "放弃",
+      "save": "保存更改"
+    },
+    "allowNotifications": {
+      "label": "允许通知",
+      "description": "接收来自 HeroUI 的推送通知"
+    },
+    "buttons": {
+      "clickMe": "点击我"
+    },
+    "inputOtp": {
+      "label": "验证账户",
+      "description": "我们已向 a****@gmail.com 发送验证码",
+      "didntReceive": "没有收到验证码？",
+      "resend": "重新发送"
+    },
+    "listBox": {
+      "ariaLabel": "文件操作",
+      "actions": "操作",
+      "newFile": "新建文件",
+      "newFileDescription": "创建一个新文件",
+      "editFile": "编辑文件",
+      "editFileDescription": "修改内容",
+      "dangerZone": "危险操作",
+      "deleteFile": "删除文件",
+      "deleteFileDescription": "移到回收站"
+    },
+    "login": {
+      "title": "创建账户",
+      "trialNote": "开始 7 天免费试用，无需信用卡。",
+      "getStarted": "立即开始",
+      "or": "或",
+      "continueWithGoogle": "使用 Google 继续",
+      "continueWithApple": "使用 Apple 继续"
+    },
+    "select": {
+      "placeholder": "请选择",
+      "label": "州",
+      "options": {
+        "florida": "佛罗里达",
+        "delaware": "特拉华",
+        "california": "加利福尼亚",
+        "texas": "得克萨斯",
+        "newYork": "纽约",
+        "washington": "华盛顿"
+      }
+    },
+    "slider": {
+      "label": "价格"
+    },
+    "subtleCards": {
+      "indieTitle": "Indie Hackers",
+      "indieMembers": "148 位成员",
+      "indieBy": "由 John 创建",
+      "aiTitle": "AI Builders",
+      "aiMembers": "362 位成员",
+      "aiBy": "由 Martha 创建"
+    },
+    "tabs1": {
+      "ariaLabel": "选项",
+      "all": "全部"
+    },
+    "tabs2": {
+      "ariaLabel": "选项",
+      "chats": "聊天",
+      "emails": "邮件"
+    },
+    "textfield": {
+      "label": "您的邮箱",
+      "placeholder": "john@email.com",
+      "description": "我们不会分享您的邮箱",
+      "error": "邮箱无效"
+    },
+    "uiComponents": {
+      "checkboxAriaLabel": "复选框指示器示例",
+      "switchAriaLabel": "开关启用状态示例",
+      "radioAriaLabel": "单选按钮示例"
+    },
+    "xProfile": {
+      "bio": "构建网页与移动端 UI 的未来。",
+      "bioSuffix": "(YC S24)",
+      "confettiLabel": "彩带",
+      "following": "正在关注",
+      "followers": "关注者"
+    }
+  },
   "pageActions": {
     "copyMarkdown": "复制 Markdown",
     "copied": "已复制",

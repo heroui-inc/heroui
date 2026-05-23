@@ -1,23 +1,30 @@
+"use client";
+
 import {Button} from "@heroui/react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 export const ButtonsDemo = () => {
+  const {demos} = useDictionary();
+  const label = demos.buttons.clickMe;
+
   return (
     <div className="grid grid-cols-3 gap-x-3 gap-y-2">
-      <Button size="sm">Click me</Button>
+      <Button size="sm">{label}</Button>
       <Button size="sm" variant="secondary">
-        Click me
+        {label}
       </Button>
       <Button size="sm" variant="tertiary">
-        Click me
+        {label}
       </Button>
       <Button size="sm" variant="danger">
-        Click me
+        {label}
       </Button>
       <Button size="sm" variant="danger-soft">
-        Click me
+        {label}
       </Button>
       <Button size="sm" variant="ghost">
-        Click me
+        {label}
       </Button>
     </div>
   );

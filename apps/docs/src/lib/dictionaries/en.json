@@ -192,6 +192,101 @@
       "finances": "Finances"
     }
   },
+  "demos": {
+    "alert": {
+      "title": "You have 2 credits left",
+      "description": "Get a paid plan for more credits",
+      "action": "Upgrade"
+    },
+    "alertDialog": {
+      "title": "Unsaved changes",
+      "description": "Do you want to save or discard changes?",
+      "discard": "Discard",
+      "save": "Save changes"
+    },
+    "allowNotifications": {
+      "label": "Allow notifications",
+      "description": "Receive push notifications from HeroUI"
+    },
+    "buttons": {
+      "clickMe": "Click me"
+    },
+    "inputOtp": {
+      "label": "Verify account",
+      "description": "We've sent a code to a****@gmail.com",
+      "didntReceive": "Didn't receive a code?",
+      "resend": "Resend"
+    },
+    "listBox": {
+      "ariaLabel": "File actions",
+      "actions": "Actions",
+      "newFile": "New file",
+      "newFileDescription": "Create a new file",
+      "editFile": "Edit file",
+      "editFileDescription": "Make changes",
+      "dangerZone": "Danger zone",
+      "deleteFile": "Delete file",
+      "deleteFileDescription": "Move to trash"
+    },
+    "login": {
+      "title": "Create an account",
+      "trialNote": "Start your free 7-day trial. No credit card required.",
+      "getStarted": "Get Started",
+      "or": "Or",
+      "continueWithGoogle": "Continue with Google",
+      "continueWithApple": "Continue with Apple"
+    },
+    "select": {
+      "placeholder": "Select one",
+      "label": "State",
+      "options": {
+        "florida": "Florida",
+        "delaware": "Delaware",
+        "california": "California",
+        "texas": "Texas",
+        "newYork": "New York",
+        "washington": "Washington"
+      }
+    },
+    "slider": {
+      "label": "Price"
+    },
+    "subtleCards": {
+      "indieTitle": "Indie Hackers",
+      "indieMembers": "148 members",
+      "indieBy": "By John",
+      "aiTitle": "AI Builders",
+      "aiMembers": "362 members",
+      "aiBy": "By Martha"
+    },
+    "tabs1": {
+      "ariaLabel": "Options",
+      "all": "All"
+    },
+    "tabs2": {
+      "ariaLabel": "Options",
+      "chats": "Chats",
+      "emails": "Emails"
+    },
+    "textfield": {
+      "label": "Your email",
+      "placeholder": "john@email.com",
+      "description": "We won't share your email",
+      "error": "The email is invalid"
+    },
+    "uiComponents": {
+      "checkboxAriaLabel": "Checkbox Indicator Example",
+      "switchAriaLabel": "Switch On State Example",
+      "radioAriaLabel": "Radio Buttons Example"
+    },
+    "xProfile": {
+      "bio": "Building the future of UI for web & mobile.",
+      "bioSuffix": "(YC S24)",
+      "confettiLabel": "confetti",
+      "following": "Following",
+      "followers": "Followers"
+    }
+  },
   "pageActions": {
     "copyMarkdown": "Copy Markdown",
     "copied": "Copied",
