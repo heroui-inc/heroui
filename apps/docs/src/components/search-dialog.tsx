@@ -23,6 +23,8 @@ import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {tv} from "tailwind-variants";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 // Default suggested pages for each tag
 const DEFAULT_SUGGESTIONS: Record<"native" | "web", string[]> = {
   native: [
@@ -109,6 +111,7 @@ const tagStyles = tv({
 });
 
 export default function CustomSearchDialog(props: SharedProps) {
+  const dict = useDictionary();
   const pathname = usePathname();
   const previousPathnameRef = useRef(pathname);
 
@@ -235,7 +238,8 @@ export default function CustomSearchDialog(props: SharedProps) {
           <div className="text-fd-muted-foreground inline-flex items-center gap-2">
             <ArrowRight className="size-4" />
             <p>
-              Jump to <span className="text-fd-foreground font-medium">{page.name}</span>
+              {dict.searchDialog.jumpTo}{" "}
+              <span className="text-fd-foreground font-medium">{page.name}</span>
             </p>
           </div>
         ),
@@ -303,24 +307,24 @@ export default function CustomSearchDialog(props: SharedProps) {
         <div className="border-none px-2 pt-2">
           <TagGroup
             disallowEmptySelection
-            aria-label="Framework"
+            aria-label={dict.frameworksTabs.ariaLabel}
             selectedKeys={selected}
             selectionMode="single"
             onSelectionChange={(keys) => setSelected(keys)}
           >
             <TagGroup.List className="gap-1">
               <Tag className={tagStyles()} id="web">
-                Web
+                {dict.frameworksTabs.web}
               </Tag>
               <Tag className={tagStyles()} id="native">
-                Native
+                {dict.frameworksTabs.native}
               </Tag>
             </TagGroup.List>
           </TagGroup>
         </div>
         <SearchDialogHeader className="border-b border-separator">
           <SearchDialogIcon />
-          <SearchDialogInput placeholder="What are you searching for?" />
+          <SearchDialogInput placeholder={dict.searchDialog.placeholder} />
           <SearchDialogClose />
         </SearchDialogHeader>
         <SearchDialogList

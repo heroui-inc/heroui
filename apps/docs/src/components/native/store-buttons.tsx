@@ -1,4 +1,7 @@
+"use client";
+
 import {NATIVE_APP} from "@/config/native-app";
+import {useDictionary} from "@/hooks/use-dictionary";
 
 import {Iconify} from "../iconify";
 
@@ -27,33 +30,37 @@ interface StoreButtonsProps {
  * no other code changes are required.
  */
 export const StoreButtons = ({className, size = "sm"}: StoreButtonsProps) => {
+  const dict = useDictionary().storeButtons;
   // The button system uses BEM modifiers — only `--sm` exists; `--md` is the
   // default and produced by omitting the modifier.
   const sizeClass = size === "sm" ? "button--sm" : "";
   const iconSize = size === "sm" ? 18 : 20;
 
+  const appStoreLabel = dict.appStoreLabel.replace("{name}", NATIVE_APP.NAME);
+  const playStoreLabel = dict.playStoreLabel.replace("{name}", NATIVE_APP.NAME);
+
   return (
     <div className={className ?? "flex w-full flex-col items-stretch gap-2"}>
       <a
-        aria-label={["Download ", NATIVE_APP.NAME, " on the App Store"].join("")}
+        aria-label={appStoreLabel}
         className={["button button--primary w-full justify-center", sizeClass].join(" ")}
         href={NATIVE_APP.APP_STORE_URL}
         rel="noopener noreferrer"
         target="_blank"
       >
         <Iconify icon="tabler:brand-apple-filled" width={iconSize} />
-        Download on App Store
+        {dict.appStore}
       </a>
       {NATIVE_APP.PLAY_STORE_URL ? (
         <a
-          aria-label={["Download ", NATIVE_APP.NAME, " on Google Play"].join("")}
+          aria-label={playStoreLabel}
           className={["button button--tertiary w-full justify-center", sizeClass].join(" ")}
           href={NATIVE_APP.PLAY_STORE_URL}
           rel="noopener noreferrer"
           target="_blank"
         >
           <Iconify icon="simple-icons:googleplay" width={iconSize} />
-          Download on Play Store
+          {dict.playStore}
         </a>
       ) : (
         // `role="link"` + `aria-disabled` keeps the placeholder semantically
@@ -61,7 +68,7 @@ export const StoreButtons = ({className, size = "sm"}: StoreButtonsProps) => {
         // unavailable App Store entries.
         <span
           aria-disabled="true"
-          aria-label="Android version coming soon"
+          aria-label={dict.androidComingSoonLabel}
           role="link"
           className={[
             "button button--tertiary w-full cursor-not-allowed justify-center opacity-50",
@@ -69,7 +76,7 @@ export const StoreButtons = ({className, size = "sm"}: StoreButtonsProps) => {
           ].join(" ")}
         >
           <Iconify icon="simple-icons:googleplay" width={iconSize} />
-          Android · Coming soon
+          {dict.androidComingSoon}
         </span>
       )}
     </div>

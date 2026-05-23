@@ -54,6 +54,10 @@
     "web": "网页",
     "native": "移动端"
   },
+  "searchDialog": {
+    "placeholder": "你想搜索什么？",
+    "jumpTo": "跳转到"
+  },
   "componentLinks": {
     "source": "源代码",
     "stylesSource": "样式源代码",
@@ -63,6 +67,14 @@
     "tapToPreview": "点击预览",
     "scanToPreview": "扫码预览",
     "downloadPrompt": "还没有安装 {name} 应用？请在下方下载。"
+  },
+  "storeButtons": {
+    "appStoreLabel": "在 App Store 下载 {name}",
+    "appStore": "在 App Store 下载",
+    "playStoreLabel": "在 Google Play 下载 {name}",
+    "playStore": "在 Play Store 下载",
+    "androidComingSoonLabel": "Android 版本即将推出",
+    "androidComingSoon": "Android · 即将推出"
   },
   "themes": {
     "theme": "主题",

@@ -54,6 +54,10 @@
     "web": "Web",
     "native": "Native"
   },
+  "searchDialog": {
+    "placeholder": "What are you searching for?",
+    "jumpTo": "Jump to"
+  },
   "componentLinks": {
     "source": "Source",
     "stylesSource": "Styles source",
@@ -63,6 +67,14 @@
     "tapToPreview": "Tap to preview",
     "scanToPreview": "Scan to preview",
     "downloadPrompt": "Don't have the {name} app yet? Download it below."
+  },
+  "storeButtons": {
+    "appStoreLabel": "Download {name} on the App Store",
+    "appStore": "Download on App Store",
+    "playStoreLabel": "Download {name} on Google Play",
+    "playStore": "Download on Play Store",
+    "androidComingSoonLabel": "Android version coming soon",
+    "androidComingSoon": "Android · Coming soon"
   },
   "themes": {
     "theme": "Theme",
