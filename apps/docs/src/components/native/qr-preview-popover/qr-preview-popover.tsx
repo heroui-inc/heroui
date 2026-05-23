@@ -9,6 +9,7 @@ import {useState} from "react";
 import {NATIVE_APP} from "@/config/native-app";
 import {useDictionary} from "@/hooks/use-dictionary";
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
+import {i18n} from "@/lib/i18n";
 
 import {Iconify} from "../../iconify";
 import {DeepLinkQRCode} from "../deep-link-qr-code";
@@ -33,11 +34,16 @@ function readOrigin(): string {
  * Regex matching the docs-app pathname for an individual Native component
  * page. Group 1 captures the slug. `usePathname()` returns the full browser
  * pathname (the docs site does NOT set a Next.js `basePath` — the leading
- * `/docs` is a real route segment), so the regex must include it. Fumadocs
- * route groups like `(buttons)` are stripped from the URL, but the optional
- * non-capturing group keeps the regex defensive against any future inclusion.
+ * `/{lang}/docs` is a real route segment from the `[lang]` route param), so
+ * the regex must include both the locale prefix and `/docs`. The locale
+ * alternation is built from {@link i18n.languages} so the two stay in sync
+ * automatically when a new language is added. Fumadocs route groups like
+ * `(buttons)` are stripped from the URL, but the optional non-capturing
+ * group keeps the regex defensive against any future inclusion.
  */
-const COMPONENT_PATHNAME = /^\/docs\/native\/components\/(?:\([^)]+\)\/)?([^/]+)$/;
+const COMPONENT_PATHNAME = new RegExp(
+  `^/(?:${i18n.languages.join("|")})/docs/native/components/(?:\\([^)]+\\)/)?([^/]+)$`,
+);
 
 /**
  * Resolve which native-app screen the QR should deep-link into based on the
