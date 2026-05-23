@@ -80,6 +80,7 @@ export * from "./number-field";
 export * from "./pagination";
 export * from "./select";
 export * from "./meter";
+export * from "./stacked-meter";
 export * from "./slider";
 export * from "./table";
 

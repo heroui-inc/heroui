@@ -1,0 +1,195 @@
+---
+title: StackedMeter
+description: A segmented quantity indicator that visualises a breakdown of a known capacity.
+
+links:
+  source: stacked-meter/stacked-meter.tsx
+  styles: stacked-meter.css
+  storybook: Components/Feedback/StackedMeter
+---
+
+## Import
+
+```tsx
+import { StackedMeter, Label } from '@heroui/react';
+```
+
+### Usage
+
+<ComponentPreview
+  name="stacked-meter-basic"
+/>
+
+### Anatomy
+
+```tsx
+import { StackedMeter, Label } from '@heroui/react';
+
+const segments = [
+  { id: 'photos', value: 45, label: 'Photos', color: 'accent' },
+  { id: 'videos', value: 20, label: 'Videos', color: 'success' },
+  { id: 'docs', value: 10, label: 'Documents', color: 'warning' },
+  { id: 'other', value: 5, label: 'Other', color: 'default' },
+];
+
+export default () => (
+  <StackedMeter segments={segments} maxValue={128} aria-label="Storage usage">
+    <Label>Storage</Label>
+    <StackedMeter.Output>
+      {({ total, maxValue, format }) => `${format(total)} / ${format(maxValue)} GB`}
+    </StackedMeter.Output>
+    <StackedMeter.Track />
+    <StackedMeter.Legend />
+  </StackedMeter>
+);
+```
+
+### Sizes
+
+The `size` prop controls the track thickness, matching the Meter component's size scale.
+
+<ComponentPreview
+  name="stacked-meter-sizes"
+/>
+
+### With Legend
+
+The `StackedMeter.Legend` slot renders colour swatches with labels below the track. It is `aria-hidden` since each segment already carries its own ARIA label.
+
+<ComponentPreview
+  name="stacked-meter-with-legend"
+/>
+
+### Custom Value Format
+
+Use `formatOptions` (passed to `Intl.NumberFormat`) to customise how values display in the Output and tooltips.
+
+<ComponentPreview
+  name="stacked-meter-custom-format"
+/>
+
+### Without Label
+
+When no visible label is needed, use `aria-label` for accessibility.
+
+<ComponentPreview
+  name="stacked-meter-without-label"
+/>
+
+<RelatedComponents component="stacked-meter" />
+
+## Accessibility
+
+- The root element uses `role="group"` with an `aria-label`.
+- Each segment uses `role="meter"` with `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`.
+- Screen readers can step through segments individually to hear each breakdown line.
+- The Legend is `aria-hidden="true"` (decorative — the meter roles carry the semantic information).
+- Fill animation respects `prefers-reduced-motion: reduce`.
+
+## Styling
+
+### Passing Tailwind CSS classes
+
+You can customize individual StackedMeter parts:
+
+```tsx
+import { StackedMeter, Label } from '@heroui/react';
+
+function CustomStackedMeter() {
+  return (
+    <StackedMeter segments={segments} maxValue={100} aria-label="Usage">
+      <Label>Usage</Label>
+      <StackedMeter.Output />
+      <StackedMeter.Track className="bg-purple-100 dark:bg-purple-900" />
+      <StackedMeter.Legend />
+    </StackedMeter>
+  );
+}
+```
+
+### Customizing the component classes
+
+To customize the StackedMeter component classes, you can use the `@layer components` directive.
+<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .stacked-meter {
+    @apply w-full gap-2;
+  }
+
+  .stacked-meter__track {
+    @apply h-3 rounded-full;
+  }
+
+  .stacked-meter__segment {
+    @apply rounded-none;
+  }
+}
+```
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The StackedMeter component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/stacked-meter.css)):
+
+#### Base & Element Classes
+- `.stacked-meter` - Base container (grid layout)
+- `.stacked-meter__output` - Value text display
+- `.stacked-meter__track` - Track background (flex container for segments)
+- `.stacked-meter__segment` - Individual coloured segment
+- `.stacked-meter__legend` - Legend container
+- `.stacked-meter__legend-item` - Legend row (swatch + label)
+- `.stacked-meter__legend-swatch` - Colour dot in legend
+- `.stacked-meter__legend-label` - Text label in legend
+
+#### Size Classes
+- `.stacked-meter--sm` - Small size variant (thinner track)
+- `.stacked-meter--md` - Medium size variant (default)
+- `.stacked-meter--lg` - Large size variant (thicker track)
+
+#### Segment Color Classes
+- `.stacked-meter__segment--default` - Default color
+- `.stacked-meter__segment--accent` - Accent color
+- `.stacked-meter__segment--success` - Success color
+- `.stacked-meter__segment--warning` - Warning color
+- `.stacked-meter__segment--danger` - Danger color
+
+## API Reference
+
+### StackedMeter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `segments` | `StackedMeterSegment[]` | required | Segments to render in left-to-right order |
+| `maxValue` | `number` | `100` | Total capacity (denominator) |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Track thickness |
+| `formatOptions` | `Intl.NumberFormatOptions` | - | Number format for Output and tooltips |
+| `animate` | `boolean` | `true` | Fill-in animation on mount (respects prefers-reduced-motion) |
+| `aria-label` | `string` | - | Accessible label for the group |
+| `children` | `ReactNode` | - | Compound slots (Output, Track, Legend) |
+
+### StackedMeterSegment
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | required | Stable React key and ARIA id seed |
+| `value` | `number` | required | Numeric contribution toward maxValue |
+| `label` | `string` | required | Human-readable name for tooltip and legend |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"accent"` | Segment colour |
+| `tooltip` | `ReactNode` | - | Custom tooltip content (overrides default) |
+
+### StackedMeter.Output Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `(args: { total, maxValue, format }) => ReactNode` | - | Render prop for custom output |
+
+### StackedMeter.Track Props
+
+Standard `div` props (no additional props).
+
+### StackedMeter.Legend Props
+
+Standard `ul` props (no additional props). Rendered with `aria-hidden="true"`.

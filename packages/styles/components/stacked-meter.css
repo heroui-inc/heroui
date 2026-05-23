@@ -1,0 +1,163 @@
+/* ==========================================================================
+   StackedMeter - A segmented quantity indicator within a known range
+   ========================================================================== */
+
+/* Base styles */
+.stacked-meter {
+  @apply grid w-full gap-1;
+  grid-template-areas:
+    "label output"
+    "track track"
+    "legend legend";
+  grid-template-columns: 1fr auto;
+
+  [data-slot="label"] {
+    @apply w-fit text-sm font-medium;
+
+    grid-area: label;
+  }
+
+  .stacked-meter__output {
+    @apply text-sm font-medium tabular-nums;
+
+    grid-area: output;
+  }
+
+  .stacked-meter__track {
+    @apply relative flex overflow-hidden rounded-sm bg-default;
+
+    grid-area: track;
+
+    /* Default height (matches --md) */
+    @apply h-2;
+  }
+
+  .stacked-meter__segment {
+    @apply h-full shrink-0 cursor-default outline-none;
+
+    background-color: var(--stacked-meter-segment-fill, var(--accent));
+
+    /**
+     * Transitions
+     * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+     */
+    transition: width 300ms var(--ease-out);
+    transition-delay: calc(var(--stacked-meter-segment-index, 0) * 50ms);
+    @apply motion-reduce:transition-none;
+
+    /* First segment gets left radius */
+    &:first-child {
+      @apply rounded-l-sm;
+    }
+
+    /* Last segment gets right radius */
+    &:last-child {
+      @apply rounded-r-sm;
+    }
+  }
+
+  .stacked-meter__legend {
+    @apply flex flex-wrap gap-x-4 gap-y-1;
+
+    grid-area: legend;
+  }
+
+  .stacked-meter__legend-item {
+    @apply flex items-center gap-1.5 text-xs text-muted;
+  }
+
+  .stacked-meter__legend-swatch {
+    @apply inline-block size-2.5 shrink-0 rounded-full;
+
+    background-color: var(--stacked-meter-segment-fill, var(--accent));
+  }
+
+  .stacked-meter__legend-label {
+    @apply text-xs;
+  }
+}
+
+/* ==========================================================================
+   Size variants
+   ========================================================================== */
+
+.stacked-meter--sm {
+  .stacked-meter__track {
+    @apply h-1 rounded-xs;
+  }
+
+  .stacked-meter__segment {
+    &:first-child {
+      @apply rounded-l-xs;
+    }
+
+    &:last-child {
+      @apply rounded-r-xs;
+    }
+  }
+}
+
+.stacked-meter--md {
+  /* Default size — no overrides needed */
+}
+
+.stacked-meter--lg {
+  .stacked-meter__track {
+    @apply h-3 rounded-md;
+  }
+
+  .stacked-meter__segment {
+    &:first-child {
+      @apply rounded-l-md;
+    }
+
+    &:last-child {
+      @apply rounded-r-md;
+    }
+  }
+}
+
+/* ==========================================================================
+   Segment color variants
+   ========================================================================== */
+
+.stacked-meter__segment--default {
+  --stacked-meter-segment-fill: var(--default-foreground);
+}
+
+.stacked-meter__segment--accent {
+  --stacked-meter-segment-fill: var(--accent);
+}
+
+.stacked-meter__segment--success {
+  --stacked-meter-segment-fill: var(--success);
+}
+
+.stacked-meter__segment--warning {
+  --stacked-meter-segment-fill: var(--warning);
+}
+
+.stacked-meter__segment--danger {
+  --stacked-meter-segment-fill: var(--danger);
+}
+
+/* Legend swatch colors */
+.stacked-meter__legend-swatch--default {
+  --stacked-meter-segment-fill: var(--default-foreground);
+}
+
+.stacked-meter__legend-swatch--accent {
+  --stacked-meter-segment-fill: var(--accent);
+}
+
+.stacked-meter__legend-swatch--success {
+  --stacked-meter-segment-fill: var(--success);
+}
+
+.stacked-meter__legend-swatch--warning {
+  --stacked-meter-segment-fill: var(--warning);
+}
+
+.stacked-meter__legend-swatch--danger {
+  --stacked-meter-segment-fill: var(--danger);
+}
