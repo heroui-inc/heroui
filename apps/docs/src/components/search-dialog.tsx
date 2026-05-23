@@ -139,7 +139,10 @@ export default function CustomSearchDialog(props: SharedProps) {
     return Array.from(selected).includes("web") ? "web" : "native";
   }, [selected]);
 
+  const {locale} = useI18n();
+
   const {query, search, setSearch} = useDocsSearch({
+    locale,
     tag: selectedTag,
     type: "fetch",
   });
@@ -171,6 +174,20 @@ export default function CustomSearchDialog(props: SharedProps) {
     return pages;
   }, [full]);
 
+  // Strip the locale prefix from a page tree URL so comparisons can be done
+  // against locale-agnostic paths like `/docs/react/...`.
+  const stripLocale = useCallback(
+    (url: string | undefined) => {
+      if (!url) return "";
+      if (locale && url.startsWith(`/${locale}/`)) {
+        return url.slice(locale.length + 1);
+      }
+
+      return url;
+    },
+    [locale],
+  );
+
   // Filter pages by tag and create a map
   const searchMap = useMemo(() => {
     const map = new Map<string, Item>();
@@ -180,12 +197,12 @@ export default function CustomSearchDialog(props: SharedProps) {
     const migrationPrefix = "/docs/react/migration";
 
     for (const page of allPages) {
-      const isMigrationSubPage =
-        page.url?.startsWith(migrationPrefix) && page.url !== migrationPrefix;
+      const path = stripLocale(page.url);
+      const isMigrationSubPage = path.startsWith(migrationPrefix) && path !== migrationPrefix;
 
       if (
-        page.url?.startsWith(tagPrefix) &&
-        !page.url.startsWith(releasePrefix) &&
+        path.startsWith(tagPrefix) &&
+        !path.startsWith(releasePrefix) &&
         !isMigrationSubPage &&
         typeof page.name === "string"
       ) {
@@ -194,7 +211,7 @@ export default function CustomSearchDialog(props: SharedProps) {
     }
 
     return map;
-  }, [allPages, selectedTag]);
+  }, [allPages, selectedTag, stripLocale]);
 
   // Get default suggestions for the current tag
   const defaultSuggestions = useMemo(() => {
@@ -204,7 +221,7 @@ export default function CustomSearchDialog(props: SharedProps) {
     const suggestions: SearchItemType[] = [];
 
     for (const url of suggestionUrls) {
-      const page = allPages.find((p) => p.url === url);
+      const page = allPages.find((p) => stripLocale(p.url) === url);
 
       if (page && page.name) {
         suggestions.push({
@@ -215,14 +232,14 @@ export default function CustomSearchDialog(props: SharedProps) {
               <span>{page.name}</span>
             </div>
           ),
-          onSelect: () => router.push(url as any),
+          onSelect: () => router.push((page.url ?? url) as any),
           type: "action",
         });
       }
     }
 
     return suggestions;
-  }, [allPages, selectedTag, search, router]);
+  }, [allPages, selectedTag, search, router, stripLocale]);
 
   let pageTreeAction: SearchItemType | undefined;
 
@@ -285,14 +302,16 @@ export default function CustomSearchDialog(props: SharedProps) {
     if (!query.data || query.data === "empty") return null;
 
     return query.data.filter((item) => {
-      if (item.url.startsWith(releasesPath)) return false;
-      if (item.url.startsWith(migrationPath) && item.url !== migrationPath) {
+      const path = stripLocale(item.url);
+
+      if (path.startsWith(releasesPath)) return false;
+      if (path.startsWith(migrationPath) && path !== migrationPath) {
         return false;
       }
 
       return true;
     });
-  }, [query.data, releasesPath, migrationPath]);
+  }, [query.data, releasesPath, migrationPath, stripLocale]);
 
   return (
     <SearchDialog
