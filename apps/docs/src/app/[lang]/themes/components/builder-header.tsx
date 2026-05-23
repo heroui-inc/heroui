@@ -16,7 +16,7 @@ import {useParams} from "next/navigation";
 import {HeroUILogo} from "@/components/heroui-logo";
 import {useCodePanel} from "@/hooks/use-code-panel";
 import useKeyPress from "@/hooks/use-key-press";
-import {hasLocale} from "@/lib/dictionaries";
+import {i18n} from "@/lib/i18n";
 
 import {tabs} from "../constants";
 import {usePreviewTab, useUndoRedo} from "../hooks";
@@ -30,7 +30,10 @@ export function BuilderHeader() {
   const {isCodeVisible, toggleCode} = useCodePanel();
   const {selectedTab, setSelectedTab} = usePreviewTab();
   const params = useParams<{lang?: string}>();
-  const lang = params?.lang && hasLocale(params.lang) ? params.lang : "en";
+  const lang =
+    params?.lang && (i18n.languages as readonly string[]).includes(params.lang)
+      ? params.lang
+      : i18n.defaultLanguage;
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
