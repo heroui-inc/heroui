@@ -4,6 +4,8 @@ import {ChevronsExpandVertical, FontCase} from "@gravity-ui/icons";
 import {InputGroup, Popover} from "@heroui/react";
 import {useState} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 import {fonts} from "../constants";
 import {useCustomFonts, useVariableSetter} from "../hooks";
 import {extractFontFamilyFromUrl, isCustomFontUrl} from "../utils/font-utils";
@@ -16,6 +18,7 @@ export function FontFamilyPopover() {
   const {variables} = useVariableSetter();
   const {customFonts} = useCustomFonts();
   const [mode, setMode] = useState<"suggested" | "custom">("suggested");
+  const dict = useDictionary().themeBuilder.fontFamily;
 
   // Find current font label - check predefined fonts first, then URL-based custom fonts
   const currentSuggestedFont = fonts.find((f) => f.id === variables.fontFamily);
@@ -27,7 +30,7 @@ export function FontFamilyPopover() {
   return (
     <Popover>
       <div className="flex flex-col gap-1">
-        <LockableLabel label="Font Family" variable="fontFamily" />
+        <LockableLabel label={dict.label} variable="fontFamily" />
         <Popover.Trigger>
           <InputGroup className="w-40 cursor-pointer">
             <InputGroup.Prefix className="w-10">

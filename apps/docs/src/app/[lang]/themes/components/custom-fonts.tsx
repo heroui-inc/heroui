@@ -2,37 +2,12 @@
 
 import {ArrowLeft, Globe} from "@gravity-ui/icons";
 import {Button, Description, FieldError, InputGroup, Label, Link, TextField} from "@heroui/react";
-import {useState} from "react";
+import {useMemo, useState} from "react";
+
+import {useDictionary} from "@/hooks/use-dictionary";
 
 import {useCustomFonts, useVariableSetter} from "../hooks";
 import {extractFontFamilyFromUrl, isValidFontCdnUrl} from "../utils/font-utils";
-
-/**
- * Validates if a URL is from an allowed font CDN host.
- * Returns null if valid, or an error message if invalid.
- * Supports both CSS stylesheet URLs and font file URLs (.woff2, etc.)
- */
-function validateFontCdnUrl(url: string): string | null {
-  if (!url.trim()) {
-    return null; // Empty is not an error (just not filled yet)
-  }
-
-  try {
-    const parsedUrl = new URL(url);
-
-    if (parsedUrl.protocol !== "https:") {
-      return "URL must use https protocol";
-    }
-
-    if (!isValidFontCdnUrl(url)) {
-      return "URL must be from a supported CDN (Google Fonts, Fontsource, Bunny Fonts, etc.)";
-    }
-
-    return null;
-  } catch {
-    return "Please enter a valid URL";
-  }
-}
 
 interface CustomFontsProps {
   goToSuggested: () => void;
@@ -45,8 +20,22 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
   const [isImporting, setIsImporting] = useState(false);
   const {addCustomFont} = useCustomFonts();
   const {setVariable} = useVariableSetter();
+  const dict = useDictionary().themeBuilder.customFonts;
 
-  const validationError = validateFontCdnUrl(cdnUrl);
+  const validationError = useMemo<string | null>(() => {
+    if (!cdnUrl.trim()) return null;
+
+    try {
+      const parsedUrl = new URL(cdnUrl);
+
+      if (parsedUrl.protocol !== "https:") return dict.errorHttps;
+      if (!isValidFontCdnUrl(cdnUrl)) return dict.errorSupportedCdn;
+
+      return null;
+    } catch {
+      return dict.errorInvalidUrl;
+    }
+  }, [cdnUrl, dict]);
   const showValidationError = hasBlurred && validationError !== null;
   const showError = showValidationError || importError !== null;
   const errorMessage = importError ?? validationError;
@@ -61,7 +50,7 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
     const fontFamily = extractFontFamilyFromUrl(cdnUrl);
 
     if (!fontFamily) {
-      setImportError("Could not detect font family from URL. Please check the URL format.");
+      setImportError(dict.errorCannotDetect);
       setIsImporting(false);
 
       return;
@@ -71,7 +60,12 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
     const result = addCustomFont(cdnUrl);
 
     if ("error" in result) {
-      setImportError(result.error);
+      const message =
+        result.error === "already-imported"
+          ? dict.errorAlreadyImported.replace("{name}", result.label)
+          : dict.errorCannotDetectFull;
+
+      setImportError(message);
       setIsImporting(false);
     } else {
       // Store the URL directly in the query params (makes it shareable!)
@@ -88,7 +82,7 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
       <div className="flex items-center justify-between">
         <Link className="flex items-center gap-1 no-underline" onPress={goToSuggested}>
           <ArrowLeft className="size-4" />
-          Back
+          {dict.back}
         </Link>
       </div>
       <TextField
@@ -99,14 +93,14 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
           setImportError(null);
         }}
       >
-        <Label>Font URL</Label>
+        <Label>{dict.fontUrl}</Label>
         <InputGroup variant="secondary">
           <InputGroup.Prefix>
             <Globe className="size-4 text-muted" />
           </InputGroup.Prefix>
-          <InputGroup.Input placeholder="Paste font URL..." onBlur={() => setHasBlurred(true)} />
+          <InputGroup.Input placeholder={dict.placeholder} onBlur={() => setHasBlurred(true)} />
         </InputGroup>
-        <Description>Supports G Fonts, Fontsource and Fontshare</Description>
+        <Description>{dict.description}</Description>
         {showError ? <FieldError>{errorMessage}</FieldError> : null}
       </TextField>
       <Button
@@ -116,7 +110,7 @@ export function CustomFonts({goToSuggested}: CustomFontsProps) {
         variant="secondary"
         onPress={handleImport}
       >
-        {isImporting ? "Importing..." : "Import font"}
+        {isImporting ? dict.importing : dict.importFont}
       </Button>
     </div>
   );

@@ -68,6 +68,85 @@
     "vibrantPaletteDescription": "更饱和，对比更低",
     "pickRandomHint": "按 {kbd} 随机选择"
   },
+  "themeBuilder": {
+    "onboarding": {
+      "title": "为你的品牌定制 HeroUI v3",
+      "description": "使用令牌系统自定义颜色、圆角与字体，让每个组件保持一致并可直接投入生产。",
+      "moreComing": "更多功能与主题即将推出。",
+      "continue": "继续"
+    },
+    "header": {
+      "undo": "撤销上一步",
+      "redo": "重做上一步",
+      "share": "分享主题链接",
+      "viewCode": "查看代码",
+      "linkCopied": "链接已复制",
+      "linkCopiedDescription": "你的主题链接已复制到剪贴板。",
+      "switchMode": "切换模式"
+    },
+    "resetButton": {
+      "tooltip": "恢复默认",
+      "dialogTitle": "恢复为默认主题？",
+      "dialogBody": "这将把所有主题数值恢复为默认设置。",
+      "cancel": "取消",
+      "confirm": "确认"
+    },
+    "shuffleButton": {
+      "tooltip": "随机生成",
+      "dialogTitle": "确定要随机生成吗？",
+      "dialogBody": "这将覆盖你当前的主题设置。",
+      "cancel": "取消",
+      "confirm": "确认",
+      "dontShowAgain": "不再显示"
+    },
+    "fontFamily": {
+      "label": "字体",
+      "suggested": "推荐",
+      "allFonts": "全部字体",
+      "addFromCdn": "从 CDN 添加",
+      "removeFont": "移除字体"
+    },
+    "customFonts": {
+      "back": "返回",
+      "fontUrl": "字体 URL",
+      "placeholder": "粘贴字体 URL...",
+      "description": "支持 G Fonts、Fontsource 与 Fontshare",
+      "importing": "导入中...",
+      "importFont": "导入字体",
+      "errorHttps": "URL 必须使用 https 协议",
+      "errorSupportedCdn": "URL 必须来自受支持的 CDN（Google Fonts、Fontsource、Bunny Fonts 等）",
+      "errorInvalidUrl": "请输入有效的 URL",
+      "errorCannotDetect": "无法从 URL 中识别字体，请检查 URL 格式。",
+      "errorCannotDetectFull": "无法从 URL 中识别字体，请确保 URL 是有效的字体样式表。",
+      "errorAlreadyImported": "该字体已作为 \"{name}\" 导入"
+    },
+    "accentColor": {
+      "label": "强调色",
+      "tooltip": "用于品牌与高亮的主要颜色"
+    },
+    "baseColor": {
+      "label": "基础色",
+      "tooltip": "控制背景与表面等中性色中灰度的比例"
+    },
+    "radius": {
+      "label": "圆角",
+      "description": "影响整体 UI，例如菜单与弹窗",
+      "formLabel": "表单圆角",
+      "formDescription": "影响表单元素，例如输入框与选择器",
+      "options": {
+        "none": "无",
+        "extraSmall": "超小",
+        "small": "小",
+        "medium": "中",
+        "large": "大",
+        "extraLarge": "超大"
+      }
+    },
+    "lockableLabel": {
+      "lockValue": "锁定数值",
+      "unlockValue": "解锁数值"
+    }
+  },
   "pageActions": {
     "copyMarkdown": "复制 Markdown",
     "copied": "已复制",

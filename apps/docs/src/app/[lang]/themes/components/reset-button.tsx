@@ -1,7 +1,10 @@
+"use client";
+
 import {ArrowRotateLeft} from "@gravity-ui/icons";
 import {AlertDialog, Button, Kbd, Tooltip, useOverlayState} from "@heroui/react";
 import {useMemo} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import useKeyPress from "@/hooks/use-key-press";
 
 import {defaultThemeVariables} from "../constants";
@@ -12,6 +15,7 @@ export function ResetButton() {
   const reset = useResetVariables();
   const [variables] = useVariablesState();
   const {isOpen, setOpen} = useOverlayState();
+  const dict = useDictionary().themeBuilder.resetButton;
 
   const isDisabled = useMemo(() => {
     return (
@@ -42,11 +46,9 @@ export function ResetButton() {
                   <AlertDialog.Icon status="default">
                     <ArrowRotateLeft />
                   </AlertDialog.Icon>
-                  <AlertDialog.Heading>Reset theme to default?</AlertDialog.Heading>
+                  <AlertDialog.Heading>{dict.dialogTitle}</AlertDialog.Heading>
                 </AlertDialog.Header>
-                <AlertDialog.Body>
-                  This will restore all theme values to their default settings.
-                </AlertDialog.Body>
+                <AlertDialog.Body>{dict.dialogBody}</AlertDialog.Body>
                 <AlertDialog.Footer className="flex-col sm:flex-row">
                   <Button
                     className="order-2 w-full sm:order-1 sm:w-auto"
@@ -54,7 +56,7 @@ export function ResetButton() {
                     slot="close"
                     variant="tertiary"
                   >
-                    Cancel
+                    {dict.cancel}
                   </Button>
                   <Button
                     className="order-1 w-full sm:order-2 sm:w-auto"
@@ -62,7 +64,7 @@ export function ResetButton() {
                     slot="close"
                     onPress={reset}
                   >
-                    Confirm
+                    {dict.confirm}
                   </Button>
                 </AlertDialog.Footer>
               </AlertDialog.Dialog>
@@ -73,7 +75,7 @@ export function ResetButton() {
       <Tooltip.Content>
         <Tooltip.Arrow />
         <p>
-          Reset to defaults{" "}
+          {dict.tooltip}{" "}
           <Kbd>
             <Kbd.Content>D</Kbd.Content>
           </Kbd>

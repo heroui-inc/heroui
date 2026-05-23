@@ -6,6 +6,8 @@ import {CircleInfo, Lock, LockOpen} from "@gravity-ui/icons";
 import {Label, Tooltip, cn} from "@heroui/react";
 import {useState} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 import {useToggleLockedVariable} from "../hooks/use-toggle-locked-variable";
 
 interface LockableLabelProps {
@@ -17,6 +19,7 @@ interface LockableLabelProps {
 export function LockableLabel({label, tooltip, variable}: LockableLabelProps) {
   const [isLabelHovered, setLabelHovered] = useState(false);
   const {isLocked, toggleLockedVariable} = useToggleLockedVariable(variable);
+  const dict = useDictionary().themeBuilder.lockableLabel;
 
   return (
     <div
@@ -53,7 +56,7 @@ export function LockableLabel({label, tooltip, variable}: LockableLabelProps) {
         </Tooltip.Trigger>
         <Tooltip.Content>
           <Tooltip.Arrow />
-          <p>{isLocked ? "Unlock" : "Lock"} value</p>
+          <p>{isLocked ? dict.unlockValue : dict.lockValue}</p>
         </Tooltip.Content>
       </Tooltip>
     </div>

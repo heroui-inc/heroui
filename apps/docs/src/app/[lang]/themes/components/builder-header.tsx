@@ -15,6 +15,7 @@ import {useParams} from "next/navigation";
 
 import {HeroUILogo} from "@/components/heroui-logo";
 import {useCodePanel} from "@/hooks/use-code-panel";
+import {useDictionary} from "@/hooks/use-dictionary";
 import useKeyPress from "@/hooks/use-key-press";
 import {i18n} from "@/lib/i18n";
 
@@ -29,6 +30,7 @@ export function BuilderHeader() {
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
   const {isCodeVisible, toggleCode} = useCodePanel();
   const {selectedTab, setSelectedTab} = usePreviewTab();
+  const dict = useDictionary().themeBuilder.header;
   const params = useParams<{lang?: string}>();
   const lang =
     params?.lang && (i18n.languages as readonly string[]).includes(params.lang)
@@ -37,8 +39,8 @@ export function BuilderHeader() {
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
-    toast("Link copied", {
-      description: "Your theme link is copied to the clipboard.",
+    toast(dict.linkCopied, {
+      description: dict.linkCopiedDescription,
       indicator: <LinkIcon />,
       variant: "success",
     });
@@ -70,7 +72,7 @@ export function BuilderHeader() {
               <Tooltip.Content>
                 <Tooltip.Arrow />
                 <p>
-                  Undo last change{" "}
+                  {dict.undo}{" "}
                   <Kbd>
                     <Kbd.Abbr keyValue="left" />
                   </Kbd>
@@ -91,7 +93,7 @@ export function BuilderHeader() {
                 <Tooltip.Content>
                   <Tooltip.Arrow />
                   <p>
-                    Redo last change{" "}
+                    {dict.redo}{" "}
                     <Kbd>
                       <Kbd.Abbr keyValue="right" />
                     </Kbd>
@@ -138,7 +140,7 @@ export function BuilderHeader() {
             </Tooltip.Trigger>
             <Tooltip.Content>
               <Tooltip.Arrow />
-              <p>Share theme link</p>
+              <p>{dict.share}</p>
             </Tooltip.Content>
           </Tooltip>
           <Tooltip closeDelay={0} delay={100}>
@@ -154,7 +156,7 @@ export function BuilderHeader() {
             </Tooltip.Trigger>
             <Tooltip.Content>
               <Tooltip.Arrow />
-              <p>View code</p>
+              <p>{dict.viewCode}</p>
             </Tooltip.Content>
           </Tooltip>
         </div>

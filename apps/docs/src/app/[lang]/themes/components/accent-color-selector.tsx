@@ -8,6 +8,7 @@ import {useMemo} from "react";
 
 import ColorPicker, {ColorSlider} from "@/components/color-picker";
 import {getHueFromColor, getValuesFromOklch} from "@/components/color-picker/utils/color-format";
+import {useDictionary} from "@/hooks/use-dictionary";
 
 import {useVariablesState} from "../hooks/use-variables-state";
 
@@ -16,6 +17,7 @@ import {LockableLabel} from "./lockable-label";
 export function AccentColorSelector() {
   const [variables, setVariables] = useVariablesState();
   const {chroma, hue, lightness} = variables;
+  const dict = useDictionary().themeBuilder.accentColor;
   const oklchColor = `oklch(${lightness} ${chroma} ${hue})`;
 
   const trackBackground = useMemo(() => {
@@ -54,11 +56,7 @@ export function AccentColorSelector() {
 
   return (
     <div className="flex flex-col gap-1">
-      <LockableLabel
-        label="Accent"
-        tooltip="Main color used for branding and highlights"
-        variable="hue"
-      />
+      <LockableLabel label={dict.label} tooltip={dict.tooltip} variable="hue" />
       <div className="flex flex-row items-center gap-2 overflow-visible">
         <ColorSlider
           channel="hue"

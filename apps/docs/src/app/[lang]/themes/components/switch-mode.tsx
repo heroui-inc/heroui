@@ -4,10 +4,12 @@ import {Kbd, Label, Tooltip, cn} from "@heroui/react";
 import {useTheme} from "next-themes";
 
 import {ThemeToggle} from "@/components/fumadocs/ui/theme-toggle";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {useKeyPress} from "@/hooks/use-key-press";
 
 export function SwitchMode({label}: {label?: string}) {
   const {setTheme, theme} = useTheme();
+  const dict = useDictionary().themeBuilder.header;
 
   const handleModeSwitch = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -24,7 +26,7 @@ export function SwitchMode({label}: {label?: string}) {
         </Tooltip.Trigger>
         <Tooltip.Content>
           <p>
-            Switch mode{" "}
+            {dict.switchMode}{" "}
             <Kbd>
               <Kbd.Content>S</Kbd.Content>
             </Kbd>

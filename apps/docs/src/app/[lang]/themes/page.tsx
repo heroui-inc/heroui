@@ -21,6 +21,7 @@ import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constan
 export default async function ThemeBuilderPage({params}: {params: Promise<{lang: string}>}) {
   const {lang} = await params;
   const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
+  const radiusDict = dict.themeBuilder.radius;
 
   return (
     <DictionaryProvider dict={dict}>
@@ -40,14 +41,14 @@ export default async function ThemeBuilderPage({params}: {params: Promise<{lang:
               </div>
               <div className="flex items-center gap-4">
                 <RadiusPopover
-                  description="Affects the overall UI, like menus and modals"
-                  label="Radius"
+                  description={radiusDict.description}
+                  label={radiusDict.label}
                   radiusOptions={radiusOptions}
                   variableKey="radius"
                 />
                 <RadiusPopover
-                  description="Affects form elements, like inputs and selects"
-                  label="Radius Form"
+                  description={radiusDict.formDescription}
+                  label={radiusDict.formLabel}
                   radiusOptions={formRadiusOptions}
                   variableKey="formRadius"
                 />

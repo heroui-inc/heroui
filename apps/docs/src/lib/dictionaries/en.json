@@ -68,6 +68,85 @@
     "vibrantPaletteDescription": "More saturated, less contrast",
     "pickRandomHint": "Press {kbd} to pick random"
   },
+  "themeBuilder": {
+    "onboarding": {
+      "title": "Adapt HeroUI v3 to your brand",
+      "description": "Customize colors, radius, and typography using a token system that keeps every component consistent and production-ready.",
+      "moreComing": "More features and themes coming soon.",
+      "continue": "Continue"
+    },
+    "header": {
+      "undo": "Undo last change",
+      "redo": "Redo last change",
+      "share": "Share theme link",
+      "viewCode": "View code",
+      "linkCopied": "Link copied",
+      "linkCopiedDescription": "Your theme link is copied to the clipboard.",
+      "switchMode": "Switch mode"
+    },
+    "resetButton": {
+      "tooltip": "Reset to defaults",
+      "dialogTitle": "Reset theme to default?",
+      "dialogBody": "This will restore all theme values to their default settings.",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    },
+    "shuffleButton": {
+      "tooltip": "Randomize",
+      "dialogTitle": "Are you sure you want to randomize?",
+      "dialogBody": "This will overwrite your current theme settings.",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "dontShowAgain": "Don't show again"
+    },
+    "fontFamily": {
+      "label": "Font Family",
+      "suggested": "Suggested",
+      "allFonts": "All Fonts",
+      "addFromCdn": "Add from CDN",
+      "removeFont": "Remove font"
+    },
+    "customFonts": {
+      "back": "Back",
+      "fontUrl": "Font URL",
+      "placeholder": "Paste font URL...",
+      "description": "Supports G Fonts, Fontsource and Fontshare",
+      "importing": "Importing...",
+      "importFont": "Import font",
+      "errorHttps": "URL must use https protocol",
+      "errorSupportedCdn": "URL must be from a supported CDN (Google Fonts, Fontsource, Bunny Fonts, etc.)",
+      "errorInvalidUrl": "Please enter a valid URL",
+      "errorCannotDetect": "Could not detect font family from URL. Please check the URL format.",
+      "errorCannotDetectFull": "Could not detect font family from URL. Please ensure the URL is a valid font stylesheet.",
+      "errorAlreadyImported": "This font is already imported as \"{name}\""
+    },
+    "accentColor": {
+      "label": "Accent",
+      "tooltip": "Main color used for branding and highlights"
+    },
+    "baseColor": {
+      "label": "Base",
+      "tooltip": "Controls how much gray is used in neutrals like backgrounds and surfaces"
+    },
+    "radius": {
+      "label": "Radius",
+      "description": "Affects the overall UI, like menus and modals",
+      "formLabel": "Radius Form",
+      "formDescription": "Affects form elements, like inputs and selects",
+      "options": {
+        "none": "none",
+        "extraSmall": "extra small",
+        "small": "small",
+        "medium": "medium",
+        "large": "large",
+        "extraLarge": "extra large"
+      }
+    },
+    "lockableLabel": {
+      "lockValue": "Lock value",
+      "unlockValue": "Unlock value"
+    }
+  },
   "pageActions": {
     "copyMarkdown": "Copy Markdown",
     "copied": "Copied",

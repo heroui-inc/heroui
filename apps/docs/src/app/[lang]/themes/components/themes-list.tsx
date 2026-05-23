@@ -5,6 +5,7 @@ import type {ThemeId} from "../constants";
 import {ListBox, ScrollShadow} from "@heroui/react";
 import Image from "next/image";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 import {findMatchingTheme, themeValuesById, themes} from "../constants";
@@ -13,6 +14,7 @@ import {useVariablesState} from "../hooks/use-variables-state";
 export function ThemesList() {
   const [variables, setVariables] = useVariablesState();
   const currentThemeId = findMatchingTheme(variables);
+  const dict = useDictionary().themes;
 
   const applyTheme = (themeId: ThemeId) => {
     const themeValues = themeValuesById[themeId];
@@ -36,7 +38,7 @@ export function ThemesList() {
       visibility="none"
     >
       <ListBox
-        aria-label="Theme"
+        aria-label={dict.theme}
         className="flex w-max flex-row flex-nowrap gap-5"
         items={themes}
         selectedKeys={currentThemeId ? new Set([currentThemeId]) : new Set()}

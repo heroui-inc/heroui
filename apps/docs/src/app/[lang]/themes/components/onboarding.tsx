@@ -6,6 +6,8 @@ import {Button, Modal, cn, useOverlayState} from "@heroui/react";
 import {motion} from "motion/react";
 import {useEffect} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 // Keyframe values for each property (loops back to first value)
 const RADIUS_KEYFRAMES = [24, 8, 0, 12, 24];
 const BUTTON_BG_KEYFRAMES = ["#3b82f6", "#6366f1", "#10b981", "#f97316", "#3b82f6"];
@@ -20,6 +22,7 @@ const TRANSITION: MotionProps["transition"] = {
 
 export function Onboarding() {
   const {isOpen, open, setOpen} = useOverlayState();
+  const dict = useDictionary().themeBuilder.onboarding;
 
   useEffect(() => {
     const onboarding = localStorage.getItem("onboarding");
@@ -42,21 +45,18 @@ export function Onboarding() {
             </Modal.Header>
             <Modal.Body>
               <div className="flex flex-col gap-2">
-                <p className="text-base font-medium text-foreground">
-                  Adapt HeroUI v3 to your brand
-                </p>
+                <p className="text-base font-medium text-foreground">{dict.title}</p>
                 <p className="text-sm leading-5 text-muted">
-                  Customize colors, radius, and typography using a token system that keeps every
-                  component consistent and production-ready.
+                  {dict.description}
                   <br />
                   <br />
-                  More features and themes coming soon.
+                  {dict.moreComing}
                 </p>
               </div>
             </Modal.Body>
             <Modal.Footer>
               <Button className="w-full" slot="close">
-                Continue
+                {dict.continue}
               </Button>
             </Modal.Footer>
           </Modal.Dialog>

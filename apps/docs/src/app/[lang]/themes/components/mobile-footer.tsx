@@ -3,6 +3,8 @@
 import {ScrollShadow} from "@heroui/react";
 import {useState} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 import {THEME_BUILDER_BOTTOM_SHEET_ID, formRadiusOptions, radiusOptions} from "../constants";
 
 import {AccentColorSelector} from "./accent-color-selector";
@@ -16,6 +18,7 @@ import {ThemesList} from "./themes-list";
 
 export function MobileFooter() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const radiusDict = useDictionary().themeBuilder.radius;
 
   return (
     <>
@@ -49,14 +52,14 @@ export function MobileFooter() {
             >
               <FontFamilyPopover />
               <RadiusPopover
-                description="Affects the overall UI, like menus and modals"
-                label="Radius"
+                description={radiusDict.description}
+                label={radiusDict.label}
                 radiusOptions={radiusOptions}
                 variableKey="radius"
               />
               <RadiusPopover
-                description="Affects form elements, like inputs and selects"
-                label="Radius Form"
+                description={radiusDict.formDescription}
+                label={radiusDict.formLabel}
                 radiusOptions={formRadiusOptions}
                 variableKey="formRadius"
               />

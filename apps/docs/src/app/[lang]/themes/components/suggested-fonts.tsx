@@ -6,6 +6,7 @@ import {Plus, TrashBin} from "@gravity-ui/icons";
 import {Button, ListBox, ScrollShadow, Tooltip} from "@heroui/react";
 import {useEffect} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 import {defaultThemeVariables, fonts} from "../constants";
@@ -20,6 +21,7 @@ interface SuggestedFontsProps {
 export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
   const {setVariable, variables} = useVariableSetter();
   const {removeCustomFont} = useCustomFonts();
+  const dict = useDictionary().themeBuilder.fontFamily;
 
   // Inject font links for all suggested fonts so they can be previewed
   useEffect(() => {
@@ -76,17 +78,17 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
     <>
       <div className="mb-2 flex items-center justify-between">
         <p className="text-sm font-medium capitalize">
-          {customFonts.length > 0 ? "All Fonts" : "Suggested"}
+          {customFonts.length > 0 ? dict.allFonts : dict.suggested}
         </p>
         <Button size="sm" variant="ghost" onPress={goToCustom}>
-          Add from CDN
+          {dict.addFromCdn}
           <Plus className="size-4" />
         </Button>
       </div>
       <ScrollShadow hideScrollBar className="max-h-56 pb-3" size={15}>
         <ListBox
           disallowEmptySelection
-          aria-label="Font Family"
+          aria-label={dict.label}
           className="grid grid-cols-3 gap-2 p-0"
           items={allFonts}
           layout="grid"
@@ -134,7 +136,7 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
                   </Tooltip.Trigger>
                   <Tooltip.Content>
                     <Tooltip.Arrow />
-                    <p>Remove font</p>
+                    <p>{dict.removeFont}</p>
                   </Tooltip.Content>
                 </Tooltip>
               ) : null}

@@ -137,20 +137,24 @@ export function useCustomFonts() {
 
   /**
    * Adds a new custom font from a CDN URL
-   * @returns The new font if successful, or an error message if failed
+   * @returns The new font if successful, or a typed error code if failed.
+   * Error codes are translated by the consumer via the dictionary.
    */
   const addCustomFont = useCallback(
-    (url: string, customLabel?: string): {font: CustomFont} | {error: string} => {
+    (
+      url: string,
+      customLabel?: string,
+    ):
+      | {font: CustomFont}
+      | {error: "cannot-detect-family"}
+      | {error: "already-imported"; label: string} => {
       const currentFonts = getCustomFontsFromStorage();
 
       // Extract font family from URL
       const extractedFamily = extractFontFamilyFromUrl(url);
 
       if (!extractedFamily && !customLabel) {
-        return {
-          error:
-            "Could not detect font family from URL. Please ensure the URL is a valid font stylesheet.",
-        };
+        return {error: "cannot-detect-family"};
       }
 
       const fontFamily = customLabel || extractedFamily || "Custom Font";
@@ -159,7 +163,7 @@ export function useCustomFonts() {
       const existingByUrl = currentFonts.find((f) => f.url === url);
 
       if (existingByUrl) {
-        return {error: `This font is already imported as "${existingByUrl.label}"`};
+        return {error: "already-imported", label: existingByUrl.label};
       }
 
       const id = generateFontId(fontFamily, currentFonts);

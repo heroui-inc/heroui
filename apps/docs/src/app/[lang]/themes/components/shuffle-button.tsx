@@ -4,6 +4,7 @@ import {Shuffle} from "@gravity-ui/icons";
 import {AlertDialog, Button, Checkbox, Kbd, Label, Tooltip, useOverlayState} from "@heroui/react";
 import {useEffect, useRef, useState} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {useKeyPress} from "@/hooks/use-key-press";
 
 import {LOCAL_STORAGE_KEYS} from "../constants";
@@ -22,6 +23,7 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
   const [variables] = useVariablesState();
   const snapshotVariablesRef = useRef(variables);
   const isRandomizingRef = useRef(false);
+  const dict = useDictionary().themeBuilder.shuffleButton;
 
   const handleRandomize = () => {
     isRandomizingRef.current = true;
@@ -75,7 +77,7 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
         </Tooltip.Trigger>
         <Tooltip.Content>
           <p>
-            Randomize{" "}
+            {dict.tooltip}{" "}
             <Kbd>
               <Kbd.Content>R</Kbd.Content>
             </Kbd>
@@ -94,9 +96,9 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
               <AlertDialog.Icon status="default">
                 <Shuffle />
               </AlertDialog.Icon>
-              <AlertDialog.Heading>Are you sure you want to randomize?</AlertDialog.Heading>
+              <AlertDialog.Heading>{dict.dialogTitle}</AlertDialog.Heading>
             </AlertDialog.Header>
-            <AlertDialog.Body>This will overwrite your current theme settings.</AlertDialog.Body>
+            <AlertDialog.Body>{dict.dialogBody}</AlertDialog.Body>
             <AlertDialog.Footer className="flex-col sm:flex-row sm:items-center">
               <Button
                 className="order-2 w-full sm:order-2 sm:w-auto"
@@ -104,14 +106,14 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
                 variant="tertiary"
                 onPress={handleClose}
               >
-                Cancel
+                {dict.cancel}
               </Button>
               <Button
                 className="order-1 w-full sm:order-3 sm:w-auto"
                 size="md"
                 onPress={handleRandomize}
               >
-                Confirm
+                {dict.confirm}
               </Button>
               <div className="order-3 flex flex-1 items-center gap-2 self-start sm:order-1 sm:self-center">
                 <Checkbox
@@ -124,7 +126,7 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
                     <Checkbox.Indicator />
                   </Checkbox.Control>
                 </Checkbox>
-                <Label htmlFor="dont-show-again">Don't show again</Label>
+                <Label htmlFor="dont-show-again">{dict.dontShowAgain}</Label>
               </div>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

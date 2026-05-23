@@ -5,6 +5,7 @@ import type {ThemeVariables, radiusIds} from "../constants";
 import {ChevronsExpandVertical} from "@gravity-ui/icons";
 import {InputGroup, ListBox, Popover} from "@heroui/react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 import {useVariableSetter} from "../hooks";
@@ -23,6 +24,18 @@ type RadiusPopoverProps = {
   }>;
 };
 
+const RADIUS_DESCRIPTION_KEYS: Record<
+  (typeof radiusIds)[number],
+  "none" | "extraSmall" | "small" | "medium" | "large" | "extraLarge"
+> = {
+  "extra-large": "extraLarge",
+  "extra-small": "extraSmall",
+  large: "large",
+  medium: "medium",
+  none: "none",
+  small: "small",
+};
+
 export function RadiusPopover({
   description,
   label,
@@ -32,6 +45,10 @@ export function RadiusPopover({
   const {setVariable, variables} = useVariableSetter();
   const currentValue = variables[variableKey];
   const currentOption = radiusOptions.find((r) => r.id === currentValue);
+  const optionDict = useDictionary().themeBuilder.radius.options;
+
+  const translateOption = (id: (typeof radiusIds)[number]) =>
+    optionDict[RADIUS_DESCRIPTION_KEYS[id]];
 
   return (
     <Popover>
@@ -47,7 +64,7 @@ export function RadiusPopover({
               className="max-w-20 cursor-pointer capitalize"
               id={variableKey}
               name={variableKey}
-              value={currentOption?.description}
+              value={currentOption ? translateOption(currentOption.id) : ""}
             />
             <InputGroup.Suffix className="w-10">
               <ChevronsExpandVertical className="size-3" />
@@ -88,7 +105,7 @@ export function RadiusPopover({
               >
                 <span className="text-xl font-semibold">{item.label}</span>
                 <p className="text-xs text-muted capitalize group-data-[selected=true]:text-foreground">
-                  {item.description}
+                  {translateOption(item.id)}
                 </p>
               </ListBox.Item>
             )}
