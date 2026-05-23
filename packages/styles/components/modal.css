@@ -44,7 +44,17 @@
 .modal__backdrop {
   @apply fixed inset-0 z-50;
   @apply flex flex-row items-center justify-center;
-  @apply h-(--visual-viewport-height) w-full;
+  @apply h-(--visual-viewport-height);
+
+  /**
+   * Use 100vw instead of w-full (100%) to cover the scrollbar gutter.
+   * React Aria's usePreventScroll sets scrollbar-gutter: stable on <html>,
+   * which shrinks the 100% containing block by the gutter width — leaving
+   * a strip at the right edge uncovered. 100vw resolves against the full
+   * viewport. max-width: 100% prevents overflow in scoped portal containers.
+   */
+  width: 100vw;
+  max-width: 100%;
 
   /* Entering animation */
   &[data-entering="true"] {
