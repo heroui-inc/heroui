@@ -138,15 +138,9 @@
   background-color: transparent;
 
   /* Only affects the Docs/Components ul, not the search/theme toggle */
-  ul:first-of-type {
+  nav > ul {
     padding-top: 4px;
     gap: 0;
-  }
-
-  ul:last-of-type {
-    li > a:last-of-type {
-      @apply ml-1 inline-flex items-center rounded-full border p-1.5 text-foreground;
-    }
   }
 
   li > a {
