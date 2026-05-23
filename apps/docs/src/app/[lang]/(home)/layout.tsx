@@ -32,7 +32,7 @@ export default async function Layout({
         {
           children: (
             <div className="flex items-center gap-1.5">
-              <DesignThemeSelector triggerVariant="ghost" />
+              <DesignThemeSelector />
               <GitHubLinkSmall />
             </div>
           ),
