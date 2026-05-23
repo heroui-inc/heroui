@@ -29,12 +29,12 @@ import {
 } from "@/utils/design-theme";
 
 const tabs = [
-  {label: "components"},
-  {label: "dashboard"},
-  {label: "mail"},
-  {label: "chat"},
-  {label: "finances"},
-];
+  {id: "components"},
+  {id: "dashboard"},
+  {id: "mail"},
+  {id: "chat"},
+  {id: "finances"},
+] as const;
 
 const colors = [
   "#FF81B9", // pink
@@ -83,7 +83,9 @@ function getAccentStyleVars(color: Color, theme: "light" | "dark"): Record<strin
 const LOADER_DURATION_MS = 250;
 
 export function DemoShowcase() {
-  const demo = useDictionary().home.demo;
+  const dict = useDictionary();
+  const demo = dict.home.demo;
+  const tabLabels = dict.themeBuilder.tabs;
   const [selectedTab, setSelectedTab] = useState("components");
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const [activeDesignTheme, setActiveDesignTheme] = useState<ThemeId>(getStoredDesignTheme);
@@ -219,8 +221,8 @@ export function DemoShowcase() {
           <Tabs.ListContainer>
             <Tabs.List>
               {tabs.map((tab) => (
-                <Tabs.Tab key={tab.label} className="capitalize" id={tab.label}>
-                  {tab.label}
+                <Tabs.Tab key={tab.id} className="whitespace-nowrap" id={tab.id}>
+                  {tabLabels[tab.id]}
                   <Tabs.Indicator />
                 </Tabs.Tab>
               ))}

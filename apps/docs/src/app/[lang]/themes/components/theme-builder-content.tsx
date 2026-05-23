@@ -2,6 +2,7 @@
 
 import {ScrollShadow} from "@heroui/react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 import {HEROUI_PRO_URL} from "../constants";
@@ -23,6 +24,7 @@ function getProUrl(utm: {campaign?: string; content?: string; medium: string}) {
 
 export const ThemeBuilderContent = () => {
   const {selectedTab} = usePreviewTab();
+  const demo = useDictionary().home.demo;
   const isComponentsTab = selectedTab === "components";
 
   return (
@@ -40,7 +42,7 @@ export const ThemeBuilderContent = () => {
             medium: "themes-page",
           })}
         >
-          Available in Pro as template
+          {demo.proTemplate}
         </a>
       </div>
       <ScrollShadow

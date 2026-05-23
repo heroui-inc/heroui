@@ -145,6 +145,13 @@
     "lockableLabel": {
       "lockValue": "锁定数值",
       "unlockValue": "解锁数值"
+    },
+    "tabs": {
+      "components": "组件",
+      "dashboard": "仪表盘",
+      "mail": "邮件",
+      "chat": "聊天",
+      "finances": "财务"
     }
   },
   "pageActions": {

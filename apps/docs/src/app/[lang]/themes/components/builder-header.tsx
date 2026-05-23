@@ -30,7 +30,9 @@ export function BuilderHeader() {
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
   const {isCodeVisible, toggleCode} = useCodePanel();
   const {selectedTab, setSelectedTab} = usePreviewTab();
-  const dict = useDictionary().themeBuilder.header;
+  const themeBuilderDict = useDictionary().themeBuilder;
+  const dict = themeBuilderDict.header;
+  const tabLabels = themeBuilderDict.tabs;
   const params = useParams<{lang?: string}>();
   const lang =
     params?.lang && (i18n.languages as readonly string[]).includes(params.lang)
@@ -119,8 +121,8 @@ export function BuilderHeader() {
             <Tabs.ListContainer>
               <Tabs.List>
                 {tabs.map((tab) => (
-                  <Tabs.Tab key={tab.label} className="capitalize" id={tab.label}>
-                    {tab.label}
+                  <Tabs.Tab key={tab.label} className="whitespace-nowrap" id={tab.label}>
+                    {tabLabels[tab.label]}
                     <Tabs.Indicator />
                   </Tabs.Tab>
                 ))}

@@ -145,6 +145,13 @@
     "lockableLabel": {
       "lockValue": "Lock value",
       "unlockValue": "Unlock value"
+    },
+    "tabs": {
+      "components": "Components",
+      "dashboard": "Dashboard",
+      "mail": "Mail",
+      "chat": "Chat",
+      "finances": "Finances"
     }
   },
   "pageActions": {
