@@ -4,8 +4,9 @@ import type {Dictionary} from "@/lib/dictionaries";
 import {ExternalLink} from "@/components/external-link";
 import {Iconify} from "@/components/iconify";
 
-export function getHomeLayoutLinks(dict: Dictionary): LinkItemType[] {
+export function getHomeLayoutLinks(dict: Dictionary, lang: string = "en"): LinkItemType[] {
   const nav = dict.nav;
+  const blogUrl = `/${lang}/blog`;
 
   return [
     {
@@ -45,7 +46,7 @@ export function getHomeLayoutLinks(dict: Dictionary): LinkItemType[] {
         {
           icon: <Iconify icon="pen-line" />,
           text: nav.blog,
-          url: "/blog",
+          url: blogUrl,
         },
         {
           external: true,
@@ -97,7 +98,7 @@ export function getHomeLayoutLinks(dict: Dictionary): LinkItemType[] {
       active: "nested-url",
       on: "nav",
       text: nav.blog,
-      url: "/blog",
+      url: blogUrl,
     },
     {
       children: (

@@ -32,6 +32,23 @@
     "description": "Sorry, the page you're looking for could not be found.",
     "returnHome": "Return Home"
   },
+  "blog": {
+    "heading": "Blog",
+    "metaTitle": "Blog | HeroUI",
+    "metaDescription": "Guides, tutorials, and resources for building modern React applications with HeroUI. Comparisons, best practices, and more.",
+    "categoriesAriaLabel": "Blog categories",
+    "categories": {
+      "all": "All",
+      "tutorial": "Guides",
+      "comparison": "Comparisons",
+      "native": "Native",
+      "uiLibraries": "Resources"
+    },
+    "latestPosts": "Latest Posts",
+    "emptyState": "No posts found for this category.",
+    "backToBlog": "Back to Blog",
+    "relatedPosts": "Related Posts"
+  },
   "footer": {
     "allRightsReserved": "All rights reserved."
   },

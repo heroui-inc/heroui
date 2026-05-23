@@ -109,6 +109,7 @@ export function getHomeContent(lang: string): HomeContent {
 
 export function getHomeLayoutLinks(lang: string): LinkItemType[] {
   const {nav} = getHomeContent(lang);
+  const blogUrl = `/${lang}/blog`;
 
   return [
     {
@@ -148,7 +149,7 @@ export function getHomeLayoutLinks(lang: string): LinkItemType[] {
         {
           icon: <Iconify icon="pen-line" />,
           text: nav.blog,
-          url: "/blog",
+          url: blogUrl,
         },
         {
           external: true,
@@ -200,7 +201,7 @@ export function getHomeLayoutLinks(lang: string): LinkItemType[] {
       active: "nested-url",
       on: "nav",
       text: nav.blog,
-      url: "/blog",
+      url: blogUrl,
     },
     {
       children: (

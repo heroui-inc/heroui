@@ -22,6 +22,11 @@ const TAG_COLORS: Record<string, string> = {
   "ui-libraries": "from-blue-500 to-cyan-500",
 };
 
+const DATE_LOCALES: Record<string, string> = {
+  cn: "zh-CN",
+  en: "en-US",
+};
+
 export function getPostGradient(tags: string[]): string {
   for (const tag of tags) {
     if (TAG_COLORS[tag]) return TAG_COLORS[tag];
@@ -30,8 +35,8 @@ export function getPostGradient(tags: string[]): string {
   return "from-zinc-600 to-zinc-800";
 }
 
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("en-US", {
+function formatDate(date: string, lang: string) {
+  return new Date(date).toLocaleDateString(DATE_LOCALES[lang] ?? "en-US", {
     day: "numeric",
     month: "short",
     year: "numeric",
@@ -40,12 +45,13 @@ function formatDate(date: string) {
 
 export interface PostCardProps {
   post: BlogPost;
+  lang: string;
   featured?: boolean;
   /** Renders a denser version of the card. Use in narrow layouts (e.g. related posts). */
   compact?: boolean;
 }
 
-export function PostCard({compact = false, featured = false, post}: PostCardProps) {
+export function PostCard({compact = false, featured = false, lang, post}: PostCardProps) {
   const gradient = getPostGradient(post.tags);
   const [imgFailed, setImgFailed] = useState(false);
   const hasExternalImage = post.image && post.image.startsWith("http");
@@ -54,7 +60,7 @@ export function PostCard({compact = false, featured = false, post}: PostCardProp
   const coverTitleClass = compact ? "px-4 text-xs sm:text-sm" : "px-6 text-lg sm:text-xl";
 
   return (
-    <Link className="group flex flex-col" href={`/blog/${post.slug}`}>
+    <Link className="group flex flex-col" href={`/${lang}/blog/${post.slug}`}>
       <div
         className={`relative flex items-center justify-center overflow-hidden rounded-2xl ${featured ? "aspect-[2/1]" : "aspect-[16/9]"} ${showImage ? "bg-fd-muted" : `bg-gradient-to-br ${gradient}`}`}
       >
@@ -96,7 +102,7 @@ export function PostCard({compact = false, featured = false, post}: PostCardProp
         >
           <span>{post.author}</span>
           <span>&middot;</span>
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <time dateTime={post.date}>{formatDate(post.date, lang)}</time>
         </div>
       </div>
     </Link>

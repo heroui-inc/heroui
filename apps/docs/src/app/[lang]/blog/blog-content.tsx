@@ -1,6 +1,7 @@
 "use client";
 
 import type {BlogPost} from "@/lib/blog";
+import type {Dictionary} from "@/lib/dictionaries";
 
 import {Tag, TagGroup} from "@heroui/react";
 import {parseAsStringLiteral, useQueryState} from "nuqs";
@@ -10,21 +11,29 @@ import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 
 import {PostCard} from "./post-card";
 
-const CATEGORIES = [
-  {label: "All", value: "all"},
-  {label: "Guides", value: "tutorial"},
-  {label: "Comparisons", value: "comparison"},
-  {label: "Native", value: "native"},
-  {label: "Resources", value: "ui-libraries"},
-] as const;
+const CATEGORY_VALUES = ["all", "tutorial", "comparison", "native", "ui-libraries"] as const;
 
-const categoryValues = CATEGORIES.map((c) => c.value);
+type CategoryValue = (typeof CATEGORY_VALUES)[number];
 
-export function BlogContent({posts}: {posts: BlogPost[]}) {
+interface BlogContentProps {
+  posts: BlogPost[];
+  lang: string;
+  dict: Dictionary["blog"];
+}
+
+export function BlogContent({dict, lang, posts}: BlogContentProps) {
   const [activeCategory, setActiveCategory] = useQueryState(
     "category",
-    parseAsStringLiteral(categoryValues).withDefault("all"),
+    parseAsStringLiteral(CATEGORY_VALUES).withDefault("all"),
   );
+
+  const categories: {label: string; value: CategoryValue}[] = [
+    {label: dict.categories.all, value: "all"},
+    {label: dict.categories.tutorial, value: "tutorial"},
+    {label: dict.categories.comparison, value: "comparison"},
+    {label: dict.categories.native, value: "native"},
+    {label: dict.categories.uiLibraries, value: "ui-libraries"},
+  ];
 
   const filteredPosts = useMemo(() => {
     if (activeCategory === "all") return posts;
@@ -38,11 +47,11 @@ export function BlogContent({posts}: {posts: BlogPost[]}) {
   return (
     <main className="container mx-auto max-w-6xl px-4 py-16">
       <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Blog</h1>
+        <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{dict.heading}</h1>
       </div>
 
       <TagGroup
-        aria-label="Blog categories"
+        aria-label={dict.categoriesAriaLabel}
         className="mb-10"
         selectedKeys={new Set([activeCategory])}
         selectionMode="single"
@@ -50,11 +59,11 @@ export function BlogContent({posts}: {posts: BlogPost[]}) {
         onSelectionChange={(keys) => {
           const selected = [...keys][0];
 
-          if (selected) setActiveCategory(String(selected) as (typeof categoryValues)[number]);
+          if (selected) setActiveCategory(String(selected) as CategoryValue);
         }}
       >
         <TagGroup.List>
-          {CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <Tag key={cat.value} id={cat.value}>
               {cat.label}
             </Tag>
@@ -65,7 +74,7 @@ export function BlogContent({posts}: {posts: BlogPost[]}) {
       {featuredPosts.length > 0 && (
         <div className="mb-14 grid gap-6 md:grid-cols-2">
           {featuredPosts.map((post) => (
-            <PostCard key={post.slug} featured post={post} />
+            <PostCard key={post.slug} featured lang={lang} post={post} />
           ))}
         </div>
       )}
@@ -74,19 +83,17 @@ export function BlogContent({posts}: {posts: BlogPost[]}) {
 
       {latestPosts.length > 0 && (
         <>
-          <h2 className="mb-6 text-xl font-semibold">Latest Posts</h2>
+          <h2 className="mb-6 text-xl font-semibold">{dict.latestPosts}</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {latestPosts.map((post) => (
-              <PostCard key={post.slug} post={post} />
+              <PostCard key={post.slug} lang={lang} post={post} />
             ))}
           </div>
         </>
       )}
 
       {filteredPosts.length === 0 && (
-        <p className="text-fd-muted-foreground py-20 text-center text-lg">
-          No posts found for this category.
-        </p>
+        <p className="text-fd-muted-foreground py-20 text-center text-lg">{dict.emptyState}</p>
       )}
     </main>
   );

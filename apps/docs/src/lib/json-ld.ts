@@ -103,6 +103,8 @@ export function getTechArticleJsonLd(params: {
 export function getBlogJsonLd(params: {
   url: string;
   posts: {title: string; url: string; datePublished: string; description: string}[];
+  description?: string;
+  name?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -115,8 +117,9 @@ export function getBlogJsonLd(params: {
       url: post.url,
     })),
     description:
+      params.description ??
       "Guides, tutorials, and resources for building modern React applications with HeroUI.",
-    name: "HeroUI Blog",
+    name: params.name ?? "HeroUI Blog",
     publisher: {
       "@type": "Organization",
       logo: {

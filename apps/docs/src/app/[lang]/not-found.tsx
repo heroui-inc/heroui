@@ -17,7 +17,7 @@ export default async function NotFound() {
     <HomeLayout
       {...baseOptions}
       i18n
-      links={getHomeLayoutLinks(dict)}
+      links={getHomeLayoutLinks(dict, locale)}
       themeSwitch={{
         mode: "light-dark-system",
       }}

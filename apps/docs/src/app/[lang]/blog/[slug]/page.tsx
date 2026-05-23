@@ -12,28 +12,35 @@ import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {DocsImage} from "@/components/docs-image";
 import {siteConfig} from "@/config/site";
 import {getAllBlogPosts, getBlogPost, getRelatedPosts} from "@/lib/blog";
+import {getDictionary, hasLocale} from "@/lib/dictionaries";
+import {i18n} from "@/lib/i18n";
 import {getTechArticleJsonLd} from "@/lib/json-ld";
 import {getMDXComponents} from "@/mdx-components";
 
 import {PostCard} from "../post-card";
 
+const DATE_LOCALES: Record<string, string> = {
+  cn: "zh-CN",
+  en: "en-US",
+};
+
 interface BlogPostPageProps {
-  params: Promise<{slug: string}>;
+  params: Promise<{lang: string; slug: string}>;
 }
 
 export async function generateStaticParams() {
-  const posts = getAllBlogPosts();
-
-  return posts.map((post) => ({slug: post.slug}));
+  return i18n.languages.flatMap((lang) =>
+    getAllBlogPosts(lang).map((post) => ({lang, slug: post.slug})),
+  );
 }
 
 export async function generateMetadata({params}: BlogPostPageProps): Promise<Metadata> {
-  const {slug} = await params;
-  const post = getBlogPost(slug);
+  const {lang, slug} = await params;
+  const post = getBlogPost(slug, lang);
 
   if (!post) return {};
 
-  const url = `/blog/${slug}`;
+  const url = `/${lang}/blog/${slug}`;
 
   return {
     alternates: {
@@ -60,10 +67,16 @@ export async function generateMetadata({params}: BlogPostPageProps): Promise<Met
 }
 
 export default async function BlogPostPage({params}: BlogPostPageProps) {
-  const {slug} = await params;
-  const post = getBlogPost(slug);
+  const {lang, slug} = await params;
+
+  if (!hasLocale(lang)) notFound();
+
+  const post = getBlogPost(slug, lang);
 
   if (!post) notFound();
+
+  const dict = await getDictionary(lang);
+  const {blog} = dict;
 
   const {content} = await compileMDX({
     components: getMDXComponents(),
@@ -77,7 +90,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
     source: post.content,
   });
 
-  const postUrl = new URL(`/blog/${slug}`, siteConfig.siteUrl).toString();
+  const postUrl = new URL(`/${lang}/blog/${slug}`, siteConfig.siteUrl).toString();
   const articleJsonLd = getTechArticleJsonLd({
     authorName: post.author,
     authorUrl: post.authorUrl,
@@ -98,10 +111,10 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
       <main className="mx-auto w-full max-w-3xl px-6 py-16 sm:px-8">
         <Link
           className="button button--tertiary mb-12 -ml-2 inline-flex items-center gap-1"
-          href="/blog"
+          href={`/${lang}/blog`}
         >
           <ChevronLeft className="size-4" />
-          Back to Blog
+          {blog.backToBlog}
         </Link>
 
         <article>
@@ -147,7 +160,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
             )}
             <span>&middot;</span>
             <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("en-US", {
+              {new Date(post.date).toLocaleDateString(DATE_LOCALES[lang] ?? "en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
@@ -162,16 +175,16 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
           <ProBanner />
 
           {(() => {
-            const related = getRelatedPosts(slug, post.tags, 3);
+            const related = getRelatedPosts(slug, post.tags, 3, lang);
 
             if (related.length === 0) return null;
 
             return (
-              <nav aria-label="Related posts" className="border-fd-border mt-12 border-t pt-10">
-                <h2 className="mb-6 text-lg font-semibold">Related Posts</h2>
+              <nav aria-label={blog.relatedPosts} className="border-fd-border mt-12 border-t pt-10">
+                <h2 className="mb-6 text-lg font-semibold">{blog.relatedPosts}</h2>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {related.map((r) => (
-                    <PostCard key={r.slug} compact post={r} />
+                    <PostCard key={r.slug} compact lang={lang} post={r} />
                   ))}
                 </div>
               </nav>

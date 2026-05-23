@@ -29,7 +29,7 @@ export default async function Layout({
       {...baseOptions}
       i18n
       links={[
-        ...getHomeLayoutLinks(dict),
+        ...getHomeLayoutLinks(dict, lang),
         {
           children: (
             <div className="flex items-center gap-1.5">

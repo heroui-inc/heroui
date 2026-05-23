@@ -35,17 +35,30 @@ export const getRSS = async (): Promise<string> => {
     title: siteConfig.fullName,
   });
 
-  for (const post of getAllBlogPosts()) {
-    const postUrl = new URL(`/blog/${post.slug}`, baseUrl);
+  const seenBlogIds = new Set<string>();
 
-    feed.addItem({
-      author: [{name: post.author}],
-      date: new Date(post.date),
-      description: post.description,
-      id: `/blog/${post.slug}`,
-      link: postUrl.toString(),
-      title: post.title,
-    });
+  for (const locale of i18n.languages) {
+    for (const post of getAllBlogPosts(locale)) {
+      // Only emit each post once for its source locale, so fallback posts
+      // are not duplicated across the feed.
+      if (post.locale !== locale) continue;
+
+      const itemId = `/${locale}/blog/${post.slug}`;
+
+      if (seenBlogIds.has(itemId)) continue;
+      seenBlogIds.add(itemId);
+
+      const postUrl = new URL(itemId, baseUrl);
+
+      feed.addItem({
+        author: [{name: post.author}],
+        date: new Date(post.date),
+        description: post.description,
+        id: itemId,
+        link: postUrl.toString(),
+        title: post.title,
+      });
+    }
   }
 
   for (const page of source.getPages()) {

@@ -4,15 +4,23 @@ import {HomeLayout} from "fumadocs-ui/layouts/home";
 
 import {getHomeLayoutLinks} from "@/app/[lang]/(home)/home-layout-links";
 import {baseOptions} from "@/app/[lang]/layout.config";
-import {getDictionary} from "@/lib/dictionaries";
+import {getDictionary, hasLocale} from "@/lib/dictionaries";
 
-export default async function BlogLayout({children}: {children: ReactNode}) {
-  const dict = await getDictionary("en");
+export default async function BlogLayout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: Promise<{lang: string}>;
+}) {
+  const {lang} = await params;
+  const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
 
   return (
     <HomeLayout
       {...baseOptions}
-      links={getHomeLayoutLinks(dict)}
+      i18n
+      links={getHomeLayoutLinks(dict, lang)}
       themeSwitch={{
         mode: "light-dark-system",
       }}

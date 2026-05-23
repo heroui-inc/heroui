@@ -80,6 +80,21 @@ export async function getRedirects(): Promise<Redirect[]> {
     source: "/theme",
   });
 
+  // Blog moved under [lang] for i18n. Redirect legacy /blog and /blog/<slug>
+  // to the default-locale URL so old links keep working.
+  redirects.push(
+    {
+      destination: "/en/blog",
+      permanent: true,
+      source: "/blog",
+    },
+    {
+      destination: "/en/blog/:slug",
+      permanent: true,
+      source: "/blog/:slug",
+    },
+  );
+
   // Framework root redirects - redirect /react, /web, and /native to their respective docs
   redirects.push(
     {

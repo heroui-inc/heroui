@@ -32,6 +32,23 @@
     "description": "抱歉，找不到您要访问的页面。",
     "returnHome": "返回首页"
   },
+  "blog": {
+    "heading": "博客",
+    "metaTitle": "博客 | HeroUI",
+    "metaDescription": "面向现代 React 应用的指南、教程与资源。包含对比、最佳实践等内容。",
+    "categoriesAriaLabel": "博客分类",
+    "categories": {
+      "all": "全部",
+      "tutorial": "教程",
+      "comparison": "对比",
+      "native": "Native",
+      "uiLibraries": "资源"
+    },
+    "latestPosts": "最新文章",
+    "emptyState": "该分类下暂无文章。",
+    "backToBlog": "返回博客",
+    "relatedPosts": "相关文章"
+  },
   "footer": {
     "allRightsReserved": "保留所有权利。"
   },
