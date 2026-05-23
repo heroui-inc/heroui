@@ -77,13 +77,19 @@ export function FrameworksTabs({className}: {className?: string}) {
       <Tabs selectedKey={selectedKey} onSelectionChange={handleTabChange}>
         <Tabs.ListContainer className="pb-1.5">
           <Tabs.List aria-label={dict.ariaLabel}>
-            <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-sky-400" id="web">
-              <Globe className="mr-1 size-4" />
+            <Tabs.Tab
+              className="whitespace-nowrap sm:h-6 data-[selected=true]:[&>svg]:text-sky-400"
+              id="web"
+            >
+              <Globe className="mr-1 size-4 shrink-0" />
               {dict.web}
               <Tabs.Indicator />
             </Tabs.Tab>
-            <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-indigo-500" id="native">
-              <Smartphone className="mr-1 size-4" />
+            <Tabs.Tab
+              className="whitespace-nowrap sm:h-6 data-[selected=true]:[&>svg]:text-indigo-500"
+              id="native"
+            >
+              <Smartphone className="mr-1 size-4 shrink-0" />
               {dict.native}
               <Tabs.Indicator />
             </Tabs.Tab>
