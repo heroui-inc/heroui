@@ -106,11 +106,27 @@ export async function getRedirects(): Promise<Redirect[]> {
     source: "/docs",
   });
 
+  // Locale-prefixed root redirect (i18n)
+  // Without these, /en/docs and /cn/docs hit the catch-all route with no slug
+  // and 404 because there is no content/docs/{locale}/index.mdx.
+  redirects.push({
+    destination: "/:lang/docs/react/getting-started",
+    permanent: true,
+    source: "/:lang(en|cn)/docs",
+  });
+
   // Redirect /docs/getting-started to /docs/react/getting-started
   redirects.push({
     destination: "/docs/react/getting-started",
     permanent: true,
     source: "/docs/getting-started",
+  });
+
+  // Locale-prefixed equivalent
+  redirects.push({
+    destination: "/:lang/docs/react/getting-started",
+    permanent: true,
+    source: "/:lang(en|cn)/docs/getting-started",
   });
 
   // Getting Started pages - now includes (overview), (handbook), and (ui-for-agents) route groups
