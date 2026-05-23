@@ -139,7 +139,9 @@ export function DocsLayout(props: DocsLayoutProps) {
 
     // Normalize nav.title to ReactNode
     const titleNode: ReactNode =
-      typeof nav.title === "function" ? nav.title({} as ComponentProps<"a">) : nav.title;
+      typeof nav.title === "function"
+        ? (nav.title({} as ComponentProps<"a">) as ReactNode)
+        : nav.title;
     const viewport = (
       <SidebarViewport>
         {links
@@ -323,7 +325,9 @@ function DocsNavbar({
 
   // Normalize nav.title to ReactNode
   const titleNode: ReactNode =
-    typeof nav.title === "function" ? nav.title({} as ComponentProps<"a">) : nav.title;
+    typeof nav.title === "function"
+      ? (nav.title({} as ComponentProps<"a">) as ReactNode)
+      : nav.title;
 
   return (
     <LayoutHeader

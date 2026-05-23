@@ -13,8 +13,10 @@ export const revalidate = false;
 const SUPPORTED_LANGS = new Set<string>(i18n.languages);
 
 function extractLangFromSlug(slug: string[]): {slug: string[]; lang?: string} {
-  if (slug.length > 0 && SUPPORTED_LANGS.has(slug[0])) {
-    return {lang: slug[0], slug: slug.slice(1)};
+  const first = slug[0];
+
+  if (first !== undefined && SUPPORTED_LANGS.has(first)) {
+    return {lang: first, slug: slug.slice(1)};
   }
 
   return {slug};
