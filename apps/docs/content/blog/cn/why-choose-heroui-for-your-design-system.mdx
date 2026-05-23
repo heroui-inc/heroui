@@ -1,0 +1,305 @@
+---
+title: "为什么选择 HeroUI 作为你的设计系统"
+description: "为什么选择 HeroUI：基于 React Aria 的可访问性、Tailwind CSS v4 样式系统、复合组件以及面向生产级 React 应用的 AI 原生工具支持。"
+date: "2026-05-17"
+author: "Junior Garcia"
+authorHandle: "@jrgarciadev"
+authorUrl: "https://x.com/jrgarciadev"
+authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
+tags: ["heroui", "design-system", "react", "ui-libraries"]
+image: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-og_2x.jpg"
+darkImage: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/heroui-og-black_2x.jpg"
+---
+
+大多数 React 组件库都在解决同一个问题：不再重复造按钮。但设计系统往往会在另一个阶段出问题 —— 当你选用的库无法灵活贴合产品需求时；当可访问性是发布之后才匆忙补上的考量时；又或者当你的 AI 编码助手凭空臆造出根本不存在的 props 时。
+
+HeroUI 将 [React Aria](https://react-spectrum.adobe.com/react-aria/) 的可访问性、[Tailwind CSS v4](https://tailwindcss.com/) 的样式系统，以及一套复合组件 API 结合到一起 —— 让你拥有结构上的掌控权，又不必让 props 数量失控。本文将给出选择它作为设计系统基础的具体理由。
+
+## 技术栈
+
+| 分层 | 技术 | 原因 |
+|-------|-----------|-----|
+| **可访问性** | React Aria (Adobe) | 业界领先的 WCAG 基础原语，由 Adobe 积极维护 |
+| **样式** | Tailwind CSS v4 | 静态 CSS、零运行时、通过 `@theme` 定义设计 tokens |
+| **组件 API** | 复合组件 | `Card.Header`、`Modal.Body` —— 结构可控，不必让 props 失控 |
+| **类型** | TypeScript | 完整类型覆盖、泛型 props、兼容严格模式 |
+| **AI 工具** | MCP 服务器、llms.txt、agent skills | 让 AI 助手能拿到最新 API，而非陈旧的训练数据 |
+| **跨平台** | HeroUI Native (React Native) | 同一套设计系统覆盖 Web 与移动端 —— 目前没有其他开源库能做到这一点 |
+
+## 真正达到企业级标准的可访问性
+
+每个 HeroUI 组件都构建在 [React Aria](https://react-spectrum.adobe.com/react-aria/) 之上 —— Adobe 的可访问性原语库。这不是营销话术：React 生态中没有比它更深入的可访问性基础，它甚至支撑着 Adobe 自己的生产级设计系统（Spectrum），覆盖 Photoshop Web、Acrobat 和 Lightroom 等产品。
+
+React Aria 处理了大多数库都未顾及的部分：
+
+- **感知平台的键盘导航。** Mac、Windows 与 Linux 在 Home/End、option/alt+方向键和焦点行为上有着不同的惯例。React Aria 会自动适配。
+- **屏幕阅读器的播报。** 实时区域、状态消息以及动态内容播报，在 JAWS、NVDA 和 VoiceOver 上都能正确工作。
+- **触摸交互。** 移动端的长按、拖放与手势处理 —— 不仅仅是点击事件。
+- **国际化。** 从右到左布局、按区域格式化日期/数字，以及对 30+ 种语言的字符串排序支持。
+- **虚拟焦点。** 对于包含成千上万项的集合，React Aria 在保持性能的同时仍能正确通知屏幕阅读器。
+
+这些都很重要，因为在 2026 年，可访问性合规已经不再是可选项。政府、医疗、金融与教育行业都要求符合 WCAG。HeroUI 把这种合规作为默认能力提供，而不是需要额外升级才能获得的特性。
+
+### React Aria 与 Radix UI 的对比
+
+许多流行的库（如 shadcn/ui、Park UI）都构建在 Radix UI 之上。Radix 本身很扎实，但原团队已将重心转向 Base UI，Radix 基础组件的长期维护仍是未定之数。React Aria 则由 Adobe 持续维护 —— 一家自身产品就严重依赖它的公司。
+
+## 原生支持 Tailwind CSS v4
+
+HeroUI 不是把 Tailwind 当作兼容层 —— 它从一开始就是为 Tailwind CSS v4 设计的。
+
+**这意味着：**
+
+- **零运行时 CSS 开销。** 所有样式都是静态 CSS，在构建时就被解析完毕。没有 CSS-in-JS 的运行时计算，没有样式注入，也没有水合(hydration)成本。
+- **通过 CSS 自定义属性定义设计 tokens。** 主题以标准 CSS `@theme` 指令的形式存在，而不是 JavaScript 配置对象。改一个 token，所有组件随之更新。
+- **基于工具类的自定义。** 用 `className` 覆盖任意组件 —— 与你在项目其他地方使用 Tailwind 的方式完全一致。
+- **更小的输出体积。** Tailwind v4 的新引擎生成的 CSS 更少，再加上 HeroUI 的模块化导入，能让你的生产环境包保持精简。
+
+```tsx
+<Button variant="secondary" className="font-semibold tracking-wide">
+  Get Started
+</Button>
+
+<Card className="max-w-md shadow-lg">
+  <Card.Header className="pb-0">
+    <Card.Title className="text-xl font-bold">Dashboard</Card.Title>
+  </Card.Header>
+  <Card.Content className="py-4">
+    Your metrics here
+  </Card.Content>
+</Card>
+```
+
+如果你的团队已经在用 Tailwind，引入 HeroUI 不会带来第二套样式系统。如果你还没用 Tailwind，是否采用它是另一个独立的决定 —— 但这是 2026 年大多数 React 团队都已经做出的选择。
+
+## 复合组件 API
+
+HeroUI 采用复合组件 —— 父组件通过点号语法暴露其子组件的模式。这与 Radix UI 的做法相同，并且在复杂 UI 上比基于 props 的 API 扩展性更好。
+
+```tsx
+<Modal>
+  <Button>Open</Button>
+  <Modal.Backdrop>
+    <Modal.Container>
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Heading>Confirm</Modal.Heading>
+        </Modal.Header>
+        <Modal.Body>Are you sure?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="ghost">Cancel</Button>
+          <Button>Confirm</Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </Modal.Container>
+  </Modal.Backdrop>
+</Modal>
+```
+
+**这种模式对设计系统的意义：**
+
+- **结构可控。** 可以在组件的各个部分之间重新排列、省略或插入自定义元素，而不必与库的内部布局对抗。
+- **细粒度的样式。** 可以为任意子组件单独应用 `className`，让 `Card.Header` 与 `Card.Footer` 拥有不同样式，无需 CSS 覆盖。
+- **TypeScript 校验。** 编译器会检查你的组件树结构 —— 错误嵌套在构建时就会被发现，而不是带到生产环境。
+- **JSX 可读性强。** 组件的层级结构直接映射到 UI 的视觉层级。新成员阅读代码即可理解布局。
+
+## <ComponentCount />+ 个组件
+
+HeroUI 提供 <ComponentCount />+ 个组件，以及 <ExampleCount />+ 个有文档的示例。库覆盖了产品 UI 的完整面：
+
+- **数据输入** —— Input、Textarea、NumberField、Select、ComboBox、Autocomplete、DatePicker、DateRangePicker、ColorPicker、Slider、Switch、Checkbox、Radio
+- **数据展示** —— Table（排序、选择、分页）、Avatar、Badge、Chip、Tag、Skeleton
+- **布局** —— Card、Surface、Separator、Fieldset
+- **导航** —— Tabs、Breadcrumbs、Pagination、Link
+- **反馈** —— Toast、ProgressBar、ProgressCircle、Meter、Spinner
+- **覆盖层** —— Modal、Drawer、Popover、Tooltip、Dropdown、AlertDialog
+- **展开/折叠** —— Accordion、Disclosure
+- **动作类** —— Button、ToggleButton、ToggleButtonGroup
+
+像 Calendar、DatePicker、ColorPicker 和 Table 这样的复杂组件都是自包含的 —— 它们在内部处理日期运算、本地化格式、键盘导航以及屏幕阅读器播报。这些组件想做到真正可访问其实非常困难，而 HeroUI 把它们作为持续维护、经过测试的原语提供出来。
+
+## 面向 AI 的原生工具
+
+如今，绝大多数开发者每天都在使用 AI 编码助手。生成代码的质量取决于 AI 是否拥有你所用组件库的准确上下文 —— 否则就只能凭借陈旧的训练数据猜测。
+
+HeroUI 提供了四项官方集成：
+
+### MCP 服务器
+
+一个 [Model Context Protocol 服务器](/docs/react/getting-started/mcp-server)，AI 代理可以通过它查询组件文档、API、源码与设计 tokens。可接入 Cursor、Claude Code、Windsurf，或任何兼容 MCP 的编辑器。
+
+当 AI 助手能够访问 MCP 服务器时，它可以查到任意 HeroUI 组件的复合组件结构、可用 props 以及正确的 import —— 不再需要凭空臆造。
+
+[了解如何配置 MCP 服务器 →](/docs/react/getting-started/mcp-server)
+
+### llms.txt
+
+一个结构化参考文件，位于 [heroui.com/llms.txt](/docs/react/getting-started/llms-txt)，为 LLM 提供整个库的精炼且准确的参考。这是一个标准化格式，AI 工具会读取它来避免生成已废弃的写法。
+
+[进一步了解 llms.txt →](/docs/react/getting-started/llms-txt)
+
+### Agent Skills
+
+为 Cursor、Claude Code 等 AI 工具预构建的 [skill 文件](/docs/react/getting-started/agent-skills)，帮助 AI 代理掌握 HeroUI 的约定 —— 包括正确的 import、复合组件模式、样式方案以及项目脚手架。
+
+[了解如何安装 Agent Skills →](/docs/react/getting-started/agent-skills)
+
+### AGENTS.md
+
+一份 [AGENTS.md 文件](/docs/react/getting-started/agents-md)，为 AI 编码代理提供仓库级上下文。它描述了项目结构、编码约定与组件模式，让代理从第一次 prompt 起就理解你的代码库。
+
+[了解 AGENTS.md →](/docs/react/getting-started/agents-md)
+
+**结果是：** AI 助手能够生成正确的 HeroUI v3 代码，使用正确的复合组件模式、import 路径与 Tailwind 类名。这一点至关重要，因为错误的 AI 输出在调试上耗费的时间，远多于它生成代码本身节省的时间。
+
+## 生态系统
+
+### HeroUI Pro
+
+[HeroUI Pro](https://heroui.com/pro) 在基础库之上扩展了应用级组件与模板：
+
+- **AppLayout、Sidebar、Navbar** —— 包含响应式行为的完整应用外壳
+- **DataGrid** —— 支持类型化列、排序与过滤的高密度数据表格
+- **KPI、NumberValue、TrendChip** —— 仪表盘指标组件
+- **LineChart、BarChart** —— 数据可视化
+- **Sheet、CommandMenu** —— 高级覆盖层模式
+- **模板** —— 仪表盘、财务、聊天与邮件应用等起点模板
+
+Pro 是付费产品 —— 当你需要的不仅是 UI 组件，更是应用级基础设施时再使用。
+
+### HeroUI Native
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-light-1.webp"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/heroui-native-og-dark-1.webp"
+  alt="HeroUI Native - React Native components"
+/>
+
+HeroUI 是目前唯一在 Web 与移动端上都能提供同等组件质量的开源设计系统。[HeroUI Native](/docs/native/getting-started) 把同一套设计 tokens、复合组件 API 以及可访问性标准带到 React Native —— 利用各平台的原生 API，而非简单地包装 WebView。
+
+这意味着构建跨平台产品的团队可以在 React（Web）和 React Native（移动端）之间共享同一套设计系统，无需对任何一端妥协。统一的视觉语言、统一的组件模式、统一的主题 tokens —— 但在各端都使用原生渲染。
+
+目前没有其他开源 React 组件库能够做到这一点。MUI、shadcn/ui、Chakra UI 与 Mantine 都仅限于 Web。如果你的产品需要同时支撑 Web 与移动端，HeroUI 是唯一一套能从同一基础覆盖两端的设计系统。
+
+### Figma Kit
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/blog/community-figma-preview-light.png"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/blog/community-figma-preview-dark.png"
+  alt="HeroUI Figma Kit"
+/>
+
+[HeroUI Figma Kit (v3)](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3) 让设计与代码保持同步。Figma 中的组件与 React 实现一一对应，设计师与开发者基于同一份真实来源进行工作。
+
+### Storybook
+
+每个组件都有对应的 [Storybook stories](https://storybook-v3.heroui.com/)，展示所有变体、状态与组合方式。可用于可视化测试、设计评审与文档。
+
+### 社区
+
+HeroUI 并非新生事物 —— 我们已经构建了 5 年多，最早从 v1（最初的 NextUI）开始。社区规模稳步增长：GitHub 上有 29.3K+ stars，Discord 上有 9K+ 成员，每周还有数以千计的讨论、社区回答与 issue 被解决。
+
+- [GitHub](https://github.com/heroui-inc/heroui) —— 源码、issue 与讨论
+- [Discord](https://discord.gg/heroui) —— 9K+ 成员，社区支持与公告
+- [X / Twitter](https://x.com/hero_ui) —— 更新与版本发布
+
+### 获得 Y Combinator 投资
+
+HeroUI 获得了风险投资，包括 [Y Combinator](https://www.ycombinator.com/companies/heroui)。这意味着我们有专职的全职团队、长期的维护承诺，以及持续交付所需的资源。在选用一个组件库时，你其实是在押注它的未来 —— HeroUI 的目标是长期存在。
+
+## 开箱即用的设计品质
+
+HeroUI 提供经过精心打磨的默认样式，不做任何主题定制看起来也很精致：
+
+- **流畅的动画。** 按钮带有细腻的按下反馈，弹窗以弹簧物理动效呈现，手风琴展开时使用自然的缓动曲线。
+- **均衡的间距 tokens。** 所有组件遵循统一的数学比例，padding、margin 与 gap 都保持一致。
+- **阴影层级。** 浅色与深色模式下都能良好工作的高度层级，无需手动调整。
+- **主题变体。** 内置 glass、brutalism 以及中性等多种视觉风格，通过设计 tokens 即可切换。
+
+设计 token 体系基于 CSS 自定义属性，主题就是标准 CSS：
+
+```css
+@theme {
+  --color-primary: oklch(0.6 0.25 260);
+  --radius-field: 0.5rem;
+  --shadow-surface: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+```
+
+修改 tokens，所有组件都会随之全局更新。不需要 JavaScript 主题对象，不需要 provider 包装，也没有运行时开销。
+
+想要几次点击就把 HeroUI 变成你自己的样子？[主题构建器](/themes)允许你以可视化的方式自定义颜色、字体、圆角与间距 —— 然后导出一份可直接用于项目的 CSS 主题。
+
+## 两步即可就绪
+
+大多数组件库在渲染第一个组件之前，都需要配置文件、provider 包装、主题对象与插件设置。HeroUI 不需要。整个安装过程只有两步：
+
+**1. 安装：**
+
+```bash
+npm i @heroui/styles @heroui/react
+```
+
+**2. 在你的 CSS 中加一行：**
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles"; /* 就这些 */
+```
+
+接下来即可使用任意组件 —— 不需要 `ThemeProvider`、不需要 `ChakraProvider`、不需要 `MantineProvider`，也不需要任何配置对象：
+
+```tsx
+import { Button, Card } from "@heroui/react";
+
+export default function Page() {
+  return (
+    <Card>
+      <Card.Content>
+        <Button>Click me</Button>
+      </Card.Content>
+    </Card>
+  );
+}
+```
+
+整个配置就是这些。不需要用 provider 包裹整个应用，不需要主题配置文件，也不需要任何运行时初始化。安装、引入一行 CSS，然后就可以开始构建。查看[快速开始指南](/docs/react/getting-started/quick-start)，五分钟内即可上手。
+
+## 服务端组件
+
+HeroUI 的设计契合 React Server Components 的模型：
+
+- **静态组件**（`Card`、`Badge`、`Text`、`Separator`、`Avatar`）可以留在服务端组件树中，不带任何客户端 JavaScript。
+- **交互式组件**（`Button`、`Modal`、`Table`、`Select`）使用客户端边界 —— 每个组件都有清晰的文档说明。
+- **不强制使用 provider** —— 没有迫使整个组件树进入客户端边界的客户端 context。
+
+这意味着你的页面默认会输出更少的 JavaScript。静态布局在服务端渲染，交互式部件仅在需要的位置进行水合(hydration)。
+
+## 一些权衡
+
+HeroUI 采用聚焦的策略：与其交付所有可能的组件，我们更优先保证团队最常使用组件的深度、可访问性与品质。对于富文本编辑、拖放或图表等专门需求，我们建议将 HeroUI 与擅长这些特定问题的专业库搭配使用 —— 这比依赖单一库覆盖所有场景效果更好。
+
+HeroUI 是为 Tailwind CSS v4 构建的。如果你的团队已经在使用 Tailwind，引入它非常顺畅。如果你使用的是其他样式方案，迁移到 Tailwind 是一个独立但值得的投入 —— 那是面向现代 CSS 工具链的一笔投资。
+
+## 谁适合使用 HeroUI
+
+如果你正在构建以下产品，HeroUI 会是个不错的选择：
+
+- **SaaS 应用** —— 表单、表格、覆盖层与导航，并具备 React Aria 的可访问性
+- **仪表盘与管理后台** —— 借助 HeroUI Pro 组件构建的高密度数据布局
+- **电商门店** —— 高性能、可访问、对 SEO 友好的组件渲染
+- **营销官网与落地页** —— 精致的默认样式，没有运行时 CSS 开销
+- **跨平台产品** —— 借助 HeroUI Native，在 Web（React）与移动端（React Native）上共享同一套设计系统
+- **任何重视可访问性、Tailwind CSS 集成与 AI 辅助开发的 React / Next.js 项目**
+
+## 开始使用
+
+```bash
+npm install @heroui/styles @heroui/react
+```
+
+- [快速开始指南](/docs/react/getting-started/quick-start) —— 五分钟内即可完成配置
+- [组件文档](/docs/react/components) —— 完整的 API 参考与在线示例
+- [主题指南](/docs/react/getting-started/theming) —— 自定义设计系统
+- [MCP 服务器](/docs/react/getting-started/mcp-server) —— 接入你的 AI 编码助手
+- [GitHub 仓库](https://github.com/heroui-inc/heroui) —— 源码与 issue
