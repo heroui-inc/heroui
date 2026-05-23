@@ -1,7 +1,5 @@
 "use client";
 
-import type {ThemeValues} from "../constants";
-
 import {useMemo} from "react";
 
 import {
@@ -29,7 +27,7 @@ export interface FontMeta {
   family: string;
 }
 
-export interface ComputedThemeVars {
+interface ComputedThemeVars {
   fullLightVars: Record<string, string>;
   fullDarkVars: Record<string, string>;
   fontMeta: FontMeta;
@@ -48,7 +46,7 @@ function getCommonVars(
   };
 }
 
-export function computeThemeVars(variables: ThemeValues): ComputedThemeVars {
+function computeThemeVars(variables: ReturnType<typeof useVariablesState>[0]): ComputedThemeVars {
   const {base, chroma, hue, lightness} = variables;
   const accentColor = `oklch(${lightness} ${chroma} ${hue})`;
   const isAdaptive = accentColor in adaptiveColors;
