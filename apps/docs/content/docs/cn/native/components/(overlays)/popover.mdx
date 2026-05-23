@@ -39,7 +39,7 @@ import { Popover } from 'heroui-native';
 
 - **Popover**：根容器，管理展开/收起、定位，并为子组件提供上下文。
 - **Popover.Trigger**：可点击的触发器，切换浮层可见性；为子元素包裹按压处理。
-- **Popover.Portal**：在门户层渲染内容，保证层级与定位正确。
+- **Popover.Portal**：在Portal层渲染内容，保证层级与定位正确。
 - **Popover.Overlay**：可选背景遮罩；可透明或半透明，用于捕获外部点击。
 - **Popover.Content**：内容容器，含定位、样式与碰撞检测；支持 `popover` 与底部抽屉呈现。
 - **Popover.Arrow**：可选箭头，指向触发器；随 `placement` 自动定位。
@@ -339,12 +339,12 @@ export default function PopoverExample() {
 
 | prop                       | type        | default | description                                                                                                                   |
 | -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `children`                 | `ReactNode` | -       | 门户内容（必填）                                                                                                              |
+| `children`                 | `ReactNode` | -       | Portal内容（必填）                                                                                                              |
 | `disableFullWindowOverlay` | `boolean`   | `false` | 在 iOS 为 `true` 时使用 `View` 代替 `FullWindowOverlay`，便于元素检查器；遮罩将无法叠在原生模态之上                           |
 | `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | 控制 VoiceOver 是否将遮罩窗口视为模态容器。为 `true` 时，VoiceOver 仅聚焦遮罩内元素。仅 iOS；API 不稳定，可能随 react-native-screens 变更 |
-| `hostName`                 | `string`    | -       | 门户宿主元素的可选名称                                                                                                        |
+| `hostName`                 | `string`    | -       | Portal宿主元素的可选名称                                                                                                        |
 | `forceMount`               | `boolean`   | -       | 是否强制挂载                                                                                                                  |
-| `className`                | `string`    | -       | 门户容器额外 class                                                                                                            |
+| `className`                | `string`    | -       | Portal容器额外 class                                                                                                            |
 | `...ViewProps`             | `ViewProps` | -       | 支持全部标准 React Native `View` 属性                                                                                       |
 
 ### Popover.Overlay

@@ -47,7 +47,7 @@ import { Select } from 'heroui-native';
 - **Select.Trigger**：可点击的触发器，用于切换选择器显示。为任意子元素包裹按压处理，支持 `variant`（`'default'` 或 `'unstyled'`）。
 - **Select.Value**：显示当前选中值或占位符；选中变化时自动更新，样式随是否有选中值变化。
 - **Select.TriggerIndicator**：可选的视觉指示器，表示开/关状态；默认渲染带动画的双角标，随打开/关闭旋转。
-- **Select.Portal**：在门户层渲染内容，保证正确的层级与定位。
+- **Select.Portal**：在Portal层渲染内容，保证正确的层级与定位。
 - **Select.Overlay**：可选的背景遮罩，可透明或半透明，用于捕获外部点击。
 - **Select.Content**：内容容器，支持三种呈现：气泡（浮动定位）、底部抽屉或对话框。
 - **Select.Close**：关闭按钮；可传入自定义子节点，否则使用默认关闭图标。
@@ -537,11 +537,11 @@ Select 根级动画配置，可为：
 
 | prop                       | type        | default | description                                                                                                                   |
 | -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `children`                 | `ReactNode` | -       | 门户内容（必填）                                                                                                              |
+| `children`                 | `ReactNode` | -       | Portal内容（必填）                                                                                                              |
 | `disableFullWindowOverlay` | `boolean`   | `false` | 在 iOS 为 `true` 时使用 `View` 代替 `FullWindowOverlay`，便于元素检查器；遮罩将无法叠在原生模态之上                           |
 | `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | 控制 VoiceOver 是否将遮罩窗口视为模态容器。为 `true` 时，VoiceOver 仅聚焦遮罩内元素。仅 iOS；API 不稳定，可能随 react-native-screens 变更 |
-| `className`                | `string`    | -       | 门户容器额外 class                                                                                                            |
-| `hostName`                 | `string`    | -       | 门户宿主元素的可选名称                                                                                                        |
+| `className`                | `string`    | -       | Portal容器额外 class                                                                                                            |
+| `hostName`                 | `string`    | -       | Portal宿主元素的可选名称                                                                                                        |
 | `forceMount`               | `boolean`   | -       | 是否强制挂载到 DOM                                                                                                            |
 | `...ViewProps`             | `ViewProps` | -       | 支持全部标准 React Native `View` 属性                                                                                       |
 
