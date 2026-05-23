@@ -19,7 +19,6 @@ export default async function BlogLayout({
   return (
     <HomeLayout
       {...baseOptions}
-      i18n
       links={getHomeLayoutLinks(dict, lang)}
       themeSwitch={{
         mode: "light-dark-system",
