@@ -29,6 +29,9 @@ export function localizeHref(href?: string): string | undefined {
 
   if (LOCALE_PREFIX.test(href)) return href;
   if (href.startsWith("/docs")) return `/[lang]${href}`;
+  if (href === "/themes" || href.startsWith("/themes/") || href.startsWith("/themes?")) {
+    return `/[lang]${href}`;
+  }
 
   return href;
 }

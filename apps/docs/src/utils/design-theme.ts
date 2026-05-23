@@ -1,6 +1,6 @@
-import type {ThemeId} from "@/app/themes/constants";
+import type {ThemeId} from "@/app/[lang]/themes/constants";
 
-import {themeIds} from "@/app/themes/constants";
+import {themeIds} from "@/app/[lang]/themes/constants";
 
 export const DEFAULT_DESIGN_THEME: ThemeId = "default";
 export const DESIGN_THEME_STORAGE_KEY = "heroui-docs-design-theme";

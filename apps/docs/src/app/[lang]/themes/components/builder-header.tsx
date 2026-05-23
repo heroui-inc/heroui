@@ -11,10 +11,12 @@ import {
 } from "@gravity-ui/icons";
 import {Button, Kbd, Separator, Tabs, Tooltip, toast} from "@heroui/react";
 import Link from "next/link";
+import {useParams} from "next/navigation";
 
 import {HeroUILogo} from "@/components/heroui-logo";
 import {useCodePanel} from "@/hooks/use-code-panel";
 import useKeyPress from "@/hooks/use-key-press";
+import {hasLocale} from "@/lib/dictionaries";
 
 import {tabs} from "../constants";
 import {usePreviewTab, useUndoRedo} from "../hooks";
@@ -27,6 +29,8 @@ export function BuilderHeader() {
   const {canRedo, canUndo, redo, undo} = useUndoRedo();
   const {isCodeVisible, toggleCode} = useCodePanel();
   const {selectedTab, setSelectedTab} = usePreviewTab();
+  const params = useParams<{lang?: string}>();
+  const lang = params?.lang && hasLocale(params.lang) ? params.lang : "en";
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -44,7 +48,7 @@ export function BuilderHeader() {
     <div className="sticky top-0 z-50 mb-3 flex h-14 w-full items-center justify-center bg-background px-2 min-[1200px]:mb-4 min-[1200px]:px-0">
       <div className="flex h-14 w-full max-w-[1400px] items-center justify-between min-[1200px]:h-14">
         <div className="flex items-center gap-4">
-          <Link href="/en">
+          <Link href={`/${lang}`}>
             <HeroUILogo />
           </Link>
           <div className="flex items-center gap-3">

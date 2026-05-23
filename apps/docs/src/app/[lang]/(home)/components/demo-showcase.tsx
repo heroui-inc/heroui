@@ -1,6 +1,6 @@
 "use client";
 
-import type {ThemeId} from "@/app/themes/constants";
+import type {ThemeId} from "@/app/[lang]/themes/constants";
 import type {CSSProperties} from "react";
 import type {Color} from "react-aria-components";
 
@@ -11,12 +11,12 @@ import LinkRoot from "fumadocs-core/link";
 import {useTheme} from "next-themes";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
-import {HEROUI_PRO_URL, iframeTabs, themeValuesById} from "@/app/themes/constants";
-import {computeThemeVars} from "@/app/themes/hooks";
+import {HEROUI_PRO_URL, iframeTabs, themeValuesById} from "@/app/[lang]/themes/constants";
+import {computeThemeVars} from "@/app/[lang]/themes/hooks";
 import {
   calculateAccentForeground,
   getDerivedColorFormulas,
-} from "@/app/themes/utils/generate-theme-colors";
+} from "@/app/[lang]/themes/utils/generate-theme-colors";
 import {DemoComponents} from "@/components/demo";
 import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";

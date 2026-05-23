@@ -3,7 +3,7 @@ import {Suspense} from "react";
 import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {CodePanelProvider} from "@/hooks/use-code-panel";
 import {DictionaryProvider} from "@/hooks/use-dictionary";
-import {getDictionary, getRequestLocale} from "@/lib/dictionaries";
+import {getDictionary, hasLocale} from "@/lib/dictionaries";
 
 import {
   AccentColorSelector,
@@ -18,9 +18,9 @@ import {Onboarding} from "./components/onboarding";
 import {ThemeBuilderContent} from "./components/theme-builder-content";
 import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
 
-export default async function ThemeBuilderPage() {
-  const locale = await getRequestLocale();
-  const dict = await getDictionary(locale);
+export default async function ThemeBuilderPage({params}: {params: Promise<{lang: string}>}) {
+  const {lang} = await params;
+  const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
 
   return (
     <DictionaryProvider dict={dict}>

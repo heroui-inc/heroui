@@ -1,6 +1,6 @@
 "use client";
 
-import type {ThemeId} from "@/app/themes/constants";
+import type {ThemeId} from "@/app/[lang]/themes/constants";
 import type {ButtonProps} from "@heroui/react";
 import type {StaticImageData} from "next/image";
 
@@ -10,7 +10,7 @@ import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 import {useCallback, useEffect, useMemo, useState} from "react";
 
-import {themeValuesById} from "@/app/themes/constants";
+import {themeValuesById} from "@/app/[lang]/themes/constants";
 import airbnbTheme from "@/assets/themes/airbnb.png";
 import blackTheme from "@/assets/themes/black.png";
 import coinbaseTheme from "@/assets/themes/coinbase.png";
