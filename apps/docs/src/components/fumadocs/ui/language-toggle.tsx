@@ -2,12 +2,10 @@
 
 import type {ComponentProps} from "react";
 
-import {Button} from "@heroui/react";
-import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
+import {Button, Dropdown, Header, Label} from "@heroui/react";
 import {useI18n} from "fumadocs-ui/contexts/i18n";
 
 import {Languages} from "@/components/fumadocs/ui/icons";
-import {cn} from "@/utils/cn";
 
 export type LanguageSelectProps = ComponentProps<typeof Button>;
 
@@ -17,41 +15,41 @@ export function LanguageToggle(props: LanguageSelectProps): React.ReactElement {
   if (!context.locales) throw new Error("Missing `<I18nProvider />`");
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          isIconOnly
-          aria-label={context.text.chooseLanguage}
-          size="sm"
-          variant="tertiary"
-          {...props}
+    <Dropdown>
+      <Button
+        isIconOnly
+        aria-label={context.text.chooseLanguage}
+        size="sm"
+        variant="tertiary"
+        {...props}
+      >
+        {props.children}
+      </Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu
+          selectedKeys={context.locale ? new Set([context.locale]) : new Set<string>()}
+          selectionMode="single"
+          onSelectionChange={(keys) => {
+            if (keys === "all") return;
+            const next = keys.values().next().value;
+
+            if (typeof next === "string" && next !== context.locale) {
+              context.onChange?.(next);
+            }
+          }}
         >
-          {props.children}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="flex flex-col overflow-x-hidden p-0">
-        <p className="text-fd-muted-foreground mb-1 p-2 text-xs font-medium">
-          {context.text.chooseLanguage}
-        </p>
-        {context.locales.map((item) => (
-          <button
-            key={item.locale}
-            type="button"
-            className={cn(
-              "cursor-pointer p-2 text-start text-sm",
-              item.locale === context.locale
-                ? "bg-fd-primary/10 text-fd-primary font-medium"
-                : "hover:bg-fd-accent hover:text-fd-accent-foreground",
-            )}
-            onClick={() => {
-              context.onChange?.(item.locale);
-            }}
-          >
-            {item.name}
-          </button>
-        ))}
-      </PopoverContent>
-    </Popover>
+          <Dropdown.Section>
+            <Header>{context.text.chooseLanguage}</Header>
+            {context.locales.map((item) => (
+              <Dropdown.Item key={item.locale} id={item.locale} textValue={item.name}>
+                <Dropdown.ItemIndicator />
+                <Label>{item.name}</Label>
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Section>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
   );
 }
 
