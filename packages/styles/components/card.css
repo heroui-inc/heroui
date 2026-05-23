@@ -2,7 +2,7 @@
 
 /* Block */
 .card {
-  @apply relative flex flex-col gap-3 overflow-hidden p-4;
+  @apply relative flex flex-col gap-3 overflow-visible p-4;
   @apply shadow-surface;
   border-radius: min(32px, var(--radius-3xl));
 }

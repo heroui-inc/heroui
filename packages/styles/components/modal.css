@@ -140,7 +140,7 @@
  * Modifier: container--scroll-outside
  */
 .modal__container--scroll-outside {
-  @apply overflow-y-auto scrollbar;
+  @apply scrollbar overflow-y-auto;
   @apply pointer-events-auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -286,14 +286,14 @@
 .modal__body {
   @apply min-h-0 flex-1;
   @apply text-sm leading-[1.43] text-muted;
-  @apply my-0;
+  @apply -m-[3px] my-0 overflow-visible p-[3px];
 }
 
 /**
  * Modifier: body--scroll-inside
  */
 .modal__body--scroll-inside {
-  @apply overflow-y-auto scrollbar;
+  @apply scrollbar overflow-y-auto overscroll-contain;
   -webkit-overflow-scrolling: touch;
 }
 

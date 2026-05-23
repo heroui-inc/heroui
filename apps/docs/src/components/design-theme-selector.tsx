@@ -1,6 +1,7 @@
 "use client";
 
 import type {ThemeId} from "@/app/themes/constants";
+import type {ButtonProps} from "@heroui/react";
 import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
@@ -23,12 +24,16 @@ import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
 import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
-
-const STORAGE_KEY = "heroui-docs-design-theme";
-const VIBRANT_STORAGE_KEY = "heroui-docs-vibrant-palette";
+import {
+  DESIGN_THEME_STORAGE_KEY,
+  VIBRANT_STORAGE_KEY,
+  getStoredDesignTheme,
+  isDesignThemeId,
+  notifyDesignThemeChange,
+} from "@/utils/design-theme";
 
 interface ThemeOption {
-  id: string;
+  id: ThemeId;
   label: string;
   image: StaticImageData;
 }
@@ -51,7 +56,7 @@ function removeThemeCssLink() {
   document.getElementById("design-theme-css-link")?.remove();
 }
 
-function applyTheme(themeId: string) {
+function applyTheme(themeId: ThemeId) {
   const root = document.documentElement;
   const isDefault = themeId === "default";
 
@@ -64,19 +69,23 @@ function applyTheme(themeId: string) {
   removeThemeCssLink();
 }
 
-export function DesignThemeSelector() {
+export function DesignThemeSelector({
+  triggerVariant = "tertiary",
+}: {
+  triggerVariant?: ButtonProps["variant"];
+}) {
   const dict = useDictionary().themes;
-  const [active, setActive] = useState("default");
-  const [vibrant, setVibrant] = useState(false);
+  const [active, setActive] = useState<ThemeId>("default");
   const [mounted, setMounted] = useState(false);
+  const [vibrant, setVibrant] = useState(false);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = getStoredDesignTheme();
 
-    if (stored && THEMES.some((t) => t.id === stored)) {
+    if (stored !== "default") {
       setActive(stored);
       applyTheme(stored);
     }
@@ -94,10 +103,11 @@ export function DesignThemeSelector() {
     if (keys === "all") return;
     const selected = [...keys][0];
 
-    if (typeof selected !== "string") return;
+    if (typeof selected !== "string" || !isDesignThemeId(selected)) return;
     setActive(selected);
-    localStorage.setItem(STORAGE_KEY, selected);
+    localStorage.setItem(DESIGN_THEME_STORAGE_KEY, selected);
     applyTheme(selected);
+    notifyDesignThemeChange(selected);
   }, []);
 
   const handleVibrantToggle = useCallback((isSelected: boolean) => {
@@ -115,8 +125,7 @@ export function DesignThemeSelector() {
   const showAvatar = mounted && active !== "default" && current;
 
   const themeBuilderHref = useMemo(() => {
-    const themeId = active as ThemeId;
-    const values = themeValuesById[themeId];
+    const values = themeValuesById[active];
 
     if (!values) {
       return "/themes";
@@ -152,7 +161,7 @@ export function DesignThemeSelector() {
           <Button
             aria-label={dict.designTheme}
             size="sm"
-            variant="tertiary"
+            variant={triggerVariant}
             className={cn(
               "text-xs text-muted",
               showAvatar &&

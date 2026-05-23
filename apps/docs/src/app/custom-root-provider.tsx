@@ -8,6 +8,7 @@ import {i18nProvider} from "fumadocs-ui/i18n";
 import {RootProvider} from "fumadocs-ui/provider/next";
 import dynamic from "next/dynamic";
 
+import {WebMCPProvider} from "@/components/ai/webmcp-provider";
 import {LocaleLink} from "@/components/locale-link";
 import {DictionaryProvider} from "@/hooks/use-dictionary";
 import {translations} from "@/lib/layout.shared";
@@ -37,6 +38,8 @@ export function CustomRootProvider({
         {children}
         {/* Global toast provider for demos using the default toast() function */}
         <Toast.Provider />
+
+        <WebMCPProvider />
       </RootProvider>
     </DictionaryProvider>
   );

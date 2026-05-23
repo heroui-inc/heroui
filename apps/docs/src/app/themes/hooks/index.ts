@@ -1,5 +1,5 @@
-export {useComputedThemeVars} from "./use-computed-theme-vars";
-export type {FontMeta} from "./use-computed-theme-vars";
+export {computeThemeVars, useComputedThemeVars} from "./use-computed-theme-vars";
+export type {ComputedThemeVars, FontMeta} from "./use-computed-theme-vars";
 export {useCssSync} from "./use-css-sync";
 export {useCustomFonts} from "./use-custom-fonts";
 export type {CustomFont} from "./use-custom-fonts";

@@ -408,9 +408,9 @@
     --surface-secondary-foreground: oklch(99.11% 0.005 0);
     --surface-tertiary: oklch(27.21% 0.0075 0);
     --surface-tertiary-foreground: oklch(99.11% 0.005 0);
-    --accent: oklch(98.81% 0.0001 263.28);
-    --accent-foreground: oklch(15% 0 263.28);
-    --focus: oklch(98.81% 0.0001 263.28);
+    --accent: oklch(98.48% 0 0);
+    --accent-foreground: oklch(15% 0 0);
+    --focus: oklch(98.48% 0 0);
     --success: oklch(0.6514 0.1321 156.22);
     --success-foreground: oklch(15% 0.0396 156.22);
     --warning: oklch(0.8803 0.1348 86.06);

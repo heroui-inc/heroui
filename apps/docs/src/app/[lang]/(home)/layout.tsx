@@ -5,6 +5,7 @@ import {notFound} from "next/navigation";
 
 import {baseOptions} from "@/app/[lang]/layout.config";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
+import {SearchToggle} from "@/components/fumadocs/ui/search-toggle";
 import {GitHubLinkSmall} from "@/components/github-link";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 
@@ -32,15 +33,31 @@ export default async function Layout({
         {
           children: (
             <div className="flex items-center gap-1.5">
-              <DesignThemeSelector />
+              <DesignThemeSelector triggerVariant="ghost" />
               <GitHubLinkSmall />
             </div>
           ),
-          on: "all" as const,
+          on: "nav" as const,
+          secondary: true,
+          type: "custom" as const,
+        },
+        {
+          children: <GitHubLinkSmall />,
+          on: "menu" as const,
           secondary: true,
           type: "custom" as const,
         },
       ]}
+      searchToggle={{
+        components: {
+          sm: (
+            <>
+              <DesignThemeSelector triggerVariant="ghost" />
+              <SearchToggle hideIfDisabled className="p-2" />
+            </>
+          ),
+        },
+      }}
       themeSwitch={{
         mode: "light-dark-system",
       }}
