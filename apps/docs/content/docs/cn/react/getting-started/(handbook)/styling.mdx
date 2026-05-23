@@ -31,6 +31,24 @@ HeroUI 组件提供灵活的样式方案：Tailwind CSS 工具类、配合 [BEM]
 </Button>
 ```
 
+## 滚动条
+
+HeroUI 的滚动插槽在组件 CSS 中使用 `@apply scrollbar`。对于你自己的溢出容器，可使用 `@heroui/styles` 提供的工具类：
+
+```tsx
+<div className="scrollbar h-64 overflow-y-auto">
+  {/* 长内容 */}
+</div>
+```
+
+| 工具类 | 效果 |
+|---------|--------|
+| `scrollbar` | HeroUI 滚动条滑块（读取主题的 `--scrollbar-*` 变量） |
+| `scrollbar-default` | 操作系统 / 浏览器默认滚动条 |
+| `scrollbar-none` | 隐藏滚动条 |
+
+全局及子树级别的控制可通过在祖先元素上使用 `data-scrollbar` 实现。有关令牌（tokens）和模式的更多信息，请参阅 [主题](/docs/handbook/theming#scrollbars)。
+
 ## 基于状态的样式
 
 HeroUI 组件通过数据属性公开其状态，类似于 CSS 伪类：

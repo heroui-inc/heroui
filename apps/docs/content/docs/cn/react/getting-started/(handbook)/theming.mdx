@@ -150,7 +150,13 @@ export function ThemeSwitch() {
       --overlay-foreground: var(--foreground);
 
       --muted: oklch(0.5517 0.0138 285.94);
-      --scrollbar: oklch(87.1% 0.006 286.286);
+
+      --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+      --scrollbar-track: transparent;
+      --scrollbar-gutter: auto;
+      --scrollbar-width: thin;
+      --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      --scrollbar: var(--scrollbar-thumb);
 
       --default: oklch(94% 0.001 286.375);
       --default-foreground: var(--eclipse);
@@ -215,7 +221,13 @@ export function ThemeSwitch() {
       --overlay-foreground: var(--foreground);
 
       --muted: oklch(70.5% 0.015 286.067);
-      --scrollbar: oklch(70.5% 0.015 286.067);
+
+      --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+      --scrollbar-track: transparent;
+      --scrollbar-gutter: auto;
+      --scrollbar-width: thin;
+      --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      --scrollbar: var(--scrollbar-thumb);
 
       --default: oklch(27.4% 0.006 286.033);
       --default-foreground: var(--snow);
@@ -396,23 +408,24 @@ export function ThemeSwitch() {
 
 ## 变量参考
 
-HeroUI 定义了三种类型的变量：
-1. **基础变量** — 不会改变的值，例如 `--white`、`--black`、间距和排版
-2. **主题变量** — 在浅色/深色主题之间变化的颜色
-3. **计算变量** — 自动生成的悬停状态和尺寸变体
+HeroUI 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 中定义了三种类型的变量：
 
-完整参考请参阅：[颜色文档](/docs/handbook/colors)、[默认主题变量](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css)、[共享主题工具](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css)
+1. **基础变量（Base Variables）** — 不会变化的值，例如 `--white`、`--black`、间距以及排版
+2. **主题变量（Theme Variables）** — 在浅色 / 深色主题之间切换的颜色，以及滚动条令牌（`--scrollbar-thumb`、`--scrollbar-width` 等）
+3. **计算变量（Calculated Variables）** — 悬停状态、柔和（soft）变体以及边框 / 分隔线层级（每个浅色 / 深色主题中的 **Calculated Colors** 区块，使用 `color-mix()` 计算）
 
-**计算变量（Tailwind）：**
+如需完整参考，请查阅：[颜色文档](/docs/handbook/colors)、[默认主题变量](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css)、[共享主题工具](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css)
 
-我们使用 Tailwind 的 `@theme` 指令，为悬停状态和圆角变体自动创建计算变量。这些变量定义在 `themes/shared/theme.css` 中：
+**Tailwind 主题桥接（`@theme inline`）：**
+
+[`themes/shared/theme.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css) 将语义化变量映射为 Tailwind 令牌（`--color-*`、`--radius-*`、`--ease-*`）。计算颜色引用的是 `variables.css` 中的底层变量（例如 `--surface-hover`、`--accent-soft`）—— 它们并不会在该文件中通过 `color-mix()` 内联展开：
 <CollapsibleCode lang="css" code={`  @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
     --color-surface: var(--surface);
     --color-surface-foreground: var(--surface-foreground);
-    --color-surface-hover: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
+    --color-surface-hover: var(--surface-hover);
 
     --color-surface-secondary: var(--surface-secondary);
     --color-surface-secondary-foreground: var(--surface-secondary-foreground);
@@ -454,81 +467,61 @@ HeroUI 定义了三种类型的变量：
     --shadow-overlay: var(--overlay-shadow);
     --shadow-field: var(--field-shadow);
 
-    /* Form Field Tokens */
+    /* 表单字段令牌 */
     --color-field: var(--field-background, var(--default));
+    --color-field-hover: var(--field-hover);
     --color-field-foreground: var(--field-foreground, var(--foreground));
     --color-field-placeholder: var(--field-placeholder, var(--muted));
     --color-field-border: var(--field-border, var(--border));
     --radius-field: var(--field-radius, calc(var(--radius) * 1.5));
     --border-width-field: var(--field-border-width, var(--border-width));
 
-    /* Calculated Variables */
+    /* 颜色令牌 */
+    --color-background-secondary: var(--background-secondary);
+    --color-background-tertiary: var(--background-tertiary);
+    --color-background-inverse: var(--background-inverse);
 
-    /* --- background shades --- */
-    --color-background-secondary: color-mix(in oklab, var(--background) 96%, var(--foreground) 4%);
-    --color-background-tertiary: color-mix(in oklab, var(--background) 92%, var(--foreground) 8%);
-    --color-background-inverse: var(--foreground);
+    --color-default-hover: var(--default-hover);
+    --color-accent-hover: var(--accent-hover);
+    --color-success-hover: var(--success-hover);
+    --color-warning-hover: var(--warning-hover);
+    --color-danger-hover: var(--danger-hover);
 
-    /* ------------------------- */
-    --color-default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
-    --color-accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
-    --color-success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
-    --color-warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
-    --color-danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+    /* 表单字段颜色 */
+    --color-field-focus: var(--field-focus);
+    --color-field-border-hover: var(--field-border-hover);
+    --color-field-border-focus: var(--field-border-focus);
 
-    /* Form Field Colors */
-    --color-field-hover: color-mix(
-      in oklab,
-      var(--field-background, var(--default)) 90%,
-      var(--field-foreground, var(--foreground)) 2%
-    );
-    --color-field-focus: var(--field-background, var(--default));
-    --color-field-border-hover: color-mix(
-      in oklab,
-      var(--field-border, var(--border)) 88%,
-      var(--field-foreground, var(--foreground)) 10%
-    );
-    --color-field-border-focus: color-mix(
-      in oklab,
-      var(--field-border, var(--border)) 74%,
-      var(--field-foreground, var(--foreground)) 22%
-    );
+    /* 柔和（Soft）颜色 */
+    --color-default-soft: var(--default-soft);
+    --color-default-soft-foreground: var(--default-soft-foreground);
+    --color-default-soft-hover: var(--default-soft-hover);
 
-    /* Soft Colors */
-    --color-accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
-    --color-accent-soft-foreground: var(--accent);
-    --color-accent-soft-hover: color-mix(in oklab, var(--accent) 20%, transparent);
+    --color-accent-soft: var(--accent-soft);
+    --color-accent-soft-foreground: var(--accent-soft-foreground);
+    --color-accent-soft-hover: var(--accent-soft-hover);
 
-    --color-danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
-    --color-danger-soft-foreground: var(--danger);
-    --color-danger-soft-hover: color-mix(in oklab, var(--danger) 20%, transparent);
+    --color-danger-soft: var(--danger-soft);
+    --color-danger-soft-foreground: var(--danger-soft-foreground);
+    --color-danger-soft-hover: var(--danger-soft-hover);
 
-    --color-warning-soft: color-mix(in oklab, var(--warning) 15%, transparent);
-    --color-warning-soft-foreground: var(--warning);
-    --color-warning-soft-hover: color-mix(in oklab, var(--warning) 20%, transparent);
+    --color-warning-soft: var(--warning-soft);
+    --color-warning-soft-foreground: var(--warning-soft-foreground);
+    --color-warning-soft-hover: var(--warning-soft-hover);
 
-    --color-success-soft: color-mix(in oklab, var(--success) 15%, transparent);
-    --color-success-soft-foreground: var(--success);
-    --color-success-soft-hover: color-mix(in oklab, var(--success) 20%, transparent);
+    --color-success-soft: var(--success-soft);
+    --color-success-soft-foreground: var(--success-soft-foreground);
+    --color-success-soft-hover: var(--success-soft-hover);
 
-    /* Separator Colors - Levels */
-    --color-separator-secondary: color-mix(
-      in oklab,
-      var(--surface) 85%,
-      var(--surface-foreground) 15%
-    );
-    --color-separator-tertiary: color-mix(
-      in oklab,
-      var(--surface) 81%,
-      var(--surface-foreground) 19%
-    );
+    /* 分隔线颜色 - 层级 */
+    --color-separator-secondary: var(--separator-secondary);
+    --color-separator-tertiary: var(--separator-tertiary);
 
-    /* Border Colors - Levels (progressive contrast: default → secondary → tertiary) */
-    /* Light mode: lighter → darker | Dark mode: darker → lighter */
-    --color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
-    --color-border-tertiary: color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%);
+    /* 边框颜色 - 层级 */
+    --color-border-secondary: var(--border-secondary);
+    --color-border-tertiary: var(--border-tertiary);
 
-    /* Radius and default sizes - defaults can change by just changing the --radius */
+    /* 圆角与默认尺寸 - 只需更改 --radius 即可调整默认值 */
     --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */
     --radius-sm: calc(var(--radius) * 0.5); /* 0.25rem (4px) */
     --radius-md: calc(var(--radius) * 0.75); /* 0.375rem (6px) */
@@ -538,27 +531,27 @@ HeroUI 定义了三种类型的变量：
     --radius-3xl: calc(var(--radius) * 3); /* 1.5rem (24px) */
     --radius-4xl: calc(var(--radius) * 4); /* 2rem (32px) */
 
-    /* Transition Timing Functions  */
-    --ease-smooth: ease; /* same as transition: ease; */
-    /* These custom curves are made by https://twitter.com/bdc */
+    /* 过渡缓动函数 */
+    --ease-smooth: ease; /* 等同于 transition: ease; */
+    /* 这些自定义曲线由 https://twitter.com/bdc 制作 */
 
-    /* From smoother to faster */
+    /* 由平缓到快速 */
     --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
     --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
     --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
     --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
     --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
     --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
-    /* From slower to faster */
+    /* 由慢到快 */
     --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
     --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
     --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
-    /* Custom smooth-out curve: fast start, smooth stop - Apple style */
+    /* 自定义的平滑收尾曲线：快速启动、平滑结束 —— Apple 风格 */
     --ease-out-fluid: cubic-bezier(0.32, 0.72, 0, 1);
-    /* From slower to faster */
+    /* 由慢到快 */
     --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
     --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
     --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
@@ -566,10 +559,10 @@ HeroUI 定义了三种类型的变量：
     --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
     --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
-    /* Linear */
+    /* 线性 */
     --ease-linear: linear;
 
-    /* Animations */
+    /* 动画 */
     --animate-spin-fast: spin 0.75s linear infinite;
     --animate-skeleton: skeleton 2s linear infinite;
     --animate-caret-blink: caret-blink 1.2s ease-out infinite;
@@ -595,7 +588,64 @@ HeroUI 定义了三种类型的变量：
 `}
 />
 
-表单控件现在依赖于 `--field-*` 变量及其计算出的悬停/焦点变体。在主题中更新这些变量，即可为输入框、复选框、单选按钮和 OTP 插槽重新设置样式，而不会影响按钮或卡片等 Surface 类组件。
+表单控件依赖 `--field-*` 主题变量。悬停、聚焦及边框变体定义于 `variables.css` 的 **Calculated Colors** 区块中，并在 `theme.css` 中映射到 Tailwind 令牌（例如 `--color-field-hover: var(--field-hover)`）。在你的主题中覆盖 `--field-background`、`--field-hover` 及相关令牌，即可重新设计输入框、复选框、单选框和 OTP 输入槽的样式，而不会影响按钮或卡片等表面（surface）。
+
+## 滚动条
+
+HeroUI 为组件中的滚动区域（表格、弹出框、抽屉等）应用统一的滚动条样式。滚动条使用标准 CSS 属性（`scrollbar-width`、`scrollbar-color`、`scrollbar-gutter`），不再依赖 `::-webkit-scrollbar` 覆盖。
+
+**模式** — 在 `<html>`、组件根元素或滚动插槽上设置 `data-scrollbar`：
+
+| 模式 | `data-scrollbar` | 行为 |
+|------|------------------|------|
+| HeroUI（默认） | *（未设置）* | 使用主题令牌呈现的纤细滑块 |
+| 操作系统 / 浏览器 | `default` | 原生滚动条（`auto`） |
+| 隐藏 | `none` | 不显示滚动条（`scrollbar-width: none`） |
+
+```html
+<!-- 全局使用原生滚动条 -->
+<html data-scrollbar="default">
+
+<!-- 在某个子树中隐藏滚动条（例如弹出框） -->
+<div data-scrollbar="none">
+  ...
+</div>
+```
+
+**主题变量** — 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 的浅色与深色主题区块中定义：
+
+| 变量 | 描述 |
+|------|------|
+| `--scrollbar-thumb` | 滑块颜色（默认通过 `color-mix` 混入 15% 的 `--foreground`） |
+| `--scrollbar-track` | 轨道颜色（默认 `transparent`） |
+| `--scrollbar-gutter` | 滚动条间隙（默认 `auto`） |
+| `--scrollbar-width` | `scrollbar-width` 属性（默认 `thin`） |
+| `--scrollbar-color` | `scrollbar-color` 属性（默认为滑块颜色 + 轨道颜色） |
+| `--scrollbar` | `--scrollbar-thumb` 的旧版别名 |
+
+**全局自定义：**
+
+```css
+/* app/globals.css */
+:root {
+  --scrollbar-thumb: color-mix(in oklch, var(--accent) 30%, transparent);
+  --scrollbar-gutter: auto;
+}
+```
+
+**按滚动插槽** — 在组件上传入 `data-scrollbar`，或在外层包裹元素上覆盖相关令牌：
+
+```tsx
+<Table data-scrollbar="default">
+  ...
+</Table>
+
+<Calendar.YearPickerGrid data-scrollbar="none" />
+```
+
+**自定义溢出区域** — 在自己的元素上使用 `@heroui/styles` 提供的 `scrollbar`、`scrollbar-default` 或 `scrollbar-none` 工具类。基于类的覆盖方式详见 [样式](/docs/handbook/styling)。
+
+> **注意**：部分组件默认隐藏滚动条（日期选择器弹出框、颜色选择器、次级标签页）。嵌套的滚动插槽（例如日期选择器内部的日历年份选择器）会保留 HeroUI 滚动条，因为 `scrollbar-none` 只作用于其所在的元素本身，不会影响使用 `@apply scrollbar` 的后代元素。
 
 ## 资源
 
