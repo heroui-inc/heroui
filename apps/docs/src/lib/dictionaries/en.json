@@ -49,6 +49,10 @@
     "backToBlog": "Back to Blog",
     "relatedPosts": "Related Posts"
   },
+  "showcase": {
+    "heading": "Showcase",
+    "description": "Explore interactive examples showcasing HeroUI components in real-world scenarios."
+  },
   "footer": {
     "allRightsReserved": "All rights reserved."
   },

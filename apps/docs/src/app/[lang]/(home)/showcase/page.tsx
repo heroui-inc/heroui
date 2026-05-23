@@ -1,9 +1,14 @@
 "use client";
 
+import {useParams} from "next/navigation";
+
 import {ShowcaseItem} from "@/components/showcase-item";
+import {i18n} from "@/lib/i18n";
 import {getShowcaseCategories} from "@/showcases";
 
 export default function ShowcasePage() {
+  const params = useParams<{lang?: string}>();
+  const lang = params.lang ?? i18n.defaultLanguage;
   const categories = getShowcaseCategories();
 
   return (
@@ -13,7 +18,7 @@ export default function ShowcasePage() {
           <h2 className="text-md mb-4 rounded-full text-foreground">{category.name}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {category.items.map((item) => (
-              <ShowcaseItem key={item.name} href={`/showcase/${item.name}`} item={item} />
+              <ShowcaseItem key={item.name} href={`/${lang}/showcase/${item.name}`} item={item} />
             ))}
           </div>
         </section>

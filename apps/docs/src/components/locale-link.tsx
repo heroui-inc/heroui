@@ -32,6 +32,9 @@ export function localizeHref(href?: string): string | undefined {
   if (href === "/themes" || href.startsWith("/themes/") || href.startsWith("/themes?")) {
     return `/[lang]${href}`;
   }
+  if (href === "/showcase" || href.startsWith("/showcase/") || href.startsWith("/showcase?")) {
+    return `/[lang]${href}`;
+  }
 
   return href;
 }

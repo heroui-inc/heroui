@@ -34,7 +34,6 @@ const PUBLIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
 const LOCALE_REDIRECT_EXCLUDED_PREFIXES = [
   ...MARKDOWN_EXCLUDED_PREFIXES,
   "/install",
-  "/showcase",
   "/native",
   "/react",
   "/docs/native-showcase",

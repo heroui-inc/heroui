@@ -49,6 +49,10 @@
     "backToBlog": "返回博客",
     "relatedPosts": "相关文章"
   },
+  "showcase": {
+    "heading": "展示",
+    "description": "探索展示 HeroUI 组件在真实场景中应用的互动示例。"
+  },
   "footer": {
     "allRightsReserved": "保留所有权利。"
   },

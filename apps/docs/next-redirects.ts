@@ -95,6 +95,21 @@ export async function getRedirects(): Promise<Redirect[]> {
     },
   );
 
+  // Showcase moved under [lang] for i18n. Redirect legacy /showcase and
+  // /showcase/<id> to the default-locale URL so old links keep working.
+  redirects.push(
+    {
+      destination: "/en/showcase",
+      permanent: true,
+      source: "/showcase",
+    },
+    {
+      destination: "/en/showcase/:id",
+      permanent: true,
+      source: "/showcase/:id",
+    },
+  );
+
   // Framework root redirects - redirect /react, /web, and /native to their respective docs
   redirects.push(
     {

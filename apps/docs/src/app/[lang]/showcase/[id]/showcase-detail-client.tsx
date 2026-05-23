@@ -5,12 +5,13 @@ import type {UrlObject} from "url";
 
 import {chipVariants} from "@heroui/react";
 import LinkRoot from "next/link";
-import {useSearchParams} from "next/navigation";
+import {useParams, useSearchParams} from "next/navigation";
 import {Suspense} from "react";
 import {tv} from "tailwind-variants";
 
 import {ShowcaseItem} from "@/components/showcase-item";
 import {ShowcasePreview} from "@/components/showcase-preview";
+import {i18n} from "@/lib/i18n";
 import {getAllShowcases} from "@/showcases";
 import {cn} from "@/utils/cn";
 
@@ -33,6 +34,8 @@ interface ShowcaseDetailClientProps {
 }
 
 function ShowcasesList({showcaseId}: {showcaseId: string}) {
+  const params = useParams<{lang?: string}>();
+  const lang = params.lang ?? i18n.defaultLanguage;
   const searchParams = useSearchParams();
   const allShowcases = getAllShowcases();
   const returnUrl = searchParams.get("returnUrl");
@@ -45,7 +48,7 @@ function ShowcasesList({showcaseId}: {showcaseId: string}) {
           key={item.name}
           isMinimal
           aria-label={item.title}
-          href={`/showcase/${item.name}${queryString}`}
+          href={`/${lang}/showcase/${item.name}${queryString}`}
           isSelected={item.name === showcaseId}
           item={item}
         />

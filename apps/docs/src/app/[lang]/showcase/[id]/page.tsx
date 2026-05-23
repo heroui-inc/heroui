@@ -6,6 +6,8 @@ import path from "node:path";
 import {notFound} from "next/navigation";
 
 import {ShowcaseSource} from "@/components/showcase-source";
+import {hasLocale} from "@/lib/dictionaries";
+import {i18n} from "@/lib/i18n";
 import {getAllShowcases, getShowcase} from "@/showcases";
 
 import {ShowcaseCodePanel} from "./showcase-code-panel";
@@ -14,6 +16,7 @@ import {ShowcaseWrapper} from "./showcase-wrapper";
 
 interface ShowcasePageProps {
   params: Promise<{
+    lang: string;
     id: string;
   }>;
 }
@@ -22,20 +25,20 @@ interface ShowcasePageProps {
 export const dynamic = "force-static";
 
 export async function generateMetadata({params}: ShowcasePageProps): Promise<Metadata> {
-  const {id} = await params;
+  const {id, lang} = await params;
   const showcase = getShowcase(id);
 
   if (!showcase) return {};
 
   return {
     alternates: {
-      canonical: `/showcase/${id}`,
+      canonical: `/${lang}/showcase/${id}`,
     },
     description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
     openGraph: {
       description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
       title: `${showcase.name} - HeroUI Showcase`,
-      url: `/showcase/${id}`,
+      url: `/${lang}/showcase/${id}`,
     },
     title: `${showcase.name} - HeroUI Showcase`,
   };
@@ -44,13 +47,19 @@ export async function generateMetadata({params}: ShowcasePageProps): Promise<Met
 export async function generateStaticParams() {
   const showcases = getAllShowcases();
 
-  return showcases.map((showcase) => ({
-    id: showcase.name,
-  }));
+  return i18n.languages.flatMap((lang) =>
+    showcases.map((showcase) => ({
+      id: showcase.name,
+      lang,
+    })),
+  );
 }
 
 export default async function ShowcasePage({params}: ShowcasePageProps) {
-  const {id} = await params;
+  const {id, lang} = await params;
+
+  if (!hasLocale(lang)) notFound();
+
   const showcase = getShowcase(id);
 
   if (!showcase) {

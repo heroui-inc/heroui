@@ -9,22 +9,25 @@ import {
   TooltipRoot,
   TooltipTrigger,
 } from "@heroui/react";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 
 import {HeroUILogo} from "@/components/heroui-logo";
 import {Iconify} from "@/components/iconify";
 import {useCodePanel} from "@/hooks/use-code-panel";
+import {i18n} from "@/lib/i18n";
 
 import {ShowcaseThemeSwitch} from "./showcase-theme-switch";
 
 export function ShowcaseHeader() {
   const router = useRouter();
+  const params = useParams<{lang?: string}>();
   const searchParams = useSearchParams();
   const {isCodeVisible, toggleCode} = useCodePanel();
+  const lang = params.lang ?? i18n.defaultLanguage;
 
-  // Get the returnUrl parameter, default to /showcase if not present
-  const returnUrl = searchParams.get("returnUrl") || "/showcase";
+  // Get the returnUrl parameter, default to the locale-aware showcase listing
+  const returnUrl = searchParams.get("returnUrl") || `/${lang}/showcase`;
 
   const onClose = () => {
     router.push(returnUrl as any);
