@@ -59,6 +59,11 @@
     "stylesSource": "样式源代码",
     "themeSource": "主题源代码"
   },
+  "qrPreviewPopover": {
+    "tapToPreview": "点击预览",
+    "scanToPreview": "扫码预览",
+    "downloadPrompt": "还没有安装 {name} 应用？请在下方下载。"
+  },
   "themes": {
     "theme": "主题",
     "custom": "自定义",

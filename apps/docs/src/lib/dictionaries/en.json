@@ -59,6 +59,11 @@
     "stylesSource": "Styles source",
     "themeSource": "Theme source"
   },
+  "qrPreviewPopover": {
+    "tapToPreview": "Tap to preview",
+    "scanToPreview": "Scan to preview",
+    "downloadPrompt": "Don't have the {name} app yet? Download it below."
+  },
   "themes": {
     "theme": "Theme",
     "custom": "Custom",

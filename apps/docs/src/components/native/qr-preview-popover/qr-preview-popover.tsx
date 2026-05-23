@@ -7,6 +7,7 @@ import {usePathname} from "next/navigation";
 import {useState} from "react";
 
 import {NATIVE_APP} from "@/config/native-app";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 
 import {Iconify} from "../../iconify";
@@ -101,6 +102,7 @@ function buildDeepLinkUrl(origin: string, slug: string): string {
  * home screen (`"home"`), or an explicit component (`"component"` + slug).
  */
 export const QRPreviewPopover = (props: NativeQRPreviewTarget) => {
+  const dict = useDictionary().qrPreviewPopover;
   const isMobile = useIsMobileDevice();
   const pathname = usePathname();
 
@@ -111,24 +113,19 @@ export const QRPreviewPopover = (props: NativeQRPreviewTarget) => {
 
   const slug = resolveSlug(props, pathname);
   const deepLinkUrl = origin ? buildDeepLinkUrl(origin, slug) : "";
+  const triggerLabel = isMobile ? dict.tapToPreview : dict.scanToPreview;
+  const downloadPrompt = dict.downloadPrompt.replace("{name}", NATIVE_APP.NAME);
 
   return (
     <Popover>
-      <Button
-        aria-label={isMobile ? "Tap to preview" : "Scan to preview"}
-        className="bg-default/70"
-        size="sm"
-        variant="tertiary"
-      >
+      <Button aria-label={triggerLabel} className="bg-default/70" size="sm" variant="tertiary">
         {!isMobile && <Iconify icon="gravity-ui:qr-code" width={16} />}
-        {isMobile ? "Tap to preview" : "Scan to preview"}
+        {triggerLabel}
       </Button>
       <Popover.Content className="max-w-[240px] rounded-2xl" offset={6} placement="bottom end">
         <Popover.Dialog className="flex flex-col items-center gap-4 px-5 pb-6">
           <DeepLinkQRCode size={160} url={deepLinkUrl} />
-          <span className="mb-2 text-center text-xs text-foreground">
-            {["Don't have the ", NATIVE_APP.NAME, " app yet? Download it below."].join("")}
-          </span>
+          <span className="mb-2 text-center text-xs text-foreground">{downloadPrompt}</span>
           <StoreButtons />
         </Popover.Dialog>
       </Popover.Content>
