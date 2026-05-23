@@ -39,7 +39,7 @@ export default async function HomePage({params}: {params: Promise<{lang: string}
             <span className="max-w-60 truncate sm:max-w-full">{home.releaseBadge}</span>
           </LinkRoot>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:mt-4 lg:text-5xl">
-            {home.titleMain} <span className="text-muted/70">{home.titleMuted}</span>
+            {home.titleMain} <div className="text-muted/70">{home.titleMuted}</div>
           </h1>
           <p className="text-balance text-muted md:text-lg">{home.description}</p>
           <div className="mt-4 flex gap-3">

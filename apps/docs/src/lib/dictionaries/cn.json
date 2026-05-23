@@ -1,8 +1,8 @@
 {
   "home": {
     "releaseBadge": "HeroUI v3.0.5 - Typography 重命名、令牌重构与修复",
-    "titleMain": "开箱即美。",
-    "titleMuted": "设计灵活可定制。",
+    "titleMain": "开箱即用",
+    "titleMuted": "设计灵活可定制",
     "description": "HeroUI 是面向网页与移动端的现代 UI 库，助你快速迭代、保持一致，并打造令人愉悦的用户体验。",
     "getStarted": "快速开始",
     "viewComponents": "查看组件",
