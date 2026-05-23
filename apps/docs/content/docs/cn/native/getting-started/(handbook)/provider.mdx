@@ -261,7 +261,7 @@ HeroUINativeProvider
 
 ### 安全区内边距处理
 
-Provider 会自动使用 `react-native-safe-area-context` 的 [`SafeAreaListener`](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-listener) 包裹应用。该组件监听安全区与帧变化且尽量不触发重渲染，并通过 `onChange` 将最新 insets 同步给 Uniwind。
+Provider 会自动使用 `react-native-safe-area-context` 的 [`SafeAreaListener`](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-listener) 包裹应用。该组件监听安全区与帧的变化但不会触发重渲染，并通过 `onChange` 回调将最新的 insets 同步给 Uniwind。
 
 ## 轻量 Provider（Raw）
 
@@ -444,6 +444,6 @@ const config: HeroUINativeConfig = {
 
 ## 相关链接
 
-- [快速开始](/docs/native/getting-started/quick-start) — 基础搭建
+- [快速开始](/docs/native/getting-started/quick-start) — 基础搭建指南
 - [主题](/docs/native/getting-started/theming) — 颜色与主题定制
 - [样式](/docs/native/getting-started/styling) — 使用 Tailwind 编写样式

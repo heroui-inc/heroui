@@ -20,7 +20,7 @@ HeroUI Native 以 `className` 作为主要样式入口，所有组件均可通�
 - **在 IDE 中悬停 `className`** — TypeScript 定义会提示可用属性
 - **查阅组件文档** — 组件页顶部通常有样式源码链接，其中会标注动画相关限制
 
-**自定义动画样式：** 若某属性被动画占用，可在支持 `animation` 的组件上通过该属性调整。
+**自定义动画样式：** 若某属性被动画占用，可在支持 `animation` 属性的组件上通过 `animation` 进行调整。
 
 ## 基础样式
 
@@ -188,11 +188,13 @@ export function Link({
 }
 ```
 
-**可用的 classNames 导出示例：**
+**可用的 classNames 导出：**
 
-- `buttonClassNames` — 含 `root`、`label` 等函数
-- `cardClassNames` — 含 `root`、`header`、`body`、`footer`、`label`、`description` 等
-- `chipClassNames` — 含 `root`、`label`
+每个组件都会导出对应的 `classNames` 对象，例如：
+
+- `buttonClassNames` — 包含 `root` 与 `label` 函数
+- `cardClassNames` — 包含 `root`、`header`、`body`、`footer`、`label` 与 `description` 函数
+- `chipClassNames` — 包含 `root` 与 `label` 函数
 - 其他组件同理……
 
 **典型用法：**

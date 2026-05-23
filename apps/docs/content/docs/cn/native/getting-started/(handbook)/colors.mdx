@@ -118,14 +118,14 @@ HeroUI Native 的颜色体系围绕语义意图构建，而非堆砌视觉色板
     { label: "前景", variable: "--foreground" },
     { label: "弱化", variable: "--muted" },
     { label: "分段", variable: "--segment" },
-    { label: "遮罩", variable: "--overlay" },
+    { label: "覆盖层", variable: "--overlay" },
     { label: "链接", variable: "--link" },
   ]}
   darkColors={[
     { label: "前景", variable: "--foreground", border: true },
     { label: "弱化", variable: "--muted", border: true },
     { label: "分段", variable: "--segment", border: true },
-    { label: "遮罩", variable: "--overlay", border: true },
+    { label: "覆盖层", variable: "--overlay", border: true },
     { label: "链接", variable: "--link", border: true },
   ]}
 />
@@ -204,13 +204,13 @@ HeroUI Native 的颜色体系围绕语义意图构建，而非堆砌视觉色板
   lightColors={[
     { label: "边框", variable: "--border" },
     { label: "背衬", variable: "--backdrop" },
-    { label: "遮罩", variable: "--overlay", border: true },
+    { label: "覆盖层", variable: "--overlay", border: true },
     { label: "分段", variable: "--segment", border: true },
   ]}
   darkColors={[
     { label: "边框", variable: "--border" },
     { label: "背衬", variable: "--backdrop" },
-    { label: "遮罩", variable: "--overlay", border: true },
+    { label: "覆盖层", variable: "--overlay", border: true },
     { label: "分段", variable: "--segment", border: true },
   ]}
 />
@@ -261,7 +261,7 @@ import { View, Text } from 'react-native';
 完整主题定义见仓库中的 [variables.css](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/variables.css)。该主题通过 [Uniwind 主题系统](https://docs.uniwind.dev/theming/basics) 在明暗模式间自动切换，并支持跟随系统与在代码中切换主题。
 
 <CollapsibleCode lang="css" code={`  @theme {
-    /* 基础色（在明暗模式下勿改动） */
+    /* 基础色（在明暗模式间保持不变） */
     --white: oklch(100% 0 0);
     --black: oklch(0% 0 0);
     --snow: oklch(0.9911 0 0);
@@ -296,7 +296,7 @@ import { View, Text } from 'react-native';
         --surface-tertiary: oklch(0.9373 0.0013 286.37);
         --surface-tertiary-foreground: var(--foreground);
 
-        /* 遮罩层 */
+        /* 覆盖层 */
         --overlay: var(--white);
         --overlay-foreground: var(--foreground);
         --backdrop: oklch(0% 0 0 / 20%);
@@ -351,7 +351,7 @@ import { View, Text } from 'react-native';
         --surface-tertiary: oklch(0.2721 0.0024 247.91);
         --surface-tertiary-foreground: var(--foreground);
 
-        /* 遮罩层 */
+        /* 覆盖层 */
         --overlay: oklch(0.2103 0.0059 285.89);
         --overlay-foreground: var(--foreground);
         --backdrop: oklch(0% 0 0 / 20%);

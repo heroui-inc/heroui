@@ -10,7 +10,7 @@ HeroUI Native 的动画基于 [react-native-reanimated](https://docs.swmansion.c
 
 每个带动画的组件都暴露统一的 `animation` 属性，用于控制该组件上的全部动画：可调整数值、时间配置、布局动画，或完全关闭动画。
 
-**建议：** 处理动画时，先查看目标组件是否提供 `animation` 属性。
+**做法：** 处理动画时，先查看目标组件是否提供 `animation` 属性。
 
 ## 修改动画
 
@@ -112,6 +112,8 @@ import {Switch} from 'heroui-native';
 - `'disabled'`：关闭动画，但仍可配置属性值
 - `'disable-all'`：关闭自身及子级全部动画（仅在根级可用）
 - `boolean`：简单开关（`true` 启用，`false` 禁用）
+
+这样既能精细控制动画行为，又能在不启用动画的情况下自定义属性值。
 
 ## 关闭动画
 
