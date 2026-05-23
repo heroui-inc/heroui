@@ -102,7 +102,7 @@ const StackedMeterRoot = ({
     return () => cancelAnimationFrame(frame);
   }, [animate]);
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env["NODE_ENV"] !== "production") {
     const total = segments.reduce((sum, s) => sum + s.value, 0);
 
     if (total > maxValue) {
