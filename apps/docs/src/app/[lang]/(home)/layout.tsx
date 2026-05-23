@@ -27,7 +27,6 @@ export default async function Layout({
   return (
     <HomeLayout
       {...baseOptions}
-      i18n
       links={[
         ...getHomeLayoutLinks(dict, lang),
         {
