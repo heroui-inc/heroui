@@ -5,6 +5,7 @@ import {notFound} from "next/navigation";
 
 import {baseOptions} from "@/app/[lang]/layout.config";
 import {DesignThemeSelector} from "@/components/design-theme-selector";
+import {LanguageToggleSlot, LanguageToggleText} from "@/components/fumadocs/ui/language-toggle";
 import {SearchToggle} from "@/components/fumadocs/ui/search-toggle";
 import {GitHubLinkSmall} from "@/components/github-link";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
@@ -55,6 +56,12 @@ export default async function Layout({
               <SearchToggle hideIfDisabled className="p-2" />
             </>
           ),
+        },
+      }}
+      slots={{
+        languageSelect: {
+          root: LanguageToggleSlot,
+          text: LanguageToggleText,
         },
       }}
       themeSwitch={{

@@ -6,6 +6,7 @@ import {Button} from "@heroui/react";
 import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
 import {useI18n} from "fumadocs-ui/contexts/i18n";
 
+import {Languages} from "@/components/fumadocs/ui/icons";
 import {cn} from "@/utils/cn";
 
 export type LanguageSelectProps = ComponentProps<typeof Button>;
@@ -59,4 +60,14 @@ export function LanguageToggleText(props: ComponentProps<"span">) {
   const text = context.locales?.find((item) => item.locale === context.locale)?.name;
 
   return <span {...props}>{text}</span>;
+}
+
+// Adapter for use as a fumadocs `slots.languageSelect.root` slot (e.g. in HomeLayout).
+// Render the same LanguageToggle component across pages
+export function LanguageToggleSlot(_props: ComponentProps<"button">) {
+  return (
+    <LanguageToggle>
+      <Languages className="text-fd-muted-foreground size-4.5" />
+    </LanguageToggle>
+  );
 }
