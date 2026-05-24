@@ -2532,3 +2532,15 @@ export const demos: Record<string, DemoItem> = {
 export function getDemo(name: string): DemoItem | undefined {
   return demos[name];
 }
+
+export function getComponentCount(): number {
+  const uniqueComponents = new Set(
+    Object.values(demos).map((demo) => demo.file.match(/^([^/]+)\//)?.[1]),
+  );
+
+  return uniqueComponents.size;
+}
+
+export function getExampleCount(): number {
+  return Object.keys(demos).length;
+}

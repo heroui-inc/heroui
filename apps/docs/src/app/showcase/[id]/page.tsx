@@ -1,3 +1,5 @@
+import type {Metadata} from "next";
+
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -18,6 +20,26 @@ interface ShowcasePageProps {
 
 // Force static rendering for showcase pages
 export const dynamic = "force-static";
+
+export async function generateMetadata({params}: ShowcasePageProps): Promise<Metadata> {
+  const {id} = await params;
+  const showcase = getShowcase(id);
+
+  if (!showcase) return {};
+
+  return {
+    alternates: {
+      canonical: `/showcase/${id}`,
+    },
+    description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
+    openGraph: {
+      description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
+      title: `${showcase.name} - HeroUI Showcase`,
+      url: `/showcase/${id}`,
+    },
+    title: `${showcase.name} - HeroUI Showcase`,
+  };
+}
 
 export async function generateStaticParams() {
   const showcases = getAllShowcases();

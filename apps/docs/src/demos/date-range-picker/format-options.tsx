@@ -113,7 +113,7 @@ export function FormatOptions() {
                 </DateRangePicker.Trigger>
               </DateField.Suffix>
             </DateField.Group>
-            <DateRangePicker.Popover className="flex w-full flex-col gap-3">
+            <DateRangePicker.Popover className="flex w-full max-w-63 flex-col gap-3">
               <RangeCalendar aria-label="Trip dates" className="w-full">
                 <RangeCalendar.Header>
                   <RangeCalendar.YearPickerTrigger>

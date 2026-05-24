@@ -50,7 +50,7 @@ export function FormatOptions() {
     <div className="flex flex-col gap-4">
       <DatePicker
         key={granularity}
-        className="w-fit min-w-64"
+        className="w-fit min-w-72"
         defaultValue={defaultValue}
         granularity={granularity}
         hideTimeZone={hideTimeZone}

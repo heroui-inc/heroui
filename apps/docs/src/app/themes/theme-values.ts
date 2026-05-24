@@ -57,6 +57,8 @@ export type ThemeValues = {
   radius: RadiusId;
   /** Optional semantic color overrides for light/dark modes */
   semanticOverrides?: ThemeSemanticOverrides;
+  /** Use vibrant (more saturated) soft foreground colors instead of accessible defaults */
+  vibrantPalette?: boolean;
 };
 
 export const defaultThemeValues: ThemeValues = {

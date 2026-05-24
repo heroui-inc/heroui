@@ -693,115 +693,85 @@ export function generateThemeColors(params: ColorGenerationParams): GeneratedThe
  * -----------------------------------------------------------------------------------------------*/
 
 /**
- * For light accents (lightness > 0.65), return a darker OKLCH string
- * so text on secondary buttons, chips, and badges stays readable.
+ * Static var()-based formulas that mirror packages/styles/themes/default/variables.css.
+ * These must be re-declared on scoped elements because CSS custom properties
+ * resolve var() at the element where they are defined, not where inherited.
+ *
+ * Light and dark themes differ in soft percentages:
+ *   - Light: accent/warning/success soft 15%/20%, danger 15%/20%
+ *   - Dark:  accent/warning/success soft 12%/16%, danger 15%/20%
  */
-function darkenForSoftForeground(oklchValue: string): string {
-  const color = parseOklch(oklchValue);
-
-  if (!color || color.l <= 0.65) return oklchValue;
-
-  return formatOklch({
-    c: Math.min(color.c * 1.4, 0.25),
-    h: color.h,
-    l: Math.max(color.l - 0.35, 0.35),
-  });
-}
-
-/**
- * Accent-derived source variables used by @theme color aliases.
- */
-export function getAccentDerivedVariables(
-  accentValue: string,
-  accentFgValue: string,
+export function getDerivedColorFormulas(
+  theme: "light" | "dark",
+  options?: {vibrant?: boolean},
 ): Record<string, string> {
-  const softFg = darkenForSoftForeground(accentValue);
+  const isLight = theme === "light";
+  const vibrant = options?.vibrant ?? false;
+  const [softPct, softHoverPct] = isLight ? ["15%", "20%"] : ["12%", "16%"];
+
+  const vibrantSoftFg = "color-mix(in oklab, var(--VAR) 92%, var(--foreground) 8%)";
+  const sfFg = (colorVar: string, accessibleFormula: string) =>
+    vibrant ? vibrantSoftFg.replace("--VAR", colorVar) : accessibleFormula;
 
   return {
-    "--accent-hover": `color-mix(in oklab, ${accentValue} 90%, ${accentFgValue} 10%)`,
-    "--accent-soft": `color-mix(in oklab, ${accentValue} 15%, transparent)`,
-    "--accent-soft-foreground": softFg,
-    "--accent-soft-hover": `color-mix(in oklab, ${accentValue} 20%, transparent)`,
-    "--tw-ring-color": "var(--focus)",
-  };
-}
-
-/**
- * Semantic color derived source variables (hover, soft variants).
- */
-export function getSemanticDerivedVariables(
-  colorName: string,
-  colorValue: string,
-  foregroundValue: string,
-): Record<string, string> {
-  const softFg = darkenForSoftForeground(colorValue);
-
-  return {
-    [`--${colorName}-hover`]: `color-mix(in oklab, ${colorValue} 90%, ${foregroundValue} 10%)`,
-    [`--${colorName}-soft`]: `color-mix(in oklab, ${colorValue} 15%, transparent)`,
-    [`--${colorName}-soft-foreground`]: softFg,
-    [`--${colorName}-soft-hover`]: `color-mix(in oklab, ${colorValue} 20%, transparent)`,
-  };
-}
-
-/**
- * Field-derived source variables based on base field variables.
- */
-export function getFieldDerivedVariables(
-  fieldBgValue: string,
-  fieldFgValue: string,
-  fieldBorderValue: string,
-): Record<string, string> {
-  return {
-    "--field-border-focus": `color-mix(in oklab, ${fieldBorderValue} 74%, ${fieldFgValue} 22%)`,
-    "--field-border-hover": `color-mix(in oklab, ${fieldBorderValue} 88%, ${fieldFgValue} 10%)`,
-    "--field-focus": fieldBgValue,
-    "--field-hover": `color-mix(in oklab, ${fieldBgValue} 90%, ${fieldFgValue} 2%)`,
-  };
-}
-
-/**
- * Derived source variables that mirror packages/styles/themes/default/variables.css.
- */
-export function getDerivedColorVariables(vars: Record<string, string>): Record<string, string> {
-  const background = vars["--background"] ?? "";
-  const border = vars["--border"] ?? "";
-  const defaultColor = vars["--default"] ?? "";
-  const defaultForeground = vars["--default-foreground"] ?? "";
-  const fieldBackground = vars["--field-background"] ?? "";
-  const fieldBorder = vars["--field-border"] ?? border;
-  const fieldForeground = vars["--field-foreground"] ?? "";
-  const foreground = vars["--foreground"] ?? "";
-  const surface = vars["--surface"] ?? "";
-  const surfaceForeground = vars["--surface-foreground"] ?? "";
-
-  return {
-    "--background-inverse": foreground,
-    "--background-secondary": `color-mix(in oklab, ${background} 96%, ${foreground} 4%)`,
-    "--background-tertiary": `color-mix(in oklab, ${background} 92%, ${foreground} 8%)`,
-    "--border-secondary": `color-mix(in oklab, ${surface} 78%, ${surfaceForeground} 22%)`,
-    "--border-tertiary": `color-mix(in oklab, ${surface} 66%, ${surfaceForeground} 34%)`,
-    "--default-hover": `color-mix(in oklab, ${defaultColor} 96%, ${defaultForeground} 4%)`,
-    "--separator-secondary": `color-mix(in oklab, ${surface} 85%, ${surfaceForeground} 15%)`,
-    "--separator-tertiary": `color-mix(in oklab, ${surface} 81%, ${surfaceForeground} 19%)`,
-    "--surface-hover": `color-mix(in oklab, ${surface} 92%, ${surfaceForeground} 8%)`,
-    ...getAccentDerivedVariables(vars["--accent"] ?? "", vars["--accent-foreground"] ?? ""),
-    ...getSemanticDerivedVariables(
-      "success",
-      vars["--success"] ?? "",
-      vars["--success-foreground"] ?? "",
+    "--accent-hover": "color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%)",
+    "--accent-soft": `color-mix(in oklab, var(--accent) ${softPct}, transparent)`,
+    "--accent-soft-foreground": sfFg(
+      "accent",
+      isLight
+        ? "color-mix(in oklab, var(--accent) 70%, var(--foreground) 30%)"
+        : "color-mix(in oklab, var(--accent) 80%, var(--foreground) 30%)",
     ),
-    ...getSemanticDerivedVariables(
-      "warning",
-      vars["--warning"] ?? "",
-      vars["--warning-foreground"] ?? "",
-    ),
-    ...getSemanticDerivedVariables(
+    "--accent-soft-hover": `color-mix(in oklab, var(--accent) ${softHoverPct}, transparent)`,
+    "--background-inverse": "var(--foreground)",
+    "--background-secondary": "color-mix(in oklab, var(--background) 96%, var(--foreground) 4%)",
+    "--background-tertiary": "color-mix(in oklab, var(--background) 92%, var(--foreground) 8%)",
+    "--border-secondary": "color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%)",
+    "--border-tertiary": "color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%)",
+    "--danger-hover": "color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%)",
+    "--danger-soft": "color-mix(in oklab, var(--danger) 15%, transparent)",
+    "--danger-soft-foreground": sfFg(
       "danger",
-      vars["--danger"] ?? "",
-      vars["--danger-foreground"] ?? "",
+      isLight
+        ? "color-mix(in oklab, var(--danger) 70%, var(--foreground) 40%)"
+        : "color-mix(in oklab, var(--danger) 80%, var(--foreground) 30%)",
     ),
-    ...getFieldDerivedVariables(fieldBackground, fieldForeground, fieldBorder),
+    "--danger-soft-hover": "color-mix(in oklab, var(--danger) 20%, transparent)",
+    "--default-hover": "color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%)",
+    "--default-soft": "color-mix(in oklab, var(--default) 50%, transparent)",
+    "--default-soft-foreground": "var(--default-foreground)",
+    "--default-soft-hover": "color-mix(in oklab, var(--default) 60%, transparent)",
+    "--field-border-focus":
+      "color-mix(in oklab, var(--field-border, var(--border)) 74%, var(--field-foreground, var(--foreground)) 22%)",
+    "--field-border-hover":
+      "color-mix(in oklab, var(--field-border, var(--border)) 88%, var(--field-foreground, var(--foreground)) 10%)",
+    "--field-focus": "var(--field-background, var(--default))",
+    "--field-hover":
+      "color-mix(in oklab, var(--field-background, var(--default)) 90%, var(--field-foreground, var(--foreground)) 2%)",
+    "--separator-secondary":
+      "color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%)",
+    "--separator-tertiary":
+      "color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%)",
+    "--success-hover": "color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%)",
+    "--success-soft": `color-mix(in oklab, var(--success) ${softPct}, transparent)`,
+    "--success-soft-foreground": sfFg(
+      "success",
+      isLight
+        ? "color-mix(in oklab, var(--success) 80%, var(--foreground) 60%)"
+        : "color-mix(in oklab, var(--success) 80%, var(--foreground) 30%)",
+    ),
+    "--success-soft-hover": `color-mix(in oklab, var(--success) ${softHoverPct}, transparent)`,
+    "--surface-hover": "color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%)",
+    "--tw-ring-color": "var(--focus)",
+    "--warning-hover": "color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%)",
+    "--warning-soft": `color-mix(in oklab, var(--warning) ${softPct}, transparent)`,
+    "--warning-soft-foreground": sfFg(
+      "warning",
+      isLight
+        ? "color-mix(in oklab, var(--warning) 80%, var(--foreground) 70%)"
+        : "color-mix(in oklab, var(--warning) 80%, var(--foreground) 30%)",
+    ),
+    "--warning-soft-hover": `color-mix(in oklab, var(--warning) ${softHoverPct}, transparent)`,
   };
 }
 

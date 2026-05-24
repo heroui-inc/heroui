@@ -1,0 +1,427 @@
+---
+title: "14 Dashboard Templates and Frameworks for React Teams in 2026"
+description: "React dashboard templates, admin frameworks, and UI starting points for building admin panels, analytics dashboards, and data-driven applications."
+date: "2026-05-10"
+author: "Junior Garcia"
+authorHandle: "@jrgarciadev"
+authorUrl: "https://x.com/jrgarciadev"
+authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
+tags: ["react", "dashboards", "templates"]
+image: "/images/blog/best-react-dashboards.jpg"
+draft: true
+---
+
+Building a React dashboard from scratch takes weeks — picking the right template, framework, or component stack can cut that down dramatically. The strongest options give you responsive layouts, data visualization patterns, accessible navigation, and a theme system you can actually maintain.
+
+I pulled together 14 options worth checking in 2026. Pricing and feature gates change often, so use this as a shortlist and verify the current license before you buy or build on top of anything.
+
+
+## Quick Comparison
+
+| Template / Framework | Type | Best reason to consider it |
+|---------------------|------|----------------------------|
+| **HeroUI Pro Dashboard** | Template + Pro components | HeroUI-native app shell, sidebar, navbar, KPI, data grid, and chart patterns |
+| **Tremor** | Dashboard UI resources | Tailwind v4 dashboard blocks and analytics-oriented UI |
+| **Refine** | Framework | Data-provider driven CRUD/admin applications |
+| **AdminJS** | Framework | Generated admin panels from backend models |
+| **React Admin** | Framework | Mature admin framework with a large data-provider ecosystem |
+| **Ant Design Pro** | Template/framework ecosystem | Ant Design and ProComponents-based admin apps |
+| **CoreUI** | Template | Cross-framework admin template ecosystem |
+| **Tabler** | Template | Bootstrap-based dashboard UI |
+| **Argon Dashboard** | Template | Creative Tim dashboard aesthetic |
+| **Material Dashboard** | Template | MUI / Material Design dashboard starting point |
+| **Berry** | Template | MUI-based admin dashboard ecosystem |
+| **Mantis** | Template | MUI-based admin dashboard ecosystem |
+| **shadcn/ui Dashboard** | Example | Source-owned Tailwind dashboard example |
+| **HeroUI Pro + custom widgets** | Pro components + template | Start from Pro layout/table/chart primitives, then add product-specific widgets |
+
+---
+
+## 1. HeroUI Pro Dashboard Template
+
+[HeroUI Pro](https://heroui.com/pro) offers pre-built dashboard templates designed specifically for SaaS products, admin panels, and analytics dashboards. Built on HeroUI v3 components with Tailwind CSS v4.
+
+**What you get:**
+
+- Complete dashboard layouts with sidebar navigation, header, and content areas
+- Analytics pages with charts, metrics cards, and data tables
+- Settings, analytics, orders, tracker, help, finance, chat, and email-style app surfaces across the current templates
+- App shell patterns using `AppLayout`, `Sidebar`, and `Navbar`
+- Pro dashboard widgets using `KPI`, `DataGrid`, `LineChart`, `NumberValue`, and `TrendChip`
+- Dark mode support with HeroUI's theming system
+- Responsive design that works on mobile and desktop
+
+**Key strengths:**
+
+- **Production-quality components.** Every component is built on React Aria with full accessibility support and keyboard navigation.
+- **Tailwind CSS v4.** Modern styling with CSS-based theming, no runtime overhead.
+- **Next.js App Router ready.** Templates are built for the latest Next.js with server components and streaming.
+- **AI tooling.** Use HeroUI's MCP server with Cursor or other AI tools to extend and customize dashboards with AI assistance.
+
+**Pricing:** Premium license through HeroUI Pro; check the current pricing page for details.
+
+**Best for:** Teams building SaaS products who want accessible, modern dashboard components they can customize with Tailwind CSS.
+
+---
+
+## 2. Tremor
+
+[Tremor](https://tremor.so/) is focused on dashboard UI. Its current docs describe Tremor Raw as designed for React 18.2+ and Tailwind CSS 4.0+.
+
+**What you get:**
+
+- Dashboard-oriented UI resources
+- Tremor Blocks for copy-paste dashboard sections
+- Figma UI Kit for dashboard design work
+- Tailwind CSS v4 setup guides
+
+**Key strengths:**
+
+- **Dashboard-first design.** The project is centered on analytics and dashboard interfaces.
+- **Tailwind native.** Current docs target Tailwind CSS v4.
+- **Useful design resources.** The docs link to Tremor Blocks and a Figma UI Kit.
+
+**Trade-offs:** Limited to dashboard-specific components. You'll need another library for forms, navigation, and other general UI patterns.
+
+**Pricing:** Check Tremor's current site and repository before choosing it for a commercial project.
+
+**Best for:** Teams that already have a UI library and need dashboard-specific visualization components to complement it.
+
+---
+
+## 3. Refine
+
+[Refine](https://refine.dev/) is a meta-framework for building data-intensive applications — admin panels, dashboards, and internal tools. It's not a template; it's a framework that generates CRUD interfaces from your data model.
+
+**What you get:**
+
+- Automatic CRUD operations from data provider configuration
+- Authentication and authorization hooks
+- Routing integration (Next.js, Remix, React Router)
+- Connectors for REST, GraphQL, Supabase, Strapi, Appwrite, and more
+- UI framework adapters for Ant Design, MUI, Mantine, and Chakra UI
+
+**Key strengths:**
+
+- **Data-first architecture.** Define your data providers and Refine generates the boilerplate — list pages, create/edit forms, show views, and filters.
+- **Framework-agnostic UI.** Swap between Ant Design, MUI, Mantine, or Chakra UI without changing your business logic.
+- **Headless mode.** Use your own components if none of the bundled UI adapters fit.
+- **Active community.** Regular releases, good documentation, and a responsive maintainer team.
+
+**Trade-offs:** The abstraction adds complexity for simple dashboards. If your data layer doesn't fit Refine's provider model, you'll fight the framework more than benefit from it.
+
+**Pricing:** Check Refine's current open-source and commercial offering before choosing it.
+
+**Best for:** Teams building admin panels or internal tools with standard CRUD patterns over existing APIs.
+
+---
+
+## 4. AdminJS
+
+[AdminJS](https://adminjs.co/) (formerly Admin Bro) auto-generates an admin panel from your database models. Point it at your ORM, and it creates a full CRUD interface.
+
+**What you get:**
+
+- Auto-generated admin panel from Sequelize, TypeORM, Mongoose, Prisma, or MikroORM models
+- CRUD views, search, filtering, and bulk actions
+- Dashboard page with customizable widgets
+- Role-based access control
+- Custom action hooks for business logic
+
+**Key strengths:**
+
+- **Zero-config setup for common ORMs.** If you use Prisma or TypeORM, AdminJS reads your schema and generates an admin panel automatically.
+- **Customizable.** Override components, actions, and views when the defaults don't fit.
+- **Plugin system.** Add features like file upload, import/export, and logging through plugins.
+
+**Trade-offs:** The auto-generated UI looks functional but plain. Heavy customization can become painful because you're working against the generated output. The React version uses older patterns.
+
+**Pricing:** Check AdminJS's current open-source and hosted offering before choosing it.
+
+**Best for:** Backend teams that need a quick admin panel for database management without building frontend code.
+
+---
+
+## 5. React Admin
+
+[React Admin](https://marmelab.com/react-admin/) is the most mature admin framework in the React ecosystem, maintained by Marmelab since 2016.
+
+**What you get:**
+
+- Complete admin panel framework with routing, layout, and state management
+- List, Create, Edit, Show views with declarative configuration
+- Many data provider adapters for common backend patterns
+- Authentication hooks and access control
+- Theming through MUI
+
+**Key strengths:**
+
+- **Mature and battle-tested.** Years of production use mean many admin edge cases are documented and handled.
+- **Declarative API.** Define resources, list columns, form fields, and filters with JSX — React Admin generates the plumbing.
+- **Enormous data provider ecosystem.** If your backend speaks a protocol, there's probably a React Admin data provider for it.
+- **Enterprise edition.** Calendar, kanban, audit log, real-time updates, and multi-tenancy for teams that need them.
+
+**Trade-offs:** Tightly coupled to MUI for styling. The declarative API is powerful but opaque — debugging what goes wrong inside the framework requires understanding its internals.
+
+**Pricing:** Check React Admin's current licensing and Enterprise Edition details.
+
+**Best for:** Teams building full-featured admin panels that need a mature, well-documented framework with extensive data provider support.
+
+---
+
+## 6. Ant Design Pro
+
+[Ant Design Pro](https://pro.ant.design/) is the official dashboard template ecosystem for Ant Design. It is aimed at full-featured admin products built around Ant Design and ProComponents.
+
+**What you get:**
+
+- Complete admin layout with sidebar, header, and breadcrumbs
+- Pre-built pages: dashboard, forms, tables, profiles, error pages
+- Authentication and authorization patterns in the Ant Design Pro ecosystem
+- ProComponents (ProTable, ProForm, ProLayout) for complex data patterns
+- Internationalization with 10+ language packs
+
+**Key strengths:**
+
+- **ProComponents.** Advanced components like ProTable (configurable data table with search, filtering, and actions) save weeks of development time.
+- **Umi integration.** Built on the Umi framework with conventions for routing, plugins, and data fetching.
+- **Comprehensive template.** Nearly every page you'd need in an admin panel is included and customizable.
+
+**Trade-offs:** Tightly coupled to the Ant Design ecosystem (Umi, Ant Design, AntV). The aesthetic is distinctly Ant Design — theming it to look different is difficult. Documentation is primarily in Chinese with English translations.
+
+**Pricing:** Check Ant Design Pro's current license and repository before choosing it.
+
+**Best for:** Teams already using Ant Design who need a comprehensive admin template with advanced data components.
+
+---
+
+## 7. CoreUI
+
+[CoreUI](https://coreui.io/) is a cross-framework admin template available for React, Vue, Angular, and vanilla Bootstrap. The React version ships with a complete dashboard layout and component set.
+
+**What you get:**
+
+- Dashboard layout with sidebar navigation and header
+- 30+ page templates (analytics, user management, settings, etc.)
+- Custom UI components built on Bootstrap foundations
+- Chart examples for data visualization
+- Icon library with 1,500+ icons
+
+**Key strengths:**
+
+- **Cross-framework consistency.** If your organization uses multiple frontend frameworks, CoreUI provides a consistent design language across all of them.
+- **Extensive page templates.** Pre-built pages for common admin patterns save time on layout and structure.
+- **Regular updates.** Actively maintained with frequent releases.
+
+**Trade-offs:** The Bootstrap foundation feels dated compared to Tailwind-based alternatives. The free version is limited — most useful features require the Pro license.
+
+**Pricing:** Check CoreUI's current pricing and license before choosing it.
+
+**Best for:** Organizations that need the same admin panel design across React, Vue, and Angular projects.
+
+---
+
+## 8. Tabler
+
+[Tabler](https://tabler.io/) is a free, open-source dashboard template built on Bootstrap with a React adaptation. Known for its clean, minimal design and extensive component set.
+
+**What you get:**
+
+- 200+ responsive UI components
+- Dashboard layout with multiple navigation patterns
+- Apache ECharts integration for data visualization
+- Form components with validation
+- Email and e-commerce page templates
+
+**Key strengths:**
+
+- **Beautiful design.** Tabler has one of the cleanest default aesthetics of any free dashboard template.
+- **Component breadth.** Over 200 components covering navigation, forms, data display, feedback, and layout.
+- **Open-source starting point.** Check the current repository license and docs before adopting it.
+- **Active development.** Regular releases with new components and improvements.
+
+**Trade-offs:** The React version lags behind the HTML/Bootstrap version in features. TypeScript support is incomplete. Based on Bootstrap rather than a modern CSS approach.
+
+**Pricing:** Check Tabler's current license and template docs before choosing it.
+
+**Best for:** Developers who want a beautiful, free dashboard template and are comfortable with Bootstrap-based styling.
+
+---
+
+## 9. Argon Dashboard
+
+[Argon Dashboard React](https://www.creative-tim.com/product/argon-dashboard-react) by Creative Tim is a popular dashboard template with a distinctive visual style.
+
+**What you get:**
+
+- Dashboard layout with sidebar and navbar
+- Pre-built pages (dashboard, maps, tables, user profile)
+- Bootstrap-based styling with custom extensions
+- Chart examples
+
+**Key strengths:**
+
+- **Distinctive design.** Argon has a recognizable gradient-heavy aesthetic that stands out from more neutral templates.
+- **Creative Tim ecosystem.** Integrates with Creative Tim's other products (login pages, landing pages, design system).
+- **Good documentation.** Clear setup instructions and component guides.
+
+**Trade-offs:** The free version is bare-bones — most useful pages and components require the Pro license. The design is polarizing. Bootstrap foundation limits modern CSS usage.
+
+**Pricing:** Check Creative Tim's current pricing and license before choosing it.
+
+**Best for:** Teams that like Creative Tim's design aesthetic and want a quick starting point for a dashboard.
+
+---
+
+## 10. Material Dashboard
+
+[Material Dashboard React](https://www.creative-tim.com/product/material-dashboard-react) is another Creative Tim template, built on MUI with a Material Design aesthetic.
+
+**What you get:**
+
+- MUI-based dashboard layout
+- Pre-built pages with Material Design styling
+- Chart examples for data visualization
+- Dark mode support
+- RTL layout support
+
+**Key strengths:**
+
+- **Material Design compliance.** If you need a dashboard that follows Google's Material Design guidelines, this delivers out of the box.
+- **MUI foundation.** Access to MUI's full component ecosystem for extending beyond the template's defaults.
+- **Well-documented.** Clear guides for customization, theming, and deployment.
+
+**Trade-offs:** Same Creative Tim free-vs-Pro split — the free version is limited. Closely tied to MUI, making it hard to use with other styling approaches.
+
+**Pricing:** Check Creative Tim's current pricing and license before choosing it.
+
+**Best for:** Teams using MUI who want a Material Design dashboard template with ready-made pages.
+
+---
+
+## 11. Berry
+
+[Berry](https://berrydashboard.io/) is an MUI-based admin dashboard template known for its polished design and comprehensive feature set.
+
+**What you get:**
+
+- A large set of page templates and widgets
+- Chart examples for data visualization
+- Authentication page examples
+- Multi-language support
+- Light and dark themes with RTL support
+
+**Key strengths:**
+
+- **Feature density.** Berry focuses on a large set of pre-built pages and widgets.
+- **Chart-heavy pages.** The template includes polished chart-oriented dashboard pages.
+- **Auth examples.** Includes authentication-related page examples.
+
+**Trade-offs:** The Pro version is expensive compared to alternatives. MUI dependency means the same theming constraints apply.
+
+**Pricing:** Check the current Berry pricing and license before choosing it.
+
+**Best for:** Teams that want a feature-rich MUI dashboard with multiple authentication patterns and extensive pre-built pages.
+
+---
+
+## 12. Mantis
+
+[Mantis](https://mantisdashboard.io/) is a React admin dashboard built on MUI, focused on clean design and developer experience.
+
+**What you get:**
+
+- Clean, modern dashboard layout
+- Chart examples for data visualization
+- Authentication page examples
+- Form components with validation
+- Widget pages for common dashboard patterns
+
+**Key strengths:**
+
+- **Clean aesthetic.** Mantis has a more restrained, modern design compared to other MUI-based templates.
+- **Good code organization.** The project structure follows best practices for scalable React applications.
+- **Regular updates.** Actively maintained with consistent releases.
+
+**Trade-offs:** Similar to Berry — MUI dependency, limited free version, Pro pricing.
+
+**Pricing:** Check the current Mantis pricing and license before choosing it.
+
+**Best for:** Teams who want a clean, well-organized MUI dashboard template.
+
+---
+
+## 13. Shadcn Dashboard
+
+The [shadcn/ui Dashboard](https://ui.shadcn.com/examples/dashboard) example demonstrates how to build a full dashboard using shadcn/ui components with Tailwind CSS.
+
+**What you get:**
+
+- Example dashboard layout with sidebar and header
+- Data table with sorting, filtering, and pagination
+- Charts using Recharts
+- Account/authentication page examples
+- Settings forms
+
+**Key strengths:**
+
+- **Full code ownership.** Since shadcn/ui components are copied into your project, you have complete control over the dashboard code.
+- **Tailwind CSS styling.** Clean, utility-first styling that's easy to customize.
+- **Community extensions.** Many developers have built expanded dashboard templates on top of the shadcn example.
+
+**Trade-offs:** It's an example, not a production template. You'll need to build out most pages yourself. The components need manual updates when shadcn releases improvements.
+
+**Pricing:** Check shadcn/ui's current license and docs before choosing it.
+
+**Best for:** Developers who want a Tailwind-based dashboard starting point with full control over the source code.
+
+---
+
+## 14. HeroUI Pro + Custom Widgets
+
+If you want a HeroUI-native dashboard, start with [HeroUI Pro](https://heroui.com/pro) rather than rebuilding the frame from base components. Use the Pro dashboard template for the app shell and add product-specific widgets only where your product needs something unique.
+
+**What you get:**
+
+- `AppLayout`, `Sidebar`, and `Navbar` for the dashboard frame
+- `KPI`, `DataGrid`, `LineChart`, `NumberValue`, and `TrendChip` for dashboard UI
+- Base HeroUI components for local UI around the Pro primitives
+- Full control over your data fetching, permissions, and business logic
+
+**Why this works:**
+
+- **No hand-rolled shell.** The app frame, sidebar, navbar, metrics, tables, and charts already have Pro primitives.
+- **Modern stack.** The current dashboard template is built with Next.js and HeroUI Pro components.
+- **AI-assisted development.** Use HeroUI's MCP server and docs so agents can extend the dashboard with current APIs.
+
+**How to start:**
+
+1. Start from the HeroUI Pro dashboard template.
+2. Keep `AppLayout`, `Sidebar`, `Navbar`, `KPI`, `DataGrid`, and chart components as the foundation.
+3. Replace the mock data files with your API, database, or analytics source.
+4. Add custom widgets only for product-specific workflows.
+
+**Pricing:** Check HeroUI Pro's current pricing and license before choosing it.
+
+**Best for:** Teams that want a HeroUI-native dashboard without rebuilding dashboard infrastructure from scratch.
+
+---
+
+## How to Choose
+
+Your choice depends on what you value most:
+
+- **Speed to launch:** HeroUI Pro Dashboard or Ant Design Pro give you the most complete starting points.
+- **Maximum flexibility:** HeroUI Pro plus custom widgets or the shadcn Dashboard example let you build around your product's exact needs.
+- **CRUD-heavy admin panels:** React Admin or Refine auto-generate interfaces from your data model.
+- **Enterprise needs:** React Admin Enterprise, MUI X, or Berry Pro offer advanced features with support contracts.
+- **Budget-friendly:** Tabler, Tremor, and the shadcn Dashboard example are worth checking when you want an open-source starting point.
+
+## Build Your Dashboard with HeroUI
+
+HeroUI provides the components you need to build modern, accessible dashboards:
+
+- [Component Documentation](/docs/react/components) — Tables, Cards, Navigation, Forms, and more
+- [Quick Start Guide](/docs/react/getting-started/quick-start) — Set up a new project in minutes
+- [HeroUI Pro](https://heroui.com/pro) — Pre-built dashboard templates and premium components
+- [Tutorial: Build a React Dashboard](/blog/build-react-dashboard-with-heroui) — Step-by-step guide

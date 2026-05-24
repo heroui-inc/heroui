@@ -1,0 +1,23 @@
+/* =============================================================================
+ * HeroUI scrollbar system
+ *
+ * Modes via data-scrollbar on any ancestor:
+ *   (unset) — HeroUI scrollbar from theme --scrollbar-width/color/gutter (light/dark)
+ *   default — OS / browser scrollbar (auto)
+ *   none    — hidden (inherited to descendants using @apply scrollbar)
+ *
+ * Each scroll container applies @apply scrollbar | scrollbar-none | scrollbar-default
+ * in its own component CSS file.
+ * ============================================================================= */
+
+[data-scrollbar="default"] {
+  --scrollbar-width: auto;
+  --scrollbar-color: auto;
+  --scrollbar-gutter: auto;
+}
+
+[data-scrollbar="none"] {
+  --scrollbar-width: none;
+  --scrollbar-color: auto;
+  --scrollbar-gutter: auto;
+}

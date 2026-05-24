@@ -13,14 +13,18 @@ import {ComponentPreview} from "./components/component-preview";
 import {ComponentsCategory} from "./components/components-category";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
-import {NativeComponentsCategory} from "./components/native-components-category";
-import {NativeImageHeroView} from "./components/native-image-hero-view";
-import {NativeQRPreviewPopover} from "./components/native-qr-preview-popover";
-import {NativeVideoPlayerView} from "./components/native-video-player-view";
+import {
+  ComponentsCategory as NativeComponentsCategory,
+  ImageHeroView as NativeImageHeroView,
+  QRPreviewPopover as NativeQRPreviewPopover,
+  TryOnDevice as NativeTryOnDevice,
+  VideoPlayerView as NativeVideoPlayerView,
+} from "./components/native";
 import {NewsletterForm} from "./components/newsletter-form";
 import {RelatedComponents as RelatedComponentsComponent} from "./components/related-components";
 import {RelatedShowcases as RelatedShowcasesComponent} from "./components/related-showcases";
 import {VideoPlayer} from "./components/video-player";
+import {getComponentCount, getExampleCount} from "./demos";
 import {FumadocsCustomCodeblock as CodeBlock} from "./mdx-components/fumadocs-custom-codeblock";
 import {PackageManagers} from "./mdx-components/package-managers";
 import {cn} from "./utils/cn";
@@ -34,6 +38,14 @@ const X = (props: any) => <Iconify {...props} icon="xmark" />;
 const Star = (props: any) => <Iconify {...props} icon="star-fill" />;
 
 const Icon = (props: any) => <Iconify {...props} />;
+
+function ComponentCount() {
+  return <>{getComponentCount()}</>;
+}
+
+function ExampleCount() {
+  return <>{getExampleCount()}</>;
+}
 
 const MAX_LINES_FOR_LINE_NUMBERS = 20;
 
@@ -105,16 +117,19 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CodeBlock,
     CollapsibleCode,
     ComponentCard,
+    ComponentCount,
     ComponentGrid,
     ComponentPreview,
     ComponentsCategory,
     DocsImage,
+    ExampleCount,
     Icon,
     Info,
     Link,
     NativeComponentsCategory,
     NativeImageHeroView,
     NativeQRPreviewPopover,
+    NativeTryOnDevice,
     NativeVideoPlayerView,
     NewsletterForm,
     PackageManagers,

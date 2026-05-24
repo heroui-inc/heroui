@@ -237,6 +237,8 @@ export type ThemeVariables = {
   fontFamily: (typeof fontIds)[number] | string;
   formRadius: RadiusId;
   radius: RadiusId;
+  /** Use vibrant (more saturated) soft foreground colors instead of accessible defaults */
+  vibrantPalette?: boolean;
 };
 
 export const themeVariableKeys = [
@@ -248,6 +250,9 @@ export const themeVariableKeys = [
   "formRadius",
   "radius",
 ] as const satisfies readonly (keyof ThemeVariables)[];
+
+/** Theme variable keys that can be locked (excludes booleans like `vibrantPalette`). */
+export type LockableThemeVariableKey = (typeof themeVariableKeys)[number];
 
 export const defaultThemeVariables: ThemeVariables = {
   base: DEFAULT_BASE,

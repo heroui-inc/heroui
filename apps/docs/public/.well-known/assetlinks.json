@@ -1,0 +1,13 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "TODO_ANDROID_PACKAGE_NAME",
+      "sha256_cert_fingerprints": ["TODO_YOUR_SIGNING_KEY_SHA256"]
+    }
+  }
+]

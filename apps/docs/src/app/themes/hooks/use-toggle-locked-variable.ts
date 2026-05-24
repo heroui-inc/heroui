@@ -1,10 +1,10 @@
 "use client";
 
-import type {ThemeVariables} from "../constants";
+import type {LockableThemeVariableKey} from "../constants";
 
 import {useVariablesState} from "./use-variables-state";
 
-export function useToggleLockedVariable(key: keyof ThemeVariables) {
+export function useToggleLockedVariable(key: LockableThemeVariableKey) {
   const [variables, setVariables] = useVariablesState();
   const isLocked = variables.lockedVariables.includes(key);
   const toggleLockedVariable = () => {

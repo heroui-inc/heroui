@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appID": "8L5ZY5BBT6.com.herouinative.app",
+        "paths": [
+          "/docs/native-showcase/components/*"
+        ]
+      }
+    ]
+  }
+}

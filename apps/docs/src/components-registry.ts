@@ -441,6 +441,13 @@ const componentsMap: Record<string, ComponentInfo> = {
     name: "taggroup",
     title: "TagGroup",
   },
+  text: {
+    category: "display",
+    description: "Semantic typography primitive for headings, body copy, and inline code",
+    href: "/docs/components/text",
+    name: "text",
+    title: "Text",
+  },
   textarea: {
     category: "forms",
     description: "Multiline text input with focus management",

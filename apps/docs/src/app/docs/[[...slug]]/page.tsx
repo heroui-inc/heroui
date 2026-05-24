@@ -19,6 +19,7 @@ import {NewsletterForm} from "@/components/newsletter-form";
 import {PRContributors, fetchPRContributors} from "@/components/pr-contributors";
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
+import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {
@@ -68,47 +69,77 @@ export default async function Page(props: {params: Promise<{slug?: string[]}>}) 
   // Fetch PR contributors if github info is available
   const contributors = githubInfo?.pull ? await fetchPRContributors(githubInfo.pull) : undefined;
 
-  return (
-    <DocsPage
-      full={page.data.full}
-      toc={page.data.toc}
-      // TODO: add github last edit
-      // lastUpdate={lastEditTime}
-      tableOfContent={{
-        footer: <NewsletterForm />,
-        style: "normal",
-      }}
-    >
-      <section className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <DocsTitle className="flex items-center gap-2">
-            {page.data.title}
-            {!!isComponentStatusIcon && (
-              <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
-            )}
-          </DocsTitle>
-          {page.data.toc.length > 0 && (
-            <div className="flex items-center gap-2">
-              <ViewOptions markdownUrl={`${page.url}.mdx`} />
-            </div>
-          )}
-        </div>
-        <DocsDescription className="text-md mt-2 mb-4">{page.data.description}</DocsDescription>
-        {!!links && <ComponentLinks links={links} />}
-      </section>
-      <DocsBody className="prose-sm">
-        <MDXContent
-          components={getMDXComponents({
-            PRContributors: () => (
-              <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
-            ),
+  const slugParts = params.slug ?? [];
+  const pageUrl = `/docs/${slugParts.join("/")}`;
 
-            // this allows you to link to other pages with relative file paths
-            a: createRelativeLink(source, page),
-          })}
-        />
-      </DocsBody>
-    </DocsPage>
+  const breadcrumbItems = [
+    {name: "Home", url: "https://heroui.com"},
+    {name: "Docs", url: "https://heroui.com/docs"},
+    ...slugParts.map((segment, i) => ({
+      name: segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
+      url: `https://heroui.com/docs/${slugParts.slice(0, i + 1).join("/")}`,
+    })),
+  ];
+
+  return (
+    <>
+      <script
+        dangerouslySetInnerHTML={{__html: JSON.stringify(getBreadcrumbJsonLd(breadcrumbItems))}}
+        type="application/ld+json"
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            getTechArticleJsonLd({
+              description: page.data.description ?? "",
+              title: page.data.title,
+              url: `https://heroui.com${pageUrl}`,
+            }),
+          ),
+        }}
+      />
+      <DocsPage
+        full={page.data.full}
+        toc={page.data.toc}
+        // TODO: add github last edit
+        // lastUpdate={lastEditTime}
+        tableOfContent={{
+          footer: <NewsletterForm />,
+          style: "normal",
+        }}
+      >
+        <section className="flex flex-col gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <DocsTitle className="flex items-center gap-2">
+              {page.data.title}
+              {!!isComponentStatusIcon && (
+                <StatusChip className="w-fit" status={page.data.icon as StatusChipStatus} />
+              )}
+            </DocsTitle>
+            {page.data.toc.length > 0 && (
+              <div className="flex items-center gap-2">
+                <ViewOptions markdownUrl={`${page.url}.mdx`} />
+              </div>
+            )}
+          </div>
+          <DocsDescription className="text-md mt-2 mb-4">{page.data.description}</DocsDescription>
+          {!!links && <ComponentLinks links={links} />}
+        </section>
+        <DocsBody className="prose-sm">
+          <MDXContent
+            components={getMDXComponents({
+              PRContributors: () => (
+                <PRContributors contributors={contributors} github={githubInfo ?? undefined} />
+              ),
+
+              // this allows you to link to other pages with relative file paths
+              a: createRelativeLink(source, page),
+            })}
+          />
+        </DocsBody>
+      </DocsPage>
+    </>
   );
 }
 
@@ -130,10 +161,18 @@ export async function generateMetadata(props: {
   // Ensure absolute URL for Open Graph
   const imageUrl = image.startsWith("http") ? image : new URL(image, siteConfig.siteUrl).toString();
 
+  const url = `/docs/${(params.slug ?? []).join("/")}`;
+
   return {
+    alternates: {
+      canonical: url,
+    },
     description: page.data.description,
     openGraph: {
+      description: page.data.description,
       images: imageUrl,
+      title: page.data.title,
+      url,
     },
     title: page.data.title,
     twitter: {

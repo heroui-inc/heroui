@@ -31,6 +31,24 @@ HeroUI components provide flexible styling options: Tailwind CSS utilities, CSS 
 </Button>
 ```
 
+## Scrollbars
+
+HeroUI scroll slots use `@apply scrollbar` in component CSS. For your own overflow containers, use the utilities from `@heroui/styles`:
+
+```tsx
+<div className="scrollbar h-64 overflow-y-auto">
+  {/* long content */}
+</div>
+```
+
+| Utility | Effect |
+|---------|--------|
+| `scrollbar` | HeroUI thumb (reads theme `--scrollbar-*` variables) |
+| `scrollbar-default` | OS / browser scrollbars |
+| `scrollbar-none` | Hidden scrollbar |
+
+Global and per-subtree control uses `data-scrollbar` on an ancestor. See [Theming](/docs/handbook/theming#scrollbars) for tokens and modes.
+
 ## State-Based Styling
 
 HeroUI components expose their state through data attributes, similar to CSS pseudo-classes:

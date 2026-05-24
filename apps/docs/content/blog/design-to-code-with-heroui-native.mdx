@@ -1,0 +1,125 @@
+---
+title: "Design to Code with HeroUI Native"
+description: "How HeroUI Native connects Figma, code, and AI-assisted mobile development."
+date: "2026-05-13"
+author: "Junior Garcia"
+authorHandle: "@jrgarciadev"
+authorUrl: "https://x.com/jrgarciadev"
+authorAvatar: "https://avatars.githubusercontent.com/u/30373425?v=4"
+tags: ["native", "react-native", "design-system", "figma", "ai"]
+image: "/images/blog/design-to-code-with-heroui-native.jpg"
+draft: true
+---
+
+The hardest part of a mobile design system is not drawing components. It is keeping design, code, documentation, and generated AI output aligned over time.
+
+HeroUI Native is built for that workflow. The library gives developers a maintained React Native component system, gives designers a shared HeroUI visual language through Figma, and gives AI assistants structured documentation through MCP, llms.txt, and skills.
+
+## The Problem
+
+Most teams drift in predictable ways:
+
+- Figma components use one naming system.
+- React Native components use another.
+- Design tokens get translated by hand.
+- AI agents guess props from old examples.
+- Engineers copy a component once, customize it, and rarely bring upstream fixes back in.
+
+The result is subtle inconsistency. One screen has different spacing. Another uses the wrong disabled state. A generated component imports web HeroUI into a native app. The first version ships, but the system becomes harder to maintain.
+
+HeroUI Native is designed to reduce that drift.
+
+## Shared Mental Model
+
+HeroUI Native uses the same product-level ideas as the rest of the HeroUI ecosystem:
+
+- Semantic variants like `primary`, `secondary`, and `tertiary`.
+- Compound components for flexible composition.
+- Theme variables for semantic colors and surfaces.
+- Component documentation with anatomy, props, examples, and usage patterns.
+- AI-readable docs for agents.
+
+The implementation is native, not web. HeroUI Native uses React Native, Uniwind, `HeroUINativeProvider`, and mobile interaction patterns. But the design language stays familiar.
+
+```tsx
+import {Button, Card} from "heroui-native";
+
+<Card>
+  <Card.Header>
+    <Card.Title>Workspace</Card.Title>
+    <Card.Description>Invite your team and manage access.</Card.Description>
+  </Card.Header>
+  <Card.Body>{/* Screen content */}</Card.Body>
+  <Card.Footer>
+    <Button variant="primary">
+      <Button.Label>Invite member</Button.Label>
+    </Button>
+  </Card.Footer>
+</Card>;
+```
+
+## Figma Kit V3
+
+The [HeroUI Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3) is the design-side entry point for the ecosystem. It is linked from the Native docs so teams can work from the same visual system while building mobile screens.
+
+Use it to:
+
+- Start from HeroUI's visual language instead of blank frames.
+- Keep component names and variants close to the code model.
+- Align designers and developers on hierarchy, states, and spacing.
+- Create mobile product screens that feel connected to the rest of the HeroUI ecosystem.
+
+Figma does not replace implementation details like keyboard handling, safe areas, bottom sheets, or screen reader behavior. But a shared kit reduces the translation cost between design and code.
+
+## AI Context That Knows Native
+
+AI coding tools are useful only when they have current context. Without that, they often mix web and native APIs.
+
+HeroUI Native provides dedicated AI entry points:
+
+- [/native/llms.txt](/native/llms.txt) for a quick Native documentation index.
+- [/native/llms-full.txt](/native/llms-full.txt) for complete Native documentation.
+- [/native/llms-components.txt](/native/llms-components.txt) for component docs only.
+- [/native/llms-patterns.txt](/native/llms-patterns.txt) for common patterns.
+- [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server), published as `@heroui/native-mcp`.
+- [HeroUI Native Agent Skills](/docs/native/getting-started/agent-skills).
+
+That matters because Native code has different rules:
+
+- Import from `heroui-native`.
+- Use React Native press handlers such as `onPress`.
+- Configure `HeroUINativeProvider`.
+- Wrap the app with `GestureHandlerRootView`.
+- Use Uniwind and `heroui-native/styles`.
+- Use Native component anatomy, not web component anatomy.
+
+The MCP server and skills help agents follow those rules.
+
+## A Practical Workflow
+
+Here is the workflow we recommend:
+
+1. **Design from the Figma kit.** Start from HeroUI's component language instead of one-off mobile components.
+2. **Install HeroUI Native correctly.** Follow the [Quick Start](/docs/native/getting-started/quick-start) so Uniwind, peer dependencies, styles, and providers are configured.
+3. **Give agents the docs.** Add the [MCP server](/docs/native/getting-started/mcp-server) or reference [/native/llms-full.txt](/native/llms-full.txt).
+4. **Build screens with compound components.** Compose components using dot notation and semantic variants.
+5. **Customize through theme variables.** Keep brand-level changes in the theming layer, not scattered across every screen.
+6. **Update through the package.** Treat HeroUI Native as a maintained dependency, not a copied snapshot.
+
+## Why This Helps
+
+Design-to-code is not about removing engineers or designers. It is about reducing translation loss.
+
+HeroUI Native helps because:
+
+- Designers start from the HeroUI visual system.
+- Developers get a maintained React Native package.
+- AI assistants get current component docs.
+- Teams keep a consistent vocabulary across web and mobile.
+- The library can evolve without every app owning every internal component detail.
+
+That is the long-term value: not just faster first screens, but fewer inconsistencies as the app grows.
+
+## Next Step
+
+Install the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server) in your editor, then ask your assistant to build a screen using the [Quick Start](/docs/native/getting-started/quick-start) and the components in [All Components](/docs/native/components).
