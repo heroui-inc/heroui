@@ -7,7 +7,15 @@ import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
-import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -99,7 +107,7 @@ const Toast = <T extends object = ToastContentValue>({
   // prop, so set it imperatively on the underlying DOM node. Only the frontmost
   // toast is reachable via keyboard; stacked/hidden toasts are removed from
   // the tab order.
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = toastRef.current;
 
     if (el) {
