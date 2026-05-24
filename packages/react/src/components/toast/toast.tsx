@@ -53,6 +53,7 @@ type ToastContext = {
   maxVisibleToasts?: number;
   heightsByKey?: Record<string, number>;
   onToastHeightChange?: (key: string, height: number) => void;
+  onToastHeightRemove?: (key: string) => void;
 };
 
 const ToastContext = createContext<ToastContext>({});
@@ -79,6 +80,7 @@ const Toast = <T extends object = ToastContentValue>({
     heightsByKey,
     maxVisibleToasts = DEFAULT_MAX_VISIBLE_TOAST,
     onToastHeightChange,
+    onToastHeightRemove,
     placement: contextPlacement,
     scaleFactor: contextScaleFactor,
     slots,
@@ -102,6 +104,18 @@ const Toast = <T extends object = ToastContentValue>({
       onToastHeightChange?.(toastKey, toastHeight);
     }
   }, [toastKey, toastHeight, onToastHeightChange]);
+
+  // Drop this toast's entry from the provider's height map when it unmounts
+  // (or when its key changes). Keeps `toastHeights` bounded to currently
+  // mounted toasts without reading external mutable state inside a setState
+  // updater.
+  useEffect(() => {
+    if (!toastKey) return;
+
+    return () => {
+      onToastHeightRemove?.(toastKey);
+    };
+  }, [toastKey, onToastHeightRemove]);
 
   // ToastProps from react-aria-components does not expose tabIndex as a typed
   // prop, so set it imperatively on the underlying DOM node. Only the frontmost
@@ -379,45 +393,34 @@ const ToastProvider = <T extends object = ToastContentValue>({
     return maxVisibleToasts ?? queueLimit ?? DEFAULT_MAX_VISIBLE_TOAST;
   }, [maxVisibleToasts, queueProp]);
 
-  // Stale entries are pruned opportunistically inside handleToastHeightChange
-  // rather than via a separate effect — every mounted toast measures its
-  // height on appear, which gives us a natural point to drop entries for
-  // toasts that are no longer visible. This bounds the size of toastHeights
-  // to the set of currently visible toasts plus the one being measured.
-  const handleToastHeightChange = useCallback(
-    (key: string, height: number) => {
-      setToastHeights((prev) => {
-        const visibleKeys = new Set(toastQueue.visibleToasts.map((t) => String(t.key)));
+  const handleToastHeightChange = useCallback((key: string, height: number) => {
+    setToastHeights((prev) => {
+      if (prev[key] === height) {
+        return prev;
+      }
 
-        visibleKeys.add(key);
+      return {
+        ...prev,
+        [key]: height,
+      };
+    });
+  }, []);
 
-        let hasStale = false;
+  // Removes a toast's height entry when it unmounts (called from each Toast's
+  // effect cleanup). Keeps `toastHeights` bounded to currently mounted toasts.
+  const handleToastHeightRemove = useCallback((key: string) => {
+    setToastHeights((prev) => {
+      if (!(key in prev)) {
+        return prev;
+      }
 
-        for (const k of Object.keys(prev)) {
-          if (!visibleKeys.has(k)) {
-            hasStale = true;
-            break;
-          }
-        }
+      const next = {...prev};
 
-        if (!hasStale && prev[key] === height) {
-          return prev;
-        }
+      delete next[key];
 
-        const next: Record<string, number> = {};
-
-        for (const [k, v] of Object.entries(prev)) {
-          if (visibleKeys.has(k)) {
-            next[k] = v;
-          }
-        }
-        next[key] = height;
-
-        return next;
-      });
-    },
-    [toastQueue],
-  );
+      return next;
+    });
+  }, []);
 
   const getDefaultChildren = useCallback(
     (renderProps: {toast: QueuedToast<T>}) => {
@@ -483,6 +486,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
               heightsByKey: toastHeights,
               maxVisibleToasts: resolvedMaxVisibleToasts,
               onToastHeightChange: handleToastHeightChange,
+              onToastHeightRemove: handleToastHeightRemove,
               placement,
               scaleFactor,
               slots,
