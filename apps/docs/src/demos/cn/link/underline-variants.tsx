@@ -4,9 +4,9 @@ export function LinkUnderlineVariants() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">悬停时显示下划线</p>
-        <Link className="hover:underline" href="#">
-          悬停查看下划线动画
+        <p className="text-sm font-medium text-muted">默认悬浮下划线</p>
+        <Link href="#">
+          悬浮以查看下划线
           <Link.Icon />
         </Link>
       </div>
