@@ -7,7 +7,15 @@ import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
-import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -95,6 +103,18 @@ const Toast = <T extends object = ToastContentValue>({
     }
   }, [toastKey, toastHeight, onToastHeightChange]);
 
+  // ToastProps from react-aria-components does not expose tabIndex as a typed
+  // prop, so set it imperatively on the underlying DOM node. Only the frontmost
+  // toast is reachable via keyboard; stacked/hidden toasts are removed from
+  // the tab order.
+  useLayoutEffect(() => {
+    const el = toastRef.current;
+
+    if (el) {
+      el.tabIndex = isFrontmost ? 0 : -1;
+    }
+  }, [isFrontmost]);
+
   const style = useMemo<CSSProperties>(() => {
     const frontToastKey = visibleToasts[0]?.key;
 
@@ -107,7 +127,6 @@ const Toast = <T extends object = ToastContentValue>({
 
     return {
       scale: `${scale}`,
-      tabindex: isFrontmost ? 0 : -1,
       translate: `0 ${translateY}px 0`,
       viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
       zIndex: visibleToasts.length - index,
