@@ -144,7 +144,6 @@
 
   /* Entering animations */
   &[data-entering="true"] {
-    transition-property: opacity, transform;
     @apply animate-in duration-150 ease-smooth fade-in-0 zoom-in-95;
 
     /* Placement-specific translations */
@@ -172,7 +171,7 @@
 
   &[data-exiting="true"],
   &[data-entering="true"] {
-    @apply will-change-[opacity,transform];
+    @apply transition-[opacity,transform] will-change-[opacity,transform];
   }
 
   /* Arrow styling */
