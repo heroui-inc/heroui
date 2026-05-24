@@ -4,9 +4,9 @@ export function LinkUnderlineVariants() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-muted">Underline on hover</p>
-        <Link className="hover:underline" href="#">
-          Hover to see underline animation
+        <p className="text-sm font-medium text-muted">Default hover underline</p>
+        <Link href="#">
+          Hover to see the underline
           <Link.Icon />
         </Link>
       </div>

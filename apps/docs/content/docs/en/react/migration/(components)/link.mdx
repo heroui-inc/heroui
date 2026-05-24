@@ -127,7 +127,7 @@ export default function App() {
   </Tab>
   <Tab value="v3">
     ```tsx
-    <Link href="#" className="hover:underline">
+    <Link href="#">
       Hover to underline
     </Link>
     <Link href="#" className="underline underline-offset-2">
@@ -156,7 +156,7 @@ export default function App() {
     import { Link } from "@heroui/react";
 
     {/* Style your router link with the same classes as Link; add an icon if needed */}
-    <NextLink href="/about" className="link hover:underline">
+    <NextLink href="/about" className="link">
       About
     </NextLink>
     ```
@@ -180,7 +180,7 @@ Link (Root)
 3. **Size Prop Removed**: Use Tailwind CSS classes (`text-sm`, `text-base`, `text-lg`)
 4. **Color Prop Removed**: Use Tailwind CSS classes (`text-primary`, `text-danger`, etc.)
 5. **Block Prop Removed**: Use Tailwind CSS classes (`block`, `hover:bg-surface`)
-6. **Underline**: No longer a prop; use Tailwind (`underline`, `hover:underline`, `no-underline`, `underline-offset-1`, etc.)
+6. **Underline**: No longer a prop; Link underlines on hover by default. Use Tailwind (`underline`, `no-underline`, `underline-offset-1`, etc.) to customize it.
 7. **Routing**: v3 Link does not support `as` or `asChild`; use your router's Link with Tailwind classes (e.g. `link`, `link__icon`) for consistent styling
 8. **Animation Removed**: `disableAnimation` prop removed
 9. **`onPress` Handler**: New `onPress` prop available for handling link activation events (click or keyboard)

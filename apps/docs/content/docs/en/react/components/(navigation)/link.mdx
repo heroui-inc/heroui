@@ -50,6 +50,8 @@ export default () => (
 
 ### Text Decoration with Tailwind CSS
 
+Link is underlined on hover by default. Use Tailwind CSS text-decoration utilities to make the underline always visible, remove it entirely, or customize its color, style, thickness, and offset.
+
 <ComponentPreview
   name="link-underline-and-offset"
 />
@@ -57,7 +59,7 @@ export default () => (
 **Text Decoration Line:**
 - `underline` - Always visible underline
 - `no-underline` - Remove underline
-- `hover:underline` - Underline appears on hover
+- default `Link` styles - Underline appears on hover
 
 **Text Decoration Color:**
 - `decoration-primary`, `decoration-secondary`, etc. - Set underline color using theme colors
@@ -123,7 +125,7 @@ To customize the Link component classes, you can use the `@layer components` dir
 ```css
 @layer components {
   .link {
-    @apply font-semibold no-underline hover:underline;
+    @apply font-semibold;
   }
 }
 ```
@@ -143,6 +145,8 @@ The Link component uses these CSS classes ([View source styles](https://github.c
 The component supports both CSS pseudo-classes and data attributes for flexibility:
 
 - **Focus**: `:focus-visible` or `[data-focus-visible="true"]`
+- **Hover**: `:hover` or `[data-hovered="true"]`
+- **Pressed**: `:active` or `[data-pressed="true"]`
 - **Disabled**: `:disabled` or `[aria-disabled="true"]`
 
 ## API Reference
@@ -202,7 +206,7 @@ import NextLink from 'next/link';
 // Apply classes directly with Tailwind utilities
 export default function Demo() {
   return (
-    <NextLink href="/about" className="link hover:underline underline-offset-2">
+    <NextLink href="/about" className="link underline-offset-2">
       About Page
     </NextLink>
   );
