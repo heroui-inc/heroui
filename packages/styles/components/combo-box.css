@@ -16,9 +16,9 @@
   [data-slot="input"] {
     @apply min-w-0 flex-1;
 
-    /* Add padding-right when trigger is present */
+    /* Add inline-end padding when trigger is present */
     &:has(+ .combo-box__trigger) {
-      @apply pr-7;
+      @apply pe-7;
     }
 
     /* Focus state (input.css only has focus-visible, but combo-box also needs focus) */
@@ -43,7 +43,7 @@
 }
 
 .combo-box__trigger {
-  @apply absolute top-1/2 right-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pr-2 text-field-placeholder transition duration-150 no-highlight;
+  @apply absolute top-1/2 end-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pe-2 text-field-placeholder transition duration-150 no-highlight;
 
   /* Remove default button styles */
   @apply border-none bg-transparent outline-none;

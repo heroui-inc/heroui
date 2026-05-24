@@ -22,9 +22,9 @@
   border-width: var(--border-width-field);
   border-color: var(--field-border);
 
-  /* Add padding-right when indicator is present */
+  /* Add inline-end padding when indicator is present */
   &:has(.autocomplete__indicator) {
-    @apply pr-7;
+    @apply pe-7;
   }
 
   /* Hover state - exclude when clear button is hovered to prevent double hover effect */
@@ -96,7 +96,7 @@
 }
 
 .autocomplete__value {
-  @apply flex-1 text-left text-base wrap-break-word text-current sm:text-sm;
+  @apply flex-1 text-start text-base wrap-break-word text-current sm:text-sm;
 
   &[data-placeholder="true"] {
     @apply text-field-placeholder;
@@ -109,7 +109,7 @@
 }
 
 .autocomplete__indicator {
-  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
+  @apply absolute inset-y-0 end-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
