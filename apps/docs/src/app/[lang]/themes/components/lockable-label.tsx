@@ -1,6 +1,6 @@
 "use client";
 
-import type {themeVariableKeys} from "../constants";
+import type {LockableThemeVariableKey} from "../constants";
 
 import {CircleInfo, Lock, LockOpen} from "@gravity-ui/icons";
 import {Label, Tooltip, cn} from "@heroui/react";
@@ -12,7 +12,7 @@ import {useToggleLockedVariable} from "../hooks/use-toggle-locked-variable";
 
 interface LockableLabelProps {
   label: string;
-  variable: (typeof themeVariableKeys)[number];
+  variable: LockableThemeVariableKey;
   tooltip?: string;
 }
 
