@@ -196,7 +196,7 @@
  * Modifier: dialog--scroll-inside
  */
 .modal__dialog--scroll-inside {
-  @apply overflow-hidden;
+  @apply overflow-clip;
 }
 
 /**

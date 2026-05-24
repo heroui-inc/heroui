@@ -125,7 +125,7 @@
 
   &[data-exiting="true"],
   &[data-entering="true"] {
-    @apply will-change-[opacity,transform];
+    @apply transition-[opacity,transform] will-change-[opacity,transform];
   }
 
   /* Arrow styling */

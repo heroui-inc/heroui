@@ -42,13 +42,13 @@
 }
 
 .table-root--secondary .table__column:first-child {
-  border-top-left-radius: min(32px, var(--radius-2xl));
-  border-bottom-left-radius: min(32px, var(--radius-2xl));
+  border-start-start-radius: min(32px, var(--radius-2xl));
+  border-end-start-radius: min(32px, var(--radius-2xl));
 }
 
 .table-root--secondary .table__column:last-child {
-  border-top-right-radius: min(32px, var(--radius-2xl));
-  border-bottom-right-radius: min(32px, var(--radius-2xl));
+  border-start-end-radius: min(32px, var(--radius-2xl));
+  border-end-end-radius: min(32px, var(--radius-2xl));
 }
 
 /* Secondary: body has no shadow or rounded corners */
@@ -143,18 +143,19 @@
    -------------------------------------------------------------------------- */
 .table__body {
   /* Non-virtualized: round corners via first/last cells
-     (border-radius on <tbody> itself has no effect) */
+     (border-radius on <tbody> itself has no effect).
+     Logical properties so corners follow `dir` in RTL. */
   & tr:first-child td:first-child {
-    border-top-left-radius: min(32px, var(--radius-2xl));
+    border-start-start-radius: min(32px, var(--radius-2xl));
   }
   & tr:first-child td:last-child {
-    border-top-right-radius: min(32px, var(--radius-2xl));
+    border-start-end-radius: min(32px, var(--radius-2xl));
   }
   & tr:last-child td:first-child {
-    border-bottom-left-radius: min(32px, var(--radius-2xl));
+    border-end-start-radius: min(32px, var(--radius-2xl));
   }
   & tr:last-child td:last-child {
-    border-bottom-right-radius: min(32px, var(--radius-2xl));
+    border-end-end-radius: min(32px, var(--radius-2xl));
   }
 
   /* Virtualized: elements are divs, not tr/td. VirtualizerItem wrappers
