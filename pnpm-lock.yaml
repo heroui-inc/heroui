@@ -189,6 +189,9 @@ importers:
       '@internationalized/date':
         specifier: 3.12.1
         version: 3.12.1
+      '@lglab/react-qr-code':
+        specifier: 1.7.0
+        version: 1.7.0(react@19.2.6)
       '@react-aria/overlays':
         specifier: 3.32.0
         version: 3.32.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -1486,6 +1489,11 @@ packages:
 
   '@lezer/lr@1.4.5':
     resolution: {integrity: sha512-/YTRKP5yPPSo1xImYQk7AZZMAgap0kegzqCSYHjAL9x1AZ0ZQW+IpcEzMKagCsbTsLnVeWkxYrCNeXG8xEPrjg==}
+
+  '@lglab/react-qr-code@1.7.0':
+    resolution: {integrity: sha512-nocFONGSsDkgCKpMEvBkOsBZc7OXih4d9TDRBMdikLnlN4p5a63i2zfs2fEnsyyF02gBfhw8rgLWpFZNOyfabQ==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@lmdb/lmdb-darwin-arm64@2.8.5':
     resolution: {integrity: sha512-KPDeVScZgA1oq0CiPBcOa3kHIqU+pTOwRFDIhxvmf8CTNvqdZQYp5cCKW0bUk69VygB2PuTiINFWbY78aR2pQw==}
@@ -8345,6 +8353,10 @@ snapshots:
   '@lezer/lr@1.4.5':
     dependencies:
       '@lezer/common': 1.5.0
+
+  '@lglab/react-qr-code@1.7.0(react@19.2.6)':
+    dependencies:
+      react: 19.2.6
 
   '@lmdb/lmdb-darwin-arm64@2.8.5':
     optional: true
