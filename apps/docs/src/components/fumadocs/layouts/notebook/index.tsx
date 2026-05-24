@@ -273,7 +273,7 @@ export function DocsLayout(props: DocsLayoutProps) {
             ))}
             {!!i18n && (
               <LanguageToggle>
-                <Languages className="text-fd-muted-foreground size-4.5" />
+                <Languages className="text-fd-muted-foreground size-4" />
               </LanguageToggle>
             )}
             {themeSwitch.enabled !== false &&
@@ -446,7 +446,7 @@ function DocsNavbar({
           <div className="flex items-center gap-2 max-md:hidden">
             {!!i18n && (
               <LanguageToggle>
-                <Languages className="text-fd-muted-foreground size-4.5" />
+                <Languages className="text-fd-muted-foreground size-4" />
               </LanguageToggle>
             )}
             {themeSwitch.enabled !== false &&

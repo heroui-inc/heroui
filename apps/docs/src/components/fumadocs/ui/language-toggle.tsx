@@ -65,7 +65,7 @@ export function LanguageToggleText(props: ComponentProps<"span">) {
 export function LanguageToggleSlot(_props: ComponentProps<"button">) {
   return (
     <LanguageToggle>
-      <Languages className="text-fd-muted-foreground size-4.5" />
+      <Languages className="text-fd-muted-foreground size-4" />
     </LanguageToggle>
   );
 }
