@@ -251,6 +251,9 @@ export const themeVariableKeys = [
   "radius",
 ] as const satisfies readonly (keyof ThemeVariables)[];
 
+/** Theme variable keys that can be locked (excludes booleans like `vibrantPalette`). */
+export type LockableThemeVariableKey = (typeof themeVariableKeys)[number];
+
 export const defaultThemeVariables: ThemeVariables = {
   base: DEFAULT_BASE,
   chroma: 0.195,
