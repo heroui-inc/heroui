@@ -9,6 +9,8 @@ const normalizeSiteUrl = (siteUrl) => {
   return url.toString().replace(/\/$/, "");
 };
 
+const contentSignalDirective = "Content-Signal: ai-train=yes, search=yes, ai-input=yes";
+
 /** @type {import('next-sitemap').IConfig} */
 export default {
   autoLastmod: true,
@@ -25,6 +27,13 @@ export default {
         userAgent: "*",
       },
     ],
+    transformRobotsTxt: async (_, robotsTxt) => {
+      if (robotsTxt.includes(contentSignalDirective)) {
+        return robotsTxt;
+      }
+
+      return robotsTxt.replace("Allow: /\n", `Allow: /\n${contentSignalDirective}\n`);
+    },
   },
   siteUrl: normalizeSiteUrl(
     process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://heroui.com",

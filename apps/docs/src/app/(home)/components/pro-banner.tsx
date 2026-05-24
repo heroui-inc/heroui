@@ -19,13 +19,37 @@ interface DiscountData {
 
 const PRO_API_URL = env.NEXT_PUBLIC_PRO_API_URL;
 
-const PLACEHOLDER = {days: "--", hours: "--", minutes: "--", seconds: "--"};
+const DISCOUNT_CAMPAIGN = "launch_discount";
+const DEFAULT_CAMPAIGN = "pro_default";
+
+const getProHref = (medium: string, campaign: string) =>
+  `${PRO_URL}?utm_source=heroui.com&utm_medium=${medium}&utm_campaign=${campaign}`;
+
+const DEFAULT_PRO_COPY = {
+  cardDescription:
+    "Components, templates, and AI tooling for React and React Native. Made for teams that care about the details.",
+  cardTitle: "Build faster with HeroUI Pro",
+  cta: "Explore Pro",
+  headerDetail: "Components, templates & AI tooling",
+  headerTitle: "HeroUI Pro is live",
+  heroLabel: "Now available",
+};
+
+const DISCOUNT_PRO_COPY = {
+  cardDescription:
+    "More components, charts, advanced MCP & Skills, and a complete theme builder. Get your license now at a discounted price for a limited time.",
+  cardTitle: "HeroUI Pro launch discount is live!",
+  cta: "Get Pro deal",
+  headerTitle: "Launch discount is live!",
+};
 
 function useProDiscount() {
   const [discount, setDiscount] = useState<DiscountData | null>(null);
 
   useEffect(() => {
     let cancelled = false;
+
+    if (!PRO_API_URL) return;
 
     fetch(`${PRO_API_URL}/api/prices`)
       .then((res) => res.json())
@@ -51,6 +75,11 @@ interface TimeRemaining {
   seconds: string;
 }
 
+interface CountdownState {
+  endsAt: string;
+  time: TimeRemaining | null;
+}
+
 function getTimeRemaining(targetDate: Date): TimeRemaining | null {
   const diff = Math.max(0, targetDate.getTime() - Date.now());
 
@@ -68,7 +97,7 @@ function getTimeRemaining(targetDate: Date): TimeRemaining | null {
 }
 
 function useCountdown(endsAt: string | null) {
-  const [time, setTime] = useState<TimeRemaining | null>(null);
+  const [countdown, setCountdown] = useState<CountdownState | null>(null);
 
   useEffect(() => {
     if (!endsAt) return;
@@ -77,8 +106,10 @@ function useCountdown(endsAt: string | null) {
 
     if (Number.isNaN(endDate.getTime())) return;
 
-    const frame = requestAnimationFrame(() => setTime(getTimeRemaining(endDate)));
-    const id = setInterval(() => setTime(getTimeRemaining(endDate)), 1000);
+    const update = () => setCountdown({endsAt, time: getTimeRemaining(endDate)});
+
+    const frame = requestAnimationFrame(update);
+    const id = setInterval(update, 1000);
 
     return () => {
       cancelAnimationFrame(frame);
@@ -86,7 +117,9 @@ function useCountdown(endsAt: string | null) {
     };
   }, [endsAt]);
 
-  return time;
+  if (!endsAt || countdown?.endsAt !== endsAt) return null;
+
+  return countdown.time;
 }
 
 export function HeaderBanner() {
@@ -95,44 +128,53 @@ export function HeaderBanner() {
 
   if (!SHOW_BANNER) return null;
 
-  const percent = discount?.percent ?? "--";
-  const t = time ?? PLACEHOLDER;
+  const hasLiveDiscount = Boolean(discount && time);
+  const campaign = hasLiveDiscount ? DISCOUNT_CAMPAIGN : DEFAULT_CAMPAIGN;
 
   return (
     <a
       className="flex h-8 w-full items-center justify-center gap-1.5 bg-surface-secondary transition-colors hover:bg-surface-secondary/80"
-      href={`${PRO_URL}?utm_source=heroui.com&utm_medium=banner&utm_campaign=launch_discount`}
+      href={getProHref("banner", campaign)}
       rel="noopener noreferrer"
       target="_blank"
     >
       <span className="shrink-0 rounded-full bg-accent px-2 py-0.5 text-xs leading-tight font-medium text-accent-foreground">
         Pro
       </span>
-      <span className="hidden text-xs font-medium text-foreground sm:inline">
-        Launch discount is live!
-      </span>
-      <span className="text-xs font-medium text-foreground">
-        <span className="tabular-nums">{percent}%</span> off
-        <span className="hidden sm:inline"> ends</span> in
-      </span>
-      <span className="shrink-0 rounded-[5px] border border-accent-soft-hover bg-linear-to-r from-accent/10 to-accent/7 px-1.5 py-0.5 text-xs leading-tight font-medium text-foreground tabular-nums">
-        <Calligraph animation="snappy" variant="number">
-          {t.days}
-        </Calligraph>
-        d :{" "}
-        <Calligraph animation="snappy" variant="number">
-          {t.hours}
-        </Calligraph>
-        h :{" "}
-        <Calligraph animation="snappy" variant="number">
-          {t.minutes}
-        </Calligraph>
-        m :{" "}
-        <Calligraph animation="snappy" variant="number">
-          {t.seconds}
-        </Calligraph>
-        s
-      </span>
+      {hasLiveDiscount ? (
+        <>
+          <span className="hidden text-xs font-medium text-foreground sm:inline">
+            {DISCOUNT_PRO_COPY.headerTitle}
+          </span>
+          <span className="text-xs font-medium text-foreground">
+            <span className="tabular-nums">{discount?.percent}</span>% off
+            <span className="hidden sm:inline"> ends</span> in
+          </span>
+          <span className="shrink-0 rounded-[5px] border border-accent-soft-hover bg-linear-to-r from-accent/10 to-accent/7 px-1.5 py-0.5 text-xs leading-tight font-medium text-foreground tabular-nums">
+            <Calligraph animation="snappy" variant="number">
+              {time?.days}
+            </Calligraph>
+            d :{" "}
+            <Calligraph animation="snappy" variant="number">
+              {time?.hours}
+            </Calligraph>
+            h :{" "}
+            <Calligraph animation="snappy" variant="number">
+              {time?.minutes}
+            </Calligraph>
+            m :{" "}
+            <Calligraph animation="snappy" variant="number">
+              {time?.seconds}
+            </Calligraph>
+            s
+          </span>
+        </>
+      ) : (
+        <span className="text-xs font-medium text-foreground">
+          <span className="hidden sm:inline">{DEFAULT_PRO_COPY.headerTitle} - </span>
+          {DEFAULT_PRO_COPY.headerDetail}
+        </span>
+      )}
     </a>
   );
 }
@@ -158,6 +200,9 @@ export function ProBanner() {
   const time = useCountdown(discount?.endsAt ?? null);
 
   const visible = SHOW_BANNER && !wasPreviouslyDismissed && !dismissed;
+  const hasLiveDiscount = Boolean(discount && time);
+  const campaign = hasLiveDiscount ? DISCOUNT_CAMPAIGN : DEFAULT_CAMPAIGN;
+  const copy = hasLiveDiscount ? DISCOUNT_PRO_COPY : DEFAULT_PRO_COPY;
 
   const handleDismiss = () => {
     setDismissed(true);
@@ -294,25 +339,31 @@ export function ProBanner() {
             <div className="relative flex items-center gap-2">
               <ProTitle />
             </div>
-            <span className="relative text-xs text-[#4E75A5] tabular-nums">
-              Ends in{" "}
-              <Calligraph animation="snappy" variant="number">
-                {(time ?? PLACEHOLDER).days}
-              </Calligraph>
-              d{" "}
-              <Calligraph animation="snappy" variant="number">
-                {(time ?? PLACEHOLDER).hours}
-              </Calligraph>
-              h{" "}
-              <Calligraph animation="snappy" variant="number">
-                {(time ?? PLACEHOLDER).minutes}
-              </Calligraph>
-              m{" "}
-              <Calligraph animation="snappy" variant="number">
-                {(time ?? PLACEHOLDER).seconds}
-              </Calligraph>
-              s
-            </span>
+            {hasLiveDiscount ? (
+              <span className="relative text-xs text-[#4E75A5] tabular-nums">
+                Ends in{" "}
+                <Calligraph animation="snappy" variant="number">
+                  {time?.days}
+                </Calligraph>
+                d{" "}
+                <Calligraph animation="snappy" variant="number">
+                  {time?.hours}
+                </Calligraph>
+                h{" "}
+                <Calligraph animation="snappy" variant="number">
+                  {time?.minutes}
+                </Calligraph>
+                m{" "}
+                <Calligraph animation="snappy" variant="number">
+                  {time?.seconds}
+                </Calligraph>
+                s
+              </span>
+            ) : (
+              <span className="relative text-xs font-medium text-[#4E75A5]">
+                {DEFAULT_PRO_COPY.heroLabel}
+              </span>
+            )}
           </div>
 
           <CloseButton
@@ -323,20 +374,15 @@ export function ProBanner() {
           {/* Content section */}
           <div className="flex flex-col gap-3 p-4">
             <div className="flex flex-col gap-1.5">
-              <h3 className="text-base font-semibold text-foreground">
-                HeroUI Pro launch discount is live!
-              </h3>
-              <p className="text-sm leading-relaxed text-muted">
-                More components, charts, advanced MCP &amp; Skills, and a complete theme builder.
-                Get your license now at a discounted price for a limited time.
-              </p>
+              <h3 className="text-base font-semibold text-foreground">{copy.cardTitle}</h3>
+              <p className="text-sm leading-relaxed text-muted">{copy.cardDescription}</p>
             </div>
             <div className="flex items-center gap-2 pt-1">
               <Button size="md" variant="outline" onPress={handleDismiss}>
                 Close
               </Button>
               <a
-                href={`${PRO_URL}?utm_source=heroui.com&utm_medium=pro_banner&utm_campaign=launch_discount`}
+                href={getProHref("pro_banner", campaign)}
                 rel="noopener noreferrer"
                 target="_blank"
                 className={buttonVariants({
@@ -346,7 +392,7 @@ export function ProBanner() {
                   variant: "primary",
                 })}
               >
-                Get Pro deal
+                {copy.cta}
               </a>
             </div>
           </div>

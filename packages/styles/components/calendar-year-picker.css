@@ -97,45 +97,11 @@
  * are set via JS to match the sibling day grid element.
  * -------------------------------------------------------------------------- */
 .calendar-year-picker__year-grid {
-  @apply pointer-events-none absolute right-0 left-0 grid content-start gap-1 overflow-y-auto p-1 opacity-0;
+  @apply pointer-events-none absolute right-0 left-0 grid content-start gap-1 overflow-y-auto p-1 opacity-0 scrollbar;
   grid-template-columns: repeat(3, 1fr);
 
   /* When closing: instant (no transition) */
   will-change: opacity;
-
-  /* Custom scrollbar – small contained element, per Emil's guidelines */
-  scrollbar-width: thin;
-  scrollbar-color: oklch(0% 0 0 / 0.15) transparent;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: oklch(0% 0 0 / 0.15);
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: oklch(0% 0 0 / 0.25);
-  }
-
-  /* Dark mode scrollbar */
-  :is([data-theme="dark"], .dark) & {
-    scrollbar-color: oklch(100% 0 0 / 0.15) transparent;
-
-    &::-webkit-scrollbar-thumb {
-      background: oklch(100% 0 0 / 0.15);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: oklch(100% 0 0 / 0.25);
-    }
-  }
 }
 
 .calendar-year-picker__year-grid[data-open="true"] {

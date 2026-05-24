@@ -85,6 +85,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}
+        data-slot="dropdown-popover"
         placement={placement}
       >
         {children}

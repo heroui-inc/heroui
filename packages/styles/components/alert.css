@@ -37,33 +37,33 @@
 }
 
 .alert--accent .alert__indicator {
-  @apply text-accent;
+  @apply text-accent-soft-foreground;
 }
 
 .alert--accent .alert__title {
-  @apply text-accent;
+  @apply text-accent-soft-foreground;
 }
 
 .alert--success .alert__indicator {
-  @apply text-success;
+  @apply text-success-soft-foreground;
 }
 
 .alert--success .alert__title {
-  @apply text-success;
+  @apply text-success-soft-foreground;
 }
 
 .alert--warning .alert__indicator {
-  @apply text-warning;
+  @apply text-warning-soft-foreground;
 }
 
 .alert--warning .alert__title {
-  @apply text-warning;
+  @apply text-warning-soft-foreground;
 }
 
 .alert--danger .alert__indicator {
-  @apply text-danger;
+  @apply text-danger-soft-foreground;
 }
 
 .alert--danger .alert__title {
-  @apply text-danger;
+  @apply text-danger-soft-foreground;
 }

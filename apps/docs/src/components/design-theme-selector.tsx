@@ -1,10 +1,11 @@
 "use client";
 
 import type {ThemeId} from "@/app/themes/constants";
+import type {ButtonProps} from "@heroui/react";
 import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
-import {Button, ListBox, Popover, buttonVariants} from "@heroui/react";
+import {Button, Description, Label, ListBox, Popover, Switch, buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 import {useCallback, useEffect, useMemo, useState} from "react";
@@ -22,11 +23,16 @@ import rabbitTheme from "@/assets/themes/rabbit.png";
 import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
 import {cn} from "@/utils/cn";
-
-const STORAGE_KEY = "heroui-docs-design-theme";
+import {
+  DESIGN_THEME_STORAGE_KEY,
+  VIBRANT_STORAGE_KEY,
+  getStoredDesignTheme,
+  isDesignThemeId,
+  notifyDesignThemeChange,
+} from "@/utils/design-theme";
 
 interface ThemeOption {
-  id: string;
+  id: ThemeId;
   label: string;
   image: StaticImageData;
 }
@@ -49,7 +55,7 @@ function removeThemeCssLink() {
   document.getElementById("design-theme-css-link")?.remove();
 }
 
-function applyTheme(themeId: string) {
+function applyTheme(themeId: ThemeId) {
   const root = document.documentElement;
   const isDefault = themeId === "default";
 
@@ -62,19 +68,31 @@ function applyTheme(themeId: string) {
   removeThemeCssLink();
 }
 
-export function DesignThemeSelector() {
-  const [active, setActive] = useState("default");
+export function DesignThemeSelector({
+  triggerVariant = "tertiary",
+}: {
+  triggerVariant?: ButtonProps["variant"];
+}) {
+  const [active, setActive] = useState<ThemeId>("default");
   const [mounted, setMounted] = useState(false);
+  const [vibrant, setVibrant] = useState(false);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = getStoredDesignTheme();
 
-    if (stored && THEMES.some((t) => t.id === stored)) {
+    if (stored !== "default") {
       setActive(stored);
       applyTheme(stored);
+    }
+
+    const storedVibrant = localStorage.getItem(VIBRANT_STORAGE_KEY);
+
+    if (storedVibrant === "true") {
+      setVibrant(true);
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
     }
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
@@ -83,18 +101,29 @@ export function DesignThemeSelector() {
     if (keys === "all") return;
     const selected = [...keys][0];
 
-    if (typeof selected !== "string") return;
+    if (typeof selected !== "string" || !isDesignThemeId(selected)) return;
     setActive(selected);
-    localStorage.setItem(STORAGE_KEY, selected);
+    localStorage.setItem(DESIGN_THEME_STORAGE_KEY, selected);
     applyTheme(selected);
+    notifyDesignThemeChange(selected);
+  }, []);
+
+  const handleVibrantToggle = useCallback((isSelected: boolean) => {
+    setVibrant(isSelected);
+    localStorage.setItem(VIBRANT_STORAGE_KEY, String(isSelected));
+
+    if (isSelected) {
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
+    } else {
+      document.documentElement.removeAttribute("data-vibrant-palette");
+    }
   }, []);
 
   const current = THEMES.find((t) => t.id === active);
   const showAvatar = mounted && active !== "default" && current;
 
   const themeBuilderHref = useMemo(() => {
-    const themeId = active as ThemeId;
-    const values = themeValuesById[themeId];
+    const values = themeValuesById[active];
 
     if (!values) {
       return "/themes";
@@ -130,7 +159,7 @@ export function DesignThemeSelector() {
           <Button
             aria-label="Design theme"
             size="sm"
-            variant="tertiary"
+            variant={triggerVariant}
             className={cn(
               "text-xs text-muted",
               showAvatar &&
@@ -190,6 +219,19 @@ export function DesignThemeSelector() {
                 </ListBox.Item>
               )}
             </ListBox>
+            <div className="mt-4 border-t border-separator pt-4">
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-0.5">
+                  <Label className="text-xs">Vibrant palette</Label>
+                  <Description className="text-[10px]">More saturated, less contrast</Description>
+                </div>
+                <Switch isSelected={vibrant} onChange={handleVibrantToggle}>
+                  <Switch.Control>
+                    <Switch.Thumb />
+                  </Switch.Control>
+                </Switch>
+              </div>
+            </div>
             <LinkRoot
               href={themeBuilderHref}
               className={buttonVariants({

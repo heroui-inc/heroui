@@ -3,7 +3,7 @@
 import type {ThemeId} from "../constants";
 
 import {BucketPaint, ChevronsExpandVertical} from "@gravity-ui/icons";
-import {InputGroup, Kbd, Label, ListBox, Popover} from "@heroui/react";
+import {Description, InputGroup, Kbd, Label, ListBox, Popover, Switch} from "@heroui/react";
 import Image from "next/image";
 
 import useKeyPress from "@/hooks/use-key-press";
@@ -105,7 +105,23 @@ export function ThemePopover() {
               </ListBox.Item>
             )}
           </ListBox>
-          <p className="mt-5 text-xs text-muted">
+          <div className="mt-4 border-t border-separator pt-4">
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-0.5">
+                <Label className="text-xs">Vibrant palette</Label>
+                <Description className="text-[10px]">More saturated, less contrast</Description>
+              </div>
+              <Switch
+                isSelected={variables.vibrantPalette ?? false}
+                onChange={(isSelected) => setVariables({vibrantPalette: isSelected})}
+              >
+                <Switch.Control>
+                  <Switch.Thumb />
+                </Switch.Control>
+              </Switch>
+            </div>
+          </div>
+          <p className="mt-4 text-xs text-muted">
             Press{" "}
             <Kbd>
               <Kbd.Content>T</Kbd.Content>

@@ -87,15 +87,10 @@
 }
 
 .date-input-group__input-container {
-  @apply flex flex-1 items-center;
+  @apply flex flex-1 items-center scrollbar-none;
   width: fit-content;
   overflow-x: auto;
   overflow-y: clip;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .date-input-group__segment {

@@ -19,7 +19,7 @@ import {
   calculateAccentForeground,
   generateThemeColors,
   getColorVariablesForElement,
-  getDerivedColorVariables,
+  getDerivedColorFormulas,
   radiusDerivedVariables,
 } from "../utils/generate-theme-colors";
 
@@ -104,6 +104,7 @@ function getAdaptiveColorCSS(
   lightness: number,
   commonVars: Record<string, string>,
   semanticOverrides?: SemanticOverrides,
+  vibrant?: boolean,
 ): string | null {
   const adaptiveConfig = adaptiveColors[accentColor];
 
@@ -131,30 +132,31 @@ function getAdaptiveColorCSS(
   const lightVars = getColorVariablesForElement(lightColors, "light");
   const darkVars = getColorVariablesForElement(darkColors, "dark");
 
-  const lightAccentVars = {
+  const lightAccentVars: Record<string, string> = {
     "--accent": adaptiveConfig.light,
     "--accent-foreground": lightFg,
+    "--accent-soft-foreground": adaptiveConfig.light,
     "--focus": adaptiveConfig.light,
   };
 
-  const darkAccentVars = {
+  const darkAccentVars: Record<string, string> = {
     "--accent": adaptiveConfig.dark,
     "--accent-foreground": darkFg,
+    "--accent-soft-foreground": adaptiveConfig.dark,
     "--focus": adaptiveConfig.dark,
   };
 
-  // Derived vars must be re-declared on scoped elements because
-  // CSS custom properties resolve var() at the level they are defined,
-  // not where they are inherited.
+  const derivedOpts = {vibrant};
+
   const colorLightVars = {
     ...lightVars,
+    ...getDerivedColorFormulas("light", derivedOpts),
     ...lightAccentVars,
-    ...getDerivedColorVariables({...lightVars, ...lightAccentVars}),
   };
   const colorDarkVars = {
     ...darkVars,
+    ...getDerivedColorFormulas("dark", derivedOpts),
     ...darkAccentVars,
-    ...getDerivedColorVariables({...darkVars, ...darkAccentVars}),
   };
 
   // Content level: colors + radius + fonts
@@ -196,14 +198,16 @@ function getThemeColorsCSS(
   grayChroma: number,
   commonVars: Record<string, string>,
   semanticOverrides?: SemanticOverrides,
+  vibrant?: boolean,
 ): string {
   const colors = generateThemeColors({chroma, grayChroma, hue, lightness, semanticOverrides});
 
   const lightVars = getColorVariablesForElement(colors, "light");
   const darkVars = getColorVariablesForElement(colors, "dark");
 
-  const colorLightVars = {...lightVars, ...getDerivedColorVariables(lightVars)};
-  const colorDarkVars = {...darkVars, ...getDerivedColorVariables(darkVars)};
+  const derivedOpts = {vibrant};
+  const colorLightVars = {...lightVars, ...getDerivedColorFormulas("light", derivedOpts)};
+  const colorDarkVars = {...darkVars, ...getDerivedColorFormulas("dark", derivedOpts)};
 
   // Content level: colors + radius + fonts
   const fullLightVars = {...commonVars, ...colorLightVars};
@@ -337,6 +341,14 @@ export function useCssSync() {
 
     cleanupStyles();
 
+    const vibrant = variables.vibrantPalette ?? false;
+
+    if (vibrant) {
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
+    } else {
+      document.documentElement.removeAttribute("data-vibrant-palette");
+    }
+
     if (isAdaptive) {
       // Inject CSS for adaptive colors (different accent values for light/dark)
       const adaptiveCSS = getAdaptiveColorCSS(
@@ -346,6 +358,7 @@ export function useCssSync() {
         lightness,
         commonVars,
         semanticOverrides,
+        vibrant,
       );
 
       if (adaptiveCSS) {
@@ -360,15 +373,15 @@ export function useCssSync() {
         base,
         commonVars,
         semanticOverrides,
+        vibrant,
       );
 
       injectStyleElement(THEME_COLORS_STYLE_ID, themeColorsCSS);
     }
 
-    // Cleanup: remove injected styles when unmounting
     return () => {
       cleanupStyles();
-      // Also remove font var style on unmount
+      document.documentElement.removeAttribute("data-vibrant-palette");
       const existingFontVar = document.getElementById(FONT_VAR_STYLE_ID);
 
       if (existingFontVar) {
@@ -383,6 +396,7 @@ export function useCssSync() {
     variables.fontFamily,
     variables.formRadius,
     variables.radius,
+    variables.vibrantPalette,
     base,
   ]);
 }

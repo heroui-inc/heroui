@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "predev": "node scripts/build-skills.mjs",
+    "predev": "node scripts/build-skills.mjs && node scripts/build-theme-presets.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/build-skills.mjs",
+    "prebuild": "node scripts/build-skills.mjs && node scripts/build-theme-presets.mjs",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",

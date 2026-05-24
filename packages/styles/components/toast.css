@@ -158,31 +158,31 @@
 
 /* Variant modifiers */
 .toast--accent .toast__title {
-  @apply text-accent;
+  @apply text-accent-soft-foreground;
 }
 
 .toast--success .toast__title {
-  @apply text-success;
+  @apply text-success-soft-foreground;
 }
 
 .toast--success .toast__indicator {
-  @apply text-success;
+  @apply text-success-soft-foreground;
 }
 
 .toast--warning .toast__title {
-  @apply text-warning;
+  @apply text-warning-soft-foreground;
 }
 
 .toast--warning .toast__indicator {
-  @apply text-warning;
+  @apply text-warning-soft-foreground;
 }
 
 .toast--danger .toast__title {
-  @apply text-danger;
+  @apply text-danger-soft-foreground;
 }
 
 .toast--danger .toast__indicator {
-  @apply text-danger;
+  @apply text-danger-soft-foreground;
 }
 
 /* View transition animations */

@@ -44,18 +44,11 @@
 }
 
 .date-range-picker__popover {
-  @apply max-w-(--trigger-width) origin-(--trigger-anchor-point) overflow-x-hidden overflow-y-auto overscroll-contain bg-overlay p-3;
+  @apply max-w-(--trigger-width) origin-(--trigger-anchor-point) overflow-x-hidden overflow-y-auto overscroll-contain bg-overlay p-3 scrollbar-none;
   @apply motion-reduce:transition-none;
 
   box-shadow: var(--shadow-overlay);
   border-radius: min(32px, calc(var(--radius) * 2.5));
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 
   &:focus-visible:not(:focus),
   &[data-focus-visible="true"] {
