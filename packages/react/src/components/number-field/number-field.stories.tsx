@@ -434,10 +434,10 @@ export const WithChevrons: Story = {
       }}
     >
       <Label>Number field with chevrons</Label>
-      <NumberField.Group>
-        <NumberField.Input />
-        <div className="flex h-[calc(100%+2px)] flex-col border-l border-field-placeholder/15">
-          <NumberField.IncrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-r-0 border-l-0 pt-0.5 text-sm">
+      <NumberField.Group className="flex">
+        <NumberField.Input className="flex-1" />
+        <div className="flex h-full flex-col border-l border-field-placeholder/15">
+          <NumberField.IncrementButton className="flex h-1/2 w-6 items-center justify-center rounded-none border-0 pt-0.5 text-sm">
             <svg
               aria-hidden="true"
               height="11"
@@ -453,7 +453,7 @@ export const WithChevrons: Story = {
               />
             </svg>
           </NumberField.IncrementButton>
-          <NumberField.DecrementButton className="-ml-px flex h-1/2 w-6 flex-1 rounded-none border-r-0 border-l-0 pb-0.5 text-sm">
+          <NumberField.DecrementButton className="flex h-1/2 w-6 items-center justify-center rounded-none border-0 pb-0.5 text-sm">
             <svg
               aria-hidden="true"
               height="11"
