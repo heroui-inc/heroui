@@ -35,14 +35,17 @@ export class ToastQueue<T extends object = ToastContentValue> {
   constructor(options?: ToastQueueOptions) {
     this.maxVisibleToasts = options?.maxVisibleToasts;
 
-    // Chain successive ViewTransitions so that back-to-back mutations (e.g.
-    // close + add inside toast.promise()) don't collide. The View Transitions
-    // API only allows one active transition at a time — starting a second
-    // while the first is still in-flight aborts the first with a
-    // "Skipped ViewTransition due to another transition starting" DOMException.
-    // Holding a reference to the in-flight transition and awaiting its
-    // .finished promise before starting the next serializes them.
-    let activeTransition: ViewTransition | null = null;
+    // Serialize successive ViewTransitions through a tail-extending promise
+    // chain. The View Transitions API only allows one active transition at a
+    // time — starting a second while the first is still animating aborts the
+    // first with a "Skipped ViewTransition due to another transition starting"
+    // DOMException (which surfaces as an unhandled rejection on .finished).
+    // Appending each new transition to the end of the chain (rather than
+    // attaching them all to the first active one) keeps them strictly ordered
+    // even when three or more mutations stack inside a single microtask, as
+    // happens during toast.promise() while the loading toast's own add
+    // transition is still in flight.
+    let transitionChain: Promise<unknown> = Promise.resolve();
 
     const defaultWrapUpdate = (fn: () => void): void => {
       if (typeof document === "undefined" || !("startViewTransition" in document)) {
@@ -51,24 +54,17 @@ export class ToastQueue<T extends object = ToastContentValue> {
         return;
       }
 
-      const runTransition = () => {
+      const runNext = (): Promise<unknown> => {
         const transition = document.startViewTransition(() => {
           flushSync(fn);
         });
 
-        activeTransition = transition;
-        transition.finished.finally(() => {
-          if (activeTransition === transition) {
-            activeTransition = null;
-          }
-        });
+        // Swallow the "skipped" rejection so that chain steps after a
+        // superseded transition still run.
+        return transition.finished.catch(() => {});
       };
 
-      if (activeTransition) {
-        activeTransition.finished.then(runTransition, runTransition);
-      } else {
-        runTransition();
-      }
+      transitionChain = transitionChain.then(runNext, runNext);
     };
 
     this.queue = new ToastQueuePrimitive<T>({
