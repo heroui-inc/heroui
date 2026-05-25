@@ -7,7 +7,7 @@ import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
-import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
+import React, {createContext, useCallback, useContext, useEffect, useMemo, useRef} from "react";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -341,22 +341,6 @@ const ToastProvider = <T extends object = ToastContentValue>({
   ...rest
 }: ToastProviderProps<T>) => {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
-  // Use a client-only state for mobile detection to avoid SSR hydration mismatch.
-  // Default to false (desktop layout) on the server and first client render,
-  // then update after hydration via useEffect.
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 768px)");
-
-    setIsMobile(mql.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-
-    mql.addEventListener("change", handler);
-
-    return () => mql.removeEventListener("change", handler);
-  }, []);
 
   const [toastHeights, setToastHeights] = React.useState<Record<string, number>>({});
 
@@ -411,18 +395,28 @@ const ToastProvider = <T extends object = ToastContentValue>({
           <ToastContent>
             {!!title && <ToastTitle>{title}</ToastTitle>}
             {!!description && <ToastDescription>{description}</ToastDescription>}
-            {isMobile && actionProps?.children ? (
-              <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
+            {actionProps?.children ? (
+              <ToastActionButton
+                {...actionProps}
+                className={composeTwRenderProps(actionProps.className, "toast__action--mobile")}
+              >
+                {actionProps.children}
+              </ToastActionButton>
             ) : null}
           </ToastContent>
-          {!isMobile && actionProps?.children ? (
-            <ToastActionButton {...actionProps}>{actionProps.children}</ToastActionButton>
+          {actionProps?.children ? (
+            <ToastActionButton
+              {...actionProps}
+              className={composeTwRenderProps(actionProps.className, "toast__action--desktop")}
+            >
+              {actionProps.children}
+            </ToastActionButton>
           ) : null}
           <ToastCloseButton />
         </Toast>
       );
     },
-    [isMobile, placement, scaleFactor],
+    [placement, scaleFactor],
   );
 
   return (

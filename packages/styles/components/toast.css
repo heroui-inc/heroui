@@ -156,6 +156,18 @@
   @apply mt-2 sm:mt-0;
 }
 
+/* Responsive placement: action button is rendered in two DOM positions
+ * (inside .toast__content for stacked-below layout, and as a sibling of
+ * .toast__content for inline layout). CSS — not JS — picks which one is
+ * visible, so there is no SSR/CSR mismatch and no post-hydration flash. */
+.toast__action--mobile {
+  @apply sm:hidden;
+}
+
+.toast__action--desktop {
+  @apply max-sm:hidden;
+}
+
 /* Variant modifiers */
 .toast--accent .toast__title {
   @apply text-accent;
