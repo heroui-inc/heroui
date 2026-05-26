@@ -58,7 +58,7 @@ const content: Record<HomeLocale, HomeContent> = {
       roadmap: "路线图",
       themes: "主题",
     },
-    releaseBadge: "HeroUI v3.1.0 – 多语言文档、soft 令牌、滚动条与修复",
+    releaseBadge: "HeroUI Native v1.0.4 - Typography, soft palette, vibrant theme & Expo 56",
     title: (
       <>
         开箱即美。<span className="text-muted/70">设计上随心可定。</span>
@@ -89,7 +89,7 @@ const content: Record<HomeLocale, HomeContent> = {
       roadmap: "Roadmap",
       themes: "Themes",
     },
-    releaseBadge: "HeroUI v3.1.0 – i18n docs, soft tokens, scrollbars & fixes",
+    releaseBadge: "HeroUI Native v1.0.4 – Typography, soft palette, vibrant theme & Expo 56",
     title: (
       <>
         Beautiful by default. <span className="text-muted/70">Customizable by design.</span>
