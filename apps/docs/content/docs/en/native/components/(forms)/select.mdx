@@ -807,3 +807,17 @@ const { itemValue, label } = useSelectItem();
 ### Element Inspector (iOS)
 
 Select uses FullWindowOverlay on iOS. To enable the React Native element inspector during development, set `disableFullWindowOverlay={true}` on `Select.Portal`. Tradeoff: the select dropdown will not appear above native modals when disabled.
+
+### Native Modal (iOS)
+
+When a `Select` is opened inside a screen presented as a native modal (`presentation: 'modal' | 'formSheet' | 'pageSheet'`), the dropdown may render shifted upward. In the new architecture (Fabric), `react-native-screens` marks `RNSModalScreen` as a Fabric root, so the trigger's position is reported relative to the modal's origin while `FullWindowOverlay` (where the dropdown is mounted) is anchored to the iOS application window. Compensate by adding `safeAreaInsets.top` to `offset`:
+
+```tsx
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const insets = useSafeAreaInsets();
+
+<Select.Content presentation="popover" offset={insets.top + 10}>
+  ...
+</Select.Content>;
+```

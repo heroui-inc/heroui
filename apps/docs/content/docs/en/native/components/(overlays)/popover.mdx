@@ -516,3 +516,17 @@ const CustomContent = () => {
 ### Element Inspector (iOS)
 
 Popover uses FullWindowOverlay on iOS. To enable the React Native element inspector during development, set `disableFullWindowOverlay={true}` on `Popover.Portal`. Tradeoff: the popover will not appear above native modals when disabled.
+
+### Native Modal (iOS)
+
+When a `Popover` is opened inside a screen presented as a native modal (`presentation: 'modal' | 'formSheet' | 'pageSheet'`), the popover content may render shifted upward. In the new architecture (Fabric), `react-native-screens` marks `RNSModalScreen` as a Fabric root, so the trigger's position is reported relative to the modal's origin while `FullWindowOverlay` (where the popover is mounted) is anchored to the iOS application window. Compensate by adding `safeAreaInsets.top` to `offset`:
+
+```tsx
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const insets = useSafeAreaInsets();
+
+<Popover.Content presentation="popover" offset={insets.top + 20}>
+  ...
+</Popover.Content>;
+```

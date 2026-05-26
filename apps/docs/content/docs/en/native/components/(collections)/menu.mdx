@@ -789,3 +789,23 @@ const { isOpen, onOpenChange, isDisabled } = useSubMenu();
 | `onOpenChange` | `(open: boolean) => void` | Callback to change the open state           |
 | `isDisabled`   | `boolean`                 | Whether the sub-menu is disabled            |
 | `nativeID`     | `string`                  | Unique identifier for the sub-menu instance |
+
+## Special Notes
+
+### Element Inspector (iOS)
+
+Menu uses FullWindowOverlay on iOS. To enable the React Native element inspector during development, set `disableFullWindowOverlay={true}` on `Menu.Portal`. Tradeoff: the menu will not appear above native modals when disabled.
+
+### Native Modal (iOS)
+
+When a `Menu` is opened inside a screen presented as a native modal (`presentation: 'modal' | 'formSheet' | 'pageSheet'`), the menu content may render shifted upward. In the new architecture (Fabric), `react-native-screens` marks `RNSModalScreen` as a Fabric root, so the trigger's position is reported relative to the modal's origin while `FullWindowOverlay` (where the menu is mounted) is anchored to the iOS application window. Compensate by adding `safeAreaInsets.top` to `offset`:
+
+```tsx
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const insets = useSafeAreaInsets();
+
+<Menu.Content presentation="popover" offset={insets.top}>
+  ...
+</Menu.Content>;
+```
