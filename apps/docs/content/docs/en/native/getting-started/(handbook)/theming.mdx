@@ -465,6 +465,30 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
 
 Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
 
+## Vibrant Palette
+
+By default, HeroUI Native uses accessible soft foreground colors that mix the semantic color with the foreground for better contrast on soft backgrounds. If you prefer more saturated, vibrant soft foreground colors, import the optional `heroui-native/styles/vibrant` stylesheet alongside the base styles:
+
+```css
+/* global.css */
+@import "heroui-native/styles";
+@import "heroui-native/styles/vibrant"; /* [!code highlight] */
+```
+
+This switches all `*-soft-foreground` variables (accent, success, warning, danger) to use 92% of the semantic color with only 8% foreground mixed in — closer to the raw color but with a slight contrast boost. Components such as [Alert](/docs/native/components/alert), [Avatar](/docs/native/components/avatar), [Button](/docs/native/components/button), [Chip](/docs/native/components/chip), and [Toast](/docs/native/components/toast) automatically pick up the new soft foreground colors on their soft variants — no component prop changes are required.
+
+| Mode | Accessible (default) | Vibrant |
+|------|----------------------|---------|
+| Soft foreground | `color-mix(color 70-80%, foreground 30-40%)` | `color-mix(color 92%, foreground 8%)` |
+
+<Callout type="warning">
+  The vibrant palette prioritizes visual saturation over contrast. It may not meet WCAG accessibility guidelines for some color combinations, especially with lighter accent colors.
+</Callout>
+
+<Callout type="info">
+  The optional vibrant palette is available starting from [v1.0.4](/docs/native/releases/v1-0-4).
+</Callout>
+
 ## Resources
 
 - [Colors Documentation](/docs/native/getting-started/colors)
