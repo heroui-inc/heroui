@@ -56,21 +56,77 @@ async function getMdxFiles(dir: string, baseDir: string = dir): Promise<string[]
 }
 
 /**
- * Generate redirects for routes
+ * Produce locale-aware redirects for `/docs/...` sources.
+ *
+ * Every internal docs link in MDX is rewritten by `LocaleLink` to include
+ * the current locale prefix (`/cn/docs/...` for Chinese, `/docs/...` for
+ * the default `en` locale — Fumadocs strips the prefix for the default
+ * language). To make a single conceptual redirect work in every locale,
+ * we emit two Next.js rules per mapping:
+ *
+ *  1. A locale-prefixed source -> locale-prefixed destination (keeps the
+ *     user in the same locale, e.g. /cn/docs/handbook/colors ->
+ *     /cn/docs/react/getting-started/colors).
+ *  2. A bare source -> default-locale destination (covers external links
+ *     and crawlers landing on the un-prefixed URL).
+ *
+ * Both `source` and `destination` MUST start with `/docs/`.
+ */
+function localizedDocsRedirect(source: string, destination: string): Redirect[] {
+  if (!source.startsWith("/docs/") || !destination.startsWith("/docs/")) {
+    throw new Error(
+      `localizedDocsRedirect expects /docs/... source and destination, got ${source} -> ${destination}`,
+    );
+  }
+
+  return [
+    // Locale-prefixed (preserves the visitor's current language).
+    {
+      destination: `/:lang${destination}`,
+      permanent: true,
+      source: `/:lang(en|cn)${source}`,
+    },
+    // Bare path (no locale) -> default locale.
+    {
+      destination: `/en${destination}`,
+      permanent: true,
+      source,
+    },
+  ];
+}
+
+/**
+ * Convenience: turn a list of {source, destination} pairs into the full
+ * locale-aware redirect set.
+ */
+function localizedDocsRedirects(
+  pairs: ReadonlyArray<{source: string; destination: string}>,
+): Redirect[] {
+  return pairs.flatMap(({destination, source}) => localizedDocsRedirect(source, destination));
+}
+
+/**
+ * Generate redirects from `/docs/<prefix>/<route>` to
+ * `/docs/react/<prefix>/<route>` (i.e. promoting the framework-agnostic
+ * legacy URL to the `react` namespace), in both locale and non-locale form.
  */
 function generateRedirects(routes: string[], prefix: string): Redirect[] {
-  return routes.map((route) => ({
-    destination: `/docs/react/${prefix ? `${prefix}/` : ""}${route}`,
-    permanent: true,
-    source: `/docs/${prefix ? `${prefix}/` : ""}${route}`,
-  }));
+  return localizedDocsRedirects(
+    routes.map((route) => ({
+      destination: `/docs/react/${prefix ? `${prefix}/` : ""}${route}`,
+      source: `/docs/${prefix ? `${prefix}/` : ""}${route}`,
+    })),
+  );
 }
 
 /**
  * Main function to generate all redirects
  */
 export async function getRedirects(): Promise<Redirect[]> {
-  const rootDir = join(process.cwd(), "content/docs/react");
+  // Content lives under `content/docs/{en,cn}/react/...` because Fumadocs is
+  // configured with `parser: "dir"` for i18n. The English copy is the source
+  // of truth for the route list, so we enumerate redirects from there.
+  const rootDir = join(process.cwd(), "content/docs/en/react");
   const redirects: Redirect[] = [];
 
   // Theme builder redirect - redirect /theme to /themes
@@ -129,35 +185,38 @@ export async function getRedirects(): Promise<Redirect[]> {
     },
   );
 
-  // Root redirect
-  redirects.push({
-    destination: "/docs/react/getting-started",
-    permanent: true,
-    source: "/docs",
-  });
+  // Root redirects (bare /docs and locale-prefixed /en/docs, /cn/docs).
+  redirects.push(
+    {
+      destination: "/en/docs/react/getting-started",
+      permanent: true,
+      source: "/docs",
+    },
+    // Locale-prefixed root redirect (i18n)
+    // Without these, /en/docs and /cn/docs hit the catch-all route with no slug
+    // and 404 because there is no content/docs/{locale}/index.mdx.
+    {
+      destination: "/:lang/docs/react/getting-started",
+      permanent: true,
+      source: "/:lang(en|cn)/docs",
+    },
+  );
 
-  // Locale-prefixed root redirect (i18n)
-  // Without these, /en/docs and /cn/docs hit the catch-all route with no slug
-  // and 404 because there is no content/docs/{locale}/index.mdx.
-  redirects.push({
-    destination: "/:lang/docs/react/getting-started",
-    permanent: true,
-    source: "/:lang(en|cn)/docs",
-  });
+  // Framework root redirects under /docs (parallel to /react and /native at
+  // the site root). Without these, links like /docs/react and /docs/native
+  // 404 because there is no content/docs/{react,native}/index.mdx.
+  redirects.push(
+    ...localizedDocsRedirects([
+      {destination: "/docs/react/getting-started", source: "/docs/react"},
+      {destination: "/docs/native/getting-started", source: "/docs/native"},
+    ]),
+  );
+
+  // Bare /docs/components -> the components index page
+  redirects.push(...localizedDocsRedirect("/docs/components", "/docs/react/components"));
 
   // Redirect /docs/getting-started to /docs/react/getting-started
-  redirects.push({
-    destination: "/docs/react/getting-started",
-    permanent: true,
-    source: "/docs/getting-started",
-  });
-
-  // Locale-prefixed equivalent
-  redirects.push({
-    destination: "/:lang/docs/react/getting-started",
-    permanent: true,
-    source: "/:lang(en|cn)/docs/getting-started",
-  });
+  redirects.push(...localizedDocsRedirect("/docs/getting-started", "/docs/react/getting-started"));
 
   // Getting Started pages - now includes (overview), (handbook), and (ui-for-agents) route groups
   const gettingStartedDir = join(rootDir, "getting-started");
@@ -167,47 +226,30 @@ export async function getRedirects(): Promise<Redirect[]> {
 
   // Backward compatibility: redirect old get-started paths to new getting-started paths
   redirects.push(
-    ...generateRedirects(gettingStartedPages, "get-started").map((redirect) => ({
-      ...redirect,
-      destination: redirect.destination.replace("/get-started/", "/getting-started/"),
-    })),
+    ...gettingStartedPages.flatMap((page) =>
+      localizedDocsRedirect(`/docs/get-started/${page}`, `/docs/react/getting-started/${page}`),
+    ),
   );
 
   // Backward compatibility: redirect old root paths to new getting-started paths
   redirects.push(
-    {
-      destination: "/docs/react/getting-started",
-      permanent: true,
-      source: "/docs/introduction",
-    },
-    {
-      destination: "/docs/react/getting-started/quick-start",
-      permanent: true,
-      source: "/docs/quick-start",
-    },
-    {
-      destination: "/docs/react/components",
-      permanent: true,
-      source: "/docs/components-list",
-    },
-    {
-      destination: "/docs/react/getting-started/design-principles",
-      permanent: true,
-      source: "/docs/react/design-principles",
-    },
-    {
-      destination: "/docs/react/getting-started/design-principles",
-      permanent: true,
-      source: "/docs/design-principles",
-    },
+    ...localizedDocsRedirects([
+      {destination: "/docs/react/getting-started", source: "/docs/introduction"},
+      {destination: "/docs/react/getting-started/quick-start", source: "/docs/quick-start"},
+      {destination: "/docs/react/components", source: "/docs/components-list"},
+      {
+        destination: "/docs/react/getting-started/design-principles",
+        source: "/docs/react/design-principles",
+      },
+      {
+        destination: "/docs/react/getting-started/design-principles",
+        source: "/docs/design-principles",
+      },
+    ]),
   );
 
   // Releases (index and versions)
-  redirects.push({
-    destination: "/docs/react/releases",
-    permanent: true,
-    source: "/docs/changelog",
-  });
+  redirects.push(...localizedDocsRedirect("/docs/changelog", "/docs/react/releases"));
 
   const releasesDir = join(rootDir, "releases");
   const releasesVersions = await getMdxFiles(releasesDir);
@@ -215,26 +257,17 @@ export async function getRedirects(): Promise<Redirect[]> {
   redirects.push(...generateRedirects(releasesVersions, "releases"));
 
   // Backward compatibility: redirect old changelog paths to new releases paths
-  redirects.push({
-    destination: "/docs/react/releases",
-    permanent: true,
-    source: "/docs/react/changelog",
-  });
+  redirects.push(...localizedDocsRedirect("/docs/react/changelog", "/docs/react/releases"));
 
   // Generate backward compatibility redirects for all changelog version pages
   releasesVersions.forEach((version) => {
-    // Redirect /docs/react/changelog/${version} -> /docs/react/releases/${version}
-    redirects.push({
-      destination: `/docs/react/releases/${version}`,
-      permanent: true,
-      source: `/docs/react/changelog/${version}`,
-    });
-    // Redirect /docs/changelog/${version} -> /docs/react/releases/${version}
-    redirects.push({
-      destination: `/docs/react/releases/${version}`,
-      permanent: true,
-      source: `/docs/changelog/${version}`,
-    });
+    redirects.push(
+      ...localizedDocsRedirect(
+        `/docs/react/changelog/${version}`,
+        `/docs/react/releases/${version}`,
+      ),
+      ...localizedDocsRedirect(`/docs/changelog/${version}`, `/docs/react/releases/${version}`),
+    );
   });
 
   // Components - now organized in categorized subdirectories with route groups
@@ -245,44 +278,42 @@ export async function getRedirects(): Promise<Redirect[]> {
 
   // Component name redirects - backward compatibility for renamed components
   redirects.push(
-    {
-      destination: "/docs/react/components/typography",
-      permanent: true,
-      source: "/docs/react/components/text",
-    },
-    {
-      destination: "/docs/react/components/text-area",
-      permanent: true,
-      source: "/docs/react/components/textarea",
-    },
-    {
-      destination: "/docs/react/components/combo-box",
-      permanent: true,
-      source: "/docs/react/components/combobox",
-    },
-    {
-      destination: "/docs/react/components/list-box",
-      permanent: true,
-      source: "/docs/react/components/listbox",
-    },
+    ...localizedDocsRedirects([
+      {
+        destination: "/docs/react/components/typography",
+        source: "/docs/react/components/text",
+      },
+      {
+        destination: "/docs/react/components/text-area",
+        source: "/docs/react/components/textarea",
+      },
+      {
+        destination: "/docs/react/components/combo-box",
+        source: "/docs/react/components/combobox",
+      },
+      {
+        destination: "/docs/react/components/list-box",
+        source: "/docs/react/components/listbox",
+      },
+      {
+        destination: "/docs/react/components/number-field",
+        source: "/docs/react/components/numberfield",
+      },
+    ]),
   );
 
   // Handbook migration: redirect old handbook paths to new getting-started paths
   // Handbook pages are now under getting-started/(handbook)/
-  const handbookPages = ["colors", "theming", "styling", "animation", "composition"];
+  const handbookPages = ["colors", "theming", "styling", "animation", "composition", "dark-mode"];
 
   redirects.push(
-    ...handbookPages.map((page) => ({
-      destination: `/docs/react/getting-started/${page}`,
-      permanent: true,
-      source: `/docs/react/handbook/${page}`,
-    })),
-    // Also handle /docs/handbook/* paths
-    ...handbookPages.map((page) => ({
-      destination: `/docs/react/getting-started/${page}`,
-      permanent: true,
-      source: `/docs/handbook/${page}`,
-    })),
+    ...handbookPages.flatMap((page) => [
+      ...localizedDocsRedirect(
+        `/docs/react/handbook/${page}`,
+        `/docs/react/getting-started/${page}`,
+      ),
+      ...localizedDocsRedirect(`/docs/handbook/${page}`, `/docs/react/getting-started/${page}`),
+    ]),
   );
 
   // UI for Agents migration: redirect old ui-for-agents paths to new getting-started paths
@@ -290,17 +321,16 @@ export async function getRedirects(): Promise<Redirect[]> {
   const uiForAgentsPages = ["llms-txt", "mcp-server"];
 
   redirects.push(
-    ...uiForAgentsPages.map((page) => ({
-      destination: `/docs/react/getting-started/${page}`,
-      permanent: true,
-      source: `/docs/react/ui-for-agents/${page}`,
-    })),
-    // Also handle /docs/ui-for-agents/* paths
-    ...uiForAgentsPages.map((page) => ({
-      destination: `/docs/react/getting-started/${page}`,
-      permanent: true,
-      source: `/docs/ui-for-agents/${page}`,
-    })),
+    ...uiForAgentsPages.flatMap((page) => [
+      ...localizedDocsRedirect(
+        `/docs/react/ui-for-agents/${page}`,
+        `/docs/react/getting-started/${page}`,
+      ),
+      ...localizedDocsRedirect(
+        `/docs/ui-for-agents/${page}`,
+        `/docs/react/getting-started/${page}`,
+      ),
+    ]),
   );
 
   return redirects;
