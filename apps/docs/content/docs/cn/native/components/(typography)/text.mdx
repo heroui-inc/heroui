@@ -1,6 +1,6 @@
 ---
-title: Text 文本
-description: Primitive typography component for rendering styled text with semantic type variants.
+title: Typography 文本
+description: 用于渲染带语义类型变体的样式化文本的排版基元组件。
 icon: new
 links:
   source_native: text/text.tsx
@@ -14,210 +14,208 @@ links:
   srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-dark.mp4"
 />
 
-## Import
+## 导入
 
 ```tsx
-import { Text } from 'heroui-native';
+import { Typography } from 'heroui-native';
 ```
 
-## Anatomy
+## 结构
 
 ```tsx
-<Text>...</Text>
+<Typography>...</Typography>
 
-{/* Sub-components */}
-<Text.Heading>...</Text.Heading>
-<Text.Paragraph>...</Text.Paragraph>
-<Text.Code>...</Text.Code>
+{/* 子组件 */}
+<Typography.Heading>...</Typography.Heading>
+<Typography.Paragraph>...</Typography.Paragraph>
+<Typography.Code>...</Typography.Code>
 ```
 
-- **Text**: Root text element. Selects a typography preset via `type` and exposes orthogonal `align`, `color`, `weight`, and `truncate` props.
-- **Text.Heading**: Convenience wrapper restricted to heading types (`h1`–`h6`). Adds `accessibilityRole="header"` automatically.
-- **Text.Paragraph**: Convenience wrapper restricted to body types (`body`, `body-sm`, `body-xs`).
-- **Text.Code**: Chip-styled inline monospaced text. Uses a platform-appropriate monospace font family.
+- **Typography**：文本根元素。通过 `type` 选择排版预设，并提供互不耦合的 `align`、`color`、`weight`、`truncate` 属性。
+- **Typography.Heading**：限定为标题类型（`h1`–`h6`）的便捷包装组件，会自动添加 `accessibilityRole="header"`。
+- **Typography.Paragraph**：限定为正文类型（`body`、`body-sm`、`body-xs`）的便捷包装组件。
+- **Typography.Code**：以 chip 样式呈现的等宽内联文本，采用平台合适的等宽字体。
 
-## Usage
+## 用法
 
-### Basic Usage
+### 基础用法
 
-The Text component renders body text by default.
+`Typography` 默认渲染正文文本。
 
 ```tsx
-<Text>Hello, world!</Text>
+<Typography>Hello, world!</Typography>
 ```
 
-### Type Variants
+### 类型变体
 
-Use the `type` prop to select a semantic typography preset.
+使用 `type` 属性选择语义化排版预设。
 
 ```tsx
-<Text type="h1">Heading 1</Text>
-<Text type="h2">Heading 2</Text>
-<Text type="h3">Heading 3</Text>
-<Text type="h4">Heading 4</Text>
-<Text type="h5">Heading 5</Text>
-<Text type="h6">Heading 6</Text>
-<Text type="body">Body text</Text>
-<Text type="body-sm">Small body text</Text>
-<Text type="body-xs">Extra-small body text</Text>
-<Text type="code">Code snippet</Text>
+<Typography type="h1">Heading 1</Typography>
+<Typography type="h2">Heading 2</Typography>
+<Typography type="h3">Heading 3</Typography>
+<Typography type="h4">Heading 4</Typography>
+<Typography type="h5">Heading 5</Typography>
+<Typography type="h6">Heading 6</Typography>
+<Typography type="body">Body text</Typography>
+<Typography type="body-sm">Small body text</Typography>
+<Typography type="body-xs">Extra-small body text</Typography>
+<Typography type="code">Code snippet</Typography>
 ```
 
-### Headings
+### 标题
 
-Use `Text.Heading` for heading text with automatic header accessibility role.
+使用 `Typography.Heading` 渲染标题文本，自动具备 header 无障碍角色。
 
 ```tsx
-<Text.Heading type="h1">Page Title</Text.Heading>
-<Text.Heading type="h2">Section Title</Text.Heading>
-<Text.Heading type="h3">Subsection Title</Text.Heading>
+<Typography.Heading type="h1">Page Title</Typography.Heading>
+<Typography.Heading type="h2">Section Title</Typography.Heading>
+<Typography.Heading type="h3">Subsection Title</Typography.Heading>
 ```
 
-### Paragraphs
+### 段落
 
-Use `Text.Paragraph` for body text.
+使用 `Typography.Paragraph` 渲染正文文本。
 
 ```tsx
-<Text.Paragraph>
-  This is a paragraph of body text with the default size.
-</Text.Paragraph>
-<Text.Paragraph type="body-sm">
-  This is smaller body text.
-</Text.Paragraph>
+<Typography.Paragraph>
+  这是一个使用默认尺寸渲染的正文段落。
+</Typography.Paragraph>
+<Typography.Paragraph type="body-sm">
+  这是较小的正文文本。
+</Typography.Paragraph>
 ```
 
-### Code
+### 代码
 
-Use `Text.Code` (or equivalently `<Text type="code">`) for inline code snippets. Both render a chip-styled, monospaced inline element with a subtle background, rounded corners, and a `self-start` layout so it does not stretch in flex containers. The platform monospace `fontFamily` is applied at the `Text` root, so the two forms are interchangeable.
+使用 `Typography.Code`（或等价的 `<Typography type="code">`）渲染内联代码片段。两者都会呈现为 chip 样式的等宽内联元素，带有低饱和背景、圆角，并采用 `self-start` 布局以避免在 flex 容器中被拉伸。平台相关的等宽 `fontFamily` 在 `Typography` 根元素上应用，因此两种写法可互换。
 
 ```tsx
-<Text.Code>console.log('hello')</Text.Code>
-<Text type="code">console.log('hello')</Text>
+<Typography.Code>console.log('hello')</Typography.Code>
+<Typography type="code">console.log('hello')</Typography>
 ```
 
-### Alignment
+### 对齐
 
-Use the `align` prop to control horizontal alignment. `start` and `end` are RTL-aware (they flip under right-to-left layouts).
+使用 `align` 属性控制水平对齐。`start` 与 `end` 是 RTL 感知的（在从右到左布局下会翻转）。
 
 ```tsx
-<Text align="start">Start-aligned</Text>
-<Text align="center">Center-aligned</Text>
-<Text align="end">End-aligned</Text>
-<Text align="justify">Justified text spreads across the line.</Text>
+<Typography align="start">Start-aligned</Typography>
+<Typography align="center">Center-aligned</Typography>
+<Typography align="end">End-aligned</Typography>
+<Typography align="justify">Justified text spreads across the line.</Typography>
 ```
 
-> **Note:** `text-justify` is iOS-only on React Native; Android falls back to left alignment.
+> **说明：** `text-justify` 在 React Native 中仅 iOS 生效；Android 会回退为左对齐。
 
-### Color
+### 颜色
 
-Use the `color` prop to apply a semantic foreground color preset.
+使用 `color` 属性应用语义化前景色预设。
 
 ```tsx
-<Text color="default">Default foreground</Text>
-<Text color="muted">Muted secondary text</Text>
+<Typography color="default">Default foreground</Typography>
+<Typography color="muted">Muted secondary text</Typography>
 ```
 
-For other theme colors, pass the corresponding utility through `className` (e.g. `className="text-accent"`, `className="text-danger"`).
+如需其他主题色，可通过 `className` 传入对应工具类（如 `className="text-accent"`、`className="text-danger"`）。
 
-### Weight
+### 字重
 
-Use the `weight` prop to override the font weight implied by `type`. The override merges via `tailwind-merge`, so it always wins over the type variant's default weight.
+使用 `weight` 属性覆盖由 `type` 推导出的字重。该覆盖通过 `tailwind-merge` 合并，因此始终优先于 type 变体的默认字重。
 
 ```tsx
-<Text type="h1" weight="bold">Bold H1</Text>
-<Text weight="medium">Medium body</Text>
-<Text weight="semibold">Semibold body</Text>
+<Typography type="h1" weight="bold">Bold H1</Typography>
+<Typography weight="medium">Medium body</Typography>
+<Typography weight="semibold">Semibold body</Typography>
 ```
 
-### Truncation
+### 截断
 
-Use the `truncate` boolean prop to limit the text to a single line with an ellipsis. It is mapped to React Native's `numberOfLines={1}`. An explicit `numberOfLines` prop, if provided, takes precedence.
+使用布尔属性 `truncate` 将文本限制为单行并以省略号结尾。它映射到 React Native 的 `numberOfLines={1}`。如显式提供 `numberOfLines`，则以后者为准。
 
 ```tsx
-<Text truncate>
-  A long line of text that will be cut off with an ellipsis when it overflows
-  the container.
-</Text>;
+<Typography truncate>
+  当内容溢出容器时，这一长行文本会被截断并显示省略号。
+</Typography>;
 
 {
-  /* Multi-line truncation via the underlying RN prop */
+  /* 通过底层 RN 属性实现多行截断 */
 }
-<Text numberOfLines={2}>
-  Two-line truncation works through React Native's standard `numberOfLines`
-  prop.
-</Text>;
+<Typography numberOfLines={2}>
+  通过 React Native 标准的 `numberOfLines` 属性可实现多行截断。
+</Typography>;
 ```
 
-## Example
+## 示例
 
 ```tsx
-import { Text } from 'heroui-native';
+import { Typography } from 'heroui-native';
 import { View } from 'react-native';
 
-export default function TextExample() {
+export default function TypographyExample() {
   return (
     <View className="flex-1 justify-center px-5 gap-4">
-      <Text.Heading type="h1">Welcome</Text.Heading>
-      <Text.Heading type="h3">Getting Started</Text.Heading>
-      <Text.Paragraph>
-        This is a body paragraph rendered with the Text component.
-      </Text.Paragraph>
-      <Text.Paragraph color="muted" type="body-sm">
-        Smaller supporting text for captions or footnotes.
-      </Text.Paragraph>
-      <Text.Code>npm install heroui-native</Text.Code>
+      <Typography.Heading type="h1">欢迎</Typography.Heading>
+      <Typography.Heading type="h3">快速开始</Typography.Heading>
+      <Typography.Paragraph>
+        这是使用 Typography 组件渲染的正文段落。
+      </Typography.Paragraph>
+      <Typography.Paragraph color="muted" type="body-sm">
+        用于注释或脚注的较小辅助文本。
+      </Typography.Paragraph>
+      <Typography.Code>npm install heroui-native</Typography.Code>
     </View>
   );
 }
 ```
 
-You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/text.tsx>).
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/text.tsx>)。
 
-## API Reference
+## API 参考
 
-### Text
+### Typography
 
-`Text` extends all standard React Native `TextProps` with additional typography props.
+`Typography` 继承 React Native 的全部 `TextProps`，并新增排版相关属性。
 
-| prop           | type                                                                                         | default     | description                                                                                                                    |
-| -------------- | -------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'body' \| 'body-sm' \| 'body-xs' \| 'code'` | `'body'`    | Semantic typography variant (size, default weight, line-height)                                                                |
-| `align`        | `'start' \| 'center' \| 'end' \| 'justify'`                                                  | `'start'`   | Horizontal alignment. `start` and `end` are RTL-aware. `justify` is iOS-only.                                                  |
-| `color`        | `'default' \| 'muted'`                                                                       | `'default'` | Semantic foreground color preset                                                                                               |
-| `weight`       | `'normal' \| 'medium' \| 'semibold' \| 'bold'`                                               | -           | Font weight override. When set, overrides the weight implied by `type`.                                                        |
-| `truncate`     | `boolean`                                                                                    | `false`     | Truncates the text to a single line with an ellipsis (sets `numberOfLines={1}`). An explicit `numberOfLines` takes precedence. |
-| `children`     | `React.ReactNode`                                                                            | -           | Content to render                                                                                                              |
-| `className`    | `string`                                                                                     | -           | Additional CSS classes                                                                                                         |
-| `...TextProps` | `TextProps`                                                                                  | -           | All standard React Native `Text` props are supported                                                                           |
+| prop           | type                                                                                         | default     | description                                                                                  |
+| -------------- | -------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'body' \| 'body-sm' \| 'body-xs' \| 'code'` | `'body'`    | 语义化排版变体（字号、默认字重、行高）                                                       |
+| `align`        | `'start' \| 'center' \| 'end' \| 'justify'`                                                  | `'start'`   | 水平对齐方式。`start` 与 `end` 为 RTL 感知；`justify` 仅 iOS 生效                            |
+| `color`        | `'default' \| 'muted'`                                                                       | `'default'` | 语义化前景色预设                                                                             |
+| `weight`       | `'normal' \| 'medium' \| 'semibold' \| 'bold'`                                               | -           | 字重覆盖。设置后会覆盖 `type` 暗含的字重                                                     |
+| `truncate`     | `boolean`                                                                                    | `false`     | 将文本截断为单行并显示省略号（即设 `numberOfLines={1}`）。显式 `numberOfLines` 优先级更高    |
+| `children`     | `React.ReactNode`                                                                            | -           | 渲染内容                                                                                     |
+| `className`    | `string`                                                                                     | -           | 额外 CSS 类                                                                                  |
+| `...TextProps` | `TextProps`                                                                                  | -           | 支持 React Native `Text` 的全部标准属性                                                      |
 
-### Text.Heading
+### Typography.Heading
 
-Inherits all `Text` root props (`align`, `color`, `weight`, `truncate`, `className`, and React Native `TextProps`). Sets `accessibilityRole="header"` automatically and narrows `type` to heading variants.
+继承 `Typography` 根元素的全部属性（`align`、`color`、`weight`、`truncate`、`className` 及 React Native `TextProps`）。自动设置 `accessibilityRole="header"`，并将 `type` 收窄为标题变体。
 
-| prop           | type                                           | default | description                                          |
-| -------------- | ---------------------------------------------- | ------- | ---------------------------------------------------- |
-| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | `'h1'`  | Heading level                                        |
-| `children`     | `React.ReactNode`                              | -       | Content to render                                    |
-| `className`    | `string`                                       | -       | Additional CSS classes                               |
-| `...TextProps` | `TextProps`                                    | -       | All standard React Native `Text` props are supported |
+| prop           | type                                           | default | description                              |
+| -------------- | ---------------------------------------------- | ------- | ---------------------------------------- |
+| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | `'h1'`  | 标题级别                                 |
+| `children`     | `React.ReactNode`                              | -       | 渲染内容                                 |
+| `className`    | `string`                                       | -       | 额外 CSS 类                              |
+| `...TextProps` | `TextProps`                                    | -       | 支持 React Native `Text` 的全部标准属性  |
 
-### Text.Paragraph
+### Typography.Paragraph
 
-Inherits all `Text` root props (`align`, `color`, `weight`, `truncate`, `className`, and React Native `TextProps`). Narrows `type` to body variants.
+继承 `Typography` 根元素的全部属性（`align`、`color`、`weight`、`truncate`、`className` 及 React Native `TextProps`）。将 `type` 收窄为正文变体。
 
-| prop           | type                               | default  | description                                          |
-| -------------- | ---------------------------------- | -------- | ---------------------------------------------------- |
-| `type`         | `'body' \| 'body-sm' \| 'body-xs'` | `'body'` | Paragraph text size                                  |
-| `children`     | `React.ReactNode`                  | -        | Content to render                                    |
-| `className`    | `string`                           | -        | Additional CSS classes                               |
-| `...TextProps` | `TextProps`                        | -        | All standard React Native `Text` props are supported |
+| prop           | type                               | default  | description                              |
+| -------------- | ---------------------------------- | -------- | ---------------------------------------- |
+| `type`         | `'body' \| 'body-sm' \| 'body-xs'` | `'body'` | 段落文本字号                             |
+| `children`     | `React.ReactNode`                  | -        | 渲染内容                                 |
+| `className`    | `string`                           | -        | 额外 CSS 类                              |
+| `...TextProps` | `TextProps`                        | -        | 支持 React Native `Text` 的全部标准属性  |
 
-### Text.Code
+### Typography.Code
 
-Inherits all `Text` root props (`align`, `color`, `weight`, `truncate`, `className`, `style`, and React Native `TextProps`). Thin wrapper that forces `type="code"`; the platform monospace `fontFamily` is merged in at the `Text` root, so `<Text type="code">` and `<Text.Code>` render identically.
+继承 `Typography` 根元素的全部属性（`align`、`color`、`weight`、`truncate`、`className`、`style` 及 React Native `TextProps`）。它是一个强制 `type="code"` 的轻量包装；平台相关的等宽 `fontFamily` 在 `Typography` 根元素上合并，因此 `<Typography type="code">` 与 `<Typography.Code>` 渲染效果完全一致。
 
-| prop           | type              | default | description                                          |
-| -------------- | ----------------- | ------- | ---------------------------------------------------- |
-| `children`     | `React.ReactNode` | -       | Content to render                                    |
-| `className`    | `string`          | -       | Additional CSS classes                               |
-| `...TextProps` | `TextProps`       | -       | All standard React Native `Text` props are supported |
+| prop           | type              | default | description                              |
+| -------------- | ----------------- | ------- | ---------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 渲染内容                                 |
+| `className`    | `string`          | -       | 额外 CSS 类                              |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部标准属性  |

@@ -516,3 +516,17 @@ const CustomContent = () => {
 ### 元素检查器（iOS）
 
 `Popover` 在 iOS 使用 `FullWindowOverlay`。开发时若需启用 React Native 元素检查器，可在 `Popover.Portal` 设置 `disableFullWindowOverlay={true}`。代价：浮层将无法叠在原生系统模态之上。
+
+### 原生模态（iOS）
+
+当 `Popover` 位于以原生模态形式呈现的页面内时（`presentation: 'modal' | 'formSheet' | 'pageSheet'`），浮层内容可能会向上偏移渲染。在新架构（Fabric）中，`react-native-screens` 将 `RNSModalScreen` 标记为 Fabric 根节点，因此触发器的坐标是相对于模态原点上报的，而 `FullWindowOverlay`（浮层挂载点）锚定在 iOS 应用窗口上。可通过将 `safeAreaInsets.top` 加到 `offset` 来补偿：
+
+```tsx
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const insets = useSafeAreaInsets();
+
+<Popover.Content presentation="popover" offset={insets.top + 20}>
+  ...
+</Popover.Content>;
+```

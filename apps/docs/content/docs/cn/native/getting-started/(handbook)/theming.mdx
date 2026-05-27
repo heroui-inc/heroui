@@ -465,6 +465,30 @@ HeroUI 定义三类变量：
 
 表单控件依赖 `--field-*` 变量及其计算出的 hover/focus 变体。在主题中调整它们即可重塑输入框、复选框、单选与 OTP 等，而不会影响按钮、卡片等 Surface 组件的观感。
 
+## 鲜亮配色
+
+默认情况下，HeroUI Native 使用可读性更好的柔和前景色，即将语义色与前景色按比例混合，以在 soft 背景上获得更佳对比度。如果你偏好饱和度更高、更鲜亮的柔和前景色，可以在引入基础样式之后，额外导入可选的 `heroui-native/styles/vibrant` 样式：
+
+```css
+/* global.css */
+@import "heroui-native/styles";
+@import "heroui-native/styles/vibrant"; /* [!code highlight] */
+```
+
+这会将所有 `*-soft-foreground` 变量（accent、success、warning、danger）切换为「语义色 92% + 前景色 8%」的混合配方——更贴近原始色调，但仍带有轻微的对比度增强。[Alert](/docs/native/components/alert)、[Avatar](/docs/native/components/avatar)、[Button](/docs/native/components/button)、[Chip](/docs/native/components/chip)、[Toast](/docs/native/components/toast) 等组件会自动在其 soft 变体上使用新的柔和前景色——无需修改任何组件属性。
+
+| 模式 | 可读性优先（默认） | 鲜亮 |
+|------|----------------------|---------|
+| Soft 前景 | `color-mix(color 70-80%, foreground 30-40%)` | `color-mix(color 92%, foreground 8%)` |
+
+<Callout type="warning">
+  鲜亮配色优先考虑视觉饱和度而非对比度。对某些颜色组合（尤其是更浅的强调色），它可能不满足 WCAG 无障碍准则。
+</Callout>
+
+<Callout type="info">
+  可选的鲜亮配色自 [v1.0.4](/docs/native/releases/v1-0-4) 起提供。
+</Callout>
+
 ## 相关资源
 
 - [颜色](/docs/native/getting-started/colors)

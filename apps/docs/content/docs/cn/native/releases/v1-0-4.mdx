@@ -1,0 +1,286 @@
+---
+title: v1.0.4
+description:
+  Typography 组件替代 Text、调整后的柔和前景色主题令牌与可选鲜亮配色、iOS 原生模态偏移说明、示例应用升级至 Expo 56 / React Native 0.85
+github:
+  pull: 420
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 5 月 26 日</span>
+</div>
+
+HeroUI Native v1.0.4 将排版基元 `Text` 重命名为 `Typography`，让出 React Native 自身的 `Text` 名称，同时更贴近语义化排版用法；既有的 `Text` 导出保留为弃用别名，可平滑升级。本版本还在 Alert、Avatar、Button、Chip、Toast 中调整了 soft 前景色令牌，使其在 soft 背景上具备更好的对比度；新增可选的 `heroui-native/styles/vibrant` 配色；为 Menu、Popover、Select 补充 iOS 原生模态偏移的处理说明；并将示例应用升级到 Expo 56 / React Native 0.85。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## 新增
+
+### Typography 组件（由 `Text` 重命名而来）
+
+库内的排版基元已从 `Text` 重命名为 `Typography`，避免与 React Native 内建的 `Text` 重名，并更准确地体现其作为语义化排版系统的定位。组件的 API、变体与行为保持不变——只是公开名称发生变化。
+
+```tsx
+import { Typography } from "heroui-native";
+import { View } from "react-native";
+
+export function Example() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-4">
+      <Typography.Heading type="h1">Welcome</Typography.Heading>
+      <Typography.Heading type="h3">Getting Started</Typography.Heading>
+      <Typography.Paragraph>
+        This is a body paragraph rendered with the Typography component.
+      </Typography.Paragraph>
+      <Typography.Paragraph color="muted" type="body-sm">
+        Smaller supporting text for captions or footnotes.
+      </Typography.Paragraph>
+      <Typography.Code>npm install heroui-native</Typography.Code>
+    </View>
+  );
+}
+```
+
+**变更要点：**
+
+- 主导出改为 `Typography`，子组件为 `Typography.Heading`、`Typography.Paragraph`、`Typography.Code`
+- 新增 `typographyClassNames` 样式 API 与 `Typography*` 类型别名，取代原先的 `Text*` 命名
+- 既有的 `Text`、`textClassNames` 与 `Text*` 类型作为**弃用**的重导出保留以兼容旧代码
+- 组件目录中的示例页由 `text` 重命名为 `typography`
+- JSDoc 与组件文档更新为引用 Typography 以及新的文档 URL
+
+<Callout type="info">
+  **无需迁移。** 既有的 `import { Text } from "heroui-native"` 通过弃用重导出仍然可用。请在未来某个大版本移除弃用别名之前，按你的节奏迁移到 `Typography`。
+</Callout>
+
+**相关 PR：** [#417](https://github.com/heroui-inc/heroui-native/pull/417)
+
+### 鲜亮主题配色（可选）
+
+新增可选的 `heroui-native/styles/vibrant` 样式表，适合希望在 soft 变体上保持更饱和品牌色的应用。它在保留调整后的柔和前景令牌带来的可读性改进的同时，仍为 soft 背景上的图标与文字保留较高的色彩饱和度。
+
+**用法：**
+
+```ts
+// 默认调整后的柔和前景配色
+import "heroui-native/styles";
+
+// 或者，启用鲜亮配色
+import "heroui-native/styles";
+import "heroui-native/styles/vibrant";
+```
+
+在引入基础样式之后再引入 `heroui-native/styles/vibrant`，即可用更饱和的取值覆盖柔和前景令牌。无需修改任何组件代码即可启用。
+
+**相关 PR：** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
+
+## 组件改进
+
+### 多组件柔和前景色调整
+
+[Alert](/docs/native/components/alert)、[Avatar](/docs/native/components/avatar)、[Button](/docs/native/components/button)、[Chip](/docs/native/components/chip)、[Toast](/docs/native/components/toast) 现使用新的 `*-soft-foreground` 主题令牌渲染 soft 背景上的标签与图标，呈现更好的对比度，并在亮色与暗色主题下保持更统一的视觉效果。
+
+**改进点：**
+
+- `theme.css` 中通过 `color-mix` 计算柔和前景令牌（`accent-soft-foreground`、`success-soft-foreground`、`warning-soft-foreground`、`danger-soft-foreground`、`default-soft-foreground`），提升 soft 背景上的可读性
+- Alert、Avatar、Button、Chip、Toast 的样式（及其内部 hooks）改为使用新的柔和前景令牌，不再直接使用 `text-accent`、`text-success` 等原始语义色
+- 新增可选的 `heroui-native/styles/vibrant` 导出，为希望保留饱和品牌色的应用保留更鲜亮的 soft 变体外观
+- 示例应用中 Alert、Avatar、Button、Chip、Toast 的演示同步更新以匹配新的取色方式
+
+组件属性与公开 API 均无变化——仅 soft 变体的取色发生变化。沿用默认主题的应用将开箱获得 soft 变体上更柔和、可读性更佳的图标与标签颜色。
+
+**相关 PR：** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
+
+### TextArea 垂直内边距修复
+
+[TextArea](/docs/native/components/text-area) 现已应用合适的内部垂直内边距，多行内容不再紧贴输入区上边缘。
+
+**改进点：**
+
+- `TextArea` 现使用 `h-32 py-2`，提供一致的内部间距
+- 无 API 变更——仅为组件内的样式调整
+
+**相关 PR：** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+## API 增强
+
+### `useThemeColor` 令牌更新
+
+[`useThemeColor`](/docs/native/hooks/use-theme-color) hook 新增表面色与柔和色相关令牌，并对遮罩背景令牌进行了重命名以更清晰表达语义。
+
+**新能力：**
+
+```tsx
+import { useThemeColor } from "heroui-native";
+
+const colors = useThemeColor([
+  "default-soft",
+  "default-soft-foreground",
+  "surface-foreground",
+  "backdrop",
+]);
+```
+
+**变更：**
+
+- 新增 `default-soft` 与 `default-soft-foreground` 令牌
+- 新增表面前景色令牌（如 `surface-foreground`），可显式取用表面文字颜色
+- 将 `overlay-backdrop` 重命名为 `backdrop`，与底层 CSS 变量命名保持一致
+
+如果你使用了已移除的 `useThemeColor` 键（`on-surface-*`）或旧的 `overlay-backdrop` 键，请改用更新后的令牌名。组件属性与视觉默认值保持不变。
+
+**相关 PR：** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
+
+## 依赖
+
+### `@gorhom/bottom-sheet` 对等依赖范围更新
+
+`@gorhom/bottom-sheet` 的对等依赖范围由 `^5.2.8` 升级到 `^5.2.9`。如果你的应用使用 HeroUI Native 的 [BottomSheet](/docs/native/components/bottom-sheet)（或 `Menu` / `Popover` / `Select` 配合 `presentation="bottom-sheet"`），请确保安装兼容版本：
+
+```bash
+npm i @gorhom/bottom-sheet@^5.2.9
+```
+
+这是本版本对消费者唯一的对等依赖变更。库的 `react`（`>=19.0.0`）与 `react-native`（`>=0.81.0`）对等依赖范围保持不变。
+
+**相关 PR：** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+### 示例应用升级至 Expo 56 / React Native 0.85
+
+仓库内的示例应用升级到了最新的 Expo 与 React Native 工具链。这不会直接影响库的消费者，但为运行示例的贡献者带来收益：
+
+- Expo `56`
+- React Native `0.85.3`
+- React `19.2.3`
+- React Native Reanimated `4.3.1`
+- `react-native-worklets` `0.8.3`
+- Uniwind `^1.6.3`
+
+本次升级还包含以下整理：
+
+- 重写 `metro.config.js`，将对等依赖解析锁定到示例的 `node_modules`，修复当 `uniwind` 或 `react` 从 workspace 根解析出两份副本时 Hermes 抛出的「Maximum call stack size exceeded」崩溃
+- 在 input-otp 与展示页中以 `StyleSheet.absoluteFill` 替换已弃用的 `StyleSheet.absoluteFillObject`
+- 将 `useFocusEffect` / `useHeaderHeight` 的导入迁移至 `expo-router`
+- 移除未使用的 `example/src/components/safe-area-view.tsx`、`eas.json` 以及陈旧的 `newArchEnabled` / `edgeToEdgeEnabled` 标记
+- 示例应用的 slug/bundle 重命名为 `heroui-native-oss`；调整 Android 上 `WithStateToggle` 的内边距
+
+**相关 PR：** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+## 文档
+
+### Menu、Popover、Select 的 iOS 原生模态偏移说明
+
+[Menu](/docs/native/components/menu)、[Popover](/docs/native/components/popover)、[Select](/docs/native/components/select) 文档新增**原生模态（iOS）**章节，解释当触发器位于以原生模态（`presentation: "modal" | "formSheet" | "pageSheet"`）呈现的页面内时，遮罩内容为何会向上偏移渲染，以及如何补偿。
+
+**改进点：**
+
+- 各组件文档说明了 Fabric / `FullWindowOverlay` 的坐标不一致：触发器坐标相对于模态原点，而遮罩锚定在窗口
+- 文档化了配合 `react-native-safe-area-context` 中 `useSafeAreaInsets` 使用的 `offset={insets.top}` 推荐方案
+- 提供示例应用中相关文件（`popover-native-modal.tsx`、`select-native-modal.tsx`）的链接，便于查阅完整用法
+
+**用法示例：**
+
+```tsx
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Popover } from "heroui-native";
+
+const insets = useSafeAreaInsets();
+
+<Popover.Content presentation="popover" offset={insets.top + 20}>
+  {/* ... */}
+</Popover.Content>;
+```
+
+这是纯文档变更，未改动任何 API 或运行时行为。
+
+**相关 PR：** [#419](https://github.com/heroui-inc/heroui-native/pull/419)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #405](https://github.com/heroui-inc/heroui-native/issues/405)**：补充了在 React Navigation 原生模态中 `Menu` 渲染错位的处理方案。Menu 文档新增**原生模态（iOS）**章节，解释 Fabric / `FullWindowOverlay` 的坐标不一致，并演示如何用 `useSafeAreaInsets` 配合 `offset={insets.top}` 补偿。
+- **[Issue #418](https://github.com/heroui-inc/heroui-native/issues/418)**：修复将示例应用升级到 Expo 56 后出现的 Hermes 崩溃（「Maximum call stack size exceeded」）及 `BottomSheet` 内容不可见的问题。示例的 `metro.config.js` 现已将对等依赖解析（`react`、`react-native`、`uniwind` 等）锁定到示例的本地 `node_modules`，防止从 workspace 根加载到重复副本。
+
+**相关 PR：**
+
+- [#419](https://github.com/heroui-inc/heroui-native/pull/419)
+- [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+## 弃用
+
+### `Text` 排版导出
+
+`Text` 组件与相关导出现已**弃用**，推荐使用 `Typography`。既有导入仍可继续工作，不会产生运行时错误——仅会在 TypeScript / IDE 中提示弃用。请在未来某个大版本移除弃用别名之前完成迁移。
+
+**弃用 → 推荐：**
+
+```tsx
+// 弃用（仍可用）
+import { Text, textClassNames, type TextProps } from "heroui-native";
+
+<Text.Heading type="h1">Welcome</Text.Heading>;
+
+// 推荐
+import {
+  Typography,
+  typographyClassNames,
+  type TypographyProps,
+} from "heroui-native";
+
+<Typography.Heading type="h1">Welcome</Typography.Heading>;
+```
+
+**相关 PR：** [#417](https://github.com/heroui-inc/heroui-native/pull/417)
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [Typography](/docs/native/components/typography) — 组件由 Text 重命名而来；完整 API、Anatomy 与用法已更新
+- [Menu](/docs/native/components/menu) — 新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
+- [Popover](/docs/native/components/popover) — 新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
+- [Select](/docs/native/components/select) — 新增**原生模态（iOS）**章节，含 `offset={insets.top}` 方案
+- [快速开始](/docs/native/getting-started/quick-start) — 可选对等依赖 `@gorhom/bottom-sheet` 更新到 `^5.2.9`
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！
