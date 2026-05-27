@@ -12,6 +12,12 @@ import {flushSync} from "react-dom";
 
 import {DEFAULT_RAC_MAX_VISIBLE_TOAST, DEFAULT_TOAST_TIMEOUT} from "./constants";
 
+function swallowViewTransitionPromise(promise: unknown) {
+  if (promise && typeof (promise as Promise<unknown>).catch === "function") {
+    (promise as Promise<unknown>).catch(() => {});
+  }
+}
+
 /* ------------------------------------------------------------------------------------------------
  * Toast Queue Options
  * --------------------------------------------------------------------------------------------- */
@@ -40,9 +46,15 @@ export class ToastQueue<T extends object = ToastContentValue> {
         ? options.wrapUpdate
         : (fn: () => void) => {
             if ("startViewTransition" in document) {
-              document.startViewTransition(() => {
+              const transition = document.startViewTransition(() => {
                 flushSync(fn);
               });
+
+              if (transition && typeof transition === "object") {
+                swallowViewTransitionPromise(transition.ready);
+                swallowViewTransitionPromise(transition.updateCallbackDone);
+                swallowViewTransitionPromise(transition.finished);
+              }
             } else {
               fn();
             }
