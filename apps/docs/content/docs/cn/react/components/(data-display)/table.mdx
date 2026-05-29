@@ -34,7 +34,13 @@ export default () => (
     <Table.ScrollContainer>
       <Table.Content aria-label="Example table">
         <Table.Header>
-          <Table.Column>Name</Table.Column>
+          <Table.Column allowsSorting>
+            {({ sortDirection }) => (
+              <Table.SortableColumnHeader sortDirection={sortDirection}>
+                Name
+              </Table.SortableColumnHeader>
+            )}
+          </Table.Column>
           <Table.Column>Role</Table.Column>
         </Table.Header>
         <Table.Body>
@@ -59,7 +65,7 @@ export default () => (
 
 ### 排序
 
-在 `Table.Column` 上设置 `allowsSorting` 可将列设为可排序。在 `Table.Content` 上使用 `sortDescriptor` 与 `onSortChange` 管理排序状态。
+在 `Table.Column` 上设置 `allowsSorting` 可将列设为可排序。在 `Table.Content` 上使用 `sortDescriptor` 与 `onSortChange` 管理排序状态。使用 `Table.SortableColumnHeader` 包裹列标签，并将列渲染函数中的 `sortDirection` 传入，即可显示默认的升序 / 降序指示器。
 
 <ComponentPreview
   name="table-sorting"
@@ -232,6 +238,8 @@ Table 组件使用以下 CSS 类（[查看源码样式](https://github.com/herou
 - `.table__resizable-container` - 启用列宽调整的包裹层
 - `.table__load-more` - 无限滚动的哨兵行
 - `.table__load-more-content` - 加载指示器的样式容器
+- `.table__sortable-column-header` - 可排序列标签与指示器的包裹层
+- `.table__sortable-column-indicator` - 排序方向 chevron（通过 `[data-direction="descending"]` 翻转）
 
 #### 变体类
 - `.table-root--primary` - 灰色背景容器与卡片式表体（默认）
@@ -330,6 +338,18 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类。 |
 | `children` | `React.ReactNode` | - | 单元格内容。 |
+
+### Table.SortableColumnHeader Props
+
+渲染可排序列的标签与升序 / 降序指示器。请在 `Table.Column` 的渲染函数回调中使用，并将 `sortDirection` 透传进来。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `sortDirection` | `"ascending" \| "descending"` | - | 当前排序方向。请从 `Table.Column` 的渲染函数中透传。 |
+| `showIndicator` | `boolean` | `true` | 当存在排序方向时是否渲染指示器图标。 |
+| `indicator` | `React.ReactNode` | - | 自定义指示器元素。会覆盖默认的 chevron，并会被自动注入 `data-direction` 属性。 |
+| `className` | `string` | - | 包裹元素的额外 CSS 类。 |
+| `children` | `React.ReactNode` | - | 列标签内容。 |
 
 ### Table.Footer Props
 

@@ -34,7 +34,13 @@ export default () => (
     <Table.ScrollContainer>
       <Table.Content aria-label="Example table">
         <Table.Header>
-          <Table.Column>Name</Table.Column>
+          <Table.Column allowsSorting>
+            {({ sortDirection }) => (
+              <Table.SortableColumnHeader sortDirection={sortDirection}>
+                Name
+              </Table.SortableColumnHeader>
+            )}
+          </Table.Column>
           <Table.Column>Role</Table.Column>
         </Table.Header>
         <Table.Body>
@@ -59,7 +65,7 @@ export default () => (
 
 ### Sorting
 
-Columns can be made sortable using the `allowsSorting` prop on `Table.Column`. Use `sortDescriptor` and `onSortChange` on `Table.Content` to manage sort state.
+Columns can be made sortable using the `allowsSorting` prop on `Table.Column`. Use `sortDescriptor` and `onSortChange` on `Table.Content` to manage sort state. Wrap the label in `Table.SortableColumnHeader` and forward the `sortDirection` from the column's render prop to render the default ascending/descending indicator.
 
 <ComponentPreview
   name="table-sorting"
@@ -234,6 +240,8 @@ The Table component uses these CSS classes ([View source styles](https://github.
 - `.table__resizable-container` - Wrapper enabling column resizing
 - `.table__load-more` - Sentinel row for infinite scrolling
 - `.table__load-more-content` - Styled container for the loading indicator
+- `.table__sortable-column-header` - Sortable column label + indicator wrapper
+- `.table__sortable-column-indicator` - Sort direction chevron (rotates via `[data-direction="descending"]`)
 
 #### Variant Classes
 - `.table-root--primary` - Gray background container with card-style body (default)
@@ -332,6 +340,18 @@ Inherits from [React Aria Cell](https://react-spectrum.adobe.com/react-aria/Tabl
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Cell content |
+
+### Table.SortableColumnHeader Props
+
+Renders a sortable column label with an ascending/descending indicator. Use it inside a `Table.Column` render-prop callback and forward the `sortDirection` value.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sortDirection` | `"ascending" \| "descending"` | - | Current sort direction. Pass through from the `Table.Column` render prop. |
+| `showIndicator` | `boolean` | `true` | Whether to render the sort indicator icon when a direction is set. |
+| `indicator` | `React.ReactNode` | - | Custom indicator element. Overrides the default chevron and receives a `data-direction` attribute. |
+| `className` | `string` | - | Additional CSS classes for the wrapper. |
+| `children` | `React.ReactNode` | - | Column label content. |
 
 ### Table.Footer Props
 
