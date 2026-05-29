@@ -214,7 +214,8 @@ RangeCalendar 继承 React Aria [RangeCalendar](https://react-spectrum.adobe.com
 | `onFocusChange` | `(value: DateValue) => void` | - | 焦点移动到其它日期时调用。 |
 | `minValue` | `DateValue` | 历法感知的 `1900-01-01` | 可选的最早日期。 |
 | `maxValue` | `DateValue` | 历法感知的 `2099-12-31` | 可选的最晚日期。 |
-| `isDateUnavailable` | `(date: DateValue) => boolean` | - | 将日期标记为不可用。 |
+| `weeksInMonth` | `number` | - | 一个月的周数。该值会覆盖区域设置的默认值。 |
+| `isDateUnavailable` | `(date: DateValue, anchorDate: CalendarDate \| null) => boolean` | - | 将日期标记为不可用。如果设置了 `anchorDate`，则会基于用户首次选中的日期来调整可用日期。 |
 | `allowsNonContiguousRanges` | `boolean` | `false` | 允许范围跨越不可用日期。 |
 | `isDisabled` | `boolean` | `false` | 禁用交互与选择。 |
 | `isReadOnly` | `boolean` | `false` | 内容只读，不可更改选中。 |
