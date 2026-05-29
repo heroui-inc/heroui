@@ -20,6 +20,8 @@ export const tableVariants = tv({
     resizableContainer: "table__resizable-container",
     row: "table__row",
     scrollContainer: "table__scroll-container",
+    sortableColumnHeader: "table__sortable-column-header",
+    sortableColumnIndicator: "table__sortable-column-indicator",
   },
   variants: {
     variant: {

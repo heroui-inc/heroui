@@ -22,6 +22,7 @@ import {cx} from "tailwind-variants";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+import {IconChevronUp} from "../icons";
 
 /* -------------------------------------------------------------------------------------------------
  * Table Context
@@ -340,6 +341,86 @@ const TableLoadMoreContent = <E extends keyof React.JSX.IntrinsicElements = "div
 TableLoadMoreContent.displayName = "HeroUI.Table.LoadMoreContent";
 
 /* -------------------------------------------------------------------------------------------------
+ * Table Sortable Column Header
+ * -----------------------------------------------------------------------------------------------*/
+type TableSortDirection = "ascending" | "descending";
+
+interface TableSortableColumnHeaderProps extends Omit<
+  React.ComponentPropsWithoutRef<"span">,
+  "children"
+> {
+  /** Label content of the column header. */
+  children?: ReactNode;
+  /**
+   * Current sort direction for the column. Pass the `sortDirection` value
+   * received from `Table.Column`'s render-prop callback.
+   */
+  sortDirection?: TableSortDirection;
+  /**
+   * Whether to render the sort indicator icon when a direction is set.
+   * @default true
+   */
+  showIndicator?: boolean;
+  /**
+   * Custom indicator element. When provided, overrides the default chevron.
+   * The indicator receives a `data-direction` attribute reflecting the
+   * current sort direction.
+   */
+  indicator?: ReactNode;
+}
+
+const TableSortableColumnHeader = React.forwardRef<HTMLSpanElement, TableSortableColumnHeaderProps>(
+  ({children, className, indicator, showIndicator = true, sortDirection, ...props}, ref) => {
+    const {slots} = useContext(TableContext);
+
+    const shouldRenderIndicator = showIndicator && !!sortDirection;
+
+    let indicatorElement: ReactNode = null;
+
+    if (shouldRenderIndicator) {
+      if (indicator === undefined) {
+        indicatorElement = (
+          <IconChevronUp
+            className={slots?.sortableColumnIndicator()}
+            data-direction={sortDirection}
+            data-slot="table-sortable-column-indicator"
+          />
+        );
+      } else if (React.isValidElement(indicator)) {
+        const element = indicator as React.ReactElement<{
+          className?: string;
+          "data-direction"?: TableSortDirection;
+          "data-slot"?: "table-sortable-column-indicator";
+        }>;
+
+        indicatorElement = React.cloneElement(element, {
+          className: composeSlotClassName(slots?.sortableColumnIndicator, element.props.className),
+          "data-direction": sortDirection,
+          "data-slot": "table-sortable-column-indicator",
+        });
+      } else {
+        indicatorElement = indicator;
+      }
+    }
+
+    return (
+      <span
+        ref={ref}
+        className={composeSlotClassName(slots?.sortableColumnHeader, className)}
+        data-direction={sortDirection}
+        data-slot="table-sortable-column-header"
+        {...props}
+      >
+        {children}
+        {indicatorElement}
+      </span>
+    );
+  },
+);
+
+TableSortableColumnHeader.displayName = "HeroUI.Table.SortableColumnHeader";
+
+/* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
 // Re-export Collection from React Aria for dynamic cell rendering within rows.
@@ -363,6 +444,7 @@ export {
   TableLoadMoreItem,
   TableLoadMoreContent,
   TableResizableContainer,
+  TableSortableColumnHeader,
 };
 
 export type {
@@ -379,4 +461,6 @@ export type {
   TableLoadMoreItemProps,
   TableLoadMoreContentProps,
   TableResizableContainerProps,
+  TableSortableColumnHeaderProps,
+  TableSortDirection,
 };

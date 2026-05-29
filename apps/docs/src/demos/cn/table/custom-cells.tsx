@@ -2,7 +2,7 @@
 
 import type {Selection, SortDescriptor} from "@heroui/react";
 
-import {Avatar, Button, Checkbox, Chip, Table, cn} from "@heroui/react";
+import {Avatar, Button, Checkbox, Chip, Table} from "@heroui/react";
 import {Icon} from "@iconify/react";
 import {useMemo, useState} from "react";
 
@@ -64,29 +64,6 @@ const users: User[] = [
   },
 ];
 
-function SortableColumnHeader({
-  children,
-  sortDirection,
-}: {
-  children: React.ReactNode;
-  sortDirection?: "ascending" | "descending";
-}) {
-  return (
-    <span className="flex items-center justify-between">
-      {children}
-      {!!sortDirection && (
-        <Icon
-          icon="gravity-ui:chevron-up"
-          className={cn(
-            "size-3 transform transition-transform duration-100 ease-out",
-            sortDirection === "descending" ? "rotate-180" : "",
-          )}
-        />
-      )}
-    </span>
-  );
-}
-
 export function CustomCells() {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
@@ -131,22 +108,30 @@ export function CustomCells() {
             </Table.Column>
             <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>员工 ID</SortableColumnHeader>
+                <Table.SortableColumnHeader sortDirection={sortDirection}>
+                  员工 ID
+                </Table.SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="name">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>成员</SortableColumnHeader>
+                <Table.SortableColumnHeader sortDirection={sortDirection}>
+                  成员
+                </Table.SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="role">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>角色</SortableColumnHeader>
+                <Table.SortableColumnHeader sortDirection={sortDirection}>
+                  角色
+                </Table.SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column allowsSorting id="status">
               {({sortDirection}) => (
-                <SortableColumnHeader sortDirection={sortDirection}>状态</SortableColumnHeader>
+                <Table.SortableColumnHeader sortDirection={sortDirection}>
+                  状态
+                </Table.SortableColumnHeader>
               )}
             </Table.Column>
             <Table.Column className="text-end">操作</Table.Column>

@@ -18,7 +18,7 @@
    cannot push beyond.
    -------------------------------------------------------------------------- */
 .table__scroll-container {
-  @apply overflow-x-auto scrollbar;
+  @apply scrollbar overflow-x-auto;
   scrollbar-gutter: auto;
 }
 
@@ -135,6 +135,26 @@
   &[data-focus-visible="true"] {
     @apply rounded-lg outline-none;
     box-shadow: inset 0 0 0 2px var(--focus);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Sortable Column Header — wraps the column label and an optional indicator
+   icon. Rendered inside a sortable `Table.Column`'s render prop callback.
+   -------------------------------------------------------------------------- */
+.table__sortable-column-header {
+  @apply flex items-center justify-between;
+}
+
+/* --------------------------------------------------------------------------
+   Sortable Column Indicator — chevron that flips based on `data-direction`.
+   Defaults to pointing up (ascending) and rotates 180° for descending.
+   -------------------------------------------------------------------------- */
+.table__sortable-column-indicator {
+  @apply size-3 transform transition-transform duration-100 ease-out;
+
+  &[data-direction="descending"] {
+    @apply rotate-180;
   }
 }
 
@@ -296,7 +316,7 @@
    Resizable Container — wraps table to enable column resizing via React Aria.
    -------------------------------------------------------------------------- */
 .table__resizable-container {
-  @apply relative overflow-auto scrollbar;
+  @apply relative scrollbar overflow-auto;
   scrollbar-gutter: auto;
 }
 

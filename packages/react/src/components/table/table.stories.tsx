@@ -228,29 +228,6 @@ const statusColorMap: Record<string, "success" | "danger" | "warning"> = {
   "On Leave": "warning",
 };
 
-function SortableColumnHeader({
-  children,
-  sortDirection,
-}: {
-  children: React.ReactNode;
-  sortDirection?: "ascending" | "descending";
-}) {
-  return (
-    <span className="flex items-center justify-between">
-      {children}
-      {!!sortDirection && (
-        <Icon
-          icon="gravity-ui:chevron-up"
-          className={cn(
-            "size-3 transform transition-transform duration-100 ease-out",
-            sortDirection === "descending" ? "rotate-180" : "",
-          )}
-        />
-      )}
-    </span>
-  );
-}
-
 /**
  * Shared template for Default and SecondaryVariant stories.
  */
@@ -301,24 +278,30 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
               </Table.Column>
               <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
                     Worker ID
-                  </SortableColumnHeader>
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column allowsSorting id="name">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>Member</SortableColumnHeader>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
+                    Member
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column allowsSorting id="role">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>Role</SortableColumnHeader>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
+                    Role
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column allowsSorting id="status">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>Status</SortableColumnHeader>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
+                    Status
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column className="text-end">Actions</Table.Column>

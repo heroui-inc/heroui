@@ -3,8 +3,7 @@
 import type {SortDescriptor} from "@heroui/react";
 import type {SortingState} from "@tanstack/react-table";
 
-import {Chip, Pagination, Table, cn} from "@heroui/react";
-import {Icon} from "@iconify/react";
+import {Chip, Pagination, Table} from "@heroui/react";
 import {
   createColumnHelper,
   flexRender,
@@ -94,30 +93,6 @@ function toSortingState(descriptor: SortDescriptor): SortingState {
   return [{desc: descriptor.direction === "descending", id: descriptor.column as string}];
 }
 
-// --- Sort Header ----------------------------------------------------------
-function SortableColumnHeader({
-  children,
-  sortDirection,
-}: {
-  children: React.ReactNode;
-  sortDirection?: "ascending" | "descending";
-}) {
-  return (
-    <span className="flex items-center justify-between">
-      {children}
-      {!!sortDirection && (
-        <Icon
-          icon="gravity-ui:chevron-up"
-          className={cn(
-            "size-3 transform transition-transform duration-100 ease-out",
-            sortDirection === "descending" ? "rotate-180" : "",
-          )}
-        />
-      )}
-    </span>
-  );
-}
-
 // --- Component ------------------------------------------------------------
 const PAGE_SIZE = 4;
 
@@ -162,9 +137,9 @@ export function TanstackTable() {
                 isRowHeader={header.id === "name"}
               >
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
-                  </SortableColumnHeader>
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
             ))}
