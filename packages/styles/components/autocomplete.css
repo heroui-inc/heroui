@@ -97,12 +97,11 @@
   &:focus,
   &[data-focus="true"] {
   }
-}
 
-.autocomplete--secondary[data-invalid="true"] .autocomplete__trigger,
-.autocomplete--secondary[aria-invalid="true"] .autocomplete__trigger {
-  @apply status-invalid-field;
-  background-color: var(--autocomplete-trigger-bg);
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    background-color: var(--autocomplete-trigger-bg-focus);
+  }
 }
 
 .autocomplete__value {

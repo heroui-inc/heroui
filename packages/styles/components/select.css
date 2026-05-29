@@ -107,12 +107,11 @@
   &:focus,
   &[data-focus="true"] {
   }
-}
 
-.select--secondary[data-invalid="true"] .select__trigger,
-.select--secondary[aria-invalid="true"] .select__trigger {
-  @apply status-invalid-field;
-  background-color: var(--select-trigger-bg);
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    background-color: var(--select-trigger-bg-focus);
+  }
 }
 
 .select__value {
