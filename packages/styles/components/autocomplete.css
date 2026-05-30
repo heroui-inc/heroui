@@ -68,9 +68,11 @@
   /* Default styles */
 }
 
-.autocomplete--primary[data-invalid="true"] .autocomplete__trigger,
-.autocomplete--primary[aria-invalid="true"] .autocomplete__trigger {
-  background-color: var(--field-focus);
+.autocomplete--primary .autocomplete__trigger {
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    background-color: var(--field-focus);
+  }
 }
 
 .autocomplete--secondary .autocomplete__trigger {

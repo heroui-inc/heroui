@@ -79,9 +79,11 @@
   /* Default styles */
 }
 
-.select--primary[data-invalid="true"] .select__trigger,
-.select--primary[aria-invalid="true"] .select__trigger {
-  background-color: var(--field-focus);
+.select--primary .select__trigger {
+  &[data-invalid="true"],
+  &[aria-invalid="true"] {
+    background-color: var(--field-focus);
+  }
 }
 
 .select--secondary .select__trigger {
