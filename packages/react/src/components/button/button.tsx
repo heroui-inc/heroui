@@ -1,7 +1,7 @@
 "use client";
 
 import type {ButtonVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {CSSProperties, ComponentPropsWithRef} from "react";
 
 import {buttonVariants} from "@heroui/styles";
 import {useContext} from "react";
@@ -17,12 +17,15 @@ interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>,
   [BUTTON_GROUP_CHILD]?: boolean;
 }
 
+const contentWrapperStyle: CSSProperties = {display: "contents"};
+
 const ButtonRoot = ({
   children,
   className,
   fullWidth,
   isDisabled,
   isIconOnly,
+  isPending,
   size,
   slot,
   style,
@@ -43,6 +46,8 @@ const ButtonRoot = ({
   const finalFullWidth =
     fullWidth ?? (shouldUseContext ? buttonGroupContext?.fullWidth : undefined);
 
+  const hasPendingState = typeof isPending === "boolean";
+
   const styles = buttonVariants({
     fullWidth: finalFullWidth,
     isIconOnly,
@@ -55,11 +60,28 @@ const ButtonRoot = ({
       className={composeTwRenderProps(className, styles)}
       data-slot="button"
       isDisabled={finalIsDisabled}
+      isPending={isPending}
       slot={slot}
       style={style}
       {...rest}
     >
-      {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
+      {(renderProps) => {
+        const renderedChildren = typeof children === "function" ? children(renderProps) : children;
+
+        if (!hasPendingState) {
+          return renderedChildren;
+        }
+
+        return (
+          <span
+            key={renderProps.isPending ? "pending" : "idle"}
+            data-slot="button-content"
+            style={contentWrapperStyle}
+          >
+            {renderedChildren}
+          </span>
+        );
+      }}
     </ButtonPrimitive>
   );
 };
