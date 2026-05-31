@@ -53,6 +53,7 @@
   .autocomplete[data-invalid="true"] &,
   .autocomplete[aria-invalid="true"] & {
     @apply status-invalid-field;
+    background-color: var(--field-focus);
   }
 
   /* Disabled state */
@@ -66,13 +67,6 @@
 /* Variant property definitions */
 .autocomplete--primary {
   /* Default styles */
-}
-
-.autocomplete--primary .autocomplete__trigger {
-  &[data-invalid="true"],
-  &[aria-invalid="true"] {
-    background-color: var(--field-focus);
-  }
 }
 
 .autocomplete--secondary .autocomplete__trigger {
@@ -100,8 +94,8 @@
   &[data-focus="true"] {
   }
 
-  &[data-invalid="true"],
-  &[aria-invalid="true"] {
+  .autocomplete[data-invalid="true"] &,
+  .autocomplete[aria-invalid="true"] & {
     background-color: var(--autocomplete-trigger-bg-focus);
   }
 }

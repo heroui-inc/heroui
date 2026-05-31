@@ -109,10 +109,6 @@
   &[data-filled="true"] {
     background-color: var(--input-otp-slot-bg-focus);
   }
-
-  &[data-invalid="true"] {
-    background-color: var(--input-otp-slot-bg-focus);
-  }
 }
 
 /* Animations */

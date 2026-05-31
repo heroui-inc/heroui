@@ -64,6 +64,7 @@
   .select[data-invalid="true"] &,
   .select[aria-invalid="true"] & {
     @apply status-invalid-field;
+    background-color: var(--field-focus);
   }
 
   /* Disabled state */
@@ -77,13 +78,6 @@
 /* Variant property definitions */
 .select--primary {
   /* Default styles */
-}
-
-.select--primary .select__trigger {
-  &[data-invalid="true"],
-  &[aria-invalid="true"] {
-    background-color: var(--field-focus);
-  }
 }
 
 .select--secondary .select__trigger {
@@ -110,8 +104,8 @@
   &[data-focus="true"] {
   }
 
-  &[data-invalid="true"],
-  &[aria-invalid="true"] {
+  .select[data-invalid="true"] &,
+  .select[aria-invalid="true"] & {
     background-color: var(--select-trigger-bg-focus);
   }
 }
