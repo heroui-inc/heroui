@@ -7,7 +7,11 @@ import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {selectVariants} from "@heroui/styles";
+<<<<<<< HEAD
 import React, {createContext, use} from "react";
+=======
+import React, {createContext, useContext, useEffect, useRef} from "react";
+>>>>>>> 7e28d2b55 (fix(select): correct popover scroll position when opening)
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -130,8 +134,8 @@ const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
       {
         ...(props as any),
         className: composeSlotClassName(slots?.indicator, className),
-        "data-slot": "select-indicator",
         "data-open": dataAttr(state?.isOpen),
+        "data-slot": "select-indicator",
       },
     );
   }
@@ -162,7 +166,46 @@ const SelectPopover = ({
   placement = "bottom",
   ...props
 }: SelectPopoverProps) => {
+<<<<<<< HEAD
   const {slots} = use(SelectContext);
+=======
+  const {slots} = useContext(SelectContext);
+  const state = useContext(SelectStateContext);
+  const popoverRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!state?.isOpen || !popoverRef.current) return;
+
+    const scrollSelectedItem = () => {
+      const popover = popoverRef.current;
+
+      if (!popover) return;
+
+      const selectedItem = popover.querySelector<HTMLElement>('[aria-selected="true"]');
+
+      if (!selectedItem) return;
+
+      const popoverHeight = popover.clientHeight;
+      const itemTop = selectedItem.offsetTop;
+      const itemHeight = selectedItem.offsetHeight;
+      const scrollTop = Math.max(
+        0,
+        itemTop - Math.floor(popoverHeight / 2) + Math.floor(itemHeight / 2),
+      );
+
+      popover.scrollTo({
+        behavior: "auto",
+        top: scrollTop,
+      });
+    };
+
+    const timer = window.setTimeout(() => {
+      window.requestAnimationFrame(scrollSelectedItem);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [state?.isOpen]);
+>>>>>>> 7e28d2b55 (fix(select): correct popover scroll position when opening)
 
   return (
     <SurfaceContext
@@ -172,6 +215,7 @@ const SelectPopover = ({
     >
       <PopoverPrimitive
         {...props}
+        ref={popoverRef}
         className={composeTwRenderProps(className, slots?.popover())}
         data-slot="select-popover"
         placement={placement}
