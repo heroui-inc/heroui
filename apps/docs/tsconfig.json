@@ -12,5 +12,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "env.ts", "next-env.d.ts", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "cloudflare-env.d.ts"]
 }
