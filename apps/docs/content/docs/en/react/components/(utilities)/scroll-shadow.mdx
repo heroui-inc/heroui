@@ -103,6 +103,15 @@ The ScrollShadow component uses these CSS classes ([View source styles](https://
 
 - `.scroll-shadow--hide-scrollbar` - Hides native scrollbar
 
+### CSS Variables
+
+The ScrollShadow component uses CSS variables to size the fade mask and reserve space for visible native scrollbars:
+
+| Variable                          | Default                                | Description                                                                                                      |
+| --------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `--scroll-shadow-size`            | `40px`                                 | Controls the fade gradient size. This is set from the `size` prop.                                               |
+| `--scroll-shadow-scrollbar-size`  | `10px` (`0px` when `hideScrollBar`)    | Reserves a solid mask gutter for the native scrollbar so the fade does not cover it. Override for wider scrollbars. |
+
 ### Data Attributes
 
 The component uses data attributes to control shadow visibility:

@@ -2,70 +2,92 @@
 .scroll-shadow {
   @apply relative;
   --scroll-shadow-size: 40px;
+  --scroll-shadow-scrollbar-size: 10px;
 }
 
 /* Orientation: Vertical */
 .scroll-shadow--vertical {
-  @apply overflow-y-auto scrollbar;
+  @apply scrollbar overflow-y-auto;
 }
 
 /* Orientation: Horizontal */
 .scroll-shadow--horizontal {
-  @apply overflow-x-auto scrollbar;
+  @apply scrollbar overflow-x-auto;
 }
 
 /* Variant: Fade - Vertical */
 .scroll-shadow--fade.scroll-shadow--vertical {
+  &:where([data-top-scroll="true"], [data-bottom-scroll="true"], [data-top-bottom-scroll="true"]) {
+    mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+    mask-position:
+      left top,
+      right top;
+    mask-repeat: no-repeat;
+    mask-size:
+      calc(100% - var(--scroll-shadow-scrollbar-size)) 100%,
+      var(--scroll-shadow-scrollbar-size) 100%;
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+    -webkit-mask-position:
+      left top,
+      right top;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size:
+      calc(100% - var(--scroll-shadow-scrollbar-size)) 100%,
+      var(--scroll-shadow-scrollbar-size) 100%;
+  }
+
   &[data-top-scroll="true"] {
     --scroll-linear-gradient: 0deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
-
-    mask-image: linear-gradient(var(--scroll-linear-gradient));
-    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-bottom-scroll="true"] {
     --scroll-linear-gradient: 180deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
-
-    mask-image: linear-gradient(var(--scroll-linear-gradient));
-    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-top-bottom-scroll="true"] {
     --scroll-linear-gradient:
       #000, #000, transparent 0, #000 var(--scroll-shadow-size),
       #000 calc(100% - var(--scroll-shadow-size)), transparent;
-
-    mask-image: linear-gradient(var(--scroll-linear-gradient));
-    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 }
 
 /* Variant: Fade - Horizontal */
 .scroll-shadow--fade.scroll-shadow--horizontal {
+  &:where([data-left-scroll="true"], [data-right-scroll="true"], [data-left-right-scroll="true"]) {
+    mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+    mask-position:
+      left top,
+      left bottom;
+    mask-repeat: no-repeat;
+    mask-size:
+      100% calc(100% - var(--scroll-shadow-scrollbar-size)),
+      100% var(--scroll-shadow-scrollbar-size);
+    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+    -webkit-mask-position:
+      left top,
+      left bottom;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size:
+      100% calc(100% - var(--scroll-shadow-scrollbar-size)),
+      100% var(--scroll-shadow-scrollbar-size);
+  }
+
   &[data-left-scroll="true"] {
     --scroll-linear-gradient: 270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
-
-    mask-image: linear-gradient(var(--scroll-linear-gradient));
-    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-right-scroll="true"] {
     --scroll-linear-gradient: 90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
-
-    mask-image: linear-gradient(var(--scroll-linear-gradient));
-    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 
   &[data-left-right-scroll="true"] {
     --scroll-linear-gradient:
       to right, #000, #000, transparent 0, #000 var(--scroll-shadow-size),
       #000 calc(100% - var(--scroll-shadow-size)), transparent;
-
-    mask-image: linear-gradient(var(--scroll-linear-gradient));
-    -webkit-mask-image: linear-gradient(var(--scroll-linear-gradient));
   }
 }
 
 .scroll-shadow--hide-scrollbar {
   @apply scrollbar-none;
+  --scroll-shadow-scrollbar-size: 0px;
 }
