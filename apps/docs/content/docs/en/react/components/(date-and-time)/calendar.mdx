@@ -214,6 +214,7 @@ Calendar inherits all props from React Aria [Calendar](https://react-spectrum.ad
 | `onFocusChange` | `(value: DateValue) => void` | - | Called when focus moves to another date. |
 | `minValue` | `DateValue` | Calendar-aware `1900-01-01` | Earliest selectable date. |
 | `maxValue` | `DateValue` | Calendar-aware `2099-12-31` | Latest selectable date. |
+| `weeksInMonth` | `number` | - | The number of weeks in a month. This overrides the default set by the locale. |
 | `isDateUnavailable` | `(date: DateValue) => boolean` | - | Marks dates as unavailable. |
 | `isDisabled` | `boolean` | `false` | Disables interaction and selection. |
 | `isReadOnly` | `boolean` | `false` | Keeps content readable but prevents selection changes. |
