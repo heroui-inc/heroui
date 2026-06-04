@@ -1,0 +1,97 @@
+---
+title: v3.1.1
+description: Table sortable header API, toast ViewTransition fixes, disabled Fieldset propagation, scroll-mask fixes, RTL Table styles, and React Aria 1.18.
+github:
+  pull: 6587
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">June 4, 2026</span>
+</div>
+
+Patch release: `Table.SortableColumnHeader` standardizes sortable column labels and indicators, Toast serializes ViewTransition updates, Fieldset disabled state reaches more React Aria descendants, and scroll + RTL style fixes landed for ScrollShadow, Modal, AlertDialog, and Table.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### Table.SortableColumnHeader
+
+`Table.SortableColumnHeader` renders a sortable column label with an optional ascending/descending indicator. Use it inside a `Table.Column` render prop and forward `sortDirection` ([#6588](https://github.com/heroui-inc/heroui/pull/6588)).
+
+```tsx
+<Table.Column allowsSorting>
+  {({sortDirection}) => (
+    <Table.SortableColumnHeader sortDirection={sortDirection}>
+      Name
+    </Table.SortableColumnHeader>
+  )}
+</Table.Column>
+```
+
+- **Default indicator**: Chevron appears when a sort direction exists
+- **Custom indicator**: Pass `indicator`, or hide it with `showIndicator={false}`
+- **Style slots**: `.table__sortable-column-header` + `.table__sortable-column-indicator`
+
+<ComponentPreview name="table-sorting" />
+
+## Component Fixes
+
+- **Toast**: ViewTransition updates are now serialized in the toast queue, preventing skipped transitions and AbortError rejections when `toast.promise()` closes the loading toast and opens success/error feedback ([#6511](https://github.com/heroui-inc/heroui/pull/6511)).
+- **Fieldset**: `disabled` now propagates through React Aria Button, CheckboxGroup, Link, RadioGroup, Slider, ToggleButton, and ToggleButtonGroup contexts ([#6596](https://github.com/heroui-inc/heroui/pull/6596)).
+- **Calendar docs**: `weeksInMonth` is documented for Calendar and RangeCalendar; RangeCalendar now lists `isDateUnavailable(date, anchorDate)` from React Aria 1.18 ([#6586](https://github.com/heroui-inc/heroui/pull/6586)).
+
+## Style Fixes
+
+- **Modal / AlertDialog**: `scroll-inside` dialogs now cap height with `max-h-full min-h-0` so the body area scrolls instead of overflowing the dialog ([#6597](https://github.com/heroui-inc/heroui/pull/6597)).
+- **ScrollShadow**: Fade masks reserve space for visible native scrollbars through `--scroll-shadow-scrollbar-size` ([#6598](https://github.com/heroui-inc/heroui/pull/6598)).
+- **Table RTL**: Column separators and resize handles now use logical `end-0` positioning in RTL layouts ([#6606](https://github.com/heroui-inc/heroui/pull/6606)).
+
+## Dependencies
+
+- **React Aria Components**: `1.17.0` → `1.18.0` ([#6586](https://github.com/heroui-inc/heroui/pull/6586))
+- **@internationalized/date**: `3.12.1` → `3.12.2`
+- **React Aria / Stately helpers**: `@react-aria/*`, `@react-stately/*`, and `@react-types/shared` received patch updates
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [Table Docs](/docs/components/table)
+- [ScrollShadow Docs](/docs/components/scroll-shadow)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6587](https://github.com/heroui-inc/heroui/pull/6587)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

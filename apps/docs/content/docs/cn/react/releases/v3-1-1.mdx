@@ -1,0 +1,97 @@
+---
+title: v3.1.1
+description: Table 排序标题 API、Toast ViewTransition 修复、Fieldset 禁用态传递、滚动遮罩修复、RTL Table 样式，以及 React Aria 1.18。
+github:
+  pull: 6587
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 6 月 4 日</span>
+</div>
+
+补丁版本：`Table.SortableColumnHeader` 统一 sortable 列标题与排序指示器，Toast 会串行化 ViewTransition 更新，Fieldset 的 disabled 状态覆盖更多 React Aria 后代，ScrollShadow、Modal、AlertDialog 和 Table 的滚动与 RTL 样式也同步修复。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增内容
+
+### Table.SortableColumnHeader
+
+`Table.SortableColumnHeader` 用于渲染 sortable 列标题和可选的升降序指示器。放在 `Table.Column` render prop 中，并传入 `sortDirection` ([#6588](https://github.com/heroui-inc/heroui/pull/6588))。
+
+```tsx
+<Table.Column allowsSorting>
+  {({sortDirection}) => (
+    <Table.SortableColumnHeader sortDirection={sortDirection}>
+      Name
+    </Table.SortableColumnHeader>
+  )}
+</Table.Column>
+```
+
+- **默认指示器**：存在排序方向时显示 chevron
+- **自定义指示器**：传入 `indicator`，或用 `showIndicator={false}` 隐藏
+- **样式插槽**：`.table__sortable-column-header` + `.table__sortable-column-indicator`
+
+<ComponentPreview name="table-sorting" />
+
+## 组件修复
+
+- **Toast**：Toast 队列会串行化 ViewTransition 更新，避免 `toast.promise()` 关闭 loading toast 并打开 success/error toast 时出现 skipped transition 和 AbortError rejection ([#6511](https://github.com/heroui-inc/heroui/pull/6511))。
+- **Fieldset**：`disabled` 现在会通过 React Aria Button、CheckboxGroup、Link、RadioGroup、Slider、ToggleButton 和 ToggleButtonGroup context 传递给后代组件 ([#6596](https://github.com/heroui-inc/heroui/pull/6596))。
+- **Calendar 文档**：Calendar 与 RangeCalendar 已补充 `weeksInMonth`；RangeCalendar 现在列出 React Aria 1.18 的 `isDateUnavailable(date, anchorDate)` 签名 ([#6586](https://github.com/heroui-inc/heroui/pull/6586))。
+
+## 样式修复
+
+- **Modal / AlertDialog**：`scroll-inside` dialog 现在使用 `max-h-full min-h-0` 限制高度，让 body 区域滚动而不是让 dialog 溢出 ([#6597](https://github.com/heroui-inc/heroui/pull/6597))。
+- **ScrollShadow**：Fade mask 通过 `--scroll-shadow-scrollbar-size` 为可见原生滚动条保留空间 ([#6598](https://github.com/heroui-inc/heroui/pull/6598))。
+- **Table RTL**：列分隔线和 resize handle 在 RTL 布局中改用 logical `end-0` 定位 ([#6606](https://github.com/heroui-inc/heroui/pull/6606))。
+
+## 依赖
+
+- **React Aria Components**：`1.17.0` → `1.18.0` ([#6586](https://github.com/heroui-inc/heroui/pull/6586))
+- **@internationalized/date**：`3.12.1` → `3.12.2`
+- **React Aria / Stately helpers**：`@react-aria/*`、`@react-stately/*` 和 `@react-types/shared` 升级到 patch 版本
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [Table 文档](/docs/components/table)
+- [ScrollShadow 文档](/docs/components/scroll-shadow)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6587](https://github.com/heroui-inc/heroui/pull/6587)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的朋友！
+
+<PRContributors />
