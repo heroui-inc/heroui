@@ -111,7 +111,7 @@
   /* Separator between columns — a short vertical line on the right edge */
   &::after {
     content: "";
-    @apply pointer-events-none absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+    @apply pointer-events-none absolute top-1/2 end-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   }
 
   &:last-child:not(:only-child)::after {
