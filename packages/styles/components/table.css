@@ -306,7 +306,7 @@
    -------------------------------------------------------------------------- */
 .table__column-resizer {
   /* Match the ::after separator: absolute, right edge, short vertical line */
-  @apply absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+  @apply absolute top-1/2 end-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   /* Make it interactive — wider hit area with transparent padding */
   @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2;
   /* Reset appearance */
