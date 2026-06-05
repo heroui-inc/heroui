@@ -91,3 +91,6 @@ apps/docs/public/skills
 
 # SEO analysis output
 .seo-output
+
+# OpenNext
+.open-next
