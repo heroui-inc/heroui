@@ -28,7 +28,12 @@
   "observability": {
     "enabled": true,
   },
-  "upload_source_maps": true,
+  // Source map upload is disabled to avoid hitting V8's 512 MB max-string
+  // length during wrangler's bundle serialization. With ~2k+ SSG pages,
+  // OpenNext inlines a large prerender-manifest into handler.mjs; the
+  // resulting source map exceeds the V8 string cap.
+  // See https://github.com/opennextjs/opennextjs-cloudflare/issues/1174
+  "upload_source_maps": false,
   /**
    * Smart Placement
    * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
