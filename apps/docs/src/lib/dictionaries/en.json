@@ -84,6 +84,12 @@
     "stylesSource": "Styles source",
     "themeSource": "Theme source"
   },
+  "copyPrompt": {
+    "copy": "Copy prompt",
+    "copied": "Copied",
+    "ariaLabelCopy": "Copy prompt to clipboard",
+    "ariaLabelCopied": "Prompt copied to clipboard"
+  },
   "qrPreviewPopover": {
     "tapToPreview": "Tap to preview",
     "scanToPreview": "Scan to preview",
