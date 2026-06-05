@@ -1,13 +1,13 @@
 import type {ComponentProps} from "react";
 
-import {SwitchContent, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb} from "./switch";
+import {SwitchButtonRoot, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb} from "./switch";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const Switch = Object.assign(SwitchRoot, {
   Root: SwitchRoot,
-  Content: SwitchContent,
+  Button: SwitchButtonRoot,
   Control: SwitchControl,
   Thumb: SwitchThumb,
   Icon: SwitchIcon,
@@ -16,7 +16,7 @@ export const Switch = Object.assign(SwitchRoot, {
 export type Switch = {
   Props: ComponentProps<typeof SwitchRoot>;
   RootProps: ComponentProps<typeof SwitchRoot>;
-  ContentProps: ComponentProps<typeof SwitchContent>;
+  ButtonProps: ComponentProps<typeof SwitchButtonRoot>;
   ControlProps: ComponentProps<typeof SwitchControl>;
   ThumbProps: ComponentProps<typeof SwitchThumb>;
   IconProps: ComponentProps<typeof SwitchIcon>;
@@ -25,15 +25,19 @@ export type Switch = {
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {SwitchRoot, SwitchContent, SwitchControl, SwitchIcon, SwitchThumb};
+export {SwitchButtonRoot, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb};
 
 export type {
   SwitchRootProps,
   SwitchRootProps as SwitchProps,
-  SwitchContentProps,
+  SwitchButtonRootProps,
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,
+  SwitchFieldRenderProps,
+  SwitchButtonRenderProps,
+  /** @deprecated Use {@link SwitchFieldRenderProps} for the root render prop, or {@link SwitchButtonRenderProps} for control. */
+  SwitchFieldRenderProps as SwitchRenderProps,
 } from "./switch";
 
 /* -------------------------------------------------------------------------------------------------

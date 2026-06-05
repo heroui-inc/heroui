@@ -34,21 +34,21 @@ export default function App() {
     <RadioGroup>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>London</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Tokyo</Label>
-          <Description>Capital of Japan</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>Capital of Japan</Description>
       </Radio>
     </RadioGroup>
   );
@@ -60,7 +60,7 @@ export default function App() {
 ### 1. Component Structure
 
 **v2:** Simple Radio with children as label  
-**v3:** Compound components: `Radio.Control`, `Radio.Indicator`, `Radio.Content`
+**v3:** Compound components: `Radio.Button`, `Radio.Control`, `Radio.Indicator`
 
 ### 2. Prop Changes
 
@@ -68,7 +68,7 @@ export default function App() {
 |---------|-------------|-------|
 | `onValueChange` | `onChange` | Renamed event handler |
 | `label` (on RadioGroup) | — | Use `Label` component |
-| `description` (on Radio) | — | Use `Description` component inside `Radio.Content` |
+| `description` (on Radio) | — | Use `Description` component as a sibling of `Radio.Button` |
 | `size` | — | Removed (use Tailwind CSS) |
 | `color` | — | Removed (use Tailwind CSS) |
 | `classNames` | — | Use `className` props on individual components |
@@ -108,13 +108,13 @@ export default function App() {
     <RadioGroup>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>London</Label>
-          <Description>Capital of England</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>Capital of England</Description>
       </Radio>
     </RadioGroup>
     
@@ -122,12 +122,12 @@ export default function App() {
     <RadioGroup isInvalid>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>London</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
       <FieldError>Please select an option</FieldError>
     </RadioGroup>
@@ -162,20 +162,20 @@ export default function App() {
     <RadioGroup value={selected} onChange={setSelected}>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>London</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Tokyo</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
     </RadioGroup>
     ```
@@ -198,20 +198,20 @@ export default function App() {
     <RadioGroup orientation="horizontal">
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>London</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Tokyo</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
     </RadioGroup>
     ```
@@ -227,12 +227,12 @@ v3 introduces a `variant` prop on `RadioGroup` with `"primary"` (default) and `"
 <RadioGroup variant="primary">
   <Label>Select city</Label>
   <Radio value="london">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
+    <Radio.Button>
+      <Radio.Control>
+        <Radio.Indicator />
+      </Radio.Control>
       <Label>London</Label>
-    </Radio.Content>
+    </Radio.Button>
   </Radio>
 </RadioGroup>
 
@@ -240,12 +240,12 @@ v3 introduces a `variant` prop on `RadioGroup` with `"primary"` (default) and `"
 <RadioGroup variant="secondary">
   <Label>Select city</Label>
   <Radio value="london">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
+    <Radio.Button>
+      <Radio.Control>
+        <Radio.Indicator />
+      </Radio.Control>
       <Label>London</Label>
-    </Radio.Content>
+    </Radio.Button>
   </Radio>
 </RadioGroup>
 ```
@@ -258,20 +258,20 @@ v3 supports `isReadOnly` on `RadioGroup`, which prevents value changes while kee
 <RadioGroup isReadOnly defaultValue="london">
   <Label>Select city</Label>
   <Radio value="london">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
+    <Radio.Button>
+      <Radio.Control>
+        <Radio.Indicator />
+      </Radio.Control>
       <Label>London</Label>
-    </Radio.Content>
+    </Radio.Button>
   </Radio>
   <Radio value="tokyo">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
+    <Radio.Button>
+      <Radio.Control>
+        <Radio.Indicator />
+      </Radio.Control>
       <Label>Tokyo</Label>
-    </Radio.Content>
+    </Radio.Button>
   </Radio>
 </RadioGroup>
 ```
@@ -284,19 +284,19 @@ The v3 Radio follows this structure:
 RadioGroup (Root)
   ├── Label (optional)
   ├── Radio
-  │   ├── Radio.Control
-  │   │   └── Radio.Indicator
-  │   └── Radio.Content
-  │       ├── Label
-  │       └── Description (optional)
+  │   ├── Radio.Button (the clickable label)
+  │   │   ├── Radio.Control
+  │   │   │   └── Radio.Indicator
+  │   │   └── Label
+  │   └── Description (optional, sibling)
   └── FieldError (optional)
 ```
 
 ## Summary
 
-1. **Component Structure**: Must use compound components (`Radio.Control`, `Radio.Indicator`, `Radio.Content`)
+1. **Component Structure**: Must use compound components (`Radio.Button`, `Radio.Control`, `Radio.Indicator`)
 2. **Label Handling**: `label` prop removed - use `Label` component
-3. **Description Handling**: `description` prop removed - use `Description` component inside `Radio.Content`
+3. **Description Handling**: `description` prop removed - use `Description` component as a sibling of `Radio.Button`
 4. **Event Handler**: `onValueChange` → `onChange`
 5. **Styling Props Removed**: `size`, `color` - use Tailwind CSS
 6. **ClassNames Removed**: Use `className` props on individual components

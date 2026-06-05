@@ -35,29 +35,29 @@ export default function App() {
     <RadioGroup name="city">
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>London</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Tokyo</Label>
-          <Description>Capital of Japan</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>Capital of Japan</Description>
       </Radio>
       <Radio value="paris">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Paris</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
     </RadioGroup>
   );
@@ -74,12 +74,12 @@ export default function App() {
 ### 2. Radio Structure
 
 **v2:** Simple Radio components with children as labels  
-**v3:** Compound Radio components with `Radio.Control`, `Radio.Indicator`, and `Radio.Content`
+**v3:** Compound Radio components with `Radio.Button`, `Radio.Control`, and `Radio.Indicator`
 
 ### 3. Description Handling
 
 **v2:** Used `description` prop on individual `Radio` components  
-**v3:** Use `Description` component inside `Radio.Content`
+**v3:** Use `Description` component as a sibling of `Radio.Button`
 
 ### 4. Event Handler
 
@@ -118,22 +118,22 @@ export default function App() {
     <RadioGroup name="plan">
       <Label>Select plan</Label>
       <Radio value="basic">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Basic</Label>
-          <Description>Basic features</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>Basic features</Description>
       </Radio>
       <Radio value="pro">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Pro</Label>
-          <Description>All features</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>All features</Description>
       </Radio>
     </RadioGroup>
     ```
@@ -160,12 +160,12 @@ export default function App() {
     <RadioGroup variant="primary" name="plan">
       <Label>Select plan</Label>
       <Radio value="basic">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Basic</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
     </RadioGroup>
 
@@ -173,12 +173,12 @@ export default function App() {
     <RadioGroup variant="secondary" name="plan">
       <Label>Select plan</Label>
       <Radio value="basic">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Basic</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
     </RadioGroup>
     ```
@@ -194,20 +194,20 @@ import { RadioGroup, Radio, Label } from "@heroui/react";
 <RadioGroup isReadOnly defaultValue="basic" name="plan">
   <Label>Select plan</Label>
   <Radio value="basic">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
+    <Radio.Button>
+      <Radio.Control>
+        <Radio.Indicator />
+      </Radio.Control>
       <Label>Basic</Label>
-    </Radio.Content>
+    </Radio.Button>
   </Radio>
   <Radio value="pro">
-    <Radio.Control>
-      <Radio.Indicator />
-    </Radio.Control>
-    <Radio.Content>
+    <Radio.Button>
+      <Radio.Control>
+        <Radio.Indicator />
+      </Radio.Control>
       <Label>Pro</Label>
-    </Radio.Content>
+    </Radio.Button>
   </Radio>
 </RadioGroup>
 ```
@@ -238,20 +238,20 @@ import { RadioGroup, Radio, Label } from "@heroui/react";
     <RadioGroup name="city" value={value} onChange={setValue}>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>London</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Tokyo</Label>
-        </Radio.Content>
+        </Radio.Button>
       </Radio>
     </RadioGroup>
     ```
@@ -262,7 +262,7 @@ import { RadioGroup, Radio, Label } from "@heroui/react";
 
 - Replace `label` prop with `Label` component as child
 - Update Radio children to use compound component structure
-- Replace `description` prop on Radio with `Description` component inside `Radio.Content`
+- Replace `description` prop on Radio with `Description` component as a sibling of `Radio.Button`
 - Change `onValueChange` to `onChange`
 - Add `name` prop for form integration
 - New `variant` prop: `"primary"` (default) or `"secondary"` for lower emphasis styling

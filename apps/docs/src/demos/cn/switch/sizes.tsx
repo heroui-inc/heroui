@@ -4,28 +4,28 @@ export function Sizes() {
   return (
     <div className="flex gap-6">
       <Switch size="sm">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Switch.Content>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
           <Label className="text-xs">小</Label>
-        </Switch.Content>
+        </Switch.Button>
       </Switch>
       <Switch size="md">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Switch.Content>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
           <Label className="text-sm">中</Label>
-        </Switch.Content>
+        </Switch.Button>
       </Switch>
       <Switch size="lg">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Switch.Content>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
           <Label className="text-base">大</Label>
-        </Switch.Content>
+        </Switch.Button>
       </Switch>
     </div>
   );

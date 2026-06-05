@@ -6,31 +6,31 @@ export function Basic() {
       <Label>Plan selection</Label>
       <Description>Choose the plan that suits you best</Description>
       <Radio value="basic">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Basic Plan</Label>
-          <Description>Includes 100 messages per month</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>Includes 100 messages per month</Description>
       </Radio>
       <Radio value="premium">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Premium Plan</Label>
-          <Description>Includes 200 messages per month</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>Includes 200 messages per month</Description>
       </Radio>
       <Radio value="business">
-        <Radio.Control>
-          <Radio.Indicator />
-        </Radio.Control>
-        <Radio.Content>
+        <Radio.Button>
+          <Radio.Control>
+            <Radio.Indicator />
+          </Radio.Control>
           <Label>Business Plan</Label>
-          <Description>Unlimited messages</Description>
-        </Radio.Content>
+        </Radio.Button>
+        <Description>Unlimited messages</Description>
       </Radio>
     </RadioGroup>
   );

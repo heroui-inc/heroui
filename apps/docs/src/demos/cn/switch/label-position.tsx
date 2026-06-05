@@ -4,20 +4,20 @@ export function LabelPosition() {
   return (
     <div className="flex flex-col gap-4">
       <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Switch.Content>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
           <Label className="text-sm">标签在后</Label>
-        </Switch.Content>
+        </Switch.Button>
       </Switch>
       <Switch>
-        <Switch.Content>
+        <Switch.Button>
           <Label className="text-sm">标签在前</Label>
-        </Switch.Content>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+        </Switch.Button>
       </Switch>
     </div>
   );

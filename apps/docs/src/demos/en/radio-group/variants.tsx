@@ -7,22 +7,22 @@ export function Variants() {
         <p className="text-sm font-medium text-muted">Primary variant</p>
         <RadioGroup defaultValue="option1" name="primary-plan" variant="primary">
           <Radio value="option1">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <Radio.Button>
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
               <Label>Option 1</Label>
-              <Description>Standard styling with default background</Description>
-            </Radio.Content>
+            </Radio.Button>
+            <Description>Standard styling with default background</Description>
           </Radio>
           <Radio value="option2">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <Radio.Button>
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
               <Label>Option 2</Label>
-              <Description>Another option with primary styling</Description>
-            </Radio.Content>
+            </Radio.Button>
+            <Description>Another option with primary styling</Description>
           </Radio>
         </RadioGroup>
       </div>
@@ -30,22 +30,22 @@ export function Variants() {
         <p className="text-sm font-medium text-muted">Secondary variant</p>
         <RadioGroup defaultValue="option1" name="secondary-plan" variant="secondary">
           <Radio value="option1">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <Radio.Button>
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
               <Label>Option 1</Label>
-              <Description>Lower emphasis variant for use in surfaces</Description>
-            </Radio.Content>
+            </Radio.Button>
+            <Description>Lower emphasis variant for use in surfaces</Description>
           </Radio>
           <Radio value="option2">
-            <Radio.Control>
-              <Radio.Indicator />
-            </Radio.Control>
-            <Radio.Content>
+            <Radio.Button>
+              <Radio.Control>
+                <Radio.Indicator />
+              </Radio.Control>
               <Label>Option 2</Label>
-              <Description>Another option with secondary styling</Description>
-            </Radio.Content>
+            </Radio.Button>
+            <Description>Another option with secondary styling</Description>
           </Radio>
         </RadioGroup>
       </div>

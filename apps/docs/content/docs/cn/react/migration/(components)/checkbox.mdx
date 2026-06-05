@@ -27,12 +27,12 @@ import { Checkbox, Label } from "@heroui/react";
 export default function App() {
   return (
     <Checkbox defaultSelected id="option">
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="option">Option</Label>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>Option</Label>
+      </Checkbox.Button>
     </Checkbox>
   );
 }
@@ -43,12 +43,12 @@ export default function App() {
 ### 1. 组件结构
 
 **v2：** 简单组件，`children` 即标签  
-**v3：** 复合组件：`Checkbox.Control`、`Checkbox.Indicator`、`Checkbox.Content`
+**v3：** 复合组件：`Checkbox.Button`、`Checkbox.Control`、`Checkbox.Indicator`
 
 ### 2. 标签处理
 
 **v2：** 标签直接作为 `children` 传入 `Checkbox`  
-**v3：** 标签须放在 `Checkbox.Content` 内，并使用 `Label` 组件
+**v3：** 标签放在 `Checkbox.Button`（可点击的标签）内；`Description` / `FieldError` 是 `Checkbox.Button` 的同级节点
 
 ### 3. Prop 变更
 
@@ -95,12 +95,12 @@ export default function App() {
     const [isSelected, setIsSelected] = useState(false);
 
     <Checkbox id="subscribe" isSelected={isSelected} onChange={setIsSelected}>
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="subscribe">Subscribe</Label>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>Subscribe</Label>
+      </Checkbox.Button>
     </Checkbox>
     ```
   </Tab>
@@ -123,13 +123,13 @@ export default function App() {
     import { Checkbox, Label, Description } from "@heroui/react";
 
     <Checkbox id="option" defaultSelected>
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="option">Option</Label>
-        <Description>Description text</Description>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>Option</Label>
+      </Checkbox.Button>
+      <Description>Description text</Description>
     </Checkbox>
     ```
   </Tab>
@@ -157,28 +157,28 @@ export default function App() {
       <Label>Select cities</Label>
       <Description>Choose all that apply</Description>
       <Checkbox value="buenos-aires">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Buenos Aires</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
       <Checkbox value="sydney">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Sydney</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
       <Checkbox value="san-francisco">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>San Francisco</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
     </CheckboxGroup>
     ```
@@ -201,22 +201,22 @@ export default function App() {
     ```tsx
     {/* Colors - use Tailwind classes */}
     <Checkbox defaultSelected id="primary">
-      <Checkbox.Control className="data-[selected=true]:bg-primary data-[selected=true]:border-primary">
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="primary">Primary</Label>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control className="data-[selected=true]:bg-primary data-[selected=true]:border-primary">
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>Primary</Label>
+      </Checkbox.Button>
     </Checkbox>
     
     {/* Sizes - use Tailwind classes */}
     <Checkbox defaultSelected id="medium">
-      <Checkbox.Control className="size-5">
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="medium">Medium</Label>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control className="size-5">
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>Medium</Label>
+      </Checkbox.Button>
     </Checkbox>
     ```
   </Tab>
@@ -235,14 +235,14 @@ export default function App() {
   <Tab value="v3">
     ```tsx
     <Checkbox defaultSelected id="option">
-      <Checkbox.Control>
-        <Checkbox.Indicator>
-          {({isSelected}) => isSelected ? <HeartIcon /> : null}
-        </Checkbox.Indicator>
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="option">Option</Label>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control>
+          <Checkbox.Indicator>
+            {({isSelected}) => isSelected ? <HeartIcon /> : null}
+          </Checkbox.Indicator>
+        </Checkbox.Control>
+        <Label>Option</Label>
+      </Checkbox.Button>
     </Checkbox>
     ```
   </Tab>
@@ -255,22 +255,22 @@ v3 引入 `variant` prop，可选 `"primary"`（默认）与 `"secondary"`：
 ```tsx
 {/* Primary variant (default) */}
 <Checkbox variant="primary" id="primary-option">
-  <Checkbox.Control>
-    <Checkbox.Indicator />
-  </Checkbox.Control>
-  <Checkbox.Content>
-    <Label htmlFor="primary-option">Primary</Label>
-  </Checkbox.Content>
+  <Checkbox.Button>
+    <Checkbox.Control>
+      <Checkbox.Indicator />
+    </Checkbox.Control>
+    <Label>Primary</Label>
+  </Checkbox.Button>
 </Checkbox>
 
 {/* Secondary variant - lower emphasis, suitable for Surface components */}
 <Checkbox variant="secondary" id="secondary-option">
-  <Checkbox.Control>
-    <Checkbox.Indicator />
-  </Checkbox.Control>
-  <Checkbox.Content>
-    <Label htmlFor="secondary-option">Secondary</Label>
-  </Checkbox.Content>
+  <Checkbox.Button>
+    <Checkbox.Control>
+      <Checkbox.Indicator />
+    </Checkbox.Control>
+    <Label>Secondary</Label>
+  </Checkbox.Button>
 </Checkbox>
 ```
 
@@ -285,12 +285,12 @@ v3 引入 `variant` prop，可选 `"primary"`（默认）与 `"secondary"`：
   <Tab value="v3">
     ```tsx
     <Checkbox isIndeterminate id="option">
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="option">Option</Label>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>Option</Label>
+      </Checkbox.Button>
     </Checkbox>
     ```
   </Tab>
@@ -304,14 +304,14 @@ v3 Checkbox 支持渲染 prop，用于暴露状态信息：
 <Checkbox id="terms">
   {({isSelected, isIndeterminate, isHovered, isPressed, isFocused, isDisabled}) => (
     <>
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="terms">
+      <Checkbox.Button>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>
           {isSelected ? "Terms accepted" : "Accept terms"}
         </Label>
-      </Checkbox.Content>
+      </Checkbox.Button>
     </>
   )}
 </Checkbox>
@@ -321,16 +321,16 @@ v3 Checkbox 支持渲染 prop，用于暴露状态信息：
 
 ```tsx
 <Checkbox id="custom">
-  <Checkbox.Control>
-    <Checkbox.Indicator>
-      {({isSelected, isIndeterminate}) =>
-        isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null
-      }
-    </Checkbox.Indicator>
-  </Checkbox.Control>
-  <Checkbox.Content>
-    <Label htmlFor="custom">Custom indicator</Label>
-  </Checkbox.Content>
+  <Checkbox.Button>
+    <Checkbox.Control>
+      <Checkbox.Indicator>
+        {({isSelected, isIndeterminate}) =>
+          isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null
+        }
+      </Checkbox.Indicator>
+    </Checkbox.Control>
+    <Label>Custom indicator</Label>
+  </Checkbox.Button>
 </Checkbox>
 ```
 
@@ -364,14 +364,14 @@ v3 Checkbox 支持渲染 prop，用于暴露状态信息：
 
 ```tsx
 <Checkbox className="custom-base" id="option">
-  <Checkbox.Control className="custom-control">
-    <Checkbox.Indicator className="custom-indicator" />
-  </Checkbox.Control>
-  <Checkbox.Content className="custom-content">
-    <Label htmlFor="option" className="custom-label">
+  <Checkbox.Button>
+    <Checkbox.Control className="custom-control">
+      <Checkbox.Indicator className="custom-indicator" />
+    </Checkbox.Control>
+    <Label className="custom-label">
       Option
     </Label>
-  </Checkbox.Content>
+  </Checkbox.Button>
 </Checkbox>
 ```
 
@@ -381,17 +381,18 @@ v3 Checkbox 的结构如下：
 
 ```
 Checkbox (Root)
-  ├── Checkbox.Control
-  │   └── Checkbox.Indicator
-  └── Checkbox.Content (optional)
-      ├── Label (required if using Content)
-      └── Description (optional)
+  ├── Checkbox.Button (the clickable label)
+  │   ├── Checkbox.Control
+  │   │   └── Checkbox.Indicator
+  │   └── Label
+  ├── Description (optional, sibling)
+  └── FieldError (optional, sibling)
 ```
 
 ## 总结
 
-1. **组件结构**：必须使用复合组件（`Control`、`Indicator`、`Content`）。
-2. **标签处理**：标签须使用 `Label`，并放在 `Checkbox.Content` 内。
+1. **组件结构**：必须使用复合组件（`Button`、`Control`、`Indicator`）。
+2. **标签处理**：标签放在 `Checkbox.Button` 内。
 3. **`onValueChange` → `onChange`**：事件处理函数 prop 已重命名。
 4. **颜色已移除**：请在 `Checkbox.Control` 上使用 Tailwind CSS 类。
 5. **尺寸已移除**：请在 `Checkbox.Control` 上使用 Tailwind CSS 类。

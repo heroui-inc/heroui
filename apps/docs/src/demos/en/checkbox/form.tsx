@@ -18,36 +18,30 @@ export function Form() {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-3">
-          <Checkbox id="form-notifications" name="notifications" value="on">
+        <Checkbox name="notifications" value="on">
+          <Checkbox.Button>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-          </Checkbox>
-          <Checkbox.Content>
-            <Label htmlFor="form-notifications">Enable notifications</Label>
-          </Checkbox.Content>
-        </div>
-        <div className="flex items-center gap-3">
-          <Checkbox defaultSelected id="form-newsletter" name="newsletter" value="on">
+            <Label>Enable notifications</Label>
+          </Checkbox.Button>
+        </Checkbox>
+        <Checkbox defaultSelected name="newsletter" value="on">
+          <Checkbox.Button>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-          </Checkbox>
-          <Checkbox.Content>
-            <Label htmlFor="form-newsletter">Subscribe to newsletter</Label>
-          </Checkbox.Content>
-        </div>
-        <div className="flex items-center gap-3">
-          <Checkbox id="form-marketing" name="marketing" value="on">
+            <Label>Subscribe to newsletter</Label>
+          </Checkbox.Button>
+        </Checkbox>
+        <Checkbox name="marketing" value="on">
+          <Checkbox.Button>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-          </Checkbox>
-          <Checkbox.Content>
-            <Label htmlFor="form-marketing">Receive marketing updates</Label>
-          </Checkbox.Content>
-        </div>
+            <Label>Receive marketing updates</Label>
+          </Checkbox.Button>
+        </Checkbox>
       </div>
       <Button className="mt-4" size="sm" type="submit" variant="primary">
         Submit

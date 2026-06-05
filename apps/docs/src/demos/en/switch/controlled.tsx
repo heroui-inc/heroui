@@ -9,12 +9,12 @@ export function Controlled() {
   return (
     <div className="flex flex-col gap-4">
       <Switch isSelected={isSelected} onChange={setIsSelected}>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Switch.Content>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
           <Label className="text-sm">Enable notifications</Label>
-        </Switch.Content>
+        </Switch.Button>
       </Switch>
       <p className="text-sm text-muted">Switch is {isSelected ? "on" : "off"}</p>
     </div>

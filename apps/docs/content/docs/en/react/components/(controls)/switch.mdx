@@ -2,7 +2,7 @@
 title: Switch
 description: A toggle switch component for boolean states
 links:
-  rac: Switch
+  rac: SwitchField
   source: switch/switch.tsx
   styles: switch.css
   storybook: Components/Controls/Switch
@@ -26,22 +26,31 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 Import the Switch component and access all parts using dot notation.
 
 ```tsx
-import { Switch, Label, Description } from '@heroui/react';
+import { Switch, Label, Description, FieldError } from '@heroui/react';
 
 export default () => (
   <Switch>
-    <Switch.Control>
-      <Switch.Thumb>
-        <Switch.Icon/> {/* Optional */}
-      </Switch.Thumb>
-    </Switch.Control>
-    <Switch.Content>
-      <Label />
-      <Description /> {/* Optional */}
-    </Switch.Content>
+    <Switch.Button>
+      <Switch.Control>
+        <Switch.Thumb>
+          <Switch.Icon /> {/* Optional */}
+        </Switch.Thumb>
+      </Switch.Control>
+      <Label /> {/* Part of the clickable button + accessible name */}
+    </Switch.Button>
+    <Description /> {/* Optional — field-level help text */}
+    <FieldError /> {/* Optional — validation message */}
   </Switch>
 );
 ```
+
+<Callout type="warn">
+  Put the `Label` (and the `Switch.Control`) inside `Switch.Button` — it is the clickable
+  area and the switch's accessible name. Keep `Description` and `FieldError` as siblings of
+  `Switch.Button` so they are announced via `aria-describedby`. For a switch with **no label**
+  you can skip `Switch.Button` and place `Switch.Control` directly inside `Switch` — the control
+  becomes the clickable target (pass an `aria-label`).
+</Callout>
 
 For grouping multiple switches, use the `SwitchGroup` component:
 
@@ -51,16 +60,20 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 export default () => (
   <SwitchGroup>
     <Switch>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
-      <Label>Option 1</Label>
+      <Switch.Button>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 1</Label>
+      </Switch.Button>
     </Switch>
     <Switch>
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
-      <Label>Option 2</Label>
+      <Switch.Button>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        <Label>Option 2</Label>
+      </Switch.Button>
     </Switch>
   </SwitchGroup>
 );
@@ -225,8 +238,8 @@ To customize the Switch component classes, you can use the `@layer components` d
     @apply bg-white shadow-sm;
   }
 
-  .switch__content {
-    @apply flex flex-col gap-1;
+  .switch__button {
+    @apply items-center gap-3;
   }
 
   .switch__icon {
@@ -243,8 +256,8 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 
 The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
 
-- `.switch` - Base switch container
-- `.switch__content` - Optional content container
+- `.switch` - Base switch container (the field)
+- `.switch__button` - Clickable label wrapping the control and label text
 - `.switch__control` - Switch control track
 - `.switch__thumb` - Switch thumb that moves
 - `.switch__icon` - Optional icon inside the thumb
@@ -266,16 +279,16 @@ The SwitchGroup component uses these CSS classes ([View source styles](https://g
 The switch supports both CSS pseudo-classes and data attributes for flexibility:
 
 - **Selected**: `[data-selected="true"]` (thumb position and background color change)
-- **Hover**: `:hover` or `[data-hovered="true"]`
-- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
-- **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
+- **Hover**: `:hover` or `[data-hovered="true"]` on `Switch.Control` (button)
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on the button (shows focus ring on track)
+- **Disabled**: `[data-disabled="true"]` on the field (reduced opacity, including help text)
 - **Pressed**: `:active` or `[data-pressed="true"]`
 
 ## API Reference
 
 ### Switch Props
 
-Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html).
+Inherits from [React Aria SwitchField](https://react-spectrum.adobe.com/react-aria/Switch.html).
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -283,27 +296,43 @@ Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Sw
 | `isSelected` | `boolean` | `false` | Whether the switch is on |
 | `defaultSelected` | `boolean` | `false` | Whether the switch is on by default (uncontrolled) |
 | `isDisabled` | `boolean` | `false` | Whether the switch is disabled |
+| `isInvalid` | `boolean` | `false` | Whether the switch is invalid |
+| `isReadOnly` | `boolean` | `false` | Whether the switch is read only |
+| `isRequired` | `boolean` | `false` | Whether the switch must be selected |
+| `validate` | `(value: boolean) => ValidationError \| true \| null \| undefined` | - | Custom validation function |
+| `validationBehavior` | `'native' \| 'aria'` | `'native'` | Whether to use native HTML form validation or ARIA |
 | `name` | `string` | - | The name of the input element, used when submitting an HTML form |
 | `value` | `string` | - | The value of the input element, used when submitting an HTML form |
 | `onChange` | `(isSelected: boolean) => void` | - | Handler called when the switch value changes |
 | `onPress` | `(e: PressEvent) => void` | - | Handler called when the switch is pressed |
-| `children` | `React.ReactNode \| (values: SwitchRenderProps) => React.ReactNode` | - | Switch content or render prop |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+| `children` | `React.ReactNode \| (values: SwitchFieldRenderProps) => React.ReactNode` | - | Switch content or field render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### SwitchRenderProps
+### Switch.Button Props
 
-When using the render prop pattern, these values are provided:
+The clickable `<label>` that wraps the control and label text. Put the `Label` inside it; keep `Description`/`FieldError` as siblings of `Switch.Button`. Optional for switches with no label — render `Switch.Control` directly inside `Switch` (with an `aria-label`) and the control becomes the clickable target.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode \| (values: SwitchButtonRenderProps) => React.ReactNode` | - | Button content (control + label), or a button render prop |
+| `className` | `string \| (values: SwitchButtonRenderProps) => string` | - | Classes applied to the clickable label |
+
+### SwitchFieldRenderProps
+
+When using a render prop on the root `Switch`, these field-level values are provided:
 
 | Prop | Type | Description |
 |------|------|-------------|
 | `isSelected` | `boolean` | Whether the switch is currently on |
-| `isHovered` | `boolean` | Whether the switch is hovered |
-| `isPressed` | `boolean` | Whether the switch is currently pressed |
-| `isFocused` | `boolean` | Whether the switch is focused |
-| `isFocusVisible` | `boolean` | Whether the switch is keyboard focused |
 | `isDisabled` | `boolean` | Whether the switch is disabled |
 | `isReadOnly` | `boolean` | Whether the switch is read only |
-| `state` | `-` | State of the switch. |
+| `isInvalid` | `boolean` | Whether the switch is invalid |
+| `isRequired` | `boolean` | Whether the switch is required |
+| `state` | `ToggleState` | State of the switch |
+
+### SwitchButtonRenderProps
+
+`Switch.Control` uses button-level render props (`isHovered`, `isPressed`, `isFocusVisible`, etc.). Pass a function as `Switch.Control` children to access them.
 
 ### SwitchGroup Props
 

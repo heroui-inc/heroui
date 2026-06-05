@@ -348,37 +348,41 @@ export function ComponentShowcase() {
             <h3 className="text-sm font-semibold text-muted">Controls</h3>
 
             <Checkbox defaultSelected name="notifications">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
+              <Checkbox.Button>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
                 <Label className="text-sm">Enable notifications</Label>
-              </Checkbox.Content>
+              </Checkbox.Button>
             </Checkbox>
 
             <Checkbox name="marketing">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
-              <Checkbox.Content>
+              <Checkbox.Button>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
                 <Label className="text-sm">Marketing emails</Label>
-              </Checkbox.Content>
+              </Checkbox.Button>
             </Checkbox>
 
             <Separator />
 
             <Switch defaultSelected>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Dark mode</Label>
+              <Switch.Button>
+                <Switch.Control>
+                  <Switch.Thumb />
+                </Switch.Control>
+                <Label className="text-sm">Dark mode</Label>
+              </Switch.Button>
             </Switch>
 
             <Switch>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Auto-save</Label>
+              <Switch.Button>
+                <Switch.Control>
+                  <Switch.Thumb />
+                </Switch.Control>
+                <Label className="text-sm">Auto-save</Label>
+              </Switch.Button>
             </Switch>
           </div>
 

@@ -1,6 +1,6 @@
 /* Field error styles */
 .field-error {
-  @apply h-0 px-1 text-xs wrap-break-word text-danger opacity-0 data-[visible=true]:h-auto data-[visible=true]:opacity-100;
+  @apply h-0 px-1 text-xs wrap-break-word text-danger opacity-0 data-visible:h-auto data-visible:opacity-100;
 
   /**
    * Transitions
@@ -10,4 +10,18 @@
     opacity 150ms var(--ease-out),
     height 350ms var(--ease-smooth);
   @apply motion-reduce:transition-none;
+}
+
+/*
+ * Toggle fields (checkbox/switch): stack below the label like description.
+ * Disable collapsible height/opacity — those styles break flex-col content layout.
+ */
+.checkbox > .field-error,
+.checkbox > [data-slot="field-error"],
+.switch > .field-error,
+.switch > [data-slot="field-error"],
+.radio > .field-error,
+.radio > [data-slot="field-error"] {
+  @apply m-0 h-auto min-h-0 p-0 text-muted opacity-100;
+  transition: none;
 }

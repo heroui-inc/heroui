@@ -5,7 +5,7 @@ import {tv} from "tailwind-variants";
 export const radioVariants = tv({
   slots: {
     base: "radio",
-    content: "radio__content",
+    button: "radio__button",
     control: "radio__control",
     indicator: "radio__indicator",
   },

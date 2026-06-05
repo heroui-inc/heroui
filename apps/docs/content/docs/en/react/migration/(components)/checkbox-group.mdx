@@ -35,28 +35,28 @@ export default function App() {
     <CheckboxGroup name="interests">
       <Label>Select interests</Label>
       <Checkbox value="coding">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Coding</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Design</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Writing</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
     </CheckboxGroup>
   );
@@ -78,7 +78,7 @@ export default function App() {
 ### 3. Checkbox Structure
 
 **v2:** Simple Checkbox components with children as labels  
-**v3:** Compound Checkbox components with `Checkbox.Control`, `Checkbox.Indicator`, and `Checkbox.Content`
+**v3:** Compound Checkbox components with `Checkbox.Button`, `Checkbox.Control`, and `Checkbox.Indicator`
 
 ### 4. Event Handler
 
@@ -126,28 +126,28 @@ export default function App() {
     >
       <Label>Select interests</Label>
       <Checkbox value="coding">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Coding</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Design</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Writing</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
     </CheckboxGroup>
     ```
@@ -157,7 +157,7 @@ export default function App() {
 ## Summary
 
 - Keep using `CheckboxGroup`; replace `label` prop with `Label` component as a child
-- Update Checkbox children to use compound component structure (`Checkbox.Control`, `Checkbox.Indicator`, `Checkbox.Content`)
+- Update Checkbox children to use compound component structure (`Checkbox.Button`, `Checkbox.Control`, `Checkbox.Indicator`)
 - Change `onValueChange` to `onChange`
 - Add `name` prop for form integration
 - Built on React Aria Components for accessibility

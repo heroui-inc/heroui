@@ -2,7 +2,7 @@
 title: RadioGroup 单选框组
 description: 用于从列表中选择单个选项的单选组。
 links:
-  rac: RadioGroup
+  rac: RadioField
   source: radio-group/radio-group.tsx
   styles: radio-group.css
   storybook: Components/Forms/RadioGroup
@@ -33,20 +33,28 @@ export default () => (
     <Label />
     <Description />
     <Radio value="option1">
-      <Radio.Control>
-        <Radio.Indicator>
-          <span>✓</span> {/* Custom indicator (optional) */}
-        </Radio.Indicator>
-      </Radio.Control>
-      <Radio.Content>
+      <Radio.Button> {/* 可点击区域：control + label */}
+        <Radio.Control>
+          <Radio.Indicator>
+            <span>✓</span> {/* Custom indicator (optional) */}
+          </Radio.Indicator>
+        </Radio.Control>
         <Label />
-        <Description />
-      </Radio.Content>
+      </Radio.Button>
+      <Description /> {/* 兄弟节点 — 位于按钮外部（通过 aria-describedby 关联） */}
+      <FieldError /> {/* 可选 — 单选项校验错误信息 */}
     </Radio>
-    <FieldError />
+    <FieldError /> {/* 可选 — 组级校验 */}
   </RadioGroup>
 )
 ```
+
+<Callout type="warn">
+  将 `Label` 放在 `Radio.Button` **内部**（它构成单选项的无障碍名称），并将
+  `Description`/`FieldError` 作为 `Radio.Button` **外部的兄弟节点**，使其通过
+  `aria-describedby` 关联，而不会被并入名称。对于整张卡片都可点击的卡片式选项，
+  可以把所有内容都放进 `Radio.Button`。
+</Callout>
 
 ### 自定义指示器
 
@@ -238,8 +246,8 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 | `value` | `string` | - | 单选项的值 |
 | `isDisabled` | `boolean` | `false` | 是否禁用该单选项 |
 | `name` | `string` | - | 单选项名称，用于提交 HTML 表单 |
-| `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | 单选内容或渲染 prop |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+| `children` | `React.ReactNode \| (values: RadioFieldRenderProps) => React.ReactNode` | - | 单选内容或字段级渲染 prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioFieldRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
 ### Radio.Control Props
 
@@ -255,27 +263,28 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `children` | `React.ReactNode \| (values: RadioRenderProps) => React.ReactNode` | - | 可选内容或接收当前单选状态的渲染 prop。 |
+| `children` | `React.ReactNode \| (values: RadioButtonRenderProps) => React.ReactNode` | - | 可选内容或接收当前单选按钮状态的渲染 prop。 |
 
-### Radio.Content Props
+### Radio.Button Props
 
-继承 `React.HTMLAttributes<HTMLDivElement>`。
+单选项的可点击区域（包裹隐藏 input 的 `<label>`）。请将 `Radio.Control` 与 `Label` 放在其中。`className` 支持接收 `RadioButtonRenderProps` 的渲染函数。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `children` | `React.ReactNode` | - | 内容包裹层内要渲染的内容（通常为 Label 与 Description） |
+| `children` | `React.ReactNode \| (values: RadioButtonRenderProps) => React.ReactNode` | - | 可点击内容（通常为 Radio.Control 与 Label） |
 
-### RadioRenderProps
+### RadioFieldRenderProps
 
-使用渲染 prop 模式时，会提供以下值：
+在根级 `Radio` 上使用渲染 prop 时，会提供以下字段级值：
 
 | Prop | 类型 | 描述 |
 |------|------|------|
 | `isSelected` | `boolean` | 单选项是否已选中 |
-| `isHovered` | `boolean` | 是否悬停 |
-| `isPressed` | `boolean` | 是否按下 |
-| `isFocused` | `boolean` | 是否聚焦 |
-| `isFocusVisible` | `boolean` | 是否为键盘可见焦点 |
 | `isDisabled` | `boolean` | 是否禁用 |
 | `isReadOnly` | `boolean` | 是否只读 |
 | `isInvalid` | `boolean` | 是否无效 |
+| `isRequired` | `boolean` | 是否必填 |
+
+### RadioButtonRenderProps
+
+`Radio.Control` 和 `Radio.Indicator` 使用按钮级渲染 prop（`isHovered`、`isPressed`、`isFocusVisible` 等）。将函数作为 `Radio.Control` 子节点或传给 `Radio.Indicator` 即可访问它们。

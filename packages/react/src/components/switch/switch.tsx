@@ -3,51 +3,90 @@
 import type {DOMRenderProps} from "../../utils/dom";
 import type {SwitchVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
+import type {SwitchButtonRenderProps, SwitchFieldRenderProps} from "react-aria-components/Switch";
 
 import {switchVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
-import {Switch as SwitchPrimitive} from "react-aria-components/Switch";
+import React, {createContext, useContext, useId} from "react";
+import {
+  SwitchButton as SwitchButtonPrimitive,
+  SwitchField as SwitchFieldPrimitive,
+} from "react-aria-components/Switch";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
-/* -------------------------------------------------------------------------------------------------
- * Switch Context
- * -----------------------------------------------------------------------------------------------*/
-interface SwitchContext {
+import {SwitchButtonContext, SwitchFieldIdContext} from "./switch-context";
+
+interface SwitchFieldContextValue {
   slots?: ReturnType<typeof switchVariants>;
+  fieldState?: SwitchFieldRenderProps;
 }
 
-const SwitchContext = createContext<SwitchContext>({});
+const SwitchFieldContext = createContext<SwitchFieldContextValue>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Switch Root
+ * Switch (Field) — React Aria `SwitchField`. RSC-safe: it does not inspect children.
  * -----------------------------------------------------------------------------------------------*/
-interface SwitchRootProps extends ComponentPropsWithRef<typeof SwitchPrimitive>, SwitchVariants {}
+interface SwitchRootProps
+  extends ComponentPropsWithRef<typeof SwitchFieldPrimitive>, SwitchVariants {}
 
-const SwitchRoot = ({children, className, size, ...props}: SwitchRootProps) => {
+const SwitchRoot = ({children, className, id, size, ...props}: SwitchRootProps) => {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
   const slots = React.useMemo(() => switchVariants({size}), [size]);
 
   return (
-    <SwitchContext value={{slots}}>
-      <SwitchPrimitive
-        data-slot="switch"
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </SwitchPrimitive>
-    </SwitchContext>
+    <SwitchFieldPrimitive
+      data-slot="switch"
+      id={inputId}
+      {...props}
+      className={composeTwRenderProps(className, slots.base())}
+    >
+      {(fieldState) => (
+        <SwitchFieldIdContext value={{inputId}}>
+          <SwitchFieldContext value={{slots, fieldState}}>
+            {typeof children === "function" ? children(fieldState) : children}
+          </SwitchFieldContext>
+        </SwitchFieldIdContext>
+      )}
+    </SwitchFieldPrimitive>
   );
 };
 
+SwitchRoot.displayName = "HeroUI.Switch";
+
 /* -------------------------------------------------------------------------------------------------
- * Switch Control
+ * Switch.Button — clickable `SwitchButton` label wrapping the control + `Label`.
+ * Keep `Description`/`FieldError` as siblings of `Switch.Button`.
  * -----------------------------------------------------------------------------------------------*/
+interface SwitchButtonRootProps extends ComponentPropsWithRef<typeof SwitchButtonPrimitive> {}
+
+const SwitchButtonRoot = ({children, className, ...props}: SwitchButtonRootProps) => {
+  const {slots} = useContext(SwitchFieldContext);
+
+  return (
+    <SwitchButtonPrimitive
+      data-slot="switch-button"
+      {...props}
+      className={composeTwRenderProps(className, slots?.button())}
+    >
+      {(buttonState) => (
+        <SwitchButtonContext value={{buttonState}}>
+          {typeof children === "function" ? children(buttonState) : children}
+        </SwitchButtonContext>
+      )}
+    </SwitchButtonPrimitive>
+  );
+};
+
+SwitchButtonRoot.displayName = "HeroUI.Switch.Button";
+
+/* -----------------------------------------------------------------------------------------------*/
+
 interface SwitchControlProps<
   E extends keyof React.JSX.IntrinsicElements = "span",
 > extends DOMRenderProps<E, undefined> {
-  children?: ReactNode;
+  children?: ReactNode | ((props: SwitchButtonRenderProps) => ReactNode);
   className?: string;
 }
 
@@ -56,22 +95,37 @@ const SwitchControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: SwitchControlProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchControlProps<E>>) => {
-  const {slots} = useContext(SwitchContext);
+  const {slots} = useContext(SwitchFieldContext);
+  const {buttonState} = useContext(SwitchButtonContext);
 
-  return (
+  const control = (
     <dom.span
       className={composeSlotClassName(slots?.control, className)}
       data-slot="switch-control"
       {...(props as any)}
     >
-      {children}
+      {typeof children === "function"
+        ? children(buttonState ?? ({} as SwitchButtonRenderProps))
+        : children}
     </dom.span>
+  );
+
+  if (buttonState != null) {
+    return control;
+  }
+
+  // Control-only: self-wrap so the control is the clickable target (RSC-safe).
+  return (
+    <SwitchButtonPrimitive className={slots?.button()} data-slot="switch-button">
+      {(state) => <SwitchButtonContext value={{buttonState: state}}>{control}</SwitchButtonContext>}
+    </SwitchButtonPrimitive>
   );
 };
 
-/* -------------------------------------------------------------------------------------------------
- * Switch Thumb
- * -----------------------------------------------------------------------------------------------*/
+SwitchControl.displayName = "HeroUI.Switch.Control";
+
+/* -----------------------------------------------------------------------------------------------*/
+
 interface SwitchThumbProps<
   E extends keyof React.JSX.IntrinsicElements = "span",
 > extends DOMRenderProps<E, undefined> {
@@ -84,7 +138,7 @@ const SwitchThumb = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: SwitchThumbProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchThumbProps<E>>) => {
-  const {slots} = useContext(SwitchContext);
+  const {slots} = useContext(SwitchFieldContext);
 
   return (
     <dom.span
@@ -97,9 +151,10 @@ const SwitchThumb = <E extends keyof React.JSX.IntrinsicElements = "span">({
   );
 };
 
-/* -------------------------------------------------------------------------------------------------
- * Switch Icon
- * -----------------------------------------------------------------------------------------------*/
+SwitchThumb.displayName = "HeroUI.Switch.Thumb";
+
+/* -----------------------------------------------------------------------------------------------*/
+
 interface SwitchIconProps<
   E extends keyof React.JSX.IntrinsicElements = "span",
 > extends DOMRenderProps<E, undefined> {
@@ -112,7 +167,7 @@ const SwitchIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: SwitchIconProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchIconProps<E>>) => {
-  const {slots} = useContext(SwitchContext);
+  const {slots} = useContext(SwitchFieldContext);
 
   return (
     <dom.span
@@ -125,43 +180,18 @@ const SwitchIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
   );
 };
 
-/* -------------------------------------------------------------------------------------------------
- * Switch Content
- * -----------------------------------------------------------------------------------------------*/
-interface SwitchContentProps<
-  E extends keyof React.JSX.IntrinsicElements = "div",
-> extends DOMRenderProps<E, undefined> {
-  children?: ReactNode;
-  className?: string;
-}
+SwitchIcon.displayName = "HeroUI.Switch.Icon";
 
-const SwitchContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
-  children,
-  className,
-  ...props
-}: SwitchContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchContentProps<E>>) => {
-  const {slots} = useContext(SwitchContext);
+/* ----------------------------------------------------------------------------------------------*/
 
-  return (
-    <dom.div
-      className={composeSlotClassName(slots?.content, className)}
-      data-slot="switch-content"
-      {...(props as any)}
-    >
-      {children}
-    </dom.div>
-  );
-};
-
-/* -------------------------------------------------------------------------------------------------
- * Exports
- * -----------------------------------------------------------------------------------------------*/
-export {SwitchRoot, SwitchControl, SwitchThumb, SwitchIcon, SwitchContent};
-
+export {SwitchRoot, SwitchButtonRoot, SwitchControl, SwitchThumb, SwitchIcon};
+export {SwitchButtonContext, SwitchFieldIdContext} from "./switch-context";
 export type {
   SwitchRootProps,
+  SwitchButtonRootProps,
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,
-  SwitchContentProps,
+  SwitchFieldRenderProps,
+  SwitchButtonRenderProps,
 };

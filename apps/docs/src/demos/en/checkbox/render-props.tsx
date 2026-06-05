@@ -7,17 +7,15 @@ export function RenderProps() {
     <Checkbox id="render-props-terms">
       {({isSelected}) => (
         <>
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
-          <Checkbox.Content>
-            <Label htmlFor="render-props-terms">
-              {isSelected ? "Terms accepted" : "Accept terms"}
-            </Label>
-            <Description>
-              {isSelected ? "Thank you for accepting" : "Please read and accept the terms"}
-            </Description>
-          </Checkbox.Content>
+          <Checkbox.Button>
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            <Label>{isSelected ? "Terms accepted" : "Accept terms"}</Label>
+          </Checkbox.Button>
+          <Description>
+            {isSelected ? "Thank you for accepting" : "Please read and accept the terms"}
+          </Description>
         </>
       )}
     </Checkbox>

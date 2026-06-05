@@ -4,13 +4,13 @@ export function WithDescription() {
   return (
     <div className="max-w-sm">
       <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Switch.Content>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
           <Label className="text-sm">Public profile</Label>
-          <Description>Allow others to see your profile information</Description>
-        </Switch.Content>
+        </Switch.Button>
+        <Description>Allow others to see your profile information</Description>
       </Switch>
     </div>
   );

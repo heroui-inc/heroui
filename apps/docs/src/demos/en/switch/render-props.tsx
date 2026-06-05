@@ -6,14 +6,12 @@ export function RenderProps() {
   return (
     <Switch>
       {({isSelected}) => (
-        <>
+        <Switch.Button>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Switch.Content>
-            <Label className="text-sm">{isSelected ? "Enabled" : "Disabled"}</Label>
-          </Switch.Content>
-        </>
+          <Label className="text-sm">{isSelected ? "Enabled" : "Disabled"}</Label>
+        </Switch.Button>
       )}
     </Switch>
   );

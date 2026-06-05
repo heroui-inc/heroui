@@ -63,24 +63,22 @@ export function DeliveryAndPayment() {
           <Label>配送方式</Label>
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
-              <Radio
-                key={option.value}
-                value={option.value}
-                className={clsx(
-                  "group relative flex-col gap-4 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
-                  "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
-                )}
-              >
-                <Radio.Control className="absolute top-3 right-4 size-5">
-                  <Radio.Indicator />
-                </Radio.Control>
-                <Radio.Content className="flex flex-col gap-6">
+              <Radio key={option.value} value={option.value}>
+                <Radio.Button
+                  className={clsx(
+                    "group relative flex w-full flex-col gap-6 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
+                    "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
+                  )}
+                >
+                  <Radio.Control className="absolute top-3 right-4 size-5">
+                    <Radio.Indicator />
+                  </Radio.Control>
                   <div className="flex flex-col gap-1">
                     <Label>{option.title}</Label>
                     <Description>{option.description}</Description>
                   </div>
                   <span className="text-sm font-semibold">{option.price}</span>
-                </Radio.Content>
+                </Radio.Button>
               </Radio>
             ))}
           </div>
@@ -93,24 +91,22 @@ export function DeliveryAndPayment() {
           </div>
           <div className="grid gap-x-4 md:grid-cols-2">
             {paymentOptions.map((option) => (
-              <Radio
-                key={option.value}
-                value={option.value}
-                className={clsx(
-                  "group relative flex-col gap-4 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all",
-                  "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
-                )}
-              >
-                <Radio.Control className="absolute top-3 right-4 size-5">
-                  <Radio.Indicator />
-                </Radio.Control>
-                <Radio.Content className="flex flex-row items-start justify-start gap-4">
+              <Radio key={option.value} value={option.value}>
+                <Radio.Button
+                  className={clsx(
+                    "group relative flex w-full flex-row items-start justify-start gap-4 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all",
+                    "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
+                  )}
+                >
+                  <Radio.Control className="absolute top-3 right-4 size-5">
+                    <Radio.Indicator />
+                  </Radio.Control>
                   <Icon className="size-6" icon={option.icon} />
                   <div className="flex flex-col gap-1">
                     <Label>{option.title}</Label>
                     <Description>{option.description}</Description>
                   </div>
-                </Radio.Content>
+                </Radio.Button>
               </Radio>
             ))}
           </div>

@@ -8,16 +8,14 @@ export function Controlled() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-3">
-        <Checkbox id="email-notifications" isSelected={isSelected} onChange={setIsSelected}>
+      <Checkbox id="email-notifications" isSelected={isSelected} onChange={setIsSelected}>
+        <Checkbox.Button>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Checkbox.Content>
-            <Label htmlFor="email-notifications">Email notifications</Label>
-          </Checkbox.Content>
-        </Checkbox>
-      </div>
+          <Label>Email notifications</Label>
+        </Checkbox.Button>
+      </Checkbox>
       <p className="text-sm text-muted">
         Status: <span className="font-medium">{isSelected ? "Enabled" : "Disabled"}</span>
       </p>

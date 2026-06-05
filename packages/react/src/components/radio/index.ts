@@ -1,36 +1,40 @@
 import type {ComponentProps} from "react";
 
-import {RadioContent, RadioControl, RadioIndicator, RadioRoot} from "./radio";
+import {RadioButtonRoot, RadioControl, RadioIndicator, RadioRoot} from "./radio";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const Radio = Object.assign(RadioRoot, {
   Root: RadioRoot,
+  Button: RadioButtonRoot,
   Control: RadioControl,
   Indicator: RadioIndicator,
-  Content: RadioContent,
 });
 
 export type Radio = {
   Props: ComponentProps<typeof RadioRoot>;
   RootProps: ComponentProps<typeof RadioRoot>;
+  ButtonProps: ComponentProps<typeof RadioButtonRoot>;
   ControlProps: ComponentProps<typeof RadioControl>;
   IndicatorProps: ComponentProps<typeof RadioIndicator>;
-  ContentProps: ComponentProps<typeof RadioContent>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {RadioContent, RadioControl, RadioIndicator, RadioRoot};
+export {RadioButtonRoot, RadioControl, RadioIndicator, RadioRoot};
+
+export {RadioButtonContext, RadioFieldIdContext} from "./radio";
 
 export type {
   RadioRootProps,
   RadioRootProps as RadioProps,
+  RadioButtonRootProps,
   RadioControlProps,
   RadioIndicatorProps,
-  RadioContentProps,
+  RadioFieldRenderProps,
+  RadioButtonRenderProps,
 } from "./radio";
 
 /* -------------------------------------------------------------------------------------------------

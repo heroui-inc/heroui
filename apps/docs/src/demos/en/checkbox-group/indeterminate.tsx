@@ -17,38 +17,38 @@ export function Indeterminate() {
           setSelected(isSelected ? allOptions : []);
         }}
       >
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
-        <Checkbox.Content>
+        <Checkbox.Button>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
           <Label>Select all</Label>
-        </Checkbox.Content>
+        </Checkbox.Button>
       </Checkbox>
       <div className="ml-6 flex flex-col gap-2">
         <CheckboxGroup value={selected} onChange={setSelected}>
           <Checkbox value="coding">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Content>
+            <Checkbox.Button>
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
               <Label>Coding</Label>
-            </Checkbox.Content>
+            </Checkbox.Button>
           </Checkbox>
           <Checkbox value="design">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Content>
+            <Checkbox.Button>
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
               <Label>Design</Label>
-            </Checkbox.Content>
+            </Checkbox.Button>
           </Checkbox>
           <Checkbox value="writing">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Content>
+            <Checkbox.Button>
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
               <Label>Writing</Label>
-            </Checkbox.Content>
+            </Checkbox.Button>
           </Checkbox>
         </CheckboxGroup>
       </div>

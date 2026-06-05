@@ -23,22 +23,28 @@ export const Default: Story = {
   render: () => (
     <SwitchGroup>
       <Switch name="notifications">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label className="text-sm">Allow Notifications</Label>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Allow Notifications</Label>
+        </Switch.Button>
       </Switch>
       <Switch name="marketing">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label className="text-sm">Marketing emails</Label>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Marketing emails</Label>
+        </Switch.Button>
       </Switch>
       <Switch name="social">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label className="text-sm">Social media updates</Label>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Social media updates</Label>
+        </Switch.Button>
       </Switch>
     </SwitchGroup>
   ),
@@ -48,22 +54,28 @@ export const Horizontal: Story = {
   render: () => (
     <SwitchGroup className="overflow-x-auto" orientation="horizontal">
       <Switch name="notifications">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label className="text-sm">Notifications</Label>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Notifications</Label>
+        </Switch.Button>
       </Switch>
       <Switch name="marketing">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label className="text-sm">Marketing</Label>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Marketing</Label>
+        </Switch.Button>
       </Switch>
       <Switch name="social">
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label className="text-sm">Social</Label>
+        <Switch.Button>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          <Label className="text-sm">Social</Label>
+        </Switch.Button>
       </Switch>
     </SwitchGroup>
   ),
@@ -86,22 +98,28 @@ export const Form: Story = {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <SwitchGroup>
           <Switch name="notifications" value="on">
-            <Switch.Control>
-              <Switch.Thumb />
-            </Switch.Control>
-            <Label className="text-sm">Enable notifications</Label>
+            <Switch.Button>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+              <Label className="text-sm">Enable notifications</Label>
+            </Switch.Button>
           </Switch>
           <Switch defaultSelected name="newsletter" value="on">
-            <Switch.Control>
-              <Switch.Thumb />
-            </Switch.Control>
-            <Label className="text-sm">Subscribe to newsletter</Label>
+            <Switch.Button>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+              <Label className="text-sm">Subscribe to newsletter</Label>
+            </Switch.Button>
           </Switch>
           <Switch name="marketing" value="on">
-            <Switch.Control>
-              <Switch.Thumb />
-            </Switch.Control>
-            <Label className="text-sm">Receive marketing updates</Label>
+            <Switch.Button>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+              <Label className="text-sm">Receive marketing updates</Label>
+            </Switch.Button>
           </Switch>
         </SwitchGroup>
         <Button className="mt-4" size="sm" type="submit" variant="primary">

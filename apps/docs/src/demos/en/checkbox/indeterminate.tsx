@@ -17,13 +17,13 @@ export function Indeterminate() {
         setIsIndeterminate(false);
       }}
     >
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
-      <Checkbox.Content>
-        <Label htmlFor="select-all">Select all</Label>
-        <Description>Shows indeterminate state (dash icon)</Description>
-      </Checkbox.Content>
+      <Checkbox.Button>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+        <Label>Select all</Label>
+      </Checkbox.Button>
+      <Description>Shows indeterminate state (dash icon)</Description>
     </Checkbox>
   );
 }

@@ -6,31 +6,31 @@ export function Horizontal() {
       <Label>订阅套餐</Label>
       <RadioGroup defaultValue="pro" name="plan-orientation" orientation="horizontal">
         <Radio value="starter">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <Radio.Button>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
             <Label>入门版</Label>
-            <Description>适合副项目</Description>
-          </Radio.Content>
+          </Radio.Button>
+          <Description>适合副项目</Description>
         </Radio>
         <Radio value="pro">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <Radio.Button>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
             <Label>专业版</Label>
-            <Description>高级报表</Description>
-          </Radio.Content>
+          </Radio.Button>
+          <Description>高级报表</Description>
         </Radio>
         <Radio value="teams">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
+          <Radio.Button>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
             <Label>团队版</Label>
-            <Description>最多 10 名队友</Description>
-          </Radio.Content>
+          </Radio.Button>
+          <Description>最多 10 名队友</Description>
         </Radio>
       </RadioGroup>
     </div>
