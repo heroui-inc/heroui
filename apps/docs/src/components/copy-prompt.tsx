@@ -4,6 +4,7 @@ import {Button} from "@heroui/react";
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
 
 import {Iconify} from "@/components/iconify";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 /**
@@ -42,6 +43,7 @@ export interface CopyPromptProps {
  * toggle state from `useCopyButton` must run in the browser.
  */
 export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}: CopyPromptProps) {
+  const dict = useDictionary().copyPrompt;
   const [checked, onClick] = useCopyButton(() => {
     void navigator.clipboard.writeText(prompt);
   });
@@ -59,7 +61,7 @@ export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}
       </div>
       <div className="prose-no-margin min-w-0 flex-1 leading-relaxed">{children}</div>
       <Button
-        aria-label={checked ? "Prompt copied to clipboard" : "Copy prompt to clipboard"}
+        aria-label={checked ? dict.ariaLabelCopied : dict.ariaLabelCopy}
         className="shrink-0"
         isDisabled={checked}
         size="sm"
@@ -70,12 +72,12 @@ export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}
         {checked ? (
           <>
             <Iconify icon="check" />
-            Copied
+            {dict.copied}
           </>
         ) : (
           <>
             <Iconify icon="copy" />
-            Copy prompt
+            {dict.copy}
           </>
         )}
       </Button>
