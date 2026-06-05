@@ -1,5 +1,7 @@
 # AGENTS.md
 
+> **Note:** This repository is a personal fork of HeroUI (formerly NextUI).
+
 Instructions for AI agents working with the HeroUI v3 repository.
 
 ## Repository Overview
