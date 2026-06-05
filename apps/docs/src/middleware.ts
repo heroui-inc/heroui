@@ -79,7 +79,14 @@ function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): 
   return response;
 }
 
-export function proxy(request: NextRequest) {
+// NOTE: This file is intentionally named `middleware.ts` (the deprecated
+// Next.js 16 convention) instead of `proxy.ts`. `@opennextjs/cloudflare`
+// only supports the Edge runtime for request interception, while Next.js
+// 16's new `proxy.ts` runs on Node.js, which OpenNext rejects with:
+//   "ERROR Node.js middleware is not currently supported."
+// See https://github.com/opennextjs/opennextjs-cloudflare/issues/962.
+// Switch back to `proxy.ts` when OpenNext ships proxy support.
+export function middleware(request: NextRequest) {
   const {pathname} = request.nextUrl;
 
   // Markdown handler runs first so agent requests are served regardless of locale.
