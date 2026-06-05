@@ -78,7 +78,11 @@ const config: NextConfig = {
         source: "/:lang(en|cn)/docs/:path*.mdx",
       },
       {
-        destination: "/llms.mdx/:path*",
+        // No-locale form maps to the default-locale prerendered route.
+        // We only ship the locale-prefixed routes (see generateStaticParams
+        // in app/llms.mdx/[...slug]/route.ts) to keep the Worker bundle
+        // under Cloudflare's 64 MiB cap.
+        destination: "/llms.mdx/en/:path*",
         source: "/docs/:path*.mdx",
       },
     ];

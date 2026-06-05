@@ -45,22 +45,14 @@ export async function GET(_req: NextRequest, {params}: {params: Promise<{slug: s
 }
 
 export function generateStaticParams() {
+  // Only emit locale-prefixed routes. The no-prefix form is served by
+  // middleware via an internal rewrite — see middleware.ts.
   return source
     .generateParams()
     .filter((param) => param.slug?.length > 0)
-    .flatMap((param) => {
-      const lang = (param as {lang?: string}).lang;
-      const entries: Array<{slug: string[]}> = [];
+    .map((param) => {
+      const lang = (param as {lang?: string}).lang ?? i18n.defaultLanguage;
 
-      if (lang) {
-        entries.push({slug: [lang, ...param.slug]});
-        if (lang === i18n.defaultLanguage) {
-          entries.push({slug: param.slug});
-        }
-      } else {
-        entries.push({slug: param.slug});
-      }
-
-      return entries;
+      return {slug: [lang, ...param.slug]};
     });
 }

@@ -79,6 +79,24 @@ function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): 
   return response;
 }
 
+// Matches `/llms.mdx/<seg>/...` and `/llms-raw.mdx/<seg>/...`.
+const LLMS_MDX_PATH_PATTERN = /^\/(llms-raw\.mdx|llms\.mdx)\/([^/]+)(\/.*)?$/;
+
+// If a request hits `/llms.mdx/foo/bar` (no locale segment), return the
+// equivalent default-locale path `/llms.mdx/en/foo/bar`. Returns null when
+// the path already has a valid locale or doesn't match these routes.
+function getLLMSMdxRewriteTarget(pathname: string): string | null {
+  const match = pathname.match(LLMS_MDX_PATH_PATTERN);
+
+  if (!match) return null;
+
+  const [, prefix, firstSeg, rest] = match;
+
+  if (SUPPORTED_LOCALES.has(firstSeg)) return null;
+
+  return `/${prefix}/${DEFAULT_LOCALE}/${firstSeg}${rest ?? ""}`;
+}
+
 // NOTE: This file is intentionally named `middleware.ts` (the deprecated
 // Next.js 16 convention) instead of `proxy.ts`. `@opennextjs/cloudflare`
 // only supports the Edge runtime for request interception, while Next.js
@@ -88,6 +106,20 @@ function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): 
 // Switch back to `proxy.ts` when OpenNext ships proxy support.
 export function middleware(request: NextRequest) {
   const {pathname} = request.nextUrl;
+
+  // No-locale form of /llms.mdx/* and /llms-raw.mdx/* is internally rewritten
+  // to the default-locale path. The browser/crawler URL stays the same, but
+  // the response comes from the single locale-prefixed prerendered route.
+  // This halves the prerender count for these endpoints.
+  const llmsTarget = getLLMSMdxRewriteTarget(pathname);
+
+  if (llmsTarget) {
+    const url = request.nextUrl.clone();
+
+    url.pathname = llmsTarget;
+
+    return NextResponse.rewrite(url);
+  }
 
   // Markdown handler runs first so agent requests are served regardless of locale.
   if (
