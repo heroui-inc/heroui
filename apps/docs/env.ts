@@ -35,4 +35,8 @@ export const env = createEnv({
     LOOPS_API_KEY: z.string().min(1),
     NODE_ENV: z.enum(["development", "production"]).default("development"),
   },
+  // Honor SKIP_ENV_VALIDATION at build time. Server secrets are provided
+  // to the running Worker via Cloudflare-managed secrets (not the build env)
+  // so they're legitimately absent during `next build`.
+  skipValidation: !!process.env["SKIP_ENV_VALIDATION"],
 });

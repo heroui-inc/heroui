@@ -69,6 +69,20 @@ jobs:
 
       - name: Build (Next.js + OpenNext worker bundle)
         working-directory: apps/docs
+        env:
+          # Skip @t3-oss/env-nextjs Zod validation at build time — server
+          # secrets (LOOPS_*, FEATUREBASE_*) are provided to the running
+          # Worker via Cloudflare-managed secrets, not the build environment.
+          SKIP_ENV_VALIDATION: "true"
+          # NEXT_PUBLIC_* values are inlined into the client bundle at
+          # build time, so they MUST be present here (not just at runtime).
+          NEXT_PUBLIC_APP_ENV: ${{ vars.NEXT_PUBLIC_APP_ENV || 'production' }}
+          NEXT_PUBLIC_CDN_URL: ${{ secrets.NEXT_PUBLIC_CDN_URL || 'https://heroui-assets.nyc3.cdn.digitaloceanspaces.com' }}
+          NEXT_PUBLIC_POSTHOG_HOST: ${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
+          NEXT_PUBLIC_POSTHOG_KEY: ${{ secrets.NEXT_PUBLIC_POSTHOG_KEY }}
+          NEXT_PUBLIC_PRO_API_URL: ${{ secrets.NEXT_PUBLIC_PRO_API_URL || 'https://heroui.pro' }}
+          NEXT_PUBLIC_PRO_URL: ${{ secrets.NEXT_PUBLIC_PRO_URL || 'https://heroui.pro' }}
+          NEXT_PUBLIC_SHOW_PRE_SALE_BANNER: ${{ vars.NEXT_PUBLIC_SHOW_PRE_SALE_BANNER || 'false' }}
         run: pnpm build:cf
 
       - name: Deploy to Cloudflare Workers (production)
