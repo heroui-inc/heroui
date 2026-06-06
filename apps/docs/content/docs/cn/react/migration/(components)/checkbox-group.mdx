@@ -35,28 +35,28 @@ export default function App() {
     <CheckboxGroup name="interests">
       <Label>Select interests</Label>
       <Checkbox value="coding">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Coding</Label>
-        </Checkbox.Button>
+          Coding
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Design</Label>
-        </Checkbox.Button>
+          Design
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Writing</Label>
-        </Checkbox.Button>
+          Writing
+        </Checkbox.Content>
       </Checkbox>
     </CheckboxGroup>
   );
@@ -78,7 +78,7 @@ export default function App() {
 ### 3. Checkbox 结构
 
 **v2：** 简单的 Checkbox 组件，子节点直接作为标签  
-**v3：** 复合 Checkbox 组件，由 `Checkbox.Button`、`Checkbox.Control` 与 `Checkbox.Indicator` 组成
+**v3：** 复合 Checkbox 组件，由 `Checkbox.Content`、`Checkbox.Control` 与 `Checkbox.Indicator` 组成
 
 ### 4. 事件处理函数
 
@@ -126,28 +126,28 @@ export default function App() {
     >
       <Label>Select interests</Label>
       <Checkbox value="coding">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Coding</Label>
-        </Checkbox.Button>
+          Coding
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Design</Label>
-        </Checkbox.Button>
+          Design
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Writing</Label>
-        </Checkbox.Button>
+          Writing
+        </Checkbox.Content>
       </Checkbox>
     </CheckboxGroup>
     ```
@@ -157,7 +157,7 @@ export default function App() {
 ## 总结
 
 - 继续使用 `CheckboxGroup`；用 `Label` 子组件取代 `label` prop
-- 将 Checkbox 子项更新为复合组件结构（`Checkbox.Button`、`Checkbox.Control`、`Checkbox.Indicator`）
+- 将 Checkbox 子项更新为复合组件结构（`Checkbox.Content`、`Checkbox.Control`、`Checkbox.Indicator`）
 - 将 `onValueChange` 改为 `onChange`
 - 添加 `name` prop 以便集成到表单中
 - 基于 React Aria Components 构建，更易实现无障碍

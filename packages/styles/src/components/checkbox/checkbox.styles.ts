@@ -8,7 +8,7 @@ export const checkboxVariants = tv({
   },
   slots: {
     base: "checkbox",
-    button: "checkbox__button",
+    content: "checkbox__content",
     control: "checkbox__control",
     indicator: "checkbox__indicator",
   },

@@ -5,7 +5,7 @@ import {Calendar, DateField, DatePicker, Label} from "@heroui/react";
 export function CustomRenderFunction() {
   return (
     <DatePicker
-      className="w-64"
+      className="w-72"
       name="date"
       render={(props) => <div {...props} data-custom="date-picker" />}
     >

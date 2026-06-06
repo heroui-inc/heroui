@@ -25,12 +25,12 @@ type Story = StoryObj<typeof Checkbox>;
 export const Default: Story = {
   render: () => (
     <Checkbox name="terms">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Accept terms and conditions</Label>
-      </Checkbox.Button>
+        Accept terms and conditions
+      </Checkbox.Content>
     </Checkbox>
   ),
 };
@@ -41,24 +41,24 @@ export const Variants: Story = {
       <div className="flex flex-col gap-2">
         <p className="text-sm font-medium text-muted">Primary variant</p>
         <Checkbox name="primary" variant="primary">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Primary checkbox</Label>
-          </Checkbox.Button>
+            Primary checkbox
+          </Checkbox.Content>
           <Description>Standard styling with default background</Description>
         </Checkbox>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-sm font-medium text-muted">Secondary variant</p>
         <Checkbox name="secondary" variant="secondary">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Secondary checkbox</Label>
-          </Checkbox.Button>
+            Secondary checkbox
+          </Checkbox.Content>
           <Description>Lower emphasis variant for use in surfaces</Description>
         </Checkbox>
       </div>
@@ -69,12 +69,12 @@ export const Variants: Story = {
 export const WithDescription: Story = {
   render: () => (
     <Checkbox name="terms">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Accept terms and conditions</Label>
-      </Checkbox.Button>
+        Accept terms and conditions
+      </Checkbox.Content>
       <Description>I agree to the terms and privacy policy</Description>
     </Checkbox>
   ),
@@ -84,7 +84,7 @@ export const WithCustomIndicator: Story = {
   render: () => (
     <div className="flex gap-4 px-4">
       <Checkbox defaultSelected id="heart">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -99,11 +99,11 @@ export const WithCustomIndicator: Story = {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>Heart</Label>
-        </Checkbox.Button>
+          Heart
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox defaultSelected id="plus">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -128,11 +128,11 @@ export const WithCustomIndicator: Story = {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>Plus</Label>
-        </Checkbox.Button>
+          Plus
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox isIndeterminate id="indeterminate">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isIndeterminate}) =>
@@ -144,8 +144,8 @@ export const WithCustomIndicator: Story = {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>Indeterminate</Label>
-        </Checkbox.Button>
+          Indeterminate
+        </Checkbox.Content>
       </Checkbox>
     </div>
   ),
@@ -155,12 +155,12 @@ export const Indeterminate: Story = {
   render: () => {
     return (
       <Checkbox isIndeterminate id="select-all">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Select all</Label>
-        </Checkbox.Button>
+          Select all
+        </Checkbox.Content>
         <Description>Shows indeterminate state</Description>
       </Checkbox>
     );
@@ -170,9 +170,11 @@ export const Indeterminate: Story = {
 export const ControlOnly: Story = {
   render: () => (
     <Checkbox aria-label="Accept" name="control-only">
-      <Checkbox.Control>
-        <Checkbox.Indicator />
-      </Checkbox.Control>
+      <Checkbox.Content>
+        <Checkbox.Control>
+          <Checkbox.Indicator />
+        </Checkbox.Control>
+      </Checkbox.Content>
     </Checkbox>
   ),
 };
@@ -180,12 +182,12 @@ export const ControlOnly: Story = {
 export const Disabled: Story = {
   render: () => (
     <Checkbox isDisabled id="feature">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Feature</Label>
-      </Checkbox.Button>
+        Feature
+      </Checkbox.Content>
       <Description>This feature is coming soon</Description>
     </Checkbox>
   ),
@@ -198,12 +200,12 @@ export const Controlled: Story = {
     return (
       <div className="flex flex-col gap-3 px-4">
         <Checkbox id="notifications" isSelected={isSelected} onChange={setIsSelected}>
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Email notifications</Label>
-          </Checkbox.Button>
+            Email notifications
+          </Checkbox.Content>
         </Checkbox>
         <p className="mt-2 text-sm text-muted">
           Status: <span className="font-medium">{isSelected ? "Enabled" : "Disabled"}</span>
@@ -218,12 +220,12 @@ export const RenderProps: Story = {
     <Checkbox id="terms">
       {({isSelected}) => (
         <>
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>{isSelected ? "Terms accepted" : "Accept terms"}</Label>
-          </Checkbox.Button>
+            {isSelected ? "Terms accepted" : "Accept terms"}
+          </Checkbox.Content>
           <Description>
             {isSelected ? "Thank you for accepting" : "Please read and accept the terms"}
           </Description>
@@ -236,12 +238,12 @@ export const RenderProps: Story = {
 export const Invalid: Story = {
   render: () => (
     <Checkbox isInvalid isRequired name="agreement">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>I agree to the terms</Label>
-      </Checkbox.Button>
+        I agree to the terms
+      </Checkbox.Content>
       <FieldError>You must accept the terms to continue</FieldError>
     </Checkbox>
   ),
@@ -254,12 +256,12 @@ export const Validation: Story = {
       name="newsletter"
       validate={(isSelected) => (isSelected ? true : "Please subscribe to continue")}
     >
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Subscribe to newsletter</Label>
-      </Checkbox.Button>
+        Subscribe to newsletter
+      </Checkbox.Content>
       <FieldError />
     </Checkbox>
   ),
@@ -274,32 +276,32 @@ export const FullRounded: Story = {
           className="[&_[data-slot='checkbox-default-indicator--checkmark']]:size-2"
           id="small-rounded"
         >
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-3 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Small size</Label>
-          </Checkbox.Button>
+            Small size
+          </Checkbox.Content>
         </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
         <Checkbox id="default-rounded">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-4 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Default size</Label>
-          </Checkbox.Button>
+            Default size
+          </Checkbox.Content>
         </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
         <Checkbox id="large-rounded">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-5 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Large size</Label>
-          </Checkbox.Button>
+            Large size
+          </Checkbox.Content>
         </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
@@ -307,12 +309,12 @@ export const FullRounded: Story = {
           className="[&_[data-slot='checkbox-default-indicator--checkmark']]:size-4"
           id="xl-rounded"
         >
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-6 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Extra large size</Label>
-          </Checkbox.Button>
+            Extra large size
+          </Checkbox.Content>
         </Checkbox>
       </div>
     </div>
@@ -351,7 +353,7 @@ export const FeaturesAndAddOnsExample: Story = {
             <div className="flex flex-col gap-2">
               {addOns.map((addon) => (
                 <Checkbox key={addon.value} id={addon.value} value={addon.value}>
-                  <Checkbox.Button
+                  <Checkbox.Content
                     className={cx(
                       "group relative flex w-full flex-row items-start justify-start gap-4 rounded-3xl bg-surface-tertiary px-5 py-4 transition-all",
                       "data-[selected=true]:bg-accent/10",
@@ -362,10 +364,10 @@ export const FeaturesAndAddOnsExample: Story = {
                     </Checkbox.Control>
                     <Icon className="size-5 text-accent" icon={addon.icon} />
                     <div className="flex flex-col gap-1">
-                      <Label>{addon.title}</Label>
+                      <span>{addon.title}</span>
                       <Description>{addon.description}</Description>
                     </div>
-                  </Checkbox.Button>
+                  </Checkbox.Content>
                 </Checkbox>
               ))}
             </div>

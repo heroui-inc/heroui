@@ -1,6 +1,6 @@
 "use client";
 
-import {Checkbox, CheckboxGroup, Label} from "@heroui/react";
+import {Checkbox, CheckboxGroup} from "@heroui/react";
 import {useState} from "react";
 
 export function Indeterminate() {
@@ -17,38 +17,38 @@ export function Indeterminate() {
           setSelected(isSelected ? allOptions : []);
         }}
       >
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>全选</Label>
-        </Checkbox.Button>
+          全选
+        </Checkbox.Content>
       </Checkbox>
       <div className="ml-6 flex flex-col gap-2">
         <CheckboxGroup value={selected} onChange={setSelected}>
           <Checkbox value="coding">
-            <Checkbox.Button>
+            <Checkbox.Content>
               <Checkbox.Control>
                 <Checkbox.Indicator />
               </Checkbox.Control>
-              <Label>编程</Label>
-            </Checkbox.Button>
+              编程
+            </Checkbox.Content>
           </Checkbox>
           <Checkbox value="design">
-            <Checkbox.Button>
+            <Checkbox.Content>
               <Checkbox.Control>
                 <Checkbox.Indicator />
               </Checkbox.Control>
-              <Label>设计</Label>
-            </Checkbox.Button>
+              设计
+            </Checkbox.Content>
           </Checkbox>
           <Checkbox value="writing">
-            <Checkbox.Button>
+            <Checkbox.Content>
               <Checkbox.Control>
                 <Checkbox.Indicator />
               </Checkbox.Control>
-              <Label>写作</Label>
-            </Checkbox.Button>
+              写作
+            </Checkbox.Content>
           </Checkbox>
         </CheckboxGroup>
       </div>

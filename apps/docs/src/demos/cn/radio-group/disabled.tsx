@@ -6,30 +6,30 @@ export function Disabled() {
       <Label>订阅套餐</Label>
       <Description>我们正在发布更新，暂时无法更改套餐。</Description>
       <Radio value="starter">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>入门版</Label>
-        </Radio.Button>
+          入门版
+        </Radio.Content>
         <Description>适合副项目和小型团队</Description>
       </Radio>
       <Radio value="pro">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>专业版</Label>
-        </Radio.Button>
+          专业版
+        </Radio.Content>
         <Description>高级报表与分析</Description>
       </Radio>
       <Radio value="teams">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>团队版</Label>
-        </Radio.Button>
+          团队版
+        </Radio.Content>
         <Description>最多可与 10 名队友共享访问权限</Description>
       </Radio>
     </RadioGroup>

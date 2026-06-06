@@ -8,7 +8,7 @@ export function WithCustomIndicator() {
       <Label>Features</Label>
       <Description>Select the features you want</Description>
       <Checkbox value="notifications">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -27,12 +27,12 @@ export function WithCustomIndicator() {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>Email notifications</Label>
-        </Checkbox.Button>
+          Email notifications
+        </Checkbox.Content>
         <Description>Receive updates via email</Description>
       </Checkbox>
       <Checkbox value="newsletter">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -51,8 +51,8 @@ export function WithCustomIndicator() {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>Newsletter</Label>
-        </Checkbox.Button>
+          Newsletter
+        </Checkbox.Content>
         <Description>Get weekly newsletters</Description>
       </Checkbox>
     </CheckboxGroup>

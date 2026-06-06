@@ -1,13 +1,13 @@
 import type {ComponentProps} from "react";
 
-import {SwitchButtonRoot, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb} from "./switch";
+import {SwitchContent, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb} from "./switch";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const Switch = Object.assign(SwitchRoot, {
   Root: SwitchRoot,
-  Button: SwitchButtonRoot,
+  Content: SwitchContent,
   Control: SwitchControl,
   Thumb: SwitchThumb,
   Icon: SwitchIcon,
@@ -16,7 +16,7 @@ export const Switch = Object.assign(SwitchRoot, {
 export type Switch = {
   Props: ComponentProps<typeof SwitchRoot>;
   RootProps: ComponentProps<typeof SwitchRoot>;
-  ButtonProps: ComponentProps<typeof SwitchButtonRoot>;
+  ContentProps: ComponentProps<typeof SwitchContent>;
   ControlProps: ComponentProps<typeof SwitchControl>;
   ThumbProps: ComponentProps<typeof SwitchThumb>;
   IconProps: ComponentProps<typeof SwitchIcon>;
@@ -25,12 +25,12 @@ export type Switch = {
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {SwitchButtonRoot, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb};
+export {SwitchContent, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb};
 
 export type {
   SwitchRootProps,
   SwitchRootProps as SwitchProps,
-  SwitchButtonRootProps,
+  SwitchContentProps,
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,

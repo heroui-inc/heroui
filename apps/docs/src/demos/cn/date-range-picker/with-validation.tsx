@@ -20,7 +20,7 @@ export function WithValidation() {
   return (
     <DateRangePicker
       isRequired
-      className="w-72"
+      className="w-80"
       endName="endDate"
       isInvalid={isInvalid}
       minValue={currentDate}

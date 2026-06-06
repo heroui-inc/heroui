@@ -14,7 +14,7 @@ export function WithValidation() {
   return (
     <DatePicker
       isRequired
-      className="w-64"
+      className="w-72"
       isInvalid={isInvalid}
       minValue={currentDate}
       name="date"

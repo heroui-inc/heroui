@@ -37,7 +37,7 @@ export function FormExample() {
   };
 
   return (
-    <Form className="flex w-64 flex-col gap-3" onSubmit={handleSubmit}>
+    <Form className="flex w-72 flex-col gap-3" onSubmit={handleSubmit}>
       <DatePicker
         isRequired
         isInvalid={isInvalid}

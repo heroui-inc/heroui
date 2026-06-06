@@ -1,4 +1,4 @@
-import {Description, Label, Radio, RadioGroup} from "@heroui/react";
+import {Description, Radio, RadioGroup} from "@heroui/react";
 
 export function Variants() {
   return (
@@ -7,21 +7,21 @@ export function Variants() {
         <p className="text-sm font-medium text-muted">Primary variant</p>
         <RadioGroup defaultValue="option1" name="primary-plan" variant="primary">
           <Radio value="option1">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>Option 1</Label>
-            </Radio.Button>
+              Option 1
+            </Radio.Content>
             <Description>Standard styling with default background</Description>
           </Radio>
           <Radio value="option2">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>Option 2</Label>
-            </Radio.Button>
+              Option 2
+            </Radio.Content>
             <Description>Another option with primary styling</Description>
           </Radio>
         </RadioGroup>
@@ -30,21 +30,21 @@ export function Variants() {
         <p className="text-sm font-medium text-muted">Secondary variant</p>
         <RadioGroup defaultValue="option1" name="secondary-plan" variant="secondary">
           <Radio value="option1">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>Option 1</Label>
-            </Radio.Button>
+              Option 1
+            </Radio.Content>
             <Description>Lower emphasis variant for use in surfaces</Description>
           </Radio>
           <Radio value="option2">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>Option 2</Label>
-            </Radio.Button>
+              Option 2
+            </Radio.Content>
             <Description>Another option with secondary styling</Description>
           </Radio>
         </RadioGroup>

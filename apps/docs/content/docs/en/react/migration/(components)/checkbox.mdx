@@ -27,12 +27,12 @@ import { Checkbox, Label } from "@heroui/react";
 export default function App() {
   return (
     <Checkbox defaultSelected id="option">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Option</Label>
-      </Checkbox.Button>
+        Option
+      </Checkbox.Content>
     </Checkbox>
   );
 }
@@ -43,12 +43,12 @@ export default function App() {
 ### 1. Component Structure
 
 **v2:** Simple component with children as label  
-**v3:** Compound components: `Checkbox.Button`, `Checkbox.Control`, `Checkbox.Indicator`
+**v3:** Compound components: `Checkbox.Content`, `Checkbox.Control`, `Checkbox.Indicator`
 
 ### 2. Label Handling
 
 **v2:** Label passed as children directly to `Checkbox`  
-**v3:** Label goes inside `Checkbox.Button` (the clickable label); `Description`/`FieldError` are siblings of `Checkbox.Button`
+**v3:** Label goes inside `Checkbox.Content` (the clickable label); `Description`/`FieldError` are siblings of `Checkbox.Content`
 
 ### 3. Prop Changes
 
@@ -95,12 +95,12 @@ For migrating checkbox groups, see the [CheckboxGroup migration guide](/docs/rea
     const [isSelected, setIsSelected] = useState(false);
 
     <Checkbox id="subscribe" isSelected={isSelected} onChange={setIsSelected}>
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Subscribe</Label>
-      </Checkbox.Button>
+        Subscribe
+      </Checkbox.Content>
     </Checkbox>
     ```
   </Tab>
@@ -123,12 +123,12 @@ For migrating checkbox groups, see the [CheckboxGroup migration guide](/docs/rea
     import { Checkbox, Label, Description } from "@heroui/react";
 
     <Checkbox id="option" defaultSelected>
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Option</Label>
-      </Checkbox.Button>
+        Option
+      </Checkbox.Content>
       <Description>Description text</Description>
     </Checkbox>
     ```
@@ -157,28 +157,28 @@ For migrating checkbox groups, see the [CheckboxGroup migration guide](/docs/rea
       <Label>Select cities</Label>
       <Description>Choose all that apply</Description>
       <Checkbox value="buenos-aires">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Buenos Aires</Label>
-        </Checkbox.Button>
+          Buenos Aires
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="sydney">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Sydney</Label>
-        </Checkbox.Button>
+          Sydney
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="san-francisco">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>San Francisco</Label>
-        </Checkbox.Button>
+          San Francisco
+        </Checkbox.Content>
       </Checkbox>
     </CheckboxGroup>
     ```
@@ -201,22 +201,22 @@ For migrating checkbox groups, see the [CheckboxGroup migration guide](/docs/rea
     ```tsx
     {/* Colors - use Tailwind classes */}
     <Checkbox defaultSelected id="primary">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control className="data-[selected=true]:bg-primary data-[selected=true]:border-primary">
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Primary</Label>
-      </Checkbox.Button>
+        Primary
+      </Checkbox.Content>
     </Checkbox>
     
     {/* Sizes - use Tailwind classes */}
     <Checkbox defaultSelected id="medium">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control className="size-5">
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Medium</Label>
-      </Checkbox.Button>
+        Medium
+      </Checkbox.Content>
     </Checkbox>
     ```
   </Tab>
@@ -235,14 +235,14 @@ For migrating checkbox groups, see the [CheckboxGroup migration guide](/docs/rea
   <Tab value="v3">
     ```tsx
     <Checkbox defaultSelected id="option">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator>
             {({isSelected}) => isSelected ? <HeartIcon /> : null}
           </Checkbox.Indicator>
         </Checkbox.Control>
-        <Label>Option</Label>
-      </Checkbox.Button>
+        Option
+      </Checkbox.Content>
     </Checkbox>
     ```
   </Tab>
@@ -255,22 +255,22 @@ v3 introduces a `variant` prop with `"primary"` (default) and `"secondary"` opti
 ```tsx
 {/* Primary variant (default) */}
 <Checkbox variant="primary" id="primary-option">
-  <Checkbox.Button>
+  <Checkbox.Content>
     <Checkbox.Control>
       <Checkbox.Indicator />
     </Checkbox.Control>
-    <Label>Primary</Label>
-  </Checkbox.Button>
+    Primary
+  </Checkbox.Content>
 </Checkbox>
 
 {/* Secondary variant - lower emphasis, suitable for Surface components */}
 <Checkbox variant="secondary" id="secondary-option">
-  <Checkbox.Button>
+  <Checkbox.Content>
     <Checkbox.Control>
       <Checkbox.Indicator />
     </Checkbox.Control>
-    <Label>Secondary</Label>
-  </Checkbox.Button>
+    Secondary
+  </Checkbox.Content>
 </Checkbox>
 ```
 
@@ -285,12 +285,12 @@ v3 introduces a `variant` prop with `"primary"` (default) and `"secondary"` opti
   <Tab value="v3">
     ```tsx
     <Checkbox isIndeterminate id="option">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Option</Label>
-      </Checkbox.Button>
+        Option
+      </Checkbox.Content>
     </Checkbox>
     ```
   </Tab>
@@ -304,14 +304,14 @@ v3 Checkbox supports a render prop pattern that provides state information:
 <Checkbox id="terms">
   {({isSelected, isIndeterminate, isHovered, isPressed, isFocused, isDisabled}) => (
     <>
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>
+        
           {isSelected ? "Terms accepted" : "Accept terms"}
-        </Label>
-      </Checkbox.Button>
+        
+      </Checkbox.Content>
     </>
   )}
 </Checkbox>
@@ -321,7 +321,7 @@ v3 Checkbox supports a render prop pattern that provides state information:
 
 ```tsx
 <Checkbox id="custom">
-  <Checkbox.Button>
+  <Checkbox.Content>
     <Checkbox.Control>
       <Checkbox.Indicator>
         {({isSelected, isIndeterminate}) =>
@@ -329,8 +329,8 @@ v3 Checkbox supports a render prop pattern that provides state information:
         }
       </Checkbox.Indicator>
     </Checkbox.Control>
-    <Label>Custom indicator</Label>
-  </Checkbox.Button>
+    Custom indicator
+  </Checkbox.Content>
 </Checkbox>
 ```
 
@@ -363,14 +363,14 @@ Available render props:
 
 ```tsx
 <Checkbox className="custom-base" id="option">
-  <Checkbox.Button>
+  <Checkbox.Content>
     <Checkbox.Control className="custom-control">
       <Checkbox.Indicator className="custom-indicator" />
     </Checkbox.Control>
-    <Label className="custom-label">
+    
       Option
-    </Label>
-  </Checkbox.Button>
+    
+  </Checkbox.Content>
 </Checkbox>
 ```
 
@@ -380,7 +380,7 @@ The v3 Checkbox follows this structure:
 
 ```
 Checkbox (Root)
-  ├── Checkbox.Button (the clickable label)
+  ├── Checkbox.Content (the clickable label)
   │   ├── Checkbox.Control
   │   │   └── Checkbox.Indicator
   │   └── Label
@@ -391,7 +391,7 @@ Checkbox (Root)
 ## Summary
 
 1. **Component Structure**: Must use compound components (`Button`, `Control`, `Indicator`)
-2. **Label Handling**: Labels go inside `Checkbox.Button`
+2. **Label Handling**: Labels go inside `Checkbox.Content`
 3. **onValueChange → onChange**: Event handler prop renamed
 4. **Color Removed**: Use Tailwind CSS classes on `Checkbox.Control`
 5. **Size Removed**: Use Tailwind CSS classes on `Checkbox.Control`

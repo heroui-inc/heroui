@@ -554,9 +554,9 @@ export const demos: Record<string, DemoItem> = {
     component: CheckboxDemos.Indeterminate,
     file: "en/checkbox/indeterminate.tsx",
   },
-  "checkbox-with-label": {
-    component: CheckboxDemos.WithLabel,
-    file: "en/checkbox/with-label.tsx",
+  "checkbox-external-label": {
+    component: CheckboxDemos.ExternalLabel,
+    file: "en/checkbox/external-label.tsx",
   },
   "checkbox-with-description": {
     component: CheckboxDemos.WithDescription,

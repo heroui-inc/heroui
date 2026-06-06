@@ -101,9 +101,11 @@ export function CustomCells() {
           <Table.Header>
             <Table.Column className="pr-0">
               <Checkbox aria-label="Select all" slot="selection">
-                <Checkbox.Control>
-                  <Checkbox.Indicator />
-                </Checkbox.Control>
+                <Checkbox.Content>
+                  <Checkbox.Control>
+                    <Checkbox.Indicator />
+                  </Checkbox.Control>
+                </Checkbox.Content>
               </Checkbox>
             </Table.Column>
             <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
@@ -141,9 +143,11 @@ export function CustomCells() {
               <Table.Row key={user.id} id={user.id}>
                 <Table.Cell className="pr-0">
                   <Checkbox aria-label={`Select ${user.name}`} slot="selection" variant="secondary">
-                    <Checkbox.Control>
-                      <Checkbox.Indicator />
-                    </Checkbox.Control>
+                    <Checkbox.Content>
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                    </Checkbox.Content>
                   </Checkbox>
                 </Table.Cell>
                 <Table.Cell className="font-medium">

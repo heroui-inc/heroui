@@ -1,6 +1,7 @@
 ---
 title: Checkbox 复选框
 description: 复选框允许用户从多个独立选项中选择多项，或将单个独立选项标记为已选。
+icon: updated
 links:
   rac: CheckboxField
   source: checkbox/checkbox.tsx
@@ -12,7 +13,7 @@ links:
 ## 引入
 
 ```tsx
-import { Checkbox, Label } from '@heroui/react';
+import { Checkbox } from '@heroui/react';
 ```
 
 ### 用法
@@ -26,28 +27,21 @@ import { Checkbox, Label } from '@heroui/react';
 引入 Checkbox 后，可通过点语法访问各个部分。
 
 ```tsx
-import { Checkbox, Label, Description, FieldError } from '@heroui/react';
+import { Checkbox, Description, FieldError } from '@heroui/react';
 
 export default () => (
   <Checkbox>
-    <Checkbox.Button>
+    <Checkbox.Content>
       <Checkbox.Control>
         <Checkbox.Indicator />
       </Checkbox.Control>
-      <Label /> {/* 可点击按钮的一部分，同时作为无障碍名称 */}
-    </Checkbox.Button>
+      Label {/* 纯文本 —— 可点击的标签，同时作为无障碍名称 */}
+    </Checkbox.Content>
     <Description /> {/* 可选 — 字段级帮助文本 */}
     <FieldError /> {/* 可选 — 校验错误信息 */}
   </Checkbox>
 );
 ```
-
-<Callout type="warn">
-  只把 `Label` 放进 `Checkbox.Button` —— 它是可点击区域，也是 checkbox 的无障碍名称。
-  将 `Description` 和 `FieldError` 作为 `Checkbox.Button` 的兄弟节点，这样它们会通过
-  `aria-describedby` 朗读，而不会成为名称的一部分。对于**没有标签**的 checkbox（例如表格行选择），
-  可以省略 `Checkbox.Button`，直接把 `Checkbox.Control` 放在 `Checkbox` 内 —— 此时控件本身即为可点击目标。
-</Callout>
 
 ### 禁用
 
@@ -73,10 +67,10 @@ export default () => (
   name="checkbox-indeterminate"
 />
 
-### 带标签
+### 外部标签
 
 <ComponentPreview
-  name="checkbox-with-label"
+  name="checkbox-external-label"
 />
 
 ### 带说明
@@ -144,12 +138,12 @@ import { Checkbox, Label } from '@heroui/react';
 function CustomCheckbox() {
   return (
     <Checkbox name="custom">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
           <Checkbox.Indicator className="text-white" />
         </Checkbox.Control>
-        <Label>Custom Checkbox</Label>
-      </Checkbox.Button>
+        Custom Checkbox
+      </Checkbox.Content>
     </Checkbox>
   );
 }
@@ -189,7 +183,7 @@ function CustomCheckbox() {
     @apply text-white;
   }
 
-  .checkbox__button {
+  .checkbox__content {
     @apply items-center gap-3;
   }
 }
@@ -202,7 +196,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 Checkbox 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/checkbox.css)）：
 
 - `.checkbox` - Checkbox 根容器
-- `.checkbox__button` - 包裹控件与标签文本的可点击 label
+- `.checkbox__content` - 包裹控件与标签文本的可点击 label
 - `.checkbox__control` - Checkbox 控件方框
 - `.checkbox__indicator` - Checkbox 勾选指示器
 
@@ -242,9 +236,9 @@ Checkbox 同时支持 CSS 伪类与 data 属性，以获得更好的灵活性：
 | `children` | `React.ReactNode \| (values: CheckboxFieldRenderProps) => React.ReactNode` | - | Checkbox 内容或字段级渲染 prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxFieldRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
 
-### Checkbox.Button Props
+### Checkbox.Content Props
 
-包裹控件与标签文本的可点击 `<label>`。请把 `Label` 放在它内部；`Description`/`FieldError` 作为 `Checkbox.Button` 的兄弟节点。对于仅有控件的 checkbox 可省略 —— 如果直接把 `Checkbox.Control` 放在 `Checkbox` 内（无标签），控件本身即为可点击目标。
+包裹控件与标签文本的可点击 `<label>`。请把 `Checkbox.Control` 与 `Label` 放在它内部；`Description`/`FieldError` 作为 `Checkbox.Content` 的兄弟节点。对于没有标签的 checkbox，省略 `Label` 并在 `Checkbox` 上传入 `aria-label`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|

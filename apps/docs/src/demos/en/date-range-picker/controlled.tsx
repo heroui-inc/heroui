@@ -16,7 +16,7 @@ export function Controlled() {
   const [value, setValue] = useState<DateRange | null>({end: start.add({days: 4}), start});
 
   return (
-    <div className="flex w-72 flex-col gap-4">
+    <div className="flex w-80 flex-col gap-4">
       <DateRangePicker endName="endDate" startName="startDate" value={value} onChange={setValue}>
         <Label>Trip dates</Label>
         <DateField.Group fullWidth>

@@ -1,6 +1,6 @@
 "use client";
 
-import {Checkbox, Description, Label} from "@heroui/react";
+import {Checkbox, Description} from "@heroui/react";
 import {useState} from "react";
 
 export function Indeterminate() {
@@ -17,12 +17,12 @@ export function Indeterminate() {
         setIsIndeterminate(false);
       }}
     >
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Select all</Label>
-      </Checkbox.Button>
+        Select all
+      </Checkbox.Content>
       <Description>Shows indeterminate state (dash icon)</Description>
     </Checkbox>
   );

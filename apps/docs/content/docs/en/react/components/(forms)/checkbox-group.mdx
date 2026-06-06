@@ -1,6 +1,7 @@
 ---
 title: CheckboxGroup
 description: A checkbox group component for managing multiple checkbox selections
+icon: updated
 links:
   rac: CheckboxGroup
   source: checkbox-group/checkbox-group.tsx
@@ -32,12 +33,12 @@ export default () => (
     <Label />
     <Description /> {/* Optional */}
     <Checkbox value="option1">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label />
-      </Checkbox.Button>
+        Label {/* plain text — the clickable label */}
+      </Checkbox.Content>
       <Description /> {/* Optional per-checkbox help text */}
     </Checkbox>
     <FieldError /> {/* Optional */}
@@ -110,12 +111,12 @@ function CustomCheckboxGroup() {
   return (
     <CheckboxGroup className="gap-4" name="custom">
       <Checkbox value="option1">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
             <Checkbox.Indicator className="text-white" />
           </Checkbox.Control>
-          <Label>Option 1</Label>
-        </Checkbox.Button>
+          Option 1
+        </Checkbox.Content>
       </Checkbox>
     </CheckboxGroup>
   );

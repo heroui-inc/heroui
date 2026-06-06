@@ -5,7 +5,7 @@ import {DateField, DateRangePicker, Label, RangeCalendar} from "@heroui/react";
 export function CustomRenderFunction() {
   return (
     <DateRangePicker
-      className="w-72"
+      className="w-80"
       endName="endDate"
       render={(props) => <div data-custom="foo" {...props} />}
       startName="startDate"

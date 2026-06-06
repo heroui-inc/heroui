@@ -6,30 +6,30 @@ export function Horizontal() {
       <Label>Subscription plan</Label>
       <RadioGroup defaultValue="pro" name="plan-orientation" orientation="horizontal">
         <Radio value="starter">
-          <Radio.Button>
+          <Radio.Content>
             <Radio.Control>
               <Radio.Indicator />
             </Radio.Control>
-            <Label>Starter</Label>
-          </Radio.Button>
+            Starter
+          </Radio.Content>
           <Description>For side projects</Description>
         </Radio>
         <Radio value="pro">
-          <Radio.Button>
+          <Radio.Content>
             <Radio.Control>
               <Radio.Indicator />
             </Radio.Control>
-            <Label>Pro</Label>
-          </Radio.Button>
+            Pro
+          </Radio.Content>
           <Description>Advanced reporting</Description>
         </Radio>
         <Radio value="teams">
-          <Radio.Button>
+          <Radio.Content>
             <Radio.Control>
               <Radio.Indicator />
             </Radio.Control>
-            <Label>Teams</Label>
-          </Radio.Button>
+            Teams
+          </Radio.Content>
           <Description>Up to 10 teammates</Description>
         </Radio>
       </RadioGroup>

@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 
 export function WithCustomIndicator() {
   return (
-    <DateRangePicker className="w-72" endName="endDate" startName="startDate">
+    <DateRangePicker className="w-80" endName="endDate" startName="startDate">
       <Label>Trip dates</Label>
       <DateField.Group fullWidth>
         <DateField.Input slot="start">

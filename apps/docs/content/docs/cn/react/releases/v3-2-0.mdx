@@ -11,7 +11,7 @@ github:
 
 Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。[Tooltip](/docs/components/tooltip) 新增用于全局显示与隐藏延迟的主题变量。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了随 React Aria 1.18 一起发布的补丁修复（`Table.SortableColumnHeader`、Toast 与 Fieldset 修复、滚动与 RTL 样式修复）。
 
-⚠️ **破坏性变更**：`Radio`、`Checkbox`、`Switch` 使用 `*.Button` 替代 `*.Content`。详见[破坏性变更](#breaking-changes)。
+⚠️ **破坏性变更**：`Radio`、`Checkbox`、`Switch` 改为显式的 `*.Content` 组合 —— `*.Control` 嵌套进 `*.Content`，标签变为 `*.Content` 内的纯文本（不嵌套 `<Label>`），`Description`/`FieldError` 变为 `*.Content` 的兄弟节点。详见[破坏性变更](#-breaking-changes)。
 
 ## 安装
 
@@ -130,16 +130,20 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 - **@internationalized/date**：`3.12.1` → `3.12.2`
 - **React Aria / Stately 辅助包**：`@react-aria/*`、`@react-stately/*` 与 `@react-types/shared` 补丁更新
 
-## Breaking Changes
+## ⚠️ Breaking Changes
 
-### Radio、Checkbox 与 Switch：`*.Content` → `*.Button`
+### Radio、Checkbox 与 Switch：显式 `*.Content` 组合
 
-这些组件现在使用 React Aria 的 `*Field` + `*Button` 组合方式，移除了 `*.Content` 包装。请把控件和 `Label` 放进新的 `*.Button`（可点击的 label）中，并把 `Description`/`FieldError` 移到 `*.Button` 的兄弟节点 —— 这样它们会通过 `aria-describedby` 朗读，而不会成为无障碍名称的一部分。
+这些组件现在在底层使用 React Aria 的 `*Field` + `*Button` 组合方式。`X.Content` 现在是**可点击的 label**（React Aria 的 `*Button`）。共有三点变化：
+
+- **`X.Control` 移进 `X.Content`** —— 它们以前是兄弟节点。
+- **标签是 `X.Content` 内部的纯文本** —— `X.Content` 渲染的是 `<label>` 元素，所以不要嵌套 `<Label>` 组件（嵌套的 `<label>` 是无效 HTML）。若要使用独立的 `Label`，请把它放在**外部**，并用 `htmlFor` + 组件 `id` 关联。
+- **`Description`/`FieldError` 移到外部**，作为 `X.Content` 的兄弟节点，这样它们会通过 `aria-describedby` 朗读，而不会被并入无障碍名称。
 
 **Checkbox**
 
 ```tsx
-// 之前
+// v3.1
 <Checkbox>
   <Checkbox.Control>
     <Checkbox.Indicator />
@@ -150,14 +154,14 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
   </Checkbox.Content>
 </Checkbox>
 
-// 之后
+// v3.2
 <Checkbox>
-  <Checkbox.Button>
+  <Checkbox.Content>
     <Checkbox.Control>
       <Checkbox.Indicator />
     </Checkbox.Control>
-    <Label>Accept terms</Label>
-  </Checkbox.Button>
+    Accept terms
+  </Checkbox.Content>
   <Description>You agree to our terms</Description>
 </Checkbox>
 ```
@@ -165,7 +169,7 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 **Radio**
 
 ```tsx
-// 之前
+// v3.1
 <Radio value="a">
   <Radio.Control>
     <Radio.Indicator />
@@ -175,21 +179,21 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
   </Radio.Content>
 </Radio>
 
-// 之后
+// v3.2
 <Radio value="a">
-  <Radio.Button>
+  <Radio.Content>
     <Radio.Control>
       <Radio.Indicator />
     </Radio.Control>
-    <Label>Option A</Label>
-  </Radio.Button>
+    Option A
+  </Radio.Content>
 </Radio>
 ```
 
 **Switch**
 
 ```tsx
-// 之前
+// v3.1
 <Switch>
   <Switch.Control>
     <Switch.Thumb />
@@ -199,26 +203,42 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
   </Switch.Content>
 </Switch>
 
-// 之后
+// v3.2
 <Switch>
-  <Switch.Button>
+  <Switch.Content>
     <Switch.Control>
       <Switch.Thumb />
     </Switch.Control>
-    <Label>Enable notifications</Label>
-  </Switch.Button>
+    Enable notifications
+  </Switch.Content>
 </Switch>
 ```
 
 **迁移对照**
 
-| 之前 | 之后 |
+| v3.1 | v3.2 |
 |------|------|
-| `<X.Content>` 包裹 `Label` + 帮助文本 | `<X.Button>` 包裹 `X.Control` + `Label` |
-| `Description` / `FieldError` 位于 `X.Content` 内 | `Description` / `FieldError` 作为 `X.Button` 的兄弟节点 |
-| `X.Content` 部件 | 已移除 —— 改用 `X.Button` |
+| `X.Control` 与 `X.Content` 为兄弟节点 | `X.Control` 嵌套进 `X.Content` |
+| `X.Content` 是包裹 `Label` + 帮助文本的布局 `<div>` | `X.Content` 是包裹 `X.Control` + 标签文本的可点击 `<label>` |
+| 通过 `X.Content` 内的 `<Label>` 提供标签 | 标签是 `X.Content` 内的**纯文本**（不嵌套 `<Label>`） |
+| `Description` / `FieldError` 位于 `X.Content` 内 | `Description` / `FieldError` 作为 `X.Content` 的兄弟节点 |
 
-**仅含控件的 Checkbox 和 Switch 无需改动。** 如果你直接把 `Checkbox.Control` / `Switch.Control` 放在根节点内（没有标签，例如表格行选择或图标开关），它会继续正常工作 —— 控件会自动包裹为可点击元素。
+**外部标签** —— 若要使用独立的 `Label`，请把它放在组件外部，并用 `htmlFor` + 组件 `id` 关联：
+
+```tsx
+<div className="flex items-center gap-3">
+  <Checkbox id="terms">
+    <Checkbox.Content>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+    </Checkbox.Content>
+  </Checkbox>
+  <Label htmlFor="terms">Accept terms</Label>
+</div>
+```
+
+**仅含控件的 Checkbox 和 Switch**（没有标签，例如表格行选择或图标开关）仍需用 `X.Content` 作为可点击包装。请把 `Checkbox.Control` / `Switch.Control` 放进 `X.Content`，省略标签，并在根组件上传入 `aria-label`。
 
 各组件完整迁移指南：[Checkbox](/docs/react/migration/checkbox)、[Checkbox Group](/docs/react/migration/checkbox-group)、[Radio](/docs/react/migration/radio)、[Radio Group](/docs/react/migration/radio-group)、[Switch](/docs/react/migration/switch)。
 

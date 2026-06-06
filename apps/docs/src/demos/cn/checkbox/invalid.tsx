@@ -1,14 +1,14 @@
-import {Checkbox, FieldError, Label} from "@heroui/react";
+import {Checkbox, FieldError} from "@heroui/react";
 
 export function Invalid() {
   return (
     <Checkbox isInvalid isRequired name="agreement">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>我同意条款</Label>
-      </Checkbox.Button>
+        我同意条款
+      </Checkbox.Content>
       <FieldError>您必须接受条款才能继续</FieldError>
     </Checkbox>
   );

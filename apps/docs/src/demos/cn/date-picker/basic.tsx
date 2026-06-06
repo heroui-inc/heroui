@@ -4,7 +4,7 @@ import {Calendar, DateField, DatePicker, Label} from "@heroui/react";
 
 export function Basic() {
   return (
-    <DatePicker className="w-64" name="date">
+    <DatePicker className="w-72" name="date">
       <Label>日期</Label>
       <DateField.Group fullWidth>
         <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>

@@ -18,28 +18,28 @@ export function Validation() {
       <CheckboxGroup isRequired name="preferences">
         <Label>Preferences</Label>
         <Checkbox value="email">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Email notifications</Label>
-          </Checkbox.Button>
+            Email notifications
+          </Checkbox.Content>
         </Checkbox>
         <Checkbox value="sms">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>SMS notifications</Label>
-          </Checkbox.Button>
+            SMS notifications
+          </Checkbox.Content>
         </Checkbox>
         <Checkbox value="push">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Push notifications</Label>
-          </Checkbox.Button>
+            Push notifications
+          </Checkbox.Content>
         </Checkbox>
         <FieldError>Please select at least one notification method.</FieldError>
       </CheckboxGroup>

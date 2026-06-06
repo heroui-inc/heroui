@@ -29,9 +29,11 @@ export function SelectionDemo() {
             <Table.Header>
               <Table.Column className="pr-0">
                 <Checkbox aria-label="Select all" slot="selection">
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox.Content>
                 </Checkbox>
               </Table.Column>
               <Table.Column isRowHeader>Name</Table.Column>
@@ -48,9 +50,11 @@ export function SelectionDemo() {
                       slot="selection"
                       variant="secondary"
                     >
-                      <Checkbox.Control>
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
+                      <Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox.Content>
                     </Checkbox>
                   </Table.Cell>
                   <Table.Cell>{user.name}</Table.Cell>

@@ -1,14 +1,14 @@
-import {Label, Switch} from "@heroui/react";
+import {Switch} from "@heroui/react";
 
 export function Disabled() {
   return (
     <Switch isDisabled>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">启用通知</Label>
-      </Switch.Button>
+        启用通知
+      </Switch.Content>
     </Switch>
   );
 }

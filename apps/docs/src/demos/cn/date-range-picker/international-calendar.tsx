@@ -10,7 +10,7 @@ export function InternationalCalendar() {
   return (
     <I18nProvider locale="hi-IN-u-ca-indian">
       <DateRangePicker
-        className="w-72"
+        className="w-80"
         defaultValue={{end: start.add({days: 7}), start}}
         endName="endDate"
         startName="startDate"

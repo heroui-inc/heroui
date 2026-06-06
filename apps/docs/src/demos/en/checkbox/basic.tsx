@@ -1,14 +1,14 @@
-import {Checkbox, Label} from "@heroui/react";
+import {Checkbox} from "@heroui/react";
 
 export function Basic() {
   return (
     <Checkbox name="basic-terms">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Accept terms and conditions</Label>
-      </Checkbox.Button>
+        Accept terms and conditions
+      </Checkbox.Content>
     </Checkbox>
   );
 }

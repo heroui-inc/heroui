@@ -6,21 +6,21 @@ export function Disabled() {
       <Label>Features</Label>
       <Description>Feature selection is temporarily disabled</Description>
       <Checkbox value="feature1">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Feature 1</Label>
-        </Checkbox.Button>
+          Feature 1
+        </Checkbox.Content>
         <Description>This feature is coming soon</Description>
       </Checkbox>
       <Checkbox value="feature2">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Feature 2</Label>
-        </Checkbox.Button>
+          Feature 2
+        </Checkbox.Content>
         <Description>This feature is coming soon</Description>
       </Checkbox>
     </CheckboxGroup>

@@ -1,13 +1,13 @@
 import type {ComponentProps} from "react";
 
-import {CheckboxButtonRoot, CheckboxControl, CheckboxIndicator, CheckboxRoot} from "./checkbox";
+import {CheckboxContent, CheckboxControl, CheckboxIndicator, CheckboxRoot} from "./checkbox";
 
 /* -------------------------------------------------------------------------------------------------
  * Compound Component
  * -----------------------------------------------------------------------------------------------*/
 export const Checkbox = Object.assign(CheckboxRoot, {
   Root: CheckboxRoot,
-  Button: CheckboxButtonRoot,
+  Content: CheckboxContent,
   Control: CheckboxControl,
   Indicator: CheckboxIndicator,
 });
@@ -15,7 +15,7 @@ export const Checkbox = Object.assign(CheckboxRoot, {
 export type Checkbox = {
   Props: ComponentProps<typeof CheckboxRoot>;
   RootProps: ComponentProps<typeof CheckboxRoot>;
-  ButtonProps: ComponentProps<typeof CheckboxButtonRoot>;
+  ContentProps: ComponentProps<typeof CheckboxContent>;
   ControlProps: ComponentProps<typeof CheckboxControl>;
   IndicatorProps: ComponentProps<typeof CheckboxIndicator>;
 };
@@ -23,17 +23,17 @@ export type Checkbox = {
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {CheckboxButtonRoot, CheckboxControl, CheckboxIndicator, CheckboxRoot};
+export {CheckboxContent, CheckboxControl, CheckboxIndicator, CheckboxRoot};
 
 export type {
   CheckboxRootProps,
   CheckboxRootProps as CheckboxProps,
-  CheckboxButtonRootProps,
+  CheckboxContentProps,
   CheckboxControlProps,
   CheckboxIndicatorProps,
   CheckboxFieldRenderProps,
   CheckboxButtonRenderProps,
-  /** @deprecated Use {@link CheckboxFieldRenderProps} for the root render prop, or {@link CheckboxButtonRenderProps} for control/indicator. */
+  /** @deprecated Use {@link CheckboxFieldRenderProps} for the root render prop, or {@link CheckboxButtonRenderProps} for content/control/indicator. */
   CheckboxFieldRenderProps as CheckboxRenderProps,
 } from "./checkbox";
 

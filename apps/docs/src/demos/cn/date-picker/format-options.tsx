@@ -50,7 +50,7 @@ export function FormatOptions() {
     <div className="flex flex-col gap-4">
       <DatePicker
         key={granularity}
-        className="w-fit min-w-64"
+        className="w-fit min-w-72"
         defaultValue={defaultValue}
         granularity={granularity}
         hideTimeZone={hideTimeZone}
@@ -173,16 +173,20 @@ export function FormatOptions() {
 
       <div className="flex min-w-80 flex-col gap-2">
         <Switch isSelected={hideTimeZone} onChange={setHideTimeZone}>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">隐藏时区</Label>
+          <Switch.Content>
+            <Switch.Control>
+              <Switch.Thumb />
+            </Switch.Control>
+            隐藏时区
+          </Switch.Content>
         </Switch>
         <Switch isSelected={shouldForceLeadingZeros} onChange={setShouldForceLeadingZeros}>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">强制前导零</Label>
+          <Switch.Content>
+            <Switch.Control>
+              <Switch.Thumb />
+            </Switch.Control>
+            强制前导零
+          </Switch.Content>
         </Switch>
       </div>
     </div>

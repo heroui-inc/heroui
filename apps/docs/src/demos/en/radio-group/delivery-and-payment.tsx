@@ -64,7 +64,7 @@ export function DeliveryAndPayment() {
           <div className="grid gap-x-4 md:grid-cols-3">
             {deliveryOptions.map((option) => (
               <Radio key={option.value} value={option.value}>
-                <Radio.Button
+                <Radio.Content
                   className={clsx(
                     "group relative flex w-full flex-col gap-6 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
                     "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10",
@@ -74,11 +74,11 @@ export function DeliveryAndPayment() {
                     <Radio.Indicator />
                   </Radio.Control>
                   <div className="flex flex-col gap-1">
-                    <Label>{option.title}</Label>
+                    <span>{option.title}</span>
                     <Description>{option.description}</Description>
                   </div>
                   <span className="text-sm font-semibold">{option.price}</span>
-                </Radio.Button>
+                </Radio.Content>
               </Radio>
             ))}
           </div>
@@ -92,7 +92,7 @@ export function DeliveryAndPayment() {
           <div className="grid gap-x-4 md:grid-cols-2">
             {paymentOptions.map((option) => (
               <Radio key={option.value} value={option.value}>
-                <Radio.Button
+                <Radio.Content
                   className={clsx(
                     "group relative flex w-full flex-row items-start justify-start gap-4 rounded-xl border border-transparent bg-surface px-5 py-4 transition-all",
                     "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
@@ -103,10 +103,10 @@ export function DeliveryAndPayment() {
                   </Radio.Control>
                   <Icon className="size-6" icon={option.icon} />
                   <div className="flex flex-col gap-1">
-                    <Label>{option.title}</Label>
+                    <span>{option.title}</span>
                     <Description>{option.description}</Description>
                   </div>
-                </Radio.Button>
+                </Radio.Content>
               </Radio>
             ))}
           </div>

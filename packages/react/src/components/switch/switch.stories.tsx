@@ -5,7 +5,6 @@ import React from "react";
 
 import {Description} from "../description";
 import {FieldError} from "../field-error";
-import {Label} from "../label";
 
 import {Switch} from "./index";
 
@@ -23,12 +22,12 @@ type Story = StoryObj<typeof Switch>;
 export const Default: Story = {
   render: () => (
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -36,12 +35,12 @@ export const Default: Story = {
 export const Disabled: Story = {
   render: () => (
     <Switch isDisabled>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -49,12 +48,12 @@ export const Disabled: Story = {
 export const DefaultSelected: Story = {
   render: () => (
     <Switch defaultSelected>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -62,9 +61,11 @@ export const DefaultSelected: Story = {
 export const DisabledDefaultSelected: Story = {
   render: () => (
     <Switch defaultSelected isDisabled aria-label="Enable notifications">
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -76,12 +77,12 @@ export const Controlled: Story = {
     return (
       <div className="flex flex-col gap-4">
         <Switch isSelected={isSelected} onChange={setIsSelected}>
-          <Switch.Button>
+          <Switch.Content>
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
-            <Label className="text-sm">Enable notifications</Label>
-          </Switch.Button>
+            Enable notifications
+          </Switch.Content>
         </Switch>
         <p className="text-sm text-muted">Switch is {isSelected ? "on" : "off"}</p>
       </div>
@@ -92,9 +93,11 @@ export const Controlled: Story = {
 export const WithoutLabel: Story = {
   render: () => (
     <Switch aria-label="Enable notifications">
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -102,12 +105,12 @@ export const WithoutLabel: Story = {
 export const Invalid: Story = {
   render: () => (
     <Switch isInvalid isRequired name="notifications">
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
       <FieldError>You must enable notifications to continue</FieldError>
     </Switch>
   ),
@@ -120,12 +123,12 @@ export const Validation: Story = {
       name="terms-switch"
       validate={(isSelected) => (isSelected ? true : "You must accept to continue")}
     >
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label className="text-sm">Accept terms</Label>
-      </Switch.Button>
+        Accept terms
+      </Switch.Content>
       <FieldError />
     </Switch>
   ),
@@ -135,28 +138,28 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex gap-6">
       <Switch size="sm">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-xs">Small</Label>
-        </Switch.Button>
+          Small
+        </Switch.Content>
       </Switch>
       <Switch size="md">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Medium</Label>
-        </Switch.Button>
+          Medium
+        </Switch.Content>
       </Switch>
       <Switch size="lg">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-base">Large</Label>
-        </Switch.Button>
+          Large
+        </Switch.Content>
       </Switch>
     </div>
   ),
@@ -165,12 +168,12 @@ export const Sizes: Story = {
 export const LabelBefore: Story = {
   render: () => (
     <Switch>
-      <Switch.Button>
-        <Label className="text-sm">Enable notifications</Label>
+      <Switch.Content>
+        Enable notifications
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-      </Switch.Button>
+      </Switch.Content>
     </Switch>
   ),
 };
@@ -179,12 +182,12 @@ export const WithDescription: Story = {
   render: () => (
     <div className="max-w-sm">
       <Switch>
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Public profile</Label>
-        </Switch.Button>
+          Public profile
+        </Switch.Content>
         <Description>Allow others to see your profile information</Description>
       </Switch>
     </div>
@@ -195,20 +198,22 @@ export const WithCustomStyles: Story = {
   render: () => (
     <Switch aria-label="Power">
       {({isSelected}) => (
-        <Switch.Control
-          className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
-        >
-          <Switch.Thumb
-            className={`size-[27px] bg-white shadow-sm ${isSelected ? "ms-[22px] shadow-lg" : ""}`}
+        <Switch.Content>
+          <Switch.Control
+            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
           >
-            <Switch.Icon>
-              <Icon
-                className={`size-4 ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
-                icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
-              />
-            </Switch.Icon>
-          </Switch.Thumb>
-        </Switch.Control>
+            <Switch.Thumb
+              className={`size-[27px] bg-white shadow-sm ${isSelected ? "ms-[22px] shadow-lg" : ""}`}
+            >
+              <Switch.Icon>
+                <Icon
+                  className={`size-4 ${isSelected ? "text-cyan-600" : "text-blue-600"}`}
+                  icon={isSelected ? "gravity-ui:check" : "gravity-ui:power"}
+                />
+              </Switch.Icon>
+            </Switch.Thumb>
+          </Switch.Control>
+        </Switch.Content>
       )}
     </Switch>
   ),
@@ -254,16 +259,18 @@ export const WithIcons: Story = {
         {Object.entries(icons).map(([key, value]) => (
           <Switch key={key} defaultSelected aria-label={key} size="lg">
             {({isSelected}) => (
-              <Switch.Control className={isSelected ? value.selectedControlClass : ""}>
-                <Switch.Thumb>
-                  <Switch.Icon>
-                    <Icon
-                      className={`${isSelected ? `opacity-100 ${value.selectedIconClass}` : "opacity-70"} size-3 text-inherit`}
-                      icon={isSelected ? value.on : value.off}
-                    />
-                  </Switch.Icon>
-                </Switch.Thumb>
-              </Switch.Control>
+              <Switch.Content>
+                <Switch.Control className={isSelected ? value.selectedControlClass : ""}>
+                  <Switch.Thumb>
+                    <Switch.Icon>
+                      <Icon
+                        className={`${isSelected ? `opacity-100 ${value.selectedIconClass}` : "opacity-70"} size-3 text-inherit`}
+                        icon={isSelected ? value.on : value.off}
+                      />
+                    </Switch.Icon>
+                  </Switch.Thumb>
+                </Switch.Control>
+              </Switch.Content>
             )}
           </Switch>
         ))}
@@ -276,12 +283,12 @@ export const RenderProps: Story = {
   render: () => (
     <Switch>
       {({isSelected}) => (
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">{isSelected ? "Enabled" : "Disabled"}</Label>
-        </Switch.Button>
+          {isSelected ? "Enabled" : "Disabled"}
+        </Switch.Content>
       )}
     </Switch>
   ),

@@ -34,20 +34,20 @@ export default function App() {
     <RadioGroup>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>London</Label>
-        </Radio.Button>
+          London
+        </Radio.Content>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Tokyo</Label>
-        </Radio.Button>
+          Tokyo
+        </Radio.Content>
         <Description>Capital of Japan</Description>
       </Radio>
     </RadioGroup>
@@ -60,7 +60,7 @@ export default function App() {
 ### 1. 组件结构
 
 **v2：** 简单的 Radio，`children` 作为标签文案  
-**v3：** 复合组件：`Radio.Button`、`Radio.Control`、`Radio.Indicator`
+**v3：** 复合组件：`Radio.Content`、`Radio.Control`、`Radio.Indicator`
 
 ### 2. Prop 变更
 
@@ -68,7 +68,7 @@ export default function App() {
 | --- | --- | --- |
 | `onValueChange` | `onChange` | 事件处理函数已重命名 |
 | `label`（在 RadioGroup 上） | — | 使用 `Label` 组件 |
-| `description`（在 Radio 上） | — | 将 `Description` 组件作为 `Radio.Button` 的兄弟节点使用 |
+| `description`（在 Radio 上） | — | 将 `Description` 组件作为 `Radio.Content` 的兄弟节点使用 |
 | `size` | — | 已移除（请改用 Tailwind CSS） |
 | `color` | — | 已移除（请改用 Tailwind CSS） |
 | `classNames` | — | 在各子组件上使用 `className` prop |
@@ -108,12 +108,12 @@ export default function App() {
     <RadioGroup>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>London</Label>
-        </Radio.Button>
+          London
+        </Radio.Content>
         <Description>Capital of England</Description>
       </Radio>
     </RadioGroup>
@@ -122,12 +122,12 @@ export default function App() {
     <RadioGroup isInvalid>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>London</Label>
-        </Radio.Button>
+          London
+        </Radio.Content>
       </Radio>
       <FieldError>Please select an option</FieldError>
     </RadioGroup>
@@ -162,20 +162,20 @@ export default function App() {
     <RadioGroup value={selected} onChange={setSelected}>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>London</Label>
-        </Radio.Button>
+          London
+        </Radio.Content>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Tokyo</Label>
-        </Radio.Button>
+          Tokyo
+        </Radio.Content>
       </Radio>
     </RadioGroup>
     ```
@@ -198,20 +198,20 @@ export default function App() {
     <RadioGroup orientation="horizontal">
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>London</Label>
-        </Radio.Button>
+          London
+        </Radio.Content>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Tokyo</Label>
-        </Radio.Button>
+          Tokyo
+        </Radio.Content>
       </Radio>
     </RadioGroup>
     ```
@@ -227,12 +227,12 @@ v3 在 `RadioGroup` 上新增 `variant` prop，可选 `"primary"`（默认）与
 <RadioGroup variant="primary">
   <Label>Select city</Label>
   <Radio value="london">
-    <Radio.Button>
+    <Radio.Content>
       <Radio.Control>
         <Radio.Indicator />
       </Radio.Control>
-      <Label>London</Label>
-    </Radio.Button>
+      London
+    </Radio.Content>
   </Radio>
 </RadioGroup>
 
@@ -240,12 +240,12 @@ v3 在 `RadioGroup` 上新增 `variant` prop，可选 `"primary"`（默认）与
 <RadioGroup variant="secondary">
   <Label>Select city</Label>
   <Radio value="london">
-    <Radio.Button>
+    <Radio.Content>
       <Radio.Control>
         <Radio.Indicator />
       </Radio.Control>
-      <Label>London</Label>
-    </Radio.Button>
+      London
+    </Radio.Content>
   </Radio>
 </RadioGroup>
 ```
@@ -258,20 +258,20 @@ v3 支持在 `RadioGroup` 上使用 `isReadOnly`：在保持组合可聚焦的�
 <RadioGroup isReadOnly defaultValue="london">
   <Label>Select city</Label>
   <Radio value="london">
-    <Radio.Button>
+    <Radio.Content>
       <Radio.Control>
         <Radio.Indicator />
       </Radio.Control>
-      <Label>London</Label>
-    </Radio.Button>
+      London
+    </Radio.Content>
   </Radio>
   <Radio value="tokyo">
-    <Radio.Button>
+    <Radio.Content>
       <Radio.Control>
         <Radio.Indicator />
       </Radio.Control>
-      <Label>Tokyo</Label>
-    </Radio.Button>
+      Tokyo
+    </Radio.Content>
   </Radio>
 </RadioGroup>
 ```
@@ -284,7 +284,7 @@ v3 的 Radio 结构如下：
 RadioGroup (Root)
   ├── Label (optional)
   ├── Radio
-  │   ├── Radio.Button (the clickable label)
+  │   ├── Radio.Content (the clickable label)
   │   │   ├── Radio.Control
   │   │   │   └── Radio.Indicator
   │   │   └── Label
@@ -294,9 +294,9 @@ RadioGroup (Root)
 
 ## 总结
 
-1. **组件结构**：必须使用复合组件（`Radio.Button`、`Radio.Control`、`Radio.Indicator`）。
+1. **组件结构**：必须使用复合组件（`Radio.Content`、`Radio.Control`、`Radio.Indicator`）。
 2. **标签**：已移除 `label` prop，请使用 `Label` 组件。
-3. **描述**：已移除 `description` prop，请将 `Description` 组件作为 `Radio.Button` 的兄弟节点使用。
+3. **描述**：已移除 `description` prop，请将 `Description` 组件作为 `Radio.Content` 的兄弟节点使用。
 4. **事件处理函数**：`onValueChange` → `onChange`。
 5. **样式相关 prop 已移除**：`size`、`color` 等请改用 Tailwind CSS。
 6. **`classNames` 已移除**：在各子组件上使用 `className` prop。

@@ -122,9 +122,11 @@ export function ShuffleButton({enableKeyboardShortcut = true}: ShuffleButtonProp
                   variant="secondary"
                   onChange={setIsDontShowAgainChecked}
                 >
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox.Content>
                 </Checkbox>
                 <Label htmlFor="dont-show-again">{dict.dontShowAgain}</Label>
               </div>

@@ -8,7 +8,7 @@ export function InternationalCalendar() {
   return (
     <I18nProvider locale="hi-IN-u-ca-indian">
       <DatePicker
-        className="w-64"
+        className="w-72"
         defaultValue={today(getLocalTimeZone())}
         name="international-date"
       >

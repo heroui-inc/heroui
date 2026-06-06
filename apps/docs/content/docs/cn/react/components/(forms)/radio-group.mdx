@@ -1,6 +1,7 @@
 ---
 title: RadioGroup 单选框组
 description: 用于从列表中选择单个选项的单选组。
+icon: updated
 links:
   rac: RadioField
   source: radio-group/radio-group.tsx
@@ -20,7 +21,6 @@ import { RadioGroup, Radio } from '@heroui/react';
   name="radio-group-basic"
 />
 
-
 ### 组件结构
 
 导入 RadioGroup 组件后，可通过点号访问各个子部分。
@@ -33,14 +33,14 @@ export default () => (
     <Label />
     <Description />
     <Radio value="option1">
-      <Radio.Button> {/* 可点击区域：control + label */}
+      <Radio.Content> {/* 可点击区域：control + label */}
         <Radio.Control>
           <Radio.Indicator>
             <span>✓</span> {/* Custom indicator (optional) */}
           </Radio.Indicator>
         </Radio.Control>
-        <Label />
-      </Radio.Button>
+        Label {/* 纯文本 —— 可点击的标签 */}
+      </Radio.Content>
       <Description /> {/* 兄弟节点 — 位于按钮外部（通过 aria-describedby 关联） */}
       <FieldError /> {/* 可选 — 单选项校验错误信息 */}
     </Radio>
@@ -48,13 +48,6 @@ export default () => (
   </RadioGroup>
 )
 ```
-
-<Callout type="warn">
-  将 `Label` 放在 `Radio.Button` **内部**（它构成单选项的无障碍名称），并将
-  `Description`/`FieldError` 作为 `Radio.Button` **外部的兄弟节点**，使其通过
-  `aria-describedby` 关联，而不会被并入名称。对于整张卡片都可点击的卡片式选项，
-  可以把所有内容都放进 `Radio.Button`。
-</Callout>
 
 ### 自定义指示器
 
@@ -118,7 +111,6 @@ RadioGroup 支持两种视觉变体：
   align="start"
   name="radio-group-delivery-and-payment"
 />
-
 
 <RelatedShowcases component="RadioGroup" />
 
@@ -265,7 +257,7 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 |------|------|--------|------|
 | `children` | `React.ReactNode \| (values: RadioButtonRenderProps) => React.ReactNode` | - | 可选内容或接收当前单选按钮状态的渲染 prop。 |
 
-### Radio.Button Props
+### Radio.Content Props
 
 单选项的可点击区域（包裹隐藏 input 的 `<label>`）。请将 `Radio.Control` 与 `Label` 放在其中。`className` 支持接收 `RadioButtonRenderProps` 的渲染函数。
 

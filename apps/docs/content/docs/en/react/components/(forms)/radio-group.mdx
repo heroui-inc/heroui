@@ -1,6 +1,7 @@
 ---
 title: RadioGroup
 description: Radio group for selecting a single option from a list
+icon: updated
 links:
   rac: RadioField
   source: radio-group/radio-group.tsx
@@ -20,7 +21,6 @@ import { RadioGroup, Radio } from '@heroui/react';
   name="radio-group-basic"
 />
 
-
 ### Anatomy
 
 Import the RadioGroup component and access all parts using dot notation.
@@ -33,14 +33,14 @@ export default () => (
     <Label />
     <Description />
     <Radio value="option1">
-      <Radio.Button> {/* The clickable area: control + label */}
+      <Radio.Content> {/* The clickable area: control + label */}
         <Radio.Control>
           <Radio.Indicator>
             <span>✓</span> {/* Custom indicator (optional) */}
           </Radio.Indicator>
         </Radio.Control>
-        <Label />
-      </Radio.Button>
+        Label {/* plain text — the clickable label */}
+      </Radio.Content>
       <Description /> {/* Sibling — stays outside the button (announced via aria-describedby) */}
       <FieldError /> {/* Optional — per-radio validation message */}
     </Radio>
@@ -48,13 +48,6 @@ export default () => (
   </RadioGroup>
 )
 ```
-
-<Callout type="warn">
-  Place `Label` **inside** `Radio.Button` (it forms the radio's accessible name), and keep
-  `Description`/`FieldError` as **siblings outside** `Radio.Button` so they are exposed via
-  `aria-describedby` instead of being folded into the name. For card-style options where the whole
-  card should be clickable, put everything inside `Radio.Button`.
-</Callout>
 
 ### Custom Indicator
 
@@ -118,7 +111,6 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
   align="start"
   name="radio-group-delivery-and-payment"
 />
-
 
 <RelatedShowcases component="RadioGroup" />
 
@@ -202,7 +194,7 @@ The RadioGroup component uses these CSS classes ([View source styles](https://gi
 #### Base Classes
 - `.radio-group` - Base radio group container
 - `.radio` - Individual radio item
-- `.radio__button` - Radio button (RAC label wrapper for control + label text)
+- `.radio__content` - Radio button (RAC label wrapper for control + label text)
 - `.radio__control` - Radio control (circular button)
 - `.radio__indicator` - Radio indicator (inner dot)
 - `.radio__content` - Radio content wrapper
@@ -266,7 +258,7 @@ Extends `React.HTMLAttributes<HTMLSpanElement>`.
 |------|------|---------|-------------|
 | `children` | `React.ReactNode \| (values: RadioButtonRenderProps) => React.ReactNode` | - | Optional content or render prop that receives the current radio button state. |
 
-### Radio.Button Props
+### Radio.Content Props
 
 The clickable area of the radio (the `<label>` wrapping the hidden input). Place `Radio.Control` and the `Label` inside it. `className` accepts a render function that receives `RadioButtonRenderProps`.
 

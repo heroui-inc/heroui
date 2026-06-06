@@ -8,7 +8,7 @@ export function CustomIndicator() {
       <Label>选择套餐</Label>
       <Description>选择最适合你的套餐</Description>
       <Radio value="basic">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator>
               {({isSelected}) =>
@@ -16,12 +16,12 @@ export function CustomIndicator() {
               }
             </Radio.Indicator>
           </Radio.Control>
-          <Label>基础版</Label>
-        </Radio.Button>
+          基础版
+        </Radio.Content>
         <Description>每月包含 100 条消息</Description>
       </Radio>
       <Radio value="premium">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator>
               {({isSelected}) =>
@@ -29,12 +29,12 @@ export function CustomIndicator() {
               }
             </Radio.Indicator>
           </Radio.Control>
-          <Label>高级版</Label>
-        </Radio.Button>
+          高级版
+        </Radio.Content>
         <Description>每月包含 200 条消息</Description>
       </Radio>
       <Radio value="business">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator>
               {({isSelected}) =>
@@ -42,8 +42,8 @@ export function CustomIndicator() {
               }
             </Radio.Indicator>
           </Radio.Control>
-          <Label>商业版</Label>
-        </Radio.Button>
+          商业版
+        </Radio.Content>
         <Description>无限消息</Description>
       </Radio>
     </RadioGroup>

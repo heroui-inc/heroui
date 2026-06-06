@@ -27,8 +27,8 @@
   --radio-control-bg-hover: var(--default-hover);
 
   /* Hover state */
-  .radio:has([data-slot="radio-button"][data-hovered="true"]) &,
-  .radio [data-slot="radio-button"][data-hovered="true"] & {
+  .radio:has([data-slot="radio-content"][data-hovered="true"]) &,
+  .radio [data-slot="radio-content"][data-hovered="true"] & {
     @apply border-field-border-hover;
   }
 
@@ -38,7 +38,7 @@
   }
 
   /* Hover indicator color (unselected) */
-  .radio:has([data-slot="radio-button"][data-hovered="true"]):not([data-selected]):not(
+  .radio:has([data-slot="radio-content"][data-hovered="true"]):not([data-selected]):not(
       :has(input:checked)
     )
     & {

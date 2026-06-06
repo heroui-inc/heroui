@@ -33,7 +33,7 @@ export function FeaturesAndAddOns() {
           <div className="flex flex-col gap-2">
             {addOns.map((addon) => (
               <Checkbox key={addon.value} value={addon.value} variant="secondary">
-                <Checkbox.Button
+                <Checkbox.Content
                   className={clsx(
                     "group relative flex w-full flex-row items-start justify-start gap-4 rounded-3xl bg-surface px-5 py-4 transition-all",
                     "data-[selected=true]:bg-accent/10",
@@ -44,10 +44,10 @@ export function FeaturesAndAddOns() {
                   </Checkbox.Control>
                   <addon.icon className="size-5 text-accent-soft-foreground" />
                   <div className="flex flex-col gap-1">
-                    <Label>{addon.title}</Label>
+                    <span>{addon.title}</span>
                     <Description>{addon.description}</Description>
                   </div>
-                </Checkbox.Button>
+                </Checkbox.Content>
               </Checkbox>
             ))}
           </div>

@@ -3,7 +3,6 @@ import type {Meta, StoryObj} from "@storybook/react";
 import React from "react";
 
 import {Button} from "../button";
-import {Label} from "../label";
 import {Switch} from "../switch";
 
 import {SwitchGroup} from "./index";
@@ -23,28 +22,28 @@ export const Default: Story = {
   render: () => (
     <SwitchGroup>
       <Switch name="notifications">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Allow Notifications</Label>
-        </Switch.Button>
+          Allow Notifications
+        </Switch.Content>
       </Switch>
       <Switch name="marketing">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Marketing emails</Label>
-        </Switch.Button>
+          Marketing emails
+        </Switch.Content>
       </Switch>
       <Switch name="social">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Social media updates</Label>
-        </Switch.Button>
+          Social media updates
+        </Switch.Content>
       </Switch>
     </SwitchGroup>
   ),
@@ -54,28 +53,28 @@ export const Horizontal: Story = {
   render: () => (
     <SwitchGroup className="overflow-x-auto" orientation="horizontal">
       <Switch name="notifications">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Notifications</Label>
-        </Switch.Button>
+          Notifications
+        </Switch.Content>
       </Switch>
       <Switch name="marketing">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Marketing</Label>
-        </Switch.Button>
+          Marketing
+        </Switch.Content>
       </Switch>
       <Switch name="social">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">Social</Label>
-        </Switch.Button>
+          Social
+        </Switch.Content>
       </Switch>
     </SwitchGroup>
   ),
@@ -98,28 +97,28 @@ export const Form: Story = {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <SwitchGroup>
           <Switch name="notifications" value="on">
-            <Switch.Button>
+            <Switch.Content>
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
-              <Label className="text-sm">Enable notifications</Label>
-            </Switch.Button>
+              Enable notifications
+            </Switch.Content>
           </Switch>
           <Switch defaultSelected name="newsletter" value="on">
-            <Switch.Button>
+            <Switch.Content>
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
-              <Label className="text-sm">Subscribe to newsletter</Label>
-            </Switch.Button>
+              Subscribe to newsletter
+            </Switch.Content>
           </Switch>
           <Switch name="marketing" value="on">
-            <Switch.Button>
+            <Switch.Content>
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
-              <Label className="text-sm">Receive marketing updates</Label>
-            </Switch.Button>
+              Receive marketing updates
+            </Switch.Content>
           </Switch>
         </SwitchGroup>
         <Button className="mt-4" size="sm" type="submit" variant="primary">
