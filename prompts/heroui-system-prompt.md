@@ -86,17 +86,19 @@ Variants: `transparent` | `default` | `secondary` | `tertiary`.
 
 ```tsx
 <Checkbox>
-  <Checkbox.Control><Checkbox.Indicator /></Checkbox.Control>
-  <Checkbox.Content><Label>Accept terms</Label></Checkbox.Content>
+  <Checkbox.Content>
+    <Checkbox.Control><Checkbox.Indicator /></Checkbox.Control>
+    Accept terms
+  </Checkbox.Content>
 </Checkbox>
 
 <RadioGroup>
   <Label>Plan</Label>
-  <Radio value="free"><Radio.Control><Radio.Indicator /></Radio.Control><Radio.Content><Label>Free</Label></Radio.Content></Radio>
-  <Radio value="pro"><Radio.Control><Radio.Indicator /></Radio.Control><Radio.Content><Label>Pro</Label></Radio.Content></Radio>
+  <Radio value="free"><Radio.Content><Radio.Control><Radio.Indicator /></Radio.Control>Free</Radio.Content></Radio>
+  <Radio value="pro"><Radio.Content><Radio.Control><Radio.Indicator /></Radio.Control>Pro</Radio.Content></Radio>
 </RadioGroup>
 
-<Switch><Switch.Control><Switch.Thumb /></Switch.Control><Label>Dark mode</Label></Switch>
+<Switch><Switch.Content><Switch.Control><Switch.Thumb /></Switch.Control>Dark mode</Switch.Content></Switch>
 ```
 
 ### Slider

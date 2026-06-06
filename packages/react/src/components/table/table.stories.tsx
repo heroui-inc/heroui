@@ -271,9 +271,11 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
             <Table.Header>
               <Table.Column className="pr-0">
                 <Checkbox aria-label="Select all" slot="selection">
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox.Content>
                 </Checkbox>
               </Table.Column>
               <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
@@ -315,9 +317,11 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
                       slot="selection"
                       variant="secondary"
                     >
-                      <Checkbox.Control>
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
+                      <Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox.Content>
                     </Checkbox>
                   </Table.Cell>
                   <Table.Cell className="font-medium">
@@ -491,9 +495,11 @@ const DynamicWithSelectionTemplate = () => {
             <Table.Header>
               <Table.Column>
                 <Checkbox aria-label="Select all" slot="selection">
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox.Content>
                 </Checkbox>
               </Table.Column>
               <Table.Collection items={columns}>
@@ -511,9 +517,11 @@ const DynamicWithSelectionTemplate = () => {
                       slot="selection"
                       variant="secondary"
                     >
-                      <Checkbox.Control>
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
+                      <Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox.Content>
                     </Checkbox>
                   </Table.Cell>
                   <Table.Collection items={columns}>

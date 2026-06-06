@@ -1,31 +1,31 @@
-import {Label, Switch, SwitchGroup} from "@heroui/react";
+import {Switch, SwitchGroup} from "@heroui/react";
 
 export function Group() {
   return (
     <SwitchGroup>
       <Switch name="notifications">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">允许通知</Label>
-        </Switch.Button>
+          允许通知
+        </Switch.Content>
       </Switch>
       <Switch name="marketing">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">营销邮件</Label>
-        </Switch.Button>
+          营销邮件
+        </Switch.Content>
       </Switch>
       <Switch name="social">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">社交媒体更新</Label>
-        </Switch.Button>
+          社交媒体更新
+        </Switch.Content>
       </Switch>
     </SwitchGroup>
   );

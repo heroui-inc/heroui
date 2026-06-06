@@ -29,9 +29,11 @@ export function SelectionDemo() {
             <Table.Header>
               <Table.Column className="pr-0">
                 <Checkbox aria-label="全选" slot="selection">
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox.Content>
                 </Checkbox>
               </Table.Column>
               <Table.Column isRowHeader>姓名</Table.Column>
@@ -44,9 +46,11 @@ export function SelectionDemo() {
                 <Table.Row key={user.id} id={user.id}>
                   <Table.Cell className="pr-0">
                     <Checkbox aria-label={`选择 ${user.name}`} slot="selection" variant="secondary">
-                      <Checkbox.Control>
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
+                      <Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox.Content>
                     </Checkbox>
                   </Table.Cell>
                   <Table.Cell>{user.name}</Table.Cell>

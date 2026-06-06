@@ -230,9 +230,11 @@ export function DesignThemeSelector({
                   </Description>
                 </div>
                 <Switch isSelected={vibrant} onChange={handleVibrantToggle}>
-                  <Switch.Control>
-                    <Switch.Thumb />
-                  </Switch.Control>
+                  <Switch.Content>
+                    <Switch.Control>
+                      <Switch.Thumb />
+                    </Switch.Control>
+                  </Switch.Content>
                 </Switch>
               </div>
             </div>

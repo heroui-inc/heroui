@@ -12,4 +12,4 @@ export {Invalid} from "./invalid";
 export {RenderProps} from "./render-props";
 export {Variants} from "./variants";
 export {WithDescription} from "./with-description";
-export {WithLabel} from "./with-label";
+export {ExternalLabel} from "./external-label";

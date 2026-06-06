@@ -6,30 +6,30 @@ export function Basic() {
       <Label>选择你的兴趣</Label>
       <Description>可多选</Description>
       <Checkbox value="coding">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>编程</Label>
-        </Checkbox.Button>
+          编程
+        </Checkbox.Content>
         <Description>热爱构建软件</Description>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>设计</Label>
-        </Checkbox.Button>
+          设计
+        </Checkbox.Content>
         <Description>喜欢打造精美界面</Description>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>写作</Label>
-        </Checkbox.Button>
+          写作
+        </Checkbox.Content>
         <Description>热衷于内容创作</Description>
       </Checkbox>
     </CheckboxGroup>

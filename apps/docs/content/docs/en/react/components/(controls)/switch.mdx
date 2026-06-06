@@ -1,6 +1,7 @@
 ---
 title: Switch
 description: A toggle switch component for boolean states
+icon: updated
 links:
   rac: SwitchField
   source: switch/switch.tsx
@@ -26,31 +27,23 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 Import the Switch component and access all parts using dot notation.
 
 ```tsx
-import { Switch, Label, Description, FieldError } from '@heroui/react';
+import { Switch, Description, FieldError } from '@heroui/react';
 
 export default () => (
   <Switch>
-    <Switch.Button>
+    <Switch.Content>
       <Switch.Control>
         <Switch.Thumb>
           <Switch.Icon /> {/* Optional */}
         </Switch.Thumb>
       </Switch.Control>
-      <Label /> {/* Part of the clickable button + accessible name */}
-    </Switch.Button>
+      Label {/* plain text — the clickable label + accessible name */}
+    </Switch.Content>
     <Description /> {/* Optional — field-level help text */}
     <FieldError /> {/* Optional — validation message */}
   </Switch>
 );
 ```
-
-<Callout type="warn">
-  Put the `Label` (and the `Switch.Control`) inside `Switch.Button` — it is the clickable
-  area and the switch's accessible name. Keep `Description` and `FieldError` as siblings of
-  `Switch.Button` so they are announced via `aria-describedby`. For a switch with **no label**
-  you can skip `Switch.Button` and place `Switch.Control` directly inside `Switch` — the control
-  becomes the clickable target (pass an `aria-label`).
-</Callout>
 
 For grouping multiple switches, use the `SwitchGroup` component:
 
@@ -60,20 +53,20 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 export default () => (
   <SwitchGroup>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Option 1</Label>
-      </Switch.Button>
+        Option 1
+      </Switch.Content>
     </Switch>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Option 2</Label>
-      </Switch.Button>
+        Option 2
+      </Switch.Content>
     </Switch>
   </SwitchGroup>
 );
@@ -186,7 +179,7 @@ function CustomSwitch() {
               className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
             />
           </Switch.Control>
-          <Label>Custom Switch</Label>
+          Custom Switch
         </>
       )}
     </Switch>
@@ -203,16 +196,20 @@ function CustomSwitchGroup() {
   return (
     <SwitchGroup className="gap-8" orientation="horizontal">
       <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Option 1</Label>
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Option 1
+        </Switch.Content>
       </Switch>
       <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Option 2</Label>
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Option 2
+        </Switch.Content>
       </Switch>
     </SwitchGroup>
   );
@@ -238,7 +235,7 @@ To customize the Switch component classes, you can use the `@layer components` d
     @apply bg-white shadow-sm;
   }
 
-  .switch__button {
+  .switch__content {
     @apply items-center gap-3;
   }
 
@@ -257,7 +254,7 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
 
 - `.switch` - Base switch container (the field)
-- `.switch__button` - Clickable label wrapping the control and label text
+- `.switch__content` - Clickable label wrapping the control and label text
 - `.switch__control` - Switch control track
 - `.switch__thumb` - Switch thumb that moves
 - `.switch__icon` - Optional icon inside the thumb
@@ -308,9 +305,9 @@ Inherits from [React Aria SwitchField](https://react-spectrum.adobe.com/react-ar
 | `children` | `React.ReactNode \| (values: SwitchFieldRenderProps) => React.ReactNode` | - | Switch content or field render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Switch.Button Props
+### Switch.Content Props
 
-The clickable `<label>` that wraps the control and label text. Put the `Label` inside it; keep `Description`/`FieldError` as siblings of `Switch.Button`. Optional for switches with no label — render `Switch.Control` directly inside `Switch` (with an `aria-label`) and the control becomes the clickable target.
+The clickable `<label>` that wraps the control and label text. Put `Switch.Control` and the `Label` inside it; keep `Description`/`FieldError` as siblings of `Switch.Content`. For a switch with no label, omit the `Label` and pass an `aria-label` on `Switch`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

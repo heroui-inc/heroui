@@ -3,7 +3,7 @@
 
    Structure (explicit composition):
      .radio                      → RadioField wrapper (column)
-       .radio__button            → RadioButton: the clickable row (control + label)
+       .radio__content            → RadioButton: the clickable row (control + label)
          .radio__control
          [data-slot="label"]
        [data-slot="description"] → field-level sibling, below the row
@@ -19,7 +19,7 @@
     @apply select-none;
   }
 
-  .radio__button [data-slot="label"] {
+  .radio__content [data-slot="label"] {
     cursor: var(--cursor-interactive);
   }
 
@@ -42,9 +42,9 @@
   }
 }
 
-/* Radio button — the clickable label (control + label text) */
-.radio__button {
-  @apply inline-flex cursor-[inherit] items-center gap-3 outline-none no-highlight;
+/* Radio content — the clickable label (control + label text) */
+.radio__content {
+  @apply inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
 }
 
 /* ==========================================================================
@@ -68,19 +68,19 @@
 
   /* Interactive states */
   /* Focus */
-  .radio:has([data-slot="radio-button"][data-focus-visible="true"]) &,
-  .radio [data-slot="radio-button"][data-focus-visible="true"] & {
+  .radio:has([data-slot="radio-content"][data-focus-visible="true"]) &,
+  .radio [data-slot="radio-content"][data-focus-visible="true"] & {
     @apply status-focused;
   }
 
   /* Hover */
-  .radio:has([data-slot="radio-button"][data-hovered="true"]) &,
-  .radio [data-slot="radio-button"][data-hovered="true"] & {
+  .radio:has([data-slot="radio-content"][data-hovered="true"]) &,
+  .radio [data-slot="radio-content"][data-hovered="true"] & {
     @apply border-field-border-hover;
   }
 
   /* Hover - only when not selected */
-  .radio:has([data-slot="radio-button"][data-hovered="true"]):not([data-selected]):not(
+  .radio:has([data-slot="radio-content"][data-hovered="true"]):not([data-selected]):not(
       :has(input:checked)
     )
     & {
@@ -90,23 +90,23 @@
   }
 
   /* Pressed */
-  .radio:has([data-slot="radio-button"][data-pressed="true"]) &,
-  .radio [data-slot="radio-button"][data-pressed="true"] & {
+  .radio:has([data-slot="radio-content"][data-pressed="true"]) &,
+  .radio [data-slot="radio-content"][data-pressed="true"] & {
     @apply scale-95;
   }
 
   /* Selection states */
   /* Selected */
   .radio[data-selected] &,
-  .radio:has([data-slot="radio-button"][aria-checked="true"]) &,
+  .radio:has([data-slot="radio-content"][aria-checked="true"]) &,
   .radio:has(input:checked) & {
     @apply border-transparent bg-accent;
   }
 
   /* Selected + Pressed */
-  .radio[data-selected]:has([data-slot="radio-button"][data-pressed="true"]) &,
-  .radio:has([data-slot="radio-button"][data-pressed="true"][aria-checked="true"]) &,
-  .radio:has(input:checked):has([data-slot="radio-button"][data-pressed="true"]) & {
+  .radio[data-selected]:has([data-slot="radio-content"][data-pressed="true"]) &,
+  .radio:has([data-slot="radio-content"][data-pressed="true"][aria-checked="true"]) &,
+  .radio:has(input:checked):has([data-slot="radio-content"][data-pressed="true"]) & {
     @apply bg-accent-hover;
   }
 
@@ -158,18 +158,18 @@
 
 /* Selected state */
 .radio[data-selected] .radio__indicator:empty::before,
-.radio:has([data-slot="radio-button"][aria-checked="true"]) .radio__indicator:empty::before,
+.radio:has([data-slot="radio-content"][aria-checked="true"]) .radio__indicator:empty::before,
 .radio:has(input:checked) .radio__indicator:empty::before {
   @apply bg-accent-foreground;
   scale: 0.4286; /* 6px */
 }
 
 /* Selected + Pressed state */
-.radio[data-selected]:has([data-slot="radio-button"][data-pressed="true"])
+.radio[data-selected]:has([data-slot="radio-content"][data-pressed="true"])
   .radio__indicator:empty::before,
-.radio:has([data-slot="radio-button"][data-pressed="true"][aria-checked="true"])
+.radio:has([data-slot="radio-content"][data-pressed="true"][aria-checked="true"])
   .radio__indicator:empty::before,
-.radio:has(input:checked):has([data-slot="radio-button"][data-pressed="true"])
+.radio:has(input:checked):has([data-slot="radio-content"][data-pressed="true"])
   .radio__indicator:empty::before {
   scale: 0.5714; /* 8px */
 }

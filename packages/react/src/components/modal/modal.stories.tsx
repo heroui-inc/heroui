@@ -405,16 +405,20 @@ export const ScrollComparison = () => {
         onChange={(value) => setScroll(value as "inside" | "outside")}
       >
         <Radio value="inside">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Label>Inside</Label>
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Label>Inside</Label>
+          </Radio.Content>
         </Radio>
         <Radio value="outside">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Label>Outside</Label>
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            <Label>Outside</Label>
+          </Radio.Content>
         </Radio>
       </RadioGroup>
 

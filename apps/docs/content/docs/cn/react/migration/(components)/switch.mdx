@@ -27,12 +27,12 @@ import { Switch, Label } from "@heroui/react";
 export default function App() {
   return (
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
     </Switch>
   );
 }
@@ -43,7 +43,7 @@ export default function App() {
 ### 1. 组件结构
 
 **v2：** children 作为标签的简单 Switch  
-**v3：** 复合组件（`Switch.Button`、`Switch.Control`、`Switch.Thumb`）与 `Label` 组件
+**v3：** 复合组件（`Switch.Content`、`Switch.Control`、`Switch.Thumb`）与 `Label` 组件
 
 ### 2. Prop 变更
 
@@ -62,7 +62,7 @@ export default function App() {
 ### 3. 新组件
 
 - `SwitchGroup` — 用于将多个 Switch 成组  
-- `Switch.Button` — 可点击的标签，包裹控件与 `Label`  
+- `Switch.Content` — 可点击的标签，包裹控件与 `Label`  
 - `Switch.Icon` — 拇指（Thumb）内的图标  
 
 ## 迁移示例
@@ -88,12 +88,12 @@ export default function App() {
     const [isSelected, setIsSelected] = useState(true);
 
     <Switch isSelected={isSelected} onChange={setIsSelected}>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Airplane mode</Label>
-      </Switch.Button>
+        Airplane mode
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -110,9 +110,11 @@ export default function App() {
   <Tab value="v3">
     ```tsx
     <Switch defaultSelected aria-label="Automatic updates">
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -129,7 +131,7 @@ export default function App() {
   <Tab value="v3">
     ```tsx
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb>
             <Switch.Icon>
@@ -137,8 +139,8 @@ export default function App() {
             </Switch.Icon>
           </Switch.Thumb>
         </Switch.Control>
-        <Label>Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -160,14 +162,14 @@ export default function App() {
   <Tab value="v3">
     ```tsx
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="flex items-center gap-2">
           <SunIcon />
           <Switch.Thumb />
           <MoonIcon />
         </Switch.Control>
-        <Label>Dark mode</Label>
-      </Switch.Button>
+        Dark mode
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -188,12 +190,12 @@ export default function App() {
     import { Switch, Label, Description } from "@heroui/react";
 
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
       <Description>You will receive notifications for all activity</Description>
     </Switch>
     ```
@@ -223,55 +225,55 @@ export default function App() {
     {/* Sizes */}
     <div className="flex gap-4">
       <Switch size="sm">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Small</Label>
-        </Switch.Button>
+          Small
+        </Switch.Content>
       </Switch>
       <Switch size="md">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Medium</Label>
-        </Switch.Button>
+          Medium
+        </Switch.Content>
       </Switch>
       <Switch size="lg">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Large</Label>
-        </Switch.Button>
+          Large
+        </Switch.Content>
       </Switch>
     </div>
     
     {/* Colors - Use Tailwind CSS classes */}
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="data-[selected=true]:bg-accent">
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Primary</Label>
-      </Switch.Button>
+        Primary
+      </Switch.Content>
     </Switch>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="data-[selected=true]:bg-success">
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Success</Label>
-      </Switch.Button>
+        Success
+      </Switch.Content>
     </Switch>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="data-[selected=true]:bg-danger">
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Danger</Label>
-      </Switch.Button>
+        Danger
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -295,20 +297,20 @@ export default function App() {
 
     <SwitchGroup>
       <Switch name="notifications">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Allow Notifications</Label>
-        </Switch.Button>
+          Allow Notifications
+        </Switch.Content>
       </Switch>
       <Switch name="marketing">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Marketing emails</Label>
-        </Switch.Button>
+          Marketing emails
+        </Switch.Content>
       </Switch>
     </SwitchGroup>
     ```
@@ -321,7 +323,7 @@ v3 `Switch` 的结构如下：
 
 ```
 Switch (Root)
-  ├── Switch.Button (the clickable label)
+  ├── Switch.Content (the clickable label)
   │   ├── Switch.Control
   │   │   └── Switch.Thumb
   │   │       └── Switch.Icon (optional)
@@ -335,13 +337,13 @@ Switch (Root)
 ```
 SwitchGroup
   ├── Switch
-  │   ├── Switch.Button
+  │   ├── Switch.Content
   │   │   ├── Switch.Control
   │   │   │   └── Switch.Thumb
   │   │   └── Label
   │   └── Description (optional)
   └── Switch
-      ├── Switch.Button
+      ├── Switch.Content
       │   ├── Switch.Control
       │   │   └── Switch.Thumb
       │   └── Label
@@ -358,7 +360,7 @@ SwitchGroup
 ### 标签
 
 - **v2：** children 作为标签  
-- **v3：** `Label` 放在 `Switch.Button`（可点击的标签）内；`Description` / `FieldError` 作为 `Switch.Button` 的同级元素
+- **v3：** `Label` 放在 `Switch.Content`（可点击的标签）内；`Description` / `FieldError` 作为 `Switch.Content` 的同级元素
 
 ### 图标
 
@@ -367,11 +369,11 @@ SwitchGroup
 
 ## 总结
 
-1. **组件结构**：必须使用复合组件（`Switch.Button`、`Switch.Control`、`Switch.Thumb`）
-2. **可点击的标签**：用 `Switch.Button` 包裹 `Switch.Control` 与 `Label`；将 `Description` / `FieldError` 作为 `Switch.Button` 的同级元素
-3. **标签**：不再用 children 作为标签 — 请在 `Switch.Button` 内使用 `Label`
+1. **组件结构**：必须使用复合组件（`Switch.Content`、`Switch.Control`、`Switch.Thumb`）
+2. **可点击的标签**：用 `Switch.Content` 包裹 `Switch.Control` 与 `Label`；将 `Description` / `FieldError` 作为 `Switch.Content` 的同级元素
+3. **标签**：不再用 children 作为标签 — 请在 `Switch.Content` 内使用 `Label`
 4. **事件处理函数**：`onValueChange` → `onChange`
 5. **样式相关 prop 已移除**：`color` — 请使用 Tailwind CSS
 6. **图标相关 prop 已移除**：`thumbIcon`、`startContent`、`endContent` — 请用子组件或直接自定义
 7. **`classNames` 已移除**：请在各子组件上使用 `className` prop
-8. **新组件**：`SwitchGroup` 用于成组；`Switch.Button` 作为可点击的标签，包裹控件与 `Label`
+8. **新组件**：`SwitchGroup` 用于成组；`Switch.Content` 作为可点击的标签，包裹控件与 `Label`

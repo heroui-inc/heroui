@@ -11,7 +11,7 @@ github:
 
 Calendar gains week and day views, a reworked year picker, and range demos built on React Aria 1.18. [Tooltip](/docs/components/tooltip) adds theme variables for global show and hide delays. The toggles (`Radio`, `Checkbox`, `Switch`) move to React Aria's `*Field` + `*Button` composition. This release also rolls in the patch fixes shipped alongside React Aria 1.18 (`Table.SortableColumnHeader`, toast and fieldset fixes, scroll and RTL style fixes).
 
-⚠️ **Breaking changes**: `Radio`, `Checkbox`, and `Switch` replace `*.Content` with `*.Button`. See [Breaking Changes](#breaking-changes).
+⚠️ **Breaking changes**: `Radio`, `Checkbox`, and `Switch` move to an explicit `*.Content` composition — `*.Control` nests inside `*.Content`, the label is plain text inside `*.Content` (no nested `<Label>`), and `Description`/`FieldError` become siblings of `*.Content`. See [Breaking Changes](#-breaking-changes).
 
 ## Installation
 
@@ -130,16 +130,20 @@ Individual `delay` and `closeDelay` props still override these values on specifi
 - **@internationalized/date**: `3.12.1` → `3.12.2`
 - **React Aria / Stately helpers**: `@react-aria/*`, `@react-stately/*`, and `@react-types/shared` patch updates
 
-## Breaking Changes
+## ⚠️ Breaking Changes
 
-### Radio, Checkbox & Switch: `*.Content` → `*.Button`
+### Radio, Checkbox & Switch: explicit `*.Content` composition
 
-These toggles now use React Aria's `*Field` + `*Button` composition. The `*.Content` wrapper is removed. Put the control and `Label` inside a new `*.Button` (the clickable label), and move `Description`/`FieldError` out as siblings of `*.Button` so they're exposed via `aria-describedby` instead of the accessible name.
+These toggles now use React Aria's `*Field` + `*Button` composition under the hood. `X.Content` is now the **clickable label** (React Aria's `*Button`). Three things change:
+
+- **`X.Control` moves inside `X.Content`** — they used to be siblings.
+- **The label is plain text inside `X.Content`** — `X.Content` renders the `<label>` element, so don't nest a `<Label>` component (nested `<label>` elements are invalid HTML). For a standalone `Label`, place it **outside** and link it with `htmlFor` + the toggle `id`.
+- **`Description`/`FieldError` move out** as siblings of `X.Content`, so they're exposed via `aria-describedby` instead of being folded into the accessible name.
 
 **Checkbox**
 
 ```tsx
-// Before
+// v3.1
 <Checkbox>
   <Checkbox.Control>
     <Checkbox.Indicator />
@@ -150,14 +154,14 @@ These toggles now use React Aria's `*Field` + `*Button` composition. The `*.Cont
   </Checkbox.Content>
 </Checkbox>
 
-// After
+// v3.2
 <Checkbox>
-  <Checkbox.Button>
+  <Checkbox.Content>
     <Checkbox.Control>
       <Checkbox.Indicator />
     </Checkbox.Control>
-    <Label>Accept terms</Label>
-  </Checkbox.Button>
+    Accept terms
+  </Checkbox.Content>
   <Description>You agree to our terms</Description>
 </Checkbox>
 ```
@@ -165,7 +169,7 @@ These toggles now use React Aria's `*Field` + `*Button` composition. The `*.Cont
 **Radio**
 
 ```tsx
-// Before
+// v3.1
 <Radio value="a">
   <Radio.Control>
     <Radio.Indicator />
@@ -175,21 +179,21 @@ These toggles now use React Aria's `*Field` + `*Button` composition. The `*.Cont
   </Radio.Content>
 </Radio>
 
-// After
+// v3.2
 <Radio value="a">
-  <Radio.Button>
+  <Radio.Content>
     <Radio.Control>
       <Radio.Indicator />
     </Radio.Control>
-    <Label>Option A</Label>
-  </Radio.Button>
+    Option A
+  </Radio.Content>
 </Radio>
 ```
 
 **Switch**
 
 ```tsx
-// Before
+// v3.1
 <Switch>
   <Switch.Control>
     <Switch.Thumb />
@@ -199,26 +203,42 @@ These toggles now use React Aria's `*Field` + `*Button` composition. The `*.Cont
   </Switch.Content>
 </Switch>
 
-// After
+// v3.2
 <Switch>
-  <Switch.Button>
+  <Switch.Content>
     <Switch.Control>
       <Switch.Thumb />
     </Switch.Control>
-    <Label>Enable notifications</Label>
-  </Switch.Button>
+    Enable notifications
+  </Switch.Content>
 </Switch>
 ```
 
 **Migration summary**
 
-| Before | After |
-|--------|-------|
-| `<X.Content>` wraps `Label` + help text | `<X.Button>` wraps `X.Control` + `Label` |
-| `Description` / `FieldError` inside `X.Content` | `Description` / `FieldError` as siblings of `X.Button` |
-| `X.Content` part | Removed — use `X.Button` |
+| v3.1 | v3.2 |
+|------|------|
+| `X.Control` and `X.Content` are siblings | `X.Control` nests inside `X.Content` |
+| `X.Content` is a layout `<div>` wrapping `Label` + help text | `X.Content` is the clickable `<label>` wrapping `X.Control` + label text |
+| Label provided via `<Label>` inside `X.Content` | Label is **plain text** inside `X.Content` (no nested `<Label>`) |
+| `Description` / `FieldError` inside `X.Content` | `Description` / `FieldError` as siblings of `X.Content` |
 
-**Control-only checkboxes and switches need no changes.** If you render `Checkbox.Control` / `Switch.Control` directly inside the root (no label, e.g. table row selection or icon switches), it keeps working — the control self-wraps into the clickable element.
+**External label** — to use a standalone `Label`, place it outside the toggle and link it with `htmlFor` + the toggle `id`:
+
+```tsx
+<div className="flex items-center gap-3">
+  <Checkbox id="terms">
+    <Checkbox.Content>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+    </Checkbox.Content>
+  </Checkbox>
+  <Label htmlFor="terms">Accept terms</Label>
+</div>
+```
+
+**Control-only checkboxes and switches** (no label, e.g. table row selection or icon switches) still need `X.Content` as the clickable wrapper. Wrap `Checkbox.Control` / `Switch.Control` in `X.Content`, omit the label, and pass an `aria-label` on the root.
 
 Full per-component guides: [Checkbox](/docs/react/migration/checkbox), [Checkbox Group](/docs/react/migration/checkbox-group), [Radio](/docs/react/migration/radio), [Radio Group](/docs/react/migration/radio-group), and [Switch](/docs/react/migration/switch).
 

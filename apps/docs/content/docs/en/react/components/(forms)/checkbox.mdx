@@ -1,6 +1,7 @@
 ---
 title: Checkbox
 description: Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.
+icon: updated
 links:
   rac: CheckboxField
   source: checkbox/checkbox.tsx
@@ -12,7 +13,7 @@ links:
 ## Import
 
 ```tsx
-import { Checkbox, Label } from '@heroui/react';
+import { Checkbox } from '@heroui/react';
 ```
 
 ### Usage
@@ -26,30 +27,21 @@ import { Checkbox, Label } from '@heroui/react';
 Import the Checkbox component and access all parts using dot notation.
 
 ```tsx
-import { Checkbox, Label, Description, FieldError } from '@heroui/react';
+import { Checkbox, Description, FieldError } from '@heroui/react';
 
 export default () => (
   <Checkbox>
-    <Checkbox.Button>
+    <Checkbox.Content>
       <Checkbox.Control>
         <Checkbox.Indicator />
       </Checkbox.Control>
-      <Label /> {/* Part of the clickable button + accessible name */}
-    </Checkbox.Button>
+      Label {/* plain text — the clickable label + accessible name */}
+    </Checkbox.Content>
     <Description /> {/* Optional — field-level help text */}
     <FieldError /> {/* Optional — validation message */}
   </Checkbox>
 );
 ```
-
-<Callout type="warn">
-  Put only the `Label` inside `Checkbox.Button` — it is the clickable area and the
-  checkbox's accessible name. Keep `Description` and `FieldError` as siblings of
-  `Checkbox.Button` so they are announced via `aria-describedby` instead of becoming
-  part of the name. For a checkbox with **no label** (e.g. table row selection) you can
-  skip `Checkbox.Button` and place `Checkbox.Control` directly inside `Checkbox` — the
-  control becomes the clickable target.
-</Callout>
 
 ### Disabled
 
@@ -75,10 +67,10 @@ export default () => (
   name="checkbox-indeterminate"
 />
 
-### With Label
+### External Label
 
 <ComponentPreview
-  name="checkbox-with-label"
+  name="checkbox-external-label"
 />
 
 ### With Description
@@ -141,17 +133,17 @@ The Checkbox component supports two visual variants:
 You can customize individual Checkbox components:
 
 ```tsx
-import { Checkbox, Label } from '@heroui/react';
+import { Checkbox } from '@heroui/react';
 
 function CustomCheckbox() {
   return (
     <Checkbox name="custom">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
           <Checkbox.Indicator className="text-white" />
         </Checkbox.Control>
-        <Label>Custom Checkbox</Label>
-      </Checkbox.Button>
+        Custom Checkbox
+      </Checkbox.Content>
     </Checkbox>
   );
 }
@@ -191,7 +183,7 @@ To customize the Checkbox component classes, you can use the `@layer components`
     @apply text-white;
   }
 
-  .checkbox__button {
+  .checkbox__content {
     @apply items-center gap-3;
   }
 }
@@ -204,7 +196,7 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 The Checkbox component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/checkbox.css)):
 
 - `.checkbox` - Base checkbox container (the field)
-- `.checkbox__button` - Clickable label wrapping the control and label text
+- `.checkbox__content` - Clickable label wrapping the control and label text
 - `.checkbox__control` - Checkbox control box
 - `.checkbox__indicator` - Checkbox checkmark indicator
 
@@ -244,9 +236,9 @@ Inherits from [React Aria CheckboxField](https://react-spectrum.adobe.com/react-
 | `children` | `React.ReactNode \| (values: CheckboxFieldRenderProps) => React.ReactNode` | - | Checkbox content or field render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Checkbox.Button Props
+### Checkbox.Content Props
 
-The clickable `<label>` that wraps the control and label text. Put the `Label` inside it; keep `Description`/`FieldError` as siblings of `Checkbox.Button`. Optional for control-only checkboxes — if you render `Checkbox.Control` directly inside `Checkbox` (no label), the control itself becomes the clickable target.
+The clickable `<label>` that wraps the control and label text. Put `Checkbox.Control` and the `Label` inside it; keep `Description`/`FieldError` as siblings of `Checkbox.Content`. For a checkbox with no label, omit the `Label` and pass an `aria-label` on `Checkbox`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

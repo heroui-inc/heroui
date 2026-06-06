@@ -35,29 +35,29 @@ export default function App() {
     <RadioGroup name="city">
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>London</Label>
-        </Radio.Button>
+          London
+        </Radio.Content>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Tokyo</Label>
-        </Radio.Button>
+          Tokyo
+        </Radio.Content>
         <Description>Capital of Japan</Description>
       </Radio>
       <Radio value="paris">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Paris</Label>
-        </Radio.Button>
+          Paris
+        </Radio.Content>
       </Radio>
     </RadioGroup>
   );
@@ -74,12 +74,12 @@ export default function App() {
 ### 2. Radio 结构
 
 **v2：** 简单的 Radio 组件，子节点直接作为标签  
-**v3：** 复合 Radio 组件，由 `Radio.Button`、`Radio.Control` 与 `Radio.Indicator` 组成
+**v3：** 复合 Radio 组件，由 `Radio.Content`、`Radio.Control` 与 `Radio.Indicator` 组成
 
 ### 3. 描述处理
 
 **v2：** 在单个 `Radio` 组件上使用 `description` prop  
-**v3：** 将 `Description` 组件作为 `Radio.Button` 的兄弟节点使用
+**v3：** 将 `Description` 组件作为 `Radio.Content` 的兄弟节点使用
 
 ### 4. 事件处理函数
 
@@ -118,21 +118,21 @@ export default function App() {
     <RadioGroup name="plan">
       <Label>Select plan</Label>
       <Radio value="basic">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Basic</Label>
-        </Radio.Button>
+          Basic
+        </Radio.Content>
         <Description>Basic features</Description>
       </Radio>
       <Radio value="pro">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Pro</Label>
-        </Radio.Button>
+          Pro
+        </Radio.Content>
         <Description>All features</Description>
       </Radio>
     </RadioGroup>
@@ -160,12 +160,12 @@ export default function App() {
     <RadioGroup variant="primary" name="plan">
       <Label>Select plan</Label>
       <Radio value="basic">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Basic</Label>
-        </Radio.Button>
+          Basic
+        </Radio.Content>
       </Radio>
     </RadioGroup>
 
@@ -173,12 +173,12 @@ export default function App() {
     <RadioGroup variant="secondary" name="plan">
       <Label>Select plan</Label>
       <Radio value="basic">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Basic</Label>
-        </Radio.Button>
+          Basic
+        </Radio.Content>
       </Radio>
     </RadioGroup>
     ```
@@ -194,20 +194,20 @@ import { RadioGroup, Radio, Label } from "@heroui/react";
 <RadioGroup isReadOnly defaultValue="basic" name="plan">
   <Label>Select plan</Label>
   <Radio value="basic">
-    <Radio.Button>
+    <Radio.Content>
       <Radio.Control>
         <Radio.Indicator />
       </Radio.Control>
-      <Label>Basic</Label>
-    </Radio.Button>
+      Basic
+    </Radio.Content>
   </Radio>
   <Radio value="pro">
-    <Radio.Button>
+    <Radio.Content>
       <Radio.Control>
         <Radio.Indicator />
       </Radio.Control>
-      <Label>Pro</Label>
-    </Radio.Button>
+      Pro
+    </Radio.Content>
   </Radio>
 </RadioGroup>
 ```
@@ -238,20 +238,20 @@ import { RadioGroup, Radio, Label } from "@heroui/react";
     <RadioGroup name="city" value={value} onChange={setValue}>
       <Label>Select city</Label>
       <Radio value="london">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>London</Label>
-        </Radio.Button>
+          London
+        </Radio.Content>
       </Radio>
       <Radio value="tokyo">
-        <Radio.Button>
+        <Radio.Content>
           <Radio.Control>
             <Radio.Indicator />
           </Radio.Control>
-          <Label>Tokyo</Label>
-        </Radio.Button>
+          Tokyo
+        </Radio.Content>
       </Radio>
     </RadioGroup>
     ```
@@ -262,7 +262,7 @@ import { RadioGroup, Radio, Label } from "@heroui/react";
 
 - 用 `Label` 子组件取代 `label` prop
 - 将 Radio 子项更新为复合组件结构
-- 将 `Description` 组件作为 `Radio.Button` 的兄弟节点，取代 Radio 的 `description` prop
+- 将 `Description` 组件作为 `Radio.Content` 的兄弟节点，取代 Radio 的 `description` prop
 - 将 `onValueChange` 改为 `onChange`
 - 添加 `name` prop 以便集成到表单中
 - 新增 `variant` prop：`"primary"`（默认）或 `"secondary"`，用于较弱的视觉强调

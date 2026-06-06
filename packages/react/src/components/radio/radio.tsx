@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {RadioButtonRenderProps, RadioFieldRenderProps} from "react-aria-components/RadioGroup";
 
 import {radioVariants} from "@heroui/styles";
-import React, {createContext, useContext, useId} from "react";
+import React, {createContext, useContext} from "react";
 import {
   RadioButton as RadioButtonPrimitive,
   RadioField as RadioFieldPrimitive,
@@ -14,80 +14,69 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
-import {RadioButtonContext, RadioFieldIdContext} from "./radio-context";
-
-interface RadioFieldContextValue {
+interface RadioContext {
   slots?: ReturnType<typeof radioVariants>;
-  fieldState?: RadioFieldRenderProps;
+  state?: RadioFieldRenderProps;
 }
 
-const RadioFieldContext = createContext<RadioFieldContextValue>({});
+const RadioContext = createContext<RadioContext>({});
 
 /* -------------------------------------------------------------------------------------------------
- * Radio (Field) — React Aria `RadioField`. RSC-safe: it does not inspect children.
+ * Radio (Field) — React Aria `RadioField`.
  * -----------------------------------------------------------------------------------------------*/
 interface RadioRootProps extends ComponentPropsWithRef<typeof RadioFieldPrimitive> {
   /** The name of the radio button, used when submitting an HTML form. */
   name?: string;
 }
 
-const RadioRoot = ({children, className, id, ...props}: RadioRootProps) => {
-  const generatedId = useId();
-  const inputId = id ?? generatedId;
+const RadioRoot = ({children, className, ...props}: RadioRootProps) => {
   const slots = React.useMemo(() => radioVariants(), []);
 
   return (
-    <RadioFieldIdContext value={{inputId}}>
-      <RadioFieldPrimitive
-        data-slot="radio"
-        id={inputId}
-        {...props}
-        className={composeTwRenderProps(className, slots.base())}
-      >
-        {(fieldState) => (
-          <RadioFieldContext value={{slots, fieldState}}>
-            {typeof children === "function" ? children(fieldState) : children}
-          </RadioFieldContext>
-        )}
-      </RadioFieldPrimitive>
-    </RadioFieldIdContext>
+    <RadioFieldPrimitive
+      data-slot="radio"
+      {...props}
+      className={composeTwRenderProps(className, slots.base())}
+    >
+      {(state) => (
+        <RadioContext value={{slots, state}}>
+          {typeof children === "function" ? children(state) : children}
+        </RadioContext>
+      )}
+    </RadioFieldPrimitive>
   );
 };
 
 RadioRoot.displayName = "HeroUI.Radio";
 
 /* -------------------------------------------------------------------------------------------------
- * Radio.Button — clickable `RadioButton` label wrapping the control + `Label`.
- * Keep `Description`/`FieldError` as siblings of `Radio.Button`.
+ * Radio.Content — the clickable `RadioButton` label wrapping the control + `Label`.
+ * Keep `Description`/`FieldError` as siblings of `Radio.Content`.
  * -----------------------------------------------------------------------------------------------*/
-interface RadioButtonRootProps extends ComponentPropsWithRef<typeof RadioButtonPrimitive> {}
+interface RadioContentProps extends ComponentPropsWithRef<typeof RadioButtonPrimitive> {}
 
-const RadioButtonRoot = ({children, className, ...props}: RadioButtonRootProps) => {
-  const {slots} = useContext(RadioFieldContext);
+const RadioContent = ({children, className, ...props}: RadioContentProps) => {
+  const {slots} = useContext(RadioContext);
 
   return (
     <RadioButtonPrimitive
-      data-slot="radio-button"
+      data-slot="radio-content"
       {...props}
-      className={composeTwRenderProps(className, slots?.button())}
+      className={composeTwRenderProps(className, slots?.content())}
     >
-      {(buttonState) => (
-        <RadioButtonContext value={{buttonState, isInsideRadioButton: true}}>
-          {typeof children === "function" ? children(buttonState) : children}
-        </RadioButtonContext>
-      )}
+      {children}
     </RadioButtonPrimitive>
   );
 };
 
-RadioButtonRoot.displayName = "HeroUI.Radio.Button";
+RadioContent.displayName = "HeroUI.Radio.Content";
 
 /* -----------------------------------------------------------------------------------------------*/
 
 interface RadioControlProps<
   E extends keyof React.JSX.IntrinsicElements = "span",
 > extends DOMRenderProps<E, undefined> {
-  children?: ReactNode | ((props: RadioButtonRenderProps) => ReactNode);
+  children?: ReactNode;
   className?: string;
 }
 
@@ -96,9 +85,7 @@ const RadioControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: RadioControlProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof RadioControlProps<E>>) => {
-  const {fieldState, slots} = useContext(RadioFieldContext);
-  const {buttonState} = useContext(RadioButtonContext);
-  const renderState = (buttonState ?? fieldState) as RadioButtonRenderProps | undefined;
+  const {slots} = useContext(RadioContext);
 
   return (
     <dom.span
@@ -106,9 +93,7 @@ const RadioControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
       data-slot="radio-control"
       {...(props as any)}
     >
-      {typeof children === "function"
-        ? children(renderState ?? ({} as RadioButtonRenderProps))
-        : children}
+      {children}
     </dom.span>
   );
 };
@@ -120,7 +105,7 @@ RadioControl.displayName = "HeroUI.Radio.Control";
 interface RadioIndicatorProps<
   E extends keyof React.JSX.IntrinsicElements = "span",
 > extends DOMRenderProps<E, undefined> {
-  children?: ReactNode | ((props: RadioButtonRenderProps) => ReactNode);
+  children?: ReactNode | ((props: RadioFieldRenderProps) => ReactNode);
   className?: string;
 }
 
@@ -129,14 +114,10 @@ const RadioIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: RadioIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof RadioIndicatorProps<E>>) => {
-  const {fieldState, slots} = useContext(RadioFieldContext);
-  const {buttonState} = useContext(RadioButtonContext);
-  const renderState = (buttonState ?? fieldState) as RadioButtonRenderProps | undefined;
+  const {slots, state} = useContext(RadioContext);
 
   const content =
-    typeof children === "function"
-      ? children(renderState ?? ({} as RadioButtonRenderProps))
-      : children;
+    typeof children === "function" ? children(state ?? ({} as RadioFieldRenderProps)) : children;
 
   return (
     <dom.span
@@ -154,11 +135,10 @@ RadioIndicator.displayName = "HeroUI.Radio.Indicator";
 
 /* ----------------------------------------------------------------------------------------------*/
 
-export {RadioRoot, RadioButtonRoot, RadioControl, RadioIndicator};
-export {RadioButtonContext, RadioFieldIdContext} from "./radio-context";
+export {RadioRoot, RadioContent, RadioControl, RadioIndicator};
 export type {
   RadioRootProps,
-  RadioButtonRootProps,
+  RadioContentProps,
   RadioControlProps,
   RadioIndicatorProps,
   RadioFieldRenderProps,

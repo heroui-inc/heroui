@@ -97,22 +97,22 @@
 
   /* Focus states */
   .switch:focus-visible &,
-  .switch:has([data-slot="switch-button"][data-focus-visible="true"]) &,
-  .switch [data-slot="switch-button"][data-focus-visible="true"] & {
+  .switch:has([data-slot="switch-content"][data-focus-visible="true"]) &,
+  .switch [data-slot="switch-content"][data-focus-visible="true"] & {
     @apply status-focused;
   }
 
   /* Hover states */
   .switch:hover &,
-  .switch:has([data-slot="switch-button"][data-hovered="true"]) &,
-  .switch [data-slot="switch-button"][data-hovered="true"] & {
+  .switch:has([data-slot="switch-content"][data-hovered="true"]) &,
+  .switch [data-slot="switch-content"][data-hovered="true"] & {
     background-color: var(--switch-control-bg-hover);
   }
 
   /* Pressed states */
   .switch:active &,
-  .switch:has([data-slot="switch-button"][data-pressed="true"]) &,
-  .switch [data-slot="switch-button"][data-pressed="true"] & {
+  .switch:has([data-slot="switch-content"][data-pressed="true"]) &,
+  .switch [data-slot="switch-content"][data-pressed="true"] & {
     background-color: var(--switch-control-bg-pressed);
     @apply motion-reduce:transform-none;
   }
@@ -128,7 +128,7 @@
   .switch[data-selected="true"]:hover &,
   .switch[aria-checked="true"][data-hovered="true"] &,
   .switch[data-selected="true"][data-hovered="true"] &,
-  .switch:has([data-slot="switch-button"][data-hovered="true"])[data-selected="true"] & {
+  .switch:has([data-slot="switch-content"][data-hovered="true"])[data-selected="true"] & {
     background-color: var(--switch-control-bg-checked-hover);
   }
 
@@ -137,14 +137,14 @@
   .switch[data-selected="true"]:active &,
   .switch[aria-checked="true"][data-pressed="true"] &,
   .switch[data-selected="true"][data-pressed="true"] &,
-  .switch:has([data-slot="switch-button"][data-pressed="true"])[data-selected="true"] & {
+  .switch:has([data-slot="switch-content"][data-pressed="true"])[data-selected="true"] & {
     background-color: var(--switch-control-bg-checked-hover);
   }
 }
 
-/* Switch button — the clickable label (control + label text) */
-.switch__button {
-  @apply inline-flex cursor-[inherit] items-center gap-3 outline-none no-highlight;
+/* Switch content — the clickable label (control + label text) */
+.switch__content {
+  @apply inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
 }
 
 /* Size-specific control dimensions */
@@ -233,7 +233,7 @@
   @apply select-none;
 }
 
-.switch__button [data-slot="label"] {
+.switch__content [data-slot="label"] {
   cursor: var(--cursor-interactive);
 }
 

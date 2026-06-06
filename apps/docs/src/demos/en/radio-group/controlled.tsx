@@ -11,30 +11,30 @@ export function Controlled() {
       <RadioGroup name="plan-controlled" value={value} onChange={setValue}>
         <Label>Subscription plan</Label>
         <Radio value="starter">
-          <Radio.Button>
+          <Radio.Content>
             <Radio.Control>
               <Radio.Indicator />
             </Radio.Control>
-            <Label>Starter</Label>
-          </Radio.Button>
+            Starter
+          </Radio.Content>
           <Description>For side projects and small teams</Description>
         </Radio>
         <Radio value="pro">
-          <Radio.Button>
+          <Radio.Content>
             <Radio.Control>
               <Radio.Indicator />
             </Radio.Control>
-            <Label>Pro</Label>
-          </Radio.Button>
+            Pro
+          </Radio.Content>
           <Description>Advanced reporting and analytics</Description>
         </Radio>
         <Radio value="teams">
-          <Radio.Button>
+          <Radio.Content>
             <Radio.Control>
               <Radio.Indicator />
             </Radio.Control>
-            <Label>Teams</Label>
-          </Radio.Button>
+            Teams
+          </Radio.Content>
           <Description>Share access with up to 10 teammates</Description>
         </Radio>
       </RadioGroup>

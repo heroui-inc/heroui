@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Checkbox, Label} from "@heroui/react";
+import {Button, Checkbox} from "@heroui/react";
 import React from "react";
 
 export function Form() {
@@ -19,28 +19,28 @@ export function Form() {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-3">
         <Checkbox name="notifications" value="on">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Enable notifications</Label>
-          </Checkbox.Button>
+            Enable notifications
+          </Checkbox.Content>
         </Checkbox>
         <Checkbox defaultSelected name="newsletter" value="on">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Subscribe to newsletter</Label>
-          </Checkbox.Button>
+            Subscribe to newsletter
+          </Checkbox.Content>
         </Checkbox>
         <Checkbox name="marketing" value="on">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Receive marketing updates</Label>
-          </Checkbox.Button>
+            Receive marketing updates
+          </Checkbox.Content>
         </Checkbox>
       </div>
       <Button className="mt-4" size="sm" type="submit" variant="primary">

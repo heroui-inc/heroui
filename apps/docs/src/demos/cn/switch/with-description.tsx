@@ -1,15 +1,15 @@
-import {Description, Label, Switch} from "@heroui/react";
+import {Description, Switch} from "@heroui/react";
 
 export function WithDescription() {
   return (
     <div className="max-w-sm">
       <Switch>
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label className="text-sm">公开资料</Label>
-        </Switch.Button>
+          公开资料
+        </Switch.Content>
         <Description>允许他人查看你的资料信息</Description>
       </Switch>
     </div>

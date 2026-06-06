@@ -85,7 +85,7 @@ export function FormatOptions() {
     <div className="flex w-full flex-col gap-4">
       <DateRangePicker
         key={granularity}
-        className="w-max min-w-72"
+        className="w-max min-w-80"
         defaultValue={defaultValue}
         endName="endDate"
         granularity={granularity}
@@ -259,16 +259,20 @@ export function FormatOptions() {
 
       <div className="flex min-w-[529px] flex-col gap-2">
         <Switch isSelected={hideTimeZone} onChange={setHideTimeZone}>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Hide timezone</Label>
+          <Switch.Content>
+            <Switch.Control>
+              <Switch.Thumb />
+            </Switch.Control>
+            Hide timezone
+          </Switch.Content>
         </Switch>
         <Switch isSelected={shouldForceLeadingZeros} onChange={setShouldForceLeadingZeros}>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          <Label className="text-sm">Force leading zeros</Label>
+          <Switch.Content>
+            <Switch.Control>
+              <Switch.Thumb />
+            </Switch.Control>
+            Force leading zeros
+          </Switch.Content>
         </Switch>
       </div>
     </div>

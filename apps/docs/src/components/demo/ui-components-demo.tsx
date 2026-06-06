@@ -12,16 +12,20 @@ export function UIComponentsDemo() {
     <div className="flex w-full items-center justify-center gap-8">
       {/* Checkbox - Selected State */}
       <Checkbox defaultSelected aria-label={t.checkboxAriaLabel}>
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
+        <Checkbox.Content>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+        </Checkbox.Content>
       </Checkbox>
 
       {/* Switch - On State */}
       <Switch defaultSelected aria-label={t.switchAriaLabel}>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+        </Switch.Content>
       </Switch>
 
       {/* Radio Buttons - Unselected and Selected */}
@@ -33,14 +37,18 @@ export function UIComponentsDemo() {
         orientation="horizontal"
       >
         <Radio value="option1">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+          </Radio.Content>
         </Radio>
         <Radio value="option2">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+          </Radio.Content>
         </Radio>
       </RadioGroup>
 

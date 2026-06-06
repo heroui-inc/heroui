@@ -28,30 +28,30 @@ export const Default: Story = {
       <Label>Select your interests</Label>
       <Description>Choose all that apply</Description>
       <Checkbox value="coding">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Coding</Label>
-        </Checkbox.Button>
+          Coding
+        </Checkbox.Content>
         <Description>Love building software</Description>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Design</Label>
-        </Checkbox.Button>
+          Design
+        </Checkbox.Content>
         <Description>Enjoy creating beautiful interfaces</Description>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Writing</Label>
-        </Checkbox.Button>
+          Writing
+        </Checkbox.Content>
         <Description>Passionate about content creation</Description>
       </Checkbox>
     </CheckboxGroup>
@@ -64,7 +64,7 @@ export const WithCustomIndicator: Story = {
       <Label>Features</Label>
       <Description>Select the features you want</Description>
       <Checkbox value="notifications">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -83,12 +83,12 @@ export const WithCustomIndicator: Story = {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>Email notifications</Label>
-        </Checkbox.Button>
+          Email notifications
+        </Checkbox.Content>
         <Description>Receive updates via email</Description>
       </Checkbox>
       <Checkbox value="newsletter">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -107,8 +107,8 @@ export const WithCustomIndicator: Story = {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>Newsletter</Label>
-        </Checkbox.Button>
+          Newsletter
+        </Checkbox.Content>
         <Description>Get weekly newsletters</Description>
       </Checkbox>
     </CheckboxGroup>
@@ -130,38 +130,38 @@ export const Indeterminate: Story = {
             setSelected(isSelected ? allOptions : []);
           }}
         >
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Select all</Label>
-          </Checkbox.Button>
+            Select all
+          </Checkbox.Content>
         </Checkbox>
         <div className="ml-6 flex flex-col gap-2">
           <CheckboxGroup value={selected} onChange={setSelected}>
             <Checkbox value="coding">
-              <Checkbox.Button>
+              <Checkbox.Content>
                 <Checkbox.Control>
                   <Checkbox.Indicator />
                 </Checkbox.Control>
-                <Label>Coding</Label>
-              </Checkbox.Button>
+                Coding
+              </Checkbox.Content>
             </Checkbox>
             <Checkbox value="design">
-              <Checkbox.Button>
+              <Checkbox.Content>
                 <Checkbox.Control>
                   <Checkbox.Indicator />
                 </Checkbox.Control>
-                <Label>Design</Label>
-              </Checkbox.Button>
+                Design
+              </Checkbox.Content>
             </Checkbox>
             <Checkbox value="writing">
-              <Checkbox.Button>
+              <Checkbox.Content>
                 <Checkbox.Control>
                   <Checkbox.Indicator />
                 </Checkbox.Control>
-                <Label>Writing</Label>
-              </Checkbox.Button>
+                Writing
+              </Checkbox.Content>
             </Checkbox>
           </CheckboxGroup>
         </div>
@@ -188,28 +188,28 @@ export const Validation: Story = {
           <Label>Preferences</Label>
           <Description>Select at least one preference</Description>
           <Checkbox value="email">
-            <Checkbox.Button>
+            <Checkbox.Content>
               <Checkbox.Control>
                 <Checkbox.Indicator />
               </Checkbox.Control>
-              <Label>Email notifications</Label>
-            </Checkbox.Button>
+              Email notifications
+            </Checkbox.Content>
           </Checkbox>
           <Checkbox value="sms">
-            <Checkbox.Button>
+            <Checkbox.Content>
               <Checkbox.Control>
                 <Checkbox.Indicator />
               </Checkbox.Control>
-              <Label>SMS notifications</Label>
-            </Checkbox.Button>
+              SMS notifications
+            </Checkbox.Content>
           </Checkbox>
           <Checkbox value="push">
-            <Checkbox.Button>
+            <Checkbox.Content>
               <Checkbox.Control>
                 <Checkbox.Indicator />
               </Checkbox.Control>
-              <Label>Push notifications</Label>
-            </Checkbox.Button>
+              Push notifications
+            </Checkbox.Content>
           </Checkbox>
           <FieldError>Please select at least one notification method.</FieldError>
         </CheckboxGroup>
@@ -232,28 +232,28 @@ export const Controlled: Story = {
       >
         <Label>Your skills</Label>
         <Checkbox value="coding">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Coding</Label>
-          </Checkbox.Button>
+            Coding
+          </Checkbox.Content>
         </Checkbox>
         <Checkbox value="design">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Design</Label>
-          </Checkbox.Button>
+            Design
+          </Checkbox.Content>
         </Checkbox>
         <Checkbox value="writing">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control>
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>Writing</Label>
-          </Checkbox.Button>
+            Writing
+          </Checkbox.Content>
         </Checkbox>
         <Label className="my-4 text-sm text-muted">Selected: {selected.join(", ") || "None"}</Label>
       </CheckboxGroup>
@@ -267,21 +267,21 @@ export const Disabled: Story = {
       <Label>Features</Label>
       <Description>Feature selection is temporarily disabled</Description>
       <Checkbox value="feature1">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Feature 1</Label>
-        </Checkbox.Button>
+          Feature 1
+        </Checkbox.Content>
         <Description>This feature is coming soon</Description>
       </Checkbox>
       <Checkbox value="feature2">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>Feature 2</Label>
-        </Checkbox.Button>
+          Feature 2
+        </Checkbox.Content>
         <Description>This feature is coming soon</Description>
       </Checkbox>
     </CheckboxGroup>

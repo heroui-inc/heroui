@@ -1,14 +1,14 @@
-import {Checkbox, Description, Label} from "@heroui/react";
+import {Checkbox, Description} from "@heroui/react";
 
 export function Disabled() {
   return (
     <Checkbox isDisabled id="feature">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Premium Feature</Label>
-      </Checkbox.Button>
+        Premium Feature
+      </Checkbox.Content>
       <Description>This feature is coming soon</Description>
     </Checkbox>
   );

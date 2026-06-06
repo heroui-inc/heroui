@@ -1,14 +1,14 @@
-import {Checkbox, Label} from "@heroui/react";
+import {Checkbox} from "@heroui/react";
 
 export function DefaultSelected() {
   return (
     <Checkbox defaultSelected id="default-notifications">
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>Enable email notifications</Label>
-      </Checkbox.Button>
+        Enable email notifications
+      </Checkbox.Content>
     </Checkbox>
   );
 }

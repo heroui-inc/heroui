@@ -9,7 +9,7 @@ export function Disabled() {
   return (
     <DateRangePicker
       isDisabled
-      className="w-72"
+      className="w-80"
       endName="endDate"
       startName="startDate"
       value={{end: start.add({days: 4}), start}}

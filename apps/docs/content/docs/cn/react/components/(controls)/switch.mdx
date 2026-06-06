@@ -1,6 +1,7 @@
 ---
 title: Switch 开关
 description: 用于布尔状态的开关组件。
+icon: updated
 links:
   rac: SwitchField
   source: switch/switch.tsx
@@ -26,30 +27,23 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 引入 Switch 组件，并通过点语法访问各部分。
 
 ```tsx
-import { Switch, Label, Description, FieldError } from '@heroui/react';
+import { Switch, Description, FieldError } from '@heroui/react';
 
 export default () => (
   <Switch>
-    <Switch.Button>
+    <Switch.Content>
       <Switch.Control>
         <Switch.Thumb>
           <Switch.Icon /> {/* 可选 */}
         </Switch.Thumb>
       </Switch.Control>
-      <Label /> {/* 可点击按钮的一部分，同时作为无障碍名称 */}
-    </Switch.Button>
+      Label {/* 纯文本 —— 可点击的标签，同时作为无障碍名称 */}
+    </Switch.Content>
     <Description /> {/* 可选 — 字段级帮助文本 */}
     <FieldError /> {/* 可选 — 校验错误信息 */}
   </Switch>
 );
 ```
-
-<Callout type="warn">
-  把 `Label`（以及 `Switch.Control`）放进 `Switch.Button` —— 它是可点击区域，也是 switch 的无障碍名称。
-  将 `Description` 和 `FieldError` 作为 `Switch.Button` 的兄弟节点，这样它们会通过 `aria-describedby` 朗读。
-  对于**没有标签**的 switch，可省略 `Switch.Button`，直接把 `Switch.Control` 放在 `Switch` 内（并传入 `aria-label`），
-  此时控件本身即为可点击目标。
-</Callout>
 
 要对多个 Switch 进行分组，请使用 `SwitchGroup` 组件：
 
@@ -59,20 +53,20 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 export default () => (
   <SwitchGroup>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Option 1</Label>
-      </Switch.Button>
+        Option 1
+      </Switch.Content>
     </Switch>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Option 2</Label>
-      </Switch.Button>
+        Option 2
+      </Switch.Content>
     </Switch>
   </SwitchGroup>
 );
@@ -185,7 +179,7 @@ function CustomSwitch() {
               className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
             />
           </Switch.Control>
-          <Label>Custom Switch</Label>
+          Custom Switch
         </>
       )}
     </Switch>
@@ -202,16 +196,20 @@ function CustomSwitchGroup() {
   return (
     <SwitchGroup className="gap-8" orientation="horizontal">
       <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Option 1</Label>
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Option 1
+        </Switch.Content>
       </Switch>
       <Switch>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        <Label>Option 2</Label>
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Option 2
+        </Switch.Content>
       </Switch>
     </SwitchGroup>
   );
@@ -237,7 +235,7 @@ function CustomSwitchGroup() {
     @apply bg-white shadow-sm;
   }
 
-  .switch__button {
+  .switch__content {
     @apply items-center gap-3;
   }
 
@@ -256,7 +254,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 Switch 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)）：
 
 - `.switch` - Switch 根容器（字段）
-- `.switch__button` - 包裹控件与标签文本的可点击 label
+- `.switch__content` - 包裹控件与标签文本的可点击 label
 - `.switch__control` - Switch 轨道
 - `.switch__thumb` - 可移动的滑块
 - `.switch__icon` - 滑块内可选图标
@@ -307,9 +305,9 @@ SwitchGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com
 | `children` | `React.ReactNode \| (values: SwitchFieldRenderProps) => React.ReactNode` | - | Switch 内容或字段级渲染 prop。 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchFieldRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### Switch.Button Props
+### Switch.Content Props
 
-包裹控件与标签文本的可点击 `<label>`。请把 `Label` 放在它内部；`Description`/`FieldError` 作为 `Switch.Button` 的兄弟节点。对于没有标签的 switch 可省略 —— 直接把 `Switch.Control` 放在 `Switch` 内（并传入 `aria-label`），控件本身即为可点击目标。
+包裹控件与标签文本的可点击 `<label>`。请把 `Switch.Control` 与 `Label` 放在它内部；`Description`/`FieldError` 作为 `Switch.Content` 的兄弟节点。对于没有标签的 switch，省略 `Label` 并在 `Switch` 上传入 `aria-label`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|

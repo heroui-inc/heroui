@@ -9,32 +9,32 @@ export function FullRounded() {
           className="[&_[data-slot='checkbox-default-indicator--checkmark']]:size-2"
           name="small-rounded"
         >
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-3 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>小尺寸</Label>
-          </Checkbox.Button>
+            小尺寸
+          </Checkbox.Content>
         </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
         <Checkbox name="default-rounded">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-4 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>默认尺寸</Label>
-          </Checkbox.Button>
+            默认尺寸
+          </Checkbox.Content>
         </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
         <Checkbox name="large-rounded">
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-5 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>大尺寸</Label>
-          </Checkbox.Button>
+            大尺寸
+          </Checkbox.Content>
         </Checkbox>
       </div>
       <div className="flex flex-col gap-3">
@@ -42,12 +42,12 @@ export function FullRounded() {
           className="[&_[data-slot='checkbox-default-indicator--checkmark']]:size-4"
           name="xl-rounded"
         >
-          <Checkbox.Button>
+          <Checkbox.Content>
             <Checkbox.Control className="size-6 rounded-full before:rounded-full">
               <Checkbox.Indicator />
             </Checkbox.Control>
-            <Label>特大尺寸</Label>
-          </Checkbox.Button>
+            特大尺寸
+          </Checkbox.Content>
         </Checkbox>
       </div>
     </div>

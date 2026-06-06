@@ -1,12 +1,12 @@
 "use client";
 
-import {Checkbox, Label} from "@heroui/react";
+import {Checkbox} from "@heroui/react";
 
 export function CustomIndicator() {
   return (
     <div className="flex gap-4">
       <Checkbox defaultSelected name="heart">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -21,11 +21,11 @@ export function CustomIndicator() {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>心形</Label>
-        </Checkbox.Button>
+          心形
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox defaultSelected name="plus">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -50,11 +50,11 @@ export function CustomIndicator() {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>加号</Label>
-        </Checkbox.Button>
+          加号
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox isIndeterminate name="indeterminate">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isIndeterminate}) =>
@@ -66,8 +66,8 @@ export function CustomIndicator() {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>部分选中</Label>
-        </Checkbox.Button>
+          部分选中
+        </Checkbox.Content>
       </Checkbox>
     </div>
   );

@@ -27,12 +27,12 @@ import { Switch, Label } from "@heroui/react";
 export default function App() {
   return (
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
     </Switch>
   );
 }
@@ -43,7 +43,7 @@ export default function App() {
 ### 1. Component Structure
 
 **v2:** Simple Switch with children as label
-**v3:** Compound components (`Switch.Button`, `Switch.Control`, `Switch.Thumb`) with `Label` component
+**v3:** Compound components (`Switch.Content`, `Switch.Control`, `Switch.Thumb`) with `Label` component
 
 ### 2. Prop Changes
 
@@ -62,7 +62,7 @@ export default function App() {
 ### 3. New Components
 
 - `SwitchGroup` - For grouping multiple switches
-- `Switch.Button` - The clickable label wrapping the control and `Label`
+- `Switch.Content` - The clickable label wrapping the control and `Label`
 - `Switch.Icon` - For icons inside the thumb
 
 ## Migration Examples
@@ -88,12 +88,12 @@ export default function App() {
     const [isSelected, setIsSelected] = useState(true);
 
     <Switch isSelected={isSelected} onChange={setIsSelected}>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Airplane mode</Label>
-      </Switch.Button>
+        Airplane mode
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -110,9 +110,11 @@ export default function App() {
   <Tab value="v3">
     ```tsx
     <Switch defaultSelected aria-label="Automatic updates">
-      <Switch.Control>
-        <Switch.Thumb />
-      </Switch.Control>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -129,7 +131,7 @@ export default function App() {
   <Tab value="v3">
     ```tsx
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb>
             <Switch.Icon>
@@ -137,8 +139,8 @@ export default function App() {
             </Switch.Icon>
           </Switch.Thumb>
         </Switch.Control>
-        <Label>Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -160,14 +162,14 @@ export default function App() {
   <Tab value="v3">
     ```tsx
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="flex items-center gap-2">
           <SunIcon />
           <Switch.Thumb />
           <MoonIcon />
         </Switch.Control>
-        <Label>Dark mode</Label>
-      </Switch.Button>
+        Dark mode
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -188,12 +190,12 @@ export default function App() {
     import { Switch, Label, Description } from "@heroui/react";
 
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control>
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Enable notifications</Label>
-      </Switch.Button>
+        Enable notifications
+      </Switch.Content>
       <Description>You will receive notifications for all activity</Description>
     </Switch>
     ```
@@ -223,55 +225,55 @@ export default function App() {
     {/* Sizes */}
     <div className="flex gap-4">
       <Switch size="sm">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Small</Label>
-        </Switch.Button>
+          Small
+        </Switch.Content>
       </Switch>
       <Switch size="md">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Medium</Label>
-        </Switch.Button>
+          Medium
+        </Switch.Content>
       </Switch>
       <Switch size="lg">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Large</Label>
-        </Switch.Button>
+          Large
+        </Switch.Content>
       </Switch>
     </div>
     
     {/* Colors - Use Tailwind CSS classes */}
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="data-[selected=true]:bg-accent">
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Primary</Label>
-      </Switch.Button>
+        Primary
+      </Switch.Content>
     </Switch>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="data-[selected=true]:bg-success">
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Success</Label>
-      </Switch.Button>
+        Success
+      </Switch.Content>
     </Switch>
     <Switch>
-      <Switch.Button>
+      <Switch.Content>
         <Switch.Control className="data-[selected=true]:bg-danger">
           <Switch.Thumb />
         </Switch.Control>
-        <Label>Danger</Label>
-      </Switch.Button>
+        Danger
+      </Switch.Content>
     </Switch>
     ```
   </Tab>
@@ -295,20 +297,20 @@ export default function App() {
 
     <SwitchGroup>
       <Switch name="notifications">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Allow Notifications</Label>
-        </Switch.Button>
+          Allow Notifications
+        </Switch.Content>
       </Switch>
       <Switch name="marketing">
-        <Switch.Button>
+        <Switch.Content>
           <Switch.Control>
             <Switch.Thumb />
           </Switch.Control>
-          <Label>Marketing emails</Label>
-        </Switch.Button>
+          Marketing emails
+        </Switch.Content>
       </Switch>
     </SwitchGroup>
     ```
@@ -321,7 +323,7 @@ The v3 Switch follows this structure:
 
 ```
 Switch (Root)
-  ├── Switch.Button (the clickable label)
+  ├── Switch.Content (the clickable label)
   │   ├── Switch.Control
   │   │   └── Switch.Thumb
   │   │       └── Switch.Icon (optional)
@@ -335,13 +337,13 @@ For groups:
 ```
 SwitchGroup
   ├── Switch
-  │   ├── Switch.Button
+  │   ├── Switch.Content
   │   │   ├── Switch.Control
   │   │   │   └── Switch.Thumb
   │   │   └── Label
   │   └── Description (optional)
   └── Switch
-      ├── Switch.Button
+      ├── Switch.Content
       │   ├── Switch.Control
       │   │   └── Switch.Thumb
       │   └── Label
@@ -358,7 +360,7 @@ SwitchGroup
 ### Label Handling
 
 - **v2:** Children were used as label
-- **v3:** Label goes inside `Switch.Button` (the clickable label); `Description`/`FieldError` are siblings of `Switch.Button`
+- **v3:** Label goes inside `Switch.Content` (the clickable label); `Description`/`FieldError` are siblings of `Switch.Content`
 
 ### Icons
 
@@ -367,11 +369,11 @@ SwitchGroup
 
 ## Summary
 
-1. **Component Structure**: Must use compound components (`Switch.Button`, `Switch.Control`, `Switch.Thumb`)
-2. **Clickable Label**: Use `Switch.Button` to wrap `Switch.Control` and `Label`; place `Description`/`FieldError` as siblings of `Switch.Button`
-3. **Label Handling**: Children no longer used as label - use `Label` component inside `Switch.Button`
+1. **Component Structure**: Must use compound components (`Switch.Content`, `Switch.Control`, `Switch.Thumb`)
+2. **Clickable Label**: Use `Switch.Content` to wrap `Switch.Control` and `Label`; place `Description`/`FieldError` as siblings of `Switch.Content`
+3. **Label Handling**: Children no longer used as label - use `Label` component inside `Switch.Content`
 4. **Event Handler**: `onValueChange` → `onChange`
 5. **Styling Props Removed**: `color` - use Tailwind CSS
 6. **Icon Props Removed**: `thumbIcon`, `startContent`, `endContent` - use components or customize directly
 7. **ClassNames Removed**: Use `className` props on individual components
-8. **New Components**: `SwitchGroup` for grouping switches, `Switch.Button` as the clickable label wrapping the control and `Label`
+8. **New Components**: `SwitchGroup` for grouping switches, `Switch.Content` as the clickable label wrapping the control and `Label`

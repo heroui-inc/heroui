@@ -1,6 +1,6 @@
 "use client";
 
-import {Checkbox, Description, Label} from "@heroui/react";
+import {Checkbox, Description} from "@heroui/react";
 import {useState} from "react";
 
 export function Indeterminate() {
@@ -17,12 +17,12 @@ export function Indeterminate() {
         setIsIndeterminate(false);
       }}
     >
-      <Checkbox.Button>
+      <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        <Label>全选</Label>
-      </Checkbox.Button>
+        全选
+      </Checkbox.Content>
       <Description>展示部分选中状态（短横线图标）</Description>
     </Checkbox>
   );

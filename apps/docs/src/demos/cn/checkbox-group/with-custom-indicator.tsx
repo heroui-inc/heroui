@@ -8,7 +8,7 @@ export function WithCustomIndicator() {
       <Label>功能</Label>
       <Description>选择你需要的功能</Description>
       <Checkbox value="notifications">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -27,12 +27,12 @@ export function WithCustomIndicator() {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>邮件通知</Label>
-        </Checkbox.Button>
+          邮件通知
+        </Checkbox.Content>
         <Description>通过邮件接收更新</Description>
       </Checkbox>
       <Checkbox value="newsletter">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator>
               {({isSelected}) =>
@@ -51,8 +51,8 @@ export function WithCustomIndicator() {
               }
             </Checkbox.Indicator>
           </Checkbox.Control>
-          <Label>邮件通讯</Label>
-        </Checkbox.Button>
+          邮件通讯
+        </Checkbox.Content>
         <Description>每周接收邮件简报</Description>
       </Checkbox>
     </CheckboxGroup>

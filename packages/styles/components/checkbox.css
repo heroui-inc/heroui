@@ -17,7 +17,7 @@
     @apply select-none;
   }
 
-  .checkbox__button [data-slot="label"] {
+  .checkbox__content [data-slot="label"] {
     cursor: var(--cursor-interactive);
   }
 
@@ -114,15 +114,15 @@
   /* Interactive states */
   /* Focus */
   .checkbox:focus-visible &,
-  .checkbox:has([data-slot="checkbox-button"][data-focus-visible="true"]) &,
-  .checkbox [data-slot="checkbox-button"][data-focus-visible="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-focus-visible="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-focus-visible="true"] & {
     @apply status-focused;
   }
 
   /* Hover */
   .checkbox:hover &,
-  .checkbox:has([data-slot="checkbox-button"][data-hovered="true"]) &,
-  .checkbox [data-slot="checkbox-button"][data-hovered="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-hovered="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-hovered="true"] & {
     @apply border-field-border-hover;
 
     &::before {
@@ -132,8 +132,8 @@
 
   /* Pressed */
   .checkbox:active &,
-  .checkbox:has([data-slot="checkbox-button"][data-pressed="true"]) &,
-  .checkbox [data-slot="checkbox-button"][data-pressed="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-pressed="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-pressed="true"] & {
   }
 
   /* Selection states */
@@ -155,7 +155,7 @@
   /* Indeterminate + Pressed */
   .checkbox:active[data-indeterminate="true"] &,
   .checkbox[data-pressed="true"][data-indeterminate="true"] &,
-  .checkbox:has([data-slot="checkbox-button"][data-pressed="true"])[data-indeterminate="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-pressed="true"])[data-indeterminate="true"] & {
     @apply bg-accent-hover;
   }
 
@@ -227,15 +227,15 @@
 
   /* Hover state */
   .checkbox:hover &,
-  .checkbox:has([data-slot="checkbox-button"][data-hovered="true"]) &,
-  .checkbox [data-slot="checkbox-button"][data-hovered="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-hovered="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-hovered="true"] & {
     @apply border-field-border-hover;
   }
 }
 
-/* Checkbox button — the clickable label (control + label text) */
-.checkbox__button {
-  @apply inline-flex cursor-[inherit] items-center gap-3 outline-none no-highlight;
+/* Checkbox content — the clickable label (control + label text) */
+.checkbox__content {
+  @apply inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
 }
 
 /* Unselected state background for secondary variant */

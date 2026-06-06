@@ -10,28 +10,28 @@ export function Controlled() {
     <CheckboxGroup className="min-w-[320px]" name="skills" value={selected} onChange={setSelected}>
       <Label>你的技能</Label>
       <Checkbox value="coding">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>编程</Label>
-        </Checkbox.Button>
+          编程
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>设计</Label>
-        </Checkbox.Button>
+          设计
+        </Checkbox.Content>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Button>
+        <Checkbox.Content>
           <Checkbox.Control>
             <Checkbox.Indicator />
           </Checkbox.Control>
-          <Label>写作</Label>
-        </Checkbox.Button>
+          写作
+        </Checkbox.Content>
       </Checkbox>
       <Label className="my-4 text-sm text-muted">已选：{selected.join(", ") || "无"}</Label>
     </CheckboxGroup>

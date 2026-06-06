@@ -1,4 +1,4 @@
-import {Description, Label, Radio, RadioGroup} from "@heroui/react";
+import {Description, Radio, RadioGroup} from "@heroui/react";
 
 export function Variants() {
   return (
@@ -7,21 +7,21 @@ export function Variants() {
         <p className="text-sm font-medium text-muted">主要变体</p>
         <RadioGroup defaultValue="option1" name="primary-plan" variant="primary">
           <Radio value="option1">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>选项 1</Label>
-            </Radio.Button>
+              选项 1
+            </Radio.Content>
             <Description>默认背景的标准样式</Description>
           </Radio>
           <Radio value="option2">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>选项 2</Label>
-            </Radio.Button>
+              选项 2
+            </Radio.Content>
             <Description>另一种主要样式选项</Description>
           </Radio>
         </RadioGroup>
@@ -30,21 +30,21 @@ export function Variants() {
         <p className="text-sm font-medium text-muted">次要变体</p>
         <RadioGroup defaultValue="option1" name="secondary-plan" variant="secondary">
           <Radio value="option1">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>选项 1</Label>
-            </Radio.Button>
+              选项 1
+            </Radio.Content>
             <Description>用于表面上的低强调变体</Description>
           </Radio>
           <Radio value="option2">
-            <Radio.Button>
+            <Radio.Content>
               <Radio.Control>
                 <Radio.Indicator />
               </Radio.Control>
-              <Label>选项 2</Label>
-            </Radio.Button>
+              选项 2
+            </Radio.Content>
             <Description>另一种次要样式选项</Description>
           </Radio>
         </RadioGroup>

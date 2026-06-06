@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Label, Modal, Radio, RadioGroup} from "@heroui/react";
+import {Button, Modal, Radio, RadioGroup} from "@heroui/react";
 import {useState} from "react";
 
 export function ScrollComparison() {
@@ -14,16 +14,20 @@ export function ScrollComparison() {
         onChange={(value) => setScroll(value as "inside" | "outside")}
       >
         <Radio value="inside">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Label>内部</Label>
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            内部
+          </Radio.Content>
         </Radio>
         <Radio value="outside">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Label>外部</Label>
+          <Radio.Content>
+            <Radio.Control>
+              <Radio.Indicator />
+            </Radio.Control>
+            外部
+          </Radio.Content>
         </Radio>
       </RadioGroup>
 
