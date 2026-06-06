@@ -1,7 +1,5 @@
 "use client";
 
-import type {MotionValue} from "motion/react";
-
 import {Rocket} from "@gravity-ui/icons";
 import LinkRoot from "fumadocs-core/link";
 import {AnimatePresence, animate, motion, useMotionValue, useReducedMotion} from "motion/react";
@@ -32,39 +30,6 @@ function BadgePill({badge}: {badge: ReleaseBadge}) {
       <Rocket className="size-3 shrink-0 text-accent-soft-foreground" />
       <span className="max-w-60 truncate sm:max-w-full">{badge.label}</span>
     </LinkRoot>
-  );
-}
-
-interface SegmentProps {
-  badge: ReleaseBadge;
-  isActive: boolean;
-  progress: MotionValue<number>;
-  reduceMotion: boolean;
-  onSelect: () => void;
-}
-
-const fillClassName =
-  "absolute inset-0 origin-left rounded-full bg-gradient-to-r from-accent/60 to-transparent";
-
-function ProgressSegment({badge, isActive, onSelect, progress, reduceMotion}: SegmentProps) {
-  return (
-    <button
-      aria-current={isActive ? "true" : undefined}
-      aria-label={badge.label}
-      className="relative h-0.75 w-8 overflow-hidden rounded-full bg-accent-soft-foreground/25 transition-colors outline-none before:absolute before:-inset-x-0.5 before:-inset-y-3 before:content-[''] hover:bg-accent-soft-foreground/40 focus-visible:ring-2 focus-visible:ring-accent"
-      type="button"
-      onClick={onSelect}
-    >
-      {!isActive ? null : reduceMotion ? (
-        <span aria-hidden="true" className={fillClassName} />
-      ) : (
-        <motion.span
-          aria-hidden="true"
-          className={fillClassName}
-          style={{scaleX: progress, willChange: "transform"}}
-        />
-      )}
-    </button>
   );
 }
 
@@ -114,49 +79,28 @@ export function ReleaseBadges({badges, intervalMs = 5000}: ReleaseBadgesProps) {
 
   if (!active) return null;
 
-  const select = (i: number) => {
-    progress.set(0);
-    setIndex(i);
-  };
-
   return (
     <div
-      className="flex flex-col items-center gap-2"
+      className="flex h-6 items-center justify-center"
       onBlurCapture={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="flex h-6 items-center justify-center">
-        <AnimatePresence initial={false} mode="popLayout">
-          <motion.div
-            key={activeIndex}
-            animate={{opacity: 1, y: 0}}
-            exit={reduceMotion ? {opacity: 0} : {opacity: 0, y: -10}}
-            initial={reduceMotion ? {opacity: 0} : {opacity: 0, y: 10}}
-            style={{willChange: "transform, opacity"}}
-            transition={
-              reduceMotion
-                ? {duration: 0}
-                : {default: slideSpring, opacity: fadeOut, y: slideSpring}
-            }
-          >
-            <BadgePill badge={active} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      <div className="flex items-center gap-1.5">
-        {badges.map((badge, i) => (
-          <ProgressSegment
-            key={badge.href}
-            badge={badge}
-            isActive={i === activeIndex}
-            progress={progress}
-            reduceMotion={reduceMotion}
-            onSelect={() => select(i)}
-          />
-        ))}
-      </div>
+      <AnimatePresence initial={false} mode="popLayout">
+        <motion.div
+          key={activeIndex}
+          animate={{opacity: 1, y: 0}}
+          exit={reduceMotion ? {opacity: 0} : {opacity: 0, y: -10}}
+          initial={reduceMotion ? {opacity: 0} : {opacity: 0, y: 10}}
+          style={{willChange: "transform, opacity"}}
+          transition={
+            reduceMotion ? {duration: 0} : {default: slideSpring, opacity: fadeOut, y: slideSpring}
+          }
+        >
+          <BadgePill badge={active} />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
