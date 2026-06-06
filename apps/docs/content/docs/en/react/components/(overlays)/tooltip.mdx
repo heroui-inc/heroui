@@ -70,6 +70,29 @@ export default () => (
 
 ## Styling
 
+### Global Delay Configuration
+
+You can set default show and hide delays for all Tooltip components in your application by defining CSS variables:
+
+```css
+/* In your global CSS file */
+:root {
+  --tooltip-delay: 1500ms;
+  --tooltip-close-delay: 500ms;
+}
+
+/* You can also set different values for light/dark themes */
+.light, [data-theme="light"] {
+  --tooltip-delay: 1200ms;
+}
+
+.dark, [data-theme="dark"] {
+  --tooltip-close-delay: 300ms;
+}
+```
+
+Values accept CSS time units such as `ms` and `s`. These global settings are overridden by the `delay` and `closeDelay` props when specified on individual tooltips.
+
 ### Passing Tailwind CSS classes
 
 ```tsx
@@ -131,8 +154,8 @@ The component supports animation states:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | Trigger element and content |
-| `delay` | `number` | `700` | Delay in milliseconds before showing tooltip |
-| `closeDelay` | `number` | `0` | Delay in milliseconds before hiding tooltip |
+| `delay` | `number` | `1500` or CSS variable | Delay in milliseconds before showing the tooltip. Can be globally configured via `--tooltip-delay` |
+| `closeDelay` | `number` | `500` or CSS variable | Delay in milliseconds before hiding the tooltip. Can be globally configured via `--tooltip-close-delay` |
 | `trigger` | `"hover" \| "focus"` | `"hover"` | How the tooltip is triggered |
 | `isDisabled` | `boolean` | `false` | Whether the tooltip is disabled |
 
