@@ -1,0 +1,217 @@
+---
+title: v3.2.0
+description: 基于 React Aria 1.18 的 Calendar 周/日视图与年份选择器，以及 Radio、Checkbox、Switch 的破坏性组合方式变更。
+github:
+  pull: 6616
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 6 月 6 日</span>
+</div>
+
+Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了随 React Aria 1.18 一起发布的补丁修复（`Table.SortableColumnHeader`、Toast 与 Fieldset 修复、滚动与 RTL 样式修复）。
+
+⚠️ **破坏性变更**：`Radio`、`Checkbox`、`Switch` 使用 `*.Button` 替代 `*.Content`。详见[破坏性变更](#breaking-changes)。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增内容
+
+### Calendar
+
+`Calendar` 与 `RangeCalendar` 新增周视图与日视图，以及来自 React Aria 1.18 的新日历属性。
+
+- **周视图 / 日视图**：通过 `visibleDuration` 渲染多周或单日布局
+- **多选**：在单个 `Calendar` 中选择多个日期
+- **React Aria 1.18 属性**：`weeksInMonth` 与用于范围选择的 `isDateUnavailable(date, anchorDate)`
+- **内部实现**：月份标题使用 React Aria 的 `CalendarHeading`，年份选择器基于 React Aria calendar hooks 重建
+
+**周视图：**
+
+<ComponentPreview name="calendar-week-view" />
+
+**日视图：**
+
+<ComponentPreview name="calendar-day-view" />
+
+**多选：**
+
+<ComponentPreview name="calendar-multiple-selection" />
+
+**多选：**
+
+<ComponentPreview name="calendar-multiple-selection" />
+
+### Table.SortableColumnHeader
+
+`Table.SortableColumnHeader` 用于渲染 sortable 列标题和可选的升降序指示器。放在 `Table.Column` render prop 中，并传入 `sortDirection` ([#6588](https://github.com/heroui-inc/heroui/pull/6588))。
+
+```tsx
+<Table.Column allowsSorting>
+  {({sortDirection}) => (
+    <Table.SortableColumnHeader sortDirection={sortDirection}>
+      Name
+    </Table.SortableColumnHeader>
+  )}
+</Table.Column>
+```
+
+- **默认指示器**：存在排序方向时显示 chevron
+- **自定义指示器**：传入 `indicator`，或用 `showIndicator={false}` 隐藏
+- **样式插槽**：`.table__sortable-column-header` + `.table__sortable-column-indicator`
+
+<ComponentPreview name="table-sorting" />
+
+## 组件修复
+
+- **Toast**：Toast 队列会串行化 ViewTransition 更新，避免在 `toast.promise()` 关闭 loading toast 并打开成功/失败反馈时出现被跳过的过渡和 AbortError ([#6511](https://github.com/heroui-inc/heroui/pull/6511))。
+- **Fieldset**：`disabled` 会传递到 React Aria 的 Button、CheckboxGroup、Link、RadioGroup、Slider、ToggleButton 和 ToggleButtonGroup 上下文 ([#6596](https://github.com/heroui-inc/heroui/pull/6596))。
+
+## 样式修复
+
+- **Modal / AlertDialog**：`scroll-inside` 对话框通过 `max-h-full min-h-0` 限制高度，使内容区域滚动而非溢出 ([#6597](https://github.com/heroui-inc/heroui/pull/6597))。
+- **ScrollShadow**：渐隐遮罩通过 `--scroll-shadow-scrollbar-size` 为可见的原生滚动条预留空间 ([#6598](https://github.com/heroui-inc/heroui/pull/6598))。
+- **Table RTL**：列分隔线与拖拽手柄在 RTL 下使用逻辑属性 `end-0` 定位 ([#6606](https://github.com/heroui-inc/heroui/pull/6606))。
+
+## 依赖
+
+- **React Aria Components**：`1.17.0` → `1.18.0` ([#6586](https://github.com/heroui-inc/heroui/pull/6586))。1.18 引入了 toggles 所采用的 `*Field` + `*Button` 组合方式、`CalendarHeading`，以及 `isDateUnavailable(date, anchorDate)`。
+- **@internationalized/date**：`3.12.1` → `3.12.2`
+- **React Aria / Stately 辅助包**：`@react-aria/*`、`@react-stately/*` 与 `@react-types/shared` 补丁更新
+
+## Breaking Changes
+
+### Radio、Checkbox 与 Switch：`*.Content` → `*.Button`
+
+这些组件现在使用 React Aria 的 `*Field` + `*Button` 组合方式，移除了 `*.Content` 包装。请把控件和 `Label` 放进新的 `*.Button`（可点击的 label）中，并把 `Description`/`FieldError` 移到 `*.Button` 的兄弟节点 —— 这样它们会通过 `aria-describedby` 朗读，而不会成为无障碍名称的一部分。
+
+**Checkbox**
+
+```tsx
+// 之前
+<Checkbox>
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label>Accept terms</Label>
+    <Description>You agree to our terms</Description>
+  </Checkbox.Content>
+</Checkbox>
+
+// 之后
+<Checkbox>
+  <Checkbox.Button>
+    <Checkbox.Control>
+      <Checkbox.Indicator />
+    </Checkbox.Control>
+    <Label>Accept terms</Label>
+  </Checkbox.Button>
+  <Description>You agree to our terms</Description>
+</Checkbox>
+```
+
+**Radio**
+
+```tsx
+// 之前
+<Radio value="a">
+  <Radio.Control>
+    <Radio.Indicator />
+  </Radio.Control>
+  <Radio.Content>
+    <Label>Option A</Label>
+  </Radio.Content>
+</Radio>
+
+// 之后
+<Radio value="a">
+  <Radio.Button>
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Label>Option A</Label>
+  </Radio.Button>
+</Radio>
+```
+
+**Switch**
+
+```tsx
+// 之前
+<Switch>
+  <Switch.Control>
+    <Switch.Thumb />
+  </Switch.Control>
+  <Switch.Content>
+    <Label>Enable notifications</Label>
+  </Switch.Content>
+</Switch>
+
+// 之后
+<Switch>
+  <Switch.Button>
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Enable notifications</Label>
+  </Switch.Button>
+</Switch>
+```
+
+**迁移对照**
+
+| 之前 | 之后 |
+|------|------|
+| `<X.Content>` 包裹 `Label` + 帮助文本 | `<X.Button>` 包裹 `X.Control` + `Label` |
+| `Description` / `FieldError` 位于 `X.Content` 内 | `Description` / `FieldError` 作为 `X.Button` 的兄弟节点 |
+| `X.Content` 部件 | 已移除 —— 改用 `X.Button` |
+
+**仅含控件的 Checkbox 和 Switch 无需改动。** 如果你直接把 `Checkbox.Control` / `Switch.Control` 放在根节点内（没有标签，例如表格行选择或图标开关），它会继续正常工作 —— 控件会自动包裹为可点击元素。
+
+各组件完整迁移指南：[Checkbox](/docs/react/migration/checkbox)、[Checkbox Group](/docs/react/migration/checkbox-group)、[Radio](/docs/react/migration/radio)、[Radio Group](/docs/react/migration/radio-group)、[Switch](/docs/react/migration/switch)。
+
+## 链接
+
+- [Calendar 文档](/docs/react/components/calendar)
+- [Checkbox 文档](/docs/react/components/checkbox)
+- [Radio Group 文档](/docs/react/components/radio-group)
+- [Switch 文档](/docs/react/components/switch)
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6616](https://github.com/heroui-inc/heroui/pull/6616)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />

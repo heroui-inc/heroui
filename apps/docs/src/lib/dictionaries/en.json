@@ -1,6 +1,15 @@
 {
   "home": {
-    "releaseBadge": "New CLI: create-heroui-native-app v1.0.0",
+    "releaseBadges": [
+      {
+        "label": "HeroUI React v3.2.0 — Calendar views & toggle changes",
+        "href": "/docs/react/releases/v3-2-0"
+      },
+      {
+        "label": "New CLI: create-heroui-native-app v1.0.0",
+        "href": "/docs/native/releases/create-heroui-native-app"
+      }
+    ],
     "titleMain": "Beautiful by default.",
     "titleMuted": "Customizable by design.",
     "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
