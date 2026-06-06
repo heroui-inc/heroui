@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">June 6, 2026</span>
 </div>
 
-Calendar gains week and day views, a reworked year picker, and range demos built on React Aria 1.18. The toggles (`Radio`, `Checkbox`, `Switch`) move to React Aria's `*Field` + `*Button` composition. This release also rolls in the patch fixes shipped alongside React Aria 1.18 (`Table.SortableColumnHeader`, toast and fieldset fixes, scroll and RTL style fixes).
+Calendar gains week and day views, a reworked year picker, and range demos built on React Aria 1.18. [Tooltip](/docs/components/tooltip) adds theme variables for global show and hide delays. The toggles (`Radio`, `Checkbox`, `Switch`) move to React Aria's `*Field` + `*Button` composition. This release also rolls in the patch fixes shipped alongside React Aria 1.18 (`Table.SortableColumnHeader`, toast and fieldset fixes, scroll and RTL style fixes).
 
 ⚠️ **Breaking changes**: `Radio`, `Checkbox`, and `Switch` replace `*.Content` with `*.Button`. See [Breaking Changes](#breaking-changes).
 
@@ -90,6 +90,28 @@ Update to the latest version:
 - **Style slots**: `.table__sortable-column-header` + `.table__sortable-column-indicator`
 
 <ComponentPreview name="table-sorting" />
+
+### Tooltip delay theme variables
+
+[Tooltip](/docs/components/tooltip) reads default show and hide delays from theme CSS variables ([#6617](https://github.com/heroui-inc/heroui/pull/6617)):
+
+- `--tooltip-delay` — delay before showing a tooltip (default: `1500ms`)
+- `--tooltip-close-delay` — delay before hiding a tooltip (default: `500ms`)
+
+Override them globally:
+
+```css
+:root {
+  --tooltip-delay: 700ms;
+  --tooltip-close-delay: 0ms;
+}
+```
+
+Individual `delay` and `closeDelay` props still override these values on specific tooltips.
+
+<Callout type="warning">
+  **Behavior change:** With the default HeroUI theme, tooltip delays now default to `1500ms` / `500ms` instead of the previous React Aria defaults of `700ms` / `0ms`. Set the CSS variables or props explicitly to preserve the old timing.
+</Callout>
 
 ## Component Fixes
 
@@ -203,6 +225,7 @@ Full per-component guides: [Checkbox](/docs/react/migration/checkbox), [Checkbox
 ## Links
 
 - [Calendar Docs](/docs/react/components/calendar)
+- [Tooltip Docs](/docs/react/components/tooltip)
 - [Checkbox Docs](/docs/react/components/checkbox)
 - [Radio Group Docs](/docs/react/components/radio-group)
 - [Switch Docs](/docs/react/components/switch)

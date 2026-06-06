@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 6 月 6 日</span>
 </div>
 
-Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了随 React Aria 1.18 一起发布的补丁修复（`Table.SortableColumnHeader`、Toast 与 Fieldset 修复、滚动与 RTL 样式修复）。
+Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。[Tooltip](/docs/components/tooltip) 新增用于全局显示与隐藏延迟的主题变量。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了随 React Aria 1.18 一起发布的补丁修复（`Table.SortableColumnHeader`、Toast 与 Fieldset 修复、滚动与 RTL 样式修复）。
 
 ⚠️ **破坏性变更**：`Radio`、`Checkbox`、`Switch` 使用 `*.Button` 替代 `*.Content`。详见[破坏性变更](#breaking-changes)。
 
@@ -90,6 +90,28 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 - **样式插槽**：`.table__sortable-column-header` + `.table__sortable-column-indicator`
 
 <ComponentPreview name="table-sorting" />
+
+### Tooltip 延迟主题变量
+
+[Tooltip](/docs/components/tooltip) 现在会从主题 CSS 变量读取默认的显示与隐藏延迟 ([#6617](https://github.com/heroui-inc/heroui/pull/6617))：
+
+- `--tooltip-delay` — 显示 Tooltip 前的延迟（默认：`1500ms`）
+- `--tooltip-close-delay` — 隐藏 Tooltip 前的延迟（默认：`500ms`）
+
+全局覆盖示例：
+
+```css
+:root {
+  --tooltip-delay: 700ms;
+  --tooltip-close-delay: 0ms;
+}
+```
+
+单个 Tooltip 上的 `delay` 和 `closeDelay` 属性仍会覆盖这些值。
+
+<Callout type="warning">
+  **行为变更：** 使用默认 HeroUI 主题时，Tooltip 延迟现在默认为 `1500ms` / `500ms`，而不是之前的 React Aria 默认值 `700ms` / `0ms`。如需保留旧行为，请显式设置 CSS 变量或 props。
+</Callout>
 
 ## 组件修复
 
@@ -203,6 +225,7 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 ## 链接
 
 - [Calendar 文档](/docs/react/components/calendar)
+- [Tooltip 文档](/docs/react/components/tooltip)
 - [Checkbox 文档](/docs/react/components/checkbox)
 - [Radio Group 文档](/docs/react/components/radio-group)
 - [Switch 文档](/docs/react/components/switch)
