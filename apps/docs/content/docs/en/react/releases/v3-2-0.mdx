@@ -1,0 +1,217 @@
+---
+title: v3.2.0
+description: Calendar week/day views and year picker on React Aria 1.18, plus breaking Radio, Checkbox, and Switch composition changes.
+github:
+  pull: 6587
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">June 6, 2026</span>
+</div>
+
+Calendar gains week and day views, a reworked year picker, and range demos built on React Aria 1.18. The toggles (`Radio`, `Checkbox`, `Switch`) move to React Aria's `*Field` + `*Button` composition. This release also rolls in the patch fixes shipped alongside React Aria 1.18 (`Table.SortableColumnHeader`, toast and fieldset fixes, scroll and RTL style fixes).
+
+⚠️ **Breaking changes**: `Radio`, `Checkbox`, and `Switch` replace `*.Content` with `*.Button`. See [Breaking Changes](#breaking-changes).
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## What's New
+
+### Calendar
+
+`Calendar` and `RangeCalendar` gain week and day views, plus new React Aria 1.18 calendar props.
+
+- **Week / day views**: `visibleDuration` renders multi-week or single-day layouts
+- **Multiple selection**: select several dates in a single `Calendar`
+- **React Aria 1.18 props**: `weeksInMonth` and `isDateUnavailable(date, anchorDate)` for ranges
+- **Internals**: month labels use React Aria's `CalendarHeading`, and the year picker is rebuilt on React Aria calendar hooks
+
+**Week view:**
+
+<ComponentPreview name="calendar-week-view" />
+
+**Day view:**
+
+<ComponentPreview name="calendar-day-view" />
+
+**Multiple selection:**
+
+<ComponentPreview name="calendar-multiple-selection" />
+
+**Multiple selection:**
+
+<ComponentPreview name="calendar-multiple-selection" />
+
+### Table.SortableColumnHeader
+
+`Table.SortableColumnHeader` renders a sortable column label with an optional ascending/descending indicator. Use it inside a `Table.Column` render prop and forward `sortDirection` ([#6588](https://github.com/heroui-inc/heroui/pull/6588)).
+
+```tsx
+<Table.Column allowsSorting>
+  {({sortDirection}) => (
+    <Table.SortableColumnHeader sortDirection={sortDirection}>
+      Name
+    </Table.SortableColumnHeader>
+  )}
+</Table.Column>
+```
+
+- **Default indicator**: Chevron appears when a sort direction exists
+- **Custom indicator**: Pass `indicator`, or hide it with `showIndicator={false}`
+- **Style slots**: `.table__sortable-column-header` + `.table__sortable-column-indicator`
+
+<ComponentPreview name="table-sorting" />
+
+## Component Fixes
+
+- **Toast**: ViewTransition updates are serialized in the toast queue, preventing skipped transitions and AbortError rejections when `toast.promise()` swaps the loading toast for success/error feedback ([#6511](https://github.com/heroui-inc/heroui/pull/6511)).
+- **Fieldset**: `disabled` propagates through React Aria Button, CheckboxGroup, Link, RadioGroup, Slider, ToggleButton, and ToggleButtonGroup contexts ([#6596](https://github.com/heroui-inc/heroui/pull/6596)).
+
+## Style Fixes
+
+- **Modal / AlertDialog**: `scroll-inside` dialogs cap height with `max-h-full min-h-0` so the body scrolls instead of overflowing ([#6597](https://github.com/heroui-inc/heroui/pull/6597)).
+- **ScrollShadow**: Fade masks reserve space for visible native scrollbars via `--scroll-shadow-scrollbar-size` ([#6598](https://github.com/heroui-inc/heroui/pull/6598)).
+- **Table RTL**: Column separators and resize handles use logical `end-0` positioning in RTL ([#6606](https://github.com/heroui-inc/heroui/pull/6606)).
+
+## Dependencies
+
+- **React Aria Components**: `1.17.0` → `1.18.0` ([#6586](https://github.com/heroui-inc/heroui/pull/6586)). 1.18 adds the `*Field` + `*Button` composition adopted by the toggles, `CalendarHeading`, and `isDateUnavailable(date, anchorDate)`.
+- **@internationalized/date**: `3.12.1` → `3.12.2`
+- **React Aria / Stately helpers**: `@react-aria/*`, `@react-stately/*`, and `@react-types/shared` patch updates
+
+## Breaking Changes
+
+### Radio, Checkbox & Switch: `*.Content` → `*.Button`
+
+These toggles now use React Aria's `*Field` + `*Button` composition. The `*.Content` wrapper is removed. Put the control and `Label` inside a new `*.Button` (the clickable label), and move `Description`/`FieldError` out as siblings of `*.Button` so they're exposed via `aria-describedby` instead of the accessible name.
+
+**Checkbox**
+
+```tsx
+// Before
+<Checkbox>
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label>Accept terms</Label>
+    <Description>You agree to our terms</Description>
+  </Checkbox.Content>
+</Checkbox>
+
+// After
+<Checkbox>
+  <Checkbox.Button>
+    <Checkbox.Control>
+      <Checkbox.Indicator />
+    </Checkbox.Control>
+    <Label>Accept terms</Label>
+  </Checkbox.Button>
+  <Description>You agree to our terms</Description>
+</Checkbox>
+```
+
+**Radio**
+
+```tsx
+// Before
+<Radio value="a">
+  <Radio.Control>
+    <Radio.Indicator />
+  </Radio.Control>
+  <Radio.Content>
+    <Label>Option A</Label>
+  </Radio.Content>
+</Radio>
+
+// After
+<Radio value="a">
+  <Radio.Button>
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    <Label>Option A</Label>
+  </Radio.Button>
+</Radio>
+```
+
+**Switch**
+
+```tsx
+// Before
+<Switch>
+  <Switch.Control>
+    <Switch.Thumb />
+  </Switch.Control>
+  <Switch.Content>
+    <Label>Enable notifications</Label>
+  </Switch.Content>
+</Switch>
+
+// After
+<Switch>
+  <Switch.Button>
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Label>Enable notifications</Label>
+  </Switch.Button>
+</Switch>
+```
+
+**Migration summary**
+
+| Before | After |
+|--------|-------|
+| `<X.Content>` wraps `Label` + help text | `<X.Button>` wraps `X.Control` + `Label` |
+| `Description` / `FieldError` inside `X.Content` | `Description` / `FieldError` as siblings of `X.Button` |
+| `X.Content` part | Removed — use `X.Button` |
+
+**Control-only checkboxes and switches need no changes.** If you render `Checkbox.Control` / `Switch.Control` directly inside the root (no label, e.g. table row selection or icon switches), it keeps working — the control self-wraps into the clickable element.
+
+Full per-component guides: [Checkbox](/docs/react/migration/checkbox), [Checkbox Group](/docs/react/migration/checkbox-group), [Radio](/docs/react/migration/radio), [Radio Group](/docs/react/migration/radio-group), and [Switch](/docs/react/migration/switch).
+
+## Links
+
+- [Calendar Docs](/docs/react/components/calendar)
+- [Checkbox Docs](/docs/react/components/checkbox)
+- [Radio Group Docs](/docs/react/components/radio-group)
+- [Switch Docs](/docs/react/components/switch)
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6587](https://github.com/heroui-inc/heroui/pull/6587)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
