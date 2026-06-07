@@ -154,14 +154,14 @@
   /* Bottom/top placement: full width, auto height */
   &[data-placement="bottom"] {
     @apply w-full;
-    @apply max-h-[85vh];
+    max-height: calc(var(--visual-viewport-height, 100dvh) * 0.85);
     border-top-left-radius: min(32px, var(--radius-2xl));
     border-top-right-radius: min(32px, var(--radius-2xl));
   }
 
   &[data-placement="top"] {
     @apply w-full;
-    @apply max-h-[85vh];
+    max-height: calc(var(--visual-viewport-height, 100dvh) * 0.85);
     border-bottom-left-radius: min(32px, var(--radius-2xl));
     border-bottom-right-radius: min(32px, var(--radius-2xl));
   }
