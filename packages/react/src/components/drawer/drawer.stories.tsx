@@ -165,6 +165,47 @@ export const WithForm = () => (
   </Drawer>
 );
 
+/**
+ * Testing for https://github.com/heroui-inc/heroui/issues/6620.
+ */
+export const BottomWithForm = () => (
+  <Drawer>
+    <Button variant="secondary">Open Bottom Drawer (Form)</Button>
+    <Drawer.Backdrop>
+      <Drawer.Content placement="bottom">
+        <Drawer.Dialog>
+          <Drawer.Handle />
+          <Drawer.Header>
+            <Drawer.Heading>Quick Reply</Drawer.Heading>
+          </Drawer.Header>
+          <Drawer.Body>
+            <form className="flex flex-col gap-4">
+              <TextField className="w-full" name="subject" type="text">
+                <Label>Subject</Label>
+                <Input placeholder="What's it about?" variant="secondary" />
+              </TextField>
+              <TextField className="w-full" name="recipient" type="email">
+                <Label>Recipient</Label>
+                <Input placeholder="someone@example.com" variant="secondary" />
+              </TextField>
+              <TextField className="w-full" name="message" type="text">
+                <Label>Message</Label>
+                <Input placeholder="Type your reply…" variant="secondary" />
+              </TextField>
+            </form>
+          </Drawer.Body>
+          <Drawer.Footer>
+            <Button slot="close" variant="secondary">
+              Cancel
+            </Button>
+            <Button slot="close">Send</Button>
+          </Drawer.Footer>
+        </Drawer.Dialog>
+      </Drawer.Content>
+    </Drawer.Backdrop>
+  </Drawer>
+);
+
 export const WithScrollableContent = () => (
   <Drawer>
     <Button variant="secondary">Terms & Conditions</Button>
