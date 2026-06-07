@@ -1,0 +1,141 @@
+---
+title: Input 输入框
+description: 单行文本输入原语，可接受标准 HTML 属性。
+links:
+  rac: Input
+  source: input/input.tsx
+  styles: input.css
+  storybook: Components/Forms/Input
+---
+
+## 引入
+
+```tsx
+import { Input } from '@heroui/react';
+```
+
+<Callout>
+  关于校验、标签与错误信息，请参见 **[TextField](/docs/components/text-field)**。
+</Callout>
+
+### 用法
+
+<ComponentPreview name="input-basic" />
+
+### Input 类型
+
+<ComponentPreview name="input-types" />
+
+### 受控
+
+<ComponentPreview name="input-controlled" />
+
+### 全宽
+
+<ComponentPreview name="input-full-width" />
+
+### 变体
+
+Input 支持两种视觉变体：
+
+- **`primary`**（默认）— 常规样式并带阴影，适用于大多数场景
+- **`secondary`** — 弱强调变体，无阴影，适合用于 Surface 组件内
+
+<ComponentPreview name="input-variants" />
+
+### 在 Surface 内
+
+在 [Surface](/docs/components/surface) 组件内使用时，请使用 `variant="secondary"`，以应用适合表面背景的弱强调变体。
+
+<ComponentPreview name="input-on-surface" />
+
+<RelatedComponents component="input" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {Input, Label} from '@heroui/react';
+
+function CustomInput() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Label htmlFor="custom-input">Project name</Label>
+      <Input
+        id="custom-input"
+        className="rounded-xl border border-border/70 bgsurface px-4 py-2 text-sm shadow-sm focus-visible:border-primary"
+        placeholder="New web app"
+      />
+    </div>
+  );
+}
+```
+
+### 自定义组件类
+
+基础类 `.input` 驱动每个实例。使用 `@layer components` 一次性覆盖即可。
+
+```css
+@layer components {
+  .input {
+    @apply rounded-lg border border-border bgsurface px-4 py-2 text-sm shadow-sm transition-colors;
+
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-surface-secondary border-border/80;
+    }
+
+    &:focus-visible,
+    &[data-focus-visible="true"] {
+      @apply border-primary ring-2 ring-primary/20;
+    }
+
+    &[data-invalid="true"] {
+      @apply border-danger bg-danger-50/10 text-danger;
+    }
+  }
+}
+```
+
+### CSS 类
+
+- `.input` — 原生 input 元素样式
+
+### 交互状态
+
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **可见焦点**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **无效**：`[data-invalid="true"]`（并与 `aria-invalid` 同步）
+- **禁用**：`:disabled` 或 `[aria-disabled="true"]`
+- **只读**：`[aria-readonly="true"]`
+
+## API 参考
+
+### Input Props
+
+除标准 HTML `<input>` 属性外，还支持以下 props：
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 与组件样式合并的 Tailwind 类。 |
+| `type` | `string` | `"text"` | Input 类型（text、email、password、number 等）。 |
+| `value` | `string` | - | 受控值。 |
+| `defaultValue` | `string` | - | 非受控初始值。 |
+| `onChange` | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - | 变更事件处理函数。 |
+| `placeholder` | `string` | - | 占位符文本。 |
+| `disabled` | `boolean` | `false` | 禁用输入框。 |
+| `readOnly` | `boolean` | `false` | 将输入框设为只读。 |
+| `required` | `boolean` | `false` | 将输入框标记为必填。 |
+| `name` | `string` | - | 用于表单提交的 name。 |
+| `autoComplete` | `string` | - | 浏览器自动完成提示。 |
+| `maxLength` | `number` | - | 最大字符数。 |
+| `minLength` | `number` | - | 最小字符数。 |
+| `pattern` | `string` | - | 用于校验的正则表达式。 |
+| `min` | `number \| string` | - | 最小值（用于 number/date 输入）。 |
+| `max` | `number \| string` | - | 最大值（用于 number/date 输入）。 |
+| `step` | `number \| string` | - | 步进间隔（用于 number 输入）。 |
+| `fullWidth` | `boolean` | `false` | 输入框是否占满容器宽度。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为无阴影的弱强调变体，适合用于 surface 内。 |
+
+> 如需 `isInvalid`、`isRequired` 等校验相关 props 与错误处理，请使用 **[TextField](/docs/components/text-field)**，并将 Input 作为其子组件。

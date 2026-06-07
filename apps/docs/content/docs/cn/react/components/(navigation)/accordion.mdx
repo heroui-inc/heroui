@@ -1,0 +1,300 @@
+---
+title: Accordion 手风琴
+description: 用于在紧凑空间中组织信息的可折叠内容面板。
+links:
+  rac: Disclosure
+  source: accordion/accordion.tsx
+  styles: accordion.css
+  storybook: Components/Navigation/Accordion
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Accordion } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="accordion-basic"
+  minHeight="400px"
+/>
+
+
+### 组件结构
+
+引入 Accordion 组件并通过点语法访问所有子部分。
+
+```tsx
+import { Accordion } from '@heroui/react';
+
+export default () => (
+  <Accordion>
+    <Accordion.Item>
+      <Accordion.Heading>
+        <Accordion.Trigger>
+          <Accordion.Indicator />
+        </Accordion.Trigger>
+      </Accordion.Heading>
+      <Accordion.Panel>
+        <Accordion.Body/>
+      </Accordion.Panel>
+    </Accordion.Item>
+  </Accordion>
+)
+```
+
+### Surface
+
+<ComponentPreview
+  name="accordion-surface"
+ minHeight="400px"
+/>
+
+### 多项同时展开
+
+<ComponentPreview
+  name="accordion-multiple"
+   minHeight="524px"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="accordion-controlled"
+  minHeight="400px"
+/>
+
+### 自定义指示器
+
+<ComponentPreview
+  name="accordion-custom-indicator"
+   minHeight="320px"
+/>
+
+### 禁用状态
+
+<ComponentPreview
+  name="accordion-disabled"
+   minHeight="524px"
+/>
+
+### FAQ 布局
+
+<ComponentPreview
+  name="accordion-faq"
+  minHeight="720px"
+/>
+
+### 自定义样式
+
+<ComponentPreview
+  name="accordion-custom-styles"
+  minHeight="420px"
+/>
+
+### 无分隔线
+
+<ComponentPreview
+  name="accordion-without-separator"
+  minHeight="400px"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="accordion-custom-render-function"
+  minHeight="400px"
+/>
+
+<RelatedComponents component="accordion" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+<CollapsibleCode lang="tsx" code={`"use client";
+
+import { Accordion, cn } from "@heroui/react";
+import {Icon} from "@iconify/react";
+
+const items = [
+  {
+    content:
+      "Stay informed about your account activity with real-time notifications. You'll receive instant alerts for important events like transactions, new messages, security updates, and system announcements. ",
+    iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/bell-small.png",
+    title: "Set Up Notifications",
+    subtitle: "Receive account activity updates",
+  },
+  {
+    content:
+      "Enhance your browsing experience by installing our official browser extension. The extension provides seamless integration with your account, allowing you to receive notifications directly in your browser, quickly access your dashboard, and interact with web3 applications securely. Compatible with Chrome, Firefox, Edge, and Brave browsers.",
+    iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/compass-small.png",
+    title: "Set up Browser Extension",
+    subtitle: "Connect you browser to your account",
+  },
+  {
+    content:
+      "Begin your journey into the world of digital collectibles by creating your first NFT. Our intuitive minting process guides you through uploading your artwork, setting metadata, choosing royalty percentages, and deploying to the blockchain. Whether you're an artist, creator, or collector, you'll find all the tools you need to bring your digital assets to life. Your collectibles are stored on IPFS for permanent decentralized storage.",
+    iconUrl:
+      "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/mint-collective-small.png",
+    title: "Mint Collectible",
+    subtitle: "Create your first collectible",
+  },
+];
+
+export function CustomStyles() {
+  return (
+    <Accordion className="bg-surface-secondary w-full max-w-md rounded-2xl" variant="surface">
+      {items.map((item, index) => (
+        <Accordion.Item
+          key={index}
+          className={cn(
+            "group/item",
+            "first:[&_[data-slot=accordion-trigger]]:rounded-t-2xl", // 第一个触发器：圆角顶部
+            "last:[&:not(:has([data-slot=accordion-trigger][aria-expanded='true']))_[data-slot=accordion-trigger]]:rounded-b-2xl", // 最后一个触发器：圆角底部
+          )}
+        >
+          <Accordion.Heading>
+            <Accordion.Trigger className="hover:bg-surface-tertiary group flex items-center gap-2">
+              {item.iconUrl ? (
+                <img
+                  alt={item.title}
+                  className="group-hover/item:scale-120 group-hover/item:-rotate-10 h-11 w-11 transition-[scale,rotate] duration-300 ease-out group-hover/item:drop-shadow-lg"
+                  src={item.iconUrl}
+                />
+              ) : null}
+              <div className="flex flex-col gap-0">
+                <span className="font-medium leading-5">{item.title}</span>
+                <span className="text-muted/80 font-normal leading-6">{item.subtitle}</span>
+              </div>
+              <Accordion.Indicator className="text-muted/50 [&>svg]:size-4">
+                <Icon icon="gravity-ui:chevron-down" />
+              </Accordion.Indicator>
+            </Accordion.Trigger>
+          </Accordion.Heading>
+          <Accordion.Panel>
+            <Accordion.Body className="text-muted/80">{item.content}</Accordion.Body>
+          </Accordion.Panel>
+        </Accordion.Item>
+      ))}
+    </Accordion>
+  );
+}`} />
+
+### 自定义组件类
+
+若要自定义 Accordion 组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .accordion {
+    @apply rounded-xl bg-gray-50;
+  }
+
+  .accordion__trigger {
+    @apply font-semibold text-lg;
+  }
+
+  .accordion--outline {
+    @apply shadow-lg border-2;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Accordion 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/accordion.css)）：
+
+#### 基础类
+- `.accordion` - Accordion 根容器
+- `.accordion__body` - 正文容器
+- `.accordion__heading` - 标题包裹层
+- `.accordion__indicator` - 展开/收起指示图标
+- `.accordion__item` - 单个 Accordion 项
+- `.accordion__panel` - 可折叠面板容器
+- `.accordion__trigger` - 可点击的触发按钮
+
+#### 变体类
+- `.accordion--outline` - 描边变体（边框与背景）
+
+#### 状态类
+- `.accordion__trigger[aria-expanded="true"]` - 展开状态
+- `.accordion__panel[aria-hidden="false"]` - 面板可见状态
+
+### 交互状态
+
+该组件同时支持 CSS 伪类与 data 属性：
+
+- **悬停**：触发器上 `:hover` 或 `[data-hovered="true"]`
+- **聚焦**：触发器上 `:focus-visible` 或 `[data-focus-visible="true"]`
+- **禁用**：触发器上 `:disabled` 或 `[aria-disabled="true"]`
+- **展开**：触发器上 `[aria-expanded="true"]`
+
+## API 参考
+
+### Accordion Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `allowsMultipleExpanded` | `boolean` | `false` | 是否允许多项同时展开。 |
+| `defaultExpandedKeys` | `Iterable<Key>` | - | 初始展开的 key。 |
+| `expandedKeys` | `Iterable<Key>` | - | 受控的展开 key。 |
+| `onExpandedChange` | `(keys: Set<Key>) => void` | - | 展开 key 变化时调用的事件处理函数。 |
+| `isDisabled` | `boolean` | `false` | 是否禁用整个 Accordion。 |
+| `variant` | `"default" \| "surface"` | `"default"` | Accordion 的视觉变体。 |
+| `hideSeparator` | `boolean` | `false` | 是否隐藏 Accordion 项之间的分隔线。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | Accordion 项。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, AccordionRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+
+### Accordion.Item Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `id` | `Key` | - | 该项的唯一标识。 |
+| `isDisabled` | `boolean` | `false` | 是否禁用该项。 |
+| `defaultExpanded` | `boolean` | `false` | 初始是否展开。 |
+| `isExpanded` | `boolean` | - | 受控展开状态。 |
+| `onExpandedChange` | `(isExpanded: boolean) => void` | - | 展开状态变化时调用的事件处理函数。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 项内容。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, AccordionItemRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### Accordion.Trigger Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 触发器内容或渲染函数。 |
+| `onPress` | `() => void` | - | 额外的按下事件处理函数。 |
+| `isDisabled` | `boolean` | - | 是否禁用触发器。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TriggerRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### Accordion.Panel Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 面板内容。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, AccordionPanelRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### Accordion.Indicator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 自定义指示图标。 |
+
+### Accordion.Body Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 正文内容。 |

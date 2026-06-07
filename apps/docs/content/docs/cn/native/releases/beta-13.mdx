@@ -1,0 +1,663 @@
+---
+title: Beta 13
+description: TextArea 组件、Button outline 变体、Tabs 改进、表单原语拆分、弹层动画重构、样式类名导出与关键问题修复
+github:
+  pull: 254
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 2 月 3 日</span>
+</div>
+
+Beta 13 引入多行输入组件 TextArea、Button outline 变体，并为所有组件导出样式类名。本版本显著改进 Tabs（动画与变体命名更清晰）、将表单相关能力拆为独立原语、重构弹层动画系统以提升一致性与 Android 兼容性，并修复中文输入、主题色计算、Uniwind Pro 兼容、Bottom Sheet 打开与摇树（tree-shaking）等关键问题，整体提升开发者体验与组件可靠性。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native@beta
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native@beta
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native@beta
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native@beta
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 Beta 13！你可以探索 TextArea、CloseButton、Button outline、Tabs 改进、细粒度导出与各项修复。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## 更新亮点
+
+### 新组件
+
+本版本新增 **3** 个重要组件：
+
+- **[TextArea](/docs/native/components/text-area)**：多行文本输入，带样式边框与背景，适用于较长内容。
+- **[Input](/docs/native/components/input)**：单行文本输入，带样式边框与背景；现作为独立于 TextField 的组件提供（此前仅 `TextField.Input`）。
+- **[CloseButton](/docs/native/components/close-button)**：可复用关闭按钮，用于 Dialog、Modal 等遮罩场景，样式在各遮罩间一致。
+
+#### TextArea
+
+TextArea 面向评论、消息、描述与较长表单字段等多行场景；可与 TextField 组合成完整表单结构，支持校验态与多种视觉变体。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="text-area"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-area-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 多行输入，行数可配置
+- 与 TextField 无缝组合
+- 校验态与视觉反馈
+- primary / secondary 等变体
+- 禁用与只读
+- `className` 与 `styles` 定制
+- 完整无障碍支持
+
+**用法：**
+
+```tsx
+import { Description, Label, TextArea, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <Label>Message</Label>
+      <TextArea placeholder="Enter your message here..." />
+      <Description>Please provide as much detail as possible.</Description>
+    </TextField>
+  );
+}
+```
+
+完整文档与示例见 [TextArea 组件页](/docs/native/components/text-area)。
+
+**相关 PR：** [#254](https://github.com/heroui-inc/heroui-native/pull/254)
+
+#### Input
+
+Input 现可作为独立组件使用，提供带边框与背景的单行输入。此前仅能通过 `TextField.Input` 使用；现可单独使用，或与 TextField、ControlField 等组合。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="input"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 单行输入，带样式边框与背景
+- 独立使用或与表单组件组合
+- 校验态与视觉反馈
+- primary / secondary 变体
+- 禁用与只读
+- `className` 与 `styles`
+- 完整无障碍支持
+
+**用法：**
+
+```tsx
+import { Description, Input, Label, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <Label>Email</Label>
+      <Input placeholder="Enter your email..." />
+      <Description>We'll never share your email.</Description>
+    </TextField>
+  );
+}
+```
+
+完整文档与示例见 [Input 组件页](/docs/native/components/input)。
+
+**相关 PR：** [#247](https://github.com/heroui-inc/heroui-native/pull/247)
+
+#### CloseButton
+
+CloseButton 为关闭 Dialog、Modal、Popover 等遮罩提供统一实现：跨遮罩一致样式、可配置图标属性，并与 Dialog、Popover、Select、Bottom Sheet 等集成。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="close-button"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 各遮罩间关闭按钮样式一致
+- 图标尺寸与颜色可配置
+- 支持自定义子节点替换默认图标
+- 禁用态
+- 与 Dialog、Popover、Select、Bottom Sheet 集成
+- 默认样式针对遮罩场景优化
+
+**用法：**
+
+```tsx
+import { CloseButton } from "heroui-native";
+
+// 独立使用
+<CloseButton onPress={handleClose} />
+
+// 作为 Dialog、Popover、Select、Bottom Sheet 的一部分
+<Dialog>
+  <Dialog.Close />
+</Dialog>
+```
+
+完整文档与示例见 [CloseButton 组件页](/docs/native/components/close-button)。
+
+**相关 PR：** [#237](https://github.com/heroui-inc/heroui-native/pull/237)
+
+### 新子组件
+
+#### Tabs.Separator
+
+Tabs 新增 `Separator` 子组件，在触发器之间提供随当前选项卡变化的显隐动画，便于做视觉分隔。
+
+**特性：**
+
+- 随活动选项卡变化的显隐过渡
+- `betweenValues` 控制显示区间
+- 动画时长与不透明度可配置
+- 可设为始终可见的静态分隔
+
+**用法：**
+
+```tsx
+import { Tabs } from "heroui-native";
+
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.ScrollView>
+      <Tabs.Indicator />
+      <Tabs.Trigger value="general">
+        <Tabs.Label>General</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Separator betweenValues={["general", "notifications"]} />
+      <Tabs.Trigger value="notifications">
+        <Tabs.Label>Notifications</Tabs.Label>
+      </Tabs.Trigger>
+    </Tabs.ScrollView>
+  </Tabs.List>
+</Tabs>
+```
+
+**相关 PR：** [#228](https://github.com/heroui-inc/heroui-native/pull/228)
+
+## 组件改进
+
+### Button outline 变体
+
+[Button](/docs/native/components/button) 新增 `outline` 变体：透明背景 + 边框，丰富按钮视觉层次。
+
+**改进：**
+
+- 新增 `outline` 有边框样式
+- 与其他 Button 变体风格一致
+- outline 的悬停与聚焦态正确
+- 与既有 Button API 无缝衔接
+
+**用法：**
+
+```tsx
+import { Button } from "heroui-native";
+
+<Button variant="outline">Outline Button</Button>
+```
+
+**相关 PR：** [#235](https://github.com/heroui-inc/heroui-native/pull/235)
+
+### Tabs 指示条动画重构
+
+[Tabs](/docs/native/components/tabs) 指示条动画由宽高动画改为 `translateX` 变换，过渡更顺滑、性能更好。
+
+**改进：**
+
+- 指示条迁移到 `translateX`
+- 动画性能与流畅度提升
+- 切换时视觉更一致
+- 减少动画期间的布局重算
+
+**相关 PR：** [#227](https://github.com/heroui-inc/heroui-native/pull/227)
+
+### Popover 箭头尺寸与视觉衔接
+
+[Popover](/docs/native/components/popover) 改进箭头尺寸及与内容的视觉衔接。
+
+**改进：**
+
+- 箭头尺寸相对内容更合理
+- 箭头与弹层连接更自然
+- 对齐与间距优化
+
+**相关 PR：** [#243](https://github.com/heroui-inc/heroui-native/pull/243)
+
+### 表单组件拆分为原语
+
+表单相关能力拆为独立原语，组合更灵活、职责更清晰。
+
+**改进：**
+
+- 表单能力原子化
+- 复用性与组合性提升
+- 关注点分离更好
+- 自定义表单布局更自由
+
+**相关 PR：** [#247](https://github.com/heroui-inc/heroui-native/pull/247)
+
+### Input Android 阴影修复
+
+[Input](/docs/native/components/input) 为 Android 增加平台相关阴影，跨端视觉更一致。
+
+**改进：**
+
+- Android 平台阴影
+- iOS / Android 观感对齐
+- Android 上层次（elevation）观感改善
+
+**相关 PR：** [#248](https://github.com/heroui-inc/heroui-native/pull/248)
+
+### 弹层动画系统重构
+
+Popover、Select、Dialog、BottomSheet 的动画系统已重构：统一进出场逻辑、遮罩组合与内容动画，标准化各弹层行为并修复 Android 指针事件问题。
+
+**改进：**
+
+- Dialog 等呈现统一使用 FadeInDown / FadeOutDown 等进出场
+- 遮罩动画钩子同时支持基于 progress 与进出场两类动画
+- 遮罩组合更多使用 Dialog.Overlay、Popover.Overlay，减少单纯 Pressable 包裹
+- 修复影响弹层交互的 Android pointer events 问题
+- 示例中显式写出 `presentation`（popover、dialog、bottom-sheet）
+- 动画 API 简化，更易维护、跨组件更一致
+
+**相关 PR：** [#263](https://github.com/heroui-inc/heroui-native/pull/263)
+
+## API 增强
+
+### 细粒度导出以优化包体
+
+库现为各组件提供细粒度导出路径，可按需 import 以减小包体。
+
+**新能力：**
+
+```tsx
+// 细粒度导入——仅需少量组件时推荐
+import { HeroUINativeProvider } from "heroui-native/provider";
+import { Button } from "heroui-native/button";
+import { Card } from "heroui-native/card";
+
+// 总入口导入——会拉取整库，适合大量使用组件时
+import { Button, Card } from "heroui-native";
+```
+
+细粒度导入适合只用少数组件的场景；从 `heroui-native` 总入口导入会包含完整库，适合全站大量使用。
+
+**可用细粒度路径：**
+
+- `heroui-native/provider` — Provider
+- `heroui-native/[component-name]` — 各组件
+- `heroui-native/portal` — Portal 工具
+- `heroui-native/utils` — 工具函数
+- `heroui-native/hooks` — 自定义 Hooks
+
+<Callout type="warning">
+  **重要**：为控制包体，请在整个项目中**一致地**使用细粒度导入。只要存在一处从 `heroui-native` 总入口的导入，摇树优化策略即可能失效。
+</Callout>
+
+**相关 PR：** [#233](https://github.com/heroui-inc/heroui-native/pull/233)
+
+### 样式类名导出
+
+所有组件现导出对应样式类名，便于在代码中引用类名或搭建自定义主题方案。
+
+**新能力：**
+
+```tsx
+import { buttonClassNames } from "heroui-native";
+
+const customStyles = {
+  base: buttonClassNames.base,
+  variant: buttonClassNames.variant,
+};
+```
+
+**相关 PR：** [#252](https://github.com/heroui-inc/heroui-native/pull/252)
+
+## 样式修复
+
+### 样式优化
+
+- **移除 quaternary 变体**：删除第四级变体并打磨样式以提升一致性
+- **多组件样式打磨**：视觉一致性增强
+- **阴影与圆角**：跨组件阴影、圆角更统一
+- **主题变量整理**：简化变量并减少冗余 `color-mix` 计算
+
+**相关 PR：** [#246](https://github.com/heroui-inc/heroui-native/pull/246)
+
+## ⚠️ 破坏性变更
+
+### Tabs `variant` 重命名
+
+Tabs 的 `variant` 由 `pill` / `line` 改为 `primary` / `secondary`，与其他组件命名更一致。
+
+**迁移：**
+
+```tsx
+// 之前
+<Tabs variant="pill">{/* content */}</Tabs>
+<Tabs variant="line">{/* content */}</Tabs>
+
+// 之后
+<Tabs variant="primary">{/* content */}</Tabs>
+<Tabs variant="secondary">{/* content */}</Tabs>
+```
+
+**可选项：**
+
+- `"primary"` — 原 `"pill"`
+- `"secondary"` — 原 `"line"`
+
+**相关 PR：** [#236](https://github.com/heroui-inc/heroui-native/pull/236)
+
+### Tabs 指示条动画实现变更
+
+[Tabs](/docs/native/components/tabs) 指示条由 `left` 定位改为 `translateX` 变换以利用 GPU。若自定义过指示条动画，需更新配置。
+
+**迁移：**
+
+```tsx
+// 之前
+<Tabs
+  indicatorAnimation={{
+    left: {
+      type: "spring",
+      config: { damping: 20, stiffness: 300 },
+    },
+  }}
+>
+  {/* content */}
+</Tabs>
+
+// 之后
+<Tabs
+  indicatorAnimation={{
+    translateX: {
+      type: "spring",
+      config: { damping: 20, stiffness: 300 },
+    },
+  }}
+>
+  {/* content */}
+</Tabs>
+```
+
+**变更摘要：**
+
+- `TabsIndicatorAnimation` 中由 `left` 改为 `translateX`
+- 指示条定位基于 `translateX` 变换
+- 指示条样式增加 `left-0` 基准类以保持初始位置
+- 观感应与此前一致，仅底层实现变化
+
+**相关 PR：** [#227](https://github.com/heroui-inc/heroui-native/pull/227)
+
+### Divider 更名为 Separator
+
+`Divider` 已更名为 `Separator`，命名更统一，并避免与其他「分隔线」实现混淆。
+
+**迁移：**
+
+```tsx
+// 之前
+import { Divider } from "heroui-native";
+<Divider />
+
+// 之后
+import { Separator } from "heroui-native";
+<Separator />
+```
+
+**相关 PR：** [#238](https://github.com/heroui-inc/heroui-native/pull/238)
+
+### 移除 quaternary 变体
+
+[Surface](/docs/native/components/surface) 与 [Card](/docs/native/components/card) 已移除 `quaternary` 变体，简化设计系统。
+
+**迁移：**
+
+```tsx
+// 之前
+<Surface variant="quaternary">{/* content */}</Surface>
+<Card variant="quaternary">{/* content */}</Card>
+
+// 之后：使用 default、secondary、tertiary 或自定义 className
+<Surface variant="secondary">{/* content */}</Surface>
+<Card variant="secondary">{/* content */}</Card>
+<Surface className="bg-custom-quaternary">{/* content */}</Surface>
+```
+
+**可用变体：** `"default"`、`"secondary"`、`"tertiary"`
+
+**相关 PR：** [#246](https://github.com/heroui-inc/heroui-native/pull/246)
+
+### 表单原语拆分与重命名
+
+表单拆分过程中若干组件重命名、结构调整，以获得更灵活的组合方式。
+
+**重命名：**
+
+- `FormField` → `ControlField`
+- `ErrorView` → `FieldError`
+
+**迁移：**
+
+```tsx
+// 之前
+import { FormField, ErrorView, TextField } from "heroui-native";
+<FormField>
+  <TextField.Input />
+  <ErrorView>Error message</ErrorView>
+</FormField>
+
+// 之后
+import { ControlField, FieldError, Input, TextField } from "heroui-native";
+<ControlField>
+  <Input />
+  <FieldError>Error message</FieldError>
+</ControlField>
+```
+
+**移除 TextField.Input：**
+
+请改用独立 `Input`：
+
+```tsx
+// 之前
+import { TextField } from "heroui-native";
+<TextField>
+  <TextField.Input placeholder="Enter text..." />
+</TextField>
+
+// 之后
+import { Input, TextField } from "heroui-native";
+<TextField>
+  <Input placeholder="Enter text..." />
+</TextField>
+```
+
+**组合方式：**
+
+`RadioGroup`、`TextField`、`ControlField` 现直接使用 `Label`、`Description`、`FieldError`：
+
+```tsx
+import { ControlField, Description, FieldError, Input, Label, RadioGroup, TextField } from "heroui-native";
+
+<TextField>
+  <Label>Email</Label>
+  <Input placeholder="Enter email..." />
+  <Description>We'll never share your email.</Description>
+  <FieldError>Invalid email address</FieldError>
+</TextField>
+
+<RadioGroup>
+  <Label>Select option</Label>
+  <RadioGroup.Item value="option1">
+    <RadioGroup.Label>Option 1</RadioGroup.Label>
+  </RadioGroup.Item>
+  <Description>Choose one option</Description>
+  <FieldError>Please select an option</FieldError>
+</RadioGroup>
+
+<ControlField>
+  <Label>Custom Field</Label>
+  <Input placeholder="Enter value..." />
+  <Description>Additional information</Description>
+  <FieldError>Validation error</FieldError>
+</ControlField>
+```
+
+**相关 PR：** [#247](https://github.com/heroui-inc/heroui-native/pull/247)
+
+### CloseButton 与移除 Close 的 asChild
+
+新增可复用 `CloseButton`；Dialog、Popover、Select、BottomSheet 的关闭实现统一基于该组件。各 `*.Close` 已移除 `asChild`。
+
+**迁移：**
+
+```tsx
+// 之前
+import { Button, Dialog } from "heroui-native";
+<Dialog>
+  <Dialog.Close asChild>
+    <Button>Cancel</Button>
+  </Dialog.Close>
+</Dialog>
+
+// 之后：用受控 open + 自定义按钮处理关闭
+import { Button, Dialog } from "heroui-native";
+const [isOpen, setIsOpen] = useState(false);
+<Dialog open={isOpen} onOpenChange={setIsOpen}>
+  <Button onPress={() => setIsOpen(false)}>Cancel</Button>
+</Dialog>
+```
+
+**变更摘要：**
+
+- 新增 `CloseButton`，默认 `variant="tertiary"`、`size="sm"`、`isIconOnly={true}`
+- `Dialog.Close`、`Popover.Close`、`Select.Close`、`BottomSheet.Close` 内部基于 `CloseButton`
+- 所有 Close 组件移除 `asChild`
+- Close 仍支持 Button 的 `variant`、`size`、`iconProps` 与自定义 `children`
+- 使用完全自定义按钮时需自行处理关闭逻辑
+
+**相关 PR：** [#237](https://github.com/heroui-inc/heroui-native/pull/237)
+
+### 弹层动画系统重构（API）
+
+弹层动画重构带来若干需改代码的 API 调整。
+
+**迁移要点：**
+
+- 从 `Dialog.Root` 移除 `closeDelay`、`isDismissKeyboardOnClose`
+- 从 `Dialog.Root` 的 `animation` 移除自定义 `entering`/`exiting`（仅保留禁用类开关）；自定义进出场请在 `Dialog.Content` 上使用 Keyframe 动画配置
+- 从 `Dialog.Content` 移除 `isAnimatedStyleActive`、`onLayout`
+- 从 `BottomSheet.Root` 移除 `isDismissKeyboardOnClose`
+- `BottomSheet.Overlay` 的 `animation` 不再支持 `entering`/`exiting`
+- 所有 `Popover.Content`、`Select.Content` 必须显式传入 `presentation`（由可选改为必填）
+- `useBottomSheetAnimation()` 不再返回 `bottomSheetState`；`useDialogAnimation()` 不再返回 `dialogState`
+
+**变更摘要：**
+
+- `Dialog.Root`：移除 `closeDelay`、`isDismissKeyboardOnClose`；`animation` 类型由支持自定义进场的 `DialogRootAnimation` 收窄为仅禁用标志的 `AnimationRootDisableAll`
+- `Dialog.Content`：移除 `isAnimatedStyleActive`、`onLayout`
+- `BottomSheet.Root`：移除 `isDismissKeyboardOnClose`
+- `BottomSheet.Overlay`：`animation` 不再含 `entering`/`exiting`
+- `Popover.Content`、`Select.Content`：`presentation` 必填（此前可选，默认 `"popover"`）
+- 上述动画钩子返回值精简
+
+**相关 PR：** [#263](https://github.com/heroui-inc/heroui-native/pull/263)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #181](https://github.com/heroui-inc/heroui-native/issues/181)**：修复 TextField 输入中文等多字节字符报错；现正确处理多字节与国际输入，含中日韩等语言。
+
+- **[Issue #219](https://github.com/heroui-inc/heroui-native/issues/219)**：修复 Button `childrenToString()` 在多子节点时返回 `"[object Object]"`；现正确处理 React 元素与复杂子树，避免错误字符串化。
+
+- **[Issue #232](https://github.com/heroui-inc/heroui-native/issues/232)**：修复 HeroUINativeProvider 与新版 Uniwind Pro 不兼容；现可正常配合最新 Uniwind。
+
+- **[Issue #259](https://github.com/heroui-inc/heroui-native/issues/259)**：修复 Bottom Sheet 在快速打开并随即进行手势操作后偶发无法再次打开等问题；进出场动画逻辑重构后已缓解。
+
+- **[Issue #261](https://github.com/heroui-inc/heroui-native/issues/261)**：修复 `@gorhom/bottom-sheet` 无法被摇树剔除的问题；未使用依赖可被更好剔除。
+
+**其他修复：**
+
+- 修复主题计算色在部分场景下数值错误
+- 修复 `childrenToString`，避免错误地将 React 元素转为字符串
+
+**相关 PR：**
+
+- [#226](https://github.com/heroui-inc/heroui-native/pull/226)
+- [#239](https://github.com/heroui-inc/heroui-native/pull/239)
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

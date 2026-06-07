@@ -1,11 +1,10 @@
 "use client";
 
 import type {StatusChipStatus} from "../status-chip";
-import type {UrlObject} from "url";
 
 import {Link as LocalLinkIcon} from "@gravity-ui/icons";
 import {Link} from "@heroui/react";
-import NextLink from "next/link";
+import LinkRoot from "fumadocs-core/link";
 
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
 import {cn} from "@/utils/cn";
@@ -56,9 +55,9 @@ function ConditionalLink({
   }
 
   return (
-    <NextLink className={className} href={href as unknown as UrlObject}>
+    <LinkRoot className={className} href={href}>
       {children}
-    </NextLink>
+    </LinkRoot>
   );
 }
 

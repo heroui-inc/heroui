@@ -1,0 +1,54 @@
+---
+title: AGENTS.md
+description: 为 AI 编码代理下载 HeroUI v3 React 文档
+icon: preview
+---
+
+将 HeroUI v3 React 文档直接下载到你的项目中，供 AI 助手参考。
+
+<Callout>
+  **注意：** `agents-md` 命令专门用于 HeroUI React v3。其他 CLI 命令（如 `add`、`init`、`upgrade` 等）目前仍用于 HeroUI v2。
+</Callout>
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agents-md.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agents-md-dark.jpg"
+  alt="HeroUI React v3 AGENTS.md"
+/>
+
+### 用法
+
+```bash
+npx heroui-cli@latest agents-md --react
+```
+
+或者指定输出文件：
+
+```bash
+npx heroui-cli@latest agents-md --react --output AGENTS.md
+```
+
+### 功能说明
+
+- 将最新的 HeroUI v3 React 文档下载到 `.heroui-docs/react/`
+- 在 `AGENTS.md` 或 `CLAUDE.md` 中生成索引
+- 包含用于代码示例的 demo 文件
+- 自动将 `.heroui-docs/` 添加到 `.gitignore`
+
+### 选项
+
+- `--react` — 仅下载 React 文档
+- `--output <files...>` — 目标文件（例如 `AGENTS.md`，或 `AGENTS.md CLAUDE.md`）
+- `--ssh` — 使用 SSH 进行 git clone
+
+### 环境要求
+
+- Tailwind CSS >= v4
+- React >= 19.0.0
+- `@heroui/react >= 3.0.0` 或 `@latest`
+
+### 相关文档
+
+- [AGENTS.md](https://agents.md/) — 了解面向编码代理的 AGENTS.md 格式
+- [CLAUDE.md](https://code.claude.com/docs/en/best-practices#write-an-effective-claude-md) — Claude 对应版本的 AGENTS.md
+- [AGENTS.md vs Skills](https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals) — AGENTS.md 的性能表现

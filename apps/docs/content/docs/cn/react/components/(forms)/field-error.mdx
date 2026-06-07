@@ -1,0 +1,121 @@
+---
+title: FieldError 字段错误
+description: 用于展示表单字段的校验错误信息。
+links:
+  rac: FieldError
+  source: field-error/field-error.tsx
+  styles: field-error.css
+---
+
+## 引入
+
+```tsx
+import { FieldError } from '@heroui/react';
+```
+
+## 用法
+
+FieldError 组件用于展示表单字段的校验错误信息。当父级字段被标记为无效时会自动显示，并提供平滑的透明度过渡。
+
+<ComponentPreview
+  name="field-error-basic"
+/>
+
+<RelatedComponents component="fielderror" />
+
+## API 参考
+
+### FieldError Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode \| ((validation: ValidationResult) => ReactNode)` | - | 错误信息内容或渲染函数。 |
+
+## 无障碍
+
+FieldError 组件通过以下方式保证无障碍：
+
+- 使用恰当的 ARIA 属性以播报错误
+- 通过语义化 HTML 支持屏幕阅读器
+- 同时提供视觉与程序化的错误提示
+- 根据校验状态自动控制可见性
+
+## 样式
+
+FieldError 组件使用以下 CSS 类：
+
+- `.field-error` - 基础错误样式，使用危险色（danger）
+- 仅在存在 `data-visible` 属性时显示
+- 长文案会以省略号截断
+
+## 示例
+
+### 基础校验
+
+```tsx
+export function Basic() {
+  const [value, setValue] = useState("");
+  const isInvalid = value.length > 0 && value.length < 3;
+
+  return (
+    <TextField className="w-64" isInvalid={isInvalid}>
+      <Label htmlFor="username">Username</Label>
+      <Input
+        id="username"
+        placeholder="Enter username"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <FieldError>Username must be at least 3 characters</FieldError>
+    </TextField>
+  );
+}
+```
+
+### 动态错误信息
+
+```tsx
+<TextField isInvalid={errors.length > 0}>
+  <Label>Password</Label>
+  <Input type="password" />
+  <FieldError>
+    {(validation) => validation.validationErrors.join(', ')}
+  </FieldError>
+</TextField>
+```
+
+### 自定义校验逻辑
+
+```tsx
+function EmailField() {
+  const [email, setEmail] = useState('');
+  const isInvalid = email.length > 0 && !email.includes('@');
+
+  return (
+    <TextField isInvalid={isInvalid}>
+      <Label>Email</Label>
+      <Input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <FieldError>Email must include @ symbol</FieldError>
+    </TextField>
+  );
+}
+```
+
+### 多条错误信息
+
+```tsx
+<TextField isInvalid={hasErrors}>
+  <Label>Username</Label>
+  <Input />
+  <FieldError>
+    {errors.map((error, i) => (
+      <div key={i}>{error}</div>
+    ))}
+  </FieldError>
+</TextField>
+```

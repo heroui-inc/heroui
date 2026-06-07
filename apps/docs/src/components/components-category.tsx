@@ -2,7 +2,6 @@ import type {StatusChipStatus} from "./status-chip";
 
 import {cn} from "@/utils/cn";
 
-import {getComponentInfo} from "../components-registry";
 import {source} from "../lib/source";
 
 import {ComponentItem} from "./component-item";
@@ -11,141 +10,188 @@ import {ComponentItem} from "./component-item";
 const COMPONENT_GROUPS = [
   {
     category: "Buttons",
-    components: ["button", "button-group", "close-button", "toggle-button", "toggle-button-group"],
+    components: [
+      "(buttons)/button",
+      "(buttons)/button-group",
+      "(buttons)/close-button",
+      "(buttons)/toggle-button",
+      "(buttons)/toggle-button-group",
+    ],
   },
   {
     category: "Forms",
     components: [
-      "checkbox",
-      "checkbox-group",
-      "description",
-      "error-message",
-      "field-error",
-      "fieldset",
-      "form",
-      "input",
-      "input-group",
-      "input-otp",
-      "label",
-      "number-field",
-      "radio-group",
-      "search-field",
-      "textfield",
-      "textarea",
+      "(forms)/checkbox",
+      "(forms)/checkbox-group",
+      "(forms)/description",
+      "(forms)/error-message",
+      "(forms)/field-error",
+      "(forms)/fieldset",
+      "(forms)/form",
+      "(forms)/input",
+      "(forms)/input-group",
+      "(forms)/input-otp",
+      "(forms)/label",
+      "(forms)/number-field",
+      "(forms)/radio-group",
+      "(forms)/search-field",
+      "(forms)/text-field",
+      "(forms)/text-area",
     ],
   },
   {
     category: "Date and Time",
     components: [
-      "calendar",
-      "date-field",
-      "date-picker",
-      "date-range-picker",
-      "range-calendar",
-      "time-field",
+      "(date-and-time)/calendar",
+      "(date-and-time)/date-field",
+      "(date-and-time)/date-picker",
+      "(date-and-time)/date-range-picker",
+      "(date-and-time)/range-calendar",
+      "(date-and-time)/time-field",
     ],
   },
   {
     category: "Navigation",
     components: [
-      "accordion",
-      "breadcrumbs",
-      "disclosure",
-      "disclosure-group",
-      "link",
-      "pagination",
-      "tabs",
+      "(navigation)/accordion",
+      "(navigation)/breadcrumbs",
+      "(navigation)/disclosure",
+      "(navigation)/disclosure-group",
+      "(navigation)/link",
+      "(navigation)/pagination",
+      "(navigation)/tabs",
     ],
   },
   {
     category: "Overlays",
-    components: ["alert-dialog", "drawer", "modal", "popover", "toast", "tooltip"],
+    components: [
+      "(overlays)/alert-dialog",
+      "(overlays)/drawer",
+      "(overlays)/modal",
+      "(overlays)/popover",
+      "(overlays)/toast",
+      "(overlays)/tooltip",
+    ],
   },
   {
     category: "Collections",
-    components: ["dropdown", "list-box", "tag-group"],
+    components: ["(collections)/dropdown", "(collections)/list-box", "(collections)/tag-group"],
   },
   {
     category: "Controls",
-    components: ["slider", "switch"],
+    components: ["(controls)/slider", "(controls)/switch"],
   },
   {
     category: "Feedback",
-    components: ["alert", "meter", "progressbar", "progresscircle", "skeleton", "spinner"],
+    components: [
+      "(feedback)/alert",
+      "(feedback)/meter",
+      "(feedback)/progress-bar",
+      "(feedback)/progress-circle",
+      "(feedback)/skeleton",
+      "(feedback)/spinner",
+    ],
   },
   {
     category: "Layout",
-    components: ["card", "separator", "surface", "toolbar"],
+    components: ["(layout)/card", "(layout)/separator", "(layout)/surface", "(layout)/toolbar"],
   },
   {
     category: "Media",
-    components: ["avatar"],
+    components: ["(media)/avatar"],
   },
   {
     category: "Pickers",
-    components: ["autocomplete", "combo-box", "select"],
+    components: ["(pickers)/autocomplete", "(pickers)/combo-box", "(pickers)/select"],
   },
   {
     category: "Typography",
-    components: ["kbd"],
+    components: ["(typography)/kbd"],
   },
   {
     category: "Data Display",
-    components: ["badge", "chip", "table"],
+    components: ["(data-display)/badge", "(data-display)/chip", "(data-display)/table"],
   },
   {
     category: "Colors",
     components: [
-      "color-area",
-      "color-field",
-      "color-picker",
-      "color-slider",
-      "color-swatch",
-      "color-swatch-picker",
+      "(colors)/color-area",
+      "(colors)/color-field",
+      "(colors)/color-picker",
+      "(colors)/color-slider",
+      "(colors)/color-swatch",
+      "(colors)/color-swatch-picker",
     ],
   },
   {
     category: "Utilities",
-    components: ["scroll-shadow"],
+    components: ["(utilities)/scroll-shadow"],
   },
 ] as const;
 
 const componentStatusIcons = ["preview", "new", "updated", "new-dot"];
 
 interface ComponentWithStatus {
-  component: NonNullable<ReturnType<typeof getComponentInfo>>;
+  component: {
+    name: string;
+    title: string;
+    description: string;
+    href: string;
+    category?: string;
+  };
   status?: StatusChipStatus;
 }
 
 interface ComponentCategory {
   category: string;
+  locale: string;
 }
 
-function getComponentWithStatus(name: string): ComponentWithStatus | null {
-  const componentInfo = getComponentInfo(name);
+function isRouteGroup(part: string): boolean {
+  return part.startsWith("(") && part.endsWith(")");
+}
 
-  if (!componentInfo) return null;
+function getComponentNameFromPath(path: string): string {
+  return path.split("/").pop() || path;
+}
 
-  // Get page data to check for status icon
-  const pagePath = componentInfo.href.replace("/docs/", "").split("/").filter(Boolean);
-  const page = source.getPage(pagePath);
-  const icon = page?.data.icon;
+function getComponentWithStatus(path: string, locale: string): ComponentWithStatus | null {
+  const pathWithoutRouteGroups = path
+    .split("/")
+    .filter((part) => !isRouteGroup(part))
+    .join("/");
+
+  const pagePath = ["react", "components", ...pathWithoutRouteGroups.split("/")].filter(Boolean);
+  const page = source.getPage(pagePath, locale);
+
+  if (!page) return null;
+
+  const title = page.data.title || "";
+  const description = page.data.description || "";
+  const componentName = getComponentNameFromPath(path);
+  const icon = page.data.icon;
   const status: StatusChipStatus | undefined =
     icon && componentStatusIcons.includes(icon) ? (icon as StatusChipStatus) : undefined;
 
   return {
-    component: componentInfo,
+    component: {
+      category: undefined,
+      description,
+      href: page.url,
+      name: componentName,
+      title,
+    },
     status,
   };
 }
 
-export function ComponentsCategory({category}: ComponentCategory) {
+export function ComponentsCategory({category, locale}: ComponentCategory) {
   const group = COMPONENT_GROUPS.find((group) => group.category === category);
 
   if (!group) return null;
 
   const components = group.components
-    .map(getComponentWithStatus)
+    .map((path) => getComponentWithStatus(path, locale))
     .filter((item): item is ComponentWithStatus => item !== null);
 
   if (components.length === 0) return null;

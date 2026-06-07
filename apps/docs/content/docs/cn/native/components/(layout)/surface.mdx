@@ -1,0 +1,146 @@
+---
+title: Surface 表面
+description: 提供层级与背景样式的容器组件。
+icon: updated
+links:
+  source_native: surface/surface.tsx
+  styles_native: surface/surface.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/surface-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/surface-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Surface } from 'heroui-native';
+```
+
+## 结构
+
+Surface 是提供层级与背景样式的容器，可包裹子内容，并通过变体与样式属性定制外观。
+
+```tsx
+<Surface>...</Surface>
+```
+
+- **Surface**：主容器，通过变体提供一致的内边距、背景与层级感。
+
+## 用法
+
+### 基础用法
+
+Surface 用于创建具有一致内边距与样式的容器。
+
+```tsx
+<Surface>...</Surface>
+```
+
+### 变体
+
+通过不同层级控制视觉外观。
+
+```tsx
+<Surface variant="default">
+  ...
+</Surface>
+
+<Surface variant="secondary">
+  ...
+</Surface>
+
+<Surface variant="tertiary">
+  ...
+</Surface>
+```
+
+### 嵌套 Surface
+
+使用不同变体嵌套，形成视觉层级。
+
+```tsx
+<Surface variant="default">
+  ...
+  <Surface variant="secondary">
+    ...
+    <Surface variant="tertiary">...</Surface>
+  </Surface>
+</Surface>
+```
+
+### 自定义样式
+
+通过 `className` 或 `style` 传入自定义样式。
+
+```tsx
+<Surface className="bg-accent-soft">
+  ...
+</Surface>
+
+<Surface variant="tertiary" className="p-0">
+  ...
+</Surface>
+```
+
+### 禁用全部动画
+
+将 `animation` 设为 `"disable-all"` 可禁用自身及子级的全部动画。
+
+```tsx
+{
+  /* 禁用自身及子级的全部动画 */
+}
+<Surface animation="disable-all">无动画</Surface>;
+```
+
+## 示例
+
+```tsx
+import { Surface } from 'heroui-native';
+import { Text, View } from 'react-native';
+
+export default function SurfaceExample() {
+  return (
+    <View className="gap-4">
+      <Surface variant="default" className="gap-2">
+        <AppText className="text-foreground">表面内容</AppText>
+        <AppText className="text-muted">
+          默认表面变体，使用 bg-surface 样式。
+        </AppText>
+      </Surface>
+
+      <Surface variant="secondary" className="gap-2">
+        <AppText className="text-foreground">表面内容</AppText>
+        <AppText className="text-muted">
+          次要表面变体，使用 bg-surface-secondary 样式。
+        </AppText>
+      </Surface>
+
+      <Surface variant="tertiary" className="gap-2">
+        <AppText className="text-foreground">表面内容</AppText>
+        <AppText className="text-muted">
+          第三级表面变体，使用 bg-surface-tertiary 样式。
+        </AppText>
+      </Surface>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/surface.tsx)。
+
+## API 参考
+
+### Surface
+
+| prop           | type                                                      | default     | description                                                                               |
+| -------------- | --------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `variant`      | `'default' \| 'secondary' \| 'tertiary' \| 'transparent'` | `'default'` | 视觉变体，控制背景色与边框                                                                |
+| `children`     | `React.ReactNode`                                         | -           | 渲染在表面内的内容                                                                       |
+| `className`    | `string`                                                  | -           | 额外的 class                                                                             |
+| `animation`    | `"disable-all" \| undefined`                              | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级的全部动画                                     |
+| `asChild`      | `boolean`                                                 | `false`     | 是否以子元素方式渲染                                                                     |
+| `...ViewProps` | `ViewProps`                                               | -           | 支持 React Native `View` 的全部属性                                                      |

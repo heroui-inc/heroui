@@ -1,0 +1,73 @@
+---
+title: Typography 排版
+description: 面向标题、正文与行内代码的语义化排版原语，基于 React Aria Components 的 Text 构建。
+links:
+  source: typography/typography.tsx
+  styles: typography.css
+  storybook: Components/Typography
+---
+
+## 引入
+
+```tsx
+import {Typography} from "@heroui/react";
+```
+
+## 用法
+
+<ComponentPreview name="typography-typography-scale" />
+
+默认情况下，`Typography` 会将视觉上的 `type` 映射到对应的语义化元素。
+
+## 子组件
+
+<ComponentPreview name="typography-primitives" />
+
+- `Typography.Heading` 将 `level={1..6}` 映射为 `type="h1"` 至 `type="h6"`。
+- `Typography.Paragraph` 将 `size="base" | "sm" | "xs"` 映射为正文样式。
+- `Typography.Code` 映射为行内代码样式。
+- `Typography.Prose` 为以常规 HTML 子节点传入的富文本内容提供排版样式。
+
+## Prose
+
+<ComponentPreview name="typography-prose" />
+
+## Render Prop
+
+<ComponentPreview name="typography-render-props" />
+
+需要自定义实际渲染的元素时，可使用 React Aria Components 风格的 `render` prop。
+
+## CSS 类名
+
+### 基础类
+
+- `.typography` - 排版基础原语
+- `.typography-prose` - 富文本文章体容器
+
+### 类型类
+
+- `.typography--h1` 至 `.typography--h6`
+- `.typography--body`、`.typography--body-sm`、`.typography--body-xs`
+- `.typography--code`
+
+### 修饰类
+
+- `.typography--align-start`、`.typography--align-center`、`.typography--align-end`、`.typography--align-justify`
+- `.typography--color-default`、`.typography--color-muted`
+- `.typography--truncate`
+- `.typography--weight-normal`、`.typography--weight-medium`、`.typography--weight-semibold`、`.typography--weight-bold`
+
+## API 参考
+
+### Typography 属性
+
+| 属性       | 类型                                                                                           | 默认值     | 说明                                    |
+| ---------- | ---------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------- |
+| `type`     | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'body' \| 'body-sm' \| 'body-xs' \| 'code'` | `'body'`    | 语义化排版样式。                     |
+| `align`    | `'start' \| 'center' \| 'end' \| 'justify'`                                                 | `'start'`   | 文本对齐。                                |
+| `color`    | `'default' \| 'muted'`                                                                        | `'default'` | 文本颜色。                                    |
+| `weight`   | `'normal' \| 'medium' \| 'semibold' \| 'bold'`                                              | -           | 字重覆盖。                          |
+| `truncate` | `boolean`                                                                                      | -           | 将文本截断为单行并显示省略号。  |
+| `render`   | `DOMRenderFunction`                                                                            | -           | 来自 React Aria 的自定义渲染函数。        |
+| `children` | `ReactNode`                                                                                    | -           | 文本内容。                                  |

@@ -1,0 +1,392 @@
+---
+title: Listbox
+description: Listbox 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 ListBox 文档](/docs/react/components/listbox)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+### v2：独立组件
+
+在 v2 中，Listbox 使用彼此独立的组件：
+
+```tsx
+import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Listbox>
+      <ListboxItem key="1">Item 1</ListboxItem>
+    </Listbox>
+  );
+}
+```
+
+### v3：复合组件
+
+在 v3 中，ListBox 使用复合组件：
+
+```tsx
+import { ListBox, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ListBox>
+      <ListBox.Item id="1" textValue="Item 1">
+        <Label>Item 1</Label>
+      </ListBox.Item>
+    </ListBox>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件命名
+
+**v2：** `Listbox`、`ListboxItem`、`ListboxSection`  
+**v3：** `ListBox`、`ListBox.Item`、`ListBox.Section`
+
+### 2. 条目标识
+
+**v2：** React 的 `key` 同时用于列表调和与条目身份（选择、焦点）。  
+**v3：** 使用 `id` 管理状态与焦点，使用 `textValue` 提供无障碍信息（当内容不是纯文本时）；列表中仍可为各项保留 React 的 `key`。
+
+### 3. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `key`（用于状态） | `ListBox.Item` | 条目身份（状态）请使用 `id` |
+| — | `textValue`（在 `ListBox.Item` 上） | 用于无障碍（输入预判） |
+| `variant`、`color` | `ListBox` 或 `ListBox.Item` 上的 `variant` | 精简为 `"default"` \| `"danger"`（不再有单独的 `color` prop） |
+| `onAction` | `ListBox` | 按下条目时触发，签名为 `(key: Key) => void` |
+| `disabledKeys` | `ListBox` | 与 v2 相同——一组键，对应应为非交互的条目 |
+| `startContent`、`endContent` | — | 请在条目内容中手动放置图标 |
+| `description` | `Description` | 使用 `Description` 组件 |
+| `title`（在 Section 上） | `Header` | 使用 `Header` 组件 |
+| `topContent`、`bottomContent` | — | 已移除（请自行处理） |
+| `itemClasses`、`classNames` | — | 在各部分上使用 `className` |
+| `hideSelectedIcon` | — | 不渲染 `ListBox.ItemIndicator` |
+| `disableAnimation` | — | 已移除 |
+| `isVirtualized`、`virtualization` | React Aria `Virtualizer` | 使用 React Aria 的 `<Virtualizer>` 包装（见下方示例） |
+| `selectedKeys` | `ListBox` | 与 v2 相同（使用 `Selection` 类型的 Set） |
+
+## 迁移示例
+
+### 选择
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState(new Set(["text"]));
+
+    <Listbox
+      selectedKeys={singleSelected}
+      selectionMode="single"
+      onSelectionChange={setSingleSelected}
+    >
+      <ListboxItem key="text">Text</ListboxItem>
+      <ListboxItem key="number">Number</ListboxItem>
+    </Listbox>
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState(new Set(["text"]));
+
+    <Listbox
+      selectedKeys={multiSelected}
+      selectionMode="multiple"
+      onSelectionChange={setMultiSelected}
+    >
+      <ListboxItem key="text">Text</ListboxItem>
+      <ListboxItem key="number">Number</ListboxItem>
+    </Listbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import type { Selection } from "@heroui/react";
+
+    {/* Single selection */}
+    const [singleSelected, setSingleSelected] = useState<Selection>(new Set(["text"]));
+
+    <ListBox
+      selectedKeys={singleSelected}
+      selectionMode="single"
+      onSelectionChange={setSingleSelected}
+    >
+      <ListBox.Item id="text" textValue="Text">
+        <Label>Text</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+      <ListBox.Item id="number" textValue="Number">
+        <Label>Number</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+    </ListBox>
+    
+    {/* Multiple selection */}
+    const [multiSelected, setMultiSelected] = useState<Selection>(new Set(["text"]));
+
+    <ListBox
+      selectedKeys={multiSelected}
+      selectionMode="multiple"
+      onSelectionChange={setMultiSelected}
+    >
+      <ListBox.Item id="text" textValue="Text">
+        <Label>Text</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+      <ListBox.Item id="number" textValue="Number">
+        <Label>Number</Label>
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+    </ListBox>
+    ```
+  </Tab>
+</Tabs>
+
+### 含描述
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="new"
+      description="Create a new file"
+    >
+      New file
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, Label } from "@heroui/react";
+
+    <ListBox.Item id="new" textValue="New file">
+      <Label>New file</Label>
+      <Description>Create a new file</Description>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### 含图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="new"
+      startContent={<AddIcon />}
+    >
+      New file
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ListBox.Item id="new" textValue="New file">
+      <AddIcon />
+      <Label>New file</Label>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### 含分组
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Listbox>
+      <ListboxSection title="Actions">
+        <ListboxItem key="new">New file</ListboxItem>
+        <ListboxItem key="edit">Edit file</ListboxItem>
+      </ListboxSection>
+      <ListboxSection title="Danger zone">
+        <ListboxItem key="delete">Delete</ListboxItem>
+      </ListboxSection>
+    </Listbox>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Header, Label, Separator } from "@heroui/react";
+
+    <ListBox>
+      <ListBox.Section>
+        <Header>Actions</Header>
+        <ListBox.Item id="new" textValue="New file">
+          <Label>New file</Label>
+        </ListBox.Item>
+        <ListBox.Item id="edit" textValue="Edit file">
+          <Label>Edit file</Label>
+        </ListBox.Item>
+      </ListBox.Section>
+      <Separator />
+      <ListBox.Section>
+        <Header>Danger zone</Header>
+        <ListBox.Item id="delete" textValue="Delete" variant="danger">
+          <Label>Delete</Label>
+        </ListBox.Item>
+      </ListBox.Section>
+    </ListBox>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义选中指示器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ListboxItem
+      key="1"
+      selectedIcon={<CustomCheckIcon />}
+    >
+      Item 1
+    </ListboxItem>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ListBox.Item id="1" textValue="Item 1">
+      <Label>Item 1</Label>
+      <ListBox.ItemIndicator>
+        {({isSelected}) =>
+          isSelected ? <CustomCheckIcon /> : null
+        }
+      </ListBox.ItemIndicator>
+    </ListBox.Item>
+    ```
+  </Tab>
+</Tabs>
+
+### `variant` prop
+
+在 v3 中，`ListBox` 与 `ListBox.Item` 都接受 `variant` prop，取值为 `"default"`（默认）或 `"danger"`。在根级 `ListBox` 上设置 `variant` 会作用于所有条目；在单个 `ListBox.Item` 上设置会覆盖该条目的根级值。
+
+```tsx
+{/* Root-level variant — all items inherit "danger" styling */}
+<ListBox variant="danger">
+  <ListBox.Item id="delete" textValue="Delete">
+    <Label>Delete</Label>
+  </ListBox.Item>
+</ListBox>
+
+{/* Per-item variant */}
+<ListBox>
+  <ListBox.Item id="edit" textValue="Edit">
+    <Label>Edit</Label>
+  </ListBox.Item>
+  <ListBox.Item id="delete" textValue="Delete" variant="danger">
+    <Label>Delete</Label>
+  </ListBox.Item>
+</ListBox>
+```
+
+### `onAction` 事件处理函数
+
+`onAction` 在条目被按下（点击或 Enter）时触发，参数为该条目的 `id`（类型为 `Key`）。
+
+```tsx
+<ListBox onAction={(key) => alert(`Action on ${key}`)}>
+  <ListBox.Item id="copy" textValue="Copy">
+    <Label>Copy</Label>
+  </ListBox.Item>
+  <ListBox.Item id="paste" textValue="Paste">
+    <Label>Paste</Label>
+  </ListBox.Item>
+</ListBox>
+```
+
+### `disabledKeys`
+
+使用 `disabledKeys` 将特定条目设为非交互：
+
+```tsx
+<ListBox disabledKeys={new Set(["paste"])}>
+  <ListBox.Item id="copy" textValue="Copy">
+    <Label>Copy</Label>
+  </ListBox.Item>
+  <ListBox.Item id="paste" textValue="Paste">
+    <Label>Paste</Label>
+  </ListBox.Item>
+</ListBox>
+```
+
+### `ListBox.Item` 的渲染 prop
+
+`ListBox.Item` 支持渲染 prop，可读取当前交互状态。可用字段包括 `isSelected`、`isFocused`、`isDisabled`、`isPressed`：
+
+```tsx
+<ListBox selectionMode="single">
+  <ListBox.Item id="item1" textValue="Item 1">
+    {({isSelected, isFocused, isDisabled, isPressed}) => (
+      <>
+        <Label className={isSelected ? "font-bold" : ""}>Item 1</Label>
+        {isSelected && <ListBox.ItemIndicator />}
+      </>
+    )}
+  </ListBox.Item>
+</ListBox>
+```
+
+### 虚拟化
+
+v3 仍通过 React Aria 的 `<Virtualizer>` **支持虚拟化**。用 `Virtualizer` 包裹 `ListBox` 的条目，以高效渲染长列表：
+
+```tsx
+import {Virtualizer} from "react-aria-components";
+
+<ListBox
+  aria-label="Large list"
+  items={items}
+  selectionMode="multiple"
+>
+  <Virtualizer>
+    {(item) => (
+      <ListBox.Item id={item.id} textValue={item.name}>
+        <Label>{item.name}</Label>
+      </ListBox.Item>
+    )}
+  </Virtualizer>
+</ListBox>
+```
+
+## 组件剖析
+
+v3 ListBox 的结构如下：
+
+```
+ListBox (Root)
+  ├── ListBox.Item
+  │   ├── Icon (optional, manual placement)
+  │   ├── Label (required)
+  │   ├── Description (optional)
+  │   └── ListBox.ItemIndicator (optional)
+  └── ListBox.Section (optional)
+      ├── Header (optional)
+      └── ListBox.Item
+```
+
+## 总结
+
+1. **组件命名**：`Listbox` → `ListBox`，`ListboxItem` → `ListBox.Item`，`ListboxSection` → `ListBox.Section`。
+2. **条目结构**：必须使用 `Label`、`Description`、`ListBox.ItemIndicator` 等组件。
+3. **图标**：不再使用 `startContent` / `endContent` prop，改为手动排版。
+4. **分组**：使用 `Header` 组件，不再使用 Section 的 `title` prop。
+5. **`variant` prop**：`variant` 与 `color` 合并为单一的 `variant`（`"default"` \| `"danger"`），可设在 `ListBox` 与 `ListBox.Item` 上。
+6. **`onAction`**：`ListBox` 上新增 `onAction`，用于处理条目按下。
+7. **`disabledKeys`**：仍在 `ListBox` 上支持，用于禁用特定条目。
+8. **渲染 prop**：`ListBox.Item` 通过渲染 prop 提供 `isSelected`、`isFocused`、`isDisabled`、`isPressed`。
+9. **已移除的内容 props**：`topContent`、`bottomContent`——请自行组织布局。
+10. **虚拟化**：仍通过 React Aria `<Virtualizer>` 支持（替代 `isVirtualized` prop）。
+11. **选择类型**：使用 `Selection` 类型（Set），而不是数组。

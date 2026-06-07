@@ -55,7 +55,7 @@ export function DocsImage({
   ) : (
     <Image
       alt={alt}
-      className="absolute inset-0 h-full w-full object-contain"
+      className={cn("absolute inset-0 h-full w-full object-contain", className)}
       height={height}
       priority={priority}
       src={src}

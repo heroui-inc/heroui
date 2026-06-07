@@ -1,0 +1,197 @@
+---
+title: v3.0.5
+description: Text 重命名为 Typography（破坏性变更），颜色令牌重构为无前缀源变量，修复 Checkbox 与 Radio 边框对齐，并新增 CLI 文档页。
+github:
+  pull: 6503
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 5 月 15 日</span>
+</div>
+
+补丁版本：`Text` 重命名为 `Typography`，以解决 `tailwind-merge` 冲突导致变体类名被静默丢弃的问题。派生颜色令牌（`hover`、`soft`、`border-secondary` 等）从 `theme.css` 中的 `@theme inline` 别名迁移到 `variables.css` 作为无前缀源变量，组件 CSS 可直接引用。此外还修复了 Checkbox 与 Radio 的边框对齐问题，优化了 Calendar 的 `accent-soft-foreground` 悬停样式，并新增了 CLI 文档页。
+
+⚠️ **破坏性变更**：`Text` → `Typography`。BEM 块名由 `text` 改为 `typography`（例如 `text--body-sm` → `typography--body-sm`）。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## ⚠️ 破坏性变更
+
+### `Text` → `Typography`
+
+[v3.0.4](/docs/react/releases/v3-0-4) 中发布的该组件使用了 `text-*` BEM 修饰符，与 Tailwind 的 `text-*` 工具类家族冲突。`tailwind-variants` 在每次变体组合时都会运行 `tailwind-merge`，并将 `text--body-sm`、`text--color-muted`、`text--weight-normal` 去重为单个类名——从而静默丢弃其他类名。
+
+将块名重命名为 `typography` 可永久解决该冲突 ([#6505](https://github.com/heroui-inc/heroui/pull/6505)，修复 [#6497](https://github.com/heroui-inc/heroui/issues/6497))。
+
+**之前：**
+
+```tsx
+import {Text} from "@heroui/react";
+
+<Text type="body-sm" color="muted" weight="medium">
+  Hello world
+</Text>;
+```
+
+**之后：**
+
+```tsx
+import {Typography} from "@heroui/react";
+
+<Typography type="body-sm" color="muted" weight="medium">
+  Hello world
+</Typography>;
+```
+
+子组件同样重命名：
+
+| 之前              | 之后                     |
+| ----------------- | ------------------------ |
+| `Text`            | `Typography`             |
+| `Text.Heading`    | `Typography.Heading`     |
+| `Text.Paragraph`  | `Typography.Paragraph`   |
+| `Text.Code`       | `Typography.Code`        |
+| `Text.Prose`      | `Typography.Prose`       |
+
+CSS BEM 类名也会相应变更：`.text` → `.typography`，`.text--body-sm` → `.typography--body-sm` 等。完整类名参考请参阅 [Typography 文档](/docs/components/typography)。
+
+<ComponentPreview name="typography-typography-scale" />
+
+## 样式重构
+
+### 无前缀源颜色令牌
+
+所有派生颜色令牌——`*-hover`、`*-soft`、`*-soft-foreground`、`border-secondary` 等——从 `theme.css` 中的 `@theme inline` 别名迁移到 `variables.css` 作为无前缀源变量，24 个组件 CSS 文件现直接引用源令牌 ([#6499](https://github.com/heroui-inc/heroui/pull/6499))。
+
+**1. `color-mix` 公式从 `theme.css` 移至 `variables.css`**
+
+之前——计算逻辑位于 `@theme inline` 块内：
+
+```css
+/* packages/styles/themes/shared/theme.css */
+--color-accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+--color-accent-soft: var(--accent-soft, color-mix(in oklab, var(--accent) 15%, transparent));
+--color-accent-soft-foreground: var(--accent-soft-foreground, var(--accent));
+--color-border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+```
+
+之后——`theme.css` 仅保留别名；公式位于 `variables.css`：
+
+```css
+/* packages/styles/themes/default/variables.css */
+--accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+--accent-soft: color-mix(in oklab, var(--accent) 15%, transparent);
+--accent-soft-foreground: var(--accent);
+--border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+
+/* packages/styles/themes/shared/theme.css */
+--color-accent-hover: var(--accent-hover);
+--color-accent-soft: var(--accent-soft);
+--color-accent-soft-foreground: var(--accent-soft-foreground);
+--color-border-secondary: var(--border-secondary);
+```
+
+**2. 组件 CSS 直接使用源令牌**
+
+之前——各处使用 `var(--color-*)` 引用：
+
+```css
+/* packages/styles/components/button.css */
+.button--primary {
+  --button-bg: var(--color-accent);
+  --button-bg-hover: var(--color-accent-hover);
+  --button-fg: var(--color-accent-foreground);
+}
+
+.button--secondary {
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-fg: var(--color-accent-soft-foreground);
+}
+```
+
+之后——无前缀源令牌：
+
+```css
+/* packages/styles/components/button.css */
+.button--primary {
+  --button-bg: var(--accent);
+  --button-bg-hover: var(--accent-hover);
+  --button-fg: var(--accent-foreground);
+}
+
+.button--secondary {
+  --button-bg: var(--default);
+  --button-bg-hover: var(--default-hover);
+  --button-fg: var(--accent-soft-foreground);
+}
+```
+
+`@theme inline` 块仍将每个 `--color-*` 暴露为 Tailwind 工具类别名，因此用户侧的类名用法（`bg-accent`、`text-accent` 等）不受影响。
+
+**3. Theme builder 合并精简**
+
+三个派生令牌辅助函数（`getAccentDerivedVariables`、`getSemanticDerivedVariables`、`getFieldDerivedVariables`）合并为单一的 `getDerivedColorVariables()`，输出完整的无前缀源令牌集合，并包含 `darkenForSoftForeground` 逻辑，以确保浅色强调主题下 soft-foreground 文字仍清晰可读。
+
+## 样式修复
+
+- **Calendar / Range Calendar**：日期单元格默认悬停样式现使用 `accent-soft-foreground` 而非 `accent`，使浅色强调主题下悬停单元格仍清晰可读。文档站搜索标签的选中状态也做了相同调整 ([#6500](https://github.com/heroui-inc/heroui/pull/6500))。
+- **Checkbox**：`.checkbox__control` 现已应用与 `.radio__control` 相同的基础样式：`border`、`border-field-border` 以及 `[border-width:var(--border-width-field)]`，并将 `border-color` 加入过渡属性列表 ([#6521](https://github.com/heroui-inc/heroui/pull/6521))。
+- **Radio**：`.radio__control` 默认边框现使用 `border-field-border`，而非 Tailwind 通用的 `border` 颜色，与 Input、Select、TextArea、NumberField 保持一致 ([#6522](https://github.com/heroui-inc/heroui/pull/6522))。
+
+## 文档
+
+### CLI 页面
+
+新增 [CLI 文档页](/docs/react/getting-started/cli)，涵盖安装、`init`、`install`、`upgrade`、`uninstall`、`list`、`doctor` 与 `env` 命令及示例输出 ([#6498](https://github.com/heroui-inc/heroui/pull/6498))。
+
+## 依赖项
+
+各软件包版本升级 ([#6529](https://github.com/heroui-inc/heroui/pull/6529))：
+
+- **`react` / `react-dom`**：`19.2.3` → `19.2.6`
+- **`@types/react`**：`19.2.7` → `19.2.14`
+- **`next`**（文档站）：`16.1.1` → `16.2.6`
+- **CI actions**：`actions/checkout@v6`、`actions/setup-node@v6`、`actions/cache@v5`、`pnpm/action-setup@v6`
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6503](https://github.com/heroui-inc/heroui/pull/6503)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的朋友！
+
+<PRContributors />

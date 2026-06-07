@@ -1,0 +1,198 @@
+---
+title: 迁移
+description: 将 HeroUI v2 应用迁移到 v3 的完整指南
+index: true
+---
+
+## 面向 AI 助手
+
+以下是 AI 助手获取迁移文档的三种方式。***我们推荐使用 HeroUI Migration MCP 服务器***，并充分利用其 prompt 与工具，不过其它方式也都能为 agent 提供完整的文档。
+
+| 对比项 | MCP Server | Agent Skills | AGENTS.md |
+|---------|-----------|--------------|-----------|
+| **数据来源** | 远程端点 | 远程端点 | 本地文件 |
+| **访问方式** | MCP 工具 | 脚本文件 | 读取本地文件 |
+| **配置方式** | MCP 配置 | 安装命令 | `heroui-cli` 命令 |
+| **更新** | 实时 | 实时 | 手动 |
+| **离线** | ❌ | ❌ | ✅ |
+| **工具** | MCP 工具 + prompt | 脚本 | ❌ |
+| **指南** | [MCP Server →](/docs/react/migration/mcp-server) | [Agent Skills →](/docs/react/migration/agent-skills) | [AGENTS.md →](/docs/react/migration/agents-md) |
+
+## 主要变化
+
+<section id="major-changes">
+
+- **依赖项**：将 React 升级到 v19+、HeroUI 包升级到 v3、Tailwind CSS 升级到 v4，并移除 Framer Motion
+- **无需 Provider**：v3 不再需要 `HeroUIProvider`
+- **组件 API 更新**：许多组件改用 React Aria Components 模式
+- **复合组件**：全新的复合组件模式带来了更好的定制能力。详情请参阅各组件的迁移指南。
+- **已移除的 Hooks**：v2 中的组件 Hooks（如 `useSwitch`、`useInput`）已被移除——请改用复合组件。`useDisclosure` 已被替换为 `useOverlayState`。详情请参阅 [Hooks 迁移指南](/docs/react/migration/hooks)。
+- **配置变更**：从 Tailwind 配置中移除 `heroui()` 插件，更新 CSS 导入，并删除 `hero.ts` 文件
+- **条目标识**：集合类组件（Dropdown、ListBox、Select、Accordion 等）在 v3 中改用 `id` 和 `textValue`；列表本身仍需保留 React 的 `key`。
+
+</section>
+
+### 条目标识与无障碍（key、id、textValue）
+
+在 v2 中，集合类组件（Dropdown、ListBox、Select、Accordion 等）使用 **React 的 `key`** 作为条目标识。同一个值既驱动 React 的列表协调，又承担组件的选中/展开状态。在使用 React Aria Components 的 v3 中，这两种职责被拆分开：
+
+- **`id`** — v3 在每个条目上使用显式的 **`id`** 属性来表示选中状态、焦点以及回调（例如 `selectedKeys`、`expandedKeys`、`onSelectionChange`）。请使用与你在 v2 中给 `key` 设置的相同（或等效）的值，这样状态和回调仍能正确指向对应的条目。
+- **`textValue`** — 当条目的可见内容不是纯文本时（例如使用了 `Label`、图标或 `Description`），v3 需要在条目上提供 **`textValue`**。它用于屏幕阅读器播报和键入快速定位（type-ahead）。
+- **`key`** — **继续在列表项上使用 React 的 `key`**。它仍然是 React 列表协调所必需的，且与 `id` 相互独立。
+
+迁移时：为 v3 的 API 添加 `id`（必要时再加上 `textValue`），同时保留供 React 使用的 `key`。
+
+## 迁移策略
+
+如果不做特殊设置，HeroUI v2 与 v3 不能在同一个项目中共存。你可以选择以下两种迁移方式：
+
+### 一次性完整迁移
+
+**适用场景：** 能够集中投入时间、一次性完成迁移的项目。
+
+**工作方式：**
+- 先迁移所有组件代码（此阶段项目将无法正常运行）
+- 将依赖项切换到 v3
+- 完成样式迁移
+
+**优点：**
+- 配置更简单——无需复杂的共存配置
+- 切换更干净——同一时间只有一个版本处于激活状态
+- 由 Migration MCP 的 prompt 提供支持
+
+**缺点：**
+- 项目在迁移期间无法正常运行
+- 必须在切换依赖之前完成所有组件的迁移
+
+**开始迁移：** [完整迁移指南](/docs/react/migration/full-migration)
+
+### 渐进式迁移
+
+**适用场景：** 需要在迁移过程中保持可用的项目、希望分阶段逐步迁移的团队，以及按功能逐个迁移的大型代码库。
+
+**工作方式：**
+- 通过 pnpm 别名或组件包来设置共存
+- 在保持项目可用的前提下，逐个迁移组件
+- 完成迁移后再移除 v2 依赖项
+
+**优点：**
+- 项目在迁移期间始终可用
+- 可以分阶段、按需逐步推进
+- 可以将 v3 组件与 v2 并存测试
+
+**缺点：**
+- 初始配置更为复杂
+- 可能出现样式冲突
+- 需要同时管理两个版本
+
+**开始迁移：** [渐进式迁移指南](/docs/react/migration/incremental-migration)
+
+## 组件迁移参考
+
+<section id="step-6-component-migration-reference">
+
+可以通过下表快速查找每个组件的迁移指南。点击「迁移指南」列中的链接，即可跳转到对应的详细迁移说明。
+
+<Callout>
+  **组件开发状态**：标有 🔄 进行中或 📋 计划中的组件仍在开发中。可以查看[路线图](https://herouiv3.featurebase.app/roadmap)了解任务状态。这些组件的迁移指南将在开发完成后提供。
+</Callout>
+
+| v2 组件 | v3 组件 | 状态 | 迁移指南 |
+|-------------|--------------|--------|-----------------|
+| Accordion | Accordion | ✅ 可用 | [查看指南 →](/docs/react/migration/accordion) |
+| Alert | Alert | ✅ 可用 | [查看指南 →](/docs/react/migration/alert) |
+| Autocomplete | ComboBox | ✅ 已重命名 | [查看指南 →](/docs/react/migration/autocomplete) |
+| Avatar | Avatar | ✅ 可用 | [查看指南 →](/docs/react/migration/avatar) |
+| Badge | Badge | ✅ 可用 | [查看指南 →](/docs/react/migration/badge) |
+| Breadcrumbs | Breadcrumbs | ✅ 可用 | [查看指南 →](/docs/react/migration/breadcrumbs) |
+| Button | Button | ✅ 可用 | [查看指南 →](/docs/react/migration/button) |
+| ButtonGroup | ButtonGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/button-group) |
+| Calendar | Calendar | ✅ 可用 | [查看指南 →](/docs/react/migration/calendar) |
+| Card | Card | ✅ 可用 | [查看指南 →](/docs/react/migration/card) |
+| Checkbox | Checkbox | ✅ 可用 | [查看指南 →](/docs/react/migration/checkbox) |
+| CheckboxGroup | CheckboxGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/checkbox-group) |
+| Chip | Chip | ✅ 可用 | [查看指南 →](/docs/react/migration/chip) |
+| Code | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/code) |
+| DateInput | DateField | ✅ 已重命名 | [查看指南 →](/docs/react/migration/dateinput) |
+| DatePicker | DatePicker | ✅ 可用 | [查看指南 →](/docs/react/migration/date-picker) |
+| DateRangePicker | DateRangePicker | ✅ 可用 | [查看指南 →](/docs/react/migration/date-range-picker) |
+| TimeInput | TimeField | ✅ 已重命名 | [查看指南 →](/docs/react/migration/timeinput) |
+| Divider | Separator | ✅ 已重命名 | [查看指南 →](/docs/react/migration/divider) |
+| Drawer | Drawer | ✅ 可用 | [查看指南 →](/docs/react/migration/drawer) |
+| Dropdown | Dropdown | ✅ 可用 | [查看指南 →](/docs/react/migration/dropdown) |
+| Form | Form | ✅ 可用 | [查看指南 →](/docs/react/migration/form) |
+| Image | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/image) |
+| Input | TextField、Input、InputGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/input) |
+| InputOTP | InputOTP | ✅ 可用 | [查看指南 →](/docs/react/migration/input-otp) |
+| Kbd | Kbd | ✅ 可用 | [查看指南 →](/docs/react/migration/kbd) |
+| Link | Link | ✅ 可用 | [查看指南 →](/docs/react/migration/link) |
+| Listbox | ListBox | ✅ 可用 | [查看指南 →](/docs/react/migration/listbox) |
+| Modal | Modal | ✅ 可用 | [查看指南 →](/docs/react/migration/modal) |
+| Navbar | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/navbar) |
+| NumberInput | NumberField | ✅ 已重命名 | [查看指南 →](/docs/react/migration/numberinput) |
+| Pagination | Pagination | ✅ 可用 | [查看指南 →](/docs/react/migration/pagination) |
+| Popover | Popover | ✅ 可用 | [查看指南 →](/docs/react/migration/popover) |
+| Progress | ProgressBar | ✅ 已重命名 | [查看指南 →](/docs/react/migration/progress) |
+| CircularProgress | ProgressCircle | ✅ 已重命名 | [查看指南 →](/docs/react/migration/circular-progress) |
+| Radio | Radio | ✅ 可用 | [查看指南 →](/docs/react/migration/radio) |
+| RadioGroup | RadioGroup | ✅ 可用 | [查看指南 →](/docs/react/migration/radio-group) |
+| RangeCalendar | RangeCalendar | ✅ 可用 | [查看指南 →](/docs/react/migration/range-calendar) |
+| Ripple | ❌ | ❌ 已移除 | [参见 Button 的水波纹效果 →](/docs/react/components/button#adding-ripple-effect) |
+| ScrollShadow | ScrollShadow | ✅ 可用 | [查看指南 →](/docs/react/migration/scroll-shadow) |
+| Select | Select | ✅ 可用 | [查看指南 →](/docs/react/migration/select) |
+| Skeleton | Skeleton | ✅ 可用 | [查看指南 →](/docs/react/migration/skeleton) |
+| Slider | Slider | ✅ 可用 | [查看指南 →](/docs/react/migration/slider) |
+| Snippet | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/snippet) |
+| Spacer | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/spacer) |
+| Spinner | Spinner | ✅ 可用 | [查看指南 →](/docs/react/migration/spinner) |
+| Switch | Switch | ✅ 可用 | [查看指南 →](/docs/react/migration/switch) |
+| Table | Table | ✅ 可用 | [查看指南 →](/docs/react/migration/table) |
+| Tabs | Tabs | ✅ 可用 | [查看指南 →](/docs/react/migration/tabs) |
+| Toast | Toast | ✅ 可用 | [查看指南 →](/docs/react/migration/toast) |
+| Tooltip | Tooltip | ✅ 可用 | [查看指南 →](/docs/react/migration/tooltip) |
+| User | ❌ | ❌ 已移除 | [查看指南 →](/docs/react/migration/user) |
+
+</section>
+
+## v3 中新增的组件
+
+<section id="new-components-in-v3">
+
+v3 引入了一系列 v2 中尚未提供的全新组件：
+
+| 组件 | 用途 | 文档 |
+|-----------|---------|---------------|
+| TextField | 增强型文本输入框，支持 label 与 description | [查看文档 →](/docs/react/components/text-field) |
+| TextArea | 多行文本输入组件 | [查看文档 →](/docs/react/components/text-area) |
+| AlertDialog | 用于确认与提醒的模态对话框 | [查看文档 →](/docs/react/components/alert-dialog) |
+| Label | 无障碍的表单标签组件 | [查看文档 →](/docs/react/components/label) |
+| Description | 表单字段的辅助说明文本 | [查看文档 →](/docs/react/components/description) |
+| FieldError | 表单字段的错误信息显示 | [查看文档 →](/docs/react/components/field-error) |
+| Fieldset | 对相关表单字段进行分组 | [查看文档 →](/docs/react/components/fieldset) |
+| InputGroup | 将多个输入框组合在一起 | [查看文档 →](/docs/react/components/input-group) |
+| Surface | 带有层级样式的容器组件 | [查看文档 →](/docs/react/components/surface) |
+| Disclosure | 可展开 / 可折叠的内容区域 | [查看文档 →](/docs/react/components/disclosure) |
+| DisclosureGroup | 用于管理多个 Disclosure 区域的复合组件 | [查看文档 →](/docs/react/components/disclosure-group) |
+| SearchField | 带清除按钮与可选加载状态的搜索输入框 | [查看文档 →](/docs/react/components/search-field) |
+| DateField | 配合日历选择器的日期输入框 | [查看文档 →](/docs/react/components/date-field) |
+| TimeField | 时间输入组件 | [查看文档 →](/docs/react/components/time-field) |
+| Tag、TagGroup | 用于选择或展示的 Tag 与 TagGroup | [查看文档 →](/docs/react/components/tag-group) |
+| ColorPicker | 颜色选择（ColorArea、ColorField、ColorSlider、ColorSwatch、ColorSwatchPicker） | [查看文档 →](/docs/react/components/color-picker) |
+| CloseButton | 用于关闭或解除浮层的触发按钮 | [查看文档 →](/docs/react/components/close-button) |
+| ErrorMessage | 表单字段错误信息展示（基于 React Aria 集成） | [查看文档 →](/docs/react/components/error-message) |
+
+</section>
+
+## 其他迁移指南
+
+- **[Hooks 迁移指南](/docs/react/migration/hooks)**：将 Hooks 从 v2 迁移到 v3 的详细说明
+- **[样式迁移指南](/docs/react/migration/styling)**：更新工具类、颜色 token 与组件样式的综合指南
+
+## 获取帮助
+
+如果你在迁移过程中遇到问题：
+
+1. 查看 [v3 文档](/docs/react)
+2. 查阅具体组件的迁移指南
+3. 在 [GitHub Discussions](https://github.com/heroui-inc/heroui/discussions) 中查找或提问
+4. 加入 [Discord 社区](https://discord.gg/9b6yyZKmH4)

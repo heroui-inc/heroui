@@ -1,8 +1,14 @@
+"use client";
+
 import {Avatar, Card} from "@heroui/react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {VerifiedBadgeIcon} from "@/icons/verified-badge";
 
 export function XProfileDemo() {
+  const {demos} = useDictionary();
+  const t = demos.xProfile;
+
   return (
     <Card className="w-full items-start justify-center xl:w-[400px]">
       <Card.Header className="items-top w-full flex-row justify-between">
@@ -25,22 +31,22 @@ export function XProfileDemo() {
       </Card.Header>
       <Card.Content className="flex-row text-left">
         <p className="pl-px text-sm font-medium">
-          Building the future of UI for web & mobile.&nbsp;
+          {t.bio}&nbsp;
           <br />
-          <span aria-label="confetti" role="img">
+          <span aria-label={t.confettiLabel} role="img">
             🚀
           </span>
-          &nbsp;(YC S24)&nbsp;
+          &nbsp;{t.bioSuffix}&nbsp;
         </p>
       </Card.Content>
       <Card.Footer className="gap-2">
         <div className="flex gap-1">
           <p className="text-sm font-semibold">4</p>
-          <p className="text-sm text-muted">Following</p>
+          <p className="text-sm text-muted">{t.following}</p>
         </div>
         <div className="flex gap-1">
           <p className="text-sm font-semibold">97.1K</p>
-          <p className="text-sm text-muted">Followers</p>
+          <p className="text-sm text-muted">{t.followers}</p>
         </div>
       </Card.Footer>
     </Card>

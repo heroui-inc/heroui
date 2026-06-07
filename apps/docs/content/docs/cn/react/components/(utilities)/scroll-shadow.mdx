@@ -1,0 +1,139 @@
+---
+title: ScrollShadow 滚动阴影
+description: 通过阴影提示可滚动溢出内容，并根据滚动位置自动检测显示或隐藏。
+links:
+  source: scroll-shadow/scroll-shadow.tsx
+  styles: scroll-shadow.css
+  storybook: Components/Utilities/ScrollShadow
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { ScrollShadow } from "@heroui/react";
+```
+
+## 用法
+
+<ComponentPreview name="scroll-shadow-default" />
+
+## 方向
+
+<ComponentPreview name="scroll-shadow-orientation" />
+
+## 隐藏滚动条
+
+<ComponentPreview name="scroll-shadow-hide-scroll-bar" />
+
+## 自定义阴影尺寸
+
+<ComponentPreview name="scroll-shadow-custom-size" />
+
+## 可见性变化
+
+<ComponentPreview name="scroll-shadow-visibility-change" />
+
+## 与 Card 组合
+
+<ComponentPreview name="scroll-shadow-with-card" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {ScrollShadow, Card} from "@heroui/react";
+
+function CustomScrollShadow() {
+  return (
+    <Card className="w-full p-0 sm:max-w-md">
+      <ScrollShadow className="max-h-[300px] p-6 bg-gradient-to-b from-purple-50 to-pink-50">
+        <div className="space-y-4">
+          {Array.from({length: 10}).map((_, idx) => (
+            <p key={idx}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
+              risus hendrerit venenatis.
+            </p>
+          ))}
+        </div>
+      </ScrollShadow>
+    </Card>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 ScrollShadow 组件类，可以使用 `@layer components` 指令。
+<br />[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .scroll-shadow {
+    @apply rounded-xl border border-default-200;
+  }
+
+  .scroll-shadow--vertical {
+    @apply pr-2; /* Add padding for custom scrollbar styling */
+  }
+
+  .scroll-shadow--horizontal {
+    @apply pb-2;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ScrollShadow 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/scroll-shadow.css)）：
+
+#### 基础类
+
+- `.scroll-shadow` - 根容器元素
+
+#### 方向变体
+
+- `.scroll-shadow--vertical` - 纵向滚动（默认）
+- `.scroll-shadow--horizontal` - 横向滚动
+
+#### 状态修饰符
+
+- `.scroll-shadow--hide-scrollbar` - 隐藏原生滚动条
+
+### CSS 变量
+
+ScrollShadow 组件使用 CSS 变量设置渐变遮罩尺寸，并为可见的原生滚动条保留空间：
+
+| 变量                              | 默认值                                 | 描述                                                                                                               |
+| --------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `--scroll-shadow-size`            | `40px`                                 | 控制渐变阴影尺寸。该值由 `size` prop 设置。                                                                         |
+| `--scroll-shadow-scrollbar-size`  | `10px`（`hideScrollBar` 时为 `0px`）   | 为原生滚动条保留一段实色遮罩区域，避免渐变覆盖滚动条。使用更宽的自定义滚动条时可以覆盖该值。                       |
+
+### Data 属性
+
+组件使用 data 属性控制阴影可见性：
+
+- **滚动状态**：`[data-top-scroll]`、`[data-bottom-scroll]`、`[data-left-scroll]`、`[data-right-scroll]` — 当内容可向对应方向滚动时应用
+- **组合状态**：`[data-top-bottom-scroll]`、`[data-left-right-scroll]` — 当内容可向两个方向滚动时应用
+- **方向**：`[data-orientation="vertical"]` 或 `[data-orientation="horizontal"]` — 表示滚动方向
+- **尺寸**：`[data-scroll-shadow-size]` — 阴影渐变尺寸数值
+
+## API 参考
+
+### ScrollShadow
+
+| Prop | 类型 | 默认值 | 描述 |
+| -------------------- | ----------------------------------------------------------------------------- | ------------ | ------------------------------------------------------- |
+| `orientation`        | `"vertical"` \| `"horizontal"`                                                | `"vertical"` | 滚动方向                                    |
+| `variant`            | `"fade"`                                                                      | `"fade"`     | 阴影视觉效果样式                          |
+| `size`               | `number`                                                                      | `40`         | 阴影渐变尺寸（像素）                      |
+| `offset`             | `number`                                                                      | `0`          | 开始显示阴影前的滚动偏移量（像素）    |
+| `hideScrollBar`      | `boolean`                                                                     | `false`      | 是否隐藏原生滚动条                    |
+| `isEnabled`          | `boolean`                                                                     | `true`       | 是否启用滚动阴影检测              |
+| `visibility`         | `"auto"` \| `"both"` \| `"top"` \| `"bottom"` \| `"left"` \| `"right"` \| `"none"` | `"auto"`     | 受控的阴影可见性                      |
+| `onVisibilityChange` | `(visibility: ScrollShadowVisibility) => void`                                | -            | 阴影可见性变化时调用的回调         |
+| `className`          | `string`                                                                      | -            | 应用到根元素上的额外 CSS 类     |
+| `children`           | `ReactNode`                                                                   | -            | 可滚动的子内容                                  |

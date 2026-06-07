@@ -1,0 +1,201 @@
+---
+title: ColorPicker 颜色选择器
+description: 可组合的 ColorPicker，在多个颜色组件之间同步颜色值。
+links:
+  rac: ColorPicker
+  source: color-picker/color-picker.tsx
+  styles: color-picker.css
+  storybook: Components/Pickers/ColorPicker
+  figma: true
+---
+
+## 引入
+
+```tsx
+import {
+  ColorPicker,
+  ColorArea,
+  ColorSlider,
+  ColorSwatch,
+  ColorField,
+  ColorSwatchPicker,
+} from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="color-picker-basic"
+/>
+
+### 组件结构
+
+ColorPicker 是一个可组合组件，会组合多个颜色相关子组件：
+
+```tsx
+import { ColorPicker, ColorArea, ColorSlider, ColorSwatch, Label } from '@heroui/react';
+
+export default () => (
+  <ColorPicker defaultValue="#0485F7">
+    <ColorPicker.Trigger>
+      <ColorSwatch />
+      <Label>Pick a color</Label>
+    </ColorPicker.Trigger>
+    <ColorPicker.Popover>
+      <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness">
+        <ColorArea.Thumb />
+      </ColorArea>
+      <ColorSlider channel="hue" colorSpace="hsb">
+        <ColorSlider.Track>
+          <ColorSlider.Thumb />
+        </ColorSlider.Track>
+      </ColorSlider>
+    </ColorPicker.Popover>
+  </ColorPicker>
+);
+```
+
+### 受控
+
+<ComponentPreview
+  name="color-picker-controlled"
+/>
+
+### 带 swatch
+
+<ComponentPreview
+  name="color-picker-with-swatches"
+/>
+
+### 带输入字段
+
+使用 `ColorField` 让用户编辑各个颜色通道的数值，并可配合 `Select` 切换色彩空间。
+
+<ComponentPreview
+  name="color-picker-with-fields"
+/>
+
+### 带滑块
+
+使用多个 `ColorSlider` 来调整颜色值的各个通道。
+
+<ComponentPreview
+  name="color-picker-with-sliders"
+/>
+
+<RelatedComponents component="color-picker" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { ColorPicker, ColorArea, ColorSlider, ColorSwatch, Label } from '@heroui/react';
+
+function CustomColorPicker() {
+  return (
+    <ColorPicker defaultValue="#0485F7">
+      <ColorPicker.Trigger className="gap-4">
+        <ColorSwatch className="rounded-lg" />
+        <Label>Pick a color</Label>
+      </ColorPicker.Trigger>
+      <ColorPicker.Popover className="p-4 rounded-xl">
+        <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness">
+          <ColorArea.Thumb />
+        </ColorArea>
+      </ColorPicker.Popover>
+    </ColorPicker>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 ColorPicker 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .color-picker {
+    @apply inline-flex;
+  }
+
+  .color-picker__trigger {
+    @apply inline-flex items-center gap-4 rounded-lg;
+  }
+
+  .color-picker__popover {
+    @apply p-4 rounded-xl;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，以确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ColorPicker 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-picker.css)）：
+
+#### 基础类
+- `.color-picker` - 基础容器
+- `.color-picker__trigger` - 触发按钮
+- `.color-picker__popover` - Popover 容器
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，便于灵活定制：
+
+- **Focus**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **Disabled**：`:disabled` 或 `[data-disabled="true"]`
+
+## API 参考
+
+### ColorPicker Props
+
+继承自 [React Aria ColorPicker](https://react-spectrum.adobe.com/react-aria/ColorPicker.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `string \| Color` | - | 当前颜色值（受控） |
+| `defaultValue` | `string \| Color` | - | 默认颜色值（非受控） |
+| `onChange` | `(color: Color) => void` | - | 颜色变化时触发的事件处理函数 |
+| `children` | `React.ReactNode` | - | 颜色选择器内容（Trigger、Popover 等） |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### ColorPicker.Trigger Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode \| ((renderProps) => React.ReactNode)` | - | 触发器内容或渲染 prop |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### ColorPicker.Popover Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `placement` | `Placement` | `"bottom left"` | Popover 的放置位置 |
+| `children` | `React.ReactNode` | - | Popover 内容 |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### Related Types
+
+#### Color
+
+表示颜色值。完整 API 见 [React Aria Color](https://react-spectrum.adobe.com/react-aria/ColorPicker.html#color)。
+
+| Method | 描述 |
+|--------|------|
+| `toString(format)` | 将颜色转换为指定格式的字符串（hex、rgb、hsl、hsb、css） |
+| `toFormat(format)` | 将颜色转换为指定格式并返回新的 Color 对象 |
+| `getChannelValue(channel)` | 返回指定通道的数值 |
+| `withChannelValue(channel, value)` | 设置通道数值并返回新的 Color |
+
+#### parseColor
+
+```tsx
+import { parseColor } from 'react-aria-components';
+
+// Parse from string
+const color = parseColor('#ff0000');
+const hslColor = parseColor('hsl(0, 100%, 50%)');
+```

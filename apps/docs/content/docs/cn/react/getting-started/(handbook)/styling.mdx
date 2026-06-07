@@ -1,0 +1,304 @@
+---
+title: 样式
+description: 使用 CSS、Tailwind 或 CSS-in-JS 为 HeroUI 组件设置样式
+icon: brush
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI 组件提供灵活的样式方案：Tailwind CSS 工具类、配合 [BEM](https://getbem.com/) 类名或数据属性的 CSS、CSS-in-JS 库，以及用于动态样式的渲染属性。
+
+## 基础样式
+
+**使用 className：** 所有 HeroUI 组件都接受 `className` 属性：
+
+```tsx
+<Button className="bg-purple-500 hover:bg-purple-600">
+  Custom Button
+</Button>
+
+<Accordion className="border-2 border-gray-200 rounded-xl">
+  {/* content */}
+</Accordion>
+```
+
+**使用 style：** 组件也接受内联样式：
+
+```tsx
+<Button style={{ backgroundColor: '#8B5CF6' }}>
+  Styled Button
+</Button>
+```
+
+## 滚动条
+
+HeroUI 的滚动插槽在组件 CSS 中使用 `@apply scrollbar`。对于你自己的溢出容器，可使用 `@heroui/styles` 提供的工具类：
+
+```tsx
+<div className="scrollbar h-64 overflow-y-auto">
+  {/* 长内容 */}
+</div>
+```
+
+| 工具类 | 效果 |
+|---------|--------|
+| `scrollbar` | HeroUI 滚动条滑块（读取主题的 `--scrollbar-*` 变量） |
+| `scrollbar-thin` | HeroUI 主题化纤细滚动条 |
+| `scrollbar-default` | 操作系统 / 浏览器默认滚动条 |
+| `scrollbar-none` | 隐藏滚动条 |
+
+全局及子树级别的控制可通过在祖先元素上使用 `data-scrollbar` 实现。有关令牌（tokens）和模式的更多信息，请参阅 [主题](/docs/handbook/theming#scrollbars)。
+
+## 基于状态的样式
+
+HeroUI 组件通过数据属性公开其状态，类似于 CSS 伪类：
+
+```css
+/* Target different states */
+.button[data-hovered="true"], .button:hover {
+  background: var(--accent-hover);
+}
+
+.button[data-pressed="true"], .button:active {
+  transform: scale(0.97);
+}
+
+.button[data-focus-visible="true"], .button:focus-visible {
+  outline: 2px solid var(--focus);
+}
+```
+
+## 渲染属性
+
+根据组件状态动态应用样式：
+
+```tsx
+// Dynamic classes
+<Button
+  className={({ isPressed }) =>
+    isPressed ? 'bg-blue-600' : 'bg-blue-500'
+  }
+>
+  Press me
+</Button>
+
+// Dynamic content
+<Button>
+  {({ isHovered, isPressed }) => (
+    <>
+      <Icon
+        icon="gravity-ui:heart"
+        className={isPressed ? 'text-red-500' : 'text-neutral-400'}
+      />
+      <span className={isHovered ? 'underline' : ''}>
+        Like
+      </span>
+    </>
+  )}
+</Button>
+```
+
+## BEM 类名
+
+HeroUI 使用 [BEM 方法论](https://getbem.com/) 来保持类名命名的一致性：
+
+```css
+/* Block */
+.button { }
+.accordion { }
+
+/* Element */
+.accordion__trigger { }
+.accordion__panel { }
+
+/* Modifier */
+.button--primary { }
+.button--lg { }
+.accordion--outline { }
+```
+
+**全局自定义组件：**
+
+```css
+/* global.css */
+
+@layer components {
+  /* Override button styles */
+  .button {
+    @apply font-semibold uppercase;
+  }
+
+  .button--primary {
+    @apply bg-indigo-600 hover:bg-indigo-700;
+  }
+
+  /* Add custom variant */
+  .button--gradient {
+    @apply bg-gradient-to-r from-purple-500 to-pink-500;
+  }
+}
+```
+
+## 创建包装组件
+
+使用 [tailwind-variants](https://tailwind-variants.org/) 创建可复用的自定义组件 —— 它是 Tailwind CSS 的一等公民变体 API：
+
+```tsx
+import { Button as HeroButton, type ButtonProps } from '@heroui/react';
+import { buttonVariants, tv, type VariantProps } from '@heroui/styles';
+
+const customButtonVariants = tv({
+  extend: buttonVariants,
+  base: 'font-medium transition-all',
+  variants: {
+    intent: {
+      primary: 'bg-blue-500 hover:bg-blue-600 text-white',
+      secondary: 'bg-gray-200 hover:bg-gray-300',
+      danger: 'bg-red-500 hover:bg-red-600 text-white',
+    },
+    size: {
+      small: 'text-sm px-2 py-1',
+      medium: 'text-base px-4 py-2',
+      large: 'text-lg px-6 py-3',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+    size: 'medium',
+  },
+});
+
+type CustomButtonVariants = VariantProps<typeof customButtonVariants>;
+interface CustomButtonProps
+  extends Omit<ButtonProps, 'className'>,
+  CustomButtonVariants {
+  className?: string;
+}
+
+export function CustomButton({ intent, size, className, ...props }: CustomButtonProps) {
+  return (
+    <HeroButton
+      className={customButtonVariants({ intent, size, className })}
+      {...props}
+    />
+  );
+}
+```
+
+## CSS-in-JS 集成
+
+**Styled Components：**
+
+```tsx
+import styled from 'styled-components';
+import { Button } from '@heroui/react';
+
+const StyledButton = styled(Button)`
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  border-radius: 8px;
+  color: white;
+  padding: 12px 24px;
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(255, 105, 135, 0.3);
+  }
+`;
+```
+
+**Emotion：**
+
+```tsx
+import { css } from '@emotion/css';
+import { Button } from '@heroui/react';
+
+const buttonStyles = css`
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  border-radius: 8px;
+  color: white;
+  padding: 12px 24px;
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(255, 105, 135, 0.3);
+  }
+`;
+
+<Button className={buttonStyles}>
+  Emotion Button
+</Button>
+```
+
+## 响应式设计
+
+**使用 Tailwind 工具类：**
+
+```tsx
+<Button className="text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6">
+  Responsive Button
+</Button>
+```
+
+**或者使用 CSS：**
+
+```css
+.button {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+```
+
+## CSS 模块
+
+如需作用域化的样式，可以使用 CSS 模块：
+
+```css
+/* Button.module.css */
+.button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+```
+
+```tsx
+import styles from './Button.module.css';
+import { Button } from '@heroui/react';
+
+<Button className={styles.button}>
+  Scoped Button
+</Button>
+```
+
+## 组件类名参考
+
+**Button：** `.button`、`.button--{variant}`、`.button--{size}`、`.button--icon-only`
+**Accordion：** `.accordion`、`.accordion__item`、`.accordion__trigger`、`.accordion__panel`、`.accordion--outline`
+
+> **注意：** 完整的类名参考请查看各组件文档：[Button](/docs/components/button#css-classes)、[Accordion](/docs/components/accordion#css-classes)
+
+所有组件的类名请查看 [@heroui/styles/components](https://github.com/heroui-inc/heroui/tree/main/packages/styles/components)。
+
+## 下一步
+
+- 了解 [动画](/docs/handbook/animation) 相关技巧
+- 探索 [主题](/docs/handbook/theming) 系统
+- 浏览 [组件](/docs/react/components) 示例

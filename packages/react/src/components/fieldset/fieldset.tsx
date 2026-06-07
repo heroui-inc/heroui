@@ -5,6 +5,16 @@ import type {ReactNode} from "react";
 
 import {fieldsetVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
+import {
+  ButtonContext,
+  CheckboxGroupContext,
+  LinkContext,
+  Provider,
+  RadioGroupContext,
+  SliderContext,
+  ToggleButtonContext,
+  ToggleButtonGroupContext,
+} from "react-aria-components";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -29,14 +39,58 @@ interface FieldsetRootProps<
 }
 
 const FieldsetRoot = <E extends keyof React.JSX.IntrinsicElements = "fieldset">({
+  children,
   className,
   ...props
 }: FieldsetRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetRootProps<E>>) => {
   const slots = React.useMemo(() => fieldsetVariants({}), []);
 
+  // Mirror native `<fieldset disabled>` as `data-disabled="true"` so the
+  // existing `[data-disabled="true"] .label` (and similar) ancestor selectors
+  // cascade disabled styling to descendant fields, just like a direct
+  // `isDisabled` prop on TextField/Checkbox/etc. would.
+  const isDisabled = "disabled" in props && props.disabled === true;
+
   return (
     <FieldsetContext value={{slots}}>
-      <dom.fieldset className={slots?.base({className})} data-slot="fieldset" {...(props as any)} />
+      <dom.fieldset
+        className={slots?.base({className})}
+        data-disabled={isDisabled || undefined}
+        data-slot="fieldset"
+        {...(props as any)}
+      >
+        {isDisabled ? (
+          // Forward `isDisabled` through React Aria contexts so descendant
+          // components stay consistent with the native `<fieldset disabled>`
+          // behaviour. There are two reasons we need to do this manually:
+          //
+          // 1. Some primitives (Slider, RadioGroup, CheckboxGroup, ...) render
+          //    as `<div>` so the browser does not propagate the fieldset's
+          //    `disabled` attribute to them — without this, they would still
+          //    look enabled and remain interactive.
+          // 2. Other primitives (Button, ToggleButton, Link, ...) do get
+          //    natively disabled by the browser, but React Aria's internal
+          //    `isDisabled` state — which drives `data-disabled` and the
+          //    `{isDisabled}` render prop — only updates from props/context.
+          //    Without this, the button is unclickable but its render prop
+          //    keeps returning `isDisabled: false`.
+          <Provider
+            values={[
+              [ButtonContext, {isDisabled: true}],
+              [CheckboxGroupContext, {isDisabled: true}],
+              [LinkContext, {isDisabled: true}],
+              [RadioGroupContext, {isDisabled: true}],
+              [SliderContext, {isDisabled: true}],
+              [ToggleButtonContext, {isDisabled: true}],
+              [ToggleButtonGroupContext, {isDisabled: true}],
+            ]}
+          >
+            {children}
+          </Provider>
+        ) : (
+          children
+        )}
+      </dom.fieldset>
     </FieldsetContext>
   );
 };

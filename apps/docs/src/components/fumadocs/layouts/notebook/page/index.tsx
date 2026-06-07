@@ -2,9 +2,7 @@ import type {BreadcrumbProps, FooterProps} from "./client";
 import type {AnchorProviderProps, TOCItemType} from "fumadocs-core/toc";
 import type {ComponentProps, ReactNode} from "react";
 
-import * as TocClerk from "fumadocs-ui/components/toc/clerk";
-import * as TocDefault from "fumadocs-ui/components/toc/default";
-import {TOCProvider, TOCScrollArea} from "fumadocs-ui/components/toc/index";
+import {TOCProvider, TOCScrollArea} from "fumadocs-ui/components/toc";
 import {buttonVariants} from "fumadocs-ui/components/ui/button";
 import {I18nLabel} from "fumadocs-ui/contexts/i18n";
 
@@ -18,6 +16,7 @@ import {
   PageTOCPopoverContent,
   PageTOCPopoverTrigger,
 } from "./client";
+import {TOCItems} from "./toc-items";
 
 interface BreadcrumbOptions extends BreadcrumbProps {
   enabled: boolean;
@@ -117,11 +116,7 @@ export function DocsPage({
             <PageTOCPopoverContent>
               {tocPopoverOptions.header}
               <TOCScrollArea>
-                {tocPopoverOptions.style === "clerk" ? (
-                  <TocClerk.TOCItems />
-                ) : (
-                  <TocDefault.TOCItems />
-                )}
+                <TOCItems />
               </TOCScrollArea>
               {tocPopoverOptions.footer}
             </PageTOCPopoverContent>
@@ -154,7 +149,7 @@ export function DocsPage({
               <I18nLabel label="toc" />
             </h3>
             <TOCScrollArea>
-              {tocOptions.style === "clerk" ? <TocClerk.TOCItems /> : <TocDefault.TOCItems />}
+              <TOCItems />
             </TOCScrollArea>
             {tocOptions.footer}
           </div>

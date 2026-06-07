@@ -27,19 +27,21 @@
   --radio-control-bg-hover: var(--default-hover);
 
   /* Hover state */
-  .radio:hover &,
-  .radio[data-hovered="true"] & {
+  .radio:has([data-slot="radio-content"][data-hovered="true"]) &,
+  .radio [data-slot="radio-content"][data-hovered="true"] & {
     @apply border-field-border-hover;
   }
 
   /* Default indicator color (unselected) */
-  .radio:not([aria-checked="true"]):not([data-selected="true"]) & .radio__indicator:empty::before {
+  .radio:not([data-selected]):not(:has(input:checked)) & .radio__indicator:empty::before {
     background-color: var(--radio-control-bg);
   }
 
   /* Hover indicator color (unselected) */
-  .radio:hover:not([aria-checked="true"]):not([data-selected="true"]) &,
-  .radio[data-hovered="true"]:not([aria-checked="true"]):not([data-selected="true"]) & {
+  .radio:has([data-slot="radio-content"][data-hovered="true"]):not([data-selected]):not(
+      :has(input:checked)
+    )
+    & {
     .radio__indicator:empty::before {
       background-color: var(--radio-control-bg-hover);
     }

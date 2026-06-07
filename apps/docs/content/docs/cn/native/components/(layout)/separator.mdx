@@ -1,0 +1,116 @@
+---
+title: Separator 分隔符
+description: 用于在视觉上分隔内容的简单线条。
+links:
+  source_native: separator/separator.tsx
+  styles_native: separator/separator.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/separator-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/separator-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Separator } from "heroui-native";
+```
+
+## 结构
+
+```tsx
+<Separator />
+```
+
+- **Separator**：简单的分隔线组件，可水平或垂直排列，并支持自定义粗细与变体样式。
+
+## 用法
+
+### 基础用法
+
+在内容区块之间创建视觉分隔。
+
+```tsx
+<Separator />
+```
+
+### 方向
+
+使用 `orientation` 控制分隔线方向。
+
+```tsx
+<View>
+  <Text>水平分隔线</Text>
+  <Separator orientation="horizontal" />
+  <Text>下方内容</Text>
+</View>
+
+<View className="h-24 flex-row">
+  <Text>左侧</Text>
+  <Separator orientation="vertical" />
+  <Text>右侧</Text>
+</View>
+```
+
+### 变体
+
+在细线与粗线之间选择，以强调程度区分。
+
+```tsx
+<Separator variant="thin" />
+<Separator variant="thick" />
+```
+
+### 自定义粗细
+
+使用数值精确控制线条粗细（像素）。
+
+```tsx
+<Separator thickness={1} />
+<Separator thickness={5} />
+<Separator thickness={10} />
+```
+
+## 示例
+
+```tsx
+import { Separator, Surface } from 'heroui-native';
+import { Text, View } from 'react-native';
+
+export default function SeparatorExample() {
+  return (
+    <Surface variant="secondary" className="px-6 py-7">
+      <Text className="text-base font-medium text-foreground">
+        HeroUI Native
+      </Text>
+      <Text className="text-sm text-muted">
+        现代化的 React Native 组件库。
+      </Text>
+      <Separator className="my-4" />
+      <View className="flex-row items-center h-5">
+        <Text className="text-sm text-foreground">组件</Text>
+        <Separator orientation="vertical" className="mx-3" />
+        <Text className="text-sm text-foreground">主题</Text>
+        <Separator orientation="vertical" className="mx-3" />
+        <Text className="text-sm text-foreground">示例</Text>
+      </View>
+    </Surface>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/separator.tsx)。
+
+## API 参考
+
+### Separator
+
+| prop           | type                         | default        | description                                                                                  |
+| -------------- | ---------------------------- | -------------- | -------------------------------------------------------------------------------------------- |
+| `variant`      | `'thin' \| 'thick'`          | `'thin'`       | 分隔线样式变体                                                                               |
+| `orientation`  | `'horizontal' \| 'vertical'` | `'horizontal'` | 分隔线方向                                                                                   |
+| `thickness`    | `number`                     | `undefined`    | 自定义粗细（像素）；水平时控制高度，垂直时控制宽度                                           |
+| `className`    | `string`                     | `undefined`    | 额外的 class                                                                                 |
+| `...ViewProps` | `ViewProps`                  | -              | 支持 React Native `View` 的全部属性                                                         |

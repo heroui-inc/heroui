@@ -7,17 +7,17 @@ import {RadioContent, RadioControl, RadioIndicator, RadioRoot} from "./radio";
  * -----------------------------------------------------------------------------------------------*/
 export const Radio = Object.assign(RadioRoot, {
   Root: RadioRoot,
+  Content: RadioContent,
   Control: RadioControl,
   Indicator: RadioIndicator,
-  Content: RadioContent,
 });
 
 export type Radio = {
   Props: ComponentProps<typeof RadioRoot>;
   RootProps: ComponentProps<typeof RadioRoot>;
+  ContentProps: ComponentProps<typeof RadioContent>;
   ControlProps: ComponentProps<typeof RadioControl>;
   IndicatorProps: ComponentProps<typeof RadioIndicator>;
-  ContentProps: ComponentProps<typeof RadioContent>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -28,9 +28,11 @@ export {RadioContent, RadioControl, RadioIndicator, RadioRoot};
 export type {
   RadioRootProps,
   RadioRootProps as RadioProps,
+  RadioContentProps,
   RadioControlProps,
   RadioIndicatorProps,
-  RadioContentProps,
+  RadioFieldRenderProps,
+  RadioButtonRenderProps,
 } from "./radio";
 
 /* -------------------------------------------------------------------------------------------------

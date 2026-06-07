@@ -15,6 +15,7 @@ import {
   TableRoot,
   TableRow,
   TableScrollContainer,
+  TableSortableColumnHeader,
 } from "./table";
 
 /* -------------------------------------------------------------------------------------------------
@@ -35,6 +36,7 @@ export const Table = Object.assign(TableRoot, {
   Root: TableRoot,
   Row: TableRow,
   ScrollContainer: TableScrollContainer,
+  SortableColumnHeader: TableSortableColumnHeader,
 });
 
 export type Table = {
@@ -52,6 +54,7 @@ export type Table = {
   LoadMoreProps: ComponentProps<typeof TableLoadMoreItem>;
   LoadMoreContentProps: ComponentProps<typeof TableLoadMoreContent>;
   ResizableContainerProps: ComponentProps<typeof TableResizableContainer>;
+  SortableColumnHeaderProps: ComponentProps<typeof TableSortableColumnHeader>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -72,6 +75,7 @@ export {
   TableLoadMoreItem,
   TableLoadMoreContent,
   TableResizableContainer,
+  TableSortableColumnHeader,
 };
 
 export type {
@@ -89,6 +93,8 @@ export type {
   TableLoadMoreItemProps,
   TableLoadMoreContentProps,
   TableResizableContainerProps,
+  TableSortableColumnHeaderProps,
+  TableSortDirection,
 } from "./table";
 
 /* -------------------------------------------------------------------------------------------------

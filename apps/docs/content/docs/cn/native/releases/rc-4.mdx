@@ -1,0 +1,225 @@
+---
+title: RC 4
+description: SubMenu 组件、Slider Output 组合重构、PressableFeedback 水波纹修复、Bottom Sheet 返回键处理修复
+github:
+  pull: 331
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 3 月 6 日</span>
+</div>
+
+RC 4 引入用于嵌套可展开菜单的 SubMenu 复合组件，配套弹簧动画展开/收起；重构 Slider Output，采用基于插槽的样式并支持 `textProps` 透传；为 `Menu.Group` 增加 `disallowEmptySelection`，实现类单选框行为。本版本还通过双层缓冲修复快速连按时 PressableFeedback 水波纹闪烁，并修复 Bottom Sheet 在 Android 上未尊重 `enablePanDownToClose` 的返回键处理。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 RC 4 的全部改进！你可以探索全新的 SubMenu 组件、改进后的 Slider Output，以及各项修复。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## 更新亮点
+
+### SubMenu 组件
+
+[Menu](/docs/native/components/menu) 现通过新的 `SubMenu` 复合组件支持嵌套可展开子菜单。SubMenu 嵌套在 `Menu.Content` 内，按压后以弹簧动画展开/收起额外项，并带动指示器旋转。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="menu"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 复合子组件：`SubMenu`、`SubMenu.Trigger`、`SubMenu.TriggerIndicator`、`SubMenu.Content`
+- 弹簧动画展开/收起与指示器旋转
+- 无头原语层：上下文、受控/非受控打开状态，以及无障碍属性（`role`、`aria-expanded`、`aria-disabled`）
+- 父级菜单协同：打开 SubMenu 时 popover 缩至 0.98、移除阴影，非 SubMenu 项淡出至 40% 不透明度并 `pointer-events-none`
+- 打开 SubMenu 时菜单内容切换为 `FadeOut` 退出动画，避免与缩放动画冲突
+- `useSubMenu` 钩子供高级场景使用
+
+**用法：**
+
+```tsx
+import { Menu, SubMenu } from "heroui-native";
+
+export function MenuWithSubMenu() {
+  return (
+    <Menu>
+      <Menu.Trigger>
+        <Button>Open Menu</Button>
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Overlay />
+        <Menu.Content>
+          <Menu.Item>
+            <Menu.ItemTitle>Edit</Menu.ItemTitle>
+          </Menu.Item>
+          <SubMenu>
+            <SubMenu.Trigger>
+              <Menu.ItemTitle>More Options</Menu.ItemTitle>
+              <SubMenu.TriggerIndicator />
+            </SubMenu.Trigger>
+            <SubMenu.Content>
+              <Menu.Item>
+                <Menu.ItemTitle>Import</Menu.ItemTitle>
+              </Menu.Item>
+              <Menu.Item>
+                <Menu.ItemTitle>Export</Menu.ItemTitle>
+              </Menu.Item>
+            </SubMenu.Content>
+          </SubMenu>
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+}
+```
+
+完整文档与示例见 [Menu 组件页](/docs/native/components/menu)。
+
+**相关 PR：** [#331](https://github.com/heroui-inc/heroui-native/pull/331)
+
+## 组件改进
+
+### Slider Output 组合重构
+
+[Slider](/docs/native/components/slider) 的 Output 已重构为基于插槽的架构，包含 `container` 与 `text` 插槽，并新增 `textProps` 用于向内层文本元素透传属性。
+
+**改进：**
+
+- 基于插槽的样式：将 `output` 类拆为 `container` 与 `text`，新增 `classNames`（`classNames={{ container, text }}`）以便精细覆盖样式
+- 组合修复：仅在默认内容时渲染 `HeroText`；自定义子节点直接渲染，无额外文本包装
+- `Slider.Output` 新增 `textProps`，可向内部文本传递任意属性（如 `maxFontSizeMultiplier`）
+- 从样式模块导出 `OutputSlots` 类型供外部使用
+
+**相关 PR：** [#328](https://github.com/heroui-inc/heroui-native/pull/328)
+
+### Menu.Group 的 `disallowEmptySelection`
+
+[Menu](/docs/native/components/menu) 的 `Menu.Group` 现支持 `disallowEmptySelection`，在 `single` 选择模式下禁止取消最后一项选中，实现类单选框行为。
+
+**用法：**
+
+```tsx
+<Menu.Group
+  selectionMode="single"
+  selectedKeys={selected}
+  onSelectionChange={setSelected}
+  disallowEmptySelection
+>
+  <Menu.Item id="list">
+    <Menu.ItemTitle>List View</Menu.ItemTitle>
+    <Menu.ItemIndicator />
+  </Menu.Item>
+  <Menu.Item id="grid">
+    <Menu.ItemTitle>Grid View</Menu.ItemTitle>
+    <Menu.ItemIndicator />
+  </Menu.Item>
+</Menu.Group>
+```
+
+**相关 PR：** [#331](https://github.com/heroui-inc/heroui-native/pull/331)
+
+### Bottom Sheet 与 `enablePanDownToClose` 一致
+
+[Bottom Sheet](/docs/native/components/bottom-sheet) 现会在 Android 硬件返回键行为上正确尊重 `enablePanDownToClose`。此前即使 `enablePanDownToClose` 为 `false`，返回键仍会关闭 Bottom Sheet。
+
+**改进：**
+
+- `enablePanDownToClose` 透传至 `BottomSheetContentContainer`（默认 `true`）
+- 仅在 `isOpen` 与 `enablePanDownToClose` 均为 `true` 时注册 `BackHandler` 监听
+- `enablePanDownToClose={false}` 时不再可通过 Android 返回键关闭
+
+**相关 PR：** [#327](https://github.com/heroui-inc/heroui-native/pull/327)
+
+## ⚠️ 破坏性变更
+
+### Chip 组件尺寸
+
+[Chip](/docs/native/components/chip) 的尺寸变体已由固定高度改为基于内边距，以在较大无障碍字号下适配动态文字缩放。
+
+**迁移：**
+
+若自定义样式依赖此前的 `h-5`/`h-6`/`h-7` 高度，请改为新的内边距方案：
+
+```tsx
+// 之前 — 固定高度
+// Chip 使用 h-5（sm）、h-6（md）、h-7（lg）
+
+// 之后 — 基于内边距
+// Chip 使用 py-0.5（sm）、py-[3px]（md）、py-1（lg）
+// 圆角更新：rounded-xl → rounded-2xl / rounded-3xl
+```
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [Menu](/docs/native/components/menu) — SubMenu 文档：结构分解、用法示例、完整 API 参考及 `useSubMenu` 钩子说明
+- [Slider](/docs/native/components/slider) — 更新 Output 文档：基于插槽的样式与 `textProps`
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

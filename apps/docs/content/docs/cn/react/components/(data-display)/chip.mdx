@@ -1,0 +1,163 @@
+---
+title: Chip 标签
+description: 用于展示标签、状态与分类等信息的小型徽标。
+links:
+  source: chip/chip.tsx
+  styles: chip.css
+  storybook: Components/Data Display/Chip
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Chip } from '@heroui/react';
+```
+
+## 组件结构
+
+引入 Chip 组件，并通过点语法访问各部分。
+
+> 纯文本子节点会自动包在 `<Chip.Label>` 中。
+
+```tsx
+<Chip>
+  Label text
+</Chip>
+```
+
+### 用法
+
+<ComponentPreview
+  name="chip-basic"
+/>
+
+### 变体
+
+<ComponentPreview
+  name="chip-variants"
+/>
+
+### 带图标
+
+<ComponentPreview
+  name="chip-with-icon"
+/>
+
+### 状态
+
+<ComponentPreview
+  name="chip-statuses"
+/>
+
+<RelatedComponents component="chip" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以为根容器与各插槽分别添加类名：
+
+```tsx
+import {Chip} from '@heroui/react';
+
+function CustomChip() {
+  return (
+    <Chip className="rounded-full px-4 py-2 font-bold">
+      <Chip.Label className="text-lg uppercase">
+        Custom Styled
+      </Chip.Label>
+    </Chip>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Chip 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .chip {
+    @apply rounded-full text-xs;
+  }
+
+  .chip__label {
+    @apply font-medium;
+  }
+
+  .chip--accent {
+    @apply border-accent/20;
+  }
+
+  .chip--accent .chip__label {
+    @apply text-accent;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Chip 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/chip.css)）：
+
+#### 基础类
+- `.chip` - Chip 容器基础样式
+- `.chip__label` - 标签文本插槽样式
+
+#### 颜色类
+- `.chip--accent` - 强调颜色变体
+- `.chip--danger` - 危险颜色变体
+- `.chip--default` - 默认颜色变体
+- `.chip--success` - 成功颜色变体
+- `.chip--warning` - 警告颜色变体
+
+#### 变体类
+- `.chip--primary` - Primary 变体，实心背景
+- `.chip--secondary` - Secondary 变体，带边框
+- `.chip--tertiary` - Tertiary 变体，透明背景
+- `.chip--soft` - Soft 变体，浅色背景
+
+#### 尺寸类
+- `.chip--sm` - 小尺寸
+- `.chip--md` - 中尺寸（默认）
+- `.chip--lg` - 大尺寸
+
+#### 复合变体类
+
+Chip 支持组合变体与颜色类（例如 `.chip--secondary.chip--accent`）。以下组合定义了默认样式：
+
+**Primary 变体：**
+- `.chip--primary.chip--accent` - Primary + 强调色，实心背景
+- `.chip--primary.chip--success` - Primary + 成功色，实心背景
+- `.chip--primary.chip--warning` - Primary + 警告色，实心背景
+- `.chip--primary.chip--danger` - Primary + 危险色，实心背景
+
+**Soft 变体：**
+- `.chip--accent.chip--soft` - Soft + 强调色，浅色背景
+- `.chip--success.chip--soft` - Soft + 成功色，浅色背景
+- `.chip--warning.chip--soft` - Soft + 警告色，浅色背景
+- `.chip--danger.chip--soft` - Soft + 危险色，浅色背景
+
+**说明：** 你也可以在 CSS 中通过 `@layer components` 为任意变体与颜色组合（例如 `.chip--secondary.chip--accent`、`.chip--tertiary.chip--success`）编写自定义样式。
+
+## API 参考
+
+### Chip Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | Chip 内展示的内容 |
+| `className` | `string` | - | 根元素的额外 CSS 类 |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | 颜色变体 |
+| `variant` | `"primary" \| "secondary" \| "tertiary" \| "soft"` | `"secondary"` | 视觉样式变体 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 尺寸 |
+
+### Chip.Label Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 标签文本内容 |
+| `className` | `string` | - | 标签插槽的额外 CSS 类 |

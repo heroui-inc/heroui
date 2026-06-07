@@ -9,9 +9,57 @@
  * Base Calendar Styles
  * -------------------------------------------------------------------------- */
 .calendar {
-  @apply w-63 max-w-full;
+  @apply w-63 max-w-63;
 
   container-type: inline-size;
+}
+
+/* Week view – visibleDuration={{ weeks: n }} */
+.calendar--week-view {
+  .calendar__cell {
+    /* Keep cells circular on the 7-column grid; only filled cells take space. */
+    @apply aspect-square size-auto w-full place-self-center;
+  }
+}
+
+/* Day view – visibleDuration={{ days: n }} */
+.calendar--day-view {
+  .calendar__cell {
+    @apply aspect-square size-auto w-full place-self-center;
+  }
+
+  /*
+   * Isolate header and body into separate 7-column grids. With display:contents
+   * on the root grid, fewer than 7 weekday headers flow into the same row as dates.
+   */
+  .calendar__grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar__grid-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    @apply w-full;
+
+    & > tr {
+      display: contents;
+    }
+  }
+
+  .calendar__grid-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    @apply mt-1 w-full;
+
+    & > tr {
+      display: contents;
+    }
+
+    & > tr:first-child > td {
+      @apply mt-0;
+    }
+  }
 }
 
 /* -----------------------------------------------------------------------------
@@ -157,7 +205,14 @@
 
   /* Today indicator */
   &[data-today="true"] {
-    @apply text-accent-soft-foreground;
+    @apply bg-accent-soft text-accent-soft-foreground;
+
+    @media (hover: hover) {
+      &:hover:not([data-selected="true"]),
+      &[data-hovered="true"]:not([data-selected="true"]) {
+        @apply bg-accent-soft-hover;
+      }
+    }
   }
 
   /* Selected state */

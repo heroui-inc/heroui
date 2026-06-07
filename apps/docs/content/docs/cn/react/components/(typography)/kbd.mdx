@@ -1,0 +1,157 @@
+---
+title: Kbd 键盘按键
+description: 用于展示键盘快捷键与组合键。
+links:
+  source: kbd/kbd.tsx
+  styles: kbd.css
+  storybook: Components/Typography/Kbd
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Kbd } from "@heroui/react";
+```
+
+### 用法
+
+<ComponentPreview 
+  name="kbd-basic"
+/>
+
+### 组件结构
+
+导入 Kbd 组件后，可通过点语法访问所有子部分。
+
+```tsx
+import { Kbd } from "@heroui/react";
+
+export default () => (
+  <Kbd>
+    <Kbd.Abbr title="Command">⌘</Kbd.Abbr>
+    <Kbd.Content>K</Kbd.Content>
+  </Kbd>
+);
+```
+
+### 导航键
+
+<ComponentPreview 
+  name="kbd-navigation-keys"
+/>
+
+### 行内用法
+
+<ComponentPreview 
+  name="kbd-inline-usage"
+/>
+
+### 说明性文本
+
+<ComponentPreview 
+  name="kbd-instructional-text"
+/>
+
+### 特殊键
+
+<ComponentPreview 
+  name="kbd-special-keys"
+/>
+
+### 变体
+
+<ComponentPreview 
+  name="kbd-variants"
+/>
+
+<RelatedComponents component="kbd" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Kbd } from "@heroui/react";
+
+function CustomKbd() {
+  return (
+    <Kbd className="bg-gray-100 dark:bg-gray-800">
+      <Kbd.Content>K</Kbd.Content>
+    </Kbd>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 Kbd 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .kbd {
+    @apply bg-gray-100 dark:bg-gray-800 border-gray-300;
+  }
+
+  .kbd__abbr {
+    @apply font-bold;
+  }
+
+  .kbd__content {
+    @apply text-sm;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Kbd 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/kbd.css)）：
+
+#### 基础类
+
+- `.kbd` — 按键基础样式（背景、边框与间距）
+- `.kbd__abbr` — 修饰键的缩写元素
+- `.kbd__content` — 按键文字的包裹层
+
+## API 参考
+
+### Kbd Props
+
+| Prop        | 类型              | 默认值    | 描述                   |
+| ----------- | ----------------- | --------- | ---------------------- |
+| `children`  | `React.ReactNode` | -         | 按键内容               |
+| `variant`   | `"default" \| "light"` | `default`       | 键盘按键的视觉变体 |
+| `className` | `string`          | -         | 自定义 CSS 类          |
+
+### Kbd.Abbr Props
+
+| Prop        | 类型              | 默认值 | 描述                                                                 |
+| ----------- | ----------------- | ------ | -------------------------------------------------------------------- |
+| `title`     | `string`          | -      | 无障碍 `title`（例如 ⌘ 对应 “Command”）                            |
+| `children`  | `React.ReactNode` | -      | 显示的符号或文本（例如 ⌘、⌥、⇧）                                   |
+| `className` | `string`          | -      | 自定义 CSS 类                                                       |
+
+### Kbd.Key Props
+
+| Prop        | 类型              | 默认值 | 描述                 |
+| ----------- | ----------------- | ------ | -------------------- |
+| `children`  | `React.ReactNode` | -      | 按键上的文本         |
+| `className` | `string`          | -      | 自定义 CSS 类        |
+
+### Kbd.Content Type
+
+`keyValue` 属性可用的按键取值：
+
+| Modifier Keys | Special Keys | Navigation Keys | Function Keys |
+| ------------- | ------------ | --------------- | ------------- |
+| `command`     | `enter`      | `up`            | `fn`          |
+| `shift`       | `delete`     | `down`          |               |
+| `ctrl`        | `escape`     | `left`          |               |
+| `option`      | `tab`        | `right`         |               |
+| `alt`         | `space`      | `pageup`        |               |
+| `win`         | `capslock`   | `pagedown`      |               |
+|               | `help`       | `home`          |               |
+|               |              | `end`           |               |

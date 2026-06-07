@@ -1,0 +1,455 @@
+---
+title: Calendar
+description: Calendar 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Calendar 文档](/docs/react/components/calendar)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Calendar` 是一个完全通过 props 配置的单一组件：
+
+```tsx
+import { Calendar } from "@heroui/react";
+
+export default function App() {
+  return <Calendar aria-label="Date" />;
+}
+```
+
+在 v3 中，Calendar 改用带显式子组件的复合组件模式：
+
+```tsx
+import { Calendar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Calendar aria-label="Date">
+      <Calendar.Header>
+        <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单一 `Calendar` 组件，所有布局都在内部处理  
+**v3：** 复合组件：`Calendar.Header`、`Calendar.Heading`、`Calendar.NavButton`、`Calendar.Grid`、`Calendar.GridHeader`、`Calendar.GridBody`、`Calendar.HeaderCell`、`Calendar.Cell`、`Calendar.CellIndicator`
+
+### 2. 年份选择器
+
+**v2：** 通过 `showMonthAndYearPickers` prop 提供内置月份 / 年份选择器  
+**v3：** 使用专用复合组件：`Calendar.YearPickerTrigger`、`Calendar.YearPickerGrid`、`Calendar.YearPickerGridBody`、`Calendar.YearPickerCell`
+
+### 3. Prop 变更
+
+| v2 prop | v3 等效项 | 说明 |
+| ------- | ----------- | ---- |
+| `value` | `value` | 保持一致 |
+| `defaultValue` | `defaultValue` | 保持一致 |
+| `onChange` | `onChange` | 保持一致 |
+| `focusedValue` | `focusedValue` | 保持一致 |
+| `onFocusChange` | `onFocusChange` | 保持一致 |
+| `minValue` | `minValue` | 保持一致 |
+| `maxValue` | `maxValue` | 保持一致 |
+| `isDateUnavailable` | `isDateUnavailable` | 保持一致 |
+| `isDisabled` | `isDisabled` | 保持一致 |
+| `isReadOnly` | `isReadOnly` | 保持一致 |
+| `isInvalid` | `isInvalid` | 保持一致 |
+| `visibleMonths` | `visibleDuration` | 改为 `{months: number}` 对象 |
+| `showMonthAndYearPickers` | - | 使用 `Calendar.YearPickerTrigger` 和 `Calendar.YearPickerGrid` |
+| `onHeaderExpandedChange` | `onYearPickerOpenChange` | 已重命名 |
+| `color` | - | 已移除（请改用 Tailwind CSS） |
+| `calendarWidth` | - | 已移除（请改用 `className` 或 Tailwind CSS） |
+| `weekdayStyle` | - | 已移除 |
+| `pageBehavior` | `pageBehavior` | 保持一致 |
+| `firstDayOfWeek` | - | 改用 `I18nProvider` 的 locale |
+| `hideDisabledDates` | - | 已移除 |
+| `disableAnimation` | - | 已移除 |
+| `topContent` | - | 将自定义内容作为 `Calendar` children 放在 `Calendar.Grid` 之前 |
+| `bottomContent` | - | 将自定义内容作为 `Calendar` children 放在 `Calendar.Grid` 之后 |
+| `classNames` | - | 在各个复合组件上使用 `className` |
+| `errorMessage` | - | 已移除（请在外部处理校验） |
+
+### 4. color prop 已移除
+
+**v2：** `color` prop 支持 `default`、`primary`、`secondary`、`success`、`warning`、`danger`  
+**v3：** 不再提供 `color` prop，请使用 Tailwind CSS 类设置单元格样式，或通过自定义 `calendar.css` 覆盖
+
+## 迁移示例
+
+### 基本日历
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Calendar } from "@heroui/react";
+    import { today, getLocalTimeZone } from "@internationalized/date";
+
+    <Calendar
+      aria-label="Date"
+      defaultValue={today(getLocalTimeZone())}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Calendar } from "@heroui/react";
+    import { today, getLocalTimeZone } from "@internationalized/date";
+
+    <Calendar
+      aria-label="Date"
+      defaultValue={today(getLocalTimeZone())}
+    >
+      <Calendar.Header>
+        <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { Calendar } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState(parseDate("2024-03-07"));
+
+    <Calendar
+      aria-label="Date"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Calendar } from "@heroui/react";
+    import { parseDate } from "@internationalized/date";
+
+    const [value, setValue] = useState(parseDate("2024-03-07"));
+
+    <Calendar
+      aria-label="Date"
+      value={value}
+      onChange={setValue}
+    >
+      <Calendar.Header>
+        <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 月份和年份选择器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Calendar
+      aria-label="Date"
+      showMonthAndYearPickers
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Calendar aria-label="Date">
+      <Calendar.Header>
+        <Calendar.YearPickerTrigger>
+          <Calendar.YearPickerTriggerHeading />
+          <Calendar.YearPickerTriggerIndicator />
+        </Calendar.YearPickerTrigger>
+        <Calendar.NavButton slot="previous" />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+      <Calendar.YearPickerGrid>
+        <Calendar.YearPickerGridBody>
+          {(year) => <Calendar.YearPickerCell date={year} />}
+        </Calendar.YearPickerGridBody>
+      </Calendar.YearPickerGrid>
+    </Calendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 多个月份
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Calendar
+      aria-label="Date"
+      visibleMonths={2}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Calendar aria-label="Date" visibleDuration={{months: 2}}>
+      <Calendar.Header>
+        <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <div className="flex gap-4">
+        <Calendar.Grid>
+          <Calendar.GridHeader>
+            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+          </Calendar.GridHeader>
+          <Calendar.GridBody>
+            {(date) => <Calendar.Cell date={date} />}
+          </Calendar.GridBody>
+        </Calendar.Grid>
+        <Calendar.Grid offset={{months: 1}}>
+          <Calendar.GridHeader>
+            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+          </Calendar.GridHeader>
+          <Calendar.GridBody>
+            {(date) => <Calendar.Cell date={date} />}
+          </Calendar.GridBody>
+        </Calendar.Grid>
+      </div>
+    </Calendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 不可用日期
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { isWeekend } from "@internationalized/date";
+    import { useLocale } from "@react-aria/i18n";
+
+    const { locale } = useLocale();
+
+    <Calendar
+      aria-label="Date"
+      isDateUnavailable={(date) => isWeekend(date, locale)}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { isWeekend } from "@internationalized/date";
+    import { useLocale } from "@react-aria/i18n";
+
+    const { locale } = useLocale();
+
+    <Calendar
+      aria-label="Date"
+      isDateUnavailable={(date) => isWeekend(date, locale)}
+    >
+      <Calendar.Header>
+        <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 顶部与底部内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Calendar
+      aria-label="Date"
+      topContent={<p>Select a date</p>}
+      bottomContent={
+        <button onClick={() => setValue(today(getLocalTimeZone()))}>
+          Today
+        </button>
+      }
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Calendar aria-label="Date">
+      <p>Select a date</p>
+      <Calendar.Header>
+        <Calendar.Heading />
+        <Calendar.NavButton slot="previous" />
+        <Calendar.NavButton slot="next" />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHeader>
+          {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+        </Calendar.GridHeader>
+        <Calendar.GridBody>
+          {(date) => <Calendar.Cell date={date} />}
+        </Calendar.GridBody>
+      </Calendar.Grid>
+      <button onClick={() => setValue(today(getLocalTimeZone()))}>
+        Today
+      </button>
+    </Calendar>
+    ```
+  </Tab>
+</Tabs>
+
+### 单元格指示器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 did not have a built-in cell indicator API */}
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Calendar.Grid>
+      <Calendar.GridHeader>
+        {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+      </Calendar.GridHeader>
+      <Calendar.GridBody>
+        {(date) => (
+          <Calendar.Cell date={date}>
+            {({formattedDate}) => (
+              <>
+                {formattedDate}
+                {hasEvent(date) && <Calendar.CellIndicator />}
+              </>
+            )}
+          </Calendar.Cell>
+        )}
+      </Calendar.GridBody>
+    </Calendar.Grid>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<Calendar
+  classNames={{
+    base: "custom-base",
+    prevButton: "custom-prev",
+    nextButton: "custom-next",
+    title: "custom-title",
+    cell: "custom-cell",
+    cellButton: "custom-cell-button",
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<Calendar className="custom-base">
+  <Calendar.Header>
+    <Calendar.Heading className="custom-title" />
+    <Calendar.NavButton slot="previous" className="custom-prev" />
+    <Calendar.NavButton slot="next" className="custom-next" />
+  </Calendar.Header>
+  <Calendar.Grid>
+    <Calendar.GridHeader>
+      {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+    </Calendar.GridHeader>
+    <Calendar.GridBody>
+      {(date) => <Calendar.Cell date={date} className="custom-cell" />}
+    </Calendar.GridBody>
+  </Calendar.Grid>
+</Calendar>
+```
+
+## 组件结构
+
+v3 Calendar 遵循以下结构：
+
+```
+Calendar (Root)
+  ├── [Custom top content]
+  ├── Calendar.Header
+  │   ├── Calendar.Heading (or Calendar.YearPickerTrigger)
+  │   ├── Calendar.NavButton slot="previous"
+  │   └── Calendar.NavButton slot="next"
+  ├── Calendar.Grid (one per visible month)
+  │   ├── Calendar.GridHeader
+  │   │   └── Calendar.HeaderCell (render prop)
+  │   └── Calendar.GridBody
+  │       └── Calendar.Cell (render prop)
+  │           └── Calendar.CellIndicator (optional)
+  ├── Calendar.YearPickerGrid (optional)
+  │   └── Calendar.YearPickerGridBody
+  │       └── Calendar.YearPickerCell
+  └── [Custom bottom content]
+```
+
+## 总结
+
+1. **组件结构**：单一组件 → 带显式布局控制的复合组件
+2. **年份选择器**：`showMonthAndYearPickers` prop → 专用的 `Calendar.YearPickerTrigger` 和 `Calendar.YearPickerGrid` 组件
+3. **多个月份**：`visibleMonths={n}` → `visibleDuration={{months: n}}`，并使用多个带 `offset` 的 `Calendar.Grid` 组件
+4. **color 已移除**：请改用 Tailwind CSS 类
+5. **顶部 / 底部内容**：prop 已移除 → 直接将内容作为 children 放在 `Calendar` 内
+6. **单元格自定义**：新增 `Calendar.CellIndicator`，且 `Calendar.Cell` 支持渲染 prop
+7. **样式**：`classNames` prop → 各个复合组件上的 `className`
+8. **已移除 prop**：`calendarWidth`、`weekdayStyle`、`hideDisabledDates`、`disableAnimation` —— 请使用 Tailwind CSS 或省略

@@ -348,19 +348,19 @@ export function ComponentShowcase() {
             <h3 className="text-sm font-semibold text-muted">Controls</h3>
 
             <Checkbox defaultSelected name="notifications">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
               <Checkbox.Content>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
                 <Label className="text-sm">Enable notifications</Label>
               </Checkbox.Content>
             </Checkbox>
 
             <Checkbox name="marketing">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
               <Checkbox.Content>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
                 <Label className="text-sm">Marketing emails</Label>
               </Checkbox.Content>
             </Checkbox>
@@ -368,17 +368,21 @@ export function ComponentShowcase() {
             <Separator />
 
             <Switch defaultSelected>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Dark mode</Label>
+              <Switch.Content>
+                <Switch.Control>
+                  <Switch.Thumb />
+                </Switch.Control>
+                <Label className="text-sm">Dark mode</Label>
+              </Switch.Content>
             </Switch>
 
             <Switch>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-              <Label className="text-sm">Auto-save</Label>
+              <Switch.Content>
+                <Switch.Control>
+                  <Switch.Thumb />
+                </Switch.Control>
+                <Label className="text-sm">Auto-save</Label>
+              </Switch.Content>
             </Switch>
           </div>
 
@@ -438,26 +442,26 @@ export function ComponentShowcase() {
           <h3 className="text-sm font-semibold text-muted">Radio Group</h3>
           <RadioGroup defaultValue="pro" name="plan" orientation="horizontal">
             <Radio value="starter">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
               <Radio.Content>
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
                 <Label className="text-sm">Starter</Label>
               </Radio.Content>
             </Radio>
             <Radio value="pro">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
               <Radio.Content>
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
                 <Label className="text-sm">Pro</Label>
               </Radio.Content>
             </Radio>
             <Radio value="enterprise">
-              <Radio.Control>
-                <Radio.Indicator />
-              </Radio.Control>
               <Radio.Content>
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
                 <Label className="text-sm">Enterprise</Label>
               </Radio.Content>
             </Radio>

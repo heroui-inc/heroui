@@ -1,0 +1,447 @@
+---
+title: Accordion 手风琴
+description: 可折叠内容面板，在紧凑空间内组织信息
+links:
+  source_native: accordion/accordion.tsx
+  styles_native: accordion/accordion.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/accordion-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/accordion-docs-dark-1.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Accordion } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator>...</Accordion.Indicator>
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+- **Accordion**：主容器，管理手风琴状态与行为；控制各条目的展开/收起，支持单选或多选展开模式，并提供 `default` 或 `surface` 等视觉变体。
+- **Accordion.Item**：单个条目的容器，包裹触发器与内容，并管理该条目的展开状态。
+- **Accordion.Trigger**：用于切换条目展开的可交互区域，基于 Header 与 Trigger 原语构建。
+- **Accordion.Indicator**：可选的视觉指示器，展示展开状态；默认使用随状态旋转的动画 chevron 图标。
+- **Accordion.Content**：可展开内容的容器，配合布局过渡动画实现平滑展开/收起。
+
+## 用法
+
+### 基础用法
+
+Accordion 通过复合子组件创建可展开的内容区块。
+
+```tsx
+<Accordion selectionMode="single">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator />
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### 单选模式
+
+同一时间只允许展开一个条目。
+
+```tsx
+<Accordion selectionMode="single" defaultValue="2">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="2">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### 多选模式
+
+允许多个条目同时展开。
+
+```tsx
+<Accordion selectionMode="multiple" defaultValue={['1', '3']}>
+  <Accordion.Item value="1">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="2">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="3">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Surface 变体
+
+为手风琴应用表面容器样式。
+
+```tsx
+<Accordion selectionMode="single" variant="surface">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator />
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### 自定义指示器
+
+用自定义内容替换默认 chevron 指示器。
+
+```tsx
+<Accordion selectionMode="single">
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      ...
+      <Accordion.Indicator>
+        <CustomIndicator />
+      </Accordion.Indicator>
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### 无分隔线
+
+隐藏条目之间的分隔线。
+
+```tsx
+<Accordion selectionMode="single" hideSeparator>
+  <Accordion.Item value="1">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="2">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### 自定义样式
+
+通过 `className`、`classNames` 或 `styles` 传入自定义样式。
+
+```tsx
+<Accordion
+  className="rounded-lg"
+  classNames={{
+    container: 'bg-surface',
+    separator: 'bg-separator/50',
+  }}
+  styles={{
+    container: { padding: 16 },
+    separator: { height: 2 },
+  }}
+>
+  <Accordion.Item value="1">
+    <Accordion.Trigger>...</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+### 配合 PressableFeedback
+
+对 `Accordion.Trigger` 使用 `asChild`，并用 `PressableFeedback` 包裹内容以添加按压反馈动画。
+
+```tsx
+import { Accordion, PressableFeedback } from 'heroui-native';
+import { View } from 'react-native';
+
+<Accordion>
+  <Accordion.Item value="1">
+    <Accordion.Trigger asChild>
+      <PressableFeedback animation={{ scale: false }}>
+        <PressableFeedback.Scale className="flex-row items-center flex-1 gap-3">
+          <Text>条目标题</Text>
+        </PressableFeedback.Scale>
+        <Accordion.Indicator />
+        <PressableFeedback.Highlight
+          animation={{ opacity: { value: [0, 0.05] } }}
+        />
+      </PressableFeedback>
+    </Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>;
+```
+
+## 示例
+
+```tsx
+import { Accordion, useThemeColor } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View, Text } from 'react-native';
+
+export default function AccordionExample() {
+  const themeColorMuted = useThemeColor('muted');
+
+  const accordionData = [
+    {
+      id: '1',
+      title: '如何下单？',
+      icon: <Ionicons name="bag-outline" size={16} color={themeColorMuted} />,
+      content:
+        '这是一段示例说明文字，用于演示折叠面板中的正文内容展示效果。',
+    },
+    {
+      id: '2',
+      title: '支持哪些支付方式？',
+      icon: <Ionicons name="card-outline" size={16} color={themeColorMuted} />,
+      content:
+        '这是一段示例说明文字，用于演示折叠面板中的正文内容展示效果。',
+    },
+    {
+      id: '3',
+      title: '运费如何计算？',
+      icon: <Ionicons name="cube-outline" size={16} color={themeColorMuted} />,
+      content:
+        '这是一段示例说明文字，用于演示折叠面板中的正文内容展示效果。',
+    },
+  ];
+
+  return (
+    <Accordion selectionMode="single" variant="surface" defaultValue="2">
+      {accordionData.map((item) => (
+        <Accordion.Item key={item.id} value={item.id}>
+          <Accordion.Trigger>
+            <View className="flex-row items-center flex-1 gap-3">
+              {item.icon}
+              <Text className="text-foreground text-base flex-1">
+                {item.title}
+              </Text>
+            </View>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+          <Accordion.Content>
+            <Text className="text-muted text-base/relaxed px-[25px]">
+              {item.content}
+            </Text>
+          </Accordion.Content>
+        </Accordion.Item>
+      ))}
+    </Accordion>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/accordion.tsx)。
+
+## API 参考
+
+### Accordion
+
+| prop                    | type                                               | default     | description                                                    |
+| ----------------------- | -------------------------------------------------- | ----------- | -------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                                  | -           | 渲染在手风琴内的子节点                                         |
+| `selectionMode`         | `'single' \| 'multiple'`                           | -           | 允许单条或多条同时展开                                         |
+| `variant`               | `'default' \| 'surface'`                           | `'default'` | 手风琴视觉变体                                                 |
+| `hideSeparator`         | `boolean`                                          | `false`     | 是否隐藏条目之间的分隔线                                       |
+| `defaultValue`          | `string \| string[] \| undefined`                  | -           | 非受控模式下的默认展开项                                       |
+| `value`                 | `string \| string[] \| undefined`                  | -           | 受控模式下的当前展开项                                         |
+| `isDisabled`            | `boolean`                                          | -           | 是否禁用全部条目                                               |
+| `isCollapsible`         | `boolean`                                          | `true`      | 已展开条目是否可再次收起                                       |
+| `animation`             | `AccordionRootAnimation`                           | -           | 根级动画配置                                                   |
+| `className`             | `string`                                           | -           | 容器的额外 class                                               |
+| `classNames`            | `ElementSlots<RootSlots>`                          | -           | 各插槽的额外 class                                             |
+| `styles`                | `Partial<Record<RootSlots, ViewStyle>>`            | -           | 根组件各部分的样式                                             |
+| `onValueChange`         | `(value: string \| string[] \| undefined) => void` | -           | 展开项变化时的回调                                             |
+| `...Animated.ViewProps` | `Animated.ViewProps`                               | -           | 支持 Reanimated `Animated.View` 的全部属性                     |
+
+#### `ElementSlots<RootSlots>`
+
+| prop        | type     | description                         |
+| ----------- | -------- | ----------------------------------- |
+| `container` | `string` | 手风琴容器的自定义 class            |
+| `separator` | `string` | 条目之间分隔线的自定义 class        |
+
+#### `styles`
+
+| prop        | type        | description            |
+| ----------- | ----------- | ---------------------- |
+| `container` | `ViewStyle` | 手风琴容器样式         |
+| `separator` | `ViewStyle` | 条目之间分隔线样式     |
+
+#### AccordionRootAnimation
+
+手风琴根组件的动画配置，可为：
+
+- `false` 或 `"disabled"`：仅禁用根级动画
+- `"disable-all"`：禁用全部动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop           | type                                     | default                                                                                         | description                            |
+| -------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `state`        | `'disabled' \| 'disable-all' \| boolean` | -                                                                                               | 在自定义属性时禁用动画                 |
+| `layout.value` | `LayoutTransition`                       | `LinearTransition`<br/>`.springify()`<br/>`.damping(140)`<br/>`.stiffness(1600)`<br/>`.mass(4)` | 手风琴过渡的自定义布局动画           |
+
+### Accordion.Item
+
+| prop                    | type                                                                        | default | description                                                                      |
+| ----------------------- | --------------------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------- |
+| `children`              | `React.ReactNode \| ((props: AccordionItemRenderProps) => React.ReactNode)` | -       | 条目内的子节点，或渲染函数                                                       |
+| `value`                 | `string`                                                                    | -       | 唯一标识该条目的值                                                               |
+| `isDisabled`            | `boolean`                                                                   | -       | 是否禁用该条目                                                                   |
+| `className`             | `string`                                                                    | -       | 额外的 class                                                                     |
+| `...Animated.ViewProps` | `Animated.ViewProps`                                                        | -       | 支持 Reanimated `Animated.View` 的全部属性                                       |
+
+#### AccordionItemRenderProps
+
+| prop         | type      | description              |
+| ------------ | --------- | ------------------------ |
+| `isExpanded` | `boolean` | 当前条目是否展开         |
+| `value`      | `string`  | 该条目的唯一值           |
+
+### Accordion.Trigger
+
+| prop                | type              | default | description                          |
+| ------------------- | ----------------- | ------- | ------------------------------------ |
+| `children`          | `React.ReactNode` | -       | 触发器内的子节点                     |
+| `className`         | `string`          | -       | 额外的 class                         |
+| `isDisabled`        | `boolean`         | -       | 是否禁用触发器                       |
+| `...PressableProps` | `PressableProps`  | -       | 支持 React Native `Pressable` 的属性 |
+
+### Accordion.Indicator
+
+| prop                    | type                          | default | description                                              |
+| ----------------------- | ----------------------------- | ------- | -------------------------------------------------------- |
+| `children`              | `React.ReactNode`             | -       | 自定义指示器内容；未提供时默认为带动画的 chevron         |
+| `className`             | `string`                      | -       | 额外的 class                                             |
+| `iconProps`             | `AccordionIndicatorIconProps` | -       | 图标配置                                                 |
+| `animation`             | `AccordionIndicatorAnimation` | -       | 指示器动画配置                                           |
+| `isAnimatedStyleActive` | `boolean`                     | `true`  | 是否启用 Reanimated 动画样式                             |
+| `...Animated.ViewProps` | `Animated.ViewProps`          | -       | 支持 Reanimated `Animated.View` 的全部属性               |
+
+#### AccordionIndicatorIconProps
+
+| prop    | type     | default      | description |
+| ------- | -------- | ------------ | ----------- |
+| `size`  | `number` | `16`         | 图标尺寸    |
+| `color` | `string` | `foreground` | 图标颜色  |
+
+#### AccordionIndicatorAnimation
+
+指示器动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                    | type                    | default                                      | description                                      |
+| ----------------------- | ----------------------- | -------------------------------------------- | ------------------------------------------------ |
+| `state`                 | `'disabled' \| boolean` | -                                            | 在自定义属性时禁用动画                           |
+| `rotation.value`        | `[number, number]`      | `[0, -180]`                                  | 旋转角度 [收起, 展开]，单位为度                |
+| `rotation.springConfig` | `WithSpringConfig`      | `{ damping: 140, stiffness: 1000, mass: 4 }` | 旋转弹簧动画配置                                 |
+
+### Accordion.Content
+
+| prop           | type                        | default | description                        |
+| -------------- | --------------------------- | ------- | ---------------------------------- |
+| `children`     | `React.ReactNode`           | -       | 内容区域内的子节点                 |
+| `className`    | `string`                    | -       | 额外的 class                       |
+| `animation`    | `AccordionContentAnimation` | -       | 内容动画配置                       |
+| `...ViewProps` | `ViewProps`                 | -       | 支持 React Native `View` 的属性    |
+
+#### AccordionContentAnimation
+
+内容区动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop             | type                    | default                                                              | description              |
+| ---------------- | ----------------------- | -------------------------------------------------------------------- | ------------------------ |
+| `state`          | `'disabled' \| boolean` | -                                                                    | 在自定义属性时禁用动画   |
+| `entering.value` | `EntryOrExitLayoutType` | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.out(Easing.ease))` | 自定义进入动画         |
+| `exiting.value`  | `EntryOrExitLayoutType` | `FadeOut`<br/>`.duration(200)`<br/>`.easing(Easing.in(Easing.ease))` | 自定义退出动画           |
+
+## Hooks
+
+### useAccordion
+
+访问手风琴根上下文，必须在 `Accordion` 内使用。
+
+```tsx
+import { useAccordion } from 'heroui-native';
+
+const { value, onValueChange, selectionMode, isCollapsible, isDisabled } =
+  useAccordion();
+```
+
+#### 返回值
+
+| property        | type                                                                  | description                                      |
+| --------------- | --------------------------------------------------------------------- | ------------------------------------------------ |
+| `selectionMode` | `'single' \| 'multiple' \| undefined`                                 | 单选或多选展开模式                               |
+| `value`         | `(string \| undefined) \| string[]`                                   | 当前展开项：单选为字符串，多选为数组             |
+| `onValueChange` | `(value: string \| undefined) => void \| ((value: string[]) => void)` | 更新展开项的回调                               |
+| `isCollapsible` | `boolean`                                                             | 已展开项是否可收起                               |
+| `isDisabled`    | `boolean \| undefined`                                                | 是否禁用全部条目                                 |
+
+### useAccordionItem
+
+访问单条条目上下文，必须在 `Accordion.Item` 内使用。
+
+```tsx
+import { useAccordionItem } from 'heroui-native';
+
+const { value, isExpanded, isDisabled, nativeID } = useAccordionItem();
+```
+
+#### 返回值
+
+| property     | type                   | description                          |
+| ------------ | ---------------------- | ------------------------------------ |
+| `value`      | `string`               | 该条目的唯一值                       |
+| `isExpanded` | `boolean`              | 当前是否展开                         |
+| `isDisabled` | `boolean \| undefined` | 该条目是否禁用                       |
+| `nativeID`   | `string`               | 无障碍与 ARIA 使用的原生 ID          |
+
+## 特别说明
+
+当 Accordion 与同屏其他组件一起使用时，请为这些组件导入并应用 `AccordionLayoutTransition`，以保证整屏布局动画一致、顺滑。
+
+```jsx
+import { Accordion, AccordionLayoutTransition } from 'heroui-native';
+import Animated from 'react-native-reanimated';
+
+<Animated.ScrollView layout={AccordionLayoutTransition}>
+  <Animated.View layout={AccordionLayoutTransition}>
+    {/* 其他内容 */}
+  </Animated.View>
+
+  <Accordion>{/* 手风琴条目 */}</Accordion>
+</Animated.ScrollView>;
+```
+
+这样在展开或收起时，屏幕上各组件会使用相同的时长与缓动，体验更统一。

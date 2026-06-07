@@ -1,0 +1,73 @@
+---
+title: Typography
+description: A semantic typography primitive for headings, body copy, and inline code built on React Aria Components Text.
+links:
+  source: typography/typography.tsx
+  styles: typography.css
+  storybook: Components/Typography
+---
+
+## Import
+
+```tsx
+import {Typography} from "@heroui/react";
+```
+
+## Usage
+
+<ComponentPreview name="typography-typography-scale" />
+
+`Typography` maps visual `type` values to semantic elements by default.
+
+## Primitives
+
+<ComponentPreview name="typography-primitives" />
+
+- `Typography.Heading` maps `level={1..6}` to `type="h1"` through `type="h6"`.
+- `Typography.Paragraph` maps `size="base" | "sm" | "xs"` to body text styles.
+- `Typography.Code` maps to the inline code style.
+- `Typography.Prose` styles rich content passed as regular HTML children.
+
+## Prose
+
+<ComponentPreview name="typography-prose" />
+
+## Render Prop
+
+<ComponentPreview name="typography-render-props" />
+
+Use the React Aria Components-style `render` prop when you need to customize the rendered element.
+
+## CSS Classes
+
+### Base Classes
+
+- `.typography` - Base typography primitive
+- `.typography-prose` - Rich prose container
+
+### Type Classes
+
+- `.typography--h1` through `.typography--h6`
+- `.typography--body`, `.typography--body-sm`, `.typography--body-xs`
+- `.typography--code`
+
+### Modifier Classes
+
+- `.typography--align-start`, `.typography--align-center`, `.typography--align-end`, `.typography--align-justify`
+- `.typography--color-default`, `.typography--color-muted`
+- `.typography--truncate`
+- `.typography--weight-normal`, `.typography--weight-medium`, `.typography--weight-semibold`, `.typography--weight-bold`
+
+## API Reference
+
+### Typography Props
+
+| Prop       | Type                                                                                           | Default     | Description                                    |
+| ---------- | ---------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------- |
+| `type`     | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'body' \| 'body-sm' \| 'body-xs' \| 'code'` | `'body'`    | Semantic typography style.                     |
+| `align`    | `'start' \| 'center' \| 'end' \| 'justify'`                                                 | `'start'`   | Text alignment.                                |
+| `color`    | `'default' \| 'muted'`                                                                        | `'default'` | Text color.                                    |
+| `weight`   | `'normal' \| 'medium' \| 'semibold' \| 'bold'`                                              | -           | Font weight override.                          |
+| `truncate` | `boolean`                                                                                      | -           | Truncates the text to one line with ellipsis.  |
+| `render`   | `DOMRenderFunction`                                                                            | -           | Custom render function from React Aria.        |
+| `children` | `ReactNode`                                                                                    | -           | Text content.                                  |

@@ -1,0 +1,145 @@
+---
+title: v1.0.1
+description: Toast 竞态修复、使用 disabled 修饰符的禁用态样式、背景层样式变量 backdrop
+github:
+  pull: 360
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 4 月 1 日</span>
+</div>
+
+HeroUI Native v1.0.1 是一次侧重可靠性与开发者体验的补丁版本。它修复了 Toast 提供程序中导致动画值过期的竞态条件，将七个组件的禁用态样式改为使用原生 `disabled:` 修饰符，并为主题系统新增 `--backdrop` 变量，供遮罩类组件使用。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 v1.0.1 的全部改进！你可以查看 Toast 修复、改进后的禁用态样式以及新的背景层变量。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## API 增强
+
+### `--backdrop` 主题变量
+
+主题系统新增顶层样式变量 `--backdrop`，为 Dialog、Bottom Sheet 等遮罩组件背后的变暗层提供专用色令牌。默认值为 `oklch(0% 0 0 / 20%)`，呈现轻微但可见的背景变暗效果。
+
+**新能力：**
+
+```tsx
+import { Dialog } from "heroui-native";
+
+// Dialog 与 Bottom Sheet 遮罩现自动使用 bg-backdrop
+<Dialog>
+  <Dialog.Content>
+    {/* 内容绘制在主题化背景层之上 */}
+  </Dialog.Content>
+</Dialog>
+```
+
+`--backdrop` 已纳入所有内置主题的浅色与深色模式，对应的 Tailwind 工具类 `bg-backdrop` 也可用于自定义组件样式。
+
+**相关 PR：** [#366](https://github.com/heroui-inc/heroui-native/pull/366)
+
+## 样式修复
+
+### 禁用态修饰符
+
+七个组件的禁用态样式已改为使用 `disabled:` 前缀修饰符，而非无条件应用样式。这样可确保 `opacity-disabled`、`pointer-events-none` 等仅在组件真实处于禁用态时生效，并尊重来自 Uniwind 的原生 `disabled` 修饰符。
+
+**涉及组件：**
+
+- [Button](/docs/native/components/button)
+- [Checkbox](/docs/native/components/checkbox)
+- [Input](/docs/native/components/input)
+- [Menu](/docs/native/components/menu)
+- [Switch](/docs/native/components/switch)
+- [Tabs](/docs/native/components/tabs)
+- [TagGroup](/docs/native/components/tag-group)
+
+所有 `isDisabled` 变体类现均使用 `disabled:` 前缀（例如 `disabled:opacity-disabled disabled:pointer-events-none`），正确限定在禁用伪状态，并在禁用态动态切换时消除样式冲突。
+
+**相关 PR：** [#361](https://github.com/heroui-inc/heroui-native/pull/361)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #359](https://github.com/heroui-inc/heroui-native/issues/359)**：修复 Toast 提供程序中 `total` SharedValue 与实际 Toast 数量可能不同步的竞态。原先手动增减在 `hide` 与 `show` 同一帧执行、或自动消失与手动隐藏竞速时，易出现闭包陈旧导致不一致。`total` 现通过 `useEffect` 由 `toasts.length` 派生，使透明度、缩放、translateY 等插值始终反映真实数量。
+
+- **[Issue #356](https://github.com/heroui-inc/heroui-native/issues/356)**：修复在 `isDisabled` 为 true 时禁用样式被无条件应用、阻碍开发者主题化或自定义禁用外观的问题。上述七个组件均已改为 `disabled:` 前缀，将样式正确限定在禁用伪状态。
+
+**相关 PR：**
+
+- [#360](https://github.com/heroui-inc/heroui-native/pull/360)
+- [#361](https://github.com/heroui-inc/heroui-native/pull/361)
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [Colors](/docs/native/getting-started/colors) — 在颜色参考中补充新的 `--backdrop` 变量
+- [Theming](/docs/native/getting-started/theming) — 主题指南中增加 `--backdrop` 变量说明
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

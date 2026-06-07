@@ -1,0 +1,197 @@
+---
+title: Label 标签
+description: 用于标注表单字段等 UI 的文本组件，支持必填标记与校验状态。
+links:
+  source_native: label/label.tsx
+  styles_native: label/label.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Label } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Label>
+  <Label.Text>...</Label.Text>
+</Label>
+```
+
+- **Label**：根容器，管理标签状态并为子组件提供上下文。传入字符串子节点时会自动渲染为 `Label.Text`。支持禁用、必填与非法状态。
+- **Label.Text**：标签文字；在必填时自动显示星号，非法或禁用时改变颜色。
+
+## 用法
+
+### 基础用法
+
+展示标签文字。字符串子节点会自动渲染为 `Label.Text`。
+
+```tsx
+<Label>用户名</Label>
+```
+
+### 与表单字段配合
+
+将 `Label` 与表单字段组合以提供无障碍标签。
+
+```tsx
+<TextField>
+  <Label>用户名</Label>
+  <Input placeholder="请输入用户名" />
+</TextField>
+```
+
+### 必填字段
+
+使用 `isRequired` 显示必填星号。
+
+```tsx
+<TextField>
+  <Label isRequired>密码</Label>
+  <Input placeholder="创建密码" secureTextEntry />
+</TextField>
+```
+
+### 非法状态
+
+在校验失败时使用非法样式突出标签。
+
+```tsx
+import { FieldError, Label, TextField } from 'heroui-native';
+
+<TextField isInvalid>
+  <Label isInvalid>确认密码</Label>
+  <Input
+    placeholder="再次输入密码"
+    secureTextEntry
+    value="different"
+    editable={false}
+  />
+  <FieldError>两次密码不一致</FieldError>
+</TextField>
+```
+
+### 禁用状态
+
+禁用标签以表示字段不可交互。
+
+```tsx
+<TextField isDisabled>
+  <Label>订阅方案</Label>
+  <Input value="Premium" />
+</TextField>
+```
+
+### 自定义布局
+
+使用复合子组件自定义标签结构。
+
+```tsx
+<Label>
+  <Label.Text>自定义标签</Label.Text>
+</Label>
+```
+
+### 自定义样式
+
+通过 `className`、`classNames` 或 `styles` 传入样式。
+
+```tsx
+<Label className="mb-2">
+  <Label.Text
+    className="text-lg"
+    classNames={{
+      text: "font-bold",
+      asterisk: "text-danger"
+    }}
+  >
+    自定义样式标签
+  </Label.Text>
+</Label>
+```
+
+## 示例
+
+```tsx
+import { FieldError, Label, TextField } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function LabelExample() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-8">
+      <TextField>
+        <Label>用户名</Label>
+        <Input placeholder="请输入用户名" />
+      </TextField>
+      <TextField>
+        <Label isRequired>密码</Label>
+        <Input placeholder="创建密码" secureTextEntry />
+      </TextField>
+      <TextField isInvalid>
+        <Label isInvalid>确认密码</Label>
+        <Input
+          placeholder="再次输入密码"
+          secureTextEntry
+          value="different"
+          editable={false}
+        />
+        <FieldError>两次密码不一致</FieldError>
+      </TextField>
+      <TextField isDisabled>
+        <Label>订阅方案</Label>
+        <Input value="Premium" />
+      </TextField>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/label.tsx)。
+
+## API 参考
+
+### Label
+
+| prop                | type                         | default     | description                                                                                                   |
+| ------------------- | ---------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode`            | -           | 标签内容。为字符串时自动渲染为 `Label.Text`；否则按原样渲染子节点                                               |
+| `isRequired`        | `boolean`                    | `false`     | 是否必填；为 true 时显示星号                                                                                   |
+| `isInvalid`         | `boolean`                    | `false`     | 是否非法；为 true 时文字使用危险色                                                                             |
+| `isDisabled`        | `boolean`                    | `false`     | 是否禁用；应用禁用样式并阻止交互                                                                               |
+| `className`         | `string`                     | -           | 额外的 class                                                                                                  |
+| `animation`         | `"disable-all" \| undefined` | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级的全部动画                                                           |
+| `...PressableProps` | `PressableProps`             | -           | 支持 React Native `Pressable` 的全部属性                                                                       |
+
+### Label.Text
+
+| prop           | type                                     | default | description                                                                        |
+| -------------- | ---------------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                        | -       | 标签文字内容                                                                       |
+| `className`    | `string`                                 | -       | 文本元素的额外 class                                                               |
+| `classNames`   | `ElementSlots<LabelSlots>`               | -       | 标签各部分的额外 class                                                             |
+| `styles`       | `Partial<Record<LabelSlots, TextStyle>>` | -       | 标签各部分的样式                                                                   |
+| `nativeID`     | `string`                                 | -       | 无障碍用原生 ID，通过 aria-labelledby 关联表单控件                                 |
+| `...TextProps` | `TextProps`                              | -       | 支持 React Native `Text` 的全部属性                                                |
+
+#### `ElementSlots<LabelSlots>`
+
+| prop       | type     | description        |
+| ---------- | -------- | ------------------ |
+| `text`     | `string` | 标签文字的 class   |
+| `asterisk` | `string` | 星号的 class       |
+
+#### `styles`
+
+| prop       | type        | description |
+| ---------- | ----------- | ----------- |
+| `text`     | `TextStyle` | 标签文字样式 |
+| `asterisk` | `TextStyle` | 星号样式     |

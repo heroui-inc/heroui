@@ -99,6 +99,7 @@ const ColorPickerPopover = ({
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}
+        data-slot="color-picker-popover"
         placement={placement}
       >
         {children}

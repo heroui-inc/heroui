@@ -1,0 +1,366 @@
+---
+title: Beta 12
+description: InputOTP、Label、Description 组件，Popover 关闭修复，受控状态改进，圆角修复，以及变体样式属性支持
+github:
+  pull: 214
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 1 月 13 日</span>
+</div>
+
+Beta 12 新增三个核心表单组件——InputOTP、Label、Description——强化 React Native 中的表单搭建能力。另含 Popover 关闭行为、弹层受控状态、圆角配置等关键修复，并为多个表单组件增加变体样式属性支持，使表单组件更稳健、样式与行为更易控。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native@beta
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native@beta
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native@beta
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native@beta
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 Beta 12！你可以探索 InputOTP、Label、Description，以及 Popover 修复、受控状态改进、圆角修复与变体样式属性支持。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## 更新亮点
+
+### 新组件
+
+本版本新增 **3** 个核心表单组件：
+
+- **[InputOTP](/docs/native/components/input-otp)**：一次性密码输入，独立字符格、动画与校验支持。
+- **[Label](/docs/native/components/label)**：表单与界面元素标签文本，支持必填标记与校验态。
+- **[Description](/docs/native/components/description)**：无障碍说明与辅助文案，用于表单等场景。
+
+#### InputOTP
+
+InputOTP 为双因素认证、验证码、PIN 等场景提供完整方案：独立字符格与流畅动画、可自定义分组与分隔符、全面校验支持。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="input-otp"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 独立字符格、流畅动画与光标指示
+- 灵活分组与分隔符
+- 基于模式的输入限制（数字、字符或自定义正则）
+- 受控/非受控值管理
+- 校验态与视觉反馈
+- 每位占位符可配置
+- 粘贴支持与转换函数
+- 完整无障碍支持
+
+**用法：**
+
+```tsx
+import { InputOTP, Label, Description } from "heroui-native";
+
+export function Example() {
+  return (
+    <>
+      <Label>Verify account</Label>
+      <InputOTP maxLength={6} onComplete={(code) => console.log(code)}>
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+        </InputOTP.Group>
+        <InputOTP.Separator />
+        <InputOTP.Group>
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
+      <Description>We've sent a code to your email</Description>
+    </>
+  );
+}
+```
+
+完整文档与示例见 [InputOTP 组件页](/docs/native/components/input-otp)。
+
+**相关 PR：** [#214](https://github.com/heroui-inc/heroui-native/pull/214)
+
+#### Label
+
+Label 为表单字段提供无障碍标签，内置必填星号、校验态与禁用态，并随字段校验状态自适应样式。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="label"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/label-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 必填字段自动显示星号
+- 非法态样式
+- 禁用态支持
+- 复合结构便于自定义布局
+- 通过 nativeID 关联的完整无障碍支持
+- 支持 `className`、`classNames`、`styles` 定制样式
+
+**用法：**
+
+```tsx
+import { Label, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <Label isRequired>Password</Label>
+      <TextField.Input placeholder="Create a password" secureTextEntry />
+    </TextField>
+  );
+}
+```
+
+完整文档与示例见 [Label 组件页](/docs/native/components/label)。
+
+**相关 PR：** [#214](https://github.com/heroui-inc/heroui-native/pull/214)
+
+#### Description
+
+Description 为表单字段提供无障碍辅助说明，默认弱化样式，并可通过 nativeID 与字段关联以支持读屏。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="description"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/description-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/description-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 适合辅助文案的弱化文本样式
+- 通过 nativeID 与 `aria-describedby` 关联无障碍
+- 与表单组件无缝集成
+- 支持自定义样式
+
+**用法：**
+
+```tsx
+import { Description, TextField } from "heroui-native";
+
+export function Example() {
+  return (
+    <TextField>
+      <TextField.Label>Email address</TextField.Label>
+      <TextField.Input
+        placeholder="Enter your email"
+        keyboardType="email-address"
+        aria-describedby="email-desc"
+      />
+      <Description nativeID="email-desc">
+        We'll never share your email with anyone else.
+      </Description>
+    </TextField>
+  );
+}
+```
+
+完整文档与示例见 [Description 组件页](/docs/native/components/description)。
+
+**相关 PR：** [#214](https://github.com/heroui-inc/heroui-native/pull/214)
+
+## 组件改进
+
+### Popover 通过 ref 关闭修复
+
+[Popover](/docs/native/components/popover) 已修复通过 ref 程序化关闭时的行为。
+
+**改进：**
+
+- 基于 ref 的关闭方法现能正确触发关闭动画
+- ref 调用与组件内部状态的同步改进
+- 程序化关闭更可靠
+
+确保调用 `popoverRef.current?.close()` 时能可靠关闭并正确管理状态与动画。
+
+**相关 PR：** [#207](https://github.com/heroui-inc/heroui-native/pull/207)
+
+### 弹层受控状态修复
+
+Dialog、Bottom Sheet、Popover 等弹层组件已修复通过 `isOpen` 的受控状态。
+
+**改进：**
+
+- 受控状态同步修复
+- 外部状态变更的处理改进
+- 受控模式下行为更可预期
+
+**相关 PR：** [#215](https://github.com/heroui-inc/heroui-native/pull/215)
+
+### Button、Chip、Tabs 圆角修复
+
+[Button](/docs/native/components/button)、[Chip](/docs/native/components/chip)、[Tabs](/docs/native/components/tabs) 已修复对全局圆角配置的尊重。
+
+**改进：**
+
+- Button 全局圆角应用修复
+- Chip 圆角应用修复
+- Tabs 圆角应用修复
+- 使用全局主题配置的组件间一致性提升
+
+**相关 PR：** [#218](https://github.com/heroui-inc/heroui-native/pull/218)
+
+### TextField.Input 属性精简
+
+[TextField](/docs/native/components/text-field) 的 Input 子组件已移除 `animation` 与 `isAnimatedStyleActive`。
+
+**变更：**
+
+- 自 TextField.Input 移除 `animation`
+- 自 TextField.Input 移除 `isAnimatedStyleActive`
+- API 简化，更易维护
+
+动画行为现由组件内部统一处理，无需手动配置动画属性。
+
+**相关 PR：** [#220](https://github.com/heroui-inc/heroui-native/pull/220)
+
+## API 增强
+
+### HeroUINativeProvider 的 devInfo 配置
+
+`HeroUINativeProvider` 现支持 `devInfo` 配置项，便于开发与调试。
+
+**新能力：**
+
+```tsx
+import { HeroUINativeProvider } from "heroui-native";
+
+export function App() {
+  return (
+    <HeroUINativeProvider
+      devInfo={{
+        // 开发期配置项
+      }}
+    >
+      {/* 应用内容 */}
+    </HeroUINativeProvider>
+  );
+}
+```
+
+**相关 PR：** [#217](https://github.com/heroui-inc/heroui-native/pull/217)
+
+### 变体样式属性支持
+
+[Checkbox](/docs/native/components/checkbox)、[Radio](/docs/native/components/radio)、[TextField](/docs/native/components/text-field)、[InputOTP](/docs/native/components/input-otp) 现支持通过 `variant` 样式属性更便捷地覆盖变体样式。
+
+**新能力：**
+
+```tsx
+import { Checkbox, Radio, TextField, InputOTP } from "heroui-native";
+
+<Checkbox variant="bordered" style={{ variant: "flat" }}>
+  Option 1
+</Checkbox>
+
+<Radio variant="solid" style={{ variant: "bordered" }}>
+  Option 2
+</Radio>
+
+<TextField variant="underlined" style={{ variant: "bordered" }}>
+  <TextField.Input />
+</TextField>
+```
+
+除组件 `variant` 属性外，也可通过 style 中的变体信息灵活调整外观。
+
+**相关 PR：** [#220](https://github.com/heroui-inc/heroui-native/pull/220)
+
+## 样式修复
+
+### 圆角配置
+
+修复全局圆角未正确应用到部分组件的问题。
+
+**修复：**
+
+- Button 未尊重全局圆角
+- Chip 圆角应用
+- Tabs 圆角应用
+
+### 样式优化
+
+- **圆角一致性**：Button、Chip、Tabs 的圆角应用更一致
+- **主题配置**：主题传播增强，组件更一致地尊重全局设置
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #93](https://github.com/heroui-inc/heroui-native/issues/93)**：修复在 Unwind 场景下 Button 未应用全局圆角的问题，现与主题全局圆角一致。
+
+- **[Issue #213](https://github.com/heroui-inc/heroui-native/issues/213)**：修复 Select 受控模式（`isOpen`）不生效的问题；提供 `isOpen` 时可在外部可靠管理开闭。
+
+**相关 PR：**
+
+- [#218](https://github.com/heroui-inc/heroui-native/pull/218)
+- [#215](https://github.com/heroui-inc/heroui-native/pull/215)
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

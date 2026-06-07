@@ -1,0 +1,253 @@
+---
+title: ControlField 控件字段
+description: 将标签、说明（或其他内容）与控件（Switch 或 Checkbox）组合为单一可按压区域的字段组件。
+links:
+  source_native: control-field/control-field.tsx
+  styles_native: control-field/control-field.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/control-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/control-field-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { ControlField } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<ControlField>
+  <Label>...</Label>
+  <Description>...</Description>
+  <ControlField.Indicator>...</ControlField.Indicator>
+  <FieldError>...</FieldError>
+</ControlField>
+```
+
+- **ControlField**：根容器，管理布局与状态向下传递
+- **Label**：主标签（来自 [Label](./label)）
+- **Description**：辅助说明（来自 [Description](./description)）
+- **ControlField.Indicator**：表单控件容器（[Switch](./switch)、[Checkbox](./checkbox)、[Radio](./radio)）
+- **FieldError**：校验错误展示（来自 [FieldError](./field-error)）
+
+## 用法
+
+### 基础用法
+
+ControlField 包裹控件，提供一致布局与状态管理。
+
+```tsx
+<ControlField isSelected={value} onSelectedChange={setValue}>
+  <Label className="flex-1">Label text</Label>
+  <ControlField.Indicator />
+</ControlField>
+```
+
+### 带说明
+
+在标签下使用 Description 添加辅助说明。
+
+```tsx
+<ControlField isSelected={value} onSelectedChange={setValue}>
+  <View className="flex-1">
+    <Label>Enable notifications</Label>
+    <Description>
+      Receive push notifications about your account activity
+    </Description>
+  </View>
+  <ControlField.Indicator />
+</ControlField>
+```
+
+### 带错误信息
+
+使用 FieldError 展示校验错误。
+
+```tsx
+<ControlField
+  isSelected={value}
+  onSelectedChange={setValue}
+  isInvalid={!value}
+  className="flex-col items-start gap-1"
+>
+  <View className="flex-row items-center gap-2">
+    <View className="flex-1">
+      <Label>I agree to the terms</Label>
+      <Description>
+        By checking this box, you agree to our Terms of Service
+      </Description>
+    </View>
+    <ControlField.Indicator variant="checkbox" />
+  </View>
+  <FieldError>This field is required</FieldError>
+</ControlField>
+```
+
+### 禁用态
+
+使用 `isDisabled` 控制是否可交互。
+
+```tsx
+<ControlField isSelected={value} onSelectedChange={setValue} isDisabled>
+  <View className="flex-1">
+    <Label>Disabled field</Label>
+    <Description>This field is disabled</Description>
+  </View>
+  <ControlField.Indicator />
+</ControlField>
+```
+
+### 关闭所有动画
+
+使用 `"disable-all"` 关闭根及子级全部动画。
+
+```tsx
+<ControlField
+  isSelected={value}
+  onSelectedChange={setValue}
+  animation="disable-all"
+>
+  <View className="flex-1">
+    <Label>Label text</Label>
+    <Description>Description text</Description>
+  </View>
+  <ControlField.Indicator />
+</ControlField>
+```
+
+## 示例
+
+```tsx
+import {
+  Checkbox,
+  Description,
+  FieldError,
+  ControlField,
+  Label,
+  Switch,
+} from 'heroui-native';
+import React from 'react';
+import { ScrollView, View } from 'react-native';
+
+export default function ControlFieldExample() {
+  const [notifications, setNotifications] = React.useState(false);
+  const [terms, setTerms] = React.useState(false);
+  const [newsletter, setNewsletter] = React.useState(true);
+
+  return (
+    <ScrollView className="bg-background p-4">
+      <View className="gap-4">
+        <ControlField
+          isSelected={notifications}
+          onSelectedChange={setNotifications}
+        >
+          <View className="flex-1">
+            <Label>Enable notifications</Label>
+            <Description>
+              Receive push notifications about your account activity
+            </Description>
+          </View>
+          <ControlField.Indicator />
+        </ControlField>
+
+        <ControlField
+          isSelected={terms}
+          onSelectedChange={setTerms}
+          isInvalid={!terms}
+          className="flex-col items-start gap-1"
+        >
+          <View className="flex-row items-center gap-2">
+            <View className="flex-1">
+              <Label>I agree to the terms and conditions</Label>
+              <Description>
+                By checking this box, you agree to our Terms of Service
+              </Description>
+            </View>
+            <ControlField.Indicator className="mt-0.5">
+              <Checkbox />
+            </ControlField.Indicator>
+          </View>
+          <FieldError>This field is required</FieldError>
+        </ControlField>
+
+        <ControlField isSelected={newsletter} onSelectedChange={setNewsletter}>
+          <View className="flex-1">
+            <Label>Subscribe to newsletter</Label>
+          </View>
+          <ControlField.Indicator>
+            <Checkbox color="warning" />
+          </ControlField.Indicator>
+        </ControlField>
+      </View>
+    </ScrollView>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/control-field.tsx)。
+
+## API 参考
+
+### ControlField
+
+| prop              | type                                                                       | default     | description                                                                               |
+| ----------------- | -------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| children          | `React.ReactNode \| ((props: ControlFieldRenderProps) => React.ReactNode)` | -           | 字段内部内容或渲染函数                                                                     |
+| isSelected        | `boolean`                                                                  | `undefined` | 是否选中/勾选                                                                             |
+| isDisabled        | `boolean`                                                                  | `false`     | 是否禁用                                                                                  |
+| isInvalid         | `boolean`                                                                  | `false`     | 是否非法                                                                                  |
+| isRequired        | `boolean`                                                                  | `false`     | 是否必填                                                                                  |
+| className         | `string`                                                                   | -           | 根元素自定义 class                                                                        |
+| onSelectedChange  | `(isSelected: boolean) => void`                                            | -           | 选中状态变化时回调                                                                        |
+| animation         | `"disable-all" \| undefined`                                               | `undefined` | 动画配置；`"disable-all"` 时关闭根及子级全部动画                                           |
+| ...PressableProps | `PressableProps`                                                           | -           | 支持 React Native Pressable 全部属性                                                      |
+
+### Label
+
+`Label` 会自动消费 ControlField 上下文中的表单状态（`isDisabled`、`isInvalid`）。
+
+**说明**：完整属性见 [Label 组件文档](./label)。
+
+### Description
+
+`Description` 会自动消费 ControlField 上下文中的表单状态（`isDisabled`、`isInvalid`）。
+
+**说明**：完整属性见 [Description 组件文档](./description)。
+
+### ControlField.Indicator
+
+| prop         | type                                | default    | description                                                |
+| ------------ | ----------------------------------- | ---------- | ---------------------------------------------------------- |
+| children     | `React.ReactNode`                   | -          | 要渲染的控件（Switch、Checkbox、Radio）                    |
+| variant      | `'checkbox' \| 'radio' \| 'switch'` | `'switch'` | 未提供 children 时渲染的内置变体                           |
+| className    | `string`                            | -          | 指示器容器自定义 class                                     |
+| ...ViewProps | `ViewProps`                         | -          | 支持 React Native View 全部属性                            |
+
+**说明：** 提供 `children` 时，若子组件上尚未设置，会自动从 ControlField 上下文传入 `isSelected`、`onSelectedChange`、`isDisabled`、`isInvalid`。使用 `radio` 变体时，Radio 以独立模式渲染（不在 RadioGroup 内）。
+
+### FieldError
+
+`FieldError` 会自动消费 ControlField 上下文中的 `isInvalid`。
+
+**说明**：完整属性见 [FieldError 组件文档](./field-error)。显隐由父级 ControlField 的 `isInvalid` 控制。
+
+## Hooks
+
+### useControlField
+
+在 `ControlField` 内访问字段上下文（用于自定义子结构）。
+
+**返回值：**
+
+| property           | type                                           | description                                    |
+| ------------------ | ---------------------------------------------- | ---------------------------------------------- |
+| `isSelected`       | `boolean \| undefined`                         | 是否选中/勾选                                  |
+| `onSelectedChange` | `((isSelected: boolean) => void) \| undefined` | 选中状态变化回调                               |
+| `isDisabled`       | `boolean`                                      | 是否禁用                                       |
+| `isInvalid`        | `boolean`                                      | 是否非法                                       |
+| `isPressed`        | `SharedValue<boolean>`                         | Reanimated 共享值，表示按压状态                |

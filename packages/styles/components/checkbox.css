@@ -3,33 +3,32 @@
    ========================================================================== */
 
 .checkbox {
-  @apply flex gap-3 outline-none no-highlight;
+  @apply flex flex-col items-start gap-1 outline-none no-highlight;
 
   cursor: var(--cursor-interactive);
 
-  /* Align center when there's no description */
-  &:not(:has([data-slot="description"])) {
-    @apply items-center;
-  }
-
-  /* Align start when there's a description */
-  &:has([data-slot="description"]) {
-    @apply items-start;
+  /* Field-level help text (siblings of the button), indented to align under the label */
+  & > [data-slot="description"],
+  & > [data-slot="field-error"] {
+    @apply w-full min-w-0 cursor-default ps-7 text-xs text-wrap wrap-break-word text-muted select-none;
   }
 
   [data-slot="label"] {
     @apply select-none;
   }
 
-  [data-slot="description"] {
-    @apply text-wrap select-none;
+  .checkbox__content [data-slot="label"] {
+    cursor: var(--cursor-interactive);
   }
 
   /* Disabled state */
-  &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled="true"] {
     @apply status-disabled;
+
+    [data-slot="description"],
+    [data-slot="field-error"] {
+      @apply status-disabled;
+    }
   }
 
   /* Indicator styles */
@@ -97,11 +96,6 @@
 
   cursor: var(--cursor-interactive);
 
-  /* Add top margin when there's a description */
-  .checkbox:has([data-slot="description"]) & {
-    @apply mt-0.5;
-  }
-
   /* Background indicator pseudo-element */
   &::before {
     @apply pointer-events-none absolute inset-0 z-0 origin-center scale-70 rounded-md bg-accent opacity-0 content-[''];
@@ -120,13 +114,15 @@
   /* Interactive states */
   /* Focus */
   .checkbox:focus-visible &,
-  .checkbox[data-focus-visible="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-focus-visible="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-focus-visible="true"] & {
     @apply status-focused;
   }
 
   /* Hover */
   .checkbox:hover &,
-  .checkbox[data-hovered="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-hovered="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-hovered="true"] & {
     @apply border-field-border-hover;
 
     &::before {
@@ -136,7 +132,8 @@
 
   /* Pressed */
   .checkbox:active &,
-  .checkbox[data-pressed="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-pressed="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-pressed="true"] & {
   }
 
   /* Selection states */
@@ -157,7 +154,8 @@
 
   /* Indeterminate + Pressed */
   .checkbox:active[data-indeterminate="true"] &,
-  .checkbox[data-pressed="true"][data-indeterminate="true"] & {
+  .checkbox[data-pressed="true"][data-indeterminate="true"] &,
+  .checkbox:has([data-slot="checkbox-content"][data-pressed="true"])[data-indeterminate="true"] & {
     @apply bg-accent-hover;
   }
 
@@ -201,16 +199,8 @@
   @apply relative z-10 flex size-3 items-center justify-center;
 
   & svg {
-    @apply transform-gpu;
+    @apply size-full transform-gpu;
   }
-}
-
-/* ==========================================================================
-   Checkbox content wrapper
-   ========================================================================== */
-
-.checkbox__content {
-  @apply flex flex-col gap-0;
 }
 
 /* ==========================================================================
@@ -237,9 +227,15 @@
 
   /* Hover state */
   .checkbox:hover &,
-  .checkbox[data-hovered="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-hovered="true"]) &,
+  .checkbox [data-slot="checkbox-content"][data-hovered="true"] & {
     @apply border-field-border-hover;
   }
+}
+
+/* Checkbox content — the clickable label (control + label text) */
+.checkbox__content {
+  @apply inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
 }
 
 /* Unselected state background for secondary variant */

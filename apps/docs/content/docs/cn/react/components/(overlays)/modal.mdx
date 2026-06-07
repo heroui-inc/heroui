@@ -1,0 +1,292 @@
+---
+title: Modal 模态框
+description: 用于聚焦用户交互与重要内容的对话框遮罩层。
+links:
+  rac: Modal
+  source: modal/modal.tsx
+  styles: modal.css
+  storybook: modal
+---
+
+## 引入
+
+```tsx
+import { Modal } from "@heroui/react";
+```
+
+### 用法
+
+<ComponentPreview name="modal-default" />
+
+### 组件结构
+
+导入 Modal 组件后，可通过点语法访问所有子部分。
+
+```tsx
+import {Modal, Button} from "@heroui/react";
+
+export default () => (
+  <Modal>
+    <Button>Open Modal</Button>
+    <Modal.Backdrop>
+      <Modal.Container>
+        <Modal.Dialog>
+          <Modal.CloseTrigger /> {/* Optional: Close button */}
+          <Modal.Header>
+            <Modal.Icon /> {/* Optional: Icon */}
+            <Modal.Heading />
+          </Modal.Header>
+          <Modal.Body />
+          <Modal.Footer />
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal>
+);
+```
+
+### 位置
+
+<ComponentPreview name="modal-placements" />
+
+### 遮罩变体
+
+<ComponentPreview name="modal-backdrop-variants" />
+
+### 尺寸
+
+<ComponentPreview name="modal-sizes" />
+
+### 自定义遮罩
+
+<ComponentPreview name="modal-custom-backdrop" />
+
+### 关闭行为
+
+<ComponentPreview name="modal-dismiss-behavior" />
+
+### 关闭方式
+
+<ComponentPreview name="modal-close-methods" />
+
+### 滚动行为
+
+<ComponentPreview name="modal-scroll-comparison" />
+
+### 受控状态
+
+<ComponentPreview name="modal-controlled" />
+
+### 带表单
+
+<ComponentPreview name="modal-with-form" />
+
+### 自定义触发器
+
+<ComponentPreview name="modal-custom-trigger" />
+
+### 自定义动画
+
+<ComponentPreview name="modal-custom-animations" />
+
+### 自定义 Portal
+
+<ComponentPreview name="modal-custom-portal" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {Modal, Button} from "@heroui/react";
+
+function CustomModal() {
+  return (
+    <Modal>
+      <Button>Open Modal</Button>
+      <Modal.Backdrop className="bg-black/80">
+        <Modal.Container className="items-start pt-20">
+          <Modal.Dialog className="bg-linear-to-br from-purple-500 to-pink-500 text-white">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>Custom Styled Modal</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <p>This modal has custom styling applied via Tailwind classes</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button slot="close">Close</Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 Modal 的组件类，可使用 `@layer components` 指令。
+
+<br />
+[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .modal__backdrop {
+    @apply bg-gradient-to-br from-black/50 to-black/70;
+  }
+
+  .modal__dialog {
+    @apply rounded-2xl border border-white/10 shadow-2xl;
+  }
+
+  .modal__header {
+    @apply text-center;
+  }
+
+  .modal__close-trigger {
+    @apply rounded-full bg-white/10 hover:bg-white/20;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Modal 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/modal.css)）：
+
+#### 基础类
+- `.modal__trigger` — 打开 Modal 的触发元素
+- `.modal__backdrop` — Modal 背后的遮罩层
+- `.modal__container` — 支持 placement 的定位包裹层
+- `.modal__dialog` — Modal 内容容器
+- `.modal__header` — 标题与图标区域
+- `.modal__body` — 主内容区域
+- `.modal__footer` — 操作区域
+- `.modal__close-trigger` — 关闭按钮元素
+
+#### 遮罩变体
+- `.modal__backdrop--opaque` — 不透明有色遮罩（默认）
+- `.modal__backdrop--blur` — 带玻璃效果的模糊遮罩
+- `.modal__backdrop--transparent` — 透明遮罩（无叠加层）
+
+#### 滚动变体
+- `.modal__container--scroll-outside` — 允许整个 Modal 滚动
+- `.modal__dialog--scroll-inside` — 限制 Modal 高度，由 body 区域滚动
+- `.modal__body--scroll-inside` — 仅 body 区域可滚动
+- `.modal__body--scroll-outside` — 允许整页滚动
+
+### 交互状态
+
+组件支持以下交互状态：
+
+- **焦点**：`:focus-visible` 或 `[data-focus-visible="true"]` — 应用于触发器、对话框与关闭按钮
+- **悬停**：`:hover` 或 `[data-hovered="true"]` — 应用于关闭按钮悬停
+- **按下**：`:active` 或 `[data-pressed="true"]` — 应用于关闭按钮按下
+- **进入**：`[data-entering]` — Modal 打开动画期间
+- **离开**：`[data-exiting]` — Modal 关闭动画期间
+- **位置**：`[data-placement="*"]` — 基于 Modal 位置（auto、top、center、bottom）
+
+## API 参考
+
+### Modal
+
+| Prop       | 类型        | 默认值 | 描述                    |
+| ---------- | ----------- | ------ | ----------------------- |
+| `children` | `ReactNode` | -      | 触发器与容器元素        |
+
+### Modal.Trigger
+
+| Prop        | 类型        | 默认值 | 描述             |
+| ----------- | ----------- | ------ | ---------------- |
+| `children`  | `ReactNode` | -      | 自定义触发内容   |
+| `className` | `string`    | -      | CSS 类           |
+
+### Modal.Backdrop
+
+| Prop                        | 类型                                  | 默认值    | 描述                 |
+| --------------------------- | ------------------------------------- | --------- | -------------------- |
+| `variant`                   | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | 遮罩叠加样式         |
+| `isDismissable`             | `boolean`                             | `true`    | 点击遮罩是否关闭     |
+| `isKeyboardDismissDisabled` | `boolean`                             | `false`   | 是否禁用 ESC 关闭    |
+| `isOpen`                    | `boolean`                             | -         | 受控打开状态         |
+| `onOpenChange`              | `(isOpen: boolean) => void`           | -         | 打开状态变化处理函数 |
+| `className`                 | `string \| (values) => string`        | -         | 遮罩 CSS 类          |
+| `UNSTABLE_portalContainer`  | `HTMLElement`                         | -         | 自定义 portal 容器   |
+
+### Modal.Container
+
+| Prop        | 类型                                      | 默认值    | 描述                |
+| ----------- | ----------------------------------------- | --------- | ------------------- |
+| `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"`  | Modal 在屏幕上的位置 |
+| `scroll`    | `"inside" \| "outside"`                   | `"inside"` | 滚动行为            |
+| `size`      | `"xs" \| "sm" \| "md" \| "lg" \| "cover" \| "full"` | `"md"` | Modal 尺寸变体      |
+| `className` | `string \| (values) => string`            | -         | 容器 CSS 类         |
+
+### Modal.Dialog
+
+| Prop               | 类型                                  | 默认值    | 描述                   |
+| ------------------ | ------------------------------------- | --------- | ---------------------- |
+| `children`         | `ReactNode \| ({close}) => ReactNode` | -         | 内容或渲染函数         |
+| `className`        | `string \| (values) => string`        | -         | CSS 类                 |
+| `role`             | `string`                              | `"dialog"` | ARIA role              |
+| `aria-label`       | `string`                              | -         | 无障碍标签             |
+| `aria-labelledby`  | `string`                              | -         | 标签元素的 id          |
+| `aria-describedby` | `string`                              | -         | 描述元素的 id          |
+
+### Modal.Header
+
+| Prop        | 类型        | 默认值 | 描述       |
+| ----------- | ----------- | ------ | ---------- |
+| `children`  | `ReactNode` | -      | 头部内容   |
+| `className` | `string`    | -      | CSS 类     |
+
+### Modal.Body
+
+| Prop        | 类型        | 默认值 | 描述     |
+| ----------- | ----------- | ------ | -------- |
+| `children`  | `ReactNode` | -      | 正文内容 |
+| `className` | `string`    | -      | CSS 类   |
+
+### Modal.Footer
+
+| Prop        | 类型        | 默认值 | 描述     |
+| ----------- | ----------- | ------ | -------- |
+| `children`  | `ReactNode` | -      | 底部内容 |
+| `className` | `string`    | -      | CSS 类   |
+
+### Modal.CloseTrigger
+
+| Prop        | 类型                           | 默认值 | 描述           |
+| ----------- | ------------------------------ | ------ | -------------- |
+| `children`  | `ReactNode`                    | -      | 自定义关闭按钮 |
+| `className` | `string \| (values) => string` | -      | CSS 类         |
+
+### useOverlayState Hook
+
+```tsx
+import {useOverlayState} from "@heroui/react";
+
+const state = useOverlayState({
+  defaultOpen: false,
+  onOpenChange: (isOpen) => console.log(isOpen),
+});
+
+state.isOpen; // 当前状态
+state.open(); // 打开 modal
+state.close(); // 关闭 modal
+state.toggle(); // 切换状态
+state.setOpen(); // 直接设置状态
+```
+
+## 无障碍
+
+实现 [WAI-ARIA Dialog 模式](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)：
+
+- **焦点陷阱**：焦点锁定在 Modal 内
+- **键盘**：`ESC` 关闭（启用时）、`Tab` 在元素间循环
+- **屏幕阅读器**：正确的 ARIA 属性
+- **滚动锁定**：打开时禁用 body 滚动

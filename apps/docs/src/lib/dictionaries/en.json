@@ -1,0 +1,334 @@
+{
+  "home": {
+    "releaseBadges": [
+      {
+        "label": "HeroUI React v3.2.0 — Calendar views & toggle changes",
+        "href": "/docs/react/releases/v3-2-0"
+      },
+      {
+        "label": "New CLI: create-heroui-native-app v1.0.0",
+        "href": "/docs/native/releases/create-heroui-native-app"
+      }
+    ],
+    "titleMain": "Beautiful by default.",
+    "titleMuted": "Customizable by design.",
+    "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
+    "getStarted": "Get started",
+    "viewComponents": "View components",
+    "githubStarsPrefix": "Open source with",
+    "githubStarsSuffix": "stars",
+    "demo": {
+      "proTemplate": "Available in Pro as template",
+      "themeBuilder": "Open in theme builder"
+    }
+  },
+  "nav": {
+    "documentation": "Documentation",
+    "resources": "Resources",
+    "gettingStarted": "Getting Started",
+    "themes": "Themes",
+    "components": "Components",
+    "reactNative": "React Native",
+    "reactNativeShort": "Native",
+    "releases": "Releases",
+    "blog": "Blog",
+    "docs": "Docs",
+    "roadmap": "Roadmap"
+  },
+  "notFound": {
+    "imageAlt": "404 Not Found",
+    "title": "404",
+    "description": "Sorry, the page you're looking for could not be found.",
+    "returnHome": "Return Home"
+  },
+  "blog": {
+    "heading": "Blog",
+    "metaTitle": "Blog | HeroUI",
+    "metaDescription": "Guides, tutorials, and resources for building modern React applications with HeroUI. Comparisons, best practices, and more.",
+    "categoriesAriaLabel": "Blog categories",
+    "categories": {
+      "all": "All",
+      "tutorial": "Guides",
+      "comparison": "Comparisons",
+      "native": "Native",
+      "uiLibraries": "Resources"
+    },
+    "latestPosts": "Latest Posts",
+    "emptyState": "No posts found for this category.",
+    "backToBlog": "Back to Blog",
+    "relatedPosts": "Related Posts"
+  },
+  "showcase": {
+    "heading": "Showcase",
+    "description": "Explore interactive examples showcasing HeroUI components in real-world scenarios."
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved."
+  },
+  "newsletter": {
+    "label": "Hero Newsletter",
+    "placeholder": "name@email.com",
+    "subscribe": "Subscribe",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email.",
+    "apiError": "Failed to subscribe newsletter",
+    "genericError": "Something went wrong. Please try again."
+  },
+  "statusChip": {
+    "new": "New",
+    "preview": "Preview",
+    "updated": "Updated"
+  },
+  "frameworksTabs": {
+    "ariaLabel": "Documentation framework",
+    "web": "Web",
+    "native": "Native"
+  },
+  "searchDialog": {
+    "placeholder": "What are you searching for?",
+    "jumpTo": "Jump to"
+  },
+  "componentLinks": {
+    "source": "Source",
+    "stylesSource": "Styles source",
+    "themeSource": "Theme source"
+  },
+  "copyPrompt": {
+    "copy": "Copy prompt",
+    "copied": "Copied",
+    "ariaLabelCopy": "Copy prompt to clipboard",
+    "ariaLabelCopied": "Prompt copied to clipboard"
+  },
+  "qrPreviewPopover": {
+    "tapToPreview": "Tap to preview",
+    "scanToPreview": "Scan to preview",
+    "downloadPrompt": "Don't have the {name} app yet? Download it below."
+  },
+  "storeButtons": {
+    "appStoreLabel": "Download {name} on the App Store",
+    "appStore": "Download on App Store",
+    "playStoreLabel": "Download {name} on Google Play",
+    "playStore": "Download on Play Store",
+    "androidComingSoonLabel": "Android version coming soon",
+    "androidComingSoon": "Android · Coming soon"
+  },
+  "themes": {
+    "theme": "Theme",
+    "custom": "Custom",
+    "designTheme": "Design theme",
+    "editTheme": "Edit theme",
+    "vibrantPalette": "Vibrant palette",
+    "vibrantPaletteDescription": "More saturated, less contrast",
+    "pickRandomHint": "Press {kbd} to pick random"
+  },
+  "themeBuilder": {
+    "onboarding": {
+      "title": "Adapt HeroUI v3 to your brand",
+      "description": "Customize colors, radius, and typography using a token system that keeps every component consistent and production-ready.",
+      "moreComing": "More features and themes coming soon.",
+      "continue": "Continue"
+    },
+    "header": {
+      "undo": "Undo last change",
+      "redo": "Redo last change",
+      "share": "Share theme link",
+      "viewCode": "View code",
+      "linkCopied": "Link copied",
+      "linkCopiedDescription": "Your theme link is copied to the clipboard.",
+      "switchMode": "Switch mode"
+    },
+    "resetButton": {
+      "tooltip": "Reset to defaults",
+      "dialogTitle": "Reset theme to default?",
+      "dialogBody": "This will restore all theme values to their default settings.",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    },
+    "shuffleButton": {
+      "tooltip": "Randomize",
+      "dialogTitle": "Are you sure you want to randomize?",
+      "dialogBody": "This will overwrite your current theme settings.",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "dontShowAgain": "Don't show again"
+    },
+    "fontFamily": {
+      "label": "Font Family",
+      "suggested": "Suggested",
+      "allFonts": "All Fonts",
+      "addFromCdn": "Add from CDN",
+      "removeFont": "Remove font"
+    },
+    "customFonts": {
+      "back": "Back",
+      "fontUrl": "Font URL",
+      "placeholder": "Paste font URL...",
+      "description": "Supports G Fonts, Fontsource and Fontshare",
+      "importing": "Importing...",
+      "importFont": "Import font",
+      "errorHttps": "URL must use https protocol",
+      "errorSupportedCdn": "URL must be from a supported CDN (Google Fonts, Fontsource, Bunny Fonts, etc.)",
+      "errorInvalidUrl": "Please enter a valid URL",
+      "errorCannotDetect": "Could not detect font family from URL. Please check the URL format.",
+      "errorCannotDetectFull": "Could not detect font family from URL. Please ensure the URL is a valid font stylesheet.",
+      "errorAlreadyImported": "This font is already imported as \"{name}\""
+    },
+    "accentColor": {
+      "label": "Accent",
+      "tooltip": "Main color used for branding and highlights"
+    },
+    "baseColor": {
+      "label": "Base",
+      "tooltip": "Controls how much gray is used in neutrals like backgrounds and surfaces"
+    },
+    "radius": {
+      "label": "Radius",
+      "description": "Affects the overall UI, like menus and modals",
+      "formLabel": "Radius Form",
+      "formDescription": "Affects form elements, like inputs and selects",
+      "options": {
+        "none": "none",
+        "extraSmall": "extra small",
+        "small": "small",
+        "medium": "medium",
+        "large": "large",
+        "extraLarge": "extra large"
+      }
+    },
+    "lockableLabel": {
+      "lockValue": "Lock value",
+      "unlockValue": "Unlock value"
+    },
+    "tabs": {
+      "components": "Components",
+      "dashboard": "Dashboard",
+      "mail": "Mail",
+      "chat": "Chat",
+      "finances": "Finances"
+    }
+  },
+  "demos": {
+    "alert": {
+      "title": "You have 2 credits left",
+      "description": "Get a paid plan for more credits",
+      "action": "Upgrade"
+    },
+    "alertDialog": {
+      "title": "Unsaved changes",
+      "description": "Do you want to save or discard changes?",
+      "discard": "Discard",
+      "save": "Save changes"
+    },
+    "allowNotifications": {
+      "label": "Allow notifications",
+      "description": "Receive push notifications from HeroUI"
+    },
+    "buttons": {
+      "clickMe": "Click me"
+    },
+    "inputOtp": {
+      "label": "Verify account",
+      "description": "We've sent a code to a****@gmail.com",
+      "didntReceive": "Didn't receive a code?",
+      "resend": "Resend"
+    },
+    "listBox": {
+      "ariaLabel": "File actions",
+      "actions": "Actions",
+      "newFile": "New file",
+      "newFileDescription": "Create a new file",
+      "editFile": "Edit file",
+      "editFileDescription": "Make changes",
+      "dangerZone": "Danger zone",
+      "deleteFile": "Delete file",
+      "deleteFileDescription": "Move to trash"
+    },
+    "login": {
+      "title": "Create an account",
+      "trialNote": "Start your free 7-day trial. No credit card required.",
+      "getStarted": "Get Started",
+      "or": "Or",
+      "continueWithGoogle": "Continue with Google",
+      "continueWithApple": "Continue with Apple"
+    },
+    "select": {
+      "placeholder": "Select one",
+      "label": "State",
+      "options": {
+        "florida": "Florida",
+        "delaware": "Delaware",
+        "california": "California",
+        "texas": "Texas",
+        "newYork": "New York",
+        "washington": "Washington"
+      }
+    },
+    "slider": {
+      "label": "Price"
+    },
+    "subtleCards": {
+      "indieTitle": "Indie Hackers",
+      "indieMembers": "148 members",
+      "indieBy": "By John",
+      "aiTitle": "AI Builders",
+      "aiMembers": "362 members",
+      "aiBy": "By Martha"
+    },
+    "tabs1": {
+      "ariaLabel": "Options",
+      "all": "All"
+    },
+    "tabs2": {
+      "ariaLabel": "Options",
+      "chats": "Chats",
+      "emails": "Emails"
+    },
+    "textfield": {
+      "label": "Your email",
+      "placeholder": "john@email.com",
+      "description": "We won't share your email",
+      "error": "The email is invalid"
+    },
+    "uiComponents": {
+      "checkboxAriaLabel": "Checkbox Indicator Example",
+      "switchAriaLabel": "Switch On State Example",
+      "radioAriaLabel": "Radio Buttons Example"
+    },
+    "xProfile": {
+      "bio": "Building the future of UI for web & mobile.",
+      "bioSuffix": "(YC S24)",
+      "confettiLabel": "confetti",
+      "following": "Following",
+      "followers": "Followers"
+    }
+  },
+  "pageActions": {
+    "copyMarkdown": "Copy Markdown",
+    "copied": "Copied",
+    "moreOptions": "More options",
+    "askWithUrl": "Read {url}, I want to ask questions about it.",
+    "askFallback": "I want to ask questions about this documentation.",
+    "items": {
+      "markdown": {
+        "title": "View as Markdown",
+        "description": "View page as Markdown format"
+      },
+      "cursor": {
+        "title": "Add to Cursor",
+        "description": "Install MCP Server on Cursor"
+      },
+      "vscode": {
+        "title": "Add to VS Code",
+        "description": "Install MCP Server on VS Code"
+      },
+      "chatgpt": {
+        "title": "Open in ChatGPT",
+        "description": "Ask questions about this page"
+      },
+      "claude": {
+        "title": "Open in Claude",
+        "description": "Ask questions about this page"
+      }
+    }
+  }
+}

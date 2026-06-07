@@ -170,6 +170,7 @@ const SelectPopover = ({
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}
+        data-slot="select-popover"
         placement={placement}
       >
         {children}

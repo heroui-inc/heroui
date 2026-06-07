@@ -1,0 +1,160 @@
+---
+title: Meter 计量条
+description: Meter 表示已知范围内的数量，或一个比例值。
+links:
+  rac: Meter
+  source: meter/meter.tsx
+  styles: meter.css
+  storybook: Components/Feedback/Meter
+---
+
+## 引入
+
+```tsx
+import { Meter, Label } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="meter-basic"
+/>
+
+### 组件结构
+
+```tsx
+import { Meter, Label } from '@heroui/react';
+
+export default () => (
+  <Meter value={60}>
+    <Label>Storage</Label>
+    <Meter.Output />
+    <Meter.Track>
+      <Meter.Fill />
+    </Meter.Track>
+  </Meter>
+);
+```
+
+### 尺寸
+
+<ComponentPreview
+  name="meter-sizes"
+/>
+
+### 颜色
+
+<ComponentPreview
+  name="meter-colors"
+/>
+
+### 自定义取值范围与格式
+
+使用 `minValue`、`maxValue` 与 `formatOptions` 自定义取值范围与展示格式。
+
+<ComponentPreview
+  name="meter-custom-value"
+/>
+
+### 无可见标签
+
+当不需要可见标签时，请使用 `aria-label` 以保证无障碍。
+
+<ComponentPreview
+  name="meter-without-label"
+/>
+
+<RelatedComponents component="meter" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以为 Meter 的各个部分分别自定义样式：
+
+```tsx
+import { Meter, Label } from '@heroui/react';
+
+function CustomMeter() {
+  return (
+    <Meter value={60}>
+      <Label>Storage</Label>
+      <Meter.Output />
+      <Meter.Track className="bg-purple-100 dark:bg-purple-900">
+        <Meter.Fill className="bg-purple-500" />
+      </Meter.Track>
+    </Meter>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 Meter 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .meter {
+    @apply w-full gap-2;
+  }
+
+  .meter__track {
+    @apply h-3 rounded-full;
+  }
+
+  .meter__fill {
+    @apply rounded-full;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Meter 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/meter.css)）：
+
+#### 基础与元素类
+- `.meter` — 基础容器（grid 布局）
+- `.meter__output` — 数值文本展示
+- `.meter__track` — 轨道背景
+- `.meter__fill` — 轨道已填充部分
+
+#### 尺寸类
+- `.meter--sm` — 小尺寸变体（更细的轨道）
+- `.meter--md` — 中等尺寸变体（默认）
+- `.meter--lg` — 大尺寸变体（更粗的轨道）
+
+#### 颜色类
+- `.meter--default` — 默认颜色变体
+- `.meter--accent` — 强调色变体
+- `.meter--success` — 成功色变体
+- `.meter--warning` — 警告色变体
+- `.meter--danger` — 危险色变体
+
+## API 参考
+
+### Meter Props
+
+继承自 [React Aria Meter](https://react-spectrum.adobe.com/react-aria/Meter.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `number` | `0` | 当前值 |
+| `minValue` | `number` | `0` | 最小值 |
+| `maxValue` | `number` | `100` | 最大值 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Meter 轨道尺寸 |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"accent"` | 填充条颜色 |
+| `formatOptions` | `Intl.NumberFormatOptions` | `{style: 'percent'}` | 数值展示的格式化选项 |
+| `valueLabel` | `ReactNode` | - | 自定义数值标签内容 |
+| `children` | `ReactNode \| (values: MeterRenderProps) => ReactNode` | - | 内容或渲染 prop |
+
+### MeterRenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `percentage` | `number` | Meter 百分比（0–100） |
+| `valueText` | `string` | 格式化后的数值文本 |

@@ -1,0 +1,222 @@
+---
+title: Typography
+description: Primitive typography component for rendering styled text with semantic type variants.
+icon: new
+links:
+  source_native: text/text.tsx
+  styles_native: text/text.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-dark.mp4"
+/>
+
+## Import
+
+```tsx
+import { Typography } from 'heroui-native';
+```
+
+## Anatomy
+
+```tsx
+<Typography>...</Typography>
+
+{/* Sub-components */}
+<Typography.Heading>...</Typography.Heading>
+<Typography.Paragraph>...</Typography.Paragraph>
+<Typography.Code>...</Typography.Code>
+```
+
+- **Typography**: Root text element. Selects a typography preset via `type` and exposes orthogonal `align`, `color`, `weight`, and `truncate` props.
+- **Typography.Heading**: Convenience wrapper restricted to heading types (`h1`–`h6`). Adds `accessibilityRole="header"` automatically.
+- **Typography.Paragraph**: Convenience wrapper restricted to body types (`body`, `body-sm`, `body-xs`).
+- **Typography.Code**: Chip-styled inline monospaced text. Uses a platform-appropriate monospace font family.
+
+## Usage
+
+### Basic Usage
+
+The Typography component renders body text by default.
+
+```tsx
+<Typography>Hello, world!</Typography>
+```
+
+### Type Variants
+
+Use the `type` prop to select a semantic typography preset.
+
+```tsx
+<Typography type="h1">Heading 1</Typography>
+<Typography type="h2">Heading 2</Typography>
+<Typography type="h3">Heading 3</Typography>
+<Typography type="h4">Heading 4</Typography>
+<Typography type="h5">Heading 5</Typography>
+<Typography type="h6">Heading 6</Typography>
+<Typography type="body">Body text</Typography>
+<Typography type="body-sm">Small body text</Typography>
+<Typography type="body-xs">Extra-small body text</Typography>
+<Typography type="code">Code snippet</Typography>
+```
+
+### Headings
+
+Use `Typography.Heading` for heading text with automatic header accessibility role.
+
+```tsx
+<Typography.Heading type="h1">Page Title</Typography.Heading>
+<Typography.Heading type="h2">Section Title</Typography.Heading>
+<Typography.Heading type="h3">Subsection Title</Typography.Heading>
+```
+
+### Paragraphs
+
+Use `Typography.Paragraph` for body text.
+
+```tsx
+<Typography.Paragraph>
+  This is a paragraph of body text with the default size.
+</Typography.Paragraph>
+<Typography.Paragraph type="body-sm">
+  This is smaller body text.
+</Typography.Paragraph>
+```
+
+### Code
+
+Use `Typography.Code` (or equivalently `<Typography type="code">`) for inline code snippets. Both render a chip-styled, monospaced inline element with a subtle background, rounded corners, and a `self-start` layout so it does not stretch in flex containers. The platform monospace `fontFamily` is applied at the `Typography` root, so the two forms are interchangeable.
+
+```tsx
+<Typography.Code>console.log('hello')</Typography.Code>
+<Typography type="code">console.log('hello')</Typography>
+```
+
+### Alignment
+
+Use the `align` prop to control horizontal alignment. `start` and `end` are RTL-aware (they flip under right-to-left layouts).
+
+```tsx
+<Typography align="start">Start-aligned</Typography>
+<Typography align="center">Center-aligned</Typography>
+<Typography align="end">End-aligned</Typography>
+<Typography align="justify">Justified text spreads across the line.</Typography>
+```
+
+> **Note:** `text-justify` is iOS-only on React Native; Android falls back to left alignment.
+
+### Color
+
+Use the `color` prop to apply a semantic foreground color preset.
+
+```tsx
+<Typography color="default">Default foreground</Typography>
+<Typography color="muted">Muted secondary text</Typography>
+```
+
+For other theme colors, pass the corresponding utility through `className` (e.g. `className="text-accent"`, `className="text-danger"`).
+
+### Weight
+
+Use the `weight` prop to override the font weight implied by `type`. The override merges via `tailwind-merge`, so it always wins over the type variant's default weight.
+
+```tsx
+<Typography type="h1" weight="bold">Bold H1</Typography>
+<Typography weight="medium">Medium body</Typography>
+<Typography weight="semibold">Semibold body</Typography>
+```
+
+### Truncation
+
+Use the `truncate` boolean prop to limit the text to a single line with an ellipsis. It is mapped to React Native's `numberOfLines={1}`. An explicit `numberOfLines` prop, if provided, takes precedence.
+
+```tsx
+<Typography truncate>
+  A long line of text that will be cut off with an ellipsis when it overflows
+  the container.
+</Typography>;
+
+{
+  /* Multi-line truncation via the underlying RN prop */
+}
+<Typography numberOfLines={2}>
+  Two-line truncation works through React Native's standard `numberOfLines`
+  prop.
+</Typography>;
+```
+
+## Example
+
+```tsx
+import { Typography } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function TypographyExample() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-4">
+      <Typography.Heading type="h1">Welcome</Typography.Heading>
+      <Typography.Heading type="h3">Getting Started</Typography.Heading>
+      <Typography.Paragraph>
+        This is a body paragraph rendered with the Typography component.
+      </Typography.Paragraph>
+      <Typography.Paragraph color="muted" type="body-sm">
+        Smaller supporting text for captions or footnotes.
+      </Typography.Paragraph>
+      <Typography.Code>npm install heroui-native</Typography.Code>
+    </View>
+  );
+}
+```
+
+You can find more examples in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/text.tsx>).
+
+## API Reference
+
+### Typography
+
+`Typography` extends all standard React Native `TextProps` with additional typography props.
+
+| prop           | type                                                                                         | default     | description                                                                                                                    |
+| -------------- | -------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'body' \| 'body-sm' \| 'body-xs' \| 'code'` | `'body'`    | Semantic typography variant (size, default weight, line-height)                                                                |
+| `align`        | `'start' \| 'center' \| 'end' \| 'justify'`                                                  | `'start'`   | Horizontal alignment. `start` and `end` are RTL-aware. `justify` is iOS-only.                                                  |
+| `color`        | `'default' \| 'muted'`                                                                       | `'default'` | Semantic foreground color preset                                                                                               |
+| `weight`       | `'normal' \| 'medium' \| 'semibold' \| 'bold'`                                               | -           | Font weight override. When set, overrides the weight implied by `type`.                                                        |
+| `truncate`     | `boolean`                                                                                    | `false`     | Truncates the text to a single line with an ellipsis (sets `numberOfLines={1}`). An explicit `numberOfLines` takes precedence. |
+| `children`     | `React.ReactNode`                                                                            | -           | Content to render                                                                                                              |
+| `className`    | `string`                                                                                     | -           | Additional CSS classes                                                                                                         |
+| `...TextProps` | `TextProps`                                                                                  | -           | All standard React Native `Text` props are supported                                                                           |
+
+### Typography.Heading
+
+Inherits all `Typography` root props (`align`, `color`, `weight`, `truncate`, `className`, and React Native `TextProps`). Sets `accessibilityRole="header"` automatically and narrows `type` to heading variants.
+
+| prop           | type                                           | default | description                                          |
+| -------------- | ---------------------------------------------- | ------- | ---------------------------------------------------- |
+| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | `'h1'`  | Heading level                                        |
+| `children`     | `React.ReactNode`                              | -       | Content to render                                    |
+| `className`    | `string`                                       | -       | Additional CSS classes                               |
+| `...TextProps` | `TextProps`                                    | -       | All standard React Native `Text` props are supported |
+
+### Typography.Paragraph
+
+Inherits all `Typography` root props (`align`, `color`, `weight`, `truncate`, `className`, and React Native `TextProps`). Narrows `type` to body variants.
+
+| prop           | type                               | default  | description                                          |
+| -------------- | ---------------------------------- | -------- | ---------------------------------------------------- |
+| `type`         | `'body' \| 'body-sm' \| 'body-xs'` | `'body'` | Paragraph text size                                  |
+| `children`     | `React.ReactNode`                  | -        | Content to render                                    |
+| `className`    | `string`                           | -        | Additional CSS classes                               |
+| `...TextProps` | `TextProps`                        | -        | All standard React Native `Text` props are supported |
+
+### Typography.Code
+
+Inherits all `Typography` root props (`align`, `color`, `weight`, `truncate`, `className`, `style`, and React Native `TextProps`). Thin wrapper that forces `type="code"`; the platform monospace `fontFamily` is merged in at the `Typography` root, so `<Typography type="code">` and `<Typography.Code>` render identically.
+
+| prop           | type              | default | description                                          |
+| -------------- | ----------------- | ------- | ---------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Content to render                                    |
+| `className`    | `string`          | -       | Additional CSS classes                               |
+| `...TextProps` | `TextProps`       | -       | All standard React Native `Text` props are supported |

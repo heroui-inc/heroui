@@ -1,0 +1,579 @@
+---
+title: Tabs 标签页
+description: 使用选项卡视图组织内容，支持动画过渡与指示器。
+links:
+  source_native: tabs/tabs.tsx
+  styles_native: tabs/tabs.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/tabs-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/tabs-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Tabs } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Tabs>
+  <Tabs.List>
+    <Tabs.ScrollView>
+      <Tabs.Indicator />
+      <Tabs.Trigger>
+        <Tabs.Label>...</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Separator />
+      <Tabs.Trigger>
+        <Tabs.Label>...</Tabs.Label>
+      </Tabs.Trigger>
+    </Tabs.ScrollView>
+  </Tabs.List>
+  <Tabs.Content>...</Tabs.Content>
+</Tabs>
+```
+
+- **Tabs**：管理选项卡状态与选中的根容器。控制当前激活项、处理值变化，并向子组件提供上下文。
+- **Tabs.List**：放置选项卡触发器的容器。将多个触发器组合在一起，并支持 `primary` 或 `secondary` 等样式变体。
+- **Tabs.ScrollView**：可选的横向滚动容器。当标签溢出时可横向滚动，并可在选中时自动居中。
+- **Tabs.Trigger**：每个选项卡的交互触发器。处理按压以切换激活项，并测量位置以驱动指示器动画。
+- **Tabs.Label**：触发器上的文字标签，用于展示选项卡标题及对应样式。
+- **Tabs.Indicator**：当前激活项的可视指示器，可在选项卡之间以弹簧或时长动画平滑过渡。
+- **Tabs.Separator**：选项卡之间的分隔线。当当前值不在 `betweenValues` 数组中时显示，并带有透明度过渡动画。
+- **Tabs.Content**：面板内容容器。当其 `value` 与当前激活项一致时显示对应内容。
+
+## 用法
+
+### 基础用法
+
+Tabs 使用复合子组件，将内容划分为可切换的区域。
+
+```tsx
+<Tabs defaultValue="tab1">
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Trigger value="tab1">
+      <Tabs.Label>标签一</Tabs.Label>
+    </Tabs.Trigger>
+    <Tabs.Trigger value="tab2">
+      <Tabs.Label>标签二</Tabs.Label>
+    </Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="tab1">...</Tabs.Content>
+  <Tabs.Content value="tab2">...</Tabs.Content>
+</Tabs>
+```
+
+### 主样式（primary）
+
+默认圆角主样式，选中项背后为填充指示器。
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab} variant="primary">
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Trigger value="settings">
+      <Tabs.Label>设置</Tabs.Label>
+    </Tabs.Trigger>
+    <Tabs.Trigger value="profile">
+      <Tabs.Label>个人资料</Tabs.Label>
+    </Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="settings">...</Tabs.Content>
+  <Tabs.Content value="profile">...</Tabs.Content>
+</Tabs>
+```
+
+### 次样式（secondary）
+
+下划线指示器，视觉更轻量。
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab} variant="secondary">
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Trigger value="overview">
+      <Tabs.Label>概览</Tabs.Label>
+    </Tabs.Trigger>
+    <Tabs.Trigger value="analytics">
+      <Tabs.Label>分析</Tabs.Label>
+    </Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="overview">...</Tabs.Content>
+  <Tabs.Content value="analytics">...</Tabs.Content>
+</Tabs>
+```
+
+### 可滚动标签
+
+标签较多时通过横向滚动容纳。
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.ScrollView scrollAlign="center">
+      <Tabs.Indicator />
+      <Tabs.Trigger value="tab1">
+        <Tabs.Label>第一个</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Trigger value="tab2">
+        <Tabs.Label>第二个</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Trigger value="tab3">
+        <Tabs.Label>第三个</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Trigger value="tab4">
+        <Tabs.Label>第四个</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Trigger value="tab5">
+        <Tabs.Label>第五个</Tabs.Label>
+      </Tabs.Trigger>
+    </Tabs.ScrollView>
+  </Tabs.List>
+  <Tabs.Content value="tab1">...</Tabs.Content>
+  <Tabs.Content value="tab2">...</Tabs.Content>
+  <Tabs.Content value="tab3">...</Tabs.Content>
+  <Tabs.Content value="tab4">...</Tabs.Content>
+  <Tabs.Content value="tab5">...</Tabs.Content>
+</Tabs>
+```
+
+### 禁用标签
+
+使用 `isDisabled` 禁止与特定标签交互。
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Trigger value="active">
+      <Tabs.Label>可用</Tabs.Label>
+    </Tabs.Trigger>
+    <Tabs.Trigger value="disabled" isDisabled>
+      <Tabs.Label>已禁用</Tabs.Label>
+    </Tabs.Trigger>
+    <Tabs.Trigger value="another">
+      <Tabs.Label>其他</Tabs.Label>
+    </Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="active">...</Tabs.Content>
+  <Tabs.Content value="another">...</Tabs.Content>
+</Tabs>
+```
+
+### 与图标组合
+
+图标与文字并用，信息更直观。
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Trigger value="home">
+      <Icon name="home" size={16} />
+      <Tabs.Label>首页</Tabs.Label>
+    </Tabs.Trigger>
+    <Tabs.Trigger value="search">
+      <Icon name="search" size={16} />
+      <Tabs.Label>搜索</Tabs.Label>
+    </Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="home">...</Tabs.Content>
+  <Tabs.Content value="search">...</Tabs.Content>
+</Tabs>
+```
+
+### 使用渲染函数
+
+在 `Tabs.Trigger` 上使用渲染函数，可读取选中状态并按需自定义内容。
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Trigger value="settings">
+      {({ isSelected, value, isDisabled }) => (
+        <Tabs.Label
+          className={isSelected ? 'text-accent font-medium' : 'text-foreground'}
+        >
+          设置
+        </Tabs.Label>
+      )}
+    </Tabs.Trigger>
+    <Tabs.Trigger value="profile">
+      {({ isSelected }) => (
+        <>
+          <Icon name="user" size={16} />
+          <Tabs.Label className={isSelected ? 'text-accent' : 'text-muted'}>
+            个人资料
+          </Tabs.Label>
+        </>
+      )}
+    </Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="settings">...</Tabs.Content>
+  <Tabs.Content value="profile">...</Tabs.Content>
+</Tabs>
+```
+
+### 与分隔线配合
+
+在标签之间添加分隔线；可见性由 `betweenValues` 与当前激活项共同决定（详见下方 API）。
+
+```tsx
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tabs.List>
+    <Tabs.ScrollView>
+      <Tabs.Indicator />
+      <Tabs.Trigger value="general">
+        <Tabs.Label>通用</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Separator betweenValues={['general', 'notifications']} />
+      <Tabs.Trigger value="notifications">
+        <Tabs.Label>通知</Tabs.Label>
+      </Tabs.Trigger>
+      <Tabs.Separator betweenValues={['notifications', 'profile']} />
+      <Tabs.Trigger value="profile">
+        <Tabs.Label>个人资料</Tabs.Label>
+      </Tabs.Trigger>
+    </Tabs.ScrollView>
+  </Tabs.List>
+  <Tabs.Content value="general">...</Tabs.Content>
+  <Tabs.Content value="notifications">...</Tabs.Content>
+  <Tabs.Content value="profile">...</Tabs.Content>
+</Tabs>
+```
+
+## 示例
+
+```tsx
+import {
+  Button,
+  Checkbox,
+  Description,
+  ControlField,
+  Label,
+  Tabs,
+  TextField,
+} from 'heroui-native';
+import { useState } from 'react';
+import { View, Text } from 'react-native';
+import Animated, {
+  FadeIn,
+  FadeOut,
+  LinearTransition,
+} from 'react-native-reanimated';
+
+const AnimatedContentContainer = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
+  <Animated.View
+    entering={FadeIn.duration(200)}
+    exiting={FadeOut.duration(200)}
+    className="gap-6"
+  >
+    {children}
+  </Animated.View>
+);
+
+export default function TabsExample() {
+  const [activeTab, setActiveTab] = useState('general');
+
+  const [showSidebar, setShowSidebar] = useState(true);
+  const [accountActivity, setAccountActivity] = useState(true);
+  const [name, setName] = useState('');
+
+  return (
+    <Tabs value={activeTab} onValueChange={setActiveTab} variant="primary">
+      <Tabs.List>
+        <Tabs.ScrollView>
+          <Tabs.Indicator />
+          <Tabs.Trigger value="general">
+            <Tabs.Label>通用</Tabs.Label>
+          </Tabs.Trigger>
+          <Tabs.Trigger value="notifications">
+            <Tabs.Label>通知</Tabs.Label>
+          </Tabs.Trigger>
+          <Tabs.Trigger value="profile">
+            <Tabs.Label>个人资料</Tabs.Label>
+          </Tabs.Trigger>
+        </Tabs.ScrollView>
+      </Tabs.List>
+
+      <Animated.View
+        layout={LinearTransition.duration(200)}
+        className="px-4 py-6 border border-border rounded-xl"
+      >
+        <Tabs.Content value="general">
+          <AnimatedContentContainer>
+            <ControlField
+              isSelected={showSidebar}
+              onSelectedChange={setShowSidebar}
+            >
+              <ControlField.Indicator variant="checkbox" />
+              <View className="flex-1">
+                <Label>显示侧边栏</Label>
+                <Description>显示侧边导航面板</Description>
+              </View>
+            </ControlField>
+          </AnimatedContentContainer>
+        </Tabs.Content>
+
+        <Tabs.Content value="notifications">
+          <AnimatedContentContainer>
+            <ControlField
+              isSelected={accountActivity}
+              onSelectedChange={setAccountActivity}
+            >
+              <ControlField.Indicator variant="checkbox" />
+              <View className="flex-1">
+                <Label>账户动态</Label>
+                <Description>接收与账户活动相关的通知</Description>
+              </View>
+            </ControlField>
+          </AnimatedContentContainer>
+        </Tabs.Content>
+
+        <Tabs.Content value="profile">
+          <AnimatedContentContainer>
+            <TextField isRequired>
+              <Label>姓名</Label>
+              <Input
+                value={name}
+                onChangeText={setName}
+                placeholder="请输入全名"
+              />
+            </TextField>
+            <Button size="sm" className="self-start">
+              <Button.Label>更新资料</Button.Label>
+            </Button>
+          </AnimatedContentContainer>
+        </Tabs.Content>
+      </Animated.View>
+    </Tabs>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/tabs.tsx>)。
+
+## API 参考
+
+### Tabs
+
+| prop            | type                         | 默认值     | 描述                                                                               |
+| --------------- | ---------------------------- | ---------- | ---------------------------------------------------------------------------------- |
+| `children`      | `React.ReactNode`            | -          | 渲染在 Tabs 内的子元素                                                           |
+| `value`         | `string`                     | -          | 当前激活的标签值                                                                 |
+| `variant`       | `'primary' \| 'secondary'`   | `'primary'` | 视觉变体                                                                         |
+| `className`     | `string`                     | -          | 根容器额外 className                                                              |
+| `animation`     | `"disable-all" \| undefined` | `undefined` | 动画配置。设为 `"disable-all"` 可关闭全部动画（含子树）                         |
+| `onValueChange` | `(value: string) => void`    | -          | 激活标签变化时的回调                                                             |
+| `...ViewProps`  | `ViewProps`                  | -          | 支持 React Native `View` 的全部标准属性                                          |
+
+### Tabs.List
+
+| prop           | type              | 默认值 | 描述                                        |
+| -------------- | ----------------- | ------ | ------------------------------------------- |
+| `children`     | `React.ReactNode` | -      | 渲染在列表内的子元素                        |
+| `className`    | `string`          | -      | 额外 className                              |
+| `...ViewProps` | `ViewProps`       | -      | 支持 React Native `View` 的全部标准属性     |
+
+### Tabs.ScrollView
+
+| prop                        | type                                     | 默认值    | 描述                                              |
+| --------------------------- | ---------------------------------------- | --------- | ------------------------------------------------- |
+| `children`                  | `React.ReactNode`                        | -         | 渲染在滚动视图内的子元素                          |
+| `scrollAlign`               | `'start' \| 'center' \| 'end' \| 'none'` | `'center'` | 选中项的滚动对齐方式                            |
+| `className`                 | `string`                                 | -         | 滚动容器额外 className                          |
+| `contentContainerClassName` | `string`                                 | -         | 内容容器额外 className                          |
+| `...ScrollViewProps`        | `ScrollViewProps`                        | -         | 支持 React Native `ScrollView` 的全部标准属性   |
+
+### Tabs.Trigger
+
+| prop                | type                                                                      | 默认值  | 描述                                                               |
+| ------------------- | ------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------ |
+| `children`          | `React.ReactNode \| ((props: TabsTriggerRenderProps) => React.ReactNode)` | -       | 子节点，或接收 `TabsTriggerRenderProps` 的渲染函数                 |
+| `value`             | `string`                                                                  | -       | 唯一标识该标签的值                                                 |
+| `isDisabled`        | `boolean`                                                                 | `false` | 是否禁用该触发器                                                 |
+| `className`         | `string`                                                                  | -       | 额外 className                                                     |
+| `...PressableProps` | `PressableProps`                                                          | -       | 支持 React Native `Pressable` 的全部标准属性                       |
+
+#### TabsTriggerRenderProps
+
+使用渲染函数作为 `children` 时，会传入以下属性：
+
+| property     | type      | 描述                     |
+| ------------ | --------- | ------------------------ |
+| `isSelected` | `boolean` | 当前触发器是否被选中     |
+| `value`      | `string`  | 该触发器的值             |
+| `isDisabled` | `boolean` | 该触发器是否禁用         |
+
+### Tabs.Label
+
+| prop           | type              | 默认值 | 描述                                        |
+| -------------- | ----------------- | ------ | ------------------------------------------- |
+| `children`     | `React.ReactNode` | -      | 作为标签渲染的文本内容                      |
+| `className`    | `string`          | -      | 额外 className                              |
+| `...TextProps` | `TextProps`       | -      | 支持 React Native `Text` 的全部标准属性     |
+
+### Tabs.Indicator
+
+| prop                    | type                     | 默认值 | 描述                                                  |
+| ----------------------- | ------------------------ | ------ | ----------------------------------------------------- |
+| `children`              | `React.ReactNode`        | -      | 自定义指示器内容                                      |
+| `className`             | `string`                 | -      | 额外 className                                        |
+| `animation`             | `TabsIndicatorAnimation` | -      | 动画配置                                              |
+| `isAnimatedStyleActive` | `boolean`                | `true` | 是否启用 Reanimated 动画样式                        |
+| `...Animated.ViewProps` | `Animated.ViewProps`     | -      | 支持 Reanimated `Animated.View` 的全部属性          |
+
+#### TabsIndicatorAnimation
+
+`Tabs.Indicator` 的动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭所有动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                | type                                   | 默认值                                                                      | 描述                               |
+| ------------------- | -------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------- |
+| `state`             | `'disabled' \| boolean`                | -                                                                           | 自定义属性时用于禁用动画           |
+| `width.type`        | `'spring' \| 'timing'`                 | `'spring'`                                                                  | 宽度动画类型                       |
+| `width.config`      | `WithSpringConfig \| WithTimingConfig` | `{ stiffness: 1200, damping: 120 }`（spring）或 `{ duration: 200 }`（timing） | Reanimated 动画配置        |
+| `height.type`       | `'spring' \| 'timing'`                 | `'spring'`                                                                  | 高度动画类型                       |
+| `height.config`     | `WithSpringConfig \| WithTimingConfig` | 同上                                                                        | Reanimated 动画配置                |
+| `translateX.type`   | `'spring' \| 'timing'`                 | `'spring'`                                                                  | 水平位移动画类型                   |
+| `translateX.config` | `WithSpringConfig \| WithTimingConfig` | 同上                                                                        | Reanimated 动画配置                |
+
+### Tabs.Separator
+
+| prop                    | type                     | 默认值  | 描述                                                                                                                            |
+| ----------------------- | ------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `betweenValues`         | `string[]`               | -       | 分隔线两侧对应的标签值数组。当**当前**标签值**不在**该数组中时，分隔线可见（与可见性动画联动）                                 |
+| `isAlwaysVisible`       | `boolean`                | `false` | 为 `true` 时透明度恒为 1，不受当前标签影响                                                                                     |
+| `className`             | `string`                 | -       | 额外 className                                                                                                                  |
+| `animation`             | `TabsSeparatorAnimation` | -       | 动画配置                                                                                                                        |
+| `isAnimatedStyleActive` | `boolean`                | `true`  | 是否启用 Reanimated 动画样式                                                                                                    |
+| `children`              | `React.ReactNode`        | -       | 自定义分隔线内容                                                                                                                |
+| `...Animated.ViewProps` | `Animated.ViewProps`     | -       | 支持 Reanimated `Animated.View` 的全部属性                                                                                      |
+
+**说明：** 以下样式属性由动画占用，不能仅通过 `className` 覆盖：
+
+- `opacity`：用于分隔线显隐过渡（当前标签在 `betweenValues` 内时为 0，否则为 1）
+
+若要调整这些属性，请使用 `animation`。若需完全关闭动画样式、改用自己的 `className` 或 `style`，请设置 `isAnimatedStyleActive={false}`。
+
+#### TabsSeparatorAnimation
+
+`Tabs.Separator` 的动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭所有动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                   | type                    | 默认值             | 描述                               |
+| ---------------------- | ----------------------- | ------------------ | ---------------------------------- |
+| `state`                | `'disabled' \| boolean` | -                  | 自定义属性时用于禁用动画           |
+| `opacity.value`        | `[number, number]`      | `[0, 1]`           | 透明度区间 [隐藏, 显示]            |
+| `opacity.timingConfig` | `WithTimingConfig`      | `{ duration: 200 }` | 时长类动画配置                  |
+
+### Tabs.Content
+
+| prop           | type              | 默认值 | 描述                                        |
+| -------------- | ----------------- | ------ | ------------------------------------------- |
+| `children`     | `React.ReactNode` | -      | 渲染在面板内的子元素                        |
+| `value`        | `string`          | -      | 该内容与哪个标签值对应                      |
+| `className`    | `string`          | -      | 额外 className                              |
+| `...ViewProps` | `ViewProps`       | -      | 支持 React Native `View` 的全部标准属性     |
+
+## Hooks
+
+### useTabs
+
+在自定义组件或复合子组件中读取 Tabs 根上下文。
+
+```tsx
+import { useTabs } from 'heroui-native';
+
+const CustomComponent = () => {
+  const { value, onValueChange, nativeID } = useTabs();
+  // ...你的实现
+};
+```
+
+#### 返回值
+
+类型：`UseTabsReturn`
+
+| property        | type                      | 描述                     |
+| --------------- | ------------------------- | ------------------------ |
+| `value`         | `string`                  | 当前激活的标签值         |
+| `onValueChange` | `(value: string) => void` | 用于切换激活标签的回调   |
+| `nativeID`      | `string`                  | 该 Tabs 实例的唯一标识   |
+
+**说明：** 必须在 `Tabs` 内使用；在上下文外调用会抛错。
+
+### useTabsMeasurements
+
+读取标签测量上下文，用于管理各触发器的位置与尺寸。
+
+```tsx
+import { useTabsMeasurements } from 'heroui-native';
+
+const CustomIndicator = () => {
+  const { measurements, variant } = useTabsMeasurements();
+  // ...你的实现
+};
+```
+
+#### 返回值
+
+类型：`UseTabsMeasurementsReturn`
+
+| property          | type                                                    | 描述                               |
+| ----------------- | ------------------------------------------------------- | ---------------------------------- |
+| `measurements`    | `Record<string, ItemMeasurements>`                      | 各标签触发器的测量数据             |
+| `setMeasurements` | `(key: string, measurements: ItemMeasurements) => void` | 更新指定触发器的测量数据           |
+| `variant`         | `'primary' \| 'secondary'`                              | 当前 Tabs 的视觉变体               |
+
+#### ItemMeasurements
+
+| property | type     | 描述                 |
+| -------- | -------- | -------------------- |
+| `width`  | `number` | 触发器宽度（像素）   |
+| `height` | `number` | 触发器高度（像素）   |
+| `x`      | `number` | 触发器的 x 坐标      |
+
+**说明：** 必须在 `Tabs` 内使用；在上下文外调用会抛错。
+
+### useTabsTrigger
+
+在自定义组件或复合子组件中读取单个 `Tabs.Trigger` 的上下文。
+
+```tsx
+import { useTabsTrigger } from 'heroui-native';
+
+const CustomLabel = () => {
+  const { value, isSelected, nativeID } = useTabsTrigger();
+  // ...你的实现
+};
+```
+
+#### 返回值
+
+类型：`UseTabsTriggerReturn`
+
+| property     | type      | 描述                     |
+| ------------ | --------- | ------------------------ |
+| `value`      | `string`  | 该触发器的值             |
+| `nativeID`   | `string`  | 该触发器的唯一标识       |
+| `isSelected` | `boolean` | 当前触发器是否被选中     |
+
+**说明：** 必须在 `Tabs.Trigger` 内使用；在上下文外调用会抛错。

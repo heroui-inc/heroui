@@ -1,0 +1,70 @@
+---
+title: Agent Skills
+description: 让 AI 助手使用 HeroUI Native 组件构建移动端界面
+---
+
+HeroUI Native Skills 为 AI 助手提供组件、模式与 React Native 最佳实践等系统化知识。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills-native.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agent-skills-native-dark.jpg"
+  alt="HeroUI Native Agent Skills"
+/>
+
+### 安装
+
+```bash
+curl -fsSL https://heroui.com/install | bash -s heroui-native
+```
+
+或使用 skills 包：
+
+```bash
+npx skills add heroui-inc/heroui
+```
+
+<span className="text-sm text-muted">
+支持 Claude Code、Cursor、OpenCode 等。
+</span>
+
+### 用法
+
+Skills 会被 AI **自动发现**，也可通过 `/heroui-native` 显式调用。
+
+你可以让助手：
+
+- 使用 HeroUI Native 搭建移动组件
+- 用 HeroUI Native 创建页面
+- 定制主题与样式
+- 查阅组件文档
+
+<Callout>
+  更复杂的场景可配合 [MCP 服务器](/docs/native/getting-started/mcp-server)，以实时访问组件文档与源码。
+</Callout>
+
+### 包含内容
+
+- HeroUI Native 安装指南
+- 全部组件的 props、示例与用法模式
+- 基于 Uniwind 的主题与样式指南
+- 设计原则与组合模式
+
+### 目录结构
+
+```
+skills/heroui-native/
+├── SKILL.md              # 主说明
+├── LICENSE.txt           # Apache License 2.0
+└── scripts/              # 工具脚本
+    ├── list_components.mjs
+    ├── get_component_docs.mjs
+    ├── get_theme.mjs
+    └── get_docs.mjs
+```
+
+### 相关文档
+
+- [Agent Skills 规范](https://agentskills.io/home)
+- [Claude Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
+- [Cursor Skills](https://cursor.com/docs/context/skills)
+- [OpenCode Skills](https://opencode.ai/docs/skills)

@@ -1,0 +1,245 @@
+---
+title: DateRangePicker 日期范围选择器
+description: 基于 React Aria DateRangePicker 的可组合日期范围选择器，由 DateField 与 RangeCalendar 组合而成。
+links:
+  rac: DateRangePicker
+  source: date-range-picker/date-range-picker.tsx
+  styles: date-range-picker.css
+  storybook: Components/Date and Time/DateRangePicker
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { DateField, DateRangePicker, Label, RangeCalendar } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="date-range-picker-basic" />
+
+### 组件结构
+
+`DateRangePicker` 采用组合优先的 API。请显式组合 `DateField` 与 `RangeCalendar`，以便完全控制结构与样式。
+
+```tsx
+import {DateField, DateRangePicker, Label, RangeCalendar} from '@heroui/react';
+
+export default () => (
+  <DateRangePicker>
+    <Label />
+    <DateField.Group>
+      <DateField.InputContainer>
+        <DateField.Input slot="start">
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateRangePicker.RangeSeparator />
+        <DateField.Input slot="end">
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+      </DateField.InputContainer>
+      <DateField.Suffix>
+        <DateRangePicker.Trigger>
+          <DateRangePicker.TriggerIndicator />
+        </DateRangePicker.Trigger>
+      </DateField.Suffix>
+    </DateField.Group>
+    <DateRangePicker.Popover>
+      <RangeCalendar aria-label="Choose trip dates">
+        <RangeCalendar.Header>
+          <RangeCalendar.YearPickerTrigger>
+            <RangeCalendar.YearPickerTriggerHeading />
+            <RangeCalendar.YearPickerTriggerIndicator />
+          </RangeCalendar.YearPickerTrigger>
+          <RangeCalendar.NavButton slot="previous" />
+          <RangeCalendar.NavButton slot="next" />
+        </RangeCalendar.Header>
+        <RangeCalendar.Grid>
+          <RangeCalendar.GridHeader>
+            {(day) => <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>}
+          </RangeCalendar.GridHeader>
+          <RangeCalendar.GridBody>{(date) => <RangeCalendar.Cell date={date} />}</RangeCalendar.GridBody>
+        </RangeCalendar.Grid>
+      </RangeCalendar>
+    </DateRangePicker.Popover>
+  </DateRangePicker>
+)
+```
+
+### 受控
+
+<ComponentPreview name="date-range-picker-controlled" />
+
+### 校验
+
+<ComponentPreview name="date-range-picker-with-validation" />
+
+### 格式选项
+
+使用 `granularity`、`hourCycle`、`hideTimeZone`、`shouldForceLeadingZeros` 等 props 控制 DateRangePicker 值的展示格式。
+
+<ComponentPreview name="date-range-picker-format-options" />
+
+### 禁用
+
+<ComponentPreview name="date-range-picker-disabled" />
+
+### 自定义指示器
+
+未传入子节点时，`DateRangePicker.TriggerIndicator` 会渲染默认的 `IconCalendar`。传入子节点即可替换。
+
+<ComponentPreview name="date-range-picker-with-custom-indicator" />
+
+### 表单示例
+
+<ComponentPreview name="date-range-picker-form-example" />
+
+### 国际化历法
+
+默认情况下，DateRangePicker 按用户语言环境的历法显示日期。你可以使用 `I18nProvider` 包裹 DateRangePicker，并通过 [Unicode 历法语言扩展](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string) 覆盖。
+
+下方示例展示印度历法系统：
+
+<ComponentPreview name="date-range-picker-international-calendar" />
+
+**说明：** `onChange` 事件始终返回与 `value` 或 `defaultValue` 相同历法系统中的日期（若未提供值则为公历），与界面展示的本地化格式无关。
+
+支持的历法系统及其标识符完整列表见：
+- [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
+- [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="date-range-picker-custom-render-function"
+/>
+
+<RelatedComponents component="daterangepicker" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以独立为每个组合部件添加样式：
+
+```tsx
+import {DateField, DateRangePicker, Label, RangeCalendar} from '@heroui/react';
+
+function CustomDateRangePicker() {
+  return (
+    <DateRangePicker className="w-[360px] gap-2">
+      <Label className="text-sm font-semibold">Trip dates</Label>
+      <DateField.Group className="rounded-xl border border-border/60 bg-surface" fullWidth variant="secondary">
+        <DateField.InputContainer>
+          <DateField.Input slot="start">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+          <DateRangePicker.RangeSeparator className="px-2 text-default" />
+          <DateField.Input slot="end">
+            {(segment) => <DateField.Segment segment={segment} />}
+          </DateField.Input>
+        </DateField.InputContainer>
+        <DateField.Suffix>
+          <DateRangePicker.Trigger className="w-full">
+            <DateRangePicker.TriggerIndicator className="text-default" />
+          </DateRangePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DateRangePicker.Popover className="rounded-xl p-2">
+        <RangeCalendar aria-label="Custom range picker calendar">
+          {/* RangeCalendar parts */}
+        </RangeCalendar>
+      </DateRangePicker.Popover>
+    </DateRangePicker>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 DateRangePicker 基础类，请使用 `@layer components`。
+
+```css
+@layer components {
+  .date-range-picker {
+    @apply inline-flex flex-col gap-1;
+  }
+
+  .date-range-picker__trigger {
+    @apply inline-flex items-center justify-between;
+  }
+
+  .date-range-picker__trigger-indicator {
+    @apply text-muted;
+  }
+
+  .date-range-picker__range-separator {
+    @apply px-2 text-default;
+  }
+
+  .date-range-picker__popover {
+    @apply min-w-[var(--trigger-width)] p-0;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 命名，以便复写与自定义。
+
+### CSS 类
+
+DateRangePicker 在 `packages/styles/components/date-range-picker.css` 中使用以下类：
+
+- `.date-range-picker` - 根包裹层。
+- `.date-range-picker__trigger` - 打开弹出层的触发区域。
+- `.date-range-picker__trigger-indicator` - 默认或自定义指示器插槽。
+- `.date-range-picker__range-separator` - 开始与结束日期输入之间的分隔。
+- `.date-range-picker__popover` - 弹出层内容包裹。
+
+### 交互状态
+
+DateRangePicker 支持 React Aria 的 data 属性与伪类状态：
+
+- **展开**：触发器上的 `[data-open="true"]`。
+- **禁用**：触发器上的 `[data-disabled="true"]` 或 `[aria-disabled="true"]`。
+- **焦点可见**：触发器上的 `:focus-visible` 或 `[data-focus-visible="true"]`。
+- **悬停**：触发器上的 `:hover` 或 `[data-hovered="true"]`。
+
+## API 参考
+
+### DateRangePicker Props
+
+DateRangePicker 继承 React Aria [DateRangePicker](https://react-aria.adobe.com/DateRangePicker) 的全部 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `{ start: DateValue; end: DateValue } \| null` | - | 受控的选中日期范围值。 |
+| `defaultValue` | `{ start: DateValue; end: DateValue } \| null` | - | 非受控模式下的默认范围。 |
+| `onChange` | `(value: { start: DateValue; end: DateValue } \| null) => void` | - | 选中范围变化时调用。 |
+| `isOpen` | `boolean` | - | 受控的弹出层展开状态。 |
+| `defaultOpen` | `boolean` | `false` | 弹出层初始是否展开。 |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | 弹出层展开状态变化时调用。 |
+| `isDisabled` | `boolean` | `false` | 禁用范围选择与触发器交互。 |
+| `isInvalid` | `boolean` | - | 标记字段无效以呈现校验状态。 |
+| `minValue` | `DateValue` | - | 可选的最小日期。 |
+| `maxValue` | `DateValue` | - | 可选的最大日期。 |
+| `startName` | `string` | - | HTML 表单提交时开始日期字段名。 |
+| `endName` | `string` | - | HTML 表单提交时结束日期字段名。 |
+| `children` | `ReactNode \| (values: DateRangePickerRenderProps) => ReactNode` | - | 组合内容或渲染函数。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DateRangePickerRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+### 组合部件
+
+| 组件 | 描述 |
+|-----------|-------------|
+| `DateRangePicker.Root` | 根日期范围选择器容器与状态持有者。 |
+| `DateRangePicker.Trigger` | 触发按钮，通常放在 `DateField.Suffix` 内。 |
+| `DateRangePicker.TriggerIndicator` | 带默认日历图标的指示器插槽。 |
+| `DateRangePicker.RangeSeparator` | 开始与结束日期输入之间的分隔部件。 |
+| `DateRangePicker.Popover` | 包裹 `RangeCalendar` 内容的弹出层。 |
+
+### Related packages
+
+- [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — 各日期组件共用的日期类型（`CalendarDate`、`CalendarDateTime`、`ZonedDateTime`）与工具函数
+- [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — 为子树覆盖语言环境
+- [`useLocale`](https://react-aria.adobe.com/useLocale) — 读取当前语言环境与书写方向

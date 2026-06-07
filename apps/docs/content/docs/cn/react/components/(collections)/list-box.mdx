@@ -1,0 +1,328 @@
+---
+title: ListBox 列表框
+description: 列表框展示一组选项，并允许用户选择一个或多个。
+links:
+  rac: ListBox
+  source: list-box/list-box.tsx
+  styles: list-box.css
+  storybook: Components/Collections/ListBox
+---
+
+## 引入
+
+```tsx
+import { ListBox } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="list-box-default"
+/>
+
+### 组件结构
+
+引入 ListBox 组件并通过点语法访问所有子部分。
+
+```tsx
+import { ListBox, Label, Description, Header } from '@heroui/react';
+
+export default () => (
+  <ListBox>
+    <ListBox.Item>
+      <Label />
+      <Description />
+      <ListBox.ItemIndicator />
+    </ListBox.Item>
+    <ListBox.Section>
+      <Header />
+      <ListBox.Item>
+        <Label />
+      </ListBox.Item>
+    </ListBox.Section>
+  </ListBox>
+)
+```
+
+### 带分组
+
+<ComponentPreview
+  name="list-box-with-sections"
+/>
+
+### 多选
+
+<ComponentPreview
+  name="list-box-multi-select"
+/>
+
+### 带禁用项
+
+<ComponentPreview
+  name="list-box-with-disabled-items"
+/>
+
+### 自定义勾选图标
+
+<ComponentPreview
+  name="list-box-custom-check-icon"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="list-box-controlled"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="list-box-custom-render-function"
+/>
+
+### 虚拟化
+
+ListBox 通过 [Virtualizer](https://react-aria.adobe.com/Virtualizer) 支持虚拟化，仅渲染视口内可见的行，从而高效展示大数据集。
+
+<ComponentPreview 
+  name="list-box-virtualization"
+/>
+
+<RelatedComponents component="list-box" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { ListBox } from '@heroui/react';
+
+function CustomListBox() {
+  return (
+    <ListBox className="border rounded-lg p-2 bg-surface">
+      <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
+        Item 1
+      </ListBox.Item>
+    </ListBox>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 ListBox 组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .list-box {
+    @apply rounded-lg border border-border bg-surface p-2;
+  }
+
+  .list-box-item {
+    @apply rounded px-2 py-1 cursor-pointer;
+  }
+
+  .list-box-item--danger {
+    @apply text-danger;
+  }
+
+  .list-box-item__indicator {
+    @apply text-accent;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ListBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/list-box.css)）：
+
+#### 基础类
+- `.list-box` - ListBox 根容器
+- `.list-box-item` - 单个列表项
+- `.list-box-item__indicator` - 选中指示图标
+- `.list-box-section` - 用于分组的区块容器
+
+#### 变体类
+- `.list-box--default` - 默认变体样式
+- `.list-box--danger` - 危险变体样式
+- `.list-box-item--default` - 列表项默认变体
+- `.list-box-item--danger` - 列表项危险变体
+
+#### 状态类
+- `.list-box-item[data-selected="true"]` - 选中状态
+- `.list-box-item[data-focus-visible="true"]` - 聚焦状态
+- `.list-box-item[data-disabled="true"]` - 禁用状态
+- `.list-box-item__indicator[data-visible="true"]` - 指示器可见状态
+
+### 交互状态
+
+该组件同时支持 CSS 伪类与 data 属性：
+
+- **悬停**：列表项上 `:hover` 或 `[data-hovered="true"]`
+- **聚焦**：列表项上 `:focus-visible` 或 `[data-focus-visible="true"]`
+- **已选中**：列表项上 `[data-selected="true"]`
+- **禁用**：列表项上 `:disabled` 或 `[data-disabled="true"]`
+
+## API 参考
+
+### ListBox Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `aria-label` | `string` | - | ListBox 的无障碍标签。 |
+| `aria-labelledby` | `string` | - | 标注 ListBox 的元素 id。 |
+| `selectionMode` | `"none" \| "single" \| "multiple"` | `"single"` | 选择行为。 |
+| `selectedKeys` | `Selection` | - | 受控的选中 key。 |
+| `defaultSelectedKeys` | `Selection` | - | 初始选中 key。 |
+| `onSelectionChange` | `(keys: Selection) => void` | - | 选中变化时调用的事件处理函数。 |
+| `disabledKeys` | `Iterable<Key>` | - | 禁用项的 key。 |
+| `onAction` | `(key: Key) => void` | - | 激活某项时调用的事件处理函数。 |
+| `variant` | `"default" \| "danger"` | `"default"` | 视觉变体。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | ListBox 项与分组。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ListBoxRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### ListBox.Item Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `id` | `Key` | - | 列表项唯一标识。 |
+| `textValue` | `string` | - | 用于无障碍与首字母导航的文本值。 |
+| `isDisabled` | `boolean` | `false` | 是否禁用该项。 |
+| `variant` | `"default" \| "danger"` | `"default"` | 视觉变体。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 列表项内容或渲染函数。 |
+| `render` | `(props: DetailedHTMLProps<LinkWithRequiredHref, HTMLAnchorElement> \| React.JSX.IntrinsicElements[keyof React.JSX.IntrinsicElements], renderProps: ListBoxItemRenderProps) => ReactElement` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### ListBox.ItemIndicator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 自定义指示器内容或渲染函数。 |
+
+### ListBox.Section Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 分组内容，包含 Header 与列表项。 |
+
+### RenderProps
+
+在 ListBox.Item 或 ListBox.ItemIndicator 中使用渲染函数时，会传入以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isSelected` | `boolean` | 该项是否选中。 |
+| `isFocused` | `boolean` | 该项是否聚焦。 |
+| `isDisabled` | `boolean` | 该项是否禁用。 |
+| `isPressed` | `boolean` | 该项是否处于按下状态。 |
+
+### ListLayout
+
+| Name | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `rowHeight` | `number \| undefined` | 48 | 行固定高度（px）。 |
+| `estimatedRowHeight` | `number \| undefined` | — | 行高可变时的估算高度。 |
+| `headingHeight` | `number \| undefined` | 48 | 分组标题固定高度（px）。 |
+| `estimatedHeadingHeight` | `number \| undefined` | — | 标题高度可变时的估算高度。 |
+| `loaderHeight` | `number \| undefined` | 48 | 加载器元素固定高度（px）。该加载器用于在根级或嵌套行/分组中渲染「加载更多」等内容。 |
+| `dropIndicatorThickness` | `number \| undefined` | 2 | 放置指示线厚度。 |
+| `gap` | `number \| undefined` | 0 | 项之间的间距。 |
+| `padding` | `number \| undefined` | 0 | 列表内边距。 |
+
+## 示例
+
+### 基础用法
+
+```tsx
+import { ListBox, Label, Description } from '@heroui/react';
+
+<ListBox aria-label="Users" selectionMode="single">
+  <ListBox.Item id="1" textValue="Bob">
+    <Label>Bob</Label>
+    <Description>bob@heroui.com</Description>
+  </ListBox.Item>
+  <ListBox.Item id="2" textValue="Alice">
+    <Label>Alice</Label>
+    <Description>alice@heroui.com</Description>
+  </ListBox.Item>
+</ListBox>
+```
+
+### 带分组
+
+```tsx
+import { ListBox, Header, Separator } from '@heroui/react';
+
+<ListBox aria-label="Actions" selectionMode="none" onAction={(key) => console.log(key)}>
+  <ListBox.Section>
+    <Header>Actions</Header>
+    <ListBox.Item id="new" textValue="New file">New file</ListBox.Item>
+    <ListBox.Item id="edit" textValue="Edit file">Edit file</ListBox.Item>
+  </ListBox.Section>
+  <Separator />
+  <ListBox.Section>
+    <Header>Danger zone</Header>
+    <ListBox.Item id="delete" textValue="Delete" variant="danger">Delete</ListBox.Item>
+  </ListBox.Section>
+</ListBox>
+```
+
+### 受控选择
+
+```tsx
+import { ListBox, Selection } from '@heroui/react';
+import { useState } from 'react';
+
+function ControlledListBox() {
+  const [selected, setSelected] = useState<Selection>(new Set(["1"]));
+
+  return (
+    <ListBox
+      aria-label="Options"
+      selectedKeys={selected}
+      selectionMode="multiple"
+      onSelectionChange={setSelected}
+    >
+      <ListBox.Item id="1" textValue="Option 1">Option 1</ListBox.Item>
+      <ListBox.Item id="2" textValue="Option 2">Option 2</ListBox.Item>
+      <ListBox.Item id="3" textValue="Option 3">Option 3</ListBox.Item>
+    </ListBox>
+  );
+}
+```
+
+### 自定义指示器
+
+```tsx
+import { ListBox, ListBoxItemIndicator } from '@heroui/react';
+import { Icon } from '@iconify/react';
+
+<ListBox aria-label="Options" selectionMode="multiple">
+  <ListBox.Item id="1" textValue="Option 1">
+    Option 1
+    <ListBox.ItemIndicator>
+      {({isSelected}) =>
+        isSelected ? <Icon icon="gravity-ui:check" /> : null
+      }
+    </ListBox.ItemIndicator>
+  </ListBox.Item>
+</ListBox>
+```
+
+## 无障碍
+
+ListBox 组件实现 ARIA listbox 模式，并提供：
+
+- 完整键盘导航支持
+- 屏幕阅读器对选中变化的播报
+- 合理的焦点管理
+- 禁用状态支持
+- 首字母导航（typeahead）搜索能力
+
+更多信息见 [React Aria ListBox 文档](https://react-spectrum.adobe.com/react-aria/ListBox.html)。

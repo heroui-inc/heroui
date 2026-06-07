@@ -1,0 +1,184 @@
+---
+title: Beta 11
+description: Bottom Sheet 关闭协同增强、Dialog 侧滑关闭修复、TextField 改进，以及面向高级场景的 PortalHost 导出
+github:
+  pull: 203
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 1 月 6 日</span>
+</div>
+
+Beta 11 聚焦多块核心能力的可靠性与开发者体验：增强 Bottom Sheet 在各关闭路径下的一致性；修复 Dialog 侧滑关闭手势；解决 TextField 样式与行为问题；并新增 `PortalHost` 导出以支持高级 Portal 挂载。交互更顺滑，对组件行为的控制也更充分。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native@beta
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native@beta
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native@beta
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native@beta
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 Beta 11 的改进！你可以查看增强后的 Bottom Sheet、Dialog、TextField 与 PortalHost 相关能力。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## 组件改进
+
+### Bottom Sheet 关闭协同增强
+
+[Bottom Sheet](/docs/native/components/bottom-sheet) 已增强各类关闭路径之间的协同。
+
+**改进：**
+
+- 下滑关闭、点击遮罩、关闭按钮与程序化关闭之间的同步更好
+- 关闭过程中的状态管理改进，减少竞态
+- 各关闭场景下 `onOpenChange` 触发更可靠
+- 动画进度与关闭态切换的衔接更顺畅
+
+Bottom Sheet 支持下滑、点遮罩、点关闭按钮或代码关闭。此前这些路径偶发冲突或表现不一致；本更新使各路径协调一致，体验更可预期。
+
+**相关 PR：** [#201](https://github.com/heroui-inc/heroui-native/pull/201)
+
+### Dialog 侧滑关闭手势修复
+
+[Dialog](/docs/native/components/dialog) 已修复侧滑关闭手势的处理。
+
+**改进：**
+
+- 侧滑关闭的手势检测与处理修复
+- 滑动过程中手势状态管理改进
+- 松手时与动画的衔接增强
+- 超过阈值后侧滑关闭更可靠
+
+Dialog 支持下滑关闭。本修复解决滑动过程中手势偶发无响应或行为异常的问题。
+
+**相关 PR：** [#193](https://github.com/heroui-inc/heroui-native/pull/193)
+
+### TextField 样式与行为修复
+
+[TextField](/docs/native/components/text-field) 的样式与行为问题已修复。
+
+**改进：**
+
+- 输入框样式不一致问题修复
+- 动画状态管理问题修复
+- 聚焦/失焦处理改进
+- 错误态视觉反馈增强
+- 占位符与选中颜色应用修复
+
+确保 TextField 在聚焦、失焦、非法等状态下显示正确，并向用户提供一致的视觉反馈。
+
+**相关 PR：** [#202](https://github.com/heroui-inc/heroui-native/pull/202)
+
+## API 增强
+
+### PortalHost 导出（高级场景）
+
+`PortalHost` 现从主 Provider 模块导出，支持高级 Portal 宿主挂载。
+
+**新能力：**
+
+```tsx
+import { HeroUINativeProvider, PortalHost } from "heroui-native";
+
+export function CustomLayout() {
+  return (
+    <>
+      <HeroUINativeProvider>
+        {/* 应用内容 */}
+      </HeroUINativeProvider>
+
+      {/* 在自定义位置手动挂载 PortalHost */}
+      <PortalHost name="custom-host" />
+    </>
+  );
+}
+```
+
+便于在自定义布局中手动挂载 Portal 宿主，例如需在 BottomSheet、Modal 或其他遮罩内指定渲染位置时。默认 `HeroUINativeProvider` 已包含标准场景的 `PortalHost`；现可额外创建具名宿主以支持多宿主架构。
+
+**适用场景：**
+
+- 在 Bottom Sheet 内挂载 Portal
+- 在 Modal 中创建 Portal 宿主
+- 自定义遮罩渲染
+- 多宿主 Portal 架构
+
+**相关 PR：** [#185](https://github.com/heroui-inc/heroui-native/pull/185)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #187](https://github.com/heroui-inc/heroui-native/issues/187)**：修复通过滑动手势关闭后，需多次点击才能再次打开 Bottom Sheet 或 Dialog 的问题。内部状态现与关闭动画正确同步，无论以何种方式关闭均可立即再次打开。
+
+- **[Issue #189](https://github.com/heroui-inc/heroui-native/issues/189)**：修复含文本输入的 Dialog 在侧滑关闭时应用卡死的问题。
+
+- **[Issue #196](https://github.com/heroui-inc/heroui-native/issues/196)**：修复 TextField 多行输入行为，与 React Native `TextInput` 多行语义一致。
+
+- **[Issue #199](https://github.com/heroui-inc/heroui-native/issues/199)**：修复 TextField Input 内占位符文字位置问题。
+
+**相关 PR：**
+
+- [#201](https://github.com/heroui-inc/heroui-native/pull/201)
+- [#202](https://github.com/heroui-inc/heroui-native/pull/202)
+- [#193](https://github.com/heroui-inc/heroui-native/pull/193)
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

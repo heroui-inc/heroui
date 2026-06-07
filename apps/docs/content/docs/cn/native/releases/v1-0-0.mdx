@@ -1,0 +1,232 @@
+---
+title: v1.0.0
+description: LinkButton 组件、子菜单冲突处理、可选的 @gorhom/bottom-sheet 对等依赖、ThemeColorValue 品牌类型
+github:
+  pull: 347
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 3 月 19 日</span>
+</div>
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/heroui-native-v1-release-.mp4"
+  height={430}
+  muted
+/>
+
+🎉 HeroUI Native 正式发布 v1.0.0——这是首个稳定版本，标志着库已从 beta 与候选发布阶段毕业，成为可用于生产环境的 React Native 应用基础。伴随这一里程碑，本版本还包含全新的 LinkButton 组件、子菜单冲突处理、可选的 `@gorhom/bottom-sheet` 对等依赖，以及针对 `useThemeColor` 的更强类型安全。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过我们的预览应用，在真机上体验 v1.0.0 的全部改进！你可以探索全新的 LinkButton 组件、改进后的子菜单行为，以及各项修复。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## 更新亮点
+
+### LinkButton 组件
+
+全新的 [LinkButton](/docs/native/components/button) 复合组件会渲染 ghost 变体按钮，且无高亮反馈，适用于「服务条款」「隐私政策」等行内链接式交互。它完全复用现有 Button 基础设施，并在内部强制 ghost 变体且关闭高亮反馈。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="link-button"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 复合子组件：`LinkButton.Label`，用于样式化文本内容
+- 内部强制 ghost 变体——不对外暴露 `variant` 属性
+- 通过 `resolveAnimationObject` 默认关闭高亮反馈
+- `h-auto p-0` 基础类移除默认按钮高度与内边距，便于行内使用
+- 合并使用方动画配置时仍保持 `highlight: false`
+
+**用法：**
+
+```tsx
+import { LinkButton } from "heroui-native";
+
+export function TermsLink() {
+  return (
+    <LinkButton onPress={() => openURL("https://example.com/terms")}>
+      <LinkButton.Label>Terms of Service</LinkButton.Label>
+    </LinkButton>
+  );
+}
+```
+
+**相关 PR：** [#341](https://github.com/heroui-inc/heroui-native/pull/341)
+
+## 组件改进
+
+### 子菜单单开约束与点击背景关闭
+
+[Menu](/docs/native/components/menu) 子菜单系统已重构为按 ID 跟踪当前子菜单，而非简单布尔值，从而在同级子菜单之间强制「同时仅开一个」。子菜单打开时，会在菜单内容区域上方渲染可点击的背景层，用户点击外部即可关闭。
+
+**改进：**
+
+- `openSubMenuId` 取代布尔标记——同一时间只能有一个子菜单处于打开状态；打开新的会自动关闭上一个
+- 子菜单打开时，在菜单内容上渲染 `Pressable` 遮罩，支持点击关闭
+- 非当前打开的子菜单触发器通过新的 `isOtherSubMenuOpen` 样式变体获得 `opacity-40` 与 `pointer-events-none`
+- 打开的子菜单内容使用 `z-50`，关闭的为 `z-40`，避免层叠问题
+- 演示应用新增「两个子菜单」示例，展示同一菜单中的多个子菜单
+
+**相关 PR：** [#343](https://github.com/heroui-inc/heroui-native/pull/343)
+
+### Button Label 的 ref 类型修复
+
+`ButtonLabel` 的 ref 类型已从 `View` 更正为 `TextRef`，并从 `button.tsx` 中移除了未使用的 `View` 导入，使 ref 类型与实际渲染元素一致。
+
+**相关 PR：** [#341](https://github.com/heroui-inc/heroui-native/pull/341)
+
+## API 增强
+
+### 用于 `useThemeColor` 的 `ThemeColorValue` 品牌类型
+
+`useThemeColor` 在单次取色调用时现返回 `ThemeColorValue` 品牌类型，误用数组解构时 IDE 会立即将类型标为 `never`。非空断言运算符（`!`）也已替换为安全的空值合并回退。
+
+**新行为：**
+
+```tsx
+import { useThemeColor } from "heroui-native";
+
+// 正确 — 直接赋值
+const mutedColor = useThemeColor("muted");
+
+// 错误 — IDE 会立即标出 `never` 类型
+const [color] = useThemeColor("muted"); // color: never
+```
+
+`ThemeColorValue` 继承自 `string`，因此凡可接受 `string` 处均可赋值。现有调用点在运行时不受影响。`_colorValueBrand` 符号以 `declare const` 声明，无运行时体积。
+
+**相关 PR：** [#337](https://github.com/heroui-inc/heroui-native/pull/337)
+
+### 公开钩子 `useBottomSheetAwareHandlers`
+
+`useBottomSheetAwareHandlers` 现已作为公开 API 导出，便于在 Bottom Sheet 内显式控制键盘避让与 `Input`、`InputOTP` 的衔接。此前在 `Input` 与 `InputOTP` 上可用的隐式 `isBottomSheetAware` 属性已被取代。
+
+**用法：**
+
+```tsx
+import { useBottomSheetAwareHandlers, Input } from "heroui-native";
+
+export function BottomSheetInput() {
+  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+
+  return <Input onFocus={onFocus} onBlur={onBlur} placeholder="Type here..." />;
+}
+```
+
+**相关 PR：** [#347](https://github.com/heroui-inc/heroui-native/pull/347)
+
+## ⚠️ 破坏性变更
+
+### Bottom Sheet 内的 `Input` 与 `InputOTP`
+
+已从 `Input` 与 `InputOTP` 移除 `isBottomSheetAware` 属性。此前 Bottom Sheet 内的键盘避让在底层自动处理；现在必须显式使用 `useBottomSheetAwareHandlers` 并自行传入处理器。这样可减轻 Input 组件负担，去掉隐式 `@gorhom/bottom-sheet` 导入，使该包对不使用 Bottom Sheet 的项目成为可选对等依赖。
+
+**迁移：**
+
+```tsx
+// 之前
+<Input isBottomSheetAware placeholder="Type here..." />
+
+// 之后
+import { useBottomSheetAwareHandlers } from "heroui-native";
+
+const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+<Input onFocus={onFocus} onBlur={onBlur} placeholder="Type here..." />
+```
+
+凡在 `BottomSheet` 内渲染的 `Input` 或 `InputOTP` 均需按此调整；在 Bottom Sheet 外使用的组件不受影响。
+
+**相关 PR：** [#347](https://github.com/heroui-inc/heroui-native/pull/347)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #330](https://github.com/heroui-inc/heroui-native/issues/330)**：修复 `Input` 在模块顶层无条件导入 `@gorhom/bottom-sheet` 的问题，即使 `isBottomSheetAware` 为 `false`。现通过可选的 `try/catch` 包装懒加载该包，不使用 Bottom Sheet 的项目无需再安装它。
+
+- **[Issue #340](https://github.com/heroui-inc/heroui-native/issues/340)**：修复子菜单内容出现在同级子菜单触发器后方的问题。子菜单系统现按 ID 跟踪活动子菜单、强制单开，并应用正确的 z-index 分层（打开 `z-50`，关闭 `z-40`）。
+
+**相关 PR：**
+
+- [#347](https://github.com/heroui-inc/heroui-native/pull/347)
+- [#343](https://github.com/heroui-inc/heroui-native/pull/343)
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [LinkButton](/docs/native/components/link-button) — LinkButton 复合组件文档：结构分解、用法示例与 API 参考
+- [Menu](/docs/native/components/menu) — 更新子菜单文档：单开约束与点击背景关闭行为
+- [Input](/docs/native/components/input) — 更新 Bottom Sheet 用法示例，采用 `useBottomSheetAwareHandlers` 模式
+- [InputOTP](/docs/native/components/input-otp) — 同上，Bottom Sheet 示例采用 `useBottomSheetAwareHandlers`
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

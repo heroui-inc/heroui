@@ -1,0 +1,128 @@
+---
+title: Surface 表面
+description: 提供表面级样式与子组件上下文的容器组件。
+links:
+  source: surface/surface.tsx
+  styles: surface.css
+  storybook: surface
+---
+
+## 引入
+
+```tsx
+import { Surface } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="surface-variants"
+/>
+
+## 概述
+
+Surface 组件是语义化容器，通过变体提供不同的视觉层次。
+
+### 变体
+
+Surface 提供描述视觉层次的语义化变体：
+
+- **`default`** — 标准表面外观（bg-surface）
+- **`secondary`** — 中等层次（bg-surface-secondary）
+- **`tertiary`** — 更高层次（bg-surface-tertiary）
+
+## 与表单组件配合
+
+在 Surface 内使用表单组件时，请为这些组件设置 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+```tsx
+import { Surface, Input, TextArea } from '@heroui/react';
+
+function App() {
+  return (
+    <Surface variant="default">
+      <Input placeholder="Input with secondary variant" variant="secondary" />
+      <TextArea placeholder="TextArea with secondary variant" variant="secondary" />
+    </Surface>
+  );
+}
+```
+
+<RelatedComponents component="surface" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Surface } from '@heroui/react';
+
+function CustomSurface() {
+  return (
+    <Surface
+      className="rounded-2xl p-8 shadow-lg"
+      variant="secondary"
+    >
+      <h2>Custom Styled Surface</h2>
+      <p>Content goes here</p>
+    </Surface>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Surface 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .surface {
+    @apply rounded-2xl border border-border;
+  }
+
+  .surface--secondary {
+    @apply bg-gradient-to-br from-blue-50 to-purple-50;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Surface 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/surface.css)）：
+
+#### 基础类
+- `.surface` - Surface 根容器
+
+#### 变体类
+- `.surface--default` - 默认 Surface 变体（bg-surface）
+- `.surface--secondary` - Secondary Surface 变体（bg-surface-secondary）
+- `.surface--tertiary` - Tertiary Surface 变体（bg-surface-tertiary）
+
+## API 参考
+
+### Surface Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | ` "transparent" \| "default" \| "secondary" \| "tertiary"` | `"default"` | Surface 的视觉变体。 |
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `ReactNode` | - | Surface 内容。 |
+
+## Context API
+
+### SurfaceContext
+
+子组件可通过 Surface 上下文读取当前变体：
+
+```tsx
+import { useContext } from 'react';
+import { SurfaceContext } from '@heroui/react';
+
+function MyComponent() {
+  const { variant } = useContext(SurfaceContext);
+  // variant 为 "transparent" | "default" | "secondary" | "tertiary" | undefined
+}
+```

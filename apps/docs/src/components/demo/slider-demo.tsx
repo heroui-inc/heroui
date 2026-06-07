@@ -2,7 +2,11 @@
 
 import {Label, Slider} from "@heroui/react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 export function SliderDemo() {
+  const {demos} = useDictionary();
+
   return (
     <div className="w-[256px] px-1">
       <Slider
@@ -13,7 +17,7 @@ export function SliderDemo() {
         minValue={0}
         step={10}
       >
-        <Label>Price</Label>
+        <Label>{demos.slider.label}</Label>
         <Slider.Output />
         <Slider.Track>
           <Slider.Fill />

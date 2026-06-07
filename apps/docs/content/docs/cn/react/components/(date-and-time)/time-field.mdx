@@ -1,0 +1,435 @@
+---
+title: TimeField 时间字段
+description: 基于 React Aria TimeField 的时间输入字段，包含标签、说明与校验。
+links:
+  rac: TimeField
+  source: time-field/time-field.tsx
+  styles: time-field.css
+  storybook: Components/Date and Time/TimeField
+---
+
+## 引入
+
+```tsx
+import { TimeField } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="time-field-basic" />
+
+### 组件结构
+
+```tsx
+import {TimeField, Label, Description, FieldError} from '@heroui/react';
+
+export default () => (
+  <TimeField>
+    <Label />
+    <TimeField.Group>
+      <TimeField.Input>
+        {(segment) => <TimeField.Segment segment={segment} />}
+      </TimeField.Input>
+    </TimeField.Group>
+    <Description />
+    <FieldError />
+  </TimeField>
+)
+```
+
+> **TimeField** 将标签、时间输入、说明与错误信息组合为单个无障碍组件。
+
+### 带描述
+
+<ComponentPreview name="time-field-with-description" />
+
+### 必填字段
+
+<ComponentPreview name="time-field-required" />
+
+### 校验
+
+配合 `FieldError`，使用 `isInvalid` 展示校验信息。
+
+<ComponentPreview name="time-field-invalid" />
+
+### 带校验
+
+TimeField 支持使用 `minValue`、`maxValue` 及自定义校验逻辑。
+
+<ComponentPreview name="time-field-with-validation" />
+
+### 受控
+
+通过控制 `value` 与其它组件或状态管理同步。
+
+<ComponentPreview name="time-field-controlled" />
+
+### 禁用状态
+
+<ComponentPreview name="time-field-disabled" />
+
+### 带图标
+
+通过前缀或后缀图标增强时间输入。
+
+<ComponentPreview name="time-field-with-prefix-icon" />
+
+<ComponentPreview name="time-field-with-suffix-icon" />
+
+<ComponentPreview name="time-field-with-prefix-and-suffix" />
+
+### 全宽
+
+<ComponentPreview name="time-field-full-width" />
+
+### 在 Surface 中
+
+在 [Surface](/docs/components/surface) 内使用时，请在 `TimeField.Group` 上使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="time-field-on-surface" />
+
+### 表单示例
+
+包含校验与提交的完整表单示例。
+
+<ComponentPreview name="time-field-form-example" />
+
+<RelatedComponents component="timefield" />
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="time-field-custom-render-function"
+/>
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {TimeField, Label, Description} from '@heroui/react';
+
+function CustomTimeField() {
+  return (
+    <TimeField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
+      <Label className="text-sm font-semibold text-default-700">
+        Appointment time
+      </Label>
+      <TimeField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
+        <TimeField.Input>
+          {(segment) => <TimeField.Segment segment={segment} />}
+        </TimeField.Input>
+      </TimeField.Group>
+      <Description className="text-xs text-default-500">
+        Select a time for your appointment.
+      </Description>
+    </TimeField>
+  );
+}
+```
+
+### 自定义组件类
+
+TimeField 的默认样式很轻量。覆盖 `.time-field` 类即可自定义容器样式。
+
+```css
+@layer components {
+  .time-field {
+    @apply flex flex-col gap-1;
+
+    &[data-invalid="true"],
+    &[aria-invalid="true"] {
+      [data-slot="description"] {
+        @apply hidden;
+      }
+    }
+
+    [data-slot="label"] {
+      @apply w-fit;
+    }
+
+    [data-slot="description"] {
+      @apply px-1;
+    }
+  }
+}
+```
+
+### CSS 类
+
+- `.time-field` – 轻量样式的根容器（`flex flex-col gap-1`）
+
+> **说明：** 子组件（[Label](/docs/components/label)、[Description](/docs/components/description)、[FieldError](/docs/components/field-error)）拥有各自的 CSS 类与样式。自定义方式请参阅对应文档。`TimeField.Group` 的样式见下文 API 参考。
+
+### 交互状态
+
+TimeField 会根据状态自动设置以下 data 属性：
+
+- **无效**：`[data-invalid="true"]` 或 `[aria-invalid="true"]` – 无效时自动隐藏 description 插槽
+- **必填**：`[data-required="true"]` – 当 `isRequired` 为 true 时添加
+- **禁用**：`[data-disabled="true"]` – 当 `isDisabled` 为 true 时添加
+- **焦点在内**：`[data-focus-within="true"]` – 任一子输入聚焦时添加
+
+## API 参考
+
+### TimeField Props
+
+TimeField 继承 React Aria [TimeField](https://react-aria.adobe.com/TimeField) 的全部 props。
+
+#### Base Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode \| (values: TimeFieldRenderProps) => React.ReactNode` | - | 子组件（Label、TimeField.Group 等）或渲染函数。 |
+| `className` | `string \| (values: TimeFieldRenderProps) => string` | - | 用于样式的 CSS 类，支持渲染 prop。 |
+| `style` | `React.CSSProperties \| (values: TimeFieldRenderProps) => React.CSSProperties` | - | 内联样式，支持渲染 prop。 |
+| `fullWidth` | `boolean` | `false` | 时间字段是否占满容器宽度。 |
+| `id` | `string` | - | 元素的唯一 id。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TimeFieldRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+#### Value Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `TimeValue \| null` | - | 当前值（受控）。类型见 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/)。 |
+| `defaultValue` | `TimeValue \| null` | - | 默认值（非受控）。类型见 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/)。 |
+| `onChange` | `(value: TimeValue \| null) => void` | - | 值变化时触发的事件处理函数。 |
+| `placeholderValue` | `TimeValue \| null` | - | 影响占位符格式的占位时间；默认随小时制为 12:00 AM 或 00:00。 |
+
+#### Validation Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isRequired` | `boolean` | `false` | 是否在提交表单前要求用户输入。 |
+| `isInvalid` | `boolean` | - | 值是否无效。 |
+| `minValue` | `TimeValue \| null` | - | 用户可选择最早时间。类型见 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/)。 |
+| `maxValue` | `TimeValue \| null` | - | 用户可选择最晚时间。类型见 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/)。 |
+| `validate` | `(value: TimeValue) => ValidationError \| true \| null \| undefined` | - | 自定义校验函数。 |
+| `validationBehavior` | `'native' \| 'aria'` | `'native'` | 使用原生 HTML 表单校验还是 ARIA 属性。 |
+
+#### Format Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `granularity` | `'hour' \| 'minute' \| 'second'` | `'minute'` | 时间选择器显示的最小单位。 |
+| `hourCycle` | `12 \| 24` | - | 以 12 或 24 小时制显示时间；默认由语言环境决定。 |
+| `hideTimeZone` | `boolean` | `false` | 是否隐藏时区缩写。 |
+| `shouldForceLeadingZeros` | `boolean` | - | 是否始终为小时字段显示前导零；默认由语言环境决定。 |
+
+#### State Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isDisabled` | `boolean` | - | 是否禁用输入。 |
+| `isReadOnly` | `boolean` | - | 是否可选中但不可修改。 |
+
+#### Form Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `name` | `string` | - | 输入元素的 name，用于 HTML 表单提交；以 ISO 8601 字符串提交。 |
+| `autoFocus` | `boolean` | - | 是否在渲染后自动聚焦该元素。 |
+
+#### Accessibility Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `aria-label` | `string` | - | 无可见标签时的无障碍标签。 |
+| `aria-labelledby` | `string` | - | 标注该字段的元素 id。 |
+| `aria-describedby` | `string` | - | 描述该字段的元素 id。 |
+| `aria-details` | `string` | - | 包含额外详情的元素 id。 |
+
+### 组合组件
+
+TimeField 与以下独立组件配合使用，请分别导入并直接使用：
+
+- **Label** – 来自 `@heroui/react` 的字段标签
+- **TimeField.Group** – 时间输入分组（详见下文）
+- **TimeField.Input** – 来自 `@heroui/react` 的分段位编辑输入
+- **TimeField.Segment** – 单个时间段位（时、分、秒等）
+- **TimeField.Prefix** / **TimeField.Suffix** – 输入组的前缀与后缀插槽
+- **Description** – 来自 `@heroui/react` 的辅助说明
+- **FieldError** – 来自 `@heroui/react` 的校验错误信息
+
+这些组件各自有独立的 props API。在 TimeField 中直接组合使用：
+
+```tsx
+import {parseTime} from '@internationalized/date';
+import {TimeField, Label, Description, FieldError} from '@heroui/react';
+
+<TimeField
+  isRequired
+  isInvalid={hasError}
+  minValue={parseTime('09:00')}
+  maxValue={parseTime('17:00')}
+  value={time}
+  onChange={setTime}
+>
+  <Label>Appointment Time</Label>
+  <TimeField.Group>
+    <TimeField.Input>
+      {(segment) => <TimeField.Segment segment={segment} />}
+    </TimeField.Input>
+  </TimeField.Group>
+  <Description>Select a time between 9:00 AM and 5:00 PM.</Description>
+  <FieldError>Please select a valid time.</FieldError>
+</TimeField>
+```
+
+### TimeValue 类型
+
+TimeField 使用 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) 中的类型：
+
+- `Time` – 仅时间（时、分、秒）
+- `CalendarDateTime` – 含日期与时间、不含时区（TimeField 仅展示时间部分）
+- `ZonedDateTime` – 含日期、时间与时区（TimeField 仅展示时间部分）
+
+示例：
+
+```tsx
+import {parseTime, Time, getLocalTimeZone, now} from '@internationalized/date';
+
+// Parse from string
+const time = parseTime('14:30');
+
+// Create from current time
+const currentTime = now(getLocalTimeZone());
+const timeValue = new Time(currentTime.hour, currentTime.minute, currentTime.second);
+
+// Use in TimeField
+<TimeField value={time} onChange={setTime}>
+  {/* ... */}
+</TimeField>
+```
+
+> **说明：** TimeField 使用 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) 进行时间处理、解析与类型定义。更多类型与函数见 [Internationalized Date 文档](https://react-aria.adobe.com/internationalized/date/)。
+
+### TimeFieldRenderProps
+
+对 `className`、`style` 或 `children` 使用渲染 prop 时，可使用以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isDisabled` | `boolean` | 字段是否禁用。 |
+| `isInvalid` | `boolean` | 字段当前是否无效。 |
+| `isReadOnly` | `boolean` | 字段是否只读。 |
+| `isRequired` | `boolean` | 字段是否必填。 |
+| `isFocused` | `boolean` | 字段是否聚焦。 |
+| `isFocusWithin` | `boolean` | 是否有子元素聚焦。 |
+| `isFocusVisible` | `boolean` | 焦点是否可见（键盘导航）。 |
+
+### TimeField.Group Props
+
+TimeField.Group 继承 React Aria `Group` 的全部 props，并额外支持：
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉变体。`primary` 为默认带阴影样式；`secondary` 为低强调、无阴影，适合用于 Surface。 |
+
+### TimeField.Input Props
+
+TimeField.Input 继承 React Aria `DateInput` 的全部 props，并额外支持：
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 输入的视觉变体。`primary` 为默认带阴影样式；`secondary` 为低强调、无阴影，适合用于 Surface。 |
+
+`TimeField.Input` 接受渲染函数作为子节点，函数接收日期段位；每个段位表示时间的一部分（时、分、秒等）。
+
+### TimeField.Segment Props
+
+TimeField.Segment 继承 React Aria `DateSegment` 的全部 props：
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `segment` | `DateSegment` | - | 来自 TimeField.Input 渲染函数的 `DateSegment` 对象。 |
+| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
+
+### TimeField.Prefix Props
+
+TimeField.Prefix 接受标准 HTML `div` 属性：
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 前缀插槽中要显示的内容。 |
+
+### TimeField.Suffix Props
+
+TimeField.Suffix 接受标准 HTML `div` 属性：
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 后缀插槽中要显示的内容。 |
+
+## TimeField.Group 样式
+
+### 自定义组件类
+
+基础类作用于所有实例，可通过 `@layer components` 一次性覆盖。
+
+```css
+@layer components {
+  .date-input-group {
+    @apply inline-flex h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
+
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-field-hover;
+    }
+
+    &[data-focus-within="true"],
+    &:focus-within {
+      @apply status-focused-field;
+    }
+
+    &[data-invalid="true"] {
+      @apply status-invalid-field;
+    }
+
+    &[data-disabled="true"],
+    &[aria-disabled="true"] {
+      @apply status-disabled;
+    }
+  }
+
+  .date-input-group__input {
+    @apply flex flex-1 items-center gap-px rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+  }
+
+  .date-input-group__segment {
+    @apply inline-block rounded-md px-0.5 text-end tabular-nums outline-none;
+
+    &:focus,
+    &[data-focused="true"] {
+      @apply bg-accent-soft text-accent-soft-foreground;
+    }
+  }
+
+  .date-input-group__prefix,
+  .date-input-group__suffix {
+    @apply pointer-events-none shrink-0 text-field-placeholder flex items-center;
+  }
+}
+```
+
+### TimeField.Group CSS 类
+
+- `.date-input-group` – 根容器样式
+- `.date-input-group__input` – 输入包裹层样式
+- `.date-input-group__segment` – 单个时间段位样式
+- `.date-input-group__prefix` – 前缀元素样式
+- `.date-input-group__suffix` – 后缀元素样式
+
+### TimeField.Group 交互状态
+
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **焦点在内**：`[data-focus-within="true"]` 或 `:focus-within`
+- **无效**：`[data-invalid="true"]`（同时与 `aria-invalid` 同步）
+- **禁用**：`[data-disabled="true"]` 或 `[aria-disabled="true"]`
+- **段位聚焦**：段位上的 `:focus` 或 `[data-focused="true"]`
+- **段位占位符**：段位上的 `[data-placeholder="true"]`

@@ -1,0 +1,178 @@
+---
+title: v3.1.0
+description: 中文 React 文档、可访问的 soft foreground 令牌、统一滚动条、useTheme SSR 修复、Toast 清理、Link 下划线与 RTL 布局优化。
+github:
+  pull: 6576
+---
+
+import {HandPointUp} from "@gravity-ui/icons";
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 5 月 25 日</span>
+</div>
+
+v3.1.0 是小版本发布：新增中文 React 文档与本地化示例，soft foreground 默认达到无障碍对比度，滚动条统一由 `data-scrollbar` 和主题变量控制；同时修复 `useTheme`、Toast、Link、Fieldset、浮层和 RTL 布局问题。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增内容
+
+### 中文 React 文档
+
+React 文档、迁移指南、发布说明和示例现在都有中文版本 ([#6533](https://github.com/heroui-inc/heroui/pull/6533))。组件页、入门指南和迁移参考都可以按 locale 发布。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/oss-releases/cn-docs-showcase.png"
+  alt="HeroUI 中文 React 文档页面"
+  wrapperClassName="aspect-[1922/1323]"
+/>
+
+### 可访问的 Soft Foreground 令牌
+
+Soft 状态不再直接套语义色，而是使用专门的 foreground token，让 Badge、Chip、Alert、Toast、Avatar 和 Calendar 范围状态的文字对比度更稳定 ([#6548](https://github.com/heroui-inc/heroui/pull/6548))。
+
+可直接覆盖这些 token：
+
+- `--default-soft`
+- `--default-soft-foreground`
+- `--default-soft-hover`
+- `--accent-soft-foreground`
+- `--danger-soft-foreground`
+- `--warning-soft-foreground`
+- `--success-soft-foreground`
+
+默认 palette 现在使用符合无障碍对比度的 soft foreground。需要旧版更饱和、但对比度更低的颜色时，在根元素启用 vibrant palette：
+
+```html
+<html data-vibrant-palette="true">
+  ...
+</html>
+```
+
+<ComponentPreview name="chip-vibrant-palette" />
+
+### 统一滚动条系统
+
+滚动容器现在共享同一套标准 CSS 滚动条工具：主题 token 负责颜色和宽度，`data-scrollbar` 负责模式切换 ([#6545](https://github.com/heroui-inc/heroui/pull/6545))。组件滚动区域和自定义 overflow 区域都读取同一组 `--scrollbar-*` 变量。
+
+三种模式：
+
+- HeroUI 纤细：不设置 `data-scrollbar`，或设置 `data-scrollbar="thin"`。
+- 浏览器默认：设置 `data-scrollbar="default"`，使用操作系统 / 浏览器滚动条。
+- 隐藏：设置 `data-scrollbar="none"`，隐藏滚动条但保留滚动。
+
+```html
+<div data-scrollbar="thin">使用 HeroUI 主题滚动条</div>
+<div data-scrollbar="default">使用浏览器默认滚动条</div>
+<div data-scrollbar="none">隐藏后代 HeroUI 滚动条</div>
+```
+
+<div className="not-prose mt-6 mb-4 flex items-center gap-2 text-sm font-medium text-muted">
+  <HandPointUp aria-hidden="true" className="size-5 shrink-0" />
+  <span>垂直滚动</span>
+</div>
+
+<ComponentPreview name="list-box-scrollbar-modes" />
+
+Select、ComboBox、Autocomplete、Dropdown、DatePicker、DateRangePicker、ColorPicker、Table、Tabs、Modal、Drawer 和 ScrollShadow 已接入同一套工具。
+
+自定义滚动插槽使用 `scrollbar`。它读取最近的 `data-scrollbar` 祖先，并自动应用对应的 `--scrollbar-width`、`--scrollbar-color` 和 `--scrollbar-gutter`。
+
+```css
+.alert-dialog__body {
+  @apply min-h-0 flex-1 scrollbar;
+}
+```
+
+主题变量也从单个固定的 `--scrollbar` 颜色，改为一组更细的滚动条 token：
+
+```css
+/* before */
+--scrollbar: oklch(70.5% 0.015 286.067);
+
+/* after */
+--scrollbar: var(--scrollbar-thumb);
+--scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+--scrollbar-track: transparent;
+--scrollbar-gutter: auto;
+--scrollbar-width: thin;
+--scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+```
+
+`--scrollbar` 保留为兼容别名；新的 thumb、track、gutter、width 和 color token 控制最终滚动条。
+
+恢复浏览器默认滚动条：在 `<html>`、`<main>` 或任意嵌套容器上设置 `data-scrollbar="default"`。如果全局已设为默认，但某个局部仍要 HeroUI 样式，在该容器上加 `data-scrollbar="thin"`。
+
+```html
+<html data-scrollbar="default">
+  <main>
+    <section data-scrollbar="thin">
+      <!-- 这里使用 HeroUI 主题滚动条 -->
+    </section>
+  </main>
+</html>
+```
+
+## 组件与运行时修复
+
+- **Fieldset**：`disabled` 会传给字段标签，并禁用后代 React Aria `RadioGroup` 与 `Slider` ([#6547](https://github.com/heroui-inc/heroui/pull/6547))。
+- **Toast**：非前台 Toast 不再进入 Tab 顺序；卸载时清理已测量高度 ([#6510](https://github.com/heroui-inc/heroui/pull/6510), [#6512](https://github.com/heroui-inc/heroui/pull/6512))。
+- **`useTheme`**：SSR 不再读取浏览器 API；`resolvedTheme` 改为派生值；系统主题订阅改用 `useSyncExternalStore` ([#6561](https://github.com/heroui-inc/heroui/pull/6561))。
+- **Link**：默认无下划线；hover 使用 50% 装饰色；active / pressed 使用 100%；移除下划线装饰色过渡 ([#6570](https://github.com/heroui-inc/heroui/pull/6570), [#6571](https://github.com/heroui-inc/heroui/pull/6571))。
+
+## 布局、浮层与 RTL 修复
+
+- **浮层定位**：进入动画只过渡 `opacity` 和 `transform`，不再动画化 React Aria 写入的定位值 ([#6549](https://github.com/heroui-inc/heroui/pull/6549))。
+- **Dialog 与 Modal 聚焦**：Modal 和 AlertDialog 内容改用裁剪处理，避免 focus 触发程序化滚动；body focus ring 不再被 overflow 裁掉 ([#6448](https://github.com/heroui-inc/heroui/pull/6448), [#6557](https://github.com/heroui-inc/heroui/pull/6557))。
+- **RTL Table 圆角**：Table 改用逻辑方向的 `border-radius`，RTL 外侧圆角保持正确 ([#6568](https://github.com/heroui-inc/heroui/pull/6568))。
+- **RTL Picker 与 Menu 指示器**：Select、ListBox.Item、Autocomplete、ComboBox 和 MenuItem 改用 logical inline start/end，覆盖 chevron、value、checkmark、trigger 和 submenu indicator ([#6573](https://github.com/heroui-inc/heroui/pull/6573))。
+
+## 文档与依赖
+
+- 主题文档同步当前 `theme.css` / `variables.css`：soft foreground 令牌和滚动条变量都已更新。
+- 发布说明和迁移文档同步 Link 行为。
+- 文档站新增 `@fumadocs/language`；`fumadocs-core` / `fumadocs-ui` 升级到 `16.9.0`。
+- 文档和样式包的 Tailwind 工具升级到 `4.3.0`。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [主题文档](/docs/react/getting-started/theming)
+- [Figma Kit V3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6576](https://github.com/heroui-inc/heroui/pull/6576)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的朋友！
+
+<PRContributors />

@@ -1,5 +1,9 @@
+"use client";
+
 import {Avatar, Card} from "@heroui/react";
 import {tv} from "tailwind-variants";
+
+import {useDictionary} from "@/hooks/use-dictionary";
 
 const cardStyles = tv({
   slots: {
@@ -13,6 +17,8 @@ const cardStyles = tv({
 
 export function SubtleCardsDemo() {
   const {avatar, card, cardContent, footer, footerAvatar} = cardStyles();
+  const {demos} = useDictionary();
+  const t = demos.subtleCards;
 
   return (
     <div className="flex w-full flex-row flex-wrap justify-between gap-4">
@@ -20,15 +26,15 @@ export function SubtleCardsDemo() {
         <Card.Header>
           <Avatar className={avatar()}>
             <Avatar.Image
-              alt="Demo 1"
+              alt={t.indieTitle}
               src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo1.jpg"
             />
             <Avatar.Fallback>JK</Avatar.Fallback>
           </Avatar>
         </Card.Header>
         <Card.Content className={cardContent()}>
-          <p className="text-sm font-medium">Indie Hackers</p>
-          <p className="text-sm text-muted">148 members</p>
+          <p className="text-sm font-medium">{t.indieTitle}</p>
+          <p className="text-sm text-muted">{t.indieMembers}</p>
         </Card.Content>
         <Card.Footer className={footer()}>
           <Avatar className={footerAvatar()}>
@@ -38,22 +44,22 @@ export function SubtleCardsDemo() {
             />
             <Avatar.Fallback>JK</Avatar.Fallback>
           </Avatar>
-          <p className="text-xs text-muted">By John</p>
+          <p className="text-xs text-muted">{t.indieBy}</p>
         </Card.Footer>
       </Card>
       <Card className={card()}>
         <Card.Header>
           <Avatar className={avatar()}>
             <Avatar.Image
-              alt="AI Builders"
+              alt={t.aiTitle}
               src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/demo2.jpg"
             />
             <Avatar.Fallback>J</Avatar.Fallback>
           </Avatar>
         </Card.Header>
         <Card.Content className={cardContent()}>
-          <p className="text-sm font-medium">AI Builders</p>
-          <p className="text-sm text-muted">362 members</p>
+          <p className="text-sm font-medium">{t.aiTitle}</p>
+          <p className="text-sm text-muted">{t.aiMembers}</p>
         </Card.Content>
         <Card.Footer className={footer()}>
           <Avatar className={footerAvatar()}>
@@ -63,7 +69,7 @@ export function SubtleCardsDemo() {
             />
             <Avatar.Fallback>M</Avatar.Fallback>
           </Avatar>
-          <p className="text-xs text-muted">By Martha</p>
+          <p className="text-xs text-muted">{t.aiBy}</p>
         </Card.Footer>
       </Card>
     </div>

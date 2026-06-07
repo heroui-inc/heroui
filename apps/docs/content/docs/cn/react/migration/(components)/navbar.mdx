@@ -1,0 +1,645 @@
+---
+title: Navbar
+description: Navbar 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="warning">
+  HeroUI v3 已**移除** Navbar 组件。请使用原生 HTML 元素与 Tailwind CSS 类手动搭建导航栏。本指南介绍常见模式，并简化复杂能力的说明。
+</Callout>
+
+## 关键变化
+
+### 1. 组件移除
+
+**v2：** `<Navbar>` 与子组件（`NavbarBrand`、`NavbarContent`、`NavbarItem`、`NavbarMenu`、`NavbarMenuItem`、`NavbarMenuToggle`）  
+**v3：** 使用原生 HTML 手动组合
+
+### 2. 子组件映射
+
+| v2 组件 | v3 对应 | 说明 |
+| ------- | ------- | ---- |
+| `Navbar` | `<nav>` 元素 | 主容器 |
+| `NavbarBrand` | `<div>` 或 `<a>` | Logo / 品牌区 |
+| `NavbarContent` | `<ul>` 元素 | 导航列表 |
+| `NavbarItem` | `<li>` 元素 | 导航项 |
+| `NavbarMenu` | 移动端菜单覆盖层 | 需自行实现 |
+| `NavbarMenuItem` | 移动菜单内的 `<li>` | 移动菜单项 |
+| `NavbarMenuToggle` | `<button>` | 移动菜单切换 |
+
+### 3. 已移除的能力
+
+- `shouldHideOnScroll` — 需自行实现滚动检测  
+- `isBlurred` — 请使用 Tailwind CSS 的 `backdrop-blur` 工具类  
+- `isBordered` — 请使用 Tailwind CSS 边框类  
+- `position` 变体 — 请使用 Tailwind CSS 的 `sticky`、`fixed` 等类  
+- `maxWidth` 变体 — 请使用 Tailwind CSS 的 `max-w-*` 类  
+- 移动菜单动画 — 需自行实现  
+- 滚动锁定 — 需自行实现（见下文「滚动锁定」）
+
+## 迁移示例
+
+### 基础 Navbar
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react";
+
+    {/* Basic */}
+    <Navbar>
+      <NavbarBrand>
+        <Logo />
+        <p className="font-bold">ACME</p>
+      </NavbarBrand>
+      <NavbarContent>
+        <NavbarItem><Link href="#">Features</Link></NavbarItem>
+        <NavbarItem><Link href="#">Pricing</Link></NavbarItem>
+      </NavbarContent>
+    </Navbar>
+    
+    {/* With right-aligned content */}
+    <Navbar>
+      <NavbarBrand>Logo</NavbarBrand>
+      <NavbarContent justify="end">
+        <NavbarItem><Button>Sign Up</Button></NavbarItem>
+      </NavbarContent>
+    </Navbar>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Link, Button } from "@heroui/react";
+
+    {/* Basic */}
+    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
+      <header className="flex h-16 items-center justify-between px-6">
+        <div className="flex items-center gap-3">
+          <Logo />
+          <p className="font-bold">ACME</p>
+        </div>
+        <ul className="flex items-center gap-4">
+          <li><Link href="#">Features</Link></li>
+          <li><Link href="#">Pricing</Link></li>
+        </ul>
+      </header>
+    </nav>
+    
+    {/* With right-aligned content */}
+    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
+      <header className="flex h-16 items-center justify-between px-6">
+        <div>Logo</div>
+        <ul className="flex items-center gap-4">
+          <li><Button>Sign Up</Button></li>
+        </ul>
+      </header>
+    </nav>
+    ```
+  </Tab>
+</Tabs>
+
+### 移动菜单（简化版）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import {
+      Navbar,
+      NavbarBrand,
+      NavbarContent,
+      NavbarItem,
+      NavbarMenu,
+      NavbarMenuItem,
+      NavbarMenuToggle,
+    } from "@heroui/react";
+
+    function App() {
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+      return (
+        <Navbar onMenuOpenChange={setIsMenuOpen}>
+          <NavbarContent>
+            <NavbarMenuToggle className="sm:hidden" />
+            <NavbarBrand>Logo</NavbarBrand>
+          </NavbarContent>
+          <NavbarContent className="hidden md:flex">
+            <NavbarItem>Features</NavbarItem>
+            <NavbarItem>Pricing</NavbarItem>
+          </NavbarContent>
+          <NavbarMenu>
+            <NavbarMenuItem>Features</NavbarMenuItem>
+            <NavbarMenuItem>Pricing</NavbarMenuItem>
+          </NavbarMenu>
+        </Navbar>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Link, Button } from "@heroui/react";
+
+    function App() {
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+      return (
+        <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
+          <header className="flex h-16 items-center justify-between px-6">
+            <div className="flex items-center gap-4">
+              <button
+                className="md:hidden"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                <span className="sr-only">Menu</span>
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+              <div>Logo</div>
+            </div>
+            <ul className="hidden items-center gap-4 md:flex">
+              <li>
+                <Link href="#">Features</Link>
+              </li>
+              <li>
+                <Link href="#">Pricing</Link>
+              </li>
+            </ul>
+          </header>
+          {isMenuOpen && (
+            <div className="border-t border-separator md:hidden">
+              <ul className="flex flex-col gap-2 p-4">
+                <li>
+                  <Link href="#" className="block py-2">
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="block py-2">
+                    Pricing
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
+        </nav>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## 完整示例
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import {
+      Navbar,
+      NavbarBrand,
+      NavbarContent,
+      NavbarItem,
+      NavbarMenu,
+      NavbarMenuItem,
+      NavbarMenuToggle,
+      Link,
+      Button,
+    } from "@heroui/react";
+
+    export default function App() {
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+      return (
+        <Navbar position="sticky" maxWidth="lg" onMenuOpenChange={setIsMenuOpen}>
+          <NavbarContent>
+            <NavbarMenuToggle className="sm:hidden" />
+            <NavbarBrand>
+              <Logo />
+              <p className="font-bold">ACME</p>
+            </NavbarBrand>
+          </NavbarContent>
+          <NavbarContent className="hidden md:flex">
+            <NavbarItem>
+              <Link href="#">Features</Link>
+            </NavbarItem>
+            <NavbarItem isActive>
+              <Link href="#">Dashboard</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link href="#">Pricing</Link>
+            </NavbarItem>
+          </NavbarContent>
+          <NavbarContent justify="end">
+            <NavbarItem>
+              <Link href="#">Login</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Button>Sign Up</Button>
+            </NavbarItem>
+          </NavbarContent>
+          <NavbarMenu>
+            <NavbarMenuItem>
+              <Link href="#">Features</Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem>
+              <Link href="#">Dashboard</Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem>
+              <Link href="#">Pricing</Link>
+            </NavbarMenuItem>
+          </NavbarMenu>
+        </Navbar>
+      );
+    }
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Link, Button } from "@heroui/react";
+
+    export default function App() {
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+      return (
+        <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
+          <header className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+            <div className="flex items-center gap-4">
+              <button
+                className="md:hidden"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={isMenuOpen}
+              >
+                <span className="sr-only">Menu</span>
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+              <div className="flex items-center gap-3">
+                <Logo />
+                <p className="font-bold">ACME</p>
+              </div>
+            </div>
+            <ul className="hidden items-center gap-4 md:flex">
+              <li>
+                <Link href="#">Features</Link>
+              </li>
+              <li>
+                <Link href="#" className="font-medium text-accent" aria-current="page">
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link href="#">Pricing</Link>
+              </li>
+            </ul>
+            <div className="hidden items-center gap-4 md:flex">
+              <Link href="#">Login</Link>
+              <Button>Sign Up</Button>
+            </div>
+          </header>
+          {isMenuOpen && (
+            <div className="border-t border-separator md:hidden">
+              <ul className="flex flex-col gap-2 p-4">
+                <li>
+                  <Link href="#" className="block py-2">
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="block py-2 font-medium text-accent">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="block py-2">
+                    Pricing
+                  </Link>
+                </li>
+                <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
+                  <Link href="#" className="block py-2">
+                    Login
+                  </Link>
+                  <Button className="w-full">Sign Up</Button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </nav>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## 创建可复用的 Navbar 组件（推荐）
+
+导航栏在应用中很常见，下面是一个简化的可复用组件示例：
+
+```tsx
+import { useState, ReactNode } from "react";
+import { Link, Button } from "@heroui/react";
+import { cn } from "@/lib/utils"; // or your cn utility
+
+interface NavbarItem {
+  label: string;
+  href: string;
+  isActive?: boolean;
+}
+
+interface NavbarProps {
+  brand: ReactNode;
+  items: NavbarItem[];
+  rightContent?: ReactNode;
+  className?: string;
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+  position?: "static" | "sticky" | "fixed";
+}
+
+const maxWidthClasses = {
+  sm: "max-w-[640px]",
+  md: "max-w-[768px]",
+  lg: "max-w-[1024px]",
+  xl: "max-w-[1280px]",
+  "2xl": "max-w-[1536px]",
+  full: "max-w-full",
+};
+
+export function Navbar({
+  brand,
+  items,
+  rightContent,
+  className,
+  maxWidth = "lg",
+  position = "sticky",
+}: NavbarProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <nav
+      className={cn(
+        "z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg",
+        position === "sticky" && "sticky top-0",
+        position === "fixed" && "fixed top-0",
+        className
+      )}
+    >
+      <header
+        className={cn(
+          "flex h-16 items-center justify-between px-6",
+          maxWidth !== "full" && maxWidthClasses[maxWidth],
+          "mx-auto"
+        )}
+      >
+        <div className="flex items-center gap-4">
+          <button
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <span className="sr-only">Menu</span>
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+          {brand}
+        </div>
+        <ul className="hidden items-center gap-4 md:flex">
+          {items.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={cn(item.isActive && "font-medium text-accent")}
+                aria-current={item.isActive ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {rightContent && <div className="hidden items-center gap-4 md:flex">{rightContent}</div>}
+      </header>
+      {isMenuOpen && (
+        <div className="border-t border-separator md:hidden">
+          <ul className="flex flex-col gap-2 p-4">
+            {items.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "block py-2",
+                    item.isActive && "font-medium text-accent"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            {rightContent && (
+              <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
+                {rightContent}
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+// Usage
+<Navbar
+  brand={
+    <>
+      <Logo />
+      <p className="font-bold">ACME</p>
+    </>
+  }
+  items={[
+    { label: "Features", href: "#features" },
+    { label: "Dashboard", href: "#dashboard", isActive: true },
+    { label: "Pricing", href: "#pricing" },
+  ]}
+  rightContent={
+    <>
+      <Link href="#login">Login</Link>
+      <Button>Sign Up</Button>
+    </>
+  }
+/>
+```
+
+## 高级能力（需自行实现）
+
+### 滚动时隐藏
+
+`shouldHideOnScroll` 需要自行实现滚动检测：
+
+```tsx
+import { useState, useEffect } from "react";
+
+function useScrollDirection() {
+  const [isHidden, setIsHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsHidden(currentScrollY > lastScrollY && currentScrollY > 64);
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  return isHidden;
+}
+
+function NavbarWithHideOnScroll() {
+  const isHidden = useScrollDirection();
+
+  return (
+    <nav
+      className={cn(
+        "sticky top-0 z-40 w-full transition-transform duration-300",
+        isHidden && "-translate-y-full"
+      )}
+    >
+      {/* navbar content */}
+    </nav>
+  );
+}
+```
+
+### 滚动锁定
+
+在移动菜单打开时锁定页面滚动：
+
+```tsx
+useEffect(() => {
+  if (isMenuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [isMenuOpen]);
+```
+
+## 总结
+
+1. **组件已移除**：`Navbar`、`NavbarBrand`、`NavbarContent`、`NavbarItem`、`NavbarMenu`、`NavbarMenuItem`、`NavbarMenuToggle` 均已移除。  
+2. **导入调整**：从 `@heroui/react` 中移除所有 Navbar 相关导入。  
+3. **手动组合**：使用原生 HTML 搭建导航栏。  
+4. **移动菜单**：通过状态管理手动实现移动菜单。  
+5. **样式**：直接使用 Tailwind CSS 类。  
+6. **高级能力**：滚动时隐藏、动画等需自行实现。
+
+## 迁移步骤
+
+1. **移除导入**：删除所有与 Navbar 相关的导入。  
+2. **替换结构**：将 `<Navbar>` 替换为 `<nav>`。  
+3. **替换子组件**：用语义化 HTML（`<header>`、`<ul>`、`<li>`）替代子组件。  
+4. **补充移动菜单**：手动实现菜单切换与菜单面板。  
+5. **应用样式**：用 Tailwind CSS 完成布局与样式。  
+6. **管理状态**：用 React `useState` 管理移动菜单开关。  
+7. **（可选）** 为应用封装可复用的 Navbar 组件。
+
+## 常见模式
+
+### 简单导航
+
+```tsx
+<nav className="sticky top-0 z-40 w-full border-b border-separator bg-background">
+  <header className="flex h-16 items-center justify-between px-6">
+    <div>Logo</div>
+    <ul className="flex items-center gap-4">
+      <li><Link href="#">Home</Link></li>
+      <li><Link href="#">About</Link></li>
+      <li><Link href="#">Contact</Link></li>
+    </ul>
+  </header>
+</nav>
+```
+
+### 搭配下拉（使用 v3 Dropdown）
+
+```tsx
+import { Dropdown, Button, Label } from "@heroui/react";
+
+<ul className="flex items-center gap-4">
+  <li>
+    <Dropdown>
+      <Button variant="ghost">Features</Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu>
+          <Dropdown.Item id="feature1" textValue="Feature 1">
+            <Label>Feature 1</Label>
+          </Dropdown.Item>
+          <Dropdown.Item id="feature2" textValue="Feature 2">
+            <Label>Feature 2</Label>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+  </li>
+</ul>
+```

@@ -1,0 +1,194 @@
+---
+title: ToggleButtonGroup 切换按钮组
+description: 将多个 ToggleButton 组合为统一控件，允许用户选择单个或多个选项。
+links:
+  rac: ToggleButtonGroup
+  source: toggle-button-group/toggle-button-group.tsx
+  styles: toggle-button-group.css
+  storybook: Components/Buttons/ToggleButtonGroup
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="toggle-button-group-basic"
+/>
+
+### 组件结构
+
+导入 ToggleButtonGroup 组件，并通过点语法访问所有子部分。
+
+```tsx
+import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
+
+export default () => (
+  <ToggleButtonGroup selectionMode="multiple">
+    <ToggleButton id="first">First</ToggleButton>
+    <ToggleButton id="second">
+      <ToggleButtonGroup.Separator />
+      Second
+    </ToggleButton>
+    <ToggleButton id="third">
+      <ToggleButtonGroup.Separator />
+      Third
+    </ToggleButton>
+  </ToggleButtonGroup>
+);
+```
+
+### 尺寸
+
+<ComponentPreview
+  name="toggle-button-group-sizes"
+/>
+
+### 方向
+
+<ComponentPreview
+  name="toggle-button-group-orientation"
+/>
+
+### 分离模式
+
+使用 `isDetached` 让按钮之间留出间隔，而不是彼此连接。
+
+<ComponentPreview
+  name="toggle-button-group-attached"
+/>
+
+### 全宽
+
+<ComponentPreview
+  name="toggle-button-group-full-width"
+/>
+
+### 选择模式
+
+使用 `selectionMode="single"` 实现互斥选择，或使用 `selectionMode="multiple"` 实现独立切换。
+
+<ComponentPreview
+  name="toggle-button-group-selection-mode"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="toggle-button-group-controlled"
+/>
+
+### 禁用
+
+<ComponentPreview
+  name="toggle-button-group-disabled"
+/>
+
+### 无分隔线
+
+在按钮中直接省略 `<ToggleButtonGroup.Separator />` 组件即可。
+
+<ComponentPreview
+  name="toggle-button-group-without-separator"
+/>
+
+<RelatedComponents component="toggle-button-group" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
+
+function CustomToggleButtonGroup() {
+  return (
+    <ToggleButtonGroup className="bg-purple-100" selectionMode="single">
+      <ToggleButton id="a">Option A</ToggleButton>
+      <ToggleButton id="b">
+        <ToggleButtonGroup.Separator />
+        Option B
+      </ToggleButton>
+    </ToggleButtonGroup>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 ToggleButtonGroup 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .toggle-button-group {
+    @apply rounded-lg;
+  }
+
+  .toggle-button-group__separator {
+    @apply opacity-25;
+  }
+
+  .toggle-button-group--full-width {
+    @apply w-full;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toggle-button-group.css)）：
+
+#### 基础与布局类
+
+- `.toggle-button-group` - 容器基础样式
+- `.toggle-button-group--horizontal` - 水平方向
+- `.toggle-button-group--vertical` - 垂直方向
+- `.toggle-button-group--full-width` - 全宽修饰符
+- `.toggle-button-group__separator` - 按钮之间的分隔线元素
+
+#### 修饰符类
+
+- `.toggle-button-group--detached` - 分离模式（按钮间有间隔）
+
+## API 参考
+
+### ToggleButtonGroup Props
+
+继承自 [React Aria ToggleButtonGroup](https://react-aria.adobe.com/ToggleButtonGroup)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `selectionMode` | `"single" \| "multiple"` | `"single"` | 是否允许选中一个或多个按钮 |
+| `selectedKeys` | `Iterable<Key>` | - | 受控的选中状态 |
+| `defaultSelectedKeys` | `Iterable<Key>` | - | 默认选中 key（非受控） |
+| `onSelectionChange` | `(keys: Set<Key>) => void` | - | 选中变化时调用 |
+| `disallowEmptySelection` | `boolean` | `false` | 是否禁止清空所有选中 |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 布局方向 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 传递给子 ToggleButton 的尺寸 |
+| `isDetached` | `boolean` | `false` | 按钮是否以间隔分离显示 |
+| `fullWidth` | `boolean` | `false` | 按钮组是否占满可用宽度 |
+| `isDisabled` | `boolean` | `false` | 是否禁用组内全部按钮 |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### ToggleButtonGroup.Separator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### 说明
+
+- ToggleButtonGroup 使用 React Context 将 `size` 传递给所有子 ToggleButton 组件
+- 每个 ToggleButton 都必须有唯一 `id` prop，并与 `selectedKeys` / `defaultSelectedKeys` 中使用的 key 对应
+- `isDisabled` prop 由 React Aria 原生处理，会禁用所有子 ToggleButton；单个按钮可通过设置 `isDisabled={false}` 覆盖
+- 组件会自动处理按钮之间的圆角
+- 在每个 ToggleButton（第一个除外）内添加 `<ToggleButtonGroup.Separator />`，可在按钮之间显示分隔线
+- 将 `disallowEmptySelection` 与 `selectionMode="single"` 一起使用，可确保始终有一个选项被选中

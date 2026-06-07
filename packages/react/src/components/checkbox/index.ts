@@ -7,17 +7,17 @@ import {CheckboxContent, CheckboxControl, CheckboxIndicator, CheckboxRoot} from 
  * -----------------------------------------------------------------------------------------------*/
 export const Checkbox = Object.assign(CheckboxRoot, {
   Root: CheckboxRoot,
+  Content: CheckboxContent,
   Control: CheckboxControl,
   Indicator: CheckboxIndicator,
-  Content: CheckboxContent,
 });
 
 export type Checkbox = {
   Props: ComponentProps<typeof CheckboxRoot>;
   RootProps: ComponentProps<typeof CheckboxRoot>;
+  ContentProps: ComponentProps<typeof CheckboxContent>;
   ControlProps: ComponentProps<typeof CheckboxControl>;
   IndicatorProps: ComponentProps<typeof CheckboxIndicator>;
-  ContentProps: ComponentProps<typeof CheckboxContent>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -28,9 +28,13 @@ export {CheckboxContent, CheckboxControl, CheckboxIndicator, CheckboxRoot};
 export type {
   CheckboxRootProps,
   CheckboxRootProps as CheckboxProps,
+  CheckboxContentProps,
   CheckboxControlProps,
   CheckboxIndicatorProps,
-  CheckboxContentProps,
+  CheckboxFieldRenderProps,
+  CheckboxButtonRenderProps,
+  /** @deprecated Use {@link CheckboxFieldRenderProps} for the root render prop, or {@link CheckboxButtonRenderProps} for content/control/indicator. */
+  CheckboxFieldRenderProps as CheckboxRenderProps,
 } from "./checkbox";
 
 /* -------------------------------------------------------------------------------------------------

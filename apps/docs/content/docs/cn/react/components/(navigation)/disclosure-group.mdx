@@ -1,0 +1,143 @@
+---
+title: DisclosureGroup 折叠面板组
+description: 管理多个 Disclosure 的容器，用于协调展开状态。
+links:
+  rac: DisclosureGroup
+  source: disclosure-group/disclosure-group.tsx
+  styles: disclosure-group.css
+  storybook: Components/Navigation/DisclosureGroup
+---
+
+## 引入
+
+```tsx
+import { DisclosureGroup } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="disclosure-group-basic"
+  minHeight="580px"
+/>
+
+
+### 组件结构
+
+导入所有子部分并组合使用。
+
+```tsx
+import {DisclosureGroup, Disclosure} from '@heroui/react';
+
+export default () => (
+  <DisclosureGroup>
+    <Disclosure id="item1">
+      <Disclosure.Heading>
+        <Disclosure.Trigger>
+          <Disclosure.Indicator />
+        </Disclosure.Trigger>
+      </Disclosure.Heading>
+      <Disclosure.Content />
+    </Disclosure>
+  </DisclosureGroup>
+)
+```
+
+### 受控
+
+你可以使用 `expandedKeys` 与 `onExpandedChange` props，通过外部导航控件控制哪些 Disclosure 处于展开状态。
+
+<ComponentPreview
+  name="disclosure-group-controlled"
+  minHeight="580px"
+/>
+
+
+
+<RelatedShowcases component="DisclosureGroup" />
+
+<RelatedComponents component="disclosuregroup" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {
+  DisclosureGroup,
+  Disclosure,
+  DisclosureTrigger,
+  DisclosurePanel
+} from '@heroui/react';
+
+function CustomDisclosureGroup() {
+  return (
+    <DisclosureGroup className="border rounded-lg p-4 space-y-2">
+      <Disclosure id="first" className="border-b pb-2">
+        <DisclosureTrigger>Item 1</DisclosureTrigger>
+        <DisclosurePanel>Content 1</DisclosurePanel>
+      </Disclosure>
+      <Disclosure id="second">
+        <DisclosureTrigger>Item 2</DisclosureTrigger>
+        <DisclosurePanel>Content 2</DisclosurePanel>
+      </Disclosure>
+    </DisclosureGroup>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 DisclosureGroup 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .disclosure-group {
+    @apply w-full;
+
+    /* Performance optimization */
+    contain: layout style;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+DisclosureGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/disclosure-group.css)）：
+
+#### 基础类
+
+- `.disclosure-group` - 带布局 containment 的基础容器样式
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，以便灵活控制状态：
+
+- **禁用**：在整个组合上使用 `:disabled` 或 `[aria-disabled="true"]`
+- **展开管理**：自动管理子 Disclosure 项上的 `[data-expanded]` 等状态
+
+## API 参考
+
+### DisclosureGroup Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `expandedKeys` | `Set<Key>` | - | 当前展开项（受控） |
+| `defaultExpandedKeys` | `Iterable<Key>` | - | 初始展开项（非受控） |
+| `onExpandedChange` | `(keys: Set<Key>) => void` | - | 展开项变化时调用的处理函数 |
+| `allowsMultipleExpanded` | `boolean` | `false` | 是否允许多项同时展开 |
+| `isDisabled` | `boolean` | `false` | 是否禁用组内全部 Disclosure |
+| `children` | `ReactNode \| RenderFunction` | - | 要渲染的 Disclosure 项 |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### RenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `expandedKeys` | `Set<Key>` | 当前展开的 key |
+| `isDisabled` | `boolean` | 组合是否禁用 |

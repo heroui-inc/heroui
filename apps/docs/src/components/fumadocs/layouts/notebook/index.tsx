@@ -2,13 +2,13 @@ import type {LayoutHeaderTabsProps} from "./client";
 import type {LinkItemType} from "@/components/fumadocs/ui/link-item";
 import type * as PageTree from "fumadocs-core/page-tree";
 import type {SidebarPageTreeComponents} from "fumadocs-ui/components/sidebar/page-tree";
+import type {GetSidebarTabsOptions} from "fumadocs-ui/components/sidebar/tabs";
 import type {SidebarTabWithProps} from "fumadocs-ui/components/sidebar/tabs/dropdown";
-import type {GetSidebarTabsOptions} from "fumadocs-ui/components/sidebar/tabs/index";
 import type {BaseLayoutProps} from "fumadocs-ui/layouts/shared";
 import type {ComponentProps, FC, HTMLAttributes, ReactNode} from "react";
 
 import Link from "fumadocs-core/link";
-import {getSidebarTabs} from "fumadocs-ui/components/sidebar/tabs/index";
+import {getSidebarTabs} from "fumadocs-ui/components/sidebar/tabs";
 import {buttonVariants} from "fumadocs-ui/components/ui/button";
 import {TreeContextProvider} from "fumadocs-ui/contexts/tree";
 import {resolveLinkItems} from "fumadocs-ui/layouts/shared";
@@ -139,7 +139,9 @@ export function DocsLayout(props: DocsLayoutProps) {
 
     // Normalize nav.title to ReactNode
     const titleNode: ReactNode =
-      typeof nav.title === "function" ? nav.title({} as ComponentProps<"a">) : nav.title;
+      typeof nav.title === "function"
+        ? (nav.title({} as ComponentProps<"a">) as ReactNode)
+        : nav.title;
     const viewport = (
       <SidebarViewport>
         {links
@@ -199,6 +201,7 @@ export function DocsLayout(props: DocsLayoutProps) {
             {tabs.length > 0 && (
               <FilteredSidebarTabsDropdown
                 className={cn(tabMode === "navbar" && "lg:hidden")}
+                filterByPathname={headerTabsProps?.filterByPathname}
                 options={tabs}
               />
             )}
@@ -236,7 +239,12 @@ export function DocsLayout(props: DocsLayoutProps) {
             >
               <X />
             </SidebarTrigger>
-            {tabs.length > 0 && <FilteredSidebarTabsDropdown options={tabs} />}
+            {tabs.length > 0 && (
+              <FilteredSidebarTabsDropdown
+                filterByPathname={headerTabsProps?.filterByPathname}
+                options={tabs}
+              />
+            )}
           </Header>
           {viewport}
           <Footer
@@ -265,7 +273,7 @@ export function DocsLayout(props: DocsLayoutProps) {
             ))}
             {!!i18n && (
               <LanguageToggle>
-                <Languages className="text-fd-muted-foreground size-4.5" />
+                <Languages className="text-fd-muted-foreground size-4" />
               </LanguageToggle>
             )}
             {themeSwitch.enabled !== false &&
@@ -317,7 +325,9 @@ function DocsNavbar({
 
   // Normalize nav.title to ReactNode
   const titleNode: ReactNode =
-    typeof nav.title === "function" ? nav.title({} as ComponentProps<"a">) : nav.title;
+    typeof nav.title === "function"
+      ? (nav.title({} as ComponentProps<"a">) as ReactNode)
+      : nav.title;
 
   return (
     <LayoutHeader
@@ -436,7 +446,7 @@ function DocsNavbar({
           <div className="flex items-center gap-2 max-md:hidden">
             {!!i18n && (
               <LanguageToggle>
-                <Languages className="text-fd-muted-foreground size-4.5" />
+                <Languages className="text-fd-muted-foreground size-4" />
               </LanguageToggle>
             )}
             {themeSwitch.enabled !== false &&

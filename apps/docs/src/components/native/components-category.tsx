@@ -108,6 +108,7 @@ interface ComponentWithStatus {
 
 interface ComponentCategory {
   category: string;
+  locale: string;
 }
 
 function getComponentNameFromPath(path: string): string {
@@ -142,7 +143,7 @@ function isRouteGroup(part: string): boolean {
  * `null` when the page isn't found so the caller can `.filter()` missing
  * entries away without throwing.
  */
-function getComponentWithStatus(path: string): ComponentWithStatus | null {
+function getComponentWithStatus(path: string, locale: string): ComponentWithStatus | null {
   // Route groups (parentheses) are part of the file path but filtered out
   // in URL paths. So `(buttons)/button` becomes `button` in the URL.
   const pathWithoutRouteGroups = path
@@ -150,10 +151,8 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
     .filter((part) => !isRouteGroup(part))
     .join("/");
 
-  const href = `/docs/native/components/${pathWithoutRouteGroups}`;
-
   const pagePath = ["native", "components", ...pathWithoutRouteGroups.split("/")].filter(Boolean);
-  const page = source.getPage(pagePath);
+  const page = source.getPage(pagePath, locale);
 
   if (!page) return null;
 
@@ -171,7 +170,7 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
     component: {
       category: undefined,
       description,
-      href,
+      href: page.url,
       name: componentName,
       title,
     },
@@ -189,13 +188,13 @@ function getComponentWithStatus(path: string): ComponentWithStatus | null {
  * component in the category fails to resolve to a page — this keeps the MDX
  * surface forgiving while a category is being built out.
  */
-export function ComponentsCategory({category}: ComponentCategory) {
+export function ComponentsCategory({category, locale}: ComponentCategory) {
   const group = COMPONENT_GROUPS.find((group) => group.category === category);
 
   if (!group) return null;
 
   const components = group.components
-    .map(getComponentWithStatus)
+    .map((path) => getComponentWithStatus(path, locale))
     .filter((item): item is ComponentWithStatus => item !== null);
 
   if (components.length === 0) return null;

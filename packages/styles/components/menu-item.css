@@ -30,14 +30,14 @@
     @apply size-3.5;
   }
 
-  /* Add padding-left when indicator is present */
+  /* Add inline-start padding when indicator is present */
   &:has(.menu-item__indicator) {
-    @apply pl-7;
+    @apply ps-7;
   }
 
-  /* Add padding-right when indicator is present and has submenu */
+  /* Add inline-end padding when indicator is present and has submenu */
   &[data-has-submenu="true"]:has(.menu-item__indicator) {
-    @apply pr-7 pl-2;
+    @apply pe-7 ps-2;
   }
 
   /* Focus visible state (keyboard focus only) */
@@ -97,16 +97,16 @@
    ========================================================================== */
 
 .menu-item__indicator {
-  @apply absolute top-1/2 left-2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center text-muted;
+  @apply absolute top-1/2 start-2 flex size-4 shrink-0 -translate-y-1/2 items-center justify-center text-muted;
 
   /**
    * Transitions
    */
   @apply transition duration-250 motion-reduce:transition-none;
 
-  /* Position on the right when menu item has submenu */
+  /* Position on the inline-end when menu item has submenu */
   .menu-item[data-has-submenu="true"] & {
-    @apply right-2 left-auto;
+    @apply end-2 start-auto;
   }
 
   /* Checkmark SVG indicator */

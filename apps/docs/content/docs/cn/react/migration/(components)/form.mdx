@@ -1,0 +1,116 @@
+---
+title: Form
+description: Form 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Form 文档](/docs/react/components/form)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 主要变化
+
+### 1. Form 组件 prop
+
+v2 与 v3 之间，Form 组件的 prop 大体保持不变，仅新增了一个：
+
+| 属性 | v2 | v3 | 说明 |
+| ---- | -- | -- | ---- |
+| `validationBehavior` | ✅ | ✅ | 相同：`"native"` \| `"aria"` |
+| `validationErrors` | ✅ | ✅ | 相同：`Record<string, string \| string[]>` |
+| `onSubmit` | ✅ | ✅ | 相同 |
+| `onReset` | ✅ | ✅ | 相同 |
+| `action` | ✅ | ✅ | 相同 |
+| `method` | ✅ | ✅ | 相同 |
+| `encType` | ✅ | ✅ | 相同 |
+| `target` | ✅ | ✅ | 相同 |
+| `className` | ✅ | ✅ | 相同 |
+| `onInvalid` | ❌ | ✅ | 新增：表单验证失败时调用的处理函数 |
+
+## 结构变化
+
+在 v2 中，Form 组件的用法：
+
+```tsx
+import { Form, Button } from "@heroui/react";
+
+export default function App() {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted");
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      {/* Form content */}
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
+}
+```
+
+在 v3 中，Form 组件的用法保持一致：
+
+```tsx
+import { Form, Button } from "@heroui/react";
+
+export default function App() {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted");
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      {/* Form content */}
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
+}
+```
+
+## 迁移示例
+
+### 带 onInvalid 处理函数的表单（v3 新增）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 没有 onInvalid prop */}
+    <Form onSubmit={onSubmit}>
+      {/* Form content */}
+      <Button type="submit">Submit</Button>
+    </Form>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Form
+      onInvalid={(e) => {
+        e.preventDefault();
+        // Custom handling when form validation fails
+        console.log("Form validation failed");
+      }}
+      onSubmit={onSubmit}
+    >
+      {/* Form content */}
+      <Button type="submit">Submit</Button>
+    </Form>
+    ```
+  </Tab>
+</Tabs>
+
+`onInvalid` 处理函数会在表单验证失败时被调用。默认情况下，第一个无效字段会获得焦点；通过调用 `e.preventDefault()` 可以自定义这一行为。
+
+## 总结
+
+1. **Form 组件**：没有破坏性变更——prop 与行为保持一致
+2. **新增 prop**：`onInvalid` 可用于自定义校验失败时的处理逻辑
+
+## 迁移步骤
+
+1. **无需改动**：Form 组件在 v3 中的工作方式与 v2 相同
+2. **可选**：如果你需要自定义校验失败时的处理逻辑，可使用新增的 `onInvalid` prop
+
+## 关于表单字段
+
+虽然 Form 组件本身没有变化，但其中使用的表单字段组件（例如 `Input`、`TextField` 等）在 v3 中已有更新。具体的字段迁移说明请参阅各自的迁移指南。

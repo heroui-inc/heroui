@@ -1,0 +1,96 @@
+---
+title: Label 标签
+description: 渲染与表单控件关联的无障碍标签。
+links:
+  rac: TextField
+  source: label/label.tsx
+  styles: label.css
+---
+
+## 引入
+
+```tsx
+import { Label } from '@heroui/react';
+```
+
+## 用法
+
+<ComponentPreview
+  name="label-basic"
+/>
+
+<RelatedComponents component="label" />
+
+## API 参考
+
+### Label Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `htmlFor` | `string` | - | 标签所关联元素的 id |
+| `isRequired` | `boolean` | `false` | 是否显示必填指示符 |
+| `isDisabled` | `boolean` | `false` | 标签是否处于禁用状态 |
+| `isInvalid` | `boolean` | `false` | 标签是否处于无效状态 |
+| `className` | `string` | - | 附加的 CSS 类 |
+| `children` | `ReactNode` | - | 标签内容 |
+
+## 无障碍
+
+Label 基于原生 HTML `<label>`（[MDN 参考](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)），并遵循 WAI-ARIA 最佳实践：
+
+- 使用 `htmlFor` 与表单控件关联
+- 提供语义化的 `<label>` 元素
+- 与表单控件关联时支持键盘导航
+- 向屏幕阅读器传达必填与无效状态
+- 点击标签可聚焦/激活关联的表单控件
+
+<RelatedComponents component="label" />
+
+## 样式
+
+### CSS 类
+
+Label 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/label.css)）：
+
+#### 基础类
+- `.label` — 基础标签文本样式
+
+#### 状态修饰类
+- `.label--required` 或 `[data-required="true"] > .label` — 显示必填星号
+- `.label--disabled` 或 `[data-disabled="true"] .label` — 禁用状态样式
+- `.label--invalid` 或 `[data-invalid="true"] .label` 或 `[aria-invalid="true"] .label` — 无效状态样式（危险/红色文本）
+ 
+**说明：** 必填星号会基于 role 与 `data-slot` 智能应用，并排除：
+- `role="group"`、`role="radiogroup"`、`role="checkboxgroup"` 的元素
+- `data-slot="radio"` 或 `data-slot="checkbox"` 的元素
+
+从而在分组组件与必填字段组合时避免重复星号。
+
+## 示例
+
+### 带必填指示符
+
+```tsx
+<Label htmlFor="email" isRequired>
+  Email Address
+</Label>
+<Input id="email" type="email" />
+```
+
+### 禁用状态
+
+```tsx
+<Label htmlFor="username" isDisabled>
+  Username
+</Label>
+<Input id="username" isDisabled />
+```
+
+### 无效状态
+
+```tsx
+<Label htmlFor="password" isInvalid>
+  Password
+</Label>
+<Input id="password" isInvalid />
+```

@@ -1,0 +1,127 @@
+---
+title: v3.0.3
+description: 升级到 RAC 1.17（依赖减少 90%）、Table 支持可展开行、采用 Apache 2.0 协议、新增 useTheme Hook、DOM 多态 render-prop API，以及若干 bug 修复。
+github:
+  pull: 6441
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 4 月 17 日</span>
+</div>
+
+补丁版本：升级到 React Aria Components 1.17（依赖数量减少 90%）、Table 支持可展开行、采用 Apache 2.0 协议，为 Vite 与 CRA 应用提供 `useTheme` Hook、新增可在 render prop 中替换元素的 DOM 多态工具函数，以及若干 bug 修复。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### React Aria Components 1.17
+
+本次发布将 React Aria Components 升级到 [v1.17.0](https://react-aria.adobe.com/releases/v1-17-0)。最大亮点是依赖整合：**RAC 的传递依赖减少了 90%**，安装与构建都更快。详情请查看完整的 [RAC 1.17 发布说明](https://react-aria.adobe.com/releases/v1-17-0)。
+
+### Table 可展开行
+
+Table 现在支持以可展开行的形式呈现树形数据。设置 `treeColumn` 并在对应单元格中渲染一个 chevron 图标即可展开 / 折叠子行——非常适合用于文件浏览器、嵌套分类以及层级数据。
+
+<ComponentPreview
+  name="table-expandable-rows"
+/>
+
+### useTheme Hook
+
+对于使用 Vite 或 Create React App 搭建（没有 Next.js 主题 Provider）的纯 React 应用，可以从 `@heroui/react` 中引入 `useTheme`。它接受任意主题名（`"light"`、`"dark"`、`"brutalism-light"` 等），传入 `"system"` 则会跟随操作系统偏好。`useTheme` 会将主题值持久化到 `localStorage`，并在 `<html>` 元素上同步设置 `data-theme` 与 `class`，二者均为解析后的主题名。
+
+```tsx
+"use client";
+
+import { Button, useTheme } from "@heroui/react";
+
+export function ThemeSwitch() {
+  const { theme, setTheme } = useTheme("light");
+
+  return (
+    <div className="flex gap-2">
+      <Button onPress={() => setTheme("light")}>
+        Light
+      </Button>
+      <Button onPress={() => setTheme("dark")}>
+        Dark
+      </Button>
+      <Button onPress={() => setTheme("system")}>
+        System
+      </Button>
+      <Button onPress={() => setTheme("brutalism-light")}>
+        Brutalism Light
+      </Button>
+      <span className="text-sm opacity-70">Current: {theme}</span>
+    </div>
+  );
+}
+```
+
+### DOM 多态工具
+
+DOM 多态辅助工具让那些没有基于 React Aria 基元构建的轻量级组件，也能通过 render prop 切换其宿主元素。
+
+**示例：** 将 Card 组件渲染为 `<button />`
+
+```tsx
+<Card<"button"> render={(props) => <button {...props} />} />
+```
+
+### 协议变更
+
+HeroUI 现已采用 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 协议，取代此前的 MIT 协议。Apache 2.0 同样提供宽松的使用自由，并在此基础上增加了显式的专利授权，提供更进一步的法律保护。现有用户无需进行任何操作。
+
+## Bug 修复
+
+- **Tabs**：限定 secondary 变体样式的作用范围，嵌套的 tab 组将不再继承父级变体（[#6384](https://github.com/heroui-inc/heroui/pull/6384)）
+
+## 依赖更新
+
+- **React Aria Components**：从 `1.16.0` 升级到 [`1.17.0`](https://react-aria.adobe.com/releases/v1-17-0)
+- **@react-aria/utils**：从 `3.33.1` 升级到 `3.34.0`
+- **@react-types/shared**：从 `3.33.1` 升级到 `3.34.0`
+- **@internationalized/date**：从 `3.12.0` 升级到 `3.12.1`
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [Figma Kit v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6441](https://github.com/heroui-inc/heroui/pull/6441)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

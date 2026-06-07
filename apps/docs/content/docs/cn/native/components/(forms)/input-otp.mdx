@@ -1,0 +1,415 @@
+---
+title: InputOTP 一次性密码输入框
+description: 用于输入一次性验证码（OTP）的输入组件，支持分格、动画与校验。
+links:
+  source_native: input-otp/input-otp.tsx
+  styles_native: input-otp/input-otp.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-otp-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { InputOTP } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<InputOTP>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={2}>
+      <InputOTP.SlotPlaceholder />
+      <InputOTP.SlotValue />
+      <InputOTP.SlotCaret />
+    </InputOTP.Slot>
+  </InputOTP.Group>
+</InputOTP>
+```
+
+- **InputOTP**：根容器，管理 OTP 状态与文本变更，并为子组件提供上下文；处理焦点、校验与字符输入。
+- **InputOTP.Group**：将多个格子编组；用于视觉分组（例如每 3 位一组）。
+- **InputOTP.Slot**：单个字符格；`index` 须在 OTP 序列中唯一且与位置对应。未提供子节点时，默认渲染 `SlotPlaceholder`、`SlotValue` 与 `SlotCaret`。
+- **InputOTP.SlotPlaceholder**：空位时显示的占位字符；`Slot` 无子节点时默认使用。
+- **InputOTP.SlotValue**：显示已输入字符并带动画；`Slot` 无子节点时默认使用。
+- **InputOTP.SlotCaret**：动画光标，指示当前输入位置；置于 `Slot` 内以显示正在输入的位置。
+- **InputOTP.Separator**：分组之间的视觉分隔符。
+
+## 用法
+
+### 基础用法
+
+创建 6 位 OTP，分两组并带分隔符。
+
+```tsx
+<InputOTP maxLength={6} onComplete={(code) => console.log(code)}>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>
+```
+
+### 四位 PIN
+
+简单的 4 位数字 PIN。
+
+```tsx
+<InputOTP maxLength={4} onComplete={(code) => console.log(code)}>
+  <InputOTP.Slot index={0} />
+  <InputOTP.Slot index={1} />
+  <InputOTP.Slot index={2} />
+  <InputOTP.Slot index={3} />
+</InputOTP>
+```
+
+### 自定义占位
+
+为每个格子位置提供自定义占位字符。
+
+```tsx
+<InputOTP
+  maxLength={6}
+  placeholder="——————"
+  onComplete={(code) => console.log(code)}
+>
+  <InputOTP.Group>
+    {({ slots }) => (
+      <>
+        {slots.map((slot) => (
+          <InputOTP.Slot key={slot.index} index={slot.index} />
+        ))}
+      </>
+    )}
+  </InputOTP.Group>
+</InputOTP>
+```
+
+### 受控值
+
+以编程方式控制 OTP 值。
+
+```tsx
+const [value, setValue] = useState('');
+
+<InputOTP value={value} onChange={setValue} maxLength={6}>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>;
+```
+
+### 校验态
+
+非法时展示校验错误样式。
+
+```tsx
+<InputOTP value={value} onChange={setValue} maxLength={6} isInvalid={isInvalid}>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>
+```
+
+### 输入模式（正则）
+
+使用正则限制可输入字符。内置：`REGEXP_ONLY_DIGITS`（0–9）、`REGEXP_ONLY_CHARS`（a–z、A–Z）、`REGEXP_ONLY_DIGITS_AND_CHARS`（数字与字母）。
+
+```tsx
+import { InputOTP, REGEXP_ONLY_CHARS } from 'heroui-native';
+
+<InputOTP
+  maxLength={6}
+  pattern={REGEXP_ONLY_CHARS}
+  inputMode="text"
+  onComplete={(code) => console.log(code)}
+>
+  <InputOTP.Group>
+    <InputOTP.Slot index={0} />
+    <InputOTP.Slot index={1} />
+    <InputOTP.Slot index={2} />
+  </InputOTP.Group>
+  <InputOTP.Separator />
+  <InputOTP.Group>
+    <InputOTP.Slot index={3} />
+    <InputOTP.Slot index={4} />
+    <InputOTP.Slot index={5} />
+  </InputOTP.Group>
+</InputOTP>;
+```
+
+### 自定义布局
+
+在 `Group` 上使用渲染属性以自定义格子布局。
+
+```tsx
+<InputOTP maxLength={6}>
+  <InputOTP.Group>
+    {({ slots, isFocused, isInvalid }) => (
+      <>
+        {slots.map((slot) => (
+          <InputOTP.Slot
+            key={slot.index}
+            index={slot.index}
+            className={cn('custom-class', slot.isActive && 'active-class')}
+          >
+            <InputOTP.SlotPlaceholder />
+            <InputOTP.SlotValue />
+            <InputOTP.SlotCaret />
+          </InputOTP.Slot>
+        ))}
+      </>
+    )}
+  </InputOTP.Group>
+</InputOTP>
+```
+
+### 在底部抽屉内
+
+在 `BottomSheet` 中渲染 `InputOTP` 时，使用 `useBottomSheetAwareHandlers` 返回的 `onFocus` / `onBlur` 传给 `InputOTP`，以正确处理键盘避让。
+
+```tsx
+import { InputOTP, useBottomSheetAwareHandlers } from 'heroui-native';
+
+const BottomSheetOTPInput = () => {
+  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+
+  return (
+    <InputOTP maxLength={6} onFocus={onFocus} onBlur={onBlur}>
+      <InputOTP.Group>
+        <InputOTP.Slot index={0} />
+        <InputOTP.Slot index={1} />
+        <InputOTP.Slot index={2} />
+      </InputOTP.Group>
+      <InputOTP.Separator />
+      <InputOTP.Group>
+        <InputOTP.Slot index={3} />
+        <InputOTP.Slot index={4} />
+        <InputOTP.Slot index={5} />
+      </InputOTP.Group>
+    </InputOTP>
+  );
+};
+```
+
+## 示例
+
+```tsx
+import { InputOTP, Label, Description, type InputOTPRef } from 'heroui-native';
+import { View } from 'react-native';
+import { useRef } from 'react';
+
+export default function InputOTPExample() {
+  const ref = useRef<InputOTPRef>(null);
+
+  const onComplete = (code: string) => {
+    console.log('OTP completed:', code);
+    setTimeout(() => {
+      ref.current?.clear();
+    }, 1000);
+  };
+
+  return (
+    <View className="flex-1 px-5 items-center justify-center">
+      <View>
+        <Label>验证账户</Label>
+        <Description className="mb-3">
+          我们已向 a****@gmail.com 发送验证码
+        </Description>
+        <InputOTP ref={ref} maxLength={6} onComplete={onComplete}>
+          <InputOTP.Group>
+            <InputOTP.Slot index={0} />
+            <InputOTP.Slot index={1} />
+            <InputOTP.Slot index={2} />
+          </InputOTP.Group>
+          <InputOTP.Separator />
+          <InputOTP.Group>
+            <InputOTP.Slot index={3} />
+            <InputOTP.Slot index={4} />
+            <InputOTP.Slot index={5} />
+          </InputOTP.Group>
+        </InputOTP>
+      </View>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/input-otp.tsx)。
+
+## API 参考
+
+### InputOTP
+
+| prop                       | type                          | default     | description                                                                                |
+| -------------------------- | ----------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `maxLength`                | `number`                      | -           | OTP 最大长度（必填）                                                                       |
+| `value`                    | `string`                      | -           | 受控值                                                                                     |
+| `defaultValue`             | `string`                      | -           | 非受控默认值                                                                               |
+| `onChange`                 | `(value: string) => void`     | -           | 值变化回调                                                                                 |
+| `onComplete`               | `(value: string) => void`     | -           | 所有格子填满时触发                                                                         |
+| `isDisabled`               | `boolean`                     | `false`     | 是否禁用                                                                                   |
+| `isInvalid`                | `boolean`                     | `false`     | 是否处于非法状态                                                                           |
+| `pattern`                  | `string`                      | -           | 允许字符的正则（如 `REGEXP_ONLY_DIGITS`、`REGEXP_ONLY_CHARS`）                             |
+| `inputMode`                | `TextInputProps['inputMode']` | `'numeric'` | 输入模式                                                                                   |
+| `placeholder`              | `string`                      | -           | 占位字符串；每个字符对应一个格子位置                                                       |
+| `placeholderTextColor`     | `string`                      | -           | 全部格子的占位文字颜色                                                                     |
+| `placeholderTextClassName` | `string`                      | -           | 全部格子的占位文字 class                                                                   |
+| `pasteTransformer`         | `(text: string) => string`    | -           | 粘贴内容转换（如去掉连字符）；默认会移除非匹配字符                                         |
+| `onFocus`                  | `(e: FocusEvent) => void`     | -           | 聚焦回调                                                                                   |
+| `onBlur`                   | `(e: BlurEvent) => void`      | -           | 失焦回调                                                                                   |
+| `textInputProps`           | `Omit<TextInputProps, ...>`   | -           | 透传给底层 `TextInput` 的额外属性                                                          |
+| `children`                 | `React.ReactNode`             | -           | 子节点                                                                                     |
+| `className`                | `string`                      | -           | 根容器额外 class                                                                           |
+| `style`                    | `PressableProps['style']`     | -           | 传给容器 `Pressable` 的样式                                                                |
+| `isBottomSheetAware`       | `boolean`                     | `true`      | 在 `BottomSheet` 内是否自动处理键盘相关状态；设为 `false` 可关闭                           |
+| `animation`                | `"disable-all" \| undefined`  | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级全部动画                                         |
+
+### InputOTP.Group
+
+| prop           | type                                                                        | default | description                                                                                                              |
+| -------------- | --------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `children`     | `React.ReactNode \| ((props: InputOTPGroupRenderProps) => React.ReactNode)` | -       | 子节点，或接收格子数据与上下文的渲染函数                                                                                 |
+| `className`    | `string`                                                                    | -       | 额外 class                                                                                                               |
+| `...ViewProps` | `ViewProps`                                                                 | -       | 支持全部标准 React Native `View` 属性                                                                                    |
+
+#### InputOTPGroupRenderProps
+
+| prop         | type         | description                              |
+| ------------ | ------------ | ---------------------------------------- |
+| `slots`      | `SlotData[]` | 每个位置的格子数据数组                   |
+| `maxLength`  | `number`     | OTP 最大长度                             |
+| `value`      | `string`     | 当前 OTP 值                              |
+| `isFocused`  | `boolean`    | 是否聚焦                                 |
+| `isDisabled` | `boolean`    | 是否禁用                                 |
+| `isInvalid`  | `boolean`    | 是否非法                                 |
+
+### InputOTP.Slot
+
+| prop           | type              | default | description                                                                                 |
+| -------------- | ----------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `index`        | `number`          | -       | 格子下标（必填），须为 `0` 到 `maxLength - 1`                                               |
+| `children`     | `React.ReactNode` | -       | 自定义格子内容；未提供时默认为 `SlotPlaceholder`、`SlotValue`、`SlotCaret`                  |
+| `className`    | `string`          | -       | 额外 class                                                                                  |
+| `style`        | `ViewStyle`       | -       | 额外样式                                                                                    |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 React Native `View` 属性                                                     |
+
+### InputOTP.SlotPlaceholder
+
+| prop           | type        | default | description                                                          |
+| -------------- | ----------- | ------- | -------------------------------------------------------------------- |
+| `children`     | `string`    | -       | 显示文本（可选，默认使用 `slot.placeholderChar`）                    |
+| `className`    | `string`    | -       | 额外 class                                                           |
+| `style`        | `TextStyle` | -       | 额外样式                                                             |
+| `...TextProps` | `TextProps` | -       | 支持全部标准 React Native `Text` 属性                              |
+
+### InputOTP.SlotValue
+
+| prop           | type                         | default | description                                               |
+| -------------- | ---------------------------- | ------- | --------------------------------------------------------- |
+| `children`     | `string`                     | -       | 显示文本（可选，默认使用 `slot.char`）                    |
+| `className`    | `string`                     | -       | 额外 class                                                |
+| `animation`    | `InputOTPSlotValueAnimation` | -       | `SlotValue` 动画配置                                      |
+| `...TextProps` | `TextProps`                  | -       | 支持全部标准 React Native `Text` 属性                     |
+
+#### InputOTPSlotValueAnimation
+
+`InputOTP.SlotValue` 动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop               | type                    | default                                  | description                                     |
+| ------------------ | ----------------------- | ---------------------------------------- | ----------------------------------------------- |
+| `state`            | `'disabled' \| boolean` | -                                        | 在自定义属性时用于禁用动画                      |
+| `wrapper.entering` | `EntryOrExitLayoutType` | `FadeIn.duration(250)`                   | 包裹层进入动画                                  |
+| `wrapper.exiting`  | `EntryOrExitLayoutType` | `FadeOut.duration(100)`                  | 包裹层退出动画                                  |
+| `text.entering`    | `EntryOrExitLayoutType` | `FlipInXDown.duration(250).easing(...)`  | 文本进入动画                                    |
+| `text.exiting`     | `EntryOrExitLayoutType` | `FlipOutXDown.duration(250).easing(...)` | 文本退出动画                                    |
+
+### InputOTP.SlotCaret
+
+| prop                    | type                         | default  | description                                                                                                                                  |
+| ----------------------- | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `className`             | `string`                     | -        | 额外 class                                                                                                                                   |
+| `style`                 | `ViewStyle`                  | -        | 额外样式                                                                                                                                     |
+| `animation`             | `InputOTPSlotCaretAnimation` | -        | `SlotCaret` 动画配置                                                                                                                          |
+| `isAnimatedStyleActive` | `boolean`                    | `true`   | 是否启用 Reanimated 动画样式；为 `false` 时移除内置动画样式，可自行实现                                                                      |
+| `pointerEvents`         | `'none' \| 'auto' \| ...`    | `'none'` | 指针事件配置                                                                                                                                 |
+| `...ViewProps`          | `ViewProps`                  | -        | 支持全部标准 React Native `View` 属性                                                                                                        |
+
+#### InputOTPSlotCaretAnimation
+
+`InputOTP.SlotCaret` 动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop               | type                    | default    | description                                     |
+| ------------------ | ----------------------- | ---------- | ----------------------------------------------- |
+| `state`            | `'disabled' \| boolean` | -          | 在自定义属性时用于禁用动画                      |
+| `opacity.value`    | `[number, number]`      | `[0, 1]`   | 透明度 [最小, 最大]                             |
+| `opacity.duration` | `number`                | `500`      | 动画时长（毫秒）                                |
+| `height.value`     | `[number, number]`      | `[16, 18]` | 高度 [最小, 最大]（像素）                       |
+| `height.duration`  | `number`                | `500`      | 动画时长（毫秒）                                |
+
+### InputOTP.Separator
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `className`    | `string`    | -       | 额外 class                                         |
+| `...ViewProps` | `ViewProps` | -       | 支持全部标准 React Native `View` 属性              |
+
+## Hooks
+
+### useInputOTP
+
+读取 `InputOTP` 根上下文，须在 `InputOTP` 内使用。
+
+```tsx
+const { value, maxLength, isFocused, isDisabled, isInvalid, slots } =
+  useInputOTP();
+```
+
+### useInputOTPSlot
+
+读取 `InputOTP.Slot` 上下文，须在 `InputOTP.Slot` 内使用。
+
+```tsx
+const { slot, isActive, isCaretVisible } = useInputOTPSlot();
+```

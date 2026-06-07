@@ -1,0 +1,492 @@
+---
+title: Modal
+description: Modal 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Modal 文档](/docs/react/components/modal)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Modal 使用相互独立的组件：
+
+```tsx
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+
+export default function App() {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+  return (
+    <>
+      <Button onPress={onOpen}>Open Modal</Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Title</ModalHeader>
+          <ModalBody>Content</ModalBody>
+          <ModalFooter>Footer</ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
+在 v3 中，Modal 使用复合组件：
+
+```tsx
+import { Modal, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Modal>
+      <Button>Open Modal</Button>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>Title</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>Content</Modal.Body>
+            <Modal.Footer>Footer</Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 相互独立的组件（`Modal`、`ModalContent`、`ModalHeader`、`ModalBody`、`ModalFooter`）  
+**v3：** 复合组件（`Modal.Backdrop`、`Modal.Container`、`Modal.Dialog`、`Modal.Header`、`Modal.Body`、`Modal.Footer`）
+
+### 2. 内置触发：`Modal.Trigger`
+
+**v2：** 需要 `useDisclosure`，并手动把 `onPress` 接到打开逻辑上。  
+**v3：** 提供 `Modal.Trigger` 作为内置触发组件，按下即可自动打开模态框，无需自行管理状态。
+
+<Tabs items={["v2", "v3 (Button trigger)", "v3 (Modal.Trigger)"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Modal, ModalContent, Button, useDisclosure } from "@heroui/react";
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    <Button onPress={onOpen}>Open Modal</Button>
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (Button trigger)">
+    ```tsx
+    import { Modal, Button } from "@heroui/react";
+
+    {/* A Button placed as a direct child of Modal automatically becomes the trigger */}
+    <Modal>
+      <Button>Open Modal</Button>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>{/* content */}</Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (Modal.Trigger)">
+    ```tsx
+    import { Modal } from "@heroui/react";
+
+    {/* Use Modal.Trigger for custom trigger elements (cards, links, etc.) */}
+    <Modal>
+      <Modal.Trigger className="flex items-center gap-3 rounded-2xl bg-surface p-4">
+        <p className="font-semibold">Settings</p>
+        <p className="text-xs text-muted">Manage your preferences</p>
+      </Modal.Trigger>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>{/* content */}</Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+</Tabs>
+
+`Modal.Trigger` 会把任意内容包装成可按压元素以打开模态框。当你需要标准 `Button` 以外的自定义触发元素时使用它。
+
+### 3. 状态管理
+
+**v2：** 使用 `useDisclosure`。  
+**v3：** 内置触发场景下可不需要状态；也可在 `Modal.Backdrop` 上用受控的 `isOpen` / `onOpenChange`，或使用 `useOverlayState` 并把 `state` 传给根组件。
+
+#### `useOverlayState` 替代 `useDisclosure`
+
+`useOverlayState` 可直接替代 v2 的 `useDisclosure`，支持受控与非受控：
+
+```tsx
+import { useOverlayState } from "@heroui/react";
+
+// 非受控（内部自管状态）
+const state = useOverlayState();
+
+// 非受控且默认打开
+const state = useOverlayState({ defaultOpen: true });
+
+// 带回调
+const state = useOverlayState({
+  onOpenChange: (isOpen) => console.log("Modal is now:", isOpen),
+});
+
+// 受控（由你管理状态）
+const [isOpen, setIsOpen] = useState(false);
+const state = useOverlayState({ isOpen, onOpenChange: setIsOpen });
+```
+
+**Hook API：**
+
+| 属性                    | 类型                         | 说明                 |
+| ----------------------- | ---------------------------- | -------------------- |
+| `state.isOpen`          | `boolean`                    | 浮层当前是否打开   |
+| `state.open()`          | `() => void`                 | 打开浮层           |
+| `state.close()`         | `() => void`                 | 关闭浮层           |
+| `state.toggle()`        | `() => void`                 | 切换打开/关闭      |
+| `state.setOpen(isOpen)` | `(isOpen: boolean) => void`  | 直接设置打开状态   |
+
+将 `state` 传给 `Modal` 根组件以完成连接：
+
+```tsx
+const state = useOverlayState();
+
+<Modal state={state}>
+  <Button onPress={state.open}>Open</Button>
+  <Modal.Backdrop>
+    <Modal.Container>
+      <Modal.Dialog>{/* content */}</Modal.Dialog>
+    </Modal.Container>
+  </Modal.Backdrop>
+</Modal>
+```
+
+<Callout type="info">
+  从 `useDisclosure` 迁移到 `useOverlayState` 的更多细节，请参阅 [Hooks 迁移指南](/docs/react/migration/hooks)。
+</Callout>
+
+### 4. Prop 变更
+
+| v2 prop                     | v3 位置                         | 说明                                                         |
+| --------------------------- | ------------------------------- | ------------------------------------------------------------ |
+| `size`                      | `size`（在 `Modal.Container`）  | 简化取值（xs、sm、md、lg、cover、full）                      |
+| `radius`                    | —                               | 已移除（请用 Tailwind CSS）                                  |
+| `shadow`                    | —                               | 已移除（请用 Tailwind CSS）                                  |
+| `backdrop`                  | `variant`（在 **`Modal.Backdrop`**） | 已重命名；取值不变（`opaque`、`blur`、`transparent`）   |
+| `scrollBehavior`            | `scroll`（在 `Modal.Container`） | 已重命名（`normal` → `inside`）                             |
+| `placement`                 | `placement`（在 `Modal.Container`） | 移到 Container                                            |
+| `isDismissable`             | `isDismissable`（在 **`Modal.Backdrop`**） | 移到 `Modal.Backdrop`                              |
+| `isKeyboardDismissDisabled` | `isKeyboardDismissDisabled`（在 **`Modal.Backdrop`**） | 移到 `Modal.Backdrop`              |
+| `isOpen`                    | `isOpen`（在 **`Modal.Backdrop`**） | 受控状态在 `Modal.Backdrop`                              |
+| `onOpenChange`              | `onOpenChange`（在 **`Modal.Backdrop`**） | 同上                                                 |
+| `onClose`                   | —                               | 使用渲染 prop 提供的 `close`                                 |
+| `hideCloseButton`           | —                               | 省略 `Modal.CloseTrigger` 即可                               |
+| `closeButton`               | —                               | 使用 `Modal.CloseTrigger` 自定义内容                         |
+| `motionProps`               | —                               | 已移除（动画机制已不同）                                     |
+| `classNames`                | —                               | 在各子组件上使用 `className`                                 |
+| `shouldBlockScroll`         | —                               | 已移除（由组件自动处理）                                     |
+| `portalContainer`           | —                               | 已移除                                                       |
+
+## 迁移示例
+
+### 受控 Modal
+
+<Tabs items={["v2", "v3 (useState)", "v3 (useOverlayState)", "v3 (state prop)"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useDisclosure } from "@heroui/react";
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader>Title</ModalHeader>
+            <ModalBody>Content</ModalBody>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (useState)">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Modal>
+      <Button onPress={() => setIsOpen(true)}>Open</Button>
+      <Modal.Backdrop isOpen={isOpen} onOpenChange={setIsOpen}>
+        <Modal.Container>
+          <Modal.Dialog>
+            {({close}) => (
+              <>
+                <Modal.Header>
+                  <Modal.Heading>Title</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>Content</Modal.Body>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (useOverlayState)">
+    ```tsx
+    import { useOverlayState } from "@heroui/react";
+
+    const state = useOverlayState();
+
+    <Modal>
+      <Button onPress={state.open}>Open</Button>
+      <Modal.Backdrop isOpen={state.isOpen} onOpenChange={state.setOpen}>
+        <Modal.Container>
+          <Modal.Dialog>
+            {({close}) => (
+              <>
+                <Modal.Header>
+                  <Modal.Heading>Title</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>Content</Modal.Body>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3 (state prop)">
+    ```tsx
+    import { useOverlayState } from "@heroui/react";
+
+    // 将 state 直接传给 Modal 根组件，无需再手动连接 isOpen/onOpenChange
+    const state = useOverlayState();
+
+    <Modal state={state}>
+      <Button onPress={state.open}>Open</Button>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>
+            {({close}) => (
+              <>
+                <Modal.Header>
+                  <Modal.Heading>Title</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>Content</Modal.Body>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  `useDisclosure` → `useOverlayState` 的完整迁移说明，请参阅 [Hooks 迁移指南](/docs/react/migration/hooks)。
+</Callout>
+
+### 遮罩与 Container 的 prop
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Backdrop */}
+    <Modal backdrop="blur">
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    
+    {/* Placement */}
+    <Modal placement="top">
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    
+    {/* Scroll behavior */}
+    <Modal scrollBehavior="outside">
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* 遮罩：在 Modal.Backdrop 上使用 variant */}
+    <Modal.Backdrop variant="blur">
+      <Modal.Container>
+        <Modal.Dialog>{/* content */}</Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+    
+    {/* 位置：在 Container 上 */}
+    <Modal.Backdrop>
+      <Modal.Container placement="top">
+        <Modal.Dialog>{/* content */}</Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+    
+    {/* 滚动：在 Container 上 */}
+    <Modal.Backdrop>
+      <Modal.Container scroll="outside">
+        <Modal.Dialog>{/* content */}</Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
+    ```
+  </Tab>
+</Tabs>
+
+### 关闭按钮
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Without close button */}
+    <Modal hideCloseButton>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    
+    {/* Custom close button */}
+    <Modal closeButton={<CustomCloseIcon />}>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* 无关闭按钮：省略 Modal.CloseTrigger */}
+    <Modal.Container>
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Heading>Title</Modal.Heading>
+        </Modal.Header>
+      </Modal.Dialog>
+    </Modal.Container>
+    
+    {/* 自定义关闭按钮 */}
+    <Modal.Container>
+      <Modal.Dialog>
+        <Modal.CloseTrigger>
+          <CustomCloseIcon />
+        </Modal.CloseTrigger>
+        {/* content */}
+      </Modal.Dialog>
+    </Modal.Container>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义触发器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Modal, ModalContent, useDisclosure } from "@heroui/react";
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    {/* Any element needed manual onPress + useDisclosure */}
+    <div onClick={onOpen} className="cursor-pointer rounded-xl bg-surface p-4">
+      <p className="font-semibold">Settings</p>
+      <p className="text-xs text-muted">Manage your preferences</p>
+    </div>
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalContent>{/* content */}</ModalContent>
+    </Modal>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Modal } from "@heroui/react";
+
+    {/* Modal.Trigger handles press events and accessibility automatically */}
+    <Modal>
+      <Modal.Trigger className="rounded-xl bg-surface p-4">
+        <p className="font-semibold">Settings</p>
+        <p className="text-xs text-muted">Manage your preferences</p>
+      </Modal.Trigger>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Heading>Settings</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>{/* content */}</Modal.Body>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+    ```
+  </Tab>
+</Tabs>
+
+### 图标与标题
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <ModalHeader className="flex flex-col gap-1">
+      <Icon />
+      Modal Title
+    </ModalHeader>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Modal.Header>
+      <Modal.Icon>
+        <Icon />
+      </Modal.Icon>
+      <Modal.Heading>Modal Title</Modal.Heading>
+    </Modal.Header>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件结构（Anatomy）
+
+v3 的 Modal 结构如下：
+
+```
+Modal (Root)
+  ├── Trigger (e.g. Button or Modal.Trigger)
+  └── Modal.Backdrop (variant, isDismissable, isKeyboardDismissDisabled)
+      └── Modal.Container (placement, scroll, size)
+          └── Modal.Dialog
+              ├── Modal.CloseTrigger (optional)
+              ├── Modal.Header
+              │   ├── Modal.Icon (optional)
+              │   └── Modal.Heading
+              ├── Modal.Body
+              └── Modal.Footer
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Modal.Container`、`Modal.Dialog` 等）。
+2. **内置触发**：自定义触发用 `Modal.Trigger`；或将 `Button` 作为 `Modal` 的直接子元素，无需再手动接线状态。
+3. **状态管理**：`useDisclosure` 由 `useOverlayState` 替代；支持受控/非受控，并支持根 `Modal` 的 `state` prop。
+4. **prop 迁移**：许多 prop 从 `Modal` 移到 `Modal.Backdrop` 与 `Modal.Container`。
+5. **关闭回调**：`onClose` 由 `Modal.Dialog` 渲染 prop 中的 `close` 替代。
+6. **关闭按钮**：`hideCloseButton` / `closeButton` 由 `Modal.CloseTrigger` 组合方式替代。
+7. **尺寸**：在 `Modal.Container` 上使用 `size`（xs、sm、md、lg、cover、full）；`radius` 与 `shadow` 已移除，请用 Tailwind CSS。
+8. **遮罩**：`backdrop` → `Modal.Backdrop` 上的 `variant`（`opaque`、`blur`、`transparent`）。
+9. **滚动 prop 重命名**：`scrollBehavior` → `scroll`（`normal` → `inside`）。
+10. **动画**：`motionProps` 已移除，动画机制已变化。
+11. **新增子组件**：`Modal.Trigger`、`Modal.Icon`、`Modal.Heading`、`Modal.CloseTrigger`。

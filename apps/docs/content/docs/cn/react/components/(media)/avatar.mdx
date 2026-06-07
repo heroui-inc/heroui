@@ -1,0 +1,154 @@
+---
+title: Avatar 头像
+description: 展示用户头像图片，并提供可定制的回退内容。
+links:
+  radix: avatar
+  source: avatar/avatar.tsx
+  styles: avatar.css
+  storybook: Components/Media/Avatar
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Avatar } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="avatar-basic" />
+
+### 组件结构
+
+引入 Avatar 组件，并通过点语法访问各部分。
+
+```tsx
+import { Avatar } from '@heroui/react';
+
+export default () => (
+  <Avatar>
+    <Avatar.Image/>
+    <Avatar.Fallback/>
+  </Avatar>
+)
+```
+
+### 尺寸
+
+<ComponentPreview name="avatar-sizes" />
+
+### 颜色
+
+<ComponentPreview name="avatar-colors" />
+
+### 变体
+
+<ComponentPreview name="avatar-variants" />
+
+### 回退内容
+
+<ComponentPreview name="avatar-fallback" />
+
+### 头像组
+
+<ComponentPreview name="avatar-group" />
+
+### 自定义样式
+
+<ComponentPreview name="avatar-custom-styles" />
+
+<RelatedComponents component="avatar" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Avatar } from '@heroui/react';
+
+function CustomAvatar() {
+  return (
+    <Avatar className="size-20">
+      <Avatar.Image src="..." alt="..." />
+      <Avatar.Fallback>XL</Avatar.Fallback>
+    </Avatar>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Avatar 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .avatar {
+    @apply size-16 border-2 border-primary;
+  }
+
+  .avatar__fallback {
+    @apply bg-gradient-to-br from-purple-500 to-pink-500;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Avatar 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/avatar.css)）：
+
+#### 基础类
+- `.avatar` - 基础容器，默认尺寸（size-10）
+- `.avatar__image` - 图片元素，方形比例
+- `.avatar__fallback` - 回退容器，内容居中
+
+#### 尺寸修饰
+- `.avatar--sm` - 小尺寸（size-8）
+- `.avatar--md` - 中尺寸（默认，无额外样式）
+- `.avatar--lg` - 大尺寸（size-12）
+
+#### 变体修饰
+- `.avatar--soft` - Soft 变体，背景更浅
+
+#### 颜色修饰
+- `.avatar__fallback--default` - 默认文字颜色
+- `.avatar__fallback--accent` - 强调文字颜色
+- `.avatar__fallback--success` - 成功文字颜色
+- `.avatar__fallback--warning` - 警告文字颜色
+- `.avatar__fallback--danger` - 危险文字颜色
+
+## API 参考
+
+### Avatar Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Avatar 尺寸 |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | 回退区域的颜色主题 |
+| `variant` | `'default' \| 'soft'` | `'default'` | 视觉样式变体 |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### Avatar.Image Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `src` | `string` | - | 图片地址 |
+| `srcSet` | `string` | - | 响应式图片的 `srcset` |
+| `sizes` | `string` | - | 响应式图片的 `sizes` |
+| `alt` | `string` | - | 图片替代文本 |
+| `onLoad` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | 图片加载成功时的事件处理函数 |
+| `onError` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | 图片加载失败时的事件处理函数 |
+| `crossOrigin` | `'anonymous' \| 'use-credentials'` | - | 图片请求的 CORS 设置 |
+| `loading` | `'eager' \| 'lazy'` | - | 原生懒加载属性 |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### Avatar.Fallback Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `delayMs` | `number` | - | 显示回退内容前的延迟（减轻闪烁） |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | 覆盖父级的颜色 |
+| `className` | `string` | - | 额外的 CSS 类 |

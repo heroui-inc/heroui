@@ -1,0 +1,340 @@
+---
+title: PressableFeedback 按压反馈
+description: 为按压交互提供视觉反馈的容器组件，内置缩放动画。
+icon: updated
+links:
+  source_native: pressable-feedback/pressable-feedback.tsx
+  styles_native: pressable-feedback/pressable-feedback.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/pressable-feedback-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/pressable-feedback-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { PressableFeedback } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<PressableFeedback>
+  <PressableFeedback.Highlight />
+  <PressableFeedback.Ripple />
+  <PressableFeedback.Scale>...</PressableFeedback.Scale>
+</PressableFeedback>
+```
+
+- **PressableFeedback**：内置缩放动画的可按压容器；管理按压状态与容器尺寸，并通过上下文提供给子复合部件。使用 `PressableFeedback.Scale` 时可将 `animation={false}` 关闭根级内置缩放。
+- **PressableFeedback.Scale**：对特定子元素应用缩放的包装层；需要精确控制哪个元素缩放，或要在缩放层上直接应用 `className` / `style` 时使用。
+- **PressableFeedback.Highlight**：iOS 风格的高亮遮罩，绝对定位，在按压时淡入。
+- **PressableFeedback.Ripple**：Android 风格的涟漪，从触点扩展的径向渐变圆。
+
+## 用法
+
+### 基础
+
+默认提供按下缩放反馈，多数场景推荐直接使用。
+
+```tsx
+<PressableFeedback>...</PressableFeedback>
+```
+
+### 配合 Highlight
+
+在默认缩放之外叠加 iOS 风格高亮。
+
+```tsx
+<PressableFeedback>
+  <PressableFeedback.Highlight />
+  ...
+</PressableFeedback>
+```
+
+### 配合 Ripple
+
+在默认缩放之外叠加 Android 风格涟漪。
+
+```tsx
+<PressableFeedback>
+  <PressableFeedback.Ripple />
+  ...
+</PressableFeedback>
+```
+
+### 自定义缩放动画
+
+通过根组件 `animation.scale` 配置，支持 `value`、`timingConfig`、`ignoreScaleCoefficient`。
+
+```tsx
+<PressableFeedback
+  animation={{
+    scale: {
+      value: 0.9,
+      timingConfig: { duration: 150 },
+      ignoreScaleCoefficient: true,
+    },
+  }}
+>
+  ...
+</PressableFeedback>
+```
+
+### 自定义 Highlight 动画
+
+配置高亮层的不透明度与背景色。
+
+```tsx
+<PressableFeedback>
+  <PressableFeedback.Highlight
+    animation={{
+      backgroundColor: { value: '#3b82f6' },
+      opacity: { value: [0, 0.2] },
+    }}
+  />
+  ...
+</PressableFeedback>
+```
+
+### 自定义 Ripple 动画
+
+配置涟漪颜色、不透明度与时长。
+
+```tsx
+<PressableFeedback>
+  <PressableFeedback.Ripple
+    animation={{
+      backgroundColor: { value: '#ec4899' },
+      opacity: { value: [0, 0.1, 0] },
+      progress: { baseDuration: 600 },
+    }}
+  />
+  ...
+</PressableFeedback>
+```
+
+### 对指定子元素缩放（PressableFeedback.Scale）
+
+需要对容器内某一子元素而非根节点缩放时，将根组件设为 `animation={false}` 关闭内置缩放，再使用 `PressableFeedback.Scale`，以便在缩放层上直接应用 `className` / `style`。
+
+```tsx
+<PressableFeedback animation={false}>
+  <PressableFeedback.Scale>...</PressableFeedback.Scale>
+</PressableFeedback>
+```
+
+可与 `Highlight` 或 `Ripple` 组合在 `Scale` 内：
+
+```tsx
+<PressableFeedback animation={false}>
+  <PressableFeedback.Scale>
+    <PressableFeedback.Highlight />
+    ...
+  </PressableFeedback.Scale>
+</PressableFeedback>
+```
+
+### 禁用全部动画
+
+根上设置 `animation="disable-all"` 可级联禁用内置缩放及子复合部件（Scale、Highlight、Ripple）的动画。
+
+```tsx
+<PressableFeedback animation="disable-all">...</PressableFeedback>
+```
+
+也可在保留缩放配置的同时禁用动画（例如运行时切换）：
+
+```tsx
+<PressableFeedback animation={{ scale: { value: 0.97 }, state: 'disable-all' }}>
+  ...
+</PressableFeedback>
+```
+
+## 示例
+
+```tsx
+import { PressableFeedback, Card, Button } from 'heroui-native';
+import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, View, Text } from 'react-native';
+
+export default function PressableFeedbackExample() {
+  return (
+    <PressableFeedback className="w-full aspect-square overflow-auto">
+      <Card className="flex-1">
+        <Image
+          source={{
+            uri: 'https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/neo2.jpeg',
+          }}
+          style={StyleSheet.absoluteFill}
+          contentFit="cover"
+        />
+        <LinearGradient
+          colors={['rgba(0,0,0,0.1)', 'rgba(0,0,0,0.4)']}
+          style={StyleSheet.absoluteFill}
+        />
+        <PressableFeedback.Ripple
+          animation={{
+            backgroundColor: { value: 'white' },
+            opacity: { value: [0, 0.3, 0] },
+          }}
+        />
+        <View className="flex-1 gap-4" pointerEvents="box-none">
+          <Card.Body className="flex-1" pointerEvents="none">
+            <Card.Title className="text-base text-zinc-50 uppercase mb-0.5">
+              Neo
+            </Card.Title>
+            <Card.Description className="text-zinc-50 font-medium text-base">
+              家用机器人
+            </Card.Description>
+          </Card.Body>
+          <Card.Footer className="gap-3">
+            <View className="flex-row items-center justify-between">
+              <View pointerEvents="none">
+                <Text className="text-base text-white">即将开售</Text>
+                <Text className="text-base text-zinc-300">订阅通知</Text>
+              </View>
+              <Button size="sm" className="bg-white">
+                <Button.Label className="text-black">通知我</Button.Label>
+              </Button>
+            </View>
+          </Card.Footer>
+        </View>
+      </Card>
+    </PressableFeedback>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/pressable-feedback.tsx>)。
+
+## API 参考
+
+### PressableFeedback
+
+| prop                    | type                             | default | description                                                                                                 |
+| ----------------------- | -------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                | -       | 需要包裹按压反馈的内容                                                                                       |
+| `isDisabled`            | `boolean`                        | `false` | 是否禁用                                                                                                     |
+| `className`             | `string`                         | -       | 额外的 class                                                                                                 |
+| `animation`             | `PressableFeedbackRootAnimation` | -       | 通过 `{ scale: ... }` 自定义缩放；`false` 关闭根级缩放；`'disable-all'` 级联禁用全部                         |
+| `isAnimatedStyleActive` | `boolean`                        | `true`  | 根内置动画样式是否启用                                                                                       |
+| `asChild`               | `boolean`                        | `false` | 是否以子元素方式渲染                                                                                         |
+| `...rest`               | `AnimatedProps<PressableProps>`  | -       | 支持 Reanimated `Animated` `Pressable` 的属性                                                              |
+
+#### PressableFeedbackRootAnimation
+
+根 `animation` 遵循标准 `AnimationRoot` 控制流：
+
+- `true` 或 `undefined`：使用默认内置缩放
+- `false` 或 `"disabled"`：关闭根内置缩放（改用 `PressableFeedback.Scale` 时）
+- `"disable-all"`：级联禁用全部动画（含内置缩放与子级 Scale、Highlight、Ripple）
+- `object`：自定义内置缩放
+
+| prop    | type                                     | default | description                                                                     |
+| ------- | ---------------------------------------- | ------- | ------------------------------------------------------------------------------- |
+| `scale` | `PressableFeedbackScaleAnimation`        | -       | 自定义内置缩放（value、timingConfig 等）                                        |
+| `state` | `'disabled' \| 'disable-all' \| boolean` | -       | 在保留配置的同时控制动画状态（例如运行时开关）                                  |
+
+### PressableFeedback.Scale
+
+对容器内指定子元素应用缩放时使用；根上设 `animation={false}` 以关闭其内置缩放。
+
+| prop                    | type                              | default | description                                                  |
+| ----------------------- | --------------------------------- | ------- | ------------------------------------------------------------ |
+| `className`             | `string`                          | -       | 额外的 class                                                 |
+| `animation`             | `PressableFeedbackScaleAnimation` | -       | 缩放动画配置                                                 |
+| `isAnimatedStyleActive` | `boolean`                         | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `style`                 | `ViewStyle`                       | -       | 额外样式                                                     |
+| `...AnimatedProps`      | `AnimatedProps<ViewProps>`        | -       | 支持 Reanimated `Animated.View` 的属性                       |
+
+#### PressableFeedbackScaleAnimation
+
+缩放动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用缩放动画
+- `true` 或 `undefined`：使用默认缩放动画
+- `object`：自定义缩放配置
+
+| prop                     | type                    | default                                              | description                                                                |
+| ------------------------ | ----------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| `state`                  | `'disabled' \| boolean` | -                                                    | 在自定义属性时禁用动画                                                     |
+| `value`                  | `number`                | `0.985`                                              | 按下时的缩放值（会随容器宽度自动调整）                                     |
+| `timingConfig`           | `WithTimingConfig`      | `{ duration: 300, easing: Easing.out(Easing.ease) }` | 时间曲线配置                                                               |
+| `ignoreScaleCoefficient` | `boolean`               | `false`                                              | 为 true 时忽略自动缩放系数，直接使用 `value`                               |
+
+### PressableFeedback.Highlight
+
+| prop                    | type                                  | default | description                                                  |
+| ----------------------- | ------------------------------------- | ------- | ------------------------------------------------------------ |
+| `className`             | `string`                              | -       | 额外的 class                                                 |
+| `animation`             | `PressableFeedbackHighlightAnimation` | -       | 高亮层动画配置                                               |
+| `isAnimatedStyleActive` | `boolean`                             | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `style`                 | `ViewStyle`                           | -       | 额外样式                                                     |
+| `...AnimatedProps`      | `AnimatedProps<ViewProps>`            | -       | 支持 Reanimated `Animated.View` 的属性                       |
+
+#### PressableFeedbackHighlightAnimation
+
+高亮层动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用高亮动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                    | type                    | default             | description                       |
+| ----------------------- | ----------------------- | ------------------- | --------------------------------- |
+| `state`                 | `'disabled' \| boolean` | -                   | 在自定义属性时禁用动画            |
+| `opacity.value`         | `[number, number]`      | `[0, 0.1]`          | 不透明度 [未按下, 按下]           |
+| `opacity.timingConfig`  | `WithTimingConfig`      | `{ duration: 200 }` | 时间曲线配置                      |
+| `backgroundColor.value` | `string`                | 随主题灰色          | 高亮层背景色                      |
+
+### PressableFeedback.Ripple
+
+| prop                    | type                                      | default | description                                                  |
+| ----------------------- | ----------------------------------------- | ------- | ------------------------------------------------------------ |
+| `className`             | `string`                                  | -       | 容器插槽的 class                                             |
+| `classNames`            | `ElementSlots<RippleSlots>`               | -       | 各插槽 class（container、ripple）                            |
+| `styles`                | `Partial<Record<RippleSlots, ViewStyle>>` | -       | 涟漪遮罩各部分的样式                                         |
+| `animation`             | `PressableFeedbackRippleAnimation`        | -       | 涟漪动画配置                                                 |
+| `isAnimatedStyleActive` | `boolean`                                 | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `...ViewProps`          | `Omit<ViewProps, 'style'>`                | -       | 支持 `View` 属性（不含 `style`）                             |
+
+#### `styles`
+
+| prop        | type        | description   |
+| ----------- | ----------- | ------------- |
+| `container` | `ViewStyle` | 容器插槽样式  |
+| `ripple`    | `ViewStyle` | 涟漪插槽样式  |
+
+#### PressableFeedbackRippleAnimation
+
+涟漪动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用涟漪动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                                 | type                       | default                 | description                                                                  |
+| ------------------------------------ | -------------------------- | ----------------------- | ---------------------------------------------------------------------------- |
+| `state`                              | `'disabled' \| boolean`    | -                       | 在自定义属性时禁用动画                                                       |
+| `backgroundColor.value`              | `string`                   | 随主题计算              | 涟漪背景色                                                                   |
+| `progress.baseDuration`              | `number`                   | `1000`                  | 涟漪进度基准时长（会按对角线自动调整）                                       |
+| `progress.minBaseDuration`           | `number`                   | `750`                   | 进度动画最小时长                                                             |
+| `progress.ignoreDurationCoefficient` | `boolean`                  | `false`                 | 为 true 时忽略自动时长系数，直接使用基准时长                                 |
+| `opacity.value`                      | `[number, number, number]` | `[0, 0.1, 0]`           | 不透明度 [起始, 峰值, 结束]                                                  |
+| `opacity.timingConfig`               | `WithTimingConfig`         | `{ duration: 200 }`     | 时间曲线配置                                                                 |
+| `scale.value`                        | `[number, number, number]` | `[0, 1, 1]`             | 缩放 [起始, 峰值, 结束]                                                      |
+| `scale.timingConfig`                 | `WithTimingConfig`         | `{ duration: 200 }`     | 时间曲线配置                                                                 |
+
+#### `ElementSlots<RippleSlots>`
+
+涟漪各插槽的额外 class：
+
+| slot        | description                                                                                                         |
+| ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| `container` | 外层容器（`absolute inset-0`），可通过 class 完全定制样式                                                           |
+| `ripple`    | 内层涟漪（`absolute top-0 left-0 rounded-full`），带动画属性，不宜用 className 覆盖动画相关表现                  |

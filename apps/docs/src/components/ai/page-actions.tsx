@@ -6,6 +6,7 @@ import {ChevronDown} from "lucide-react";
 import {useMemo, useState} from "react";
 import {cn} from "tailwind-variants";
 
+import {useDictionary} from "@/hooks/use-dictionary";
 import {ClaudeIcon, CursorIcon, MarkdownIcon, OpenAIIcon, VSCodeIcon} from "@/icons/dev";
 import {__DEV__} from "@/utils/env";
 
@@ -26,13 +27,19 @@ function setCache(key: string, value: string) {
   cache.set(key, value);
 }
 
-function markdownUrlToSlug(markdownUrl: string): string {
-  const slug = markdownUrl.replace(/^\/docs\//, "").replace(/\.mdx$/, "");
+function parseMarkdownUrl(markdownUrl: string): {slug: string; lang?: string} {
+  const url = markdownUrl.replace(/\.mdx$/, "");
+  const match = url.match(/^\/(?:(en|cn)\/)?docs\/(.*)$/);
 
-  return slug || "index";
+  if (!match) return {slug: "index"};
+
+  const [, lang, rest] = match;
+
+  return {lang, slug: rest || "index"};
 }
 
 export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
+  const dict = useDictionary().pageActions;
   const items = useMemo(() => {
     let fullMarkdownUrl = "";
 
@@ -45,47 +52,47 @@ export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
     }
 
     const query = fullMarkdownUrl
-      ? `Read ${fullMarkdownUrl}, I want to ask questions about it.`
-      : "I want to ask questions about this documentation.";
+      ? dict.askWithUrl.replace("{url}", fullMarkdownUrl)
+      : dict.askFallback;
 
     return [
       {
-        description: "View page as Markdown format",
+        description: dict.items.markdown.description,
         href: fullMarkdownUrl,
         icon: <MarkdownIcon size={18} />,
         key: "markdown",
-        title: "View as Markdown",
+        title: dict.items.markdown.title,
       },
       {
-        description: "Install MCP Server on Cursor",
+        description: dict.items.cursor.description,
         href: "cursor://anysphere.cursor-deeplink/mcp/install?name=heroui-react&config=eyJjb21tYW5kIjoibnB4IC15IEBoZXJvdWkvcmVhY3QtbWNwQGxhdGVzdCJ9",
         icon: <CursorIcon size={18} />,
         key: "cursor",
-        title: "Add to Cursor",
+        title: dict.items.cursor.title,
       },
       {
-        description: "Install MCP Server on VS Code",
+        description: dict.items.vscode.description,
         href: "vscode:mcp/install?%7B%22name%22%3A%22heroui-react%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40heroui%2Freact-mcp%40latest%22%5D%7D",
         icon: <VSCodeIcon size={18} />,
         key: "vscode",
-        title: "Add to VS Code",
+        title: dict.items.vscode.title,
       },
       {
-        description: "Ask questions about this page",
+        description: dict.items.chatgpt.description,
         href: `https://chatgpt.com/?${new URLSearchParams({hints: "search", q: query})}`,
         icon: <OpenAIIcon size={16} />,
         key: "chatgpt",
-        title: "Open in ChatGPT",
+        title: dict.items.chatgpt.title,
       },
       {
-        description: "Ask questions about this page",
+        description: dict.items.claude.description,
         href: `https://claude.ai/new?${new URLSearchParams({q: query})}`,
         icon: <ClaudeIcon size={16} />,
         key: "claude",
-        title: "Open in Claude",
+        title: dict.items.claude.title,
       },
     ];
-  }, [markdownUrl]);
+  }, [markdownUrl, dict]);
 
   const [isLoading, setLoading] = useState(false);
 
@@ -99,9 +106,9 @@ export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
       }
     }
 
-    const slug = markdownUrlToSlug(markdownUrl);
+    const {lang, slug} = parseMarkdownUrl(markdownUrl);
     const slugArray = slug.split("/").filter(Boolean);
-    const apiUrl = `/llms-raw.mdx/${slugArray.join("/")}`;
+    const apiUrl = `/llms-raw.mdx/${[lang, ...slugArray].filter(Boolean).join("/")}`;
 
     setLoading(true);
 
@@ -133,17 +140,17 @@ export function ViewOptions({markdownUrl}: {markdownUrl: string}) {
         {checked ? (
           <>
             <Iconify icon="check" />
-            Copied
+            {dict.copied}
           </>
         ) : (
           <>
             <Iconify icon="copy" />
-            Copy Markdown
+            {dict.copyMarkdown}
           </>
         )}
       </Button>
       <Dropdown isOpen={isOpen} onOpenChange={setOpen}>
-        <Button isIconOnly aria-label="More options" size="md" variant="tertiary">
+        <Button isIconOnly aria-label={dict.moreOptions} size="md" variant="tertiary">
           <ButtonGroup.Separator />
           <ChevronDown
             className={cn(

@@ -1,0 +1,232 @@
+---
+title: ColorSwatchPicker 颜色色块选择器
+description: 允许用户从预置调色板中选择颜色的 swatch 列表。
+links:
+  rac: ColorSwatchPicker
+  source: color-swatch-picker/color-swatch-picker.tsx
+  styles: color-swatch-picker.css
+  storybook: Components/Colors/ColorSwatchPicker
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { ColorSwatchPicker, parseColor } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="color-swatch-picker-basic"
+/>
+
+### 组件结构
+
+导入 ColorSwatchPicker 组件，并通过点语法访问所有子部分。
+
+```tsx
+import { ColorSwatchPicker } from '@heroui/react';
+
+export default () => (
+  <ColorSwatchPicker>
+    <ColorSwatchPicker.Item color="#F43F5E">
+      <ColorSwatchPicker.Swatch />
+      <ColorSwatchPicker.Indicator />
+    </ColorSwatchPicker.Item>
+    <ColorSwatchPicker.Item color="#D946EF">
+      <ColorSwatchPicker.Swatch />
+      <ColorSwatchPicker.Indicator />
+    </ColorSwatchPicker.Item>
+    <ColorSwatchPicker.Item color="#8B5CF6">
+      <ColorSwatchPicker.Swatch />
+      <ColorSwatchPicker.Indicator />
+    </ColorSwatchPicker.Item>
+  </ColorSwatchPicker>
+);
+```
+
+### 变体
+
+<ComponentPreview
+  name="color-swatch-picker-variants"
+/>
+
+### 尺寸
+
+<ComponentPreview
+  name="color-swatch-picker-sizes"
+/>
+
+### 堆叠布局
+
+<ComponentPreview
+  name="color-swatch-picker-stack-layout"
+/>
+
+### 默认值
+
+<ComponentPreview
+  name="color-swatch-picker-default-value"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="color-swatch-picker-controlled"
+/>
+
+### 禁用
+
+<ComponentPreview
+  name="color-swatch-picker-disabled"
+/>
+
+### 自定义指示器
+
+<ComponentPreview
+  name="color-swatch-picker-custom-indicator"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="color-swatch-picker-custom-render-function"
+/>
+
+<RelatedComponents component="color-swatch-picker" />
+
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以使用 `className` props 自定义 ColorSwatchPicker：
+
+```tsx
+import { ColorSwatchPicker } from '@heroui/react';
+
+function CustomColorSwatchPicker() {
+  return (
+    <ColorSwatchPicker className="gap-4">
+      <ColorSwatchPicker.Item color="#F43F5E" className="shadow-lg">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+      <ColorSwatchPicker.Item color="#D946EF">
+        <ColorSwatchPicker.Swatch />
+      </ColorSwatchPicker.Item>
+    </ColorSwatchPicker>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 ColorSwatchPicker 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .color-swatch-picker {
+    @apply gap-4;
+  }
+
+  .color-swatch-picker__item {
+    @apply shadow-md;
+  }
+
+  .color-swatch-picker__swatch {
+    @apply border-2 border-white;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ColorSwatchPicker 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-swatch-picker.css)）：
+
+#### 基础与结构
+
+- `.color-swatch-picker` - 基础容器（flex 布局）
+- `.color-swatch-picker__item` - 单个 swatch 包裹层
+- `.color-swatch-picker__swatch` - swatch 视觉元素
+
+#### 尺寸类
+
+- `.color-swatch-picker--xs` - 特小（16px）
+- `.color-swatch-picker--sm` - 小（24px）
+- `.color-swatch-picker--md` - 中（32px，默认）
+- `.color-swatch-picker--lg` - 大（36px）
+- `.color-swatch-picker--xl` - 特大（40px）
+
+#### 形状变体
+
+- `.color-swatch-picker--circle` - 圆形（默认）
+- `.color-swatch-picker--square` - 圆角方形
+
+#### 布局类
+
+- `.color-swatch-picker--grid` - 横向换行网格（默认）
+- `.color-swatch-picker--stack` - 纵向堆叠
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，以便灵活控制状态：
+
+- **悬停**：`:hover` 或 `[data-hovered="true"]` — 缩放至 1.1（仅在未选中时）
+- **聚焦**：`:focus-visible` 或 `[data-focus-visible="true"]` — 焦点环
+- **已选中**：`[data-selected="true"]` — 与 swatch 同色的内边框
+- **禁用**：`[data-disabled="true"]` — 降低透明度
+
+## API 参考
+
+### ColorSwatchPicker Props
+
+继承自 [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/react-aria/ColorSwatchPicker.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `string \| Color` | - | 当前选中颜色（受控） |
+| `defaultValue` | `string \| Color` | - | 默认选中颜色（非受控） |
+| `onChange` | `(value: Color) => void` | - | 选中变化时调用的处理函数 |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | swatch 尺寸 |
+| `variant` | `"circle" \| "square"` | `"circle"` | swatch 形状 |
+| `layout` | `"grid" \| "stack"` | `"grid"` | 布局方向 |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `React.ReactNode` | - | ColorSwatchPicker.Item 元素 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchPickerRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+### ColorSwatchPicker.Item Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `color` | `string \| Color` | **必填** | swatch 颜色 |
+| `isDisabled` | `boolean` | `false` | 是否禁用该项 |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `React.ReactNode` | - | ColorSwatchPicker.Swatch 元素 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchPickerItemRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+### ColorSwatchPicker.Swatch Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### parseColor
+
+为方便使用，从 React Aria Components 重新导出 `parseColor` 函数：
+
+```tsx
+import { parseColor } from '@heroui/react';
+
+// 解析十六进制颜色
+const red = parseColor('#ff0000');
+
+// 解析 RGB
+const green = parseColor('rgb(0, 255, 0)');
+
+// 解析 HSL
+const blue = parseColor('hsl(240, 100%, 50%)');
+```

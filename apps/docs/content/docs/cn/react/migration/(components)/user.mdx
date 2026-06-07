@@ -1,0 +1,446 @@
+---
+title: User
+description: User 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="warning">
+  HeroUI v3 中的 User 组件已被**移除**。请使用 Avatar、文本元素与 Tailwind CSS 类手动组合用户展示。
+</Callout>
+
+## 主要变化
+
+### 1. 组件已移除
+
+**v2：** 来自 `@heroui/react` 的 `<User>` 组件  
+**v3：** 使用 `Avatar` + 文本元素手动组合
+
+### 2. 功能映射
+
+v2 User 组件包含以下需要替换的功能：
+
+| v2 功能 | v3 等效项 | 说明 |
+| ------- | ----------- | ---- |
+| `name` prop | 文本元素 | 将名称渲染为文本或标题 |
+| `description` prop | 文本元素 | 将描述渲染为文本 |
+| `avatarProps` prop | `Avatar` 组件 | 直接使用 v3 Avatar 组件 |
+| `isFocusable` prop | 手动焦点处理 | 按需添加 `tabIndex` 与焦点样式 |
+| `classNames` prop | Tailwind CSS 类 | 直接将类应用到元素上 |
+
+## 结构变化
+
+### v2：User 组件
+
+在 v2 中，`User` 是一个将 Avatar 与名称组合在一起的便捷组件：
+
+```tsx
+import { User } from "@heroui/react";
+
+export default function App() {
+  return (
+    <User
+      name="Junior Garcia"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+  );
+}
+```
+
+### v3：手动组合
+
+在 v3 中，请使用 Avatar 和文本元素手动组合用户展示：
+
+```tsx
+import { Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </div>
+  );
+}
+```
+
+## 迁移示例
+
+### 带描述
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      description="Software Engineer"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <div className="flex flex-col items-start">
+        <span className="text-sm">Junior Garcia</span>
+        <span className="text-xs text-muted">Software Engineer</span>
+      </div>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 使用默认头像（姓名首字母）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      avatarProps={{
+        name: "Junior Garcia",
+        getInitials: (name) =>
+          name
+            .split(" ")
+            .map((n) => n[0])
+            .join(""),
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    function getInitials(name: string) {
+      return name
+        .split(" ")
+        .map((n) => n[0])
+        .join("");
+    }
+
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Fallback>{getInitials("Junior Garcia")}</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 带链接描述
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User, Link } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      description={
+        <Link href="https://x.com/jrgarciadev" size="sm">
+          @jrgarciadev
+        </Link>
+      }
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, Link } from "@heroui/react";
+
+    <div className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <div className="flex flex-col items-start">
+        <span className="text-sm">Junior Garcia</span>
+        <Link href="https://x.com/jrgarciadev" className="text-xs">
+          @jrgarciadev
+        </Link>
+      </div>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+### 可点击的用户
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    {/* Focusable */}
+    <User
+      name="Junior Garcia"
+      isFocusable
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    
+    {/* As button */}
+    <User
+      as="button"
+      name="Junior Garcia"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar } from "@heroui/react";
+
+    {/* Focusable */}
+    <button
+      className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus"
+      tabIndex={0}
+    >
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </button>
+    
+    {/* As button */}
+    <button
+      className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus"
+    >
+      <Avatar>
+        <Avatar.Image
+          src="https://example.com/avatar.jpg"
+          alt="Junior Garcia"
+        />
+        <Avatar.Fallback>JG</Avatar.Fallback>
+      </Avatar>
+      <span className="text-sm">Junior Garcia</span>
+    </button>
+    ```
+  </Tab>
+</Tabs>
+
+## 创建可复用的 User 组件（推荐）
+
+由于用户展示很常见，可以创建一个可复用组件：
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { User } from "@heroui/react";
+
+    <User
+      name="Junior Garcia"
+      description="Software Engineer"
+      avatarProps={{
+        src: "https://example.com/avatar.jpg",
+      }}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Avatar, Link } from "@heroui/react";
+    import { ReactNode } from "react";
+    import { cn } from "@/lib/utils"; // 或你的 cn 工具函数
+
+    interface UserProps {
+      name: string | ReactNode;
+      description?: string | ReactNode;
+      avatarSrc?: string;
+      avatarAlt?: string;
+      avatarFallback?: string;
+      className?: string;
+      isFocusable?: boolean;
+      as?: "div" | "button" | "a";
+      href?: string;
+      onClick?: () => void;
+    }
+
+    function getInitials(name: string): string {
+      return name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+    }
+
+    export function User({
+      name,
+      description,
+      avatarSrc,
+      avatarAlt,
+      avatarFallback,
+      className,
+      isFocusable = false,
+      as = "div",
+      href,
+      onClick,
+    }: UserProps) {
+      const Component = as === "a" ? "a" : as === "button" ? "button" : "div";
+      const fallback = avatarFallback || (typeof name === "string" ? getInitials(name) : "?");
+
+      const content = (
+        <>
+          <Avatar>
+            {avatarSrc && (
+              <Avatar.Image
+                src={avatarSrc}
+                alt={avatarAlt || (typeof name === "string" ? name : "")}
+              />
+            )}
+            <Avatar.Fallback>{fallback}</Avatar.Fallback>
+          </Avatar>
+          <div className="flex flex-col items-start">
+            <span className="text-sm">{name}</span>
+            {description && (
+              <span className="text-xs text-muted">{description}</span>
+            )}
+          </div>
+        </>
+      );
+
+      const baseClasses = cn(
+        "inline-flex items-center gap-2 rounded-sm outline-none",
+        isFocusable && "focus-visible:ring-2 focus-visible:ring-focus",
+        className
+      );
+
+      if (Component === "button") {
+        return (
+          <button className={baseClasses} onClick={onClick} tabIndex={isFocusable ? 0 : -1}>
+            {content}
+          </button>
+        );
+      }
+
+      if (Component === "a") {
+        return (
+          <a href={href} className={baseClasses} tabIndex={isFocusable ? 0 : -1}>
+            {content}
+          </a>
+        );
+      }
+
+      return (
+        <div className={baseClasses} tabIndex={isFocusable ? 0 : -1}>
+          {content}
+        </div>
+      );
+    }
+
+    // Usage
+    <User
+      name="Junior Garcia"
+      description="Software Engineer"
+      avatarSrc="https://example.com/avatar.jpg"
+      avatarAlt="Junior Garcia"
+    />
+    ```
+  </Tab>
+</Tabs>
+
+## 样式参考
+
+v2 User 组件使用了以下基础样式，迁移时可以按需复用：
+
+- **基础容器**：`inline-flex items-center gap-2 rounded-sm`
+- **包装层（用于名称 / 描述）**：`inline-flex flex-col items-start`
+- **名称**：`text-sm`（text-small）
+- **描述**：`text-xs text-muted`（text-tiny text-foreground-400）
+
+## 总结
+
+1. **组件已移除**：v3 中不再提供 `User` 组件
+2. **导入变更**：移除 `import { User } from "@heroui/react"`
+3. **手动组合**：使用 Avatar + 文本元素组合用户展示
+4. **Avatar 变更**：使用 v3 Avatar 的复合组件模式
+5. **样式**：直接应用 Tailwind CSS 类
+6. **焦点处理**：如有需要，手动实现焦点样式
+
+## 迁移步骤
+
+1. **移除导入**：从 `@heroui/react` 导入中移除 `User`
+2. **替换组件**：将所有 `<User>` 实例替换为手动组合
+3. **使用 Avatar**：使用 v3 Avatar 复合组件模式
+4. **添加文本元素**：将名称和描述作为文本元素添加
+5. **应用样式**：使用 Tailwind CSS 类处理布局与样式
+6. **处理焦点**：如果使用过 `isFocusable`，请添加焦点样式
+7. **可选**：为你的应用创建可复用的 User 组件
+
+## 常见模式
+
+### 用户列表
+
+```tsx
+<div className="space-y-2">
+  {users.map((user) => (
+    <div key={user.id} className="inline-flex items-center gap-2">
+      <Avatar>
+        <Avatar.Image src={user.avatar} alt={user.name} />
+        <Avatar.Fallback>{getInitials(user.name)}</Avatar.Fallback>
+      </Avatar>
+      <div className="flex flex-col items-start">
+        <span className="text-sm">{user.name}</span>
+        {user.role && (
+          <span className="text-xs text-muted">{user.role}</span>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
+```
+
+### 可点击的用户
+
+```tsx
+<button
+  className="inline-flex items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-focus hover:bg-default-100"
+  onClick={() => handleUserClick(user)}
+>
+  <Avatar>
+    <Avatar.Image src={user.avatar} alt={user.name} />
+    <Avatar.Fallback>{getInitials(user.name)}</Avatar.Fallback>
+  </Avatar>
+  <div className="flex flex-col items-start">
+    <span className="text-sm">{user.name}</span>
+    <span className="text-xs text-muted">{user.email}</span>
+  </div>
+</button>
+```

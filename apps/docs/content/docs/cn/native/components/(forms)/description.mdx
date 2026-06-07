@@ -1,0 +1,139 @@
+---
+title: Description 描述
+description: 用于为表单字段等提供无障碍说明与辅助文案的文本组件。
+links:
+  source_native: description/description.tsx
+  styles_native: description/description.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/description-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/description-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Description } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Description>...</Description>
+```
+
+- **Description**：以弱化样式展示说明或辅助文案；可通过 `nativeID` 与表单字段关联以支持无障碍。
+
+## 用法
+
+### 基础用法
+
+使用默认弱化样式展示说明文字。
+
+```tsx
+<Description>This is a helpful description.</Description>
+```
+
+### 与表单字段组合
+
+使用 `nativeID` 为表单字段提供可关联的说明。
+
+```tsx
+<TextField>
+  <Label>Email address</Label>
+  <Input
+    placeholder="Enter your email"
+    keyboardType="email-address"
+    autoCapitalize="none"
+  />
+  <Description nativeID="email-desc">
+    We'll never share your email with anyone else.
+  </Description>
+</TextField>
+```
+
+### 无障碍关联
+
+通过 `nativeID` 与 `aria-describedby` 将说明与字段关联，便于读屏。
+
+```tsx
+<TextField>
+  <Label>Password</Label>
+  <Input
+    placeholder="Create a password"
+    secureTextEntry
+    aria-describedby="password-desc"
+  />
+  <Description nativeID="password-desc">
+    Use at least 8 characters with a mix of letters, numbers, and symbols.
+  </Description>
+</TextField>
+```
+
+### 非法态时隐藏
+
+使用 `hideOnInvalid` 控制字段非法时是否隐藏说明。
+
+```tsx
+<TextField isInvalid={isInvalid}>
+  <Label>Email</Label>
+  <Input placeholder="Enter your email" />
+  <Description hideOnInvalid>
+    We'll never share your email with anyone else.
+  </Description>
+  <FieldError>Please enter a valid email address</FieldError>
+</TextField>
+```
+
+当 `hideOnInvalid` 为 `true` 时，字段非法会隐藏说明；为 `false`（默认）时非法仍显示说明。
+
+## 示例
+
+```tsx
+import { Description, Input, Label, TextField } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function DescriptionExample() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-8">
+      <TextField>
+        <Label>Email address</Label>
+        <Input
+          placeholder="Enter your email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <Description nativeID="email-desc">
+          We'll never share your email with anyone else.
+        </Description>
+      </TextField>
+      <TextField>
+        <Label>Password</Label>
+        <Input placeholder="Create a password" secureTextEntry />
+        <Description nativeID="password-desc">
+          Use at least 8 characters with a mix of letters, numbers, and symbols.
+        </Description>
+      </TextField>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/description.tsx>)。
+
+## API 参考
+
+### Description
+
+| prop            | type                                | default | description                                                                                |
+| --------------- | ----------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| `children`      | `React.ReactNode`                   | -       | 说明文本内容                                                                               |
+| `className`     | `string`                            | -       | 额外 class                                                                                 |
+| `nativeID`      | `string`                            | -       | 无障碍用 native ID，与 `aria-describedby` 等配合关联字段                                   |
+| `isInvalid`     | `boolean`                           | -       | 是否处于非法态（可覆盖上下文）                                                           |
+| `isDisabled`    | `boolean`                           | -       | 是否禁用态（可覆盖上下文）                                                               |
+| `hideOnInvalid` | `boolean`                           | `false` | 非法时是否隐藏说明                                                                       |
+| `animation`     | `DescriptionAnimation \| undefined` | -       | 说明显隐等过渡的动画配置                                                                   |
+| `...TextProps`  | `TextProps`                         | -       | 支持 React Native `Text` 的全部标准属性                                                  |

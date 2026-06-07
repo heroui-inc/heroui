@@ -1,0 +1,119 @@
+---
+title: CloseButton 关闭按钮
+description: 用于关闭对话框、模态框或收起内容的按钮组件。
+links:
+  source_native: close-button/close-button.tsx
+  styles_native: close-button/close-button.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/close-button-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { CloseButton } from 'heroui-native';
+```
+
+## 用法
+
+### 基础用法
+
+CloseButton 渲染带默认样式的关闭图标按钮。
+
+```tsx
+<CloseButton />
+```
+
+### 自定义图标颜色
+
+通过 `iconProps` 自定义图标颜色。
+
+```tsx
+<CloseButton iconProps={{ color: themeColorDanger }} />
+<CloseButton iconProps={{ color: themeColorAccent }} />
+```
+
+### 自定义图标尺寸
+
+通过 `iconProps` 调整图标大小。
+
+```tsx
+<CloseButton iconProps={{ size: 24 }} />
+```
+
+### 自定义子节点
+
+用自定义内容替换默认关闭图标。
+
+```tsx
+<CloseButton>
+  <CustomIcon />
+</CloseButton>
+```
+
+### 禁用态
+
+禁用按钮以禁止交互。
+
+```tsx
+<CloseButton isDisabled />
+```
+
+## 示例
+
+```tsx
+import { CloseButton, useThemeColor } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export default function CloseButtonExample() {
+  const themeColorForeground = useThemeColor('foreground');
+  const themeColorDanger = useThemeColor('danger');
+
+  return (
+    <View className="flex-1 px-5 items-center justify-center">
+      <View className="flex-row items-center gap-4">
+        <CloseButton />
+        <CloseButton iconProps={{ color: themeColorDanger }} />
+        <CloseButton>
+          <StyledIonicons
+            name="close-circle"
+            size={28}
+            color={themeColorForeground}
+          />
+        </CloseButton>
+        <CloseButton isDisabled />
+      </View>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/close-button.tsx)。
+
+## API 参考
+
+### CloseButton
+
+CloseButton 继承 [Button](./button) 的全部属性。默认 `variant='tertiary'`、`size='sm'`、`isIconOnly=true`。
+
+| prop        | type                   | default | description                                      |
+| ----------- | ---------------------- | ------- | ------------------------------------------------ |
+| `iconProps` | `CloseButtonIconProps` | -       | 自定义关闭图标属性                               |
+| `children`  | `React.ReactNode`      | -       | 自定义内容，替换默认关闭图标                     |
+
+`isDisabled`、`className`、`animation`、`feedbackVariant` 以及所有 Pressable 相关继承属性见 [Button API 参考](./button#api-reference)。
+
+#### CloseButtonIconProps
+
+| prop    | type     | default                | description       |
+| ------- | -------- | ---------------------- | ----------------- |
+| `size`  | `number` | `20`                   | 图标尺寸          |
+| `color` | `string` | Uses theme muted color | 图标颜色          |

@@ -1,0 +1,153 @@
+---
+title: ToggleButton 切换按钮
+description: 用于在开启/关闭或已选中/未选中状态之间切换的交互式切换控件。
+links:
+  rac: ToggleButton
+  source: toggle-button/toggle-button.tsx
+  styles: toggle-button.css
+  storybook: Components/Buttons/ToggleButton
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { ToggleButton } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="toggle-button-basic"
+/>
+
+### 变体
+
+<ComponentPreview
+  name="toggle-button-variants"
+/>
+
+### 仅图标
+
+<ComponentPreview
+  name="toggle-button-icon-only"
+/>
+
+### 尺寸
+
+<ComponentPreview
+  name="toggle-button-sizes"
+/>
+
+
+### 受控
+
+<ComponentPreview
+  name="toggle-button-controlled"
+/>
+
+### 禁用
+
+<ComponentPreview
+  name="toggle-button-disabled"
+/>
+
+<RelatedComponents component="togglebutton" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { ToggleButton } from '@heroui/react';
+
+function CustomToggleButton() {
+  return (
+    <ToggleButton className="bg-purple-500 text-white">
+      Toggle
+    </ToggleButton>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 ToggleButton 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .toggle-button {
+    @apply bg-purple-500 text-white;
+  }
+
+  .toggle-button--icon-only {
+    @apply rounded-lg;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ToggleButton 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toggle-button.css)）：
+
+#### 基础与尺寸类
+
+- `.toggle-button` - 切换按钮基础样式
+- `.toggle-button--sm` - 小尺寸变体
+- `.toggle-button--md` - 中尺寸变体（默认）
+- `.toggle-button--lg` - 大尺寸变体
+
+#### 变体类
+
+- `.toggle-button--default` - 默认变体（填充背景）
+- `.toggle-button--ghost` - 幽灵变体（透明背景）
+
+#### 修饰符类
+
+- `.toggle-button--icon-only` - 仅图标切换按钮
+- `.toggle-button--icon-only.toggle-button--sm` - 小尺寸仅图标
+- `.toggle-button--icon-only.toggle-button--lg` - 大尺寸仅图标
+
+### 交互状态
+
+该切换按钮同时支持 CSS 伪类与 data 属性，以便灵活控制状态：
+
+- **已选中**：`[data-selected="true"]`（强调色背景与前景）
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **激活/按下**：`:active` 或 `[data-pressed="true"]`（包含缩放变换）
+- **聚焦**：`:focus-visible` 或 `[data-focus-visible="true"]`（显示焦点环）
+- **禁用**：`:disabled` 或 `[aria-disabled="true"]`（降低透明度，禁用指针事件）
+
+## API 参考
+
+### ToggleButton Props
+
+继承自 [React Aria ToggleButton](https://react-spectrum.adobe.com/react-aria/ToggleButton.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | `'default' \| 'ghost'` | `'default'` | 视觉样式变体 |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 切换按钮尺寸 |
+| `isIconOnly` | `boolean` | `false` | 按钮是否仅包含图标 |
+| `isSelected` | `boolean` | - | 受控的已选中状态 |
+| `defaultSelected` | `boolean` | `false` | 默认已选中状态（非受控） |
+| `isDisabled` | `boolean` | `false` | 是否禁用切换按钮 |
+| `onChange` | `(isSelected: boolean) => void` | - | 已选中状态变化时调用的处理函数 |
+| `onPress` | `(e: PressEvent) => void` | - | 按钮按下时调用的处理函数 |
+| `children` | `React.ReactNode \| (values: ToggleButtonRenderProps) => React.ReactNode` | - | 按钮内容或渲染 prop |
+
+### ToggleButtonRenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isSelected` | `boolean` | 按钮当前是否已选中 |
+| `isPressed` | `boolean` | 按钮当前是否处于按下状态 |
+| `isHovered` | `boolean` | 按钮是否处于悬停状态 |
+| `isFocused` | `boolean` | 按钮是否处于聚焦状态 |
+| `isFocusVisible` | `boolean` | 按钮是否应显示焦点指示 |
+| `isDisabled` | `boolean` | 按钮是否被禁用 |

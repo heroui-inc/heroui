@@ -1,0 +1,292 @@
+---
+title: 增量迁移
+description: 将 HeroUI v2 增量迁移到 v3 同时保持两个版本并行工作的分步指南
+---
+
+## 概述
+
+通过共存的增量迁移，您可以逐个组件地从 HeroUI v2 迁移到 v3，同时保持项目在整个迁移过程中正常运行。此方法使用特殊的设置策略来允许 v2 和 v3 组件并行工作。
+
+### AI 助理资源
+
+AI 助手可以协助迁移。你可以使用 [迁移 MCP 服务器](/docs/react/migration/mcp-server) 获取工具与提示词，使用 [迁移 Agent Skills](/docs/react/migration/agent-skills) 获取基于技能的知识，或使用 [用于迁移的 AGENTS.md](/docs/react/migration/agents-md) 将迁移文档下载到项目中。
+
+### 限制和注意事项
+
+在选择此方法之前，请注意：
+
+- **捆绑包大小**：迁移期间将包含两个版本，从而增加捆绑包大小
+- **样式冲突**：v2 和 v3 样式可能会冲突；彻底测试
+- **类型冲突**：如果两个版本都导入到同一个文件中，TypeScript 可能会显示冲突
+- **提供商**：v2 需要`HeroUIProvider`，v3 没有 - 您可能需要条件提供者包装
+- **React 版本**：v3 需要 React 19+，v2 支持 React 18+ - 确保安装 React 19
+- **设置复杂性**：与完全迁移相比，需要更复杂的初始设置
+
+### 没有 v3 对应组件的组件
+
+由于 v2 和 v3 可以共存，因此没有 v3 对应项的 v2 组件可以保留在您的项目中。这些组件将在迁移期间继续工作：
+
+- **Code**、**Image**、**Navbar**、**Ripple**、**Snippet**、**Spacer**、**User**
+
+您无需替换它们即可完成迁移。如果您希望删除它们并使用本机 HTML 或手动实现，您可以要求您的代理帮助使用[组件迁移参考](/docs/react/migration#component-migration-reference)指南。
+
+## 策略选择
+
+根据您当前导入 v2 组件的方式选择策略：
+
+- **使用`@heroui/react`**：使用策略 A（pnpm 别名）
+- **使用组件包** (`@heroui/button`, `@heroui/card`等）：使用策略B（组件包）
+
+## 策略 A：使用 pnpm 别名
+
+该策略使用 pnpm 包别名以不同的名称安装 v3 包，从而允许两个版本共存。
+
+### 设置
+
+1. 使用别名安装 v3 软件包：
+
+```json
+{
+  "dependencies": {
+    "@heroui/react": "2.8.6",
+    "@heroui/theme": "2.4.24",
+    "@heroui-v3/react": "npm:@heroui/react@latest",
+    "@heroui-v3/styles": "npm:@heroui/styles@latest"
+  }
+}
+```
+
+2. 从以下位置导入 v2 组件`@heroui/react`:
+
+```tsx
+import {Button} from "@heroui/react"; // v2
+```
+
+3. 从以下位置导入 v3 组件`@heroui-v3/react`:
+
+```tsx
+import {Button} from "@heroui-v3/react"; // v3
+```
+
+### 迁移过程
+
+1. **一次迁移一个组件：**
+   - 更新导入以使用`@heroui-v3/react`
+   - 将组件代码更新为 v3 API
+   - 测试迁移的组件
+   - 验证样式看起来正确
+   - 对于没有 v3 对位的 v2 组件（**Code**、**Image**、**Navbar**、**Ripple**、**Snippet**、**Spacer**、**User**），请将它们保留在原处，它们在共存期间仍会继续工作。
+
+2. **继续，直到所有组件均已迁移**
+   - 跟踪哪些组件已迁移
+   - 彻底测试每个迁移的组件
+   - 如果您想稍后删除 v2 删除的组件，请使用[组件迁移参考](/docs/react/migration#component-migration-reference)指南并要求您的代理帮助将其替换为原生 HTML 或手动实施。
+
+3. **迁移所有组件后，切换到仅 v3：**
+   - 删除 v2 依赖项（`@heroui/react`, `@heroui/theme`)
+   - 删除别名
+   - 将所有导入更新为`@heroui/react`（消除`-v3`后缀）
+   - 完成样式迁移
+
+### 注意事项
+
+- 两个 CSS 系统都将被加载（v2 通过 Tailwind 插件，v3 通过 CSS 导入）
+- 您暂时需要两个 Tailwind 配置
+- 迁移过程中捆绑包大小会变大
+- 可能会发生一些样式冲突
+
+## 策略 B：使用组件包
+
+该策略将 v2 的特定于组件的包与 v3 的统一包一起使用。
+
+### 设置
+
+1. 安装v3主包和v2组件包：
+
+```json
+{
+  "dependencies": {
+    "@heroui/react": "latest", // v3
+    "@heroui/styles": "latest", // v3
+    "@heroui/button": "2.8.6", // v2
+    "@heroui/card": "2.8.6", // v2
+    // ... other v2 component packages as needed
+  }
+}
+```
+
+2. 从以下位置导入 v3 组件`@heroui/react`:
+
+```tsx
+import {Button} from "@heroui/react"; // v3
+```
+
+3. 从组件包中导入 v2 组件：
+
+```tsx
+import {Card} from "@heroui/card"; // v2
+```
+
+### 迁移过程
+
+1. **安装 v3 软件包** (`@heroui/react`, `@heroui/styles`)
+2. **为尚未迁移的组件安装 v2 组件包**
+3. **一次迁移一个组件：**
+   - 从依赖中删除 v2 组件包
+   - 更新导入以使用`@heroui/react`(v3)
+   - 将组件代码更新为 v3 API
+   - 测试迁移的组件
+   - 对于没有 v3 对位的 v2 组件（**Code**、**Image**、**Navbar**、**Ripple**、**Snippet**、**Spacer**、**User**），请将它们保留在原处，它们在共存期间仍会继续工作。
+4. **继续，直到所有组件均已迁移**
+   - 如果您想稍后删除 v2 删除的组件，请使用[组件迁移参考](/docs/react/migration#component-migration-reference)指南并要求您的代理帮助将其替换为原生 HTML 或手动实施。
+5. **删除剩余的 v2 组件包**
+6. **完成样式迁移**
+
+### 注意事项
+
+- 仅当您的项目使用特定于组件的包时才有效
+- 需要管理多个包依赖关系
+- v3 没有组件包，因此这是一种单向迁移路径
+
+## 共存的 CSS 配置
+
+在共存期间，您将需要两个 CSS 系统：
+
+```css
+/* globals.css */
+@import "tailwindcss";
+
+/* v2 styles via Tailwind plugin */
+/* (configured in tailwind.config.js) */
+
+/* v3 styles */
+@import "@heroui/styles";
+```
+
+<Callout type="warning">
+  **重要提示：** 导入顺序很重要：先导入 `tailwindcss`，再导入 `@heroui/styles`。
+</Callout>
+
+## Tailwind配置
+
+您暂时需要两个 Tailwind 配置：
+
+**v2 配置（tailwind.config.js）：**
+
+```js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [heroui()],
+  // ... other config
+};
+```
+
+**v3 配置：** 不需要插件，但确保安装 Tailwind v4。
+
+## 组件迁移
+
+对于您迁移的每个组件：
+
+1. **查看组件迁移指南**
+   - 使用[组件迁移参考](/docs/react/migration#component-migration-reference)表
+   - 检查特定于组件的迁移指南
+
+2. **更新导入**
+   - 策略A：改变`@heroui/react` → `@heroui-v3/react`
+   - 策略 B：更改组件包 →`@heroui/react`
+
+3. **更新组件代码**
+   - 遵循组件迁移指南
+   - 更新 props、组件结构和 API 调用
+   - 如果需要，用复合组件替换挂钩
+
+4. **测试迁移的组件**
+   - 验证组件正确渲染
+   - 测试功能和交互
+   - 检查样式冲突
+   - 确保 v2 组件的样式仍然正确
+
+5. **文档迁移**
+   - 跟踪哪些组件已迁移
+   - 注意任何问题或疑虑
+
+## CSS 冲突处理
+
+共存期间，v2 和 v3 CSS 系统都会被加载。监控冲突：
+
+1. **注意样式不一致**
+   - 检查v2和v3样式是否冲突
+   - 验证两个 CSS 导入均存在且顺序正确
+
+2. **指导冲突解决**
+   - 确保 CSS 导入顺序：`tailwindcss`首先，然后`@heroui/styles`
+   - 检查 Tailwind 配置是否配置了 v2 插件
+   - 验证 v3 CSS 是否正确导入
+
+3. **每次迁移后测试样式**
+   - 验证迁移的组件看起来正确
+   - 检查是否有意外的样式覆盖
+   - 确保 v2 组件的样式仍然正确
+
+## 完成迁移
+
+迁移所有组件后：
+
+1. **删除 v2 依赖项：**
+   - 消除`@heroui/react`和`@heroui/theme`（策略A）
+   - 全部删除`@heroui/*`组件包（策略B）
+   - 删除别名（策略 A）
+   - 如果你将已移除的 v2 组件（**Code**、**Image**、**Navbar**、**Ripple**、**Snippet**、**Spacer**、**User**）保留在项目中，有两个选择：(1) 在删除 v2 依赖前按迁移指南替换它们，或 (2) 暂时保留 v2 依赖，直到你准备好替换。你也可以请代理依据指南协助移除或替换。
+
+2. **更新所有导入：**
+   - 改变`@heroui-v3/react` → `@heroui/react`（策略A）
+   - 更改组件包导入 →`@heroui/react`（策略B）
+
+3. **更新CSS：**
+   - 从配置中删除 v2 Tailwind 插件
+   - 仅保留`@import "@heroui/styles";`
+
+4. **完成样式迁移：**
+   - 遵循[样式迁移指南](/docs/react/migration/styling)
+   - 更新实用程序类、颜色标记等。
+
+## 共存迁移清单
+
+使用此清单来跟踪增量迁移进度：
+
+### 初始设置
+- 选择策略（A：别名或B：组件包）
+- 安装 v3 软件包（使用别名或直接安装）
+- 为两个版本配置 CSS
+- 确保已安装 React 19+
+- 临时设置两个 Tailwind 配置
+
+### 组件迁移（对每个组件重复）
+- 查看组件迁移指南
+- 更新导入（策略 A 或 B）
+- 将组件代码更新为 v3 API
+- 测试迁移的组件
+- 检查样式冲突
+- 记录迁移进度
+- 识别已移除的 v2 组件（**Code**、**Image**、**Navbar**、**Ripple**、**Snippet**、**Spacer**、**User**）——保留在原处或按指南替换
+
+### 完成
+- 迁移所有组件
+- 可选：在删除 v2 deps 之前使用迁移指南替换已删除的组件，或者仅在替换所有已删除的组件后删除 v2 deps
+- 删除 v2 依赖项
+- 删除别名（策略 A）
+- 将所有导入更新为仅限 v3
+- 删除 v2 Tailwind 插件
+- 将 CSS 更新为仅限 v3
+- 完成样式迁移
+- 测试整个应用程序
+
+## 下一步
+
+完成增量迁移后：
+
+1. 回顾[v3 组件文档](/docs/react/components)
+2. 探索 v3 中可用的新组件
+3. 查看[样式指南](/docs/react/getting-started/handbook/styling)
+4. 了解[构图模式](/docs/react/getting-started/handbook/composition)

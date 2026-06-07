@@ -1,0 +1,432 @@
+---
+title: Toast 轻提示
+description: 在屏幕顶部或底部展示的临时通知消息。
+icon: updated
+links:
+  source_native: toast/toast.tsx
+  styles_native: toast/toast.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/toast-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/toast-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Toast, useToast } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Toast>
+  <Toast.Title>...</Toast.Title>
+  <Toast.Description>...</Toast.Description>
+  <Toast.Action>...</Toast.Action>
+  <Toast.Close />
+</Toast>
+```
+
+- **Toast**：主容器，负责定位、动画与滑动手势。
+- **Toast.Title**：标题文字，继承父级 Toast 的变体样式。
+- **Toast.Description**：标题下方的描述文字。
+- **Toast.Action**：操作按钮；按钮变体默认随 Toast 变体推断，也可覆盖。
+- **Toast.Close**：关闭按钮，图标按钮样式，按下时调用隐藏。
+
+## 用法
+
+### 用法一：简单字符串
+
+使用纯字符串快速展示 Toast。
+
+```tsx
+const { toast } = useToast();
+
+toast.show('这是一条 Toast 消息');
+```
+
+### 用法二：配置对象
+
+通过配置对象传入标题、描述、变体与操作按钮等。
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  variant: 'success',
+  label: '套餐已升级',
+  description: '可继续使用 HeroUI Chat',
+  icon: <Icon name="check" />,
+  actionLabel: '关闭',
+  onActionPress: ({ hide }) => hide(),
+});
+```
+
+### 用法三：自定义组件
+
+使用完全自定义的组件以自由控制样式与布局。
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  component: (props) => (
+    <Toast variant="accent" placement="top" {...props}>
+      <Toast.Title>自定义 Toast</Toast.Title>
+      <Toast.Description>这是一个自定义 Toast 组件</Toast.Description>
+      <Toast.Close />
+    </Toast>
+  ),
+});
+```
+
+**说明**：Toast 条目会做性能相关的 memo。若需把外部状态（如加载中）传入自定义 Toast，不会自动随状态重渲染。请使用 React Context、全局状态或 ref 等方式让状态能传递到 Toast 内。
+
+### 禁用全部动画
+
+使用 `"disable-all"` 可禁用自身及子级（如 `Toast.Action` 内的 `Button`）的全部动画。
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  variant: 'success',
+  label: '操作完成',
+  description: '已禁用全部动画',
+  animation: 'disable-all',
+});
+```
+
+自定义组件示例：
+
+```tsx
+const { toast } = useToast();
+
+toast.show({
+  component: (props) => (
+    <Toast variant="accent" animation="disable-all" {...props}>
+      <Toast.Title>无动画</Toast.Title>
+      <Toast.Description>
+        此 Toast 已禁用全部动画
+      </Toast.Description>
+      <Toast.Action>操作</Toast.Action>
+    </Toast>
+  ),
+});
+```
+
+## 示例
+
+```tsx
+import { Button, Toast, useToast, useThemeColor } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function ToastExample() {
+  const { toast } = useToast();
+  const themeColorForeground = useThemeColor('foreground');
+
+  return (
+    <View className="gap-4 p-4">
+      <Button
+        onPress={() =>
+          toast.show({
+            variant: 'success',
+            label: '套餐已升级',
+            description: '可继续使用 HeroUI Chat',
+            actionLabel: '关闭',
+            onActionPress: ({ hide }) => hide(),
+          })
+        }
+      >
+        显示成功 Toast
+      </Button>
+
+      <Button
+        onPress={() =>
+          toast.show({
+            component: (props) => (
+              <Toast variant="accent" {...props}>
+                <Toast.Title>自定义 Toast</Toast.Title>
+                <Toast.Description>
+                  使用自定义组件渲染
+                </Toast.Description>
+                <Toast.Action onPress={() => props.hide()}>撤销</Toast.Action>
+                <Toast.Close className="absolute top-0 right-0" />
+              </Toast>
+            ),
+          })
+        }
+      >
+        显示自定义 Toast
+      </Button>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/toast.tsx>)。
+
+## 全局配置
+
+通过 `HeroUINativeProvider` 的 `config` 全局配置 Toast；本地调用可覆盖默认值。
+
+> **说明**：Provider 的完整配置见 [Provider 文档](/docs/native/getting-started/handbook/provider#toast-configuration)。
+
+### 边距（Insets）
+
+控制 Toast 与屏幕边缘的距离，会在安全区内边距基础上叠加。例如四边距屏幕 20px：
+
+```tsx
+<HeroUINativeProvider
+  config={{
+    toast: {
+      insets: {
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
+      },
+    },
+  }}
+>
+  {children}
+</HeroUINativeProvider>
+```
+
+### 使用 KeyboardAvoidingView 包裹内容
+
+用 `KeyboardAvoidingView` 包裹 Toast 内容，键盘弹出时自动避让：
+
+```tsx
+import {
+  KeyboardAvoidingView,
+  KeyboardProvider,
+} from 'react-native-keyboard-controller';
+import { HeroUINativeProvider } from 'heroui-native';
+import { useCallback } from 'react';
+
+function AppContent() {
+  const contentWrapper = useCallback(
+    (children: React.ReactNode) => (
+      <KeyboardAvoidingView
+        pointerEvents="box-none"
+        behavior="padding"
+        keyboardVerticalOffset={12}
+        className="flex-1"
+      >
+        {children}
+      </KeyboardAvoidingView>
+    ),
+    []
+  );
+
+  return (
+    <KeyboardProvider>
+      <HeroUINativeProvider
+        config={{
+          toast: {
+            contentWrapper,
+          },
+        }}
+      >
+        {children}
+      </HeroUINativeProvider>
+    </KeyboardProvider>
+  );
+}
+```
+
+### 默认属性
+
+全局设置变体、位置、动画与滑动等默认值：
+
+```tsx
+<HeroUINativeProvider
+  config={{
+    toast: {
+      defaultProps: {
+        variant: 'accent',
+        placement: 'bottom',
+        isSwipeable: false,
+      },
+    },
+  }}
+>
+  {children}
+</HeroUINativeProvider>
+```
+
+## API 参考
+
+### Toast
+
+| prop                    | type                                                          | default     | description                                                               |
+| ----------------------- | ------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `variant`               | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | 视觉变体                                                                  |
+| `placement`             | `'top' \| 'bottom'`                                           | `'top'`     | 在屏幕上的位置                                                            |
+| `isSwipeable`           | `boolean`                                                     | `true`      | 是否可滑动关闭并带橡皮筋拖拽效果                                          |
+| `animation`             | `ToastRootAnimation`                                          | -           | 动画配置                                                                  |
+| `isAnimatedStyleActive` | `boolean`                                                     | `true`      | 是否启用 Reanimated 动画样式                                              |
+| `className`             | `string`                                                      | -           | Toast 容器额外 class                                                      |
+| `...ViewProps`          | `ViewProps`                                                   | -           | 支持 React Native `View` 的全部属性                                       |
+
+#### ToastRootAnimation
+
+Toast 根动画配置，可为：
+
+- `false` 或 `"disabled"`：仅禁用根级动画
+- `"disable-all"`：禁用全部动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                      | type                                     | default                                                                                                                   | description                                                                      |
+| ------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `state`                   | `'disabled' \| 'disable-all' \| boolean` | -                                                                                                                         | 在自定义属性时禁用动画                                                           |
+| `opacity.value`           | `[number, number]`                       | `[1, 0]`                                                                                                                  | Toast 移出可视堆叠时的透明度插值                                                 |
+| `opacity.timingConfig`    | `WithTimingConfig`                       | `{ duration: 300 }`                                                                                                       | 透明度过渡的时间配置                                                             |
+| `translateY.value`        | `[number, number]`                       | `[0, 10]`                                                                                                                 | 堆叠 Toast 微位移效果的 Y 插值                                                   |
+| `translateY.timingConfig` | `WithTimingConfig`                       | `{ duration: 300 }`                                                                                                       | translateY 过渡的时间配置                                                        |
+| `scale.value`             | `[number, number]`                       | `[1, 0.97]`                                                                                                               | 堆叠 Toast 景深缩放的插值                                                        |
+| `scale.timingConfig`      | `WithTimingConfig`                       | `{ duration: 300 }`                                                                                                       | 缩放过渡的时间配置                                                               |
+| `entering.top`            | `EntryOrExitLayoutType`                  | `FadeInUp`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: -100 }] })`<br/>`.mass(3)`  | 顶部放置时的进入动画                                                             |
+| `entering.bottom`         | `EntryOrExitLayoutType`                  | `FadeInDown`<br/>`.springify()`<br/>`.withInitialValues({ opacity: 1, transform: [{ translateY: 100 }] })`<br/>`.mass(3)` | 底部放置时的进入动画                                                             |
+| `exiting.top`             | `EntryOrExitLayoutType`                  | 关键帧动画<br/>`translateY: -100, scale: 0.97, opacity: 0.5`                                                              | 顶部放置时的退出动画                                                             |
+| `exiting.bottom`          | `EntryOrExitLayoutType`                  | 关键帧动画<br/>`translateY: 100, scale: 0.97, opacity: 0.5`                                                               | 底部放置时的退出动画                                                             |
+
+### Toast.Title
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 标题内容                                           |
+| `className`    | `string`          | -       | 额外的 class                                       |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                |
+
+### Toast.Description
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 描述内容                                           |
+| `className`    | `string`          | -       | 额外的 class                                       |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性                |
+
+### Toast.Action
+
+`Toast.Action` 继承 [Button](button) 的全部属性。按钮变体默认由 Toast 变体推断，也可覆盖。
+
+| prop        | type                   | default | description                                                                  |
+| ----------- | ---------------------- | ------- | ---------------------------------------------------------------------------- |
+| `children`  | `React.ReactNode`      | -       | 操作按钮文字                                                                 |
+| `variant`   | `ButtonVariant`        | -       | 按钮变体；未提供时由 Toast 变体自动决定                                       |
+| `size`      | `'sm' \| 'md' \| 'lg'` | `'sm'`  | 操作按钮尺寸                                                                 |
+| `className` | `string`               | -       | 额外的 class                                                                 |
+
+`onPress`、`isDisabled` 等其余属性见 [Button API 参考](button#api-reference)。
+
+### Toast.Close
+
+`Toast.Close` 继承 [Button](button) 的全部属性。
+
+| prop        | type                                | default | description                                    |
+| ----------- | ----------------------------------- | ------- | ---------------------------------------------- |
+| `children`  | `React.ReactNode`                   | -       | 自定义关闭图标；默认使用 CloseIcon             |
+| `iconProps` | `{ size?: number; color?: string }` | -       | 默认关闭图标的属性                             |
+| `size`      | `'sm' \| 'md' \| 'lg'`              | `'sm'`  | 关闭按钮尺寸                                   |
+| `className` | `string`                            | -       | 额外的 class                                   |
+| `onPress`   | `(event: any) => void`              | -       | 自定义按下处理；默认隐藏 Toast                 |
+
+其余继承属性见 [Button API 参考](button#api-reference)。
+
+### ToastProviderProps
+
+通过 `HeroUINativeProvider` 的 `config.toast` 进行全局配置时可用的属性。
+
+| prop                                         | type                                                | default | description                                                                                                                                                                                                      |
+| -------------------------------------------- | --------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defaultProps`                               | `ToastGlobalConfig`                                 | -       | 全局默认配置，可被单次调用覆盖                                                                                                                                                                                   |
+| `disableFullWindowOverlay`                   | `boolean`                                           | `false` | iOS 上为 true 时使用普通 `View` 替代 `FullWindowOverlay`，便于元素检查器；Toast 将不再叠在原生模态之上                                                                                                         |
+| `unstable_accessibilityContainerViewIsModal` | `boolean`                                           | `false` | 是否将覆盖窗口视为模态容器（VoiceOver）。为 true 时焦点限制在覆盖层内。仅 iOS；可能随 react-native-screens 变化                                                                                                  |
+| `insets`                                     | `ToastInsets`                                       | -       | 相对屏幕边缘的内边距（与安全区内边距相加）                                                                                                                                                                       |
+| `maxVisibleToasts`                           | `number`                                            | `3`     | 最大可见条数，超过后开始降低透明度                                                                                                                                                                               |
+| `contentWrapper`                             | `(children: React.ReactNode) => React.ReactElement` | -       | 自定义包裹 Toast 内容的函数                                                                                                                                                                                      |
+| `children`                                   | `React.ReactNode`                                   | -       | 子节点                                                                                                                                                                                                           |
+
+#### ToastGlobalConfig
+
+全局默认，可被单次调用覆盖。
+
+| prop          | type                                                          | description                                                               |
+| ------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `variant`     | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | 视觉变体                                                                  |
+| `placement`   | `'top' \| 'bottom'`                                           | 位置                                                                      |
+| `isSwipeable` | `boolean`                                                     | 是否可滑动关闭并带橡皮筋效果                                              |
+| `animation`   | `ToastRootAnimation`                                          | Toast 动画配置                                                            |
+
+#### ToastInsets
+
+相对屏幕边缘的间距，会与安全区内边距相加。
+
+| prop     | type     | default | description                                                                                               |
+| -------- | -------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| `top`    | `number` | -       | 距顶部像素（叠加安全区）。平台默认：iOS 0，Android 12                                                      |
+| `bottom` | `number` | -       | 距底部像素（叠加安全区）。平台默认：iOS 6，Android 12                                                      |
+| `left`   | `number` | -       | 距左侧像素（叠加安全区）。默认 12                                                                          |
+| `right`  | `number` | -       | 距右侧像素（叠加安全区）。默认 12                                                                          |
+
+## Hooks
+
+### useToast
+
+访问 Toast 能力，必须在 `ToastProvider` 内使用（由 `HeroUINativeProvider` 提供）。
+
+| 返回值           | type           | description                              |
+| ---------------- | -------------- | ---------------------------------------- |
+| `toast`          | `ToastManager` | 含 `show`、`hide` 等方法的 Toast 管理器 |
+| `isToastVisible` | `boolean`      | 当前是否有 Toast 可见                    |
+
+#### ToastManager
+
+| method | type                                              | description                                                                                                                          |
+| ------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `show` | `(options: string \| ToastShowOptions) => string` | 显示 Toast，返回 ID。支持字符串、配置对象或自定义组件三种形式                                                                        |
+| `hide` | `(ids?: string \| string[] \| 'all') => void`     | 隐藏一条或多条。无参隐藏最后一条；`'all'` 隐藏全部；传入 ID 或 ID 数组隐藏指定项                                                     |
+
+#### ToastShowOptions
+
+展示选项：默认样式的配置对象，或自定义组件。
+
+**使用配置对象（无 `component`）时：**
+
+| prop            | type                                                                                                                              | default | description                                                                         |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `variant`       | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'`                                                                     | -       | 视觉变体                                                                            |
+| `placement`     | `'top' \| 'bottom'`                                                                                                               | -       | 位置                                                                                |
+| `isSwipeable`   | `boolean`                                                                                                                         | -       | 是否可滑动关闭                                                                      |
+| `animation`     | `ToastRootAnimation \| false \| "disabled" \| "disable-all"`                                                                      | -       | 动画配置                                                                            |
+| `duration`      | `number \| 'persistent'`                                                                                                          | `4000`  | 自动隐藏毫秒数；`'persistent'` 表示不自动隐藏                                     |
+| `id`            | `string`                                                                                                                          | -       | 可选 ID；未提供则自动生成                                                           |
+| `label`         | `string`                                                                                                                          | -       | 标题文字                                                                            |
+| `description`   | `string`                                                                                                                          | -       | 描述文字                                                                            |
+| `actionLabel`   | `string`                                                                                                                          | -       | 操作按钮文案                                                                        |
+| `onActionPress` | `(helpers: { show: (options: string \| ToastShowOptions) => string; hide: (ids?: string \| string[] \| 'all') => void }) => void` | -       | 操作按钮按下回调                                                                    |
+| `icon`          | `React.ReactNode`                                                                                                                 | -       | 左侧图标                                                                            |
+| `onShow`        | `() => void`                                                                                                                      | -       | 显示时回调                                                                          |
+| `onHide`        | `() => void`                                                                                                                      | -       | 隐藏时回调                                                                          |
+
+**使用自定义组件时：**
+
+| prop        | type                                                 | default | description                                                                         |
+| ----------- | ---------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `id`        | `string`                                             | -       | 可选 ID；未提供则自动生成                                                           |
+| `component` | `(props: ToastComponentProps) => React.ReactElement` | -       | 接收 Toast props 并返回 React 元素的函数                                            |
+| `duration`  | `number \| 'persistent'`                             | `4000`  | 自动隐藏毫秒数；`'persistent'` 表示不自动隐藏                                     |
+| `onShow`    | `() => void`                                         | -       | 显示时回调                                                                          |
+| `onHide`    | `() => void`                                         | -       | 隐藏时回调                                                                          |
+
+## 特别说明
+
+### 元素检查器（iOS）
+
+Toast 在 iOS 上使用 `FullWindowOverlay`。开发时若需使用 React Native 元素检查器，可在 `HeroUINativeProvider` 的 `config.toast` 中设置 `disableFullWindowOverlay={true}`。代价：Toast 将无法叠在原生系统模态之上。

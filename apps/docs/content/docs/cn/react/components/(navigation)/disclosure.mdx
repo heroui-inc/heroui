@@ -1,0 +1,164 @@
+---
+title: Disclosure 折叠面板
+description: Disclosure 是一种可折叠区域：头部包含标题与触发按钮，面板包裹正文内容。
+links:
+  rac: Disclosure
+  source: disclosure/disclosure.tsx
+  styles: disclosure.css
+  storybook: Components/Navigation/Disclosure
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Disclosure } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="disclosure-basic"
+  minHeight="440px"
+/>
+
+### 组件结构
+
+导入 Disclosure 组件后，可通过点号访问各个子部分。
+
+```tsx
+import { Disclosure } from '@heroui/react';
+
+export default () => (
+  <Disclosure>
+    <Disclosure.Heading>
+      <Disclosure.Trigger>
+        <Disclosure.Indicator />
+      </Disclosure.Trigger>
+    </Disclosure.Heading>
+    <Disclosure.Content/>
+  </Disclosure>
+)
+```
+
+<RelatedShowcases component="Disclosure" />
+
+<RelatedComponents component="disclosure" />
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="disclosure-custom-render-function"
+/>
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Disclosure } from '@heroui/react';
+
+function CustomDisclosure() {
+  return (
+    <Disclosure className="border rounded-lg p-4">
+      <Disclosure.Heading>
+        <Disclosure.Trigger className="text-lg font-semibold">
+          Click to expand
+          <Disclosure.Indicator />
+        </Disclosure.Trigger>
+      </Disclosure.Heading>
+      <Disclosure.Content>
+        <Disclosure.Body className="mt-4 text-gray-600">
+          Hidden content
+        </Disclosure.Body>
+      </Disclosure.Content>
+    </Disclosure>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 Disclosure 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .disclosure {
+    @apply relative;
+  }
+
+  .disclosure__trigger {
+    @apply cursor-pointer;
+  }
+
+  .disclosure__indicator {
+    @apply transition-transform duration-300;
+  }
+
+  .disclosure__content {
+    @apply overflow-hidden transition-all;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，以确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Disclosure 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/disclosure.css)）：
+
+#### 基础类
+- `.disclosure` - 基础容器样式
+- `.disclosure__heading` - 标题包裹层
+- `.disclosure__trigger` - 触发按钮样式
+- `.disclosure__indicator` - Chevron 指示器样式
+- `.disclosure__content` - 带动画的内容容器
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，便于灵活定制：
+
+- **Expanded**：指示器上 `[data-expanded="true"]`，用于旋转等效果
+- **Focus**：触发器上 `:focus-visible` 或 `[data-focus-visible="true"]`
+- **Disabled**：触发器上 `:disabled` 或 `[aria-disabled="true"]`
+- **Hidden**：内容上 `[aria-hidden="false"]` 表示可见
+
+
+## API 参考
+
+### Disclosure Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isExpanded` | `boolean` | `false` | 控制展开状态 |
+| `onExpandedChange` | `(isExpanded: boolean) => void` | - | 展开状态变化时的回调 |
+| `isDisabled` | `boolean` | `false` | 是否禁用 Disclosure |
+| `children` | `ReactNode \| RenderFunction` | - | 要渲染的内容 |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DisclosureRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### DisclosureTrigger Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `ReactNode \| RenderFunction` | - | 触发器内容 |
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### DisclosureContent Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `ReactNode` | - | 要显示/隐藏的内容 |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DisclosureContentRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+
+### RenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isExpanded` | `boolean` | 当前是否展开 |
+| `isDisabled` | `boolean` | Disclosure 是否禁用 |

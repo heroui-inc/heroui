@@ -1,0 +1,584 @@
+---
+title: Autocomplete
+description: Autocomplete 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  在 v3 中，v2 的 `Autocomplete` 可以迁移为 [v3 Autocomplete](/docs/react/components/autocomplete) 或 [v3 ComboBox](/docs/react/components/combo-box)，取决于你的使用场景。请参阅下文「何时使用 Autocomplete 与 ComboBox」。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 何时使用 Autocomplete 与 ComboBox
+
+v3 提供两个组件来替代 v2 的 Autocomplete：
+
+| 组件 | 适用场景 | 输入方式 | 底层实现 |
+| ---- | -------- | -------- | -------- |
+| **Autocomplete** | 选择器式交互，Popover 内带搜索 / 筛选字段 | 按钮触发器展示已选值；Popover 内为搜索输入 | React Aria `Select` + `Autocomplete` |
+| **ComboBox** | 在可见输入框中输入以筛选下拉列表 | 内联文本输入与下拉触发器 | React Aria `ComboBox` |
+
+**使用 Autocomplete**：用户从预定义列表中选择，且搜索字段应出现在下拉内（类似可搜索的选择器）。
+
+**使用 ComboBox**：用户在可见输入框中直接输入以筛选或搜索选项（行为最接近 v2）。
+
+## 结构变化
+
+在 v2 中，Autocomplete 是内部包装 Input 的单一组件：
+
+```tsx
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Autocomplete label="Select an animal">
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+  );
+}
+```
+
+### 迁移到 v3 ComboBox（最接近 v2）
+
+ComboBox 提供与 v2 Autocomplete 最接近的体验：内联文本输入并随输入筛选选项。
+
+```tsx
+import { ComboBox, Input, Label, ListBox } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ComboBox>
+      <Label>Select an animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+  );
+}
+```
+
+### 迁移到 v3 Autocomplete（可搜索的选择器）
+
+Autocomplete 提供选择器式触发器，并在 Popover 内提供搜索 / 筛选字段：
+
+```tsx
+import { Autocomplete, Label, SearchField, ListBox, useFilter } from "@heroui/react";
+
+export default function App() {
+  const { contains } = useFilter({ sensitivity: "base" });
+
+  return (
+    <Autocomplete>
+      <Label>Select an animal</Label>
+      <Autocomplete.Trigger>
+        <Autocomplete.Value />
+        <Autocomplete.ClearButton />
+        <Autocomplete.Indicator />
+      </Autocomplete.Trigger>
+      <Autocomplete.Popover>
+        <Autocomplete.Filter filter={contains}>
+          <SearchField>
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input placeholder="Search..." />
+            </SearchField.Group>
+          </SearchField>
+          <ListBox>
+            <ListBox.Item id="cat" textValue="Cat">
+              Cat
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="dog" textValue="Dog">
+              Dog
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Autocomplete.Filter>
+      </Autocomplete.Popover>
+    </Autocomplete>
+  );
+}
+```
+
+## 关键变化
+
+### 1. 两个替代组件
+
+**v2：** `Autocomplete`（单一组件）  
+**v3：** `ComboBox`（内联输入 + 下拉）或 `Autocomplete`（选择器式 + Popover 内搜索）
+
+### 2. 组件结构
+
+**v2：** 单一组件，内部包含 Input  
+**v3 ComboBox：** 复合组件（`ComboBox.InputGroup`、`ComboBox.Trigger`、`ComboBox.Popover`）  
+**v3 Autocomplete：** 复合组件（`Autocomplete.Trigger`、`Autocomplete.Value`、`Autocomplete.ClearButton`、`Autocomplete.Indicator`、`Autocomplete.Popover`、`Autocomplete.Filter`）
+
+### 3. 菜单项组件
+
+**v2：** `AutocompleteItem`、`AutocompleteSection`  
+**v3：** `ListBox.Item`、`ListBox.Section`（来自 ListBox）
+
+### 4. 菜单项标识
+
+**v2：** React 的 `key` 同时用于列表协调与选择时的项标识。  
+**v3：** 在 `ListBox.Item` 上使用 `id` 与 `textValue`（状态与无障碍）；列表中的项仍保留 React 的 `key`。
+
+### 5. Autocomplete 专用子组件（v3）
+
+v3 Autocomplete 引入 v2 中不存在的子组件：
+
+| 子组件 | 用途 |
+| ------ | ---- |
+| `Autocomplete.Trigger` | 打开 Popover 的按钮组 |
+| `Autocomplete.Value` | 显示当前选中值或占位符 |
+| `Autocomplete.ClearButton` | 清除当前选择 |
+| `Autocomplete.Indicator` | 下拉箭头图标（打开时旋转） |
+| `Autocomplete.Popover` | 下拉 Popover 容器 |
+| `Autocomplete.Filter` | 包裹 `SearchField` 与 `ListBox` 以启用筛选；接受 `filter` 函数、`inputValue`、`onInputChange` |
+
+### 6. SearchField 集成
+
+v3 Autocomplete 在 `Autocomplete.Filter` 内使用 `SearchField`，作为 Popover 中的搜索输入：
+
+```tsx
+<Autocomplete.Filter filter={contains}>
+  <SearchField>
+    <SearchField.Group>
+      <SearchField.SearchIcon />
+      <SearchField.Input placeholder="Search..." />
+    </SearchField.Group>
+  </SearchField>
+  <ListBox>...</ListBox>
+</Autocomplete.Filter>
+```
+
+`SearchField` 还有子组件：`SearchField.Group`、`SearchField.Input`、`SearchField.SearchIcon`、`SearchField.ClearButton`。
+
+### 7. useFilter Hook
+
+v3 Autocomplete 使用 `useFilter` hook（来自 React Aria，由 `@heroui/react` 再导出）提供带区域设置感知的筛选函数：
+
+```tsx
+import { useFilter } from "@heroui/react";
+
+const { contains } = useFilter({ sensitivity: "base" });
+
+// 传给 Autocomplete.Filter
+<Autocomplete.Filter filter={contains}>
+  ...
+</Autocomplete.Filter>
+```
+
+该 hook 返回 `contains`、`startsWith`、`endsWith`。`sensitivity` 控制区域设置感知匹配（`"base"`、`"accent"`、`"case"`、`"variant"`）。
+
+### 8. Prop 变更（ComboBox）
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| — | `id`（在 `ListBox.Item` 上） | 状态用的项标识 |
+| — | `textValue`（在 `ListBox.Item` 上） | 无障碍（提前输入） |
+| `label` | `Label` | 使用 `Label` 组件 |
+| `description` | `Description` | 使用 `Description` 组件 |
+| `placeholder` | `Input` | 写在 `Input` 的 `placeholder` |
+| `selectedKey`、`onSelectionChange`、`inputValue`、`onInputChange` | `ComboBox` | 与 v2 相同 |
+| `allowsCustomValue`、`allowsEmptyCollection`、`defaultFilter` | `ComboBox` | 与 v2 相同 |
+| `disabledKeys`、`isDisabled`、`isRequired`、`isInvalid`、`name` | `ComboBox` | 与 v2 相同 |
+| `menuTrigger` | `ComboBox` | `"focus"`（默认）、`"input"` 或 `"manual"` |
+| `variant`、`color`、`size`、`radius` | — | 已移除（请使用 Tailwind CSS） |
+| `labelPlacement` | — | 已移除（请自行摆放 Label） |
+| `startContent`、`endContent` | — | 加到 `Input` 或 InputGroup |
+| `selectorIcon`、`clearIcon` | — | 自定义 `ComboBox.Trigger` 或手动实现 |
+| `isClearable` | — | 手动实现 |
+| `showScrollIndicators` | — | 已移除 |
+| `classNames` | — | 在各部件上使用 `className` |
+| `popoverProps`、`listboxProps`、`inputProps` | — | 直接在对应子组件上配置 |
+| `scrollShadowProps`、`scrollRef` | — | 已移除 |
+| `selectorButtonProps`、`clearButtonProps`、`disableSelectorIconRotation` | — | 已移除 |
+| `isReadOnly` | `ComboBox` | `ComboBox` 上的 `isReadOnly` prop |
+| `fullWidth` | `ComboBox` | `ComboBox` 上的 `fullWidth` prop |
+| `isVirtualized`、`maxListboxHeight`、`itemHeight` | — | 已移除 |
+| `onClose`、`onClear` | — | 改用其他事件处理函数 |
+| `validationBehavior`、`validate` | `ComboBox` | 写在 `ComboBox` 上的 prop |
+
+### 9. Prop 变更（Autocomplete）
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| — | `id`（在 `ListBox.Item` 上） | 状态用的项标识 |
+| — | `textValue`（在 `ListBox.Item` 上） | 无障碍（提前输入） |
+| `label` | `Label` | 使用 `Label` 组件 |
+| `description` | `Description` | 使用 `Description` 组件 |
+| `placeholder` | `Autocomplete` | 根组件上的 `placeholder` prop |
+| `selectedKey` / `onSelectionChange` | `value` / `onChange` | Autocomplete 上已重命名 |
+| `selectionMode` | `Autocomplete` | `"single"`（默认）或 `"multiple"` |
+| `inputValue`、`onInputChange` | `Autocomplete.Filter` | 写在 `Filter` 上的 `inputValue` 与 `onInputChange` |
+| `disabledKeys`、`isDisabled`、`isRequired`、`isInvalid`、`name` | `Autocomplete` | 与 v2 相同 |
+| `variant`、`color`、`size`、`radius` | — | 已移除（请使用 Tailwind CSS）；`variant` 支持 `"primary"` / `"secondary"` |
+| `isClearable` | `Autocomplete.ClearButton` | 内置子组件 |
+| `selectorIcon` | `Autocomplete.Indicator` | 将自定义图标作为 children 传入 |
+| `onClear` | `Autocomplete` | 根组件上的 `onClear` prop |
+| `fullWidth` | `Autocomplete` | 根组件上的 `fullWidth` prop |
+| `classNames` | — | 在各部件上使用 `className` |
+| `popoverProps`、`listboxProps`、`inputProps` | — | 直接在对应子组件上配置 |
+
+## 迁移示例
+
+### 受控选择（ComboBox）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKey, setSelectedKey] = useState("cat");
+
+    <Autocomplete
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+      label="Animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import type { Key } from "@heroui/react";
+
+    const [selectedKey, setSelectedKey] = useState<Key | null>("cat");
+
+    <ComboBox
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+    >
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控选择（Autocomplete）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [selectedKey, setSelectedKey] = useState("cat");
+
+    <Autocomplete
+      selectedKey={selectedKey}
+      onSelectionChange={setSelectedKey}
+      label="Animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import type { Key } from "@heroui/react";
+    import { Autocomplete, Label, SearchField, ListBox, useFilter } from "@heroui/react";
+
+    const [value, setValue] = useState<Key | Key[] | null>("cat");
+    const { contains } = useFilter({ sensitivity: "base" });
+
+    <Autocomplete value={value} onChange={setValue}>
+      <Label>Animal</Label>
+      <Autocomplete.Trigger>
+        <Autocomplete.Value />
+        <Autocomplete.ClearButton />
+        <Autocomplete.Indicator />
+      </Autocomplete.Trigger>
+      <Autocomplete.Popover>
+        <Autocomplete.Filter filter={contains}>
+          <SearchField>
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input placeholder="Search..." />
+            </SearchField.Group>
+          </SearchField>
+          <ListBox>
+            <ListBox.Item id="cat" textValue="Cat">
+              <Label>Cat</Label>
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="dog" textValue="Dog">
+              <Label>Dog</Label>
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Autocomplete.Filter>
+      </Autocomplete.Popover>
+    </Autocomplete>
+    ```
+  </Tab>
+</Tabs>
+
+### 带分组
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Autocomplete label="Country">
+      <AutocompleteSection title="North America">
+        <AutocompleteItem key="usa">United States</AutocompleteItem>
+        <AutocompleteItem key="canada">Canada</AutocompleteItem>
+      </AutocompleteSection>
+      <AutocompleteSection title="Europe">
+        <AutocompleteItem key="uk">United Kingdom</AutocompleteItem>
+      </AutocompleteSection>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Header, Separator } from "@heroui/react";
+
+    <ComboBox>
+      <Label>Country</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search countries..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Section>
+            <Header>North America</Header>
+            <ListBox.Item id="usa" textValue="United States">
+              United States
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="canada" textValue="Canada">
+              Canada
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox.Section>
+          <Separator />
+          <ListBox.Section>
+            <Header>Europe</Header>
+            <ListBox.Item id="uk" textValue="United Kingdom">
+              United Kingdom
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox.Section>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+### 使用 useFilter（Autocomplete）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 在内部处理筛选 */}
+    <Autocomplete label="Animal">
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+      <AutocompleteItem key="dog">Dog</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Autocomplete, Label, SearchField, ListBox, useFilter } from "@heroui/react";
+
+    function FilterExample() {
+      const { contains } = useFilter({ sensitivity: "base" });
+
+      return (
+        <Autocomplete>
+          <Label>Animal</Label>
+          <Autocomplete.Trigger>
+            <Autocomplete.Value />
+            <Autocomplete.ClearButton />
+            <Autocomplete.Indicator />
+          </Autocomplete.Trigger>
+          <Autocomplete.Popover>
+            <Autocomplete.Filter filter={contains}>
+              <SearchField>
+                <SearchField.Group>
+                  <SearchField.SearchIcon />
+                  <SearchField.Input placeholder="Search..." />
+                </SearchField.Group>
+              </SearchField>
+              <ListBox>
+                <ListBox.Item id="cat" textValue="Cat">
+                  <Label>Cat</Label>
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+                <ListBox.Item id="dog" textValue="Dog">
+                  <Label>Dog</Label>
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              </ListBox>
+            </Autocomplete.Filter>
+          </Autocomplete.Popover>
+        </Autocomplete>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### 表单校验
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Required field */}
+    <Autocomplete label="Animal" isRequired>
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+
+    {/* With error message */}
+    <Autocomplete
+      label="Animal"
+      isInvalid
+      errorMessage="Please select an animal"
+    >
+      <AutocompleteItem key="cat">Cat</AutocompleteItem>
+    </Autocomplete>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { FieldError, Form } from "@heroui/react";
+
+    {/* Required field */}
+    <Form>
+      <ComboBox isRequired name="animal">
+        <Label>Animal</Label>
+        <ComboBox.InputGroup>
+          <Input placeholder="Search animals..." />
+          <ComboBox.Trigger />
+        </ComboBox.InputGroup>
+        <ComboBox.Popover>
+          <ListBox>
+            <ListBox.Item id="cat" textValue="Cat">
+              Cat
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </ComboBox.Popover>
+        <FieldError />
+      </ComboBox>
+    </Form>
+
+    {/* With error message */}
+    <ComboBox isInvalid>
+      <Label>Animal</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Popover>
+        <ListBox>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+      <FieldError>Please select an animal</FieldError>
+    </ComboBox>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件剖析
+
+### ComboBox 剖析
+
+```
+ComboBox (Root)
+  ├── Label
+  ├── ComboBox.InputGroup
+  │   ├── Input
+  │   └── ComboBox.Trigger
+  ├── Description (optional)
+  ├── ComboBox.Popover
+  │   └── ListBox
+  │       ├── ListBox.Item
+  │       │   ├── [Content]
+  │       │   └── ListBox.ItemIndicator (optional)
+  │       └── ListBox.Section (optional)
+  │           ├── Header
+  │           └── ListBox.Item
+  └── FieldError (optional)
+```
+
+### Autocomplete 剖析
+
+```
+Autocomplete (Root)
+  ├── Label
+  ├── Autocomplete.Trigger
+  │   ├── Autocomplete.Value
+  │   ├── Autocomplete.ClearButton
+  │   └── Autocomplete.Indicator
+  ├── Description (optional)
+  ├── Autocomplete.Popover
+  │   └── Autocomplete.Filter
+  │       ├── SearchField
+  │       │   └── SearchField.Group
+  │       │       ├── SearchField.SearchIcon
+  │       │       └── SearchField.Input
+  │       └── ListBox
+  │           ├── ListBox.Item
+  │           │   ├── [Content]
+  │           │   └── ListBox.ItemIndicator (optional)
+  │           └── ListBox.Section (optional)
+  │               ├── Header
+  │               └── ListBox.Item
+  └── FieldError (optional)
+```
+
+## 总结
+
+1. **两个替代组件**：v2 `Autocomplete` 可迁移为 v3 `ComboBox`（内联输入）或 v3 `Autocomplete`（Popover 内可筛选的选择器）。  
+2. **组件结构**：由带 prop 的单一组件变为带显式子节点的复合组件。  
+3. **菜单项组件**：`AutocompleteItem` → `ListBox.Item`；`AutocompleteSection` → `ListBox.Section`。  
+4. **菜单项标识**：在项上使用 `id` 与 `textValue`；列表协调仍用 React 的 `key`。  
+5. **输入**：v3 ComboBox 需要显式 `Input`；v3 Autocomplete 在 `Autocomplete.Filter` 内使用 `SearchField`。  
+6. **标签 / 描述**：对应 prop 拆为独立的 `Label` 与 `Description` 组件。  
+7. **筛选**：v3 Autocomplete 通过 `Autocomplete.Filter` 与 `useFilter` 做区域设置感知筛选；v3 ComboBox 使用 `defaultFilter` prop。  
+8. **清除按钮**：v3 Autocomplete 内置 `Autocomplete.ClearButton`；v3 ComboBox 需手动实现。  
+9. **选中值展示**：v3 Autocomplete 用 `Autocomplete.Value` 展示选中值，并支持渲染 prop。  
+10. **样式类 prop 已移除**：`color`、`size`、`radius` 已移除（请使用 Tailwind CSS）；`variant` 现支持 `"primary"` / `"secondary"`。  
+11. **classNames 已移除**：在各子组件上使用 `className` prop。  
+12. **useFilter Hook**：v3 新增，提供 `contains`、`startsWith`、`endsWith` 用于区域设置感知的文本匹配。

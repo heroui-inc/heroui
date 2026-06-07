@@ -1,0 +1,334 @@
+{
+  "home": {
+    "releaseBadges": [
+      {
+        "label": "HeroUI React v3.2.0 — Calendar 视图与 toggle 变更",
+        "href": "/docs/react/releases/v3-2-0"
+      },
+      {
+        "label": "全新 CLI：create-heroui-native-app v1.0.0",
+        "href": "/docs/native/releases/create-heroui-native-app"
+      }
+    ],
+    "titleMain": "开箱即用",
+    "titleMuted": "设计灵活可定制",
+    "description": "HeroUI 是面向网页与移动端的现代 UI 库，助你快速迭代、保持一致，并打造令人愉悦的用户体验。",
+    "getStarted": "快速开始",
+    "viewComponents": "查看组件",
+    "githubStarsPrefix": "开源项目，已有",
+    "githubStarsSuffix": "颗星",
+    "demo": {
+      "proTemplate": "Pro 模板可用",
+      "themeBuilder": "在主题编辑器中打开"
+    }
+  },
+  "nav": {
+    "documentation": "文档",
+    "resources": "资源",
+    "gettingStarted": "快速开始",
+    "themes": "主题",
+    "components": "组件",
+    "reactNative": "React Native",
+    "reactNativeShort": "Native",
+    "releases": "版本发布",
+    "blog": "博客",
+    "docs": "文档",
+    "roadmap": "路线图"
+  },
+  "notFound": {
+    "imageAlt": "404 未找到",
+    "title": "404",
+    "description": "抱歉，找不到您要访问的页面。",
+    "returnHome": "返回首页"
+  },
+  "blog": {
+    "heading": "博客",
+    "metaTitle": "博客 | HeroUI",
+    "metaDescription": "面向现代 React 应用的指南、教程与资源。包含对比、最佳实践等内容。",
+    "categoriesAriaLabel": "博客分类",
+    "categories": {
+      "all": "全部",
+      "tutorial": "教程",
+      "comparison": "对比",
+      "native": "Native",
+      "uiLibraries": "资源"
+    },
+    "latestPosts": "最新文章",
+    "emptyState": "该分类下暂无文章。",
+    "backToBlog": "返回博客",
+    "relatedPosts": "相关文章"
+  },
+  "showcase": {
+    "heading": "展示",
+    "description": "探索展示 HeroUI 组件在真实场景中应用的互动示例。"
+  },
+  "footer": {
+    "allRightsReserved": "保留所有权利。"
+  },
+  "newsletter": {
+    "label": "Hero 新闻通讯",
+    "placeholder": "name@email.com",
+    "subscribe": "订阅",
+    "emailRequired": "请输入邮箱地址",
+    "emailInvalid": "请输入有效的邮箱地址。",
+    "apiError": "订阅失败，请稍后再试",
+    "genericError": "出现错误，请稍后再试。"
+  },
+  "statusChip": {
+    "new": "新",
+    "preview": "预览",
+    "updated": "更新"
+  },
+  "frameworksTabs": {
+    "ariaLabel": "文档框架",
+    "web": "网页",
+    "native": "移动端"
+  },
+  "searchDialog": {
+    "placeholder": "你想搜索什么？",
+    "jumpTo": "跳转到"
+  },
+  "componentLinks": {
+    "source": "源代码",
+    "stylesSource": "样式源代码",
+    "themeSource": "主题源代码"
+  },
+  "copyPrompt": {
+    "copy": "复制提示词",
+    "copied": "已复制",
+    "ariaLabelCopy": "复制提示词到剪贴板",
+    "ariaLabelCopied": "提示词已复制到剪贴板"
+  },
+  "qrPreviewPopover": {
+    "tapToPreview": "点击预览",
+    "scanToPreview": "扫码预览",
+    "downloadPrompt": "还没有安装 {name} 应用？请在下方下载。"
+  },
+  "storeButtons": {
+    "appStoreLabel": "在 App Store 下载 {name}",
+    "appStore": "在 App Store 下载",
+    "playStoreLabel": "在 Google Play 下载 {name}",
+    "playStore": "在 Play Store 下载",
+    "androidComingSoonLabel": "Android 版本即将推出",
+    "androidComingSoon": "Android · 即将推出"
+  },
+  "themes": {
+    "theme": "主题",
+    "custom": "自定义",
+    "designTheme": "设计主题",
+    "editTheme": "编辑主题",
+    "vibrantPalette": "鲜艳调色板",
+    "vibrantPaletteDescription": "更饱和，对比更低",
+    "pickRandomHint": "按 {kbd} 随机选择"
+  },
+  "themeBuilder": {
+    "onboarding": {
+      "title": "为你的品牌定制 HeroUI v3",
+      "description": "使用令牌系统自定义颜色、圆角与字体，让每个组件保持一致并可直接投入生产。",
+      "moreComing": "更多功能与主题即将推出。",
+      "continue": "继续"
+    },
+    "header": {
+      "undo": "撤销上一步",
+      "redo": "重做上一步",
+      "share": "分享主题链接",
+      "viewCode": "查看代码",
+      "linkCopied": "链接已复制",
+      "linkCopiedDescription": "你的主题链接已复制到剪贴板。",
+      "switchMode": "切换模式"
+    },
+    "resetButton": {
+      "tooltip": "恢复默认",
+      "dialogTitle": "恢复为默认主题？",
+      "dialogBody": "这将把所有主题数值恢复为默认设置。",
+      "cancel": "取消",
+      "confirm": "确认"
+    },
+    "shuffleButton": {
+      "tooltip": "随机生成",
+      "dialogTitle": "确定要随机生成吗？",
+      "dialogBody": "这将覆盖你当前的主题设置。",
+      "cancel": "取消",
+      "confirm": "确认",
+      "dontShowAgain": "不再显示"
+    },
+    "fontFamily": {
+      "label": "字体",
+      "suggested": "推荐",
+      "allFonts": "全部字体",
+      "addFromCdn": "从 CDN 添加",
+      "removeFont": "移除字体"
+    },
+    "customFonts": {
+      "back": "返回",
+      "fontUrl": "字体 URL",
+      "placeholder": "粘贴字体 URL...",
+      "description": "支持 G Fonts、Fontsource 与 Fontshare",
+      "importing": "导入中...",
+      "importFont": "导入字体",
+      "errorHttps": "URL 必须使用 https 协议",
+      "errorSupportedCdn": "URL 必须来自受支持的 CDN（Google Fonts、Fontsource、Bunny Fonts 等）",
+      "errorInvalidUrl": "请输入有效的 URL",
+      "errorCannotDetect": "无法从 URL 中识别字体，请检查 URL 格式。",
+      "errorCannotDetectFull": "无法从 URL 中识别字体，请确保 URL 是有效的字体样式表。",
+      "errorAlreadyImported": "该字体已作为 \"{name}\" 导入"
+    },
+    "accentColor": {
+      "label": "强调色",
+      "tooltip": "用于品牌与高亮的主要颜色"
+    },
+    "baseColor": {
+      "label": "基础色",
+      "tooltip": "控制背景与表面等中性色中灰度的比例"
+    },
+    "radius": {
+      "label": "圆角",
+      "description": "影响整体 UI，例如菜单与弹窗",
+      "formLabel": "表单圆角",
+      "formDescription": "影响表单元素，例如输入框与选择器",
+      "options": {
+        "none": "无",
+        "extraSmall": "超小",
+        "small": "小",
+        "medium": "中",
+        "large": "大",
+        "extraLarge": "超大"
+      }
+    },
+    "lockableLabel": {
+      "lockValue": "锁定数值",
+      "unlockValue": "解锁数值"
+    },
+    "tabs": {
+      "components": "组件",
+      "dashboard": "仪表盘",
+      "mail": "邮件",
+      "chat": "聊天",
+      "finances": "财务"
+    }
+  },
+  "demos": {
+    "alert": {
+      "title": "您还剩 2 次额度",
+      "description": "升级到付费计划获取更多额度",
+      "action": "升级"
+    },
+    "alertDialog": {
+      "title": "未保存的更改",
+      "description": "您要保存还是放弃更改？",
+      "discard": "放弃",
+      "save": "保存更改"
+    },
+    "allowNotifications": {
+      "label": "允许通知",
+      "description": "接收来自 HeroUI 的推送通知"
+    },
+    "buttons": {
+      "clickMe": "点击我"
+    },
+    "inputOtp": {
+      "label": "验证账户",
+      "description": "我们已向 a****@gmail.com 发送验证码",
+      "didntReceive": "没有收到验证码？",
+      "resend": "重新发送"
+    },
+    "listBox": {
+      "ariaLabel": "文件操作",
+      "actions": "操作",
+      "newFile": "新建文件",
+      "newFileDescription": "创建一个新文件",
+      "editFile": "编辑文件",
+      "editFileDescription": "修改内容",
+      "dangerZone": "危险操作",
+      "deleteFile": "删除文件",
+      "deleteFileDescription": "移到回收站"
+    },
+    "login": {
+      "title": "创建账户",
+      "trialNote": "开始 7 天免费试用，无需信用卡。",
+      "getStarted": "立即开始",
+      "or": "或",
+      "continueWithGoogle": "使用 Google 继续",
+      "continueWithApple": "使用 Apple 继续"
+    },
+    "select": {
+      "placeholder": "请选择",
+      "label": "州",
+      "options": {
+        "florida": "佛罗里达",
+        "delaware": "特拉华",
+        "california": "加利福尼亚",
+        "texas": "得克萨斯",
+        "newYork": "纽约",
+        "washington": "华盛顿"
+      }
+    },
+    "slider": {
+      "label": "价格"
+    },
+    "subtleCards": {
+      "indieTitle": "Indie Hackers",
+      "indieMembers": "148 位成员",
+      "indieBy": "由 John 创建",
+      "aiTitle": "AI Builders",
+      "aiMembers": "362 位成员",
+      "aiBy": "由 Martha 创建"
+    },
+    "tabs1": {
+      "ariaLabel": "选项",
+      "all": "全部"
+    },
+    "tabs2": {
+      "ariaLabel": "选项",
+      "chats": "聊天",
+      "emails": "邮件"
+    },
+    "textfield": {
+      "label": "您的邮箱",
+      "placeholder": "john@email.com",
+      "description": "我们不会分享您的邮箱",
+      "error": "邮箱无效"
+    },
+    "uiComponents": {
+      "checkboxAriaLabel": "复选框指示器示例",
+      "switchAriaLabel": "开关启用状态示例",
+      "radioAriaLabel": "单选按钮示例"
+    },
+    "xProfile": {
+      "bio": "构建网页与移动端 UI 的未来。",
+      "bioSuffix": "(YC S24)",
+      "confettiLabel": "彩带",
+      "following": "正在关注",
+      "followers": "关注者"
+    }
+  },
+  "pageActions": {
+    "copyMarkdown": "复制 Markdown",
+    "copied": "已复制",
+    "moreOptions": "更多选项",
+    "askWithUrl": "请阅读 {url}，我想就此进行提问。",
+    "askFallback": "我想就这份文档进行提问。",
+    "items": {
+      "markdown": {
+        "title": "查看 Markdown",
+        "description": "以 Markdown 格式查看页面"
+      },
+      "cursor": {
+        "title": "添加到 Cursor",
+        "description": "在 Cursor 中安装 MCP 服务器"
+      },
+      "vscode": {
+        "title": "添加到 VS Code",
+        "description": "在 VS Code 中安装 MCP 服务器"
+      },
+      "chatgpt": {
+        "title": "在 ChatGPT 中打开",
+        "description": "就此页面进行提问"
+      },
+      "claude": {
+        "title": "在 Claude 中打开",
+        "description": "就此页面进行提问"
+      }
+    }
+  }
+}

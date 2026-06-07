@@ -1,0 +1,201 @@
+---
+title: Skeleton 骨架屏
+description: Skeleton 用于展示加载状态，并预览组件的预期形状。
+links:
+  source: skeleton/skeleton.tsx
+  styles: skeleton.css
+  storybook: Components/Feedback/Skeleton
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Skeleton } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview 
+  name="skeleton-basic"
+/>
+ 
+
+### 文本内容
+
+<ComponentPreview 
+  name="skeleton-text-content"
+/>
+
+### 用户资料
+
+<ComponentPreview 
+  name="skeleton-user-profile"
+/>
+
+### 列表项
+
+<ComponentPreview
+  name="skeleton-list"
+/>
+
+### 动画类型
+
+<ComponentPreview
+  name="skeleton-animation-types"
+/>
+
+### 网格
+
+<ComponentPreview
+  name="skeleton-grid"
+/>
+
+### 单次闪烁
+
+一种同步的闪烁效果，会一次性扫过所有骨架元素。请在父容器上应用 `skeleton--shimmer` 类，并将子级 Skeleton 的 `animationType` 设为 `"none"`。
+
+<ComponentPreview
+  name="skeleton-single-shimmer"
+  style={{'contain': 'none'}}
+/>
+
+<RelatedComponents component="skeleton" />
+
+## 样式
+
+### 全局动画配置
+
+你可以通过在应用中定义 `--skeleton-animation` CSS 变量，为所有 Skeleton 设置默认动画类型：
+
+```css
+/* In your global CSS file */
+:root {
+  /* Possible values: shimmer, pulse, none */
+  --skeleton-animation: pulse;
+}
+
+/* You can also set different values for light/dark themes */
+.light, [data-theme="light"] {
+  --skeleton-animation: shimmer;
+}
+
+.dark, [data-theme="dark"] {
+  --skeleton-animation: pulse;
+}
+```
+
+在单个组件上指定 `animationType` 时，会覆盖上述全局设置。
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Skeleton } from '@heroui/react';
+
+function CustomSkeleton() {
+  return (
+    <Skeleton className="h-20 w-32 rounded-full" />
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Skeleton 的组件类名，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  /* Base skeleton styles */
+  .skeleton {
+    @apply bg-surface-secondary/50; /* Change base background */
+  }
+
+  /* Shimmer animation gradient */
+  .skeleton--shimmer:before {
+    @apply viasurface; /* Change shimmer gradient color */
+  }
+
+  /* Pulse animation */
+  .skeleton--pulse {
+    @apply animate-pulse opacity-75; /* Customize pulse animation */
+  }
+
+  /* No animation variant */
+  .skeleton--none {
+    @apply opacity-50; /* Style for static skeleton */
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+
+### CSS 类
+
+Skeleton 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/skeleton.css)）：
+
+#### 基础类
+`.skeleton` - 包含背景与圆角等基础骨架样式
+
+#### 动画变体类
+- `.skeleton--shimmer` - 添加带渐变效果的闪烁动画（默认）
+- `.skeleton--pulse` - 使用 Tailwind 的 `animate-pulse` 添加脉冲动画
+- `.skeleton--none` - 无动画的静态骨架
+
+### 动画
+
+Skeleton 支持三种动画类型，视觉效果各不相同：
+
+#### 闪烁动画
+
+闪烁效果会在骨架元素上移动渐变：
+
+```css
+.skeleton--shimmer:before {
+  @apply animate-skeleton via-surface-3 absolute inset-0 -translate-x-full
+         bg-gradient-to-r from-transparent to-transparent content-[''];
+}
+```
+
+闪烁动画在主题中通过以下方式定义：
+
+```css
+@theme inline {
+  --animate-skeleton: skeleton 2s linear infinite;
+
+  @keyframes skeleton {
+    100% {
+      transform: translateX(200%);
+    }
+  }
+}
+```
+
+#### 脉冲动画
+
+脉冲动画使用 Tailwind 内置的 `animate-pulse` 工具类：
+
+```css
+.skeleton--pulse {
+  @apply animate-pulse;
+}
+```
+
+#### 无动画
+
+用于不需要任何动画的静态骨架：
+
+```css
+.skeleton--none {
+  /* No animation styles applied */
+}
+```
+
+## API 参考
+
+### Skeleton Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `animationType` | `"shimmer" \| "pulse" \| "none"` | `"shimmer"` 或 CSS 变量 | Skeleton 的动画类型；也可通过 `--skeleton-animation` CSS 变量进行全局配置 |
+| `className` | `string` | - | 额外的 CSS 类名 |

@@ -1,0 +1,257 @@
+---
+title: SkeletonGroup 骨架屏组
+description: 协调多个骨架屏占位，并提供统一的动画与加载态控制。
+links:
+  source_native: skeleton-group/skeleton-group.tsx
+  styles_native: skeleton-group/skeleton-group.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/skeleton-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/skeleton-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { SkeletonGroup } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<SkeletonGroup>
+  <SkeletonGroup.Item />
+</SkeletonGroup>
+```
+
+- **SkeletonGroup**：根容器，为所有骨架项提供统一控制
+- **SkeletonGroup.Item**：单个骨架项，继承父级组的属性
+
+## 用法
+
+### 基础用法
+
+SkeletonGroup 用共享的加载态与动画管理多个骨架项。
+
+```tsx
+<SkeletonGroup isLoading={isLoading}>
+  <SkeletonGroup.Item className="h-4 w-full rounded-md" />
+  <SkeletonGroup.Item className="h-4 w-3/4 rounded-md" />
+  <SkeletonGroup.Item className="h-4 w-1/2 rounded-md" />
+</SkeletonGroup>
+```
+
+### 容器布局
+
+在组上使用 `className` 控制骨架项布局。
+
+```tsx
+<SkeletonGroup isLoading={isLoading} className="flex-row items-center gap-3">
+  <SkeletonGroup.Item className="h-12 w-12 rounded-lg" />
+  <View className="flex-1 gap-1.5">
+    <SkeletonGroup.Item className="h-4 w-full rounded-md" />
+    <SkeletonGroup.Item className="h-3 w-2/3 rounded-md" />
+  </View>
+</SkeletonGroup>
+```
+
+### isSkeletonOnly（纯骨架布局）
+
+当组内仅有骨架与布局用 `View`（加载完成后无真实内容）时，使用 `isSkeletonOnly`。`isLoading` 为 `false` 时整个组会隐藏，避免空容器影响布局。
+
+```tsx
+<SkeletonGroup
+  isLoading={isLoading}
+  isSkeletonOnly // isLoading 为 false 时隐藏整组
+  className="flex-row items-center gap-3"
+>
+  <SkeletonGroup.Item className="h-12 w-12 rounded-lg" />
+  {/* 该 View 仅用于布局，无加载后内容 */}
+  <View className="flex-1 gap-1.5">
+    <SkeletonGroup.Item className="h-4 w-full rounded-md" />
+    <SkeletonGroup.Item className="h-3 w-2/3 rounded-md" />
+  </View>
+</SkeletonGroup>
+```
+
+### 动画变体
+
+为组内所有项统一设置动画变体。
+
+```tsx
+<SkeletonGroup isLoading={isLoading} variant="pulse">
+  <SkeletonGroup.Item className="h-10 w-10 rounded-full" />
+  <SkeletonGroup.Item className="h-4 w-32 rounded-md" />
+  <SkeletonGroup.Item className="h-3 w-24 rounded-md" />
+</SkeletonGroup>
+```
+
+### 自定义动画配置
+
+为整组配置 shimmer 或 pulse。
+
+```tsx
+<SkeletonGroup
+  isLoading={isLoading}
+  variant="shimmer"
+  animation={{
+    shimmer: {
+      duration: 2000,
+      highlightColor: 'rgba(59, 130, 246, 0.3)',
+    },
+  }}
+>
+  <SkeletonGroup.Item className="h-16 w-full rounded-lg" />
+  <SkeletonGroup.Item className="h-4 w-3/4 rounded-md" />
+</SkeletonGroup>
+```
+
+### 进出场动画
+
+组出现或消失时应用 Reanimated 过渡。
+
+```tsx
+<SkeletonGroup
+  entering={FadeInLeft}
+  exiting={FadeOutRight}
+  isLoading={isLoading}
+  className="w-full gap-2"
+>
+  <SkeletonGroup.Item className="h-4 w-full rounded-md" />
+  <SkeletonGroup.Item className="h-4 w-3/4 rounded-md" />
+</SkeletonGroup>
+```
+
+## 示例
+
+```tsx
+import { Card, SkeletonGroup, Avatar } from 'heroui-native';
+import { useState } from 'react';
+import { Text, View, Image } from 'react-native';
+
+export default function SkeletonGroupExample() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <SkeletonGroup isLoading={isLoading}>
+      <Card className="p-4">
+        <Card.Header>
+          <View className="flex-row items-center gap-3 mb-4">
+            <SkeletonGroup.Item className="h-10 w-10 rounded-full">
+              <Avatar size="sm" alt="Avatar">
+                <Avatar.Image
+                  source={{ uri: 'https://i.pravatar.cc/150?img=4' }}
+                />
+                <Avatar.Fallback />
+              </Avatar>
+            </SkeletonGroup.Item>
+
+            <View className="flex-1 gap-1">
+              <SkeletonGroup.Item className="h-3 w-32 rounded-md">
+                <Text className="font-semibold text-foreground">John Doe</Text>
+              </SkeletonGroup.Item>
+              <SkeletonGroup.Item className="h-3 w-24 rounded-md">
+                <Text className="text-sm text-muted">@johndoe</Text>
+              </SkeletonGroup.Item>
+            </View>
+          </View>
+
+          <View className="mb-4 gap-1.5">
+            <SkeletonGroup.Item className="h-4 w-full rounded-md">
+              <Text className="text-base text-foreground">
+                This is the first line of the post content.
+              </Text>
+            </SkeletonGroup.Item>
+            <SkeletonGroup.Item className="h-4 w-full rounded-md">
+              <Text className="text-base text-foreground">
+                Second line with more interesting content to read.
+              </Text>
+            </SkeletonGroup.Item>
+            <SkeletonGroup.Item className="h-4 w-2/3 rounded-md">
+              <Text className="text-base text-foreground">
+                Last line is shorter.
+              </Text>
+            </SkeletonGroup.Item>
+          </View>
+        </Card.Header>
+
+        <SkeletonGroup.Item className="h-48 w-full rounded-lg">
+          <View className="h-48 bg-surface-tertiary rounded-lg overflow-hidden">
+            <Image
+              source={{
+                uri: 'https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/backgrounds/cards/car1.jpg',
+              }}
+              className="h-full w-full"
+            />
+          </View>
+        </SkeletonGroup.Item>
+      </Card>
+    </SkeletonGroup>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/skeleton-group.tsx)。
+
+## API 参考
+
+### SkeletonGroup
+
+| prop                    | type                             | default     | description                                                            |
+| ----------------------- | -------------------------------- | ----------- | ---------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                | -           | `SkeletonGroup.Item` 与布局元素                                        |
+| `isLoading`             | `boolean`                        | `true`      | 骨架项是否处于加载中                                                   |
+| `isSkeletonOnly`        | `boolean`                        | `false`     | 为 `true` 时，`isLoading` 为 `false` 隐藏整组（纯骨架布局）            |
+| `variant`               | `'shimmer' \| 'pulse' \| 'none'` | `'shimmer'` | 组内所有项的动画变体                                                   |
+| `animation`             | `SkeletonRootAnimation`          | -           | 动画配置                                                               |
+| `className`             | `string`                         | -           | 组容器额外 class                                                       |
+| `style`                 | `StyleProp<ViewStyle>`           | -           | 组容器自定义样式                                                       |
+| `...Animated.ViewProps` | `AnimatedProps<ViewProps>`       | -           | 支持 Reanimated `Animated.View` 全部属性                              |
+
+#### SkeletonRootAnimation
+
+SkeletonGroup 动画配置，可为：
+
+- `false` 或 `"disabled"`：仅关闭根动画
+- `"disable-all"`：关闭所有动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                     | type                                     | default                     | description                                     |
+| ------------------------ | ---------------------------------------- | --------------------------- | ----------------------------------------------- |
+| `state`                  | `'disabled' \| 'disable-all' \| boolean` | -                           | 关闭动画的同时仍允许自定义属性                  |
+| `entering.value`         | `EntryOrExitLayoutType`                  | `FadeIn`                    | 自定义进入动画                                  |
+| `exiting.value`          | `EntryOrExitLayoutType`                  | `FadeOut`                   | 自定义退出动画                                  |
+| `shimmer.duration`       | `number`                                 | `1500`                      | 动画时长（毫秒）                                |
+| `shimmer.speed`          | `number`                                 | `1`                         | 速度倍率                                        |
+| `shimmer.highlightColor` | `string`                                 | -                           | 微光高光色                                      |
+| `shimmer.easing`         | `EasingFunction`                         | `Easing.linear`             | 缓动函数                                        |
+| `pulse.duration`         | `number`                                 | `1000`                      | 动画时长（毫秒）                                |
+| `pulse.minOpacity`       | `number`                                 | `0.5`                       | 最小不透明度                                    |
+| `pulse.maxOpacity`       | `number`                                 | `1`                         | 最大不透明度                                    |
+| `pulse.easing`           | `EasingFunction`                         | `Easing.inOut(Easing.ease)` | 缓动函数                                        |
+
+### SkeletonGroup.Item
+
+| prop                    | type                             | default   | description                                                         |
+| ----------------------- | -------------------------------- | --------- | ------------------------------------------------------------------- |
+| `children`              | `React.ReactNode`                | -         | 非加载态显示的内容                                                  |
+| `isLoading`             | `boolean`                        | 继承组    | 是否加载中（覆盖组设置）                                            |
+| `variant`               | `'shimmer' \| 'pulse' \| 'none'` | 继承组    | 动画变体（覆盖组设置）                                              |
+| `animation`             | `SkeletonRootAnimation`          | 继承组    | 动画配置（覆盖组设置）                                              |
+| `className`             | `string`                         | -         | 单项额外 class                                                      |
+| `...Animated.ViewProps` | `AnimatedProps<ViewProps>`       | -         | 支持 Reanimated `Animated.View` 全部属性                            |
+
+## 特别说明
+
+### 属性继承
+
+`SkeletonGroup.Item` 从父级 `SkeletonGroup` 继承所有与动画相关的属性：
+
+- `isLoading`
+- `variant`
+- `animation`
+
+单项可通过自身属性覆盖继承值。

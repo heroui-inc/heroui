@@ -1,0 +1,134 @@
+---
+title: Kbd
+description: Kbd 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Kbd 文档](/docs/react/components/kbd)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Kbd 通过 `keys` prop 自动渲染键盘按键：
+
+```tsx
+import { Kbd } from "@heroui/react";
+
+export default function App() {
+  return <Kbd keys={["command"]}>K</Kbd>;
+}
+```
+
+在 v3 中，Kbd 改为复合组件，需要手动声明各个按键：
+
+```tsx
+import { Kbd } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Kbd>
+      <Kbd.Abbr keyValue="command" />
+      <Kbd.Content>K</Kbd.Content>
+    </Kbd>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单组件加 `keys` prop  
+**v3：** 复合组件：`Kbd.Abbr`、`Kbd.Key`、`Kbd.Content`
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `keys` | - | 已移除（改用 `Kbd.Abbr` 配合 `keyValue`） |
+| `classNames` | - | 改用 `className` |
+| - | `Kbd` | 新增 `variant` prop（`default` \| `light`） |
+| - | `Kbd.Key` | 用于按键文本的新增子组件（`Kbd.Content` 的替代写法） |
+
+## 迁移示例
+
+### 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Kbd keys={["command"]}>K</Kbd>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Kbd variant="default">
+      <Kbd.Abbr keyValue="command" />
+      <Kbd.Content>K</Kbd.Content>
+    </Kbd>
+    <Kbd variant="light">
+      <Kbd.Abbr keyValue="command" />
+      <Kbd.Content>K</Kbd.Content>
+    </Kbd>
+    ```
+  </Tab>
+</Tabs>
+
+## Kbd.Key 与 Kbd.Content
+
+v3 提供了两个子组件用于包装按键文本内容：
+
+- **`Kbd.Key`**：用于按键的文本内容（例如字母或数字）。接受 `children` 与 `className` prop。
+- **`Kbd.Content`**：用于包装内容文本的等价写法。接受 `children` 与 `className` prop。
+
+两者在包装非修饰键的文本时可以互换使用：
+
+```tsx
+{/* Using Kbd.Key */}
+<Kbd>
+  <Kbd.Abbr keyValue="command" />
+  <Kbd.Key>K</Kbd.Key>
+</Kbd>
+
+{/* Using Kbd.Content */}
+<Kbd>
+  <Kbd.Abbr keyValue="command" />
+  <Kbd.Content>K</Kbd.Content>
+</Kbd>
+```
+
+## 组件结构
+
+v3 Kbd 遵循以下结构：
+
+```
+Kbd (Root)
+  ├── Kbd.Abbr (keyValue="command")
+  ├── Kbd.Abbr (keyValue="shift") [optional, multiple]
+  └── Kbd.Key or Kbd.Content [optional, for text content]
+```
+
+## 可用的键值
+
+`keyValue` prop 支持与 v2 相同的键盘按键类型：
+
+**修饰键：**
+- `command`、`shift`、`ctrl`、`option`、`alt`、`win`
+
+**特殊键：**
+- `enter`、`delete`、`escape`、`tab`、`space`、`capslock`、`help`
+
+**导航键：**
+- `up`、`down`、`left`、`right`、`pageup`、`pagedown`、`home`、`end`
+
+**功能键：**
+- `fn`
+
+## 总结
+
+1. **组件结构**：按键必须通过 `Kbd.Abbr` 子组件手动声明
+2. **移除 keys prop**：改用 `Kbd.Abbr` 配合 `keyValue`
+3. **包装子节点**：将文本内容包裹在 `Kbd.Content` 子组件中
+4. **移除 classNames**：改在各子组件上使用 `className` prop
+5. **新增 variant prop**：在 `Kbd` 上新增 `variant` 样式 prop（`default` \| `light`）
+6. **新增 Kbd.Key 子组件**：可作为 `Kbd.Content` 的替代写法用于按键文本

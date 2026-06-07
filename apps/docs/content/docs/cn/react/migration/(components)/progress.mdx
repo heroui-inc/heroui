@@ -1,0 +1,223 @@
+---
+title: Progress
+description: Progress 从 HeroUI v2 到 v3（现在称为 ProgressBar）的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 ProgressBar 文档](/docs/react/components/progress-bar)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+<Callout type="warning">
+  正在寻找 CircularProgress 的迁移说明？请参阅 [CircularProgress 迁移指南](/docs/react/migration/circular-progress)。
+</Callout>
+
+## 组件重命名
+
+`Progress` 在 v3 中已重命名为 `ProgressBar`。
+
+## 结构变化
+
+在 v2 中，`Progress` 是单个组件，通过 prop 进行配置：
+
+```tsx
+import { Progress } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Progress label="Loading..." value={60} />
+  );
+}
+```
+
+在 v3 中，`ProgressBar` 改为复合组件模式：
+
+```tsx
+import { ProgressBar, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <ProgressBar value={60}>
+      <Label>Loading...</Label>
+      <ProgressBar.Output />
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单一 `Progress` 组件，所有部分都在内部渲染  
+**v3：** 复合组件：`ProgressBar`、`ProgressBar.Output`、`ProgressBar.Track`、`ProgressBar.Fill`，并配合外部的 `Label`
+
+### 2. 颜色
+
+**v2：** `default`、`primary`、`secondary`、`success`、`warning`、`danger`  
+**v3：** `default`、`accent`、`success`、`warning`、`danger`
+
+### 3. Prop 变更
+
+| v2 prop | v3 对应项 | 说明 |
+| ------- | --------- | ---- |
+| `value` | `value` | 相同 |
+| `minValue` | `minValue` | 相同 |
+| `maxValue` | `maxValue` | 相同 |
+| `isIndeterminate` | `isIndeterminate` | 相同 |
+| `formatOptions` | `formatOptions` | 相同 |
+| `size` | `size` | 相同（`sm`、`md`、`lg`） |
+| `color` | `color` | `primary` → `accent`，`secondary` 已移除 |
+| `label` | - | 改用 `Label` 组件 |
+| `valueLabel` | `valueLabel` | 相同 |
+| `showValueLabel` | - | 通过包含或省略 `ProgressBar.Output` 控制 |
+| `radius` | - | 已移除（请改用 Tailwind CSS） |
+| `isStriped` | - | 已移除（请在 `ProgressBar.Fill` 上使用 Tailwind CSS） |
+| `isDisabled` | - | 已移除 |
+| `disableAnimation` | - | 已移除 |
+| `classNames` | - | 改在各复合子组件上使用 `className` |
+
+## 迁移示例
+
+### 基本进度条
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Progress } from "@heroui/react";
+
+    <Progress label="Loading..." value={60} color="primary" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { ProgressBar, Label } from "@heroui/react";
+
+    <ProgressBar value={60} color="accent">
+      <Label>Loading...</Label>
+      <ProgressBar.Output />
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+### 不确定状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Progress isIndeterminate aria-label="Loading..." size="sm" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressBar isIndeterminate aria-label="Loading..." size="sm">
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+### 无标签（无障碍）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Progress aria-label="Loading..." value={70} />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressBar aria-label="Loading..." value={70}>
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义格式
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Progress
+      label="Budget"
+      formatOptions={{ style: "currency", currency: "USD" }}
+      maxValue={10000}
+      value={4000}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <ProgressBar
+      formatOptions={{ style: "currency", currency: "USD" }}
+      maxValue={10000}
+      value={4000}
+    >
+      <Label>Budget</Label>
+      <ProgressBar.Output />
+      <ProgressBar.Track>
+        <ProgressBar.Fill />
+      </ProgressBar.Track>
+    </ProgressBar>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变更
+
+### v2：`classNames` prop
+
+```tsx
+<Progress
+  classNames={{
+    base: "custom-base",
+    track: "custom-track",
+    indicator: "custom-fill",
+    label: "custom-label",
+    value: "custom-value",
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<ProgressBar className="custom-base" value={60}>
+  <Label className="custom-label">Loading</Label>
+  <ProgressBar.Output className="custom-value" />
+  <ProgressBar.Track className="custom-track">
+    <ProgressBar.Fill className="custom-fill" />
+  </ProgressBar.Track>
+</ProgressBar>
+```
+
+## 组件结构
+
+```
+ProgressBar (Root)
+  ├── Label (optional)
+  ├── ProgressBar.Output (optional, formatted value display)
+  └── ProgressBar.Track
+      └── ProgressBar.Fill
+```
+
+## 总结
+
+1. **重命名**：`Progress` → `ProgressBar`
+2. **组件结构**：单组件 → 复合组件（`ProgressBar.Output`、`ProgressBar.Track`、`ProgressBar.Fill`）
+3. **标签**：`label` prop → `Label` 组件
+4. **数值显示**：`showValueLabel` prop → 通过包含或省略 `ProgressBar.Output` 控制
+5. **颜色变化**：`primary` → `accent`，`secondary` 已移除
+6. **移除的 prop**：`radius`、`isStriped`、`isDisabled`、`disableAnimation` → 请改用 Tailwind CSS
+7. **移除 classNames**：改在各复合子组件上使用 `className`

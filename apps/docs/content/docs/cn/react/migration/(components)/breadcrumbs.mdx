@@ -1,0 +1,142 @@
+---
+title: Breadcrumbs
+description: Breadcrumbs 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Breadcrumbs 文档](/docs/react/components/breadcrumbs)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Breadcrumbs` 接受 `items` prop 或子节点：
+
+```tsx
+import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Breadcrumbs>
+      <BreadcrumbItem href="#">Home</BreadcrumbItem>
+      <BreadcrumbItem href="#">Products</BreadcrumbItem>
+      <BreadcrumbItem>Current Page</BreadcrumbItem>
+    </Breadcrumbs>
+  );
+}
+```
+
+在 v3 中，Breadcrumbs 改为复合组件模式，由 `Breadcrumbs` 与 `BreadcrumbsItem` 组成：
+
+```tsx
+import { Breadcrumbs, BreadcrumbsItem } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Breadcrumbs>
+      <BreadcrumbsItem href="#">Home</BreadcrumbsItem>
+      <BreadcrumbsItem href="#">Products</BreadcrumbsItem>
+      <BreadcrumbsItem>Current Page</BreadcrumbsItem>
+    </Breadcrumbs>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件名称：`BreadcrumbItem` → `BreadcrumbsItem`
+
+**v2：** 使用 `BreadcrumbItem`（单数）  
+**v3：** 使用 `BreadcrumbsItem`（复数）
+
+### 2. 自定义分隔符
+
+**v2：** 通过 prop 自定义分隔符  
+**v3：** 通过在 `Breadcrumbs` 根节点上设置 `separator` prop 自定义
+
+### 3. 内置链接组件
+
+**v2：** 项目可以是链接或纯文本  
+**v3：** 当提供 `href` 时，项目会自动使用 `Link` 组件
+
+### 4. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `maxItems` | - | 已移除（渲染全部项目，或自行实现折叠逻辑） |
+| `itemsBeforeCollapse`、`itemsAfterCollapse`、`renderEllipsis` | - | 已移除（与 `maxItems` 折叠/省略号一并移除） |
+| `items`（prop 写法） | - | 改用子节点 |
+| `onAction` | - | 如有需要，可在单个项目上使用 `onPress` |
+| `isDisabled` | 根节点上的 `isDisabled` | 现在根节点支持，可一次性禁用全部面包屑链接 |
+| `classNames`、`itemClasses` | - | 改用 `Breadcrumbs` 与 `BreadcrumbsItem` 上的 `className` |
+
+### 5. 根节点上的 `isDisabled` prop
+
+**v2：** 根组件不支持 `isDisabled`  
+**v3：** `Breadcrumbs` 根节点支持 `isDisabled`，可立即禁用所有面包屑链接
+
+### 6. 自动 `aria-current="page"` 行为
+
+**v3：** 最后一个未提供 `href` 的面包屑项目会自动带上 `aria-current="page"`，向辅助技术指明当前页面，无需手动配置。
+
+### 7. 集成 React Aria Components
+
+**v3：** 基于 React Aria Components 构建，提供更佳的无障碍体验与键盘导航支持。
+
+## 迁移示例
+
+### 自定义分隔符
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Breadcrumbs separator="/">
+      <BreadcrumbItem href="#">Home</BreadcrumbItem>
+      <BreadcrumbItem>Current</BreadcrumbItem>
+    </Breadcrumbs>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+    import { Breadcrumbs, BreadcrumbsItem } from "@heroui/react";
+
+    <Breadcrumbs separator={<Icon icon="gravity-ui:caret-right" />}>
+      <BreadcrumbsItem href="#">Home</BreadcrumbsItem>
+      <BreadcrumbsItem>Current</BreadcrumbsItem>
+    </Breadcrumbs>
+    ```
+  </Tab>
+</Tabs>
+
+### 禁用状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 did not support isDisabled on the root */}
+    <Breadcrumbs>
+      <BreadcrumbItem href="#">Home</BreadcrumbItem>
+      <BreadcrumbItem>Current</BreadcrumbItem>
+    </Breadcrumbs>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* v3 supports isDisabled on root to disable all links */}
+    <Breadcrumbs isDisabled>
+      <BreadcrumbsItem href="#">Home</BreadcrumbsItem>
+      <BreadcrumbsItem>Current</BreadcrumbsItem>
+    </Breadcrumbs>
+    ```
+  </Tab>
+</Tabs>
+
+## 总结
+
+- 将 `BreadcrumbItem` 重命名为 `BreadcrumbsItem`
+- 在根节点上设置 `separator`，可以是字符串或 React 元素（例如图标）
+- 提供 `href` 的项目会自动使用内置 Link
+- 根节点现在支持 `isDisabled`，可立即禁用全部面包屑链接
+- 最后一个未提供 `href` 的项目会自动带上 `aria-current="page"`，提升无障碍体验
+- v3 不再提供 `maxItems` / 折叠功能——请显示全部项目或自行实现；用 `className` 取代 `classNames` / `itemClasses`
+- 基于 React Aria Components 构建，更易实现无障碍

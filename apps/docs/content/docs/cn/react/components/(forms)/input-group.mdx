@@ -1,0 +1,379 @@
+---
+title: InputGroup 输入框组
+description: 将相关输入控件与前后缀元素组合，以增强表单字段。
+links:
+  rac: Group
+  source: input-group/input-group.tsx
+  styles: input-group.css
+  storybook: Components/Forms/InputGroup
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { InputGroup } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="input-group-default" />
+
+### 组件结构
+
+```tsx
+import {InputGroup, TextField, Label} from '@heroui/react';
+
+export default () => (
+  <TextField>
+    <Label />
+    <InputGroup>
+      <InputGroup.Prefix />
+      <InputGroup.Input /> {/* Or use InputGroup.TextArea for multiline input */}
+      <InputGroup.Suffix />
+    </InputGroup>
+  </TextField>
+)
+```
+
+> **InputGroup** 使用可选的前缀与后缀包裹输入框，形成视觉上统一的组合。通常放在 **[TextField](/docs/components/text-field)** 内，用于在输入前后添加图标、文字、按钮等元素。单行输入请使用 **InputGroup.Input**，多行输入请使用 **InputGroup.TextArea**。
+
+### 前缀图标
+
+在输入框前添加图标。
+
+<ComponentPreview name="input-group-with-prefix-icon" />
+
+### 后缀图标
+
+在输入框后添加图标。
+
+<ComponentPreview name="input-group-with-suffix-icon" />
+
+### 前缀与后缀
+
+同时组合前缀与后缀。
+
+<ComponentPreview name="input-group-with-prefix-and-suffix" />
+
+### 文字前缀
+
+使用文字作为前缀，例如货币符号或协议前缀。
+
+<ComponentPreview name="input-group-with-text-prefix" />
+
+### 文字后缀
+
+使用文字作为后缀，例如域名后缀或单位。
+
+<ComponentPreview name="input-group-with-text-suffix" />
+
+### 图标前缀与文字后缀
+
+组合图标前缀与文字后缀。
+
+<ComponentPreview name="input-group-with-icon-prefix-and-text-suffix" />
+
+### 复制按钮后缀
+
+在后缀中加入交互按钮，例如复制按钮。
+
+<ComponentPreview name="input-group-with-copy-suffix" />
+
+### 图标前缀与复制按钮
+
+组合图标前缀与交互式后缀按钮。
+
+<ComponentPreview name="input-group-with-icon-prefix-and-copy-suffix" />
+
+### 密码显隐切换
+
+在后缀中使用按钮切换密码可见性。
+
+<ComponentPreview name="input-group-password-with-toggle" />
+
+### 加载状态
+
+在后缀显示加载指示器，表示正在处理。
+
+<ComponentPreview name="input-group-with-loading-suffix" />
+
+### 键盘快捷键
+
+使用 [Kbd](/docs/components/kbd) 组件展示键盘快捷键。
+
+<ComponentPreview name="input-group-with-keyboard-shortcut" />
+
+### Badge 后缀
+
+在后缀中加入徽章或 chip，用于展示状态或标签。
+
+<ComponentPreview name="input-group-with-badge-suffix" />
+
+### 必填字段
+
+InputGroup 会遵循父级 TextField 的必填状态。
+
+<ComponentPreview name="input-group-required" />
+
+### 校验
+
+InputGroup 会自动反映父级 TextField 的无效状态。
+
+<ComponentPreview name="input-group-invalid" />
+
+### 禁用状态
+
+InputGroup 会遵循父级 TextField 的禁用状态。
+
+<ComponentPreview name="input-group-disabled" />
+
+### 全宽
+
+<ComponentPreview name="input-group-full-width" />
+
+### 变体
+
+InputGroup 支持两种视觉变体：
+
+- **`primary`**（默认）— 带阴影的标准样式，适用于大多数场景
+- **`secondary`** — 低强调、无阴影的变体，适合用在 Surface 组件内
+
+<ComponentPreview name="input-group-variants" />
+
+### 在 Surface 内
+
+在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="input-group-on-surface" />
+
+### 搭配 TextArea
+
+多行输入请使用 **InputGroup.TextArea**，并搭配前缀与后缀。当存在 textarea 时，容器高度会自动适应内容，并将前缀/后缀与顶部对齐。
+
+<ComponentPreview name="input-group-with-textarea" />
+
+<RelatedComponents component="inputgroup" />
+
+<RelatedShowcases component="InputGroup" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {InputGroup, TextField, Label} from '@heroui/react';
+
+function CustomInputGroup() {
+  return (
+    <TextField>
+      <Label>Website</Label>
+      <InputGroup className="rounded-xl border-2 border-primary">
+        <InputGroup.Prefix className="bg-primary/10 text-primary">
+          https://
+        </InputGroup.Prefix>
+        <InputGroup.Input className="font-medium" />
+        <InputGroup.Suffix className="bg-primary/10 text-primary">
+          .com
+        </InputGroup.Suffix>
+      </InputGroup>
+    </TextField>
+  );
+}
+```
+
+### 自定义组件类
+
+InputGroup 使用可自定义的 CSS 类。你可以覆盖这些类名以匹配自己的设计系统。
+
+```css
+@layer components {
+  .input-group {
+    @apply bg-field text-field-foreground shadow-field rounded-field inline-flex min-h-9 items-center overflow-hidden border text-sm outline-none;
+  }
+
+  .input-group__input {
+    @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+  }
+
+  .input-group__prefix {
+    @apply text-field-placeholder rounded-l-field flex h-full items-center justify-center rounded-r-none bg-transparent px-3;
+  }
+
+  .input-group__suffix {
+    @apply text-field-placeholder rounded-r-field flex h-full items-center justify-center rounded-l-none bg-transparent px-3;
+  }
+
+  /* Secondary variant */
+  .input-group--secondary {
+    @apply shadow-none;
+    background-color: var(--color-default);
+  }
+}
+```
+
+### CSS 类
+
+- `.input-group` – 根容器：带边框、背景与 flex 布局。默认使用 `min-h-9` 与 `items-center`；当存在 textarea 时会切换为 `items-start`。
+- `.input-group__input` – 透明背景、无边框的输入元素。textarea 也使用该基础类。
+- `.input-group__prefix` – 左侧圆角的前缀容器。与 textarea 搭配时与顶部对齐。
+- `.input-group__suffix` – 右侧圆角的后缀容器。与 textarea 搭配时与顶部对齐。
+- `.input-group--primary` – 带阴影的主变体（默认）
+- `.input-group--secondary` – 无阴影的次变体，适合用在 surface 上
+
+**说明：** 使用 `InputGroup.TextArea` 时，容器会从 `items-center` 切换为 `items-start`，并使用 `height: auto` 替代固定高度。前缀与后缀与顶部对齐，并增加内边距以匹配 textarea 的垂直内边距。textarea 使用相同的 `.input-group__input` 基础类，并通过 `[data-slot="input-group-textarea"]` 选择器应用 textarea 专用样式（最小高度与纵向 resize）。
+
+### 交互状态
+
+InputGroup 会根据状态自动管理以下 data 属性：
+
+- **Hover**：`[data-hovered]` – 悬停在整个组合上时应用
+- **Focus Within**：`[data-focus-within]` – 输入框聚焦时应用
+- **Invalid**：`[data-invalid]` – 父级 TextField 为无效时应用
+- **Disabled**：`[data-disabled]` 或 `[aria-disabled]` – 父级 TextField 为禁用时应用
+
+## API 参考
+
+### InputGroup Props
+
+InputGroup 继承 React Aria [Group](https://react-spectrum.adobe.com/react-aria/Group.html) 组件的全部 props。
+
+#### Base Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode \| (values: GroupRenderProps) => React.ReactNode` | - | 子组件（Input、TextArea、Prefix、Suffix）或渲染函数。 |
+| `className` | `string \| (values: GroupRenderProps) => string` | - | 用于样式的 CSS 类，支持渲染 prop。 |
+| `style` | `React.CSSProperties \| (values: GroupRenderProps) => React.CSSProperties` | - | 行内样式，支持渲染 prop。 |
+| `fullWidth` | `boolean` | `false` | 输入组是否占满容器宽度 |
+| `id` | `string` | - | 元素的唯一标识符。 |
+
+#### Variant Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为低强调、无阴影变体，适合用在 surface 上。 |
+
+#### Accessibility Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `aria-label` | `string` | - | 没有可见标签时的无障碍标签。 |
+| `aria-labelledby` | `string` | - | 用于标注该组的元素 ID。 |
+| `aria-describedby` | `string` | - | 用于描述该组的元素 ID。 |
+| `aria-details` | `string` | - | 包含更多详情的元素 ID。 |
+| `role` | `'group' \| 'region' \| 'presentation'` | `'group'` | 分组的无障碍角色。重要内容可使用 `region`，纯视觉分组可使用 `presentation`。 |
+
+### Composition Components
+
+InputGroup 与以下子组件配合使用：
+
+- **InputGroup.Root** – 根容器（也可直接写作 `InputGroup`）
+- **InputGroup.Input** – 单行输入元素组件
+- **InputGroup.TextArea** – 多行 textarea 元素组件
+- **InputGroup.Prefix** – 前缀容器组件
+- **InputGroup.Suffix** – 后缀容器组件
+
+#### InputGroup.Input Props
+
+InputGroup.Input 继承 React Aria [Input](https://react-spectrum.adobe.com/react-aria/Input.html) 组件的全部 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 用于样式的 CSS 类。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 输入的视觉变体。`primary` 为默认带阴影样式。`secondary` 为低强调、无阴影变体，适合用在 surface 上。 |
+| `type` | `string` | `'text'` | 输入类型（text、password、email 等）。 |
+| `value` | `string` | - | 当前值（受控）。 |
+| `defaultValue` | `string` | - | 默认值（非受控）。 |
+| `placeholder` | `string` | - | 占位符文本。 |
+| `disabled` | `boolean` | - | 是否禁用输入。 |
+| `readOnly` | `boolean` | - | 是否只读。 |
+
+#### InputGroup.TextArea Props
+
+InputGroup.TextArea 继承 React Aria [TextArea](https://react-spectrum.adobe.com/react-aria/TextArea.html) 组件的全部 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 用于样式的 CSS 类。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | textarea 的视觉变体。`primary` 为默认带阴影样式。`secondary` 为低强调、无阴影变体，适合用在 surface 上。 |
+| `value` | `string` | - | 当前值（受控）。 |
+| `defaultValue` | `string` | - | 默认值（非受控）。 |
+| `placeholder` | `string` | - | 占位符文本。 |
+| `rows` | `number` | - | 可见文本行数。 |
+| `disabled` | `boolean` | - | 是否禁用 textarea。 |
+| `readOnly` | `boolean` | - | 是否只读。 |
+
+#### InputGroup.Prefix Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 前缀中要展示的内容（图标、文字等）。 |
+| `className` | `string` | - | 用于样式的 CSS 类。 |
+
+#### InputGroup.Suffix Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 后缀中要展示的内容（图标、按钮、徽章等）。 |
+| `className` | `string` | - | 用于样式的 CSS 类。 |
+
+### Usage Example
+
+```tsx
+import {InputGroup, TextField, Label, Button} from '@heroui/react';
+import {Icon} from '@iconify/react';
+
+function Example() {
+  return (
+    <TextField>
+      <Label>Email</Label>
+      <InputGroup>
+        <InputGroup.Prefix>
+          <Icon icon="gravity-ui:envelope" />
+        </InputGroup.Prefix>
+        <InputGroup.Input placeholder="name@email.com" />
+        <InputGroup.Suffix>
+          <Button isIconOnly size="sm" variant="ghost">
+            <Icon icon="gravity-ui:check" />
+          </Button>
+        </InputGroup.Suffix>
+      </InputGroup>
+    </TextField>
+  );
+}
+```
+
+### TextArea Usage Example
+
+```tsx
+import {Envelope} from "@gravity-ui/icons";
+import {Description, FieldError, InputGroup, Label, TextField} from "@heroui/react";
+import {useState} from "react";
+
+function TextAreaExample() {
+  const [feedback, setFeedback] = useState("");
+
+  return (
+    <TextField fullWidth isInvalid={feedback.length > 500} name="feedback" onChange={setFeedback}>
+      <Label>Your Feedback</Label>
+      <InputGroup fullWidth>
+        <InputGroup.Prefix>
+          <Envelope className="size-4 text-muted" />
+        </InputGroup.Prefix>
+        <InputGroup.TextArea
+          className="resize-none"
+          placeholder="Share your thoughts, suggestions, or issues..."
+          rows={5}
+          value={feedback}
+        />
+      </InputGroup>
+      <Description className="flex w-full items-center justify-between px-1">
+        <span>Maximum 500 characters.</span>
+        <span className="ml-auto">{feedback.length}/500</span>
+      </Description>
+      <FieldError>Feedback must be less than 500 characters</FieldError>
+    </TextField>
+  );
+}
+```

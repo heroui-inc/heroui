@@ -1,0 +1,244 @@
+---
+title: Dark Mode
+description: Add light, dark, and system theme switching to HeroUI v3
+icon: moon
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI dark mode is CSS-driven. Components read theme variables from the root element, so you do not need a HeroUI provider. Add the `dark` class or `data-theme="dark"` to `<html>` and HeroUI will apply the dark theme.
+
+```html
+<html class="dark" data-theme="dark">
+  <body class="bg-background text-foreground">
+    <!-- Your app -->
+  </body>
+</html>
+```
+
+Keep the `bg-background` and `text-foreground` classes on your app shell so the page canvas changes with the active theme.
+
+<Callout type="info">
+  HeroUI's built-in light and dark themes respond to both `.light` / `.dark` classes and `data-theme="light"` / `data-theme="dark"` attributes. If you set both manually, keep the values in sync.
+</Callout>
+
+## Next.js with next-themes
+
+Use [next-themes](https://github.com/pacocoursey/next-themes) when you need theme persistence, system preference support, and no flash before hydration in a Next.js app.
+
+### Install next-themes
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i next-themes
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add next-themes
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add next-themes
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add next-themes
+    ```
+  </Tab>
+</Tabs>
+
+### App Router
+
+Create a client provider for `next-themes`.
+
+```tsx
+// app/providers.tsx
+"use client";
+
+import {ThemeProvider as NextThemesProvider} from "next-themes";
+
+export function Providers({children}: {children: React.ReactNode}) {
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      {children}
+    </NextThemesProvider>
+  );
+}
+```
+
+Wrap your app with the provider from the root layout. Add `suppressHydrationWarning` to `<html>` because `next-themes` updates that element before hydration.
+
+```tsx
+// app/layout.tsx
+import "./globals.css";
+
+import {Providers} from "./providers";
+
+export default function RootLayout({children}: {children: React.ReactNode}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-background text-foreground">
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+### Theme switcher
+
+Use `useTheme` from `next-themes` inside a client component. Delay rendering until mount because the active theme is not known during SSR.
+
+```tsx
+// app/components/theme-switcher.tsx
+"use client";
+
+import {Button} from "@heroui/react";
+import {useTheme} from "next-themes";
+import {useEffect, useState} from "react";
+
+export function ThemeSwitcher() {
+  const [mounted, setMounted] = useState(false);
+  const {resolvedTheme, setTheme, theme} = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const activeTheme = theme === "system" ? resolvedTheme : theme;
+
+  return (
+    <div className="flex items-center gap-2">
+      <Button
+        variant={activeTheme === "light" ? "primary" : "secondary"}
+        onPress={() => setTheme("light")}
+      >
+        Light
+      </Button>
+      <Button
+        variant={activeTheme === "dark" ? "primary" : "secondary"}
+        onPress={() => setTheme("dark")}
+      >
+        Dark
+      </Button>
+      <Button variant={theme === "system" ? "primary" : "secondary"} onPress={() => setTheme("system")}>
+        System
+      </Button>
+    </div>
+  );
+}
+```
+
+### Pages Router
+
+For `pages/`, wrap your application in `pages/_app.tsx`.
+
+```tsx
+// pages/_app.tsx
+import "@/styles/globals.css";
+
+import type {AppProps} from "next/app";
+import {ThemeProvider as NextThemesProvider} from "next-themes";
+
+export default function App({Component, pageProps}: AppProps) {
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <Component {...pageProps} />
+    </NextThemesProvider>
+  );
+}
+```
+
+## Using custom theme names
+
+The `attribute="class"` setup works well for the built-in `light` and `dark` themes. If your custom theme CSS is written with `data-theme` selectors, configure `next-themes` to write `data-theme` instead.
+
+```tsx
+<NextThemesProvider
+  attribute="data-theme"
+  defaultTheme="system"
+  enableSystem
+  themes={["light", "dark", "ocean", "ocean-dark"]}
+>
+  {children}
+</NextThemesProvider>
+```
+
+When you pass a custom `themes` list, include `"light"` and `"dark"` if you still want the built-in themes available.
+
+## React with useTheme
+
+Use HeroUI's `useTheme` hook when you are building a plain React app, such as Vite or Create React App, and do not need `next-themes`.
+
+The hook is exported from `@heroui/react`. It stores the selected theme in `localStorage`, resolves `"system"` from the user's OS preference, and applies both the class and `data-theme` attribute to `<html>`.
+
+```tsx
+// src/components/theme-switcher.tsx
+import {Button, useTheme} from "@heroui/react";
+
+export function ThemeSwitcher() {
+  const {resolvedTheme, setTheme, theme} = useTheme("system");
+
+  return (
+    <div className="flex items-center gap-2">
+      <Button
+        variant={resolvedTheme === "light" ? "primary" : "secondary"}
+        onPress={() => setTheme("light")}
+      >
+        Light
+      </Button>
+      <Button
+        variant={resolvedTheme === "dark" ? "primary" : "secondary"}
+        onPress={() => setTheme("dark")}
+      >
+        Dark
+      </Button>
+      <Button variant={theme === "system" ? "primary" : "secondary"} onPress={() => setTheme("system")}>
+        System
+      </Button>
+    </div>
+  );
+}
+```
+
+<Callout type="warning">
+  Use one theme controller per app. In Next.js, prefer `next-themes` and its `useTheme` hook. In plain React apps, use `useTheme` from `@heroui/react`.
+</Callout>
+
+## Styling for both themes
+
+Theme-aware utilities work automatically because they read CSS variables:
+
+```tsx
+<main className="min-h-screen bg-background text-foreground">
+  <section className="bg-surface text-surface-foreground shadow-surface">
+    Theme-aware content
+  </section>
+</main>
+```
+
+Use the `dark:` variant for one-off changes that only apply in dark mode:
+
+```tsx
+<div className="bg-background text-foreground dark:border-default">
+  Custom dark-mode adjustment
+</div>
+```
+

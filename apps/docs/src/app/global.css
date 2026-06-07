@@ -138,15 +138,14 @@
   background-color: transparent;
 
   /* Only affects the Docs/Components ul, not the search/theme toggle */
-  ul:first-of-type {
+  nav > ul {
     padding-top: 4px;
     gap: 0;
   }
 
-  ul:last-of-type {
-    li > a:last-of-type {
-      @apply ml-1 inline-flex items-center rounded-full border p-1.5 text-foreground;
-    }
+  nav > ul > li > a,
+  nav > ul:last-of-type > li > a:last-of-type {
+    @apply ml-0 rounded-none border-none p-2;
   }
 
   li > a {
@@ -308,6 +307,16 @@
       @apply font-medium;
     }
   }
+}
+
+/* Keep CJK phrases together so they wrap as a whole word instead of breaking between characters. 
+   Safe for non-CJK locales since `keep-all` behaves like `normal` for non-CJK text. */
+#nd-sidebar a,
+#nd-sidebar p,
+#nd-sidebar-mobile a,
+#nd-sidebar-mobile p {
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ============================================================================

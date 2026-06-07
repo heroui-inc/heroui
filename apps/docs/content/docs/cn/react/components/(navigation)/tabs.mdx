@@ -1,0 +1,217 @@
+---
+title: Tabs 标签页
+description: Tabs 将内容组织为多个区块，并允许用户在它们之间导航。
+links:
+  rac: Tabs
+  source: tabs/tabs.tsx
+  styles: tabs.css
+  storybook: Components/Navigation/Tabs
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Tabs } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-basic"
+/>
+
+### 组件结构
+
+导入 Tabs 组件后，可通过点语法访问所有子部分。
+
+```tsx
+import { Tabs } from '@heroui/react';
+
+export default () => (
+  <Tabs>
+    <Tabs.ListContainer>
+      <Tabs.List aria-label="Options">
+        <Tabs.Tab>
+          <Tabs.Separator /> {/* Optional */}
+          <Tabs.Indicator />
+        </Tabs.Tab>
+      </Tabs.List>
+    </Tabs.ListContainer>
+    <Tabs.Panel/>
+  </Tabs>
+)
+```
+
+### 垂直布局
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-vertical"
+/>
+
+### 禁用 Tab
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-disabled"
+/>
+
+### 带分隔线
+
+在每个 `<Tabs.Tab>` 内（第一项除外）添加 `<Tabs.Separator />`，用于在标签之间显示分隔线。
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-with-separator"
+/>
+
+### 自定义样式
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-custom-styles"
+/>
+
+### Secondary 变体
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-secondary"
+/>
+
+### Secondary 变体（垂直）
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-secondary-vertical"
+/>
+
+<RelatedShowcases component="Tabs" />
+
+<RelatedComponents component="tabs" />
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="tabs-custom-render-function"
+/>
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+<CollapsibleCode lang="tsx" code={`
+import { Tabs } from '@heroui/react';
+
+function CustomTabs() {
+  return (
+    <Tabs className="w-full max-w-lg text-center">
+      <Tabs.ListContainer>
+        <Tabs.List
+          aria-label="Options"
+          className="*:data-[selected=true]:text-accent-foreground w-fit *:h-6 *:w-fit *:px-3 *:text-sm *:font-normal"
+        >
+          <Tabs.Tab id="daily">Daily<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="weekly">Weekly<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="bi-weekly">Bi-Weekly<Tabs.Indicator /></Tabs.Tab>
+          <Tabs.Tab id="monthly">Monthly<Tabs.Indicator /></Tabs.Tab>
+        </Tabs.List>
+      </Tabs.ListContainer>
+      <Tabs.Panel className="px-4" id="daily">
+        <h3 className="mb-2 font-semibold">Daily</h3>
+        <p className="text-sm text-gray-600">Manage your daily tasks and goals.</p>
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="weekly">
+        <h3 className="mb-2 font-semibold">Weekly</h3>
+        <p className="text-sm text-gray-600">Manage your weekly tasks and goals.</p>
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="bi-weekly">
+        <h3 className="mb-2 font-semibold">Bi-Weekly</h3>
+        <p className="text-sm text-gray-600">Manage your bi-weekly tasks and goals.</p>
+      </Tabs.Panel>
+      <Tabs.Panel className="px-4" id="monthly">
+        <h3 className="mb-2 font-semibold">Monthly</h3>
+        <p className="text-sm text-gray-600">Manage your monthly tasks and goals.</p>
+      </Tabs.Panel>
+    </Tabs>
+  );
+}
+`} />
+
+### CSS 类
+
+Tabs 使用以下 CSS 类：
+
+#### 基础类
+- `.tabs` — Tabs 根容器
+- `.tabs__list-container` — 标签列表容器外层包裹
+- `.tabs__list` — 标签列表容器
+- `.tabs__tab` — 单个标签按钮
+- `.tabs__separator` — 标签之间的分隔线
+- `.tabs__panel` — 标签面板内容
+- `.tabs__indicator` — 标签指示器
+
+#### 方向属性
+- `.tabs[data-orientation="horizontal"]` — 水平标签布局（默认）
+- `.tabs[data-orientation="vertical"]` — 垂直标签布局
+
+#### 变体类
+- `.tabs--secondary` — Secondary 变体，使用下划线指示器
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性：
+
+- **已选中**：`[aria-selected="true"]`
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **焦点**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **禁用**：`[aria-disabled="true"]`
+
+
+
+## API 参考
+
+### Tabs Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉样式变体。Primary 使用填充指示器，Secondary 使用下划线指示器 |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 标签布局方向 |
+| `selectedKey` | `string` | - | 受控选中标签的 key |
+| `defaultSelectedKey` | `string` | - | 默认选中标签的 key |
+| `onSelectionChange` | `(key: Key) => void` | - | 选中变化事件处理函数 |
+| `className` | `string` | - | 附加的 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabsRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+
+### Tabs.List Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `aria-label` | `string` | - | 标签列表的无障碍标签 |
+| `className` | `string` | - | 附加的 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabListRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+
+### Tabs.Tab Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `id` | `string` | - | 标签唯一标识 |
+| `isDisabled` | `boolean` | `false` | 是否禁用该标签 |
+| `className` | `string` | - | 附加的 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+
+### Tabs.Separator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 附加的 CSS 类 |
+
+### Tabs.Panel Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `id` | `string` | - | 与对应 Tab id 匹配的面板标识 |
+| `className` | `string` | - | 附加的 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabPanelRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |

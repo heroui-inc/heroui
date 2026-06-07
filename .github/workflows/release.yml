@@ -15,9 +15,11 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    environment: npm-publish
     timeout-minutes: 15
     permissions:
       contents: write
+      id-token: write
 
     steps:
       - name: Checkout
@@ -30,6 +32,9 @@ jobs:
 
       - name: Build packages
         run: pnpm build
+
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@11
 
       - name: Determine previous tag
         id: prev-tag
@@ -45,15 +50,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
 
-      - name: Configure npm auth
-        run: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish @heroui/styles
         id: publish-styles
-        run: pnpm --filter @heroui/styles publish --no-git-checks --access public ${{ inputs.dry_run && '--dry-run' || '' }}
+        working-directory: packages/styles
+        run: |
+          mkdir -p "$RUNNER_TEMP/heroui-release"
+          PACKAGE_TARBALL="$(node -p "const pkg = require('./package.json'); pkg.name.replace('@', '').replace('/', '-') + '-' + pkg.version + '.tgz'")"
+          pnpm pack --pack-destination "$RUNNER_TEMP/heroui-release"
+          npm publish "$RUNNER_TEMP/heroui-release/$PACKAGE_TARBALL" --access public ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Publish @heroui/react
         if: steps.publish-styles.outcome == 'success'
-        run: pnpm --filter @heroui/react publish --no-git-checks --access public ${{ inputs.dry_run && '--dry-run' || '' }}
+        working-directory: packages/react
+        run: |
+          mkdir -p "$RUNNER_TEMP/heroui-release"
+          PACKAGE_TARBALL="$(node -p "const pkg = require('./package.json'); pkg.name.replace('@', '').replace('/', '-') + '-' + pkg.version + '.tgz'")"
+          pnpm pack --pack-destination "$RUNNER_TEMP/heroui-release"
+          npm publish "$RUNNER_TEMP/heroui-release/$PACKAGE_TARBALL" --access public ${{ inputs.dry_run && '--dry-run' || '' }}

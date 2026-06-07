@@ -1,0 +1,241 @@
+---
+title: SearchField 搜索框
+description: 用于筛选与查询的复合搜索输入框。
+links:
+  source_native: search-field/search-field.tsx
+  styles_native: search-field/search-field.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { SearchField } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<SearchField value={value} onChange={onChange}>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+</SearchField>
+```
+
+- **SearchField**：根容器，接收 `value` 与 `onChange` 并通过上下文下发；同时提供 `isDisabled`、`isInvalid`、`isRequired` 与动画设置。
+- **SearchField.Group**：横向 `flex-row` 容器，排列搜索图标、输入与清除按钮。
+- **SearchField.SearchIcon**：默认放大镜图标，绝对定位在输入左侧；可传入子节点替换默认图标。
+- **SearchField.Input**：包装 `Input` 并应用搜索相关默认行为；自动从上下文读取 `value` 与 `onChangeText`。
+- **SearchField.ClearButton**：清除输入的小图标按钮；值为空时自动隐藏；按下时调用上下文的 `onChange("")`。
+
+## 用法
+
+### 基础用法
+
+在根上传入 `value` 与 `onChange`；`Input` 与 `ClearButton` 通过上下文消费。
+
+```tsx
+<SearchField value={searchValue} onChange={setSearchValue}>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+</SearchField>
+```
+
+### 标签与说明
+
+在 `Group` 外放置 `Label`、`Description` 以补充语义。
+
+```tsx
+<SearchField value={searchValue} onChange={setSearchValue}>
+  <Label>查找商品</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+  <Description>按名称、分类或 SKU 搜索</Description>
+</SearchField>
+```
+
+### 校验
+
+在根上使用 `isInvalid`、`isRequired`，并配合 `FieldError` 展示错误。
+
+```tsx
+<SearchField
+  value={searchValue}
+  onChange={setSearchValue}
+  isRequired
+  isInvalid={isInvalid}
+>
+  <Label>搜索用户</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+  <Description hideOnInvalid>至少输入 3 个字符再搜索</Description>
+  <FieldError>未找到结果，请尝试其他关键词。</FieldError>
+</SearchField>
+```
+
+### 自定义搜索图标
+
+向 `SearchField.SearchIcon` 传入子节点替换默认图标。
+
+```tsx
+<SearchField value={searchValue} onChange={setSearchValue}>
+  <SearchField.Group>
+    <SearchField.SearchIcon>
+      <Text className="text-base">🔍</Text>
+    </SearchField.SearchIcon>
+    <SearchField.Input className="pl-10" />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+</SearchField>
+```
+
+### 禁用
+
+根上设置 `isDisabled`，通过上下文禁用子级。
+
+```tsx
+<SearchField value="之前的查询" isDisabled>
+  <Label>已禁用的搜索</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input />
+  </SearchField.Group>
+  <Description>搜索暂时不可用</Description>
+</SearchField>
+```
+
+## 示例
+
+```tsx
+import { Description, Label, SearchField } from 'heroui-native';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+export default function SearchFieldExample() {
+  const [searchValue, setSearchValue] = useState('');
+
+  return (
+    <View className="px-5">
+      <SearchField value={searchValue} onChange={setSearchValue}>
+        <Label>查找商品</Label>
+        <SearchField.Group>
+          <SearchField.SearchIcon />
+          <SearchField.Input />
+          <SearchField.ClearButton />
+        </SearchField.Group>
+        <Description>按名称、分类或 SKU 搜索</Description>
+      </SearchField>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/search-field.tsx>)。
+
+## API 参考
+
+### SearchField
+
+| prop           | type                      | default | description                                              |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `children`     | `React.ReactNode`         | -       | 搜索字段内的子节点                                       |
+| `value`        | `string`                  | -       | 受控搜索文本                                             |
+| `onChange`     | `(value: string) => void` | -       | 文本变化回调                                             |
+| `isDisabled`   | `boolean`                 | `false` | 是否禁用                                                 |
+| `isInvalid`    | `boolean`                 | `false` | 是否非法                                                 |
+| `isRequired`   | `boolean`                 | `false` | 是否必填                                                 |
+| `className`    | `string`                  | -       | 额外的 class                                             |
+| `animation`    | `AnimationRootDisableAll` | -       | 搜索字段动画配置                                         |
+| `...ViewProps` | `ViewProps`               | -       | 支持 React Native `View` 的全部属性                      |
+
+#### AnimationRootDisableAll
+
+根动画配置，可为：
+
+- `"disable-all"`：禁用全部动画（含子级，级联）
+- `undefined`：使用默认动画
+
+### SearchField.Group
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 组内子节点                                         |
+| `className`    | `string`          | -       | 额外的 class                                       |
+| `...ViewProps` | `ViewProps`       | -       | 支持 React Native `View` 的全部属性                |
+
+### SearchField.SearchIcon
+
+| prop           | type                             | default | description                                                                        |
+| -------------- | -------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`                | -       | 自定义内容，替换默认搜索图标                                                       |
+| `className`    | `string`                         | -       | 额外的 class                                                                       |
+| `iconProps`    | `SearchFieldSearchIconIconProps` | -       | 自定义默认搜索图标（提供 `children` 时忽略）                                       |
+| `...ViewProps` | `ViewProps`                      | -       | 支持 React Native `View` 的全部属性                                                |
+
+#### SearchFieldSearchIconIconProps
+
+| prop    | type     | default             | description |
+| ------- | -------- | ------------------- | ----------- |
+| `size`  | `number` | `16`                | 图标尺寸    |
+| `color` | `string` | 主题的 `muted` 色   | 图标颜色    |
+
+### SearchField.Input
+
+在 [Input](./input) 属性之上带有搜索默认值（`placeholder="Search..."`、`returnKeyType="search"`、`accessibilityRole="search"`）。不提供 `value` 与 `onChangeText`，由 `SearchField` 上下文提供。
+
+### SearchField.ClearButton
+
+受控 `value` 为空字符串时自动隐藏；按下时调用上下文的 `onChange("")`。若额外传入 `onPress`，会在清空后调用。
+
+| prop             | type                              | default | description                                      |
+| ---------------- | --------------------------------- | ------- | ------------------------------------------------ |
+| `children`       | `React.ReactNode`                 | -       | 自定义内容，替换默认关闭图标                     |
+| `iconProps`      | `SearchFieldClearButtonIconProps` | -       | 清除按钮图标属性                                 |
+| `className`      | `string`                          | -       | 额外的 class                                     |
+| `...ButtonProps` | `ButtonRootProps`                 | -       | 支持 Button 根级全部属性                         |
+
+#### SearchFieldClearButtonIconProps
+
+| prop    | type     | default             | description |
+| ------- | -------- | ------------------- | ----------- |
+| `size`  | `number` | `14`                | 图标尺寸    |
+| `color` | `string` | 主题的 `muted` 色   | 图标颜色    |
+
+## Hooks
+
+### useSearchField
+
+访问搜索字段上下文，必须在 `SearchField` 内使用。
+
+```tsx
+import { useSearchField } from 'heroui-native';
+
+const { value, onChange, isDisabled, isInvalid, isRequired } = useSearchField();
+```
+
+#### 返回值
+
+| property     | type                                     | description           |
+| ------------ | ---------------------------------------- | --------------------- |
+| `value`      | `string \| undefined`                    | 当前受控搜索文本      |
+| `onChange`   | `((value: string) => void) \| undefined` | 更新搜索文本的回调    |
+| `isDisabled` | `boolean`                                | 是否禁用              |
+| `isInvalid`  | `boolean`                                | 是否非法              |
+| `isRequired` | `boolean`                                | 是否必填              |

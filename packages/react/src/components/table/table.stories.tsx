@@ -228,29 +228,6 @@ const statusColorMap: Record<string, "success" | "danger" | "warning"> = {
   "On Leave": "warning",
 };
 
-function SortableColumnHeader({
-  children,
-  sortDirection,
-}: {
-  children: React.ReactNode;
-  sortDirection?: "ascending" | "descending";
-}) {
-  return (
-    <span className="flex items-center justify-between">
-      {children}
-      {!!sortDirection && (
-        <Icon
-          icon="gravity-ui:chevron-up"
-          className={cn(
-            "size-3 transform transition-transform duration-100 ease-out",
-            sortDirection === "descending" ? "rotate-180" : "",
-          )}
-        />
-      )}
-    </span>
-  );
-}
-
 /**
  * Shared template for Default and SecondaryVariant stories.
  */
@@ -294,31 +271,39 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
             <Table.Header>
               <Table.Column className="pr-0">
                 <Checkbox aria-label="Select all" slot="selection">
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox.Content>
                 </Checkbox>
               </Table.Column>
               <Table.Column allowsSorting isRowHeader className="after:hidden" id="id">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
                     Worker ID
-                  </SortableColumnHeader>
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column allowsSorting id="name">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>Member</SortableColumnHeader>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
+                    Member
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column allowsSorting id="role">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>Role</SortableColumnHeader>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
+                    Role
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column allowsSorting id="status">
                 {({sortDirection}) => (
-                  <SortableColumnHeader sortDirection={sortDirection}>Status</SortableColumnHeader>
+                  <Table.SortableColumnHeader sortDirection={sortDirection}>
+                    Status
+                  </Table.SortableColumnHeader>
                 )}
               </Table.Column>
               <Table.Column className="text-end">Actions</Table.Column>
@@ -332,9 +317,11 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
                       slot="selection"
                       variant="secondary"
                     >
-                      <Checkbox.Control>
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
+                      <Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox.Content>
                     </Checkbox>
                   </Table.Cell>
                   <Table.Cell className="font-medium">
@@ -508,9 +495,11 @@ const DynamicWithSelectionTemplate = () => {
             <Table.Header>
               <Table.Column>
                 <Checkbox aria-label="Select all" slot="selection">
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox.Content>
                 </Checkbox>
               </Table.Column>
               <Table.Collection items={columns}>
@@ -528,9 +517,11 @@ const DynamicWithSelectionTemplate = () => {
                       slot="selection"
                       variant="secondary"
                     >
-                      <Checkbox.Control>
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
+                      <Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox.Content>
                     </Checkbox>
                   </Table.Cell>
                   <Table.Collection items={columns}>
@@ -777,7 +768,7 @@ export const Virtualization: Story = {
           <Table.ScrollContainer>
             <Table.Content
               aria-label="Virtualized table with 1000 rows"
-              className="h-[500px] min-w-[700px] overflow-auto"
+              className="h-[500px] min-w-[700px] overflow-auto scrollbar"
             >
               <Table.Header className="h-full w-full">
                 <Table.Column isRowHeader id="name" minWidth={160}>

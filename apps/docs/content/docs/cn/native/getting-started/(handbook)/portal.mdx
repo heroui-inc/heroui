@@ -1,0 +1,143 @@
+---
+title: Portal
+icon: windows
+---
+
+Portal 可将子节点渲染到应用中的其他位置，特别适用于需要浮在其他内容之上的组件，例如模态框、覆盖层与弹出层。
+
+## 默认配置
+
+默认情况下，`PortalHost` 已包含在 `HeroUINativeProvider` 中，无需手动添加。Provider 会自动为所有使用 Portal 的组件设置好Portal系统。
+
+## 进阶用法
+
+如需自定义Portal实现，可直接从 `heroui-native` 导入 `Portal` 与 `PortalHost`：
+
+```tsx
+import { Portal, PortalHost } from "heroui-native";
+import { View, Text } from "react-native";
+
+function AppLayout() {
+  return (
+    <View className="flex-1">
+      <View className="p-5">
+        <Text>Header Content</Text>
+      </View>
+      
+      <View className="flex-1 p-5">
+        <Text>Main Content Area</Text>
+        <CustomNotification />
+      </View>
+      
+      {/* Portal host positioned at the top of the screen */}
+      <PortalHost name="notification-host" />
+    </View>
+  );
+}
+
+function CustomNotification() {
+  return (
+    <Portal name="notification-portal" hostName="notification-host">
+      <View className="absolute top-0 left-0 right-0 bg-blue-500 p-4">
+        <Text>This notification appears at the top via Portal</Text>
+      </View>
+    </Portal>
+  );
+}
+```
+
+本例中，`CustomNotification` 组件通过 `Portal` 将内容渲染到位于屏幕顶部的 `PortalHost` 处，使通知浮于所有其他内容之上，无论它在组件树中的实际定义位置在哪。
+
+## 状态管理注意事项
+
+父组件中的状态变化可能导致Portal内组件出现意外问题。例如，将文本输入框直接放入Portal内时，若父组件触发重渲染，可能会重置输入框的自动建议，或导致其他界面异常。
+
+为避免该问题，请将交互组件（如输入框）的状态保留在Portal内部：把Portal内容拆分为独立组件，从而隔离父组件重渲染带来的影响。
+
+### 示例模式
+
+```tsx
+// ❌ 问题：父级状态导致重渲染，影响Portal内内容
+function ParentComponent() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [inputValue, setInputValue] = useState(""); // State in parent
+  
+  return (
+    <Dialog isOpen={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog.Trigger>
+        <Button>Open Dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Input 
+          value={inputValue} 
+          onChangeText={setInputValue} 
+          // Parent re-renders reset auto-suggestions
+        />
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+
+// ✅ 正确：在Portal内的独立组件中管理状态
+function ParentComponent() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  
+  return (
+    <Dialog isOpen={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog.Trigger>
+        <Button>Open Dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <DialogFormContent 
+          onClose={() => setDialogOpen(false)} 
+          // Form state isolated from parent
+        />
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+
+function DialogFormContent({ onClose }: { onClose: () => void }) {
+  const [inputValue, setInputValue] = useState(""); // State inside portal
+  const [error, setError] = useState("");
+  
+  return (
+    <Dialog.Content>
+      <Input 
+        value={inputValue} 
+        onChangeText={setInputValue}
+        // Auto-suggestions preserved during parent re-renders
+      />
+      <FieldError>{error}</FieldError>
+      <Button onPress={onClose}>Close</Button>
+    </Dialog.Content>
+  );
+}
+```
+
+在正确示例中，`DialogFormContent` 独立于父组件管理自身状态。这样即便父组件因 `dialogOpen` 等变化而重渲染，也不会影响输入框的内部状态，从而保留自动建议等输入行为。
+
+## API 参考
+
+### PortalHost
+
+默认情况下，所有 `Portal` 组件的子内容都会作为该 `PortalHost` 的子节点进行渲染。
+
+| prop | type     | description                                                      |
+|------|----------|------------------------------------------------------------------|
+| name | `string` | 作为自定义宿主使用时提供（可选） |
+
+### Portal
+
+| prop      | type     | description                                                      |
+|-----------|----------|------------------------------------------------------------------|
+| name*     | `string` | 唯一值；同名 Portal 会替换原有 Portal                          |
+| hostName  | `string` | 子内容需要渲染到自定义宿主时提供（可选）                       |
+| children  | `React.ReactNode` | 要渲染到Portal中的内容                                   |
+
+\* 必填属性
+
+## 相关链接
+
+- [快速开始](/docs/native/getting-started/quick-start) — 基础搭建指南
+- 查阅 [Provider](/docs/native/getting-started/provider) 文档

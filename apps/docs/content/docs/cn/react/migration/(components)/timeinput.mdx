@@ -1,0 +1,266 @@
+---
+title: TimeInput
+description: TimeInput → TimeField 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 TimeField 文档](/docs/react/components/time-field)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，TimeInput 是单个组件，通过 prop 配置：
+
+```tsx
+import { TimeInput } from "@heroui/react";
+
+export default function App() {
+  return <TimeInput label="Time" name="time" />;
+}
+```
+
+在 v3 中，TimeField 改为复合组件，需要配合 DateInputGroup 与分段（segment）的 render prop：
+
+```tsx
+import { TimeField, DateInputGroup, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <TimeField className="w-[256px]" name="time">
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </TimeField>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件命名
+
+**v2：** `TimeInput`  
+**v3：** `TimeField`
+
+### 2. 组件结构
+
+**v2：** 单个组件，通过 prop 配置  
+**v3：** 复合组件：`TimeField`（根）+ `DateInputGroup` 与 `DateInputGroup.Input`（render prop）+ `DateInputGroup.Segment`；可选地搭配 `DateInputGroup.Prefix` 与 `DateInputGroup.Suffix`
+
+### 3. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `label` | — | 改用 `Label` 组件 |
+| `description` | — | 改用 `Description` 组件 |
+| `errorMessage` | — | 改用 `FieldError` 组件 |
+| `value`、`defaultValue`、`onChange` | `TimeField` | 与 React Aria 一致 |
+| `minValue`、`maxValue`、`granularity`、`placeholderValue` | `TimeField` | 相同 |
+| `isRequired`、`isDisabled`、`isReadOnly`、`isInvalid`、`name` | `TimeField` | 相同 |
+| `validationBehavior`、`shouldForceLeadingZeros` | `TimeField` | 相同 |
+| `variant` | `DateInputGroup` | 简化为仅 `primary` \| `secondary` |
+| `fullWidth` | `TimeField` 或 `DateInputGroup` | 设置在根或分组上 |
+| `color` | — | 已移除（请改用 Tailwind CSS） |
+| `size` | — | 已移除（请改用 Tailwind CSS） |
+| `radius` | — | 已移除（请改用 Tailwind CSS） |
+| `labelPlacement` | — | 通过布局自行处理 |
+| `startContent` | `DateInputGroup.Prefix` | 改用 Prefix 子组件 |
+| `endContent` | `DateInputGroup.Suffix` | 改用 Suffix 子组件 |
+| `classNames` | — | 在 `TimeField` 与 `DateInputGroup` 各部分上使用 `className` |
+| `groupProps` | — | 在 `DateInputGroup` 上使用 `className` 或标准 DOM 属性 |
+| `labelProps` | — | 在 `Label` 上使用 `className` |
+| `fieldProps` | — | 在 `DateInputGroup` 上使用 `className` |
+| `innerWrapperProps` | — | 在分组 / 输入相关部分上使用 `className` |
+| `descriptionProps` | — | 在 `Description` 上使用 `className` |
+| `errorMessageProps` | — | 在 `FieldError` 上使用 `className` |
+| `inputRef` | — | 由 `TimeField` / React Aria 处理 ref |
+
+## 迁移示例
+
+### 带描述与错误信息
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <TimeInput
+      description="Select start time"
+      label="Start time"
+      name="startTime"
+    />
+
+    <TimeInput
+      errorMessage="Please enter a valid time"
+      isInvalid
+      label="Time"
+      name="time"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError, Label } from "@heroui/react";
+
+    <TimeField className="w-[256px]" name="startTime">
+      <Label>Start time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <Description>Select start time</Description>
+    </TimeField>
+
+    <TimeField className="w-[256px]" isInvalid name="time">
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+      <FieldError>Please enter a valid time</FieldError>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseTime } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState(null);
+
+    <TimeInput
+      label="Time"
+      name="time"
+      value={value}
+      onChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import type { TimeValue } from "@internationalized/date";
+    import { useState } from "react";
+
+    const [value, setValue] = useState<TimeValue | null>(null);
+
+    <TimeField
+      className="w-[256px]"
+      name="time"
+      value={value}
+      onChange={setValue}
+    >
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+### 最小 / 最大值与粒度
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { parseTime } from "@internationalized/date";
+
+    <TimeInput
+      granularity="minute"
+      label="Time"
+      maxValue={parseTime("18:00")}
+      minValue={parseTime("09:00")}
+      name="time"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { parseTime } from "@internationalized/date";
+
+    <TimeField
+      className="w-[256px]"
+      granularity="minute"
+      maxValue={parseTime("18:00")}
+      minValue={parseTime("09:00")}
+      name="time"
+    >
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+      </DateInputGroup>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+### Start / End 内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <TimeInput
+      endContent={<ClockIcon />}
+      label="Time"
+      name="time"
+      startContent={<ClockIcon />}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <TimeField className="w-[256px]" name="time">
+      <Label>Time</Label>
+      <DateInputGroup>
+        <DateInputGroup.Prefix>
+          <ClockIcon />
+        </DateInputGroup.Prefix>
+        <DateInputGroup.Input>
+          {(segment) => <DateInputGroup.Segment segment={segment} />}
+        </DateInputGroup.Input>
+        <DateInputGroup.Suffix>
+          <ClockIcon />
+        </DateInputGroup.Suffix>
+      </DateInputGroup>
+    </TimeField>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件结构
+
+v3 TimeField 遵循以下结构：
+
+```
+TimeField (Root)
+  ├── Label (optional)
+  ├── DateInputGroup
+  │   ├── DateInputGroup.Prefix (optional)
+  │   ├── DateInputGroup.Input → (segment) => DateInputGroup.Segment
+  │   └── DateInputGroup.Suffix (optional)
+  ├── Description (optional)
+  └── FieldError (optional)
+```
+
+## 总结
+
+1. **组件重命名**：`TimeInput` → `TimeField`
+2. **组件结构**：必须使用复合组件：`TimeField`（根）配合 `DateInputGroup` 与 `DateInputGroup.Input`（render prop）+ `DateInputGroup.Segment`
+3. **标签 / 描述 / 错误**：改用独立组件（`Label`、`Description`、`FieldError`）
+4. **时间相关 prop 不变**：`value`、`defaultValue`、`onChange`、`minValue`、`maxValue`、`granularity`、`placeholderValue`、`isRequired`、`isDisabled`、`isInvalid`、`name`、`validationBehavior`、`shouldForceLeadingZeros` 继续保留在 `TimeField` 上
+5. **DateInputGroup 的变体**：v3 仅支持 `DateInputGroup` 上的 `variant="primary"` 与 `variant="secondary"`；`color`、`size`、`radius` 已移除——请改用 Tailwind CSS
+6. **Start / End 内容**：`startContent` / `endContent` → `DateInputGroup.Prefix` 与 `DateInputGroup.Suffix`
+7. **移除 labelPlacement**：`labelPlacement` 已移除——请通过布局自行实现
+8. **DOM / className prop**：`groupProps`、`labelProps`、`fieldProps`、`classNames` 已移除——请在相关部分使用 `className`（以及标准 DOM 属性）

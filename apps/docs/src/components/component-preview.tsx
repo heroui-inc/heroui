@@ -14,6 +14,12 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: string;
   hideCode?: boolean;
   minHeight?: string;
+  /**
+   * Locale used to resolve which demo registry to read from. Falls back to the
+   * default locale (en) if the requested translation is missing. Usually
+   * injected by the page route via `getMDXComponents` overrides.
+   */
+  locale?: string;
 }
 
 export function ComponentPreview({
@@ -22,11 +28,12 @@ export function ComponentPreview({
   description,
   hideCode = false,
   isBgSolid = false,
+  locale,
   minHeight,
   name,
   ...props
 }: ComponentPreviewProps) {
-  const demo = getDemo(name);
+  const demo = getDemo(name, locale);
 
   if (!demo) {
     return (
@@ -53,7 +60,9 @@ export function ComponentPreview({
       {...props}
     >
       <Component />
-      {!hideCode && !!demo.file && <ComponentSource language="tsx" name={name} title={name} />}
+      {!hideCode && !!demo.file && (
+        <ComponentSource language="tsx" locale={locale} name={name} title={name} />
+      )}
     </ComponentPreviewContainer>
   );
 }

@@ -1,0 +1,93 @@
+---
+title: v3.0.2
+description: 修复了多个 bug，Drawer 过渡更平滑，新增 --backdrop 主题变量，并优化了 trigger、arrow 与 Tag 的样式。
+github:
+  pull: 6364
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 4 月 3 日</span>
+</div>
+
+补丁版本，包含若干 bug 修复、样式优化，以及新增的 `--backdrop` 主题变量。Drawer 过渡已重写为原生 CSS，动画更加平滑。浮层触发器现在以 `inline-block` 形式呈现，Tooltip 和 Popover 的默认箭头形状也已更新。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### `--backdrop` 主题变量
+
+新增用于浮层背景遮罩的 `--backdrop` CSS 变量（[#6375](https://github.com/heroui-inc/heroui/pull/6375)）。浅色主题默认值为 `rgba(0, 0, 0, 0.5)`，深色主题为 `rgba(0, 0, 0, 0.6)`。[Modal](/docs/components/modal)、[AlertDialog](/docs/components/alert-dialog) 与 [Drawer](/docs/components/drawer) 现在都引用该变量，而不再使用硬编码的值。
+
+可以在全局进行覆写：
+
+```css
+:root {
+  --backdrop: rgba(0, 0, 0, 0.7);
+}
+```
+
+也可以直接使用对应的工具类 `bg-backdrop`。
+
+## 样式改进
+
+### Trigger 改用 `inline-block` 显示
+
+Popover、Tooltip、Dropdown、Modal、AlertDialog、Drawer 与 Disclosure 中的触发元素现在都会应用 `inline-block`，避免触发器包裹行内内容时出现布局塌陷的问题（[#6373](https://github.com/heroui-inc/heroui/pull/6373)）。
+
+### Tooltip 与 Popover 的箭头
+
+默认箭头的 SVG 路径已从二次贝塞尔曲线改为三次贝塞尔曲线，形状更平滑、更自然（[#6372](https://github.com/heroui-inc/heroui/pull/6372)）。
+
+### Tag 的间距
+
+为提升可读性，Tag 在 `sm`（由 `px-1` 改为 `px-2`）和 `md`（由 `px-1.5` 改为 `px-2`）尺寸下增加了水平内边距（[#6315](https://github.com/heroui-inc/heroui/pull/6315)）。
+
+## Bug 修复
+
+- **Autocomplete**：popover 上的 `--trigger-width` CSS 变量现在通过 `useResizeObserver` 跟踪触发元素的宽度，修复了下拉宽度不对齐的问题（[#6374](https://github.com/heroui-inc/heroui/pull/6374)）
+- **Drawer**：面板过渡已从 Tailwind 的 `animate-in` / `animate-out` 重写为原生的 CSS `translate` 过渡，使各种放置位置下的开关动画都更加平滑（[#6393](https://github.com/heroui-inc/heroui/pull/6393)）
+- **InputGroup**：secondary 变体的聚焦背景现在仅在实际的 input 或 textarea 获得焦点时才会触发，不再因组内任意可聚焦的子元素被聚焦而触发（[#6362](https://github.com/heroui-inc/heroui/pull/6362)）
+- **Tag**：Tag 内部的 `CloseButton` 现在带有显式的 `aria-label="Remove tag"`，可被屏幕阅读器正确识别（[#6341](https://github.com/heroui-inc/heroui/pull/6341)）
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [Figma Kit v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6364](https://github.com/heroui-inc/heroui/pull/6364)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

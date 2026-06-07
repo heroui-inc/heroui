@@ -1,0 +1,669 @@
+---
+title: 主题
+description: 使用 CSS 变量和全局样式自定义 HeroUI 的设计系统
+icon: palette
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI 使用 CSS 变量和 [BEM](https://getbem.com/) 类来实现主题化。你可以使用标准 CSS 自定义从颜色到组件样式的所有内容。
+
+<Callout type="info">
+  **想要创建你自己的主题？** 试试 [主题构建器](/themes)，以可视化方式自定义颜色、圆角、字体等，然后导出 CSS 用于你的项目。
+</Callout>
+
+## 工作原理
+
+HeroUI 的主题系统构建于 [Tailwind CSS v4](https://tailwindcss.com/docs/theme) 的主题之上。当你导入 `@heroui/styles` 时，它会使用 Tailwind 的内置调色板，将其映射到语义化变量，自动在浅色和深色主题之间切换，并使用 CSS 层和 `@theme` 指令进行组织。
+
+**命名规则：**
+- 不带后缀的颜色用作背景（例如 `--accent`）
+- 带 `-foreground` 后缀的颜色用于该背景上的文本（例如 `--accent-foreground`）
+
+## 快速开始
+
+**应用主题：** 将主题类添加到 HTML 并将颜色应用到 body 上：
+
+```html
+<html class="light" data-theme="light">
+  <body class="bg-background text-foreground">
+    <!-- Your app -->
+  </body>
+</html>
+```
+
+**切换主题：**
+```html
+<!-- Light theme -->
+<html class="light" data-theme="light">
+
+<!-- Dark theme -->
+<html class="dark" data-theme="dark">
+```
+
+**使用 [next-themes](https://github.com/pacocoursey/next-themes) 以编程方式切换主题（适用于 Next.js）：**
+
+首先，用 `ThemeProvider` 包装你的应用：
+
+```tsx
+// app/providers.tsx
+"use client";
+
+import { ThemeProvider } from "next-themes";
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="light">
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+```tsx
+// app/layout.tsx
+import { Providers } from "./providers";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-background text-foreground">
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+然后使用 `useTheme` 在主题之间切换：
+
+```tsx
+"use client";
+
+import { useTheme } from "next-themes";
+
+export function ThemeSwitch() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      Toggle {theme === "dark" ? "Light" : "Dark"} Mode
+    </button>
+  );
+}
+```
+
+**覆盖颜色：**
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+
+:root {
+  /* Override any color variable */
+  --accent: oklch(0.7 0.25 260);
+  --success: oklch(0.65 0.15 155);
+}
+```
+
+> **注意**：完整的调色板和视觉参考请参见 [颜色](/docs/handbook/colors)。
+
+> **深色模式**：如需基于 `next-themes` 与 HeroUI `useTheme` 钩子的完整配置指南，请参见 [深色模式](/docs/handbook/dark-mode)。
+
+**创建你自己的主题：**
+
+<CollapsibleCode lang="css" code={`/* src/themes/ocean.css */
+@layer base {
+    /* Ocean Light */
+    [data-theme="ocean"] {
+      color-scheme: light;
+
+      /* Primitive Colors (Do not change between light and dark) */
+      --white: oklch(100% 0 0);
+      --black: oklch(0% 0 0);
+      --snow: oklch(0.9911 0 0);
+      --eclipse: oklch(0.2103 0.0059 285.89);
+
+      /* Spacing & Layout */
+      --spacing: 0.25rem;
+      --border-width: 1px;
+      --field-border-width: 0px;
+      --disabled-opacity: 0.5;
+      --ring-offset-width: 2px;
+      --cursor-interactive: pointer;
+      --cursor-disabled: not-allowed;
+
+      /* Radius */
+      --radius: 0.75rem;
+      --field-radius: calc(var(--radius) * 1.5);
+
+      /* Base Colors */
+      --background: oklch(0.985 0.015 225);
+      --foreground: var(--eclipse);
+
+      /* Surface: Used for non-overlay components */
+      --surface: var(--white);
+      --surface-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components */
+      --overlay: var(--white);
+      --overlay-foreground: var(--foreground);
+
+      --muted: oklch(0.5517 0.0138 285.94);
+
+      --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+      --scrollbar-track: transparent;
+      --scrollbar-gutter: auto;
+      --scrollbar-width: thin;
+      --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      --scrollbar: var(--scrollbar-thumb);
+
+      --default: oklch(94% 0.001 286.375);
+      --default-foreground: var(--eclipse);
+
+      /* Ocean accent */
+      --accent: oklch(0.450 0.150 230);
+      --accent-foreground: var(--snow);
+
+      /* Form Field Defaults */
+      --field-background: var(--white);
+      --field-foreground: oklch(0.2103 0.0059 285.89);
+      --field-placeholder: var(--muted);
+      --field-border: transparent;
+
+      /* Status (kept compatible) */
+      --success: oklch(0.7329 0.1935 150.81);
+      --success-foreground: var(--eclipse);
+
+      --warning: oklch(0.7819 0.1585 72.33);
+      --warning-foreground: var(--eclipse);
+
+      --danger: oklch(0.6532 0.2328 25.74);
+      --danger-foreground: var(--snow);
+
+      /* Component Colors */
+      --segment: var(--white);
+      --segment-foreground: var(--foreground);
+
+      /* Misc */
+      --border: oklch(0.50 0.060 230 / 22%);
+      --separator: oklch(92% 0.004 286.32);
+      --focus: var(--accent);
+      --link: var(--accent);
+
+      /* Shadows */
+      --surface-shadow:
+        0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+        0 0 1px 0 rgba(0, 0, 0, 0.06);
+      --overlay-shadow: 0 4px 16px 0 rgba(24, 24, 27, 0.08), 0 8px 24px 0 rgba(24, 24, 27, 0.09);
+      --field-shadow:
+        0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+        0 0 1px 0 rgba(0, 0, 0, 0.06);
+
+      /* Skeleton Default Global Animation */
+      --skeleton-animation: shimmer; /* Possible values: shimmer, pulse, none */
+
+      /* Tooltip Default Delays */
+      --tooltip-delay: 1500ms;
+      --tooltip-close-delay: 500ms;
+    }
+
+    /* Ocean Dark */
+    [data-theme="ocean-dark"] {
+      color-scheme: dark;
+
+      /* Base Colors */
+      --background: oklch(0.140 0.020 230);
+      --foreground: var(--snow);
+
+      /* Surface: Used for non-overlay components */
+      --surface: oklch(0.2103 0.0059 285.89);
+      --surface-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components */
+      --overlay: oklch(0.22 0.0059 285.89);
+      --overlay-foreground: var(--foreground);
+
+      --muted: oklch(70.5% 0.015 286.067);
+
+      --scrollbar-thumb: color-mix(in oklch, var(--foreground) 15%, transparent);
+      --scrollbar-track: transparent;
+      --scrollbar-gutter: auto;
+      --scrollbar-width: thin;
+      --scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      --scrollbar: var(--scrollbar-thumb);
+
+      --default: oklch(27.4% 0.006 286.033);
+      --default-foreground: var(--snow);
+
+      /* Form Field Defaults */
+      --field-background: var(--default);
+      --field-foreground: var(--foreground);
+
+      /* Ocean accent */
+      --accent: oklch(0.860 0.080 230);
+      --accent-foreground: var(--eclipse);
+
+      /* Status */
+      --success: oklch(0.7329 0.1935 150.81);
+      --success-foreground: var(--eclipse);
+
+      --warning: oklch(0.8203 0.1388 76.34);
+      --warning-foreground: var(--eclipse);
+
+      --danger: oklch(0.594 0.1967 24.63);
+      --danger-foreground: var(--snow);
+
+      /* Component Colors */
+      --segment: oklch(0.3964 0.01 285.93);
+      --segment-foreground: var(--foreground);
+
+      /* Misc */
+      --border: oklch(22% 0.006 286.033);
+      --separator: oklch(22% 0.006 286.033);
+      --focus: var(--accent);
+      --link: var(--accent);
+
+      /* Shadows */
+      --surface-shadow: 0 0 0 0 transparent inset;
+      --overlay-shadow: 0 0 0 0 transparent inset;
+      --field-shadow: 0 0 0 0 transparent inset;
+    }
+}
+`}
+/>
+
+使用你的主题：
+
+```css
+/* app/globals.css */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@import "./src/themes/ocean.css" layer(theme); /* [!code highlight]*/
+```
+
+应用你的主题：
+
+```html
+<!-- index.html -->
+
+<!-- Light ocean -->
+<html data-theme="ocean">
+
+<!-- Dark ocean -->
+<html data-theme="ocean-dark">
+```
+
+## 自定义组件
+
+**全局组件样式：** 使用 BEM 类覆盖任何组件：
+
+```css
+@layer components {
+  /* Customize buttons */
+  .button {
+    @apply font-semibold tracking-wide;
+  }
+
+  .button--primary {
+    @apply bg-blue-600 hover:bg-blue-700;
+  }
+
+  /* Customize accordions */
+  .accordion__trigger {
+    @apply text-lg font-bold;
+  }
+}
+```
+
+> **注意**：完整的样式参考请参见 [样式](/docs/handbook/styling)。
+
+**查找组件类名：** 每个组件文档页面都会列出所有可用的类名（基类、修饰符、元素、状态）。示例：[Button 类名](/docs/components/button#css-classes)
+
+## 导入策略
+
+**完整导入（推荐）：** 两行代码即可获得全部内容：
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles";
+```
+
+**按需导入：** 只导入你需要的内容：
+
+```css
+/* Define layers */
+@layer theme, base, components, utilities;
+
+/* Base requirements */
+@import "tailwindcss";
+@import "@heroui/styles/base" layer(base);
+/* OR specific base file */
+@import "@heroui/styles/base/base.css" layer(base);
+
+/* Theme variables */
+@import "@heroui/styles/themes/shared/theme.css" layer(theme);
+@import "@heroui/styles/themes/default" layer(theme);
+/* OR specific theme files */
+@import "@heroui/styles/themes/default/index.css" layer(theme);
+@import "@heroui/styles/themes/default/variables.css" layer(theme);
+
+/* Components (all components) */
+@import "@heroui/styles/components" layer(components);
+/* OR specific component files */
+@import "@heroui/styles/components/index.css" layer(components);
+@import "@heroui/styles/components/button.css" layer(components);
+@import "@heroui/styles/components/accordion.css" layer(components);
+
+/* Utilities (optional) */
+@import "@heroui/styles/utilities" layer(utilities);
+
+/* Variants (optional) */
+@import "@heroui/styles/variants" layer(utilities);
+```
+
+> **注意**：目录导入（例如 `@heroui/styles/components`）会自动解析为其对应的 `index.css` 文件。使用显式文件路径（例如 `@heroui/styles/components/button.css`）来导入单个组件的样式。
+
+**Headless 模式：** 从头开始构建你自己的样式：
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles/base/base.css";
+
+/* Your custom styles */
+.button {
+  /* Your button styles */
+}
+```
+
+## 添加自定义颜色
+
+将你自己的语义化颜色添加到主题中：
+
+```css
+/* Define in both light and dark themes */
+:root,
+[data-theme="light"] {
+  --info: oklch(0.6 0.15 210);
+  --info-foreground: oklch(0.98 0 0);
+}
+
+.dark,
+[data-theme="dark"] {
+  --info: oklch(0.7 0.12 210);
+  --info-foreground: oklch(0.15 0 0);
+}
+
+/* Make the color available to Tailwind */
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+```
+
+现在你可以在组件中使用它：
+
+```tsx
+<div className="bg-info text-info-foreground">Info message</div>
+```
+
+## 变量参考
+
+HeroUI 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 中定义了三种类型的变量：
+
+1. **基础变量（Base Variables）** — 不会变化的值，例如 `--white`、`--black`、间距以及排版
+2. **主题变量（Theme Variables）** — 在浅色 / 深色主题之间切换的颜色，以及滚动条令牌（`--scrollbar-thumb`、`--scrollbar-width` 等）
+3. **计算变量（Calculated Variables）** — 悬停状态、柔和（soft）变体以及边框 / 分隔线层级（每个浅色 / 深色主题中的 **Calculated Colors** 区块，使用 `color-mix()` 计算）
+
+如需完整参考，请查阅：[颜色文档](/docs/handbook/colors)、[默认主题变量](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css)、[共享主题工具](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css)
+
+**Tailwind 主题桥接（`@theme inline`）：**
+
+[`themes/shared/theme.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/shared/theme.css) 将语义化变量映射为 Tailwind 令牌（`--color-*`、`--radius-*`、`--ease-*`）。计算颜色引用的是 `variables.css` 中的底层变量（例如 `--surface-hover`、`--accent-soft`）—— 它们并不会在该文件中通过 `color-mix()` 内联展开：
+<CollapsibleCode lang="css" code={`  @theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-surface: var(--surface);
+    --color-surface-foreground: var(--surface-foreground);
+    --color-surface-hover: var(--surface-hover);
+
+    --color-surface-secondary: var(--surface-secondary);
+    --color-surface-secondary-foreground: var(--surface-secondary-foreground);
+
+    --color-surface-tertiary: var(--surface-tertiary);
+    --color-surface-tertiary-foreground: var(--surface-tertiary-foreground);
+
+    --color-overlay: var(--overlay);
+    --color-overlay-foreground: var(--overlay-foreground);
+
+    --color-muted: var(--muted);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-segment: var(--segment);
+    --color-segment-foreground: var(--segment-foreground);
+
+    --color-border: var(--border);
+    --color-separator: var(--separator);
+    --color-focus: var(--focus);
+    --color-link: var(--link);
+
+    --color-default: var(--default);
+    --color-default-foreground: var(--default-foreground);
+
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+
+    --color-danger: var(--danger);
+    --color-danger-foreground: var(--danger-foreground);
+
+    --color-backdrop: var(--backdrop);
+
+    --shadow-surface: var(--surface-shadow);
+    --shadow-overlay: var(--overlay-shadow);
+    --shadow-field: var(--field-shadow);
+
+    /* 表单字段令牌 */
+    --color-field: var(--field-background, var(--default));
+    --color-field-hover: var(--field-hover);
+    --color-field-foreground: var(--field-foreground, var(--foreground));
+    --color-field-placeholder: var(--field-placeholder, var(--muted));
+    --color-field-border: var(--field-border, var(--border));
+    --radius-field: var(--field-radius, calc(var(--radius) * 1.5));
+    --border-width-field: var(--field-border-width, var(--border-width));
+
+    /* 颜色令牌 */
+    --color-background-secondary: var(--background-secondary);
+    --color-background-tertiary: var(--background-tertiary);
+    --color-background-inverse: var(--background-inverse);
+
+    --color-default-hover: var(--default-hover);
+    --color-accent-hover: var(--accent-hover);
+    --color-success-hover: var(--success-hover);
+    --color-warning-hover: var(--warning-hover);
+    --color-danger-hover: var(--danger-hover);
+
+    /* 表单字段颜色 */
+    --color-field-focus: var(--field-focus);
+    --color-field-border-hover: var(--field-border-hover);
+    --color-field-border-focus: var(--field-border-focus);
+
+    /* 柔和（Soft）颜色 */
+    --color-default-soft: var(--default-soft);
+    --color-default-soft-foreground: var(--default-soft-foreground);
+    --color-default-soft-hover: var(--default-soft-hover);
+
+    --color-accent-soft: var(--accent-soft);
+    --color-accent-soft-foreground: var(--accent-soft-foreground);
+    --color-accent-soft-hover: var(--accent-soft-hover);
+
+    --color-danger-soft: var(--danger-soft);
+    --color-danger-soft-foreground: var(--danger-soft-foreground);
+    --color-danger-soft-hover: var(--danger-soft-hover);
+
+    --color-warning-soft: var(--warning-soft);
+    --color-warning-soft-foreground: var(--warning-soft-foreground);
+    --color-warning-soft-hover: var(--warning-soft-hover);
+
+    --color-success-soft: var(--success-soft);
+    --color-success-soft-foreground: var(--success-soft-foreground);
+    --color-success-soft-hover: var(--success-soft-hover);
+
+    /* 分隔线颜色 - 层级 */
+    --color-separator-secondary: var(--separator-secondary);
+    --color-separator-tertiary: var(--separator-tertiary);
+
+    /* 边框颜色 - 层级 */
+    --color-border-secondary: var(--border-secondary);
+    --color-border-tertiary: var(--border-tertiary);
+
+    /* 圆角与默认尺寸 - 只需更改 --radius 即可调整默认值 */
+    --radius-xs: calc(var(--radius) * 0.25); /* 0.125rem (2px) */
+    --radius-sm: calc(var(--radius) * 0.5); /* 0.25rem (4px) */
+    --radius-md: calc(var(--radius) * 0.75); /* 0.375rem (6px) */
+    --radius-lg: calc(var(--radius) * 1); /* 0.5rem (8px) */
+    --radius-xl: calc(var(--radius) * 1.5); /* 0.75rem (12px) */
+    --radius-2xl: calc(var(--radius) * 2); /* 1rem (16px) */
+    --radius-3xl: calc(var(--radius) * 3); /* 1.5rem (24px) */
+    --radius-4xl: calc(var(--radius) * 4); /* 2rem (32px) */
+
+    /* 过渡缓动函数 */
+    --ease-smooth: ease; /* 等同于 transition: ease; */
+    /* 这些自定义曲线由 https://twitter.com/bdc 制作 */
+
+    /* 由平缓到快速 */
+    --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    /* 由慢到快 */
+    --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+    /* 自定义的平滑收尾曲线：快速启动、平滑结束 —— Apple 风格 */
+    --ease-out-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+    /* 由慢到快 */
+    --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+    --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+    --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+    /* 线性 */
+    --ease-linear: linear;
+
+    /* 动画 */
+    --animate-spin-fast: spin 0.75s linear infinite;
+    --animate-skeleton: skeleton 2s linear infinite;
+    --animate-caret-blink: caret-blink 1.2s ease-out infinite;
+
+    @keyframes skeleton {
+      100% {
+        transform: translateX(200%);
+      }
+    }
+
+    @keyframes caret-blink {
+      0%,
+      70%,
+      100% {
+        opacity: 1;
+      }
+      20%,
+      50% {
+        opacity: 0;
+      }
+    }
+  }
+`}
+/>
+
+表单控件依赖 `--field-*` 主题变量。悬停、聚焦及边框变体定义于 `variables.css` 的 **Calculated Colors** 区块中，并在 `theme.css` 中映射到 Tailwind 令牌（例如 `--color-field-hover: var(--field-hover)`）。在你的主题中覆盖 `--field-background`、`--field-hover` 及相关令牌，即可重新设计输入框、复选框、单选框和 OTP 输入槽的样式，而不会影响按钮或卡片等表面（surface）。
+
+## 滚动条
+
+HeroUI 为组件中的滚动区域（表格、弹出框、抽屉等）应用统一的滚动条样式。滚动条使用标准 CSS 属性（`scrollbar-width`、`scrollbar-color`、`scrollbar-gutter`），不再依赖 `::-webkit-scrollbar` 覆盖。
+
+**模式** — 在 `<html>`、组件根元素或滚动插槽上设置 `data-scrollbar`：
+
+| 模式 | `data-scrollbar` | 行为 |
+|------|------------------|------|
+| HeroUI 纤细 | *（未设置）* 或 `thin` | 使用主题令牌呈现的纤细滑块 |
+| 操作系统 / 浏览器 | `default` | 原生滚动条（`auto`） |
+| 隐藏 | `none` | 不显示滚动条（`scrollbar-width: none`） |
+
+```html
+<!-- 全局使用原生滚动条 -->
+<html data-scrollbar="default">
+
+<!-- 在某个子树中恢复 HeroUI 滚动条 -->
+<main data-scrollbar="thin">
+  ...
+</main>
+
+<!-- 在某个子树中隐藏滚动条（例如弹出框） -->
+<div data-scrollbar="none">
+  ...
+</div>
+```
+
+**主题变量** — 在 [`variables.css`](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/themes/default/variables.css) 的浅色与深色主题区块中定义：
+
+| 变量 | 描述 |
+|------|------|
+| `--scrollbar-thumb` | 滑块颜色（默认通过 `color-mix` 混入 15% 的 `--foreground`） |
+| `--scrollbar-track` | 轨道颜色（默认 `transparent`） |
+| `--scrollbar-gutter` | 滚动条间隙（默认 `auto`） |
+| `--scrollbar-width` | `scrollbar-width` 属性（默认 `thin`） |
+| `--scrollbar-color` | `scrollbar-color` 属性（默认为滑块颜色 + 轨道颜色） |
+| `--scrollbar` | `--scrollbar-thumb` 的旧版别名 |
+
+**全局自定义：**
+
+```css
+/* app/globals.css */
+:root {
+  --scrollbar-thumb: color-mix(in oklch, var(--accent) 30%, transparent);
+  --scrollbar-gutter: auto;
+}
+```
+
+**按滚动插槽** — 在组件上传入 `data-scrollbar`，或在外层包裹元素上覆盖相关令牌：
+
+```tsx
+<Table data-scrollbar="default">
+  ...
+</Table>
+
+<Drawer.Content data-scrollbar="thin" />
+
+<Calendar.YearPickerGrid data-scrollbar="none" />
+```
+
+**自定义溢出区域** — 在自己的元素上使用 `@heroui/styles` 提供的 `scrollbar`、`scrollbar-thin`、`scrollbar-default` 或 `scrollbar-none` 工具类。基于类的覆盖方式详见 [样式](/docs/handbook/styling)。
+
+> **注意**：部分组件默认隐藏滚动条（日期选择器弹出框、颜色选择器、次级标签页）。嵌套的滚动插槽（例如日期选择器内部的日历年份选择器）会保留 HeroUI 滚动条，因为 `scrollbar-none` 只作用于其所在的元素本身，不会影响使用 `@apply scrollbar` 的后代元素。
+
+## 资源
+
+- [颜色文档](/docs/handbook/colors)
+- [样式指南](/docs/handbook/styling)
+- [Tailwind CSS v4 主题](https://tailwindcss.com/docs/theme)
+- [BEM 方法论](https://getbem.com/)
+- [OKLCH 颜色工具](https://oklch.com)

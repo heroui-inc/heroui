@@ -1,0 +1,218 @@
+---
+title: Skeleton 骨架屏
+description: 展示加载占位，支持微光（shimmer）或脉冲（pulse）等动画效果。
+links:
+  source_native: skeleton/skeleton.tsx
+  styles_native: skeleton/skeleton.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/skeleton-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/skeleton-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Skeleton } from 'heroui-native';
+```
+
+## 结构
+
+Skeleton 为简单包装器，在内容加载时渲染占位，无子部件 API。
+
+```tsx
+<Skeleton />
+```
+
+## 用法
+
+### 基础用法
+
+在内容加载期间显示带动画的占位。
+
+```tsx
+<Skeleton className="h-20 w-full rounded-lg" />
+```
+
+### 与内容切换
+
+加载中显示 Skeleton，就绪后显示真实内容。
+
+```tsx
+<Skeleton isLoading={isLoading} className="h-20 rounded-lg">
+  <View className="h-20 bg-primary rounded-lg">
+    <Text>Loaded Content</Text>
+  </View>
+</Skeleton>
+```
+
+### 动画变体
+
+用 `variant` 控制动画样式。
+
+```tsx
+<Skeleton variant="shimmer" className="h-20 w-full rounded-lg" />
+<Skeleton variant="pulse" className="h-20 w-full rounded-lg" />
+<Skeleton variant="none" className="h-20 w-full rounded-lg" />
+```
+
+### 自定义微光
+
+自定义时长、速度与高光色。
+
+```tsx
+<Skeleton
+  className="h-16 w-full rounded-lg"
+  variant="shimmer"
+  animation={{
+    shimmer: {
+      duration: 2000,
+      speed: 2,
+      highlightColor: 'rgba(59, 130, 246, 0.3)',
+    },
+  }}
+>
+  ...
+</Skeleton>
+```
+
+### 自定义脉冲
+
+配置脉冲时长与不透明度范围。
+
+```tsx
+<Skeleton
+  className="h-16 w-full rounded-lg"
+  variant="pulse"
+  animation={{
+    pulse: {
+      duration: 500,
+      minOpacity: 0.1,
+      maxOpacity: 0.8,
+    },
+  }}
+>
+  ...
+</Skeleton>
+```
+
+### 形状变化
+
+通过 `className` 控制占位形状。
+
+```tsx
+<Skeleton className="h-4 w-full rounded-md" />
+<Skeleton className="h-4 w-3/4 rounded-md" />
+<Skeleton className="h-4 w-1/2 rounded-md" />
+<Skeleton className="size-12 rounded-full" />
+```
+
+### 自定义进出场
+
+Skeleton 出现或消失时使用自定义 Reanimated 过渡。
+
+```tsx
+<Skeleton
+  entering={FadeIn.duration(300)}
+  exiting={FadeOut.duration(300)}
+  isLoading={isLoading}
+  className="h-20 w-full rounded-lg"
+>
+  ...
+</Skeleton>
+```
+
+## 示例
+
+```tsx
+import { Avatar, Card, Skeleton } from 'heroui-native';
+import { useState } from 'react';
+import { Image, Text, View } from 'react-native';
+
+export default function SkeletonExample() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <Card className="p-4">
+      <View className="flex-row items-center gap-3 mb-4">
+        <Skeleton isLoading={isLoading} className="h-10 w-10 rounded-full">
+          <Avatar size="sm" alt="Avatar">
+            <Avatar.Image source={{ uri: 'https://i.pravatar.cc/150?img=4' }} />
+            <Avatar.Fallback />
+          </Avatar>
+        </Skeleton>
+
+        <View className="flex-1 gap-1">
+          <Skeleton isLoading={isLoading} className="h-3 w-32 rounded-md">
+            <Text className="font-semibold text-foreground">John Doe</Text>
+          </Skeleton>
+          <Skeleton isLoading={isLoading} className="h-3 w-24 rounded-md">
+            <Text className="text-sm text-muted">@johndoe</Text>
+          </Skeleton>
+        </View>
+      </View>
+
+      <Skeleton
+        isLoading={isLoading}
+        className="h-48 w-full rounded-lg"
+        animation={{
+          shimmer: {
+            duration: 1500,
+            speed: 1,
+          },
+        }}
+      >
+        <View className="h-48 bg-surface-tertiary rounded-lg overflow-hidden">
+          <Image
+            source={{
+              uri: 'https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/backgrounds/cards/car1.jpg',
+            }}
+            className="h-full w-full"
+          />
+        </View>
+      </Skeleton>
+    </Card>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/skeleton.tsx)。
+
+## API 参考
+
+### Skeleton
+
+| prop                    | type                             | default     | description                                                  |
+| ----------------------- | -------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode`                | -           | 非加载态时显示的内容                                         |
+| `isLoading`             | `boolean`                        | `true`      | 是否处于加载中                                               |
+| `variant`               | `'shimmer' \| 'pulse' \| 'none'` | `'shimmer'` | 动画变体                                                     |
+| `animation`             | `SkeletonRootAnimation`          | -           | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                        | `true`      | 是否启用 Reanimated 动画样式                                 |
+| `className`             | `string`                         | -           | 额外样式 class                                               |
+| `...Animated.ViewProps` | `AnimatedProps<ViewProps>`       | -           | 支持 Reanimated `Animated.View` 的全部属性                  |
+
+#### SkeletonRootAnimation
+
+Skeleton 根动画配置，可为：
+
+- `false` 或 `"disabled"`：仅关闭根动画
+- `"disable-all"`：关闭所有动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                     | type                                     | default                     | description                                     |
+| ------------------------ | ---------------------------------------- | --------------------------- | ----------------------------------------------- |
+| `state`                  | `'disabled' \| 'disable-all' \| boolean` | -                           | 关闭动画的同时仍允许自定义属性                  |
+| `entering.value`         | `EntryOrExitLayoutType`                  | `FadeIn`                    | 自定义进入动画                                  |
+| `exiting.value`          | `EntryOrExitLayoutType`                  | `FadeOut`                   | 自定义退出动画                                  |
+| `shimmer.duration`       | `number`                                 | `1500`                      | 动画时长（毫秒）                                |
+| `shimmer.speed`          | `number`                                 | `1`                         | 速度倍率                                        |
+| `shimmer.highlightColor` | `string`                                 | -                           | 微光高光色                                      |
+| `shimmer.easing`         | `EasingFunction`                         | `Easing.linear`             | 缓动函数                                        |
+| `pulse.duration`         | `number`                                 | `1000`                      | 动画时长（毫秒）                                |
+| `pulse.minOpacity`       | `number`                                 | `0.5`                       | 最小不透明度                                    |
+| `pulse.maxOpacity`       | `number`                                 | `1`                         | 最大不透明度                                    |
+| `pulse.easing`           | `EasingFunction`                         | `Easing.inOut(Easing.ease)` | 缓动函数                                        |

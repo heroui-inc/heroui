@@ -1,0 +1,197 @@
+---
+title: Badge 徽标
+description: 展示相对其他元素定位的小型指示器，常用于未读数、状态点与标签等场景。
+links:
+  source: badge/badge.tsx
+  styles: badge.css
+  storybook: Components/Data Display/Badge
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Badge } from '@heroui/react';
+```
+
+## 组件结构
+
+Badge 通过 `Badge.Anchor` 相对另一个元素定位。纯文本子节点会自动包在 `<Badge.Label>` 中。
+
+> 若需要独立展示标签，请改用 [Chip](/docs/react/components/chip) 组件。
+
+```tsx
+<Badge.Anchor>
+  <Avatar />
+  <Badge color="danger">5</Badge>
+</Badge.Anchor>
+```
+
+### 用法
+
+<ComponentPreview
+  name="badge-basic"
+/>
+
+### 颜色
+
+<ComponentPreview
+  name="badge-colors"
+/>
+
+### 尺寸
+
+<ComponentPreview
+  name="badge-sizes"
+/>
+
+### 变体
+
+<ComponentPreview
+  name="badge-variants"
+/>
+
+### 位置
+
+<ComponentPreview
+  name="badge-placements"
+/>
+
+### 带内容
+
+Badge 支持以文本、数字与图标作为内容。未提供子节点时，会渲染为点状指示器。
+
+<ComponentPreview
+  name="badge-with-content"
+/>
+
+### 点状 Badge
+
+空的 Badge 可作为状态指示器，适用于在线/离线状态或活动信号等场景。
+
+<ComponentPreview
+  name="badge-dot"
+/>
+
+<RelatedComponents component="badge" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以为根容器与各插槽分别添加类名：
+
+```tsx
+import {Badge, Avatar} from '@heroui/react';
+
+function CustomBadge() {
+  return (
+    <Badge.Anchor>
+      <Avatar />
+      <Badge className="border-2 border-white" color="danger">
+        <Badge.Label className="font-bold">99+</Badge.Label>
+      </Badge>
+    </Badge.Anchor>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Badge 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .badge {
+    @apply rounded-full text-xs;
+  }
+
+  .badge__label {
+    @apply font-semibold;
+  }
+
+  .badge--accent {
+    @apply shadow-sm;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Badge 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/badge.css)）：
+
+#### 基础类
+- `.badge` - Badge 容器基础样式
+- `.badge__label` - 标签文本插槽样式
+- `.badge-anchor` - 锚定元素的定位包裹层
+
+#### 颜色类
+- `.badge--accent` - 强调颜色变体
+- `.badge--danger` - 危险颜色变体
+- `.badge--default` - 默认颜色变体
+- `.badge--success` - 成功颜色变体
+- `.badge--warning` - 警告颜色变体
+
+#### 变体类
+- `.badge--primary` - Primary 变体，实心背景
+- `.badge--secondary` - Secondary 变体，默认背景
+- `.badge--soft` - Soft 变体，浅色背景
+
+#### 尺寸类
+- `.badge--sm` - 小尺寸
+- `.badge--md` - 中尺寸（默认）
+- `.badge--lg` - 大尺寸
+
+#### 位置类
+- `.badge--top-right` - 右上角（默认）
+- `.badge--top-left` - 左上角
+- `.badge--bottom-right` - 右下角
+- `.badge--bottom-left` - 左下角
+
+#### 复合变体类
+
+Badge 支持组合变体与颜色类（例如 `.badge--primary.badge--accent`）。以下组合定义了默认样式：
+
+**Primary 变体：**
+- `.badge--primary.badge--accent` - Primary + 强调色，实心背景
+- `.badge--primary.badge--default` - Primary + 默认色，实心背景
+- `.badge--primary.badge--success` - Primary + 成功色，实心背景
+- `.badge--primary.badge--warning` - Primary + 警告色，实心背景
+- `.badge--primary.badge--danger` - Primary + 危险色，实心背景
+
+**Soft 变体：**
+- `.badge--soft.badge--accent` - Soft + 强调色，浅色背景
+- `.badge--soft.badge--default` - Soft + 默认色，浅色背景
+- `.badge--soft.badge--success` - Soft + 成功色，浅色背景
+- `.badge--soft.badge--warning` - Soft + 警告色，浅色背景
+- `.badge--soft.badge--danger` - Soft + 危险色，浅色背景
+
+## API 参考
+
+### Badge Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | Badge 内展示的内容（文本、数字或图标）。省略时渲染为点状指示器。 |
+| `className` | `string` | - | 根元素的额外 CSS 类。 |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | 颜色变体。 |
+| `variant` | `"primary" \| "secondary" \| "soft"` | `"primary"` | 视觉样式变体。 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 尺寸。 |
+| `placement` | `"top-right" \| "top-left" \| "bottom-right" \| "bottom-left"` | `"top-right"` | 相对锚点的位置。 |
+
+### Badge.Anchor Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 被锚定的元素以及 Badge 本身。 |
+| `className` | `string` | - | 锚点包裹层的额外 CSS 类。 |
+
+### Badge.Label Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 标签文本内容。 |
+| `className` | `string` | - | 标签插槽的额外 CSS 类。 |

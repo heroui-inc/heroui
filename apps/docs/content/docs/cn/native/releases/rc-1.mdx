@@ -1,0 +1,499 @@
+---
+title: RC 1
+description: Alert 组件、独立 Radio 组件、Select TriggerIndicator、HeroUINativeProviderRaw、disableFullWindowOverlay、styles 属性扩展、主题 surface 重构
+github:
+  pull: 284
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 2 月 12 日</span>
+</div>
+
+RC 1 是 HeroUI Native 的首个候选发布（Release Candidate），表明库已接近生产可用。本版本引入以无障碍为先、带状态变体的 Alert 复合组件；将 Radio 抽为可双模式运行的独立组件；新增带动画的 Select.TriggerIndicator 子组件。还提供轻量 `HeroUINativeProviderRaw` 以优化包体、用于 iOS 调试的 `disableFullWindowOverlay`、六个组件统一的 `styles` 插槽式样式，以及用主题显式变量替代计算型 surface 色的主题重构。另含 BottomSheet 内 InputOTP、Toast 文字裁切与元素检查器兼容等关键修复。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 RC 1 的全部改进！你可以探索新的 Alert 与 Radio、Select TriggerIndicator，以及各项修复。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## 更新亮点
+
+### 新组件
+
+本版本新增 **1** 个组件：
+
+- **[Alert](/docs/native/components/alert)**：无障碍告警组件，五种状态变体，复合子组件灵活组合内容。
+
+#### Alert
+
+Alert 提供无障碍告警展示，内置五种状态变体：default、accent、success、warning、danger。遵循复合组件模式，含 `Alert.Indicator`、`Alert.Content`、`Alert.Title`、`Alert.Description`，便于布局与定制。原语层自动提供 `role="alert"`、`aria-labelledby` 与 `aria-describedby` 关联。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="alert"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/alert-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 五种状态变体：default、accent、success、warning、danger
+- 默认 SVG 状态图标，通过 `useStatusColor` 随主题着色
+- 复合架构：Indicator、Content、Title、Description
+- 支持自定义指示器（如替换为 Spinner）
+- 无障碍原语：`role="alert"`、`aria-labelledby`、`aria-describedby`
+- 所有子组件支持 `asChild` 插槽
+- 所有部件支持 ref 转发与 `className`
+
+**用法：**
+
+```tsx
+import { Alert } from "heroui-native";
+
+export function Example() {
+  return (
+    <Alert status="success">
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>Payment successful</Alert.Title>
+        <Alert.Description>
+          Your payment has been processed successfully.
+        </Alert.Description>
+      </Alert.Content>
+    </Alert>
+  );
+}
+```
+
+完整文档与示例见 [Alert 组件页](/docs/native/components/alert)。
+
+**相关 PR：** [#284](https://github.com/heroui-inc/heroui-native/pull/284)
+
+### 新子组件
+
+#### Select.TriggerIndicator
+
+[Select](/docs/native/components/select) 新增 `TriggerIndicator` 子组件，显示带动画的 V 形图标以表示开/关状态，开闭时以 Reanimated 弹簧物理旋转。
+
+**特性：**
+
+- 开闭过渡时旋转的 V 形动画
+- `animation` 可配置旋转值与弹簧参数
+- `iconProps` 自定义尺寸、颜色
+- 支持自定义子节点替换默认 V 形
+- 与 Select 开闭状态自动同步
+
+**用法：**
+
+```tsx
+import { Select } from "heroui-native";
+
+<Select>
+  <Select.Trigger>
+    <Select.Value placeholder="Select an option" />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Content>
+      {/* Select items */}
+    </Select.Content>
+  </Select.Portal>
+</Select>
+```
+
+**相关 PR：** [#274](https://github.com/heroui-inc/heroui-native/pull/274)
+
+## 组件改进
+
+### Toast 样式与堆叠重构
+
+[Toast](/docs/native/components/toast) 样式由边框模拟内边距改为真实 `p-4` 与上下占位视图，改善多 Toast 堆叠时的内容可见性。
+
+**改进：**
+
+- 以 `p-4` 取代 `border-[16px]` 内边距变通写法
+- 新增 `useVerticalPlaceholderStyles` 用于占位视图样式
+- 顶部与底部绝对定位占位 View，避免堆叠时内容露出
+- 阴影系统改用 `shadow-overlay` 令牌
+- 统一各主题（alpha、mint、sky）的遮罩阴影，降低不透明度
+
+确保不同高度 Toast 堆叠时内容仍被正确遮挡，样式更易维护、可预期。
+
+**相关 PR：** [#229](https://github.com/heroui-inc/heroui-native/pull/229)
+
+### Dialog 遮罩手势关闭动画时序
+
+[Dialog](/docs/native/components/dialog) 在手势关闭时弹层动画时序已修复：进度值按延迟正确排队，确保关闭动画播完再重置。
+
+**改进：**
+
+- 手势关闭时进度在 300ms 延迟后过渡到 2
+- 350ms 后进度重置为 0，保证动画完成
+- 移除 `isOpen` 为 false 时立即 `progress.set(2)` 的调用
+- 侧滑关闭时关闭动画可正常播放
+
+**相关 PR：** [#277](https://github.com/heroui-inc/heroui-native/pull/277)
+
+### 主题 Surface 变量重构
+
+主题系统以主题文件中的显式 surface 变量取代计算色，跨主题更可控、更一致。
+
+**改进：**
+
+- `surface-secondary`、`surface-tertiary`（及对应前景）在各主题（alpha、lavender、mint、sky、variables.css）中显式定义
+- 基础主题使用 `var(--surface-secondary)`、`var(--surface-tertiary)`，不再用 `color-mix` 计算
+- 从 theme.css 移除 `on-surface`、`on-surface-secondary`、`on-surface-tertiary` 调色板
+- 主题文档更新变量结构与示例
+
+主题作者可直接控制 surface 色值，不再依赖 `color-mix`，各主题 surface 表现更可预期。
+
+**相关 PR：** [#281](https://github.com/heroui-inc/heroui-native/pull/281)
+
+## API 增强
+
+### 多组件统一 `styles` 属性
+
+六个组件现支持统一的 `styles` 插槽式样式 API。
+
+**涉及组件：**
+
+- **Accordion**：`container`、`separator` 插槽
+- **AvatarFallback**：`container`、`text` 插槽
+- **FieldError**：`container`、`text` 插槽
+- **Label**：`text`、`asterisk` 插槽（并修复 `style` 处理）
+- **PressableFeedback Ripple**：`container`、`ripple` 插槽（取代 `containerStyle` 与 `rippleStyle`）
+- **SelectContentDialog**：`wrapper`、`content` 插槽
+
+**新能力：**
+
+```tsx
+import { Accordion, Label } from "heroui-native";
+
+// 对指定插槽应用样式
+<Label styles={{ text: { fontSize: 18 }, asterisk: { color: "red" } }} isRequired>
+  Username
+</Label>
+
+<Accordion
+  styles={{
+    container: { borderRadius: 12 },
+    separator: { backgroundColor: "gray" },
+  }}
+>
+  {/* Accordion items */}
+</Accordion>
+```
+
+变更保持与既有 `style` 的向后兼容，二者同时提供时会正确合并。
+
+**相关 PR：** [#271](https://github.com/heroui-inc/heroui-native/pull/271)
+
+### `disableFullWindowOverlay` 属性
+
+基于 Portal 的组件现支持 `disableFullWindowOverlay`，便于在 iOS 开发时使用 React Native 元素检查器。
+
+**涉及组件：**
+
+- `BottomSheet.Portal`
+- `Dialog.Portal`
+- `Popover.Portal`
+- `Select.Portal`
+- `ToastProvider`
+
+**新能力：**
+
+```tsx
+import { Dialog } from "heroui-native";
+
+// 在 iOS 上启用元素检查器
+<Dialog>
+  <Dialog.Portal disableFullWindowOverlay>
+    <Dialog.Overlay />
+    <Dialog.Content>
+      {/* content */}
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+iOS 上 `FullWindowOverlay` 使用独立原生窗口，会阻挡元素检查器。将 `disableFullWindowOverlay` 设为 `true` 时内容绘于主窗口，开发期可检查元素；代价是遮罩不再叠在原生模态或键盘之上。Android 上该属性无效果。
+
+使用 `HeroUINativeProvider` 时，Toast 通过 `config.toast` 传入该属性。
+
+**相关 PR：** [#283](https://github.com/heroui-inc/heroui-native/pull/283)
+
+### HeroUINativeProviderRaw
+
+新增轻量提供者变体 `HeroUINativeProviderRaw`，不包含 `ToastProvider` 与 `PortalHost`，由使用方完全控制打包依赖。
+
+**新能力：**
+
+```tsx
+import { HeroUINativeProviderRaw } from "heroui-native/provider-raw";
+
+// 无 Toast 与 Portal 的轻量提供者
+export function App() {
+  return (
+    <HeroUINativeProviderRaw>
+      {/* Your app content */}
+    </HeroUINativeProviderRaw>
+  );
+}
+```
+
+`react-native-screens`、`@gorhom/bottom-sheet`、`react-native-svg` 由此可作为完全可选的对等依赖。Raw 提供者仅含 `SafeAreaListener`、`GlobalAnimationSettingsProvider`、`TextComponentProvider`。需要 Toast 或 Portal 时可自行组合。
+
+**相关 PR：** [#285](https://github.com/heroui-inc/heroui-native/pull/285)
+
+### Select.Trigger 的 `variant` 属性
+
+`Select.Trigger` 现支持 `variant`：`"default"` 与 `"unstyled"`，便于与 Button 等自定义触发器组合。
+
+**新能力：**
+
+```tsx
+import { Button, Select } from "heroui-native";
+
+// 默认变体（预置样式触发器）
+<Select>
+  <Select.Trigger variant="default">
+    <Select.Value placeholder="Choose..." />
+    <Select.TriggerIndicator />
+  </Select.Trigger>
+</Select>
+
+// 无样式变体，用于自定义组合
+<Select>
+  <Select.Trigger variant="unstyled">
+    <Button>
+      <Select.Value placeholder="Choose..." />
+      <Select.TriggerIndicator />
+    </Button>
+  </Select.Trigger>
+</Select>
+```
+
+**相关 PR：** [#274](https://github.com/heroui-inc/heroui-native/pull/274)
+
+### ControlField 的 Radio 变体
+
+[ControlField](/docs/native/components/control-field) 的 `ControlField.Indicator` 现支持 `"radio"` 变体，与既有 `"switch"`、`"checkbox"` 并列，渲染独立 Radio 组件。
+
+**新能力：**
+
+```tsx
+import { ControlField } from "heroui-native";
+
+<ControlField>
+  <ControlField.Indicator variant="radio" />
+  <ControlField.Label>Radio option</ControlField.Label>
+</ControlField>
+```
+
+**相关 PR：** [#286](https://github.com/heroui-inc/heroui-native/pull/286)
+
+## ⚠️ 破坏性变更
+
+### PressableFeedback Ripple：统一 `styles` 属性
+
+PressableFeedback Ripple 的 `containerStyle` 与 `rippleStyle` 已合并为统一 `styles`。
+
+**迁移：**
+
+将所有单独样式属性改为 `styles`：
+
+```tsx
+// 之前
+<PressableFeedback.Ripple
+  containerStyle={{ borderRadius: 8 }}
+  rippleStyle={{ backgroundColor: "blue" }}
+/>
+
+// 之后
+<PressableFeedback.Ripple
+  styles={{
+    container: { borderRadius: 8 },
+    ripple: { backgroundColor: "blue" },
+  }}
+/>
+```
+
+**相关 PR：** [#271](https://github.com/heroui-inc/heroui-native/pull/271)
+
+### Select.Trigger 默认样式
+
+`Select.Trigger` 默认 `variant="default"`，会应用容器样式（`flex-row items-center justify-between h-12 px-4 rounded-2xl bg-surface shadow-surface`）。若此前为自定义样式触发器，需加 `variant="unstyled"` 以免套用默认样式。
+
+**迁移：**
+
+```tsx
+// 之前（自定义样式触发器）
+<Select.Trigger className="custom-trigger-styles">
+  {/* content */}
+</Select.Trigger>
+
+// 之后（加 variant="unstyled" 保留自定义）
+<Select.Trigger variant="unstyled" className="custom-trigger-styles">
+  {/* content */}
+</Select.Trigger>
+```
+
+**相关 PR：** [#274](https://github.com/heroui-inc/heroui-native/pull/274)
+
+### Surface 主题变量结构调整
+
+基础主题已移除 `on-surface`、`on-surface-secondary`、`on-surface-tertiary` 及其 hover/focus 变体 CSS 变量。secondary/tertiary surface 色现于各主题文件中显式定义。
+
+**迁移：**
+
+若自定义样式引用上述变量，请改为主题中定义的对应 surface 前景变量。
+
+```css
+/* 之前 */
+color: var(--on-surface);
+color: var(--on-surface-secondary);
+
+/* 之后 */
+color: var(--surface-foreground);
+color: var(--surface-secondary-foreground);
+```
+
+**相关 PR：** [#281](https://github.com/heroui-inc/heroui-native/pull/281)
+
+### 移除 RadioGroup.Indicator
+
+`RadioGroup.Indicator` 与 `RadioGroup.IndicatorThumb` 已移除，改为独立 `Radio` 组件。相关类型 `RadioGroupIndicatorProps`、`RadioGroupIndicatorThumbProps`、`RadioGroupIndicatorThumbAnimation` 亦不再导出。
+
+**迁移：**
+
+将所有 `RadioGroup.Indicator` / `RadioGroup.IndicatorThumb` 替换为 `Radio`：
+
+```tsx
+// 之前
+import { RadioGroup } from "heroui-native";
+
+<RadioGroup>
+  <RadioGroup.Item value="option1">
+    <RadioGroup.Indicator>
+      <RadioGroup.IndicatorThumb />
+    </RadioGroup.Indicator>
+    <RadioGroup.Label>Option 1</RadioGroup.Label>
+  </RadioGroup.Item>
+</RadioGroup>
+
+// 之后
+import { Radio, RadioGroup } from "heroui-native";
+
+<RadioGroup>
+  <RadioGroup.Item value="option1">
+    <Radio>
+      <Radio.Indicator>
+        <Radio.IndicatorThumb />
+      </Radio.Indicator>
+    </Radio>
+    <RadioGroup.Label>Option 1</RadioGroup.Label>
+  </RadioGroup.Item>
+</RadioGroup>
+```
+
+**相关 PR：** [#286](https://github.com/heroui-inc/heroui-native/pull/286)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #229](https://github.com/heroui-inc/heroui-native/issues/229)**：修复 BottomSheet 内 InputOTP 不可用。现可在 BottomSheet 遮罩内正常聚焦与输入，解决此前无法输入 OTP 的问题。
+
+- **[Issue #265](https://github.com/heroui-inc/heroui-native/issues/265)**：修复 Toast 描述首字符被裁切。Toast 样式重构后以真实内边距与占位视图取代边框变通，任意堆叠配置下文字均可完整显示。
+
+- **[Issue #272](https://github.com/heroui-inc/heroui-native/issues/272)**：修复 FullWindowOverlay 在 iOS 上阻挡 React Native 元素检查器。Portal 组件新增 `disableFullWindowOverlay`，开发期可将遮罩内容绘于主窗口以恢复检查器。
+
+**相关 PR：**
+
+- [#229](https://github.com/heroui-inc/heroui-native/pull/229)
+- [#283](https://github.com/heroui-inc/heroui-native/pull/283)
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [Alert](/docs/native/components/alert) — 新组件：用法示例与 API 参考
+- [Radio](/docs/native/components/radio) — 独立 Radio 组件文档
+- [Radio Group](/docs/native/components/radio-group) — 反映移除 RadioGroup.Indicator 及与 Radio 的集成
+- [Control Field](/docs/native/components/control-field) — 新增 radio 变体说明
+- [Select](/docs/native/components/select) — TriggerIndicator 子组件与 Trigger variant
+- [Toast](/docs/native/components/toast) — 更新样式实现说明
+- [Bottom Sheet](/docs/native/components/bottom-sheet) — 补充 disableFullWindowOverlay
+- [Dialog](/docs/native/components/dialog) — 补充 disableFullWindowOverlay
+- [Popover](/docs/native/components/popover) — 补充 disableFullWindowOverlay
+- [Provider](/docs/native/getting-started/provider) — HeroUINativeProviderRaw 与提供者层级
+- [Theming](/docs/native/getting-started/theming) — 更新 surface 变量结构与示例
+- [Accordion](/docs/native/components/accordion) — 补充 styles 属性
+- [Avatar](/docs/native/components/avatar) — 补充 styles 属性
+- [Label](/docs/native/components/label) — 补充 styles 属性
+- [Field Error](/docs/native/components/field-error) — 补充 styles 属性
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

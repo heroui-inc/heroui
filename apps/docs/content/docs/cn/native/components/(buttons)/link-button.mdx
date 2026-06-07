@@ -1,0 +1,164 @@
+---
+title: LinkButton 链接按钮
+description: 幽灵样式按钮，无高亮按压反馈，适合行内链接式交互。
+links:
+  source_native: link-button/link-button.tsx
+  styles_native: link-button/link-button.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/link-button-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { LinkButton } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<LinkButton>
+  <LinkButton.Label>...</LinkButton.Label>
+</LinkButton>
+```
+
+- **LinkButton**：根级可按压容器。内部渲染 `variant="ghost"` 的 `Button`，并强制关闭高亮反馈；使用者无法覆盖上述行为。
+- **LinkButton.Label**：链接按钮文字，继承父级上下文中的尺寸与变体样式。
+
+## 用法
+
+### 基础用法
+
+行内链接风格文字，响应按压。
+
+```tsx
+<LinkButton onPress={handlePress}>了解更多</LinkButton>
+```
+
+### 尺寸
+
+使用 `size` 控制文字尺寸。
+
+```tsx
+<LinkButton size="sm">
+  小
+</LinkButton>
+
+<LinkButton size="md">
+  中
+</LinkButton>
+
+<LinkButton size="lg">
+  大
+</LinkButton>
+```
+
+### 禁用状态
+
+禁用后不可交互。
+
+```tsx
+<LinkButton isDisabled>已禁用的链接</LinkButton>
+```
+
+### 自定义样式
+
+在根与 `Label` 上使用 `className`。
+
+```tsx
+<LinkButton className="px-2">
+  <LinkButton.Label className="text-accent underline">
+    样式化链接
+  </LinkButton.Label>
+</LinkButton>
+```
+
+### 与正文混排
+
+与普通文字混排，用于条款、政策或上下文导航。
+
+```tsx
+<View className="flex-row flex-wrap">
+  <Text className="text-sm text-muted">我同意 </Text>
+  <LinkButton size="sm" onPress={handleTermsPress}>
+    <LinkButton.Label className="text-accent">
+      服务条款
+    </LinkButton.Label>
+  </LinkButton>
+  <Text className="text-sm text-muted"> 与 </Text>
+  <LinkButton size="sm" onPress={handlePrivacyPress}>
+    <LinkButton.Label className="text-accent">隐私政策</LinkButton.Label>
+  </LinkButton>
+</View>
+```
+
+## 示例
+
+```tsx
+import { Button, Checkbox, ControlField, LinkButton } from 'heroui-native';
+import React from 'react';
+import { Alert, View, Text } from 'react-native';
+
+export default function LinkButtonExample() {
+  const [isAgreed, setIsAgreed] = React.useState(false);
+
+  const handleTermsPress = () => Alert.alert('条款', '跳转至服务条款');
+  const handlePrivacyPress = () =>
+    Alert.alert('隐私', '跳转至隐私政策');
+
+  return (
+    <View className="flex-1 px-5 items-center justify-center">
+      <View className="w-full max-w-xs gap-6">
+        <ControlField
+          isSelected={isAgreed}
+          onSelectedChange={setIsAgreed}
+          className="items-start"
+        >
+          <ControlField.Indicator>
+            <Checkbox className="mt-0.5" />
+          </ControlField.Indicator>
+          <View className="flex-row flex-wrap flex-1">
+            <Text className="text-sm text-muted">我同意 </Text>
+            <LinkButton size="sm" onPress={handleTermsPress}>
+              <LinkButton.Label className="text-accent">
+                服务条款
+              </LinkButton.Label>
+            </LinkButton>
+            <Text className="text-sm text-muted"> 与 </Text>
+            <LinkButton size="sm" onPress={handlePrivacyPress}>
+              <LinkButton.Label className="text-accent">
+                隐私政策
+              </LinkButton.Label>
+            </LinkButton>
+          </View>
+        </ControlField>
+        <Button isDisabled={!isAgreed}>注册</Button>
+      </View>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/link-button.tsx>)。
+
+## API 参考
+
+### LinkButton
+
+继承 [Button](./button#button) 的全部属性，**除 `variant` 外**（内部固定为 `ghost`）。
+
+**内部强制行为：**
+
+| override    | value        | description                              |
+| ----------- | ------------ | ---------------------------------------- |
+| `variant`   | `ghost`      | 始终为 ghost，不可修改                   |
+| `highlight` | `false`      | 高亮反馈关闭，不可修改                   |
+| `className` | `h-auto p-0` | 移除默认按钮高度与内边距               |
+
+### LinkButton.Label
+
+与 [Button.Label](./button#buttonlabel) 等价，属性相同。

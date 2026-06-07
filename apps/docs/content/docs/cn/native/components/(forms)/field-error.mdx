@@ -1,0 +1,214 @@
+---
+title: FieldError 字段错误
+description: 展示校验错误信息，并带有平滑动画。
+links:
+  source_native: field-error/field-error.tsx
+  styles_native: field-error/field-error.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/field-error-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/field-error-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { FieldError } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<FieldError>错误信息内容</FieldError>
+```
+
+- **FieldError**：展示错误信息的主容器，带动画。字符串子节点会自动用 `Text` 包裹，也可传入自定义 React 节点。通过 `isInvalid` 控制显隐，并支持自定义进入/退出动画。
+
+## 用法
+
+### 基础用法
+
+校验失败时展示错误信息。
+
+```tsx
+<FieldError isInvalid={true}>此字段为必填</FieldError>
+```
+
+### 受控显隐
+
+使用 `isInvalid` 控制何时显示。放在 `TextField` 等表单项内时，会自动消费 form-item-state 上下文。
+
+```tsx
+const [isInvalid, setIsInvalid] = useState(false);
+
+<FieldError isInvalid={isInvalid}>请输入有效的邮箱地址</FieldError>;
+```
+
+### 与表单字段配合
+
+`FieldError` 会通过 form-item-state 上下文自动读取 `TextField` 的表单状态。
+
+```tsx
+import { FieldError, Label, TextField } from 'heroui-native';
+
+<TextField isRequired isInvalid={true}>
+  <Label>邮箱</Label>
+  <Input placeholder="请输入邮箱" />
+  <FieldError>请输入有效的邮箱地址</FieldError>
+</TextField>
+```
+
+### 自定义内容
+
+子节点可传入自定义 React 组件而非纯字符串。
+
+```tsx
+<FieldError isInvalid={true}>
+  <View className="flex-row items-center">
+    <Icon name="alert-circle" />
+    <Text className="ml-2 text-danger">输入无效</Text>
+  </View>
+</FieldError>
+```
+
+### 自定义动画
+
+使用 `animation` 覆盖默认进入/退出动画。
+
+```tsx
+import { SlideInDown, SlideOutUp } from 'react-native-reanimated';
+
+<FieldError
+  isInvalid={true}
+  animation={{
+    entering: { value: SlideInDown.duration(200) },
+    exiting: { value: SlideOutUp.duration(150) },
+  }}
+>
+  字段校验未通过
+</FieldError>;
+```
+
+完全禁用动画：
+
+```tsx
+<FieldError isInvalid={true} animation={false}>
+  字段校验未通过
+</FieldError>
+```
+
+### 自定义样式
+
+为容器与文字应用自定义样式。
+
+```tsx
+<FieldError
+  isInvalid={true}
+  className="mt-2"
+  classNames={{
+    container: 'bg-danger/10 p-2 rounded',
+    text: 'text-xs font-medium',
+  }}
+>
+  密码至少 8 位
+</FieldError>
+```
+
+### 自定义 Text 属性
+
+当子节点为字符串时，可通过 `textProps` 传给内部 `Text`。
+
+```tsx
+<FieldError
+  isInvalid={true}
+  textProps={{
+    numberOfLines: 1,
+    ellipsizeMode: 'tail',
+    style: { letterSpacing: 0.5 },
+  }}
+>
+  这是一段可能很长需要截断的错误提示文案示例
+</FieldError>
+```
+
+## 示例
+
+```tsx
+import { Description, FieldError, Label, TextField } from 'heroui-native';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+export default function FieldErrorExample() {
+  const [email, setEmail] = useState('');
+  const [isInvalid, setIsInvalid] = useState(false);
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleBlur = () => {
+    setIsInvalid(email !== '' && !isValidEmail);
+  };
+
+  return (
+    <View className="p-4">
+      <TextField isInvalid={isInvalid}>
+        <Label>邮箱地址</Label>
+        <Input
+          placeholder="请输入邮箱"
+          value={email}
+          onChangeText={setEmail}
+          onBlur={handleBlur}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <Description>
+          我们将通过此邮箱与您联系
+        </Description>
+        <FieldError>请输入有效的邮箱地址</FieldError>
+      </TextField>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/field-error.tsx)。
+
+## API 参考
+
+### FieldError
+
+| prop                   | type                                          | default     | description                                                                                                                                   |
+| ---------------------- | --------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`             | `React.ReactNode`                             | `undefined` | 错误内容；字符串子节点会用 `Text` 包裹                                                                                                         |
+| `isInvalid`            | `boolean`                                     | `undefined` | 控制是否显示（可覆盖 form-item-state）。置于 `TextField` 内时会自动消费表单状态                                                               |
+| `animation`            | `FieldErrorRootAnimation`                     | -           | 动画配置                                                                                                                                      |
+| `className`            | `string`                                      | `undefined` | 容器的额外 class                                                                                                                              |
+| `classNames`           | `ElementSlots<FieldErrorSlots>`               | `undefined` | 各部分的额外 class                                                                                                                            |
+| `styles`               | `{ container?: ViewStyle; text?: TextStyle }` | `undefined` | 容器与文字的样式                                                                                                                              |
+| `textProps`            | `TextProps`                                   | `undefined` | 子节点为字符串时传给 `Text` 的额外属性                                                                                                        |
+| `...AnimatedViewProps` | `AnimatedProps<ViewProps>`                    | -           | 支持 Reanimated `Animated.View` 的全部属性                                                                                                    |
+
+**classNames：** `ElementSlots<FieldErrorSlots>` 为各部分提供类型安全的 class。可用插槽：`container`、`text`。
+
+#### `styles`
+
+| prop        | type        | description |
+| ----------- | ----------- | ----------- |
+| `container` | `ViewStyle` | 容器样式    |
+| `text`      | `TextStyle` | 文字样式    |
+
+#### FieldErrorRootAnimation
+
+根组件动画配置，可为：
+
+- `false` 或 `"disabled"`：仅禁用根级动画
+- `"disable-all"`：禁用全部动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop             | type                                     | default                                                               | description              |
+| ---------------- | ---------------------------------------- | --------------------------------------------------------------------- | ------------------------ |
+| `state`          | `'disabled' \| 'disable-all' \| boolean` | -                                                                     | 在自定义属性时禁用动画   |
+| `entering.value` | `EntryOrExitLayoutType`                  | `FadeIn`<br/>`.duration(150)`<br/>`.easing(Easing.out(Easing.ease))`  | 自定义进入动画           |
+| `exiting.value`  | `EntryOrExitLayoutType`                  | `FadeOut`<br/>`.duration(100)`<br/>`.easing(Easing.out(Easing.ease))` | 自定义退出动画           |

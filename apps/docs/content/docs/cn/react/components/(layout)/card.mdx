@@ -1,0 +1,193 @@
+---
+title: Card 卡片
+description: 用于分组相关内容与操作的灵活容器组件。
+links:
+  source: card/card.tsx
+  styles: card.css
+  storybook: Components/Layout/Card
+---
+
+## 引入
+
+```tsx
+import { Card } from "@heroui/react";
+```
+
+### 用法
+
+<ComponentPreview
+  name="card-default"
+/>
+
+### 组件结构
+
+导入 Card 组件后，可通过点语法访问所有子部分。
+
+```tsx
+import { Card } from "@heroui/react";
+
+export default () => (
+  <Card>
+    <Card.Header>
+      <Card.Title />
+      <Card.Description />
+    </Card.Header>
+    <Card.Content />
+    <Card.Footer />
+  </Card>
+);
+```
+
+### 变体
+
+卡片提供语义化变体，用于表达层级强弱而非固定视觉样式，主题可按需诠释：
+
+<ComponentPreview
+  name="card-variants"
+/>
+
+- **`transparent`** — 层次最低，透明背景（适合嵌套卡片）
+- **`default`** — 常规卡片，适用于大多数场景（surface-secondary）
+- **`secondary`** — 中等突出，吸引适度注意（surface-tertiary）
+- **`tertiary`** — 更高突出，用于重要内容（surface-tertiary）
+
+### 横向布局
+
+<ComponentPreview
+  name="card-horizontal"
+/>
+
+### 带头像
+
+<ComponentPreview
+  name="card-with-avatar"
+/>
+
+### 带图片
+
+<ComponentPreview
+  name="card-with-images"
+/>
+
+### 带表单
+
+<ComponentPreview
+  name="card-with-form"
+/>
+
+## 无障碍
+
+```tsx
+import { Card } from '@heroui/react';
+import { cardVariants } from '@heroui/styles';
+
+// 语义化标记
+<Card role="article" aria-labelledby="card-title">
+  <Card.Header>
+    <Card.Title id="card-title">Article Title</Card.Title>
+  </Card.Header>
+</Card>
+
+// 可交互卡片
+<a className={cardVariants().base()} href="/details" aria-label="View product details">
+  <Card.Title>Product Name</Card.Title>
+</a>
+```
+
+<RelatedComponents component="card" />
+
+## 样式
+
+### 组件定制
+
+```tsx
+<Card className="border-2 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50">
+  <Card.Header>
+    <Card.Title className="text-blue-900">Custom Styled Card</Card.Title>
+    <Card.Description className="text-blue-700">Custom colors applied</Card.Description>
+  </Card.Header>
+  <Card.Content>
+    <p className="text-blue-800">Content with custom styling</p>
+  </Card.Content>
+</Card>
+```
+
+### CSS 变量覆盖
+
+```css
+/* 覆盖特定变体 */
+.card--secondary {
+  @apply bg-gradient-to-br from-blue-50 to-purple-50;
+}
+
+/* 自定义元素样式 */
+.card__title {
+  @apply text-xl font-bold;
+}
+```
+
+## CSS 类
+
+Card 使用 [BEM](https://getbem.com/) 命名以便样式可预期（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/card.css)）：
+
+
+#### 基础类
+
+- `.card` — 基础容器，含内边距与边框
+- `.card__header` — 头部区域容器
+- `.card__title` — 标题的基础字号与字重
+- `.card__description` — 弱化说明文字
+- `.card__content` — 弹性主内容区
+- `.card__footer` — 底部行布局
+
+#### 变体类
+
+- `.card--transparent` — 层次最低，透明背景（对应 `transparent` 变体）
+- `.card--default` — 常规外观，surface-secondary（默认）
+- `.card--secondary` — 中等突出，surface-tertiary（对应 `secondary` 变体）
+- `.card--tertiary` — 更高突出，surface-tertiary（对应 `tertiary` 变体）
+
+## API 参考
+
+### Card
+
+| Prop        | 类型                                                      | 默认值      | 描述                                       |
+| ----------- | --------------------------------------------------------- | ----------- | ------------------------------------------ |
+| `variant`   | `"transparent" \| "default" \| "secondary" \| "tertiary"` | `"default"` | 表示层次强弱的语义变体                     |
+| `className` | `string`                                                  | -           | 附加的 CSS 类                              |
+| `children`  | `React.ReactNode`                                         | -           | 卡片内容                                   |
+
+### Card.Header
+
+| Prop        | 类型              | 默认值 | 描述                    |
+| ----------- | ----------------- | ------ | ----------------------- |
+| `className` | `string`          | -      | 附加的 CSS 类           |
+| `children`  | `React.ReactNode` | -      | 头部内容                |
+
+### Card.Title
+
+| Prop        | 类型              | 默认值 | 描述                                 |
+| ----------- | ----------------- | ------ | ------------------------------------ |
+| `className` | `string`          | -      | 附加的 CSS 类                        |
+| `children`  | `React.ReactNode` | -      | 标题内容（渲染为 `h3`）              |
+
+### Card.Description
+
+| Prop        | 类型              | 默认值 | 描述                                |
+| ----------- | ----------------- | ------ | ----------------------------------- |
+| `className` | `string`          | -      | 附加的 CSS 类                       |
+| `children`  | `React.ReactNode` | -      | 说明内容（渲染为 `p`）              |
+
+### Card.Content
+
+| Prop        | 类型              | 默认值 | 描述                    |
+| ----------- | ----------------- | ------ | ----------------------- |
+| `className` | `string`          | -      | 附加的 CSS 类           |
+| `children`  | `React.ReactNode` | -      | 主内容                  |
+
+### Card.Footer
+
+| Prop        | 类型              | 默认值 | 描述                    |
+| ----------- | ----------------- | ------ | ----------------------- |
+| `className` | `string`          | -      | 附加的 CSS 类           |
+| `children`  | `React.ReactNode` | -      | 底部内容                |

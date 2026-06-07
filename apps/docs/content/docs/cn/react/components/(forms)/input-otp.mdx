@@ -1,0 +1,289 @@
+---
+title: InputOTP 一次性密码输入框
+description: 用于验证码与安全认证等场景的一次性密码输入组件。
+links:
+  source: input-otp/input-otp.tsx
+  styles: input-otp.css
+  storybook: Components/Forms/InputOTP
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { InputOTP } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="input-otp-basic" />
+
+### 组件结构
+
+引入 InputOTP 后，可通过点语法访问各个部分。
+
+```tsx
+import { InputOTP } from '@heroui/react';
+
+export default () => (
+  <InputOTP maxLength={6}>
+    <InputOTP.Group>
+      <InputOTP.Slot index={0} />
+      <InputOTP.Slot index={1} />
+      {/* ...rest of the slots */}
+    </InputOTP.Group>
+    <InputOTP.Separator />
+    <InputOTP.Group>
+      <InputOTP.Slot index={3} />
+      {/* ...rest of the slots */}
+    </InputOTP.Group>
+  </InputOTP>
+)
+```
+
+> **InputOTP** 基于 [@guilherme_rodz](https://twitter.com/guilherme_rodz) 的 [input-otp](https://github.com/guilhermerodz/input-otp) 构建，为 OTP 输入组件提供灵活且无障碍的基础能力。
+
+### 四位数字
+
+<ComponentPreview name="input-otp-four-digits" />
+
+### 禁用状态
+
+<ComponentPreview name="input-otp-disabled" />
+
+### 使用 pattern
+
+使用 `pattern` prop 限制可输入字符。HeroUI 会导出常用模式，例如 `REGEXP_ONLY_CHARS` 与 `REGEXP_ONLY_DIGITS`。
+
+<ComponentPreview name="input-otp-with-pattern" />
+
+### 受控
+
+控制值以同步状态、清空输入或实现自定义校验。
+
+<ComponentPreview name="input-otp-controlled" />
+
+### 带校验
+
+将 `isInvalid` 与校验消息一起使用以展示错误。
+
+<ComponentPreview name="input-otp-with-validation" />
+
+### 完成回调
+
+在所有槽位填满时使用 `onComplete` 回调触发逻辑。
+
+<ComponentPreview name="input-otp-on-complete" />
+
+### 表单示例
+
+包含校验与提交的完整双因素认证表单。
+
+<ComponentPreview name="input-otp-form-example" />
+
+### 变体
+
+InputOTP 支持两种视觉变体：
+
+- **`primary`**（默认）— 常规带阴影样式，适用于大多数场景
+- **`secondary`** — 弱强调、无阴影变体，适合用于 Surface 组件内部
+
+<ComponentPreview name="input-otp-variants" />
+
+### 在 Surface 内
+
+在 [Surface](/docs/components/surface) 组件内部使用时，请使用 `variant="secondary"`，以应用适合 surface 背景的弱强调变体。
+
+<ComponentPreview name="input-otp-on-surface" />
+
+<RelatedComponents component="inputotp" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {InputOTP, Label} from '@heroui/react';
+
+function CustomInputOTP() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Label className="text-sm font-semibold">Enter verification code</Label>
+      <InputOTP
+        className="gap-3"
+        containerClassName="gap-4"
+        maxLength={6}
+      >
+        <InputOTP.Group className="gap-3">
+          <InputOTP.Slot
+            className="size-12 rounded-lg border-2 text-lg font-bold"
+            index={0}
+          />
+          <InputOTP.Slot
+            className="size-12 rounded-lg border-2 text-lg font-bold"
+            index={1}
+          />
+          <InputOTP.Slot
+            className="size-12 rounded-lg border-2 text-lg font-bold"
+            index={2}
+          />
+        </InputOTP.Group>
+        <InputOTP.Separator className="bg-border h-1 w-2 rounded-full" />
+        <InputOTP.Group className="gap-3">
+          <InputOTP.Slot
+            className="size-12 rounded-lg border-2 text-lg font-bold"
+            index={3}
+          />
+          <InputOTP.Slot
+            className="size-12 rounded-lg border-2 text-lg font-bold"
+            index={4}
+          />
+          <InputOTP.Slot
+            className="size-12 rounded-lg border-2 text-lg font-bold"
+            index={5}
+          />
+        </InputOTP.Group>
+      </InputOTP>
+    </div>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 InputOTP 的组件类名，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .input-otp {
+    @apply gap-3;
+  }
+
+  .input-otp__slot {
+    @apply size-12 rounded-xl border-2 font-bold;
+  }
+
+  .input-otp__slot[data-active="true"] {
+    @apply border-primary-500 ring-2 ring-primary-200;
+  }
+
+  .input-otp__separator {
+    @apply w-2 h-1 bg-border-strong rounded-full;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+
+### CSS 类
+
+InputOTP 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/input-otp.css)）：
+
+#### 基础类
+- `.input-otp` - 根容器
+- `.input-otp__container` - input-otp 库提供的内层容器
+- `.input-otp__group` - 槽位分组
+- `.input-otp__slot` - 单个输入槽位
+- `.input-otp__slot-value` - 槽位内的字符
+- `.input-otp__caret` - 闪烁的光标指示器
+- `.input-otp__separator` - 分组之间的视觉分隔符
+
+#### 状态类
+- `.input-otp__slot[data-active="true"]` - 当前激活的槽位
+- `.input-otp__slot[data-filled="true"]` - 已填入字符的槽位
+- `.input-otp__slot[data-disabled="true"]` - 禁用的槽位
+- `.input-otp__slot[data-invalid="true"]` - 无效的槽位
+- `.input-otp__container[data-disabled="true"]` - 禁用的容器
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，以获得更好的灵活性：
+
+- **悬停**：槽位上的 `:hover` 或 `[data-hovered="true"]`
+- **激活**：槽位上的 `[data-active="true"]`（当前聚焦）
+- **已填**：槽位上的 `[data-filled="true"]`（包含字符）
+- **禁用**：容器与槽位上的 `[data-disabled="true"]`
+- **无效**：槽位上的 `[data-invalid="true"]`
+
+## API 参考
+
+### InputOTP Props
+
+InputOTP 在 [input-otp](https://github.com/guilhermerodz/input-otp) 库之上构建，并增加了额外能力。
+
+#### Base Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `maxLength` | `number` | - | **必填。** 输入槽位数量。 |
+| `value` | `string` | - | 受控值（未提供则为非受控）。 |
+| `onChange` | `(value: string) => void` | - | 值变化时调用。 |
+| `onComplete` | `(value: string) => void` | - | 所有槽位填满时调用。 |
+| `className` | `string` | - | 容器的额外 CSS 类名。 |
+| `containerClassName` | `string` | - | 内层容器的 CSS 类名。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为弱强调、无阴影变体，适合用于 surface 上。 |
+| `children` | `React.ReactNode` | - | InputOTP.Group、InputOTP.Slot 与 InputOTP.Separator 组件。 |
+
+#### Validation Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isDisabled` | `boolean` | `false` | 是否禁用输入。 |
+| `isInvalid` | `boolean` | `false` | 输入是否处于无效状态。 |
+| `validationErrors` | `string[]` | - | 服务端或自定义校验错误。 |
+| `validationDetails` | `ValidityState` | - | HTML5 校验详情。 |
+
+#### Input Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `pattern` | `string` | - | 允许字符的正则表达式（例如 `REGEXP_ONLY_DIGITS`）。 |
+| `textAlign` | `'left' \| 'center' \| 'right'` | `'left'` | 槽位内文本对齐方式。 |
+| `inputMode` | `'numeric' \| 'text' \| 'decimal' \| 'tel' \| 'search' \| 'email' \| 'url'` | `'numeric'` | 移动设备上的虚拟键盘类型。 |
+| `placeholder` | `string` | - | 空槽位的占位符文本。 |
+| `pasteTransformer` | `(text: string) => string` | - | 转换粘贴文本（例如移除连字符）。 |
+
+#### Form Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `name` | `string` | - | 表单提交时使用的 name 属性。 |
+| `autoFocus` | `boolean` | - | 挂载时是否聚焦第一个槽位。 |
+
+### InputOTP.Group Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 分组的额外 CSS 类名。 |
+| `children` | `React.ReactNode` | - | InputOTP.Slot 组件。 |
+
+### InputOTP.Slot Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `index` | `number` | - | **必填。** 槽位从 0 开始的索引。 |
+| `className` | `string` | - | 槽位的额外 CSS 类名。 |
+
+### InputOTP.Separator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 分隔符的额外 CSS 类名。 |
+
+### 导出的 pattern
+
+HeroUI 会为了方便而从 input-otp 再导出常用正则 pattern：
+
+```tsx
+import { REGEXP_ONLY_DIGITS, REGEXP_ONLY_CHARS, REGEXP_ONLY_DIGITS_AND_CHARS } from '@heroui/react';
+
+// Use with pattern prop
+<InputOTP pattern={REGEXP_ONLY_DIGITS} maxLength={6}>
+  {/* ... */}
+</InputOTP>
+```
+
+- **REGEXP_ONLY_DIGITS** — 仅数字字符（0-9）
+- **REGEXP_ONLY_CHARS** — 仅字母字符（a-z、A-Z）
+- **REGEXP_ONLY_DIGITS_AND_CHARS** — 字母数字字符（0-9、a-z、A-Z）

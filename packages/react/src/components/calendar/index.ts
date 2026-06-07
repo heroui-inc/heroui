@@ -1,4 +1,6 @@
-import type {ComponentProps} from "react";
+import type {CalendarRootProps} from "./calendar";
+import type {ComponentProps, ReactElement} from "react";
+import type {CalendarSelectionMode, DateValue} from "react-aria-components/Calendar";
 
 import {
   CalendarYearPickerCell,
@@ -22,10 +24,17 @@ import {
   CalendarRoot,
 } from "./calendar";
 
+type CalendarComponent = <
+  T extends DateValue = DateValue,
+  M extends CalendarSelectionMode = "single",
+>(
+  props: CalendarRootProps<T, M>,
+) => ReactElement | null;
+
 /* -------------------------------------------------------------------------------------------------
 | * Compound Component
 | * -----------------------------------------------------------------------------------------------*/
-export const Calendar = Object.assign(CalendarRoot, {
+const CalendarCompound = Object.assign(CalendarRoot, {
   Root: CalendarRoot,
   Header: CalendarHeader,
   Heading: CalendarHeading,
@@ -43,6 +52,8 @@ export const Calendar = Object.assign(CalendarRoot, {
   YearPickerGridBody: CalendarYearPickerGridBody,
   YearPickerCell: CalendarYearPickerCell,
 });
+
+export const Calendar = CalendarCompound as CalendarComponent & typeof CalendarCompound;
 
 export type Calendar = {
   Props: ComponentProps<typeof CalendarRoot>;
@@ -97,13 +108,8 @@ export type {
 /* -------------------------------------------------------------------------------------------------
 | * YearPickerContext (re-exported from calendar-year-picker for convenience)
 | * -----------------------------------------------------------------------------------------------*/
-export {
-  YearPickerContext,
-  YearPickerStateContext,
-  useYearPicker,
-  useYearPickerState,
-} from "../calendar-year-picker";
-export type {YearPickerContextValue, YearPickerStateContextValue} from "../calendar-year-picker";
+export {YearPickerContext, useYearPicker, useCalendarOrRangeState} from "../calendar-year-picker";
+export type {YearPickerContextValue} from "../calendar-year-picker";
 
 /* -------------------------------------------------------------------------------------------------
 | * Variants
@@ -111,3 +117,5 @@ export type {YearPickerContextValue, YearPickerStateContextValue} from "../calen
 export {calendarVariants} from "@heroui/styles";
 
 export type {CalendarVariants} from "@heroui/styles";
+
+export type {CalendarSelectionMode} from "react-aria-components/Calendar";

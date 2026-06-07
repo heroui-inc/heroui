@@ -1,0 +1,379 @@
+---
+title: Slider 滑块
+description: Slider 允许用户在范围内选择一个或多个值。
+links:
+  rac: Slider
+  source: slider/slider.tsx
+  styles: slider.css
+  storybook: Components/Controls/Slider
+---
+
+## 引入
+
+```tsx
+import { Slider } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="slider-default"
+/>
+
+### 组件结构
+
+引入 Slider 组件，并通过点语法访问各部分。
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+export default () => (
+  <Slider>
+    <Label />
+    <Slider.Output />
+    <Slider.Track>
+      <Slider.Fill />
+      <Slider.Thumb />
+    </Slider.Track>
+  </Slider>
+)
+```
+
+### 范围滑块组件结构
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+export default () => (
+  <Slider defaultValue={[25, 75]}>
+    <Label />
+    <Slider.Output />
+    <Slider.Track>
+      {({state}) => (
+        <>
+          <Slider.Fill />
+          {state.values.map((_, i) => (
+            <Slider.Thumb key={i} index={i} />
+          ))}
+        </>
+      )}
+    </Slider.Track>
+  </Slider>
+)
+```
+
+### 纵向
+
+<ComponentPreview
+  name="slider-vertical"
+/>
+
+### 范围
+
+<ComponentPreview
+  name="slider-range"
+/>
+
+### 禁用
+
+<ComponentPreview
+  name="slider-disabled"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="slider-custom-render-function"
+/>
+
+<RelatedComponents component="slider" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+function CustomSlider() {
+  return (
+    <Slider className="w-full">
+      <Label>Volume</Label>
+      <Slider.Output className="text-muted-fg text-sm" />
+      <Slider.Track className="h-2 rounded-full bg-surface-secondary">
+        <Slider.Fill className="bg-accent" />
+        <Slider.Thumb className="size-4 rounded-full bg-accent" />
+      </Slider.Track>
+    </Slider>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Slider 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .slider {
+    @apply flex flex-col gap-2;
+  }
+
+  .slider__output {
+    @apply text-muted-fg text-sm;
+  }
+
+  .slider-track {
+    @apply relative h-2 w-full rounded-full bg-surface-secondary;
+  }
+
+  .slider-fill {
+    @apply absolute h-full rounded-full bg-accent;
+  }
+
+  .slider-thumb {
+    @apply size-4 rounded-full bg-accent border-2 border-background;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Slider 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/slider.css)）：
+
+#### 基础类
+- `.slider` - Slider 根容器
+- `.slider__output` - 显示当前值的输出元素
+- `.slider-track` - 包含填充与滑块的轨道元素
+- `.slider-fill` - 显示已选范围的填充元素
+- `.slider-thumb` - 单个滑块控制点
+
+#### 状态类
+- `.slider[data-disabled="true"]` - 禁用状态
+- `.slider[data-orientation="vertical"]` - 纵向方向
+- `.slider-thumb[data-dragging="true"]` - 滑块正在拖动
+- `.slider-thumb[data-focus-visible="true"]` - 滑块键盘聚焦
+- `.slider-thumb[data-disabled="true"]` - 滑块禁用状态
+- `.slider-track[data-fill-start="true"]` - 填充从起点开始
+- `.slider-track[data-fill-end="true"]` - 填充在终点结束
+
+### 交互状态
+
+该组件同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制：
+
+- **悬停**：滑块上的 `:hover` 或 `[data-hovered="true"]`
+- **聚焦**：滑块上的 `:focus-visible` 或 `[data-focus-visible="true"]`
+- **拖动**：滑块上的 `[data-dragging="true"]`
+- **禁用**：Slider 或滑块上的 `:disabled` 或 `[data-disabled="true"]`
+
+## API 参考
+
+### Slider Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `number \| number[]` | - | 当前值（受控）。 |
+| `defaultValue` | `number \| number[]` | - | 默认值（非受控）。 |
+| `onChange` | `(value: number \| number[]) => void` | - | 值变化时的事件处理函数。 |
+| `onChangeEnd` | `(value: number \| number[]) => void` | - | 拖动结束时的事件处理函数。 |
+| `minValue` | `number` | `0` | Slider 的最小值。 |
+| `maxValue` | `number` | `100` | Slider 的最大值。 |
+| `step` | `number` | `1` | Slider 的步进值。 |
+| `formatOptions` | `Intl.NumberFormatOptions` | - | 数值标签的显示格式。 |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Slider 的方向。 |
+| `isDisabled` | `boolean` | - | Slider 是否禁用。 |
+| `aria-label` | `string` | - | Slider 的无障碍标签。 |
+| `aria-labelledby` | `string` | - | 标注 Slider 的元素 ID。 |
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | Slider 内容或渲染函数。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### Slider.Output Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 输出内容或渲染函数。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderOutputRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### Slider.Track Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 轨道内容或渲染函数。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderTrackRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### Slider.Fill Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `style` | `CSSProperties` | - | 行内样式。 |
+
+### Slider.Thumb Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `index` | `number` | `0` | 滑块在 Slider 内的索引。 |
+| `isDisabled` | `boolean` | - | 该滑块是否禁用。 |
+| `name` | `string` | - | 输入元素名称，用于提交 HTML 表单。 |
+| `className` | `string` | - | 额外的 CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 滑块内容或渲染函数。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderThumbRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### RenderProps
+
+对 `Slider.Output` 或 `Slider.Track` 使用渲染函数时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `state` | `SliderState` | Slider 的状态。 |
+| `values` | `number[]` | 按滑块索引管理的数值。 |
+| `getThumbValueLabel` | `(index: number) => string` | 返回指定滑块数值的字符串标签。 |
+| `orientation` | `"horizontal" \| "vertical"` | Slider 的方向。 |
+| `isDisabled` | `boolean` | Slider 是否禁用。 |
+
+## 示例
+
+### 基础用法
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider defaultValue={30}>
+  <Label>Volume</Label>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### 范围滑块
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider
+  defaultValue={[100, 500]}
+  formatOptions={{style: "currency", currency: "USD"}}
+  maxValue={1000}
+  minValue={0}
+  step={50}
+>
+  <Label>Price Range</Label>
+  <Slider.Output />
+  <Slider.Track>
+    {({state}) => (
+      <>
+        <Slider.Fill />
+        {state.values.map((_, i) => (
+          <Slider.Thumb key={i} index={i} />
+        ))}
+      </>
+    )}
+  </Slider.Track>
+</Slider>
+```
+
+### 受控值
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+import { useState } from 'react';
+
+function ControlledSlider() {
+  const [value, setValue] = useState(25);
+
+  return (
+    <>
+      <Slider value={value} onChange={setValue}>
+        <Label>Volume</Label>
+        <Slider.Output />
+        <Slider.Track>
+          <Slider.Fill />
+          <Slider.Thumb />
+        </Slider.Track>
+      </Slider>
+      <p>Current value: {value}</p>
+    </>
+  );
+}
+```
+
+### 自定义数值格式
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider
+  defaultValue={60}
+  formatOptions={{style: "currency", currency: "USD"}}
+>
+  <Label>Price</Label>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### 纵向方向
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider defaultValue={30} orientation="vertical" aria-label="Volume">
+  <Label>Volume</Label>
+  <Slider.Output />
+  <Slider.Track>
+    <Slider.Fill />
+    <Slider.Thumb />
+  </Slider.Track>
+</Slider>
+```
+
+### 自定义输出展示
+
+```tsx
+import { Slider, Label } from '@heroui/react';
+
+<Slider defaultValue={[25, 75]}>
+  <Label>Range</Label>
+  <Slider.Output>
+    {({state}) =>
+      state.values.map((_, i) => state.getThumbValueLabel(i)).join(' – ')
+    }
+  </Slider.Output>
+  <Slider.Track>
+    {({state}) => (
+      <>
+        <Slider.Fill />
+        {state.values.map((_, i) => (
+          <Slider.Thumb key={i} index={i} />
+        ))}
+      </>
+    )}
+  </Slider.Track>
+</Slider>
+```
+
+## 无障碍
+
+Slider 组件实现 ARIA slider 模式，并提供：
+
+- 完整的键盘导航支持（方向键、Home、End、Page Up/Down）
+- 数值变化时的屏幕阅读器播报
+- 合理的焦点管理
+- 禁用状态支持
+- 通过隐藏 input 元素与 HTML 表单集成
+- 结合区域设置进行数值格式化的国际化支持
+- 从右到左（RTL）语言支持
+
+更多信息见 [React Aria Slider 文档](https://react-spectrum.adobe.com/react-aria/Slider.html)。

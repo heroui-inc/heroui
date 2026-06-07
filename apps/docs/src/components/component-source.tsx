@@ -13,6 +13,7 @@ export async function ComponentSource({
   // TODO: Disclosure is not ready yet, so we need to use collapsible for now
   collapsible = true,
   language,
+  locale,
   name,
   showCodeTitle = false,
   showLineNumbers = true,
@@ -21,6 +22,8 @@ export async function ComponentSource({
   name?: string;
   title?: string;
   language?: string;
+  /** Locale forwarded by `ComponentPreview` to pick the right demo registry. */
+  locale?: string;
   showCodeTitle?: boolean;
   showLineNumbers?: boolean;
   collapsible?: boolean;
@@ -33,7 +36,7 @@ export async function ComponentSource({
   let code: string | undefined;
 
   if (name) {
-    const item = await getDemo(name);
+    const item = await getDemo(name, locale);
 
     src = item?.file;
   }

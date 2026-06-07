@@ -1,0 +1,207 @@
+---
+title: 动画
+description: 为 HeroUI Native 组件添加流畅动画与过渡
+icon: copy-transparent
+---
+
+HeroUI Native 的动画基于 [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/)，手势由 [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/) 处理。若需更细粒度控制，建议先熟悉二者。
+
+## `animation` 属性
+
+每个带动画的组件都暴露统一的 `animation` 属性，用于控制该组件上的全部动画：可调整数值、时间配置、布局动画，或完全关闭动画。
+
+**做法：** 处理动画时，先查看目标组件是否提供 `animation` 属性。
+
+## 修改动画
+
+向 `animation` 传入对象即可定制。不同组件暴露的可调属性不同。若只想微调内置动画，可使用我们提供的各项配置；若要完全自定义动画逻辑，通常需要自行编写带动画的自定义组件。
+
+### 示例 1：简单数值调整
+
+调整缩放、透明度或颜色等数值：
+
+```tsx
+import {Switch} from 'heroui-native';
+
+<Switch
+  animation={{
+    scale: {
+      value: [1, 0.9], // [unpressed, pressed]
+    },
+    backgroundColor: {
+      value: ['#172554', '#eab308'], // [unselected, selected]
+    },
+  }}>
+  <Switch.Thumb />
+</Switch>;
+```
+
+### 示例 2：时间曲线配置
+
+自定义时长与缓动：
+
+```tsx
+import {Accordion} from 'heroui-native';
+
+<Accordion>
+  <Accordion.Item value="1">
+    <Accordion.Trigger>
+      <Accordion.Indicator
+        animation={{
+          rotation: {
+            value: [0, -180],
+            springConfig: {
+              damping: 60,
+              stiffness: 900,
+              mass: 3,
+            },
+          },
+        }}
+      />
+    </Accordion.Trigger>
+  </Accordion.Item>
+</Accordion>;
+```
+
+### 示例 3：布局动画（进入 / 退出）
+
+使用 Reanimated 的布局动画 API：
+
+```tsx
+import {Accordion} from 'heroui-native';
+import {FadeInRight, FadeInLeft, ZoomIn} from 'react-native-reanimated';
+import {Easing} from 'react-native-reanimated';
+
+<Accordion>
+  <Accordion.Item value="1">
+    <Accordion.Content
+      animation={{
+        entering: {
+          value: FadeInRight.delay(50).easing(Easing.inOut(Easing.ease)),
+        },
+      }}>
+      Content here
+    </Accordion.Content>
+  </Accordion.Item>
+</Accordion>;
+```
+
+### 示例 4：使用 `state` 精细控制
+
+`state` 可在关闭动画的同时仍保留属性配置，便于微调而不真正播放动画：
+
+```tsx
+import {Switch} from 'heroui-native';
+
+<Switch
+  animation={{
+    state: 'disabled', // Disable animations but allow property customization
+    scale: {
+      value: 0.95, // This value is still respected even though animations are disabled
+    },
+    backgroundColor: {
+      value: ['#172554', '#eab308'],
+    },
+  }}>
+  <Switch.Thumb />
+</Switch>
+```
+
+`state` 可取：
+
+- `'disabled'`：关闭动画，但仍可配置属性值
+- `'disable-all'`：关闭自身及子级全部动画（仅在根级可用）
+- `boolean`：简单开关（`true` 启用，`false` 禁用）
+
+这样既能精细控制动画行为，又能在不启用动画的情况下自定义属性值。
+
+## 关闭动画
+
+可通过 `animation` 在不同层级关闭动画。
+
+### 关闭选项
+
+- `animation={false}` 或 `animation="disabled"`：仅关闭当前组件动画
+- `animation="disable-all"`：关闭根级及其子级全部动画（仅根级可用）
+- `animation={true}` 或 `animation={undefined}`：使用默认动画
+
+### 组件级关闭
+
+仅关闭某个子部件的动画：
+
+```tsx
+<Switch>
+  <Switch.Thumb animation={false} />
+</Switch>
+```
+
+### 根级 `disable-all`
+
+`"disable-all"` 仅在复合组件根级可用，会向下级联，**包括**树中的独立组件（如 `Button`、`Spinner` 等），不仅限于复合子部件：
+
+```tsx
+// Disables all animations including Button components inside Card
+<Card animation="disable-all">
+  <Card.Body>
+    <Card.Title>$450</Card.Title>
+    <Card.Description>Living room Sofa</Card.Description>
+  </Card.Body>
+  <Card.Footer className="gap-3">
+    <Button variant="primary">Buy now</Button>
+    <Button variant="ghost">Add to cart</Button>
+  </Card.Footer>
+</Card>
+```
+
+**注意：** `"disable-all"` 会级联到所有子组件，包括独立的 `Button`、`Spinner` 等。
+
+## 全局动画配置
+
+在 `HeroUINativeProvider` 上统一关闭应用内全部 HeroUI Native 动画：
+
+```tsx
+import {HeroUINativeProvider} from 'heroui-native';
+
+<HeroUINativeProvider
+  config={{
+    animation: 'disable-all',
+  }}>
+  <App />
+</HeroUINativeProvider>;
+```
+
+这会覆盖各组件自身的 `animation` 设置，全局禁用动画。
+
+## 无障碍
+
+系统「减少动态效果」会在底层自动处理：当用户开启该无障碍选项时，库会通过 `GlobalAnimationSettingsProvider` 与 Reanimated 的 `useReducedMotion()` 全局关闭动画。
+
+你通常无需额外编码，库会尊重系统无障碍偏好。
+
+## 动画状态管理
+
+内部会统一管理禁用态，避免关闭动画后出现卡顿或跳变：禁用时组件会直接落到终态，而不是播放到一半。
+
+## 子级渲染函数
+
+许多组件支持将 `children` 设为函数，便于根据 `isSelected` 等状态渲染：
+
+```tsx
+import {Switch} from 'heroui-native';
+
+<Switch
+  isSelected={isSelected}
+  onSelectedChange={setIsSelected}>
+  {({isSelected, isDisabled}) => (
+    <Switch.Thumb>{isSelected ? <CheckIcon /> : <XIcon />}</Switch.Thumb>
+  )}
+</Switch>;
+```
+
+该模式便于根据选中、禁用等状态构建动态界面。
+
+## 下一步
+
+- [样式](/docs/native/getting-started/styling)
+- [主题](/docs/native/getting-started/theming)
+- [颜色](/docs/native/getting-started/colors)

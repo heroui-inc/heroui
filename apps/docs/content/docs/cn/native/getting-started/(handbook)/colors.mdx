@@ -1,0 +1,478 @@
+---
+title: 颜色
+description: HeroUI Native 的调色板与主题系统
+icon: bucket-paint
+links:
+  themes: true
+  tailwind: theme
+---
+
+import {ColorSectionSideBySide, ColorSectionStacked, ColorSectionFormField, ColorSectionPrimitive} from "@/components/color-section";
+
+HeroUI Native 的颜色体系围绕语义意图构建，而非堆砌视觉色板。系统不会暴露庞大的原始色表，而是定义一小套有意义的色彩角色，覆盖绝大多数界面需求。
+
+系统中的多数颜色会由少量基础值自动派生。这样 HeroUI 能在保持对比度、层级与主题行为一致的同时，让整套体系易于理解与修改。
+
+颜色应首先传达用途与状态；视觉变化来自尺度、强调与上下文。
+
+## 强调色
+
+强调色代表品牌或产品的主识别色，用于吸引对关键操作、高亮与重点时刻的注意。
+
+强调色应有意识地节制使用。滥用会削弱其冲击力，并破坏视觉层级。多数情况下，组件会从基础强调色自动派生悬停、柔和背景与聚焦等相关取值。
+
+<ColorSectionSideBySide
+  name="强调色"
+  baseVariable="--accent"
+  hoverVariable="--accent"
+  hoverCssValue="color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%)"
+  foregroundVariable="--accent-foreground"
+  soft={{
+    baseVariable: "--accent",
+    baseCssValue: "color-mix(in oklab, var(--accent) 15%, transparent)",
+    hoverVariable: "--accent",
+    hoverCssValue: "color-mix(in oklab, var(--accent) 20%, transparent)",
+    foregroundVariable: "--accent",
+    foregroundCssValue: "var(--accent)",
+  }}
+/>
+
+## 默认（中性色）
+
+默认色构成系统的中性骨架，用于大多数非强调的界面元素。
+
+<ColorSectionSideBySide
+  name="默认"
+  baseVariable="--default"
+  hoverVariable="--default"
+  hoverCssValue="color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%)"
+  foregroundVariable="--default-foreground"
+/>
+
+## 成功
+
+成功色传达积极结果、确认与完成状态，常见于反馈组件、状态指示与校验通过等场景。
+
+<ColorSectionSideBySide
+  name="成功"
+  baseVariable="--success"
+  hoverVariable="--success"
+  hoverCssValue="color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%)"
+  foregroundVariable="--success-foreground"
+  soft={{
+    baseVariable: "--success",
+    baseCssValue: "color-mix(in oklab, var(--success) 15%, transparent)",
+    hoverVariable: "--success",
+    hoverCssValue: "color-mix(in oklab, var(--success) 20%, transparent)",
+    foregroundVariable: "--success",
+    foregroundCssValue: "var(--success)",
+  }}
+/>
+
+## 警告
+
+警告色表示需谨慎、存在风险，或需要留意但非破坏性的操作，常用于提示、消息以及用户应暂停或复核信息的过渡状态。
+
+<ColorSectionSideBySide
+  name="警告"
+  baseVariable="--warning"
+  hoverVariable="--warning"
+  hoverCssValue="color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%)"
+  foregroundVariable="--warning-foreground"
+  soft={{
+    baseVariable: "--warning",
+    baseCssValue: "color-mix(in oklab, var(--warning) 15%, transparent)",
+    hoverVariable: "--warning",
+    hoverCssValue: "color-mix(in oklab, var(--warning) 20%, transparent)",
+    foregroundVariable: "--warning",
+    foregroundCssValue: "var(--warning)",
+  }}
+/>
+
+## 危险
+
+危险色表示破坏性、不可逆或关键的操作与状态，应一眼可辨，并稳定用于错误、危险按钮与严重告警。
+
+<ColorSectionSideBySide
+  name="危险"
+  baseVariable="--danger"
+  hoverVariable="--danger"
+  hoverCssValue="color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%)"
+  foregroundVariable="--danger-foreground"
+  soft={{
+    baseVariable: "--danger",
+    baseCssValue: "color-mix(in oklab, var(--danger) 15%, transparent)",
+    hoverVariable: "--danger",
+    hoverCssValue: "color-mix(in oklab, var(--danger) 20%, transparent)",
+    foregroundVariable: "--danger",
+    foregroundCssValue: "var(--danger)",
+  }}
+/>
+
+## 前景色
+
+前景色用于正文级内容，如文字与图标。这些颜色针对可读性与无障碍优化，并会随背景与表面上下文自动适配。请勿在组件内硬编码前景色。
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "前景", variable: "--foreground" },
+    { label: "弱化", variable: "--muted" },
+    { label: "分段", variable: "--segment" },
+    { label: "覆盖层", variable: "--overlay" },
+    { label: "链接", variable: "--link" },
+  ]}
+  darkColors={[
+    { label: "前景", variable: "--foreground", border: true },
+    { label: "弱化", variable: "--muted", border: true },
+    { label: "分段", variable: "--segment", border: true },
+    { label: "覆盖层", variable: "--overlay", border: true },
+    { label: "链接", variable: "--link", border: true },
+  ]}
+/>
+
+## 背景色
+
+背景色定义界面的基底画布，在保持视觉克制的前提下建立整体对比与氛围。
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "背景", variable: "--background", border: true },
+    { label: "次级", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 96%, var(--foreground) 4%)", border: true },
+    { label: "第三级", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 92%, var(--foreground) 8%)", border: true },
+    { label: "反色", variable: "--foreground" },
+  ]}
+  darkColors={[
+    { label: "背景", variable: "--background", border: true },
+    { label: "次级", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 96%, var(--foreground) 4%)", border: true },
+    { label: "第三级", variable: "--background", cssValue: "color-mix(in oklab, var(--background) 92%, var(--foreground) 8%)", border: true },
+    { label: "反色", variable: "--foreground", border: true },
+  ]}
+/>
+
+## 表面色
+
+表面色叠在背景之上，用于卡片、面板、模态与下拉等容器。表面通过抬升、对比与分层形成区隔与层级，而非依赖强烈的色相跳跃。
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "表面", variable: "--surface", border: true },
+    { label: "次级", variable: "--surface-secondary", border: true },
+    { label: "第三级", variable: "--surface-tertiary", border: true },
+  ]}
+  darkColors={[
+    { label: "表面", variable: "--surface", border: true },
+    { label: "次级", variable: "--surface-secondary", border: true },
+    { label: "第三级", variable: "--surface-tertiary", border: true },
+  ]}
+/>
+
+## 表单字段
+
+表单字段色是面向输入、控件与可交互字段的专用令牌，覆盖默认、聚焦与悬停等多种状态。将其独立出来，可让表单元素在视觉上与按钮及界面其余部分保持清晰区分。
+
+<ColorSectionFormField
+  colors={{
+    bg: "--field-background",
+    bgHover: "color-mix(in oklab, var(--field-background) 90%, var(--field-foreground) 10%)",
+    placeholder: "--field-placeholder",
+    foreground: "--field-foreground",
+  }}
+/>
+
+## 分隔线
+
+分隔线色用于分割线、描边与轻量边界，用来组织内容、引导视线而不增加噪点。分隔线色应保持低对比、不抢眼。
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "分隔线", variable: "--separator", border: true },
+    { label: "次级", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%)", border: true },
+    { label: "第三级", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%)", border: true },
+  ]}
+  darkColors={[
+    { label: "分隔线", variable: "--separator", border: true },
+    { label: "次级", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%)", border: true },
+    { label: "第三级", variable: "--surface", cssValue: "color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%)", border: true },
+  ]}
+/>
+
+## 其他
+
+其他颜色在界面中承担特定工具性角色，用于组织内容、引导视线而不增加噪点。
+
+<ColorSectionStacked
+  lightColors={[
+    { label: "边框", variable: "--border" },
+    { label: "背衬", variable: "--backdrop" },
+    { label: "覆盖层", variable: "--overlay", border: true },
+    { label: "分段", variable: "--segment", border: true },
+  ]}
+  darkColors={[
+    { label: "边框", variable: "--border" },
+    { label: "背衬", variable: "--backdrop" },
+    { label: "覆盖层", variable: "--overlay", border: true },
+    { label: "分段", variable: "--segment", border: true },
+  ]}
+/>
+
+## 基础色
+
+基础色是与模式无关的底层取值，作为语义色令牌的根基，在明暗主题之间不会改变。
+
+<ColorSectionPrimitive
+  colors={[
+    { label: "白", variable: "--white", border: true, tooltip: "--white: oklch(100% 0 0)" },
+    { label: "黑", variable: "--black", tooltip: "--black: oklch(0% 0 0)" },
+    { label: "雪白", variable: "--snow", border: true, tooltip: "--snow: oklch(0.9911 0 0)" },
+    { label: "月蚀", variable: "--eclipse", tooltip: "--eclipse: oklch(0.2103 0.0059 285.89)" },
+  ]}
+/>
+
+## 如何使用颜色
+
+**在组件中：**
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="bg-background flex-1 p-4">
+  <Text className="text-foreground mb-4">内容</Text>
+  <Button variant="primary" className="bg-accent">
+    <Button.Label className="text-accent-foreground">点击我</Button.Label>
+  </Button>
+</View>;
+```
+
+**在 CSS 文件中：**
+
+```css title="global.css"
+/* 直接使用 CSS 变量 */
+.container {
+  flex: 1;
+  background-color: var(--accent);
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius);
+}
+```
+
+## 默认主题
+
+完整主题定义见仓库中的 [variables.css](https://github.com/heroui-inc/heroui-native/blob/main/src/styles/variables.css)。该主题通过 [Uniwind 主题系统](https://docs.uniwind.dev/theming/basics) 在明暗模式间自动切换，并支持跟随系统与在代码中切换主题。
+
+<CollapsibleCode lang="css" code={`  @theme {
+    /* 基础色（在明暗模式间保持不变） */
+    --white: oklch(100% 0 0);
+    --black: oklch(0% 0 0);
+    --snow: oklch(0.9911 0 0);
+    --eclipse: oklch(0.2103 0.0059 285.89);
+
+    /* 边框 */
+    --border-width: 1px;
+    --field-border-width: 0px;
+
+    /* 基础圆角 */
+    --radius: 0.5rem;
+    --field-radius: calc(var(--radius) * 1.5);
+
+    /* 不透明度 */
+    --opacity-disabled: 0.5;
+}
+
+@layer theme {
+    :root {
+      @variant light {
+        /* 基础颜色 */
+        --background: oklch(0.9702 0 0);
+        --foreground: var(--eclipse);
+
+        /* 表面 */
+        --surface: var(--white);
+        --surface-foreground: var(--foreground);
+
+        --surface-secondary: oklch(0.9524 0.0013 286.37);
+        --surface-secondary-foreground: var(--foreground);
+
+        --surface-tertiary: oklch(0.9373 0.0013 286.37);
+        --surface-tertiary-foreground: var(--foreground);
+
+        /* 覆盖层 */
+        --overlay: var(--white);
+        --overlay-foreground: var(--foreground);
+        --backdrop: oklch(0% 0 0 / 20%);
+
+        --muted: oklch(0.5517 0.0138 285.94);
+
+        --default: oklch(94% 0.001 286.375);
+        --default-foreground: var(--eclipse);
+
+        --accent: oklch(0.6204 0.195 253.83);
+        --accent-foreground: var(--snow);
+
+        /* 表单字段 */
+        --field-background: var(--white);
+        --field-foreground: oklch(0.2103 0.0059 285.89);
+        --field-placeholder: var(--muted);
+        --field-border: transparent;
+
+        /* 状态色 */
+        --success: oklch(0.7329 0.1935 150.81);
+        --success-foreground: var(--eclipse);
+
+        --warning: oklch(0.7819 0.1585 72.33);
+        --warning-foreground: var(--eclipse);
+
+        --danger: oklch(0.6532 0.2328 25.74);
+        --danger-foreground: var(--snow);
+
+        /* 组件颜色 */
+        --segment: var(--white);
+        --segment-foreground: var(--eclipse);
+
+        /* 杂项颜色 */
+        --border: oklch(90% 0.004 286.32);
+        --separator: oklch(74% 0.004 286.32);
+        --focus: var(--accent);
+        --link: var(--foreground);
+      }
+
+      @variant dark {
+        /* 基础颜色 */
+        --background: oklch(12% 0.005 285.823);
+        --foreground: var(--snow);
+
+        /* 表面 */
+        --surface: oklch(0.2103 0.0059 285.89);
+        --surface-foreground: var(--foreground);
+
+        --surface-secondary: oklch(0.257 0.0037 286.14);
+        --surface-secondary-foreground: var(--foreground);
+
+        --surface-tertiary: oklch(0.2721 0.0024 247.91);
+        --surface-tertiary-foreground: var(--foreground);
+
+        /* 覆盖层 */
+        --overlay: oklch(0.2103 0.0059 285.89);
+        --overlay-foreground: var(--foreground);
+        --backdrop: oklch(0% 0 0 / 20%);
+
+        --muted: oklch(70.5% 0.015 286.067);
+
+        --default: oklch(27.4% 0.006 286.033);
+        --default-foreground: var(--snow);
+
+        --accent: oklch(0.6204 0.195 253.83);
+        --accent-foreground: var(--snow);
+
+        /* 表单字段 */
+        --field-background: oklch(0.2103 0.0059 285.89);
+        --field-foreground: var(--foreground);
+        --field-placeholder: var(--muted);
+        --field-border: transparent;
+
+        /* 状态色 */
+        --success: oklch(0.7329 0.1935 150.81);
+        --success-foreground: var(--eclipse);
+
+        --warning: oklch(0.8203 0.1388 76.34);
+        --warning-foreground: var(--eclipse);
+
+        --danger: oklch(0.594 0.1967 24.63);
+        --danger-foreground: var(--snow);
+
+        /* 组件颜色 */
+        --segment: oklch(0.3964 0.01 285.93);
+        --segment-foreground: var(--foreground);
+
+        /* 杂项颜色 */
+        --border: oklch(28% 0.006 286.033);
+        --separator: oklch(40% 0.006 286.033);
+        --focus: var(--accent);
+        --link: var(--foreground);
+      }
+    }
+  }
+`}
+/>
+
+## 自定义颜色
+
+**覆盖已有颜色：**
+
+```css
+@layer theme {
+  @variant light {
+    /* 覆盖默认颜色 */
+    --accent: oklch(0.65 0.25 270); /* 自定义靛蓝强调色 */
+    --success: oklch(0.65 0.15 155);
+  }
+
+  @variant dark {
+    /* 覆盖深色主题颜色 */
+    --accent: oklch(0.65 0.25 270);
+    --success: oklch(0.75 0.12 155);
+  }
+}
+```
+
+**提示：** 可在 [oklch.com](https://oklch.com) 转换颜色。
+
+**添加自定义颜色：**
+
+```css
+@layer theme {
+  @variant light {
+    --info: oklch(0.6 0.15 210);
+    --info-foreground: oklch(0.98 0 0);
+  }
+
+  @variant dark {
+    --info: oklch(0.7 0.12 210);
+    --info-foreground: oklch(0.15 0 0);
+  }
+}
+
+@theme inline {
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+```
+
+随后即可使用：
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="bg-info p-4 rounded-lg">
+  <Text className="text-info-foreground">提示信息</Text>
+</View>;
+```
+
+> **注意：** 若要进一步了解主题变量及其在 Tailwind CSS v4 中的行为，请参阅 [Tailwind CSS 主题文档](https://tailwindcss.com/docs/theme)。
+
+## useThemeColor 钩子
+
+`useThemeColor` 钩子已增强，支持一次选取多种颜色，在复杂主题场景下更灵活。
+
+**一次选取多种颜色：**
+
+现在可以同时选取多种颜色，在需要一并处理相关色值时很有用：
+
+```tsx
+import { useThemeColor } from 'heroui-native';
+
+// 一次选取多种颜色
+const [accent, accentForeground, success, danger] = useThemeColor([
+  'accent',
+  'accentForeground',
+  'success',
+  'danger',
+]);
+
+// 使用所选颜色
+<View style={{ backgroundColor: accent }}>
+  <Text style={{ color: accentForeground }}>强调色文字</Text>
+</View>;
+```
+
+该改进在需要同时选取并应用多种颜色时，可提升性能，也便于管理复杂的主题组合。

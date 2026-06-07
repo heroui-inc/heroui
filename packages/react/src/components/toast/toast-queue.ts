@@ -34,19 +34,42 @@ export class ToastQueue<T extends object = ToastContentValue> {
 
   constructor(options?: ToastQueueOptions) {
     this.maxVisibleToasts = options?.maxVisibleToasts;
+
+    // Serialize successive ViewTransitions through a tail-extending promise
+    // chain. The View Transitions API only allows one active transition at a
+    // time — starting a second while the first is still animating aborts the
+    // first with a "Skipped ViewTransition due to another transition starting"
+    // DOMException (which surfaces as an unhandled rejection on .finished).
+    // Appending each new transition to the end of the chain (rather than
+    // attaching them all to the first active one) keeps them strictly ordered
+    // even when three or more mutations stack inside a single microtask, as
+    // happens during toast.promise() while the loading toast's own add
+    // transition is still in flight.
+    let transitionChain: Promise<unknown> = Promise.resolve();
+
+    const defaultWrapUpdate = (fn: () => void): void => {
+      if (typeof document === "undefined" || !("startViewTransition" in document)) {
+        fn();
+
+        return;
+      }
+
+      const runNext = (): Promise<unknown> => {
+        const transition = document.startViewTransition(() => {
+          flushSync(fn);
+        });
+
+        // Swallow the "skipped" rejection so that chain steps after a
+        // superseded transition still run.
+        return transition.finished.catch(() => {});
+      };
+
+      transitionChain = transitionChain.then(runNext, runNext);
+    };
+
     this.queue = new ToastQueuePrimitive<T>({
       maxVisibleToasts: DEFAULT_RAC_MAX_VISIBLE_TOAST,
-      wrapUpdate: options?.wrapUpdate
-        ? options.wrapUpdate
-        : (fn: () => void) => {
-            if ("startViewTransition" in document) {
-              document.startViewTransition(() => {
-                flushSync(fn);
-              });
-            } else {
-              fn();
-            }
-          },
+      wrapUpdate: options?.wrapUpdate ?? defaultWrapUpdate,
     });
   }
 

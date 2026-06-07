@@ -1,0 +1,266 @@
+---
+title: TextField 文本输入框
+description: 带标签、说明与错误处理的文本输入，用于收集用户输入。
+links:
+  source_native: text-field/text-field.tsx
+  styles_native: text-field/text-field.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-field-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { TextField } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<TextField>
+  <Label>...</Label>
+  <Input />
+  <Description>...</Description>
+  <FieldError>...</FieldError>
+</TextField>
+```
+
+- **TextField**：根容器，负责间距与状态管理
+- **Label**：标签，必填时可显示星号（见 [Label](./label)）
+- **Input**：带动画边框与背景的输入（见 [Input](./input)）
+- **Description**：辅助说明文字（见 [Description](./description)）
+- **FieldError**：校验错误展示（见 [FieldError](./field-error)）
+
+## 用法
+
+### 基础用法
+
+提供带标签与说明的完整输入结构。
+
+```tsx
+<TextField>
+  <Label>邮箱</Label>
+  <Input placeholder="请输入邮箱" />
+  <Description>我们不会公开您的邮箱</Description>
+</TextField>
+```
+
+### 必填
+
+在必填字段的标签上显示星号。
+
+```tsx
+<TextField isRequired>
+  <Label>用户名</Label>
+  <Input placeholder="请选择用户名" />
+</TextField>
+```
+
+### 校验
+
+非法时展示错误信息。
+
+```tsx
+import { FieldError, Input, Label, TextField } from 'heroui-native';
+
+<TextField isRequired isInvalid={true}>
+  <Label>邮箱</Label>
+  <Input placeholder="请输入邮箱" />
+  <FieldError>请输入有效邮箱</FieldError>
+</TextField>;
+```
+
+### 局部覆盖非法状态
+
+为单个部件覆盖上下文的非法状态。
+
+```tsx
+import {
+  Description,
+  FieldError,
+  Input,
+  Label,
+  TextField,
+} from 'heroui-native';
+
+<TextField isInvalid={true}>
+  <Label isInvalid={false}>邮箱</Label>
+  <Input placeholder="请输入邮箱" isInvalid={false} />
+  <Description isInvalid={false}>
+    尽管输入非法，此说明仍可显示
+  </Description>
+  <FieldError>邮箱格式不正确</FieldError>
+</TextField>;
+```
+
+### 多行输入
+
+用于较长内容。
+
+```tsx
+<TextField>
+  <Label>留言</Label>
+  <Input placeholder="请输入留言…" multiline numberOfLines={4} />
+  <Description>最多 500 字</Description>
+</TextField>
+```
+
+### 禁用状态
+
+禁用整个字段。
+
+```tsx
+<TextField isDisabled>
+  <Label>禁用字段</Label>
+  <Input placeholder="不可编辑" value="只读内容" />
+</TextField>
+```
+
+### 变体
+
+按场景切换输入样式。
+
+```tsx
+<TextField>
+  <Label>主要变体</Label>
+  <Input placeholder="主要样式" variant="primary" />
+</TextField>
+
+<TextField>
+  <Label>次要变体</Label>
+  <Input placeholder="次要样式" variant="secondary" />
+</TextField>
+```
+
+### 自定义样式
+
+通过 `className` 自定义输入外观。
+
+```tsx
+<TextField>
+  <Label>自定义样式</Label>
+  <Input
+    placeholder="自定义颜色"
+    className="bg-blue-50 border-blue-500 focus:border-blue-700"
+  />
+</TextField>
+```
+
+## 示例
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { Description, Input, Label, TextField } from 'heroui-native';
+import { useState } from 'react';
+import { Pressable, View } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export const TextInputContent = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  return (
+    <View className="gap-4">
+      <TextField isRequired>
+        <Label>邮箱</Label>
+        <Input
+          placeholder="请输入邮箱"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Description>
+          我们不会向他人公开您的邮箱。
+        </Description>
+      </TextField>
+
+      <TextField isRequired>
+        <Label>新密码</Label>
+        <View className="w-full flex-row items-center">
+          <Input
+            value={password}
+            onChangeText={setPassword}
+            className="flex-1 px-10"
+            placeholder="请输入密码"
+            secureTextEntry={!isPasswordVisible}
+          />
+          <StyledIonicons
+            name="lock-closed-outline"
+            size={16}
+            className="absolute left-3.5 text-muted"
+            pointerEvents="none"
+          />
+          <Pressable
+            className="absolute right-4"
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+          >
+            <StyledIonicons
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+              size={16}
+              className="text-muted"
+            />
+          </Pressable>
+        </View>
+        <Description>密码至少 6 位</Description>
+      </TextField>
+    </View>
+  );
+};
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/text-field.tsx>)。
+
+## API 参考
+
+### TextField
+
+| prop         | type                         | default     | description                                                                               |
+| ------------ | ---------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| children     | `React.ReactNode`            | -           | 文本字段内的子节点                                                                       |
+| isDisabled   | `boolean`                    | `false`     | 是否禁用整个字段                                                                         |
+| isInvalid    | `boolean`                    | `false`     | 是否处于非法状态                                                                         |
+| isRequired   | `boolean`                    | `false`     | 是否必填（显示星号）                                                                     |
+| className    | `string`                     | -           | 根元素自定义 class                                                                       |
+| animation    | `"disable-all" \| undefined` | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级的全部动画                                     |
+| ...ViewProps | `ViewProps`                  | -           | 支持 React Native `View` 的全部属性                                                      |
+
+> **说明**：`Label`、`Input`、`Description`、`FieldError` 的详细 API 见各自文档：
+>
+> - [Label](./label)
+> - [Input](./input)
+> - [Description](./description)
+> - [FieldError](./field-error)
+>
+> 这些组件会通过 form-item-state 上下文自动消费 `TextField` 的表单状态。
+
+## Hooks
+
+### useTextField
+
+访问 `TextField` 上下文，必须在 `TextField` 内使用。
+
+```tsx
+import { TextField, useTextField } from 'heroui-native';
+
+function CustomComponent() {
+  const { isDisabled, isInvalid, isRequired } = useTextField();
+
+  // 使用上下文值…
+}
+```
+
+#### 返回值
+
+| property   | type      | description           |
+| ---------- | --------- | --------------------- |
+| isDisabled | `boolean` | 是否禁用整个字段      |
+| isInvalid  | `boolean` | 是否处于非法状态      |
+| isRequired | `boolean` | 是否必填              |

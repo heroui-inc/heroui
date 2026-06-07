@@ -1,6 +1,5 @@
 import type {MDXComponents} from "mdx/types";
 
-import Link from "fumadocs-core/link";
 import {Callout as FDCallout} from "fumadocs-ui/components/callout";
 import {Card, Cards} from "fumadocs-ui/components/card";
 import {Pre} from "fumadocs-ui/components/codeblock";
@@ -11,8 +10,10 @@ import {Suspense} from "react";
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
 import {ComponentsCategory} from "./components/components-category";
+import {CopyPrompt} from "./components/copy-prompt";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
+import {LocaleLink} from "./components/locale-link";
 import {
   ComponentsCategory as NativeComponentsCategory,
   ImageHeroView as NativeImageHeroView,
@@ -39,12 +40,12 @@ const Star = (props: any) => <Iconify {...props} icon="star-fill" />;
 
 const Icon = (props: any) => <Iconify {...props} />;
 
-function ComponentCount() {
-  return <>{getComponentCount()}</>;
+function ComponentCount({locale}: {locale?: string} = {}) {
+  return <>{getComponentCount(locale)}</>;
 }
 
-function ExampleCount() {
-  return <>{getExampleCount()}</>;
+function ExampleCount({locale}: {locale?: string} = {}) {
+  return <>{getExampleCount(locale)}</>;
 }
 
 const MAX_LINES_FOR_LINE_NUMBERS = 20;
@@ -71,10 +72,13 @@ function ComponentCard({
   href: string;
 }) {
   return (
-    <a className="block rounded-lg border p-4 transition-colors hover:bg-muted/50" href={href}>
+    <LocaleLink
+      className="block rounded-lg border p-4 transition-colors hover:bg-muted/50"
+      href={href}
+    >
       <h3 className="mb-2 font-semibold">{name}</h3>
       <p className="text-sm text-muted">{description}</p>
-    </a>
+    </LocaleLink>
   );
 }
 
@@ -121,11 +125,12 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentGrid,
     ComponentPreview,
     ComponentsCategory,
+    CopyPrompt,
     DocsImage,
     ExampleCount,
     Icon,
     Info,
-    Link,
+    Link: LocaleLink,
     NativeComponentsCategory,
     NativeImageHeroView,
     NativeQRPreviewPopover,

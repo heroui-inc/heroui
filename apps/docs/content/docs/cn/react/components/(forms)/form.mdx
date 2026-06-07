@@ -1,0 +1,158 @@
+---
+title: Form 表单
+description: 用于表单校验与提交处理的包装组件。
+links:
+  source: form/form.tsx
+  rac: https://react-spectrum.adobe.com/react-aria/Form.html
+---
+
+## 引入
+
+```tsx
+import { Form } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="form-basic" />
+
+### 组件结构
+
+引入所有组件部分，并自由组合：
+
+```tsx
+import {Form, Button} from '@heroui/react';
+
+export default () => (
+  <Form>
+    {/* Form fields go here */}
+    <Button type="submit"/>
+    <Button type="reset"/>
+  </Form>
+)
+```
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="form-custom-render-function"
+/>
+
+<RelatedComponents component="form" />
+
+<RelatedShowcases component="Form" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {Form, TextField, Label, Input, FieldError, Button} from '@heroui/react';
+
+function CustomForm() {
+  return (
+    <Form className="w-full max-w-md space-y-4 rounded-lg border border-border bg-surface p-6">
+      <TextField>
+        <Label className="text-sm font-medium">Email</Label>
+        <Input className="rounded-full border-border/60" placeholder="Enter your email" />
+        <FieldError className="text-xs" />
+      </TextField>
+      <Button type="submit" className="w-full">
+        Submit
+      </Button>
+    </Form>
+  );
+}
+```
+
+## API 参考
+
+### Form Props
+
+Form 组件是对 React Aria `Form` 原语的封装，提供表单校验与提交处理能力。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `action` | `string \| FormHTMLAttributes['action']` | - | 表单数据提交的目标 URL。 |
+| `className` | `string` | - | 应用到 form 元素上的 Tailwind CSS 类。 |
+| `children` | `React.ReactNode` | - | 表单内容（字段、按钮等）。 |
+| `encType` | `'application/x-www-form-urlencoded' \| 'multipart/form-data' \| 'text/plain'` | - | 表单数据提交时的编码类型。 |
+| `method` | `'get' \| 'post'` | - | 提交表单时使用的 HTTP 方法。 |
+| `onInvalid` | `(event: FormEvent<HTMLFormElement>) => void` | - | 表单校验失败时调用的处理函数。默认会聚焦第一个无效字段，使用 `preventDefault()` 可自定义聚焦行为。 |
+| `onReset` | `(event: FormEvent<HTMLFormElement>) => void` | - | 表单被重置时调用的处理函数。 |
+| `onSubmit` | `(event: FormEvent<HTMLFormElement>) => void` | - | 表单被提交时调用的处理函数。 |
+| `target` | `'_self' \| '_blank' \| '_parent' \| '_top'` | - | 提交表单后响应的展示位置。 |
+| `validationBehavior` | `'native' \| 'aria'` | `'native'` | 使用浏览器原生 HTML 校验还是 ARIA 校验。`'native'` 会阻止表单提交，`'aria'` 会实时显示错误。 |
+| `validationErrors` | `ValidationErrors` | - | 按字段名映射的服务端校验错误。错误会立即展示，并在用户修改字段后自动清除。 |
+| `aria-label` | `string` | - | 表单的无障碍标签。 |
+| `aria-labelledby` | `string` | - | 用于为表单提供标签的元素 ID。提供后会创建 form landmark。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+### 表单校验
+
+Form 组件集成了 React Aria 的校验体系，你可以：
+
+- 使用内置的 HTML5 校验属性（`required`、`minLength`、`pattern` 等）
+- 在 TextField 等组件上提供自定义校验函数
+- 通过 FieldError 组件展示校验错误
+- 在提交时进行完整的校验处理
+- 通过 `validationErrors` prop 提供服务端校验错误
+
+#### 校验行为
+
+`validationBehavior` prop 控制校验信息的展示方式：
+
+- **`native`**（默认）：使用浏览器原生 HTML 校验，发生错误时阻止表单提交。
+- **`aria`**：使用 ARIA 属性进行校验，在用户输入时实时显示错误，且不会阻止提交。
+
+该行为可以在 form 层级设置，也可以在单个字段层级覆盖。
+
+### 表单提交
+
+表单可以通过多种方式提交：
+
+- **传统提交**：设置 `action` prop 提交到一个 URL
+- **JavaScript 处理**：使用 `onSubmit` 处理函数处理表单数据
+- **FormData API**：在提交处理函数中使用 FormData API 读取表单数据
+
+使用 FormData 的示例：
+
+```tsx
+function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const data = Object.fromEntries(formData);
+  console.log('Form data:', data);
+}
+```
+
+### 与表单字段集成
+
+Form 组件可与 HeroUI 的所有表单字段组件无缝配合：
+
+- **TextField**：带标签与校验的文本输入
+- **Checkbox**：布尔选择
+- **RadioGroup**：从多个选项中单选
+- **Switch**：切换控件
+- **Button**：用于表单提交与重置
+
+所有字段组件在置于 Form 内部时，都会自动接入 Form 的校验与提交行为。
+
+### 无障碍
+
+使用 React Aria 组件时，表单默认即具备良好的无障碍能力，主要特性包括：
+
+- 原生 `<form>` 元素语义
+- 通过 `aria-label` 或 `aria-labelledby` 创建 form landmark
+- 校验失败时自动聚焦管理
+- 设置 `validationBehavior="aria"` 时使用 ARIA 校验属性
+
+### 进阶用法
+
+更高级的使用场景，包括：
+- 自定义校验上下文
+- Form context provider
+- 与第三方库的集成
+- 校验错误时的自定义聚焦管理
+
+请参考 [React Aria Form 文档](https://react-spectrum.adobe.com/react-aria/Form.html)。

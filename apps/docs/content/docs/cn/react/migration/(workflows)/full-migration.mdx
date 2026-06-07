@@ -1,0 +1,509 @@
+---
+title: 完全迁移
+description: 使用完整迁移方法将 HeroUI v2 迁移到 v3 的分步指南
+---
+
+## 概述
+
+完全迁移是一种从 HeroUI v2 迁移到 v3 的结构化方法。此方法首先迁移所有组件代码，然后切换依赖关系，确保干净的过渡。
+
+**重要：** 完全迁移意味着项目在迁移过程中将被破坏（v2 和 v3 不能共存）。在功能分支中工作以维护工作主分支。
+
+### AI 助理资源
+
+AI 助手可以协助迁移。你可以使用 [迁移 MCP 服务器](/docs/react/migration/mcp-server) 获取工具与提示词，使用 [迁移 Agent Skills](/docs/react/migration/agent-skills) 获取基于技能的知识，或使用 [用于迁移的 AGENTS.md](/docs/react/migration/agents-md) 将迁移文档下载到项目中。
+
+## 迁移工作流程
+
+**重要**：由于 v2 和 v3 无法共存，因此迁移分两个主要阶段进行：
+
+1. **准备阶段**：迁移所有组件代码，同时仍依赖 v2 依赖项（代码将被破坏）
+2. **切换阶段**：将依赖项更新到 v3 并修复任何剩余问题
+
+**⚠️ 关键：不要构建来检查迁移过程中的错误**
+
+- 使用**类型检查**（例如，`tsc --noEmit`) 如果可以检查 TypeScript 错误
+- 使用**lint**（例如，`eslint`, `biome check`) 如果可以检查代码质量
+- **不要**运行构建命令（例如，`npm run build`, `next build`, `vite build`)
+- **请勿** 在迁移期间尝试启动/运行项目
+
+## 分步迁移指南
+
+<section id="step-1-update-dependencies">
+
+### 第 1 步：更新依赖项
+
+#### 更新反应
+
+v3 需要 React 19+。更新你的 React 版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add react@^19.0.0 react-dom@^19.0.0
+    ```
+  </Tab>
+</Tabs>
+
+**注意**：这些依赖项更新可以在切换 HeroUI 之前完成（不会破坏项目）。但是，HeroUI 包切换只能在所有组件代码迁移之后进行。
+
+#### 更新 HeroUI 包
+
+**重要**：在迁移所有组件代码后执行此操作。删除 v2 软件包并安装 v3：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm uninstall @heroui/react @heroui/theme
+    npm install @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm remove @heroui/react @heroui/theme
+    pnpm add @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn remove @heroui/react @heroui/theme
+    yarn add @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun remove @heroui/react @heroui/theme
+    bun add @heroui/styles @heroui/react
+    ```
+  </Tab>
+</Tabs>
+
+#### 删除Framer Motion
+
+v3 不再需要 Framer Motion：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm uninstall framer-motion
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm remove framer-motion
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn remove framer-motion
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun remove framer-motion
+    ```
+  </Tab>
+</Tabs>
+
+#### 更新 Tailwind CSS
+
+确保您使用的是 Tailwind CSS v4：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm install tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add tailwindcss@^4.0.0
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add tailwindcss@^4.0.0
+    ```
+  </Tab>
+</Tabs>
+
+</section>
+
+<section id="step-2-update-theming-configuration">
+
+### 第 2 步：更新主题配置
+
+#### 删除 Tailwind 插件配置
+
+**v2 配置：**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
+  plugins: [heroui()],
+  // ... other config
+};
+```
+
+**v3 配置：**
+
+删除`heroui()`来自 Tailwind 配置的插件。如果您仅将 Tailwind 用于 HeroUI 并且没有其他自定义，则可以删除`tailwind.config.js`完全。否则，保留该文件但删除 HeroUI 插件配置。
+
+#### 更新 CSS 导入
+
+**v2 CSS：**
+
+```css
+/* globals.css or main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+**v3 CSS：**
+
+```css
+/* globals.css or main.css */
+@import "tailwindcss";
+@import "@heroui/styles"; /* [!code highlight]*/
+```
+
+<Callout type="warning">
+  **重要提示：** 导入顺序很重要：先导入 `tailwindcss`，再导入 `@heroui/styles`。
+</Callout>
+
+#### 删除主题插件文件
+
+如果您创建了一个`hero.ts`v2 文件，您可以将其删除：
+
+```bash
+rm hero.ts
+```
+
+</section>
+
+<section id="step-3-remove-herouiprovider">
+
+### 第3步：删除HeroUIProvider
+
+v3 不需要 Provider 组件。从应用程序根目录中删除它。
+
+**v2 代码：**
+
+```tsx
+// app.tsx or App.tsx
+import {HeroUIProvider} from "@heroui/react";
+
+function App() {
+  return (
+    <HeroUIProvider>
+      <YourApplication />
+    </HeroUIProvider>
+  );
+}
+```
+
+**v3 代码：**
+
+```tsx
+// app.tsx or App.tsx
+function App() {
+  return <YourApplication />;
+}
+```
+
+**如果您使用 Provider 道具：**
+
+如果您使用 Provider 道具，例如`navigate`, `useHref`, `locale`, `disableAnimation`等等，您需要以不同的方式处理这些：
+
+- **路由器集成**：直接使用 React Router 或您的路由库
+- **区域设置**：使用 React Aria 的`I18nProvider`如果需要直接
+- **动画**：请参阅下面的动画更改部分
+
+#### 动画变化
+
+v3 删除了 Framer Motion 依赖性并以不同方式处理动画：
+
+- **基于 CSS 的动画**：v3 使用原生 CSS 动画和过渡，而不是基于 JavaScript 的动画
+- **更好的性能**：CSS 动画提供更好的性能和更流畅的动画
+- **无全局禁用**：与 v2 的 Provider 不同`disableAnimation`道具，v3 中没有全局动画切换
+- **每个组件控制**：通过 CSS 或特定于组件的 props（如果可用）控制动画
+- **自定义动画**：使用标准 CSS`@keyframes`和自定义动画的过渡属性
+
+</section>
+
+<section id="step-4-replace-removed-hooks">
+
+### 第 4 步：更换拆下的挂钩
+
+HeroUI v2 提供了组件挂钩（例如`useSwitch`, `useInput`, `useCheckbox`等）和实用程序挂钩，例如`useDisclosure`。 HeroUI v3 删除了大多数组件挂钩，转而使用复合组件，并替换了`useDisclosure`和`useOverlayState`.
+
+查看综合[Hooks 迁移指南](/docs/react/migration/hooks)为了：
+- 组件挂钩移除并迁移到复合组件
+- `useDisclosure` → `useOverlayState`迁移
+- 迁移策略和示例
+
+</section>
+
+<section id="step-5-update-component-imports">
+
+### 第 5 步：更新组件导入
+
+所有组件现在都从单个包导入：
+
+**v2 导入：**
+
+```tsx
+// Individual packages (if used)
+import {Button} from "@heroui/button";
+import {Card} from "@heroui/card";
+
+// Or from main package
+import {Button, Card} from "@heroui/react";
+```
+
+**v3 导入：**
+
+```tsx
+// All components from single package
+import {Button, Card} from "@heroui/react";
+```
+
+#### TypeScript 注意事项
+
+如果您使用 TypeScript，请注意 v3 中的类型更改：
+
+```tsx
+// Import types alongside components
+import {Button, type ButtonProps} from "@heroui/react";
+
+// Compound component types are properly exported
+import {Checkbox, type CheckboxProps} from "@heroui/react";
+
+// Type names may have changed - check component documentation
+type MyButtonProps = ButtonProps & {
+  customProp?: string;
+};
+```
+
+**常见类型变化：**
+- 组件 prop 接口可能有不同的名称或属性
+- 复合零部件有自己的类型导出
+- 更新了 Ref 类型以匹配 React 19 模式
+
+</section>
+
+<section id="step-6-component-migration">
+
+### 第6步：组件迁移
+
+使用[组件迁移参考](/docs/react/migration#component-migration-reference)表查找每个组件的迁移指南。根据组件的特定指南迁移组件。
+
+**要点：**
+- 根据需要查看各个组件迁移指南
+- 迁移组件 API、props 和结构
+- 更新复合组件模式（复选框、单选、开关、卡片、模态等）
+- 更新组组件（ButtonGroup、CheckboxGroup、RadioGroup）
+- 处理已移除组件（**Code**、**Image**、**Navbar**、**Ripple**、**Snippet**、**Spacer**、**User**）——替换为原生 HTML 或自定义实现
+- 处理进行中/计划中的组件 - 替换为 HTML 元素，直到 v3 组件可用
+
+</section>
+
+<section id="step-7-update-custom-theme-overrides">
+
+### 第 7 步：更新自定义主题覆盖
+
+如果您在 v2 中有自定义主题覆盖，则需要针对 v3 的基于 CSS 的主题系统更新它们。
+
+**v2 主题定制：**
+
+```js
+// tailwind.config.js
+const {heroui} = require("@heroui/react");
+
+module.exports = {
+  plugins: [
+    heroui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              // custom colors
+            },
+          },
+        },
+      },
+    }),
+  ],
+};
+```
+
+**v3 主题定制：**
+
+v3 使用 CSS 变量。在 CSS 中覆盖它们：
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "@heroui/styles";
+
+:root {
+  --color-primary: /* your color */;
+  /* other CSS variables */
+}
+```
+
+检查[主题文档](/docs/react/getting-started/handbook/theming)获取可用的 CSS 变量。
+
+这是在继续样式迁移之前暂停并验证组件功能的好时机。
+
+</section>
+
+<section id="step-8-hooks-migration">
+
+### 第8步：Hooks迁移
+
+组件迁移完成后，确保所有钩子都已迁移：
+
+1. **替换组件钩子**：将 `useSwitch`、`useInput`、`useCheckbox` 等替换为复合组件用法
+2. **迁移 useDisclosure**：将 `useDisclosure` 替换为 `useOverlayState` 以管理浮层状态
+3. **参考 Hooks 指南**：参阅 [Hooks 迁移指南](/docs/react/migration/hooks) 获取详细步骤与示例
+
+</section>
+
+<section id="step-9-styling-migration">
+
+### 第 9 步：样式迁移
+
+挂钩迁移完成后，继续进行样式更改。这是一个单独的步骤，以确保在解决视觉更改之前验证组件功能。
+
+**样式迁移指南：**
+
+查看综合[样式迁移指南](/docs/react/migration/styling)为了：
+
+- 实用程序类更改（`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`， ETC。）
+- 颜色标记更新（`bg-primary` → `bg-accent`, `bg-content1` → `bg-surface`， ETC。）
+- 组件样式差异（大小、间距、边框半径）
+- CSS 变量更改
+- 视觉差异和对齐变化
+
+**主要样式变化：**
+
+- **实用程序类**：自定义实用程序替换为标准 Tailwind 类
+- **颜色标记**：`primary` → `accent`, `secondary`删除,`content1-4` → `surface`/`overlay`
+- **编号比例**：颜色比例如`primary-50`, `primary-100`已删除
+- **边框半径**：默认值已更改（v3 中更小）
+- **组件样式**：更新了默认大小、填充和间距
+
+**迁移清单：**
+
+- 审查[样式迁移指南](/docs/react/migration/styling)
+- 更新实用程序类（`text-tiny` → `text-xs`， ETC。）
+- 更新颜色标记（`bg-primary` → `bg-accent`， ETC。）
+- 更新内容颜色（`bg-content1` → `bg-surface`或者`bg-overlay`)
+- 更新编号色阶（`bg-primary-50` → `bg-accent-soft`)
+- 检查组件样式更改（大小、间距、边框半径）
+- 测试视觉外观并根据需要进行调整
+
+</section>
+
+<section id="step-10-testing">
+
+### 第10步：测试
+
+迁移后，彻底测试您的应用程序：
+
+1. **视觉测试**：检查所有组件正确渲染
+2. **功能**：测试所有交互和行为
+3. **辅助功能**：验证键盘导航和屏幕阅读器支持
+4. **响应式设计**：在不同的屏幕尺寸上进行测试
+5. **性能**：检查包大小和运行时性能
+
+</section>
+
+## 迁移清单
+
+使用此清单来跟踪您的完整迁移进度：
+
+### 依赖关系
+- 将 React 更新至 v19+
+- 将 HeroUI 包更新到 v3（组件迁移后）
+- 删除Framer Motion
+- 将 Tailwind CSS 更新至 v4
+
+### 配置
+- 消除`heroui()`Tailwind 配置中的插件
+- 更新 CSS 导入
+- 消除`hero.ts`文件（如果存在）
+
+### 应用程序代码-组件迁移
+- 消除`HeroUIProvider`包装纸
+- 处理提供者道具迁移（路由器、区域设置、动画）
+- 将所有组件导入更新为`@heroui/react`
+- 迁移重命名组件（Divider → Separator、Autocomplete → Combobox、NumberInput → NumberField）
+- 更新复合组件模式（复选框、单选、开关、卡片、模态等）
+- 更新组组件（ButtonGroup、CheckboxGroup、RadioGroup）
+- 更新 TypeScript 类型引用（如果使用组件类型）
+- 处理已移除组件（**Code**、**Image**、**Navbar**、**Ripple**、**Snippet**、**Spacer**、**User**）——替换为原生 HTML 或自定义实现
+- 处理进行中/计划中的组件 - 替换为 HTML 元素，直到 v3 组件可用
+- 考虑使用`asChild`灵活构图的属性
+- **在进行钩子迁移之前验证组件功能**
+
+### 应用程序代码-Hooks迁移
+- 审查[Hooks 迁移指南](/docs/react/migration/hooks)
+- 更换组件挂钩（`useSwitch`, `useInput`, `useCheckbox`等）与复合组件
+- 代替`useDisclosure`和`useOverlayState`用于覆盖状态管理
+- 根据迁移指南更新所有钩子用法
+- **在继续样式迁移之前验证钩子迁移**
+
+### 应用程序代码 - 样式迁移
+- 审查[样式迁移指南](/docs/react/migration/styling)
+- 更新实用程序类（`text-tiny` → `text-xs`, `rounded-small` → `rounded-sm`， ETC。）
+- 更新颜色标记（`bg-primary` → `bg-accent`, `bg-secondary` → `bg-default`， ETC。）
+- 更新内容颜色（`bg-content1` → `bg-surface`或者`bg-overlay`)
+- 更新编号色阶（`bg-primary-50` → `bg-accent-soft`， ETC。）
+- 更新转换实用程序（`.transition-background` → `transition-colors`， ETC。）
+- 检查组件样式更改（大小、间距、边框半径）
+- 将自定义主题覆盖更新为 CSS 变量
+- 测试视觉外观并根据需要进行调整
+
+### 测试
+- 视觉回归测试
+- 功能测试
+- 辅助功能测试
+- 性能测试
+
+## 下一步
+
+完成完整迁移后：
+
+1. 回顾[v3 组件文档](/docs/react/components)
+2. 探索 v3 中可用的新组件
+3. 查看[样式指南](/docs/react/getting-started/handbook/styling)
+4. 了解[构图模式](/docs/react/getting-started/handbook/composition)

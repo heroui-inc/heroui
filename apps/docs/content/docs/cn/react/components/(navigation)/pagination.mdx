@@ -1,0 +1,253 @@
+---
+title: Pagination 分页
+description: 分页导航：可组合的页码链接、上一页/下一页按钮与省略号指示器。
+links:
+  source: pagination/pagination.tsx
+  styles: pagination.css
+  storybook: Components/Navigation/Pagination
+---
+
+## 引入
+
+```tsx
+import { Pagination } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="pagination-basic"
+/>
+
+### 组件结构
+
+导入 Pagination 组件后，可通过点号访问各个子部分。
+
+```tsx
+import { Pagination } from '@heroui/react';
+
+export default () => (
+  <Pagination>
+    <Pagination.Summary>Showing 1-10 of 100 results</Pagination.Summary>
+    <Pagination.Content>
+      <Pagination.Item>
+        <Pagination.Previous>
+          <Pagination.PreviousIcon />
+          <span>Previous</span>
+        </Pagination.Previous>
+      </Pagination.Item>
+      <Pagination.Item>
+        <Pagination.Link isActive>1</Pagination.Link>
+      </Pagination.Item>
+      <Pagination.Item>
+        <Pagination.Ellipsis />
+      </Pagination.Item>
+      <Pagination.Item>
+        <Pagination.Link>10</Pagination.Link>
+      </Pagination.Item>
+      <Pagination.Item>
+        <Pagination.Next>
+          <span>Next</span>
+          <Pagination.NextIcon />
+        </Pagination.Next>
+      </Pagination.Item>
+    </Pagination.Content>
+  </Pagination>
+);
+```
+
+### 尺寸
+
+<ComponentPreview
+  name="pagination-sizes"
+/>
+
+### 带省略号
+
+<ComponentPreview
+  name="pagination-with-ellipsis"
+/>
+
+### 简化（上一页 / 下一页）
+
+<ComponentPreview
+  name="pagination-simple-prev-next"
+/>
+
+### 带摘要
+
+<ComponentPreview
+  name="pagination-with-summary"
+/>
+
+### 自定义图标
+
+你可以通过为 `PreviousIcon` 与 `NextIcon` 传入自定义子节点来替换默认的 chevron 图标。
+
+<ComponentPreview
+  name="pagination-custom-icons"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="pagination-controlled"
+/>
+
+### 禁用
+
+<ComponentPreview
+  name="pagination-disabled"
+/>
+
+<RelatedComponents component="pagination" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以单独定制 Pagination 的各个子部分：
+
+```tsx
+import { Pagination } from '@heroui/react';
+
+function CustomPagination() {
+  return (
+    <Pagination className="gap-8">
+      <Pagination.Content className="gap-2">
+        <Pagination.Item>
+          <Pagination.Link className="rounded-md" isActive>1</Pagination.Link>
+        </Pagination.Item>
+      </Pagination.Content>
+    </Pagination>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 Pagination 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .pagination {
+    @apply gap-8;
+  }
+
+  .pagination__link {
+    @apply rounded-md;
+  }
+
+  .pagination__summary {
+    @apply text-xs font-semibold;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，以确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Pagination 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/pagination.css)）：
+
+#### 基础与布局类
+- `.pagination` - 根导航容器（flex 布局）
+- `.pagination__summary` - 左侧信息文本容器
+- `.pagination__content` - 分页项容器
+- `.pagination__item` - 单个分页项包裹层
+- `.pagination__link` - 页码按钮（ghost 按钮样式）
+- `.pagination__link--nav` - 导航按钮修饰符（Previous/Next）
+- `.pagination__ellipsis` - 省略号指示器
+
+#### 尺寸类
+- `.pagination--sm` - 小尺寸变体
+- `.pagination--md` - 中尺寸变体（默认）
+- `.pagination--lg` - 大尺寸变体
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，便于灵活定制：
+
+- **Active page**：`[data-active="true"]` 或 `[aria-current="page"]`
+- **Hover**：`:hover` 或 `[data-hovered="true"]`
+- **Focus**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **Disabled**：`:disabled` 或 `[aria-disabled="true"]`
+- **Pressed**：`:active` 或 `[data-pressed="true"]`
+
+## API 参考
+
+### Pagination Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 分页控件的尺寸 |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 分页部件（Summary、Content 等） |
+
+### Pagination.Summary Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 摘要内容（例如 "Showing 1-10 of 120"） |
+
+### Pagination.Content Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 分页项 |
+
+### Pagination.Item Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 项内容（Link、Previous、Next 或 Ellipsis） |
+
+### Pagination.Link Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isActive` | `boolean` | `false` | 是否为当前页 |
+| `isDisabled` | `boolean` | `false` | 是否禁用链接 |
+| `onPress` | `(e: PressEvent) => void` | - | 按下事件处理函数（来自 React Aria） |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 页码内容 |
+
+### Pagination.Previous / Pagination.Next Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isDisabled` | `boolean` | `false` | 是否禁用按钮 |
+| `onPress` | `(e: PressEvent) => void` | - | 按下事件处理函数（来自 React Aria） |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 按钮内容（可与 PreviousIcon/NextIcon 组合） |
+
+### Pagination.PreviousIcon / Pagination.NextIcon Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | Default chevron SVG | 用于替换默认 chevron 的自定义图标 |
+
+### Pagination.Ellipsis Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+
+## 无障碍
+
+Pagination 基于 [React Aria 的 Button](https://react-spectrum.adobe.com/react-aria/Button.html) 原语实现所有可交互元素，并提供：
+
+- 语义化 `<nav>` 元素，包含 `aria-label="pagination"` 与 `role="navigation"`
+- 通过在当前链接上使用 `aria-current="page"` 标示活动页
+- 通过 Tab 键在全部可交互元素间进行键盘导航
+- 通过 React Aria 在鼠标、触摸与键盘交互之间统一处理按下事件
+- 键盘导航时通过 `:focus-visible` 显示焦点环
+- 省略号使用 `aria-hidden="true"`，避免干扰屏幕阅读器
+- 通过 `isDisabled` 向辅助技术正确传达禁用状态
+
+> **说明：** Pagination 按钮请使用 `onPress` 而不是 `onClick`。React Aria 的 `onPress` 会规范化不同指针类型的按下行为，并提供开箱即用的无障碍改进。

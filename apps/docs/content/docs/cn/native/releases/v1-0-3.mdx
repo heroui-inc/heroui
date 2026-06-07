@@ -1,0 +1,233 @@
+---
+title: v1.0.3
+description:
+  全新 Text 排版组件、ScrollShadow 反向列表支持、Tabs RTL 指示器修复、Avatar alt 属性可选化、Select 指示器统一、表单字段样式微调
+github:
+  pull: 400
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 5 月 11 日</span>
+</div>
+
+HeroUI Native v1.0.3 引入全新的 `Text` 排版基元，提供面向标题、段落与内联代码的复合 API；同时为 `ScrollShadow` 在反向列表下的渲染、`Tabs` 指示器在 RTL 布局下的对齐、以及自定义 `Select.TriggerIndicator` `children` 时的动画问题带来重要修复。本版本还对 `Button`、`Chip`、`Input` 的视觉样式进行了微调，将 `Avatar` 的 `alt` 属性改为可选，并修正 `TextField` 与 `SearchField` 的内部内边距行为。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## 新增
+
+### 新组件
+
+本版本新增 **1 个** 排版组件：
+
+- **[Text](/docs/native/components/text)**：带语义 `type` 变体的排版基元组件，附带 `Heading`、`Paragraph`、`Code` 子组件。（[文档](/docs/native/components/text)）
+
+#### Text
+
+`Text` 组件是一个排版基元，通过语义化预设渲染样式化文本。它提供 `Text.Heading`、`Text.Paragraph`、`Text.Code` 等子组件构成的复合 API，并在 `tailwind-variants` 基础上叠加互不耦合的 `align`、`color`、`weight`、`truncate` 属性，使排版可以组合复用，无需在每个调用点重复定义样式。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="text"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 语义化 `type` 变体：`h1`–`h6`、`body`、`body-sm`、`body-xs`、`code`
+- `Text.Heading` 自动设置 `accessibilityRole="header"`，并将 `type` 收窄为标题级别
+- `Text.Paragraph` 将 `type` 收窄为正文变体，适合长文本可读性
+- `Text.Code` 渲染为 chip 样式的内联等宽文本，采用平台合适的 `fontFamily`（iOS 为 Menlo，其他平台为 `monospace`）
+- RTL 感知的 `align` 属性，支持 `start`、`center`、`end`、`justify`（justify 仅 iOS 生效）
+- 语义化 `color` 预设（`default`、`muted`），其他主题色可通过 `className` 外挂
+- `weight` 覆盖：借助 `tailwind-merge` 始终优先于 `type` 暗含的字重
+- `truncate` 布尔属性：等价于 `numberOfLines={1}`；显式 `numberOfLines` 始终优先
+
+**用法：**
+
+```tsx
+import { Text } from "heroui-native";
+import { View } from "react-native";
+
+export function Example() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-4">
+      <Text.Heading type="h1">Welcome</Text.Heading>
+      <Text.Heading type="h3">Getting Started</Text.Heading>
+      <Text.Paragraph>
+        This is a body paragraph rendered with the Text component.
+      </Text.Paragraph>
+      <Text.Paragraph color="muted" type="body-sm">
+        Smaller supporting text for captions or footnotes.
+      </Text.Paragraph>
+      <Text.Code>npm install heroui-native</Text.Code>
+    </View>
+  );
+}
+```
+
+完整文档与示例见 [Text 组件页面](/docs/native/components/text)。
+
+**相关 PR：** [#400](https://github.com/heroui-inc/heroui-native/pull/400)
+
+## 组件改进
+
+### ScrollShadow 反向子列表支持
+
+[ScrollShadow](/docs/native/components/scroll-shadow) 现已正确处理反向的可滚动子组件，如 `<FlatList inverted>` 或 `<FlashList inverted>`。
+
+**改进点：**
+
+- `ScrollShadowRoot` 现会读取可滚动子组件上的 `inverted` 属性，沿用既有的 `childHorizontal` 自动检测模式
+- 内部交换驱动各视觉边缘的动画样式，使阴影渲染到正确的一侧
+- 公共 API 无变化——仅当子组件设置 `inverted={true}` 时启用该修复，此前在此情况下渐变会出现在错误的边缘
+
+此前，包裹反向列表时渐变阴影会渲染在顶部，而可滚动内容位于其下；即便仍有更多内容也不会出现底部阴影。修复后，反向 feed、聊天列表等反向滚动表面上的指示器方向已正确。
+
+**相关 PR：** [#398](https://github.com/heroui-inc/heroui-native/pull/398)
+
+### Tabs RTL 指示器对齐
+
+[Tabs](/docs/native/components/tabs) 的指示器在 React Native 处于 RTL 模式时定位现已正确。
+
+**改进点：**
+
+- 通过 tabs 测量上下文跟踪标签条的宽度
+- 固定布局使用 `Tabs.List` 的布局宽度
+- 滚动布局使用 `Tabs.ScrollView` 的内容宽度
+- 仅当 `I18nManager.isRTL` 启用时，对指示器的 `translateX` 进行镜像
+
+指示器使用绝对定位 `left` 锚点配合测量得到的 `translateX`。在 RTL 模式下，React Native 会自动翻转绝对锚点，但所测量的 transform 仍需手动镜像——本次修复内部完成了这一处理。固定与滚动两类标签列表均已修复，且公共 API 未变。
+
+**相关 PR：** [#396](https://github.com/heroui-inc/heroui-native/pull/396)
+
+### Select 触发器指示器渲染统一
+
+[Select](/docs/native/components/select) 的 `Select.TriggerIndicator` 现无论使用默认图标还是自定义 `children`，都会一致地应用展开/收起的旋转动画。
+
+**改进点：**
+
+- 自定义 `children` 现可获得与默认图标相同的动画容器样式
+- 通过 `children ?? <ChevronDownIcon />` 将 `ChevronDownIcon` 作为回退渲染
+- 将此前分散的渲染分支合并为统一的渲染路径
+
+此前，向 `Select.TriggerIndicator` 传入自定义 `children` 会绕过旋转动画，导致开合时指示器保持静止。统一分支确保旋转动画始终生效，且公共 API 未变。
+
+**相关 PR：** [#409](https://github.com/heroui-inc/heroui-native/pull/409)
+
+## API 增强
+
+### Avatar 的 `alt` 属性变为可选
+
+[Avatar](/docs/native/components/avatar) 的 `alt` 属性现已可选，默认为 `'Avatar'`，在保留无障碍支持的同时，减少装饰性或语境明确场景下的样板代码。
+
+**新能力：**
+
+```tsx
+import { Avatar } from "heroui-native";
+
+<Avatar>
+  <Avatar.Image source={{ uri: "https://example.com/avatar.jpg" }} />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar>;
+```
+
+显式传入 `alt` 的既有代码继续正常工作——该属性仅在缺省时获得一个合理的默认值。`RootProps` 类型现已反映为 `alt?: string`，并通过 JSDoc 标注 `@default 'Avatar'`，组件文档同步更新。
+
+**相关 PR：** [#404](https://github.com/heroui-inc/heroui-native/pull/404)
+
+## 样式修复
+
+### Button、Chip、Input 样式微调
+
+对 [Button](/docs/native/components/button)、[Chip](/docs/native/components/chip)、[Input](/docs/native/components/input) 的尺寸与色彩样式进行了微调，统一改用 Tailwind 工具类与语义化的 soft 颜色令牌。
+
+**修复：**
+
+- **Button**：尺寸改用 Tailwind 高度工具类（`h-10`、`h-12`、`h-14`），不再使用任意像素值；`sm` 高度由 36px 调整为 40px，提升触控目标的人体工学
+- **Chip**：`md`/`lg` 的垂直内边距微调（`py-[3px]` → `py-1`，`py-1` → `py-1.5`），间距更协调
+- **Chip**：soft 变体改用语义化 `bg-{color}-soft` 令牌，取代基于不透明度的 `bg-{color}/15` 背景
+- **Input**：由 `py-3.5` 改为 `min-h-12`，无论内容如何字段都保持稳定高度
+- **Input**：primary 变体的边框现正确使用 `border-field-border` 令牌，而非 `border-field`
+
+Button `sm` 尺寸（+4px）与 Chip `md`/`lg` 内边距上的像素级差异建议进行视觉回归确认。无 API 变更——仅更新了 `button.styles.ts`、`chip.styles.ts`、`input.styles.ts` 中的样式令牌。
+
+**相关 PR：** [#406](https://github.com/heroui-inc/heroui-native/pull/406)
+
+### TextField 与 SearchField 内部内边距修复
+
+[TextField](/docs/native/components/text-field) 与 [SearchField](/docs/native/components/search-field) 不再对嵌套的 `Label`、`Description`、`FieldError` 施加额外的水平内边距。
+
+**修复：**
+
+- `TextField` 现在向其 `FormFieldContext` 提供 `hasFieldPadding: false`
+- `SearchField` 现在向其 `FormFieldContext` 提供 `hasFieldPadding: false`
+- 渲染在上述字段内的 `Label`、`Description`、`FieldError` 不再继承额外的 `px-1.5` 侧边距
+- 所有表单字段容器（`ControlField`、`RadioGroup`、`TagGroup` 已采用 `hasFieldPadding: false`）的视觉对齐现已统一
+
+此次变更仅涉及两处为 `FormFieldContext` 提供值的 `useMemo`。如果你此前依赖这一非预期的内部内边距，可通过为受影响的子组件添加 `className="px-1.5"` 恢复原有间距。
+
+**相关 PR：** [#407](https://github.com/heroui-inc/heroui-native/pull/407)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #334](https://github.com/heroui-inc/heroui-native/issues/334)**：修复 RTL 布局下 `Tabs.Indicator` 的定位错乱。指示器以绝对定位 `left` 锚点配合测量的 `translateX` 实现位移；在 RTL 模式下 React Native 会自动翻转锚点，但测量得到的 transform 仍需手动镜像。tabs 测量上下文现会跟踪标签条宽度，仅当 `I18nManager.isRTL` 启用时镜像 `translateX`，固定与滚动两类标签列表均已修复。
+- **[Issue #393](https://github.com/heroui-inc/heroui-native/issues/393)**：修复 `ScrollShadow` 忽略子组件 `inverted` 属性的问题。`ScrollShadowRoot` 现会读取可滚动子组件上的 `inverted`（沿用既有的 `childHorizontal` 自动检测），并交换驱动各视觉边缘的动画样式，使反向 feed 与聊天式列表上的渐变出现在正确的一侧。
+
+**相关 PR：**
+
+- [#396](https://github.com/heroui-inc/heroui-native/pull/396)
+- [#398](https://github.com/heroui-inc/heroui-native/pull/398)
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [Text](/docs/native/components/text) — 新组件文档，含结构、用法与完整 API 参考
+- [Avatar](/docs/native/components/avatar) — `alt` 属性记为可选，默认值 `'Avatar'`
+- [组件总览](/docs/native/components) — 在既有分类外新增 Typography 分类
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

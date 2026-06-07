@@ -1,0 +1,51 @@
+---
+title: AGENTS.md
+description: 将 HeroUI Native 文档下载到项目中，供 AI 编程助手引用
+icon: preview
+---
+
+可将 HeroUI Native 文档直接下载到项目内，供 AI 助手本地引用。
+
+<Callout>
+  **说明：** `agents-md` 命令专用于 **HeroUI React v3** 与 **HeroUI Native**。其他 CLI 命令（如 `add`、`init`、`upgrade` 等）目前仍面向 HeroUI v2。
+</Callout>
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agents-md-native.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/agents-md-native-dark.jpg"
+  alt="HeroUI Native AGENTS.md"
+/>
+
+### 用法
+
+```bash
+npx heroui-cli@latest agents-md --native
+```
+
+指定输出文件：
+
+```bash
+npx heroui-cli@latest agents-md --native --output AGENTS.md
+```
+
+### 作用
+
+- 将最新 HeroUI Native 文档下载到 `.heroui-docs/native/`
+- 在 `AGENTS.md` 或 `CLAUDE.md` 中生成索引
+- 自动将 `.heroui-docs/` 加入 `.gitignore`
+
+### 选项
+
+- `--native` — 仅下载 Native 文档
+- `--output <files...>` — 输出文件（如 `AGENTS.md` 或 `AGENTS.md CLAUDE.md`）
+- `--ssh` — 使用 SSH 进行 git clone
+
+### 要求
+
+- Tailwind CSS >= v4（通过 Uniwind）
+
+### 相关文档
+
+- [AGENTS.md](https://agents.md/) — AGENTS.md 格式说明
+- [CLAUDE.md](https://code.claude.com/docs/en/best-practices#write-an-effective-claude-md) — Claude 侧的等价物
+- [AGENTS.md vs Skills](https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals) — 评测相关讨论

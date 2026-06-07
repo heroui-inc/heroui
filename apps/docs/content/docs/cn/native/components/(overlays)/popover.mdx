@@ -1,0 +1,531 @@
+---
+title: Popover 弹出框
+description: 锚定在触发器上的浮动内容面板，支持方位与对齐选项。
+icon: updated
+links:
+  source_native: popover/popover.tsx
+  styles_native: popover/popover.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/popover-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/popover-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Popover } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content>
+      <Popover.Arrow />
+      <Popover.Close />
+      <Popover.Title>...</Popover.Title>
+      <Popover.Description>...</Popover.Description>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+- **Popover**：根容器，管理展开/收起、定位，并为子组件提供上下文。
+- **Popover.Trigger**：可点击的触发器，切换浮层可见性；为子元素包裹按压处理。
+- **Popover.Portal**：在Portal层渲染内容，保证层级与定位正确。
+- **Popover.Overlay**：可选背景遮罩；可透明或半透明，用于捕获外部点击。
+- **Popover.Content**：内容容器，含定位、样式与碰撞检测；支持 `popover` 与底部抽屉呈现。
+- **Popover.Arrow**：可选箭头，指向触发器；随 `placement` 自动定位。
+- **Popover.Close**：关闭按钮；可自定义子节点，默认关闭图标。
+- **Popover.Title**：可选标题，使用预设排版。
+- **Popover.Description**：可选说明文字，弱化样式。
+
+## 用法
+
+### 基础用法
+
+通过组合子部件创建浮动内容面板。
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">...</Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### 标题与说明
+
+使用标题与说明组织内容层级。
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">
+      <Popover.Close />
+      <Popover.Title>...</Popover.Title>
+      <Popover.Description>...</Popover.Description>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### 带箭头
+
+添加指向触发器的箭头以增强视觉关联。
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" placement="top">
+      <Popover.Arrow />
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+> **说明：** 使用 `<Popover.Arrow />` 时，需要为 `Popover.Content` 添加边框，例如 `border border-border`，以便箭头与内容边框视觉衔接。
+
+### 宽度控制
+
+通过 `width` 控制浮层内容宽度。
+
+```tsx
+{
+  /* 固定像素宽度 */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width={320}>
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>;
+
+{
+  /* 与触发器同宽 */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width="trigger">
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>;
+
+{
+  /* 全宽（100%） */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width="full">
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>;
+
+{
+  /* 随内容自适应（默认） */
+}
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover" width="content-fit">
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>;
+```
+
+### 底部抽屉呈现
+
+在移动端使用底部抽屉交互。
+
+> **重要：** `Popover.Content` 的 `presentation` 必须与 `Popover` 根上的 `presentation` 一致。开发模式下不一致会抛错。
+
+```tsx
+<Popover presentation="bottom-sheet">
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="bottom-sheet">
+      <Popover.Title>...</Popover.Title>
+      <Popover.Description>...</Popover.Description>
+      <Button>关闭</Button>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### 方位选项
+
+控制浮层相对触发器出现的位置。
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Content presentation="popover" placement="left">
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### 对齐选项
+
+沿放置轴微调内容对齐。
+
+```tsx
+<Popover>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Content presentation="popover" placement="top" align="start">
+      ...
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### 自定义动画
+
+在 `Popover` 根上使用 `animation` 配置展开/收起过渡。
+
+```tsx
+<Popover
+  animation={{
+    entering: {
+      type: 'spring',
+      config: { damping: 15, stiffness: 300 },
+    },
+    exiting: {
+      type: 'timing',
+      config: { duration: 200 },
+    },
+  }}
+>
+  <Popover.Trigger>...</Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">...</Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### 编程式控制
+
+```tsx
+// 通过 ref 编程式打开/关闭
+const popoverRef = useRef<PopoverTriggerRef>(null);
+
+// 打开
+popoverRef.current?.open();
+
+// 关闭
+popoverRef.current?.close();
+
+// 完整示例
+<Popover>
+  <Popover.Trigger ref={popoverRef} asChild>
+    <Button>触发器</Button>
+  </Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Overlay />
+    <Popover.Content presentation="popover">
+      <Text>内容</Text>
+      <Button onPress={() => popoverRef.current?.close()}>关闭</Button>
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>;
+```
+
+## 示例
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { Button, Popover, useThemeColor } from 'heroui-native';
+import { Text, View } from 'react-native';
+
+export default function PopoverExample() {
+  const themeColorMuted = useThemeColor('muted');
+
+  return (
+    <Popover>
+      <Popover.Trigger asChild>
+        <Button variant="tertiary" size="sm">
+          <Ionicons
+            name="information-circle"
+            size={20}
+            color={themeColorMuted}
+          />
+          <Button.Label>查看说明</Button.Label>
+        </Button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Overlay />
+        <Popover.Content
+          presentation="popover"
+          width={320}
+          className="gap-1 rounded-xl px-6 py-4"
+        >
+          <Popover.Close className="absolute top-3 right-3 z-50" />
+          <Popover.Title>说明</Popover.Title>
+          <Popover.Description>
+            此浮层包含标题与描述，用于向用户提供更有层次的信息。
+          </Popover.Description>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/popover.tsx)。
+
+## API 参考
+
+### Popover
+
+| prop            | type                          | default     | description                                                                                    |
+| --------------- | ----------------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
+| `children`      | `ReactNode`                   | -           | 浮层内的子节点                                                                                 |
+| `isOpen`        | `boolean`                     | -           | 是否展开（受控）                                                                               |
+| `isDefaultOpen` | `boolean`                     | -           | 初始是否展开（非受控）                                                                         |
+| `onOpenChange`  | `(isOpen: boolean) => void`   | -           | 展开状态变化时的回调                                                                           |
+| `animation`     | `AnimationRootDisableAll`     | -           | 动画配置，可为 `false`、`"disabled"`、`"disable-all"`、`true` 或 `undefined`                     |
+| `presentation`  | `'popover' \| 'bottom-sheet'` | `'popover'` | 内容呈现方式                                                                                   |
+| `asChild`       | `boolean`                     | `false`     | 是否将子元素作为实际渲染节点                                                                   |
+| `...ViewProps`  | `ViewProps`                   | -           | 支持全部标准 React Native `View` 属性                                                        |
+
+#### AnimationRootDisableAll
+
+根级动画配置，可为：
+
+- `false` 或 `"disabled"`：仅禁用根动画
+- `"disable-all"`：禁用根与子级全部动画
+- `true` 或 `undefined`：使用默认动画
+
+### Popover.Trigger
+
+| prop                | type             | default | description                                             |
+| ------------------- | ---------------- | ------- | ------------------------------------------------------- |
+| `children`          | `ReactNode`      | -       | 触发器内容                                              |
+| `className`         | `string`         | -       | 触发器额外 class                                        |
+| `asChild`           | `boolean`        | `true`  | 是否将子元素作为实际渲染节点                            |
+| `...PressableProps` | `PressableProps` | -       | 支持全部标准 React Native `Pressable` 属性              |
+
+### Popover.Portal
+
+| prop                       | type        | default | description                                                                                                                   |
+| -------------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `children`                 | `ReactNode` | -       | Portal内容（必填）                                                                                                              |
+| `disableFullWindowOverlay` | `boolean`   | `false` | 在 iOS 为 `true` 时使用 `View` 代替 `FullWindowOverlay`，便于元素检查器；遮罩将无法叠在原生模态之上                           |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | 控制 VoiceOver 是否将遮罩窗口视为模态容器。为 `true` 时，VoiceOver 仅聚焦遮罩内元素。仅 iOS；API 不稳定，可能随 react-native-screens 变更 |
+| `hostName`                 | `string`    | -       | Portal宿主元素的可选名称                                                                                                        |
+| `forceMount`               | `boolean`   | -       | 是否强制挂载                                                                                                                  |
+| `className`                | `string`    | -       | Portal容器额外 class                                                                                                            |
+| `...ViewProps`             | `ViewProps` | -       | 支持全部标准 React Native `View` 属性                                                                                       |
+
+### Popover.Overlay
+
+| prop                    | type                      | default | description                                                  |
+| ----------------------- | ------------------------- | ------- | ------------------------------------------------------------ |
+| `className`             | `string`                  | -       | 遮罩额外 class                                               |
+| `closeOnPress`          | `boolean`                 | `true`  | 点击遮罩是否关闭                                             |
+| `forceMount`            | `boolean`                 | -       | 是否强制挂载                                                 |
+| `animation`             | `PopoverOverlayAnimation` | -       | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                 | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `asChild`               | `boolean`                 | `false` | 是否将子元素作为实际渲染节点                                 |
+| `...Animated.ViewProps` | `Animated.ViewProps`      | -       | 支持 Reanimated `Animated.View` 的全部属性                   |
+
+#### PopoverOverlayAnimation
+
+遮罩动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop            | type                       | default                     | description                                                                               |
+| --------------- | -------------------------- | --------------------------- | ----------------------------------------------------------------------------------------- |
+| `state`         | `'disabled' \| boolean`    | -                           | 在自定义属性时用于禁用动画                                                                |
+| `opacity.value` | `[number, number, number]` | `[0, 1, 0]`                 | 透明度 [空闲, 打开, 关闭]，用于底部抽屉等呈现                                             |
+| `entering`      | `EntryOrExitLayoutType`    | 默认淡入 200ms              | 自定义进入关键帧，用于 `popover` 呈现                                                     |
+| `exiting`       | `EntryOrExitLayoutType`    | 默认淡出 150ms              | 自定义退出关键帧，用于 `popover` 呈现                                                     |
+
+### Popover.Content（Popover 呈现）
+
+| prop                      | type                                             | default         | description                                                                                             |
+| ------------------------- | ------------------------------------------------ | --------------- | ------------------------------------------------------------------------------------------------------- |
+| `children`                | `ReactNode`                                      | -               | 浮层内容                                                                                                |
+| `presentation`            | `'popover'`                                      | `'popover'`     | 呈现模式，须与 `Popover` 根一致；未传时默认为 `popover`                                                 |
+| `width`                   | `number \| 'trigger' \| 'content-fit' \| 'full'` | `'content-fit'` | 内容宽度策略                                                                                            |
+| `placement`               | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | 相对触发器的方位                                                                                        |
+| `align`                   | `'start' \| 'center' \| 'end'`                   | `'center'`      | 沿放置轴的对齐                                                                                          |
+| `avoidCollisions`         | `boolean`                                        | `true`          | 靠近视口边缘时是否翻转 placement                                                                        |
+| `offset`                  | `number`                                         | `9`             | 与触发器的间距（像素）                                                                                  |
+| `alignOffset`             | `number`                                         | `0`             | 沿对齐轴的偏移（像素）                                                                                  |
+| `disablePositioningStyle` | `boolean`                                        | `false`         | 是否禁用自动定位样式                                                                                    |
+| `forceMount`              | `boolean`                                        | -               | 是否强制挂载                                                                                            |
+| `insets`                  | `Insets`                                         | -               | 定位时需遵守的屏幕边距                                                                                  |
+| `className`               | `string`                                         | -               | 内容容器额外 class                                                                                      |
+| `animation`               | `PopupPopoverContentAnimation`                   | -               | 动画配置                                                                                                |
+| `isAnimatedStyleActive`   | `boolean`                                        | `true`          | 是否启用 Reanimated 动画样式                                                                            |
+| `asChild`                 | `boolean`                                        | `false`         | 是否将子元素作为实际渲染节点                                                                            |
+| `...Animated.ViewProps`   | `Animated.ViewProps`                             | -               | 支持 Reanimated `Animated.View` 的全部属性                                                            |
+
+### Popover.Content（底部抽屉呈现）
+
+| prop                        | type                   | default | description                                                                                    |
+| --------------------------- | ---------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `children`                  | `ReactNode`            | -       | 底部抽屉内容                                                                                   |
+| `presentation`              | `'bottom-sheet'`       | -       | 呈现模式，须为 `bottom-sheet` 并与根一致（必填）                                               |
+| `contentContainerClassName` | `string`               | -       | 内容容器额外 class                                                                             |
+| `contentContainerProps`     | `BottomSheetViewProps` | -       | 内容容器属性                                                                                   |
+| `enablePanDownToClose`      | `boolean`              | `true`  | 是否允许下滑关闭                                                                               |
+| `backgroundStyle`           | `ViewStyle`            | -       | 底部抽屉背景样式                                                                               |
+| `handleIndicatorStyle`      | `ViewStyle`            | -       | 把手指示器样式                                                                                 |
+| `...BottomSheetProps`       | `BottomSheetProps`     | -       | 支持 `@gorhom/bottom-sheet` 的全部属性                                                         |
+
+#### PopupPopoverContentAnimation
+
+内容（`popover` 呈现）动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop       | type                    | default                                                         | description                                       |
+| ---------- | ----------------------- | --------------------------------------------------------------- | ------------------------------------------------- |
+| `state`    | `'disabled' \| boolean` | -                                                               | 在自定义属性时用于禁用动画                        |
+| `entering` | `EntryOrExitLayoutType` | 默认关键帧：translateY/translateX、scale、opacity（200ms）      | 自定义进入关键帧                                  |
+| `exiting`  | `EntryOrExitLayoutType` | 默认与进入镜像（150ms）                                         | 自定义退出关键帧                                  |
+
+### Popover.Arrow
+
+| prop                  | type                                     | default | description                                                           |
+| --------------------- | ---------------------------------------- | ------- | --------------------------------------------------------------------- |
+| `className`           | `string`                                 | -       | 箭头额外 class                                                        |
+| `height`              | `number`                                 | `12`    | 箭头高度（像素）                                                      |
+| `width`               | `number`                                 | `20`    | 箭头宽度（像素）                                                      |
+| `fill`                | `string`                                 | -       | 填充色（默认与内容背景一致）                                          |
+| `stroke`              | `string`                                 | -       | 描边色（默认与内容边框色一致）                                        |
+| `strokeWidth`         | `number`                                 | `1`     | 描边宽度（像素）                                                      |
+| `strokeBaselineInset` | `number`                                 | `1`     | 描边基线内缩（像素）                                                  |
+| `placement`           | `'top' \| 'bottom' \| 'left' \| 'right'` | -       | 浮层方位（自内容继承）                                                |
+| `children`            | `ReactNode`                              | -       | 自定义箭头内容（替换默认 SVG）                                        |
+| `style`               | `StyleProp<ViewStyle>`                   | -       | 箭头容器额外样式                                                      |
+| `...ViewProps`        | `ViewProps`                              | -       | 支持全部标准 React Native `View` 属性                               |
+
+### Popover.Close
+
+`Popover.Close` 继承 [CloseButton](./close-button)，按下时自动关闭浮层。
+
+### Popover.Title
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode` | -       | 标题文案                                           |
+| `className`    | `string`    | -       | 标题额外 class                                     |
+| `...TextProps` | `TextProps` | -       | 支持全部标准 React Native `Text` 属性              |
+
+### Popover.Description
+
+| prop           | type        | default | description                                        |
+| -------------- | ----------- | ------- | -------------------------------------------------- |
+| `children`     | `ReactNode` | -       | 说明文案                                           |
+| `className`    | `string`    | -       | 说明额外 class                                     |
+| `...TextProps` | `TextProps` | -       | 支持全部标准 React Native `Text` 属性              |
+
+## Hooks
+
+### usePopover
+
+在自定义或复合子组件中读取浮层上下文。
+
+```tsx
+import { usePopover } from 'heroui-native';
+
+const CustomContent = () => {
+  const { isOpen, onOpenChange, triggerPosition } = usePopover();
+  // …实现
+};
+```
+
+#### 返回值
+
+| property             | type                                                | description                                                       |
+| -------------------- | --------------------------------------------------- | ----------------------------------------------------------------- |
+| `isOpen`             | `boolean`                                           | 当前是否打开                                                      |
+| `onOpenChange`       | `(open: boolean) => void`                           | 修改展开状态的回调                                                |
+| `isDefaultOpen`      | `boolean \| undefined`                              | 默认是否打开（非受控）                                            |
+| `isDisabled`         | `boolean \| undefined`                              | 是否禁用                                                          |
+| `triggerPosition`    | `LayoutPosition \| null`                            | 触发器相对视口的位置                                              |
+| `setTriggerPosition` | `(triggerPosition: LayoutPosition \| null) => void` | 更新触发器位置                                                    |
+| `contentLayout`      | `LayoutRectangle \| null`                           | 浮层内容的布局测量                                                |
+| `setContentLayout`   | `(contentLayout: LayoutRectangle \| null) => void`  | 更新内容布局测量                                                  |
+| `nativeID`           | `string`                                            | 当前实例唯一标识                                                  |
+
+**说明：** 必须在 `Popover` 内使用；在上下文外调用将抛错。
+
+### usePopoverAnimation
+
+在自定义或复合子组件中读取浮层动画共享值。
+
+```tsx
+import { usePopoverAnimation } from 'heroui-native';
+
+const CustomContent = () => {
+  const { progress, isDragging } = usePopoverAnimation();
+  // …实现
+};
+```
+
+#### 返回值
+
+| property     | type                   | description                                                        |
+| ------------ | ---------------------- | ------------------------------------------------------------------ |
+| `progress`   | `SharedValue<number>`  | 动画进度（0=空闲，1=打开，2=关闭）                                 |
+| `isDragging` | `SharedValue<boolean>` | 是否正在拖拽                                                       |
+
+**说明：** 必须在 `Popover` 内使用；在动画上下文外调用将抛错。
+
+## 特别说明
+
+### 元素检查器（iOS）
+
+`Popover` 在 iOS 使用 `FullWindowOverlay`。开发时若需启用 React Native 元素检查器，可在 `Popover.Portal` 设置 `disableFullWindowOverlay={true}`。代价：浮层将无法叠在原生系统模态之上。
+
+### 原生模态（iOS）
+
+当 `Popover` 位于以原生模态形式呈现的页面内时（`presentation: 'modal' | 'formSheet' | 'pageSheet'`），浮层内容可能会向上偏移渲染。在新架构（Fabric）中，`react-native-screens` 将 `RNSModalScreen` 标记为 Fabric 根节点，因此触发器的坐标是相对于模态原点上报的，而 `FullWindowOverlay`（浮层挂载点）锚定在 iOS 应用窗口上。可通过将 `safeAreaInsets.top` 加到 `offset` 来补偿：
+
+```tsx
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const insets = useSafeAreaInsets();
+
+<Popover.Content presentation="popover" offset={insets.top + 20}>
+  ...
+</Popover.Content>;
+```

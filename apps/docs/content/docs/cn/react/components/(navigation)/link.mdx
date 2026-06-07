@@ -1,0 +1,224 @@
+---
+title: Link 链接
+description: 用于导航的样式化锚点组件，内置图标支持。
+links:
+  rac: Link
+  source: link/link.tsx
+  styles: link.css
+  storybook: Components/Navigation/Link
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Link } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="link-basic"
+/>
+
+### 组件结构
+
+导入 Link 组件后，可通过点语法访问所有子部分。
+
+```tsx
+import { Link } from '@heroui/react';
+
+export default () => (
+  <Link href="#">
+    Call to action
+    <Link.Icon />
+  </Link>
+);
+```
+
+### 自定义图标
+
+<ComponentPreview
+  name="link-custom-icon"
+/>
+
+### 图标位置
+
+<ComponentPreview
+  name="link-icon-placement"
+/>
+
+### 配合 Tailwind CSS 的文本装饰
+
+Link 默认在悬浮时显示下划线。可使用 Tailwind CSS 的 text-decoration 工具类让下划线始终可见、完全移除，或自定义其颜色、样式、粗细与偏移。
+
+<ComponentPreview
+  name="link-underline-and-offset"
+/>
+
+**文本装饰线：**
+- `underline` — 始终显示下划线
+- `no-underline` — 移除下划线
+- 默认 `Link` 样式 — 下划线在悬浮时显示
+
+**文本装饰色：**
+- `decoration-primary`、`decoration-secondary` 等 — 使用主题色设置下划线颜色
+- `decoration-muted/50` — 使用透明度修饰符实现半透明下划线
+
+**文本装饰样式：**
+- `decoration-solid` — 实线（默认）
+- `decoration-double` — 双线
+- `decoration-dotted` — 点线
+- `decoration-dashed` — 虚线
+- `decoration-wavy` — 波浪线
+
+**文本装饰粗细：**
+- `decoration-1`、`decoration-2`、`decoration-4` 等 — 控制下划线粗细
+
+**下划线偏移：**
+- `underline-offset-1`、`underline-offset-2`、`underline-offset-4` 等 — 调整文本与下划线间距
+
+更多说明见 Tailwind CSS 文档：
+- [text-decoration-line](https://tailwindcss.com/docs/text-decoration-line)
+- [text-decoration-color](https://tailwindcss.com/docs/text-decoration-color)
+- [text-decoration-style](https://tailwindcss.com/docs/text-decoration-style)
+- [text-decoration-thickness](https://tailwindcss.com/docs/text-decoration-thickness)
+- [text-underline-offset](https://tailwindcss.com/docs/text-underline-offset)
+
+
+可用的 BEM 类：
+- 基础：`link`
+- 图标：`link__icon`
+
+<RelatedComponents component="link" />
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="link-custom-render-function"
+/>
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Link } from '@heroui/react';
+
+function CustomLink() {
+  return (
+    <Link
+      href="#"
+      className="text-lg font-bold text-accent hover:text-accent/80"
+    >
+      Custom styled link
+    </Link>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 Link 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .link {
+    @apply font-semibold;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Link 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/link.css)）：
+
+#### 基础类
+- `.link` — 链接基础样式
+- `.link__icon` — 链接图标样式
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，以获得更大灵活性：
+
+- **焦点**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **悬浮**：`:hover` 或 `[data-hovered="true"]`
+- **按下**：`:active` 或 `[data-pressed="true"]`
+- **禁用**：`:disabled` 或 `[aria-disabled="true"]`
+
+## API 参考
+
+### Link Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `href` | `string` | - | 锚点的目标 URL |
+| `target` | `string` | `"_self"` | 在何处打开链接文档 |
+| `rel` | `string` | - | 当前文档与链接文档的关系 |
+| `download` | `boolean \| string` | - | 触发下载而非导航 |
+| `isDisabled` | `boolean` | `false` | 禁用指针与键盘交互 |
+| `className` | `string` | - | 与默认样式合并的自定义类 |
+| `children` | `React.ReactNode` | - | 渲染在链接内部的内容 |
+| `onPress` | `(e: PressEvent) => void` | - | 链接被激活时触发 |
+| `autoFocus` | `boolean` | - | 元素挂载时是否应获得焦点 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, LinkRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+
+### Link.Icon Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 自定义图标元素；省略时使用内置箭头图标 |
+| `className` | `string` | - | 附加的 CSS 类 |
+
+
+
+### 与路由库配合使用
+
+使用变体函数为框架专用链接（例如 Next.js）添加样式：
+
+```tsx
+import { Link } from '@heroui/react';
+import { linkVariants } from '@heroui/styles';
+import NextLink from 'next/link';
+
+export default function Demo() {
+  const slots = linkVariants();
+
+  return (
+    <NextLink className={slots.base()} href="/about">
+      About Page
+      <Link.Icon className={slots.icon()} />
+    </NextLink>
+  );
+}
+```
+
+### 直接应用类
+
+由于 HeroUI 使用 [BEM](https://getbem.com/) 类，你可以将 Link 样式直接应用到任意链接元素：
+
+```tsx
+import NextLink from 'next/link';
+
+// 直接使用 Tailwind 工具类
+export default function Demo() {
+  return (
+    <NextLink href="/about" className="link underline-offset-2">
+      About Page
+    </NextLink>
+  );
+}
+
+// 或使用原生 <a>
+export default function NativeLink() {
+  return (
+    <a href="/about" className="link underline decoration-primary underline-offset-4">
+      About Page
+      <Link.Icon className="link__icon" />
+    </a>
+  );
+}
+```

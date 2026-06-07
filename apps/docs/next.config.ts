@@ -74,6 +74,10 @@ const config: NextConfig = {
   async rewrites() {
     return [
       {
+        destination: "/llms.mdx/:lang/:path*",
+        source: "/:lang(en|cn)/docs/:path*.mdx",
+      },
+      {
         destination: "/llms.mdx/:path*",
         source: "/docs/:path*.mdx",
       },

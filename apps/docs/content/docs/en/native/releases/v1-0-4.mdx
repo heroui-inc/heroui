@@ -1,0 +1,286 @@
+---
+title: v1.0.4
+description:
+  Typography component renames Text, refined soft-foreground theme tokens with optional vibrant palette, iOS native modal offset guidance, Expo 56 / React Native 0.85 example upgrade
+github:
+  pull: 420
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">May 26, 2026</span>
+</div>
+
+HeroUI Native v1.0.4 renames the `Text` typography primitive to `Typography` to free up React Native's `Text` name and align with semantic typography usage, while keeping the existing `Text` exports as deprecated aliases for a seamless upgrade. This release also refines soft-foreground color tokens across Alert, Avatar, Button, Chip, and Toast for better contrast on soft backgrounds, ships a new optional `heroui-native/styles/vibrant` palette, documents the iOS native-modal offset workaround for Menu, Popover, and Select, and upgrades the example app to Expo 56 / React Native 0.85.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It on Your Device
+
+<NativeTryOnDevice />
+
+## What's New
+
+### Typography Component (Renamed from `Text`)
+
+The library's typography primitive has been renamed from `Text` to `Typography` to avoid clashing with React Native's built-in `Text` and to better describe its purpose as a semantic typography system. The component's API, variants, and behavior are unchanged — only the public name moves.
+
+```tsx
+import { Typography } from "heroui-native";
+import { View } from "react-native";
+
+export function Example() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-4">
+      <Typography.Heading type="h1">Welcome</Typography.Heading>
+      <Typography.Heading type="h3">Getting Started</Typography.Heading>
+      <Typography.Paragraph>
+        This is a body paragraph rendered with the Typography component.
+      </Typography.Paragraph>
+      <Typography.Paragraph color="muted" type="body-sm">
+        Smaller supporting text for captions or footnotes.
+      </Typography.Paragraph>
+      <Typography.Code>npm install heroui-native</Typography.Code>
+    </View>
+  );
+}
+```
+
+**What changed:**
+
+- Primary export is now `Typography`, with sub-components `Typography.Heading`, `Typography.Paragraph`, and `Typography.Code`
+- New `typographyClassNames` style API and `Typography*` type aliases replace the prior `Text*` naming
+- The existing `Text`, `textClassNames`, and `Text*` types are kept as **deprecated** re-exports for backward compatibility
+- Example screen renamed from `text` to `typography` in the component catalog
+- JSDoc and component docs updated to reference Typography and the new docs URL
+
+<Callout type="info">
+  **No migration required.** Existing `import { Text } from "heroui-native"` continues to work via deprecated re-exports. Migrate to `Typography` at your convenience before a future major release removes the deprecated aliases.
+</Callout>
+
+**Related PR:** [#417](https://github.com/heroui-inc/heroui-native/pull/417)
+
+### Vibrant Theme Palette (Optional)
+
+A new optional `heroui-native/styles/vibrant` stylesheet is available for apps that prefer more saturated brand colors on soft variants. It keeps the readability improvements from the refined soft-foreground tokens while preserving high color saturation for icons and text on soft backgrounds.
+
+**Usage:**
+
+```ts
+// Default refined soft-foreground palette
+import "heroui-native/styles";
+
+// Or, opt into the vibrant palette
+import "heroui-native/styles";
+import "heroui-native/styles/vibrant";
+```
+
+Import `heroui-native/styles/vibrant` after the base styles to override soft-foreground tokens with the more saturated values. No component code changes are required to opt in.
+
+**Related PR:** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
+
+## Component Improvements
+
+### Refined Soft-Foreground Colors Across Components
+
+The [Alert](/docs/native/components/alert), [Avatar](/docs/native/components/avatar), [Button](/docs/native/components/button), [Chip](/docs/native/components/chip), and [Toast](/docs/native/components/toast) components now use the new `*-soft-foreground` theme tokens for labels and icons on soft backgrounds, producing better contrast and a more cohesive look across light and dark themes.
+
+**Improvements:**
+
+- Soft foreground tokens (`accent-soft-foreground`, `success-soft-foreground`, `warning-soft-foreground`, `danger-soft-foreground`, `default-soft-foreground`) are computed via `color-mix` in `theme.css` for improved readability on soft backgrounds
+- Alert, Avatar, Button, Chip, and Toast styles (and their internal hooks) consume the new soft-foreground tokens instead of raw semantic colors like `text-accent` or `text-success`
+- A new optional `heroui-native/styles/vibrant` export preserves saturated brand colors on soft variants for apps that want a more vivid look
+- Example app demos for Alert, Avatar, Button, Chip, and Toast were updated to match the refined color usage
+
+Component props and public APIs are unchanged — only the color values applied to soft variants. Apps relying on the default theme will see softer, more legible icon and label colors on soft variants out of the box.
+
+**Related PR:** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
+
+### TextArea Vertical Padding Fix
+
+The [TextArea](/docs/native/components/text-area) component now applies proper inner vertical padding so multiline content no longer hugs the top edge of the field.
+
+**Improvements:**
+
+- `TextArea` now uses `h-32 py-2` for consistent inner spacing
+- No API changes — the fix is a styling-only update inside the component
+
+**Related PR:** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+## API Enhancements
+
+### `useThemeColor` Token Updates
+
+The [`useThemeColor`](/docs/native/hooks/use-theme-color) hook now exposes additional surface and soft tokens, and renames the overlay backdrop token for clarity.
+
+**New Capability:**
+
+```tsx
+import { useThemeColor } from "heroui-native";
+
+const colors = useThemeColor([
+  "default-soft",
+  "default-soft-foreground",
+  "surface-foreground",
+  "backdrop",
+]);
+```
+
+**Changes:**
+
+- Added `default-soft` and `default-soft-foreground` tokens
+- Added surface foreground tokens (e.g. `surface-foreground`) for explicit access to surface text colors
+- Renamed `overlay-backdrop` to `backdrop` for consistency with the underlying CSS variable name
+
+Apps using removed `useThemeColor` keys (`on-surface-*`) or the previous `overlay-backdrop` key should migrate to the updated token names. Component props and visual defaults are unchanged.
+
+**Related PR:** [#420](https://github.com/heroui-inc/heroui-native/pull/420)
+
+## Dependencies
+
+### `@gorhom/bottom-sheet` Peer Range Updated
+
+The peer dependency range for `@gorhom/bottom-sheet` has been bumped from `^5.2.8` to `^5.2.9`. Apps that use HeroUI Native's [BottomSheet](/docs/native/components/bottom-sheet) component (or any of `Menu` / `Popover` / `Select` with `presentation="bottom-sheet"`) should ensure they are on a compatible version:
+
+```bash
+npm i @gorhom/bottom-sheet@^5.2.9
+```
+
+This is the only peer-dep change affecting consumers. The library's `react` (`>=19.0.0`) and `react-native` (`>=0.81.0`) peer ranges are unchanged.
+
+**Related PR:** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+### Example App Upgraded to Expo 56 / React Native 0.85
+
+The example app shipped in the repository has been upgraded to the latest Expo and React Native toolchain. This does not affect consumers of the library directly, but contributors running the example will benefit from the upgrades:
+
+- Expo `56`
+- React Native `0.85.3`
+- React `19.2.3`
+- React Native Reanimated `4.3.1`
+- `react-native-worklets` `0.8.3`
+- Uniwind `^1.6.3`
+
+Additional housekeeping included in this upgrade:
+
+- `metro.config.js` rewritten to pin peer-dep resolution to the example's `node_modules`, fixing Hermes "Maximum call stack size exceeded" crashes when `uniwind` or `react` resolved to two copies from the workspace root
+- Replaced deprecated `StyleSheet.absoluteFillObject` with `StyleSheet.absoluteFill` in input-otp and showcases
+- Migrated `useFocusEffect` / `useHeaderHeight` imports to `expo-router`
+- Removed unused `example/src/components/safe-area-view.tsx`, `eas.json`, and stale `newArchEnabled` / `edgeToEdgeEnabled` flags
+- Example app slug/bundle renamed to `heroui-native-oss`; Android `WithStateToggle` padding adjusted
+
+**Related PR:** [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+## Documentation
+
+### iOS Native Modal Offset Guidance for Menu, Popover, and Select
+
+The [Menu](/docs/native/components/menu), [Popover](/docs/native/components/popover), and [Select](/docs/native/components/select) documentation now includes a **Native Modal (iOS)** section that explains why overlay content can render shifted upward when a trigger lives inside a screen presented as a native modal (`presentation: "modal" | "formSheet" | "pageSheet"`), and how to compensate.
+
+**Improvements:**
+
+- Each component's docs now describe the Fabric / `FullWindowOverlay` coordinate mismatch: trigger coordinates are modal-relative while the overlay is window-anchored
+- Documents the recommended `offset={insets.top}` workaround using `useSafeAreaInsets` from `react-native-safe-area-context`
+- Links to the example app files (`popover-native-modal.tsx`, `select-native-modal.tsx`) for full usage patterns
+
+**Usage example:**
+
+```tsx
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Popover } from "heroui-native";
+
+const insets = useSafeAreaInsets();
+
+<Popover.Content presentation="popover" offset={insets.top + 20}>
+  {/* ... */}
+</Popover.Content>;
+```
+
+This is a documentation-only change — no API or runtime behavior was modified.
+
+**Related PR:** [#419](https://github.com/heroui-inc/heroui-native/pull/419)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #405](https://github.com/heroui-inc/heroui-native/issues/405)**: Documented the workaround for `Menu` rendering misaligned when opened inside a React Navigation native modal. The new **Native Modal (iOS)** section in the Menu docs explains the Fabric / `FullWindowOverlay` coordinate mismatch and shows how to compensate via `offset={insets.top}` with `useSafeAreaInsets`.
+- **[Issue #418](https://github.com/heroui-inc/heroui-native/issues/418)**: Resolved Hermes crashes ("Maximum call stack size exceeded") and the invisible `BottomSheet` content seen after upgrading the example app to Expo 56. The example's `metro.config.js` now pins peer-dep resolution (`react`, `react-native`, `uniwind`, etc.) to the example's local `node_modules`, preventing duplicate copies from being loaded from the workspace root.
+
+**Related PRs:**
+
+- [#419](https://github.com/heroui-inc/heroui-native/pull/419)
+- [#421](https://github.com/heroui-inc/heroui-native/pull/421)
+
+## Deprecations
+
+### `Text` Typography Exports
+
+The `Text` component and related exports are now **deprecated** in favor of `Typography`. Existing imports continue to work and will not produce runtime errors — only TypeScript / IDE deprecation hints are emitted. Plan to migrate before a future major release removes the deprecated aliases.
+
+**Deprecated → Recommended:**
+
+```tsx
+// Deprecated (still works)
+import { Text, textClassNames, type TextProps } from "heroui-native";
+
+<Text.Heading type="h1">Welcome</Text.Heading>;
+
+// Recommended
+import {
+  Typography,
+  typographyClassNames,
+  type TypographyProps,
+} from "heroui-native";
+
+<Typography.Heading type="h1">Welcome</Typography.Heading>;
+```
+
+**Related PR:** [#417](https://github.com/heroui-inc/heroui-native/pull/417)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Typography](/docs/native/components/typography) - Component renamed from Text; full API, anatomy, and usage reference updated
+- [Menu](/docs/native/components/menu) - Added **Native Modal (iOS)** section with `offset={insets.top}` workaround
+- [Popover](/docs/native/components/popover) - Added **Native Modal (iOS)** section with `offset={insets.top}` workaround
+- [Select](/docs/native/components/select) - Added **Native Modal (iOS)** section with `offset={insets.top}` workaround
+- [Quick Start](/docs/native/getting-started/quick-start) - Updated `@gorhom/bottom-sheet` optional peer dependency to `^5.2.9`
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!

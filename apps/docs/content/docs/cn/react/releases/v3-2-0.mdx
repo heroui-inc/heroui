@@ -1,0 +1,260 @@
+---
+title: v3.2.0
+description: 基于 React Aria 1.18 的 Calendar 周/日视图与年份选择器，以及 Radio、Checkbox、Switch 的破坏性组合方式变更。
+github:
+  pull: 6616
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 6 月 6 日</span>
+</div>
+
+Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。[Tooltip](/docs/components/tooltip) 新增用于全局显示与隐藏延迟的主题变量。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了随 React Aria 1.18 一起发布的补丁修复（`Table.SortableColumnHeader`、Toast 与 Fieldset 修复、滚动与 RTL 样式修复）。
+
+⚠️ **破坏性变更**：`Radio`、`Checkbox`、`Switch` 改为显式的 `*.Content` 组合 —— `*.Control` 嵌套进 `*.Content`，标签变为 `*.Content` 内的纯文本（不嵌套 `<Label>`），`Description`/`FieldError` 变为 `*.Content` 的兄弟节点。详见[破坏性变更](#-breaking-changes)。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增内容
+
+### Calendar
+
+`Calendar` 与 `RangeCalendar` 新增周视图与日视图，以及来自 React Aria 1.18 的新日历属性。
+
+- **周视图 / 日视图**：通过 `visibleDuration` 渲染多周或单日布局
+- **多选**：在单个 `Calendar` 中选择多个日期
+- **React Aria 1.18 属性**：`weeksInMonth` 与用于范围选择的 `isDateUnavailable(date, anchorDate)`
+- **内部实现**：月份标题使用 React Aria 的 `CalendarHeading`，年份选择器基于 React Aria calendar hooks 重建
+
+**周视图：**
+
+<ComponentPreview name="calendar-week-view" />
+
+**日视图：**
+
+<ComponentPreview name="calendar-day-view" />
+
+**多选：**
+
+<ComponentPreview name="calendar-multiple-selection" />
+
+**多选：**
+
+<ComponentPreview name="calendar-multiple-selection" />
+
+### Table.SortableColumnHeader
+
+`Table.SortableColumnHeader` 用于渲染 sortable 列标题和可选的升降序指示器。放在 `Table.Column` render prop 中，并传入 `sortDirection` ([#6588](https://github.com/heroui-inc/heroui/pull/6588))。
+
+```tsx
+<Table.Column allowsSorting>
+  {({sortDirection}) => (
+    <Table.SortableColumnHeader sortDirection={sortDirection}>
+      Name
+    </Table.SortableColumnHeader>
+  )}
+</Table.Column>
+```
+
+- **默认指示器**：存在排序方向时显示 chevron
+- **自定义指示器**：传入 `indicator`，或用 `showIndicator={false}` 隐藏
+- **样式插槽**：`.table__sortable-column-header` + `.table__sortable-column-indicator`
+
+<ComponentPreview name="table-sorting" />
+
+### Tooltip 延迟主题变量
+
+[Tooltip](/docs/components/tooltip) 现在会从主题 CSS 变量读取默认的显示与隐藏延迟 ([#6617](https://github.com/heroui-inc/heroui/pull/6617))：
+
+- `--tooltip-delay` — 显示 Tooltip 前的延迟（默认：`1500ms`）
+- `--tooltip-close-delay` — 隐藏 Tooltip 前的延迟（默认：`500ms`）
+
+全局覆盖示例：
+
+```css
+:root {
+  --tooltip-delay: 700ms;
+  --tooltip-close-delay: 0ms;
+}
+```
+
+单个 Tooltip 上的 `delay` 和 `closeDelay` 属性仍会覆盖这些值。
+
+<Callout type="warning">
+  **行为变更：** 使用默认 HeroUI 主题时，Tooltip 延迟现在默认为 `1500ms` / `500ms`，而不是之前的 React Aria 默认值 `700ms` / `0ms`。如需保留旧行为，请显式设置 CSS 变量或 props。
+</Callout>
+
+## 组件修复
+
+- **Toast**：Toast 队列会串行化 ViewTransition 更新，避免在 `toast.promise()` 关闭 loading toast 并打开成功/失败反馈时出现被跳过的过渡和 AbortError ([#6511](https://github.com/heroui-inc/heroui/pull/6511))。
+- **Fieldset**：`disabled` 会传递到 React Aria 的 Button、CheckboxGroup、Link、RadioGroup、Slider、ToggleButton 和 ToggleButtonGroup 上下文 ([#6596](https://github.com/heroui-inc/heroui/pull/6596))。
+
+## 样式修复
+
+- **Modal / AlertDialog**：`scroll-inside` 对话框通过 `max-h-full min-h-0` 限制高度，使内容区域滚动而非溢出 ([#6597](https://github.com/heroui-inc/heroui/pull/6597))。
+- **ScrollShadow**：渐隐遮罩通过 `--scroll-shadow-scrollbar-size` 为可见的原生滚动条预留空间 ([#6598](https://github.com/heroui-inc/heroui/pull/6598))。
+- **Table RTL**：列分隔线与拖拽手柄在 RTL 下使用逻辑属性 `end-0` 定位 ([#6606](https://github.com/heroui-inc/heroui/pull/6606))。
+
+## 依赖
+
+- **React Aria Components**：`1.17.0` → `1.18.0` ([#6586](https://github.com/heroui-inc/heroui/pull/6586))。1.18 引入了 toggles 所采用的 `*Field` + `*Button` 组合方式、`CalendarHeading`，以及 `isDateUnavailable(date, anchorDate)`。
+- **@internationalized/date**：`3.12.1` → `3.12.2`
+- **React Aria / Stately 辅助包**：`@react-aria/*`、`@react-stately/*` 与 `@react-types/shared` 补丁更新
+
+## ⚠️ Breaking Changes
+
+### Radio、Checkbox 与 Switch：显式 `*.Content` 组合
+
+这些组件现在在底层使用 React Aria 的 `*Field` + `*Button` 组合方式。`X.Content` 现在是**可点击的 label**（React Aria 的 `*Button`）。共有三点变化：
+
+- **`X.Control` 移进 `X.Content`** —— 它们以前是兄弟节点。
+- **标签是 `X.Content` 内部的纯文本** —— `X.Content` 渲染的是 `<label>` 元素，所以不要嵌套 `<Label>` 组件（嵌套的 `<label>` 是无效 HTML）。若要使用独立的 `Label`，请把它放在**外部**，并用 `htmlFor` + 组件 `id` 关联。
+- **`Description`/`FieldError` 移到外部**，作为 `X.Content` 的兄弟节点，这样它们会通过 `aria-describedby` 朗读，而不会被并入无障碍名称。
+
+**Checkbox**
+
+```tsx
+// v3.1
+<Checkbox>
+  <Checkbox.Control>
+    <Checkbox.Indicator />
+  </Checkbox.Control>
+  <Checkbox.Content>
+    <Label>Accept terms</Label>
+    <Description>You agree to our terms</Description>
+  </Checkbox.Content>
+</Checkbox>
+
+// v3.2
+<Checkbox>
+  <Checkbox.Content>
+    <Checkbox.Control>
+      <Checkbox.Indicator />
+    </Checkbox.Control>
+    Accept terms
+  </Checkbox.Content>
+  <Description>You agree to our terms</Description>
+</Checkbox>
+```
+
+**Radio**
+
+```tsx
+// v3.1
+<Radio value="a">
+  <Radio.Control>
+    <Radio.Indicator />
+  </Radio.Control>
+  <Radio.Content>
+    <Label>Option A</Label>
+  </Radio.Content>
+</Radio>
+
+// v3.2
+<Radio value="a">
+  <Radio.Content>
+    <Radio.Control>
+      <Radio.Indicator />
+    </Radio.Control>
+    Option A
+  </Radio.Content>
+</Radio>
+```
+
+**Switch**
+
+```tsx
+// v3.1
+<Switch>
+  <Switch.Control>
+    <Switch.Thumb />
+  </Switch.Control>
+  <Switch.Content>
+    <Label>Enable notifications</Label>
+  </Switch.Content>
+</Switch>
+
+// v3.2
+<Switch>
+  <Switch.Content>
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    Enable notifications
+  </Switch.Content>
+</Switch>
+```
+
+**迁移对照**
+
+| v3.1 | v3.2 |
+|------|------|
+| `X.Control` 与 `X.Content` 为兄弟节点 | `X.Control` 嵌套进 `X.Content` |
+| `X.Content` 是包裹 `Label` + 帮助文本的布局 `<div>` | `X.Content` 是包裹 `X.Control` + 标签文本的可点击 `<label>` |
+| 通过 `X.Content` 内的 `<Label>` 提供标签 | 标签是 `X.Content` 内的**纯文本**（不嵌套 `<Label>`） |
+| `Description` / `FieldError` 位于 `X.Content` 内 | `Description` / `FieldError` 作为 `X.Content` 的兄弟节点 |
+
+**外部标签** —— 若要使用独立的 `Label`，请把它放在组件外部，并用 `htmlFor` + 组件 `id` 关联：
+
+```tsx
+<div className="flex items-center gap-3">
+  <Checkbox id="terms">
+    <Checkbox.Content>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+    </Checkbox.Content>
+  </Checkbox>
+  <Label htmlFor="terms">Accept terms</Label>
+</div>
+```
+
+**仅含控件的 Checkbox 和 Switch**（没有标签，例如表格行选择或图标开关）仍需用 `X.Content` 作为可点击包装。请把 `Checkbox.Control` / `Switch.Control` 放进 `X.Content`，省略标签，并在根组件上传入 `aria-label`。
+
+各组件完整迁移指南：[Checkbox](/docs/react/migration/checkbox)、[Checkbox Group](/docs/react/migration/checkbox-group)、[Radio](/docs/react/migration/radio)、[Radio Group](/docs/react/migration/radio-group)、[Switch](/docs/react/migration/switch)。
+
+## 链接
+
+- [Calendar 文档](/docs/react/components/calendar)
+- [Tooltip 文档](/docs/react/components/tooltip)
+- [Checkbox 文档](/docs/react/components/checkbox)
+- [Radio Group 文档](/docs/react/components/radio-group)
+- [Switch 文档](/docs/react/components/switch)
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6616](https://github.com/heroui-inc/heroui/pull/6616)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />

@@ -1,0 +1,201 @@
+---
+title: 组合
+description: 用组件组合模式搭建灵活 UI
+icon: layers
+---
+
+HeroUI Native 通过组合模式实现灵活、可定制的组件：可更换实际渲染元素、将多个部件拼在一起，并完全掌控结构。
+
+## 复合组件
+
+HeroUI Native 采用点记法的复合组件——子组件作为属性导出（如 `Button.Label`、`Dialog.Trigger`、`Accordion.Item`），共同构成完整界面。
+
+```tsx
+import { Button, Dialog } from 'heroui-native';
+
+function DialogExample() {
+  return (
+    <Dialog>
+      <Dialog.Trigger>
+        打开对话框
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <Dialog.Content>
+          <Dialog.Close />
+          <Dialog.Title>对话框标题</Dialog.Title>
+          <Dialog.Description>对话框说明</Dialog.Description>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+```
+
+## asChild 属性
+
+`asChild` 用于改变组件实际渲染的元素。为 `true` 时，HeroUI Native 会克隆子元素并合并属性，而不是渲染默认包裹节点。
+
+```tsx
+import { Button, Dialog } from 'heroui-native';
+
+function DialogExample() {
+  return (
+    <Dialog>
+      {/* asChild：Button 直接作为触发器，无额外包裹 */}
+      <Dialog.Trigger asChild>
+        <Button variant="primary">打开对话框</Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <Dialog.Content>
+          {/* Dialog.Close 也可使用 asChild */}
+          <Dialog.Close asChild>
+            <Button variant="ghost" size="sm">取消</Button>
+          </Dialog.Close>
+          <Dialog.Title>对话框标题</Dialog.Title>
+          <Dialog.Description>对话框说明</Dialog.Description>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog>
+  );
+}
+```
+
+## 自定义组件
+
+通过组合 HeroUI Native 原语封装自己的组件：
+
+```tsx
+import { Button, Card, Popover } from 'heroui-native';
+import { View } from 'react-native';
+
+// 商品卡片
+function ProductCard({ title, description, price, onBuy, ...props }) {
+  return (
+    <Card {...props}>
+      <Card.Body>
+        <Card.Title>{price}</Card.Title>
+        <Card.Title>{title}</Card.Title>
+        <Card.Description>{description}</Card.Description>
+      </Card.Body>
+      <Card.Footer>
+        <Button variant="primary" onPress={onBuy}>
+          <Button.Label>立即购买</Button.Label>
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+}
+
+// 带 Popover 的按钮
+function PopoverButton({ children, popoverContent, ...props }) {
+  return (
+    <Popover>
+      <Popover.Trigger asChild>
+        <Button {...props}>
+          <Button.Label>{children}</Button.Label>
+        </Button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Overlay />
+        <Popover.Content>
+          <Popover.Close />
+          {popoverContent}
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover>
+  );
+}
+
+// 用法
+<ProductCard
+  title="客厅沙发"
+  description="适合现代家居空间"
+  price="$450"
+  onBuy={() => console.log('购买')}
+/>
+
+<PopoverButton variant="tertiary" popoverContent={
+  <View>
+    <Popover.Title>说明</Popover.Title>
+    <Popover.Description>更多详情见此处</Popover.Description>
+  </View>
+}>
+  显示说明
+</PopoverButton>
+```
+
+## 自定义变体
+
+可用 `tailwind-variants` 扩展样式。**文字颜色类须加在 `Button.Label` 上，而不是父级 `Button`：**
+
+```tsx
+import { Button } from 'heroui-native';
+import type { ButtonRootProps } from 'heroui-native';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const customButtonVariants = tv({
+  base: 'font-semibold rounded-lg',
+  variants: {
+    intent: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-gray-200',
+      danger: 'bg-red-500',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+  },
+});
+
+const customLabelVariants = tv({
+  base: '',
+  variants: {
+    intent: {
+      primary: 'text-white',
+      secondary: 'text-gray-800',
+      danger: 'text-white',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+  },
+});
+
+type CustomButtonVariants = VariantProps<typeof customButtonVariants>;
+
+interface CustomButtonProps
+  extends Omit<ButtonRootProps, 'className' | 'variant'>,
+    CustomButtonVariants {
+  className?: string;
+  labelClassName?: string;
+}
+
+export function CustomButton({
+  intent,
+  className,
+  labelClassName,
+  children,
+  ...props
+}: CustomButtonProps) {
+  return (
+    <Button
+      className={customButtonVariants({ intent, className })}
+      {...props}
+    >
+      <Button.Label
+        className={customLabelVariants({ intent, className: labelClassName })}
+      >
+        {children}
+      </Button.Label>
+    </Button>
+  );
+}
+```
+
+## 下一步
+
+- 了解 [样式](/docs/native/getting-started/styling) 体系
+- 阅读 [主题](/docs/native/getting-started/theming) 文档
+- 探索 [动画](/docs/native/getting-started/animation) 选项

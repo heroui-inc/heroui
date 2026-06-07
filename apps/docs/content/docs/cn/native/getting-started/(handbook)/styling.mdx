@@ -1,0 +1,371 @@
+---
+title: 样式
+description: 使用 Tailwind 或 StyleSheet API 为 HeroUI Native 组件编写样式
+icon: brush
+links:
+  themes: true
+  tailwind: theme
+---
+
+HeroUI Native 提供灵活的样式方案：Tailwind CSS 工具类、StyleSheet API，以及用于动态样式的 render props。
+
+## 样式原则
+
+HeroUI Native 以 `className` 作为主要样式入口，所有组件均可通过 `className` 使用 Tailwind 类。
+
+**StyleSheet 优先级：** 同时传入 `style`（StyleSheet）与 `className` 时，`style` 优先级更高，可在需要时覆盖 Tailwind。
+
+**动画样式：** 部分样式属性由 `react-native-reanimated` 驱动，与 StyleSheet 类似，其优先级也高于 `className`。要确认哪些属性受动画占用、无法仅靠 `className` 设置：
+
+- **在 IDE 中悬停 `className`** — TypeScript 定义会提示可用属性
+- **查阅组件文档** — 组件页顶部通常有样式源码链接，其中会标注动画相关限制
+
+**自定义动画样式：** 若某属性被动画占用，可在支持 `animation` 属性的组件上通过 `animation` 进行调整。
+
+## 基础样式
+
+**使用 className：** 所有 HeroUI Native 组件都支持 `className`：
+
+```tsx
+import { Button } from 'heroui-native';
+
+<Button className="bg-accent px-6 py-3 rounded-lg">
+  <Button.Label>Custom Button</Button.Label>
+</Button>;
+```
+
+**使用 style：** 也可通过 `style` 传入内联样式：
+
+```tsx
+import { Button } from 'heroui-native';
+
+<Button style={{ backgroundColor: '#8B5CF6', paddingHorizontal: 24 }}>
+  <Button.Label>Styled Button</Button.Label>
+</Button>;
+```
+
+## Render Props
+
+使用渲染函数读取组件状态并动态定制内容：
+
+```tsx
+import { RadioGroup, Label, cn } from 'heroui-native';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="option1">
+    {({ isSelected, isInvalid, isDisabled }) => (
+      <>
+        <Label
+          className={cn(
+            'text-foreground',
+            isSelected && 'text-accent font-semibold'
+          )}
+        >
+          Option 1
+        </Label>
+        <Radio
+          className={cn(
+            'border-2 rounded-full',
+            isSelected && 'border-accent bg-accent'
+          )}
+        >
+          {isSelected && <CustomIcon />}
+        </Radio>
+      </>
+    )}
+  </RadioGroup.Item>
+</RadioGroup>;
+```
+
+## 封装可复用组件
+
+结合 [tailwind-variants](https://tailwind-variants.org/)（Tailwind 优先的变体 API）封装自定义组件：
+
+```tsx
+import { Button } from 'heroui-native';
+import type { ButtonRootProps } from 'heroui-native';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const customButtonVariants = tv({
+  base: 'font-semibold rounded-lg',
+  variants: {
+    intent: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-gray-200',
+      danger: 'bg-red-500',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+  },
+});
+
+const customLabelVariants = tv({
+  base: '',
+  variants: {
+    intent: {
+      primary: 'text-white',
+      secondary: 'text-gray-800',
+      danger: 'text-white',
+    },
+  },
+  defaultVariants: {
+    intent: 'primary',
+  },
+});
+
+type CustomButtonVariants = VariantProps<typeof customButtonVariants>;
+
+interface CustomButtonProps
+  extends Omit<ButtonRootProps, 'className' | 'variant'>,
+    CustomButtonVariants {
+  className?: string;
+  labelClassName?: string;
+}
+
+export function CustomButton({
+  intent,
+  className,
+  labelClassName,
+  children,
+  ...props
+}: CustomButtonProps) {
+  return (
+    <Button
+      className={customButtonVariants({ intent, className })}
+      {...props}
+    >
+      <Button.Label
+        className={customLabelVariants({ intent, className: labelClassName })}
+      >
+        {children}
+      </Button.Label>
+    </Button>
+  );
+}
+```
+
+## 使用组件自带的 classNames
+
+每个 HeroUI Native 组件都会导出与内部一致的 `classNames` 工具对象，便于让自定义组件在视觉上与库内组件保持一致。
+
+例如，让自定义 `Link` 看起来像 `Button`：
+
+```tsx
+import { buttonClassNames, cn } from 'heroui-native';
+import { Pressable, Text } from 'react-native';
+
+interface LinkProps {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Link({
+  href,
+  variant = 'primary',
+  size = 'md',
+  children,
+  className,
+}: LinkProps) {
+  return (
+    <Pressable
+      className={cn(
+        buttonClassNames.root({ variant, size }),
+        className
+      )}
+      onPress={() => {
+        // Handle navigation
+      }}
+    >
+      <Text className={buttonClassNames.label({ variant, size })}>
+        {children}
+      </Text>
+    </Pressable>
+  );
+}
+```
+
+**可用的 classNames 导出：**
+
+每个组件都会导出对应的 `classNames` 对象，例如：
+
+- `buttonClassNames` — 包含 `root` 与 `label` 函数
+- `cardClassNames` — 包含 `root`、`header`、`body`、`footer`、`label` 与 `description` 函数
+- `chipClassNames` — 包含 `root` 与 `label` 函数
+- 其他组件同理……
+
+**典型用法：**
+
+```tsx
+import { buttonClassNames } from 'heroui-native';
+
+// Use with variant and size options
+const rootClasses = buttonClassNames.root({
+  variant: 'primary',
+  size: 'md',
+  className: 'custom-class', // Optional: merge with your own classes
+});
+
+const labelClasses = buttonClassNames.label({
+  variant: 'primary',
+  size: 'md',
+});
+```
+
+`classNames` 函数的变体参数与对应组件一致，便于在自定义组件与 HeroUI 组件之间保持视觉一致。
+
+## 响应式设计
+
+HeroUI Native 通过 [Uniwind](https://docs.uniwind.dev/breakpoints) 支持 Tailwind 的响应式断点前缀，如 `sm:`、`md:`、`lg:`、`xl:`，按屏幕宽度条件应用样式。
+
+**移动优先：** 先写无前缀的小屏样式，再用断点为大屏增强。
+
+### 响应式排版与间距
+
+```tsx
+import { Button } from 'heroui-native';
+import { View, Text } from 'react-native';
+
+<View className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+  <Text className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
+    Responsive Heading
+  </Text>
+  <Button className="px-3 sm:px-4 lg:px-6">
+    <Button.Label className="text-sm sm:text-base lg:text-lg">
+      Responsive Button
+    </Button.Label>
+  </Button>
+</View>;
+```
+
+### 响应式布局
+
+```tsx
+import { View, Text } from 'react-native';
+
+<View className="flex-row flex-wrap">
+  {/* Mobile: 1 column, Tablet: 2 columns, Desktop: 3 columns */}
+  <View className="w-full sm:w-1/2 lg:w-1/3 p-2">
+    <View className="bg-accent p-4 rounded-lg">
+      <Text className="text-accent-foreground">Item 1</Text>
+    </View>
+  </View>
+</View>;
+```
+
+**默认断点：**
+
+- `sm`：640px
+- `md`：768px
+- `lg`：1024px
+- `xl`：1280px
+- `2xl`：1536px
+
+自定义断点与更多说明见 [Uniwind 断点文档](https://docs.uniwind.dev/breakpoints)。
+
+## 工具函数
+
+HeroUI Native 提供一些样式相关的工具。
+
+### cn
+
+`cn` 用于合并 Tailwind 类并处理冲突，适合条件类或与 props 传入的类合并：
+
+```tsx
+import { cn } from 'heroui-native';
+import { View } from 'react-native';
+
+function MyComponent({ className, isActive }) {
+  return (
+    <View
+      className={cn(
+        'bg-background p-4 rounded-lg',
+        'border border-separator',
+        isActive && 'bg-accent',
+        className
+      )}
+    />
+  );
+}
+```
+
+`cn` 基于 `tailwind-variants`，具备：
+
+- 自动合并 Tailwind 类（`twMerge: true`）
+- 自定义透明度分组等能力
+- 合理的冲突解决（靠后的类覆盖靠前的类）
+
+**冲突示例：**
+
+```tsx
+// 'bg-accent' overrides 'bg-background'
+cn('bg-background p-4', 'bg-accent');
+// Result: 'p-4 bg-accent'
+```
+
+### useThemeColor
+
+从 CSS 变量读取主题色，支持单色或一次读取多种颜色（后者更高效）。
+
+**单色：**
+
+```tsx
+import { useThemeColor } from 'heroui-native';
+
+function MyComponent() {
+  const accentColor = useThemeColor('accent');
+  const dangerColor = useThemeColor('danger');
+
+  return (
+    <View style={{ borderColor: accentColor }}>
+      <Text style={{ color: dangerColor }}>Error message</Text>
+    </View>
+  );
+}
+```
+
+**多色（推荐在需要多个 token 时使用）：**
+
+```tsx
+import { useThemeColor } from 'heroui-native';
+
+function MyComponent() {
+  const [accentColor, backgroundColor, dangerColor] = useThemeColor([
+    'accent',
+    'background',
+    'danger',
+  ]);
+
+  return (
+    <View style={{ borderColor: accentColor, backgroundColor }}>
+      <Text style={{ color: dangerColor }}>Error message</Text>
+    </View>
+  );
+}
+```
+
+**类型签名：**
+
+```tsx
+// Single color
+useThemeColor(themeColor: ThemeColor): string
+
+// Multiple colors (with type inference for tuples)
+useThemeColor<T extends readonly [ThemeColor, ...ThemeColor[]]>(
+  themeColor: T
+): CreateStringTuple<T['length']>
+
+// Multiple colors (array)
+useThemeColor(themeColor: ThemeColor[]): string[]
+```
+
+可用主题色包括：`background`、`foreground`、`surface`、`accent`、`default`、`success`、`warning`、`danger` 及其 hover、soft、foreground 等变体，以及 `muted`、`border`、`separator`、`field`、`overlay` 等语义色。
+
+## 下一步
+
+- [动画](/docs/native/getting-started/animation)
+- [主题](/docs/native/getting-started/theming)
+- [颜色](/docs/native/getting-started/colors)

@@ -1,16 +1,16 @@
 "use client";
 
-import type {ThemeId} from "@/app/themes/constants";
+import type {ThemeId} from "@/app/[lang]/themes/constants";
 import type {ButtonProps} from "@heroui/react";
 import type {StaticImageData} from "next/image";
 
 import {BucketPaint, Palette} from "@gravity-ui/icons";
-import {Button, ListBox, Popover, buttonVariants} from "@heroui/react";
+import {Button, Description, Label, ListBox, Popover, Switch, buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
 import {useCallback, useEffect, useMemo, useState} from "react";
 
-import {themeValuesById} from "@/app/themes/constants";
+import {themeValuesById} from "@/app/[lang]/themes/constants";
 import airbnbTheme from "@/assets/themes/airbnb.png";
 import blackTheme from "@/assets/themes/black.png";
 import coinbaseTheme from "@/assets/themes/coinbase.png";
@@ -22,9 +22,11 @@ import netflixTheme from "@/assets/themes/netflix.png";
 import rabbitTheme from "@/assets/themes/rabbit.png";
 import skyTheme from "@/assets/themes/sky.png";
 import spotifyTheme from "@/assets/themes/spotify.png";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 import {
   DESIGN_THEME_STORAGE_KEY,
+  VIBRANT_STORAGE_KEY,
   getStoredDesignTheme,
   isDesignThemeId,
   notifyDesignThemeChange,
@@ -72,8 +74,10 @@ export function DesignThemeSelector({
 }: {
   triggerVariant?: ButtonProps["variant"];
 }) {
+  const dict = useDictionary().themes;
   const [active, setActive] = useState<ThemeId>("default");
   const [mounted, setMounted] = useState(false);
+  const [vibrant, setVibrant] = useState(false);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => setMounted(true), []);
@@ -84,6 +88,13 @@ export function DesignThemeSelector({
     if (stored !== "default") {
       setActive(stored);
       applyTheme(stored);
+    }
+
+    const storedVibrant = localStorage.getItem(VIBRANT_STORAGE_KEY);
+
+    if (storedVibrant === "true") {
+      setVibrant(true);
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
     }
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
@@ -97,6 +108,17 @@ export function DesignThemeSelector({
     localStorage.setItem(DESIGN_THEME_STORAGE_KEY, selected);
     applyTheme(selected);
     notifyDesignThemeChange(selected);
+  }, []);
+
+  const handleVibrantToggle = useCallback((isSelected: boolean) => {
+    setVibrant(isSelected);
+    localStorage.setItem(VIBRANT_STORAGE_KEY, String(isSelected));
+
+    if (isSelected) {
+      document.documentElement.setAttribute("data-vibrant-palette", "true");
+    } else {
+      document.documentElement.removeAttribute("data-vibrant-palette");
+    }
   }, []);
 
   const current = THEMES.find((t) => t.id === active);
@@ -137,7 +159,7 @@ export function DesignThemeSelector({
       <Popover>
         <Popover.Trigger>
           <Button
-            aria-label="Design theme"
+            aria-label={dict.designTheme}
             size="sm"
             variant={triggerVariant}
             className={cn(
@@ -158,13 +180,13 @@ export function DesignThemeSelector({
             ) : (
               <BucketPaint className="size-3.5 text-foreground" />
             )}
-            <span className="hidden sm:inline">{showAvatar ? current.label : "Theme"}</span>
+            <span className="hidden sm:inline">{showAvatar ? current.label : dict.theme}</span>
           </Button>
         </Popover.Trigger>
         <Popover.Content className="w-[248px] rounded-3xl" placement="bottom">
           <Popover.Dialog className="p-4">
             <ListBox
-              aria-label="Design theme"
+              aria-label={dict.designTheme}
               className="grid grid-cols-4 gap-3"
               items={THEMES}
               layout="grid"
@@ -199,6 +221,23 @@ export function DesignThemeSelector({
                 </ListBox.Item>
               )}
             </ListBox>
+            <div className="mt-4 border-t border-separator pt-4">
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-0.5">
+                  <Label className="text-xs">{dict.vibrantPalette}</Label>
+                  <Description className="text-[10px]">
+                    {dict.vibrantPaletteDescription}
+                  </Description>
+                </div>
+                <Switch isSelected={vibrant} onChange={handleVibrantToggle}>
+                  <Switch.Content>
+                    <Switch.Control>
+                      <Switch.Thumb />
+                    </Switch.Control>
+                  </Switch.Content>
+                </Switch>
+              </div>
+            </div>
             <LinkRoot
               href={themeBuilderHref}
               className={buttonVariants({
@@ -209,7 +248,7 @@ export function DesignThemeSelector({
               })}
             >
               <Palette className="size-4" />
-              Edit theme
+              {dict.editTheme}
             </LinkRoot>
           </Popover.Dialog>
         </Popover.Content>

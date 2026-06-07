@@ -1,0 +1,197 @@
+---
+title: v1.0.2
+description: PressableFeedback 与 Surface 的 asChild 插槽模式、Portal 无障碍 modal 属性、Button Android 变体修复、Input 与 Select 样式微调
+github:
+  pull: 380
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 4 月 15 日</span>
+</div>
+
+HeroUI Native v1.0.2 为 PressableFeedback 与 Surface 引入 `asChild` 插槽模式，为所有基于 Portal 的遮罩组件增加 VoiceOver 模态包容支持，并修复 Android 上 Button 某变体的样式问题。本版本还微调了 Input 与 Select 的视觉效果，并在 RadioGroup 文档中内嵌 API 参考表。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 v1.0.2 的全部改进！你可以探索新的 `asChild` 插槽模式、Portal 无障碍改进、Android 上更可靠的 Button 行为，以及优化后的 Input 与 Select 样式。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## API 增强
+
+### PressableFeedback 与 Surface 的 `asChild` 插槽模式
+
+[PressableFeedback](/docs/native/components/pressable-feedback) 与 [Surface](/docs/native/components/surface) 现支持 `asChild` 属性，采用 Slot 模式实现多态渲染。当 `asChild` 为 `true` 时，组件会把自身行为与样式合并到单个子元素上，而不再额外包一层节点。
+
+**PressableFeedback** 使用 `Animated.createAnimatedComponent(Slot.Pressable)`，将按压处理与动画样式合并到子元素。**Surface** 使用 `Slot.View`，将表面样式（海拔、背景、`className`）合并到子元素。
+
+**新能力：**
+
+```tsx
+import { PressableFeedback, Surface } from "heroui-native";
+
+// PressableFeedback 将按压处理合并到子元素
+<PressableFeedback asChild onPress={() => console.log("pressed")}>
+  <MyCustomComponent />
+</PressableFeedback>
+
+// Surface 将表面样式合并到子元素
+<Surface asChild elevation={2}>
+  <MyCustomCard />
+</Surface>
+```
+
+`asChild` 默认为 `false`，保持既有行为，无需迁移。启用 `asChild` 时子节点须为单个 React 元素。两处实现均遵循代码库中已有的 Slot 原语模式。
+
+**相关 PR：** [#380](https://github.com/heroui-inc/heroui-native/pull/380)
+
+### Portal 组件的 `unstable_accessibilityContainerViewIsModal`
+
+所有基于 Portal 的遮罩组件新增 `unstable_accessibilityContainerViewIsModal` 属性，用于控制 iOS VoiceOver 是否将遮罩窗口视为模态容器。启用后，VoiceOver 焦点限制在遮罩内，无法导航到背后内容。
+
+**支持的组件：**
+
+- [BottomSheet](/docs/native/components/bottom-sheet)（`BottomSheet.Portal`）
+- [Dialog](/docs/native/components/dialog)（`Dialog.Portal`）
+- [Menu](/docs/native/components/menu)（`Menu.Portal`）
+- [Popover](/docs/native/components/popover)（`Popover.Portal`）
+- [Select](/docs/native/components/select)（`Select.Portal`）
+- [Toast](/docs/native/components/toast)（`ToastProvider`）
+
+**新能力：**
+
+```tsx
+import { Dialog } from "heroui-native";
+
+<Dialog>
+  <Dialog.Portal unstable_accessibilityContainerViewIsModal>
+    <Dialog.Content>
+      {/* 在 iOS 上 VoiceOver 焦点限制在此遮罩内 */}
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+该属性默认为 `false`，保持既有行为。标记为 `unstable` 是因为它直接映射到 `react-native-screens` 中 `FullWindowOverlay` 的原生 `accessibilityViewIsModal`，未来可能随该库版本变化。
+
+**相关 PR：** [#383](https://github.com/heroui-inc/heroui-native/pull/383)
+
+## 样式修复
+
+### Input 与 Select 视觉微调
+
+优化了 [Input](/docs/native/components/input) 与 [Select](/docs/native/components/select) 的视觉样式，使外观更干净、比例更协调。
+
+**调整：**
+
+- **Input**：边框宽度由 `border-2`（2px）改为 `border-[1.5px]`，边框更轻、不抢眼
+- **Select**：触发器垂直内边距由 `py-3.5` 改为 `py-3`，布局更紧凑
+
+以上均为纯视觉调整，无 API 或行为变更。建议在 iOS 与 Android 上做视觉回归确认。
+
+**相关 PR：** [#381](https://github.com/heroui-inc/heroui-native/pull/381)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #363](https://github.com/heroui-inc/heroui-native/issues/363)**：修复 Android 上 Button 的 outline 变体在通过条件属性切换到其他变体时边框仍残留的问题。Android 上的 React Native 在变体切换时有时会保留 `borderWidth`。除 `outline` 外的所有按钮变体现均包含显式 `border-0` 类，确保变体切换时将 `borderWidth` 重置为 `0`。
+
+- **[Issue #357](https://github.com/heroui-inc/heroui-native/issues/357)**：响应在 Card 上支持 `asChild` 以实现可按压卡片模式的诉求。PressableFeedback 与 Surface 上的新 `asChild` 插槽模式，使开发者可将按压与表面样式合并到单个子元素，无需额外包装节点。
+
+**相关 PR：**
+
+- [#370](https://github.com/heroui-inc/heroui-native/pull/370)
+- [#380](https://github.com/heroui-inc/heroui-native/pull/380)
+
+## 文档
+
+### RadioGroup 内联 API 参考
+
+[RadioGroup](/docs/native/components/radio-group) 文档现于页面内嵌 `Radio`、`Radio.Indicator`、`Radio.IndicatorThumb` 的完整 API 表，读者无需再跳转到单独的 Radio 文档即可了解在 `RadioGroup.Item` 中组合时的可用属性。
+
+**改进：**
+
+- `Radio`、`Radio.Indicator`、`Radio.IndicatorThumb` 的完整属性表内嵌展示
+- 补充 `RadioRenderProps`、`RadioRootAnimation`、`RadioIndicatorThumbAnimation` 类型说明
+- 将外链式 Markdown 链接统一为内联代码格式以保持一致性
+
+**相关 PR：** [#384](https://github.com/heroui-inc/heroui-native/pull/384)
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [RadioGroup](/docs/native/components/radio-group) — 内联 API 表：`Radio`、`Radio.Indicator`、`Radio.IndicatorThumb`
+- [PressableFeedback](/docs/native/components/pressable-feedback) — 补充 `asChild` 属性说明
+- [Surface](/docs/native/components/surface) — 补充 `asChild` 属性说明
+- [BottomSheet](/docs/native/components/bottom-sheet) — 补充 `unstable_accessibilityContainerViewIsModal` 说明
+- [Dialog](/docs/native/components/dialog) — 同上
+- [Menu](/docs/native/components/menu) — 同上
+- [Popover](/docs/native/components/popover) — 同上
+- [Select](/docs/native/components/select) — 同上
+- [Toast](/docs/native/components/toast) — 同上
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

@@ -1,0 +1,207 @@
+---
+title: InputGroup 输入框组
+description: 复合布局组件，将输入框与可选的前后缀装饰组合在一起。
+links:
+  source_native: input-group/input-group.tsx
+  styles_native: input-group/input-group.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-group-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { InputGroup } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix>...</InputGroup.Prefix>
+  <InputGroup.Input />
+  <InputGroup.Suffix>...</InputGroup.Suffix>
+</InputGroup>
+```
+
+- **InputGroup**：布局容器，包裹前缀、输入与后缀；提供动画设置与测量上下文，自动将前后缀宽度应用为 `Input` 的内边距。
+- **InputGroup.Prefix**：绝对定位在输入左侧；测量宽度自动作为 `InputGroup.Input` 的 `paddingLeft`。
+- **InputGroup.Suffix**：绝对定位在输入右侧；测量宽度自动作为 `InputGroup.Input` 的 `paddingRight`。
+- **InputGroup.Input**：透传至 `Input`，支持全部 `Input` 属性，并自动获得前后缀对应的左右内边距。
+
+## 用法
+
+### 基础用法
+
+通过复合子部件为输入框附加前后缀内容。
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix>...</InputGroup.Prefix>
+  <InputGroup.Input placeholder="请输入" />
+  <InputGroup.Suffix>...</InputGroup.Suffix>
+</InputGroup>
+```
+
+### 仅前缀
+
+在输入前附加图标等内容。
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix isDecorative>
+    <PersonIcon size={16} />
+  </InputGroup.Prefix>
+  <InputGroup.Input placeholder="用户名" />
+</InputGroup>
+```
+
+### 仅后缀
+
+在输入后附加图标等内容。
+
+```tsx
+<InputGroup>
+  <InputGroup.Input placeholder="搜索商品…" />
+  <InputGroup.Suffix isDecorative>
+    <MagnifierIcon size={16} />
+  </InputGroup.Suffix>
+</InputGroup>
+```
+
+### 装饰性与可交互
+
+在 `Prefix`/`Suffix` 上设置 `isDecorative` 时，触摸事件会穿透到 `Input`，且对读屏隐藏装饰内容；包含可交互元素时不要设置。
+
+```tsx
+<InputGroup>
+  <InputGroup.Prefix isDecorative>
+    <LockIcon size={16} />
+  </InputGroup.Prefix>
+  <InputGroup.Input placeholder="请输入密码" secureTextEntry />
+  <InputGroup.Suffix>
+    <Pressable onPress={togglePasswordVisibility}>
+      <EyeIcon size={16} />
+    </Pressable>
+  </InputGroup.Suffix>
+</InputGroup>
+```
+
+### 禁用状态
+
+禁用整个输入组，状态会级联到子组件。
+
+```tsx
+<InputGroup isDisabled>
+  <InputGroup.Prefix isDecorative>
+    <LockIcon size={16} />
+  </InputGroup.Prefix>
+  <InputGroup.Input placeholder="已禁用" />
+</InputGroup>
+```
+
+### 与 TextField 组合
+
+与 `TextField`、`Label`、`Description` 等组合成完整表单项。
+
+```tsx
+<TextField isRequired>
+  <Label>邮箱</Label>
+  <InputGroup>
+    <InputGroup.Prefix isDecorative>
+      <MailIcon size={16} />
+    </InputGroup.Prefix>
+    <InputGroup.Input placeholder="you@example.com" keyboardType="email-address" />
+  </InputGroup>
+  <Description>我们不会公开您的邮箱</Description>
+</TextField>
+```
+
+## 示例
+
+```tsx
+import { InputGroup } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { Pressable, View } from 'react-native';
+
+export default function InputGroupExample() {
+  const [value, setValue] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  return (
+    <View className="px-5">
+      <InputGroup>
+        <InputGroup.Prefix isDecorative>
+          <Ionicons name="lock-closed-outline" size={16} color="#888" />
+        </InputGroup.Prefix>
+        <InputGroup.Input
+          value={value}
+          onChangeText={setValue}
+          placeholder="请输入密码"
+          secureTextEntry={!isPasswordVisible}
+        />
+        <InputGroup.Suffix>
+          <Pressable
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+            hitSlop={20}
+          >
+            <Ionicons
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+              size={16}
+              color="#888"
+            />
+          </Pressable>
+        </InputGroup.Suffix>
+      </InputGroup>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/input-group.tsx>)。
+
+## API 参考
+
+### InputGroup
+
+| prop           | type                     | default | description                                                                  |
+| -------------- | ------------------------ | ------- | ---------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`        | -       | 组内子节点                                                                   |
+| `className`    | `string`                 | -       | 额外的 class                                                                 |
+| `isDisabled`   | `boolean`                | `false` | 是否禁用整个输入组及子级                                                     |
+| `animation`    | `AnimationRootDisableAll`| -       | 输入组动画配置                                                               |
+| `...ViewProps` | `ViewProps`              | -       | 支持 React Native `View` 的全部属性                                          |
+
+#### AnimationRootDisableAll
+
+根组件动画配置，可为：
+
+- `"disable-all"`：禁用全部动画（含子级，级联）
+- `undefined`：使用默认动画
+
+### InputGroup.Prefix
+
+| prop             | type              | default | description                                                                                  |
+| ---------------- | ----------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `children`       | `React.ReactNode` | -       | 前缀区域内容                                                                                 |
+| `className`      | `string`          | -       | 额外的 class                                                                                 |
+| `isDecorative`   | `boolean`         | `false` | 为 true 时触摸穿透到 `Input`，且对读屏隐藏                                                   |
+| `...ViewProps`   | `ViewProps`       | -       | 支持 React Native `View` 的全部属性                                                          |
+
+### InputGroup.Suffix
+
+| prop             | type              | default | description                                                                                  |
+| ---------------- | ----------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `children`       | `React.ReactNode` | -       | 后缀区域内容                                                                                 |
+| `className`      | `string`          | -       | 额外的 class                                                                                 |
+| `isDecorative`   | `boolean`         | `false` | 为 true 时触摸穿透到 `Input`，且对读屏隐藏                                                   |
+| `...ViewProps`   | `ViewProps`       | -       | 支持 React Native `View` 的全部属性                                                          |
+
+### InputGroup.Input
+
+透传至 [Input](./input) 组件，支持其全部属性。

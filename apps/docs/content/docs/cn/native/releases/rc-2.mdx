@@ -1,0 +1,446 @@
+---
+title: RC 2
+description: SearchField、ListGroup、Slider 组件，Select 多选模式，Button 反馈 API 重构，放宽对等依赖约束
+github:
+  pull: 298
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 2 月 20 日</span>
+</div>
+
+RC 2 继续向生产就绪推进：新增 SearchField、ListGroup、Slider 三个组件；Select 支持由类型安全泛型支撑的多选模式；Button 按压反馈 API 重构为统一的 `feedbackVariant` + `animation`；放宽对等依赖约束以更好兼容 Expo SDK 55。另含若干 Select 与 Avatar 的问题修复。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 抢先体验
+
+通过预览应用在真机上体验 RC 2 的全部改进！你可以探索 SearchField、ListGroup、Slider、Select 多选模式、更新后的 Button 反馈 API，以及各项修复。
+
+### 环境要求
+
+请确保手机已安装最新版本的 [Expo Go](https://expo.dev/go)。
+
+### 如何访问
+
+**方式一：扫描二维码**
+
+使用手机相机或 Expo Go 应用扫描：
+
+<div className="flex justify-center my-6">
+  <img
+    width="200"
+    src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/qr-code-native.png"
+    alt="Expo Go 二维码"
+  />
+</div>
+
+> **Android 用户请注意：** 若使用系统相机或其他扫码应用会跳转到浏览器并出现 404，请先打开 Expo Go，使用其内置扫码功能扫描。
+
+**方式二：点击链接**
+
+**[📱 在 Expo Go 中打开演示应用](https://link.heroui.com/native-demo)**
+
+若设备已安装 Expo Go，将自动在其中打开应用。
+
+## 更新亮点
+
+### 新组件
+
+本版本新增 **3** 个组件：
+
+- **[Slider](/docs/native/components/slider)**：支持单值与区间模式、横/纵方向、自定义数字格式与弹簧动画拇指反馈。
+- **[ListGroup](/docs/native/components/list-group)**：基于 Surface 的分组列表，可按压项、前后缀槽位，默认右箭头导航指示。
+- **[SearchField](/docs/native/components/search-field)**：用于筛选与查询的复合组件，内置搜索图标、可清空输入与空值时自动隐藏清除按钮。
+
+#### Slider
+
+Slider 支持单值与区间（双拇指）模式、横纵布局、通过 `Intl.NumberFormat` 自定义数字格式，以及弹簧动画拇指反馈。原语层独立处理手势与数值逻辑，便于换肤实现复用。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="slider"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/slider-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 复合子组件：`Slider.Output`、`Slider.Track`、`Slider.Fill`、`Slider.Thumb`
+- 区间滑块：`defaultValue`/`value` 传入数组，在 `Slider.Track` 上使用渲染函数渲染多个拇指
+- `orientation="vertical"` 纵向
+- `formatOptions` 接受 `Intl.NumberFormatOptions`（货币、百分比、单位等）
+- 基于 gesture-handler 的拖拽与轨道点击定位
+- 数值钳制、步进与多拇指支持
+- 可通过 `animation` 配置弹簧缩放拇指动画
+- 无障碍：每个拇指 `role="slider"`，完整 `accessibilityValue`（min、max、now、text）
+- `useSlider` 暴露上下文供高级用法
+
+**用法：**
+
+```tsx
+import { Slider } from "heroui-native";
+
+export function BasicSlider() {
+  return (
+    <Slider defaultValue={50} minValue={0} maxValue={100}>
+      <Slider.Output />
+      <Slider.Track>
+        <Slider.Fill />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider>
+  );
+}
+
+export function RangeSlider() {
+  return (
+    <Slider defaultValue={[20, 80]} minValue={0} maxValue={100}>
+      <Slider.Output />
+      <Slider.Track>
+        {({ thumbs }) => (
+          <>
+            <Slider.Fill />
+            {thumbs.map((_, i) => (
+              <Slider.Thumb key={i} index={i} />
+            ))}
+          </>
+        )}
+      </Slider.Track>
+    </Slider>
+  );
+}
+```
+
+完整文档与示例见 [Slider 组件页](/docs/native/components/slider)。
+
+**相关 PR：** [#305](https://github.com/heroui-inc/heroui-native/pull/305)
+
+#### ListGroup
+
+ListGroup 在 Surface 容器内渲染分组列表项，适用于设置页、菜单与内容浏览等导航列表模式。每项支持前缀、内容（标题 + 描述）与后缀槽位，默认带右箭头导航指示。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="list-group"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 基于 Surface 的圆角容器与一致间距
+- 复合子组件：`ListGroup.Item`、`ListGroup.ItemPrefix`、`ListGroup.ItemContent`、`ListGroup.ItemTitle`、`ListGroup.ItemDescription`、`ListGroup.ItemSuffix`
+- `ItemSuffix` 默认内置 `ChevronRightIcon`
+- 可按压项，集成 PressableFeedback
+- 槽位可完全自定义图标、徽标等
+
+**用法：**
+
+```tsx
+import { ListGroup } from "heroui-native";
+
+export function Example() {
+  return (
+    <ListGroup>
+      <ListGroup.Item onPress={() => console.log("Profile")}>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Profile</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>Manage your account</ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+      <ListGroup.Item onPress={() => console.log("Settings")}>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>Settings</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>App preferences</ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+    </ListGroup>
+  );
+}
+```
+
+完整文档与示例见 [ListGroup 组件页](/docs/native/components/list-group)。
+
+**相关 PR：** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+#### SearchField
+
+SearchField 为搜索与筛选场景提供专用输入，采用与 TextField 相同的复合组件模式：搜索图标、可清空输入、值为空时自动隐藏清除按钮。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="search-field"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/search-field-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 复合子组件：`SearchField.Group`、`SearchField.SearchIcon`、`SearchField.Input`、`SearchField.ClearButton`
+- `ClearButton` 在值为空时自动隐藏，按压清除搜索文本
+- `SearchIcon` 支持自定义子节点替换默认放大镜 SVG
+- 校验态视觉反馈
+- 禁用态支持
+- 与 Label、Description、FieldError 无缝集成
+
+**用法：**
+
+```tsx
+import { Label, SearchField } from "heroui-native";
+
+export function Example() {
+  return (
+    <SearchField>
+      <Label>Search</Label>
+      <SearchField.Group>
+        <SearchField.SearchIcon />
+        <SearchField.Input placeholder="Search components..." />
+        <SearchField.ClearButton />
+      </SearchField.Group>
+    </SearchField>
+  );
+}
+```
+
+完整文档与示例见 [SearchField 组件页](/docs/native/components/search-field)。
+
+**相关 PR：** [#299](https://github.com/heroui-inc/heroui-native/pull/299)
+
+### Select 多选模式
+
+[Select](/docs/native/components/select) 现通过 `selectionMode` 支持多选。`RootProps` 对 `SelectionMode` 泛型化，TypeScript 按模式解析 `value` 与 `onValueChange`——单选为 `SelectOption`，多选为 `SelectOption[]`。
+
+**特性：**
+
+- `selectionMode="multiple"` 可多选切换；多选模式下 `closeOnPress` 默认 `false`
+- 类型安全泛型：`RootProps<M>` 通过 `SelectValueType<M>` 解析 `value`/`onValueChange`
+- `Select.Value` 使用 `formatSelectedLabels` 将多标签格式化为「Apple, Banana and Cherry」
+- 单选模式完全向后兼容（默认）
+
+**用法：**
+
+```tsx
+import { Select } from "heroui-native";
+
+export function MultiSelect() {
+  return (
+    <Select selectionMode="multiple">
+      <Select.Trigger>
+        <Select.Value placeholder="Select fruits..." />
+        <Select.TriggerIndicator />
+      </Select.Trigger>
+      <Select.Portal>
+        <Select.Content>
+          <Select.Item value="apple" label="Apple" />
+          <Select.Item value="banana" label="Banana" />
+          <Select.Item value="cherry" label="Cherry" />
+        </Select.Content>
+      </Select.Portal>
+    </Select>
+  );
+}
+```
+
+**相关 PR：** [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+
+### 新子组件
+
+#### PressableFeedback.Scale
+
+新增复合子组件，用于可选的缩放按压动画组合。`PressableFeedback.Scale` 可为任意可按压元素（如 `ListGroup.Item`）增加缩放反馈，而无需根级 `PressableFeedback` 管理缩放。
+
+**用法：**
+
+```tsx
+import { PressableFeedback } from "heroui-native";
+
+<PressableFeedback.Scale>
+  <ListGroup.Item onPress={handlePress}>
+    {/* item content */}
+  </ListGroup.Item>
+</PressableFeedback.Scale>
+```
+
+**相关 PR：** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+## 组件改进
+
+### Select 触发器与状态修复
+
+[Select](/docs/native/components/select) 针对触发器与受控状态有多项修复。
+
+**改进：**
+
+- 自定义 `className` 现正确参与触发器样式计算，修复用户类名被静默丢弃的情况
+- `useControllableState` 在从受控切到非受控时重置内部状态，避免陈旧选中残留
+- 触发器通过 `onLayout` 测量位置，正确支持 `isDefaultOpen`
+- 触发器样式更新为 `gap-3`、`py-3.5`，值文本使用 `flex-1` 改善布局
+
+**相关 PR：** [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+
+### Avatar asChild 图片修复
+
+[Avatar](/docs/native/components/avatar) 的 `AvatarImage` 在向底层原语转发时正确分离 `source`、`style` 与 `asChild` 及其余属性，修复使用 `asChild` 时错误将全部属性展开到图片组件的问题。
+
+**相关 PR：** [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+
+## API 增强
+
+### Button 反馈 API 重构
+
+[Button](/docs/native/components/button) 的按压反馈 API 重构为统一的类型安全 `feedbackVariant` + `animation`，取代此前多属性拼写。
+
+**新能力：**
+
+```tsx
+import { Button } from "heroui-native";
+
+// 缩放 + 高亮（默认）
+<Button feedbackVariant="scale-highlight">Press me</Button>
+
+// 缩放 + 水波纹
+<Button feedbackVariant="scale-ripple">Press me</Button>
+
+// 仅缩放
+<Button feedbackVariant="scale">Press me</Button>
+
+// 自定义动画配置
+<Button
+  feedbackVariant="scale-highlight"
+  animation={{ scale: 0.95, highlight: { color: "rgba(0,0,0,0.1)" } }}
+>
+  Press me
+</Button>
+```
+
+`animation` 为按变体区分的联合类型，各反馈配置均有完整类型推导。
+
+`button.utils.ts` 中新增 `resolveAnimationObject` 与 `isAnimationDisabled`，集中解析动画属性。
+
+**相关 PR：** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+## 依赖
+
+### 放宽对等依赖约束
+
+对等依赖版本约束已放宽为 caret（`^`）与范围（`>=`），替代偏紧的 tilde（`~`）或固定版本，便于使用方在较新依赖版本上解析，尤其 Expo SDK 55。
+
+**变更：**
+
+- `react-native-reanimated`：`~4.1.1` → `^4.1.1`（允许次版本更新）
+- `react-native-safe-area-context`：`~5.6.0` → `^5.6.0`
+- `react-native-svg`：`15.12.1` → `^15.12.1`
+- `react-native-worklets`：`0.5.1` → `>=0.5.1`
+
+无运行时逻辑变更——此前已满足约束的项目无需修改即可继续工作。
+
+**相关 PR：** [#306](https://github.com/heroui-inc/heroui-native/pull/306)
+
+## ⚠️ 破坏性变更
+
+### Button 反馈 API
+
+已移除 Button 上的 `pressableFeedbackVariant`、`pressableFeedbackHighlightProps`、`pressableFeedbackRippleProps`。请迁移到 `feedbackVariant` 与统一的 `animation`。
+
+**迁移：**
+
+更新所有 Button 反馈相关属性：
+
+```tsx
+// 之前
+<Button
+  pressableFeedbackVariant="highlight"
+  pressableFeedbackHighlightProps={{ color: "rgba(0,0,0,0.1)" }}
+>
+  Press me
+</Button>
+
+// 之后
+<Button
+  feedbackVariant="scale-highlight"
+  animation={{ scale: 0.95, highlight: { color: "rgba(0,0,0,0.1)" } }}
+>
+  Press me
+</Button>
+```
+
+**变体映射：**
+
+- `"highlight"` → `"scale-highlight"`（默认）
+- `"ripple"` → `"scale-ripple"`
+- `"none"` → `"scale"` 或 `"none"`
+
+**可选项：**
+
+- `"scale-highlight"` — 缩小 + 高亮遮罩（默认）
+- `"scale-ripple"` — 缩小 + 水波纹
+- `"scale"` — 仅缩小
+- `"none"` — 无反馈动画
+
+**相关 PR：** [#302](https://github.com/heroui-inc/heroui-native/pull/302)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #291](https://github.com/heroui-inc/heroui-native/issues/291)**：修复 `Select.Trigger` 的 `variant` 被 `className` 覆盖的问题。传入触发器的自定义类名现正确参与样式计算，不再被静默丢弃。
+
+- **[Issue #294](https://github.com/heroui-inc/heroui-native/issues/294)**：兼容 `react-native-worklets` 0.7.x 与 `react-native-reanimated` 4.2.x（Expo SDK 55）。放宽对等依赖约束，接受上述新版本而不产生解析告警。
+
+**相关 PR：**
+
+- [#298](https://github.com/heroui-inc/heroui-native/pull/298)
+- [#306](https://github.com/heroui-inc/heroui-native/pull/306)
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [SearchField](/docs/native/components/search-field) — 新组件文档：用法示例与 API 参考
+- [ListGroup](/docs/native/components/list-group) — 新组件文档：用法示例与 API 参考
+- [Slider](/docs/native/components/slider) — 新组件文档：用法示例与 API 参考
+- [Select](/docs/native/components/select) — 多选模式、触发器 className 修复与受控状态改进
+- [Button](/docs/native/components/button) — 更新反馈 API 文档：`feedbackVariant` 与 `animation`
+- [Avatar](/docs/native/components/avatar) — 修复 `asChild` 图片属性展开说明
+- [PressableFeedback](/docs/native/components/pressable-feedback) — 新增 `PressableFeedback.Scale` 子组件文档
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

@@ -1,0 +1,147 @@
+---
+title: ColorSwatch 颜色色块
+description: 颜色值的视觉预览，并提供无障碍支持。
+links:
+  rac: ColorSwatch
+  source: color-swatch/color-swatch.tsx
+  styles: color-swatch.css
+  storybook: Components/Colors/ColorSwatch
+---
+
+## 引入
+
+```tsx
+import { ColorSwatch } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="color-swatch-basic"
+/>
+
+### Sizes
+
+<ComponentPreview
+  name="color-swatch-sizes"
+/>
+
+### Shapes
+
+<ComponentPreview
+  name="color-swatch-shapes"
+/>
+
+### Transparency
+
+<ComponentPreview
+  name="color-swatch-transparency"
+/>
+
+### Custom Styles with Render Props
+
+你可以使用 `style` 渲染 prop 来读取颜色值并创建自定义视觉效果。
+
+<ComponentPreview
+  name="color-swatch-custom-styles"
+/>
+
+### Accessibility
+
+使用 `colorName` 为颜色提供自定义可访问名称，并使用 `aria-label` 补充颜色用途的上下文。
+
+<ComponentPreview
+  name="color-swatch-accessibility"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="color-swatch-custom-render-function"
+/>
+
+<RelatedComponents component="color-swatch" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {ColorSwatch} from '@heroui/react';
+
+function CustomColorSwatch() {
+  return (
+    <ColorSwatch
+      className="size-12 rounded-lg"
+      color="#0485F7"
+    />
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 ColorSwatch 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .color-swatch {
+    @apply border-2 border-white;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，以确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ColorSwatch 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-swatch.css)）：
+
+#### 基础类
+- `.color-swatch` - 基础 swatch（色板）样式，透明区域使用棋盘格背景
+
+#### 形状类
+- `.color-swatch--circle` - 圆形（默认）
+- `.color-swatch--square` - 圆角方形
+
+#### 尺寸类
+- `.color-swatch--xs` - 特小（16px）
+- `.color-swatch--sm` - 小（24px）
+- `.color-swatch--md` - 中（32px，默认）
+- `.color-swatch--lg` - 大（36px）
+- `.color-swatch--xl` - 特大（40px）
+
+## API 参考
+
+### ColorSwatch Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `color` | `string \| Color` | - | 要展示的颜色值（hex、rgb、hsl 等） |
+| `colorName` | `string` | - | 颜色的可访问名称（会覆盖自动生成的描述） |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `shape` | `"circle" \| "square"` | `"circle"` | swatch（色板）形状 |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | swatch（色板）尺寸 |
+| `style` | `CSSProperties \| ((renderProps) => CSSProperties)` | - | 行内样式，或带颜色访问能力的渲染 prop 函数 |
+| `aria-label` | `string` | - | swatch 的无障碍标签 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### Style Render Props
+
+当把 `style` 作为函数传入时，你会获得包含颜色对象在内的渲染参数：
+
+```tsx
+<ColorSwatch
+  color="#0485F7"
+  style={({ color }) => ({
+    boxShadow: `0 4px 14px ${color.toString("css")}80`,
+  })}
+/>
+```
+
+`color` 对象提供例如：
+
+- `color.toString("css")` - 返回 CSS 颜色字符串
+- `color.toString("hex")` - 返回十六进制颜色字符串
+- `color.getChannelValue("alpha")` - 返回 alpha 通道数值

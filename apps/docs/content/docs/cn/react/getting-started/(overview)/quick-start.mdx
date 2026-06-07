@@ -1,0 +1,71 @@
+---
+title: 快速入门
+description: 只需几分钟即可开始使用 HeroUI v3
+icon: rocket
+---
+
+## 环境要求
+
+- [React 19+](https://reactjs.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/docs/installation/framework-guides)
+
+## 快速安装
+
+安装 HeroUI 及其所需依赖：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles @heroui/react
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles @heroui/react
+    ```
+  </Tab>
+</Tabs>
+
+## 导入样式
+
+将以下内容添加到你的主 CSS 文件 `globals.css`：
+
+```css
+@import "tailwindcss";
+@import "@heroui/styles"; /* [!code highlight]*/
+```
+
+<Callout type="warning">
+  导入顺序很重要。请务必先导入 `tailwindcss`。
+</Callout>
+
+## 使用组件
+
+```tsx
+import { Button } from '@heroui/react';
+
+function App() {
+  return (
+    <Button>
+      My Button
+    </Button>
+  );
+}
+```
+
+## 下一步
+
+- [主题](/themes) — 创建并分享你自己的主题
+- [浏览组件](/docs/react/components) — 查看所有可用的组件
+- [学习样式](/docs/handbook/styling) — 使用 Tailwind CSS 进行自定义
+- [探索组合模式](/docs/handbook/composition) — 掌握复合组件

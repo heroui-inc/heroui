@@ -1,0 +1,811 @@
+---
+title: Menu 菜单
+description: 浮动上下文菜单，支持定位、选择分组与多种呈现方式。
+icon: updated
+links:
+  source_native: menu/menu.tsx
+  styles_native: menu/menu.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/menu-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Menu, SubMenu } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover">
+      <Menu.Close />
+      <Menu.Label>...</Menu.Label>
+      <Menu.Group>
+        <Menu.Item>
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>...</Menu.ItemTitle>
+          <Menu.ItemDescription>...</Menu.ItemDescription>
+        </Menu.Item>
+      </Menu.Group>
+      <SubMenu>
+        <SubMenu.Trigger textValue="...">
+          <SubMenu.TriggerIndicator />
+          ...
+        </SubMenu.Trigger>
+        <SubMenu.Content>
+          <Menu.Item>...</Menu.Item>
+          <Menu.Item>...</Menu.Item>
+        </SubMenu.Content>
+      </SubMenu>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+- **Menu**：主容器，管理开闭状态与定位，并向子组件提供上下文。
+- **Menu.Trigger**：可点击元素，用于切换菜单显隐。
+- **Menu.Portal**：在 Portal 层渲染菜单内容，叠于其他内容之上。
+- **Menu.Overlay**：可选背景遮罩，用于捕获外部点击并关闭菜单。
+- **Menu.Content**：菜单内容容器；两种呈现：带定位与碰撞检测的浮动 Popover，或底部抽屉式 Bottom Sheet。
+- **Menu.Close**：关闭按钮，按下后关闭菜单。
+- **Menu.Label**：菜单内的非交互分区标题。
+- **Menu.Group**：对菜单项分组，可选选择模式（无 / 单选 / 多选）。
+- **Menu.Item**：可按压菜单项，带按压动画反馈；可独立使用或置于 Group 内参与选择。
+- **Menu.ItemTitle**：菜单项主标题文本。
+- **Menu.ItemDescription**：菜单项次要说明文本。
+- **Menu.ItemIndicator**：菜单项选中指示（对勾或圆点）。
+- **SubMenu**：子菜单根容器，管理展开/收起状态并为子级提供动画上下文。
+- **SubMenu.Trigger**：可按压行，切换子菜单开闭；样式与普通菜单项一致。
+- **SubMenu.TriggerIndicator**：动画 V 形图标（默认 chevron-right），随子菜单开闭旋转；放在 `SubMenu.Trigger` 内。
+- **SubMenu.Content**：绝对定位容器，子菜单开闭时带动画高度变化；其内放置 `Menu.Item` 等。
+
+## 用法
+
+### 基础用法
+
+Menu 通过复合部件组成浮动上下文菜单。
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={220}>
+      <Menu.Item>
+        <Menu.ItemTitle>View Profile</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item>
+        <Menu.ItemTitle>Settings</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### 带副标题
+
+在标题旁为菜单项添加次要说明文字。
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={260}>
+      <Menu.Item className="items-start">
+        <View className="flex-1">
+          <Menu.ItemTitle>New file</Menu.ItemTitle>
+          <Menu.ItemDescription>Create a new file</Menu.ItemDescription>
+        </View>
+      </Menu.Item>
+      <Menu.Item className="items-start">
+        <View className="flex-1">
+          <Menu.ItemTitle>Copy link</Menu.ItemTitle>
+          <Menu.ItemDescription>Copy the file link</Menu.ItemDescription>
+        </View>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### 单选
+
+使用 `Menu.Group` 并设置 `selectionMode="single"`，同一时间仅允许选中一项。
+
+```tsx
+const [theme, setTheme] = useState<Set<MenuKey>>(() => new Set(['system']));
+
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={180}>
+      <Menu.Label>Appearance</Menu.Label>
+      <Menu.Group
+        selectionMode="single"
+        selectedKeys={theme}
+        onSelectionChange={setTheme}
+      >
+        <Menu.Item id="light">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Light</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="dark">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Dark</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="system">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>System</Menu.ItemTitle>
+        </Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>;
+```
+
+### 多选
+
+使用 `selectionMode="multiple"` 可同时选中多项。
+
+```tsx
+const [textStyles, setTextStyles] = useState<Set<MenuKey>>(
+  () => new Set(['bold', 'italic'])
+);
+
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={250}>
+      <Menu.Label>Text Style</Menu.Label>
+      <Menu.Group
+        selectionMode="multiple"
+        selectedKeys={textStyles}
+        onSelectionChange={setTextStyles}
+      >
+        <Menu.Item id="bold">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Bold</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="italic">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Italic</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="underline">
+          <Menu.ItemIndicator />
+          <Menu.ItemTitle>Underline</Menu.ItemTitle>
+        </Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>;
+```
+
+### 子菜单
+
+在 `Menu.Content` 内嵌套 `SubMenu`，按压后展开更多项。
+
+```tsx
+<Menu>
+  <Menu.Trigger asChild>
+    <Button variant="secondary">Editor Menu</Button>
+  </Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={240}>
+      <Menu.Item>
+        <Menu.ItemTitle>New Space</Menu.ItemTitle>
+      </Menu.Item>
+      <SubMenu>
+        <SubMenu.Trigger textValue="Focus">
+          <SubMenu.TriggerIndicator />
+          <Text className="flex-1 text-base font-medium text-foreground">
+            Focus
+          </Text>
+        </SubMenu.Trigger>
+        <SubMenu.Content>
+          <Menu.Item>
+            <Menu.ItemTitle>Zen Mode</Menu.ItemTitle>
+          </Menu.Item>
+          <Menu.Item>
+            <Menu.ItemTitle>Reader Mode</Menu.ItemTitle>
+          </Menu.Item>
+          <Menu.Item>
+            <Menu.ItemTitle>Lock Tab</Menu.ItemTitle>
+          </Menu.Item>
+        </SubMenu.Content>
+      </SubMenu>
+      <Menu.Item>
+        <Menu.ItemTitle>Heading 1</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### 危险变体
+
+对破坏性操作在菜单项上使用 `variant="danger"`。
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={220}>
+      <Menu.Item>
+        <Menu.ItemTitle>Edit</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item variant="danger">
+        <Menu.ItemTitle>Delete</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### 方位
+
+控制菜单相对触发器出现的位置。
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" placement="right" width={200}>
+      <Menu.Item>
+        <Menu.ItemTitle>Option A</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item>
+        <Menu.ItemTitle>Option B</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### Bottom Sheet 呈现
+
+使用 `presentation="bottom-sheet"` 以底部抽屉形式展示菜单内容。
+
+```tsx
+<Menu presentation="bottom-sheet">
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="bottom-sheet">
+      <Menu.Item>
+        <Menu.ItemTitle>Option A</Menu.ItemTitle>
+      </Menu.Item>
+      <Menu.Item>
+        <Menu.ItemTitle>Option B</Menu.ItemTitle>
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+### 圆点指示器
+
+在 `Menu.ItemIndicator` 上使用 `variant="dot"` 显示实心圆点，而非对勾。
+
+```tsx
+<Menu>
+  <Menu.Trigger>...</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Overlay />
+    <Menu.Content presentation="popover" width={180}>
+      <Menu.Group
+        selectionMode="single"
+        selectedKeys={alignment}
+        onSelectionChange={setAlignment}
+      >
+        <Menu.Item id="left">
+          <Menu.ItemIndicator variant="dot" />
+          <Menu.ItemTitle>Left</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="center">
+          <Menu.ItemIndicator variant="dot" />
+          <Menu.ItemTitle>Center</Menu.ItemTitle>
+        </Menu.Item>
+        <Menu.Item id="right">
+          <Menu.ItemIndicator variant="dot" />
+          <Menu.ItemTitle>Right</Menu.ItemTitle>
+        </Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
+  </Menu.Portal>
+</Menu>
+```
+
+## 示例
+
+```tsx
+import type { MenuKey } from 'heroui-native';
+import { Button, Menu, Separator } from 'heroui-native';
+import { useState } from 'react';
+import { Text, View } from 'react-native';
+
+export default function MenuExample() {
+  const [textStyles, setTextStyles] = useState<Set<MenuKey>>(
+    () => new Set(['bold', 'italic'])
+  );
+  const [alignment, setAlignment] = useState<Set<MenuKey>>(
+    () => new Set(['left'])
+  );
+
+  return (
+    <Menu>
+      <Menu.Trigger asChild>
+        <Button variant="secondary">Styles</Button>
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Overlay />
+        <Menu.Content presentation="popover" width={250}>
+          <Menu.Label className="mb-1">Text Style</Menu.Label>
+          <Menu.Group
+            selectionMode="multiple"
+            selectedKeys={textStyles}
+            onSelectionChange={setTextStyles}
+          >
+            <Menu.Item id="bold">
+              <Menu.ItemIndicator />
+              <Menu.ItemTitle>Bold</Menu.ItemTitle>
+              <Text className="text-sm text-muted">⌘ B</Text>
+            </Menu.Item>
+            <Menu.Item id="italic">
+              <Menu.ItemIndicator />
+              <Menu.ItemTitle>Italic</Menu.ItemTitle>
+              <Text className="text-sm text-muted">⌘ I</Text>
+            </Menu.Item>
+            <Menu.Item id="underline">
+              <Menu.ItemIndicator />
+              <Menu.ItemTitle>Underline</Menu.ItemTitle>
+              <Text className="text-sm text-muted">⌘ U</Text>
+            </Menu.Item>
+          </Menu.Group>
+          <Separator className="mx-2 my-2 opacity-75" />
+          <Menu.Label className="mb-1">Text Alignment</Menu.Label>
+          <Menu.Group
+            selectionMode="single"
+            selectedKeys={alignment}
+            onSelectionChange={setAlignment}
+          >
+            <Menu.Item id="left">
+              <Menu.ItemIndicator variant="dot" />
+              <Menu.ItemTitle>Left</Menu.ItemTitle>
+            </Menu.Item>
+            <Menu.Item id="center">
+              <Menu.ItemIndicator variant="dot" />
+              <Menu.ItemTitle>Center</Menu.ItemTitle>
+            </Menu.Item>
+            <Menu.Item id="right">
+              <Menu.ItemIndicator variant="dot" />
+              <Menu.ItemTitle>Right</Menu.ItemTitle>
+            </Menu.Item>
+          </Menu.Group>
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/menu.tsx>)。
+
+## API 参考
+
+### Menu
+
+| prop            | type                          | default     | description                                        |
+| --------------- | ----------------------------- | ----------- | -------------------------------------------------- |
+| `children`      | `React.ReactNode`             | -           | 菜单内容                                           |
+| `presentation`  | `'popover' \| 'bottom-sheet'` | `'popover'` | 菜单内容的呈现方式                                 |
+| `isOpen`        | `boolean`                     | -           | 受控开闭状态                                       |
+| `isDefaultOpen` | `boolean`                     | -           | 非受控：首次渲染时是否打开                         |
+| `isDisabled`    | `boolean`                     | -           | 是否禁用菜单                                       |
+| `animation`     | `MenuRootAnimation`           | -           | 菜单根级动画配置                                   |
+| `onOpenChange`  | `(open: boolean) => void`     | -           | 开闭状态变化时触发                                 |
+| `...ViewProps`  | `ViewProps`                   | -           | 支持 React Native `View` 的全部标准属性          |
+
+#### MenuRootAnimation
+
+菜单根组件的动画配置，可为：
+
+- `"disable-all"`：关闭所有动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+
+### Menu.Trigger
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `children`          | `React.ReactNode` | -       | 触发器内容                                              |
+| `className`         | `string`          | -       | 触发器额外 class                                        |
+| `isDisabled`        | `boolean`         | `false` | 是否禁用触发器                                          |
+| `asChild`           | `boolean`         | -       | 使用 Slot 模式将行为合并到单个子元素                    |
+| `...PressableProps` | `PressableProps`  | -       | 支持 React Native `Pressable` 的全部标准属性          |
+
+### Menu.Portal
+
+| prop                       | type              | default | description                                            |
+| -------------------------- | ----------------- | ------- | ------------------------------------------------------ |
+| `children`                 | `React.ReactNode` | -       | Portal 内容                                            |
+| `className`                | `string`          | -       | Portal 容器额外 class                                  |
+| `disableFullWindowOverlay` | `boolean`         | `false` | 在 iOS 上使用普通 `View` 替代 `FullWindowOverlay`      |
+| `unstable_accessibilityContainerViewIsModal` | `boolean` | `false` | 控制 VoiceOver 是否将遮罩窗口视为模态容器。为 `true` 时焦点限制在遮罩内。仅 iOS。不稳定：可能随 `react-native-screens` 更新变化 |
+| `hostName`                 | `string`          | -       | Portal 宿主元素的可选名称                              |
+| `forceMount`               | `boolean`         | -       | 无论开闭状态是否强制挂载 Portal                        |
+
+### Menu.Overlay
+
+| prop                    | type                   | default | description                                                  |
+| ----------------------- | ---------------------- | ------- | ------------------------------------------------------------ |
+| `className`             | `string`               | -       | 遮罩额外 class                                               |
+| `closeOnPress`          | `boolean`              | `true`  | 点击遮罩时是否关闭菜单                                       |
+| `animation`             | `MenuOverlayAnimation` | -       | 遮罩动画配置                                                 |
+| `isAnimatedStyleActive` | `boolean`              | `true`  | 是否启用 Reanimated 动画样式                               |
+| `forceMount`            | `boolean`              | -       | 无论开闭是否强制挂载遮罩                                     |
+| `...PressableProps`     | `PressableProps`       | -       | 支持 React Native `Pressable` 的全部标准属性               |
+
+#### MenuOverlayAnimation
+
+菜单遮罩的动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭所有动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                     | type                    | default                 | description                         |
+| ------------------------ | ----------------------- | ----------------------- | ----------------------------------- |
+| `state`                  | `'disabled' \| boolean` | -                       | 关闭动画的同时仍允许自定义属性      |
+| `opacity.entering.value` | `EntryOrExitLayoutType` | `FadeIn.duration(200)`  | 遮罩进入动画                        |
+| `opacity.exiting.value`  | `EntryOrExitLayoutType` | `FadeOut.duration(150)` | 遮罩退出动画                        |
+
+### Menu.Content（Popover）
+
+当 `presentation="popover"` 时的属性。
+
+| prop              | type                                             | default         | description                                        |
+| ----------------- | ------------------------------------------------ | --------------- | -------------------------------------------------- |
+| `children`        | `React.ReactNode`                                | -               | 菜单内容                                           |
+| `presentation`    | `'popover'`                                      | -               | 呈现方式（须与 Menu 根一致）                       |
+| `placement`       | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'bottom'`      | 相对触发器的弹出方位                               |
+| `align`           | `'start' \| 'center' \| 'end'`                   | `'center'`      | 沿对齐轴相对触发器的对齐方式                       |
+| `avoidCollisions` | `boolean`                                        | `true`          | 是否自动避让屏幕边缘                               |
+| `offset`          | `number`                                         | `9`             | 与触发器的间距（像素）                             |
+| `alignOffset`     | `number`                                         | `0`             | 沿对齐轴的偏移（像素）                             |
+| `width`           | `'content-fit' \| 'trigger' \| 'full' \| number` | `'content-fit'` | 内容宽度策略                                       |
+| `className`       | `string`                                         | -               | 内容容器额外 class                                 |
+| `animation`       | `MenuContentAnimation`                           | -               | 内容动画配置                                       |
+| `...ViewProps`    | `ViewProps`                                      | -               | 支持 React Native `View` 的全部标准属性            |
+
+#### MenuContentAnimation
+
+Popover 内容动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭所有动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop             | type                    | default                         | description                    |
+| ---------------- | ----------------------- | ------------------------------- | ------------------------------ |
+| `state`          | `'disabled' \| boolean` | -                               | 关闭动画的同时仍允许自定义属性 |
+| `entering.value` | `EntryOrExitLayoutType` | Scale + fade entering animation | 自定义进入动画                 |
+| `exiting.value`  | `EntryOrExitLayoutType` | Scale + fade exiting animation  | 自定义退出动画                 |
+
+### Menu.Content（Bottom Sheet）
+
+当 `presentation="bottom-sheet"` 时的属性。继承 `@gorhom/bottom-sheet` 的 BottomSheet 属性。
+
+| prop                        | type                                     | default | description                                          |
+| --------------------------- | ---------------------------------------- | ------- | ---------------------------------------------------- |
+| `children`                  | `React.ReactNode`                        | -       | 底部抽屉内容                                         |
+| `presentation`              | `'bottom-sheet'`                         | -       | 呈现方式（须与 Menu 根一致）                         |
+| `className`                 | `string`                                 | -       | 底部抽屉额外 class                                   |
+| `backgroundClassName`       | `string`                                 | -       | 背景额外 class                                       |
+| `handleIndicatorClassName`  | `string`                                 | -       | 把手指示条额外 class                                 |
+| `contentContainerClassName` | `string`                                 | -       | 内容容器额外 class                                   |
+| `contentContainerProps`     | `Omit<BottomSheetViewProps, 'children'>` | -       | 内容容器属性                                         |
+| `animation`                 | `AnimationDisabled`                      | -       | 设为 `false` 或 `"disabled"` 可关闭动画             |
+| `...BottomSheetProps`       | `Partial<BottomSheetProps>`              | -       | 支持 `@gorhom/bottom-sheet` 的全部属性               |
+
+### Menu.Close
+
+继承 `CloseButtonProps`。按下后自动关闭菜单。
+
+| prop             | type                   | default | description                          |
+| ---------------- | ---------------------- | ------- | ------------------------------------ |
+| `iconProps`      | `CloseButtonIconProps` | -       | 自定义关闭图标属性                   |
+| `...ButtonProps` | `ButtonRootProps`      | -       | 支持 Button 根级全部属性            |
+
+### Menu.Group
+
+| prop                  | type                               | default  | description                                        |
+| --------------------- | ---------------------------------- | -------- | -------------------------------------------------- |
+| `children`            | `React.ReactNode`                  | -        | 分组内容（`Menu.Item` 等）                         |
+| `selectionMode`       | `'none' \| 'single' \| 'multiple'` | `'none'` | 分组内允许的选择类型                               |
+| `selectedKeys`        | `Iterable<MenuKey>`                | -        | 当前选中键（受控）                                 |
+| `defaultSelectedKeys` | `Iterable<MenuKey>`                | -        | 初始选中键（非受控）                               |
+| `isDisabled`          | `boolean`                          | `false`  | 是否禁用整个分组                                   |
+| `disabledKeys`        | `Iterable<MenuKey>`                | -        | 应禁用的项键集合                                   |
+| `shouldCloseOnSelect` | `boolean`                          | -        | 选中项时是否关闭菜单                               |
+| `className`           | `string`                           | -        | 分组容器额外 class                                 |
+| `onSelectionChange`   | `(keys: Set<MenuKey>) => void`     | -        | 选中变化时回调                                     |
+| `...ViewProps`        | `ViewProps`                        | -        | 支持 React Native `View` 的全部标准属性            |
+
+### Menu.Label
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 标签文本内容                                       |
+| `className`    | `string`          | -       | 标签额外 class                                     |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部标准属性          |
+
+### Menu.Item
+
+| prop                    | type                                                             | default     | description                                                  |
+| ----------------------- | ---------------------------------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode \| ((props: MenuItemRenderProps) => ReactNode)` | -           | 子元素或渲染函数                                             |
+| `id`                    | `MenuKey`                                                        | -           | 唯一标识；在 `Menu.Group` 内时必填                           |
+| `variant`               | `'default' \| 'danger'`                                          | `'default'` | 菜单项视觉变体                                               |
+| `isDisabled`            | `boolean`                                                        | `false`     | 是否禁用该项                                                 |
+| `isSelected`            | `boolean`                                                        | -           | 独立项时的受控选中状态                                       |
+| `shouldCloseOnSelect`   | `boolean`                                                        | `true`      | 按压该项是否关闭菜单                                         |
+| `className`             | `string`                                                         | -           | 菜单项额外 class                                             |
+| `animation`             | `MenuItemAnimation`                                              | -           | 按压反馈动画配置                                             |
+| `isAnimatedStyleActive` | `boolean`                                                        | `true`      | 是否启用 Reanimated 动画样式                                 |
+| `onSelectedChange`      | `(selected: boolean) => void`                                    | -           | 独立项选中状态变化时回调                                     |
+| `...PressableProps`     | `PressableProps`                                                 | -           | 支持 React Native `Pressable` 的全部标准属性                 |
+
+#### MenuItemRenderProps
+
+当 `children` 为函数时传入渲染函数的参数。
+
+| prop         | type                    | description                             |
+| ------------ | ----------------------- | --------------------------------------- |
+| `isSelected` | `boolean`               | 当前项是否选中                          |
+| `isDisabled` | `boolean`               | 是否禁用                                |
+| `isPressed`  | `SharedValue<boolean>`  | 是否处于按压中                          |
+| `variant`    | `'default' \| 'danger'` | 项的视觉变体                            |
+
+#### MenuItemAnimation
+
+菜单项按压反馈动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭项动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                           | type               | default                    | description                    |
+| ------------------------------ | ------------------ | -------------------------- | ------------------------------ |
+| `scale.value`                  | `number`           | `0.98`                     | 按压时的缩放值                 |
+| `scale.timingConfig`           | `WithTimingConfig` | `{ duration: 150 }`        | 缩放的动画配置                 |
+| `backgroundColor.value`        | `string`           | `useThemeColor('default')` | 按压时背景色                   |
+| `backgroundColor.timingConfig` | `WithTimingConfig` | `{ duration: 150 }`        | 背景色过渡时间配置             |
+
+### Menu.ItemTitle
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 标题文本内容                                       |
+| `className`    | `string`          | -       | 标题额外 class                                     |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部标准属性          |
+
+### Menu.ItemDescription
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 说明文本内容                                       |
+| `className`    | `string`          | -       | 说明额外 class                                     |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部标准属性          |
+
+### Menu.ItemIndicator
+
+| prop           | type                         | default       | description                                            |
+| -------------- | ---------------------------- | ------------- | ------------------------------------------------------ |
+| `children`     | `React.ReactNode`            | -             | 自定义指示内容；默认为对勾或圆点                     |
+| `variant`      | `'checkmark' \| 'dot'`       | `'checkmark'` | 指示器视觉变体                                         |
+| `iconProps`    | `MenuItemIndicatorIconProps` | -             | 图标配置（对勾变体）                                   |
+| `forceMount`   | `boolean`                    | `true`        | 无论是否选中都强制挂载指示器                           |
+| `className`    | `string`                     | -             | 指示器额外 class                                       |
+| `...ViewProps` | `ViewProps`                  | -             | 支持 React Native `View` 的全部标准属性              |
+
+#### MenuItemIndicatorIconProps
+
+| prop    | type     | default | description                                    |
+| ------- | -------- | ------- | ---------------------------------------------- |
+| `size`  | `number` | `16`    | 指示图标尺寸（圆点变体为 8）                   |
+| `color` | `string` | `muted` | 指示图标颜色                                   |
+
+### SubMenu
+
+| prop            | type                      | default | description                                              |
+| --------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `children`      | `React.ReactNode`         | -       | 子菜单内容（触发器、内容区等）                           |
+| `isOpen`        | `boolean`                 | -       | 受控开闭状态                                             |
+| `isDefaultOpen` | `boolean`                 | -       | 非受控：首次渲染时是否打开                               |
+| `isDisabled`    | `boolean`                 | `false` | 是否禁用子菜单                                           |
+| `className`     | `string`                  | -       | 根容器额外 class                                         |
+| `animation`     | `SubMenuRootAnimation`    | -       | 子菜单动画配置                                           |
+| `onOpenChange`  | `(open: boolean) => void` | -       | 开闭状态变化时回调                                       |
+| `...ViewProps`  | `ViewProps`               | -       | 支持 React Native `View` 的全部标准属性                |
+
+##### SubMenuRootAnimation
+
+SubMenu 根组件动画配置，可为：
+
+- `"disable-all"`：关闭所有动画（含子级）
+- `false` 或 `"disabled"`：仅关闭根级动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                            | type                    | default                                     | description                            |
+| ------------------------------- | ----------------------- | ------------------------------------------- | -------------------------------------- |
+| `state`                         | `'disabled' \| boolean` | -                                           | 关闭动画的同时仍允许自定义属性         |
+| `rootContent.marginHorizontal`  | `number`                | `-16`                                       | 子菜单打开时水平外边距                 |
+| `rootContent.marginVertical`    | `number`                | `-16`                                       | 子菜单打开时垂直外边距                 |
+| `rootContent.paddingHorizontal` | `number`                | `6`                                         | 子菜单打开时水平内边距                 |
+| `rootContent.paddingTop`        | `number`                | `12`                                        | 子菜单打开时顶部内边距                 |
+| `rootContent.springConfig`      | `WithSpringConfig`      | `{ damping: 100, stiffness: 950, mass: 3 }` | 展开/收起的弹簧配置                    |
+
+#### SubMenu.Trigger
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `children`          | `React.ReactNode` | -       | 触发器内容（标题、图标、指示器等）                      |
+| `textValue`         | `string`          | -       | 读屏播报的无障碍文本                                    |
+| `className`         | `string`          | -       | 触发器额外 class                                        |
+| `isDisabled`        | `boolean`         | `false` | 是否禁用                                                |
+| `asChild`           | `boolean`         | -       | 使用 Slot 模式合并到单个子元素                          |
+| `...PressableProps` | `PressableProps`  | -       | 支持 React Native `Pressable` 的全部标准属性          |
+
+#### SubMenu.TriggerIndicator
+
+子菜单开闭时旋转的指示图标，默认为向右 V 形（chevron-right）。
+
+| prop                    | type                               | default | description                                                  |
+| ----------------------- | ---------------------------------- | ------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode`                  | -       | 自定义指示内容（替换默认 V 形）                              |
+| `className`             | `string`                           | -       | 指示器额外 class                                             |
+| `iconProps`             | `SubMenuTriggerIndicatorIconProps` | -       | 默认 V 形的图标配置                                          |
+| `animation`             | `SubMenuTriggerIndicatorAnimation` | -       | 指示器旋转动画配置                                           |
+| `isAnimatedStyleActive` | `boolean`                          | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `...ViewProps`          | `ViewProps`                        | -       | 支持 React Native `View` 的全部标准属性                    |
+
+##### SubMenuTriggerIndicatorIconProps
+
+| prop    | type     | default | description                 |
+| ------- | -------- | ------- | --------------------------- |
+| `size`  | `number` | `14`    | 指示图标尺寸                |
+| `color` | `string` | `muted` | 指示图标颜色                |
+
+##### SubMenuTriggerIndicatorAnimation
+
+触发器指示旋转的动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭所有动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                    | type                    | default                                      | description                                      |
+| ----------------------- | ----------------------- | -------------------------------------------- | ------------------------------------------------ |
+| `state`                 | `'disabled' \| boolean` | -                                            | 关闭动画的同时仍允许自定义属性                   |
+| `rotation.value`        | `[number, number]`      | `[0, 90]`                                    | 旋转角度 [收起, 展开]，单位度                  |
+| `rotation.springConfig` | `WithSpringConfig`      | `{ damping: 140, stiffness: 1000, mass: 4 }` | 旋转弹簧配置                                     |
+
+#### SubMenu.Content
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `children`          | `React.ReactNode` | -       | 子菜单项（`Menu.Item`、`Menu.Group` 等）                |
+| `className`         | `string`          | -       | 内容容器额外 class                                      |
+| `...PressableProps` | `PressableProps`  | -       | 支持 React Native `Pressable` 的全部标准属性          |
+
+## Hooks
+
+### useMenu
+
+访问菜单根上下文，须在 `Menu` 内使用。
+
+```tsx
+import { useMenu } from 'heroui-native';
+
+const { isOpen, onOpenChange, presentation, isDisabled } = useMenu();
+```
+
+#### 返回值
+
+| property       | type                          | description                             |
+| -------------- | ----------------------------- | --------------------------------------- |
+| `isOpen`       | `boolean`                     | 菜单是否打开                            |
+| `onOpenChange` | `(open: boolean) => void`     | 修改开闭状态的回调                      |
+| `presentation` | `'popover' \| 'bottom-sheet'` | 当前呈现模式                            |
+| `isDisabled`   | `boolean \| undefined`        | 是否禁用                                |
+| `nativeID`     | `string`                      | 菜单实例唯一标识                        |
+
+### useMenuItem
+
+访问菜单项上下文，须在 `Menu.Item` 内使用。
+
+```tsx
+import { useMenuItem } from 'heroui-native';
+
+const { id, isSelected, isDisabled, variant } = useMenuItem();
+```
+
+#### 返回值
+
+| property     | type                    | description                            |
+| ------------ | ----------------------- | -------------------------------------- |
+| `id`         | `MenuKey \| undefined`  | 项标识                                 |
+| `isSelected` | `boolean`               | 是否选中                               |
+| `isDisabled` | `boolean`               | 是否禁用                               |
+| `variant`    | `'default' \| 'danger'` | 项的视觉变体                           |
+
+### useMenuAnimation
+
+访问菜单动画上下文，须在 `Menu` 内使用。
+
+```tsx
+import { useMenuAnimation } from 'heroui-native';
+
+const { progress, isDragging } = useMenuAnimation();
+```
+
+#### 返回值
+
+| property     | type                   | description                                               |
+| ------------ | ---------------------- | --------------------------------------------------------- |
+| `progress`   | `SharedValue<number>`  | 动画进度（0=空闲，1=打开，2=关闭）                        |
+| `isDragging` | `SharedValue<boolean>` | Bottom Sheet 是否正在被拖拽                               |
+
+### useSubMenu
+
+访问子菜单上下文，须在 `SubMenu` 内使用。
+
+```tsx
+import { useSubMenu } from 'heroui-native';
+
+const { isOpen, onOpenChange, isDisabled } = useSubMenu();
+```
+
+#### 返回值
+
+| property       | type                      | description                                 |
+| -------------- | ------------------------- | ------------------------------------------- |
+| `isOpen`       | `boolean`                 | 子菜单是否打开                              |
+| `onOpenChange` | `(open: boolean) => void` | 修改开闭状态的回调                          |
+| `isDisabled`   | `boolean`                 | 是否禁用                                    |
+| `nativeID`     | `string`                  | 子菜单实例唯一标识                          |
+
+## 特别说明
+
+### 元素检查器（iOS）
+
+Menu 在 iOS 上使用 `FullWindowOverlay`。开发时若需启用 React Native 元素检查器，请在 `Menu.Portal` 上设置 `disableFullWindowOverlay={true}`。代价是菜单将无法叠在原生模态之上。
+
+### 原生模态（iOS）
+
+当 `Menu` 位于以原生模态形式呈现的页面内时（`presentation: 'modal' | 'formSheet' | 'pageSheet'`），菜单内容可能会向上偏移渲染。在新架构（Fabric）中，`react-native-screens` 将 `RNSModalScreen` 标记为 Fabric 根节点，因此触发器的坐标是相对于模态原点上报的，而 `FullWindowOverlay`（菜单挂载点）锚定在 iOS 应用窗口上。可通过将 `safeAreaInsets.top` 加到 `offset` 来补偿：
+
+```tsx
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const insets = useSafeAreaInsets();
+
+<Menu.Content presentation="popover" offset={insets.top}>
+  ...
+</Menu.Content>;
+```

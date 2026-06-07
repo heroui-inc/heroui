@@ -1,0 +1,529 @@
+---
+title: Dropdown 下拉菜单
+description: 下拉菜单展示一组可供用户选择的操作或选项。
+links:
+  rac: Menu
+  source: dropdown/dropdown.tsx
+  styles: dropdown.css
+  storybook: Components/Collections/Dropdown
+---
+
+## 引入
+
+```tsx
+import { Dropdown } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="dropdown-default"
+/>
+
+### 组件结构
+
+引入 Dropdown 组件并通过点语法访问所有子部分。
+
+```tsx
+import { Dropdown, Button, Label, Description, Header, Kbd, Separator } from '@heroui/react';
+
+export default () => (
+  <Dropdown>
+    <Dropdown.Trigger>
+      <Button />
+    </Dropdown.Trigger>
+    <Dropdown.Popover>
+      <Dropdown.Menu>
+        <Dropdown.Item>
+          <Label />
+          <Description />
+          <Kbd slot="keyboard" />
+          <Dropdown.ItemIndicator />
+        </Dropdown.Item>
+        <Separator />
+        <Dropdown.Section>
+          <Header />
+          <Dropdown.Item />
+        </Dropdown.Section>
+        <Dropdown.SubmenuTrigger>
+          <Dropdown.Item>
+            <Label />
+            <Dropdown.SubmenuIndicator />
+          </Dropdown.Item>
+          <Dropdown.Popover>
+            <Dropdown.Menu>
+              <Dropdown.Item />
+            </Dropdown.Menu>
+          </Dropdown.Popover>
+        </Dropdown.SubmenuTrigger>
+      </Dropdown.Menu>
+    </Dropdown.Popover>
+  </Dropdown>
+)
+```
+
+### 带单选
+
+<ComponentPreview
+  name="dropdown-with-single-selection"
+/>
+
+### 单选且自定义指示器
+
+<ComponentPreview
+  name="dropdown-single-with-custom-indicator"
+/>
+
+### 带多选
+
+<ComponentPreview
+  name="dropdown-with-multiple-selection"
+/>
+
+### 带分组级选择
+
+<ComponentPreview
+  name="dropdown-with-section-level-selection"
+/>
+
+### 带键盘快捷键
+
+<ComponentPreview
+  name="dropdown-with-keyboard-shortcuts"
+/>
+
+### 带图标
+
+<ComponentPreview
+  name="dropdown-with-icons"
+/>
+
+### 长按触发
+
+<ComponentPreview
+  name="dropdown-long-press-trigger"
+/>
+
+### 带描述
+
+<ComponentPreview
+  name="dropdown-with-descriptions"
+/>
+
+### 带分组
+
+<ComponentPreview
+  name="dropdown-with-sections"
+/>
+
+### 带禁用项
+
+<ComponentPreview
+  name="dropdown-with-disabled-items"
+/>
+
+### 带子菜单
+
+<ComponentPreview
+  name="dropdown-with-submenus"
+/>
+
+### 带自定义子菜单指示器
+
+<ComponentPreview
+  name="dropdown-with-custom-submenu-indicator"
+/>
+
+### 受控
+
+<ComponentPreview
+  name="dropdown-controlled"
+/>
+
+### 受控展开状态
+
+<ComponentPreview
+  name="dropdown-controlled-open-state"
+/>
+
+### 自定义触发器
+
+<ComponentPreview
+  name="dropdown-custom-trigger"
+/>
+
+<RelatedComponents component="dropdown" />
+ 
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Dropdown, Button } from '@heroui/react';
+
+function CustomDropdown() {
+  return (
+    <Dropdown>
+      <Dropdown.Trigger className="rounded-lg border p-2 bg-surface">
+        <Button>Actions</Button>
+      </Dropdown.Trigger>
+      <Dropdown.Popover className="min-w-[200px]">
+        <Dropdown.Menu>
+          <Dropdown.Item id="item-1" textValue="Item 1" className="hover:bg-surface-secondary">
+            Item 1
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Dropdown 组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .dropdown {
+    @apply flex flex-col gap-1;
+  }
+
+  .dropdown__trigger {
+    @apply outline-none;
+  }
+
+  .dropdown__popover {
+    @apply rounded-lg border border-border bg-overlay p-2;
+  }
+
+  .dropdown__menu {
+    @apply flex flex-col gap-1;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体和状态可复用且易于自定义。
+
+### CSS 类
+
+Dropdown 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/dropdown.css)）：
+
+#### 基础类
+- `.dropdown` - Dropdown 根容器
+- `.dropdown__trigger` - 用于触发 Dropdown 的按钮或元素
+- `.dropdown__popover` - Popover 容器
+- `.dropdown__menu` - Popover 内的菜单容器
+
+#### 状态类
+- `.dropdown__trigger[data-focus-visible="true"]` - 触发器聚焦状态
+- `.dropdown__trigger[data-disabled="true"]` - 触发器禁用状态
+- `.dropdown__trigger[data-pressed="true"]` - 触发器按下状态
+- `.dropdown__popover[data-entering]` - 进入动画状态
+- `.dropdown__popover[data-exiting]` - 退出动画状态
+- `.dropdown__menu[data-selection-mode="single"]` - 单选模式
+- `.dropdown__menu[data-selection-mode="multiple"]` - 多选模式
+
+### 菜单组件类
+
+Dropdown 使用 Menu、MenuItem 与 MenuSection 作为底层组件。以下类名也可用于自定义：
+
+#### Menu 类
+- `.menu` - 菜单容器（[menu.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu.css)）
+  - `[data-slot="separator"]` - 菜单内的分隔线元素
+
+#### MenuItem 类
+- `.menu-item` - 菜单项容器（[menu-item.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu-item.css)）
+- `.menu-item__indicator` - 选中指示器（对勾或圆点）
+  - `[data-slot="menu-item-indicator--checkmark"]` - 对勾指示器 SVG
+  - `[data-slot="menu-item-indicator--dot"]` - 圆点指示器 SVG
+- `.menu-item__indicator--submenu` - 子菜单指示器（箭头）
+- `.menu-item--default` - 默认样式变体
+- `.menu-item--danger` - 危险样式变体
+
+#### MenuItem 状态类
+- `.menu-item[data-focus-visible="true"]` - 聚焦状态（键盘焦点）
+- `.menu-item[data-focus="true"]` - 聚焦状态
+- `.menu-item[data-pressed]` - 按下状态
+- `.menu-item[data-hovered]` - 悬停状态
+- `.menu-item[data-selected="true"]` - 选中状态
+- `.menu-item[data-disabled]` - 禁用状态
+- `.menu-item[data-has-submenu="true"]` - 带子菜单的项
+- `.menu-item[data-selection-mode="single"]` - 单选模式
+- `.menu-item[data-selection-mode="multiple"]` - 多选模式
+- `.menu-item[aria-checked="true"]` - 已勾选（ARIA）
+- `.menu-item[aria-selected="true"]` - 已选中（ARIA）
+
+#### MenuSection 类
+- `.menu-section` - 菜单分区容器（[menu-section.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu-section.css)）
+
+### 交互状态
+
+该组件同时支持 CSS 伪类和 data 属性，便于灵活组合：
+
+- **悬停**：触发器与菜单项上 `:hover` 或 `[data-hovered="true"]`
+- **聚焦**：触发器与菜单项上 `:focus-visible` 或 `[data-focus-visible="true"]`
+- **禁用**：触发器与菜单项上 `:disabled` 或 `[data-disabled="true"]`
+- **按下**：触发器与菜单项上 `:active` 或 `[data-pressed="true"]`
+- **选中**：菜单项上 `[data-selected="true"]` 或 `[aria-selected="true"]`
+
+## API 参考
+
+### Dropdown Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isOpen` | `boolean` | - | 设置菜单展开状态（受控）。 |
+| `defaultOpen` | `boolean` | - | 设置菜单默认展开状态（非受控）。 |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | 展开状态变化时调用的事件处理函数。 |
+| `trigger` | `"press" \| "longPress"` | `"press"` | 触发菜单的交互类型。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | Dropdown 内容。 |
+
+### Dropdown.Trigger Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 触发器内容或渲染函数。 |
+
+使用 Button 作为触发器时，同样支持所有 [Button](https://react-spectrum.adobe.com/react-aria/Button.html) props。
+
+### Dropdown.Popover Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | 相对于触发器的 Popover 位置。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 子内容。 |
+
+同样支持所有 [Popover](https://react-spectrum.adobe.com/react-aria/Popover.html) props。
+
+### Dropdown.Menu Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `selectionMode` | `"single" \| "multiple" \| "none"` | `"none"` | 是否启用单选、多选或不启用选择。 |
+| `selectedKeys` | `Iterable<Key>` | - | 当前选中的 key（受控）。 |
+| `defaultSelectedKeys` | `Iterable<Key>` | - | 初始选中的 key（非受控）。 |
+| `onSelectionChange` | `(keys: Selection) => void` | - | 选中变化时调用的事件处理函数。 |
+| `disabledKeys` | `Iterable<Key>` | - | 禁用项的 key。 |
+| `onAction` | `(key: Key) => void` | - | 激活菜单项时调用的事件处理函数。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 菜单内容。 |
+
+同样支持所有 [Menu](https://react-spectrum.adobe.com/react-aria/Menu.html#menu) props。
+
+### Dropdown.Section Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `selectionMode` | `"single" \| "multiple"` | - | 该分组内菜单项的选择模式。 |
+| `selectedKeys` | `Iterable<Key>` | - | 当前选中的 key（受控）。 |
+| `defaultSelectedKeys` | `Iterable<Key>` | - | 初始选中的 key（非受控）。 |
+| `onSelectionChange` | `(keys: Selection) => void` | - | 选中变化时调用的事件处理函数。 |
+| `disabledKeys` | `Iterable<Key>` | - | 禁用项的 key。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 分组内容。 |
+
+同样支持所有 [MenuSection](https://react-spectrum.adobe.com/react-aria/Menu.html#menusection) props。
+
+### Dropdown.Item Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `id` | `Key` | - | 菜单项唯一标识。 |
+| `textValue` | `string` | - | 用于首字母导航的文本内容。 |
+| `variant` | `"default" \| "danger"` | `"default"` | 菜单项视觉变体。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 菜单项内容或渲染函数。 |
+
+同样支持所有 [MenuItem](https://react-spectrum.adobe.com/react-aria/Menu.html#menuitem) props。
+
+### Dropdown.ItemIndicator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `type` | `"checkmark" \| "dot"` | `"checkmark"` | 指示器类型。 |
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode \| RenderFunction` | - | 自定义指示器内容或渲染函数。 |
+
+使用渲染函数时，会传入以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isSelected` | `boolean` | 该项是否选中。 |
+| `isIndeterminate` | `boolean` | 该项是否处于不确定状态。 |
+
+### Dropdown.SubmenuIndicator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 自定义指示器内容。 |
+
+### Dropdown.SubmenuTrigger Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | 子菜单触发器内容。 |
+
+同样支持所有 [SubmenuTrigger](https://react-spectrum.adobe.com/react-aria/Menu.html#submenutrigger) props。
+
+### RenderProps
+
+在 Dropdown.Item 中使用渲染函数时，会传入以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isSelected` | `boolean` | 该项是否选中。 |
+| `isFocused` | `boolean` | 该项是否聚焦。 |
+| `isDisabled` | `boolean` | 该项是否禁用。 |
+| `isPressed` | `boolean` | 该项是否处于按下状态。 |
+
+## 示例
+
+### 基础用法
+
+```tsx
+import { Dropdown, Button, Label } from '@heroui/react';
+
+<Dropdown>
+  <Button aria-label="Menu" variant="secondary">
+    Actions
+  </Button>
+  <Dropdown.Popover>
+    <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
+      <Dropdown.Item id="new-file" textValue="New file">
+        <Label>New file</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="open-file" textValue="Open file">
+        <Label>Open file</Label>
+      </Dropdown.Item>
+      <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
+        <Label>Delete file</Label>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown.Popover>
+</Dropdown>
+```
+
+### 带分组
+
+```tsx
+import { Dropdown, Button, Label, Header, Separator } from '@heroui/react';
+
+<Dropdown>
+  <Button aria-label="Menu" variant="secondary">
+    Actions
+  </Button>
+  <Dropdown.Popover>
+    <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
+      <Dropdown.Section>
+        <Header>Actions</Header>
+        <Dropdown.Item id="new-file" textValue="New file">
+          <Label>New file</Label>
+        </Dropdown.Item>
+        <Dropdown.Item id="edit-file" textValue="Edit file">
+          <Label>Edit file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+      <Separator />
+      <Dropdown.Section>
+        <Header>Danger zone</Header>
+        <Dropdown.Item id="delete-file" textValue="Delete file" variant="danger">
+          <Label>Delete file</Label>
+        </Dropdown.Item>
+      </Dropdown.Section>
+    </Dropdown.Menu>
+  </Dropdown.Popover>
+</Dropdown>
+```
+
+### 受控选择
+
+```tsx
+import type { Selection } from '@heroui/react';
+
+import { Dropdown, Button, Label } from '@heroui/react';
+import { useState } from 'react';
+
+function ControlledDropdown() {
+  const [selected, setSelected] = useState<Selection>(new Set(['bold']));
+
+  return (
+    <Dropdown>
+      <Button aria-label="Menu" variant="secondary">
+        Actions
+      </Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu
+          selectedKeys={selected}
+          selectionMode="multiple"
+          onSelectionChange={setSelected}
+        >
+          <Dropdown.Item id="bold" textValue="Bold">
+            <Label>Bold</Label>
+            <Dropdown.ItemIndicator />
+          </Dropdown.Item>
+          <Dropdown.Item id="italic" textValue="Italic">
+            <Label>Italic</Label>
+            <Dropdown.ItemIndicator />
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
+  );
+}
+```
+
+### 带子菜单
+
+```tsx
+import { Dropdown, Button, Label } from '@heroui/react';
+
+<Dropdown>
+  <Button aria-label="Menu" variant="secondary">
+    Share
+  </Button>
+  <Dropdown.Popover>
+    <Dropdown.Menu onAction={(key) => alert(`Selected: ${key}`)}>
+      <Dropdown.Item id="copy-link" textValue="Copy Link">
+        <Label>Copy Link</Label>
+      </Dropdown.Item>
+      <Dropdown.SubmenuTrigger>
+        <Dropdown.Item id="share" textValue="Share">
+          <Label>Other</Label>
+          <Dropdown.SubmenuIndicator />
+        </Dropdown.Item>
+        <Dropdown.Popover>
+          <Dropdown.Menu>
+            <Dropdown.Item id="whatsapp" textValue="WhatsApp">
+              <Label>WhatsApp</Label>
+            </Dropdown.Item>
+            <Dropdown.Item id="telegram" textValue="Telegram">
+              <Label>Telegram</Label>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown.SubmenuTrigger>
+    </Dropdown.Menu>
+  </Dropdown.Popover>
+</Dropdown>
+```
+
+## 无障碍
+
+Dropdown 组件实现 ARIA 菜单模式，并提供：
+
+- 完整键盘导航（方向键、Home/End、首字母导航）
+- 屏幕阅读器对操作与选中变化的播报
+- 合理的焦点管理
+- 禁用态支持
+- 长按交互支持
+- 子菜单导航
+
+更多信息见 [React Aria Menu 文档](https://react-spectrum.adobe.com/react-aria/Menu.html#menu)。
+

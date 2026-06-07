@@ -2,13 +2,12 @@
 
 import type {ComponentProps} from "react";
 
-import {buttonVariants} from "fumadocs-ui/components/ui/button";
-import {Popover, PopoverContent, PopoverTrigger} from "fumadocs-ui/components/ui/popover";
+import {Button, Dropdown, Header, Label} from "@heroui/react";
 import {useI18n} from "fumadocs-ui/contexts/i18n";
 
-import {cn} from "@/utils/cn";
+import {Languages} from "@/components/fumadocs/ui/icons";
 
-export type LanguageSelectProps = ComponentProps<"button">;
+export type LanguageSelectProps = ComponentProps<typeof Button>;
 
 export function LanguageToggle(props: LanguageSelectProps): React.ReactElement {
   const context = useI18n();
@@ -16,43 +15,41 @@ export function LanguageToggle(props: LanguageSelectProps): React.ReactElement {
   if (!context.locales) throw new Error("Missing `<I18nProvider />`");
 
   return (
-    <Popover>
-      <PopoverTrigger
+    <Dropdown>
+      <Button
+        isIconOnly
         aria-label={context.text.chooseLanguage}
+        size="sm"
+        variant="tertiary"
         {...props}
-        className={cn(
-          buttonVariants({
-            className: "gap-1.5 p-1.5",
-            color: "ghost",
-          }),
-          props.className,
-        )}
       >
         {props.children}
-      </PopoverTrigger>
-      <PopoverContent className="flex flex-col overflow-x-hidden p-0">
-        <p className="text-fd-muted-foreground mb-1 p-2 text-xs font-medium">
-          {context.text.chooseLanguage}
-        </p>
-        {context.locales.map((item) => (
-          <button
-            key={item.locale}
-            type="button"
-            className={cn(
-              "p-2 text-start text-sm",
-              item.locale === context.locale
-                ? "bg-fd-primary/10 text-fd-primary font-medium"
-                : "hover:bg-fd-accent hover:text-fd-accent-foreground",
-            )}
-            onClick={() => {
-              context.onChange?.(item.locale);
-            }}
-          >
-            {item.name}
-          </button>
-        ))}
-      </PopoverContent>
-    </Popover>
+      </Button>
+      <Dropdown.Popover>
+        <Dropdown.Menu
+          selectedKeys={context.locale ? new Set([context.locale]) : new Set<string>()}
+          selectionMode="single"
+          onSelectionChange={(keys) => {
+            if (keys === "all") return;
+            const next = keys.values().next().value;
+
+            if (typeof next === "string" && next !== context.locale) {
+              context.onChange?.(next);
+            }
+          }}
+        >
+          <Dropdown.Section>
+            <Header>{context.text.chooseLanguage}</Header>
+            {context.locales.map((item) => (
+              <Dropdown.Item key={item.locale} id={item.locale} textValue={item.name}>
+                <Dropdown.ItemIndicator />
+                <Label>{item.name}</Label>
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Section>
+        </Dropdown.Menu>
+      </Dropdown.Popover>
+    </Dropdown>
   );
 }
 
@@ -61,4 +58,14 @@ export function LanguageToggleText(props: ComponentProps<"span">) {
   const text = context.locales?.find((item) => item.locale === context.locale)?.name;
 
   return <span {...props}>{text}</span>;
+}
+
+// Adapter for use as a fumadocs `slots.languageSelect.root` slot (e.g. in HomeLayout).
+// Render the same LanguageToggle component across pages
+export function LanguageToggleSlot(_props: ComponentProps<"button">) {
+  return (
+    <LanguageToggle>
+      <Languages className="text-fd-muted-foreground size-4" />
+    </LanguageToggle>
+  );
 }

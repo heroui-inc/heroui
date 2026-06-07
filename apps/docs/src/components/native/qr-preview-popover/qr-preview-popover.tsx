@@ -7,7 +7,9 @@ import {usePathname} from "next/navigation";
 import {useState} from "react";
 
 import {NATIVE_APP} from "@/config/native-app";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {useIsMobileDevice} from "@/hooks/use-is-mobile-device";
+import {i18n} from "@/lib/i18n";
 
 import {Iconify} from "../../iconify";
 import {DeepLinkQRCode} from "../deep-link-qr-code";
@@ -32,11 +34,16 @@ function readOrigin(): string {
  * Regex matching the docs-app pathname for an individual Native component
  * page. Group 1 captures the slug. `usePathname()` returns the full browser
  * pathname (the docs site does NOT set a Next.js `basePath` — the leading
- * `/docs` is a real route segment), so the regex must include it. Fumadocs
- * route groups like `(buttons)` are stripped from the URL, but the optional
- * non-capturing group keeps the regex defensive against any future inclusion.
+ * `/{lang}/docs` is a real route segment from the `[lang]` route param), so
+ * the regex must include both the locale prefix and `/docs`. The locale
+ * alternation is built from {@link i18n.languages} so the two stay in sync
+ * automatically when a new language is added. Fumadocs route groups like
+ * `(buttons)` are stripped from the URL, but the optional non-capturing
+ * group keeps the regex defensive against any future inclusion.
  */
-const COMPONENT_PATHNAME = /^\/docs\/native\/components\/(?:\([^)]+\)\/)?([^/]+)$/;
+const COMPONENT_PATHNAME = new RegExp(
+  `^/(?:${i18n.languages.join("|")})/docs/native/components/(?:\\([^)]+\\)/)?([^/]+)$`,
+);
 
 /**
  * Resolve which native-app screen the QR should deep-link into based on the
@@ -101,6 +108,7 @@ function buildDeepLinkUrl(origin: string, slug: string): string {
  * home screen (`"home"`), or an explicit component (`"component"` + slug).
  */
 export const QRPreviewPopover = (props: NativeQRPreviewTarget) => {
+  const dict = useDictionary().qrPreviewPopover;
   const isMobile = useIsMobileDevice();
   const pathname = usePathname();
 
@@ -111,24 +119,19 @@ export const QRPreviewPopover = (props: NativeQRPreviewTarget) => {
 
   const slug = resolveSlug(props, pathname);
   const deepLinkUrl = origin ? buildDeepLinkUrl(origin, slug) : "";
+  const triggerLabel = isMobile ? dict.tapToPreview : dict.scanToPreview;
+  const downloadPrompt = dict.downloadPrompt.replace("{name}", NATIVE_APP.NAME);
 
   return (
     <Popover>
-      <Button
-        aria-label={isMobile ? "Tap to preview" : "Scan to preview"}
-        className="bg-default/70"
-        size="sm"
-        variant="tertiary"
-      >
+      <Button aria-label={triggerLabel} className="bg-default/70" size="sm" variant="tertiary">
         {!isMobile && <Iconify icon="gravity-ui:qr-code" width={16} />}
-        {isMobile ? "Tap to preview" : "Scan to preview"}
+        {triggerLabel}
       </Button>
       <Popover.Content className="max-w-[240px] rounded-2xl" offset={6} placement="bottom end">
         <Popover.Dialog className="flex flex-col items-center gap-4 px-5 pb-6">
           <DeepLinkQRCode size={160} url={deepLinkUrl} />
-          <span className="mb-2 text-center text-xs text-foreground">
-            {["Don't have the ", NATIVE_APP.NAME, " app yet? Download it below."].join("")}
-          </span>
+          <span className="mb-2 text-center text-xs text-foreground">{downloadPrompt}</span>
           <StoreButtons />
         </Popover.Dialog>
       </Popover.Content>

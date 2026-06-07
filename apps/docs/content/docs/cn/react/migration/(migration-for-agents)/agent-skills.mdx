@@ -1,0 +1,60 @@
+---
+title: Agent Skills
+description: 让 AI 助手协助你将 HeroUI v2 迁移到 v3。
+---
+
+HeroUI Migration Skills 为你的 AI 助手提供关于 HeroUI v2 到 v3 迁移流程、组件指南与最佳实践的完整知识。
+
+### 安装
+
+```bash
+curl -fsSL https://heroui.com/install | bash -s heroui-migration
+```
+
+或者通过 skills 包安装：
+
+```bash
+npx skills add heroui-inc/heroui
+```
+
+<span className="text-sm text-muted">
+支持 Claude Code、Cursor、OpenCode 等。
+</span>
+
+### 使用方法
+
+Skills 会被你的 AI 助手**自动发现**，你也可以直接通过 `/heroui-migration` 命令调用它。
+
+只需让你的 AI 助手做这些事：
+- 将组件从 HeroUI v2 迁移到 v3
+- 获取完整迁移或渐进式迁移的流程
+- 获取面向特定组件的迁移指南
+- 查阅 Hooks 与样式相关的迁移文档
+
+### 包含的内容
+
+- 迁移流程（完整与渐进式）
+- 面向特定组件的迁移指南（39 个组件）
+- Hooks 迁移指南（如 `useDisclosure` → `useOverlayState` 等）
+- 样式迁移指南（工具类、颜色 token、CSS 变量）
+- 关键 API 变更与复合组件模式
+
+### 结构
+
+```
+skills/heroui-migration/
+├── SKILL.md                    # Main skill documentation
+├── LICENSE.txt                 # Apache License 2.0
+└── scripts/                    # Utility scripts
+    ├── list_migration_guides.mjs
+    ├── get_migration_guide.mjs
+    ├── get_component_migration_guides.mjs
+    ├── get_styling_migration_guide.mjs
+    └── get_hooks_migration_guide.mjs
+```
+
+## 链接
+
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [Discord 社区](https://discord.gg/9b6yyZKmH4)
+- [Agent Skills](https://agentskills.io/) —— 了解 Agent Skills 的格式

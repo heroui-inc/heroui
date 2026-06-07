@@ -3,8 +3,11 @@ import path from "node:path";
 
 import matter from "gray-matter";
 
+import {i18n} from "@/lib/i18n";
+
 export interface BlogPost {
   slug: string;
+  locale: string;
   title: string;
   description: string;
   date: string;
@@ -20,11 +23,16 @@ export interface BlogPost {
 }
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
+const DEFAULT_LOCALE = i18n.defaultLanguage;
 
 // Drafts are visible in development/preview but hidden in production builds.
 const HIDE_DRAFTS = process.env.NODE_ENV === "production";
 
-function parsePost(slug: string, rawContent: string): BlogPost {
+function getLocaleDir(locale: string): string {
+  return path.join(BLOG_DIR, locale);
+}
+
+function parsePost(slug: string, locale: string, rawContent: string): BlogPost {
   const {content, data} = matter(rawContent);
 
   return {
@@ -38,42 +46,71 @@ function parsePost(slug: string, rawContent: string): BlogPost {
     description: data["description"],
     draft: Boolean(data["draft"]),
     image: data["image"],
+    locale,
     slug,
     tags: data["tags"] || [],
     title: data["title"],
   };
 }
 
-export function getAllBlogPosts(): BlogPost[] {
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".mdx"));
+function readPostsFromDir(locale: string): BlogPost[] {
+  const dir = getLocaleDir(locale);
 
-  const posts = files.map((file) => {
+  if (!fs.existsSync(dir)) return [];
+
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
+
+  return files.map((file) => {
     const slug = file.replace(/\.mdx$/, "");
-    const rawContent = fs.readFileSync(path.join(BLOG_DIR, file), "utf-8");
+    const rawContent = fs.readFileSync(path.join(dir, file), "utf-8");
 
-    return parsePost(slug, rawContent);
+    return parsePost(slug, locale, rawContent);
   });
+}
+
+/**
+ * Returns all blog posts for the given locale.
+ * Posts only available in the default locale are surfaced as fallbacks
+ * so non-default locales never appear empty before their content is translated.
+ */
+export function getAllBlogPosts(locale: string = DEFAULT_LOCALE): BlogPost[] {
+  const localePosts = readPostsFromDir(locale);
+
+  let posts = localePosts;
+
+  if (locale !== DEFAULT_LOCALE) {
+    const seen = new Set(localePosts.map((p) => p.slug));
+    const fallbackPosts = readPostsFromDir(DEFAULT_LOCALE).filter((p) => !seen.has(p.slug));
+
+    posts = [...localePosts, ...fallbackPosts];
+  }
 
   const visible = HIDE_DRAFTS ? posts.filter((post) => !post.draft) : posts;
 
   return visible.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getBlogPost(slug: string): BlogPost | undefined {
-  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+export function getBlogPost(slug: string, locale: string = DEFAULT_LOCALE): BlogPost | undefined {
+  const candidates = locale === DEFAULT_LOCALE ? [DEFAULT_LOCALE] : [locale, DEFAULT_LOCALE];
 
-  if (!fs.existsSync(filePath)) return undefined;
+  for (const candidateLocale of candidates) {
+    const filePath = path.join(getLocaleDir(candidateLocale), `${slug}.mdx`);
 
-  const rawContent = fs.readFileSync(filePath, "utf-8");
-  const post = parsePost(slug, rawContent);
+    if (!fs.existsSync(filePath)) continue;
 
-  if (HIDE_DRAFTS && post.draft) return undefined;
+    const rawContent = fs.readFileSync(filePath, "utf-8");
+    const post = parsePost(slug, candidateLocale, rawContent);
 
-  return post;
+    if (HIDE_DRAFTS && post.draft) return undefined;
+
+    return post;
+  }
+
+  return undefined;
 }
 
-export function getAllBlogTags(): string[] {
-  const posts = getAllBlogPosts();
+export function getAllBlogTags(locale: string = DEFAULT_LOCALE): string[] {
+  const posts = getAllBlogPosts(locale);
   const tags = new Set<string>();
 
   posts.forEach((post) => post.tags.forEach((tag) => tags.add(tag)));
@@ -81,8 +118,13 @@ export function getAllBlogTags(): string[] {
   return Array.from(tags).sort();
 }
 
-export function getRelatedPosts(slug: string, tags: string[], limit = 3): BlogPost[] {
-  const allPosts = getAllBlogPosts().filter((p) => p.slug !== slug);
+export function getRelatedPosts(
+  slug: string,
+  tags: string[],
+  limit = 3,
+  locale: string = DEFAULT_LOCALE,
+): BlogPost[] {
+  const allPosts = getAllBlogPosts(locale).filter((p) => p.slug !== slug);
 
   const scored = allPosts.map((post) => {
     const sharedTags = post.tags.filter((t) => tags.includes(t)).length;

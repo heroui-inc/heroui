@@ -1,0 +1,144 @@
+---
+title: Fieldset 字段集
+description: 使用 legend、description 与操作区对相关表单控件进行分组。
+links:
+  source: fieldset/fieldset.tsx
+  styles: fieldset.css
+  storybook: Components/Forms/Fieldset
+---
+
+## 引入
+
+```tsx
+import { Fieldset } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="fieldset-basic" />
+
+### 在 Surface 内
+
+在 [Surface](/docs/components/surface) 组件内部使用时，请在表单控件（Input、TextArea 等）上使用 `variant="secondary"`，以应用适合 surface 背景的弱强调变体。
+
+<ComponentPreview name="fieldset-on-surface" />
+
+### 组件结构
+
+引入 Fieldset 后，可通过点语法访问各个部分。
+
+```tsx
+import { Fieldset } from '@heroui/react';
+
+export default () => (
+  <Fieldset>
+    <Fieldset.Legend />
+    <Fieldset.Group>
+      {/* form fields go here */}
+    </Fieldset.Group>
+    <Fieldset.Actions>
+      {/* action buttons go here */}
+    </Fieldset.Actions>
+  </Fieldset>
+)
+```
+
+<RelatedComponents component="fieldset" />
+
+<RelatedShowcases component="Fieldset" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Fieldset, TextField, Label, Input } from '@heroui/react';
+
+function CustomFieldset() {
+  return (
+    <Fieldset className="rounded-xl border border-border bg-surface p-6 shadow-sm">
+      <Fieldset.Legend className="text-lg font-semibold">Team members</Fieldset.Legend>
+      <Fieldset.Group className="grid gap-4 md:grid-cols-2">
+        <TextField>
+          <Label>First name</Label>
+          <Input className="rounded-full border-border/60" placeholder="Jane" />
+        </TextField>
+        <TextField>
+          <Label>Last name</Label>
+          <Input className="rounded-full border-border/60" placeholder="Doe" />
+        </TextField>
+      </Fieldset.Group>
+      <Fieldset.Actions className="justify-end gap-3">
+        {/* Action buttons */}
+      </Fieldset.Actions>
+    </Fieldset>
+  );
+}
+```
+
+### 自定义组件类
+
+使用 `@layer components` 指令，针对 Fieldset 的 [BEM](https://getbem.com/) 风格类名进行定制。
+
+```css
+@layer components {
+  .fieldset {
+    @apply gap-5 rounded-xl border border-border/60 bg-surface p-6 shadow-field;
+  }
+
+  .fieldset__legend {
+    @apply text-lg font-semibold;
+  }
+
+  .fieldset__field_group {
+    @apply gap-3 md:grid md:grid-cols-2;
+  }
+
+  .fieldset__actions {
+    @apply flex justify-end gap-2 pt-2;
+  }
+}
+```
+
+### CSS 类
+
+Fieldset 复合组件暴露以下 CSS 选择器：
+
+- `.fieldset` – 根容器
+- `.fieldset__legend` – Legend 元素
+- `.fieldset__field_group` – 分组字段的包裹层
+- `.fieldset__actions` – 字段下方的操作栏
+
+## API 参考
+
+### Fieldset Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 应用到根元素上的 Tailwind CSS 类。 |
+| `children` | `React.ReactNode` | - | Fieldset 内容（legend、分组、description、操作区等）。 |
+| `nativeProps` | `React.HTMLAttributes<HTMLFieldSetElement>` | 支持原生 fieldset 的属性与事件。 |
+
+### Fieldset.Legend Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | legend 元素的 Tailwind 类。 |
+| `children` | `React.ReactNode` | - | Legend 内容，通常为纯文本。 |
+| `nativeProps` | `React.HTMLAttributes<HTMLLegendElement>` |  - | 原生 legend 属性。 |
+
+### Fieldset.Group Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 分组字段的布局与间距类。 |
+| `children` | `React.ReactNode` | - | 在 fieldset 内分组的表单控件。 |
+| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | 原生 div 属性。 |
+
+### Fieldset.Actions Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 用于对齐操作按钮或辅助文本的 Tailwind 类。 |
+| `children` | `React.ReactNode` | - | 操作按钮或辅助文本。 |
+| `nativeProps` | `React.HTMLAttributes<HTMLDivElement>` | - | 原生 div 属性。 |

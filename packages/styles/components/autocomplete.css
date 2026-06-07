@@ -22,9 +22,9 @@
   border-width: var(--border-width-field);
   border-color: var(--field-border);
 
-  /* Add padding-right when indicator is present */
+  /* Add inline-end padding when indicator is present */
   &:has(.autocomplete__indicator) {
-    @apply pr-7;
+    @apply pe-7;
   }
 
   /* Hover state - exclude when clear button is hovered to prevent double hover effect */
@@ -93,10 +93,15 @@
   &:focus,
   &[data-focus="true"] {
   }
+
+  .autocomplete[data-invalid="true"] &,
+  .autocomplete[aria-invalid="true"] & {
+    background-color: var(--autocomplete-trigger-bg-focus);
+  }
 }
 
 .autocomplete__value {
-  @apply flex-1 text-left text-base wrap-break-word text-current sm:text-sm;
+  @apply flex-1 text-start text-base wrap-break-word text-current sm:text-sm;
 
   &[data-placeholder="true"] {
     @apply text-field-placeholder;
@@ -109,7 +114,7 @@
 }
 
 .autocomplete__indicator {
-  @apply absolute inset-y-0 right-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
+  @apply absolute inset-y-0 end-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -125,7 +130,7 @@
 
 /* Similar to popover content styles */
 .autocomplete__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 pt-2 text-sm;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 pt-2 text-sm scrollbar;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
@@ -164,7 +169,7 @@
 
   &[data-exiting="true"],
   &[data-entering="true"] {
-    @apply will-change-[opacity,transform];
+    @apply transition-[opacity,transform] will-change-[opacity,transform];
   }
 
   /* Arrow styling */
@@ -225,7 +230,7 @@
 /* Clear Button styles */
 .autocomplete__clear-button {
   @apply relative isolate inline-flex h-6 w-6 shrink-0 origin-center items-center justify-center rounded-xl p-1 text-muted select-none no-highlight;
-  @apply mr-0 size-5 shrink-0 self-center bg-transparent;
+  @apply me-0 size-5 shrink-0 self-center bg-transparent;
 
   /* Cursor */
   cursor: var(--cursor-interactive);

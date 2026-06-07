@@ -1,0 +1,118 @@
+---
+title: ErrorMessage 错误信息
+description: 用于展示错误信息的底层组件。
+links:
+  rac: TagGroup
+  source: error-message/error-message.tsx
+  styles: error-message.css
+---
+
+## 引入
+
+```tsx
+import { ErrorMessage } from '@heroui/react';
+```
+
+## 用法
+
+`ErrorMessage` 是基于 React Aria `Text`、并使用 `errorMessage` 插槽的底层组件，适用于 **非表单** 场景（例如 `TagGroup`、`Calendar` 等集合类组件）。
+
+<ComponentPreview
+  name="error-message-basic"
+/>
+
+### 组件结构
+
+```tsx
+import { TagGroup, Tag, Label, Description, ErrorMessage } from '@heroui/react';
+
+<TagGroup>
+  <Label />
+  <TagGroup.List>
+    <Tag />
+  </TagGroup.List>
+  <Description />
+  <ErrorMessage />
+</TagGroup>
+```
+
+<RelatedComponents component="errormessage" />
+
+## 何时使用
+
+`ErrorMessage` **不绑定表单**，是用于非表单上下文的通用错误展示组件。
+
+- **推荐用于** 非表单组件（例如 `TagGroup`、`Calendar`、集合类组件）
+- **对于表单字段**，我们更推荐使用 [`FieldError`](/docs/components/field-error)，它提供表单相关的校验能力与自动错误处理，并遵循标准化的表单校验模式。
+
+## ErrorMessage 与 FieldError
+
+| 组件 | 使用场景 | 表单集成 | 示例组件 |
+| --- | --- | --- | --- |
+| `ErrorMessage` | 非表单组件 | 否 | `TagGroup`、`Calendar` |
+| `FieldError` | 表单字段（推荐） | 是 | `TextField`、`NumberField`、`Select` |
+
+对于表单校验，我们推荐使用 `FieldError`，因为它遵循标准化的表单校验模式并提供表单相关能力。示例与最佳实践见 [FieldError 文档](/docs/components/field-error) 与 [Form 指南](/docs/components/form)。
+
+## API 参考
+
+### ErrorMessage Props
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode` | - | 错误信息内容 |
+
+**说明：** `ErrorMessage` 基于 React Aria 的 `Text` 组件，并使用 `slot="errorMessage"`。你可以使用 `[slot=errorMessage]` CSS 选择器进行样式覆盖。
+
+## 无障碍
+
+ErrorMessage 通过以下方式增强无障碍：
+
+- 使用屏幕阅读器可识别的语义化 HTML
+- 提供 `slot="errorMessage"` 属性以集成 React Aria
+- 为错误状态提供合适的文本对比度
+- 遵循 WAI-ARIA 的错误信息最佳实践
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { ErrorMessage } from '@heroui/react';
+
+function CustomErrorMessage() {
+  return (
+    <ErrorMessage className="font-bold text-sm">
+      Custom styled error message
+    </ErrorMessage>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 ErrorMessage 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .error-message {
+    @apply text-red-600 text-sm font-medium;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ErrorMessage 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/error-message.css)）：
+
+#### 基础类
+
+- `.error-message` - 危险色与文本截断等基础样式
+
+#### 插槽类
+
+- `[slot="errorMessage"]` - 与 React Aria 集成的 ErrorMessage 插槽样式

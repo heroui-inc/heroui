@@ -2,11 +2,10 @@
 
 import type {ComponentInfo} from "../components-registry";
 import type {StatusChipStatus} from "./status-chip";
-import type {UrlObject} from "url";
 
 import {Link} from "@heroui/react";
+import LinkRoot from "fumadocs-core/link";
 import Image from "next/image";
-import NextLink from "next/link";
 
 import {cn} from "@/utils/cn";
 import {CDN_URL} from "@/utils/constants";
@@ -79,9 +78,9 @@ function ConditionalLink({
   }
 
   return (
-    <NextLink className={className} href={href as unknown as UrlObject}>
+    <LinkRoot className={className} href={href}>
       {children}
-    </NextLink>
+    </LinkRoot>
   );
 }
 
@@ -99,7 +98,8 @@ export function ComponentItem({
   status,
 }: ComponentItemProps) {
   const {href, title} = component;
-  const imageName = title.toLowerCase();
+  // to cater chinese component title: <English> <Chinese>
+  const imageName = title.toLowerCase().split(" ")[0];
   const lightSrc = `${CDN_URL}/docs/related-components/light-${imageName}.png`;
   const darkSrc = `${CDN_URL}/docs/related-components/dark-${imageName}.png`;
 

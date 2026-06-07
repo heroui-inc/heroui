@@ -1,0 +1,186 @@
+---
+title: Tooltip 工具提示
+description: 当用户悬停或聚焦某个元素时，展示提示性文本。
+icon: updated
+links:
+  rac: Tooltip
+  source: tooltip/tooltip.tsx
+  styles: tooltip.css
+  storybook: Components/Overlays/Tooltip
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Tooltip } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="tooltip-basic"
+/>
+
+### 组件结构
+
+引入 Tooltip 后，可通过点语法访问各个部分。
+
+```tsx
+import { Tooltip, Button } from '@heroui/react';
+
+export default () => (
+  <Tooltip>
+    <Tooltip.Trigger>
+      <Button>Hover for tooltip</Button>
+    </Tooltip.Trigger>
+    <Tooltip.Content>
+      <Tooltip.Arrow />
+      Helpful information about this element
+    </Tooltip.Content>
+  </Tooltip>
+)
+```
+
+### 带箭头
+
+<ComponentPreview
+  name="tooltip-with-arrow"
+/>
+
+### 位置
+
+<ComponentPreview
+  name="tooltip-placement"
+/>
+
+### 自定义触发
+
+<ComponentPreview
+  name="tooltip-custom-trigger"
+/>
+
+<RelatedComponents component="tooltip" />
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="tooltip-custom-render-function"
+/>
+
+## 样式
+
+### 全局延迟配置
+
+你可以通过定义 CSS 变量，为应用中所有 Tooltip 设置默认的显示与隐藏延迟：
+
+```css
+/* 在你的全局 CSS 文件中 */
+:root {
+  --tooltip-delay: 1500ms;
+  --tooltip-close-delay: 500ms;
+}
+
+/* 也可以为浅色/深色主题设置不同的值 */
+.light, [data-theme="light"] {
+  --tooltip-delay: 1200ms;
+}
+
+.dark, [data-theme="dark"] {
+  --tooltip-close-delay: 300ms;
+}
+```
+
+值支持 `ms`、`s` 等 CSS 时间单位。在单个 Tooltip 上指定 `delay` 或 `closeDelay` 时，会覆盖这些全局设置。
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { Tooltip, Button } from '@heroui/react';
+
+function CustomTooltip() {
+  return (
+    <Tooltip>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content className="bg-accent text-accent-foreground">
+        <p>Custom styled tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 Tooltip 的组件类名，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .tooltip {
+    @apply rounded-xl shadow-lg;
+  }
+
+  .tooltip__trigger {
+    @apply cursor-help;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+
+### CSS 类
+
+Tooltip 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tooltip.css)）：
+
+#### 基础类
+- `.tooltip` - 带动画的基础 Tooltip 样式
+- `.tooltip__trigger` - 触发元素样式
+
+### 交互状态
+
+组件支持以下动画相关状态：
+
+- **进入**：`[data-entering]` — Tooltip 出现过程中应用
+- **离开**：`[data-exiting]` — Tooltip 消失过程中应用
+- **位置**：`[data-placement="*"]` — 根据 Tooltip 位置应用
+
+## API 参考
+
+### Tooltip Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 触发元素与内容 |
+| `delay` | `number` | `1500` 或 CSS 变量 | 显示 Tooltip 前的延迟（毫秒）；可通过 `--tooltip-delay` CSS 变量全局配置 |
+| `closeDelay` | `number` | `500` 或 CSS 变量 | 隐藏 Tooltip 前的延迟（毫秒）；可通过 `--tooltip-close-delay` CSS 变量全局配置 |
+| `trigger` | `"hover" \| "focus"` | `"hover"` | Tooltip 的触发方式 |
+| `isDisabled` | `boolean` | `false` | 是否禁用 Tooltip |
+
+### Tooltip.Content Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 在 Tooltip 中展示的内容 |
+| `showArrow` | `boolean` | `false` | 是否显示箭头指示器 |
+| `offset` | `number` | `3`（带箭头时为 7） | 与触发元素的距离 |
+| `placement` | `"top" \| "bottom" \| "left" \| "right"` (及变体) | `"top"` | Tooltip 的位置 |
+| `className` | `string` | - | 额外的 CSS 类名 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TooltipRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+### Tooltip.Trigger Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 触发 Tooltip 的元素 |
+| `className` | `string` | - | 额外的 CSS 类名 |
+
+### Tooltip.Arrow Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | - | 自定义箭头元素 |
+| `className` | `string` | - | 额外的 CSS 类名 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, OverlayArrowRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |

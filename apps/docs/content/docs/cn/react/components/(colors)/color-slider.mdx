@@ -1,0 +1,231 @@
+---
+title: ColorSlider 颜色滑块
+description: ColorSlider 允许用户调整颜色值的单个通道。
+links:
+  rac: ColorSlider
+  source: color-slider/color-slider.tsx
+  styles: color-slider.css
+  storybook: Components/Colors/ColorSlider
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { ColorSlider, Label } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="color-slider-basic"
+/>
+
+### 组件结构
+
+导入 ColorSlider 组件后，可通过点号访问各个子部分。
+
+```tsx
+import { ColorSlider, Label } from '@heroui/react';
+
+export default () => (
+  <ColorSlider channel="hue" defaultValue="hsl(0, 100%, 50%)">
+    <Label>Hue</Label>
+    <ColorSlider.Output />
+    <ColorSlider.Track>
+      <ColorSlider.Thumb />
+    </ColorSlider.Track>
+  </ColorSlider>
+)
+```
+### Vertical
+
+<ComponentPreview
+  name="color-slider-vertical"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="color-slider-disabled"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="color-slider-controlled"
+/>
+
+### HSL Channels
+
+使用多个 ColorSlider 控制同一颜色值的不同通道。这些滑块可以共享同一个颜色值，从而组成完整的颜色选择器。
+
+<ComponentPreview
+  name="color-slider-channels"
+/>
+
+### Alpha Channel
+
+alpha 通道滑块会显示透明度棋盘格背景，以帮助可视化透明度。
+
+<ComponentPreview
+  name="color-slider-alpha-channel"
+/>
+
+### RGB Channels
+
+你也可以使用 RGB 色彩空间，并分别控制红、绿、蓝通道。
+
+<ComponentPreview
+  name="color-slider-rgb-channels"
+/>
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="color-slider-custom-render-function"
+/>
+
+<RelatedComponents component="color-slider" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { ColorSlider, Label } from '@heroui/react';
+
+function CustomColorSlider() {
+  return (
+    <ColorSlider channel="hue" defaultValue="hsl(0, 100%, 50%)" className="w-full">
+      <Label>Hue</Label>
+      <ColorSlider.Output className="text-muted text-sm" />
+      <ColorSlider.Track className="h-6 rounded-full">
+        <ColorSlider.Thumb className="size-5 rounded-full border-2 border-white" />
+      </ColorSlider.Track>
+    </ColorSlider>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 ColorSlider 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .color-slider {
+    @apply flex flex-col gap-2;
+  }
+
+  .color-slider__output {
+    @apply text-muted text-sm;
+  }
+
+  .color-slider__track {
+    @apply relative h-5 w-full rounded-full;
+  }
+
+  .color-slider__thumb {
+    @apply size-4 rounded-full border-3 border-white shadow-overlay;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，以确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ColorSlider 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-slider.css)）：
+
+#### 基础类
+- `.color-slider` - 基础滑块容器
+- `.color-slider__output` - 显示当前数值的输出元素
+- `.color-slider__track` - 带颜色渐变的轨道元素
+- `.color-slider__thumb` - 显示当前颜色的滑块（thumb）
+
+#### 状态类
+- `.color-slider[data-disabled="true"]` - 禁用状态
+- `.color-slider[data-orientation="vertical"]` - 纵向方向
+- `.color-slider__thumb[data-dragging="true"]` - 正在拖动 thumb
+- `.color-slider__thumb[data-focus-visible="true"]` - thumb 的键盘焦点
+- `.color-slider__thumb[data-disabled="true"]` - thumb 禁用状态
+
+### 交互状态
+
+组件同时支持 CSS 伪类与 data 属性，便于灵活定制：
+
+- **Hover**：thumb 上 `:hover` 或 `[data-hovered="true"]`
+- **Focus**：thumb 上 `:focus-visible` 或 `[data-focus-visible="true"]`
+- **Dragging**：thumb 上 `[data-dragging="true"]`
+- **Disabled**：滑块或 thumb 上 `:disabled` 或 `[data-disabled="true"]`
+
+## API 参考
+
+### ColorSlider Props
+
+继承自 [React Aria ColorSlider](https://react-spectrum.adobe.com/react-aria/ColorSlider.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `channel` | `ColorChannel` | - | 滑块操作的通道（hue、saturation、lightness、brightness、alpha、red、green、blue） |
+| `colorSpace` | `ColorSpace` | - | 色彩空间（hsl、hsb、rgb）。默认取当前值的色彩空间 |
+| `value` | `string \| Color` | - | 当前颜色值（受控） |
+| `defaultValue` | `string \| Color` | - | 默认颜色值（非受控） |
+| `onChange` | `(value: Color) => void` | - | 拖动过程中数值变化时触发的事件处理函数 |
+| `onChangeEnd` | `(value: Color) => void` | - | 拖动结束时触发的事件处理函数 |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 滑块方向 |
+| `isDisabled` | `boolean` | - | 是否禁用滑块 |
+| `name` | `string` | - | 用于表单提交的 input 名称 |
+| `aria-label` | `string` | - | 滑块的无障碍标签 |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode \| RenderFunction` | - | 滑块内容或渲染函数 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSliderRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### ColorSlider.Output Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `ReactNode \| RenderFunction` | - | 输出内容或渲染函数 |
+
+### ColorSlider.Track Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+| `style` | `CSSProperties \| RenderFunction` | - | 行内样式或渲染函数 |
+| `children` | `ReactNode \| RenderFunction` | - | 轨道内容或渲染函数 |
+
+### ColorSlider.Thumb Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+| `style` | `CSSProperties \| RenderFunction` | - | 行内样式或渲染函数 |
+| `children` | `ReactNode \| RenderFunction` | - | thumb 内容或渲染函数 |
+
+### RenderProps
+
+使用渲染函数时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `state` | `ColorSliderState` | ColorSlider 的状态 |
+| `color` | `Color` | 当前颜色值 |
+| `orientation` | `"horizontal" \| "vertical"` | 滑块方向 |
+| `isDisabled` | `boolean` | 是否禁用滑块 |
+
+## 无障碍
+
+ColorSlider 实现了 ARIA slider 模式，并提供：
+
+- 完整的键盘导航支持（方向键、Home、End、Page Up/Down）
+- 屏幕阅读器对数值变化的播报
+- 合理的焦点管理
+- 禁用状态支持
+- 通过隐藏 input 元素与 HTML 表单集成
+- 结合区域设置进行数值格式化的国际化支持
+
+更多信息见 [React Aria ColorSlider 文档](https://react-spectrum.adobe.com/react-aria/ColorSlider.html)。

@@ -1,0 +1,188 @@
+---
+title: Beta 10
+description: Bottom Sheet 组件、PressableFeedback 重构、动画 API 的 State 扩展、use-theme-color 多色选取与问题修复
+github:
+  pull: 6068
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2025 年 12 月 30 日</span>
+</div>
+
+本版本新增 [Bottom Sheet](/docs/native/components/bottom-sheet) 组件；重构 [PressableFeedback](/docs/native/components/pressable-feedback) 并改进 API；为动画 API 增加 State Prop 支持；增强 `use-theme-color` 以支持一次选取多色；并包含若干问题修复与文档改进。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i heroui-native@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add heroui-native@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add heroui-native@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add heroui-native@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 更新亮点
+
+### 新组件
+
+#### Bottom Sheet
+
+本版本新增 **Bottom Sheet** 组件：自屏幕底部滑入的通用遮罩层，带动画过渡与下滑关闭手势。
+
+<NativeVideoPlayerView
+  target="component"
+  slug="bottom-sheet"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/bottom-sheet-docs-dark.mp4"
+/>
+
+**特性：**
+
+- 平滑动画过渡与手势支持
+- 多档吸附高度，布局更灵活
+- Detached 模式，支持自定义定位
+- 可自定义遮罩与模糊效果
+- 完整无障碍支持
+- 基于 [@gorhom/bottom-sheet](https://gorhom.dev/react-native-bottom-sheet)
+
+**用法：**
+
+```tsx
+import { BottomSheet, Button } from 'heroui-native';
+
+<BottomSheet>
+  <BottomSheet.Trigger asChild>
+    <Button>Open Bottom Sheet</Button>
+  </BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay />
+    <BottomSheet.Content>
+      <BottomSheet.Close />
+      <BottomSheet.Title>Title</BottomSheet.Title>
+      <BottomSheet.Description>Description</BottomSheet.Description>
+    </BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
+完整文档与示例见 [Bottom Sheet 组件页](/docs/native/components/bottom-sheet)。
+
+**相关 PR：** [#174](https://github.com/heroui-inc/heroui-native/pull/174)
+
+## 组件改进
+
+### PressableFeedback 重构
+
+[PressableFeedback](/docs/native/components/pressable-feedback) 已重构，API 更清晰，动画控制更好。
+
+**改进：**
+
+- 动画配置 API 增强
+- 更好支持自定义动画状态
+- 性能与流畅度提升
+- 反馈定位选项更灵活
+
+在提供更多按压反馈动画控制能力的同时，保持向后兼容。
+
+**相关 PR：** [#182](https://github.com/heroui-inc/heroui-native/pull/182)
+
+## API 增强
+
+### 动画 API：State 属性扩展
+
+动画 API 新增 `state` 属性，可在自定义属性的同时关闭动画，实现更细粒度的行为控制。
+
+**新能力：**
+
+```tsx
+<Component
+  animation={{
+    state: 'disabled', // 或 'disable-all' 或 boolean
+    // ... 其他动画属性
+  }}
+/>
+```
+
+`state` 可取：
+
+- `'disabled'`：关闭动画，仍允许自定义属性
+- `'disable-all'`：关闭所有动画（含子级）
+- `boolean`：简单开关
+
+便于在不启用动画的情况下微调动画相关属性，利于精细调整组件行为。
+
+**相关 PR：** [#176](https://github.com/heroui-inc/heroui-native/pull/176)
+
+### use-theme-color 多色选取
+
+`use-theme-color` 已重构，支持一次选取多种颜色，主题定制更灵活。
+
+**增强：**
+
+- 支持同时选取多种颜色
+- 颜色选取逻辑改进
+- 多色场景下性能更好
+
+便于在需要多色协同应用的主题场景中组合使用。
+
+**相关 PR：** [#170](https://github.com/heroui-inc/heroui-native/pull/170)
+
+## 文档
+
+### 动画样式指南注释
+
+为动画样式指南补充注释与说明，便于开发者理解与正确使用动画能力。
+
+**改进：**
+
+- 示例代码附详细注释
+- 动画模式说明更清晰
+- 不同动画方案的选用指引更明确
+
+**相关 PR：** [#179](https://github.com/heroui-inc/heroui-native/pull/179)
+
+## 问题修复
+
+本版本包含以下修复：
+
+- **[Issue #173](https://github.com/heroui-inc/heroui-native/issues/173)**：修复 `classNames={{ container: "bg-x" }}` 无法为 TextField.Input 容器设置 `backgroundColor` 的问题。
+- **[Issue #177](https://github.com/heroui-inc/heroui-native/issues/177)**：修复按钮缩放动画有时停留在 0.9 倍、松手后无法回弹的问题。
+- **[Issue #178](https://github.com/heroui-inc/heroui-native/issues/178)**：修复影响组件功能的问题。
+
+## 文档更新
+
+以下文档页面已随本版本更新：
+
+- [动画指南](/docs/native/getting-started/animation) — 补充动画 API State 属性说明
+- [颜色指南](/docs/native/getting-started/colors) — 补充 use-theme-color 多色选取说明
+- [PressableFeedback 组件](/docs/native/components/pressable-feedback) — 更新重构后的 API 文档
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

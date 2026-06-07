@@ -92,8 +92,10 @@ Sizes: `sm`, `md`, `lg`. Use `onPress` (not `onClick`).
 
 ```tsx
 <Checkbox>
-  <Checkbox.Control><Checkbox.Indicator /></Checkbox.Control>
-  <Checkbox.Content><Label>Accept terms</Label></Checkbox.Content>
+  <Checkbox.Content>
+    <Checkbox.Control><Checkbox.Indicator /></Checkbox.Control>
+    Accept terms
+  </Checkbox.Content>
 </Checkbox>
 ```
 
@@ -103,12 +105,16 @@ Sizes: `sm`, `md`, `lg`. Use `onPress` (not `onClick`).
 <RadioGroup>
   <Label>Plan</Label>
   <Radio value="free">
-    <Radio.Control><Radio.Indicator /></Radio.Control>
-    <Radio.Content><Label>Free</Label></Radio.Content>
+    <Radio.Content>
+      <Radio.Control><Radio.Indicator /></Radio.Control>
+      Free
+    </Radio.Content>
   </Radio>
   <Radio value="pro">
-    <Radio.Control><Radio.Indicator /></Radio.Control>
-    <Radio.Content><Label>Pro</Label></Radio.Content>
+    <Radio.Content>
+      <Radio.Control><Radio.Indicator /></Radio.Control>
+      Pro
+    </Radio.Content>
   </Radio>
 </RadioGroup>
 ```
@@ -117,8 +123,10 @@ Sizes: `sm`, `md`, `lg`. Use `onPress` (not `onClick`).
 
 ```tsx
 <Switch>
-  <Switch.Control><Switch.Thumb /></Switch.Control>
-  <Label>Notifications</Label>
+  <Switch.Content>
+    <Switch.Control><Switch.Thumb /></Switch.Control>
+    Notifications
+  </Switch.Content>
 </Switch>
 ```
 

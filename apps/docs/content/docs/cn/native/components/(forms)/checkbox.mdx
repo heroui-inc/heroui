@@ -1,0 +1,323 @@
+---
+title: Checkbox 复选框
+description: 可在选中与未选中之间切换的可选控件。
+links:
+  source_native: checkbox/checkbox.tsx
+  styles_native: checkbox/checkbox.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/checkbox-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/checkbox-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Checkbox } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Checkbox>
+  <Checkbox.Indicator>...</Checkbox.Indicator>
+</Checkbox>
+```
+
+- **Checkbox**：主容器，处理选中状态与用户交互。未提供子节点时渲染带动画对勾的默认指示器；自动识别是否在 Surface 上以便样式正确；支持可定制或关闭的按压缩放动画；子节点可为渲染函数以访问 `isSelected`、`isInvalid`、`isDisabled`。
+- **Checkbox.Indicator**：可选对勾容器，选中时默认带滑动、缩放、透明度与圆角动画；无子节点时渲染带动画路径的 SVG 对勾；各动画可单独配置或关闭；子节点可为渲染函数以访问状态。
+
+## 用法
+
+### 基础用法
+
+未提供子节点时，Checkbox 使用默认动画指示器，并自动检测是否在 Surface 背景上。
+
+```tsx
+<Checkbox isSelected={isSelected} onSelectedChange={setIsSelected} />
+```
+
+### 自定义指示器
+
+在 Indicator 中使用渲染函数，按状态显示/隐藏自定义图标。
+
+```tsx
+<Checkbox isSelected={isSelected} onSelectedChange={setIsSelected}>
+  <Checkbox.Indicator>
+    {({ isSelected }) => (isSelected ? <CheckIcon /> : null)}
+  </Checkbox.Indicator>
+</Checkbox>
+```
+
+### 非法状态
+
+使用 `isInvalid` 表示校验错误并应用危险色样式。
+
+```tsx
+<Checkbox
+  isSelected={isSelected}
+  onSelectedChange={setIsSelected}
+  isInvalid={hasError}
+/>
+```
+
+### 自定义动画
+
+为根与指示器分别自定义或关闭动画。
+
+```tsx
+{
+  /* 关闭所有动画（根与指示器） */
+}
+<Checkbox
+  animation="disable-all"
+  isSelected={isSelected}
+  onSelectedChange={setIsSelected}
+>
+  <Checkbox.Indicator />
+</Checkbox>;
+
+{
+  /* 仅关闭根动画 */
+}
+<Checkbox
+  animation="disabled"
+  isSelected={isSelected}
+  onSelectedChange={setIsSelected}
+>
+  <Checkbox.Indicator />
+</Checkbox>;
+
+{
+  /* 仅关闭指示器动画 */
+}
+<Checkbox isSelected={isSelected} onSelectedChange={setIsSelected}>
+  <Checkbox.Indicator animation="disabled" />
+</Checkbox>;
+
+{
+  /* 自定义动画配置 */
+}
+<Checkbox
+  animation={{ scale: { value: [1, 0.9], timingConfig: { duration: 200 } } }}
+  isSelected={isSelected}
+  onSelectedChange={setIsSelected}
+>
+  <Checkbox.Indicator
+    animation={{
+      scale: { value: [0.5, 1] },
+      opacity: { value: [0, 1] },
+      translateX: { value: [-8, 0] },
+      borderRadius: { value: [12, 0] },
+    }}
+  />
+</Checkbox>;
+```
+
+## 示例
+
+```tsx
+import {
+  Checkbox,
+  Description,
+  ControlField,
+  Label,
+  Separator,
+  Surface,
+} from "heroui-native";
+import React from 'react';
+import { View, Text } from 'react-native';
+
+interface CheckboxFieldProps {
+  isSelected: boolean;
+  onSelectedChange: (value: boolean) => void;
+  title: string;
+  description: string;
+}
+
+const CheckboxField: React.FC<CheckboxFieldProps> = ({
+  isSelected,
+  onSelectedChange,
+  title,
+  description,
+}) => {
+  return (
+    <ControlField isSelected={isSelected} onSelectedChange={onSelectedChange}>
+      <ControlField.Indicator>
+        <Checkbox className="mt-0.5" />
+      </ControlField.Indicator>
+      <View className="flex-1">
+        <Label className="text-lg">{title}</Label>
+        <Description className="text-base">
+          {description}
+        </Description>
+      </View>
+    </ControlField>
+  );
+};
+
+export default function BasicUsage() {
+  const [fields, setFields] = React.useState({
+    newsletter: true,
+    marketing: false,
+    terms: false,
+  });
+
+  const fieldConfigs: Record<
+    keyof typeof fields,
+    { title: string; description: string }
+  > = {
+    newsletter: {
+      title: 'Subscribe to newsletter',
+      description: 'Get weekly updates about new features and tips',
+    },
+    marketing: {
+      title: 'Marketing communications',
+      description: 'Receive promotional emails and special offers',
+    },
+    terms: {
+      title: 'Accept terms and conditions',
+      description: 'Agree to our Terms of Service and Privacy Policy',
+    },
+  };
+
+  const handleFieldChange = (key: keyof typeof fields) => (value: boolean) => {
+    setFields((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const fieldKeys = Object.keys(fields) as Array<keyof typeof fields>;
+
+  return (
+    <View className="flex-1 items-center justify-center px-5">
+      <Surface className="py-5 w-full">
+        {fieldKeys.map((key, index) => (
+          <React.Fragment key={key}>
+            {index > 0 && <Separator className="my-4" />}
+            <CheckboxField
+              isSelected={fields[key]}
+              onSelectedChange={handleFieldChange(key)}
+              title={fieldConfigs[key].title}
+              description={fieldConfigs[key].description}
+            />
+          </React.Fragment>
+        ))}
+      </Surface>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/checkbox.tsx>)。
+
+## API 参考
+
+### Checkbox
+
+| prop                    | type                                                                   | default     | description                                                               |
+| ----------------------- | ---------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `children`              | `React.ReactNode \| ((props: CheckboxRenderProps) => React.ReactNode)` | `undefined` | 子元素或用于自定义的渲染函数                                               |
+| `isSelected`            | `boolean`                                                              | `undefined` | 是否选中                                                                  |
+| `onSelectedChange`      | `(isSelected: boolean) => void`                                        | `undefined` | 选中状态变化时回调                                                        |
+| `isDisabled`            | `boolean`                                                              | `false`     | 是否禁用、不可交互                                                        |
+| `isInvalid`             | `boolean`                                                              | `false`     | 是否非法（危险色样式）                                                    |
+| `variant`               | `'primary' \| 'secondary'`                                             | `'primary'` | 视觉变体                                                                  |
+| `hitSlop`               | `number`                                                               | `6`         | 可点区域扩展（hit slop）                                                  |
+| `animation`             | `CheckboxRootAnimation`                                                | -           | 动画配置                                                                  |
+| `isAnimatedStyleActive` | `boolean`                                                              | `true`      | 是否启用 Reanimated 动画样式                                              |
+| `className`             | `string`                                                               | `undefined` | 额外 class                                                                |
+| `...PressableProps`     | `PressableProps`                                                       | -           | 支持 React Native `Pressable` 标准属性（`disabled` 除外）                |
+
+#### CheckboxRenderProps
+
+| prop         | type      | description                      |
+| ------------ | --------- | -------------------------------- |
+| `isSelected` | `boolean` | 是否选中                         |
+| `isInvalid`  | `boolean` | 是否非法                         |
+| `isDisabled` | `boolean` | 是否禁用                         |
+
+#### CheckboxRootAnimation
+
+复选框根组件动画配置，可为：
+
+- `false` 或 `"disabled"`：仅关闭根动画
+- `"disable-all"`：关闭所有动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                 | type                                     | default             | description                                     |
+| -------------------- | ---------------------------------------- | ------------------- | ----------------------------------------------- |
+| `state`              | `'disabled' \| 'disable-all' \| boolean` | -                   | 关闭动画的同时仍允许自定义属性                  |
+| `scale.value`        | `[number, number]`                       | `[1, 0.96]`         | 缩放值 [未按压, 按压]                           |
+| `scale.timingConfig` | `WithTimingConfig`                       | `{ duration: 150 }` | 动画时间配置                                    |
+
+### Checkbox.Indicator
+
+| prop                    | type                                                                   | default     | description                                                  |
+| ----------------------- | ---------------------------------------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode \| ((props: CheckboxRenderProps) => React.ReactNode)` | `undefined` | 指示器内容或渲染函数                                         |
+| `className`             | `string`                                                               | `undefined` | 指示器额外 class                                             |
+| `iconProps`             | `CheckboxIndicatorIconProps`                                           | `undefined` | 默认动画对勾图标的自定义属性                                 |
+| `animation`             | `CheckboxIndicatorAnimation`                                           | -           | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                                                              | `true`      | 是否启用 Reanimated 动画样式                                 |
+| `...AnimatedViewProps`  | `AnimatedProps<ViewProps>`                                             | -           | 支持 React Native Animated View 标准属性                    |
+
+#### CheckboxIndicatorIconProps
+
+用于自定义默认动画对勾图标。
+
+| prop            | type     | description                                      |
+| --------------- | -------- | ------------------------------------------------ |
+| `size`          | `number` | 图标尺寸                                         |
+| `strokeWidth`   | `number` | 描边宽度                                         |
+| `color`         | `string` | 图标颜色（默认为主题 accent-foreground）        |
+| `enterDuration` | `number` | 出现动画时长（对勾显示）                         |
+| `exitDuration`  | `number` | 消失动画时长（对勾隐藏）                         |
+
+#### CheckboxIndicatorAnimation
+
+指示器动画配置，可为：
+
+- `false` 或 `"disabled"`：关闭全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop                        | type                    | default             | description                                     |
+| --------------------------- | ----------------------- | ------------------- | ----------------------------------------------- |
+| `state`                     | `'disabled' \| boolean` | -                   | 关闭动画的同时仍允许自定义属性                  |
+| `opacity.value`             | `[number, number]`      | `[0, 1]`            | 透明度 [未选中, 选中]                           |
+| `opacity.timingConfig`      | `WithTimingConfig`      | `{ duration: 100 }` | 透明度动画时间配置                              |
+| `borderRadius.value`        | `[number, number]`      | `[8, 0]`            | 圆角 [未选中, 选中]                             |
+| `borderRadius.timingConfig` | `WithTimingConfig`      | `{ duration: 50 }`  | 圆角动画时间配置                                |
+| `translateX.value`          | `[number, number]`      | `[-4, 0]`           | X 位移 [未选中, 选中]                           |
+| `translateX.timingConfig`   | `WithTimingConfig`      | `{ duration: 100 }` | 位移动画时间配置                                |
+| `scale.value`               | `[number, number]`      | `[0.8, 1]`          | 缩放 [未选中, 选中]                             |
+| `scale.timingConfig`        | `WithTimingConfig`      | `{ duration: 100 }` | 缩放动画时间配置                                |
+
+## Hooks
+
+### useCheckbox
+
+在自定义或复合结构内访问复选框上下文。
+
+```tsx
+import { useCheckbox } from 'heroui-native';
+
+const CustomIndicator = () => {
+  const { isSelected, isInvalid, isDisabled } = useCheckbox();
+  // ... your implementation
+};
+```
+
+**返回值：** `UseCheckboxReturn`
+
+| property           | type                                           | description                                                    |
+| ------------------ | ---------------------------------------------- | -------------------------------------------------------------- |
+| `isSelected`       | `boolean \| undefined`                         | 是否选中                                                       |
+| `onSelectedChange` | `((isSelected: boolean) => void) \| undefined` | 修改选中状态的回调函数                                         |
+| `isDisabled`       | `boolean`                                      | 是否禁用、不可交互                                             |
+| `isInvalid`        | `boolean`                                      | 是否非法（危险色）                                             |
+| `nativeID`         | `string \| undefined`                          | 复选框元素 native ID                                           |
+
+**注意：** 必须在 `Checkbox` 内使用；在上下文外调用会抛错。

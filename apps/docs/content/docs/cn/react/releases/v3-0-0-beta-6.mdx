@@ -1,0 +1,373 @@
+---
+title: v3.0.0-beta.6
+description: 新增 6 个颜色组件（ColorPicker、ColorArea、ColorSlider、ColorField、ColorSwatch、ColorSwatchPicker）、Toast 改进，以及多项样式修复。
+github:
+  pull: 6129
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 2 月 6 日</span>
+</div>
+
+本次发布引入了完整的**颜色系统**，新增六个用于颜色选择与处理的组件：[ColorPicker](/docs/components/color-picker)、[ColorArea](/docs/components/color-area)、[ColorSlider](/docs/components/color-slider)、[ColorField](/docs/components/color-field)、[ColorSwatch](/docs/components/color-swatch) 与 [ColorSwatchPicker](/docs/components/color-swatch-picker)。同时还包含 [Separator](/docs/components/separator) 的新变体以及多项样式改进。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-light@2x.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/versions/beta-6-dark@2x.jpg"
+  alt="HeroUI v3 Beta 6"
+  href="/docs/changelog/v3-0-0-beta-6"
+/>
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@beta @heroui/react@beta
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### 颜色系统
+
+我们很高兴推出完整的**颜色系统**——一整套用于颜色选择、处理与展示的组件。这些组件基于 React Aria 的颜色基元构建，可以无缝协同工作。
+
+**主要特性：**
+- **完整的色彩空间支持**：支持 HSL、HSB 与 RGB 色彩空间
+- **基于通道的编辑**：可单独操作每一个颜色通道（hue、saturation、lightness、brightness、red、green、blue、alpha）
+- **默认无障碍**：完整支持键盘导航与屏幕阅读器
+- **可组合的设计**：自由搭配组件，构建你自己的颜色选择器
+
+### 新组件
+
+本次发布共引入 **6 个** 新的颜色组件：
+
+- **[ColorPicker](#colorpicker)**：完整的颜色选择器，包含 trigger、popover 以及可组合的内部部件。（[文档](/docs/components/color-picker)）
+- **[ColorArea](#colorarea)**：二维渐变区域，可同时选择两个颜色通道。（[文档](/docs/components/color-area)）
+- **[ColorSlider](#colorslider)**：单通道滑块，用于精细调整颜色。（[文档](/docs/components/color-slider)）
+- **[ColorField](#colorfield)**：用于输入与编辑颜色值的文本框。（[文档](/docs/components/color-field)）
+- **[ColorSwatch](#colorswatch)**：可视化的颜色预览，支持透明度。（[文档](/docs/components/color-swatch)）
+- **[ColorSwatchPicker](#colorswatchpicker)**：可选的颜色块网格，便于快速选择颜色。（[文档](/docs/components/color-swatch-picker)）
+
+### ColorPicker
+
+ColorPicker 是一个复合组件，将所有颜色组件组合在一起，提供完整的颜色选择体验。
+
+<ComponentPreview
+  name="color-picker-basic"
+/>
+
+### ColorArea
+
+二维渐变区域，可同时选择两个颜色通道，通常用于 saturation 与 brightness。
+
+<ComponentPreview
+  name="color-area-basic"
+/>
+
+### ColorSlider
+
+用于调整单个颜色通道（如 hue、saturation、lightness 或 alpha）的滑块。
+
+<ComponentPreview
+  name="color-slider-basic"
+/>
+
+**不同的通道：**
+
+<ComponentPreview
+  name="color-slider-channels"
+/>
+
+### ColorField
+
+用于直接输入颜色值的文本输入框，支持多种颜色格式。
+
+<ComponentPreview
+  name="color-field-basic"
+/>
+
+### ColorSwatch
+
+颜色值的可视化展示，支持透明度图案。
+
+<ComponentPreview
+  name="color-swatch-basic"
+/>
+
+### ColorSwatchPicker
+
+色块网格，可从预定义的调色板中快速选择颜色。
+
+<ComponentPreview
+  name="color-swatch-picker-basic"
+/>
+
+## 组件改进
+
+### Toast 增强
+
+[Toast](/docs/components/toast) 组件经过了重大改进，新增了多项功能并提升了稳定性（#6151）：
+
+**新功能：**
+- **加载状态**：新增 `isLoading` prop，会显示一个 spinner 替代默认指示器
+- **默认超时**：Toast 现在默认 4 秒后自动关闭（可通过 `timeout` prop 配置）
+- **宽度控制**：在 `Toast.Provider` 上新增 `width` prop，可自定义 Toast 的宽度
+- **自适应高度**：Toast 会根据内容自适应高度
+- **更好的堆叠效果**：通过绝对定位与高度同步，修复了 Toast 堆叠时出现的布局抖动
+- **更稳健的关闭处理**：将 `onClose` 回调延迟执行，避免 Toast 过渡死锁
+- **仅最前 Toast 显示关闭按钮**：关闭按钮仅出现在最前一个 Toast 上，UI 更加干净
+- **Promise 支持增强**：改进了 `toast.promise()`，加载状态与错误处理更加完善
+
+**新增演示：**
+- Promise 与加载状态
+- 回调与超时处理
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+### Separator 变体
+
+为 [Separator](/docs/components/separator) 组件新增了变体，提供不同的视觉风格。
+
+### Chip 组件 —— Label slot
+
+[Chip](/docs/components/chip) 组件现在支持 `Chip.Label` 子组件，以获得更好的视觉对齐。当移除起始或末尾的内容（如图标）时，标签文字会过于贴近 Chip 的边缘。为了向后兼容，纯文本的 children 会自动被包裹在 `<Chip.Label>` 中。
+
+**用法：**
+
+```tsx
+import { Chip } from '@heroui/react';
+
+// Automatic wrapping (backward compatible)
+<Chip>Label text</Chip>
+
+// Explicit label with custom styling
+<Chip>
+  <Chip.Label className="font-bold">Custom Label</Chip.Label>
+</Chip>
+
+// Mixing icons and labels
+<Chip>
+  <Icon icon="gravity-ui:check" />
+  <Chip.Label>With Icon</Chip.Label>
+</Chip>
+```
+
+## 样式修复
+
+- **浮层内容**：修复了浮层内容上的模糊效果（#6136）
+- **Invalid 字段**：在字段处于 invalid 状态时，将 ring 改为 outline（#6184）
+- **Link 与按钮**：修复了使用按钮变体的 Link 组件的样式（#6138）
+- **Toast 内容**：修复了 Toast 内容的垂直对齐问题（#6147）
+- **Safari SVG**：修复了 SVG 在 Safari 中位置偏移的问题（#6149）
+- **Placeholder 颜色**：将 placeholder 的颜色与输入文本对齐（#6139)
+- **Tooltip**：从 tooltip 触发组件中移除了 cursor 样式
+- **CSS 变量**：让计算变量仅依赖根变量（#6154）
+
+## Bug 修复
+
+- 修复了视图过渡期间页面交互不可用的问题（#6128）
+- 修复了 Markdown URL 的格式化问题（#6162）
+- 修复了指向 ComboBox 页面的链接错误（#6164）
+- 修复了 `index.css` 中 Autocomplete 样式的引入顺序
+- 修复了 CSS 类名的连字符格式（#6191）
+
+## ⚠️ 破坏性变更
+
+### Toast 组件 —— Container 重命名为 Provider
+
+为提升语义清晰度，`Toast.Container` 已重命名为 `Toast.Provider`（#6151）。
+
+**之前：**
+```tsx
+<Toast.Container placement="bottom" />
+```
+
+**之后：**
+```tsx
+<Toast.Provider placement="bottom" />
+```
+
+**其他变更：**
+- 默认的 `gap` prop 从 `14` 改为 `12` 像素
+- 默认 `timeout` 现在为 `4000`（4 秒），无需再显式设置
+- 为保持一致性，`Toast.Action` 已重命名为 `Toast.ActionButton`
+
+### CSS 类名命名约定
+
+为了一致性，CSS 类名已统一改为连字符格式（#6141）。这一调整更贴合 BEM 规范，也提升了与 Tailwind CSS 的兼容性。
+
+**重要说明**：`textarea` 类名最初被改为 `text-area`，但由于与 Tailwind 原生的 `textarea` 类名冲突，已在 PR #6191 中回滚为 `textarea`。TextArea 组件相关的类名无需修改。
+
+#### 组件类名变更
+
+以下 CSS 类名已更新。如果你的自定义 CSS 直接使用了这些类名，请同步更新选择器：
+
+| 组件 | 旧类名 | 新类名 | 说明 |
+|------|--------|--------|------|
+| **ComboBox** | `.combobox` | `.combo-box` | 全部相关类名同步更新 |
+| | `.combobox__input-group` | `.combo-box__input-group` | |
+| | `.combobox__trigger` | `.combo-box__trigger` | |
+| | `.combobox__popover` | `.combo-box__popover` | |
+| | `.combobox--full-width` | `.combo-box--full-width` | |
+| **ListBox** | `.listbox` | `.list-box` | 全部相关类名同步更新 |
+| **ListBoxItem** | `.listbox-item` | `.list-box-item` | 全部相关类名同步更新 |
+| | `.listbox-item__indicator` | `.list-box-item__indicator` | |
+| | `.listbox-item--default` | `.list-box-item--default` | |
+| | `.listbox-item--danger` | `.list-box-item--danger` | |
+| **ListBoxSection** | `.listbox-section` | `.list-box-section` | 全部相关类名同步更新 |
+| **TextArea** | `.textarea` | `.textarea` | **未变更** —— 为避免与 Tailwind 冲突已回滚 |
+
+#### 迁移指南
+
+**之前：**
+```css
+/* Custom styles targeting old class names */
+.combobox {
+  /* styles */
+}
+
+.listbox-item {
+  /* styles */
+}
+```
+
+**之后：**
+```css
+/* Update to new hyphenated class names */
+.combo-box {
+  /* styles */
+}
+
+.list-box-item {
+  /* styles */
+}
+```
+
+**JavaScript / TypeScript 更新：**
+
+如果你在 JavaScript 或 TypeScript 代码中使用了这些类名：
+
+```tsx
+// Before
+<div className="combobox" />
+<ListBoxItem className="listbox-item" />
+
+// After
+<div className="combo-box" />
+<ListBoxItem className="list-box-item" />
+```
+
+**说明**：组件 props 与 TypeScript 类型保持不变，仅 CSS 类名做了更新。
+
+### 移除的 CSS 变量
+
+作为 surface 颜色重构的一部分，部分 CSS 变量已被移除（#6204）。这些变量要么改为直接引用其他变量，要么被完全移除。
+
+#### Surface 颜色变量
+
+以下经过计算的 surface 颜色变量已被移除，并改为直接引用对应的变量：
+
+**已移除：**
+- `--color-surface-secondary`（之前通过 `color-mix` 计算得到）
+- `--color-surface-tertiary`（之前通过 `color-mix` 计算得到）
+
+**替代方案：**
+这些变量现在直接引用 `variables.css` 中定义的基础变量：
+- `--color-surface-secondary` → 直接使用 `var(--surface-secondary)`
+- `--color-surface-tertiary` → 直接使用 `var(--surface-tertiary)`
+
+基础变量 `--surface-secondary` 与 `--surface-tertiary` 现在直接定义在 `variables.css` 中，而不再在 `theme.css` 中通过计算得出。
+
+#### On Surface 颜色变量
+
+所有 `--color-on-surface-*` 变量都已被完全移除：
+
+**已移除：**
+- `--color-on-surface`
+- `--color-on-surface-foreground`
+- `--color-on-surface-hover`
+- `--color-on-surface-focus`
+- `--color-on-surface-secondary`
+- `--color-on-surface-secondary-foreground`
+- `--color-on-surface-secondary-hover`
+- `--color-on-surface-secondary-focus`
+- `--color-on-surface-tertiary`
+- `--color-on-surface-tertiary-foreground`
+- `--color-on-surface-tertiary-hover`
+- `--color-on-surface-tertiary-focus`
+
+**迁移方式：**
+
+如果你之前用到了这些变量，请改用对应的 surface 变量：
+
+```css
+/* Before */
+.element {
+  background: var(--color-on-surface);
+  color: var(--color-on-surface-foreground);
+}
+
+.element:hover {
+  background: var(--color-on-surface-hover);
+}
+
+/* After */
+.element {
+  background: var(--surface-secondary);
+  color: var(--surface-secondary-foreground);
+}
+
+.element:hover {
+  background: color-mix(in oklab, var(--surface-secondary) 92%, var(--surface-secondary-foreground) 8%);
+}
+```
+
+或者使用 Tailwind 工具类：
+```tsx
+// Before
+<div className="bg-on-surface text-on-surface-foreground" />
+
+// After
+<div className="bg-surface-secondary text-surface-secondary-foreground" />
+```
+
+**相关 PR：** [#6204](https://github.com/heroui-inc/heroui/pull/6204)
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [设计系统 - Figma Kit v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6201](https://github.com/heroui-inc/heroui/pull/6201)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

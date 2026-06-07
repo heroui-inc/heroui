@@ -3,7 +3,11 @@
 import {InputOTP, Label, Link} from "@heroui/react";
 import {useState} from "react";
 
+import {useDictionary} from "@/hooks/use-dictionary";
+
 export function InputOTPDemo() {
+  const {demos} = useDictionary();
+  const t = demos.inputOtp;
   // HERO - 4320 - easter egg
   const [value, setValue] = useState("4320");
 
@@ -11,8 +15,8 @@ export function InputOTPDemo() {
     <div className="flex w-full justify-center">
       <div className="flex w-[280px] flex-col items-start justify-center gap-2">
         <div className="flex flex-col items-start gap-1">
-          <Label>Verify account</Label>
-          <p className="text-sm text-muted">We&apos;ve sent a code to a****@gmail.com</p>
+          <Label>{t.label}</Label>
+          <p className="text-sm text-muted">{t.description}</p>
         </div>
         <InputOTP maxLength={6} value={value} onChange={setValue}>
           <InputOTP.Group>
@@ -28,8 +32,8 @@ export function InputOTPDemo() {
           </InputOTP.Group>
         </InputOTP>
         <div className="flex items-center gap-[5px] px-1 pt-1">
-          <p className="text-sm text-muted">Didn&apos;t receive a code?</p>
-          <Link className="text-foreground">Resend</Link>
+          <p className="text-sm text-muted">{t.didntReceive}</p>
+          <Link className="text-foreground">{t.resend}</Link>
         </div>
       </div>
     </div>

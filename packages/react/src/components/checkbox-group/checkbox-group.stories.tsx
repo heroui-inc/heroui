@@ -28,31 +28,31 @@ export const Default: Story = {
       <Label>Select your interests</Label>
       <Description>Choose all that apply</Description>
       <Checkbox value="coding">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Coding</Label>
-          <Description>Love building software</Description>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          Coding
         </Checkbox.Content>
+        <Description>Love building software</Description>
       </Checkbox>
       <Checkbox value="design">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Design</Label>
-          <Description>Enjoy creating beautiful interfaces</Description>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          Design
         </Checkbox.Content>
+        <Description>Enjoy creating beautiful interfaces</Description>
       </Checkbox>
       <Checkbox value="writing">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Writing</Label>
-          <Description>Passionate about content creation</Description>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          Writing
         </Checkbox.Content>
+        <Description>Passionate about content creation</Description>
       </Checkbox>
     </CheckboxGroup>
   ),
@@ -64,52 +64,52 @@ export const WithCustomIndicator: Story = {
       <Label>Features</Label>
       <Description>Select the features you want</Description>
       <Checkbox value="notifications">
-        <Checkbox.Control>
-          <Checkbox.Indicator>
-            {({isSelected}) =>
-              isSelected ? (
-                <svg
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeWidth={2}
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : null
-            }
-          </Checkbox.Indicator>
-        </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Email notifications</Label>
-          <Description>Receive updates via email</Description>
+          <Checkbox.Control>
+            <Checkbox.Indicator>
+              {({isSelected}) =>
+                isSelected ? (
+                  <svg
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : null
+              }
+            </Checkbox.Indicator>
+          </Checkbox.Control>
+          Email notifications
         </Checkbox.Content>
+        <Description>Receive updates via email</Description>
       </Checkbox>
       <Checkbox value="newsletter">
-        <Checkbox.Control>
-          <Checkbox.Indicator>
-            {({isSelected}) =>
-              isSelected ? (
-                <svg
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeWidth={2}
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : null
-            }
-          </Checkbox.Indicator>
-        </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Newsletter</Label>
-          <Description>Get weekly newsletters</Description>
+          <Checkbox.Control>
+            <Checkbox.Indicator>
+              {({isSelected}) =>
+                isSelected ? (
+                  <svg
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : null
+              }
+            </Checkbox.Indicator>
+          </Checkbox.Control>
+          Newsletter
         </Checkbox.Content>
+        <Description>Get weekly newsletters</Description>
       </Checkbox>
     </CheckboxGroup>
   ),
@@ -130,37 +130,37 @@ export const Indeterminate: Story = {
             setSelected(isSelected ? allOptions : []);
           }}
         >
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Select all</Label>
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            Select all
           </Checkbox.Content>
         </Checkbox>
         <div className="ml-6 flex flex-col gap-2">
           <CheckboxGroup value={selected} onChange={setSelected}>
             <Checkbox value="coding">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
               <Checkbox.Content>
-                <Label>Coding</Label>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
+                Coding
               </Checkbox.Content>
             </Checkbox>
             <Checkbox value="design">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
               <Checkbox.Content>
-                <Label>Design</Label>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
+                Design
               </Checkbox.Content>
             </Checkbox>
             <Checkbox value="writing">
-              <Checkbox.Control>
-                <Checkbox.Indicator />
-              </Checkbox.Control>
               <Checkbox.Content>
-                <Label>Writing</Label>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
+                Writing
               </Checkbox.Content>
             </Checkbox>
           </CheckboxGroup>
@@ -188,27 +188,27 @@ export const Validation: Story = {
           <Label>Preferences</Label>
           <Description>Select at least one preference</Description>
           <Checkbox value="email">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
             <Checkbox.Content>
-              <Label>Email notifications</Label>
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+              Email notifications
             </Checkbox.Content>
           </Checkbox>
           <Checkbox value="sms">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
             <Checkbox.Content>
-              <Label>SMS notifications</Label>
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+              SMS notifications
             </Checkbox.Content>
           </Checkbox>
           <Checkbox value="push">
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
             <Checkbox.Content>
-              <Label>Push notifications</Label>
+              <Checkbox.Control>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+              Push notifications
             </Checkbox.Content>
           </Checkbox>
           <FieldError>Please select at least one notification method.</FieldError>
@@ -232,27 +232,27 @@ export const Controlled: Story = {
       >
         <Label>Your skills</Label>
         <Checkbox value="coding">
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Coding</Label>
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            Coding
           </Checkbox.Content>
         </Checkbox>
         <Checkbox value="design">
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Design</Label>
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            Design
           </Checkbox.Content>
         </Checkbox>
         <Checkbox value="writing">
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
           <Checkbox.Content>
-            <Label>Writing</Label>
+            <Checkbox.Control>
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            Writing
           </Checkbox.Content>
         </Checkbox>
         <Label className="my-4 text-sm text-muted">Selected: {selected.join(", ") || "None"}</Label>
@@ -267,22 +267,22 @@ export const Disabled: Story = {
       <Label>Features</Label>
       <Description>Feature selection is temporarily disabled</Description>
       <Checkbox value="feature1">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Feature 1</Label>
-          <Description>This feature is coming soon</Description>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          Feature 1
         </Checkbox.Content>
+        <Description>This feature is coming soon</Description>
       </Checkbox>
       <Checkbox value="feature2">
-        <Checkbox.Control>
-          <Checkbox.Indicator />
-        </Checkbox.Control>
         <Checkbox.Content>
-          <Label>Feature 2</Label>
-          <Description>This feature is coming soon</Description>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+          Feature 2
         </Checkbox.Content>
+        <Description>This feature is coming soon</Description>
       </Checkbox>
     </CheckboxGroup>
   ),

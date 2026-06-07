@@ -1,0 +1,476 @@
+---
+title: 组合
+description: 使用组件组合模式构建灵活的 UI
+icon: layers
+---
+
+HeroUI 使用组合模式来创建灵活、可定制的组件。你可以更换渲染的元素、把组件组合在一起，并完全掌控最终的标记结构。
+
+## 与框架无关的样式
+
+HeroUI 的变体函数位于 `@heroui/styles` 包中，可以独立于 React 使用。这使得 Vue、Svelte 等其他框架也能使用 HeroUI 的设计系统：
+
+```tsx
+// Import directly from @heroui/styles (framework-agnostic)
+import { buttonVariants } from '@heroui/styles';
+
+// Or import from @heroui/react (re-exports the same functions)
+import { buttonVariants } from '@heroui/react';
+```
+
+两种导入方式的工作原理完全相同。在为非 React 框架构建，或希望避免引入 React 依赖时，请使用 `@heroui/styles`。
+
+## 多态样式
+
+使用变体函数或 BEM 类，将 HeroUI 样式应用到任何元素上。可以把组件样式扩展到框架组件、原生 HTML 元素或自定义组件，并保持完整的类型安全。
+
+**示例：将 Link 设置为按钮样式**
+
+你可以使用 `buttonVariants` 为 Link 组件应用按钮样式：
+
+```tsx
+import { buttonVariants } from '@heroui/styles';
+import Link from 'next/link';
+
+// Style a Next.js Link as a primary button
+<Link
+  className={buttonVariants({ variant: "primary" })}
+  href="/about"
+>
+  About
+</Link>
+
+// Style a native anchor as a secondary button with custom size
+<a
+  className={buttonVariants({ variant: "secondary", size: "lg" })}
+  href="https://example.com"
+>
+  External Link
+</a>
+```
+
+**直接使用 BEM 类：**
+
+```tsx
+import Link from 'next/link';
+
+// Apply button styles directly using BEM classes
+<Link className="button button--primary" href="/about">
+  About
+</Link>
+```
+
+**配合复合组件使用**
+
+当使用自定义根元素而非 HeroUI 的 Root 组件时，子组件无法访问 context slot。你可以使用变体函数或 BEM 类，手动将 `className` 传递给子组件：
+
+```tsx
+import { Link } from '@heroui/react';
+import { linkVariants } from '@heroui/styles';
+import NextLink from 'next/link';
+
+// With custom root - pass className manually
+const slots = linkVariants();
+
+<NextLink className={slots.base()} href="/about">
+  About Page
+  <Link.Icon className={slots.icon()} />
+</NextLink>
+
+<NextLink className="link" href="/about">
+  About Page
+  <Link.Icon className="link__icon" />
+</NextLink>
+```
+
+这种方法之所以可行，是因为 HeroUI 的变体函数和 BEM 类可以应用到任何元素上，让你能够灵活地用 HeroUI 的设计系统为框架组件、原生元素或自定义组件设置样式。
+
+## 直接应用类名
+
+为链接或其他元素设置样式最简单的方法，就是直接使用 HeroUI 的 [BEM](https://getbem.com/) 类。这种方法简单直接，适用于任何框架或纯 HTML。
+
+**配合 Next.js Link 使用：**
+```tsx
+import Link from 'next/link';
+
+<Link className="button button--tertiary" href="/">
+  Return Home
+</Link>
+```
+
+**配合原生 anchor 使用：**
+```tsx
+<a className="button button--primary" href="/dashboard">
+  Go to Dashboard
+</a>
+```
+
+**可用的按钮类名：**
+- `.button` — 基础按钮样式
+- `.button--primary`、`.button--secondary`、`.button--tertiary`、`.button--danger`、`.button--ghost` — 变体
+- `.button--sm`、`.button--md`、`.button--lg` — 尺寸
+- `.button--icon-only` — 仅图标按钮
+
+这种方法之所以可行，是因为 HeroUI 使用了 [BEM](https://getbem.com/) 类，可以应用到任何元素上。当你不需要组件的交互功能（例如 `onPress` 事件处理器）、只想要视觉样式时，这种方式非常合适。
+
+## 使用变体函数
+
+如需更多控制和类型安全，可以使用变体函数将 HeroUI 样式应用到特定框架的组件或自定义元素上。`@heroui/styles`（与框架无关）和 `@heroui/react`（重新导出）都提供了变体函数。
+
+**配合 Next.js Link 使用：**
+
+```tsx
+import { Link } from '@heroui/react';
+import { linkVariants } from '@heroui/styles';
+import NextLink from 'next/link';
+
+const slots = linkVariants();
+
+<NextLink className={slots.base()} href="/about">
+  About Page
+  <Link.Icon className={slots.icon()} />
+</NextLink>
+```
+
+**配合 Button 样式：**
+
+```tsx
+import { buttonVariants } from '@heroui/styles';
+import Link from 'next/link';
+
+<Link
+  className={buttonVariants({ variant: "primary", size: "md" })}
+  href="/dashboard"
+>
+  Dashboard
+</Link>
+```
+
+**可用的变体函数：** 每个组件都从 `@heroui/styles` 导出其变体函数（`buttonVariants`、`chipVariants`、`linkVariants`、`spinnerVariants` 等）。使用它们可以在保持类型安全的同时，将 HeroUI 的设计系统应用到任何元素上。
+
+## 复合组件
+
+HeroUI 组件以复合组件的方式构建 —— 它们会导出多个协同工作的子部件。你可以通过三种灵活的方式来使用它们：
+
+**选项 1：复合模式（推荐）** — 直接使用主组件，无需 `.Root` 后缀：
+
+```tsx
+import { Alert } from '@heroui/react';
+
+<Alert>
+  <Alert.Icon />
+  <Alert.Content>
+    <Alert.Title>Success</Alert.Title>
+    <Alert.Description>Your changes have been saved.</Alert.Description>
+  </Alert.Content>
+  <Alert.Close />
+</Alert>
+```
+
+**选项 2：使用 .Root 的复合模式** — 如果你喜欢显式命名，可以添加 `.Root` 后缀：
+
+```tsx
+import { Alert } from '@heroui/react';
+
+<Alert.Root>
+  <Alert.Icon />
+  <Alert.Content>
+    <Alert.Title>Success</Alert.Title>
+    <Alert.Description>Your changes have been saved.</Alert.Description>
+  </Alert.Content>
+  <Alert.Close />
+</Alert.Root>
+```
+
+**选项 3：命名导出** — 单独导入每个部分：
+
+```tsx
+import {
+  AlertRoot,
+  AlertIcon,
+  AlertContent,
+  AlertTitle,
+  AlertDescription,
+  AlertClose
+} from '@heroui/react';
+
+<AlertRoot>
+  <AlertIcon />
+  <AlertContent>
+    <AlertTitle>Success</AlertTitle>
+    <AlertDescription>Your changes have been saved.</AlertDescription>
+  </AlertContent>
+  <AlertClose />
+</AlertRoot>
+```
+
+**混合语法：** 在同一组件中混合复合和命名导出：
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from '@heroui/react';
+
+<Alert>
+  <Alert.Icon />
+  <Alert.Content>
+    <AlertTitle>Success</AlertTitle>
+    <AlertDescription>Your changes have been saved.</AlertDescription>
+  </Alert.Content>
+  <Alert.Close />
+</Alert>
+```
+
+**简单组件：** 像 `Button` 这样的简单组件以同样的方式工作 —— 无需 `.Root`：
+
+```tsx
+import { Button } from '@heroui/react';
+
+// Recommended - no .Root needed
+<Button>Click me</Button>
+
+// Or with .Root
+<Button.Root>Click me</Button.Root>
+
+// Or named export
+import { ButtonRoot } from '@heroui/react';
+<ButtonRoot>Click me</ButtonRoot>
+```
+
+**优点：** 这三种模式都能提供灵活性、可定制性、可控性和一致性。选择最适合你代码库的那一种即可。
+
+## 混合使用变体函数
+
+你可以组合来自不同组件的变体函数，以创建独特的样式：
+
+```tsx
+import { Link } from '@heroui/react';
+import { linkVariants, buttonVariants } from '@heroui/styles';
+
+// Link styled with button variants
+const buttonStyles = buttonVariants({ variant: "tertiary", size: "md" });
+
+<Link
+  className={buttonStyles}
+  href="https://heroui.com"
+>
+  HeroUI
+</Link>
+```
+
+## 自定义组件
+
+通过组合 HeroUI 原语，创建你自己的组件：
+
+```tsx
+import { Button, Tooltip } from '@heroui/react';
+import { buttonVariants } from '@heroui/styles';
+
+// Link button component using variant functions
+function LinkButton({ href, children, variant = "primary", ...props }) {
+  return (
+    <a
+      href={href}
+      className={buttonVariants({ variant, ...props })}
+      {...props}
+    >
+      {children}
+    </a>
+  );
+}
+
+// Icon button with tooltip
+function IconButton({ icon, label, ...props }) {
+  return (
+    <Tooltip>
+      <Tooltip.Trigger>
+        <Button isIconOnly {...props}>
+          <Icon icon={icon} />
+        </Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>{label}</Tooltip.Content>
+    </Tooltip>
+  );
+}
+```
+
+## 自定义变体
+
+通过扩展组件的变体函数来创建自定义变体：
+
+```tsx
+import type { ButtonRootProps } from "@heroui/react";
+import type { VariantProps } from "tailwind-variants";
+
+import { Button } from "@heroui/react";
+import { buttonVariants, tv } from "@heroui/styles";
+
+const myButtonVariants = tv({
+  extend: buttonVariants,
+  base: "text-md text-shadow-lg font-semibold shadow-md data-[pending=true]:opacity-40",
+  variants: {
+    radius: {
+      lg: "rounded-lg",
+      md: "rounded-md",
+      sm: "rounded-sm",
+      full: "rounded-full",
+    },
+    size: {
+      sm: "h-10 px-4",
+      md: "h-11 px-6",
+      lg: "h-12 px-8",
+      xl: "h-13 px-10",
+    },
+    variant: {
+      primary: "text-white dark:bg-white/10 dark:text-white dark:hover:bg-white/15",
+    },
+  },
+  defaultVariants: {
+    radius: "full",
+    variant: "primary",
+  },
+});
+
+type MyButtonVariants = VariantProps<typeof myButtonVariants>;
+export type MyButtonProps = Omit<ButtonRootProps, "className"> &
+  MyButtonVariants & { className?: string };
+
+function CustomButton({ className, radius, variant, ...props }: MyButtonProps) {
+  return <Button className={myButtonVariants({ className, radius, variant })} {...props} />;
+}
+
+export function CustomVariants() {
+  return <CustomButton>Custom Button</CustomButton>;
+}
+```
+
+**类型引用：** 在使用组件类型时，可以使用命名类型导入或对象样式语法。
+
+**推荐 — 命名类型导入：**
+```tsx
+import type { ButtonRootProps, AvatarRootProps } from "@heroui/react";
+
+type MyButtonProps = ButtonRootProps;
+type MyAvatarProps = AvatarRootProps;
+```
+
+**替代方案 — 对象样式语法：**
+```tsx
+import { Button, Avatar } from "@heroui/react";
+
+type MyButtonProps = Button["RootProps"];
+type MyAvatarProps = Avatar["RootProps"];
+```
+
+**注意：** 不再支持 `Button.RootProps` 这种命名空间语法。请使用 `Button["RootProps"]` 或命名导入。
+
+## 自定义 DOM 元素
+
+在以下组件上使用 `render` prop，可以渲染自定义组件来代替默认的 DOM 元素。
+
+例如，你可以渲染一个 [Motion](https://motion.dev/) 按钮，并利用其状态来驱动动画。
+
+```tsx
+import {Button} from '@heroui/react';
+import {motion} from 'motion/react';
+
+<Button
+  render={(domProps, {isPressed}) => (
+    <motion.button
+      {...domProps}
+      animate={{scale: isPressed ? 0.9 : 1}} />
+  )}>
+  Press me
+</Button>
+```
+
+`render` prop 对于从客户端路由库渲染链接组件，或复用已有的展示型组件也很有用。
+
+```tsx
+import {Link} from '@heroui/react';
+import NextLink from 'next/link';
+
+<Link
+  render={({ref, ...domProps}) => (
+    <NextLink {...domProps} ref={ref as React.Ref<HTMLAnchorElement>} href="/privacy-policy" />
+  )}
+>
+  Privacy Policy
+</Link>
+```
+
+请遵循以下规则，以免破坏组件的行为和无障碍能力：
+- 始终渲染期望的元素类型（例如，如果期望的是 `<button>`，就不要渲染 `<a>`）。如果检测到不匹配，开发期间你会看到警告。
+- 只渲染单个根 DOM 元素（不要使用 fragment）。
+- 始终将传入的 props 传递给底层 DOM 元素，并根据需要通过 `mergeProps` 与你自己的 props 合并。
+
+
+## 框架集成
+
+**配合 Next.js 使用：**
+
+使用变体函数获得类型安全的样式：
+```tsx
+import { buttonVariants } from '@heroui/styles';
+import Link from 'next/link';
+
+<Link
+  className={buttonVariants({ variant: "primary" })}
+  href="/dashboard"
+>
+  Dashboard
+</Link>
+```
+
+或者直接应用 BEM 类（最简单）：
+```tsx
+import Link from 'next/link';
+
+<Link className="button button--primary" href="/dashboard">
+  Dashboard
+</Link>
+```
+
+**配合 React Router 使用：**
+
+使用变体函数：
+```tsx
+import { buttonVariants } from '@heroui/styles';
+import { Link } from 'react-router-dom';
+
+<Link
+  className={buttonVariants({ variant: "primary" })}
+  to="/dashboard"
+>
+  Dashboard
+</Link>
+```
+
+或者直接应用 BEM 类（最简单）：
+```tsx
+import { Link } from 'react-router-dom';
+
+<Link className="button button--primary" to="/dashboard">
+  Dashboard
+</Link>
+```
+
+**配合 Vue、Svelte 或其他框架使用：**
+
+由于 `@heroui/styles` 没有 React 依赖，你可以直接在任何框架中使用它：
+```vue
+<script setup>
+import { buttonVariants } from '@heroui/styles';
+
+const primaryButton = buttonVariants({ variant: "primary" });
+</script>
+
+<template>
+  <button :class="primaryButton">Click me</button>
+</template>
+```
+
+
+## 下一步
+
+- 了解组件的 [样式](/docs/handbook/styling)
+- 探索 [动画](/docs/handbook/animation) 选项
+- 浏览 [组件](/docs/react/components) 获取更多示例

@@ -1,0 +1,226 @@
+---
+title: Input 输入框
+description: 单行文本输入，带样式边框与背景，用于收集用户输入。
+links:
+  source_native: input/input.tsx
+  styles_native: input/input.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/input-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Input } from 'heroui-native';
+```
+
+## 用法
+
+### 基础用法
+
+`Input` 可单独使用，也可放在 `TextField` 内。
+
+```tsx
+import { Input } from 'heroui-native';
+
+<Input placeholder="请输入邮箱" />;
+```
+
+### 与 TextField 组合
+
+与 `TextField` 搭配形成完整表单结构。
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>邮箱</Label>
+  <Input placeholder="请输入邮箱" />
+</TextField>;
+```
+
+### 校验状态
+
+非法时展示错误样式。
+
+```tsx
+import { FieldError, Input, Label, TextField } from 'heroui-native';
+
+<TextField isRequired isInvalid={true}>
+  <Label>邮箱</Label>
+  <Input placeholder="请输入邮箱" />
+  <FieldError>请输入有效邮箱</FieldError>
+</TextField>;
+```
+
+### 局部覆盖非法状态
+
+在输入上覆盖上下文中的非法状态。
+
+```tsx
+import { FieldError, Input, Label, TextField } from 'heroui-native';
+
+<TextField isInvalid={true}>
+  <Label isInvalid={false}>邮箱</Label>
+  <Input placeholder="请输入邮箱" isInvalid={false} />
+  <FieldError>邮箱格式不正确</FieldError>
+</TextField>;
+```
+
+### 禁用状态
+
+禁用输入，阻止交互。
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField isDisabled>
+  <Label>禁用字段</Label>
+  <Input placeholder="不可编辑" value="只读内容" />
+</TextField>;
+```
+
+### 变体
+
+按场景使用不同视觉变体。
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>主要变体</Label>
+  <Input placeholder="主要样式" variant="primary" />
+</TextField>
+
+<TextField>
+  <Label>次要变体</Label>
+  <Input placeholder="次要样式" variant="secondary" />
+</TextField>
+```
+
+### 自定义样式
+
+通过 `className` 自定义外观。
+
+```tsx
+import { Input, Label, TextField } from 'heroui-native';
+
+<TextField>
+  <Label>自定义样式</Label>
+  <Input
+    placeholder="自定义颜色"
+    className="bg-blue-50 border-blue-500 focus:border-blue-700"
+  />
+</TextField>;
+```
+
+### 在 Bottom Sheet 内
+
+在 `BottomSheet` 中渲染 `Input` 时，使用 `useBottomSheetAwareHandlers` 连接键盘避让：将返回的 `onFocus`、`onBlur` 传给 `Input`。
+
+```tsx
+import { Input, TextField, useBottomSheetAwareHandlers } from 'heroui-native';
+
+const BottomSheetTextInput = () => {
+  const { onFocus, onBlur } = useBottomSheetAwareHandlers();
+
+  return (
+    <TextField>
+      <Input
+        placeholder="在此输入…"
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
+    </TextField>
+  );
+};
+```
+
+## 示例
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { Description, Input, Label, TextField } from 'heroui-native';
+import { useState } from 'react';
+import { Pressable, View } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export const TextInputContent = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  return (
+    <View className="gap-4">
+      <TextField isRequired>
+        <Label>邮箱</Label>
+        <Input
+          placeholder="请输入邮箱"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Description>
+          我们不会向他人公开您的邮箱。
+        </Description>
+      </TextField>
+
+      <TextField isRequired>
+        <Label>新密码</Label>
+        <View className="w-full flex-row items-center">
+          <Input
+            value={password}
+            onChangeText={setPassword}
+            className="flex-1 px-10"
+            placeholder="请输入密码"
+            secureTextEntry={!isPasswordVisible}
+          />
+          <StyledIonicons
+            name="lock-closed-outline"
+            size={16}
+            className="absolute left-3.5 text-muted"
+            pointerEvents="none"
+          />
+          <Pressable
+            className="absolute right-4"
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+          >
+            <StyledIonicons
+              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+              size={16}
+              className="text-muted"
+            />
+          </Pressable>
+        </View>
+        <Description>密码至少 6 位</Description>
+      </TextField>
+    </View>
+  );
+};
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/input.tsx)。
+
+## API 参考
+
+### Input
+
+| prop                      | type                       | default               | description                                                  |
+| ------------------------- | -------------------------- | --------------------- | ------------------------------------------------------------ |
+| isInvalid                 | `boolean`                  | `undefined`           | 是否非法（可覆盖上下文）                                     |
+| variant                   | `'primary' \| 'secondary'` | `'primary'`           | 输入框视觉变体                                               |
+| className                 | `string`                   | -                     | 自定义 class                                                 |
+| selectionColorClassName   | `string`                   | `"accent-accent"`     | 选中文本颜色的 class                                         |
+| placeholderColorClassName | `string`                   | `"field-placeholder"` | 占位符文字颜色的 class                                       |
+| isBottomSheetAware        | `boolean`                  | `true`                | 在 BottomSheet 内是否自动处理键盘相关逻辑；设为 `false` 可关闭 |
+| animation                 | `AnimationRoot`            | `undefined`           | 输入框动画配置                                               |
+| ...TextInputProps         | `TextInputProps`           | -                     | 支持 React Native `TextInput` 的全部属性                     |
+
+> **说明**：置于 `TextField` 内时，`Input` 会通过 form-item-state 上下文自动消费 `isDisabled`、`isInvalid` 等表单状态。

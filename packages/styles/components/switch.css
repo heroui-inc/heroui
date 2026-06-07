@@ -1,6 +1,6 @@
 /* Switch base styles */
 .switch {
-  @apply inline-flex items-center gap-3 no-highlight;
+  @apply flex flex-col items-start gap-1 no-highlight;
 
   /* Cursor */
   cursor: var(--cursor-interactive);
@@ -13,14 +13,42 @@
   --switch-control-bg-checked-hover: var(--accent-hover);
 
   /* Disabled state */
-  &:disabled,
-  &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[data-disabled="true"] {
     @apply status-disabled;
+
+    [data-slot="description"],
+    [data-slot="field-error"] {
+      @apply status-disabled;
+    }
 
     .switch__thumb {
       @apply bg-default-foreground/20;
     }
+  }
+
+  /* Field-level help text below the control + label row */
+  & > [data-slot="description"] {
+    @apply w-full min-w-0 ps-[calc(2.5rem+0.75rem)];
+  }
+
+  & > [data-slot="field-error"] {
+    @apply w-full min-w-0 ps-[calc(2.5rem+0.75rem)] text-xs text-muted;
+  }
+
+  &.switch--sm > [data-slot="description"] {
+    @apply ps-[calc(2rem+0.75rem)];
+  }
+
+  &.switch--sm > [data-slot="field-error"] {
+    @apply ps-[calc(2rem+0.75rem)];
+  }
+
+  &.switch--lg > [data-slot="description"] {
+    @apply ps-[calc(3rem+0.75rem)];
+  }
+
+  &.switch--lg > [data-slot="field-error"] {
+    @apply ps-[calc(3rem+0.75rem)];
   }
 
   /* Disabled + Selected state */
@@ -69,19 +97,22 @@
 
   /* Focus states */
   .switch:focus-visible &,
-  .switch[data-focus-visible="true"] & {
+  .switch:has([data-slot="switch-content"][data-focus-visible="true"]) &,
+  .switch [data-slot="switch-content"][data-focus-visible="true"] & {
     @apply status-focused;
   }
 
   /* Hover states */
   .switch:hover &,
-  .switch[data-hovered="true"] & {
+  .switch:has([data-slot="switch-content"][data-hovered="true"]) &,
+  .switch [data-slot="switch-content"][data-hovered="true"] & {
     background-color: var(--switch-control-bg-hover);
   }
 
   /* Pressed states */
   .switch:active &,
-  .switch[data-pressed="true"] & {
+  .switch:has([data-slot="switch-content"][data-pressed="true"]) &,
+  .switch [data-slot="switch-content"][data-pressed="true"] & {
     background-color: var(--switch-control-bg-pressed);
     @apply motion-reduce:transform-none;
   }
@@ -96,7 +127,8 @@
   .switch[aria-checked="true"]:hover &,
   .switch[data-selected="true"]:hover &,
   .switch[aria-checked="true"][data-hovered="true"] &,
-  .switch[data-selected="true"][data-hovered="true"] & {
+  .switch[data-selected="true"][data-hovered="true"] &,
+  .switch:has([data-slot="switch-content"][data-hovered="true"])[data-selected="true"] & {
     background-color: var(--switch-control-bg-checked-hover);
   }
 
@@ -104,9 +136,15 @@
   .switch[aria-checked="true"]:active &,
   .switch[data-selected="true"]:active &,
   .switch[aria-checked="true"][data-pressed="true"] &,
-  .switch[data-selected="true"][data-pressed="true"] & {
+  .switch[data-selected="true"][data-pressed="true"] &,
+  .switch:has([data-slot="switch-content"][data-pressed="true"])[data-selected="true"] & {
     background-color: var(--switch-control-bg-checked-hover);
   }
+}
+
+/* Switch content — the clickable label (control + label text) */
+.switch__content {
+  @apply inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
 }
 
 /* Size-specific control dimensions */
@@ -191,7 +229,14 @@
   @apply text-base font-medium text-foreground;
 }
 
-/* Switch content */
-.switch__content {
-  @apply flex flex-col gap-0;
+.switch [data-slot="label"] {
+  @apply select-none;
+}
+
+.switch__content [data-slot="label"] {
+  cursor: var(--cursor-interactive);
+}
+
+.switch [data-slot="description"] {
+  @apply cursor-default select-none;
 }

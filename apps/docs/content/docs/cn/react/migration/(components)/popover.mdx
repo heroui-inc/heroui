@@ -1,0 +1,279 @@
+---
+title: Popover
+description: Popover 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Popover 文档](/docs/react/components/popover)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Popover 由独立的多个组件组成：
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Popover placement="right">
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+在 v3 中，Popover 改为复合组件：
+
+```tsx
+import { Popover, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content>
+        <Popover.Dialog>
+          <Popover.Heading>Title</Popover.Heading>
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 独立的多个组件（`Popover`、`PopoverTrigger`、`PopoverContent`）  
+**v3：** 复合组件（`Popover`、`Popover.Trigger`、`Popover.Content`、`Popover.Dialog`、`Popover.Heading`、`Popover.Arrow`）
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `placement` | `placement`（在 Content 上） | 移至 `Popover.Content` |
+| `offset` | `offset`（在 Content 上） | 移至 `Popover.Content` |
+| `shouldFlip` | `shouldFlip`（在 Content 上） | 移至 `Popover.Content` |
+| `isOpen` / `defaultOpen` / `onOpenChange` | 同名（在根上） | 受控状态仍保留在根 `Popover` 上 |
+| `showArrow` | — | 改用 `Popover.Arrow` 子组件 |
+| `size` | — | 已移除（请改用 Tailwind CSS） |
+| `color` | — | 已移除（请改用 Tailwind CSS） |
+| `radius` | — | 已移除（请改用 Tailwind CSS） |
+| `shadow` | — | 已移除（请改用 Tailwind CSS） |
+| `backdrop` | — | 已移除 |
+| `motionProps` | — | 已移除（动画机制已不同） |
+| `classNames` | — | 改在各子组件上使用 `className` |
+| `onClose` | — | 改用 `onOpenChange((open) => { if (!open) { ... } })` |
+
+## 迁移示例
+
+### 内容配置
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With arrow */}
+    <Popover showArrow>
+      <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+      <PopoverContent><div>Content</div></PopoverContent>
+    </Popover>
+    
+    {/* With placement */}
+    <Popover placement="top">
+      <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+      <PopoverContent><div>Content</div></PopoverContent>
+    </Popover>
+    
+    {/* With offset */}
+    <Popover offset={10}>
+      <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+      <PopoverContent><div>Content</div></PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* With arrow - use component */}
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content>
+        <Popover.Dialog>
+          <Popover.Arrow />
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    
+    {/* With placement - moved to Content */}
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content placement="top">
+        <Popover.Dialog>
+          <Popover.Arrow />
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    
+    {/* With offset - moved to Content */}
+    <Popover>
+      <Button>Open</Button>
+      <Popover.Content offset={10}>
+        <Popover.Dialog>
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+### 带标题
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <PopoverContent>
+      <div className="px-1 py-2">
+        <div className="text-small font-bold">Title</div>
+        <div className="text-tiny">Content</div>
+      </div>
+    </PopoverContent>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover.Content>
+      <Popover.Dialog>
+        <Popover.Heading>Title</Popover.Heading>
+        <p className="text-muted mt-2 text-sm">Content</p>
+      </Popover.Dialog>
+    </Popover.Content>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+      <PopoverTrigger>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div>Content</div>
+      </PopoverContent>
+    </Popover>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Button>Open</Button>
+      <Popover.Content>
+        <Popover.Dialog>
+          <div>Content</div>
+        </Popover.Dialog>
+      </Popover.Content>
+    </Popover>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义触发器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <PopoverTrigger>
+      <CustomButton>Custom</CustomButton>
+    </PopoverTrigger>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Popover.Trigger>
+      <CustomButton>Custom</CustomButton>
+    </Popover.Trigger>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件结构
+
+v3 Popover 遵循以下结构：
+
+```
+Popover (Root)
+  ├── Popover.Trigger (optional, or use Button directly)
+  └── Popover.Content
+      └── Popover.Dialog
+          ├── Popover.Arrow (optional)
+          ├── Popover.Heading (optional)
+          └── Content
+```
+
+## v3 中的新功能
+
+### Popover.Arrow 组件
+
+在 v2 中，箭头通过根 `Popover` 上的 `showArrow` 布尔 prop 控制。在 v3 中，`Popover.Arrow` 是一个放置在 `Popover.Content` 内部的专用组件，让你可以完全控制其渲染：
+
+```tsx
+<Popover>
+  <Button>Open</Button>
+  <Popover.Content>
+    <Popover.Arrow className="custom-arrow" />
+    <Popover.Dialog>
+      <div>Content</div>
+    </Popover.Dialog>
+  </Popover.Content>
+</Popover>
+```
+
+`Popover.Arrow` 也接受 `render` prop，可完全自定义箭头的渲染。
+
+### 受控打开状态
+
+受控的打开状态仍保留在根 `Popover` 组件上，prop 名称与 v2 一致：
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ---- | ---- | ------ | ---- |
+| `isOpen` | `boolean` | - | 控制 Popover 的可见性（受控） |
+| `defaultOpen` | `boolean` | `false` | 初始打开状态（非受控） |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | 打开状态变化时触发 |
+
+### 自定义渲染函数
+
+`Popover.Content` 与 `Popover.Arrow` 都支持 `render` prop，让你可以在高级场景下用自定义渲染函数覆盖默认 DOM 元素。
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Popover.Content`、`Popover.Dialog` 等）
+2. **触发器**：可以使用 `Popover.Trigger`，或直接将 Button 作为子节点
+3. **内容包装**：内容必须放在 `Popover.Dialog` 中
+4. **箭头**：移除 `showArrow` prop——改用 `Popover.Arrow` 子组件
+5. **标题**：改用 `Popover.Heading` 组件
+6. **prop 移动位置**：`placement`、`offset`、`shouldFlip` 移到 `Popover.Content` 上
+7. **移除样式 prop**：`size`、`color`、`radius`、`shadow` —— 请改用 Tailwind CSS
+8. **移除 backdrop**：`backdrop` prop 已移除
+9. **移除 motion**：`motionProps` 已移除，动画机制已不同
+10. **移除 classNames**：改在各子组件上使用 `className` prop

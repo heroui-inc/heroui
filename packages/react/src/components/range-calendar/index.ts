@@ -97,13 +97,8 @@ export type {
 /* -------------------------------------------------------------------------------------------------
 | * YearPickerContext (re-exported from calendar-year-picker for convenience)
 | * -----------------------------------------------------------------------------------------------*/
-export {
-  YearPickerContext,
-  YearPickerStateContext,
-  useYearPicker,
-  useYearPickerState,
-} from "../calendar-year-picker";
-export type {YearPickerContextValue, YearPickerStateContextValue} from "../calendar-year-picker";
+export {YearPickerContext, useYearPicker, useCalendarOrRangeState} from "../calendar-year-picker";
+export type {YearPickerContextValue} from "../calendar-year-picker";
 
 /* -------------------------------------------------------------------------------------------------
 | * Variants

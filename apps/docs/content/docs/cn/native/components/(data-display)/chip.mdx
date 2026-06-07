@@ -1,0 +1,201 @@
+---
+title: Chip 标签
+description: 以胶囊形态展示的小型元素。
+icon: updated
+links:
+  source_native: chip/chip.tsx
+  styles_native: chip/chip.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/chip-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/chip-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Chip } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Chip>
+  <Chip.Label>...</Chip.Label>
+</Chip>
+```
+
+- **Chip**：主容器，展示紧凑元素
+- **Chip.Label**：芯片上的文字内容
+
+## 用法
+
+### 基础用法
+
+Chip 以胶囊形态展示文字或自定义内容。
+
+```tsx
+<Chip>基础芯片</Chip>
+```
+
+### 尺寸
+
+使用 `size` 控制尺寸。
+
+```tsx
+<Chip size="sm">小</Chip>
+<Chip size="md">中</Chip>
+<Chip size="lg">大</Chip>
+```
+
+### 变体
+
+使用 `variant` 切换视觉风格。
+
+```tsx
+<Chip variant="primary">主要</Chip>
+<Chip variant="secondary">次要</Chip>
+<Chip variant="tertiary">第三级</Chip>
+<Chip variant="soft">柔和</Chip>
+```
+
+### 颜色
+
+使用 `color` 应用不同主题色。
+
+```tsx
+<Chip color="accent">强调</Chip>
+<Chip color="default">默认</Chip>
+<Chip color="success">成功</Chip>
+<Chip color="warning">警告</Chip>
+<Chip color="danger">危险</Chip>
+```
+
+### 搭配图标
+
+通过复合组件在文字旁添加图标或自定义内容。
+
+```tsx
+<Chip>
+  <Icon name="star" size={12} />
+  <Chip.Label>精选</Chip.Label>
+</Chip>
+
+<Chip>
+  <Chip.Label>关闭</Chip.Label>
+  <Icon name="close" size={12} />
+</Chip>
+```
+
+### 自定义样式
+
+通过 `className` 或 `style` 传入样式。
+
+```tsx
+<Chip className="bg-purple-600 px-6">
+  <Chip.Label className="text-white">自定义</Chip.Label>
+</Chip>
+```
+
+### 禁用全部动画
+
+将 `animation` 设为 `"disable-all"` 可禁用自身及子级的全部动画。
+
+```tsx
+{
+  /* 禁用自身及子级的全部动画 */
+}
+<Chip animation="disable-all">无动画</Chip>;
+```
+
+## 示例
+
+```tsx
+import { Chip } from 'heroui-native';
+import { View, Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+export default function ChipExample() {
+  return (
+    <View className="gap-4 p-4">
+      <View className="flex-row flex-wrap gap-2">
+        <Chip size="sm">小</Chip>
+        <Chip size="md">中</Chip>
+        <Chip size="lg">大</Chip>
+      </View>
+
+      <View className="flex-row flex-wrap gap-2">
+        <Chip variant="primary" color="accent">
+          主要
+        </Chip>
+        <Chip variant="secondary" color="success">
+          <View className="size-1.5 rounded-full bg-success" />
+          <Chip.Label>成功</Chip.Label>
+        </Chip>
+        <Chip variant="tertiary" color="warning">
+          <Ionicons name="star" size={12} color="#F59E0B" />
+          <Chip.Label>高级</Chip.Label>
+        </Chip>
+      </View>
+
+      <View className="flex-row gap-2">
+        <Chip variant="secondary">
+          <Chip.Label>移除</Chip.Label>
+          <Ionicons name="close" size={14} color="#6B7280" />
+        </Chip>
+        <Chip className="bg-purple-600">
+          <Chip.Label className="text-white font-semibold">自定义</Chip.Label>
+        </Chip>
+      </View>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/chip.tsx)。
+
+## API 参考
+
+### Chip
+
+| prop                | type                                                          | default     | description                                                                               |
+| ------------------- | ------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `children`          | `React.ReactNode`                                             | -           | 芯片内要渲染的内容                                                                       |
+| `size`              | `'sm' \| 'md' \| 'lg'`                                        | `'md'`      | 芯片尺寸                                                                                 |
+| `variant`           | `'primary' \| 'secondary' \| 'tertiary' \| 'soft'`            | `'primary'` | 视觉变体                                                                                 |
+| `color`             | `'accent' \| 'default' \| 'success' \| 'warning' \| 'danger'` | `'accent'`  | 颜色主题                                                                                 |
+| `className`         | `string`                                                      | -           | 额外的 class                                                                             |
+| `animation`         | `"disable-all" \| undefined`                                  | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级的全部动画                                     |
+| `...PressableProps` | `PressableProps`                                              | -           | 支持 `Pressable` 的全部属性                                                              |
+
+### Chip.Label
+
+| prop           | type              | default | description                            |
+| -------------- | ----------------- | ------- | -------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 作为标签渲染的文字或内容               |
+| `className`    | `string`          | -       | 额外的 class                           |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部属性    |
+
+## Hooks
+
+### useChip
+
+访问 Chip 上下文，返回尺寸、变体与颜色。
+
+```tsx
+import { useChip } from 'heroui-native';
+
+const { size, variant, color } = useChip();
+```
+
+#### 返回值
+
+| property  | type                                                          | description |
+| --------- | ------------------------------------------------------------- | ----------- |
+| `size`    | `'sm' \| 'md' \| 'lg'`                                        | 芯片尺寸    |
+| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'soft'`            | 视觉变体    |
+| `color`   | `'accent' \| 'default' \| 'success' \| 'warning' \| 'danger'` | 颜色主题    |
+
+**说明：** 必须在 `Chip` 内使用；在上下文外调用将抛出错误。

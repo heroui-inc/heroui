@@ -1,0 +1,26 @@
+{
+  "title": "快速开始",
+  "description": "快速开始使用 HeroUI Native",
+  "root": true,
+  "icon": "book-open",
+  "pages": [
+    "---概述---",
+    "index",
+    "(overview)/quick-start",
+    "(overview)/design-principles",
+    "[route][路线图](https://herouinative.featurebase.app/roadmap)",
+    "---手册---",
+    "(handbook)/provider",
+    "(handbook)/portal",
+    "(handbook)/colors",
+    "(handbook)/theming",
+    "(handbook)/styling",
+    "(handbook)/animation",
+    "(handbook)/composition",
+    "---代理用户界面---",
+    "(ui-for-agents)/llms-txt",
+    "(ui-for-agents)/mcp-server",
+    "(ui-for-agents)/agent-skills",
+    "(ui-for-agents)/agents-md"
+  ]
+}

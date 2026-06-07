@@ -1,0 +1,73 @@
+---
+title: Description 描述
+description: 为表单字段及其他组件提供补充说明文字。
+links:
+  rac: TextField
+  source: description/description.tsx
+  styles: description.css
+---
+
+## 引入
+
+```tsx
+import { Description } from '@heroui/react';
+```
+
+## 用法
+
+<ComponentPreview
+  name="description-basic"
+/>
+
+<RelatedComponents component="description" />
+
+## API 参考
+
+### Description Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
+| `children` | `ReactNode` | - | Description 的内容。 |
+
+## 无障碍
+
+Description 组件通过以下方式增强无障碍：
+
+- 使用语义化 HTML，屏幕阅读器可识别
+- 提供 `slot="description"` 属性以便与 React Aria 集成
+- 支持适宜的文本对比度
+
+## 样式
+
+Description 组件使用以下 CSS 类：
+
+- `.description` - 基础 Description 样式，使用弱化（muted）文本颜色
+
+## 示例
+
+### 与表单字段一起使用
+
+```tsx
+<div className="flex flex-col gap-1">
+  <Label htmlFor="password">Password</Label>
+  <Input id="password" type="password" aria-describedby="password-description" />
+  <Description id="password-description">
+    Must be at least 8 characters with one uppercase letter
+  </Description>
+</div>
+```
+ 
+### 与 TextField 集成
+
+```tsx
+import {TextField, Label, Input, Description} from '@heroui/react';
+
+<TextField type="email">
+  <Label>Email</Label>
+  <Input placeholder="Enter your email" />
+  <Description>We'll never share your email</Description>
+</TextField>
+```
+
+使用 [TextField](./text-field) 组件时，无障碍属性会自动应用到 Label 与 Description 上。

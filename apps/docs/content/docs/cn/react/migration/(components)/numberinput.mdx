@@ -1,0 +1,272 @@
+---
+title: NumberInput
+description: NumberInput → NumberField 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 NumberField 文档](/docs/react/components/numberfield)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，NumberInput 是单个组件，通过 prop 配置：
+
+```tsx
+import { NumberInput } from "@heroui/react";
+
+export default function App() {
+  return <NumberInput label="Amount" defaultValue={1024} />;
+}
+```
+
+在 v3 中，NumberField 改为复合组件：
+
+```tsx
+import { NumberField, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <NumberField defaultValue={1024}>
+      <Label>Amount</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件命名
+
+**v2：** `NumberInput`  
+**v3：** `NumberField`
+
+### 2. 组件结构
+
+**v2：** 单个组件，通过 prop 配置  
+**v3：** 复合组件：`NumberField.Group`、`NumberField.Input`、`NumberField.IncrementButton`、`NumberField.DecrementButton`
+
+### 3. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `onValueChange` | `onChange` | 事件处理函数已重命名 |
+| `label` | — | 改用 `Label` 组件 |
+| `description` | — | 改用 `Description` 组件 |
+| `errorMessage` | — | 改用 `FieldError` 组件 |
+| `variant` | `variant`（在 NumberField 上） | 简化为仅 `primary` \| `secondary` |
+| `color` | — | 已移除（请改用 Tailwind CSS） |
+| `size` | — | 已移除（请改用 Tailwind CSS） |
+| `radius` | — | 已移除（请改用 Tailwind CSS） |
+| `startContent` | — | 手动将内容放入 Group 中 |
+| `endContent` | — | 手动将内容放入 Group 中 |
+| `labelPlacement` | — | 通过布局类自行处理 |
+| `hideStepper` | — | 省略 `NumberField.IncrementButton` 与 `NumberField.DecrementButton` |
+| `isClearable` | — | 请手动实现清除功能 |
+| `classNames` | — | 改在各子组件上使用 `className` prop |
+| `isWheelDisabled` | — | 已移除 |
+
+## 迁移示例
+
+### 表单校验
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With description */}
+    <NumberInput
+      description="Enter the amount"
+      label="Amount"
+    />
+    
+    {/* With error message */}
+    <NumberInput
+      errorMessage="Please enter a valid number"
+      isInvalid
+      label="Amount"
+    />
+    
+    {/* Required */}
+    <NumberInput isRequired label="Quantity" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Description, FieldError, Label } from "@heroui/react";
+
+    {/* With description */}
+    <NumberField>
+      <Label>Amount</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+      <Description>Enter the amount</Description>
+    </NumberField>
+    
+    {/* With error message */}
+    <NumberField isInvalid>
+      <Label>Amount</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+      <FieldError>Please enter a valid number</FieldError>
+    </NumberField>
+    
+    {/* Required */}
+    <NumberField isRequired>
+      <Label>Quantity</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState();
+
+    <NumberInput
+      value={value}
+      onValueChange={setValue}
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [value, setValue] = useState<number | undefined>();
+
+    <NumberField value={value} onChange={setValue}>
+      <Label>Amount</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+    ```
+  </Tab>
+</Tabs>
+
+### 不带步进按钮
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <NumberInput hideStepper label="Amount" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <NumberField>
+      <Label>Amount</Label>
+      <NumberField.Group>
+        <NumberField.Input />
+      </NumberField.Group>
+    </NumberField>
+    ```
+  </Tab>
+</Tabs>
+
+### 数值约束
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Min/Max */}
+    <NumberInput
+      label="Quantity"
+      maxValue={100}
+      minValue={0}
+    />
+    
+    {/* Step */}
+    <NumberInput label="Percentage" step={0.1} />
+    
+    {/* Format options */}
+    <NumberInput
+      formatOptions={{style: "currency", currency: "USD"}}
+      label="Price"
+    />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Min/Max */}
+    <NumberField maxValue={100} minValue={0}>
+      <Label>Quantity</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+    
+    {/* Step */}
+    <NumberField step={0.1}>
+      <Label>Percentage</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+    
+    {/* Format options */}
+    <NumberField formatOptions={{style: "currency", currency: "USD"}}>
+      <Label>Price</Label>
+      <NumberField.Group>
+        <NumberField.DecrementButton />
+        <NumberField.Input />
+        <NumberField.IncrementButton />
+      </NumberField.Group>
+    </NumberField>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件结构
+
+v3 NumberField 遵循以下结构：
+
+```
+NumberField (Root)
+  ├── Label (optional)
+  ├── NumberField.Group
+  │   ├── NumberField.DecrementButton
+  │   ├── NumberField.Input
+  │   └── NumberField.IncrementButton
+  ├── Description (optional)
+  └── FieldError (optional)
+```
+
+## 总结
+
+1. **组件重命名**：`NumberInput` → `NumberField`
+2. **组件结构**：必须使用复合组件（`NumberField.Group`、`NumberField.Input` 等）
+3. **标签 / 描述 / 错误**：改用独立组件（`Label`、`Description`、`FieldError`）
+4. **步进按钮**：必须显式包含 `NumberField.IncrementButton` 与 `NumberField.DecrementButton`
+5. **事件处理函数**：`onValueChange` → `onChange`
+6. **简化变体**：v3 仅支持 `variant="primary"` 与 `variant="secondary"`；`color`、`size`、`radius` 已移除——请改用 Tailwind CSS
+7. **移除 content prop**：`startContent`、`endContent` —— 请手动放置
+8. **移除清除按钮**：`isClearable` 已移除——请自行实现
+9. **步进控件**：`hideStepper` 已移除——通过省略相应按钮实现
+10. **移除 labelPlacement**：`labelPlacement` 已移除——请通过布局自行实现

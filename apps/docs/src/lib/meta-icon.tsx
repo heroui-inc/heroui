@@ -11,9 +11,11 @@ export function createMetaIcon(iconName: string | undefined) {
     iconName === "preview" ||
     iconName === "updated"
   ) {
-    return <StatusChip className="order-last" status={iconName} />;
+    // Stable key based on iconName — fumadocs renders the icon as an array
+    // child (e.g. `[node.icon, node.name]`), so a key is required to silence
+    // React's "unique key" warning while remaining hydration-safe.
+    return <StatusChip key={`status-${iconName}`} className="order-last" status={iconName} />;
   }
 
-  // Remove key prop to avoid hydration mismatch - React will handle reconciliation automatically
-  return <Iconify icon={iconName} />;
+  return <Iconify key={`icon-${iconName}`} icon={iconName} />;
 }

@@ -1,0 +1,320 @@
+---
+title: Card
+description: Card 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Card 文档](/docs/react/components/card)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Card 使用独立导出的子组件：`CardHeader`、`CardBody`、`CardFooter`。
+
+```tsx
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Card>
+      <CardHeader>Header</CardHeader>
+      <CardBody>Body</CardBody>
+      <CardFooter>Footer</CardFooter>
+    </Card>
+  );
+}
+```
+
+在 v3 中，Card 使用复合组件模式，子部件以 `Card.*` 形式显式组合：
+
+```tsx
+import { Card } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Title</Card.Title>
+        <Card.Description>Description</Card.Description>
+      </Card.Header>
+      <Card.Content>Body content</Card.Content>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+  );
+}
+```
+
+## 关键变化
+
+### 1. 组件结构
+
+**v2：** 独立组件：`CardHeader`、`CardBody`、`CardFooter`  
+**v3：** 复合组件：`Card.Header`、`Card.Title`、`Card.Description`、`Card.Content`、`Card.Footer`
+
+### 2. 组件命名变化
+
+| v2 组件 | v3 组件 | 说明 |
+| --- | --- | --- |
+| `CardHeader` | `Card.Header` | 功能等价 |
+| `CardBody` | `Card.Content` | 已重命名 |
+| `CardFooter` | `Card.Footer` | 功能等价 |
+| — | `Card.Title` | 新增：用于标题区标题 |
+| — | `Card.Description` | 新增：用于标题区描述 |
+
+### 3. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| --- | --- | --- |
+| `shadow` | — | 已移除（例如使用 Tailwind `shadow-sm`、`shadow-md`） |
+| `radius` | — | 已移除（例如使用 Tailwind `rounded-lg`） |
+| `fullWidth` | — | 已移除（例如使用 Tailwind `w-full`） |
+| `isHoverable` | — | 已移除（请使用 Tailwind 的 hover class） |
+| `isPressable` | — | 请在 Card 内使用 `button` 或 `a` 包裹可点击区域 |
+| `isBlurred`、`isFooterBlurred` | — | 已移除（例如使用 Tailwind `backdrop-blur-*`） |
+| `isDisabled` | — | 已移除（请使用条件渲染处理） |
+| `disableAnimation`、`disableRipple` | — | 已移除 |
+| `allowTextSelectionOnPress` | — | 已移除（不再适用） |
+| `classNames` | — | 在各子部件上使用 `className` |
+
+### 4. 变体
+
+**v2：** 无 `variant` prop（主要通过 shadow / radius 控制观感）  
+**v3：** 提供 `variant` prop：`transparent`、`default`、`secondary`、`tertiary`
+
+## 迁移示例
+
+### Card 结构
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Basic structure */}
+    <Card>
+      <CardHeader>Header</CardHeader>
+      <CardBody>Body content</CardBody>
+      <CardFooter>Footer</CardFooter>
+    </Card>
+    
+    {/* With title and description */}
+    <Card>
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <p className="text-tiny uppercase font-bold">Daily Mix</p>
+        <small className="text-default-500">12 Tracks</small>
+        <h4 className="font-bold text-large">Frontend Radio</h4>
+      </CardHeader>
+      <CardBody>Content</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* 基础结构 */}
+    <Card>
+      <Card.Header>
+        <Card.Title>Header</Card.Title>
+      </Card.Header>
+      <Card.Content>Body content</Card.Content>
+      <Card.Footer>Footer</Card.Footer>
+    </Card>
+    
+    {/* 标题 + 描述 */}
+    <Card>
+      <Card.Header>
+        <Card.Title>Frontend Radio</Card.Title>
+        <Card.Description>Daily Mix • 12 Tracks</Card.Description>
+      </Card.Header>
+      <Card.Content>Content</Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### 可点击的 Card
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Card 
+      isPressable 
+      shadow="sm" 
+      onPress={() => console.log("pressed")}
+    >
+      <CardBody>Clickable card</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Card className="shadow-sm">
+      <button
+        type="button"
+        className="w-full cursor-pointer text-left"
+        onClick={() => console.log("pressed")}
+      >
+        <Card.Content>Clickable card</Card.Content>
+      </button>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### 带图片的 Card
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Card className="py-4">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <h4 className="font-bold text-large">Frontend Radio</h4>
+      </CardHeader>
+      <CardBody className="overflow-visible py-2">
+        <Image
+          alt="Card background"
+          className="object-cover rounded-xl"
+          src="https://example.com/image.jpg"
+          width={270}
+        />
+      </CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Card className="py-4">
+      <Card.Header>
+        <Card.Title>Frontend Radio</Card.Title>
+      </Card.Header>
+      <Card.Content className="overflow-visible py-2">
+        <img
+          alt="Card background"
+          className="object-cover rounded-xl w-full"
+          src="https://example.com/image.jpg"
+        />
+      </Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### 页脚背景模糊（Blurred Footer）
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Card, CardFooter, Image, Button } from "@heroui/react";
+
+    <Card isFooterBlurred className="border-none" radius="lg">
+      <Image
+        alt="Woman listing to music"
+        className="object-cover"
+        height={200}
+        src="https://example.com/image.jpg"
+        width={200}
+      />
+      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+        <p className="text-tiny text-white/80">Available soon.</p>
+        <Button className="text-tiny text-white bg-black/20" size="sm">
+          Notify me
+        </Button>
+      </CardFooter>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Card, Button } from "@heroui/react";
+
+    <Card className="border-none rounded-lg relative overflow-hidden">
+      <img
+        alt="Woman listing to music"
+        className="object-cover w-full h-[200px]"
+        src="https://example.com/image.jpg"
+      />
+      <Card.Footer className="justify-between backdrop-blur-md bg-white/10 border-white/20 border overflow-hidden py-1 absolute rounded-lg bottom-1 w-[calc(100%_-_8px)] shadow-sm ml-1 z-10">
+        <p className="text-tiny text-white/80">Available soon.</p>
+        <Button className="text-tiny text-white bg-black/20" size="sm">
+          Notify me
+        </Button>
+      </Card.Footer>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+### Card 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 doesn't have variants, uses shadow/radius */}
+    <Card shadow="md" radius="lg">
+      <CardBody>Content</CardBody>
+    </Card>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Card variant="default">
+      <Card.Content>Content</Card.Content>
+    </Card>
+    <Card variant="secondary">
+      <Card.Content>Content</Card.Content>
+    </Card>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<Card 
+  classNames={{
+    base: "custom-base",
+    header: "custom-header",
+    body: "custom-body",
+    footer: "custom-footer"
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<Card className="custom-base">
+  <Card.Header className="custom-header">
+    <Card.Title>Title</Card.Title>
+  </Card.Header>
+  <Card.Content className="custom-body">
+    Content
+  </Card.Content>
+  <Card.Footer className="custom-footer">
+    Footer
+  </Card.Footer>
+</Card>
+```
+
+## 组件组成
+
+v3 的 Card 结构如下：
+
+```
+Card (Root)
+  ├── Card.Header (optional)
+  │   ├── Card.Title (optional)
+  │   └── Card.Description (optional)
+  ├── Card.Content (optional)
+  └── Card.Footer (optional)
+```
+
+## 总结
+
+1. **组件结构**：请使用复合组件，而不是 v2 的独立导出子组件。
+2. **`CardBody` → `Card.Content`**：组件已重命名。
+3. **新增子组件**：`Card.Title` 与 `Card.Description`，用于结构化标题区。
+4. **大量样式 prop 已移除**：请改用 Tailwind CSS class。
+5. **可点击 Card**：不要用 `isPressable`，改为在 Card 内使用 `button` 或链接。
+6. **模糊效果**：请使用 Tailwind `backdrop-blur-*` class，而不是相关 prop。
+7. **变体**：新增用于表达语义层级 / 视觉强调度的变体体系。
+8. **`classNames` 已移除**：在各子部件上使用 `className` prop。

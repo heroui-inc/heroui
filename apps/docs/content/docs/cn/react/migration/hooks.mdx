@@ -1,0 +1,282 @@
+---
+title: Hooks
+description: HeroUI Hooks 从 v2 到 v3 的迁移指南
+---
+
+<Callout type="info">
+  完整的 API 参考请参阅 [v3 组件文档](/docs/components-list)。本指南重点介绍如何从 HeroUI v2 迁移 Hooks。
+</Callout>
+
+## 概述
+
+HeroUI v3 移除了 v2 中存在的大多数组件 Hooks，转而使用复合组件，并新增了一个用于管理浮层状态的 Hook。本指南涵盖：
+
+- 组件 Hooks 的移除（`useSwitch`、`useInput`、`useCheckbox` 等）
+- `useDisclosure` → `useOverlayState` 的迁移
+- 迁移策略与示例
+
+## 组件 Hooks 的移除
+
+HeroUI v2 提供了一系列组件 Hooks（例如 `useSwitch`、`useInput`、`useCheckbox` 等），它们返回一组 prop getter（`getBaseProps`、`getWrapperProps`、`getThumbProps` 等），让用户在无法直接修改内部子组件的情况下也能自定义组件结构。HeroUI v3 通过复合组件解决了这个问题，从而无需再依赖这些 Hooks。
+
+### 为什么 v2 中存在这些 Hooks
+
+在 v2 中，组件具有固定的内部结构。为了自定义这些结构，用户需要使用提供 prop getter 的 Hooks。例如，`useSwitch` 返回 `getBaseProps()`、`getWrapperProps()`、`getThumbProps()` 等，用户可以将其展开到自定义元素上，从而构建自己的 Switch 结构。
+
+### v3 的解决方案：复合组件
+
+v3 采用了复合组件模式，让你可以直接访问组件的各个部分。你不再需要使用带有 prop getter 的 Hooks，而是可以直接通过 `Switch.Control`、`Switch.Thumb`、`Checkbox.Control`、`Checkbox.Indicator` 等子组件进行组合。
+
+### 迁移策略
+
+1. **识别 Hook 用法**：在你的代码库中搜索来自 `@heroui/react` 的导入，找出包含 Hook 名称（`useSwitch`、`useInput`、`useCheckbox`、`useRadio` 等）的引用。
+2. **替换为复合组件**：使用复合组件模式，替代带有 prop getter 的 Hooks。
+3. **保留原有结构**：迁移时，尽量保持与原 Hook 实现一致的组件结构。例如：
+   - 如果你之前用 `useSwitch` 创建了一个 **不带** thumb 的 Switch，那么在 v3 中也不要添加 `Switch.Thumb`
+   - 如果你之前用 `useCheckbox` 创建了一个 **不带** indicator 的 Checkbox，那么在 v3 中也不要添加 `Checkbox.Indicator`
+   - 只引入原本基于 Hook 的实现中实际用到的子组件
+4. **参考各组件指南**：查看各个组件的迁移指南，获取具体示例。
+
+### 主要差异
+
+- **v2**：Hooks 提供 prop getter，用于自定义固定的组件结构
+- **v3**：复合组件允许直接组合组件的各个部分
+
+### 保留结构示例
+
+**v2：不带 thumb 的 Switch**
+```tsx
+import { useSwitch } from "@heroui/react";
+
+function CustomSwitch() {
+  const { getBaseProps } = useSwitch();
+  
+  return (
+    <div {...getBaseProps()}>
+      {/* No thumb element */}
+    </div>
+  );
+}
+```
+
+**v3：等效结构**
+```tsx
+import { Switch } from "@heroui/react";
+
+function CustomSwitch() {
+  return (
+    <Switch.Control>
+      {/* No Switch.Thumb - preserving the original structure */}
+    </Switch.Control>
+  );
+}
+```
+
+有关具体组件的详细迁移示例，请参阅各个组件的迁移指南。
+
+## useDisclosure → useOverlayState
+
+v2 中的 `useDisclosure` 钩子在 v3 中已替换为 `useOverlayState`。该钩子用于管理 Modal、Popover 等浮层组件的打开/关闭状态。
+
+### v2：useDisclosure
+
+**API：**
+```tsx
+const {isOpen, onOpen, onClose, onOpenChange, isControlled, getButtonProps, getDisclosureProps} = useDisclosure({
+  isOpen?: boolean;
+  defaultOpen?: boolean;
+  onClose?(): void;
+  onOpen?(): void;
+  onChange?(isOpen: boolean | undefined): void;
+  id?: string;
+});
+```
+
+**示例：**
+```tsx
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+
+export default function App() {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+  return (
+    <>
+      <Button onPress={onOpen}>Open Modal</Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          <ModalHeader>Title</ModalHeader>
+          <ModalBody>Content</ModalBody>
+          <ModalFooter>
+            <Button onPress={onOpenChange}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
+### v3：useOverlayState
+
+**API：**
+```tsx
+const state = useOverlayState({
+  isOpen?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+});
+
+// Returns:
+// {
+//   isOpen: boolean;
+//   open(): void;
+//   close(): void;
+//   toggle(): void;
+//   setOpen(isOpen: boolean): void;
+// }
+```
+
+**示例：**
+```tsx
+import { Modal, Button, useOverlayState } from "@heroui/react";
+
+export default function App() {
+  const state = useOverlayState();
+
+  return (
+    <Modal>
+      <Button onPress={state.open}>Open Modal</Button>
+      <Modal.Container isOpen={state.isOpen} onOpenChange={state.setOpen}>
+        <Modal.Dialog>
+          {({close}) => (
+            <>
+              <Modal.Header>
+                <Modal.Heading>Title</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>Content</Modal.Body>
+              <Modal.Footer>
+                <Button onPress={close}>Close</Button>
+              </Modal.Footer>
+            </>
+          )}
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal>
+  );
+}
+```
+
+### 迁移指南
+
+#### 基本迁移
+
+**v2：**
+```tsx
+const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
+```
+
+**v3：**
+```tsx
+const state = useOverlayState();
+// Use state.open(), state.close(), state.toggle(), state.setOpen(boolean)
+```
+
+#### 受控状态
+
+**v2：**
+```tsx
+const {isOpen, onOpenChange} = useDisclosure({
+  isOpen: controlledIsOpen,
+  onChange: (isOpen) => setControlledIsOpen(isOpen)
+});
+```
+
+**v3：**
+```tsx
+const state = useOverlayState({
+  isOpen: controlledIsOpen,
+  onOpenChange: setControlledIsOpen
+});
+```
+
+#### 非受控状态
+
+**v2：**
+```tsx
+const {isOpen, onOpen, onClose} = useDisclosure({
+  defaultOpen: false
+});
+```
+
+**v3：**
+```tsx
+const state = useOverlayState({
+  defaultOpen: false
+});
+// Use state.open(), state.close(), state.toggle()
+```
+
+### API 差异
+
+| v2（useDisclosure） | v3（useOverlayState） | 说明 |
+|-------------------|---------------------|-------|
+| `isOpen` | `isOpen` | 相同 |
+| `onOpen()` | `open()` | 方法重命名 |
+| `onClose()` | `close()` | 方法重命名 |
+| `onOpenChange()` | `toggle()` | 新增的切换方法 |
+| `onOpenChange`（prop） | `setOpen(boolean)` | API 不同 |
+| `isControlled` | - | 已移除（由内部处理） |
+| `getButtonProps()` | - | 已移除（改用复合组件） |
+| `getDisclosureProps()` | - | 已移除（改用复合组件） |
+
+### useOverlayState 的优势
+
+- **更简洁的 API**：使用专用方法（`open()`、`close()`、`toggle()`），而非回调
+- **更简单的状态管理**：在受控与非受控两种模式下都能无缝工作
+- **更完善的 TypeScript 支持**：改进了类型推断和自动补全
+- **与 React Aria 保持一致**：与 React Aria Components 的模式相符
+
+### 替代方案：useState
+
+对于简单的场景，你也可以直接使用 React 的 `useState`：
+
+```tsx
+import { useState } from "react";
+import { Modal, Button } from "@heroui/react";
+
+export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Modal>
+      <Button onPress={() => setIsOpen(true)}>Open</Button>
+      <Modal.Container isOpen={isOpen} onOpenChange={setIsOpen}>
+        <Modal.Dialog>
+          {/* content */}
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal>
+  );
+}
+```
+
+不过，`useOverlayState` 为常见操作提供了更简洁的 API 和专用方法。
+
+## 已移除的 Hooks
+
+v2 中的以下 Hooks 在 v3 中已被移除：
+
+- **useDraggable**：已移除
+- **useClipboard**：已移除
+- **usePagination**：已移除
+- **useToast**：已移除
+
+## 总结
+
+- **组件 Hooks**（`useSwitch`、`useInput` 等）→ 改用 **复合组件**
+- **useDisclosure** → 改用 **useOverlayState** 来管理浮层状态
+- **useOverlayState** 提供了更简洁的 API，包含 `open()`、`close()`、`toggle()` 与 `setOpen()` 方法
+- **已移除的 Hooks**：`useDraggable`、`useClipboard`、`usePagination`、`useToast` 不再可用
+- 对于简单的场景可以直接使用 `useState`，但 `useOverlayState` 在使用体验上更佳
+
+有关具体组件的 Hooks 迁移示例，请参阅各个组件的迁移指南。

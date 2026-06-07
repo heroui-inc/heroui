@@ -1,0 +1,348 @@
+---
+title: SearchField 搜索框
+description: 搜索输入字段，包含清除按钮与搜索图标。
+links:
+  rac: SearchField
+  source: search-field/search-field.tsx
+  styles: search-field.css
+  storybook: Components/Forms/SearchField
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { SearchField } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="search-field-basic" />
+
+### 组件结构
+
+```tsx
+import {SearchField, Label, Description, FieldError} from '@heroui/react';
+
+export default () => (
+  <SearchField>
+    <Label />
+    <SearchField.Group>
+      <SearchField.SearchIcon />
+      <SearchField.Input />
+      <SearchField.ClearButton />
+    </SearchField.Group>
+    <Description />
+    <FieldError />
+  </SearchField>
+)
+```
+
+> **SearchField** 允许用户输入并清空搜索关键词。它包含搜索图标，并提供可选的清除按钮以便快速重置。
+
+### 带说明
+
+<ComponentPreview name="search-field-with-description" />
+
+### 必填字段
+
+<ComponentPreview name="search-field-required" />
+
+### 校验
+
+将 `isInvalid` 与 `FieldError` 配合使用，以展示校验信息。
+
+<ComponentPreview name="search-field-validation" />
+
+### 禁用状态
+
+<ComponentPreview name="search-field-disabled" />
+
+### 受控
+
+控制值以与其他组件同步，或执行自定义格式化。
+
+<ComponentPreview name="search-field-controlled" />
+
+### 带校验
+
+在受控数值的基础上实现自定义校验逻辑。
+
+<ComponentPreview name="search-field-with-validation" />
+
+### 自定义图标
+
+自定义搜索图标与清除按钮图标。
+
+<ComponentPreview name="search-field-custom-icons" />
+
+### 全宽
+
+<ComponentPreview name="search-field-full-width" />
+
+### 变体
+
+SearchField 支持两种视觉变体：
+
+- **`primary`**（默认）— 带阴影的标准样式，适用于大多数场景
+- **`secondary`** — 低强调、无阴影的变体，适合用在 Surface 组件内
+
+<ComponentPreview name="search-field-variants" />
+
+### 在 Surface 内
+
+在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="search-field-on-surface" />
+
+### 表单示例
+
+包含校验与提交处理的完整表单集成示例。
+
+<ComponentPreview name="search-field-form-example" />
+
+### 键盘快捷键
+
+添加快捷键以快速聚焦搜索字段。
+
+<ComponentPreview name="search-field-with-keyboard-shortcut" />
+
+<RelatedComponents component="searchfield" />
+
+<RelatedShowcases component="SearchField" />
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="search-field-custom-render-function"
+/>
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {SearchField, Label} from '@heroui/react';
+
+function CustomSearchField() {
+  return (
+    <SearchField className="gap-2">
+      <Label className="text-sm font-semibold">Search</Label>
+      <SearchField.Group className="rounded-xl border-2">
+        <SearchField.SearchIcon className="text-blue-500" />
+        <SearchField.Input className="text-center font-bold" />
+        <SearchField.ClearButton className="text-red-500" />
+      </SearchField.Group>
+    </SearchField>
+  );
+}
+```
+
+### 自定义组件类
+
+SearchField 使用可自定义的 CSS 类。你可以覆盖这些类名以匹配自己的设计系统。
+
+```css
+@layer components {
+  .search-field {
+    @apply flex flex-col gap-1;
+  }
+
+  /* When invalid, the description is hidden automatically */
+  .search-field[data-invalid],
+  .search-field[aria-invalid] {
+    [data-slot="description"] {
+      @apply hidden;
+    }
+  }
+
+  .search-field__group {
+    @apply bg-field text-field-foreground shadow-field rounded-field inline-flex h-9 items-center overflow-hidden border;
+  }
+
+  .search-field__input {
+    @apply flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none outline-none;
+  }
+
+  .search-field__search-icon {
+    @apply text-field-placeholder pointer-events-none shrink-0 ml-3 mr-0 size-4;
+  }
+
+  .search-field__clear-button {
+    @apply mr-1 shrink-0;
+  }
+}
+```
+
+### CSS 类
+
+- `.search-field` – 根容器，样式非常克制（`flex flex-col gap-1`）
+- `.search-field__group` – 搜索图标、输入框与清除按钮的容器，包含边框与背景样式
+- `.search-field__input` – 搜索输入字段
+- `.search-field__search-icon` – 左侧显示的搜索图标
+- `.search-field__clear-button` – 用于清空搜索字段的按钮
+- `.search-field--primary` – 带阴影的主变体（默认）
+- `.search-field--secondary` – 无阴影的次变体，适合用在 surface 上
+
+> **说明：** 子组件（[Label](/docs/components/label)、[Description](/docs/components/description)、[FieldError](/docs/components/field-error)）拥有各自的 CSS 类与样式。自定义方式请参见对应文档。
+
+### 交互状态
+
+SearchField 会根据状态自动管理以下 data 属性：
+
+- **Invalid**：`[data-invalid="true"]` 或 `[aria-invalid="true"]` – 无效时会自动隐藏 description 插槽
+- **Disabled**：`[data-disabled="true"]` – 当 `isDisabled` 为 true 时应用
+- **Focus Within**：`[data-focus-within="true"]` – 当输入框聚焦时应用
+- **Focus Visible**：`[data-focus-visible="true"]` – 当焦点可见（键盘导航）时应用
+- **Hovered**：`[data-hovered="true"]` – 当悬停在整个组合上时应用
+- **Empty**：`[data-empty="true"]` – 当字段为空时应用（会隐藏清除按钮）
+
+更多属性可通过渲染 prop 获得（见下方的 SearchFieldRenderProps）。
+
+## API 参考
+
+### SearchField Props
+
+SearchField 继承 React Aria [SearchField](https://react-spectrum.adobe.com/react-aria/SearchField.html) 组件的全部 props。
+
+#### Base Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode \| (values: SearchFieldRenderProps) => React.ReactNode` | - | 子组件（Label、Group、Input 等）或渲染函数。 |
+| `className` | `string \| (values: SearchFieldRenderProps) => string` | - | 用于样式的 CSS 类，支持渲染 prop。 |
+| `style` | `React.CSSProperties \| (values: SearchFieldRenderProps) => React.CSSProperties` | - | 行内样式，支持渲染 prop。 |
+| `fullWidth` | `boolean` | `false` | 搜索字段是否占满容器宽度 |
+| `id` | `string` | - | 元素的唯一标识符。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为低强调、无阴影变体，适合用在 surface 上。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SearchFieldRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+#### Value Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `string` | - | 当前值（受控）。 |
+| `defaultValue` | `string` | - | 默认值（非受控）。 |
+| `onChange` | `(value: string) => void` | - | 值变化时触发的事件处理函数。 |
+
+#### Validation Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isRequired` | `boolean` | `false` | 提交表单前是否要求用户输入。 |
+| `isInvalid` | `boolean` | - | 当前值是否无效。 |
+| `validate` | `(value: string) => ValidationError \| true \| null \| undefined` | - | 自定义校验函数。 |
+| `validationBehavior` | `'native' \| 'aria'` | `'native'` | 使用原生 HTML 表单校验或 ARIA 属性。 |
+| `validationErrors` | `string[]` | - | 服务端校验错误。 |
+
+#### State Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `isDisabled` | `boolean` | - | 是否禁用输入。 |
+| `isReadOnly` | `boolean` | - | 是否可选中但不可修改。 |
+
+#### Form Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `name` | `string` | - | input 元素的名称，用于 HTML 表单提交。 |
+| `autoFocus` | `boolean` | - | 元素渲染后是否应获得焦点。 |
+
+#### Event Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `onSubmit` | `(value: string) => void` | - | 用户提交搜索（Enter）时触发的事件处理函数。 |
+| `onClear` | `() => void` | - | 按下清除按钮时触发的事件处理函数。 |
+
+#### Accessibility Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `aria-label` | `string` | - | 没有可见标签时的无障碍标签。 |
+| `aria-labelledby` | `string` | - | 用于标注该字段的元素 ID。 |
+| `aria-describedby` | `string` | - | 用于描述该字段的元素 ID。 |
+| `aria-details` | `string` | - | 包含更多详情的元素 ID。 |
+
+### Composition Components
+
+SearchField 需要与以下独立组件组合使用，请分别导入并直接使用：
+
+- **SearchField.Group** – 搜索图标、输入框与清除按钮的容器
+- **SearchField.Input** – 搜索输入字段
+- **SearchField.SearchIcon** – 左侧显示的搜索图标
+- **SearchField.ClearButton** – 用于清空搜索字段的按钮
+- **Label** – 字段标签组件（`@heroui/react`）
+- **Description** – 辅助说明文本组件（`@heroui/react`）
+- **FieldError** – 校验错误信息组件（`@heroui/react`）
+
+这些组件各自拥有 props API。请直接在 SearchField 内组合使用：
+
+```tsx
+<SearchField isRequired isInvalid={hasError} value={value} onChange={setValue}>
+  <Label>Search</Label>
+  <SearchField.Group>
+    <SearchField.SearchIcon />
+    <SearchField.Input placeholder="Search..." />
+    <SearchField.ClearButton />
+  </SearchField.Group>
+  <Description>Enter keywords to search</Description>
+  <FieldError>Search query is required</FieldError>
+</SearchField>
+```
+
+#### SearchField.Group Props
+
+SearchField.Group 继承 React Aria [Group](https://react-spectrum.adobe.com/react-aria/Group.html) 组件的 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode \| (values: GroupRenderProps) => React.ReactNode` | - | 子组件（SearchIcon、Input、ClearButton）或渲染函数。 |
+| `className` | `string \| (values: GroupRenderProps) => string` | - | 用于样式的 CSS 类。 |
+
+#### SearchField.Input Props
+
+SearchField.Input 继承 React Aria [Input](https://react-spectrum.adobe.com/react-aria/Input.html) 组件的 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 用于样式的 CSS 类。 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 输入的视觉变体。`primary` 为默认带阴影样式。`secondary` 为低强调、无阴影变体，适合用在 surface 上。 |
+| `placeholder` | `string` | - | 输入为空时显示的占位符文本。 |
+| `type` | `string` | `"search"` | 输入类型（会自动设置为 `"search"`）。 |
+
+#### SearchField.SearchIcon Props
+
+SearchField.SearchIcon 是一个用于渲染搜索图标的自定义组件。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | `<IconSearch />` | 自定义图标元素。默认为搜索图标。 |
+| `className` | `string` | - | 用于样式的 CSS 类。 |
+
+#### SearchField.ClearButton Props
+
+SearchField.ClearButton 继承 React Aria [Button](https://react-spectrum.adobe.com/react-aria/Button.html) 组件的 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | `<CloseButton icon />` | 按钮的图标或内容。默认为关闭图标。 |
+| `className` | `string` | - | 用于样式的 CSS 类。 |
+| `slot` | `"clear"` | `"clear"` | 必须设置为 `"clear"`（会自动设置）。 |
+
+### SearchFieldRenderProps
+
+在 `className`、`style` 或 `children` 上使用渲染 prop 时，可使用以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `isDisabled` | `boolean` | 字段是否禁用。 |
+| `isInvalid` | `boolean` | 字段当前是否无效。 |
+| `isReadOnly` | `boolean` | 字段是否只读。 |
+| `isRequired` | `boolean` | 字段是否必填。 |
+| `isFocused` | `boolean` | 字段是否聚焦（已弃用，请使用 `isFocusWithin`）。 |
+| `isFocusWithin` | `boolean` | 是否有任意子元素聚焦。 |
+| `isFocusVisible` | `boolean` | 是否为可见焦点（键盘导航）。 |
+| `value` | `string` | 当前值。 |
+| `isEmpty` | `boolean` | 字段是否为空。 |

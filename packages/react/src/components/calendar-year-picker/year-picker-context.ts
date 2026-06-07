@@ -1,7 +1,5 @@
 "use client";
 
-import type {DateValue} from "react-aria-components/Calendar";
-
 import {createContext, useContext} from "react";
 
 /* -------------------------------------------------------------------------------------------------
@@ -18,16 +16,7 @@ interface YearPickerContextValue {
   calendarGridSlot: "calendar-grid" | "range-calendar-grid";
 }
 
-interface YearPickerStateContextValue {
-  focusedDate: DateValue;
-  setFocusedDate: (value: DateValue) => void;
-  timeZone: string;
-  minValue?: DateValue | null;
-  maxValue?: DateValue | null;
-}
-
 const YearPickerContext = createContext<YearPickerContextValue | null>(null);
-const YearPickerStateContext = createContext<YearPickerStateContextValue | null>(null);
 
 /**
  * Hook to consume YearPickerContext.
@@ -43,21 +32,5 @@ function useYearPicker(): YearPickerContextValue {
   return context;
 }
 
-/**
- * Hook to consume normalized calendar state used by YearPicker.
- * Must be provided by Calendar or RangeCalendar root via adapter bridge.
- */
-function useYearPickerState(): YearPickerStateContextValue {
-  const context = useContext(YearPickerStateContext);
-
-  if (!context) {
-    throw new Error(
-      "useYearPickerState must be used within a <Calendar> or <RangeCalendar> component.",
-    );
-  }
-
-  return context;
-}
-
-export {YearPickerContext, YearPickerStateContext, useYearPicker, useYearPickerState};
-export type {YearPickerContextValue, YearPickerStateContextValue};
+export {YearPickerContext, useYearPicker};
+export type {YearPickerContextValue};

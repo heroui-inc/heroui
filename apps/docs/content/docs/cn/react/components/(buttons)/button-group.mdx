@@ -1,0 +1,185 @@
+---
+title: ButtonGroup 按钮组
+description: 将相关按钮组合在一起，并提供一致的样式与间距。
+links:
+  rac: Button
+  source: button-group/button-group.tsx
+  styles: button-group.css
+  storybook: Components/Buttons/ButtonGroup
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { ButtonGroup, Button } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="button-group-basic"
+/>
+
+### 组件结构
+
+导入 ButtonGroup 组件后，可通过点语法访问所有子部分。
+
+```tsx
+import { ButtonGroup, Button } from '@heroui/react';
+
+export default () => (
+  <ButtonGroup>
+    <Button>First</Button>
+    <Button>
+      <ButtonGroup.Separator />
+      Second
+    </Button>
+    <Button>
+      <ButtonGroup.Separator />
+      Third
+    </Button>
+  </ButtonGroup>
+);
+```
+
+> **ButtonGroup** 将多个 Button 组件包裹在一起，应用一致的样式、间距以及自动圆角处理。它使用 React Context 将 `size`、`variant` 与 `isDisabled` props 传递给所有子按钮。
+
+### 变体
+
+<ComponentPreview
+  name="button-group-variants"
+/>
+
+### 尺寸
+
+<ComponentPreview
+  name="button-group-sizes"
+/>
+
+### 方向
+
+使用 `orientation` prop 将按钮按水平或垂直方向排列。
+
+<ComponentPreview
+  name="button-group-orientation"
+/>
+
+### 带图标
+
+<ComponentPreview
+  name="button-group-with-icons"
+/>
+
+### 全宽
+
+<ComponentPreview
+  name="button-group-full-width"
+/>
+
+### 禁用状态
+
+<ComponentPreview
+  name="button-group-disabled"
+/>
+
+### 无分隔线
+
+直接在按钮中省略 `<ButtonGroup.Separator />` 组件即可。
+
+<ComponentPreview
+  name="button-group-without-separator"
+/>
+
+<RelatedComponents component="button-group" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import { ButtonGroup, Button } from '@heroui/react';
+
+function CustomButtonGroup() {
+  return (
+    <ButtonGroup className="gap-2">
+      <Button>First</Button>
+      <Button>
+        <ButtonGroup.Separator />
+        Second
+      </Button>
+      <Button>
+        <ButtonGroup.Separator />
+        Third
+      </Button>
+    </ButtonGroup>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 ButtonGroup 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .button-group {
+    @apply gap-2 rounded-lg;
+  }
+
+  .button-group__separator {
+    @apply opacity-25;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ButtonGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/button-group.css)）：
+
+#### 基础类
+
+- `.button-group` - 按钮组容器的基础样式
+- `.button-group--full-width` - 全宽修饰符
+- `.button-group__separator` - 按钮之间的分隔线元素
+
+ButtonGroup 会自动为按钮处理圆角：
+
+- 第一个按钮获得左侧/起始侧圆角
+- 最后一个按钮获得右侧/结束侧圆角
+- 中间按钮不带圆角
+- 仅有一个按钮时，四边都会应用完整圆角
+
+在每个 Button（第一个除外）内部添加 `<ButtonGroup.Separator />`，即可在按钮之间显示分隔线。
+
+## API 参考
+
+### ButtonGroup Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'ghost' \| 'danger'` | - | 应用于组内所有按钮的视觉变体 |
+| `size` | `'sm' \| 'md' \| 'lg'` | - | 应用于组内所有按钮的尺寸 |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | 按钮组的排列方向 |
+| `fullWidth` | `boolean` | `false` | 按钮组是否占满容器宽度 |
+| `isDisabled` | `boolean` | `false` | 是否禁用组内全部按钮（可在单个按钮上覆盖） |
+| `className` | `string` | - | 额外的 CSS 类 |
+| `children` | `React.ReactNode` | - | 需要组合在一起的按钮组件 |
+
+### ButtonGroup.Separator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 额外的 CSS 类 |
+
+### 说明
+
+- ButtonGroup 使用 React Context 将 `size`、`variant` 与 `isDisabled` props 传递给所有子 Button 组件
+- **只有直接子级按钮会接收 ButtonGroup 的 props**：即使某个按钮是 ButtonGroup 的后代，只要它嵌套在其他组件（如 Modal、Dropdown）中，就不会继承组级 props
+- 单个 Button 可通过设置 `isDisabled={false}` 覆盖组级别的 `isDisabled`
+- 组件会自动处理按钮之间的圆角
+- 在每个 Button（第一个除外）中添加 `<ButtonGroup.Separator />` 可显示分隔线
+- 按钮组中的按钮会移除激活/按压时的缩放变换，以获得更统一的视觉效果

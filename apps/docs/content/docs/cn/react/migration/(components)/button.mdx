@@ -1,0 +1,357 @@
+---
+title: Button
+description: Button 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Button 文档](/docs/react/components/button)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Button` 通过 `color` 与 `variant` 组合使用：
+
+```tsx
+import { Button } from "@heroui/react";
+
+export default function App() {
+  return <Button color="primary" variant="solid">Button</Button>;
+}
+```
+
+在 v3 中，`Button` 仅使用 `variant` prop（不再有独立的 `color` prop）：
+
+```tsx
+import { Button } from "@heroui/react";
+
+export default function App() {
+  return <Button variant="primary">Button</Button>;
+}
+```
+
+## 主要变化
+
+### 1. 变体与颜色
+
+**v2：** 使用 `color` + `variant` 组合  
+**v3：** 仅使用 `variant`（无独立 `color` prop）
+
+| v2 color + variant | v3 变体 | 说明 |
+| ------------------ | ------- | ---- |
+| `color="primary" variant="solid"` | `variant="primary"` | 默认主按钮 |
+| `color="default" variant="solid"` | `variant="primary"` | 使用 primary 变体 |
+| `color="secondary" variant="solid"` | `variant="secondary"` | 相同 |
+| `color="success" variant="solid"` | `variant="primary"` | 如需可配合自定义样式使用 primary |
+| `color="warning" variant="solid"` | `variant="primary"` | 如需可配合自定义样式使用 primary |
+| `color="danger" variant="solid"` | `variant="danger"` | 提供 danger 变体 |
+| `color="primary" variant="bordered"` | `variant="secondary"` | 外观相近 |
+| `color="primary" variant="light"` | `variant="tertiary"` | 外观相近 |
+| `color="primary" variant="flat"` | `variant="tertiary"` | 外观相近 |
+| `color="primary" variant="faded"` | `variant="secondary"` | 外观相近 |
+| `color="primary" variant="ghost"` | `variant="ghost"` | 相同 |
+| `color="danger" variant="flat"` | `variant="danger-soft"` | 新增柔和危险变体 |
+
+**v2 变体：** `solid`、`bordered`、`light`、`flat`、`faded`、`shadow`、`ghost`  
+**v3 变体：** `primary`、`secondary`、`tertiary`、`outline`、`ghost`、`danger`、`danger-soft`
+
+### 2. 加载状态：`isLoading` → `isPending`
+
+**v2：** 使用 `isLoading` prop  
+**v3：** 使用 `isPending` prop
+
+### 3. 默认宽度行为
+
+**v2：** 按钮按尺寸带有最小宽度（sm：`min-w-16`，md：`min-w-20`，lg：`min-w-24`）  
+**v3：** 按钮默认使用 `w-fit`（宽度随内容，无最小宽度）
+
+因此当文案较短时，v3 按钮会比 v2 更窄。若要保留 v2 的最小宽度行为，请添加 Tailwind 类，请见下方 **尺寸与最小宽度** 示例小节。
+
+### 4. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `isLoading` | `Button` | 已重命名为 `isPending` |
+| `isIconOnly` | `Button` | v3 仍支持 — 渲染仅含图标的方形按钮 |
+| `color` | — | 已移除（由变体负责样式） |
+| `radius` | — | 已移除（请使用 Tailwind，例如 `rounded-lg`） |
+| `startContent`, `endContent` | — | 请将图标作为 children 放置 |
+| `spinner`, `spinnerPlacement` | — | 请通过渲染 prop 自行处理加载态 |
+| `disableRipple` | — | 已移除（v3 已移除波纹） |
+| `disableAnimation` | — | 已移除（动画由内部处理） |
+| `classNames` | — | 请使用 `className` |
+
+### 5. ButtonGroup 仍可用
+
+**v2：** 提供独立的 `ButtonGroup` 组件  
+**v3：** `ButtonGroup` 仍然存在。详见 [ButtonGroup 迁移指南](/docs/react/migration/button-group)。
+
+## 迁移示例
+
+### 变体
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button color="primary" variant="solid">Solid</Button>
+    <Button color="primary" variant="bordered">Bordered</Button>
+    <Button color="primary" variant="ghost">Ghost</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="ghost">Ghost</Button>
+    ```
+  </Tab>
+</Tabs>
+
+### danger-soft 变体
+
+`danger-soft` 变体为 v3 新增，用于替代 v2 中 `color="danger" variant="flat"` 的用法。
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button color="danger" variant="flat">Delete</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Button variant="danger-soft">Delete</Button>
+    ```
+  </Tab>
+</Tabs>
+
+### 仅图标（`isIconOnly`）
+
+`isIconOnly` prop 在 v2 与 v3 中均可用，用于渲染适配单个图标的方形按钮。v3 中请用 `variant` 替代 `color` 控制样式。
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button isIconOnly color="danger" variant="flat">
+      <HeartIcon />
+    </Button>
+    <Button isIconOnly color="primary" variant="bordered" size="sm">
+      <SearchIcon />
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button isIconOnly variant="danger-soft">
+      <Icon icon="gravity-ui:heart" />
+    </Button>
+    <Button isIconOnly variant="secondary" size="sm">
+      <Icon icon="gravity-ui:magnifier" />
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### 加载状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Simple loading */}
+    <Button isLoading color="primary">
+      Loading
+    </Button>
+    
+    {/* Loading with conditional content */}
+    <Button 
+      isLoading={isLoading}
+      spinnerPlacement="start"
+      color="primary"
+      onPress={() => setIsLoading(true)}
+    >
+      Upload File
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Spinner } from "@heroui/react";
+    import { Icon } from "@iconify/react";
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    {/* Simple loading */}
+    <Button isPending={isLoading}>
+      {({isPending}) => (
+        <>
+          {isPending && <Spinner color="current" size="sm" />}
+          Loading
+        </>
+      )}
+    </Button>
+    
+    {/* Loading with conditional content */}
+    <Button 
+      isPending={isLoading}
+      onPress={() => setIsLoading(true)}
+    >
+      {({isPending}) => (
+        <>
+          {isPending ? (
+            <Spinner color="current" size="sm" />
+          ) : (
+            <Icon icon="gravity-ui:paperclip" />
+          )}
+          {isPending ? "Uploading..." : "Upload File"}
+        </>
+      )}
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### 带图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button 
+      color="success" 
+      endContent={<Icon icon="gravity-ui:camera" />}
+    >
+      Take a photo
+    </Button>
+    <Button 
+      color="danger" 
+      startContent={<Icon icon="gravity-ui:trash-bin" />}
+      variant="bordered"
+    >
+      Delete user
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button variant="primary">
+      <Icon icon="gravity-ui:camera" />
+      Take a photo
+    </Button>
+    <Button variant="secondary">
+      <Icon icon="gravity-ui:trash-bin" />
+      Delete user
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### 仅图标按钮
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Button isIconOnly color="danger">
+      <HeartIcon />
+    </Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Button isIconOnly variant="danger">
+      <Icon icon="gravity-ui:heart" />
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### 按钮组
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup size="sm" color="primary" variant="solid">
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Button, ButtonGroup } from "@heroui/react";
+
+    <ButtonGroup size="sm" variant="primary">
+      <Button>One</Button>
+      <Button>Two</Button>
+      <Button>Three</Button>
+    </ButtonGroup>
+    ```
+  </Tab>
+</Tabs>
+
+### 尺寸与最小宽度
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* v2 automatically applies minimum widths */}
+    <Button size="md" color="primary">Save</Button>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* v3 uses w-fit by default - add min-width to match v2 */}
+    <Button size="md" variant="primary" className="min-w-20">
+      Save
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+## 渲染 prop 模式
+
+v3 `Button` 支持渲染 prop 模式，可拿到状态信息：
+
+```tsx
+<Button isPending={isLoading}>
+  {({isPending, isPressed, isHovered, isFocused, isFocusVisible, isDisabled}) => (
+    <>
+      {isPending && <Spinner size="sm" />}
+      {isPressed ? "Pressed!" : "Click me"}
+    </>
+  )}
+</Button>
+```
+
+可用的渲染 prop：
+
+- `isPending` — 是否处于加载状态  
+- `isPressed` — 是否正被按下  
+- `isHovered` — 是否悬停  
+- `isFocused` — 是否聚焦  
+- `isFocusVisible` — 是否应显示焦点环  
+- `isDisabled` — 是否禁用  
+
+## 总结
+
+1. **`color` prop 已移除**：请用 `variant` 替代 `color` + `variant` 组合  
+2. **变体体系变更**：新变体系统（`primary`、`secondary`、`tertiary`、`outline`、`ghost`、`danger`、`danger-soft`）  
+3. **`danger-soft` 变体**：v3 新增，替代 v2 的 `color="danger" variant="flat"`  
+4. **`isLoading` → `isPending`**：加载相关 prop 已重命名  
+5. **`isIconOnly`**：v3 仍支持 — 用于仅图标的方形按钮  
+6. **默认宽度变更**：按钮默认 `w-fit`，不再内置最小宽度 — 可添加 `min-w-*` 贴近 v2  
+7. **图标**：`startContent` / `endContent` 已移除 — 请将图标作为 children  
+8. **加载指示器**：需通过渲染 prop 自行组合 Spinner 等  
+9. **渲染 prop**：v3 `Button` 的 children 可为函数，参数包含 `isPending`、`isPressed`、`isHovered`、`isFocused`、`isFocusVisible`、`isDisabled`  
+10. **`radius` 已移除**：请使用 Tailwind CSS 类  
+11. **波纹已移除**：v3 无波纹效果  
+12. **ButtonGroup**：参见 [ButtonGroup 迁移指南](/docs/react/migration/button-group)  
+13. **`classNames` 已移除**：请使用 `className` prop  

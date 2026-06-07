@@ -1,0 +1,209 @@
+---
+title: Spinner 加载指示器
+description: 展示旋转加载动画。
+links:
+  source_native: spinner/spinner.tsx
+  styles_native: spinner/spinner.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/spinner-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/spinner-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Spinner } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Spinner>
+  <Spinner.Indicator>...</Spinner.Indicator>
+</Spinner>
+```
+
+- **Spinner**：主容器，控制加载状态、尺寸与颜色。未提供子节点时渲染默认动画指示器。
+- **Spinner.Indicator**：可选子组件，用于自定义动画配置与图标外观；可传入自定义子节点替换默认图标。
+
+## 用法
+
+### 基础用法
+
+展示旋转加载指示器。
+
+```tsx
+<Spinner />
+```
+
+### 尺寸
+
+使用 `size` 控制大小。
+
+```tsx
+<Spinner size="sm" />
+<Spinner size="md" />
+<Spinner size="lg" />
+```
+
+### 颜色
+
+使用预设色或自定义颜色字符串。
+
+```tsx
+<Spinner color="default" />
+<Spinner color="success" />
+<Spinner color="warning" />
+<Spinner color="danger" />
+<Spinner color="#8B5CF6" />
+```
+
+### 加载状态
+
+使用 `isLoading` 控制是否显示。
+
+```tsx
+<Spinner isLoading={true} />
+<Spinner isLoading={false} />
+```
+
+### 动画速度
+
+在 `Indicator` 上使用 `animation` 自定义旋转速度。
+
+```tsx
+<Spinner>
+  <Spinner.Indicator animation={{ rotation: { speed: 0.5 } }} />
+</Spinner>
+
+<Spinner>
+  <Spinner.Indicator animation={{ rotation: { speed: 2 } }} />
+</Spinner>
+```
+
+### 自定义图标
+
+用自定义内容替换默认图标。
+
+```tsx
+const themeColorForeground = useThemeColor('foreground')
+
+<Spinner>
+  <Spinner.Indicator>
+    <Ionicons name="refresh" size={24} color={themeColorForeground} />
+  </Spinner.Indicator>
+</Spinner>
+
+<Spinner>
+  <Spinner.Indicator>
+    <Text>⏳</Text>
+  </Spinner.Indicator>
+</Spinner>
+```
+
+## 示例
+
+```tsx
+import { Spinner } from 'heroui-native';
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+
+export default function SpinnerExample() {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  return (
+    <View className="gap-4 p-4 bg-background">
+      <View className="flex-row items-center gap-2 p-4 rounded-lg bg-stone-200">
+        <Spinner size="sm" color="default" />
+        <Text className="text-stone-500">正在加载内容…</Text>
+      </View>
+
+      <View className="items-center p-8 rounded-2xl bg-stone-200">
+        <Spinner size="lg" color="success" isLoading={isLoading} />
+        <Text className="text-stone-500 mt-4">处理中…</Text>
+        <TouchableOpacity onPress={() => setIsLoading(!isLoading)}>
+          <Text className="text-primary mt-2 text-sm">
+            {isLoading ? '点击停止' : '点击开始'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <View className="flex-row gap-4 items-center justify-center">
+        <Spinner size="md" color="#EC4899">
+          <Spinner.Indicator animation={{ rotation: { speed: 0.7 } }}>
+            <Ionicons name="refresh" size={24} color="#EC4899" />
+          </Spinner.Indicator>
+        </Spinner>
+      </View>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/spinner.tsx)。
+
+## API 参考
+
+### Spinner
+
+| prop           | type                                                        | default     | description                                        |
+| -------------- | ----------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode`                                           | `undefined` | 旋转器内部内容                                     |
+| `size`         | `'sm' \| 'md' \| 'lg'`                                      | `'md'`      | 尺寸                                               |
+| `color`        | `'default' \| 'success' \| 'warning' \| 'danger' \| string` | `'default'` | 颜色主题或自定义色值                               |
+| `isLoading`    | `boolean`                                                   | `true`      | 是否处于加载中（显示动画）                         |
+| `className`    | `string`                                                    | `undefined` | 自定义 class                                       |
+| `animation`    | `SpinnerRootAnimation`                                      | -           | 根级动画配置                                       |
+| `...ViewProps` | `ViewProps`                                                 | -           | 支持 React Native `View` 的全部属性                |
+
+#### SpinnerRootAnimation
+
+Spinner 根组件的动画配置，可为：
+
+- `false` 或 `"disabled"`：仅禁用根级动画
+- `"disable-all"`：禁用全部动画（含子级）
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop             | type                                     | default                                                              | description                       |
+| ---------------- | ---------------------------------------- | -------------------------------------------------------------------- | --------------------------------- |
+| `state`          | `'disabled' \| 'disable-all' \| boolean` | -                                                                    | 在自定义属性时禁用动画            |
+| `entering.value` | `EntryOrExitLayoutType`                  | `FadeIn`<br/>`.duration(200)`<br/>`.easing(Easing.out(Easing.ease))` | 自定义进入动画                    |
+| `exiting.value`  | `EntryOrExitLayoutType`                  | `FadeOut`<br/>`.duration(100)`                                       | 自定义退出动画                    |
+
+### Spinner.Indicator
+
+| prop                    | type                        | default     | description                                                  |
+| ----------------------- | --------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`              | `React.ReactNode`           | `undefined` | 指示器内部内容                                               |
+| `iconProps`             | `SpinnerIconProps`          | `undefined` | 默认图标的属性                                               |
+| `className`             | `string`                    | `undefined` | 指示器元素的 class                                           |
+| `animation`             | `SpinnerIndicatorAnimation` | -           | 动画配置                                                     |
+| `isAnimatedStyleActive` | `boolean`                   | `true`      | 是否启用 Reanimated 动画样式                                 |
+| `...Animated.ViewProps` | `Animated.ViewProps`        | -           | 支持 Reanimated `Animated.View` 的全部属性                   |
+
+#### SpinnerIndicatorAnimation
+
+`Spinner.Indicator` 的动画配置，可为：
+
+- `false` 或 `"disabled"`：禁用全部动画
+- `true` 或 `undefined`：使用默认动画
+- `object`：自定义动画配置
+
+| prop              | type                         | default         | description                       |
+| ----------------- | ---------------------------- | --------------- | --------------------------------- |
+| `state`           | `'disabled' \| boolean`      | -               | 在自定义属性时禁用动画            |
+| `rotation.speed`  | `number`                     | `1.1`           | 旋转速度倍率                      |
+| `rotation.easing` | `WithTimingConfig['easing']` | `Easing.linear` | 动画缓动配置                      |
+
+### SpinnerIconProps
+
+| prop     | type               | default          | description |
+| -------- | ------------------ | ---------------- | ----------- |
+| `width`  | `number \| string` | `24`             | 图标宽度    |
+| `height` | `number \| string` | `24`             | 图标高度    |
+| `color`  | `string`           | `'currentColor'` | 图标颜色    |

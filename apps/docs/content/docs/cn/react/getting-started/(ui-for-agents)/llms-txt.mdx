@@ -1,0 +1,62 @@
+---
+title: LLMs.txt
+description: 让 Claude、Cursor、Windsurf 等 AI 助手理解 HeroUI v3
+---
+
+我们提供 [LLMs.txt](https://llmstxt.org/) 文件，让 AI 编码助手可以访问 HeroUI v3 文档。
+
+## 可用文件
+
+**核心文档：**
+- [/react/llms.txt](/react/llms.txt) — React 文档的快速参考索引
+- [/react/llms-full.txt](/react/llms-full.txt) — 完整的 HeroUI React 文档
+
+**适用于上下文窗口有限的场景：**
+- [/react/llms-components.txt](/react/llms-components.txt) — 仅包含组件文档
+- [/react/llms-patterns.txt](/react/llms-patterns.txt) — 常见模式与代码片段
+
+**全平台：**
+- [/llms.txt](/llms.txt) — 快速参考索引（React + Native）
+- [/llms-full.txt](/llms-full.txt) — 完整文档（React + Native）
+- [/llms-components.txt](/llms-components.txt) — 全部组件文档
+- [/llms-patterns.txt](/llms-patterns.txt) — 全部模式与代码片段
+
+## 集成
+
+**Claude Code：** 让 Claude 参考文档：
+```
+Use HeroUI React documentation from https://heroui.com/react/llms.txt
+```
+或者添加到你项目中的 `.claude` 文件以自动加载。
+
+**Cursor：** 使用 `@Docs` 功能：
+```
+@Docs https://heroui.com/react/llms-full.txt
+```
+[了解更多](https://docs.cursor.com/context/@-symbols/@-docs)
+
+**Windsurf：** 添加到你的 `.windsurfrules` 文件：
+```
+#docs https://heroui.com/react/llms-full.txt
+```
+[了解更多](https://docs.codeium.com/windsurf/memories#memories-and-rules)
+
+**其他 AI 工具：** 大多数 AI 助手都可以通过 URL 引用文档。只需提供：
+```
+https://heroui.com/react/llms.txt
+```
+
+**针对特定组件的文档：**
+```
+https://heroui.com/react/llms-components.txt
+```
+
+**针对模式与最佳实践：**
+```
+https://heroui.com/react/llms-patterns.txt
+```
+
+
+## 参与贡献
+
+发现 AI 生成的代码有问题？欢迎在 [GitHub](https://github.com/heroui-inc/heroui) 上帮助我们改进 LLMs.txt 文件。

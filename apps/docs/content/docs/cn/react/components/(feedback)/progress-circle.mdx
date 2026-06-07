@@ -1,0 +1,168 @@
+---
+title: ProgressCircle 环形进度条
+description: 环形进度指示器，用于展示确定或不确定的进度。
+links:
+  rac: ProgressBar
+  source: progress-circle/progress-circle.tsx
+  styles: progress-circle.css
+  storybook: Components/Feedback/ProgressCircle
+---
+
+## 引入
+
+```tsx
+import { ProgressCircle } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview
+  name="progress-circle-basic"
+/>
+
+### 组件结构
+
+```tsx
+import { ProgressCircle } from '@heroui/react';
+
+export default () => (
+  <ProgressCircle aria-label="Loading" value={60}>
+    <ProgressCircle.Track>
+      <ProgressCircle.TrackCircle />
+      <ProgressCircle.FillCircle />
+    </ProgressCircle.Track>
+  </ProgressCircle>
+);
+```
+
+### 尺寸
+
+<ComponentPreview
+  name="progress-circle-sizes"
+/>
+
+### 颜色
+
+<ComponentPreview
+  name="progress-circle-colors"
+/>
+
+### 不确定进度
+
+在无法确定具体进度时，使用 `isIndeterminate`。
+
+<ComponentPreview
+  name="progress-circle-indeterminate"
+/>
+
+### 带标签
+
+<ComponentPreview
+  name="progress-circle-with-label"
+/>
+
+### 自定义 SVG 属性
+
+由于每个部分都是可组合组件，你可以直接覆盖 `strokeWidth`、`r`、`cx`、`cy`、`viewBox` 等 SVG 属性。
+
+<ComponentPreview
+  name="progress-circle-custom-svg"
+/>
+
+<RelatedComponents component="progress-circle" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以分别自定义 ProgressCircle 的各个部分：
+
+```tsx
+import { ProgressCircle } from '@heroui/react';
+
+function CustomProgressCircle() {
+  return (
+    <ProgressCircle aria-label="Loading" value={60}>
+      <ProgressCircle.Track>
+        <ProgressCircle.TrackCircle />
+        <ProgressCircle.FillCircle className="stroke-purple-500" />
+      </ProgressCircle.Track>
+    </ProgressCircle>
+  );
+}
+```
+
+### 自定义组件类
+
+若要自定义 ProgressCircle 组件类，可以使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .progress-circle {
+    @apply inline-flex;
+  }
+
+  .progress-circle__track {
+    @apply size-12;
+  }
+
+  .progress-circle__fill-circle {
+    stroke: purple;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+ProgressCircle 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/progress-circle.css)）：
+
+#### 基础与元素类
+
+- `.progress-circle` - 基础容器
+- `.progress-circle__track` - SVG 元素
+- `.progress-circle__track-circle` - 背景圆环
+- `.progress-circle__fill-circle` - 进度弧
+
+#### 尺寸类
+
+- `.progress-circle--sm` - 小尺寸
+- `.progress-circle--md` - 中等尺寸（默认）
+- `.progress-circle--lg` - 大尺寸
+
+#### 颜色类
+
+- `.progress-circle--default` - 默认颜色
+- `.progress-circle--accent` - 强调色
+- `.progress-circle--success` - 成功色
+- `.progress-circle--warning` - 警告色
+- `.progress-circle--danger` - 危险色
+
+## API 参考
+
+### ProgressCircle Props
+
+继承自 [React Aria ProgressBar](https://react-spectrum.adobe.com/react-aria/ProgressBar.html)。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `value` | `number` | `0` | 当前值 |
+| `minValue` | `number` | `0` | 最小值 |
+| `maxValue` | `number` | `100` | 最大值 |
+| `isIndeterminate` | `boolean` | `false` | 是否为不确定进度 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 圆环尺寸 |
+| `color` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"accent"` | 进度弧颜色 |
+| `formatOptions` | `Intl.NumberFormatOptions` | `{style: 'percent'}` | 数值展示格式 |
+| `children` | `ReactNode \| (values: ProgressBarRenderProps) => ReactNode` | - | 内容或渲染 prop |
+
+### ProgressBarRenderProps
+
+使用渲染 prop 模式时，会提供以下值：
+
+| Prop | 类型 | 描述 |
+|------|------|------|
+| `percentage` | `number` | 进度百分比（0–100） |
+| `valueText` | `string` | 格式化后的数值文案 |
+| `isIndeterminate` | `boolean` | 是否为不确定进度 |

@@ -18,40 +18,8 @@
    cannot push beyond.
    -------------------------------------------------------------------------- */
 .table__scroll-container {
-  @apply overflow-x-auto;
-  /* Custom scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: oklch(0% 0 0 / 0.15) transparent;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: oklch(0% 0 0 / 0.15);
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: oklch(0% 0 0 / 0.25);
-  }
-
-  /* Dark mode scrollbar */
-  :is([data-theme="dark"], .dark) & {
-    scrollbar-color: oklch(100% 0 0 / 0.15) transparent;
-
-    &::-webkit-scrollbar-thumb {
-      background: oklch(100% 0 0 / 0.15);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: oklch(100% 0 0 / 0.25);
-    }
-  }
+  @apply scrollbar overflow-x-auto;
+  scrollbar-gutter: auto;
 }
 
 .table-root--primary {
@@ -74,13 +42,13 @@
 }
 
 .table-root--secondary .table__column:first-child {
-  border-top-left-radius: min(32px, var(--radius-2xl));
-  border-bottom-left-radius: min(32px, var(--radius-2xl));
+  border-start-start-radius: min(32px, var(--radius-2xl));
+  border-end-start-radius: min(32px, var(--radius-2xl));
 }
 
 .table-root--secondary .table__column:last-child {
-  border-top-right-radius: min(32px, var(--radius-2xl));
-  border-bottom-right-radius: min(32px, var(--radius-2xl));
+  border-start-end-radius: min(32px, var(--radius-2xl));
+  border-end-end-radius: min(32px, var(--radius-2xl));
 }
 
 /* Secondary: body has no shadow or rounded corners */
@@ -143,7 +111,7 @@
   /* Separator between columns — a short vertical line on the right edge */
   &::after {
     content: "";
-    @apply pointer-events-none absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+    @apply pointer-events-none absolute top-1/2 end-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   }
 
   &:last-child:not(:only-child)::after {
@@ -171,22 +139,43 @@
 }
 
 /* --------------------------------------------------------------------------
+   Sortable Column Header — wraps the column label and an optional indicator
+   icon. Rendered inside a sortable `Table.Column`'s render prop callback.
+   -------------------------------------------------------------------------- */
+.table__sortable-column-header {
+  @apply flex items-center justify-between;
+}
+
+/* --------------------------------------------------------------------------
+   Sortable Column Indicator — chevron that flips based on `data-direction`.
+   Defaults to pointing up (ascending) and rotates 180° for descending.
+   -------------------------------------------------------------------------- */
+.table__sortable-column-indicator {
+  @apply size-3 transform transition-transform duration-100 ease-out;
+
+  &[data-direction="descending"] {
+    @apply rotate-180;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Table Body (<tbody>)
    -------------------------------------------------------------------------- */
 .table__body {
   /* Non-virtualized: round corners via first/last cells
-     (border-radius on <tbody> itself has no effect) */
+     (border-radius on <tbody> itself has no effect).
+     Logical properties so corners follow `dir` in RTL. */
   & tr:first-child td:first-child {
-    border-top-left-radius: min(32px, var(--radius-2xl));
+    border-start-start-radius: min(32px, var(--radius-2xl));
   }
   & tr:first-child td:last-child {
-    border-top-right-radius: min(32px, var(--radius-2xl));
+    border-start-end-radius: min(32px, var(--radius-2xl));
   }
   & tr:last-child td:first-child {
-    border-bottom-left-radius: min(32px, var(--radius-2xl));
+    border-end-start-radius: min(32px, var(--radius-2xl));
   }
   & tr:last-child td:last-child {
-    border-bottom-right-radius: min(32px, var(--radius-2xl));
+    border-end-end-radius: min(32px, var(--radius-2xl));
   }
 
   /* Virtualized: elements are divs, not tr/td. VirtualizerItem wrappers
@@ -327,7 +316,8 @@
    Resizable Container — wraps table to enable column resizing via React Aria.
    -------------------------------------------------------------------------- */
 .table__resizable-container {
-  @apply relative overflow-auto;
+  @apply relative scrollbar overflow-auto;
+  scrollbar-gutter: auto;
 }
 
 /* --------------------------------------------------------------------------
@@ -336,7 +326,7 @@
    -------------------------------------------------------------------------- */
 .table__column-resizer {
   /* Match the ::after separator: absolute, right edge, short vertical line */
-  @apply absolute top-1/2 right-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+  @apply absolute top-1/2 end-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   /* Make it interactive — wider hit area with transparent padding */
   @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2;
   /* Reset appearance */

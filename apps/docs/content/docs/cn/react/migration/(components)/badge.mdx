@@ -1,0 +1,275 @@
+---
+title: Badge
+description: Badge 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Badge 文档](/docs/react/components/badge)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Badge` 是一个包装组件，相对其子元素进行内容定位：
+
+```tsx
+import { Badge, Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Badge content="5" color="primary">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+  );
+}
+```
+
+在 v3 中，Badge 改为复合组件模式，由 `Badge.Anchor` 负责定位：
+
+```tsx
+import { Badge, Avatar } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="accent">5</Badge>
+    </Badge.Anchor>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单一 `Badge` 组件包裹子节点，通过 `content` prop 设置徽章文本  
+**v3：** 复合组件：`Badge.Anchor`（定位包装器）、`Badge`（徽章本身）、`Badge.Label`（文本插槽，字符串子节点会自动包裹）
+
+### 2. 变体
+
+**v2：** `solid`、`flat`、`faded`、`shadow`  
+**v3：** `primary`、`secondary`、`soft`
+
+### 3. 颜色
+
+**v2：** `default`、`primary`、`secondary`、`success`、`warning`、`danger`  
+**v3：** `default`、`accent`、`success`、`warning`、`danger`
+
+### 4. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `content` | `Badge` 子节点 | 内容现在以子节点传入 |
+| `children` | `Badge.Anchor` | 锚定元素放入 `Badge.Anchor` 内部 |
+| `variant` | `Badge` | 取值变化（详见变体映射） |
+| `color` | `Badge` | `primary` → `accent`，`secondary` 已移除 |
+| `size` | `Badge` | 相同（`sm`、`md`、`lg`） |
+| `placement` | `Badge` | 相同（`top-right`、`top-left`、`bottom-right`、`bottom-left`） |
+| `shape` | - | 已移除（请改用 Tailwind CSS） |
+| `showOutline` | - | 已移除（请改用 Tailwind CSS，例如 `border-2`） |
+| `disableOutline` | - | 已移除 |
+| `disableAnimation` | - | 已移除 |
+| `isInvisible` | - | 已移除（请使用条件渲染） |
+| `isOneChar` | - | 已移除（请改用 Tailwind CSS） |
+| `isDot` | - | 省略子节点即可渲染为圆点 |
+| `classNames` | - | 改在各子组件上使用 `className` |
+
+### 5. 变体映射
+
+| v2 变体 | v3 对应项 | 说明 |
+| ------- | --------- | ---- |
+| `solid` | `primary` | 实心背景 |
+| `flat` | `soft` | 浅色背景 |
+| `faded` | `secondary` | 边框 + 背景 |
+| `shadow` | `primary` | 配合 Tailwind 的 `shadow-*` 类 |
+
+### 6. 颜色映射
+
+| v2 颜色 | v3 对应项 | 说明 |
+| ------- | --------- | ---- |
+| `default` | `default` | 相同 |
+| `primary` | `accent` | 已重命名 |
+| `secondary` | `default` 或 `accent` | 视上下文而定 |
+| `success` | `success` | 相同 |
+| `warning` | `warning` | 相同 |
+| `danger` | `danger` | 相同 |
+
+## 迁移示例
+
+### 基本徽章
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Badge, Avatar } from "@heroui/react";
+
+    <Badge content="5" color="primary">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Badge, Avatar } from "@heroui/react";
+
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="accent">5</Badge>
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### 圆点徽章
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Badge content="" isDot color="success">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="success" />
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### 位置
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Badge content="5" placement="bottom-right" color="danger">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge placement="bottom-right" color="danger">5</Badge>
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### 可见性切换
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    const [isInvisible, setIsInvisible] = useState(false);
+
+    <Badge content="5" isInvisible={isInvisible} color="danger">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    const [isVisible, setIsVisible] = useState(true);
+
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      {isVisible && <Badge color="danger">5</Badge>}
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+### 带图标内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Badge content={<Icon icon="gravity-ui:check" />} color="success">
+      <Avatar src="https://i.pravatar.cc/300" />
+    </Badge>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Badge.Anchor>
+      <Avatar>
+        <Avatar.Image src="https://i.pravatar.cc/300" alt="User" />
+        <Avatar.Fallback>U</Avatar.Fallback>
+      </Avatar>
+      <Badge color="success">
+        <Icon icon="gravity-ui:check" />
+      </Badge>
+    </Badge.Anchor>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变更
+
+### v2：`classNames` prop
+
+```tsx
+<Badge
+  classNames={{
+    base: "custom-base",
+    badge: "custom-badge"
+  }}
+/>
+```
+
+### v3：直接使用 `className` prop
+
+```tsx
+<Badge.Anchor className="custom-anchor">
+  <Avatar />
+  <Badge className="custom-badge">
+    <Badge.Label className="custom-label">5</Badge.Label>
+  </Badge>
+</Badge.Anchor>
+```
+
+## 组件结构
+
+v3 Badge 遵循以下结构：
+
+```
+Badge.Anchor (positioning wrapper)
+  ├── [Anchored element: Avatar, Button, etc.]
+  └── Badge (the badge indicator)
+      └── Badge.Label (auto-wrapped for string/number children)
+```
+
+## 总结
+
+1. **组件结构**：`Badge` 包裹子节点 → `Badge.Anchor` + `Badge` 作为同级
+2. **移除 content prop**：`content` prop → 将内容作为 `Badge` 的子节点传入
+3. **圆点徽章**：`isDot` prop → 省略子节点
+4. **可见性**：`isInvisible` prop → 改用条件渲染
+5. **变体收敛**：从 4 个变体减少为 3 个（`primary`、`secondary`、`soft`）
+6. **颜色变化**：`primary` → `accent`，`secondary` 已移除
+7. **移除的 prop**：`shape`、`showOutline`、`disableAnimation`、`isOneChar` —— 请改用 Tailwind CSS
+8. **移除 classNames**：改在各复合子组件上使用 `className`

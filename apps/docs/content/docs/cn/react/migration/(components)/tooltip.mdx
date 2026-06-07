@@ -1,0 +1,353 @@
+---
+title: Tooltip
+description: Tooltip 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Tooltip 文档](/docs/react/components/tooltip)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，Tooltip 使用 `content` prop：
+
+```tsx
+import { Tooltip, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Tooltip content="I am a tooltip">
+      <Button>Hover me</Button>
+    </Tooltip>
+  );
+}
+```
+
+在 v3 中，Tooltip 需要复合组件：
+
+```tsx
+import { Tooltip, Button } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Tooltip>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        I am a tooltip
+      </Tooltip.Content>
+    </Tooltip>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 通过 `content` prop 与作为触发器的 children 使用 Tooltip  
+**v3：** 复合组件（`Tooltip.Trigger`、`Tooltip.Content`、`Tooltip.Arrow`）
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `content` | — | 请使用 `Tooltip.Content` 的 children |
+| `showArrow` | `showArrow`（在 Content 上） | 移至 `Tooltip.Content` |
+| `placement` | `placement`（在 Content 上） | 移至 `Tooltip.Content` |
+| `offset` | `offset`（在 Content 上） | 移至 `Tooltip.Content` |
+| `color` | — | 已移除（请使用 Tailwind CSS） |
+| `size` | — | 已移除（请使用 Tailwind CSS） |
+| `radius` | — | 已移除（请使用 Tailwind CSS） |
+| `shadow` | — | 已移除（请使用 Tailwind CSS） |
+| `classNames` | — | 请在各子组件上使用 `className` |
+| `motionProps` | — | 已移除（动画机制已不同） |
+| `trigger` | `trigger`（在根上） | 仍存在：`"hover"` \| `"focus"`（默认 `"hover"`） |
+| `isDisabled` | `isDisabled`（在根上） | v3 新增：可完全禁用 Tooltip |
+| `delay` | `delay`（在根上） | 仍存在（默认由 `0` 改为 `700`） |
+| `closeDelay` | `closeDelay`（在根上） | 仍存在（默认 `0`） |
+| `portalContainer` | — | 不再对外暴露 |
+| `updatePositionDeps` | — | 不再对外暴露 |
+| `containerPadding`, `crossOffset` | — | 不再对外暴露 |
+| `shouldFlip` | — | 自动处理 |
+| `triggerScaleOnOpen` | — | 不可用 |
+| `isKeyboardDismissDisabled` | — | 不可用 |
+| `isDismissable` | — | 不可用 |
+| `shouldCloseOnBlur` | — | 不可用 |
+| `shouldCloseOnInteractOutside` | — | 不可用 |
+| `onClose` | — | 请改用 `onOpenChange` |
+
+### 3. 移至 `Tooltip.Content` 的 prop
+
+- `showArrow` — 现位于 `Tooltip.Content`
+- `placement` — 现位于 `Tooltip.Content`
+- `offset` — 现位于 `Tooltip.Content`
+
+## 迁移示例
+
+### 内容配置
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* With arrow */}
+    <Tooltip content="I am a tooltip" showArrow>
+      <Button>Hover me</Button>
+    </Tooltip>
+    
+    {/* With placement */}
+    <Tooltip content="Tooltip" placement="bottom">
+      <Button>Hover me</Button>
+    </Tooltip>
+    
+    {/* With offset */}
+    <Tooltip content="Tooltip" offset={12}>
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* With arrow */}
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content showArrow>
+        <Tooltip.Arrow />
+        <p>I am a tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    
+    {/* With placement */}
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content placement="bottom">
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    
+    {/* With offset */}
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content offset={12}>
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### 受控 Tooltip
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Tooltip
+      content="I am a tooltip"
+      isOpen={isOpen}
+      onOpenChange={setIsOpen}
+    >
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    <Tooltip isOpen={isOpen} onOpenChange={setIsOpen} delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>I am a tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### 带延迟
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Tooltip content="Tooltip" delay={500} closeDelay={200}>
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Tooltip delay={500} closeDelay={200}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Tooltip
+      content={
+        <div>
+          <strong>Title</strong>
+          <p>Description</p>
+        </div>
+      }
+    >
+      <Button>Hover me</Button>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Tooltip delay={0}>
+      <Tooltip.Trigger>
+        <Button>Hover me</Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <div>
+          <strong>Title</strong>
+          <p>Description</p>
+        </div>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义触发器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Tooltip content="Tooltip">
+      <div className="custom-trigger">Custom trigger</div>
+    </Tooltip>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Tooltip delay={0}>
+      <Tooltip.Trigger className="custom-trigger">
+        <div>Custom trigger</div>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>Tooltip</p>
+      </Tooltip.Content>
+    </Tooltip>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件组成
+
+v3 Tooltip 的结构如下：
+
+```
+Tooltip (Root)
+  ├── Tooltip.Trigger
+  │   └── [Trigger element]
+  └── Tooltip.Content
+      ├── Tooltip.Arrow (optional)
+      └── [Tooltip content]
+```
+
+## v3 新增 prop
+
+### isDisabled
+
+`isDisabled` prop 可完全禁用 Tooltip。禁用后，悬停或聚焦时都不会显示提示：
+
+```tsx
+<Tooltip isDisabled>
+  <Tooltip.Trigger>
+    <Button>No tooltip</Button>
+  </Tooltip.Trigger>
+  <Tooltip.Content>
+    <p>This will not show</p>
+  </Tooltip.Content>
+</Tooltip>
+```
+
+### trigger
+
+`trigger` prop 控制 Tooltip 的激活方式，取值为 `"hover"`（默认）或 `"focus"`：
+
+```tsx
+{/* Show tooltip only on focus */}
+<Tooltip trigger="focus">
+  <Tooltip.Trigger>
+    <Button>Focus me</Button>
+  </Tooltip.Trigger>
+  <Tooltip.Content>
+    <p>Shown on focus only</p>
+  </Tooltip.Content>
+</Tooltip>
+```
+
+### 自定义渲染函数
+
+`Tooltip.Content` 与 `Tooltip.Arrow` 均支持 `render` prop，可在高级场景下用自定义渲染函数覆盖默认 DOM 元素。
+
+## 说明
+
+### `content` prop
+
+- **v2：** 使用 `content` prop 传入提示文本 / 内容  
+- **v3：** 内容作为 `Tooltip.Content` 的 children
+
+### 箭头
+
+- **v2：** 由根上的 `showArrow` 控制  
+- **v3：** 在 `Tooltip.Content` 上使用 `showArrow`，并包含 `Tooltip.Arrow` 组件
+
+### placement 与 offset
+
+- **v2：** `placement` 与 `offset` 在根上  
+- **v3：** `placement` 与 `offset` 移至 `Tooltip.Content`
+
+### 触发元素
+
+- **v2：** children 自动作为触发器  
+- **v3：** 必须将触发元素包在 `Tooltip.Trigger` 内
+
+### 默认延迟
+
+- **v2：** `delay` 默认为 `0`  
+- **v3：** `delay` 默认为 `700`（注意：示例中使用 `delay={0}` 以贴近 v2 行为）
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Tooltip.Trigger`、`Tooltip.Content`、`Tooltip.Arrow`）
+2. **`content` prop 已移除**：请使用 `Tooltip.Content` 的 children
+3. **prop 迁移**：`showArrow`、`placement`、`offset` 移至 `Tooltip.Content`
+4. **样式相关 prop 已移除**：`color`、`size`、`radius`、`shadow` — 请使用 Tailwind CSS
+5. **`classNames` 已移除**：请在各子组件上使用 `className`
+6. **`motionProps` 已移除**：动画机制已不同
+7. **高级 prop 已移除**：大量定位与行为相关 prop 已移除
+8. **默认延迟变更**：默认由 `0` 改为 `700`
+9. **`isDisabled` prop**：v3 新增，可完全禁用 Tooltip
+10. **`trigger` prop**：取 `"hover"`（默认）或 `"focus"`，用于控制激活方式
+11. **渲染 prop**：`Tooltip.Content` 与 `Tooltip.Arrow` 支持 `render` prop，用于自定义 DOM 渲染

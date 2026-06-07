@@ -1,0 +1,103 @@
+---
+title: v3.0.4
+description: 全新 Text 组件、文档主题选择器、采用 min() 上限约束的圆角设计令牌、Table 聚焦环重构，以及多项 bug 修复。
+github:
+  pull: 6483
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 5 月</span>
+</div>
+
+补丁版本：从 HeroUI Pro 移植的全新 `Text` 复合组件；文档站新增主题选择器，可在不同主题下预览各组件；在约 45 个组件 CSS 文件中将圆角设计令牌改为使用 `min()` 上限约束；重做 Table 的聚焦环；并修复 Checkbox、Autocomplete、Tooltip 与表单字段内边距等问题。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 只需对它说一句「Hey Cursor，把 HeroUI 升级到最新版本」，AI 助手就会自动对比版本并应用必要的变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新增功能
+
+### Text 组件
+
+用于结构化排版的新复合组件，从 HeroUI Pro 移植 ([#6479](https://github.com/heroui-inc/heroui/pull/6479))。会根据子组件或 `type` prop 自动渲染正确的 HTML 元素——`<h1>` 至 `<h6>`、`<p>` 或 `<code>`。
+
+<ComponentPreview name="text-typography-scale" />
+
+子组件：`Text.Heading`、`Text.Paragraph`、`Text.Code`、`Text.Prose`。
+
+各子组件支持的 prop：`align`、`color`、`weight`、`truncate`。`Text.Heading` 支持 `level`（1–6）。`Text.Paragraph` 支持 `size`（`"base"`、`"sm"`、`"xs"`）。
+
+使用 `Text.Prose` 包裹混合内容以获得自动的文章体间距：
+
+```tsx
+<Text.Prose>
+  <Text.Heading level={3}>快速开始</Text.Heading>
+  <Text.Paragraph>安装依赖包并引入组件。</Text.Paragraph>
+</Text.Prose>
+```
+
+### 文档主题选择器
+
+文档站现内置主题选择器，可在浅色、深色、粗野主义等多种主题下预览每个组件。你的选择会保存到 `localStorage`，在会话之间保持 ([#6471](https://github.com/heroui-inc/heroui/pull/6471))。
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/videos/heroui-oss-3.0.4-4k.mp4"
+  muted
+/>
+
+### 圆角设计令牌
+
+约 45 个组件 CSS 文件中的 `rounded-full` 与硬编码 `border-radius` 现均通过 `min()` 限制计算后的半径 ([#6465](https://github.com/heroui-inc/heroui/pull/6465))。当用户设置过大的自定义圆角主题时，组件外观不再失真——半径在即将超过元素尺寸时停止增大。
+
+### Table 聚焦环重构
+
+表格行的聚焦指示改为在每个单元格上使用内阴影分别绘制，而非在整行使用单一 `box-shadow`。聚焦环在所有单元格之间视觉上保持连续，并在虚拟化表格包装器中正常工作。
+
+## Bug 修复
+
+- **Checkbox**：移除选中/半选指示态中硬编码的 `accent-hover` 背景 ([#6487](https://github.com/heroui-inc/heroui/pull/6487))
+- **Autocomplete**：`isDisabled` 现通过 context 从根节点传递到 `Trigger` 与 `ClearButton` ([#6443](https://github.com/heroui-inc/heroui/pull/6443))
+- **Description**：移除表单字段中说明文字的多余水平内边距（textfield、color-field、date-field、number-field、search-field、time-field） ([#6484](https://github.com/heroui-inc/heroui/pull/6484))
+- **Tooltip**：内边距由 `px-2 py-1` 调整为 `p-2`，圆角改为使用设计令牌 ([#6481](https://github.com/heroui-inc/heroui/pull/6481))
+- **Theme Builder**：修复 `accent-foreground` 取值被对调的问题 ([#6401](https://github.com/heroui-inc/heroui/pull/6401))
+- **柔和色对比度**：浅色强调主题（Sky、Lavender、Mint）下，`accent-soft-foreground` 现使用更深一级的色阶，修复次要按钮、Chip 与 Badge 上文字几乎不可见的问题。共享主题现从 `--accent-soft-foreground` 读取，并回退到 `--accent`
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [Figma Kit v3](https://www.figma.com/community/file/1546526812159103429/heroui-figma-kit-v3)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6483](https://github.com/heroui-inc/heroui/pull/6483)
+
+## 贡献者
+
+感谢每一位为本次发布做出贡献的开发者！
+
+<PRContributors />

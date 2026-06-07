@@ -1,0 +1,227 @@
+---
+title: DatePicker 日期选择器
+description: 可组合的日期选择器，基于 React Aria DatePicker，通过 DateField 与 Calendar 组合实现。
+links:
+  rac: DatePicker
+  source: date-picker/date-picker.tsx
+  styles: date-picker.css
+  storybook: Components/Date and Time/DatePicker
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { DatePicker, DateField, Calendar, Label } from '@heroui/react';
+```
+
+### 用法
+
+<ComponentPreview name="date-picker-basic" />
+
+### 组件结构
+
+`DatePicker` 采用组合优先的 API。请显式组合 `DateField` 与 `Calendar`，以便完全控制结构与样式。
+
+```tsx
+import {Calendar, DateField, DatePicker, Label} from '@heroui/react';
+
+export default () => (
+  <DatePicker>
+    <Label />
+    <DateField.Group>
+      <DateField.Input>
+        {(segment) => <DateField.Segment segment={segment} />}
+      </DateField.Input>
+      <DateField.Suffix>
+        <DatePicker.Trigger>
+          <DatePicker.TriggerIndicator />
+        </DatePicker.Trigger>
+      </DateField.Suffix>
+    </DateField.Group>
+    <DatePicker.Popover>
+      <Calendar aria-label="Choose date">
+        <Calendar.Header>
+          <Calendar.YearPickerTrigger>
+            <Calendar.YearPickerTriggerHeading />
+            <Calendar.YearPickerTriggerIndicator />
+          </Calendar.YearPickerTrigger>
+          <Calendar.NavButton slot="previous" />
+          <Calendar.NavButton slot="next" />
+        </Calendar.Header>
+        <Calendar.Grid>
+          <Calendar.GridHeader>
+            {(day) => <Calendar.HeaderCell>{day}</Calendar.HeaderCell>}
+          </Calendar.GridHeader>
+          <Calendar.GridBody>{(date) => <Calendar.Cell date={date} />}</Calendar.GridBody>
+        </Calendar.Grid>
+      </Calendar>
+    </DatePicker.Popover>
+  </DatePicker>
+)
+```
+
+### 受控
+
+<ComponentPreview name="date-picker-controlled" />
+
+### 校验
+
+<ComponentPreview name="date-picker-with-validation" />
+
+### 格式选项
+
+使用 `granularity`、`hourCycle`、`hideTimeZone`、`shouldForceLeadingZeros` 等 props 控制 DatePicker 值的展示方式。
+
+<ComponentPreview name="date-picker-format-options" />
+
+### 禁用
+
+<ComponentPreview name="date-picker-disabled" />
+
+### 自定义指示器
+
+未提供子节点时，`DatePicker.TriggerIndicator` 会渲染默认的 `IconCalendar`。传入子节点即可替换。
+
+<ComponentPreview name="date-picker-with-custom-indicator" />
+
+### 表单示例
+
+<ComponentPreview name="date-picker-form-example" />
+
+### 国际化历法
+
+默认情况下，DatePicker 会使用用户语言环境对应的历法显示日期。你可以使用 `I18nProvider` 包裹 DatePicker，并通过 [Unicode 历法语言扩展](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string) 覆盖。
+
+下方示例展示印度历法系统：
+
+<ComponentPreview name="date-picker-international-calendar" />
+
+**说明：** `onChange` 事件返回的日期始终与 `value` 或 `defaultValue` 使用同一历法系统（未提供值时为公历），与界面展示的本地化格式无关。这能确保应用逻辑在单一历法系统下保持一致，同时仍可按用户偏好展示日期。
+
+支持的历法系统及其标识符完整列表见：
+
+- [React Aria Calendar Implementations](https://react-aria.adobe.com/internationalized/date/Calendar#implementations)
+- [React Aria International Calendars](https://react-aria.adobe.com/Calendar#international-calendars)
+
+### 自定义渲染函数
+
+<ComponentPreview
+  name="date-picker-custom-render-function"
+/>
+
+<RelatedComponents component="datepicker" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+你可以分别为各个组合部分添加样式：
+
+```tsx
+import {Calendar, DateField, DatePicker, Label} from '@heroui/react';
+
+function CustomDatePicker() {
+  return (
+    <DatePicker className="w-[320px] gap-2">
+      <Label className="text-sm font-semibold">Date</Label>
+      <DateField.Group className="rounded-xl border border-border/60 bg-surface" fullWidth variant="secondary">
+        <DateField.Input>
+          {(segment) => <DateField.Segment segment={segment} />}
+        </DateField.Input>
+        <DateField.Suffix>
+          <DatePicker.Trigger className="w-full">
+            <DatePicker.TriggerIndicator className="text-default-600" />
+          </DatePicker.Trigger>
+        </DateField.Suffix>
+      </DateField.Group>
+      <DatePicker.Popover className="rounded-xl p-2">
+        <Calendar aria-label="Custom date picker calendar">
+          {/* Calendar parts */}
+        </Calendar>
+      </DatePicker.Popover>
+    </DatePicker>
+  );
+}
+```
+
+### 自定义组件类
+
+要自定义 DatePicker 的基础类，请使用 `@layer components`。
+
+```css
+@layer components {
+  .date-picker {
+    @apply inline-flex flex-col gap-1;
+  }
+
+  .date-picker__trigger {
+    @apply inline-flex items-center justify-between;
+  }
+
+  .date-picker__trigger-indicator {
+    @apply text-muted;
+  }
+
+  .date-picker__popover {
+    @apply min-w-[var(--trigger-width)] p-0;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 命名，便于复写与定制。
+
+### CSS 类
+
+DatePicker 在 `packages/styles/components/date-picker.css` 中使用以下类：
+
+- `.date-picker` - 根包裹层。
+- `.date-picker__trigger` - 打开弹出层的触发区域。
+- `.date-picker__trigger-indicator` - 默认或自定义指示器插槽。
+- `.date-picker__popover` - 弹出层内容包裹。
+
+### 交互状态
+
+DatePicker 支持 React Aria 的 data 属性与伪类状态：
+
+- **展开**：触发器上的 `[data-open="true"]`。
+- **禁用**：触发器上的 `[data-disabled="true"]` 或 `[aria-disabled="true"]`。
+- **焦点可见**：触发器上的 `:focus-visible` 或 `[data-focus-visible="true"]`。
+- **悬停**：触发器上的 `:hover` 或 `[data-hovered="true"]`。
+
+## API 参考
+
+### DatePicker Props
+
+DatePicker 继承 React Aria [DatePicker](https://react-aria.adobe.com/DatePicker.md) 的全部 props。
+
+| Prop | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `value` | `DateValue \| null` | - | 受控的选中日期值。 |
+| `defaultValue` | `DateValue \| null` | - | 非受控模式下的默认选中值。 |
+| `onChange` | `(value: DateValue \| null) => void` | - | 选中日期变化时调用。 |
+| `isOpen` | `boolean` | - | 受控的弹出层打开状态。 |
+| `defaultOpen` | `boolean` | `false` | 弹出层初始打开状态。 |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | 弹出层打开状态变化时调用。 |
+| `isDisabled` | `boolean` | `false` | 禁用日期选择与触发器交互。 |
+| `isInvalid` | `boolean` | - | 将字段标记为无效以呈现校验状态。 |
+| `minValue` | `DateValue` | - | 可选择的最小日期。 |
+| `maxValue` | `DateValue` | - | 可选择的最大日期。 |
+| `name` | `string` | - | HTML 表单提交使用的 name。 |
+| `children` | `ReactNode \| (values: DatePickerRenderProps) => ReactNode` | - | 组合内容或渲染函数。 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, DatePickerRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+
+### 组合部件
+
+| 组件 | 描述 |
+| --- | --- |
+| `DatePicker.Root` | 根日期选择器容器与状态持有者。 |
+| `DatePicker.Trigger` | 触发按钮，通常渲染在 `DateField.Suffix` 内。 |
+| `DatePicker.TriggerIndicator` | 带默认日历图标的指示器插槽。 |
+| `DatePicker.Popover` | 包裹 `Calendar` 内容的弹出层。 |
+
+### 相关包
+
+- [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) — 所有日期组件共用的日期类型（`CalendarDate`、`CalendarDateTime`、`ZonedDateTime`）与工具函数
+- [`I18nProvider`](https://react-aria.adobe.com/I18nProvider) — 为子树覆盖语言环境
+- [`useLocale`](https://react-aria.adobe.com/useLocale) — 读取当前语言环境与布局方向

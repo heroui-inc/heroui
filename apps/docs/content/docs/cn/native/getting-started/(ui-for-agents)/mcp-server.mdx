@@ -1,0 +1,206 @@
+---
+title: MCP 服务器
+description: 在 AI 助手中直接访问 HeroUI Native 文档
+---
+
+HeroUI MCP 服务器让 AI 助手直接读取 HeroUI Native 组件文档，便于在 AI 驱动的开发流程中使用 HeroUI。
+
+<DocsImage
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/hero-native-mcp-light-new.jpg"
+  darkSrc="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/hero-native-mcp-dark-new.jpg"
+  alt="HeroUI Native MCP 服务器"
+/>
+
+
+当前 MCP 服务器支持 **heroui-native** 与 [stdio 传输](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio)。npm 包名为 `@heroui/native-mcp`。源码见 [GitHub](https://github.com/heroui-inc/heroui-mcp)。
+
+<Callout>
+  随着 HeroUI Native 组件增加，MCP 中的可用内容也会同步扩展。
+</Callout>
+
+## 快速配置
+
+**Cursor：**
+
+<div className="flex items-center gap-3 mb-4">
+  <a
+    href="https://link.heroui.com/native-mcp-cursor-install"
+    className="button button--tertiary button--sm no-underline"
+  >
+    <svg viewBox="0 0 466.73 532.09" className="w-5 h-5 fill-current">
+      <path d="M457.43,125.94L244.42,2.96c-6.84-3.95-15.28-3.95-22.12,0L9.3,125.94c-5.75,3.32-9.3,9.46-9.3,16.11v247.99c0,6.65,3.55,12.79,9.3,16.11l213.01,122.98c6.84,3.95,15.28,3.95,22.12,0l213.01-122.98c5.75-3.32,9.3-9.46,9.3-16.11v-247.99c0-6.65-3.55-12.79-9.3-16.11h-.01ZM444.05,151.99l-205.63,356.16c-1.39,2.4-5.06,1.42-5.06-1.36v-233.21c0-4.66-2.49-8.97-6.53-11.31L24.87,145.67c-2.4-1.39-1.42-5.06,1.36-5.06h411.26c5.84,0,9.49,6.33,6.57,11.39h-.01Z"/>
+    </svg>
+    <span>在 Cursor 中安装</span>
+  </a>
+</div>
+
+或手动添加到 **Cursor 设置** → **Tools** → **MCP Servers**：
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "heroui-native": {
+      "command": "npx",
+      "args": ["-y", "@heroui/native-mcp@latest"]
+    }
+  }
+}
+```
+
+也可将以下内容加入 `~/.cursor/mcp.json`。详见 [Cursor 文档](https://cursor.com/docs/context/mcp)。
+
+**Claude Code：** 在终端执行：
+
+```bash
+claude mcp add heroui-native -- npx -y @heroui/native-mcp@latest
+```
+
+或手动写入项目的 `.mcp.json`：
+
+```json title=".mcp.json"
+{
+  "mcpServers": {
+    "heroui-native": {
+      "command": "npx",
+      "args": ["-y", "@heroui/native-mcp@latest"]
+    }
+  }
+}
+```
+
+添加配置后重启 Claude Code，运行 `/mcp` 查看列表；若显示 **Connected** 即可使用。
+
+更多说明见 [Claude Code MCP 文档](https://docs.claude.com/en/docs/claude-code/mcp)。
+
+**Windsurf：** 在项目 `.windsurf/mcp.json` 中加入：
+
+```json title=".windsurf/mcp.json"
+{
+  "mcpServers": {
+    "heroui-native": {
+      "command": "npx",
+      "args": ["-y", "@heroui/native-mcp@latest"]
+    }
+  }
+}
+```
+
+保存后重启 Windsurf 以生效。
+
+详见 [Windsurf MCP 文档](https://docs.windsurf.com/windsurf/cascade/mcp)。
+
+**Zed：** 在 `settings.json` 中配置（命令面板 `zed: open settings` 或 `Cmd-,` / `Ctrl-,`）：
+
+```json title="settings.json"
+{
+  "context_servers": {
+    "heroui-native": {
+      "command": "npx",
+      "args": ["-y", "@heroui/native-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+重启 Zed 后，在 Agent 面板设置中确认 heroui-native 旁指示点为绿色，提示为「Server is active」。
+
+详见 [Zed MCP 文档](https://zed.dev/docs/ai/mcp)。
+
+**VS Code：** 若配合 GitHub Copilot 使用 MCP，在项目 `.vscode/mcp.json` 中添加：
+
+```json title=".vscode/mcp.json"
+{
+  "servers": {
+    "heroui-native": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@heroui/native-mcp@latest"]
+    }
+  }
+}
+```
+
+打开 `.vscode/mcp.json`，在 heroui-native 旁点击 **Start**。
+
+详见 [VS Code MCP 文档](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)。
+
+**Codex：** 写入 `~/.codex/config.toml` 或项目内 `.codex/config.toml`：
+
+```toml title="config.toml"
+[mcp_servers.heroui-native]
+command = "npx"
+args = ["-y", "@heroui/native-mcp@latest"]
+```
+
+重启 Codex，在 TUI 中运行 `/mcp` 校验服务器已激活。
+
+详见 [Codex MCP 文档](https://developers.openai.com/codex/mcp)。
+
+**OpenCode：** 在项目 `opencode.json` 中添加：
+
+```json title="opencode.json"
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "heroui-native": {
+      "type": "local",
+      "command": ["npx", "-y", "@heroui/native-mcp@latest"]
+    }
+  }
+}
+```
+
+重启 OpenCode 后生效。
+
+详见 [OpenCode MCP 文档](https://open-code.ai/docs/en/mcp-servers)。
+
+## 用法
+
+配置完成后，可向 AI 提问，例如：
+
+- "Help me install HeroUI Native in my Expo app"
+- "Show me all HeroUI Native components"
+- "What props does the Button component have?"
+- "Give me an example of using the Card component"
+- "What are the theme variables for dark mode?"
+
+### 自动升级
+
+MCP 也可协助将 HeroUI Native 升级到最新版本，例如：
+
+```bash
+"Hey Cursor, update HeroUI Native to the latest version"
+```
+
+助手通常会：
+
+- 对比当前版本与最新发布
+- 阅读变更日志中的破坏性变更
+- 在项目中应用必要的代码更新
+
+适用于升级到最新稳定版或预发布版本。
+
+## 可用工具
+
+MCP 向 AI 暴露以下工具：
+
+| 工具 | 说明 |
+|------|------|
+| `list_components` | 列出全部 HeroUI Native 组件 |
+| `get_component_docs` | 获取一个或多个组件的完整文档（结构、props、示例与用法模式） |
+| `get_theme_variables` | 读取颜色、排版、间距等主题变量，支持明暗模式 |
+| `get_docs` | 浏览 HeroUI Native 全部文档（指南与原则等）；安装说明可使用路径 `/docs/native/getting-started/quick-start` |
+
+
+## 故障排除
+
+**环境要求：** Node.js 22 及以上。使用 `npx` 时会自动下载包。
+
+**需要帮助？** [GitHub Issues](https://github.com/heroui-inc/heroui-mcp/issues) | [Discord 社区](https://discord.gg/heroui)
+
+## 链接
+
+- [npm 包](https://www.npmjs.com/package/@heroui/native-mcp)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-mcp)
+- [贡献指南](https://github.com/heroui-inc/heroui-mcp/blob/main/CONTRIBUTING.md)

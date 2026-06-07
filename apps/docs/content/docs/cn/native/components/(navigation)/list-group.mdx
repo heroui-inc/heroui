@@ -1,0 +1,397 @@
+---
+title: ListGroup 列表组
+description: 基于 Surface 的容器，用于分组展示列表项并保持一致的布局与间距。
+links:
+  source_native: list-group/list-group.tsx
+  styles_native: list-group/list-group.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/list-group-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { ListGroup } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>...</ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>...</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>...</ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+- **ListGroup**：基于 Surface 的根容器，用于分组列表项；支持全部 Surface 变体（`default`、`secondary`、`tertiary`、`transparent`）。
+- **ListGroup.Item**：可按压的水平 `flex-row` 行容器，提供统一的间距与对齐。
+- **ListGroup.ItemPrefix**：可选前导槽，用于图标、头像等。
+- **ListGroup.ItemContent**：`flex-1` 包裹标题与说明，占据剩余横向空间。
+- **ListGroup.ItemTitle**：主标题，前景色与中等字重。
+- **ListGroup.ItemDescription**：次要说明，弱化颜色与较小字号。
+- **ListGroup.ItemSuffix**：可选尾部槽；默认渲染右箭头；传入子节点可覆盖默认图标。
+
+## 用法
+
+### 基础用法
+
+通过组合子部件创建带标题与说明的分组列表。
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>个人信息</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        姓名、邮箱、手机号
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>支付方式</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        Visa 尾号 4829
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### 带图标
+
+使用 `ListGroup.ItemPrefix` 放置前置图标。
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="person-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>个人资料</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        姓名、照片、简介
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="lock-closed-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>安全</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        密码、双重验证
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### 仅标题
+
+省略 `ListGroup.ItemDescription` 以展示仅标题行。
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="wifi-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Wi-Fi</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemPrefix>
+      <Icon name="bluetooth-outline" size={22} />
+    </ListGroup.ItemPrefix>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>蓝牙</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### Surface 变体
+
+为根容器应用不同的视觉变体。
+
+```tsx
+<ListGroup variant="transparent">
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>Wi-Fi</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### 自定义尾部
+
+向 `ListGroup.ItemSuffix` 传入子节点以覆盖默认箭头。
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>语言</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>简体中文</ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix>
+      <Icon name="arrow-forward" size={18} />
+    </ListGroup.ItemSuffix>
+  </ListGroup.Item>
+  <Separator className="mx-4" />
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>通知</ListGroup.ItemTitle>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix>
+      <Chip variant="primary" color="danger">
+        <Chip.Label className="font-bold">7</Chip.Label>
+      </Chip>
+    </ListGroup.ItemSuffix>
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### 自定义尾部图标属性
+
+通过 `iconProps` 调整默认箭头尺寸与颜色。
+
+```tsx
+<ListGroup>
+  <ListGroup.Item>
+    <ListGroup.ItemContent>
+      <ListGroup.ItemTitle>存储空间</ListGroup.ItemTitle>
+      <ListGroup.ItemDescription>
+        已用 12.4 GB / 共 50 GB
+      </ListGroup.ItemDescription>
+    </ListGroup.ItemContent>
+    <ListGroup.ItemSuffix iconProps={{ size: 18, color: mutedColor }} />
+  </ListGroup.Item>
+</ListGroup>
+```
+
+### 配合 PressableFeedback
+
+用 `PressableFeedback` 包裹列表项以添加缩放与水波纹反馈。此模式下将 `onPress` 放在 `PressableFeedback` 上，并对 `ListGroup.Item` 使用 `disabled`。
+
+```tsx
+import { ListGroup, PressableFeedback, Separator } from 'heroui-native';
+
+<ListGroup>
+  <PressableFeedback animation={false} onPress={() => {}}>
+    <PressableFeedback.Scale>
+      <ListGroup.Item disabled>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>外观</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>
+            主题、字号、显示
+          </ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+    </PressableFeedback.Scale>
+    <PressableFeedback.Ripple />
+  </PressableFeedback>
+  <Separator className="mx-4" />
+  <PressableFeedback animation={false} onPress={() => {}}>
+    <PressableFeedback.Scale>
+      <ListGroup.Item disabled>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>通知</ListGroup.ItemTitle>
+          <ListGroup.ItemDescription>
+            提醒、声音、角标
+          </ListGroup.ItemDescription>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix />
+      </ListGroup.Item>
+    </PressableFeedback.Scale>
+    <PressableFeedback.Ripple />
+  </PressableFeedback>
+</ListGroup>
+```
+
+## 示例
+
+```tsx
+import { Ionicons } from '@expo/vector-icons';
+import { ListGroup, Separator, useThemeColor } from 'heroui-native';
+import { View, Text } from 'react-native';
+import { withUniwind } from 'uniwind';
+
+const StyledIonicons = withUniwind(Ionicons);
+
+export default function ListGroupExample() {
+  const mutedColor = useThemeColor('muted');
+
+  return (
+    <View className="flex-1 justify-center px-5">
+      <Text className="text-sm text-muted mb-2 ml-2">账户</Text>
+      <ListGroup className="mb-6">
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="person-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>个人信息</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              姓名、邮箱、手机号
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix />
+        </ListGroup.Item>
+        <Separator className="mx-4" />
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="card-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>支付方式</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              Visa 尾号 4829
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix />
+        </ListGroup.Item>
+      </ListGroup>
+      <Text className="text-sm text-muted mb-2 ml-2">偏好设置</Text>
+      <ListGroup>
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="color-palette-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>外观</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              主题、字号、显示
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix />
+        </ListGroup.Item>
+        <Separator className="mx-4" />
+        <ListGroup.Item>
+          <ListGroup.ItemPrefix>
+            <StyledIonicons
+              name="notifications-outline"
+              size={22}
+              className="text-foreground"
+            />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>通知</ListGroup.ItemTitle>
+            <ListGroup.ItemDescription>
+              提醒、声音、角标
+            </ListGroup.ItemDescription>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix iconProps={{ size: 18, color: mutedColor }} />
+        </ListGroup.Item>
+      </ListGroup>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/list-group.tsx)。
+
+## API 参考
+
+### ListGroup
+
+| prop           | type                                                       | default     | description                                        |
+| -------------- | ---------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode`                                          | -           | 分组内的子节点                                     |
+| `variant`      | `'default' \| 'secondary' \| 'tertiary' \| 'transparent'` | `'default'` | 底层 Surface 容器的视觉变体                      |
+| `className`    | `string`                                                   | -           | 根容器额外 class                                   |
+| `...ViewProps` | `ViewProps`                                                | -           | 支持全部标准 React Native `View` 属性              |
+
+### ListGroup.Item
+
+| prop                | type              | default | description                                             |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------- |
+| `children`          | `React.ReactNode` | -       | 列表行内的子节点                                        |
+| `className`         | `string`          | -       | 列表行额外 class                                        |
+| `...PressableProps` | `PressableProps`  | -       | 支持全部标准 React Native `Pressable` 属性              |
+
+### ListGroup.ItemPrefix
+
+| prop           | type              | default | description                                            |
+| -------------- | ----------------- | ------- | ------------------------------------------------------ |
+| `children`     | `React.ReactNode` | -       | 前导内容，如图标或头像                                 |
+| `className`    | `string`          | -       | 前导区域额外 class                                     |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 React Native `View` 属性                  |
+
+### ListGroup.ItemContent
+
+| prop           | type              | default | description                                            |
+| -------------- | ----------------- | ------- | ------------------------------------------------------ |
+| `children`     | `React.ReactNode` | -       | 内容区，通常为标题与说明                               |
+| `className`    | `string`          | -       | 内容区额外 class                                       |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 React Native `View` 属性                  |
+
+### ListGroup.ItemTitle
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 标题文本或自定义内容                               |
+| `className`    | `string`          | -       | 标题额外 class                                     |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 React Native `View` 属性              |
+
+### ListGroup.ItemDescription
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 说明文本或自定义内容                               |
+| `className`    | `string`          | -       | 说明额外 class                                     |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 React Native `View` 属性              |
+
+### ListGroup.ItemSuffix
+
+| prop           | type                 | default | description                                                                        |
+| -------------- | -------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `children`     | `React.ReactNode`    | -       | 自定义尾部内容；提供时将覆盖默认右箭头图标                                         |
+| `className`    | `string`             | -       | 尾部额外 class                                                                     |
+| `iconProps`    | `ListGroupIconProps` | -       | 自定义默认右箭头图标；仅在无 `children` 时生效                                     |
+| `...ViewProps` | `ViewProps`          | -       | 支持全部标准 React Native `View` 属性                                              |
+
+#### ListGroupIconProps
+
+| prop    | type     | default             | description                        |
+| ------- | -------- | ------------------- | ---------------------------------- |
+| `size`  | `number` | `16`                | 箭头图标尺寸（像素）               |
+| `color` | `string` | 主题的 `muted` 颜色 | 箭头图标颜色                       |

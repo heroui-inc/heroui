@@ -8,10 +8,12 @@ import {Tabs} from "@heroui/react";
 import {usePathname, useRouter} from "next/navigation";
 import {useCallback, useEffect, useRef, useState} from "react";
 
-import {defaultRoutes, useCurrentFramework} from "@/hooks/use-current-framework";
+import {getDefaultRoute, useCurrentFramework} from "@/hooks/use-current-framework";
+import {useDictionary} from "@/hooks/use-dictionary";
 import {cn} from "@/utils/cn";
 
 export function FrameworksTabs({className}: {className?: string}) {
+  const dict = useDictionary().frameworksTabs;
   const pathname = usePathname();
   const router = useRouter();
   const isNavigatingRef = useRef(false);
@@ -45,10 +47,10 @@ export function FrameworksTabs({className}: {className?: string}) {
 
       // Navigate to default route for target framework after a short delay to allow animation to play
       setTimeout(() => {
-        router.push(defaultRoutes[targetFramework] as any);
+        router.push(getDefaultRoute(targetFramework, pathname) as any);
       }, 150); // Small delay to let animation start
     },
-    [currentFramework, router],
+    [currentFramework, pathname, router],
   );
 
   // Sync selectedKey with pathname changes (e.g., browser back/forward)
@@ -74,15 +76,21 @@ export function FrameworksTabs({className}: {className?: string}) {
     <div className={cn("ml-auto", className)}>
       <Tabs selectedKey={selectedKey} onSelectionChange={handleTabChange}>
         <Tabs.ListContainer className="pb-1.5">
-          <Tabs.List aria-label="Documentation framework">
-            <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-sky-400" id="web">
-              <Globe className="mr-1 size-4" />
-              Web
+          <Tabs.List aria-label={dict.ariaLabel}>
+            <Tabs.Tab
+              className="whitespace-nowrap sm:h-6 data-[selected=true]:[&>svg]:text-sky-400"
+              id="web"
+            >
+              <Globe className="mr-1 size-4 shrink-0" />
+              {dict.web}
               <Tabs.Indicator />
             </Tabs.Tab>
-            <Tabs.Tab className="sm:h-6 data-[selected=true]:[&>svg]:text-indigo-500" id="native">
-              <Smartphone className="mr-1 size-4" />
-              Native
+            <Tabs.Tab
+              className="whitespace-nowrap sm:h-6 data-[selected=true]:[&>svg]:text-indigo-500"
+              id="native"
+            >
+              <Smartphone className="mr-1 size-4 shrink-0" />
+              {dict.native}
               <Tabs.Indicator />
             </Tabs.Tab>
           </Tabs.List>

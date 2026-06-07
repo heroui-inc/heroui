@@ -25,7 +25,7 @@ export type Switch = {
 /* -------------------------------------------------------------------------------------------------
  * Named Component
  * -----------------------------------------------------------------------------------------------*/
-export {SwitchRoot, SwitchContent, SwitchControl, SwitchIcon, SwitchThumb};
+export {SwitchContent, SwitchControl, SwitchIcon, SwitchRoot, SwitchThumb};
 
 export type {
   SwitchRootProps,
@@ -34,6 +34,10 @@ export type {
   SwitchControlProps,
   SwitchThumbProps,
   SwitchIconProps,
+  SwitchFieldRenderProps,
+  SwitchButtonRenderProps,
+  /** @deprecated Use {@link SwitchFieldRenderProps} for the root render prop, or {@link SwitchButtonRenderProps} for control. */
+  SwitchFieldRenderProps as SwitchRenderProps,
 } from "./switch";
 
 /* -------------------------------------------------------------------------------------------------

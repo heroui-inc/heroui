@@ -1,0 +1,379 @@
+---
+title: Switch
+description: Switch 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Switch 文档](/docs/react/components/switch)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`Switch` 结构简单，children 作为标签：
+
+```tsx
+import { Switch } from "@heroui/react";
+
+export default function App() {
+  return <Switch>Enable notifications</Switch>;
+}
+```
+
+在 v3 中，`Switch` 需要复合组件：
+
+```tsx
+import { Switch, Label } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Switch>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        Enable notifications
+      </Switch.Content>
+    </Switch>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** children 作为标签的简单 Switch  
+**v3：** 复合组件（`Switch.Content`、`Switch.Control`、`Switch.Thumb`）与 `Label` 组件
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `onValueChange` | `onChange` | 事件处理函数已重命名 |
+| `size` | `size` | 仍在根上（`sm` \| `md` \| `lg`） |
+| `label` | — | 请使用 `Label` 组件 |
+| `color` | — | 已移除（请使用 Tailwind CSS） |
+| `thumbIcon` | — | 请在 `Switch.Thumb` 内使用 `Switch.Icon` |
+| `startContent` | — | 请直接自定义控件 |
+| `endContent` | — | 请直接自定义控件 |
+| `classNames` | — | 请在各子组件上使用 `className` |
+| `disableAnimation` | — | 已移除（动画机制已不同） |
+
+### 3. 新组件
+
+- `SwitchGroup` — 用于将多个 Switch 成组  
+- `Switch.Content` — 可点击的标签，包裹控件与 `Label`  
+- `Switch.Icon` — 拇指（Thumb）内的图标  
+
+## 迁移示例
+
+### 受控 Switch
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+
+    const [isSelected, setIsSelected] = useState(true);
+
+    <Switch isSelected={isSelected} onValueChange={setIsSelected}>
+      Airplane mode
+    </Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+
+    const [isSelected, setIsSelected] = useState(true);
+
+    <Switch isSelected={isSelected} onChange={setIsSelected}>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        Airplane mode
+      </Switch.Content>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### 无标签
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Switch defaultSelected aria-label="Automatic updates" />
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Switch defaultSelected aria-label="Automatic updates">
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+      </Switch.Content>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### 带拇指图标
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Switch thumbIcon={<CheckIcon />}>Enable notifications</Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Switch>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb>
+            <Switch.Icon>
+              <CheckIcon />
+            </Switch.Icon>
+          </Switch.Thumb>
+        </Switch.Control>
+        Enable notifications
+      </Switch.Content>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### 带起始 / 结束内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Switch
+      startContent={<SunIcon />}
+      endContent={<MoonIcon />}
+    >
+      Dark mode
+    </Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Switch>
+      <Switch.Content>
+        <Switch.Control className="flex items-center gap-2">
+          <SunIcon />
+          <Switch.Thumb />
+          <MoonIcon />
+        </Switch.Control>
+        Dark mode
+      </Switch.Content>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### 带标签与描述
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Switch description="You will receive notifications for all activity">
+      Enable notifications
+    </Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Switch, Label, Description } from "@heroui/react";
+
+    <Switch>
+      <Switch.Content>
+        <Switch.Control>
+          <Switch.Thumb />
+        </Switch.Control>
+        Enable notifications
+      </Switch.Content>
+      <Description>You will receive notifications for all activity</Description>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### 尺寸与颜色
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* Sizes */}
+    <div className="flex gap-4">
+      <Switch size="sm">Small</Switch>
+      <Switch size="md">Medium</Switch>
+      <Switch size="lg">Large</Switch>
+    </div>
+    
+    {/* Colors */}
+    <Switch color="primary">Primary</Switch>
+    <Switch color="success">Success</Switch>
+    <Switch color="danger">Danger</Switch>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    {/* Sizes */}
+    <div className="flex gap-4">
+      <Switch size="sm">
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Small
+        </Switch.Content>
+      </Switch>
+      <Switch size="md">
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Medium
+        </Switch.Content>
+      </Switch>
+      <Switch size="lg">
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Large
+        </Switch.Content>
+      </Switch>
+    </div>
+    
+    {/* Colors - Use Tailwind CSS classes */}
+    <Switch>
+      <Switch.Content>
+        <Switch.Control className="data-[selected=true]:bg-accent">
+          <Switch.Thumb />
+        </Switch.Control>
+        Primary
+      </Switch.Content>
+    </Switch>
+    <Switch>
+      <Switch.Content>
+        <Switch.Control className="data-[selected=true]:bg-success">
+          <Switch.Thumb />
+        </Switch.Control>
+        Success
+      </Switch.Content>
+    </Switch>
+    <Switch>
+      <Switch.Content>
+        <Switch.Control className="data-[selected=true]:bg-danger">
+          <Switch.Thumb />
+        </Switch.Control>
+        Danger
+      </Switch.Content>
+    </Switch>
+    ```
+  </Tab>
+</Tabs>
+
+### Switch 组
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    {/* No built-in group component in v2 */}
+    <div className="flex flex-col gap-2">
+      <Switch name="notifications">Allow Notifications</Switch>
+      <Switch name="marketing">Marketing emails</Switch>
+    </div>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { SwitchGroup } from "@heroui/react";
+
+    <SwitchGroup>
+      <Switch name="notifications">
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Allow Notifications
+        </Switch.Content>
+      </Switch>
+      <Switch name="marketing">
+        <Switch.Content>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+          Marketing emails
+        </Switch.Content>
+      </Switch>
+    </SwitchGroup>
+    ```
+  </Tab>
+</Tabs>
+
+## 组件组成
+
+v3 `Switch` 的结构如下：
+
+```
+Switch (Root)
+  ├── Switch.Content (the clickable label)
+  │   ├── Switch.Control
+  │   │   └── Switch.Thumb
+  │   │       └── Switch.Icon (optional)
+  │   └── Label
+  ├── Description (optional, sibling)
+  └── FieldError (optional, sibling)
+```
+
+分组时：
+
+```
+SwitchGroup
+  ├── Switch
+  │   ├── Switch.Content
+  │   │   ├── Switch.Control
+  │   │   │   └── Switch.Thumb
+  │   │   └── Label
+  │   └── Description (optional)
+  └── Switch
+      ├── Switch.Content
+      │   ├── Switch.Control
+      │   │   └── Switch.Thumb
+      │   └── Label
+      └── Description (optional)
+```
+
+## 说明
+
+### 事件处理函数
+
+- **v2：** `onValueChange` prop  
+- **v3：** `onChange` prop（签名相同：`(isSelected: boolean) => void`）
+
+### 标签
+
+- **v2：** children 作为标签  
+- **v3：** `Label` 放在 `Switch.Content`（可点击的标签）内；`Description` / `FieldError` 作为 `Switch.Content` 的同级元素
+
+### 图标
+
+- **v2：** `thumbIcon` 用于拇指内图标，`startContent` / `endContent` 用于外侧图标  
+- **v3：** 拇指内图标用 `Switch.Icon`（置于 `Switch.Thumb` 内）；起始 / 结束内容请自定义 `Switch.Control`
+
+## 总结
+
+1. **组件结构**：必须使用复合组件（`Switch.Content`、`Switch.Control`、`Switch.Thumb`）
+2. **可点击的标签**：用 `Switch.Content` 包裹 `Switch.Control` 与 `Label`；将 `Description` / `FieldError` 作为 `Switch.Content` 的同级元素
+3. **标签**：不再用 children 作为标签 — 请在 `Switch.Content` 内使用 `Label`
+4. **事件处理函数**：`onValueChange` → `onChange`
+5. **样式相关 prop 已移除**：`color` — 请使用 Tailwind CSS
+6. **图标相关 prop 已移除**：`thumbIcon`、`startContent`、`endContent` — 请用子组件或直接自定义
+7. **`classNames` 已移除**：请在各子组件上使用 `className` prop
+8. **新组件**：`SwitchGroup` 用于成组；`Switch.Content` 作为可点击的标签，包裹控件与 `Label`

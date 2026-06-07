@@ -1,0 +1,142 @@
+---
+title: TextArea 多行文本框
+description: 原语级多行文本输入组件，可接受标准 HTML 属性。
+links:
+  rac: TextArea
+  source: textarea/textarea.tsx
+  styles: textarea.css
+  storybook: Components/Forms/Textarea
+---
+
+## 引入
+
+```tsx
+import { TextArea } from '@heroui/react';
+```
+
+<Callout>
+  关于校验、标签与错误信息，请参阅 **[TextField](/docs/components/text-field)**。
+</Callout>
+
+### 用法
+
+<ComponentPreview name="textarea-basic" />
+
+### 受控
+
+<ComponentPreview name="textarea-controlled" />
+
+### 行数与尺寸调整
+
+<ComponentPreview name="textarea-rows" />
+
+### 全宽
+
+<ComponentPreview name="textarea-full-width" />
+
+### 变体
+
+TextArea 支持两种视觉变体：
+
+- **`primary`**（默认）— 常规带阴影样式，适用于大多数场景
+- **`secondary`** — 弱强调、无阴影变体，适合用于 Surface 组件内部
+
+<ComponentPreview name="textarea-variants" />
+
+### 在 Surface 内
+
+在 [Surface](/docs/components/surface) 组件内部使用时，请使用 `variant="secondary"`，以应用适合 surface 背景的弱强调变体。
+
+<ComponentPreview name="textarea-on-surface" />
+
+<RelatedComponents component="textarea" />
+
+<RelatedShowcases component="TextArea" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+import {Label, TextArea} from '@heroui/react';
+
+function CustomTextArea() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Label htmlFor="custom-textarea">Message</Label>
+      <TextArea
+        id="custom-textarea"
+        className="rounded-xl border border-border/70 bgsurface px-4 py-3 text-sm leading-6 shadow-sm"
+        placeholder="Let us know how we can help..."
+        rows={5}
+        style={{resize: "vertical"}}
+      />
+    </div>
+  );
+}
+```
+
+### 自定义组件类
+
+使用 Tailwind 的 `@layer components` 一次性覆盖共享的 `.textarea` 类。
+
+```css
+@layer components {
+  .textarea {
+    @apply rounded-xl border border-border bgsurface px-4 py-3 text-sm leading-6 shadow-sm;
+
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-surface-secondary border-border/80;
+    }
+
+    &:focus-visible,
+    &[data-focus-visible="true"] {
+      @apply border-primary ring-2 ring-primary/20;
+    }
+
+    &[data-invalid="true"] {
+      @apply border-danger bg-danger-50/10 text-danger;
+    }
+  }
+}
+```
+
+### CSS 类
+
+- `.textarea` – 底层 `<textarea>` 元素样式
+
+### 交互状态
+
+- **悬停**：`:hover` 或 `[data-hovered="true"]`
+- **可见焦点**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **无效**：`[data-invalid="true"]`
+- **禁用**：`:disabled` 或 `[aria-disabled="true"]`
+
+## API 参考
+
+### TextArea Props
+
+TextArea 接受所有标准 HTML `<textarea>` 属性，以及以下属性：
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 与基础样式合并的 Tailwind 类。 |
+| `rows` | `number` | `3` | 可见文本行数。 |
+| `cols` | `number` | - | 文本控件的可见宽度。 |
+| `value` | `string` | - | TextArea 的受控值。 |
+| `defaultValue` | `string` | - | 非受控初始值。 |
+| `onChange` | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | - | 变更处理函数。 |
+| `placeholder` | `string` | - | 占位符文本。 |
+| `disabled` | `boolean` | `false` | 禁用 TextArea。 |
+| `readOnly` | `boolean` | `false` | 将 TextArea 设为只读。 |
+| `required` | `boolean` | `false` | 将 TextArea 标记为必填。 |
+| `name` | `string` | - | 表单提交时使用的 name。 |
+| `autoComplete` | `string` | - | 浏览器自动完成提示。 |
+| `maxLength` | `number` | - | 最大字符数。 |
+| `minLength` | `number` | - | 最小字符数。 |
+| `wrap` | `'soft' \| 'hard'` | - | 提交时文本如何换行。 |
+| `fullWidth` | `boolean` | `false` | TextArea 是否占满容器宽度 |
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为弱强调、无阴影变体，适合用于 surface 上。 |
+
+> 对于 `isInvalid`、`isRequired` 等校验 prop 以及错误处理，请将 TextArea 作为子组件与 **[TextField](/docs/components/text-field)** 一起使用。

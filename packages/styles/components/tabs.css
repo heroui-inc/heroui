@@ -183,16 +183,11 @@
 
     /* Horizontal orientation - bottom border, scrollable */
     &[data-orientation="horizontal"] {
-      @apply border-b border-border;
+      @apply border-b border-border scrollbar-none;
 
       max-width: 100%;
       overflow-x: auto;
       overflow-y: clip;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
     }
 
     /* Vertical orientation - left border */

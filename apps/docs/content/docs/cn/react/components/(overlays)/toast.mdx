@@ -1,0 +1,332 @@
+---
+title: Toast 轻提示
+description: 向用户展示临时通知与消息，支持自动消失与可定制的放置位置。
+links:
+  rac: Toast
+  source: toast/toast.tsx
+  styles: toast.css
+  storybook: Components/Feedback/Toast
+  figma: true
+---
+
+## 引入
+
+```tsx
+import { Toast, toast } from '@heroui/react';
+```
+
+## 设置
+
+在应用根部渲染 Provider。
+
+```tsx
+import { Toast, Button, toast } from '@heroui/react';
+
+function App() {
+  return (
+    <div>
+      <Toast.Provider />
+      <Button onPress={() => toast("Simple message")}>
+        Show toast
+      </Button>
+    </div>
+  );
+}
+```
+
+### 用法
+
+<ComponentPreview
+  name="toast-default"
+/>
+
+### 简单 Toast
+
+<ComponentPreview
+  name="toast-simple"
+/>
+
+### 变体
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+### 自定义指示器
+
+<ComponentPreview
+  name="toast-custom-indicator"
+/>
+
+### Promise 与加载中
+
+<ComponentPreview
+  name="toast-promise"
+/>
+
+### 回调
+
+<ComponentPreview
+  name="toast-callbacks"
+/>
+
+### 放置位置
+
+<ComponentPreview
+  name="toast-placements"
+/>
+
+### 自定义 Toast 渲染
+
+<ComponentPreview
+  name="toast-custom-toast"
+/>
+
+### 自定义队列
+
+<ComponentPreview
+  name="toast-custom-queue"
+/>
+
+### 组件结构
+
+```tsx
+<Toast.Provider>
+  <Toast>
+    <Toast.Indicator />
+    <Toast.Content>
+      <Toast.Title />
+      <Toast.Description />
+    </Toast.Content>
+    <Toast.ActionButton />
+    <Toast.CloseButton />
+  </Toast>
+</Toast.Provider>
+```
+
+<RelatedComponents component="toast" />
+
+## 样式
+
+### 传入 Tailwind CSS 类
+
+```tsx
+<Toast.Provider className="bottom-8 right-8" placement="bottom end" />
+```
+
+### 自定义组件类
+
+要自定义 Toast 的组件类，可使用 `@layer components` 指令。
+<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .toast {
+    @apply rounded-xl shadow-lg;
+  }
+
+  .toast__content {
+    @apply gap-2;
+  }
+}
+```
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toast.css)）：
+
+#### 基础类
+- `.toast` — Toast 根容器
+- `.toast__region` — Toast 区域容器
+- `.toast__content` — 包裹标题与说明的内容容器
+- `.toast__indicator` — 图标/指示器容器
+- `.toast__title` — Toast 标题文本
+- `.toast__description` — Toast 说明文本
+- `.toast__action` — 操作按钮容器
+- `.toast__close` — 关闭按钮容器
+
+#### 变体类
+- `.toast--default` — 默认灰色变体
+- `.toast--accent` — 强调蓝色变体
+- `.toast--success` — 成功绿色变体
+- `.toast--warning` — 警告黄/橙色变体
+- `.toast--danger` — 危险红色变体
+
+### 交互状态
+
+组件支持多种状态：
+
+- **最前**：`[data-frontmost]` — 应用于堆叠中最上层可见的 Toast
+- **索引**：`[data-index]` — 基于 Toast 在堆叠中的位置
+- **放置**：`[data-placement="*"]` — 基于 Toast 区域的放置位置
+
+## API 参考
+
+### Toast.Provider Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `placement` | `"top start" \| "top" \| "top end" \| "bottom start" \| "bottom" \| "bottom end"` | `"bottom"` | Toast 区域的放置位置 |
+| `gap` | `number` | `12` | Toast 之间的间距（像素） |
+| `maxVisibleToasts` | `number` | `3` | 同时最多显示的 Toast 数量 |
+| `scaleFactor` | `number` | `0.05` | 堆叠 Toast 的缩放系数（0–1） |
+| `width` | `number \| string` | `460` | Toast 宽度（像素或 CSS 值） |
+| `queue` | `ToastQueue<T>` | - | 自定义 Toast 队列实例 |
+| `children` | `ReactNode \| ((props: {toast: QueuedToast<T>}) => ReactNode)` | - | 自定义渲染函数或子节点 |
+| `className` | `string` | - | 附加的 CSS 类 |
+
+### Toast Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `toast` | `QueuedToast<T>` | - | 来自队列的 Toast 数据（必填） |
+| `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | Toast 的视觉变体 |
+| `placement` | `ToastVariants["placement"]` | - | 放置位置（继承自 Provider） |
+| `scaleFactor` | `number` | - | 缩放系数（继承自 Provider） |
+| `className` | `string` | - | 附加的 CSS 类 |
+| `children` | `ReactNode` | - | Toast 内容（ToastContent、ToastIndicator 等） |
+
+### Toast.Content Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `ReactNode` | - | 内容（通常为 ToastTitle 与 ToastDescription） |
+| `className` | `string` | - | 附加的 CSS 类 |
+
+### Toast.Indicator Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `variant` | `ToastVariants["variant"]` | - | 默认图标的变体 |
+| `children` | `ReactNode` | - | 自定义指示图标（默认使用变体图标） |
+| `className` | `string` | - | 附加的 CSS 类 |
+
+### Toast.Title Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `ReactNode` | - | 标题文本 |
+| `className` | `string` | - | 附加的 CSS 类 |
+
+### Toast.Description Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `ReactNode` | - | 说明文本 |
+| `className` | `string` | - | 附加的 CSS 类 |
+
+### Toast.ActionButton Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `children` | `ReactNode` | - | 操作按钮内容 |
+| `className` | `string` | - | 附加的 CSS 类 |
+| All `Button` props | - | - | 接受 Button 组件的全部 props |
+
+### Toast.CloseButton Props
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 附加的 CSS 类 |
+| All `CloseButton` props | - | - | 接受 CloseButton 组件的全部 props |
+
+### ToastQueue
+
+`ToastQueue` 用于管理 `<Toast.Provider>` 的状态。状态存放在 React 之外，因此你可以在应用的任意位置触发 Toast。
+
+#### 构造选项
+
+| Option | 类型 | 默认值 | 描述 |
+|--------|------|--------|------|
+| `maxVisibleToasts` | `number` | `3` | 同时最多显示的 Toast 数量（仅视觉） |
+| `wrapUpdate` | `(fn: () => void) => void` | - | 包裹状态更新的函数（例如用于 view transitions） |
+
+#### 方法
+
+| Method | 参数 | 返回值 | 描述 |
+|--------|------------|---------|------|
+| `add` | `(content: T, options?: ToastOptions)` | `string` | 将 Toast 加入队列，返回 Toast key |
+| `close` | `(key: string)` | `void` | 按 key 关闭 Toast |
+| `pauseAll` | `()` | `void` | 暂停所有 Toast 计时器 |
+| `resumeAll` | `()` | `void` | 恢复所有 Toast 计时器 |
+| `clear` | `()` | `void` | 关闭所有 Toast |
+| `subscribe` | `(fn: () => void)` | `() => void` | 订阅队列变化，返回取消订阅函数 |
+
+### toast 函数
+
+默认 `toast` 函数提供便捷方法用于显示 Toast：
+
+```tsx
+import { toast } from '@heroui/react';
+
+// 基础 toast（默认约 4 秒后自动消失）
+toast("Event has been created");
+
+// 变体方法（默认同样约 4 秒后自动消失）
+toast.success("File saved");
+toast.info("New update available");
+toast.warning("Please check your settings");
+toast.danger("Something went wrong");
+
+// 传入 options
+toast("Event has been created", {
+  description: "Your event has been scheduled for tomorrow",
+  variant: "default",
+  timeout: 5000, // 自定义超时：5 秒
+  onClose: () => console.log("Closed"),
+  actionProps: {
+    children: "View",
+    onPress: () => {},
+  },
+  indicator: <CustomIcon />,
+});
+
+// Promise 支持（自动显示加载指示）
+toast.promise(
+  uploadFile(),
+  {
+    loading: "Uploading file...",
+    success: (data) => `File ${data.filename} uploaded`,
+    error: "Failed to upload file",
+  }
+);
+
+// 手动加载状态（持久 toast：不自动消失）
+const loadingId = toast("Creating event...", {
+  isLoading: true,
+  timeout: 0, // 持久 toast：不自动消失
+});
+
+// 随后关闭并展示结果
+toast.close(loadingId);
+toast.success("Event created");
+
+// 队列方法
+toast.close(key);
+toast.clear();
+toast.pauseAll();
+toast.resumeAll();
+```
+
+#### toast Options
+
+| Option | 类型 | 默认值 | 描述 |
+|--------|------|--------|------|
+| `title` | `ReactNode` | - | Toast 标题（变体方法的第一个参数） |
+| `description` | `ReactNode` | - | 可选说明文本 |
+| `variant` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"default"` | 视觉变体 |
+| `indicator` | `ReactNode` | - | 自定义指示图标（`null` 可隐藏） |
+| `actionProps` | `ButtonProps` | - | 操作按钮 props |
+| `isLoading` | `boolean` | `false` | 使用加载指示替代指示器 |
+| `timeout` | `number` | `4000` | 自动消失超时（毫秒）。默认 4000ms（4 秒）。设为 `0` 表示持久 Toast，不自动消失 |
+| `onClose` | `() => void` | - | Toast 关闭时的回调 |
+
+#### toast.promise Options
+
+| Option | 类型 | 默认值 | 描述 |
+|--------|------|--------|------|
+| `loading` | `ReactNode` | - | Promise pending 时显示的消息 |
+| `success` | `ReactNode \| ((data: T) => ReactNode)` | - | 成功时显示的消息（可为函数） |
+| `error` | `ReactNode \| ((error: Error) => ReactNode)` | - | 失败时显示的消息（可为函数） |

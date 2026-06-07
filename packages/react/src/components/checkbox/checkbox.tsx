@@ -3,11 +3,17 @@
 import type {DOMRenderProps} from "../../utils/dom";
 import type {CheckboxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
-import type {CheckboxRenderProps} from "react-aria-components/Checkbox";
+import type {
+  CheckboxButtonRenderProps,
+  CheckboxFieldRenderProps,
+} from "react-aria-components/Checkbox";
 
 import {checkboxVariants} from "@heroui/styles";
 import React, {createContext, useContext} from "react";
-import {Checkbox as CheckboxPrimitive} from "react-aria-components/Checkbox";
+import {
+  CheckboxButton as CheckboxButtonPrimitive,
+  CheckboxField as CheckboxFieldPrimitive,
+} from "react-aria-components/Checkbox";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -15,13 +21,16 @@ import {CheckboxGroupContext} from "../checkbox-group/checkbox-group";
 
 interface CheckboxContext {
   slots?: ReturnType<typeof checkboxVariants>;
-  state?: CheckboxRenderProps;
+  state?: CheckboxFieldRenderProps;
 }
 
 const CheckboxContext = createContext<CheckboxContext>({});
 
+/* -------------------------------------------------------------------------------------------------
+ * Checkbox (Field) — React Aria `CheckboxField`.
+ * -----------------------------------------------------------------------------------------------*/
 interface CheckboxRootProps
-  extends ComponentPropsWithRef<typeof CheckboxPrimitive>, CheckboxVariants {
+  extends ComponentPropsWithRef<typeof CheckboxFieldPrimitive>, CheckboxVariants {
   /** The name of the checkbox, used when submitting an HTML form. */
   name?: string;
 }
@@ -35,19 +44,43 @@ const CheckboxRoot = ({children, className, variant, ...props}: CheckboxRootProp
   );
 
   return (
-    <CheckboxPrimitive
+    <CheckboxFieldPrimitive
       data-slot="checkbox"
       {...props}
       className={composeTwRenderProps(className, slots.base())}
     >
-      {(values) => (
-        <CheckboxContext value={{slots, state: values}}>
-          {typeof children === "function" ? children(values) : children}
+      {(state) => (
+        <CheckboxContext value={{slots, state}}>
+          {typeof children === "function" ? children(state) : children}
         </CheckboxContext>
       )}
-    </CheckboxPrimitive>
+    </CheckboxFieldPrimitive>
   );
 };
+
+CheckboxRoot.displayName = "HeroUI.Checkbox";
+
+/* -------------------------------------------------------------------------------------------------
+ * Checkbox.Content — the clickable `CheckboxButton` label wrapping the control + `Label`.
+ * Keep `Description`/`FieldError` as siblings of `Checkbox.Content`.
+ * -----------------------------------------------------------------------------------------------*/
+interface CheckboxContentProps extends ComponentPropsWithRef<typeof CheckboxButtonPrimitive> {}
+
+const CheckboxContent = ({children, className, ...props}: CheckboxContentProps) => {
+  const {slots} = useContext(CheckboxContext);
+
+  return (
+    <CheckboxButtonPrimitive
+      data-slot="checkbox-content"
+      {...props}
+      className={composeTwRenderProps(className, slots?.content())}
+    >
+      {children}
+    </CheckboxButtonPrimitive>
+  );
+};
+
+CheckboxContent.displayName = "HeroUI.Checkbox.Content";
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -77,12 +110,14 @@ const CheckboxControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
   );
 };
 
+CheckboxControl.displayName = "HeroUI.Checkbox.Control";
+
 /* -----------------------------------------------------------------------------------------------*/
 
 interface CheckboxIndicatorProps<
   E extends keyof React.JSX.IntrinsicElements = "span",
 > extends DOMRenderProps<E, undefined> {
-  children?: ReactNode | ((props: CheckboxRenderProps) => ReactNode);
+  children?: ReactNode | ((props: CheckboxFieldRenderProps) => ReactNode);
   className?: string;
 }
 
@@ -95,12 +130,11 @@ const CheckboxIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
   const {slots, state} = useContext(CheckboxContext);
 
   const isSelected = state?.isSelected;
-
   const isIndeterminate = state?.isIndeterminate;
 
   const content =
     typeof children === "function" ? (
-      children(state ?? ({} as CheckboxRenderProps))
+      children(state ?? ({} as CheckboxFieldRenderProps))
     ) : children ? (
       children
     ) : isIndeterminate ? (
@@ -146,35 +180,16 @@ const CheckboxIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
-interface CheckboxContentProps<
-  E extends keyof React.JSX.IntrinsicElements = "div",
-> extends DOMRenderProps<E, undefined> {
-  children?: ReactNode;
-  className?: string;
-}
-
-const CheckboxContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
-  children,
-  className,
-  ...props
-}: CheckboxContentProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof CheckboxContentProps<E>>) => {
-  const {slots} = useContext(CheckboxContext);
-
-  return (
-    <dom.div
-      className={composeSlotClassName(slots?.content, className)}
-      data-slot="checkbox-content"
-      {...(props as any)}
-    >
-      {children}
-    </dom.div>
-  );
-};
+CheckboxIndicator.displayName = "HeroUI.Checkbox.Indicator";
 
 /* ----------------------------------------------------------------------------------------------*/
 
-export {CheckboxRoot, CheckboxControl, CheckboxIndicator, CheckboxContent};
-export type {CheckboxRootProps, CheckboxControlProps, CheckboxIndicatorProps, CheckboxContentProps};
+export {CheckboxRoot, CheckboxContent, CheckboxControl, CheckboxIndicator};
+export type {
+  CheckboxRootProps,
+  CheckboxContentProps,
+  CheckboxControlProps,
+  CheckboxIndicatorProps,
+  CheckboxFieldRenderProps,
+  CheckboxButtonRenderProps,
+};

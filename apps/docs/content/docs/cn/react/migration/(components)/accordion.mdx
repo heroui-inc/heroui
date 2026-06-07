@@ -1,0 +1,382 @@
+---
+title: Accordion
+description: Accordion 从 HeroUI v2 到 v3 的迁移指南。
+---
+
+<Callout type="info">
+  完整的 API 参考、样式指南与高级示例请参阅 [v3 Accordion 文档](/docs/react/components/accordion)。本指南只关注从 HeroUI v2 的迁移。
+</Callout>
+
+## 结构变化
+
+在 v2 中，`AccordionItem` 是一个独立组件，通过 props 接收标题、副标题、内容等元素：
+
+```tsx
+import { Accordion, AccordionItem } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Accordion>
+      <AccordionItem
+        key="1"
+        title="Accordion 1"
+      >
+        Content here
+      </AccordionItem>
+      <AccordionItem
+        key="2"
+        title="Accordion 2"
+      >
+        Content here
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```
+
+在 v3 中，Accordion 采用复合组件模式，并使用显式子组件进行组合：
+
+```tsx
+import { Accordion } from "@heroui/react";
+
+export default function App() {
+  return (
+    <Accordion>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Accordion 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content here</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Accordion 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content here</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+```
+
+## 主要变化
+
+### 1. 组件结构
+
+**v2：** 单个带 props 的 `AccordionItem` 组件  
+**v3：** 复合组件：`Accordion.Item`、`Accordion.Heading`、`Accordion.Trigger`、`Accordion.Panel`、`Accordion.Body`、`Accordion.Indicator`
+
+### 2. Prop 变更
+
+| v2 prop | v3 位置 | 说明 |
+| ------- | ------- | ---- |
+| `selectedKeys` | `Accordion` | 已重命名为 `expandedKeys`；类型为 `Iterable<Key>` |
+| `defaultSelectedKeys` | `Accordion` | 已重命名为 `defaultExpandedKeys` |
+| `onSelectionChange` | `Accordion` | 已重命名为 `onExpandedChange`；签名为 `(keys: Set<Key>) => void` |
+| `selectionMode="multiple"` | `Accordion` | 使用 `allowsMultipleExpanded`（布尔值） |
+| `isCompact` | — | 已移除（请使用 Tailwind CSS，例如 `text-sm`、`py-2`） |
+| `hideIndicator` | — | 不渲染 `<Accordion.Indicator />` 即可隐藏 |
+| `disableAnimation`、`disableIndicatorAnimation`、`motionProps` | — | 已移除（不支持动画 / 请使用 CSS） |
+| `showDivider`、`dividerProps` | — | 已移除（请手动添加分隔线或使用 `Divider`） |
+| `keepContentMounted` | — | 已移除（v3 中内容始终挂载） |
+| `selectionBehavior`、`disallowEmptySelection` | — | 已移除（不适用） |
+| `itemClasses` | — | 在各项上使用 `className` |
+| `startContent` | — | 将内容放在 `<Accordion.Trigger>` 内 |
+| `title`、`subtitle` | — | 将内容放在 `<Accordion.Trigger>` 内 |
+
+### 3. 变体
+
+**v2 变体：** `light`、`shadow`、`bordered`、`splitted`  
+**v3 变体：** `default`、`surface`
+
+v3 的变体更精简。若要接近 v2 的视觉效果：
+
+- **v2 `light`** → v3 `default`
+- **v2 `shadow`** → v3 `surface`
+- **v2 `bordered`** → v3 `default` + 添加边框类
+- **v2 `splitted`** → v3 `default` + 为各项添加背景色与间距 / 外边距
+
+### 4. 条目标识
+
+**v2：** React 的 `key` 同时用于列表调和与展开状态。  
+**v3：** 在 `Accordion.Item` 上使用 `id` 标识展开状态；列表中仍可为各项保留 React 的 `key`。
+
+## 迁移示例
+
+### 受控状态
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { useState } from "react";
+    import { Accordion, AccordionItem } from "@heroui/react";
+
+    const [selectedKeys, setSelectedKeys] = useState(new Set(["1"]));
+
+    <Accordion 
+      selectedKeys={selectedKeys} 
+      onSelectionChange={setSelectedKeys}
+    >
+      <AccordionItem key="1" title="Item 1">
+        Content 1
+      </AccordionItem>
+      <AccordionItem key="2" title="Item 2">
+        Content 2
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { useState } from "react";
+    import { Accordion } from "@heroui/react";
+    import type { Key } from "@heroui/react";
+
+    const [expandedKeys, setExpandedKeys] = useState<Set<Key>>(new Set(["1"]));
+
+    <Accordion 
+      expandedKeys={expandedKeys} 
+      onExpandedChange={setExpandedKeys}
+    >
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 1</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 2</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### 副标题与前置内容
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Accordion>
+      <AccordionItem 
+        key="1"
+        title="Accordion 1"
+        subtitle="Press to expand"
+        startContent={<Icon icon="gravity-ui:box" />}
+      >
+        Content here
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Accordion>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            <Icon icon="gravity-ui:box" className="mr-2" />
+            <div className="flex flex-col">
+              <span>Accordion 1</span>
+              <span className="text-sm text-muted">Press to expand</span>
+            </div>
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content here</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### 自定义指示器
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    import { Icon } from "@iconify/react";
+
+    <Accordion>
+      <AccordionItem 
+        key="1"
+        title="Item 1"
+        indicator={(props) => (
+          props.isOpen ? <Icon icon="mdi:minus" /> : <Icon icon="mdi:plus" />
+        )}
+      >
+        Content
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    import { Icon } from "@iconify/react";
+    import { useState } from "react";
+    import { Accordion } from "@heroui/react";
+    import type { Key } from "@heroui/react";
+
+    const [expandedKeys, setExpandedKeys] = useState<Set<Key>>(new Set());
+
+    <Accordion 
+      expandedKeys={expandedKeys}
+      onExpandedChange={setExpandedKeys}
+    >
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator>
+              {expandedKeys.has("1") ? (
+                <Icon icon="gravity-ui:minus" />
+              ) : (
+                <Icon icon="gravity-ui:plus" />
+              )}
+            </Accordion.Indicator>
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+### 禁用项与默认展开键
+
+<Tabs items={["v2", "v3"]}>
+  <Tab value="v2">
+    ```tsx
+    <Accordion 
+      defaultExpandedKeys={["1"]}
+      disabledKeys={["2"]}
+    >
+      <AccordionItem key="1" title="Item 1">
+        Content 1
+      </AccordionItem>
+      <AccordionItem key="2" title="Item 2">
+        Content 2
+      </AccordionItem>
+    </Accordion>
+    ```
+  </Tab>
+  <Tab value="v3">
+    ```tsx
+    <Accordion defaultExpandedKeys={["1"]}>
+      <Accordion.Item id="1">
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 1
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 1</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="2" isDisabled>
+        <Accordion.Heading>
+          <Accordion.Trigger>
+            Item 2
+            <Accordion.Indicator />
+          </Accordion.Trigger>
+        </Accordion.Heading>
+        <Accordion.Panel>
+          <Accordion.Body>Content 2</Accordion.Body>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+    ```
+  </Tab>
+</Tabs>
+
+## 样式变化
+
+### v2：`classNames` prop
+
+```tsx
+<AccordionItem 
+  classNames={{
+    base: "custom-base",
+    title: "custom-title",
+    content: "custom-content"
+  }}
+/>
+```
+
+### v3：在各子组件上使用 `className`
+
+```tsx
+<Accordion.Item className="custom-base">
+  <Accordion.Heading>
+    <Accordion.Trigger className="custom-title">
+      Title
+      <Accordion.Indicator />
+    </Accordion.Trigger>
+  </Accordion.Heading>
+  <Accordion.Panel>
+    <Accordion.Body className="custom-content">
+      Content
+    </Accordion.Body>
+  </Accordion.Panel>
+</Accordion.Item>
+```
+
+## 组件剖析
+
+v3 Accordion 的结构如下：
+
+```
+Accordion (Root)
+  └── Accordion.Item
+      ├── Accordion.Heading
+      │   └── Accordion.Trigger
+      │       ├── [Your content: title, subtitle, icons, etc.]
+      │       └── Accordion.Indicator (optional)
+      └── Accordion.Panel
+          └── Accordion.Body
+              └── [Your content]
+```
+
+## 总结
+
+1. **组件结构**：必须使用复合组件，而不是仅靠 props 拼装。
+2. **状态 props**：`selectedKeys` → `expandedKeys`，`onSelectionChange` → `onExpandedChange`。
+3. **多段展开**：`selectionMode="multiple"` → `allowsMultipleExpanded={true}`。
+4. **条目标识**：展开状态用 `id`；列表调和仍使用 React 的 `key`。
+5. **变体**：由 4 种缩减为 2 种。
+6. **已移除的 props**：大量便捷 props 已移除；请改用 Tailwind CSS 类。
+7. **内容结构**：标题、副标题与前置内容需手动放入 `Trigger`。
+8. **指示器**：必须显式渲染；不再自动生成指示器。

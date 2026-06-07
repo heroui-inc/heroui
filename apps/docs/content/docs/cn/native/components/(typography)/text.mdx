@@ -1,0 +1,220 @@
+---
+title: Typography 文本
+description: 用于渲染带语义类型变体的样式化文本的排版基元组件。
+icon: new
+links:
+  source_native: text/text.tsx
+  styles_native: text/text.styles.ts
+---
+
+<NativeVideoPlayerView
+  target="auto"
+  srcLight="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-light.mp4"
+  srcDark="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/components/videos/text-docs-dark.mp4"
+/>
+
+## 导入
+
+```tsx
+import { Typography } from 'heroui-native';
+```
+
+## 结构
+
+```tsx
+<Typography>...</Typography>
+
+{/* 子组件 */}
+<Typography.Heading>...</Typography.Heading>
+<Typography.Paragraph>...</Typography.Paragraph>
+<Typography.Code>...</Typography.Code>
+```
+
+- **Typography**：文本根元素。通过 `type` 选择排版预设，并提供互不耦合的 `align`、`color`、`weight`、`truncate` 属性。
+- **Typography.Heading**：限定为标题类型（`h1`–`h6`）的便捷包装组件，会自动添加 `accessibilityRole="header"`。
+- **Typography.Paragraph**：限定为正文类型（`body`、`body-sm`、`body-xs`）的便捷包装组件。
+- **Typography.Code**：以 chip 样式呈现的等宽内联文本，采用平台合适的等宽字体。
+
+## 用法
+
+### 基础用法
+
+`Typography` 默认渲染正文文本。
+
+```tsx
+<Typography>Hello, world!</Typography>
+```
+
+### 类型变体
+
+使用 `type` 属性选择语义化排版预设。
+
+```tsx
+<Typography type="h1">Heading 1</Typography>
+<Typography type="h2">Heading 2</Typography>
+<Typography type="h3">Heading 3</Typography>
+<Typography type="h4">Heading 4</Typography>
+<Typography type="h5">Heading 5</Typography>
+<Typography type="h6">Heading 6</Typography>
+<Typography type="body">Body text</Typography>
+<Typography type="body-sm">Small body text</Typography>
+<Typography type="body-xs">Extra-small body text</Typography>
+<Typography type="code">Code snippet</Typography>
+```
+
+### 标题
+
+使用 `Typography.Heading` 渲染标题文本，自动具备 header 无障碍角色。
+
+```tsx
+<Typography.Heading type="h1">Page Title</Typography.Heading>
+<Typography.Heading type="h2">Section Title</Typography.Heading>
+<Typography.Heading type="h3">Subsection Title</Typography.Heading>
+```
+
+### 段落
+
+使用 `Typography.Paragraph` 渲染正文文本。
+
+```tsx
+<Typography.Paragraph>
+  这是一个使用默认尺寸渲染的正文段落。
+</Typography.Paragraph>
+<Typography.Paragraph type="body-sm">
+  这是较小的正文文本。
+</Typography.Paragraph>
+```
+
+### 代码
+
+使用 `Typography.Code`（或等价的 `<Typography type="code">`）渲染内联代码片段。两者都会呈现为 chip 样式的等宽内联元素，带有低饱和背景、圆角，并采用 `self-start` 布局以避免在 flex 容器中被拉伸。平台相关的等宽 `fontFamily` 在 `Typography` 根元素上应用，因此两种写法可互换。
+
+```tsx
+<Typography.Code>console.log('hello')</Typography.Code>
+<Typography type="code">console.log('hello')</Typography>
+```
+
+### 对齐
+
+使用 `align` 属性控制水平对齐。`start` 与 `end` 是 RTL 感知的（在从右到左布局下会翻转）。
+
+```tsx
+<Typography align="start">Start-aligned</Typography>
+<Typography align="center">Center-aligned</Typography>
+<Typography align="end">End-aligned</Typography>
+<Typography align="justify">Justified text spreads across the line.</Typography>
+```
+
+> **说明：** `text-justify` 在 React Native 中仅 iOS 生效；Android 会回退为左对齐。
+
+### 颜色
+
+使用 `color` 属性应用语义化前景色预设。
+
+```tsx
+<Typography color="default">Default foreground</Typography>
+<Typography color="muted">Muted secondary text</Typography>
+```
+
+如需其他主题色，可通过 `className` 传入对应工具类（如 `className="text-accent"`、`className="text-danger"`）。
+
+### 字重
+
+使用 `weight` 属性覆盖由 `type` 推导出的字重。该覆盖通过 `tailwind-merge` 合并，因此始终优先于 type 变体的默认字重。
+
+```tsx
+<Typography type="h1" weight="bold">Bold H1</Typography>
+<Typography weight="medium">Medium body</Typography>
+<Typography weight="semibold">Semibold body</Typography>
+```
+
+### 截断
+
+使用布尔属性 `truncate` 将文本限制为单行并以省略号结尾。它映射到 React Native 的 `numberOfLines={1}`。如显式提供 `numberOfLines`，则以后者为准。
+
+```tsx
+<Typography truncate>
+  当内容溢出容器时，这一长行文本会被截断并显示省略号。
+</Typography>;
+
+{
+  /* 通过底层 RN 属性实现多行截断 */
+}
+<Typography numberOfLines={2}>
+  通过 React Native 标准的 `numberOfLines` 属性可实现多行截断。
+</Typography>;
+```
+
+## 示例
+
+```tsx
+import { Typography } from 'heroui-native';
+import { View } from 'react-native';
+
+export default function TypographyExample() {
+  return (
+    <View className="flex-1 justify-center px-5 gap-4">
+      <Typography.Heading type="h1">欢迎</Typography.Heading>
+      <Typography.Heading type="h3">快速开始</Typography.Heading>
+      <Typography.Paragraph>
+        这是使用 Typography 组件渲染的正文段落。
+      </Typography.Paragraph>
+      <Typography.Paragraph color="muted" type="body-sm">
+        用于注释或脚注的较小辅助文本。
+      </Typography.Paragraph>
+      <Typography.Code>npm install heroui-native</Typography.Code>
+    </View>
+  );
+}
+```
+
+更多示例见 [GitHub 仓库](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/app/(home)/components/text.tsx>)。
+
+## API 参考
+
+### Typography
+
+`Typography` 继承 React Native 的全部 `TextProps`，并新增排版相关属性。
+
+| prop           | type                                                                                         | default     | description                                                                                  |
+| -------------- | -------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'body' \| 'body-sm' \| 'body-xs' \| 'code'` | `'body'`    | 语义化排版变体（字号、默认字重、行高）                                                       |
+| `align`        | `'start' \| 'center' \| 'end' \| 'justify'`                                                  | `'start'`   | 水平对齐方式。`start` 与 `end` 为 RTL 感知；`justify` 仅 iOS 生效                            |
+| `color`        | `'default' \| 'muted'`                                                                       | `'default'` | 语义化前景色预设                                                                             |
+| `weight`       | `'normal' \| 'medium' \| 'semibold' \| 'bold'`                                               | -           | 字重覆盖。设置后会覆盖 `type` 暗含的字重                                                     |
+| `truncate`     | `boolean`                                                                                    | `false`     | 将文本截断为单行并显示省略号（即设 `numberOfLines={1}`）。显式 `numberOfLines` 优先级更高    |
+| `children`     | `React.ReactNode`                                                                            | -           | 渲染内容                                                                                     |
+| `className`    | `string`                                                                                     | -           | 额外 CSS 类                                                                                  |
+| `...TextProps` | `TextProps`                                                                                  | -           | 支持 React Native `Text` 的全部标准属性                                                      |
+
+### Typography.Heading
+
+继承 `Typography` 根元素的全部属性（`align`、`color`、`weight`、`truncate`、`className` 及 React Native `TextProps`）。自动设置 `accessibilityRole="header"`，并将 `type` 收窄为标题变体。
+
+| prop           | type                                           | default | description                              |
+| -------------- | ---------------------------------------------- | ------- | ---------------------------------------- |
+| `type`         | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | `'h1'`  | 标题级别                                 |
+| `children`     | `React.ReactNode`                              | -       | 渲染内容                                 |
+| `className`    | `string`                                       | -       | 额外 CSS 类                              |
+| `...TextProps` | `TextProps`                                    | -       | 支持 React Native `Text` 的全部标准属性  |
+
+### Typography.Paragraph
+
+继承 `Typography` 根元素的全部属性（`align`、`color`、`weight`、`truncate`、`className` 及 React Native `TextProps`）。将 `type` 收窄为正文变体。
+
+| prop           | type                               | default  | description                              |
+| -------------- | ---------------------------------- | -------- | ---------------------------------------- |
+| `type`         | `'body' \| 'body-sm' \| 'body-xs'` | `'body'` | 段落文本字号                             |
+| `children`     | `React.ReactNode`                  | -        | 渲染内容                                 |
+| `className`    | `string`                           | -        | 额外 CSS 类                              |
+| `...TextProps` | `TextProps`                        | -        | 支持 React Native `Text` 的全部标准属性  |
+
+### Typography.Code
+
+继承 `Typography` 根元素的全部属性（`align`、`color`、`weight`、`truncate`、`className`、`style` 及 React Native `TextProps`）。它是一个强制 `type="code"` 的轻量包装；平台相关的等宽 `fontFamily` 在 `Typography` 根元素上合并，因此 `<Typography type="code">` 与 `<Typography.Code>` 渲染效果完全一致。
+
+| prop           | type              | default | description                              |
+| -------------- | ----------------- | ------- | ---------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 渲染内容                                 |
+| `className`    | `string`          | -       | 额外 CSS 类                              |
+| `...TextProps` | `TextProps`       | -       | 支持 React Native `Text` 的全部标准属性  |
