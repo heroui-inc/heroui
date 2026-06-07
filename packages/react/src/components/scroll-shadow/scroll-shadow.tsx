@@ -102,6 +102,11 @@ export const ScrollShadowRoot = ({
     [orientation, hideScrollBar, variant],
   );
 
+  const style = {
+    "--scroll-shadow-size": `${size}px`,
+    ...props.style,
+  } as React.CSSProperties;
+
   return (
     <div
       ref={mergeRefs(internalRef, ref)}
@@ -109,11 +114,7 @@ export const ScrollShadowRoot = ({
       data-orientation={orientation}
       data-scroll-shadow-size={size}
       data-slot="scroll-shadow"
-      style={{
-        // @ts-expect-error - CSS variables are not typed
-        "--scroll-shadow-size": `${size}px`,
-        ...props.style,
-      }}
+      style={style}
       {...props}
     >
       {children}
