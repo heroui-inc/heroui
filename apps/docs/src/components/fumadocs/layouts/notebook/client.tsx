@@ -98,7 +98,7 @@ export function LayoutBody({children, className, style, ...props}: ComponentProp
         "sidebar sidebar toc-popover toc-popover ."
         "sidebar sidebar main toc ." 1fr / minmax(min-content, 1fr) var(--fd-sidebar-col) minmax(0, ${pageCol}) var(--fd-toc-width) minmax(min-content, 1fr)`,
           ...style,
-        } as object
+        } as React.CSSProperties
       }
       {...props}
     >
