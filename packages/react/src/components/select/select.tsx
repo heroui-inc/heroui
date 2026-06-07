@@ -134,8 +134,8 @@ const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
       {
         ...(props as any),
         className: composeSlotClassName(slots?.indicator, className),
-        "data-open": dataAttr(state?.isOpen),
         "data-slot": "select-indicator",
+        "data-open": dataAttr(state?.isOpen),
       },
     );
   }
@@ -176,34 +176,21 @@ const SelectPopover = ({
   useEffect(() => {
     if (!state?.isOpen || !popoverRef.current) return;
 
-    const scrollSelectedItem = () => {
-      const popover = popoverRef.current;
+    let rafId = 0;
 
-      if (!popover) return;
+    const timerId = window.setTimeout(() => {
+      rafId = window.requestAnimationFrame(() => {
+        const selectedItem =
+          popoverRef.current?.querySelector<HTMLElement>('[aria-selected="true"]');
 
-      const selectedItem = popover.querySelector<HTMLElement>('[aria-selected="true"]');
-
-      if (!selectedItem) return;
-
-      const popoverHeight = popover.clientHeight;
-      const itemTop = selectedItem.offsetTop;
-      const itemHeight = selectedItem.offsetHeight;
-      const scrollTop = Math.max(
-        0,
-        itemTop - Math.floor(popoverHeight / 2) + Math.floor(itemHeight / 2),
-      );
-
-      popover.scrollTo({
-        behavior: "auto",
-        top: scrollTop,
+        selectedItem?.scrollIntoView({block: "nearest"});
       });
-    };
-
-    const timer = window.setTimeout(() => {
-      window.requestAnimationFrame(scrollSelectedItem);
     }, 0);
 
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timerId);
+      window.cancelAnimationFrame(rafId);
+    };
   }, [state?.isOpen]);
 >>>>>>> 7e28d2b55 (fix(select): correct popover scroll position when opening)
 
