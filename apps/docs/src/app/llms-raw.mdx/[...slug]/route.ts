@@ -22,6 +22,11 @@ function extractLangFromSlug(slug: string[]): {slug: string[]; lang?: string} {
   return {slug};
 }
 
+// Render on demand at request time — see the matching note in
+// `app/llms.mdx/[...slug]/route.ts`. Prerendering this route inflates
+// the Worker handler bundle past Cloudflare's per-script size limit.
+export const dynamic = "force-dynamic";
+
 export async function GET(_req: NextRequest, {params}: {params: Promise<{slug: string[]}>}) {
   try {
     const {lang, slug} = extractLangFromSlug((await params).slug);
@@ -42,17 +47,4 @@ export async function GET(_req: NextRequest, {params}: {params: Promise<{slug: s
       status: 500,
     });
   }
-}
-
-export function generateStaticParams() {
-  // Only emit locale-prefixed routes. The no-prefix form is served by
-  // middleware via an internal rewrite — see middleware.ts.
-  return source
-    .generateParams()
-    .filter((param) => param.slug?.length > 0)
-    .map((param) => {
-      const lang = (param as {lang?: string}).lang ?? i18n.defaultLanguage;
-
-      return {slug: [lang, ...param.slug]};
-    });
 }

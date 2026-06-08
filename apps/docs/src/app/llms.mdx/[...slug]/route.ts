@@ -22,6 +22,14 @@ function extractLangFromSlug(slug: string[]): {slug: string[]; lang?: string} {
   return {slug};
 }
 
+// Render on demand at request time. Prerendering every doc page here
+// causes OpenNext to inline the full prerender-manifest (every page's
+// MDX body) into the Worker's handler.mjs, which pushes the compressed
+// Worker bundle past Cloudflare's per-script size limit (10 MiB on the
+// Workers Paid plan). Dynamic rendering keeps the bundle small while
+// still serving the same content from `source` on the Worker runtime.
+export const dynamic = "force-dynamic";
+
 export async function GET(_req: NextRequest, {params}: {params: Promise<{slug: string[]}>}) {
   try {
     const {lang, slug} = extractLangFromSlug((await params).slug);
@@ -42,19 +50,4 @@ export async function GET(_req: NextRequest, {params}: {params: Promise<{slug: s
       status: 500,
     });
   }
-}
-
-export function generateStaticParams() {
-  // Only emit locale-prefixed routes. The no-prefix form (e.g.
-  // `/llms.mdx/foo/bar`) is served by middleware via an internal rewrite
-  // to the default-locale variant, so we don't double the prerender count
-  // and the resulting Worker bundle stays under Cloudflare's 64 MiB cap.
-  return source
-    .generateParams()
-    .filter((param) => param.slug && param.slug.length > 0)
-    .map((param) => {
-      const lang = (param as {lang?: string}).lang ?? i18n.defaultLanguage;
-
-      return {slug: [lang, ...param.slug]};
-    });
 }
