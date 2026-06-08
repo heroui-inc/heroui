@@ -130,7 +130,7 @@
 
 /* Similar to popover content styles */
 .autocomplete__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 pt-2 text-sm scrollbar;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 scrollbar overflow-y-auto overscroll-contain bg-overlay p-0 pt-2 text-sm;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
@@ -215,6 +215,17 @@
   /* Empty State */
   [data-slot="empty-state"] {
     @apply text-center text-sm text-overlay-foreground/60;
+  }
+}
+
+/* Popover dialog — mirrors Popover.Dialog focus management without a visible focus ring */
+.autocomplete__popover-dialog {
+  @apply outline-none;
+
+  &:focus,
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply outline-none;
   }
 }
 

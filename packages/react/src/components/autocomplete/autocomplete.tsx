@@ -11,6 +11,7 @@ import {mergeRefs, useResizeObserver} from "@react-aria/utils";
 import React, {createContext, useCallback, useContext, useRef, useState} from "react";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
+import {Dialog as DialogPrimitive} from "react-aria-components/Dialog";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -248,7 +249,9 @@ const AutocompletePopover = ({
           } as React.CSSProperties
         }
       >
-        {children}
+        <DialogPrimitive className={slots?.popoverDialog()} data-slot="autocomplete-popover-dialog">
+          {children}
+        </DialogPrimitive>
       </PopoverPrimitive>
     </SurfaceContext>
   );
