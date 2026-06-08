@@ -1,0 +1,130 @@
+---
+title: create-heroui-native-app
+description:
+  全新的命令行工具，用于一键创建预先配置好的 HeroUI Native + Expo Router 项目 —— Expo SDK 56、React Native 0.85、Uniwind，所有 peer 依赖均已就绪，并提供两套起始模板（单页面与 Tabs）。
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 6 月 4 日</span>
+</div>
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/cli-demo.mp4"
+  height={430}
+  muted
+/>
+
+🎉 全新的 CLI —— [`create-heroui-native-app`](https://www.npmjs.com/package/create-heroui-native-app) —— 现已成为启动 HeroUI Native 项目最快捷的方式。一条命令即可生成一个完整的 Expo Router 应用，内置 HeroUI Native、Uniwind、Tailwind CSS、所有必需的 peer 依赖以及 Provider 包装，无需再手动配置 `global.css`、`metro.config.js` 或 `app/_layout.tsx`。
+
+## 快速开始
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npx create-heroui-native-app@latest my-app
+  ```
+</Tab>
+<Tab value="pnpm">
+  ```bash
+  pnpm create heroui-native-app@latest my-app
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn create heroui-native-app my-app
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun create heroui-native-app@latest my-app
+  ```
+</Tab>
+</Tabs>
+
+随后启动开发服务器：
+
+```bash
+cd my-app
+npm run start
+```
+
+到此为止。如需完整流程，请直接阅读[快速开始指南](/docs/native/getting-started/quick-start)。
+
+## 起始模板
+
+CLI 自带两套模板。可在交互式选择器中选择，或通过命令行参数跳过提示：
+
+| 参数 | 模板 | 说明 |
+| --- | --- | --- |
+| `--expo` | `expo` | 单页面 Expo Router 应用，含 HeroUI `Button` 演示。 |
+| `--expo-tabs` | `expo-tabs` | 含两个 Tabs（`Button` + `Card` 演示）的 Expo Router 布局。 |
+
+```bash
+npx create-heroui-native-app@latest my-app --expo
+npx create-heroui-native-app@latest my-app --expo-tabs --use-pnpm
+```
+
+## 你将得到什么
+
+每个生成的项目都已预先配置：
+
+- **Expo SDK 56** + **Expo Router**，并启用类型化路由
+- **React 19.2** + **React Native 0.85.2** + Hermes v1（SDK 56 默认启用）
+- **HeroUI Native**：在 `app/_layout.tsx` 中由 `HeroUINativeProvider` 与 `GestureHandlerRootView` 包裹
+- **Uniwind** + **Tailwind CSS**：通过 `metro.config.js` 与 `global.css` 完成接入
+- 所有 HeroUI Native **必需的 peer 依赖**已锁定到兼容版本：`react-native-reanimated`、`react-native-gesture-handler`、`react-native-worklets`、`react-native-safe-area-context`、`react-native-svg`、`tailwind-variants`、`tailwind-merge`
+- 内置 `react-native-screens`，让 HeroUI 的遮罩组件（`Dialog`、`Menu`、`Popover`、`Select`、`BottomSheet`、`Toast`）开箱即用
+- `@expo/metro-runtime`（SDK 56 上 Expo Router 需要的 peer 依赖）
+- 仅使用 `babel-preset-expo` 的 `babel.config.js`（worklets 已由该 preset 处理）
+- 启用 `strict: true` 与 `@/*` 路径别名的 **TypeScript** 配置
+
+## CLI 参考
+
+```text
+create-heroui-native-app [project-name] [options]
+```
+
+| 选项 | 说明 |
+| --- | --- |
+| `[project-name]` | 要创建的目录名。未提供时会进行交互提示。必须是合法的 npm 包名。 |
+| `--expo` | 使用单页面 Expo 模板。 |
+| `--expo-tabs` | 使用 Expo + Tabs 模板。 |
+| `--template <id>` | 指定模板 id（`expo` 或 `expo-tabs`）。 |
+| `--use-npm` / `--use-yarn` / `--use-pnpm` / `--use-bun` | 强制使用指定包管理器（默认自动检测）。 |
+| `--skip-install` | 跳过依赖安装步骤。 |
+| `--skip-git` | 不初始化 git 仓库。 |
+| `-h`, `--help` | 打印用法并退出。 |
+
+### 示例
+
+```bash
+# 完全交互式 —— 同时提示项目名与模板
+npx create-heroui-native-app@latest
+
+# 已指定项目名，仍展示模板选择器
+npx create-heroui-native-app@latest my-app
+
+# 完全非交互式
+npx create-heroui-native-app@latest my-app --expo
+
+# 使用 Tabs 模板，并通过 pnpm 安装依赖
+npx create-heroui-native-app@latest my-app --expo-tabs --use-pnpm
+
+# 仅生成项目，不安装依赖、不初始化 git
+npx create-heroui-native-app@latest my-app --expo --skip-install --skip-git
+```
+
+## 系统要求
+
+- **Node.js 20.19.4+**（Expo SDK 56 / React Native 0.85 的要求）
+- 构建原生 iOS 时需要 **iOS 16.4+**（Expo SDK 56 的部署目标）
+- macOS、Linux 或 Windows
+
+<Callout type="info">
+  **已经有应用了？** 本 CLI 仅用于创建新项目。若要将 HeroUI Native 添加到既有的 React Native 或 Expo 应用，请参阅[快速开始中的方案 2](/docs/native/getting-started/quick-start#option-2-add-to-an-existing-project)。
+</Callout>
+
+## 链接
+
+- [快速开始指南](/docs/native/getting-started/quick-start)
+- [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)

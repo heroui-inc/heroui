@@ -1,0 +1,130 @@
+---
+title: create-heroui-native-app
+description:
+  New CLI for scaffolding a preconfigured HeroUI Native + Expo Router project — Expo SDK 56, React Native 0.85, Uniwind, all peer dependencies wired up, two starter templates (single-screen and tabs).
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">June 4, 2026</span>
+</div>
+
+<VideoPlayer
+  src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/native/cli-demo.mp4"
+  height={430}
+  muted
+/>
+
+🎉 A new CLI — [`create-heroui-native-app`](https://www.npmjs.com/package/create-heroui-native-app) — is now the fastest way to start a HeroUI Native project. One command scaffolds a complete Expo Router app with HeroUI Native, Uniwind, Tailwind CSS, every required peer dependency, and the provider wiring already in place. No manual setup of `global.css`, `metro.config.js`, or `app/_layout.tsx`.
+
+## Quick Start
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npx create-heroui-native-app@latest my-app
+  ```
+</Tab>
+<Tab value="pnpm">
+  ```bash
+  pnpm create heroui-native-app@latest my-app
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn create heroui-native-app my-app
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun create heroui-native-app@latest my-app
+  ```
+</Tab>
+</Tabs>
+
+Then start the dev server:
+
+```bash
+cd my-app
+npm run start
+```
+
+That's it. Skip ahead to the [Quick Start guide](/docs/native/getting-started/quick-start) for the full walkthrough.
+
+## Starter Templates
+
+The CLI ships with two templates. Pick one in the interactive picker, or pass a flag to skip the prompt.
+
+| Flag | Template | Description |
+| --- | --- | --- |
+| `--expo` | `expo` | Single-screen Expo Router app with a HeroUI `Button` demo. |
+| `--expo-tabs` | `expo-tabs` | Expo Router tabs layout with two tabs (`Button` + `Card` demos). |
+
+```bash
+npx create-heroui-native-app@latest my-app --expo
+npx create-heroui-native-app@latest my-app --expo-tabs --use-pnpm
+```
+
+## What You Get
+
+Every scaffolded project ships preconfigured with:
+
+- **Expo SDK 56** + **Expo Router** with typed routes enabled
+- **React 19.2** + **React Native 0.85.2** + Hermes v1 (default in SDK 56)
+- **HeroUI Native** wrapped in `HeroUINativeProvider` and `GestureHandlerRootView` inside `app/_layout.tsx`
+- **Uniwind** + **Tailwind CSS** wired through `metro.config.js` and `global.css`
+- All HeroUI Native **mandatory peer dependencies** pinned to compatible versions: `react-native-reanimated`, `react-native-gesture-handler`, `react-native-worklets`, `react-native-safe-area-context`, `react-native-svg`, `tailwind-variants`, `tailwind-merge`
+- `react-native-screens` so HeroUI overlay components (`Dialog`, `Menu`, `Popover`, `Select`, `BottomSheet`, `Toast`) work out of the box
+- `@expo/metro-runtime` (required peer for Expo Router on SDK 56)
+- A `babel.config.js` using just `babel-preset-expo` (worklets handled by the preset)
+- **TypeScript** with `strict: true` and the `@/*` path alias
+
+## CLI Reference
+
+```text
+create-heroui-native-app [project-name] [options]
+```
+
+| Option | Description |
+| --- | --- |
+| `[project-name]` | Directory name to create. Prompted if omitted. Must be a valid npm package name. |
+| `--expo` | Use the single-screen Expo template. |
+| `--expo-tabs` | Use the Expo + tabs template. |
+| `--template <id>` | Use the template with the given id (`expo` or `expo-tabs`). |
+| `--use-npm` / `--use-yarn` / `--use-pnpm` / `--use-bun` | Force a specific package manager (otherwise auto-detected). |
+| `--skip-install` | Don't run the package manager install step. |
+| `--skip-git` | Don't initialize a git repository. |
+| `-h`, `--help` | Print usage and exit. |
+
+### Examples
+
+```bash
+# Fully interactive — prompts for both project name and template
+npx create-heroui-native-app@latest
+
+# Project name supplied, template picker still shown
+npx create-heroui-native-app@latest my-app
+
+# Fully non-interactive
+npx create-heroui-native-app@latest my-app --expo
+
+# Tabs template, install with pnpm
+npx create-heroui-native-app@latest my-app --expo-tabs --use-pnpm
+
+# Scaffold only, no install, no git
+npx create-heroui-native-app@latest my-app --expo --skip-install --skip-git
+```
+
+## Requirements
+
+- **Node.js 20.19.4+** (required by Expo SDK 56 / React Native 0.85)
+- **iOS 16.4+** when building native iOS (Expo SDK 56 deployment target)
+- macOS, Linux, or Windows
+
+<Callout type="info">
+  **Already have an app?** The CLI is for new projects. To add HeroUI Native to an existing React Native or Expo app, follow [Option 2 in the Quick Start](/docs/native/getting-started/quick-start#option-2-add-to-an-existing-project).
+</Callout>
+
+## Links
+
+- [Quick Start guide](/docs/native/getting-started/quick-start)
+- [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server)

@@ -1,6 +1,6 @@
 {
   "home": {
-    "releaseBadge": "HeroUI Native v1.0.4 – Typography、柔和配色、鲜亮主题与 Expo 56",
+    "releaseBadge": "全新 CLI：create-heroui-native-app v1.0.0",
     "titleMain": "开箱即用",
     "titleMuted": "设计灵活可定制",
     "description": "HeroUI 是面向网页与移动端的现代 UI 库，助你快速迭代、保持一致，并打造令人愉悦的用户体验。",
@@ -83,6 +83,12 @@
     "source": "源代码",
     "stylesSource": "样式源代码",
     "themeSource": "主题源代码"
+  },
+  "copyPrompt": {
+    "copy": "复制提示词",
+    "copied": "已复制",
+    "ariaLabelCopy": "复制提示词到剪贴板",
+    "ariaLabelCopied": "提示词已复制到剪贴板"
   },
   "qrPreviewPopover": {
     "tapToPreview": "点击预览",

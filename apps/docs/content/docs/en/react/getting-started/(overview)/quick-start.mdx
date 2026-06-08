@@ -11,6 +11,29 @@ icon: rocket
 
 ## Quick Install
 
+<CopyPrompt
+  prompt={`Set up HeroUI in this React project.
+
+Use the HeroUI MCP server (@heroui/react-mcp) as the single source of truth for installation steps, peer dependencies, and component APIs. Start by retrieving the latest quick-start / installation guide from the MCP and follow it precisely — do not rely on memory for versions, package names, or setup steps.
+
+Before making any changes:
+
+1. Analyze the project. Detect the package manager (npm / pnpm / yarn / bun), framework (e.g. Next.js, Vite, Remix, Astro, etc.), TypeScript usage, and the location of the main CSS entry file (e.g. globals.css, app.css, index.css).
+2. Confirm the project meets the requirements: React 19+ and Tailwind CSS v4. If Tailwind CSS v4 is not installed, set it up following the official Tailwind v4 framework guide that matches the detected framework before adding HeroUI.
+3. Read package.json and only install what is missing. Pin to the exact versions listed in the MCP quick-start to avoid compatibility issues.
+
+Then apply the setup:
+
+- Install @heroui/react and @heroui/styles plus any missing mandatory peer dependencies.
+- In the main Tailwind CSS entry file, add \`@import "@heroui/styles";\` immediately after \`@import "tailwindcss";\`. Import order matters — tailwindcss must be imported first.
+- Make sure the CSS entry file is loaded by the app (e.g. imported in the root layout / entry file for Next.js, Vite, Remix, etc.). HeroUI v3 does not require a Provider, so no wrapper component is needed.
+- Add a small smoke test by rendering a \`<Button>\` from \`@heroui/react\` somewhere visible to confirm styles are applied.
+
+When done, summarize the changes you made and tell me how to start the dev server.`}
+>
+  **Prefer to let your AI assistant do it?** Install the [HeroUI MCP Server](/docs/react/getting-started/mcp-server) in your editor, then paste the prompt into your AI assistant — it will analyze your project and handle the entire setup for you.
+</CopyPrompt>
+
 Install HeroUI and required dependencies:
 
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>

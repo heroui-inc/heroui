@@ -1,6 +1,6 @@
 {
   "home": {
-    "releaseBadge": "HeroUI Native v1.0.4 - Typography, soft palette, vibrant theme & Expo 56",
+    "releaseBadge": "New CLI: create-heroui-native-app v1.0.0",
     "titleMain": "Beautiful by default.",
     "titleMuted": "Customizable by design.",
     "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
@@ -83,6 +83,12 @@
     "source": "Source",
     "stylesSource": "Styles source",
     "themeSource": "Theme source"
+  },
+  "copyPrompt": {
+    "copy": "Copy prompt",
+    "copied": "Copied",
+    "ariaLabelCopy": "Copy prompt to clipboard",
+    "ariaLabelCopied": "Prompt copied to clipboard"
   },
   "qrPreviewPopover": {
     "tapToPreview": "Tap to preview",

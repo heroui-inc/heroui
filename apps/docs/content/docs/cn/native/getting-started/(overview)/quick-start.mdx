@@ -4,7 +4,77 @@ description: 几分钟内上手 HeroUI Native
 icon: rocket
 ---
 
-## 入门
+请根据项目情况选择适合的方案：
+
+- **方案 1** —— 通过我们的 CLI 一键创建预先配置好的新项目，无需手动设置。
+- **方案 2** —— 将 HeroUI Native 添加到已有的 React Native 或 Expo 项目。
+
+## 方案 1：创建新项目
+
+最快捷的启动方式。CLI 会生成一个 Expo 项目，内置 HeroUI Native、所有必需的 peer 依赖、Uniwind / Tailwind CSS、全局样式以及已配置好的 `HeroUINativeProvider`，让你可以直接进入开发。
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npx create-heroui-native-app@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm create heroui-native-app@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn create heroui-native-app
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun create heroui-native-app@latest
+    ```
+  </Tab>
+</Tabs>
+
+按照交互提示完成配置，然后启动开发服务器：
+
+```bash
+cd my-app
+npm run start
+```
+
+到此即可开始开发。可直接跳到[使用第一个组件](#use-your-first-component)，或[浏览组件](/docs/native/components)。
+
+<Callout type="info">
+  生成的项目自带 Expo + TypeScript、预配置的 Uniwind + Tailwind CSS、含必要导入的 `global.css`，并已在应用入口包裹 `GestureHandlerRootView` 与 `HeroUINativeProvider`。
+</Callout>
+
+## 方案 2：添加到已有项目
+
+如果你已经有一个 React Native 或 Expo 应用，请按以下步骤手动安装与配置 HeroUI Native。
+
+<CopyPrompt
+  prompt={`Set up HeroUI Native in this React Native project.
+
+Use the HeroUI Native MCP server (@heroui/native-mcp) as the single source of truth for installation steps, peer dependencies, and component APIs. Start by retrieving the latest quick-start / installation guide from the MCP and follow it precisely — do not rely on memory for versions, package names, or setup steps.
+
+Before making any changes:
+
+1. Analyze the project. Detect the package manager (npm / pnpm / yarn / bun), framework (Expo or bare React Native), TypeScript usage, and the location of node_modules. This matters for global.css — the @source path must be written relative to global.css itself and must resolve to node_modules/heroui-native/lib.
+2. Read package.json and only install what is missing. Pin to the exact versions listed in the MCP quick-start to avoid compatibility issues.
+3. Inspect the app entry (App.tsx, app/_layout.tsx, index.tsx, etc.) and check whether GestureHandlerRootView already wraps the app. If it does, reuse it — do not nest a second GestureHandlerRootView.
+
+Then apply the setup:
+
+- Install heroui-native plus any missing mandatory+optional peer dependencies.
+- Set up Uniwind + Tailwind CSS (follow the Uniwind quickstart) and add the HeroUI Native imports plus the correct @source line to global.css.
+- Make sure GestureHandlerRootView wraps the entire app — it must be the outermost wrapper with style { flex: 1 }.
+- Add HeroUINativeProvider as a direct child of GestureHandlerRootView, wrapping the rest of the app.
+
+When done, summarize the changes you made and tell me how to run the app on iOS / Android.`}
+>
+  **更喜欢让 AI 助手代劳？** 在编辑器中安装 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)，将上方提示词粘贴给你的 AI 助手 —— 它会分析你的项目并完成整套配置。
+</CopyPrompt>
 
 ### 1. 安装 HeroUI Native
 
@@ -113,7 +183,7 @@ export default function App() {
 
 > **说明：** 关于文本属性、动画、Toast 等高级配置，请参阅 [Provider 文档](/docs/native/getting-started/provider)。
 
-### 7. 使用第一个组件
+## 使用第一个组件
 
 ```tsx
 import { Button } from 'heroui-native';
@@ -128,7 +198,7 @@ export default function MyComponent() {
 }
 ```
 
-### 8. 通过细粒度导出减小包体
+## 通过细粒度导出减小包体
 
 若希望减小包体、仅引入用到的组件，可使用细粒度导出：
 

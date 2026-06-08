@@ -1,10 +1,80 @@
 ---
 title: Quick Start
-description: Get started with HeroUI Native in minutes
+description: Get up and running with HeroUI Native
 icon: rocket
 ---
 
-## Getting Started
+Choose the path that fits your project:
+
+- **Option 1** — Scaffold a new, preconfigured project with our CLI. Zero setup.
+- **Option 2** — Add HeroUI Native to an existing React Native or Expo project.
+
+## Option 1: Create a New Project
+
+The fastest way to start. The CLI scaffolds an Expo project with HeroUI Native, all required peer dependencies, Uniwind / Tailwind CSS, global styles, and the `HeroUINativeProvider` already wired up — so you can jump straight to building.
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npx create-heroui-native-app@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm create heroui-native-app@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn create heroui-native-app
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun create heroui-native-app@latest
+    ```
+  </Tab>
+</Tabs>
+
+Follow the interactive prompts, then start the dev server:
+
+```bash
+cd my-app
+npm run start
+```
+
+You're ready to build. Skip ahead to [Use Your First Component](#use-your-first-component) or [browse components](/docs/native/components).
+
+<Callout type="info">
+  The scaffold includes Expo with TypeScript, Uniwind + Tailwind CSS preconfigured, `global.css` with the required imports, and the app entry already wrapped in `GestureHandlerRootView` and `HeroUINativeProvider`.
+</Callout>
+
+## Option 2: Add to an Existing Project
+
+If you already have a React Native or Expo app, follow these steps to install and configure HeroUI Native manually.
+
+<CopyPrompt
+  prompt={`Set up HeroUI Native in this React Native project.
+
+Use the HeroUI Native MCP server (@heroui/native-mcp) as the single source of truth for installation steps, peer dependencies, and component APIs. Start by retrieving the latest quick-start / installation guide from the MCP and follow it precisely — do not rely on memory for versions, package names, or setup steps.
+
+Before making any changes:
+
+1. Analyze the project. Detect the package manager (npm / pnpm / yarn / bun), framework (Expo or bare React Native), TypeScript usage, and the location of node_modules. This matters for global.css — the @source path must be written relative to global.css itself and must resolve to node_modules/heroui-native/lib.
+2. Read package.json and only install what is missing. Pin to the exact versions listed in the MCP quick-start to avoid compatibility issues.
+3. Inspect the app entry (App.tsx, app/_layout.tsx, index.tsx, etc.) and check whether GestureHandlerRootView already wraps the app. If it does, reuse it — do not nest a second GestureHandlerRootView.
+
+Then apply the setup:
+
+- Install heroui-native plus any missing mandatory+optional peer dependencies.
+- Set up Uniwind + Tailwind CSS (follow the Uniwind quickstart) and add the HeroUI Native imports plus the correct @source line to global.css.
+- Make sure GestureHandlerRootView wraps the entire app — it must be the outermost wrapper with style { flex: 1 }.
+- Add HeroUINativeProvider as a direct child of GestureHandlerRootView, wrapping the rest of the app.
+
+When done, summarize the changes you made and tell me how to run the app on iOS / Android.`}
+>
+  **Prefer to let your AI assistant do it?** Install the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server) in your editor, then paste the prompt into your AI assistant — it will analyze your project and handle the entire setup for you.
+</CopyPrompt>
 
 ### 1. Install HeroUI Native
 
@@ -113,7 +183,7 @@ export default function App() {
 
 > **Note**: For advanced configuration options including text props, animation settings, and toast configuration, see the [Provider documentation](/docs/native/getting-started/provider).
 
-### 7. Use Your First Component
+## Use Your First Component
 
 ```tsx
 import { Button } from 'heroui-native';
@@ -128,7 +198,7 @@ export default function MyComponent() {
 }
 ```
 
-### 8. Reduce Bundle Size with Granular Exports
+## Reduce Bundle Size with Granular Exports
 
 If you want to reduce bundle size and import only the components you need, our library provides granular exports for each component:
 

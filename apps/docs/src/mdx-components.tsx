@@ -10,6 +10,7 @@ import {Suspense} from "react";
 import {CollapsibleCode} from "./components/collapsible-code";
 import {ComponentPreview} from "./components/component-preview";
 import {ComponentsCategory} from "./components/components-category";
+import {CopyPrompt} from "./components/copy-prompt";
 import {DocsImage} from "./components/docs-image";
 import {Iconify} from "./components/iconify";
 import {LocaleLink} from "./components/locale-link";
@@ -124,6 +125,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentGrid,
     ComponentPreview,
     ComponentsCategory,
+    CopyPrompt,
     DocsImage,
     ExampleCount,
     Icon,
