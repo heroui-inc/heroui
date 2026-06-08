@@ -40,9 +40,15 @@ export class ToastQueue<T extends object = ToastContentValue> {
         ? options.wrapUpdate
         : (fn: () => void) => {
             if ("startViewTransition" in document) {
-              document.startViewTransition(() => {
-                flushSync(fn);
-              });
+              try {
+                const transition = document.startViewTransition(() => {
+                  flushSync(fn);
+                });
+
+                void transition.finished.catch(() => {});
+              } catch {
+                fn();
+              }
             } else {
               fn();
             }
