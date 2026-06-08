@@ -5,7 +5,6 @@ import {join} from "node:path";
 
 import {remarkNpm} from "fumadocs-core/mdx-plugins";
 import {remarkInclude} from "fumadocs-mdx/config";
-import {remarkAutoTypeTable} from "fumadocs-typescript";
 import {remark} from "remark";
 import remarkGfm from "remark-gfm";
 import remarkMdx from "remark-mdx";
@@ -14,12 +13,7 @@ import {getRelatedComponents} from "@/components-registry";
 import {siteConfig} from "@/config/site";
 import {getDemo} from "@/demos";
 
-const processor = remark()
-  .use(remarkMdx)
-  .use(remarkInclude)
-  .use(remarkGfm)
-  .use(remarkAutoTypeTable)
-  .use(remarkNpm);
+const processor = remark().use(remarkMdx).use(remarkInclude).use(remarkGfm).use(remarkNpm);
 
 const CONTENT_DIR = "content/docs";
 const DEMOS_DIR = "src/demos";

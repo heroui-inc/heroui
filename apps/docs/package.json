@@ -49,7 +49,6 @@
     "feed": "5.1.0",
     "fumadocs-core": "16.9.0",
     "fumadocs-mdx": "14.2.2",
-    "fumadocs-typescript": "5.0.0",
     "fumadocs-ui": "16.9.0",
     "gray-matter": "4.0.3",
     "lucide-react": "0.562.0",
@@ -71,7 +70,6 @@
     "shiki": "3.20.0",
     "tailwind-merge": "3.4.0",
     "tailwind-variants": "3.2.2",
-    "ts-morph": "27.0.2",
     "usehooks-ts": "3.1.1",
     "zod": "4.2.1",
     "@opennextjs/cloudflare": "1.19.11"
