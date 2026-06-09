@@ -8,7 +8,7 @@ export type Lang = "en" | "cn";
 export const DEFAULT_LANG: Lang = "en";
 
 export interface DemoItem {
-  component: ComponentType;
+  loader: () => Promise<ComponentType>;
   /**
    * Source file path relative to `src/demos`, used by `ComponentSource` to
    * load the raw code from disk. Always lang-prefixed, e.g.
