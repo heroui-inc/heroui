@@ -1,2564 +1,2780 @@
 /* eslint-disable sort-keys, sort-keys-fix/sort-keys-fix */
 import type {DemoItem} from "@/demos";
 
-import * as AccordionDemos from "./accordion";
-import * as AlertDemos from "./alert";
-import * as AlertDialogDemos from "./alert-dialog";
-import * as AutocompleteDemos from "./autocomplete";
-import * as AvatarDemos from "./avatar";
-import * as BadgeDemos from "./badge";
-import * as BreadcrumbsDemos from "./breadcrumbs";
-import * as ButtonDemos from "./button";
-import * as ButtonGroupDemos from "./button-group";
-import * as CalendarDemos from "./calendar";
-import * as CardDemos from "./card";
-import * as CheckboxDemos from "./checkbox";
-import * as CheckboxGroupDemos from "./checkbox-group";
-import * as ChipDemos from "./chip";
-import * as CloseButtonDemos from "./close-button";
-import * as ColorAreaDemos from "./color-area";
-import * as ColorFieldDemos from "./color-field";
-import * as ColorPickerDemos from "./color-picker";
-import * as ColorSliderDemos from "./color-slider";
-import * as ColorSwatchDemos from "./color-swatch";
-import * as ColorSwatchPickerDemos from "./color-swatch-picker";
-import * as ComboBoxDemos from "./combo-box";
-import * as DateFieldDemos from "./date-field";
-import * as DatePickerDemos from "./date-picker";
-import * as DateRangePickerDemos from "./date-range-picker";
-import * as DescriptionDemos from "./description";
-import * as DisclosureDemos from "./disclosure";
-import * as DisclosureGroupDemos from "./disclosure-group";
-import * as DrawerDemos from "./drawer";
-import * as DropdownDemos from "./dropdown";
-import * as ErrorMessageDemos from "./error-message";
-import * as FieldErrorDemos from "./field-error";
-import * as FieldsetDemos from "./fieldset";
-import * as FormDemos from "./form";
-import * as InputDemos from "./input";
-import * as InputGroupDemos from "./input-group";
-import * as InputOTPDemos from "./input-otp";
-import * as KbdDemos from "./kbd";
-import * as LabelDemos from "./label";
-import * as LinkDemos from "./link";
-import * as ListBoxDemos from "./list-box";
-import * as MeterDemos from "./meter";
-import * as ModalDemos from "./modal";
-import * as NumberFieldDemos from "./number-field";
-import * as PaginationDemos from "./pagination";
-import * as PopoverDemos from "./popover";
-import * as ProgressBarDemos from "./progress-bar";
-import * as ProgressCircleDemos from "./progress-circle";
-import * as RadioGroupDemos from "./radio-group";
-import * as RangeCalendarDemos from "./range-calendar";
-import * as ScrollShadowDemos from "./scroll-shadow";
-import * as SearchFieldDemos from "./search-field";
-import * as SelectDemos from "./select";
-import * as SeparatorDemos from "./separator";
-import * as SkeletonDemos from "./skeleton";
-import * as SliderDemos from "./slider";
-import * as SpinnerDemos from "./spinner";
-import * as SurfaceDemos from "./surface";
-import * as SwitchDemos from "./switch";
-import * as TableDemos from "./table";
-import * as TabsDemos from "./tabs";
-import * as TagGroupDemos from "./tag-group";
-import * as TextAreaDemos from "./textarea";
-import * as TextFieldDemos from "./textfield";
-import * as TimeFieldDemos from "./time-field";
-import * as ToastDemos from "./toast";
-import * as ToggleButtonDemos from "./toggle-button";
-import * as ToggleButtonGroupDemos from "./toggle-button-group";
-import * as ToolbarDemos from "./toolbar";
-import * as TooltipDemos from "./tooltip";
-import * as TypographyDemos from "./typography";
+import dynamic from "next/dynamic";
 
 export const demos: Record<string, DemoItem> = {
   // Accordion demos
   "accordion-basic": {
-    component: AccordionDemos.Basic,
+    component: dynamic(() => import("./accordion/basic").then((m) => m.Basic)),
     file: "en/accordion/basic.tsx",
   },
   "accordion-surface": {
-    component: AccordionDemos.Surface,
+    component: dynamic(() => import("./accordion/surface").then((m) => m.Surface)),
     file: "en/accordion/surface.tsx",
   },
   "accordion-multiple": {
-    component: AccordionDemos.Multiple,
+    component: dynamic(() => import("./accordion/multiple").then((m) => m.Multiple)),
     file: "en/accordion/multiple.tsx",
   },
   "accordion-disabled": {
-    component: AccordionDemos.Disabled,
+    component: dynamic(() => import("./accordion/disabled").then((m) => m.Disabled)),
     file: "en/accordion/disabled.tsx",
   },
   "accordion-custom-indicator": {
-    component: AccordionDemos.CustomIndicator,
+    component: dynamic(() => import("./accordion/custom-indicator").then((m) => m.CustomIndicator)),
     file: "en/accordion/custom-indicator.tsx",
   },
   "accordion-faq": {
-    component: AccordionDemos.FAQ,
+    component: dynamic(() => import("./accordion/faq").then((m) => m.FAQ)),
     file: "en/accordion/faq.tsx",
   },
   "accordion-custom-styles": {
-    component: AccordionDemos.CustomStyles,
+    component: dynamic(() => import("./accordion/custom-styles").then((m) => m.CustomStyles)),
     file: "en/accordion/custom-styles.tsx",
   },
   "accordion-without-separator": {
-    component: AccordionDemos.WithoutSeparator,
+    component: dynamic(() =>
+      import("./accordion/without-separator").then((m) => m.WithoutSeparator),
+    ),
     file: "en/accordion/without-separator.tsx",
   },
   "accordion-custom-render-function": {
-    component: AccordionDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./accordion/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/accordion/custom-render-function.tsx",
   },
   "accordion-controlled": {
-    component: AccordionDemos.Controlled,
+    component: dynamic(() => import("./accordion/controlled").then((m) => m.Controlled)),
     file: "en/accordion/controlled.tsx",
   },
   // Alert demos
   "alert-basic": {
-    component: AlertDemos.Basic,
+    component: dynamic(() => import("./alert/basic").then((m) => m.Basic)),
     file: "en/alert/basic.tsx",
   },
   // AlertDialog demos
   "alert-dialog-default": {
-    component: AlertDialogDemos.Default,
+    component: dynamic(() => import("./alert-dialog/default").then((m) => m.Default)),
     file: "en/alert-dialog/default.tsx",
   },
   "alert-dialog-statuses": {
-    component: AlertDialogDemos.Statuses,
+    component: dynamic(() => import("./alert-dialog/statuses").then((m) => m.Statuses)),
     file: "en/alert-dialog/statuses.tsx",
   },
   "alert-dialog-placements": {
-    component: AlertDialogDemos.Placements,
+    component: dynamic(() => import("./alert-dialog/placements").then((m) => m.Placements)),
     file: "en/alert-dialog/placements.tsx",
   },
   "alert-dialog-backdrop-variants": {
-    component: AlertDialogDemos.BackdropVariants,
+    component: dynamic(() =>
+      import("./alert-dialog/backdrop-variants").then((m) => m.BackdropVariants),
+    ),
     file: "en/alert-dialog/backdrop-variants.tsx",
   },
   "alert-dialog-sizes": {
-    component: AlertDialogDemos.Sizes,
+    component: dynamic(() => import("./alert-dialog/sizes").then((m) => m.Sizes)),
     file: "en/alert-dialog/sizes.tsx",
   },
   "alert-dialog-controlled": {
-    component: AlertDialogDemos.Controlled,
+    component: dynamic(() => import("./alert-dialog/controlled").then((m) => m.Controlled)),
     file: "en/alert-dialog/controlled.tsx",
   },
   "alert-dialog-dismiss-behavior": {
-    component: AlertDialogDemos.DismissBehavior,
+    component: dynamic(() =>
+      import("./alert-dialog/dismiss-behavior").then((m) => m.DismissBehavior),
+    ),
     file: "en/alert-dialog/dismiss-behavior.tsx",
   },
   "alert-dialog-custom-icon": {
-    component: AlertDialogDemos.CustomIcon,
+    component: dynamic(() => import("./alert-dialog/custom-icon").then((m) => m.CustomIcon)),
     file: "en/alert-dialog/custom-icon.tsx",
   },
   "alert-dialog-custom-backdrop": {
-    component: AlertDialogDemos.CustomBackdrop,
+    component: dynamic(() =>
+      import("./alert-dialog/custom-backdrop").then((m) => m.CustomBackdrop),
+    ),
     file: "en/alert-dialog/custom-backdrop.tsx",
   },
   "alert-dialog-custom-trigger": {
-    component: AlertDialogDemos.CustomTrigger,
+    component: dynamic(() => import("./alert-dialog/custom-trigger").then((m) => m.CustomTrigger)),
     file: "en/alert-dialog/custom-trigger.tsx",
   },
   "alert-dialog-with-close-button": {
-    component: AlertDialogDemos.WithCloseButton,
+    component: dynamic(() =>
+      import("./alert-dialog/with-close-button").then((m) => m.WithCloseButton),
+    ),
     file: "en/alert-dialog/with-close-button.tsx",
   },
   "alert-dialog-custom-animations": {
-    component: AlertDialogDemos.CustomAnimations,
+    component: dynamic(() =>
+      import("./alert-dialog/custom-animations").then((m) => m.CustomAnimations),
+    ),
     file: "en/alert-dialog/custom-animations.tsx",
   },
   "alert-dialog-close-methods": {
-    component: AlertDialogDemos.CloseMethods,
+    component: dynamic(() => import("./alert-dialog/close-methods").then((m) => m.CloseMethods)),
     file: "en/alert-dialog/close-methods.tsx",
   },
   "alert-dialog-custom-portal": {
-    component: AlertDialogDemos.CustomPortal,
+    component: dynamic(() => import("./alert-dialog/custom-portal").then((m) => m.CustomPortal)),
     file: "en/alert-dialog/custom-portal.tsx",
   },
   // Avatar demos
   "avatar-basic": {
-    component: AvatarDemos.Basic,
+    component: dynamic(() => import("./avatar/basic").then((m) => m.Basic)),
     file: "en/avatar/basic.tsx",
   },
   "avatar-sizes": {
-    component: AvatarDemos.Sizes,
+    component: dynamic(() => import("./avatar/sizes").then((m) => m.Sizes)),
     file: "en/avatar/sizes.tsx",
   },
   "avatar-colors": {
-    component: AvatarDemos.Colors,
+    component: dynamic(() => import("./avatar/colors").then((m) => m.Colors)),
     file: "en/avatar/colors.tsx",
   },
   "avatar-variants": {
-    component: AvatarDemos.Variants,
+    component: dynamic(() => import("./avatar/variants").then((m) => m.Variants)),
     file: "en/avatar/variants.tsx",
   },
   "avatar-fallback": {
-    component: AvatarDemos.Fallback,
+    component: dynamic(() => import("./avatar/fallback").then((m) => m.Fallback)),
     file: "en/avatar/fallback.tsx",
   },
   "avatar-group": {
-    component: AvatarDemos.Group,
+    component: dynamic(() => import("./avatar/group").then((m) => m.Group)),
     file: "en/avatar/group.tsx",
   },
   "avatar-custom-styles": {
-    component: AvatarDemos.CustomStyles,
+    component: dynamic(() => import("./avatar/custom-styles").then((m) => m.CustomStyles)),
     file: "en/avatar/custom-styles.tsx",
   },
   // Badge demos
   "badge-basic": {
-    component: BadgeDemos.Basic,
+    component: dynamic(() => import("./badge/basic").then((m) => m.BadgeBasic)),
     file: "en/badge/basic.tsx",
   },
   "badge-colors": {
-    component: BadgeDemos.Colors,
+    component: dynamic(() => import("./badge/colors").then((m) => m.BadgeColors)),
     file: "en/badge/colors.tsx",
   },
   "badge-sizes": {
-    component: BadgeDemos.Sizes,
+    component: dynamic(() => import("./badge/sizes").then((m) => m.BadgeSizes)),
     file: "en/badge/sizes.tsx",
   },
   "badge-variants": {
-    component: BadgeDemos.Variants,
+    component: dynamic(() => import("./badge/variants").then((m) => m.BadgeVariants)),
     file: "en/badge/variants.tsx",
   },
   "badge-placements": {
-    component: BadgeDemos.Placements,
+    component: dynamic(() => import("./badge/placements").then((m) => m.BadgePlacements)),
     file: "en/badge/placements.tsx",
   },
   "badge-with-content": {
-    component: BadgeDemos.WithContent,
+    component: dynamic(() => import("./badge/with-content").then((m) => m.BadgeWithContent)),
     file: "en/badge/with-content.tsx",
   },
   "badge-dot": {
-    component: BadgeDemos.Dot,
+    component: dynamic(() => import("./badge/dot").then((m) => m.BadgeDot)),
     file: "en/badge/dot.tsx",
   },
   // Breadcrumbs demos
   "breadcrumbs-basic": {
-    component: BreadcrumbsDemos.BreadcrumbsBasic,
+    component: dynamic(() => import("./breadcrumbs/basic")),
     file: "en/breadcrumbs/basic.tsx",
   },
   "breadcrumbs-level-2": {
-    component: BreadcrumbsDemos.BreadcrumbsLevel2,
+    component: dynamic(() => import("./breadcrumbs/level-2")),
     file: "en/breadcrumbs/level-2.tsx",
   },
   "breadcrumbs-level-3": {
-    component: BreadcrumbsDemos.BreadcrumbsLevel3,
+    component: dynamic(() => import("./breadcrumbs/level-3")),
     file: "en/breadcrumbs/level-3.tsx",
   },
   "breadcrumbs-custom-separator": {
-    component: BreadcrumbsDemos.BreadcrumbsCustomSeparator,
+    component: dynamic(() => import("./breadcrumbs/custom-separator")),
     file: "en/breadcrumbs/custom-separator.tsx",
   },
   "breadcrumbs-disabled": {
-    component: BreadcrumbsDemos.BreadcrumbsDisabled,
+    component: dynamic(() => import("./breadcrumbs/disabled")),
     file: "en/breadcrumbs/disabled.tsx",
   },
   "breadcrumbs-custom-render-function": {
-    component: BreadcrumbsDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./breadcrumbs/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/breadcrumbs/custom-render-function.tsx",
   },
   // Button demos
   "button-basic": {
-    component: ButtonDemos.Basic,
+    component: dynamic(() => import("./button/basic").then((m) => m.Basic)),
     file: "en/button/basic.tsx",
   },
   "button-custom-variants": {
-    component: ButtonDemos.CustomVariants,
+    component: dynamic(() => import("./button/custom-variants").then((m) => m.CustomVariants)),
     file: "en/button/custom-variants.tsx",
   },
   "button-disabled": {
-    component: ButtonDemos.Disabled,
+    component: dynamic(() => import("./button/disabled").then((m) => m.Disabled)),
     file: "en/button/disabled.tsx",
   },
   "button-icon-only": {
-    component: ButtonDemos.IconOnly,
+    component: dynamic(() => import("./button/icon-only").then((m) => m.IconOnly)),
     file: "en/button/icon-only.tsx",
   },
   "button-loading": {
-    component: ButtonDemos.Loading,
+    component: dynamic(() => import("./button/loading").then((m) => m.Loading)),
     file: "en/button/loading.tsx",
   },
   "button-loading-state": {
-    component: ButtonDemos.LoadingState,
+    component: dynamic(() => import("./button/loading-state").then((m) => m.LoadingState)),
     file: "en/button/loading-state.tsx",
   },
   "button-sizes": {
-    component: ButtonDemos.Sizes,
+    component: dynamic(() => import("./button/sizes").then((m) => m.Sizes)),
     file: "en/button/sizes.tsx",
   },
   "button-full-width": {
-    component: ButtonDemos.FullWidth,
+    component: dynamic(() => import("./button/full-width").then((m) => m.FullWidth)),
     file: "en/button/full-width.tsx",
   },
   "button-social": {
-    component: ButtonDemos.Social,
+    component: dynamic(() => import("./button/social").then((m) => m.Social)),
     file: "en/button/social.tsx",
   },
   "button-ripple-effect": {
-    component: ButtonDemos.RippleEffect,
+    component: dynamic(() => import("./button/ripple-effect").then((m) => m.RippleEffect)),
     file: "en/button/ripple-effect.tsx",
   },
   "button-variants": {
-    component: ButtonDemos.Variants,
+    component: dynamic(() => import("./button/variants").then((m) => m.Variants)),
     file: "en/button/variants.tsx",
   },
   "button-outline-variant": {
-    component: ButtonDemos.OutlineVariant,
+    component: dynamic(() => import("./button/outline-variant").then((m) => m.OutlineVariant)),
     file: "en/button/outline-variant.tsx",
   },
   "button-with-icons": {
-    component: ButtonDemos.WithIcons,
+    component: dynamic(() => import("./button/with-icons").then((m) => m.WithIcons)),
     file: "en/button/with-icons.tsx",
   },
   "button-custom-render-function": {
-    component: ButtonDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./button/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/button/custom-render-function.tsx",
   },
   // ButtonGroup demos
   "button-group-basic": {
-    component: ButtonGroupDemos.Basic,
+    component: dynamic(() => import("./button-group/basic").then((m) => m.Basic)),
     file: "en/button-group/basic.tsx",
   },
   "button-group-disabled": {
-    component: ButtonGroupDemos.Disabled,
+    component: dynamic(() => import("./button-group/disabled").then((m) => m.Disabled)),
     file: "en/button-group/disabled.tsx",
   },
   "button-group-sizes": {
-    component: ButtonGroupDemos.Sizes,
+    component: dynamic(() => import("./button-group/sizes").then((m) => m.Sizes)),
     file: "en/button-group/sizes.tsx",
   },
   "button-group-full-width": {
-    component: ButtonGroupDemos.FullWidth,
+    component: dynamic(() => import("./button-group/full-width").then((m) => m.FullWidth)),
     file: "en/button-group/full-width.tsx",
   },
   "button-group-variants": {
-    component: ButtonGroupDemos.Variants,
+    component: dynamic(() => import("./button-group/variants").then((m) => m.Variants)),
     file: "en/button-group/variants.tsx",
   },
   "button-group-with-icons": {
-    component: ButtonGroupDemos.WithIcons,
+    component: dynamic(() => import("./button-group/with-icons").then((m) => m.WithIcons)),
     file: "en/button-group/with-icons.tsx",
   },
   "button-group-orientation": {
-    component: ButtonGroupDemos.Orientation,
+    component: dynamic(() => import("./button-group/orientation").then((m) => m.Orientation)),
     file: "en/button-group/orientation.tsx",
   },
   "button-group-without-separator": {
-    component: ButtonGroupDemos.WithoutSeparator,
+    component: dynamic(() =>
+      import("./button-group/without-separator").then((m) => m.WithoutSeparator),
+    ),
     file: "en/button-group/without-separator.tsx",
   },
   // Card demos
   "card-default": {
-    component: CardDemos.Default,
+    component: dynamic(() => import("./card/default").then((m) => m.Default)),
     file: "en/card/default.tsx",
   },
   "card-horizontal": {
-    component: CardDemos.Horizontal,
+    component: dynamic(() => import("./card/horizontal").then((m) => m.Horizontal)),
     file: "en/card/horizontal.tsx",
   },
   "card-variants": {
-    component: CardDemos.Variants,
+    component: dynamic(() => import("./card/variants").then((m) => m.Variants)),
     file: "en/card/variants.tsx",
   },
   "card-with-avatar": {
-    component: CardDemos.WithAvatar,
+    component: dynamic(() => import("./card/with-avatar").then((m) => m.WithAvatar)),
     file: "en/card/with-avatar.tsx",
   },
   "card-with-form": {
-    component: CardDemos.WithForm,
+    component: dynamic(() => import("./card/with-form").then((m) => m.WithForm)),
     file: "en/card/with-form.tsx",
   },
   "card-with-images": {
-    component: CardDemos.WithImages,
+    component: dynamic(() => import("./card/with-images").then((m) => m.WithImages)),
     file: "en/card/with-images.tsx",
   },
   // Calendar demos
   "calendar-basic": {
-    component: CalendarDemos.Basic,
+    component: dynamic(() => import("./calendar/basic").then((m) => m.Basic)),
     file: "en/calendar/basic.tsx",
   },
   "calendar-custom-styles": {
-    component: CalendarDemos.CustomStyles,
+    component: dynamic(() => import("./calendar/custom-styles").then((m) => m.CustomStyles)),
     file: "en/calendar/custom-styles.tsx",
   },
   "calendar-default-value": {
-    component: CalendarDemos.DefaultValue,
+    component: dynamic(() => import("./calendar/default-value").then((m) => m.DefaultValue)),
     file: "en/calendar/default-value.tsx",
   },
   "calendar-controlled": {
-    component: CalendarDemos.Controlled,
+    component: dynamic(() => import("./calendar/controlled").then((m) => m.Controlled)),
     file: "en/calendar/controlled.tsx",
   },
   "calendar-min-max-dates": {
-    component: CalendarDemos.MinMaxDates,
+    component: dynamic(() => import("./calendar/min-max-dates").then((m) => m.MinMaxDates)),
     file: "en/calendar/min-max-dates.tsx",
   },
   "calendar-unavailable-dates": {
-    component: CalendarDemos.UnavailableDates,
+    component: dynamic(() =>
+      import("./calendar/unavailable-dates").then((m) => m.UnavailableDates),
+    ),
     file: "en/calendar/unavailable-dates.tsx",
   },
   "calendar-weeks-in-month": {
-    component: CalendarDemos.WeeksInMonth,
+    component: dynamic(() => import("./calendar/weeks-in-month").then((m) => m.WeeksInMonth)),
     file: "en/calendar/weeks-in-month.tsx",
   },
   "calendar-week-view": {
-    component: CalendarDemos.WeekView,
+    component: dynamic(() => import("./calendar/week-view").then((m) => m.WeekView)),
     file: "en/calendar/week-view.tsx",
   },
   "calendar-day-view": {
-    component: CalendarDemos.DayView,
+    component: dynamic(() => import("./calendar/day-view").then((m) => m.DayView)),
     file: "en/calendar/day-view.tsx",
   },
   "calendar-multiple-selection": {
-    component: CalendarDemos.MultipleSelection,
+    component: dynamic(() =>
+      import("./calendar/multiple-selection").then((m) => m.MultipleSelection),
+    ),
     file: "en/calendar/multiple-selection.tsx",
   },
   "calendar-disabled": {
-    component: CalendarDemos.Disabled,
+    component: dynamic(() => import("./calendar/disabled").then((m) => m.Disabled)),
     file: "en/calendar/disabled.tsx",
   },
   "calendar-read-only": {
-    component: CalendarDemos.ReadOnly,
+    component: dynamic(() => import("./calendar/read-only").then((m) => m.ReadOnly)),
     file: "en/calendar/read-only.tsx",
   },
   "calendar-focused-value": {
-    component: CalendarDemos.FocusedValue,
+    component: dynamic(() => import("./calendar/focused-value").then((m) => m.FocusedValue)),
     file: "en/calendar/focused-value.tsx",
   },
   "calendar-with-indicators": {
-    component: CalendarDemos.WithIndicators,
+    component: dynamic(() => import("./calendar/with-indicators").then((m) => m.WithIndicators)),
     file: "en/calendar/with-indicators.tsx",
   },
   "calendar-multiple-months": {
-    component: CalendarDemos.MultipleMonths,
+    component: dynamic(() => import("./calendar/multiple-months").then((m) => m.MultipleMonths)),
     file: "en/calendar/multiple-months.tsx",
   },
   "calendar-year-picker": {
-    component: CalendarDemos.YearPicker,
+    component: dynamic(() => import("./calendar/year-picker").then((m) => m.YearPicker)),
     file: "en/calendar/year-picker.tsx",
   },
   "calendar-international-calendar": {
-    component: CalendarDemos.InternationalCalendar,
+    component: dynamic(() =>
+      import("./calendar/international-calendar").then((m) => m.InternationalCalendar),
+    ),
     file: "en/calendar/international-calendar.tsx",
   },
   "calendar-booking-calendar": {
-    component: CalendarDemos.BookingCalendar,
+    component: dynamic(() => import("./calendar/booking-calendar").then((m) => m.BookingCalendar)),
     file: "en/calendar/booking-calendar.tsx",
   },
   "calendar-custom-icons": {
-    component: CalendarDemos.CustomIcons,
+    component: dynamic(() => import("./calendar/custom-icons").then((m) => m.CustomIcons)),
     file: "en/calendar/custom-icons.tsx",
   },
   // RangeCalendar demos
   "range-calendar-basic": {
-    component: RangeCalendarDemos.Basic,
+    component: dynamic(() => import("./range-calendar/basic").then((m) => m.Basic)),
     file: "en/range-calendar/basic.tsx",
   },
   "range-calendar-year-picker": {
-    component: RangeCalendarDemos.YearPicker,
+    component: dynamic(() => import("./range-calendar/year-picker").then((m) => m.YearPicker)),
     file: "en/range-calendar/year-picker.tsx",
   },
   "range-calendar-default-value": {
-    component: RangeCalendarDemos.DefaultValue,
+    component: dynamic(() => import("./range-calendar/default-value").then((m) => m.DefaultValue)),
     file: "en/range-calendar/default-value.tsx",
   },
   "range-calendar-controlled": {
-    component: RangeCalendarDemos.Controlled,
+    component: dynamic(() => import("./range-calendar/controlled").then((m) => m.Controlled)),
     file: "en/range-calendar/controlled.tsx",
   },
   "range-calendar-min-max-dates": {
-    component: RangeCalendarDemos.MinMaxDates,
+    component: dynamic(() => import("./range-calendar/min-max-dates").then((m) => m.MinMaxDates)),
     file: "en/range-calendar/min-max-dates.tsx",
   },
   "range-calendar-unavailable-dates": {
-    component: RangeCalendarDemos.UnavailableDates,
+    component: dynamic(() =>
+      import("./range-calendar/unavailable-dates").then((m) => m.UnavailableDates),
+    ),
     file: "en/range-calendar/unavailable-dates.tsx",
   },
   "range-calendar-anchor-unavailable-dates": {
-    component: RangeCalendarDemos.AnchorUnavailableDates,
+    component: dynamic(() =>
+      import("./range-calendar/anchor-unavailable-dates").then((m) => m.AnchorUnavailableDates),
+    ),
     file: "en/range-calendar/anchor-unavailable-dates.tsx",
   },
   "range-calendar-weeks-in-month": {
-    component: RangeCalendarDemos.WeeksInMonth,
+    component: dynamic(() => import("./range-calendar/weeks-in-month").then((m) => m.WeeksInMonth)),
     file: "en/range-calendar/weeks-in-month.tsx",
   },
   "range-calendar-week-view": {
-    component: RangeCalendarDemos.WeekView,
+    component: dynamic(() => import("./range-calendar/week-view").then((m) => m.WeekView)),
     file: "en/range-calendar/week-view.tsx",
   },
   "range-calendar-day-view": {
-    component: RangeCalendarDemos.DayView,
+    component: dynamic(() => import("./range-calendar/day-view").then((m) => m.DayView)),
     file: "en/range-calendar/day-view.tsx",
   },
   "range-calendar-allows-non-contiguous-ranges": {
-    component: RangeCalendarDemos.AllowsNonContiguousRanges,
+    component: dynamic(() =>
+      import("./range-calendar/allows-non-contiguous-ranges").then(
+        (m) => m.AllowsNonContiguousRanges,
+      ),
+    ),
     file: "en/range-calendar/allows-non-contiguous-ranges.tsx",
   },
   "range-calendar-disabled": {
-    component: RangeCalendarDemos.Disabled,
+    component: dynamic(() => import("./range-calendar/disabled").then((m) => m.Disabled)),
     file: "en/range-calendar/disabled.tsx",
   },
   "range-calendar-read-only": {
-    component: RangeCalendarDemos.ReadOnly,
+    component: dynamic(() => import("./range-calendar/read-only").then((m) => m.ReadOnly)),
     file: "en/range-calendar/read-only.tsx",
   },
   "range-calendar-invalid": {
-    component: RangeCalendarDemos.Invalid,
+    component: dynamic(() => import("./range-calendar/invalid").then((m) => m.Invalid)),
     file: "en/range-calendar/invalid.tsx",
   },
   "range-calendar-focused-value": {
-    component: RangeCalendarDemos.FocusedValue,
+    component: dynamic(() => import("./range-calendar/focused-value").then((m) => m.FocusedValue)),
     file: "en/range-calendar/focused-value.tsx",
   },
   "range-calendar-with-indicators": {
-    component: RangeCalendarDemos.WithIndicators,
+    component: dynamic(() =>
+      import("./range-calendar/with-indicators").then((m) => m.WithIndicators),
+    ),
     file: "en/range-calendar/with-indicators.tsx",
   },
   "range-calendar-multiple-months": {
-    component: RangeCalendarDemos.MultipleMonths,
+    component: dynamic(() =>
+      import("./range-calendar/multiple-months").then((m) => m.MultipleMonths),
+    ),
     file: "en/range-calendar/multiple-months.tsx",
   },
   "range-calendar-three-months": {
-    component: RangeCalendarDemos.ThreeMonths,
+    component: dynamic(() => import("./range-calendar/three-months").then((m) => m.ThreeMonths)),
     file: "en/range-calendar/three-months.tsx",
   },
   "range-calendar-international-calendar": {
-    component: RangeCalendarDemos.InternationalCalendar,
+    component: dynamic(() =>
+      import("./range-calendar/international-calendar").then((m) => m.InternationalCalendar),
+    ),
     file: "en/range-calendar/international-calendar.tsx",
   },
   "range-calendar-booking-calendar": {
-    component: RangeCalendarDemos.BookingCalendar,
+    component: dynamic(() =>
+      import("./range-calendar/booking-calendar").then((m) => m.BookingCalendar),
+    ),
     file: "en/range-calendar/booking-calendar.tsx",
   },
   // Checkbox demos
   "checkbox-basic": {
-    component: CheckboxDemos.Basic,
+    component: dynamic(() => import("./checkbox/basic").then((m) => m.Basic)),
     file: "en/checkbox/basic.tsx",
   },
   "checkbox-disabled": {
-    component: CheckboxDemos.Disabled,
+    component: dynamic(() => import("./checkbox/disabled").then((m) => m.Disabled)),
     file: "en/checkbox/disabled.tsx",
   },
   "checkbox-default-selected": {
-    component: CheckboxDemos.DefaultSelected,
+    component: dynamic(() => import("./checkbox/default-selected").then((m) => m.DefaultSelected)),
     file: "en/checkbox/default-selected.tsx",
   },
   "checkbox-controlled": {
-    component: CheckboxDemos.Controlled,
+    component: dynamic(() => import("./checkbox/controlled").then((m) => m.Controlled)),
     file: "en/checkbox/controlled.tsx",
   },
   "checkbox-indeterminate": {
-    component: CheckboxDemos.Indeterminate,
+    component: dynamic(() => import("./checkbox/indeterminate").then((m) => m.Indeterminate)),
     file: "en/checkbox/indeterminate.tsx",
   },
   "checkbox-external-label": {
-    component: CheckboxDemos.ExternalLabel,
+    component: dynamic(() => import("./checkbox/external-label").then((m) => m.ExternalLabel)),
     file: "en/checkbox/external-label.tsx",
   },
   "checkbox-with-description": {
-    component: CheckboxDemos.WithDescription,
+    component: dynamic(() => import("./checkbox/with-description").then((m) => m.WithDescription)),
     file: "en/checkbox/with-description.tsx",
   },
   "checkbox-render-props": {
-    component: CheckboxDemos.RenderProps,
+    component: dynamic(() => import("./checkbox/render-props").then((m) => m.RenderProps)),
     file: "en/checkbox/render-props.tsx",
   },
   "checkbox-form": {
-    component: CheckboxDemos.Form,
+    component: dynamic(() => import("./checkbox/form").then((m) => m.Form)),
     file: "en/checkbox/form.tsx",
   },
   "checkbox-custom-styles": {
-    component: CheckboxDemos.CustomStyles,
+    component: dynamic(() => import("./checkbox/custom-styles").then((m) => m.CustomStyles)),
     file: "en/checkbox/custom-styles.tsx",
   },
   "checkbox-invalid": {
-    component: CheckboxDemos.Invalid,
+    component: dynamic(() => import("./checkbox/invalid").then((m) => m.Invalid)),
     file: "en/checkbox/invalid.tsx",
   },
   "checkbox-custom-indicator": {
-    component: CheckboxDemos.CustomIndicator,
+    component: dynamic(() => import("./checkbox/custom-indicator").then((m) => m.CustomIndicator)),
     file: "en/checkbox/custom-indicator.tsx",
   },
   "checkbox-full-rounded": {
-    component: CheckboxDemos.FullRounded,
+    component: dynamic(() => import("./checkbox/full-rounded").then((m) => m.FullRounded)),
     file: "en/checkbox/full-rounded.tsx",
   },
   "checkbox-variants": {
-    component: CheckboxDemos.Variants,
+    component: dynamic(() => import("./checkbox/variants").then((m) => m.Variants)),
     file: "en/checkbox/variants.tsx",
   },
   "checkbox-custom-render-function": {
-    component: CheckboxDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./checkbox/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/checkbox/custom-render-function.tsx",
   },
   // CheckboxGroup demos
   "checkbox-group-basic": {
-    component: CheckboxGroupDemos.Basic,
+    component: dynamic(() => import("./checkbox-group/basic").then((m) => m.Basic)),
     file: "en/checkbox-group/basic.tsx",
   },
   "checkbox-group-on-surface": {
-    component: CheckboxGroupDemos.OnSurface,
+    component: dynamic(() => import("./checkbox-group/on-surface").then((m) => m.OnSurface)),
     file: "en/checkbox-group/on-surface.tsx",
   },
   "checkbox-group-with-custom-indicator": {
-    component: CheckboxGroupDemos.WithCustomIndicator,
+    component: dynamic(() =>
+      import("./checkbox-group/with-custom-indicator").then((m) => m.WithCustomIndicator),
+    ),
     file: "en/checkbox-group/with-custom-indicator.tsx",
   },
   "checkbox-group-indeterminate": {
-    component: CheckboxGroupDemos.Indeterminate,
+    component: dynamic(() => import("./checkbox-group/indeterminate").then((m) => m.Indeterminate)),
     file: "en/checkbox-group/indeterminate.tsx",
   },
   "checkbox-group-validation": {
-    component: CheckboxGroupDemos.Validation,
+    component: dynamic(() => import("./checkbox-group/validation").then((m) => m.Validation)),
     file: "en/checkbox-group/validation.tsx",
   },
   "checkbox-group-controlled": {
-    component: CheckboxGroupDemos.Controlled,
+    component: dynamic(() => import("./checkbox-group/controlled").then((m) => m.Controlled)),
     file: "en/checkbox-group/controlled.tsx",
   },
   "checkbox-group-disabled": {
-    component: CheckboxGroupDemos.Disabled,
+    component: dynamic(() => import("./checkbox-group/disabled").then((m) => m.Disabled)),
     file: "en/checkbox-group/disabled.tsx",
   },
   "checkbox-group-features-and-addons": {
-    component: CheckboxGroupDemos.FeaturesAndAddOns,
+    component: dynamic(() =>
+      import("./checkbox-group/features-and-addons").then((m) => m.FeaturesAndAddOns),
+    ),
     file: "en/checkbox-group/features-and-addons.tsx",
   },
   "checkbox-group-custom-render-function": {
-    component: CheckboxGroupDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./checkbox-group/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/checkbox-group/custom-render-function.tsx",
   },
   // Chip demos
   "chip-basic": {
-    component: ChipDemos.Basic,
+    component: dynamic(() => import("./chip/basic").then((m) => m.ChipBasic)),
     file: "en/chip/basic.tsx",
   },
   "chip-variants": {
-    component: ChipDemos.Variants,
+    component: dynamic(() => import("./chip/variants").then((m) => m.ChipVariants)),
     file: "en/chip/variants.tsx",
   },
   "chip-with-icon": {
-    component: ChipDemos.WithIcon,
+    component: dynamic(() => import("./chip/with-icon").then((m) => m.ChipWithIcon)),
     file: "en/chip/with-icon.tsx",
   },
   "chip-statuses": {
-    component: ChipDemos.Statuses,
+    component: dynamic(() => import("./chip/statuses").then((m) => m.ChipStatuses)),
     file: "en/chip/statuses.tsx",
   },
   "chip-vibrant-palette": {
-    component: ChipDemos.VibrantPalette,
+    component: dynamic(() => import("./chip/vibrant-palette").then((m) => m.ChipVibrantPalette)),
     file: "en/chip/vibrant-palette.tsx",
   },
   // ColorField demos
   "color-field-basic": {
-    component: ColorFieldDemos.Basic,
+    component: dynamic(() => import("./color-field/basic").then((m) => m.Basic)),
     file: "en/color-field/basic.tsx",
   },
   "color-field-channel-editing": {
-    component: ColorFieldDemos.ChannelEditing,
+    component: dynamic(() => import("./color-field/channel-editing").then((m) => m.ChannelEditing)),
     file: "en/color-field/channel-editing.tsx",
   },
   "color-field-controlled": {
-    component: ColorFieldDemos.Controlled,
+    component: dynamic(() => import("./color-field/controlled").then((m) => m.Controlled)),
     file: "en/color-field/controlled.tsx",
   },
   "color-field-disabled": {
-    component: ColorFieldDemos.Disabled,
+    component: dynamic(() => import("./color-field/disabled").then((m) => m.Disabled)),
     file: "en/color-field/disabled.tsx",
   },
   "color-field-form-example": {
-    component: ColorFieldDemos.FormExample,
+    component: dynamic(() => import("./color-field/form-example").then((m) => m.FormExample)),
     file: "en/color-field/form-example.tsx",
   },
   "color-field-full-width": {
-    component: ColorFieldDemos.FullWidth,
+    component: dynamic(() => import("./color-field/full-width").then((m) => m.FullWidth)),
     file: "en/color-field/full-width.tsx",
   },
   "color-field-invalid": {
-    component: ColorFieldDemos.Invalid,
+    component: dynamic(() => import("./color-field/invalid").then((m) => m.Invalid)),
     file: "en/color-field/invalid.tsx",
   },
   "color-field-on-surface": {
-    component: ColorFieldDemos.OnSurface,
+    component: dynamic(() => import("./color-field/on-surface").then((m) => m.OnSurface)),
     file: "en/color-field/on-surface.tsx",
   },
   "color-field-required": {
-    component: ColorFieldDemos.Required,
+    component: dynamic(() => import("./color-field/required").then((m) => m.Required)),
     file: "en/color-field/required.tsx",
   },
   "color-field-variants": {
-    component: ColorFieldDemos.Variants,
+    component: dynamic(() => import("./color-field/variants").then((m) => m.Variants)),
     file: "en/color-field/variants.tsx",
   },
   "color-field-with-description": {
-    component: ColorFieldDemos.WithDescription,
+    component: dynamic(() =>
+      import("./color-field/with-description").then((m) => m.WithDescription),
+    ),
     file: "en/color-field/with-description.tsx",
   },
   "color-field-custom-render-function": {
-    component: ColorFieldDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./color-field/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/color-field/custom-render-function.tsx",
   },
   // ColorPicker demos
   "color-picker-basic": {
-    component: ColorPickerDemos.Basic,
+    component: dynamic(() => import("./color-picker/basic").then((m) => m.Basic)),
     file: "en/color-picker/basic.tsx",
   },
   "color-picker-controlled": {
-    component: ColorPickerDemos.Controlled,
+    component: dynamic(() => import("./color-picker/controlled").then((m) => m.Controlled)),
     file: "en/color-picker/controlled.tsx",
   },
   "color-picker-with-swatches": {
-    component: ColorPickerDemos.WithSwatches,
+    component: dynamic(() => import("./color-picker/with-swatches").then((m) => m.WithSwatches)),
     file: "en/color-picker/with-swatches.tsx",
   },
   "color-picker-with-fields": {
-    component: ColorPickerDemos.WithFields,
+    component: dynamic(() => import("./color-picker/with-fields").then((m) => m.WithFields)),
     file: "en/color-picker/with-fields.tsx",
   },
   "color-picker-with-sliders": {
-    component: ColorPickerDemos.WithSliders,
+    component: dynamic(() => import("./color-picker/with-sliders").then((m) => m.WithSliders)),
     file: "en/color-picker/with-sliders.tsx",
   },
   // ColorArea demos
   "color-area-basic": {
-    component: ColorAreaDemos.Basic,
+    component: dynamic(() => import("./color-area/basic").then((m) => m.ColorAreaBasic)),
     file: "en/color-area/basic.tsx",
   },
   "color-area-with-dots": {
-    component: ColorAreaDemos.WithDots,
+    component: dynamic(() => import("./color-area/with-dots").then((m) => m.ColorAreaWithDots)),
     file: "en/color-area/with-dots.tsx",
   },
   "color-area-space-and-channels": {
-    component: ColorAreaDemos.SpaceAndChannels,
+    component: dynamic(() =>
+      import("./color-area/space-and-channels").then((m) => m.ColorAreaSpaceAndChannels),
+    ),
     file: "en/color-area/space-and-channels.tsx",
   },
   "color-area-controlled": {
-    component: ColorAreaDemos.Controlled,
+    component: dynamic(() => import("./color-area/controlled").then((m) => m.ColorAreaControlled)),
     file: "en/color-area/controlled.tsx",
   },
   "color-area-disabled": {
-    component: ColorAreaDemos.Disabled,
+    component: dynamic(() => import("./color-area/disabled").then((m) => m.ColorAreaDisabled)),
     file: "en/color-area/disabled.tsx",
   },
   "color-area-custom-render-function": {
-    component: ColorAreaDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./color-area/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/color-area/custom-render-function.tsx",
   },
   // ColorSwatch demos
   "color-swatch-basic": {
-    component: ColorSwatchDemos.Basic,
+    component: dynamic(() => import("./color-swatch/basic").then((m) => m.ColorSwatchBasic)),
     file: "en/color-swatch/basic.tsx",
   },
   "color-swatch-sizes": {
-    component: ColorSwatchDemos.Sizes,
+    component: dynamic(() => import("./color-swatch/sizes").then((m) => m.ColorSwatchSizes)),
     file: "en/color-swatch/sizes.tsx",
   },
   "color-swatch-shapes": {
-    component: ColorSwatchDemos.Shapes,
+    component: dynamic(() => import("./color-swatch/shapes").then((m) => m.ColorSwatchShapes)),
     file: "en/color-swatch/shapes.tsx",
   },
   "color-swatch-transparency": {
-    component: ColorSwatchDemos.Transparency,
+    component: dynamic(() =>
+      import("./color-swatch/transparency").then((m) => m.ColorSwatchTransparency),
+    ),
     file: "en/color-swatch/transparency.tsx",
   },
   "color-swatch-custom-styles": {
-    component: ColorSwatchDemos.CustomStyles,
+    component: dynamic(() =>
+      import("./color-swatch/custom-styles").then((m) => m.ColorSwatchCustomStyles),
+    ),
     file: "en/color-swatch/custom-styles.tsx",
   },
   "color-swatch-accessibility": {
-    component: ColorSwatchDemos.Accessibility,
+    component: dynamic(() =>
+      import("./color-swatch/accessibility").then((m) => m.ColorSwatchAccessibility),
+    ),
     file: "en/color-swatch/accessibility.tsx",
   },
   "color-swatch-custom-render-function": {
-    component: ColorSwatchDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./color-swatch/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/color-swatch/custom-render-function.tsx",
   },
   // ColorSlider demos
   "color-slider-basic": {
-    component: ColorSliderDemos.Basic,
+    component: dynamic(() => import("./color-slider/basic").then((m) => m.Basic)),
     file: "en/color-slider/basic.tsx",
   },
   "color-slider-channels": {
-    component: ColorSliderDemos.Channels,
+    component: dynamic(() => import("./color-slider/channels").then((m) => m.Channels)),
     file: "en/color-slider/channels.tsx",
   },
   "color-slider-alpha-channel": {
-    component: ColorSliderDemos.AlphaChannel,
+    component: dynamic(() => import("./color-slider/alpha-channel").then((m) => m.AlphaChannel)),
     file: "en/color-slider/alpha-channel.tsx",
   },
   "color-slider-rgb-channels": {
-    component: ColorSliderDemos.RGBChannels,
+    component: dynamic(() => import("./color-slider/rgb-channels").then((m) => m.RGBChannels)),
     file: "en/color-slider/rgb-channels.tsx",
   },
   "color-slider-vertical": {
-    component: ColorSliderDemos.Vertical,
+    component: dynamic(() => import("./color-slider/vertical").then((m) => m.Vertical)),
     file: "en/color-slider/vertical.tsx",
   },
   "color-slider-disabled": {
-    component: ColorSliderDemos.Disabled,
+    component: dynamic(() => import("./color-slider/disabled").then((m) => m.Disabled)),
     file: "en/color-slider/disabled.tsx",
   },
   "color-slider-controlled": {
-    component: ColorSliderDemos.Controlled,
+    component: dynamic(() => import("./color-slider/controlled").then((m) => m.Controlled)),
     file: "en/color-slider/controlled.tsx",
   },
   "color-slider-custom-render-function": {
-    component: ColorSliderDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./color-slider/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/color-slider/custom-render-function.tsx",
   },
   // CloseButton demos
   "close-button-default": {
-    component: CloseButtonDemos.Default,
+    component: dynamic(() => import("./close-button/default").then((m) => m.Default)),
     file: "en/close-button/default.tsx",
   },
   "close-button-with-custom-icon": {
-    component: CloseButtonDemos.WithCustomIcon,
+    component: dynamic(() =>
+      import("./close-button/with-custom-icon").then((m) => m.WithCustomIcon),
+    ),
     file: "en/close-button/with-custom-icon.tsx",
   },
   "close-button-interactive": {
-    component: CloseButtonDemos.Interactive,
+    component: dynamic(() => import("./close-button/interactive").then((m) => m.Interactive)),
     file: "en/close-button/interactive.tsx",
   },
   // ColorSwatchPicker demos
   "color-swatch-picker-basic": {
-    component: ColorSwatchPickerDemos.Basic,
+    component: dynamic(() => import("./color-swatch-picker/basic").then((m) => m.Basic)),
     file: "en/color-swatch-picker/basic.tsx",
   },
   "color-swatch-picker-sizes": {
-    component: ColorSwatchPickerDemos.Sizes,
+    component: dynamic(() => import("./color-swatch-picker/sizes").then((m) => m.Sizes)),
     file: "en/color-swatch-picker/sizes.tsx",
   },
   "color-swatch-picker-variants": {
-    component: ColorSwatchPickerDemos.Variants,
+    component: dynamic(() => import("./color-swatch-picker/variants").then((m) => m.Variants)),
     file: "en/color-swatch-picker/variants.tsx",
   },
   "color-swatch-picker-stack-layout": {
-    component: ColorSwatchPickerDemos.StackLayout,
+    component: dynamic(() =>
+      import("./color-swatch-picker/stack-layout").then((m) => m.StackLayout),
+    ),
     file: "en/color-swatch-picker/stack-layout.tsx",
   },
   "color-swatch-picker-controlled": {
-    component: ColorSwatchPickerDemos.Controlled,
+    component: dynamic(() => import("./color-swatch-picker/controlled").then((m) => m.Controlled)),
     file: "en/color-swatch-picker/controlled.tsx",
   },
   "color-swatch-picker-disabled": {
-    component: ColorSwatchPickerDemos.Disabled,
+    component: dynamic(() => import("./color-swatch-picker/disabled").then((m) => m.Disabled)),
     file: "en/color-swatch-picker/disabled.tsx",
   },
   "color-swatch-picker-default-value": {
-    component: ColorSwatchPickerDemos.DefaultValue,
+    component: dynamic(() =>
+      import("./color-swatch-picker/default-value").then((m) => m.DefaultValue),
+    ),
     file: "en/color-swatch-picker/default-value.tsx",
   },
   "color-swatch-picker-custom-indicator": {
-    component: ColorSwatchPickerDemos.CustomIndicator,
+    component: dynamic(() =>
+      import("./color-swatch-picker/custom-indicator").then((m) => m.CustomIndicator),
+    ),
     file: "en/color-swatch-picker/custom-indicator.tsx",
   },
   "color-swatch-picker-custom-render-function": {
-    component: ColorSwatchPickerDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./color-swatch-picker/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/color-swatch-picker/custom-render-function.tsx",
   },
   // Autocomplete demos
   "autocomplete-default": {
-    component: AutocompleteDemos.Default,
+    component: dynamic(() => import("./autocomplete/default")),
     file: "en/autocomplete/default.tsx",
   },
   "autocomplete-single-select": {
-    component: AutocompleteDemos.SingleSelect,
+    component: dynamic(() => import("./autocomplete/single-select")),
     file: "en/autocomplete/single-select.tsx",
   },
   "autocomplete-variants": {
-    component: AutocompleteDemos.Variants,
+    component: dynamic(() => import("./autocomplete/variants").then((m) => m.Variants)),
     file: "en/autocomplete/variants.tsx",
   },
   "autocomplete-multiple-select": {
-    component: AutocompleteDemos.MultipleSelect,
+    component: dynamic(() =>
+      import("./autocomplete/multiple-select").then((m) => m.MultipleSelect),
+    ),
     file: "en/autocomplete/multiple-select.tsx",
   },
   "autocomplete-full-width": {
-    component: AutocompleteDemos.FullWidth,
+    component: dynamic(() => import("./autocomplete/full-width").then((m) => m.FullWidth)),
     file: "en/autocomplete/full-width.tsx",
   },
   "autocomplete-with-description": {
-    component: AutocompleteDemos.WithDescription,
+    component: dynamic(() =>
+      import("./autocomplete/with-description").then((m) => m.WithDescription),
+    ),
     file: "en/autocomplete/with-description.tsx",
   },
   "autocomplete-with-sections": {
-    component: AutocompleteDemos.WithSections,
+    component: dynamic(() => import("./autocomplete/with-sections").then((m) => m.WithSections)),
     file: "en/autocomplete/with-sections.tsx",
   },
   "autocomplete-with-disabled-options": {
-    component: AutocompleteDemos.WithDisabledOptions,
+    component: dynamic(() =>
+      import("./autocomplete/with-disabled-options").then((m) => m.WithDisabledOptions),
+    ),
     file: "en/autocomplete/with-disabled-options.tsx",
   },
   "autocomplete-allows-empty-collection": {
-    component: AutocompleteDemos.AllowsEmptyCollection,
+    component: dynamic(() =>
+      import("./autocomplete/allows-empty-collection").then((m) => m.AllowsEmptyCollection),
+    ),
     file: "en/autocomplete/allows-empty-collection.tsx",
   },
   "autocomplete-custom-indicator": {
-    component: AutocompleteDemos.CustomIndicator,
+    component: dynamic(() =>
+      import("./autocomplete/custom-indicator").then((m) => m.CustomIndicator),
+    ),
     file: "en/autocomplete/custom-indicator.tsx",
   },
   "autocomplete-required": {
-    component: AutocompleteDemos.Required,
+    component: dynamic(() => import("./autocomplete/required").then((m) => m.Required)),
     file: "en/autocomplete/required.tsx",
   },
   "autocomplete-controlled": {
-    component: AutocompleteDemos.Controlled,
+    component: dynamic(() => import("./autocomplete/controlled").then((m) => m.Controlled)),
     file: "en/autocomplete/controlled.tsx",
   },
   "autocomplete-controlled-open-state": {
-    component: AutocompleteDemos.ControlledOpenState,
+    component: dynamic(() =>
+      import("./autocomplete/controlled-open-state").then((m) => m.ControlledOpenState),
+    ),
     file: "en/autocomplete/controlled-open-state.tsx",
   },
   "autocomplete-asynchronous-filtering": {
-    component: AutocompleteDemos.AsynchronousFiltering,
+    component: dynamic(() =>
+      import("./autocomplete/asynchronous-filtering").then((m) => m.AsynchronousFiltering),
+    ),
     file: "en/autocomplete/asynchronous-filtering.tsx",
   },
   "autocomplete-disabled": {
-    component: AutocompleteDemos.Disabled,
+    component: dynamic(() => import("./autocomplete/disabled").then((m) => m.Disabled)),
     file: "en/autocomplete/disabled.tsx",
   },
   "autocomplete-user-selection": {
-    component: AutocompleteDemos.UserSelection,
+    component: dynamic(() => import("./autocomplete/user-selection").then((m) => m.UserSelection)),
     file: "en/autocomplete/user-selection.tsx",
   },
   "autocomplete-user-selection-multiple": {
-    component: AutocompleteDemos.UserSelectionMultiple,
+    component: dynamic(() =>
+      import("./autocomplete/user-selection-multiple").then((m) => m.UserSelectionMultiple),
+    ),
     file: "en/autocomplete/user-selection-multiple.tsx",
   },
   "autocomplete-location-search": {
-    component: AutocompleteDemos.LocationSearch,
+    component: dynamic(() =>
+      import("./autocomplete/location-search").then((m) => m.LocationSearch),
+    ),
     file: "en/autocomplete/location-search.tsx",
   },
   "autocomplete-tag-group-selection": {
-    component: AutocompleteDemos.TagGroupSelection,
+    component: dynamic(() =>
+      import("./autocomplete/tag-group-selection").then((m) => m.TagGroupSelection),
+    ),
     file: "en/autocomplete/tag-group-selection.tsx",
   },
   "autocomplete-email-recipients": {
-    component: AutocompleteDemos.EmailRecipients,
+    component: dynamic(() =>
+      import("./autocomplete/email-recipients").then((m) => m.EmailRecipients),
+    ),
     file: "en/autocomplete/email-recipients.tsx",
   },
   // ComboBox demos
   "combo-box-default": {
-    component: ComboBoxDemos.Default,
+    component: dynamic(() => import("./combo-box/default").then((m) => m.Default)),
     file: "en/combo-box/default.tsx",
   },
   "combo-box-default-selected-key": {
-    component: ComboBoxDemos.DefaultSelectedKey,
+    component: dynamic(() =>
+      import("./combo-box/default-selected-key").then((m) => m.DefaultSelectedKey),
+    ),
     file: "en/combo-box/default-selected-key.tsx",
   },
   "combo-box-with-description": {
-    component: ComboBoxDemos.WithDescription,
+    component: dynamic(() => import("./combo-box/with-description").then((m) => m.WithDescription)),
     file: "en/combo-box/with-description.tsx",
   },
   "combo-box-with-sections": {
-    component: ComboBoxDemos.WithSections,
+    component: dynamic(() => import("./combo-box/with-sections").then((m) => m.WithSections)),
     file: "en/combo-box/with-sections.tsx",
   },
   "combo-box-with-disabled-options": {
-    component: ComboBoxDemos.WithDisabledOptions,
+    component: dynamic(() =>
+      import("./combo-box/with-disabled-options").then((m) => m.WithDisabledOptions),
+    ),
     file: "en/combo-box/with-disabled-options.tsx",
   },
   "combo-box-custom-indicator": {
-    component: ComboBoxDemos.CustomIndicator,
+    component: dynamic(() => import("./combo-box/custom-indicator").then((m) => m.CustomIndicator)),
     file: "en/combo-box/custom-indicator.tsx",
   },
   "combo-box-required": {
-    component: ComboBoxDemos.Required,
+    component: dynamic(() => import("./combo-box/required").then((m) => m.Required)),
     file: "en/combo-box/required.tsx",
   },
   "combo-box-full-width": {
-    component: ComboBoxDemos.FullWidth,
+    component: dynamic(() => import("./combo-box/full-width").then((m) => m.FullWidth)),
     file: "en/combo-box/full-width.tsx",
   },
   "combo-box-custom-value": {
-    component: ComboBoxDemos.CustomValue,
+    component: dynamic(() => import("./combo-box/custom-value").then((m) => m.CustomValue)),
     file: "en/combo-box/custom-value.tsx",
   },
   "combo-box-controlled": {
-    component: ComboBoxDemos.Controlled,
+    component: dynamic(() => import("./combo-box/controlled").then((m) => m.Controlled)),
     file: "en/combo-box/controlled.tsx",
   },
   "combo-box-controlled-input-value": {
-    component: ComboBoxDemos.ControlledInputValue,
+    component: dynamic(() =>
+      import("./combo-box/controlled-input-value").then((m) => m.ControlledInputValue),
+    ),
     file: "en/combo-box/controlled-input-value.tsx",
   },
   "combo-box-asynchronous-loading": {
-    component: ComboBoxDemos.AsynchronousLoading,
+    component: dynamic(() =>
+      import("./combo-box/asynchronous-loading").then((m) => m.AsynchronousLoading),
+    ),
     file: "en/combo-box/asynchronous-loading.tsx",
   },
   "combo-box-custom-filtering": {
-    component: ComboBoxDemos.CustomFiltering,
+    component: dynamic(() => import("./combo-box/custom-filtering").then((m) => m.CustomFiltering)),
     file: "en/combo-box/custom-filtering.tsx",
   },
   "combo-box-allows-custom-value": {
-    component: ComboBoxDemos.AllowsCustomValue,
+    component: dynamic(() =>
+      import("./combo-box/allows-custom-value").then((m) => m.AllowsCustomValue),
+    ),
     file: "en/combo-box/allows-custom-value.tsx",
   },
   "combo-box-disabled": {
-    component: ComboBoxDemos.Disabled,
+    component: dynamic(() => import("./combo-box/disabled").then((m) => m.Disabled)),
     file: "en/combo-box/disabled.tsx",
   },
   "combo-box-on-surface": {
-    component: ComboBoxDemos.OnSurface,
+    component: dynamic(() => import("./combo-box/on-surface").then((m) => m.OnSurface)),
     file: "en/combo-box/on-surface.tsx",
   },
   "combo-box-menu-trigger": {
-    component: ComboBoxDemos.MenuTrigger,
+    component: dynamic(() => import("./combo-box/menu-trigger").then((m) => m.MenuTrigger)),
     file: "en/combo-box/menu-trigger.tsx",
   },
   "combo-box-custom-render-function": {
-    component: ComboBoxDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./combo-box/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/combo-box/custom-render-function.tsx",
   },
   // Drawer demos
   "drawer-basic": {
-    component: DrawerDemos.Basic,
+    component: dynamic(() => import("./drawer/basic").then((m) => m.Basic)),
     file: "en/drawer/basic.tsx",
   },
   "drawer-placements": {
-    component: DrawerDemos.Placements,
+    component: dynamic(() => import("./drawer/placements").then((m) => m.Placements)),
     file: "en/drawer/placements.tsx",
   },
   "drawer-backdrop-variants": {
-    component: DrawerDemos.BackdropVariants,
+    component: dynamic(() => import("./drawer/backdrop-variants").then((m) => m.BackdropVariants)),
     file: "en/drawer/backdrop-variants.tsx",
   },
   "drawer-with-form": {
-    component: DrawerDemos.WithForm,
+    component: dynamic(() => import("./drawer/with-form").then((m) => m.WithForm)),
     file: "en/drawer/with-form.tsx",
   },
   "drawer-scrollable-content": {
-    component: DrawerDemos.ScrollableContent,
+    component: dynamic(() =>
+      import("./drawer/scrollable-content").then((m) => m.ScrollableContent),
+    ),
     file: "en/drawer/scrollable-content.tsx",
   },
   "drawer-navigation": {
-    component: DrawerDemos.Navigation,
+    component: dynamic(() => import("./drawer/navigation").then((m) => m.Navigation)),
     file: "en/drawer/navigation.tsx",
   },
   "drawer-non-dismissable": {
-    component: DrawerDemos.NonDismissable,
+    component: dynamic(() => import("./drawer/non-dismissable").then((m) => m.NonDismissable)),
     file: "en/drawer/non-dismissable.tsx",
   },
   "drawer-controlled": {
-    component: DrawerDemos.Controlled,
+    component: dynamic(() => import("./drawer/controlled").then((m) => m.Controlled)),
     file: "en/drawer/controlled.tsx",
   },
   // Disclosure demos
   "disclosure-basic": {
-    component: DisclosureDemos.Basic,
+    component: dynamic(() => import("./disclosure/basic").then((m) => m.Basic)),
     file: "en/disclosure/basic.tsx",
   },
   "disclosure-custom-render-function": {
-    component: DisclosureDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./disclosure/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/disclosure/custom-render-function.tsx",
   },
   // DisclosureGroup demos
   "disclosure-group-basic": {
-    component: DisclosureGroupDemos.Basic,
+    component: dynamic(() => import("./disclosure-group/basic").then((m) => m.Basic)),
     file: "en/disclosure-group/basic.tsx",
   },
   "disclosure-group-controlled": {
-    component: DisclosureGroupDemos.Controlled,
+    component: dynamic(() => import("./disclosure-group/controlled").then((m) => m.Controlled)),
     file: "en/disclosure-group/controlled.tsx",
   },
   // Dropdown demos
   "dropdown-default": {
-    component: DropdownDemos.Default,
+    component: dynamic(() => import("./dropdown/default").then((m) => m.Default)),
     file: "en/dropdown/default.tsx",
   },
   "dropdown-with-single-selection": {
-    component: DropdownDemos.WithSingleSelection,
+    component: dynamic(() =>
+      import("./dropdown/with-single-selection").then((m) => m.WithSingleSelection),
+    ),
     file: "en/dropdown/with-single-selection.tsx",
   },
   "dropdown-single-with-custom-indicator": {
-    component: DropdownDemos.SingleWithCustomIndicator,
+    component: dynamic(() =>
+      import("./dropdown/single-with-custom-indicator").then((m) => m.SingleWithCustomIndicator),
+    ),
     file: "en/dropdown/single-with-custom-indicator.tsx",
   },
   "dropdown-with-multiple-selection": {
-    component: DropdownDemos.WithMultipleSelection,
+    component: dynamic(() =>
+      import("./dropdown/with-multiple-selection").then((m) => m.WithMultipleSelection),
+    ),
     file: "en/dropdown/with-multiple-selection.tsx",
   },
   "dropdown-with-section-level-selection": {
-    component: DropdownDemos.WithSectionLevelSelection,
+    component: dynamic(() =>
+      import("./dropdown/with-section-level-selection").then((m) => m.WithSectionLevelSelection),
+    ),
     file: "en/dropdown/with-section-level-selection.tsx",
   },
   "dropdown-with-keyboard-shortcuts": {
-    component: DropdownDemos.WithKeyboardShortcuts,
+    component: dynamic(() =>
+      import("./dropdown/with-keyboard-shortcuts").then((m) => m.WithKeyboardShortcuts),
+    ),
     file: "en/dropdown/with-keyboard-shortcuts.tsx",
   },
   "dropdown-with-icons": {
-    component: DropdownDemos.WithIcons,
+    component: dynamic(() => import("./dropdown/with-icons").then((m) => m.WithIcons)),
     file: "en/dropdown/with-icons.tsx",
   },
   "dropdown-long-press-trigger": {
-    component: DropdownDemos.LongPressTrigger,
+    component: dynamic(() =>
+      import("./dropdown/long-press-trigger").then((m) => m.LongPressTrigger),
+    ),
     file: "en/dropdown/long-press-trigger.tsx",
   },
   "dropdown-with-descriptions": {
-    component: DropdownDemos.WithDescriptions,
+    component: dynamic(() =>
+      import("./dropdown/with-descriptions").then((m) => m.WithDescriptions),
+    ),
     file: "en/dropdown/with-descriptions.tsx",
   },
   "dropdown-with-sections": {
-    component: DropdownDemos.WithSections,
+    component: dynamic(() => import("./dropdown/with-sections").then((m) => m.WithSections)),
     file: "en/dropdown/with-sections.tsx",
   },
   "dropdown-with-disabled-items": {
-    component: DropdownDemos.WithDisabledItems,
+    component: dynamic(() =>
+      import("./dropdown/with-disabled-items").then((m) => m.WithDisabledItems),
+    ),
     file: "en/dropdown/with-disabled-items.tsx",
   },
   "dropdown-with-submenus": {
-    component: DropdownDemos.WithSubmenus,
+    component: dynamic(() => import("./dropdown/with-submenus").then((m) => m.WithSubmenus)),
     file: "en/dropdown/with-submenus.tsx",
   },
   "dropdown-with-custom-submenu-indicator": {
-    component: DropdownDemos.WithCustomSubmenuIndicator,
+    component: dynamic(() =>
+      import("./dropdown/with-custom-submenu-indicator").then((m) => m.WithCustomSubmenuIndicator),
+    ),
     file: "en/dropdown/with-custom-submenu-indicator.tsx",
   },
   "dropdown-controlled": {
-    component: DropdownDemos.Controlled,
+    component: dynamic(() => import("./dropdown/controlled").then((m) => m.Controlled)),
     file: "en/dropdown/controlled.tsx",
   },
   "dropdown-controlled-open-state": {
-    component: DropdownDemos.ControlledOpenState,
+    component: dynamic(() =>
+      import("./dropdown/controlled-open-state").then((m) => m.ControlledOpenState),
+    ),
     file: "en/dropdown/controlled-open-state.tsx",
   },
   "dropdown-custom-trigger": {
-    component: DropdownDemos.CustomTrigger,
+    component: dynamic(() => import("./dropdown/custom-trigger").then((m) => m.CustomTrigger)),
     file: "en/dropdown/custom-trigger.tsx",
   },
   // ErrorMessage demos
   "error-message-basic": {
-    component: ErrorMessageDemos.Basic,
+    component: dynamic(() => import("./error-message/basic").then((m) => m.ErrorMessageBasic)),
     file: "en/error-message/basic.tsx",
   },
   "error-message-with-tag-group": {
-    component: ErrorMessageDemos.WithTagGroup,
+    component: dynamic(() =>
+      import("./error-message/with-tag-group").then((m) => m.ErrorMessageWithTagGroup),
+    ),
     file: "en/error-message/with-tag-group.tsx",
   },
   // Form demos
   "form-basic": {
-    component: FormDemos.Basic,
+    component: dynamic(() => import("./form/basic").then((m) => m.Basic)),
     file: "en/form/basic.tsx",
   },
   "form-custom-render-function": {
-    component: FormDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./form/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/form/custom-render-function.tsx",
   },
   // Fieldset demos
   "fieldset-basic": {
-    component: FieldsetDemos.Basic,
+    component: dynamic(() => import("./fieldset/basic").then((m) => m.Basic)),
     file: "en/fieldset/basic.tsx",
   },
   "fieldset-on-surface": {
-    component: FieldsetDemos.OnSurface,
+    component: dynamic(() => import("./fieldset/on-surface").then((m) => m.OnSurface)),
     file: "en/fieldset/on-surface.tsx",
   },
   // Input demos
   "input-basic": {
-    component: InputDemos.Basic,
+    component: dynamic(() => import("./input/basic").then((m) => m.Basic)),
     file: "en/input/basic.tsx",
   },
   "input-full-width": {
-    component: InputDemos.FullWidth,
+    component: dynamic(() => import("./input/full-width").then((m) => m.FullWidth)),
     file: "en/input/full-width.tsx",
   },
   "input-types": {
-    component: InputDemos.Types,
+    component: dynamic(() => import("./input/types").then((m) => m.Types)),
     file: "en/input/types.tsx",
   },
   "input-controlled": {
-    component: InputDemos.Controlled,
+    component: dynamic(() => import("./input/controlled").then((m) => m.Controlled)),
     file: "en/input/controlled.tsx",
   },
   "input-on-surface": {
-    component: InputDemos.OnSurface,
+    component: dynamic(() => import("./input/on-surface").then((m) => m.OnSurface)),
     file: "en/input/on-surface.tsx",
   },
   "input-variants": {
-    component: InputDemos.Variants,
+    component: dynamic(() => import("./input/variants").then((m) => m.Variants)),
     file: "en/input/variants.tsx",
   },
   // DateField demos
   "date-field-basic": {
-    component: DateFieldDemos.Basic,
+    component: dynamic(() => import("./date-field/basic").then((m) => m.Basic)),
     file: "en/date-field/basic.tsx",
   },
   "date-field-controlled": {
-    component: DateFieldDemos.Controlled,
+    component: dynamic(() => import("./date-field/controlled").then((m) => m.Controlled)),
     file: "en/date-field/controlled.tsx",
   },
   "date-field-disabled": {
-    component: DateFieldDemos.Disabled,
+    component: dynamic(() => import("./date-field/disabled").then((m) => m.Disabled)),
     file: "en/date-field/disabled.tsx",
   },
   "date-field-form-example": {
-    component: DateFieldDemos.FormExample,
+    component: dynamic(() => import("./date-field/form-example").then((m) => m.FormExample)),
     file: "en/date-field/form-example.tsx",
   },
   "date-field-invalid": {
-    component: DateFieldDemos.Invalid,
+    component: dynamic(() => import("./date-field/invalid").then((m) => m.Invalid)),
     file: "en/date-field/invalid.tsx",
   },
   "date-field-on-surface": {
-    component: DateFieldDemos.OnSurface,
+    component: dynamic(() => import("./date-field/on-surface").then((m) => m.OnSurface)),
     file: "en/date-field/on-surface.tsx",
   },
   "date-field-required": {
-    component: DateFieldDemos.Required,
+    component: dynamic(() => import("./date-field/required").then((m) => m.Required)),
     file: "en/date-field/required.tsx",
   },
   "date-field-with-description": {
-    component: DateFieldDemos.WithDescription,
+    component: dynamic(() =>
+      import("./date-field/with-description").then((m) => m.WithDescription),
+    ),
     file: "en/date-field/with-description.tsx",
   },
   "date-field-with-prefix-and-suffix": {
-    component: DateFieldDemos.WithPrefixAndSuffix,
+    component: dynamic(() =>
+      import("./date-field/with-prefix-and-suffix").then((m) => m.WithPrefixAndSuffix),
+    ),
     file: "en/date-field/with-prefix-and-suffix.tsx",
   },
   "date-field-with-prefix-icon": {
-    component: DateFieldDemos.WithPrefixIcon,
+    component: dynamic(() => import("./date-field/with-prefix-icon").then((m) => m.WithPrefixIcon)),
     file: "en/date-field/with-prefix-icon.tsx",
   },
   "date-field-with-suffix-icon": {
-    component: DateFieldDemos.WithSuffixIcon,
+    component: dynamic(() => import("./date-field/with-suffix-icon").then((m) => m.WithSuffixIcon)),
     file: "en/date-field/with-suffix-icon.tsx",
   },
   "date-field-full-width": {
-    component: DateFieldDemos.FullWidth,
+    component: dynamic(() => import("./date-field/full-width").then((m) => m.FullWidth)),
     file: "en/date-field/full-width.tsx",
   },
   "date-field-granularity": {
-    component: DateFieldDemos.Granularity,
+    component: dynamic(() => import("./date-field/granularity").then((m) => m.Granularity)),
     file: "en/date-field/granularity.tsx",
   },
   "date-field-with-validation": {
-    component: DateFieldDemos.WithValidation,
+    component: dynamic(() => import("./date-field/with-validation").then((m) => m.WithValidation)),
     file: "en/date-field/with-validation.tsx",
   },
   "date-field-variants": {
-    component: DateFieldDemos.Variants,
+    component: dynamic(() => import("./date-field/variants").then((m) => m.Variants)),
     file: "en/date-field/variants.tsx",
   },
   "date-field-custom-render-function": {
-    component: DateFieldDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./date-field/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/date-field/custom-render-function.tsx",
   },
   // DatePicker demos
   "date-picker-basic": {
-    component: DatePickerDemos.Basic,
+    component: dynamic(() => import("./date-picker/basic").then((m) => m.Basic)),
     file: "en/date-picker/basic.tsx",
   },
   "date-picker-controlled": {
-    component: DatePickerDemos.Controlled,
+    component: dynamic(() => import("./date-picker/controlled").then((m) => m.Controlled)),
     file: "en/date-picker/controlled.tsx",
   },
   "date-picker-disabled": {
-    component: DatePickerDemos.Disabled,
+    component: dynamic(() => import("./date-picker/disabled").then((m) => m.Disabled)),
     file: "en/date-picker/disabled.tsx",
   },
   "date-picker-format-options": {
-    component: DatePickerDemos.FormatOptions,
+    component: dynamic(() => import("./date-picker/format-options").then((m) => m.FormatOptions)),
     file: "en/date-picker/format-options.tsx",
   },
   "date-picker-form-example": {
-    component: DatePickerDemos.FormExample,
+    component: dynamic(() => import("./date-picker/form-example").then((m) => m.FormExample)),
     file: "en/date-picker/form-example.tsx",
   },
   "date-picker-with-custom-indicator": {
-    component: DatePickerDemos.WithCustomIndicator,
+    component: dynamic(() =>
+      import("./date-picker/with-custom-indicator").then((m) => m.WithCustomIndicator),
+    ),
     file: "en/date-picker/with-custom-indicator.tsx",
   },
   "date-picker-with-validation": {
-    component: DatePickerDemos.WithValidation,
+    component: dynamic(() => import("./date-picker/with-validation").then((m) => m.WithValidation)),
     file: "en/date-picker/with-validation.tsx",
   },
   "date-picker-international-calendar": {
-    component: DatePickerDemos.InternationalCalendar,
+    component: dynamic(() =>
+      import("./date-picker/international-calendar").then((m) => m.InternationalCalendar),
+    ),
     file: "en/date-picker/international-calendar.tsx",
   },
   "date-picker-custom-render-function": {
-    component: DatePickerDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./date-picker/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/date-picker/custom-render-function.tsx",
   },
   // DateRangePicker demos
   "date-range-picker-basic": {
-    component: DateRangePickerDemos.Basic,
+    component: dynamic(() => import("./date-range-picker/basic").then((m) => m.Basic)),
     file: "en/date-range-picker/basic.tsx",
   },
   "date-range-picker-controlled": {
-    component: DateRangePickerDemos.Controlled,
+    component: dynamic(() => import("./date-range-picker/controlled").then((m) => m.Controlled)),
     file: "en/date-range-picker/controlled.tsx",
   },
   "date-range-picker-disabled": {
-    component: DateRangePickerDemos.Disabled,
+    component: dynamic(() => import("./date-range-picker/disabled").then((m) => m.Disabled)),
     file: "en/date-range-picker/disabled.tsx",
   },
   "date-range-picker-format-options": {
-    component: DateRangePickerDemos.FormatOptions,
+    component: dynamic(() =>
+      import("./date-range-picker/format-options").then((m) => m.FormatOptions),
+    ),
     file: "en/date-range-picker/format-options.tsx",
   },
   "date-range-picker-form-example": {
-    component: DateRangePickerDemos.FormExample,
+    component: dynamic(() => import("./date-range-picker/form-example").then((m) => m.FormExample)),
     file: "en/date-range-picker/form-example.tsx",
   },
   "date-range-picker-with-custom-indicator": {
-    component: DateRangePickerDemos.WithCustomIndicator,
+    component: dynamic(() =>
+      import("./date-range-picker/with-custom-indicator").then((m) => m.WithCustomIndicator),
+    ),
     file: "en/date-range-picker/with-custom-indicator.tsx",
   },
   "date-range-picker-with-validation": {
-    component: DateRangePickerDemos.WithValidation,
+    component: dynamic(() =>
+      import("./date-range-picker/with-validation").then((m) => m.WithValidation),
+    ),
     file: "en/date-range-picker/with-validation.tsx",
   },
   "date-range-picker-international-calendar": {
-    component: DateRangePickerDemos.InternationalCalendar,
+    component: dynamic(() =>
+      import("./date-range-picker/international-calendar").then((m) => m.InternationalCalendar),
+    ),
     file: "en/date-range-picker/international-calendar.tsx",
   },
   "date-range-picker-custom-render-function": {
-    component: DateRangePickerDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./date-range-picker/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/date-range-picker/custom-render-function.tsx",
   },
   "date-range-picker-input-container": {
-    component: DateRangePickerDemos.InputContainer,
+    component: dynamic(() =>
+      import("./date-range-picker/input-container").then((m) => m.InputContainer),
+    ),
     file: "en/date-range-picker/input-container.tsx",
   },
   // InputOTP demos
   "input-otp-basic": {
-    component: InputOTPDemos.Basic,
+    component: dynamic(() => import("./input-otp/basic").then((m) => m.Basic)),
     file: "en/input-otp/basic.tsx",
   },
   "input-otp-four-digits": {
-    component: InputOTPDemos.FourDigits,
+    component: dynamic(() => import("./input-otp/four-digits").then((m) => m.FourDigits)),
     file: "en/input-otp/four-digits.tsx",
   },
   "input-otp-disabled": {
-    component: InputOTPDemos.Disabled,
+    component: dynamic(() => import("./input-otp/disabled").then((m) => m.Disabled)),
     file: "en/input-otp/disabled.tsx",
   },
   "input-otp-with-pattern": {
-    component: InputOTPDemos.WithPattern,
+    component: dynamic(() => import("./input-otp/with-pattern").then((m) => m.WithPattern)),
     file: "en/input-otp/with-pattern.tsx",
   },
   "input-otp-controlled": {
-    component: InputOTPDemos.Controlled,
+    component: dynamic(() => import("./input-otp/controlled").then((m) => m.Controlled)),
     file: "en/input-otp/controlled.tsx",
   },
   "input-otp-with-validation": {
-    component: InputOTPDemos.WithValidation,
+    component: dynamic(() => import("./input-otp/with-validation").then((m) => m.WithValidation)),
     file: "en/input-otp/with-validation.tsx",
   },
   "input-otp-on-complete": {
-    component: InputOTPDemos.OnComplete,
+    component: dynamic(() => import("./input-otp/on-complete").then((m) => m.OnComplete)),
     file: "en/input-otp/on-complete.tsx",
   },
   "input-otp-form-example": {
-    component: InputOTPDemos.FormExample,
+    component: dynamic(() => import("./input-otp/form-example").then((m) => m.FormExample)),
     file: "en/input-otp/form-example.tsx",
   },
   "input-otp-on-surface": {
-    component: InputOTPDemos.OnSurface,
+    component: dynamic(() => import("./input-otp/on-surface").then((m) => m.OnSurface)),
     file: "en/input-otp/on-surface.tsx",
   },
   "input-otp-variants": {
-    component: InputOTPDemos.Variants,
+    component: dynamic(() => import("./input-otp/variants").then((m) => m.Variants)),
     file: "en/input-otp/variants.tsx",
   },
   // InputGroup demos
   "input-group-default": {
-    component: InputGroupDemos.Default,
+    component: dynamic(() => import("./input-group/default").then((m) => m.Default)),
     file: "en/input-group/default.tsx",
   },
   "input-group-full-width": {
-    component: InputGroupDemos.FullWidth,
+    component: dynamic(() => import("./input-group/full-width").then((m) => m.FullWidth)),
     file: "en/input-group/full-width.tsx",
   },
   "input-group-with-prefix-icon": {
-    component: InputGroupDemos.WithPrefixIcon,
+    component: dynamic(() =>
+      import("./input-group/with-prefix-icon").then((m) => m.WithPrefixIcon),
+    ),
     file: "en/input-group/with-prefix-icon.tsx",
   },
   "input-group-with-suffix-icon": {
-    component: InputGroupDemos.WithSuffixIcon,
+    component: dynamic(() =>
+      import("./input-group/with-suffix-icon").then((m) => m.WithSuffixIcon),
+    ),
     file: "en/input-group/with-suffix-icon.tsx",
   },
   "input-group-with-prefix-and-suffix": {
-    component: InputGroupDemos.WithPrefixAndSuffix,
+    component: dynamic(() =>
+      import("./input-group/with-prefix-and-suffix").then((m) => m.WithPrefixAndSuffix),
+    ),
     file: "en/input-group/with-prefix-and-suffix.tsx",
   },
   "input-group-with-text-prefix": {
-    component: InputGroupDemos.WithTextPrefix,
+    component: dynamic(() =>
+      import("./input-group/with-text-prefix").then((m) => m.WithTextPrefix),
+    ),
     file: "en/input-group/with-text-prefix.tsx",
   },
   "input-group-with-text-suffix": {
-    component: InputGroupDemos.WithTextSuffix,
+    component: dynamic(() =>
+      import("./input-group/with-text-suffix").then((m) => m.WithTextSuffix),
+    ),
     file: "en/input-group/with-text-suffix.tsx",
   },
   "input-group-with-icon-prefix-and-text-suffix": {
-    component: InputGroupDemos.WithIconPrefixAndTextSuffix,
+    component: dynamic(() =>
+      import("./input-group/with-icon-prefix-and-text-suffix").then(
+        (m) => m.WithIconPrefixAndTextSuffix,
+      ),
+    ),
     file: "en/input-group/with-icon-prefix-and-text-suffix.tsx",
   },
   "input-group-with-copy-suffix": {
-    component: InputGroupDemos.WithCopySuffix,
+    component: dynamic(() =>
+      import("./input-group/with-copy-suffix").then((m) => m.WithCopySuffix),
+    ),
     file: "en/input-group/with-copy-suffix.tsx",
   },
   "input-group-with-icon-prefix-and-copy-suffix": {
-    component: InputGroupDemos.WithIconPrefixAndCopySuffix,
+    component: dynamic(() =>
+      import("./input-group/with-icon-prefix-and-copy-suffix").then(
+        (m) => m.WithIconPrefixAndCopySuffix,
+      ),
+    ),
     file: "en/input-group/with-icon-prefix-and-copy-suffix.tsx",
   },
   "input-group-password-with-toggle": {
-    component: InputGroupDemos.PasswordWithToggle,
+    component: dynamic(() =>
+      import("./input-group/password-with-toggle").then((m) => m.PasswordWithToggle),
+    ),
     file: "en/input-group/password-with-toggle.tsx",
   },
   "input-group-with-loading-suffix": {
-    component: InputGroupDemos.WithLoadingSuffix,
+    component: dynamic(() =>
+      import("./input-group/with-loading-suffix").then((m) => m.WithLoadingSuffix),
+    ),
     file: "en/input-group/with-loading-suffix.tsx",
   },
   "input-group-with-keyboard-shortcut": {
-    component: InputGroupDemos.WithKeyboardShortcut,
+    component: dynamic(() =>
+      import("./input-group/with-keyboard-shortcut").then((m) => m.WithKeyboardShortcut),
+    ),
     file: "en/input-group/with-keyboard-shortcut.tsx",
   },
   "input-group-with-badge-suffix": {
-    component: InputGroupDemos.WithBadgeSuffix,
+    component: dynamic(() =>
+      import("./input-group/with-badge-suffix").then((m) => m.WithBadgeSuffix),
+    ),
     file: "en/input-group/with-badge-suffix.tsx",
   },
   "input-group-required": {
-    component: InputGroupDemos.Required,
+    component: dynamic(() => import("./input-group/required").then((m) => m.Required)),
     file: "en/input-group/required.tsx",
   },
   "input-group-invalid": {
-    component: InputGroupDemos.Invalid,
+    component: dynamic(() => import("./input-group/invalid").then((m) => m.Invalid)),
     file: "en/input-group/invalid.tsx",
   },
   "input-group-disabled": {
-    component: InputGroupDemos.Disabled,
+    component: dynamic(() => import("./input-group/disabled").then((m) => m.Disabled)),
     file: "en/input-group/disabled.tsx",
   },
   "input-group-on-surface": {
-    component: InputGroupDemos.OnSurface,
+    component: dynamic(() => import("./input-group/on-surface").then((m) => m.OnSurface)),
     file: "en/input-group/on-surface.tsx",
   },
   "input-group-with-textarea": {
-    component: InputGroupDemos.WithTextArea,
+    component: dynamic(() => import("./input-group/with-textarea").then((m) => m.WithTextArea)),
     file: "en/input-group/with-textarea.tsx",
   },
   "input-group-variants": {
-    component: InputGroupDemos.Variants,
+    component: dynamic(() => import("./input-group/variants").then((m) => m.Variants)),
     file: "en/input-group/variants.tsx",
   },
   // Kbd demos
   "kbd-basic": {
-    component: KbdDemos.Basic,
+    component: dynamic(() => import("./kbd/basic").then((m) => m.Basic)),
     file: "en/kbd/basic.tsx",
   },
   "kbd-navigation-keys": {
-    component: KbdDemos.NavigationKeys,
+    component: dynamic(() => import("./kbd/navigation").then((m) => m.NavigationKeys)),
     file: "en/kbd/navigation.tsx",
   },
   "kbd-inline-usage": {
-    component: KbdDemos.InlineUsage,
+    component: dynamic(() => import("./kbd/inline").then((m) => m.InlineUsage)),
     file: "en/kbd/inline.tsx",
   },
   "kbd-instructional-text": {
-    component: KbdDemos.InstructionalText,
+    component: dynamic(() => import("./kbd/instructional").then((m) => m.InstructionalText)),
     file: "en/kbd/instructional.tsx",
   },
   "kbd-special-keys": {
-    component: KbdDemos.SpecialKeys,
+    component: dynamic(() => import("./kbd/special").then((m) => m.SpecialKeys)),
     file: "en/kbd/special.tsx",
   },
   "kbd-variants": {
-    component: KbdDemos.Variants,
+    component: dynamic(() => import("./kbd/variants").then((m) => m.Variants)),
     file: "en/kbd/variants.tsx",
   },
   // Link demos
   "link-basic": {
-    component: LinkDemos.Basic,
+    component: dynamic(() => import("./link/basic").then((m) => m.LinkBasic)),
     file: "en/link/basic.tsx",
   },
   "link-custom-icon": {
-    component: LinkDemos.CustomIcon,
+    component: dynamic(() => import("./link/custom-icon").then((m) => m.LinkCustomIcon)),
     file: "en/link/custom-icon.tsx",
   },
   "link-icon-placement": {
-    component: LinkDemos.IconPlacement,
+    component: dynamic(() => import("./link/icon-placement").then((m) => m.LinkIconPlacement)),
     file: "en/link/icon-placement.tsx",
   },
   "link-underline-and-offset": {
-    component: LinkDemos.UnderlineAndOffset,
+    component: dynamic(() =>
+      import("./link/underline-and-offset").then((m) => m.LinkUnderlineAndOffset),
+    ),
     file: "en/link/underline-and-offset.tsx",
   },
   "link-custom-render-function": {
-    component: LinkDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./link/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/link/custom-render-function.tsx",
   },
   // RadioGroup demos
   "radio-group-basic": {
-    component: RadioGroupDemos.Basic,
+    component: dynamic(() => import("./radio-group/basic").then((m) => m.Basic)),
     file: "en/radio-group/basic.tsx",
   },
   "radio-group-controlled": {
-    component: RadioGroupDemos.Controlled,
+    component: dynamic(() => import("./radio-group/controlled").then((m) => m.Controlled)),
     file: "en/radio-group/controlled.tsx",
   },
   "radio-group-custom-indicator": {
-    component: RadioGroupDemos.CustomIndicator,
+    component: dynamic(() =>
+      import("./radio-group/custom-indicator").then((m) => m.CustomIndicator),
+    ),
     file: "en/radio-group/custom-indicator.tsx",
   },
   "radio-group-delivery-and-payment": {
-    component: RadioGroupDemos.DeliveryAndPayment,
+    component: dynamic(() =>
+      import("./radio-group/delivery-and-payment").then((m) => m.DeliveryAndPayment),
+    ),
     file: "en/radio-group/delivery-and-payment.tsx",
   },
   "radio-group-disabled": {
-    component: RadioGroupDemos.Disabled,
+    component: dynamic(() => import("./radio-group/disabled").then((m) => m.Disabled)),
     file: "en/radio-group/disabled.tsx",
   },
   "radio-group-horizontal": {
-    component: RadioGroupDemos.Horizontal,
+    component: dynamic(() => import("./radio-group/horizontal").then((m) => m.Horizontal)),
     file: "en/radio-group/horizontal.tsx",
   },
   "radio-group-uncontrolled": {
-    component: RadioGroupDemos.Uncontrolled,
+    component: dynamic(() => import("./radio-group/uncontrolled").then((m) => m.Uncontrolled)),
     file: "en/radio-group/uncontrolled.tsx",
   },
   "radio-group-validation": {
-    component: RadioGroupDemos.Validation,
+    component: dynamic(() => import("./radio-group/validation").then((m) => m.Validation)),
     file: "en/radio-group/validation.tsx",
   },
   "radio-group-on-surface": {
-    component: RadioGroupDemos.OnSurface,
+    component: dynamic(() => import("./radio-group/on-surface").then((m) => m.OnSurface)),
     file: "en/radio-group/on-surface.tsx",
   },
   "radio-group-variants": {
-    component: RadioGroupDemos.Variants,
+    component: dynamic(() => import("./radio-group/variants").then((m) => m.Variants)),
     file: "en/radio-group/variants.tsx",
   },
   "radio-group-custom-render-function": {
-    component: RadioGroupDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./radio-group/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/radio-group/custom-render-function.tsx",
   },
   // Skeleton demos
   "skeleton-basic": {
-    component: SkeletonDemos.Basic,
+    component: dynamic(() => import("./skeleton/basic").then((m) => m.Basic)),
     file: "en/skeleton/basic.tsx",
   },
   "skeleton-text-content": {
-    component: SkeletonDemos.TextContent,
+    component: dynamic(() => import("./skeleton/text-content").then((m) => m.TextContent)),
     file: "en/skeleton/text-content.tsx",
   },
   "skeleton-user-profile": {
-    component: SkeletonDemos.UserProfile,
+    component: dynamic(() => import("./skeleton/user-profile").then((m) => m.UserProfile)),
     file: "en/skeleton/user-profile.tsx",
   },
   "skeleton-list": {
-    component: SkeletonDemos.List,
+    component: dynamic(() => import("./skeleton/list").then((m) => m.List)),
     file: "en/skeleton/list.tsx",
   },
   "skeleton-animation-types": {
-    component: SkeletonDemos.AnimationTypes,
+    component: dynamic(() => import("./skeleton/animation-types").then((m) => m.AnimationTypes)),
     file: "en/skeleton/animation-types.tsx",
   },
   "skeleton-grid": {
-    component: SkeletonDemos.Grid,
+    component: dynamic(() => import("./skeleton/grid").then((m) => m.Grid)),
     file: "en/skeleton/grid.tsx",
   },
   "skeleton-single-shimmer": {
-    component: SkeletonDemos.SingleShimmer,
+    component: dynamic(() => import("./skeleton/single-shimmer").then((m) => m.SingleShimmer)),
     file: "en/skeleton/single-shimmer.tsx",
   },
   // Separator demos
   "separator-basic": {
-    component: SeparatorDemos.Basic,
+    component: dynamic(() => import("./separator/basic").then((m) => m.Basic)),
     file: "en/separator/basic.tsx",
   },
   "separator-vertical": {
-    component: SeparatorDemos.Vertical,
+    component: dynamic(() => import("./separator/vertical").then((m) => m.Vertical)),
     file: "en/separator/vertical.tsx",
   },
   "separator-with-content": {
-    component: SeparatorDemos.WithContent,
+    component: dynamic(() => import("./separator/with-content").then((m) => m.WithContent)),
     file: "en/separator/with-content.tsx",
   },
   "separator-variants": {
-    component: SeparatorDemos.Variants,
+    component: dynamic(() => import("./separator/variants").then((m) => m.Variants)),
     file: "en/separator/variants.tsx",
   },
   "separator-with-surface": {
-    component: SeparatorDemos.WithSurface,
+    component: dynamic(() => import("./separator/with-surface").then((m) => m.WithSurface)),
     file: "en/separator/with-surface.tsx",
   },
   "separator-manual-variant-override": {
-    component: SeparatorDemos.ManualVariantOverride,
+    component: dynamic(() =>
+      import("./separator/manual-variant-override").then((m) => m.ManualVariantOverride),
+    ),
     file: "en/separator/manual-variant-override.tsx",
   },
   "separator-custom-render-function": {
-    component: SeparatorDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./separator/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/separator/custom-render-function.tsx",
   },
   // Spinner demos
   "spinner-basic": {
-    component: SpinnerDemos.Basic,
+    component: dynamic(() => import("./spinner/basic").then((m) => m.SpinnerBasic)),
     file: "en/spinner/basic.tsx",
   },
   "spinner-colors": {
-    component: SpinnerDemos.Colors,
+    component: dynamic(() => import("./spinner/colors").then((m) => m.SpinnerColors)),
     file: "en/spinner/colors.tsx",
   },
   "spinner-sizes": {
-    component: SpinnerDemos.Sizes,
+    component: dynamic(() => import("./spinner/sizes").then((m) => m.SpinnerSizes)),
     file: "en/spinner/sizes.tsx",
   },
   // Surface demos
   "surface-variants": {
-    component: SurfaceDemos.Variants,
+    component: dynamic(() => import("./surface/variants").then((m) => m.Variants)),
     file: "en/surface/variants.tsx",
   },
   // Switch demos
   "switch-basic": {
-    component: SwitchDemos.Basic,
+    component: dynamic(() => import("./switch/basic").then((m) => m.Basic)),
     file: "en/switch/basic.tsx",
   },
   "switch-disabled": {
-    component: SwitchDemos.Disabled,
+    component: dynamic(() => import("./switch/disabled").then((m) => m.Disabled)),
     file: "en/switch/disabled.tsx",
   },
   "switch-default-selected": {
-    component: SwitchDemos.DefaultSelected,
+    component: dynamic(() => import("./switch/default-selected").then((m) => m.DefaultSelected)),
     file: "en/switch/default-selected.tsx",
   },
   "switch-controlled": {
-    component: SwitchDemos.Controlled,
+    component: dynamic(() => import("./switch/controlled").then((m) => m.Controlled)),
     file: "en/switch/controlled.tsx",
   },
   "switch-without-label": {
-    component: SwitchDemos.WithoutLabel,
+    component: dynamic(() => import("./switch/without-label").then((m) => m.WithoutLabel)),
     file: "en/switch/without-label.tsx",
   },
   "switch-sizes": {
-    component: SwitchDemos.Sizes,
+    component: dynamic(() => import("./switch/sizes").then((m) => m.Sizes)),
     file: "en/switch/sizes.tsx",
   },
   "switch-label-position": {
-    component: SwitchDemos.LabelPosition,
+    component: dynamic(() => import("./switch/label-position").then((m) => m.LabelPosition)),
     file: "en/switch/label-position.tsx",
   },
   "switch-with-icons": {
-    component: SwitchDemos.WithIcons,
+    component: dynamic(() => import("./switch/with-icons").then((m) => m.WithIcons)),
     file: "en/switch/with-icons.tsx",
   },
   "switch-with-description": {
-    component: SwitchDemos.WithDescription,
+    component: dynamic(() => import("./switch/with-description").then((m) => m.WithDescription)),
     file: "en/switch/with-description.tsx",
   },
   "switch-group": {
-    component: SwitchDemos.Group,
+    component: dynamic(() => import("./switch/group").then((m) => m.Group)),
     file: "en/switch/group.tsx",
   },
   "switch-group-horizontal": {
-    component: SwitchDemos.GroupHorizontal,
+    component: dynamic(() => import("./switch/group-horizontal").then((m) => m.GroupHorizontal)),
     file: "en/switch/group-horizontal.tsx",
   },
   "switch-render-props": {
-    component: SwitchDemos.RenderProps,
+    component: dynamic(() => import("./switch/render-props").then((m) => m.RenderProps)),
     file: "en/switch/render-props.tsx",
   },
   "switch-form": {
-    component: SwitchDemos.Form,
+    component: dynamic(() => import("./switch/form").then((m) => m.Form)),
     file: "en/switch/form.tsx",
   },
   "switch-custom-styles": {
-    component: SwitchDemos.CustomStyles,
+    component: dynamic(() => import("./switch/custom-styles").then((m) => m.CustomStyles)),
     file: "en/switch/custom-styles.tsx",
   },
   "switch-custom-render-function": {
-    component: SwitchDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./switch/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/switch/custom-render-function.tsx",
   },
   // Tabs demos
   "tabs-basic": {
-    component: TabsDemos.Basic,
+    component: dynamic(() => import("./tabs/basic").then((m) => m.Basic)),
     file: "en/tabs/basic.tsx",
   },
   "tabs-vertical": {
-    component: TabsDemos.Vertical,
+    component: dynamic(() => import("./tabs/vertical").then((m) => m.Vertical)),
     file: "en/tabs/vertical.tsx",
   },
   "tabs-disabled": {
-    component: TabsDemos.Disabled,
+    component: dynamic(() => import("./tabs/disabled").then((m) => m.Disabled)),
     file: "en/tabs/disabled.tsx",
   },
   "tabs-custom-styles": {
-    component: TabsDemos.CustomStyles,
+    component: dynamic(() => import("./tabs/custom-styles").then((m) => m.CustomStyles)),
     file: "en/tabs/custom-styles.tsx",
   },
   "tabs-with-separator": {
-    component: TabsDemos.WithSeparator,
+    component: dynamic(() => import("./tabs/with-separator").then((m) => m.WithSeparator)),
     file: "en/tabs/with-separator.tsx",
   },
   "tabs-secondary": {
-    component: TabsDemos.Secondary,
+    component: dynamic(() => import("./tabs/secondary").then((m) => m.Secondary)),
     file: "en/tabs/secondary.tsx",
   },
   "tabs-secondary-vertical": {
-    component: TabsDemos.SecondaryVertical,
+    component: dynamic(() => import("./tabs/secondary-vertical").then((m) => m.SecondaryVertical)),
     file: "en/tabs/secondary-vertical.tsx",
   },
   "tabs-custom-render-function": {
-    component: TabsDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./tabs/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/tabs/custom-render-function.tsx",
   },
   // TagGroup demos
   "tag-group-basic": {
-    component: TagGroupDemos.Basic,
+    component: dynamic(() => import("./tag-group/basic").then((m) => m.TagGroupBasic)),
     file: "en/tag-group/basic.tsx",
   },
   "tag-group-sizes": {
-    component: TagGroupDemos.Sizes,
+    component: dynamic(() => import("./tag-group/sizes").then((m) => m.TagGroupSizes)),
     file: "en/tag-group/sizes.tsx",
   },
   "tag-group-variants": {
-    component: TagGroupDemos.Variants,
+    component: dynamic(() => import("./tag-group/variants").then((m) => m.TagGroupVariants)),
     file: "en/tag-group/variants.tsx",
   },
   "tag-group-disabled": {
-    component: TagGroupDemos.Disabled,
+    component: dynamic(() => import("./tag-group/disabled").then((m) => m.TagGroupDisabled)),
     file: "en/tag-group/disabled.tsx",
   },
   "tag-group-selection-modes": {
-    component: TagGroupDemos.SelectionModes,
+    component: dynamic(() =>
+      import("./tag-group/selection-modes").then((m) => m.TagGroupSelectionModes),
+    ),
     file: "en/tag-group/selection-modes.tsx",
   },
   "tag-group-controlled": {
-    component: TagGroupDemos.Controlled,
+    component: dynamic(() => import("./tag-group/controlled").then((m) => m.TagGroupControlled)),
     file: "en/tag-group/controlled.tsx",
   },
   "tag-group-with-error-message": {
-    component: TagGroupDemos.WithErrorMessage,
+    component: dynamic(() =>
+      import("./tag-group/with-error-message").then((m) => m.TagGroupWithErrorMessage),
+    ),
     file: "en/tag-group/with-error-message.tsx",
   },
   "tag-group-with-prefix": {
-    component: TagGroupDemos.WithPrefix,
+    component: dynamic(() => import("./tag-group/with-prefix").then((m) => m.TagGroupWithPrefix)),
     file: "en/tag-group/with-prefix.tsx",
   },
   "tag-group-with-remove-button": {
-    component: TagGroupDemos.WithRemoveButton,
+    component: dynamic(() =>
+      import("./tag-group/with-remove-button").then((m) => m.TagGroupWithRemoveButton),
+    ),
     file: "en/tag-group/with-remove-button.tsx",
   },
   "tag-group-with-list-data": {
-    component: TagGroupDemos.WithListData,
+    component: dynamic(() =>
+      import("./tag-group/with-list-data").then((m) => m.TagGroupWithListData),
+    ),
     file: "en/tag-group/with-list-data.tsx",
   },
   "tag-group-custom-render-function": {
-    component: TagGroupDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./tag-group/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/tag-group/custom-render-function.tsx",
   },
   // Table demos
   "table-basic": {
-    component: TableDemos.Basic,
+    component: dynamic(() => import("./table/basic").then((m) => m.Basic)),
     file: "en/table/basic.tsx",
   },
   "table-secondary-variant": {
-    component: TableDemos.SecondaryVariant,
+    component: dynamic(() => import("./table/secondary-variant").then((m) => m.SecondaryVariant)),
     file: "en/table/secondary-variant.tsx",
   },
   "table-sorting": {
-    component: TableDemos.Sorting,
+    component: dynamic(() => import("./table/sorting").then((m) => m.Sorting)),
     file: "en/table/sorting.tsx",
   },
   "table-selection": {
-    component: TableDemos.SelectionDemo,
+    component: dynamic(() => import("./table/selection").then((m) => m.SelectionDemo)),
     file: "en/table/selection.tsx",
   },
   "table-custom-cells": {
-    component: TableDemos.CustomCells,
+    component: dynamic(() => import("./table/custom-cells").then((m) => m.CustomCells)),
     file: "en/table/custom-cells.tsx",
   },
   "table-expandable-rows": {
-    component: TableDemos.ExpandableRows,
+    component: dynamic(() => import("./table/expandable-rows").then((m) => m.ExpandableRows)),
     file: "en/table/expandable-rows.tsx",
   },
   "table-pagination": {
-    component: TableDemos.PaginationDemo,
+    component: dynamic(() => import("./table/pagination").then((m) => m.PaginationDemo)),
     file: "en/table/pagination.tsx",
   },
   "table-column-resizing": {
-    component: TableDemos.ColumnResizing,
+    component: dynamic(() => import("./table/column-resizing").then((m) => m.ColumnResizing)),
     file: "en/table/column-resizing.tsx",
   },
   "table-empty-state": {
-    component: TableDemos.EmptyStateDemo,
+    component: dynamic(() => import("./table/empty-state").then((m) => m.EmptyStateDemo)),
     file: "en/table/empty-state.tsx",
   },
   "table-async-loading": {
-    component: TableDemos.AsyncLoading,
+    component: dynamic(() => import("./table/async-loading").then((m) => m.AsyncLoading)),
     file: "en/table/async-loading.tsx",
   },
   "table-virtualization": {
-    component: TableDemos.Virtualization,
+    component: dynamic(() => import("./table/virtualization").then((m) => m.Virtualization)),
     file: "en/table/virtualization.tsx",
   },
   "table-tanstack-table": {
-    component: TableDemos.TanstackTable,
+    component: dynamic(() => import("./table/tanstack-table").then((m) => m.TanstackTable)),
     file: "en/table/tanstack-table.tsx",
   },
   // TextArea demos
   "textarea-basic": {
-    component: TextAreaDemos.Basic,
+    component: dynamic(() => import("./textarea/basic").then((m) => m.Basic)),
     file: "en/textarea/basic.tsx",
   },
   "textarea-full-width": {
-    component: TextAreaDemos.FullWidth,
+    component: dynamic(() => import("./textarea/full-width").then((m) => m.FullWidth)),
     file: "en/textarea/full-width.tsx",
   },
   "textarea-rows": {
-    component: TextAreaDemos.Rows,
+    component: dynamic(() => import("./textarea/rows").then((m) => m.Rows)),
     file: "en/textarea/rows.tsx",
   },
   "textarea-controlled": {
-    component: TextAreaDemos.Controlled,
+    component: dynamic(() => import("./textarea/controlled").then((m) => m.Controlled)),
     file: "en/textarea/controlled.tsx",
   },
   "textarea-on-surface": {
-    component: TextAreaDemos.OnSurface,
+    component: dynamic(() => import("./textarea/on-surface").then((m) => m.OnSurface)),
     file: "en/textarea/on-surface.tsx",
   },
   "textarea-variants": {
-    component: TextAreaDemos.Variants,
+    component: dynamic(() => import("./textarea/variants").then((m) => m.Variants)),
     file: "en/textarea/variants.tsx",
   },
   // Typography demos
   "typography-default": {
-    component: TypographyDemos.Default,
+    component: dynamic(() => import("./typography/default").then((m) => m.Default)),
     file: "en/typography/default.tsx",
   },
   "typography-primitives": {
-    component: TypographyDemos.Primitives,
+    component: dynamic(() => import("./typography/primitives").then((m) => m.Primitives)),
     file: "en/typography/primitives.tsx",
   },
   "typography-prose": {
-    component: TypographyDemos.Prose,
+    component: dynamic(() => import("./typography/prose").then((m) => m.Prose)),
     file: "en/typography/prose.tsx",
   },
   "typography-render-props": {
-    component: TypographyDemos.RenderProps,
+    component: dynamic(() => import("./typography/render-props").then((m) => m.RenderProps)),
     file: "en/typography/render-props.tsx",
   },
   "typography-typography-scale": {
-    component: TypographyDemos.TypographyScale,
+    component: dynamic(() =>
+      import("./typography/typography-scale").then((m) => m.TypographyScale),
+    ),
     file: "en/typography/typography-scale.tsx",
   },
   // TextField demos
   "textfield-basic": {
-    component: TextFieldDemos.Basic,
+    component: dynamic(() => import("./textfield/basic").then((m) => m.Basic)),
     file: "en/textfield/basic.tsx",
   },
   "textfield-with-description": {
-    component: TextFieldDemos.WithDescription,
+    component: dynamic(() => import("./textfield/with-description").then((m) => m.WithDescription)),
     file: "en/textfield/with-description.tsx",
   },
   "textfield-required": {
-    component: TextFieldDemos.Required,
+    component: dynamic(() => import("./textfield/required").then((m) => m.Required)),
     file: "en/textfield/required.tsx",
   },
   "textfield-with-error": {
-    component: TextFieldDemos.WithError,
+    component: dynamic(() => import("./textfield/with-error").then((m) => m.WithError)),
     file: "en/textfield/with-error.tsx",
   },
   "textfield-disabled": {
-    component: TextFieldDemos.Disabled,
+    component: dynamic(() => import("./textfield/disabled").then((m) => m.Disabled)),
     file: "en/textfield/disabled.tsx",
   },
   "textfield-textarea": {
-    component: TextFieldDemos.TextArea,
+    component: dynamic(() => import("./textfield/textarea").then((m) => m.TextAreaExample)),
     file: "en/textfield/textarea.tsx",
   },
   "textfield-input-types": {
-    component: TextFieldDemos.InputTypes,
+    component: dynamic(() => import("./textfield/input-types").then((m) => m.InputTypes)),
     file: "en/textfield/input-types.tsx",
   },
   "textfield-full-width": {
-    component: TextFieldDemos.FullWidth,
+    component: dynamic(() => import("./textfield/full-width").then((m) => m.FullWidth)),
     file: "en/textfield/full-width.tsx",
   },
   "textfield-controlled": {
-    component: TextFieldDemos.Controlled,
+    component: dynamic(() => import("./textfield/controlled").then((m) => m.Controlled)),
     file: "en/textfield/controlled.tsx",
   },
   "textfield-validation": {
-    component: TextFieldDemos.Validation,
+    component: dynamic(() => import("./textfield/validation").then((m) => m.Validation)),
     file: "en/textfield/validation.tsx",
   },
   "textfield-on-surface": {
-    component: TextFieldDemos.OnSurface,
+    component: dynamic(() => import("./textfield/on-surface").then((m) => m.OnSurface)),
     file: "en/textfield/on-surface.tsx",
   },
   "textfield-custom-render-function": {
-    component: TextFieldDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./textfield/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/textfield/custom-render-function.tsx",
   },
   // TimeField demos
   "time-field-basic": {
-    component: TimeFieldDemos.Basic,
+    component: dynamic(() => import("./time-field/basic").then((m) => m.Basic)),
     file: "en/time-field/basic.tsx",
   },
   "time-field-controlled": {
-    component: TimeFieldDemos.Controlled,
+    component: dynamic(() => import("./time-field/controlled").then((m) => m.Controlled)),
     file: "en/time-field/controlled.tsx",
   },
   "time-field-disabled": {
-    component: TimeFieldDemos.Disabled,
+    component: dynamic(() => import("./time-field/disabled").then((m) => m.Disabled)),
     file: "en/time-field/disabled.tsx",
   },
   "time-field-form-example": {
-    component: TimeFieldDemos.FormExample,
+    component: dynamic(() => import("./time-field/form-example").then((m) => m.FormExample)),
     file: "en/time-field/form-example.tsx",
   },
   "time-field-invalid": {
-    component: TimeFieldDemos.Invalid,
+    component: dynamic(() => import("./time-field/invalid").then((m) => m.Invalid)),
     file: "en/time-field/invalid.tsx",
   },
   "time-field-on-surface": {
-    component: TimeFieldDemos.OnSurface,
+    component: dynamic(() => import("./time-field/on-surface").then((m) => m.OnSurface)),
     file: "en/time-field/on-surface.tsx",
   },
   "time-field-required": {
-    component: TimeFieldDemos.Required,
+    component: dynamic(() => import("./time-field/required").then((m) => m.Required)),
     file: "en/time-field/required.tsx",
   },
   "time-field-with-description": {
-    component: TimeFieldDemos.WithDescription,
+    component: dynamic(() =>
+      import("./time-field/with-description").then((m) => m.WithDescription),
+    ),
     file: "en/time-field/with-description.tsx",
   },
   "time-field-with-prefix-and-suffix": {
-    component: TimeFieldDemos.WithPrefixAndSuffix,
+    component: dynamic(() =>
+      import("./time-field/with-prefix-and-suffix").then((m) => m.WithPrefixAndSuffix),
+    ),
     file: "en/time-field/with-prefix-and-suffix.tsx",
   },
   "time-field-with-prefix-icon": {
-    component: TimeFieldDemos.WithPrefixIcon,
+    component: dynamic(() => import("./time-field/with-prefix-icon").then((m) => m.WithPrefixIcon)),
     file: "en/time-field/with-prefix-icon.tsx",
   },
   "time-field-with-suffix-icon": {
-    component: TimeFieldDemos.WithSuffixIcon,
+    component: dynamic(() => import("./time-field/with-suffix-icon").then((m) => m.WithSuffixIcon)),
     file: "en/time-field/with-suffix-icon.tsx",
   },
   "time-field-full-width": {
-    component: TimeFieldDemos.FullWidth,
+    component: dynamic(() => import("./time-field/full-width").then((m) => m.FullWidth)),
     file: "en/time-field/full-width.tsx",
   },
   "time-field-with-validation": {
-    component: TimeFieldDemos.WithValidation,
+    component: dynamic(() => import("./time-field/with-validation").then((m) => m.WithValidation)),
     file: "en/time-field/with-validation.tsx",
   },
   "time-field-custom-render-function": {
-    component: TimeFieldDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./time-field/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/time-field/custom-render-function.tsx",
   },
   // Toast demos
   "toast-default": {
-    component: ToastDemos.Default,
+    component: dynamic(() => import("./toast/default").then((m) => m.Default)),
     file: "en/toast/default.tsx",
   },
   "toast-simple": {
-    component: ToastDemos.Simple,
+    component: dynamic(() => import("./toast/simple").then((m) => m.Simple)),
     file: "en/toast/simple.tsx",
   },
   "toast-variants": {
-    component: ToastDemos.Variants,
+    component: dynamic(() => import("./toast/variants").then((m) => m.Variants)),
     file: "en/toast/variants.tsx",
   },
   "toast-custom-indicator": {
-    component: ToastDemos.CustomIndicator,
+    component: dynamic(() => import("./toast/custom-indicator").then((m) => m.CustomIndicator)),
     file: "en/toast/custom-indicator.tsx",
   },
   "toast-promise": {
-    component: ToastDemos.Promise,
+    component: dynamic(() => import("./toast/promise").then((m) => m.PromiseDemo)),
     file: "en/toast/promise.tsx",
   },
   "toast-callbacks": {
-    component: ToastDemos.Callbacks,
+    component: dynamic(() => import("./toast/callbacks").then((m) => m.Callbacks)),
     file: "en/toast/callbacks.tsx",
   },
   "toast-placements": {
-    component: ToastDemos.Placements,
+    component: dynamic(() => import("./toast/placements").then((m) => m.Placements)),
     file: "en/toast/placements.tsx",
   },
   "toast-custom-toast": {
-    component: ToastDemos.CustomToast,
+    component: dynamic(() => import("./toast/custom-toast").then((m) => m.CustomToast)),
     file: "en/toast/custom-toast.tsx",
   },
   "toast-custom-queue": {
-    component: ToastDemos.CustomQueue,
+    component: dynamic(() => import("./toast/custom-queue").then((m) => m.CustomQueue)),
     file: "en/toast/custom-queue.tsx",
   },
   // ToggleButton demos
   "toggle-button-basic": {
-    component: ToggleButtonDemos.Basic,
+    component: dynamic(() => import("./toggle-button/basic").then((m) => m.Basic)),
     file: "en/toggle-button/basic.tsx",
   },
   "toggle-button-variants": {
-    component: ToggleButtonDemos.Variants,
+    component: dynamic(() => import("./toggle-button/variants").then((m) => m.Variants)),
     file: "en/toggle-button/variants.tsx",
   },
   "toggle-button-sizes": {
-    component: ToggleButtonDemos.Sizes,
+    component: dynamic(() => import("./toggle-button/sizes").then((m) => m.Sizes)),
     file: "en/toggle-button/sizes.tsx",
   },
   "toggle-button-icon-only": {
-    component: ToggleButtonDemos.IconOnly,
+    component: dynamic(() => import("./toggle-button/icon-only").then((m) => m.IconOnly)),
     file: "en/toggle-button/icon-only.tsx",
   },
   "toggle-button-controlled": {
-    component: ToggleButtonDemos.Controlled,
+    component: dynamic(() => import("./toggle-button/controlled").then((m) => m.Controlled)),
     file: "en/toggle-button/controlled.tsx",
   },
   "toggle-button-disabled": {
-    component: ToggleButtonDemos.Disabled,
+    component: dynamic(() => import("./toggle-button/disabled").then((m) => m.Disabled)),
     file: "en/toggle-button/disabled.tsx",
   },
   // ToggleButtonGroup demos
   "toggle-button-group-basic": {
-    component: ToggleButtonGroupDemos.Basic,
+    component: dynamic(() => import("./toggle-button-group/basic").then((m) => m.Basic)),
     file: "en/toggle-button-group/basic.tsx",
   },
   "toggle-button-group-sizes": {
-    component: ToggleButtonGroupDemos.Sizes,
+    component: dynamic(() => import("./toggle-button-group/sizes").then((m) => m.Sizes)),
     file: "en/toggle-button-group/sizes.tsx",
   },
   "toggle-button-group-orientation": {
-    component: ToggleButtonGroupDemos.Orientation,
+    component: dynamic(() =>
+      import("./toggle-button-group/orientation").then((m) => m.Orientation),
+    ),
     file: "en/toggle-button-group/orientation.tsx",
   },
   "toggle-button-group-attached": {
-    component: ToggleButtonGroupDemos.Attached,
+    component: dynamic(() => import("./toggle-button-group/attached").then((m) => m.Attached)),
     file: "en/toggle-button-group/attached.tsx",
   },
   "toggle-button-group-full-width": {
-    component: ToggleButtonGroupDemos.FullWidth,
+    component: dynamic(() => import("./toggle-button-group/full-width").then((m) => m.FullWidth)),
     file: "en/toggle-button-group/full-width.tsx",
   },
   "toggle-button-group-selection-mode": {
-    component: ToggleButtonGroupDemos.SelectionMode,
+    component: dynamic(() =>
+      import("./toggle-button-group/selection-mode").then((m) => m.SelectionMode),
+    ),
     file: "en/toggle-button-group/selection-mode.tsx",
   },
   "toggle-button-group-controlled": {
-    component: ToggleButtonGroupDemos.Controlled,
+    component: dynamic(() => import("./toggle-button-group/controlled").then((m) => m.Controlled)),
     file: "en/toggle-button-group/controlled.tsx",
   },
   "toggle-button-group-disabled": {
-    component: ToggleButtonGroupDemos.Disabled,
+    component: dynamic(() => import("./toggle-button-group/disabled").then((m) => m.Disabled)),
     file: "en/toggle-button-group/disabled.tsx",
   },
   "toggle-button-group-without-separator": {
-    component: ToggleButtonGroupDemos.WithoutSeparator,
+    component: dynamic(() =>
+      import("./toggle-button-group/without-separator").then((m) => m.WithoutSeparator),
+    ),
     file: "en/toggle-button-group/without-separator.tsx",
   },
   // Toolbar demos
   "toolbar-basic": {
-    component: ToolbarDemos.Basic,
+    component: dynamic(() => import("./toolbar/basic").then((m) => m.Basic)),
     file: "en/toolbar/basic.tsx",
   },
   "toolbar-vertical": {
-    component: ToolbarDemos.Vertical,
+    component: dynamic(() => import("./toolbar/vertical").then((m) => m.Vertical)),
     file: "en/toolbar/vertical.tsx",
   },
   "toolbar-with-button-group": {
-    component: ToolbarDemos.WithButtonGroup,
+    component: dynamic(() => import("./toolbar/with-button-group").then((m) => m.WithButtonGroup)),
     file: "en/toolbar/with-button-group.tsx",
   },
   "toolbar-attached": {
-    component: ToolbarDemos.Attached,
+    component: dynamic(() => import("./toolbar/custom-styles").then((m) => m.Attached)),
     file: "en/toolbar/custom-styles.tsx",
   },
   // Tooltip demos
   "tooltip-basic": {
-    component: TooltipDemos.Basic,
+    component: dynamic(() => import("./tooltip/basic").then((m) => m.TooltipBasic)),
     file: "en/tooltip/basic.tsx",
   },
   "tooltip-with-arrow": {
-    component: TooltipDemos.WithArrow,
+    component: dynamic(() => import("./tooltip/with-arrow").then((m) => m.TooltipWithArrow)),
     file: "en/tooltip/with-arrow.tsx",
   },
   "tooltip-placement": {
-    component: TooltipDemos.Placement,
+    component: dynamic(() => import("./tooltip/placement").then((m) => m.TooltipPlacement)),
     file: "en/tooltip/placement.tsx",
   },
   "tooltip-custom-trigger": {
-    component: TooltipDemos.CustomTrigger,
+    component: dynamic(() =>
+      import("./tooltip/custom-trigger").then((m) => m.TooltipCustomTrigger),
+    ),
     file: "en/tooltip/custom-trigger.tsx",
   },
   "tooltip-custom-render-function": {
-    component: TooltipDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./tooltip/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/tooltip/custom-render-function.tsx",
   },
   // Popover demos
   "popover-basic": {
-    component: PopoverDemos.Basic,
+    component: dynamic(() => import("./popover/basic").then((m) => m.PopoverBasic)),
     file: "en/popover/basic.tsx",
   },
   "popover-with-arrow": {
-    component: PopoverDemos.WithArrow,
+    component: dynamic(() => import("./popover/with-arrow").then((m) => m.PopoverWithArrow)),
     file: "en/popover/with-arrow.tsx",
   },
   "popover-placement": {
-    component: PopoverDemos.Placement,
+    component: dynamic(() => import("./popover/placement").then((m) => m.PopoverPlacement)),
     file: "en/popover/placement.tsx",
   },
   "popover-interactive": {
-    component: PopoverDemos.Interactive,
+    component: dynamic(() => import("./popover/interactive").then((m) => m.PopoverInteractive)),
     file: "en/popover/interactive.tsx",
   },
   "popover-custom-render-function": {
-    component: PopoverDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./popover/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/popover/custom-render-function.tsx",
   },
   // Label demos
   "label-basic": {
-    component: LabelDemos.Basic,
+    component: dynamic(() => import("./label/basic").then((m) => m.Basic)),
     file: "en/label/basic.tsx",
   },
   // ListBox demos
   "list-box-controlled": {
-    component: ListBoxDemos.Controlled,
+    component: dynamic(() => import("./list-box/controlled").then((m) => m.Controlled)),
     file: "en/list-box/controlled.tsx",
   },
   "list-box-custom-check-icon": {
-    component: ListBoxDemos.CustomCheckIcon,
+    component: dynamic(() => import("./list-box/custom-check-icon").then((m) => m.CustomCheckIcon)),
     file: "en/list-box/custom-check-icon.tsx",
   },
   "list-box-default": {
-    component: ListBoxDemos.Default,
+    component: dynamic(() => import("./list-box/default").then((m) => m.Default)),
     file: "en/list-box/default.tsx",
   },
   "list-box-multi-select": {
-    component: ListBoxDemos.MultiSelect,
+    component: dynamic(() => import("./list-box/multi-select").then((m) => m.MultiSelect)),
     file: "en/list-box/multi-select.tsx",
   },
   "list-box-scrollbar-modes": {
-    component: ListBoxDemos.ScrollbarModes,
+    component: dynamic(() => import("./list-box/scrollbar-modes").then((m) => m.ScrollbarModes)),
     file: "en/list-box/scrollbar-modes.tsx",
   },
   "list-box-with-disabled-items": {
-    component: ListBoxDemos.WithDisabledItems,
+    component: dynamic(() =>
+      import("./list-box/with-disabled-items").then((m) => m.WithDisabledItems),
+    ),
     file: "en/list-box/with-disabled-items.tsx",
   },
   "list-box-with-sections": {
-    component: ListBoxDemos.WithSections,
+    component: dynamic(() => import("./list-box/with-sections").then((m) => m.WithSections)),
     file: "en/list-box/with-sections.tsx",
   },
   "list-box-custom-render-function": {
-    component: ListBoxDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./list-box/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/list-box/custom-render-function.tsx",
   },
   "list-box-virtualization": {
-    component: ListBoxDemos.Virtualization,
+    component: dynamic(() => import("./list-box/virtualization").then((m) => m.Virtualization)),
     file: "en/list-box/virtualization.tsx",
   },
   // Meter demos
   "meter-basic": {
-    component: MeterDemos.Basic,
+    component: dynamic(() => import("./meter/basic").then((m) => m.Basic)),
     file: "en/meter/basic.tsx",
   },
   "meter-sizes": {
-    component: MeterDemos.Sizes,
+    component: dynamic(() => import("./meter/sizes").then((m) => m.Sizes)),
     file: "en/meter/sizes.tsx",
   },
   "meter-colors": {
-    component: MeterDemos.Colors,
+    component: dynamic(() => import("./meter/colors").then((m) => m.Colors)),
     file: "en/meter/colors.tsx",
   },
   "meter-custom-value": {
-    component: MeterDemos.CustomValue,
+    component: dynamic(() => import("./meter/custom-value").then((m) => m.CustomValue)),
     file: "en/meter/custom-value.tsx",
   },
   "meter-without-label": {
-    component: MeterDemos.WithoutLabel,
+    component: dynamic(() => import("./meter/without-label").then((m) => m.WithoutLabel)),
     file: "en/meter/without-label.tsx",
   },
   // ProgressBar demos
   "progress-bar-basic": {
-    component: ProgressBarDemos.Basic,
+    component: dynamic(() => import("./progress-bar/basic").then((m) => m.Basic)),
     file: "en/progress-bar/basic.tsx",
   },
   "progress-bar-sizes": {
-    component: ProgressBarDemos.Sizes,
+    component: dynamic(() => import("./progress-bar/sizes").then((m) => m.Sizes)),
     file: "en/progress-bar/sizes.tsx",
   },
   "progress-bar-colors": {
-    component: ProgressBarDemos.Colors,
+    component: dynamic(() => import("./progress-bar/colors").then((m) => m.Colors)),
     file: "en/progress-bar/colors.tsx",
   },
   "progress-bar-indeterminate": {
-    component: ProgressBarDemos.Indeterminate,
+    component: dynamic(() => import("./progress-bar/indeterminate").then((m) => m.Indeterminate)),
     file: "en/progress-bar/indeterminate.tsx",
   },
   "progress-bar-custom-value": {
-    component: ProgressBarDemos.CustomValue,
+    component: dynamic(() => import("./progress-bar/custom-value").then((m) => m.CustomValue)),
     file: "en/progress-bar/custom-value.tsx",
   },
   "progress-bar-without-label": {
-    component: ProgressBarDemos.WithoutLabel,
+    component: dynamic(() => import("./progress-bar/without-label").then((m) => m.WithoutLabel)),
     file: "en/progress-bar/without-label.tsx",
   },
   // ProgressCircle demos
   "progress-circle-basic": {
-    component: ProgressCircleDemos.Basic,
+    component: dynamic(() => import("./progress-circle/basic").then((m) => m.Basic)),
     file: "en/progress-circle/basic.tsx",
   },
   "progress-circle-sizes": {
-    component: ProgressCircleDemos.Sizes,
+    component: dynamic(() => import("./progress-circle/sizes").then((m) => m.Sizes)),
     file: "en/progress-circle/sizes.tsx",
   },
   "progress-circle-colors": {
-    component: ProgressCircleDemos.Colors,
+    component: dynamic(() => import("./progress-circle/colors").then((m) => m.Colors)),
     file: "en/progress-circle/colors.tsx",
   },
   "progress-circle-indeterminate": {
-    component: ProgressCircleDemos.Indeterminate,
+    component: dynamic(() =>
+      import("./progress-circle/indeterminate").then((m) => m.Indeterminate),
+    ),
     file: "en/progress-circle/indeterminate.tsx",
   },
   "progress-circle-with-label": {
-    component: ProgressCircleDemos.WithLabel,
+    component: dynamic(() => import("./progress-circle/with-label").then((m) => m.WithLabel)),
     file: "en/progress-circle/with-label.tsx",
   },
   "progress-circle-custom-svg": {
-    component: ProgressCircleDemos.CustomSvg,
+    component: dynamic(() => import("./progress-circle/custom-svg").then((m) => m.CustomSvg)),
     file: "en/progress-circle/custom-svg.tsx",
   },
   // Modal demos
   "modal-default": {
-    component: ModalDemos.Default,
+    component: dynamic(() => import("./modal/default").then((m) => m.Default)),
     file: "en/modal/default.tsx",
   },
   "modal-placements": {
-    component: ModalDemos.Placements,
+    component: dynamic(() => import("./modal/placements").then((m) => m.Placements)),
     file: "en/modal/placements.tsx",
   },
   "modal-backdrop-variants": {
-    component: ModalDemos.BackdropVariants,
+    component: dynamic(() => import("./modal/backdrop-variants").then((m) => m.BackdropVariants)),
     file: "en/modal/backdrop-variants.tsx",
   },
   "modal-scroll-comparison": {
-    component: ModalDemos.ScrollComparison,
+    component: dynamic(() => import("./modal/scroll-comparison").then((m) => m.ScrollComparison)),
     file: "en/modal/scroll-comparison.tsx",
   },
   "modal-dismiss-behavior": {
-    component: ModalDemos.DismissBehavior,
+    component: dynamic(() => import("./modal/dismiss-behavior").then((m) => m.DismissBehavior)),
     file: "en/modal/dismiss-behavior.tsx",
   },
   "modal-with-form": {
-    component: ModalDemos.WithForm,
+    component: dynamic(() => import("./modal/with-form").then((m) => m.WithForm)),
     file: "en/modal/with-form.tsx",
   },
   "modal-controlled": {
-    component: ModalDemos.Controlled,
+    component: dynamic(() => import("./modal/controlled").then((m) => m.Controlled)),
     file: "en/modal/controlled.tsx",
   },
   "modal-custom-trigger": {
-    component: ModalDemos.CustomTrigger,
+    component: dynamic(() => import("./modal/custom-trigger").then((m) => m.CustomTrigger)),
     file: "en/modal/custom-trigger.tsx",
   },
   "modal-custom-backdrop": {
-    component: ModalDemos.CustomBackdrop,
+    component: dynamic(() => import("./modal/custom-backdrop").then((m) => m.CustomBackdrop)),
     file: "en/modal/custom-backdrop.tsx",
   },
   "modal-custom-animations": {
-    component: ModalDemos.CustomAnimations,
+    component: dynamic(() => import("./modal/custom-animations").then((m) => m.CustomAnimations)),
     file: "en/modal/custom-animations.tsx",
   },
   "modal-sizes": {
-    component: ModalDemos.Sizes,
+    component: dynamic(() => import("./modal/sizes").then((m) => m.Sizes)),
     file: "en/modal/sizes.tsx",
   },
   "modal-close-methods": {
-    component: ModalDemos.CloseMethods,
+    component: dynamic(() => import("./modal/close-methods").then((m) => m.CloseMethods)),
     file: "en/modal/close-methods.tsx",
   },
   "modal-custom-portal": {
-    component: ModalDemos.CustomPortal,
+    component: dynamic(() => import("./modal/custom-portal").then((m) => m.CustomPortal)),
     file: "en/modal/custom-portal.tsx",
   },
   // NumberField demos
   "number-field-basic": {
-    component: NumberFieldDemos.Basic,
+    component: dynamic(() => import("./number-field/basic").then((m) => m.Basic)),
     file: "en/number-field/basic.tsx",
   },
   "number-field-with-description": {
-    component: NumberFieldDemos.WithDescription,
+    component: dynamic(() =>
+      import("./number-field/with-description").then((m) => m.WithDescription),
+    ),
     file: "en/number-field/with-description.tsx",
   },
   "number-field-required": {
-    component: NumberFieldDemos.Required,
+    component: dynamic(() => import("./number-field/required").then((m) => m.Required)),
     file: "en/number-field/required.tsx",
   },
   "number-field-validation": {
-    component: NumberFieldDemos.Validation,
+    component: dynamic(() => import("./number-field/validation").then((m) => m.Validation)),
     file: "en/number-field/validation.tsx",
   },
   "number-field-disabled": {
-    component: NumberFieldDemos.Disabled,
+    component: dynamic(() => import("./number-field/disabled").then((m) => m.Disabled)),
     file: "en/number-field/disabled.tsx",
   },
   "number-field-full-width": {
-    component: NumberFieldDemos.FullWidth,
+    component: dynamic(() => import("./number-field/full-width").then((m) => m.FullWidth)),
     file: "en/number-field/full-width.tsx",
   },
   "number-field-controlled": {
-    component: NumberFieldDemos.Controlled,
+    component: dynamic(() => import("./number-field/controlled").then((m) => m.Controlled)),
     file: "en/number-field/controlled.tsx",
   },
   "number-field-with-validation": {
-    component: NumberFieldDemos.WithValidation,
+    component: dynamic(() =>
+      import("./number-field/with-validation").then((m) => m.WithValidation),
+    ),
     file: "en/number-field/with-validation.tsx",
   },
   "number-field-with-step": {
-    component: NumberFieldDemos.WithStep,
+    component: dynamic(() => import("./number-field/with-step").then((m) => m.WithStep)),
     file: "en/number-field/with-step.tsx",
   },
   "number-field-with-format-options": {
-    component: NumberFieldDemos.WithFormatOptions,
+    component: dynamic(() =>
+      import("./number-field/with-format-options").then((m) => m.WithFormatOptions),
+    ),
     file: "en/number-field/with-format-options.tsx",
   },
   "number-field-custom-icons": {
-    component: NumberFieldDemos.CustomIcons,
+    component: dynamic(() => import("./number-field/custom-icons").then((m) => m.CustomIcons)),
     file: "en/number-field/custom-icons.tsx",
   },
   "number-field-on-surface": {
-    component: NumberFieldDemos.OnSurface,
+    component: dynamic(() => import("./number-field/on-surface").then((m) => m.OnSurface)),
     file: "en/number-field/on-surface.tsx",
   },
   "number-field-with-chevrons": {
-    component: NumberFieldDemos.WithChevrons,
+    component: dynamic(() => import("./number-field/with-chevrons").then((m) => m.WithChevrons)),
     file: "en/number-field/with-chevrons.tsx",
   },
   "number-field-form-example": {
-    component: NumberFieldDemos.FormExample,
+    component: dynamic(() => import("./number-field/form-example").then((m) => m.FormExample)),
     file: "en/number-field/form-example.tsx",
   },
   "number-field-variants": {
-    component: NumberFieldDemos.Variants,
+    component: dynamic(() => import("./number-field/variants").then((m) => m.Variants)),
     file: "en/number-field/variants.tsx",
   },
   "number-field-custom-render-function": {
-    component: NumberFieldDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./number-field/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/number-field/custom-render-function.tsx",
   },
   // Pagination demos
   "pagination-basic": {
-    component: PaginationDemos.Basic,
+    component: dynamic(() => import("./pagination/basic").then((m) => m.PaginationBasic)),
     file: "en/pagination/basic.tsx",
   },
   "pagination-sizes": {
-    component: PaginationDemos.Sizes,
+    component: dynamic(() => import("./pagination/sizes").then((m) => m.PaginationSizes)),
     file: "en/pagination/sizes.tsx",
   },
   "pagination-with-ellipsis": {
-    component: PaginationDemos.WithEllipsis,
+    component: dynamic(() =>
+      import("./pagination/with-ellipsis").then((m) => m.PaginationWithEllipsis),
+    ),
     file: "en/pagination/with-ellipsis.tsx",
   },
   "pagination-simple-prev-next": {
-    component: PaginationDemos.SimplePrevNext,
+    component: dynamic(() =>
+      import("./pagination/simple-prev-next").then((m) => m.PaginationSimplePrevNext),
+    ),
     file: "en/pagination/simple-prev-next.tsx",
   },
   "pagination-with-summary": {
-    component: PaginationDemos.WithSummary,
+    component: dynamic(() =>
+      import("./pagination/with-summary").then((m) => m.PaginationWithSummary),
+    ),
     file: "en/pagination/with-summary.tsx",
   },
   "pagination-custom-icons": {
-    component: PaginationDemos.CustomIcons,
+    component: dynamic(() =>
+      import("./pagination/custom-icons").then((m) => m.PaginationCustomIcons),
+    ),
     file: "en/pagination/custom-icons.tsx",
   },
   "pagination-controlled": {
-    component: PaginationDemos.Controlled,
+    component: dynamic(() => import("./pagination/controlled").then((m) => m.PaginationControlled)),
     file: "en/pagination/controlled.tsx",
   },
   "pagination-disabled": {
-    component: PaginationDemos.Disabled,
+    component: dynamic(() => import("./pagination/disabled").then((m) => m.PaginationDisabled)),
     file: "en/pagination/disabled.tsx",
   },
   // Select demos
   "select-default": {
-    component: SelectDemos.Default,
+    component: dynamic(() => import("./select/default").then((m) => m.Default)),
     file: "en/select/default.tsx",
   },
   "select-with-description": {
-    component: SelectDemos.WithDescription,
+    component: dynamic(() => import("./select/with-description").then((m) => m.WithDescription)),
     file: "en/select/with-description.tsx",
   },
   "select-multiple-select": {
-    component: SelectDemos.MultipleSelect,
+    component: dynamic(() => import("./select/multiple-select").then((m) => m.MultipleSelect)),
     file: "en/select/multiple-select.tsx",
   },
   "select-with-sections": {
-    component: SelectDemos.WithSections,
+    component: dynamic(() => import("./select/with-sections").then((m) => m.WithSections)),
     file: "en/select/with-sections.tsx",
   },
   "select-with-disabled-options": {
-    component: SelectDemos.WithDisabledOptions,
+    component: dynamic(() =>
+      import("./select/with-disabled-options").then((m) => m.WithDisabledOptions),
+    ),
     file: "en/select/with-disabled-options.tsx",
   },
   "select-custom-indicator": {
-    component: SelectDemos.CustomIndicator,
+    component: dynamic(() => import("./select/custom-indicator").then((m) => m.CustomIndicator)),
     file: "en/select/custom-indicator.tsx",
   },
   "select-required": {
-    component: SelectDemos.Required,
+    component: dynamic(() => import("./select/required").then((m) => m.Required)),
     file: "en/select/required.tsx",
   },
   "select-full-width": {
-    component: SelectDemos.FullWidth,
+    component: dynamic(() => import("./select/full-width").then((m) => m.FullWidth)),
     file: "en/select/full-width.tsx",
   },
   "select-on-surface": {
-    component: SelectDemos.OnSurface,
+    component: dynamic(() => import("./select/on-surface").then((m) => m.OnSurface)),
     file: "en/select/on-surface.tsx",
   },
   "select-custom-value": {
-    component: SelectDemos.CustomValue,
+    component: dynamic(() => import("./select/custom-value").then((m) => m.CustomValue)),
     file: "en/select/custom-value.tsx",
   },
   "select-custom-value-multiple": {
-    component: SelectDemos.CustomValueMultiple,
+    component: dynamic(() =>
+      import("./select/custom-value-multiple").then((m) => m.CustomValueMultiple),
+    ),
     file: "en/select/custom-value-multiple.tsx",
   },
   "select-controlled": {
-    component: SelectDemos.Controlled,
+    component: dynamic(() => import("./select/controlled").then((m) => m.Controlled)),
     file: "en/select/controlled.tsx",
   },
   "select-controlled-multiple": {
-    component: SelectDemos.ControlledMultiple,
+    component: dynamic(() =>
+      import("./select/controlled-multiple").then((m) => m.ControlledMultiple),
+    ),
     file: "en/select/controlled-multiple.tsx",
   },
   "select-controlled-open-state": {
-    component: SelectDemos.ControlledOpenState,
+    component: dynamic(() =>
+      import("./select/controlled-open-state").then((m) => m.ControlledOpenState),
+    ),
     file: "en/select/controlled-open-state.tsx",
   },
   "select-asynchronous-loading": {
-    component: SelectDemos.AsynchronousLoading,
+    component: dynamic(() =>
+      import("./select/asynchronous-loading").then((m) => m.AsynchronousLoading),
+    ),
     file: "en/select/asynchronous-loading.tsx",
   },
   "select-disabled": {
-    component: SelectDemos.Disabled,
+    component: dynamic(() => import("./select/disabled").then((m) => m.Disabled)),
     file: "en/select/disabled.tsx",
   },
   "select-variants": {
-    component: SelectDemos.Variants,
+    component: dynamic(() => import("./select/variants").then((m) => m.Variants)),
     file: "en/select/variants.tsx",
   },
   "select-custom-render-function": {
-    component: SelectDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./select/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/select/custom-render-function.tsx",
   },
   // SearchField demos
   "search-field-basic": {
-    component: SearchFieldDemos.Basic,
+    component: dynamic(() => import("./search-field/basic").then((m) => m.Basic)),
     file: "en/search-field/basic.tsx",
   },
   "search-field-with-description": {
-    component: SearchFieldDemos.WithDescription,
+    component: dynamic(() =>
+      import("./search-field/with-description").then((m) => m.WithDescription),
+    ),
     file: "en/search-field/with-description.tsx",
   },
   "search-field-required": {
-    component: SearchFieldDemos.Required,
+    component: dynamic(() => import("./search-field/required").then((m) => m.Required)),
     file: "en/search-field/required.tsx",
   },
   "search-field-validation": {
-    component: SearchFieldDemos.Validation,
+    component: dynamic(() => import("./search-field/validation").then((m) => m.Validation)),
     file: "en/search-field/validation.tsx",
   },
   "search-field-disabled": {
-    component: SearchFieldDemos.Disabled,
+    component: dynamic(() => import("./search-field/disabled").then((m) => m.Disabled)),
     file: "en/search-field/disabled.tsx",
   },
   "search-field-full-width": {
-    component: SearchFieldDemos.FullWidth,
+    component: dynamic(() => import("./search-field/full-width").then((m) => m.FullWidth)),
     file: "en/search-field/full-width.tsx",
   },
   "search-field-controlled": {
-    component: SearchFieldDemos.Controlled,
+    component: dynamic(() => import("./search-field/controlled").then((m) => m.Controlled)),
     file: "en/search-field/controlled.tsx",
   },
   "search-field-with-validation": {
-    component: SearchFieldDemos.WithValidation,
+    component: dynamic(() =>
+      import("./search-field/with-validation").then((m) => m.WithValidation),
+    ),
     file: "en/search-field/with-validation.tsx",
   },
   "search-field-custom-icons": {
-    component: SearchFieldDemos.CustomIcons,
+    component: dynamic(() => import("./search-field/custom-icons").then((m) => m.CustomIcons)),
     file: "en/search-field/custom-icons.tsx",
   },
   "search-field-on-surface": {
-    component: SearchFieldDemos.OnSurface,
+    component: dynamic(() => import("./search-field/on-surface").then((m) => m.OnSurface)),
     file: "en/search-field/on-surface.tsx",
   },
   "search-field-form-example": {
-    component: SearchFieldDemos.FormExample,
+    component: dynamic(() => import("./search-field/form-example").then((m) => m.FormExample)),
     file: "en/search-field/form-example.tsx",
   },
   "search-field-with-keyboard-shortcut": {
-    component: SearchFieldDemos.WithKeyboardShortcut,
+    component: dynamic(() =>
+      import("./search-field/with-keyboard-shortcut").then((m) => m.WithKeyboardShortcut),
+    ),
     file: "en/search-field/with-keyboard-shortcut.tsx",
   },
   "search-field-variants": {
-    component: SearchFieldDemos.Variants,
+    component: dynamic(() => import("./search-field/variants").then((m) => m.Variants)),
     file: "en/search-field/variants.tsx",
   },
   "search-field-custom-render-function": {
-    component: SearchFieldDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./search-field/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/search-field/custom-render-function.tsx",
   },
   // ScrollShadow demos
   "scroll-shadow-default": {
-    component: ScrollShadowDemos.Default,
+    component: dynamic(() => import("./scroll-shadow/default")),
     file: "en/scroll-shadow/default.tsx",
   },
   "scroll-shadow-orientation": {
-    component: ScrollShadowDemos.Orientation,
+    component: dynamic(() => import("./scroll-shadow/orientation")),
     file: "en/scroll-shadow/orientation.tsx",
   },
   "scroll-shadow-hide-scroll-bar": {
-    component: ScrollShadowDemos.HideScrollBar,
+    component: dynamic(() => import("./scroll-shadow/hide-scroll-bar")),
     file: "en/scroll-shadow/hide-scroll-bar.tsx",
   },
   "scroll-shadow-custom-size": {
-    component: ScrollShadowDemos.CustomSize,
+    component: dynamic(() => import("./scroll-shadow/custom-size")),
     file: "en/scroll-shadow/custom-size.tsx",
   },
   "scroll-shadow-visibility-change": {
-    component: ScrollShadowDemos.VisibilityChange,
+    component: dynamic(() => import("./scroll-shadow/visibility-change")),
     file: "en/scroll-shadow/visibility-change.tsx",
   },
   "scroll-shadow-with-card": {
-    component: ScrollShadowDemos.WithCard,
+    component: dynamic(() => import("./scroll-shadow/with-card")),
     file: "en/scroll-shadow/with-card.tsx",
   },
   // Slider demos
   "slider-default": {
-    component: SliderDemos.Default,
+    component: dynamic(() => import("./slider/default").then((m) => m.Default)),
     file: "en/slider/default.tsx",
   },
   "slider-vertical": {
-    component: SliderDemos.Vertical,
+    component: dynamic(() => import("./slider/vertical").then((m) => m.Vertical)),
     file: "en/slider/vertical.tsx",
   },
   "slider-range": {
-    component: SliderDemos.Range,
+    component: dynamic(() => import("./slider/range").then((m) => m.Range)),
     file: "en/slider/range.tsx",
   },
   "slider-disabled": {
-    component: SliderDemos.Disabled,
+    component: dynamic(() => import("./slider/disabled").then((m) => m.Disabled)),
     file: "en/slider/disabled.tsx",
   },
   "slider-custom-render-function": {
-    component: SliderDemos.CustomRenderFunction,
+    component: dynamic(() =>
+      import("./slider/custom-render-function").then((m) => m.CustomRenderFunction),
+    ),
     file: "en/slider/custom-render-function.tsx",
   },
   // Description demos
   "description-basic": {
-    component: DescriptionDemos.Basic,
+    component: dynamic(() => import("./description/basic").then((m) => m.Basic)),
     file: "en/description/basic.tsx",
   },
   // FieldError demos
   "field-error-basic": {
-    component: FieldErrorDemos.Basic,
+    component: dynamic(() => import("./field-error/basic").then((m) => m.Basic)),
     file: "en/field-error/basic.tsx",
   },
 };
