@@ -6,6 +6,7 @@ import {join} from "node:path";
 
 import {createRelativeLink} from "fumadocs-ui/mdx";
 import {notFound} from "next/navigation";
+import {cache} from "react";
 
 import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
@@ -36,7 +37,7 @@ import {
 
 const componentStatusIcons = ["preview", "new", "updated"];
 
-async function getRawMDXContent(pagePath: string): Promise<string> {
+const getRawMDXContent = cache(async (pagePath: string): Promise<string> => {
   try {
     // `page.path` already includes the locale prefix when using
     // `parser: "dir"`, so we must not prepend the locale again.
@@ -46,7 +47,7 @@ async function getRawMDXContent(pagePath: string): Promise<string> {
   } catch {
     return "";
   }
-}
+});
 
 export default async function Page(props: {params: Promise<{lang: string; slug?: string[]}>}) {
   const params = await props.params;
