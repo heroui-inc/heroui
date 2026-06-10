@@ -53,6 +53,42 @@ const DefaultTemplate = (args: Story["args"]) => {
   );
 };
 
+const overflowItems = [
+  {id: "overview", label: "Overview"},
+  {id: "analytics", label: "Analytics"},
+  {id: "reports", label: "Reports"},
+  {id: "performance", label: "Performance"},
+  {id: "engagement", label: "Engagement"},
+  {id: "audience", label: "Audience"},
+  {id: "acquisition", label: "Acquisition"},
+  {id: "retention", label: "Retention"},
+  {id: "settings", label: "Settings"},
+];
+
+const OverflowTemplate = (args: Story["args"]) => {
+  return (
+    <div className="w-[400px]">
+      <Tabs {...args}>
+        <Tabs.ListContainer>
+          <Tabs.List aria-label="Overflow options">
+            {overflowItems.map((item) => (
+              <Tabs.Tab key={item.id} id={item.id}>
+                {item.label}
+                <Tabs.Indicator />
+              </Tabs.Tab>
+            ))}
+          </Tabs.List>
+        </Tabs.ListContainer>
+        {overflowItems.map((item) => (
+          <Tabs.Panel key={item.id} className="pt-4" id={item.id}>
+            <p>{item.label} panel content.</p>
+          </Tabs.Panel>
+        ))}
+      </Tabs>
+    </div>
+  );
+};
+
 const VerticalTemplate = (args: Story["args"]) => {
   return (
     <div className="w-[600px]">
@@ -404,7 +440,7 @@ const Showcase1Template = (args: Story["args"]) => {
           ))}
         </div>
         <Tabs {...args} defaultSelectedKey={DEFAULT_ZOOM} onSelectionChange={setSelectedZoom}>
-          <Tabs.ListContainer className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto sm:my-6">
+          <Tabs.ListContainer className="scrollbar-hide my-4 w-full max-w-full overflow-x-auto bg-transparent sm:my-6">
             <Tabs.List
               aria-label="Options"
               className="w-fit min-w-min rounded-full bg-[#333336] *:h-8 *:w-fit *:px-3 *:text-xs *:font-normal *:text-white *:opacity-80 *:hover:opacity-100 *:data-[selected=true]:text-black sm:*:h-9 sm:*:px-4 sm:*:text-sm"
@@ -454,6 +490,13 @@ export const Default: Story = {
     children: null,
   },
   render: DefaultTemplate,
+};
+
+export const Overflow: Story = {
+  args: {
+    children: null,
+  },
+  render: OverflowTemplate,
 };
 
 export const Vertical: Story = {
