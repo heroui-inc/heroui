@@ -41,12 +41,25 @@
   @apply bg-surface-secondary;
 }
 
-.table-root--secondary .table__column:first-child {
+/* Round only the truly first/last column header.
+   Non-virtualized: column is a <th> child of <tr>.
+   Virtualized: column is wrapped in a `VirtualizerItem` (role="presentation") so
+   `:first-child` / `:last-child` on `.table__column` would match every column
+   (each is the only child of its wrapper). Walk up to the row instead. */
+.table-root--secondary
+  :is(
+    th.table__column:first-child,
+    [role="row"] > [role="presentation"]:first-of-type > .table__column
+  ) {
   border-start-start-radius: min(32px, var(--radius-2xl));
   border-end-start-radius: min(32px, var(--radius-2xl));
 }
 
-.table-root--secondary .table__column:last-child {
+.table-root--secondary
+  :is(
+    th.table__column:last-child,
+    [role="row"] > [role="presentation"]:last-of-type > .table__column
+  ) {
   border-start-end-radius: min(32px, var(--radius-2xl));
   border-end-end-radius: min(32px, var(--radius-2xl));
 }
@@ -111,7 +124,7 @@
   /* Separator between columns — a short vertical line on the right edge */
   &::after {
     content: "";
-    @apply pointer-events-none absolute top-1/2 end-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+    @apply pointer-events-none absolute end-0 top-1/2 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   }
 
   &:last-child:not(:only-child)::after {
@@ -136,6 +149,13 @@
     @apply rounded-lg outline-none;
     box-shadow: inset 0 0 0 2px var(--focus);
   }
+}
+
+/* Virtualized: each column is wrapped in a `VirtualizerItem` (role="presentation"),
+   so `.table__column:last-child:not(:only-child)::after` above never matches.
+   Hide the trailing separator on the rightmost wrapper instead. */
+[role="row"] > [role="presentation"]:last-of-type:not(:only-of-type) > .table__column::after {
+  content: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -326,7 +346,7 @@
    -------------------------------------------------------------------------- */
 .table__column-resizer {
   /* Match the ::after separator: absolute, right edge, short vertical line */
-  @apply absolute top-1/2 end-0 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
+  @apply absolute end-0 top-1/2 h-4 w-px -translate-y-1/2 rounded-sm bg-separator;
   /* Make it interactive — wider hit area with transparent padding */
   @apply box-content translate-x-1/2 cursor-col-resize touch-none px-2;
   /* Reset appearance */
