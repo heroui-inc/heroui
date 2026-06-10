@@ -8,6 +8,9 @@ export const tabsVariants = tv({
   },
   slots: {
     base: "tabs",
+    scrollNext: "tabs__list-container__scroll-next",
+    scrollPrev: "tabs__list-container__scroll-prev",
+    scroller: "tabs__list-container__scroller",
     separator: "tabs__separator",
     tab: "tabs__tab",
     tabIndicator: "tabs__indicator",
