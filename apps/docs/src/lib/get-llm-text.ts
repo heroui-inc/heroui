@@ -116,7 +116,7 @@ ${header}
   const finalContent = processed.value
     .toString()
     .replace(
-      /<(ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeComponentsCategory|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g,
+      /<(ComponentPreview|CollapsibleCode|RelatedComponents|RelatedShowcases|DocsImage|NativeVideoPlayerView|NativeTryOnDevice)[^>]*\/?>/g,
       "",
     );
 
