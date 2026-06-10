@@ -170,35 +170,29 @@ export const WithForm = () => (
  */
 export const BottomWithForm = () => (
   <Drawer>
-    <Button variant="secondary">Open Bottom Drawer (Form)</Button>
+    <Button variant="secondary">Open Tall Bottom Drawer (90dvh)</Button>
     <Drawer.Backdrop>
       <Drawer.Content placement="bottom">
-        <Drawer.Dialog>
+        <Drawer.Dialog className="h-[90dvh]">
           <Drawer.Handle />
           <Drawer.Header>
-            <Drawer.Heading>Quick Reply</Drawer.Heading>
+            <Drawer.Heading>Edit Profile</Drawer.Heading>
           </Drawer.Header>
           <Drawer.Body>
             <form className="flex flex-col gap-4">
-              <TextField className="w-full" name="subject" type="text">
-                <Label>Subject</Label>
-                <Input placeholder="What's it about?" variant="secondary" />
-              </TextField>
-              <TextField className="w-full" name="recipient" type="email">
-                <Label>Recipient</Label>
-                <Input placeholder="someone@example.com" variant="secondary" />
-              </TextField>
-              <TextField className="w-full" name="message" type="text">
-                <Label>Message</Label>
-                <Input placeholder="Type your reply…" variant="secondary" />
-              </TextField>
+              {Array.from({length: 8}).map((_, i) => (
+                <TextField key={i} className="w-full" name={`field-${i}`} type="text">
+                  <Label>Field {i + 1}</Label>
+                  <Input placeholder={`Value for field ${i + 1}`} variant="secondary" />
+                </TextField>
+              ))}
             </form>
           </Drawer.Body>
           <Drawer.Footer>
             <Button slot="close" variant="secondary">
               Cancel
             </Button>
-            <Button slot="close">Send</Button>
+            <Button slot="close">Save</Button>
           </Drawer.Footer>
         </Drawer.Dialog>
       </Drawer.Content>
