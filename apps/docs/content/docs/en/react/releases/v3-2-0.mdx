@@ -123,6 +123,9 @@ Individual `delay` and `closeDelay` props still override these values on specifi
 - **Modal / AlertDialog**: `scroll-inside` dialogs cap height with `max-h-full min-h-0` so the body scrolls instead of overflowing ([#6597](https://github.com/heroui-inc/heroui/pull/6597)).
 - **ScrollShadow**: Fade masks reserve space for visible native scrollbars via `--scroll-shadow-scrollbar-size` ([#6598](https://github.com/heroui-inc/heroui/pull/6598)).
 - **Table RTL**: Column separators and resize handles use logical `end-0` positioning in RTL ([#6606](https://github.com/heroui-inc/heroui/pull/6606)).
+- **Link**: Drops the hardcoded `text-sm` so links inherit font size from their parent, and `.link__icon` scales relative to text with `size-[0.75em]` instead of a fixed `size-2` ([#6621](https://github.com/heroui-inc/heroui/pull/6621)).
+- **DatePicker / DateRangePicker**: Calendar popovers use `min-w-(--trigger-width)` instead of `max-w-(--trigger-width)` so the calendar is at least as wide as the trigger and no longer clips horizontally ([#6622](https://github.com/heroui-inc/heroui/pull/6622)).
+- **Table**: Secondary header borders and rounded corners render correctly when the table is wrapped in React Aria's `<Virtualizer>` — column selectors no longer treat every virtualized column as both first and last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624)).
 
 ## Dependencies
 
