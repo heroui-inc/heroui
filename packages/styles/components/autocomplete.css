@@ -130,7 +130,7 @@
 
 /* Similar to popover content styles */
 .autocomplete__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 pt-2 text-sm scrollbar;
+  @apply w-(--trigger-width) max-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-hidden overscroll-contain bg-overlay p-0 pt-2 text-sm;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
@@ -192,7 +192,7 @@
 
   /* Listbox styles */
   [data-slot="list-box"] {
-    @apply p-1.5 outline-none;
+    @apply max-h-[320px] scrollbar overflow-y-auto p-1.5 outline-none;
   }
 
   [data-slot="list-box-item"] {
