@@ -46,9 +46,9 @@
     "@heroui/popover": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-aria/focus": "3.22.0",
-    "@react-aria/menu": "3.22.0",
-    "@react-stately/menu": "3.10.0",
+    "@react-aria/focus": "3.22.1",
+    "@react-aria/menu": "3.22.1",
+    "@react-stately/menu": "3.10.1",
     "@react-types/menu": "3.11.0"
   },
   "devDependencies": {

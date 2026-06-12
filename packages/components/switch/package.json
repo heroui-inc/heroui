@@ -43,11 +43,11 @@
     "@heroui/shared-utils": "workspace:*",
     "@heroui/react-utils": "workspace:*",
     "@heroui/use-safe-layout-effect": "workspace:*",
-    "@react-aria/focus": "3.22.0",
-    "@react-aria/interactions": "3.28.0",
-    "@react-aria/switch": "3.8.0",
-    "@react-aria/visually-hidden": "3.9.0",
-    "@react-stately/toggle": "3.10.0"
+    "@react-aria/focus": "3.22.1",
+    "@react-aria/interactions": "3.28.1",
+    "@react-aria/switch": "3.8.1",
+    "@react-aria/visually-hidden": "3.9.1",
+    "@react-stately/toggle": "3.10.1"
   },
   "devDependencies": {
     "@heroui/theme": "workspace:*",

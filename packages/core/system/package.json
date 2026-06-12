@@ -56,8 +56,8 @@
   "dependencies": {
     "@heroui/react-utils": "workspace:*",
     "@heroui/system-rsc": "workspace:*",
-    "@react-aria/i18n": "3.13.0",
-    "@react-aria/overlays": "3.32.0",
-    "@react-aria/utils": "3.34.0"
+    "@react-aria/i18n": "3.13.1",
+    "@react-aria/overlays": "3.32.1",
+    "@react-aria/utils": "3.34.1"
   }
 }

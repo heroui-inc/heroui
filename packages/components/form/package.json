@@ -43,8 +43,8 @@
     "@heroui/system": "workspace:*",
     "@heroui/theme": "workspace:*",
     "@heroui/shared-utils": "workspace:*",
-    "@react-types/shared": "3.34.0",
-    "@react-stately/form": "3.3.0",
+    "@react-types/shared": "3.35.0",
+    "@react-stately/form": "3.3.1",
     "@react-types/form": "3.8.0"
   },
   "devDependencies": {

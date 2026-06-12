@@ -34,10 +34,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@react-aria/focus": "3.22.0",
-    "@react-aria/interactions": "3.28.0",
-    "@react-aria/overlays": "3.32.0",
-    "@react-types/shared": "3.34.0"
+    "@react-aria/focus": "3.22.1",
+    "@react-aria/interactions": "3.28.1",
+    "@react-aria/overlays": "3.32.1",
+    "@react-types/shared": "3.35.0"
   },
   "peerDependencies": {
     "react": ">=18",
