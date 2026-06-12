@@ -916,6 +916,10 @@ export const demos: Record<string, DemoItem> = {
     component: AutocompleteDemos.AsynchronousFiltering,
     file: "en/autocomplete/asynchronous-filtering.tsx",
   },
+  "autocomplete-virtualization": {
+    component: AutocompleteDemos.Virtualization,
+    file: "en/autocomplete/virtualization.tsx",
+  },
   "autocomplete-disabled": {
     component: AutocompleteDemos.Disabled,
     file: "en/autocomplete/disabled.tsx",
