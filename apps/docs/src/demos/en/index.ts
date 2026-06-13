@@ -860,7 +860,7 @@ export const demos: Record<string, DemoItem> = {
     file: "en/autocomplete/asynchronous-filtering.tsx",
   },
   "autocomplete-virtualization": {
-    component: AutocompleteDemos.Virtualization,
+    loader: () => import("./autocomplete/virtualization").then((m) => m.Virtualization),
     file: "en/autocomplete/virtualization.tsx",
   },
   "autocomplete-disabled": {
