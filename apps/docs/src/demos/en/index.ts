@@ -859,6 +859,10 @@ export const demos: Record<string, DemoItem> = {
       import("./autocomplete/asynchronous-filtering").then((m) => m.AsynchronousFiltering),
     file: "en/autocomplete/asynchronous-filtering.tsx",
   },
+  "autocomplete-virtualization": {
+    component: AutocompleteDemos.Virtualization,
+    file: "en/autocomplete/virtualization.tsx",
+  },
   "autocomplete-disabled": {
     loader: () => import("./autocomplete/disabled").then((m) => m.Disabled),
     file: "en/autocomplete/disabled.tsx",

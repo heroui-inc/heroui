@@ -5,6 +5,7 @@ import {Icon} from "@iconify/react";
 import {useAsyncList} from "@react-stately/data";
 import React, {useState} from "react";
 import {useFilter} from "react-aria-components/Autocomplete";
+import {ListLayout, Virtualizer} from "react-aria-components/Virtualizer";
 import {cn} from "tailwind-variants";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
@@ -1137,6 +1138,137 @@ export const AsynchronousFiltering: Story = {
                 </ListBox.Item>
               )}
             </ListBox>
+          </Autocomplete.Filter>
+        </Autocomplete.Popover>
+      </Autocomplete>
+    );
+  },
+};
+
+interface User {
+  email: string;
+  id: number;
+  name: string;
+}
+
+function generateUsers(n: number): User[] {
+  const firstNames = [
+    "Emma",
+    "Liam",
+    "Olivia",
+    "Noah",
+    "Ava",
+    "James",
+    "Sophia",
+    "Oliver",
+    "Isabella",
+    "Lucas",
+    "Mia",
+    "Ethan",
+    "Charlotte",
+    "Mason",
+    "Amelia",
+    "Logan",
+    "Harper",
+    "Alexander",
+    "Ella",
+    "Benjamin",
+  ];
+  const lastNames = [
+    "Smith",
+    "Johnson",
+    "Williams",
+    "Brown",
+    "Jones",
+    "Garcia",
+    "Miller",
+    "Davis",
+    "Rodriguez",
+    "Martinez",
+    "Anderson",
+    "Taylor",
+    "Thomas",
+    "Jackson",
+    "White",
+    "Harris",
+    "Clark",
+    "Lewis",
+    "Robinson",
+    "Walker",
+  ];
+  const users: User[] = [];
+
+  for (let i = 0; i < n; i++) {
+    const firstName = firstNames[i % firstNames.length]!;
+    const lastName = lastNames[Math.floor(i / firstNames.length) % lastNames.length]!;
+    const name = `${firstName} ${lastName}`;
+
+    users.push({
+      email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@acme.com`,
+      id: i + 1,
+      name,
+    });
+  }
+
+  return users;
+}
+
+export const Virtualization: Story = {
+  render: () => {
+    const [selectedKey, setSelectedKey] = useState<Key | null>(null);
+    const [searchQuery, setSearchQuery] = useState("");
+    const {contains} = useFilter({sensitivity: "base"});
+
+    const allUsers = React.useMemo(() => generateUsers(1000), []);
+
+    const filteredUsers = React.useMemo(() => {
+      if (!searchQuery) return allUsers;
+
+      return allUsers.filter(
+        (user) => contains(user.name, searchQuery) || contains(user.email, searchQuery),
+      );
+    }, [allUsers, contains, searchQuery]);
+
+    return (
+      <Autocomplete
+        allowsEmptyCollection
+        className="w-[300px]"
+        placeholder="Select a user"
+        selectionMode="single"
+        value={selectedKey}
+        onChange={setSelectedKey}
+      >
+        <Label>User</Label>
+        <Autocomplete.Trigger>
+          <Autocomplete.Value />
+          <Autocomplete.ClearButton />
+          <Autocomplete.Indicator />
+        </Autocomplete.Trigger>
+        <Autocomplete.Popover>
+          <Autocomplete.Filter inputValue={searchQuery} onInputChange={setSearchQuery}>
+            <SearchField autoFocus className="sticky top-0 z-10" name="search" variant="secondary">
+              <SearchField.Group>
+                <SearchField.SearchIcon />
+                <SearchField.Input placeholder="Search users..." />
+                <SearchField.ClearButton />
+              </SearchField.Group>
+            </SearchField>
+            <Virtualizer layout={ListLayout} layoutOptions={{rowHeight: 50}}>
+              <ListBox
+                items={filteredUsers}
+                renderEmptyState={() => <EmptyState>No results found</EmptyState>}
+              >
+                {(user) => (
+                  <ListBox.Item id={user.id} textValue={user.name}>
+                    <div className="flex flex-col">
+                      <Label>{user.name}</Label>
+                      <Description>{user.email}</Description>
+                    </div>
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                )}
+              </ListBox>
+            </Virtualizer>
           </Autocomplete.Filter>
         </Autocomplete.Popover>
       </Autocomplete>

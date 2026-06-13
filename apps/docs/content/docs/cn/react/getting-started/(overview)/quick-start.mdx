@@ -11,6 +11,29 @@ icon: rocket
 
 ## 快速安装
 
+<CopyPrompt
+  prompt={`在这个 React 项目中安装并配置 HeroUI。
+
+请使用 HeroUI MCP 服务器（@heroui/react-mcp）作为安装步骤、对等依赖和组件 API 的唯一可信来源。开始前先从 MCP 获取最新的 quick-start / 安装指南，并严格按照其中的版本号、包名和步骤执行——不要凭记忆操作。
+
+在做出任何更改之前：
+
+1. 分析项目。识别包管理器（npm / pnpm / yarn / bun）、所用框架（如 Next.js、Vite、Remix、Astro 等）、是否使用 TypeScript，以及主 CSS 入口文件的位置（如 globals.css、app.css、index.css）。
+2. 确认项目满足前置要求：React 19+ 和 Tailwind CSS v4。如果尚未安装 Tailwind CSS v4，请先按照与所用框架相匹配的官方 Tailwind v4 框架指南完成安装，再继续添加 HeroUI。
+3. 阅读 package.json，仅安装尚缺失的依赖。请严格使用 MCP quick-start 中给出的版本号，避免兼容性问题。
+
+然后执行安装与配置：
+
+- 安装 @heroui/react 和 @heroui/styles，以及任何缺失的必需对等依赖。
+- 在主 Tailwind CSS 入口文件中，紧跟在 \`@import "tailwindcss";\` 之后添加 \`@import "@heroui/styles";\`。导入顺序很重要——必须先导入 tailwindcss。
+- 确认该 CSS 入口文件已被应用加载（例如在 Next.js / Vite / Remix 的根布局或入口文件中被引入）。HeroUI v3 不需要 Provider，因此无需添加任何包裹组件。
+- 在页面上可见的位置渲染一个来自 \`@heroui/react\` 的 \`<Button>\` 作为最小冒烟测试，确认样式已正确生效。
+
+完成后，请总结你做出的变更，并告诉我如何启动开发服务器。`}
+>
+  **想让 AI 助手代劳？** 在你的编辑器中安装 [HeroUI MCP Server](/docs/react/getting-started/mcp-server)，然后把上面的提示词粘贴给 AI 助手——它会分析你的项目并自动完成全部配置。
+</CopyPrompt>
+
 安装 HeroUI 及其所需依赖：
 
 <Tabs items={["npm", "pnpm", "yarn", "bun"]}>
