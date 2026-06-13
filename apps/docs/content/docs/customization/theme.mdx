@@ -86,6 +86,7 @@ module.exports = {
       addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
       defaultTheme: "light", // default theme from the themes object
       defaultExtendTheme: "light", // default theme to extend on custom themes
+      shadowDOM: false, // also scope theme variables to `:host(...)` for ShadowDOM usage
       layout: {}, // common layout tokens (applied to all themes)
       themes: {
         light: {
@@ -171,6 +172,7 @@ with themes in HeroUI:
 | addCommonColors    | `boolean`                     | If true, the common heroui colors (e.g. "blue", "green", "purple") will replace the TailwindCSS default colors. | `false`  |
 | defaultTheme       | `light` \| `dark`             | The default theme to use.                                                                                       | `light`  |
 | defaultExtendTheme | `light` \| `dark`             | The default theme to extend.                                                                                    | `light`  |
+| shadowDOM          | `boolean`                     | If true, theme variables are also scoped to `:host(...)` selectors and the derived `--color-*` vars are re-declared under every theme selector, so theming works when the CSS is adopted into a ShadowRoot. | `false`  |
 | layout             | [LayoutTheme](#layouttheme)   | The layout definitions.                                                                                         | -        |
 | themes             | [ConfigThemes](#configthemes) | The theme definitions.                                                                                          | -        |
 

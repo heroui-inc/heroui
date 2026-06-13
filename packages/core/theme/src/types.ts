@@ -139,4 +139,12 @@ export type HeroUIPluginConfig = {
    * @default "light"
    */
   defaultExtendTheme?: DefaultThemeType;
+  /**
+   * Also scope theme variables to `:host(...)` selectors and re-declare the
+   * derived `--color-*` vars under every theme selector, so themes react when
+   * the generated CSS is adopted into a ShadowRoot (e.g. browser extensions,
+   * web components). Off by default — adds extra selectors to the output.
+   * @default false
+   */
+  shadowDOM?: boolean;
 };

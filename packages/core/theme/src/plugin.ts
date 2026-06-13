@@ -140,11 +140,25 @@ const corePlugin = (
   defaultTheme: DefaultThemeType,
   prefix: string,
   addCommonColors: boolean,
+  shadowDOM: boolean,
 ) => {
   const resolved = resolveConfig(themes, defaultTheme, prefix);
 
   const createStripeGradient = (stripeColor: string, backgroundColor: string) =>
     `linear-gradient(45deg,  hsl(var(--${prefix}-${stripeColor})) 25%,  hsl(var(--${prefix}-${backgroundColor})) 25%,  hsl(var(--${prefix}-${backgroundColor})) 50%,  hsl(var(--${prefix}-${stripeColor})) 50%,  hsl(var(--${prefix}-${stripeColor})) 75%,  hsl(var(--${prefix}-${backgroundColor})) 75%,  hsl(var(--${prefix}-${backgroundColor})))`;
+
+  /**
+   * Re-declare the Tailwind derived `--color-*` vars as `hsl(var(--{prefix}-*))`
+   * so they re-resolve in whatever scope they are emitted into. This is what
+   * lets a `.dark` toggle on an inner element inside a ShadowRoot actually
+   * change the colors components read (see `issues/shadow.md`).
+   */
+  const deriveColorVars = () =>
+    Object.keys(resolved?.colors ?? {}).reduce<Record<string, string>>((acc, colorName) => {
+      acc[`--color-${colorName}`] = `hsl(var(--${prefix}-${colorName}))`;
+
+      return acc;
+    }, {});
 
   return plugin(
     ({addBase, addUtilities, addVariant}) => {
@@ -160,10 +174,55 @@ const corePlugin = (
 
       // add the css variables to "@layer utilities"
       addUtilities({...resolved?.utilities, ...utilities});
-      // add the theme as variant e.g. "[theme-name]:text-2xl"
+      // add the theme as variant e.g. "[theme-name]:text-2xl". When shadowDOM is
+      // enabled, also match when the host element carries the theme class so
+      // `dark:`-style utilities work inside a ShadowRoot.
       resolved?.variants.forEach((variant) => {
-        addVariant(variant.name, variant.definition);
+        addVariant(
+          variant.name,
+          shadowDOM
+            ? [
+                ...variant.definition,
+                `:host(.${variant.name}) &`,
+                `:host([data-theme='${variant.name}']) &`,
+              ]
+            : variant.definition,
+        );
       });
+
+      // ShadowDOM support (opt-in): additionally scope every theme to `:host(...)`
+      // selectors and re-declare the derived `--color-*` vars under all theme
+      // selectors, so theming works when the CSS is adopted into a ShadowRoot.
+      if (shadowDOM) {
+        const colorVars = deriveColorVars();
+
+        // mirror the base color/background onto the shadow host
+        addBase({[":host"]: {...baseStyles(prefix)}});
+
+        // default (light) theme: mirror base color-scheme/vars onto :host
+        Object.entries(resolved?.baseStyles ?? {}).forEach(([baseSelector, styles]) => {
+          // baseSelector looks like ":root, [data-theme=light]"
+          const themeName = baseSelector.match(/\[data-theme=(.+?)\]/)?.[1];
+          const hostSelector = themeName ? `:host, :host([data-theme=${themeName}])` : ":host";
+
+          addBase({[hostSelector]: {...styles, ...colorVars}});
+        });
+
+        // every theme (`.light`, `.dark`, custom): re-emit `--heroui-*` source
+        // vars + derived `--color-*` vars under the full selector set so the
+        // class can live on the host OR on an inner wrapper inside the shadow.
+        Object.entries(resolved?.utilities ?? {}).forEach(([cssSelector, styles]) => {
+          const themeName = cssSelector.replace(/^\./, "");
+          const combinedSelector = [
+            `.${themeName}`,
+            `[data-theme='${themeName}']`,
+            `:host(.${themeName})`,
+            `:host([data-theme='${themeName}'])`,
+          ].join(", ");
+
+          addUtilities({[combinedSelector]: {...styles, ...colorVars}});
+        });
+      }
     },
     // extend the colors config
     {
@@ -241,6 +300,7 @@ export const heroui = (config: HeroUIPluginConfig = {}): ReturnType<typeof plugi
     defaultExtendTheme = "light",
     prefix: defaultPrefix = DEFAULT_PREFIX,
     addCommonColors = false,
+    shadowDOM = false,
   } = config;
 
   const userLightColors = themeObject?.light?.colors || {};
@@ -295,5 +355,5 @@ export const heroui = (config: HeroUIPluginConfig = {}): ReturnType<typeof plugi
     ...otherThemes,
   };
 
-  return corePlugin(themes, defaultTheme, defaultPrefix, addCommonColors);
+  return corePlugin(themes, defaultTheme, defaultPrefix, addCommonColors, shadowDOM);
 };
