@@ -8,7 +8,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import {Suspense} from "react";
 
 import {CollapsibleCode} from "./components/collapsible-code";
-import {ComponentPreview} from "./components/component-preview";
+import {ComponentPreview, ComponentPreviewFallback} from "./components/component-preview";
 import {ComponentsCategory} from "./components/components-category";
 import {CopyPrompt} from "./components/copy-prompt";
 import {DocsImage} from "./components/docs-image";
@@ -100,6 +100,14 @@ function RelatedComponents(props: any) {
   );
 }
 
+function ComponentPreviewWithSuspense(props: React.ComponentProps<typeof ComponentPreview>) {
+  return (
+    <Suspense fallback={<ComponentPreviewFallback />}>
+      <ComponentPreview {...props} />
+    </Suspense>
+  );
+}
+
 function Callout({className, ...props}: React.ComponentProps<typeof FDCallout>) {
   return (
     <FDCallout
@@ -123,7 +131,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentCard,
     ComponentCount,
     ComponentGrid,
-    ComponentPreview,
+    ComponentPreview: ComponentPreviewWithSuspense,
     ComponentsCategory,
     CopyPrompt,
     DocsImage,

@@ -16,6 +16,7 @@ const config: NextConfig = {
     optimizePackageImports: [
       "@heroui/react",
       "@gravity-ui/icons",
+      "@iconify/react",
       "lucide-react",
       "motion",
       "fumadocs-ui",

@@ -1207,7 +1207,7 @@ export const demos: Record<string, DemoItem> = {
     file: "en/date-picker/disabled.tsx",
   },
   "date-picker-format-options": {
-    loader: () => import("./date-picker/format-options").then((m) => m.FormatOptions),
+    loader: () => import("./date-picker/format-options-no-ssr").then((m) => m.FormatOptions),
     file: "en/date-picker/format-options.tsx",
   },
   "date-picker-form-example": {
@@ -1246,7 +1246,7 @@ export const demos: Record<string, DemoItem> = {
     file: "en/date-range-picker/disabled.tsx",
   },
   "date-range-picker-format-options": {
-    loader: () => import("./date-range-picker/format-options").then((m) => m.FormatOptions),
+    loader: () => import("./date-range-picker/format-options-no-ssr").then((m) => m.FormatOptions),
     file: "en/date-range-picker/format-options.tsx",
   },
   "date-range-picker-form-example": {
