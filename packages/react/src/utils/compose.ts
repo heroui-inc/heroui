@@ -10,6 +10,10 @@ function composeTwRenderProps<T>(
   className: string | ((v: T) => string) | undefined,
   tailwind?: string | ((v: T) => string | undefined),
 ): string | ((v: T) => string) {
+  if (typeof className !== "function" && typeof tailwind !== "function") {
+    return cx(tailwind ?? "", className ?? "") ?? "";
+  }
+
   return composeRenderProps(className, (className, renderProps): string => {
     const tw = typeof tailwind === "function" ? (tailwind(renderProps) ?? "") : (tailwind ?? "");
     const cls = className ?? "";
