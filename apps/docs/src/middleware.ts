@@ -79,7 +79,7 @@ function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): 
   return response;
 }
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const {pathname} = request.nextUrl;
 
   // Markdown handler runs first so agent requests are served regardless of locale.
