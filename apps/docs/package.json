@@ -18,7 +18,13 @@
     "test:skills": "node test_skills_scripts.mjs",
     "test:skills:dev": "node test_skills_scripts.mjs --env dev",
     "test:skills:staging": "node test_skills_scripts.mjs --env staging",
-    "test:skills:prod": "node test_skills_scripts.mjs --env production"
+    "test:skills:prod": "node test_skills_scripts.mjs --env production",
+    "clean": "rm -rf .next node_modules .turbo dist",
+    "build:cf": "opennextjs-cloudflare build",
+    "deploy:cf": "opennextjs-cloudflare deploy",
+    "upload:cf": "opennextjs-cloudflare upload",
+    "preview:cf": "opennextjs-cloudflare preview",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
   },
   "dependencies": {
     "@fumadocs/language": "0.0.1",
@@ -66,7 +72,8 @@
     "tailwind-variants": "3.2.2",
     "ts-morph": "27.0.2",
     "usehooks-ts": "3.1.1",
-    "zod": "4.2.1"
+    "zod": "4.2.1",
+    "@opennextjs/cloudflare": "1.19.11"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
@@ -81,6 +88,7 @@
     "postcss": "8.5.6",
     "source-map-support": "0.5.21",
     "tailwindcss": "4.3.0",
-    "tar": "7.5.7"
+    "tar": "7.5.7",
+    "wrangler": "4.100.0"
   }
 }
