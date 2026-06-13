@@ -13,7 +13,16 @@ const withMDX = createMDX();
 const config: NextConfig = {
   compress: true,
   experimental: {
-    optimizePackageImports: ["@heroui/react"],
+    optimizePackageImports: [
+      "@heroui/react",
+      "@gravity-ui/icons",
+      "@iconify/react",
+      "lucide-react",
+      "motion",
+      "fumadocs-ui",
+      "fumadocs-core",
+      "react-aria-components",
+    ],
   },
   async headers() {
     return [

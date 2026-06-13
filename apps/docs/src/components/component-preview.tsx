@@ -22,7 +22,16 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   locale?: string;
 }
 
-export function ComponentPreview({
+export function ComponentPreviewFallback() {
+  return (
+    <div
+      aria-hidden="true"
+      className="component-preview-container my-4 h-[200px] animate-pulse rounded-lg border bg-muted/30"
+    />
+  );
+}
+
+export async function ComponentPreview({
   align = "center",
   className,
   description,
@@ -46,7 +55,7 @@ export function ComponentPreview({
     );
   }
 
-  const Component = demo.component;
+  const Component = await demo.loader();
 
   return (
     <ComponentPreviewContainer

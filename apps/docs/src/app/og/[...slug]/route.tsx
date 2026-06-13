@@ -112,11 +112,5 @@ export const GET = async (_req: Request, {params}: {params: Promise<{slug: strin
   });
 };
 
-export const generateStaticParams = (): {slug: string[]}[] => {
-  return source.generateParams().map((page) => ({
-    ...page,
-    slug: [...page.slug, "image.png"],
-  }));
-};
-
+export const dynamic = "force-static";
 export const revalidate = false;

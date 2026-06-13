@@ -6,10 +6,11 @@ import {join} from "node:path";
 
 import {createRelativeLink} from "fumadocs-ui/mdx";
 import {notFound} from "next/navigation";
+import {Suspense, cache} from "react";
 
 import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
-import {ComponentPreview} from "@/components/component-preview";
+import {ComponentPreview, ComponentPreviewFallback} from "@/components/component-preview";
 import {ComponentsCategory} from "@/components/components-category";
 import {
   DocsBody,
@@ -36,7 +37,7 @@ import {
 
 const componentStatusIcons = ["preview", "new", "updated"];
 
-async function getRawMDXContent(pagePath: string): Promise<string> {
+const getRawMDXContent = cache(async (pagePath: string): Promise<string> => {
   try {
     // `page.path` already includes the locale prefix when using
     // `parser: "dir"`, so we must not prepend the locale again.
@@ -46,7 +47,7 @@ async function getRawMDXContent(pagePath: string): Promise<string> {
   } catch {
     return "";
   }
-}
+});
 
 export default async function Page(props: {params: Promise<{lang: string; slug?: string[]}>}) {
   const params = await props.params;
@@ -138,7 +139,11 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
           <MDXContent
             components={getMDXComponents({
               ComponentCount: () => <>{getComponentCount(params.lang)}</>,
-              ComponentPreview: (props) => <ComponentPreview {...props} locale={params.lang} />,
+              ComponentPreview: (props) => (
+                <Suspense fallback={<ComponentPreviewFallback />}>
+                  <ComponentPreview {...props} locale={params.lang} />
+                </Suspense>
+              ),
               ComponentsCategory: (props) => <ComponentsCategory {...props} locale={params.lang} />,
               ExampleCount: () => <>{getExampleCount(params.lang)}</>,
               NativeComponentsCategory: (props) => (
