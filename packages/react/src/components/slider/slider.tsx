@@ -80,7 +80,9 @@ const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
       {...props}
     >
       {children
-        ? (values) => <>{typeof children === "function" ? children(values) : children}</>
+        ? typeof children === "function"
+          ? (values) => children(values)
+          : children
         : ({state}) => state.values.map((_, i) => state.getThumbValueLabel(i)).join(" – ")}
     </SliderOutputPrimitive>
   );
@@ -121,7 +123,7 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
           })}
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </SliderTrackPrimitive>
   );
 };
@@ -187,7 +189,7 @@ const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
       data-slot="slider-thumb"
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </SliderThumbPrimitive>
   );
 };

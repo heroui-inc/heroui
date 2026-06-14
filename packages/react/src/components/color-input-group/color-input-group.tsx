@@ -47,7 +47,7 @@ const ColorInputGroupRoot = ({
         data-slot="color-input-group"
         {...props}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </GroupPrimitive>
     </ColorInputGroupContext>
   );

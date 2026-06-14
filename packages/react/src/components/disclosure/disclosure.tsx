@@ -46,7 +46,7 @@ const DisclosureRoot = ({children, className, ...props}: DisclosureRootProps) =>
         {...props}
         className={composeTwRenderProps(className, slots.base())}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </DisclosurePrimitive>
     </DisclosureContext>
   );
@@ -76,7 +76,7 @@ const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
  * -----------------------------------------------------------------------------------------------*/
 interface DisclosureTriggerProps extends ButtonProps {}
 
-const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
+const DisclosureTrigger = ({children, className, ...props}: DisclosureTriggerProps) => {
   const {slots} = useContext(DisclosureContext);
 
   return (
@@ -86,9 +86,7 @@ const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
       slot="trigger"
       {...props}
     >
-      {(values) => (
-        <>{typeof props.children === "function" ? props.children(values) : props.children}</>
-      )}
+      {typeof children === "function" ? (values) => children(values) : children}
     </Button>
   );
 };

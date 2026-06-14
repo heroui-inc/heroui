@@ -27,7 +27,7 @@ const FieldErrorRoot = memo(function FieldErrorRoot({
       data-slot="field-error"
       {...rest}
     >
-      {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
+      {typeof children === "function" ? (renderProps) => children(renderProps) : children}
     </FieldErrorPrimitive>
   );
 });

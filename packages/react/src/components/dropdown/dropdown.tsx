@@ -60,7 +60,7 @@ const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) 
       data-slot="dropdown-trigger"
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </Button>
   );
 };

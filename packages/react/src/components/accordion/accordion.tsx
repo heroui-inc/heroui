@@ -50,7 +50,7 @@ const AccordionRoot = ({
       data-slot="accordion"
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </DisclosureGroup>
   );
 
@@ -155,7 +155,7 @@ const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
  * -----------------------------------------------------------------------------------------------*/
 interface AccordionTriggerProps extends ComponentPropsWithRef<typeof Button> {}
 
-const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
+const AccordionTrigger = ({children, className, ...props}: AccordionTriggerProps) => {
   const {slots} = useContext(AccordionContext);
 
   return (
@@ -165,9 +165,7 @@ const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
       slot="trigger"
       {...props}
     >
-      {(values) => (
-        <>{typeof props.children === "function" ? props.children(values) : props.children}</>
-      )}
+      {typeof children === "function" ? (values) => children(values) : children}
     </Button>
   );
 };

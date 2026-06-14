@@ -65,7 +65,7 @@ const InputGroupRoot = ({
         data-slot="input-group"
         onClick={handleClick}
       >
-        {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
+        {typeof children === "function" ? (renderProps) => children(renderProps) : children}
       </GroupPrimitive>
     </InputGroupContext>
   );

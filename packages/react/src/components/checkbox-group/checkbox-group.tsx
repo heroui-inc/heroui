@@ -33,7 +33,7 @@ const CheckboxGroup = ({children, className, variant, ...props}: CheckboxGroupPr
         data-slot="checkbox-group"
         {...props}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </CheckboxGroupPrimitive>
     </CheckboxGroupContext.Provider>
   );

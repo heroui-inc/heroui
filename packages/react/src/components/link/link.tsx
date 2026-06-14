@@ -33,7 +33,7 @@ const LinkRoot = ({children, className, ...props}: LinkRootProps) => {
   return (
     <LinkContext value={{slots}}>
       <LinkPrimitive {...props} className={composeTwRenderProps(className, slots?.base())}>
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </LinkPrimitive>
     </LinkContext>
   );

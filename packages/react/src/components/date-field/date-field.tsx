@@ -32,7 +32,7 @@ function DateFieldRoot<T extends DateValue>({
       {...props}
       className={composeTwRenderProps(className, styles)}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </DateFieldPrimitive>
   );
 }

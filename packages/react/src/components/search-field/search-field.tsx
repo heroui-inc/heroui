@@ -49,7 +49,7 @@ const SearchFieldRoot = ({
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </SearchFieldPrimitive>
     </SearchFieldContext>
   );
@@ -69,7 +69,7 @@ const SearchFieldGroup = ({children, className, ...props}: SearchFieldGroupProps
       data-slot="search-field-group"
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </GroupPrimitive>
   );
 };

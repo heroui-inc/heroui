@@ -76,7 +76,7 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
         className={composeTwRenderProps(className, slots?.base())}
         isDisabled={isDisabled}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </SelectPrimitive>
     </AutocompleteContext>
   );
@@ -127,7 +127,7 @@ const AutocompleteTrigger = React.forwardRef<HTMLDivElement, AutocompleteTrigger
         onClick={handleClick}
         {...props}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </GroupPrimitive>
     );
   },

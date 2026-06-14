@@ -6,7 +6,7 @@ import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {selectVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -37,13 +37,13 @@ interface SelectRootProps<T extends object, M extends "single" | "multiple" = "s
   items?: Iterable<T, M>;
 }
 
-const SelectRoot = <T extends object = object, M extends "single" | "multiple" = "single">({
+function SelectRootInner<T extends object = object, M extends "single" | "multiple" = "single">({
   children,
   className,
   fullWidth,
   variant,
   ...props
-}: SelectRootProps<T, M>) => {
+}: SelectRootProps<T, M>) {
   const slots = React.useMemo(() => selectVariants({fullWidth, variant}), [fullWidth, variant]);
   const contextValue = React.useMemo(() => ({slots}), [slots]);
 
@@ -54,11 +54,20 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </SelectPrimitive>
     </SelectContext>
   );
-};
+}
+
+SelectRootInner.displayName = "HeroUI.Select";
+
+const SelectRoot = memo(SelectRootInner) as <
+  T extends object = object,
+  M extends "single" | "multiple" = "single",
+>(
+  props: SelectRootProps<T, M>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Select Trigger
@@ -74,7 +83,7 @@ const SelectTrigger = ({children, className, ...props}: SelectTriggerProps) => {
       data-slot="select-trigger"
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </ButtonPrimitive>
   );
 };

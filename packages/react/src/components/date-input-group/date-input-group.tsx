@@ -56,7 +56,7 @@ const DateInputGroupRoot = ({
         data-slot="date-input-group"
         {...props}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </GroupPrimitive>
     </DateInputGroupContext>
   );

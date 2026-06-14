@@ -48,7 +48,7 @@ const NumberFieldRoot = ({
         {...props}
         className={composeTwRenderProps(className, slots?.base())}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </NumberFieldPrimitive>
     </NumberFieldContext>
   );
@@ -68,7 +68,7 @@ const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps
       data-slot="number-field-group"
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </GroupPrimitive>
   );
 };

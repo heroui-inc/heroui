@@ -4,7 +4,7 @@ import type {TextFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {textFieldVariants} from "@heroui/styles";
-import React, {createContext} from "react";
+import React, {createContext, memo} from "react";
 import {TextField as TextFieldPrimitive} from "react-aria-components/TextField";
 
 import {composeTwRenderProps} from "../../utils/compose";
@@ -30,7 +30,13 @@ interface TextFieldRootProps
   variant?: "primary" | "secondary";
 }
 
-const TextFieldRoot = ({children, className, fullWidth, variant, ...props}: TextFieldRootProps) => {
+const TextFieldRoot = memo(function TextFieldRoot({
+  children,
+  className,
+  fullWidth,
+  variant,
+  ...props
+}: TextFieldRootProps) {
   const styles = React.useMemo(() => textFieldVariants({fullWidth}), [fullWidth]);
   const contextValue = React.useMemo(() => ({variant}), [variant]);
 
@@ -45,7 +51,9 @@ const TextFieldRoot = ({children, className, fullWidth, variant, ...props}: Text
       </TextFieldPrimitive>
     </TextFieldContext>
   );
-};
+});
+
+TextFieldRoot.displayName = "HeroUI.TextField";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

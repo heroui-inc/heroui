@@ -43,7 +43,7 @@ const ToggleButtonRoot = ({
       style={style}
       {...rest}
     >
-      {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
+      {typeof children === "function" ? (renderProps) => children(renderProps) : children}
     </ToggleButtonPrimitive>
   );
 };

@@ -63,7 +63,7 @@ const ButtonRoot = memo(function ButtonRoot({
       style={style}
       {...rest}
     >
-      {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
+      {typeof children === "function" ? (renderProps) => children(renderProps) : children}
     </ButtonPrimitive>
   );
 });

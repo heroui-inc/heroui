@@ -34,7 +34,7 @@ const DisclosureGroupRoot = ({children, className, ...props}: DisclosureGroupRoo
         {...props}
         className={composeTwRenderProps(className, slots.base())}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </DisclosureGroupPrimitive>
     </DisclosureGroupContext>
   );

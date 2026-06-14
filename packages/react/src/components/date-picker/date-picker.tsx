@@ -88,7 +88,7 @@ const DatePickerRoot = <T extends DateValue>({
         className={composeTwRenderProps(className, slots?.base())}
         onOpenChange={handleOpenChange}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </DatePickerPrimitive>
     </DatePickerContext>
   );
@@ -120,7 +120,7 @@ const DatePickerTrigger = React.forwardRef<HTMLButtonElement, DatePickerTriggerP
         data-slot="date-picker-trigger"
         {...props}
       >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        {typeof children === "function" ? (values) => children(values) : children}
       </ButtonPrimitive>
     );
   },

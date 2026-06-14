@@ -24,7 +24,7 @@ const RadioGroupRoot = ({children, className, variant, ...props}: RadioGroupRoot
       {...props}
       className={composeTwRenderProps(className, styles)}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </RadioGroupPrimitive>
   );
 };

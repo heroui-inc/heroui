@@ -67,7 +67,7 @@ const ColorPickerTrigger = ({children, className, ...props}: ColorPickerTriggerP
       data-slot="color-picker-trigger"
       {...props}
     >
-      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+      {typeof children === "function" ? (values) => children(values) : children}
     </ButtonPrimitive>
   );
 };
