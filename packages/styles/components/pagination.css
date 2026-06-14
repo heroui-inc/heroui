@@ -74,11 +74,12 @@
     transform: scale(0.97);
   }
 
-  /* Active page - tertiary button style */
+  /* Active page - solid accent fill so the current page reads clearly on any surface */
   &[data-active="true"] {
-    --pagination-link-bg: var(--default);
-    --pagination-link-bg-hover: var(--default-hover);
-    --pagination-link-bg-pressed: var(--default-hover);
+    --pagination-link-bg: var(--accent);
+    --pagination-link-bg-hover: var(--accent-hover);
+    --pagination-link-bg-pressed: var(--accent-hover);
+    --pagination-link-fg: var(--accent-foreground);
   }
 }
 
