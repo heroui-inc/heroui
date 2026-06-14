@@ -4,6 +4,7 @@ import type {LabelVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {labelVariants} from "@heroui/styles";
+import {memo, useMemo} from "react";
 import {Label as LabelPrimitive} from "react-aria-components/Label";
 
 /* -------------------------------------------------------------------------------------------------
@@ -11,24 +12,27 @@ import {Label as LabelPrimitive} from "react-aria-components/Label";
  * -----------------------------------------------------------------------------------------------*/
 interface LabelRootProps extends ComponentPropsWithRef<typeof LabelPrimitive>, LabelVariants {}
 
-const LabelRoot = ({
+const LabelRoot = memo(function LabelRoot({
   children,
   className,
   isDisabled,
   isInvalid,
   isRequired,
   ...rest
-}: LabelRootProps) => {
+}: LabelRootProps) {
+  const styles = useMemo(
+    () => labelVariants({isRequired, isDisabled, isInvalid, className}),
+    [isRequired, isDisabled, isInvalid, className],
+  );
+
   return (
-    <LabelPrimitive
-      className={labelVariants({isRequired, isDisabled, isInvalid, className})}
-      data-slot="label"
-      {...rest}
-    >
+    <LabelPrimitive className={styles} data-slot="label" {...rest}>
       {children}
     </LabelPrimitive>
   );
-};
+});
+
+LabelRoot.displayName = "HeroUI.Label";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
