@@ -5,6 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {TextProps} from "react-aria-components/Text";
 
 import {descriptionVariants} from "@heroui/styles";
+import {memo} from "react";
 import {Text} from "react-aria-components/Text";
 
 /* -------------------------------------------------------------------------------------------------
@@ -13,7 +14,11 @@ import {Text} from "react-aria-components/Text";
 interface DescriptionRootProps
   extends ComponentPropsWithRef<typeof Text>, TextProps, DescriptionVariants {}
 
-const DescriptionRoot = ({children, className, ...rest}: DescriptionRootProps) => {
+const DescriptionRoot = memo(function DescriptionRoot({
+  children,
+  className,
+  ...rest
+}: DescriptionRootProps) {
   return (
     <Text
       className={descriptionVariants({className})}
@@ -24,7 +29,9 @@ const DescriptionRoot = ({children, className, ...rest}: DescriptionRootProps) =
       {children}
     </Text>
   );
-};
+});
+
+DescriptionRoot.displayName = "HeroUI.Description";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

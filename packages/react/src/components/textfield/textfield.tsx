@@ -35,17 +35,15 @@ const TextFieldRoot = ({children, className, fullWidth, variant, ...props}: Text
   const contextValue = React.useMemo(() => ({variant}), [variant]);
 
   return (
-    <TextFieldPrimitive
-      data-slot="textfield"
-      {...props}
-      className={composeTwRenderProps(className, styles)}
-    >
-      {(values) => (
-        <TextFieldContext value={contextValue}>
-          <>{typeof children === "function" ? children(values) : children}</>
-        </TextFieldContext>
-      )}
-    </TextFieldPrimitive>
+    <TextFieldContext value={contextValue}>
+      <TextFieldPrimitive
+        data-slot="textfield"
+        {...props}
+        className={composeTwRenderProps(className, styles)}
+      >
+        {typeof children === "function" ? (values) => children(values) : children}
+      </TextFieldPrimitive>
+    </TextFieldContext>
   );
 };
 

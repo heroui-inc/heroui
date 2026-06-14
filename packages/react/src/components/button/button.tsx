@@ -4,7 +4,7 @@ import type {ButtonVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {buttonVariants} from "@heroui/styles";
-import {useContext} from "react";
+import {memo, useContext, useMemo} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {composeTwRenderProps} from "../../utils";
@@ -17,7 +17,7 @@ interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>,
   [BUTTON_GROUP_CHILD]?: boolean;
 }
 
-const ButtonRoot = ({
+const ButtonRoot = memo(function ButtonRoot({
   children,
   className,
   fullWidth,
@@ -29,7 +29,7 @@ const ButtonRoot = ({
   variant,
   [BUTTON_GROUP_CHILD]: isButtonGroupChild,
   ...rest
-}: ButtonRootProps) => {
+}: ButtonRootProps) {
   const buttonGroupContext = useContext(ButtonGroupContext);
 
   // Only use context if this button is a direct child of ButtonGroup
@@ -43,12 +43,16 @@ const ButtonRoot = ({
   const finalFullWidth =
     fullWidth ?? (shouldUseContext ? buttonGroupContext?.fullWidth : undefined);
 
-  const styles = buttonVariants({
-    fullWidth: finalFullWidth,
-    isIconOnly,
-    size: finalSize,
-    variant: finalVariant,
-  });
+  const styles = useMemo(
+    () =>
+      buttonVariants({
+        fullWidth: finalFullWidth,
+        isIconOnly,
+        size: finalSize,
+        variant: finalVariant,
+      }),
+    [finalFullWidth, isIconOnly, finalSize, finalVariant],
+  );
 
   return (
     <ButtonPrimitive
@@ -62,7 +66,9 @@ const ButtonRoot = ({
       {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
     </ButtonPrimitive>
   );
-};
+});
+
+ButtonRoot.displayName = "HeroUI.Button";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
