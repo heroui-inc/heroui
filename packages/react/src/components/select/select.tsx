@@ -2,7 +2,6 @@
 
 import type {Booleanish} from "../../utils/assertion";
 import type {DOMRenderProps} from "../../utils/dom";
-import type {SurfaceVariants} from "../surface";
 import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
@@ -19,7 +18,7 @@ import {
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
-import {SurfaceContext} from "../surface";
+import {SurfaceContext, defaultSurfaceContextValue} from "../surface";
 
 /* -------------------------------------------------------------------------------------------------
  * Select Context
@@ -46,9 +45,10 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
   ...props
 }: SelectRootProps<T, M>) => {
   const slots = React.useMemo(() => selectVariants({fullWidth, variant}), [fullWidth, variant]);
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <SelectContext value={{slots}}>
+    <SelectContext value={contextValue}>
       <SelectPrimitive
         data-slot="select"
         {...props}
@@ -162,11 +162,7 @@ const SelectPopover = ({
   const {slots} = useContext(SelectContext);
 
   return (
-    <SurfaceContext
-      value={{
-        variant: "default" as SurfaceVariants["variant"],
-      }}
-    >
+    <SurfaceContext value={defaultSurfaceContextValue}>
       <PopoverPrimitive
         {...props}
         className={composeTwRenderProps(className, slots?.popover())}

@@ -43,6 +43,7 @@ const InputGroupRoot = ({
     () => inputGroupVariants({fullWidth, variant: resolvedVariant}),
     [fullWidth, resolvedVariant],
   );
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
@@ -56,7 +57,7 @@ const InputGroupRoot = ({
   };
 
   return (
-    <InputGroupContext value={{slots}}>
+    <InputGroupContext value={contextValue}>
       <GroupPrimitive
         {...props}
         ref={groupRef}

@@ -1,5 +1,6 @@
 "use client";
 
+import type {SurfaceContextValue} from "./surface.constants";
 import type {DOMRenderProps} from "../../utils/dom";
 import type {SurfaceVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
@@ -12,11 +13,7 @@ import {dom} from "../../utils/dom";
 /* ------------------------------------------------------------------------------------------------
  * Surface Context
  * --------------------------------------------------------------------------------------------- */
-type SurfaceContext = {
-  variant?: SurfaceVariants["variant"];
-};
-
-const SurfaceContext = createContext<SurfaceContext>({});
+const SurfaceContext = createContext<SurfaceContextValue>({});
 
 /* ------------------------------------------------------------------------------------------------
  * Surface Root
@@ -36,8 +33,10 @@ const SurfaceRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
   variant = "default",
   ...rest
 }: SurfaceRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SurfaceRootProps<E>>) => {
+  const contextValue = React.useMemo(() => ({variant}), [variant]);
+
   return (
-    <SurfaceContext value={{variant}}>
+    <SurfaceContext value={contextValue}>
       <dom.div
         className={surfaceVariants({variant, className})}
         data-slot="surface"

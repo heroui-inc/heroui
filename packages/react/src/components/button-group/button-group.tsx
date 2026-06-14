@@ -59,6 +59,10 @@ const ButtonGroupRoot = ({
     () => buttonGroupVariants({fullWidth, orientation}),
     [fullWidth, orientation],
   );
+  const contextValue = React.useMemo(
+    () => ({slots, size, variant, isDisabled, fullWidth}),
+    [slots, size, variant, isDisabled, fullWidth],
+  );
 
   // Wrap only direct children with context provider
   const wrappedChildren = Children.map(children as React.ReactNode, (child) => {
@@ -73,7 +77,7 @@ const ButtonGroupRoot = ({
   });
 
   return (
-    <ButtonGroupContext value={{slots, size, variant, isDisabled, fullWidth}}>
+    <ButtonGroupContext value={contextValue}>
       <Group
         className={composeTwRenderProps(className, slots.base())}
         data-slot="button-group"

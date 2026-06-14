@@ -2,7 +2,6 @@
 
 import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-overlay-state";
 import type {DOMRenderProps} from "../../utils/dom";
-import type {SurfaceVariants} from "../surface";
 import type {ModalVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {Button as ButtonPrimitive} from "react-aria-components/Button";
@@ -25,7 +24,7 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
-import {SurfaceContext} from "../surface";
+import {SurfaceContext, defaultSurfaceContextValue} from "../surface";
 
 type ModalPlacement = "auto" | "top" | "center" | "bottom";
 
@@ -200,7 +199,7 @@ const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
   const {placement, slots} = useContext(ModalContext);
 
   return (
-    <SurfaceContext value={{variant: "default" as SurfaceVariants["variant"]}}>
+    <SurfaceContext value={defaultSurfaceContextValue}>
       <DialogPrimitive
         className={composeSlotClassName(slots?.dialog, className)}
         data-placement={placement}

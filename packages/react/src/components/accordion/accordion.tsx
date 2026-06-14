@@ -20,7 +20,7 @@ import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {IconChevronDown} from "../icons";
-import {SurfaceContext} from "../surface";
+import {SurfaceContext, defaultSurfaceContextValue} from "../surface";
 
 const AccordionContext = createContext<{
   slots?: ReturnType<typeof accordionVariants>;
@@ -58,7 +58,7 @@ const AccordionRoot = ({
     <AccordionContext value={{slots, hideSeparator}}>
       {variant === "surface" ? (
         // Allows inner components to apply "on-surface" colors for proper contrast
-        <SurfaceContext value={{variant: "default"}}>{content}</SurfaceContext>
+        <SurfaceContext value={defaultSurfaceContextValue}>{content}</SurfaceContext>
       ) : (
         content
       )}

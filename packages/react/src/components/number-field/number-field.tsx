@@ -39,9 +39,10 @@ const NumberFieldRoot = ({
     () => numberFieldVariants({fullWidth, variant}),
     [fullWidth, variant],
   );
+  const contextValue = React.useMemo(() => ({slots}), [slots]);
 
   return (
-    <NumberFieldContext value={{slots}}>
+    <NumberFieldContext value={contextValue}>
       <NumberFieldPrimitive
         data-slot="number-field"
         {...props}

@@ -24,9 +24,10 @@ interface CheckboxGroupProps
 
 const CheckboxGroup = ({children, className, variant, ...props}: CheckboxGroupProps) => {
   const styles = React.useMemo(() => checkboxGroupVariants({variant}), [variant]);
+  const contextValue = React.useMemo(() => ({variant}), [variant]);
 
   return (
-    <CheckboxGroupContext.Provider value={{variant}}>
+    <CheckboxGroupContext.Provider value={contextValue}>
       <CheckboxGroupPrimitive
         className={composeTwRenderProps(className, styles)}
         data-slot="checkbox-group"

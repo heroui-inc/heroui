@@ -25,6 +25,8 @@ export type {SurfaceRootProps, SurfaceRootProps as SurfaceProps} from "./surface
  * Context
  * -----------------------------------------------------------------------------------------------*/
 export {SurfaceContext} from "./surface";
+export {defaultSurfaceContextValue} from "./surface.constants";
+export type {SurfaceContextValue} from "./surface.constants";
 
 /* -------------------------------------------------------------------------------------------------
  * Variants

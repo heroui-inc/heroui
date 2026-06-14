@@ -2,7 +2,6 @@
 
 import type {UseOverlayStateProps, UseOverlayStateReturn} from "../../hooks/use-overlay-state";
 import type {DOMRenderProps} from "../../utils/dom";
-import type {SurfaceVariants} from "../surface";
 import type {DrawerVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components/Button";
@@ -26,7 +25,7 @@ import {
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
-import {SurfaceContext} from "../surface";
+import {SurfaceContext, defaultSurfaceContextValue} from "../surface";
 
 type DrawerPlacement = "top" | "bottom" | "left" | "right";
 
@@ -361,7 +360,7 @@ const DrawerDialog = ({children, className, ...props}: DrawerDialogProps) => {
   const {dialogRef, dragHandlers} = useDrawerDrag(placement, isDismissable);
 
   return (
-    <SurfaceContext value={{variant: "default" as SurfaceVariants["variant"]}}>
+    <SurfaceContext value={defaultSurfaceContextValue}>
       <DialogPrimitive
         ref={dialogRef}
         className={composeSlotClassName(slots?.dialog, className)}

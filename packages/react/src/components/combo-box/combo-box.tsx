@@ -51,9 +51,10 @@ const ComboBoxRoot = <T extends object = object>({
   ...props
 }: ComboBoxRootProps<T>) => {
   const slots = React.useMemo(() => comboBoxVariants({fullWidth}), [fullWidth]);
+  const contextValue = React.useMemo(() => ({slots, variant}), [slots, variant]);
 
   return (
-    <ComboBoxContext value={{slots, variant}}>
+    <ComboBoxContext value={contextValue}>
       <ComboBoxPrimitive
         data-slot="combo-box"
         menuTrigger={menuTrigger}
