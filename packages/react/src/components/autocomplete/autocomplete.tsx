@@ -43,6 +43,7 @@ type AutocompleteContext = {
   indicatorClassName?: string;
   onClear?: () => void;
   popoverClassName?: string;
+  popoverDialogClassName?: string;
   triggerClassName?: string;
   valueClassName?: string;
   triggerRef: RefObject<HTMLElement | null>;
@@ -87,6 +88,7 @@ function AutocompleteRootInner<
       clearButtonClassName: slots.clearButton(),
       indicatorClassName: slots.indicator(),
       popoverClassName: slots.popover(),
+      popoverDialogClassName: slots.popoverDialog(),
       triggerClassName: slots.trigger(),
       valueClassName: slots.value(),
       triggerRef,
@@ -272,7 +274,7 @@ const AutocompletePopover = memo(function AutocompletePopover({
   style,
   ...props
 }: AutocompletePopoverProps) {
-  const {popoverClassName, triggerRef} = useContext(AutocompleteContext);
+  const {popoverClassName, popoverDialogClassName, triggerRef} = useContext(AutocompleteContext);
   const [triggerWidth, setTriggerWidth] = useState<string | null>(null);
 
   const onResize = useCallback(() => {
@@ -311,7 +313,7 @@ const AutocompletePopover = memo(function AutocompletePopover({
         style={popoverStyle}
         triggerRef={triggerRef}
       >
-        <DialogPrimitive className={slots?.popoverDialog()} data-slot="autocomplete-popover-dialog">
+        <DialogPrimitive className={popoverDialogClassName} data-slot="autocomplete-popover-dialog">
           {children}
         </DialogPrimitive>
       </PopoverPrimitive>
