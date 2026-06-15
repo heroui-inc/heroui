@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {ColorSliderRenderProps, ColorSpace} from "react-aria-components/ColorSlider";
 
 import {colorSliderVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {
   ColorSlider as ColorSliderPrimitive,
   ColorThumb as ColorThumbPrimitive,
@@ -99,8 +99,10 @@ function getValidColorSpace(channel: string, colorSpace?: ColorSpace): ColorSpac
  * -----------------------------------------------------------------------------------------------*/
 interface ColorSliderContext {
   channel?: string;
-  slots?: ReturnType<typeof colorSliderVariants>;
+  outputClassName?: string;
   state?: ColorSliderRenderProps;
+  thumbClassName?: string;
+  trackClassName?: string;
 }
 
 const ColorSliderContext = createContext<ColorSliderContext>({});
@@ -115,15 +117,24 @@ interface ColorSliderRootBaseProps
 
 type ColorSliderRootProps = ColorSliderRootBaseProps & ColorSliderChannelProps;
 
-const ColorSliderRoot = ({
+const ColorSliderRoot = memo(function ColorSliderRoot({
   channel,
   children,
   className,
   colorSpace,
   orientation = "horizontal",
   ...props
-}: ColorSliderRootProps) => {
-  const slots = React.useMemo(() => colorSliderVariants({}), []);
+}: ColorSliderRootProps) {
+  const slots = useMemo(() => colorSliderVariants({}), []);
+  const cachedClassNames = useMemo(
+    () => ({
+      outputClassName: slots.output(),
+      thumbClassName: slots.thumb(),
+      trackClassName: slots.track(),
+    }),
+    [slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   // Validate and auto-correct invalid channel/colorSpace combinations
   const validColorSpace = getValidColorSpace(channel, colorSpace);
@@ -135,31 +146,35 @@ const ColorSliderRoot = ({
       data-slot="color-slider"
       orientation={orientation}
       {...props}
-      className={composeTwRenderProps(className, slots.base())}
+      className={composeTwRenderProps(className, baseClassName)}
     >
       {(values) => (
-        <ColorSliderContext value={{channel, slots, state: values}}>
+        <ColorSliderContext value={{channel, ...cachedClassNames, state: values}}>
           {typeof children === "function" ? children(values) : children}
         </ColorSliderContext>
       )}
     </ColorSliderPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorSlider Output
  * -----------------------------------------------------------------------------------------------*/
 interface ColorSliderOutputProps extends ComponentPropsWithRef<typeof SliderOutputPrimitive> {}
 
-const ColorSliderOutput = ({children, className, ...props}: ColorSliderOutputProps) => {
-  const {slots} = useContext(ColorSliderContext);
+const ColorSliderOutput = memo(function ColorSliderOutput({
+  children,
+  className,
+  ...props
+}: ColorSliderOutputProps) {
+  const {outputClassName} = useContext(ColorSliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, outputClassName),
+    [className, outputClassName],
+  );
 
   return (
-    <SliderOutputPrimitive
-      className={composeTwRenderProps(className, slots?.output())}
-      data-slot="color-slider-output"
-      {...props}
-    >
+    <SliderOutputPrimitive className={resolvedClassName} data-slot="color-slider-output" {...props}>
       {children
         ? typeof children === "function"
           ? (values) => children(values)
@@ -167,19 +182,28 @@ const ColorSliderOutput = ({children, className, ...props}: ColorSliderOutputPro
         : ({state}) => state.getThumbValueLabel(0)}
     </SliderOutputPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorSlider Track
  * -----------------------------------------------------------------------------------------------*/
 interface ColorSliderTrackProps extends ComponentPropsWithRef<typeof SliderTrackPrimitive> {}
 
-const ColorSliderTrack = ({children, className, style, ...props}: ColorSliderTrackProps) => {
-  const {channel, slots, state} = useContext(ColorSliderContext);
+const ColorSliderTrack = memo(function ColorSliderTrack({
+  children,
+  className,
+  style,
+  ...props
+}: ColorSliderTrackProps) {
+  const {channel, state, trackClassName} = useContext(ColorSliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, trackClassName),
+    [className, trackClassName],
+  );
   // Calculate start and end colors for the gradient edge caps
   const displayColor = state?.state?.getDisplayColor();
 
-  const edgeColors = React.useMemo(() => {
+  const edgeColors = useMemo(() => {
     // Access color through state.state.value (ColorSliderState.value)
     if (!displayColor || !channel) {
       return {end: "transparent", start: "transparent"};
@@ -207,7 +231,7 @@ const ColorSliderTrack = ({children, className, style, ...props}: ColorSliderTra
 
   return (
     <SliderTrackPrimitive
-      className={composeTwRenderProps(className, slots?.track())}
+      className={resolvedClassName}
       data-slot="color-slider-track"
       style={({defaultStyle, ...rest}) => ({
         // Add transparency checkerboard pattern for alpha channel
@@ -222,19 +246,28 @@ const ColorSliderTrack = ({children, className, style, ...props}: ColorSliderTra
       {typeof children === "function" ? (values) => children(values) : children}
     </SliderTrackPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorSlider Thumb
  * -----------------------------------------------------------------------------------------------*/
 interface ColorSliderThumbProps extends ComponentPropsWithRef<typeof ColorThumbPrimitive> {}
 
-const ColorSliderThumb = ({children, className, style, ...props}: ColorSliderThumbProps) => {
-  const {slots} = useContext(ColorSliderContext);
+const ColorSliderThumb = memo(function ColorSliderThumb({
+  children,
+  className,
+  style,
+  ...props
+}: ColorSliderThumbProps) {
+  const {thumbClassName} = useContext(ColorSliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, thumbClassName),
+    [className, thumbClassName],
+  );
 
   return (
     <ColorThumbPrimitive
-      className={composeTwRenderProps(className, slots?.thumb())}
+      className={resolvedClassName}
       data-slot="color-slider-thumb"
       style={({defaultStyle, isDisabled, ...rest}) => ({
         ...defaultStyle,
@@ -246,7 +279,7 @@ const ColorSliderThumb = ({children, className, style, ...props}: ColorSliderThu
       {typeof children === "function" ? (values) => children(values) : children}
     </ColorThumbPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

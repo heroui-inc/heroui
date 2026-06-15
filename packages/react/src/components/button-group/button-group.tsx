@@ -6,23 +6,23 @@ import type {ButtonGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {buttonGroupVariants} from "@heroui/styles";
-import React, {Children, createContext, isValidElement, useContext} from "react";
+import React, {Children, createContext, isValidElement, memo, useContext, useMemo} from "react";
 import {Group} from "react-aria-components/Group";
 import {useSlottedContext} from "react-aria-components/slots";
 import {ToggleButtonGroupContext as RACToggleButtonGroupContext} from "react-aria-components/ToggleButtonGroup";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils";
+import {composeTwRenderProps} from "../../utils";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type ButtonGroupContext = {
-  slots?: ReturnType<typeof buttonGroupVariants>;
+  fullWidth?: ButtonProps["fullWidth"];
+  isDisabled?: ButtonProps["isDisabled"];
+  separatorClassName?: string;
   size?: ButtonProps["size"];
   variant?: ButtonProps["variant"];
-  isDisabled?: ButtonProps["isDisabled"];
-  fullWidth?: ButtonProps["fullWidth"];
 };
 
 const ButtonGroupContext = createContext<ButtonGroupContext>({});
@@ -42,7 +42,7 @@ interface ButtonGroupRootProps
   orientation?: "horizontal" | "vertical";
 }
 
-const ButtonGroupRoot = ({
+const ButtonGroupRoot = memo(function ButtonGroupRoot({
   children,
   className,
   fullWidth,
@@ -51,18 +51,25 @@ const ButtonGroupRoot = ({
   size,
   variant,
   ...rest
-}: ButtonGroupRootProps) => {
+}: ButtonGroupRootProps) {
   const racContext = useSlottedContext(RACToggleButtonGroupContext);
   const orientation = orientationProp ?? racContext?.orientation ?? "horizontal";
 
-  const slots = React.useMemo(
+  const slots = useMemo(
     () => buttonGroupVariants({fullWidth, orientation}),
     [fullWidth, orientation],
   );
-  const contextValue = React.useMemo(
-    () => ({slots, size, variant, isDisabled, fullWidth}),
+  const contextValue = useMemo<ButtonGroupContext>(
+    () => ({
+      fullWidth,
+      isDisabled,
+      separatorClassName: slots.separator(),
+      size,
+      variant,
+    }),
     [slots, size, variant, isDisabled, fullWidth],
   );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   // Wrap only direct children with context provider
   const wrappedChildren = Children.map(children as React.ReactNode, (child) => {
@@ -79,7 +86,7 @@ const ButtonGroupRoot = ({
   return (
     <ButtonGroupContext value={contextValue}>
       <Group
-        className={composeTwRenderProps(className, slots.base())}
+        className={composeTwRenderProps(className, baseClassName)}
         data-slot="button-group"
         isDisabled={isDisabled}
         {...rest}
@@ -88,7 +95,7 @@ const ButtonGroupRoot = ({
       </Group>
     </ButtonGroupContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ButtonGroup Separator
@@ -100,22 +107,33 @@ interface ButtonGroupSeparatorProps<
   className?: string;
 }
 
-const ButtonGroupSeparator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function ButtonGroupSeparatorInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: ButtonGroupSeparatorProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ButtonGroupSeparatorProps<E>>) => {
-  const {slots} = useContext(ButtonGroupContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ButtonGroupSeparatorProps<E>>) {
+  const {separatorClassName} = useContext(ButtonGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, separatorClassName) as string,
+    [className, separatorClassName],
+  );
 
   return (
     <dom.span
       aria-hidden="true"
-      className={composeSlotClassName(slots?.separator, className)}
+      className={resolvedClassName}
       data-slot="button-group-separator"
       {...(props as any)}
     />
   );
-};
+}
+
+const ButtonGroupSeparator = memo(ButtonGroupSeparatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: ButtonGroupSeparatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ButtonGroupSeparatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

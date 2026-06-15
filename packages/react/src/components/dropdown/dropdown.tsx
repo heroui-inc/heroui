@@ -5,7 +5,7 @@ import type {DropdownVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {dropdownVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   Menu as MenuPrimitive,
@@ -23,7 +23,9 @@ import {SurfaceContext} from "../surface";
  * Dropdown Context
  * -----------------------------------------------------------------------------------------------*/
 type DropdownContext = {
-  slots?: ReturnType<typeof dropdownVariants>;
+  menuClassName?: string;
+  popoverClassName?: string;
+  triggerClassName?: string;
 };
 
 const DropdownContext = createContext<DropdownContext>({});
@@ -36,34 +38,46 @@ interface DropdownRootProps
   className?: string;
 }
 
-const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
-  const slots = React.useMemo(() => dropdownVariants(), []);
+const DropdownRoot = memo(function DropdownRoot({children, ...props}: DropdownRootProps) {
+  const slots = useMemo(() => dropdownVariants(), []);
+  const contextValue = useMemo<DropdownContext>(
+    () => ({
+      menuClassName: slots.menu(),
+      popoverClassName: slots.popover(),
+      triggerClassName: slots.trigger(),
+    }),
+    [slots],
+  );
 
   return (
-    <DropdownContext value={{slots}}>
+    <DropdownContext value={contextValue}>
       <MenuTriggerPrimitive {...props}>{children}</MenuTriggerPrimitive>
     </DropdownContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Trigger (Button wrapper)
  * -----------------------------------------------------------------------------------------------*/
 interface DropdownTriggerProps extends ComponentPropsWithRef<typeof Button> {}
 
-const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) => {
-  const {slots} = useContext(DropdownContext);
+const DropdownTrigger = memo(function DropdownTrigger({
+  children,
+  className,
+  ...props
+}: DropdownTriggerProps) {
+  const {triggerClassName} = useContext(DropdownContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName),
+    [className, triggerClassName],
+  );
 
   return (
-    <Button
-      className={composeTwRenderProps(className, slots?.trigger())}
-      data-slot="dropdown-trigger"
-      {...props}
-    >
+    <Button className={resolvedClassName} data-slot="dropdown-trigger" {...props}>
       {typeof children === "function" ? (values) => children(values) : children}
     </Button>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Popover (Popover wrapper)
@@ -73,8 +87,17 @@ interface DropdownPopoverProps
   children: React.ReactNode;
 }
 
-const DropdownPopover = ({children, className, placement, ...props}: DropdownPopoverProps) => {
-  const {slots} = useContext(DropdownContext);
+const DropdownPopover = memo(function DropdownPopover({
+  children,
+  className,
+  placement,
+  ...props
+}: DropdownPopoverProps) {
+  const {popoverClassName} = useContext(DropdownContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, popoverClassName),
+    [className, popoverClassName],
+  );
 
   return (
     <SurfaceContext
@@ -84,7 +107,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
     >
       <PopoverPrimitive
         {...props}
-        className={composeTwRenderProps(className, slots?.popover())}
+        className={resolvedClassName}
         data-slot="dropdown-popover"
         placement={placement}
       >
@@ -92,7 +115,7 @@ const DropdownPopover = ({children, className, placement, ...props}: DropdownPop
       </PopoverPrimitive>
     </SurfaceContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Menu (Menu wrapper)
@@ -102,18 +125,26 @@ interface DropdownMenuProps<T extends object>
   className?: string;
 }
 
-function DropdownMenu<T extends object>({className, ...props}: DropdownMenuProps<T>) {
-  const {slots} = useContext(DropdownContext);
+function DropdownMenuInner<T extends object>({className, ...props}: DropdownMenuProps<T>) {
+  const {menuClassName} = useContext(DropdownContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, menuClassName),
+    [className, menuClassName],
+  );
 
   return (
     <MenuPrimitive
-      className={composeTwRenderProps(className, slots?.menu())}
+      className={resolvedClassName}
       data-selection-mode={props.selectionMode}
       data-slot="dropdown-menu"
       {...props}
     />
   );
 }
+
+const DropdownMenu = memo(DropdownMenuInner) as <T extends object>(
+  props: DropdownMenuProps<T>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Item (MenuItem wrapper)

@@ -7,7 +7,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components/Button";
 
 import {disclosureVariants} from "@heroui/styles";
-import React, {createContext, useContext, useRef} from "react";
+import React, {createContext, memo, useContext, useMemo, useRef} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   DisclosurePanel,
@@ -17,7 +17,7 @@ import {
 import {Heading as DisclosureHeadingPrimitive} from "react-aria-components/Heading";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {IconChevronDown} from "../icons";
 
@@ -25,7 +25,12 @@ import {IconChevronDown} from "../icons";
  * Disclosure Context
  * --------------------------------------------------------------------------------------------- */
 type DisclosureContext = {
-  slots?: ReturnType<typeof disclosureVariants>;
+  bodyClassName?: string;
+  bodyInnerClassName?: string;
+  contentClassName?: string;
+  headingClassName?: string;
+  indicatorClassName?: string;
+  triggerClassName?: string;
 };
 
 const DisclosureContext = createContext<DisclosureContext>({});
@@ -36,21 +41,37 @@ const DisclosureContext = createContext<DisclosureContext>({});
 interface DisclosureRootProps
   extends ComponentPropsWithRef<typeof DisclosurePrimitive>, DisclosureVariants {}
 
-const DisclosureRoot = ({children, className, ...props}: DisclosureRootProps) => {
-  const slots = React.useMemo(() => disclosureVariants({}), []);
+const DisclosureRoot = memo(function DisclosureRoot({
+  children,
+  className,
+  ...props
+}: DisclosureRootProps) {
+  const slots = useMemo(() => disclosureVariants({}), []);
+  const contextValue = useMemo<DisclosureContext>(
+    () => ({
+      bodyClassName: slots.body(),
+      bodyInnerClassName: slots.bodyInner(),
+      contentClassName: slots.content(),
+      headingClassName: slots.heading(),
+      indicatorClassName: slots.indicator(),
+      triggerClassName: slots.trigger(),
+    }),
+    [slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
-    <DisclosureContext value={{slots}}>
+    <DisclosureContext value={contextValue}>
       <DisclosurePrimitive
         data-slot="disclosure"
         {...props}
-        className={composeTwRenderProps(className, slots.base())}
+        className={composeTwRenderProps(className, baseClassName)}
       >
         {typeof children === "function" ? (values) => children(values) : children}
       </DisclosurePrimitive>
     </DisclosureContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Heading
@@ -59,52 +80,70 @@ interface DisclosureHeadingProps extends ComponentPropsWithRef<typeof Disclosure
   className?: string;
 }
 
-const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
-  const {slots} = useContext(DisclosureContext);
+const DisclosureHeading = memo(function DisclosureHeading({
+  className,
+  ...props
+}: DisclosureHeadingProps) {
+  const {headingClassName} = useContext(DisclosureContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, headingClassName) as string,
+    [className, headingClassName],
+  );
 
   return (
     <DisclosureHeadingPrimitive
-      className={composeSlotClassName(slots?.heading, className)}
+      className={resolvedClassName}
       data-slot="disclosure-heading"
       {...props}
     />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Trigger
  * -----------------------------------------------------------------------------------------------*/
 interface DisclosureTriggerProps extends ButtonProps {}
 
-const DisclosureTrigger = ({children, className, ...props}: DisclosureTriggerProps) => {
-  const {slots} = useContext(DisclosureContext);
+const DisclosureTrigger = memo(function DisclosureTrigger({
+  children,
+  className,
+  ...props
+}: DisclosureTriggerProps) {
+  const {triggerClassName} = useContext(DisclosureContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName) as string,
+    [className, triggerClassName],
+  );
 
   return (
-    <Button
-      className={composeTwRenderProps(className, slots?.trigger())}
-      data-slot="disclosure-trigger"
-      slot="trigger"
-      {...props}
-    >
+    <Button className={resolvedClassName} data-slot="disclosure-trigger" slot="trigger" {...props}>
       {typeof children === "function" ? (values) => children(values) : children}
     </Button>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Content
  * -----------------------------------------------------------------------------------------------*/
 interface DisclosureContentProps extends ComponentPropsWithRef<typeof DisclosurePanel> {}
 
-const DisclosureContent = ({children, className, ...props}: DisclosureContentProps) => {
-  const {slots} = useContext(DisclosureContext);
+const DisclosureContent = memo(function DisclosureContent({
+  children,
+  className,
+  ...props
+}: DisclosureContentProps) {
+  const {contentClassName} = useContext(DisclosureContext);
   const contentRef = useRef<HTMLDivElement>(null);
   const {isExpanded} = useContext(DisclosureStateContext)!;
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, contentClassName) as string,
+    [className, contentClassName],
+  );
 
   return (
     <DisclosurePanel
       ref={contentRef}
-      className={composeTwRenderProps(className, slots?.content())}
+      className={resolvedClassName}
       data-expanded={dataAttr(isExpanded)}
       data-slot="disclosure-content"
       {...props}
@@ -112,7 +151,7 @@ const DisclosureContent = ({children, className, ...props}: DisclosureContentPro
       {children}
     </DisclosurePanel>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Body
@@ -124,20 +163,31 @@ interface DisclosureBodyContentProps<
   className?: string;
 }
 
-const DisclosureBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function DisclosureBodyInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
 }: DisclosureBodyContentProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof DisclosureBodyContentProps<E>>) => {
-  const {slots} = useContext(DisclosureContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof DisclosureBodyContentProps<E>>) {
+  const {bodyClassName, bodyInnerClassName} = useContext(DisclosureContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, bodyInnerClassName) as string,
+    [className, bodyInnerClassName],
+  );
 
   return (
-    <dom.div className={slots?.body({})} data-slot="disclosure-body" {...(props as any)}>
-      <div className={composeSlotClassName(slots?.bodyInner, className)}>{children}</div>
+    <dom.div className={bodyClassName} data-slot="disclosure-body" {...(props as any)}>
+      <div className={resolvedClassName}>{children}</div>
     </dom.div>
   );
-};
+}
+
+const DisclosureBody = memo(DisclosureBodyInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: DisclosureBodyContentProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof DisclosureBodyContentProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Indicator
@@ -149,14 +199,18 @@ interface DisclosureIndicatorProps<
   className?: string;
 }
 
-const DisclosureIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+function DisclosureIndicatorInner<E extends keyof React.JSX.IntrinsicElements = "svg">({
   children,
   className,
   ...props
 }: DisclosureIndicatorProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof DisclosureIndicatorProps<E>>) => {
+  Omit<React.JSX.IntrinsicElements[E], keyof DisclosureIndicatorProps<E>>) {
   const {isExpanded} = useContext(DisclosureStateContext)!;
-  const {slots} = useContext(DisclosureContext);
+  const {indicatorClassName} = useContext(DisclosureContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, indicatorClassName) as string,
+    [className, indicatorClassName],
+  );
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(
@@ -168,7 +222,7 @@ const DisclosureIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg"
       {
         ...(props as any),
         "data-expanded": dataAttr(isExpanded),
-        className: composeSlotClassName(slots?.indicator, className),
+        className: resolvedClassName,
         "data-slot": "disclosure-indicator",
       },
     );
@@ -176,13 +230,20 @@ const DisclosureIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg"
 
   return (
     <IconChevronDown
-      className={composeSlotClassName(slots?.indicator, className)}
+      className={resolvedClassName}
       data-expanded={dataAttr(isExpanded)}
       data-slot="disclosure-indicator"
       {...(props as any)}
     />
   );
-};
+}
+
+const DisclosureIndicator = memo(DisclosureIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+>(
+  props: DisclosureIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof DisclosureIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

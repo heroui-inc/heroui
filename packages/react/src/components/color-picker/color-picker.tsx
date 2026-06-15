@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {ColorPickerProps as ColorPickerPrimitiveProps} from "react-aria-components/ColorPicker";
 
 import {colorPickerVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {ColorPicker as ColorPickerPrimitive} from "react-aria-components/ColorPicker";
 import {
@@ -14,14 +14,15 @@ import {
   Popover as PopoverPrimitive,
 } from "react-aria-components/Popover";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {SurfaceContext} from "../surface";
 
 /* -------------------------------------------------------------------------------------------------
  * ColorPicker Context
  * -----------------------------------------------------------------------------------------------*/
 type ColorPickerContext = {
-  slots?: ReturnType<typeof colorPickerVariants>;
+  popoverClassName?: string;
+  triggerClassName?: string;
 };
 
 const ColorPickerContext = createContext<ColorPickerContext>({});
@@ -37,40 +38,60 @@ interface ColorPickerRootProps
   children: React.ReactNode;
 }
 
-const ColorPickerRoot = ({children, className, ...props}: ColorPickerRootProps) => {
-  const slots = React.useMemo(() => colorPickerVariants(), []);
+const ColorPickerRoot = memo(function ColorPickerRoot({
+  children,
+  className,
+  ...props
+}: ColorPickerRootProps) {
+  const slots = useMemo(() => colorPickerVariants(), []);
+  const contextValue = useMemo<ColorPickerContext>(
+    () => ({
+      popoverClassName: slots.popover(),
+      triggerClassName: slots.trigger(),
+    }),
+    [slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName) as string,
+    [className, baseClassName],
+  );
 
   return (
-    <ColorPickerContext value={{slots}}>
+    <ColorPickerContext value={contextValue}>
       <ColorPickerPrimitive {...props}>
         <DialogTriggerPrimitive>
-          <div className={composeSlotClassName(slots?.base, className)} data-slot="color-picker">
+          <div className={resolvedClassName} data-slot="color-picker">
             {children}
           </div>
         </DialogTriggerPrimitive>
       </ColorPickerPrimitive>
     </ColorPickerContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorPicker Trigger
  * -----------------------------------------------------------------------------------------------*/
 interface ColorPickerTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
-const ColorPickerTrigger = ({children, className, ...props}: ColorPickerTriggerProps) => {
-  const {slots} = useContext(ColorPickerContext);
+const ColorPickerTrigger = memo(function ColorPickerTrigger({
+  children,
+  className,
+  ...props
+}: ColorPickerTriggerProps) {
+  const {triggerClassName} = useContext(ColorPickerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName),
+    [className, triggerClassName],
+  );
 
   return (
-    <ButtonPrimitive
-      className={composeTwRenderProps(className, slots?.trigger())}
-      data-slot="color-picker-trigger"
-      {...props}
-    >
+    <ButtonPrimitive className={resolvedClassName} data-slot="color-picker-trigger" {...props}>
       {typeof children === "function" ? (values) => children(values) : children}
     </ButtonPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorPicker Popover
@@ -82,13 +103,17 @@ interface ColorPickerPopoverProps extends Omit<
   children: React.ReactNode;
 }
 
-const ColorPickerPopover = ({
+const ColorPickerPopover = memo(function ColorPickerPopover({
   children,
   className,
   placement = "bottom left",
   ...props
-}: ColorPickerPopoverProps) => {
-  const {slots} = useContext(ColorPickerContext);
+}: ColorPickerPopoverProps) {
+  const {popoverClassName} = useContext(ColorPickerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, popoverClassName),
+    [className, popoverClassName],
+  );
 
   return (
     <SurfaceContext
@@ -98,7 +123,7 @@ const ColorPickerPopover = ({
     >
       <PopoverPrimitive
         {...props}
-        className={composeTwRenderProps(className, slots?.popover())}
+        className={resolvedClassName}
         data-slot="color-picker-popover"
         placement={placement}
       >
@@ -106,7 +131,7 @@ const ColorPickerPopover = ({
       </PopoverPrimitive>
     </SurfaceContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

@@ -6,7 +6,7 @@ import type {SurfaceVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
 
 import {surfaceVariants} from "@heroui/styles";
-import React, {createContext} from "react";
+import React, {createContext, memo, useMemo} from "react";
 
 import {dom} from "../../utils/dom";
 
@@ -27,26 +27,30 @@ interface SurfaceRootProps<
   variant?: SurfaceVariants["variant"];
 }
 
-const SurfaceRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function SurfaceRootInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   variant = "default",
   ...rest
-}: SurfaceRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SurfaceRootProps<E>>) => {
-  const contextValue = React.useMemo(() => ({variant}), [variant]);
+}: SurfaceRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SurfaceRootProps<E>>) {
+  const contextValue = useMemo(() => ({variant}), [variant]);
+  const resolvedClassName = useMemo(
+    () => surfaceVariants({variant, className}),
+    [variant, className],
+  );
 
   return (
     <SurfaceContext value={contextValue}>
-      <dom.div
-        className={surfaceVariants({variant, className})}
-        data-slot="surface"
-        {...(rest as any)}
-      >
+      <dom.div className={resolvedClassName} data-slot="surface" {...(rest as any)}>
         {children}
       </dom.div>
     </SurfaceContext>
   );
-};
+}
+
+const SurfaceRoot = memo(SurfaceRootInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: SurfaceRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SurfaceRootProps<E>>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Exports

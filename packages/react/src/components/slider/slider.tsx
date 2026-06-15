@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {SliderRenderProps} from "react-aria-components/Slider";
 
 import {sliderVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {
   SliderOutput as SliderOutputPrimitive,
   Slider as SliderPrimitive,
@@ -15,7 +15,7 @@ import {
 } from "react-aria-components/Slider";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
@@ -30,8 +30,12 @@ import {dom} from "../../utils/dom";
  * Slider Context
  * -----------------------------------------------------------------------------------------------*/
 interface SliderContext {
-  slots?: ReturnType<typeof sliderVariants>;
+  fillClassName?: string;
+  marksClassName?: string;
+  outputClassName?: string;
   state?: SliderRenderProps;
+  thumbClassName?: string;
+  trackClassName?: string;
 }
 
 const SliderContext = createContext<SliderContext>({});
@@ -41,44 +45,63 @@ const SliderContext = createContext<SliderContext>({});
  * -----------------------------------------------------------------------------------------------*/
 interface SliderRootProps extends ComponentPropsWithRef<typeof SliderPrimitive>, SliderVariants {}
 
-const SliderRoot = ({
+const SliderRoot = memo(function SliderRoot({
   children,
   className,
   orientation = "horizontal",
   ...props
-}: SliderRootProps) => {
-  const slots = React.useMemo(() => sliderVariants({}), []);
+}: SliderRootProps) {
+  const slots = useMemo(() => sliderVariants({}), []);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName),
+    [className, baseClassName],
+  );
+  const slotClassNames = useMemo(
+    () => ({
+      fillClassName: slots.fill(),
+      marksClassName: slots.marks(),
+      outputClassName: slots.output(),
+      thumbClassName: slots.thumb(),
+      trackClassName: slots.track(),
+    }),
+    [slots],
+  );
 
   return (
     <SliderPrimitive
       data-slot="slider"
       orientation={orientation}
       {...props}
-      className={composeTwRenderProps(className, slots.base())}
+      className={resolvedClassName}
     >
       {(values) => (
-        <SliderContext value={{slots, state: values}}>
+        <SliderContext value={{...slotClassNames, state: values}}>
           {typeof children === "function" ? children(values) : children}
         </SliderContext>
       )}
     </SliderPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Output
  * -----------------------------------------------------------------------------------------------*/
 interface SliderOutputProps extends ComponentPropsWithRef<typeof SliderOutputPrimitive> {}
 
-const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
-  const {slots} = useContext(SliderContext);
+const SliderOutput = memo(function SliderOutput({
+  children,
+  className,
+  ...props
+}: SliderOutputProps) {
+  const {outputClassName} = useContext(SliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, outputClassName),
+    [className, outputClassName],
+  );
 
   return (
-    <SliderOutputPrimitive
-      className={composeTwRenderProps(className, slots?.output())}
-      data-slot="slider-output"
-      {...props}
-    >
+    <SliderOutputPrimitive className={resolvedClassName} data-slot="slider-output" {...props}>
       {children
         ? typeof children === "function"
           ? (values) => children(values)
@@ -86,15 +109,19 @@ const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
         : ({state}) => state.values.map((_, i) => state.getThumbValueLabel(i)).join(" – ")}
     </SliderOutputPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Track
  * -----------------------------------------------------------------------------------------------*/
 interface SliderTrackProps extends ComponentPropsWithRef<typeof SliderTrackPrimitive> {}
 
-const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
-  const {slots, state} = useContext(SliderContext);
+const SliderTrack = memo(function SliderTrack({children, className, ...props}: SliderTrackProps) {
+  const {state, trackClassName} = useContext(SliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, trackClassName),
+    [className, trackClassName],
+  );
 
   const {getThumbPercent, values} = state?.state || {};
 
@@ -109,7 +136,7 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
 
   return (
     <SliderTrackPrimitive
-      className={composeTwRenderProps(className, slots?.track())}
+      className={resolvedClassName}
       data-disabled={dataAttr(state?.isDisabled)}
       data-slot="slider-track"
       {...(singleThumb
@@ -126,7 +153,7 @@ const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
       {typeof children === "function" ? (values) => children(values) : children}
     </SliderTrackPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Fill
@@ -137,12 +164,16 @@ interface SliderFillProps<
   className?: string;
 }
 
-const SliderFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function SliderFillInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   style,
   ...props
-}: SliderFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderFillProps<E>>) => {
-  const {slots, state} = useContext(SliderContext);
+}: SliderFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderFillProps<E>>) {
+  const {fillClassName, state} = useContext(SliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, fillClassName) as string,
+    [className, fillClassName],
+  );
 
   const {getThumbPercent, orientation, values} = state?.state || {};
 
@@ -155,12 +186,11 @@ const SliderFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
 
   return (
     <dom.div
-      className={composeSlotClassName(slots?.fill, className)}
+      className={resolvedClassName}
       data-disabled={dataAttr(state?.isDisabled)}
       data-slot="slider-fill"
       style={{
         ...style,
-        // TODO: rtl support
         [isVertical ? "bottom" : "left"]: `${startOffset! * 100}%`,
         ...(isVertical
           ? {
@@ -173,26 +203,30 @@ const SliderFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
       {...(props as any)}
     />
   );
-};
+}
+
+const SliderFill = memo(SliderFillInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: SliderFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderFillProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Slider Thumb
  * -----------------------------------------------------------------------------------------------*/
 interface SliderThumbProps extends ComponentPropsWithRef<typeof SliderThumbPrimitive> {}
 
-const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
-  const {slots} = useContext(SliderContext);
+const SliderThumb = memo(function SliderThumb({children, className, ...props}: SliderThumbProps) {
+  const {thumbClassName} = useContext(SliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, thumbClassName),
+    [className, thumbClassName],
+  );
 
   return (
-    <SliderThumbPrimitive
-      className={composeTwRenderProps(className, slots?.thumb())}
-      data-slot="slider-thumb"
-      {...props}
-    >
+    <SliderThumbPrimitive className={resolvedClassName} data-slot="slider-thumb" {...props}>
       {typeof children === "function" ? (values) => children(values) : children}
     </SliderThumbPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * TODO: Slider Marks
@@ -203,20 +237,22 @@ interface SliderMarksProps<
   className?: string;
 }
 
-const SliderMarks = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function SliderMarksInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
-}: SliderMarksProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderMarksProps<E>>) => {
-  const {slots} = useContext(SliderContext);
-
-  return (
-    <dom.div
-      className={composeSlotClassName(slots?.marks, className)}
-      data-slot="slider-marks"
-      {...(props as any)}
-    />
+}: SliderMarksProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderMarksProps<E>>) {
+  const {marksClassName} = useContext(SliderContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, marksClassName) as string,
+    [className, marksClassName],
   );
-};
+
+  return <dom.div className={resolvedClassName} data-slot="slider-marks" {...(props as any)} />;
+}
+
+const SliderMarks = memo(SliderMarksInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: SliderMarksProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderMarksProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

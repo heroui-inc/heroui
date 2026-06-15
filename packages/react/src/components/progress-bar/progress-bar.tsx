@@ -6,18 +6,20 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ProgressBarRenderProps} from "react-aria-components/ProgressBar";
 
 import {progressBarVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {ProgressBar as ProgressBarPrimitive} from "react-aria-components/ProgressBar";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ProgressBar Context
  * -----------------------------------------------------------------------------------------------*/
 interface ProgressBarContext {
-  slots?: ReturnType<typeof progressBarVariants>;
+  fillClassName?: string;
+  outputClassName?: string;
   state?: ProgressBarRenderProps;
+  trackClassName?: string;
 }
 
 const ProgressBarContext = createContext<ProgressBarContext>({});
@@ -28,23 +30,38 @@ const ProgressBarContext = createContext<ProgressBarContext>({});
 interface ProgressBarRootProps
   extends ComponentPropsWithRef<typeof ProgressBarPrimitive>, ProgressBarVariants {}
 
-const ProgressBarRoot = ({children, className, color, size, ...props}: ProgressBarRootProps) => {
-  const slots = React.useMemo(() => progressBarVariants({color, size}), [color, size]);
+const ProgressBarRoot = memo(function ProgressBarRoot({
+  children,
+  className,
+  color,
+  size,
+  ...props
+}: ProgressBarRootProps) {
+  const slots = useMemo(() => progressBarVariants({color, size}), [color, size]);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName),
+    [className, baseClassName],
+  );
+  const slotClassNames = useMemo(
+    () => ({
+      fillClassName: slots.fill(),
+      outputClassName: slots.output(),
+      trackClassName: slots.track(),
+    }),
+    [slots],
+  );
 
   return (
-    <ProgressBarPrimitive
-      data-slot="progress-bar"
-      {...props}
-      className={composeTwRenderProps(className, slots.base())}
-    >
+    <ProgressBarPrimitive data-slot="progress-bar" {...props} className={resolvedClassName}>
       {(values) => (
-        <ProgressBarContext value={{slots, state: values}}>
+        <ProgressBarContext value={{...slotClassNames, state: values}}>
           {typeof children === "function" ? children(values) : children}
         </ProgressBarContext>
       )}
     </ProgressBarPrimitive>
   );
-};
+});
 
 ProgressBarRoot.displayName = "HeroUI.ProgressBar";
 
@@ -58,26 +75,33 @@ interface ProgressBarOutputProps<
   className?: string;
 }
 
-const ProgressBarOutput = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function ProgressBarOutputInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...props
 }: ProgressBarOutputProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarOutputProps<E>>) => {
-  const {slots, state} = useContext(ProgressBarContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarOutputProps<E>>) {
+  const {outputClassName, state} = useContext(ProgressBarContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, outputClassName) as string,
+    [className, outputClassName],
+  );
 
   return (
-    <dom.span
-      className={composeSlotClassName(slots?.output, className)}
-      data-slot="progress-bar-output"
-      {...(props as any)}
-    >
+    <dom.span className={resolvedClassName} data-slot="progress-bar-output" {...(props as any)}>
       {children ?? state?.valueText}
     </dom.span>
   );
-};
+}
 
-ProgressBarOutput.displayName = "HeroUI.ProgressBar.Output";
+ProgressBarOutputInner.displayName = "HeroUI.ProgressBar.Output";
+
+const ProgressBarOutput = memo(ProgressBarOutputInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: ProgressBarOutputProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarOutputProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * ProgressBar Track
@@ -89,26 +113,33 @@ interface ProgressBarTrackProps<
   className?: string;
 }
 
-const ProgressBarTrack = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function ProgressBarTrackInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
 }: ProgressBarTrackProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarTrackProps<E>>) => {
-  const {slots} = useContext(ProgressBarContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarTrackProps<E>>) {
+  const {trackClassName} = useContext(ProgressBarContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, trackClassName) as string,
+    [className, trackClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.track, className)}
-      data-slot="progress-bar-track"
-      {...(props as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="progress-bar-track" {...(props as any)}>
       {children}
     </dom.div>
   );
-};
+}
 
-ProgressBarTrack.displayName = "HeroUI.ProgressBar.Track";
+ProgressBarTrackInner.displayName = "HeroUI.ProgressBar.Track";
+
+const ProgressBarTrack = memo(ProgressBarTrackInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: ProgressBarTrackProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarTrackProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * ProgressBar Fill
@@ -121,17 +152,20 @@ interface ProgressBarFillProps<
   style?: React.CSSProperties;
 }
 
-const ProgressBarFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function ProgressBarFillInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   style,
   ...props
-}: ProgressBarFillProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarFillProps<E>>) => {
-  const {slots, state} = useContext(ProgressBarContext);
+}: ProgressBarFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarFillProps<E>>) {
+  const {fillClassName, state} = useContext(ProgressBarContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, fillClassName) as string,
+    [className, fillClassName],
+  );
 
   return (
     <dom.div
-      className={composeSlotClassName(slots?.fill, className)}
+      className={resolvedClassName}
       data-slot="progress-bar-fill"
       style={{
         ...style,
@@ -140,9 +174,16 @@ const ProgressBarFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
       {...(props as any)}
     />
   );
-};
+}
 
-ProgressBarFill.displayName = "HeroUI.ProgressBar.Fill";
+ProgressBarFillInner.displayName = "HeroUI.ProgressBar.Fill";
+
+const ProgressBarFill = memo(ProgressBarFillInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: ProgressBarFillProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ProgressBarFillProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

@@ -6,7 +6,7 @@ import type {AccordionVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {accordionVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   Disclosure,
@@ -17,15 +17,23 @@ import {
 import {DisclosureGroup} from "react-aria-components/DisclosureGroup";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext, defaultSurfaceContextValue} from "../surface";
 
-const AccordionContext = createContext<{
-  slots?: ReturnType<typeof accordionVariants>;
+type AccordionContext = {
+  bodyClassName?: string;
+  bodyInnerClassName?: string;
+  headingClassName?: string;
   hideSeparator?: boolean;
-}>({});
+  indicatorClassName?: string;
+  itemClassName?: string;
+  panelClassName?: string;
+  triggerClassName?: string;
+};
+
+const AccordionContext = createContext<AccordionContext>({});
 
 /* -------------------------------------------------------------------------------------------------
  * Accordion Root
@@ -35,18 +43,32 @@ interface AccordionRootProps
   hideSeparator?: boolean;
 }
 
-const AccordionRoot = ({
+const AccordionRoot = memo(function AccordionRoot({
   children,
   className,
   hideSeparator = false,
   variant,
   ...props
-}: AccordionRootProps) => {
-  const slots = React.useMemo(() => accordionVariants({variant}), [variant]);
+}: AccordionRootProps) {
+  const slots = useMemo(() => accordionVariants({variant}), [variant]);
+  const contextValue = useMemo<AccordionContext>(
+    () => ({
+      bodyClassName: slots.body(),
+      bodyInnerClassName: slots.bodyInner(),
+      headingClassName: slots.heading(),
+      hideSeparator,
+      indicatorClassName: slots.indicator(),
+      itemClassName: slots.item(),
+      panelClassName: slots.panel(),
+      triggerClassName: slots.trigger(),
+    }),
+    [slots, hideSeparator],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   const content = (
     <DisclosureGroup
-      className={composeTwRenderProps(className, slots.base())}
+      className={composeTwRenderProps(className, baseClassName)}
       data-slot="accordion"
       {...props}
     >
@@ -55,7 +77,7 @@ const AccordionRoot = ({
   );
 
   return (
-    <AccordionContext value={{slots, hideSeparator}}>
+    <AccordionContext value={contextValue}>
       {variant === "surface" ? (
         // Allows inner components to apply "on-surface" colors for proper contrast
         <SurfaceContext value={defaultSurfaceContextValue}>{content}</SurfaceContext>
@@ -64,19 +86,23 @@ const AccordionRoot = ({
       )}
     </AccordionContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionItem
  * -----------------------------------------------------------------------------------------------*/
 interface AccordionItemProps extends ComponentPropsWithRef<typeof Disclosure> {}
 
-const AccordionItem = ({className, ...props}: AccordionItemProps) => {
-  const {hideSeparator, slots} = useContext(AccordionContext);
+const AccordionItem = memo(function AccordionItem({className, ...props}: AccordionItemProps) {
+  const {hideSeparator, itemClassName} = useContext(AccordionContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, itemClassName) as string,
+    [className, itemClassName],
+  );
 
   return (
     <Disclosure
-      className={composeTwRenderProps(className, slots?.item())}
+      className={resolvedClassName}
       data-hide-separator={hideSeparator ? "true" : undefined}
       data-slot="accordion-item"
       {...props}
@@ -84,7 +110,7 @@ const AccordionItem = ({className, ...props}: AccordionItemProps) => {
       {props.children}
     </Disclosure>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionIndicator
@@ -96,14 +122,18 @@ interface AccordionIndicatorProps<
   className?: string;
 }
 
-const AccordionIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+function AccordionIndicatorInner<E extends keyof React.JSX.IntrinsicElements = "svg">({
   children,
   className,
   ...props
 }: AccordionIndicatorProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof AccordionIndicatorProps<E>>) => {
-  const {slots} = useContext(AccordionContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof AccordionIndicatorProps<E>>) {
+  const {indicatorClassName} = useContext(AccordionContext);
   const {isExpanded} = useContext(DisclosureStateContext)!;
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, indicatorClassName) as string,
+    [className, indicatorClassName],
+  );
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(
@@ -115,7 +145,7 @@ const AccordionIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">
       {
         ...(props as any),
         "data-expanded": dataAttr(isExpanded),
-        className: composeSlotClassName(slots?.indicator, className),
+        className: resolvedClassName,
         "data-slot": "accordion-indicator",
       },
     );
@@ -123,13 +153,20 @@ const AccordionIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">
 
   return (
     <IconChevronDown
-      className={composeSlotClassName(slots?.indicator, className)}
+      className={resolvedClassName}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-indicator"
       {...(props as any)}
     />
   );
-};
+}
+
+const AccordionIndicator = memo(AccordionIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+>(
+  props: AccordionIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof AccordionIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionHeading
@@ -138,37 +175,43 @@ interface AccordionHeadingProps extends ComponentPropsWithRef<typeof DisclosureH
   className?: string;
 }
 
-const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
-  const {slots} = useContext(AccordionContext);
+const AccordionHeading = memo(function AccordionHeading({
+  className,
+  ...props
+}: AccordionHeadingProps) {
+  const {headingClassName} = useContext(AccordionContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, headingClassName) as string,
+    [className, headingClassName],
+  );
 
   return (
-    <DisclosureHeading
-      className={composeSlotClassName(slots?.heading, className)}
-      data-slot="accordion-heading"
-      {...props}
-    />
+    <DisclosureHeading className={resolvedClassName} data-slot="accordion-heading" {...props} />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionTrigger
  * -----------------------------------------------------------------------------------------------*/
 interface AccordionTriggerProps extends ComponentPropsWithRef<typeof Button> {}
 
-const AccordionTrigger = ({children, className, ...props}: AccordionTriggerProps) => {
-  const {slots} = useContext(AccordionContext);
+const AccordionTrigger = memo(function AccordionTrigger({
+  children,
+  className,
+  ...props
+}: AccordionTriggerProps) {
+  const {triggerClassName} = useContext(AccordionContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName) as string,
+    [className, triggerClassName],
+  );
 
   return (
-    <Button
-      className={composeTwRenderProps(className, slots?.trigger())}
-      data-slot="accordion-trigger"
-      slot="trigger"
-      {...props}
-    >
+    <Button className={resolvedClassName} data-slot="accordion-trigger" slot="trigger" {...props}>
       {typeof children === "function" ? (values) => children(values) : children}
     </Button>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionBody
@@ -180,32 +223,50 @@ interface AccordionBodyProps<
   className?: string;
 }
 
-const AccordionBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function AccordionBodyInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
-}: AccordionBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AccordionBodyProps<E>>) => {
-  const {slots} = useContext(AccordionContext);
+}: AccordionBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AccordionBodyProps<E>>) {
+  const {bodyClassName, bodyInnerClassName} = useContext(AccordionContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, bodyInnerClassName) as string,
+    [className, bodyInnerClassName],
+  );
 
   return (
-    <dom.div className={slots?.body({})} data-slot="accordion-body" {...(props as any)}>
-      <div className={composeSlotClassName(slots?.bodyInner, className)}>{children}</div>
+    <dom.div className={bodyClassName} data-slot="accordion-body" {...(props as any)}>
+      <div className={resolvedClassName}>{children}</div>
     </dom.div>
   );
-};
+}
+
+const AccordionBody = memo(AccordionBodyInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: AccordionBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AccordionBodyProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionPanel
  * -----------------------------------------------------------------------------------------------*/
 interface AccordionPanelProps extends ComponentPropsWithRef<typeof DisclosurePanel> {}
 
-const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) => {
-  const {slots} = useContext(AccordionContext);
+const AccordionPanel = memo(function AccordionPanel({
+  children,
+  className,
+  ...props
+}: AccordionPanelProps) {
+  const {panelClassName} = useContext(AccordionContext);
   const {isExpanded} = useContext(DisclosureStateContext)!;
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, panelClassName) as string,
+    [className, panelClassName],
+  );
 
   return (
     <DisclosurePanel
-      className={composeTwRenderProps(className, slots?.panel())}
+      className={resolvedClassName}
       data-expanded={dataAttr(isExpanded)}
       data-slot="accordion-panel"
       {...props}
@@ -213,7 +274,7 @@ const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) =>
       {children}
     </DisclosurePanel>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

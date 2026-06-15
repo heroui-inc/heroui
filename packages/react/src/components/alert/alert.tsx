@@ -6,9 +6,9 @@ import type {AlertVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
 
 import {alertVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 
-import {composeSlotClassName} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "../icons";
 import {SurfaceContext} from "../surface";
@@ -17,8 +17,11 @@ import {SurfaceContext} from "../surface";
  * Alert Context
  * --------------------------------------------------------------------------------------------- */
 type AlertContext = {
-  slots?: ReturnType<typeof alertVariants>;
+  contentClassName?: string;
+  descriptionClassName?: string;
+  indicatorClassName?: string;
   status?: "default" | "accent" | "success" | "warning" | "danger";
+  titleClassName?: string;
 };
 
 const AlertContext = createContext<AlertContext>({});
@@ -35,28 +38,47 @@ interface AlertRootProps<
   status?: AlertVariants["status"];
 }
 
-const AlertRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function AlertRootInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   status,
   ...rest
-}: AlertRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertRootProps<E>>) => {
-  const slots = React.useMemo(() => alertVariants({status}), [status]);
+}: AlertRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertRootProps<E>>) {
+  const slots = useMemo(() => alertVariants({status}), [status]);
+  const contextValue = useMemo<AlertContext>(
+    () => ({
+      contentClassName: slots.content(),
+      descriptionClassName: slots.description(),
+      indicatorClassName: slots.indicator(),
+      status,
+      titleClassName: slots.title(),
+    }),
+    [slots, status],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName) as string,
+    [className, baseClassName],
+  );
 
   return (
-    <AlertContext value={{slots, status}}>
+    <AlertContext value={contextValue}>
       <SurfaceContext
         value={{
           variant: "default" as SurfaceVariants["variant"],
         }}
       >
-        <dom.div className={slots?.base({className})} data-slot="alert-root" {...(rest as any)}>
+        <dom.div className={resolvedClassName} data-slot="alert-root" {...(rest as any)}>
           {children}
         </dom.div>
       </SurfaceContext>
     </AlertContext>
   );
-};
+}
+
+const AlertRoot = memo(AlertRootInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: AlertRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertRootProps<E>>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Indicator
@@ -68,14 +90,17 @@ interface AlertIndicatorProps<
   className?: string;
 }
 
-const AlertIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function AlertIndicatorInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...rest
-}: AlertIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertIndicatorProps<E>>) => {
-  const {slots, status} = useContext(AlertContext);
+}: AlertIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertIndicatorProps<E>>) {
+  const {indicatorClassName, status} = useContext(AlertContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, indicatorClassName) as string,
+    [className, indicatorClassName],
+  );
 
-  // Map status to default icons
   const getDefaultIcon = () => {
     switch (status) {
       case "accent":
@@ -92,15 +117,18 @@ const AlertIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
   };
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.indicator, className)}
-      data-slot="alert-indicator"
-      {...(rest as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="alert-indicator" {...(rest as any)}>
       {children ?? getDefaultIcon()}
     </dom.div>
   );
-};
+}
+
+const AlertIndicator = memo(AlertIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: AlertIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof AlertIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Content
@@ -112,23 +140,29 @@ interface AlertContentProps<
   className?: string;
 }
 
-const AlertContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function AlertContentInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...rest
-}: AlertContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertContentProps<E>>) => {
-  const {slots} = useContext(AlertContext);
+}: AlertContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertContentProps<E>>) {
+  const {contentClassName} = useContext(AlertContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, contentClassName) as string,
+    [className, contentClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.content, className)}
-      data-slot="alert-content"
-      {...(rest as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="alert-content" {...(rest as any)}>
       {children}
     </dom.div>
   );
-};
+}
+
+const AlertContent = memo(AlertContentInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: AlertContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertContentProps<E>>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Title
@@ -141,23 +175,27 @@ interface AlertTitleProps<E extends keyof React.JSX.IntrinsicElements = "p"> ext
   className?: string;
 }
 
-const AlertTitle = <E extends keyof React.JSX.IntrinsicElements = "p">({
+function AlertTitleInner<E extends keyof React.JSX.IntrinsicElements = "p">({
   children,
   className,
   ...rest
-}: AlertTitleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertTitleProps<E>>) => {
-  const {slots} = useContext(AlertContext);
+}: AlertTitleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertTitleProps<E>>) {
+  const {titleClassName} = useContext(AlertContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, titleClassName) as string,
+    [className, titleClassName],
+  );
 
   return (
-    <dom.p
-      className={composeSlotClassName(slots?.title, className)}
-      data-slot="alert-title"
-      {...(rest as any)}
-    >
+    <dom.p className={resolvedClassName} data-slot="alert-title" {...(rest as any)}>
       {children}
     </dom.p>
   );
-};
+}
+
+const AlertTitle = memo(AlertTitleInner) as <E extends keyof React.JSX.IntrinsicElements = "p">(
+  props: AlertTitleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertTitleProps<E>>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Alert Description
@@ -169,24 +207,31 @@ interface AlertDescriptionProps<
   className?: string;
 }
 
-const AlertDescription = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function AlertDescriptionInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...rest
 }: AlertDescriptionProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof AlertDescriptionProps<E>>) => {
-  const {slots} = useContext(AlertContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof AlertDescriptionProps<E>>) {
+  const {descriptionClassName} = useContext(AlertContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, descriptionClassName) as string,
+    [className, descriptionClassName],
+  );
 
   return (
-    <dom.span
-      className={composeSlotClassName(slots?.description, className)}
-      data-slot="alert-description"
-      {...(rest as any)}
-    >
+    <dom.span className={resolvedClassName} data-slot="alert-description" {...(rest as any)}>
       {children}
     </dom.span>
   );
-};
+}
+
+const AlertDescription = memo(AlertDescriptionInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: AlertDescriptionProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof AlertDescriptionProps<E>>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Exports

@@ -4,7 +4,7 @@ import type {DisclosureGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {disclosureGroupVariants} from "@heroui/styles";
-import React, {createContext} from "react";
+import React, {createContext, memo, useMemo} from "react";
 import {DisclosureGroup as DisclosureGroupPrimitive} from "react-aria-components/DisclosureGroup";
 
 import {composeTwRenderProps} from "../../utils/compose";
@@ -12,9 +12,7 @@ import {composeTwRenderProps} from "../../utils/compose";
 /* -------------------------------------------------------------------------------------------------
  * Disclosure Group Context
  * -----------------------------------------------------------------------------------------------*/
-type DisclosureGroupContext = {
-  slots?: ReturnType<typeof disclosureGroupVariants>;
-};
+type DisclosureGroupContext = Record<string, never>;
 
 const DisclosureGroupContext = createContext<DisclosureGroupContext>({});
 
@@ -24,21 +22,26 @@ const DisclosureGroupContext = createContext<DisclosureGroupContext>({});
 interface DisclosureGroupRootProps
   extends ComponentPropsWithRef<typeof DisclosureGroupPrimitive>, DisclosureGroupVariants {}
 
-const DisclosureGroupRoot = ({children, className, ...props}: DisclosureGroupRootProps) => {
-  const slots = React.useMemo(() => disclosureGroupVariants({}), []);
+const DisclosureGroupRoot = memo(function DisclosureGroupRoot({
+  children,
+  className,
+  ...props
+}: DisclosureGroupRootProps) {
+  const slots = useMemo(() => disclosureGroupVariants({}), []);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
-    <DisclosureGroupContext value={{slots}}>
+    <DisclosureGroupContext value={{}}>
       <DisclosureGroupPrimitive
         data-slot="disclosure-group"
         {...props}
-        className={composeTwRenderProps(className, slots.base())}
+        className={composeTwRenderProps(className, baseClassName)}
       >
         {typeof children === "function" ? (values) => children(values) : children}
       </DisclosureGroupPrimitive>
     </DisclosureGroupContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

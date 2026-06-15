@@ -5,7 +5,7 @@ import type {TabsVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tabsVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {SelectionIndicator as SelectionIndicatorPrimitive} from "react-aria-components/SelectionIndicator";
 import {
   TabList as TabListPrimitive,
@@ -14,7 +14,7 @@ import {
   Tabs as TabsPrimitive,
 } from "react-aria-components/Tabs";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
@@ -22,7 +22,12 @@ import {dom} from "../../utils/dom";
  * -----------------------------------------------------------------------------------------------*/
 type TabsContext = {
   orientation?: "horizontal" | "vertical";
-  slots?: ReturnType<typeof tabsVariants>;
+  separatorClassName?: string;
+  tabClassName?: string;
+  tabIndicatorClassName?: string;
+  tabListClassName?: string;
+  tabListContainerClassName?: string;
+  tabPanelClassName?: string;
 };
 
 const TabsContext = createContext<TabsContext>({});
@@ -35,20 +40,33 @@ interface TabsRootProps extends ComponentPropsWithRef<typeof TabsPrimitive>, Tab
   className?: string;
 }
 
-const TabsRoot = ({
+const TabsRoot = memo(function TabsRoot({
   children,
   className,
   orientation = "horizontal",
   variant,
   ...props
-}: TabsRootProps) => {
-  const slots = React.useMemo(() => tabsVariants({variant}), [variant]);
+}: TabsRootProps) {
+  const slots = useMemo(() => tabsVariants({variant}), [variant]);
+  const contextValue = useMemo<TabsContext>(
+    () => ({
+      orientation,
+      separatorClassName: slots.separator(),
+      tabClassName: slots.tab(),
+      tabIndicatorClassName: slots.tabIndicator(),
+      tabListClassName: slots.tabList(),
+      tabListContainerClassName: slots.tabListContainer(),
+      tabPanelClassName: slots.tabPanel(),
+    }),
+    [orientation, slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
-    <TabsContext value={{orientation, slots}}>
+    <TabsContext value={contextValue}>
       <TabsPrimitive
         {...props}
-        className={composeTwRenderProps(className, slots.base())}
+        className={composeTwRenderProps(className, baseClassName)}
         data-slot="tabs"
         orientation={orientation}
       >
@@ -56,7 +74,7 @@ const TabsRoot = ({
       </TabsPrimitive>
     </TabsContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs List Container
@@ -68,24 +86,31 @@ interface TabListContainerProps<
   className?: string;
 }
 
-const TabListContainer = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function TabListContainerInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
 }: TabListContainerProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof TabListContainerProps<E>>) => {
-  const {slots} = useContext(TabsContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof TabListContainerProps<E>>) {
+  const {tabListContainerClassName} = useContext(TabsContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, tabListContainerClassName) as string,
+    [className, tabListContainerClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.tabListContainer, className)}
-      data-slot="tabs-list-container"
-      {...(props as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="tabs-list-container" {...(props as any)}>
       {children}
     </dom.div>
   );
-};
+}
+
+const TabListContainer = memo(TabListContainerInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: TabListContainerProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof TabListContainerProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs List
@@ -95,19 +120,19 @@ interface TabListProps extends ComponentPropsWithRef<typeof TabListPrimitive<obj
   className?: string;
 }
 
-const TabList = ({children, className, ...props}: TabListProps) => {
-  const {slots} = useContext(TabsContext);
+const TabList = memo(function TabList({children, className, ...props}: TabListProps) {
+  const {tabListClassName} = useContext(TabsContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, tabListClassName),
+    [className, tabListClassName],
+  );
 
   return (
-    <TabListPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.tabList())}
-      data-slot="tabs-list"
-    >
+    <TabListPrimitive {...props} className={resolvedClassName} data-slot="tabs-list">
       {children}
     </TabListPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tab
@@ -116,19 +141,19 @@ interface TabProps extends ComponentPropsWithRef<typeof TabPrimitive> {
   className?: string;
 }
 
-const Tab = ({children, className, ...props}: TabProps) => {
-  const {slots} = useContext(TabsContext);
+const Tab = memo(function Tab({children, className, ...props}: TabProps) {
+  const {tabClassName} = useContext(TabsContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, tabClassName),
+    [className, tabClassName],
+  );
 
   return (
-    <TabPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.tab())}
-      data-slot="tabs-tab"
-    >
+    <TabPrimitive {...props} className={resolvedClassName} data-slot="tabs-tab">
       {children}
     </TabPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Indicator
@@ -137,17 +162,21 @@ interface TabIndicatorProps extends ComponentPropsWithRef<typeof SelectionIndica
   className?: string;
 }
 
-const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
-  const {slots} = useContext(TabsContext);
+const TabIndicator = memo(function TabIndicator({className, ...props}: TabIndicatorProps) {
+  const {tabIndicatorClassName} = useContext(TabsContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, tabIndicatorClassName) as string,
+    [className, tabIndicatorClassName],
+  );
 
   return (
     <SelectionIndicatorPrimitive
-      className={composeSlotClassName(slots?.tabIndicator, className)}
+      className={resolvedClassName}
       data-slot="tabs-indicator"
       {...props}
     />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Panel
@@ -157,19 +186,19 @@ interface TabPanelProps extends Omit<ComponentPropsWithRef<typeof TabPanelPrimit
   className?: string;
 }
 
-const TabPanel = ({children, className, ...props}: TabPanelProps) => {
-  const {slots} = useContext(TabsContext);
+const TabPanel = memo(function TabPanel({children, className, ...props}: TabPanelProps) {
+  const {tabPanelClassName} = useContext(TabsContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, tabPanelClassName),
+    [className, tabPanelClassName],
+  );
 
   return (
-    <TabPanelPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.tabPanel())}
-      data-slot="tabs-panel"
-    >
+    <TabPanelPrimitive {...props} className={resolvedClassName} data-slot="tabs-panel">
       {children}
     </TabPanelPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Separator
@@ -180,21 +209,31 @@ interface TabSeparatorProps<
   className?: string;
 }
 
-const TabSeparator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function TabSeparatorInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
-}: TabSeparatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TabSeparatorProps<E>>) => {
-  const {slots} = useContext(TabsContext);
+}: TabSeparatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TabSeparatorProps<E>>) {
+  const {separatorClassName} = useContext(TabsContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, separatorClassName) as string,
+    [className, separatorClassName],
+  );
 
   return (
     <dom.span
       aria-hidden="true"
-      className={composeSlotClassName(slots?.separator, className)}
+      className={resolvedClassName}
       data-slot="tabs-separator"
       {...(props as any)}
     />
   );
-};
+}
+
+const TabSeparator = memo(TabSeparatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: TabSeparatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TabSeparatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

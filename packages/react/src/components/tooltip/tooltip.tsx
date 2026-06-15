@@ -5,7 +5,7 @@ import type {TooltipVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tooltipVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Focusable as FocusablePrimitive} from "react-aria-components/Focusable";
 import {
   OverlayArrow,
@@ -14,7 +14,7 @@ import {
 } from "react-aria-components/Tooltip";
 
 import {useCSSVariable} from "../../hooks/use-css-variable";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {parseCSSTime} from "../../utils/css";
 import {dom} from "../../utils/dom";
 
@@ -22,7 +22,8 @@ import {dom} from "../../utils/dom";
  * Tooltip Context
  * -----------------------------------------------------------------------------------------------*/
 type TooltipContext = {
-  slots?: ReturnType<typeof tooltipVariants>;
+  baseClassName?: string;
+  triggerClassName?: string;
 };
 
 const TooltipContext = createContext<TooltipContext>({});
@@ -32,13 +33,20 @@ const TooltipContext = createContext<TooltipContext>({});
  * -----------------------------------------------------------------------------------------------*/
 type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
 
-const TooltipRoot = ({
+const TooltipRoot = memo(function TooltipRoot({
   children,
   closeDelay,
   delay,
   ...props
-}: ComponentPropsWithRef<typeof TooltipTriggerPrimitive>) => {
-  const slots = React.useMemo(() => tooltipVariants(), []);
+}: ComponentPropsWithRef<typeof TooltipTriggerPrimitive>) {
+  const slots = useMemo(() => tooltipVariants(), []);
+  const contextValue = useMemo<TooltipContext>(
+    () => ({
+      baseClassName: slots.base(),
+      triggerClassName: slots.trigger(),
+    }),
+    [slots],
+  );
 
   const cssDelay = useCSSVariable("--tooltip-delay");
   const cssCloseDelay = useCSSVariable("--tooltip-close-delay");
@@ -47,7 +55,7 @@ const TooltipRoot = ({
   const resolvedCloseDelay = closeDelay ?? parseCSSTime(cssCloseDelay);
 
   return (
-    <TooltipContext value={{slots}}>
+    <TooltipContext value={contextValue}>
       <TooltipTriggerPrimitive
         closeDelay={resolvedCloseDelay}
         data-slot="tooltip-root"
@@ -58,7 +66,7 @@ const TooltipRoot = ({
       </TooltipTriggerPrimitive>
     </TooltipContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Content
@@ -69,26 +77,26 @@ interface TooltipContentProps
   children: React.ReactNode;
 }
 
-const TooltipContent = ({
+const TooltipContent = memo(function TooltipContent({
   children,
   className,
   offset: offsetProp,
   showArrow = false,
   ...props
-}: TooltipContentProps) => {
-  const {slots} = useContext(TooltipContext);
+}: TooltipContentProps) {
+  const {baseClassName} = useContext(TooltipContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName),
+    [className, baseClassName],
+  );
   const offset = offsetProp ? offsetProp : showArrow ? 7 : 3;
 
   return (
-    <TooltipPrimitive
-      {...props}
-      className={composeTwRenderProps(className, slots?.base())}
-      offset={offset}
-    >
+    <TooltipPrimitive {...props} className={resolvedClassName} offset={offset}>
       {children}
     </TooltipPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Arrow
@@ -97,7 +105,11 @@ type TooltipArrowProps = Omit<ComponentPropsWithRef<typeof OverlayArrow>, "child
   children?: React.ReactNode;
 };
 
-const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
+const TooltipArrow = memo(function TooltipArrow({
+  children,
+  className,
+  ...props
+}: TooltipArrowProps) {
   const defaultArrow = (
     <svg
       data-slot="overlay-arrow"
@@ -128,7 +140,7 @@ const TooltipArrow = ({children, className, ...props}: TooltipArrowProps) => {
       {arrow}
     </OverlayArrow>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Trigger
@@ -140,17 +152,21 @@ interface TooltipTriggerProps<
   className?: string;
 }
 
-const TooltipTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function TooltipTriggerInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
-}: TooltipTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TooltipTriggerProps<E>>) => {
-  const {slots} = useContext(TooltipContext);
+}: TooltipTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TooltipTriggerProps<E>>) {
+  const {triggerClassName} = useContext(TooltipContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName) as string,
+    [className, triggerClassName],
+  );
 
   return (
     <FocusablePrimitive>
       <dom.div
-        className={composeSlotClassName(slots?.trigger, className)}
+        className={resolvedClassName}
         data-slot="tooltip-trigger"
         role="button"
         {...(props as any)}
@@ -159,7 +175,14 @@ const TooltipTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
       </dom.div>
     </FocusablePrimitive>
   );
-};
+}
+
+const TooltipTrigger = memo(TooltipTriggerInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: TooltipTriggerProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof TooltipTriggerProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

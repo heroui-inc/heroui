@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {tagVariants} from "@heroui/styles";
-import React, {Children, createContext, useContext, useMemo} from "react";
+import React, {Children, createContext, memo, useContext, useMemo} from "react";
 import {Tag as TagPrimitive} from "react-aria-components/TagGroup";
 
 import {pickChildren} from "../../utils/children";
@@ -17,7 +17,7 @@ import {TagGroupContext} from "../tag-group";
  * Tag Context
  * -----------------------------------------------------------------------------------------------*/
 type TagContext = {
-  slots?: ReturnType<typeof tagVariants>;
+  removeButtonClassName?: string;
 };
 
 const TagContext = createContext<TagContext>({});
@@ -27,10 +27,16 @@ const TagContext = createContext<TagContext>({});
  * -----------------------------------------------------------------------------------------------*/
 interface TagRootProps extends ComponentPropsWithRef<typeof TagPrimitive>, TagVariants {}
 
-const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
+const TagRoot = memo(function TagRoot({children, className, ...restProps}: TagRootProps) {
   const {size, variant} = useContext(TagGroupContext);
 
   const slots = useMemo(() => tagVariants({size, variant}), [size, variant]);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName),
+    [className, baseClassName],
+  );
+  const removeButtonClassName = useMemo(() => slots.removeButton(), [slots]);
 
   const textValue = useMemo(() => {
     if (typeof children === "string") {
@@ -46,7 +52,6 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
     return undefined;
   }, [children]);
 
-  // Extract custom RemoveButton from children if present
   const [childrenWithoutRemoveButton, removeButtonChildren] = useMemo(() => {
     if (typeof children === "function") {
       return [children, undefined];
@@ -57,13 +62,13 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
 
   return (
     <TagPrimitive
-      className={composeTwRenderProps(className, slots.base())}
+      className={resolvedClassName}
       data-slot="tag"
       textValue={textValue}
       {...restProps}
     >
       {(renderProps) => (
-        <TagContext value={{slots}}>
+        <TagContext value={{removeButtonClassName}}>
           {typeof children === "function" ? (
             children(renderProps)
           ) : (
@@ -81,7 +86,7 @@ const TagRoot = ({children, className, ...restProps}: TagRootProps) => {
       )}
     </TagPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tag Remove Button
@@ -90,13 +95,21 @@ type TagRemoveButtonProps = ComponentPropsWithRef<typeof ButtonPrimitive> & {
   children?: React.ReactNode;
 };
 
-const TagRemoveButton = ({children, className, ...restProps}: TagRemoveButtonProps) => {
-  const {slots} = useContext(TagContext);
+const TagRemoveButton = memo(function TagRemoveButton({
+  children,
+  className,
+  ...restProps
+}: TagRemoveButtonProps) {
+  const {removeButtonClassName} = useContext(TagContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, removeButtonClassName),
+    [className, removeButtonClassName],
+  );
 
   return (
     <CloseButton
       aria-label="Remove tag"
-      className={composeTwRenderProps(className, slots?.removeButton())}
+      className={resolvedClassName}
       data-slot="tag-remove-button"
       slot="remove"
       {...restProps}
@@ -104,7 +117,7 @@ const TagRemoveButton = ({children, className, ...restProps}: TagRemoveButtonPro
       {children}
     </CloseButton>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

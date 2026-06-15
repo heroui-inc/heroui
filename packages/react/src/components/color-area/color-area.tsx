@@ -4,7 +4,7 @@ import type {ColorAreaVariants} from "@heroui/styles";
 import type {CSSProperties, ComponentPropsWithRef} from "react";
 
 import {colorAreaVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {
   ColorArea as ColorAreaPrimitive,
   ColorThumb as ColorThumbPrimitive,
@@ -16,7 +16,7 @@ import {composeTwRenderProps} from "../../utils/compose";
  * ColorArea Context
  * -----------------------------------------------------------------------------------------------*/
 interface ColorAreaContext {
-  slots?: ReturnType<typeof colorAreaVariants>;
+  thumbClassName?: string;
 }
 
 const ColorAreaContext = createContext<ColorAreaContext>({});
@@ -27,14 +27,27 @@ const ColorAreaContext = createContext<ColorAreaContext>({});
 interface ColorAreaRootProps
   extends ComponentPropsWithRef<typeof ColorAreaPrimitive>, ColorAreaVariants {}
 
-const ColorAreaRoot = ({children, className, showDots, style, ...props}: ColorAreaRootProps) => {
-  const slots = React.useMemo(() => colorAreaVariants({showDots}), [showDots]);
+const ColorAreaRoot = memo(function ColorAreaRoot({
+  children,
+  className,
+  showDots,
+  style,
+  ...props
+}: ColorAreaRootProps) {
+  const slots = useMemo(() => colorAreaVariants({showDots}), [showDots]);
+  const contextValue = useMemo<ColorAreaContext>(
+    () => ({
+      thumbClassName: slots.thumb(),
+    }),
+    [slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
-    <ColorAreaContext value={{slots}}>
+    <ColorAreaContext value={contextValue}>
       <ColorAreaPrimitive
         {...props}
-        className={composeTwRenderProps(className, slots.base())}
+        className={composeTwRenderProps(className, baseClassName)}
         data-slot="color-area"
         style={(renderProps) => {
           const userStyle = typeof style === "function" ? style(renderProps) : style;
@@ -49,19 +62,27 @@ const ColorAreaRoot = ({children, className, showDots, style, ...props}: ColorAr
       </ColorAreaPrimitive>
     </ColorAreaContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorArea Thumb
  * -----------------------------------------------------------------------------------------------*/
 interface ColorAreaThumbProps extends ComponentPropsWithRef<typeof ColorThumbPrimitive> {}
 
-const ColorAreaThumb = ({className, style, ...props}: ColorAreaThumbProps) => {
-  const {slots} = useContext(ColorAreaContext);
+const ColorAreaThumb = memo(function ColorAreaThumb({
+  className,
+  style,
+  ...props
+}: ColorAreaThumbProps) {
+  const {thumbClassName} = useContext(ColorAreaContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, thumbClassName),
+    [className, thumbClassName],
+  );
 
   return (
     <ColorThumbPrimitive
-      className={composeTwRenderProps(className, slots?.thumb())}
+      className={resolvedClassName}
       data-slot="color-area-thumb"
       style={(renderProps) => {
         const userStyle = typeof style === "function" ? style(renderProps) : style;
@@ -74,7 +95,7 @@ const ColorAreaThumb = ({className, style, ...props}: ColorAreaThumbProps) => {
       {...props}
     />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

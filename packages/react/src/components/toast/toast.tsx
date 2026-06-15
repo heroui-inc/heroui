@@ -9,12 +9,14 @@ import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-co
 import {toastVariants} from "@heroui/styles";
 import React, {
   createContext,
+  memo,
   useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
@@ -26,7 +28,7 @@ import {
 
 import {useMeasuredHeight, useMediaQuery} from "../../hooks";
 import {dataAttr} from "../../utils/assertion";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {Button} from "../button";
 import {CloseButton} from "../close-button";
@@ -44,16 +46,24 @@ import {ToastQueue, toast as defaultToastQueue} from "./toast-queue";
 /* ------------------------------------------------------------------------------------------------
  * Toast Context
  * --------------------------------------------------------------------------------------------- */
+type ToastVariant = NonNullable<ToastVariants["variant"]>;
+
 type ToastContext = {
-  slots?: ReturnType<typeof toastVariants>;
-  placement?: ToastVariants["placement"];
-  width?: number | string;
-  scaleFactor?: number;
+  actionClassName?: string;
+  closeClassName?: string;
+  contentClassName?: string;
+  descriptionClassName?: string;
   gap?: number;
-  maxVisibleToasts?: number;
   heightsByKey?: Record<string, number>;
+  indicatorClassName?: string;
+  maxVisibleToasts?: number;
   onToastHeightChange?: (key: string, height: number) => void;
   onToastHeightRemove?: (key: string) => void;
+  placement?: ToastVariants["placement"];
+  scaleFactor?: number;
+  titleClassName?: string;
+  toastClassNames?: Record<ToastVariant, string>;
+  width?: number | string;
 };
 
 const ToastContext = createContext<ToastContext>({});
@@ -66,7 +76,7 @@ interface ToastProps<T extends object = ToastContentValue>
   scaleFactor?: number;
 }
 
-const Toast = <T extends object = ToastContentValue>({
+function ToastInner<T extends object = ToastContentValue>({
   children,
   className,
   placement,
@@ -74,7 +84,7 @@ const Toast = <T extends object = ToastContentValue>({
   toast,
   variant,
   ...rest
-}: ToastProps<T>) => {
+}: ToastProps<T>) {
   const {
     gap = DEFAULT_GAP,
     heightsByKey,
@@ -83,11 +93,16 @@ const Toast = <T extends object = ToastContentValue>({
     onToastHeightRemove,
     placement: contextPlacement,
     scaleFactor: contextScaleFactor,
-    slots,
+    toastClassNames,
   } = useContext(ToastContext);
 
   const finalPlacement = placement ?? contextPlacement;
   const finalScaleFactor = scaleFactor ?? contextScaleFactor;
+  const toastClassName = toastClassNames?.[variant ?? "default"];
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, toastClassName),
+    [className, toastClassName],
+  );
 
   const state = useContext(ToastStateContext)!;
   const visibleToasts = state.visibleToasts;
@@ -159,7 +174,6 @@ const Toast = <T extends object = ToastContentValue>({
     heightsByKey,
     index,
     isBottom,
-    isFrontmost,
     isHidden,
     rest.style,
     toast?.key,
@@ -171,7 +185,7 @@ const Toast = <T extends object = ToastContentValue>({
     <ToastPrimitive
       ref={toastRef}
       aria-hidden={isHidden}
-      className={composeTwRenderProps(className, slots?.toast({variant}))}
+      className={resolvedClassName}
       data-frontmost={dataAttr(isFrontmost)}
       data-hidden={dataAttr(isHidden)}
       data-index={index}
@@ -183,28 +197,32 @@ const Toast = <T extends object = ToastContentValue>({
       {children}
     </ToastPrimitive>
   );
-};
+}
 
-Toast.displayName = "HeroUI.Toast";
+ToastInner.displayName = "HeroUI.Toast";
+
+const Toast = memo(ToastInner) as <T extends object = ToastContentValue>(
+  props: ToastProps<T>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Content
  * --------------------------------------------------------------------------------------------- */
 interface ToastContentProps extends ComponentPropsWithRef<typeof ToastContentPrimitive> {}
 
-const ToastContent = ({children, className, ...rest}: ToastContentProps) => {
-  const {slots} = useContext(ToastContext);
+const ToastContent = memo(function ToastContent({children, className, ...rest}: ToastContentProps) {
+  const {contentClassName} = useContext(ToastContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, contentClassName) as string,
+    [className, contentClassName],
+  );
 
   return (
-    <ToastContentPrimitive
-      className={composeSlotClassName(slots?.content, className)}
-      data-slot="toast-content"
-      {...rest}
-    >
+    <ToastContentPrimitive className={resolvedClassName} data-slot="toast-content" {...rest}>
       {children}
     </ToastContentPrimitive>
   );
-};
+});
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Indicator
@@ -217,13 +235,17 @@ interface ToastIndicatorProps<
   variant?: ToastVariants["variant"];
 }
 
-const ToastIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function ToastIndicatorInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   variant,
   ...rest
-}: ToastIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ToastIndicatorProps<E>>) => {
-  const {slots} = useContext(ToastContext);
+}: ToastIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ToastIndicatorProps<E>>) {
+  const {indicatorClassName} = useContext(ToastContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, indicatorClassName) as string,
+    [className, indicatorClassName],
+  );
 
   const getDefaultIcon = useCallback(() => {
     switch (variant) {
@@ -241,37 +263,39 @@ const ToastIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
   }, [variant]);
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.indicator, className)}
-      data-slot="toast-indicator"
-      {...(rest as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="toast-indicator" {...(rest as any)}>
       {children ?? getDefaultIcon()}
     </dom.div>
   );
-};
+}
 
-ToastIndicator.displayName = "HeroUI.ToastIndicator";
+ToastIndicatorInner.displayName = "HeroUI.ToastIndicator";
+
+const ToastIndicator = memo(ToastIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: ToastIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ToastIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Toast Title
  * --------------------------------------------------------------------------------------------- */
 interface ToastTitleProps extends ComponentPropsWithRef<typeof TextPrimitive> {}
 
-const ToastTitle = ({children, className, ...rest}: ToastTitleProps) => {
-  const {slots} = useContext(ToastContext);
+const ToastTitle = memo(function ToastTitle({children, className, ...rest}: ToastTitleProps) {
+  const {titleClassName} = useContext(ToastContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, titleClassName) as string,
+    [className, titleClassName],
+  );
 
   return (
-    <TextPrimitive
-      className={composeSlotClassName(slots?.title, className)}
-      data-slot="toast-title"
-      slot="title"
-      {...rest}
-    >
+    <TextPrimitive className={resolvedClassName} data-slot="toast-title" slot="title" {...rest}>
       {children}
     </TextPrimitive>
   );
-};
+});
 
 ToastTitle.displayName = "HeroUI.ToastTitle";
 
@@ -280,12 +304,20 @@ ToastTitle.displayName = "HeroUI.ToastTitle";
  * --------------------------------------------------------------------------------------------- */
 interface ToastDescriptionProps extends ComponentPropsWithRef<typeof TextPrimitive> {}
 
-const ToastDescription = ({children, className, ...rest}: ToastDescriptionProps) => {
-  const {slots} = useContext(ToastContext);
+const ToastDescription = memo(function ToastDescription({
+  children,
+  className,
+  ...rest
+}: ToastDescriptionProps) {
+  const {descriptionClassName} = useContext(ToastContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, descriptionClassName) as string,
+    [className, descriptionClassName],
+  );
 
   return (
     <TextPrimitive
-      className={composeSlotClassName(slots?.description, className)}
+      className={resolvedClassName}
       data-slot="toast-description"
       slot="description"
       {...rest}
@@ -293,7 +325,7 @@ const ToastDescription = ({children, className, ...rest}: ToastDescriptionProps)
       {children}
     </TextPrimitive>
   );
-};
+});
 
 ToastDescription.displayName = "HeroUI.ToastDescription";
 
@@ -302,18 +334,20 @@ ToastDescription.displayName = "HeroUI.ToastDescription";
  * --------------------------------------------------------------------------------------------- */
 interface ToastCloseButtonProps extends ComponentPropsWithRef<typeof CloseButton> {}
 
-const ToastCloseButton = ({className, ...rest}: ToastCloseButtonProps) => {
-  const {slots} = useContext(ToastContext);
+const ToastCloseButton = memo(function ToastCloseButton({
+  className,
+  ...rest
+}: ToastCloseButtonProps) {
+  const {closeClassName} = useContext(ToastContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, closeClassName),
+    [className, closeClassName],
+  );
 
   return (
-    <CloseButton
-      className={composeTwRenderProps(className, slots?.close())}
-      data-slot="toast-close"
-      slot="close"
-      {...rest}
-    />
+    <CloseButton className={resolvedClassName} data-slot="toast-close" slot="close" {...rest} />
   );
-};
+});
 
 ToastCloseButton.displayName = "HeroUI.ToastCloseButton";
 
@@ -322,19 +356,23 @@ ToastCloseButton.displayName = "HeroUI.ToastCloseButton";
  * --------------------------------------------------------------------------------------------- */
 interface ToastActionButtonProps extends ComponentPropsWithRef<typeof Button> {}
 
-const ToastActionButton = ({children, className, ...rest}: ToastActionButtonProps) => {
-  const {slots} = useContext(ToastContext);
+const ToastActionButton = memo(function ToastActionButton({
+  children,
+  className,
+  ...rest
+}: ToastActionButtonProps) {
+  const {actionClassName} = useContext(ToastContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, actionClassName),
+    [className, actionClassName],
+  );
 
   return (
-    <Button
-      className={composeTwRenderProps(className, slots?.action?.())}
-      data-slot="toast-action-button"
-      {...rest}
-    >
+    <Button className={resolvedClassName} data-slot="toast-action-button" {...rest}>
       {children}
     </Button>
   );
-};
+});
 
 ToastActionButton.displayName = "HeroUI.ToastActionButton";
 
@@ -362,7 +400,7 @@ interface ToastProviderProps<T extends object = ToastContentValue> extends Omit<
   width?: number | string;
 }
 
-const ToastProvider = <T extends object = ToastContentValue>({
+function ToastProviderInner<T extends object = ToastContentValue>({
   children,
   className,
   gap = DEFAULT_GAP,
@@ -372,10 +410,33 @@ const ToastProvider = <T extends object = ToastContentValue>({
   scaleFactor = DEFAULT_SCALE_FACTOR,
   width = DEFAULT_TOAST_WIDTH,
   ...rest
-}: ToastProviderProps<T>) => {
+}: ToastProviderProps<T>) {
   const slots = useMemo(() => toastVariants({placement}), [placement]);
+  const slotClassNames = useMemo(
+    () => ({
+      actionClassName: slots.action(),
+      closeClassName: slots.close(),
+      contentClassName: slots.content(),
+      descriptionClassName: slots.description(),
+      indicatorClassName: slots.indicator(),
+      titleClassName: slots.title(),
+      toastClassNames: {
+        accent: slots.toast({variant: "accent"}),
+        danger: slots.toast({variant: "danger"}),
+        default: slots.toast({variant: "default"}),
+        success: slots.toast({variant: "success"}),
+        warning: slots.toast({variant: "warning"}),
+      },
+    }),
+    [slots],
+  );
+  const regionClassName = useMemo(() => slots.region(), [slots]);
+  const resolvedRegionClassName = useMemo(
+    () => composeTwRenderProps(className, regionClassName),
+    [className, regionClassName],
+  );
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const [toastHeights, setToastHeights] = React.useState<Record<string, number>>({});
+  const [toastHeights, setToastHeights] = useState<Record<string, number>>({});
 
   const toastQueue = useMemo((): StatelyToastQueue<T> => {
     if (queueProp) {
@@ -460,7 +521,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
 
   return (
     <ToastRegionPrimitive<T>
-      className={composeTwRenderProps(className, slots?.region())}
+      className={resolvedRegionClassName}
       data-slot="toast-region"
       queue={toastQueue}
       style={{
@@ -482,6 +543,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
         return (
           <ToastContext
             value={{
+              ...slotClassNames,
               gap,
               heightsByKey: toastHeights,
               maxVisibleToasts: resolvedMaxVisibleToasts,
@@ -489,7 +551,6 @@ const ToastProvider = <T extends object = ToastContentValue>({
               onToastHeightRemove: handleToastHeightRemove,
               placement,
               scaleFactor,
-              slots,
               width,
             }}
           >
@@ -503,9 +564,13 @@ const ToastProvider = <T extends object = ToastContentValue>({
       }}
     </ToastRegionPrimitive>
   );
-};
+}
 
-ToastProvider.displayName = "HeroUI.ToastProvider";
+ToastProviderInner.displayName = "HeroUI.ToastProvider";
+
+const ToastProvider = memo(ToastProviderInner) as <T extends object = ToastContentValue>(
+  props: ToastProviderProps<T>,
+) => React.JSX.Element;
 
 /* ------------------------------------------------------------------------------------------------
  * Exports

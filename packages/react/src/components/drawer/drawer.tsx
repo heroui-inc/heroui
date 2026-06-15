@@ -9,7 +9,7 @@ import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Di
 
 import {drawerVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
-import React, {createContext, useCallback, useContext, useMemo, useRef} from "react";
+import React, {createContext, memo, useCallback, useContext, useMemo, useRef} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
   Dialog as DialogPrimitive,
@@ -22,7 +22,7 @@ import {
   Modal as ModalPrimitive,
 } from "react-aria-components/Modal";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
 import {SurfaceContext, defaultSurfaceContextValue} from "../surface";
@@ -204,12 +204,38 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
  * Drawer Context
  * -----------------------------------------------------------------------------------------------*/
 type DrawerContext = {
-  slots?: ReturnType<typeof drawerVariants>;
-  placement?: DrawerPlacement;
+  backdropClassName?: string;
+  bodyClassName?: string;
+  closeTriggerClassName?: string;
+  contentClassName?: string;
+  dialogClassName?: string;
+  footerClassName?: string;
+  handleClassName?: string;
+  headerClassName?: string;
+  headingClassName?: string;
   isDismissable?: boolean;
+  placement?: DrawerPlacement;
+  triggerClassName?: string;
 };
 
 const DrawerContext = createContext<DrawerContext>({});
+
+const createDrawerContextFromSlots = (
+  slots: ReturnType<typeof drawerVariants>,
+  prev: DrawerContext = {},
+): DrawerContext => ({
+  ...prev,
+  backdropClassName: slots.backdrop(),
+  bodyClassName: slots.body(),
+  closeTriggerClassName: slots.closeTrigger(),
+  contentClassName: slots.content(),
+  dialogClassName: slots.dialog(),
+  footerClassName: slots.footer(),
+  handleClassName: slots.handle(),
+  headerClassName: slots.header(),
+  headingClassName: slots.heading(),
+  triggerClassName: slots.trigger(),
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Drawer Root
@@ -218,10 +244,11 @@ interface DrawerRootProps extends ComponentPropsWithRef<typeof DrawerTriggerPrim
   state?: UseOverlayStateReturn;
 }
 
-const DrawerRoot = ({children, state, ...props}: DrawerRootProps) => {
+const DrawerRoot = memo(function DrawerRoot({children, state, ...props}: DrawerRootProps) {
+  const slots = useMemo(() => drawerVariants(), []);
   const drawerContext = useMemo<DrawerContext>(
-    () => ({slots: drawerVariants(), placement: undefined, isDismissable: true}),
-    [],
+    () => ({...createDrawerContextFromSlots(slots), placement: undefined, isDismissable: true}),
+    [slots],
   );
 
   const controlledProps = useMemo<UseOverlayStateProps>(
@@ -236,7 +263,7 @@ const DrawerRoot = ({children, state, ...props}: DrawerRootProps) => {
       </DrawerTriggerPrimitive>
     </DrawerContext>
   );
-};
+});
 
 DrawerRoot.displayName = "HeroUI.Drawer";
 
@@ -245,19 +272,23 @@ DrawerRoot.displayName = "HeroUI.Drawer";
  * -----------------------------------------------------------------------------------------------*/
 interface DrawerTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
-const DrawerTrigger = ({children, className, ...props}: DrawerTriggerProps) => {
-  const {slots} = useContext(DrawerContext);
+const DrawerTrigger = memo(function DrawerTrigger({
+  children,
+  className,
+  ...props
+}: DrawerTriggerProps) {
+  const {triggerClassName} = useContext(DrawerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName),
+    [className, triggerClassName],
+  );
 
   return (
-    <ButtonPrimitive
-      className={composeTwRenderProps(className, slots?.trigger())}
-      data-slot="drawer-trigger"
-      {...props}
-    >
+    <ButtonPrimitive className={resolvedClassName} data-slot="drawer-trigger" {...props}>
       {children}
     </ButtonPrimitive>
   );
-};
+});
 
 DrawerTrigger.displayName = "HeroUI.Drawer.Trigger";
 
@@ -273,25 +304,34 @@ interface DrawerBackdropProps extends ComponentPropsWithRef<typeof ModalOverlayP
   isDismissable?: boolean;
 }
 
-const DrawerBackdrop = ({
+const DrawerBackdrop = memo(function DrawerBackdrop({
   children,
   className,
   isDismissable = true,
   variant,
   ...props
-}: DrawerBackdropProps) => {
-  const {slots: contextSlots} = useContext(DrawerContext);
+}: DrawerBackdropProps) {
+  const contextValue = useContext(DrawerContext);
 
   const updatedSlots = useMemo(() => drawerVariants({variant}), [variant]);
 
   const updatedDrawerContext = useMemo<DrawerContext>(
-    () => ({slots: {...contextSlots, ...updatedSlots}, isDismissable}),
-    [contextSlots, updatedSlots, isDismissable],
+    () => ({
+      ...contextValue,
+      backdropClassName: updatedSlots.backdrop(),
+      isDismissable,
+    }),
+    [contextValue, updatedSlots, isDismissable],
+  );
+
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, updatedSlots.backdrop()),
+    [className, updatedSlots],
   );
 
   return (
     <ModalOverlayPrimitive
-      className={composeTwRenderProps(className, updatedSlots?.backdrop())}
+      className={resolvedClassName}
       data-slot="drawer-backdrop"
       isDismissable={isDismissable}
       {...props}
@@ -303,7 +343,7 @@ const DrawerBackdrop = ({
       )}
     </ModalOverlayPrimitive>
   );
-};
+});
 
 DrawerBackdrop.displayName = "HeroUI.Drawer.Backdrop";
 
@@ -317,24 +357,35 @@ interface DrawerContentProps extends Omit<
   placement?: DrawerPlacement;
 }
 
-const DrawerContent = ({
+const DrawerContent = memo(function DrawerContent({
   children,
   className,
   placement = "bottom",
   ...props
-}: DrawerContentProps) => {
-  const {isDismissable, slots: contextSlots} = useContext(DrawerContext);
+}: DrawerContentProps) {
+  const {isDismissable, ...contextValue} = useContext(DrawerContext);
 
   const updatedSlots = useMemo(() => drawerVariants({placement}), [placement]);
 
   const updatedDrawerContext = useMemo<DrawerContext>(
-    () => ({placement, isDismissable, slots: {...contextSlots, ...updatedSlots}}),
-    [contextSlots, placement, isDismissable, updatedSlots],
+    () => ({
+      ...contextValue,
+      placement,
+      isDismissable,
+      contentClassName: updatedSlots.content(),
+      dialogClassName: updatedSlots.dialog(),
+    }),
+    [contextValue, placement, isDismissable, updatedSlots],
+  );
+
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, updatedSlots.content()),
+    [className, updatedSlots],
   );
 
   return (
     <ModalPrimitive
-      className={composeTwRenderProps(className, updatedSlots?.content())}
+      className={resolvedClassName}
       data-placement={placement}
       data-slot="drawer-content"
       {...props}
@@ -346,7 +397,7 @@ const DrawerContent = ({
       )}
     </ModalPrimitive>
   );
-};
+});
 
 DrawerContent.displayName = "HeroUI.Drawer.Content";
 
@@ -355,18 +406,30 @@ DrawerContent.displayName = "HeroUI.Drawer.Content";
  * -----------------------------------------------------------------------------------------------*/
 interface DrawerDialogProps extends DialogPrimitiveProps {}
 
-const DrawerDialog = ({children, className, ...props}: DrawerDialogProps) => {
-  const {isDismissable = true, placement, slots} = useContext(DrawerContext);
+const DrawerDialog = memo(function DrawerDialog({
+  children,
+  className,
+  ...props
+}: DrawerDialogProps) {
+  const {dialogClassName, isDismissable = true, placement} = useContext(DrawerContext);
   const {dialogRef, dragHandlers} = useDrawerDrag(placement, isDismissable);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, dialogClassName) as string,
+    [className, dialogClassName],
+  );
+  const dialogStyle = useMemo(
+    () => (isDismissable ? {touchAction: "none" as const} : undefined),
+    [isDismissable],
+  );
 
   return (
     <SurfaceContext value={defaultSurfaceContextValue}>
       <DialogPrimitive
         ref={dialogRef}
-        className={composeSlotClassName(slots?.dialog, className)}
+        className={resolvedClassName}
         data-placement={placement}
         data-slot="drawer-dialog"
-        style={isDismissable ? {touchAction: "none"} : undefined}
+        style={dialogStyle}
         {...dragHandlers}
         {...props}
       >
@@ -374,7 +437,7 @@ const DrawerDialog = ({children, className, ...props}: DrawerDialogProps) => {
       </DialogPrimitive>
     </SurfaceContext>
   );
-};
+});
 
 DrawerDialog.displayName = "HeroUI.Drawer.Dialog";
 
@@ -388,25 +451,31 @@ interface DrawerHeaderProps<
   className?: string;
 }
 
-const DrawerHeader = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function DrawerHeaderInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
-}: DrawerHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHeaderProps<E>>) => {
-  const {slots} = useContext(DrawerContext);
+}: DrawerHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHeaderProps<E>>) {
+  const {headerClassName} = useContext(DrawerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, headerClassName) as string,
+    [className, headerClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.header, className)}
-      data-slot="drawer-header"
-      {...(props as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="drawer-header" {...(props as any)}>
       {children}
     </dom.div>
   );
-};
+}
 
-DrawerHeader.displayName = "HeroUI.Drawer.Header";
+DrawerHeaderInner.displayName = "HeroUI.Drawer.Header";
+
+const DrawerHeader = memo(DrawerHeaderInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: DrawerHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHeaderProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Drawer Body
@@ -418,16 +487,20 @@ interface DrawerBodyProps<
   className?: string;
 }
 
-const DrawerBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function DrawerBodyInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
-}: DrawerBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerBodyProps<E>>) => {
-  const {slots} = useContext(DrawerContext);
+}: DrawerBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerBodyProps<E>>) {
+  const {bodyClassName} = useContext(DrawerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, bodyClassName) as string,
+    [className, bodyClassName],
+  );
 
   return (
     <dom.div
-      className={composeSlotClassName(slots?.body, className)}
+      className={resolvedClassName}
       data-slot="drawer-body"
       style={{touchAction: "pan-y"}}
       {...(props as any)}
@@ -435,9 +508,13 @@ const DrawerBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
       {children}
     </dom.div>
   );
-};
+}
 
-DrawerBody.displayName = "HeroUI.Drawer.Body";
+DrawerBodyInner.displayName = "HeroUI.Drawer.Body";
+
+const DrawerBody = memo(DrawerBodyInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: DrawerBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerBodyProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Drawer Footer
@@ -449,37 +526,51 @@ interface DrawerFooterProps<
   className?: string;
 }
 
-const DrawerFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function DrawerFooterInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
-}: DrawerFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerFooterProps<E>>) => {
-  const {slots} = useContext(DrawerContext);
+}: DrawerFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerFooterProps<E>>) {
+  const {footerClassName} = useContext(DrawerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, footerClassName) as string,
+    [className, footerClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.footer, className)}
-      data-slot="drawer-footer"
-      {...(props as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="drawer-footer" {...(props as any)}>
       {children}
     </dom.div>
   );
-};
+}
 
-DrawerFooter.displayName = "HeroUI.Drawer.Footer";
+DrawerFooterInner.displayName = "HeroUI.Drawer.Footer";
+
+const DrawerFooter = memo(DrawerFooterInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: DrawerFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerFooterProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Drawer Heading
  * -----------------------------------------------------------------------------------------------*/
 interface DrawerHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
-const DrawerHeading = ({children, className, ...props}: DrawerHeadingProps) => {
-  const {slots} = useContext(DrawerContext);
+const DrawerHeading = memo(function DrawerHeading({
+  children,
+  className,
+  ...props
+}: DrawerHeadingProps) {
+  const {headingClassName} = useContext(DrawerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, headingClassName) as string,
+    [className, headingClassName],
+  );
 
   return (
     <HeadingPrimitive
-      className={composeSlotClassName(slots?.heading, className)}
+      className={resolvedClassName}
       data-slot="drawer-heading"
       slot="title"
       {...props}
@@ -487,7 +578,7 @@ const DrawerHeading = ({children, className, ...props}: DrawerHeadingProps) => {
       {children}
     </HeadingPrimitive>
   );
-};
+});
 
 DrawerHeading.displayName = "HeroUI.Drawer.Heading";
 
@@ -501,25 +592,35 @@ interface DrawerHandleProps<
   className?: string;
 }
 
-const DrawerHandle = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function DrawerHandleInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
-}: DrawerHandleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHandleProps<E>>) => {
-  const {slots} = useContext(DrawerContext);
+}: DrawerHandleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHandleProps<E>>) {
+  const {handleClassName} = useContext(DrawerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, handleClassName) as string,
+    [className, handleClassName],
+  );
 
   return (
     <dom.div
       aria-hidden="true"
-      className={composeSlotClassName(slots?.handle, className)}
+      className={resolvedClassName}
       data-slot="drawer-handle"
       {...(props as any)}
     >
       <div data-slot="drawer-handle-bar" />
     </dom.div>
   );
-};
+}
 
-DrawerHandle.displayName = "HeroUI.Drawer.Handle";
+DrawerHandleInner.displayName = "HeroUI.Drawer.Handle";
+
+const DrawerHandle = memo(DrawerHandleInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: DrawerHandleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof DrawerHandleProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Drawer Close Trigger
@@ -529,18 +630,25 @@ interface DrawerCloseTriggerProps extends ButtonPrimitiveProps {
   children?: ReactNode;
 }
 
-const DrawerCloseTrigger = ({className, ...rest}: DrawerCloseTriggerProps) => {
-  const {slots} = useContext(DrawerContext);
+const DrawerCloseTrigger = memo(function DrawerCloseTrigger({
+  className,
+  ...rest
+}: DrawerCloseTriggerProps) {
+  const {closeTriggerClassName} = useContext(DrawerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, closeTriggerClassName),
+    [className, closeTriggerClassName],
+  );
 
   return (
     <CloseButton
-      className={composeTwRenderProps(className, slots?.closeTrigger())}
+      className={resolvedClassName}
       data-slot="drawer-close-trigger"
       slot="close"
       {...rest}
     />
   );
-};
+});
 
 DrawerCloseTrigger.displayName = "HeroUI.Drawer.CloseTrigger";
 

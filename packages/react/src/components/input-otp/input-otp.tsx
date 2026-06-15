@@ -6,19 +6,23 @@ import type {ValidationResult} from "react-aria-components/CheckboxGroup";
 
 import {inputOTPVariants} from "@heroui/styles";
 import {OTPInput, OTPInputContext} from "input-otp";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {FieldErrorContext} from "react-aria-components/FieldError";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeSlotClassName} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Context
  * -----------------------------------------------------------------------------------------------*/
 interface InputOTPContext {
-  slots?: ReturnType<typeof inputOTPVariants>;
+  caretClassName?: string;
+  groupClassName?: string;
   isDisabled?: boolean;
   isInvalid?: boolean;
+  separatorClassName?: string;
+  slotClassName?: string;
+  slotValueClassName?: string;
 }
 
 const InputOTPContext = createContext<InputOTPContext>({
@@ -41,7 +45,7 @@ interface InputOTPRootProps
   children: React.ReactNode;
 }
 
-const InputOTPRoot = ({
+const InputOTPRoot = memo(function InputOTPRoot({
   className,
   inputClassName,
   isDisabled = false,
@@ -50,10 +54,31 @@ const InputOTPRoot = ({
   validationErrors = [],
   variant,
   ...props
-}: InputOTPRootProps) => {
-  const slots = React.useMemo(() => inputOTPVariants({variant}), [variant]);
+}: InputOTPRootProps) {
+  const slots = useMemo(() => inputOTPVariants({variant}), [variant]);
+  const contextValue = useMemo<InputOTPContext>(
+    () => ({
+      caretClassName: slots.caret(),
+      groupClassName: slots.group(),
+      isDisabled,
+      isInvalid,
+      separatorClassName: slots.separator(),
+      slotClassName: slots.slot(),
+      slotValueClassName: slots.slotValue(),
+    }),
+    [isDisabled, isInvalid, slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedInputClassName = useMemo(
+    () => composeTwRenderProps(inputClassName, slots.input()) as string,
+    [inputClassName, slots],
+  );
+  const resolvedContainerClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName) as string,
+    [className, baseClassName],
+  );
 
-  const validation = React.useMemo(
+  const validation = useMemo(
     () =>
       ({
         isInvalid,
@@ -64,12 +89,12 @@ const InputOTPRoot = ({
   );
 
   return (
-    <InputOTPContext value={{slots, isDisabled, isInvalid}}>
+    <InputOTPContext value={contextValue}>
       <FieldErrorContext value={validation}>
         <OTPInput
           // OTP Input package uses the `className` prop for the actual `input` element which is not visible to the user so no need to pass it to the base container
-          className={slots.input({className: inputClassName})}
-          containerClassName={slots.base({className})}
+          className={resolvedInputClassName}
+          containerClassName={resolvedContainerClassName}
           data-disabled={dataAttr(isDisabled)}
           data-invalid={dataAttr(isInvalid)}
           data-slot="input-otp"
@@ -79,7 +104,7 @@ const InputOTPRoot = ({
       </FieldErrorContext>
     </InputOTPContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Group
@@ -87,17 +112,15 @@ const InputOTPRoot = ({
 
 interface InputOTPGroupProps extends ComponentPropsWithRef<"div"> {}
 
-const InputOTPGroup = ({className, ...props}: InputOTPGroupProps) => {
-  const {slots} = useContext(InputOTPContext);
-
-  return (
-    <div
-      className={composeSlotClassName(slots?.group, className)}
-      data-slot="input-otp-group"
-      {...props}
-    />
+const InputOTPGroup = memo(function InputOTPGroup({className, ...props}: InputOTPGroupProps) {
+  const {groupClassName} = useContext(InputOTPContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, groupClassName) as string,
+    [className, groupClassName],
   );
-};
+
+  return <div className={resolvedClassName} data-slot="input-otp-group" {...props} />;
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Slot
@@ -106,16 +129,21 @@ interface InputOTPSlotProps extends ComponentPropsWithRef<"div"> {
   index: number;
 }
 
-const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
-  const {isDisabled, isInvalid, slots} = useContext(InputOTPContext);
+const InputOTPSlot = memo(function InputOTPSlot({className, index, ...props}: InputOTPSlotProps) {
+  const {caretClassName, isDisabled, isInvalid, slotClassName, slotValueClassName} =
+    useContext(InputOTPContext);
 
   const inputOTPContext = useContext(OTPInputContext);
   const {char, hasFakeCaret, isActive} = inputOTPContext?.slots[index] ?? {};
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, slotClassName) as string,
+    [className, slotClassName],
+  );
 
   return (
     <div
       {...props}
-      className={composeSlotClassName(slots?.slot, className)}
+      className={resolvedClassName}
       data-active={dataAttr(isActive)}
       data-disabled={dataAttr(isDisabled)}
       data-filled={dataAttr(!!char)}
@@ -123,16 +151,16 @@ const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
       data-slot="input-otp-slot"
     >
       {char ? (
-        <div className={slots?.slotValue()} data-slot="input-otp-slot-value">
+        <div className={slotValueClassName} data-slot="input-otp-slot-value">
           {char}
         </div>
       ) : null}
       {hasFakeCaret && isActive ? (
-        <div className={slots?.caret()} data-slot="input-otp-caret" />
+        <div className={caretClassName} data-slot="input-otp-caret" />
       ) : null}
     </div>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Input OTP Separator
@@ -141,17 +169,18 @@ interface InputOTPSeparatorProps extends ComponentPropsWithRef<"div"> {
   className?: string;
 }
 
-const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
-  const {slots} = useContext(InputOTPContext);
-
-  return (
-    <div
-      className={composeSlotClassName(slots?.separator, className)}
-      data-slot="input-otp-separator"
-      {...props}
-    />
+const InputOTPSeparator = memo(function InputOTPSeparator({
+  className,
+  ...props
+}: InputOTPSeparatorProps) {
+  const {separatorClassName} = useContext(InputOTPContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, separatorClassName) as string,
+    [className, separatorClassName],
   );
-};
+
+  return <div className={resolvedClassName} data-slot="input-otp-separator" {...props} />;
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

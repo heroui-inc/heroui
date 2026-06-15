@@ -6,18 +6,20 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {InputProps as InputPrimitiveProps} from "react-aria-components/Input";
 
 import {colorInputGroupVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Input as InputPrimitive} from "react-aria-components/Input";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type ColorInputGroupContext = {
-  slots?: ReturnType<typeof colorInputGroupVariants>;
+  inputClassName?: string;
+  prefixClassName?: string;
+  suffixClassName?: string;
 };
 
 const ColorInputGroupContext = createContext<ColorInputGroupContext>({});
@@ -28,22 +30,28 @@ const ColorInputGroupContext = createContext<ColorInputGroupContext>({});
 interface ColorInputGroupRootProps
   extends ComponentPropsWithRef<typeof GroupPrimitive>, ColorInputGroupVariants {}
 
-const ColorInputGroupRoot = ({
+const ColorInputGroupRoot = memo(function ColorInputGroupRoot({
   children,
   className,
   fullWidth,
   variant,
   ...props
-}: ColorInputGroupRootProps) => {
-  const slots = React.useMemo(
-    () => colorInputGroupVariants({fullWidth, variant}),
-    [fullWidth, variant],
+}: ColorInputGroupRootProps) {
+  const slots = useMemo(() => colorInputGroupVariants({fullWidth, variant}), [fullWidth, variant]);
+  const contextValue = useMemo<ColorInputGroupContext>(
+    () => ({
+      inputClassName: slots.input(),
+      prefixClassName: slots.prefix(),
+      suffixClassName: slots.suffix(),
+    }),
+    [slots],
   );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
-    <ColorInputGroupContext value={{slots}}>
+    <ColorInputGroupContext value={contextValue}>
       <GroupPrimitive
-        className={composeTwRenderProps(className, slots?.base())}
+        className={composeTwRenderProps(className, baseClassName)}
         data-slot="color-input-group"
         {...props}
       >
@@ -51,7 +59,7 @@ const ColorInputGroupRoot = ({
       </GroupPrimitive>
     </ColorInputGroupContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Prefix
@@ -63,24 +71,31 @@ interface ColorInputGroupPrefixProps<
   className?: string;
 }
 
-const ColorInputGroupPrefix = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function ColorInputGroupPrefixInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
 }: ColorInputGroupPrefixProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupPrefixProps<E>>) => {
-  const {slots} = useContext(ColorInputGroupContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupPrefixProps<E>>) {
+  const {prefixClassName} = useContext(ColorInputGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, prefixClassName) as string,
+    [className, prefixClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.prefix, className)}
-      data-slot="color-input-group-prefix"
-      {...(props as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="color-input-group-prefix" {...(props as any)}>
       {children}
     </dom.div>
   );
-};
+}
+
+const ColorInputGroupPrefix = memo(ColorInputGroupPrefixInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: ColorInputGroupPrefixProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupPrefixProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Input
@@ -89,17 +104,20 @@ interface ColorInputGroupInputProps extends InputPrimitiveProps {
   className?: string;
 }
 
-const ColorInputGroupInput = ({className, ...props}: ColorInputGroupInputProps) => {
-  const {slots} = useContext(ColorInputGroupContext);
+const ColorInputGroupInput = memo(function ColorInputGroupInput({
+  className,
+  ...props
+}: ColorInputGroupInputProps) {
+  const {inputClassName} = useContext(ColorInputGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, inputClassName),
+    [className, inputClassName],
+  );
 
   return (
-    <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input())}
-      data-slot="color-input-group-input"
-      {...props}
-    />
+    <InputPrimitive className={resolvedClassName} data-slot="color-input-group-input" {...props} />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * ColorInputGroup Suffix
@@ -111,24 +129,31 @@ interface ColorInputGroupSuffixProps<
   className?: string;
 }
 
-const ColorInputGroupSuffix = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function ColorInputGroupSuffixInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
 }: ColorInputGroupSuffixProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupSuffixProps<E>>) => {
-  const {slots} = useContext(ColorInputGroupContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupSuffixProps<E>>) {
+  const {suffixClassName} = useContext(ColorInputGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, suffixClassName) as string,
+    [className, suffixClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.suffix, className)}
-      data-slot="color-input-group-suffix"
-      {...(props as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="color-input-group-suffix" {...(props as any)}>
       {children}
     </dom.div>
   );
-};
+}
+
+const ColorInputGroupSuffix = memo(ColorInputGroupSuffixInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: ColorInputGroupSuffixProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupSuffixProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

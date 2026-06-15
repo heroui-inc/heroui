@@ -4,7 +4,7 @@ import type {DOMRenderProps} from "../../utils/dom";
 import type {ReactNode} from "react";
 
 import {fieldsetVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {
   ButtonContext,
   CheckboxGroupContext,
@@ -16,14 +16,16 @@ import {
   ToggleButtonGroupContext,
 } from "react-aria-components";
 
-import {composeSlotClassName} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Context
  * -----------------------------------------------------------------------------------------------*/
 type FieldsetContext = {
-  slots?: ReturnType<typeof fieldsetVariants>;
+  actionsClassName?: string;
+  fieldGroupClassName?: string;
+  legendClassName?: string;
 };
 
 const FieldsetContext = createContext<FieldsetContext>({});
@@ -38,42 +40,37 @@ interface FieldsetRootProps<
   className?: string;
 }
 
-const FieldsetRoot = <E extends keyof React.JSX.IntrinsicElements = "fieldset">({
+function FieldsetRootInner<E extends keyof React.JSX.IntrinsicElements = "fieldset">({
   children,
   className,
   ...props
-}: FieldsetRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetRootProps<E>>) => {
-  const slots = React.useMemo(() => fieldsetVariants({}), []);
+}: FieldsetRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetRootProps<E>>) {
+  const slots = useMemo(() => fieldsetVariants({}), []);
+  const contextValue = useMemo<FieldsetContext>(
+    () => ({
+      actionsClassName: slots.actions(),
+      fieldGroupClassName: slots.fieldGroup(),
+      legendClassName: slots.legend(),
+    }),
+    [slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName) as string,
+    [className, baseClassName],
+  );
 
-  // Mirror native `<fieldset disabled>` as `data-disabled="true"` so the
-  // existing `[data-disabled="true"] .label` (and similar) ancestor selectors
-  // cascade disabled styling to descendant fields, just like a direct
-  // `isDisabled` prop on TextField/Checkbox/etc. would.
   const isDisabled = "disabled" in props && props.disabled === true;
 
   return (
-    <FieldsetContext value={{slots}}>
+    <FieldsetContext value={contextValue}>
       <dom.fieldset
-        className={slots?.base({className})}
+        className={resolvedClassName}
         data-disabled={isDisabled || undefined}
         data-slot="fieldset"
         {...(props as any)}
       >
         {isDisabled ? (
-          // Forward `isDisabled` through React Aria contexts so descendant
-          // components stay consistent with the native `<fieldset disabled>`
-          // behaviour. There are two reasons we need to do this manually:
-          //
-          // 1. Some primitives (Slider, RadioGroup, CheckboxGroup, ...) render
-          //    as `<div>` so the browser does not propagate the fieldset's
-          //    `disabled` attribute to them — without this, they would still
-          //    look enabled and remain interactive.
-          // 2. Other primitives (Button, ToggleButton, Link, ...) do get
-          //    natively disabled by the browser, but React Aria's internal
-          //    `isDisabled` state — which drives `data-disabled` and the
-          //    `{isDisabled}` render prop — only updates from props/context.
-          //    Without this, the button is unclickable but its render prop
-          //    keeps returning `isDisabled: false`.
           <Provider
             values={[
               [ButtonContext, {isDisabled: true}],
@@ -93,7 +90,13 @@ const FieldsetRoot = <E extends keyof React.JSX.IntrinsicElements = "fieldset">(
       </dom.fieldset>
     </FieldsetContext>
   );
-};
+}
+
+const FieldsetRoot = memo(FieldsetRootInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "fieldset",
+>(
+  props: FieldsetRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetRootProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Fieldset Legend
@@ -105,20 +108,27 @@ interface FieldsetLegendProps<
   className?: string;
 }
 
-const FieldsetLegend = <E extends keyof React.JSX.IntrinsicElements = "legend">({
+function FieldsetLegendInner<E extends keyof React.JSX.IntrinsicElements = "legend">({
   className,
   ...props
-}: FieldsetLegendProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetLegendProps<E>>) => {
-  const {slots} = useContext(FieldsetContext);
+}: FieldsetLegendProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetLegendProps<E>>) {
+  const {legendClassName} = useContext(FieldsetContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, legendClassName) as string,
+    [className, legendClassName],
+  );
 
   return (
-    <dom.legend
-      className={composeSlotClassName(slots?.legend, className)}
-      data-slot="fieldset-legend"
-      {...(props as any)}
-    />
+    <dom.legend className={resolvedClassName} data-slot="fieldset-legend" {...(props as any)} />
   );
-};
+}
+
+const FieldsetLegend = memo(FieldsetLegendInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "legend",
+>(
+  props: FieldsetLegendProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof FieldsetLegendProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Field Group
@@ -130,20 +140,24 @@ interface FieldGroupProps<
   className?: string;
 }
 
-const FieldGroup = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function FieldGroupInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...rest
-}: FieldGroupProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldGroupProps<E>>) => {
-  const {slots} = useContext(FieldsetContext);
+}: FieldGroupProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldGroupProps<E>>) {
+  const {fieldGroupClassName} = useContext(FieldsetContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, fieldGroupClassName) as string,
+    [className, fieldGroupClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.fieldGroup, className)}
-      data-slot="fieldset-field-group"
-      {...(rest as any)}
-    />
+    <dom.div className={resolvedClassName} data-slot="fieldset-field-group" {...(rest as any)} />
   );
-};
+}
+
+const FieldGroup = memo(FieldGroupInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: FieldGroupProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldGroupProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Field Actions
@@ -155,24 +169,30 @@ interface FieldsetActionsProps<
   className?: string;
 }
 
-const FieldsetActions = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function FieldsetActionsInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...rest
-}: FieldsetActionsProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof FieldsetActionsProps<E>>) => {
-  const {slots} = useContext(FieldsetContext);
+}: FieldsetActionsProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetActionsProps<E>>) {
+  const {actionsClassName} = useContext(FieldsetContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, actionsClassName) as string,
+    [className, actionsClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.actions, className)}
-      data-slot="fieldset-actions"
-      {...(rest as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="fieldset-actions" {...(rest as any)}>
       {children}
     </dom.div>
   );
-};
+}
+
+const FieldsetActions = memo(FieldsetActionsInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: FieldsetActionsProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof FieldsetActionsProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

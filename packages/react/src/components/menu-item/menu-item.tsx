@@ -6,10 +6,10 @@ import type {ComponentPropsWithRef} from "react";
 import type {MenuItemRenderProps} from "react-aria-components/Menu";
 
 import {menuItemVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components/Menu";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils";
+import {composeTwRenderProps} from "../../utils";
 import {dom} from "../../utils/dom";
 import {IconChevronRight} from "../icons";
 
@@ -17,8 +17,9 @@ import {IconChevronRight} from "../icons";
  * Menu Item Context
  * -----------------------------------------------------------------------------------------------*/
 interface MenuItemContext {
-  slots?: ReturnType<typeof menuItemVariants>;
+  indicatorClassName?: string;
   state?: MenuItemRenderProps;
+  submenuIndicatorClassName?: string;
 }
 
 const MenuItemContext = createContext<MenuItemContext>({});
@@ -31,23 +32,37 @@ interface MenuItemRootProps
   className?: string;
 }
 
-const MenuItemRoot = ({children, className, variant, ...props}: MenuItemRootProps) => {
-  const slots = React.useMemo(() => menuItemVariants({variant}), [variant]);
+const MenuItemRoot = memo(function MenuItemRoot({
+  children,
+  className,
+  variant,
+  ...props
+}: MenuItemRootProps) {
+  const slots = useMemo(() => menuItemVariants({variant}), [variant]);
+  const baseClassName = useMemo(() => slots.item(), [slots]);
+  const indicatorClassName = useMemo(() => slots.indicator(), [slots]);
+  const submenuIndicatorClassName = useMemo(() => slots.submenuIndicator(), [slots]);
 
   return (
     <MenuItemPrimitive
-      className={composeTwRenderProps(className, slots.item())}
+      className={composeTwRenderProps(className, baseClassName)}
       data-slot="menu-item"
       {...props}
     >
       {(values) => (
-        <MenuItemContext value={{slots, state: values}}>
+        <MenuItemContext
+          value={{
+            indicatorClassName,
+            state: values,
+            submenuIndicatorClassName,
+          }}
+        >
           {typeof children === "function" ? children(values) : children}
         </MenuItemContext>
       )}
     </MenuItemPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Indicator
@@ -60,15 +75,19 @@ interface MenuItemIndicatorProps<
   type?: "checkmark" | "dot";
 }
 
-const MenuItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function MenuItemIndicatorInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   type = "checkmark",
   ...props
 }: MenuItemIndicatorProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof MenuItemIndicatorProps<E>>) => {
-  const {slots, state} = useContext(MenuItemContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof MenuItemIndicatorProps<E>>) {
+  const {indicatorClassName, state} = useContext(MenuItemContext);
   const isSelected = state?.isSelected;
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, indicatorClassName) as string,
+    [className, indicatorClassName],
+  );
 
   const content =
     typeof children === "function" ? (
@@ -108,7 +127,7 @@ const MenuItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
   return (
     <dom.span
       aria-hidden="true"
-      className={composeSlotClassName(slots?.indicator, className)}
+      className={resolvedClassName}
       data-slot="menu-item-indicator"
       data-type={type}
       data-visible={isSelected || undefined}
@@ -117,7 +136,14 @@ const MenuItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
       {content}
     </dom.span>
   );
-};
+}
+
+const MenuItemIndicator = memo(MenuItemIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: MenuItemIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof MenuItemIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Menu Item Submenu Indicator
@@ -129,14 +155,18 @@ interface MenuItemSubmenuIndicatorProps<
   className?: string;
 }
 
-const MenuItemSubmenuIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function MenuItemSubmenuIndicatorInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...props
 }: MenuItemSubmenuIndicatorProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof MenuItemSubmenuIndicatorProps<E>>) => {
-  const {slots, state} = useContext(MenuItemContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof MenuItemSubmenuIndicatorProps<E>>) {
+  const {state, submenuIndicatorClassName} = useContext(MenuItemContext);
   const hasSubmenu = state?.hasSubmenu;
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, submenuIndicatorClassName) as string,
+    [className, submenuIndicatorClassName],
+  );
 
   if (!hasSubmenu) {
     return null;
@@ -148,14 +178,21 @@ const MenuItemSubmenuIndicator = <E extends keyof React.JSX.IntrinsicElements = 
   return (
     <dom.span
       aria-hidden="true"
-      className={composeSlotClassName(slots?.submenuIndicator, className)}
+      className={resolvedClassName}
       data-slot="submenu-indicator"
       {...(props as any)}
     >
       {content}
     </dom.span>
   );
-};
+}
+
+const MenuItemSubmenuIndicator = memo(MenuItemSubmenuIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: MenuItemSubmenuIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof MenuItemSubmenuIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

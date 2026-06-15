@@ -4,7 +4,7 @@ import type {TagVariants} from "../tag";
 import type {ComponentPropsWithRef} from "react";
 
 import {tagGroupVariants} from "@heroui/styles";
-import React, {createContext, useContext, useMemo} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {
   TagGroup as TagGroupPrimitive,
   TagList as TagListPrimitive,
@@ -16,7 +16,7 @@ import {composeTwRenderProps} from "../../utils/compose";
  * TagGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupContext = {
-  slots?: ReturnType<typeof tagGroupVariants>;
+  listClassName?: string;
   size?: TagVariants["size"];
   variant?: TagVariants["variant"];
 };
@@ -31,46 +31,63 @@ type TagGroupRootProps = ComponentPropsWithRef<typeof TagGroupPrimitive> & {
   variant?: TagVariants["variant"];
 };
 
-const TagGroupRoot = ({children, className, size, variant, ...restProps}: TagGroupRootProps) => {
+const TagGroupRoot = memo(function TagGroupRoot({
+  children,
+  className,
+  size,
+  variant,
+  ...restProps
+}: TagGroupRootProps) {
   const slots = useMemo(() => tagGroupVariants(), []);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName) as string,
+    [className, baseClassName],
+  );
+  const contextValue = useMemo<TagGroupContext>(
+    () => ({
+      listClassName: slots.list(),
+      size,
+      variant,
+    }),
+    [size, slots, variant],
+  );
 
   return (
-    <TagGroupContext
-      value={{
-        slots,
-        size,
-        variant,
-      }}
-    >
-      <TagGroupPrimitive className={slots.base({className})} data-slot="tag-group" {...restProps}>
+    <TagGroupContext value={contextValue}>
+      <TagGroupPrimitive className={resolvedClassName} data-slot="tag-group" {...restProps}>
         {children}
       </TagGroupPrimitive>
     </TagGroupContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * TagGroup List
  * -----------------------------------------------------------------------------------------------*/
 type TagGroupListProps<T extends object> = ComponentPropsWithRef<typeof TagListPrimitive<T>> & {};
 
-const TagGroupList = <T extends object>({
+function TagGroupListInner<T extends object>({
   children,
   className,
   ...restProps
-}: TagGroupListProps<T>) => {
-  const {slots} = useContext(TagGroupContext);
+}: TagGroupListProps<T>) {
+  const {listClassName} = useContext(TagGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, listClassName),
+    [className, listClassName],
+  );
 
   return (
-    <TagListPrimitive
-      className={composeTwRenderProps(className, slots?.list())}
-      data-slot="tag-group-list"
-      {...restProps}
-    >
+    <TagListPrimitive className={resolvedClassName} data-slot="tag-group-list" {...restProps}>
       {children}
     </TagListPrimitive>
   );
-};
+}
+
+const TagGroupList = memo(TagGroupListInner) as <T extends object>(
+  props: TagGroupListProps<T>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

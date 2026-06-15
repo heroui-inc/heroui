@@ -6,18 +6,20 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {MeterRenderProps} from "react-aria-components/Meter";
 
 import {meterVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Meter as MeterPrimitive} from "react-aria-components/Meter";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
  * Meter Context
  * -----------------------------------------------------------------------------------------------*/
 interface MeterContext {
-  slots?: ReturnType<typeof meterVariants>;
+  fillClassName?: string;
+  outputClassName?: string;
   state?: MeterRenderProps;
+  trackClassName?: string;
 }
 
 const MeterContext = createContext<MeterContext>({});
@@ -27,23 +29,38 @@ const MeterContext = createContext<MeterContext>({});
  * -----------------------------------------------------------------------------------------------*/
 interface MeterRootProps extends ComponentPropsWithRef<typeof MeterPrimitive>, MeterVariants {}
 
-const MeterRoot = ({children, className, color, size, ...props}: MeterRootProps) => {
-  const slots = React.useMemo(() => meterVariants({color, size}), [color, size]);
+const MeterRoot = memo(function MeterRoot({
+  children,
+  className,
+  color,
+  size,
+  ...props
+}: MeterRootProps) {
+  const slots = useMemo(() => meterVariants({color, size}), [color, size]);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName),
+    [className, baseClassName],
+  );
+  const slotClassNames = useMemo(
+    () => ({
+      fillClassName: slots.fill(),
+      outputClassName: slots.output(),
+      trackClassName: slots.track(),
+    }),
+    [slots],
+  );
 
   return (
-    <MeterPrimitive
-      data-slot="meter"
-      {...props}
-      className={composeTwRenderProps(className, slots.base())}
-    >
+    <MeterPrimitive data-slot="meter" {...props} className={resolvedClassName}>
       {(values) => (
-        <MeterContext value={{slots, state: values}}>
+        <MeterContext value={{...slotClassNames, state: values}}>
           {typeof children === "function" ? children(values) : children}
         </MeterContext>
       )}
     </MeterPrimitive>
   );
-};
+});
 
 MeterRoot.displayName = "HeroUI.Meter";
 
@@ -57,25 +74,31 @@ interface MeterOutputProps<
   className?: string;
 }
 
-const MeterOutput = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function MeterOutputInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...props
-}: MeterOutputProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterOutputProps<E>>) => {
-  const {slots, state} = useContext(MeterContext);
+}: MeterOutputProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterOutputProps<E>>) {
+  const {outputClassName, state} = useContext(MeterContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, outputClassName) as string,
+    [className, outputClassName],
+  );
 
   return (
-    <dom.span
-      className={composeSlotClassName(slots?.output, className)}
-      data-slot="meter-output"
-      {...(props as any)}
-    >
+    <dom.span className={resolvedClassName} data-slot="meter-output" {...(props as any)}>
       {children ?? state?.valueText}
     </dom.span>
   );
-};
+}
 
-MeterOutput.displayName = "HeroUI.Meter.Output";
+MeterOutputInner.displayName = "HeroUI.Meter.Output";
+
+const MeterOutput = memo(MeterOutputInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: MeterOutputProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterOutputProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Meter Track
@@ -87,25 +110,29 @@ interface MeterTrackProps<
   className?: string;
 }
 
-const MeterTrack = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function MeterTrackInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   ...props
-}: MeterTrackProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterTrackProps<E>>) => {
-  const {slots} = useContext(MeterContext);
+}: MeterTrackProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterTrackProps<E>>) {
+  const {trackClassName} = useContext(MeterContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, trackClassName) as string,
+    [className, trackClassName],
+  );
 
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.track, className)}
-      data-slot="meter-track"
-      {...(props as any)}
-    >
+    <dom.div className={resolvedClassName} data-slot="meter-track" {...(props as any)}>
       {children}
     </dom.div>
   );
-};
+}
 
-MeterTrack.displayName = "HeroUI.Meter.Track";
+MeterTrackInner.displayName = "HeroUI.Meter.Track";
+
+const MeterTrack = memo(MeterTrackInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: MeterTrackProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterTrackProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Meter Fill
@@ -118,16 +145,20 @@ interface MeterFillProps<
   style?: React.CSSProperties;
 }
 
-const MeterFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function MeterFillInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   style,
   ...props
-}: MeterFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterFillProps<E>>) => {
-  const {slots, state} = useContext(MeterContext);
+}: MeterFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterFillProps<E>>) {
+  const {fillClassName, state} = useContext(MeterContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, fillClassName) as string,
+    [className, fillClassName],
+  );
 
   return (
     <dom.div
-      className={composeSlotClassName(slots?.fill, className)}
+      className={resolvedClassName}
       data-slot="meter-fill"
       style={{
         ...style,
@@ -136,9 +167,13 @@ const MeterFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
       {...(props as any)}
     />
   );
-};
+}
 
-MeterFill.displayName = "HeroUI.Meter.Fill";
+MeterFillInner.displayName = "HeroUI.Meter.Fill";
+
+const MeterFill = memo(MeterFillInner) as <E extends keyof React.JSX.IntrinsicElements = "div">(
+  props: MeterFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterFillProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

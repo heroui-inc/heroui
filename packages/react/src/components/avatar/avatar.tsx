@@ -5,14 +5,15 @@ import type {ComponentPropsWithRef} from "react";
 
 import {avatarVariants} from "@heroui/styles";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import React, {createContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 
-import {composeSlotClassName} from "../../utils/compose";
+import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 
 /* ------------------------------------------------------------------------------------------------
  * Avatar Context
  * --------------------------------------------------------------------------------------------- */
 type AvatarContext = {
+  imageClassName?: string;
   slots?: ReturnType<typeof avatarVariants>;
 };
 
@@ -24,24 +25,43 @@ const AvatarContext = createContext<AvatarContext>({});
 interface AvatarRootProps
   extends Omit<ComponentPropsWithRef<typeof AvatarPrimitive.Root>, "color">, AvatarVariants {}
 
-const AvatarRoot = ({children, className, color, size, variant, ...props}: AvatarRootProps) => {
-  const slots = React.useMemo(() => avatarVariants({color, size, variant}), [color, size, variant]);
+const AvatarRoot = memo(function AvatarRoot({
+  children,
+  className,
+  color,
+  size,
+  variant,
+  ...props
+}: AvatarRootProps) {
+  const slots = useMemo(() => avatarVariants({color, size, variant}), [color, size, variant]);
+  const contextValue = useMemo<AvatarContext>(
+    () => ({
+      imageClassName: slots.image(),
+      slots,
+    }),
+    [slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName) as string,
+    [className, baseClassName],
+  );
 
   return (
-    <AvatarContext value={{slots}}>
-      <AvatarPrimitive.Root className={slots.base({className})} {...props}>
+    <AvatarContext value={contextValue}>
+      <AvatarPrimitive.Root className={resolvedClassName} {...props}>
         {children}
       </AvatarPrimitive.Root>
     </AvatarContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Avatar Image
  * -----------------------------------------------------------------------------------------------*/
 interface AvatarImageProps extends ComponentPropsWithRef<typeof AvatarPrimitive.Image> {}
 
-const AvatarImage = ({
+const AvatarImage = memo(function AvatarImage({
   className,
   crossOrigin,
   loading,
@@ -51,12 +71,16 @@ const AvatarImage = ({
   src,
   srcSet,
   ...props
-}: AvatarImageProps) => {
-  const {slots} = React.useContext(AvatarContext);
+}: AvatarImageProps) {
+  const {imageClassName} = useContext(AvatarContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, imageClassName) as string,
+    [className, imageClassName],
+  );
 
   return (
     <AvatarPrimitive.Image
-      className={composeSlotClassName(slots?.image, className)}
+      className={resolvedClassName}
       crossOrigin={crossOrigin}
       loading={loading}
       sizes={sizes}
@@ -67,7 +91,7 @@ const AvatarImage = ({
       {...props}
     />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Avatar Fallback
@@ -76,8 +100,12 @@ interface AvatarFallbackProps extends ComponentPropsWithRef<typeof AvatarPrimiti
   color?: AvatarVariants["color"];
 }
 
-const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
-  const {slots} = React.useContext(AvatarContext);
+const AvatarFallback = memo(function AvatarFallback({
+  className,
+  color,
+  ...props
+}: AvatarFallbackProps) {
+  const {slots} = useContext(AvatarContext);
 
   return (
     <AvatarPrimitive.Fallback
@@ -86,7 +114,7 @@ const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
       {...props}
     />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

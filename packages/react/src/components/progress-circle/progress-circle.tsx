@@ -6,10 +6,10 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ProgressBarRenderProps} from "react-aria-components/ProgressBar";
 
 import {progressCircleVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {ProgressBar as ProgressBarPrimitive} from "react-aria-components/ProgressBar";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
@@ -24,8 +24,10 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
  * ProgressCircle Context
  * -----------------------------------------------------------------------------------------------*/
 interface ProgressCircleContext {
-  slots?: ReturnType<typeof progressCircleVariants>;
+  fillCircleClassName?: string;
   state?: ProgressBarRenderProps;
+  trackCircleClassName?: string;
+  trackClassName?: string;
 }
 
 const ProgressCircleContext = createContext<ProgressCircleContext>({});
@@ -36,29 +38,38 @@ const ProgressCircleContext = createContext<ProgressCircleContext>({});
 interface ProgressCircleRootProps
   extends ComponentPropsWithRef<typeof ProgressBarPrimitive>, ProgressCircleVariants {}
 
-const ProgressCircleRoot = ({
+const ProgressCircleRoot = memo(function ProgressCircleRoot({
   children,
   className,
   color,
   size,
   ...props
-}: ProgressCircleRootProps) => {
-  const slots = React.useMemo(() => progressCircleVariants({color, size}), [color, size]);
+}: ProgressCircleRootProps) {
+  const slots = useMemo(() => progressCircleVariants({color, size}), [color, size]);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, baseClassName),
+    [className, baseClassName],
+  );
+  const slotClassNames = useMemo(
+    () => ({
+      fillCircleClassName: slots.fillCircle(),
+      trackCircleClassName: slots.trackCircle(),
+      trackClassName: slots.track(),
+    }),
+    [slots],
+  );
 
   return (
-    <ProgressBarPrimitive
-      data-slot="progress-circle"
-      {...props}
-      className={composeTwRenderProps(className, slots.base())}
-    >
+    <ProgressBarPrimitive data-slot="progress-circle" {...props} className={resolvedClassName}>
       {(values) => (
-        <ProgressCircleContext value={{slots, state: values}}>
+        <ProgressCircleContext value={{...slotClassNames, state: values}}>
           {typeof children === "function" ? children(values) : children}
         </ProgressCircleContext>
       )}
     </ProgressBarPrimitive>
   );
-};
+});
 
 ProgressCircleRoot.displayName = "HeroUI.ProgressCircle";
 
@@ -72,17 +83,21 @@ interface ProgressCircleTrackProps<
   className?: string;
 }
 
-const ProgressCircleTrack = <E extends keyof React.JSX.IntrinsicElements = "svg">({
+function ProgressCircleTrackInner<E extends keyof React.JSX.IntrinsicElements = "svg">({
   children,
   className,
   ...props
 }: ProgressCircleTrackProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackProps<E>>) => {
-  const {slots} = useContext(ProgressCircleContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackProps<E>>) {
+  const {trackClassName} = useContext(ProgressCircleContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, trackClassName) as string,
+    [className, trackClassName],
+  );
 
   return (
     <dom.svg
-      className={composeSlotClassName(slots?.track, className)}
+      className={resolvedClassName}
       data-slot="progress-circle-track"
       fill="none"
       viewBox={`0 0 ${CENTER * 2} ${CENTER * 2}`}
@@ -91,9 +106,16 @@ const ProgressCircleTrack = <E extends keyof React.JSX.IntrinsicElements = "svg"
       {children}
     </dom.svg>
   );
-};
+}
 
-ProgressCircleTrack.displayName = "HeroUI.ProgressCircle.Track";
+ProgressCircleTrackInner.displayName = "HeroUI.ProgressCircle.Track";
+
+const ProgressCircleTrack = memo(ProgressCircleTrackInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "svg",
+>(
+  props: ProgressCircleTrackProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * ProgressCircle TrackCircle
@@ -105,16 +127,20 @@ interface ProgressCircleTrackCircleProps<
   className?: string;
 }
 
-const ProgressCircleTrackCircle = <E extends keyof React.JSX.IntrinsicElements = "circle">({
+function ProgressCircleTrackCircleInner<E extends keyof React.JSX.IntrinsicElements = "circle">({
   className,
   ...props
 }: ProgressCircleTrackCircleProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackCircleProps<E>>) => {
-  const {slots} = useContext(ProgressCircleContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackCircleProps<E>>) {
+  const {trackCircleClassName} = useContext(ProgressCircleContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, trackCircleClassName) as string,
+    [className, trackCircleClassName],
+  );
 
   return (
     <dom.circle
-      className={composeSlotClassName(slots?.trackCircle, className)}
+      className={resolvedClassName}
       cx={CENTER}
       cy={CENTER}
       data-slot="progress-circle-track-circle"
@@ -123,9 +149,16 @@ const ProgressCircleTrackCircle = <E extends keyof React.JSX.IntrinsicElements =
       {...(props as any)}
     />
   );
-};
+}
 
-ProgressCircleTrackCircle.displayName = "HeroUI.ProgressCircle.TrackCircle";
+ProgressCircleTrackCircleInner.displayName = "HeroUI.ProgressCircle.TrackCircle";
+
+const ProgressCircleTrackCircle = memo(ProgressCircleTrackCircleInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "circle",
+>(
+  props: ProgressCircleTrackCircleProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackCircleProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * ProgressCircle FillCircle
@@ -137,19 +170,23 @@ interface ProgressCircleFillCircleProps<
   className?: string;
 }
 
-const ProgressCircleFillCircle = <E extends keyof React.JSX.IntrinsicElements = "circle">({
+function ProgressCircleFillCircleInner<E extends keyof React.JSX.IntrinsicElements = "circle">({
   className,
   ...props
 }: ProgressCircleFillCircleProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleFillCircleProps<E>>) => {
-  const {slots, state} = useContext(ProgressCircleContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleFillCircleProps<E>>) {
+  const {fillCircleClassName, state} = useContext(ProgressCircleContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, fillCircleClassName) as string,
+    [className, fillCircleClassName],
+  );
   const percentage = state?.percentage ?? 0;
   const isIndeterminate = state?.isIndeterminate ?? false;
   const strokeDashoffset = CIRCUMFERENCE - (percentage / 100) * CIRCUMFERENCE;
 
   return (
     <dom.circle
-      className={composeSlotClassName(slots?.fillCircle, className)}
+      className={resolvedClassName}
       cx={CENTER}
       cy={CENTER}
       data-slot="progress-circle-fill-circle"
@@ -162,9 +199,16 @@ const ProgressCircleFillCircle = <E extends keyof React.JSX.IntrinsicElements = 
       {...(props as any)}
     />
   );
-};
+}
 
-ProgressCircleFillCircle.displayName = "HeroUI.ProgressCircle.FillCircle";
+ProgressCircleFillCircleInner.displayName = "HeroUI.ProgressCircle.FillCircle";
+
+const ProgressCircleFillCircle = memo(ProgressCircleFillCircleInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "circle",
+>(
+  props: ProgressCircleFillCircleProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleFillCircleProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

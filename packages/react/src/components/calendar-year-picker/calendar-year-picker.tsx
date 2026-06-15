@@ -6,12 +6,12 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {CalendarHeadingProps, CalendarYearPickerProps} from "react-aria/useCalendar";
 
 import {calendarYearPickerVariants} from "@heroui/styles";
-import React from "react";
+import React, {memo, useCallback, useContext, useMemo, useRef, useState} from "react";
 import {useCalendarHeading, useCalendarYearPicker} from "react-aria/useCalendar";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {getYearRange} from "../../utils/calendar";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {IconChevronRight} from "../icons";
 
@@ -57,14 +57,16 @@ interface CalendarYearPickerTriggerIndicatorProps<
 }
 
 interface CalendarYearPickerTriggerContextValue extends CalendarYearPickerTriggerRenderProps {
-  slots: ReturnType<typeof calendarYearPickerVariants>;
+  triggerClassName?: string;
+  triggerHeadingClassName?: string;
+  triggerIndicatorClassName?: string;
 }
 
 const CalendarYearPickerTriggerContext =
   React.createContext<CalendarYearPickerTriggerContextValue | null>(null);
 
 function useCalendarYearPickerTriggerContext(): CalendarYearPickerTriggerContextValue {
-  const context = React.useContext(CalendarYearPickerTriggerContext);
+  const context = useContext(CalendarYearPickerTriggerContext);
 
   if (!context) {
     throw new Error(
@@ -75,20 +77,28 @@ function useCalendarYearPickerTriggerContext(): CalendarYearPickerTriggerContext
   return context;
 }
 
-const CalendarYearPickerTrigger = ({
+const CalendarYearPickerTrigger = memo(function CalendarYearPickerTrigger({
   children,
   className,
   onKeyDown,
   onPress,
   ...props
-}: CalendarYearPickerTriggerProps) => {
+}: CalendarYearPickerTriggerProps) {
   const {isYearPickerOpen, setIsYearPickerOpen} = useYearPicker();
   const state = useCalendarOrRangeState();
   const monthYear = useCalendarHeading({}, state);
 
-  const slots = React.useMemo(() => calendarYearPickerVariants(), []);
+  const slots = useMemo(() => calendarYearPickerVariants(), []);
+  const slotClassNames = useMemo(
+    () => ({
+      triggerClassName: slots.trigger(),
+      triggerHeadingClassName: slots.triggerHeading(),
+      triggerIndicatorClassName: slots.triggerIndicator(),
+    }),
+    [slots],
+  );
 
-  const handleToggle = React.useCallback(() => {
+  const handleToggle = useCallback(() => {
     setIsYearPickerOpen(!isYearPickerOpen);
   }, [isYearPickerOpen, setIsYearPickerOpen]);
 
@@ -107,7 +117,7 @@ const CalendarYearPickerTrigger = ({
     }
   };
 
-  const values: CalendarYearPickerTriggerRenderProps = React.useMemo(
+  const values: CalendarYearPickerTriggerRenderProps = useMemo(
     () => ({
       isOpen: isYearPickerOpen,
       monthYear,
@@ -116,12 +126,16 @@ const CalendarYearPickerTrigger = ({
     [handleToggle, isYearPickerOpen, monthYear],
   );
 
-  const contextValue = React.useMemo(
+  const contextValue = useMemo(
     () => ({
       ...values,
-      slots,
+      ...slotClassNames,
     }),
-    [slots, values],
+    [slotClassNames, values],
+  );
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, slotClassNames.triggerClassName),
+    [className, slotClassNames.triggerClassName],
   );
 
   return (
@@ -129,7 +143,7 @@ const CalendarYearPickerTrigger = ({
       <ButtonPrimitive
         aria-expanded={isYearPickerOpen}
         aria-label={`${monthYear}, year selector`}
-        className={composeTwRenderProps(className, slots.trigger())}
+        className={resolvedClassName}
         data-open={isYearPickerOpen || undefined}
         data-slot="calendar-year-picker-trigger"
         slot={null}
@@ -144,53 +158,72 @@ const CalendarYearPickerTrigger = ({
       </ButtonPrimitive>
     </CalendarYearPickerTriggerContext>
   );
-};
+});
 
 CalendarYearPickerTrigger.displayName = "HeroUI.CalendarYearPicker.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * CalendarYearPickerTriggerHeading
  * -----------------------------------------------------------------------------------------------*/
-const CalendarYearPickerTriggerHeading = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function CalendarYearPickerTriggerHeadingInner<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>({
   children,
   className,
   format,
   offset,
   ...props
 }: CalendarYearPickerTriggerHeadingProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerTriggerHeadingProps<E>>) => {
-  const {monthYear, slots, ...values} = useCalendarYearPickerTriggerContext();
+  Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerTriggerHeadingProps<E>>) {
+  const {monthYear, triggerHeadingClassName, ...values} = useCalendarYearPickerTriggerContext();
   const state = useCalendarOrRangeState();
   const heading = useCalendarHeading({format, offset}, state);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerHeadingClassName) as string,
+    [className, triggerHeadingClassName],
+  );
 
   return (
     <dom.span
-      className={composeSlotClassName(slots.triggerHeading, className)}
+      className={resolvedClassName}
       data-slot="calendar-year-picker-trigger-heading"
       {...(props as any)}
     >
       {typeof children === "function" ? children({monthYear, ...values}) : children || heading}
     </dom.span>
   );
-};
+}
 
-CalendarYearPickerTriggerHeading.displayName = "HeroUI.CalendarYearPicker.TriggerHeading";
+CalendarYearPickerTriggerHeadingInner.displayName = "HeroUI.CalendarYearPicker.TriggerHeading";
+
+const CalendarYearPickerTriggerHeading = memo(CalendarYearPickerTriggerHeadingInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: CalendarYearPickerTriggerHeadingProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerTriggerHeadingProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * CalendarYearPickerTriggerIndicator
  * -----------------------------------------------------------------------------------------------*/
-const CalendarYearPickerTriggerIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function CalendarYearPickerTriggerIndicatorInner<
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>({
   children,
   className,
   ...props
 }: CalendarYearPickerTriggerIndicatorProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerTriggerIndicatorProps<E>>) => {
-  const {monthYear, slots, ...values} = useCalendarYearPickerTriggerContext();
+  Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerTriggerIndicatorProps<E>>) {
+  const {monthYear, triggerIndicatorClassName, ...values} = useCalendarYearPickerTriggerContext();
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerIndicatorClassName) as string,
+    [className, triggerIndicatorClassName],
+  );
 
   return (
     <dom.span
       aria-hidden="true"
-      className={composeSlotClassName(slots.triggerIndicator, className)}
+      className={resolvedClassName}
       data-slot="calendar-year-picker-trigger-indicator"
       {...(props as any)}
     >
@@ -199,9 +232,16 @@ const CalendarYearPickerTriggerIndicator = <E extends keyof React.JSX.IntrinsicE
         : children || <IconChevronRight height="1em" width="1em" />}
     </dom.span>
   );
-};
+}
 
-CalendarYearPickerTriggerIndicator.displayName = "HeroUI.CalendarYearPicker.TriggerIndicator";
+CalendarYearPickerTriggerIndicatorInner.displayName = "HeroUI.CalendarYearPicker.TriggerIndicator";
+
+const CalendarYearPickerTriggerIndicator = memo(CalendarYearPickerTriggerIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: CalendarYearPickerTriggerIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerTriggerIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * CalendarYearPickerGrid
@@ -241,21 +281,22 @@ interface CalendarYearPickerCellProps
 }
 
 interface CalendarYearPickerGridContextValue {
-  slots: ReturnType<typeof calendarYearPickerVariants>;
-  isYearPickerOpen: boolean;
   activeYear: number;
   focusedYear: number;
-  years: number[];
   getFormattedYear: (year: number) => string;
+  isYearPickerOpen: boolean;
   selectYear: (year: number) => void;
   setActiveYear: (year: number) => void;
+  yearCellClassName?: string;
+  yearGridClassName?: string;
+  years: number[];
 }
 
 const CalendarYearPickerGridContext =
   React.createContext<CalendarYearPickerGridContextValue | null>(null);
 
 function useCalendarYearPickerGridContext(): CalendarYearPickerGridContextValue {
-  const context = React.useContext(CalendarYearPickerGridContext);
+  const context = useContext(CalendarYearPickerGridContext);
 
   if (!context) {
     throw new Error("CalendarYearPicker components must be used within <CalendarYearPicker.Grid>.");
@@ -264,7 +305,7 @@ function useCalendarYearPickerGridContext(): CalendarYearPickerGridContextValue 
   return context;
 }
 
-const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "div">({
+function CalendarYearPickerGridInner<E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
   format,
@@ -272,14 +313,21 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
   visibleYears: visibleYearsProp,
   ...props
 }: CalendarYearPickerGridProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerGridProps<E>>) => {
+  Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerGridProps<E>>) {
   const {calendarGridSlot, calendarRef, isYearPickerOpen, setIsYearPickerOpen} = useYearPicker();
   const state = useCalendarOrRangeState();
-  const gridRef = React.useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  const slots = React.useMemo(() => calendarYearPickerVariants(), []);
+  const slots = useMemo(() => calendarYearPickerVariants(), []);
+  const slotClassNames = useMemo(
+    () => ({
+      yearCellClassName: slots.yearCell(),
+      yearGridClassName: slots.yearGrid(),
+    }),
+    [slots],
+  );
 
-  const visibleYears = React.useMemo(() => {
+  const visibleYears = useMemo(() => {
     if (visibleYearsProp != null) {
       return visibleYearsProp;
     }
@@ -305,13 +353,13 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
   const itemByYear = new Map(items.map((item) => [item.date.year, item]));
   const focusedYear = items[focusedItemId as number]?.date.year ?? state.focusedDate.year;
 
-  const getFormattedYear = React.useCallback(
+  const getFormattedYear = useCallback(
     (year: number) => itemByYear.get(year)?.formatted ?? String(year),
     [itemByYear],
   );
 
-  const [activeYear, setActiveYear] = React.useState(focusedYear);
-  const wasYearPickerOpenRef = React.useRef(false);
+  const [activeYear, setActiveYear] = useState(focusedYear);
+  const wasYearPickerOpenRef = useRef(false);
 
   // Position the year grid to overlay the day grid
   React.useEffect(() => {
@@ -330,7 +378,7 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
     }
   }, [calendarGridSlot, calendarRef, state.focusedDate]);
 
-  const focusYearCell = React.useCallback((year: number) => {
+  const focusYearCell = useCallback((year: number) => {
     const yearGrid = gridRef.current;
 
     if (!yearGrid) return;
@@ -380,7 +428,7 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
     }
   }, [activeYear, isYearPickerOpen, itemsKey, years]);
 
-  const handleYearSelect = React.useCallback(
+  const handleYearSelect = useCallback(
     (year: number) => {
       const item = itemByYear.get(year);
 
@@ -454,7 +502,7 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
     }
   };
 
-  const contextValue = React.useMemo(
+  const contextValue = useMemo(
     () => ({
       activeYear,
       focusedYear,
@@ -462,10 +510,22 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
       isYearPickerOpen,
       selectYear: handleYearSelect,
       setActiveYear,
-      slots,
       years,
+      ...slotClassNames,
     }),
-    [activeYear, focusedYear, getFormattedYear, handleYearSelect, isYearPickerOpen, slots, years],
+    [
+      activeYear,
+      focusedYear,
+      getFormattedYear,
+      handleYearSelect,
+      isYearPickerOpen,
+      slotClassNames,
+      years,
+    ],
+  );
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, slotClassNames.yearGridClassName) as string,
+    [className, slotClassNames.yearGridClassName],
   );
 
   return (
@@ -474,7 +534,7 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
         ref={gridRef}
         aria-hidden={!isYearPickerOpen}
         aria-label={yearGridAriaLabel}
-        className={composeSlotClassName(slots.yearGrid, className)}
+        className={resolvedClassName}
         data-open={isYearPickerOpen || undefined}
         data-slot="calendar-year-picker-grid"
         role="listbox"
@@ -486,14 +546,23 @@ const CalendarYearPickerGrid = <E extends keyof React.JSX.IntrinsicElements = "d
       </dom.div>
     </CalendarYearPickerGridContext>
   );
-};
+}
 
-CalendarYearPickerGrid.displayName = "HeroUI.CalendarYearPicker.Grid";
+CalendarYearPickerGridInner.displayName = "HeroUI.CalendarYearPicker.Grid";
+
+const CalendarYearPickerGrid = memo(CalendarYearPickerGridInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "div",
+>(
+  props: CalendarYearPickerGridProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof CalendarYearPickerGridProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * CalendarYearPickerGridBody
  * -----------------------------------------------------------------------------------------------*/
-const CalendarYearPickerGridBody = ({children}: CalendarYearPickerGridBodyProps) => {
+const CalendarYearPickerGridBody = memo(function CalendarYearPickerGridBody({
+  children,
+}: CalendarYearPickerGridBodyProps) {
   const {focusedYear, getFormattedYear, isYearPickerOpen, selectYear, years} =
     useCalendarYearPickerGridContext();
   const currentYear = new Date().getFullYear();
@@ -524,14 +593,14 @@ const CalendarYearPickerGridBody = ({children}: CalendarYearPickerGridBodyProps)
       })}
     </>
   );
-};
+});
 
 CalendarYearPickerGridBody.displayName = "HeroUI.CalendarYearPicker.GridBody";
 
 /* -------------------------------------------------------------------------------------------------
  * CalendarYearPickerCell
  * -----------------------------------------------------------------------------------------------*/
-const CalendarYearPickerCell = ({
+const CalendarYearPickerCell = memo(function CalendarYearPickerCell({
   children,
   className,
   excludeFromTabOrder,
@@ -539,7 +608,7 @@ const CalendarYearPickerCell = ({
   onPress,
   year,
   ...props
-}: CalendarYearPickerCellProps) => {
+}: CalendarYearPickerCellProps) {
   const {
     activeYear,
     focusedYear,
@@ -547,7 +616,7 @@ const CalendarYearPickerCell = ({
     isYearPickerOpen,
     selectYear,
     setActiveYear,
-    slots,
+    yearCellClassName,
   } = useCalendarYearPickerGridContext();
   const isSelected = year === focusedYear;
   const isActive = year === activeYear;
@@ -560,12 +629,16 @@ const CalendarYearPickerCell = ({
     selectYear: () => selectYear(year),
     year,
   };
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, yearCellClassName),
+    [className, yearCellClassName],
+  );
 
   return (
     <ButtonPrimitive
       aria-label={formattedYear}
       aria-selected={isSelected}
-      className={composeTwRenderProps(className, slots.yearCell())}
+      className={resolvedClassName}
       data-selected={isSelected || undefined}
       data-slot="calendar-year-picker-year-cell"
       data-year={year}
@@ -584,7 +657,7 @@ const CalendarYearPickerCell = ({
       {typeof children === "function" ? children(values) : children || formattedYear}
     </ButtonPrimitive>
   );
-};
+});
 
 CalendarYearPickerCell.displayName = "HeroUI.CalendarYearPicker.Cell";
 

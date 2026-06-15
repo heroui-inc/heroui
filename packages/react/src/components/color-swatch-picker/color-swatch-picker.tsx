@@ -6,21 +6,23 @@ import type {CSSProperties, ComponentPropsWithRef} from "react";
 import type {ColorSwatchPickerItemRenderProps} from "react-aria-components/ColorSwatchPicker";
 
 import {colorSwatchPickerVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {
   ColorSwatchPickerItem as ColorSwatchPickerItemPrimitive,
   ColorSwatchPicker as ColorSwatchPickerPrimitive,
   ColorSwatch as ColorSwatchPrimitive,
 } from "react-aria-components/ColorSwatchPicker";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Context
 | * -----------------------------------------------------------------------------------------------*/
 interface ColorSwatchPickerContext {
-  slots?: ReturnType<typeof colorSwatchPickerVariants>;
+  indicatorClassName?: string;
+  itemClassName?: string;
+  swatchClassName?: string;
 }
 
 const ColorSwatchPickerContext = createContext<ColorSwatchPickerContext>({});
@@ -40,31 +42,40 @@ const ColorSwatchPickerItemContext = createContext<ColorSwatchPickerItemContext>
 interface ColorSwatchPickerRootProps
   extends ComponentPropsWithRef<typeof ColorSwatchPickerPrimitive>, ColorSwatchPickerVariants {}
 
-const ColorSwatchPickerRoot = ({
+const ColorSwatchPickerRoot = memo(function ColorSwatchPickerRoot({
   children,
   className,
   layout,
   size,
   variant,
   ...props
-}: ColorSwatchPickerRootProps) => {
-  const slots = React.useMemo(
+}: ColorSwatchPickerRootProps) {
+  const slots = useMemo(
     () => colorSwatchPickerVariants({layout, size, variant}),
     [layout, size, variant],
   );
+  const contextValue = useMemo<ColorSwatchPickerContext>(
+    () => ({
+      indicatorClassName: slots.indicator(),
+      itemClassName: slots.item(),
+      swatchClassName: slots.swatch(),
+    }),
+    [slots],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
-    <ColorSwatchPickerContext value={{slots}}>
+    <ColorSwatchPickerContext value={contextValue}>
       <ColorSwatchPickerPrimitive
         data-slot="color-swatch-picker"
         {...props}
-        className={composeTwRenderProps(className, slots.base())}
+        className={composeTwRenderProps(className, baseClassName)}
       >
         {children}
       </ColorSwatchPickerPrimitive>
     </ColorSwatchPickerContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Item
@@ -73,14 +84,22 @@ interface ColorSwatchPickerItemProps extends ComponentPropsWithRef<
   typeof ColorSwatchPickerItemPrimitive
 > {}
 
-const ColorSwatchPickerItem = ({children, className, ...props}: ColorSwatchPickerItemProps) => {
-  const {slots} = useContext(ColorSwatchPickerContext);
+const ColorSwatchPickerItem = memo(function ColorSwatchPickerItem({
+  children,
+  className,
+  ...props
+}: ColorSwatchPickerItemProps) {
+  const {itemClassName} = useContext(ColorSwatchPickerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, itemClassName),
+    [className, itemClassName],
+  );
 
   return (
     <ColorSwatchPickerItemPrimitive
       data-slot="color-swatch-picker-item"
       {...props}
-      className={composeTwRenderProps(className, slots?.item())}
+      className={resolvedClassName}
       style={(renderProps) =>
         ({
           "--color-swatch-current": renderProps.color.toString("css"),
@@ -94,24 +113,31 @@ const ColorSwatchPickerItem = ({children, className, ...props}: ColorSwatchPicke
       )}
     </ColorSwatchPickerItemPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Swatch
 | * -----------------------------------------------------------------------------------------------*/
 interface ColorSwatchPickerSwatchProps extends ComponentPropsWithRef<typeof ColorSwatchPrimitive> {}
 
-const ColorSwatchPickerSwatch = ({className, ...props}: ColorSwatchPickerSwatchProps) => {
-  const {slots} = useContext(ColorSwatchPickerContext);
+const ColorSwatchPickerSwatch = memo(function ColorSwatchPickerSwatch({
+  className,
+  ...props
+}: ColorSwatchPickerSwatchProps) {
+  const {swatchClassName} = useContext(ColorSwatchPickerContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, swatchClassName),
+    [className, swatchClassName],
+  );
 
   return (
     <ColorSwatchPrimitive
-      className={composeTwRenderProps(className, slots?.swatch())}
+      className={resolvedClassName}
       data-slot="color-swatch-picker-swatch"
       {...props}
     />
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
 | * ColorSwatchPicker Indicator
@@ -138,14 +164,18 @@ function getColorLuminance(color: ColorSwatchPickerItemRenderProps["color"]): nu
   return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
 }
 
-const ColorSwatchPickerIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
+function ColorSwatchPickerIndicatorInner<E extends keyof React.JSX.IntrinsicElements = "span">({
   children,
   className,
   ...props
 }: ColorSwatchPickerIndicatorProps<E> &
-  Omit<React.JSX.IntrinsicElements[E], keyof ColorSwatchPickerIndicatorProps<E>>) => {
-  const {slots} = useContext(ColorSwatchPickerContext);
+  Omit<React.JSX.IntrinsicElements[E], keyof ColorSwatchPickerIndicatorProps<E>>) {
+  const {indicatorClassName} = useContext(ColorSwatchPickerContext);
   const {state} = useContext(ColorSwatchPickerItemContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, indicatorClassName) as string,
+    [className, indicatorClassName],
+  );
 
   // Determine if the background color is light (luminance > 0.5)
   // Use white checkmark on dark backgrounds, black on light backgrounds
@@ -175,7 +205,7 @@ const ColorSwatchPickerIndicator = <E extends keyof React.JSX.IntrinsicElements 
   return (
     <dom.span
       aria-hidden="true"
-      className={composeSlotClassName(slots?.indicator, className)}
+      className={resolvedClassName}
       data-light-color={isLightColor ? "true" : undefined}
       data-slot="color-swatch-picker-indicator"
       {...(props as any)}
@@ -183,7 +213,14 @@ const ColorSwatchPickerIndicator = <E extends keyof React.JSX.IntrinsicElements 
       {content}
     </dom.span>
   );
-};
+}
+
+const ColorSwatchPickerIndicator = memo(ColorSwatchPickerIndicatorInner) as <
+  E extends keyof React.JSX.IntrinsicElements = "span",
+>(
+  props: ColorSwatchPickerIndicatorProps<E> &
+    Omit<React.JSX.IntrinsicElements[E], keyof ColorSwatchPickerIndicatorProps<E>>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
 | * Exports
