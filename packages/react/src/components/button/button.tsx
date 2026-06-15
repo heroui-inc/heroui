@@ -1,10 +1,10 @@
 "use client";
 
 import type {ButtonVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {buttonVariants} from "@heroui/styles";
-import {useContext} from "react";
+import {Children, Fragment, cloneElement, isValidElement, useContext} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {composeTwRenderProps} from "../../utils";
@@ -16,6 +16,23 @@ import {BUTTON_GROUP_CHILD, ButtonGroupContext} from "../button-group";
 interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {
   [BUTTON_GROUP_CHILD]?: boolean;
 }
+
+const wrapTextNodes = (node: ReactNode): ReactNode =>
+  Children.map(node, (child) => {
+    if (typeof child === "string") {
+      return child.trim() === "" ? child : <span>{child}</span>;
+    }
+
+    if (typeof child === "number") {
+      return <span>{child}</span>;
+    }
+
+    if (isValidElement<{children?: ReactNode}>(child) && child.type === Fragment) {
+      return cloneElement(child, undefined, wrapTextNodes(child.props.children));
+    }
+
+    return child;
+  });
 
 const ButtonRoot = ({
   children,
@@ -70,7 +87,7 @@ const ButtonRoot = ({
           return renderedChildren;
         }
 
-        return <span>{renderedChildren}</span>;
+        return wrapTextNodes(renderedChildren);
       }}
     </ButtonPrimitive>
   );
