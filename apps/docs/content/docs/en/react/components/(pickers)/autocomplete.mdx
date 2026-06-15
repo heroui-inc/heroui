@@ -227,6 +227,10 @@ To customize the Autocomplete component classes, you can use the `@layer compone
   .autocomplete__popover {
     @apply rounded-lg border border-border bg-surface p-2;
   }
+
+  .autocomplete__popover-dialog {
+    @apply outline-none;
+  }
 }
 ```
 
@@ -244,6 +248,7 @@ The Autocomplete component uses these CSS classes ([View source styles](https://
 - `.autocomplete__clear-button` - The clear button that removes the selected value
 - `.autocomplete__indicator` - The dropdown indicator icon
 - `.autocomplete__popover` - The popover container
+- `.autocomplete__popover-dialog` - Internal dialog wrapper inside the popover for focus management (matches [Popover](/docs/components/popover) behavior)
 - `.autocomplete__filter` - The filter wrapper
 
 #### Variant Classes
@@ -329,7 +334,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------ |
 | `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | Placement of the popover relative to the trigger |
 | `className` | `string`                                                                                                                                                                                                                                                                                                                 | -          | Additional CSS classes                           |
-| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | Content children                                 |
+| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | Content children. Wrapped internally in a dialog element for focus management, styled with `.autocomplete__popover-dialog`. |
 
 ### Autocomplete.Filter Props
 
@@ -386,9 +391,11 @@ The Autocomplete component implements the ARIA select pattern with filtering and
 
 - Full keyboard navigation support
 - Screen reader announcements for selection changes
-- Proper focus management
+- Focus management aligned with [Popover](/docs/components/popover): `Autocomplete.Popover` wraps its content in an internal dialog so touch interactions do not show a stray focus ring on the popover overlay
 - Support for disabled states
 - Search functionality with filtering
 - HTML form integration
+
+Use `autoFocus={false}` on `SearchField` when you want to avoid opening the mobile keyboard as soon as the popover appears. Filtering still works once the user focuses the search input.
 
 For more information, see the [React Aria Select documentation](https://react-spectrum.adobe.com/react-aria/Select.html).

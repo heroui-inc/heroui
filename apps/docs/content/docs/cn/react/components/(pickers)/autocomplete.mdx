@@ -227,6 +227,10 @@ function CustomAutocomplete() {
   .autocomplete__popover {
     @apply rounded-lg border border-border bg-surface p-2;
   }
+
+  .autocomplete__popover-dialog {
+    @apply outline-none;
+  }
 }
 ```
 
@@ -244,6 +248,7 @@ Autocomplete 使用以下 CSS 类（[查看源码样式](https://github.com/hero
 - `.autocomplete__clear-button` - 清除已选值的按钮
 - `.autocomplete__indicator` - 下拉指示图标
 - `.autocomplete__popover` - 弹出层容器
+- `.autocomplete__popover-dialog` - 弹出层内部的 dialog 包裹层，用于焦点管理（与 [Popover](/docs/components/popover) 行为一致）
 - `.autocomplete__filter` - 过滤区域包裹层
 
 #### 变体类
@@ -329,7 +334,7 @@ Autocomplete 使用以下 CSS 类（[查看源码样式](https://github.com/hero
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------ |
 | `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | 弹出层相对触发器的位置 |
 | `className` | `string`                                                                                                                                                                                                                                                                                                                 | -          | 额外的 CSS 类 |
-| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | 子内容 |
+| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | 子内容。内部会包裹在 dialog 元素中以管理焦点，样式类为 `.autocomplete__popover-dialog`。 |
 
 ### Autocomplete.Filter Props
 
@@ -386,9 +391,11 @@ Autocomplete 实现带过滤的 ARIA 选择模式，并提供：
 
 - 完整键盘导航支持
 - 选择变化时的屏幕阅读器播报
-- 合理的焦点管理
+- 与 [Popover](/docs/components/popover) 一致的焦点管理：`Autocomplete.Popover` 会在内部用 dialog 包裹内容，避免触摸交互时在弹出层 overlay 上出现多余的焦点环
 - 禁用状态支持
 - 可搜索与过滤
 - HTML 表单集成
+
+若希望在弹出层打开时不立即唤起移动端键盘，可在 `SearchField` 上设置 `autoFocus={false}`。用户聚焦搜索输入框后仍可正常过滤。
 
 更多信息见 [React Aria Select 文档](https://react-spectrum.adobe.com/react-aria/Select.html)。

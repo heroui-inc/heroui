@@ -117,6 +117,8 @@ Individual `delay` and `closeDelay` props still override these values on specifi
 
 - **Toast**: ViewTransition updates are serialized in the toast queue, preventing skipped transitions and AbortError rejections when `toast.promise()` swaps the loading toast for success/error feedback ([#6511](https://github.com/heroui-inc/heroui/pull/6511)).
 - **Fieldset**: `disabled` propagates through React Aria Button, CheckboxGroup, Link, RadioGroup, Slider, ToggleButton, and ToggleButtonGroup contexts ([#6596](https://github.com/heroui-inc/heroui/pull/6596)).
+- **Autocomplete**: Popover content is wrapped in a React Aria `Dialog`, so opening the popover no longer leaves a stray focus ring on the listbox ([#6627](https://github.com/heroui-inc/heroui/pull/6627)).
+- **Tooltip**: The trigger uses the `useFocusable` hook instead of the `<Focusable>` wrapper, avoiding a false-positive "child must be focusable" warning when a tooltip is mounted inside an `inert` subtree (e.g. behind an open Drawer/Modal) ([#6628](https://github.com/heroui-inc/heroui/pull/6628)).
 
 ## Style Fixes
 
@@ -126,6 +128,8 @@ Individual `delay` and `closeDelay` props still override these values on specifi
 - **Link**: Drops the hardcoded `text-sm` so links inherit font size from their parent, and `.link__icon` scales relative to text with `size-[0.75em]` instead of a fixed `size-2` ([#6621](https://github.com/heroui-inc/heroui/pull/6621)).
 - **DatePicker / DateRangePicker**: Calendar popovers use `min-w-(--trigger-width)` instead of `max-w-(--trigger-width)` so the calendar is at least as wide as the trigger and no longer clips horizontally ([#6622](https://github.com/heroui-inc/heroui/pull/6622)).
 - **Table**: Secondary header borders and rounded corners render correctly when the table is wrapped in React Aria's `<Virtualizer>` — column selectors no longer treat every virtualized column as both first and last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624)).
+- **Autocomplete**: The popover is constrained to the trigger width and the listbox caps its height at `320px` with internal scrolling, so virtualized lists no longer overflow the popover ([#6642](https://github.com/heroui-inc/heroui/pull/6642)).
+- **Spinner**: Uses `inline-flex` with `shrink-0` (instead of `relative`) so the spin animation renders correctly in non-flex layouts, and honors `motion-reduce` ([#6644](https://github.com/heroui-inc/heroui/pull/6644)).
 
 ## Dependencies
 

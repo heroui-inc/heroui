@@ -218,6 +218,17 @@
   }
 }
 
+/* Popover dialog — mirrors Popover.Dialog focus management without a visible focus ring */
+.autocomplete__popover-dialog {
+  @apply outline-none;
+
+  &:focus,
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    @apply outline-none;
+  }
+}
+
 /* Full width modifier */
 .autocomplete--full-width {
   @apply w-full;

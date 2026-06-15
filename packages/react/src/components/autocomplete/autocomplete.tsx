@@ -19,6 +19,7 @@ import React, {
 } from "react";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
+import {Dialog as DialogPrimitive} from "react-aria-components/Dialog";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -310,7 +311,9 @@ const AutocompletePopover = memo(function AutocompletePopover({
         style={popoverStyle}
         triggerRef={triggerRef}
       >
-        {children}
+        <DialogPrimitive className={slots?.popoverDialog()} data-slot="autocomplete-popover-dialog">
+          {children}
+        </DialogPrimitive>
       </PopoverPrimitive>
     </SurfaceContext>
   );

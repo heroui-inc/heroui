@@ -117,6 +117,8 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 
 - **Toast**：Toast 队列会串行化 ViewTransition 更新，避免在 `toast.promise()` 关闭 loading toast 并打开成功/失败反馈时出现被跳过的过渡和 AbortError ([#6511](https://github.com/heroui-inc/heroui/pull/6511))。
 - **Fieldset**：`disabled` 会传递到 React Aria 的 Button、CheckboxGroup、Link、RadioGroup、Slider、ToggleButton 和 ToggleButtonGroup 上下文 ([#6596](https://github.com/heroui-inc/heroui/pull/6596))。
+- **Autocomplete**：Popover 内容包裹在 React Aria 的 `Dialog` 中，打开 popover 时 listbox 不再出现多余的焦点环 ([#6627](https://github.com/heroui-inc/heroui/pull/6627))。
+- **Tooltip**：Trigger 改用 `useFocusable` hook 而非 `<Focusable>` 包装组件，避免 Tooltip 挂载在 `inert` 子树中（例如位于已打开的 Drawer/Modal 之后）时出现误报的 “child must be focusable” 警告 ([#6628](https://github.com/heroui-inc/heroui/pull/6628))。
 
 ## 样式修复
 
@@ -126,6 +128,8 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 - **Link**：移除硬编码的 `text-sm`，让链接从父元素继承字号；`.link__icon` 改为相对单位 `size-[0.75em]`，随文本大小缩放，而不再使用固定的 `size-2` ([#6621](https://github.com/heroui-inc/heroui/pull/6621))。
 - **DatePicker / DateRangePicker**：日历 popover 由 `max-w-(--trigger-width)` 改为 `min-w-(--trigger-width)`，确保 popover 至少与触发器一样宽，避免被水平裁剪 ([#6622](https://github.com/heroui-inc/heroui/pull/6622))。
 - **Table**：当 Table 被 React Aria 的 `<Virtualizer>` 包裹时，secondary 表头的边框与圆角能够正确渲染 —— 列选择器不再把每个虚拟化列都同时视为 first 和 last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624))。
+- **Autocomplete**：Popover 限制为触发器宽度，listbox 高度上限为 `320px` 并支持内部滚动，避免虚拟化列表溢出 popover ([#6642](https://github.com/heroui-inc/heroui/pull/6642))。
+- **Spinner**：改用 `inline-flex` 搭配 `shrink-0`（替代 `relative`），使旋转动画在非 flex 布局中也能正确渲染，并支持 `motion-reduce` ([#6644](https://github.com/heroui-inc/heroui/pull/6644))。
 
 ## 依赖
 
