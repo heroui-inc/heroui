@@ -1,7 +1,7 @@
 "use client";
 
 import type {ButtonVariants} from "@heroui/styles";
-import type {CSSProperties, ComponentPropsWithRef} from "react";
+import type {ComponentPropsWithRef} from "react";
 
 import {buttonVariants} from "@heroui/styles";
 import {useContext} from "react";
@@ -16,8 +16,6 @@ import {BUTTON_GROUP_CHILD, ButtonGroupContext} from "../button-group";
 interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {
   [BUTTON_GROUP_CHILD]?: boolean;
 }
-
-const contentWrapperStyle: CSSProperties = {display: "contents"};
 
 const ButtonRoot = ({
   children,
@@ -72,15 +70,7 @@ const ButtonRoot = ({
           return renderedChildren;
         }
 
-        return (
-          <span
-            key={renderProps.isPending ? "pending" : "idle"}
-            data-slot="button-content"
-            style={contentWrapperStyle}
-          >
-            {renderedChildren}
-          </span>
-        );
+        return <span>{renderedChildren}</span>;
       }}
     </ButtonPrimitive>
   );
