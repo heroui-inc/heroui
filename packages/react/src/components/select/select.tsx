@@ -6,7 +6,7 @@ import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {selectVariants} from "@heroui/styles";
-import React, {createContext, memo, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -25,6 +25,8 @@ import {SurfaceContext, defaultSurfaceContextValue} from "../surface";
  * -----------------------------------------------------------------------------------------------*/
 type SelectContext = {
   slots?: ReturnType<typeof selectVariants>;
+  triggerClassName?: string;
+  valueClassName?: string;
 };
 
 const SelectContext = createContext<SelectContext>({});
@@ -45,14 +47,22 @@ function SelectRootInner<T extends object = object, M extends "single" | "multip
   ...props
 }: SelectRootProps<T, M>) {
   const slots = React.useMemo(() => selectVariants({fullWidth, variant}), [fullWidth, variant]);
-  const contextValue = React.useMemo(() => ({slots}), [slots]);
+  const contextValue = React.useMemo<SelectContext>(
+    () => ({
+      slots,
+      triggerClassName: slots.trigger(),
+      valueClassName: slots.value(),
+    }),
+    [slots],
+  );
+  const baseClassName = React.useMemo(() => slots.base(), [slots]);
 
   return (
     <SelectContext value={contextValue}>
       <SelectPrimitive
         data-slot="select"
         {...props}
-        className={composeTwRenderProps(className, slots?.base())}
+        className={composeTwRenderProps(className, baseClassName)}
       >
         {typeof children === "function" ? (values) => children(values) : children}
       </SelectPrimitive>
@@ -74,38 +84,46 @@ const SelectRoot = memo(SelectRootInner) as <
  * -----------------------------------------------------------------------------------------------*/
 interface SelectTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
-const SelectTrigger = ({children, className, ...props}: SelectTriggerProps) => {
-  const {slots} = useContext(SelectContext);
+const SelectTrigger = memo(function SelectTrigger({
+  children,
+  className,
+  ...props
+}: SelectTriggerProps) {
+  const {triggerClassName} = useContext(SelectContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName),
+    [className, triggerClassName],
+  );
 
   return (
-    <ButtonPrimitive
-      className={composeTwRenderProps(className, slots?.trigger())}
-      data-slot="select-trigger"
-      {...props}
-    >
+    <ButtonPrimitive className={resolvedClassName} data-slot="select-trigger" {...props}>
       {typeof children === "function" ? (values) => children(values) : children}
     </ButtonPrimitive>
   );
-};
+});
+
+SelectTrigger.displayName = "HeroUI.Select.Trigger";
 
 /* -------------------------------------------------------------------------------------------------
  * Select Value
  * -----------------------------------------------------------------------------------------------*/
 interface SelectValueProps extends ComponentPropsWithRef<typeof SelectValuePrimitive> {}
 
-const SelectValue = ({children, className, ...props}: SelectValueProps) => {
-  const {slots} = useContext(SelectContext);
+const SelectValue = memo(function SelectValue({children, className, ...props}: SelectValueProps) {
+  const {valueClassName} = useContext(SelectContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, valueClassName),
+    [className, valueClassName],
+  );
 
   return (
-    <SelectValuePrimitive
-      className={composeTwRenderProps(className, slots?.value())}
-      data-slot="select-value"
-      {...props}
-    >
+    <SelectValuePrimitive className={resolvedClassName} data-slot="select-value" {...props}>
       {children}
     </SelectValuePrimitive>
   );
-};
+});
+
+SelectValue.displayName = "HeroUI.Select.Value";
 
 /* -------------------------------------------------------------------------------------------------
  * Select Indicator

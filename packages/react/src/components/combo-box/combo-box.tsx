@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components/Button";
 
 import {comboBoxVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useContext, useMemo} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   ComboBox as ComboBoxPrimitive,
@@ -15,7 +15,7 @@ import {
 } from "react-aria-components/ComboBox";
 
 import {dataAttr} from "../../utils/assertion";
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -23,7 +23,9 @@ import {SurfaceContext} from "../surface";
  * ComboBox Context
  * -----------------------------------------------------------------------------------------------*/
 type ComboBoxContext = {
-  slots?: ReturnType<typeof comboBoxVariants>;
+  inputGroupClassName?: string;
+  popoverClassName?: string;
+  triggerClassName?: string;
   variant?: "primary" | "secondary";
 };
 
@@ -42,16 +44,25 @@ interface ComboBoxRootProps<T extends object>
   variant?: "primary" | "secondary";
 }
 
-const ComboBoxRoot = <T extends object = object>({
+function ComboBoxRootInner<T extends object = object>({
   children,
   className,
   fullWidth,
   menuTrigger = "focus",
   variant,
   ...props
-}: ComboBoxRootProps<T>) => {
-  const slots = React.useMemo(() => comboBoxVariants({fullWidth}), [fullWidth]);
-  const contextValue = React.useMemo(() => ({slots, variant}), [slots, variant]);
+}: ComboBoxRootProps<T>) {
+  const slots = useMemo(() => comboBoxVariants({fullWidth}), [fullWidth]);
+  const contextValue = useMemo<ComboBoxContext>(
+    () => ({
+      inputGroupClassName: slots.inputGroup(),
+      popoverClassName: slots.popover(),
+      triggerClassName: slots.trigger(),
+      variant,
+    }),
+    [slots, variant],
+  );
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
     <ComboBoxContext value={contextValue}>
@@ -59,29 +70,44 @@ const ComboBoxRoot = <T extends object = object>({
         data-slot="combo-box"
         menuTrigger={menuTrigger}
         {...props}
-        className={composeTwRenderProps(className, slots?.base())}
+        className={composeTwRenderProps(className, baseClassName)}
       >
         {typeof children === "function" ? (values) => children(values) : children}
       </ComboBoxPrimitive>
     </ComboBoxContext>
   );
-};
+}
+
+ComboBoxRootInner.displayName = "HeroUI.ComboBox";
+
+const ComboBoxRoot = memo(ComboBoxRootInner) as <T extends object = object>(
+  props: ComboBoxRootProps<T>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * ComboBox InputGroup
  * -----------------------------------------------------------------------------------------------*/
 interface ComboBoxInputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const ComboBoxInputGroup = ({children, className, ...props}: ComboBoxInputGroupProps) => {
-  const {slots} = useContext(ComboBoxContext);
-  const inputGroupClassName = composeSlotClassName(slots?.inputGroup, className);
+const ComboBoxInputGroup = memo(function ComboBoxInputGroup({
+  children,
+  className,
+  ...props
+}: ComboBoxInputGroupProps) {
+  const {inputGroupClassName} = useContext(ComboBoxContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, inputGroupClassName) as string,
+    [className, inputGroupClassName],
+  );
 
   return (
-    <div className={inputGroupClassName} data-slot="combo-box-input-group" {...props}>
+    <div className={resolvedClassName} data-slot="combo-box-input-group" {...props}>
       {children}
     </div>
   );
-};
+});
+
+ComboBoxInputGroup.displayName = "HeroUI.ComboBox.InputGroup";
 
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Trigger
@@ -92,12 +118,16 @@ interface ComboBoxTriggerProps extends ButtonProps {
 }
 
 const ComboBoxTrigger = ({children, className, ...rest}: ComboBoxTriggerProps) => {
-  const {slots} = useContext(ComboBoxContext);
+  const {triggerClassName} = useContext(ComboBoxContext);
   const state = useContext(ComboBoxStateContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, triggerClassName),
+    [className, triggerClassName],
+  );
 
   return (
     <Button
-      className={composeTwRenderProps(className, slots?.trigger())}
+      className={resolvedClassName}
       data-open={dataAttr(state?.isOpen)}
       data-slot="combo-box-trigger"
       {...rest}
@@ -123,7 +153,11 @@ const ComboBoxPopover = ({
   placement = "bottom",
   ...props
 }: ComboBoxPopoverProps) => {
-  const {slots} = useContext(ComboBoxContext);
+  const {popoverClassName} = useContext(ComboBoxContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, popoverClassName),
+    [className, popoverClassName],
+  );
 
   return (
     <SurfaceContext
@@ -133,7 +167,7 @@ const ComboBoxPopover = ({
     >
       <PopoverPrimitive
         {...props}
-        className={composeTwRenderProps(className, slots?.popover())}
+        className={resolvedClassName}
         data-slot="combo-box-popover"
         placement={placement}
       >

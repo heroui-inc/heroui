@@ -5,12 +5,12 @@ import type {SearchFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {searchFieldVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, isValidElement, memo, useContext, useMemo} from "react";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Input as InputPrimitive} from "react-aria-components/Input";
 import {SearchField as SearchFieldPrimitive} from "react-aria-components/SearchField";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {CloseButton} from "../close-button";
 import {IconSearch} from "../icons";
 
@@ -18,7 +18,10 @@ import {IconSearch} from "../icons";
  * SearchField Context
  * -----------------------------------------------------------------------------------------------*/
 type SearchFieldContext = {
-  slots?: ReturnType<typeof searchFieldVariants>;
+  clearButtonClassName?: string;
+  groupClassName?: string;
+  inputClassName?: string;
+  searchIconClassName?: string;
 };
 
 const SearchFieldContext = createContext<SearchFieldContext>({});
@@ -29,67 +32,84 @@ const SearchFieldContext = createContext<SearchFieldContext>({});
 interface SearchFieldRootProps
   extends ComponentPropsWithRef<typeof SearchFieldPrimitive>, SearchFieldVariants {}
 
-const SearchFieldRoot = ({
+const SearchFieldRoot = memo(function SearchFieldRoot({
   children,
   className,
   fullWidth,
   variant,
   ...props
-}: SearchFieldRootProps) => {
-  const slots = React.useMemo(
-    () => searchFieldVariants({fullWidth, variant}),
-    [fullWidth, variant],
+}: SearchFieldRootProps) {
+  const slots = useMemo(() => searchFieldVariants({fullWidth, variant}), [fullWidth, variant]);
+  const contextValue = useMemo<SearchFieldContext>(
+    () => ({
+      clearButtonClassName: slots.clearButton(),
+      groupClassName: slots.group(),
+      inputClassName: slots.input(),
+      searchIconClassName: slots.searchIcon(),
+    }),
+    [slots],
   );
-  const contextValue = React.useMemo(() => ({slots}), [slots]);
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
   return (
     <SearchFieldContext value={contextValue}>
       <SearchFieldPrimitive
         data-slot="search-field"
         {...props}
-        className={composeTwRenderProps(className, slots?.base())}
+        className={composeTwRenderProps(className, baseClassName)}
       >
         {typeof children === "function" ? (values) => children(values) : children}
       </SearchFieldPrimitive>
     </SearchFieldContext>
   );
-};
+});
+
+SearchFieldRoot.displayName = "HeroUI.SearchField";
 
 /* -------------------------------------------------------------------------------------------------
  * SearchField Group
  * -----------------------------------------------------------------------------------------------*/
 interface SearchFieldGroupProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
 
-const SearchFieldGroup = ({children, className, ...props}: SearchFieldGroupProps) => {
-  const {slots} = useContext(SearchFieldContext);
+const SearchFieldGroup = memo(function SearchFieldGroup({
+  children,
+  className,
+  ...props
+}: SearchFieldGroupProps) {
+  const {groupClassName} = useContext(SearchFieldContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, groupClassName),
+    [className, groupClassName],
+  );
 
   return (
-    <GroupPrimitive
-      className={composeTwRenderProps(className, slots?.group())}
-      data-slot="search-field-group"
-      {...props}
-    >
+    <GroupPrimitive className={resolvedClassName} data-slot="search-field-group" {...props}>
       {typeof children === "function" ? (values) => children(values) : children}
     </GroupPrimitive>
   );
-};
+});
+
+SearchFieldGroup.displayName = "HeroUI.SearchField.Group";
 
 /* -------------------------------------------------------------------------------------------------
  * SearchField Input
  * -----------------------------------------------------------------------------------------------*/
 interface SearchFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
-const SearchFieldInput = ({className, ...props}: SearchFieldInputProps) => {
-  const {slots} = useContext(SearchFieldContext);
-
-  return (
-    <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input())}
-      data-slot="search-field-input"
-      {...props}
-    />
+const SearchFieldInput = memo(function SearchFieldInput({
+  className,
+  ...props
+}: SearchFieldInputProps) {
+  const {inputClassName} = useContext(SearchFieldContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, inputClassName),
+    [className, inputClassName],
   );
-};
+
+  return <InputPrimitive className={resolvedClassName} data-slot="search-field-input" {...props} />;
+});
+
+SearchFieldInput.displayName = "HeroUI.SearchField.Input";
 
 /* -------------------------------------------------------------------------------------------------
  * SearchField Search Icon
@@ -107,9 +127,13 @@ const SearchFieldSearchIcon = <E extends keyof React.JSX.IntrinsicElements = "sv
   ...props
 }: SearchFieldSearchIconProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof SearchFieldSearchIconProps<E>>) => {
-  const {slots} = useContext(SearchFieldContext);
+  const {searchIconClassName} = useContext(SearchFieldContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, searchIconClassName),
+    [className, searchIconClassName],
+  );
 
-  if (children && React.isValidElement(children)) {
+  if (children && isValidElement(children)) {
     return React.cloneElement(
       children as React.ReactElement<{
         className?: string;
@@ -117,7 +141,7 @@ const SearchFieldSearchIcon = <E extends keyof React.JSX.IntrinsicElements = "sv
       }>,
       {
         ...(props as any),
-        className: composeSlotClassName(slots?.searchIcon, className),
+        className: resolvedClassName,
         "data-slot": "search-field-search-icon",
       },
     );
@@ -125,7 +149,7 @@ const SearchFieldSearchIcon = <E extends keyof React.JSX.IntrinsicElements = "sv
 
   return (
     <IconSearch
-      className={composeSlotClassName(slots?.searchIcon, className)}
+      className={resolvedClassName}
       data-slot="search-field-search-icon"
       {...(props as any)}
     />
@@ -137,18 +161,27 @@ const SearchFieldSearchIcon = <E extends keyof React.JSX.IntrinsicElements = "sv
  * -----------------------------------------------------------------------------------------------*/
 interface SearchFieldClearButtonProps extends ComponentPropsWithRef<typeof CloseButton> {}
 
-const SearchFieldClearButton = ({className, ...props}: SearchFieldClearButtonProps) => {
-  const {slots} = useContext(SearchFieldContext);
+const SearchFieldClearButton = memo(function SearchFieldClearButton({
+  className,
+  ...props
+}: SearchFieldClearButtonProps) {
+  const {clearButtonClassName} = useContext(SearchFieldContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, clearButtonClassName),
+    [className, clearButtonClassName],
+  );
 
   return (
     <CloseButton
-      className={composeTwRenderProps(className, slots?.clearButton())}
+      className={resolvedClassName}
       data-slot="search-field-clear-button"
       slot="clear"
       {...props}
     />
   );
-};
+});
+
+SearchFieldClearButton.displayName = "HeroUI.SearchField.ClearButton";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

@@ -9,6 +9,8 @@ import {FieldError as FieldErrorPrimitive} from "react-aria-components/FieldErro
 
 import {composeTwRenderProps} from "../../utils/compose";
 
+const fieldErrorClassName = fieldErrorVariants();
+
 /* -------------------------------------------------------------------------------------------------
  * Field Error Root
  * -----------------------------------------------------------------------------------------------*/
@@ -23,7 +25,7 @@ const FieldErrorRoot = memo(function FieldErrorRoot({
   return (
     <FieldErrorPrimitive
       data-visible
-      className={composeTwRenderProps(className, fieldErrorVariants())}
+      className={composeTwRenderProps(className, fieldErrorClassName)}
       data-slot="field-error"
       {...rest}
     >

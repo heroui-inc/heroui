@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {DateValue} from "react-aria-components/Calendar";
 
 import {dateFieldVariants} from "@heroui/styles";
-import React from "react";
+import React, {memo, useMemo} from "react";
 import {DateField as DateFieldPrimitive} from "react-aria-components/DateField";
 
 import {dataAttr} from "../../utils/assertion";
@@ -17,13 +17,13 @@ import {composeTwRenderProps} from "../../utils/compose";
 interface DateFieldRootProps<T extends DateValue>
   extends ComponentPropsWithRef<typeof DateFieldPrimitive<T>>, DateFieldVariants {}
 
-function DateFieldRoot<T extends DateValue>({
+function DateFieldRootInner<T extends DateValue>({
   children,
   className,
   fullWidth,
   ...props
 }: DateFieldRootProps<T>) {
-  const styles = React.useMemo(() => dateFieldVariants({fullWidth}), [fullWidth]);
+  const styles = useMemo(() => dateFieldVariants({fullWidth}), [fullWidth]);
 
   return (
     <DateFieldPrimitive
@@ -36,6 +36,12 @@ function DateFieldRoot<T extends DateValue>({
     </DateFieldPrimitive>
   );
 }
+
+DateFieldRootInner.displayName = "HeroUI.DateField";
+
+const DateFieldRoot = memo(DateFieldRootInner) as <T extends DateValue>(
+  props: DateFieldRootProps<T>,
+) => React.JSX.Element;
 
 /* -------------------------------------------------------------------------------------------------
  * Exports

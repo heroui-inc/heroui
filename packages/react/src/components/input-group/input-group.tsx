@@ -4,19 +4,22 @@ import type {InputGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {inputGroupVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, memo, useCallback, useContext, useMemo} from "react";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Input as InputPrimitive} from "react-aria-components/Input";
 import {TextArea as TextAreaPrimitive} from "react-aria-components/TextArea";
 
-import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {composeTwRenderProps} from "../../utils/compose";
 import {TextFieldContext} from "../textfield";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Context
  * -----------------------------------------------------------------------------------------------*/
 type InputGroupContext = {
-  slots?: ReturnType<typeof inputGroupVariants>;
+  baseClassName?: string;
+  inputClassName?: string;
+  prefixClassName?: string;
+  suffixClassName?: string;
 };
 
 const InputGroupContext = createContext<InputGroupContext>({});
@@ -27,41 +30,54 @@ const InputGroupContext = createContext<InputGroupContext>({});
 interface InputGroupRootProps
   extends ComponentPropsWithRef<typeof GroupPrimitive>, InputGroupVariants {}
 
-const InputGroupRoot = ({
+const InputGroupRoot = memo(function InputGroupRoot({
   children,
   className,
   fullWidth,
   onClick,
   variant,
   ...props
-}: InputGroupRootProps) => {
+}: InputGroupRootProps) {
   const textFieldContext = useContext(TextFieldContext);
   const resolvedVariant = variant ?? textFieldContext?.variant;
   const groupRef = React.useRef<HTMLDivElement>(null);
 
-  const slots = React.useMemo(
+  const slots = useMemo(
     () => inputGroupVariants({fullWidth, variant: resolvedVariant}),
     [fullWidth, resolvedVariant],
   );
-  const contextValue = React.useMemo(() => ({slots}), [slots]);
+  const contextValue = useMemo<InputGroupContext>(
+    () => ({
+      baseClassName: slots.base(),
+      inputClassName: slots.input(),
+      prefixClassName: slots.prefix(),
+      suffixClassName: slots.suffix(),
+    }),
+    [slots],
+  );
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLElement;
-    const input = groupRef.current?.querySelector("input");
+  const baseClassName = useMemo(() => slots.base(), [slots]);
 
-    if (input && target !== input && !input.contains(target)) {
-      input.focus();
-    }
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const target = e.target as HTMLElement;
+      const input = groupRef.current?.querySelector("input");
 
-    onClick?.(e);
-  };
+      if (input && target !== input && !input.contains(target)) {
+        input.focus();
+      }
+
+      onClick?.(e);
+    },
+    [onClick],
+  );
 
   return (
     <InputGroupContext value={contextValue}>
       <GroupPrimitive
         {...props}
         ref={groupRef}
-        className={composeTwRenderProps(className, slots?.base())}
+        className={composeTwRenderProps(className, baseClassName)}
         data-slot="input-group"
         onClick={handleClick}
       >
@@ -69,79 +85,98 @@ const InputGroupRoot = ({
       </GroupPrimitive>
     </InputGroupContext>
   );
-};
+});
+
+InputGroupRoot.displayName = "HeroUI.InputGroup";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Input
  * -----------------------------------------------------------------------------------------------*/
 interface InputGroupInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
-const InputGroupInput = ({className, ...props}: InputGroupInputProps) => {
-  const {slots} = useContext(InputGroupContext);
-
-  return (
-    <InputPrimitive
-      className={composeTwRenderProps(className, slots?.input())}
-      data-slot="input-group-input"
-      {...props}
-    />
+const InputGroupInput = memo(function InputGroupInput({className, ...props}: InputGroupInputProps) {
+  const {inputClassName} = useContext(InputGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, inputClassName),
+    [className, inputClassName],
   );
-};
+
+  return <InputPrimitive className={resolvedClassName} data-slot="input-group-input" {...props} />;
+});
+
+InputGroupInput.displayName = "HeroUI.InputGroup.Input";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Prefix
  * -----------------------------------------------------------------------------------------------*/
 interface InputGroupPrefixProps extends ComponentPropsWithRef<"div"> {}
 
-const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps) => {
-  const {slots} = useContext(InputGroupContext);
+const InputGroupPrefix = memo(function InputGroupPrefix({
+  children,
+  className,
+  ...props
+}: InputGroupPrefixProps) {
+  const {prefixClassName} = useContext(InputGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, prefixClassName) as string,
+    [className, prefixClassName],
+  );
 
   return (
-    <div
-      className={composeSlotClassName(slots?.prefix, className)}
-      data-slot="input-group-prefix"
-      {...props}
-    >
+    <div className={resolvedClassName} data-slot="input-group-prefix" {...props}>
       {children}
     </div>
   );
-};
+});
+
+InputGroupPrefix.displayName = "HeroUI.InputGroup.Prefix";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup TextArea
  * -----------------------------------------------------------------------------------------------*/
 interface InputGroupTextAreaProps extends ComponentPropsWithRef<typeof TextAreaPrimitive> {}
 
-const InputGroupTextArea = ({className, ...props}: InputGroupTextAreaProps) => {
-  const {slots} = useContext(InputGroupContext);
+const InputGroupTextArea = memo(function InputGroupTextArea({
+  className,
+  ...props
+}: InputGroupTextAreaProps) {
+  const {inputClassName} = useContext(InputGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, inputClassName),
+    [className, inputClassName],
+  );
 
   return (
-    <TextAreaPrimitive
-      className={composeTwRenderProps(className, slots?.input())}
-      data-slot="input-group-textarea"
-      {...props}
-    />
+    <TextAreaPrimitive className={resolvedClassName} data-slot="input-group-textarea" {...props} />
   );
-};
+});
+
+InputGroupTextArea.displayName = "HeroUI.InputGroup.TextArea";
 
 /* -------------------------------------------------------------------------------------------------
  * InputGroup Suffix
  * -----------------------------------------------------------------------------------------------*/
 interface InputGroupSuffixProps extends ComponentPropsWithRef<"div"> {}
 
-const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps) => {
-  const {slots} = useContext(InputGroupContext);
+const InputGroupSuffix = memo(function InputGroupSuffix({
+  children,
+  className,
+  ...props
+}: InputGroupSuffixProps) {
+  const {suffixClassName} = useContext(InputGroupContext);
+  const resolvedClassName = useMemo(
+    () => composeTwRenderProps(className, suffixClassName) as string,
+    [className, suffixClassName],
+  );
 
   return (
-    <div
-      className={composeSlotClassName(slots?.suffix, className)}
-      data-slot="input-group-suffix"
-      {...props}
-    >
+    <div className={resolvedClassName} data-slot="input-group-suffix" {...props}>
       {children}
     </div>
   );
-};
+});
+
+InputGroupSuffix.displayName = "HeroUI.InputGroup.Suffix";
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
