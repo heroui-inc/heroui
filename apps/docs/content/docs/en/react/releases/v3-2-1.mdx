@@ -1,6 +1,6 @@
 ---
 title: v3.2.1
-description: Patch release that externalizes react-aria from the @heroui/react bundle so consumers use a single deduped copy instead of a vendored one.
+description: Patch release that externalizes react-aria from the @heroui/react bundle and fixes SwitchGroup horizontal layout.
 github:
   pull: 6654
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">June 17, 2026</span>
 </div>
 
-Patch release: `@heroui/react` no longer bundles its own copy of `react-aria`. The `react-aria` subpaths are now externalized in the Rollup build, so they resolve to the version installed in your project — preventing a duplicated, vendored copy of `react-aria` from shipping inside `@heroui/react`.
+Patch release: `@heroui/react` no longer bundles its own copy of `react-aria`. The `react-aria` subpaths are now externalized in the Rollup build, so they resolve to the version installed in your project — preventing a duplicated, vendored copy of `react-aria` from shipping inside `@heroui/react`. This release also fixes `SwitchGroup` horizontal layout by rendering the missing `switch-group__items` wrapper.
 
 ## Installation
 
@@ -45,6 +45,7 @@ Update to the latest version:
 ## Bug Fixes
 
 - **@heroui/react**: Externalize the `react-aria` subpaths in the Rollup build alongside the other `@react-*` and `react-aria-components` externals, so `@heroui/react` no longer vendors its own copy of `react-aria`. Consumers now resolve to the single `react-aria` installed in their project, avoiding duplicate-instance bugs and unnecessary bundle bloat ([#6653](https://github.com/heroui-inc/heroui/pull/6653)).
+- **SwitchGroup**: Render the missing `switch-group__items` wrapper so `orientation="horizontal"` lays out switches in a row instead of stacking vertically ([#6655](https://github.com/heroui-inc/heroui/pull/6655)).
 
 ## Links
 

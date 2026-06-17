@@ -1,6 +1,6 @@
 ---
 title: v3.2.1
-description: 补丁版本：将 react-aria 从 @heroui/react 产物中外部化，使其使用项目中已去重的单一副本，而非内置的内联副本。
+description: 补丁版本：将 react-aria 从 @heroui/react 产物中外部化，并修复 SwitchGroup 横向布局。
 github:
   pull: 6654
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 6 月 17 日</span>
 </div>
 
-补丁版本：`@heroui/react` 不再内置自己的 `react-aria` 副本。`react-aria` 的子路径现在在 Rollup 构建中被外部化，因此会解析到你项目中安装的版本 —— 避免在 `@heroui/react` 内部打包出一份重复、内联的 `react-aria` 副本。
+补丁版本：`@heroui/react` 不再内置自己的 `react-aria` 副本。`react-aria` 的子路径现在在 Rollup 构建中被外部化，因此会解析到你项目中安装的版本 —— 避免在 `@heroui/react` 内部打包出一份重复、内联的 `react-aria` 副本。本次发布还修复了 `SwitchGroup` 横向布局，补全缺失的 `switch-group__items` 包装层。
 
 ## 安装
 
@@ -45,6 +45,7 @@ github:
 ## 错误修复
 
 - **@heroui/react**：将 `react-aria` 子路径与其他 `@react-*` 和 `react-aria-components` 一起在 Rollup 构建中外部化，使 `@heroui/react` 不再内置自己的 `react-aria` 副本。消费方现在会解析到项目中安装的单一 `react-aria`，避免重复实例的问题以及不必要的产物体积膨胀 ([#6653](https://github.com/heroui-inc/heroui/pull/6653))。
+- **SwitchGroup**：补全缺失的 `switch-group__items` 包装层，使 `orientation="horizontal"` 时开关横向排列，而不再垂直堆叠 ([#6655](https://github.com/heroui-inc/heroui/pull/6655))。
 
 ## 链接
 
