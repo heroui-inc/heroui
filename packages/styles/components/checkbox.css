@@ -235,7 +235,7 @@
 
 /* Checkbox content — the clickable label (control + label text) */
 .checkbox__content {
-  @apply inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
+  @apply relative inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
 }
 
 /* Unselected state background for secondary variant */
