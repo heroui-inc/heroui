@@ -33,6 +33,7 @@ const CloseButtonRoot = ({
       data-slot="close-button"
       slot={slot}
       style={style}
+      type="button"
       {...rest}
     >
       {(renderProps) =>
