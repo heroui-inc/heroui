@@ -314,6 +314,7 @@ const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "
       data-empty={dataAttr(state?.selectionManager.selectedKeys.size === 0)}
       data-slot="autocomplete-clear-button"
       disabled={isDisabled ?? false}
+      type="button"
       onClick={handleClick}
       {...(props as any)}
     >
