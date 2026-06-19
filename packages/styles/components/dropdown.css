@@ -49,7 +49,7 @@
 
 /* Similar to select popover styles */
 .dropdown__popover {
-  @apply max-w-[48svw] origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 text-sm scrollbar md:min-w-55;
+  @apply max-w-[48svw] origin-(--trigger-anchor-point) scroll-py-1 scrollbar overflow-y-auto overscroll-contain bg-overlay p-0 text-sm will-change-transform md:min-w-55;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 
