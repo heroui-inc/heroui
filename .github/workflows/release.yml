@@ -69,7 +69,13 @@ jobs:
 
       - name: Publish to npm
         working-directory: ${{ steps.tag.outputs.dir }}
+        env:
+          # Use a clean npmrc with no _authToken so npm performs OIDC trusted
+          # publishing instead of authenticating with an injected token.
+          NPM_CONFIG_USERCONFIG: ${{ runner.temp }}/.npmrc-publish
+          NODE_AUTH_TOKEN: ""
         run: |
+          printf 'registry=https://registry.npmjs.org/\n' > "$NPM_CONFIG_USERCONFIG"
           mkdir -p "$RUNNER_TEMP/heroui-release"
           PACKAGE_TARBALL="$(node -p "const pkg = require('./package.json'); pkg.name.replace('@', '').replace('/', '-') + '-' + pkg.version + '.tgz'")"
           pnpm pack --pack-destination "$RUNNER_TEMP/heroui-release"
