@@ -40,7 +40,7 @@ jobs:
           echo "Publishing $PKG_NAME@$PKG_VERSION"
 
       - name: Build packages
-        run: pnpm build
+        run: pnpm --filter "${{ steps.tag.outputs.name }}" build
 
       - name: Ensure npm supports trusted publishing
         run: npm install -g npm@11
