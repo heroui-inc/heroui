@@ -1,0 +1,64 @@
+---
+title: v3.2.2
+description: Patch release that upgrades React Aria to 1.19.0 and fixes accidental form submission from clear/close buttons and overflow scroll from visually hidden inputs.
+github:
+  pull: 6660
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">June 19, 2026</span>
+</div>
+
+Patch release: upgrades to React Aria `1.19.0` (`react-aria@3.50.0`), and fixes two regressions — clear and close buttons no longer submit their surrounding form, and visually hidden inputs in `Checkbox`, `Radio`, and `Switch` no longer cause overflow scroll.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Bug Fixes
+
+- **Input fields**: Set `type="button"` on clear and close buttons so they no longer submit the surrounding form when clicked ([#6656](https://github.com/heroui-inc/heroui/pull/6656)).
+- **Checkbox / Radio / Switch**: Prevent the visually hidden inputs from causing overflow scroll ([#6657](https://github.com/heroui-inc/heroui/pull/6657)).
+
+## Dependencies
+
+- **React Aria**: Upgrade to `react-aria-components@1.19.0` and `react-aria@3.50.0` ([#6658](https://github.com/heroui-inc/heroui/pull/6658)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6660](https://github.com/heroui-inc/heroui/pull/6660)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

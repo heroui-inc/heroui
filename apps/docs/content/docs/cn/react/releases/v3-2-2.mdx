@@ -1,0 +1,64 @@
+---
+title: v3.2.2
+description: 补丁版本：将 React Aria 升级到 1.19.0，并修复清除/关闭按钮意外提交表单以及视觉隐藏输入框导致溢出滚动的问题。
+github:
+  pull: 6660
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 6 月 19 日</span>
+</div>
+
+补丁版本：升级到 React Aria `1.19.0`（`react-aria@3.50.0`），并修复两个回归问题 —— 清除和关闭按钮不再提交其所在的表单，`Checkbox`、`Radio` 和 `Switch` 中的视觉隐藏输入框不再导致溢出滚动。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 错误修复
+
+- **输入框**：为清除和关闭按钮设置 `type="button"`，使其在点击时不再提交所在的表单 ([#6656](https://github.com/heroui-inc/heroui/pull/6656))。
+- **Checkbox / Radio / Switch**：避免视觉隐藏的输入框导致溢出滚动 ([#6657](https://github.com/heroui-inc/heroui/pull/6657))。
+
+## 依赖
+
+- **React Aria**：升级到 `react-aria-components@1.19.0` 和 `react-aria@3.50.0` ([#6658](https://github.com/heroui-inc/heroui/pull/6658))。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6660](https://github.com/heroui-inc/heroui/pull/6660)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />
