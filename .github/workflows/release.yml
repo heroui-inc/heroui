@@ -47,6 +47,26 @@ jobs:
       - name: Ensure npm supports trusted publishing
         run: npm install -g npm@11
 
+      # >>> debug-ec473e: trusted-publishing diagnostics (remove after verification)
+      - name: Debug trusted publishing env
+        working-directory: ${{ steps.tag.outputs.dir }}
+        run: |
+          echo "node: $(node -v)"
+          echo "npm: $(npm -v)  (path: $(command -v npm))"
+          echo "OIDC request url set: ${ACTIONS_ID_TOKEN_REQUEST_URL:+yes}"
+          echo "OIDC request token set: ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+yes}"
+          echo "NPM_CONFIG_USERCONFIG=${NPM_CONFIG_USERCONFIG:-<unset>}"
+          echo "--- userconfig .npmrc (token redacted) ---"
+          UC="${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
+          [ -f "$UC" ] && sed -E 's/(_authToken=).*/\1<redacted>/' "$UC" || echo "(no userconfig npmrc)"
+          echo "--- project .npmrc (token redacted) ---"
+          [ -f .npmrc ] && sed -E 's/(_authToken=).*/\1<redacted>/' .npmrc || echo "(no project npmrc)"
+          echo "--- package name/version ---"
+          node -p "const p=require('./package.json'); p.name+'@'+p.version"
+          echo "--- dry-run publish (verbose) ---"
+          npm publish --dry-run --access public --foreground-scripts 2>&1 | tail -30 || true
+      # <<< debug-ec473e
+
       - name: Publish to npm
         working-directory: ${{ steps.tag.outputs.dir }}
         run: |
