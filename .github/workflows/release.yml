@@ -79,4 +79,5 @@ jobs:
           mkdir -p "$RUNNER_TEMP/heroui-release"
           PACKAGE_TARBALL="$(node -p "const pkg = require('./package.json'); pkg.name.replace('@', '').replace('/', '-') + '-' + pkg.version + '.tgz'")"
           pnpm pack --pack-destination "$RUNNER_TEMP/heroui-release"
-          npm publish "$RUNNER_TEMP/heroui-release/$PACKAGE_TARBALL" --access public
+          # debug-ec473e: verbose to capture whether OIDC trusted publishing is attempted
+          npm publish "$RUNNER_TEMP/heroui-release/$PACKAGE_TARBALL" --access public --loglevel verbose
