@@ -144,7 +144,7 @@
 
 /* Switch content — the clickable label (control + label text) */
 .switch__content {
-  @apply inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
+  @apply relative inline-flex cursor-[inherit] items-center gap-3 text-sm font-medium text-foreground outline-none select-none no-highlight;
 }
 
 /* Size-specific control dimensions */
