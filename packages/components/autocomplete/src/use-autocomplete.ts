@@ -1,6 +1,5 @@
 import type {AutocompleteVariantProps, SlotsToClasses, AutocompleteSlots} from "@heroui/theme";
 import type {DOMAttributes, HTMLHeroUIProps, PropGetter} from "@heroui/system";
-import type {FilterFn} from "@react-stately/combobox";
 import type {ReactRef} from "@heroui/react-utils";
 import type {ReactNode} from "react";
 import type {ComboBoxProps} from "@react-types/combobox";
@@ -107,7 +106,7 @@ interface Props<T> extends Omit<HTMLHeroUIProps<"input">, keyof ComboBoxProps<T>
   /**
    * The filter function used to determine if a option should be included in the autocomplete list.
    * */
-  defaultFilter?: FilterFn;
+  defaultFilter?: (textValue: string, inputValue: string) => boolean;
   /**
    * Callback fired when the select menu is closed.
    */
