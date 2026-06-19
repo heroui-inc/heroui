@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "@heroui/**"
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish
+    if: github.repository == 'heroui-inc/heroui'
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Parse tag
+        id: tag
+        shell: bash
+        run: |
+          REF="${GITHUB_REF_NAME}"
+          # tag format: @scope/name@version -> split on the LAST "@"
+          PKG_NAME="${REF%@*}"
+          PKG_VERSION="${REF##*@}"
+
+          echo "name=$PKG_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PKG_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing $PKG_NAME@$PKG_VERSION"
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@11
+
+      - name: Publish to npm
+        run: pnpm --filter "${{ steps.tag.outputs.name }}" publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
