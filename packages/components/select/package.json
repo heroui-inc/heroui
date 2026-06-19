@@ -59,7 +59,7 @@
     "@react-aria/overlays": "3.32.1",
     "@react-aria/interactions": "3.28.1",
     "@react-aria/visually-hidden": "3.9.1",
-    "@react-types/shared": "3.35.0"
+    "@react-types/shared": "3.36.0"
   },
   "devDependencies": {
     "@heroui/avatar": "workspace:*",

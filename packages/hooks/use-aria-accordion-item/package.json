@@ -37,7 +37,7 @@
     "@react-aria/button": "3.15.1",
     "@react-aria/focus": "3.22.1",
     "@react-stately/tree": "3.10.1",
-    "@react-types/shared": "3.35.0"
+    "@react-types/shared": "3.36.0"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

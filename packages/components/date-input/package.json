@@ -48,7 +48,7 @@
     "@react-aria/i18n": "3.13.1",
     "@react-stately/datepicker": "3.17.1",
     "@react-types/datepicker": "3.14.0",
-    "@react-types/shared": "3.35.0"
+    "@react-types/shared": "3.36.0"
   },
   "devDependencies": {
     "@heroui/system": "workspace:*",

@@ -39,7 +39,7 @@
     "@react-aria/selection": "3.28.1",
     "@react-stately/tree": "3.10.1",
     "@react-types/accordion": "3.0.0-alpha.26",
-    "@react-types/shared": "3.35.0"
+    "@react-types/shared": "3.36.0"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

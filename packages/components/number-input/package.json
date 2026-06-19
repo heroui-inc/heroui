@@ -53,7 +53,7 @@
     "@react-aria/interactions": "3.28.1",
     "@react-aria/numberfield": "3.13.1",
     "@react-stately/numberfield": "3.12.1",
-    "@react-types/shared": "3.35.0",
+    "@react-types/shared": "3.36.0",
     "@react-types/numberfield": "3.9.0",
     "@react-types/button": "3.16.0"
   },

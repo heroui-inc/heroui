@@ -42,7 +42,7 @@
     "@react-aria/utils": "3.34.1",
     "@react-stately/collections": "3.13.1",
     "@react-types/overlays": "3.10.0",
-    "@react-types/shared": "3.35.0"
+    "@react-types/shared": "3.36.0"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

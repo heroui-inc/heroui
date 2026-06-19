@@ -51,7 +51,7 @@
     "@react-stately/checkbox": "3.8.1",
     "@react-stately/toggle": "3.10.1",
     "@react-types/checkbox": "3.11.0",
-    "@react-types/shared": "3.35.0"
+    "@react-types/shared": "3.36.0"
   },
   "devDependencies": {
     "@heroui/shared-icons": "workspace:*",

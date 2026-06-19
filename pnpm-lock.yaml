@@ -485,8 +485,8 @@ importers:
         specifier: 3.14.0
         version: 3.14.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
       '@tailwindcss/postcss':
         specifier: 4.1.11
         version: 4.1.11
@@ -599,8 +599,8 @@ importers:
         specifier: 3.0.0-alpha.26
         version: 3.0.0-alpha.26(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/avatar':
         specifier: workspace:*
@@ -715,8 +715,8 @@ importers:
         specifier: 3.15.0
         version: 3.15.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/avatar':
         specifier: workspace:*
@@ -899,8 +899,8 @@ importers:
         specifier: 3.28.1
         version: 3.28.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/shared-icons':
         specifier: workspace:*
@@ -978,8 +978,8 @@ importers:
         specifier: 3.9.0
         version: 3.9.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
       scroll-into-view-if-needed:
         specifier: 3.0.10
         version: 3.0.10
@@ -1030,8 +1030,8 @@ importers:
         specifier: 3.28.1
         version: 3.28.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/avatar':
         specifier: workspace:*
@@ -1103,8 +1103,8 @@ importers:
         specifier: 3.11.0
         version: 3.11.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/shared-icons':
         specifier: workspace:*
@@ -1220,8 +1220,8 @@ importers:
         specifier: 3.14.0
         version: 3.14.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/shared-icons':
         specifier: workspace:*
@@ -1293,8 +1293,8 @@ importers:
         specifier: 3.14.0
         version: 3.14.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/radio':
         specifier: workspace:*
@@ -1330,8 +1330,8 @@ importers:
         specifier: workspace:*
         version: link:../../core/system-rsc
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/theme':
         specifier: workspace:*
@@ -1492,8 +1492,8 @@ importers:
         specifier: 3.8.0
         version: 3.8.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/button':
         specifier: workspace:*
@@ -1566,8 +1566,8 @@ importers:
         specifier: 3.12.1
         version: 3.12.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
       '@react-types/textfield':
         specifier: 3.13.0
         version: 3.13.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1744,8 +1744,8 @@ importers:
         specifier: 3.14.1
         version: 3.14.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
       '@tanstack/react-virtual':
         specifier: 3.11.3
         version: 3.11.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -1814,8 +1814,8 @@ importers:
         specifier: 3.11.0
         version: 3.11.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/shared-icons':
         specifier: workspace:*
@@ -2048,8 +2048,8 @@ importers:
         specifier: 3.9.0
         version: 3.9.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/system':
         specifier: workspace:*
@@ -2265,8 +2265,8 @@ importers:
         specifier: 3.10.0
         version: 3.10.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/system':
         specifier: workspace:*
@@ -2400,8 +2400,8 @@ importers:
         specifier: 3.9.1
         version: 3.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/avatar':
         specifier: workspace:*
@@ -2777,8 +2777,8 @@ importers:
         specifier: 3.9.1
         version: 3.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
       scroll-into-view-if-needed:
         specifier: 3.0.10
         version: 3.0.10
@@ -3176,8 +3176,8 @@ importers:
   packages/core/system-rsc:
     dependencies:
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       '@heroui/react-utils':
         specifier: workspace:*
@@ -3253,8 +3253,8 @@ importers:
         specifier: 3.0.0-alpha.26
         version: 3.0.0-alpha.26(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3275,8 +3275,8 @@ importers:
         specifier: 3.10.1
         version: 3.10.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3300,8 +3300,8 @@ importers:
         specifier: 3.16.0
         version: 3.16.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3325,8 +3325,8 @@ importers:
         specifier: 3.7.0
         version: 3.7.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3399,8 +3399,8 @@ importers:
         specifier: 3.10.0
         version: 3.10.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3424,8 +3424,8 @@ importers:
         specifier: 3.32.1
         version: 3.32.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -3771,8 +3771,8 @@ importers:
         specifier: 3.10.0
         version: 3.10.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-types/shared':
-        specifier: 3.35.0
-        version: 3.35.0(react@18.3.0)
+        specifier: 3.36.0
+        version: 3.36.0(react@18.3.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -7461,8 +7461,8 @@ packages:
     peerDependencies:
       react: 18.3.0
 
-  '@react-types/shared@3.35.0':
-    resolution: {integrity: sha512-iNWvuzEwANttpQpdlu8nPBtdHb0mcCMj1ZTH//iRB5E/14IAnyRlR25rxH7pNLyzHINsPGEKnWvpwDMCT6vziQ==}
+  '@react-types/shared@3.36.0':
+    resolution: {integrity: sha512-DkP/H0C2YjjS7gZWKNqOmU8a16qHPjQNdzMwmTq9SzplM6Iw0kVMTZ0OIoe6FOgGqa+FwMsE2QbPjh/n3g/jXQ==}
     peerDependencies:
       react: 18.3.0
 
@@ -15408,7 +15408,7 @@ snapshots:
   '@adobe/react-spectrum@3.47.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
       '@internationalized/date': 3.12.2
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@spectrum-icons/ui': 3.7.0(@adobe/react-spectrum@3.47.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@spectrum-icons/workflow': 4.3.0(@adobe/react-spectrum@3.47.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@swc/helpers': 0.5.17
@@ -19069,7 +19069,7 @@ snapshots:
 
   '@react-aria/interactions@3.28.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@swc/helpers': 0.5.17
       react: 18.3.0
       react-aria: 3.48.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -19126,7 +19126,7 @@ snapshots:
 
   '@react-aria/radio@3.13.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@swc/helpers': 0.5.17
       react: 18.3.0
       react-aria: 3.48.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -19141,7 +19141,7 @@ snapshots:
 
   '@react-aria/slider@3.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@swc/helpers': 0.5.17
       react: 18.3.0
       react-aria: 3.48.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -19170,7 +19170,7 @@ snapshots:
 
   '@react-aria/tabs@3.12.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@swc/helpers': 0.5.17
       react: 18.3.0
       react-aria: 3.48.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -19547,7 +19547,7 @@ snapshots:
 
   '@react-types/accordion@3.0.0-alpha.26(react@18.3.0)':
     dependencies:
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       react: 18.3.0
 
   '@react-types/breadcrumbs@3.8.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
@@ -19608,7 +19608,7 @@ snapshots:
     dependencies:
       '@react-spectrum/form': 3.8.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-spectrum/provider': 3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
@@ -19621,7 +19621,7 @@ snapshots:
 
   '@react-types/link@3.6.4(react@18.3.0)':
     dependencies:
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       react: 18.3.0
 
   '@react-types/link@3.7.0(@react-spectrum/provider@3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
@@ -19656,7 +19656,7 @@ snapshots:
       '@react-spectrum/overlays': 5.10.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-spectrum/provider': 3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-stately/overlays': 3.7.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
@@ -19681,7 +19681,7 @@ snapshots:
     dependencies:
       react: 18.3.0
 
-  '@react-types/shared@3.35.0(react@18.3.0)':
+  '@react-types/shared@3.36.0(react@18.3.0)':
     dependencies:
       react: 18.3.0
 
@@ -19690,7 +19690,7 @@ snapshots:
       '@react-spectrum/provider': 3.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-spectrum/table': 3.18.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       '@react-stately/table': 3.16.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
@@ -26983,7 +26983,7 @@ snapshots:
   react-aria-components@1.17.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@internationalized/date': 3.12.2
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@swc/helpers': 0.5.17
       client-only: 0.0.1
       react: 18.3.0
@@ -26996,7 +26996,7 @@ snapshots:
       '@internationalized/date': 3.12.2
       '@internationalized/number': 3.6.6
       '@internationalized/string': 3.2.8
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@swc/helpers': 0.5.17
       aria-hidden: 1.2.6
       clsx: 2.1.1
@@ -27097,7 +27097,7 @@ snapshots:
       '@internationalized/date': 3.12.2
       '@internationalized/number': 3.6.6
       '@internationalized/string': 3.2.8
-      '@react-types/shared': 3.35.0(react@18.3.0)
+      '@react-types/shared': 3.36.0(react@18.3.0)
       '@swc/helpers': 0.5.17
       react: 18.3.0
       use-sync-external-store: 1.6.0(react@18.3.0)
