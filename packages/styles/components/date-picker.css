@@ -40,7 +40,7 @@
 }
 
 .date-picker__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scrollbar-none overflow-y-auto overscroll-contain bg-overlay p-3;
+  @apply w-fit origin-(--trigger-anchor-point) scrollbar-none overflow-y-auto overscroll-contain bg-overlay p-3;
   @apply motion-reduce:transition-none;
 
   box-shadow: var(--shadow-overlay);
