@@ -6,8 +6,10 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "TODO_ANDROID_PACKAGE_NAME",
-      "sha256_cert_fingerprints": ["TODO_YOUR_SIGNING_KEY_SHA256"]
+      "package_name": "com.herouinative.android",
+      "sha256_cert_fingerprints": [
+        "62:D8:E2:37:B2:F1:18:99:A5:08:6B:65:95:53:24:3F:5B:A2:A8:95:78:9E:AA:A3:D2:82:55:1F:83:74:7F:2E"
+      ]
     }
   }
 ]
