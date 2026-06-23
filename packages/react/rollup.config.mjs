@@ -50,6 +50,7 @@ const external = [
   /^@react-stately/,
   /^@react-types\//,
   /^@internationalized\//,
+  /^react-aria($|\/)/,
   /^react-aria-components($|\/)/,
   /^tailwind-merge/,
   /^tailwind-variants/,

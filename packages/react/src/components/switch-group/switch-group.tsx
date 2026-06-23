@@ -32,7 +32,9 @@ const SwitchGroupRoot = <E extends keyof React.JSX.IntrinsicElements = "div">({
 
   return (
     <dom.div data-slot="switch-group" {...(props as any)} className={slots.base({className})}>
-      {children}
+      <dom.div className={slots.items()} data-slot="switch-group-items">
+        {children}
+      </dom.div>
     </dom.div>
   );
 };

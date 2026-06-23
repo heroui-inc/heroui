@@ -1,0 +1,60 @@
+---
+title: v3.2.1
+description: Patch release that externalizes react-aria from the @heroui/react bundle and fixes SwitchGroup horizontal layout.
+github:
+  pull: 6654
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">June 17, 2026</span>
+</div>
+
+Patch release: `@heroui/react` no longer bundles its own copy of `react-aria`. The `react-aria` subpaths are now externalized in the Rollup build, so they resolve to the version installed in your project — preventing a duplicated, vendored copy of `react-aria` from shipping inside `@heroui/react`. This release also fixes `SwitchGroup` horizontal layout by rendering the missing `switch-group__items` wrapper.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Bug Fixes
+
+- **@heroui/react**: Externalize the `react-aria` subpaths in the Rollup build alongside the other `@react-*` and `react-aria-components` externals, so `@heroui/react` no longer vendors its own copy of `react-aria`. Consumers now resolve to the single `react-aria` installed in their project, avoiding duplicate-instance bugs and unnecessary bundle bloat ([#6653](https://github.com/heroui-inc/heroui/pull/6653)).
+- **SwitchGroup**: Render the missing `switch-group__items` wrapper so `orientation="horizontal"` lays out switches in a row instead of stacking vertically ([#6655](https://github.com/heroui-inc/heroui/pull/6655)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6654](https://github.com/heroui-inc/heroui/pull/6654)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

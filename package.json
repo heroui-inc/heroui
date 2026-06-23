@@ -1,12 +1,12 @@
 {
   "name": "heroui",
   "private": true,
-  "version": "3.1.0",
+  "version": "3.2.1",
   "license": "MIT",
   "author": {
     "name": "HeroUI",
     "email": "support@heroui.com",
-    "url": "https://www.heroui.com/"
+    "url": "https://heroui.com/"
   },
   "repository": {
     "type": "git",

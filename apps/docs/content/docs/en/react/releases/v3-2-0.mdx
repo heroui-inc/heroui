@@ -6,12 +6,12 @@ github:
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-muted">June 6, 2026</span>
+  <span className="text-sm text-muted">June 15, 2026</span>
 </div>
 
-Calendar gains week and day views, a reworked year picker, and range demos built on React Aria 1.18. [Tooltip](/docs/components/tooltip) adds theme variables for global show and hide delays. The toggles (`Radio`, `Checkbox`, `Switch`) move to React Aria's `*Field` + `*Button` composition. This release also rolls in the patch fixes shipped alongside React Aria 1.18 (`Table.SortableColumnHeader`, toast and fieldset fixes, scroll and RTL style fixes).
+Calendar gains week and day views, a reworked year picker, and range demos built on React Aria 1.18. [Autocomplete](/docs/components/autocomplete) adds a Virtualizer example for large option lists. [Tooltip](/docs/components/tooltip) adds theme variables for global show and hide delays. The toggles (`Radio`, `Checkbox`, `Switch`) move to React Aria's `*Field` + `*Button` composition. This release also rolls in patch fixes for virtualized lists, grouped-field autofill, toast and fieldset behavior, and scroll and RTL styles.
 
-⚠️ **Breaking changes**: `Radio`, `Checkbox`, and `Switch` move to an explicit `*.Content` composition — `*.Control` nests inside `*.Content`, the label is plain text inside `*.Content` (no nested `<Label>`), and `Description`/`FieldError` become siblings of `*.Content`. See [Breaking Changes](#-breaking-changes).
+⚠️ **Breaking changes**: `Radio`, `Checkbox`, and `Switch` move to an explicit `*.Content` composition — `*.Control` nests inside `*.Content`, the label is plain text inside `*.Content` (no nested `<Label>`), and `Description`/`FieldError` become siblings of `*.Content`. See [Breaking Changes](#%EF%B8%8F-breaking-changes).
 
 ## Installation
 
@@ -67,9 +67,16 @@ Update to the latest version:
 
 <ComponentPreview name="calendar-multiple-selection" />
 
-**Multiple selection:**
+### Autocomplete
 
-<ComponentPreview name="calendar-multiple-selection" />
+Virtualizer support for large option lists, with docs, Storybook, and style fixes for popover sizing and listbox scroll height.
+
+- **Virtualization**: Wrap `ListBox` in React Aria's `<Virtualizer>` inside `Autocomplete.Popover` ([#6642](https://github.com/heroui-inc/heroui/pull/6642))
+- **Popover sizing**: Listbox caps at `320px` with internal scrolling; search field stays fixed above the list
+
+**Virtualization:**
+
+<ComponentPreview name="autocomplete-virtualization" />
 
 ### Table.SortableColumnHeader
 
@@ -129,7 +136,10 @@ Individual `delay` and `closeDelay` props still override these values on specifi
 - **DatePicker / DateRangePicker**: Calendar popovers use `min-w-(--trigger-width)` instead of `max-w-(--trigger-width)` so the calendar is at least as wide as the trigger and no longer clips horizontally ([#6622](https://github.com/heroui-inc/heroui/pull/6622)).
 - **Table**: Secondary header borders and rounded corners render correctly when the table is wrapped in React Aria's `<Virtualizer>` — column selectors no longer treat every virtualized column as both first and last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624)).
 - **Autocomplete**: The popover is constrained to the trigger width and the listbox caps its height at `320px` with internal scrolling, so virtualized lists no longer overflow the popover ([#6642](https://github.com/heroui-inc/heroui/pull/6642)).
+- **ListBox**: Replaces `flex flex-col gap` with block flow + sibling margins so React Aria's Virtualizer content height is not collapsed by flex-shrink — fixes scrollbar thumb resizing during virtualized scroll ([#6636](https://github.com/heroui-inc/heroui/pull/6636)).
+- **InputGroup / NumberField / SearchField**: Browser autofill highlight lifts onto the group shell so prefix, suffix, and increment/decrement slots share the rounded highlight ([#6625](https://github.com/heroui-inc/heroui/pull/6625)).
 - **Spinner**: Uses `inline-flex` with `shrink-0` (instead of `relative`) so the spin animation renders correctly in non-flex layouts, and honors `motion-reduce` ([#6644](https://github.com/heroui-inc/heroui/pull/6644)).
+- **Toast**: Close button uses `-top-1 -right-1` on all breakpoints to align with container padding ([#6574](https://github.com/heroui-inc/heroui/pull/6574)).
 
 ## Dependencies
 
@@ -252,6 +262,7 @@ Full per-component guides: [Checkbox](/docs/react/migration/checkbox), [Checkbox
 ## Links
 
 - [Calendar Docs](/docs/react/components/calendar)
+- [Autocomplete Docs](/docs/react/components/autocomplete)
 - [Tooltip Docs](/docs/react/components/tooltip)
 - [Checkbox Docs](/docs/react/components/checkbox)
 - [Radio Group Docs](/docs/react/components/radio-group)

@@ -2,8 +2,8 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.0 — Calendar views & toggle changes",
-        "href": "/docs/react/releases/v3-2-0"
+        "label": "HeroUI React v3.2.1 — patch release",
+        "href": "/docs/react/releases/v3-2-1"
       },
       {
         "label": "New CLI: create-heroui-native-app v1.0.0",

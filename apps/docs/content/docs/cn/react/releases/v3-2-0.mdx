@@ -6,12 +6,12 @@ github:
 ---
 
 <div className="flex items-center gap-3 mb-6">
-  <span className="text-sm text-muted">2026 年 6 月 6 日</span>
+  <span className="text-sm text-muted">2026 年 6 月 15 日</span>
 </div>
 
-Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。[Tooltip](/docs/components/tooltip) 新增用于全局显示与隐藏延迟的主题变量。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了随 React Aria 1.18 一起发布的补丁修复（`Table.SortableColumnHeader`、Toast 与 Fieldset 修复、滚动与 RTL 样式修复）。
+Calendar 新增周视图与日视图、重做的年份选择器，以及基于 React Aria 1.18 的范围日历演示。[Autocomplete](/docs/components/autocomplete) 新增用于大型选项列表的 Virtualizer 示例。[Tooltip](/docs/components/tooltip) 新增用于全局显示与隐藏延迟的主题变量。Radio、Checkbox、Switch 迁移到 React Aria 的 `*Field` + `*Button` 组合方式。本次发布同时纳入了虚拟化列表、分组字段自动填充、Toast 与 Fieldset 行为，以及滚动与 RTL 样式方面的补丁修复。
 
-⚠️ **破坏性变更**：`Radio`、`Checkbox`、`Switch` 改为显式的 `*.Content` 组合 —— `*.Control` 嵌套进 `*.Content`，标签变为 `*.Content` 内的纯文本（不嵌套 `<Label>`），`Description`/`FieldError` 变为 `*.Content` 的兄弟节点。详见[破坏性变更](#-breaking-changes)。
+⚠️ **破坏性变更**：`Radio`、`Checkbox`、`Switch` 改为显式的 `*.Content` 组合 —— `*.Control` 嵌套进 `*.Content`，标签变为 `*.Content` 内的纯文本（不嵌套 `<Label>`），`Description`/`FieldError` 变为 `*.Content` 的兄弟节点。详见[破坏性变更](#%EF%B8%8F-breaking-changes)。
 
 ## 安装
 
@@ -67,9 +67,16 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 
 <ComponentPreview name="calendar-multiple-selection" />
 
-**多选：**
+### Autocomplete
 
-<ComponentPreview name="calendar-multiple-selection" />
+支持通过 Virtualizer 渲染大型选项列表，并补充文档、Storybook 示例，以及针对 popover 尺寸和 listbox 滚动高度的样式修复。
+
+- **虚拟化**：在 `Autocomplete.Popover` 内用 React Aria 的 `<Virtualizer>` 包裹 `ListBox` ([#6642](https://github.com/heroui-inc/heroui/pull/6642))
+- **Popover 尺寸**：listbox 高度上限为 `320px` 并支持内部滚动；搜索框固定在列表上方
+
+**虚拟化：**
+
+<ComponentPreview name="autocomplete-virtualization" />
 
 ### Table.SortableColumnHeader
 
@@ -129,7 +136,10 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 - **DatePicker / DateRangePicker**：日历 popover 由 `max-w-(--trigger-width)` 改为 `min-w-(--trigger-width)`，确保 popover 至少与触发器一样宽，避免被水平裁剪 ([#6622](https://github.com/heroui-inc/heroui/pull/6622))。
 - **Table**：当 Table 被 React Aria 的 `<Virtualizer>` 包裹时，secondary 表头的边框与圆角能够正确渲染 —— 列选择器不再把每个虚拟化列都同时视为 first 和 last child ([#6624](https://github.com/heroui-inc/heroui/pull/6624))。
 - **Autocomplete**：Popover 限制为触发器宽度，listbox 高度上限为 `320px` 并支持内部滚动，避免虚拟化列表溢出 popover ([#6642](https://github.com/heroui-inc/heroui/pull/6642))。
+- **ListBox**：将 `flex flex-col gap` 改为普通块级流 + 兄弟节点间距，避免 React Aria Virtualizer 的内容高度被 flex-shrink 压缩 —— 修复虚拟化滚动时滚动条滑块尺寸变化的问题 ([#6636](https://github.com/heroui-inc/heroui/pull/6636))。
+- **InputGroup / NumberField / SearchField**：浏览器自动填充高亮提升到分组容器上，使 prefix、suffix 和增减按钮槽位共享圆角高亮 ([#6625](https://github.com/heroui-inc/heroui/pull/6625))。
 - **Spinner**：改用 `inline-flex` 搭配 `shrink-0`（替代 `relative`），使旋转动画在非 flex 布局中也能正确渲染，并支持 `motion-reduce` ([#6644](https://github.com/heroui-inc/heroui/pull/6644))。
+- **Toast**：关闭按钮在所有断点下统一使用 `-top-1 -right-1`，与容器内边距对齐 ([#6574](https://github.com/heroui-inc/heroui/pull/6574))。
 
 ## 依赖
 
@@ -252,6 +262,7 @@ Calendar 新增周视图与日视图、重做的年份选择器，以及基于 R
 ## 链接
 
 - [Calendar 文档](/docs/react/components/calendar)
+- [Autocomplete 文档](/docs/react/components/autocomplete)
 - [Tooltip 文档](/docs/react/components/tooltip)
 - [Checkbox 文档](/docs/react/components/checkbox)
 - [Radio Group 文档](/docs/react/components/radio-group)

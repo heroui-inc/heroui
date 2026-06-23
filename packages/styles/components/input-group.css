@@ -49,6 +49,21 @@
   &[aria-disabled="true"] {
     @apply status-disabled;
   }
+
+  /**
+   * Browser autofill state.
+   * The user-agent paints `:-webkit-autofill`/`:autofill` on the inner <input>
+   * element only, inside its content box. Because the inner input has its
+   * border-radius stripped on whichever side touches a prefix/suffix, the
+   * autofill highlight ends up as a sharp-cornered rectangle and the
+   * prefix/suffix slots receive no highlight at all. Lift the highlight
+   * onto the group so the rounded shell + prefix + suffix all share it.
+   */
+  &:has([data-slot="input-group-input"]:-webkit-autofill),
+  &:has([data-slot="input-group-input"]:autofill) {
+    background-color: var(--field-focus);
+    border-color: var(--field-border-focus);
+  }
 }
 
 .input-group__input {
@@ -68,6 +83,25 @@
   &:focus,
   &:focus-visible {
     @apply outline-none;
+  }
+
+  /**
+   * Neutralize the browser's per-input autofill paint so the inner <input>
+   * doesn't draw a sharp-cornered yellow rectangle. The unified highlight
+   * is applied to `.input-group` above. Preserve the autofilled text and
+   * caret colors, and pin the background-color transition so the inset
+   * box-shadow trick doesn't flicker on state changes.
+   */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active,
+  &:autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    box-shadow: 0 0 0 1000px transparent inset;
+    -webkit-text-fill-color: var(--field-foreground);
+    caret-color: var(--field-foreground);
+    transition: background-color 9999s ease-in-out 0s;
   }
 }
 
