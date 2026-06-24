@@ -199,6 +199,15 @@
     @apply px-2.5;
   }
 
+  /* Virtualized rows: react-aria's Virtualizer wraps each row in an absolutely-positioned
+   * [role="presentation"] element whose width equals the scroll container's clientWidth
+   * (which includes the list-box horizontal padding) while sitting inside the padded content
+   * box. Without this, rows overflow the right padding and the hover background reaches the
+   * popover edge. Subtract the horizontal padding (2 × p-1.5 = 12px) to keep rows aligned. */
+  [role="presentation"] > [data-slot="list-box-item"] {
+    width: calc(100% - var(--spacing) * 3);
+  }
+
   /* As the popover closes fast in single-select mode, the default item indicator transition is not even visible - so we disable it only for single-select */
   [data-slot="list-box"]:not([aria-multiselectable="true"]) [data-slot="list-box-item-indicator"],
   [data-slot="list-box"]:not([aria-multiselectable="true"])
