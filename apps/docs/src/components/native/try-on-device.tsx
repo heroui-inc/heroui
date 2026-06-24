@@ -5,7 +5,7 @@ import {useState} from "react";
 import {NATIVE_APP} from "@/config/native-app";
 
 import {DeepLinkQRCode} from "./deep-link-qr-code";
-import {StoreButtons} from "./store-buttons";
+import {StoreButtonsLocalized} from "./store-buttons-localized";
 
 /**
  * Read `window.location.origin` synchronously when running in the browser.
@@ -52,7 +52,7 @@ export const TryOnDevice = () => {
         <span className="mb-2 text-center text-xs text-foreground">
           {["Don't have the ", NATIVE_APP.NAME, " app yet? Download it below."].join("")}
         </span>
-        <StoreButtons className="flex w-full max-w-xs flex-col items-stretch gap-2" />
+        <StoreButtonsLocalized className="flex w-full max-w-xs flex-col items-stretch gap-2" />
       </div>
     </div>
   );

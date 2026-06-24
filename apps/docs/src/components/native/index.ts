@@ -5,6 +5,7 @@ export {DownloadAppBanner} from "./download-app-banner";
 export {ImageHeroView} from "./image-hero-view";
 export {QRPreviewPopover, pickNativeQRTarget} from "./qr-preview-popover";
 export type {NativeQRPreviewTarget} from "./qr-preview-popover";
-export {StoreButtons} from "./store-buttons";
+export {StoreButtonsLocalized} from "./store-buttons-localized";
+export {StoreButtons, StoreButtonsView} from "./store-buttons";
 export {TryOnDevice} from "./try-on-device";
 export {VideoPlayerView} from "./video-player-view";

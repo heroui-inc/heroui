@@ -8,7 +8,8 @@
       "namespace": "android_app",
       "package_name": "com.herouinative.android",
       "sha256_cert_fingerprints": [
-        "62:D8:E2:37:B2:F1:18:99:A5:08:6B:65:95:53:24:3F:5B:A2:A8:95:78:9E:AA:A3:D2:82:55:1F:83:74:7F:2E"
+        "62:D8:E2:37:B2:F1:18:99:A5:08:6B:65:95:53:24:3F:5B:A2:A8:95:78:9E:AA:A3:D2:82:55:1F:83:74:7F:2E",
+        "77:AC:EE:FC:3F:03:A2:E7:5F:5F:08:B1:53:C9:F1:25:8C:31:0A:F1:D9:63:C9:DE:FE:F8:31:CE:F1:9A:37:9E"
       ]
     }
   }
