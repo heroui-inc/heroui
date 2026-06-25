@@ -38,13 +38,12 @@ export class ToastQueue<T extends object = ToastContentValue> {
     // Serialize successive ViewTransitions through a tail-extending promise
     // chain. The View Transitions API only allows one active transition at a
     // time — starting a second while the first is still animating aborts the
-    // first with a "Skipped ViewTransition due to another transition starting"
-    // DOMException (which surfaces as an unhandled rejection on .finished).
-    // Appending each new transition to the end of the chain (rather than
-    // attaching them all to the first active one) keeps them strictly ordered
-    // even when three or more mutations stack inside a single microtask, as
-    // happens during toast.promise() while the loading toast's own add
-    // transition is still in flight.
+    // first with a "Transition was skipped" DOMException (which surfaces as an
+    // unhandled rejection on .ready). Appending each new transition to the end
+    // of the chain (rather than attaching them all to the first active one)
+    // keeps them strictly ordered even when three or more mutations stack
+    // inside a single microtask, as happens during toast.promise() while the
+    // loading toast's own add transition is still in flight.
     let transitionChain: Promise<unknown> = Promise.resolve();
 
     const defaultWrapUpdate = (fn: () => void): void => {
@@ -58,6 +57,13 @@ export class ToastQueue<T extends object = ToastContentValue> {
         const transition = document.startViewTransition(() => {
           flushSync(fn);
         });
+
+        // When a transition is superseded or aborted, it's `ready` that
+        // rejects (e.g. "AbortError: Transition was skipped" /
+        // "InvalidStateError: Transition was aborted because of invalid
+        // state"); `finished` still fulfills. Catch `ready` so the rejection
+        // doesn't surface as an unhandled promise rejection.
+        transition.ready.catch(() => {});
 
         // Swallow the "skipped" rejection so that chain steps after a
         // superseded transition still run.
