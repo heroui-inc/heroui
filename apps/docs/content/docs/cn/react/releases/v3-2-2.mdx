@@ -50,6 +50,7 @@ github:
 - **Chip**：将宽度设置为 `w-fit`，使 chip 根据内容自适应宽度，而非拉伸填满容器 ([#6664](https://github.com/heroui-inc/heroui/pull/6664))。
 - **DatePicker / DateRangePicker**：使用 `w-fit` 替代 `min-w-(--trigger-width)`，避免弹出层宽度过宽 ([#6665](https://github.com/heroui-inc/heroui/pull/6665))。
 - **Autocomplete**：修正虚拟化列表项的右内边距，使列表项不再溢出到弹出层边缘 ([#6672](https://github.com/heroui-inc/heroui/pull/6672))。
+- **Toast**：在 toast 队列中捕获 ViewTransition 的 `ready` 拒绝，使被取代的过渡不再产生未处理的 Promise 拒绝 ([#6674](https://github.com/heroui-inc/heroui/pull/6674))。
 
 ## 依赖
 
