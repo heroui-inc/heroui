@@ -90,7 +90,7 @@
 
 .toggle-button-group__separator {
   @apply rounded-sm bg-current opacity-15;
-  position: absolute;
+  flex: none;
   pointer-events: none;
 
   /**
@@ -102,16 +102,12 @@
 
   /* Horizontal orientation - vertical divider */
   .toggle-button-group--horizontal & {
-    left: -1px;
-    top: 25%;
     width: 1px;
     height: 50%;
   }
 
   /* Vertical orientation - horizontal divider */
   .toggle-button-group--vertical & {
-    left: 25%;
-    top: -1px;
     width: 50%;
     height: 1px;
   }
