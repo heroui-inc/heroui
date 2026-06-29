@@ -13,7 +13,7 @@ import {i18n} from "@/lib/i18n";
 
 import {Iconify} from "../../iconify";
 import {DeepLinkQRCode} from "../deep-link-qr-code";
-import {StoreButtons} from "../store-buttons";
+import {StoreButtonsLocalized} from "../store-buttons-localized";
 
 /**
  * Read `window.location.origin` synchronously when running in the browser.
@@ -132,7 +132,7 @@ export const QRPreviewPopover = (props: NativeQRPreviewTarget) => {
         <Popover.Dialog className="flex flex-col items-center gap-4 px-5 pb-6">
           <DeepLinkQRCode size={160} url={deepLinkUrl} />
           <span className="mb-2 text-center text-xs text-foreground">{downloadPrompt}</span>
-          <StoreButtons />
+          <StoreButtonsLocalized />
         </Popover.Dialog>
       </Popover.Content>
     </Popover>

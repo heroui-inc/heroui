@@ -46,9 +46,9 @@ export function WithIcons() {
   return (
     <div className="flex gap-3">
       {Object.entries(icons).map(([key, value]) => (
-        <Switch key={key} defaultSelected size="lg">
+        <Switch key={key} defaultSelected aria-label={key} size="lg">
           {({isSelected}) => (
-            <>
+            <Switch.Content>
               <Switch.Control className={isSelected ? value.selectedControlClass : ""}>
                 <Switch.Thumb>
                   <Switch.Icon>
@@ -60,7 +60,7 @@ export function WithIcons() {
                   </Switch.Icon>
                 </Switch.Thumb>
               </Switch.Control>
-            </>
+            </Switch.Content>
           )}
         </Switch>
       ))}

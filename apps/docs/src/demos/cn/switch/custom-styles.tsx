@@ -5,9 +5,9 @@ import {Switch} from "@heroui/react";
 
 export function CustomStyles() {
   return (
-    <Switch>
+    <Switch aria-label="Power">
       {({isSelected}) => (
-        <>
+        <Switch.Content>
           <Switch.Control
             className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
           >
@@ -23,7 +23,7 @@ export function CustomStyles() {
               </Switch.Icon>
             </Switch.Thumb>
           </Switch.Control>
-        </>
+        </Switch.Content>
       )}
     </Switch>
   );
