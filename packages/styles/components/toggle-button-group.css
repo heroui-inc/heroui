@@ -102,12 +102,14 @@
 
   /* Horizontal orientation - vertical divider */
   .toggle-button-group--horizontal & {
+    margin-inline-start: -1px;
     width: 1px;
     height: 50%;
   }
 
   /* Vertical orientation - horizontal divider */
   .toggle-button-group--vertical & {
+    margin-block-start: -1px;
     width: 50%;
     height: 1px;
   }

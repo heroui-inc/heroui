@@ -85,12 +85,14 @@
 
   /* Horizontal orientation - vertical divider */
   .button-group--horizontal & {
+    margin-inline-start: -1px;
     width: 1px;
     height: 50%;
   }
 
   /* Vertical orientation - horizontal divider */
   .button-group--vertical & {
+    margin-block-start: -1px;
     width: 50%;
     height: 1px;
   }
