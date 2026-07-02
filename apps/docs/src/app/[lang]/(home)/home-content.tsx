@@ -58,7 +58,7 @@ const content: Record<HomeLocale, HomeContent> = {
       roadmap: "路线图",
       themes: "主题",
     },
-    releaseBadge: "全新 CLI：create-heroui-native-app v1.0.0",
+    releaseBadge: "HeroUI Native v1.0.5 — patch release",
     title: (
       <>
         开箱即美。<span className="text-muted/70">设计上随心可定。</span>
@@ -89,7 +89,7 @@ const content: Record<HomeLocale, HomeContent> = {
       roadmap: "Roadmap",
       themes: "Themes",
     },
-    releaseBadge: "New CLI: create-heroui-native-app v1.0.0",
+    releaseBadge: "HeroUI Native v1.0.5 — patch release",
     title: (
       <>
         Beautiful by default. <span className="text-muted/70">Customizable by design.</span>
