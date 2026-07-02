@@ -396,7 +396,7 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
   --color-field-placeholder: var(--field-placeholder, var(--muted));
   --color-field-border: var(--field-border, var(--border));
   --radius-field: var(--field-radius, var(--radius-xl));
-  --border-width-field: var(--field-border-width, var(--border-width));
+  --border-width-field-width: var(--field-border-width, var(--border-width));
 
   --shadow-surface: var(--surface-shadow);
   --shadow-overlay: var(--overlay-shadow);
@@ -462,6 +462,8 @@ We use Tailwind's `@theme` directive to automatically create calculated variable
 }
 `}
 />
+
+> **Field border utilities:** Use `border-field-width` for the field border width and `border-field-border` for the field border color. Pair them together (`border-field-width border-field-border`) when you need both. The `border-field` class remains a border-color utility from `--color-field` only; do not use it for width. If you previously used `border-field` for width, migrate to `border-field-width`. Customize the width via the `--field-border-width` primitive.
 
 Form controls now rely on the `--field-*` variables and their calculated hover/focus variants. Update them in your theme to restyle inputs, checkboxes, radios, and OTP slots without impacting surfaces like buttons or cards.
 
