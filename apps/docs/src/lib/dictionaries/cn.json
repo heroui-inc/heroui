@@ -3,11 +3,13 @@
     "releaseBadges": [
       {
         "label": "HeroUI React v3.2.1 — 补丁版本",
-        "href": "/docs/react/releases/v3-2-1"
+        "href": "/docs/react/releases/v3-2-1",
+        "date": "2026-06-24"
       },
       {
         "label": "HeroUI Native v1.0.5 — patch release",
-        "href": "/docs/native/releases/v1-0-5"
+        "href": "/docs/native/releases/v1-0-5",
+        "date": "2026-07-02"
       }
     ],
     "titleMain": "开箱即用",
