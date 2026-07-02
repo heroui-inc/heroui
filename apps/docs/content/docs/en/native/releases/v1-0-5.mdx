@@ -1,0 +1,222 @@
+---
+title: v1.0.5
+description:
+  Split border-field token fixes width/color merge conflict, Typography Dynamic Type support, provider text input configuration, single-mount popover animations, Select icon color fix, Expo 57 / RN 0.86 upgrade
+github:
+  pull: 439
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">July 2, 2026</span>
+</div>
+
+HeroUI Native v1.0.5 resolves a long-standing `border-field` merge conflict by splitting the field border into separate width and color tokens and configuring `tailwind-variants` globally, migrating Input, InputOTP, Radio, and Checkbox to outline-based focus, active, and invalid states. This release also brings iOS Dynamic Type support to Typography, adds provider-level text input configuration, reworks Popover, Menu, and Select entering animations to mount content only once, aligns the Select check icon with the `accent-soft-foreground` token, and upgrades the toolchain to Expo 57 / React Native 0.86.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It on Your Device
+
+<NativeTryOnDevice />
+
+## Performance
+
+### Single-Mount Popover, Menu, and Select Animations
+
+The [Popover](/docs/native/components/popover), [Menu](/docs/native/components/menu), and [Select](/docs/native/components/select) content now mounts a single time and animates in via a shared value once it has been measured and positioned. Previously, the content subtree was mounted twice — a hidden probe to measure dimensions, then a visible node — so the entering Keyframe could fire on mount at the correct position.
+
+**Improvements:**
+
+- The default entering animation is driven by a shared value (`rEnteringStyle`) that plays once content is positioned (`isReady`), keeping the subtree mounted only once
+- `usePopupPopoverContentAnimation` now returns `isDrivenEntering` and `rEnteringStyle`, with translate, scale, and opacity interpolated from a progress value
+- Content is hidden from pointer events until it is ready; disabled animations resolve directly to the shown state
+- Custom entering Keyframes retain the previous probe-and-mount fallback path
+
+Public component APIs are unchanged — the single-mount path is entirely internal, and custom entering animations behave exactly as before. We recommend verifying enter and exit animations across all four placements, sub-menu transitions, and the disabled-animations case.
+
+**Related PR:** [#438](https://github.com/heroui-inc/heroui-native/pull/438)
+
+## Component Improvements
+
+### Typography Dynamic Type Support (iOS)
+
+The [Typography](/docs/native/components/typography) component now applies a default `dynamicTypeRamp` per semantic type so text scales the way Apple intends on iOS. Larger types such as titles scale more slowly than body text, matching iOS system behavior for Dynamic Type. Previously, text in every Typography component scaled with the same factor.
+
+**Improvements:**
+
+- Each Typography type maps to an appropriate iOS Dynamic Type ramp (e.g. headings to `title` ramps, paragraphs to `body`)
+- Improves accessibility and text-scaling fidelity on iOS with no impact on Android
+- The `dynamicTypeRamp` default can be overridden per instance where a different ramp is desired
+
+This change is iOS-only and does not alter the Typography API. Apps that already pass `dynamicTypeRamp` directly continue to control scaling explicitly.
+
+**Related PR:** [#435](https://github.com/heroui-inc/heroui-native/pull/435)
+
+### Select Check Icon Color
+
+The [Select](/docs/native/components/select) component's `Select.ItemIndicator` now defaults its check icon color to the `accent-soft-foreground` theme token instead of `accent`, aligning the selected-item indicator with the intended semantic foreground color for better contrast and visual consistency.
+
+**Improvements:**
+
+- Default check icon color uses `accent-soft-foreground` for improved contrast in selected list items
+- JSDoc and component docs updated to reflect the new default
+
+Only the default icon color changes when `iconProps.color` is omitted — the API is unchanged and custom colors still work. Manual verification on light and dark themes is recommended to confirm indicator contrast.
+
+**Related PR:** [#436](https://github.com/heroui-inc/heroui-native/pull/436)
+
+## API Enhancements
+
+### Provider Text Input Configuration
+
+The [HeroUINativeProvider](/docs/native/getting-started/provider) (and `HeroUINativeProviderRaw`) can now configure a subset of `TextInput` props globally through a new `textInputProps` config, starting with `allowFontScaling` and `maxFontSizeMultiplier`. This mirrors the existing global `textProps` pattern and keeps input font-scaling behavior consistent across the app.
+
+**New Capability:**
+
+```tsx
+import { HeroUINativeProvider } from "heroui-native";
+
+export function App() {
+  return (
+    <HeroUINativeProvider
+      config={{
+        textInputProps: {
+          allowFontScaling: true,
+          maxFontSizeMultiplier: 1.5,
+        },
+      }}
+    >
+      {/* Your app */}
+    </HeroUINativeProvider>
+  );
+}
+```
+
+**What's included:**
+
+- New `textInputProps` config on `HeroUINativeConfig` and `HeroUINativeConfigRaw` (`allowFontScaling`, `maxFontSizeMultiplier`)
+- New `TextInputComponentProvider` / `useTextInputComponent` and a `HeroTextInput` helper that applies global props as overridable defaults
+- Applied across `Input` (and therefore `TextArea`, `SearchField`, and `InputGroup`) and the `InputOTP` primitive
+
+Global props are applied as defaults, so any prop passed directly to a component still overrides them.
+
+**Related PR:** [#437](https://github.com/heroui-inc/heroui-native/pull/437)
+
+## Dependencies
+
+### Expo 57 / React Native 0.86 Upgrade
+
+The project has been upgraded to the Expo 57 / React Native 0.86 toolchain. This upgrade also fixes overlay exit animations by wrapping content nodes so layout animations no longer share transforms with animated styles, restores the Android input focus ring, and hardens Pressable style callback typing.
+
+**Fixes:**
+
+- Moved `entering` / `exiting` layout animations onto a wrapper `Animated.View` for Popover, Menu, and Select to fix exit animations and remove the Reanimated layout-animation override warning
+- Show the input focus ring on Android using a border, with iOS retaining the outline approach
+- Simplified the default exiting keyframes by dropping the `scale` transform
+- Added explicit `PressableStateCallbackType` typing to button and sub-menu style callbacks
+
+**Dependency upgrades:**
+
+- Expo `57`
+- React Native `0.86`
+- React Native Reanimated `4.5`
+- `react-native-worklets` `0.10`
+- Tailwind CSS `4.3`
+- Uniwind `1.10`
+
+Public APIs are unchanged, but consumers should align their peer versions with Expo 57 / React Native 0.86. Manual testing of overlay open/close animations on iOS and Android and input focus states is recommended.
+
+**Related PR:** [#439](https://github.com/heroui-inc/heroui-native/pull/439)
+
+## ⚠️ Breaking Changes
+
+### Split `border-field` Into Separate Width and Color Tokens
+
+Previously, `border-field` generated both a width and a color utility under the same name, so `tailwind-merge` dropped the width. Field components hardcoded border widths (`border`, `border-[1.5px]`) and used border-color for focus and invalid states. v1.0.5 splits the field border into two non-conflicting utilities and configures `tailwind-variants` globally so width and color no longer collapse during merge.
+
+**What changed:**
+
+- `border-field-width` (width) and `border-field-border` (color) are now separate, non-conflicting utilities
+- `tv` / `cn` are configured with a shared `twMergeConfig` (`border-w` group) registered globally; all `*.styles.ts` import `tv` from the lib
+- Input, InputOTP, Radio, and Checkbox use `border-field-width` and `outline-*` for focus, active, and invalid states; the invalid outline now shows at rest
+- The `--field-radius` multiplier changed from `1.5` to `1.75`
+
+The public component API is unchanged, but the visual and behavioral changes require verification. Please confirm the following in your app:
+
+**Migration:**
+
+Borders set via the `--field-border` color alone no longer appear — `--field-border-width` now defaults to `0px`, so set a width as well:
+
+```tsx
+// Before — a color alone rendered a visible border
+// --field-border: <color>;
+
+// After — also set a width, since --field-border-width defaults to 0px
+// --field-border: <color>;
+// --field-border-width: 1.5px;
+```
+
+When using the field border width utility directly, rename it:
+
+```tsx
+// Before
+<View className="border-field" />
+
+// After
+<View className="border-field-width" />
+```
+
+**Also verify:**
+
+- Focus, active, and invalid states now use `outline-*` rather than border-color
+- Overrides of the `--border-width-field` theme key must use `--border-width-field-width` (or the `--field-border-width` primitive)
+- Field corner radius changes slightly (`--field-radius` multiplier `1.5` → `1.75`)
+
+If you rely on `--field-border` color to produce resting borders, set a non-zero `--field-border-width` default to restore that appearance.
+
+**Related PR:** [#434](https://github.com/heroui-inc/heroui-native/pull/434)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Typography](/docs/native/components/typography) - Documented the default `dynamicTypeRamp` behavior on iOS
+- [Select](/docs/native/components/select) - Updated the `Select.ItemIndicator` default check icon color
+- [Provider](/docs/native/getting-started/provider) - Added the `textInputProps` section, examples, and provider hierarchy
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
