@@ -10,7 +10,7 @@ import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Di
 
 import {modalVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
-import {createContext, useContext, useMemo} from "react";
+import {createContext, use, useMemo} from "react";
 import {
   Dialog as DialogPrimitive,
   Heading as HeadingPrimitive,
@@ -81,7 +81,7 @@ const ModalTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: ModalTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalTriggerProps<E>>) => {
-  const {slots} = useContext(ModalContext);
+  const {slots} = use(ModalContext);
 
   return (
     <PressablePrimitive>
@@ -117,7 +117,7 @@ const ModalBackdrop = ({
   variant,
   ...props
 }: ModalBackdropProps) => {
-  const {slots: contextSlots} = useContext(ModalContext);
+  const {slots: contextSlots} = use(ModalContext);
 
   const updatedSlots = useMemo(() => modalVariants({variant}), [variant]);
 
@@ -166,7 +166,7 @@ const ModalContainer = ({
   size,
   ...props
 }: ModalContainerProps) => {
-  const {slots: contextSlots} = useContext(ModalContext);
+  const {slots: contextSlots} = use(ModalContext);
 
   const updatedSlots = useMemo(() => modalVariants({scroll, size}), [scroll, size]);
 
@@ -197,7 +197,7 @@ const ModalContainer = ({
 interface ModalDialogProps extends DialogPrimitiveProps {}
 
 const ModalDialog = ({children, className, ...props}: ModalDialogProps) => {
-  const {placement, slots} = useContext(ModalContext);
+  const {placement, slots} = use(ModalContext);
 
   return (
     <SurfaceContext value={{variant: "default" as SurfaceVariants["variant"]}}>
@@ -228,7 +228,7 @@ const ModalHeader = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: ModalHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalHeaderProps<E>>) => {
-  const {slots} = useContext(ModalContext);
+  const {slots} = use(ModalContext);
 
   return (
     <dom.div
@@ -256,7 +256,7 @@ const ModalBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: ModalBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalBodyProps<E>>) => {
-  const {slots} = useContext(ModalContext);
+  const {slots} = use(ModalContext);
 
   return (
     <dom.div
@@ -284,7 +284,7 @@ const ModalFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: ModalFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalFooterProps<E>>) => {
-  const {slots} = useContext(ModalContext);
+  const {slots} = use(ModalContext);
 
   return (
     <dom.div
@@ -303,7 +303,7 @@ const ModalFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
 interface ModalHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
 const ModalHeading = ({children, className, ...props}: ModalHeadingProps) => {
-  const {slots} = useContext(ModalContext);
+  const {slots} = use(ModalContext);
 
   return (
     <HeadingPrimitive
@@ -332,7 +332,7 @@ const ModalIcon = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: ModalIconProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ModalIconProps<E>>) => {
-  const {slots} = useContext(ModalContext);
+  const {slots} = use(ModalContext);
 
   return (
     <dom.div
@@ -354,7 +354,7 @@ interface ModalCloseTriggerProps extends ComponentPropsWithRef<typeof ButtonPrim
 }
 
 const ModalCloseTrigger = ({className, ...rest}: ModalCloseTriggerProps) => {
-  const {slots} = useContext(ModalContext);
+  const {slots} = use(ModalContext);
 
   return (
     <CloseButton

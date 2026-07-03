@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {InputProps as InputPrimitiveProps} from "react-aria-components/Input";
 
 import {colorInputGroupVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Input as InputPrimitive} from "react-aria-components/Input";
 
@@ -69,7 +69,7 @@ const ColorInputGroupPrefix = <E extends keyof React.JSX.IntrinsicElements = "di
   ...props
 }: ColorInputGroupPrefixProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupPrefixProps<E>>) => {
-  const {slots} = useContext(ColorInputGroupContext);
+  const {slots} = use(ColorInputGroupContext);
 
   return (
     <dom.div
@@ -90,7 +90,7 @@ interface ColorInputGroupInputProps extends InputPrimitiveProps {
 }
 
 const ColorInputGroupInput = ({className, ...props}: ColorInputGroupInputProps) => {
-  const {slots} = useContext(ColorInputGroupContext);
+  const {slots} = use(ColorInputGroupContext);
 
   return (
     <InputPrimitive
@@ -117,7 +117,7 @@ const ColorInputGroupSuffix = <E extends keyof React.JSX.IntrinsicElements = "di
   ...props
 }: ColorInputGroupSuffixProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ColorInputGroupSuffixProps<E>>) => {
-  const {slots} = useContext(ColorInputGroupContext);
+  const {slots} = use(ColorInputGroupContext);
 
   return (
     <dom.div

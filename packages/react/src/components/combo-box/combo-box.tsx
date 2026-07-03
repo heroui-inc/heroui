@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components/Button";
 
 import {comboBoxVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   ComboBox as ComboBoxPrimitive,
@@ -72,7 +72,7 @@ const ComboBoxRoot = <T extends object = object>({
 interface ComboBoxInputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const ComboBoxInputGroup = ({children, className, ...props}: ComboBoxInputGroupProps) => {
-  const {slots} = useContext(ComboBoxContext);
+  const {slots} = use(ComboBoxContext);
   const inputGroupClassName = composeSlotClassName(slots?.inputGroup, className);
 
   return (
@@ -91,8 +91,8 @@ interface ComboBoxTriggerProps extends ButtonProps {
 }
 
 const ComboBoxTrigger = ({children, className, ...rest}: ComboBoxTriggerProps) => {
-  const {slots} = useContext(ComboBoxContext);
-  const state = useContext(ComboBoxStateContext);
+  const {slots} = use(ComboBoxContext);
+  const state = use(ComboBoxStateContext);
 
   return (
     <Button
@@ -122,7 +122,7 @@ const ComboBoxPopover = ({
   placement = "bottom",
   ...props
 }: ComboBoxPopoverProps) => {
-  const {slots} = useContext(ComboBoxContext);
+  const {slots} = use(ComboBoxContext);
 
   return (
     <SurfaceContext

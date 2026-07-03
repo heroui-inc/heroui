@@ -52,7 +52,7 @@ const AvatarImage = ({
   srcSet,
   ...props
 }: AvatarImageProps) => {
-  const {slots} = React.useContext(AvatarContext);
+  const {slots} = React.use(AvatarContext);
 
   return (
     <AvatarPrimitive.Image
@@ -77,7 +77,7 @@ interface AvatarFallbackProps extends ComponentPropsWithRef<typeof AvatarPrimiti
 }
 
 const AvatarFallback = ({className, color, ...props}: AvatarFallbackProps) => {
-  const {slots} = React.useContext(AvatarContext);
+  const {slots} = React.use(AvatarContext);
 
   return (
     <AvatarPrimitive.Fallback

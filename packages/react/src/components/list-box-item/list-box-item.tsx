@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {ListBoxItemRenderProps} from "react-aria-components/ListBox";
 
 import {listboxItemVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {ListBoxItem as ListBoxItemPrimitive} from "react-aria-components/ListBox";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
@@ -64,7 +64,7 @@ const ListBoxItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "spa
   ...props
 }: ListBoxItemIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ListBoxItemIndicatorProps<E>>) => {
-  const {slots, state} = useContext(ListBoxItemContext);
+  const {slots, state} = use(ListBoxItemContext);
   const isSelected = state?.isSelected;
 
   const content =

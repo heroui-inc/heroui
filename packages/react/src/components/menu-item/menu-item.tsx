@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {MenuItemRenderProps} from "react-aria-components/Menu";
 
 import {menuItemVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {MenuItem as MenuItemPrimitive} from "react-aria-components/Menu";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
@@ -67,7 +67,7 @@ const MenuItemIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">
   ...props
 }: MenuItemIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof MenuItemIndicatorProps<E>>) => {
-  const {slots, state} = useContext(MenuItemContext);
+  const {slots, state} = use(MenuItemContext);
   const isSelected = state?.isSelected;
 
   const content =
@@ -135,7 +135,7 @@ const MenuItemSubmenuIndicator = <E extends keyof React.JSX.IntrinsicElements = 
   ...props
 }: MenuItemSubmenuIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof MenuItemSubmenuIndicatorProps<E>>) => {
-  const {slots, state} = useContext(MenuItemContext);
+  const {slots, state} = use(MenuItemContext);
   const hasSubmenu = state?.hasSubmenu;
 
   if (!hasSubmenu) {

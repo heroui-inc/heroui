@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {ColorPickerProps as ColorPickerPrimitiveProps} from "react-aria-components/ColorPicker";
 
 import {colorPickerVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {ColorPicker as ColorPickerPrimitive} from "react-aria-components/ColorPicker";
 import {
@@ -59,7 +59,7 @@ const ColorPickerRoot = ({children, className, ...props}: ColorPickerRootProps) 
 interface ColorPickerTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
 const ColorPickerTrigger = ({children, className, ...props}: ColorPickerTriggerProps) => {
-  const {slots} = useContext(ColorPickerContext);
+  const {slots} = use(ColorPickerContext);
 
   return (
     <ButtonPrimitive
@@ -88,7 +88,7 @@ const ColorPickerPopover = ({
   placement = "bottom left",
   ...props
 }: ColorPickerPopoverProps) => {
-  const {slots} = useContext(ColorPickerContext);
+  const {slots} = use(ColorPickerContext);
 
   return (
     <SurfaceContext

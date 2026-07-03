@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {SwitchButtonRenderProps, SwitchFieldRenderProps} from "react-aria-components/Switch";
 
 import {switchVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   SwitchButton as SwitchButtonPrimitive,
   SwitchField as SwitchFieldPrimitive,
@@ -55,7 +55,7 @@ SwitchRoot.displayName = "HeroUI.Switch";
 interface SwitchContentProps extends ComponentPropsWithRef<typeof SwitchButtonPrimitive> {}
 
 const SwitchContent = ({children, className, ...props}: SwitchContentProps) => {
-  const {slots} = useContext(SwitchContext);
+  const {slots} = use(SwitchContext);
 
   return (
     <SwitchButtonPrimitive
@@ -84,7 +84,7 @@ const SwitchControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: SwitchControlProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchControlProps<E>>) => {
-  const {slots} = useContext(SwitchContext);
+  const {slots} = use(SwitchContext);
 
   return (
     <dom.span
@@ -113,7 +113,7 @@ const SwitchThumb = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: SwitchThumbProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchThumbProps<E>>) => {
-  const {slots} = useContext(SwitchContext);
+  const {slots} = use(SwitchContext);
 
   return (
     <dom.span
@@ -142,7 +142,7 @@ const SwitchIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: SwitchIconProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SwitchIconProps<E>>) => {
-  const {slots} = useContext(SwitchContext);
+  const {slots} = use(SwitchContext);
 
   return (
     <dom.span

@@ -5,7 +5,7 @@ import type {PaginationVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {paginationVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {composeTwRenderProps} from "../../utils";
@@ -75,7 +75,7 @@ const PaginationSummary = <E extends keyof React.JSX.IntrinsicElements = "div">(
   ...props
 }: PaginationSummaryProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof PaginationSummaryProps<E>>) => {
-  const {slots} = useContext(PaginationContext);
+  const {slots} = use(PaginationContext);
 
   return (
     <dom.div
@@ -106,7 +106,7 @@ const PaginationContent = <E extends keyof React.JSX.IntrinsicElements = "ul">({
   ...props
 }: PaginationContentProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof PaginationContentProps<E>>) => {
-  const {slots} = useContext(PaginationContext);
+  const {slots} = use(PaginationContext);
 
   return (
     <dom.ul
@@ -136,7 +136,7 @@ const PaginationItem = <E extends keyof React.JSX.IntrinsicElements = "li">({
   className,
   ...props
 }: PaginationItemProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof PaginationItemProps<E>>) => {
-  const {slots} = useContext(PaginationContext);
+  const {slots} = use(PaginationContext);
 
   return (
     <dom.li
@@ -161,7 +161,7 @@ interface PaginationLinkProps extends ComponentPropsWithRef<typeof ButtonPrimiti
 }
 
 const PaginationLink = ({children, className, isActive, ...props}: PaginationLinkProps) => {
-  const {slots} = useContext(PaginationContext);
+  const {slots} = use(PaginationContext);
 
   return (
     <ButtonPrimitive
@@ -187,7 +187,7 @@ interface PaginationPreviousProps extends ComponentPropsWithRef<typeof ButtonPri
 }
 
 const PaginationPrevious = ({children, className, ...props}: PaginationPreviousProps) => {
-  const {slots} = useContext(PaginationContext);
+  const {slots} = use(PaginationContext);
   const baseClass = `${slots?.link() ?? ""} pagination__link--nav`.trim();
 
   return (
@@ -242,7 +242,7 @@ interface PaginationNextProps extends ComponentPropsWithRef<typeof ButtonPrimiti
 }
 
 const PaginationNext = ({children, className, ...props}: PaginationNextProps) => {
-  const {slots} = useContext(PaginationContext);
+  const {slots} = use(PaginationContext);
   const baseClass = `${slots?.link() ?? ""} pagination__link--nav`.trim();
 
   return (
@@ -302,7 +302,7 @@ const PaginationEllipsis = <E extends keyof React.JSX.IntrinsicElements = "span"
   ...props
 }: PaginationEllipsisProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof PaginationEllipsisProps<E>>) => {
-  const {slots} = useContext(PaginationContext);
+  const {slots} = use(PaginationContext);
 
   return (
     <dom.span

@@ -9,8 +9,8 @@ import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-co
 import {toastVariants} from "@heroui/styles";
 import React, {
   createContext,
+  use,
   useCallback,
-  useContext,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -84,12 +84,12 @@ const Toast = <T extends object = ToastContentValue>({
     placement: contextPlacement,
     scaleFactor: contextScaleFactor,
     slots,
-  } = useContext(ToastContext);
+  } = use(ToastContext);
 
   const finalPlacement = placement ?? contextPlacement;
   const finalScaleFactor = scaleFactor ?? contextScaleFactor;
 
-  const state = useContext(ToastStateContext)!;
+  const state = use(ToastStateContext)!;
   const visibleToasts = state.visibleToasts;
   const index = visibleToasts.indexOf(toast);
   const isFrontmost = index <= 0;
@@ -193,7 +193,7 @@ Toast.displayName = "HeroUI.Toast";
 interface ToastContentProps extends ComponentPropsWithRef<typeof ToastContentPrimitive> {}
 
 const ToastContent = ({children, className, ...rest}: ToastContentProps) => {
-  const {slots} = useContext(ToastContext);
+  const {slots} = use(ToastContext);
 
   return (
     <ToastContentPrimitive
@@ -223,7 +223,7 @@ const ToastIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
   variant,
   ...rest
 }: ToastIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ToastIndicatorProps<E>>) => {
-  const {slots} = useContext(ToastContext);
+  const {slots} = use(ToastContext);
 
   const getDefaultIcon = useCallback(() => {
     switch (variant) {
@@ -259,7 +259,7 @@ ToastIndicator.displayName = "HeroUI.ToastIndicator";
 interface ToastTitleProps extends ComponentPropsWithRef<typeof TextPrimitive> {}
 
 const ToastTitle = ({children, className, ...rest}: ToastTitleProps) => {
-  const {slots} = useContext(ToastContext);
+  const {slots} = use(ToastContext);
 
   return (
     <TextPrimitive
@@ -281,7 +281,7 @@ ToastTitle.displayName = "HeroUI.ToastTitle";
 interface ToastDescriptionProps extends ComponentPropsWithRef<typeof TextPrimitive> {}
 
 const ToastDescription = ({children, className, ...rest}: ToastDescriptionProps) => {
-  const {slots} = useContext(ToastContext);
+  const {slots} = use(ToastContext);
 
   return (
     <TextPrimitive
@@ -303,7 +303,7 @@ ToastDescription.displayName = "HeroUI.ToastDescription";
 interface ToastCloseButtonProps extends ComponentPropsWithRef<typeof CloseButton> {}
 
 const ToastCloseButton = ({className, ...rest}: ToastCloseButtonProps) => {
-  const {slots} = useContext(ToastContext);
+  const {slots} = use(ToastContext);
 
   return (
     <CloseButton
@@ -323,7 +323,7 @@ ToastCloseButton.displayName = "HeroUI.ToastCloseButton";
 interface ToastActionButtonProps extends ComponentPropsWithRef<typeof Button> {}
 
 const ToastActionButton = ({children, className, ...rest}: ToastActionButtonProps) => {
-  const {slots} = useContext(ToastContext);
+  const {slots} = use(ToastContext);
 
   return (
     <Button

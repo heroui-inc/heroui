@@ -4,7 +4,7 @@ import type {ColorAreaVariants} from "@heroui/styles";
 import type {CSSProperties, ComponentPropsWithRef} from "react";
 
 import {colorAreaVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   ColorArea as ColorAreaPrimitive,
   ColorThumb as ColorThumbPrimitive,
@@ -57,7 +57,7 @@ const ColorAreaRoot = ({children, className, showDots, style, ...props}: ColorAr
 interface ColorAreaThumbProps extends ComponentPropsWithRef<typeof ColorThumbPrimitive> {}
 
 const ColorAreaThumb = ({className, style, ...props}: ColorAreaThumbProps) => {
-  const {slots} = useContext(ColorAreaContext);
+  const {slots} = use(ColorAreaContext);
 
   return (
     <ColorThumbPrimitive

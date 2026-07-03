@@ -64,7 +64,7 @@ const CalendarYearPickerTriggerContext =
   React.createContext<CalendarYearPickerTriggerContextValue | null>(null);
 
 function useCalendarYearPickerTriggerContext(): CalendarYearPickerTriggerContextValue {
-  const context = React.useContext(CalendarYearPickerTriggerContext);
+  const context = React.use(CalendarYearPickerTriggerContext);
 
   if (!context) {
     throw new Error(
@@ -255,7 +255,7 @@ const CalendarYearPickerGridContext =
   React.createContext<CalendarYearPickerGridContextValue | null>(null);
 
 function useCalendarYearPickerGridContext(): CalendarYearPickerGridContextValue {
-  const context = React.useContext(CalendarYearPickerGridContext);
+  const context = React.use(CalendarYearPickerGridContext);
 
   if (!context) {
     throw new Error("CalendarYearPicker components must be used within <CalendarYearPicker.Grid>.");

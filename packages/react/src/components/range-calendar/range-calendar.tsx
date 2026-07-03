@@ -9,7 +9,7 @@ import type {DateValue} from "react-aria-components/Calendar";
 import {rangeCalendarVariants} from "@heroui/styles";
 import {CalendarDate, DateFormatter, createCalendar} from "@internationalized/date";
 import {useControlledState} from "@react-stately/utils";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {useLocale} from "react-aria-components/I18nProvider";
 import {
@@ -167,7 +167,7 @@ const RangeCalendarHeader = <E extends keyof React.JSX.IntrinsicElements = "head
   ...props
 }: RangeCalendarHeaderProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof RangeCalendarHeaderProps<E>>) => {
-  const {slots} = useContext(RangeCalendarContext);
+  const {slots} = use(RangeCalendarContext);
 
   return (
     <dom.header
@@ -190,7 +190,7 @@ interface RangeCalendarHeadingProps extends ComponentPropsWithRef<
 > {}
 
 const RangeCalendarHeading = ({className, ...props}: RangeCalendarHeadingProps) => {
-  const {slots} = useContext(RangeCalendarContext);
+  const {slots} = use(RangeCalendarContext);
 
   return (
     <CalendarHeadingPrimitive
@@ -216,7 +216,7 @@ const RangeCalendarNavButton = ({
   slot,
   ...props
 }: RangeCalendarNavButtonProps) => {
-  const {slots} = useContext(RangeCalendarContext);
+  const {slots} = use(RangeCalendarContext);
 
   return (
     <ButtonPrimitive
@@ -254,7 +254,7 @@ const RangeCalendarGrid = ({
   weekdayStyle = "short",
   ...props
 }: RangeCalendarGridProps) => {
-  const rangeCalendarContext = useContext(RangeCalendarContext);
+  const rangeCalendarContext = use(RangeCalendarContext);
   const {dayView, slots} = rangeCalendarContext;
   const contextValue = React.useMemo(
     () => ({
@@ -288,7 +288,7 @@ interface RangeCalendarGridHeaderProps extends ComponentPropsWithRef<
 > {}
 
 const RangeCalendarGridHeader = ({children, className, ...props}: RangeCalendarGridHeaderProps) => {
-  const {dayView, slots} = useContext(RangeCalendarContext);
+  const {dayView, slots} = use(RangeCalendarContext);
 
   if (dayView && dayView.days >= 7 && typeof children === "function") {
     return (
@@ -326,7 +326,7 @@ interface RangeCalendarGridBodyProps extends ComponentPropsWithRef<
 > {}
 
 const RangeCalendarGridBody = ({children, className, ...props}: RangeCalendarGridBodyProps) => {
-  const {dayView, slots} = useContext(RangeCalendarContext);
+  const {dayView, slots} = use(RangeCalendarContext);
 
   if (dayView && dayView.days >= 7 && typeof children === "function") {
     return (
@@ -362,7 +362,7 @@ interface RangeCalendarHeaderCellProps extends ComponentPropsWithRef<
 > {}
 
 const RangeCalendarHeaderCell = ({className, ...props}: RangeCalendarHeaderCellProps) => {
-  const {slots} = useContext(RangeCalendarContext);
+  const {slots} = use(RangeCalendarContext);
 
   return (
     <CalendarHeaderCellPrimitive
@@ -381,7 +381,7 @@ RangeCalendarHeaderCell.displayName = "HeroUI.RangeCalendar.HeaderCell";
 interface RangeCalendarCellProps extends ComponentPropsWithRef<typeof CalendarCellPrimitive> {}
 
 const RangeCalendarCell = ({children, className, ...props}: RangeCalendarCellProps) => {
-  const {slots} = useContext(RangeCalendarContext);
+  const {slots} = use(RangeCalendarContext);
 
   return (
     <CalendarCellPrimitive
@@ -429,7 +429,7 @@ const RangeCalendarCellIndicator = <E extends keyof React.JSX.IntrinsicElements 
   ...props
 }: RangeCalendarCellIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof RangeCalendarCellIndicatorProps<E>>) => {
-  const {slots} = useContext(RangeCalendarContext);
+  const {slots} = use(RangeCalendarContext);
 
   return (
     <dom.span

@@ -289,7 +289,7 @@ const ControlledTemplate = (props: PaginationProps) => {
   const totalItems = 120;
 
   const getPageNumbers = () => {
-    const pages: (number | "ellipsis")[] = [];
+    const pages: (number | "start-ellipsis" | "end-ellipsis")[] = [];
 
     if (totalPages <= 7) {
       for (let i = 1; i <= totalPages; i++) {
@@ -299,7 +299,7 @@ const ControlledTemplate = (props: PaginationProps) => {
       pages.push(1);
 
       if (page > 3) {
-        pages.push("ellipsis");
+        pages.push("start-ellipsis");
       }
 
       const start = Math.max(2, page - 1);
@@ -310,7 +310,7 @@ const ControlledTemplate = (props: PaginationProps) => {
       }
 
       if (page < totalPages - 2) {
-        pages.push("ellipsis");
+        pages.push("end-ellipsis");
       }
 
       pages.push(totalPages);
@@ -335,9 +335,9 @@ const ControlledTemplate = (props: PaginationProps) => {
               <span>Previous</span>
             </Pagination.Previous>
           </Pagination.Item>
-          {getPageNumbers().map((p, i) =>
-            p === "ellipsis" ? (
-              <Pagination.Item key={`ellipsis-${i}`}>
+          {getPageNumbers().map((p) =>
+            p === "start-ellipsis" || p === "end-ellipsis" ? (
+              <Pagination.Item key={p}>
                 <Pagination.Ellipsis />
               </Pagination.Item>
             ) : (

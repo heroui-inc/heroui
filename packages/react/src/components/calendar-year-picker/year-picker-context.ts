@@ -1,6 +1,6 @@
 "use client";
 
-import {createContext, useContext} from "react";
+import {createContext, use} from "react";
 
 /* -------------------------------------------------------------------------------------------------
  * YearPickerContext
@@ -23,7 +23,7 @@ const YearPickerContext = createContext<YearPickerContextValue | null>(null);
  * Must be used inside Calendar or RangeCalendar.
  */
 function useYearPicker(): YearPickerContextValue {
-  const context = useContext(YearPickerContext);
+  const context = use(YearPickerContext);
 
   if (!context) {
     throw new Error("useYearPicker must be used within a <Calendar> or <RangeCalendar> component.");

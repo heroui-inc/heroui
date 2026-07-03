@@ -5,7 +5,7 @@ import type {LinkVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {linkVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Link as LinkPrimitive} from "react-aria-components/Link";
 
 import {dataAttr} from "../../utils/assertion";
@@ -54,7 +54,7 @@ const LinkIcon = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...rest
 }: LinkIconProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof LinkIconProps<E>>) => {
-  const {slots} = useContext(LinkContext);
+  const {slots} = use(LinkContext);
 
   return (
     <dom.span

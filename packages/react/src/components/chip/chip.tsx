@@ -5,7 +5,7 @@ import type {ChipVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
 
 import {chipVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -81,7 +81,7 @@ const ChipLabel = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: ChipLabelProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof ChipLabelProps<E>>) => {
-  const {slots} = useContext(ChipContext);
+  const {slots} = use(ChipContext);
 
   return (
     <dom.span

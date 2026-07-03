@@ -8,7 +8,7 @@ import type {ComponentPropsWithRef, ReactNode, RefObject} from "react";
 
 import {autocompleteVariants} from "@heroui/styles";
 import {mergeRefs, useResizeObserver} from "@react-aria/utils";
-import React, {createContext, useCallback, useContext, useRef, useState} from "react";
+import React, {createContext, use, useCallback, useRef, useState} from "react";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Dialog as DialogPrimitive} from "react-aria-components/Dialog";
@@ -88,51 +88,51 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
  * -----------------------------------------------------------------------------------------------*/
 interface AutocompleteTriggerProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
 
-const AutocompleteTrigger = React.forwardRef<HTMLDivElement, AutocompleteTriggerProps>(
-  ({children, className, isDisabled: isDisabledProp, onClick, ...props}, ref) => {
-    const {
-      clearButtonRef,
-      isDisabled: rootDisabled,
-      slots,
-      triggerRef,
-    } = useContext(AutocompleteContext);
-    const state = useContext(SelectStateContext);
-    const isDisabled = isDisabledProp ?? rootDisabled ?? false;
+const AutocompleteTrigger = ({
+  children,
+  className,
+  isDisabled: isDisabledProp,
+  onClick,
+  ref,
+  ...props
+}: AutocompleteTriggerProps) => {
+  const {clearButtonRef, isDisabled: rootDisabled, slots, triggerRef} = use(AutocompleteContext);
+  const state = use(SelectStateContext);
+  const isDisabled = isDisabledProp ?? rootDisabled ?? false;
 
-    // Callback ref to update context ref
-    const contextRefCallback = React.useCallback(
-      (node: HTMLDivElement | null) => {
-        triggerRef.current = node;
-      },
-      [triggerRef],
-    );
+  // Callback ref to update context ref
+  const contextRefCallback = React.useCallback(
+    (node: HTMLDivElement | null) => {
+      triggerRef.current = node;
+    },
+    [triggerRef],
+  );
 
-    // Merge context ref callback with user-provided ref
-    const mergedRef = mergeRefs(contextRefCallback, ref);
+  // Merge context ref callback with user-provided ref
+  const mergedRef = mergeRefs(contextRefCallback, ref);
 
-    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-      // Don't toggle if clicking the clear button
-      if (clearButtonRef.current?.contains(e.target as Node)) {
-        return;
-      }
-      onClick?.(e);
-      state?.toggle();
-    };
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Don't toggle if clicking the clear button
+    if (clearButtonRef.current?.contains(e.target as Node)) {
+      return;
+    }
+    onClick?.(e);
+    state?.toggle();
+  };
 
-    return (
-      <GroupPrimitive
-        ref={mergedRef}
-        className={composeTwRenderProps(className, slots?.trigger())}
-        data-slot="autocomplete-trigger"
-        isDisabled={isDisabled}
-        onClick={handleClick}
-        {...props}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </GroupPrimitive>
-    );
-  },
-);
+  return (
+    <GroupPrimitive
+      ref={mergedRef}
+      className={composeTwRenderProps(className, slots?.trigger())}
+      data-slot="autocomplete-trigger"
+      isDisabled={isDisabled}
+      onClick={handleClick}
+      {...props}
+    >
+      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+    </GroupPrimitive>
+  );
+};
 
 AutocompleteTrigger.displayName = "AutocompleteTrigger";
 
@@ -142,7 +142,7 @@ AutocompleteTrigger.displayName = "AutocompleteTrigger";
 interface AutocompleteValueProps extends ComponentPropsWithRef<typeof SelectValuePrimitive> {}
 
 const AutocompleteValue = ({children, className, ...props}: AutocompleteValueProps) => {
-  const {slots} = useContext(AutocompleteContext);
+  const {slots} = use(AutocompleteContext);
 
   return (
     <SelectValuePrimitive
@@ -171,8 +171,8 @@ const AutocompleteIndicator = <E extends keyof React.JSX.IntrinsicElements = "sv
   ...props
 }: AutocompleteIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof AutocompleteIndicatorProps<E>>) => {
-  const {slots} = useContext(AutocompleteContext);
-  const state = useContext(SelectStateContext);
+  const {slots} = use(AutocompleteContext);
+  const state = use(SelectStateContext);
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(
@@ -219,7 +219,7 @@ const AutocompletePopover = ({
   style,
   ...props
 }: AutocompletePopoverProps) => {
-  const {slots, triggerRef} = useContext(AutocompleteContext);
+  const {slots, triggerRef} = use(AutocompleteContext);
   const [triggerWidth, setTriggerWidth] = useState<string | null>(null);
 
   const onResize = useCallback(() => {
@@ -287,8 +287,8 @@ const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "
   ...props
 }: AutocompleteClearButtonProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof AutocompleteClearButtonProps<E>>) => {
-  const {clearButtonRef, isDisabled, onClear, slots} = useContext(AutocompleteContext);
-  const state = useContext(SelectStateContext);
+  const {clearButtonRef, isDisabled, onClear, slots} = use(AutocompleteContext);
+  const state = use(SelectStateContext);
 
   const clearButtonRefCallback = React.useCallback(
     (node: HTMLButtonElement | null) => {

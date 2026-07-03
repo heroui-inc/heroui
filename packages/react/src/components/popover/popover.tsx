@@ -6,7 +6,7 @@ import type {PopoverVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {popoverVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   Dialog as DialogPrimitive,
   Heading as HeadingPrimitive,
@@ -60,7 +60,7 @@ interface PopoverContentProps
 }
 
 const PopoverContent = ({children, className, ...props}: PopoverContentProps) => {
-  const {slots} = useContext(PopoverContext);
+  const {slots} = use(PopoverContext);
 
   return (
     <PopoverContext value={{slots}}>
@@ -125,7 +125,7 @@ type PopoverDialogProps = Omit<ComponentPropsWithRef<typeof DialogPrimitive>, "c
 };
 
 const PopoverDialog = ({children, className, ...props}: PopoverDialogProps) => {
-  const {slots} = useContext(PopoverContext);
+  const {slots} = use(PopoverContext);
 
   return (
     <DialogPrimitive
@@ -153,7 +153,7 @@ const PopoverTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: PopoverTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof PopoverTriggerProps<E>>) => {
-  const {slots} = useContext(PopoverContext);
+  const {slots} = use(PopoverContext);
 
   return (
     <PressablePrimitive>
@@ -175,7 +175,7 @@ const PopoverTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
 type PopoverHeadingProps = ComponentPropsWithRef<typeof HeadingPrimitive> & {};
 
 const PopoverHeading = ({children, className, ...props}: PopoverHeadingProps) => {
-  const {slots} = useContext(PopoverContext);
+  const {slots} = use(PopoverContext);
 
   return (
     <HeadingPrimitive

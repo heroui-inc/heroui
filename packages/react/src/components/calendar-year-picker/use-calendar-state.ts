@@ -1,6 +1,6 @@
 "use client";
 
-import {useContext} from "react";
+import {use} from "react";
 import {CalendarStateContext} from "react-aria-components/Calendar";
 import {RangeCalendarStateContext} from "react-aria-components/RangeCalendar";
 
@@ -9,8 +9,8 @@ import {RangeCalendarStateContext} from "react-aria-components/RangeCalendar";
  * Must be used inside <Calendar> or <RangeCalendar>.
  */
 function useCalendarOrRangeState() {
-  const calendarState = useContext(CalendarStateContext);
-  const rangeCalendarState = useContext(RangeCalendarStateContext);
+  const calendarState = use(CalendarStateContext);
+  const rangeCalendarState = use(RangeCalendarStateContext);
   const state = calendarState ?? rangeCalendarState;
 
   if (!state) {

@@ -5,7 +5,7 @@ import type {TabsVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tabsVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {SelectionIndicator as SelectionIndicatorPrimitive} from "react-aria-components/SelectionIndicator";
 import {
   TabList as TabListPrimitive,
@@ -74,7 +74,7 @@ const TabListContainer = <E extends keyof React.JSX.IntrinsicElements = "div">({
   ...props
 }: TabListContainerProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof TabListContainerProps<E>>) => {
-  const {slots} = useContext(TabsContext);
+  const {slots} = use(TabsContext);
 
   return (
     <dom.div
@@ -96,7 +96,7 @@ interface TabListProps extends ComponentPropsWithRef<typeof TabListPrimitive<obj
 }
 
 const TabList = ({children, className, ...props}: TabListProps) => {
-  const {slots} = useContext(TabsContext);
+  const {slots} = use(TabsContext);
 
   return (
     <TabListPrimitive
@@ -117,7 +117,7 @@ interface TabProps extends ComponentPropsWithRef<typeof TabPrimitive> {
 }
 
 const Tab = ({children, className, ...props}: TabProps) => {
-  const {slots} = useContext(TabsContext);
+  const {slots} = use(TabsContext);
 
   return (
     <TabPrimitive
@@ -138,7 +138,7 @@ interface TabIndicatorProps extends ComponentPropsWithRef<typeof SelectionIndica
 }
 
 const TabIndicator = ({className, ...props}: TabIndicatorProps) => {
-  const {slots} = useContext(TabsContext);
+  const {slots} = use(TabsContext);
 
   return (
     <SelectionIndicatorPrimitive
@@ -158,7 +158,7 @@ interface TabPanelProps extends Omit<ComponentPropsWithRef<typeof TabPanelPrimit
 }
 
 const TabPanel = ({children, className, ...props}: TabPanelProps) => {
-  const {slots} = useContext(TabsContext);
+  const {slots} = use(TabsContext);
 
   return (
     <TabPanelPrimitive
@@ -184,7 +184,7 @@ const TabSeparator = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: TabSeparatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TabSeparatorProps<E>>) => {
-  const {slots} = useContext(TabsContext);
+  const {slots} = use(TabsContext);
 
   return (
     <dom.span

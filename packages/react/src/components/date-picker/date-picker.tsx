@@ -8,7 +8,7 @@ import type {DateValue} from "react-aria-components/Calendar";
 
 import {datePickerVariants} from "@heroui/styles";
 import {mergeRefs} from "@react-aria/utils";
-import React, {createContext, useContext, useEffect, useRef} from "react";
+import React, {createContext, use, useEffect, useRef} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
   DatePicker as DatePickerPrimitive,
@@ -101,30 +101,28 @@ DatePickerRoot.displayName = "HeroUI.DatePicker";
  * -----------------------------------------------------------------------------------------------*/
 interface DatePickerTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
-const DatePickerTrigger = React.forwardRef<HTMLButtonElement, DatePickerTriggerProps>(
-  ({children, className, ...props}, ref) => {
-    const {slots, triggerRef} = useContext(DatePickerContext);
+const DatePickerTrigger = ({children, className, ref, ...props}: DatePickerTriggerProps) => {
+  const {slots, triggerRef} = use(DatePickerContext);
 
-    const contextRefCallback = React.useCallback(
-      (node: HTMLButtonElement | null) => {
-        triggerRef.current = node;
-      },
-      [triggerRef],
-    );
-    const mergedRef = mergeRefs(contextRefCallback, ref);
+  const contextRefCallback = React.useCallback(
+    (node: HTMLButtonElement | null) => {
+      triggerRef.current = node;
+    },
+    [triggerRef],
+  );
+  const mergedRef = mergeRefs(contextRefCallback, ref);
 
-    return (
-      <ButtonPrimitive
-        ref={mergedRef}
-        className={composeTwRenderProps(className, slots?.trigger())}
-        data-slot="date-picker-trigger"
-        {...props}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </ButtonPrimitive>
-    );
-  },
-);
+  return (
+    <ButtonPrimitive
+      ref={mergedRef}
+      className={composeTwRenderProps(className, slots?.trigger())}
+      data-slot="date-picker-trigger"
+      {...props}
+    >
+      {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+    </ButtonPrimitive>
+  );
+};
 
 DatePickerTrigger.displayName = "HeroUI.DatePicker.Trigger";
 
@@ -144,7 +142,7 @@ const DatePickerTriggerIndicator = <E extends keyof React.JSX.IntrinsicElements 
   ...props
 }: DatePickerTriggerIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof DatePickerTriggerIndicatorProps<E>>) => {
-  const {slots} = useContext(DatePickerContext);
+  const {slots} = use(DatePickerContext);
 
   return (
     <dom.span
@@ -176,7 +174,7 @@ const DatePickerPopover = ({
   placement = "bottom",
   ...props
 }: DatePickerPopoverProps) => {
-  const {slots} = useContext(DatePickerContext);
+  const {slots} = use(DatePickerContext);
 
   return (
     <SurfaceContext

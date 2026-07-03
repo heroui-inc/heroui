@@ -7,7 +7,7 @@ import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {selectVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -66,7 +66,7 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
 interface SelectTriggerProps extends ComponentPropsWithRef<typeof ButtonPrimitive> {}
 
 const SelectTrigger = ({children, className, ...props}: SelectTriggerProps) => {
-  const {slots} = useContext(SelectContext);
+  const {slots} = use(SelectContext);
 
   return (
     <ButtonPrimitive
@@ -85,7 +85,7 @@ const SelectTrigger = ({children, className, ...props}: SelectTriggerProps) => {
 interface SelectValueProps extends ComponentPropsWithRef<typeof SelectValuePrimitive> {}
 
 const SelectValue = ({children, className, ...props}: SelectValueProps) => {
-  const {slots} = useContext(SelectContext);
+  const {slots} = use(SelectContext);
 
   return (
     <SelectValuePrimitive
@@ -114,8 +114,8 @@ const SelectIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">({
   ...props
 }: SelectIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof SelectIndicatorProps<E>>) => {
-  const {slots} = useContext(SelectContext);
-  const state = useContext(SelectStateContext);
+  const {slots} = use(SelectContext);
+  const state = use(SelectStateContext);
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(
@@ -159,7 +159,7 @@ const SelectPopover = ({
   placement = "bottom",
   ...props
 }: SelectPopoverProps) => {
-  const {slots} = useContext(SelectContext);
+  const {slots} = use(SelectContext);
 
   return (
     <SurfaceContext
