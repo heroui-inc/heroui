@@ -6,10 +6,10 @@
  * Remove it and import directly from react-aria-components when they export it.
  */
 
-import type {AllHTMLAttributes, ForwardedRef, ReactElement} from "react";
+import type {AllHTMLAttributes, ReactElement} from "react";
 
 import {mergeRefs, useLayoutEffect} from "@react-aria/utils";
-import React, {forwardRef, useMemo, useRef} from "react";
+import React, {useMemo, useRef} from "react";
 
 export type DOMRenderFunction<E extends keyof React.JSX.IntrinsicElements, T> = (
   props: React.JSX.IntrinsicElements[E],
@@ -33,10 +33,9 @@ export interface DOMRenderProps<E extends keyof React.JSX.IntrinsicElements, T> 
 // eslint-disable-next-line react-refresh/only-export-components
 function DOMElement(
   ElementType: string,
-  props: DOMRenderProps<any, any> & AllHTMLAttributes<HTMLElement>,
-  forwardedRef: ForwardedRef<HTMLElement>,
+  props: DOMRenderProps<any, any> & AllHTMLAttributes<HTMLElement> & {ref?: React.Ref<HTMLElement>},
 ) {
-  const {render, ...otherProps} = props;
+  const {ref: forwardedRef, render, ...otherProps} = props;
   const elementRef = useRef<HTMLElement | null>(null);
   const ref = useMemo(() => mergeRefs(forwardedRef, elementRef), [forwardedRef, elementRef]);
 
@@ -79,7 +78,7 @@ export const dom = new Proxy(
       let res = domComponentCache[elementType];
 
       if (!res) {
-        res = forwardRef(DOMElement.bind(null, elementType));
+        res = DOMElement.bind(null, elementType);
         domComponentCache[elementType] = res;
       }
 
