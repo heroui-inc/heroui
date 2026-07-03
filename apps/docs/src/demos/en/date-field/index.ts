@@ -1,6 +1,6 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
 export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FullWidth} from "./full-width";
@@ -14,3 +14,4 @@ export {WithPrefixAndSuffix} from "./with-prefix-and-suffix";
 export {WithPrefixIcon} from "./with-prefix-icon";
 export {WithSuffixIcon} from "./with-suffix-icon";
 export {WithValidation} from "./with-validation";
+export {CustomStyles} from "./custom-styles";

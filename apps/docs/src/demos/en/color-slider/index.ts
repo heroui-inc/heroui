@@ -6,4 +6,5 @@ export {RGBChannels} from "./rgb-channels";
 export {Vertical} from "./vertical";
 export {Disabled} from "./disabled";
 export {Controlled} from "./controlled";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
+export {CustomStyles} from "./custom-styles";

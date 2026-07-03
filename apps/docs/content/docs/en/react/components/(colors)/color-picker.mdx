@@ -9,7 +9,7 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import {
@@ -22,13 +22,11 @@ import {
 } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="color-picker-basic"
 />
 
-### Anatomy
+## Anatomy
 
 The ColorPicker is a composable component that combines multiple color components:
 
@@ -54,6 +52,8 @@ export default () => (
   </ColorPicker>
 );
 ```
+
+## Examples
 
 ### Controlled
 
@@ -83,36 +83,16 @@ Use multiple `ColorSlider` components to adjust each channel of a color value.
   name="color-picker-with-sliders"
 />
 
-<RelatedComponents component="color-picker" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="color-picker-custom-styles" />
 
-```tsx
-import { ColorPicker, ColorArea, ColorSlider, ColorSwatch, Label } from '@heroui/react';
-
-function CustomColorPicker() {
-  return (
-    <ColorPicker defaultValue="#0485F7">
-      <ColorPicker.Trigger className="gap-4">
-        <ColorSwatch className="rounded-lg" />
-        <Label>Pick a color</Label>
-      </ColorPicker.Trigger>
-      <ColorPicker.Popover className="p-4 rounded-xl">
-        <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness">
-          <ColorArea.Thumb />
-        </ColorArea>
-      </ColorPicker.Popover>
-    </ColorPicker>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ColorPicker component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -130,13 +110,15 @@ To customize the ColorPicker component classes, you can use the `@layer componen
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ColorPicker component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-picker.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.color-picker` - Base container
 - `.color-picker__trigger` - Trigger button
 - `.color-picker__popover` - Popover container
@@ -150,7 +132,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### ColorPicker Props
+### ColorPicker
 
 Inherits from [React Aria ColorPicker](https://react-spectrum.adobe.com/react-aria/ColorPicker.html).
 
@@ -162,14 +144,14 @@ Inherits from [React Aria ColorPicker](https://react-spectrum.adobe.com/react-ar
 | `children` | `React.ReactNode` | - | Content of the color picker (Trigger, Popover, etc.) |
 | `className` | `string` | - | Additional CSS classes |
 
-### ColorPicker.Trigger Props
+### ColorPicker.Trigger
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `React.ReactNode \| ((renderProps) => React.ReactNode)` | - | Trigger content or render prop |
 | `className` | `string` | - | Additional CSS classes |
 
-### ColorPicker.Popover Props
+### ColorPicker.Popover
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -199,3 +181,7 @@ import { parseColor } from 'react-aria-components';
 const color = parseColor('#ff0000');
 const hslColor = parseColor('hsl(0, 100%, 50%)');
 ```
+
+## Related Components
+
+<RelatedComponents component="color-picker" />

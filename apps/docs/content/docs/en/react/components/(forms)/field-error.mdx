@@ -7,47 +7,17 @@ links:
   styles: field-error.css
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { FieldError } from '@heroui/react';
 ```
 
-## Usage
-
-The FieldError component displays validation error messages for form fields. It automatically appears when the parent field is marked as invalid and provides smooth opacity transitions.
-
 <ComponentPreview
   name="field-error-basic"
 />
 
-<RelatedComponents component="fielderror" />
-
-## API
-
-### FieldError Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode \| ((validation: ValidationResult) => ReactNode)` | - | Error message content or render function |
-
-## Accessibility
-
-The FieldError component ensures accessibility by:
-
-- Using proper ARIA attributes for error announcement
-- Supporting screen readers with semantic HTML
-- Providing visual and programmatic error indication
-- Automatically managing visibility based on validation state
-
-## Styling
-
-The FieldError component uses the following CSS classes:
-
-- `.field-error` - Base error styles with danger color
-- Only shows when the `data-visible` attribute is present
-- Text is truncated with ellipsis for long messages
+The FieldError component displays validation error messages for form fields. It automatically appears when the parent field is marked as invalid and provides smooth opacity transitions.
 
 ## Examples
 
@@ -119,3 +89,57 @@ function EmailField() {
   </FieldError>
 </TextField>
 ```
+
+## Customization
+
+### Tailwind CSS
+
+<ComponentPreview name="field-error-custom-styles" />
+
+### Global CSS
+
+To customize the FieldError component classes, you can use the `@layer components` directive. [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+
+```css
+@layer components {
+  .field-error {
+    @apply font-medium text-danger;
+  }
+}
+```
+
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
+### CSS Classes
+
+The FieldError component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/field-error.css)):
+
+#### Base Classes [!toc]
+
+- `.field-error` - Base error styles with danger color
+- Only shows when the `data-visible` attribute is present
+- Text is truncated with ellipsis for long messages
+
+## API Reference
+
+### FieldError
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode \| ((validation: ValidationResult) => ReactNode)` | - | Error message content or render function |
+
+## Accessibility
+
+The FieldError component ensures accessibility by:
+
+- Using proper ARIA attributes for error announcement
+- Supporting screen readers with semantic HTML
+- Providing visual and programmatic error indication
+- Automatically managing visibility based on validation state
+
+## Related Components
+
+<RelatedComponents component="fielderror" />

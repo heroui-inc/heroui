@@ -9,17 +9,15 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { InputGroup } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="input-group-default" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import {InputGroup, TextField, Label} from '@heroui/react';
@@ -38,23 +36,44 @@ export default () => (
 
 > **InputGroup** wraps an input field with optional prefix and suffix elements, creating a visually cohesive group. It's typically used within **[TextField](/docs/components/text-field)** to add icons, text, buttons, or other elements before or after the input. Use **InputGroup.Input** for single-line inputs or **InputGroup.TextArea** for multiline text inputs.
 
-### With Prefix Icon
+## Examples
 
-Add an icon before the input field.
+### Variants
 
-<ComponentPreview name="input-group-with-prefix-icon" />
+The InputGroup component supports two visual variants:
 
-### With Suffix Icon
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
 
-Add an icon after the input field.
+<ComponentPreview name="input-group-variants" />
 
-<ComponentPreview name="input-group-with-suffix-icon" />
+### In Surface
 
-### With Prefix and Suffix
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
-Combine both prefix and suffix elements.
+<ComponentPreview name="input-group-on-surface" />
 
-<ComponentPreview name="input-group-with-prefix-and-suffix" />
+### Loading State
+
+Show a loading spinner in the suffix to indicate processing.
+
+<ComponentPreview name="input-group-with-loading-suffix" />
+
+### Required Field
+
+InputGroup respects the required state from its parent TextField.
+
+<ComponentPreview name="input-group-required" />
+
+### Disabled State
+
+InputGroup respects the disabled state from its parent TextField.
+
+<ComponentPreview name="input-group-disabled" />
+
+### Full Width
+
+<ComponentPreview name="input-group-full-width" />
 
 ### Text Prefix
 
@@ -92,12 +111,6 @@ Use a button in the suffix to toggle password visibility.
 
 <ComponentPreview name="input-group-password-with-toggle" />
 
-### Loading State
-
-Show a loading spinner in the suffix to indicate processing.
-
-<ComponentPreview name="input-group-with-loading-suffix" />
-
 ### Keyboard Shortcut
 
 Display keyboard shortcuts using the [Kbd](/docs/components/kbd) component.
@@ -110,42 +123,29 @@ Add a badge or chip in the suffix to show status or labels.
 
 <ComponentPreview name="input-group-with-badge-suffix" />
 
-### Required Field
-
-InputGroup respects the required state from its parent TextField.
-
-<ComponentPreview name="input-group-required" />
-
 ### Validation
 
 InputGroup automatically reflects invalid state from its parent TextField.
 
 <ComponentPreview name="input-group-invalid" />
 
-### Disabled State
+### With Prefix Icon
 
-InputGroup respects the disabled state from its parent TextField.
+Add an icon before the input field.
 
-<ComponentPreview name="input-group-disabled" />
+<ComponentPreview name="input-group-with-prefix-icon" />
 
-### Full Width
+### With Suffix Icon
 
-<ComponentPreview name="input-group-full-width" />
+Add an icon after the input field.
 
-### Variants
+<ComponentPreview name="input-group-with-suffix-icon" />
 
-The InputGroup component supports two visual variants:
+### With Prefix and Suffix
 
-- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
-- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+Combine both prefix and suffix elements.
 
-<ComponentPreview name="input-group-variants" />
-
-### In Surface
-
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
-
-<ComponentPreview name="input-group-on-surface" />
+<ComponentPreview name="input-group-with-prefix-and-suffix" />
 
 ### With TextArea
 
@@ -153,28 +153,25 @@ Use **InputGroup.TextArea** for multiline text inputs with prefix and suffix ele
 
 <ComponentPreview name="input-group-with-textarea" />
 
-<RelatedComponents component="inputgroup" />
-
-<RelatedShowcases component="InputGroup" />
-
-## Styling
-
-### Passing Tailwind CSS classes
+### Usage Example
 
 ```tsx
-import {InputGroup, TextField, Label} from '@heroui/react';
+import {InputGroup, TextField, Label, Button} from '@heroui/react';
+import {Icon} from '@iconify/react';
 
-function CustomInputGroup() {
+function Example() {
   return (
     <TextField>
-      <Label>Website</Label>
-      <InputGroup className="rounded-xl border-2 border-primary">
-        <InputGroup.Prefix className="bg-primary/10 text-primary">
-          https://
+      <Label>Email</Label>
+      <InputGroup>
+        <InputGroup.Prefix>
+          <Icon icon="gravity-ui:envelope" />
         </InputGroup.Prefix>
-        <InputGroup.Input className="font-medium" />
-        <InputGroup.Suffix className="bg-primary/10 text-primary">
-          .com
+        <InputGroup.Input placeholder="name@email.com" />
+        <InputGroup.Suffix>
+          <Button isIconOnly size="sm" variant="ghost">
+            <Icon icon="gravity-ui:check" />
+          </Button>
         </InputGroup.Suffix>
       </InputGroup>
     </TextField>
@@ -182,7 +179,47 @@ function CustomInputGroup() {
 }
 ```
 
-### Customizing the component classes
+### TextArea Usage Example
+
+```tsx
+import {Envelope} from "@gravity-ui/icons";
+import {Description, FieldError, InputGroup, Label, TextField} from "@heroui/react";
+import {useState} from "react";
+
+function TextAreaExample() {
+  const [feedback, setFeedback] = useState("");
+
+  return (
+    <TextField fullWidth isInvalid={feedback.length > 500} name="feedback" onChange={setFeedback}>
+      <Label>Your Feedback</Label>
+      <InputGroup fullWidth>
+        <InputGroup.Prefix>
+          <Envelope className="size-4 text-muted" />
+        </InputGroup.Prefix>
+        <InputGroup.TextArea
+          className="resize-none"
+          placeholder="Share your thoughts, suggestions, or issues..."
+          rows={5}
+          value={feedback}
+        />
+      </InputGroup>
+      <Description className="flex w-full items-center justify-between px-1">
+        <span>Maximum 500 characters.</span>
+        <span className="ml-auto">{feedback.length}/500</span>
+      </Description>
+      <FieldError>Feedback must be less than 500 characters</FieldError>
+    </TextField>
+  );
+}
+```
+
+## Customization
+
+### Tailwind CSS
+
+<ComponentPreview name="input-group-custom-styles" />
+
+### Global CSS
 
 InputGroup uses CSS classes that can be customized. Override the component classes to match your design system.
 
@@ -212,12 +249,21 @@ InputGroup uses CSS classes that can be customized. Override the component class
 }
 ```
 
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
 ### CSS Classes
+
+#### Base Classes [!toc]
 
 - `.input-group` – Root container with border, background, and flex layout. Uses `min-h-9` for flexible height and `items-center` by default, switching to `items-start` when a textarea is present.
 - `.input-group__input` – Input element with transparent background and no border. Also used as the base class for textarea elements.
 - `.input-group__prefix` – Prefix container with left border radius. Aligns to top when used with textarea.
 - `.input-group__suffix` – Suffix container with right border radius. Aligns to top when used with textarea.
+
+#### Variant Classes [!toc]
+
 - `.input-group--primary` – Primary variant with shadow (default)
 - `.input-group--secondary` – Secondary variant without shadow, suitable for use in surfaces
 
@@ -234,7 +280,7 @@ InputGroup automatically manages these data attributes based on its state:
 
 ## API Reference
 
-### InputGroup Props
+### InputGroup
 
 InputGroup inherits all props from React Aria's [Group](https://react-spectrum.adobe.com/react-aria/Group.html) component.
 
@@ -318,63 +364,10 @@ InputGroup.TextArea inherits all props from React Aria's [TextArea](https://reac
 | `children` | `React.ReactNode` | - | Content to display in the suffix (icons, buttons, badges, etc.). |
 | `className` | `string` | - | CSS classes for styling. |
 
-### Usage Example
+## Related Showcases
 
-```tsx
-import {InputGroup, TextField, Label, Button} from '@heroui/react';
-import {Icon} from '@iconify/react';
+<RelatedShowcases component="InputGroup" />
 
-function Example() {
-  return (
-    <TextField>
-      <Label>Email</Label>
-      <InputGroup>
-        <InputGroup.Prefix>
-          <Icon icon="gravity-ui:envelope" />
-        </InputGroup.Prefix>
-        <InputGroup.Input placeholder="name@email.com" />
-        <InputGroup.Suffix>
-          <Button isIconOnly size="sm" variant="ghost">
-            <Icon icon="gravity-ui:check" />
-          </Button>
-        </InputGroup.Suffix>
-      </InputGroup>
-    </TextField>
-  );
-}
-```
+## Related Components
 
-### TextArea Usage Example
-
-```tsx
-import {Envelope} from "@gravity-ui/icons";
-import {Description, FieldError, InputGroup, Label, TextField} from "@heroui/react";
-import {useState} from "react";
-
-function TextAreaExample() {
-  const [feedback, setFeedback] = useState("");
-
-  return (
-    <TextField fullWidth isInvalid={feedback.length > 500} name="feedback" onChange={setFeedback}>
-      <Label>Your Feedback</Label>
-      <InputGroup fullWidth>
-        <InputGroup.Prefix>
-          <Envelope className="size-4 text-muted" />
-        </InputGroup.Prefix>
-        <InputGroup.TextArea
-          className="resize-none"
-          placeholder="Share your thoughts, suggestions, or issues..."
-          rows={5}
-          value={feedback}
-        />
-      </InputGroup>
-      <Description className="flex w-full items-center justify-between px-1">
-        <span>Maximum 500 characters.</span>
-        <span className="ml-auto">{feedback.length}/500</span>
-      </Description>
-      <FieldError>Feedback must be less than 500 characters</FieldError>
-    </TextField>
-  );
-}
-```
-
+<RelatedComponents component="inputgroup" />

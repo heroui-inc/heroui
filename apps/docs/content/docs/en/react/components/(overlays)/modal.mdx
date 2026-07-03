@@ -8,19 +8,15 @@ links:
   storybook: modal
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Modal } from "@heroui/react";
 ```
 
-### Usage
-
 <ComponentPreview name="modal-default" />
 
-### Anatomy
-
-Import the Modal component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import {Modal, Button} from "@heroui/react";
@@ -45,29 +41,15 @@ export default () => (
 );
 ```
 
-### Placement
-
-<ComponentPreview name="modal-placements" />
-
-### Backdrop Variants
-
-<ComponentPreview name="modal-backdrop-variants" />
+## Examples
 
 ### Sizes
 
 <ComponentPreview name="modal-sizes" />
 
-### Custom Backdrop
+### Placement
 
-<ComponentPreview name="modal-custom-backdrop" />
-
-### Dismiss Behavior
-
-<ComponentPreview name="modal-dismiss-behavior" />
-
-### Close Methods
-
-<ComponentPreview name="modal-close-methods" />
+<ComponentPreview name="modal-placements" />
 
 ### Scroll Behavior
 
@@ -85,6 +67,22 @@ export default () => (
 
 <ComponentPreview name="modal-custom-trigger" />
 
+### Backdrop Variants
+
+<ComponentPreview name="modal-backdrop-variants" />
+
+### Custom Backdrop
+
+<ComponentPreview name="modal-custom-backdrop" />
+
+### Dismiss Behavior
+
+<ComponentPreview name="modal-dismiss-behavior" />
+
+### Close Methods
+
+<ComponentPreview name="modal-close-methods" />
+
 ### Custom Animations
 
 <ComponentPreview name="modal-custom-animations" />
@@ -93,43 +91,16 @@ export default () => (
 
 <ComponentPreview name="modal-custom-portal" />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import {Modal, Button} from "@heroui/react";
+<ComponentPreview name="modal-custom-styles" />
 
-function CustomModal() {
-  return (
-    <Modal>
-      <Button>Open Modal</Button>
-      <Modal.Backdrop className="bg-black/80">
-        <Modal.Container className="items-start pt-20">
-          <Modal.Dialog className="bg-linear-to-br from-purple-500 to-pink-500 text-white">
-            <Modal.CloseTrigger />
-            <Modal.Header>
-              <Modal.Heading>Custom Styled Modal</Modal.Heading>
-            </Modal.Header>
-            <Modal.Body>
-              <p>This modal has custom styling applied via Tailwind classes</p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button slot="close">Close</Button>
-            </Modal.Footer>
-          </Modal.Dialog>
-        </Modal.Container>
-      </Modal.Backdrop>
-    </Modal>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Modal component classes, you can use the `@layer components` directive.
 
-<br />
 [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
@@ -152,13 +123,15 @@ To customize the Modal component classes, you can use the `@layer components` di
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Modal component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/modal.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 
 - `.modal__trigger` - Trigger element that opens the modal
 - `.modal__backdrop` - Overlay backdrop behind the modal
@@ -169,13 +142,13 @@ The Modal component uses these CSS classes ([View source styles](https://github.
 - `.modal__footer` - Footer section for actions
 - `.modal__close-trigger` - Close button element
 
-#### Backdrop Variants
+#### Backdrop Variants [!toc]
 
 - `.modal__backdrop--opaque` - Opaque colored backdrop (default)
 - `.modal__backdrop--blur` - Blurred backdrop with glass effect
 - `.modal__backdrop--transparent` - Transparent backdrop (no overlay)
 
-#### Scroll Variants
+#### Scroll Variants [!toc]
 
 - `.modal__container--scroll-outside` - Enables scrolling the entire modal
 - `.modal__dialog--scroll-inside` - Constrains modal height for body scrolling
@@ -293,3 +266,7 @@ Implements [WAI-ARIA Dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/di
 - **Keyboard**: `ESC` closes (when enabled), `Tab` cycles elements
 - **Screen readers**: Proper ARIA attributes
 - **Scroll lock**: Body scroll disabled when open
+
+## Related Components
+
+<RelatedComponents component="modal" />

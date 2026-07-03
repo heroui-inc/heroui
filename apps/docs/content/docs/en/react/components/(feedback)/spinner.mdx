@@ -8,17 +8,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Spinner } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="spinner-basic"
 />
+
+## Examples
 
 ### Colors
 
@@ -32,26 +32,16 @@ import { Spinner } from '@heroui/react';
   name="spinner-sizes"
 />
 
-<RelatedComponents component="spinner" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="spinner-custom-styles" />
 
-```tsx
-import {Spinner} from '@heroui/react';
-
-function CustomSpinner() {
-  return (
-    <Spinner className="text-blue-500" />
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Spinner component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -65,20 +55,22 @@ To customize the Spinner component classes, you can use the `@layer components` 
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Spinner component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/spinner.css)):
 
-#### Base & Size Classes
+#### Base & Size Classes [!toc]
 - `.spinner` - Base spinner styles with default size
 - `.spinner--sm` - Small size variant
 - `.spinner--md` - Medium size variant (default)
 - `.spinner--lg` - Large size variant
 - `.spinner--xl` - Extra large size variant
 
-#### Color Classes
+#### Color Classes [!toc]
 - `.spinner--current` - Inherits current text color
 - `.spinner--accent` - Accent color variant
 - `.spinner--danger` - Danger color variant
@@ -87,10 +79,14 @@ The Spinner component uses these CSS classes ([View source styles](https://githu
 
 ## API Reference
 
-### Spinner Props
+### Spinner
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size of the spinner |
 | `color` | `"current" \| "accent" \| "success" \| "warning" \| "danger"` | `"current"` | Color variant of the spinner |
 | `className` | `string` | - | Additional CSS classes |
+
+## Related Components
+
+<RelatedComponents component="spinner" />

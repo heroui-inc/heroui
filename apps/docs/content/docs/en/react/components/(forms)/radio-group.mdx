@@ -9,21 +9,17 @@ links:
   storybook: Components/Forms/RadioGroup
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { RadioGroup, Radio } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="radio-group-basic"
 />
 
-### Anatomy
-
-Import the RadioGroup component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import {RadioGroup, Radio, Label, Description, FieldError} from '@heroui/react';
@@ -49,16 +45,35 @@ export default () => (
 )
 ```
 
-### Custom Indicator
-
-<ComponentPreview
-  name="radio-group-custom-indicator"
-/>
+## Examples
 
 ### Horizontal Orientation
 
 <ComponentPreview
   name="radio-group-horizontal"
+/>
+
+### Variants
+
+The RadioGroup component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with default background, suitable for most use cases
+- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
+
+<ComponentPreview name="radio-group-variants" />
+
+### In Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
+
+<ComponentPreview
+  name="radio-group-on-surface"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="radio-group-disabled"
 />
 
 ### Controlled
@@ -81,29 +96,6 @@ Combine `defaultValue` with `onChange` when you only need to react to updates.
   name="radio-group-validation"
 />
 
-### Disabled
-
-<ComponentPreview
-  name="radio-group-disabled"
-/>
-
-### Variants
-
-The RadioGroup component supports two visual variants:
-
-- **`primary`** (default) - Standard styling with default background, suitable for most use cases
-- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
-
-<ComponentPreview name="radio-group-variants" />
-
-### In Surface
-
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
-
-<ComponentPreview
-  name="radio-group-on-surface"
-/>
-
 ### Delivery & Payment
 
 <ComponentPreview
@@ -112,54 +104,28 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
   name="radio-group-delivery-and-payment"
 />
 
-<RelatedShowcases component="RadioGroup" />
-
-<RelatedComponents component="radiogroup" />
-
-### Custom Render Function
+### Custom Indicator
 
 <ComponentPreview
-  name="radio-group-custom-render-function"
+  name="radio-group-custom-indicator"
 />
 
-## Styling
+### Render Function
 
-### Passing Tailwind CSS classes
+<ComponentPreview
+  name="radio-group-render-function"
+/>
 
-```tsx
-import { RadioGroup, Radio } from '@heroui/react';
+## Customization
 
-export default () => (
-  <RadioGroup defaultValue="premium" name="plan">
-    <Radio
-      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-blue-300 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-500/10"
-      value="basic"
-    >
-      <Radio.Indicator className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500" />
-      Basic Plan
-    </Radio>
-    <Radio
-      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-purple-300 data-[selected=true]:border-purple-500 data-[selected=true]:bg-purple-500/10"
-      value="premium"
-    >
-      <Radio.Indicator className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500" />
-      Premium Plan
-    </Radio>
-    <Radio
-      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-emerald-300 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-500/10"
-      value="business"
-    >
-      <Radio.Indicator className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500" />
-      Business Plan
-    </Radio>
-  </RadioGroup>
-);
-```
+### Tailwind CSS
 
-### Customizing the component classes
+<ComponentPreview name="radio-group-custom-styles" />
+
+### Global CSS
 
 To customize the RadioGroup component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -185,21 +151,24 @@ To customize the RadioGroup component classes, you can use the `@layer component
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The RadioGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/radio-group.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
+
 - `.radio-group` - Base radio group container
 - `.radio` - Individual radio item
 - `.radio__content` - Radio button (RAC label wrapper for control + label text)
 - `.radio__control` - Radio control (circular button)
 - `.radio__indicator` - Radio indicator (inner dot)
-- `.radio__content` - Radio content wrapper
 
-#### Modifier Classes
+#### Modifier Classes [!toc]
+
 - `.radio--disabled` - Disabled radio state
 
 ### Interactive States
@@ -215,7 +184,7 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 
 ## API Reference
 
-### RadioGroup Props
+### RadioGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -232,7 +201,7 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `children` | `React.ReactNode \| (values: RadioGroupRenderProps) => React.ReactNode` | - | Radio group content or render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioGroupRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Radio Props
+### Radio
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -242,7 +211,7 @@ The radio supports both CSS pseudo-classes and data attributes for flexibility:
 | `children` | `React.ReactNode \| (values: RadioFieldRenderProps) => React.ReactNode` | - | Radio content or field render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Radio.Control Props
+### Radio.Control
 
 Extends `React.HTMLAttributes<HTMLSpanElement>`.
 
@@ -250,7 +219,7 @@ Extends `React.HTMLAttributes<HTMLSpanElement>`.
 |------|------|---------|-------------|
 | `children` | `React.ReactNode` | - | The content to render inside the control wrapper (typically Radio.Indicator) |
 
-### Radio.Indicator Props
+### Radio.Indicator
 
 Extends `React.HTMLAttributes<HTMLSpanElement>`.
 
@@ -258,7 +227,7 @@ Extends `React.HTMLAttributes<HTMLSpanElement>`.
 |------|------|---------|-------------|
 | `children` | `React.ReactNode \| (values: RadioButtonRenderProps) => React.ReactNode` | - | Optional content or render prop that receives the current radio button state. |
 
-### Radio.Content Props
+### Radio.Content
 
 The clickable area of the radio (the `<label>` wrapping the hidden input). Place `Radio.Control` and the `Label` inside it. `className` accepts a render function that receives `RadioButtonRenderProps`.
 
@@ -281,3 +250,11 @@ When using a render prop on the root `Radio`, these field-level values are provi
 ### RadioButtonRenderProps
 
 `Radio.Control` and `Radio.Indicator` use button-level render props (`isHovered`, `isPressed`, `isFocusVisible`, etc.). Pass a function as `Radio.Control` children or to `Radio.Indicator` to access them.
+
+## Related Showcases
+
+<RelatedShowcases component="RadioGroup" />
+
+## Related Components
+
+<RelatedComponents component="radiogroup" />

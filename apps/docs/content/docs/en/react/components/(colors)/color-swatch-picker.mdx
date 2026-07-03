@@ -9,21 +9,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ColorSwatchPicker, parseColor } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="color-swatch-picker-basic"
 />
 
-### Anatomy
-
-Import the ColorSwatchPicker component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { ColorSwatchPicker } from '@heroui/react';
@@ -46,6 +42,8 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### Variants
 
 <ComponentPreview
@@ -56,6 +54,12 @@ export default () => (
 
 <ComponentPreview
   name="color-swatch-picker-sizes"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="color-swatch-picker-disabled"
 />
 
 ### Stack Layout
@@ -76,54 +80,28 @@ export default () => (
   name="color-swatch-picker-controlled"
 />
 
-### Disabled
-
-<ComponentPreview
-  name="color-swatch-picker-disabled"
-/>
-
 ### Custom Indicator
 
 <ComponentPreview
   name="color-swatch-picker-custom-indicator"
 />
 
-### Custom Render Function
+### Render Function
 
 <ComponentPreview
-  name="color-swatch-picker-custom-render-function"
+  name="color-swatch-picker-render-function"
 />
 
-<RelatedComponents component="color-swatch-picker" />
+## Customization
 
+### Tailwind CSS
 
-## Styling
+<ComponentPreview name="color-swatch-picker-custom-styles" />
 
-### Passing Tailwind CSS classes
-
-You can customize the ColorSwatchPicker using className props:
-
-```tsx
-import { ColorSwatchPicker } from '@heroui/react';
-
-function CustomColorSwatchPicker() {
-  return (
-    <ColorSwatchPicker className="gap-4">
-      <ColorSwatchPicker.Item color="#F43F5E" className="shadow-lg">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-      <ColorSwatchPicker.Item color="#D946EF">
-        <ColorSwatchPicker.Swatch />
-      </ColorSwatchPicker.Item>
-    </ColorSwatchPicker>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ColorSwatchPicker component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -141,29 +119,31 @@ To customize the ColorSwatchPicker component classes, you can use the `@layer co
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ColorSwatchPicker component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-swatch-picker.css)):
 
-#### Base & Structure
+#### Base & Structure [!toc]
 - `.color-swatch-picker` - Base container (flex layout)
 - `.color-swatch-picker__item` - Individual swatch item wrapper
 - `.color-swatch-picker__swatch` - The color swatch visual element
 
-#### Size Classes
+#### Size Classes [!toc]
 - `.color-swatch-picker--xs` - Extra small (16px)
 - `.color-swatch-picker--sm` - Small (24px)
 - `.color-swatch-picker--md` - Medium (32px, default)
 - `.color-swatch-picker--lg` - Large (36px)
 - `.color-swatch-picker--xl` - Extra large (40px)
 
-#### Shape Variants
+#### Shape Variants [!toc]
 - `.color-swatch-picker--circle` - Circle shape (default)
 - `.color-swatch-picker--square` - Square shape with rounded corners
 
-#### Layout Classes
+#### Layout Classes [!toc]
 - `.color-swatch-picker--grid` - Horizontal wrapping layout (default)
 - `.color-swatch-picker--stack` - Vertical stacked layout
 
@@ -178,7 +158,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### ColorSwatchPicker Props
+### ColorSwatchPicker
 
 Inherits from [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/react-aria/ColorSwatchPicker.html).
 
@@ -194,7 +174,7 @@ Inherits from [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/re
 | `children` | `React.ReactNode` | - | ColorSwatchPicker.Item elements |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchPickerRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### ColorSwatchPicker.Item Props
+### ColorSwatchPicker.Item
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -204,7 +184,7 @@ Inherits from [React Aria ColorSwatchPicker](https://react-spectrum.adobe.com/re
 | `children` | `React.ReactNode` | - | ColorSwatchPicker.Swatch element |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchPickerItemRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### ColorSwatchPicker.Swatch Props
+### ColorSwatchPicker.Swatch
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -226,3 +206,7 @@ const green = parseColor('rgb(0, 255, 0)');
 // Parse HSL
 const blue = parseColor('hsl(240, 100%, 50%)');
 ```
+
+## Related Components
+
+<RelatedComponents component="color-swatch-picker" />

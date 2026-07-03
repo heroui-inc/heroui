@@ -8,21 +8,17 @@ links:
   storybook: Components/Pickers/ComboBox
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ComboBox } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="combo-box-default"
 />
 
-### Anatomy
-
-Import the ComboBox component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { ComboBox, Input, Label, Description, Header, ListBox, Separator } from '@heroui/react';
@@ -54,28 +50,18 @@ export default () => (
 )
 ```
 
+## Examples
+
+### Full Width
+
+<ComponentPreview
+  name="combo-box-full-width"
+/>
+
 ### With Description
 
 <ComponentPreview
   name="combo-box-with-description"
-/>
-
-### With Sections
-
-<ComponentPreview
-  name="combo-box-with-sections"
-/>
-
-### With Disabled Options
-
-<ComponentPreview
-  name="combo-box-with-disabled-options"
-/>
-
-### Custom Indicator
-
-<ComponentPreview
-  name="combo-box-custom-indicator"
 />
 
 ### Required
@@ -84,10 +70,22 @@ export default () => (
   name="combo-box-required"
 />
 
-### Custom Value
+### Disabled
 
 <ComponentPreview
-  name="combo-box-custom-value"
+  name="combo-box-disabled"
+/>
+
+### With Disabled Options
+
+<ComponentPreview
+  name="combo-box-with-disabled-options"
+/>
+
+### With Sections
+
+<ComponentPreview
+  name="combo-box-with-sections"
 />
 
 ### Controlled
@@ -108,10 +106,10 @@ export default () => (
   name="combo-box-asynchronous-loading"
 />
 
-### Custom Filtering
+### Default Selected Key
 
 <ComponentPreview
-  name="combo-box-custom-filtering"
+  name="combo-box-default-selected-key"
 />
 
 ### Allows Custom Value
@@ -120,30 +118,28 @@ export default () => (
   name="combo-box-allows-custom-value"
 />
 
-### Disabled
+### Custom Indicator
 
 <ComponentPreview
-  name="combo-box-disabled"
+  name="combo-box-custom-indicator"
 />
 
-### Default Selected Key
+### Custom Value
 
 <ComponentPreview
-  name="combo-box-default-selected-key"
+  name="combo-box-custom-value"
 />
 
-### Full Width
+### Custom Filtering
 
 <ComponentPreview
-  name="combo-box-full-width"
+  name="combo-box-custom-filtering"
 />
 
-### In Surface
-
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
+### Render Function
 
 <ComponentPreview
-  name="combo-box-on-surface"
+  name="combo-box-render-function"
 />
 
 ### Menu Trigger
@@ -158,45 +154,24 @@ Use the `menuTrigger` prop to control when the popover opens:
   name="combo-box-menu-trigger"
 />
 
-### Custom Render Function
+### In Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview
-  name="combo-box-custom-render-function"
+  name="combo-box-on-surface"
 />
 
-<RelatedComponents component="combo-box" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="combo-box-custom-styles" />
 
-```tsx
-import { ComboBox, Input } from '@heroui/react';
-
-function CustomComboBox() {
-  return (
-    <ComboBox className="w-full">
-      <Label>Favorite Animal</Label>
-      <ComboBox.InputGroup className="border rounded-lg p-2 bg-surface">
-        <Input placeholder="Search animals..." />
-        <ComboBox.Trigger className="text-muted" />
-      </ComboBox.InputGroup>
-      <ComboBox.Popover>
-        <ListBox>
-          <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
-            Item 1
-          </ListBox.Item>
-        </ListBox>
-      </ComboBox.Popover>
-    </ComboBox>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ComboBox component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -218,19 +193,21 @@ To customize the ComboBox component classes, you can use the `@layer components`
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ComboBox component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/combo-box.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.combo-box` - Base ComboBox container
 - `.combo-box__input-group` - Container for the input and trigger button
 - `.combo-box__trigger` - The button that triggers the popover
 - `.combo-box__popover` - The popover container
 
-#### State Classes
+#### State Classes [!toc]
 - `.combo-box[data-invalid="true"]` - Invalid state
 - `.combo-box[data-disabled="true"]` - Disabled ComboBox state
 - `.combo-box__trigger[data-focus-visible="true"]` - Focused trigger state
@@ -248,7 +225,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### ComboBox Props
+### ComboBox
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -284,21 +261,21 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | ComboBox content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ComboBoxRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### ComboBox.InputGroup Props
+### ComboBox.InputGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | InputGroup content |
 
-### ComboBox.Trigger Props
+### ComboBox.Trigger
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Custom trigger content |
 
-### ComboBox.Popover Props
+### ComboBox.Popover
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -306,7 +283,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Content children |
 
-### RenderProps
+### Render Props
 
 When using render functions with ComboBox, these values are provided:
 
@@ -825,3 +802,6 @@ The ComboBox component implements the ARIA comboBox pattern and provides:
 
 For more information, see the [React Aria ComboBox documentation](https://react-spectrum.adobe.com/react-aria/ComboBox.html).
 
+## Related Components
+
+<RelatedComponents component="combo-box" />

@@ -1,6 +1,7 @@
 ---
 title: TextField
 description: Composition-friendly text fields with labels, descriptions, and inline validation
+icon: updated
 links:
   rac: TextField
   source: textfield/textfield.tsx
@@ -9,17 +10,15 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { TextField } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="textfield-basic" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import {TextField, Label, Input, Description, FieldError} from '@heroui/react';
@@ -37,6 +36,14 @@ export default () => (
 >  **TextField** combines label, input, description, and error into a single accessible component.
 For standalone inputs, use **[Input](/docs/components/input)** or **[TextArea](/docs/components/textarea)**.
 
+## Examples
+
+### In Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on Input or TextArea components to apply the lower emphasis variant suitable for surface backgrounds.
+
+<ComponentPreview name="textfield-on-surface" />
+
 ### With Description
 
 <ComponentPreview name="textfield-with-description" />
@@ -44,6 +51,14 @@ For standalone inputs, use **[Input](/docs/components/input)** or **[TextArea](/
 ### Required Field
 
 <ComponentPreview name="textfield-required" />
+
+### Disabled State
+
+<ComponentPreview name="textfield-disabled" />
+
+### Full Width
+
+<ComponentPreview name="textfield-full-width" />
 
 ### Validation
 
@@ -61,10 +76,6 @@ Control the value to synchronize counters, previews, or formatting.
 
 <ComponentPreview name="textfield-with-error" />
 
-### Disabled State
-
-<ComponentPreview name="textfield-disabled" />
-
 ### TextArea
 
 Use [TextArea](/docs/components/textarea) instead of [Input](/docs/components/input) for multiline content.
@@ -75,49 +86,19 @@ Use [TextArea](/docs/components/textarea) instead of [Input](/docs/components/in
 
 <ComponentPreview name="textfield-input-types" />
 
-### Full Width
-
-<ComponentPreview name="textfield-full-width" />
-
-### In Surface
-
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on Input or TextArea components to apply the lower emphasis variant suitable for surface backgrounds.
-
-<ComponentPreview name="textfield-on-surface" />
-
-<RelatedComponents component="textfield" />
-
-<RelatedShowcases component="TextField" />
-
-### Custom Render Function
+### Render Function
 
 <ComponentPreview
-  name="textfield-custom-render-function"
+  name="textfield-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import {TextField, Label, Input, Description} from '@heroui/react';
+<ComponentPreview name="text-field-custom-styles" />
 
-function CustomTextField() {
-  return (
-    <TextField className="gap-2 rounded-xl border border-border/60 bgsurface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Project name
-      </Label>
-      <Input className="rounded-lg border border-border/60 bgsurface px-3 py-2" />
-      <Description className="text-xs text-default-500">
-        Keep it short and memorable.
-      </Description>
-    </TextField>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 TextField has minimal default styling. Override the `.textfield` class to customize the container styling.
 
@@ -140,6 +121,10 @@ TextField has minimal default styling. Override the `.textfield` class to custom
 }
 ```
 
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
 ### CSS Classes
 
 - `.textfield` – Root container with minimal styling (`flex flex-col gap-1`)
@@ -159,7 +144,7 @@ Additional attributes are available through render props (see TextFieldRenderPro
 
 ## API Reference
 
-### TextField Props
+### TextField
 
 TextField inherits all props from React Aria's [TextField](https://react-spectrum.adobe.com/react-aria/TextField.html) component.
 
@@ -236,7 +221,7 @@ Each of these components has its own props API. Use them directly within TextFie
 </TextField>
 ```
 
-### TextFieldRenderProps
+### Render Props
 
 When using render props with `className`, `style`, or `children`, these values are available:
 
@@ -249,3 +234,11 @@ When using render props with `className`, `style`, or `children`, these values a
 | `isFocused` | `boolean` | Whether the field is currently focused (DEPRECATED - use `isFocusWithin`). |
 | `isFocusWithin` | `boolean` | Whether any child element is focused. |
 | `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
+
+## Related Showcases
+
+<RelatedShowcases component="TextField" />
+
+## Related Components
+
+<RelatedComponents component="textfield" />

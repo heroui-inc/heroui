@@ -1,46 +1,40 @@
 ---
 title: Switch
 description: A toggle switch component for boolean states
-icon: updated
 links:
-  rac: SwitchField
+  rac: Switch
   source: switch/switch.tsx
   styles: switch.css
   storybook: Components/Controls/Switch
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Switch, SwitchGroup, Label } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="switch-basic"
 />
 
-### Anatomy
-
-Import the Switch component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
-import { Switch, Description, FieldError } from '@heroui/react';
+import { Switch, Label, Description } from '@heroui/react';
 
 export default () => (
   <Switch>
+    <Switch.Control>
+      <Switch.Thumb>
+        <Switch.Icon/> {/* Optional */}
+      </Switch.Thumb>
+    </Switch.Control>
     <Switch.Content>
-      <Switch.Control>
-        <Switch.Thumb>
-          <Switch.Icon /> {/* Optional */}
-        </Switch.Thumb>
-      </Switch.Control>
-      Label {/* plain text — the clickable label + accessible name */}
+      <Label />
+      <Description /> {/* Optional */}
     </Switch.Content>
-    <Description /> {/* Optional — field-level help text */}
-    <FieldError /> {/* Optional — validation message */}
   </Switch>
 );
 ```
@@ -53,29 +47,51 @@ import { Switch, SwitchGroup, Label } from '@heroui/react';
 export default () => (
   <SwitchGroup>
     <Switch>
-      <Switch.Content>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        Option 1
-      </Switch.Content>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 1</Label>
     </Switch>
     <Switch>
-      <Switch.Content>
-        <Switch.Control>
-          <Switch.Thumb />
-        </Switch.Control>
-        Option 2
-      </Switch.Content>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Label>Option 2</Label>
     </Switch>
   </SwitchGroup>
 );
 ```
 
+## Examples
+
+### Sizes
+
+<ComponentPreview
+  name="switch-sizes"
+/>
+
+### With Icons
+
+<ComponentPreview
+  name="switch-with-icons"
+/>
+
 ### Disabled
 
 <ComponentPreview
   name="switch-disabled"
+/>
+
+### Without Label
+
+<ComponentPreview
+  name="switch-without-label"
+/>
+
+### With Description
+
+<ComponentPreview
+  name="switch-with-description"
 />
 
 ### Default Selected
@@ -90,34 +106,10 @@ export default () => (
   name="switch-controlled"
 />
 
-### Without Label
-
-<ComponentPreview
-  name="switch-without-label"
-/>
-
-### Sizes
-
-<ComponentPreview
-  name="switch-sizes"
-/>
-
 ### Label Position
 
 <ComponentPreview
   name="switch-label-position"
-/>
-
-### With Icons
-
-<ComponentPreview
-  name="switch-with-icons"
-/>
-
-### With Description
-
-<ComponentPreview
-  name="switch-with-description"
 />
 
 ### Group
@@ -132,94 +124,34 @@ export default () => (
   name="switch-group-horizontal"
 />
 
-### Render Props
-
-<ComponentPreview
-  name="switch-render-props"
-/>
-
 ### Form Integration
 
 <ComponentPreview
   name="switch-form"
 />
 
-### Custom Styles
+### Render Props
 
 <ComponentPreview
-  name="switch-custom-styles"
+  name="switch-render-props"
 />
 
-### Custom Render Function
+### Render Function
 
 <ComponentPreview
-  name="switch-custom-render-function"
+  name="switch-render-function"
 />
 
-<RelatedComponents component="switch" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="switch-custom-styles" />
 
-You can customize individual Switch components:
-
-```tsx
-import { Switch, Label } from '@heroui/react';
-
-function CustomSwitch() {
-  return (
-    <Switch>
-      {({isSelected}) => (
-        <>
-          <Switch.Control
-            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
-          >
-            <Switch.Thumb
-              className={`size-[27px] bg-white shadow-sm ${isSelected ? "translate-x-5 shadow-lg" : ""}`}
-            />
-          </Switch.Control>
-          Custom Switch
-        </>
-      )}
-    </Switch>
-  );
-}
-```
-
-Or customize the SwitchGroup layout:
-
-```tsx
-import { Switch, SwitchGroup, Label } from '@heroui/react';
-
-function CustomSwitchGroup() {
-  return (
-    <SwitchGroup className="gap-8" orientation="horizontal">
-      <Switch>
-        <Switch.Content>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          Option 1
-        </Switch.Content>
-      </Switch>
-      <Switch>
-        <Switch.Content>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-          Option 2
-        </Switch.Content>
-      </Switch>
-    </SwitchGroup>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Switch component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -236,7 +168,7 @@ To customize the Switch component classes, you can use the `@layer components` d
   }
 
   .switch__content {
-    @apply items-center gap-3;
+    @apply flex flex-col gap-1;
   }
 
   .switch__icon {
@@ -245,16 +177,18 @@ To customize the Switch component classes, you can use the `@layer components` d
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
-#### Switch Classes
+#### Switch Classes [!toc]
 
 The Switch component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)):
 
-- `.switch` - Base switch container (the field)
-- `.switch__content` - Clickable label wrapping the control and label text
+- `.switch` - Base switch container
+- `.switch__content` - Optional content container
 - `.switch__control` - Switch control track
 - `.switch__thumb` - Switch thumb that moves
 - `.switch__icon` - Optional icon inside the thumb
@@ -262,7 +196,7 @@ The Switch component uses these CSS classes ([View source styles](https://github
 - `.switch--md` - Medium size variant (default)
 - `.switch--lg` - Large size variant
 
-#### SwitchGroup Classes
+#### SwitchGroup Classes [!toc]
 
 The SwitchGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch-group.css)):
 
@@ -276,16 +210,16 @@ The SwitchGroup component uses these CSS classes ([View source styles](https://g
 The switch supports both CSS pseudo-classes and data attributes for flexibility:
 
 - **Selected**: `[data-selected="true"]` (thumb position and background color change)
-- **Hover**: `:hover` or `[data-hovered="true"]` on `Switch.Control` (button)
-- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` on the button (shows focus ring on track)
-- **Disabled**: `[data-disabled="true"]` on the field (reduced opacity, including help text)
+- **Hover**: `:hover` or `[data-hovered="true"]`
+- **Focus**: `:focus-visible` or `[data-focus-visible="true"]` (shows focus ring)
+- **Disabled**: `:disabled` or `[aria-disabled="true"]` (reduced opacity, no pointer events)
 - **Pressed**: `:active` or `[data-pressed="true"]`
 
 ## API Reference
 
-### Switch Props
+### Switch
 
-Inherits from [React Aria SwitchField](https://react-spectrum.adobe.com/react-aria/Switch.html).
+Inherits from [React Aria Switch](https://react-spectrum.adobe.com/react-aria/Switch.html).
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -302,39 +236,34 @@ Inherits from [React Aria SwitchField](https://react-spectrum.adobe.com/react-ar
 | `value` | `string` | - | The value of the input element, used when submitting an HTML form |
 | `onChange` | `(isSelected: boolean) => void` | - | Handler called when the switch value changes |
 | `onPress` | `(e: PressEvent) => void` | - | Handler called when the switch is pressed |
-| `children` | `React.ReactNode \| (values: SwitchFieldRenderProps) => React.ReactNode` | - | Switch content or field render prop |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
+| `children` | `React.ReactNode \| (values: SwitchRenderProps) => React.ReactNode` | - | Switch content or render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Switch.Content Props
+### Render Props
 
-The clickable `<label>` that wraps the control and label text. Put `Switch.Control` and the `Label` inside it; keep `Description`/`FieldError` as siblings of `Switch.Content`. For a switch with no label, omit the `Label` and pass an `aria-label` on `Switch`.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `React.ReactNode \| (values: SwitchButtonRenderProps) => React.ReactNode` | - | Button content (control + label), or a button render prop |
-| `className` | `string \| (values: SwitchButtonRenderProps) => string` | - | Classes applied to the clickable label |
-
-### SwitchFieldRenderProps
-
-When using a render prop on the root `Switch`, these field-level values are provided:
+When using the render prop pattern, these values are provided:
 
 | Prop | Type | Description |
 |------|------|-------------|
 | `isSelected` | `boolean` | Whether the switch is currently on |
+| `isHovered` | `boolean` | Whether the switch is hovered |
+| `isPressed` | `boolean` | Whether the switch is currently pressed |
+| `isFocused` | `boolean` | Whether the switch is focused |
+| `isFocusVisible` | `boolean` | Whether the switch is keyboard focused |
 | `isDisabled` | `boolean` | Whether the switch is disabled |
 | `isReadOnly` | `boolean` | Whether the switch is read only |
 | `isInvalid` | `boolean` | Whether the switch is invalid |
 | `isRequired` | `boolean` | Whether the switch is required |
-| `state` | `ToggleState` | State of the switch |
+| `state` | `-` | State of the switch. |
 
-### SwitchButtonRenderProps
-
-`Switch.Control` uses button-level render props (`isHovered`, `isPressed`, `isFocusVisible`, etc.). Pass a function as `Switch.Control` children to access them.
-
-### SwitchGroup Props
+### SwitchGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | The orientation of the switch group |
 | `children` | `React.ReactNode` | - | The switch items to render |
 | `className` | `string` | - | Additional CSS class names |
+
+## Related Components
+
+<RelatedComponents component="switch" />

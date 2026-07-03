@@ -17,13 +17,15 @@ export function RelatedComponents({className, component}: RelatedComponentsProps
   }
 
   return (
-    <div className={cn("my-8", className)}>
-      <h2 className="mb-4 text-xl font-semibold">Related Components</h2>
-      <div className="not-prose grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-        {relatedComponents.map((relatedComponent) => (
-          <ComponentItem key={relatedComponent.name} component={relatedComponent} />
-        ))}
-      </div>
+    <div
+      className={cn(
+        "not-prose grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-3",
+        className,
+      )}
+    >
+      {relatedComponents.map((relatedComponent) => (
+        <ComponentItem key={relatedComponent.name} component={relatedComponent} />
+      ))}
     </div>
   );
 }
