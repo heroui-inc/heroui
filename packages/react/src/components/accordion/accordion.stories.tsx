@@ -38,8 +38,8 @@ const Wrapper = ({children, className}: {children: React.ReactNode; className?: 
 const Template = (props: Accordion["RootProps"]) => (
   <Wrapper>
     <Accordion {...props}>
-      {items.map((item, index) => (
-        <Accordion.Item key={index}>
+      {items.map((item) => (
+        <Accordion.Item key={item.title}>
           <Accordion.Heading>
             <Accordion.Trigger>
               {item.icon ? (
@@ -75,8 +75,8 @@ const CustomTemplate = (props: Accordion["RootProps"]) => (
             <p className="text-md mb-2 font-medium text-muted">{category.title}</p>
             <div key={category.title}>
               <Accordion {...props} className="w-full" variant="surface">
-                {category.items.map((item, index) => (
-                  <Accordion.Item key={index}>
+                {category.items.map((item) => (
+                  <Accordion.Item key={item.title}>
                     <Accordion.Heading>
                       <Accordion.Trigger>
                         {item.title}
@@ -135,8 +135,8 @@ export const Custom = {
 const WithoutSeparatorTemplate = ({hideSeparator = true, ...props}: Accordion["RootProps"]) => (
   <Wrapper>
     <Accordion hideSeparator={hideSeparator} {...props}>
-      {items.map((item, index) => (
-        <Accordion.Item key={index}>
+      {items.map((item) => (
+        <Accordion.Item key={item.title}>
           <Accordion.Heading>
             <Accordion.Trigger>
               {item.icon ? (

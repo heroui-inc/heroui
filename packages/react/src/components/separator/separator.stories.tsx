@@ -75,7 +75,7 @@ export const WithContent: Story = {
   render: () => (
     <div className="max-w-md space-y-4 rounded-3xl bg-surface p-4 shadow-surface">
       {items.map((item, index) => (
-        <div key={index}>
+        <div key={item.title}>
           <div className="flex items-center gap-3">
             <img alt={item.title} className="size-12" src={item.iconUrl} />
             <div className="flex-1 space-y-0">
