@@ -3,11 +3,13 @@
 import {Rocket} from "@gravity-ui/icons";
 import LinkRoot from "fumadocs-core/link";
 import {AnimatePresence, animate, motion, useMotionValue, useReducedMotion} from "motion/react";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 
 interface ReleaseBadge {
   label: string;
   href: string;
+  /** ISO date string (e.g. "2026-06-30") used to order badges newest-first. */
+  date?: string;
 }
 
 interface ReleaseBadgesProps {
@@ -38,7 +40,23 @@ export function ReleaseBadges({badges, intervalMs = 5000}: ReleaseBadgesProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const progress = useMotionValue(0);
-  const count = badges.length;
+
+  // Order badges newest-first so the latest release is shown first. Badges
+  // without a valid date sink to the bottom while preserving their relative
+  // order (stable sort).
+  const sortedBadges = useMemo(() => {
+    const toTime = (badge: ReleaseBadge): number => {
+      if (!badge.date) return Number.NEGATIVE_INFINITY;
+
+      const time = new Date(badge.date).getTime();
+
+      return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time;
+    };
+
+    return [...badges].sort((a, b) => toTime(b) - toTime(a));
+  }, [badges]);
+
+  const count = sortedBadges.length;
 
   // Autoplay: drive a single progress value (transform-only fill) and advance
   // on completion. Stopping retains the value, so hover/focus pause + resume
@@ -69,13 +87,13 @@ export function ReleaseBadges({badges, intervalMs = 5000}: ReleaseBadgesProps) {
 
   // Single highlight: render the plain badge (no carousel chrome).
   if (count === 1) {
-    const [only] = badges;
+    const [only] = sortedBadges;
 
     return only ? <BadgePill badge={only} /> : null;
   }
 
   const activeIndex = index % count;
-  const active = badges[activeIndex];
+  const active = sortedBadges[activeIndex];
 
   if (!active) return null;
 

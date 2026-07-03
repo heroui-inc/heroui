@@ -6,8 +6,9 @@
         "href": "/docs/react/releases/v3-2-2"
       },
       {
-        "label": "New CLI: create-heroui-native-app v1.0.0",
-        "href": "/docs/native/releases/create-heroui-native-app"
+        "label": "HeroUI Native v1.0.5 — patch release",
+        "href": "/docs/native/releases/v1-0-5",
+        "date": "2026-07-02"
       }
     ],
     "titleMain": "Beautiful by default.",

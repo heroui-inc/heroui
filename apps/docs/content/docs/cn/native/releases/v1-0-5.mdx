@@ -1,0 +1,222 @@
+---
+title: v1.0.5
+description:
+  拆分 border-field 令牌以修复宽度/颜色合并冲突、Typography 支持 Dynamic Type、Provider 级文本输入配置、单次挂载的弹层动画、Select 图标颜色修复、升级至 Expo 57 / RN 0.86
+github:
+  pull: 439
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 7 月 2 日</span>
+</div>
+
+HeroUI Native v1.0.5 通过将字段边框拆分为独立的宽度与颜色令牌，并全局配置 `tailwind-variants`，解决了长期存在的 `border-field` 合并冲突，同时将 Input、InputOTP、Radio、Checkbox 迁移到基于 outline 的聚焦、激活与无效状态。本版本还为 Typography 带来 iOS Dynamic Type 支持，新增 Provider 级的文本输入配置，重构 Popover、Menu、Select 的进入动画以让内容仅挂载一次，将 Select 勾选图标与 `accent-soft-foreground` 令牌对齐，并将工具链升级至 Expo 57 / React Native 0.86。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## 性能
+
+### 单次挂载的 Popover、Menu、Select 动画
+
+[Popover](/docs/native/components/popover)、[Menu](/docs/native/components/menu)、[Select](/docs/native/components/select) 的内容现在只挂载一次，并在完成测量与定位后通过共享值播放进入动画。此前，内容子树会被挂载两次——先用一个隐藏探针测量尺寸，再挂载可见节点——以便进入 Keyframe 能在正确位置于挂载时触发。
+
+**改进点：**
+
+- 默认的进入动画由一个共享值（`rEnteringStyle`）驱动，在内容完成定位（`isReady`）后播放，使子树仅挂载一次
+- `usePopupPopoverContentAnimation` 现返回 `isDrivenEntering` 与 `rEnteringStyle`，其位移、缩放与不透明度均由一个进度值插值得出
+- 内容在就绪之前对指针事件保持隐藏；禁用动画时直接解析为显示状态
+- 自定义的进入 Keyframe 仍保留原先的「探针 + 挂载」回退路径
+
+组件的公开 API 未变——单次挂载路径完全是内部实现，自定义进入动画的行为与之前完全一致。建议在全部四个放置方向、子菜单过渡以及禁用动画的情形下，验证进入与退出动画。
+
+**相关 PR：** [#438](https://github.com/heroui-inc/heroui-native/pull/438)
+
+## 组件改进
+
+### Typography Dynamic Type 支持（iOS）
+
+[Typography](/docs/native/components/text) 组件现在会按语义类型应用默认的 `dynamicTypeRamp`，使文本在 iOS 上以符合 Apple 设计意图的方式缩放。较大的类型（如标题）比正文缩放得更慢，与 iOS 系统的 Dynamic Type 行为一致。此前，所有 Typography 组件中的文本都以相同的系数缩放。
+
+**改进点：**
+
+- 每个 Typography 类型都映射到合适的 iOS Dynamic Type ramp（例如标题映射到 `title` ramp，段落映射到 `body`）
+- 在 iOS 上提升无障碍与文本缩放的保真度，对 Android 无影响
+- 在需要不同 ramp 的场景下，可按实例覆盖 `dynamicTypeRamp` 默认值
+
+此变更仅针对 iOS，不改动 Typography 的 API。已直接传入 `dynamicTypeRamp` 的应用仍会显式控制缩放行为。
+
+**相关 PR：** [#435](https://github.com/heroui-inc/heroui-native/pull/435)
+
+### Select 勾选图标颜色
+
+[Select](/docs/native/components/select) 组件的 `Select.ItemIndicator` 现在将其勾选图标颜色默认为 `accent-soft-foreground` 主题令牌，而非 `accent`，使选中项指示器与预期的语义前景色对齐，从而获得更好的对比度与视觉一致性。
+
+**改进点：**
+
+- 默认勾选图标颜色改用 `accent-soft-foreground`，提升选中列表项的对比度
+- JSDoc 与组件文档已同步更新以反映新的默认值
+
+仅在省略 `iconProps.color` 时默认图标颜色会发生变化——API 未变，自定义颜色仍然有效。建议在亮色与暗色主题下进行手动验证，以确认指示器对比度。
+
+**相关 PR：** [#436](https://github.com/heroui-inc/heroui-native/pull/436)
+
+## API 增强
+
+### Provider 文本输入配置
+
+[HeroUINativeProvider](/docs/native/getting-started/provider)（以及 `HeroUINativeProviderRaw`）现可通过新的 `textInputProps` 配置在全局配置一部分 `TextInput` 属性，首批支持 `allowFontScaling` 与 `maxFontSizeMultiplier`。这与既有的全局 `textProps` 模式保持一致，使整个应用的输入字体缩放行为保持统一。
+
+**新能力：**
+
+```tsx
+import { HeroUINativeProvider } from "heroui-native";
+
+export function App() {
+  return (
+    <HeroUINativeProvider
+      config={{
+        textInputProps: {
+          allowFontScaling: true,
+          maxFontSizeMultiplier: 1.5,
+        },
+      }}
+    >
+      {/* Your app */}
+    </HeroUINativeProvider>
+  );
+}
+```
+
+**包含内容：**
+
+- 在 `HeroUINativeConfig` 与 `HeroUINativeConfigRaw` 上新增 `textInputProps` 配置（`allowFontScaling`、`maxFontSizeMultiplier`）
+- 新增 `TextInputComponentProvider` / `useTextInputComponent` 以及一个 `HeroTextInput` 辅助组件，将全局属性作为可覆盖的默认值应用
+- 已应用于 `Input`（因此涵盖 `TextArea`、`SearchField`、`InputGroup`）以及 `InputOTP` 基元
+
+全局属性作为默认值应用，因此任何直接传给组件的属性仍会覆盖它们。
+
+**相关 PR：** [#437](https://github.com/heroui-inc/heroui-native/pull/437)
+
+## 依赖
+
+### 升级至 Expo 57 / React Native 0.86
+
+项目已升级到 Expo 57 / React Native 0.86 工具链。本次升级还通过包裹内容节点来修复遮罩退出动画，使布局动画不再与动画样式共享 transform，恢复 Android 输入聚焦环，并强化了 Pressable 样式回调的类型。
+
+**修复：**
+
+- 将 Popover、Menu、Select 的 `entering` / `exiting` 布局动画移到包裹用的 `Animated.View` 上，以修复退出动画并消除 Reanimated 的布局动画覆盖警告
+- 在 Android 上使用边框显示输入聚焦环，iOS 仍保留 outline 方案
+- 通过移除 `scale` transform 简化默认的退出 keyframe
+- 为 button 与子菜单的样式回调添加显式的 `PressableStateCallbackType` 类型
+
+**依赖升级：**
+
+- Expo `57`
+- React Native `0.86`
+- React Native Reanimated `4.5`
+- `react-native-worklets` `0.10`
+- Tailwind CSS `4.3`
+- Uniwind `1.10`
+
+公开 API 未变，但消费者应将其对等依赖版本与 Expo 57 / React Native 0.86 对齐。建议在 iOS 与 Android 上手动测试遮罩的打开/关闭动画以及输入聚焦状态。
+
+**相关 PR：** [#439](https://github.com/heroui-inc/heroui-native/pull/439)
+
+## ⚠️ 破坏性变更
+
+### 将 `border-field` 拆分为独立的宽度与颜色令牌
+
+此前，`border-field` 会以同一名称同时生成宽度与颜色两个工具类，导致 `tailwind-merge` 丢弃宽度。字段组件硬编码了边框宽度（`border`、`border-[1.5px]`），并使用 border-color 表示聚焦与无效状态。v1.0.5 将字段边框拆分为两个互不冲突的工具类，并全局配置 `tailwind-variants`，使宽度与颜色在合并时不再相互覆盖。
+
+**变更内容：**
+
+- `border-field-width`（宽度）与 `border-field-border`（颜色）现在是独立、互不冲突的工具类
+- `tv` / `cn` 使用一个共享的 `twMergeConfig`（`border-w` 分组）进行配置并全局注册；所有 `*.styles.ts` 均从 lib 导入 `tv`
+- Input、InputOTP、Radio、Checkbox 使用 `border-field-width` 与 `outline-*` 表示聚焦、激活与无效状态；无效 outline 现在在静止状态下即显示
+- `--field-radius` 系数由 `1.5` 改为 `1.75`
+
+组件的公开 API 未变，但视觉与行为上的变化需要验证。请在你的应用中确认以下事项：
+
+**迁移：**
+
+仅通过 `--field-border` 颜色设置的边框将不再显示——`--field-border-width` 现在默认为 `0px`，因此需要同时设置宽度：
+
+```tsx
+// 之前——仅设置颜色即可渲染出可见边框
+// --field-border: <color>;
+
+// 之后——还需设置宽度，因为 --field-border-width 默认为 0px
+// --field-border: <color>;
+// --field-border-width: 1.5px;
+```
+
+直接使用字段边框宽度工具类时，请重命名：
+
+```tsx
+// 之前
+<View className="border-field" />
+
+// 之后
+<View className="border-field-width" />
+```
+
+**同时请验证：**
+
+- 聚焦、激活与无效状态现在使用 `outline-*` 而非 border-color
+- 对 `--border-width-field` 主题键的覆盖必须改用 `--border-width-field-width`（或 `--field-border-width` 基元）
+- 字段圆角略有变化（`--field-radius` 系数由 `1.5` → `1.75`）
+
+如果你依赖 `--field-border` 颜色来产生静止状态的边框，请设置一个非零的 `--field-border-width` 默认值以恢复该外观。
+
+**相关 PR：** [#434](https://github.com/heroui-inc/heroui-native/pull/434)
+
+## 文档更新
+
+以下文档页面已随本版本更新以反映相关变更：
+
+- [Typography](/docs/native/components/text) — 记录了 iOS 上默认的 `dynamicTypeRamp` 行为
+- [Select](/docs/native/components/select) — 更新了 `Select.ItemIndicator` 默认勾选图标颜色
+- [Provider](/docs/native/getting-started/provider) — 新增 `textInputProps` 章节、示例与 Provider 层级说明
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

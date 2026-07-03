@@ -29,7 +29,7 @@ export const NATIVE_APP = {
    * automatically when this is `null`. When the Play Store listing goes live,
    * paste its URL here and both surfaces re-enable with no other code changes.
    */
-  PLAY_STORE_URL: null,
+  PLAY_STORE_URL: "https://play.google.com/store/apps/details?id=com.herouinative.android",
   /**
    * Custom URL scheme registered by the native app. Used by the in-page
    * "Open in app" tap link on mobile to bypass iOS's same-domain Safari

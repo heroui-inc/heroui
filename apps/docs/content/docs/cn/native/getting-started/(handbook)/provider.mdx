@@ -1,24 +1,25 @@
 ---
 title: Provider
-description: 配置 HeroUI Native 的文本、动画与 Toast 等全局能力
+description: 配置 HeroUI Native provider 的文本、文本输入、动画和 toast 设置
 icon: chevrons-expand-horizontal
 ---
 
-`HeroUINativeProvider` 是根级 Provider，用于在 React Native 应用中初始化并配置 HeroUI Native，提供全局配置与Portal管理。
+`HeroUINativeProvider` 是根 provider 组件，用于在你的 React Native 应用中配置和初始化 HeroUI Native。它为你的应用提供全局配置和 portal 管理。
 
-## 概览
+## 概述
 
-Provider 作为 HeroUI Native 的主入口，为应用包裹必要的上下文与配置：
+该 provider 是 HeroUI Native 的主要入口点，为你的应用包裹必要的上下文和配置：
 
-- **安全区内边距**：通过 `SafeAreaListener` 自动同步安全区变化，并写入 Uniwind，便于在 Tailwind 中使用（如 `pb-safe-offset-3`）
-- **文本配置**：全局 Text 相关设置，保证各 HeroUI 组件文本表现一致
-- **动画配置**：全局控制是否关闭应用内全部动画
-- **Toast 配置**：全局 Toast 系统（边距、默认属性、内容包裹层等）
-- **Portal管理**：处理叠层、模态等需要浮在应用层级之上的组件
+- **安全区域内边距（Safe Area Insets）**：通过 `SafeAreaListener` 自动处理安全区域内边距的更新，并将其与 Uniwind 同步，以便在 Tailwind class 中使用（例如 `pb-safe-offset-3`）
+- **文本配置**：全局 Text 组件设置，确保所有 HeroUI 组件保持一致
+- **文本输入配置**：全局文本输入设置，确保所有 HeroUI 输入组件保持一致
+- **动画配置**：全局动画控制，可禁用整个应用中的所有动画
+- **Toast 配置**：全局 toast 系统配置，包括内边距、默认 props 和包裹组件
+- **Portal 管理**：处理渲染在应用层级之上的浮层、模态框及其他组件
 
-## 基础用法
+## 基础设置
 
-在应用根节点使用 Provider：
+用该 provider 包裹你的应用根节点：
 
 ```tsx
 import { HeroUINativeProvider } from 'heroui-native';
@@ -27,19 +28,19 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <HeroUINativeProvider>{/* Your app content */}</HeroUINativeProvider>
+      <HeroUINativeProvider>{/* 你的应用内容 */}</HeroUINativeProvider>
     </GestureHandlerRootView>
   );
 }
 ```
 
-## 配置项
+## 配置选项
 
-Provider 接受 `config` 属性，常用分组如下。
+该 provider 接受一个 `config` prop，包含以下选项：
 
-### 文本组件配置
+### Text 组件配置
 
-面向 HeroUI Native 内所有 Text 的全局设置。仅包含适合「全局统一」调整的属性：
+HeroUI Native 内所有 Text 组件的全局设置。这些 props 经过精心挑选，仅包含那些适合在应用中所有 Text 组件上进行全局配置的选项：
 
 ```tsx
 import { HeroUINativeProvider } from 'heroui-native';
@@ -47,16 +48,16 @@ import type { HeroUINativeConfig } from 'heroui-native';
 
 const config: HeroUINativeConfig = {
   textProps: {
-    // Disable font scaling for accessibility
+    // 为无障碍禁用字体缩放
     allowFontScaling: false,
 
-    // Auto-adjust font size to fit container
+    // 自动调整字号以适应容器
     adjustsFontSizeToFit: false,
 
-    // Maximum font size multiplier when scaling
+    // 缩放时的最大字号倍数
     maxFontSizeMultiplier: 1.5,
 
-    // Minimum font scale (iOS only, 0.01-1.0)
+    // 最小字体缩放比例（仅限 iOS，0.01-1.0）
     minimumFontScale: 0.5,
   },
 };
@@ -64,87 +65,118 @@ const config: HeroUINativeConfig = {
 export default function App() {
   return (
     <HeroUINativeProvider config={config}>
-      {/* Your app content */}
+      {/* 你的应用内容 */}
     </HeroUINativeProvider>
   );
 }
 ```
 
+### TextInput 组件配置
+
+HeroUI Native 内所有基于 TextInput 的组件的全局设置（例如 Input、TextArea、SearchField、InputGroup、InputOTP）。这些 props 经过精心挑选，仅包含那些适合在应用中所有输入组件上进行全局配置的选项：
+
+```tsx
+import { HeroUINativeProvider } from 'heroui-native';
+import type { HeroUINativeConfig } from 'heroui-native';
+
+const config: HeroUINativeConfig = {
+  textInputProps: {
+    // 遵循 Text Size 无障碍设置
+    allowFontScaling: false,
+
+    // 启用 allowFontScaling 时的最大字号倍数
+    maxFontSizeMultiplier: 1.5,
+  },
+};
+
+export default function App() {
+  return (
+    <HeroUINativeProvider config={config}>
+      {/* 你的应用内容 */}
+    </HeroUINativeProvider>
+  );
+}
+```
+
+<Callout type="info">
+  **注意**：这些 props 会作为默认值应用。直接传递给单个输入组件的任何 prop 都会覆盖对应的全局值。
+</Callout>
+
 ### 动画配置
 
-应用级动画开关：
+整个应用的全局动画配置：
 
 ```tsx
 const config: HeroUINativeConfig = {
-  // Disable all animations across the application (cascades to all children)
+  // 禁用应用中的所有动画（级联到所有子组件）
   animation: 'disable-all',
 };
 ```
 
 <Callout type="warning">
-  **说明：** 设为 `'disable-all'` 后，应用内全部动画将被关闭，可用于无障碍或性能优化场景。
+  **注意**：当设置为 `'disable-all'` 时，应用中的所有动画都会被禁用。这对于无障碍或性能优化很有用。
 </Callout>
 
 ### 开发者信息配置
 
-控制开发环境下控制台中的提示信息：
+控制在控制台中显示的面向开发者的提示信息：
 
 ```tsx
 const config: HeroUINativeConfig = {
   devInfo: {
-    // Disable styling principles information message
+    // 禁用样式原则提示信息
     stylingPrinciples: false,
   },
 };
 ```
 
 <Callout type="info">
-  **说明：** 默认会输出信息类日志。将 `stylingPrinciples: false` 可关闭开发时关于样式原则的提示。
+  **注意**：默认情况下会启用提示信息。设置 `stylingPrinciples: false` 可禁用在开发期间出现在控制台中的样式原则提示信息。
 </Callout>
 
 ### Toast 配置
 
-配置全局 Toast（边距、默认属性、包裹层等），也可完全关闭 Toast：
+配置全局 toast 系统，包括内边距、默认 props 和包裹组件。你也可以完全禁用 toast provider：
 
-**方式一：关闭 Toast Provider**
+**选项 1：禁用 Toast Provider**
 
 ```tsx
 const config: HeroUINativeConfig = {
-  // Disable toast provider entirely
+  // 完全禁用 toast provider
   toast: false,
-  // or
+  // 或
   toast: 'disabled',
 };
 ```
 
 <Callout type="info">
-  **说明：** 当 `toast` 为 `false` 或 `'disabled'` 时，不会渲染 `ToastProvider`，应用内无法使用 Toast。
+  **注意**：当 toast 被禁用（`false` 或 `'disabled'`）时，`ToastProvider` 将不会被渲染，你的应用中也将无法使用 toast 功能。
 </Callout>
 
-**方式二：配置 Toast Provider**
+**选项 2：配置 Toast Provider**
 
 ```tsx
 import { KeyboardAvoidingView } from 'react-native';
 
 const config: HeroUINativeConfig = {
   toast: {
-    // Global toast configuration (used as defaults for all toasts)
+    // 全局 toast 配置（作为所有 toast 的默认值）
     defaultProps: {
       variant: 'default',
       placement: 'top',
       isSwipeable: true,
       animation: true,
     },
-    // Insets for spacing from screen edges (added to safe area insets)
+    // 与屏幕边缘间距的内边距（叠加在安全区域内边距之上）
     insets: {
-      top: 0,      // Default: iOS = 0, Android = 12
-      bottom: 6,   // Default: iOS = 6, Android = 12
-      left: 12,    // Default: 12
-      right: 12,   // Default: 12
+      top: 0,      // 默认值：iOS = 0，Android = 12
+      bottom: 6,   // 默认值：iOS = 6，Android = 12
+      left: 12,    // 默认值：12
+      right: 12,   // 默认值：12
     },
-    // Maximum number of visible toasts before opacity starts fading
+    // 开始淡出透明度前可见 toast 的最大数量
     maxVisibleToasts: 3,
-    // Custom wrapper function to wrap the toast content
+    // 用于包裹 toast 内容的自定义包裹函数
     contentWrapper: (children) => (
       <KeyboardAvoidingView
         behavior="padding"
@@ -160,7 +192,7 @@ const config: HeroUINativeConfig = {
 
 ## 完整示例
 
-综合展示各项配置：
+以下是展示所有配置选项的完整示例：
 
 ```tsx
 import { HeroUINativeProvider } from 'heroui-native';
@@ -168,21 +200,26 @@ import type { HeroUINativeConfig } from 'heroui-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const config: HeroUINativeConfig = {
-  // Global text configuration
+  // 全局文本配置
   textProps: {
     minimumFontScale: 0.5,
     maxFontSizeMultiplier: 1.5,
     allowFontScaling: true,
     adjustsFontSizeToFit: false,
   },
-  // Global animation configuration
-  animation: 'disable-all', // Optional: disable all animations
-  // Developer information messages configuration
-  devInfo: {
-    stylingPrinciples: true, // Optional: disable styling principles message
+  // 全局文本输入配置
+  textInputProps: {
+    allowFontScaling: true,
+    maxFontSizeMultiplier: 1.5,
   },
-  // Global toast configuration
-  // Option 1: Configure toast with custom settings
+  // 全局动画配置
+  animation: 'disable-all', // 可选：禁用所有动画
+  // 开发者信息提示配置
+  devInfo: {
+    stylingPrinciples: true, // 可选：禁用样式原则提示信息
+  },
+  // 全局 toast 配置
+  // 选项 1：使用自定义设置配置 toast
   toast: {
     defaultProps: {
       variant: 'default',
@@ -196,9 +233,9 @@ const config: HeroUINativeConfig = {
     },
     maxVisibleToasts: 3,
   },
-  // Option 2: Disable toast entirely
+  // 选项 2：完全禁用 toast
   // toast: false,
-  // or
+  // 或
   // toast: 'disabled',
 };
 
@@ -215,7 +252,7 @@ export default function App() {
 
 ## 与 Expo Router 集成
 
-使用 Expo Router 时，在根布局中包裹：
+使用 Expo Router 时，包裹你的根布局：
 
 ```tsx
 // app/_layout.tsx
@@ -243,39 +280,40 @@ export default function RootLayout() {
 
 ### Provider 层级
 
-`HeroUINativeProvider` 内部由多层 Provider 组合而成：
+`HeroUINativeProvider` 内部组合了多个 provider：
 
 ```
 HeroUINativeProvider
-├── SafeAreaListener (handles safe area insets updates)
-│   └── GlobalAnimationSettingsProvider (animation configuration)
-│       └── TextComponentProvider (text configuration)
-│           └── ToastProvider (toast configuration, conditionally rendered)
-│               └── Your App
-│               └── PortalHost (for overlays)
+├── SafeAreaListener（处理安全区域内边距更新）
+│   └── GlobalAnimationSettingsProvider（动画配置）
+│       └── TextComponentProvider（文本配置）
+│           └── TextInputComponentProvider（文本输入配置）
+│               └── ToastProvider（toast 配置，按条件渲染）
+│                   └── 你的应用
+│                   └── PortalHost（用于浮层）
 ```
 
 <Callout type="info">
-  **说明：** `ToastProvider` 是否渲染取决于 `toast` 配置。当 `toast` 为 `false` 或 `'disabled'` 时，不会渲染 `ToastProvider`，应用内容与 `PortalHost` 将直接挂在 `TextComponentProvider` 之下。
+  **注意**：`ToastProvider` 会根据 `toast` 配置按条件渲染。如果 `toast` 设置为 `false` 或 `'disabled'`，`ToastProvider` 将不会被渲染，应用内容和 `PortalHost` 会直接渲染在 `TextInputComponentProvider` 之下。
 </Callout>
 
-### 安全区内边距处理
+### 安全区域内边距处理
 
-Provider 会自动使用 `react-native-safe-area-context` 的 [`SafeAreaListener`](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-listener) 包裹应用。该组件监听安全区与帧的变化但不会触发重渲染，并通过 `onChange` 回调将最新的 insets 同步给 Uniwind。
+该 provider 会自动用来自 `react-native-safe-area-context` 的 [`SafeAreaListener`](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-listener) 包裹你的应用。该组件监听安全区域内边距和框架变化而不会触发重新渲染，并通过 `onChange` 回调用最新的内边距自动更新 Uniwind。
 
-## 轻量 Provider（Raw）
+## Raw Provider
 
-`HeroUINativeProviderRaw` 是面向包体优化的精简版，不包含 `ToastProvider` 与 `PortalHost`，仅保留最小起点，按需自行组合能力。
+`HeroUINativeProviderRaw` 是 `HeroUINativeProvider` 的轻量级变体，为打包体积优化而设计。它不包含 `ToastProvider` 和 `PortalHost`，为你提供一个最精简的起点，让你只安装和添加真正需要的内容。
 
 ### 何时使用
 
-当你希望精确控制打包进应用的依赖时，可使用 Raw Provider。从 `heroui-native/provider-raw` 导入后，下列依赖仅在用到对应组件时才需要：
+当你想完全掌控打包体积中包含哪些依赖时，使用 `HeroUINativeProviderRaw`。使用从 `heroui-native/provider-raw` 导入的 raw provider 时，以下依赖是可选的，仅在你使用对应组件时才需要：
 
-- **react-native-screens** — 浮层类组件（Popover、Dialog）需要
-- **@gorhom/bottom-sheet** — BottomSheet 需要
-- **react-native-svg** — 使用图标的组件（Accordion、Alert、Checkbox 等）需要
+- **react-native-screens** —— 浮层组件（Popover、Dialog）所需
+- **@gorhom/bottom-sheet** —— BottomSheet 组件所需
+- **react-native-svg** —— 使用图标的组件所需（Accordion、Alert、Checkbox 等）
 
-### 接入
+### 设置
 
 ```tsx
 import {
@@ -294,16 +332,16 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <HeroUINativeProviderRaw config={config}>
-        {/* Your app content */}
+        {/* 你的应用内容 */}
       </HeroUINativeProviderRaw>
     </GestureHandlerRootView>
   );
 }
 ```
 
-### 手动添加 Toast 与 Portal
+### 手动添加 Toast 和 Portal
 
-使用 Raw Provider 且仍需要 Toast 或 Portal 时，请自行组合：
+如果你在使用 raw provider 时需要 toast 或 portal 功能，请自行添加：
 
 ```tsx
 import { HeroUINativeProviderRaw } from 'heroui-native/provider-raw';
@@ -315,7 +353,7 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <HeroUINativeProviderRaw>
         <ToastProvider>
-          {/* Your app content */}
+          {/* 你的应用内容 */}
           <PortalHost />
         </ToastProvider>
       </HeroUINativeProviderRaw>
@@ -324,33 +362,34 @@ export default function App() {
 }
 ```
 
-### Raw 的层级
+### Provider 层级
 
 ```
 HeroUINativeProviderRaw
-├── SafeAreaListener (handles safe area insets updates)
-│   └── GlobalAnimationSettingsProvider (animation configuration)
-│       └── TextComponentProvider (text configuration)
-│           └── Your App
+├── SafeAreaListener（处理安全区域内边距更新）
+│   └── GlobalAnimationSettingsProvider（动画配置）
+│       └── TextComponentProvider（文本配置）
+│           └── TextInputComponentProvider（文本输入配置）
+│               └── 你的应用
 ```
 
 ## 最佳实践
 
 ### 1. 单一 Provider 实例
 
-始终在应用根使用**一个** `HeroUINativeProvider`，不要嵌套多个：
+始终在应用根部使用单个 `HeroUINativeProvider`。不要嵌套多个 provider：
 
 ```tsx
-// ❌ Bad
+// ❌ 不推荐
 <HeroUINativeProvider>
   <SomeComponent>
-    <HeroUINativeProvider> {/* Don't do this */}
+    <HeroUINativeProvider> {/* 不要这样做 */}
       <AnotherComponent />
     </HeroUINativeProvider>
   </SomeComponent>
 </HeroUINativeProvider>
 
-// ✅ Good
+// ✅ 推荐
 <HeroUINativeProvider>
   <SomeComponent>
     <AnotherComponent />
@@ -358,18 +397,18 @@ HeroUINativeProviderRaw
 </HeroUINativeProvider>
 ```
 
-### 2. 配置对象外置
+### 2. 配置对象
 
-将 `config` 定义在组件外，避免每次渲染重新创建：
+在组件外部定义你的配置，以避免每次渲染时重新创建：
 
 ```tsx
-// ❌ Bad
+// ❌ 不推荐
 function App() {
   return (
     <HeroUINativeProvider
       config={{
         textProps: {
-          /* inline config */
+          /* 内联配置 */
         },
       }}
     >
@@ -378,7 +417,7 @@ function App() {
   );
 }
 
-// ✅ Good
+// ✅ 推荐
 const config: HeroUINativeConfig = {
   textProps: {
     maxFontSizeMultiplier: 1.5,
@@ -392,16 +431,16 @@ function App() {
 }
 ```
 
-### 3. 文本与无障碍
+### 3. 文本配置
 
-配置文本属性时请兼顾无障碍，例如允许系统字体缩放但限制上限：
+配置文本 props 时请考虑无障碍：
 
 ```tsx
 const config: HeroUINativeConfig = {
   textProps: {
-    // Allow font scaling for accessibility
+    // 为无障碍允许字体缩放
     allowFontScaling: true,
-    // But limit maximum scale
+    // 但限制最大缩放比例
     maxFontSizeMultiplier: 1.5,
   },
 };
@@ -409,24 +448,28 @@ const config: HeroUINativeConfig = {
 
 ## TypeScript 支持
 
-Provider 具备完整类型，可导入类型以获得更好的 IDE 体验：
+该 provider 具有完整的类型定义。导入类型以获得更好的 IDE 支持：
 
 ```tsx
 import { HeroUINativeProvider, type HeroUINativeConfig } from 'heroui-native';
 
 const config: HeroUINativeConfig = {
-  // Full type safety and autocomplete
+  // 完整的类型安全和自动补全
   textProps: {
     allowFontScaling: true,
     maxFontSizeMultiplier: 1.5,
   },
-  animation: 'disable-all', // Optional: disable all animations
-  devInfo: {
-    stylingPrinciples: true, // Optional: disable styling principles message
+  textInputProps: {
+    allowFontScaling: true,
+    maxFontSizeMultiplier: 1.5,
   },
-  // Toast configuration options:
-  // - false or 'disabled': Disable toast provider
-  // - ToastProviderProps object: Configure toast settings
+  animation: 'disable-all', // 可选：禁用所有动画
+  devInfo: {
+    stylingPrinciples: true, // 可选：禁用样式原则提示信息
+  },
+  // Toast 配置选项：
+  // - false 或 'disabled'：禁用 toast provider
+  // - ToastProviderProps 对象：配置 toast 设置
   toast: {
     defaultProps: {
       variant: 'default',
@@ -442,8 +485,8 @@ const config: HeroUINativeConfig = {
 };
 ```
 
-## 相关链接
+## 相关
 
-- [快速开始](/docs/native/getting-started/quick-start) — 基础搭建指南
-- [主题](/docs/native/getting-started/theming) — 颜色与主题定制
-- [样式](/docs/native/getting-started/styling) — 使用 Tailwind 编写样式
+- [快速开始](/docs/native/getting-started/quick-start) - 基础设置指南
+- [主题](/docs/native/getting-started/theming) - 自定义颜色和主题
+- [样式](/docs/native/getting-started/styling) - 使用 Tailwind 为组件设置样式

@@ -396,7 +396,7 @@ HeroUI 定义三类变量：
   --color-field-placeholder: var(--field-placeholder, var(--muted));
   --color-field-border: var(--field-border, var(--border));
   --radius-field: var(--field-radius, var(--radius-xl));
-  --border-width-field: var(--field-border-width, var(--border-width));
+  --border-width-field-width: var(--field-border-width, var(--border-width));
 
   --shadow-surface: var(--surface-shadow);
   --shadow-overlay: var(--overlay-shadow);
@@ -462,6 +462,8 @@ HeroUI 定义三类变量：
 }
 `}
 />
+
+> **表单字段边框工具类：** 使用 `border-field-width` 设置字段边框宽度，使用 `border-field-border` 设置字段边框颜色。当两者都需要时，将它们搭配使用（`border-field-width border-field-border`）。`border-field` class 仍然只是一个来自 `--color-field` 的边框颜色工具类；请勿用它来设置宽度。如果你之前使用 `border-field` 来设置宽度，请迁移到 `border-field-width`。通过 `--field-border-width` 原语（primitive）自定义宽度。
 
 表单控件依赖 `--field-*` 变量及其计算出的 hover/focus 变体。在主题中调整它们即可重塑输入框、复选框、单选与 OTP 等，而不会影响按钮、卡片等 Surface 组件的观感。
 
