@@ -58,7 +58,7 @@ const content: Record<HomeLocale, HomeContent> = {
       roadmap: "路线图",
       themes: "主题",
     },
-    releaseBadge: "HeroUI Native v1.0.5 — patch release",
+    releaseBadge: "HeroUI Native v1.0.5 — 补丁版本",
     title: (
       <>
         开箱即美。<span className="text-muted/70">设计上随心可定。</span>
