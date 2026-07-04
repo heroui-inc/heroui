@@ -52,9 +52,14 @@ github:
 - **Autocomplete**：修正虚拟化列表项的右内边距，使列表项不再溢出到弹出层边缘 ([#6672](https://github.com/heroui-inc/heroui/pull/6672))。
 - **Toast**：在 toast 队列中捕获 ViewTransition 的 `ready` 拒绝，使被取代的过渡不再产生未处理的 Promise 拒绝 ([#6674](https://github.com/heroui-inc/heroui/pull/6674))。
 
+## 重构
+
+- **React 19 API**：使用 `use()` hook 替代 `useContext`，并将 `ref` 作为普通 prop 传递；将数组索引 key 替换为稳定 key ([#6688](https://github.com/heroui-inc/heroui/pull/6688))。
+
 ## 依赖
 
 - **React Aria**：升级到 `react-aria-components@1.19.0` 和 `react-aria@3.50.0` ([#6658](https://github.com/heroui-inc/heroui/pull/6658))。
+- **React Aria**：将 `react-aria`（`^3.50.0`）和 `react-aria-components`（`^1.19.0`）声明为 caret 范围，以便与 HeroUI Pro 去重 ([#6689](https://github.com/heroui-inc/heroui/pull/6689))。
 
 ## 链接
 

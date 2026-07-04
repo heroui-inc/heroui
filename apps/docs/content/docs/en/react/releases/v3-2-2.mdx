@@ -52,9 +52,14 @@ Update to the latest version:
 - **Autocomplete**: Correct the right padding of virtualized list items so rows no longer overflow into the popover edge ([#6672](https://github.com/heroui-inc/heroui/pull/6672)).
 - **Toast**: Catch the ViewTransition `ready` rejection in the toast queue so superseded transitions no longer surface as unhandled promise rejections ([#6674](https://github.com/heroui-inc/heroui/pull/6674)).
 
+## Refactor
+
+- **React 19 APIs**: Replace `useContext` with the `use()` hook and pass `ref` as a normal prop; swap array-index keys for stable keys ([#6688](https://github.com/heroui-inc/heroui/pull/6688)).
+
 ## Dependencies
 
 - **React Aria**: Upgrade to `react-aria-components@1.19.0` and `react-aria@3.50.0` ([#6658](https://github.com/heroui-inc/heroui/pull/6658)).
+- **React Aria**: Declare `react-aria` (`^3.50.0`) and `react-aria-components` (`^1.19.0`) as caret ranges so they dedupe with HeroUI Pro ([#6689](https://github.com/heroui-inc/heroui/pull/6689)).
 
 ## Links
 
