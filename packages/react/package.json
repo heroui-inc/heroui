@@ -64,8 +64,8 @@
     "@react-types/color": "3.2.0",
     "@react-stately/utils": "3.12.1",
     "input-otp": "1.4.2",
-    "react-aria": "3.50.0",
-    "react-aria-components": "1.19.0",
+    "react-aria": "^3.50.0",
+    "react-aria-components": "^1.19.0",
     "tailwind-merge": "3.4.0",
     "tailwind-variants": "3.2.2"
   },
