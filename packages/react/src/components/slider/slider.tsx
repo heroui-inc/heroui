@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {SliderRenderProps} from "react-aria-components/Slider";
 
 import {sliderVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   SliderOutput as SliderOutputPrimitive,
   Slider as SliderPrimitive,
@@ -71,7 +71,7 @@ const SliderRoot = ({
 interface SliderOutputProps extends ComponentPropsWithRef<typeof SliderOutputPrimitive> {}
 
 const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
-  const {slots} = useContext(SliderContext);
+  const {slots} = use(SliderContext);
 
   return (
     <SliderOutputPrimitive
@@ -92,7 +92,7 @@ const SliderOutput = ({children, className, ...props}: SliderOutputProps) => {
 interface SliderTrackProps extends ComponentPropsWithRef<typeof SliderTrackPrimitive> {}
 
 const SliderTrack = ({children, className, ...props}: SliderTrackProps) => {
-  const {slots, state} = useContext(SliderContext);
+  const {slots, state} = use(SliderContext);
 
   const {getThumbPercent, values} = state?.state || {};
 
@@ -140,7 +140,7 @@ const SliderFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
   style,
   ...props
 }: SliderFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderFillProps<E>>) => {
-  const {slots, state} = useContext(SliderContext);
+  const {slots, state} = use(SliderContext);
 
   const {getThumbPercent, orientation, values} = state?.state || {};
 
@@ -179,7 +179,7 @@ const SliderFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
 interface SliderThumbProps extends ComponentPropsWithRef<typeof SliderThumbPrimitive> {}
 
 const SliderThumb = ({children, className, ...props}: SliderThumbProps) => {
-  const {slots} = useContext(SliderContext);
+  const {slots} = use(SliderContext);
 
   return (
     <SliderThumbPrimitive
@@ -205,7 +205,7 @@ const SliderMarks = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: SliderMarksProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SliderMarksProps<E>>) => {
-  const {slots} = useContext(SliderContext);
+  const {slots} = use(SliderContext);
 
   return (
     <dom.div

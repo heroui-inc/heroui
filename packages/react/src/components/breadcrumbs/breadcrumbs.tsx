@@ -5,7 +5,7 @@ import type {BreadcrumbsVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {breadcrumbsVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   Breadcrumb as BreadcrumbPrimitive,
   Breadcrumbs as BreadcrumbsPrimitive,
@@ -59,7 +59,7 @@ const BreadcrumbsItem = ({
   className,
   ...props
 }: BreadcrumbsItemProps & Omit<LinkProps, "className">) => {
-  const {separator, slots} = useContext(BreadcrumbsContext);
+  const {separator, slots} = use(BreadcrumbsContext);
 
   const renderSeparator = () => {
     if (!separator)

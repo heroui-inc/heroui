@@ -7,7 +7,7 @@ import type {ButtonProps as ButtonPrimitiveProps} from "react-aria-components/Bu
 import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Dialog";
 
 import {alertDialogVariants} from "@heroui/styles";
-import {createContext, useContext, useMemo} from "react";
+import {createContext, use, useMemo} from "react";
 import {
   DialogTrigger as AlertDialogTriggerPrimitive,
   Dialog as DialogPrimitive,
@@ -64,7 +64,7 @@ const AlertDialogRoot = ({children, ...props}: AlertDialogRootProps) => {
 interface AlertDialogTriggerProps extends HTMLAttributes<HTMLDivElement> {}
 
 const AlertDialogTrigger = ({children, className, ...props}: AlertDialogTriggerProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots} = use(AlertDialogContext);
 
   return (
     <PressablePrimitive>
@@ -108,7 +108,7 @@ const AlertDialogBackdrop = ({
   variant,
   ...props
 }: AlertDialogBackdropProps) => {
-  const {slots: contextSlots} = useContext(AlertDialogContext);
+  const {slots: contextSlots} = use(AlertDialogContext);
 
   const updatedSlots = useMemo(() => alertDialogVariants({variant}), [variant]);
 
@@ -160,7 +160,7 @@ const AlertDialogContainer = ({
   size,
   ...props
 }: AlertDialogContainerProps) => {
-  const {slots: contextSlots} = useContext(AlertDialogContext);
+  const {slots: contextSlots} = use(AlertDialogContext);
 
   const updatedSlots = useMemo(() => alertDialogVariants({size}), [size]);
 
@@ -191,7 +191,7 @@ const AlertDialogContainer = ({
 interface AlertDialogDialogProps extends DialogPrimitiveProps {}
 
 const AlertDialogDialog = ({children, className, ...props}: AlertDialogDialogProps) => {
-  const {placement, slots} = useContext(AlertDialogContext);
+  const {placement, slots} = use(AlertDialogContext);
 
   return (
     <DialogPrimitive
@@ -212,7 +212,7 @@ const AlertDialogDialog = ({children, className, ...props}: AlertDialogDialogPro
 interface AlertDialogHeaderProps extends HTMLAttributes<HTMLDivElement> {}
 
 const AlertDialogHeader = ({children, className, ...props}: AlertDialogHeaderProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots} = use(AlertDialogContext);
 
   return (
     <div
@@ -231,7 +231,7 @@ const AlertDialogHeader = ({children, className, ...props}: AlertDialogHeaderPro
 interface AlertDialogHeadingProps extends ComponentPropsWithRef<typeof HeadingPrimitive> {}
 
 const AlertDialogHeading = ({children, className, ...props}: AlertDialogHeadingProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots} = use(AlertDialogContext);
 
   return (
     <HeadingPrimitive
@@ -251,7 +251,7 @@ const AlertDialogHeading = ({children, className, ...props}: AlertDialogHeadingP
 interface AlertDialogBodyProps extends HTMLAttributes<HTMLDivElement> {}
 
 const AlertDialogBody = ({children, className, ...props}: AlertDialogBodyProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots} = use(AlertDialogContext);
 
   return (
     <div
@@ -270,7 +270,7 @@ const AlertDialogBody = ({children, className, ...props}: AlertDialogBodyProps) 
 interface AlertDialogFooterProps extends HTMLAttributes<HTMLDivElement> {}
 
 const AlertDialogFooter = ({children, className, ...props}: AlertDialogFooterProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots} = use(AlertDialogContext);
 
   return (
     <div
@@ -337,7 +337,7 @@ const AlertDialogIcon = <E extends keyof React.JSX.IntrinsicElements = "div">({
 interface AlertDialogCloseTriggerProps extends ButtonPrimitiveProps {}
 
 const AlertDialogCloseTrigger = ({className, ...rest}: AlertDialogCloseTriggerProps) => {
-  const {slots} = useContext(AlertDialogContext);
+  const {slots} = use(AlertDialogContext);
 
   return (
     <CloseButton

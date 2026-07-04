@@ -6,7 +6,7 @@ import type {AlertVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
 
 import {alertVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -73,7 +73,7 @@ const AlertIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...rest
 }: AlertIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertIndicatorProps<E>>) => {
-  const {slots, status} = useContext(AlertContext);
+  const {slots, status} = use(AlertContext);
 
   // Map status to default icons
   const getDefaultIcon = () => {
@@ -117,7 +117,7 @@ const AlertContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...rest
 }: AlertContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertContentProps<E>>) => {
-  const {slots} = useContext(AlertContext);
+  const {slots} = use(AlertContext);
 
   return (
     <dom.div
@@ -146,7 +146,7 @@ const AlertTitle = <E extends keyof React.JSX.IntrinsicElements = "p">({
   className,
   ...rest
 }: AlertTitleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AlertTitleProps<E>>) => {
-  const {slots} = useContext(AlertContext);
+  const {slots} = use(AlertContext);
 
   return (
     <dom.p
@@ -175,7 +175,7 @@ const AlertDescription = <E extends keyof React.JSX.IntrinsicElements = "span">(
   ...rest
 }: AlertDescriptionProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof AlertDescriptionProps<E>>) => {
-  const {slots} = useContext(AlertContext);
+  const {slots} = use(AlertContext);
 
   return (
     <dom.span

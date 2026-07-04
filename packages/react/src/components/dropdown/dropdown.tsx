@@ -5,7 +5,7 @@ import type {DropdownVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {dropdownVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   Menu as MenuPrimitive,
@@ -52,7 +52,7 @@ const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
 interface DropdownTriggerProps extends ComponentPropsWithRef<typeof Button> {}
 
 const DropdownTrigger = ({children, className, ...props}: DropdownTriggerProps) => {
-  const {slots} = useContext(DropdownContext);
+  const {slots} = use(DropdownContext);
 
   return (
     <Button
@@ -74,7 +74,7 @@ interface DropdownPopoverProps
 }
 
 const DropdownPopover = ({children, className, placement, ...props}: DropdownPopoverProps) => {
-  const {slots} = useContext(DropdownContext);
+  const {slots} = use(DropdownContext);
 
   return (
     <SurfaceContext
@@ -103,7 +103,7 @@ interface DropdownMenuProps<T extends object>
 }
 
 function DropdownMenu<T extends object>({className, ...props}: DropdownMenuProps<T>) {
-  const {slots} = useContext(DropdownContext);
+  const {slots} = use(DropdownContext);
 
   return (
     <MenuPrimitive

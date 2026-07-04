@@ -4,7 +4,7 @@ import type {ToggleButtonVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {toggleButtonVariants} from "@heroui/styles";
-import {useContext} from "react";
+import {use} from "react";
 import {ToggleButton as ToggleButtonPrimitive} from "react-aria-components/ToggleButton";
 
 import {composeTwRenderProps} from "../../utils";
@@ -25,7 +25,7 @@ const ToggleButtonRoot = ({
   variant,
   ...rest
 }: ToggleButtonRootProps) => {
-  const groupContext = useContext(ToggleButtonGroupContext);
+  const groupContext = use(ToggleButtonGroupContext);
 
   // Merge props with precedence: direct props > context props
   const finalSize = size ?? groupContext?.size;

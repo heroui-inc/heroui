@@ -4,7 +4,7 @@ import type {DOMRenderProps} from "../../utils/dom";
 import type {ReactNode} from "react";
 
 import {fieldsetVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   ButtonContext,
   CheckboxGroupContext,
@@ -109,7 +109,7 @@ const FieldsetLegend = <E extends keyof React.JSX.IntrinsicElements = "legend">(
   className,
   ...props
 }: FieldsetLegendProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldsetLegendProps<E>>) => {
-  const {slots} = useContext(FieldsetContext);
+  const {slots} = use(FieldsetContext);
 
   return (
     <dom.legend
@@ -134,7 +134,7 @@ const FieldGroup = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...rest
 }: FieldGroupProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof FieldGroupProps<E>>) => {
-  const {slots} = useContext(FieldsetContext);
+  const {slots} = use(FieldsetContext);
 
   return (
     <dom.div
@@ -161,7 +161,7 @@ const FieldsetActions = <E extends keyof React.JSX.IntrinsicElements = "div">({
   ...rest
 }: FieldsetActionsProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof FieldsetActionsProps<E>>) => {
-  const {slots} = useContext(FieldsetContext);
+  const {slots} = use(FieldsetContext);
 
   return (
     <dom.div

@@ -7,7 +7,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components/Button";
 
 import {disclosureVariants} from "@heroui/styles";
-import React, {createContext, useContext, useRef} from "react";
+import React, {createContext, use, useRef} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   DisclosurePanel,
@@ -60,7 +60,7 @@ interface DisclosureHeadingProps extends ComponentPropsWithRef<typeof Disclosure
 }
 
 const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
-  const {slots} = useContext(DisclosureContext);
+  const {slots} = use(DisclosureContext);
 
   return (
     <DisclosureHeadingPrimitive
@@ -77,7 +77,7 @@ const DisclosureHeading = ({className, ...props}: DisclosureHeadingProps) => {
 interface DisclosureTriggerProps extends ButtonProps {}
 
 const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
-  const {slots} = useContext(DisclosureContext);
+  const {slots} = use(DisclosureContext);
 
   return (
     <Button
@@ -99,9 +99,9 @@ const DisclosureTrigger = ({className, ...props}: DisclosureTriggerProps) => {
 interface DisclosureContentProps extends ComponentPropsWithRef<typeof DisclosurePanel> {}
 
 const DisclosureContent = ({children, className, ...props}: DisclosureContentProps) => {
-  const {slots} = useContext(DisclosureContext);
+  const {slots} = use(DisclosureContext);
   const contentRef = useRef<HTMLDivElement>(null);
-  const {isExpanded} = useContext(DisclosureStateContext)!;
+  const {isExpanded} = use(DisclosureStateContext)!;
 
   return (
     <DisclosurePanel
@@ -132,7 +132,7 @@ const DisclosureBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
   ...props
 }: DisclosureBodyContentProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof DisclosureBodyContentProps<E>>) => {
-  const {slots} = useContext(DisclosureContext);
+  const {slots} = use(DisclosureContext);
 
   return (
     <dom.div className={slots?.body({})} data-slot="disclosure-body" {...(props as any)}>
@@ -157,8 +157,8 @@ const DisclosureIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg"
   ...props
 }: DisclosureIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof DisclosureIndicatorProps<E>>) => {
-  const {isExpanded} = useContext(DisclosureStateContext)!;
-  const {slots} = useContext(DisclosureContext);
+  const {isExpanded} = use(DisclosureStateContext)!;
+  const {slots} = use(DisclosureContext);
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(

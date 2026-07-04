@@ -5,7 +5,7 @@ import type {BadgeVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
 
 import {badgeVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {cx} from "tailwind-variants";
 
 import {composeSlotClassName} from "../../utils/compose";
@@ -114,7 +114,7 @@ const BadgeLabel = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: BadgeLabelProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof BadgeLabelProps<E>>) => {
-  const {slots} = useContext(BadgeContext);
+  const {slots} = use(BadgeContext);
 
   return (
     <dom.span

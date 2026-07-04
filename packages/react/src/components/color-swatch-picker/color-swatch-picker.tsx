@@ -6,7 +6,7 @@ import type {CSSProperties, ComponentPropsWithRef} from "react";
 import type {ColorSwatchPickerItemRenderProps} from "react-aria-components/ColorSwatchPicker";
 
 import {colorSwatchPickerVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   ColorSwatchPickerItem as ColorSwatchPickerItemPrimitive,
   ColorSwatchPicker as ColorSwatchPickerPrimitive,
@@ -74,7 +74,7 @@ interface ColorSwatchPickerItemProps extends ComponentPropsWithRef<
 > {}
 
 const ColorSwatchPickerItem = ({children, className, ...props}: ColorSwatchPickerItemProps) => {
-  const {slots} = useContext(ColorSwatchPickerContext);
+  const {slots} = use(ColorSwatchPickerContext);
 
   return (
     <ColorSwatchPickerItemPrimitive
@@ -102,7 +102,7 @@ const ColorSwatchPickerItem = ({children, className, ...props}: ColorSwatchPicke
 interface ColorSwatchPickerSwatchProps extends ComponentPropsWithRef<typeof ColorSwatchPrimitive> {}
 
 const ColorSwatchPickerSwatch = ({className, ...props}: ColorSwatchPickerSwatchProps) => {
-  const {slots} = useContext(ColorSwatchPickerContext);
+  const {slots} = use(ColorSwatchPickerContext);
 
   return (
     <ColorSwatchPrimitive
@@ -144,8 +144,8 @@ const ColorSwatchPickerIndicator = <E extends keyof React.JSX.IntrinsicElements 
   ...props
 }: ColorSwatchPickerIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ColorSwatchPickerIndicatorProps<E>>) => {
-  const {slots} = useContext(ColorSwatchPickerContext);
-  const {state} = useContext(ColorSwatchPickerItemContext);
+  const {slots} = use(ColorSwatchPickerContext);
+  const {state} = use(ColorSwatchPickerItemContext);
 
   // Determine if the background color is light (luminance > 0.5)
   // Use white checkmark on dark backgrounds, black on light backgrounds

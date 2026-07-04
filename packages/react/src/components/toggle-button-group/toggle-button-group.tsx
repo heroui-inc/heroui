@@ -5,7 +5,7 @@ import type {ToggleButtonGroupVariants, ToggleButtonVariants} from "@heroui/styl
 import type {ComponentPropsWithRef} from "react";
 
 import {toggleButtonGroupVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {useSlottedContext} from "react-aria-components/slots";
 import {
   ToggleButtonGroupContext as RACToggleButtonGroupContext,
@@ -87,7 +87,7 @@ const ToggleButtonGroupSeparator = <E extends keyof React.JSX.IntrinsicElements 
   ...props
 }: ToggleButtonGroupSeparatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ToggleButtonGroupSeparatorProps<E>>) => {
-  const {slots} = useContext(ToggleButtonGroupContext);
+  const {slots} = use(ToggleButtonGroupContext);
 
   return (
     <dom.span

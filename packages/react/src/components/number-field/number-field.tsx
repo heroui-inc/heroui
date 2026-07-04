@@ -4,7 +4,7 @@ import type {NumberFieldVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {numberFieldVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Input as InputPrimitive} from "react-aria-components/Input";
@@ -59,7 +59,7 @@ const NumberFieldRoot = ({
 interface NumberFieldGroupProps extends ComponentPropsWithRef<typeof GroupPrimitive> {}
 
 const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps) => {
-  const {slots} = useContext(NumberFieldContext);
+  const {slots} = use(NumberFieldContext);
 
   return (
     <GroupPrimitive
@@ -78,7 +78,7 @@ const NumberFieldGroup = ({children, className, ...props}: NumberFieldGroupProps
 interface NumberFieldInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
 const NumberFieldInput = ({className, ...props}: NumberFieldInputProps) => {
-  const {slots} = useContext(NumberFieldContext);
+  const {slots} = use(NumberFieldContext);
 
   return (
     <InputPrimitive
@@ -99,7 +99,7 @@ const NumberFieldIncrementButton = ({
   className,
   ...props
 }: NumberFieldIncrementButtonProps) => {
-  const {slots} = useContext(NumberFieldContext);
+  const {slots} = use(NumberFieldContext);
 
   return (
     <ButtonPrimitive
@@ -127,7 +127,7 @@ const NumberFieldDecrementButton = ({
   className,
   ...props
 }: NumberFieldDecrementButtonProps) => {
-  const {slots} = useContext(NumberFieldContext);
+  const {slots} = use(NumberFieldContext);
 
   return (
     <ButtonPrimitive

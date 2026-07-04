@@ -4,7 +4,7 @@ import type {TagVariants} from "../tag";
 import type {ComponentPropsWithRef} from "react";
 
 import {tagGroupVariants} from "@heroui/styles";
-import React, {createContext, useContext, useMemo} from "react";
+import React, {createContext, use, useMemo} from "react";
 import {
   TagGroup as TagGroupPrimitive,
   TagList as TagListPrimitive,
@@ -59,7 +59,7 @@ const TagGroupList = <T extends object>({
   className,
   ...restProps
 }: TagGroupListProps<T>) => {
-  const {slots} = useContext(TagGroupContext);
+  const {slots} = use(TagGroupContext);
 
   return (
     <TagListPrimitive

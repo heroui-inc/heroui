@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tooltipVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
-import React, {createContext, useContext, useRef} from "react";
+import React, {createContext, use, useRef} from "react";
 import {useFocusable} from "react-aria/useFocusable";
 import {
   OverlayArrow,
@@ -77,7 +77,7 @@ const TooltipContent = ({
   showArrow = false,
   ...props
 }: TooltipContentProps) => {
-  const {slots} = useContext(TooltipContext);
+  const {slots} = use(TooltipContext);
   const offset = offsetProp ? offsetProp : showArrow ? 7 : 3;
 
   return (
@@ -146,7 +146,7 @@ const TooltipTrigger = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: TooltipTriggerProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TooltipTriggerProps<E>>) => {
-  const {slots} = useContext(TooltipContext);
+  const {slots} = use(TooltipContext);
   const triggerRef = useRef<HTMLElement | null>(null);
   // Use the `useFocusable` hook directly rather than the `<Focusable>` wrapper component.
   // Both consume the FocusableContext provided by TooltipTriggerPrimitive's internal

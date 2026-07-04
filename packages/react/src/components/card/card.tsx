@@ -6,7 +6,7 @@ import type {CardVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
 
 import {cardVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -80,7 +80,7 @@ const CardHeader = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: CardHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardHeaderProps<E>>) => {
-  const {slots} = useContext(CardContext);
+  const {slots} = use(CardContext);
 
   return (
     <dom.div
@@ -107,7 +107,7 @@ const CardTitle = <E extends keyof React.JSX.IntrinsicElements = "h3">({
   className,
   ...props
 }: CardTitleProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardTitleProps<E>>) => {
-  const {slots} = useContext(CardContext);
+  const {slots} = use(CardContext);
 
   return (
     <dom.h3
@@ -136,7 +136,7 @@ const CardDescription = <E extends keyof React.JSX.IntrinsicElements = "p">({
   ...props
 }: CardDescriptionProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof CardDescriptionProps<E>>) => {
-  const {slots} = useContext(CardContext);
+  const {slots} = use(CardContext);
 
   return (
     <dom.p
@@ -163,7 +163,7 @@ const CardContent = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: CardContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardContentProps<E>>) => {
-  const {slots} = useContext(CardContext);
+  const {slots} = use(CardContext);
 
   return (
     <dom.div
@@ -188,7 +188,7 @@ const CardFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: CardFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CardFooterProps<E>>) => {
-  const {slots} = useContext(CardContext);
+  const {slots} = use(CardContext);
 
   return (
     <dom.div

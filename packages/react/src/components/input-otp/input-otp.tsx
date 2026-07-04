@@ -6,7 +6,7 @@ import type {ValidationResult} from "react-aria-components/CheckboxGroup";
 
 import {inputOTPVariants} from "@heroui/styles";
 import {OTPInput, OTPInputContext} from "input-otp";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {FieldErrorContext} from "react-aria-components/FieldError";
 
 import {dataAttr} from "../../utils/assertion";
@@ -88,7 +88,7 @@ const InputOTPRoot = ({
 interface InputOTPGroupProps extends ComponentPropsWithRef<"div"> {}
 
 const InputOTPGroup = ({className, ...props}: InputOTPGroupProps) => {
-  const {slots} = useContext(InputOTPContext);
+  const {slots} = use(InputOTPContext);
 
   return (
     <div
@@ -107,9 +107,9 @@ interface InputOTPSlotProps extends ComponentPropsWithRef<"div"> {
 }
 
 const InputOTPSlot = ({className, index, ...props}: InputOTPSlotProps) => {
-  const {isDisabled, isInvalid, slots} = useContext(InputOTPContext);
+  const {isDisabled, isInvalid, slots} = use(InputOTPContext);
 
-  const inputOTPContext = useContext(OTPInputContext);
+  const inputOTPContext = use(OTPInputContext);
   const {char, hasFakeCaret, isActive} = inputOTPContext?.slots[index] ?? {};
 
   return (
@@ -142,7 +142,7 @@ interface InputOTPSeparatorProps extends ComponentPropsWithRef<"div"> {
 }
 
 const InputOTPSeparator = ({className, ...props}: InputOTPSeparatorProps) => {
-  const {slots} = useContext(InputOTPContext);
+  const {slots} = use(InputOTPContext);
 
   return (
     <div

@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {MeterRenderProps} from "react-aria-components/Meter";
 
 import {meterVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Meter as MeterPrimitive} from "react-aria-components/Meter";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
@@ -62,7 +62,7 @@ const MeterOutput = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: MeterOutputProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterOutputProps<E>>) => {
-  const {slots, state} = useContext(MeterContext);
+  const {slots, state} = use(MeterContext);
 
   return (
     <dom.span
@@ -92,7 +92,7 @@ const MeterTrack = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: MeterTrackProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterTrackProps<E>>) => {
-  const {slots} = useContext(MeterContext);
+  const {slots} = use(MeterContext);
 
   return (
     <dom.div
@@ -123,7 +123,7 @@ const MeterFill = <E extends keyof React.JSX.IntrinsicElements = "div">({
   style,
   ...props
 }: MeterFillProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof MeterFillProps<E>>) => {
-  const {slots, state} = useContext(MeterContext);
+  const {slots, state} = use(MeterContext);
 
   return (
     <dom.div

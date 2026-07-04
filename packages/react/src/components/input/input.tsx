@@ -4,7 +4,7 @@ import type {InputVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {inputVariants} from "@heroui/styles";
-import React, {useContext} from "react";
+import React, {use} from "react";
 import {Input as InputPrimitive} from "react-aria-components/Input";
 
 import {composeTwRenderProps} from "../../utils";
@@ -17,8 +17,8 @@ import {TextFieldContext} from "../textfield";
 interface InputRootProps extends ComponentPropsWithRef<typeof InputPrimitive>, InputVariants {}
 
 const InputRoot = ({className, fullWidth, variant: variantProp, ...rest}: InputRootProps) => {
-  const textFieldContext = useContext(TextFieldContext);
-  const comboBoxContext = useContext(ComboBoxContext);
+  const textFieldContext = use(TextFieldContext);
+  const comboBoxContext = use(ComboBoxContext);
 
   // Use variant from context if not explicitly provided
   const variant = variantProp ?? textFieldContext.variant ?? comboBoxContext.variant;

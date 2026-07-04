@@ -6,7 +6,7 @@ import type {AccordionVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {accordionVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button} from "react-aria-components/Button";
 import {
   Disclosure,
@@ -72,7 +72,7 @@ const AccordionRoot = ({
 interface AccordionItemProps extends ComponentPropsWithRef<typeof Disclosure> {}
 
 const AccordionItem = ({className, ...props}: AccordionItemProps) => {
-  const {hideSeparator, slots} = useContext(AccordionContext);
+  const {hideSeparator, slots} = use(AccordionContext);
 
   return (
     <Disclosure
@@ -102,8 +102,8 @@ const AccordionIndicator = <E extends keyof React.JSX.IntrinsicElements = "svg">
   ...props
 }: AccordionIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof AccordionIndicatorProps<E>>) => {
-  const {slots} = useContext(AccordionContext);
-  const {isExpanded} = useContext(DisclosureStateContext)!;
+  const {slots} = use(AccordionContext);
+  const {isExpanded} = use(DisclosureStateContext)!;
 
   if (children && React.isValidElement(children)) {
     return React.cloneElement(
@@ -139,7 +139,7 @@ interface AccordionHeadingProps extends ComponentPropsWithRef<typeof DisclosureH
 }
 
 const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
-  const {slots} = useContext(AccordionContext);
+  const {slots} = use(AccordionContext);
 
   return (
     <DisclosureHeading
@@ -156,7 +156,7 @@ const AccordionHeading = ({className, ...props}: AccordionHeadingProps) => {
 interface AccordionTriggerProps extends ComponentPropsWithRef<typeof Button> {}
 
 const AccordionTrigger = ({className, ...props}: AccordionTriggerProps) => {
-  const {slots} = useContext(AccordionContext);
+  const {slots} = use(AccordionContext);
 
   return (
     <Button
@@ -187,7 +187,7 @@ const AccordionBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: AccordionBodyProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof AccordionBodyProps<E>>) => {
-  const {slots} = useContext(AccordionContext);
+  const {slots} = use(AccordionContext);
 
   return (
     <dom.div className={slots?.body({})} data-slot="accordion-body" {...(props as any)}>
@@ -202,8 +202,8 @@ const AccordionBody = <E extends keyof React.JSX.IntrinsicElements = "div">({
 interface AccordionPanelProps extends ComponentPropsWithRef<typeof DisclosurePanel> {}
 
 const AccordionPanel = ({children, className, ...props}: AccordionPanelProps) => {
-  const {slots} = useContext(AccordionContext);
-  const {isExpanded} = useContext(DisclosureStateContext)!;
+  const {slots} = use(AccordionContext);
+  const {isExpanded} = use(DisclosureStateContext)!;
 
   return (
     <DisclosurePanel

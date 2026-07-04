@@ -6,7 +6,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ProgressBarRenderProps} from "react-aria-components/ProgressBar";
 
 import {progressCircleVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {ProgressBar as ProgressBarPrimitive} from "react-aria-components/ProgressBar";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
@@ -78,7 +78,7 @@ const ProgressCircleTrack = <E extends keyof React.JSX.IntrinsicElements = "svg"
   ...props
 }: ProgressCircleTrackProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackProps<E>>) => {
-  const {slots} = useContext(ProgressCircleContext);
+  const {slots} = use(ProgressCircleContext);
 
   return (
     <dom.svg
@@ -110,7 +110,7 @@ const ProgressCircleTrackCircle = <E extends keyof React.JSX.IntrinsicElements =
   ...props
 }: ProgressCircleTrackCircleProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleTrackCircleProps<E>>) => {
-  const {slots} = useContext(ProgressCircleContext);
+  const {slots} = use(ProgressCircleContext);
 
   return (
     <dom.circle
@@ -142,7 +142,7 @@ const ProgressCircleFillCircle = <E extends keyof React.JSX.IntrinsicElements = 
   ...props
 }: ProgressCircleFillCircleProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof ProgressCircleFillCircleProps<E>>) => {
-  const {slots, state} = useContext(ProgressCircleContext);
+  const {slots, state} = use(ProgressCircleContext);
   const percentage = state?.percentage ?? 0;
   const isIndeterminate = state?.isIndeterminate ?? false;
   const strokeDashoffset = CIRCUMFERENCE - (percentage / 100) * CIRCUMFERENCE;

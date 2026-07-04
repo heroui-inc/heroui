@@ -6,7 +6,7 @@ import type {KbdVariants} from "@heroui/styles";
 import type {ReactNode} from "react";
 
 import {kbdVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 
 import {composeSlotClassName} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -69,7 +69,7 @@ const KbdAbbr = <E extends keyof React.JSX.IntrinsicElements = "abbr">({
   keyValue,
   ...props
 }: KbdAbbrProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdAbbrProps<E>>) => {
-  const {slots} = useContext(KbdContext);
+  const {slots} = use(KbdContext);
 
   return (
     <dom.abbr
@@ -97,7 +97,7 @@ const KbdContent = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: KbdContentProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof KbdContentProps<E>>) => {
-  const {slots} = useContext(KbdContext);
+  const {slots} = use(KbdContext);
 
   return (
     <dom.span className={composeSlotClassName(slots?.content, className)} {...(props as any)}>

@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef} from "react";
 import type {ColorSliderRenderProps, ColorSpace} from "react-aria-components/ColorSlider";
 
 import {colorSliderVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   ColorSlider as ColorSliderPrimitive,
   ColorThumb as ColorThumbPrimitive,
@@ -152,7 +152,7 @@ const ColorSliderRoot = ({
 interface ColorSliderOutputProps extends ComponentPropsWithRef<typeof SliderOutputPrimitive> {}
 
 const ColorSliderOutput = ({children, className, ...props}: ColorSliderOutputProps) => {
-  const {slots} = useContext(ColorSliderContext);
+  const {slots} = use(ColorSliderContext);
 
   return (
     <SliderOutputPrimitive
@@ -173,7 +173,7 @@ const ColorSliderOutput = ({children, className, ...props}: ColorSliderOutputPro
 interface ColorSliderTrackProps extends ComponentPropsWithRef<typeof SliderTrackPrimitive> {}
 
 const ColorSliderTrack = ({children, className, style, ...props}: ColorSliderTrackProps) => {
-  const {channel, slots, state} = useContext(ColorSliderContext);
+  const {channel, slots, state} = use(ColorSliderContext);
   // Calculate start and end colors for the gradient edge caps
   const displayColor = state?.state?.getDisplayColor();
 
@@ -228,7 +228,7 @@ const ColorSliderTrack = ({children, className, style, ...props}: ColorSliderTra
 interface ColorSliderThumbProps extends ComponentPropsWithRef<typeof ColorThumbPrimitive> {}
 
 const ColorSliderThumb = ({children, className, style, ...props}: ColorSliderThumbProps) => {
-  const {slots} = useContext(ColorSliderContext);
+  const {slots} = use(ColorSliderContext);
 
   return (
     <ColorThumbPrimitive

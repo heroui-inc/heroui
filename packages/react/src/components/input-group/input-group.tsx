@@ -4,7 +4,7 @@ import type {InputGroupVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {inputGroupVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Input as InputPrimitive} from "react-aria-components/Input";
 import {TextArea as TextAreaPrimitive} from "react-aria-components/TextArea";
@@ -35,7 +35,7 @@ const InputGroupRoot = ({
   variant,
   ...props
 }: InputGroupRootProps) => {
-  const textFieldContext = useContext(TextFieldContext);
+  const textFieldContext = use(TextFieldContext);
   const resolvedVariant = variant ?? textFieldContext?.variant;
   const groupRef = React.useRef<HTMLDivElement>(null);
 
@@ -76,7 +76,7 @@ const InputGroupRoot = ({
 interface InputGroupInputProps extends ComponentPropsWithRef<typeof InputPrimitive> {}
 
 const InputGroupInput = ({className, ...props}: InputGroupInputProps) => {
-  const {slots} = useContext(InputGroupContext);
+  const {slots} = use(InputGroupContext);
 
   return (
     <InputPrimitive
@@ -93,7 +93,7 @@ const InputGroupInput = ({className, ...props}: InputGroupInputProps) => {
 interface InputGroupPrefixProps extends ComponentPropsWithRef<"div"> {}
 
 const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps) => {
-  const {slots} = useContext(InputGroupContext);
+  const {slots} = use(InputGroupContext);
 
   return (
     <div
@@ -112,7 +112,7 @@ const InputGroupPrefix = ({children, className, ...props}: InputGroupPrefixProps
 interface InputGroupTextAreaProps extends ComponentPropsWithRef<typeof TextAreaPrimitive> {}
 
 const InputGroupTextArea = ({className, ...props}: InputGroupTextAreaProps) => {
-  const {slots} = useContext(InputGroupContext);
+  const {slots} = use(InputGroupContext);
 
   return (
     <TextAreaPrimitive
@@ -129,7 +129,7 @@ const InputGroupTextArea = ({className, ...props}: InputGroupTextAreaProps) => {
 interface InputGroupSuffixProps extends ComponentPropsWithRef<"div"> {}
 
 const InputGroupSuffix = ({children, className, ...props}: InputGroupSuffixProps) => {
-  const {slots} = useContext(InputGroupContext);
+  const {slots} = use(InputGroupContext);
 
   return (
     <div

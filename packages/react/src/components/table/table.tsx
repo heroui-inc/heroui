@@ -5,7 +5,7 @@ import type {TableVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tableVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   Cell as CellPrimitive,
   Collection as CollectionPrimitive,
@@ -77,7 +77,7 @@ const TableScrollContainer = <E extends keyof React.JSX.IntrinsicElements = "div
   ...props
 }: TableScrollContainerProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof TableScrollContainerProps<E>>) => {
-  const {slots} = useContext(TableContext);
+  const {slots} = use(TableContext);
 
   return (
     <dom.div
@@ -101,7 +101,7 @@ interface TableContentProps extends Omit<
 }
 
 function TableContent({className, ...props}: TableContentProps) {
-  const {slots} = useContext(TableContext);
+  const {slots} = use(TableContext);
 
   return (
     <TablePrimitive
@@ -122,7 +122,7 @@ interface TableHeaderProps<T extends object> extends ComponentPropsWithRef<
 > {}
 
 function TableHeader<T extends object>({className, ...props}: TableHeaderProps<T>) {
-  const {slots} = useContext(TableContext);
+  const {slots} = use(TableContext);
 
   return (
     <TableHeaderPrimitive
@@ -140,20 +140,18 @@ function TableHeader<T extends object>({className, ...props}: TableHeaderProps<T
  * -----------------------------------------------------------------------------------------------*/
 interface TableColumnProps extends ComponentPropsWithRef<typeof ColumnPrimitive> {}
 
-const TableColumn = React.forwardRef<HTMLTableCellElement, TableColumnProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableColumn = ({className, ref, ...props}: TableColumnProps) => {
+  const {slots} = use(TableContext);
 
-    return (
-      <ColumnPrimitive
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.column())}
-        data-slot="table-column"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <ColumnPrimitive
+      ref={ref}
+      className={composeTwRenderProps(className, slots?.column())}
+      data-slot="table-column"
+      {...props}
+    />
+  );
+};
 
 TableColumn.displayName = "HeroUI.Table.Column";
 
@@ -165,7 +163,7 @@ interface TableBodyProps<T extends object> extends ComponentPropsWithRef<
 > {}
 
 function TableBody<T extends object>({className, ...props}: TableBodyProps<T>) {
-  const {slots} = useContext(TableContext);
+  const {slots} = use(TableContext);
 
   return (
     <TableBodyPrimitive
@@ -184,7 +182,7 @@ function TableBody<T extends object>({className, ...props}: TableBodyProps<T>) {
 interface TableRowProps<T extends object> extends ComponentPropsWithRef<typeof RowPrimitive<T>> {}
 
 function TableRow<T extends object>({className, ...props}: TableRowProps<T>) {
-  const {slots} = useContext(TableContext);
+  const {slots} = use(TableContext);
 
   return (
     <RowPrimitive
@@ -202,20 +200,18 @@ function TableRow<T extends object>({className, ...props}: TableRowProps<T>) {
  * -----------------------------------------------------------------------------------------------*/
 interface TableCellProps extends ComponentPropsWithRef<typeof CellPrimitive> {}
 
-const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableCell = ({className, ref, ...props}: TableCellProps) => {
+  const {slots} = use(TableContext);
 
-    return (
-      <CellPrimitive
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.cell())}
-        data-slot="table-cell"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <CellPrimitive
+      ref={ref}
+      className={composeTwRenderProps(className, slots?.cell())}
+      data-slot="table-cell"
+      {...props}
+    />
+  );
+};
 
 TableCell.displayName = "HeroUI.Table.Cell";
 
@@ -233,7 +229,7 @@ const TableFooter = <E extends keyof React.JSX.IntrinsicElements = "div">({
   className,
   ...props
 }: TableFooterProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof TableFooterProps<E>>) => {
-  const {slots} = useContext(TableContext);
+  const {slots} = use(TableContext);
 
   return (
     <dom.div
@@ -253,18 +249,16 @@ interface TableResizableContainerProps extends ComponentPropsWithRef<
   typeof ResizableTableContainerPrimitive
 > {}
 
-const TableResizableContainer = React.forwardRef<HTMLDivElement, TableResizableContainerProps>(
-  ({className, ...props}, ref) => {
-    return (
-      <ResizableTableContainerPrimitive
-        ref={ref}
-        className={cx("table__resizable-container", className)}
-        data-slot="table-resizable-container"
-        {...props}
-      />
-    );
-  },
-);
+const TableResizableContainer = ({className, ref, ...props}: TableResizableContainerProps) => {
+  return (
+    <ResizableTableContainerPrimitive
+      ref={ref}
+      className={cx("table__resizable-container", className)}
+      data-slot="table-resizable-container"
+      {...props}
+    />
+  );
+};
 
 TableResizableContainer.displayName = "HeroUI.Table.ResizableContainer";
 
@@ -273,20 +267,18 @@ TableResizableContainer.displayName = "HeroUI.Table.ResizableContainer";
  * -----------------------------------------------------------------------------------------------*/
 interface TableColumnResizerProps extends ComponentPropsWithRef<typeof ColumnResizerPrimitive> {}
 
-const TableColumnResizer = React.forwardRef<HTMLDivElement, TableColumnResizerProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableColumnResizer = ({className, ref, ...props}: TableColumnResizerProps) => {
+  const {slots} = use(TableContext);
 
-    return (
-      <ColumnResizerPrimitive
-        ref={ref}
-        className={composeTwRenderProps(className, slots?.columnResizer())}
-        data-slot="table-column-resizer"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <ColumnResizerPrimitive
+      ref={ref}
+      className={composeTwRenderProps(className, slots?.columnResizer())}
+      data-slot="table-column-resizer"
+      {...props}
+    />
+  );
+};
 
 TableColumnResizer.displayName = "HeroUI.Table.ColumnResizer";
 
@@ -295,20 +287,18 @@ TableColumnResizer.displayName = "HeroUI.Table.ColumnResizer";
  * -----------------------------------------------------------------------------------------------*/
 interface TableLoadMoreItemProps extends ComponentPropsWithRef<typeof TableLoadMoreItemPrimitive> {}
 
-const TableLoadMoreItem = React.forwardRef<HTMLTableRowElement, TableLoadMoreItemProps>(
-  ({className, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableLoadMoreItem = ({className, ref, ...props}: TableLoadMoreItemProps) => {
+  const {slots} = use(TableContext);
 
-    return (
-      <TableLoadMoreItemPrimitive
-        ref={ref}
-        className={composeSlotClassName(slots?.loadMore, className)}
-        data-slot="table-load-more"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <TableLoadMoreItemPrimitive
+      ref={ref}
+      className={composeSlotClassName(slots?.loadMore, className)}
+      data-slot="table-load-more"
+      {...props}
+    />
+  );
+};
 
 TableLoadMoreItem.displayName = "HeroUI.Table.LoadMore";
 
@@ -327,7 +317,7 @@ const TableLoadMoreContent = <E extends keyof React.JSX.IntrinsicElements = "div
   ...props
 }: TableLoadMoreContentProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof TableLoadMoreContentProps<E>>) => {
-  const {slots} = useContext(TableContext);
+  const {slots} = use(TableContext);
 
   return (
     <dom.div
@@ -346,7 +336,7 @@ TableLoadMoreContent.displayName = "HeroUI.Table.LoadMoreContent";
 type TableSortDirection = "ascending" | "descending";
 
 interface TableSortableColumnHeaderProps extends Omit<
-  React.ComponentPropsWithoutRef<"span">,
+  React.ComponentPropsWithRef<"span">,
   "children"
 > {
   /** Label content of the column header. */
@@ -369,54 +359,60 @@ interface TableSortableColumnHeaderProps extends Omit<
   indicator?: ReactNode;
 }
 
-const TableSortableColumnHeader = React.forwardRef<HTMLSpanElement, TableSortableColumnHeaderProps>(
-  ({children, className, indicator, showIndicator = true, sortDirection, ...props}, ref) => {
-    const {slots} = useContext(TableContext);
+const TableSortableColumnHeader = ({
+  children,
+  className,
+  indicator,
+  ref,
+  showIndicator = true,
+  sortDirection,
+  ...props
+}: TableSortableColumnHeaderProps) => {
+  const {slots} = use(TableContext);
 
-    const shouldRenderIndicator = showIndicator && !!sortDirection;
+  const shouldRenderIndicator = showIndicator && !!sortDirection;
 
-    let indicatorElement: ReactNode = null;
+  let indicatorElement: ReactNode = null;
 
-    if (shouldRenderIndicator) {
-      if (indicator === undefined) {
-        indicatorElement = (
-          <IconChevronUp
-            className={slots?.sortableColumnIndicator()}
-            data-direction={sortDirection}
-            data-slot="table-sortable-column-indicator"
-          />
-        );
-      } else if (React.isValidElement(indicator)) {
-        const element = indicator as React.ReactElement<{
-          className?: string;
-          "data-direction"?: TableSortDirection;
-          "data-slot"?: "table-sortable-column-indicator";
-        }>;
+  if (shouldRenderIndicator) {
+    if (indicator === undefined) {
+      indicatorElement = (
+        <IconChevronUp
+          className={slots?.sortableColumnIndicator()}
+          data-direction={sortDirection}
+          data-slot="table-sortable-column-indicator"
+        />
+      );
+    } else if (React.isValidElement(indicator)) {
+      const element = indicator as React.ReactElement<{
+        className?: string;
+        "data-direction"?: TableSortDirection;
+        "data-slot"?: "table-sortable-column-indicator";
+      }>;
 
-        indicatorElement = React.cloneElement(element, {
-          className: composeSlotClassName(slots?.sortableColumnIndicator, element.props.className),
-          "data-direction": sortDirection,
-          "data-slot": "table-sortable-column-indicator",
-        });
-      } else {
-        indicatorElement = indicator;
-      }
+      indicatorElement = React.cloneElement(element, {
+        className: composeSlotClassName(slots?.sortableColumnIndicator, element.props.className),
+        "data-direction": sortDirection,
+        "data-slot": "table-sortable-column-indicator",
+      });
+    } else {
+      indicatorElement = indicator;
     }
+  }
 
-    return (
-      <span
-        ref={ref}
-        className={composeSlotClassName(slots?.sortableColumnHeader, className)}
-        data-direction={sortDirection}
-        data-slot="table-sortable-column-header"
-        {...props}
-      >
-        {children}
-        {indicatorElement}
-      </span>
-    );
-  },
-);
+  return (
+    <span
+      ref={ref}
+      className={composeSlotClassName(slots?.sortableColumnHeader, className)}
+      data-direction={sortDirection}
+      data-slot="table-sortable-column-header"
+      {...props}
+    >
+      {children}
+      {indicatorElement}
+    </span>
+  );
+};
 
 TableSortableColumnHeader.displayName = "HeroUI.Table.SortableColumnHeader";
 

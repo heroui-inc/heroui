@@ -13,7 +13,7 @@ import type {
 import {calendarVariants} from "@heroui/styles";
 import {CalendarDate, DateFormatter, createCalendar} from "@internationalized/date";
 import {useControlledState} from "@react-stately/utils";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
   CalendarCell as CalendarCellPrimitive,
@@ -169,7 +169,7 @@ const CalendarHeader = <E extends keyof React.JSX.IntrinsicElements = "header">(
   className,
   ...props
 }: CalendarHeaderProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof CalendarHeaderProps<E>>) => {
-  const {slots} = useContext(CalendarContext);
+  const {slots} = use(CalendarContext);
 
   return (
     <dom.header
@@ -190,7 +190,7 @@ CalendarHeader.displayName = "HeroUI.Calendar.Header";
 interface CalendarHeadingProps extends ComponentPropsWithRef<typeof CalendarHeadingPrimitive> {}
 
 const CalendarHeading = ({className, ...props}: CalendarHeadingProps) => {
-  const {slots} = useContext(CalendarContext);
+  const {slots} = use(CalendarContext);
 
   return (
     <CalendarHeadingPrimitive
@@ -211,7 +211,7 @@ interface CalendarNavButtonProps extends ComponentPropsWithRef<typeof ButtonPrim
 }
 
 const CalendarNavButton = ({children, className, slot, ...props}: CalendarNavButtonProps) => {
-  const {slots} = useContext(CalendarContext);
+  const {slots} = use(CalendarContext);
 
   return (
     <ButtonPrimitive
@@ -249,7 +249,7 @@ const CalendarGrid = ({
   weekdayStyle = "short",
   ...props
 }: CalendarGridProps) => {
-  const calendarContext = useContext(CalendarContext);
+  const calendarContext = use(CalendarContext);
   const {dayView, slots} = calendarContext;
   const contextValue = React.useMemo(
     () => ({
@@ -283,7 +283,7 @@ interface CalendarGridHeaderProps extends ComponentPropsWithRef<
 > {}
 
 const CalendarGridHeader = ({children, className, ...props}: CalendarGridHeaderProps) => {
-  const {dayView, slots} = useContext(CalendarContext);
+  const {dayView, slots} = use(CalendarContext);
 
   if (dayView && dayView.days >= 7 && typeof children === "function") {
     return (
@@ -319,7 +319,7 @@ CalendarGridHeader.displayName = "HeroUI.Calendar.GridHeader";
 interface CalendarGridBodyProps extends ComponentPropsWithRef<typeof CalendarGridBodyPrimitive> {}
 
 const CalendarGridBody = ({children, className, ...props}: CalendarGridBodyProps) => {
-  const {dayView, slots} = useContext(CalendarContext);
+  const {dayView, slots} = use(CalendarContext);
 
   if (dayView && dayView.days >= 7 && typeof children === "function") {
     return (
@@ -355,7 +355,7 @@ interface CalendarHeaderCellProps extends ComponentPropsWithRef<
 > {}
 
 const CalendarHeaderCell = ({className, ...props}: CalendarHeaderCellProps) => {
-  const {slots} = useContext(CalendarContext);
+  const {slots} = use(CalendarContext);
 
   return (
     <CalendarHeaderCellPrimitive
@@ -374,7 +374,7 @@ CalendarHeaderCell.displayName = "HeroUI.Calendar.HeaderCell";
 interface CalendarCellProps extends ComponentPropsWithRef<typeof CalendarCellPrimitive> {}
 
 const CalendarCell = ({children, className, ...props}: CalendarCellProps) => {
-  const {slots} = useContext(CalendarContext);
+  const {slots} = use(CalendarContext);
 
   return (
     <CalendarCellPrimitive
@@ -408,7 +408,7 @@ const CalendarCellIndicator = <E extends keyof React.JSX.IntrinsicElements = "sp
   ...props
 }: CalendarCellIndicatorProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof CalendarCellIndicatorProps<E>>) => {
-  const {slots} = useContext(CalendarContext);
+  const {slots} = use(CalendarContext);
 
   return (
     <dom.span

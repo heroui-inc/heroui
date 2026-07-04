@@ -5,7 +5,7 @@ import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {RadioButtonRenderProps, RadioFieldRenderProps} from "react-aria-components/RadioGroup";
 
 import {radioVariants} from "@heroui/styles";
-import React, {createContext, useContext} from "react";
+import React, {createContext, use} from "react";
 import {
   RadioButton as RadioButtonPrimitive,
   RadioField as RadioFieldPrimitive,
@@ -56,7 +56,7 @@ RadioRoot.displayName = "HeroUI.Radio";
 interface RadioContentProps extends ComponentPropsWithRef<typeof RadioButtonPrimitive> {}
 
 const RadioContent = ({children, className, ...props}: RadioContentProps) => {
-  const {slots} = useContext(RadioContext);
+  const {slots} = use(RadioContext);
 
   return (
     <RadioButtonPrimitive
@@ -85,7 +85,7 @@ const RadioControl = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: RadioControlProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof RadioControlProps<E>>) => {
-  const {slots} = useContext(RadioContext);
+  const {slots} = use(RadioContext);
 
   return (
     <dom.span
@@ -114,7 +114,7 @@ const RadioIndicator = <E extends keyof React.JSX.IntrinsicElements = "span">({
   className,
   ...props
 }: RadioIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof RadioIndicatorProps<E>>) => {
-  const {slots, state} = useContext(RadioContext);
+  const {slots, state} = use(RadioContext);
 
   const content =
     typeof children === "function" ? children(state ?? ({} as RadioFieldRenderProps)) : children;
