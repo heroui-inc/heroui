@@ -230,14 +230,10 @@ const AutocompletePopover = ({
 
   useResizeObserver({ref: triggerRef, onResize});
 
-  // `Select` (react-aria-components) computes an `aria-labelledby` for its popover content
-  // and provides it through `PopoverContext`, which `PopoverPrimitive` below consumes
-  // automatically. The nested `DialogPrimitive` we render for touch focus containment is a
-  // separate accessible element that `Select` doesn't know about, so it does not inherit that
-  // label automatically. Forward it explicitly so the dialog is labeled by the same field label
-  // as the trigger. `PopoverContext` is unavailable while collection-building performs its
-  // context-free render pass, so fall back to a static label to guarantee the dialog always has
-  // an accessible name, even then.
+  // The nested DialogPrimitive below makes react-aria-components' Popover drop role="dialog" on
+  // its own node (isDialog = shouldBeDialog && !ref.current.querySelector('[role=dialog]')), so
+  // PopoverContext's aria-labelledby lands on a roleless container. DialogPrimitive reads
+  // DialogContext, not PopoverContext, so this forwards the label explicitly (see #6691).
   const popoverContext = useContext(PopoverContext);
   const contextAriaLabelledby =
     popoverContext && typeof popoverContext === "object" && "aria-labelledby" in popoverContext
@@ -245,6 +241,8 @@ const AutocompletePopover = ({
       : undefined;
 
   const dialogAriaLabelledby = props["aria-labelledby"] ?? contextAriaLabelledby;
+  // PopoverContext is unavailable during the context-free collection-building render pass, so
+  // fall back to a static label to keep the dialog's accessible name in that case too.
   const dialogAriaLabel = props["aria-label"] ?? (dialogAriaLabelledby ? undefined : "Options");
 
   return (
