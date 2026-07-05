@@ -11,21 +11,19 @@ export function CustomStyles() {
 
   return (
     <TagGroup
-      className="w-full max-w-xs gap-2"
+      className="w-full max-w-xs gap-1.5"
       selectedKeys={selected}
       selectionMode="multiple"
       onSelectionChange={setSelected}
     >
-      <Label className="text-sm font-medium tracking-tight text-foreground">Topics</Label>
-      <TagGroup.List className="gap-1.5">
+      <Label>Topics</Label>
+      <TagGroup.List>
         <Tag id="api">API</Tag>
         <Tag id="design">Design</Tag>
         <Tag id="docs">Docs</Tag>
       </TagGroup.List>
-      <Description className="text-xs tracking-wide text-muted">
-        Pick at least one topic
-      </Description>
-      <ErrorMessage className="text-xs font-medium tracking-wide">
+      <Description>Pick at least one topic</Description>
+      <ErrorMessage className="font-medium text-danger">
         {!!isInvalid && <>Choose at least one topic</>}
       </ErrorMessage>
     </TagGroup>

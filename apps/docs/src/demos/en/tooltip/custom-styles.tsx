@@ -3,9 +3,9 @@ import {Button, Tooltip} from "@heroui/react";
 export function CustomStyles() {
   return (
     <Tooltip delay={0}>
-      <Button variant="secondary">Hover me</Button>
-      <Tooltip.Content className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-        <p>Cmd K to search</p>
+      <Button variant="secondary">Share link</Button>
+      <Tooltip.Content className="rounded-lg border border-border/80 bg-surface px-2.5 py-1 text-xs text-foreground shadow-sm">
+        <p>Copied to clipboard</p>
       </Tooltip.Content>
     </Tooltip>
   );

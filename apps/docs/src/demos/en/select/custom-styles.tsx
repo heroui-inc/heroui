@@ -1,31 +1,24 @@
 import {Label, ListBox, Select} from "@heroui/react";
 
 const itemClass =
-  "rounded-lg data-[focused=true]:bg-muted/70 data-[selected=true]:font-medium data-[selected=true]:text-foreground";
-
-const triggerClass =
-  "rounded-xl border border-border bg-surface shadow-sm ring-1 ring-black/5 transition-[box-shadow,border-color] focus-within:ring-2 focus-within:ring-foreground/15 dark:ring-white/10";
+  "rounded-lg data-[focused=true]:bg-accent/10 data-[selected=true]:text-foreground";
 
 export function CustomStyles() {
   return (
-    <Select className="w-64 gap-1.5" placeholder="Select one">
-      <Label className="font-medium text-foreground">State</Label>
-      <Select.Trigger className={triggerClass}>
+    <Select className="w-56" placeholder="Pick a plan" variant="secondary">
+      <Label className="font-medium text-foreground">Plan</Label>
+      <Select.Trigger className="rounded-xl bg-default">
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>
-      <Select.Popover className="rounded-xl border border-border bg-surface p-1 shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+      <Select.Popover className="rounded-xl border border-border bg-surface p-1 shadow-lg">
         <ListBox>
-          <ListBox.Item className={itemClass} id="florida" textValue="Florida">
-            Florida
+          <ListBox.Item className={itemClass} id="free" textValue="Free">
+            Free
             <ListBox.ItemIndicator />
           </ListBox.Item>
-          <ListBox.Item className={itemClass} id="delaware" textValue="Delaware">
-            Delaware
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
-          <ListBox.Item className={itemClass} id="california" textValue="California">
-            California
+          <ListBox.Item className={itemClass} id="pro" textValue="Pro">
+            Pro
             <ListBox.ItemIndicator />
           </ListBox.Item>
         </ListBox>

@@ -3,11 +3,11 @@ import {Surface} from "@heroui/react";
 export function CustomStyles() {
   return (
     <Surface
-      className="flex min-w-[280px] flex-col gap-2 rounded-xl border border-border bg-surface p-5 shadow-sm ring-1 ring-black/5 dark:ring-white/10"
+      className="w-full max-w-sm rounded-xl border border-accent/15 bg-linear-to-br from-accent/8 via-surface to-surface-secondary p-4"
       variant="default"
     >
-      <h3 className="text-sm font-semibold text-foreground">Workspace</h3>
-      <p className="text-sm leading-relaxed text-muted">Shared files and settings for your team.</p>
+      <h3 className="text-sm font-semibold text-foreground">Billing overview</h3>
+      <p className="text-sm text-muted">View invoices and payment methods in one place.</p>
     </Surface>
   );
 }

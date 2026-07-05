@@ -1,16 +1,16 @@
 "use client";
 
-import {Label, TimeField} from "@heroui/react";
-
-const fieldGroup =
-  "rounded-xl border border-border bg-surface shadow-sm ring-1 ring-black/5 transition-[box-shadow,border-color] focus-within:ring-2 focus-within:ring-foreground/15 dark:ring-white/10";
+import {Description, Label, TimeField} from "@heroui/react";
 
 export function CustomStyles() {
   return (
-    <TimeField className="w-full max-w-56 gap-1.5" name="time">
-      <Label className="font-medium text-foreground">Start time</Label>
-      <TimeField.Group className={fieldGroup}>
-        <TimeField.Input>{(segment) => <TimeField.Segment segment={segment} />}</TimeField.Input>
+    <TimeField className="w-full max-w-48 gap-1.5" name="reminder">
+      <Label className="font-medium text-foreground">Reminder time</Label>
+      <Description>Daily check-in notification.</Description>
+      <TimeField.Group className="rounded-xl border border-border/80 bg-surface px-2 py-1 shadow-sm ring-1 ring-accent/5 focus-within:border-accent/25 focus-within:ring-2 focus-within:ring-accent/15">
+        <TimeField.Input>
+          {(segment) => <TimeField.Segment className="text-foreground" segment={segment} />}
+        </TimeField.Input>
       </TimeField.Group>
     </TimeField>
   );
