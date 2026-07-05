@@ -13,7 +13,7 @@ import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autoc
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Dialog as DialogPrimitive} from "react-aria-components/Dialog";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
-import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
+import {PopoverContext, Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
   Select as SelectPrimitive,
   SelectStateContext,
@@ -230,6 +230,23 @@ const AutocompletePopover = ({
 
   useResizeObserver({ref: triggerRef, onResize});
 
+  // `Select` (react-aria-components) computes an `aria-labelledby` for its popover content
+  // and provides it through `PopoverContext`, which `PopoverPrimitive` below consumes
+  // automatically. The nested `DialogPrimitive` we render for touch focus containment is a
+  // separate accessible element that `Select` doesn't know about, so it does not inherit that
+  // label automatically. Forward it explicitly so the dialog is labeled by the same field label
+  // as the trigger. `PopoverContext` is unavailable while collection-building performs its
+  // context-free render pass, so fall back to a static label to guarantee the dialog always has
+  // an accessible name, even then.
+  const popoverContext = useContext(PopoverContext);
+  const contextAriaLabelledby =
+    popoverContext && typeof popoverContext === "object" && "aria-labelledby" in popoverContext
+      ? popoverContext["aria-labelledby"]
+      : undefined;
+
+  const dialogAriaLabelledby = props["aria-labelledby"] ?? contextAriaLabelledby;
+  const dialogAriaLabel = props["aria-label"] ?? (dialogAriaLabelledby ? undefined : "Options");
+
   return (
     <SurfaceContext
       value={{
@@ -249,7 +266,12 @@ const AutocompletePopover = ({
           } as React.CSSProperties
         }
       >
-        <DialogPrimitive className={slots?.popoverDialog()} data-slot="autocomplete-popover-dialog">
+        <DialogPrimitive
+          aria-label={dialogAriaLabel}
+          aria-labelledby={dialogAriaLabelledby}
+          className={slots?.popoverDialog()}
+          data-slot="autocomplete-popover-dialog"
+        >
           {children}
         </DialogPrimitive>
       </PopoverPrimitive>
