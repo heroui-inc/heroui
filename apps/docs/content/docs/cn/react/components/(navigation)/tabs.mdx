@@ -1,6 +1,7 @@
 ---
 title: Tabs 标签页
 description: Tabs 将内容组织为多个区块，并允许用户在它们之间导航。
+icon: new
 links:
   rac: Tabs
   source: tabs/tabs.tsx
@@ -49,6 +50,15 @@ export default () => (
 <ComponentPreview
   isBgSolid
   name="tabs-vertical"
+/>
+
+### 溢出
+
+当标签列表超出可用空间时，`Tabs.ListContainer` 会自动渲染滚动箭头与渐隐边缘，使用户可以导航到被隐藏的标签。水平与垂直方向均支持此行为。
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-overflow"
 />
 
 ### 禁用 Tab
@@ -147,6 +157,9 @@ Tabs 使用以下 CSS 类：
 #### 基础类
 - `.tabs` — Tabs 根容器
 - `.tabs__list-container` — 标签列表容器外层包裹
+- `.tabs__list-container__scroller` — 标签列表的可滚动容器（处理溢出与渐隐边缘）
+- `.tabs__list-container__scroll-prev` — 向前（左 / 上）滚动的箭头按钮
+- `.tabs__list-container__scroll-next` — 向后（右 / 下）滚动的箭头按钮
 - `.tabs__list` — 标签列表容器
 - `.tabs__tab` — 单个标签按钮
 - `.tabs__separator` — 标签之间的分隔线

@@ -1649,6 +1649,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./tabs/vertical").then((m) => m.Vertical),
     file: "cn/tabs/vertical.tsx",
   },
+  "tabs-overflow": {
+    component: TabsDemos.Overflow,
+    file: "cn/tabs/overflow.tsx",
+  },
   "tabs-disabled": {
     loader: () => import("./tabs/disabled").then((m) => m.Disabled),
     file: "cn/tabs/disabled.tsx",

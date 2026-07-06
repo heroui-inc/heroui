@@ -1,6 +1,7 @@
 ---
 title: Tabs
 description: Tabs organize content into multiple sections and allow users to navigate between them.
+icon: new
 links:
   rac: Tabs
   source: tabs/tabs.tsx
@@ -49,6 +50,15 @@ export default () => (
 <ComponentPreview
   isBgSolid
   name="tabs-vertical"
+/>
+
+### Overflow
+
+When the tab list exceeds the available space, `Tabs.ListContainer` automatically renders scroll chevrons and fading edges so users can navigate the hidden tabs. This works the same way for both horizontal and vertical orientations.
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-overflow"
 />
 
 ### Disabled Tab
@@ -147,6 +157,9 @@ The Tabs component uses these CSS classes:
 #### Base Classes
 - `.tabs` - Base tabs container
 - `.tabs__list-container` - Tab list container wrapper
+- `.tabs__list-container__scroller` - Scrollable wrapper around the tab list (handles overflow and fading edges)
+- `.tabs__list-container__scroll-prev` - Scroll chevron button for the previous (left / up) direction
+- `.tabs__list-container__scroll-next` - Scroll chevron button for the next (right / down) direction
 - `.tabs__list` - Tab list container
 - `.tabs__tab` - Individual tab button
 - `.tabs__separator` - Separator between tabs
