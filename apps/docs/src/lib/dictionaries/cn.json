@@ -2,8 +2,9 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.2 — RAC v1.19.0",
-        "href": "/docs/react/releases/v3-2-2"
+        "label": "HeroUI React v3.2.2 — 补丁版本",
+        "href": "/docs/react/releases/v3-2-2",
+        "date": "2026-07-06"
       },
       {
         "label": "HeroUI Native v1.0.5 — 补丁版本",
