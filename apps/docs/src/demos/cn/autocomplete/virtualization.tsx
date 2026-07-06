@@ -115,7 +115,13 @@ export function Virtualization() {
       </Autocomplete.Trigger>
       <Autocomplete.Popover>
         <Autocomplete.Filter inputValue={searchQuery} onInputChange={setSearchQuery}>
-          <SearchField autoFocus className="sticky top-0 z-10" name="search" variant="secondary">
+          <SearchField
+            autoFocus
+            aria-label="搜索"
+            className="sticky top-0 z-10"
+            name="search"
+            variant="secondary"
+          >
             <SearchField.Group>
               <SearchField.SearchIcon />
               <SearchField.Input placeholder="搜索用户…" />

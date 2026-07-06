@@ -44,7 +44,7 @@ export function FullWidth() {
         </Autocomplete.Trigger>
         <Autocomplete.Popover>
           <Autocomplete.Filter filter={contains}>
-            <SearchField autoFocus name="search" variant="secondary">
+            <SearchField autoFocus aria-label="Search" name="search" variant="secondary">
               <SearchField.Group>
                 <SearchField.SearchIcon />
                 <SearchField.Input placeholder="Search states..." />

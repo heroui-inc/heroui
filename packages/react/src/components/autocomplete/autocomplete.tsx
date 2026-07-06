@@ -19,6 +19,7 @@ import {
   SelectStateContext,
   SelectValue as SelectValuePrimitive,
 } from "react-aria-components/Select";
+import {useSlottedContext} from "react-aria-components/slots";
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
@@ -234,11 +235,10 @@ const AutocompletePopover = ({
   // its own node (isDialog = shouldBeDialog && !ref.current.querySelector('[role=dialog]')), so
   // PopoverContext's aria-labelledby lands on a roleless container. DialogPrimitive reads
   // DialogContext, not PopoverContext, so this forwards the label explicitly (see #6691).
-  const popoverContext = useContext(PopoverContext);
-  const contextAriaLabelledby =
-    popoverContext && typeof popoverContext === "object" && "aria-labelledby" in popoverContext
-      ? popoverContext["aria-labelledby"]
-      : undefined;
+  // useSlottedContext resolves PopoverContext the same way react-aria's own Popover does (via
+  // useContextProps), so a slotted provider still yields the labelledby Select computes.
+  const popoverContext = useSlottedContext(PopoverContext);
+  const contextAriaLabelledby = popoverContext?.["aria-labelledby"];
 
   const dialogAriaLabelledby = props["aria-labelledby"] ?? contextAriaLabelledby;
   // PopoverContext is unavailable during the context-free collection-building render pass, so
