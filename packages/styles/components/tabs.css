@@ -14,18 +14,94 @@
 
 /* Tab list container */
 .tabs__list-container {
-  @apply relative;
+  @apply relative bg-default;
+
+  border-radius: calc(var(--radius) * 2.5);
+
+  /* Vertical scroller fills the container height so overflow detection
+     engages when the wrapper height is constrained (e.g. h-[240px]) */
+  > .tabs__list-container__scroller[data-orientation="vertical"] {
+    @apply h-full;
+  }
+
+  /* Overflow chevron buttons */
+  > .tabs__list-container__scroll-prev,
+  > .tabs__list-container__scroll-next {
+    @apply absolute z-2 hidden size-4 cursor-(--cursor-interactive) items-center justify-center rounded-full border-0 bg-transparent p-0 text-foreground outline-none;
+
+    /**
+    * Transitions
+    * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+    */
+    transition: opacity 150ms var(--ease-smooth);
+    @apply motion-reduce:transition-none;
+
+    @media (hover: hover) {
+      &:hover {
+        @apply opacity-70;
+      }
+    }
+
+    &:focus-visible {
+      @apply status-focused;
+    }
+  }
+
+  /* Chevron position - horizontal orientation */
+  &:has([data-orientation="horizontal"]) {
+    > .tabs__list-container__scroll-prev {
+      @apply top-1/2 left-1 -translate-y-1/2;
+    }
+
+    > .tabs__list-container__scroll-next {
+      @apply top-1/2 right-1 -translate-y-1/2;
+    }
+  }
+
+  /* Chevron position - vertical orientation */
+  &:has([data-orientation="vertical"]) {
+    > .tabs__list-container__scroll-prev {
+      @apply top-1 left-1/2 -translate-x-1/2;
+    }
+
+    > .tabs__list-container__scroll-next {
+      @apply bottom-1 left-1/2 -translate-x-1/2;
+    }
+  }
+
+  /* Show chevrons only when ScrollShadow reports scrolling is possible */
+  &:has(
+      > :is(
+        [data-left-scroll="true"],
+        [data-left-right-scroll="true"],
+        [data-top-scroll="true"],
+        [data-top-bottom-scroll="true"]
+      )
+    )
+    > .tabs__list-container__scroll-prev {
+    @apply inline-flex;
+  }
+
+  &:has(
+      > :is(
+        [data-right-scroll="true"],
+        [data-left-right-scroll="true"],
+        [data-bottom-scroll="true"],
+        [data-top-bottom-scroll="true"]
+      )
+    )
+    > .tabs__list-container__scroll-next {
+    @apply inline-flex;
+  }
 }
 
 /* Tab list */
 .tabs__list {
-  @apply inline-flex bg-default p-1;
+  @apply inline-flex p-1;
 
-  border-radius: calc(var(--radius) * 2.5);
-
-  /* Horizontal orientation */
+  /* Horizontal orientation - grow with content so ScrollShadow can detect overflow */
   &[data-orientation="horizontal"] {
-    @apply w-full flex-row;
+    @apply w-max min-w-full flex-row;
   }
 
   /* Vertical orientation */
@@ -40,11 +116,10 @@
 
 /* Individual tab */
 .tabs__tab {
-  position: relative;
+  @apply relative flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium text-muted outline-none no-highlight;
+
   z-index: 1;
   cursor: var(--cursor-interactive);
-
-  @apply flex h-8 w-full items-center justify-center rounded-3xl px-4 text-center text-sm font-medium text-muted outline-none no-highlight;
 
   /**
    * Transitions
@@ -60,16 +135,12 @@
   /* Selected state */
   &[data-selected="true"] {
     @apply text-segment-foreground;
-  }
 
-  /* Hide separator when this tab is selected */
-  &[data-selected="true"] .tabs__separator {
-    opacity: 0;
-  }
-
-  /* Hide separator when previous sibling is selected */
-  &[data-selected="true"] + .tabs__tab .tabs__separator {
-    opacity: 0;
+    /* Hide separator on the selected tab and the one following it */
+    .tabs__separator,
+    & + .tabs__tab .tabs__separator {
+      @apply opacity-0;
+    }
   }
 
   /* Disabled state */
@@ -96,9 +167,7 @@
 
 /* Tab separator */
 .tabs__separator {
-  @apply rounded-sm bg-muted/25;
-  position: absolute;
-  pointer-events: none;
+  @apply pointer-events-none absolute rounded-sm bg-muted/25;
 
   /**
    * Transitions
@@ -109,28 +178,18 @@
 
   /* Horizontal tabs - vertical separator */
   .tabs__list[data-orientation="horizontal"] & {
-    left: 0;
-    top: 25%;
-    width: 1px;
-    height: 50%;
+    @apply top-1/4 left-0 h-1/2 w-px;
   }
 
   /* Vertical tabs - horizontal separator */
   .tabs__list[data-orientation="vertical"] & {
-    top: 0;
-    left: 5%;
-    width: 90%;
-    height: 1px;
+    @apply top-0 left-[5%] h-px w-[90%];
   }
 }
 
 /* Tab panel */
 .tabs__panel {
   @apply w-full p-2 outline-none;
-
-  /* Entering animations */
-  &[data-entering="true"] {
-  }
 
   /* Exiting animations */
   &[data-exiting="true"] {
@@ -149,16 +208,9 @@
 
 /* Tab indicator - React Aria's SelectionIndicator */
 .tabs__indicator {
-  box-shadow: var(--shadow-surface);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  border-radius: var(--radius-3xl);
-  width: 100%;
-  height: 100%;
+  @apply absolute top-0 left-0 size-full rounded-3xl bg-segment shadow-surface;
 
-  @apply bg-segment;
+  z-index: -1;
 
   /**
    * Transitions
@@ -175,62 +227,52 @@
    ========================================================================== */
 
 .tabs--secondary {
-  /* Tab list - remove background, add bottom/left border */
-  > .tabs__list-container > .tabs__list {
-    @apply bg-transparent p-0;
+  /* Container - flat, no pill. Underline on container (not list) so it stays
+     stable when the inner list scrolls horizontally inside the ScrollShadow. */
+  > .tabs__list-container {
+    @apply rounded-none bg-transparent;
 
-    border-radius: 0;
-
-    /* Horizontal orientation - bottom border, scrollable */
-    &[data-orientation="horizontal"] {
-      @apply border-b border-border scrollbar-none;
-
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: clip;
+    /* Tab list - remove padding */
+    .tabs__list {
+      @apply p-0;
     }
 
-    /* Vertical orientation - left border */
-    &[data-orientation="vertical"] {
-      @apply border-l border-border;
+    /* Hide separators in secondary variant */
+    .tabs__separator {
+      @apply hidden;
+    }
+
+    /* Tab - adjust for secondary variant */
+    .tabs__tab {
+      @apply rounded-none;
+
+      /* Selected state - use text-foreground */
+      &[data-selected="true"] {
+        @apply text-foreground;
+      }
+    }
+
+    /* Tab indicator - line style */
+    .tabs__indicator {
+      @apply rounded-none bg-accent shadow-none;
     }
   }
 
-  /* Tab - adjust for secondary variant */
-  > .tabs__list-container .tabs__tab {
-    @apply rounded-none;
+  /* Horizontal orientation - bottom border + bottom line indicator */
+  &[data-orientation="horizontal"] > .tabs__list-container {
+    @apply border-b border-border;
 
-    /* Selected state - use text-foreground */
-    &[data-selected="true"] {
-      @apply text-foreground;
+    .tabs__indicator {
+      @apply top-auto bottom-0 h-0.5;
     }
   }
 
-  /* Hide separators in secondary variant */
-  > .tabs__list-container .tabs__separator {
-    display: none;
-  }
+  /* Vertical orientation - left border + left line indicator */
+  &[data-orientation="vertical"] > .tabs__list-container {
+    @apply border-l border-border;
 
-  /* Tab indicator - line style */
-  > .tabs__list-container .tabs__indicator {
-    @apply bg-accent;
-
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  /* Horizontal orientation - bottom line indicator */
-  &[data-orientation="horizontal"] > .tabs__list-container .tabs__indicator {
-    top: auto;
-    bottom: 0;
-    height: 2px;
-  }
-
-  /* Vertical orientation - left line indicator */
-  &[data-orientation="vertical"] > .tabs__list-container .tabs__indicator {
-    left: 0;
-    top: 0;
-    width: 2px;
-    height: 100%;
+    .tabs__indicator {
+      @apply top-0 left-0 h-full w-0.5;
+    }
   }
 }
