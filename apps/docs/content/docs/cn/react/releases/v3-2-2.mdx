@@ -1,6 +1,6 @@
 ---
 title: v3.2.2
-description: 补丁版本：将 React Aria 升级到 1.19.0，并修复清除/关闭按钮意外提交表单以及视觉隐藏输入框导致溢出滚动的问题。
+description: 补丁版本：将 React Aria 升级到 1.19.0，为 Tabs.ListContainer 添加溢出滚动，并修复清除/关闭按钮意外提交表单以及视觉隐藏输入框导致溢出滚动的问题。
 github:
   pull: 6660
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 6 月 19 日</span>
 </div>
 
-补丁版本：升级到 React Aria `1.19.0`（`react-aria@3.50.0`），并修复两个回归问题 —— 清除和关闭按钮不再提交其所在的表单，`Checkbox`、`Radio` 和 `Switch` 中的视觉隐藏输入框不再导致溢出滚动。
+补丁版本：升级到 React Aria `1.19.0`（`react-aria@3.50.0`），为 [Tabs](/docs/components/tabs) 的 `Tabs.ListContainer` 添加溢出滚动，并修复多个回归问题 —— 清除和关闭按钮不再提交其所在的表单，`Checkbox`、`Radio` 和 `Switch` 中的视觉隐藏输入框不再导致溢出滚动。
 
 ## 安装
 
@@ -41,6 +41,19 @@ github:
 <Callout type="info">
   **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
 </Callout>
+
+## 新功能
+
+### Tabs
+
+当标签列表超出可用空间时，`Tabs.ListContainer` 会自动渲染滚动箭头和边缘渐变，以便用户浏览隐藏的标签。适用于横向和纵向布局。
+
+- **溢出滚动**：用 `Tabs.ListContainer` 包裹 `Tabs.List`，即可获得滚动箭头和边缘渐变 ([#6696](https://github.com/heroui-inc/heroui/pull/6696))
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-overflow"
+/>
 
 ## 错误修复
 

@@ -1,6 +1,6 @@
 ---
 title: v3.2.2
-description: Patch release that upgrades React Aria to 1.19.0 and fixes accidental form submission from clear/close buttons and overflow scroll from visually hidden inputs.
+description: Patch release that upgrades React Aria to 1.19.0, adds overflow scrolling to Tabs.ListContainer, and fixes accidental form submission from clear/close buttons and overflow scroll from visually hidden inputs.
 github:
   pull: 6660
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">June 19, 2026</span>
 </div>
 
-Patch release: upgrades to React Aria `1.19.0` (`react-aria@3.50.0`), and fixes two regressions — clear and close buttons no longer submit their surrounding form, and visually hidden inputs in `Checkbox`, `Radio`, and `Switch` no longer cause overflow scroll.
+Patch release: upgrades to React Aria `1.19.0` (`react-aria@3.50.0`), adds overflow scrolling to [Tabs](/docs/components/tabs) via `Tabs.ListContainer`, and fixes several regressions — clear and close buttons no longer submit their surrounding form, and visually hidden inputs in `Checkbox`, `Radio`, and `Switch` no longer cause overflow scroll.
 
 ## Installation
 
@@ -41,6 +41,19 @@ Update to the latest version:
 <Callout type="info">
   **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
 </Callout>
+
+## Features
+
+### Tabs
+
+When the tab list exceeds the available space, `Tabs.ListContainer` automatically renders scroll chevrons and fading edges so users can navigate hidden tabs. This works for both horizontal and vertical orientations.
+
+- **Overflow scrolling**: Wrap `Tabs.List` in `Tabs.ListContainer` to get scroll chevrons and edge fade ([#6696](https://github.com/heroui-inc/heroui/pull/6696))
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-overflow"
+/>
 
 ## Bug Fixes
 
