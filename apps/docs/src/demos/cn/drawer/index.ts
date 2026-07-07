@@ -6,3 +6,4 @@ export {NonDismissable} from "./non-dismissable";
 export {Placements} from "./placements";
 export {ScrollableContent} from "./scrollable-content";
 export {WithForm} from "./with-form";
+export {CustomStyles} from "./custom-styles";

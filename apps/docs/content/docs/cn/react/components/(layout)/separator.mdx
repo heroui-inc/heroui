@@ -9,16 +9,30 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Separator } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="separator-basic"
+/>
+
+## 示例
+
+### 变体
+
+<ComponentPreview
+  name="separator-variants"
+/>
+
+### 与 Surface 组合
+
+Separator 组件会根据不同的表面背景自动适配，以获得更好的可见性。
+
+<ComponentPreview
+  name="separator-with-surface"
 />
 
 ### 垂直方向
@@ -33,46 +47,21 @@ import { Separator } from '@heroui/react';
   name="separator-with-content"
 />
 
-### 变体
+### 渲染函数
 
 <ComponentPreview
-  name="separator-variants"
+  name="separator-render-function"
 />
 
-### 与 Surface 组合
+## 自定义样式
 
-Separator 会适配不同的 surface 背景，以获得更好的可见性。
+### Tailwind CSS
 
-<ComponentPreview
-  name="separator-with-surface"
-/>
+<ComponentPreview name="separator-custom-styles" />
 
-<RelatedComponents component="separator" />
+### 全局 CSS
 
-### 自定义渲染函数
-
-<ComponentPreview
-  name="separator-custom-render-function"
-/>
-
-## 样式
-
-### 传入 Tailwind CSS 类
-
-```tsx
-import {Separator} from '@heroui/react';
-
-function CustomSeparator() {
-  return (
-    <Separator className="my-8 bg-linear-to-r from-transparent via-default-500 to-transparent" />
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 Separator 的组件类名，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -86,7 +75,9 @@ function CustomSeparator() {
 }
 ```
 
-HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -112,3 +103,7 @@ Separator 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-
 | `variant` | `'default' \| 'secondary' \| 'tertiary'` | `'default'` | Separator 的视觉变体 |
 | `className` | `string` | - | 额外的 CSS 类名 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
+
+## 相关组件
+
+<RelatedComponents component="separator" />

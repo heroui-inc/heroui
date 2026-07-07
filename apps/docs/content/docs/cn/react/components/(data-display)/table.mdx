@@ -9,22 +9,18 @@ links:
   storybook: Components/Data Display/Table
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Table } from '@heroui/react';
 ```
-
-### 用法
 
 <ComponentPreview
   name="table-basic"
   minHeight="320px"
 />
 
-### 组件结构
-
-引入 Table 组件，并通过点语法访问各部分。
+## 组件结构
 
 ```tsx
 import { Table } from '@heroui/react';
@@ -56,6 +52,8 @@ export default () => (
 );
 ```
 
+## 示例
+
 ### 次要变体
 
 <ComponentPreview
@@ -63,9 +61,18 @@ export default () => (
   minHeight="320px"
 />
 
+### 异步加载
+
+Use `Table.LoadMore` for infinite scrolling. It renders a sentinel row that triggers `onLoadMore` when scrolled into view.
+
+<ComponentPreview
+  name="table-async-loading"
+  minHeight="380px"
+/>
+
 ### 排序
 
-在 `Table.Column` 上设置 `allowsSorting` 可将列设为可排序。在 `Table.Content` 上使用 `sortDescriptor` 与 `onSortChange` 管理排序状态。使用 `Table.SortableColumnHeader` 包裹列标签，并将列渲染函数中的 `sortDirection` 传入，即可显示默认的升序 / 降序指示器。
+Columns can be made sortable using the `allowsSorting` prop on `Table.Column`. Use `sortDescriptor` and `onSortChange` on `Table.Content` to manage sort state. Wrap the label in `Table.SortableColumnHeader` and forward the `sortDirection` from the column's render prop to render the default ascending/descending indicator.
 
 <ComponentPreview
   name="table-sorting"
@@ -74,11 +81,68 @@ export default () => (
 
 ### 选择
 
-在 `Table.Content` 上设置 `selectionMode` 以启用行选择。全选与每行复选框可使用带 `slot="selection"` 的 `Checkbox`。
+Enable row selection with `selectionMode` on `Table.Content`. Use `Checkbox` with `slot="selection"` for select-all and per-row checkboxes.
 
 <ComponentPreview
   name="table-selection"
   minHeight="380px"
+/>
+
+### 可展开行
+
+Rows can be nested to display hierarchical data. Use the `treeColumn` prop to designate a column, and render a `Button` with `slot="chevron"` in that column’s cells so users can expand and collapse the row. Use the `expandedKeys` prop to control which rows are expanded.
+
+<ComponentPreview
+  name="table-expandable-rows"
+  minHeight="420px"
+/>
+
+### 分页
+
+Use `Table.Footer` to add a pagination component below the table.
+
+<ComponentPreview
+  name="table-pagination"
+  minHeight="400px"
+/>
+
+### 列宽调整
+
+Wrap the table in `Table.ResizableContainer` and add `Table.ColumnResizer` inside each resizable column.
+
+<ComponentPreview
+  name="table-column-resizing"
+  minHeight="420px"
+/>
+
+### 空状态
+
+Use `renderEmptyState` on `Table.Body` to display a custom message when the table has no data.
+
+<ComponentPreview
+  name="table-empty-state"
+  minHeight="300px"
+/>
+
+### 虚拟滚动
+
+Table supports virtualization through [Virtualizer](https://react-aria.adobe.com/Virtualizer), enabling efficient rendering of large datasets by displaying only the rows visible within the viewport.
+
+<ComponentPreview
+  name="table-virtualization"
+  minHeight="380px"
+/>
+
+### TanStack Table
+
+HeroUI's Table works as a rendering layer on top of headless table libraries.
+This example uses [TanStack Table](https://tanstack.com/table) for column
+definitions, sorting, and pagination — while HeroUI handles styling and
+accessibility.
+
+<ComponentPreview
+  name="table-tanstack-table"
+  minHeight="420px"
 />
 
 ### 自定义单元格
@@ -88,105 +152,15 @@ export default () => (
   minHeight="420px"
 />
 
-### 可展开行
+## 自定义样式
 
-行可以嵌套以展示层级数据。使用 `treeColumn` 指定列，并在该列单元格内渲染带 `slot="chevron"` 的 `Button`，以便用户展开/收起行。使用 `expandedKeys` 控制哪些行处于展开状态。
+### Tailwind CSS
 
-<ComponentPreview
-  name="table-expandable-rows"
-  minHeight="420px"
-/>
+<ComponentPreview name="table-custom-styles" />
 
-### 分页
+### 全局 CSS
 
-使用 `Table.Footer` 在表格下方添加分页组件。
-
-<ComponentPreview
-  name="table-pagination"
-  minHeight="400px"
-/>
-
-### 列宽调整
-
-使用 `Table.ResizableContainer` 包裹表格，并在每个可调整宽度的列中加入 `Table.ColumnResizer`。
-
-<ComponentPreview
-  name="table-column-resizing"
-  minHeight="420px"
-/>
-
-### 空状态
-
-在 `Table.Body` 上使用 `renderEmptyState`，在表格无数据时展示自定义内容。
-
-<ComponentPreview
-  name="table-empty-state"
-  minHeight="300px"
-/>
-
-### 异步加载
-
-使用 `Table.LoadMore` 实现无限滚动：会渲染一行哨兵节点，在进入视口时触发 `onLoadMore`。
-
-<ComponentPreview
-  name="table-async-loading"
-  minHeight="380px"
-/>
-
-### 虚拟化
-
-Table 通过 [Virtualizer](https://react-aria.adobe.com/Virtualizer) 支持虚拟化，仅渲染视口内可见行，从而高效处理大数据集。
-
-<ComponentPreview
-  name="table-virtualization"
-  minHeight="380px"
-/>
-
-### TanStack Table
-
-HeroUI 的 Table 可作为无头表格库之上的渲染层。
-本示例使用 [TanStack Table](https://tanstack.com/table) 处理列定义、排序与分页，而样式与无障碍由 HeroUI 负责。
-
-<ComponentPreview
-  name="table-tanstack-table"
-  minHeight="420px"
-/>
-
-<RelatedComponents component="table" />
-
-## 样式
-
-### 传入 Tailwind CSS 类
-
-你可以为 Table 的各个部分分别传入类名：
-
-```tsx
-import { Table } from '@heroui/react';
-
-function CustomTable() {
-  return (
-    <Table className="border border-purple-200">
-      <Table.ScrollContainer>
-        <Table.Content aria-label="Custom styled table">
-          <Table.Header className="bg-purple-50">
-            <Table.Column>Name</Table.Column>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row className="hover:bg-purple-50">
-              <Table.Cell>Kate Moore</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table.Content>
-      </Table.ScrollContainer>
-    </Table>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 Table 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -215,6 +189,8 @@ function CustomTable() {
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -414,3 +390,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `dropIndicatorThickness` | `number \| undefined` | 2 | 放置指示器的线条粗细。 |
 | `gap` | `number \| undefined` | 0 | 条目之间的间距。 |
 | `padding` | `number \| undefined` | 0 | 列表的内边距。 |
+
+## 相关组件
+
+<RelatedComponents component="table" />

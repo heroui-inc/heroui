@@ -8,65 +8,45 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ScrollShadow } from "@heroui/react";
 ```
 
-## 用法
-
 <ComponentPreview name="scroll-shadow-default" />
 
-## 方向
+## 示例
+
+### 方向
 
 <ComponentPreview name="scroll-shadow-orientation" />
 
-## 隐藏滚动条
+### 阴影尺寸
 
-<ComponentPreview name="scroll-shadow-hide-scroll-bar" />
+<ComponentPreview name="scroll-shadow-size" />
 
-## 自定义阴影尺寸
-
-<ComponentPreview name="scroll-shadow-custom-size" />
-
-## 可见性变化
-
-<ComponentPreview name="scroll-shadow-visibility-change" />
-
-## 与 Card 组合
+### 与 Card 组合
 
 <ComponentPreview name="scroll-shadow-with-card" />
 
-## 样式
+### 隐藏滚动条
 
-### 传入 Tailwind CSS 类
+<ComponentPreview name="scroll-shadow-hide-scroll-bar" />
 
-```tsx
-import {ScrollShadow, Card} from "@heroui/react";
+### 可见性变化
 
-function CustomScrollShadow() {
-  return (
-    <Card className="w-full p-0 sm:max-w-md">
-      <ScrollShadow className="max-h-[300px] p-6 bg-gradient-to-b from-purple-50 to-pink-50">
-        <div className="space-y-4">
-          {Array.from({length: 10}).map((_, idx) => (
-            <p key={idx}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-              risus hendrerit venenatis.
-            </p>
-          ))}
-        </div>
-      </ScrollShadow>
-    </Card>
-  );
-}
-```
+<ComponentPreview name="scroll-shadow-visibility-change" />
 
-### 自定义组件类
+## 自定义样式
 
-若要自定义 ScrollShadow 组件类，可以使用 `@layer components` 指令。
-<br />[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+### Tailwind CSS
+
+<ComponentPreview name="scroll-shadow-custom-styles" />
+
+### 全局 CSS
+
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -83,6 +63,8 @@ function CustomScrollShadow() {
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -137,3 +119,7 @@ ScrollShadow 组件使用 CSS 变量设置渐变遮罩尺寸，并为可见的�
 | `onVisibilityChange` | `(visibility: ScrollShadowVisibility) => void`                                | -            | 阴影可见性变化时调用的回调         |
 | `className`          | `string`                                                                      | -            | 应用到根元素上的额外 CSS 类     |
 | `children`           | `ReactNode`                                                                   | -            | 可滚动的子内容                                  |
+
+## 相关组件
+
+<RelatedComponents component="scrollshadow" />

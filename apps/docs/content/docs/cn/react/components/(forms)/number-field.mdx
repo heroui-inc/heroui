@@ -9,17 +9,15 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { NumberField } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview name="number-field-basic" />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import {NumberField, Label, Description, FieldError} from '@heroui/react';
@@ -40,7 +38,24 @@ export default () => (
 
 > **NumberField** 允许用户输入数值，并可选择是否显示增减按钮。它支持国际化格式化、校验与键盘导航。
 
-### 带说明
+## 示例
+
+### 变体
+
+NumberField 组件支持两种视觉变体：
+
+- **`primary`**（默认）— 带阴影的标准样式，适用于大多数场景
+- **`secondary`** — 低强调、无阴影，适合在 Surface 等表面背景上使用
+
+<ComponentPreview name="number-field-variants" />
+
+### 表面样式
+
+在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="number-field-on-surface" />
+
+### 带描述
 
 <ComponentPreview name="number-field-with-description" />
 
@@ -48,111 +63,77 @@ export default () => (
 
 <ComponentPreview name="number-field-required" />
 
-### 校验
+### 禁用状态
 
-将 `isInvalid` 与 `FieldError` 配合使用，以展示校验信息。
+<ComponentPreview name="number-field-disabled" />
+
+### 宽度充满
+
+<ComponentPreview name="number-field-full-width" />
+
+### 表单校验
+
+Use `isInvalid` together with `FieldError` to surface validation messages.
 
 <ComponentPreview name="number-field-validation" />
 
-### 受控
+### 受控组件
 
-控制值以与其他组件同步，或执行自定义格式化。
+Control the value to synchronize with other components or perform custom formatting.
 
 <ComponentPreview name="number-field-controlled" />
 
-### 带校验
-
-在受控数值的基础上实现自定义校验逻辑。
-
-<ComponentPreview name="number-field-with-validation" />
-
 ### 步进值
 
-配置增减步进值，以实现更精确的控制。
+Configure increment/decrement step values for precise control.
 
 <ComponentPreview name="number-field-with-step" />
 
 ### 格式化选项
 
-将数字格式化为货币、百分比、小数或单位，并支持国际化。
+Format numbers as currency, percentages, decimals, or units with internationalization support.
 
 <ComponentPreview name="number-field-with-format-options" />
 
-### 自定义图标
-
-自定义增减按钮的图标。
-
-<ComponentPreview name="number-field-custom-icons" />
-
-### 搭配 Chevron
-
-在纵向布局中使用 chevron 图标，以获得不同的视觉风格。
-
-<ComponentPreview name="number-field-with-chevrons" />
-
-### 禁用状态
-
-<ComponentPreview name="number-field-disabled" />
-
-### 全宽
-
-<ComponentPreview name="number-field-full-width" />
-
-### 变体
-
-NumberField 支持两种视觉变体：
-
-- **`primary`**（默认）— 带阴影的标准样式，适用于大多数场景
-- **`secondary`** — 低强调、无阴影的变体，适合用在 Surface 组件内
-
-<ComponentPreview name="number-field-variants" />
-
-### 在 Surface 内
-
-在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
-
-<ComponentPreview name="number-field-on-surface" />
-
 ### 表单示例
 
-包含校验与提交处理的完整表单集成示例。
+Complete form integration with validation and submission handling.
 
 <ComponentPreview name="number-field-form-example" />
 
-<RelatedComponents component="numberfield" />
+### 带校验
 
-<RelatedShowcases component="NumberField" />
+Implement custom validation logic with controlled values.
 
-### 自定义渲染函数
+<ComponentPreview name="number-field-with-validation" />
+
+### 自定义图标
+
+Customize the increment and decrement button icons.
+
+<ComponentPreview name="number-field-custom-icons" />
+
+### 步进箭头
+
+Use chevron icons in a vertical layout for a different visual style.
+
+<ComponentPreview name="number-field-with-chevrons" />
+
+### 渲染函数
 
 <ComponentPreview
-  name="number-field-custom-render-function"
+  name="number-field-render-function"
 />
 
-## 样式
+## 自定义样式
 
-### 传入 Tailwind CSS 类
+### Tailwind CSS
 
-```tsx
-import {NumberField, Label} from '@heroui/react';
+<ComponentPreview name="number-field-custom-styles" />
 
-function CustomNumberField() {
-  return (
-    <NumberField className="gap-2">
-      <Label className="text-sm font-semibold">Quantity</Label>
-      <NumberField.Group className="rounded-xl border-2">
-        <NumberField.DecrementButton className="bg-gray-100" />
-        <NumberField.Input className="text-center font-bold" />
-        <NumberField.IncrementButton className="bg-gray-100" />
-      </NumberField.Group>
-    </NumberField>
-  );
-}
-```
+### 全局 CSS
 
-### 自定义组件类
-
-NumberField 使用可自定义的 CSS 类。你可以覆盖这些类名以匹配自己的设计系统。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -180,6 +161,10 @@ NumberField 使用可自定义的 CSS 类。你可以覆盖这些类名以匹配
   }
 }
 ```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -361,3 +346,11 @@ NumberField.DecrementButton 继承 React Aria [Button](https://react-spectrum.ad
 | `minValue` | `number \| undefined` | 允许的最小值。 |
 | `maxValue` | `number \| undefined` | 允许的最大值。 |
 | `step` | `number` | 增减步进值。 |
+
+## 相关示例
+
+<RelatedShowcases component="NumberField" />
+
+## 相关组件
+
+<RelatedComponents component="numberfield" />

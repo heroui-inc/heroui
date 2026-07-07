@@ -1,6 +1,6 @@
 ---
 title: DateField 日期字段
-description: 基于 React Aria DateField 的日期输入字段，包含标签、说明与校验。
+description: 基于 React Aria DateField 的日期输入字段，包含标签、说明与校验
 links:
   rac: DateField
   source: date-field/date-field.tsx
@@ -8,17 +8,15 @@ links:
   storybook: Components/Date and Time/DateField
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { DateField } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview name="date-field-basic" />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import {DateField, Label, Description, FieldError} from '@heroui/react';
@@ -39,39 +37,7 @@ export default () => (
 
 > **DateField** 将标签、日期输入、说明与错误信息组合为单个无障碍组件。
 
-### 带描述
-
-<ComponentPreview name="date-field-with-description" />
-
-### 必填字段
-
-<ComponentPreview name="date-field-required" />
-
-### 校验
-
-配合 `FieldError`，使用 `isInvalid` 展示校验信息。
-
-<ComponentPreview name="date-field-invalid" />
-
-### 带校验
-
-DateField 支持使用 `minValue`、`maxValue` 及自定义校验逻辑。
-
-<ComponentPreview name="date-field-with-validation" />
-
-### 粒度
-
-<ComponentPreview name="date-field-granularity" />
-
-### 受控
-
-通过受控 `value` 与其它组件或状态管理同步。
-
-<ComponentPreview name="date-field-controlled" />
-
-### 禁用状态
-
-<ComponentPreview name="date-field-disabled" />
+## 示例
 
 ### 带图标
 
@@ -83,24 +49,52 @@ DateField 支持使用 `minValue`、`maxValue` 及自定义校验逻辑。
 
 <ComponentPreview name="date-field-with-prefix-and-suffix" />
 
-### 全宽
-
-<ComponentPreview name="date-field-full-width" />
-
 ### 变体
 
-`DateField.Group` 提供两种视觉变体：
+DateField.Group 组件支持两种视觉变体：
 
-- **`primary`**（默认）：带阴影的标准样式，适用于大多数场景
-- **`secondary`**：低强调、无阴影，适合放在 Surface 等表面背景上
+- **`primary`**（默认）- 标准样式带阴影，适用于大多数场景
+- **`secondary`** - 低强调变体无阴影，适用于 Surface 组件内
 
 <ComponentPreview name="date-field-variants" />
 
-### 在 Surface 中
+### 表面样式
 
-在 [Surface](/docs/components/surface) 内使用时，请在 `DateField.Group` 上使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+在 [Surface](/docs/components/surface) 内使用时，请在 DateField.Group 上使用 `variant="secondary"` 以应用适合 Surface 背景的低强调变体。
 
 <ComponentPreview name="date-field-on-surface" />
+
+### 带描述
+
+<ComponentPreview name="date-field-with-description" />
+
+### 必填字段
+
+<ComponentPreview name="date-field-required" />
+
+### 禁用
+
+<ComponentPreview name="date-field-disabled" />
+
+### 宽度充满
+
+<ComponentPreview name="date-field-full-width" />
+
+### 表单校验
+
+配合 `FieldError` 使用 `isInvalid` 展示校验消息。
+
+<ComponentPreview name="date-field-invalid" />
+
+### 时间粒度
+
+<ComponentPreview name="date-field-granularity" />
+
+### 受控组件
+
+控制 value 以与其他组件或状态管理同步。
+
+<ComponentPreview name="date-field-controlled" />
 
 ### 表单示例
 
@@ -108,43 +102,27 @@ DateField 支持使用 `minValue`、`maxValue` 及自定义校验逻辑。
 
 <ComponentPreview name="date-field-form-example" />
 
-<RelatedComponents component="datefield" />
+### 带校验
 
-### 自定义渲染函数
+DateField 支持 `minValue`、`maxValue` 与自定义校验逻辑。
+
+<ComponentPreview name="date-field-with-validation" />
+
+### 渲染函数
 
 <ComponentPreview
-  name="date-field-custom-render-function"
+  name="date-field-render-function"
 />
 
-## 样式
+## 自定义样式
 
-### 传入 Tailwind CSS 类
+### Tailwind CSS
 
-```tsx
-import {DateField, Label, Description} from '@heroui/react';
+<ComponentPreview name="date-field-custom-styles" />
 
-function CustomDateField() {
-  return (
-    <DateField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Appointment date
-      </Label>
-      <DateField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <DateField.Input>
-          {(segment) => <DateField.Segment segment={segment} />}
-        </DateField.Input>
-      </DateField.Group>
-      <Description className="text-xs text-default-500">
-        Select a date for your appointment.
-      </Description>
-    </DateField>
-  );
-}
-```
+### 全局 CSS
 
-### 自定义组件类
-
-DateField 的默认样式很轻量。覆盖 `.date-field` 类即可自定义容器样式。
+DateField 默认样式较轻量。覆盖 `.date-field` 类可自定义容器样式。
 
 ```css
 @layer components {
@@ -169,24 +147,28 @@ DateField 的默认样式很轻量。覆盖 `.date-field` 类即可自定义容�
 }
 ```
 
-### CSS 类
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS Classes
 
 - `.date-field` – 轻量样式的根容器（`flex flex-col gap-1`）
 
-> **说明：** 子组件（[Label](/docs/components/label)、[Description](/docs/components/description)、[FieldError](/docs/components/field-error)）拥有各自的 CSS 类与样式。自定义方式请参阅对应文档。`DateField.Group` 的样式见下文 API 参考。
+> **Note：** 子组件（[Label](/docs/components/label)、[Description](/docs/components/description)、[FieldError](/docs/components/field-error)）拥有各自的 CSS 类与样式。自定义方式请参阅对应文档。DateField.Group 样式见下文 API 参考。
 
-### 交互状态
+### Interactive States
 
 DateField 会根据状态自动设置以下 data 属性：
 
-- **无效**：`[data-invalid="true"]` 或 `[aria-invalid="true"]` – 无效时自动隐藏 description 插槽
-- **必填**：`[data-required="true"]` – 当 `isRequired` 为 true 时添加
-- **禁用**：`[data-disabled="true"]` – 当 `isDisabled` 为 true 时添加
-- **焦点在内**：`[data-focus-within="true"]` – 任一子输入聚焦时添加
+- **Invalid**：`[data-invalid="true"]` 或 `[aria-invalid="true"]` - 无效时自动隐藏 description slot
+- **Required**：`[data-required="true"]` - 当 `isRequired` 为 true 时应用
+- **Disabled**：`[data-disabled="true"]` - 当 `isDisabled` 为 true 时应用
+- **Focus Within**：`[data-focus-within="true"]` - 任一子输入聚焦时应用
 
 ## API 参考
 
-### DateField Props
+### DateField
 
 DateField 继承 React Aria [DateField](https://react-aria.adobe.com/DateField.md) 的全部 props。
 
@@ -255,7 +237,7 @@ DateField 继承 React Aria [DateField](https://react-aria.adobe.com/DateField.m
 | `aria-describedby` | `string` | - | 描述该字段的元素 id。 |
 | `aria-details` | `string` | - | 包含额外详情的元素 id。 |
 
-### 组合组件
+### Composition Components
 
 DateField 与以下独立组件配合使用，请分别导入并直接使用：
 
@@ -292,7 +274,7 @@ import {DateField, Label, Description, FieldError} from '@heroui/react';
 </DateField>
 ```
 
-### DateValue 类型
+### DateValue Types
 
 DateField 使用 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) 中的类型：
 
@@ -320,7 +302,7 @@ const todayDate = today(getLocalTimeZone());
 
 > **说明：** DateField 依赖 [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) 进行解析、运算与类型定义。更多类型与函数见 [Internationalized Date 文档](https://react-aria.adobe.com/internationalized/date/)。
 
-### DateFieldRenderProps
+### Render Props
 
 对 `className`、`style` 或 `children` 使用渲染 prop 时，可使用以下值：
 
@@ -334,7 +316,7 @@ const todayDate = today(getLocalTimeZone());
 | `isFocusWithin` | `boolean` | 是否有子元素聚焦。 |
 | `isFocusVisible` | `boolean` | 焦点是否可见（键盘导航）。 |
 
-### DateField.Group Props
+### DateField.Group
 
 DateField.Group 继承 React Aria `Group` 的全部 props，并额外支持：
 
@@ -344,7 +326,7 @@ DateField.Group 继承 React Aria `Group` 的全部 props，并额外支持：
 | `fullWidth` | `boolean` | `false` | 日期输入组是否占满容器宽度。 |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉变体。`primary` 为默认带阴影样式；`secondary` 为低强调、无阴影，适合用于 Surface。 |
 
-### DateField.Input Props
+### DateField.Input
 
 DateField.Input 继承 React Aria `DateInput` 的全部 props，并额外支持：
 
@@ -355,7 +337,7 @@ DateField.Input 继承 React Aria `DateInput` 的全部 props，并额外支持�
 
 `DateField.Input` 接受渲染函数作为子节点，函数参数为日期段位；每个段位对应日期的一部分（年、月、日等）。
 
-### DateField.Segment Props
+### DateField.Segment
 
 DateField.Segment 继承 React Aria `DateSegment` 的全部 props：
 
@@ -364,7 +346,7 @@ DateField.Segment 继承 React Aria `DateSegment` 的全部 props：
 | `segment` | `DateSegment` | - | 来自 DateField.Input 渲染函数的 `DateSegment` 对象。 |
 | `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
 
-### DateField.InputContainer Props
+### DateField.InputContainer
 
 DateField.InputContainer 接受标准 HTML `div` 属性：
 
@@ -373,7 +355,7 @@ DateField.InputContainer 接受标准 HTML `div` 属性：
 | `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
 | `children` | `ReactNode` | - | 滚动容器中的内容（通常为多个 `DateField.Input`）。 |
 
-### DateField.Prefix Props
+### DateField.Prefix
 
 DateField.Prefix 接受标准 HTML `div` 属性：
 
@@ -382,7 +364,7 @@ DateField.Prefix 接受标准 HTML `div` 属性：
 | `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
 | `children` | `ReactNode` | - | 前缀插槽中要显示的内容。 |
 
-### DateField.Suffix Props
+### DateField.Suffix
 
 DateField.Suffix 接受标准 HTML `div` 属性：
 
@@ -391,9 +373,9 @@ DateField.Suffix 接受标准 HTML `div` 属性：
 | `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
 | `children` | `ReactNode` | - | 后缀插槽中要显示的内容。 |
 
-## DateField.Group 样式
+## DateField.Group Styling
 
-### 自定义组件类
+### Customizing the component classes
 
 基础类作用于所有实例，可通过 `@layer components` 一次性覆盖。
 
@@ -449,7 +431,7 @@ DateField.Suffix 接受标准 HTML `div` 属性：
 }
 ```
 
-### DateField.Group CSS 类
+### DateField.Group CSS Classes
 
 - `.date-input-group` – 根容器样式
 - `.date-input-group__input` – 输入包裹层样式
@@ -458,11 +440,15 @@ DateField.Suffix 接受标准 HTML `div` 属性：
 - `.date-input-group__prefix` – 前缀元素样式
 - `.date-input-group__suffix` – 后缀元素样式
 
-### DateField.Group 交互状态
+### DateField.Group Interactive States
 
-- **悬停**：`:hover` 或 `[data-hovered="true"]`
-- **焦点在内**：`[data-focus-within="true"]` 或 `:focus-within`
-- **无效**：`[data-invalid="true"]`（同时与 `aria-invalid` 同步）
-- **禁用**：`[data-disabled="true"]` 或 `[aria-disabled="true"]`
-- **段位聚焦**：段位上的 `:focus` 或 `[data-focused="true"]`
-- **段位占位符**：段位上的 `[data-placeholder="true"]`
+- **Hover**：`:hover` 或 `[data-hovered="true"]`
+- **Focus Within**：`[data-focus-within="true"]` 或 `:focus-within`
+- **Invalid**：`[data-invalid="true"]`（与 `aria-invalid` 同步）
+- **Disabled**：`[data-disabled="true"]` 或 `[aria-disabled="true"]`
+- **Segment Focus**：段位上 `:focus` 或 `[data-focused="true"]`
+- **Segment Placeholder**：段位上 `[data-placeholder="true"]`
+
+## 相关组件
+
+<RelatedComponents component="datefield" />

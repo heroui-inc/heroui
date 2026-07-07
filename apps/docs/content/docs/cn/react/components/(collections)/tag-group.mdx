@@ -8,19 +8,17 @@ links:
   storybook: Components/Collections/TagGroup
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { TagGroup } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="tag-group-basic"
 />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import { TagGroup, Tag, Label, Description, ErrorMessage } from '@heroui/react';
@@ -38,6 +36,8 @@ export default () => (
   </TagGroup>
 )
 ```
+
+## 示例
 
 ### 尺寸
 
@@ -63,7 +63,7 @@ export default () => (
   name="tag-group-selection-modes"
 />
 
-### 受控
+### 受控组件
 
 <ComponentPreview
   name="tag-group-controlled"
@@ -73,6 +73,12 @@ export default () => (
 
 <ComponentPreview
   name="tag-group-with-error-message"
+/>
+
+### 带列表数据
+
+<ComponentPreview
+  name="tag-group-with-list-data"
 />
 
 ### 带前缀
@@ -87,45 +93,21 @@ export default () => (
   name="tag-group-with-remove-button"
 />
 
-### 带列表数据
+### 渲染函数
 
 <ComponentPreview
-  name="tag-group-with-list-data"
+  name="tag-group-render-function"
 />
 
-### 自定义渲染函数
+## 自定义样式
 
-<ComponentPreview
-  name="tag-group-custom-render-function"
-/>
+### Tailwind CSS
 
-<RelatedComponents component="taggroup" />
+<ComponentPreview name="tag-group-custom-styles" />
 
-## 样式
+### 全局 CSS
 
-### 传入 Tailwind CSS 类
-
-```tsx
-import { TagGroup, Tag, Label } from '@heroui/react';
-
-function CustomTagGroup() {
-  return (
-    <TagGroup className="w-full">
-      <Label>Categories</Label>
-      <TagGroup.List className="gap-2">
-        <Tag className="rounded-lg px-4 py-2 font-bold">
-          Custom Styled
-        </Tag>
-      </TagGroup.List>
-    </TagGroup>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 TagGroup 组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -146,6 +128,8 @@ function CustomTagGroup() {
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -296,3 +280,7 @@ TagGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 | `isPressed` | `boolean` | 标签是否按下。 |
 | `isFocused` | `boolean` | 标签是否聚焦。 |
 | `isFocusVisible` | `boolean` | 标签是否为可见键盘焦点。 |
+
+## 相关组件
+
+<RelatedComponents component="taggroup" />

@@ -8,18 +8,17 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Skeleton } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview 
   name="skeleton-basic"
 />
- 
+
+## 示例
 
 ### 文本内容
 
@@ -39,12 +38,6 @@ import { Skeleton } from '@heroui/react';
   name="skeleton-list"
 />
 
-### 动画类型
-
-<ComponentPreview
-  name="skeleton-animation-types"
-/>
-
 ### 网格
 
 <ComponentPreview
@@ -53,56 +46,28 @@ import { Skeleton } from '@heroui/react';
 
 ### 单次闪烁
 
-一种同步的闪烁效果，会一次性扫过所有骨架元素。请在父容器上应用 `skeleton--shimmer` 类，并将子级 Skeleton 的 `animationType` 设为 `"none"`。
+A synchronized shimmer effect that passes over all skeleton elements at once. Apply the `skeleton--shimmer` class to a parent container and set `animationType="none"` on child skeletons.
 
 <ComponentPreview
   name="skeleton-single-shimmer"
   style={{'contain': 'none'}}
 />
 
-<RelatedComponents component="skeleton" />
+### 动画类型
 
-## 样式
+<ComponentPreview
+  name="skeleton-animation-types"
+/>
 
-### 全局动画配置
+## 自定义样式
 
-你可以通过在应用中定义 `--skeleton-animation` CSS 变量，为所有 Skeleton 设置默认动画类型：
+### Tailwind CSS
 
-```css
-/* In your global CSS file */
-:root {
-  /* Possible values: shimmer, pulse, none */
-  --skeleton-animation: pulse;
-}
+<ComponentPreview name="skeleton-custom-styles" />
 
-/* You can also set different values for light/dark themes */
-.light, [data-theme="light"] {
-  --skeleton-animation: shimmer;
-}
+### 全局 CSS
 
-.dark, [data-theme="dark"] {
-  --skeleton-animation: pulse;
-}
-```
-
-在单个组件上指定 `animationType` 时，会覆盖上述全局设置。
-
-### 传入 Tailwind CSS 类
-
-```tsx
-import { Skeleton } from '@heroui/react';
-
-function CustomSkeleton() {
-  return (
-    <Skeleton className="h-20 w-32 rounded-full" />
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 Skeleton 的组件类名，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -128,7 +93,57 @@ function CustomSkeleton() {
 }
 ```
 
-HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+### Global Animation Configuration
+
+You can set a default animation type for all Skeleton components in your application by defining the `--skeleton-animation` CSS variable:
+
+```css
+/* In your global CSS file */
+:root {
+  /* Possible values: shimmer, pulse, none */
+  --skeleton-animation: pulse;
+}
+
+/* You can also set different values for light/dark themes */
+.light, [data-theme="light"] {
+  --skeleton-animation: shimmer;
+}
+
+.dark, [data-theme="dark"] {
+  --skeleton-animation: pulse;
+}
+```
+
+This global setting will be overridden by the `animationType` prop when specified on individual components.
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### 全局动画配置
+
+你可以通过在应用中定义 `--skeleton-animation` CSS 变量，为所有 Skeleton 设置默认动画类型：
+
+```css
+/* In your global CSS file */
+:root {
+  /* Possible values: shimmer, pulse, none */
+  --skeleton-animation: pulse;
+}
+
+/* You can also set different values for light/dark themes */
+.light, [data-theme="light"] {
+  --skeleton-animation: shimmer;
+}
+
+.dark, [data-theme="dark"] {
+  --skeleton-animation: pulse;
+}
+```
+
+在单个组件上指定 `animationType` 时，会覆盖上述全局设置。
+
+
 
 ### CSS 类
 
@@ -199,3 +214,7 @@ Skeleton 支持三种动画类型，视觉效果各不相同：
 |------|------|--------|------|
 | `animationType` | `"shimmer" \| "pulse" \| "none"` | `"shimmer"` 或 CSS 变量 | Skeleton 的动画类型；也可通过 `--skeleton-animation` CSS 变量进行全局配置 |
 | `className` | `string` | - | 额外的 CSS 类名 |
+
+## 相关组件
+
+<RelatedComponents component="skeleton" />

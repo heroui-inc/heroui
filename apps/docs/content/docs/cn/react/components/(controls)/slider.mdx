@@ -8,21 +8,17 @@ links:
   storybook: Components/Controls/Slider
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Slider } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="slider-default"
 />
 
-### 组件结构
-
-引入 Slider 组件，并通过点语法访问各部分。
+## 组件结构
 
 ```tsx
 import { Slider, Label } from '@heroui/react';
@@ -39,7 +35,15 @@ export default () => (
 )
 ```
 
-### 范围滑块组件结构
+## 示例
+
+### 禁用
+
+<ComponentPreview
+  name="slider-disabled"
+/>
+
+### 范围滑块结构
 
 ```tsx
 import { Slider, Label } from '@heroui/react';
@@ -62,57 +66,33 @@ export default () => (
 )
 ```
 
-### 纵向
+### 垂直方向
 
 <ComponentPreview
   name="slider-vertical"
 />
 
-### 范围
+### 范围选择
 
 <ComponentPreview
   name="slider-range"
 />
 
-### 禁用
+### 渲染函数
 
 <ComponentPreview
-  name="slider-disabled"
+  name="slider-render-function"
 />
 
-### 自定义渲染函数
+## 自定义样式
 
-<ComponentPreview
-  name="slider-custom-render-function"
-/>
+### Tailwind CSS
 
-<RelatedComponents component="slider" />
+<ComponentPreview name="slider-custom-styles" />
 
-## 样式
+### 全局 CSS
 
-### 传入 Tailwind CSS 类
-
-```tsx
-import { Slider, Label } from '@heroui/react';
-
-function CustomSlider() {
-  return (
-    <Slider className="w-full">
-      <Label>Volume</Label>
-      <Slider.Output className="text-muted-fg text-sm" />
-      <Slider.Track className="h-2 rounded-full bg-surface-secondary">
-        <Slider.Fill className="bg-accent" />
-        <Slider.Thumb className="size-4 rounded-full bg-accent" />
-      </Slider.Track>
-    </Slider>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 Slider 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -137,6 +117,8 @@ function CustomSlider() {
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -239,7 +221,7 @@ Slider 组件使用以下 CSS 类（[查看源码样式](https://github.com/hero
 
 ## 示例
 
-### 基础用法
+### 基本用法
 
 ```tsx
 import { Slider, Label } from '@heroui/react';
@@ -281,7 +263,7 @@ import { Slider, Label } from '@heroui/react';
 </Slider>
 ```
 
-### 受控值
+### 受控数值
 
 ```tsx
 import { Slider, Label } from '@heroui/react';
@@ -324,7 +306,7 @@ import { Slider, Label } from '@heroui/react';
 </Slider>
 ```
 
-### 纵向方向
+### 垂直方向
 
 ```tsx
 import { Slider, Label } from '@heroui/react';
@@ -377,3 +359,7 @@ Slider 组件实现 ARIA slider 模式，并提供：
 - 从右到左（RTL）语言支持
 
 更多信息见 [React Aria Slider 文档](https://react-spectrum.adobe.com/react-aria/Slider.html)。
+
+## 相关组件
+
+<RelatedComponents component="slider" />

@@ -1,39 +1,26 @@
-import {Bold, Copy, Italic, Scissors, Underline} from "@gravity-ui/icons";
-import {
-  Button,
-  ButtonGroup,
-  Separator,
-  ToggleButton,
-  ToggleButtonGroup,
-  Toolbar,
-} from "@heroui/react";
+import {Bold, Italic, Underline} from "@gravity-ui/icons";
+import {ToggleButton, ToggleButtonGroup, Toolbar} from "@heroui/react";
 
-export function Attached() {
+const toggleClass =
+  "rounded-lg data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground";
+
+export function CustomStyles() {
   return (
-    <Toolbar isAttached aria-label="文本格式">
-      <ToggleButtonGroup aria-label="文本样式" selectionMode="multiple">
-        <ToggleButton isIconOnly aria-label="粗体" id="bold">
+    <Toolbar
+      aria-label="格式工具栏"
+      className="gap-1 rounded-xl border border-border/80 bg-surface-secondary p-1.5"
+    >
+      <ToggleButtonGroup aria-label="文本样式" className="gap-0.5" selectionMode="multiple">
+        <ToggleButton isIconOnly aria-label="粗体" className={toggleClass} id="bold">
           <Bold />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="斜体" id="italic">
-          <ToggleButtonGroup.Separator />
+        <ToggleButton isIconOnly aria-label="斜体" className={toggleClass} id="italic">
           <Italic />
         </ToggleButton>
-        <ToggleButton isIconOnly aria-label="下划线" id="underline">
-          <ToggleButtonGroup.Separator />
+        <ToggleButton isIconOnly aria-label="下划线" className={toggleClass} id="underline">
           <Underline />
         </ToggleButton>
       </ToggleButtonGroup>
-      <Separator />
-      <ButtonGroup variant="tertiary">
-        <Button isIconOnly aria-label="复制">
-          <Copy />
-        </Button>
-        <Button isIconOnly aria-label="剪切">
-          <ButtonGroup.Separator />
-          <Scissors />
-        </Button>
-      </ButtonGroup>
     </Toolbar>
   );
 }

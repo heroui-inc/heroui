@@ -7,19 +7,17 @@ links:
   storybook: Components/Navigation/Pagination
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Pagination } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="pagination-basic"
 />
 
-### 组件结构
+## 组件结构
 
 导入 Pagination 组件后，可通过点号访问各个子部分。
 
@@ -56,22 +54,36 @@ export default () => (
 );
 ```
 
+## 示例
+
 ### 尺寸
 
 <ComponentPreview
   name="pagination-sizes"
 />
 
-### 带省略号
+### 禁用
 
 <ComponentPreview
-  name="pagination-with-ellipsis"
+  name="pagination-disabled"
 />
 
 ### 简化（上一页 / 下一页）
 
 <ComponentPreview
   name="pagination-simple-prev-next"
+/>
+
+### 受控组件
+
+<ComponentPreview
+  name="pagination-controlled"
+/>
+
+### 带省略号
+
+<ComponentPreview
+  name="pagination-with-ellipsis"
 />
 
 ### 带摘要
@@ -82,52 +94,21 @@ export default () => (
 
 ### 自定义图标
 
-你可以通过为 `PreviousIcon` 与 `NextIcon` 传入自定义子节点来替换默认的 chevron 图标。
+You can replace the default chevron icons by passing custom children to `PreviousIcon` and `NextIcon`.
 
 <ComponentPreview
   name="pagination-custom-icons"
 />
 
-### 受控
+## 自定义样式
 
-<ComponentPreview
-  name="pagination-controlled"
-/>
+### Tailwind CSS
 
-### 禁用
+<ComponentPreview name="pagination-custom-styles" />
 
-<ComponentPreview
-  name="pagination-disabled"
-/>
+### 全局 CSS
 
-<RelatedComponents component="pagination" />
-
-## 样式
-
-### 传入 Tailwind CSS 类
-
-你可以单独定制 Pagination 的各个子部分：
-
-```tsx
-import { Pagination } from '@heroui/react';
-
-function CustomPagination() {
-  return (
-    <Pagination className="gap-8">
-      <Pagination.Content className="gap-2">
-        <Pagination.Item>
-          <Pagination.Link className="rounded-md" isActive>1</Pagination.Link>
-        </Pagination.Item>
-      </Pagination.Content>
-    </Pagination>
-  );
-}
-```
-
-### 自定义组件类
-
-要自定义 Pagination 的组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -145,7 +126,9 @@ function CustomPagination() {
 }
 ```
 
-HeroUI 遵循 [BEM](https://getbem.com/) 方法论，以确保组件变体与状态可复用且易于自定义。
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -238,6 +221,10 @@ Pagination 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |
 
+## 说明
+
+Pagination buttons use `onPress` instead of `onClick`. The `onPress` handler from React Aria normalizes press behavior across pointer types and provides accessibility improvements out of the box.
+
 ## 无障碍
 
 Pagination 基于 [React Aria 的 Button](https://react-spectrum.adobe.com/react-aria/Button.html) 原语实现所有可交互元素，并提供：
@@ -251,3 +238,7 @@ Pagination 基于 [React Aria 的 Button](https://react-spectrum.adobe.com/react
 - 通过 `isDisabled` 向辅助技术正确传达禁用状态
 
 > **说明：** Pagination 按钮请使用 `onPress` 而不是 `onClick`。React Aria 的 `onPress` 会规范化不同指针类型的按下行为，并提供开箱即用的无障碍改进。
+
+## 相关组件
+
+<RelatedComponents component="pagination" />

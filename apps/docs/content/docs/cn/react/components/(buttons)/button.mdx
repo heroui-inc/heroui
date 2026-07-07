@@ -1,6 +1,7 @@
 ---
 title: Button 按钮
-description: 可点击的按钮组件，支持多种变体与状态。
+description: 可点击的按钮组件，支持多种变体与状态
+icon: updated
 links:
   rac: Button
   source: button/button.tsx
@@ -9,23 +10,28 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Button } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="button-basic"
 />
 
-### 变体
+## 示例
 
+### 变体
 
 <ComponentPreview
   name="button-variants"
+/>
+
+### 尺寸
+
+<ComponentPreview
+  name="button-sizes"
 />
 
 ### 带图标
@@ -46,19 +52,13 @@ import { Button } from '@heroui/react';
   name="button-loading"
 />
 
-### 加载状态
+### 加载中（点击触发）
 
 <ComponentPreview
   name="button-loading-state"
 />
 
-### 尺寸
-
-<ComponentPreview
-  name="button-sizes"
-/>
-
-### 全宽
+### 宽度充满
 
 <ComponentPreview
   name="button-full-width"
@@ -66,47 +66,48 @@ import { Button } from '@heroui/react';
 
 ### 禁用状态
 
-
 <ComponentPreview
   name="button-disabled"
 />
 
-### 社交按钮
+### 社交媒体按钮
 
 <ComponentPreview
   name="button-social"
 />
 
-### 自定义渲染函数
+### 渲染函数
 
 <ComponentPreview
-  name="button-custom-render-function"
+  name="button-render-function"
 />
 
-<RelatedComponents component="button" />
+### 添加自定义变体
 
-<RelatedShowcases component="Button" />
+可通过包装组件并添加自定义变体来扩展 HeroUI 组件。
 
-## 样式
+<ComponentPreview
+  name="button-custom-variants"
+/>
 
-### 传入 Tailwind CSS 类
+### 添加涟漪效果
 
-```tsx
-import { Button } from '@heroui/react';
+Button 组件通过组合支持 ripple 效果，可将 ripple 组件作为子节点嵌套。本示例使用 [m3-ripple](https://github.com/saltyaom/m3-ripple)。
 
-function CustomButton() {
-  return (
-    <Button className="bg-purple-500 text-white hover:bg-purple-600">
-      Purple Button
-    </Button>
-  );
-}
-```
+<ComponentPreview
+  name="button-ripple-effect"
+/>
 
-### 自定义组件类
+## 自定义样式
 
-若要自定义 Button 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+### Tailwind CSS
+
+<ComponentPreview name="button-custom-styles" />
+
+### 全局 CSS
+
+可使用 `@layer components` 指令自定义 Button 组件类。
+[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -120,35 +121,21 @@ function CustomButton() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
-### 添加自定义变体
-
-你可以通过封装 HeroUI 组件并添加自定义变体来扩展其能力。
-
-<ComponentPreview
-  name="button-custom-variants"
-/>
-
-### 添加涟漪效果
-
-Button 组件支持通过组合方式实现涟漪效果，你可以将涟漪组件作为子节点嵌套。此示例使用 [m3-ripple](https://github.com/saltyaom/m3-ripple)。
-
-<ComponentPreview
-  name="button-ripple-effect"
-/>
-
-### CSS 类
+### CSS Classes
 
 Button 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/button.css)）：
 
-#### 基础与尺寸类
-- `.button` - 按钮基础样式
+#### 基础与尺寸类 [!toc]
+- `.button` - 基础按钮样式
 - `.button--sm` - 小尺寸变体
 - `.button--md` - 中尺寸变体
 - `.button--lg` - 大尺寸变体
 
-#### 变体类
+#### 变体类 [!toc]
 - `.button--primary`
 - `.button--secondary`
 - `.button--tertiary`
@@ -156,46 +143,54 @@ Button 组件使用以下 CSS 类（[查看源码样式](https://github.com/hero
 - `.button--ghost`
 - `.button--danger`
 
-#### 修饰符类
+#### 修饰符类 [!toc]
 - `.button--icon-only`
 - `.button--icon-only.button--sm`
 - `.button--icon-only.button--lg`
 
-### 交互状态
+### Interactive States
 
-该按钮同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制：
+按钮同时支持 CSS 伪类与 data 属性：
 
-- **悬停**：`:hover` 或 `[data-hovered="true"]`
-- **激活/按压**：`:active` 或 `[data-pressed="true"]`（包含缩放变换）
-- **聚焦**：`:focus-visible` 或 `[data-focus-visible="true"]`（显示焦点环）
-- **禁用**：`:disabled` 或 `[aria-disabled="true"]`（降低透明度，禁用指针事件）
-- **等待中**：`[data-pending]`（加载期间禁用指针事件）
+- **Hover**：`:hover` 或 `[data-hovered="true"]`
+- **Active/Pressed**：`:active` 或 `[data-pressed="true"]`（含缩放变换）
+- **Focus**：`:focus-visible` 或 `[data-focus-visible="true"]`（显示焦点环）
+- **Disabled**：`:disabled` 或 `[aria-disabled="true"]`（降低透明度，禁用指针事件）
+- **Pending**：`[data-pending]`（加载期间禁用指针事件）
 
 ## API 参考
 
-### Button Props
+### Button
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `variant` | `'primary' \| 'secondary' \| 'tertiary' \| 'outline' \| 'ghost' \| 'danger'` | `'primary'` | 视觉样式变体 |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 按钮尺寸 |
-| `fullWidth` | `boolean` | `false` | 按钮是否占满容器宽度 |
-| `isDisabled` | `boolean` | `false` | 按钮是否禁用 |
-| `isPending` | `boolean` | `false` | 按钮是否处于加载状态 |
-| `isIconOnly` | `boolean` | `false` | 按钮是否仅包含图标 |
-| `onPress` | `(e: PressEvent) => void` | - | 按钮被按下时的事件处理函数 |
-| `children` | `React.ReactNode \| (values: ButtonRenderProps) => React.ReactNode` | - | 按钮内容或渲染 prop |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ButtonRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+| `fullWidth` | `boolean` | `false` | 是否占满容器宽度 |
+| `isDisabled` | `boolean` | `false` | 是否禁用 |
+| `isPending` | `boolean` | `false` | 是否处于加载状态 |
+| `isIconOnly` | `boolean` | `false` | 是否仅包含图标 |
+| `onPress` | `(e: PressEvent) => void` | - | 按下时的回调 |
+| `children` | `React.ReactNode \| (values: ButtonRenderProps) => React.ReactNode` | - | 按钮内容或 render prop |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ButtonRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
-### ButtonRenderProps
+### Render Props
 
-使用渲染 prop 模式时，会提供以下值：
+使用 render prop 模式时，提供以下值：
 
 | Prop | 类型 | 描述 |
 |------|------|------|
-| `isPending` | `boolean` | 按钮是否处于加载状态 |
-| `isPressed` | `boolean` | 按钮当前是否被按压 |
-| `isHovered` | `boolean` | 按钮是否处于悬停状态 |
-| `isFocused` | `boolean` | 按钮是否处于聚焦状态 |
-| `isFocusVisible` | `boolean` | 按钮是否应显示焦点指示 |
-| `isDisabled` | `boolean` | 按钮是否禁用 |
+| `isPending` | `boolean` | 是否处于加载状态 |
+| `isPressed` | `boolean` | 是否正在按下 |
+| `isHovered` | `boolean` | 是否悬停 |
+| `isFocused` | `boolean` | 是否聚焦 |
+| `isFocusVisible` | `boolean` | 是否显示焦点指示器 |
+| `isDisabled` | `boolean` | 是否禁用 |
+
+## 相关示例
+
+<RelatedShowcases component="Button" />
+
+## 相关组件
+
+<RelatedComponents component="button" />

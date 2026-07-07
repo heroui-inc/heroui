@@ -8,17 +8,15 @@ links:
   storybook: Components/Date and Time/TimeField
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { TimeField } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview name="time-field-basic" />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import {TimeField, Label, Description, FieldError} from '@heroui/react';
@@ -39,6 +37,24 @@ export default () => (
 
 > **TimeField** 将标签、时间输入、说明与错误信息组合为单个无障碍组件。
 
+## 示例
+
+### 带图标
+
+Add prefix or suffix icons to enhance the time field.
+
+<ComponentPreview name="time-field-with-prefix-icon" />
+
+<ComponentPreview name="time-field-with-suffix-icon" />
+
+<ComponentPreview name="time-field-with-prefix-and-suffix" />
+
+### 表面样式
+
+在 [Surface](/docs/components/surface) 内使用时，请在 `TimeField.Group` 上使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="time-field-on-surface" />
+
 ### 带描述
 
 <ComponentPreview name="time-field-with-description" />
@@ -47,91 +63,53 @@ export default () => (
 
 <ComponentPreview name="time-field-required" />
 
-### 校验
-
-配合 `FieldError`，使用 `isInvalid` 展示校验信息。
-
-<ComponentPreview name="time-field-invalid" />
-
-### 带校验
-
-TimeField 支持使用 `minValue`、`maxValue` 及自定义校验逻辑。
-
-<ComponentPreview name="time-field-with-validation" />
-
-### 受控
-
-通过控制 `value` 与其它组件或状态管理同步。
-
-<ComponentPreview name="time-field-controlled" />
-
-### 禁用状态
+### 禁用
 
 <ComponentPreview name="time-field-disabled" />
 
-### 带图标
-
-通过前缀或后缀图标增强时间输入。
-
-<ComponentPreview name="time-field-with-prefix-icon" />
-
-<ComponentPreview name="time-field-with-suffix-icon" />
-
-<ComponentPreview name="time-field-with-prefix-and-suffix" />
-
-### 全宽
+### 宽度充满
 
 <ComponentPreview name="time-field-full-width" />
 
-### 在 Surface 中
+### 表单校验
 
-在 [Surface](/docs/components/surface) 内使用时，请在 `TimeField.Group` 上使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+Use `isInvalid` together with `FieldError` to surface validation messages.
 
-<ComponentPreview name="time-field-on-surface" />
+<ComponentPreview name="time-field-invalid" />
+
+### 受控组件
+
+Control the value to synchronize with other components or state management.
+
+<ComponentPreview name="time-field-controlled" />
 
 ### 表单示例
 
-包含校验与提交的完整表单示例。
+Complete form example with validation and submission handling.
 
 <ComponentPreview name="time-field-form-example" />
 
-<RelatedComponents component="timefield" />
+### 带校验
 
-### 自定义渲染函数
+TimeField supports validation with `minValue`, `maxValue`, and custom validation logic.
+
+<ComponentPreview name="time-field-with-validation" />
+
+### 渲染函数
 
 <ComponentPreview
-  name="time-field-custom-render-function"
+  name="time-field-render-function"
 />
 
-## 样式
+## 自定义样式
 
-### 传入 Tailwind CSS 类
+### Tailwind CSS
 
-```tsx
-import {TimeField, Label, Description} from '@heroui/react';
+<ComponentPreview name="time-field-custom-styles" />
 
-function CustomTimeField() {
-  return (
-    <TimeField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Appointment time
-      </Label>
-      <TimeField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <TimeField.Input>
-          {(segment) => <TimeField.Segment segment={segment} />}
-        </TimeField.Input>
-      </TimeField.Group>
-      <Description className="text-xs text-default-500">
-        Select a time for your appointment.
-      </Description>
-    </TimeField>
-  );
-}
-```
+### 全局 CSS
 
-### 自定义组件类
-
-TimeField 的默认样式很轻量。覆盖 `.time-field` 类即可自定义容器样式。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -155,6 +133,10 @@ TimeField 的默认样式很轻量。覆盖 `.time-field` 类即可自定义容�
   }
 }
 ```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -368,7 +350,7 @@ TimeField.Suffix 接受标准 HTML `div` 属性：
 
 ## TimeField.Group 样式
 
-### 自定义组件类
+### 全局 CSS
 
 基础类作用于所有实例，可通过 `@layer components` 一次性覆盖。
 
@@ -433,3 +415,7 @@ TimeField.Suffix 接受标准 HTML `div` 属性：
 - **禁用**：`[data-disabled="true"]` 或 `[aria-disabled="true"]`
 - **段位聚焦**：段位上的 `:focus` 或 `[data-focused="true"]`
 - **段位占位符**：段位上的 `[data-placeholder="true"]`
+
+## 相关组件
+
+<RelatedComponents component="timefield" />

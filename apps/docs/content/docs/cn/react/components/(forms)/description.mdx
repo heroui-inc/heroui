@@ -1,52 +1,25 @@
 ---
 title: Description 描述
-description: 为表单字段及其他组件提供补充说明文字。
+description: 为表单字段及其他组件提供补充说明文本
 links:
   rac: TextField
   source: description/description.tsx
   styles: description.css
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Description } from '@heroui/react';
 ```
 
-## 用法
-
 <ComponentPreview
   name="description-basic"
 />
 
-<RelatedComponents component="description" />
-
-## API 参考
-
-### Description Props
-
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
-| `children` | `ReactNode` | - | Description 的内容。 |
-
-## 无障碍
-
-Description 组件通过以下方式增强无障碍：
-
-- 使用语义化 HTML，屏幕阅读器可识别
-- 提供 `slot="description"` 属性以便与 React Aria 集成
-- 支持适宜的文本对比度
-
-## 样式
-
-Description 组件使用以下 CSS 类：
-
-- `.description` - 基础 Description 样式，使用弱化（muted）文本颜色
-
 ## 示例
 
-### 与表单字段一起使用
+### 搭配表单字段
 
 ```tsx
 <div className="flex flex-col gap-1">
@@ -57,8 +30,8 @@ Description 组件使用以下 CSS 类：
   </Description>
 </div>
 ```
- 
-### 与 TextField 集成
+
+### 与 TextField 配合
 
 ```tsx
 import {TextField, Label, Input, Description} from '@heroui/react';
@@ -70,4 +43,55 @@ import {TextField, Label, Input, Description} from '@heroui/react';
 </TextField>
 ```
 
-使用 [TextField](./text-field) 组件时，无障碍属性会自动应用到 Label 与 Description 上。
+使用 [TextField](./text-field) 组件时，无障碍属性会自动应用到标签与描述。
+
+## 自定义样式
+
+### Tailwind CSS
+
+<ComponentPreview name="description-custom-styles" />
+
+### 全局 CSS
+
+可使用 `@layer components` 指令自定义 Description 组件类。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .description {
+    @apply text-muted;
+  }
+}
+```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS Classes
+
+Description 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/description.css)）：
+
+#### Base Classes [!toc]
+
+- `.description` - 基础描述样式，使用 `muted` 文本颜色
+
+## API 参考
+
+### Description
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `className` | `string` | - | 附加 CSS 类 |
+| `children` | `ReactNode` | - | 描述内容 |
+
+## 无障碍
+
+Description 组件通过以下方式增强无障碍性：
+
+- 使用屏幕阅读器可识别的语义化 HTML
+- 提供 `slot="description"` 属性以集成 React Aria
+- 支持适当的文本对比度
+
+## 相关组件
+
+<RelatedComponents component="description" />

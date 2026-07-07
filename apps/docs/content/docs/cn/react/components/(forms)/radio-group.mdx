@@ -9,19 +9,17 @@ links:
   storybook: Components/Forms/RadioGroup
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { RadioGroup, Radio } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="radio-group-basic"
 />
 
-### 组件结构
+## 组件结构
 
 导入 RadioGroup 组件后，可通过点号访问各个子部分。
 
@@ -49,11 +47,7 @@ export default () => (
 )
 ```
 
-### 自定义指示器
-
-<ComponentPreview
-  name="radio-group-custom-indicator"
-/>
+## 示例
 
 ### 水平排列
 
@@ -61,24 +55,21 @@ export default () => (
   name="radio-group-horizontal"
 />
 
-### 受控
+### 变体
+
+RadioGroup 组件支持两种视觉变体：
+
+- **`primary`**（默认）— 带默认背景的标准样式，适用于大多数场景
+- **`secondary`** — 低强调变体，适合在 Surface 等表面背景上使用
+
+<ComponentPreview name="radio-group-variants" />
+
+### 表面样式
+
+在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
 
 <ComponentPreview
-  name="radio-group-controlled"
-/>
-
-### 非受控
-
-当你只需要响应更新时，可组合使用 `defaultValue` 与 `onChange`。
-
-<ComponentPreview
-  name="radio-group-uncontrolled"
-/>
-
-### 校验
-
-<ComponentPreview
-  name="radio-group-validation"
+  name="radio-group-on-surface"
 />
 
 ### 禁用
@@ -87,21 +78,24 @@ export default () => (
   name="radio-group-disabled"
 />
 
-### 变体
-
-RadioGroup 支持两种视觉变体：
-
-- **`primary`**（默认）— 带默认背景的标准样式，适用于大多数场景
-- **`secondary`** — 低强调变体，适合用在 Surface 组件内
-
-<ComponentPreview name="radio-group-variants" />
-
-### 在 Surface 内
-
-在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+### 受控组件
 
 <ComponentPreview
-  name="radio-group-on-surface"
+  name="radio-group-controlled"
+/>
+
+### 非受控
+
+Combine `defaultValue` with `onChange` when you only need to react to updates.
+
+<ComponentPreview
+  name="radio-group-uncontrolled"
+/>
+
+### 表单校验
+
+<ComponentPreview
+  name="radio-group-validation"
 />
 
 ### 配送与支付
@@ -112,54 +106,27 @@ RadioGroup 支持两种视觉变体：
   name="radio-group-delivery-and-payment"
 />
 
-<RelatedShowcases component="RadioGroup" />
-
-<RelatedComponents component="radiogroup" />
-
-### 自定义渲染函数
+### 自定义指示器
 
 <ComponentPreview
-  name="radio-group-custom-render-function"
+  name="radio-group-custom-indicator"
 />
 
-## 样式
+### 渲染函数
 
-### 传入 Tailwind CSS 类
+<ComponentPreview
+  name="radio-group-render-function"
+/>
 
-```tsx
-import { RadioGroup, Radio } from '@heroui/react';
+## 自定义样式
 
-export default () => (
-  <RadioGroup defaultValue="premium" name="plan">
-    <Radio
-      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-blue-300 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-500/10"
-      value="basic"
-    >
-      <Radio.Indicator className="border-border border-2 group-hover:border-blue-400 group-data-[selected=true]:border-blue-500 group-data-[selected=true]:bg-blue-500" />
-      Basic Plan
-    </Radio>
-    <Radio
-      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-purple-300 data-[selected=true]:border-purple-500 data-[selected=true]:bg-purple-500/10"
-      value="premium"
-    >
-      <Radio.Indicator className="border-border border-2 group-hover:border-purple-400 group-data-[selected=true]:border-purple-500 group-data-[selected=true]:bg-purple-500" />
-      Premium Plan
-    </Radio>
-    <Radio
-      className="border-border group cursor-pointer rounded-xl border-2 p-4 hover:border-emerald-300 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-500/10"
-      value="business"
-    >
-      <Radio.Indicator className="border-border border-2 group-hover:border-emerald-400 group-data-[selected=true]:border-emerald-500 group-data-[selected=true]:bg-emerald-500" />
-      Business Plan
-    </Radio>
-  </RadioGroup>
-);
-```
+### Tailwind CSS
 
-### 自定义组件类
+<ComponentPreview name="radio-group-custom-styles" />
 
-要自定义 RadioGroup 的组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+### 全局 CSS
+
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -185,7 +152,9 @@ export default () => (
 }
 ```
 
-HeroUI 遵循 [BEM](https://getbem.com/) 方法论，以确保组件变体与状态可复用且易于自定义。
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -280,3 +249,11 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 ### RadioButtonRenderProps
 
 `Radio.Control` 和 `Radio.Indicator` 使用按钮级渲染 prop（`isHovered`、`isPressed`、`isFocusVisible` 等）。将函数作为 `Radio.Control` 子节点或传给 `Radio.Indicator` 即可访问它们。
+
+## 相关示例
+
+<RelatedShowcases component="RadioGroup" />
+
+## 相关组件
+
+<RelatedComponents component="radiogroup" />

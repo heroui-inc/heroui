@@ -9,17 +9,17 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ToggleButton } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="toggle-button-basic"
 />
+
+## 示例
 
 ### 变体
 
@@ -39,41 +39,27 @@ import { ToggleButton } from '@heroui/react';
   name="toggle-button-sizes"
 />
 
-
-### 受控
-
-<ComponentPreview
-  name="toggle-button-controlled"
-/>
-
 ### 禁用
 
 <ComponentPreview
   name="toggle-button-disabled"
 />
 
-<RelatedComponents component="togglebutton" />
+### 受控组件
 
-## 样式
+<ComponentPreview
+  name="toggle-button-controlled"
+/>
 
-### 传入 Tailwind CSS 类
+## 自定义样式
 
-```tsx
-import { ToggleButton } from '@heroui/react';
+### Tailwind CSS
 
-function CustomToggleButton() {
-  return (
-    <ToggleButton className="bg-purple-500 text-white">
-      Toggle
-    </ToggleButton>
-  );
-}
-```
+<ComponentPreview name="toggle-button-custom-styles" />
 
-### 自定义组件类
+### 全局 CSS
 
-若要自定义 ToggleButton 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -86,6 +72,8 @@ function CustomToggleButton() {
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -151,3 +139,7 @@ ToggleButton 组件使用以下 CSS 类（[查看源码样式](https://github.co
 | `isFocused` | `boolean` | 按钮是否处于聚焦状态 |
 | `isFocusVisible` | `boolean` | 按钮是否应显示焦点指示 |
 | `isDisabled` | `boolean` | 按钮是否被禁用 |
+
+## 相关组件
+
+<RelatedComponents component="togglebutton" />

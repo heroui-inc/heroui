@@ -8,21 +8,40 @@ links:
   storybook: Components/Forms/Textarea
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { TextArea } from '@heroui/react';
 ```
 
-<Callout>
-  关于校验、标签与错误信息，请参阅 **[TextField](/docs/components/text-field)**。
-</Callout>
-
-### 用法
-
 <ComponentPreview name="textarea-basic" />
 
-### 受控
+<Callout>
+  For validation, labels, and error messages, see **[TextField](/docs/components/text-field)**.
+</Callout>
+
+## 示例
+
+### 变体
+
+TextArea 组件支持两种视觉变体：
+
+- **`primary`**（默认）— 带阴影的标准样式，适用于大多数场景
+- **`secondary`** — 低强调、无阴影，适合在 Surface 等表面背景上使用
+
+<ComponentPreview name="textarea-variants" />
+
+### 表面样式
+
+在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="textarea-on-surface" />
+
+### 宽度充满
+
+<ComponentPreview name="textarea-full-width" />
+
+### 受控组件
 
 <ComponentPreview name="textarea-controlled" />
 
@@ -30,55 +49,15 @@ import { TextArea } from '@heroui/react';
 
 <ComponentPreview name="textarea-rows" />
 
-### 全宽
+## 自定义样式
 
-<ComponentPreview name="textarea-full-width" />
+### Tailwind CSS
 
-### 变体
+<ComponentPreview name="text-area-custom-styles" />
 
-TextArea 支持两种视觉变体：
+### 全局 CSS
 
-- **`primary`**（默认）— 常规带阴影样式，适用于大多数场景
-- **`secondary`** — 弱强调、无阴影变体，适合用于 Surface 组件内部
-
-<ComponentPreview name="textarea-variants" />
-
-### 在 Surface 内
-
-在 [Surface](/docs/components/surface) 组件内部使用时，请使用 `variant="secondary"`，以应用适合 surface 背景的弱强调变体。
-
-<ComponentPreview name="textarea-on-surface" />
-
-<RelatedComponents component="textarea" />
-
-<RelatedShowcases component="TextArea" />
-
-## 样式
-
-### 传入 Tailwind CSS 类
-
-```tsx
-import {Label, TextArea} from '@heroui/react';
-
-function CustomTextArea() {
-  return (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor="custom-textarea">Message</Label>
-      <TextArea
-        id="custom-textarea"
-        className="rounded-xl border border-border/70 bgsurface px-4 py-3 text-sm leading-6 shadow-sm"
-        placeholder="Let us know how we can help..."
-        rows={5}
-        style={{resize: "vertical"}}
-      />
-    </div>
-  );
-}
-```
-
-### 自定义组件类
-
-使用 Tailwind 的 `@layer components` 一次性覆盖共享的 `.textarea` 类。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -101,6 +80,10 @@ function CustomTextArea() {
   }
 }
 ```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -140,3 +123,11 @@ TextArea 接受所有标准 HTML `<textarea>` 属性，以及以下属性：
 | `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为弱强调、无阴影变体，适合用于 surface 上。 |
 
 > 对于 `isInvalid`、`isRequired` 等校验 prop 以及错误处理，请将 TextArea 作为子组件与 **[TextField](/docs/components/text-field)** 一起使用。
+
+## 相关示例
+
+<RelatedShowcases component="TextArea" />
+
+## 相关组件
+
+<RelatedComponents component="textarea" />

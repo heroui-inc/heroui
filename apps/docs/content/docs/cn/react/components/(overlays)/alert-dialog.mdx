@@ -1,6 +1,6 @@
 ---
 title: AlertDialog 警告对话框
-description: 用于关键确认的模态对话框，需要用户关注并执行明确操作。
+description: 用于关键确认操作的模态对话框，需要用户关注并明确操作
 links:
   rac: AlertDialog
   source: alert-dialog/alert-dialog.tsx
@@ -8,19 +8,15 @@ links:
   storybook: Components/Overlays/AlertDialog
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { AlertDialog } from "@heroui/react";
 ```
 
-### 用法
-
 <ComponentPreview name="alert-dialog-default" />
 
-### 组件结构
-
-导入 AlertDialog 组件后，可通过点语法访问各个子部分。
+## 组件结构
 
 ```tsx
 import {AlertDialog, Button} from "@heroui/react";
@@ -45,27 +41,37 @@ export default () => (
 );
 ```
 
-### 状态
+## 示例
+
+### 状态类型
 
 <ComponentPreview name="alert-dialog-statuses" />
 
-### 位置
+### 弹出位置
 
 <ComponentPreview name="alert-dialog-placements" />
-
-### 背景变体
-
-<ComponentPreview name="alert-dialog-backdrop-variants" />
 
 ### 尺寸
 
 <ComponentPreview name="alert-dialog-sizes" />
 
+### 受控模式
+
+<ComponentPreview name="alert-dialog-controlled" />
+
 ### 自定义图标
 
 <ComponentPreview name="alert-dialog-custom-icon" />
 
-### 自定义背景
+### 自定义触发器
+
+<ComponentPreview name="alert-dialog-custom-trigger" />
+
+### 遮罩变体
+
+<ComponentPreview name="alert-dialog-backdrop-variants" />
+
+### 自定义遮罩
 
 <ComponentPreview name="alert-dialog-custom-backdrop" />
 
@@ -77,14 +83,6 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-close-methods" />
 
-### 受控状态
-
-<ComponentPreview name="alert-dialog-controlled" />
-
-### 自定义触发器
-
-<ComponentPreview name="alert-dialog-custom-trigger" />
-
 ### 自定义动画
 
 <ComponentPreview name="alert-dialog-custom-animations" />
@@ -93,52 +91,17 @@ export default () => (
 
 <ComponentPreview name="alert-dialog-custom-portal" />
 
-<RelatedComponents component="alert-dialog" />
+## 自定义样式
 
-## 样式
+### Tailwind CSS
 
-### 传入 Tailwind CSS 类
+<ComponentPreview name="alert-dialog-custom-styles" />
 
-```tsx
-import {AlertDialog, Button} from "@heroui/react";
+### 全局 CSS
 
-function CustomAlertDialog() {
-  return (
-    <AlertDialog>
-      <Button variant="danger">Delete</Button>
-      <AlertDialog.Backdrop className="bg-red-950/90">
-        <AlertDialog.Container className="items-start pt-20">
-          <AlertDialog.Dialog className="border-2 border-red-500 sm:max-w-[400px]">
-            <AlertDialog.CloseTrigger />
-            <AlertDialog.Header>
-              <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>Custom Styled Alert</AlertDialog.Heading>
-            </AlertDialog.Header>
-            <AlertDialog.Body>
-              <p>This alert dialog has custom styling applied via Tailwind classes</p>
-            </AlertDialog.Body>
-            <AlertDialog.Footer>
-              <Button slot="close" variant="tertiary">
-                Cancel
-              </Button>
-              <Button slot="close" variant="danger">
-                Delete
-              </Button>
-            </AlertDialog.Footer>
-          </AlertDialog.Dialog>
-        </AlertDialog.Container>
-      </AlertDialog.Backdrop>
-    </AlertDialog>
-  );
-}
-```
+若要自定义 AlertDialog 组件类，可使用 `@layer components` 指令。
 
-### 自定义组件类
-
-要自定义 AlertDialog 的组件类，可使用 `@layer components` 指令。
-
-<br />
-[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -164,32 +127,34 @@ function CustomAlertDialog() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
-AlertDialog 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/alert-dialog.css)）：
+AlertDialog 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/alert-dialog.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 
-- `.alert-dialog__trigger` - 打开对话框的触发元素
+- `.alert-dialog__trigger` - 打开警告对话框的触发元素
 - `.alert-dialog__backdrop` - 对话框背后的遮罩层
-- `.alert-dialog__container` - 支持位置配置的包裹层
+- `.alert-dialog__container` - 支持 placement 的定位包裹层
 - `.alert-dialog__dialog` - 对话框内容容器
-- `.alert-dialog__header` - 图标与标题区域
+- `.alert-dialog__header` - 图标与标题的头部区域
 - `.alert-dialog__heading` - 标题文本样式
 - `.alert-dialog__body` - 主内容区域
-- `.alert-dialog__footer` - 操作按钮区域
+- `.alert-dialog__footer` - 操作按钮的底部区域
 - `.alert-dialog__icon` - 带状态色的图标容器
 - `.alert-dialog__close-trigger` - 关闭按钮元素
 
-#### 背景变体
+#### 遮罩变体 [!toc]
 
-- `.alert-dialog__backdrop--opaque` - 不透明有色背景（默认）
-- `.alert-dialog__backdrop--blur` - 带玻璃效果的模糊背景
-- `.alert-dialog__backdrop--transparent` - 透明背景（无遮罩）
+- `.alert-dialog__backdrop--opaque` - 不透明彩色遮罩（默认）
+- `.alert-dialog__backdrop--blur` - 带玻璃效果的模糊遮罩
+- `.alert-dialog__backdrop--transparent` - 透明遮罩（无覆盖层）
 
-#### 状态变体（图标）
+#### 状态变体（图标）[!toc]
 
 - `.alert-dialog__icon--default` - 默认灰色状态
 - `.alert-dialog__icon--accent` - 强调蓝色状态
@@ -199,93 +164,93 @@ AlertDialog 使用以下 CSS 类（[查看源码样式](https://github.com/herou
 
 ### 交互状态
 
-组件支持以下交互状态：
+该组件支持以下交互状态：
 
-- **聚焦**：`:focus-visible` 或 `[data-focus-visible="true"]` — 应用于触发器、对话框与关闭按钮
-- **悬停**：`:hover` 或 `[data-hovered="true"]` — 应用于关闭按钮悬停时
-- **激活**：`:active` 或 `[data-pressed="true"]` — 应用于关闭按钮按下时
-- **进入**：`[data-entering]` — 应用于对话框打开动画期间
-- **离开**：`[data-exiting]` — 应用于对话框关闭动画期间
-- **位置**：`[data-placement="*"]` — 根据对话框位置应用（auto、top、center、bottom）
+- **Focus**：`:focus-visible` 或 `[data-focus-visible="true"]` — 应用于 trigger、dialog 和 close 按钮
+- **Hover**：`:hover` 或 `[data-hovered="true"]` — 应用于 close 按钮悬停时
+- **Active**：`:active` 或 `[data-pressed="true"]` — 应用于 close 按钮按下时
+- **Entering**：`[data-entering]` — 对话框打开动画期间
+- **Exiting**：`[data-exiting]` — 对话框关闭动画期间
+- **Placement**：`[data-placement="*"]` — 根据对话框位置应用（auto、top、center、bottom）
 
 ## API 参考
 
 ### AlertDialog
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode` | - | 触发器与容器元素 |
 
 ### AlertDialog.Trigger
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode` | - | 自定义触发器内容 |
 | `className` | `string` | - | CSS 类 |
 
 ### AlertDialog.Backdrop
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
-| `variant` | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | 背景遮罩样式 |
-| `isDismissable` | `boolean` | `false` | 点击背景是否关闭 |
-| `isKeyboardDismissDisabled` | `boolean` | `true` | 是否禁用 ESC 关闭 |
+|------|------|--------|------|
+| `variant` | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | 遮罩覆盖层样式 |
+| `isDismissable` | `boolean` | `false` | 点击遮罩是否关闭 |
+| `isKeyboardDismissDisabled` | `boolean` | `true` | 是否禁用 ESC 键关闭 |
 | `isOpen` | `boolean` | - | 受控的打开状态 |
-| `onOpenChange` | `(isOpen: boolean) => void` | - | 打开状态变化的事件处理函数 |
-| `className` | `string \| (values) => string` | - | 背景的 CSS 类 |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | 打开状态变化处理函数 |
+| `className` | `string \| (values) => string` | - | 遮罩 CSS 类 |
 | `UNSTABLE_portalContainer` | `HTMLElement` | - | 自定义 portal 容器 |
 
 ### AlertDialog.Container
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `placement` | `"auto" \| "center" \| "top" \| "bottom"` | `"auto"` | 对话框在屏幕上的位置 |
-| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "cover"` | `"md"` | AlertDialog 尺寸变体 |
-| `className` | `string \| (values) => string` | - | 容器的 CSS 类 |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "cover"` | `"md"` | Alert Dialog 尺寸变体 |
+| `className` | `string \| (values) => string` | - | 容器 CSS 类 |
 
 ### AlertDialog.Dialog
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode \| ({close}) => ReactNode` | - | 内容或渲染函数 |
 | `className` | `string` | - | CSS 类 |
 | `role` | `string` | `"alertdialog"` | ARIA role |
 | `aria-label` | `string` | - | 无障碍标签 |
-| `aria-labelledby` | `string` | - | 标签元素的 id |
-| `aria-describedby` | `string` | - | 描述元素的 id |
+| `aria-labelledby` | `string` | - | 标签元素的 ID |
+| `aria-describedby` | `string` | - | 描述元素的 ID |
 
 ### AlertDialog.Header
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
-| `children` | `ReactNode` | - | 头部内容（通常为 Icon 与 Heading） |
+|------|------|--------|------|
+| `children` | `ReactNode` | - | 头部内容（通常为 Icon 和 Heading） |
 | `className` | `string` | - | CSS 类 |
 
 ### AlertDialog.Heading
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode` | - | 标题文本 |
 | `className` | `string` | - | CSS 类 |
 
 ### AlertDialog.Body
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode` | - | 正文内容 |
 | `className` | `string` | - | CSS 类 |
 
 ### AlertDialog.Footer
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode` | - | 底部内容（通常为操作按钮） |
 | `className` | `string` | - | CSS 类 |
 
 ### AlertDialog.Icon
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode` | - | 自定义图标元素 |
 | `status` | `"default" \| "accent" \| "success" \| "warning" \| "danger"` | `"danger"` | 状态颜色变体 |
 | `className` | `string` | - | CSS 类 |
@@ -293,7 +258,7 @@ AlertDialog 使用以下 CSS 类（[查看源码样式](https://github.com/herou
 ### AlertDialog.CloseTrigger
 
 | Prop | 类型 | 默认值 | 描述 |
-| ---- | ---- | ------ | ---- |
+|------|------|--------|------|
 | `children` | `ReactNode` | - | 自定义关闭按钮 |
 | `className` | `string \| (values) => string` | - | CSS 类 |
 
@@ -318,8 +283,12 @@ state.setOpen(); // Set state directly
 
 实现 [WAI-ARIA AlertDialog 模式](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)：
 
-- **焦点陷阱**：焦点限制在 AlertDialog 内
-- **键盘**：`ESC` 关闭（若启用）、`Tab` 在可聚焦元素间循环
-- **屏幕阅读器**：`role="alertdialog"` 等合适的 ARIA 属性
+- **焦点陷阱**：焦点锁定在警告对话框内
+- **键盘**：`ESC` 关闭（启用时）、`Tab` 循环切换元素
+- **屏幕阅读器**：使用 `role="alertdialog"` 的正确 ARIA 属性
 - **滚动锁定**：打开时禁用 body 滚动
-- **需要明确操作**：默认需要用户明确操作（不通过点击背景/ESC 轻易关闭）
+- **必需操作**：默认需要用户明确操作（不可通过遮罩/ESC 关闭）
+
+## 相关组件
+
+<RelatedComponents component="alert-dialog" />

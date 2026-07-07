@@ -7,73 +7,41 @@ links:
   storybook: surface
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Surface } from '@heroui/react';
 ```
 
-### 用法
+<ComponentPreview name="surface-basic" />
 
-<ComponentPreview
-  name="surface-variants"
-/>
-
-## 概述
-
-Surface 组件是语义化容器，通过变体提供不同的视觉层次。
+## 示例
 
 ### 变体
 
-Surface 提供描述视觉层次的语义化变体：
+Surface comes in semantic variants that describe their prominence level:
 
-- **`default`** — 标准表面外观（bg-surface）
-- **`secondary`** — 中等层次（bg-surface-secondary）
-- **`tertiary`** — 更高层次（bg-surface-tertiary）
+- **`default`** - Standard surface appearance (bg-surface)
+- **`secondary`** - Medium prominence (bg-surface-secondary)
+- **`tertiary`** - Higher prominence (bg-surface-tertiary)
 
-## 与表单组件配合
+<ComponentPreview name="surface-variants" />
 
-在 Surface 内使用表单组件时，请为这些组件设置 `variant="secondary"`，以应用适合表面背景的低强调变体。
+### 搭配表单
 
-```tsx
-import { Surface, Input, TextArea } from '@heroui/react';
+When using form components inside a Surface, use the `variant="secondary"` prop to apply the lower emphasis variant suitable for surface backgrounds.
 
-function App() {
-  return (
-    <Surface variant="default">
-      <Input placeholder="Input with secondary variant" variant="secondary" />
-      <TextArea placeholder="TextArea with secondary variant" variant="secondary" />
-    </Surface>
-  );
-}
-```
+<ComponentPreview name="surface-with-form-components" />
 
-<RelatedComponents component="surface" />
+## 自定义样式
 
-## 样式
+### Tailwind CSS
 
-### 传入 Tailwind CSS 类
+<ComponentPreview name="surface-custom-styles" />
 
-```tsx
-import { Surface } from '@heroui/react';
+### 全局 CSS
 
-function CustomSurface() {
-  return (
-    <Surface
-      className="rounded-2xl p-8 shadow-lg"
-      variant="secondary"
-    >
-      <h2>Custom Styled Surface</h2>
-      <p>Content goes here</p>
-    </Surface>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 Surface 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -86,6 +54,8 @@ function CustomSurface() {
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -126,3 +96,7 @@ function MyComponent() {
   // variant 为 "transparent" | "default" | "secondary" | "tertiary" | undefined
 }
 ```
+
+## 相关组件
+
+<RelatedComponents component="surface" />

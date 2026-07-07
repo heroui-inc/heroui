@@ -9,15 +9,86 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Toast, toast } from '@heroui/react';
 ```
 
-## 设置
+<ComponentPreview
+  name="toast-default"
+/>
 
-在应用根部渲染 Provider。
+## 组件结构
+
+```tsx
+<Toast.Provider>
+  <Toast>
+    <Toast.Indicator />
+    <Toast.Content>
+      <Toast.Title />
+      <Toast.Description />
+    </Toast.Content>
+    <Toast.ActionButton />
+    <Toast.CloseButton />
+  </Toast>
+</Toast.Provider>
+```
+
+
+## 示例
+
+### 变体
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+### 放置位置
+
+<ComponentPreview
+  name="toast-placements"
+/>
+
+### 简单 Toast
+
+<ComponentPreview
+  name="toast-simple"
+/>
+
+### 自定义指示器
+
+<ComponentPreview
+  name="toast-custom-indicator"
+/>
+
+### 自定义 Toast 渲染
+
+<ComponentPreview
+  name="toast-custom-toast"
+/>
+
+### Promise 与加载中
+
+<ComponentPreview
+  name="toast-promise"
+/>
+
+### 回调
+
+<ComponentPreview
+  name="toast-callbacks"
+/>
+
+### 自定义队列
+
+<ComponentPreview
+  name="toast-custom-queue"
+/>
+
+### 配置
+
+Render the provider in the root of your app.
 
 ```tsx
 import { Toast, Button, toast } from '@heroui/react';
@@ -34,90 +105,15 @@ function App() {
 }
 ```
 
-### 用法
+## 自定义样式
 
-<ComponentPreview
-  name="toast-default"
-/>
+### Tailwind CSS
 
-### 简单 Toast
+<ComponentPreview name="toast-custom-styles" />
 
-<ComponentPreview
-  name="toast-simple"
-/>
+### 全局 CSS
 
-### 变体
-
-<ComponentPreview
-  name="toast-variants"
-/>
-
-### 自定义指示器
-
-<ComponentPreview
-  name="toast-custom-indicator"
-/>
-
-### Promise 与加载中
-
-<ComponentPreview
-  name="toast-promise"
-/>
-
-### 回调
-
-<ComponentPreview
-  name="toast-callbacks"
-/>
-
-### 放置位置
-
-<ComponentPreview
-  name="toast-placements"
-/>
-
-### 自定义 Toast 渲染
-
-<ComponentPreview
-  name="toast-custom-toast"
-/>
-
-### 自定义队列
-
-<ComponentPreview
-  name="toast-custom-queue"
-/>
-
-### 组件结构
-
-```tsx
-<Toast.Provider>
-  <Toast>
-    <Toast.Indicator />
-    <Toast.Content>
-      <Toast.Title />
-      <Toast.Description />
-    </Toast.Content>
-    <Toast.ActionButton />
-    <Toast.CloseButton />
-  </Toast>
-</Toast.Provider>
-```
-
-<RelatedComponents component="toast" />
-
-## 样式
-
-### 传入 Tailwind CSS 类
-
-```tsx
-<Toast.Provider className="bottom-8 right-8" placement="bottom end" />
-```
-
-### 自定义组件类
-
-要自定义 Toast 的组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -130,6 +126,8 @@ function App() {
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -330,3 +328,7 @@ toast.resumeAll();
 | `loading` | `ReactNode` | - | Promise pending 时显示的消息 |
 | `success` | `ReactNode \| ((data: T) => ReactNode)` | - | 成功时显示的消息（可为函数） |
 | `error` | `ReactNode \| ((error: Error) => ReactNode)` | - | 失败时显示的消息（可为函数） |
+
+## 相关组件
+
+<RelatedComponents component="toast" />
