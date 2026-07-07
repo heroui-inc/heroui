@@ -196,7 +196,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 Table 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/table.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.table-root` - 根容器（命名为 `table-root` 而非 `table`，因为 `table` 是 Tailwind CSS 内置的 `display: table` 工具类）
 - `.table__scroll-container` - 横向滚动包裹层与自定义滚动条
 - `.table__content` - `<table>` 元素
@@ -207,7 +207,7 @@ Table 组件使用以下 CSS 类（[查看源码样式](https://github.com/herou
 - `.table__cell` - 数据单元格（`<td>`）
 - `.table__footer` - 表底容器（位于 table 外部）
 
-#### 进阶类
+#### 进阶类 [!toc]
 - `.table__column-resizer` - 列宽拖拽手柄
 - `.table__resizable-container` - 启用列宽调整的包裹层
 - `.table__load-more` - 无限滚动的哨兵行
@@ -215,7 +215,7 @@ Table 组件使用以下 CSS 类（[查看源码样式](https://github.com/herou
 - `.table__sortable-column-header` - 可排序列标签与指示器的包裹层
 - `.table__sortable-column-indicator` - 排序方向 chevron（通过 `[data-direction="descending"]` 翻转）
 
-#### 变体类
+#### 变体类 [!toc]
 - `.table-root--primary` - 灰色背景容器与卡片式表体（默认）
 - `.table-root--secondary` - 无背景，独立圆角表头
 
@@ -233,23 +233,20 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 
 ## API 参考
 
-### Table Props
-
+### Table
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉变体。Primary 为灰色背景容器；Secondary 为扁平透明行。 |
 | `className` | `string` | - | 根容器的额外 CSS 类。 |
 | `children` | `React.ReactNode` | - | 表格内容（ScrollContainer、Footer 等）。 |
 
-### Table.ScrollContainer Props
-
+### Table.ScrollContainer
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类。 |
 | `children` | `React.ReactNode` | - | `Table.Content` 元素。 |
 
-### Table.Content Props
-
+### Table.Content
 继承自 [React Aria Table](https://react-spectrum.adobe.com/react-aria/Table.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -262,8 +259,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `onSortChange` | `(descriptor: SortDescriptor) => void` | - | 排序变化时的事件处理函数。 |
 | `className` | `string` | - | 额外的 CSS 类。 |
 
-### Table.Header Props
-
+### Table.Header
 继承自 [React Aria TableHeader](https://react-spectrum.adobe.com/react-aria/Table.html#tableheader)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -271,8 +267,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `columns` | `T[]` | - | 渲染函数模式下的动态列数据。 |
 | `children` | `React.ReactNode \| (column: T) => React.ReactNode` | - | 静态列或渲染函数。 |
 
-### Table.Column Props
-
+### Table.Column
 继承自 [React Aria Column](https://react-spectrum.adobe.com/react-aria/Table.html#column)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -284,8 +279,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `minWidth` | `number` | - | 可调整列的最小宽度。 |
 | `children` | `React.ReactNode \| (values: ColumnRenderProps) => React.ReactNode` | - | 列内容或带排序方向的渲染函数。 |
 
-### Table.Body Props
-
+### Table.Body
 继承自 [React Aria TableBody](https://react-spectrum.adobe.com/react-aria/Table.html#tablebody)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -294,8 +288,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `renderEmptyState` | `() => React.ReactNode` | - | 表格为空时展示的内容。 |
 | `children` | `React.ReactNode \| (item: T) => React.ReactNode` | - | 静态行或渲染函数。 |
 
-### Table.Row Props
-
+### Table.Row
 继承自 [React Aria Row](https://react-spectrum.adobe.com/react-aria/Table.html#row)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -304,8 +297,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `className` | `string` | - | 额外的 CSS 类。 |
 | `children` | `React.ReactNode` | - | 行单元格。 |
 
-### Table.Cell Props
-
+### Table.Cell
 继承自 [React Aria Cell](https://react-spectrum.adobe.com/react-aria/Table.html#cell)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -313,8 +305,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `className` | `string` | - | 额外的 CSS 类。 |
 | `children` | `React.ReactNode` | - | 单元格内容。 |
 
-### Table.SortableColumnHeader Props
-
+### Table.SortableColumnHeader
 渲染可排序列的标签与升序 / 降序指示器。请在 `Table.Column` 的渲染函数回调中使用，并将 `sortDirection` 透传进来。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -325,23 +316,20 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `className` | `string` | - | 包裹元素的额外 CSS 类。 |
 | `children` | `React.ReactNode` | - | 列标签内容。 |
 
-### Table.Footer Props
-
+### Table.Footer
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类。 |
 | `children` | `React.ReactNode` | - | 表底内容（例如分页）。 |
 
-### Table.ColumnResizer Props
-
+### Table.ColumnResizer
 继承自 [React Aria ColumnResizer](https://react-spectrum.adobe.com/react-aria/Table.html#columnresizer)。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类。 |
 
-### Table.ResizableContainer Props
-
+### Table.ResizableContainer
 继承自 [React Aria ResizableTableContainer](https://react-spectrum.adobe.com/react-aria/Table.html#resizabletablecontainer)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -349,8 +337,7 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `className` | `string` | - | 额外的 CSS 类。 |
 | `children` | `React.ReactNode` | - | `Table.Content` 元素。 |
 
-### Table.LoadMore Props
-
+### Table.LoadMore
 继承自 [React Aria TableLoadMoreItem](https://react-spectrum.adobe.com/react-aria/Table.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -359,15 +346,13 @@ Table 同时支持 CSS 伪类与 data 属性，以提供更灵活的状态控制
 | `onLoadMore` | `() => void` | - | 哨兵行可见时的事件处理函数。 |
 | `children` | `React.ReactNode` | - | 加载指示器内容。 |
 
-### Table.LoadMoreContent Props
-
+### Table.LoadMoreContent
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类。 |
 | `children` | `React.ReactNode` | - | 加载指示器内容（例如 Spinner）。 |
 
-### Table.Collection Props
-
+### Table.Collection
 由 React Aria `Collection` 重新导出。用于在行内与静态单元格并存时渲染动态单元格（例如复选框）。
 
 | Prop | 类型 | 默认值 | 描述 |

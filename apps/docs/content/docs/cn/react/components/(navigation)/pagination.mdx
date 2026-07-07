@@ -134,7 +134,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 Pagination 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/pagination.css)）：
 
-#### 基础与布局类
+#### 基础与布局类 [!toc]
 - `.pagination` - 根导航容器（flex 布局）
 - `.pagination__summary` - 左侧信息文本容器
 - `.pagination__content` - 分页项容器
@@ -143,7 +143,7 @@ Pagination 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 - `.pagination__link--nav` - 导航按钮修饰符（Previous/Next）
 - `.pagination__ellipsis` - 省略号指示器
 
-#### 尺寸类
+#### 尺寸类 [!toc]
 - `.pagination--sm` - 小尺寸变体
 - `.pagination--md` - 中尺寸变体（默认）
 - `.pagination--lg` - 大尺寸变体
@@ -160,37 +160,32 @@ Pagination 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 
 ## API 参考
 
-### Pagination Props
-
+### Pagination
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | 分页控件的尺寸 |
 | `className` | `string` | - | 额外的 CSS 类 |
 | `children` | `ReactNode` | - | 分页部件（Summary、Content 等） |
 
-### Pagination.Summary Props
-
+### Pagination.Summary
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |
 | `children` | `ReactNode` | - | 摘要内容（例如 "Showing 1-10 of 120"） |
 
-### Pagination.Content Props
-
+### Pagination.Content
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |
 | `children` | `ReactNode` | - | 分页项 |
 
-### Pagination.Item Props
-
+### Pagination.Item
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |
 | `children` | `ReactNode` | - | 项内容（Link、Previous、Next 或 Ellipsis） |
 
-### Pagination.Link Props
-
+### Pagination.Link
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `isActive` | `boolean` | `false` | 是否为当前页 |
@@ -199,8 +194,7 @@ Pagination 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 | `className` | `string` | - | 额外的 CSS 类 |
 | `children` | `ReactNode` | - | 页码内容 |
 
-### Pagination.Previous / Pagination.Next Props
-
+### Pagination.Previous / Pagination.Next
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `isDisabled` | `boolean` | `false` | 是否禁用按钮 |
@@ -208,15 +202,13 @@ Pagination 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 | `className` | `string` | - | 额外的 CSS 类 |
 | `children` | `ReactNode` | - | 按钮内容（可与 PreviousIcon/NextIcon 组合） |
 
-### Pagination.PreviousIcon / Pagination.NextIcon Props
-
+### Pagination.PreviousIcon / Pagination.NextIcon
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |
 | `children` | `ReactNode` | Default chevron SVG | 用于替换默认 chevron 的自定义图标 |
 
-### Pagination.Ellipsis Props
-
+### Pagination.Ellipsis
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |

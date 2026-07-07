@@ -137,26 +137,26 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 TagGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tag-group.css) 与 [tag.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tag.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.tag-group` - TagGroup 根容器
 - `.tag-group__list` - 标签列表容器
 - `.tag` - 标签基础样式
 - `.tag__remove-button` - 移除按钮触发器
 
-#### 插槽类
+#### 插槽类 [!toc]
 - `.tag-group [slot="description"]` - Description 插槽样式
 - `.tag-group [slot="errorMessage"]` - ErrorMessage 插槽样式
 
-#### 尺寸类
+#### 尺寸类 [!toc]
 - `.tag--sm` - 小尺寸标签
 - `.tag--md` - 中尺寸标签（默认）
 - `.tag--lg` - 大尺寸标签
 
-#### 变体类
+#### 变体类 [!toc]
 - `.tag--default` - 默认变体
 - `.tag--surface` - 带 Surface 背景的变体
 
-#### 状态类
+#### 状态类 [!toc]
 - `.tag[data-selected="true"]` - 选中状态
 - `.tag[data-disabled="true"]` - 禁用状态
 - `.tag[data-hovered="true"]` - 悬停状态
@@ -175,8 +175,7 @@ TagGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 
 ## API 参考
 
-### TagGroup Props
-
+### TagGroup
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `selectionMode` | `"none" \| "single" \| "multiple"` | `"none"` | 允许的选择类型。 |
@@ -192,8 +191,7 @@ TagGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 | `children` | `ReactNode \| RenderFunction` | - | TagGroup 内容或渲染函数。 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### TagGroup.List Props
-
+### TagGroup.List
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `items` | `Iterable<T>` | - | 标签列表要展示的数据项。 |
@@ -202,8 +200,7 @@ TagGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 | `children` | `ReactNode \| RenderFunction` | - | 标签列表内容或渲染函数。 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TagListRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### Tag Props
-
+### Tag
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `id` | `Key` | - | 标签唯一标识。 |
@@ -215,8 +212,7 @@ TagGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 
 **提示：** `size`、`variant` 由父级 `TagGroup` 继承，无法在单个 `Tag` 上直接设置。
 
-### Tag.RemoveButton Props
-
+### Tag.RemoveButton
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 Tailwind CSS 类。 |

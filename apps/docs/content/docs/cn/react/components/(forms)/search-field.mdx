@@ -161,11 +161,16 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 ### CSS 类
 
+#### 基础类 [!toc]
+
 - `.search-field` – 根容器，样式非常克制（`flex flex-col gap-1`）
 - `.search-field__group` – 搜索图标、输入框与清除按钮的容器，包含边框与背景样式
 - `.search-field__input` – 搜索输入字段
 - `.search-field__search-icon` – 左侧显示的搜索图标
 - `.search-field__clear-button` – 用于清空搜索字段的按钮
+
+#### 变体类 [!toc]
+
 - `.search-field--primary` – 带阴影的主变体（默认）
 - `.search-field--secondary` – 无阴影的次变体，适合用在 surface 上
 
@@ -186,8 +191,7 @@ SearchField 会根据状态自动管理以下 data 属性：
 
 ## API 参考
 
-### SearchField Props
-
+### SearchField
 SearchField 继承 React Aria [SearchField](https://react-spectrum.adobe.com/react-aria/SearchField.html) 组件的全部 props。
 
 #### Base Props

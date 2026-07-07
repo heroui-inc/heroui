@@ -253,23 +253,23 @@ InputGroup 使用可自定义的 CSS 类。覆盖组件类以匹配设计系统�
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
-### CSS Classes
+### CSS 类
 
-#### Base Classes [!toc]
+#### 基础类 [!toc]
 
 - `.input-group` – 根容器：带边框、背景与 flex 布局。默认 `min-h-9` 与 `items-center`；存在 textarea 时切换为 `items-start`
 - `.input-group__input` – 透明背景、无边框的输入元素。textarea 也使用该基础类
 - `.input-group__prefix` – 左侧圆角的前缀容器。与 textarea 搭配时与顶部对齐
 - `.input-group__suffix` – 右侧圆角的后缀容器。与 textarea 搭配时与顶部对齐
 
-#### Variant Classes [!toc]
+#### 变体类 [!toc]
 
 - `.input-group--primary` – 带阴影的主变体（默认）
 - `.input-group--secondary` – 无阴影的次变体，适用于 Surface 内
 
 **Note：** 使用 `InputGroup.TextArea` 时，容器从 `items-center` 切换为 `items-start`，并使用 `height: auto` 替代固定高度。前缀与后缀与顶部对齐，并增加内边距以匹配 textarea 的垂直内边距。textarea 使用相同的 `.input-group__input` 基础类，并通过 `[data-slot="input-group-textarea"]` 选择器应用 textarea 专用样式（最小高度与纵向 resize）。
 
-### Interactive States
+### 交互状态
 
 InputGroup 会根据状态自动管理以下 data 属性：
 

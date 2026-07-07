@@ -168,11 +168,16 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 ### CSS 类
 
+#### 基础类 [!toc]
+
 - `.number-field` – 根容器，样式非常克制（`flex flex-col gap-1`）
 - `.number-field__group` – 输入与按钮的容器，包含边框与背景样式
 - `.number-field__input` – 数字输入字段
 - `.number-field__increment-button` – 用于增加数值的按钮
 - `.number-field__decrement-button` – 用于减少数值的按钮
+
+#### 变体类 [!toc]
+
 - `.number-field--primary` – 带阴影的主变体（默认）
 - `.number-field--secondary` – 无阴影的次变体，适合用在 surface 上
 
@@ -192,8 +197,7 @@ NumberField 会根据状态自动管理以下 data 属性：
 
 ## API 参考
 
-### NumberField Props
-
+### NumberField
 NumberField 继承 React Aria [NumberField](https://react-spectrum.adobe.com/react-aria/NumberField.html) 组件的全部 props。
 
 #### Base Props

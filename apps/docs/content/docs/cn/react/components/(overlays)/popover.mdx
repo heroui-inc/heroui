@@ -97,7 +97,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/popover.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.popover` - Popover 根容器样式
 - `.popover__dialog` - 对话框内容包裹层
 - `.popover__heading` - 标题文本样式
@@ -114,8 +114,7 @@ Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 
 ## API 参考
 
-### Popover Props
-
+### Popover
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 触发器与内容元素 |
@@ -123,8 +122,7 @@ Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 | `defaultOpen` | `boolean` | `false` | 初始打开状态（非受控） |
 | `onOpenChange` | `(isOpen: boolean) => void` | - | 打开状态变化时调用 |
 
-### Popover.Content Props
-
+### Popover.Content
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 在 Popover 中展示的内容 |
@@ -134,22 +132,19 @@ Popover 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 | `className` | `string` | - | 额外的 CSS 类名 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, PopoverRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
 
-### Popover.Dialog Props
-
+### Popover.Dialog
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 对话框内容 |
 | `className` | `string` | - | 额外的 CSS 类名 |
 
-### Popover.Trigger Props
-
+### Popover.Trigger
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 触发 Popover 的元素 |
 | `className` | `string` | - | 额外的 CSS 类名 |
 
-### Popover.Arrow Props
-
+### Popover.Arrow
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 自定义箭头元素 |

@@ -155,8 +155,7 @@ TimeField 会根据状态自动设置以下 data 属性：
 
 ## API 参考
 
-### TimeField Props
-
+### TimeField
 TimeField 继承 React Aria [TimeField](https://react-aria.adobe.com/TimeField) 的全部 props。
 
 #### Base Props
@@ -301,8 +300,7 @@ const timeValue = new Time(currentTime.hour, currentTime.minute, currentTime.sec
 | `isFocusWithin` | `boolean` | 是否有子元素聚焦。 |
 | `isFocusVisible` | `boolean` | 焦点是否可见（键盘导航）。 |
 
-### TimeField.Group Props
-
+### TimeField.Group
 TimeField.Group 继承 React Aria `Group` 的全部 props，并额外支持：
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -310,8 +308,7 @@ TimeField.Group 继承 React Aria `Group` 的全部 props，并额外支持：
 | `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉变体。`primary` 为默认带阴影样式；`secondary` 为低强调、无阴影，适合用于 Surface。 |
 
-### TimeField.Input Props
-
+### TimeField.Input
 TimeField.Input 继承 React Aria `DateInput` 的全部 props，并额外支持：
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -321,8 +318,7 @@ TimeField.Input 继承 React Aria `DateInput` 的全部 props，并额外支持�
 
 `TimeField.Input` 接受渲染函数作为子节点，函数接收日期段位；每个段位表示时间的一部分（时、分、秒等）。
 
-### TimeField.Segment Props
-
+### TimeField.Segment
 TimeField.Segment 继承 React Aria `DateSegment` 的全部 props：
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -330,8 +326,7 @@ TimeField.Segment 继承 React Aria `DateSegment` 的全部 props：
 | `segment` | `DateSegment` | - | 来自 TimeField.Input 渲染函数的 `DateSegment` 对象。 |
 | `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
 
-### TimeField.Prefix Props
-
+### TimeField.Prefix
 TimeField.Prefix 接受标准 HTML `div` 属性：
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -339,8 +334,7 @@ TimeField.Prefix 接受标准 HTML `div` 属性：
 | `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
 | `children` | `ReactNode` | - | 前缀插槽中要显示的内容。 |
 
-### TimeField.Suffix Props
-
+### TimeField.Suffix
 TimeField.Suffix 接受标准 HTML `div` 属性：
 
 | Prop | 类型 | 默认值 | 描述 |

@@ -77,18 +77,18 @@ import { ColorSwatch } from '@heroui/react';
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
-### CSS Classes
+### CSS 类
 
 ColorSwatch 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-swatch.css)）：
 
-#### Base Classes [!toc]
+#### 基础类 [!toc]
 - `.color-swatch` - 基础 swatch 样式，透明区域使用棋盘格背景
 
-#### Shape Classes [!toc]
+#### 形状类 [!toc]
 - `.color-swatch--circle` - 圆形（默认）
 - `.color-swatch--square` - 圆角方形
 
-#### Size Classes [!toc]
+#### 尺寸类 [!toc]
 - `.color-swatch--xs` - 特小（16px）
 - `.color-swatch--sm` - 小（24px）
 - `.color-swatch--md` - 中（32px，默认）
@@ -110,8 +110,7 @@ ColorSwatch 组件使用以下 CSS 类（[查看源码样式](https://github.com
 | `aria-label` | `string` | - | swatch 的无障碍标签 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSwatchRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
-### Style Render Props
-
+### Style Render
 当把 `style` 作为函数传入时，会获得包含颜色对象在内的 render props：
 
 ```tsx

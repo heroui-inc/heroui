@@ -166,7 +166,7 @@ export default () => (
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
-### CSS Classes
+### CSS 类
 
 Calendar 在 `packages/styles/components/calendar.css` 与 `packages/styles/components/calendar-year-picker.css` 中使用以下类：
 
@@ -186,7 +186,7 @@ Calendar 在 `packages/styles/components/calendar.css` 与 `packages/styles/comp
 - `.calendar-year-picker__year-grid` - 可选年份的覆盖网格
 - `.calendar-year-picker__year-cell` - 单个年份选项
 
-### Interactive States
+### 交互状态
 
 Calendar 同时支持伪类与 React Aria data 属性：
 
@@ -259,8 +259,7 @@ Calendar 继承 React Aria [Calendar](https://react-spectrum.adobe.com/react-ari
 | `Calendar.YearPickerGrid` | `format` | `DateFormatterOptions` | `{year: 'numeric'}` | 自定义年份单元格标签（纪元、历法等） |
 | `Calendar.YearPickerGrid` | `visibleYears` | `number` | min–max 跨度或 `20` | 滑动窗口中显示的年份数。同时设置 `minValue` 与 `maxValue` 时默认为完整范围 |
 
-### Calendar.Cell Render Props
-
+### Calendar.Cell Render
 `Calendar.Cell` 子节点为函数时，可使用 React Aria render props：
 
 | Prop | 类型 | 描述 |

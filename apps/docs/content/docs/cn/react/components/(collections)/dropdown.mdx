@@ -185,17 +185,17 @@ export default () => (
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
-### CSS Classes
+### CSS 类
 
 Dropdown 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/dropdown.css)）：
 
-#### Base Classes [!toc]
+#### 基础类 [!toc]
 - `.dropdown` - Dropdown 根容器
 - `.dropdown__trigger` - 触发 Dropdown 的按钮或元素
 - `.dropdown__popover` - Popover 容器
 - `.dropdown__menu` - Popover 内的菜单容器
 
-#### State Classes [!toc]
+#### 状态类 [!toc]
 - `.dropdown__trigger[data-focus-visible="true"]` - 触发器聚焦状态
 - `.dropdown__trigger[data-disabled="true"]` - 触发器禁用状态
 - `.dropdown__trigger[data-pressed="true"]` - 触发器按下状态
@@ -204,15 +204,15 @@ Dropdown 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 - `.dropdown__menu[data-selection-mode="single"]` - 单选模式
 - `.dropdown__menu[data-selection-mode="multiple"]` - 多选模式
 
-### Menu Component Classes
+### 菜单组件类
 
 Dropdown 使用 Menu、MenuItem 与 MenuSection 作为底层组件。以下类名也可用于自定义：
 
-#### Menu Classes [!toc]
+#### 菜单类 [!toc]
 - `.menu` - 菜单容器（[menu.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu.css)）
   - `[data-slot="separator"]` - 菜单内的分隔线元素
 
-#### MenuItem Classes [!toc]
+#### 菜单项类 [!toc]
 - `.menu-item` - 菜单项容器（[menu-item.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu-item.css)）
 - `.menu-item__indicator` - 选中指示器（对勾或圆点）
   - `[data-slot="menu-item-indicator--checkmark"]` - 对勾指示器 SVG
@@ -221,7 +221,7 @@ Dropdown 使用 Menu、MenuItem 与 MenuSection 作为底层组件。以下类�
 - `.menu-item--default` - 默认样式变体
 - `.menu-item--danger` - 危险样式变体
 
-#### MenuItem State Classes [!toc]
+#### 菜单项状态类 [!toc]
 - `.menu-item[data-focus-visible="true"]` - 聚焦状态（键盘焦点）
 - `.menu-item[data-focus="true"]` - 聚焦状态
 - `.menu-item[data-pressed]` - 按下状态
@@ -234,10 +234,10 @@ Dropdown 使用 Menu、MenuItem 与 MenuSection 作为底层组件。以下类�
 - `.menu-item[aria-checked="true"]` - 已勾选（ARIA）
 - `.menu-item[aria-selected="true"]` - 已选中（ARIA）
 
-#### MenuSection Classes [!toc]
+#### 菜单分区类 [!toc]
 - `.menu-section` - 菜单分区容器（[menu-section.css](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/menu-section.css)）
 
-### Interactive States
+### 交互状态
 
 组件同时支持 CSS 伪类与 data 属性：
 

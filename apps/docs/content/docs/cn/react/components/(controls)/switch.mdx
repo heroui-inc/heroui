@@ -184,7 +184,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 ### CSS 类
 
-#### Switch 类
+#### Switch 类 [!toc]
 
 Switch 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch.css)）：
 
@@ -197,7 +197,7 @@ Switch 组件使用以下 CSS 类（[查看源码样式](https://github.com/hero
 - `.switch--md` - 中尺寸变体（默认）
 - `.switch--lg` - 大尺寸变体
 
-#### SwitchGroup 类
+#### SwitchGroup 类 [!toc]
 
 SwitchGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/switch-group.css)）：
 
@@ -218,8 +218,7 @@ SwitchGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com
 
 ## API 参考
 
-### Switch Props
-
+### Switch
 继承自 [React Aria SwitchField](https://react-spectrum.adobe.com/react-aria/Switch.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -240,8 +239,7 @@ SwitchGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com
 | `children` | `React.ReactNode \| (values: SwitchFieldRenderProps) => React.ReactNode` | - | Switch 内容或字段级渲染 prop。 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SwitchFieldRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### Switch.Content Props
-
+### Switch.Content
 包裹控件与标签文本的可点击 `<label>`。请把 `Switch.Control` 与 `Label` 放在它内部；`Description`/`FieldError` 作为 `Switch.Content` 的兄弟节点。对于没有标签的 switch，省略 `Label` 并在 `Switch` 上传入 `aria-label`。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -266,8 +264,7 @@ SwitchGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com
 
 `Switch.Control` 使用按钮级渲染 prop（`isHovered`、`isPressed`、`isFocusVisible` 等）。将函数作为 `Switch.Control` 的子元素即可访问。
 
-### SwitchGroup Props
-
+### SwitchGroup
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | Switch 组方向。 |

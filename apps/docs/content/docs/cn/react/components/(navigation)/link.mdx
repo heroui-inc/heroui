@@ -121,7 +121,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 Link 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/link.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.link` — 链接基础样式
 - `.link__icon` — 链接图标样式
 
@@ -136,8 +136,7 @@ Link 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/h
 
 ## API 参考
 
-### Link Props
-
+### Link
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `href` | `string` | - | 锚点的目标 URL |
@@ -151,8 +150,7 @@ Link 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/h
 | `autoFocus` | `boolean` | - | 元素挂载时是否应获得焦点 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, LinkRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
 
-### Link.Icon Props
-
+### Link.Icon
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 自定义图标元素；省略时使用内置箭头图标 |

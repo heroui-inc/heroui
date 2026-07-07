@@ -119,7 +119,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 Tooltip 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tooltip.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.tooltip` - 带动画的基础 Tooltip 样式
 - `.tooltip__trigger` - 触发元素样式
 
@@ -133,8 +133,7 @@ Tooltip 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 
 ## API 参考
 
-### Tooltip Props
-
+### Tooltip
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 触发元素与内容 |
@@ -143,8 +142,7 @@ Tooltip 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 | `trigger` | `"hover" \| "focus"` | `"hover"` | Tooltip 的触发方式 |
 | `isDisabled` | `boolean` | `false` | 是否禁用 Tooltip |
 
-### Tooltip.Content Props
-
+### Tooltip.Content
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 在 Tooltip 中展示的内容 |
@@ -154,15 +152,13 @@ Tooltip 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 | `className` | `string` | - | 额外的 CSS 类名 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TooltipRenderProps>` | - | 通过自定义渲染函数覆盖默认的 DOM 元素。 |
 
-### Tooltip.Trigger Props
-
+### Tooltip.Trigger
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 触发 Tooltip 的元素 |
 | `className` | `string` | - | 额外的 CSS 类名 |
 
-### Tooltip.Arrow Props
-
+### Tooltip.Arrow
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 自定义箭头元素 |

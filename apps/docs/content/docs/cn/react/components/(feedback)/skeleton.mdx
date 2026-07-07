@@ -149,10 +149,10 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 Skeleton 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/skeleton.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 `.skeleton` - 包含背景与圆角等基础骨架样式
 
-#### 动画变体类
+#### 动画变体类 [!toc]
 - `.skeleton--shimmer` - 添加带渐变效果的闪烁动画（默认）
 - `.skeleton--pulse` - 使用 Tailwind 的 `animate-pulse` 添加脉冲动画
 - `.skeleton--none` - 无动画的静态骨架
@@ -161,7 +161,7 @@ Skeleton 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-i
 
 Skeleton 支持三种动画类型，视觉效果各不相同：
 
-#### 闪烁动画
+#### 闪烁动画 [!toc]
 
 闪烁效果会在骨架元素上移动渐变：
 
@@ -186,7 +186,7 @@ Skeleton 支持三种动画类型，视觉效果各不相同：
 }
 ```
 
-#### 脉冲动画
+#### 脉冲动画 [!toc]
 
 脉冲动画使用 Tailwind 内置的 `animate-pulse` 工具类：
 
@@ -196,7 +196,7 @@ Skeleton 支持三种动画类型，视觉效果各不相同：
 }
 ```
 
-#### 无动画
+#### 无动画 [!toc]
 
 用于不需要任何动画的静态骨架：
 
@@ -208,8 +208,7 @@ Skeleton 支持三种动画类型，视觉效果各不相同：
 
 ## API 参考
 
-### Skeleton Props
-
+### Skeleton
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `animationType` | `"shimmer" \| "pulse" \| "none"` | `"shimmer"` 或 CSS 变量 | Skeleton 的动画类型；也可通过 `--skeleton-animation` CSS 变量进行全局配置 |

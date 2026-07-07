@@ -160,14 +160,14 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/radio-group.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.radio-group` - 单选组基础容器
 - `.radio` - 单个单选项
 - `.radio__control` - 单选控件（圆形按钮）
 - `.radio__indicator` - 单选指示器（内部圆点）
 - `.radio__content` - 单选内容包裹层
 
-#### 修饰类
+#### 修饰类 [!toc]
 - `.radio--disabled` - 禁用状态
 
 ### 交互状态
@@ -183,8 +183,7 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 
 ## API 参考
 
-### RadioGroup Props
-
+### RadioGroup
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `value` | `string` | - | 当前值（受控） |
@@ -200,8 +199,7 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 | `children` | `React.ReactNode \| (values: RadioGroupRenderProps) => React.ReactNode` | - | 单选组内容或渲染 prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioGroupRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### Radio Props
-
+### Radio
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `value` | `string` | - | 单选项的值 |
@@ -210,24 +208,21 @@ RadioGroup 使用以下 CSS 类（[查看源码样式](https://github.com/heroui
 | `children` | `React.ReactNode \| (values: RadioFieldRenderProps) => React.ReactNode` | - | 单选内容或字段级渲染 prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, RadioFieldRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### Radio.Control Props
-
+### Radio.Control
 继承 `React.HTMLAttributes<HTMLSpanElement>`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 控件包裹层内要渲染的内容（通常为 Radio.Indicator） |
 
-### Radio.Indicator Props
-
+### Radio.Indicator
 继承 `React.HTMLAttributes<HTMLSpanElement>`。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode \| (values: RadioButtonRenderProps) => React.ReactNode` | - | 可选内容或接收当前单选按钮状态的渲染 prop。 |
 
-### Radio.Content Props
-
+### Radio.Content
 单选项的可点击区域（包裹隐藏 input 的 `<label>`）。请将 `Radio.Control` 与 `Label` 放在其中。`className` 支持接收 `RadioButtonRenderProps` 的渲染函数。
 
 | Prop | 类型 | 默认值 | 描述 |
