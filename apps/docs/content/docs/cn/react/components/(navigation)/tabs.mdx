@@ -45,18 +45,11 @@ export default () => (
 
 ## 示例
 
-### 次要类型
+### 垂直布局
 
 <ComponentPreview
   isBgSolid
-  name="tabs-secondary"
-/>
-
-### 次要类型（垂直）
-
-<ComponentPreview
-  isBgSolid
-  name="tabs-secondary-vertical"
+  name="tabs-vertical"
 />
 
 ### 溢出
@@ -75,20 +68,27 @@ export default () => (
   name="tabs-disabled"
 />
 
-### 垂直布局
-
-<ComponentPreview
-  isBgSolid
-  name="tabs-vertical"
-/>
-
 ### 带分隔线
 
-Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display separator lines between tabs.
+在每个 `<Tabs.Tab>` 内（第一项除外）添加 `<Tabs.Separator />`，用于在标签之间显示分隔线。
 
 <ComponentPreview
   isBgSolid
   name="tabs-with-separator"
+/>
+
+### 次要类型
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-secondary"
+/>
+
+### 次要类型（垂直）
+
+<ComponentPreview
+  isBgSolid
+  name="tabs-secondary-vertical"
 />
 
 ### 渲染函数
@@ -135,41 +135,41 @@ Add `<Tabs.Separator />` inside each `<Tabs.Tab>` (except the first) to display 
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
-### CSS 类
+### CSS Classes
 
-Tabs 使用以下 CSS 类：
+Tabs 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/tabs.css)）：
 
-#### 基础类
-- `.tabs` — Tabs 根容器
-- `.tabs__list-container` — 标签列表容器外层包裹
-- `.tabs__list-container__scroller` — 标签列表的可滚动容器（处理溢出与渐隐边缘）
-- `.tabs__list-container__scroll-prev` — 向前（左 / 上）滚动的箭头按钮
-- `.tabs__list-container__scroll-next` — 向后（右 / 下）滚动的箭头按钮
-- `.tabs__list` — 标签列表容器
-- `.tabs__tab` — 单个标签按钮
-- `.tabs__separator` — 标签之间的分隔线
-- `.tabs__panel` — 标签面板内容
-- `.tabs__indicator` — 标签指示器
+#### 基础类 [!toc]
+- `.tabs` - Tabs 根容器
+- `.tabs__list-container` - 标签列表容器外层包裹
+- `.tabs__list-container__scroller` - 标签列表的可滚动容器（处理溢出与渐隐边缘）
+- `.tabs__list-container__scroll-prev` - 向前（左 / 上）滚动的箭头按钮
+- `.tabs__list-container__scroll-next` - 向后（右 / 下）滚动的箭头按钮
+- `.tabs__list` - 标签列表容器
+- `.tabs__tab` - 单个标签按钮
+- `.tabs__separator` - 标签之间的分隔线
+- `.tabs__panel` - 标签面板内容
+- `.tabs__indicator` - 标签指示器
 
-#### 方向属性
-- `.tabs[data-orientation="horizontal"]` — 水平标签布局（默认）
-- `.tabs[data-orientation="vertical"]` — 垂直标签布局
+#### 方向属性 [!toc]
+- `.tabs[data-orientation="horizontal"]` - 水平标签布局（默认）
+- `.tabs[data-orientation="vertical"]` - 垂直标签布局
 
-#### 变体类
-- `.tabs--secondary` — Secondary 变体，使用下划线指示器
+#### 变体类 [!toc]
+- `.tabs--secondary` - 次要类型变体，使用下划线指示器
 
-### 交互状态
+### Interactive States
 
 组件同时支持 CSS 伪类与 data 属性：
 
-- **已选中**：`[aria-selected="true"]`
-- **悬停**：`:hover` 或 `[data-hovered="true"]`
-- **焦点**：`:focus-visible` 或 `[data-focus-visible="true"]`
-- **禁用**：`[aria-disabled="true"]`
+- **Selected**：`[aria-selected="true"]`
+- **Hover**：`:hover` 或 `[data-hovered="true"]`
+- **Focus**：`:focus-visible` 或 `[data-focus-visible="true"]`
+- **Disabled**：`[aria-disabled="true"]`
 
 ## API 参考
 
-### Tabs Props
+### Tabs
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
@@ -177,40 +177,40 @@ Tabs 使用以下 CSS 类：
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 标签布局方向 |
 | `selectedKey` | `string` | - | 受控选中标签的 key |
 | `defaultSelectedKey` | `string` | - | 默认选中标签的 key |
-| `onSelectionChange` | `(key: Key) => void` | - | 选中变化事件处理函数 |
-| `className` | `string` | - | 附加的 CSS 类 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabsRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+| `onSelectionChange` | `(key: Key) => void` | - | 选中变化回调 |
+| `className` | `string` | - | 附加 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabsRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
-### Tabs.List Props
+### Tabs.List
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `aria-label` | `string` | - | 标签列表的无障碍标签 |
-| `className` | `string` | - | 附加的 CSS 类 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabListRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+| `className` | `string` | - | 附加 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabListRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
-### Tabs.Tab Props
+### Tabs.Tab
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `id` | `string` | - | 标签唯一标识 |
 | `isDisabled` | `boolean` | `false` | 是否禁用该标签 |
-| `className` | `string` | - | 附加的 CSS 类 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+| `className` | `string` | - | 附加 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
-### Tabs.Separator Props
+### Tabs.Separator
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `className` | `string` | - | 附加的 CSS 类 |
+| `className` | `string` | - | 附加 CSS 类 |
 
-### Tabs.Panel Props
+### Tabs.Panel
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `id` | `string` | - | 与对应 Tab id 匹配的面板标识 |
-| `className` | `string` | - | 附加的 CSS 类 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabPanelRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
+| `className` | `string` | - | 附加 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, TabPanelRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
 ## 相关示例
 

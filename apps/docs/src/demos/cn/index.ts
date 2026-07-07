@@ -2351,18 +2351,6 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./tabs/basic").then((m) => m.Basic),
     file: "cn/tabs/basic.tsx",
   },
-  "tabs-secondary": {
-    loader: () => import("./tabs/secondary").then((m) => m.Secondary),
-    file: "cn/tabs/secondary.tsx",
-  },
-  "tabs-secondary-vertical": {
-    loader: () => import("./tabs/secondary-vertical").then((m) => m.SecondaryVertical),
-    file: "cn/tabs/secondary-vertical.tsx",
-  },
-  "tabs-disabled": {
-    loader: () => import("./tabs/disabled").then((m) => m.Disabled),
-    file: "cn/tabs/disabled.tsx",
-  },
   "tabs-vertical": {
     loader: () => import("./tabs/vertical").then((m) => m.Vertical),
     file: "cn/tabs/vertical.tsx",
@@ -2371,9 +2359,21 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./tabs/overflow").then((m) => m.Overflow),
     file: "cn/tabs/overflow.tsx",
   },
+  "tabs-disabled": {
+    loader: () => import("./tabs/disabled").then((m) => m.Disabled),
+    file: "cn/tabs/disabled.tsx",
+  },
   "tabs-with-separator": {
     loader: () => import("./tabs/with-separator").then((m) => m.WithSeparator),
     file: "cn/tabs/with-separator.tsx",
+  },
+  "tabs-secondary": {
+    loader: () => import("./tabs/secondary").then((m) => m.Secondary),
+    file: "cn/tabs/secondary.tsx",
+  },
+  "tabs-secondary-vertical": {
+    loader: () => import("./tabs/secondary-vertical").then((m) => m.SecondaryVertical),
+    file: "cn/tabs/secondary-vertical.tsx",
   },
   "tabs-render-function": {
     loader: () => import("./tabs/render-function").then((m) => m.RenderFunction),

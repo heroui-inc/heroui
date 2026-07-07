@@ -1,8 +1,8 @@
 import {Tabs} from "@heroui/react";
 
 const listClassName = [
-  "rounded-md border border-accent/10 bg-accent-soft/30 p-1 shadow-sm",
-  "**:data-[slot=tabs-tab]:rounded-md",
+  "rounded-xl border border-accent/10 bg-accent-soft/30 p-1",
+  "**:data-[slot=tabs-tab]:rounded-lg",
   "**:data-[slot=tabs-tab]:bg-transparent",
   "**:data-[slot=tabs-tab]:text-muted",
   "**:data-[slot=tabs-tab]:opacity-100",
@@ -14,7 +14,8 @@ const listClassName = [
   "**:data-[slot=tabs-tab]:data-[focus-visible=true]:ring-accent/15",
   "**:data-[slot=tabs-tab]:data-[selected=true]:font-medium",
   "**:data-[slot=tabs-tab]:data-[selected=true]:text-accent-foreground",
-  "**:data-[slot=tabs-indicator]:rounded-md",
+  "**:data-[slot=tabs-tab]:shadow-none",
+  "**:data-[slot=tabs-indicator]:rounded-lg",
   "**:data-[slot=tabs-indicator]:bg-accent",
   "**:data-[slot=tabs-indicator]:shadow-none",
 ].join(" ");
@@ -22,7 +23,7 @@ const listClassName = [
 export function CustomStyles() {
   return (
     <Tabs className="w-full max-w-sm">
-      <Tabs.ListContainer>
+      <Tabs.ListContainer className="rounded-none bg-transparent">
         <Tabs.List aria-label="Billing cycle" className={listClassName}>
           <Tabs.Tab id="monthly">
             Monthly
