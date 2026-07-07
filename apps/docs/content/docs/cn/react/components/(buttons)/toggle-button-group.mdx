@@ -69,7 +69,7 @@ export default () => (
 
 ### 无分隔线
 
-Simply omit the `<ToggleButtonGroup.Separator />` component from your buttons.
+省略按钮中的 `<ToggleButtonGroup.Separator />` 组件即可。
 
 <ComponentPreview
   name="toggle-button-group-without-separator"
@@ -77,7 +77,7 @@ Simply omit the `<ToggleButtonGroup.Separator />` component from your buttons.
 
 ### 分离模式
 
-Use `isDetached` to separate buttons with gaps instead of connecting them.
+使用 `isDetached` 让按钮之间留出间隔，而不是彼此连接。
 
 <ComponentPreview
   name="toggle-button-group-attached"
@@ -85,7 +85,7 @@ Use `isDetached` to separate buttons with gaps instead of connecting them.
 
 ### 选择模式
 
-Use `selectionMode="single"` for mutually exclusive choices or `selectionMode="multiple"` for independent toggles.
+使用 `selectionMode="single"` 实现互斥选择，或使用 `selectionMode="multiple"` 实现独立切换。
 
 <ComponentPreview
   name="toggle-button-group-selection-mode"
@@ -145,7 +145,7 @@ ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://gith
 
 ## API 参考
 
-### ToggleButtonGroup Props
+### ToggleButtonGroup
 
 继承自 [React Aria ToggleButtonGroup](https://react-aria.adobe.com/ToggleButtonGroup)。
 
@@ -163,13 +163,13 @@ ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://gith
 | `isDisabled` | `boolean` | `false` | 是否禁用组内全部按钮 |
 | `className` | `string` | - | 额外的 CSS 类 |
 
-### ToggleButtonGroup.Separator Props
+### ToggleButtonGroup.Separator
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |
 
-### 说明
+## 说明
 
 - ToggleButtonGroup 使用 React Context 将 `size` 传递给所有子 ToggleButton 组件
 - 每个 ToggleButton 都必须有唯一 `id` prop，并与 `selectedKeys` / `defaultSelectedKeys` 中使用的 key 对应
@@ -177,15 +177,6 @@ ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://gith
 - 组件会自动处理按钮之间的圆角
 - 在每个 ToggleButton（第一个除外）内添加 `<ToggleButtonGroup.Separator />`，可在按钮之间显示分隔线
 - 将 `disallowEmptySelection` 与 `selectionMode="single"` 一起使用，可确保始终有一个选项被选中
-
-## 说明
-
-- ToggleButtonGroup uses React Context to pass `size` to all child ToggleButton components
-- Each ToggleButton must have a unique `id` prop that corresponds to the keys used in `selectedKeys` / `defaultSelectedKeys`
-- The `isDisabled` prop is handled natively by React Aria and disables all child ToggleButtons — individual buttons can override this by setting `isDisabled={false}`
-- The component automatically handles border radius between buttons
-- Add `<ToggleButtonGroup.Separator />` inside each ToggleButton (except the first) to show dividers between buttons
-- Use `disallowEmptySelection` with `selectionMode="single"` to ensure one option is always selected
 
 ## 相关组件
 

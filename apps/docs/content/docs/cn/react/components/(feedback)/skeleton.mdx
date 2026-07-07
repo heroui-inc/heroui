@@ -46,7 +46,7 @@ import { Skeleton } from '@heroui/react';
 
 ### 单次闪烁
 
-A synchronized shimmer effect that passes over all skeleton elements at once. Apply the `skeleton--shimmer` class to a parent container and set `animationType="none"` on child skeletons.
+同步的 shimmer 效果会一次性扫过所有骨架元素。在父容器上应用 `skeleton--shimmer` 类，并将子骨架的 `animationType` 设为 `"none"`。
 
 <ComponentPreview
   name="skeleton-single-shimmer"
@@ -93,18 +93,18 @@ A synchronized shimmer effect that passes over all skeleton elements at once. Ap
 }
 ```
 
-### Global Animation Configuration
+### 全局动画配置
 
-You can set a default animation type for all Skeleton components in your application by defining the `--skeleton-animation` CSS variable:
+可在全局 CSS 中通过 `--skeleton-animation` 变量为所有 Skeleton 组件设置默认动画类型：
 
 ```css
-/* In your global CSS file */
+/* 全局 CSS 文件 */
 :root {
-  /* Possible values: shimmer, pulse, none */
+  /* 可选值：shimmer、pulse、none */
   --skeleton-animation: pulse;
 }
 
-/* You can also set different values for light/dark themes */
+/* 也可为浅色/深色主题设置不同值 */
 .light, [data-theme="light"] {
   --skeleton-animation: shimmer;
 }
@@ -114,7 +114,7 @@ You can set a default animation type for all Skeleton components in your applica
 }
 ```
 
-This global setting will be overridden by the `animationType` prop when specified on individual components.
+在单个组件上指定 `animationType` 属性会覆盖此全局设置。
 
 ## 样式参考
 

@@ -63,7 +63,7 @@ export default () => (
 
 ### 异步加载
 
-Use `Table.LoadMore` for infinite scrolling. It renders a sentinel row that triggers `onLoadMore` when scrolled into view.
+使用 `Table.LoadMore` 实现无限滚动。它会渲染一个哨兵行，滚动到视口时触发 `onLoadMore`。
 
 <ComponentPreview
   name="table-async-loading"
@@ -72,7 +72,7 @@ Use `Table.LoadMore` for infinite scrolling. It renders a sentinel row that trig
 
 ### 排序
 
-Columns can be made sortable using the `allowsSorting` prop on `Table.Column`. Use `sortDescriptor` and `onSortChange` on `Table.Content` to manage sort state. Wrap the label in `Table.SortableColumnHeader` and forward the `sortDirection` from the column's render prop to render the default ascending/descending indicator.
+在 `Table.Column` 上使用 `allowsSorting` 属性可启用列排序。在 `Table.Content` 上使用 `sortDescriptor` 与 `onSortChange` 管理排序状态。将标签包裹在 `Table.SortableColumnHeader` 中，并将列 render prop 的 `sortDirection` 转发以渲染默认升序/降序指示器。
 
 <ComponentPreview
   name="table-sorting"
@@ -81,7 +81,7 @@ Columns can be made sortable using the `allowsSorting` prop on `Table.Column`. U
 
 ### 选择
 
-Enable row selection with `selectionMode` on `Table.Content`. Use `Checkbox` with `slot="selection"` for select-all and per-row checkboxes.
+在 `Table.Content` 上使用 `selectionMode` 启用行选择。使用 `slot="selection"` 的 `Checkbox` 实现全选与逐行勾选。
 
 <ComponentPreview
   name="table-selection"
@@ -90,7 +90,7 @@ Enable row selection with `selectionMode` on `Table.Content`. Use `Checkbox` wit
 
 ### 可展开行
 
-Rows can be nested to display hierarchical data. Use the `treeColumn` prop to designate a column, and render a `Button` with `slot="chevron"` in that column’s cells so users can expand and collapse the row. Use the `expandedKeys` prop to control which rows are expanded.
+行可嵌套以展示层级数据。使用 `treeColumn` 指定列，并在该列单元格中渲染 `slot="chevron"` 的 `Button`，供用户展开/收起行。使用 `expandedKeys` 控制哪些行处于展开状态。
 
 <ComponentPreview
   name="table-expandable-rows"
@@ -99,7 +99,7 @@ Rows can be nested to display hierarchical data. Use the `treeColumn` prop to de
 
 ### 分页
 
-Use `Table.Footer` to add a pagination component below the table.
+使用 `Table.Footer` 在表格下方添加分页组件。
 
 <ComponentPreview
   name="table-pagination"
@@ -108,7 +108,7 @@ Use `Table.Footer` to add a pagination component below the table.
 
 ### 列宽调整
 
-Wrap the table in `Table.ResizableContainer` and add `Table.ColumnResizer` inside each resizable column.
+将表格包裹在 `Table.ResizableContainer` 中，并在每个可调整宽度的列内添加 `Table.ColumnResizer`。
 
 <ComponentPreview
   name="table-column-resizing"
@@ -117,7 +117,7 @@ Wrap the table in `Table.ResizableContainer` and add `Table.ColumnResizer` insid
 
 ### 空状态
 
-Use `renderEmptyState` on `Table.Body` to display a custom message when the table has no data.
+在 `Table.Body` 上使用 `renderEmptyState`，在表格无数据时展示自定义消息。
 
 <ComponentPreview
   name="table-empty-state"
@@ -126,7 +126,7 @@ Use `renderEmptyState` on `Table.Body` to display a custom message when the tabl
 
 ### 虚拟滚动
 
-Table supports virtualization through [Virtualizer](https://react-aria.adobe.com/Virtualizer), enabling efficient rendering of large datasets by displaying only the rows visible within the viewport.
+Table 通过 [Virtualizer](https://react-aria.adobe.com/Virtualizer) 支持虚拟化，仅渲染视口内可见行，从而高效展示大数据集。
 
 <ComponentPreview
   name="table-virtualization"
@@ -135,10 +135,8 @@ Table supports virtualization through [Virtualizer](https://react-aria.adobe.com
 
 ### TanStack Table
 
-HeroUI's Table works as a rendering layer on top of headless table libraries.
-This example uses [TanStack Table](https://tanstack.com/table) for column
-definitions, sorting, and pagination — while HeroUI handles styling and
-accessibility.
+HeroUI 的 Table 作为无头表格库之上的渲染层。
+本示例使用 [TanStack Table](https://tanstack.com/table) 处理列定义、排序与分页，而 HeroUI 负责样式与无障碍。
 
 <ComponentPreview
   name="table-tanstack-table"

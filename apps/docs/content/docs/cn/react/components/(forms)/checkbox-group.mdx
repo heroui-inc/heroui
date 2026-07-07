@@ -27,17 +27,17 @@ import {CheckboxGroup, Checkbox, Label, Description, FieldError} from '@heroui/r
 export default () => (
   <CheckboxGroup name="interests">
     <Label />
-    <Description /> {/* Optional */}
+    <Description /> {/* 可选 */}
     <Checkbox value="option1">
       <Checkbox.Content>
         <Checkbox.Control>
           <Checkbox.Indicator />
         </Checkbox.Control>
-        Label {/* plain text — the clickable label */}
+        Label {/* 纯文本 — 可点击标签 */}
       </Checkbox.Content>
-      <Description /> {/* Optional per-checkbox help text */}
+      <Description /> {/* 可选 — 单个 Checkbox 的帮助文本 */}
     </Checkbox>
-    <FieldError /> {/* Optional */}
+    <FieldError /> {/* 可选 */}
   </CheckboxGroup>
 );
 ```

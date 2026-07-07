@@ -66,37 +66,37 @@ export default () => (
 
 ### 不可用日期
 
-Use `isDateUnavailable` to block dates such as weekends, holidays, or booked slots.
+使用 `isDateUnavailable` 屏蔽周末、节假日或已预订等不可用日期。
 
 <ComponentPreview name="range-calendar-unavailable-dates" />
 
 ### 基于锚点的不可用日期
 
-When selecting a range, `isDateUnavailable` receives a second argument, `anchorDate`, set to the first selected date. Use it to limit which end dates are valid (for example, within 7 days of the start).
+选择范围时，`isDateUnavailable` 会收到第二个参数 `anchorDate`（首个选中日期）。可用它限制哪些结束日期有效（例如起始日期后 7 天内）。
 
 <ComponentPreview name="range-calendar-anchor-unavailable-dates" />
 
 ### 月份周数
 
-Set `weeksInMonth` to a fixed value (for example, `6`) to keep the grid height stable when navigating between months.
+将 `weeksInMonth` 设为固定值（例如 `6`），在月份切换时保持网格高度稳定。
 
 <ComponentPreview name="range-calendar-weeks-in-month" />
 
 ### 周视图
 
-Set `visibleDuration={{ weeks: n }}` to show one or more weeks at a time. Navigation advances by the visible week range. Use `pageBehavior="single"` to move one week at a time when showing multiple weeks.
+设置 `visibleDuration={{ weeks: n }}` 一次显示一个或多个周。导航按可见周范围前进。显示多周时，使用 `pageBehavior="single"` 每次移动一周。
 
 <ComponentPreview name="range-calendar-week-view" />
 
 ### 日视图
 
-Set `visibleDuration={{ days: n }}` to show a rolling window of consecutive days. Navigation advances by the visible day range. Use `pageBehavior="single"` to move one day at a time when showing multiple days.
+设置 `visibleDuration={{ days: n }}` 显示连续日期的滚动窗口。导航按可见日范围前进。显示多天时，使用 `pageBehavior="single"` 每次移动一天。
 
 <ComponentPreview name="range-calendar-day-view" />
 
 ### 非连续范围
 
-Enable `allowsNonContiguousRanges` to allow selection across unavailable dates.
+启用 `allowsNonContiguousRanges` 以允许跨越不可用日期进行选择。
 
 <ComponentPreview name="range-calendar-allows-non-contiguous-ranges" />
 
@@ -114,7 +114,7 @@ Enable `allowsNonContiguousRanges` to allow selection across unavailable dates.
 
 ### 单元格标记
 
-You can customize `RangeCalendar.Cell` children and use `RangeCalendar.CellIndicator` to display metadata like events.
+可自定义 `RangeCalendar.Cell` 的子内容，并使用 `RangeCalendar.CellIndicator` 展示事件等元数据。
 
 <ComponentPreview name="range-calendar-with-indicators" />
 
@@ -124,19 +124,19 @@ You can customize `RangeCalendar.Cell` children and use `RangeCalendar.CellIndic
 
 ### 多月份展示
 
-Render multiple grids with `visibleDuration` and `offset` for booking and planning experiences.
+结合 `visibleDuration` 与 `offset` 渲染多个网格，适用于预订与规划场景。
 
 <ComponentPreview name="range-calendar-multiple-months" />
 
 ### 国际化日历
 
-By default, RangeCalendar displays dates using the calendar system for the user's locale. You can override this by wrapping your RangeCalendar with `I18nProvider` and setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string).
+默认情况下，RangeCalendar 使用用户 locale 的历法系统显示日期。可用 `I18nProvider` 包裹组件，并设置 [Unicode 历法 locale 扩展](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string) 覆盖。
 
-The example below shows the Indian calendar system:
+以下示例展示印度历法系统：
 
 <ComponentPreview name="range-calendar-international-calendar" />
 
-**Note:** The `onChange` event always returns a date in the same calendar system as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
+**注意：** 无论显示 locale 如何，`onChange` 事件始终返回与 `value` 或 `defaultValue` 相同历法系统的日期（未提供 value 时为公历）。
 
 ## 自定义样式
 
