@@ -8,3 +8,4 @@ export {Virtualization} from "./virtualization";
 export {WithDisabledItems} from "./with-disabled-items";
 export {WithSections} from "./with-sections";
 export {RenderFunction} from "./render-function";
+export {ScrollbarModes} from "./release-scrollbar-modes";

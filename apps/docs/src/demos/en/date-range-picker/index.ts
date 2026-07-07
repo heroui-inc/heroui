@@ -8,3 +8,4 @@ export {WithCustomIndicator} from "./with-custom-indicator";
 export {WithValidation} from "./with-validation";
 export {RenderFunction} from "./render-function";
 export {CustomStyles} from "./custom-styles";
+export {InputContainer} from "./release-input-container";

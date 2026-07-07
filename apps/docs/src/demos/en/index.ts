@@ -2827,4 +2827,23 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./typography/custom-styles").then((m) => m.CustomStyles),
     file: "en/typography/custom-styles.tsx",
   },
+
+  // Release Demos
+  "release-button-outline-variant": {
+    loader: () => import("./button/release-outline-variant").then((m) => m.OutlineVariant),
+    file: "en/button/release-outline-variant.tsx",
+  },
+  "release-chip-vibrant-palette": {
+    loader: () => import("./chip/release-vibrant-palette").then((m) => m.ChipVibrantPalette),
+    file: "en/chip/release-vibrant-palette.tsx",
+  },
+  "release-date-range-picker-input-container": {
+    loader: () =>
+      import("./date-range-picker/release-input-container").then((m) => m.InputContainer),
+    file: "en/date-range-picker/release-input-container.tsx",
+  },
+  "release-list-box-scrollbar-modes": {
+    loader: () => import("./list-box/release-scrollbar-modes").then((m) => m.ScrollbarModes),
+    file: "en/list-box/release-scrollbar-modes.tsx",
+  },
 };
