@@ -14,6 +14,10 @@
   @apply px-0.5;
 }
 
+:dir(rtl) .chip__label {
+  unicode-bidi: plaintext;
+}
+
 /* Color variants - set foreground color */
 .chip--accent {
   --chip-fg: var(--accent-soft-foreground);
