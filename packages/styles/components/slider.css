@@ -165,7 +165,7 @@
     }
 
     .slider__thumb {
-      @apply left-1/2;
+      @apply start-1/2;
 
       /* Thumb height + border height */
       height: calc(1.5rem + 0.25rem);

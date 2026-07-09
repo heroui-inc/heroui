@@ -91,12 +91,12 @@
 
   /* Remove border radius on left side when search icon is present */
   .search-field__group:has([data-slot="search-field-search-icon"]) & {
-    @apply rounded-l-none pl-2;
+    @apply rounded-s-none ps-2;
   }
 
   /* Remove border radius on right side when clear button is present */
   .search-field__group:has([slot="clear"]) & {
-    @apply rounded-r-none pr-2;
+    @apply rounded-e-none pe-2;
   }
 
   /* Focus state - handled by group */
@@ -127,11 +127,11 @@
 
 .search-field__search-icon {
   @apply pointer-events-none shrink-0 text-field-placeholder;
-  @apply mr-0 ml-3 size-4;
+  @apply ms-3 me-0 size-4;
 }
 
 .search-field__clear-button {
-  @apply mr-2 size-5 shrink-0;
+  @apply me-2 size-5 shrink-0;
 
   /* Overrides close button default icon size from 16px to 12px */
   [data-slot="close-button-icon"] {

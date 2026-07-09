@@ -265,11 +265,11 @@
   } */
 
   &[data-selection-start="true"]:not([data-outside-month="true"]) {
-    @apply rounded-tl-3xl rounded-bl-3xl;
+    @apply rounded-ss-3xl rounded-es-3xl;
   }
 
   &[data-selection-end="true"]:not([data-outside-month="true"]) {
-    @apply rounded-tr-3xl rounded-br-3xl;
+    @apply rounded-se-3xl rounded-ee-3xl;
   }
 
   /* Pressed state */
@@ -352,7 +352,7 @@
 
 /* Cell indicator - small dot at bottom center of cell */
 .range-calendar__cell-indicator {
-  @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-xs bg-muted;
+  @apply absolute start-1/2 bottom-1 size-[3px] -translate-x-1/2 rounded-xs bg-muted;
 
   /* Indicator color changes when cell is selected */
   [data-selected="true"] > & {

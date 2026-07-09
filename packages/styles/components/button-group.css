@@ -85,7 +85,7 @@
 
   /* Horizontal orientation - vertical divider */
   .button-group--horizontal & {
-    left: -1px;
+    inset-inline-start: -1px;
     top: 25%;
     width: 1px;
     height: 50%;
@@ -93,7 +93,7 @@
 
   /* Vertical orientation - horizontal divider */
   .button-group--vertical & {
-    left: 25%;
+    inset-inline-start: 25%;
     top: -1px;
     width: 50%;
     height: 1px;

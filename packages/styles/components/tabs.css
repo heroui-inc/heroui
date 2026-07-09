@@ -50,22 +50,22 @@
   /* Chevron position - horizontal orientation */
   &:has([data-orientation="horizontal"]) {
     > .tabs__list-container__scroll-prev {
-      @apply top-1/2 left-1 -translate-y-1/2;
+      @apply start-1 top-1/2 -translate-y-1/2;
     }
 
     > .tabs__list-container__scroll-next {
-      @apply top-1/2 right-1 -translate-y-1/2;
+      @apply end-1 top-1/2 -translate-y-1/2;
     }
   }
 
   /* Chevron position - vertical orientation */
   &:has([data-orientation="vertical"]) {
     > .tabs__list-container__scroll-prev {
-      @apply top-1 left-1/2 -translate-x-1/2;
+      @apply start-1/2 top-1 -translate-x-1/2;
     }
 
     > .tabs__list-container__scroll-next {
-      @apply bottom-1 left-1/2 -translate-x-1/2;
+      @apply start-1/2 bottom-1 -translate-x-1/2;
     }
   }
 
@@ -178,12 +178,12 @@
 
   /* Horizontal tabs - vertical separator */
   .tabs__list[data-orientation="horizontal"] & {
-    @apply top-1/4 left-0 h-1/2 w-px;
+    @apply start-0 top-1/4 h-1/2 w-px;
   }
 
   /* Vertical tabs - horizontal separator */
   .tabs__list[data-orientation="vertical"] & {
-    @apply top-0 left-[5%] h-px w-[90%];
+    @apply start-[5%] top-0 h-px w-[90%];
   }
 }
 
@@ -193,7 +193,7 @@
 
   /* Exiting animations */
   &[data-exiting="true"] {
-    @apply absolute top-0 left-0 w-full;
+    @apply absolute start-0 top-0 w-full;
   }
 
   /* Orientation spacing */
@@ -202,13 +202,13 @@
   }
 
   &[data-orientation="vertical"] {
-    @apply ml-4;
+    @apply ms-4;
   }
 }
 
 /* Tab indicator - React Aria's SelectionIndicator */
 .tabs__indicator {
-  @apply absolute top-0 left-0 size-full rounded-3xl bg-segment shadow-surface;
+  @apply absolute start-0 top-0 size-full rounded-3xl bg-segment shadow-surface;
 
   z-index: -1;
 
@@ -269,10 +269,10 @@
 
   /* Vertical orientation - left border + left line indicator */
   &[data-orientation="vertical"] > .tabs__list-container {
-    @apply border-l border-border;
+    @apply border-s border-border;
 
     .tabs__indicator {
-      @apply top-0 left-0 h-full w-0.5;
+      @apply start-0 top-0 h-full w-0.5;
     }
   }
 }
