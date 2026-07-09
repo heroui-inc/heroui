@@ -47,7 +47,7 @@ export function ComponentPreviewContainer({
   };
 
   const shouldPreventNavigation = useMemo(() => {
-    return name.includes("breadcrumbs");
+    return ["breadcrumbs-", "card-", "link-"].some((pattern) => name.includes(pattern));
   }, [name]);
 
   return (
