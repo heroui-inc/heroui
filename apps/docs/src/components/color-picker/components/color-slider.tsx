@@ -13,7 +13,7 @@ const colorSliderTrackStyles = tv({
   variants: {
     orientation: {
       horizontal: "h-8 w-full",
-      vertical: "ml-2 h-full w-8",
+      vertical: "ms-2 h-full w-8",
     },
   },
 });
@@ -43,7 +43,7 @@ export function ColorSlider({
         })}
       >
         <ColorThumb
-          className={cn(colorThumbStyles(), orientation === "horizontal" ? "top-1/2" : "left-1/2")}
+          className={cn(colorThumbStyles(), orientation === "horizontal" ? "top-1/2" : "start-1/2")}
           style={({color}) => ({
             background: thumbBackground || color.toString("css"),
           })}

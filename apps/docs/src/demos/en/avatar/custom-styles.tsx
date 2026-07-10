@@ -42,7 +42,7 @@ export function CustomStyles() {
           />
           <Avatar.Fallback>ON</Avatar.Fallback>
         </Avatar>
-        <span className="absolute right-0 bottom-0 size-3 rounded-full bg-green-500 ring-2 ring-background" />
+        <span className="absolute end-0 bottom-0 size-3 rounded-full bg-green-500 ring-2 ring-background" />
       </div>
     </div>
   );

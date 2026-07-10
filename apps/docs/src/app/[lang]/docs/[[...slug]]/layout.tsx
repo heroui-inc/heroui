@@ -43,7 +43,7 @@ export default async function Layout({
         sidebar={{
           banner: () => (
             <div className="flex flex-col items-start justify-center gap-4 px-4 pt-4 sm:hidden">
-              <div className="flex w-full items-center justify-between gap-4 pl-1">
+              <div className="flex w-full items-center justify-between gap-4 ps-1">
                 <HeroUILogo />
                 <ThemeToggle mode="light-dark-system" />
               </div>
@@ -85,7 +85,7 @@ export default async function Layout({
         nav={{
           ...baseOptions.nav,
           children: (
-            <div className="mr-2 flex items-center gap-3 md:mr-0" id="nd-nav-actions">
+            <div className="me-2 flex items-center gap-3 md:me-0" id="nd-nav-actions">
               <DesignThemeSelector />
               <GitHubLinkSmall />
             </div>

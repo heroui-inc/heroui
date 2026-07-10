@@ -214,7 +214,7 @@ export function ProBanner() {
       {visible ? (
         <motion.div
           animate={{opacity: 1, scale: 1, y: 0}}
-          className="fixed bottom-6 left-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
+          className="fixed start-6 bottom-6 z-50 w-[288px] overflow-hidden rounded-[20px] border border-separator bg-surface shadow-xl"
           exit={{opacity: 0, scale: 0.95, transition: {duration: 0.2, ease: "easeIn"}, y: 20}}
           initial={{opacity: 0, scale: 0.95, y: 20}}
           transition={{damping: 25, delay: 0.5, stiffness: 300, type: "spring"}}
@@ -332,7 +332,7 @@ export function ProBanner() {
             </svg>
             {/* Floating white particles */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-50">
+              <div className="absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-50">
                 <FloatingStars />
               </div>
             </div>
@@ -367,7 +367,7 @@ export function ProBanner() {
           </div>
 
           <CloseButton
-            className="absolute top-2 right-2 bg-transparent text-white/50 hover:bg-white/10 hover:text-white"
+            className="absolute end-2 top-2 bg-transparent text-white/50 hover:bg-white/10 hover:text-white"
             onPress={handleDismiss}
           />
 

@@ -44,7 +44,7 @@ export function AsynchronousFiltering() {
               <SearchField.Input placeholder="搜索角色…" />
               <Spinner
                 size="sm"
-                className={cn("absolute top-1/2 right-2 -translate-y-1/2", {
+                className={cn("absolute end-2 top-1/2 -translate-y-1/2", {
                   "pointer-events-none opacity-0": !list.isLoading,
                 })}
               />

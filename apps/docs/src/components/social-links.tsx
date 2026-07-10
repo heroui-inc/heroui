@@ -18,7 +18,7 @@ export function SocialLinks(props: SocialLinksProps) {
   return (
     <div className={cn("flex items-center justify-center gap-2", className)}>
       <a
-        className="-mr-1 text-inherit"
+        className="-me-1 text-inherit"
         href={siteConfig.links.twitter}
         rel="noreferrer"
         target="_blank"

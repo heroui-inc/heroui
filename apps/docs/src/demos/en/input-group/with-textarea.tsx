@@ -57,7 +57,7 @@ export function WithTextArea() {
               <p className="text-xs">Connect apps</p>
             </Tooltip.Content>
           </Tooltip>
-          <div className="ml-auto flex items-center gap-1.5">
+          <div className="ms-auto flex items-center gap-1.5">
             <Tooltip delay={0}>
               <Button isIconOnly aria-label="Voice input" size="sm" variant="ghost">
                 <Microphone />
