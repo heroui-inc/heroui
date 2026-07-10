@@ -14,7 +14,7 @@ export function LoginDemo() {
           </Avatar.Fallback>
         </Avatar>
         <Card.Title>Create an account</Card.Title>
-        <CloseButton className="absolute top-3 right-3" />
+        <CloseButton className="absolute end-3 top-3" />
       </Card.Header>
       <Card.Content className="gap-2">
         <p className="text-center text-sm font-medium text-muted">

@@ -123,13 +123,13 @@ export function ComponentShowcase() {
           <div className="flex flex-col gap-3">
             <h3 className="text-sm font-semibold text-muted">Borders</h3>
             <div className="flex flex-col gap-2">
-              <div className="flex h-12 items-center justify-start rounded-xl border border-border pl-3">
+              <div className="flex h-12 items-center justify-start rounded-xl border border-border ps-3">
                 <span className="text-sm text-foreground">Border default</span>
               </div>
-              <div className="flex h-12 items-center justify-start rounded-xl border border-border-secondary pl-3">
+              <div className="flex h-12 items-center justify-start rounded-xl border border-border-secondary ps-3">
                 <span className="text-sm text-foreground">Border secondary</span>
               </div>
-              <div className="flex h-12 items-center justify-start rounded-xl border border-border-tertiary pl-3">
+              <div className="flex h-12 items-center justify-start rounded-xl border border-border-tertiary ps-3">
                 <span className="text-sm text-foreground">Border tertiary</span>
               </div>
             </div>
@@ -169,11 +169,11 @@ export function ComponentShowcase() {
                 </div>
                 <div className="flex flex-1 flex-col gap-3">
                   <Card.Header className="gap-1">
-                    <Card.Title className="pr-8">Become an ACME Creator!</Card.Title>
+                    <Card.Title className="pe-8">Become an ACME Creator!</Card.Title>
                     <Card.Description>
                       Lorem ipsum dolor sit amet consectetur. Sed arcu donec id aliquam.
                     </Card.Description>
-                    <CloseButton aria-label="Close banner" className="absolute top-3 right-3" />
+                    <CloseButton aria-label="Close banner" className="absolute end-3 top-3" />
                   </Card.Header>
                   <Card.Footer className="mt-auto flex w-full items-center justify-between gap-3">
                     <span className="text-sm font-medium text-foreground">Only 10 spots</span>
@@ -188,7 +188,7 @@ export function ComponentShowcase() {
                 <div className="col-span-12 grid grid-cols-12 gap-4">
                   {/* Top Card */}
                   <Card className="col-span-12">
-                    <div className="absolute top-3 right-3 z-10">
+                    <div className="absolute end-3 top-3 z-10">
                       <CloseButton aria-label="Close notification" />
                     </div>
                     <Card.Header className="gap-3">
@@ -200,7 +200,7 @@ export function ComponentShowcase() {
                       />
                       <div className="flex flex-col gap-1">
                         <span className="text-xs font-medium text-muted uppercase">PAYMENT</span>
-                        <Card.Title className="pr-8 text-sm sm:text-base">
+                        <Card.Title className="pe-8 text-sm sm:text-base">
                           You can now withdraw on crypto
                         </Card.Title>
                         <Card.Description className="text-xs sm:text-sm">
