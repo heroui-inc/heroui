@@ -82,7 +82,7 @@ const ControlledTemplate = (props: Disclosure["RootProps"]) => {
         </Chip>
       </div>
       <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
-        <Disclosure.Trigger className="mb-2 flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
+        <Disclosure.Trigger className="mb-2 flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-start hover:bg-gray-50">
           <span>Toggle content</span>
           <Icon
             className="size-4 transition-transform duration-200 data-[state=open]:rotate-180"
@@ -108,7 +108,7 @@ const ProductDetailsTemplate = (props: Disclosure["RootProps"]) => {
   return (
     <div className="w-full max-w-md">
       <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
-        <Disclosure.Trigger className="flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-left hover:bg-gray-50">
+        <Disclosure.Trigger className="flex w-full items-center justify-between rounded-md border border-gray-300 px-4 py-2 text-start hover:bg-gray-50">
           <span className="flex items-center gap-2">
             <Icon icon="gravity-ui:box" />
             View product details

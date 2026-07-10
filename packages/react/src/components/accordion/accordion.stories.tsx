@@ -43,7 +43,7 @@ const Template = (props: Accordion["RootProps"]) => (
           <Accordion.Heading>
             <Accordion.Trigger>
               {item.icon ? (
-                <Icon className="mr-3 size-4 shrink-0 text-muted" icon={item.icon} />
+                <Icon className="me-3 size-4 shrink-0 text-muted" icon={item.icon} />
               ) : null}
               {item.title}
               <Accordion.Indicator>
@@ -140,7 +140,7 @@ const WithoutSeparatorTemplate = ({hideSeparator = true, ...props}: Accordion["R
           <Accordion.Heading>
             <Accordion.Trigger>
               {item.icon ? (
-                <Icon className="mr-3 size-4 shrink-0 text-muted" icon={item.icon} />
+                <Icon className="me-3 size-4 shrink-0 text-muted" icon={item.icon} />
               ) : null}
               {item.title}
               <Accordion.Indicator>

@@ -269,7 +269,7 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
             onSortChange={setSortDescriptor}
           >
             <Table.Header>
-              <Table.Column className="pr-0">
+              <Table.Column className="pe-0">
                 <Checkbox aria-label="Select all" slot="selection">
                   <Checkbox.Content>
                     <Checkbox.Control>
@@ -311,7 +311,7 @@ function DefaultTableTemplate({variant = "primary"}: {variant?: "primary" | "sec
             <Table.Body>
               {pagination.paginatedItems.map((user) => (
                 <Table.Row key={user.id} id={user.id}>
-                  <Table.Cell className="pr-0">
+                  <Table.Cell className="pe-0">
                     <Checkbox
                       aria-label={`Select ${user.name}`}
                       slot="selection"

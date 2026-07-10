@@ -417,7 +417,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
                   <Disclosure.Body
                     data-expanded={expandedKeys.has(item.id)}
                     className={cn(
-                      "mt-3 flex max-w-sm flex-col items-center gap-2 rounded-2xl bg-[rgba(42,42,45,0.72)] p-7 text-left backdrop-blur-[20px]",
+                      "mt-3 flex max-w-sm flex-col items-center gap-2 rounded-2xl bg-[rgba(42,42,45,0.72)] p-7 text-start backdrop-blur-[20px]",
                     )}
                   >
                     <p
@@ -451,7 +451,7 @@ const Showcase1Template = (props: DisclosureGroupProps) => {
           data-selected={expandedKeys.has(item.id)}
           src={item.imgSrc}
           className={cn(
-            "pointer-events-none absolute top-1/2 right-[10%] z-[0] hidden w-full max-w-6xl -translate-y-1/2 scale-[1.5] opacity-0 lg:block",
+            "pointer-events-none absolute end-[10%] top-1/2 z-[0] hidden w-full max-w-6xl -translate-y-1/2 scale-[1.5] opacity-0 lg:block",
             "translate-x-[10%] data-[selected=true]:translate-x-0 data-[selected=true]:opacity-100",
           )}
           style={{
