@@ -171,7 +171,7 @@
    Defaults to pointing up (ascending) and rotates 180° for descending.
    -------------------------------------------------------------------------- */
 .table__sortable-column-indicator {
-  @apply size-3 transform transition-transform duration-100 ease-out;
+  @apply size-3 transform transition-transform duration-100 ease-out inline-grid place-content-center;
 
   &[data-direction="descending"] {
     @apply rotate-180;
