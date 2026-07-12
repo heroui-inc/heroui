@@ -1,8 +1,9 @@
 "use client";
 
-import {usePathname} from "next/navigation";
+import {useParams, usePathname} from "next/navigation";
 
 import {ShowcaseItem} from "@/components/showcase-item";
+import {i18n} from "@/lib/i18n";
 import {getShowcasesByComponent} from "@/showcases";
 import {cn} from "@/utils/cn";
 
@@ -12,6 +13,8 @@ interface RelatedShowcasesProps {
 }
 
 export function RelatedShowcases({className, component}: RelatedShowcasesProps) {
+  const params = useParams<{lang?: string}>();
+  const lang = params.lang ?? i18n.defaultLanguage;
   const pathname = usePathname();
   const showcases = getShowcasesByComponent(component);
 
@@ -33,7 +36,7 @@ export function RelatedShowcases({className, component}: RelatedShowcasesProps) 
         <ShowcaseItem
           key={showcase.name}
           className="aspect-video h-[180px] max-w-[250px] shrink-0"
-          href={`/showcase/${showcase.name}?returnUrl=${returnUrl}`}
+          href={`/${lang}/showcase/${showcase.name}?returnUrl=${returnUrl}`}
           item={showcase}
         />
       ))}
