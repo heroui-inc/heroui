@@ -90,6 +90,11 @@
 /* Navigation buttons (Previous / Next) */
 .pagination__link--nav {
   @apply w-auto gap-1.5 px-2.5;
+
+  & [data-slot="pagination-previous-icon"],
+  & [data-slot="pagination-next-icon"] {
+    @apply rtl:rotate-180;
+  }
 }
 
 /* ==========================================================================
