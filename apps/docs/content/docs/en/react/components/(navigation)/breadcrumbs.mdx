@@ -8,21 +8,17 @@ links:
   storybook: Components/Navigation/Breadcrumbs
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Breadcrumbs } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="breadcrumbs-basic"
 />
 
-### Anatomy
-
-Import the Breadcrumbs component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Breadcrumbs } from '@heroui/react';
@@ -36,6 +32,8 @@ export default () => (
 )
 ```
 
+## Examples
+
 ### Navigation Levels
 
 <ComponentPreview
@@ -46,47 +44,34 @@ export default () => (
   name="breadcrumbs-level-3"
 />
 
-### Custom Separator
-
-<ComponentPreview
-  name="breadcrumbs-custom-separator"
-/>
-
 ### Disabled State
 
 <ComponentPreview
   name="breadcrumbs-disabled"
 />
 
-### Custom Render Function
+### Custom Separator
 
 <ComponentPreview
-  name="breadcrumbs-custom-render-function"
+  name="breadcrumbs-custom-separator"
 />
 
-## Styling
+### Render Function
 
-### Passing Tailwind CSS classes
+<ComponentPreview
+  name="breadcrumbs-render-function"
+/>
 
-```tsx
-import { Breadcrumbs } from '@heroui/react';
+## Customization
 
-function CustomBreadcrumbs() {
-  return (
-    <Breadcrumbs className="gap-2">
-      <Breadcrumbs.Item href="#" className="text-blue-600">
-        Home
-      </Breadcrumbs.Item>
-      <Breadcrumbs.Item>Current</Breadcrumbs.Item>
-    </Breadcrumbs>
-  );
-}
-```
+### Tailwind CSS
 
-### Customizing the component classes
+<ComponentPreview name="breadcrumbs-custom-styles" />
+
+### Global CSS
 
 To customize the Breadcrumbs component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -104,19 +89,21 @@ To customize the Breadcrumbs component classes, you can use the `@layer componen
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Breadcrumbs component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/breadcrumbs.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.breadcrumbs` - Base breadcrumbs container
 - `.breadcrumbs__item` - Individual breadcrumb item wrapper
 - `.breadcrumbs__link` - Breadcrumb link element
 - `.breadcrumbs__separator` - Separator icon between items
 
-#### State Classes
+#### State Classes [!toc]
 - `.breadcrumbs__link[data-current="true"]` - Current page indicator (not a link)
 
 ### Interactive States
@@ -129,7 +116,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Breadcrumbs Props
+### Breadcrumbs
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -137,16 +124,16 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `isDisabled` | `boolean` | `false` | Whether all breadcrumb links are disabled |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The breadcrumb items |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function|
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function.|
 
-### Breadcrumbs.Item Props
+### Breadcrumbs.Item
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `href` | `string` | - | The URL to link to (omit for current page) |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Item content or render function |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, BreadcrumbRenderProps>` | - | Overrides the default DOM element with a custom render function|
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, BreadcrumbRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
 ## Accessibility
 
@@ -158,3 +145,7 @@ Breadcrumbs uses React Aria Components' Breadcrumbs primitive, which provides:
 - Screen reader announcements for navigation context
 
 The last breadcrumb item (without `href`) automatically becomes the current page indicator.
+
+## Related Components
+
+<RelatedComponents component="breadcrumbs" />

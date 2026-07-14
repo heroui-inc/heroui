@@ -10,21 +10,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Checkbox } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="checkbox-basic"
 />
 
-### Anatomy
-
-Import the Checkbox component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Checkbox, Description, FieldError } from '@heroui/react';
@@ -43,28 +39,27 @@ export default () => (
 );
 ```
 
+## Examples
+
+### Variants
+
+The Checkbox component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with default background, suitable for most use cases
+- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
+
+<ComponentPreview name="checkbox-variants" />
+
+### Full Rounded
+
+<ComponentPreview
+  name="checkbox-full-rounded"
+/>
+
 ### Disabled
 
 <ComponentPreview
   name="checkbox-disabled"
-/>
-
-### Default Selected
-
-<ComponentPreview
-  name="checkbox-default-selected"
-/>
-
-### Controlled
-
-<ComponentPreview
-  name="checkbox-controlled"
-/>
-
-### Indeterminate
-
-<ComponentPreview
-  name="checkbox-indeterminate"
 />
 
 ### External Label
@@ -79,16 +74,10 @@ export default () => (
   name="checkbox-with-description"
 />
 
-### Render Props
+### Default Selected
 
 <ComponentPreview
-  name="checkbox-render-props"
-/>
-
-### Form Integration
-
-<ComponentPreview
-  name="checkbox-form"
+  name="checkbox-default-selected"
 />
 
 ### Invalid
@@ -97,62 +86,52 @@ export default () => (
   name="checkbox-invalid"
 />
 
+### Controlled
+
+<ComponentPreview
+  name="checkbox-controlled"
+/>
+
+### Indeterminate
+
+<ComponentPreview
+  name="checkbox-indeterminate"
+/>
+
+### Form Integration
+
+<ComponentPreview
+  name="checkbox-form"
+/>
+
+### Render Props
+
+<ComponentPreview
+  name="checkbox-render-props"
+/>
+
+### Render Function
+
+<ComponentPreview
+  name="checkbox-render-function"
+/>
+
 ### Custom Indicator
 
 <ComponentPreview
   name="checkbox-custom-indicator"
 />
 
-### Full Rounded
+## Customization
 
-<ComponentPreview
-  name="checkbox-full-rounded"
-/>
+### Tailwind CSS
 
-### Variants
+<ComponentPreview name="checkbox-custom-styles" />
 
-The Checkbox component supports two visual variants:
-
-- **`primary`** (default) - Standard styling with default background, suitable for most use cases
-- **`secondary`** - Lower emphasis variant, suitable for use in Surface components
-
-<ComponentPreview name="checkbox-variants" />
-
-### Custom Render Function
-
-<ComponentPreview
-  name="checkbox-custom-render-function"
-/>
-
-<RelatedComponents component="checkbox" />
-
-## Styling
-
-### Passing Tailwind CSS classes
-
-You can customize individual Checkbox components:
-
-```tsx
-import { Checkbox } from '@heroui/react';
-
-function CustomCheckbox() {
-  return (
-    <Checkbox name="custom">
-      <Checkbox.Content>
-        <Checkbox.Control className="border-2 border-purple-500 data-[selected=true]:bg-purple-500">
-          <Checkbox.Indicator className="text-white" />
-        </Checkbox.Control>
-        Custom Checkbox
-      </Checkbox.Content>
-    </Checkbox>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Checkbox component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -166,7 +145,7 @@ To customize the Checkbox component classes, you can use the `@layer components`
     /* Animated background indicator */
     &::before {
       @apply bg-accent pointer-events-none absolute inset-0 z-0 origin-center scale-50 rounded-md opacity-0 content-[''];
-      
+
       transition:
         scale 200ms linear,
         opacity 200ms linear,
@@ -189,11 +168,15 @@ To customize the Checkbox component classes, you can use the `@layer components`
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Checkbox component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/checkbox.css)):
+
+#### Base Classes [!toc]
 
 - `.checkbox` - Base checkbox container (the field)
 - `.checkbox__content` - Clickable label wrapping the control and label text
@@ -214,7 +197,7 @@ The checkbox supports both CSS pseudo-classes and data attributes for flexibilit
 
 ## API Reference
 
-### Checkbox Props
+### Checkbox
 
 Inherits from [React Aria CheckboxField](https://react-spectrum.adobe.com/react-aria/Checkbox.html).
 
@@ -236,7 +219,7 @@ Inherits from [React Aria CheckboxField](https://react-spectrum.adobe.com/react-
 | `children` | `React.ReactNode \| (values: CheckboxFieldRenderProps) => React.ReactNode` | - | Checkbox content or field render prop |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, CheckboxFieldRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Checkbox.Content Props
+### Checkbox.Content
 
 The clickable `<label>` that wraps the control and label text. Put `Checkbox.Control` and the `Label` inside it; keep `Description`/`FieldError` as siblings of `Checkbox.Content`. For a checkbox with no label, omit the `Label` and pass an `aria-label` on `Checkbox`.
 
@@ -261,3 +244,7 @@ When using a render prop on the root `Checkbox`, these field-level values are pr
 ### CheckboxButtonRenderProps
 
 `Checkbox.Control` and `Checkbox.Indicator` use button-level render props (`isHovered`, `isPressed`, `isFocusVisible`, etc.). Pass a function as `Checkbox.Control` children or to `Checkbox.Indicator` to access them.
+
+## Related Components
+
+<RelatedComponents component="checkbox" />

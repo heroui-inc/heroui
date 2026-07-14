@@ -1,8 +1,11 @@
 // Autocomplete demos
+export {CustomStyles} from "./custom-styles";
 export {AllowsEmptyCollection} from "./allows-empty-collection";
 export {AsynchronousFiltering} from "./asynchronous-filtering";
 export {Controlled} from "./controlled";
+export {ControlledMultiple} from "./controlled-multiple";
 export {ControlledOpenState} from "./controlled-open-state";
+export {CustomValue} from "./custom-value";
 export {CustomIndicator} from "./custom-indicator";
 export {default as Default} from "./default";
 export {Disabled} from "./disabled";
@@ -10,8 +13,8 @@ export {EmailRecipients} from "./email-recipients";
 export {FullWidth} from "./full-width";
 export {LocationSearch} from "./location-search";
 export {MultipleSelect} from "./multiple-select";
+export {OnSurface} from "./on-surface";
 export {Required} from "./required";
-export {default as SingleSelect} from "./single-select";
 export {TagGroupSelection} from "./tag-group-selection";
 export {UserSelection} from "./user-selection";
 export {UserSelectionMultiple} from "./user-selection-multiple";

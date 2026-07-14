@@ -1,6 +1,6 @@
 ---
 title: Avatar 头像
-description: 展示用户头像图片，并提供可定制的回退内容。
+description: 显示用户头像，支持自定义 fallback 内容
 links:
   radix: avatar
   source: avatar/avatar.tsx
@@ -9,19 +9,15 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Avatar } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview name="avatar-basic" />
 
-### 组件结构
-
-引入 Avatar 组件，并通过点语法访问各部分。
+## 组件结构
 
 ```tsx
 import { Avatar } from '@heroui/react';
@@ -33,6 +29,8 @@ export default () => (
   </Avatar>
 )
 ```
+
+## 示例
 
 ### 尺寸
 
@@ -54,33 +52,16 @@ export default () => (
 
 <ComponentPreview name="avatar-group" />
 
-### 自定义样式
+## 自定义样式
+
+### Tailwind CSS
 
 <ComponentPreview name="avatar-custom-styles" />
 
-<RelatedComponents component="avatar" />
+### 全局 CSS
 
-## 样式
-
-### 传入 Tailwind CSS 类
-
-```tsx
-import { Avatar } from '@heroui/react';
-
-function CustomAvatar() {
-  return (
-    <Avatar className="size-20">
-      <Avatar.Image src="..." alt="..." />
-      <Avatar.Fallback>XL</Avatar.Fallback>
-    </Avatar>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 Avatar 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+可使用 `@layer components` 指令自定义 Avatar 组件类。
+[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -94,61 +75,67 @@ function CustomAvatar() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 Avatar 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/avatar.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.avatar` - 基础容器，默认尺寸（size-10）
-- `.avatar__image` - 图片元素，方形比例
-- `.avatar__fallback` - 回退容器，内容居中
+- `.avatar__image` - 图片元素，aspect-square 尺寸
+- `.avatar__fallback` - 居中内容的 fallback 容器
 
-#### 尺寸修饰
-- `.avatar--sm` - 小尺寸（size-8）
-- `.avatar--md` - 中尺寸（默认，无额外样式）
-- `.avatar--lg` - 大尺寸（size-12）
+#### 尺寸修饰符 [!toc]
+- `.avatar--sm` - 小头像（size-8）
+- `.avatar--md` - 中头像（默认，无额外样式）
+- `.avatar--lg` - 大头像（size-12）
 
-#### 变体修饰
-- `.avatar--soft` - Soft 变体，背景更浅
+#### 变体修饰符 [!toc]
+- `.avatar--soft` - 浅色背景的 soft 变体
 
-#### 颜色修饰
+#### 颜色修饰符 [!toc]
 - `.avatar__fallback--default` - 默认文字颜色
-- `.avatar__fallback--accent` - 强调文字颜色
-- `.avatar__fallback--success` - 成功文字颜色
-- `.avatar__fallback--warning` - 警告文字颜色
-- `.avatar__fallback--danger` - 危险文字颜色
+- `.avatar__fallback--accent` - 强调色文字
+- `.avatar__fallback--success` - 成功色文字
+- `.avatar__fallback--warning` - 警告色文字
+- `.avatar__fallback--danger` - 危险色文字
 
 ## API 参考
 
-### Avatar Props
+### Avatar
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Avatar 尺寸 |
-| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | 回退区域的颜色主题 |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 头像尺寸 |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Fallback 颜色主题 |
 | `variant` | `'default' \| 'soft'` | `'default'` | 视觉样式变体 |
-| `className` | `string` | - | 额外的 CSS 类 |
+| `className` | `string` | - | 附加 CSS 类 |
 
-### Avatar.Image Props
+### Avatar.Image
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `src` | `string` | - | 图片地址 |
-| `srcSet` | `string` | - | 响应式图片的 `srcset` |
-| `sizes` | `string` | - | 响应式图片的 `sizes` |
+| `src` | `string` | - | 图片 URL |
+| `srcSet` | `string` | - | 响应式图片的 `srcset` 属性 |
+| `sizes` | `string` | - | 响应式图片的 `sizes` 属性 |
 | `alt` | `string` | - | 图片替代文本 |
-| `onLoad` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | 图片加载成功时的事件处理函数 |
-| `onError` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | 图片加载失败时的事件处理函数 |
+| `onLoad` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | 图片加载成功时的回调 |
+| `onError` | `(event: SyntheticEvent<HTMLImageElement>) => void` | - | 图片加载失败时的回调 |
 | `crossOrigin` | `'anonymous' \| 'use-credentials'` | - | 图片请求的 CORS 设置 |
 | `loading` | `'eager' \| 'lazy'` | - | 原生懒加载属性 |
-| `className` | `string` | - | 额外的 CSS 类 |
+| `className` | `string` | - | 附加 CSS 类 |
 
-### Avatar.Fallback Props
+### Avatar.Fallback
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `delayMs` | `number` | - | 显示回退内容前的延迟（减轻闪烁） |
-| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | 覆盖父级的颜色 |
-| `className` | `string` | - | 额外的 CSS 类 |
+| `delayMs` | `number` | - | 显示 fallback 前的延迟（防止闪烁） |
+| `color` | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'` | - | 覆盖父级颜色 |
+| `className` | `string` | - | 附加 CSS 类 |
+
+## 相关组件
+
+<RelatedComponents component="avatar" />

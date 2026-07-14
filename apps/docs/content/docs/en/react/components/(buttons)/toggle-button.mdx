@@ -9,17 +9,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ToggleButton } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="toggle-button-basic"
 />
+
+## Examples
 
 ### Variants
 
@@ -39,6 +39,11 @@ import { ToggleButton } from '@heroui/react';
   name="toggle-button-sizes"
 />
 
+### Disabled
+
+<ComponentPreview
+  name="toggle-button-disabled"
+/>
 
 ### Controlled
 
@@ -46,34 +51,16 @@ import { ToggleButton } from '@heroui/react';
   name="toggle-button-controlled"
 />
 
-### Disabled
+## Customization
 
-<ComponentPreview
-  name="toggle-button-disabled"
-/>
+### Tailwind CSS
 
-<RelatedComponents component="togglebutton" />
+<ComponentPreview name="toggle-button-custom-styles" />
 
-## Styling
-
-### Passing Tailwind CSS classes
-
-```tsx
-import { ToggleButton } from '@heroui/react';
-
-function CustomToggleButton() {
-  return (
-    <ToggleButton className="bg-purple-500 text-white">
-      Toggle
-    </ToggleButton>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ToggleButton component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -87,23 +74,25 @@ To customize the ToggleButton component classes, you can use the `@layer compone
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ToggleButton component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toggle-button.css)):
 
-#### Base & Size Classes
+#### Base & Size Classes [!toc]
 - `.toggle-button` - Base toggle button styles
 - `.toggle-button--sm` - Small size variant
 - `.toggle-button--md` - Medium size variant (default)
 - `.toggle-button--lg` - Large size variant
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.toggle-button--default` - Default variant with filled background
 - `.toggle-button--ghost` - Ghost variant with transparent background
 
-#### Modifier Classes
+#### Modifier Classes [!toc]
 - `.toggle-button--icon-only` - Icon-only toggle button
 - `.toggle-button--icon-only.toggle-button--sm` - Small icon-only
 - `.toggle-button--icon-only.toggle-button--lg` - Large icon-only
@@ -120,7 +109,7 @@ The toggle button supports both CSS pseudo-classes and data attributes for flexi
 
 ## API Reference
 
-### ToggleButton Props
+### ToggleButton
 
 Inherits from [React Aria ToggleButton](https://react-spectrum.adobe.com/react-aria/ToggleButton.html).
 
@@ -136,7 +125,7 @@ Inherits from [React Aria ToggleButton](https://react-spectrum.adobe.com/react-a
 | `onPress` | `(e: PressEvent) => void` | - | Handler called when the button is pressed |
 | `children` | `React.ReactNode \| (values: ToggleButtonRenderProps) => React.ReactNode` | - | Button content or render prop |
 
-### ToggleButtonRenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -148,3 +137,7 @@ When using the render prop pattern, these values are provided:
 | `isFocused` | `boolean` | Whether the button is focused |
 | `isFocusVisible` | `boolean` | Whether the button should show focus indicator |
 | `isDisabled` | `boolean` | Whether the button is disabled |
+
+## Related Components
+
+<RelatedComponents component="togglebutton" />

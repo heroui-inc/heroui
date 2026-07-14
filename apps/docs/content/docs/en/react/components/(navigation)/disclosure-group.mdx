@@ -8,23 +8,18 @@ links:
   storybook: Components/Navigation/DisclosureGroup
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { DisclosureGroup } from '@heroui/react';
 ```
-
-### Usage
 
 <ComponentPreview
   name="disclosure-group-basic"
   minHeight="580px"
 />
 
-
-### Anatomy
-
-Import all parts and piece them together.
+## Anatomy
 
 ```tsx
 import {DisclosureGroup, Disclosure} from '@heroui/react';
@@ -43,6 +38,8 @@ export default () => (
 )
 ```
 
+## Examples
+
 ### Controlled
 
 You can control which disclosures are expanded with external navigation controls using the `expandedKeys` and `onExpandedChange` props.
@@ -52,44 +49,16 @@ You can control which disclosures are expanded with external navigation controls
   minHeight="580px"
 />
 
+## Customization
 
+### Tailwind CSS
 
-<RelatedShowcases component="DisclosureGroup" />
+<ComponentPreview name="disclosure-group-custom-styles" />
 
-<RelatedComponents component="disclosuregroup" />
-
-## Styling
-
-### Passing Tailwind CSS classes
-
-```tsx
-import {
-  DisclosureGroup,
-  Disclosure,
-  DisclosureTrigger,
-  DisclosurePanel
-} from '@heroui/react';
-
-function CustomDisclosureGroup() {
-  return (
-    <DisclosureGroup className="border rounded-lg p-4 space-y-2">
-      <Disclosure id="first" className="border-b pb-2">
-        <DisclosureTrigger>Item 1</DisclosureTrigger>
-        <DisclosurePanel>Content 1</DisclosurePanel>
-      </Disclosure>
-      <Disclosure id="second">
-        <DisclosureTrigger>Item 2</DisclosureTrigger>
-        <DisclosurePanel>Content 2</DisclosurePanel>
-      </Disclosure>
-    </DisclosureGroup>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the DisclosureGroup component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -102,13 +71,15 @@ To customize the DisclosureGroup component classes, you can use the `@layer comp
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The DisclosureGroup component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/disclosure-group.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.disclosure-group` - Base container styles with layout containment
 
 ### Interactive States
@@ -120,7 +91,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### DisclosureGroup Props
+### DisclosureGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -132,7 +103,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Disclosure items to render |
 | `className` | `string` | - | Additional CSS classes |
 
-### RenderProps
+### Render Props
 
 When using the render prop pattern, these values are provided:
 
@@ -140,3 +111,11 @@ When using the render prop pattern, these values are provided:
 |------|------|-------------|
 | `expandedKeys` | `Set<Key>` | Currently expanded item keys |
 | `isDisabled` | `boolean` | Whether the group is disabled |
+
+## Related Showcases
+
+<RelatedShowcases component="DisclosureGroup" />
+
+## Related Components
+
+<RelatedComponents component="disclosuregroup" />

@@ -1,30 +1,19 @@
 "use client";
 
-import {Check, Power} from "@gravity-ui/icons";
-import {Switch} from "@heroui/react";
+import {Description, Label, Switch} from "@heroui/react";
 
 export function CustomStyles() {
   return (
-    <Switch aria-label="Power">
-      {({isSelected}) => (
-        <Switch.Content>
-          <Switch.Control
-            className={`h-[31px] w-[51px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
-          >
-            <Switch.Thumb
-              className={`size-[27px] bg-white shadow-sm ${isSelected ? "ms-[22px] shadow-lg" : ""}`}
-            >
-              <Switch.Icon>
-                {isSelected ? (
-                  <Check className="size-4 text-cyan-600" />
-                ) : (
-                  <Power className="size-4 text-blue-600" />
-                )}
-              </Switch.Icon>
-            </Switch.Thumb>
-          </Switch.Control>
-        </Switch.Content>
-      )}
+    <Switch id="autosave">
+      <Switch.Content>
+        <Switch.Control className="[--switch-control-bg-checked-hover:var(--success)] [--switch-control-bg-checked:var(--success)]">
+          <Switch.Thumb />
+        </Switch.Control>
+        <div className="flex flex-col gap-0.5">
+          <Label htmlFor="autosave">自动保存草稿</Label>
+          <Description>输入时会自动保存更改。</Description>
+        </div>
+      </Switch.Content>
     </Switch>
   );
 }

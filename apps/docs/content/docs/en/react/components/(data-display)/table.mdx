@@ -2,6 +2,7 @@
 title: Table
 description: Tables display structured data in rows and columns with support for sorting, selection, column resizing, and infinite scrolling.
 icon: updated
+
 links:
   rac: Table
   source: table/table.tsx
@@ -9,22 +10,18 @@ links:
   storybook: Components/Data Display/Table
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Table } from '@heroui/react';
 ```
-
-### Usage
 
 <ComponentPreview
   name="table-basic"
   minHeight="320px"
 />
 
-### Anatomy
-
-Import the Table component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Table } from '@heroui/react';
@@ -34,13 +31,7 @@ export default () => (
     <Table.ScrollContainer>
       <Table.Content aria-label="Example table">
         <Table.Header>
-          <Table.Column allowsSorting>
-            {({ sortDirection }) => (
-              <Table.SortableColumnHeader sortDirection={sortDirection}>
-                Name
-              </Table.SortableColumnHeader>
-            )}
-          </Table.Column>
+          <Table.Column>Name</Table.Column>
           <Table.Column>Role</Table.Column>
         </Table.Header>
         <Table.Body>
@@ -56,11 +47,22 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### Secondary Variant
 
 <ComponentPreview
   name="table-secondary-variant"
   minHeight="320px"
+/>
+
+### Async Loading
+
+Use `Table.LoadMore` for infinite scrolling. It renders a sentinel row that triggers `onLoadMore` when scrolled into view.
+
+<ComponentPreview
+  name="table-async-loading"
+  minHeight="380px"
 />
 
 ### Sorting
@@ -79,13 +81,6 @@ Enable row selection with `selectionMode` on `Table.Content`. Use `Checkbox` wit
 <ComponentPreview
   name="table-selection"
   minHeight="380px"
-/>
-
-### Custom Cells
-
-<ComponentPreview
-  name="table-custom-cells"
-  minHeight="420px"
 />
 
 ### Expandable Rows
@@ -124,15 +119,6 @@ Use `renderEmptyState` on `Table.Body` to display a custom message when the tabl
   minHeight="300px"
 />
 
-### Async Loading
-
-Use `Table.LoadMore` for infinite scrolling. It renders a sentinel row that triggers `onLoadMore` when scrolled into view.
-
-<ComponentPreview
-  name="table-async-loading"
-  minHeight="380px"
-/>
-
 ### Virtualization
 
 Table supports virtualization through [Virtualizer](https://react-aria.adobe.com/Virtualizer), enabling efficient rendering of large datasets by displaying only the rows visible within the viewport.
@@ -154,41 +140,23 @@ accessibility.
   minHeight="420px"
 />
 
-<RelatedComponents component="table" />
+### Custom Cells
 
-## Styling
+<ComponentPreview
+  name="table-custom-cells"
+  minHeight="420px"
+/>
 
-### Passing Tailwind CSS classes
+## Customization
 
-You can customize individual Table parts:
+### Tailwind CSS
 
-```tsx
-import { Table } from '@heroui/react';
+<ComponentPreview name="table-custom-styles" />
 
-function CustomTable() {
-  return (
-    <Table className="border border-purple-200">
-      <Table.ScrollContainer>
-        <Table.Content aria-label="Custom styled table">
-          <Table.Header className="bg-purple-50">
-            <Table.Column>Name</Table.Column>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row className="hover:bg-purple-50">
-              <Table.Cell>Kate Moore</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table.Content>
-      </Table.ScrollContainer>
-    </Table>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Table component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -218,13 +186,15 @@ To customize the Table component classes, you can use the `@layer components` di
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Table component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/table.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.table-root` - Root container (named `table-root` instead of `table` because `table` is a built-in Tailwind CSS utility class for `display: table`)
 - `.table__scroll-container` - Horizontal scroll wrapper with custom scrollbar
 - `.table__content` - The `<table>` element
@@ -235,15 +205,13 @@ The Table component uses these CSS classes ([View source styles](https://github.
 - `.table__cell` - Data cell (`<td>`)
 - `.table__footer` - Footer container (outside table)
 
-#### Advanced Classes
+#### Advanced Classes [!toc]
 - `.table__column-resizer` - Drag handle for column resizing
 - `.table__resizable-container` - Wrapper enabling column resizing
 - `.table__load-more` - Sentinel row for infinite scrolling
 - `.table__load-more-content` - Styled container for the loading indicator
-- `.table__sortable-column-header` - Sortable column label + indicator wrapper
-- `.table__sortable-column-indicator` - Sort direction chevron (rotates via `[data-direction="descending"]`)
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.table-root--primary` - Gray background container with card-style body (default)
 - `.table-root--secondary` - No background, standalone rounded headers
 
@@ -261,7 +229,7 @@ The Table supports both CSS pseudo-classes and data attributes for flexibility:
 
 ## API Reference
 
-### Table Props
+### Table
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -269,14 +237,14 @@ The Table supports both CSS pseudo-classes and data attributes for flexibility:
 | `className` | `string` | - | Additional CSS classes for the root container |
 | `children` | `React.ReactNode` | - | Table content (ScrollContainer, Footer, etc.) |
 
-### Table.ScrollContainer Props
+### Table.ScrollContainer
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Table.Content element |
 
-### Table.Content Props
+### Table.Content
 
 Inherits from [React Aria Table](https://react-spectrum.adobe.com/react-aria/Table.html).
 
@@ -290,7 +258,7 @@ Inherits from [React Aria Table](https://react-spectrum.adobe.com/react-aria/Tab
 | `onSortChange` | `(descriptor: SortDescriptor) => void` | - | Sort change handler |
 | `className` | `string` | - | Additional CSS classes |
 
-### Table.Header Props
+### Table.Header
 
 Inherits from [React Aria TableHeader](https://react-spectrum.adobe.com/react-aria/Table.html#tableheader).
 
@@ -299,7 +267,7 @@ Inherits from [React Aria TableHeader](https://react-spectrum.adobe.com/react-ar
 | `columns` | `T[]` | - | Dynamic column data for render prop pattern |
 | `children` | `React.ReactNode \| (column: T) => React.ReactNode` | - | Static columns or render prop |
 
-### Table.Column Props
+### Table.Column
 
 Inherits from [React Aria Column](https://react-spectrum.adobe.com/react-aria/Table.html#column).
 
@@ -312,7 +280,7 @@ Inherits from [React Aria Column](https://react-spectrum.adobe.com/react-aria/Ta
 | `minWidth` | `number` | - | Minimum width for resizable columns |
 | `children` | `React.ReactNode \| (values: ColumnRenderProps) => React.ReactNode` | - | Column content or render prop with sort direction |
 
-### Table.Body Props
+### Table.Body
 
 Inherits from [React Aria TableBody](https://react-spectrum.adobe.com/react-aria/Table.html#tablebody).
 
@@ -322,7 +290,7 @@ Inherits from [React Aria TableBody](https://react-spectrum.adobe.com/react-aria
 | `renderEmptyState` | `() => React.ReactNode` | - | Content to display when the table is empty |
 | `children` | `React.ReactNode \| (item: T) => React.ReactNode` | - | Static rows or render prop |
 
-### Table.Row Props
+### Table.Row
 
 Inherits from [React Aria Row](https://react-spectrum.adobe.com/react-aria/Table.html#row).
 
@@ -332,7 +300,7 @@ Inherits from [React Aria Row](https://react-spectrum.adobe.com/react-aria/Table
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Row cells |
 
-### Table.Cell Props
+### Table.Cell
 
 Inherits from [React Aria Cell](https://react-spectrum.adobe.com/react-aria/Table.html#cell).
 
@@ -341,7 +309,7 @@ Inherits from [React Aria Cell](https://react-spectrum.adobe.com/react-aria/Tabl
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Cell content |
 
-### Table.SortableColumnHeader Props
+### Table.SortableColumnHeader
 
 Renders a sortable column label with an ascending/descending indicator. Use it inside a `Table.Column` render-prop callback and forward the `sortDirection` value.
 
@@ -351,16 +319,16 @@ Renders a sortable column label with an ascending/descending indicator. Use it i
 | `showIndicator` | `boolean` | `true` | Whether to render the sort indicator icon when a direction is set. |
 | `indicator` | `React.ReactNode` | - | Custom indicator element. Overrides the default chevron and receives a `data-direction` attribute. |
 | `className` | `string` | - | Additional CSS classes for the wrapper. |
-| `children` | `React.ReactNode` | - | Column label content. |
+| `children` | `React.ReactNode` | - | Column label content |
 
-### Table.Footer Props
+### Table.Footer
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Footer content (e.g., pagination) |
 
-### Table.ColumnResizer Props
+### Table.ColumnResizer
 
 Inherits from [React Aria ColumnResizer](https://react-spectrum.adobe.com/react-aria/Table.html#columnresizer).
 
@@ -368,7 +336,7 @@ Inherits from [React Aria ColumnResizer](https://react-spectrum.adobe.com/react-
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 
-### Table.ResizableContainer Props
+### Table.ResizableContainer
 
 Inherits from [React Aria ResizableTableContainer](https://react-spectrum.adobe.com/react-aria/Table.html#resizabletablecontainer).
 
@@ -377,7 +345,7 @@ Inherits from [React Aria ResizableTableContainer](https://react-spectrum.adobe.
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Table.Content element |
 
-### Table.LoadMore Props
+### Table.LoadMore
 
 Inherits from [React Aria TableLoadMoreItem](https://react-spectrum.adobe.com/react-aria/Table.html).
 
@@ -387,14 +355,14 @@ Inherits from [React Aria TableLoadMoreItem](https://react-spectrum.adobe.com/re
 | `onLoadMore` | `() => void` | - | Handler called when the sentinel row is visible |
 | `children` | `React.ReactNode` | - | Loading indicator content |
 
-### Table.LoadMoreContent Props
+### Table.LoadMoreContent
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `React.ReactNode` | - | Loading indicator content (e.g., Spinner) |
 
-### Table.Collection Props
+### Table.Collection
 
 Re-exported from React Aria `Collection`. Used to render dynamic cells within rows alongside static cells (e.g., checkboxes).
 
@@ -402,7 +370,6 @@ Re-exported from React Aria `Collection`. Used to render dynamic cells within ro
 |------|------|---------|-------------|
 | `items` | `T[]` | - | Collection items |
 | `children` | `(item: T) => React.ReactNode` | - | Render prop for each item |
-
 
 ### TableLayout
 
@@ -416,3 +383,7 @@ Re-exported from React Aria `Collection`. Used to render dynamic cells within ro
 | `dropIndicatorThickness` | `number \| undefined` | 2 | The thickness of the drop indicator. |
 | `gap` | `number \| undefined` | 0 | The gap between items. |
 | `padding` | `number \| undefined` | 0 | The padding around the list. |
+
+## Related Components
+
+<RelatedComponents component="table" />

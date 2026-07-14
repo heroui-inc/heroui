@@ -6,4 +6,5 @@ export {FormExample} from "./form-example";
 export {InternationalCalendar} from "./international-calendar";
 export {WithCustomIndicator} from "./with-custom-indicator";
 export {WithValidation} from "./with-validation";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
+export {CustomStyles} from "./custom-styles";

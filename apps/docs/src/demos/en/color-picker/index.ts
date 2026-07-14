@@ -3,3 +3,4 @@ export {Controlled} from "./controlled";
 export {WithSwatches} from "./with-swatches";
 export {WithFields} from "./with-fields";
 export {WithSliders} from "./with-sliders";
+export {CustomStyles} from "./custom-styles";

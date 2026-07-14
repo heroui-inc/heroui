@@ -1,6 +1,7 @@
 ---
 title: Separator
 description: Visually divide content sections
+
 links:
   rac: Separator
   source: separator/separator.tsx
@@ -9,29 +10,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Separator } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="separator-basic"
 />
 
-### Vertical
-
-<ComponentPreview
-  name="separator-vertical"
-/>
-
-### With Content
-
-<ComponentPreview
-  name="separator-with-content"
-/>
+## Examples
 
 ### Variants
 
@@ -47,32 +36,34 @@ The Separator component adapts to different surface backgrounds for better visib
   name="separator-with-surface"
 />
 
-<RelatedComponents component="separator" />
-
-### Custom Render Function
+### Vertical
 
 <ComponentPreview
-  name="separator-custom-render-function"
+  name="separator-vertical"
 />
 
-## Styling
+### With Content
 
-### Passing Tailwind CSS classes
+<ComponentPreview
+  name="separator-with-content"
+/>
 
-```tsx
-import {Separator} from '@heroui/react';
+### Render Function
 
-function CustomSeparator() {
-  return (
-    <Separator className="my-8 bg-linear-to-r from-transparent via-default-500 to-transparent" />
-  );
-}
-```
+<ComponentPreview
+  name="separator-render-function"
+/>
 
-### Customizing the component classes
+## Customization
+
+### Tailwind CSS
+
+<ComponentPreview name="separator-custom-styles" />
+
+### Global CSS
 
 To customize the Separator component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -86,25 +77,27 @@ To customize the Separator component classes, you can use the `@layer components
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Separator component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/separator.css)):
 
-#### Base & Orientation Classes
+#### Base & Orientation Classes [!toc]
 - `.separator` - Base separator styles with default horizontal orientation
 - `.separator--horizontal` - Horizontal orientation (full width, 1px height)
 - `.separator--vertical` - Vertical orientation (full height, 1px width)
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.separator--default` - Default variant with standard contrast
 - `.separator--secondary` - Secondary variant with medium contrast
 - `.separator--tertiary` - Tertiary variant with subtle contrast
 
 ## API Reference
 
-### Separator Props
+### Separator
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -112,3 +105,7 @@ The Separator component uses these CSS classes ([View source styles](https://git
 | `variant` | `'default' \| 'secondary' \| 'tertiary'` | `'default'` | The visual variant of the separator |
 | `className` | `string` | - | Additional CSS classes |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, undefined>` | - | Overrides the default DOM element with a custom render function.|
+
+## Related Components
+
+<RelatedComponents component="separator" />

@@ -1,6 +1,7 @@
 ---
 title: Select
 description: A select displays a collapsible list of options and allows a user to select one of them
+
 links:
   rac: Select
   source: select/select.tsx
@@ -8,19 +9,15 @@ links:
   storybook: Components/Pickers/Select
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Select } from "@heroui/react";
 ```
 
-### Usage
-
 <ComponentPreview name="select-default" />
 
-### Anatomy
-
-Import the Select component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import {Select, Label, Description, Header, ListBox, Separator} from "@heroui/react";
@@ -52,33 +49,7 @@ export default () => (
 );
 ```
 
-### With Description
-
-<ComponentPreview name="select-with-description" />
-
-### Multiple Select
-
-<ComponentPreview name="select-multiple-select" />
-
-### With Sections
-
-<ComponentPreview name="select-with-sections" />
-
-### With Disabled Options
-
-<ComponentPreview name="select-with-disabled-options" />
-
-### Custom Indicator
-
-<ComponentPreview name="select-custom-indicator" />
-
-### Required
-
-<ComponentPreview name="select-required" />
-
-### Full Width
-
-<ComponentPreview name="select-full-width" />
+## Examples
 
 ### Variants
 
@@ -89,15 +60,33 @@ The Select component supports two visual variants:
 
 <ComponentPreview name="select-variants" />
 
-### In Surface
+### Full Width
 
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
+<ComponentPreview name="select-full-width" />
 
-<ComponentPreview name="select-on-surface" />
+### With Description
 
-### Custom Value
+<ComponentPreview name="select-with-description" />
 
-<ComponentPreview name="select-custom-value" />
+### Required
+
+<ComponentPreview name="select-required" />
+
+### Disabled
+
+<ComponentPreview name="select-disabled" />
+
+### With Disabled Options
+
+<ComponentPreview name="select-with-disabled-options" />
+
+### Multiple Select
+
+<ComponentPreview name="select-multiple-select" />
+
+### With Sections
+
+<ComponentPreview name="select-with-sections" />
 
 ### Controlled
 
@@ -115,50 +104,36 @@ When used inside a [Surface](/docs/components/surface) component, use `variant="
 
 <ComponentPreview name="select-asynchronous-loading" />
 
-### Disabled
+### Custom Indicator
 
-<ComponentPreview name="select-disabled" />
+<ComponentPreview name="select-custom-indicator" />
 
-<RelatedComponents component="select" />
+### Custom Value
 
-### Custom Render Function
+<ComponentPreview name="select-custom-value" />
+
+### Render Function
 
 <ComponentPreview
-  name="select-custom-render-function"
+  name="select-render-function"
 />
 
-## Styling
+### In Surface
 
-### Passing Tailwind CSS classes
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
 
-```tsx
-import {Select} from "@heroui/react";
+<ComponentPreview name="select-on-surface" />
 
-function CustomSelect() {
-  return (
-    <Select className="w-full">
-      <Label>State</Label>
-      <Select.Trigger className="rounded-lg border bg-surface p-2">
-        <Select.Value />
-        <Select.Indicator />
-      </Select.Trigger>
-      <Select.Popover>
-        <ListBox>
-          <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
-            Item 1
-          </ListBox.Item>
-        </ListBox>
-      </Select.Popover>
-    </Select>
-  );
-}
-```
+## Customization
 
-### Customizing the component classes
+### Tailwind CSS
+
+<ComponentPreview name="select-custom-styles" />
+
+### Global CSS
 
 To customize the Select component classes, you can use the `@layer components` directive.
 
-<br />
 [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
@@ -185,13 +160,15 @@ To customize the Select component classes, you can use the `@layer components` d
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Select component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/select.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 
 - `.select` - Base select container
 - `.select__trigger` - The button that triggers the select
@@ -199,12 +176,12 @@ The Select component uses these CSS classes ([View source styles](https://github
 - `.select__indicator` - The dropdown indicator icon
 - `.select__popover` - The popover container
 
-#### Variant Classes
+#### Variant Classes [!toc]
 
 - `.select--primary` - Primary variant with shadow (default)
 - `.select--secondary` - Secondary variant without shadow, suitable for use in surfaces
 
-#### State Classes
+#### State Classes [!toc]
 
 - `.select[data-invalid="true"]` - Invalid state
 - `.select__trigger[data-focus-visible="true"]` - Focused trigger state
@@ -223,7 +200,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Select Props
+### Select
 
 | Prop            | Type                                    | Default            | Description                                              |
 | --------------- | --------------------------------------- | ------------------ | -------------------------------------------------------- |
@@ -247,14 +224,14 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children`      | `ReactNode \| RenderFunction`           | -                  | Select content or render function                        |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SelectRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Select.Trigger Props
+### Select.Trigger
 
 | Prop        | Type                          | Default | Description                        |
 | ----------- | ----------------------------- | ------- | ---------------------------------- |
 | `className` | `string`                      | -       | Additional CSS classes             |
 | `children`  | `ReactNode \| RenderFunction` | -       | Trigger content or render function |
 
-### Select.Value Props
+### Select.Value
 
 | Prop        | Type                          | Default | Description                      |
 | ----------- | ----------------------------- | ------- | -------------------------------- |
@@ -262,14 +239,14 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children`  | `ReactNode \| RenderFunction` | -       | Value content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SelectValueRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Select.Indicator Props
+### Select.Indicator
 
 | Prop        | Type        | Default | Description              |
 | ----------- | ----------- | ------- | ------------------------ |
 | `className` | `string`    | -       | Additional CSS classes   |
 | `children`  | `ReactNode` | -       | Custom indicator content |
 
-### Select.Popover Props
+### Select.Popover
 
 | Prop        | Type                                                                                                                                                                                                                                                                                                                     | Default    | Description                                      |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------ |
@@ -277,7 +254,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string`                                                                                                                                                                                                                                                                                                                 | -          | Additional CSS classes                           |
 | `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | Content children                                 |
 
-### RenderProps
+### Render Props
 
 When using render functions with Select.Value, these values are provided:
 
@@ -300,3 +277,7 @@ The Select component implements the ARIA listbox pattern and provides:
 - HTML form integration
 
 For more information, see the [React Aria Select documentation](https://react-spectrum.adobe.com/react-aria/Select.html).
+
+## Related Components
+
+<RelatedComponents component="select" />

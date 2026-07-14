@@ -7,21 +7,17 @@ links:
   storybook: Components/Navigation/Pagination
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Pagination } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="pagination-basic"
 />
 
-### Anatomy
-
-Import the Pagination component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Pagination } from '@heroui/react';
@@ -56,22 +52,36 @@ export default () => (
 );
 ```
 
+## Examples
+
 ### Sizes
 
 <ComponentPreview
   name="pagination-sizes"
 />
 
-### With Ellipsis
+### Disabled
 
 <ComponentPreview
-  name="pagination-with-ellipsis"
+  name="pagination-disabled"
 />
 
 ### Simple (Previous / Next)
 
 <ComponentPreview
   name="pagination-simple-prev-next"
+/>
+
+### Controlled
+
+<ComponentPreview
+  name="pagination-controlled"
+/>
+
+### With Ellipsis
+
+<ComponentPreview
+  name="pagination-with-ellipsis"
 />
 
 ### With Summary
@@ -88,46 +98,16 @@ You can replace the default chevron icons by passing custom children to `Previou
   name="pagination-custom-icons"
 />
 
-### Controlled
+## Customization
 
-<ComponentPreview
-  name="pagination-controlled"
-/>
+### Tailwind CSS
 
-### Disabled
+<ComponentPreview name="pagination-custom-styles" />
 
-<ComponentPreview
-  name="pagination-disabled"
-/>
-
-<RelatedComponents component="pagination" />
-
-## Styling
-
-### Passing Tailwind CSS classes
-
-You can customize individual Pagination parts:
-
-```tsx
-import { Pagination } from '@heroui/react';
-
-function CustomPagination() {
-  return (
-    <Pagination className="gap-8">
-      <Pagination.Content className="gap-2">
-        <Pagination.Item>
-          <Pagination.Link className="rounded-md" isActive>1</Pagination.Link>
-        </Pagination.Item>
-      </Pagination.Content>
-    </Pagination>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Pagination component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -145,13 +125,15 @@ To customize the Pagination component classes, you can use the `@layer component
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Pagination component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/pagination.css)):
 
-#### Base & Layout Classes
+#### Base & Layout Classes [!toc]
 - `.pagination` - Root navigation container with flex layout
 - `.pagination__summary` - Left-side info text container
 - `.pagination__content` - Container for pagination items
@@ -160,7 +142,7 @@ The Pagination component uses these CSS classes ([View source styles](https://gi
 - `.pagination__link--nav` - Navigation button modifier (Previous/Next)
 - `.pagination__ellipsis` - Ellipsis indicator
 
-#### Size Classes
+#### Size Classes [!toc]
 - `.pagination--sm` - Small size variant
 - `.pagination--md` - Medium size variant (default)
 - `.pagination--lg` - Large size variant
@@ -177,7 +159,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Pagination Props
+### Pagination
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -185,28 +167,28 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Pagination parts (Summary, Content) |
 
-### Pagination.Summary Props
+### Pagination.Summary
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Summary content (e.g., "Showing 1-10 of 120") |
 
-### Pagination.Content Props
+### Pagination.Content
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Pagination items |
 
-### Pagination.Item Props
+### Pagination.Item
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Item content (Link, Previous, Next, or Ellipsis) |
 
-### Pagination.Link Props
+### Pagination.Link
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -216,7 +198,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Page number content |
 
-### Pagination.Previous / Pagination.Next Props
+### Pagination.Previous / Pagination.Next
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -225,18 +207,22 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Button content (compose with PreviousIcon/NextIcon) |
 
-### Pagination.PreviousIcon / Pagination.NextIcon Props
+### Pagination.PreviousIcon / Pagination.NextIcon
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | Default chevron SVG | Custom icon to replace the default chevron |
 
-### Pagination.Ellipsis Props
+### Pagination.Ellipsis
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
+
+## Note
+
+Pagination buttons use `onPress` instead of `onClick`. The `onPress` handler from React Aria normalizes press behavior across pointer types and provides accessibility improvements out of the box.
 
 ## Accessibility
 
@@ -250,4 +236,6 @@ The Pagination component is built on [React Aria's Button](https://react-spectru
 - Ellipsis marked with `aria-hidden="true"` to avoid screen reader confusion
 - Disabled states properly communicated to assistive technology via `isDisabled`
 
-> **Note:** Pagination buttons use `onPress` instead of `onClick`. The `onPress` handler from React Aria normalizes press behavior across pointer types and provides accessibility improvements out of the box.
+## Related Components
+
+<RelatedComponents component="pagination" />

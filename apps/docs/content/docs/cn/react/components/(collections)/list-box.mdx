@@ -8,21 +8,17 @@ links:
   storybook: Components/Collections/ListBox
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ListBox } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="list-box-default"
 />
 
-### 组件结构
-
-引入 ListBox 组件并通过点语法访问所有子部分。
+## 组件结构
 
 ```tsx
 import { ListBox, Label, Description, Header } from '@heroui/react';
@@ -44,7 +40,15 @@ export default () => (
 )
 ```
 
-### 带分组
+## 示例
+
+### 含禁用项
+
+<ComponentPreview
+  name="list-box-with-disabled-items"
+/>
+
+### 分组选项
 
 <ComponentPreview
   name="list-box-with-sections"
@@ -56,10 +60,18 @@ export default () => (
   name="list-box-multi-select"
 />
 
-### 带禁用项
+### 受控组件
 
 <ComponentPreview
-  name="list-box-with-disabled-items"
+  name="list-box-controlled"
+/>
+
+### 虚拟滚动
+
+ListBox 通过 [Virtualizer](https://react-aria.adobe.com/Virtualizer) 支持虚拟化，仅渲染视口内可见行，从而高效展示大数据集。
+
+<ComponentPreview 
+  name="list-box-virtualization"
 />
 
 ### 自定义勾选图标
@@ -68,50 +80,21 @@ export default () => (
   name="list-box-custom-check-icon"
 />
 
-### 受控
+### 渲染函数
 
 <ComponentPreview
-  name="list-box-controlled"
+  name="list-box-render-function"
 />
 
-### 自定义渲染函数
+## 自定义样式
 
-<ComponentPreview
-  name="list-box-custom-render-function"
-/>
+### Tailwind CSS
 
-### 虚拟化
+<ComponentPreview name="list-box-custom-styles" />
 
-ListBox 通过 [Virtualizer](https://react-aria.adobe.com/Virtualizer) 支持虚拟化，仅渲染视口内可见的行，从而高效展示大数据集。
+### 全局 CSS
 
-<ComponentPreview 
-  name="list-box-virtualization"
-/>
-
-<RelatedComponents component="list-box" />
-
-## 样式
-
-### 传入 Tailwind CSS 类
-
-```tsx
-import { ListBox } from '@heroui/react';
-
-function CustomListBox() {
-  return (
-    <ListBox className="border rounded-lg p-2 bg-surface">
-      <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
-        Item 1
-      </ListBox.Item>
-    </ListBox>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 ListBox 组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -133,25 +116,27 @@ function CustomListBox() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 ListBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/list-box.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.list-box` - ListBox 根容器
 - `.list-box-item` - 单个列表项
 - `.list-box-item__indicator` - 选中指示图标
 - `.list-box-section` - 用于分组的区块容器
 
-#### 变体类
+#### 变体类 [!toc]
 - `.list-box--default` - 默认变体样式
 - `.list-box--danger` - 危险变体样式
 - `.list-box-item--default` - 列表项默认变体
 - `.list-box-item--danger` - 列表项危险变体
 
-#### 状态类
+#### 状态类 [!toc]
 - `.list-box-item[data-selected="true"]` - 选中状态
 - `.list-box-item[data-focus-visible="true"]` - 聚焦状态
 - `.list-box-item[data-disabled="true"]` - 禁用状态
@@ -168,8 +153,7 @@ ListBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/her
 
 ## API 参考
 
-### ListBox Props
-
+### ListBox
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `aria-label` | `string` | - | ListBox 的无障碍标签。 |
@@ -185,8 +169,7 @@ ListBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/her
 | `children` | `ReactNode` | - | ListBox 项与分组。 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ListBoxRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### ListBox.Item Props
-
+### ListBox.Item
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `id` | `Key` | - | 列表项唯一标识。 |
@@ -197,15 +180,13 @@ ListBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/her
 | `children` | `ReactNode \| RenderFunction` | - | 列表项内容或渲染函数。 |
 | `render` | `(props: DetailedHTMLProps<LinkWithRequiredHref, HTMLAnchorElement> \| React.JSX.IntrinsicElements[keyof React.JSX.IntrinsicElements], renderProps: ListBoxItemRenderProps) => ReactElement` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
 
-### ListBox.ItemIndicator Props
-
+### ListBox.ItemIndicator
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 Tailwind CSS 类。 |
 | `children` | `ReactNode \| RenderFunction` | - | 自定义指示器内容或渲染函数。 |
 
-### ListBox.Section Props
-
+### ListBox.Section
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 Tailwind CSS 类。 |
@@ -237,7 +218,7 @@ ListBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/her
 
 ## 示例
 
-### 基础用法
+### 基本用法
 
 ```tsx
 import { ListBox, Label, Description } from '@heroui/react';
@@ -254,7 +235,7 @@ import { ListBox, Label, Description } from '@heroui/react';
 </ListBox>
 ```
 
-### 带分组
+### 分组选项
 
 ```tsx
 import { ListBox, Header, Separator } from '@heroui/react';
@@ -326,3 +307,7 @@ ListBox 组件实现 ARIA listbox 模式，并提供：
 - 首字母导航（typeahead）搜索能力
 
 更多信息见 [React Aria ListBox 文档](https://react-spectrum.adobe.com/react-aria/ListBox.html)。
+
+## 相关组件
+
+<RelatedComponents component="list-box" />

@@ -1,3 +1,4 @@
+export {CustomStyles} from "./custom-styles";
 export {BadgeBasic as Basic} from "./basic";
 export {BadgeColors as Colors} from "./colors";
 export {BadgeDot as Dot} from "./dot";

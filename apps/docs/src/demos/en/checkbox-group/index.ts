@@ -6,4 +6,5 @@ export {Indeterminate} from "./indeterminate";
 export {OnSurface} from "./on-surface";
 export {Validation} from "./validation";
 export {WithCustomIndicator} from "./with-custom-indicator";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
+export {CustomStyles} from "./custom-styles";

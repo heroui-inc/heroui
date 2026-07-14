@@ -1,7 +1,7 @@
 export {Basic} from "./basic";
 export {ChannelEditing} from "./channel-editing";
 export {Controlled} from "./controlled";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
 export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FullWidth} from "./full-width";
@@ -10,3 +10,4 @@ export {OnSurface} from "./on-surface";
 export {Required} from "./required";
 export {Variants} from "./variants";
 export {WithDescription} from "./with-description";
+export {CustomStyles} from "./custom-styles";

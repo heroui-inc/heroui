@@ -8,17 +8,15 @@ links:
   storybook: Components/Date and Time/TimeField
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { TimeField } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview name="time-field-basic" />
 
-### Anatomy
+## Anatomy
 
 ```tsx
 import {TimeField, Label, Description, FieldError} from '@heroui/react';
@@ -39,35 +37,7 @@ export default () => (
 
 > **TimeField** combines label, time input, description, and error into a single accessible component.
 
-### With Description
-
-<ComponentPreview name="time-field-with-description" />
-
-### Required Field
-
-<ComponentPreview name="time-field-required" />
-
-### Validation
-
-Use `isInvalid` together with `FieldError` to surface validation messages.
-
-<ComponentPreview name="time-field-invalid" />
-
-### With Validation
-
-TimeField supports validation with `minValue`, `maxValue`, and custom validation logic.
-
-<ComponentPreview name="time-field-with-validation" />
-
-### Controlled
-
-Control the value to synchronize with other components or state management.
-
-<ComponentPreview name="time-field-controlled" />
-
-### Disabled State
-
-<ComponentPreview name="time-field-disabled" />
+## Examples
 
 ### With Icons
 
@@ -79,15 +49,39 @@ Add prefix or suffix icons to enhance the time field.
 
 <ComponentPreview name="time-field-with-prefix-and-suffix" />
 
-### Full Width
-
-<ComponentPreview name="time-field-full-width" />
-
 ### On Surface
 
 When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` on TimeField.Group to apply the lower emphasis variant suitable for surface backgrounds.
 
 <ComponentPreview name="time-field-on-surface" />
+
+### With Description
+
+<ComponentPreview name="time-field-with-description" />
+
+### Required Field
+
+<ComponentPreview name="time-field-required" />
+
+### Disabled State
+
+<ComponentPreview name="time-field-disabled" />
+
+### Full Width
+
+<ComponentPreview name="time-field-full-width" />
+
+### Validation
+
+Use `isInvalid` together with `FieldError` to surface validation messages.
+
+<ComponentPreview name="time-field-invalid" />
+
+### Controlled
+
+Control the value to synchronize with other components or state management.
+
+<ComponentPreview name="time-field-controlled" />
 
 ### Form Example
 
@@ -95,41 +89,25 @@ Complete form example with validation and submission handling.
 
 <ComponentPreview name="time-field-form-example" />
 
-<RelatedComponents component="timefield" />
+### With Validation
 
-### Custom Render Function
+TimeField supports validation with `minValue`, `maxValue`, and custom validation logic.
+
+<ComponentPreview name="time-field-with-validation" />
+
+### Render Function
 
 <ComponentPreview
-  name="time-field-custom-render-function"
+  name="time-field-render-function"
 />
 
-## Styling
+## Customization
 
-### Passing Tailwind CSS classes
+### Tailwind CSS
 
-```tsx
-import {TimeField, Label, Description} from '@heroui/react';
+<ComponentPreview name="time-field-custom-styles" />
 
-function CustomTimeField() {
-  return (
-    <TimeField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Appointment time
-      </Label>
-      <TimeField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <TimeField.Input>
-          {(segment) => <TimeField.Segment segment={segment} />}
-        </TimeField.Input>
-      </TimeField.Group>
-      <Description className="text-xs text-default-500">
-        Select a time for your appointment.
-      </Description>
-    </TimeField>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 TimeField has minimal default styling. Override the `.time-field` class to customize the container styling.
 
@@ -156,6 +134,10 @@ TimeField has minimal default styling. Override the `.time-field` class to custo
 }
 ```
 
+## Styling Reference
+
+HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
+
 ### CSS Classes
 
 - `.time-field` – Root container with minimal styling (`flex flex-col gap-1`)
@@ -173,7 +155,7 @@ TimeField automatically manages these data attributes based on its state:
 
 ## API Reference
 
-### TimeField Props
+### TimeField
 
 TimeField inherits all props from React Aria's [TimeField](https://react-aria.adobe.com/TimeField) component.
 
@@ -305,7 +287,7 @@ const timeValue = new Time(currentTime.hour, currentTime.minute, currentTime.sec
 
 > **Note:** TimeField uses the [`@internationalized/date`](https://react-aria.adobe.com/internationalized/date/) package for time manipulation, parsing, and type definitions. See the [Internationalized Date documentation](https://react-aria.adobe.com/internationalized/date/) for more information about available types and functions.
 
-### TimeFieldRenderProps
+### Render Props
 
 When using render props with `className`, `style`, or `children`, these values are available:
 
@@ -319,7 +301,7 @@ When using render props with `className`, `style`, or `children`, these values a
 | `isFocusWithin` | `boolean` | Whether any child element is focused. |
 | `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation). |
 
-### TimeField.Group Props
+### TimeField.Group
 
 TimeField.Group accepts all props from React Aria's `Group` component plus the following:
 
@@ -328,7 +310,7 @@ TimeField.Group accepts all props from React Aria's `Group` component plus the f
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `variant` | `"primary" \| "secondary"` | `"primary"` | Visual variant of the component. `primary` is the default style with shadow. `secondary` is a lower emphasis variant without shadow, suitable for use in surfaces. |
 
-### TimeField.Input Props
+### TimeField.Input
 
 TimeField.Input accepts all props from React Aria's `DateInput` component plus the following:
 
@@ -339,7 +321,7 @@ TimeField.Input accepts all props from React Aria's `DateInput` component plus t
 
 The `TimeField.Input` component accepts a render prop function that receives date segments. Each segment represents a part of the time (hour, minute, second, etc.).
 
-### TimeField.Segment Props
+### TimeField.Segment
 
 TimeField.Segment accepts all props from React Aria's `DateSegment` component:
 
@@ -348,7 +330,7 @@ TimeField.Segment accepts all props from React Aria's `DateSegment` component:
 | `segment` | `DateSegment` | - | The date segment object from the TimeField.Input render prop. |
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 
-### TimeField.Prefix Props
+### TimeField.Prefix
 
 TimeField.Prefix accepts standard HTML `div` attributes:
 
@@ -357,7 +339,7 @@ TimeField.Prefix accepts standard HTML `div` attributes:
 | `className` | `string` | - | Tailwind classes merged with the component styles. |
 | `children` | `ReactNode` | - | Content to display in the prefix slot. |
 
-### TimeField.Suffix Props
+### TimeField.Suffix
 
 TimeField.Suffix accepts standard HTML `div` attributes:
 
@@ -433,3 +415,7 @@ The base classes power every instance. Override them once with `@layer component
 - **Disabled**: `[data-disabled="true"]` or `[aria-disabled="true"]`
 - **Segment Focus**: `:focus` or `[data-focused="true"]` on segment elements
 - **Segment Placeholder**: `[data-placeholder="true"]` on segment elements
+
+## Related Components
+
+<RelatedComponents component="timefield" />

@@ -9,19 +9,17 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Link } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="link-basic"
 />
 
-### 组件结构
+## 组件结构
 
 导入 Link 组件后，可通过点语法访问所有子部分。
 
@@ -36,11 +34,7 @@ export default () => (
 );
 ```
 
-### 自定义图标
-
-<ComponentPreview
-  name="link-custom-icon"
-/>
+## 示例
 
 ### 图标位置
 
@@ -85,50 +79,41 @@ Link 默认在悬浮时显示下划线。可使用 Tailwind CSS 的 text-decorat
 - [text-decoration-thickness](https://tailwindcss.com/docs/text-decoration-thickness)
 - [text-underline-offset](https://tailwindcss.com/docs/text-underline-offset)
 
-
 可用的 BEM 类：
 - 基础：`link`
 - 图标：`link__icon`
 
-<RelatedComponents component="link" />
-
-### 自定义渲染函数
+### 自定义图标
 
 <ComponentPreview
-  name="link-custom-render-function"
+  name="link-custom-icon"
 />
 
-## 样式
+### 渲染函数
 
-### 传入 Tailwind CSS 类
+<ComponentPreview
+  name="link-render-function"
+/>
 
-```tsx
-import { Link } from '@heroui/react';
+## 自定义样式
 
-function CustomLink() {
-  return (
-    <Link
-      href="#"
-      className="text-lg font-bold text-accent hover:text-accent/80"
-    >
-      Custom styled link
-    </Link>
-  );
-}
-```
+### Tailwind CSS
 
-### 自定义组件类
+<ComponentPreview name="link-custom-styles" />
 
-要自定义 Link 的组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+### 全局 CSS
+
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
   .link {
-    @apply font-semibold;
+    @apply font-semibold no-underline hover:underline;
   }
 }
 ```
+
+## 样式参考
 
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
@@ -136,7 +121,7 @@ HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态
 
 Link 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/link.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.link` — 链接基础样式
 - `.link__icon` — 链接图标样式
 
@@ -151,8 +136,7 @@ Link 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/h
 
 ## API 参考
 
-### Link Props
-
+### Link
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `href` | `string` | - | 锚点的目标 URL |
@@ -166,8 +150,7 @@ Link 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/h
 | `autoFocus` | `boolean` | - | 元素挂载时是否应获得焦点 |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, LinkRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。 |
 
-### Link.Icon Props
-
+### Link.Icon
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `React.ReactNode` | - | 自定义图标元素；省略时使用内置箭头图标 |
@@ -222,3 +205,7 @@ export default function NativeLink() {
   );
 }
 ```
+
+## 相关组件
+
+<RelatedComponents component="link" />

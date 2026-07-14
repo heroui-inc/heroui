@@ -3,4 +3,5 @@ export {Default} from "./default";
 export {Disabled} from "./disabled";
 export {Range} from "./range";
 export {Vertical} from "./vertical";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
+export {CustomStyles} from "./custom-styles";

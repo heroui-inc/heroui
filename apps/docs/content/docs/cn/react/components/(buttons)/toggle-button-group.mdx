@@ -9,19 +9,17 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="toggle-button-group-basic"
 />
 
-### 组件结构
+## 组件结构
 
 导入 ToggleButtonGroup 组件，并通过点语法访问所有子部分。
 
@@ -43,6 +41,8 @@ export default () => (
 );
 ```
 
+## 示例
+
 ### 尺寸
 
 <ComponentPreview
@@ -55,32 +55,10 @@ export default () => (
   name="toggle-button-group-orientation"
 />
 
-### 分离模式
-
-使用 `isDetached` 让按钮之间留出间隔，而不是彼此连接。
-
-<ComponentPreview
-  name="toggle-button-group-attached"
-/>
-
-### 全宽
+### 宽度充满
 
 <ComponentPreview
   name="toggle-button-group-full-width"
-/>
-
-### 选择模式
-
-使用 `selectionMode="single"` 实现互斥选择，或使用 `selectionMode="multiple"` 实现独立切换。
-
-<ComponentPreview
-  name="toggle-button-group-selection-mode"
-/>
-
-### 受控
-
-<ComponentPreview
-  name="toggle-button-group-controlled"
 />
 
 ### 禁用
@@ -91,38 +69,43 @@ export default () => (
 
 ### 无分隔线
 
-在按钮中直接省略 `<ToggleButtonGroup.Separator />` 组件即可。
+省略按钮中的 `<ToggleButtonGroup.Separator />` 组件即可。
 
 <ComponentPreview
   name="toggle-button-group-without-separator"
 />
 
-<RelatedComponents component="toggle-button-group" />
+### 分离模式
 
-## 样式
+使用 `isDetached` 让按钮之间留出间隔，而不是彼此连接。
 
-### 传入 Tailwind CSS 类
+<ComponentPreview
+  name="toggle-button-group-attached"
+/>
 
-```tsx
-import { ToggleButtonGroup, ToggleButton } from '@heroui/react';
+### 选择模式
 
-function CustomToggleButtonGroup() {
-  return (
-    <ToggleButtonGroup className="bg-purple-100" selectionMode="single">
-      <ToggleButton id="a">Option A</ToggleButton>
-      <ToggleButton id="b">
-        <ToggleButtonGroup.Separator />
-        Option B
-      </ToggleButton>
-    </ToggleButtonGroup>
-  );
-}
-```
+使用 `selectionMode="single"` 实现互斥选择，或使用 `selectionMode="multiple"` 实现独立切换。
 
-### 自定义组件类
+<ComponentPreview
+  name="toggle-button-group-selection-mode"
+/>
 
-若要自定义 ToggleButtonGroup 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+### 受控组件
+
+<ComponentPreview
+  name="toggle-button-group-controlled"
+/>
+
+## 自定义样式
+
+### Tailwind CSS
+
+<ComponentPreview name="toggle-button-group-custom-styles" />
+
+### 全局 CSS
+
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -140,13 +123,15 @@ function CustomToggleButtonGroup() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toggle-button-group.css)）：
 
-#### 基础与布局类
+#### 基础与布局类 [!toc]
 
 - `.toggle-button-group` - 容器基础样式
 - `.toggle-button-group--horizontal` - 水平方向
@@ -154,13 +139,13 @@ ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://gith
 - `.toggle-button-group--full-width` - 全宽修饰符
 - `.toggle-button-group__separator` - 按钮之间的分隔线元素
 
-#### 修饰符类
+#### 修饰符类 [!toc]
 
 - `.toggle-button-group--detached` - 分离模式（按钮间有间隔）
 
 ## API 参考
 
-### ToggleButtonGroup Props
+### ToggleButtonGroup
 
 继承自 [React Aria ToggleButtonGroup](https://react-aria.adobe.com/ToggleButtonGroup)。
 
@@ -178,13 +163,13 @@ ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://gith
 | `isDisabled` | `boolean` | `false` | 是否禁用组内全部按钮 |
 | `className` | `string` | - | 额外的 CSS 类 |
 
-### ToggleButtonGroup.Separator Props
+### ToggleButtonGroup.Separator
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 额外的 CSS 类 |
 
-### 说明
+## 说明
 
 - ToggleButtonGroup 使用 React Context 将 `size` 传递给所有子 ToggleButton 组件
 - 每个 ToggleButton 都必须有唯一 `id` prop，并与 `selectedKeys` / `defaultSelectedKeys` 中使用的 key 对应
@@ -192,3 +177,7 @@ ToggleButtonGroup 组件使用以下 CSS 类（[查看源码样式](https://gith
 - 组件会自动处理按钮之间的圆角
 - 在每个 ToggleButton（第一个除外）内添加 `<ToggleButtonGroup.Separator />`，可在按钮之间显示分隔线
 - 将 `disallowEmptySelection` 与 `selectionMode="single"` 一起使用，可确保始终有一个选项被选中
+
+## 相关组件
+
+<RelatedComponents component="toggle-button-group" />

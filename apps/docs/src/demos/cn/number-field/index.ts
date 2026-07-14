@@ -1,7 +1,7 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
 export {CustomIcons} from "./custom-icons";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
 export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FullWidth} from "./full-width";
@@ -14,3 +14,4 @@ export {WithDescription} from "./with-description";
 export {WithFormatOptions} from "./with-format-options";
 export {WithStep} from "./with-step";
 export {WithValidation} from "./with-validation";
+export {CustomStyles} from "./custom-styles";

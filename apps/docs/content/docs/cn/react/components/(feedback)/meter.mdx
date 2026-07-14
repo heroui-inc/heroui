@@ -8,19 +8,17 @@ links:
   storybook: Components/Feedback/Meter
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Meter, Label } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="meter-basic"
 />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import { Meter, Label } from '@heroui/react';
@@ -36,6 +34,8 @@ export default () => (
 );
 ```
 
+## 示例
+
 ### 尺寸
 
 <ComponentPreview
@@ -48,50 +48,31 @@ export default () => (
   name="meter-colors"
 />
 
-### 自定义取值范围与格式
-
-使用 `minValue`、`maxValue` 与 `formatOptions` 自定义取值范围与展示格式。
-
-<ComponentPreview
-  name="meter-custom-value"
-/>
-
 ### 无可见标签
 
-当不需要可见标签时，请使用 `aria-label` 以保证无障碍。
+无需可见标签时，使用 `aria-label` 提供无障碍标签。
 
 <ComponentPreview
   name="meter-without-label"
 />
 
-<RelatedComponents component="meter" />
+### 自定义取值范围与格式
 
-## 样式
+使用 `minValue`、`maxValue` 与 `formatOptions` 自定义取值范围与显示格式。
 
-### 传入 Tailwind CSS 类
+<ComponentPreview
+  name="meter-custom-value"
+/>
 
-你可以为 Meter 的各个部分分别自定义样式：
+## 自定义样式
 
-```tsx
-import { Meter, Label } from '@heroui/react';
+### Tailwind CSS
 
-function CustomMeter() {
-  return (
-    <Meter value={60}>
-      <Label>Storage</Label>
-      <Meter.Output />
-      <Meter.Track className="bg-purple-100 dark:bg-purple-900">
-        <Meter.Fill className="bg-purple-500" />
-      </Meter.Track>
-    </Meter>
-  );
-}
-```
+<ComponentPreview name="meter-custom-styles" />
 
-### 自定义组件类
+### 全局 CSS
 
-要自定义 Meter 的组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -109,24 +90,26 @@ function CustomMeter() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 Meter 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/meter.css)）：
 
-#### 基础与元素类
+#### 基础与元素类 [!toc]
 - `.meter` — 基础容器（grid 布局）
 - `.meter__output` — 数值文本展示
 - `.meter__track` — 轨道背景
 - `.meter__fill` — 轨道已填充部分
 
-#### 尺寸类
+#### 尺寸类 [!toc]
 - `.meter--sm` — 小尺寸变体（更细的轨道）
 - `.meter--md` — 中等尺寸变体（默认）
 - `.meter--lg` — 大尺寸变体（更粗的轨道）
 
-#### 颜色类
+#### 颜色类 [!toc]
 - `.meter--default` — 默认颜色变体
 - `.meter--accent` — 强调色变体
 - `.meter--success` — 成功色变体
@@ -135,8 +118,7 @@ Meter 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 
 ## API 参考
 
-### Meter Props
-
+### Meter
 继承自 [React Aria Meter](https://react-spectrum.adobe.com/react-aria/Meter.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -158,3 +140,7 @@ Meter 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 |------|------|------|
 | `percentage` | `number` | Meter 百分比（0–100） |
 | `valueText` | `string` | 格式化后的数值文本 |
+
+## 相关组件
+
+<RelatedComponents component="meter" />

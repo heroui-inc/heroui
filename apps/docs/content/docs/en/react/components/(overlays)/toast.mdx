@@ -9,13 +9,83 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Toast, toast } from '@heroui/react';
 ```
 
-## Setup
+<ComponentPreview
+  name="toast-default"
+/>
+
+## Anatomy
+
+```tsx
+<Toast.Provider>
+  <Toast>
+    <Toast.Indicator />
+    <Toast.Content>
+      <Toast.Title />
+      <Toast.Description />
+    </Toast.Content>
+    <Toast.ActionButton />
+    <Toast.CloseButton />
+  </Toast>
+</Toast.Provider>
+```
+
+## Examples
+
+### Variants
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+### Placements
+
+<ComponentPreview
+  name="toast-placements"
+/>
+
+### Simple Toasts
+
+<ComponentPreview
+  name="toast-simple"
+/>
+
+### Custom Indicators
+
+<ComponentPreview
+  name="toast-custom-indicator"
+/>
+
+### Custom Toast Rendering
+
+<ComponentPreview
+  name="toast-custom-toast"
+/>
+
+### Promise & Loading
+
+<ComponentPreview
+  name="toast-promise"
+/>
+
+### Callbacks
+
+<ComponentPreview
+  name="toast-callbacks"
+/>
+
+### Custom Queues
+
+<ComponentPreview
+  name="toast-custom-queue"
+/>
+
+### Setup
 
 Render the provider in the root of your app.
 
@@ -34,90 +104,16 @@ function App() {
 }
 ```
 
-### Usage
+## Customization
 
-<ComponentPreview
-  name="toast-default"
-/>
+### Tailwind CSS
 
-### Simple Toasts
+<ComponentPreview name="toast-custom-styles" />
 
-<ComponentPreview
-  name="toast-simple"
-/>
-
-### Variants
-
-<ComponentPreview
-  name="toast-variants"
-/>
-
-### Custom Indicators
-
-<ComponentPreview
-  name="toast-custom-indicator"
-/>
-
-### Promise & Loading
-
-<ComponentPreview
-  name="toast-promise"
-/>
-
-### Callbacks
-
-<ComponentPreview
-  name="toast-callbacks"
-/>
-
-### Placements
-
-<ComponentPreview
-  name="toast-placements"
-/>
-
-### Custom Toast Rendering
-
-<ComponentPreview
-  name="toast-custom-toast"
-/>
-
-### Custom Queues
-
-<ComponentPreview
-  name="toast-custom-queue"
-/>
-
-### Anatomy
-
-```tsx
-<Toast.Provider>
-  <Toast>
-    <Toast.Indicator />
-    <Toast.Content>
-      <Toast.Title />
-      <Toast.Description />
-    </Toast.Content>
-    <Toast.ActionButton />
-    <Toast.CloseButton />
-  </Toast>
-</Toast.Provider>
-```
-
-<RelatedComponents component="toast" />
-
-## Styling
-
-### Passing Tailwind CSS classes
-
-```tsx
-<Toast.Provider className="bottom-8 right-8" placement="bottom end" />
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Toast component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -131,13 +127,15 @@ To customize the Toast component classes, you can use the `@layer components` di
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Toast component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toast.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.toast` - Base toast container
 - `.toast__region` - Toast region container
 - `.toast__content` - Content wrapper for title and description
@@ -147,7 +145,7 @@ The Toast component uses these CSS classes ([View source styles](https://github.
 - `.toast__action` - Action button container
 - `.toast__close` - Close button container
 
-#### Variant Classes
+#### Variant Classes [!toc]
 - `.toast--default` - Default gray variant
 - `.toast--accent` - Accent blue variant
 - `.toast--success` - Success green variant
@@ -164,7 +162,7 @@ The component supports various states:
 
 ## API Reference
 
-### Toast.Provider Props
+### Toast.Provider
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -177,7 +175,7 @@ The component supports various states:
 | `children` | `ReactNode \| ((props: {toast: QueuedToast<T>}) => ReactNode)` | - | Custom render function or children |
 | `className` | `string` | - | Additional CSS classes |
 
-### Toast Props
+### Toast
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -188,14 +186,14 @@ The component supports various states:
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Toast content (ToastContent, ToastIndicator, etc.) |
 
-### Toast.Content Props
+### Toast.Content
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Content (typically ToastTitle and ToastDescription) |
 | `className` | `string` | - | Additional CSS classes |
 
-### Toast.Indicator Props
+### Toast.Indicator
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -203,21 +201,21 @@ The component supports various states:
 | `children` | `ReactNode` | - | Custom indicator icon (defaults to variant icon) |
 | `className` | `string` | - | Additional CSS classes |
 
-### Toast.Title Props
+### Toast.Title
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Title text |
 | `className` | `string` | - | Additional CSS classes |
 
-### Toast.Description Props
+### Toast.Description
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Description text |
 | `className` | `string` | - | Additional CSS classes |
 
-### Toast.ActionButton Props
+### Toast.ActionButton
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -225,7 +223,7 @@ The component supports various states:
 | `className` | `string` | - | Additional CSS classes |
 | All `Button` props | - | - | Accepts all Button component props |
 
-### Toast.CloseButton Props
+### Toast.CloseButton
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -330,3 +328,7 @@ toast.resumeAll();
 | `loading` | `ReactNode` | - | Message shown while promise is pending |
 | `success` | `ReactNode \| ((data: T) => ReactNode)` | - | Message shown on success (can be function) |
 | `error` | `ReactNode \| ((error: Error) => ReactNode)` | - | Message shown on error (can be function) |
+
+## Related Components
+
+<RelatedComponents component="toast" />
