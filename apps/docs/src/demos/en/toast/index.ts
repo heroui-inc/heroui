@@ -2,6 +2,7 @@ export {Callbacks} from "./callbacks";
 export {CustomIndicator} from "./custom-indicator";
 export {CustomQueue} from "./custom-queue";
 export {CustomToast} from "./custom-toast";
+export {CustomStyles} from "./custom-styles";
 export {Default} from "./default";
 export {Placements} from "./placements";
 export {PromiseDemo as Promise} from "./promise";

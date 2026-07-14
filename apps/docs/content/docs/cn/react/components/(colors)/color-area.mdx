@@ -1,6 +1,6 @@
 ---
 title: ColorArea 颜色区域
-description: 二维颜色选择器，用户可在渐变区域内选取颜色。
+description: 二维颜色选择器，允许用户从渐变区域中选择颜色
 links:
   rac: ColorArea
   source: color-area/color-area.tsx
@@ -9,19 +9,17 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ColorArea } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="color-area-basic"
 />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import { ColorArea } from '@heroui/react';
@@ -33,22 +31,17 @@ export default () => (
 );
 ```
 
-### 显示点阵
+## 示例
+
+### 带定位点
 
 <ComponentPreview
   name="color-area-with-dots"
 />
 
-### 受控
+### 色彩空间与通道
 
-<ComponentPreview
-  name="color-area-controlled"
-/>
-
-
-### 颜色空间与通道
-
-使用 `colorSpace` 设置颜色空间（RGB、HSL、HSB），并通过 `xChannel` / `yChannel` prop 自定义横纵轴展示的颜色通道。
+使用 `colorSpace` 设置颜色空间（RGB、HSL、HSB），使用 `xChannel`/`yChannel` 自定义各轴显示的颜色通道。
 
 <ComponentPreview
   name="color-area-space-and-channels"
@@ -60,34 +53,28 @@ export default () => (
   name="color-area-disabled"
 />
 
-### 自定义渲染函数
+### 受控组件
 
 <ComponentPreview
-  name="color-area-custom-render-function"
+  name="color-area-controlled"
 />
 
-<RelatedComponents component="color-area" />
+### 渲染函数
 
-## 样式
+<ComponentPreview
+  name="color-area-render-function"
+/>
 
-### 传入 Tailwind CSS 类
+## 自定义样式
 
-```tsx
-import { ColorArea } from '@heroui/react';
+### Tailwind CSS
 
-function CustomColorArea() {
-  return (
-    <ColorArea className="max-w-72 rounded-3xl">
-      <ColorArea.Thumb />
-    </ColorArea>
-  );
-}
-```
+<ComponentPreview name="color-area-custom-styles" />
 
-### 自定义组件类
+### 全局 CSS
 
-若要自定义 ColorArea 组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+可使用 `@layer components` 指令自定义 ColorArea 组件类。
+[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -101,51 +88,57 @@ function CustomColorArea() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 ColorArea 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-area.css)）：
 
-#### 基础类
-- `.color-area` - 基础样式，含渐变背景与内阴影
-- `.color-area--show-dots` - 叠加点阵网格，便于精确取色
+#### 基础类 [!toc]
+- `.color-area` - 渐变背景与内阴影的基础样式
+- `.color-area--show-dots` - 添加点阵网格覆盖层以精确选色
 
-#### 元素类
-- `.color-area__thumb` - 可拖动的 thumb 指示器
+#### 元素类 [!toc]
+- `.color-area__thumb` - 可拖拽的滑块指示器
 
 ### 交互状态
 
-该组件同时支持 CSS 伪类与 data 属性：
+组件同时支持 CSS 伪类与 data 属性：
 
-- **禁用**：`[data-disabled="true"]`
-- **聚焦**：`[data-focus-visible="true"]`
-- **拖拽**：`[data-dragging="true"]`（仅 thumb）
+- **Disabled**：`[data-disabled="true"]`
+- **Focus**：`[data-focus-visible="true"]`
+- **Dragging**：`[data-dragging="true"]`（仅 thumb）
 
 ## API 参考
 
-### ColorArea Props
+### ColorArea
 
 继承自 [React Aria ColorArea](https://react-spectrum.adobe.com/react-aria/ColorArea.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `value` | `string \| Color` | - | 当前颜色值（受控）。 |
-| `defaultValue` | `string \| Color` | - | 默认颜色值（非受控）。 |
-| `onChange` | `(color: Color) => void` | - | 拖拽过程中颜色变化时调用的事件处理函数。 |
-| `onChangeEnd` | `(color: Color) => void` | - | 用户结束拖拽时调用的事件处理函数。 |
-| `xChannel` | `ColorChannel` | `"saturation"` | 水平轴对应的颜色通道。 |
-| `yChannel` | `ColorChannel` | `"brightness"` | 垂直轴对应的颜色通道。 |
-| `colorSpace` | `ColorSpace` | - | 通道所在的颜色空间。 |
-| `isDisabled` | `boolean` | `false` | 是否禁用 ColorArea。 |
-| `showDots` | `boolean` | `false` | 是否显示点阵网格叠加层。 |
-| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorAreaRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+| `value` | `string \| Color` | - | 当前颜色值（受控） |
+| `defaultValue` | `string \| Color` | - | 默认颜色值（非受控） |
+| `onChange` | `(color: Color) => void` | - | 拖拽过程中颜色变化时的回调 |
+| `onChangeEnd` | `(color: Color) => void` | - | 用户停止拖拽时的回调 |
+| `xChannel` | `ColorChannel` | `"saturation"` | 水平轴的颜色通道 |
+| `yChannel` | `ColorChannel` | `"brightness"` | 垂直轴的颜色通道 |
+| `colorSpace` | `ColorSpace` | - | 通道使用的颜色空间 |
+| `isDisabled` | `boolean` | `false` | 是否禁用 |
+| `showDots` | `boolean` | `false` | 是否显示点阵网格覆盖层 |
+| `className` | `string` | - | 附加 CSS 类 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorAreaRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
-### ColorArea.Thumb Props
+### ColorArea.Thumb
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `className` | `string` | - | 额外的 Tailwind CSS 类。 |
-| `style` | `CSSProperties \| ((renderProps) => CSSProperties)` | - | 行内样式或渲染函数。 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorThumbRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+| `className` | `string` | - | 附加 CSS 类 |
+| `style` | `CSSProperties \| ((renderProps) => CSSProperties)` | - | 内联样式或 render props 函数 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorThumbRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
+
+## 相关组件
+
+<RelatedComponents component="color-area" />

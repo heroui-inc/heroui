@@ -1,6 +1,6 @@
 ---
 title: Drawer 抽屉
-description: 用于补充内容与操作的侧滑面板。
+description: 用于补充内容与操作的滑出面板
 links:
   rac: Modal
   source: drawer/drawer.tsx
@@ -8,17 +8,15 @@ links:
   storybook: Components/Overlays/Drawer
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Drawer, Button } from "@heroui/react";
 ```
 
-### 用法
-
 <ComponentPreview name="drawer-basic" />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import { Drawer, Button } from "@heroui/react";
@@ -43,31 +41,29 @@ export default () => (
 );
 ```
 
-### 位置
+## 示例
+
+### 弹出位置
 
 <ComponentPreview name="drawer-placements" />
 
-### 遮罩变体
-
-<ComponentPreview name="drawer-backdrop-variants" />
-
 ### 不可关闭
 
-在 `Drawer.Backdrop` 上设置 `isDismissable={false}`，可阻止通过点击外部或拖动关闭。用户必须与抽屉内的操作按钮交互才能关闭。
+在 `Drawer.Backdrop` 上设置 `isDismissable={false}` 可阻止点击外部或拖拽关闭。用户必须通过抽屉内的操作按钮交互。
 
 <ComponentPreview name="drawer-non-dismissable" />
 
 ### 可滚动内容
 
-`Drawer.Body` 会使用原生滚动处理溢出。为避免与滚动冲突，拖拽关闭不会在 body 区域生效。
+`Drawer.Body` 通过原生滚动自动处理溢出。拖拽关闭在 body 区域被排除，以避免与滚动冲突。
 
 <ComponentPreview name="drawer-scrollable-content" />
 
-### 受控状态
+### 受控模式
 
 <ComponentPreview name="drawer-controlled" />
 
-### 带表单
+### 搭配表单
 
 <ComponentPreview name="drawer-with-form" />
 
@@ -75,45 +71,20 @@ export default () => (
 
 <ComponentPreview name="drawer-navigation" />
 
-<RelatedComponents component="drawer" />
+### 遮罩变体
 
-## 样式
+<ComponentPreview name="drawer-backdrop-variants" />
 
-### 传入 Tailwind CSS 类
+## 自定义样式
 
-```tsx
-import { Drawer, Button } from "@heroui/react";
+### Tailwind CSS
 
-function CustomDrawer() {
-  return (
-    <Drawer>
-      <Button>Open Drawer</Button>
-      <Drawer.Backdrop className="bg-black/80">
-        <Drawer.Content>
-          <Drawer.Dialog className="bg-linear-to-br from-purple-500 to-pink-500 text-white">
-            <Drawer.CloseTrigger />
-            <Drawer.Header>
-              <Drawer.Heading>Custom Styled Drawer</Drawer.Heading>
-            </Drawer.Header>
-            <Drawer.Body>
-              <p>This drawer has custom styling applied via Tailwind classes.</p>
-            </Drawer.Body>
-            <Drawer.Footer>
-              <Button slot="close">Close</Button>
-            </Drawer.Footer>
-          </Drawer.Dialog>
-        </Drawer.Content>
-      </Drawer.Backdrop>
-    </Drawer>
-  );
-}
-```
+<ComponentPreview name="drawer-custom-styles" />
 
-### 自定义组件类
+### 全局 CSS
 
-若要自定义 Drawer 组件类，可以使用 `@layer components` 指令。
+可使用 `@layer components` 指令自定义 Drawer 组件类。
 
-<br />
 [了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
@@ -136,140 +107,142 @@ function CustomDrawer() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 Drawer 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/drawer.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 
-- `.drawer__trigger` - 打开 Drawer 的触发元素
-- `.drawer__backdrop` - Drawer 背后的遮罩
-- `.drawer__content` - Drawer 面板的定位包裹层
-- `.drawer__dialog` - Drawer 面板本体
-- `.drawer__header` - 表头区域
+- `.drawer__trigger` - 打开抽屉的触发元素
+- `.drawer__backdrop` - 抽屉背后的遮罩层
+- `.drawer__content` - 抽屉面板的定位包裹层
+- `.drawer__dialog` - 抽屉面板本身
+- `.drawer__header` - 标题区域
 - `.drawer__heading` - 主标题文本
-- `.drawer__body` - 可滚动主体内容区域
-- `.drawer__footer` - 表底操作区域
-- `.drawer__handle` - 视觉拖拽把手
+- `.drawer__body` - 主可滚动内容区域
+- `.drawer__footer` - 操作按钮区域
+- `.drawer__handle` - 视觉拖拽手柄指示器
 - `.drawer__close-trigger` - 关闭按钮元素
 
-#### 遮罩变体
+#### 遮罩变体 [!toc]
 
-- `.drawer__backdrop--opaque` - 不透明有色遮罩（默认）
-- `.drawer__backdrop--blur` - 带玻璃效果的模糊遮罩
-- `.drawer__backdrop--transparent` - 透明遮罩（无叠加层）
+- `.drawer__backdrop--opaque` - 不透明彩色遮罩（默认）
+- `.drawer__backdrop--blur` - 模糊遮罩，玻璃效果
+- `.drawer__backdrop--transparent` - 透明遮罩（无覆盖层）
 
-#### 位置变体
+#### 位置变体 [!toc]
 
-- `.drawer__content--bottom` - 自底边上滑（默认）
-- `.drawer__content--top` - 自顶边下滑
-- `.drawer__content--left` - 自左侧滑入
-- `.drawer__content--right` - 自右侧滑入
+- `.drawer__content--bottom` - 从底部边缘滑入（默认）
+- `.drawer__content--top` - 从顶部边缘滑入
+- `.drawer__content--left` - 从左侧边缘滑入
+- `.drawer__content--right` - 从右侧边缘滑入
 
-#### 对话框变体
+#### 对话框变体 [!toc]
 
-- `.drawer__dialog--top` - 自顶边下滑
-- `.drawer__dialog--bottom` - 自底边上滑
-- `.drawer__dialog--left` - 自左侧滑入
-- `.drawer__dialog--right` - 自右侧滑入
+- `.drawer__dialog--top` - 从顶部边缘滑入
+- `.drawer__dialog--bottom` - 从底部边缘滑入
+- `.drawer__dialog--left` - 从左侧边缘滑入
+- `.drawer__dialog--right` - 从右侧边缘滑入
 
 ### 交互状态
 
-该组件支持以下交互状态：
+组件支持以下交互状态：
 
-- **聚焦**：`:focus-visible` 或 `[data-focus-visible="true"]` — 应用于触发器与关闭按钮
-- **悬停**：`:hover` 或 `[data-hovered="true"]` — 关闭按钮悬停时应用
-- **激活**：`:active` 或 `[data-pressed="true"]` — 触发器与关闭按钮被按压时应用
-- **进入**：`[data-entering]` — Drawer 打开动画期间应用
-- **离开**：`[data-exiting]` — Drawer 关闭动画期间应用
-- **位置**：`[data-placement="*"]` — 根据 Drawer 位置应用（top、bottom、left、right）
+- **Focus**：`:focus-visible` 或 `[data-focus-visible="true"]` - 应用于触发器与关闭按钮
+- **Hover**：`:hover` 或 `[data-hovered="true"]` - 悬停时应用于关闭按钮
+- **Active**：`:active` 或 `[data-pressed="true"]` - 按下时应用于触发器与关闭按钮
+- **Entering**：`[data-entering]` - 抽屉打开动画期间
+- **Exiting**：`[data-exiting]` - 抽屉关闭动画期间
+- **Placement**：`[data-placement="*"]` - 根据抽屉位置（top、bottom、left、right）应用
 
 ## API 参考
 
 ### Drawer
 
-| Prop       | Type                   | 默认值 | 描述                    |
-| ---------- | ---------------------- | ------ | ----------------------- |
-| `children` | `ReactNode`            | -      | 触发器与遮罩子元素。    |
-| `state`    | `UseOverlayStateReturn` | -    | 受控的叠加层状态。      |
+| Prop       | 类型                   | 默认值 | 描述                    |
+| ---------- | ---------------------- | ------- | ------------------------------ |
+| `children` | `ReactNode`            | -       | 触发器与 backdrop 元素  |
+| `state`    | `UseOverlayStateReturn` | -      | 受控 overlay 状态       |
 
 ### Drawer.Trigger
 
-| Prop        | Type        | 默认值 | 描述            |
-| ----------- | ----------- | ------ | --------------- |
-| `children`  | `ReactNode` | -      | 自定义触发内容。 |
-| `className` | `string`    | -      | CSS 类。        |
+| Prop        | 类型        | 默认值 | 描述            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | 自定义触发器内容 |
+| `className` | `string`    | -       | CSS 类            |
 
 ### Drawer.Backdrop
 
-| Prop                        | Type                                  | 默认值    | 描述               |
-| --------------------------- | ------------------------------------- | --------- | ------------------ |
-| `variant`                   | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | 遮罩叠加样式。     |
-| `isDismissable`             | `boolean`                             | `true`     | 点击遮罩是否关闭。 |
-| `isKeyboardDismissDisabled` | `boolean`                             | `false`    | 是否禁用 ESC 关闭。 |
-| `isOpen`                    | `boolean`                             | -          | 受控打开状态。     |
-| `onOpenChange`              | `(isOpen: boolean) => void`           | -          | 打开状态变化时的事件处理函数。 |
-| `className`                 | `string \| (values) => string`        | -          | 遮罩 CSS 类。      |
+| Prop                        | 类型                                  | 默认值    | 描述               |
+| --------------------------- | ------------------------------------- | ---------- | ------------------------- |
+| `variant`                   | `"opaque" \| "blur" \| "transparent"` | `"opaque"` | 遮罩覆盖层样式    |
+| `isDismissable`             | `boolean`                             | `true`     | 点击 backdrop 关闭   |
+| `isKeyboardDismissDisabled` | `boolean`                             | `false`    | 禁用 ESC 关闭  |
+| `isOpen`                    | `boolean`                             | -          | 受控打开状态     |
+| `onOpenChange`              | `(isOpen: boolean) => void`           | -          | 打开状态变化处理函数 |
+| `className`                 | `string \| (values) => string`        | -          | Backdrop CSS 类      |
 
 ### Drawer.Content
 
-| Prop        | Type                                          | 默认值    | 描述               |
-| ----------- | --------------------------------------------- | --------- | ------------------ |
-| `placement` | `"top" \| "bottom" \| "left" \| "right"`      | `"bottom"` | Drawer 从哪一侧滑入。 |
-| `className` | `string \| (values) => string`                | -          | Content CSS 类。   |
+| Prop        | 类型                                          | 默认值    | 描述               |
+| ----------- | --------------------------------------------- | ---------- | ------------------------- |
+| `placement` | `"top" \| "bottom" \| "left" \| "right"`      | `"bottom"` | 抽屉滑入的边缘 |
+| `className` | `string \| (values) => string`                | -          | Content CSS 类       |
 
 ### Drawer.Dialog
 
-| Prop               | Type                           | 默认值    | 描述            |
-| ------------------ | ------------------------------ | --------- | --------------- |
-| `children`         | `ReactNode`                    | -         | 对话框内容。    |
-| `className`        | `string`                       | -         | CSS 类。        |
-| `role`             | `string`                       | `"dialog"` | ARIA role。     |
-| `aria-label`       | `string`                       | -         | 无障碍标签。    |
-| `aria-labelledby`  | `string`                       | -         | 标签元素 ID。   |
+| Prop               | 类型                           | 默认值    | 描述                |
+| ------------------ | ------------------------------ | ---------- | -------------------------- |
+| `children`         | `ReactNode`                    | -          | Dialog 内容             |
+| `className`        | `string`                       | -          | CSS 类                |
+| `role`             | `string`                       | `"dialog"` | ARIA role                  |
+| `aria-label`       | `string`                       | -          | 无障碍标签        |
+| `aria-labelledby`  | `string`                       | -          | 标签元素 ID        |
 
 ### Drawer.Header
 
-| Prop        | Type        | 默认值 | 描述        |
-| ----------- | ----------- | ------ | ----------- |
-| `children`  | `ReactNode` | -      | 表头内容。  |
-| `className` | `string`    | -      | CSS 类。    |
+| Prop        | 类型        | 默认值 | 描述    |
+| ----------- | ----------- | ------- | -------------- |
+| `children`  | `ReactNode` | -       | Header 内容 |
+| `className` | `string`    | -       | CSS 类    |
 
 ### Drawer.Heading
 
-| Prop        | Type        | 默认值 | 描述      |
-| ----------- | ----------- | ------ | --------- |
-| `children`  | `ReactNode` | -      | 标题文本。 |
-| `className` | `string`    | -      | CSS 类。   |
+| Prop        | 类型        | 默认值 | 描述  |
+| ----------- | ----------- | ------- | ------------ |
+| `children`  | `ReactNode` | -       | 标题文本   |
+| `className` | `string`    | -       | CSS 类  |
 
 ### Drawer.Body
 
-| Prop        | Type        | 默认值 | 描述      |
-| ----------- | ----------- | ------ | --------- |
-| `children`  | `ReactNode` | -      | 主体内容。 |
-| `className` | `string`    | -      | CSS 类。   |
+| Prop        | 类型        | 默认值 | 描述  |
+| ----------- | ----------- | ------- | ------------ |
+| `children`  | `ReactNode` | -       | Body 内容 |
+| `className` | `string`    | -       | CSS 类  |
 
 ### Drawer.Footer
 
-| Prop        | Type        | 默认值 | 描述        |
-| ----------- | ----------- | ------ | ----------- |
-| `children`  | `ReactNode` | -      | 表底内容。  |
-| `className` | `string`    | -      | CSS 类。    |
+| Prop        | 类型        | 默认值 | 描述    |
+| ----------- | ----------- | ------- | -------------- |
+| `children`  | `ReactNode` | -       | Footer 内容 |
+| `className` | `string`    | -       | CSS 类    |
 
 ### Drawer.Handle
 
-| Prop        | Type     | 默认值 | 描述   |
-| ----------- | -------- | ------ | ------ |
-| `className` | `string` | -      | CSS 类。 |
+| Prop        | 类型     | 默认值 | 描述          |
+| ----------- | -------- | ------- | -------------------- |
+| `className` | `string` | -       | CSS 类          |
 
 ### Drawer.CloseTrigger
 
-| Prop        | Type                           | 默认值 | 描述            |
-| ----------- | ------------------------------ | ------ | --------------- |
-| `children`  | `ReactNode`                    | -      | 自定义关闭按钮。 |
-| `className` | `string \| (values) => string` | -      | CSS 类。        |
+| Prop        | 类型                           | 默认值 | 描述         |
+| ----------- | ------------------------------ | ------- | ------------------- |
+| `children`  | `ReactNode`                    | -       | 自定义关闭按钮 |
+| `className` | `string \| (values) => string` | -       | CSS 类         |
 
 ### useOverlayState Hook
 
@@ -292,8 +265,12 @@ state.setOpen(); // Set state directly
 
 实现 [WAI-ARIA Dialog 模式](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)：
 
-- **焦点陷阱**：打开时将焦点锁定在 Drawer 内
-- **键盘**：可关闭时 `ESC` 关闭，`Tab` 在可聚焦元素间循环
-- **屏幕阅读器**：通过 React Aria 提供合适的 ARIA 属性
+- **焦点陷阱**：打开时焦点锁定在抽屉内
+- **键盘**：`ESC` 关闭（可关闭时），`Tab` 循环元素
+- **屏幕阅读器**：通过 React Aria 提供正确的 ARIA 属性
 - **滚动锁定**：打开时禁用 body 滚动
-- **拖拽关闭**：支持在把手、表头与表底等区域的指针拖拽手势
+- **拖拽关闭**：在 handle、header 和 footer 区域支持指针拖拽手势
+
+## 相关组件
+
+<RelatedComponents component="drawer" />

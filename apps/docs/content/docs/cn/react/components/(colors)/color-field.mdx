@@ -1,6 +1,6 @@
 ---
 title: ColorField 颜色输入框
-description: 基于 React Aria ColorField 的颜色输入字段，包含标签、说明与校验能力。
+description: 基于 React Aria ColorField 的颜色输入字段，支持标签、描述与验证
 links:
   rac: ColorField
   source: color-field/color-field.tsx
@@ -8,17 +8,15 @@ links:
   storybook: Components/Colors/ColorField
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ColorField, parseColor } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview name="color-field-basic" />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import {ColorField, Label, ColorSwatch, Description, FieldError, parseColor} from '@heroui/react';
@@ -38,9 +36,26 @@ export default () => (
 )
 ```
 
-> **ColorField** 将标签、颜色输入、说明与错误信息组合为单个可访问组件。
+> **ColorField** 将标签、颜色输入、描述与错误合并为单个无障碍组件。
 
-### 带说明
+## 示例
+
+### 变体
+
+ColorField.Group 组件支持两种视觉变体：
+
+- **`primary`**（默认）- 标准样式带阴影，适用于大多数场景
+- **`secondary`** - 低强调变体无阴影，适用于 Surface 组件内
+
+<ComponentPreview name="color-field-variants" />
+
+### 表面样式
+
+在 [Surface](/docs/components/surface) 组件内使用时，在 ColorField.Group 上使用 `variant="secondary"` 以应用适合 Surface 背景的低强调变体。
+
+<ComponentPreview name="color-field-on-surface" />
+
+### 带描述
 
 <ComponentPreview name="color-field-with-description" />
 
@@ -48,91 +63,53 @@ export default () => (
 
 <ComponentPreview name="color-field-required" />
 
-### 校验
-
-将 `isInvalid` 与 `FieldError` 配合使用，以展示校验信息。
-
-<ComponentPreview name="color-field-invalid" />
-
-### 通道编辑
-
-通过设置 `colorSpace` 与 `channel`，ColorField 支持编辑单个颜色通道（hue、saturation、lightness、红、绿、蓝、alpha）。
-
-<ComponentPreview name="color-field-channel-editing" />
-
-### 受控
-
-控制数值以与其他组件或状态管理同步。
-
-<ComponentPreview name="color-field-controlled" />
-
-### 禁用状态
+### 禁用
 
 <ComponentPreview name="color-field-disabled" />
 
-### 全宽
+### 宽度充满
 
 <ComponentPreview name="color-field-full-width" />
 
-### 变体
+### 表单校验
 
-ColorField.Group 支持两种视觉变体：
+将 `isInvalid` 与 `FieldError` 一起使用以显示验证消息。
 
-- **`primary`**（默认）— 带阴影的标准样式，适用于大多数场景
-- **`secondary`** — 低强调、无阴影的变体，适合用在 Surface 组件内
+<ComponentPreview name="color-field-invalid" />
 
-<ComponentPreview name="color-field-variants" />
+### 分量编辑
 
-### On Surface
+ColorField 支持通过设置 `colorSpace` 与 `channel` 属性编辑单个颜色通道（hue、saturation、lightness、red、green、blue、alpha）。
 
-在 [Surface](/docs/components/surface) 内使用时，请在 ColorField.Group 上使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+<ComponentPreview name="color-field-channel-editing" />
 
-<ComponentPreview name="color-field-on-surface" />
+### 受控组件
+
+控制值以与其他组件或状态管理同步。
+
+<ComponentPreview name="color-field-controlled" />
 
 ### 表单示例
 
-包含校验与提交处理的完整表单示例。
+包含验证与提交处理的完整表单示例。
 
 <ComponentPreview name="color-field-form-example" />
 
-### 自定义渲染函数
+### 渲染函数
 
 <ComponentPreview
-  name="color-field-custom-render-function"
+  name="color-field-render-function"
 />
 
-<RelatedComponents component="colorfield" />
+## 自定义样式
 
-## 样式
+### Tailwind CSS
 
-### 传入 Tailwind CSS 类
+<ComponentPreview name="color-field-custom-styles" />
 
-```tsx
-import {ColorField, Label, ColorSwatch, Description} from '@heroui/react';
+### 全局 CSS
 
-function CustomColorField() {
-  return (
-    <ColorField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Brand Color
-      </Label>
-      <ColorField.Group className="rounded-lg border border-border/60 bg-surface px-3 py-2">
-        <ColorField.Prefix>
-          <ColorSwatch color="#3B82F6" />
-        </ColorField.Prefix>
-        <ColorField.Input />
-      </ColorField.Group>
-      <Description className="text-xs text-default-500">
-        Select your brand's primary color.
-      </Description>
-    </ColorField>
-  );
-}
-```
-
-### 自定义组件类
-
-ColorField 的默认样式非常克制。你可以覆盖 `.color-field` 类来自定义容器样式。
+ColorField 默认样式较少。覆盖 `.color-field` 类以自定义容器样式。
 
 ```css
 @layer components {
@@ -157,99 +134,103 @@ ColorField 的默认样式非常克制。你可以覆盖 `.color-field` 类来�
 }
 ```
 
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
 ### CSS 类
 
-- `.color-field` – 根容器，样式非常克制（`flex flex-col gap-1`）
+- `.color-field` – 最小样式的根容器（`flex flex-col gap-1`）
 
-> **说明：** 子组件（[Label](/docs/components/label)、[Description](/docs/components/description)、[FieldError](/docs/components/field-error)）拥有各自的 CSS 类与样式。自定义方式请参见对应文档。ColorField.Group 的样式见下文 API 参考中的 **ColorField.Group Styling** 小节。
+> **Note:** 子组件（[Label](/docs/components/label)、[Description](/docs/components/description)、[FieldError](/docs/components/field-error)）有各自的 CSS 类与样式。请参阅各自文档了解自定义选项。ColorField.Group 样式见下方 API 参考。
 
 ### 交互状态
 
-ColorField 会根据状态自动管理以下 data 属性：
+ColorField 根据状态自动管理以下 data 属性：
 
-- **Invalid**：`[data-invalid="true"]` 或 `[aria-invalid="true"]` – 无效时会自动隐藏 description 插槽
-- **Required**：`[data-required="true"]` – 当 `isRequired` 为 true 时应用
-- **Disabled**：`[data-disabled="true"]` – 当 `isDisabled` 为 true 时应用
-- **Focus Within**：`[data-focus-within="true"]` – 当任意子输入聚焦时应用
+- **Invalid**：`[data-invalid="true"]` 或 `[aria-invalid="true"]` - 无效时自动隐藏 description slot
+- **Required**：`[data-required="true"]` - `isRequired` 为 true 时应用
+- **Disabled**：`[data-disabled="true"]` - `isDisabled` 为 true 时应用
+- **Focus Within**：`[data-focus-within="true"]` - 任一子 input 聚焦时应用
 
 ## API 参考
 
-### ColorField Props
+### ColorField
 
-ColorField 继承 React Aria [ColorField](https://react-aria.adobe.com/ColorField.md) 组件的全部 props。
+ColorField 继承 React Aria [ColorField](https://react-aria.adobe.com/ColorField.md) 组件的所有属性。
 
 #### Base Props
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `children` | `React.ReactNode \| (values: ColorFieldRenderProps) => React.ReactNode` | - | 子组件（Label、ColorField.Group 等）或渲染函数。 |
-| `className` | `string \| (values: ColorFieldRenderProps) => string` | - | 用于样式的 CSS 类，支持渲染 prop。 |
-| `style` | `React.CSSProperties \| (values: ColorFieldRenderProps) => React.CSSProperties` | - | 行内样式，支持渲染 prop。 |
-| `fullWidth` | `boolean` | `false` | 颜色字段是否占满容器宽度 |
-| `id` | `string` | - | 元素的唯一标识符。 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorFieldRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+| `children` | `React.ReactNode \| (values: ColorFieldRenderProps) => React.ReactNode` | - | 子组件（Label、ColorField.Group 等）或 render 函数 |
+| `className` | `string \| (values: ColorFieldRenderProps) => string` | - | CSS 类，支持 render props |
+| `style` | `React.CSSProperties \| (values: ColorFieldRenderProps) => React.CSSProperties` | - | 内联样式，支持 render props |
+| `fullWidth` | `boolean` | `false` | 是否占满容器宽度 |
+| `id` | `string` | - | 元素唯一标识符 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorFieldRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
 #### Value Props
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `value` | `Color \| null` | - | 当前值（受控）。 |
-| `defaultValue` | `Color \| null` | - | 默认值（非受控）。 |
-| `onChange` | `(color: Color \| null) => void` | - | 值变化时触发的事件处理函数。 |
+| `value` | `Color \| null` | - | 当前值（受控） |
+| `defaultValue` | `Color \| null` | - | 默认值（非受控） |
+| `onChange` | `(color: Color \| null) => void` | - | 值变化时的回调 |
 
 #### Channel Props
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `colorSpace` | `ColorSpace` | - | 当提供 `channel` 时，颜色字段所处的色彩空间。 |
-| `channel` | `ColorChannel` | - | 要编辑的颜色通道。未提供时编辑十六进制值。 |
+| `colorSpace` | `ColorSpace` | - | 提供 `channel` 时颜色字段操作的颜色空间 |
+| `channel` | `ColorChannel` | - | 要编辑的颜色通道。未提供时编辑 hex 值 |
 
 #### Validation Props
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `isRequired` | `boolean` | `false` | 提交表单前是否要求用户输入。 |
-| `isInvalid` | `boolean` | - | 当前值是否无效。 |
-| `validate` | `(value: Color) => ValidationError \| true \| null \| undefined` | - | 自定义校验函数。 |
-| `validationBehavior` | `'native' \| 'aria'` | `'native'` | 使用原生 HTML 表单校验或 ARIA 属性。 |
+| `isRequired` | `boolean` | `false` | 表单提交前是否必须输入 |
+| `isInvalid` | `boolean` | - | 值是否无效 |
+| `validate` | `(value: Color) => ValidationError \| true \| null \| undefined` | - | 自定义验证函数 |
+| `validationBehavior` | `'native' \| 'aria'` | `'native'` | 使用原生 HTML 表单验证还是 ARIA 属性 |
 
 #### State Props
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `isDisabled` | `boolean` | - | 是否禁用输入。 |
-| `isReadOnly` | `boolean` | - | 是否可选中但不可修改。 |
-| `isWheelDisabled` | `boolean` | - | 是否禁用滚轮改变数值。 |
+| `isDisabled` | `boolean` | - | 是否禁用 |
+| `isReadOnly` | `boolean` | - | 是否可选中但不可更改 |
+| `isWheelDisabled` | `boolean` | - | 是否禁用滚轮更改值 |
 
 #### Form Props
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `name` | `string` | - | input 元素的名称，用于 HTML 表单提交。 |
-| `autoFocus` | `boolean` | - | 元素渲染后是否应获得焦点。 |
+| `name` | `string` | - | HTML 表单提交时 input 元素的名称 |
+| `autoFocus` | `boolean` | - | 渲染时是否自动聚焦 |
 
 #### Accessibility Props
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `aria-label` | `string` | - | 没有可见标签时的无障碍标签。 |
-| `aria-labelledby` | `string` | - | 用于标注该字段的元素 ID。 |
-| `aria-describedby` | `string` | - | 用于描述该字段的元素 ID。 |
-| `aria-details` | `string` | - | 包含更多详情的元素 ID。 |
+| `aria-label` | `string` | - | 无可见标签时的无障碍标签 |
+| `aria-labelledby` | `string` | - | 标注此字段的元素 ID |
+| `aria-describedby` | `string` | - | 描述此字段的元素 ID |
+| `aria-details` | `string` | - | 包含附加详情的元素 ID |
 
 ### Composition Components
 
-ColorField 需要与以下独立组件组合使用，请分别导入并直接使用：
+ColorField 与以下需单独导入并直接使用的组件配合：
 
-- **Label** – 字段标签组件（`@heroui/react`）
-- **ColorField.Group** – 颜色输入分组组件（见下文）
-- **ColorField.Input** – ColorField.Group 内的输入元素
-- **ColorField.Prefix** / **ColorField.Suffix** – 输入组的前缀与后缀插槽
-- **ColorSwatch** – 颜色预览组件（`@heroui/react`）
-- **Description** – 辅助说明文本组件（`@heroui/react`）
-- **FieldError** – 校验错误信息组件（`@heroui/react`）
+- **Label** - 来自 `@heroui/react` 的字段标签组件
+- **ColorField.Group** - 颜色输入组组件（见下方文档）
+- **ColorField.Input** - ColorField.Group 内的 input 元素
+- **ColorField.Prefix** / **ColorField.Suffix** - 输入组的前缀与后缀 slot
+- **ColorSwatch** - 来自 `@heroui/react` 的颜色预览组件
+- **Description** - 来自 `@heroui/react` 的帮助文本组件
+- **FieldError** - 来自 `@heroui/react` 的验证错误消息
 
-这些组件各自拥有 props API。请直接在 ColorField 内组合使用：
+每个组件有各自的 props API。在 ColorField 内直接使用它们进行组合：
 
 ```tsx
 import {ColorField, Label, ColorSwatch, Description, FieldError, parseColor} from '@heroui/react';
@@ -274,7 +255,7 @@ import {ColorField, Label, ColorSwatch, Description, FieldError, parseColor} fro
 
 ### Color Types
 
-ColorField 使用来自 React Aria Components 的 `Color` 对象：
+ColorField 使用 React Aria Components 的 `Color` 对象：
 
 ```tsx
 import {parseColor} from '@heroui/react';
@@ -294,63 +275,63 @@ const rgb = color.toString('rgb'); // "rgb(59, 130, 246)"
 </ColorField>
 ```
 
-### ColorFieldRenderProps
+### Render Props
 
-在 `className`、`style` 或 `children` 上使用渲染 prop 时，可使用以下值：
+对 `className`、`style` 或 `children` 使用 render props 时，可使用以下值：
 
 | Prop | 类型 | 描述 |
 |------|------|------|
-| `isDisabled` | `boolean` | 字段是否禁用。 |
-| `isInvalid` | `boolean` | 字段当前是否无效。 |
-| `isReadOnly` | `boolean` | 字段是否只读。 |
-| `isRequired` | `boolean` | 字段是否必填。 |
-| `isFocused` | `boolean` | 字段是否聚焦。 |
-| `isFocusWithin` | `boolean` | 是否有任意子元素聚焦。 |
-| `isFocusVisible` | `boolean` | 是否为可见焦点（键盘导航）。 |
+| `isDisabled` | `boolean` | 字段是否禁用 |
+| `isInvalid` | `boolean` | 字段是否当前无效 |
+| `isReadOnly` | `boolean` | 字段是否只读 |
+| `isRequired` | `boolean` | 字段是否必填 |
+| `isFocused` | `boolean` | 字段是否当前聚焦 |
+| `isFocusWithin` | `boolean` | 是否有子元素聚焦 |
+| `isFocusVisible` | `boolean` | 焦点是否可见（键盘导航） |
 
-### ColorField.Group Props
+### ColorField.Group
 
-ColorField.Group 接受 React Aria `Group` 组件的全部 props，以及：
+ColorField.Group 接受 React Aria `Group` 组件的所有属性，以及以下属性：
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
+| `className` | `string` | - | 与组件样式合并的 Tailwind 类 |
 | `fullWidth` | `boolean` | `false` | 颜色输入组是否占满容器宽度 |
-| `variant` | `"primary" \| "secondary"` | `"primary"` | 组件的视觉变体。`primary` 为默认带阴影样式。`secondary` 为低强调、无阴影变体，适合用在 surface 上。 |
-| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, GroupRenderProps>` | - | 使用自定义渲染函数覆盖默认 DOM 元素。|
+| `variant` | `"primary" \| "secondary"` | `"primary"` | 视觉变体。`primary` 为默认带阴影样式；`secondary` 为低强调无阴影，适用于 Surface 内 |
+| `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, GroupRenderProps>` | - | 使用自定义 render 函数覆盖默认 DOM 元素 |
 
-### ColorField.Input Props
+### ColorField.Input
 
-ColorField.Input 接受 React Aria `Input` 组件的全部 props，以及：
+ColorField.Input 接受 React Aria `Input` 组件的所有属性，以及以下属性：
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
-| `placeholder` | `string` | - | 为空时显示的占位符文本。 |
+| `className` | `string` | - | 与组件样式合并的 Tailwind 类 |
+| `placeholder` | `string` | - | 为空时显示的占位文本 |
 
-### ColorField.Prefix Props
+### ColorField.Prefix
 
 ColorField.Prefix 接受标准 HTML `div` 属性：
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
-| `children` | `ReactNode` | - | 前缀插槽中要展示的内容。 |
+| `className` | `string` | - | 与组件样式合并的 Tailwind 类 |
+| `children` | `ReactNode` | - | 前缀 slot 中显示的内容 |
 
-### ColorField.Suffix Props
+### ColorField.Suffix
 
 ColorField.Suffix 接受标准 HTML `div` 属性：
 
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `className` | `string` | - | 与组件样式合并的 Tailwind CSS 类。 |
-| `children` | `ReactNode` | - | 后缀插槽中要展示的内容。 |
+| `className` | `string` | - | 与组件样式合并的 Tailwind 类 |
+| `children` | `ReactNode` | - | 后缀 slot 中显示的内容 |
 
 ## ColorField.Group Styling
 
-### 自定义组件类
+### Customizing the component classes
 
-基础类会作用于每个实例。你可以在 `@layer components` 中一次性覆盖它们。
+基础类驱动每个实例。使用 `@layer components` 一次性覆盖。
 
 ```css
 @layer components {
@@ -391,7 +372,7 @@ ColorField.Suffix 接受标准 HTML `div` 属性：
 ### ColorField.Group CSS Classes
 
 - `.color-input-group` – 根容器样式
-- `.color-input-group__input` – 输入区域包裹样式
+- `.color-input-group__input` – Input 包装器样式
 - `.color-input-group__prefix` – 前缀元素样式
 - `.color-input-group__suffix` – 后缀元素样式
 
@@ -399,5 +380,9 @@ ColorField.Suffix 接受标准 HTML `div` 属性：
 
 - **Hover**：`:hover` 或 `[data-hovered="true"]`
 - **Focus Within**：`[data-focus-within="true"]` 或 `:focus-within`
-- **Invalid**：`[data-invalid="true"]`（也会与 `aria-invalid` 同步）
+- **Invalid**：`[data-invalid="true"]`（与 `aria-invalid` 同步）
 - **Disabled**：`[data-disabled="true"]` 或 `[aria-disabled="true"]`
+
+## 相关组件
+
+<RelatedComponents component="colorfield" />

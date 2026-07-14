@@ -58,6 +58,9 @@ function ShowcasesList({showcaseId}: {showcaseId: string}) {
 }
 
 export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: ShowcaseDetailClientProps) {
+  const params = useParams<{lang?: string}>();
+  const lang = params.lang ?? i18n.defaultLanguage;
+
   return (
     <section className="relative flex min-h-screen w-screen flex-col overflow-hidden bg-background text-foreground">
       <div aria-hidden="true" className={dotBackground()} />
@@ -122,7 +125,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
                     }),
                   )}
                   href={
-                    `/docs/react/components/${component.toLowerCase().replace(/group$/, "-group")}` as unknown as UrlObject
+                    `/${lang}/docs/react/components/${component.toLowerCase().replace(/group$/, "-group")}` as unknown as UrlObject
                   }
                 >
                   {component}

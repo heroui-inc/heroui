@@ -7,3 +7,4 @@ export {Placements} from "./placements";
 export {PromiseDemo as Promise} from "./promise";
 export {Simple} from "./simple";
 export {Variants} from "./variants";
+export {CustomStyles} from "./custom-styles";

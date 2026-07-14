@@ -1,6 +1,7 @@
 ---
 title: ColorSlider
 description: A color slider allows users to adjust an individual channel of a color value
+
 links:
   rac: ColorSlider
   source: color-slider/color-slider.tsx
@@ -9,21 +10,17 @@ links:
   figma: true
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ColorSlider, Label } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="color-slider-basic"
 />
 
-### Anatomy
-
-Import the ColorSlider component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { ColorSlider, Label } from '@heroui/react';
@@ -38,16 +35,18 @@ export default () => (
   </ColorSlider>
 )
 ```
-### Vertical
-
-<ComponentPreview
-  name="color-slider-vertical"
-/>
+## Examples
 
 ### Disabled
 
 <ComponentPreview
   name="color-slider-disabled"
+/>
+
+### Vertical
+
+<ComponentPreview
+  name="color-slider-vertical"
 />
 
 ### Controlled
@@ -80,38 +79,22 @@ You can also use RGB color space with red, green, and blue channels.
   name="color-slider-rgb-channels"
 />
 
-### Custom Render Function
+### Render Function
 
 <ComponentPreview
-  name="color-slider-custom-render-function"
+  name="color-slider-render-function"
 />
 
-<RelatedComponents component="color-slider" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="color-slider-custom-styles" />
 
-```tsx
-import { ColorSlider, Label } from '@heroui/react';
-
-function CustomColorSlider() {
-  return (
-    <ColorSlider channel="hue" defaultValue="hsl(0, 100%, 50%)" className="w-full">
-      <Label>Hue</Label>
-      <ColorSlider.Output className="text-muted text-sm" />
-      <ColorSlider.Track className="h-6 rounded-full">
-        <ColorSlider.Thumb className="size-5 rounded-full border-2 border-white" />
-      </ColorSlider.Track>
-    </ColorSlider>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the ColorSlider component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -133,19 +116,21 @@ To customize the ColorSlider component classes, you can use the `@layer componen
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The ColorSlider component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/color-slider.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.color-slider` - Base slider container
 - `.color-slider__output` - Output element displaying current value
 - `.color-slider__track` - Track element with color gradient
 - `.color-slider__thumb` - Thumb element showing current color
 
-#### State Classes
+#### State Classes [!toc]
 - `.color-slider[data-disabled="true"]` - Disabled slider state
 - `.color-slider[data-orientation="vertical"]` - Vertical orientation
 - `.color-slider__thumb[data-dragging="true"]` - Thumb being dragged
@@ -163,7 +148,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### ColorSlider Props
+### ColorSlider
 
 Inherits from [React Aria ColorSlider](https://react-spectrum.adobe.com/react-aria/ColorSlider.html).
 
@@ -183,14 +168,14 @@ Inherits from [React Aria ColorSlider](https://react-spectrum.adobe.com/react-ar
 | `children` | `ReactNode \| RenderFunction` | - | Slider content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, ColorSliderRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### ColorSlider.Output Props
+### ColorSlider.Output
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode \| RenderFunction` | - | Output content or render function |
 
-### ColorSlider.Track Props
+### ColorSlider.Track
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -198,7 +183,7 @@ Inherits from [React Aria ColorSlider](https://react-spectrum.adobe.com/react-ar
 | `style` | `CSSProperties \| RenderFunction` | - | Inline styles or render function |
 | `children` | `ReactNode \| RenderFunction` | - | Track content or render function |
 
-### ColorSlider.Thumb Props
+### ColorSlider.Thumb
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -206,7 +191,7 @@ Inherits from [React Aria ColorSlider](https://react-spectrum.adobe.com/react-ar
 | `style` | `CSSProperties \| RenderFunction` | - | Inline styles or render function |
 | `children` | `ReactNode \| RenderFunction` | - | Thumb content or render function |
 
-### RenderProps
+### Render Props
 
 When using render functions, these values are provided:
 
@@ -229,3 +214,7 @@ The ColorSlider component implements the ARIA slider pattern and provides:
 - Internationalization support with locale-aware value formatting
 
 For more information, see the [React Aria ColorSlider documentation](https://react-spectrum.adobe.com/react-aria/ColorSlider.html).
+
+## Related Components
+
+<RelatedComponents component="color-slider" />

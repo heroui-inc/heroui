@@ -6,6 +6,7 @@ export {EmptyStateDemo} from "./empty-state";
 export {ColumnResizing} from "./column-resizing";
 export {AsyncLoading} from "./async-loading";
 export {CustomCells} from "./custom-cells";
+export {CustomStyles} from "./custom-styles";
 export {ExpandableRows} from "./expandable-rows";
 export {PaginationDemo} from "./pagination";
 export {Virtualization} from "./virtualization";

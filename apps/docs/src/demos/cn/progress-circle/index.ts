@@ -4,3 +4,4 @@ export {CustomSvg} from "./custom-svg";
 export {Indeterminate} from "./indeterminate";
 export {Sizes} from "./sizes";
 export {WithLabel} from "./with-label";
+export {CustomStyles} from "./custom-styles";

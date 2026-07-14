@@ -7,19 +7,33 @@ links:
   storybook: Components/Typography
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import {Typography} from "@heroui/react";
 ```
 
-## 用法
+<ComponentPreview name="typography-default" />
 
-<ComponentPreview name="typography-typography-scale" />
+## 组件结构
 
 默认情况下，`Typography` 会将视觉上的 `type` 映射到对应的语义化元素。
 
-## 子组件
+```tsx
+import {Typography} from "@heroui/react";
+
+export default () => (
+  <Typography type="h1">Heading</Typography>
+);
+```
+
+## 示例
+
+### 层级
+
+<ComponentPreview name="typography-typography-scale" />
+
+### 原语
 
 <ComponentPreview name="typography-primitives" />
 
@@ -28,30 +42,58 @@ import {Typography} from "@heroui/react";
 - `Typography.Code` 映射为行内代码样式。
 - `Typography.Prose` 为以常规 HTML 子节点传入的富文本内容提供排版样式。
 
-## Prose
+### 富文本排版
 
 <ComponentPreview name="typography-prose" />
 
-## Render Prop
+### 渲染属性
 
 <ComponentPreview name="typography-render-props" />
 
 需要自定义实际渲染的元素时，可使用 React Aria Components 风格的 `render` prop。
 
-## CSS 类名
+## 自定义样式
 
-### 基础类
+### Tailwind CSS
+
+<ComponentPreview name="typography-custom-styles" />
+
+### 全局 CSS
+
+若要自定义 Typography 组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+
+```css
+@layer components {
+  .typography--h1 {
+    @apply font-extrabold tracking-tight;
+  }
+
+  .typography--code {
+    @apply rounded-md bg-default-100 font-mono dark:bg-default-50/20;
+  }
+}
+```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
+
+### CSS 类
+
+Typography 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/typography.css)）：
+
+#### 基础类 [!toc]
 
 - `.typography` - 排版基础原语
 - `.typography-prose` - 富文本文章体容器
 
-### 类型类
+#### 类型类 [!toc]
 
 - `.typography--h1` 至 `.typography--h6`
 - `.typography--body`、`.typography--body-sm`、`.typography--body-xs`
 - `.typography--code`
 
-### 修饰类
+#### 修饰类 [!toc]
 
 - `.typography--align-start`、`.typography--align-center`、`.typography--align-end`、`.typography--align-justify`
 - `.typography--color-default`、`.typography--color-muted`
@@ -60,7 +102,7 @@ import {Typography} from "@heroui/react";
 
 ## API 参考
 
-### Typography 属性
+### Typography
 
 | 属性       | 类型                                                                                           | 默认值     | 说明                                    |
 | ---------- | ---------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------- |
@@ -71,3 +113,7 @@ import {Typography} from "@heroui/react";
 | `truncate` | `boolean`                                                                                      | -           | 将文本截断为单行并显示省略号。  |
 | `render`   | `DOMRenderFunction`                                                                            | -           | 来自 React Aria 的自定义渲染函数。        |
 | `children` | `ReactNode`                                                                                    | -           | 文本内容。                                  |
+
+## 相关组件
+
+<RelatedComponents component="typography" />

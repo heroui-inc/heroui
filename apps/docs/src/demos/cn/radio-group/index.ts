@@ -1,7 +1,7 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
 export {CustomIndicator} from "./custom-indicator";
-export {CustomRenderFunction} from "./custom-render-function";
+export {RenderFunction} from "./render-function";
 export {DeliveryAndPayment} from "./delivery-and-payment";
 export {Disabled} from "./disabled";
 export {Horizontal} from "./horizontal";
@@ -9,3 +9,4 @@ export {OnSurface} from "./on-surface";
 export {Uncontrolled} from "./uncontrolled";
 export {Validation} from "./validation";
 export {Variants} from "./variants";
+export {CustomStyles} from "./custom-styles";

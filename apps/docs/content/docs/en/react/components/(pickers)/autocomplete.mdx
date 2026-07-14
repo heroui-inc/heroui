@@ -8,19 +8,15 @@ links:
   storybook: Components/Pickers/Autocomplete
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Autocomplete, useFilter } from "@heroui/react";
 ```
 
-### Usage
-
 <ComponentPreview name="autocomplete-default" />
 
-### Anatomy
-
-Import the Autocomplete component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import {Autocomplete, Label, Description, SearchField, ListBox} from "@heroui/react";
@@ -54,17 +50,32 @@ export default () => (
 );
 ```
 
+## Examples
+
+### Variants
+
+The Autocomplete component supports two visual variants:
+
+- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
+- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
+
+<ComponentPreview name="autocomplete-variants" />
+
+### Full Width
+
+<ComponentPreview name="autocomplete-full-width" />
+
 ### With Description
 
 <ComponentPreview name="autocomplete-with-description" />
 
-### Multiple Select
+### Required
 
-<ComponentPreview name="autocomplete-multiple-select" />
+<ComponentPreview name="autocomplete-required" />
 
-### With Sections
+### Disabled
 
-<ComponentPreview name="autocomplete-with-sections" />
+<ComponentPreview name="autocomplete-disabled" />
 
 ### With Disabled Options
 
@@ -76,38 +87,13 @@ The `allowsEmptyCollection` prop enables the autocomplete to function even when 
 
 <ComponentPreview name="autocomplete-allows-empty-collection" />
 
-### Custom Indicator
+### With Sections
 
-<ComponentPreview name="autocomplete-custom-indicator" />
+<ComponentPreview name="autocomplete-with-sections" />
 
-### Required
+### Multiple Select
 
-<ComponentPreview name="autocomplete-required" />
-
-### Full Width
-
-<ComponentPreview name="autocomplete-full-width" />
-
-### Variants
-
-The Autocomplete component supports two visual variants:
-
-- **`primary`** (default) - Standard styling with shadow, suitable for most use cases
-- **`secondary`** - Lower emphasis variant without shadow, suitable for use in Surface components
-
-<ComponentPreview name="autocomplete-variants" />
-
-### In Surface
-
-When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
-
-<ComponentPreview name="autocomplete-full-width" />
-
-### Custom Value
-
-You can customize the displayed value using render props:
-
-<ComponentPreview name="autocomplete-user-selection" />
+<ComponentPreview name="autocomplete-multiple-select" />
 
 ### Controlled
 
@@ -115,7 +101,7 @@ You can customize the displayed value using render props:
 
 ### Controlled Multiple
 
-<ComponentPreview name="autocomplete-multiple-select" />
+<ComponentPreview name="autocomplete-controlled-multiple" />
 
 ### Controlled Open State
 
@@ -125,81 +111,60 @@ You can customize the displayed value using render props:
 
 <ComponentPreview name="autocomplete-asynchronous-filtering" />
 
+### Custom Indicator
+
+<ComponentPreview name="autocomplete-custom-indicator" />
+
+### Custom Value
+
+You can customize the displayed value using render props:
+
+<ComponentPreview name="autocomplete-custom-value" />
+
+### In Surface
+
+When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
+
+<ComponentPreview name="autocomplete-on-surface" />
+
 ### Virtualization
 
 Autocomplete supports virtualization through [Virtualizer](https://react-aria.adobe.com/Virtualizer), enabling efficient rendering of large datasets by displaying only the rows visible within the viewport.
 
 <ComponentPreview name="autocomplete-virtualization" />
 
-### Disabled
+## Advanced Examples
 
-<ComponentPreview name="autocomplete-disabled" />
-
-### Advanced Examples
-
-#### User Selection
+### User Selection
 
 <ComponentPreview name="autocomplete-user-selection" />
 
-#### User Selection Multiple
+### User Selection Multiple
 
 <ComponentPreview name="autocomplete-user-selection-multiple" />
 
-#### Location Search
+### Location Search
 
 <ComponentPreview name="autocomplete-location-search" />
 
-#### Tag Group Selection
+### Tag Group Selection
 
 <ComponentPreview name="autocomplete-tag-group-selection" />
 
-#### Email Recipients
+### Email Recipients
 
 <ComponentPreview name="autocomplete-email-recipients" />
 
-<RelatedComponents component="autocomplete" />
+## Customization
 
-## Styling
+### Tailwind CSS
 
-### Passing Tailwind CSS classes
+<ComponentPreview name="autocomplete-custom-styles" />
 
-```tsx
-import {Autocomplete, SearchField, ListBox} from "@heroui/react";
-
-function CustomAutocomplete() {
-  return (
-    <Autocomplete className="w-full">
-      <Label>State</Label>
-      <Autocomplete.Trigger className="rounded-lg border bg-surface p-2">
-        <Autocomplete.Value />
-        <Autocomplete.ClearButton />
-        <Autocomplete.Indicator />
-      </Autocomplete.Trigger>
-      <Autocomplete.Popover>
-        <Autocomplete.Filter>
-          <SearchField>
-            <SearchField.Group>
-              <SearchField.SearchIcon />
-              <SearchField.Input placeholder="Search..." />
-            </SearchField.Group>
-          </SearchField>
-          <ListBox>
-            <ListBox.Item id="1" textValue="Item 1" className="hover:bg-surface-secondary">
-              Item 1
-            </ListBox.Item>
-          </ListBox>
-        </Autocomplete.Filter>
-      </Autocomplete.Popover>
-    </Autocomplete>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Autocomplete component classes, you can use the `@layer components` directive.
 
-<br />
 [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
@@ -227,12 +192,10 @@ To customize the Autocomplete component classes, you can use the `@layer compone
   .autocomplete__popover {
     @apply rounded-lg border border-border bg-surface p-2;
   }
-
-  .autocomplete__popover-dialog {
-    @apply outline-none;
-  }
 }
 ```
+
+## Styling Reference
 
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
@@ -240,7 +203,7 @@ HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component va
 
 The Autocomplete component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/autocomplete.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 
 - `.autocomplete` - Base autocomplete container
 - `.autocomplete__trigger` - The button that triggers the autocomplete
@@ -248,15 +211,14 @@ The Autocomplete component uses these CSS classes ([View source styles](https://
 - `.autocomplete__clear-button` - The clear button that removes the selected value
 - `.autocomplete__indicator` - The dropdown indicator icon
 - `.autocomplete__popover` - The popover container
-- `.autocomplete__popover-dialog` - Internal dialog wrapper inside the popover for focus management (matches [Popover](/docs/components/popover) behavior)
 - `.autocomplete__filter` - The filter wrapper
 
-#### Variant Classes
+#### Variant Classes [!toc]
 
 - `.autocomplete--primary` - Primary variant with shadow (default)
 - `.autocomplete--secondary` - Secondary variant without shadow, suitable for use in surfaces
 
-#### State Classes
+#### State Classes [!toc]
 
 - `.autocomplete[data-invalid="true"]` - Invalid state
 - `.autocomplete__trigger[data-focus-visible="true"]` - Focused trigger state
@@ -276,7 +238,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Autocomplete Props
+### Autocomplete
 
 | Prop            | Type                                    | Default            | Description                                              |
 | --------------- | --------------------------------------- | ------------------ | -------------------------------------------------------- |
@@ -299,28 +261,28 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `className`     | `string`                                | -                  | Additional CSS classes                                   |
 | `children`      | `ReactNode \| RenderFunction`           | -                  | Autocomplete content or render function                        |
 
-### Autocomplete.Trigger Props
+### Autocomplete.Trigger
 
 | Prop        | Type                          | Default | Description                        |
 | ----------- | ----------------------------- | ------- | ---------------------------------- |
 | `className` | `string`                      | -       | Additional CSS classes             |
 | `children`  | `ReactNode \| RenderFunction` | -       | Trigger content or render function |
 
-### Autocomplete.Value Props
+### Autocomplete.Value
 
 | Prop        | Type                          | Default | Description                      |
 | ----------- | ----------------------------- | ------- | -------------------------------- |
 | `className` | `string`                      | -       | Additional CSS classes           |
 | `children`  | `ReactNode \| RenderFunction` | -       | Value content or render function |
 
-### Autocomplete.Indicator Props
+### Autocomplete.Indicator
 
 | Prop        | Type        | Default | Description              |
 | ----------- | ----------- | ------- | ------------------------ |
 | `className` | `string`    | -       | Additional CSS classes   |
 | `children`  | `ReactNode` | -       | Custom indicator content |
 
-### Autocomplete.ClearButton Props
+### Autocomplete.ClearButton
 
 | Prop        | Type                          | Default | Description                      |
 | ----------- | ----------------------------- | ------- | -------------------------------- |
@@ -328,15 +290,15 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `onClick`   | `(e: MouseEvent) => void`     | -       | Handler called when button is clicked |
 | `ref`       | `RefObject<HTMLButtonElement>` | -       | Ref to the clear button element  |
 
-### Autocomplete.Popover Props
+### Autocomplete.Popover
 
 | Prop        | Type                                                                                                                                                                                                                                                                                                                     | Default    | Description                                      |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------ |
 | `placement` | `"bottom" \| "bottom left" \| "bottom right" \| "bottom start" \| "bottom end" \| "top" \| "top left" \| "top right" \| "top start" \| "top end" \| "left" \| "left top" \| "left bottom" \| "start" \| "start top" \| "start bottom" \| "right" \| "right top" \| "right bottom" \| "end" \| "end top" \| "end bottom"` | `"bottom"` | Placement of the popover relative to the trigger |
 | `className` | `string`                                                                                                                                                                                                                                                                                                                 | -          | Additional CSS classes                           |
-| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | Content children. Wrapped internally in a dialog element for focus management, styled with `.autocomplete__popover-dialog`. |
+| `children`  | `ReactNode`                                                                                                                                                                                                                                                                                                              | -          | Content children                                 |
 
-### Autocomplete.Filter Props
+### Autocomplete.Filter
 
 | Prop         | Type                                           | Default | Description                      |
 | ------------ | ---------------------------------------------- | ------- | -------------------------------- |
@@ -374,7 +336,7 @@ const {contains} = useFilter({sensitivity: "base"});
 | `startsWith`    | `(string: string, substring: string) => boolean`          | Returns whether a string starts with a given substring    |
 | `endsWith`      | `(string: string, substring: string) => boolean`          | Returns whether a string ends with a given substring     |
 
-### RenderProps
+### Render Props
 
 When using render functions with Autocomplete.Value, these values are provided:
 
@@ -391,11 +353,13 @@ The Autocomplete component implements the ARIA select pattern with filtering and
 
 - Full keyboard navigation support
 - Screen reader announcements for selection changes
-- Focus management aligned with [Popover](/docs/components/popover): `Autocomplete.Popover` wraps its content in an internal dialog so touch interactions do not show a stray focus ring on the popover overlay
+- Proper focus management
 - Support for disabled states
 - Search functionality with filtering
 - HTML form integration
 
-Use `autoFocus={false}` on `SearchField` when you want to avoid opening the mobile keyboard as soon as the popover appears. Filtering still works once the user focuses the search input.
-
 For more information, see the [React Aria Select documentation](https://react-spectrum.adobe.com/react-aria/Select.html).
+
+## Related Components
+
+<RelatedComponents component="autocomplete" />

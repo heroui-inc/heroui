@@ -4,6 +4,7 @@ export {Controlled} from "./controlled";
 export {CustomAnimations} from "./custom-animations";
 export {CustomBackdrop} from "./custom-backdrop";
 export {CustomPortal} from "./custom-portal";
+export {CustomStyles} from "./custom-styles";
 export {CustomTrigger} from "./custom-trigger";
 export {Default} from "./default";
 export {DismissBehavior} from "./dismiss-behavior";

@@ -8,3 +8,4 @@ export {OnSurface} from "./on-surface";
 export {Variants} from "./variants";
 export {WithPattern} from "./with-pattern";
 export {WithValidation} from "./with-validation";
+export {CustomStyles} from "./custom-styles";
