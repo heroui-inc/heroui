@@ -114,6 +114,11 @@ export const ScrollShadowRoot = ({
       data-orientation={orientation}
       data-scroll-shadow-size={size}
       data-slot="scroll-shadow"
+      // Show the trailing-edge fade on first (SSR) paint to avoid a hydration flicker.
+      // The client hook measures overflow and corrects it after mount.
+      {...(isEnabled && visibility === "auto"
+        ? {[orientation === "vertical" ? "data-bottom-scroll" : "data-right-scroll"]: "true"}
+        : {})}
       style={style}
       {...props}
     >
