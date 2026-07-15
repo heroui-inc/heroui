@@ -30,6 +30,7 @@ export default () => (
       <Input />
       <ComboBox.Trigger />
     </ComboBox.InputGroup>
+    <ComboBox.Value />
     <Description />
     <ComboBox.Popover>
       <ListBox>
@@ -154,6 +155,14 @@ export default () => (
   name="combo-box-menu-trigger"
 />
 
+### 多选
+
+设置 `selectionMode="multiple"` 以允许选择多个选项。在多选模式下，使用 `ComboBox.Value` 展示已选项，并同时给内部的 `ListBox` 传入 `selectionMode="multiple"`。选择通过 `value` / `defaultValue`（`Key[]`）以及 `onChange` 回调来控制。
+
+<ComponentPreview
+  name="combo-box-multiple-selection"
+/>
+
 ### 表面样式
 
 在 [Surface](/docs/components/surface) 内使用时，请使用 `variant="secondary"` 以应用适合 Surface 背景的低强调变体。
@@ -204,6 +213,7 @@ ComboBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 #### 基础类 [!toc]
 - `.combo-box` - ComboBox 根容器
 - `.combo-box__input-group` - 输入框与触发按钮的容器
+- `.combo-box__value` - 已选值的展示区域（用于多选）
 - `.combo-box__trigger` - 打开 Popover 的按钮
 - `.combo-box__popover` - Popover 容器
 
@@ -232,9 +242,13 @@ ComboBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 | `inputValue` | `string` | - | 当前输入值（受控） |
 | `defaultInputValue` | `string` | - | 默认输入值（非受控） |
 | `onInputChange` | `(value: string) => void` | - | 输入值变化时的回调 |
-| `selectedKey` | `Key \| null` | - | 当前选中的 key（受控） |
-| `defaultSelectedKey` | `Key \| null` | - | 默认选中的 key（非受控） |
-| `onSelectionChange` | `(key: Key \| null) => void` | - | 选中变化时的回调 |
+| `selectionMode` | `"single" \| "multiple"` | `"single"` | 启用单选还是多选 |
+| `selectedKey` | `Key \| null` | - | 当前选中的 key（受控，单选） |
+| `defaultSelectedKey` | `Key \| null` | - | 默认选中的 key（非受控，单选） |
+| `onSelectionChange` | `(key: Key \| null) => void` | - | 选中变化时的回调（单选） |
+| `value` | `Key \| null \| Key[]` | - | 当前选中的 key（受控）。当 `selectionMode="multiple"` 时为 `Key[]` |
+| `defaultValue` | `Key \| null \| Key[]` | - | 初始选中的 key（非受控）。当 `selectionMode="multiple"` 时为 `Key[]` |
+| `onChange` | `(value: Key \| null \| Key[]) => void` | - | 选中变化时的回调 |
 | `items` | `Iterable<T>` | - | 在 ListBox 中展示的 items |
 | `disabledKeys` | `Iterable<Key>` | - | 禁用项的 key |
 | `defaultFilter` | `(text: string, inputValue: string) => boolean` | - | 用于过滤 items 的自定义过滤函数 |
@@ -264,6 +278,16 @@ ComboBox 组件使用以下 CSS 类（[查看源码样式](https://github.com/he
 |------|------|--------|------|
 | `className` | `string` | - | 附加 CSS 类 |
 | `children` | `ReactNode` | - | InputGroup 内容 |
+
+### ComboBox.Value
+
+渲染 ComboBox 已选中的值，若未选中任何值则渲染占位符。默认情况下，已选项以逗号分隔的列表形式渲染。可使用 render 函数自定义（例如以标签形式展示）。
+
+| Prop | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `placeholder` | `ReactNode` | - | 未选中任何项时展示的值 |
+| `className` | `string \| (values: ComboBoxValueRenderProps) => string` | - | 附加 CSS 类 |
+| `children` | `ReactNode \| (values: ComboBoxValueRenderProps) => ReactNode` | - | 自定义已选值的 render 函数 |
 
 ### ComboBox.Trigger
 

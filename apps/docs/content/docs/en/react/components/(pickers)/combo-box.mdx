@@ -30,6 +30,7 @@ export default () => (
       <Input />
       <ComboBox.Trigger />
     </ComboBox.InputGroup>
+    <ComboBox.Value />
     <Description />
     <ComboBox.Popover>
       <ListBox>
@@ -154,6 +155,14 @@ Use the `menuTrigger` prop to control when the popover opens:
   name="combo-box-menu-trigger"
 />
 
+### Multiple Selection
+
+Set `selectionMode="multiple"` to allow selecting more than one option. In multiple selection mode, use `ComboBox.Value` to display the selected items and pass `selectionMode="multiple"` to the inner `ListBox` as well. Selection is controlled with the `value` / `defaultValue` (`Key[]`) props and the `onChange` handler.
+
+<ComponentPreview
+  name="combo-box-multiple-selection"
+/>
+
 ### In Surface
 
 When used inside a [Surface](/docs/components/surface) component, use `variant="secondary"` to apply the lower emphasis variant suitable for surface backgrounds.
@@ -204,6 +213,7 @@ The ComboBox component uses these CSS classes ([View source styles](https://gith
 #### Base Classes [!toc]
 - `.combo-box` - Base ComboBox container
 - `.combo-box__input-group` - Container for the input and trigger button
+- `.combo-box__value` - The selected value display (used in multiple selection)
 - `.combo-box__trigger` - The button that triggers the popover
 - `.combo-box__popover` - The popover container
 
@@ -232,9 +242,13 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `inputValue` | `string` | - | Current input value (controlled) |
 | `defaultInputValue` | `string` | - | Default input value (uncontrolled) |
 | `onInputChange` | `(value: string) => void` | - | Handler called when the input value changes |
-| `selectedKey` | `Key \| null` | - | Current selected key (controlled) |
-| `defaultSelectedKey` | `Key \| null` | - | Default selected key (uncontrolled) |
-| `onSelectionChange` | `(key: Key \| null) => void` | - | Handler called when the selection changes |
+| `selectionMode` | `"single" \| "multiple"` | `"single"` | Whether single or multiple selection is enabled |
+| `selectedKey` | `Key \| null` | - | Current selected key (controlled, single selection) |
+| `defaultSelectedKey` | `Key \| null` | - | Default selected key (uncontrolled, single selection) |
+| `onSelectionChange` | `(key: Key \| null) => void` | - | Handler called when the selection changes (single selection) |
+| `value` | `Key \| null \| Key[]` | - | The currently selected keys (controlled). `Key[]` when `selectionMode="multiple"` |
+| `defaultValue` | `Key \| null \| Key[]` | - | The initial selected keys (uncontrolled). `Key[]` when `selectionMode="multiple"` |
+| `onChange` | `(value: Key \| null \| Key[]) => void` | - | Handler called when the selection changes |
 | `items` | `Iterable<T>` | - | The items to display in the listbox |
 | `disabledKeys` | `Iterable<Key>` | - | Keys of disabled items |
 | `defaultFilter` | `(text: string, inputValue: string) => boolean` | - | Custom filter function for filtering items |
@@ -264,6 +278,16 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | InputGroup content |
+
+### ComboBox.Value
+
+Renders the selected values of a ComboBox, or a placeholder if no value is selected. By default the selected items are rendered as a comma separated list. Use the render function to customize this (for example, to display tags).
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `ReactNode` | - | A value to display when no items are selected |
+| `className` | `string \| (values: ComboBoxValueRenderProps) => string` | - | Additional CSS classes |
+| `children` | `ReactNode \| (values: ComboBoxValueRenderProps) => ReactNode` | - | Custom render function for the selected values |
 
 ### ComboBox.Trigger
 

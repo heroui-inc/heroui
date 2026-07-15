@@ -13,6 +13,7 @@ export {Disabled} from "./disabled";
 export {FullWidth} from "./full-width";
 export {OnSurface} from "./on-surface";
 export {MenuTrigger} from "./menu-trigger";
+export {MultipleSelection} from "./multiple-selection";
 export {Required} from "./required";
 export {WithDescription} from "./with-description";
 export {WithDisabledOptions} from "./with-disabled-options";
