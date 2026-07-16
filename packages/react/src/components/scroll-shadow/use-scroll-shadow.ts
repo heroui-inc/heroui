@@ -32,9 +32,14 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
     if (!el) return;
 
     const isVertical = orientation === "vertical";
-    const scrollStart = isVertical ? el.scrollTop : el.scrollLeft;
     const scrollSize = isVertical ? el.scrollHeight : el.scrollWidth;
     const clientSize = isVertical ? el.clientHeight : el.clientWidth;
+
+    // In RTL, horizontal `scrollLeft` starts at 0 and decreases into negatives as you
+    // scroll toward the end. Normalize to the distance scrolled from the start so the
+    // before/after (start/end) checks stay direction-agnostic.
+    const isRTL = !isVertical && getComputedStyle(el).direction === "rtl";
+    const scrollStart = isVertical ? el.scrollTop : isRTL ? Math.abs(el.scrollLeft) : el.scrollLeft;
 
     const hasScrollBefore = scrollStart > offset;
     const hasScrollAfter = scrollStart + clientSize + offset < scrollSize;
