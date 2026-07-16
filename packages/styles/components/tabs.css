@@ -56,16 +56,21 @@
     > .tabs__list-container__scroll-next {
       @apply end-1 top-1/2 -translate-y-1/2;
     }
+
+    > .tabs__list-container__scroll-prev,
+    > .tabs__list-container__scroll-next {
+      @apply rtl:rotate-180;
+    }
   }
 
   /* Chevron position - vertical orientation */
   &:has([data-orientation="vertical"]) {
     > .tabs__list-container__scroll-prev {
-      @apply start-1/2 top-1 -translate-x-1/2;
+      @apply top-1 left-1/2 -translate-x-1/2;
     }
 
     > .tabs__list-container__scroll-next {
-      @apply start-1/2 bottom-1 -translate-x-1/2;
+      @apply bottom-1 left-1/2 -translate-x-1/2;
     }
   }
 

@@ -249,7 +249,8 @@
     }
 
     .color-slider__thumb {
-      @apply start-1/2 size-4;
+      /* Cross-axis centering; React Aria applies a physical translateX(-50%), so keep left-1/2 for RTL correctness */
+      @apply left-1/2 size-4;
     }
   }
 }

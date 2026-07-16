@@ -10,7 +10,8 @@
 
 /* Placement variants - Bottom */
 .toast-region--bottom {
-  @apply start-1/2 bottom-4 -translate-x-1/2;
+  /* left-1/2 + -translate-x-1/2 centers in both LTR and RTL (translate is physical) */
+  @apply bottom-4 left-1/2 -translate-x-1/2;
 }
 
 .toast-region--bottom-start {
@@ -23,7 +24,8 @@
 
 /* Placement variants - Top */
 .toast-region--top {
-  @apply start-1/2 top-4 -translate-x-1/2;
+  /* left-1/2 + -translate-x-1/2 centers in both LTR and RTL (translate is physical) */
+  @apply top-4 left-1/2 -translate-x-1/2;
 }
 
 .toast-region--top-start {
