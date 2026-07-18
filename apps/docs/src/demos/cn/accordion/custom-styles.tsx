@@ -32,7 +32,7 @@ export function CustomStyles() {
           className="group/item first:**:data-[slot=accordion-trigger]:rounded-t-2xl last:[&:not(:has([data-slot=accordion-trigger][aria-expanded='true']))_[data-slot=accordion-trigger]]:rounded-b-2xl"
         >
           <Accordion.Heading>
-            <Accordion.Trigger className="hover:bgsurface group flex items-center gap-2 transition-none">
+            <Accordion.Trigger className="group flex items-center gap-2 transition-none hover:bg-surface">
               {item.iconUrl ? (
                 <img
                   alt={item.title}
