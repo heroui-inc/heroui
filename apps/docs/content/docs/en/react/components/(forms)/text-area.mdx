@@ -66,7 +66,7 @@ function CustomTextArea() {
       <Label htmlFor="custom-textarea">Message</Label>
       <TextArea
         id="custom-textarea"
-        className="rounded-xl border border-border/70 bgsurface px-4 py-3 text-sm leading-6 shadow-sm"
+        className="rounded-xl border border-border/70 bg-surface px-4 py-3 text-sm leading-6 shadow-sm"
         placeholder="Let us know how we can help..."
         rows={5}
         style={{resize: "vertical"}}
@@ -83,7 +83,7 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
 ```css
 @layer components {
   .textarea {
-    @apply rounded-xl border border-border bgsurface px-4 py-3 text-sm leading-6 shadow-sm;
+    @apply rounded-xl border border-border bg-surface px-4 py-3 text-sm leading-6 shadow-sm;
 
     &:hover,
     &[data-hovered="true"] {
@@ -92,11 +92,11 @@ Override the shared `.textarea` class once with Tailwind's `@layer components`.
 
     &:focus-visible,
     &[data-focus-visible="true"] {
-      @apply border-primary ring-2 ring-primary/20;
+      @apply border-accent ring-2 ring-accent/20;
     }
 
     &[data-invalid="true"] {
-      @apply border-danger bg-danger-50/10 text-danger;
+      @apply border-danger bg-danger-soft text-danger;
     }
   }
 }

@@ -62,7 +62,7 @@ Link is underlined on hover by default. Use Tailwind CSS text-decoration utiliti
 - default `Link` styles - Underline appears on hover
 
 **Text Decoration Color:**
-- `decoration-primary`, `decoration-secondary`, etc. - Set underline color using theme colors
+- `decoration-accent`, `decoration-muted`, etc. - Set underline color using theme colors
 - `decoration-muted/50` - Use opacity modifiers for semi-transparent underlines
 
 **Text Decoration Style:**
@@ -215,7 +215,7 @@ export default function Demo() {
 // Or with a native anchor
 export default function NativeLink() {
   return (
-    <a href="/about" className="link underline decoration-primary underline-offset-4">
+    <a href="/about" className="link underline decoration-accent underline-offset-4">
       About Page
       <Link.Icon className="link__icon" />
     </a>
