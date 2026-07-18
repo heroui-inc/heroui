@@ -62,7 +62,7 @@ Link 默认在悬浮时显示下划线。可使用 Tailwind CSS 的 text-decorat
 - 默认 `Link` 样式 — 下划线在悬浮时显示
 
 **文本装饰色：**
-- `decoration-primary`、`decoration-secondary` 等 — 使用主题色设置下划线颜色
+- `decoration-accent`、`decoration-muted` 等 — 使用主题色设置下划线颜色
 - `decoration-muted/50` — 使用透明度修饰符实现半透明下划线
 
 **文本装饰样式：**
@@ -215,7 +215,7 @@ export default function Demo() {
 // 或使用原生 <a>
 export default function NativeLink() {
   return (
-    <a href="/about" className="link underline decoration-primary underline-offset-4">
+    <a href="/about" className="link underline decoration-accent underline-offset-4">
       About Page
       <Link.Icon className="link__icon" />
     </a>
