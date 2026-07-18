@@ -127,7 +127,7 @@
 
 .search-field__search-icon {
   @apply pointer-events-none shrink-0 text-field-placeholder;
-  @apply ms-3 me-0 size-4;
+  @apply ms-3 me-0 size-4 rtl:-scale-x-100;
 }
 
 .search-field__clear-button {
