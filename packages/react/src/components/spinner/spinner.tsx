@@ -81,7 +81,9 @@ const SpinnerRoot = <E extends keyof React.JSX.IntrinsicElements = "span">({
 }: SpinnerRootProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof SpinnerRootProps<E>>) => {
   return (
     <dom.span
+      aria-label="Loading"
       data-slot="spinner"
+      role="status"
       {...(props as any)}
       className={spinnerVariants({
         className,
@@ -89,7 +91,7 @@ const SpinnerRoot = <E extends keyof React.JSX.IntrinsicElements = "span">({
         size,
       })}
     >
-      <SpinnerPrimitive aria-hidden aria-label="Loading" role="presentation" />
+      <SpinnerPrimitive aria-hidden />
     </dom.span>
   );
 };
