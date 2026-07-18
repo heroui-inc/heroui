@@ -3,7 +3,7 @@ import {Accordion, cn} from "@heroui/react";
 
 const items = [
   {
-    content: "Stay informed about your account activity with real-time notifications. ",
+    content: "Stay informed about your account activity with real-time notifications.",
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/bell-small.png",
     subtitle: "Receive account activity updates",
     title: "Set Up Notifications",
@@ -11,7 +11,7 @@ const items = [
   {
     content: "Enhance your browsing experience by installing our official browser extension",
     iconUrl: "https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/3dicons/compass-small.png",
-    subtitle: "Connect you browser to your account",
+    subtitle: "Connect your browser to your account",
     title: "Set up Browser Extension",
   },
   {
@@ -37,7 +37,7 @@ export function CustomStyles() {
           )}
         >
           <Accordion.Heading>
-            <Accordion.Trigger className="hover:bgsurface group flex items-center gap-2 transition-none">
+            <Accordion.Trigger className="hover:bg-surface group flex items-center gap-2 transition-none">
               {item.iconUrl ? (
                 <img
                   alt={item.title}
