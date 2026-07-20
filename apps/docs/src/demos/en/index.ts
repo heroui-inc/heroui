@@ -134,6 +134,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./avatar/custom-styles").then((m) => m.CustomStyles),
     file: "en/avatar/custom-styles.tsx",
   },
+  "avatar-custom-image-component": {
+    loader: () => import("./avatar/custom-image-component").then((m) => m.CustomImageComponent),
+    file: "en/avatar/custom-image-component.tsx",
+  },
   // Badge demos
   "badge-basic": {
     loader: () => import("./badge/basic").then((m) => m.BadgeBasic),
