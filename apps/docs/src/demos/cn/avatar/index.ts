@@ -5,3 +5,4 @@ export {Fallback} from "./fallback";
 export {Group} from "./group";
 export {Sizes} from "./sizes";
 export {Variants} from "./variants";
+export {CustomImageComponent} from "./custom-image-component";
