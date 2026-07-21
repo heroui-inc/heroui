@@ -11,7 +11,6 @@ const logger = new Logger({prefix: "HeroUI"});
 /** Dev-only registry for duplicate slot name warnings. */
 let registry: Set<string> | undefined;
 
-// @ts-expect-error -- TODO: should handle envs in a better way
 const __DEV__ = typeof process !== "undefined" && process.env?.["NODE_ENV"] !== "production";
 
 /**
