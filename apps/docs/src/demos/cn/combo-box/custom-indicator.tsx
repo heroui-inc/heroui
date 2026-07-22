@@ -9,8 +9,8 @@ export function CustomIndicator() {
       <Label>最喜欢的动物</Label>
       <ComboBox.InputGroup>
         <Input placeholder="搜索动物…" />
-        <ComboBox.Trigger className="size-3">
-          <ChevronsExpandVertical />
+        <ComboBox.Trigger>
+          <ChevronsExpandVertical className="size-3" />
         </ComboBox.Trigger>
       </ComboBox.InputGroup>
       <ComboBox.Popover>
