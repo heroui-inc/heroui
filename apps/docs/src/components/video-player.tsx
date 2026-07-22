@@ -142,7 +142,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
 
   return (
     <div
-      className="not-prose relative z-1 overflow-hidden rounded-xl border border-separator"
+      className="not-prose relative z-1 aspect-video w-full overflow-hidden rounded-xl border border-separator"
       data-playing={isPlaying}
     >
       {isLoading ? (
@@ -215,7 +215,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = ({
         loop
         playsInline
         autoPlay={!!autoPlay && effectivePlayMode === "auto"}
-        className={cn("aspect-video w-full object-cover", className)}
+        className={cn("h-full w-full object-cover", className)}
         controls={controls}
         height={height}
         muted={isMuted}
