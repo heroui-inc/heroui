@@ -1,0 +1,88 @@
+---
+title: v1.0.6
+description:
+  将组件样式迁移到专用的 BEM 命名 CSS 文件，并通过按名称为 Portal 子树设置 key 修复 PortalHost 幽灵弹层问题
+github:
+  pull: 452
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 7 月 21 日</span>
+</div>
+
+HeroUI Native v1.0.6 通过将每个组件从内联 Tailwind 类名字符串迁移到 `src/styles/components` 下专用的 BEM 命名 CSS 文件来集中管理样式，同时让 `tv()` 插槽仅作为对这些类的轻量引用，从而更易于覆盖与维护。本版本还修复了一个 `PortalHost` 协调（reconciliation）缺陷：在不同屏幕间，Sheet、Dialog 与 Popover 可能会相互继承彼此的状态——产生「幽灵」状态的已打开 Sheet——现在通过按唯一名称为每个 Portal 子树设置 key 来解决该问题。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## 样式
+
+### 组件样式迁移到专用的 CSS 类
+
+每个组件的样式已从各个 `*.styles.ts` 文件中冗长的内联 Tailwind 类名字符串，迁移到 `src/styles/components` 下专用的 BEM 命名 CSS 文件，并通过 `src/styles/index.css` 接入。`tv()` 插槽现在仅作为对这些 CSS 类的轻量引用，从而集中管理样式，使组件更易于覆盖与维护。
+
+**改进点：**
+
+- 将全部约 40 个组件的样式抽取为 BEM 结构的 `.css` 文件，并通过 `src/styles/index.css` 接入
+- 让 `tv()` 插槽仅作为对新 CSS 类的轻量引用，而非内联 Tailwind 字符串
+- 新增 `element-disabled` 工具类
+- 清理相关的工具类与依赖
+
+组件的公开 API 未变，因此无需修改代码。消费者需确保已加载 `src/styles/index.css`，组件才能正确渲染。
+
+**相关 PR：** [#452](https://github.com/heroui-inc/heroui-native/pull/452)
+
+## 问题修复
+
+### PortalHost 幽灵 Sheet
+
+`PortalHost` 此前将所有已注册的 Portal 渲染为一个未设置 key 的数组，因此 React 会按索引进行协调。当某个 Portal 在列表中途注册或注销时——例如某个屏幕卸载时——相邻的 Portal 索引会发生偏移，导致 React 把一个 Portal 的实时组件状态嫁接到另一个 Portal 的内容上。对于底部 Sheet 而言，这会让其继承内部 Sheet 实例及其动画位置，于是一个已关闭的 Sheet 可能显示为完全打开（「幽灵」Sheet），而一个已打开的 Sheet 则可能继承到已关闭的实例而始终无法显示。
+
+现在每个 Portal 子树都按其唯一的 Portal 名称设置 key，因此 React 会按身份而非数组位置来追踪 Portal。这修复了 `BottomSheet`、`Dialog`、`Popover` 与 `Select` 各类 Portal 上的幽灵 Sheet 行为，也很可能是底部 Sheet 间歇性无法显示的根因。
+
+本版本包含针对以下问题的修复：
+
+- **[Issue #441](https://github.com/heroui-inc/heroui-native/issues/441)**：修复 `PortalHost` 将 Portal 渲染为未设置 key 的数组的问题——当某个屏幕卸载时，会导致 Sheet 与 Dialog 相互继承状态，从而出现显示无关内容的「幽灵」已打开 Sheet。现在 Portal 按名称设置 key，使每个子树都按身份被追踪。
+
+**相关 PR：** [#442](https://github.com/heroui-inc/heroui-native/pull/442)
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！

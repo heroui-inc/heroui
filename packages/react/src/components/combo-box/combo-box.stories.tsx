@@ -325,8 +325,8 @@ export const CustomIndicator: Story = {
       <Label>Favorite Animal</Label>
       <ComboBox.InputGroup>
         <Input placeholder="Search animals..." />
-        <ComboBox.Trigger className="size-3">
-          <Icon icon="gravity-ui:chevrons-expand-vertical" />
+        <ComboBox.Trigger>
+          <Icon className="size-3" icon="gravity-ui:chevrons-expand-vertical" />
         </ComboBox.Trigger>
       </ComboBox.InputGroup>
       <ComboBox.Popover>
