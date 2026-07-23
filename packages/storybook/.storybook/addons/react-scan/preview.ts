@@ -5,7 +5,7 @@ export {REACT_SCAN_GLOBAL_TYPE_ID};
 export const reactScanGlobalType = {
   [REACT_SCAN_GLOBAL_TYPE_ID]: {
     name: "React Scan",
-    description: "Enable React Scan to detect performance issues (Only works in isolation mode)",
+    description: "Enable React Scan to detect performance issues",
     defaultValue: DEFAULT_REACT_SCAN,
     toolbar: {
       icon: "eye",
