@@ -9,9 +9,9 @@ import type {ComponentPropsWithRef, ReactNode, RefObject} from "react";
 import {autocompleteVariants} from "@heroui/styles";
 import {mergeRefs, useResizeObserver} from "@react-aria/utils";
 import React, {createContext, use, useCallback, useRef, useState} from "react";
+import {useIsHidden} from "react-aria/private/collections/Hidden";
 import {Autocomplete as AutocompletePrimitive} from "react-aria-components/Autocomplete";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
-import {Dialog as DialogPrimitive} from "react-aria-components/Dialog";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -23,6 +23,7 @@ import {
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
+import {FieldSlotsGate} from "../../utils/field-slots-gate";
 import {CloseIcon, IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -70,16 +71,18 @@ const AutocompleteRoot = <T extends object = object, M extends "single" | "multi
   const clearButtonRef = useRef<HTMLButtonElement | null>(null);
 
   return (
-    <AutocompleteContext value={{slots, triggerRef, clearButtonRef, onClear, isDisabled}}>
-      <SelectPrimitive
-        data-slot="autocomplete"
-        {...props}
-        className={composeTwRenderProps(className, slots?.base())}
-        isDisabled={isDisabled}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </SelectPrimitive>
-    </AutocompleteContext>
+    <FieldSlotsGate>
+      <AutocompleteContext value={{slots, triggerRef, clearButtonRef, onClear, isDisabled}}>
+        <SelectPrimitive
+          data-slot="autocomplete"
+          {...props}
+          className={composeTwRenderProps(className, slots?.base())}
+          isDisabled={isDisabled}
+        >
+          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        </SelectPrimitive>
+      </AutocompleteContext>
+    </FieldSlotsGate>
   );
 };
 
@@ -99,6 +102,7 @@ const AutocompleteTrigger = ({
   const {clearButtonRef, isDisabled: rootDisabled, slots, triggerRef} = use(AutocompleteContext);
   const state = use(SelectStateContext);
   const isDisabled = isDisabledProp ?? rootDisabled ?? false;
+  const isHidden = useIsHidden();
 
   // Callback ref to update context ref
   const contextRefCallback = React.useCallback(
@@ -119,6 +123,10 @@ const AutocompleteTrigger = ({
     onClick?.(e);
     state?.toggle();
   };
+
+  if (isHidden) {
+    return null;
+  }
 
   return (
     <GroupPrimitive
@@ -249,9 +257,7 @@ const AutocompletePopover = ({
           } as React.CSSProperties
         }
       >
-        <DialogPrimitive className={slots?.popoverDialog()} data-slot="autocomplete-popover-dialog">
-          {children}
-        </DialogPrimitive>
+        {children}
       </PopoverPrimitive>
     </SurfaceContext>
   );
