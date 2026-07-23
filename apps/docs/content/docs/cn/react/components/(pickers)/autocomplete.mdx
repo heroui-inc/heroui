@@ -62,6 +62,22 @@ export default () => (
 
 <ComponentPreview name="autocomplete-multiple-select" />
 
+<Callout type="warning">
+  在多选模式下，直接使用 `<Autocomplete.Value />` 不一定会显示纯文本。它会将每个选中项在
+  `ListBox.Item` 中的 children 复制到触发器中，并以符合当前语言环境的分隔符连接。仅包含文本的选项仍会显示为文本，但选项内的任何标记（复选框、头像、指示器等）都会随每个选中项被复制一份。函数形式的
+  children 始终以 `isSelected: false` 调用，因此依赖选中状态的样式也不会生效。
+</Callout>
+
+如需以纯文本显示选中值，请使用 `selectedText` 渲染属性，它会将每个选中项的 `textValue` 连接为一个字符串：
+
+```tsx
+<Autocomplete.Value>
+  {({isPlaceholder, selectedText}) => (isPlaceholder ? "请选择" : selectedText)}
+</Autocomplete.Value>
+```
+
+如需可移除标签等更丰富的布局，请参考上方示例，基于 `state.selectedItems` 自行渲染内容。
+
 ### 分组
 
 <ComponentPreview name="autocomplete-with-sections" />
@@ -380,10 +396,11 @@ const {contains} = useFilter({sensitivity: "base"});
 
 | Prop | 类型 | 描述 |
 | --- | --- | --- |
-| `defaultChildren` | `ReactNode` | 默认渲染的值 |
+| `defaultChildren` | `ReactNode` | 默认渲染的值。多选模式下为每个选中项 children 的副本，以符合当前语言环境的分隔符连接 |
 | `isPlaceholder` | `boolean` | 值是否为占位符 |
 | `state` | `SelectState` | 自动完成的状态 |
 | `selectedItems` | `Node[]` | 当前选中的条目 |
+| `selectedText` | `string` | 选中项的 `textValue`，以符合当前语言环境的分隔符连接 |
 
 ## 无障碍
 
