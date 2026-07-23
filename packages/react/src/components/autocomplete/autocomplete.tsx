@@ -312,14 +312,18 @@ const AutocompleteClearButton = <E extends keyof React.JSX.IntrinsicElements = "
     onClick?.(e as any);
   };
 
+  const isEmpty = state?.selectionManager.selectedKeys.size === 0;
+
   return (
     <dom.button
       ref={mergedRef}
+      aria-hidden={isEmpty || undefined}
       aria-label="Clear selection"
       className={slots?.clearButton({className})}
-      data-empty={dataAttr(state?.selectionManager.selectedKeys.size === 0)}
+      data-empty={dataAttr(isEmpty)}
       data-slot="autocomplete-clear-button"
       disabled={isDisabled ?? false}
+      tabIndex={-1}
       type="button"
       onClick={handleClick}
       {...(props as any)}
