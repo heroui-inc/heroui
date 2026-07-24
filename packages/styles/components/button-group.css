@@ -60,11 +60,10 @@
   transform: none;
 }
 
-/* Override focus ring to use inset style so it stays within button bounds */
+/* Raise focused button so its outward focus ring + gap shows above adjacent buttons */
 .button-group .button:focus-visible:not(:focus),
 .button-group .button[data-focus-visible="true"] {
-  --tw-ring-offset-width: 0px;
-  @apply ring-inset;
+  @apply z-10;
 }
 
 /* ==========================================================================
