@@ -60,11 +60,10 @@
   transform: none;
 }
 
-/* Override focus ring to use inset style so it stays within button bounds */
+/* Raise focused button so its outward focus ring + gap shows above adjacent buttons */
 .button-group .button:focus-visible:not(:focus),
 .button-group .button[data-focus-visible="true"] {
-  --tw-ring-offset-width: 0px;
-  @apply ring-inset;
+  @apply z-10;
 }
 
 /* ==========================================================================
@@ -85,7 +84,7 @@
 
   /* Horizontal orientation - vertical divider */
   .button-group--horizontal & {
-    left: -1px;
+    inset-inline-start: -1px;
     top: 25%;
     width: 1px;
     height: 50%;
@@ -93,7 +92,7 @@
 
   /* Vertical orientation - horizontal divider */
   .button-group--vertical & {
-    left: 25%;
+    inset-inline-start: 25%;
     top: -1px;
     width: 50%;
     height: 1px;

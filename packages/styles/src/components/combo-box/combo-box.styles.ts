@@ -11,6 +11,7 @@ export const comboBoxVariants = tv({
     inputGroup: "combo-box__input-group",
     popover: "combo-box__popover",
     trigger: "combo-box__trigger",
+    value: "combo-box__value",
   },
   variants: {
     fullWidth: {

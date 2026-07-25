@@ -60,7 +60,7 @@ export function RenderFunction() {
           <Accordion.Heading render={(props) => <div data-custom="heading" {...props} />}>
             <Accordion.Trigger render={(props) => <button data-custom="trigger" {...props} />}>
               {item.icon ? (
-                <span className="mr-3 size-4 shrink-0 text-muted">{item.icon}</span>
+                <span className="me-3 size-4 shrink-0 text-muted">{item.icon}</span>
               ) : null}
               {item.title}
               <Accordion.Indicator>

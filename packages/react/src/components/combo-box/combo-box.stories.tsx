@@ -7,6 +7,7 @@ import React from "react";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../avatar";
 import {Button} from "../button";
+import {Chip} from "../chip";
 import {Description} from "../description";
 import {EmptyState} from "../empty-state";
 import {FieldError} from "../field-error";
@@ -325,8 +326,8 @@ export const CustomIndicator: Story = {
       <Label>Favorite Animal</Label>
       <ComboBox.InputGroup>
         <Input placeholder="Search animals..." />
-        <ComboBox.Trigger className="size-3">
-          <Icon icon="gravity-ui:chevrons-expand-vertical" />
+        <ComboBox.Trigger>
+          <Icon className="size-3" icon="gravity-ui:chevrons-expand-vertical" />
         </ComboBox.Trigger>
       </ComboBox.InputGroup>
       <ComboBox.Popover>
@@ -904,4 +905,140 @@ export const MenuTrigger: Story = {
       </div>
     </div>
   ),
+};
+
+export const MultipleSelection: Story = {
+  render: () => (
+    <ComboBox className="w-[256px]" selectionMode="multiple">
+      <Label>Favorite Animals</Label>
+      <ComboBox.InputGroup>
+        <Input placeholder="Search animals..." />
+        <ComboBox.Trigger />
+      </ComboBox.InputGroup>
+      <ComboBox.Value placeholder="No animals selected" />
+      <ComboBox.Popover>
+        <ListBox selectionMode="multiple">
+          <ListBox.Item id="aardvark" textValue="Aardvark">
+            Aardvark
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="cat" textValue="Cat">
+            Cat
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="dog" textValue="Dog">
+            Dog
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="kangaroo" textValue="Kangaroo">
+            Kangaroo
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="panda" textValue="Panda">
+            Panda
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="snake" textValue="Snake">
+            Snake
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+        </ListBox>
+      </ComboBox.Popover>
+    </ComboBox>
+  ),
+};
+
+export const MultipleSelectionControlled: Story = {
+  render: () => {
+    const animals = [
+      {id: "cat", name: "Cat"},
+      {id: "dog", name: "Dog"},
+      {id: "bird", name: "Bird"},
+      {id: "fish", name: "Fish"},
+      {id: "hamster", name: "Hamster"},
+    ];
+
+    const [value, setValue] = React.useState<Key[]>(["cat", "dog"]);
+
+    return (
+      <div className="space-y-2">
+        <ComboBox
+          className="w-[256px]"
+          selectionMode="multiple"
+          value={value}
+          onChange={(keys) => setValue(keys as Key[])}
+        >
+          <Label>Animals (controlled)</Label>
+          <ComboBox.InputGroup>
+            <Input placeholder="Search animals..." />
+            <ComboBox.Trigger />
+          </ComboBox.InputGroup>
+          <ComboBox.Value placeholder="No animals selected" />
+          <ComboBox.Popover>
+            <ListBox selectionMode="multiple">
+              {animals.map((animal) => (
+                <ListBox.Item key={animal.id} id={animal.id} textValue={animal.name}>
+                  {animal.name}
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              ))}
+            </ListBox>
+          </ComboBox.Popover>
+        </ComboBox>
+        <p className="text-sm text-muted">Selected: {value.join(", ") || "None"}</p>
+      </div>
+    );
+  },
+};
+
+export const MultipleSelectionWithTags: Story = {
+  render: () => {
+    const animals = [
+      {id: "cat", name: "Cat"},
+      {id: "dog", name: "Dog"},
+      {id: "bird", name: "Bird"},
+      {id: "fish", name: "Fish"},
+      {id: "hamster", name: "Hamster"},
+    ];
+
+    return (
+      <ComboBox<(typeof animals)[number], "multiple">
+        className="w-[256px]"
+        defaultValue={["cat", "dog"]}
+        items={animals}
+        selectionMode="multiple"
+      >
+        <Label>Favorite Animals</Label>
+        <ComboBox.InputGroup>
+          <Input placeholder="Search animals..." />
+          <ComboBox.Trigger />
+        </ComboBox.InputGroup>
+        <ComboBox.Value className="flex flex-wrap gap-2">
+          {({isPlaceholder, selectedItems}) => {
+            if (isPlaceholder || selectedItems.length === 0) {
+              return <span className="text-sm text-muted">No animals selected</span>;
+            }
+
+            return selectedItems.map((item) =>
+              item ? (
+                <Chip key={item.id} variant="soft">
+                  <Chip.Label>{item.name}</Chip.Label>
+                </Chip>
+              ) : null,
+            );
+          }}
+        </ComboBox.Value>
+        <ComboBox.Popover>
+          <ListBox selectionMode="multiple">
+            {(animal: (typeof animals)[number]) => (
+              <ListBox.Item id={animal.id} textValue={animal.name}>
+                {animal.name}
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            )}
+          </ListBox>
+        </ComboBox.Popover>
+      </ComboBox>
+    );
+  },
 };

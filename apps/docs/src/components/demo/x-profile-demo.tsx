@@ -29,8 +29,8 @@ export function XProfileDemo() {
           </div>
         </div>
       </Card.Header>
-      <Card.Content className="flex-row text-left">
-        <p className="pl-px text-sm font-medium">
+      <Card.Content className="flex-row text-start">
+        <p className="ps-px text-sm font-medium">
           {t.bio}&nbsp;
           <br />
           <span aria-label={t.confettiLabel} role="img">

@@ -52,7 +52,7 @@ export function WithTextArea() {
               <p className="text-xs">连接应用</p>
             </Tooltip.Content>
           </Tooltip>
-          <div className="ml-auto flex items-center gap-1.5">
+          <div className="ms-auto flex items-center gap-1.5">
             <Tooltip delay={0}>
               <Button isIconOnly aria-label="语音输入" size="sm" variant="ghost">
                 <Microphone />

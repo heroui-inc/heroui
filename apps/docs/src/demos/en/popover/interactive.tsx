@@ -57,11 +57,11 @@ export function PopoverInteractive() {
             <div className="mt-3 flex gap-4">
               <div>
                 <span className="font-semibold">892</span>
-                <span className="ml-1 text-sm text-muted">Following</span>
+                <span className="ms-1 text-sm text-muted">Following</span>
               </div>
               <div>
                 <span className="font-semibold">12.5K</span>
-                <span className="ml-1 text-sm text-muted">Followers</span>
+                <span className="ms-1 text-sm text-muted">Followers</span>
               </div>
             </div>
           </Popover.Dialog>

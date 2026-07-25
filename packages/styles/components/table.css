@@ -119,7 +119,7 @@
    Table Column (<th>)
    -------------------------------------------------------------------------- */
 .table__column {
-  @apply relative px-4 py-2.5 text-left text-xs font-medium text-muted;
+  @apply relative px-4 py-2.5 text-start text-xs font-medium text-muted;
 
   /* Separator between columns — a short vertical line on the right edge */
   &::after {
@@ -171,7 +171,7 @@
    Defaults to pointing up (ascending) and rotates 180° for descending.
    -------------------------------------------------------------------------- */
 .table__sortable-column-indicator {
-  @apply size-3 transform transition-transform duration-100 ease-out inline-grid place-content-center;
+  @apply inline-grid size-3 transform place-content-center transition-transform duration-100 ease-out;
 
   &[data-direction="descending"] {
     @apply rotate-180;
@@ -296,7 +296,7 @@
 .table__row:is(:focus-visible, [data-focus-visible="true"])
   > *:first-child:not(:only-child)
   :is(.table__cell, .table__column) {
-  @apply rounded-l-lg shadow-[inset_2px_0_0_0_var(--focus),inset_0_2px_0_0_var(--focus),inset_0_-2px_0_0_var(--focus)] outline-none;
+  @apply rounded-s-lg shadow-[inset_2px_0_0_0_var(--focus),inset_0_2px_0_0_var(--focus),inset_0_-2px_0_0_var(--focus)] outline-none;
 }
 
 .table__row:is(:focus-visible, [data-focus-visible="true"])
@@ -304,7 +304,7 @@
 .table__row:is(:focus-visible, [data-focus-visible="true"])
   > *:last-child:not(:only-child)
   :is(.table__cell, .table__column) {
-  @apply rounded-r-lg shadow-[inset_-2px_0_0_0_var(--focus),inset_0_2px_0_0_var(--focus),inset_0_-2px_0_0_var(--focus)] outline-none;
+  @apply rounded-e-lg shadow-[inset_-2px_0_0_0_var(--focus),inset_0_2px_0_0_var(--focus),inset_0_-2px_0_0_var(--focus)] outline-none;
 }
 
 .table__row:is(:focus-visible, [data-focus-visible="true"])

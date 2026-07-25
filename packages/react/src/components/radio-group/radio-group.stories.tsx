@@ -475,7 +475,7 @@ export const DeliveryAndPaymentExample: Story = {
                       "data-[focus-visible=true]:bg-accent/10",
                     )}
                   >
-                    <Radio.Control className="absolute top-3 right-4 size-5">
+                    <Radio.Control className="absolute end-4 top-3 size-5">
                       <Radio.Indicator />
                     </Radio.Control>
                     <div className="flex flex-col gap-1">
@@ -503,7 +503,7 @@ export const DeliveryAndPaymentExample: Story = {
                       "data-[selected=true]:bg-accent/10",
                     )}
                   >
-                    <Radio.Control className="absolute top-3 right-4 size-5">
+                    <Radio.Control className="absolute end-4 top-3 size-5">
                       <Radio.Indicator />
                     </Radio.Control>
                     <Icon className="size-6 text-accent" icon={option.icon} />

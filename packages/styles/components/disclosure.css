@@ -25,7 +25,7 @@
 }
 
 .disclosure__indicator {
-  @apply ml-auto size-4 shrink-0 text-inherit;
+  @apply ms-auto size-4 shrink-0 text-inherit;
 
   /**
    * Transitions

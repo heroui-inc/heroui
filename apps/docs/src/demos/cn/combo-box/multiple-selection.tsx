@@ -1,20 +1,18 @@
 "use client";
 
-import {ChevronsExpandVertical} from "@gravity-ui/icons";
 import {ComboBox, Input, Label, ListBox} from "@heroui/react";
 
-export function CustomIndicator() {
+export function MultipleSelection() {
   return (
-    <ComboBox className="w-[256px]">
+    <ComboBox className="w-[256px]" selectionMode="multiple">
       <Label>最喜欢的动物</Label>
       <ComboBox.InputGroup>
         <Input placeholder="搜索动物…" />
-        <ComboBox.Trigger>
-          <ChevronsExpandVertical className="size-3" />
-        </ComboBox.Trigger>
+        <ComboBox.Trigger />
       </ComboBox.InputGroup>
+      <ComboBox.Value placeholder="未选择任何动物" />
       <ComboBox.Popover>
-        <ListBox>
+        <ListBox selectionMode="multiple">
           <ListBox.Item id="aardvark" textValue="土豚">
             土豚
             <ListBox.ItemIndicator />

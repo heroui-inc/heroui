@@ -49,7 +49,7 @@ const colorSliderTrackStyles = tv({
   variants: {
     orientation: {
       horizontal: "h-8 w-full",
-      vertical: "ml-2 h-full w-8",
+      vertical: "ms-2 h-full w-8",
     },
   },
 });
@@ -176,7 +176,7 @@ function ColorSlider({
         })}
       >
         <ColorThumb
-          className={cn(colorThumbStyles(), orientation === "horizontal" ? "top-1/2" : "left-1/2")}
+          className={cn(colorThumbStyles(), orientation === "horizontal" ? "top-1/2" : "start-1/2")}
           style={({color}) => ({
             background: color.toString("css"),
           })}
@@ -445,7 +445,7 @@ export default function ColorPicker({
                         className="w-full flex-1 px-4 text-sm"
                         value={color.toString(colorFormat)}
                       />
-                      <InputGroup.Suffix className="border-l border-separator px-0">
+                      <InputGroup.Suffix className="border-s border-separator px-0">
                         <Select
                           aria-label="Color format"
                           value={colorFormat}

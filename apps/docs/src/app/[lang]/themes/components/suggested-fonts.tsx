@@ -121,7 +121,7 @@ export function SuggestedFonts({customFonts, goToCustom}: SuggestedFontsProps) {
               </p>
               {item.isCustom ? (
                 <Tooltip closeDelay={0} delay={100}>
-                  <Tooltip.Trigger className="absolute top-1 right-1">
+                  <Tooltip.Trigger className="absolute end-1 top-1">
                     <Button
                       isIconOnly
                       className="size-5 min-h-0 min-w-0 p-0 opacity-0 group-data-[hovered=true]:opacity-100"

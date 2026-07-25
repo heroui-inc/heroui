@@ -32,7 +32,7 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
     if (!el) return;
 
     const isVertical = orientation === "vertical";
-    const scrollStart = isVertical ? el.scrollTop : el.scrollLeft;
+    const scrollStart = isVertical ? el.scrollTop : Math.abs(el.scrollLeft);
     const scrollSize = isVertical ? el.scrollHeight : el.scrollWidth;
     const clientSize = isVertical ? el.clientHeight : el.clientWidth;
 

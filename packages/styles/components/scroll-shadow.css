@@ -72,12 +72,22 @@
       100% var(--scroll-shadow-scrollbar-size);
   }
 
+  /* `left`/`right` data attributes are logical (before/end of scroll). In RTL the
+     start edge is on the right, so the physical fade direction must be swapped. */
   &[data-left-scroll="true"] {
     --scroll-linear-gradient: 270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    &:dir(rtl) {
+      --scroll-linear-gradient: 90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+    }
   }
 
   &[data-right-scroll="true"] {
     --scroll-linear-gradient: 90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+
+    &:dir(rtl) {
+      --scroll-linear-gradient: 270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+    }
   }
 
   &[data-left-right-scroll="true"] {

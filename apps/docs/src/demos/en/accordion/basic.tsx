@@ -55,7 +55,7 @@ export function Basic() {
           <Accordion.Heading>
             <Accordion.Trigger>
               {item.icon ? (
-                <span className="mr-3 size-4 shrink-0 text-muted">{item.icon}</span>
+                <span className="me-3 size-4 shrink-0 text-muted">{item.icon}</span>
               ) : null}
               {item.title}
               <Accordion.Indicator>

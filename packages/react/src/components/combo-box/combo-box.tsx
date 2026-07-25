@@ -5,6 +5,7 @@ import type {SurfaceVariants} from "../surface";
 import type {ComboBoxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactElement, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components/Button";
+import type {ComboBoxValueRenderProps} from "react-aria-components/ComboBox";
 
 import {comboBoxVariants} from "@heroui/styles";
 import React, {Children, createContext, isValidElement, use} from "react";
@@ -13,6 +14,7 @@ import {Button} from "react-aria-components/Button";
 import {
   ComboBox as ComboBoxPrimitive,
   ComboBoxStateContext,
+  ComboBoxValue as ComboBoxValuePrimitive,
   Popover as PopoverPrimitive,
 } from "react-aria-components/ComboBox";
 import {Group as GroupPrimitive} from "react-aria-components/Group";
@@ -49,8 +51,8 @@ const inputGroupSlot = createCollectionSlot<InputGroupInjectedProps>("combo-box.
 /* -------------------------------------------------------------------------------------------------
  * ComboBox Root
  * -----------------------------------------------------------------------------------------------*/
-interface ComboBoxRootProps<T extends object>
-  extends ComponentPropsWithRef<typeof ComboBoxPrimitive<T>>, ComboBoxVariants {
+interface ComboBoxRootProps<T extends object, M extends "single" | "multiple" = "single">
+  extends ComponentPropsWithRef<typeof ComboBoxPrimitive<T, M>>, ComboBoxVariants {
   items?: Iterable<T>;
   /**
    * The variant of the combo box.
@@ -59,14 +61,14 @@ interface ComboBoxRootProps<T extends object>
   variant?: "primary" | "secondary";
 }
 
-const ComboBoxRoot = <T extends object = object>({
+const ComboBoxRoot = <T extends object = object, M extends "single" | "multiple" = "single">({
   children,
   className,
   fullWidth,
   menuTrigger = "focus",
   variant,
   ...props
-}: ComboBoxRootProps<T>) => {
+}: ComboBoxRootProps<T, M>) => {
   const slots = React.useMemo(() => comboBoxVariants({fullWidth}), [fullWidth]);
 
   return (
@@ -122,6 +124,31 @@ const ComboBoxInputGroup = <E extends keyof React.JSX.IntrinsicElements = "div">
     >
       {trigger}
     </inputGroupSlot.Injector>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * ComboBox Value
+ * -----------------------------------------------------------------------------------------------*/
+interface ComboBoxValueProps<T extends object> extends ComponentPropsWithRef<
+  typeof ComboBoxValuePrimitive<T>
+> {}
+
+const ComboBoxValue = <T extends object = object>({
+  children,
+  className,
+  ...props
+}: ComboBoxValueProps<T>) => {
+  const {slots} = use(ComboBoxContext);
+
+  return (
+    <ComboBoxValuePrimitive
+      className={composeTwRenderProps(className, slots?.value())}
+      data-slot="combo-box-value"
+      {...props}
+    >
+      {children}
+    </ComboBoxValuePrimitive>
   );
 };
 
@@ -239,11 +266,20 @@ const ComboBoxPopover = ({
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ComboBoxRoot, ComboBoxInputGroup, ComboBoxTrigger, ComboBoxPopover, ComboBoxContext};
+export {
+  ComboBoxRoot,
+  ComboBoxInputGroup,
+  ComboBoxValue,
+  ComboBoxTrigger,
+  ComboBoxPopover,
+  ComboBoxContext,
+};
 
 export type {
   ComboBoxRootProps,
   ComboBoxInputGroupProps,
+  ComboBoxValueProps,
+  ComboBoxValueRenderProps,
   ComboBoxTriggerProps,
   ComboBoxPopoverProps,
 };

@@ -81,6 +81,10 @@ const PaginationSummary = <E extends keyof React.JSX.IntrinsicElements = "div">(
     <dom.div
       className={composeSlotClassName(slots?.summary, className)}
       data-slot="pagination-summary"
+      // Auto-detect base direction from the summary's own text so mixed
+      // number/word content (e.g. "1 to 5 of 10 invoices") is not bidi-reordered
+      // by an RTL ancestor. User-provided `dir` still overrides via `...props`.
+      dir="auto"
       {...(props as any)}
     >
       {children}

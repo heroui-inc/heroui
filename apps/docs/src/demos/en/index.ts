@@ -949,6 +949,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./combo-box/menu-trigger").then((m) => m.MenuTrigger),
     file: "en/combo-box/menu-trigger.tsx",
   },
+  "combo-box-multiple-selection": {
+    loader: () => import("./combo-box/multiple-selection").then((m) => m.MultipleSelection),
+    file: "en/combo-box/multiple-selection.tsx",
+  },
   "combo-box-on-surface": {
     loader: () => import("./combo-box/on-surface").then((m) => m.OnSurface),
     file: "en/combo-box/on-surface.tsx",

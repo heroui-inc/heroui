@@ -20,6 +20,6 @@
 
   /* This makes the horizontal separator take up 94% of the width and be centered */
   [data-slot="separator"][data-orientation="horizontal"] {
-    @apply ml-[3%] w-[94%];
+    @apply ms-[3%] w-[94%];
   }
 }

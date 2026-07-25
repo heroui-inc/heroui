@@ -13,11 +13,11 @@ export function Horizontal() {
       </div>
       <div className="flex flex-1 flex-col gap-3">
         <Card.Header className="gap-1">
-          <Card.Title className="pr-8">成为 ACME 创作者！</Card.Title>
+          <Card.Title className="pe-8">成为 ACME 创作者！</Card.Title>
           <Card.Description>
             这是一段占位说明文字，用于展示横向卡片布局、配图与右上角关闭按钮的排版效果。
           </Card.Description>
-          <CloseButton aria-label="关闭横幅" className="absolute top-3 right-3" />
+          <CloseButton aria-label="关闭横幅" className="absolute end-3 top-3" />
         </Card.Header>
         <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col">

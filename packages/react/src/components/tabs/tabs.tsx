@@ -119,9 +119,14 @@ const TabList = ({children, className, ...props}: TabListProps) => {
       if (!el) return;
       const size = isVertical ? el.clientHeight : el.clientWidth;
 
+      // In RTL, the horizontal scroll range runs from 0 (start, on the right) to negative,
+      // so the delta sign must be flipped for `scrollLeft` to move toward the intended edge.
+      const isRTL = !isVertical && getComputedStyle(el).direction === "rtl";
+      const delta = direction * size * 0.8 * (isRTL ? -1 : 1);
+
       el.scrollBy({
         behavior: "smooth",
-        [isVertical ? "top" : "left"]: direction * size * 0.8,
+        [isVertical ? "top" : "left"]: delta,
       });
     },
     [isVertical],

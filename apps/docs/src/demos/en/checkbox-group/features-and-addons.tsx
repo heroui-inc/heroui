@@ -39,7 +39,7 @@ export function FeaturesAndAddOns() {
                     "data-[selected=true]:bg-accent/10",
                   )}
                 >
-                  <Checkbox.Control className="absolute top-3 right-4 size-5 rounded-full before:rounded-full">
+                  <Checkbox.Control className="absolute end-4 top-3 size-5 rounded-full before:rounded-full">
                     <Checkbox.Indicator />
                   </Checkbox.Control>
                   <addon.icon className="size-5 text-accent-soft-foreground" />

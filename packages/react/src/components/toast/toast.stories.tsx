@@ -511,7 +511,7 @@ const WithCallbacksTemplate = () => {
               >
                 <div className="flex-1">
                   <span className="font-medium">{item.message}</span>
-                  <span className="ml-2 text-xs text-muted">({item.time})</span>
+                  <span className="ms-2 text-xs text-muted">({item.time})</span>
                 </div>
                 <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/10 text-success">
                   <svg
@@ -556,7 +556,7 @@ const CustomToastTemplate = () => {
               <ToastContent>
                 <div className="flex items-center gap-2">
                   <ToastIndicator className="text-accent" variant={content.variant} />
-                  <div className="flex flex-col pr-6">
+                  <div className="flex flex-col pe-6">
                     {content.title ? (
                       <ToastTitle className="text-accent">{content.title}</ToastTitle>
                     ) : null}
@@ -566,7 +566,7 @@ const CustomToastTemplate = () => {
                   </div>
                 </div>
               </ToastContent>
-              <Toast.CloseButton className="absolute top-1/2 right-2 -translate-y-1/2 border-none bg-transparent opacity-100 [&>svg]:size-4" />
+              <Toast.CloseButton className="absolute end-2 top-1/2 -translate-y-1/2 border-none bg-transparent opacity-100 [&>svg]:size-4" />
             </Toast>
           );
         }}

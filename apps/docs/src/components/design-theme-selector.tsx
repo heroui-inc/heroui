@@ -165,7 +165,7 @@ export function DesignThemeSelector({
             className={cn(
               "text-xs text-muted",
               showAvatar &&
-                "max-sm:min-w-0 max-sm:border-0 max-sm:bg-transparent max-sm:px-0 sm:gap-1.5 sm:pr-2.5 sm:pl-2",
+                "max-sm:min-w-0 max-sm:border-0 max-sm:bg-transparent max-sm:px-0 sm:gap-1.5 sm:ps-2 sm:pe-2.5",
             )}
           >
             {showAvatar ? (

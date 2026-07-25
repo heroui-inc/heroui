@@ -1,0 +1,88 @@
+---
+title: v1.0.6
+description:
+  Component styles migrated to dedicated BEM-named CSS files, PortalHost ghost-sheet fix by keying portal subtrees by name
+github:
+  pull: 452
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">July 21, 2026</span>
+</div>
+
+HeroUI Native v1.0.6 centralizes styling by migrating every component from inline Tailwind class strings to dedicated BEM-named CSS files under `src/styles/components`, keeping the `tv()` slots as thin references to those classes for easier overriding and maintenance. This release also fixes a `PortalHost` reconciliation bug where sheets, dialogs, and popovers could inherit each other's state across screens — producing "ghost" open sheets — by keying each portal subtree by its unique name.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It on Your Device
+
+<NativeTryOnDevice />
+
+## Styling
+
+### Component Styles Migrated to Dedicated CSS Classes
+
+Every component's styling has moved from long inline Tailwind class strings inside each `*.styles.ts` file to dedicated BEM-named CSS files under `src/styles/components`, wired through `src/styles/index.css`. The `tv()` slots now act as thin references to these CSS classes, centralizing styling and making components far easier to override and maintain.
+
+**Improvements:**
+
+- Extracts styles for all ~40 components into BEM-structured `.css` files, wired through `src/styles/index.css`
+- Keeps `tv()` slots as thin references to the new CSS classes rather than inline Tailwind strings
+- Adds an `element-disabled` utility
+- Cleans up related utilities and dependencies
+
+Public component APIs are unchanged, so no code changes are required. Consumers must ensure `src/styles/index.css` is loaded for components to render correctly.
+
+**Related PR:** [#452](https://github.com/heroui-inc/heroui-native/pull/452)
+
+## Bug Fixes
+
+### PortalHost Ghost Sheets
+
+`PortalHost` previously rendered all registered portals as an unkeyed array, so React reconciled them by index. When a portal registered or unregistered mid-list — for example when a screen unmounted — sibling portals shifted index and React grafted one portal's live component state onto a different portal's content. For bottom sheets this adopted the internal sheet instance and its animated position, so a closed sheet could appear fully open ("ghost" sheet) while an open sheet could inherit a closed instance and never become visible.
+
+Each portal subtree is now keyed by its unique portal name, so React tracks portals by identity instead of array position. This resolves the ghost-sheet behavior across `BottomSheet`, `Dialog`, `Popover`, and `Select` portals and is a likely root cause behind intermittent bottom-sheet visibility failures.
+
+This release includes fixes for the following issues:
+
+- **[Issue #441](https://github.com/heroui-inc/heroui-native/issues/441)**: Fixed `PortalHost` rendering portals as an unkeyed array, which caused sheets and dialogs to inherit each other's state when a screen unmounted, resulting in "ghost" open sheets showing unrelated content. Portals are now keyed by name so each subtree is tracked by identity.
+
+**Related PR:** [#442](https://github.com/heroui-inc/heroui-native/pull/442)
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!

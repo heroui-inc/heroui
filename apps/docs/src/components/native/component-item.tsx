@@ -111,7 +111,7 @@ export function ComponentItem({
         ) : (
           <ConditionalLink className="link no-underline" href={href} openInNewTab={openInNewTab}>
             <ComponentTitleContent status={status} title={title} />
-            <LocalLinkIcon className="ml-1 size-3.5 text-muted" />
+            <LocalLinkIcon className="ms-1 size-3.5 text-muted" />
           </ConditionalLink>
         )}
       </div>
