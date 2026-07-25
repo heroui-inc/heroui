@@ -13,6 +13,7 @@ export const withReactScan: Decorator = (Story) => {
 
   useEffect(() => {
     scan({
+      dangerouslyForceRunInProduction: true,
       allowInIframe: true,
       enabled: isEnabled,
     });
