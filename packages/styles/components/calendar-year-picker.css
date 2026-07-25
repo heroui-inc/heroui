@@ -75,7 +75,7 @@
 }
 
 .calendar-year-picker__trigger-indicator {
-  @apply text-xs text-accent-soft-foreground;
+  @apply text-xs text-accent-soft-foreground rtl:[transform:rotate(180deg)];
 
   transition: transform 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
