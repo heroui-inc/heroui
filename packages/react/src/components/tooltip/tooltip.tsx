@@ -37,9 +37,7 @@ const TooltipContext = createContext<TooltipContext>({});
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Root
  * -----------------------------------------------------------------------------------------------*/
-interface TooltipRootProps
-  extends ComponentPropsWithRef<typeof TooltipTriggerPrimitive>,
-    ButtonGroupChildProps {}
+type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
 
 const markButtonGroupTrigger = (children: ReactNode): ReactNode => {
   let isMarked = false;
@@ -71,7 +69,7 @@ const TooltipRoot = ({
   delay,
   [BUTTON_GROUP_CHILD]: isButtonGroupChild,
   ...props
-}: TooltipRootProps) => {
+}: TooltipRootProps & ButtonGroupChildProps) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   const cssDelay = useCSSVariable("--tooltip-delay");
