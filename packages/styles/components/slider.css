@@ -165,6 +165,7 @@
     }
 
     .slider__thumb {
+      /* Cross-axis centering; React Aria applies a physical translateX(-50%), so keep left-1/2 for RTL correctness */
       @apply left-1/2;
 
       /* Thumb height + border height */

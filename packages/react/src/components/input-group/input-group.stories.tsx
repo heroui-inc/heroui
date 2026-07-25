@@ -180,7 +180,7 @@ export const WithCopySuffix: Story = {
       <Label>Website</Label>
       <InputGroup>
         <InputGroup.Input className="w-[280px]" />
-        <InputGroup.Suffix className="pr-0">
+        <InputGroup.Suffix className="pe-0">
           <Button isIconOnly aria-label="Copy" size="sm" variant="ghost">
             <Icon className="size-4" icon="gravity-ui:copy" />
           </Button>
@@ -199,7 +199,7 @@ export const WithIconPrefixAndCopySuffix: Story = {
           <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
         </InputGroup.Prefix>
         <InputGroup.Input className="w-[280px]" />
-        <InputGroup.Suffix className="pr-0">
+        <InputGroup.Suffix className="pe-0">
           <Button isIconOnly aria-label="Copy" size="sm" variant="ghost">
             <Icon className="size-4" icon="gravity-ui:copy" />
           </Button>
@@ -222,7 +222,7 @@ export const PasswordWithToggle: Story = {
             type={isVisible ? "text" : "password"}
             value={isVisible ? "87$2h.3diua" : "••••••••"}
           />
-          <InputGroup.Suffix className="pr-0">
+          <InputGroup.Suffix className="pe-0">
             <Button
               isIconOnly
               aria-label={isVisible ? "Hide password" : "Show password"}
@@ -260,7 +260,7 @@ export const WithKeyboardShortcut: Story = {
     <TextField aria-label="Command" className="w-[280px]" name="command">
       <InputGroup>
         <InputGroup.Input className="w-[280px]" placeholder="Command" />
-        <InputGroup.Suffix className="pr-2">
+        <InputGroup.Suffix className="pe-2">
           <Kbd>
             <Kbd.Abbr keyValue="command" />
             <Kbd.Content>K</Kbd.Content>
@@ -276,7 +276,7 @@ export const WithBadgeSuffix: Story = {
     <TextField aria-label="Email address" className="w-[280px]" name="email">
       <InputGroup>
         <InputGroup.Input className="w-[280px]" placeholder="Email address" />
-        <InputGroup.Suffix className="pr-2">
+        <InputGroup.Suffix className="pe-2">
           <Chip color="accent" size="md" variant="soft">
             Pro
           </Chip>
@@ -415,7 +415,7 @@ export const WithTextArea: Story = {
                 <p className="text-xs">Connect apps</p>
               </Tooltip.Content>
             </Tooltip>
-            <div className="ml-auto flex items-center gap-1.5">
+            <div className="ms-auto flex items-center gap-1.5">
               <Tooltip delay={0}>
                 <Button isIconOnly aria-label="Voice input" size="sm" variant="ghost">
                   <Icon icon="gravity-ui:microphone" />
@@ -522,7 +522,7 @@ export const AllVariations: Story = {
           <Label>Website</Label>
           <InputGroup>
             <InputGroup.Input className="w-[280px]" />
-            <InputGroup.Suffix className="pr-0">
+            <InputGroup.Suffix className="pe-0">
               <Button isIconOnly aria-label="Copy" className="h-auto p-0" size="sm" variant="ghost">
                 <Icon className="size-4" icon="gravity-ui:copy" />
               </Button>
@@ -537,7 +537,7 @@ export const AllVariations: Story = {
               <Icon className="size-4 text-muted" icon="gravity-ui:globe" />
             </InputGroup.Prefix>
             <InputGroup.Input className="w-[280px]" />
-            <InputGroup.Suffix className="pr-0">
+            <InputGroup.Suffix className="pe-0">
               <Button isIconOnly aria-label="Copy" className="h-auto p-0" size="sm" variant="ghost">
                 <Icon className="size-4" icon="gravity-ui:copy" />
               </Button>

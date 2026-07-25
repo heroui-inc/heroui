@@ -84,3 +84,8 @@
     @apply transition-[opacity,transform] will-change-[opacity,transform];
   }
 }
+
+.date-range-picker__popover .range-calendar__nav-button-icon,
+.date-range-picker__popover .calendar__nav-button-icon {
+  @apply rotate-0;
+}

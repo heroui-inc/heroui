@@ -9,7 +9,7 @@ export function WithCopySuffix() {
       <Label>网站</Label>
       <InputGroup>
         <InputGroup.Input className="w-full max-w-[280px]" />
-        <InputGroup.Suffix className="pr-0">
+        <InputGroup.Suffix className="pe-0">
           <Button isIconOnly aria-label="复制" size="sm" variant="ghost">
             <Copy className="size-4" />
           </Button>

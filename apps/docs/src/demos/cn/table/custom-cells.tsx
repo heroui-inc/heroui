@@ -99,7 +99,7 @@ export function CustomCells() {
           onSortChange={setSortDescriptor}
         >
           <Table.Header>
-            <Table.Column className="pr-0">
+            <Table.Column className="pe-0">
               <Checkbox aria-label="全选" slot="selection">
                 <Checkbox.Content>
                   <Checkbox.Control>
@@ -141,7 +141,7 @@ export function CustomCells() {
           <Table.Body>
             {sortedUsers.map((user) => (
               <Table.Row key={user.id} id={user.id}>
-                <Table.Cell className="pr-0">
+                <Table.Cell className="pe-0">
                   <Checkbox aria-label={`选择 ${user.name}`} slot="selection" variant="secondary">
                     <Checkbox.Content>
                       <Checkbox.Control>

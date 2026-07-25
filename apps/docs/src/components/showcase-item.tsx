@@ -42,7 +42,7 @@ export function ShowcaseItem({
       >
         {/* Status chip */}
         {!!status && !isMinimal && (
-          <div className="absolute top-1.5 right-2 z-10">
+          <div className="absolute end-2 top-1.5 z-10">
             <span
               className={cn(
                 chipVariants({

@@ -167,7 +167,7 @@ export default function ColorPicker({
                           onFocus={handleInputFocus}
                           onKeyDown={handleInputKeyDown}
                         />
-                        <InputGroup.Suffix className="border-l border-separator px-0">
+                        <InputGroup.Suffix className="border-s border-separator px-0">
                           <Select
                             aria-label="Color format"
                             value={currentColorFormat}

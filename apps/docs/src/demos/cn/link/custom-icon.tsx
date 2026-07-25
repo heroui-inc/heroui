@@ -6,7 +6,7 @@ export function LinkCustomIcon() {
     <div className="flex flex-col gap-3">
       <Link href="#">
         外部链接
-        <Link.Icon className="ml-1.5 size-3">
+        <Link.Icon className="ms-1.5 size-3">
           <ArrowUpRightFromSquare />
         </Link.Icon>
       </Link>

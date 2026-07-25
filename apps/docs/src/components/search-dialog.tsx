@@ -278,7 +278,7 @@ export default function CustomSearchDialog(props: SharedProps) {
         <div className="inline-flex w-full items-center gap-2">
           <ArrowRight className="text-fd-muted-foreground size-4" />
           <p className="truncate">{comp.title}</p>
-          <Chip className="ml-auto shrink-0" color="accent" size="sm" variant="soft">
+          <Chip className="ms-auto shrink-0" color="accent" size="sm" variant="soft">
             PRO
           </Chip>
         </div>

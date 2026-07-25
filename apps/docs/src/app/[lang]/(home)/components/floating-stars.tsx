@@ -1898,7 +1898,7 @@ function FloatingStarsReverse() {
 
 function StarsLayerFrame({children}: {children: ReactNode}) {
   return (
-    <div className="absolute top-0 left-1/2 h-[637.702px] w-[760.706px] -translate-x-1/2">
+    <div className="absolute start-1/2 top-0 h-[637.702px] w-[760.706px] -translate-x-1/2">
       {children}
     </div>
   );
@@ -1910,7 +1910,7 @@ export function FloatingStars() {
       <StarsLayerFrame>
         <FloatingStarsForward />
       </StarsLayerFrame>
-      <div className="absolute top-[86.38px] left-[calc(50%-63.96px)] h-[637.702px] w-[760.706px] -translate-x-1/2 overflow-clip">
+      <div className="absolute start-[calc(50%-63.96px)] top-[86.38px] h-[637.702px] w-[760.706px] -translate-x-1/2 overflow-clip">
         <StarsLayerFrame>
           <FloatingStarsReverse />
         </StarsLayerFrame>

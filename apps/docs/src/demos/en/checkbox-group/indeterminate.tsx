@@ -24,7 +24,7 @@ export function Indeterminate() {
           Select all
         </Checkbox.Content>
       </Checkbox>
-      <div className="ml-6 flex flex-col gap-2">
+      <div className="ms-6 flex flex-col gap-2">
         <CheckboxGroup value={selected} onChange={setSelected}>
           <Checkbox value="coding">
             <Checkbox.Content>

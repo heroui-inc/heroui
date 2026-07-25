@@ -43,15 +43,15 @@
 }
 
 .typography-prose blockquote {
-  @apply mt-4 border-l-4 border-border pl-4 text-muted italic;
+  @apply mt-4 border-s-4 border-border ps-4 text-muted italic;
 }
 
 .typography-prose ul {
-  @apply my-4 list-disc space-y-2 pl-6;
+  @apply my-4 list-disc space-y-2 ps-6;
 }
 
 .typography-prose ol {
-  @apply my-4 list-decimal space-y-2 pl-6;
+  @apply my-4 list-decimal space-y-2 ps-6;
 }
 
 .typography-prose li {
@@ -119,7 +119,7 @@
 }
 
 .typography--align-start {
-  @apply text-left rtl:text-right;
+  @apply text-start;
 }
 
 .typography--align-center {
@@ -127,7 +127,7 @@
 }
 
 .typography--align-end {
-  @apply text-right rtl:text-left;
+  @apply text-end;
 }
 
 .typography--align-justify {

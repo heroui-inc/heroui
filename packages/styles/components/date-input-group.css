@@ -62,20 +62,20 @@
 
   /* Remove border radius on left side when prefix is present */
   .date-input-group:has([data-slot="date-input-group-prefix"]) & {
-    @apply rounded-l-none pl-2;
+    @apply rounded-s-none ps-2;
   }
 
   /* Remove border radius on right side when suffix is present */
   .date-input-group:has([data-slot="date-input-group-suffix"]) & {
-    @apply rounded-r-none pr-2;
+    @apply rounded-e-none pe-2;
   }
 
   .date-input-group:has(.date-range-picker__range-separator) & {
     &[slot="start"] {
-      @apply flex-none pr-0;
+      @apply flex-none pe-0;
     }
     &[slot="end"] {
-      @apply pl-0;
+      @apply ps-0;
     }
   }
 
@@ -87,7 +87,7 @@
 }
 
 .date-input-group__input-container {
-  @apply flex flex-1 items-center scrollbar-none;
+  @apply flex flex-1 scrollbar-none items-center;
   width: fit-content;
   overflow-x: auto;
   overflow-y: clip;
@@ -131,12 +131,12 @@
 
 .date-input-group__prefix {
   @apply pointer-events-none shrink-0 text-field-placeholder;
-  @apply mr-0 ml-3 flex items-center;
+  @apply ms-3 me-0 flex items-center;
 }
 
 .date-input-group__suffix {
   @apply pointer-events-none shrink-0 text-field-placeholder;
-  @apply mr-3 flex items-center;
+  @apply me-3 flex items-center;
 }
 
 /* Variant property definitions */

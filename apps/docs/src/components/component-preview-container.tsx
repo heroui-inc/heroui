@@ -63,7 +63,7 @@ export function ComponentPreviewContainer({
       <div
         data-name={name}
         className={cn(
-          "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-t border-r border-l border-separator p-4 sm:p-10",
+          "preview not-prose relative min-h-[350px] w-full overflow-hidden rounded-t-xl border-s border-e border-t border-separator p-4 sm:p-10",
           isBgSolid && "bg-background",
           alignmentClasses[align],
           "flex",

@@ -75,7 +75,7 @@ export function FrameworksTabs({className}: {className?: string}) {
   // Spacing lives on the wrapper: since @heroui/styles 3.2.2 the ListContainer
   // is the visible pill (bg + radius), so padding on it distorts the pill.
   return (
-    <div className={cn("ml-auto pb-1.5", className)}>
+    <div className={cn("ms-auto pb-1.5", className)}>
       <Tabs selectedKey={selectedKey} onSelectionChange={handleTabChange}>
         <Tabs.ListContainer>
           <Tabs.List aria-label={dict.ariaLabel}>
@@ -83,7 +83,7 @@ export function FrameworksTabs({className}: {className?: string}) {
               className="whitespace-nowrap sm:h-6 data-[selected=true]:[&>svg]:text-sky-400"
               id="web"
             >
-              <Globe className="mr-1 size-4 shrink-0" />
+              <Globe className="me-1 size-4 shrink-0" />
               {dict.web}
               <Tabs.Indicator />
             </Tabs.Tab>
@@ -91,7 +91,7 @@ export function FrameworksTabs({className}: {className?: string}) {
               className="whitespace-nowrap sm:h-6 data-[selected=true]:[&>svg]:text-indigo-500"
               id="native"
             >
-              <Smartphone className="mr-1 size-4 shrink-0" />
+              <Smartphone className="me-1 size-4 shrink-0" />
               {dict.native}
               <Tabs.Indicator />
             </Tabs.Tab>

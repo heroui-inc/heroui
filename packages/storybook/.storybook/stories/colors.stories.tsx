@@ -36,7 +36,7 @@ const ColorItem = ({cssVariable, name, variable}: ColorItemProps) => {
         <code className="text-xs text-muted">{variable}</code>
       </div>
       {!!computedColor && (
-        <div className="text-right">
+        <div className="text-end">
           <code className="font-mono text-xs text-muted">{computedColor}</code>
         </div>
       )}

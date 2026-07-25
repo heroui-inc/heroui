@@ -24,8 +24,8 @@ export function XProfileDemo() {
           </div>
         </div>
       </Card.Header>
-      <Card.Content className="flex-row text-left">
-        <p className="pl-px text-sm font-medium">
+      <Card.Content className="flex-row text-start">
+        <p className="ps-px text-sm font-medium">
           Building the future of UI for web & mobile.&nbsp;
           <br />
           <span aria-label="confetti" role="img">

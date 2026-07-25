@@ -81,12 +81,12 @@
 
   /* Remove border radius on left side when decrement button is present */
   .number-field__group:has([slot="decrement"]) & {
-    @apply rounded-l-none;
+    @apply rounded-s-none;
   }
 
   /* Remove border radius on right side when increment button is present */
   .number-field__group:has([slot="increment"]) & {
-    @apply rounded-r-none;
+    @apply rounded-e-none;
   }
 
   /* Focus state - handled by group */
@@ -166,11 +166,11 @@
 }
 
 .number-field__increment-button {
-  @apply rounded-l-none rounded-r-field border-l border-field-placeholder/15;
+  @apply rounded-s-none rounded-e-field border-s border-field-placeholder/15;
 }
 
 .number-field__decrement-button {
-  @apply rounded-l-field rounded-r-none border-r border-field-placeholder/15;
+  @apply rounded-s-field rounded-e-none border-e border-field-placeholder/15;
 }
 
 /* Variant property definitions */

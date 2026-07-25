@@ -71,12 +71,12 @@
 
   /* Remove border radius on left side when prefix is present */
   .input-group:has([data-slot="input-group-prefix"]) & {
-    @apply rounded-l-none pl-0;
+    @apply rounded-s-none ps-0;
   }
 
   /* Remove border radius on right side when suffix is present */
   .input-group:has([data-slot="input-group-suffix"]) & {
-    @apply rounded-r-none pr-0;
+    @apply rounded-e-none pe-0;
   }
 
   /* Focus state - handled by group */
@@ -112,12 +112,12 @@
 }
 
 .input-group__prefix {
-  @apply flex h-full items-center justify-center rounded-l-field rounded-r-none bg-transparent px-3 text-field-placeholder;
+  @apply flex h-full items-center justify-center rounded-s-field rounded-e-none bg-transparent px-3 text-field-placeholder;
   border-width: var(--border-width-field);
   border-color: var(--field-border);
   border-style: solid;
-  border-right-color: var(--field-border);
-  border-left: none;
+  border-inline-end-color: var(--field-border);
+  border-inline-start: none;
   border-top: none;
   border-bottom: none;
 
@@ -138,12 +138,12 @@
 }
 
 .input-group__suffix {
-  @apply flex h-full items-center justify-center rounded-l-none rounded-r-field bg-transparent px-3 text-field-placeholder;
+  @apply flex h-full items-center justify-center rounded-s-none rounded-e-field bg-transparent px-3 text-field-placeholder;
   border-width: var(--border-width-field);
   border-color: var(--field-border);
   border-style: solid;
-  border-left-color: var(--field-border);
-  border-right: none;
+  border-inline-start-color: var(--field-border);
+  border-inline-end: none;
   border-top: none;
   border-bottom: none;
 

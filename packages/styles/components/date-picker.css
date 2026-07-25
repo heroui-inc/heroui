@@ -80,3 +80,8 @@
     @apply transition-[opacity,transform] will-change-[opacity,transform];
   }
 }
+
+.date-picker__popover .calendar__nav-button-icon,
+.date-picker__popover .range-calendar__nav-button-icon {
+  @apply rotate-0;
+}

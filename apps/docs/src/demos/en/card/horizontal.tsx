@@ -13,12 +13,12 @@ export function Horizontal() {
       </div>
       <div className="flex flex-1 flex-col gap-3">
         <Card.Header className="gap-1">
-          <Card.Title className="pr-8">Become an ACME Creator!</Card.Title>
+          <Card.Title className="pe-8">Become an ACME Creator!</Card.Title>
           <Card.Description>
             Lorem ipsum dolor sit amet consectetur. Sed arcu donec id aliquam dolor sed amet
             faucibus etiam.
           </Card.Description>
-          <CloseButton aria-label="Close banner" className="absolute top-3 right-3" />
+          <CloseButton aria-label="Close banner" className="absolute end-3 top-3" />
         </Card.Header>
         <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col">

@@ -75,7 +75,7 @@
 }
 
 .calendar-year-picker__trigger-indicator {
-  @apply text-xs text-accent-soft-foreground;
+  @apply text-xs text-accent-soft-foreground rtl:[transform:rotate(180deg)];
 
   transition: transform 150ms var(--ease-out);
   @apply motion-reduce:transition-none;
@@ -97,7 +97,7 @@
  * are set via JS to match the sibling day grid element.
  * -------------------------------------------------------------------------- */
 .calendar-year-picker__year-grid {
-  @apply pointer-events-none absolute right-0 left-0 grid content-start gap-1 overflow-y-auto p-1 opacity-0 scrollbar;
+  @apply pointer-events-none absolute start-0 end-0 grid scrollbar content-start gap-1 overflow-y-auto p-1 opacity-0;
   grid-template-columns: repeat(3, 1fr);
 
   /* When closing: instant (no transition) */

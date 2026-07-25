@@ -133,8 +133,8 @@
       }
 
       &::before {
-        @apply rounded-tl-2xl rounded-bl-2xl;
-        left: -0.625rem;
+        @apply rounded-ss-2xl rounded-es-2xl;
+        inset-inline-start: -0.625rem;
         box-shadow:
           inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
           inset 0 1px 0 0 rgba(0, 0, 0, 0.1),
@@ -145,8 +145,8 @@
       }
 
       &::after {
-        @apply rounded-tr-2xl rounded-br-2xl;
-        right: -0.625rem;
+        @apply rounded-se-2xl rounded-ee-2xl;
+        inset-inline-end: -0.625rem;
         box-shadow:
           inset -1px 0 0 0 rgba(0, 0, 0, 0.1),
           inset 0 1px 0 0 rgba(0, 0, 0, 0.1),
@@ -217,14 +217,14 @@
       /* Edge caps for vertical orientation */
       &::before,
       &::after {
-        @apply left-0 w-full;
+        @apply start-0 w-full;
         height: 0.625rem; /* Half thumb height + 2px gap */
       }
 
       &::before {
         bottom: -0.625rem;
-        border-bottom-left-radius: 999px;
-        border-bottom-right-radius: 999px;
+        border-end-start-radius: 999px;
+        border-end-end-radius: 999px;
         /* Left, right, and bottom borders for bottom cap */
         box-shadow:
           inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
@@ -237,8 +237,8 @@
 
       &::after {
         top: -0.625rem;
-        border-top-left-radius: 999px;
-        border-top-right-radius: 999px;
+        border-start-start-radius: 999px;
+        border-start-end-radius: 999px;
         /* Left, right, and top borders for top cap */
         box-shadow:
           inset 1px 0 0 0 rgba(0, 0, 0, 0.1),
@@ -249,6 +249,7 @@
     }
 
     .color-slider__thumb {
+      /* Cross-axis centering; React Aria applies a physical translateX(-50%), so keep left-1/2 for RTL correctness */
       @apply left-1/2 size-4;
     }
   }
