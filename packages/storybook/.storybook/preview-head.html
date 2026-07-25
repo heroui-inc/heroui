@@ -5,6 +5,20 @@
   rel="stylesheet"
 />
 
+<script>
+  try {
+    if (
+      Object.prototype.hasOwnProperty.call(globalThis, "__REACT_DEVTOOLS_GLOBAL_HOOK__") &&
+      globalThis.__REACT_DEVTOOLS_GLOBAL_HOOK__ == null
+    ) {
+      delete globalThis.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+    }
+  } catch {
+    // ignore
+  }
+</script>
+<script src="/react-scan/install-hook.global.js"></script>
+
 <style>
   html,
   body,
