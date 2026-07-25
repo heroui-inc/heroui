@@ -182,32 +182,31 @@ const AutocompleteIndicator = <E extends keyof React.JSX.IntrinsicElements = "sv
   const {slots} = use(AutocompleteContext);
   const state = use(SelectStateContext);
 
-  if (children && React.isValidElement(children)) {
-    return React.cloneElement(
-      children as React.ReactElement<{
-        className?: string;
-        "data-slot"?: "autocomplete-indicator";
-        "data-open"?: Booleanish;
-      }>,
-      {
-        ...(props as any),
-        className: composeSlotClassName(slots?.indicator, className),
-        "data-slot": "autocomplete-indicator",
-        "data-open": dataAttr(state?.isOpen),
-      },
-    );
-  }
-
-  return (
-    <ButtonPrimitive>
+  const indicator =
+    children && React.isValidElement(children) ? (
+      React.cloneElement(
+        children as React.ReactElement<{
+          className?: string;
+          "data-slot"?: "autocomplete-indicator";
+          "data-open"?: Booleanish;
+        }>,
+        {
+          ...(props as any),
+          className: composeSlotClassName(slots?.indicator, className),
+          "data-slot": "autocomplete-indicator",
+          "data-open": dataAttr(state?.isOpen),
+        },
+      )
+    ) : (
       <IconChevronDown
         className={composeSlotClassName(slots?.indicator, className)}
         data-open={dataAttr(state?.isOpen)}
         data-slot="autocomplete-default-indicator"
         {...(props as any)}
       />
-    </ButtonPrimitive>
-  );
+    );
+
+  return <ButtonPrimitive>{indicator}</ButtonPrimitive>;
 };
 
 /* -------------------------------------------------------------------------------------------------
