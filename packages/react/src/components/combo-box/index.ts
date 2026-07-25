@@ -19,9 +19,9 @@ export const ComboBox = Object.assign(ComboBoxRoot, {
   Popover: ComboBoxPopover,
 });
 
-export type ComboBox<T extends object = object> = {
-  Props: ComponentProps<typeof ComboBoxRoot<T>>;
-  RootProps: ComponentProps<typeof ComboBoxRoot<T>>;
+export type ComboBox<T extends object = object, M extends "single" | "multiple" = "single"> = {
+  Props: ComponentProps<typeof ComboBoxRoot<T, M>>;
+  RootProps: ComponentProps<typeof ComboBoxRoot<T, M>>;
   InputGroupProps: ComponentProps<typeof ComboBoxInputGroup>;
   ValueProps: ComponentProps<typeof ComboBoxValue<T>>;
   TriggerProps: ComponentProps<typeof ComboBoxTrigger>;
@@ -38,6 +38,7 @@ export type {
   ComboBoxRootProps as ComboBoxProps,
   ComboBoxInputGroupProps,
   ComboBoxValueProps,
+  ComboBoxValueRenderProps,
   ComboBoxTriggerProps,
   ComboBoxPopoverProps,
 } from "./combo-box";

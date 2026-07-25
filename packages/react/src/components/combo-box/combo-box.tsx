@@ -4,6 +4,7 @@ import type {SurfaceVariants} from "../surface";
 import type {ComboBoxVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 import type {ButtonProps} from "react-aria-components/Button";
+import type {ComboBoxValueRenderProps} from "react-aria-components/ComboBox";
 
 import {comboBoxVariants} from "@heroui/styles";
 import React, {createContext, use} from "react";
@@ -184,6 +185,7 @@ export type {
   ComboBoxRootProps,
   ComboBoxInputGroupProps,
   ComboBoxValueProps,
+  ComboBoxValueRenderProps,
   ComboBoxTriggerProps,
   ComboBoxPopoverProps,
 };
