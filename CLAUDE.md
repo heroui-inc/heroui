@@ -9,10 +9,10 @@ HeroUI v3 is a modern React UI library built with Tailwind CSS v4, using a pnpm 
 ### Key Technical Stack
 
 - **Node.js**: v22+ required
-- **pnpm**: v10.9.0 (package manager)
+- **pnpm**: v10.26.2 (package manager)
 - **React**: v19+
-- **Tailwind CSS**: v4.1.4
-- **TypeScript**: v5.8.3
+- **Tailwind CSS**: v4.1.18
+- **TypeScript**: v5.9.3
 - **Turborepo**: Build orchestration
 - **Storybook**: Component development
 - **Vitest**: Testing framework
@@ -56,7 +56,7 @@ pnpm typecheck
 ### Package-Specific Commands
 
 - Use `--filter` flag with package name: `pnpm build --filter=@heroui/react`
-- Main packages: `@heroui/react`, `@heroui/docs`, `@heroui/storybook`
+- Main packages: `@heroui/react`, `@heroui/styles`, `@heroui/docs`, `@heroui/storybook`
 
 ## Git Commit Convention
 
@@ -97,7 +97,8 @@ git commit -m "ci: add Claude Code GitHub Action workflow"
 ├── apps/
 │   └── docs/          # Documentation site (Next.js + Fumadocs)
 ├── packages/
-│   ├── react/         # Main UI component library
+│   ├── react/         # Main UI component library (@heroui/react)
+│   ├── styles/        # CSS styles & variants (@heroui/styles)
 │   ├── standard/      # Shared ESLint, Prettier, TypeScript configs
 │   ├── storybook/     # Storybook configuration
 │   └── vitest/        # Shared Vitest configurations
@@ -361,24 +362,11 @@ export {ComponentRoot as Root, ComponentItem as Item, ...};
 
 ### Current Components
 
-- `accordion`: Collapsible content sections
-- `alert`: Alert messages with compound components
-- `avatar`: User avatars with Radix UI
-- `button`: Button with variants and sizes
-- `checkbox`: Checkbox with compound components (uses external Label/Description)
-- `chip`: Small informational badges
-- `description`: Description text for form fields
-- `field-error`: Error messages for form fields
-- `fieldset`: Form field grouping components (Fieldset, Legend, FieldGroup, Field, CheckboxField)
-- `label`: Label text for form fields
-- `link`: Styled anchor links
-- `menu`: Dropdown menu system
-- `popover`: Popover overlays
-- `spinner`: Loading indicators
-- `tabs`: Tab navigation
-- `typography`: Typography component for headings, body copy, and prose
-- `textfield`: Text input field with compound components
-- `tooltip`: Hover tooltips
+**Completed**: accordion, alert, alert-dialog, autocomplete, avatar, badge, breadcrumbs, button, button-group, calendar, card, checkbox, checkbox-group, chip, close-button, color-area, color-field, color-picker, color-slider, color-swatch, color-swatch-picker, combo-box, date-field, date-picker, date-range-picker, description, disclosure, disclosure-group, drawer, dropdown, empty-state, error-message, field-error, fieldset, form, header, input, input-group, input-otp, kbd, label, link, list-box, list-box-item, list-box-section, menu, menu-item, menu-section, meter, modal, number-field, pagination, popover, progress-bar, progress-circle, radio, radio-group, range-calendar, scroll-shadow, search-field, select, separator, skeleton, slider, spinner, surface, switch, switch-group, table, tabs, tag, tag-group, textarea, textfield, time-field, toast, toggle-button, toggle-button-group, toolbar, tooltip, typography
+
+**In Progress**: calendar-year-picker
+
+> Source of truth: `packages/react/src/components/index.ts`.
 
 ## Development Workflow
 
