@@ -301,8 +301,8 @@ importers:
         specifier: 3.4.0
         version: 3.4.0
       tailwind-variants:
-        specifier: 3.2.2
-        version: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.3.0)
+        specifier: 3.3.0
+        version: 3.3.0(tailwind-merge@3.4.0)(tailwindcss@4.3.0)
       ts-morph:
         specifier: 27.0.2
         version: 27.0.2
@@ -392,8 +392,8 @@ importers:
         specifier: 3.4.0
         version: 3.4.0
       tailwind-variants:
-        specifier: 3.2.2
-        version: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
+        specifier: 3.3.0
+        version: 3.3.0(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
     devDependencies:
       '@heroui/standard':
         specifier: workspace:*
@@ -467,8 +467,8 @@ importers:
         specifier: 0.4.3
         version: 0.4.3(@types/react@19.2.14)(next@16.2.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(rollup@4.54.0)
       tailwind-variants:
-        specifier: ^3.2.2
-        version: 3.2.2(tailwind-merge@3.6.0)(tailwindcss@4.3.0)
+        specifier: ^3.3.0
+        version: 3.3.0(tailwind-merge@3.6.0)(tailwindcss@4.3.0)
     devDependencies:
       '@heroui/standard':
         specifier: workspace:*
@@ -522,8 +522,8 @@ importers:
   packages/styles:
     dependencies:
       tailwind-variants:
-        specifier: 3.2.2
-        version: 3.2.2(tailwind-merge@3.6.0)(tailwindcss@4.3.0)
+        specifier: 3.3.0
+        version: 3.3.0(tailwind-merge@3.6.0)(tailwindcss@4.3.0)
       tw-animate-css:
         specifier: 1.4.0
         version: 1.4.0
@@ -6910,14 +6910,16 @@ packages:
   tailwind-merge@3.6.0:
     resolution: {integrity: sha512-uxL7qAVQriqRQPAyK3pj66VqskWqoZ37PW94jwOTwNfq/z9oyu1V+eqrZqtR2+fCiXdYOZe/Modt8GtvqNzu+w==}
 
-  tailwind-variants@3.2.2:
-    resolution: {integrity: sha512-Mi4kHeMTLvKlM98XPnK+7HoBPmf4gygdFmqQPaDivc3DpYS6aIY6KiG/PgThrGvii5YZJqRsPz0aPyhoFzmZgg==}
-    engines: {node: '>=16.x', pnpm: '>=7.x'}
+  tailwind-variants@3.3.0:
+    resolution: {integrity: sha512-t1QsB42dcwUdaCEArO0tRZcP0nbCcAmJKRYCs7jmwYSFOCXlGqgO8c0TrCYm9OranYmT6i9YOi8LFo2gxmxnow==}
+    engines: {node: '>=16.9.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwind-merge: '>=3.0.0'
       tailwindcss: '*'
     peerDependenciesMeta:
       tailwind-merge:
+        optional: true
+      tailwindcss:
         optional: true
 
   tailwindcss@4.1.18:
@@ -14530,23 +14532,20 @@ snapshots:
 
   tailwind-merge@3.6.0: {}
 
-  tailwind-variants@3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18):
-    dependencies:
+  tailwind-variants@3.3.0(tailwind-merge@3.4.0)(tailwindcss@4.1.18):
+    optionalDependencies:
+      tailwind-merge: 3.4.0
       tailwindcss: 4.1.18
+
+  tailwind-variants@3.3.0(tailwind-merge@3.4.0)(tailwindcss@4.3.0):
     optionalDependencies:
       tailwind-merge: 3.4.0
-
-  tailwind-variants@3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.3.0):
-    dependencies:
       tailwindcss: 4.3.0
-    optionalDependencies:
-      tailwind-merge: 3.4.0
 
-  tailwind-variants@3.2.2(tailwind-merge@3.6.0)(tailwindcss@4.3.0):
-    dependencies:
-      tailwindcss: 4.3.0
+  tailwind-variants@3.3.0(tailwind-merge@3.6.0)(tailwindcss@4.3.0):
     optionalDependencies:
       tailwind-merge: 3.6.0
+      tailwindcss: 4.3.0
 
   tailwindcss@4.1.18: {}
 

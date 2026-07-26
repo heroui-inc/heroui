@@ -67,7 +67,7 @@
     "react-aria": "^3.50.0",
     "react-aria-components": "^1.19.0",
     "tailwind-merge": "3.4.0",
-    "tailwind-variants": "3.2.2"
+    "tailwind-variants": "3.3.0"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
