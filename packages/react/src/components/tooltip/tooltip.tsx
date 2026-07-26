@@ -63,7 +63,7 @@ const markButtonGroupTrigger = (children: ReactNode): ReactNode => {
   });
 };
 
-const TooltipRoot = ({
+const TooltipRoot: React.FC<TooltipRootProps> = ({
   children,
   closeDelay,
   delay,
