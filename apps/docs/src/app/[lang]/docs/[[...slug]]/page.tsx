@@ -8,8 +8,7 @@ import {createRelativeLink} from "fumadocs-ui/mdx";
 import {notFound} from "next/navigation";
 import {Suspense, cache} from "react";
 
-import {CopyNativeSetupPrompt} from "@/components/ai/copy-native-setup-prompt";
-import {CopySetupPrompt} from "@/components/ai/copy-setup-prompt";
+import {CopyNativeSetupPrompt, CopySetupPrompt} from "@/components/ai/copy-setup-prompt";
 import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
 import {ComponentPreview, ComponentPreviewFallback} from "@/components/component-preview";
