@@ -8,6 +8,8 @@ import {createRelativeLink} from "fumadocs-ui/mdx";
 import {notFound} from "next/navigation";
 import {Suspense, cache} from "react";
 
+import {CopyNativeSetupPrompt} from "@/components/ai/copy-native-setup-prompt";
+import {CopySetupPrompt} from "@/components/ai/copy-setup-prompt";
 import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
 import {ComponentPreview, ComponentPreviewFallback} from "@/components/component-preview";
@@ -58,6 +60,12 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
 
   const MDXContent = page.data.body;
   const isComponentStatusIcon = page.data.icon && componentStatusIcons.includes(page.data.icon);
+  const showCopyPrompt =
+    page.url.endsWith("/react/getting-started") ||
+    page.url.endsWith("/react/getting-started/quick-start");
+  const showNativeCopyPrompt =
+    page.url.endsWith("/native/getting-started") ||
+    page.url.endsWith("/native/getting-started/quick-start");
 
   // TODO: add github last edit
   // const lastEditTime = await getGithubLastEdit({
@@ -128,6 +136,8 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
             </DocsTitle>
             {page.data.toc.length > 0 && (
               <div className="flex items-center gap-2">
+                {!!showCopyPrompt && <CopySetupPrompt />}
+                {!!showNativeCopyPrompt && <CopyNativeSetupPrompt />}
                 <ViewOptions markdownUrl={`${page.url}.mdx`} />
               </div>
             )}
