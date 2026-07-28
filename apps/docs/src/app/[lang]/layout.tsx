@@ -65,8 +65,11 @@ export default async function Layout({
 }
 
 export const metadata: Metadata = {
+  // No `canonical` here on purpose: layout metadata is inherited by every page
+  // below it, so a canonical defined at this level would point localized and
+  // non-home routes at the home page and exclude them from the index. Each page
+  // declares its own canonical through `getLocalizedAlternates`.
   alternates: {
-    canonical: __BASE_URL__.toString(),
     types: {
       "application/rss+xml": [
         {
