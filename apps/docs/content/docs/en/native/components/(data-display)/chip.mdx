@@ -27,6 +27,7 @@ import { Chip } from 'heroui-native';
 ```
 
 - **Chip**: Main container that displays a compact element
+- **Chip.Background**: Optional theme-aware background container rendered behind the chip surface. Mounted automatically for the `secondary` variant, and for the `primary`/`soft` variants with `color="default"`, when the active theme registers default background content (e.g. `glass`). Replace or remove it via the `background` prop.
 - **Chip.Label**: Text content of the chip
 
 ## Usage
@@ -167,7 +168,18 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | `color`             | `'accent' \| 'default' \| 'success' \| 'warning' \| 'danger'` | `'accent'`  | Color theme of the chip                                                                   |
 | `className`         | `string`                                                      | -           | Additional CSS classes to apply                                                           |
 | `animation`         | `"disable-all" \| undefined`                                  | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
+| `background` | `React.ReactNode` | - | Background layer behind the chip surface. `undefined` renders the theme-aware default for the `secondary` variant and the `primary`/`soft` variants with `color="default"`; custom node replaces it; `null` removes it |
 | `...PressableProps` | `PressableProps`                                              | -           | All Pressable props are supported                                                         |
+
+### Chip.Background
+
+Absolute-fill container rendered behind the chip surface. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content inside the background container |
+| `className`    | `string`          | -       | Additional CSS classes                         |
+| `...ViewProps` | `ViewProps`       | -       | All standard View props are supported          |
 
 ### Chip.Label
 

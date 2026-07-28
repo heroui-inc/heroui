@@ -117,6 +117,20 @@ import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
 See the full example with a sticky footer (`BottomSheetFooter`) in the [GitHub repository](<https://github.com/heroui-inc/heroui-native/blob/main/example/src/components/bottom-sheet/scrollable-with-snap-points.tsx>).
 
+### Blur Overlay
+
+Use the built-in `blur` variant for an animated blur backdrop. iOS only, requires the optional `expo-blur` package; other platforms (or a missing package) fall back to the default solid backdrop. When the library theme is `glass`, the blur variant is used by default.
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>...</BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay variant="blur" blurViewProps={{ intensity: 40 }} />
+    <BottomSheet.Content>...</BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
 ### Custom Overlay
 
 Replace the default overlay with custom content like blur effects.
@@ -295,7 +309,9 @@ Animation configuration for bottom sheet root component. Can be:
 | `className`             | `string`                                               | -       | Additional CSS classes for overlay                           |
 | `style`                 | `ViewStyle`                                            | -       | Additional styles for overlay container                      |
 | `animation`             | `Omit<PopupOverlayAnimation, 'entering' \| 'exiting'>` | -       | Animation configuration                                      |
-| `isAnimatedStyleActive` | `boolean`                                              | `true`  | Whether animated styles (react-native-reanimated) are active |
+| `variant`               | `'default' \| 'blur'`                                  | `'default'` (`'blur'` when the library theme is `glass`) | Overlay variant. `'blur'` renders an animated blur backdrop (iOS only, requires `expo-blur`; falls back to `'default'` otherwise) |
+| `blurViewProps`         | `BlurViewProps`                                        | -       | Props forwarded to the BlurView rendered by the `'blur'` variant. `intensity` sets the maximum animated blur intensity (default: 75 dark / 50 light) |
+| `isAnimatedStyleActive` | `boolean`                                              | `true` (`false` for the `'blur'` variant) | Whether animated styles (react-native-reanimated) are active |
 | `isCloseOnPress`        | `boolean`                                              | `true`  | Whether pressing overlay closes bottom sheet                 |
 | `...PressableProps`     | `PressableProps`                                       | -       | All standard React Native Pressable props are supported      |
 

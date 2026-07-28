@@ -28,6 +28,7 @@ import { Avatar } from 'heroui-native';
 ```
 
 - **Avatar**: Main container that manages avatar display state. Provides size and color context to child components. Supports animation configuration to control all child animations.
+- **Avatar.Background**: Optional theme-aware background container rendered behind the avatar content. Mounted automatically for the `default` variant, and for the `soft` variant with `color="default"`, when the active theme registers default background content (e.g. `glass`). Replace or remove it via the `background` prop.
 - **Avatar.Image**: Optional image component that displays the avatar image. Handles loading states and errors automatically with opacity-based fade-in animation.
 - **Avatar.Fallback**: Optional fallback component shown when image fails to load or is unavailable. Displays a default person icon when no children are provided. Supports configurable entering animations with delay support.
 
@@ -272,7 +273,18 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | `className`    | `string`                                                      | -           | Additional CSS classes to apply                                                           |
 | `animation`    | `"disable-all"` \| `undefined`                                | `undefined` | Animation configuration. Use `"disable-all"` to disable all animations including children |
 | `alt`          | `string`                                                      | `'Avatar'`  | Alternative text description for accessibility                                            |
+| `background` | `React.ReactNode` | - | Background layer behind the avatar content. `undefined` renders the theme-aware default for the `default` variant and the `soft` variant with `color="default"`; custom node replaces it; `null` removes it |
 | `...ViewProps` | `ViewProps`                                                   | -           | All standard React Native View props are supported                                        |
+
+### Avatar.Background
+
+Absolute-fill container rendered behind the avatar content. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content inside the background container |
+| `className`    | `string`          | -       | Additional CSS classes                         |
+| `...ViewProps` | `ViewProps`       | -       | All standard View props are supported          |
 
 ### Avatar.Image
 
