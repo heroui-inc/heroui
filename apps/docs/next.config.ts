@@ -10,6 +10,13 @@ import {getRedirects} from "./next-redirects";
 
 const withMDX = createMDX();
 
+// Preview and development deployments serve the same content as production on a
+// different host, so they must opt out of indexing. Anything other than an
+// explicit non-production value stays indexable: a missing env var must never
+// silently de-index the production site.
+const appEnv = process.env["NEXT_PUBLIC_APP_ENV"];
+const isIndexable = appEnv !== "preview" && appEnv !== "development";
+
 const config: NextConfig = {
   compress: true,
   experimental: {
@@ -30,7 +37,7 @@ const config: NextConfig = {
         headers: [
           {
             key: "X-Robots-Tag",
-            value: "index, follow",
+            value: isIndexable ? "index, follow" : "noindex, nofollow",
           },
         ],
         source: "/:path*",
