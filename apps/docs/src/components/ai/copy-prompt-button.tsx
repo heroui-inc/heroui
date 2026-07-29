@@ -2,10 +2,9 @@
 
 import {Button} from "@heroui/react";
 import {useCopyButton} from "fumadocs-ui/utils/use-copy-button";
+import Image from "next/image";
 
 import {useDictionary} from "@/hooks/use-dictionary";
-
-import {Iconify} from "../iconify";
 
 /**
  * Props for the {@link CopyPromptButton} component.
@@ -42,17 +41,22 @@ export function CopyPromptButton({prompt}: CopyPromptButtonProps) {
       variant="tertiary"
       onClick={onClick}
     >
-      {checked ? (
-        <>
-          <Iconify icon="check" />
-          {dict.copied}
-        </>
-      ) : (
-        <>
-          <Iconify icon="copy" />
-          {dict.copy}
-        </>
-      )}
+      <span aria-hidden="true" className="flex items-center">
+        {["/images/mcp-cursor.png", "/images/mcp-claude.png", "/images/mcp-openai.png"].map(
+          (src, i) => (
+            <Image
+              key={src}
+              alt=""
+              className="size-5 shrink-0 rounded-full border border-white/25 object-cover"
+              height={20}
+              src={src}
+              style={{marginLeft: i > 0 ? -6 : 0, zIndex: 3 - i}}
+              width={20}
+            />
+          ),
+        )}
+      </span>
+      {checked ? dict.copied : dict.copy}
     </Button>
   );
 }
