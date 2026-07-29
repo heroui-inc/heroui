@@ -11,6 +11,7 @@ import {
 } from "react-aria-components/TagGroup";
 
 import {composeTwRenderProps} from "../../utils/compose";
+import {FieldSlotsGate} from "../../utils/field-slots-gate";
 
 /* -------------------------------------------------------------------------------------------------
  * TagGroup Context
@@ -35,17 +36,13 @@ const TagGroupRoot = ({children, className, size, variant, ...restProps}: TagGro
   const slots = useMemo(() => tagGroupVariants(), []);
 
   return (
-    <TagGroupContext
-      value={{
-        slots,
-        size,
-        variant,
-      }}
-    >
-      <TagGroupPrimitive className={slots.base({className})} data-slot="tag-group" {...restProps}>
-        {children}
-      </TagGroupPrimitive>
-    </TagGroupContext>
+    <FieldSlotsGate>
+      <TagGroupContext value={{slots, size, variant}}>
+        <TagGroupPrimitive className={slots.base({className})} data-slot="tag-group" {...restProps}>
+          {children}
+        </TagGroupPrimitive>
+      </TagGroupContext>
+    </FieldSlotsGate>
   );
 };
 

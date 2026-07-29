@@ -13,7 +13,6 @@ export const autocompleteVariants = tv({
     filter: "autocomplete__filter",
     indicator: "autocomplete__indicator",
     popover: "autocomplete__popover",
-    popoverDialog: "autocomplete__popover-dialog",
     trigger: "autocomplete__trigger",
     value: "autocomplete__value",
   },

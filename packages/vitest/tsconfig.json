@@ -1,9 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@heroui/standard/tsconfig/base.json",
-  "compilerOptions": {
-    "baseUrl": "."
-  },
+  "compilerOptions": {},
   "include": ["src", "scripts"],
   "exclude": ["node_modules"]
 }

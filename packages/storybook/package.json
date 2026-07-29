@@ -20,7 +20,7 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-aria-components": "1.19.0",
-    "react-scan": "0.4.3",
+    "react-scan": "0.5.7",
     "tailwind-variants": "^3.3.0"
   },
   "devDependencies": {
