@@ -66,6 +66,12 @@ const ButtonGroupRoot = ({
       return child;
     }
 
+    // Host elements and the separator forward unknown props straight to the DOM, where React
+    // warns about the non-boolean attribute. Only stamp children that can consume the marker.
+    if (typeof child.type === "string" || child.type === ButtonGroupSeparator) {
+      return child;
+    }
+
     // Clone the child and add the special prop
     return React.cloneElement(child, {
       [BUTTON_GROUP_CHILD]: true,
