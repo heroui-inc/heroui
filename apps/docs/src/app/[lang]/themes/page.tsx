@@ -1,9 +1,12 @@
+import type {Metadata} from "next";
+
 import {Suspense} from "react";
 
 import {ProBanner} from "@/app/[lang]/(home)/components/pro-banner";
 import {CodePanelProvider} from "@/hooks/use-code-panel";
 import {DictionaryProvider} from "@/hooks/use-dictionary";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
+import {getLocalizedAlternates} from "@/lib/seo";
 
 import {
   AccentColorSelector,
@@ -17,6 +20,18 @@ import {MobileFooter} from "./components/mobile-footer";
 import {Onboarding} from "./components/onboarding";
 import {ThemeBuilderContent} from "./components/theme-builder-content";
 import {THEME_BUILDER_PAGE_ID, formRadiusOptions, radiusOptions} from "./constants";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{lang: string}>;
+}): Promise<Metadata> {
+  const {lang} = await params;
+
+  return {
+    alternates: getLocalizedAlternates({locale: lang, path: "/themes"}),
+  };
+}
 
 export default async function ThemeBuilderPage({params}: {params: Promise<{lang: string}>}) {
   const {lang} = await params;

@@ -15,6 +15,7 @@ import {getAllBlogPosts, getBlogPost, getRelatedPosts} from "@/lib/blog";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
 import {getTechArticleJsonLd} from "@/lib/json-ld";
+import {LOCALES, getLocalizedAlternates} from "@/lib/seo";
 import {getMDXComponents} from "@/mdx-components";
 
 import {PostCard} from "../post-card";
@@ -40,12 +41,17 @@ export async function generateMetadata({params}: BlogPostPageProps): Promise<Met
 
   if (!post) return {};
 
-  const url = `/${lang}/blog/${slug}`;
+  const path = `/blog/${slug}`;
+  // Untranslated posts are served in every locale from the default-locale file,
+  // so only locales with a real translation belong in the hreflang cluster.
+  const translatedLocales = LOCALES.filter(
+    (locale) => getBlogPost(slug, locale)?.locale === locale,
+  );
+  const alternates = getLocalizedAlternates({locale: lang, locales: translatedLocales, path});
+  const url = alternates.canonical;
 
   return {
-    alternates: {
-      canonical: url,
-    },
+    alternates,
     description: post.description,
     openGraph: {
       authors: [post.author],

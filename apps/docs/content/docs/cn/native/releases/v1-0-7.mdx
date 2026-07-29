@@ -1,0 +1,142 @@
+---
+title: v1.0.7
+description:
+  通过全新的 background 属性实现可替换的背景层，新增 GlassView 层组件，为 Dialog 与 Bottom Sheet 提供 blur 遮罩变体，Select 触发器改为字段样式，Toast 迁移至 overlay 令牌
+github:
+  pull: 457
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 7 月 28 日</span>
+</div>
+
+HeroUI Native v1.0.7 让组件表面变得可扩展：组件现在接受 `background` 属性，并暴露配套的背景复合部件，从而可将表面后方的层替换为任意节点。本版本还新增 `GlassView` 层组件、用于 Dialog 与 Bottom Sheet 的 `blur` 遮罩变体，并将 `expo-blur` 作为可选的对等依赖。这些都是扩展点——默认主题不注册任何背景内容，因此渲染结果不变。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## 新特性
+
+### 可替换的背景层
+
+组件此前会直接依据主题令牌渲染固定的不透明表面。在 v1.0.7 中，拥有表面的部件接受 `background` 属性，并暴露以其所背衬元素命名的背景复合部件。传入节点即可替换该层，或传入 `null` 将其移除。
+
+```tsx
+import { Button, GlassView } from "heroui-native";
+
+<Button
+  variant="secondary"
+  background={
+    <Button.Background>
+      <GlassView intensity={80} />
+    </Button.Background>
+  }
+>
+  Save changes
+</Button>
+
+// 完全移除该层
+<Button variant="secondary" background={null}>
+  Save changes
+</Button>
+```
+
+属性与部件配对规律清晰——`background` 位于 Button、Avatar、Switch、Chip、Checkbox、Input 与 SubMenu 的根组件上，位于 `Radio.Indicator`、`Slider.Track`、`Tabs.List`、`TagGroup.Item`、`InputOTP.Slot` 与 `Popover.Content` 的子部件上，其对应部件分别为 `Radio.IndicatorBackground`、`Slider.TrackBackground`、`Tabs.ListBackground`、`TagGroup.ItemBackground`、`InputOTP.SlotBackground` 与 `Popover.ContentBackground`。每个背景容器都是绝对填充视图，继承宿主元素的定位与裁剪，并接受 `fallbackColor` 主题令牌用于不支持原生模糊的平台。
+
+是否挂载默认层由 `--theme` CSS 变量决定，可使用 `useIsGlassTheme` 与 `useHasDefaultThemeBackground` 检测这一情况。HeroUI Native 附带的主题不注册任何背景内容，因此除非你自行注入，否则不会渲染任何内容；用于激活这些层的 `glass` 主题由 `heroui-native-pro/themes/glass` 提供。
+
+**相关 PR：** [#457](https://github.com/heroui-inc/heroui-native/pull/457)
+
+## ⚠️ 破坏性变更
+
+### Select 触发器改为字段外观
+
+`.select__trigger--variant-default` 在**所有**主题上从表面外观改为字段外观——此变更不受 `--theme` 限制。如果你依赖 Select 触发器与周围的 `Surface` 元素保持一致，它现在会转而与你的表单字段保持一致。
+
+**变更内容：**
+
+- `--radius-2xl` → `--radius-field`
+- `--color-surface` → `--color-field`
+- `--shadow-surface` → `--shadow-field`
+- 新增 `--color-field-border` 边框
+
+**迁移：**
+
+无需修改 API。若要恢复此前的表面外观，请覆盖 [Select](/docs/native/components/select) 触发器的样式：
+
+```tsx
+// 之前——触发器默认使用 surface 令牌渲染
+<Select.Trigger />
+
+// 之后——显式恢复表面外观
+<Select.Trigger className="rounded-2xl bg-surface border-0 shadow-surface" />
+```
+
+**相关 PR：** [#457](https://github.com/heroui-inc/heroui-native/pull/457)
+
+### Toast 遮罩令牌切换
+
+`.toast__root` 从 `--color-surface` 改为 `--color-overlay`，其默认标签颜色从 `--color-foreground` 改为 `--color-overlay-foreground`。
+
+在附带的主题中，这些令牌在亮色（`--white`）与暗色（`oklch(0.2103 0.0059 285.89)`）模式下都解析为相同的值，因此开箱即用**没有可见变化**。只有当你将 `--surface` 与 `--overlay`——或 `--foreground` 与 `--overlay-foreground`——覆盖为不同的值时才会有影响，此时 [Toast](/docs/native/components/toast) 会转而采用你的 overlay 值而非 surface 值。
+
+**迁移：**
+
+如果你曾为 Toast 自定义 `--surface`，请将该自定义移至 `--overlay`，或直接覆盖 Toast 类：
+
+```tsx
+// 之前——Toast 跟随 --surface / --foreground
+// 之后——Toast 跟随 --overlay / --overlay-foreground
+<Toast className="bg-surface" />
+```
+
+**相关 PR：** [#457](https://github.com/heroui-inc/heroui-native/pull/457)
+
+## 更新的文档
+
+以下文档页面已更新，以反映本版本的变更：
+
+- [Dialog](/docs/native/components/dialog) - 记录 `blur` 遮罩变体与 `blurViewProps`
+- [Bottom Sheet](/docs/native/components/bottom-sheet) - 记录 `blur` 遮罩变体与 `blurViewProps`
+- 为 [Button](/docs/native/components/button)、[Avatar](/docs/native/components/avatar)、[Checkbox](/docs/native/components/checkbox)、[Chip](/docs/native/components/chip)、[Input](/docs/native/components/input)、[InputOTP](/docs/native/components/input-otp)、[Menu](/docs/native/components/menu)、[Radio Group](/docs/native/components/radio-group)、[Slider](/docs/native/components/slider)、[Switch](/docs/native/components/switch)、[Tabs](/docs/native/components/tabs) 与 [TagGroup](/docs/native/components/tag-group) 新增背景层文档
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！
