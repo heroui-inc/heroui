@@ -85,6 +85,20 @@ Handle long content with scroll views.
 </Dialog>
 ```
 
+### Blur Backdrop
+
+Overlay with an animated blur backdrop. iOS only, requires the optional `expo-blur` package; other platforms (or a missing package) fall back to the default solid backdrop. When the library theme is `glass`, the blur variant is used by default.
+
+```tsx
+<Dialog isOpen={isOpen} onOpenChange={setIsOpen}>
+  <Dialog.Trigger>...</Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay variant="blur" blurViewProps={{ intensity: 60 }} />
+    <Dialog.Content>...</Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
 ### Form Dialog
 
 Dialog with text inputs and keyboard handling.
@@ -196,7 +210,9 @@ Animation configuration for dialog root component. Can be:
 | `className`             | `string`                 | -       | Additional CSS classes for overlay                           |
 | `style`                 | `ViewStyle`              | -       | Additional styles for overlay container                      |
 | `animation`             | `DialogOverlayAnimation` | -       | Animation configuration                                      |
-| `isAnimatedStyleActive` | `boolean`                | `true`  | Whether animated styles (react-native-reanimated) are active |
+| `variant`               | `'default' \| 'blur'`    | `'default'` (`'blur'` when the library theme is `glass`) | Overlay variant. `'blur'` renders an animated blur backdrop (iOS only, requires `expo-blur`; falls back to `'default'` otherwise) |
+| `blurViewProps`         | `BlurViewProps`          | -       | Props forwarded to the BlurView rendered by the `'blur'` variant. `intensity` sets the maximum animated blur intensity (default: 75 dark / 50 light) |
+| `isAnimatedStyleActive` | `boolean`                | `true` (`false` for the `'blur'` variant) | Whether animated styles (react-native-reanimated) are active |
 | `isCloseOnPress`        | `boolean`                | `true`  | Whether pressing overlay closes dialog                       |
 | `forceMount`            | `boolean`                | -       | Force mount when closed for animation purposes               |
 | `...PressableProps`     | `PressableProps`         | -       | All standard React Native Pressable props are supported      |

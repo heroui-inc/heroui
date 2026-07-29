@@ -223,6 +223,18 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | placeholderColorClassName | `string`                   | `"field-placeholder"` | Custom className for the placeholder text color              |
 | isBottomSheetAware        | `boolean`                  | `true`                | Whether the input automatically handles keyboard state when rendered inside a BottomSheet. Set to `false` to disable |
 | animation                 | `AnimationRoot`            | `undefined`           | Animation configuration for the input                        |
+| background                | `React.ReactNode`          | -                     | Background layer behind the text input. `undefined` renders the theme-aware default when the active theme registers default background content (fallback color follows the variant: primary → field token, secondary → default token); custom node replaces it; `null` removes it |
 | ...TextInputProps         | `TextInputProps`           | -                     | All standard React Native TextInput props are supported      |
 
 > **Note**: When used within a TextField component, Input automatically consumes form state (isDisabled, isInvalid) from TextField via the form-item-state context.
+
+### Input.Background
+
+Absolute-fill container rendered behind the text input. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop           | type              | default   | description                                                                                    |
+| -------------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------- |
+| children       | `React.ReactNode` | -         | Custom content inside the background container                                                 |
+| className      | `string`          | -         | Additional CSS classes                                                                         |
+| fallbackColor  | `ThemeColor`      | `'field'` | Theme color token used as the opaque fallback on platforms without native blur (Android / web) |
+| ...ViewProps   | `ViewProps`       | -         | All standard View props are supported                                                          |

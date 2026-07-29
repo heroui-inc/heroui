@@ -1,0 +1,142 @@
+---
+title: v1.0.7
+description:
+  Replaceable background layers via a new background prop, GlassView layer component, blur overlay variant for Dialog and Bottom Sheet, Select trigger field styling, Toast overlay tokens
+github:
+  pull: 457
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">July 28, 2026</span>
+</div>
+
+HeroUI Native v1.0.7 makes component surfaces extensible: components now accept a `background` prop and expose a matching background compound part, so the layer behind a surface can be replaced with any node. It also adds the `GlassView` layer component, a `blur` overlay variant for Dialog and Bottom Sheet, and `expo-blur` as an optional peer dependency. These are extension points — the default theme registers no background content, so rendering is unchanged.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It on Your Device
+
+<NativeTryOnDevice />
+
+## What's New
+
+### Replaceable Background Layers
+
+Components previously rendered a fixed opaque surface straight from theme tokens. In v1.0.7, the surface-owning part accepts a `background` prop and exposes a background compound part named after the element it backs. Pass a node to replace the layer, or `null` to remove it.
+
+```tsx
+import { Button, GlassView } from "heroui-native";
+
+<Button
+  variant="secondary"
+  background={
+    <Button.Background>
+      <GlassView intensity={80} />
+    </Button.Background>
+  }
+>
+  Save changes
+</Button>
+
+// remove the layer entirely
+<Button variant="secondary" background={null}>
+  Save changes
+</Button>
+```
+
+The prop and part pair up predictably — `background` sits on the root for Button, Avatar, Switch, Chip, Checkbox, Input, and SubMenu, and on the sub-part for `Radio.Indicator`, `Slider.Track`, `Tabs.List`, `TagGroup.Item`, `InputOTP.Slot`, and `Popover.Content`, whose parts are `Radio.IndicatorBackground`, `Slider.TrackBackground`, `Tabs.ListBackground`, `TagGroup.ItemBackground`, `InputOTP.SlotBackground`, and `Popover.ContentBackground`. Each background container is an absolute-fill view that inherits the host element's positioning and clipping, and accepts a `fallbackColor` theme token for platforms without native blur.
+
+Whether a default layer mounts is decided by the `--theme` CSS variable, with `useIsGlassTheme` and `useHasDefaultThemeBackground` available for detecting that case. The theme shipped with HeroUI Native registers no background content, so nothing renders unless you inject it yourself; the `glass` theme that activates these layers is provided by `heroui-native-pro/themes/glass`.
+
+**Related PR:** [#457](https://github.com/heroui-inc/heroui-native/pull/457)
+
+## ⚠️ Breaking Changes
+
+### Select Trigger Restyled to a Field Look
+
+`.select__trigger--variant-default` moves from a surface look to a field look on **every** theme — this change is not gated behind `--theme`. If you rely on the Select trigger matching surrounding `Surface` elements, it will now match your form fields instead.
+
+**What changed:**
+
+- `--radius-2xl` → `--radius-field`
+- `--color-surface` → `--color-field`
+- `--shadow-surface` → `--shadow-field`
+- Adds a `--color-field-border` border
+
+**Migration:**
+
+No API changes are required. To restore the previous surface appearance, override the styling on the [Select](/docs/native/components/select) trigger:
+
+```tsx
+// Before — trigger rendered with surface tokens by default
+<Select.Trigger />
+
+// After — restore the surface look explicitly
+<Select.Trigger className="rounded-2xl bg-surface border-0 shadow-surface" />
+```
+
+**Related PR:** [#457](https://github.com/heroui-inc/heroui-native/pull/457)
+
+### Toast Overlay Token Swap
+
+`.toast__root` moves from `--color-surface` to `--color-overlay`, and its default label color moves from `--color-foreground` to `--color-overlay-foreground`.
+
+In the shipped theme these tokens resolve to identical values in both light (`--white`) and dark (`oklch(0.2103 0.0059 285.89)`) modes, so there is **no visible change** out of the box. This only matters if you have overridden `--surface` and `--overlay` — or `--foreground` and `--overlay-foreground` — to different values, in which case [Toast](/docs/native/components/toast) will now pick up your overlay values instead of your surface values.
+
+**Migration:**
+
+If you customized `--surface` for Toast, move that customization to `--overlay`, or override the Toast class directly:
+
+```tsx
+// Before — Toast followed --surface / --foreground
+// After — Toast follows --overlay / --overlay-foreground
+<Toast className="bg-surface" />
+```
+
+**Related PR:** [#457](https://github.com/heroui-inc/heroui-native/pull/457)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Dialog](/docs/native/components/dialog) - Documented the `blur` overlay variant and `blurViewProps`
+- [Bottom Sheet](/docs/native/components/bottom-sheet) - Documented the `blur` overlay variant and `blurViewProps`
+- Background layer documentation added to [Button](/docs/native/components/button), [Avatar](/docs/native/components/avatar), [Checkbox](/docs/native/components/checkbox), [Chip](/docs/native/components/chip), [Input](/docs/native/components/input), [InputOTP](/docs/native/components/input-otp), [Menu](/docs/native/components/menu), [Radio Group](/docs/native/components/radio-group), [Slider](/docs/native/components/slider), [Switch](/docs/native/components/switch), [Tabs](/docs/native/components/tabs), and [TagGroup](/docs/native/components/tag-group)
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!

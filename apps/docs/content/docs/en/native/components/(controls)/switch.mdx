@@ -29,6 +29,7 @@ import { Switch } from 'heroui-native';
 ```
 
 - **Switch**: Main container that handles toggle state and user interaction. Renders default thumb if no children provided. Animates scale (on press) and background color based on selection state. Acts as a pressable area for toggling.
+- **Switch.Background**: Optional theme-aware background container rendered behind the switch content. Mounted automatically while the switch is unselected (selection animates an opaque accent color) when the active theme registers default background content (e.g. `glass`). Replace or remove it via the `background` prop.
 - **Switch.Thumb**: Optional sliding thumb element that moves between positions. Uses spring animation for smooth transitions. Can contain custom content like icons or be customized with different styles and animations.
 - **Switch.StartContent**: Optional content displayed on the left side of the switch. Typically used for icons or text that appear when switch is off. Positioned absolutely within the switch container.
 - **Switch.EndContent**: Optional content displayed on the right side of the switch. Typically used for icons or text that appear when switch is on. Positioned absolutely within the switch container.
@@ -207,6 +208,7 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | `animation`                 | `SwitchRootAnimation`                                                | -           | Animation configuration                                      |
 | `isAnimatedStyleActive`     | `boolean`                                                            | `true`      | Whether animated styles (react-native-reanimated) are active |
 | `onSelectedChange`          | `(isSelected: boolean) => void`                                      | -           | Callback fired when the switch selection state changes       |
+| `background` | `React.ReactNode` | - | Background layer behind the switch content. `undefined` renders the theme-aware default while unselected; custom node replaces it; `null` removes it |
 | `...AnimatedPressableProps` | `AnimatedProps<PressableProps>`                                      | -           | All React Native Reanimated Pressable props are supported    |
 
 #### SwitchRenderProps
@@ -232,6 +234,16 @@ Animation configuration for Switch component. Can be:
 | `scale.timingConfig`           | `WithTimingConfig`                       | `{ duration: 150 }`                                            | Animation timing configuration                  |
 | `backgroundColor.value`        | `[string, string]`                       | Uses theme colors                                              | Background color values [unselected, selected]  |
 | `backgroundColor.timingConfig` | `WithTimingConfig`                       | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | Animation timing configuration                  |
+
+### Switch.Background
+
+Absolute-fill container rendered behind the switch content. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content inside the background container |
+| `className`    | `string`          | -       | Additional CSS classes                         |
+| `...ViewProps` | `ViewProps`       | -       | All standard View props are supported          |
 
 ### Switch.Thumb
 

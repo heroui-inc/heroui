@@ -40,6 +40,7 @@ import { InputOTP } from 'heroui-native';
 - **InputOTP**: Main container that manages OTP input state, handles text changes, and provides context to child components. Manages focus, validation, and character input.
 - **InputOTP.Group**: Container for grouping multiple slots together. Use this to visually group related slots (e.g., groups of 3 digits).
 - **InputOTP.Slot**: Individual slot that displays a single character or placeholder. Each slot must have a unique index matching its position in the OTP sequence. When no children are provided, automatically renders SlotPlaceholder, SlotValue, and SlotCaret.
+- **InputOTP.SlotBackground**: Optional theme-aware background container rendered behind the slot content. Mounted automatically, with the active theme deciding the default content (e.g. `glass`); the fallback color follows the slot variant (`primary` → field token, `secondary` → default token). Replace or remove it via the `background` prop on `InputOTP.Slot`.
 - **InputOTP.SlotPlaceholder**: Text component that displays the placeholder character for a slot when it's empty. Used by default in Slot if no children provided.
 - **InputOTP.SlotValue**: Text component that displays the actual character value for a slot with animations. Used by default in Slot if no children provided.
 - **InputOTP.SlotCaret**: Animated caret indicator that shows the current input position. Place this inside a Slot to show where the user is currently typing.
@@ -327,7 +328,19 @@ You can find more examples in the [GitHub repository](https://github.com/heroui-
 | `children`     | `React.ReactNode` | -       | Custom slot content. If not provided, defaults to SlotPlaceholder, SlotValue, and SlotCaret |
 | `className`    | `string`          | -       | Additional CSS classes to apply                                                             |
 | `style`        | `ViewStyle`       | -       | Additional styles to apply                                                                  |
+| `background` | `React.ReactNode` | - | Background layer behind the slot content. `undefined` renders the theme-aware default (fallback color follows the variant: primary → field token, secondary → default token); custom node replaces it; `null` removes it |
 | `...ViewProps` | `ViewProps`       | -       | All standard React Native View props are supported                                          |
+
+### InputOTP.SlotBackground
+
+Absolute-fill container rendered behind the slot content. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop            | type              | default   | description                                                                                    |
+| --------------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------- |
+| `children`      | `React.ReactNode` | -         | Custom content inside the background container                                                 |
+| `className`     | `string`          | -         | Additional CSS classes                                                                         |
+| `fallbackColor` | `ThemeColor`      | `'field'` | Theme color token used as the opaque fallback on platforms without native blur (Android / web) |
+| `...ViewProps`  | `ViewProps`       | -         | All standard View props are supported                                                          |
 
 ### InputOTP.SlotPlaceholder
 

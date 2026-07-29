@@ -27,6 +27,7 @@ import { Checkbox } from 'heroui-native';
 ```
 
 - **Checkbox**: Main container that handles selection state and user interaction. Renders default indicator with animated checkmark if no children provided. Automatically detects surface context for proper styling. Features press scale animation that can be customized or disabled. Supports render function children to access state (`isSelected`, `isInvalid`, `isDisabled`).
+- **Checkbox.Background**: Optional theme-aware background container rendered behind the checkbox content. Mounted automatically for the `secondary` variant while not invalid, when the active theme registers default background content (e.g. `glass`). Replace or remove it via the `background` prop.
 - **Checkbox.Indicator**: Optional checkmark container with default slide, scale, opacity, and border radius animations when selected. Renders animated check icon with SVG path drawing animation if no children provided. All animations can be individually customized or disabled. Supports render function children to access state.
 
 ## Usage
@@ -227,6 +228,7 @@ You can find more examples in the [GitHub repository](<https://github.com/heroui
 | `animation`             | `CheckboxRootAnimation`                                                | -           | Animation configuration                                                   |
 | `isAnimatedStyleActive` | `boolean`                                                              | `true`      | Whether animated styles (react-native-reanimated) are active              |
 | `className`             | `string`                                                               | `undefined` | Additional CSS classes to apply                                           |
+| `background` | `React.ReactNode` | - | Background layer behind the checkbox content. `undefined` renders the theme-aware default for the `secondary` variant while not invalid; custom node replaces it; `null` removes it |
 | `...PressableProps`     | `PressableProps`                                                       | -           | All standard React Native Pressable props are supported (except disabled) |
 
 #### CheckboxRenderProps
@@ -251,6 +253,16 @@ Animation configuration for checkbox root component. Can be:
 | `state`              | `'disabled' \| 'disable-all' \| boolean` | -                   | Disable animations while customizing properties |
 | `scale.value`        | `[number, number]`                       | `[1, 0.96]`         | Scale values [unpressed, pressed]               |
 | `scale.timingConfig` | `WithTimingConfig`                       | `{ duration: 150 }` | Animation timing configuration                  |
+
+### Checkbox.Background
+
+Absolute-fill container rendered behind the checkbox content. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content inside the background container |
+| `className`    | `string`          | -       | Additional CSS classes                         |
+| `...ViewProps` | `ViewProps`       | -       | All standard View props are supported          |
 
 ### Checkbox.Indicator
 
