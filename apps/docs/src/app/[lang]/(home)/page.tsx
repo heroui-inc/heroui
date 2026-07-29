@@ -1,3 +1,5 @@
+import type {Metadata} from "next";
+
 import {buttonVariants} from "@heroui/react";
 import LinkRoot from "fumadocs-core/link";
 import {notFound} from "next/navigation";
@@ -7,6 +9,7 @@ import {StarsCount} from "@/components/github-link";
 import {GitHubIcon} from "@/icons/github";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
+import {getLocalizedAlternates} from "@/lib/seo";
 
 import {DemoShowcase} from "./components/demo-showcase";
 import {ProBanner} from "./components/pro-banner";
@@ -17,6 +20,18 @@ export const revalidate = false;
 
 export function generateStaticParams() {
   return i18n.languages.map((lang) => ({lang}));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{lang: string}>;
+}): Promise<Metadata> {
+  const {lang} = await params;
+
+  return {
+    alternates: getLocalizedAlternates({locale: lang}),
+  };
 }
 
 export default async function HomePage({params}: {params: Promise<{lang: string}>}) {

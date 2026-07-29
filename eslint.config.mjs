@@ -38,7 +38,6 @@ const config = defineConfig([
       "!.*.mjs",
       "!.*.ts",
       "!contentlayer.config.ts",
-      "!next-sitemap.config.ts",
     ],
   },
   ...baseConfig,

@@ -1,8 +1,27 @@
+import type {Metadata} from "next";
 import type {ReactNode} from "react";
 
 import {notFound} from "next/navigation";
 
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
+import {getLocalizedAlternates} from "@/lib/seo";
+
+// The showcase index itself is a client component, so its metadata is declared
+// here — without it the page would inherit the root layout's canonical.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{lang: string}>;
+}): Promise<Metadata> {
+  const {lang} = await params;
+  const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
+
+  return {
+    alternates: getLocalizedAlternates({locale: lang, path: "/showcase"}),
+    description: dict.showcase.description,
+    title: dict.showcase.heading,
+  };
+}
 
 export default async function ShowcaseLayout({
   children,

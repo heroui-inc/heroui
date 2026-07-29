@@ -27,6 +27,7 @@ import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {getComponentCount, getExampleCount} from "@/demos";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
+import {getLocalizedAlternates, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {
@@ -190,12 +191,13 @@ export async function generateMetadata(props: {
   // Ensure absolute URL for Open Graph
   const imageUrl = image.startsWith("http") ? image : new URL(image, siteConfig.siteUrl).toString();
 
-  const url = `/docs/${(params.slug ?? []).join("/")}`;
+  // `page.url` already carries the locale prefix (`/en/docs/...`), which is the
+  // URL actually served — the unprefixed `/docs/...` form permanently redirects.
+  const url = page.url;
+  const alternates = getLocalizedAlternates({locale: params.lang, path: stripLocale(url)});
 
   return {
-    alternates: {
-      canonical: url,
-    },
+    alternates,
     description: page.data.description,
     openGraph: {
       description: page.data.description,
