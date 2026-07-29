@@ -7,8 +7,8 @@
         "date": "2026-07-06"
       },
       {
-        "label": "HeroUI Native v1.0.6 — patch release",
-        "href": "/docs/native/releases/v1-0-6",
+        "label": "HeroUI Native v1.0.7 — patch release",
+        "href": "/docs/native/releases/v1-0-7",
         "date": "2026-07-21"
       }
     ],
@@ -96,7 +96,7 @@
     "themeSource": "Theme source"
   },
   "copyPrompt": {
-    "copy": "Copy prompt",
+    "copy": "Copy Prompt",
     "copied": "Copied",
     "ariaLabelCopy": "Copy prompt to clipboard",
     "ariaLabelCopied": "Prompt copied to clipboard"

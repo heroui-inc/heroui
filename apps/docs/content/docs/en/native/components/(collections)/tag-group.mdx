@@ -34,6 +34,7 @@ import { TagGroup } from 'heroui-native';
 - **TagGroup**: Main container that manages tag selection state, disabled keys, and remove functionality. Provides size and variant context to all child components.
 - **TagGroup.List**: Container for rendering the list of tags with optional empty state rendering.
 - **TagGroup.Item**: Individual tag within the group. Supports string children (auto-wrapped in TagGroup.ItemLabel), render function children, or custom layouts.
+- **TagGroup.ItemBackground**: Optional theme-aware background container rendered behind the tag surface. Mounted automatically for unselected items when the active theme registers default background content (e.g. `glass`); the fallback color follows the variant (`surface` or `default`). Replace or remove it via the `background` prop on `TagGroup.Item`.
 - **TagGroup.ItemLabel**: Text label for the tag. Automatically rendered when string children are provided, or can be used explicitly.
 - **TagGroup.ItemRemoveButton**: Remove button for the tag. Must be placed explicitly when removal is needed. Only functional when `onRemove` is provided to TagGroup.
 
@@ -326,6 +327,7 @@ Use `animation="disable-all"` to disable all animations including children. Omit
 | `isDisabled`        | `boolean`                                                               | -       | Whether this specific tag is disabled                                        |
 | `className`         | `string`                                                                | -       | Additional CSS classes for the tag                                           |
 | `style`             | `StyleProp<ViewStyle>`                                                  | -       | Additional styles for the tag                                                |
+| `background` | `React.ReactNode` | - | Background layer behind the tag surface. `undefined` renders the theme-aware default while unselected (fallback color follows the variant); custom node replaces it; `null` removes it |
 | `...PressableProps` | `PressableProps`                                                        | -       | All standard React Native Pressable props are supported                      |
 
 #### TagRenderProps
@@ -334,6 +336,16 @@ Use `animation="disable-all"` to disable all animations including children. Omit
 | ------------ | --------- | --------------------------------------------------------------------------- |
 | `isSelected` | `boolean` | Whether the tag is currently selected                                       |
 | `isDisabled` | `boolean` | Whether the tag is disabled (merged from root, disabledKeys, and item prop) |
+
+### TagGroup.ItemBackground
+
+Absolute-fill container rendered behind the tag surface. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping. The fallback color follows the active variant (`surface` → surface token, `default` → default token).
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content inside the background container |
+| `className`    | `string`          | -       | Additional CSS classes                         |
+| `...ViewProps` | `ViewProps`       | -       | All standard View props are supported          |
 
 ### TagGroup.ItemLabel
 

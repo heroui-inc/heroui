@@ -29,6 +29,7 @@ import { Switch } from 'heroui-native';
 ```
 
 - **Switch**：主容器，处理开关状态与用户交互。未提供子节点时渲染默认拇指；根据选中状态对缩放（按压）与背景色做动画；整块可点以切换。
+- **Switch.Background**：渲染在开关内容后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会在开关未选中（选中会动画为不透明强调色）期间自动挂载。可通过 `background` 属性替换或移除。
 - **Switch.Thumb**：可选滑动拇指，在位置间移动，弹簧过渡。可放自定义内容（图标等）或通过样式与动画定制。
 - **Switch.StartContent**：可选，显示在开关左侧；常用于关态时的图标或文字；在容器内绝对定位。
 - **Switch.EndContent**：可选，显示在开关右侧；常用于开态时的图标或文字；在容器内绝对定位。
@@ -207,6 +208,7 @@ export default function SwitchExample() {
 | `animation`                 | `SwitchRootAnimation`                                                | -           | 动画配置                                                     |
 | `isAnimatedStyleActive`     | `boolean`                                                            | `true`      | 是否启用 Reanimated 动画样式                                 |
 | `onSelectedChange`          | `(isSelected: boolean) => void`                                      | -           | 选中状态变化时回调                                           |
+| `background` | `React.ReactNode` | - | 开关内容后方的背景层。`undefined` 会在未选中时渲染主题感知的默认层；自定义节点会替换它；`null` 则移除它 |
 | `...AnimatedPressableProps` | `AnimatedProps<PressableProps>`                                      | -           | 支持 Reanimated Pressable 的全部属性                         |
 
 #### SwitchRenderProps
@@ -232,6 +234,16 @@ Switch 根组件动画配置，可为：
 | `scale.timingConfig`           | `WithTimingConfig`                       | `{ duration: 150 }`                                            | 动画时间配置                                    |
 | `backgroundColor.value`        | `[string, string]`                       | 使用主题色                                                     | 背景色 [未选中, 选中]                           |
 | `backgroundColor.timingConfig` | `WithTimingConfig`                       | `{ duration: 175, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }` | 背景色过渡时间配置                              |
+
+### Switch.Background
+
+渲染在开关内容后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 背景容器内的自定义内容 |
+| `className`    | `string`          | -       | 额外 CSS 类                         |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 View 属性          |
 
 ### Switch.Thumb
 

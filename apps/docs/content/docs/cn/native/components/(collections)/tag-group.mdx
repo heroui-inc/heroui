@@ -34,6 +34,7 @@ import { TagGroup } from 'heroui-native';
 - **TagGroup**：主容器，管理标签选中状态、禁用键与移除能力，并向子组件提供尺寸与变体上下文。
 - **TagGroup.List**：渲染标签列表的容器，可渲染空状态。
 - **TagGroup.Item**：组内单个标签。支持字符串子节点（自动包在 `TagGroup.ItemLabel`）、渲染函数子节点或自定义布局。
+- **TagGroup.ItemBackground**：渲染在标签表面后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会为未选中项自动挂载；回退颜色跟随变体（`surface` 或 `default`）。可通过 `TagGroup.Item` 上的 `background` 属性替换或移除。
 - **TagGroup.ItemLabel**：标签文字。提供字符串子节点时会自动渲染，也可显式使用。
 - **TagGroup.ItemRemoveButton**：移除按钮；需要移除能力时需显式放置。仅当 `TagGroup` 传入 `onRemove` 时生效。
 
@@ -326,6 +327,7 @@ export default function TagGroupExample() {
 | `isDisabled`        | `boolean`                                                               | -       | 是否禁用该标签                                                               |
 | `className`         | `string`                                                                | -       | 标签的额外 class                                                             |
 | `style`             | `StyleProp<ViewStyle>`                                                  | -       | 标签的额外样式                                                               |
+| `background` | `React.ReactNode` | - | 标签表面后方的背景层。`undefined` 会在未选中时渲染主题感知的默认层（回退颜色跟随变体）；自定义节点会替换它；`null` 则移除它 |
 | `...PressableProps` | `PressableProps`                                                        | -       | 支持 React Native `Pressable` 的全部属性                                       |
 
 #### TagRenderProps
@@ -334,6 +336,16 @@ export default function TagGroupExample() {
 | ------------ | --------- | --------------------------------------------------------------------------- |
 | `isSelected` | `boolean` | 当前是否选中                                                                 |
 | `isDisabled` | `boolean` | 是否禁用（根级、`disabledKeys` 与条目属性合并后的结果）                     |
+
+### TagGroup.ItemBackground
+
+渲染在标签表面后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。回退颜色跟随当前变体（`surface` → surface 令牌，`default` → default 令牌）。
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 背景容器内的自定义内容 |
+| `className`    | `string`          | -       | 额外 CSS 类                         |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 View 属性          |
 
 ### TagGroup.ItemLabel
 

@@ -40,6 +40,7 @@ import { Tabs } from 'heroui-native';
 
 - **Tabs**：管理选项卡状态与选中的根容器。控制当前激活项、处理值变化，并向子组件提供上下文。
 - **Tabs.List**：放置选项卡触发器的容器。将多个触发器组合在一起，并支持 `primary` 或 `secondary` 等样式变体。
+- **Tabs.ListBackground**：渲染在列表表面后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会为 `primary` 变体自动挂载。可通过 `Tabs.List` 上的 `background` 属性替换或移除。
 - **Tabs.ScrollView**：可选的横向滚动容器。当标签溢出时可横向滚动，并可在选中时自动居中。
 - **Tabs.Trigger**：每个选项卡的交互触发器。处理按压以切换激活项，并测量位置以驱动指示器动画。
 - **Tabs.Label**：触发器上的文字标签，用于展示选项卡标题及对应样式。
@@ -384,7 +385,18 @@ export default function TabsExample() {
 | -------------- | ----------------- | ------ | ------------------------------------------- |
 | `children`     | `React.ReactNode` | -      | 渲染在列表内的子元素                        |
 | `className`    | `string`          | -      | 额外 className                              |
+| `background` | `React.ReactNode` | - | 列表表面后方的背景层。`undefined` 会为 `primary` 变体渲染主题感知的默认层；自定义节点会替换它；`null` 则移除它 |
 | `...ViewProps` | `ViewProps`       | -      | 支持 React Native `View` 的全部标准属性     |
+
+### Tabs.ListBackground
+
+渲染在 `primary` 变体列表表面后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | 默认值 | 描述                                    |
+| -------------- | ----------------- | ------ | --------------------------------------- |
+| `children`     | `React.ReactNode` | -      | 背景容器内的自定义内容                  |
+| `className`    | `string`          | -      | 额外 CSS 类                             |
+| `...ViewProps` | `ViewProps`       | -      | 支持全部标准 View 属性                  |
 
 ### Tabs.ScrollView
 

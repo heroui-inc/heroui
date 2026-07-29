@@ -107,6 +107,11 @@
 
 [data-theme-toggle] {
   @apply border-none bg-default/80;
+
+  button {
+    @apply rounded-2xl;
+    cursor: var(--cursor-interactive);
+  }
 }
 
 /* Home Layout Navigation */

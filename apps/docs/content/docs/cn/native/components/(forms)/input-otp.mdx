@@ -40,6 +40,7 @@ import { InputOTP } from 'heroui-native';
 - **InputOTP**：根容器，管理 OTP 状态与文本变更，并为子组件提供上下文；处理焦点、校验与字符输入。
 - **InputOTP.Group**：将多个格子编组；用于视觉分组（例如每 3 位一组）。
 - **InputOTP.Slot**：单个字符格；`index` 须在 OTP 序列中唯一且与位置对应。未提供子节点时，默认渲染 `SlotPlaceholder`、`SlotValue` 与 `SlotCaret`。
+- **InputOTP.SlotBackground**：渲染在格子内容后方的可选主题感知背景容器。自动挂载，由激活主题决定默认内容（如 `glass`）；回退颜色跟随格子变体（`primary` → field 令牌，`secondary` → default 令牌）。可通过 `InputOTP.Slot` 上的 `background` 属性替换或移除。
 - **InputOTP.SlotPlaceholder**：空位时显示的占位字符；`Slot` 无子节点时默认使用。
 - **InputOTP.SlotValue**：显示已输入字符并带动画；`Slot` 无子节点时默认使用。
 - **InputOTP.SlotCaret**：动画光标，指示当前输入位置；置于 `Slot` 内以显示正在输入的位置。
@@ -325,7 +326,19 @@ export default function InputOTPExample() {
 | `children`     | `React.ReactNode` | -       | 自定义格子内容；未提供时默认为 `SlotPlaceholder`、`SlotValue`、`SlotCaret`                  |
 | `className`    | `string`          | -       | 额外 class                                                                                  |
 | `style`        | `ViewStyle`       | -       | 额外样式                                                                                    |
+| `background` | `React.ReactNode` | - | 格子内容后方的背景层。`undefined` 会渲染主题感知的默认层（回退颜色跟随变体：primary → field 令牌，secondary → default 令牌）；自定义节点会替换它；`null` 则移除它 |
 | `...ViewProps` | `ViewProps`       | -       | 支持全部标准 React Native `View` 属性                                                     |
+
+### InputOTP.SlotBackground
+
+渲染在格子内容后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop            | type              | default   | description                                                                                    |
+| --------------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------- |
+| `children`      | `React.ReactNode` | -         | 背景容器内的自定义内容                                                                 |
+| `className`     | `string`          | -         | 额外 CSS 类                                                                         |
+| `fallbackColor` | `ThemeColor`      | `'field'` | 在不支持原生模糊的平台（Android / web）上用作不透明回退的主题颜色令牌 |
+| `...ViewProps`  | `ViewProps`       | -         | 支持全部标准 View 属性                                                          |
 
 ### InputOTP.SlotPlaceholder
 

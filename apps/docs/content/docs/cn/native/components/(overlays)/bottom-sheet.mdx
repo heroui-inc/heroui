@@ -103,6 +103,20 @@ import { BottomSheet } from 'heroui-native';
 </BottomSheet>
 ```
 
+### 模糊遮罩
+
+使用内置的 `blur` 变体获得带动画的模糊背景。仅限 iOS，需要可选的 `expo-blur` 包；其他平台（或缺少该包时）会回退到默认的实心背景。当库主题为 `glass` 时，默认使用模糊变体。
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>...</BottomSheet.Trigger>
+  <BottomSheet.Portal>
+    <BottomSheet.Overlay variant="blur" blurViewProps={{ intensity: 40 }} />
+    <BottomSheet.Content>...</BottomSheet.Content>
+  </BottomSheet.Portal>
+</BottomSheet>
+```
+
 ### 自定义遮罩
 
 用模糊等自定义内容替换默认遮罩。
@@ -250,7 +264,9 @@ export default function BottomSheetExample() {
 | `className`             | `string`                                               | -       | 遮罩额外 class                                               |
 | `style`                 | `ViewStyle`                                            | -       | 遮罩容器样式                                                 |
 | `animation`             | `Omit<PopupOverlayAnimation, 'entering' \| 'exiting'>` | -       | 动画配置                                                     |
-| `isAnimatedStyleActive` | `boolean`                                              | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `variant`               | `'default' \| 'blur'`                                  | `'default'`（库主题为 `glass` 时为 `'blur'`） | 遮罩变体。`'blur'` 会渲染带动画的模糊背景（仅限 iOS，需要 `expo-blur`；否则回退到 `'default'`） |
+| `blurViewProps`         | `BlurViewProps`                                        | -       | 转发给 `'blur'` 变体所渲染 BlurView 的属性。`intensity` 设置动画模糊强度的上限（默认：暗色 75 / 亮色 50） |
+| `isAnimatedStyleActive` | `boolean`                                              | `true`（`'blur'` 变体为 `false`） | 是否启用 Reanimated 动画样式                                 |
 | `isCloseOnPress`        | `boolean`                                              | `true`  | 按下遮罩是否关闭                                             |
 | `...PressableProps`     | `PressableProps`                                       | -       | 支持 React Native `Pressable` 的全部属性                     |
 

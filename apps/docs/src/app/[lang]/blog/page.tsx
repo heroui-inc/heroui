@@ -8,6 +8,7 @@ import {getAllBlogPosts} from "@/lib/blog";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
 import {getBlogJsonLd} from "@/lib/json-ld";
+import {getLocalizedAlternates} from "@/lib/seo";
 
 import {BlogContent} from "./blog-content";
 
@@ -25,9 +26,7 @@ export async function generateMetadata({params}: BlogPageProps): Promise<Metadat
   const {blog} = dict;
 
   return {
-    alternates: {
-      canonical: `/${lang}/blog`,
-    },
+    alternates: getLocalizedAlternates({locale: lang, path: "/blog"}),
     description: blog.metaDescription,
     openGraph: {
       description: blog.metaDescription,

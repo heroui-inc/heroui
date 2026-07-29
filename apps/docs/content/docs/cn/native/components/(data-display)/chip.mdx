@@ -27,6 +27,7 @@ import { Chip } from 'heroui-native';
 ```
 
 - **Chip**：主容器，展示紧凑元素
+- **Chip.Background**：渲染在芯片表面后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会为 `secondary` 变体，以及 `color="default"` 的 `primary`/`soft` 变体自动挂载。可通过 `background` 属性替换或移除。
 - **Chip.Label**：芯片上的文字内容
 
 ## 用法
@@ -167,7 +168,18 @@ export default function ChipExample() {
 | `color`             | `'accent' \| 'default' \| 'success' \| 'warning' \| 'danger'` | `'accent'`  | 颜色主题                                                                                 |
 | `className`         | `string`                                                      | -           | 额外的 class                                                                             |
 | `animation`         | `"disable-all" \| undefined`                                  | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级的全部动画                                     |
+| `background` | `React.ReactNode` | - | 芯片表面后方的背景层。`undefined` 会为 `secondary` 变体以及 `color="default"` 的 `primary`/`soft` 变体渲染主题感知的默认层；自定义节点会替换它；`null` 则移除它 |
 | `...PressableProps` | `PressableProps`                                              | -           | 支持 `Pressable` 的全部属性                                                              |
+
+### Chip.Background
+
+渲染在芯片表面后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 背景容器内的自定义内容 |
+| `className`    | `string`          | -       | 额外 CSS 类                         |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 View 属性          |
 
 ### Chip.Label
 

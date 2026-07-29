@@ -33,6 +33,7 @@ import { Slider } from 'heroui-native';
 - **Slider**: Main container that manages slider value state, orientation, and provides context to all sub-components. Supports single value and range modes.
 - **Slider.Output**: Optional display of the current value(s). Supports render functions for custom formatting. Shows a formatted value label by default.
 - **Slider.Track**: Sizing container for Fill and Thumb elements. Reports its layout size for position calculations. Supports tap-to-position and render-function children for dynamic content (e.g. multiple thumbs for range sliders).
+- **Slider.TrackBackground**: Optional theme-aware background container rendered behind the track surface. Mounted automatically whenever the active theme registers default background content (e.g. `glass`) — the track background always uses the default color. Replace or remove it via the `background` prop on `Slider.Track`.
 - **Slider.Fill**: Responsive fill bar that stretches the full cross-axis of the Track. Only the main-axis position and size are computed.
 - **Slider.Thumb**: Draggable thumb element using react-native-gesture-handler. Centered on the cross-axis by the Track layout. Animates scale on press via react-native-reanimated. Each thumb gets `role="slider"` with full `accessibilityValue`.
 
@@ -274,7 +275,18 @@ Animation configuration for the slider root component. Can be:
 | `children`     | `React.ReactNode \| ((props: SliderRenderProps) => React.ReactNode)` | -       | Content or render function receiving slider state for dynamic thumb rendering |
 | `className`    | `string`                                                             | -       | Additional CSS classes                                                        |
 | `hitSlop`      | `number`                                                             | `8`     | Extra touch area around the track                                             |
+| `background` | `React.ReactNode` | - | Background layer behind the track surface. `undefined` renders the theme-aware default whenever the active theme registers default background content; custom node replaces it; `null` removes it |
 | `...ViewProps` | `ViewProps`                                                          | -       | All standard React Native View props are supported                            |
+
+### Slider.TrackBackground
+
+Absolute-fill container rendered behind the track surface. With no children, the active library theme decides the default content (e.g. a glass blur layer); pass children to host custom content with the same positioning and clipping.
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | Custom content inside the background container |
+| `className`    | `string`          | -       | Additional CSS classes                         |
+| `...ViewProps` | `ViewProps`       | -       | All standard View props are supported          |
 
 ### Slider.Fill
 

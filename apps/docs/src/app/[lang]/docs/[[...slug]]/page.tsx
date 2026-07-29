@@ -8,6 +8,7 @@ import {createRelativeLink} from "fumadocs-ui/mdx";
 import {notFound} from "next/navigation";
 import {Suspense, cache} from "react";
 
+import {CopyNativeSetupPrompt, CopySetupPrompt} from "@/components/ai/copy-setup-prompt";
 import {ViewOptions} from "@/components/ai/page-actions";
 import {ComponentLinks} from "@/components/component-links";
 import {ComponentPreview, ComponentPreviewFallback} from "@/components/component-preview";
@@ -26,6 +27,7 @@ import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {getComponentCount, getExampleCount} from "@/demos";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
+import {getLocalizedAlternates, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {
@@ -58,6 +60,12 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
 
   const MDXContent = page.data.body;
   const isComponentStatusIcon = page.data.icon && componentStatusIcons.includes(page.data.icon);
+  const showCopyPrompt =
+    page.url.endsWith("/react/getting-started") ||
+    page.url.endsWith("/react/getting-started/quick-start");
+  const showNativeCopyPrompt =
+    page.url.endsWith("/native/getting-started") ||
+    page.url.endsWith("/native/getting-started/quick-start");
 
   // TODO: add github last edit
   // const lastEditTime = await getGithubLastEdit({
@@ -128,6 +136,8 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
             </DocsTitle>
             {page.data.toc.length > 0 && (
               <div className="flex items-center gap-2">
+                {!!showCopyPrompt && <CopySetupPrompt />}
+                {!!showNativeCopyPrompt && <CopyNativeSetupPrompt />}
                 <ViewOptions markdownUrl={`${page.url}.mdx`} />
               </div>
             )}
@@ -181,12 +191,13 @@ export async function generateMetadata(props: {
   // Ensure absolute URL for Open Graph
   const imageUrl = image.startsWith("http") ? image : new URL(image, siteConfig.siteUrl).toString();
 
-  const url = `/docs/${(params.slug ?? []).join("/")}`;
+  // `page.url` already carries the locale prefix (`/en/docs/...`), which is the
+  // URL actually served — the unprefixed `/docs/...` form permanently redirects.
+  const url = page.url;
+  const alternates = getLocalizedAlternates({locale: params.lang, path: stripLocale(url)});
 
   return {
-    alternates: {
-      canonical: url,
-    },
+    alternates,
     description: page.data.description,
     openGraph: {
       description: page.data.description,

@@ -267,15 +267,15 @@ HeroUI uses **Iconify** with **gravity-ui** as the default icon set.
 
 ### Completed
 
-accordion, alert, alert-dialog, autocomplete, avatar, badge, breadcrumbs, button, button-group, card, checkbox, checkbox-group, chip, close-button, color-area, color-field, color-picker, color-slider, color-swatch, color-swatch-picker, combo-box, date-field, date-picker, date-range-picker, description, disclosure, disclosure-group, drawer, dropdown, empty-state, error-message, field-error, fieldset, form, header, input, input-group, input-otp, kbd, label, link, list-box, list-box-item, list-box-section, menu, menu-item, menu-section, meter, modal, number-field, pagination, popover, progress-bar, progress-circle, radio, radio-group, scroll-shadow, search-field, select, separator, skeleton, slider, spinner, surface, switch, switch-group, table, tabs, tag, tag-group, textarea, textfield, time-field, toast, toggle-button, toggle-button-group, toolbar, tooltip, typography
+accordion, alert, alert-dialog, autocomplete, avatar, badge, breadcrumbs, button, button-group, calendar, card, checkbox, checkbox-group, chip, close-button, color-area, color-field, color-picker, color-slider, color-swatch, color-swatch-picker, combo-box, date-field, date-picker, date-range-picker, description, disclosure, disclosure-group, drawer, dropdown, empty-state, error-message, field-error, fieldset, form, header, input, input-group, input-otp, kbd, label, link, list-box, list-box-item, list-box-section, menu, menu-item, menu-section, meter, modal, number-field, pagination, popover, progress-bar, progress-circle, radio, radio-group, range-calendar, scroll-shadow, search-field, select, separator, skeleton, slider, spinner, surface, switch, switch-group, table, tabs, tag, tag-group, textarea, textfield, time-field, toast, toggle-button, toggle-button-group, toolbar, tooltip, typography
 
 ### In Progress
 
-calendar, calendar-year-picker, range-calendar
+calendar-year-picker
 
 ## Non-obvious Gotchas
 
-1. **`pnpm i` triggers builds** — The `postinstall` hook builds `@heroui/styles` and runs `typegen:docs`. If it fails, run `pnpm --filter @heroui/styles build` manually.
+1. **`pnpm i` triggers builds** — The `postinstall` hook builds `@heroui/styles` and runs `typegen:docs` and `typegen:docs-cn`. If it fails, run `pnpm --filter @heroui/styles build` manually.
 
 2. **Build order matters** — `@heroui/styles` must build before `@heroui/react`. Running `pnpm build` from root handles this via Turbo's `^build` dependency.
 

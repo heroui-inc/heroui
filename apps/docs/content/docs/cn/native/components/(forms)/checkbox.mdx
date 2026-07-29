@@ -27,6 +27,7 @@ import { Checkbox } from 'heroui-native';
 ```
 
 - **Checkbox**：主容器，处理选中状态与用户交互。未提供子节点时渲染带动画对勾的默认指示器；自动识别是否在 Surface 上以便样式正确；支持可定制或关闭的按压缩放动画；子节点可为渲染函数以访问 `isSelected`、`isInvalid`、`isDisabled`。
+- **Checkbox.Background**：渲染在复选框内容后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会为 `secondary` 变体在非非法状态下自动挂载。可通过 `background` 属性替换或移除。
 - **Checkbox.Indicator**：可选对勾容器，选中时默认带滑动、缩放、透明度与圆角动画；无子节点时渲染带动画路径的 SVG 对勾；各动画可单独配置或关闭；子节点可为渲染函数以访问状态。
 
 ## 用法
@@ -227,6 +228,7 @@ export default function BasicUsage() {
 | `animation`             | `CheckboxRootAnimation`                                                | -           | 动画配置                                                                  |
 | `isAnimatedStyleActive` | `boolean`                                                              | `true`      | 是否启用 Reanimated 动画样式                                              |
 | `className`             | `string`                                                               | `undefined` | 额外 class                                                                |
+| `background` | `React.ReactNode` | - | 复选框内容后方的背景层。`undefined` 会为 `secondary` 变体在非非法状态下渲染主题感知的默认层；自定义节点会替换它；`null` 则移除它 |
 | `...PressableProps`     | `PressableProps`                                                       | -           | 支持 React Native `Pressable` 标准属性（`disabled` 除外）                |
 
 #### CheckboxRenderProps
@@ -251,6 +253,16 @@ export default function BasicUsage() {
 | `state`              | `'disabled' \| 'disable-all' \| boolean` | -                   | 关闭动画的同时仍允许自定义属性                  |
 | `scale.value`        | `[number, number]`                       | `[1, 0.96]`         | 缩放值 [未按压, 按压]                           |
 | `scale.timingConfig` | `WithTimingConfig`                       | `{ duration: 150 }` | 动画时间配置                                    |
+
+### Checkbox.Background
+
+渲染在复选框内容后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 背景容器内的自定义内容 |
+| `className`    | `string`          | -       | 额外 CSS 类                         |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 View 属性          |
 
 ### Checkbox.Indicator
 
