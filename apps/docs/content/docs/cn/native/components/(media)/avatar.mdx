@@ -28,6 +28,7 @@ import { Avatar } from 'heroui-native';
 ```
 
 - **Avatar**：主容器，管理头像展示状态，向子组件提供尺寸与颜色上下文；可通过动画配置统一控制子级动画。
+- **Avatar.Background**：渲染在头像内容后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会为 `default` 变体，以及 `color="default"` 的 `soft` 变体自动挂载。可通过 `background` 属性替换或移除。
 - **Avatar.Image**：可选图片组件，展示头像；自动处理加载与错误，并以不透明度淡入。
 - **Avatar.Fallback**：图片加载失败或不可用时显示；无子节点时显示默认人像图标；支持可配置的进入动画与延迟。
 
@@ -272,7 +273,18 @@ export default function AvatarExample() {
 | `className`    | `string`                                                      | -           | 额外的 class                                                                              |
 | `animation`    | `"disable-all"` \| `undefined`                                | `undefined` | 动画配置；`"disable-all"` 可禁用自身及子级的全部动画                                       |
 | `alt`          | `string`                                                      | -           | 无障碍替代文本描述                                                                        |
+| `background` | `React.ReactNode` | - | 头像内容后方的背景层。`undefined` 会为 `default` 变体以及 `color="default"` 的 `soft` 变体渲染主题感知的默认层；自定义节点会替换它；`null` 则移除它 |
 | `...ViewProps` | `ViewProps`                                                   | -           | 支持 React Native `View` 的全部属性                                                       |
+
+### Avatar.Background
+
+渲染在头像内容后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 背景容器内的自定义内容 |
+| `className`    | `string`          | -       | 额外 CSS 类                         |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 View 属性          |
 
 ### Avatar.Image
 

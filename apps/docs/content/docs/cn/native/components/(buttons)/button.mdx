@@ -27,6 +27,7 @@ import { Button } from 'heroui-native';
 ```
 
 - **Button**：主容器，负责按压交互、动画与变体。字符串子节点会渲染为标签，也可使用复合子组件自定义布局。
+- **Button.Background**：渲染在按钮表面后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会为 `secondary` 与 `tertiary` 变体自动挂载。可通过 `background` 属性替换或移除。
 - **Button.Label**：按钮文字，继承父级 Button 上下文中的尺寸与变体样式。
 
 ## 用法
@@ -319,6 +320,7 @@ export default function ButtonExample() {
 | `isIconOnly`      | `boolean`                                                                                     | `false`             | 是否为仅图标按钮（方形比例） |
 | `feedbackVariant` | `'scale-highlight' \| 'scale-ripple' \| 'scale' \| 'none'`                                    | `'scale-highlight'` | 决定渲染哪些反馈效果                 |
 | `animation`       | `ButtonAnimation`                                                                             | -                   | 动画配置（结构取决于 `feedbackVariant`）   |
+| `background` | `React.ReactNode` | - | 按钮表面后方的背景层。`undefined` 会为 `secondary` 与 `tertiary` 变体渲染主题感知的默认层；自定义节点会替换它；`null` 则移除它 |
 
 继承属性（含 `isDisabled`、`className`、`children` 及所有 Pressable 属性）见 [PressableFeedback API 参考](./pressable-feedback#api-reference)。
 
@@ -359,6 +361,16 @@ export default function ButtonExample() {
 仅接受字符串 `'disable-all'`。所有反馈效果均被禁用。
 
 动画子类型（`PressableFeedbackScaleAnimation`、`PressableFeedbackHighlightAnimation`、`PressableFeedbackRippleAnimation`）详见 [PressableFeedback API 参考](./pressable-feedback#api-reference)。
+
+### Button.Background
+
+渲染在按钮表面后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 背景容器内的自定义内容 |
+| `className`    | `string`          | -       | 额外 CSS 类                         |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 View 属性          |
 
 ### Button.Label
 

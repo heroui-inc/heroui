@@ -86,6 +86,20 @@ import { Dialog } from 'heroui-native';
 </Dialog>
 ```
 
+### 模糊背景
+
+带动画模糊背景的遮罩。仅限 iOS，需要可选的 `expo-blur` 包；其他平台（或缺少该包时）会回退到默认的实心背景。当库主题为 `glass` 时，默认使用模糊变体。
+
+```tsx
+<Dialog isOpen={isOpen} onOpenChange={setIsOpen}>
+  <Dialog.Trigger>...</Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay variant="blur" blurViewProps={{ intensity: 60 }} />
+    <Dialog.Content>...</Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
 ### 表单对话框
 
 包含输入与键盘避让的对话框。
@@ -196,7 +210,9 @@ export default function DialogExample() {
 | `className`             | `string`                 | -       | 遮罩额外 class                                               |
 | `style`                 | `ViewStyle`              | -       | 遮罩容器样式                                                 |
 | `animation`             | `DialogOverlayAnimation` | -       | 动画配置                                                     |
-| `isAnimatedStyleActive` | `boolean`                | `true`  | 是否启用 Reanimated 动画样式                                 |
+| `variant`               | `'default' \| 'blur'`    | `'default'`（库主题为 `glass` 时为 `'blur'`） | 遮罩变体。`'blur'` 会渲染带动画的模糊背景（仅限 iOS，需要 `expo-blur`；否则回退到 `'default'`） |
+| `blurViewProps`         | `BlurViewProps`          | -       | 转发给 `'blur'` 变体所渲染 BlurView 的属性。`intensity` 设置动画模糊强度的上限（默认：暗色 75 / 亮色 50） |
+| `isAnimatedStyleActive` | `boolean`                | `true`（`'blur'` 变体为 `false`） | 是否启用 Reanimated 动画样式                                 |
 | `isCloseOnPress`        | `boolean`                | `true`  | 按下遮罩是否关闭                                             |
 | `forceMount`            | `boolean`                | -       | 关闭时仍挂载以配合动画                                       |
 | `...PressableProps`     | `PressableProps`         | -       | 支持 React Native `Pressable` 的全部属性                     |

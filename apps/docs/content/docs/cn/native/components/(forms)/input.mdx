@@ -221,6 +221,18 @@ export const TextInputContent = () => {
 | placeholderColorClassName | `string`                   | `"field-placeholder"` | 占位符文字颜色的 class                                       |
 | isBottomSheetAware        | `boolean`                  | `true`                | 在 BottomSheet 内是否自动处理键盘相关逻辑；设为 `false` 可关闭 |
 | animation                 | `AnimationRoot`            | `undefined`           | 输入框动画配置                                               |
+| background                | `React.ReactNode`          | -                     | 文本输入框后方的背景层。`undefined` 会在激活主题注册了默认背景内容时渲染主题感知的默认层（回退颜色跟随变体：primary → field 令牌，secondary → default 令牌）；自定义节点会替换它；`null` 则移除它 |
 | ...TextInputProps         | `TextInputProps`           | -                     | 支持 React Native `TextInput` 的全部属性                     |
 
 > **说明**：置于 `TextField` 内时，`Input` 会通过 form-item-state 上下文自动消费 `isDisabled`、`isInvalid` 等表单状态。
+
+### Input.Background
+
+渲染在文本输入框后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | default   | description                                                                                    |
+| -------------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------- |
+| children       | `React.ReactNode` | -         | 背景容器内的自定义内容                                                                 |
+| className      | `string`          | -         | 额外 CSS 类                                                                         |
+| fallbackColor  | `ThemeColor`      | `'field'` | 在不支持原生模糊的平台（Android / web）上用作不透明回退的主题颜色令牌 |
+| ...ViewProps   | `ViewProps`       | -         | 支持全部标准 View 属性                                                          |

@@ -41,6 +41,7 @@ import { RadioGroup } from 'heroui-native';
 - **Description**：标签下方的可选说明文字。请直接使用 [Description](./description) 组件。
 - **Radio**：置于 `RadioGroup.Item` 内的 [Radio](./radio) 组件，用于渲染单选指示器。会自动识别 `RadioGroupItem` 上下文并从中获取 `isSelected`、`isDisabled`、`isInvalid` 与 `variant`。
 - **Radio.Indicator**：单选圆环的可选容器；无子节点时渲染默认拇指样式，管理选中视觉。完整 API 见 [Radio](./radio)。
+- **Radio.IndicatorBackground**：渲染在指示器内容后方的可选主题感知背景容器。当激活主题注册了默认背景内容（如 `glass`）时，会为 `secondary` 变体在未选中且非非法状态下自动挂载。可通过 `Radio.Indicator` 上的 `background` 属性替换或移除。
 - **Radio.IndicatorThumb**：选中时显示的可选内圆，随选中状态缩放动画；可替换为自定义内容。见 [Radio](./radio)。
 - **FieldError**：在组无效时显示的错误信息，带动画显示在组内容下方。请直接使用 [FieldError](./field-error) 组件。
 
@@ -281,7 +282,18 @@ export default function RadioGroupExample() {
 | ---------------------- | -------------------------- | ----------- | ------------------------------------------------ |
 | `children`             | `React.ReactNode`          | `undefined` | 指示器内容                  |
 | `className`            | `string`                   | `undefined` | 指示器额外 CSS 类         |
+| `background` | `React.ReactNode` | - | 指示器内容后方的背景层。`undefined` 会为 `secondary` 变体在未选中且非非法状态下渲染主题感知的默认层；自定义节点会替换它；`null` 则移除它 |
 | `...AnimatedViewProps` | `AnimatedProps<ViewProps>` | -           | 支持全部 Reanimated Animated.View 属性 |
+
+### Radio.IndicatorBackground
+
+渲染在指示器内容后方的绝对填充容器。若无子节点，激活的库主题决定默认内容（如玻璃模糊层）；传入子节点可在相同的定位与裁剪下承载自定义内容。
+
+| prop           | type              | default | description                                    |
+| -------------- | ----------------- | ------- | ---------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 背景容器内的自定义内容 |
+| `className`    | `string`          | -       | 额外 CSS 类                         |
+| `...ViewProps` | `ViewProps`       | -       | 支持全部标准 View 属性          |
 
 ### Radio.IndicatorThumb
 

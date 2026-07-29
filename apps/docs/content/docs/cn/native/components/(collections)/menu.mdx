@@ -64,6 +64,7 @@ import { Menu, SubMenu } from 'heroui-native';
 - **Menu.ItemDescription**：菜单项次要说明文本。
 - **Menu.ItemIndicator**：菜单项选中指示（对勾或圆点）。
 - **SubMenu**：子菜单根容器，管理展开/收起状态并为子级提供动画上下文。
+- **SubMenu.Background**：子菜单打开时绘制其表面的绝对填充层。自动渲染；可通过 `SubMenu` 上的 `background` 属性替换。
 - **SubMenu.Trigger**：可按压行，切换子菜单开闭；样式与普通菜单项一致。
 - **SubMenu.TriggerIndicator**：动画 V 形图标（默认 chevron-right），随子菜单开闭旋转；放在 `SubMenu.Trigger` 内。
 - **SubMenu.Content**：绝对定位容器，子菜单开闭时带动画高度变化；其内放置 `Menu.Item` 等。
@@ -638,6 +639,7 @@ Popover 内容动画配置，可为：
 | `isDefaultOpen` | `boolean`                 | -       | 非受控：首次渲染时是否打开                               |
 | `isDisabled`    | `boolean`                 | `false` | 是否禁用子菜单                                           |
 | `className`     | `string`                  | -       | 根容器额外 class                                         |
+| `background`    | `React.ReactNode`         | -       | 打开的子菜单表面后方的背景层                             |
 | `animation`     | `SubMenuRootAnimation`    | -       | 子菜单动画配置                                           |
 | `onOpenChange`  | `(open: boolean) => void` | -       | 开闭状态变化时回调                                       |
 | `...ViewProps`  | `ViewProps`               | -       | 支持 React Native `View` 的全部标准属性                |
@@ -659,6 +661,38 @@ SubMenu 根组件动画配置，可为：
 | `rootContent.paddingHorizontal` | `number`                | `6`                                         | 子菜单打开时水平内边距                 |
 | `rootContent.paddingTop`        | `number`                | `12`                                        | 子菜单打开时顶部内边距                 |
 | `rootContent.springConfig`      | `WithSpringConfig`      | `{ damping: 100, stiffness: 950, mass: 3 }` | 展开/收起的弹簧配置                    |
+| `background.exiting`            | `EntryOrExitLayoutType` | `FadeOut.duration(200)`                     | 背景层的退出动画                       |
+
+#### SubMenu.Background
+
+渲染在打开的子菜单表面后方的绝对填充层。它绘制子菜单表面涂层（`--color-overlay`），若无子节点，则绘制由激活库主题选择的层——在 `glass` 主题下为 `GlassView` 模糊层，在默认主题下不绘制任何内容。
+
+该表面仅在子菜单打开时挂载（关闭时淡出），因此收起的触发行会保留其所处的菜单表面。这在 `--color-overlay` 为半透明的主题下尤为重要，若长期存在一层涂层，会使触发行被叠加两次色调，从而与其同级 `Menu.Item` 呈现不一致。
+
+可通过 `SubMenu` 上的 `background` 属性替换——自定义节点同样会接管挂载与退出过渡，因此请将内容包裹在 `SubMenu.Background` 中，以保留绝对填充、表面涂层与裁剪：
+
+```tsx
+<SubMenu
+  background={
+    <SubMenu.Background>
+      <LinearGradient
+        colors={['#ffffff22', '#ffffff05']}
+        style={StyleSheet.absoluteFill}
+      />
+    </SubMenu.Background>
+  }
+>
+  ...
+</SubMenu>
+```
+
+传入 `background={null}` 会完全移除该层，使打开的子菜单在菜单内容之上保持透明。
+
+| prop           | type              | default | description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| `children`     | `React.ReactNode` | -       | 替换主题默认层的自定义内容                          |
+| `className`    | `string`          | -       | 背景容器的额外 class                               |
+| `...ViewProps` | `ViewProps`       | -       | 支持 React Native `View` 的全部标准属性          |
 
 #### SubMenu.Trigger
 
