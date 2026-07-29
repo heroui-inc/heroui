@@ -96,7 +96,7 @@
     "themeSource": "Theme source"
   },
   "copyPrompt": {
-    "copy": "Copy prompt",
+    "copy": "Copy Prompt",
     "copied": "Copied",
     "ariaLabelCopy": "Copy prompt to clipboard",
     "ariaLabelCopied": "Prompt copied to clipboard"
