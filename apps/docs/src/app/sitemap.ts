@@ -1,6 +1,6 @@
 import type {MetadataRoute} from "next";
 
-import {getAllBlogPosts} from "@/lib/blog";
+import {getAllBlogPosts, getBlogPost} from "@/lib/blog";
 import {filterExcludedPages} from "@/lib/llms-utils";
 import {LOCALES, absoluteUrl, getSitemapAlternates, localizedPath, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
@@ -62,6 +62,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
 
     for (const post of getAllBlogPosts(locale)) {
+      if (getBlogPost(post.slug, locale)?.locale !== locale) continue;
+
       addPath(paths, `/blog/${post.slug}`, locale, parseDate(post.date));
     }
 
