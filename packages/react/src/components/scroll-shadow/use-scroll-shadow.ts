@@ -37,7 +37,7 @@ export const useScrollShadow = (props: UseScrollShadowProps) => {
     const clientSize = isVertical ? el.clientHeight : el.clientWidth;
 
     const hasScrollBefore = scrollStart > offset;
-    const hasScrollAfter = scrollStart + clientSize + offset < scrollSize;
+    const hasScrollAfter = scrollStart + clientSize + offset < scrollSize - 1;
 
     // Skip DOM updates if state hasn't changed
     const prevState = prevStateRef.current;
