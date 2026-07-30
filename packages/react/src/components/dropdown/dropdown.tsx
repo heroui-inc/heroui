@@ -14,6 +14,7 @@ import {
   SubmenuTrigger as SubmenuTriggerPrimitive,
 } from "react-aria-components/Menu";
 
+import {enableChildProps, forwardChildProps} from "../../utils/children";
 import {composeTwRenderProps} from "../../utils/compose";
 import {MenuItemIndicator, MenuItemRoot, MenuItemSubmenuIndicator} from "../menu-item";
 import {MenuSectionRoot} from "../menu-section";
@@ -36,7 +37,8 @@ interface DropdownRootProps
   className?: string;
 }
 
-const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
+const DropdownRoot = enableChildProps((inputProps: DropdownRootProps) => {
+  const {children, ...props} = forwardChildProps(inputProps);
   const slots = React.useMemo(() => dropdownVariants(), []);
 
   return (
@@ -44,7 +46,7 @@ const DropdownRoot = ({children, ...props}: DropdownRootProps) => {
       <MenuTriggerPrimitive {...props}>{children}</MenuTriggerPrimitive>
     </DropdownContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Dropdown Trigger (Button wrapper)

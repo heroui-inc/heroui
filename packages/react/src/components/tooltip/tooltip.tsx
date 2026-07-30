@@ -2,7 +2,7 @@
 
 import type {DOMRenderProps} from "../../utils/dom";
 import type {TooltipVariants} from "@heroui/styles";
-import type {ComponentPropsWithRef, ReactElement, ReactNode} from "react";
+import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tooltipVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
@@ -15,15 +15,10 @@ import {
 } from "react-aria-components/Tooltip";
 
 import {useCSSVariable} from "../../hooks/use-css-variable";
+import {enableChildProps, forwardChildProps} from "../../utils/children";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {parseCSSTime} from "../../utils/css";
 import {dom} from "../../utils/dom";
-import {Button} from "../button";
-import {BUTTON_GROUP_CHILD} from "../button-group";
-
-type ButtonGroupChildProps = {
-  [BUTTON_GROUP_CHILD]?: boolean;
-};
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Context
@@ -39,37 +34,8 @@ const TooltipContext = createContext<TooltipContext>({});
  * -----------------------------------------------------------------------------------------------*/
 type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
 
-const markButtonGroupTrigger = (children: ReactNode): ReactNode => {
-  let isMarked = false;
-
-  return React.Children.map(children, (child) => {
-    if (isMarked || !React.isValidElement(child)) {
-      return child;
-    }
-
-    isMarked = true;
-
-    const props: ButtonGroupChildProps & {children?: ReactNode} = {
-      [BUTTON_GROUP_CHILD]: true,
-    };
-
-    const element = child as ReactElement<{children?: ReactNode}>;
-
-    if (element.type !== Button && element.type !== Button.Root) {
-      props.children = markButtonGroupTrigger(element.props.children);
-    }
-
-    return React.cloneElement(element, props);
-  });
-};
-
-const TooltipRoot: React.FC<TooltipRootProps> = ({
-  children,
-  closeDelay,
-  delay,
-  [BUTTON_GROUP_CHILD]: isButtonGroupChild,
-  ...props
-}: TooltipRootProps & ButtonGroupChildProps) => {
+const TooltipRoot = enableChildProps((inputProps: TooltipRootProps) => {
+  const {children, closeDelay, delay, ...props} = forwardChildProps(inputProps);
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   const cssDelay = useCSSVariable("--tooltip-delay");
@@ -77,7 +43,6 @@ const TooltipRoot: React.FC<TooltipRootProps> = ({
 
   const resolvedDelay = delay ?? parseCSSTime(cssDelay);
   const resolvedCloseDelay = closeDelay ?? parseCSSTime(cssCloseDelay);
-  const resolvedChildren = isButtonGroupChild ? markButtonGroupTrigger(children) : children;
 
   return (
     <TooltipContext value={{slots}}>
@@ -87,11 +52,11 @@ const TooltipRoot: React.FC<TooltipRootProps> = ({
         delay={resolvedDelay}
         {...props}
       >
-        {resolvedChildren}
+        {children}
       </TooltipTriggerPrimitive>
     </TooltipContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Content

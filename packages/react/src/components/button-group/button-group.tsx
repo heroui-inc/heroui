@@ -12,6 +12,7 @@ import {useSlottedContext} from "react-aria-components/slots";
 import {ToggleButtonGroupContext as RACToggleButtonGroupContext} from "react-aria-components/ToggleButtonGroup";
 
 import {composeSlotClassName, composeTwRenderProps} from "../../utils";
+import {supportsChildProps, withChildProps} from "../../utils/children";
 import {dom} from "../../utils/dom";
 
 /* -------------------------------------------------------------------------------------------------
@@ -60,16 +61,15 @@ const ButtonGroupRoot = ({
     [fullWidth, orientation],
   );
 
-  // Wrap only direct children with context provider
+  // Mark only direct children that can consume or forward the group marker.
   const wrappedChildren = Children.map(children as React.ReactNode, (child) => {
-    if (!isValidElement(child)) {
+    if (!isValidElement(child) || !supportsChildProps(child)) {
       return child;
     }
 
-    // Clone the child and add the special prop
-    return React.cloneElement(child, {
+    return withChildProps(child, {
       [BUTTON_GROUP_CHILD]: true,
-    } as any);
+    });
   });
 
   return (

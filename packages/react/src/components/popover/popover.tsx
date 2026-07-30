@@ -18,6 +18,7 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components/Popover";
 
+import {enableChildProps, forwardChildProps} from "../../utils/children";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {SurfaceContext} from "../surface";
@@ -36,10 +37,8 @@ const PopoverContext = createContext<PopoverContext>({});
  * -----------------------------------------------------------------------------------------------*/
 type PopoverRootProps = ComponentPropsWithRef<typeof PopoverTriggerPrimitive>;
 
-const PopoverRoot = ({
-  children,
-  ...props
-}: ComponentPropsWithRef<typeof PopoverTriggerPrimitive>) => {
+const PopoverRoot = enableChildProps((inputProps: PopoverRootProps) => {
+  const {children, ...props} = forwardChildProps(inputProps);
   const slots = React.useMemo(() => popoverVariants(), []);
 
   return (
@@ -49,7 +48,7 @@ const PopoverRoot = ({
       </PopoverTriggerPrimitive>
     </PopoverContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Popover Content

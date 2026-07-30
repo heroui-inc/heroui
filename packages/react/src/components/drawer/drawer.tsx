@@ -23,6 +23,7 @@ import {
   Modal as ModalPrimitive,
 } from "react-aria-components/Modal";
 
+import {enableChildProps, forwardChildProps} from "../../utils/children";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
@@ -219,7 +220,8 @@ interface DrawerRootProps extends ComponentPropsWithRef<typeof DrawerTriggerPrim
   state?: UseOverlayStateReturn;
 }
 
-const DrawerRoot = ({children, state, ...props}: DrawerRootProps) => {
+const DrawerRoot = enableChildProps(({children, state, ...props}: DrawerRootProps) => {
+  const {children: forwardedChildren, ...rootProps} = forwardChildProps({children, ...props});
   const drawerContext = useMemo<DrawerContext>(
     () => ({slots: drawerVariants(), placement: undefined, isDismissable: true}),
     [],
@@ -232,12 +234,12 @@ const DrawerRoot = ({children, state, ...props}: DrawerRootProps) => {
 
   return (
     <DrawerContext value={drawerContext}>
-      <DrawerTriggerPrimitive data-slot="drawer-root" {...mergeProps(props, controlledProps)}>
-        {children}
+      <DrawerTriggerPrimitive data-slot="drawer-root" {...mergeProps(rootProps, controlledProps)}>
+        {forwardedChildren}
       </DrawerTriggerPrimitive>
     </DrawerContext>
   );
-};
+});
 
 DrawerRoot.displayName = "HeroUI.Drawer";
 

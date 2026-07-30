@@ -8,6 +8,7 @@ import {Chip} from "../chip";
 import {Description} from "../description";
 import {Dropdown} from "../dropdown";
 import {Label} from "../label";
+import {Tooltip} from "../tooltip";
 
 import {ButtonGroup} from "./";
 
@@ -294,6 +295,21 @@ export const WithoutSeparator: Story = {
       <Button>First</Button>
       <Button>Second</Button>
       <Button>Third</Button>
+    </ButtonGroup>
+  ),
+};
+
+export const WithTooltips: Story = {
+  render: () => (
+    <ButtonGroup size="sm" variant="secondary">
+      <Tooltip>
+        <Button>First</Button>
+        <Tooltip.Content>First action</Tooltip.Content>
+      </Tooltip>
+      <Tooltip>
+        <Button>Second</Button>
+        <Tooltip.Content>Second action</Tooltip.Content>
+      </Tooltip>
     </ButtonGroup>
   ),
 };
