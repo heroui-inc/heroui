@@ -66,6 +66,35 @@ export const Default: Story = {
   ),
 };
 
+export const WithIndicator: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Add `ToggleButtonGroup.Indicator` inside each `ToggleButton` to render an animated pill that slides to the selected button, matching `Tabs.Indicator`. Selection state comes from the toggle button itself, so no extra wiring is needed.",
+      },
+    },
+  },
+  render: () => (
+    <ToggleButtonGroup defaultSelectedKeys={["list"]} selectionMode="single">
+      <ToggleButton id="list">
+        List
+        <ToggleButtonGroup.Indicator />
+      </ToggleButton>
+      <ToggleButton id="board">
+        <ToggleButtonGroup.Separator />
+        Board
+        <ToggleButtonGroup.Indicator />
+      </ToggleButton>
+      <ToggleButton id="timeline">
+        <ToggleButtonGroup.Separator />
+        Timeline
+        <ToggleButtonGroup.Indicator />
+      </ToggleButton>
+    </ToggleButtonGroup>
+  ),
+};
+
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-col gap-6">

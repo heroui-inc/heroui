@@ -10,6 +10,7 @@ export const toggleButtonGroupVariants = tv({
   },
   slots: {
     base: "toggle-button-group",
+    indicator: "toggle-button-group__indicator",
     separator: "toggle-button-group__separator",
   },
   variants: {

@@ -6,6 +6,7 @@ import type {ComponentPropsWithRef} from "react";
 
 import {toggleButtonGroupVariants} from "@heroui/styles";
 import React, {createContext, use} from "react";
+import {SelectionIndicator as SelectionIndicatorPrimitive} from "react-aria-components/SelectionIndicator";
 import {useSlottedContext} from "react-aria-components/slots";
 import {
   ToggleButtonGroupContext as RACToggleButtonGroupContext,
@@ -74,6 +75,27 @@ const ToggleButtonGroupRoot = ({
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * ToggleButtonGroup Indicator
+ * -----------------------------------------------------------------------------------------------*/
+interface ToggleButtonGroupIndicatorProps extends ComponentPropsWithRef<
+  typeof SelectionIndicatorPrimitive
+> {
+  className?: string;
+}
+
+const ToggleButtonGroupIndicator = ({className, ...props}: ToggleButtonGroupIndicatorProps) => {
+  const {slots} = use(ToggleButtonGroupContext);
+
+  return (
+    <SelectionIndicatorPrimitive
+      className={composeSlotClassName(slots?.indicator, className)}
+      data-slot="toggle-button-group-indicator"
+      {...props}
+    />
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * ToggleButtonGroup Separator
  * -----------------------------------------------------------------------------------------------*/
 interface ToggleButtonGroupSeparatorProps<
@@ -102,6 +124,15 @@ const ToggleButtonGroupSeparator = <E extends keyof React.JSX.IntrinsicElements 
 /* -------------------------------------------------------------------------------------------------
  * Exports
  * -----------------------------------------------------------------------------------------------*/
-export {ToggleButtonGroupRoot, ToggleButtonGroupSeparator, ToggleButtonGroupContext};
+export {
+  ToggleButtonGroupRoot,
+  ToggleButtonGroupIndicator,
+  ToggleButtonGroupSeparator,
+  ToggleButtonGroupContext,
+};
 
-export type {ToggleButtonGroupRootProps, ToggleButtonGroupSeparatorProps};
+export type {
+  ToggleButtonGroupRootProps,
+  ToggleButtonGroupIndicatorProps,
+  ToggleButtonGroupSeparatorProps,
+};

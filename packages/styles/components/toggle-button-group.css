@@ -134,3 +134,39 @@
 .toggle-button-group--detached .toggle-button-group__separator {
   display: none;
 }
+
+/* ==========================================================================
+   Selection indicator - opt-in animated pill that slides between buttons
+   ========================================================================== */
+
+.toggle-button-group__indicator {
+  @apply pointer-events-none absolute inset-0 size-full;
+
+  border-radius: inherit;
+  background-color: var(--toggle-button-bg-selected);
+  z-index: -1;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition-duration: 250ms;
+  transition-property: translate, width, height;
+  transition-timing-function: var(--ease-out-fluid);
+  @apply motion-reduce:transition-none;
+}
+
+/* When an indicator is present, it paints the selected background instead of
+   the button, so the pill can animate between buttons. */
+.toggle-button-group .toggle-button:has(> .toggle-button-group__indicator) {
+  &[data-selected="true"] {
+    background-color: transparent;
+
+    @media (hover: hover) {
+      &:hover,
+      &[data-hovered="true"] {
+        background-color: transparent;
+      }
+    }
+  }
+}
