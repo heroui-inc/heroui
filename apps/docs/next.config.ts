@@ -88,7 +88,7 @@ const config: NextConfig = {
     return getRedirects();
   },
   async rewrites() {
-    return [
+    const rewrites = [
       {
         destination: "/llms.mdx/:lang/:path*",
         source: "/:lang(en|cn)/docs/:path*.mdx",
@@ -98,6 +98,25 @@ const config: NextConfig = {
         source: "/docs/:path*.mdx",
       },
     ];
+
+    const posthogHost = process.env["NEXT_PUBLIC_POSTHOG_HOST"];
+
+    if (posthogHost) {
+      const posthogAssetsHost = posthogHost.replace(".i.posthog.com", "-assets.i.posthog.com");
+
+      rewrites.push(
+        {
+          destination: `${posthogAssetsHost}/static/:path*`,
+          source: "/ingest/static/:path*",
+        },
+        {
+          destination: `${posthogHost}/:path*`,
+          source: "/ingest/:path*",
+        },
+      );
+    }
+
+    return rewrites;
   },
   trailingSlash: false,
   transpilePackages: ["@heroui/react", "@heroui/styles"],

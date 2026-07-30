@@ -2,6 +2,8 @@ import {PostHog} from "posthog-node";
 
 import {env} from "~env";
 
+import {isAnalyticsEnabled} from "@/lib/analytics/enabled";
+
 export const getPostHogClient = () => {
   if (!env.NEXT_PUBLIC_POSTHOG_KEY) {
     return null;
@@ -19,7 +21,7 @@ export const getPostHogClient = () => {
 export const captureEvent = async (eventMessage: Omit<EventMessage, "distinctId">) => {
   const posthog = getPostHogClient();
 
-  if (!posthog || env.NEXT_PUBLIC_APP_ENV !== "production") {
+  if (!posthog || !isAnalyticsEnabled()) {
     return;
   }
 
