@@ -358,15 +358,6 @@ importers:
       '@radix-ui/react-avatar':
         specifier: 1.1.11
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@react-aria/i18n':
-        specifier: 3.13.1
-        version: 3.13.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@react-aria/ssr':
-        specifier: 3.10.1
-        version: 3.10.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@react-aria/utils':
-        specifier: 3.34.1
-        version: 3.34.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@react-stately/utils':
         specifier: 3.12.1
         version: 3.12.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -379,12 +370,6 @@ importers:
       input-otp:
         specifier: 1.4.2
         version: 1.4.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      react-aria:
-        specifier: ^3.50.0
-        version: 3.50.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      react-aria-components:
-        specifier: ^1.19.0
-        version: 1.19.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       tailwind-merge:
         specifier: 3.4.0
         version: 3.4.0
@@ -401,6 +386,15 @@ importers:
       '@internationalized/date':
         specifier: 3.12.2
         version: 3.12.2
+      '@react-aria/i18n':
+        specifier: 3.13.1
+        version: 3.13.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@react-aria/ssr':
+        specifier: 3.10.1
+        version: 3.10.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@react-aria/utils':
+        specifier: 3.34.1
+        version: 3.34.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@react-stately/data':
         specifier: 3.16.1
         version: 3.16.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -422,6 +416,12 @@ importers:
       react:
         specifier: 19.2.6
         version: 19.2.6
+      react-aria:
+        specifier: 3.50.0
+        version: 3.50.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      react-aria-components:
+        specifier: 1.19.0
+        version: 1.19.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react-dom:
         specifier: 19.2.6
         version: 19.2.6(react@19.2.6)
