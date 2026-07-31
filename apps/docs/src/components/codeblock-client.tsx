@@ -72,7 +72,7 @@ export function CodeBlock({
         </BaseCodeBlock>
       </div>
       <Button
-        className="absolute right-1/2 bottom-2 translate-x-1/2 bg-surface text-xs shadow-sm shadow-black/5"
+        className="absolute end-1/2 bottom-2 translate-x-1/2 bg-surface text-xs shadow-sm shadow-black/5"
         size="sm"
         type="button"
         variant="tertiary"

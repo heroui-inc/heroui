@@ -78,12 +78,7 @@ export function PostCard({compact = false, featured = false, lang, post}: PostCa
         )}
         <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-black/10 ring-inset dark:ring-white/10" />
         {!!post.draft && (
-          <Chip
-            className="absolute top-3 right-3 shadow-sm"
-            color="warning"
-            size="sm"
-            variant="soft"
-          >
+          <Chip className="absolute end-3 top-3 shadow-sm" color="warning" size="sm" variant="soft">
             Draft
           </Chip>
         )}

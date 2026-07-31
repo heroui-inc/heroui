@@ -155,15 +155,15 @@
   &[data-placement="bottom"] {
     @apply w-full;
     @apply max-h-[85vh];
-    border-top-left-radius: min(32px, var(--radius-2xl));
-    border-top-right-radius: min(32px, var(--radius-2xl));
+    border-start-start-radius: min(32px, var(--radius-2xl));
+    border-start-end-radius: min(32px, var(--radius-2xl));
   }
 
   &[data-placement="top"] {
     @apply w-full;
     @apply max-h-[85vh];
-    border-bottom-left-radius: min(32px, var(--radius-2xl));
-    border-bottom-right-radius: min(32px, var(--radius-2xl));
+    border-end-start-radius: min(32px, var(--radius-2xl));
+    border-end-end-radius: min(32px, var(--radius-2xl));
   }
 
   /* Left/right placement: auto width, full height */
@@ -271,7 +271,7 @@
  * Element: close-trigger - the close button
  */
 .drawer__close-trigger {
-  @apply absolute top-4 right-4;
+  @apply absolute end-4 top-4;
 }
 
 /**

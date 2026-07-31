@@ -30,7 +30,7 @@ const icon = tv({
 
 const thumb = tv({
   base: [
-    "absolute top-1/2 left-2.5 z-10 h-8 w-8 bg-[#FFFFFF]/70 backdrop-blur-md",
+    "absolute start-2.5 top-1/2 z-10 h-8 w-8 bg-[#FFFFFF]/70 backdrop-blur-md",
     "-translate-y-1/2 rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]",
     "dark:bg-[#383435]/30 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),0px_1px_4px_0px_rgba(0,0,0,0.15)]",
     "transition-all duration-300",
@@ -42,7 +42,7 @@ const thumb = tv({
       isSelected: false,
     },
     {
-      class: "ml-6 w-10",
+      class: "ms-6 w-10",
       isPressed: true,
       isSelected: true,
     },
@@ -53,7 +53,7 @@ const thumb = tv({
     },
     isSelected: {
       false: "",
-      true: "ml-8",
+      true: "ms-8",
     },
   },
 });

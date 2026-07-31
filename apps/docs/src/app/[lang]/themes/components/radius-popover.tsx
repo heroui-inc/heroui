@@ -74,7 +74,7 @@ export function RadiusPopover({
       </div>
       <Popover.Content className="w-[304px] rounded-3xl" placement="top">
         <Popover.Dialog className="p-3">
-          <div className="mb-2 flex flex-col gap-0.5 pl-2">
+          <div className="mb-2 flex flex-col gap-0.5 ps-2">
             <p className="text-xs font-medium capitalize">{label}</p>
             <p className="text-xs text-muted">{description}</p>
           </div>

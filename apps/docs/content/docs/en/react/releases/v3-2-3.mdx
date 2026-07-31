@@ -1,0 +1,85 @@
+---
+title: v3.2.3
+description: Patch release that adds multiple selection to ComboBox, improves RTL support with logical CSS properties, upgrades tailwind-variants to 3.3.0, and fixes ScrollShadow, Spinner, InputOTP, Table, and Button accent styling.
+github:
+  pull: 6708
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">July 30, 2026</span>
+</div>
+
+Patch release: [ComboBox](/docs/components/combo-box) now supports multiple selection, styles adopt logical CSS properties for better RTL support, `tailwind-variants` is upgraded to `3.3.0`, and several fixes land across `ScrollShadow`, `Spinner`, `InputOTP`, `Table`, and accent `Button` focus styling.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Features
+
+### ComboBox
+
+[ComboBox](/docs/components/combo-box) now supports selecting more than one option. Set `selectionMode="multiple"`, use `ComboBox.Value` to render the selected items, and pass `selectionMode="multiple"` to the inner `ListBox` as well. Selection is controlled with the `value` / `defaultValue` (`Key[]`) props and the `onChange` handler.
+
+- **Multiple selection**: Select multiple options with `selectionMode="multiple"` and display them via `ComboBox.Value` ([#6714](https://github.com/heroui-inc/heroui/pull/6714))
+
+<ComponentPreview
+  isBgSolid
+  name="combo-box-multiple-selection"
+/>
+
+## Bug Fixes
+
+- **ScrollShadow**: Tolerate fractional scroll positions in end detection so the bottom shadow hides correctly on high-DPI displays ([#6710](https://github.com/heroui-inc/heroui/pull/6710)).
+- **RTL**: Adopt logical CSS properties across styles for better right-to-left support ([#6699](https://github.com/heroui-inc/heroui/pull/6699)).
+- **Button**: Restore the focus outline gap for accent buttons ([#6724](https://github.com/heroui-inc/heroui/pull/6724)).
+- **Spinner**: Move the accessible name from the hidden SVG to the root element's `status` role ([#6721](https://github.com/heroui-inc/heroui/pull/6721)).
+- **InputOTP**: Prevent OTP slots from overflowing narrow containers ([#6706](https://github.com/heroui-inc/heroui/pull/6706)).
+- **Table**: Center the sortable column indicator icon ([#6705](https://github.com/heroui-inc/heroui/pull/6705)).
+- **Collections**: Fix React Aria collection-builder compatibility across `Tabs`, `TagGroup`, `Select`, `Autocomplete`, and `ComboBox` ([#6727](https://github.com/heroui-inc/heroui/pull/6727)).
+- **Icons**: Remove the never-announced `aria-label` from decorative `aria-hidden` icons so accessibility linters and audits stay clean ([#6741](https://github.com/heroui-inc/heroui/pull/6741)).
+
+## Dependencies
+
+- **tailwind-variants**: Upgrade to `tailwind-variants@3.3.0` ([#6733](https://github.com/heroui-inc/heroui/pull/6733)).
+- **React Aria**: Move `react-aria`, `react-aria-components`, and the `@react-aria/*` utilities to `peerDependencies` so consumers resolve a single shared copy instead of a bundled one ([#6744](https://github.com/heroui-inc/heroui/pull/6744)).
+- **Node.js**: Require Node.js `>= 22.x`.
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6708](https://github.com/heroui-inc/heroui/pull/6708)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

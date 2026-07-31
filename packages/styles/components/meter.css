@@ -35,7 +35,7 @@
   }
 
   .meter__fill {
-    @apply absolute top-0 left-0 h-full rounded-sm;
+    @apply absolute start-0 top-0 h-full rounded-sm;
 
     background-color: var(--meter-fill);
 

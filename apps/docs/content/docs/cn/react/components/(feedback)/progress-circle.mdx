@@ -8,19 +8,17 @@ links:
   storybook: Components/Feedback/ProgressCircle
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { ProgressCircle } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="progress-circle-basic"
 />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import { ProgressCircle } from '@heroui/react';
@@ -34,6 +32,8 @@ export default () => (
   </ProgressCircle>
 );
 ```
+
+## 示例
 
 ### 尺寸
 
@@ -49,7 +49,7 @@ export default () => (
 
 ### 不确定进度
 
-在无法确定具体进度时，使用 `isIndeterminate`。
+无法确定进度时使用 `isIndeterminate`。
 
 <ComponentPreview
   name="progress-circle-indeterminate"
@@ -63,39 +63,21 @@ export default () => (
 
 ### 自定义 SVG 属性
 
-由于每个部分都是可组合组件，你可以直接覆盖 `strokeWidth`、`r`、`cx`、`cy`、`viewBox` 等 SVG 属性。
+各子部分均为可组合组件，可直接覆盖 `strokeWidth`、`r`、`cx`、`cy`、`viewBox` 等 SVG 属性。
 
 <ComponentPreview
   name="progress-circle-custom-svg"
 />
 
-<RelatedComponents component="progress-circle" />
+## 自定义样式
 
-## 样式
+### Tailwind CSS
 
-### 传入 Tailwind CSS 类
+<ComponentPreview name="progress-circle-custom-styles" />
 
-你可以分别自定义 ProgressCircle 的各个部分：
+### 全局 CSS
 
-```tsx
-import { ProgressCircle } from '@heroui/react';
-
-function CustomProgressCircle() {
-  return (
-    <ProgressCircle aria-label="Loading" value={60}>
-      <ProgressCircle.Track>
-        <ProgressCircle.TrackCircle />
-        <ProgressCircle.FillCircle className="stroke-purple-500" />
-      </ProgressCircle.Track>
-    </ProgressCircle>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 ProgressCircle 组件类，可以使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -113,26 +95,28 @@ function CustomProgressCircle() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 ProgressCircle 组件使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/progress-circle.css)）：
 
-#### 基础与元素类
+#### 基础与元素类 [!toc]
 
 - `.progress-circle` - 基础容器
 - `.progress-circle__track` - SVG 元素
 - `.progress-circle__track-circle` - 背景圆环
 - `.progress-circle__fill-circle` - 进度弧
 
-#### 尺寸类
+#### 尺寸类 [!toc]
 
 - `.progress-circle--sm` - 小尺寸
 - `.progress-circle--md` - 中等尺寸（默认）
 - `.progress-circle--lg` - 大尺寸
 
-#### 颜色类
+#### 颜色类 [!toc]
 
 - `.progress-circle--default` - 默认颜色
 - `.progress-circle--accent` - 强调色
@@ -142,8 +126,7 @@ ProgressCircle 组件使用以下 CSS 类（[查看源码样式](https://github.
 
 ## API 参考
 
-### ProgressCircle Props
-
+### ProgressCircle
 继承自 [React Aria ProgressBar](https://react-spectrum.adobe.com/react-aria/ProgressBar.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -166,3 +149,7 @@ ProgressCircle 组件使用以下 CSS 类（[查看源码样式](https://github.
 | `percentage` | `number` | 进度百分比（0–100） |
 | `valueText` | `string` | 格式化后的数值文案 |
 | `isIndeterminate` | `boolean` | 是否为不确定进度 |
+
+## 相关组件
+
+<RelatedComponents component="progress-circle" />

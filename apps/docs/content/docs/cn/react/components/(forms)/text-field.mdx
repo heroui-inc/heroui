@@ -9,17 +9,15 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { TextField } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview name="textfield-basic" />
 
-### 组件结构
+## 组件结构
 
 ```tsx
 import {TextField, Label, Input, Description, FieldError} from '@heroui/react';
@@ -36,7 +34,15 @@ export default () => (
 
 > **TextField** 将标签、输入、说明与错误信息整合为单个无障碍组件。若只需独立输入，请使用 **[Input](/docs/components/input)** 或 **[TextArea](/docs/components/textarea)**。
 
-### 带说明
+## 示例
+
+### 表面样式
+
+在 [Surface](/docs/components/surface) 内使用时，请在 Input 或 TextArea 组件上使用 `variant="secondary"`，以应用适合表面背景的低强调变体。
+
+<ComponentPreview name="textfield-on-surface" />
+
+### 带描述
 
 <ComponentPreview name="textfield-with-description" />
 
@@ -44,15 +50,23 @@ export default () => (
 
 <ComponentPreview name="textfield-required" />
 
-### 校验
+### 禁用状态
 
-使用 `isInvalid` 与 `FieldError` 展示校验信息。
+<ComponentPreview name="textfield-disabled" />
+
+### 宽度充满
+
+<ComponentPreview name="textfield-full-width" />
+
+### 表单校验
+
+将 `isInvalid` 与 `FieldError` 配合使用，以展示校验消息。
 
 <ComponentPreview name="textfield-validation" />
 
-### 受控
+### 受控组件
 
-通过受控 `value` 同步计数器、预览或格式化。
+控制 value 以同步计数器、预览或格式化逻辑。
 
 <ComponentPreview name="textfield-controlled" />
 
@@ -60,13 +74,9 @@ export default () => (
 
 <ComponentPreview name="textfield-with-error" />
 
-### 禁用状态
+### 文本域
 
-<ComponentPreview name="textfield-disabled" />
-
-### TextArea
-
-多行内容请使用 [TextArea](/docs/components/textarea) 替代 [Input](/docs/components/input)。
+多行内容请使用 [TextArea](/docs/components/textarea)，而非 [Input](/docs/components/input)。
 
 <ComponentPreview name="textfield-textarea" />
 
@@ -74,51 +84,21 @@ export default () => (
 
 <ComponentPreview name="textfield-input-types" />
 
-### 全宽
-
-<ComponentPreview name="textfield-full-width" />
-
-### 在 Surface 内
-
-置于 [Surface](/docs/components/surface) 中时，请在 Input 或 TextArea 上使用 `variant="secondary"`，以应用适合表面背景的弱强调变体。
-
-<ComponentPreview name="textfield-on-surface" />
-
-<RelatedComponents component="textfield" />
-
-<RelatedShowcases component="TextField" />
-
-### 自定义渲染函数
+### 渲染函数
 
 <ComponentPreview
-  name="textfield-custom-render-function"
+  name="textfield-render-function"
 />
 
-## 样式
+## 自定义样式
 
-### 传入 Tailwind CSS 类
+### Tailwind CSS
 
-```tsx
-import {TextField, Label, Input, Description} from '@heroui/react';
+<ComponentPreview name="text-field-custom-styles" />
 
-function CustomTextField() {
-  return (
-    <TextField className="gap-2 rounded-xl border border-border/60 bg-surface p-4 shadow-sm">
-      <Label className="text-sm font-semibold text-default-700">
-        Project name
-      </Label>
-      <Input className="rounded-lg border border-border/60 bg-surface px-3 py-2" />
-      <Description className="text-xs text-default-500">
-        Keep it short and memorable.
-      </Description>
-    </TextField>
-  );
-}
-```
+### 全局 CSS
 
-### 自定义组件类
-
-TextField 默认样式很少。覆盖 `.textfield` 类即可自定义容器样式。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -126,18 +106,22 @@ TextField 默认样式很少。覆盖 `.textfield` 类即可自定义容器样�
     @apply flex flex-col gap-1;
   }
 
-  /* 无效时自动隐藏说明 */
+  /* When invalid, the description is hidden automatically */
   .textfield[data-invalid="true"] [data-slot="description"],
   .textfield[aria-invalid="true"] [data-slot="description"] {
     @apply hidden;
   }
 
-  /* Description 默认内边距 */
+  /* Description has default padding */
   .textfield [data-slot="description"] {
     @apply px-1;
   }
 }
 ```
+
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -158,8 +142,7 @@ TextField 会根据状态自动管理以下 data 属性：
 
 ## API 参考
 
-### TextField Props
-
+### TextField
 继承 React Aria [TextField](https://react-spectrum.adobe.com/react-aria/TextField.html) 的全部 props。
 
 #### Base Props
@@ -248,3 +231,11 @@ TextField 与以下独立组件配合使用，请直接按需引入并组合：
 | `isFocused` | `boolean` | 字段是否聚焦（已弃用 — 请使用 `isFocusWithin`）。 |
 | `isFocusWithin` | `boolean` | 是否有任一子元素聚焦。 |
 | `isFocusVisible` | `boolean` | 是否为可见键盘焦点。 |
+
+## 相关案例
+
+<RelatedShowcases component="TextField" />
+
+## 相关组件
+
+<RelatedComponents component="textfield" />

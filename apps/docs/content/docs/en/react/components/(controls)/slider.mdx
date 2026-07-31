@@ -1,6 +1,7 @@
 ---
 title: Slider
 description: A slider allows a user to select one or more values within a range
+
 links:
   rac: Slider
   source: slider/slider.tsx
@@ -8,21 +9,17 @@ links:
   storybook: Components/Controls/Slider
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Slider } from '@heroui/react';
 ```
 
-### Usage
-
 <ComponentPreview
   name="slider-default"
 />
 
-### Anatomy
-
-Import the Slider component and access all parts using dot notation.
+## Anatomy
 
 ```tsx
 import { Slider, Label } from '@heroui/react';
@@ -38,6 +35,14 @@ export default () => (
   </Slider>
 )
 ```
+
+## Examples
+
+### Disabled
+
+<ComponentPreview
+  name="slider-disabled"
+/>
 
 ### Range Slider Anatomy
 
@@ -74,45 +79,22 @@ export default () => (
   name="slider-range"
 />
 
-### Disabled
+### Render Function
 
 <ComponentPreview
-  name="slider-disabled"
+  name="slider-render-function"
 />
 
-### Custom Render Function
+## Customization
 
-<ComponentPreview
-  name="slider-custom-render-function"
-/>
+### Tailwind CSS
 
-<RelatedComponents component="slider" />
+<ComponentPreview name="slider-custom-styles" />
 
-## Styling
-
-### Passing Tailwind CSS classes
-
-```tsx
-import { Slider, Label } from '@heroui/react';
-
-function CustomSlider() {
-  return (
-    <Slider className="w-full">
-      <Label>Volume</Label>
-      <Slider.Output className="text-muted-fg text-sm" />
-      <Slider.Track className="h-2 rounded-full bg-surface-secondary">
-        <Slider.Fill className="bg-accent" />
-        <Slider.Thumb className="size-4 rounded-full bg-accent" />
-      </Slider.Track>
-    </Slider>
-  );
-}
-```
-
-### Customizing the component classes
+### Global CSS
 
 To customize the Slider component classes, you can use the `@layer components` directive.
-<br/>[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
+[Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
 ```css
 @layer components {
@@ -138,20 +120,22 @@ To customize the Slider component classes, you can use the `@layer components` d
 }
 ```
 
+## Styling Reference
+
 HeroUI follows the [BEM](https://getbem.com/) methodology to ensure component variants and states are reusable and easy to customize.
 
 ### CSS Classes
 
 The Slider component uses these CSS classes ([View source styles](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/slider.css)):
 
-#### Base Classes
+#### Base Classes [!toc]
 - `.slider` - Base slider container
 - `.slider__output` - Output element displaying current value(s)
 - `.slider-track` - Track element containing fill and thumbs
 - `.slider-fill` - Fill element showing selected range
 - `.slider-thumb` - Individual thumb element
 
-#### State Classes
+#### State Classes [!toc]
 - `.slider[data-disabled="true"]` - Disabled slider state
 - `.slider[data-orientation="vertical"]` - Vertical orientation
 - `.slider-thumb[data-dragging="true"]` - Thumb being dragged
@@ -171,7 +155,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 
 ## API Reference
 
-### Slider Props
+### Slider
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -191,7 +175,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Slider content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Slider.Output Props
+### Slider.Output
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -199,7 +183,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Output content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderOutputRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Slider.Track Props
+### Slider.Track
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -207,14 +191,14 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Track content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderTrackRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### Slider.Fill Props
+### Slider.Fill
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 | `style` | `CSSProperties` | - | Inline styles |
 
-### Slider.Thumb Props
+### Slider.Thumb
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -225,7 +209,7 @@ The component supports both CSS pseudo-classes and data attributes for flexibili
 | `children` | `ReactNode \| RenderFunction` | - | Thumb content or render function |
 | `render` | `DOMRenderFunction<keyof React.JSX.IntrinsicElements, SliderThumbRenderProps>` | - | Overrides the default DOM element with a custom render function.|
 
-### RenderProps
+### Render Props
 
 When using render functions with Slider.Output or Slider.Track, these values are provided:
 
@@ -378,3 +362,6 @@ The Slider component implements the ARIA slider pattern and provides:
 
 For more information, see the [React Aria Slider documentation](https://react-spectrum.adobe.com/react-aria/Slider.html).
 
+## Related Components
+
+<RelatedComponents component="slider" />

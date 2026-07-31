@@ -7,6 +7,8 @@ import type {TextProps} from "react-aria-components/Text";
 import {descriptionVariants} from "@heroui/styles";
 import {Text} from "react-aria-components/Text";
 
+import {useHasTextSlot} from "../../utils/use-has-text-slot";
+
 /* -------------------------------------------------------------------------------------------------
  * Description Root
  * -----------------------------------------------------------------------------------------------*/
@@ -14,6 +16,10 @@ interface DescriptionRootProps
   extends ComponentPropsWithRef<typeof Text>, TextProps, DescriptionVariants {}
 
 const DescriptionRoot = ({children, className, ...rest}: DescriptionRootProps) => {
+  if (!useHasTextSlot("description")) {
+    return null;
+  }
+
   return (
     <Text
       className={descriptionVariants({className})}

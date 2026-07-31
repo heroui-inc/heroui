@@ -18,6 +18,7 @@ import {
 
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
+import {FieldSlotsGate} from "../../utils/field-slots-gate";
 import {IconChevronDown} from "../icons";
 import {SurfaceContext} from "../surface";
 
@@ -48,15 +49,17 @@ const SelectRoot = <T extends object = object, M extends "single" | "multiple" =
   const slots = React.useMemo(() => selectVariants({fullWidth, variant}), [fullWidth, variant]);
 
   return (
-    <SelectContext value={{slots}}>
-      <SelectPrimitive
-        data-slot="select"
-        {...props}
-        className={composeTwRenderProps(className, slots?.base())}
-      >
-        {(values) => <>{typeof children === "function" ? children(values) : children}</>}
-      </SelectPrimitive>
-    </SelectContext>
+    <FieldSlotsGate>
+      <SelectContext value={{slots}}>
+        <SelectPrimitive
+          data-slot="select"
+          {...props}
+          className={composeTwRenderProps(className, slots?.base())}
+        >
+          {(values) => <>{typeof children === "function" ? children(values) : children}</>}
+        </SelectPrimitive>
+      </SelectContext>
+    </FieldSlotsGate>
   );
 };
 

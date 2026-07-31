@@ -1,5 +1,6 @@
 export {Basic} from "./basic";
 export {Controlled} from "./controlled";
+export {CustomStyles} from "./custom-styles";
 export {Disabled} from "./disabled";
 export {FormExample} from "./form-example";
 export {FourDigits} from "./four-digits";

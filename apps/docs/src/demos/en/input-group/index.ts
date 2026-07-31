@@ -1,5 +1,6 @@
 export {Default} from "./default";
 export {Disabled} from "./disabled";
+export {CustomStyles} from "./custom-styles";
 export {FullWidth} from "./full-width";
 export {Invalid} from "./invalid";
 export {OnSurface} from "./on-surface";

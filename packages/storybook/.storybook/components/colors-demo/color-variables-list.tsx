@@ -71,7 +71,7 @@ export function ColorVariablesList({variables}: ColorVariablesListProps) {
   };
 
   return (
-    <div className="flex h-full flex-col gap-4 overflow-y-auto pr-2 text-sm">
+    <div className="flex h-full flex-col gap-4 overflow-y-auto pe-2 text-sm">
       {categoryOrder.map((category) => {
         const categoryVars = groupedVariables[category];
 

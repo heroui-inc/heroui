@@ -2,9 +2,9 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.2 — 补丁版本",
-        "href": "/docs/react/releases/v3-2-2",
-        "date": "2026-07-06"
+        "label": "HeroUI React v3.2.3 — 补丁版本",
+        "href": "/docs/react/releases/v3-2-3",
+        "date": "2026-07-30"
       },
       {
         "label": "HeroUI Native v1.0.7 — 补丁版本",
@@ -61,7 +61,7 @@
     "relatedPosts": "相关文章"
   },
   "showcase": {
-    "heading": "展示",
+    "heading": "相关案例",
     "description": "探索展示 HeroUI 组件在真实场景中应用的互动示例。"
   },
   "footer": {

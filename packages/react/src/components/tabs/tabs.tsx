@@ -5,7 +5,7 @@ import type {TabsVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef, ReactNode} from "react";
 
 import {tabsVariants} from "@heroui/styles";
-import React, {createContext, use, useRef} from "react";
+import React, {createContext, use, useCallback, useRef} from "react";
 import {SelectionIndicator as SelectionIndicatorPrimitive} from "react-aria-components/SelectionIndicator";
 import {
   TabList as TabListPrimitive,
@@ -14,6 +14,7 @@ import {
   Tabs as TabsPrimitive,
 } from "react-aria-components/Tabs";
 
+import {createCollectionSlot} from "../../utils";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {IconChevronDown, IconChevronLeft, IconChevronRight, IconChevronUp} from "../icons";
@@ -28,6 +29,16 @@ type TabsContext = {
 };
 
 const TabsContext = createContext<TabsContext>({});
+
+/* -------------------------------------------------------------------------------------------------
+ * Tabs Collection Slot
+ * -----------------------------------------------------------------------------------------------*/
+type ListContainerInjectedProps = {
+  className?: string;
+  render?: DOMRenderProps<"div", undefined>["render"];
+} & Record<string, unknown>;
+
+const listContainerSlot = createCollectionSlot<ListContainerInjectedProps>("tabs.listContainer");
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs Root
@@ -73,56 +84,16 @@ interface TabListContainerProps<
 const TabListContainer = <E extends keyof React.JSX.IntrinsicElements = "div">({
   children,
   className,
-  ...props
+  render,
+  ...containerProps
 }: TabListContainerProps<E> &
   Omit<React.JSX.IntrinsicElements[E], keyof TabListContainerProps<E>>) => {
-  const {orientation = "horizontal", slots} = use(TabsContext);
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const isVertical = orientation === "vertical";
-
-  const scrollBy = (direction: 1 | -1) => {
-    const el = scrollerRef.current;
-
-    if (!el) return;
-    const size = isVertical ? el.clientHeight : el.clientWidth;
-
-    el.scrollBy({behavior: "smooth", [isVertical ? "top" : "left"]: direction * size * 0.8});
-  };
-
   return (
-    <dom.div
-      className={composeSlotClassName(slots?.tabListContainer, className)}
-      data-slot="tabs-list-container"
-      {...(props as any)}
+    <listContainerSlot.Injector
+      {...({...containerProps, className, render} as ListContainerInjectedProps)}
     >
-      <ScrollShadow
-        ref={scrollerRef}
-        hideScrollBar
-        className={composeSlotClassName(slots?.scroller)}
-        orientation={orientation}
-        size={64}
-      >
-        {children}
-      </ScrollShadow>
-      <button
-        aria-label={isVertical ? "Scroll tabs up" : "Scroll tabs left"}
-        className={composeSlotClassName(slots?.scrollPrev)}
-        tabIndex={-1}
-        type="button"
-        onClick={() => scrollBy(-1)}
-      >
-        {isVertical ? <IconChevronUp /> : <IconChevronLeft />}
-      </button>
-      <button
-        aria-label={isVertical ? "Scroll tabs down" : "Scroll tabs right"}
-        className={composeSlotClassName(slots?.scrollNext)}
-        tabIndex={-1}
-        type="button"
-        onClick={() => scrollBy(1)}
-      >
-        {isVertical ? <IconChevronDown /> : <IconChevronRight />}
-      </button>
-    </dom.div>
+      {children}
+    </listContainerSlot.Injector>
   );
 };
 
@@ -135,13 +106,107 @@ interface TabListProps extends ComponentPropsWithRef<typeof TabListPrimitive<obj
 }
 
 const TabList = ({children, className, ...props}: TabListProps) => {
-  const {slots} = use(TabsContext);
+  const {orientation = "horizontal", slots} = use(TabsContext);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const isVertical = orientation === "vertical";
+
+  const [listContainerProps, restProps] = listContainerSlot.useSlot(props);
+
+  const scrollBy = useCallback(
+    (direction: 1 | -1) => {
+      const el = scrollerRef.current;
+
+      if (!el) return;
+      const size = isVertical ? el.clientHeight : el.clientWidth;
+
+      // In RTL, the horizontal scroll range runs from 0 (start, on the right) to negative,
+      // so the delta sign must be flipped for `scrollLeft` to move toward the intended edge.
+      const isRTL = !isVertical && getComputedStyle(el).direction === "rtl";
+      const delta = direction * size * 0.8 * (isRTL ? -1 : 1);
+
+      el.scrollBy({
+        behavior: "smooth",
+        [isVertical ? "top" : "left"]: delta,
+      });
+    },
+    [isVertical],
+  );
+
+  // Without ListContainer, stay a thin RAC TabList
+  if (!listContainerProps) {
+    return (
+      <TabListPrimitive
+        {...restProps}
+        className={composeTwRenderProps(className, slots?.tabList())}
+        data-slot="tabs-list"
+      >
+        {children}
+      </TabListPrimitive>
+    );
+  }
+
+  const {
+    className: containerClassName,
+    render: containerRender,
+    ...containerRest
+  } = listContainerProps;
 
   return (
     <TabListPrimitive
-      {...props}
+      {...restProps}
       className={composeTwRenderProps(className, slots?.tabList())}
       data-slot="tabs-list"
+      render={(renderProps) => {
+        const {
+          children: listChildren,
+          className: listClassName,
+          ref: listRef,
+          ...listRest
+        } = renderProps as typeof renderProps & {
+          ref?: React.Ref<HTMLDivElement>;
+        };
+
+        return (
+          <dom.div
+            className={composeSlotClassName(slots?.tabListContainer, containerClassName)}
+            data-slot="tabs-list-container"
+            render={containerRender as DOMRenderProps<"div", undefined>["render"]}
+            {...(containerRest as React.HTMLAttributes<HTMLDivElement>)}
+          >
+            <ScrollShadow
+              ref={scrollerRef}
+              hideScrollBar
+              className={composeSlotClassName(slots?.scroller)}
+              orientation={orientation}
+              size={64}
+            >
+              <div {...listRest} ref={listRef} className={listClassName}>
+                {listChildren}
+              </div>
+            </ScrollShadow>
+
+            <button
+              aria-label={isVertical ? "Scroll tabs up" : "Scroll tabs left"}
+              className={composeSlotClassName(slots?.scrollPrev)}
+              tabIndex={-1}
+              type="button"
+              onClick={() => scrollBy(-1)}
+            >
+              {isVertical ? <IconChevronUp /> : <IconChevronLeft />}
+            </button>
+
+            <button
+              aria-label={isVertical ? "Scroll tabs down" : "Scroll tabs right"}
+              className={composeSlotClassName(slots?.scrollNext)}
+              tabIndex={-1}
+              type="button"
+              onClick={() => scrollBy(1)}
+            >
+              {isVertical ? <IconChevronDown /> : <IconChevronRight />}
+            </button>
+          </dom.div>
+        );
+      }}
     >
       {children}
     </TabListPrimitive>

@@ -19,7 +19,7 @@ export function AlertDialogDemo() {
         </Avatar>
         <Card.Title>{t.title}</Card.Title>
         <Card.Description>{t.description}</Card.Description>
-        <CloseButton className="absolute top-3 right-3" />
+        <CloseButton className="absolute end-3 top-3" />
       </Card.Header>
       <Card.Footer className="flex w-full items-center gap-2 px-0.5 pt-3">
         <Button className="w-full" variant="tertiary">

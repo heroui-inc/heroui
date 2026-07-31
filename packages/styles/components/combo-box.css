@@ -42,8 +42,21 @@
   @apply relative isolate inline-flex items-center;
 }
 
+.combo-box__value {
+  @apply text-sm wrap-break-word text-field-foreground empty:hidden;
+
+  &[data-placeholder="true"] {
+    @apply text-field-placeholder;
+  }
+
+  /* Removes the list-box-item indicator element from the combo-box value */
+  [data-slot="list-box-item-indicator"] {
+    @apply hidden;
+  }
+}
+
 .combo-box__trigger {
-  @apply absolute top-1/2 end-0 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pe-2 text-field-placeholder transition duration-150 no-highlight;
+  @apply absolute end-0 top-1/2 flex h-full shrink-0 -translate-y-1/2 cursor-pointer items-center justify-center pe-2 text-field-placeholder transition duration-150 no-highlight;
 
   /* Remove default button styles */
   @apply border-none bg-transparent outline-none;
@@ -86,7 +99,7 @@
 
 /* Similar to popover content styles */
 .combo-box__popover {
-  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 overflow-y-auto overscroll-contain bg-overlay p-0 text-sm scrollbar;
+  @apply min-w-(--trigger-width) origin-(--trigger-anchor-point) scroll-py-1 scrollbar overflow-y-auto overscroll-contain bg-overlay p-0 text-sm;
   border-radius: min(32px, var(--radius-3xl));
   box-shadow: var(--shadow-overlay);
 

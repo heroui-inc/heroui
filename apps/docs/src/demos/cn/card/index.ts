@@ -1,4 +1,5 @@
 // Card demos
+export {CustomStyles} from "./custom-styles";
 export {Default} from "./default";
 export {Horizontal} from "./horizontal";
 export {Variants} from "./variants";

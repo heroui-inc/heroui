@@ -116,7 +116,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
       />
       <main className="mx-auto w-full max-w-3xl px-6 py-16 sm:px-8">
         <Link
-          className="button button--tertiary mb-12 -ml-2 inline-flex items-center gap-1"
+          className="button button--tertiary -ms-2 mb-12 inline-flex items-center gap-1"
           href={`/${lang}/blog`}
         >
           <ChevronLeft className="size-4" />
@@ -155,7 +155,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
                 {post.authorAvatar ? (
                   <img
                     alt=""
-                    className="mr-0 size-0 rounded-full opacity-0 transition-all group-hover/author:mr-2 group-hover/author:size-6 group-hover/author:opacity-100"
+                    className="me-0 size-0 rounded-full opacity-0 transition-all group-hover/author:me-2 group-hover/author:size-6 group-hover/author:opacity-100"
                     src={post.authorAvatar}
                   />
                 ) : null}

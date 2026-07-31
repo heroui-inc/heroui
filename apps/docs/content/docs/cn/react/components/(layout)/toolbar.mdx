@@ -8,22 +8,28 @@ links:
   storybook: Components/Layout/Toolbar
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Toolbar } from '@heroui/react';
 ```
 
-### 用法
-
 <ComponentPreview
   name="toolbar-basic"
 />
+
+## 示例
 
 ### 垂直方向
 
 <ComponentPreview
   name="toolbar-vertical"
+/>
+
+### 组合模式
+
+<ComponentPreview
+  name="toolbar-attached"
 />
 
 ### 与 ButtonGroup 组合
@@ -32,37 +38,15 @@ import { Toolbar } from '@heroui/react';
   name="toolbar-with-button-group"
 />
 
-### Attached
+## 自定义样式
 
-<ComponentPreview
-  name="toolbar-attached"
-/>
+### Tailwind CSS
 
-<RelatedComponents component="toolbar" />
+<ComponentPreview name="toolbar-custom-styles" />
 
-## 样式
+### 全局 CSS
 
-### 传入 Tailwind CSS 类
-
-```tsx
-import { Toolbar } from '@heroui/react';
-
-function CustomToolbar() {
-  return (
-    <Toolbar
-      aria-label="Actions"
-      className="rounded-xl border border-default bg-surface p-2"
-    >
-      {/* toolbar content */}
-    </Toolbar>
-  );
-}
-```
-
-### 自定义组件类
-
-若要自定义 Toolbar 的组件类名，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -72,7 +56,9 @@ function CustomToolbar() {
 }
 ```
 
-HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于定制。
+## 样式参考
+
+HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
@@ -85,8 +71,7 @@ Toolbar 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 
 ## API 参考
 
-### Toolbar Props
-
+### Toolbar
 继承 [React Aria Toolbar](https://react-spectrum.adobe.com/react-aria/Toolbar.html)。
 
 | Prop | 类型 | 默认值 | 描述 |
@@ -105,3 +90,7 @@ Toolbar 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-in
 | Prop | 类型 | 描述 |
 |------|------|------|
 | `orientation` | `"horizontal" \| "vertical"` | 当前 Toolbar 的方向 |
+
+## 相关组件
+
+<RelatedComponents component="toolbar" />

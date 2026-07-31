@@ -1,0 +1,85 @@
+---
+title: v3.2.3
+description: 补丁版本：为 ComboBox 添加多选支持，采用逻辑 CSS 属性改进 RTL 支持，将 tailwind-variants 升级到 3.3.0，并修复 ScrollShadow、Spinner、InputOTP、Table 以及 accent Button 的样式问题。
+github:
+  pull: 6708
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 7 月 30 日</span>
+</div>
+
+补丁版本：[ComboBox](/docs/components/combo-box) 现已支持多选，样式采用逻辑 CSS 属性以更好地支持 RTL，`tailwind-variants` 升级到 `3.3.0`，并修复了 `ScrollShadow`、`Spinner`、`InputOTP`、`Table` 以及 accent `Button` 焦点样式的多个问题。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **正在使用 AI 助手？** 对它说「Hey Cursor，把 HeroUI 升级到最新版本」。它会自动对比版本并应用必要变更。了解更多请参阅 [HeroUI MCP 服务器](/docs/ui-for-agents/mcp-server)。
+</Callout>
+
+## 新功能
+
+### ComboBox
+
+[ComboBox](/docs/components/combo-box) 现已支持选择多个选项。设置 `selectionMode="multiple"`，使用 `ComboBox.Value` 渲染已选项，并同样为内部 `ListBox` 传入 `selectionMode="multiple"`。选择通过 `value` / `defaultValue`（`Key[]`）属性和 `onChange` 处理函数进行控制。
+
+- **多选**：通过 `selectionMode="multiple"` 选择多个选项，并使用 `ComboBox.Value` 展示已选项 ([#6714](https://github.com/heroui-inc/heroui/pull/6714))
+
+<ComponentPreview
+  isBgSolid
+  name="combo-box-multiple-selection"
+/>
+
+## 错误修复
+
+- **ScrollShadow**：在末端检测中兼容小数滚动位置，使底部阴影在高分辨率屏幕上能正确隐藏 ([#6710](https://github.com/heroui-inc/heroui/pull/6710))。
+- **RTL**：在样式中采用逻辑 CSS 属性，以更好地支持从右到左布局 ([#6699](https://github.com/heroui-inc/heroui/pull/6699))。
+- **Button**：恢复 accent 按钮的焦点轮廓间隙 ([#6724](https://github.com/heroui-inc/heroui/pull/6724))。
+- **Spinner**：将无障碍名称从隐藏的 SVG 移到根元素的 `status` role 上 ([#6721](https://github.com/heroui-inc/heroui/pull/6721))。
+- **InputOTP**：避免 OTP 输入格在窄容器中溢出 ([#6706](https://github.com/heroui-inc/heroui/pull/6706))。
+- **Table**：将可排序列的指示图标居中 ([#6705](https://github.com/heroui-inc/heroui/pull/6705))。
+- **Collections**：修复 `Tabs`、`TagGroup`、`Select`、`Autocomplete` 和 `ComboBox` 的 React Aria 集合构建器兼容性问题 ([#6727](https://github.com/heroui-inc/heroui/pull/6727))。
+- **Icons**：从装饰性的 `aria-hidden` 图标中移除永远不会被朗读的 `aria-label`，使无障碍检查与审计保持整洁 ([#6741](https://github.com/heroui-inc/heroui/pull/6741))。
+
+## 依赖
+
+- **tailwind-variants**：升级到 `tailwind-variants@3.3.0` ([#6733](https://github.com/heroui-inc/heroui/pull/6733))。
+- **React Aria**：将 `react-aria`、`react-aria-components` 以及 `@react-aria/*` 工具包移至 `peerDependencies`，使使用方解析到唯一共享副本而非内置副本 ([#6744](https://github.com/heroui-inc/heroui/pull/6744))。
+- **Node.js**：要求 Node.js `>= 22.x`。
+
+## 链接
+
+- [组件文档](/docs/react/components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6708](https://github.com/heroui-inc/heroui/pull/6708)
+
+## 贡献者
+
+感谢所有为本次发布做出贡献的人！
+
+<PRContributors />

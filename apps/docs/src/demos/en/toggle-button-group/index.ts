@@ -7,3 +7,4 @@ export {Orientation} from "./orientation";
 export {SelectionMode} from "./selection-mode";
 export {Sizes} from "./sizes";
 export {WithoutSeparator} from "./without-separator";
+export {CustomStyles} from "./custom-styles";

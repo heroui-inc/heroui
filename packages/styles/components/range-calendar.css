@@ -125,7 +125,7 @@
 }
 
 .range-calendar__nav-button-icon {
-  @apply size-4;
+  @apply size-4 rtl:rotate-180;
 }
 
 /* -----------------------------------------------------------------------------
@@ -265,11 +265,11 @@
   } */
 
   &[data-selection-start="true"]:not([data-outside-month="true"]) {
-    @apply rounded-tl-3xl rounded-bl-3xl;
+    @apply rounded-ss-3xl rounded-es-3xl;
   }
 
   &[data-selection-end="true"]:not([data-outside-month="true"]) {
-    @apply rounded-tr-3xl rounded-br-3xl;
+    @apply rounded-se-3xl rounded-ee-3xl;
   }
 
   /* Pressed state */

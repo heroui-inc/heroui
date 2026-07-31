@@ -7,7 +7,7 @@ export function WithKeyboardShortcut() {
     <TextField aria-label="Command" className="w-full max-w-[280px]" name="command">
       <InputGroup>
         <InputGroup.Input className="w-full max-w-[280px]" placeholder="Command" />
-        <InputGroup.Suffix className="pr-2">
+        <InputGroup.Suffix className="pe-2">
           <Kbd>
             <Kbd.Abbr keyValue="command" />
             <Kbd.Content>K</Kbd.Content>

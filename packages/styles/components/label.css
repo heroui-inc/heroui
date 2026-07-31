@@ -13,7 +13,7 @@
 [data-required="true"]:not([role="group"]):not([role="radiogroup"]):not([role="checkboxgroup"])
   > .label,
 [data-required="true"]:not([data-slot="radio"]):not([data-slot="checkbox"]) > .label {
-  @apply after:ml-0.5 after:text-danger after:content-['*'];
+  @apply after:ms-0.5 after:text-danger after:content-['*'];
 }
 
 .label--disabled,

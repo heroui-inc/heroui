@@ -30,7 +30,7 @@ export function CustomToast() {
               <ToastContent>
                 <div className="flex items-center gap-2">
                   <ToastIndicator className="text-accent" variant={content.variant} />
-                  <div className="flex flex-col pr-6">
+                  <div className="flex flex-col pe-6">
                     {content.title ? (
                       <ToastTitle className="text-accent">{content.title}</ToastTitle>
                     ) : null}
@@ -40,7 +40,7 @@ export function CustomToast() {
                   </div>
                 </div>
               </ToastContent>
-              <Toast.CloseButton className="absolute top-1/2 right-2 -translate-y-1/2 border-none bg-transparent opacity-100 [&>svg]:size-4" />
+              <Toast.CloseButton className="absolute end-2 top-1/2 -translate-y-1/2 border-none bg-transparent opacity-100 [&>svg]:size-4" />
             </Toast>
           );
         }}

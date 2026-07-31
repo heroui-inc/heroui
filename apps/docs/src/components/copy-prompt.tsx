@@ -51,7 +51,7 @@ export function CopyPrompt({children, className, icon = "sparkles-fill", prompt}
   return (
     <div
       className={cn(
-        "flex gap-2 rounded-xl border border-border bg-surface py-3 pr-3 pl-1 text-sm text-surface-foreground shadow-surface",
+        "flex gap-2 rounded-xl border border-border bg-surface py-3 ps-1 pe-3 text-sm text-surface-foreground shadow-surface",
         className,
       )}
     >

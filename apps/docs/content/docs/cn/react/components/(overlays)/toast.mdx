@@ -9,15 +9,86 @@ links:
   figma: true
 ---
 
-## 引入
+## 用法
 
 ```tsx
 import { Toast, toast } from '@heroui/react';
 ```
 
-## 设置
+<ComponentPreview
+  name="toast-default"
+/>
 
-在应用根部渲染 Provider。
+## 组件结构
+
+```tsx
+<Toast.Provider>
+  <Toast>
+    <Toast.Indicator />
+    <Toast.Content>
+      <Toast.Title />
+      <Toast.Description />
+    </Toast.Content>
+    <Toast.ActionButton />
+    <Toast.CloseButton />
+  </Toast>
+</Toast.Provider>
+```
+
+
+## 示例
+
+### 变体
+
+<ComponentPreview
+  name="toast-variants"
+/>
+
+### 放置位置
+
+<ComponentPreview
+  name="toast-placements"
+/>
+
+### 简单 Toast
+
+<ComponentPreview
+  name="toast-simple"
+/>
+
+### 自定义指示器
+
+<ComponentPreview
+  name="toast-custom-indicator"
+/>
+
+### 自定义 Toast 渲染
+
+<ComponentPreview
+  name="toast-custom-toast"
+/>
+
+### Promise 与加载中
+
+<ComponentPreview
+  name="toast-promise"
+/>
+
+### 回调
+
+<ComponentPreview
+  name="toast-callbacks"
+/>
+
+### 自定义队列
+
+<ComponentPreview
+  name="toast-custom-queue"
+/>
+
+### 配置
+
+在应用根节点渲染 Provider。
 
 ```tsx
 import { Toast, Button, toast } from '@heroui/react';
@@ -34,90 +105,15 @@ function App() {
 }
 ```
 
-### 用法
+## 自定义样式
 
-<ComponentPreview
-  name="toast-default"
-/>
+### Tailwind CSS
 
-### 简单 Toast
+<ComponentPreview name="toast-custom-styles" />
 
-<ComponentPreview
-  name="toast-simple"
-/>
+### 全局 CSS
 
-### 变体
-
-<ComponentPreview
-  name="toast-variants"
-/>
-
-### 自定义指示器
-
-<ComponentPreview
-  name="toast-custom-indicator"
-/>
-
-### Promise 与加载中
-
-<ComponentPreview
-  name="toast-promise"
-/>
-
-### 回调
-
-<ComponentPreview
-  name="toast-callbacks"
-/>
-
-### 放置位置
-
-<ComponentPreview
-  name="toast-placements"
-/>
-
-### 自定义 Toast 渲染
-
-<ComponentPreview
-  name="toast-custom-toast"
-/>
-
-### 自定义队列
-
-<ComponentPreview
-  name="toast-custom-queue"
-/>
-
-### 组件结构
-
-```tsx
-<Toast.Provider>
-  <Toast>
-    <Toast.Indicator />
-    <Toast.Content>
-      <Toast.Title />
-      <Toast.Description />
-    </Toast.Content>
-    <Toast.ActionButton />
-    <Toast.CloseButton />
-  </Toast>
-</Toast.Provider>
-```
-
-<RelatedComponents component="toast" />
-
-## 样式
-
-### 传入 Tailwind CSS 类
-
-```tsx
-<Toast.Provider className="bottom-8 right-8" placement="bottom end" />
-```
-
-### 自定义组件类
-
-要自定义 Toast 的组件类，可使用 `@layer components` 指令。
-<br/>[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
+若要自定义组件类，可使用 `@layer components` 指令。[了解更多](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes)。
 
 ```css
 @layer components {
@@ -131,13 +127,15 @@ function App() {
 }
 ```
 
+## 样式参考
+
 HeroUI 遵循 [BEM](https://getbem.com/) 方法论，确保组件变体与状态可复用且易于自定义。
 
 ### CSS 类
 
 Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/heroui/blob/v3/packages/styles/components/toast.css)）：
 
-#### 基础类
+#### 基础类 [!toc]
 - `.toast` — Toast 根容器
 - `.toast__region` — Toast 区域容器
 - `.toast__content` — 包裹标题与说明的内容容器
@@ -147,7 +145,7 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 - `.toast__action` — 操作按钮容器
 - `.toast__close` — 关闭按钮容器
 
-#### 变体类
+#### 变体类 [!toc]
 - `.toast--default` — 默认灰色变体
 - `.toast--accent` — 强调蓝色变体
 - `.toast--success` — 成功绿色变体
@@ -164,8 +162,7 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 
 ## API 参考
 
-### Toast.Provider Props
-
+### Toast.Provider
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `placement` | `"top start" \| "top" \| "top end" \| "bottom start" \| "bottom" \| "bottom end"` | `"bottom"` | Toast 区域的放置位置 |
@@ -177,8 +174,7 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 | `children` | `ReactNode \| ((props: {toast: QueuedToast<T>}) => ReactNode)` | - | 自定义渲染函数或子节点 |
 | `className` | `string` | - | 附加的 CSS 类 |
 
-### Toast Props
-
+### Toast
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `toast` | `QueuedToast<T>` | - | 来自队列的 Toast 数据（必填） |
@@ -188,45 +184,39 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 | `className` | `string` | - | 附加的 CSS 类 |
 | `children` | `ReactNode` | - | Toast 内容（ToastContent、ToastIndicator 等） |
 
-### Toast.Content Props
-
+### Toast.Content
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `ReactNode` | - | 内容（通常为 ToastTitle 与 ToastDescription） |
 | `className` | `string` | - | 附加的 CSS 类 |
 
-### Toast.Indicator Props
-
+### Toast.Indicator
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `variant` | `ToastVariants["variant"]` | - | 默认图标的变体 |
 | `children` | `ReactNode` | - | 自定义指示图标（默认使用变体图标） |
 | `className` | `string` | - | 附加的 CSS 类 |
 
-### Toast.Title Props
-
+### Toast.Title
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `ReactNode` | - | 标题文本 |
 | `className` | `string` | - | 附加的 CSS 类 |
 
-### Toast.Description Props
-
+### Toast.Description
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `ReactNode` | - | 说明文本 |
 | `className` | `string` | - | 附加的 CSS 类 |
 
-### Toast.ActionButton Props
-
+### Toast.ActionButton
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `children` | `ReactNode` | - | 操作按钮内容 |
 | `className` | `string` | - | 附加的 CSS 类 |
 | All `Button` props | - | - | 接受 Button 组件的全部 props |
 
-### Toast.CloseButton Props
-
+### Toast.CloseButton
 | Prop | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `className` | `string` | - | 附加的 CSS 类 |
@@ -330,3 +320,7 @@ toast.resumeAll();
 | `loading` | `ReactNode` | - | Promise pending 时显示的消息 |
 | `success` | `ReactNode \| ((data: T) => ReactNode)` | - | 成功时显示的消息（可为函数） |
 | `error` | `ReactNode \| ((error: Error) => ReactNode)` | - | 失败时显示的消息（可为函数） |
+
+## 相关组件
+
+<RelatedComponents component="toast" />

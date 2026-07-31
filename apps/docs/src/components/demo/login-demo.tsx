@@ -20,7 +20,7 @@ export function LoginDemo() {
           </Avatar.Fallback>
         </Avatar>
         <Card.Title>{t.title}</Card.Title>
-        <CloseButton className="absolute top-3 right-3" />
+        <CloseButton className="absolute end-3 top-3" />
       </Card.Header>
       <Card.Content className="w-full gap-2">
         <p className="text-center text-sm font-medium text-balance text-muted">{t.trialNote}</p>

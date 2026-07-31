@@ -58,6 +58,9 @@ function ShowcasesList({showcaseId}: {showcaseId: string}) {
 }
 
 export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: ShowcaseDetailClientProps) {
+  const params = useParams<{lang?: string}>();
+  const lang = params.lang ?? i18n.defaultLanguage;
+
   return (
     <section className="relative flex min-h-screen w-screen flex-col overflow-hidden bg-background text-foreground">
       <div aria-hidden="true" className={dotBackground()} />
@@ -91,7 +94,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
           <div className="jutify-center mx-auto flex max-w-7xl flex-col flex-wrap items-center px-6 py-4 md:flex-row md:flex-nowrap md:justify-between">
             {/* Left section - Author info */}
             <div className="order-2 flex-1 md:order-1">
-              <p className="text-center text-sm text-muted/70 md:text-left">
+              <p className="text-center text-sm text-muted/70 md:text-start">
                 By{" "}
                 {showcase.author?.link ? (
                   <a
@@ -122,7 +125,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
                     }),
                   )}
                   href={
-                    `/docs/react/components/${component.toLowerCase().replace(/group$/, "-group")}` as unknown as UrlObject
+                    `/${lang}/docs/react/components/${component.toLowerCase().replace(/group$/, "-group")}` as unknown as UrlObject
                   }
                 >
                   {component}
@@ -130,7 +133,7 @@ export function ShowcaseDetailClient({codePanel, showcase, showcaseId}: Showcase
               ))}
             </div>
 
-            <div className="order-3 flex-1 text-center md:text-right">
+            <div className="order-3 flex-1 text-center md:text-end">
               <p className="text-sm text-muted/70">{showcase.title}</p>
             </div>
           </div>

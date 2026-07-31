@@ -132,7 +132,7 @@ const TemplateWithCustomContent = (props: Popover["ContentProps"]) => {
               </div>
             </Popover.Heading>
             <div>
-              <p className="pl-px text-sm">
+              <p className="ps-px text-sm">
                 Design Engineer, @hero_ui lover she/her. SF Bay Area&nbsp;
                 <span aria-label="confetti" role="img">
                   🎉
