@@ -1,6 +1,6 @@
 ---
 title: Provider
-description: Configure HeroUI Native provider with text, text input, animation, and toast settings
+description: Configure HeroUI Native provider with text, text input, animation, toast, and layout direction settings
 icon: chevrons-expand-horizontal
 ---
 
@@ -15,6 +15,7 @@ The provider serves as the main entry point for HeroUI Native, wrapping your app
 - **Text Input Configuration**: Global text input settings for consistency across all HeroUI input components
 - **Animation Configuration**: Global animation control to disable all animations across the application
 - **Toast Configuration**: Global toast system configuration including insets, default props, and wrapper components
+- **Layout Direction**: Global right-to-left flag used by component logic that runs in JavaScript instead of styles
 - **Portal Management**: Handles overlays, modals, and other components that render on top of the app hierarchy
 
 ## Basic Setup
@@ -190,6 +191,41 @@ const config: HeroUINativeConfig = {
 };
 ```
 
+### Layout Direction Configuration
+
+Tell HeroUI Native components which layout direction they render in:
+
+```tsx
+import { I18nManager } from 'react-native';
+
+const config: HeroUINativeConfig = {
+  isRTL: I18nManager.isRTL,
+};
+```
+
+Components mirror themselves with Yoga logical properties (`start`/`end`), so most of the UI flips on its own. This flag only covers logic that runs in JavaScript, such as `Slider` gesture deltas and popover `start`/`end` alignment.
+
+<Callout type="info">
+  **Note**: `isRTL` defaults to `I18nManager.isRTL`. Set it only when your app renders in a direction that differs from the global RTL state.
+</Callout>
+
+To override the direction for a subtree, wrap it with `LayoutDirectionScope`, together with Uniwind's `LayoutDirection` for the `rtl:` variants and a `direction` style for Yoga layout:
+
+```tsx
+<LayoutDirection rtl={false}>
+  <View className="flex-1" style={{ direction: 'ltr' }}>
+    <LayoutDirectionScope isRTL={false}>
+      {children}
+      <PortalHost name="preview" />
+    </LayoutDirectionScope>
+  </View>
+</LayoutDirection>
+```
+
+<Callout type="warning">
+  **Note**: Portalled content renders at the app root and escapes the scope, so render a `PortalHost` with a custom `name` inside it and pass the matching `hostName` to the overlay. In your own components, read the effective direction with the `useIsRTL` hook.
+</Callout>
+
 ## Complete Example
 
 Here's a comprehensive example showing all configuration options:
@@ -197,6 +233,7 @@ Here's a comprehensive example showing all configuration options:
 ```tsx
 import { HeroUINativeProvider } from 'heroui-native';
 import type { HeroUINativeConfig } from 'heroui-native';
+import { I18nManager } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const config: HeroUINativeConfig = {
@@ -218,6 +255,8 @@ const config: HeroUINativeConfig = {
   devInfo: {
     stylingPrinciples: true, // Optional: disable styling principles message
   },
+  // Global layout direction (defaults to I18nManager.isRTL)
+  isRTL: I18nManager.isRTL,
   // Global toast configuration
   // Option 1: Configure toast with custom settings
   toast: {
@@ -285,12 +324,13 @@ The `HeroUINativeProvider` internally composes multiple providers:
 ```
 HeroUINativeProvider
 ├── SafeAreaListener (handles safe area insets updates)
-│   └── GlobalAnimationSettingsProvider (animation configuration)
-│       └── TextComponentProvider (text configuration)
-│           └── TextInputComponentProvider (text input configuration)
-│               └── ToastProvider (toast configuration, conditionally rendered)
-│                   └── Your App
-│                   └── PortalHost (for overlays)
+│   └── LayoutDirectionProvider (layout direction configuration)
+│       └── GlobalAnimationSettingsProvider (animation configuration)
+│           └── TextComponentProvider (text configuration)
+│               └── TextInputComponentProvider (text input configuration)
+│                   └── ToastProvider (toast configuration, conditionally rendered)
+│                       └── Your App
+│                       └── PortalHost (for overlays)
 ```
 
 <Callout type="info">
@@ -303,7 +343,7 @@ The provider automatically wraps your application with [`SafeAreaListener`](http
 
 ## Raw Provider
 
-`HeroUINativeProviderRaw` is a lightweight variant of `HeroUINativeProvider` designed for bundle optimization. It excludes `ToastProvider` and `PortalHost`, giving you a bare minimum starting point where you only install and add what you actually need.
+`HeroUINativeProviderRaw` is a lightweight variant of `HeroUINativeProvider` designed for bundle optimization. It excludes `ToastProvider` and `PortalHost`, giving you a bare minimum starting point where you only install and add what you actually need. Its `HeroUINativeConfigRaw` config accepts the same options as `HeroUINativeConfig` except `toast`, so `textProps`, `textInputProps`, `animation`, `devInfo`, and `isRTL` all behave identically.
 
 ### When to Use
 
@@ -367,10 +407,11 @@ export default function App() {
 ```
 HeroUINativeProviderRaw
 ├── SafeAreaListener (handles safe area insets updates)
-│   └── GlobalAnimationSettingsProvider (animation configuration)
-│       └── TextComponentProvider (text configuration)
-│           └── TextInputComponentProvider (text input configuration)
-│               └── Your App
+│   └── LayoutDirectionProvider (layout direction configuration)
+│       └── GlobalAnimationSettingsProvider (animation configuration)
+│           └── TextComponentProvider (text configuration)
+│               └── TextInputComponentProvider (text input configuration)
+│                   └── Your App
 ```
 
 ## Best Practices
@@ -467,6 +508,7 @@ const config: HeroUINativeConfig = {
   devInfo: {
     stylingPrinciples: true, // Optional: disable styling principles message
   },
+  isRTL: false, // Optional: layout direction, defaults to I18nManager.isRTL
   // Toast configuration options:
   // - false or 'disabled': Disable toast provider
   // - ToastProviderProps object: Configure toast settings

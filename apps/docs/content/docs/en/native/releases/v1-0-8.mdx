@@ -1,0 +1,231 @@
+---
+title: v1.0.8
+description:
+  RTL layout support across components via provider isRTL config and LayoutDirectionScope, self-declared @source in the shipped stylesheet, Card.Header and TagGroup.List layout changes
+github:
+  pull: 459
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">July 31, 2026</span>
+</div>
+
+HeroUI Native v1.0.8 adds right-to-left layout support across the library. Component styles move from physical `left`/`right` to Yoga logical properties, and the JS-driven logic Yoga cannot cover — gesture deltas, animation offsets, popover alignment — now resolves direction through a new `isRTL` provider config, with a `LayoutDirectionScope` escape hatch for subtrees. This release also makes `heroui-native/styles` declare its own `@source`, so class scanning no longer depends on a hardcoded `node_modules` path in your app.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI Native to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI Native MCP Server](/docs/native/getting-started/mcp-server).
+</Callout>
+
+## Try It on Your Device
+
+<NativeTryOnDevice />
+
+## What's New
+
+### RTL Layout Support
+
+Components now mirror correctly when your app runs in a right-to-left locale. Component CSS uses logical properties throughout (`inset-inline-*`, `padding-inline-*`, `start`/`end`) so Yoga handles positioning in both directions, and the behavior Yoga cannot express — gesture deltas, animation offsets, overlay alignment — reads the effective direction from the provider.
+
+**Telling components which direction they render in:**
+
+`HeroUINativeProvider` accepts `config.isRTL`, defaulting to `I18nManager.isRTL`:
+
+```tsx
+import { HeroUINativeProvider } from 'heroui-native';
+import type { HeroUINativeConfig } from 'heroui-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+const config: HeroUINativeConfig = {
+  // Defaults to I18nManager.isRTL
+  isRTL: true,
+};
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <HeroUINativeProvider config={config}>
+        {/* Your app content */}
+      </HeroUINativeProvider>
+    </GestureHandlerRootView>
+  );
+}
+```
+
+Because the default already follows `I18nManager.isRTL`, apps that rely on the native RTL flag need no changes. Set it explicitly when direction comes from somewhere else — for example a runtime locale switcher that changes direction without a reload.
+
+**Scoping a subtree to a different direction:**
+
+The new `LayoutDirectionScope` export overrides direction for the components beneath it, which is what you want for a demo or preview area that must stay left-to-right inside a right-to-left app. It covers only the JavaScript side, so pair it with Uniwind's `LayoutDirection` for the `rtl:` variants and a `direction` style for Yoga layout:
+
+```tsx
+import { LayoutDirectionScope, PortalHost } from 'heroui-native';
+import { LayoutDirection } from 'uniwind';
+import { View } from 'react-native';
+
+<LayoutDirection rtl={false}>
+  <View className="flex-1" style={{ direction: 'ltr' }}>
+    <LayoutDirectionScope isRTL={false}>
+      <PreviewArea />
+      <PortalHost name="preview" />
+    </LayoutDirectionScope>
+  </View>
+</LayoutDirection>;
+```
+
+The scope drives the direction reads that happen in JavaScript: gesture inversion in [Slider](/docs/native/components/slider), animation offsets in [Skeleton](/docs/native/components/skeleton) and `SubMenu`, and `start`/`end` alignment for [Popover](/docs/native/components/popover) and [Menu](/docs/native/components/menu). Your own components can read the same value with the newly exported `useIsRTL` hook.
+
+<Callout type="warning">
+  **Portals escape the scope.** Content rendered through a `Portal` mounts at the app root, so overlays fall back to the app-level direction. To keep them scoped, render a [PortalHost](/docs/native/getting-started/portal) with a custom `name` inside the scope — as above — and pass the matching `hostName` to the overlay.
+</Callout>
+
+**Direction-aware behavior:**
+
+- **[Slider](/docs/native/components/slider)**: tap and drag deltas are inverted, and the fill and thumb anchor to logical edges
+- **[Skeleton](/docs/native/components/skeleton)**: the shimmer sweeps along the reading direction
+- **[Switch](/docs/native/components/switch)**: thumb travel is anchored on `start`
+- **[Tabs](/docs/native/components/tabs)**: indicator re-basing is keyed off the actual anchor swap rather than assuming a left anchor
+- **[Popover](/docs/native/components/popover) and [Menu](/docs/native/components/menu)**: `start`/`end` alignment resolves per direction
+- **[InputGroup](/docs/native/components/input-group)**: measured affix widths are applied as `paddingStart`/`paddingEnd`
+- **[SearchField](/docs/native/components/search-field), [ListGroup](/docs/native/components/list-group), and `SubMenu`**: default chevron and magnifier icons mirror
+
+**Text alignment:**
+
+`Text`-based parts across [Card](/docs/native/components/card), [Dialog](/docs/native/components/dialog), [Menu](/docs/native/components/menu), [Select](/docs/native/components/select), [Toast](/docs/native/components/toast), [Label](/docs/native/components/label), [Description](/docs/native/components/description), [FieldError](/docs/native/components/field-error), and others align to the leading edge in both directions. `TextInput` parts get an explicit `rtl:text-right`, since React Native resolves `TextInput` alignment physically rather than logically.
+
+The example app now ships `en`, `ar`, and `he` catalogs via Lingui with a runtime locale switcher, plus an `eslint-plugin-lingui` guard against untranslated strings. The release was verified manually on iOS and Android across all three locales, including scoped left-to-right previews inside a right-to-left app shell.
+
+**Related PR:** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+## Styling
+
+### The Shipped Stylesheet Declares Its Own `@source`
+
+`heroui-native/styles` now points Tailwind at its own files:
+
+```css
+@source "..";
+```
+
+Tailwind v4 resolves `@source` relative to the CSS file that contains it, so in the published package `lib/module/styles/index.css` resolves the scan path to `lib/module` — wherever the package manager installed it.
+
+Previously every app had to hardcode a filesystem path into `node_modules`:
+
+```css
+/* Before — the app had to know where the package lives */
+@import 'heroui-native/styles';
+@source './node_modules/heroui-native/lib';
+
+/* After — the package declares its own scan path */
+@import 'heroui-native/styles';
+```
+
+The two directives never behaved the same way. `@import` goes through package exports and finds the package anywhere; `@source` is a filesystem glob that only works if the package sits at that literal path. Those agree in a single-package app and disagree in a workspace, where the installer — not the project layout — decides which `node_modules` holds the package. Bun's isolated linker puts it in the app, its hoisted linker puts it at the workspace root, and pnpm and yarn split the same way depending on hoisting.
+
+The failure was also silent: a missing `@source` directory is a no-op in Tailwind, with no warning or error. App-level classes kept working while classes used only inside HeroUI's shipped components disappeared, so Avatar lost its sizing, Switch rendered invisible, and Popover backgrounds went transparent.
+
+Existing app-level `@source` lines keep working — they are simply redundant now and can be removed.
+
+**Related PR:** [#455](https://github.com/heroui-inc/heroui-native/pull/455)
+
+## ⚠️ Breaking Changes
+
+### Card.Header Aligns Children to the Leading Edge
+
+`.card__header` now sets `align-items: flex-start` instead of inheriting the default `stretch`. Cross-axis `flex-start` follows layout direction, which is what makes header content sit on the leading edge in RTL — but it also changes LTR rendering: header children that previously stretched to the full header width now shrink-wrap to their content.
+
+**Migration:**
+
+The change lives in CSS, so `items-stretch` restores the previous behavior:
+
+```tsx
+// Before — children stretched to the full header width
+<Card.Header>
+  <SomeFullWidthChild />
+</Card.Header>
+
+// After — restore stretching explicitly
+<Card.Header className="items-stretch">
+  <SomeFullWidthChild />
+</Card.Header>
+```
+
+**Related PR:** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+### TagGroup.List Applies an Inline Layout Style
+
+`TagGroup.List` now receives an inline style (`width: '100%'`, `alignItems: 'flex-start'`) merged ahead of the `style` you pass, which works around a Yoga wrap-measurement problem. Inline styles win over class-resolved ones, so `className` overrides for `width` or `alignItems` on this part no longer take effect.
+
+**Migration:**
+
+Move those two properties from `className` to `style`, which is merged after the internal values and therefore still wins:
+
+```tsx
+// Before — className override applied
+<TagGroup.List className="w-auto items-center" />
+
+// After — use style for width and alignItems
+<TagGroup.List style={{ width: 'auto', alignItems: 'center' }} />
+```
+
+Other `className` overrides on [TagGroup](/docs/native/components/tag-group) are unaffected.
+
+**Related PR:** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+## Bug Fixes
+
+This release includes fixes for the following issues:
+
+- **[Issue #454](https://github.com/heroui-inc/heroui-native/issues/454)**: Fixed class scanning breaking in monorepo layouts. `heroui-native/styles` did not declare an `@source` for its own files, so apps had to hardcode a path into `node_modules` that only resolved under some package-manager layouts — and when it was wrong, Tailwind scanned nothing and failed silently, leaving HeroUI components rendering without their styles. The shipped stylesheet now declares its own scan path relative to itself.
+
+**Related PRs:**
+
+- [#455](https://github.com/heroui-inc/heroui-native/pull/455)
+
+## Internal Changes
+
+This release also removes circular module dependencies: the `Surface` context is split into a leaf module, and shared `Toast` configuration is extracted into `toast.base-types`. Only internal import paths change — no public API is affected.
+
+**Related PR:** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+## Updated Documentation
+
+The following documentation pages have been updated to reflect the changes in this release:
+
+- [Quick Start](/docs/native/getting-started/quick-start) - The `global.css` setup no longer includes an `@source` line, with the path-based instructions kept for v1.0.7 and earlier
+- [Provider](/docs/native/getting-started/provider) - Documents the `isRTL` config option, the `LayoutDirectionScope` override, and the `useIsRTL` hook
+
+## Links
+
+- [Component Documentation](../components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui-native)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
