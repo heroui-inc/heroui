@@ -1,6 +1,6 @@
 ---
 title: Provider
-description: 配置 HeroUI Native provider 的文本、文本输入、动画和 toast 设置
+description: 配置 HeroUI Native provider 的文本、文本输入、动画、toast 和布局方向设置
 icon: chevrons-expand-horizontal
 ---
 
@@ -15,6 +15,7 @@ icon: chevrons-expand-horizontal
 - **文本输入配置**：全局文本输入设置，确保所有 HeroUI 输入组件保持一致
 - **动画配置**：全局动画控制，可禁用整个应用中的所有动画
 - **Toast 配置**：全局 toast 系统配置，包括内边距、默认 props 和包裹组件
+- **布局方向**：全局的从右到左（RTL）标志，供在 JavaScript 而非样式中运行的组件逻辑使用
 - **Portal 管理**：处理渲染在应用层级之上的浮层、模态框及其他组件
 
 ## 基础设置
@@ -190,6 +191,41 @@ const config: HeroUINativeConfig = {
 };
 ```
 
+### 布局方向配置
+
+告诉 HeroUI Native 组件它们渲染在哪个布局方向：
+
+```tsx
+import { I18nManager } from 'react-native';
+
+const config: HeroUINativeConfig = {
+  isRTL: I18nManager.isRTL,
+};
+```
+
+组件会借助 Yoga 逻辑属性（`start`/`end`）自行镜像，因此大部分 UI 会自动翻转。此标志仅覆盖在 JavaScript 中运行的逻辑，例如 `Slider` 的手势位移以及弹层的 `start`/`end` 对齐。
+
+<Callout type="info">
+  **注意**：`isRTL` 默认为 `I18nManager.isRTL`。仅当你的应用渲染方向与全局 RTL 状态不同时才需要设置它。
+</Callout>
+
+若要覆盖某个子树的方向，请用 `LayoutDirectionScope` 包裹它，同时搭配 Uniwind 的 `LayoutDirection`（用于 `rtl:` 变体）以及 `direction` 样式（用于 Yoga 布局）：
+
+```tsx
+<LayoutDirection rtl={false}>
+  <View className="flex-1" style={{ direction: 'ltr' }}>
+    <LayoutDirectionScope isRTL={false}>
+      {children}
+      <PortalHost name="preview" />
+    </LayoutDirectionScope>
+  </View>
+</LayoutDirection>
+```
+
+<Callout type="warning">
+  **注意**：通过 Portal 渲染的内容会挂载到应用根部并逃离作用域，因此请在其内部渲染一个带自定义 `name` 的 `PortalHost`，并将匹配的 `hostName` 传给遮罩。在你自己的组件中，可使用 `useIsRTL` 钩子读取有效方向。
+</Callout>
+
 ## 完整示例
 
 以下是展示所有配置选项的完整示例：
@@ -197,6 +233,7 @@ const config: HeroUINativeConfig = {
 ```tsx
 import { HeroUINativeProvider } from 'heroui-native';
 import type { HeroUINativeConfig } from 'heroui-native';
+import { I18nManager } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const config: HeroUINativeConfig = {
@@ -218,6 +255,8 @@ const config: HeroUINativeConfig = {
   devInfo: {
     stylingPrinciples: true, // 可选：禁用样式原则提示信息
   },
+  // 全局布局方向（默认为 I18nManager.isRTL）
+  isRTL: I18nManager.isRTL,
   // 全局 toast 配置
   // 选项 1：使用自定义设置配置 toast
   toast: {
@@ -285,12 +324,13 @@ export default function RootLayout() {
 ```
 HeroUINativeProvider
 ├── SafeAreaListener（处理安全区域内边距更新）
-│   └── GlobalAnimationSettingsProvider（动画配置）
-│       └── TextComponentProvider（文本配置）
-│           └── TextInputComponentProvider（文本输入配置）
-│               └── ToastProvider（toast 配置，按条件渲染）
-│                   └── 你的应用
-│                   └── PortalHost（用于浮层）
+│   └── LayoutDirectionProvider（布局方向配置）
+│       └── GlobalAnimationSettingsProvider（动画配置）
+│           └── TextComponentProvider（文本配置）
+│               └── TextInputComponentProvider（文本输入配置）
+│                   └── ToastProvider（toast 配置，按条件渲染）
+│                       └── 你的应用
+│                       └── PortalHost（用于浮层）
 ```
 
 <Callout type="info">
@@ -303,7 +343,7 @@ HeroUINativeProvider
 
 ## Raw Provider
 
-`HeroUINativeProviderRaw` 是 `HeroUINativeProvider` 的轻量级变体，为打包体积优化而设计。它不包含 `ToastProvider` 和 `PortalHost`，为你提供一个最精简的起点，让你只安装和添加真正需要的内容。
+`HeroUINativeProviderRaw` 是 `HeroUINativeProvider` 的轻量级变体，为打包体积优化而设计。它不包含 `ToastProvider` 和 `PortalHost`，为你提供一个最精简的起点，让你只安装和添加真正需要的内容。它的 `HeroUINativeConfigRaw` 配置接受与 `HeroUINativeConfig` 相同的选项（`toast` 除外），因此 `textProps`、`textInputProps`、`animation`、`devInfo` 和 `isRTL` 的行为完全一致。
 
 ### 何时使用
 
@@ -367,10 +407,11 @@ export default function App() {
 ```
 HeroUINativeProviderRaw
 ├── SafeAreaListener（处理安全区域内边距更新）
-│   └── GlobalAnimationSettingsProvider（动画配置）
-│       └── TextComponentProvider（文本配置）
-│           └── TextInputComponentProvider（文本输入配置）
-│               └── 你的应用
+│   └── LayoutDirectionProvider（布局方向配置）
+│       └── GlobalAnimationSettingsProvider（动画配置）
+│           └── TextComponentProvider（文本配置）
+│               └── TextInputComponentProvider（文本输入配置）
+│                   └── 你的应用
 ```
 
 ## 最佳实践
@@ -467,6 +508,7 @@ const config: HeroUINativeConfig = {
   devInfo: {
     stylingPrinciples: true, // 可选：禁用样式原则提示信息
   },
+  isRTL: false, // 可选：布局方向，默认为 I18nManager.isRTL
   // Toast 配置选项：
   // - false 或 'disabled'：禁用 toast provider
   // - ToastProviderProps 对象：配置 toast 设置
