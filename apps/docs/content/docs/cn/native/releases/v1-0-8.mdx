@@ -1,0 +1,231 @@
+---
+title: v1.0.8
+description:
+  通过 provider 的 isRTL 配置与 LayoutDirectionScope 为各组件提供从右到左（RTL）布局支持，随包发布的样式表自行声明 @source，并调整 Card.Header 与 TagGroup.List 的布局
+github:
+  pull: 459
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">2026 年 7 月 31 日</span>
+</div>
+
+HeroUI Native v1.0.8 为整个库带来从右到左（RTL）布局支持。组件样式从物理的 `left`/`right` 迁移到 Yoga 的逻辑属性，而 Yoga 无法覆盖的 JS 驱动逻辑——手势位移、动画偏移、弹层对齐——现在通过全新的 `isRTL` provider 配置解析方向，并提供 `LayoutDirectionScope` 作为子树的应急出口。本版本还让 `heroui-native/styles` 自行声明 `@source`，因此类名扫描不再依赖于应用中硬编码的 `node_modules` 路径。
+
+## 安装
+
+升级到最新版本：
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+<Tab value="npm">
+  ```bash
+  npm i heroui-native
+  ```
+</Tab>
+<Tab value="pnpm">
+  ``` bash
+  pnpm add heroui-native
+  ```
+</Tab>
+<Tab value="yarn">
+  ```bash
+  yarn add heroui-native
+  ```
+</Tab>
+<Tab value="bun">
+  ```bash
+  bun add heroui-native
+  ```
+</Tab>
+</Tabs>
+
+<Callout type="info">
+  **使用 AI 助手？** 直接提示「Hey Cursor，把 HeroUI Native 升级到最新版本」，助手会自动比对版本并完成必要修改。了解更多请参见 [HeroUI Native MCP 服务器](/docs/native/getting-started/mcp-server)。
+</Callout>
+
+## 真机体验
+
+<NativeTryOnDevice />
+
+## 新特性
+
+### RTL 布局支持
+
+当你的应用在从右到左的区域设置下运行时，组件现在会正确镜像。组件 CSS 全面采用逻辑属性（`inset-inline-*`、`padding-inline-*`、`start`/`end`），因此 Yoga 可在两个方向上处理定位；而 Yoga 无法表达的行为——手势位移、动画偏移、遮罩对齐——则从 provider 读取有效方向。
+
+**告诉组件它们渲染在哪个方向：**
+
+`HeroUINativeProvider` 接受 `config.isRTL`，默认为 `I18nManager.isRTL`：
+
+```tsx
+import { HeroUINativeProvider } from 'heroui-native';
+import type { HeroUINativeConfig } from 'heroui-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+const config: HeroUINativeConfig = {
+  // 默认为 I18nManager.isRTL
+  isRTL: true,
+};
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <HeroUINativeProvider config={config}>
+        {/* 你的应用内容 */}
+      </HeroUINativeProvider>
+    </GestureHandlerRootView>
+  );
+}
+```
+
+由于默认值已跟随 `I18nManager.isRTL`，依赖原生 RTL 标志的应用无需任何修改。当方向来自其他来源时才需显式设置——例如无需重载即可切换方向的运行时区域切换器。
+
+**将子树限定为不同方向：**
+
+新导出的 `LayoutDirectionScope` 会覆盖其下方组件的方向，这正是你在从右到左应用中希望某个演示或预览区域保持从左到右时所需要的。它只覆盖 JavaScript 一侧，因此需搭配 Uniwind 的 `LayoutDirection`（用于 `rtl:` 变体）以及 `direction` 样式（用于 Yoga 布局）：
+
+```tsx
+import { LayoutDirectionScope, PortalHost } from 'heroui-native';
+import { LayoutDirection } from 'uniwind';
+import { View } from 'react-native';
+
+<LayoutDirection rtl={false}>
+  <View className="flex-1" style={{ direction: 'ltr' }}>
+    <LayoutDirectionScope isRTL={false}>
+      <PreviewArea />
+      <PortalHost name="preview" />
+    </LayoutDirectionScope>
+  </View>
+</LayoutDirection>;
+```
+
+该作用域驱动发生在 JavaScript 中的方向读取：[Slider](/docs/native/components/slider) 的手势反转、[Skeleton](/docs/native/components/skeleton) 与 `SubMenu` 的动画偏移，以及 [Popover](/docs/native/components/popover) 与 [Menu](/docs/native/components/menu) 的 `start`/`end` 对齐。你自己的组件也可以通过新导出的 `useIsRTL` 钩子读取同一个值。
+
+<Callout type="warning">
+  **Portal 会逃离作用域。** 通过 `Portal` 渲染的内容会挂载到应用根部，因此遮罩会回退到应用级方向。若要让它们保持在作用域内，请在作用域内渲染一个带自定义 `name` 的 [PortalHost](/docs/native/getting-started/portal)——如上所示——并将匹配的 `hostName` 传给遮罩。
+</Callout>
+
+**方向感知行为：**
+
+- **[Slider](/docs/native/components/slider)**：点按与拖拽的位移会被反转，填充与滑块锚定到逻辑边缘
+- **[Skeleton](/docs/native/components/skeleton)**：微光沿阅读方向扫过
+- **[Switch](/docs/native/components/switch)**：滑块行程锚定在 `start`
+- **[Tabs](/docs/native/components/tabs)**：指示器的重新定基以实际锚点交换为准，而非假定为左侧锚点
+- **[Popover](/docs/native/components/popover) 与 [Menu](/docs/native/components/menu)**：`start`/`end` 对齐按方向解析
+- **[InputGroup](/docs/native/components/input-group)**：测量得到的附加元素宽度以 `paddingStart`/`paddingEnd` 应用
+- **[SearchField](/docs/native/components/search-field)、[ListGroup](/docs/native/components/list-group) 与 `SubMenu`**：默认的箭头与放大镜图标会镜像
+
+**文本对齐：**
+
+[Card](/docs/native/components/card)、[Dialog](/docs/native/components/dialog)、[Menu](/docs/native/components/menu)、[Select](/docs/native/components/select)、[Toast](/docs/native/components/toast)、[Label](/docs/native/components/label)、[Description](/docs/native/components/description)、[FieldError](/docs/native/components/field-error) 等组件中基于 `Text` 的部件在两个方向上都会对齐到起始边。`TextInput` 部件则获得显式的 `rtl:text-right`，因为 React Native 对 `TextInput` 的对齐是按物理方向而非逻辑方向解析的。
+
+示例应用现在通过 Lingui 附带 `en`、`ar`、`he` 三套语言目录并配有运行时区域切换器，还加入了 `eslint-plugin-lingui` 以防止出现未翻译的字符串。本版本已在 iOS 与 Android 上针对全部三种区域设置进行手动验证，包括在从右到左的应用外壳内部限定为从左到右的预览。
+
+**相关 PR：** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+## 样式
+
+### 随包发布的样式表自行声明 `@source`
+
+`heroui-native/styles` 现在会将 Tailwind 指向它自身的文件：
+
+```css
+@source "..";
+```
+
+Tailwind v4 会相对于包含 `@source` 的 CSS 文件来解析它，因此在已发布的包中，`lib/module/styles/index.css` 会将扫描路径解析为 `lib/module`——无论包管理器将其安装在何处。
+
+此前，每个应用都必须把一个指向 `node_modules` 的文件系统路径硬编码进来：
+
+```css
+/* 之前——应用必须知道包所在的位置 */
+@import 'heroui-native/styles';
+@source './node_modules/heroui-native/lib';
+
+/* 之后——包自行声明其扫描路径 */
+@import 'heroui-native/styles';
+```
+
+这两条指令的行为从来就不一致。`@import` 会经由包的 exports 解析，能在任何位置找到包；而 `@source` 是一个文件系统 glob，只有当包位于该字面路径时才有效。二者在单包应用中一致，但在工作区中会产生分歧——因为决定包落在哪个 `node_modules` 的是安装器，而非项目布局。Bun 的隔离链接器会把它放进应用中，其提升（hoisted）链接器会放到工作区根部，而 pnpm 与 yarn 也会因是否提升而各自分裂。
+
+这种失败还是静默的：缺失的 `@source` 目录在 Tailwind 中是无操作，不会有任何警告或错误。应用级类名照常工作，而仅在 HeroUI 随包组件内部使用的类名却消失了，于是 Avatar 失去了尺寸、Switch 渲染为不可见、Popover 背景变为透明。
+
+现有的应用级 `@source` 行仍可继续工作——它们只是变得多余，可以移除。
+
+**相关 PR：** [#455](https://github.com/heroui-inc/heroui-native/pull/455)
+
+## ⚠️ 破坏性变更
+
+### Card.Header 将子元素对齐到起始边
+
+`.card__header` 现在设置 `align-items: flex-start`，而不再继承默认的 `stretch`。交叉轴上的 `flex-start` 会跟随布局方向，这正是让头部内容在 RTL 下位于起始边的原因——但它也改变了 LTR 渲染：此前拉伸到整个头部宽度的头部子元素，现在会收缩包裹其内容。
+
+**迁移：**
+
+该变更位于 CSS 中，因此 `items-stretch` 可恢复此前的行为：
+
+```tsx
+// 之前——子元素拉伸到整个头部宽度
+<Card.Header>
+  <SomeFullWidthChild />
+</Card.Header>
+
+// 之后——显式恢复拉伸
+<Card.Header className="items-stretch">
+  <SomeFullWidthChild />
+</Card.Header>
+```
+
+**相关 PR：** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+### TagGroup.List 应用内联布局样式
+
+`TagGroup.List` 现在会接收一段内联样式（`width: '100%'`、`alignItems: 'flex-start'`），并在你传入的 `style` 之前合并，以规避 Yoga 的换行测量问题。内联样式优先于类名解析出的样式，因此对该部件在 `width` 或 `alignItems` 上的 `className` 覆盖将不再生效。
+
+**迁移：**
+
+将这两个属性从 `className` 移到 `style`，由于 `style` 在内部值之后合并，因此仍会胜出：
+
+```tsx
+// 之前——className 覆盖生效
+<TagGroup.List className="w-auto items-center" />
+
+// 之后——使用 style 设置 width 与 alignItems
+<TagGroup.List style={{ width: 'auto', alignItems: 'center' }} />
+```
+
+对 [TagGroup](/docs/native/components/tag-group) 的其他 `className` 覆盖不受影响。
+
+**相关 PR：** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+## 问题修复
+
+本版本包含以下问题的修复：
+
+- **[Issue #454](https://github.com/heroui-inc/heroui-native/issues/454)**：修复了在 monorepo 布局下类名扫描失效的问题。`heroui-native/styles` 未为其自身文件声明 `@source`，因此应用必须把一个指向 `node_modules` 的路径硬编码进来，而该路径只在部分包管理器布局下才能解析——一旦出错，Tailwind 便什么都不扫描且静默失败，导致 HeroUI 组件在没有样式的情况下渲染。随包发布的样式表现在会声明相对于自身的扫描路径。
+
+**相关 PR：**
+
+- [#455](https://github.com/heroui-inc/heroui-native/pull/455)
+
+## 内部变更
+
+本版本还移除了循环模块依赖：`Surface` 上下文被拆分为一个叶子模块，共享的 `Toast` 配置被提取到 `toast.base-types`。仅内部导入路径发生变化——不影响任何公共 API。
+
+**相关 PR：** [#459](https://github.com/heroui-inc/heroui-native/pull/459)
+
+## 更新的文档
+
+以下文档页面已更新，以反映本版本的变更：
+
+- [Quick Start](/docs/native/getting-started/quick-start) - `global.css` 的配置不再包含 `@source` 行，基于路径的说明保留给 v1.0.7 及更早版本
+- [Provider](/docs/native/getting-started/provider) - 记录 `isRTL` 配置项、`LayoutDirectionScope` 覆盖以及 `useIsRTL` 钩子
+
+## 链接
+
+- [组件文档](../components)
+- [GitHub 仓库](https://github.com/heroui-inc/heroui-native)
+
+## 贡献者
+
+感谢所有为本版本做出贡献的朋友！
