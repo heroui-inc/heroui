@@ -57,7 +57,7 @@
   "dependencies": {
     "@heroui/styles": "workspace:*",
     "@radix-ui/react-avatar": "1.1.11",
-    "@react-types/shared": "3.36.0",
+    "@react-types/shared": "3.36.1",
     "@react-types/color": "3.2.0",
     "@react-stately/utils": "3.12.1",
     "input-otp": "1.4.2",
@@ -67,7 +67,7 @@
   "devDependencies": {
     "@heroui/standard": "workspace:*",
     "@iconify/react": "6.0.2",
-    "@internationalized/date": "3.12.2",
+    "@internationalized/date": "3.12.3",
     "@react-aria/i18n": "3.13.1",
     "@react-aria/ssr": "3.10.1",
     "@react-aria/utils": "3.34.1",
@@ -78,8 +78,8 @@
     "@types/react-dom": "19.2.3",
     "fs-extra": "11.3.3",
     "react": "19.2.6",
-    "react-aria": "3.50.0",
-    "react-aria-components": "1.19.0",
+    "react-aria": "3.51.0",
+    "react-aria-components": "1.20.0",
     "react-dom": "19.2.6",
     "tailwindcss": "4.1.18"
   },
@@ -88,8 +88,8 @@
     "@react-aria/ssr": "^3.10.1",
     "@react-aria/utils": "^3.34.1",
     "react": ">=19.0.0",
-    "react-aria": "^3.50.0",
-    "react-aria-components": "^1.19.0",
+    "react-aria": "^3.51.0",
+    "react-aria-components": "^1.20.0",
     "react-dom": ">=19.0.0",
     "tailwindcss": ">=4.0.0"
   }
