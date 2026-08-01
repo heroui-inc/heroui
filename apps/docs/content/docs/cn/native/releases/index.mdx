@@ -9,6 +9,16 @@ description: HeroUI Native 的全部更新与变更，包括新功能、问题�
 
 ## 最新版本
 
+### v1.0.8
+
+**2026 年 7 月**
+
+本版本为整个库带来从右到左（RTL）布局支持：组件样式迁移到 Yoga 逻辑属性，Slider、Skeleton、Switch、Tabs、InputGroup、Popover 与 Menu 中对方向敏感的行为通过全新的 `isRTL` provider 配置解析，并提供 `LayoutDirectionScope` 作为子树的应急出口。同时让 `heroui-native/styles` 自行声明 `@source`，因此类名扫描不再依赖硬编码的 `node_modules` 路径。Card.Header 与 TagGroup.List 改变了子元素的对齐方式，两者均可用一行覆盖恢复。
+
+[阅读完整更新说明 →](/docs/native/releases/v1-0-8)
+
+---
+
 ### v1.0.7
 
 **2026 年 7 月**
