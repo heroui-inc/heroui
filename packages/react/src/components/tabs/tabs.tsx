@@ -118,15 +118,29 @@ const TabList = ({children, className, ...props}: TabListProps) => {
 
       if (!el) return;
       const size = isVertical ? el.clientHeight : el.clientWidth;
+      const scrollSize = isVertical ? el.scrollHeight : el.scrollWidth;
+      const maxScroll = Math.max(0, scrollSize - size);
 
       // In RTL, the horizontal scroll range runs from 0 (start, on the right) to negative,
       // so the delta sign must be flipped for `scrollLeft` to move toward the intended edge.
       const isRTL = !isVertical && getComputedStyle(el).direction === "rtl";
       const delta = direction * size * 0.8 * (isRTL ? -1 : 1);
+      const current = isVertical ? el.scrollTop : el.scrollLeft;
 
-      el.scrollBy({
+      // Clamp the target to the scrollable range so a press near the edge lands
+      // flush on it instead of requesting a position past the content, which can
+      // cut the smooth scroll short of the edge (e.g. iOS Safari) or leave the
+      // strip visually stranded. RTL ranges run [-maxScroll, 0].
+      const next = Math.min(
+        isRTL ? 0 : maxScroll,
+        Math.max(isRTL ? -maxScroll : 0, current + delta),
+      );
+
+      if (next === current) return;
+
+      el.scrollTo({
         behavior: "smooth",
-        [isVertical ? "top" : "left"]: delta,
+        [isVertical ? "top" : "left"]: next,
       });
     },
     [isVertical],
