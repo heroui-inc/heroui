@@ -135,7 +135,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
               )}
             </DocsTitle>
             {page.data.toc.length > 0 && (
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center justify-start gap-2">
                 {!!showCopyPrompt && <CopySetupPrompt />}
                 {!!showNativeCopyPrompt && <CopyNativeSetupPrompt />}
                 <ViewOptions markdownUrl={`${page.url}.mdx`} />
