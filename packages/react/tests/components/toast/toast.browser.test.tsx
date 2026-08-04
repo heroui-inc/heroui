@@ -1,5 +1,5 @@
+import {render} from "@heroui/testing/browser";
 import {page} from "vitest/browser";
-import {render} from "vitest-browser-react";
 
 import {Toast, ToastQueue} from "@/components/toast";
 

@@ -1,6 +1,6 @@
+import {render} from "@heroui/testing/browser";
 import {isDocumentScrollLocked} from "@heroui/testing/helpers";
 import {page, userEvent} from "vitest/browser";
-import {render} from "vitest-browser-react";
 
 import {AlertDialogFixture} from "./fixtures";
 

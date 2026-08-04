@@ -162,11 +162,14 @@ pnpm test
 # Filter by file name (e.g. button.test.tsx)
 pnpm --filter @heroui/react exec vitest run button
 
-# Coverage report (jsdom project + thresholds)
+# Coverage report (jsdom project + CI floors only — not a depth bar)
 pnpm test:coverage
+
+# Optional local shortcut: related jsdom tests for changed files (skips browser)
+pnpm --filter @heroui/react test:changed
 ```
 
-CI (`QA` Test job) installs Chromium with `--with-deps`, then runs `test:browser` and `test:coverage` separately.
+CI (`QA` Test job) installs Chromium with `--with-deps`, then runs `test:browser` and `test:coverage` separately. Do not treat `test:changed` or coverage floors alone as “fully tested.”
 
 
 5. Be sure the package builds.

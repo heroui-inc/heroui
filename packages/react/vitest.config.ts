@@ -17,7 +17,7 @@ export default defineConfig({
     },
   },
   test: {
-    // Coverage is root-only (Vitest ignores project-level coverage). Floors, jsdom-only.
+    // Coverage is root-only + jsdom-only. Thresholds are CI floors, not suite depth.
     coverage: {
       provider: "v8",
       include: ["src/components/**/*.{ts,tsx}"],

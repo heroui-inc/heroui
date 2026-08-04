@@ -46,10 +46,10 @@ pnpm test
 # Filter by file name (e.g. button.test.tsx)
 pnpm --filter @heroui/react exec vitest run button
 
-# Coverage (jsdom + thresholds)
+# Coverage (jsdom floors only — not a depth bar)
 pnpm test:coverage
 
-# Changed-set (local)
+# Changed-set (local jsdom only; not a merge gate)
 pnpm --filter @heroui/react test:changed
 
 # Run formatting
@@ -62,13 +62,14 @@ pnpm typecheck
 ### Behavioral tests (`@heroui/react`)
 
 - Suites: `packages/react/tests/components/<name>/` — `*.test.tsx` (jsdom), `*.ssr.test.tsx` (Client SSR via `ssrSmoke()`, not RSC), `*.browser.test.tsx` (Playwright for high-risk portals/overlays; not universal), optional `fixtures.tsx`
-- Harness: `@heroui/testing/helpers` (`render`, `setupUser`, `runAllTimers`, `ssrSmoke`, `User`); sources via `@/`. Pattern testers: `const user = new User(...); user.createTester(...)` — do not import `createTester` directly
+- Harness: `@heroui/testing/helpers` (`render`, `setupUser`, `runAllTimers`, `ssrSmoke`, `User`); browser `render` from `@heroui/testing/browser`. Sources via `@/`. Pattern testers: `user.createTester(...)` — do not import `createTester` directly
 - Query/assert: role/label/text first; HeroUI `data-*` + light BEM + documented `data-slot` on compound parts; no colors, full class lists, or RAC internals
 - Timers: fake timers per-suite only; wire `advanceTimers` into `setupUser` + `User`
 - Naming: `describe("Component")`; nested concern; `it` as `supports…` / `calls…` / `exposes…` / `renders…`. SSR: `"Component SSR"`; browser: `"Component (browser)"`
 - Intentional skips: internals (`rac`, `icons`), non-exported helpers (`color-input-group`, `date-input-group`), in-progress `calendar-year-picker`, parent-covered parts (`list-box-item`, `menu-item`, …), Toast SSR (client portal — jsdom + browser). Public `input-group` has its own suite. SSR/browser are risk-based
 - Browser setup (once locally): `playwright install chromium` before `pnpm test`. CI: `--with-deps`, then `test:browser` + `test:coverage`
-- Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`; coverage via `pnpm test:coverage` (jsdom only; floors, not a depth bar)
+- Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`
+- Coverage: jsdom-only floors — green ≠ depth. `test:changed`: local jsdom shortcut only, not a merge gate
 - Gotcha: `@react-aria/test-utils` is pinned to `1.0.0-rc.0` in `@heroui/testing`
 
 ### Package-Specific Commands

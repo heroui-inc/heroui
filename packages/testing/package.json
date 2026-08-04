@@ -10,6 +10,7 @@
     "./setup/react": "./setup/react.ts",
     "./setup/browser": "./setup/browser.ts",
     "./helpers": "./helpers/index.ts",
+    "./browser": "./helpers/browser.ts",
     "./globals": {
       "types": "./globals.d.ts"
     }
