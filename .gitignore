@@ -12,6 +12,8 @@ node_modules
 # testing
 coverage
 __snapshots__
+**/__screenshots__/
+**/.vitest-attachments/
 coverage.json
 
 # next.js

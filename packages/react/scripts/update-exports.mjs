@@ -61,8 +61,8 @@ async function generateExports() {
     },
     "./package.json": "./package.json",
     "./styles": {
-      default: "./dist/styles.css",
       style: "./dist/styles.css",
+      default: "./dist/styles.css",
     },
   };
 
