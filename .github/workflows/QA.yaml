@@ -48,6 +48,33 @@ jobs:
       - name: Run typecheck
         run: pnpm typecheck
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Install Playwright Chromium
+        run: pnpm --filter @heroui/testing exec playwright install --with-deps chromium
+
+      - name: Browser tests
+        run: pnpm --filter @heroui/react test:browser
+
+      - name: Jsdom tests with coverage
+        run: pnpm test:coverage
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: react-coverage
+          path: packages/react/coverage
+          if-no-files-found: ignore
+
   continuous-release:
     name: Continuous Release
     if: github.repository == 'heroui-inc/heroui'

@@ -40,11 +40,17 @@ pnpm build --filter=@heroui/react
 # Run linting
 pnpm lint
 
-# Run tests
+# Run tests (turbo → packages with a test script; jsdom + browser)
 pnpm test
 
-# Test specific component
-pnpm test button
+# Filter by file name (e.g. button.test.tsx)
+pnpm --filter @heroui/react exec vitest run button
+
+# Coverage (jsdom + thresholds)
+pnpm test:coverage
+
+# Changed-set (local)
+pnpm --filter @heroui/react test:changed
 
 # Run formatting
 pnpm run format
@@ -52,6 +58,18 @@ pnpm run format
 # Run type checking
 pnpm typecheck
 ```
+
+### Behavioral tests (`@heroui/react`)
+
+- Suites: `packages/react/tests/components/<name>/` — `*.test.tsx` (jsdom), `*.ssr.test.tsx` (Client SSR via `ssrSmoke()`, not RSC), `*.browser.test.tsx` (Playwright for high-risk portals/overlays; not universal), optional `fixtures.tsx`
+- Harness: `@heroui/testing/helpers` (`render`, `setupUser`, `runAllTimers`, `ssrSmoke`, `User`); sources via `@/`. Pattern testers: `const user = new User(...); user.createTester(...)` — do not import `createTester` directly
+- Query/assert: role/label/text first; HeroUI `data-*` + light BEM + documented `data-slot` on compound parts; no colors, full class lists, or RAC internals
+- Timers: fake timers per-suite only; wire `advanceTimers` into `setupUser` + `User`
+- Naming: `describe("Component")`; nested concern; `it` as `supports…` / `calls…` / `exposes…` / `renders…`. SSR: `"Component SSR"`; browser: `"Component (browser)"`
+- Intentional skips: internals (`rac`, `icons`), non-exported helpers (`color-input-group`, `date-input-group`), in-progress `calendar-year-picker`, parent-covered parts (`list-box-item`, `menu-item`, …), Toast SSR (client portal — jsdom + browser). Public `input-group` has its own suite. SSR/browser are risk-based
+- Browser setup (once locally): `playwright install chromium` before `pnpm test`. CI: `--with-deps`, then `test:browser` + `test:coverage`
+- Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`; coverage via `pnpm test:coverage` (jsdom only; floors, not a depth bar)
+- Gotcha: `@react-aria/test-utils` is pinned to `1.0.0-rc.0` in `@heroui/testing`
 
 ### Package-Specific Commands
 
@@ -101,7 +119,7 @@ git commit -m "ci: add Claude Code GitHub Action workflow"
 │   ├── styles/        # CSS styles & variants (@heroui/styles)
 │   ├── standard/      # Shared ESLint, Prettier, TypeScript configs
 │   ├── storybook/     # Storybook configuration
-│   └── vitest/        # Shared Vitest configurations
+│   └── testing/       # Shared test harness (@heroui/testing)
 ├── turbo.json         # Turborepo configuration
 └── pnpm-workspace.yaml # Workspace definition
 ```
@@ -520,9 +538,10 @@ This workflow ensures thorough understanding, proper planning, and high-quality 
    **IMPORTANT**: The compound component should be exported as the default export.
 
 2. **Testing**:
-   - Run `pnpm test` for all tests
-   - Run `pnpm test <component>` for specific component
-   - Ensure all new features have tests
+   - Follow Behavioral tests conventions above (semantics-first, `setupUser`, `data-*` state hooks)
+   - Run `pnpm test` for jsdom + browser; filter with `pnpm --filter @heroui/react exec vitest run <name>`
+   - Place tests under `packages/react/tests/components/<name>/` (`*.test.tsx` / `*.ssr.test.tsx` / `*.browser.test.tsx`, optional `fixtures.tsx`)
+   - Prefer arrow functions for harness helpers and test fixtures
 
 3. **Documentation**:
    - Docs live in `apps/docs/content/`

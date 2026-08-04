@@ -32,6 +32,10 @@
       "dependsOn": [],
       "outputs": []
     },
+    "test:coverage": {
+      "dependsOn": [],
+      "outputs": ["coverage/**"]
+    },
     "typecheck": {
       "dependsOn": [],
       "outputs": []

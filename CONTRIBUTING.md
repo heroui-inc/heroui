@@ -80,8 +80,8 @@ https://www.conventionalcommits.org/ or check out the
 
 3. Make and commit your changes following the
    [commit convention](https://github.com/heroui-inc/heroui/blob/main/CONTRIBUTING.md#commit-convention).
-   As you canary, you can run `pnpm build --filter=<module>` and
-   `pnpm test packages/<module>/<pkg>` e.g. `pnpm build --filter=avatar & pnpm test packages/components/avatar` to make sure everything works as expected.
+   As you go, you can run `pnpm build --filter=<module>` and
+   `pnpm --filter @heroui/react exec vitest run <name>` e.g. `pnpm build --filter=@heroui/react && pnpm --filter @heroui/react exec vitest run avatar` to make sure everything works as expected.
 
    > To know more about the `--filter` option, please check the turborepo [docs](https://turborepo.org/docs/core-concepts/filtering).
 
@@ -111,11 +111,9 @@ We use [Turbo Repo](https://turborepo.org/) for the project management.
 ## Start the dev babel server of HeroUI core components
 pnpm dev
 
-## optional
+## optional — Storybook is also started by `pnpm dev`
 
-pnpm sb ## this will start the storybook server for a faster development and testing.
-
-pnpm dev:docs ## this will start the documentation next.js server and it will automatically detect the changes in the components.
+pnpm dev:docs ## documentation next.js server; picks up component changes
 ```
 
 - If you will be working just on the documentation source code / mdx, you can use the following commands to build
@@ -132,7 +130,7 @@ pnpm dev:docs
 - You also can use Storybook to test the components and faster development:
 
 ```bash
-pnpm sb
+pnpm dev
 ```
 
 Remember that these commands must be executed in the root folder of the project.
@@ -151,29 +149,25 @@ git checkout -b fix/something
 
 4. If your code passes all the tests, then push your feature/fix branch:
 
-All commits that fix bugs or add features need a test.
-You can run the nest command for component specific tests.
+All commits that fix bugs or add features need a behavioral test when they change interactive component contracts.
+See Behavioral tests in [`AGENTS.md`](AGENTS.md): query by role/label, use `setupUser()` from `@heroui/testing/helpers`, assert `data-*` state hooks and callbacks — not CSS pixels.
 
 ```bash
-# Test current code
+# One-time local Playwright install (required before browser suites / `pnpm test`)
+pnpm --filter @heroui/testing exec playwright install chromium
 
+# Local: jsdom + browser (needs Chromium installed)
 pnpm test
 
-# or
+# Filter by file name (e.g. button.test.tsx)
+pnpm --filter @heroui/react exec vitest run button
 
-npm run test
+# Coverage report (jsdom project + thresholds)
+pnpm test:coverage
 ```
 
-```bash
-# Test isolated component code
+CI (`QA` Test job) installs Chromium with `--with-deps`, then runs `test:browser` and `test:coverage` separately.
 
-pnpm test button
-
-# or
-
-npm run test button
-
-```
 
 5. Be sure the package builds.
 
@@ -187,7 +181,7 @@ pnpm build
 npm run build
 ```
 
-> Note: ensure that you have at least Node.js 20.16.0 as well as pnpm 9.6.0 or higher installed on your machine to run the scripts
+> Note: ensure that you have at least Node.js 22.x as well as pnpm 10.26.2 (see root `packageManager`) installed on your machine to run the scripts
 
 6. Send your pull request:
 
