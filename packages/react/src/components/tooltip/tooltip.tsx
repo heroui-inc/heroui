@@ -15,6 +15,7 @@ import {
 } from "react-aria-components/Tooltip";
 
 import {useCSSVariable} from "../../hooks/use-css-variable";
+import {enableChildProps, forwardChildProps} from "../../utils/children";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {parseCSSTime} from "../../utils/css";
 import {dom} from "../../utils/dom";
@@ -33,12 +34,8 @@ const TooltipContext = createContext<TooltipContext>({});
  * -----------------------------------------------------------------------------------------------*/
 type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
 
-const TooltipRoot = ({
-  children,
-  closeDelay,
-  delay,
-  ...props
-}: ComponentPropsWithRef<typeof TooltipTriggerPrimitive>) => {
+const TooltipRoot = enableChildProps((inputProps: TooltipRootProps) => {
+  const {children, closeDelay, delay, ...props} = forwardChildProps(inputProps);
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   const cssDelay = useCSSVariable("--tooltip-delay");
@@ -59,7 +56,7 @@ const TooltipRoot = ({
       </TooltipTriggerPrimitive>
     </TooltipContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Tooltip Content

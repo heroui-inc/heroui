@@ -22,6 +22,7 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components/Modal";
 
+import {enableChildProps, forwardChildProps} from "../../utils/children";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
@@ -46,7 +47,8 @@ interface ModalRootProps extends ComponentPropsWithRef<typeof ModalTriggerPrimit
   state?: UseOverlayStateReturn;
 }
 
-const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
+const ModalRoot = enableChildProps(({children, state, ...props}: ModalRootProps) => {
+  const {children: forwardedChildren, ...rootProps} = forwardChildProps({children, ...props});
   const modalContext = useMemo<ModalContext>(
     () => ({slots: modalVariants(), placement: undefined}),
     [],
@@ -59,12 +61,12 @@ const ModalRoot = ({children, state, ...props}: ModalRootProps) => {
 
   return (
     <ModalContext value={modalContext}>
-      <ModalTriggerPrimitive data-slot="modal-root" {...mergeProps(props, controlledProps)}>
-        {children}
+      <ModalTriggerPrimitive data-slot="modal-root" {...mergeProps(rootProps, controlledProps)}>
+        {forwardedChildren}
       </ModalTriggerPrimitive>
     </ModalContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Trigger

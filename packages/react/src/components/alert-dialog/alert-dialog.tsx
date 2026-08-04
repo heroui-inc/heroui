@@ -19,6 +19,7 @@ import {
   Pressable as PressablePrimitive,
 } from "react-aria-components/Modal";
 
+import {enableChildProps, forwardChildProps} from "../../utils/children";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
@@ -43,7 +44,8 @@ const AlertDialogContext = createContext<AlertDialogContext>({});
  * -----------------------------------------------------------------------------------------------*/
 interface AlertDialogRootProps extends ComponentPropsWithRef<typeof AlertDialogTriggerPrimitive> {}
 
-const AlertDialogRoot = ({children, ...props}: AlertDialogRootProps) => {
+const AlertDialogRoot = enableChildProps((inputProps: AlertDialogRootProps) => {
+  const {children, ...props} = forwardChildProps(inputProps);
   const alertDialogContext = useMemo<AlertDialogContext>(
     () => ({slots: alertDialogVariants(), placement: undefined}),
     [],
@@ -56,7 +58,7 @@ const AlertDialogRoot = ({children, ...props}: AlertDialogRootProps) => {
       </AlertDialogTriggerPrimitive>
     </AlertDialogContext>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * AlertDialog Trigger

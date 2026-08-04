@@ -8,6 +8,7 @@ import {use} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 
 import {composeTwRenderProps} from "../../utils";
+import {enableChildProps, mergeChildProps} from "../../utils/children";
 import {BUTTON_GROUP_CHILD, ButtonGroupContext} from "../button-group";
 
 /* -------------------------------------------------------------------------------------------------
@@ -17,19 +18,20 @@ interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>,
   [BUTTON_GROUP_CHILD]?: boolean;
 }
 
-const ButtonRoot = ({
-  children,
-  className,
-  fullWidth,
-  isDisabled,
-  isIconOnly,
-  size,
-  slot,
-  style,
-  variant,
-  [BUTTON_GROUP_CHILD]: isButtonGroupChild,
-  ...rest
-}: ButtonRootProps) => {
+const ButtonRoot = enableChildProps((inputProps: ButtonRootProps) => {
+  const {
+    children,
+    className,
+    fullWidth,
+    isDisabled,
+    isIconOnly,
+    size,
+    slot,
+    style,
+    variant,
+    [BUTTON_GROUP_CHILD]: isButtonGroupChild,
+    ...rest
+  } = mergeChildProps(inputProps);
   const buttonGroupContext = use(ButtonGroupContext);
 
   // Only use context if this button is a direct child of ButtonGroup
@@ -62,7 +64,7 @@ const ButtonRoot = ({
       {(renderProps) => (typeof children === "function" ? children(renderProps) : children)}
     </ButtonPrimitive>
   );
-};
+});
 
 /* -------------------------------------------------------------------------------------------------
  * Exports
