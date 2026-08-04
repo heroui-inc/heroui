@@ -1,0 +1,65 @@
+---
+title: v3.2.4
+description: Patch release that clamps Tabs.ListContainer chevron scrolling to the scrollable range, upgrades tailwind-variants to 3.3.1 to fix variant classes falling back after a re-render, and upgrades React Aria to 1.20.0.
+github:
+  pull: 6758
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">August 4, 2026</span>
+</div>
+
+Patch release: [Tabs](/docs/components/tabs) chevron scrolling now lands flush on the edges, `tailwind-variants` is upgraded to `3.3.1` to fix variant modifiers falling back to the wrong class after a re-render, and React Aria is upgraded to `1.20.0` (`react-aria@3.51.0`).
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Bug Fixes
+
+- **Variants**: Fix variant modifiers falling back to the wrong class after a re-render — a controlled `Checkbox` no longer switches from `checkbox--primary` to `checkbox--secondary` when it is deselected, and secondary `Tabs` no longer revert to the primary variant ([#6760](https://github.com/heroui-inc/heroui/pull/6760)).
+- **Tabs**: Clamp `Tabs.ListContainer` chevron scrolling to the scrollable range so a press near an edge lands flush on it instead of overshooting, and a press while already at an edge is now a no-op ([#6749](https://github.com/heroui-inc/heroui/pull/6749)).
+
+## Dependencies
+
+- **React Aria**: Upgrade to [React Aria 1.20.0](https://react-aria.adobe.com/releases/v1-20-0) — `react-aria-components@1.20.0`, `react-aria@3.51.0`, `@react-types/shared@3.36.1`, and `@internationalized/date@3.12.3` ([#6752](https://github.com/heroui-inc/heroui/pull/6752)).
+- **tailwind-variants**: Upgrade `@heroui/react` and `@heroui/styles` to `tailwind-variants@3.3.1` ([#6760](https://github.com/heroui-inc/heroui/pull/6760)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6758](https://github.com/heroui-inc/heroui/pull/6758)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
