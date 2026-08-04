@@ -70,7 +70,6 @@ pnpm typecheck
 - Browser setup (once locally): `playwright install chromium` before `pnpm test`. CI: `--with-deps`, then `test:browser` + `test:coverage`
 - Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`
 - Coverage: jsdom-only floors — green ≠ depth. `test:changed`: local jsdom shortcut only, not a merge gate
-- Gotcha: `@react-aria/test-utils` is pinned to `1.0.0-rc.0` in `@heroui/testing`
 
 ### Package-Specific Commands
 

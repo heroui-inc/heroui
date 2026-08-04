@@ -304,11 +304,9 @@ calendar-year-picker
 
 4. **Behavioral tests** — see [Behavioral tests](#behavioral-tests-herouireact) above. Harness lives in `@heroui/testing`; suites in `packages/react/tests/`.
 
-5. **`@react-aria/test-utils` is RC-pinned** — `@heroui/testing` depends on `1.0.0-rc.0`. Bump deliberately when a stable release lands; expect tester API drift.
+5. **Commit hooks** — Husky runs `lint-staged` on pre-commit and `commitlint` on commit-msg. Non-conforming commits are rejected.
 
-6. **Commit hooks** — Husky runs `lint-staged` on pre-commit and `commitlint` on commit-msg. Non-conforming commits are rejected.
-
-7. **Run checks before committing** — `pnpm lint && pnpm typecheck && pnpm test`
+6. **Run checks before committing** — `pnpm lint && pnpm typecheck && pnpm test`
 
 ## Cursor Cloud Specific
 
