@@ -180,8 +180,9 @@ const SelectPopover = ({
 
     const timerId = window.setTimeout(() => {
       rafId = window.requestAnimationFrame(() => {
-        const selectedItem =
-          popoverRef.current?.querySelector<HTMLElement>('[aria-selected="true"]');
+        const selectedItems =
+          popoverRef.current?.querySelectorAll<HTMLElement>('[aria-selected="true"]');
+        const selectedItem = selectedItems?.[selectedItems.length - 1];
 
         selectedItem?.scrollIntoView({block: "nearest"});
       });
