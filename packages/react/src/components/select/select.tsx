@@ -7,11 +7,7 @@ import type {SelectVariants} from "@heroui/styles";
 import type {ComponentPropsWithRef} from "react";
 
 import {selectVariants} from "@heroui/styles";
-<<<<<<< HEAD
-import React, {createContext, use} from "react";
-=======
-import React, {createContext, useContext, useEffect, useRef} from "react";
->>>>>>> 7e28d2b55 (fix(select): correct popover scroll position when opening)
+import React, {createContext, use, useEffect, useRef} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {Popover as PopoverPrimitive} from "react-aria-components/Popover";
 import {
@@ -166,11 +162,8 @@ const SelectPopover = ({
   placement = "bottom",
   ...props
 }: SelectPopoverProps) => {
-<<<<<<< HEAD
   const {slots} = use(SelectContext);
-=======
-  const {slots} = useContext(SelectContext);
-  const state = useContext(SelectStateContext);
+  const state = use(SelectStateContext);
   const popoverRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -193,7 +186,6 @@ const SelectPopover = ({
       window.cancelAnimationFrame(rafId);
     };
   }, [state?.isOpen]);
->>>>>>> 7e28d2b55 (fix(select): correct popover scroll position when opening)
 
   return (
     <SurfaceContext
