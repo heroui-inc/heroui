@@ -25,4 +25,10 @@ Closes # <!-- Github issue # here -->
 
 <!-- If Yes, please describe the impact and migration path for existing HeroUI users. -->
 
+## ✅ Testing
+
+- [ ] Interactive / a11y contract changes include or update `*.test.tsx` coverage
+- [ ] Scenarios cover roles, `data-*` states, keyboard, disabled, and callbacks as applicable
+- [ ] `pnpm test` passes locally
+
 ## 📝 Additional Information

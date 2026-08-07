@@ -36,7 +36,7 @@ HeroUI v3 is a modern React UI library built with **Tailwind CSS v4**, organized
 │   │   └── src/components/  # Per-component .css files
 │   ├── standard/          # Shared ESLint, Prettier, TS configs
 │   ├── storybook/         # Storybook configuration
-│   └── vitest/            # Shared Vitest configurations
+│   └── testing/           # Shared test harness (@heroui/testing)
 ├── turbo.json
 └── pnpm-workspace.yaml
 ```
@@ -52,11 +52,32 @@ HeroUI v3 is a modern React UI library built with **Tailwind CSS v4**, organized
 | Dev (Docs site, port 3000) | `pnpm dev:docs` |
 | Lint | `pnpm lint` |
 | Typecheck | `pnpm typecheck` |
-| Test all | `pnpm test` |
-| Test one component | `pnpm test button` |
+| Test all (jsdom + browser) | `pnpm test` |
+| Test one file (filter) | `pnpm --filter @heroui/react exec vitest run button` |
+| Test with coverage | `pnpm test:coverage` (jsdom floors only — not “done”) |
+| Test changed files (local) | `pnpm --filter @heroui/react test:changed` (jsdom only; not a gate) |
 | Format | `pnpm run format` |
 | Bump version | `pnpm version:bump` |
 | Scaffold a new component | `cd packages/react && pnpm add:component ComponentName` |
+
+## Behavioral tests (`@heroui/react`)
+
+- Suites live in `packages/react/tests/components/<name>/`:
+  - `*.test.tsx` — jsdom (~90% of contracts)
+  - `*.ssr.test.tsx` — Client SSR smoke via `ssrSmoke()` (not RSC)
+  - `*.browser.test.tsx` — Playwright (overlays + high-risk portals; not every component)
+  - optional `fixtures.tsx` — shared JSX across layers
+- Import harness from `@heroui/testing/helpers` (`render`, `setupUser`, `runAllTimers`, `ssrSmoke`, `User`). Browser suites: `render` from `@heroui/testing/browser` (wraps `vitest-browser-react`; owned by `@heroui/testing`). Prefer `@/` for sources. Pattern testers: `const user = new User(...); user.createTester(...)` — not a top-level export.
+- Query: `getByRole` / label / text first; `data-testid` when needed; avoid class-primary queries.
+- Assert: roles/names, HeroUI `data-*` hooks, callbacks, focus, light BEM + documented `data-slot` on compound parts — not colors, full class lists, or RAC internals.
+- Fake timers: per-suite only; wire `advanceTimers` into `setupUser` + `User`; use `runAllTimers()`.
+- Pattern testers for groups / overlays / collections; skip for Button / Checkbox / Switch / TextField.
+- Naming: `describe("Component")`; nested concern; `it` as `supports…` / `calls…` / `exposes…` / `renders…`. SSR: `"Component SSR"`; browser: `"Component (browser)"`.
+- Intentional skips (no dedicated suite required): internals (`rac`, `icons`), non-exported helpers (`color-input-group`, `date-input-group`), in-progress `calendar-year-picker`, parent-covered parts (`list-box-item`, `menu-item`, `menu-section`, `list-box-section`), Toast SSR (client portal only — covered by jsdom + browser). Public `input-group` has its own suite. SSR and browser are risk-based, not universal.
+- Browser setup (once locally): `pnpm --filter @heroui/testing exec playwright install chromium` before `pnpm test`. CI uses `playwright install --with-deps chromium`, then `test:browser` + `test:coverage` (not a single `pnpm test`).
+- Commands: `pnpm test` (jsdom + browser, needs Chromium); filter with `pnpm --filter @heroui/react exec vitest run <name>`.
+- Coverage (`pnpm test:coverage`): jsdom only; `src/components/**` minus barrels. Thresholds are **CI floors** (statements/lines can pass with thin smoke). Green coverage ≠ sufficient depth — still require role/callback/focus (and browser for high-risk portals).
+- `test:changed`: local jsdom-only shortcut (`vitest related --changed`). Does **not** run browser suites; never use it as the merge gate — use `pnpm test` / CI.
 
 ## Git Commit Convention
 
@@ -279,13 +300,13 @@ calendar-year-picker
 
 2. **Build order matters** — `@heroui/styles` must build before `@heroui/react`. Running `pnpm build` from root handles this via Turbo's `^build` dependency.
 
-3. **Native addons allowlist** — The `pnpm.onlyBuiltDependencies` field in root `package.json` allows native compilation for `esbuild`, `@swc/core`, `@parcel/watcher`, etc. If this field is missing, you'll see "Ignored build scripts" warnings.
+3. **Native addons allowlist** — `onlyBuiltDependencies` in root `pnpm-workspace.yaml` allows native compilation for `esbuild`, `@swc/core`, `@parcel/watcher`, etc. If this list is missing, you'll see "Ignored build scripts" warnings.
 
-4. **No tests yet** — `pnpm test` runs but finds no test files. The Vitest config exists at `packages/vitest`.
+4. **Behavioral tests** — see [Behavioral tests](#behavioral-tests-herouireact) above. Harness lives in `@heroui/testing`; suites in `packages/react/tests/`.
 
 5. **Commit hooks** — Husky runs `lint-staged` on pre-commit and `commitlint` on commit-msg. Non-conforming commits are rejected.
 
-6. **Run checks before committing** — `pnpm lint && pnpm typecheck`
+6. **Run checks before committing** — `pnpm lint && pnpm typecheck && pnpm test`
 
 ## Cursor Cloud Specific
 

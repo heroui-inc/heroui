@@ -17,6 +17,7 @@
   background-color: var(--badge-bg);
   color: var(--badge-fg);
   border: 1px solid var(--badge-border);
+  background-clip: padding-box;
 }
 
 .badge__label {

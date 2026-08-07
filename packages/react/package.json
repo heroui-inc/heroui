@@ -31,8 +31,8 @@
     },
     "./package.json": "./package.json",
     "./styles": {
-      "default": "./src/styles.css",
-      "style": "./src/styles.css"
+      "style": "./src/styles.css",
+      "default": "./src/styles.css"
     }
   },
   "repository": {
@@ -50,6 +50,12 @@
     "add:component": "node scripts/add-component.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:jsdom": "vitest run --project react-jsdom",
+    "test:browser": "vitest run --project react-browser",
+    "test:coverage": "vitest run --coverage --project react-jsdom",
+    "test:changed": "vitest related --changed --project react-jsdom",
     "prepack": "clean-package && node scripts/update-exports.mjs",
     "postpack": "clean-package restore"
   },
@@ -57,17 +63,18 @@
   "dependencies": {
     "@heroui/styles": "workspace:*",
     "@radix-ui/react-avatar": "1.1.11",
-    "@react-types/shared": "3.36.0",
-    "@react-types/color": "3.2.0",
     "@react-stately/utils": "3.12.1",
+    "@react-types/color": "3.2.0",
+    "@react-types/shared": "3.36.1",
     "input-otp": "1.4.2",
     "tailwind-merge": "3.4.0",
-    "tailwind-variants": "3.3.0"
+    "tailwind-variants": "3.3.1"
   },
   "devDependencies": {
     "@heroui/standard": "workspace:*",
+    "@heroui/testing": "workspace:*",
     "@iconify/react": "6.0.2",
-    "@internationalized/date": "3.12.2",
+    "@internationalized/date": "3.12.3",
     "@react-aria/i18n": "3.13.1",
     "@react-aria/ssr": "3.10.1",
     "@react-aria/utils": "3.34.1",
@@ -76,20 +83,23 @@
     "@types/fs-extra": "11.0.4",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.2.0",
+    "@vitest/coverage-v8": "4.1.10",
     "fs-extra": "11.3.3",
     "react": "19.2.6",
-    "react-aria": "3.50.0",
-    "react-aria-components": "1.19.0",
+    "react-aria": "3.51.0",
+    "react-aria-components": "1.20.0",
     "react-dom": "19.2.6",
-    "tailwindcss": "4.1.18"
+    "tailwindcss": "4.1.18",
+    "vitest": "4.1.10"
   },
   "peerDependencies": {
     "@react-aria/i18n": "^3.13.1",
     "@react-aria/ssr": "^3.10.1",
     "@react-aria/utils": "^3.34.1",
     "react": ">=19.0.0",
-    "react-aria": "^3.50.0",
-    "react-aria-components": "^1.19.0",
+    "react-aria": "^3.51.0",
+    "react-aria-components": "^1.20.0",
     "react-dom": ">=19.0.0",
     "tailwindcss": ">=4.0.0"
   }

@@ -37,12 +37,14 @@
     "typecheck:docs-cn": "dotenv -- turbo typecheck --filter=@heroui/docs-cn",
     "typecheck:react": "turbo typecheck --filter=@heroui/react",
     "typecheck:storybook": "dotenv -- turbo typecheck --filter=@heroui/storybook",
+    "test": "turbo test",
+    "test:coverage": "turbo test:coverage --filter=@heroui/react",
     "typegen:docs": "dotenv -- pnpm --filter @heroui/docs typegen",
     "typegen:docs-cn": "dotenv -- pnpm --filter @heroui/docs-cn typegen",
     "version:bump": "bumpp package.json packages/react/package.json packages/styles/package.json",
     "release": "pnpm run build && bumpp package.json packages/react/package.json packages/styles/package.json --all",
     "clean": "pnpm clean:cache && pnpm i",
-    "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name 'pnpm-lock.yaml' \\) -prune -exec rm -rf '{}' +",
+    "clean:cache": "find . \\( -name '.turbo' -o -name '.next' -o -name 'dist' -o -name 'node_modules' -o -name '.source' -o -name '.contentlayer' -o -name '.vitest-attachments' -o -name 'coverage' -o -name 'bundle-sizes.json'  -o -name 'tsconfig.tsbuildinfo'  -o -name 'pnpm-lock.yaml' \\) -prune -exec rm -rf '{}' +",
     "upli": "pnpm up --filter \"./**\"  -L -i",
     "prepare": "husky",
     "postinstall": "pnpm --filter @heroui/styles build && pnpm typegen:docs && pnpm typegen:docs-cn"
@@ -100,24 +102,7 @@
     "turbo": "2.7.2",
     "typescript": "5.9.3",
     "typescript-eslint": "8.50.1",
-    "vitest": "4.0.16"
-  },
-  "pnpm": {
-    "overrides": {
-      "shiki": "3.20.0",
-      "ts-morph": "27.0.2"
-    },
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@swc/core",
-      "core-js",
-      "esbuild",
-      "lmdb",
-      "msgpackr-extract",
-      "protobufjs",
-      "sharp",
-      "unrs-resolver"
-    ]
+    "vitest": "4.1.10"
   },
   "engines": {
     "node": ">=22.x",

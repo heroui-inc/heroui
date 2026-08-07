@@ -1,0 +1,77 @@
+---
+title: v3.2.4
+description: Patch release that stops the Autocomplete popover from clipping its last options, restores backdrop dismissal for modals with outside scrolling, clamps Tabs.ListContainer chevron scrolling to the scrollable range, upgrades tailwind-variants to 3.3.1 to fix variant classes falling back after a re-render, upgrades React Aria to 1.20.0, and adds a behavioral test suite to @heroui/react.
+github:
+  pull: 6758
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">August 4, 2026</span>
+</div>
+
+Patch release: the [Autocomplete](/docs/components/autocomplete) popover no longer clips its last options, backdrop clicks dismiss a [Modal](/docs/components/modal) with `scroll="outside"` again, [Tabs](/docs/components/tabs) chevron scrolling lands flush on the edges, `tailwind-variants` is upgraded to `3.3.1` to fix variant modifiers falling back to the wrong class after a re-render, React Aria is upgraded to `1.20.0` (`react-aria@3.51.0`), and `@heroui/react` gains a behavioral test suite.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Bug Fixes
+
+- **Variants**: Fix variant modifiers falling back to the wrong class after a re-render — a controlled `Checkbox` no longer switches from `checkbox--primary` to `checkbox--secondary` when it is deselected, and secondary `Tabs` no longer revert to the primary variant ([#6760](https://github.com/heroui-inc/heroui/pull/6760)).
+- **Autocomplete**: Lay the popover out as a flex column and let the list shrink below its `320px` cap so the last options stay reachable when the popover is shorter than its content — most often when the trigger sits mid-viewport inside a `Modal` ([#6766](https://github.com/heroui-inc/heroui/pull/6766)).
+- **Modal**: Move outside scrolling onto the backdrop so a `scroll="outside"` modal stays dismissible — the full-height container no longer absorbs backdrop clicks and classifies them as inside the dialog ([#6770](https://github.com/heroui-inc/heroui/pull/6770)).
+- **Tooltip**: Keep the enter and exit animations when moving from one tooltip to an adjacent one. React Aria's warmup timer suppresses `data-entering` / `data-exiting` on the tooltip being replaced, unmounting it before HeroUI's CSS keyframes can run — pass the new `shouldSkipAnimation` prop to opt back into React Aria's instant swap ([#6772](https://github.com/heroui-inc/heroui/pull/6772)).
+- **Tabs**: Clamp `Tabs.ListContainer` chevron scrolling to the scrollable range so a press near an edge lands flush on it instead of overshooting, and a press while already at an edge is now a no-op ([#6749](https://github.com/heroui-inc/heroui/pull/6749)).
+- **Badge**: Clip the background to the padding box so it no longer bleeds past the `1px` border, which surfaced as a thin colored fringe on the rounded corners in Firefox ([#6768](https://github.com/heroui-inc/heroui/pull/6768)).
+- **Link**: Expose `data-slot="link"` on the link root ([#6754](https://github.com/heroui-inc/heroui/pull/6754)).
+- **Exports**: Order the `./styles` export conditions with `style` before `default` so the `style` condition is reachable ([#6754](https://github.com/heroui-inc/heroui/pull/6754)).
+
+## Testing
+
+`@heroui/react` now ships a behavioral test suite built on a shared `@heroui/testing` harness — Vitest configs, setup, and helpers (`render`, `setupUser`, `ssrSmoke`, timers, scroll-lock). Suites live in `packages/react/tests/components/` and split across two Vitest projects: `react-jsdom` for behavior and client-SSR smoke tests, and `react-browser` for Playwright checks. A QA CI job runs both, with coverage floors enforced on jsdom only.
+
+- **Behavioral tests**: Add the testing harness, per-component suites, dual Vitest projects, and the QA job ([#6754](https://github.com/heroui-inc/heroui/pull/6754)).
+
+## Dependencies
+
+- **React Aria**: Upgrade to [React Aria 1.20.0](https://react-aria.adobe.com/releases/v1-20-0) — `react-aria-components@1.20.0`, `react-aria@3.51.0`, `@react-types/shared@3.36.1`, and `@internationalized/date@3.12.3` ([#6752](https://github.com/heroui-inc/heroui/pull/6752)).
+- **tailwind-variants**: Upgrade `@heroui/react` and `@heroui/styles` to `tailwind-variants@3.3.1` ([#6760](https://github.com/heroui-inc/heroui/pull/6760)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6758](https://github.com/heroui-inc/heroui/pull/6758)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
