@@ -47,6 +47,7 @@ github:
 - **Variants**：修复重新渲染后变体修饰符回退到错误类名的问题——受控的 `Checkbox` 取消选中时不再从 `checkbox--primary` 变为 `checkbox--secondary`，secondary 变体的 `Tabs` 也不再回退到 primary 变体 ([#6760](https://github.com/heroui-inc/heroui/pull/6760))。
 - **Autocomplete**：将弹层改为 flex 纵向布局，并允许列表收缩到 `320px` 上限以下，使弹层高度小于内容高度时末尾选项仍可访问——最常见于触发器位于视口中部的 `Modal` 场景 ([#6766](https://github.com/heroui-inc/heroui/pull/6766))。
 - **Modal**：将 `scroll="outside"` 时的滚动移交给背景遮罩，使点击遮罩仍可关闭弹窗——占满视口高度的容器不再吞掉遮罩点击并将其判定为弹窗内部 ([#6770](https://github.com/heroui-inc/heroui/pull/6770))。
+- **Tooltip**：在相邻 Tooltip 之间切换时保留进入与退出动画。React Aria 的预热计时器会抑制被替换 Tooltip 上的 `data-entering` / `data-exiting`，使其在 HeroUI 的 CSS 关键帧执行前就被卸载——如需恢复 React Aria 的即时切换行为，可传入新增的 `shouldSkipAnimation` 属性 ([#6772](https://github.com/heroui-inc/heroui/pull/6772))。
 - **Tabs**：将 `Tabs.ListContainer` 的箭头滚动限制在可滚动范围内，靠近边缘时点击会精确停在边缘而不会滚动过头；已经位于边缘时点击不再触发滚动 ([#6749](https://github.com/heroui-inc/heroui/pull/6749))。
 - **Badge**：将背景裁剪到 padding box，使其不再溢出 `1px` 边框，从而消除 Firefox 中圆角处出现的细微颜色边缘 ([#6768](https://github.com/heroui-inc/heroui/pull/6768))。
 - **Link**：在 link 根元素上暴露 `data-slot="link"` ([#6754](https://github.com/heroui-inc/heroui/pull/6754))。
