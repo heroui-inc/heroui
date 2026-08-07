@@ -12,6 +12,7 @@ import {
   OverlayArrow,
   Tooltip as TooltipPrimitive,
   TooltipTrigger as TooltipTriggerPrimitive,
+  TooltipTriggerStateContext,
 } from "react-aria-components/Tooltip";
 
 import {useCSSVariable} from "../../hooks/use-css-variable";
@@ -29,16 +30,48 @@ type TooltipContext = {
 const TooltipContext = createContext<TooltipContext>({});
 
 /* -------------------------------------------------------------------------------------------------
+ * Tooltip Animation Scope
+ * -----------------------------------------------------------------------------------------------*/
+type TooltipAnimationScopeProps = {
+  children: ReactNode;
+  shouldSkipAnimation?: boolean;
+};
+
+// React Aria sets `shouldSkipAnimation` while its global warmup timer is active, which makes
+// `Tooltip` drop `data-entering` / `data-exiting` when one tooltip replaces another. HeroUI drives
+// both phases from CSS keyframes, so the flag is cleared for descendants to keep the fade on swap.
+const TooltipAnimationScope = ({children, shouldSkipAnimation}: TooltipAnimationScopeProps) => {
+  const state = use(TooltipTriggerStateContext);
+
+  if (!state || shouldSkipAnimation) return children;
+
+  return (
+    <TooltipTriggerStateContext value={{...state, shouldSkipAnimation: false}}>
+      {children}
+    </TooltipTriggerStateContext>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Tooltip Root
  * -----------------------------------------------------------------------------------------------*/
-type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive>;
+type TooltipRootProps = ComponentPropsWithRef<typeof TooltipTriggerPrimitive> & {
+  /**
+   * Whether to let React Aria skip the enter and exit animations while its global warmup timer is
+   * active, i.e. when moving quickly from one tooltip to another.
+   *
+   * @default false
+   */
+  shouldSkipAnimation?: boolean;
+};
 
 const TooltipRoot = ({
   children,
   closeDelay,
   delay,
+  shouldSkipAnimation = false,
   ...props
-}: ComponentPropsWithRef<typeof TooltipTriggerPrimitive>) => {
+}: TooltipRootProps) => {
   const slots = React.useMemo(() => tooltipVariants(), []);
 
   const cssDelay = useCSSVariable("--tooltip-delay");
@@ -55,7 +88,9 @@ const TooltipRoot = ({
         delay={resolvedDelay}
         {...props}
       >
-        {children}
+        <TooltipAnimationScope shouldSkipAnimation={shouldSkipAnimation}>
+          {children}
+        </TooltipAnimationScope>
       </TooltipTriggerPrimitive>
     </TooltipContext>
   );
