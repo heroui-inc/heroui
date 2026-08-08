@@ -137,13 +137,13 @@ The Toast component uses these CSS classes ([View source styles](https://github.
 
 #### Base Classes [!toc]
 - `.toast` - Base toast container
-- `.toast__region` - Toast region container
+- `.toast-region` - Toast region container
 - `.toast__content` - Content wrapper for title and description
 - `.toast__indicator` - Icon/indicator container
 - `.toast__title` - Toast title text
 - `.toast__description` - Toast description text
 - `.toast__action` - Action button container
-- `.toast__close` - Close button container
+- `.toast__close-button` - Close button container
 
 #### Variant Classes [!toc]
 - `.toast--default` - Default gray variant
@@ -159,6 +159,13 @@ The component supports various states:
 - **Frontmost**: `[data-frontmost]` - Applied to the topmost visible toast
 - **Index**: `[data-index]` - Applied based on toast position in stack
 - **Placement**: `[data-placement="*"]` - Applied based on toast region placement
+- **Removed**: `[data-removed]` - Applied while a closing toast plays its exit transition
+- **Expanded**: `[data-expanded]` - Applied to every toast while the stack is expanded
+- **Hidden**: `[data-hidden]` - Applied to toasts beyond `maxVisibleToasts`
+
+### Stacking and Expansion
+
+Toasts stack into a collapsed pile: the newest toast sits in front at full size, and the toasts behind it peek out, scaled down and clamped to the front toast's height. Hovering the stack (or moving keyboard focus into it) expands every visible toast to its natural height so all of them can be read; leaving collapses the stack again. While hovered or focused, auto-dismiss timers are paused, and they also pause while the page is in a background tab. On touch devices the stack stays collapsed. Pressing <kbd>Alt</kbd>+<kbd>T</kbd> moves focus to the toast region and expands the stack, and <kbd>Escape</kbd> collapses it again; the region is also a landmark reachable with <kbd>F6</kbd>. All motion is driven by interruptible CSS transitions, so rapid additions and dismissals retarget smoothly instead of jumping.
 
 ## API Reference
 
@@ -168,6 +175,7 @@ The component supports various states:
 |------|------|---------|-------------|
 | `placement` | `"top start" \| "top" \| "top end" \| "bottom start" \| "bottom" \| "bottom end"` | `"bottom"` | Placement of the toast region |
 | `gap` | `number` | `12` | The gap between toasts in pixels |
+| `isExpanded` | `boolean` | `false` | Force the stack into its expanded layout (does not pause timers) |
 | `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
 | `scaleFactor` | `number` | `0.05` | Scale factor for stacked toasts (0-1) |
 | `width` | `number \| string` | `460` | Width of the toast in pixels or CSS value |
@@ -238,18 +246,20 @@ A `ToastQueue` manages the state for a `<Toast.Provider>`. The state is stored o
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
+| `exitDuration` | `number` | `350` | How long a closing toast stays mounted for its exit animation (0 removes immediately) |
 | `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once (visual only) |
-| `wrapUpdate` | `(fn: () => void) => void` | - | Function to wrap state updates (e.g., for view transitions) |
+| `wrapUpdate` | `(fn: () => void) => void` | - | Function to wrap state updates (e.g. `document.startViewTransition`); by default updates are applied directly and animated with CSS transitions |
 
 #### Methods
 
 | Method | Parameters | Returns | Description |
 |--------|------------|---------|-------------|
 | `add` | `(content: T, options?: ToastOptions)` | `string` | Add a toast to the queue, returns toast key |
+| `update` | `(key: string, content: T, options?: {timeout?: number; onClose?: () => void})` | `boolean` | Update a toast in place, preserving its stack position; `timeout` restarts the countdown (0 keeps it open), omit it to keep the current countdown. Returns `false` if the toast no longer exists |
 | `close` | `(key: string)` | `void` | Close a toast by its key |
 | `pauseAll` | `()` | `void` | Pause all toast timers |
 | `resumeAll` | `()` | `void` | Resume all toast timers |
-| `clear` | `()` | `void` | Close all toasts |
+| `clear` | `()` | `void` | Close all toasts (each toast animates out and fires its `onClose`) |
 | `subscribe` | `(fn: () => void)` | `() => void` | Subscribe to queue changes, returns unsubscribe function |
 
 ### toast Function
@@ -281,7 +291,13 @@ toast("Event has been created", {
   indicator: <CustomIcon />,
 });
 
-// Promise support (automatically shows loading spinner)
+// Update an existing toast in place (keeps its position in the stack)
+const id = toast("Saving…", { timeout: 0 });
+toast.update(id, "Saved", { variant: "success" });
+
+// Promise support (automatically shows loading spinner). The loading toast
+// updates in place when the promise settles — same toast, same stack
+// position; the auto-dismiss countdown starts at that point.
 toast.promise(
   uploadFile(),
   {
@@ -319,7 +335,7 @@ toast.resumeAll();
 | `actionProps` | `ButtonProps` | - | Props for action button |
 | `isLoading` | `boolean` | `false` | Show loading spinner instead of indicator |
 | `timeout` | `number` | `4000` | Auto-dismiss timeout in milliseconds. Defaults to 4000ms (4 seconds). Set to `0` for persistent toasts that don't auto-dismiss |
-| `onClose` | `() => void` | - | Callback when toast is closed |
+| `onClose` | `() => void` | - | Called when the toast is dismissed, as its exit animation starts |
 
 #### toast.promise Options
 

@@ -137,13 +137,13 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 
 #### 基础类 [!toc]
 - `.toast` — Toast 根容器
-- `.toast__region` — Toast 区域容器
+- `.toast-region` — Toast 区域容器
 - `.toast__content` — 包裹标题与说明的内容容器
 - `.toast__indicator` — 图标/指示器容器
 - `.toast__title` — Toast 标题文本
 - `.toast__description` — Toast 说明文本
 - `.toast__action` — 操作按钮容器
-- `.toast__close` — 关闭按钮容器
+- `.toast__close-button` — 关闭按钮容器
 
 #### 变体类 [!toc]
 - `.toast--default` — 默认灰色变体
@@ -159,6 +159,13 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 - **最前**：`[data-frontmost]` — 应用于堆叠中最上层可见的 Toast
 - **索引**：`[data-index]` — 基于 Toast 在堆叠中的位置
 - **放置**：`[data-placement="*"]` — 基于 Toast 区域的放置位置
+- **移除中**：`[data-removed]` — 关闭中的 Toast 播放退出过渡时应用
+- **展开**：`[data-expanded]` — 堆叠展开时应用于每个 Toast
+- **隐藏**：`[data-hidden]` — 应用于超出 `maxVisibleToasts` 的 Toast
+
+### 堆叠与展开
+
+Toast 以折叠堆叠的形式呈现：最新的 Toast 以完整尺寸位于最前，后面的 Toast 依次缩小并被裁剪至最前 Toast 的高度，露出边缘。悬停堆叠（或将键盘焦点移入）时，所有可见 Toast 会展开为各自的自然高度以便完整阅读；离开后堆叠再次折叠。悬停或聚焦期间自动关闭计时器会暂停，页面处于后台标签页时也会暂停。触摸设备上堆叠保持折叠。按下 <kbd>Alt</kbd>+<kbd>T</kbd> 可将焦点移至 Toast 区域并展开堆叠，按下 <kbd>Escape</kbd> 可再次折叠；该区域同时是可通过 <kbd>F6</kbd> 到达的地标（landmark）。所有动效均由可中断的 CSS transition 驱动，快速添加或关闭时会平滑重定向而不会跳变。
 
 ## API 参考
 
@@ -167,6 +174,7 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 |------|------|--------|------|
 | `placement` | `"top start" \| "top" \| "top end" \| "bottom start" \| "bottom" \| "bottom end"` | `"bottom"` | Toast 区域的放置位置 |
 | `gap` | `number` | `12` | Toast 之间的间距（像素） |
+| `isExpanded` | `boolean` | `false` | 强制堆叠保持展开布局（不会暂停计时器） |
 | `maxVisibleToasts` | `number` | `3` | 同时最多显示的 Toast 数量 |
 | `scaleFactor` | `number` | `0.05` | 堆叠 Toast 的缩放系数（0–1） |
 | `width` | `number \| string` | `460` | Toast 宽度（像素或 CSS 值） |
@@ -230,18 +238,20 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 
 | Option | 类型 | 默认值 | 描述 |
 |--------|------|--------|------|
+| `exitDuration` | `number` | `350` | 关闭中的 Toast 为播放退出动画而保持挂载的时长（0 表示立即移除） |
 | `maxVisibleToasts` | `number` | `3` | 同时最多显示的 Toast 数量（仅视觉） |
-| `wrapUpdate` | `(fn: () => void) => void` | - | 包裹状态更新的函数（例如用于 view transitions） |
+| `wrapUpdate` | `(fn: () => void) => void` | - | 包裹状态更新的函数（例如 `document.startViewTransition`）；默认直接应用更新并由 CSS transition 驱动动画 |
 
 #### 方法
 
 | Method | 参数 | 返回值 | 描述 |
 |--------|------------|---------|------|
 | `add` | `(content: T, options?: ToastOptions)` | `string` | 将 Toast 加入队列，返回 Toast key |
+| `update` | `(key: string, content: T, options?: {timeout?: number; onClose?: () => void})` | `boolean` | 原地更新 Toast，保持其在堆叠中的位置；`timeout` 重新开始倒计时（0 表示保持打开），省略则沿用当前倒计时。Toast 已不存在时返回 `false` |
 | `close` | `(key: string)` | `void` | 按 key 关闭 Toast |
 | `pauseAll` | `()` | `void` | 暂停所有 Toast 计时器 |
 | `resumeAll` | `()` | `void` | 恢复所有 Toast 计时器 |
-| `clear` | `()` | `void` | 关闭所有 Toast |
+| `clear` | `()` | `void` | 关闭所有 Toast（每个 Toast 播放退出动画并触发各自的 `onClose`） |
 | `subscribe` | `(fn: () => void)` | `() => void` | 订阅队列变化，返回取消订阅函数 |
 
 ### toast 函数
@@ -273,7 +283,12 @@ toast("Event has been created", {
   indicator: <CustomIcon />,
 });
 
-// Promise 支持（自动显示加载指示）
+// 原地更新已有 Toast（保持其在堆叠中的位置）
+const id = toast("Saving…", { timeout: 0 });
+toast.update(id, "Saved", { variant: "success" });
+
+// Promise 支持（自动显示加载指示）。Promise 结束时加载 Toast 会原地更新 —
+// 同一个 Toast、同一个堆叠位置；自动关闭倒计时从这一刻开始。
 toast.promise(
   uploadFile(),
   {
@@ -311,7 +326,7 @@ toast.resumeAll();
 | `actionProps` | `ButtonProps` | - | 操作按钮 props |
 | `isLoading` | `boolean` | `false` | 使用加载指示替代指示器 |
 | `timeout` | `number` | `4000` | 自动消失超时（毫秒）。默认 4000ms（4 秒）。设为 `0` 表示持久 Toast，不自动消失 |
-| `onClose` | `() => void` | - | Toast 关闭时的回调 |
+| `onClose` | `() => void` | - | Toast 被关闭时触发（此时退出动画开始播放） |
 
 #### toast.promise Options
 
