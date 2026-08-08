@@ -271,15 +271,15 @@ toast.info("New update available");
 toast.warning("Please check your settings");
 toast.danger("Something went wrong");
 
-// 传入 options
-toast("Event has been created", {
+// 传入 options。利用返回的 id，操作按钮可以关闭它所属的 Toast。
+const eventId = toast("Event has been created", {
   description: "Your event has been scheduled for tomorrow",
   variant: "default",
   timeout: 5000, // 自定义超时：5 秒
   onClose: () => console.log("Closed"),
   actionProps: {
     children: "View",
-    onPress: () => {},
+    onPress: () => toast.close(eventId),
   },
   indicator: <CustomIcon />,
 });
@@ -336,6 +336,15 @@ toast.resumeAll();
 | `loading` | `ReactNode` | - | Promise pending 时显示的消息 |
 | `success` | `ReactNode \| ((data: T) => ReactNode)` | - | 成功时显示的消息（可为函数） |
 | `error` | `ReactNode \| ((error: Error) => ReactNode)` | - | 失败时显示的消息（可为函数） |
+
+## 无障碍
+
+每个 Toast 实现 [WAI-ARIA AlertDialog 模式](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)，并分组渲染在带标签的地标区域中：
+
+- **地标区域**：Toast 渲染在可通过 `F6` 到达的带标签地标区域中；`Alt` + `T` 可将焦点直接移入
+- **键盘**：`Tab` 可到达可见 Toast 的控件，`Escape` 折叠展开的堆叠；关闭聚焦的 Toast 时焦点会移至最近的剩余 Toast
+- **屏幕阅读器**：每个 Toast 使用 `role="alertdialog"` 并关联标题与描述；新 Toast 会自动播报
+- **计时器**：悬停或聚焦堆叠时、以及页面处于后台标签页时，自动关闭计时会暂停
 
 ## 相关组件
 

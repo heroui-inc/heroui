@@ -275,15 +275,15 @@ toast.info("New update available");
 toast.warning("Please check your settings");
 toast.danger("Something went wrong");
 
-// With options
-toast("Event has been created", {
+// With options. The returned id lets the action close its own toast.
+const eventId = toast("Event has been created", {
   description: "Your event has been scheduled for tomorrow",
   variant: "default",
   timeout: 5000, // Custom timeout: 5 seconds
   onClose: () => console.log("Closed"),
   actionProps: {
     children: "View",
-    onPress: () => {},
+    onPress: () => toast.close(eventId),
   },
   indicator: <CustomIcon />,
 });
@@ -341,6 +341,15 @@ toast.resumeAll();
 | `loading` | `ReactNode` | - | Message shown while promise is pending |
 | `success` | `ReactNode \| ((data: T) => ReactNode)` | - | Message shown on success (can be function) |
 | `error` | `ReactNode \| ((error: Error) => ReactNode)` | - | Message shown on error (can be function) |
+
+## Accessibility
+
+Each toast implements the [WAI-ARIA alertdialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/), grouped inside a labeled landmark region:
+
+- **Landmark region**: Toasts render in a labeled landmark reachable with `F6`; `Alt` + `T` moves focus straight to it
+- **Keyboard**: `Tab` reaches the controls of visible toasts, `Escape` collapses the expanded stack, and dismissing a focused toast moves focus to the nearest remaining toast
+- **Screen readers**: Each toast uses `role="alertdialog"` with its title and description linked; new toasts are announced automatically
+- **Timers**: Auto-dismiss pauses while the stack is hovered or focused, and while the page is in a background tab
 
 ## Related Components
 
