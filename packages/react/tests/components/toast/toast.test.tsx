@@ -1,6 +1,14 @@
-import {act, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
+import {
+  act,
+  advanceTimersByTime,
+  cleanup,
+  render,
+  runAllTimers,
+  screen,
+  setupUser,
+} from "@heroui/testing/helpers";
 
-import {Toast, ToastQueue} from "@/components/toast";
+import {DEFAULT_EXIT_DURATION, DEFAULT_TOAST_TIMEOUT, Toast, ToastQueue} from "@/components/toast";
 
 describe("Toast", () => {
   let user: ReturnType<typeof setupUser>;
@@ -99,6 +107,11 @@ describe("Toast", () => {
 
     await user.click(screen.getByRole("button", {name: "Close"}));
 
+    // onClose fires at dismissal, while the exit animation is still playing.
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    advanceTimersByTime(DEFAULT_EXIT_DURATION);
+
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole("alertdialog")).toBeNull();
   });
@@ -115,10 +128,68 @@ describe("Toast", () => {
     expect(screen.getByRole("alertdialog")).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(4000);
+      vi.advanceTimersByTime(DEFAULT_TOAST_TIMEOUT);
     });
 
     expect(screen.queryByRole("alertdialog")).toBeNull();
+  });
+
+  it("calls each onClose at dismissal and removes all toasts after clear", () => {
+    const queue = new ToastQueue();
+    const onCloseA = vi.fn();
+    const onCloseB = vi.fn();
+
+    render(<Toast.Provider queue={queue} />);
+
+    act(() => {
+      queue.add({title: "First"}, {onClose: onCloseA});
+    });
+    act(() => {
+      queue.add({title: "Second"}, {onClose: onCloseB});
+    });
+
+    act(() => {
+      queue.clear();
+    });
+
+    // onClose fires at dismissal; the toasts stay mounted (aria-hidden)
+    // while their exit animation plays.
+    expect(onCloseA).toHaveBeenCalledTimes(1);
+    expect(onCloseB).toHaveBeenCalledTimes(1);
+
+    const exiting = screen.getAllByRole("alertdialog", {hidden: true});
+
+    expect(exiting).toHaveLength(2);
+    for (const toastEl of exiting) {
+      expect(toastEl).toHaveAttribute("data-removed", "true");
+    }
+
+    advanceTimersByTime(DEFAULT_EXIT_DURATION);
+
+    expect(screen.queryByRole("alertdialog", {hidden: true})).toBeNull();
+    expect(onCloseA).toHaveBeenCalledTimes(1);
+    expect(onCloseB).toHaveBeenCalledTimes(1);
+  });
+
+  it("exposes a single batched exiting-state notification for clear", () => {
+    const queue = new ToastQueue();
+    const inner = queue.getQueue() as unknown as {
+      getExitingKeys: () => ReadonlySet<string>;
+      subscribeExiting: (fn: () => void) => () => void;
+    };
+
+    queue.add({title: "One"});
+    queue.add({title: "Two"});
+    queue.add({title: "Three"});
+
+    const onExitingChange = vi.fn();
+
+    inner.subscribeExiting(onExitingChange);
+
+    queue.clear();
+
+    expect(onExitingChange).toHaveBeenCalledTimes(1);
+    expect(inner.getExitingKeys().size).toBe(3);
   });
 
   it("exposes stacked toasts with newest frontmost and indexed", () => {
@@ -155,7 +226,8 @@ describe("Toast", () => {
       queue.add({title: "Second"});
     });
 
-    const toasts = screen.getAllByRole("alertdialog");
+    // Hidden toasts are aria-hidden, so include them in the role query.
+    const toasts = screen.getAllByRole("alertdialog", {hidden: true});
     const hidden = toasts.find((t) => t.getAttribute("data-hidden") === "true");
     const visible = toasts.find((t) => !t.hasAttribute("data-hidden"));
 
@@ -163,6 +235,54 @@ describe("Toast", () => {
     expect(visible).toBeDefined();
     expect(hidden).toHaveTextContent("First");
     expect(visible).toHaveTextContent("Second");
+  });
+
+  it("supports Alt+T to focus and expand the stack and Escape to collapse it", async () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} />);
+
+    act(() => {
+      queue.add({title: "First"});
+    });
+    act(() => {
+      queue.add({title: "Second"});
+    });
+
+    await user.keyboard("{Alt>}t{/Alt}");
+
+    const region = screen.getByRole("region");
+
+    expect(region).toHaveFocus();
+    expect(region).toHaveAttribute("data-expanded", "true");
+
+    await user.keyboard("{Escape}");
+
+    expect(region).not.toHaveAttribute("data-expanded");
+    expect(region).not.toHaveFocus();
+  });
+
+  it("exposes data-swapped on the indicator after a promise-style update", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} />);
+
+    let key = "";
+
+    act(() => {
+      key = queue.add({isLoading: true, title: "Uploading"});
+    });
+
+    const indicator = document.querySelector('[data-slot="toast-indicator"]');
+
+    expect(indicator).not.toHaveAttribute("data-swapped");
+
+    act(() => {
+      queue.update(key, {title: "Uploaded", variant: "success"});
+    });
+
+    expect(indicator).toHaveAttribute("data-swapped", "true");
+    expect(document.querySelector('[data-slot="toast-default-icon"]')).not.toBeNull();
   });
 
   it("supports custom render children via Toast.Provider function-as-children", () => {
