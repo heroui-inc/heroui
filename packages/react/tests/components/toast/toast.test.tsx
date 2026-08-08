@@ -110,6 +110,9 @@ describe("Toast", () => {
     // onClose fires at dismissal, while the exit animation is still playing.
     expect(onClose).toHaveBeenCalledTimes(1);
 
+    // Pointer dismissal releases focus so hiding the toast is not blocked.
+    expect(document.body).toHaveFocus();
+
     advanceTimersByTime(DEFAULT_EXIT_DURATION);
 
     expect(onClose).toHaveBeenCalledTimes(1);
@@ -235,6 +238,34 @@ describe("Toast", () => {
     expect(visible).toBeDefined();
     expect(hidden).toHaveTextContent("First");
     expect(visible).toHaveTextContent("Second");
+    // Hidden toasts are inert so their controls leave the tab order.
+    expect(hidden).toHaveAttribute("inert");
+    expect(visible).not.toHaveAttribute("inert");
+  });
+
+  it("moves keyboard focus to the remaining toast when the focused toast closes", async () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} />);
+
+    act(() => {
+      queue.add({title: "First"});
+    });
+    act(() => {
+      queue.add({title: "Second"});
+    });
+
+    await user.tab();
+    expect(document.activeElement).toHaveAttribute("role", "alertdialog");
+
+    await user.tab();
+    await user.keyboard("{Enter}");
+
+    // The frontmost toast is dismissed; keyboard focus lands on its neighbor.
+    const remaining = screen.getByRole("alertdialog");
+
+    expect(remaining).toHaveTextContent("First");
+    expect(remaining).toHaveFocus();
   });
 
   it("supports Alt+T to focus and expand the stack and Escape to collapse it", async () => {

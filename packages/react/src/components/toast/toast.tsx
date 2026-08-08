@@ -18,6 +18,7 @@ import React, {
   useState,
   useSyncExternalStore,
 } from "react";
+import {useFocusVisible} from "react-aria/useFocusVisible";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -66,6 +67,66 @@ const EMPTY_EXITING_KEYS: ReadonlySet<string> = new Set();
 const getEmptyExitingKeys = (): ReadonlySet<string> => EMPTY_EXITING_KEYS;
 const subscribeToNothing = (): (() => void) => () => {};
 
+// Mirrors React Aria's focus handling when a focused toast is removed:
+// pointer focus leaves the region (so hover collapse and timers stay live), keyboard focus moves to the nearest remaining toast, newer first.
+const moveFocusFromToast = (toastEl: HTMLElement, isKeyboardFocus: boolean) => {
+  if (!isKeyboardFocus) {
+    (document.activeElement as HTMLElement | null)?.blur();
+
+    return;
+  }
+
+  const isViable = (el: Element | null): el is HTMLElement =>
+    el instanceof HTMLElement &&
+    el.matches('[data-slot="toast"]:not([data-removed="true"]):not([data-hidden="true"])');
+
+  // Prefer nearest newer toast (previous siblings, DOM order is newest-first).
+  let target: HTMLElement | null = null;
+  let sibling = toastEl.previousElementSibling;
+
+  while (sibling) {
+    if (isViable(sibling)) {
+      target = sibling;
+      break;
+    }
+    sibling = sibling.previousElementSibling;
+  }
+
+  // Fallback to nearest older toast.
+  if (!target) {
+    sibling = toastEl.nextElementSibling;
+    while (sibling) {
+      if (isViable(sibling)) {
+        target = sibling;
+        break;
+      }
+      sibling = sibling.nextElementSibling;
+    }
+  }
+
+  // Rare fallback: non-sibling structure or portal-like rendering.
+  if (!target) {
+    const region = toastEl.closest<HTMLElement>('[data-slot="toast-region"]');
+
+    if (region) {
+      for (const candidate of region.querySelectorAll<HTMLElement>(
+        '[data-slot="toast"]:not([data-removed="true"]):not([data-hidden="true"])',
+      )) {
+        if (candidate !== toastEl) {
+          target = candidate;
+          break;
+        }
+      }
+    }
+  }
+
+  if (target) {
+    target.focus();
+  } else {
+    (document.activeElement as HTMLElement | null)?.blur();
+  }
+};
+
 /* ------------------------------------------------------------------------------------------------
  * Toast
  * --------------------------------------------------------------------------------------------- */
@@ -109,8 +170,7 @@ const Toast = <T extends object = ToastContentValue>({
   const toastKey = toast?.key;
   const isExiting = toastKey != null && (exitingKeys?.has(toastKey) ?? false);
 
-  // Exiting toasts are excluded from layout (siblings reposition during the
-  // exit animation) but keep their own slot while fading out.
+  // Exiting toasts are excluded from layout (siblings reposition during the exit animation) but keep their own slot while fading out.
   const layoutToasts = useMemo(() => {
     if (!exitingKeys || exitingKeys.size === 0) {
       return visibleToasts;
@@ -125,6 +185,7 @@ const Toast = <T extends object = ToastContentValue>({
   const isHidden = !isExiting && index >= maxVisibleToasts;
   const toastRef = useRef<HTMLDivElement | null>(null);
   const {height: toastHeight} = useMeasuredHeight(toastRef);
+  const {isFocusVisible} = useFocusVisible();
 
   // Layout effect so siblings have this height before the first paint;
   // a passive effect would shift the stack one frame later.
@@ -142,21 +203,39 @@ const Toast = <T extends object = ToastContentValue>({
     };
   }, [toastKey, onToastHeightRemove]);
 
-  // react-aria-components filters tabIndex and aria-hidden out of Toast
-  // props, so set both imperatively.
+  // react-aria-components filters tabIndex and aria-hidden out of Toast props, so set both imperatively.
   useLayoutEffect(() => {
     const el = toastRef.current;
 
-    if (el) {
-      el.tabIndex = isFrontmost || (isExpanded && !isHidden && !isExiting) ? 0 : -1;
-
-      if (isHidden || isExiting) {
-        el.setAttribute("aria-hidden", "true");
-      } else {
-        el.removeAttribute("aria-hidden");
-      }
+    if (!el) {
+      return;
     }
-  }, [isFrontmost, isExpanded, isHidden, isExiting]);
+
+    el.tabIndex = isFrontmost || (isExpanded && !isHidden && !isExiting) ? 0 : -1;
+
+    if (isHidden || isExiting) {
+      // Browsers block aria-hidden around a focused element, so focus must move out first.
+      if (el.contains(document.activeElement)) {
+        moveFocusFromToast(el, isFocusVisible);
+      }
+
+      el.setAttribute("aria-hidden", "true");
+
+      if (isExiting) {
+        // Exiting is one-way: drop the dying controls from the tab order.
+        // inert would also stop pointer events, which must keep hitting the ghost so the stack stays expanded under a resting cursor.
+        for (const control of el.querySelectorAll<HTMLElement>("button, a")) {
+          control.tabIndex = -1;
+        }
+      } else {
+        // Hidden toasts can become visible again; inert is reversible and they are pointer-events: none already.
+        el.setAttribute("inert", "");
+      }
+    } else {
+      el.removeAttribute("aria-hidden");
+      el.removeAttribute("inert");
+    }
+  }, [isFrontmost, isExpanded, isHidden, isExiting, isFocusVisible]);
 
   const style = useMemo<CSSProperties>(() => {
     const frontToastKey = layoutToasts[0]?.key;
@@ -179,8 +258,7 @@ const Toast = <T extends object = ToastContentValue>({
       "--offset-expanded": `${heightsBefore + index * gap}px`,
       "--scale-collapsed": `${1 - index * finalScaleFactor}`,
       viewTransitionName: `toast-${String(toast.key).replace(/[^a-zA-Z0-9]/g, "-")}`,
-      // Exiting toasts render below live siblings so the fading ghost never
-      // swallows clicks aimed at the successor sliding into its slot.
+      // Exiting toasts render below live siblings so the fading ghost never swallows clicks aimed at the successor sliding into its slot.
       zIndex: isExiting ? 0 : visibleToasts.length - fullIndex,
       ...(frontHeight
         ? ({
