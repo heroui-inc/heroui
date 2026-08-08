@@ -163,10 +163,6 @@ The component supports various states:
 - **Expanded**: `[data-expanded]` - Applied to every toast while the stack is expanded
 - **Hidden**: `[data-hidden]` - Applied to toasts beyond `maxVisibleToasts`
 
-### Stacking and Expansion
-
-Toasts stack into a collapsed pile: the newest toast sits in front at full size, and the toasts behind it peek out, scaled down and clamped to the front toast's height. Hovering the stack (or moving keyboard focus into it) expands every visible toast to its natural height so all of them can be read; leaving collapses the stack again. While hovered or focused, auto-dismiss timers are paused, and they also pause while the page is in a background tab. On touch devices the stack stays collapsed. Pressing <kbd>Alt</kbd>+<kbd>T</kbd> moves focus to the toast region and expands the stack, and <kbd>Escape</kbd> collapses it again; the region is also a landmark reachable with <kbd>F6</kbd>. All motion is driven by interruptible CSS transitions, so rapid additions and dismissals retarget smoothly instead of jumping.
-
 ## API Reference
 
 ### Toast.Provider
