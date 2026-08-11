@@ -6,6 +6,7 @@ import {Icon} from "@iconify/react";
 import React from "react";
 
 import {Button} from "../button";
+import {Modal} from "../modal";
 
 import {
   Toast,
@@ -658,4 +659,51 @@ const CustomQueueTemplate = () => {
 
 export const CustomQueue = {
   render: CustomQueueTemplate,
+};
+
+// Toast in Modal - toasts stay visible above a full-screen overlay (modal)
+const ToastInModalTemplate = () => {
+  return (
+    <div className="flex h-full flex-col items-center justify-center">
+      <Toast.Provider placement="bottom" />
+      <Modal>
+        <Button size="sm" variant="secondary">
+          Open modal
+        </Button>
+        <Modal.Backdrop>
+          <Modal.Container>
+            <Modal.Dialog className="sm:max-w-90">
+              <Modal.CloseTrigger />
+              <Modal.Header>
+                <Modal.Icon className="bg-default text-foreground">
+                  <Icon className="size-5" icon="gravity-ui:bell" />
+                </Modal.Icon>
+                <Modal.Heading>Notifications</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>
+                <p>Trigger a toast from inside the modal to see it render above the backdrop.</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  className="w-full"
+                  variant="secondary"
+                  onPress={() =>
+                    toast.success("Settings saved", {
+                      description: "Your changes have been applied",
+                    })
+                  }
+                >
+                  Show toast
+                </Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
+      </Modal>
+    </div>
+  );
+};
+
+export const ToastInModal = {
+  render: ToastInModalTemplate,
 };

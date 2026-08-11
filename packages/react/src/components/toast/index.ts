@@ -79,6 +79,7 @@ export {ToastQueue, toast, toastQueue};
 export {
   DEFAULT_EXIT_DURATION,
   DEFAULT_GAP,
+  DEFAULT_HOTKEY,
   DEFAULT_MAX_VISIBLE_TOAST,
   DEFAULT_TOAST_TIMEOUT,
 } from "./constants";

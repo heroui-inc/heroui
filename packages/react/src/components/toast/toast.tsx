@@ -27,7 +27,9 @@ import {
   UNSTABLE_ToastStateContext as ToastStateContext,
 } from "react-aria-components/Toast";
 
-import {useMeasuredHeight, useMediaQuery, useSafeLayoutEffect} from "../../hooks";
+import {useMeasuredHeight} from "../../hooks/use-measured-height";
+import {useMediaQuery} from "../../hooks/use-media-query";
+import {useSafeLayoutEffect} from "../../hooks/use-safe-layout-effect";
 import {dataAttr} from "../../utils/assertion";
 import {composeSlotClassName, composeTwRenderProps} from "../../utils/compose";
 import {dom} from "../../utils/dom";
@@ -38,6 +40,7 @@ import {Spinner} from "../spinner";
 
 import {
   DEFAULT_GAP,
+  DEFAULT_HOTKEY,
   DEFAULT_MAX_VISIBLE_TOAST,
   DEFAULT_SCALE_FACTOR,
   DEFAULT_TOAST_WIDTH,
@@ -502,6 +505,11 @@ interface ToastProviderProps<T extends object = ToastContentValue> extends Omit<
    */
   maxVisibleToasts?: number;
   /**
+   * Hotkey that focuses the toast region. Modifiers match KeyboardEvent boolean props, other keys match event.code. Pass [] to disable.
+   * @default ["altKey", "KeyT"]
+   */
+  hotkey?: string[];
+  /**
    * How much each toast behind the front one scales down.
    * @default 0.05
    */
@@ -524,6 +532,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   children,
   className,
   gap = DEFAULT_GAP,
+  hotkey = DEFAULT_HOTKEY,
   isExpanded: isExpandedProp = false,
   maxVisibleToasts,
   placement = "bottom",
@@ -536,6 +545,13 @@ const ToastProvider = <T extends object = ToastContentValue>({
   const slots = useMemo(() => toastVariants({placement}), [placement]);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [toastHeights, setToastHeights] = useState<Record<string, number>>({});
+
+  // Keeps the latest hotkey without re-registering the document listener.
+  const hotkeyRef = useRef(hotkey);
+
+  useEffect(() => {
+    hotkeyRef.current = hotkey;
+  }, [hotkey]);
 
   const toastQueue = useMemo((): StatelyToastQueue<T> => {
     if (queueProp) {
@@ -655,10 +671,19 @@ const ToastProvider = <T extends object = ToastContentValue>({
         setIsPointerOrFocusWithin(false);
       };
 
-      // Alt+T focuses the region (a React Aria landmark, so F6 works too);
+      // The hotkey focuses the region (a React Aria landmark, so F6 works too);
       // the focusin listener then expands the stack.
       const handleDocumentKeyDown = (event: KeyboardEvent) => {
-        if (event.altKey && event.code === "KeyT") {
+        const hotkey = hotkeyRef.current;
+
+        // Modifiers match KeyboardEvent boolean props; other keys match event.code.
+        const isHotkeyPressed =
+          hotkey.length > 0 &&
+          hotkey.every(
+            (key) => (event as unknown as Record<string, unknown>)[key] || event.code === key,
+          );
+
+        if (isHotkeyPressed) {
           node.focus();
         }
       };
@@ -808,6 +833,33 @@ const ToastProvider = <T extends object = ToastContentValue>({
     [isMobile, placement, scaleFactor],
   );
 
+  const contextValue = useMemo<ToastContext>(
+    () => ({
+      exitingKeys,
+      gap,
+      heightsByKey: toastHeights,
+      isExpanded,
+      maxVisibleToasts: resolvedMaxVisibleToasts,
+      onToastHeightChange: handleToastHeightChange,
+      onToastHeightRemove: handleToastHeightRemove,
+      placement,
+      scaleFactor,
+      slots,
+    }),
+    [
+      exitingKeys,
+      gap,
+      handleToastHeightChange,
+      handleToastHeightRemove,
+      isExpanded,
+      placement,
+      resolvedMaxVisibleToasts,
+      scaleFactor,
+      slots,
+      toastHeights,
+    ],
+  );
+
   return (
     <ToastRegionPrimitive<T>
       ref={handleRegionRef as ToastRegionPrimitiveProps<T>["ref"]}
@@ -830,20 +882,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
         };
 
         return (
-          <ToastContext
-            value={{
-              exitingKeys,
-              gap,
-              heightsByKey: toastHeights,
-              isExpanded,
-              maxVisibleToasts: resolvedMaxVisibleToasts,
-              onToastHeightChange: handleToastHeightChange,
-              onToastHeightRemove: handleToastHeightRemove,
-              placement,
-              scaleFactor,
-              slots,
-            }}
-          >
+          <ToastContext value={contextValue}>
             {typeof children === "undefined"
               ? getDefaultChildren(renderProps)
               : typeof children === "function"

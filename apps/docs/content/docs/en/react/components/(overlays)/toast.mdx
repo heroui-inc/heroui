@@ -174,6 +174,7 @@ The component supports various states:
 | `gap` | `number` | `12` | The gap between toasts in pixels |
 | `isExpanded` | `boolean` | `false` | Force the stack into its expanded layout (does not pause timers) |
 | `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once |
+| `hotkey` | `string[]` | `["altKey", "KeyT"]` | Hotkey that moves focus to the toast region and expands the stack. Modifiers match `KeyboardEvent` boolean properties (e.g. `"altKey"`), other keys match `event.code` (e.g. `"KeyT"`); pass `[]` to disable |
 | `scaleFactor` | `number` | `0.05` | Scale factor for stacked toasts (0-1) |
 | `width` | `number \| string` | `460` | Width of the toast in pixels or CSS value |
 | `queue` | `ToastQueue<T>` | - | Custom toast queue instance |
@@ -346,7 +347,7 @@ toast.resumeAll();
 
 Each toast implements the [WAI-ARIA alertdialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/), grouped inside a labeled landmark region:
 
-- **Landmark region**: Toasts render in a labeled landmark reachable with `F6`; `Alt` + `T` moves focus straight to it
+- **Landmark region**: Toasts render in a labeled landmark reachable with `F6`; `Alt` + `T` moves focus straight to it. The hotkey is configurable via the `hotkey` prop and can be disabled by passing an empty array, and the region label can be overridden with `aria-label`
 - **Keyboard**: `Tab` reaches the controls of visible toasts, `Escape` collapses the expanded stack, and dismissing a focused toast moves focus to the nearest remaining toast
 - **Screen readers**: Each toast uses `role="alertdialog"` with its title and description linked; new toasts are announced automatically
 - **Timers**: Auto-dismiss pauses while the stack is hovered or focused, and while the page is in a background tab

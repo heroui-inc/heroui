@@ -375,4 +375,49 @@ describe("Toast", () => {
 
     expect(screen.queryByRole("alertdialog")).toBeNull();
   });
+
+  it("supports a custom aria-label for the toast region", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider aria-label="Notifications" queue={queue} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveAttribute("aria-label", "Notifications");
+  });
+
+  it("supports a configurable hotkey", async () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider hotkey={["ctrlKey", "KeyN"]} queue={queue} />);
+
+    act(() => {
+      queue.add({title: "First"});
+      queue.add({title: "Second"});
+    });
+
+    // The default hotkey is replaced, so Alt+T no longer focuses the region.
+    await user.keyboard("{Alt>}t{/Alt}");
+    expect(screen.getByRole("region")).not.toHaveFocus();
+
+    await user.keyboard("{Control>}n{/Control}");
+    expect(screen.getByRole("region")).toHaveFocus();
+    expect(screen.getByRole("region")).toHaveAttribute("data-expanded", "true");
+  });
+
+  it("does not focus the region when the hotkey is disabled", async () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider hotkey={[]} queue={queue} />);
+
+    act(() => {
+      queue.add({title: "First"});
+      queue.add({title: "Second"});
+    });
+
+    await user.keyboard("{Alt>}t{/Alt}");
+    expect(screen.getByRole("region")).not.toHaveFocus();
+  });
 });

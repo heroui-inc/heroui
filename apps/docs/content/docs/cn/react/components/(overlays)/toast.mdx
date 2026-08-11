@@ -177,6 +177,7 @@ Toast 以折叠堆叠的形式呈现：最新的 Toast 以完整尺寸位于最�
 | `gap` | `number` | `12` | Toast 之间的间距（像素） |
 | `isExpanded` | `boolean` | `false` | 强制堆叠保持展开布局（不会暂停计时器） |
 | `maxVisibleToasts` | `number` | `3` | 同时最多显示的 Toast 数量 |
+| `hotkey` | `string[]` | `["altKey", "KeyT"]` | 将焦点移入 Toast 区域并展开堆叠的快捷键。修饰键使用 `KeyboardEvent` 布尔属性名（如 `"altKey"`），其他按键使用 `event.code`（如 `"KeyT"`）；传 `[]` 可禁用 |
 | `scaleFactor` | `number` | `0.05` | 堆叠 Toast 的缩放系数（0–1） |
 | `width` | `number \| string` | `460` | Toast 宽度（像素或 CSS 值） |
 | `queue` | `ToastQueue<T>` | - | 自定义 Toast 队列实例 |
@@ -341,7 +342,7 @@ toast.resumeAll();
 
 每个 Toast 实现 [WAI-ARIA AlertDialog 模式](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)，并分组渲染在带标签的地标区域中：
 
-- **地标区域**：Toast 渲染在可通过 `F6` 到达的带标签地标区域中；`Alt` + `T` 可将焦点直接移入
+- **地标区域**：Toast 渲染在可通过 `F6` 到达的带标签地标区域中；`Alt` + `T` 可将焦点直接移入。快捷键可通过 `hotkey` prop 配置，传空数组可禁用；区域标签可通过 `aria-label` 覆盖
 - **键盘**：`Tab` 可到达可见 Toast 的控件，`Escape` 折叠展开的堆叠；关闭聚焦的 Toast 时焦点会移至最近的剩余 Toast
 - **屏幕阅读器**：每个 Toast 使用 `role="alertdialog"` 并关联标题与描述；新 Toast 会自动播报
 - **计时器**：悬停或聚焦堆叠时、以及页面处于后台标签页时，自动关闭计时会暂停
