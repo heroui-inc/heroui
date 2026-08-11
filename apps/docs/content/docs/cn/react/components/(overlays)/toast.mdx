@@ -164,10 +164,6 @@ Toast 使用以下 CSS 类（[查看源码样式](https://github.com/heroui-inc/
 - **展开**：`[data-expanded]` — 堆叠展开时应用于每个 Toast
 - **隐藏**：`[data-hidden]` — 应用于超出 `maxVisibleToasts` 的 Toast
 
-### 堆叠与展开
-
-Toast 以折叠堆叠的形式呈现：最新的 Toast 以完整尺寸位于最前，后面的 Toast 依次缩小并被裁剪至最前 Toast 的高度，露出边缘。悬停堆叠（或将键盘焦点移入）时，所有可见 Toast 会展开为各自的自然高度以便完整阅读；离开后堆叠再次折叠。悬停或聚焦期间自动关闭计时器会暂停，页面处于后台标签页时也会暂停。触摸设备上堆叠保持折叠。按下 <kbd>Alt</kbd>+<kbd>T</kbd> 可将焦点移至 Toast 区域并展开堆叠，按下 <kbd>Escape</kbd> 可再次折叠；该区域同时是可通过 <kbd>F6</kbd> 到达的地标（landmark）。所有动效均由可中断的 CSS transition 驱动，快速添加或关闭时会平滑重定向而不会跳变。
-
 ## API 参考
 
 ### Toast.Provider
