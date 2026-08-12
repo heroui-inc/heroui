@@ -43,10 +43,12 @@ import { Spinner } from '@heroui/react';
 To customize the Spinner component classes, you can use the `@layer components` directive.
 [Learn more](https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes).
 
+You can also override the animation duration to control how fast the spinner rotates:
+
 ```css
 @layer components {
   .spinner {
-    @apply animate-spin;
+    @apply animate-[spin_0.4s_linear_infinite];
   }
 
   .spinner--accent {
