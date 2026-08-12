@@ -2219,6 +2219,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./spinner/sizes").then((m) => m.SpinnerSizes),
     file: "cn/spinner/sizes.tsx",
   },
+  "spinner-speed": {
+    loader: () => import("./spinner/speed").then((m) => m.SpinnerSpeed),
+    file: "cn/spinner/speed.tsx",
+  },
   "spinner-custom-styles": {
     loader: () => import("./spinner/custom-styles").then((m) => m.CustomStyles),
     file: "cn/spinner/custom-styles.tsx",
