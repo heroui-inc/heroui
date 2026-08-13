@@ -30,10 +30,11 @@ export async function generateMetadata({params}: BlogPageProps): Promise<Metadat
     description: blog.metaDescription,
     openGraph: {
       description: blog.metaDescription,
+      siteName: siteConfig.name,
       title: blog.metaTitle,
       url: `/${lang}/blog`,
     },
-    title: blog.metaTitle,
+    title: {absolute: blog.metaTitle},
   };
 }
 
@@ -53,7 +54,7 @@ export default async function BlogPage({params}: BlogPageProps) {
       datePublished: post.date,
       description: post.description,
       title: post.title,
-      url: new URL(`/${lang}/blog/${post.slug}`, baseUrl).toString(),
+      url: new URL(`/${post.locale}/blog/${post.slug}`, baseUrl).toString(),
     })),
     url: new URL(`/${lang}/blog`, baseUrl).toString(),
   });

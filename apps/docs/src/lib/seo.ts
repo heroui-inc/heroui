@@ -11,7 +11,7 @@ export interface LocalizedAlternates {
  * `cn` for Simplified Chinese, which is a region subtag rather than a language,
  * so it has to be translated before it reaches the markup.
  */
-const HREFLANG_BY_LOCALE: Record<string, string> = {
+const LANGUAGE_TAG_BY_LOCALE: Record<string, string> = {
   cn: "zh-Hans",
   en: "en",
 };
@@ -23,6 +23,10 @@ const LOCALE_PREFIX_PATTERN = new RegExp(`^/(${LOCALES.join("|")})(?=/|$)`);
 
 export function normalizeLocale(locale: string | undefined): string {
   return locale && LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
+}
+
+export function getLanguageTag(locale: string | undefined): string {
+  return LANGUAGE_TAG_BY_LOCALE[normalizeLocale(locale)] ?? LANGUAGE_TAG_BY_LOCALE[DEFAULT_LOCALE]!;
 }
 
 /** Turns `/en/docs/react/button` into the locale-agnostic `/docs/react/button`. */
@@ -47,7 +51,9 @@ export function localizedPath(locale: string, path = "/"): string {
 }
 
 export function absoluteUrl(path: string): string {
-  return new URL(path, siteConfig.siteUrl).toString();
+  const url = new URL(path, siteConfig.siteUrl);
+
+  return url.pathname === "/" && !url.search && !url.hash ? url.origin : url.toString();
 }
 
 /**
@@ -70,7 +76,7 @@ export function getLocalizedAlternates({
   const languages: Record<string, string> = {};
 
   for (const candidate of locales) {
-    const hreflang = HREFLANG_BY_LOCALE[candidate];
+    const hreflang = LANGUAGE_TAG_BY_LOCALE[candidate];
 
     if (!hreflang) continue;
 
@@ -99,7 +105,7 @@ export function getSitemapAlternates(
   const languages: Record<string, string> = {};
 
   for (const candidate of locales) {
-    const hreflang = HREFLANG_BY_LOCALE[candidate];
+    const hreflang = LANGUAGE_TAG_BY_LOCALE[candidate];
 
     if (!hreflang) continue;
 

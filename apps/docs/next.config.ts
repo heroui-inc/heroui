@@ -33,15 +33,19 @@ const config: NextConfig = {
   },
   async headers() {
     return [
-      {
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value: isIndexable ? "index, follow" : "noindex, nofollow",
-          },
-        ],
-        source: "/:path*",
-      },
+      ...(!isIndexable
+        ? [
+            {
+              headers: [
+                {
+                  key: "X-Robots-Tag",
+                  value: "noindex, nofollow",
+                },
+              ],
+              source: "/:path*",
+            },
+          ]
+        : []),
       {
         // Apple requires the AASA file to be served with `application/json`
         // exactly — any other content type (the default `application/octet-stream`
