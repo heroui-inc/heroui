@@ -107,6 +107,7 @@ function TableContent({className, ...props}: TableContentProps) {
     <TablePrimitive
       className={composeTwRenderProps(className, slots?.content())}
       data-slot="table-content"
+      keyboardNavigationBehavior="tab"
       {...props}
     />
   );

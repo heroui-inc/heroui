@@ -1,9 +1,19 @@
 import type {Selection, SortDescriptor} from "react-aria-components/Table";
 
-import {User, cleanup, render, runAllTimers, screen} from "@heroui/testing/helpers";
+import {
+  User,
+  cleanup,
+  fireEvent,
+  render,
+  runAllTimers,
+  screen,
+  setupUser,
+} from "@heroui/testing/helpers";
 
 import {Checkbox} from "@/components/checkbox";
+import {Input} from "@/components/input";
 import {Table} from "@/components/table";
+import {TextField} from "@/components/textfield";
 
 const rows = [
   {id: "1", name: "Kate", role: "CEO"},
@@ -72,11 +82,77 @@ const renderTable = (
   );
 };
 
+type EditableKind = "contenteditable" | "input" | "select" | "textarea";
+
+const renderEditable = (kind: EditableKind) => {
+  switch (kind) {
+    case "contenteditable":
+      return (
+        <div
+          contentEditable
+          suppressContentEditableWarning
+          aria-label="Alpha value"
+          role="textbox"
+          tabIndex={0}
+        >
+          <span data-testid="contenteditable-target">Edit</span>
+        </div>
+      );
+    case "input":
+      return (
+        <TextField aria-label="Alpha value">
+          <Input />
+        </TextField>
+      );
+    case "select":
+      return (
+        <select aria-label="Alpha value" defaultValue="alpha">
+          <option value="alpha">Alpha</option>
+          <option value="yes">Yes</option>
+        </select>
+      );
+    case "textarea":
+      return <textarea aria-label="Alpha value" />;
+    default: {
+      const exhaustiveKind: never = kind;
+
+      return exhaustiveKind;
+    }
+  }
+};
+
+const renderTypeaheadTable = (kind: EditableKind = "input") => {
+  return render(
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Editable values">
+          <Table.Header>
+            <Table.Column isRowHeader>Name</Table.Column>
+            <Table.Column>Value</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="alpha">
+              <Table.Cell>Alpha</Table.Cell>
+              <Table.Cell>{renderEditable(kind)}</Table.Cell>
+            </Table.Row>
+            <Table.Row id="year-range">
+              <Table.Cell>Year Range</Table.Cell>
+              <Table.Cell>2020–2026</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>,
+  );
+};
+
 describe("Table", () => {
   let testUtilUser: User;
+  let user: ReturnType<typeof setupUser>;
 
   beforeEach(() => {
     vi.useFakeTimers({shouldAdvanceTime: true});
+    user = setupUser({advanceTimers: vi.advanceTimersByTime});
     testUtilUser = new User({
       interactionType: "mouse",
       advanceTimer: vi.advanceTimersByTime,
@@ -142,5 +218,45 @@ describe("Table", () => {
 
     expect(onSortChange).toHaveBeenCalled();
     expect(onSortChange.mock.calls[0]?.[0]).toEqual(expect.objectContaining({column: "name"}));
+  });
+
+  it.each([
+    ["input", "textbox"],
+    ["textarea", "textbox"],
+    ["select", "combobox"],
+  ] as const)("supports matching letter keystrokes in a nested %s", async (kind, role) => {
+    renderTypeaheadTable(kind);
+    const editable = screen.getByRole(role, {name: "Alpha value"});
+
+    await user.click(editable);
+    expect(editable).toHaveFocus();
+    await user.keyboard("y");
+
+    expect(editable).toHaveFocus();
+    if (kind !== "select") {
+      expect(editable).toHaveValue("y");
+    }
+  });
+
+  it("supports matching letter keystrokes in a nested contenteditable target", async () => {
+    renderTypeaheadTable("contenteditable");
+    const editable = screen.getByRole("textbox", {name: "Alpha value"});
+
+    await user.click(editable);
+    expect(editable).toHaveFocus();
+    fireEvent.keyDown(screen.getByTestId("contenteditable-target"), {key: "y"});
+
+    expect(editable).toHaveFocus();
+  });
+
+  it("supports typeahead from non-editable cells", async () => {
+    renderTypeaheadTable();
+    const alphaCell = screen.getByRole("rowheader", {name: "Alpha"});
+    const yearRangeCell = screen.getByRole("rowheader", {name: "Year Range"});
+
+    alphaCell.focus();
+    await user.keyboard("y");
+
+    expect(yearRangeCell).toHaveFocus();
   });
 });
