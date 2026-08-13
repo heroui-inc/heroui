@@ -61,9 +61,9 @@ describe("NumberField", () => {
         <NumberField defaultValue={11} name="customer-number">
           <Label>Customer number</Label>
           <NumberField.Group data-testid="number-field-group">
-            {hasDecrement && <NumberField.DecrementButton />}
+            {hasDecrement ? <NumberField.DecrementButton /> : null}
             <NumberField.Input />
-            {hasIncrement && <NumberField.IncrementButton />}
+            {hasIncrement ? <NumberField.IncrementButton /> : null}
           </NumberField.Group>
         </NumberField>,
       );
