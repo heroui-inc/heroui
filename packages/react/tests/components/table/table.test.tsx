@@ -254,7 +254,8 @@ describe("Table", () => {
     const alphaCell = screen.getByRole("rowheader", {name: "Alpha"});
     const yearRangeCell = screen.getByRole("rowheader", {name: "Year Range"});
 
-    alphaCell.focus();
+    await user.click(alphaCell);
+    expect(alphaCell).toHaveFocus();
     await user.keyboard("y");
 
     expect(yearRangeCell).toHaveFocus();
