@@ -29,6 +29,8 @@ const MARKDOWN_EXCLUDED_PATHS = new Set([
 ]);
 
 const PUBLIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
+const UNRESOLVED_TEMPLATE_PATTERN = /(?:\{[^/{}]+\}|%7B[^/]+%7D)/i;
+const PERMANENT_LOCALIZED_PREFIXES = ["/blog", "/docs", "/showcase", "/themes"];
 
 // Routes that live outside `app/[lang]` and must never receive a locale prefix.
 const LOCALE_REDIRECT_EXCLUDED_PREFIXES = [
@@ -71,6 +73,12 @@ function shouldSkipMarkdownRewrite(pathname: string): boolean {
   return PUBLIC_FILE_PATTERN.test(pathname) && !pathname.startsWith("/docs/");
 }
 
+function shouldPermanentlyRedirect(pathname: string): boolean {
+  return PERMANENT_LOCALIZED_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+}
+
 function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): NextResponse {
   if (isHomepage(pathname)) {
     response.headers.set("Link", getHomepageLinkHeader());
@@ -81,6 +89,17 @@ function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): 
 
 export function proxy(request: NextRequest) {
   const {pathname} = request.nextUrl;
+
+  if (UNRESOLVED_TEMPLATE_PATTERN.test(pathname)) {
+    return new NextResponse("Not Found", {
+      headers: {
+        "Cache-Control": "public, max-age=0, s-maxage=3600",
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
+      },
+      status: 404,
+    });
+  }
 
   // Markdown handler runs first so agent requests are served regardless of locale.
   if (
@@ -124,7 +143,7 @@ export function proxy(request: NextRequest) {
 
     url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
 
-    return NextResponse.redirect(url, pathname.startsWith("/docs/") ? 308 : 307);
+    return NextResponse.redirect(url, shouldPermanentlyRedirect(pathname) ? 308 : 307);
   }
 
   return addHomepageDiscoveryHeaders(NextResponse.next(), pathname);

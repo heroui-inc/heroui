@@ -73,13 +73,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // Served outside `app/[lang]`, so it has no locale variants.
-  const unlocalized: SitemapEntry[] = [
-    {
-      lastModified: generatedAt,
-      url: absoluteUrl("/docs/native-showcase/privacy-policy"),
-    },
-  ];
+  const localizedEntries = toEntries(paths, generatedAt);
 
-  return [...toEntries(paths, generatedAt), ...unlocalized];
+  // Keep one canonical entry per URL. Machine-readable `.mdx`/`llms` routes
+  // and the unprefixed native-showcase fallback are intentionally excluded.
+  return [...new Map(localizedEntries.map((entry) => [entry.url, entry])).values()];
 }

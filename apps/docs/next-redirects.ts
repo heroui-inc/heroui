@@ -142,6 +142,13 @@ export async function getRedirects(): Promise<Redirect[]> {
     source: "/:path*",
   });
 
+  // The default-locale homepage is canonical at the apex, without `/en`.
+  redirects.push({
+    destination: "/",
+    permanent: true,
+    source: "/en",
+  });
+
   // Theme builder redirect - redirect /theme to /themes
   redirects.push({
     destination: "/themes",
@@ -266,6 +273,14 @@ export async function getRedirects(): Promise<Redirect[]> {
         destination: "/docs/react/getting-started/design-principles",
         source: "/docs/design-principles",
       },
+      {
+        destination: "/docs/react/getting-started/colors",
+        source: "/docs/customization/colors",
+      },
+      {
+        destination: "/docs/react/getting-started/colors",
+        source: "/docs/react/customization/colors",
+      },
     ]),
   );
 
@@ -319,6 +334,14 @@ export async function getRedirects(): Promise<Redirect[]> {
       {
         destination: "/docs/react/components/number-field",
         source: "/docs/react/components/numberfield",
+      },
+      {
+        destination: "/docs/react/components/tag-group",
+        source: "/docs/react/components/taggroup",
+      },
+      {
+        destination: "/docs/react/components/tag-group",
+        source: "/docs/components/taggroup",
       },
     ]),
   );
