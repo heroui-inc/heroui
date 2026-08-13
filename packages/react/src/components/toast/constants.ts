@@ -16,7 +16,7 @@ export const DEFAULT_TOAST_WIDTH = 460;
 // Auto-dismiss timeout in milliseconds.
 export const DEFAULT_TOAST_TIMEOUT = 4000;
 
-// How long a closing toast stays mounted for its exit animation, in milliseconds. Must match the transition-duration of the .toast[data-removed="true"] rule in @heroui/styles.
+// How long a closing toast stays mounted for its exit animation, in milliseconds. Must match the transition-duration of the .toast[data-exiting="true"] rule in @heroui/styles.
 export const DEFAULT_EXIT_DURATION = 300;
 
 // Modifiers match KeyboardEvent boolean props; other keys match event.code.
