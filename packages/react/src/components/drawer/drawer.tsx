@@ -10,7 +10,7 @@ import type {DialogProps as DialogPrimitiveProps} from "react-aria-components/Di
 
 import {drawerVariants} from "@heroui/styles";
 import {mergeProps} from "@react-aria/utils";
-import React, {createContext, use, useCallback, useMemo, useRef} from "react";
+import React, {createContext, use, useCallback, useId, useMemo, useRef} from "react";
 import {Button as ButtonPrimitive} from "react-aria-components/Button";
 import {
   Dialog as DialogPrimitive,
@@ -40,9 +40,28 @@ const DRAG_THRESHOLD = 8; // px before drag activates
 const DISMISS_FRACTION = 0.3; // dismiss if dragged > 30% of dimension
 const VELOCITY_THRESHOLD = 0.5; // px/ms — dismiss on fast flick
 
+type DrawerDebugEntry = {
+  hypothesisId: string;
+  location: string;
+  message: string;
+  data: Record<string, unknown>;
+};
+
+const writeDrawerDebugLog = (entry: DrawerDebugEntry) => {
+  if (typeof process === "undefined" || typeof process.getBuiltinModule !== "function") return;
+
+  process
+    .getBuiltinModule("node:fs")
+    .appendFileSync(
+      "/opt/cursor/logs/debug.log",
+      `${JSON.stringify({...entry, timestamp: Date.now()})}\n`,
+    );
+};
+
 function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: boolean) {
   const overlayState = use(OverlayTriggerStateContext);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const debugInstanceId = useId();
   const isDragging = useRef(false);
   const isActive = useRef(false);
   const startPos = useRef(0);
@@ -83,6 +102,26 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
       if (e.button !== 0) return;
 
       const target = e.target as HTMLElement;
+      const currentTarget = e.currentTarget as HTMLElement;
+
+      // #region agent log
+      writeDrawerDebugLog({
+        hypothesisId: "A",
+        location: "drawer.tsx:onPointerDown",
+        message: "Drawer dialog received pointer down",
+        data: {
+          instanceId: debugInstanceId,
+          placement,
+          overlayOpen: overlayState?.isOpen,
+          targetSlot: target.dataset.slot,
+          nearestDialogInstance: target
+            .closest('[data-slot="drawer-dialog"]')
+            ?.getAttribute("data-debug-drawer"),
+          currentDialogInstance: currentTarget.dataset.debugDrawer,
+          currentOwnsTarget: currentTarget.contains(target),
+        },
+      });
+      // #endregion
 
       // Don't drag from interactive elements or scrollable body
       if (
@@ -101,7 +140,7 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
       currentOffset.current = 0;
       velocity.current = 0;
     },
-    [getPos, isDismissable],
+    [debugInstanceId, getPos, isDismissable, overlayState, placement],
   );
 
   const onPointerMove = useCallback(
@@ -118,6 +157,21 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
         isActive.current = true;
         dialogRef.current.style.transition = "none";
         dialogRef.current.setPointerCapture(e.pointerId);
+        // #region agent log
+        writeDrawerDebugLog({
+          hypothesisId: "A,C",
+          location: "drawer.tsx:onPointerMove:activate",
+          message: "Drawer drag activated and captured pointer",
+          data: {
+            instanceId: debugInstanceId,
+            rawDelta,
+            targetSlot: (e.target as HTMLElement).dataset.slot,
+            currentDialogInstance: (e.currentTarget as HTMLElement).dataset.debugDrawer,
+            refDialogInstance: dialogRef.current.dataset.debugDrawer,
+            hasPointerCapture: dialogRef.current.hasPointerCapture(e.pointerId),
+          },
+        });
+        // #endregion
       }
 
       currentOffset.current = delta;
@@ -136,7 +190,7 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
 
       dialogRef.current.style.transform = `translate${axis}(${delta}px)`;
     },
-    [getPos, clamp, isVertical],
+    [clamp, debugInstanceId, getPos, isVertical],
   );
 
   const onPointerUp = useCallback(
@@ -167,10 +221,45 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
       const shouldDismiss =
         absOffset > dimension * DISMISS_FRACTION || absVelocity > VELOCITY_THRESHOLD;
 
+      // #region agent log
+      writeDrawerDebugLog({
+        hypothesisId: "A,B,C,D",
+        location: "drawer.tsx:onPointerUp:decision",
+        message: "Drawer drag dismissal decision",
+        data: {
+          instanceId: debugInstanceId,
+          overlayOpen: overlayState?.isOpen,
+          targetSlot: (e.target as HTMLElement).dataset.slot,
+          currentDialogInstance: (e.currentTarget as HTMLElement).dataset.debugDrawer,
+          refDialogInstance: el.dataset.debugDrawer,
+          hasPointerCapture: el.hasPointerCapture(e.pointerId),
+          dimension,
+          absOffset,
+          absVelocity,
+          shouldDismiss,
+          inlineTransition: el.style.transition,
+          inlineTransform: el.style.transform,
+        },
+      });
+      // #endregion
+
       if (shouldDismiss && overlayState) {
         // Keep the inline transform — it compounds with the content exit animation
         // so the drawer continues sliding from the dragged position
         overlayState.close();
+        // #region agent log
+        writeDrawerDebugLog({
+          hypothesisId: "B,D",
+          location: "drawer.tsx:onPointerUp:close",
+          message: "Drawer overlay close invoked",
+          data: {
+            instanceId: debugInstanceId,
+            overlayOpenBeforeCommit: overlayState.isOpen,
+            inlineTransition: el.style.transition,
+            inlineTransform: el.style.transform,
+          },
+        });
+        // #endregion
       } else {
         // Snap back with a spring-like ease
         el.style.transition = "transform 300ms cubic-bezier(0.32, 0.72, 0, 1)";
@@ -186,10 +275,11 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
       currentOffset.current = 0;
       velocity.current = 0;
     },
-    [isVertical, overlayState],
+    [debugInstanceId, isVertical, overlayState],
   );
 
   return {
+    debugInstanceId,
     dialogRef,
     dragHandlers: isDismissable
       ? {
@@ -358,13 +448,14 @@ interface DrawerDialogProps extends DialogPrimitiveProps {}
 
 const DrawerDialog = ({children, className, ...props}: DrawerDialogProps) => {
   const {isDismissable = true, placement, slots} = use(DrawerContext);
-  const {dialogRef, dragHandlers} = useDrawerDrag(placement, isDismissable);
+  const {debugInstanceId, dialogRef, dragHandlers} = useDrawerDrag(placement, isDismissable);
 
   return (
     <SurfaceContext value={{variant: "default" as SurfaceVariants["variant"]}}>
       <DialogPrimitive
         ref={dialogRef}
         className={composeSlotClassName(slots?.dialog, className)}
+        data-debug-drawer={debugInstanceId}
         data-placement={placement}
         data-slot="drawer-dialog"
         style={isDismissable ? {touchAction: "none"} : undefined}
