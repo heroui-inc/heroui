@@ -1,5 +1,7 @@
 import type {NextRequest} from "next/server";
 
+import {appendFileSync} from "node:fs";
+
 import {notFound} from "next/navigation";
 import {NextResponse} from "next/server";
 
@@ -24,13 +26,27 @@ function extractLangFromSlug(slug: string[]): {slug: string[]; lang?: string} {
 }
 
 export async function GET(_req: NextRequest, {params}: {params: Promise<{slug: string[]}>}) {
-  const {lang, slug} = extractLangFromSlug((await params).slug);
+  const routeParams = await params;
+
+  // #region agent log
+  appendFileSync("/opt/cursor/logs/debug.log", `${JSON.stringify({data: {routeSlug: routeParams.slug}, hypothesisId: "A,C,D", location: "apps/docs/src/app/llms.mdx/[...slug]/route.ts:GET-entry", message: "MDX route handler entered", timestamp: Date.now()})}\n`);
+  // #endregion
+
+  const {lang, slug} = extractLangFromSlug(routeParams.slug);
   const page = source.getPage(slug, lang);
+
+  // #region agent log
+  appendFileSync("/opt/cursor/logs/debug.log", `${JSON.stringify({data: {found: Boolean(page), lang: lang ?? null, slug}, hypothesisId: "C,D", location: "apps/docs/src/app/llms.mdx/[...slug]/route.ts:page-resolution", message: "Resolved MDX source page", timestamp: Date.now()})}\n`);
+  // #endregion
 
   if (!page) notFound();
 
   try {
     const content = await getLLMText(page);
+
+    // #region agent log
+    appendFileSync("/opt/cursor/logs/debug.log", `${JSON.stringify({data: {contentLength: content.length, lang: lang ?? null, slug}, hypothesisId: "D,E", location: "apps/docs/src/app/llms.mdx/[...slug]/route.ts:GET-exit", message: "Generated MDX response", timestamp: Date.now()})}\n`);
+    // #endregion
 
     return new NextResponse(content, {
       headers: LLMS_TEXT_HEADERS,
