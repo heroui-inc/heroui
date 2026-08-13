@@ -6,6 +6,13 @@ import {FieldError} from "@/components/field-error";
 import {Label} from "@/components/label";
 import {NumberField} from "@/components/number-field";
 
+const stepperCompositions = [
+  ["no stepper buttons", false, false],
+  ["only a decrement button", true, false],
+  ["only an increment button", false, true],
+  ["both stepper buttons", true, true],
+] as const;
+
 describe("NumberField", () => {
   let user: ReturnType<typeof setupUser>;
 
@@ -46,6 +53,27 @@ describe("NumberField", () => {
     expect(document.querySelector('[data-slot="number-field-increment-button"]')).not.toBeNull();
     expect(document.querySelector('[data-slot="number-field-decrement-button"]')).not.toBeNull();
   });
+
+  it.each(stepperCompositions)(
+    "supports composition with %s",
+    (_description, hasDecrement, hasIncrement) => {
+      render(
+        <NumberField defaultValue={11} name="customer-number">
+          <Label>Customer number</Label>
+          <NumberField.Group data-testid="number-field-group">
+            {hasDecrement ? <NumberField.DecrementButton /> : null}
+            <NumberField.Input />
+            {hasIncrement ? <NumberField.IncrementButton /> : null}
+          </NumberField.Group>
+        </NumberField>,
+      );
+
+      const group = screen.getByTestId("number-field-group");
+
+      expect(group.querySelector('[slot="decrement"]') !== null).toBe(hasDecrement);
+      expect(group.querySelector('[slot="increment"]') !== null).toBe(hasIncrement);
+    },
+  );
 
   it("exposes variant BEM modifier", () => {
     renderNumber({variant: "secondary"});
