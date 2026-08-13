@@ -160,7 +160,8 @@ The component supports various states:
 - **Frontmost**: `[data-frontmost]` - Applied to the topmost visible toast
 - **Index**: `[data-index]` - Applied based on toast position in stack
 - **Placement**: `[data-placement="*"]` - Applied based on toast region placement
-- **Removed**: `[data-removed]` - Applied while a closing toast plays its exit transition
+- **Entering**: `[data-entering]` - Applied during the toast enter animation
+- **Exiting**: `[data-exiting]` - Applied while a closing toast plays its exit transition
 - **Expanded**: `[data-expanded]` - Applied to every toast while the stack is expanded
 - **Hidden**: `[data-hidden]` - Applied to toasts beyond `maxVisibleToasts`
 
@@ -244,7 +245,7 @@ A `ToastQueue` manages the state for a `<Toast.Provider>`. The state is stored o
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `exitDuration` | `number` | `350` | How long a closing toast stays mounted for its exit animation (0 removes immediately) |
+| `exitDuration` | `number` | `300` | How long a closing toast stays mounted for its exit animation (0 removes immediately) |
 | `maxVisibleToasts` | `number` | `3` | Maximum number of toasts to display at once (visual only) |
 | `wrapUpdate` | `(fn: () => void) => void` | - | Function to wrap state updates (e.g. `document.startViewTransition`); by default updates are applied directly and animated with CSS transitions |
 
