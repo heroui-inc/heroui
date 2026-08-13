@@ -68,7 +68,7 @@ export default async function ThemeBuilderPage({params}: {params: Promise<{lang:
             className="grid h-dvh grid-rows-[auto_1fr_auto] bg-background px-4 sm:overflow-hidden sm:px-6"
             id={THEME_BUILDER_PAGE_ID}
           >
-            <h1 className="sr-only">{dict.themes.metaTitle}</h1>
+            <h1 className="sr-only">{dict.themes.heading}</h1>
             <BuilderHeader />
             <ThemeBuilderContent />
             <div className="mx-auto hidden items-center justify-between gap-4 py-6 max-[1200px]:flex-col sm:flex">

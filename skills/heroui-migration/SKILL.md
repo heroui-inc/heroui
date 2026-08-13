@@ -65,7 +65,7 @@ node scripts/get_hooks_migration_guide.mjs
 
 ### Direct URLs
 
-Migration docs (preview): `https://heroui-git-docs-migration-heroui.vercel.app/docs/react/migration/{filename}`
+Migration docs (preview): use a concrete guide URL from the examples below, and never fetch a URL that still contains a placeholder.
 
 Examples:
 
