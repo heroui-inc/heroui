@@ -10,11 +10,6 @@ export type DrawerFixtureProps = {
   placement?: "top" | "bottom" | "left" | "right";
 };
 
-export type StackedDrawerFixtureProps = {
-  onParentOpenChange?: (open: boolean) => void;
-  onChildOpenChange?: (open: boolean) => void;
-};
-
 export const DrawerFixture = (props: DrawerFixtureProps = {}) => (
   <Drawer defaultOpen={props.defaultOpen} isOpen={props.isOpen} onOpenChange={props.onOpenChange}>
     <Button>Open Drawer</Button>
@@ -42,11 +37,8 @@ export const DrawerFixture = (props: DrawerFixtureProps = {}) => (
   </Drawer>
 );
 
-export const StackedDrawerFixture = ({
-  onChildOpenChange,
-  onParentOpenChange,
-}: StackedDrawerFixtureProps) => (
-  <Drawer defaultOpen onOpenChange={onParentOpenChange}>
+export const StackedDrawerFixture = () => (
+  <Drawer defaultOpen>
     <Button>Open parent drawer</Button>
     <Drawer.Backdrop>
       <Drawer.Content>
@@ -56,7 +48,7 @@ export const StackedDrawerFixture = ({
             <Drawer.Heading>Parent Drawer</Drawer.Heading>
           </Drawer.Header>
           <Drawer.Body>
-            <Drawer defaultOpen onOpenChange={onChildOpenChange}>
+            <Drawer defaultOpen>
               <Button>Open child drawer</Button>
               <Drawer.Backdrop>
                 <Drawer.Content>
