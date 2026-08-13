@@ -46,9 +46,16 @@ export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
     }
 
     // Exclude `style` and state attributes to avoid triggering measurements or canceling in-progress transitions.
-    const mutationObserver = new MutationObserver(() => {
-      calculateHeight();
-    });
+    let measureFrame = 0;
+    const scheduleMeasure = () => {
+      if (measureFrame) return;
+      measureFrame = requestAnimationFrame(() => {
+        measureFrame = 0;
+        calculateHeight();
+      });
+    };
+
+    const mutationObserver = new MutationObserver(scheduleMeasure);
 
     mutationObserver.observe(element, {
       attributeFilter: ["class"],
@@ -72,6 +79,7 @@ export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
       mutationObserver.disconnect();
       window.removeEventListener("resize", handleWindowResize);
       clearTimeout(resizeTimeoutId);
+      cancelAnimationFrame(measureFrame);
     };
   }, [ref, calculateHeight]);
 

@@ -164,7 +164,7 @@ describe("Toast", () => {
 
     expect(exiting).toHaveLength(2);
     for (const toastEl of exiting) {
-      expect(toastEl).toHaveAttribute("data-removed", "true");
+      expect(toastEl).toHaveAttribute("data-exiting", "true");
     }
 
     advanceTimersByTime(DEFAULT_EXIT_DURATION);

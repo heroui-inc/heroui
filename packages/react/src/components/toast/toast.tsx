@@ -3,10 +3,11 @@
 import type {StatelyToastQueue, ToastContentValue} from "./toast-queue";
 import type {DOMRenderProps} from "../../utils/dom";
 import type {ToastVariants} from "@heroui/styles";
-import type {CSSProperties, ComponentPropsWithRef, ReactNode} from "react";
+import type {CSSProperties, ComponentPropsWithRef, ReactNode, Ref} from "react";
 import type {QueuedToast, ToastProps as ToastPrimitiveProps} from "react-aria-components/Toast";
 
 import {toastVariants} from "@heroui/styles";
+import {mergeRefs} from "@react-aria/utils";
 import React, {
   createContext,
   use,
@@ -81,7 +82,7 @@ const moveFocusFromToast = (toastEl: HTMLElement, isKeyboardFocus: boolean) => {
 
   const isViable = (el: Element | null): el is HTMLElement =>
     el instanceof HTMLElement &&
-    el.matches('[data-slot="toast"]:not([data-removed="true"]):not([data-hidden="true"])');
+    el.matches('[data-slot="toast"]:not([data-exiting="true"]):not([data-hidden="true"])');
 
   // Prefer nearest newer toast (previous siblings, DOM order is newest-first).
   let target: HTMLElement | null = null;
@@ -113,7 +114,7 @@ const moveFocusFromToast = (toastEl: HTMLElement, isKeyboardFocus: boolean) => {
 
     if (region) {
       for (const candidate of region.querySelectorAll<HTMLElement>(
-        '[data-slot="toast"]:not([data-removed="true"]):not([data-hidden="true"])',
+        '[data-slot="toast"]:not([data-exiting="true"]):not([data-hidden="true"])',
       )) {
         if (candidate !== toastEl) {
           target = candidate;
@@ -141,12 +142,14 @@ interface ToastProps<T extends object = ToastContentValue>
    * @default 0.05
    */
   scaleFactor?: number;
+  ref?: Ref<HTMLDivElement | null>;
 }
 
 const Toast = <T extends object = ToastContentValue>({
   children,
   className,
   placement,
+  ref,
   scaleFactor,
   toast,
   variant,
@@ -187,8 +190,60 @@ const Toast = <T extends object = ToastContentValue>({
   const isFrontmost = index <= 0;
   const isHidden = !isExiting && index >= maxVisibleToasts;
   const toastRef = useRef<HTMLDivElement | null>(null);
+  const mergedRef = useMemo(() => mergeRefs(toastRef, ref), [ref]);
   const {height: toastHeight} = useMeasuredHeight(toastRef);
   const {isFocusVisible} = useFocusVisible();
+  const [isEntering, setIsEntering] = useState(true);
+
+  useEffect(() => {
+    const el = toastRef.current;
+
+    if (!el) {
+      return;
+    }
+
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      setIsEntering(false);
+    };
+
+    const onEnterEnd = (event: globalThis.AnimationEvent) => {
+      if (event.target !== el) return;
+      if (!event.animationName.includes("toast-enter")) return;
+      finish();
+    };
+
+    el.addEventListener("animationend", onEnterEnd);
+    el.addEventListener("animationcancel", onEnterEnd);
+
+    let innerFrame = 0;
+    const outerFrame = requestAnimationFrame(() => {
+      innerFrame = requestAnimationFrame(() => {
+        const running =
+          typeof el.getAnimations === "function" &&
+          el.getAnimations().some((animation) => {
+            const name = "animationName" in animation ? String(animation.animationName) : "";
+
+            return name.includes("toast-enter") && animation.playState === "running";
+          });
+
+        if (!running) finish();
+      });
+    });
+
+    const timeoutId = window.setTimeout(finish, 400);
+
+    return () => {
+      settled = true;
+      el.removeEventListener("animationend", onEnterEnd);
+      el.removeEventListener("animationcancel", onEnterEnd);
+      cancelAnimationFrame(outerFrame);
+      cancelAnimationFrame(innerFrame);
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
 
   // Layout effect so siblings have this height before the first paint;
   // a passive effect would shift the stack one frame later.
@@ -284,25 +339,26 @@ const Toast = <T extends object = ToastContentValue>({
     isExiting,
     layoutToasts,
     rest.style,
-    toast?.key,
+    toast,
     toastHeight,
     visibleToasts.length,
   ]);
 
   return (
     <ToastPrimitive
-      ref={toastRef}
+      {...rest}
+      ref={mergedRef}
       className={composeTwRenderProps(className, slots?.toast({variant}))}
+      data-entering={dataAttr(isEntering)}
+      data-exiting={dataAttr(isExiting)}
       data-expanded={dataAttr(isExpanded)}
       data-frontmost={dataAttr(isFrontmost)}
       data-hidden={dataAttr(isHidden)}
       data-index={index}
       data-placement={finalPlacement}
-      data-removed={dataAttr(isExiting)}
       data-slot="toast"
       style={style}
       toast={toast}
-      {...rest}
     >
       {children}
     </ToastPrimitive>
@@ -321,9 +377,9 @@ const ToastContent = ({children, className, ...rest}: ToastContentProps) => {
 
   return (
     <ToastContentPrimitive
+      {...rest}
       className={composeSlotClassName(slots?.content, className)}
       data-slot="toast-content"
-      {...rest}
     >
       {children}
     </ToastContentPrimitive>
@@ -378,10 +434,10 @@ const ToastIndicator = <E extends keyof React.JSX.IntrinsicElements = "div">({
 
   return (
     <dom.div
+      {...(rest as any)}
       className={composeSlotClassName(slots?.indicator, className)}
       data-slot="toast-indicator"
       data-swapped={dataAttr(hasSwapped)}
-      {...(rest as any)}
     >
       {children ?? getDefaultIcon()}
     </dom.div>
@@ -400,10 +456,10 @@ const ToastTitle = ({children, className, ...rest}: ToastTitleProps) => {
 
   return (
     <TextPrimitive
+      {...rest}
       className={composeSlotClassName(slots?.title, className)}
       data-slot="toast-title"
       slot="title"
-      {...rest}
     >
       {children}
     </TextPrimitive>
@@ -422,10 +478,10 @@ const ToastDescription = ({children, className, ...rest}: ToastDescriptionProps)
 
   return (
     <TextPrimitive
+      {...rest}
       className={composeSlotClassName(slots?.description, className)}
       data-slot="toast-description"
       slot="description"
-      {...rest}
     >
       {children}
     </TextPrimitive>
@@ -444,10 +500,10 @@ const ToastCloseButton = ({className, ...rest}: ToastCloseButtonProps) => {
 
   return (
     <CloseButton
+      {...rest}
       className={composeTwRenderProps(className, slots?.close())}
       data-slot="toast-close"
       slot="close"
-      {...rest}
     />
   );
 };
@@ -464,9 +520,9 @@ const ToastActionButton = ({children, className, ...rest}: ToastActionButtonProp
 
   return (
     <Button
+      {...rest}
       className={composeTwRenderProps(className, slots?.action?.())}
       data-slot="toast-action-button"
-      {...rest}
     >
       {children}
     </Button>
@@ -862,6 +918,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
 
   return (
     <ToastRegionPrimitive<T>
+      {...rest}
       ref={handleRegionRef as ToastRegionPrimitiveProps<T>["ref"]}
       className={composeTwRenderProps(className, slots?.region())}
       data-expanded={dataAttr(isExpanded)}
@@ -871,8 +928,8 @@ const ToastProvider = <T extends object = ToastContentValue>({
         // @ts-expect-error - CSS variables
         "--gap": `${gap}px`,
         "--toast-width": typeof width === "number" ? `${width}px` : width,
+        ...rest.style,
       }}
-      {...rest}
     >
       {(renderProps) => {
         const content = renderProps.toast.content as ToastContentValue;
