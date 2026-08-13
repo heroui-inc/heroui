@@ -1,5 +1,7 @@
 import type {NextRequest} from "next/server";
 
+import {appendFileSync} from "node:fs";
+
 import {NextResponse} from "next/server";
 
 import {getHomepageLinkHeader} from "@/lib/agent-discovery";
@@ -90,7 +92,21 @@ function addHomepageDiscoveryHeaders(response: NextResponse, pathname: string): 
 export function proxy(request: NextRequest) {
   const {pathname} = request.nextUrl;
 
+  // #region agent log
+  appendFileSync(
+    "/opt/cursor/logs/debug.log",
+    `${JSON.stringify({data: {method: request.method, pathname, skipLocale: shouldSkipLocaleRedirect(pathname), skipMarkdown: shouldSkipMarkdownRewrite(pathname), templateMatched: UNRESOLVED_TEMPLATE_PATTERN.test(pathname)}, hypothesisId: "A,B,C", location: "apps/docs/src/proxy.ts:proxy-entry", message: "Proxy request classification", timestamp: Date.now()})}\n`,
+  );
+  // #endregion
+
   if (UNRESOLVED_TEMPLATE_PATTERN.test(pathname)) {
+    // #region agent log
+    appendFileSync(
+      "/opt/cursor/logs/debug.log",
+      `${JSON.stringify({data: {pathname}, hypothesisId: "B", location: "apps/docs/src/proxy.ts:template-guard", message: "Rejected unresolved template path", timestamp: Date.now()})}\n`,
+    );
+    // #endregion
+
     return new NextResponse("Not Found", {
       headers: {
         "Cache-Control": "public, max-age=0, s-maxage=3600",
@@ -116,6 +132,13 @@ export function proxy(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);
 
     requestHeaders.set("x-heroui-markdown-path", pathname);
+
+    // #region agent log
+    appendFileSync(
+      "/opt/cursor/logs/debug.log",
+      `${JSON.stringify({data: {destination: url.pathname, pathname}, hypothesisId: "A,C", location: "apps/docs/src/proxy.ts:markdown-rewrite", message: "Rewriting request to agent markdown", timestamp: Date.now()})}\n`,
+    );
+    // #endregion
 
     return addHomepageDiscoveryHeaders(
       NextResponse.rewrite(url, {
@@ -143,8 +166,22 @@ export function proxy(request: NextRequest) {
 
     url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
 
+    // #region agent log
+    appendFileSync(
+      "/opt/cursor/logs/debug.log",
+      `${JSON.stringify({data: {destination: url.pathname, pathname}, hypothesisId: "C", location: "apps/docs/src/proxy.ts:locale-redirect", message: "Redirecting to default locale", timestamp: Date.now()})}\n`,
+    );
+    // #endregion
+
     return NextResponse.redirect(url, shouldPermanentlyRedirect(pathname) ? 308 : 307);
   }
+
+  // #region agent log
+  appendFileSync(
+    "/opt/cursor/logs/debug.log",
+    `${JSON.stringify({data: {pathname}, hypothesisId: "A,C,D", location: "apps/docs/src/proxy.ts:next", message: "Continuing request without proxy rewrite", timestamp: Date.now()})}\n`,
+  );
+  // #endregion
 
   return addHomepageDiscoveryHeaders(NextResponse.next(), pathname);
 }
