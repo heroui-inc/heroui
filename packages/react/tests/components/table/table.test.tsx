@@ -121,11 +121,17 @@ const renderEditable = (kind: EditableKind) => {
   }
 };
 
-const renderTypeaheadTable = (kind: EditableKind = "input") => {
+const renderTypeaheadTable = (
+  kind: EditableKind = "input",
+  keyboardNavigationBehavior?: "arrow" | "tab",
+) => {
   return render(
     <Table>
       <Table.ScrollContainer>
-        <Table.Content aria-label="Editable values">
+        <Table.Content
+          aria-label="Editable values"
+          keyboardNavigationBehavior={keyboardNavigationBehavior}
+        >
           <Table.Header>
             <Table.Column isRowHeader>Name</Table.Column>
             <Table.Column>Value</Table.Column>
@@ -247,6 +253,18 @@ describe("Table", () => {
     fireEvent.keyDown(screen.getByTestId("contenteditable-target"), {key: "y"});
 
     expect(editable).toHaveFocus();
+  });
+
+  it("supports overriding keyboard navigation behavior", async () => {
+    renderTypeaheadTable("input", "arrow");
+    const editable = screen.getByRole("textbox", {name: "Alpha value"});
+    const yearRangeCell = screen.getByRole("rowheader", {name: "Year Range"});
+
+    await user.click(editable);
+    expect(editable).toHaveFocus();
+    await user.keyboard("y");
+
+    expect(yearRangeCell).toHaveFocus();
   });
 
   it("supports typeahead from non-editable cells", async () => {
