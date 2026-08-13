@@ -160,7 +160,14 @@ describe("Drawer", () => {
     runAllTimers();
 
     const childHandle = screen.getByTestId("child-drawer-handle");
+    const childDialog = childHandle.closest<HTMLElement>('[data-slot="drawer-dialog"]');
+    const parentDialog = screen
+      .getByTestId("parent-drawer-handle")
+      .closest<HTMLElement>('[data-slot="drawer-dialog"]');
     const dialogs = document.querySelectorAll<HTMLElement>('[data-slot="drawer-dialog"]');
+
+    expect(childDialog).not.toBeNull();
+    expect(parentDialog).not.toBeNull();
 
     dialogs.forEach((dialog) => {
       Object.defineProperties(dialog, {
@@ -173,6 +180,10 @@ describe("Drawer", () => {
 
     fireEvent.pointerDown(childHandle, {button: 0, clientY: 0, pointerId: 1});
     fireEvent.pointerMove(childHandle, {button: 0, clientY: 50, pointerId: 1});
+
+    expect(childDialog).toHaveStyle({transform: "translateY(50px)"});
+    expect(parentDialog).not.toHaveStyle({transform: "translateY(50px)"});
+
     fireEvent.pointerUp(childHandle, {button: 0, clientY: 50, pointerId: 1});
 
     expect(onChildOpenChange).toHaveBeenCalledWith(false);
