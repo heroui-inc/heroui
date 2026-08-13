@@ -27,7 +27,7 @@ import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {getComponentCount, getExampleCount} from "@/demos";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
-import {getLocalizedAlternates, stripLocale} from "@/lib/seo";
+import {absoluteUrl, getLocalizedAlternates, localizedPath, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {
@@ -87,14 +87,15 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
   const contributors = githubInfo?.pull ? await fetchPRContributors(githubInfo.pull) : undefined;
 
   const slugParts = params.slug ?? [];
-  const pageUrl = `/docs/${slugParts.join("/")}`;
+  const pagePath = `/docs/${slugParts.join("/")}`;
+  const pageUrl = absoluteUrl(localizedPath(params.lang, pagePath));
 
   const breadcrumbItems = [
-    {name: "Home", url: "https://heroui.com"},
-    {name: "Docs", url: "https://heroui.com/docs"},
+    {name: "Home", url: absoluteUrl(localizedPath(params.lang))},
+    {name: "Docs", url: absoluteUrl(localizedPath(params.lang, "/docs"))},
     ...slugParts.map((segment, i) => ({
       name: segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
-      url: `https://heroui.com/docs/${slugParts.slice(0, i + 1).join("/")}`,
+      url: absoluteUrl(localizedPath(params.lang, `/docs/${slugParts.slice(0, i + 1).join("/")}`)),
     })),
   ];
 
@@ -111,7 +112,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
             getTechArticleJsonLd({
               description: page.data.description ?? "",
               title: page.data.title,
-              url: `https://heroui.com${pageUrl}`,
+              url: pageUrl,
             }),
           ),
         }}
@@ -202,6 +203,7 @@ export async function generateMetadata(props: {
     openGraph: {
       description: page.data.description,
       images: imageUrl,
+      siteName: siteConfig.name,
       title: page.data.title,
       url,
     },
@@ -209,6 +211,7 @@ export async function generateMetadata(props: {
     twitter: {
       card: "summary_large_image",
       images: imageUrl,
+      site: "@hero_ui",
     },
   };
 }

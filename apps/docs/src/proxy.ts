@@ -124,7 +124,7 @@ export function proxy(request: NextRequest) {
 
     url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
 
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(url, pathname.startsWith("/docs/") ? 308 : 307);
   }
 
   return addHomepageDiscoveryHeaders(NextResponse.next(), pathname);

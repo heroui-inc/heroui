@@ -15,6 +15,8 @@
     "titleMain": "开箱即用",
     "titleMuted": "设计灵活可定制",
     "description": "HeroUI 是面向网页与移动端的现代 UI 库，助你快速迭代、保持一致，并打造令人愉悦的用户体验。",
+    "metaTitle": "HeroUI v3（前身为 NextUI）- 开箱即用，设计灵活可定制。",
+    "metaDescription": "基于 React Aria 和 Tailwind CSS v4 构建的精美、无障碍 React UI 组件。用于构建生产级应用的现代化 MUI、Chakra UI 和 shadcn/ui 替代方案。",
     "getStarted": "快速开始",
     "viewComponents": "查看组件",
     "githubStarsPrefix": "开源项目，已有",
@@ -115,6 +117,8 @@
     "androidComingSoon": "Android · 即将推出"
   },
   "themes": {
+    "metaTitle": "主题",
+    "metaDescription": "通过可视化控件自定义 HeroUI 的颜色、字体与圆角，并复制可直接用于生产环境的 CSS 变量。",
     "theme": "主题",
     "custom": "自定义",
     "designTheme": "设计主题",
