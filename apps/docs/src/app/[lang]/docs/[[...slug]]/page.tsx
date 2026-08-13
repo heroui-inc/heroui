@@ -26,6 +26,7 @@ import {PRContributors, fetchPRContributors} from "@/components/pr-contributors"
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {getComponentCount, getExampleCount} from "@/demos";
+import {getDocsSeoMetadata} from "@/lib/docs-seo";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
 import {absoluteUrl, getLocalizedAlternates, localizedPath, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
@@ -38,28 +39,6 @@ import {
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
 const componentStatusIcons = ["preview", "new", "updated"];
-const ENGLISH_SEO_OVERRIDES: Record<string, {description: string; title: string}> = {
-  "/docs/react/components": {
-    description:
-      "Browse accessible HeroUI React components for forms, overlays, navigation, data display, and more, built with React Aria and Tailwind CSS v4.",
-    title: "HeroUI React Components – Accessible UI Library",
-  },
-  "/docs/react/components/button": {
-    description:
-      "Build accessible React buttons with HeroUI. Explore variants, sizes, loading and disabled states, icon buttons, events, and ButtonGroup patterns.",
-    title: "HeroUI Button – Accessible React Button Component",
-  },
-  "/docs/react/components/select": {
-    description:
-      "Build accessible React select menus with HeroUI. Learn options, sections, validation, disabled states, controlled values, and customizable listboxes.",
-    title: "HeroUI Select – Accessible React Select Component",
-  },
-  "/docs/react/getting-started": {
-    description:
-      "Get started with HeroUI v3, an accessible React UI library built on React Aria and Tailwind CSS v4. Learn installation, principles, and customization.",
-    title: "HeroUI v3 – React UI Library Getting Started",
-  },
-};
 
 const getRawMDXContent = cache(async (pagePath: string): Promise<string> => {
   try {
@@ -111,6 +90,7 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
   const slugParts = params.slug ?? [];
   const pagePath = `/docs/${slugParts.join("/")}`;
   const pageUrl = absoluteUrl(localizedPath(params.lang, pagePath));
+  const seoMetadata = getDocsSeoMetadata(params.lang, pagePath);
 
   const breadcrumbItems = [
     {name: "Home", url: absoluteUrl(localizedPath(params.lang))},
@@ -132,8 +112,8 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             getTechArticleJsonLd({
-              description: page.data.description ?? "",
-              title: page.data.title,
+              description: seoMetadata?.description ?? page.data.description ?? "",
+              title: seoMetadata?.title ?? page.data.title,
               url: pageUrl,
             }),
           ),
@@ -219,7 +199,7 @@ export async function generateMetadata(props: {
   const url = page.url;
   const unlocalizedPath = stripLocale(url);
   const alternates = getLocalizedAlternates({locale: params.lang, path: unlocalizedPath});
-  const seoOverride = params.lang === "en" ? ENGLISH_SEO_OVERRIDES[unlocalizedPath] : undefined;
+  const seoOverride = getDocsSeoMetadata(params.lang, unlocalizedPath);
   const description = seoOverride?.description ?? page.data.description;
   const title = seoOverride?.title ?? page.data.title;
 
