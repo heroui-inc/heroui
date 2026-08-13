@@ -1,6 +1,8 @@
 import {User, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
 
-import {DrawerFixture} from "./fixtures";
+import {isDrawerDragTargetOwnedBy} from "@/components/drawer/drawer.utils";
+
+import {DrawerFixture, StackedDrawerFixture} from "./fixtures";
 
 const renderDrawer = (
   props: {
@@ -137,5 +139,24 @@ describe("Drawer", () => {
     expect(onOpenChange).toHaveBeenCalledWith(false);
     // Controlled: stays open until `isOpen` changes.
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("supports handle ownership across stacked drawers", () => {
+    render(<StackedDrawerFixture />);
+    runAllTimers();
+
+    const childHandle = screen.getByTestId("child-drawer-handle");
+    const childDialog = childHandle.closest<HTMLElement>('[data-slot="drawer-dialog"]');
+    const parentDialog = screen
+      .getByTestId("parent-drawer-handle")
+      .closest<HTMLElement>('[data-slot="drawer-dialog"]');
+
+    expect(childDialog).not.toBeNull();
+    expect(parentDialog).not.toBeNull();
+
+    if (!childDialog || !parentDialog) return;
+
+    expect(isDrawerDragTargetOwnedBy(childHandle, childDialog)).toBe(true);
+    expect(isDrawerDragTargetOwnedBy(childHandle, parentDialog)).toBe(false);
   });
 });
