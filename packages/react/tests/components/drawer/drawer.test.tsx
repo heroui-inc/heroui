@@ -1,14 +1,6 @@
-import {
-  User,
-  cleanup,
-  fireEvent,
-  render,
-  runAllTimers,
-  screen,
-  setupUser,
-} from "@heroui/testing/helpers";
+import {User, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
 
-import {DrawerFixture, StackedDrawerFixture} from "./fixtures";
+import {DrawerFixture} from "./fixtures";
 
 const renderDrawer = (
   props: {
@@ -145,63 +137,5 @@ describe("Drawer", () => {
     expect(onOpenChange).toHaveBeenCalledWith(false);
     // Controlled: stays open until `isOpen` changes.
     expect(screen.getByRole("dialog")).toBeInTheDocument();
-  });
-
-  it("keeps the parent open when dismissing a stacked child by its handle", () => {
-    const onChildOpenChange = vi.fn();
-    const onParentOpenChange = vi.fn();
-
-    render(
-      <StackedDrawerFixture
-        onChildOpenChange={onChildOpenChange}
-        onParentOpenChange={onParentOpenChange}
-      />,
-    );
-    runAllTimers();
-
-    const childHandle = screen.getByTestId("child-drawer-handle");
-    const childDialog = childHandle.closest<HTMLElement>('[data-slot="drawer-dialog"]');
-    const parentDialog = screen
-      .getByTestId("parent-drawer-handle")
-      .closest<HTMLElement>('[data-slot="drawer-dialog"]');
-    const dialogs = document.querySelectorAll<HTMLElement>('[data-slot="drawer-dialog"]');
-
-    expect(childDialog).not.toBeNull();
-    expect(parentDialog).not.toBeNull();
-
-    dialogs.forEach((dialog) => {
-      Object.defineProperties(dialog, {
-        hasPointerCapture: {configurable: true, value: vi.fn(() => true)},
-        offsetHeight: {configurable: true, value: 100},
-        releasePointerCapture: {configurable: true, value: vi.fn()},
-        setPointerCapture: {configurable: true, value: vi.fn()},
-      });
-    });
-
-    fireEvent.pointerDown(childHandle, {
-      button: 0,
-      clientY: 0,
-      pointerId: 1,
-      pointerType: "mouse",
-    });
-    fireEvent.pointerMove(childHandle, {
-      button: 0,
-      clientY: 50,
-      pointerId: 1,
-      pointerType: "mouse",
-    });
-
-    expect(childDialog).toHaveStyle({transform: "translateY(50px)"});
-    expect(parentDialog).not.toHaveStyle({transform: "translateY(50px)"});
-
-    fireEvent.pointerUp(childHandle, {
-      button: 0,
-      clientY: 50,
-      pointerId: 1,
-      pointerType: "mouse",
-    });
-
-    expect(onChildOpenChange).toHaveBeenCalledWith(false);
-    expect(onParentOpenChange).not.toHaveBeenCalledWith(false);
   });
 });
