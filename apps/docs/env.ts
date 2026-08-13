@@ -1,5 +1,26 @@
+import {appendFileSync} from "node:fs";
+
 import {createEnv} from "@t3-oss/env-nextjs";
 import {z} from "zod";
+
+// #region agent log
+appendFileSync(
+  "/opt/cursor/logs/debug.log",
+  `${JSON.stringify({
+    data: {
+      featurebaseEndpointPresent: process.env["FEATUREBASE_API_ENDPOINT"] !== undefined,
+      featurebaseKeyPresent: process.env["FEATUREBASE_API_KEY"] !== undefined,
+      loopsEndpointPresent: process.env["LOOPS_API_ENDPOINT"] !== undefined,
+      loopsKeyPresent: process.env["LOOPS_API_KEY"] !== undefined,
+      nodeEnv: process.env["NODE_ENV"] ?? null,
+    },
+    hypothesisId: "D",
+    location: "apps/docs/env.ts:module-evaluation",
+    message: "Validating documentation runtime environment",
+    timestamp: Date.now(),
+  })}\n`,
+);
+// #endregion
 
 export const env = createEnv({
   client: {
