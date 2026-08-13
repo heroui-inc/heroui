@@ -113,11 +113,11 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
           instanceId: debugInstanceId,
           placement,
           overlayOpen: overlayState?.isOpen,
-          targetSlot: target.dataset.slot,
+          targetSlot: target.dataset["slot"],
           nearestDialogInstance: target
             .closest('[data-slot="drawer-dialog"]')
             ?.getAttribute("data-debug-drawer"),
-          currentDialogInstance: currentTarget.dataset.debugDrawer,
+          currentDialogInstance: currentTarget.dataset["debugDrawer"],
           currentOwnsTarget: currentTarget.contains(target),
         },
       });
@@ -165,9 +165,9 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
           data: {
             instanceId: debugInstanceId,
             rawDelta,
-            targetSlot: (e.target as HTMLElement).dataset.slot,
-            currentDialogInstance: (e.currentTarget as HTMLElement).dataset.debugDrawer,
-            refDialogInstance: dialogRef.current.dataset.debugDrawer,
+            targetSlot: (e.target as HTMLElement).dataset["slot"],
+            currentDialogInstance: (e.currentTarget as HTMLElement).dataset["debugDrawer"],
+            refDialogInstance: dialogRef.current.dataset["debugDrawer"],
             hasPointerCapture: dialogRef.current.hasPointerCapture(e.pointerId),
           },
         });
@@ -229,9 +229,9 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
         data: {
           instanceId: debugInstanceId,
           overlayOpen: overlayState?.isOpen,
-          targetSlot: (e.target as HTMLElement).dataset.slot,
-          currentDialogInstance: (e.currentTarget as HTMLElement).dataset.debugDrawer,
-          refDialogInstance: el.dataset.debugDrawer,
+          targetSlot: (e.target as HTMLElement).dataset["slot"],
+          currentDialogInstance: (e.currentTarget as HTMLElement).dataset["debugDrawer"],
+          refDialogInstance: el.dataset["debugDrawer"],
           hasPointerCapture: el.hasPointerCapture(e.pointerId),
           dimension,
           absOffset,
