@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: 补丁版本：将动画合成器提示限制在动画状态，确保 Modal 重新打开后按钮文本依然清晰，并让堆叠 Drawer 的把手只关闭自身抽屉；另有 Table 键盘导航修复待合入。
+description: 补丁版本：将动画合成器提示限制在动画状态，确保 Modal 重新打开后按钮文本依然清晰，让堆叠 Drawer 的把手只关闭自身抽屉，并保留 Table 嵌套输入控件的按键输入。
 github:
   pull: 6785
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 8 月 13 日（草案）</span>
 </div>
 
-补丁版本草案：[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉。[Table](/docs/components/table) 键盘导航修复仍在等待合入本补丁。
+补丁版本草案：[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入。
 
 ## 安装
 
@@ -46,7 +46,7 @@ github:
 
 - **Button、Menu 与 Dropdown**：将 `will-change` 合成器提示限制在按下和进出场动画状态，使静态文本在带有 transform 的浮层中保持清晰，包括 `Modal` 关闭后重新打开的场景 ([#6779](https://github.com/heroui-inc/heroui/pull/6779))。
 - **Drawer**：将拖拽手势限制在最近的所属 `Drawer.Dialog`，使嵌套抽屉的把手只关闭自身抽屉，而父抽屉保持打开且不发生位移 ([#6780](https://github.com/heroui-inc/heroui/pull/6780))。
-- **Table（待合入）**：防止 typeahead 抢走嵌套可编辑控件的按键输入与焦点。待合入的修复会将 `keyboardNavigationBehavior` 暴露为 prop，并默认设为 `"tab"`，同时保留非可编辑单元格中的 typeahead；该修复预计纳入 v3.2.5，但尚未合并 ([#6781](https://github.com/heroui-inc/heroui/pull/6781))。
+- **Table**：防止 typeahead 抢走嵌套可编辑控件的按键输入与焦点。`keyboardNavigationBehavior` 现已作为 prop 暴露，并默认设为 `"tab"`，同时保留非可编辑单元格中的 typeahead ([#6781](https://github.com/heroui-inc/heroui/pull/6781))。
 
 ## 链接
 
