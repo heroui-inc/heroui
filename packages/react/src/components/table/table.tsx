@@ -100,13 +100,18 @@ interface TableContentProps extends Omit<
   className?: string;
 }
 
-function TableContent({className, ...props}: TableContentProps) {
+function TableContent({
+  className,
+  keyboardNavigationBehavior = "tab",
+  ...props
+}: TableContentProps) {
   const {slots} = use(TableContext);
 
   return (
     <TablePrimitive
       className={composeTwRenderProps(className, slots?.content())}
       data-slot="table-content"
+      keyboardNavigationBehavior={keyboardNavigationBehavior}
       {...props}
     />
   );
