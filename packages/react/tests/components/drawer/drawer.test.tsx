@@ -178,13 +178,28 @@ describe("Drawer", () => {
       });
     });
 
-    fireEvent.pointerDown(childHandle, {button: 0, clientY: 0, pointerId: 1});
-    fireEvent.pointerMove(childHandle, {button: 0, clientY: 50, pointerId: 1});
+    fireEvent.pointerDown(childHandle, {
+      button: 0,
+      clientY: 0,
+      pointerId: 1,
+      pointerType: "mouse",
+    });
+    fireEvent.pointerMove(childHandle, {
+      button: 0,
+      clientY: 50,
+      pointerId: 1,
+      pointerType: "mouse",
+    });
 
     expect(childDialog).toHaveStyle({transform: "translateY(50px)"});
     expect(parentDialog).not.toHaveStyle({transform: "translateY(50px)"});
 
-    fireEvent.pointerUp(childHandle, {button: 0, clientY: 50, pointerId: 1});
+    fireEvent.pointerUp(childHandle, {
+      button: 0,
+      clientY: 50,
+      pointerId: 1,
+      pointerType: "mouse",
+    });
 
     expect(onChildOpenChange).toHaveBeenCalledWith(false);
     expect(onParentOpenChange).not.toHaveBeenCalledWith(false);
