@@ -76,7 +76,8 @@ node scripts/get_docs.mjs /docs/native/getting-started/theming
 
 ### Direct MDX URLs
 
-Component docs: `https://heroui.com/docs/native/components/{component-name}.mdx`
+Use a concrete kebab-case component slug in every MDX request. Never request an unresolved
+template URL.
 
 Examples:
 
@@ -84,7 +85,8 @@ Examples:
 - Dialog: `https://heroui.com/docs/native/components/dialog.mdx`
 - TextField: `https://heroui.com/docs/native/components/text-field.mdx`
 
-Getting started guides: `https://heroui.com/docs/native/getting-started/{topic}.mdx`
+For getting-started guides, use a concrete topic URL such as
+`https://heroui.com/docs/native/getting-started/quick-start.mdx`.
 
 **Important:** Always fetch component docs before implementing. The MDX docs include complete examples, props, anatomy, and API references.
 

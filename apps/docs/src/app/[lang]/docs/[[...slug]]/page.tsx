@@ -38,6 +38,28 @@ import {
 // import { getGithubLastEdit } from "fumadocs-core/server";
 
 const componentStatusIcons = ["preview", "new", "updated"];
+const ENGLISH_SEO_OVERRIDES: Record<string, {description: string; title: string}> = {
+  "/docs/react/components": {
+    description:
+      "Browse accessible HeroUI React components for forms, overlays, navigation, data display, and more, built with React Aria and Tailwind CSS v4.",
+    title: "HeroUI React Components – Accessible UI Library",
+  },
+  "/docs/react/components/button": {
+    description:
+      "Build accessible React buttons with HeroUI. Explore variants, sizes, loading and disabled states, icon buttons, events, and ButtonGroup patterns.",
+    title: "HeroUI Button – Accessible React Button Component",
+  },
+  "/docs/react/components/select": {
+    description:
+      "Build accessible React select menus with HeroUI. Learn options, sections, validation, disabled states, controlled values, and customizable listboxes.",
+    title: "HeroUI Select – Accessible React Select Component",
+  },
+  "/docs/react/getting-started": {
+    description:
+      "Get started with HeroUI v3, an accessible React UI library built on React Aria and Tailwind CSS v4. Learn installation, principles, and customization.",
+    title: "HeroUI v3 – React UI Library Getting Started",
+  },
+};
 
 const getRawMDXContent = cache(async (pagePath: string): Promise<string> => {
   try {
@@ -195,23 +217,29 @@ export async function generateMetadata(props: {
   // `page.url` already carries the locale prefix (`/en/docs/...`), which is the
   // URL actually served — the unprefixed `/docs/...` form permanently redirects.
   const url = page.url;
-  const alternates = getLocalizedAlternates({locale: params.lang, path: stripLocale(url)});
+  const unlocalizedPath = stripLocale(url);
+  const alternates = getLocalizedAlternates({locale: params.lang, path: unlocalizedPath});
+  const seoOverride = params.lang === "en" ? ENGLISH_SEO_OVERRIDES[unlocalizedPath] : undefined;
+  const description = seoOverride?.description ?? page.data.description;
+  const title = seoOverride?.title ?? page.data.title;
 
   return {
     alternates,
-    description: page.data.description,
+    description,
     openGraph: {
-      description: page.data.description,
+      description,
       images: imageUrl,
       siteName: siteConfig.name,
-      title: page.data.title,
+      title,
       url,
     },
-    title: page.data.title,
+    title: seoOverride ? {absolute: title} : title,
     twitter: {
       card: "summary_large_image",
+      description,
       images: imageUrl,
       site: "@hero_ui",
+      title,
     },
   };
 }

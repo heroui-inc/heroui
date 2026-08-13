@@ -117,8 +117,8 @@
     "androidComingSoon": "Android · Coming soon"
   },
   "themes": {
-    "metaTitle": "Themes",
-    "metaDescription": "Design and customize a HeroUI theme with visual controls for colors, typography, and radius, then copy production-ready CSS variables.",
+    "metaTitle": "HeroUI Theme Builder – Customize React UI",
+    "metaDescription": "Customize HeroUI React themes visually. Tune colors, typography, and radius, preview components live, and copy production-ready Tailwind CSS v4 variables.",
     "theme": "Theme",
     "custom": "Custom",
     "designTheme": "Design theme",

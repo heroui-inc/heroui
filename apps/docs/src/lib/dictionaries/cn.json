@@ -117,8 +117,8 @@
     "androidComingSoon": "Android · 即将推出"
   },
   "themes": {
-    "metaTitle": "主题",
-    "metaDescription": "通过可视化控件自定义 HeroUI 的颜色、字体与圆角，并复制可直接用于生产环境的 CSS 变量。",
+    "metaTitle": "HeroUI 主题编辑器 – 自定义 React UI",
+    "metaDescription": "通过可视化控件自定义 HeroUI React 主题，调整颜色、字体与圆角，实时预览组件并复制可用于生产环境的 Tailwind CSS v4 变量。",
     "theme": "主题",
     "custom": "自定义",
     "designTheme": "设计主题",

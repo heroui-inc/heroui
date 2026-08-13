@@ -98,7 +98,8 @@ node scripts/get_docs.mjs /docs/react/getting-started/theming
 
 ### Direct MDX URLs
 
-Component docs: `https://heroui.com/docs/react/components/{component-name}.mdx`
+Use a concrete kebab-case component slug in every MDX request. Never request an unresolved
+template URL.
 
 Examples:
 
@@ -106,7 +107,8 @@ Examples:
 - Modal: `https://heroui.com/docs/react/components/modal.mdx`
 - Form: `https://heroui.com/docs/react/components/form.mdx`
 
-Getting started guides: `https://heroui.com/docs/react/getting-started/{topic}.mdx`
+For getting-started guides, use a concrete topic URL such as
+`https://heroui.com/docs/react/getting-started/quick-start.mdx`.
 
 **Important:** Always fetch component docs before implementing. The MDX docs include complete examples, props, anatomy, and API references.
 

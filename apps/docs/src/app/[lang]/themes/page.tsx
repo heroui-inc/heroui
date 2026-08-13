@@ -44,7 +44,14 @@ export async function generateMetadata({
       type: "website",
       url: absoluteUrl(alternates.canonical),
     },
-    title,
+    title: {absolute: title},
+    twitter: {
+      card: "summary_large_image",
+      description,
+      images: siteConfig.ogImage,
+      site: "@hero_ui",
+      title,
+    },
   };
 }
 
