@@ -50,7 +50,7 @@
     "postinstall": "pnpm --filter @heroui/styles build && pnpm typegen:docs && pnpm typegen:docs-cn"
   },
   "devDependencies": {
-    "@babel/core": "7.28.5",
+    "@babel/core": "7.29.6",
     "@babel/preset-react": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "bumpp": "11.0.1",
