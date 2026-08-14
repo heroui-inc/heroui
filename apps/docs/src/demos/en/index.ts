@@ -2660,6 +2660,10 @@ export const demos: Record<string, DemoItem> = {
     loader: () => import("./toast/placements").then((m) => m.Placements),
     file: "en/toast/placements.tsx",
   },
+  "toast-expanded": {
+    loader: () => import("./toast/expanded").then((m) => m.Expanded),
+    file: "en/toast/expanded.tsx",
+  },
   "toast-simple": {
     loader: () => import("./toast/simple").then((m) => m.Simple),
     file: "en/toast/simple.tsx",

@@ -50,6 +50,12 @@ import { Toast, toast } from '@heroui/react';
   name="toast-placements"
 />
 
+### Expanded Stack
+
+<ComponentPreview
+  name="toast-expanded"
+/>
+
 ### Simple Toasts
 
 <ComponentPreview
@@ -312,9 +318,8 @@ const loadingId = toast("Creating event...", {
   timeout: 0, // Persistent toast that doesn't auto-dismiss
 });
 
-// Later, close and show result
-toast.close(loadingId);
-toast.success("Event created");
+// Later, update in place
+toast.update(loadingId, "Event created", { variant: "success" });
 
 // Queue methods
 toast.close(key);

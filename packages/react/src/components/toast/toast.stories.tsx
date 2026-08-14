@@ -177,6 +177,50 @@ export const Placements = {
   render: PlacementsTemplate,
 };
 
+// Expanded - Keep the stack open at natural height
+const expandedQueue = new ToastQueue();
+
+const ExpandedTemplate = () => {
+  return (
+    <div className="flex h-full max-w-xl flex-col items-center justify-center">
+      <Toast.Provider
+        isExpanded
+        aria-label="Expanded notifications"
+        placement="bottom"
+        queue={expandedQueue}
+      />
+      <Button
+        size="sm"
+        variant="secondary"
+        onPress={() => {
+          expandedQueue.add({
+            title: "Simple message",
+            variant: "default",
+          });
+          setTimeout(() => {
+            expandedQueue.add({
+              title: "Operation completed",
+              variant: "success",
+            });
+          }, 400);
+          setTimeout(() => {
+            expandedQueue.add({
+              title: "New update available",
+              variant: "accent",
+            });
+          }, 800);
+        }}
+      >
+        Show 3 toasts
+      </Button>
+    </div>
+  );
+};
+
+export const Expanded = {
+  render: ExpandedTemplate,
+};
+
 // Simple Toast - Title only, minimal examples
 const SimpleToastTemplate = () => {
   return (
@@ -349,9 +393,9 @@ const LoadingStateTemplate = () => {
             });
 
             setTimeout(() => {
-              toast.close(loadingId);
-              toast.success("File uploaded", {
+              toast.update(loadingId, "File uploaded", {
                 description: "Your file has been uploaded successfully",
+                variant: "success",
               });
             }, 3000);
           }}
@@ -368,9 +412,9 @@ const LoadingStateTemplate = () => {
             });
 
             setTimeout(() => {
-              toast.close(loadingId);
-              toast.success("Payment processed", {
+              toast.update(loadingId, "Payment processed", {
                 description: "Your payment has been processed successfully",
+                variant: "success",
               });
             }, 2500);
           }}
@@ -387,9 +431,9 @@ const LoadingStateTemplate = () => {
             });
 
             setTimeout(() => {
-              toast.close(loadingId);
-              toast.danger("Failed to save", {
+              toast.update(loadingId, "Failed to save", {
                 description: "Please try again",
+                variant: "danger",
               });
             }, 2000);
           }}

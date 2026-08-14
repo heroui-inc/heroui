@@ -51,6 +51,12 @@ import { Toast, toast } from '@heroui/react';
   name="toast-placements"
 />
 
+### 展开堆叠
+
+<ComponentPreview
+  name="toast-expanded"
+/>
+
 ### 简单 Toast
 
 <ComponentPreview
@@ -303,9 +309,8 @@ const loadingId = toast("Creating event...", {
   timeout: 0, // 持久 toast：不自动消失
 });
 
-// 随后关闭并展示结果
-toast.close(loadingId);
-toast.success("Event created");
+// 随后原地更新
+toast.update(loadingId, "Event created", { variant: "success" });
 
 // 队列方法
 toast.close(key);
