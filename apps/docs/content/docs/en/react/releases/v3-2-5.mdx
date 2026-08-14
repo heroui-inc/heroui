@@ -1,0 +1,61 @@
+---
+title: v3.2.5
+description: Patch release that scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, and preserves keystrokes in nested Table inputs.
+github:
+  pull: 6785
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">August 13, 2026 (Draft)</span>
+</div>
+
+Draft patch release: [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, and [Table](/docs/components/table) preserves keystrokes in nested editable controls.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Bug Fixes
+
+- **Button, Menu, and Dropdown**: Scope `will-change` compositor hints to pressed and enter/exit animation states so static labels remain sharp inside transformed overlays, including after a `Modal` closes and reopens ([#6779](https://github.com/heroui-inc/heroui/pull/6779)).
+- **Drawer**: Scope drag gestures to the nearest owning `Drawer.Dialog` so a nested drawer handle closes only its own drawer while the parent stays open and unshifted ([#6780](https://github.com/heroui-inc/heroui/pull/6780)).
+- **Table**: Keep typeahead from stealing keystrokes and focus from nested editable controls. `keyboardNavigationBehavior` is now exposed as a prop and defaults to `"tab"`, while typeahead remains available in non-editable cells ([#6781](https://github.com/heroui-inc/heroui/pull/6781)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6785](https://github.com/heroui-inc/heroui/pull/6785)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />
