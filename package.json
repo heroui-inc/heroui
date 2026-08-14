@@ -99,7 +99,7 @@
     "rollup-plugin-postcss": "4.0.2",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
-    "turbo": "2.7.2",
+    "turbo": "2.9.14",
     "typescript": "5.9.3",
     "typescript-eslint": "8.50.1",
     "vitest": "4.1.10"
