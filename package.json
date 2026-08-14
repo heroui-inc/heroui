@@ -94,7 +94,7 @@
     "prettier": "3.7.4",
     "prettier-plugin-css-order": "2.1.2",
     "prettier-plugin-tailwindcss": "0.7.2",
-    "rollup": "4.54.0",
+    "rollup": "4.59.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.2",
     "tsup": "8.5.1",
