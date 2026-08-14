@@ -3,8 +3,9 @@ import type {ReactNode} from "react";
 
 import {notFound} from "next/navigation";
 
+import {siteConfig} from "@/config/site";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
-import {getLocalizedAlternates} from "@/lib/seo";
+import {absoluteUrl, getLocalizedAlternates} from "@/lib/seo";
 
 // The showcase index itself is a client component, so its metadata is declared
 // here — without it the page would inherit the root layout's canonical.
@@ -15,10 +16,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const {lang} = await params;
   const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
+  const alternates = getLocalizedAlternates({locale: lang, path: "/showcase"});
 
   return {
-    alternates: getLocalizedAlternates({locale: lang, path: "/showcase"}),
+    alternates,
     description: dict.showcase.description,
+    openGraph: {
+      description: dict.showcase.description,
+      images: [{alt: dict.showcase.heading, url: siteConfig.ogImage}],
+      locale: lang === "cn" ? "zh_CN" : "en_US",
+      siteName: siteConfig.name,
+      title: dict.showcase.heading,
+      type: "website",
+      url: absoluteUrl(alternates.canonical),
+    },
     title: dict.showcase.heading,
   };
 }

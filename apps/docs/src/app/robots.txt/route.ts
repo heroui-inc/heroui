@@ -9,15 +9,25 @@ export const revalidate = false;
  * never drift from the deployed canonical host.
  */
 const CONTENT_SIGNAL = "Content-Signal: ai-train=yes, search=yes, ai-input=yes";
+const GOOGLEBOT_DISALLOWS = [
+  "/*.mdx$",
+  "/llms*.txt$",
+  "/react/llms*.txt$",
+  "/native/llms*.txt$",
+  "/*/node_modules/*",
+  "/*/src/*.d.ts$",
+];
 
 export const GET = () => {
   const body = [
-    "# Every crawlable route is open to every crawler. Non-indexable endpoints",
-    "# (preview deployments, machine-only routes) opt out via X-Robots-Tag or",
-    "# page metadata instead, so nothing indexable is ever blocked here.",
+    "# Public HTML pages are crawlable. Machine-readable docs stay available to",
+    "# humans and agents, but are excluded from Google Search.",
     "User-agent: *",
     "Allow: /",
     CONTENT_SIGNAL,
+    "",
+    "User-agent: Googlebot",
+    ...GOOGLEBOT_DISALLOWS.map((path) => `Disallow: ${path}`),
     "",
     `Sitemap: ${absoluteUrl("/sitemap.xml")}`,
     "",

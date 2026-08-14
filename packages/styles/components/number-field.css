@@ -18,7 +18,19 @@
   @apply grid h-9 items-center overflow-hidden rounded-field border bg-field text-sm text-field-foreground shadow-field outline-none;
   border-width: var(--border-width-field);
   border-color: var(--field-border);
-  grid-template-columns: 40px 1fr 40px;
+  grid-template-columns: 1fr;
+
+  &:has([slot="decrement"]) {
+    grid-template-columns: 40px 1fr;
+  }
+
+  &:has([slot="increment"]) {
+    grid-template-columns: 1fr 40px;
+  }
+
+  &:has([slot="decrement"]):has([slot="increment"]) {
+    grid-template-columns: 40px 1fr 40px;
+  }
 
   /**
    * Transitions

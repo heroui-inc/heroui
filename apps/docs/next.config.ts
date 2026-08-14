@@ -16,6 +16,17 @@ const withMDX = createMDX();
 // silently de-index the production site.
 const appEnv = process.env["NEXT_PUBLIC_APP_ENV"];
 const isIndexable = appEnv !== "preview" && appEnv !== "development";
+const llmsFileNames = ["llms.txt", "llms-full.txt", "llms-components.txt", "llms-patterns.txt"];
+const machineOnlyPaths = [
+  "/:path*.mdx",
+  "/llms.mdx/:path*",
+  "/llms-raw.mdx/:path*",
+  ...llmsFileNames.map((fileName) => `/${fileName}`),
+  ...["react", "native"].flatMap((platform) =>
+    llmsFileNames.map((fileName) => `/${platform}/${fileName}`),
+  ),
+];
+const noindexHeaders = [{key: "X-Robots-Tag", value: "noindex, nofollow"}];
 
 const config: NextConfig = {
   compress: true,
@@ -33,15 +44,23 @@ const config: NextConfig = {
   },
   async headers() {
     return [
-      {
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value: isIndexable ? "index, follow" : "noindex, nofollow",
-          },
-        ],
-        source: "/:path*",
-      },
+      ...machineOnlyPaths.map((source) => ({
+        headers: noindexHeaders,
+        source,
+      })),
+      ...(!isIndexable
+        ? [
+            {
+              headers: [
+                {
+                  key: "X-Robots-Tag",
+                  value: "noindex, nofollow",
+                },
+              ],
+              source: "/:path*",
+            },
+          ]
+        : []),
       {
         // Apple requires the AASA file to be served with `application/json`
         // exactly — any other content type (the default `application/octet-stream`

@@ -26,8 +26,9 @@ import {PRContributors, fetchPRContributors} from "@/components/pr-contributors"
 import StatusChip from "@/components/status-chip";
 import {siteConfig} from "@/config/site";
 import {getComponentCount, getExampleCount} from "@/demos";
+import {getDocsSeoMetadata} from "@/lib/docs-seo";
 import {getBreadcrumbJsonLd, getTechArticleJsonLd} from "@/lib/json-ld";
-import {getLocalizedAlternates, stripLocale} from "@/lib/seo";
+import {absoluteUrl, getLocalizedAlternates, localizedPath, stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
 import {getMDXComponents} from "@/mdx-components";
 import {
@@ -87,14 +88,16 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
   const contributors = githubInfo?.pull ? await fetchPRContributors(githubInfo.pull) : undefined;
 
   const slugParts = params.slug ?? [];
-  const pageUrl = `/docs/${slugParts.join("/")}`;
+  const pagePath = `/docs/${slugParts.join("/")}`;
+  const pageUrl = absoluteUrl(localizedPath(params.lang, pagePath));
+  const seoMetadata = getDocsSeoMetadata(params.lang, pagePath);
 
   const breadcrumbItems = [
-    {name: "Home", url: "https://heroui.com"},
-    {name: "Docs", url: "https://heroui.com/docs"},
+    {name: "Home", url: absoluteUrl(localizedPath(params.lang))},
+    {name: "Docs", url: absoluteUrl(localizedPath(params.lang, "/docs"))},
     ...slugParts.map((segment, i) => ({
       name: segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
-      url: `https://heroui.com/docs/${slugParts.slice(0, i + 1).join("/")}`,
+      url: absoluteUrl(localizedPath(params.lang, `/docs/${slugParts.slice(0, i + 1).join("/")}`)),
     })),
   ];
 
@@ -109,9 +112,9 @@ export default async function Page(props: {params: Promise<{lang: string; slug?:
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             getTechArticleJsonLd({
-              description: page.data.description ?? "",
-              title: page.data.title,
-              url: `https://heroui.com${pageUrl}`,
+              description: seoMetadata?.description ?? page.data.description ?? "",
+              title: seoMetadata?.title ?? page.data.title,
+              url: pageUrl,
             }),
           ),
         }}
@@ -194,21 +197,29 @@ export async function generateMetadata(props: {
   // `page.url` already carries the locale prefix (`/en/docs/...`), which is the
   // URL actually served — the unprefixed `/docs/...` form permanently redirects.
   const url = page.url;
-  const alternates = getLocalizedAlternates({locale: params.lang, path: stripLocale(url)});
+  const unlocalizedPath = stripLocale(url);
+  const alternates = getLocalizedAlternates({locale: params.lang, path: unlocalizedPath});
+  const seoOverride = getDocsSeoMetadata(params.lang, unlocalizedPath);
+  const description = seoOverride?.description ?? page.data.description;
+  const title = seoOverride?.title ?? page.data.title;
 
   return {
     alternates,
-    description: page.data.description,
+    description,
     openGraph: {
-      description: page.data.description,
+      description,
       images: imageUrl,
-      title: page.data.title,
+      siteName: siteConfig.name,
+      title,
       url,
     },
-    title: page.data.title,
+    title: seoOverride ? {absolute: title} : title,
     twitter: {
       card: "summary_large_image",
+      description,
       images: imageUrl,
+      site: "@hero_ui",
+      title,
     },
   };
 }
