@@ -16,6 +16,7 @@ import React, {
   useMemo,
   useRef,
 } from "react";
+import {composeRenderProps} from "react-aria-components/composeRenderProps";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -370,6 +371,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   placement = "bottom",
   queue: queueProp,
   scaleFactor = DEFAULT_SCALE_FACTOR,
+  style,
   width = DEFAULT_TOAST_WIDTH,
   ...rest
 }: ToastProviderProps<T>) => {
@@ -458,18 +460,24 @@ const ToastProvider = <T extends object = ToastContentValue>({
     [isMobile, placement, scaleFactor],
   );
 
+  const regionStyle = composeRenderProps(
+    style,
+    (userStyle) =>
+      ({
+        "--gap": `${gap}px`,
+        "--placement": placement,
+        "--scale-factor": scaleFactor,
+        "--toast-width": typeof width === "number" ? `${width}px` : width,
+        ...userStyle,
+      }) as CSSProperties,
+  );
+
   return (
     <ToastRegionPrimitive<T>
       className={composeTwRenderProps(className, slots?.region())}
       data-slot="toast-region"
       queue={toastQueue}
-      style={{
-        // @ts-expect-error - CSS variables
-        "--gap": `${gap}px`,
-        "--placement": placement,
-        "--scale-factor": scaleFactor,
-        "--toast-width": typeof width === "number" ? `${width}px` : width,
-      }}
+      style={regionStyle}
       {...rest}
     >
       {(renderProps) => {

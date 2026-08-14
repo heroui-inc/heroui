@@ -1,3 +1,5 @@
+import type {CSSProperties} from "react";
+
 import {act, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
 
 import {Toast, ToastQueue} from "@/components/toast";
@@ -37,6 +39,54 @@ describe("Toast", () => {
 
     expect(region).toHaveAttribute("data-slot", "toast-region");
     expect(region).toHaveAttribute("aria-label", "1 notification.");
+  });
+
+  it("merges custom styles with the default region variables", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} style={{zIndex: 100_000}} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveStyle({
+      "--gap": "12px",
+      "--placement": "bottom",
+      "--scale-factor": "0.05",
+      "--toast-width": "460px",
+      "z-index": "100000",
+    });
+  });
+
+  it("supports overriding a region variable through custom styles", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} style={{"--gap": "24px"} as CSSProperties} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveStyle({
+      "--gap": "24px",
+      "--toast-width": "460px",
+    });
+  });
+
+  it("supports the width prop alongside custom styles", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} style={{zIndex: 100_000}} width={520} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveStyle({
+      "--toast-width": "520px",
+      "z-index": "100000",
+    });
   });
 
   it("renders default children with alertdialog role, title, description, and close button", () => {
