@@ -58,8 +58,9 @@
   inset-inline-end: 0;
   border-radius: min(32px, var(--radius-3xl));
   --toast-y: var(--offset-collapsed, 0px);
-  scale: var(--scale-collapsed, 1);
-  translate: 0 calc(var(--dir, 1) * (var(--toast-y) + var(--toast-enter)));
+  --toast-scale: var(--scale-collapsed, 1);
+  transform: translateY(calc(var(--dir, 1) * (var(--toast-y) + var(--toast-enter))))
+    scale(var(--toast-scale));
   /* px so height can transition; auto snaps. */
   height: var(--toast-height, auto);
 
@@ -69,7 +70,6 @@
   --toast-enter-duration: 350ms;
   --toast-exit-duration: 250ms;
   --toast-translate-duration: var(--toast-enter-duration);
-  --toast-scale-duration: var(--toast-enter-duration);
   --toast-height-duration: var(--toast-enter-duration);
   --toast-opacity-duration: 150ms;
 
@@ -78,9 +78,7 @@
    * CRITICAL: motion-reduce must be AFTER animation/transition for correct override specificity
    */
   transition:
-    --toast-y var(--toast-translate-duration) var(--toast-ease),
-    --toast-enter var(--toast-translate-duration) var(--toast-ease),
-    scale var(--toast-scale-duration) var(--toast-ease),
+    transform var(--toast-translate-duration) var(--toast-ease),
     height var(--toast-height-duration) var(--toast-ease),
     opacity var(--toast-opacity-duration) var(--toast-ease);
 
@@ -89,6 +87,11 @@
 
 .toast[data-entering="true"] {
   animation: toast-enter var(--toast-enter-duration) var(--toast-ease);
+  /* Enter keyframe drives --toast-enter; --toast-y still interpolates on rapid stack. */
+  transition:
+    --toast-y var(--toast-translate-duration) var(--toast-ease),
+    height var(--toast-height-duration) var(--toast-ease),
+    opacity var(--toast-opacity-duration) var(--toast-ease);
   @apply motion-reduce:animate-none;
 }
 
@@ -151,7 +154,7 @@
 /* Expanded stack: cumulative-height offsets and natural (measured) heights. */
 .toast[data-expanded="true"] {
   --toast-y: var(--offset-expanded, 0px);
-  scale: 1;
+  --toast-scale: 1;
 }
 
 .toast[data-expanded="true"]:not([data-frontmost="true"]) {
@@ -170,34 +173,35 @@
 .toast[data-exiting="true"] {
   @apply opacity-0;
   animation: none;
+  transition:
+    transform var(--toast-translate-duration) var(--toast-ease),
+    height var(--toast-height-duration) var(--toast-ease),
+    opacity var(--toast-opacity-duration) var(--toast-ease);
 }
 
 /* Frontmost: slide off the anchored edge. */
 .toast[data-exiting="true"][data-frontmost="true"] {
   --toast-translate-duration: var(--toast-exit-duration);
-  --toast-scale-duration: var(--toast-exit-duration);
   --toast-opacity-duration: 150ms;
   --toast-enter: -100%;
-  scale: 1;
+  --toast-scale: 1;
 }
 
 /* Expanded background: fade in place. */
 .toast[data-exiting="true"][data-expanded="true"]:not([data-frontmost="true"]) {
   --toast-translate-duration: 200ms;
-  --toast-scale-duration: 200ms;
   --toast-height-duration: 200ms;
   --toast-opacity-duration: 150ms;
 
-  scale: 0.96;
+  --toast-scale: 0.96;
 }
 
 /* Collapsed background: fade in place. */
 .toast[data-exiting="true"]:not([data-expanded="true"]):not([data-frontmost="true"]) {
   --toast-translate-duration: 200ms;
-  --toast-scale-duration: 200ms;
   --toast-opacity-duration: 150ms;
 
-  scale: calc(var(--scale-collapsed, 1) * 0.96);
+  --toast-scale: calc(var(--scale-collapsed, 1) * 0.96);
 }
 
 /* Toasts beyond maxVisibleToasts stay invisible in all states. */
