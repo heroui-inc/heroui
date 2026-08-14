@@ -1,17 +1,5 @@
 /* Toast component styles */
 
-@property --toast-enter {
-  syntax: "<length-percentage>";
-  inherits: false;
-  initial-value: 0%;
-}
-
-@property --toast-y {
-  syntax: "<length-percentage>";
-  inherits: false;
-  initial-value: 0px;
-}
-
 /* Toast Region - Container for all toasts */
 .toast-region {
   @apply pointer-events-none fixed z-50 outline-none;
@@ -58,10 +46,11 @@
   inset-inline-end: 0;
   border-radius: min(32px, var(--radius-3xl));
   --toast-y: var(--offset-collapsed, 0px);
+  --toast-enter: 0%;
   --toast-scale: var(--scale-collapsed, 1);
   transform: translateY(calc(var(--dir, 1) * (var(--toast-y) + var(--toast-enter))))
     scale(var(--toast-scale));
-  /* px so height can transition; auto snaps. */
+  /* px so height can transition on expand; auto snaps. */
   height: var(--toast-height, auto);
 
   @apply pointer-events-auto flex flex-row items-start justify-start gap-1.5 bg-surface px-4 py-3 shadow-overlay;
@@ -79,20 +68,14 @@
    */
   transition:
     transform var(--toast-translate-duration) var(--toast-ease),
-    height var(--toast-height-duration) var(--toast-ease),
     opacity var(--toast-opacity-duration) var(--toast-ease);
 
   @apply motion-reduce:animate-none motion-reduce:transition-none;
 }
 
+/* First paint is off-edge; dropping data-entering transitions transform in. */
 .toast[data-entering="true"] {
-  animation: toast-enter var(--toast-enter-duration) var(--toast-ease);
-  /* Enter keyframe drives --toast-enter; --toast-y still interpolates on rapid stack. */
-  transition:
-    --toast-y var(--toast-translate-duration) var(--toast-ease),
-    height var(--toast-height-duration) var(--toast-ease),
-    opacity var(--toast-opacity-duration) var(--toast-ease);
-  @apply motion-reduce:animate-none;
+  --toast-enter: -100%;
 }
 
 /* Stacking direction: offsets move away from the anchored edge; the hit-area pseudo-element (see below) extends toward the neighbor. */
@@ -132,14 +115,18 @@
   @apply motion-reduce:transition-none;
 }
 
-/* Behind toasts are clamped to the front toast's height; they stay hit-testable so hovering the peeking edges expands the stack. */
+/* Behind toasts keep their own height and shift by the extra front height so a taller incoming toast pushes them instead of snapping. */
 .toast:not([data-frontmost="true"]) {
-  height: var(--front-height, var(--toast-height, auto));
+  --toast-y: calc(
+    var(--offset-collapsed, 0px) + max(0px, var(--front-height, 0px) - var(--toast-height, 0px))
+  );
+  height: var(--toast-height, auto);
 }
 
 /* Collapsed behind toasts hide their content; clip can never become a scroll container. Expanded overflow stays visible for the close button. */
 .toast:not([data-frontmost="true"]):not([data-expanded="true"]) {
   overflow: clip;
+  max-height: var(--front-height);
 
   > :not([data-slot="toast-close"]) {
     opacity: 0;
@@ -155,6 +142,16 @@
 .toast[data-expanded="true"] {
   --toast-y: var(--offset-expanded, 0px);
   --toast-scale: 1;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER animation/transition for correct override specificity
+   */
+  transition:
+    transform var(--toast-translate-duration) var(--toast-ease),
+    height var(--toast-height-duration) var(--toast-ease),
+    opacity var(--toast-opacity-duration) var(--toast-ease);
+  @apply motion-reduce:transition-none;
 }
 
 .toast[data-expanded="true"]:not([data-frontmost="true"]) {
@@ -172,11 +169,6 @@
 /* Exit. Keep durations <= DEFAULT_EXIT_DURATION. */
 .toast[data-exiting="true"] {
   @apply opacity-0;
-  animation: none;
-  transition:
-    transform var(--toast-translate-duration) var(--toast-ease),
-    height var(--toast-height-duration) var(--toast-ease),
-    opacity var(--toast-opacity-duration) var(--toast-ease);
 }
 
 /* Frontmost: slide off the anchored edge. */
@@ -190,7 +182,6 @@
 /* Expanded background: fade in place. */
 .toast[data-exiting="true"][data-expanded="true"]:not([data-frontmost="true"]) {
   --toast-translate-duration: 200ms;
-  --toast-height-duration: 200ms;
   --toast-opacity-duration: 150ms;
 
   --toast-scale: 0.96;
@@ -325,12 +316,6 @@
 
 .toast--danger .toast__indicator {
   @apply text-danger-soft-foreground;
-}
-
-@keyframes toast-enter {
-  from {
-    --toast-enter: -100%;
-  }
 }
 
 @keyframes toast-indicator-fade {

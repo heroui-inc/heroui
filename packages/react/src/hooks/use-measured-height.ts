@@ -16,18 +16,14 @@ export const useMeasuredHeight = (ref: RefObject<HTMLDivElement | null>) => {
       return;
     }
 
-    // Temporarily remove the height clamp to measure the natural height without triggering transitions.
+    // Unclamp to measure natural height. Leave transition intact.
     const previousHeight = element.style.height;
-    const previousTransition = element.style.transition;
 
-    element.style.transition = "none";
     element.style.height = "auto";
 
-    // scrollHeight excludes borders; add them here if the element gains one.
     const measuredHeight = element.scrollHeight;
 
     element.style.height = previousHeight;
-    element.style.transition = previousTransition;
 
     setHeight((prevHeight) => (prevHeight !== measuredHeight ? measuredHeight : prevHeight));
   }, [ref]);

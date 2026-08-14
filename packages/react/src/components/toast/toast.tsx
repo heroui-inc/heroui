@@ -196,52 +196,16 @@ const Toast = <T extends object = ToastContentValue>({
   const [isEntering, setIsEntering] = useState(true);
 
   useEffect(() => {
-    const el = toastRef.current;
-
-    if (!el) {
-      return;
-    }
-
-    let settled = false;
-    const finish = () => {
-      if (settled) return;
-      settled = true;
-      setIsEntering(false);
-    };
-
-    const onEnterEnd = (event: globalThis.AnimationEvent) => {
-      if (event.target !== el) return;
-      if (!event.animationName.includes("toast-enter")) return;
-      finish();
-    };
-
-    el.addEventListener("animationend", onEnterEnd);
-    el.addEventListener("animationcancel", onEnterEnd);
-
     let innerFrame = 0;
     const outerFrame = requestAnimationFrame(() => {
       innerFrame = requestAnimationFrame(() => {
-        const running =
-          typeof el.getAnimations === "function" &&
-          el.getAnimations().some((animation) => {
-            const name = "animationName" in animation ? String(animation.animationName) : "";
-
-            return name.includes("toast-enter") && animation.playState === "running";
-          });
-
-        if (!running) finish();
+        setIsEntering(false);
       });
     });
 
-    const timeoutId = window.setTimeout(finish, 400);
-
     return () => {
-      settled = true;
-      el.removeEventListener("animationend", onEnterEnd);
-      el.removeEventListener("animationcancel", onEnterEnd);
       cancelAnimationFrame(outerFrame);
       cancelAnimationFrame(innerFrame);
-      window.clearTimeout(timeoutId);
     };
   }, []);
 
