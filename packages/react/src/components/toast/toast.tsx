@@ -72,6 +72,7 @@ const Toast = <T extends object = ToastContentValue>({
   className,
   placement,
   scaleFactor = DEFAULT_SCALE_FACTOR,
+  style,
   toast,
   variant,
   ...rest
@@ -130,7 +131,7 @@ const Toast = <T extends object = ToastContentValue>({
     }
   }, [isFrontmost]);
 
-  const style = useMemo<CSSProperties>(() => {
+  const stackingStyle = useMemo<CSSProperties>(() => {
     const frontToastKey = visibleToasts[0]?.key;
 
     const frontHeight =
@@ -152,7 +153,6 @@ const Toast = <T extends object = ToastContentValue>({
         : null),
       opacity: isHidden ? 0 : 1,
       pointerEvents: isHidden ? "none" : "auto",
-      ...rest.style,
     } as const;
   }, [
     finalScaleFactor,
@@ -162,11 +162,19 @@ const Toast = <T extends object = ToastContentValue>({
     isBottom,
     isFrontmost,
     isHidden,
-    rest.style,
     toast?.key,
     toastHeight,
     visibleToasts,
   ]);
+
+  const toastStyle = composeRenderProps(
+    style,
+    (userStyle) =>
+      ({
+        ...stackingStyle,
+        ...userStyle,
+      }) as CSSProperties,
+  );
 
   return (
     <ToastPrimitive
@@ -177,7 +185,7 @@ const Toast = <T extends object = ToastContentValue>({
       data-hidden={dataAttr(isHidden)}
       data-index={index}
       data-slot="toast"
-      style={style}
+      style={toastStyle}
       toast={toast}
       {...rest}
     >
