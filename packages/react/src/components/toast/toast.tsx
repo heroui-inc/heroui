@@ -370,6 +370,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   placement = "bottom",
   queue: queueProp,
   scaleFactor = DEFAULT_SCALE_FACTOR,
+  style,
   width = DEFAULT_TOAST_WIDTH,
   ...rest
 }: ToastProviderProps<T>) => {
@@ -469,6 +470,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
         "--placement": placement,
         "--scale-factor": scaleFactor,
         "--toast-width": typeof width === "number" ? `${width}px` : width,
+        ...style,
       }}
       {...rest}
     >
