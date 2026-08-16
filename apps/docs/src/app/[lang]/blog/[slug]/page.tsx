@@ -57,6 +57,7 @@ export async function generateMetadata({params}: BlogPostPageProps): Promise<Met
       authors: [post.author],
       description: post.description,
       publishedTime: post.date,
+      siteName: siteConfig.name,
       title: post.title,
       type: "article",
       url,
@@ -66,6 +67,7 @@ export async function generateMetadata({params}: BlogPostPageProps): Promise<Met
     twitter: {
       card: "summary_large_image",
       description: post.description,
+      site: "@hero_ui",
       title: post.title,
       ...(post.image && {images: [post.image]}),
     },

@@ -8,6 +8,8 @@ import {notFound} from "next/navigation";
 import {ImageResponse} from "next/og";
 
 import {HeroUILogo} from "@/components/heroui-logo";
+import {getDocsSeoMetadata} from "@/lib/docs-seo";
+import {stripLocale} from "@/lib/seo";
 import {source} from "@/lib/source";
 
 interface GenerateProps {
@@ -93,8 +95,10 @@ export const GET = async (_req: Request, {params}: {params: Promise<{slug: strin
 
   if (!page) notFound();
 
+  const seoMetadata = getDocsSeoMetadata(page.locale, stripLocale(page.url));
+
   return generateOGImage({
-    description: page.data.description,
+    description: seoMetadata?.description ?? page.data.description,
     fonts: [
       {
         data: interRegular,
@@ -108,7 +112,7 @@ export const GET = async (_req: Request, {params}: {params: Promise<{slug: strin
       },
     ],
     icon: <HeroUILogo size={58} />,
-    title: page.data.title,
+    title: seoMetadata?.title ?? page.data.title,
   });
 };
 

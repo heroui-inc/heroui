@@ -20,6 +20,7 @@ import React, {
   useSyncExternalStore,
 } from "react";
 import {useFocusVisible} from "react-aria/useFocusVisible";
+import {composeRenderProps} from "react-aria-components/composeRenderProps";
 import {Text as TextPrimitive} from "react-aria-components/Text";
 import {
   UNSTABLE_ToastContent as ToastContentPrimitive,
@@ -151,6 +152,7 @@ const Toast = <T extends object = ToastContentValue>({
   placement,
   ref,
   scaleFactor,
+  style,
   toast,
   variant,
   ...rest
@@ -259,7 +261,7 @@ const Toast = <T extends object = ToastContentValue>({
     }
   }, [isFrontmost, isExpanded, isHidden, isExiting, isFocusVisible]);
 
-  const style = useMemo<CSSProperties>(() => {
+  const stackingStyle = useMemo<CSSProperties>(() => {
     const frontToastKey = layoutToasts[0]?.key;
 
     const frontHeight =
@@ -292,7 +294,6 @@ const Toast = <T extends object = ToastContentValue>({
             "--toast-height": `${toastHeight}px`,
           } as CSSProperties)
         : null),
-      ...rest.style,
     } as const;
   }, [
     finalScaleFactor,
@@ -302,11 +303,19 @@ const Toast = <T extends object = ToastContentValue>({
     index,
     isExiting,
     layoutToasts,
-    rest.style,
     toast,
     toastHeight,
     visibleToasts.length,
   ]);
+
+  const toastStyle = composeRenderProps(
+    style,
+    (userStyle) =>
+      ({
+        ...stackingStyle,
+        ...userStyle,
+      }) as CSSProperties,
+  );
 
   return (
     <ToastPrimitive
@@ -321,7 +330,7 @@ const Toast = <T extends object = ToastContentValue>({
       data-index={index}
       data-placement={finalPlacement}
       data-slot="toast"
-      style={style}
+      style={toastStyle}
       toast={toast}
     >
       {children}
@@ -559,6 +568,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
   queue: queueProp,
   ref: refProp,
   scaleFactor = DEFAULT_SCALE_FACTOR,
+  style,
   width = DEFAULT_TOAST_WIDTH,
   ...rest
 }: ToastProviderProps<T>) => {
@@ -880,6 +890,18 @@ const ToastProvider = <T extends object = ToastContentValue>({
     ],
   );
 
+  const regionStyle = composeRenderProps(
+    style,
+    (userStyle) =>
+      ({
+        "--gap": `${gap}px`,
+        "--placement": placement,
+        "--scale-factor": scaleFactor,
+        "--toast-width": typeof width === "number" ? `${width}px` : width,
+        ...userStyle,
+      }) as CSSProperties,
+  );
+
   return (
     <ToastRegionPrimitive<T>
       {...rest}
@@ -888,12 +910,7 @@ const ToastProvider = <T extends object = ToastContentValue>({
       data-expanded={dataAttr(isExpanded)}
       data-slot="toast-region"
       queue={toastQueue}
-      style={{
-        // @ts-expect-error - CSS variables
-        "--gap": `${gap}px`,
-        "--toast-width": typeof width === "number" ? `${width}px` : width,
-        ...rest.style,
-      }}
+      style={regionStyle}
     >
       {(renderProps) => {
         const content = renderProps.toast.content as ToastContentValue;

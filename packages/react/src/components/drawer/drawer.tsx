@@ -28,6 +28,8 @@ import {dom} from "../../utils/dom";
 import {CloseButton} from "../close-button";
 import {SurfaceContext} from "../surface";
 
+import {isDrawerDragTargetOwnedBy} from "./drawer.utils";
+
 type DrawerPlacement = "top" | "bottom" | "left" | "right";
 
 /* -------------------------------------------------------------------------------------------------
@@ -83,6 +85,9 @@ function useDrawerDrag(placement: DrawerPlacement | undefined, isDismissable: bo
       if (e.button !== 0) return;
 
       const target = e.target as HTMLElement;
+      const currentTarget = e.currentTarget as HTMLElement;
+
+      if (!isDrawerDragTargetOwnedBy(target, currentTarget)) return;
 
       // Don't drag from interactive elements or scrollable body
       if (

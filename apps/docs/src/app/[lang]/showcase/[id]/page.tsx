@@ -6,6 +6,7 @@ import path from "node:path";
 import {notFound} from "next/navigation";
 
 import {ShowcaseSource} from "@/components/showcase-source";
+import {siteConfig} from "@/config/site";
 import {hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
 import {getLocalizedAlternates} from "@/lib/seo";
@@ -38,6 +39,7 @@ export async function generateMetadata({params}: ShowcasePageProps): Promise<Met
     description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
     openGraph: {
       description: `Interactive demo of ${showcase.name} built with HeroUI components.`,
+      siteName: siteConfig.name,
       title: `${showcase.name} - HeroUI Showcase`,
       url: alternates.canonical,
     },

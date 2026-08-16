@@ -30,12 +30,12 @@ function addPath(paths: LocalizedPaths, path: string, locale: string, lastModifi
   }
 }
 
-function toEntries(paths: LocalizedPaths): SitemapEntry[] {
+function toEntries(paths: LocalizedPaths, defaultLastModified: Date): SitemapEntry[] {
   return [...paths].flatMap(([path, {lastModified, locales}]) =>
     locales.map((locale) => ({
       alternates: {languages: getSitemapAlternates(path, locales)},
+      lastModified: lastModified ?? defaultLastModified,
       url: absoluteUrl(localizedPath(locale, path)),
-      ...(lastModified ? {lastModified} : {}),
     })),
   );
 }
@@ -49,6 +49,7 @@ function parseDate(value: string | undefined): Date | undefined {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const generatedAt = new Date();
   const paths: LocalizedPaths = new Map();
 
   for (const locale of LOCALES) {
@@ -72,8 +73,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // Served outside `app/[lang]`, so it has no locale variants.
-  const unlocalized: SitemapEntry[] = [{url: absoluteUrl("/docs/native-showcase/privacy-policy")}];
+  const localizedEntries = toEntries(paths, generatedAt);
 
-  return [...toEntries(paths), ...unlocalized];
+  // Keep one canonical entry per URL. Machine-readable `.mdx`/`llms` routes
+  // and the unprefixed native-showcase fallback are intentionally excluded.
+  return [...new Map(localizedEntries.map((entry) => [entry.url, entry])).values()];
 }

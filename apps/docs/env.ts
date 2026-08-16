@@ -29,10 +29,10 @@ export const env = createEnv({
     NODE_ENV: process.env["NODE_ENV"],
   },
   server: {
-    FEATUREBASE_API_ENDPOINT: z.string().min(1),
-    FEATUREBASE_API_KEY: z.string().min(1),
-    LOOPS_API_ENDPOINT: z.string().min(1),
-    LOOPS_API_KEY: z.string().min(1),
+    FEATUREBASE_API_ENDPOINT: z.string().min(1).optional(),
+    FEATUREBASE_API_KEY: z.string().min(1).optional(),
+    LOOPS_API_ENDPOINT: z.string().min(1).optional(),
+    LOOPS_API_KEY: z.string().min(1).optional(),
     NODE_ENV: z.enum(["development", "production"]).default("development"),
   },
 });

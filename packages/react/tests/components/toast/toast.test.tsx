@@ -1,3 +1,5 @@
+import type {CSSProperties} from "react";
+
 import {
   act,
   advanceTimersByTime,
@@ -45,6 +47,71 @@ describe("Toast", () => {
 
     expect(region).toHaveAttribute("data-slot", "toast-region");
     expect(region).toHaveAttribute("aria-label", "1 notification.");
+  });
+
+  it("merges custom styles with the default region variables", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} style={{zIndex: 100_000}} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveStyle({
+      "--gap": "12px",
+      "--placement": "bottom",
+      "--scale-factor": "0.05",
+      "--toast-width": "460px",
+      "z-index": "100000",
+    });
+  });
+
+  it("supports overriding a region variable through custom styles", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} style={{"--toast-width": "320px"} as CSSProperties} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveStyle({
+      "--gap": "12px",
+      "--placement": "bottom",
+      "--scale-factor": "0.05",
+      "--toast-width": "320px",
+    });
+  });
+
+  it("supports the width prop alongside custom styles", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} style={{zIndex: 100_000}} width={520} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveStyle({
+      "--toast-width": "520px",
+      "z-index": "100000",
+    });
+  });
+
+  it("supports a style render function on the region", () => {
+    const queue = new ToastQueue();
+
+    render(<Toast.Provider queue={queue} style={() => ({zIndex: 100_000}) as CSSProperties} />);
+
+    act(() => {
+      queue.add({title: "Saved"});
+    });
+
+    expect(screen.getByRole("region")).toHaveStyle({
+      "--toast-width": "460px",
+      "z-index": "100000",
+    });
   });
 
   it("renders default children with alertdialog role, title, description, and close button", () => {
@@ -337,6 +404,33 @@ describe("Toast", () => {
 
     expect(screen.getByTestId("custom-toast")).toBeInTheDocument();
     expect(screen.getByText("Custom layout")).toBeInTheDocument();
+  });
+
+  it("merges custom styles with the toast stacking styles", () => {
+    const queue = new ToastQueue();
+
+    render(
+      <Toast.Provider queue={queue}>
+        {({toast: toastItem}) => (
+          <Toast data-testid="custom-toast" style={{marginTop: 8}} toast={toastItem}>
+            <Toast.Content>
+              <Toast.Title>Custom layout</Toast.Title>
+            </Toast.Content>
+          </Toast>
+        )}
+      </Toast.Provider>,
+    );
+
+    act(() => {
+      queue.add({title: "ignored"});
+    });
+
+    expect(screen.getByTestId("custom-toast")).toHaveStyle({
+      "margin-top": "8px",
+      opacity: "1",
+      "pointer-events": "auto",
+      "z-index": "1",
+    });
   });
 
   it("exposes placement BEM modifiers on the region and toast", () => {

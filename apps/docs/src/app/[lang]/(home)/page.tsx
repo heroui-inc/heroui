@@ -6,10 +6,11 @@ import {notFound} from "next/navigation";
 
 import {Footer} from "@/components/footer";
 import {StarsCount} from "@/components/github-link";
+import {siteConfig} from "@/config/site";
 import {GitHubIcon} from "@/icons/github";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {i18n} from "@/lib/i18n";
-import {getLocalizedAlternates} from "@/lib/seo";
+import {absoluteUrl, getLocalizedAlternates} from "@/lib/seo";
 
 import {DemoShowcase} from "./components/demo-showcase";
 import {ProBanner} from "./components/pro-banner";
@@ -28,9 +29,33 @@ export async function generateMetadata({
   params: Promise<{lang: string}>;
 }): Promise<Metadata> {
   const {lang} = await params;
+  const locale = hasLocale(lang) ? lang : "en";
+  const dict = await getDictionary(locale);
+  const alternates = getLocalizedAlternates({locale});
+  const {metaDescription: description, metaTitle: title} = dict.home;
+  const url = absoluteUrl(alternates.canonical);
 
   return {
-    alternates: getLocalizedAlternates({locale: lang}),
+    alternates,
+    description,
+    openGraph: {
+      description,
+      images: [{alt: title, url: siteConfig.ogImage}],
+      locale: locale === "cn" ? "zh_CN" : "en_US",
+      siteName: siteConfig.name,
+      title,
+      type: "website",
+      url,
+    },
+    title: {absolute: title},
+    twitter: {
+      card: "summary_large_image",
+      creator: "@hero_ui",
+      description,
+      images: [siteConfig.ogImage],
+      site: "@hero_ui",
+      title,
+    },
   };
 }
 

@@ -1,0 +1,63 @@
+---
+title: v3.2.5
+description: Patch release that scopes animation compositor hints so Modal button labels stay sharp after reopen, keeps stacked Drawer handles from closing ancestor drawers, preserves keystrokes in nested Table inputs, stops NumberField from reserving stepper columns when buttons are absent, and keeps Toast region CSS variables when custom styles are passed.
+github:
+  pull: 6792
+---
+
+<div className="flex items-center gap-3 mb-6">
+  <span className="text-sm text-muted">August 13, 2026</span>
+</div>
+
+Patch release: [Button](/docs/components/button), Menu, and Dropdown apply compositor hints only while animating so labels stay sharp after a [Modal](/docs/components/modal) reopens, a nested [Drawer](/docs/components/drawer) handle now closes only its own drawer, [Table](/docs/components/table) preserves keystrokes in nested editable controls, [NumberField](/docs/components/number-field) no longer reserves stepper columns when buttons are absent, and [Toast](/docs/components/toast) keeps region CSS variables when custom styles are passed.
+
+## Installation
+
+Update to the latest version:
+
+<Tabs items={["npm", "pnpm", "yarn", "bun"]}>
+  <Tab value="npm">
+    ```bash
+    npm i @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @heroui/styles@latest @heroui/react@latest
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  **Using AI assistants?** Simply prompt "Hey Cursor, update HeroUI to the latest version" and your AI assistant will automatically compare versions and apply the necessary changes. Learn more about the [HeroUI MCP Server](/docs/ui-for-agents/mcp-server).
+</Callout>
+
+## Bug Fixes
+
+- **Button, Menu, and Dropdown**: Scope `will-change` compositor hints to pressed and enter/exit animation states so static labels remain sharp inside transformed overlays, including after a `Modal` closes and reopens ([#6779](https://github.com/heroui-inc/heroui/pull/6779)).
+- **Drawer**: Scope drag gestures to the nearest owning `Drawer.Dialog` so a nested drawer handle closes only its own drawer while the parent stays open and unshifted ([#6780](https://github.com/heroui-inc/heroui/pull/6780)).
+- **Table**: Keep typeahead from stealing keystrokes and focus from nested editable controls. `keyboardNavigationBehavior` is now exposed as a prop and defaults to `"tab"`, while typeahead remains available in non-editable cells ([#6781](https://github.com/heroui-inc/heroui/pull/6781)).
+- **NumberField**: Size the input grid from the stepper slots that are present, so fields without increment or decrement buttons no longer reserve empty side columns ([#6778](https://github.com/heroui-inc/heroui/pull/6778)).
+- **Toast**: Merge custom `style` props with region CSS variables and toast stacking styles so passing styles such as `zIndex` no longer drops `--toast-width` and collapses the toast ([#6794](https://github.com/heroui-inc/heroui/pull/6794)).
+
+## Links
+
+- [Component Docs](/docs/react/components)
+- [GitHub Repository](https://github.com/heroui-inc/heroui)
+- [GitHub PR #6792](https://github.com/heroui-inc/heroui/pull/6792)
+
+## Contributors
+
+Thanks to everyone who contributed to this release!
+
+<PRContributors />

@@ -9,6 +9,7 @@ export type ContentType = "all" | "components" | "patterns";
 export const LLMS_TEXT_HEADERS = {
   "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
   "Content-Type": "text/plain; charset=utf-8",
+  "X-Robots-Tag": "noindex, nofollow",
 } as const;
 
 export function getPlatformFromPage(page: Page): Platform {

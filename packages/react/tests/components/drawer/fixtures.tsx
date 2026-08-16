@@ -36,3 +36,35 @@ export const DrawerFixture = (props: DrawerFixtureProps = {}) => (
     </Drawer.Backdrop>
   </Drawer>
 );
+
+export const StackedDrawerFixture = () => (
+  <Drawer defaultOpen>
+    <Button>Open parent drawer</Button>
+    <Drawer.Backdrop>
+      <Drawer.Content>
+        <Drawer.Dialog>
+          <Drawer.Handle data-testid="parent-drawer-handle" />
+          <Drawer.Header>
+            <Drawer.Heading>Parent Drawer</Drawer.Heading>
+          </Drawer.Header>
+          <Drawer.Body>
+            <Drawer defaultOpen>
+              <Button>Open child drawer</Button>
+              <Drawer.Backdrop>
+                <Drawer.Content>
+                  <Drawer.Dialog>
+                    <Drawer.Handle data-testid="child-drawer-handle" />
+                    <Drawer.Header>
+                      <Drawer.Heading>Child Drawer</Drawer.Heading>
+                    </Drawer.Header>
+                    <Drawer.Body>Child drawer body</Drawer.Body>
+                  </Drawer.Dialog>
+                </Drawer.Content>
+              </Drawer.Backdrop>
+            </Drawer>
+          </Drawer.Body>
+        </Drawer.Dialog>
+      </Drawer.Content>
+    </Drawer.Backdrop>
+  </Drawer>
+);

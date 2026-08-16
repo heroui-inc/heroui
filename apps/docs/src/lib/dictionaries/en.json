@@ -2,9 +2,9 @@
   "home": {
     "releaseBadges": [
       {
-        "label": "HeroUI React v3.2.4 — patch release",
-        "href": "/docs/react/releases/v3-2-4",
-        "date": "2026-08-04"
+        "label": "HeroUI React v3.2.5 — patch release",
+        "href": "/docs/react/releases/v3-2-5",
+        "date": "2026-08-13"
       },
       {
         "label": "HeroUI Native v1.0.8 — patch release",
@@ -15,6 +15,8 @@
     "titleMain": "Beautiful by default.",
     "titleMuted": "Customizable by design.",
     "description": "HeroUI is the modern UI library for web and mobile, built to help you move fast, stay consistent, and deliver delightful user experiences.",
+    "metaTitle": "HeroUI v3 (Previously NextUI) - Beautiful by default, customizable by design.",
+    "metaDescription": "Beautiful, accessible React UI components built on React Aria and Tailwind CSS v4. The modern alternative to MUI, Chakra UI, and shadcn/ui for building production-ready applications.",
     "getStarted": "Get started",
     "viewComponents": "View components",
     "githubStarsPrefix": "Open source with",
@@ -115,6 +117,9 @@
     "androidComingSoon": "Android · Coming soon"
   },
   "themes": {
+    "heading": "Theme Builder",
+    "metaTitle": "HeroUI Theme Builder – Customize React UI",
+    "metaDescription": "Customize HeroUI React themes visually. Tune colors, typography, and radius, preview components live, and copy production-ready HeroUI CSS variables.",
     "theme": "Theme",
     "custom": "Custom",
     "designTheme": "Design theme",

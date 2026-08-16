@@ -10,6 +10,7 @@ import {NuqsAdapter} from "nuqs/adapters/next/app";
 import {siteConfig} from "@/config/site";
 import {getDictionary, hasLocale} from "@/lib/dictionaries";
 import {getOrganizationJsonLd, getSoftwareApplicationJsonLd, getWebSiteJsonLd} from "@/lib/json-ld";
+import {getLanguageTag} from "@/lib/seo";
 import {source} from "@/lib/source";
 import {__BASE_URL__} from "@/utils/env";
 
@@ -33,7 +34,7 @@ export default async function Layout({
   const dict = hasLocale(lang) ? await getDictionary(lang) : await getDictionary("en");
 
   return (
-    <html suppressHydrationWarning className={inter.variable} lang={lang}>
+    <html suppressHydrationWarning className={inter.variable} lang={getLanguageTag(lang)}>
       <head>
         <script
           dangerouslySetInnerHTML={{__html: JSON.stringify(getOrganizationJsonLd())}}
@@ -129,7 +130,7 @@ export const metadata: Metadata = {
       },
     ],
     locale: "en_US",
-    siteName: siteConfig.fullName,
+    siteName: siteConfig.name,
     type: "website",
     url: __BASE_URL__.toString(),
   },
@@ -146,6 +147,7 @@ export const metadata: Metadata = {
     creator: "@hero_ui",
     description: siteConfig.description,
     images: [siteConfig.ogImage],
+    site: "@hero_ui",
     title: siteConfig.fullName,
   },
 };
