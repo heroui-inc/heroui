@@ -1,6 +1,6 @@
 ---
 title: v3.2.5
-description: 补丁版本：将动画合成器提示限制在动画状态，确保 Modal 重新打开后按钮文本依然清晰，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，并在没有步进按钮时不再为 NumberField 预留侧栏空间。
+description: 补丁版本：将动画合成器提示限制在动画状态，确保 Modal 重新打开后按钮文本依然清晰，让堆叠 Drawer 的把手只关闭自身抽屉，保留 Table 嵌套输入控件的按键输入，在没有步进按钮时不再为 NumberField 预留侧栏空间，并在传入自定义样式时保留 Toast 区域 CSS 变量。
 github:
   pull: 6792
 ---
@@ -9,7 +9,7 @@ github:
   <span className="text-sm text-muted">2026 年 8 月 13 日</span>
 </div>
 
-补丁版本：[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间。
+补丁版本：[Button](/docs/components/button)、Menu 和 Dropdown 仅在动画期间应用合成器提示，使 [Modal](/docs/components/modal) 重新打开后文本依然清晰；嵌套 [Drawer](/docs/components/drawer) 的把手现在只会关闭自身抽屉；[Table](/docs/components/table) 也会保留嵌套可编辑控件的按键输入；[NumberField](/docs/components/number-field) 在没有步进按钮时也不再预留侧栏空间；[Toast](/docs/components/toast) 在传入自定义样式时也会保留区域 CSS 变量。
 
 ## 安装
 
@@ -48,6 +48,7 @@ github:
 - **Drawer**：将拖拽手势限制在最近的所属 `Drawer.Dialog`，使嵌套抽屉的把手只关闭自身抽屉，而父抽屉保持打开且不发生位移 ([#6780](https://github.com/heroui-inc/heroui/pull/6780))。
 - **Table**：防止 typeahead 抢走嵌套可编辑控件的按键输入与焦点。`keyboardNavigationBehavior` 现已作为 prop 暴露，并默认设为 `"tab"`，同时保留非可编辑单元格中的 typeahead ([#6781](https://github.com/heroui-inc/heroui/pull/6781))。
 - **NumberField**：根据实际存在的步进槽位调整输入网格，没有递增或递减按钮时不再预留空白侧栏 ([#6778](https://github.com/heroui-inc/heroui/pull/6778))。
+- **Toast**：将自定义 `style` 与区域 CSS 变量及 Toast 堆叠样式合并，避免传入如 `zIndex` 等样式时丢失 `--toast-width` 导致 Toast 宽度塌缩 ([#6794](https://github.com/heroui-inc/heroui/pull/6794))。
 
 ## 链接
 
