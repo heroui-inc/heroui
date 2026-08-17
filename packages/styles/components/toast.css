@@ -2,7 +2,7 @@
 
 /* Toast Region - Container for all toasts */
 .toast-region {
-  @apply pointer-events-none fixed z-50 outline-none;
+  @apply pointer-events-none fixed z-(--z-index-toast) outline-none;
   @apply w-[calc(100vw-2rem)] sm:w-auto sm:min-w-(--toast-width);
 
   display: block;

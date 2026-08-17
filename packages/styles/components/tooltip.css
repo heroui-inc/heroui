@@ -31,11 +31,13 @@
   /* Exiting animations */
   &[data-exiting="true"] {
     @apply animate-out duration-100 ease-smooth zoom-out-95 fade-out;
+    /* Stays non-interactive while closing, even if the exit animation is interrupted. */
+    @apply pointer-events-none;
   }
 
   &[data-exiting="true"],
   &[data-entering="true"] {
-    @apply transition-[opacity,transform] will-change-[opacity,transform];
+    @apply will-change-[opacity,transform];
   }
 
   /* Arrow styling */
