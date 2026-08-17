@@ -1,6 +1,7 @@
 import type {Key} from "@react-types/shared";
 
 import {User, cleanup, render, runAllTimers, screen, setupUser} from "@heroui/testing/helpers";
+import {useState} from "react";
 import {useFilter} from "react-aria-components/Autocomplete";
 
 import {Autocomplete} from "@/components/autocomplete";
@@ -8,6 +9,8 @@ import {FieldError} from "@/components/field-error";
 import {Label} from "@/components/label";
 import {ListBox} from "@/components/list-box";
 import {SearchField} from "@/components/search-field";
+import {Tag} from "@/components/tag";
+import {TagGroup} from "@/components/tag-group";
 
 const animals = [
   {id: "cat", name: "Cat"},
@@ -64,6 +67,75 @@ const AutocompleteExample = (props: {
         </Autocomplete.Filter>
       </Autocomplete.Popover>
       {props.isInvalid ? <FieldError>Please choose an animal</FieldError> : null}
+    </Autocomplete>
+  );
+};
+
+const AutocompleteMultipleExample = (props: {onRemove?: (keys: Set<Key>) => void}) => {
+  const {contains} = useFilter({sensitivity: "base"});
+  const [selectedKeys, setSelectedKeys] = useState<Key[]>(["cat", "dog", "panda"]);
+
+  const onRemove = (keys: Set<Key>) => {
+    props.onRemove?.(keys);
+    setSelectedKeys((prev) => prev.filter((key) => !keys.has(key)));
+  };
+
+  return (
+    <Autocomplete
+      data-testid="autocomplete"
+      placeholder="Select animals"
+      selectionMode="multiple"
+      value={selectedKeys}
+      onChange={(keys) => setSelectedKeys(keys as Key[])}
+    >
+      <Label>Favorite Animals</Label>
+      <Autocomplete.Trigger>
+        <Autocomplete.Value>
+          {({defaultChildren, isPlaceholder, state}) => {
+            if (isPlaceholder || state.selectedItems.length === 0) {
+              return defaultChildren;
+            }
+
+            return (
+              <TagGroup aria-label="Selected animals" size="sm" onRemove={onRemove}>
+                <TagGroup.List>
+                  {state.selectedItems.map((selectedItem) => {
+                    const item = animals.find((animal) => animal.id === selectedItem.key);
+
+                    if (!item) return null;
+
+                    return (
+                      <Tag key={item.id} id={item.id}>
+                        {item.name}
+                      </Tag>
+                    );
+                  })}
+                </TagGroup.List>
+              </TagGroup>
+            );
+          }}
+        </Autocomplete.Value>
+        <Autocomplete.Indicator />
+      </Autocomplete.Trigger>
+      <Autocomplete.Popover>
+        <Autocomplete.Filter filter={contains}>
+          <SearchField autoFocus aria-label="Search animals" name="search" variant="secondary">
+            <SearchField.Group>
+              <SearchField.SearchIcon />
+              <SearchField.Input placeholder="Search animals..." />
+              <SearchField.ClearButton />
+            </SearchField.Group>
+          </SearchField>
+          <ListBox>
+            {animals.map((item) => (
+              <ListBox.Item key={item.id} id={item.id} textValue={item.name}>
+                {item.name}
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            ))}
+          </ListBox>
+        </Autocomplete.Filter>
+      </Autocomplete.Popover>
     </Autocomplete>
   );
 };
@@ -170,5 +242,55 @@ describe("Autocomplete", () => {
     expect(screen.getByText("Please choose an animal")).toBeInTheDocument();
     expect(document.querySelector('[data-slot="field-error"]')).not.toBeNull();
     expect(screen.getByTestId("autocomplete")).toHaveAttribute("data-invalid", "true");
+  });
+
+  describe("multiple selection with tags", () => {
+    it("removes the tag on the first press without opening the popover", async () => {
+      const onRemove = vi.fn();
+
+      render(<AutocompleteMultipleExample onRemove={onRemove} />);
+
+      expect(screen.getAllByRole("row")).toHaveLength(3);
+
+      await user.click(screen.getByRole("button", {name: "Remove tag Dog"}));
+      runAllTimers();
+
+      expect(onRemove).toHaveBeenCalledTimes(1);
+      expect(screen.queryByRole("row", {name: "Dog"})).toBeNull();
+      expect(screen.getByRole("row", {name: "Cat"})).toBeInTheDocument();
+      expect(screen.getByRole("row", {name: "Panda"})).toBeInTheDocument();
+
+      // A press on a control inside the trigger must not toggle the dropdown, otherwise the
+      // next press is swallowed dismissing the popover instead of removing a tag.
+      expect(screen.queryByRole("listbox")).toBeNull();
+      expect(document.querySelector('[data-slot="autocomplete-popover"]')).toBeNull();
+    });
+
+    it("supports removing consecutive tags with one press each", async () => {
+      render(<AutocompleteMultipleExample />);
+
+      for (const name of ["Cat", "Dog", "Panda"]) {
+        await user.click(screen.getByRole("button", {name: `Remove tag ${name}`}));
+        runAllTimers();
+
+        expect(screen.queryByRole("row", {name})).toBeNull();
+      }
+
+      expect(screen.queryAllByRole("row")).toHaveLength(0);
+    });
+
+    it("supports removing a focused tag with the keyboard", async () => {
+      const onRemove = vi.fn();
+
+      render(<AutocompleteMultipleExample onRemove={onRemove} />);
+
+      screen.getByRole("row", {name: "Dog"}).focus();
+      await user.keyboard("{Delete}");
+      runAllTimers();
+
+      expect(onRemove).toHaveBeenCalledTimes(1);
+      expect(screen.queryByRole("row", {name: "Dog"})).toBeNull();
+      expect(screen.getAllByRole("row")).toHaveLength(2);
+    });
   });
 });
