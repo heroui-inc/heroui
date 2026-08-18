@@ -38,10 +38,10 @@
     @apply pe-7;
   }
 
-  /* Hover state */
+  /* Hover state - exclude when clear button is hovered to prevent double hover effect */
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
+    &:hover:not(:has(.select__clear-button:hover)),
+    &[data-hovered="true"]:not(:has(.select__clear-button:hover)) {
       @apply bg-field-hover;
       border-color: var(--field-border-hover);
     }
@@ -88,9 +88,10 @@
   --select-trigger-bg-hover: var(--default-hover);
   --select-trigger-bg-focus: var(--default);
 
+  /* Exclude when clear button is hovered to prevent double hover effect */
   @media (hover: hover) {
-    &:hover,
-    &[data-hovered="true"] {
+    &:hover:not(:has(.select__clear-button:hover)),
+    &[data-hovered="true"]:not(:has(.select__clear-button:hover)) {
       background-color: var(--select-trigger-bg-hover);
     }
   }
@@ -120,6 +121,49 @@
   /* Removes the list-box-item indicator element from the select value*/
   [data-slot="list-box-item-indicator"] {
     @apply hidden;
+  }
+}
+
+/* Clear Button styles */
+.select__clear-button {
+  @apply relative isolate inline-flex size-5 shrink-0 origin-center transform-gpu items-center justify-center self-center rounded-xl bg-transparent p-1 text-muted select-none no-highlight;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /**
+   * The visible box stays at 20px so it fits inside the trigger's 36px min-height
+   * without growing it. Expand the pointer target to the 24px floor in WCAG 2.5.8.
+   */
+  &::after {
+    @apply absolute -inset-0.5;
+    content: "";
+  }
+
+  /* Transition only when visible - disappears immediately when cleared */
+  &:not([data-empty="true"]) {
+    transition: opacity 150ms var(--ease-smooth);
+    @apply motion-reduce:transition-none;
+  }
+
+  &[data-empty="true"] {
+    @apply pointer-events-none opacity-0;
+  }
+
+  [data-slot="select-clear-button-icon"] {
+    @apply size-3.5;
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered="true"] {
+      @apply bg-default-hover;
+    }
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.93);
   }
 }
 
